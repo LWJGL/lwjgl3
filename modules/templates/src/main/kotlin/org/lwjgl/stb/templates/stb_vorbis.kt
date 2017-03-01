@@ -18,7 +18,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 
 	documentation =
 		"""
-		Native bindings to stb_vorbis.c from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_vorbis.c from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		Ogg Vorbis audio decoder.
 

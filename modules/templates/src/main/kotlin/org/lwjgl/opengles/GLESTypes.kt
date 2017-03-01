@@ -12,13 +12,15 @@ fun config() {
 	packageInfo(
 		GLES_PACKAGE,
 		"""
-		Contains bindings to the <a href="https://www.khronos.org/opengles/">OpenGL ES</a>, a royalty-free, cross-platform API for full-function 2D and 3D
+		Contains bindings to the ${url("https://www.khronos.org/opengles/", "OpenGL ES")}, a royalty-free, cross-platform API for full-function 2D and 3D
 		graphics on embedded systems - including consoles, phones, appliances and vehicles. It consists of well-defined subsets of desktop OpenGL, creating a
 		flexible and powerful low-level interface between software and graphics acceleration.
 
-		The <a href="https://www.khronos.org/registry/gles/">Khronos OpenGL ES registry</a> is a useful online resource that contains the OpenGL ES and OpenGL
-		ES Shading Language specifications, as well as specifications of OpenGL ES extensions. The <a href="https://www.khronos.org/opengles/sdk/docs/">OpenGL
-		ES Reference Pages</a> is another convenient source of documentation.
+		The ${url("https://www.khronos.org/registry/gles/", "Khronos OpenGL ES registry")} is a useful online resource that contains the OpenGL ES and OpenGL
+		ES Shading Language specifications, as well as specifications of OpenGL ES extensions. The ${url(
+			"https://www.khronos.org/opengles/sdk/docs/",
+			"OpenGL ES Reference Pages")
+		} is another convenient source of documentation.
 		"""
 	)
 }

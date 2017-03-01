@@ -14,7 +14,7 @@ fun config() {
 	packageInfo(
 		TinyFD_PACKAGE,
 		"""
-		Contains bindings to <a href="https://sourceforge.net/projects/tinyfiledialogs/">tiny file dialogs</a>.
+		Contains bindings to ${url("https://sourceforge.net/projects/tinyfiledialogs/", "tiny file dialogs")}.
 		"""
 	)
 }

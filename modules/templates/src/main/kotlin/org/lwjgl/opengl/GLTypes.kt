@@ -12,10 +12,10 @@ fun config() {
 	packageInfo(
 		OPENGL_PACKAGE,
 		"""
-		Contains bindings to the <a href="https://www.opengl.org/">OpenGL</a> cross-platform 2D and 3D rendering API.
+		Contains bindings to the ${url("https://www.opengl.org/", "OpenGL")} cross-platform 2D and 3D rendering API.
 
-		The <a href="https://www.opengl.org/registry/">OpenGL registry</a> is a useful online resource that contains the OpenGL and OpenGL Shading Language
-		specifications, as well as specifications of OpenGL extensions. The <a href="https://www.opengl.org/sdk/docs/">OpenGL Reference Pages</a> is another
+		The ${url("https://www.opengl.org/registry/", "OpenGL registry")} is a useful online resource that contains the OpenGL and OpenGL Shading Language
+		specifications, as well as specifications of OpenGL extensions. The ${url("https://www.opengl.org/sdk/docs/", "OpenGL Reference Pages")} is another
 		convenient source of documentation.
 		"""
 	)

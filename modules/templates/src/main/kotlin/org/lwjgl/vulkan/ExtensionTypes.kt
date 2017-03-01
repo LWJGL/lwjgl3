@@ -806,7 +806,7 @@ val VkRenderPassMultiviewCreateInfoKHX = struct(VULKAN_PACKAGE, "VkRenderPassMul
 
 		If the view mask is zero for all subpasses, multiview is considered to be disabled and all drawing commands execute normally, without this additional broadcasting.
 
-		Some implementations <b>may</b> not support multiview in conjunction with <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiview-gs">geometry shaders</a> or <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiview-tess">tessellation shaders</a>.
+		Some implementations <b>may</b> not support multiview in conjunction with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiview-gs">geometry shaders</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiview-tess">tessellation shaders</a>.
 
 		When multiview is enabled, the #DEPENDENCY_VIEW_LOCAL_BIT_KHX bit in a dependency <b>can</b> be used to express a view-local dependency, meaning that each view in the destination subpass depends on a single view in the source subpass. Unlike pipeline barriers, a subpass dependency <b>can</b> potentially have a different view mask in the source subpass and the destination subpass. If the dependency is view-local, then each view (<code>dstView</code>) in the destination subpass depends on the view <code>dstView + pViewOffsets[dependency]</code> in the source subpass. If there is not such a view in the source subpass, then this dependency does not affect that view in the destination subpass. If the dependency is not view-local, then all views in the destination subpass depend on all views in the source subpass, and the view offset is ignored. A non-zero view offset is not allowed in a self-dependency.
 
@@ -854,8 +854,8 @@ val VkPhysicalDeviceMultiviewFeaturesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDev
 		<h5>Description</h5>
 		<ul>
 			<li>{@code multiview} indicates whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero.</li>
-			<li>{@code multiviewGeometryShader} indicates whether the implementation supports multiview rendering within a render pass, with <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#geometry">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.</li>
-			<li>{@code multiviewTessellationShader} indicates whether the implementation supports multiview rendering within a render pass, with <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#tessellation">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.</li>
+			<li>{@code multiviewGeometryShader} indicates whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#geometry">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.</li>
+			<li>{@code multiviewTessellationShader} indicates whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#tessellation">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.</li>
 		</ul>
 
 		If the ##VkPhysicalDeviceMultiviewFeaturesKHX structure is included in the {@code pNext} chain of #GetPhysicalDeviceFeatures2KHR(), it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceMultiviewFeaturesKHX <b>can</b> also be used in the {@code pNext} chain of #CreateDevice() to enable features.
@@ -1542,7 +1542,7 @@ val VkImageSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkImageSwapchainCrea
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If {@code swapchain} is not #NULL_HANDLE, the fields of ##VkImageCreateInfo <b>must</b> match the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
+			<li>If {@code swapchain} is not #NULL_HANDLE, the fields of ##VkImageCreateInfo <b>must</b> match the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -2055,7 +2055,7 @@ val VkExportMemoryWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkExportMemoryWin
 
 		<dl>
 			<dt>1</dt>
-			<dd><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</a></dd>
+			<dd><a target="_blank" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</a></dd>
 		</dl>
 
 		<h5>Valid Usage</h5>
@@ -2268,7 +2268,7 @@ val VkImportSemaphoreWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkImportSemaph
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code handleType} <b>must</b> be a value included in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-handletypes-win32">Handle Type Permanence for VkImportSemaphoreWin32HandleInfoKHX</a> table.</li>
+			<li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-handletypes-win32">Handle Type Permanence for VkImportSemaphoreWin32HandleInfoKHX</a> table.</li>
 			<li>The semaphore from which {@code handleType} was exported <b>must</b> have been created on the same underlying physical device as {@code semaphore}.</li>
 		</ul>
 
@@ -2317,7 +2317,7 @@ val VkExportSemaphoreWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkExportSemaph
 
 		<dl>
 			<dt>1</dt>
-			<dd><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</a></dd>
+			<dd><a target="_blank" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx</a></dd>
 		</dl>
 
 		<h5>Valid Usage</h5>
@@ -2390,7 +2390,7 @@ val VkImportSemaphoreFdInfoKHX = struct(VULKAN_PACKAGE, "VkImportSemaphoreFdInfo
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code handleType} <b>must</b> be a value included in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-handletypes-fd">Handle Type Permanence for VkImportSemaphoreFdInfoKHX</a> table.</li>
+			<li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-handletypes-fd">Handle Type Permanence for VkImportSemaphoreFdInfoKHX</a> table.</li>
 			<li>The semaphore from which {@code handleType} was exported <b>must</b> have been created on the same underlying physical device as {@code semaphore}.</li>
 		</ul>
 
@@ -2443,7 +2443,7 @@ val VkDescriptorUpdateTemplateEntryKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpd
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code dstBinding} <b>must</b> be a valid binding in the descriptor set layout implicitly specified when using a descriptor update template to update descriptors.</li>
-			<li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">consecutive binding updates</a></li>
+			<li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">consecutive binding updates</a></li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -3008,7 +3008,7 @@ val VkPipelineViewportWScalingStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipe
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiViewport">multiple viewports</a> feature is not enabled and {@code viewportWScalingEnable} is #TRUE, {@code viewportCount} <b>must</b> be 1</li>
+			<li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiViewport">multiple viewports</a> feature is not enabled and {@code viewportWScalingEnable} is #TRUE, {@code viewportCount} <b>must</b> be 1</li>
 			<li>{@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive if {@code viewportWScalingEnable} is #TRUE</li>
 			<li>{@code viewportCount} and ##VkPipelineViewportStateCreateInfo{@code ::viewportCount} <b>must</b> be identical if {@code viewportWScalingEnable} is #TRUE</li>
 		</ul>
@@ -3045,7 +3045,7 @@ val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EX
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code supportedSurfaceCounters} <b>must</b> not include #SURFACE_COUNTER_VBLANK_EXT unless the surface queried is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#wsi-display-surfaces">display surface</a>.</li>
+			<li>{@code supportedSurfaceCounters} <b>must</b> not include #SURFACE_COUNTER_VBLANK_EXT unless the surface queried is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#wsi-display-surfaces">display surface</a>.</li>
 		</ul>
 
 		<h5>See Also</h5>

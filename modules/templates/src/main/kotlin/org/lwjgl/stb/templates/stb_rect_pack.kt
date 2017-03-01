@@ -15,7 +15,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 
 	documentation =
 		"""
-		Native bindings to stb_rect_pack.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_rect_pack.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		Useful for e.g. packing rectangular textures into an atlas. Does not do rotation.
 

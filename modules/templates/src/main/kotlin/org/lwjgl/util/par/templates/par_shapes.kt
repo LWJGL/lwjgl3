@@ -34,7 +34,7 @@ ENABLE_WARNINGS()""")
 
 	documentation =
 		"""
-		Bindings to <a href="https://github.com/prideout/par/blob/master/par_shapes.h">par_shapes.h</a>, a single-file, zero-dependency, C99 library that can
+		Bindings to ${url("https://github.com/prideout/par/blob/master/par_shapes.h", "par_shapes.h")}, a single-file, zero-dependency, C99 library that can
 		generate simple shapes and perform basic operations on them. These operations include:
 		${ul(
 			"Applying affine transformations",
@@ -195,7 +195,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 		"create_lsystem",
 		"""
 		Creates trees or vegetation by executing a recursive turtle graphics program. The program is a list of command-argument pairs. See the
-		<a href="https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/util/par/ParTest.java\#L263">unit test</a> for an example.
+		${url("https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/util/par/ParTest.java\\#L263", "unit test")} for an example.
 		Texture coordinates and normals are not generated.
 		""",
 

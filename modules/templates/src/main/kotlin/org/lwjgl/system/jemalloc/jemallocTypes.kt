@@ -13,11 +13,11 @@ fun config() {
 	packageInfo(
 		JEMALLOC_PACKAGE,
 		"""
-		Contains bindings to the <a href="http://jemalloc.net/">jemalloc</a> library. jemalloc is a general purpose malloc implementation that emphasizes
+		Contains bindings to the ${url("http://jemalloc.net/", "jemalloc")} library. jemalloc is a general purpose malloc implementation that emphasizes
 		fragmentation avoidance and scalable concurrency support.
 
-		The jemalloc documentation can be found <a href="http://jemalloc.net/jemalloc.3.html">here</a>. The jemalloc
-		<a href="https://github.com/jemalloc/jemalloc/wiki">wiki</a> also contains useful information.
+		The jemalloc documentation can be found ${url("http://jemalloc.net/jemalloc.3.html", "here")}. The jemalloc
+		${url("https://github.com/jemalloc/jemalloc/wiki", "wiki")} also contains useful information.
 
 		The jemalloc shared library that comes with LWJGL is configured with:
 		${ul(
@@ -32,7 +32,7 @@ fun config() {
 		The shared library may be replaced with a custom build that has more features enabled.
 
 		Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
-		<a href="http://jemalloc.net/jemalloc.3.html\#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.
+		${url("http://jemalloc.net/jemalloc.3.html\\#mallctl_namespace", "MALLCTL NAMESPACE")} and the {@code mallctl*} functions.
 		"""
 	)
 

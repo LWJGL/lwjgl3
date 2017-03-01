@@ -12,7 +12,7 @@ fun config() {
 	packageInfo(
 		TINYEXR_PACKAGE,
 		"""
-		Contains bindings to the <a href="https://github.com/syoyo/tinyexr">Tiny OpenEXR</a> image library.
+		Contains bindings to the ${url("https://github.com/syoyo/tinyexr", "Tiny OpenEXR")} image library.
 
 		tinyexr is a small, single header-only library to load and save OpenEXR(.exr) images.
 		"""

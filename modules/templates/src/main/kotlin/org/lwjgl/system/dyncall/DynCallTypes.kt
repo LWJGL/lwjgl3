@@ -12,7 +12,7 @@ fun config() {
 	packageInfo(
 		DYNCALL_PACKAGE,
 		"""
-		Contains bindings to the <a href="http://www.dyncall.org/">dyncall</a> library.
+		Contains bindings to the ${url("http://www.dyncall.org/", "dyncall")} library.
 
 		The dyncall library encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to
 		right and then call interface allowing programmers to call C functions in a completely dynamic manner. In other words, instead of calling a function

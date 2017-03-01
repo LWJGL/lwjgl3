@@ -20,7 +20,7 @@ ENABLE_WARNINGS()""")
 
 	documentation =
 		"""
-		Native bindings to <a href="https://facebook.github.io/yoga/">Yoga</a>.
+		Native bindings to ${url("https://facebook.github.io/yoga/", "Yoga")}.
 
 		Yoga is an open-source, cross-platform layout library that implements Flexbox. Yoga’s focus is on creating an expressive layout library, not
 		implementing all of CSS. Therefore, there are no plans to include support for tables, floats, or similar CSS concepts. Yoga also does not support

@@ -17,7 +17,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 
 	documentation =
 		"""
-		Bindings to <a href="https://sourceforge.net/projects/tinyfiledialogs/">tiny file dialogs</a>, a native dialog library with support for:
+		Bindings to ${url("https://sourceforge.net/projects/tinyfiledialogs/", "tiny file dialogs")}, a native dialog library with support for:
 		${ul(
 			"message / question",
 			"input / password",

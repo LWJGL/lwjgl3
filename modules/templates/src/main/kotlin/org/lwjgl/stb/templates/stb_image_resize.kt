@@ -19,7 +19,7 @@ val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, p
 
 	documentation =
 		"""
-		Native bindings to stb_image_resize.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_image_resize.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		Written with emphasis on usability, portability, and efficiency. (No SIMD or threads, so it be easily outperformed by libs that use those.) Only
 		scaling and translation is supported, no rotations or shears. Easy API downsamples w/Mitchell filter, upsamples w/cubic interpolation.

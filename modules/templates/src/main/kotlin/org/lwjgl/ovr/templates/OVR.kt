@@ -22,7 +22,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 ENABLE_WARNINGS()""")
 
 	documentation =
-		"""Native bindings to libOVR, using the <a href="https://developer.oculus.com/">Oculus SDK</a> C API."""
+		"""Native bindings to libOVR, using the ${url("https://developer.oculus.com/", "Oculus SDK")} C API."""
 
 	IntConstant(
 		"Boolean values",

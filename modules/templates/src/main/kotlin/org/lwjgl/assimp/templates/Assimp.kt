@@ -10,10 +10,10 @@ import org.lwjgl.assimp.*
 val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", prefixConstant = "ai", binding = ASSIMP_BINDING) {
 	documentation =
 		"""
-		Contains bindings to the <a href="http://www.assimp.org/">Assimp</a> library.
+		Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library.
 
-		Assimp comes with fairly outdated documentation, which you can read online <a href="http://www.assimp.org/lib_html/">here</a>. The
-		<a href="http://www.assimp.org/FAQ.html">Frequently Asked Questions</a> are also useful.
+		Assimp comes with fairly outdated documentation, which you can read online ${url("http://www.assimp.org/lib_html/", "here")}. The
+		${url("http://www.assimp.org/FAQ.html", "Frequently Asked Questions")} are also useful.
 
         The bindings only consist of the C API of the Assimp model import library.
         """
@@ -30,7 +30,7 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
 		Enables time measurements.
 
 		If enabled, measures the time needed for each part of the loading process (i.e. IO time, importing, postprocessing, ..) and dumps these timings to the
-		DefaultLogger. See the <a href="http://assimp.org/lib_html/perf.html">Performance Page</a> for more information on this topic.
+		DefaultLogger. See the ${url("http://assimp.org/lib_html/perf.html", "Performance Page")} for more information on this topic.
 
 		Property type: bool. Default value: false.
 		""",
@@ -2243,7 +2243,7 @@ aiAttachLogStream(&c);""")}
 			Reorders triangles for better vertex cache locality.
 
 			The step tries to improve the ACMR (average post-transform vertex cache miss ratio) for all meshes. The implementation runs in O(n) and is roughly
-			based on the 'tipsify' algorithm (see <a href="http://www.cs.princeton.edu/gfx/pubs/Sander_2007_%3ETR/tipsy.pdf">this paper</a>).
+			based on the 'tipsify' algorithm (see ${url("http://www.cs.princeton.edu/gfx/pubs/Sander_2007_%3ETR/tipsy.pdf", "this paper")}).
 
 			If you intend to render huge models in hardware, this step might be of interest to you. The #AI_CONFIG_PP_ICL_PTCACHE_SIZE importer property
 			can be used to fine-tune the cache optimization.

@@ -212,7 +212,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
 		VkDevice.IN("device", "a logical device on which the event <b>may</b> occur."),
 		const..VkDeviceEventInfoEXT.p.IN("pDeviceEventInfo", "a pointer to an instance of the ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
-		const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
 		Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
 	)
 
@@ -255,7 +255,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 		VkDevice.IN("device", "a logical device associated with {@code display}"),
 		VkDisplayKHR.IN("display", "the display on which the event <b>may</b> occur."),
 		const..VkDisplayEventInfoEXT.p.IN("pDisplayEventInfo", "a pointer to an instance of the ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
-		const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
 		Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
 	)
 

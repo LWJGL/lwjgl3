@@ -25,7 +25,7 @@ ENABLE_WARNINGS()""")
 
 	documentation =
 		"""
-		Native bindings to <a href="https://github.com/Cyan4973/xxHash">xxhash</a>.
+		Native bindings to ${url("https://github.com/Cyan4973/xxHash", "xxhash")}.
 
 		xxHash is an extremely fast Hash algorithm, running at RAM speed limits. It also successfully passes all tests from the SMHasher suite.
 		"""

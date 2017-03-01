@@ -14,7 +14,7 @@ val stb_perlin = "STBPerlin".nativeClass(packageName = STB_PACKAGE, prefix = "ST
 
 	documentation =
 		"""
-		Native bindings to stb_perlin.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_perlin.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		Revised Perlin noise (3D input, 1D output).
 		"""

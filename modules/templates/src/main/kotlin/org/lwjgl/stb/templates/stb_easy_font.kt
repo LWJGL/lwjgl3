@@ -12,7 +12,7 @@ val stb_easy_font = "STBEasyFont".nativeClass(packageName = STB_PACKAGE, prefix 
 
 	documentation =
 		"""
-		Native bindings to stb_easy_font.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_easy_font.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		Bitmap font for use in 3D APIs:
 		${ul(

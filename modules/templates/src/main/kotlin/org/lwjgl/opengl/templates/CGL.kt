@@ -775,8 +775,10 @@ val CGL = "CGL".nativeClass(
 		#ChoosePixelFormat() with the full-screen attribute, you need to check whether the pixel format object is created successfully.
 
 		You must capture the display prior to entering full-screen mode and release it after exiting. After calling this function, subsequent OpenGL drawing is
-		rendered into the entire screen. For more information, see
-		<a href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_intro/opengl_intro.html\#//apple_ref/doc/uid/TP40001987">OpenGL Programming Guide for Mac</a>.
+		rendered into the entire screen. For more information, see ${url(
+			"https://developer.apple.com/library/mac/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_intro/opengl_intro.html\\#//apple_ref/doc/uid/TP40001987",
+			"OpenGL Programming Guide for Mac")
+		}.
 
 		To exit full-screen mode, call #ClearDrawable().
 

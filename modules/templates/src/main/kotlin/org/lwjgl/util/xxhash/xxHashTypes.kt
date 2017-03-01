@@ -12,9 +12,9 @@ fun config() {
 	packageInfo(
 		XXHASH_PACKAGE,
 		"""
-		Contains bindings to <a href="https://github.com/Cyan4973/xxHash">xxHash</a>, an extremely fash non-cryptographic hash algorithm.
+		Contains bindings to ${url("https://github.com/Cyan4973/xxHash", "xxHash")}, an extremely fash non-cryptographic hash algorithm.
 
-		xxHash successfully completes the <a href="https://code.google.com/p/smhasher/wiki/SMHasher">SMHasher</a> test suite which evaluates collision,
+		xxHash successfully completes the ${url("https://code.google.com/p/smhasher/wiki/SMHasher", "SMHasher")} test suite which evaluates collision,
 		dispersion and randomness qualities of hash functions.
 		"""
 	)

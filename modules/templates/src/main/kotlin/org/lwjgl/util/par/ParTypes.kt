@@ -12,7 +12,7 @@ fun config() {
 	packageInfo(
 		PAR_PACKAGE,
 		"""
-		Contains bindings to the <a href="https://github.com/prideout/par">par</a> library.
+		Contains bindings to the ${url("https://github.com/prideout/par", "par")} library.
 		"""
 	)
 

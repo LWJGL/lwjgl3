@@ -13,7 +13,7 @@ fun config() {
 	packageInfo(
 		STB_PACKAGE,
 		"""
-		Contains bindings to <a href="https://github.com/nothings/stb">stb</a>, a set of single-file public domain libraries.
+		Contains bindings to ${url("https://github.com/nothings/stb", "stb")}, a set of single-file public domain libraries.
 
 		The functionality provided by stb includes:
 		${ul(

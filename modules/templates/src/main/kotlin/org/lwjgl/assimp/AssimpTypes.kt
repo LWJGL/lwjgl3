@@ -12,10 +12,10 @@ fun config() {
 	packageInfo(
 		ASSIMP_PACKAGE,
 		"""
-		Contains bindings to the <a href="http://www.assimp.org/">Assimp</a> library.
+		Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library.
 
-		Assimp comes with fairly outdated documentation, which you can read online <a href="http://www.assimp.org/lib_html/">here</a>. The
-		<a href="http://www.assimp.org/faq.html">Frequently Asked Questions</a> are also useful.
+		Assimp comes with fairly outdated documentation, which you can read online ${url("http://www.assimp.org/lib_html/", "here")}. The
+		${url("http://www.assimp.org/faq.html", "Frequently Asked Questions")} are also useful.
 
         The bindings only consist of the C API of the Assimp model import library.
 		"""

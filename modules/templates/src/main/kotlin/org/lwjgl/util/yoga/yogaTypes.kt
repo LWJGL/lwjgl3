@@ -12,7 +12,7 @@ fun config() {
 	packageInfo(
 		YOGA_PACKAGE,
 		"""
-		Contains bindings to <a href="https://facebook.github.io/yoga/">Yoga</a>.
+		Contains bindings to ${url("https://facebook.github.io/yoga/", "Yoga")}.
 
 		Yoga is a cross-platform layout engine enabling maximum collaboration within your team by implementing an API familiar to many designers and opening it
 		up to developers across different platforms.

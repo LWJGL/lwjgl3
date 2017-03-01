@@ -34,8 +34,8 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 			<dd><ul>
 				<li>This extension is written against version 1.0 of the Vulkan API.</li>
 				<li>This extension requires Vulkan 1.0.</li>
-				<li>This extension requires the <a href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_geometry_shader_passthrough.html">SPV_NV_geometry_shader_passthrough</a> SPIR-V extension.</li>
-				<li>This extension requires the <a href="https://www.opengl.org/registry/specs/NV/geometry_shader_passthrough.txt">GL_NV_geometry_shader_passthrough</a> extension for GLSL source languages.</li>
+				<li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_geometry_shader_passthrough.html">SPV_NV_geometry_shader_passthrough</a> SPIR-V extension.</li>
+				<li>This extension requires the <a target="_blank" href="https://www.opengl.org/registry/specs/NV/geometry_shader_passthrough.txt">GL_NV_geometry_shader_passthrough</a> extension for GLSL source languages.</li>
 				<li>This extension requires the {@code geometryShader} feature.</li>
 			</ul></dd>
 

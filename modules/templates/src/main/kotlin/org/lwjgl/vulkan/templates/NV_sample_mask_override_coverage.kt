@@ -37,8 +37,8 @@ val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClas
 			<dd><ul>
 				<li>This extension is written against version 1.0 of the Vulkan API.</li>
 				<li>This extension requires Vulkan 1.0.</li>
-				<li>This extension requires the <a href="https://gitlab.khronos.org/spirv/spirv-extensions/blob/master/SPV_NV_sample_mask_override_coverage.asciidoc">SPV_NV_sample_mask_override_coverage</a> SPIR-V extension.</li>
-				<li>This extension requires the <a href="https://www.opengl.org/registry/specs/NV/sample_mask_override_coverage.txt">GL_NV_sample_mask_override_coverage</a> extension for GLSL source languages.</li>
+				<li>This extension requires the <a target="_blank" href="https://gitlab.khronos.org/spirv/spirv-extensions/blob/master/SPV_NV_sample_mask_override_coverage.asciidoc">SPV_NV_sample_mask_override_coverage</a> SPIR-V extension.</li>
+				<li>This extension requires the <a target="_blank" href="https://www.opengl.org/registry/specs/NV/sample_mask_override_coverage.txt">GL_NV_sample_mask_override_coverage</a> extension for GLSL source languages.</li>
 			</ul></dd>
 
 			<dt><b>Contributors</b></dt>

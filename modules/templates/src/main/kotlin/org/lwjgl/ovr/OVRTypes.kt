@@ -788,9 +788,9 @@ fun config() {
 	packageInfo(
 		OVR_PACKAGE,
 		"""
-		Contains bindings to LibOVR, the <a href="https://developer.oculus.com/">Oculus SDK</a> library.
+		Contains bindings to LibOVR, the ${url("https://developer.oculus.com/", "Oculus SDK")} library.
 
-		Documentation on how to get started with the Oculus SDK can be found <a href="https://developer.oculus.com/documentation/">here</a>.
+		Documentation on how to get started with the Oculus SDK can be found ${url("https://developer.oculus.com/documentation/", "here")}.
 		"""
 	)
 

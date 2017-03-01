@@ -20,7 +20,7 @@ val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix =
 
 	documentation =
 		"""
-		Native bindings to stb_truetype.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_truetype.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		This library processes TrueType files:
 		${ul(
@@ -374,7 +374,7 @@ int main(int arg, char **argv)
 		default (no oversampling) is achieved by {@code h_oversample=1, v_oversample=1}. The total number of pixels required is
 		{@code h_oversample*v_oversample} larger than the default; for example, 2x2 oversampling requires 4x the storage of 1x1. For best results, render
 		oversampled textures with bilinear filtering. Look at the readme in
-		<a href="https://github.com/nothings/stb/blob/master/tests/oversample/README.md">stb/tests/oversample</a> for information about oversampled fonts.
+		${url("https://github.com/nothings/stb/blob/master/tests/oversample/README.md", "stb/tests/oversample")} for information about oversampled fonts.
 
 		To use with PackFontRangesGather etc., you must set it before calls to #PackFontRangesGatherRects().
 		""",
@@ -1022,8 +1022,8 @@ int main(int arg, char **argv)
 
 		See the truetype spec:
 		${ul(
-			"""<a href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html">TrueType Reference Manual - The 'name' table</a>""",
-			"""<a href="http://www.microsoft.com/typography/otspec/name.htm">OpenType™ Specification - The Naming Table</a>"""
+			"""${url("https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html", "TrueType Reference Manual - The 'name' table")}""",
+			"""${url("http://www.microsoft.com/typography/otspec/name.htm", "OpenType™ Specification - The Naming Table")}"""
 		)}
 		""",
 

@@ -12,10 +12,10 @@ fun config() {
 	packageInfo(
 		GLFW_PACKAGE,
 		"""
-		Contains bindings to the <a href="http://www.glfw.org/">GLFW</a> library.
+		Contains bindings to the ${url("http://www.glfw.org/", "GLFW")} library.
 
-		GLFW comes with extensive documentation, which you can read online <a href="http://www.glfw.org/docs/latest/">here</a>. The
-		<a href="http://www.glfw.org/faq.html">Frequently Asked Questions</a> are also useful.
+		GLFW comes with extensive documentation, which you can read online ${url("http://www.glfw.org/docs/latest/", "here")}. The
+		${url("http://www.glfw.org/faq.html", "Frequently Asked Questions")} are also useful.
 
         On macOS the JVM must be started with the {@code -XstartOnFirstThread} argument for GLFW to work. This is necessary because most GLFW functions must be
         called on the main thread and the Cocoa API on macOS requires that thread to be the first thread in the process. For this reason, on-screen GLFW

@@ -14,7 +14,7 @@ val stb_dxt = "STBDXT".nativeClass(packageName = STB_PACKAGE, prefix = "STB", pr
 
 	documentation =
 		"""
-		Native bindings to stb_dxt.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_dxt.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		DXT1/DXT5 compressor.
 		"""

@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
 	documentation =
 		"""
-		Native bindings to the C API of the <a href="https://github.com/bkaradzic/bgfx">bgfx</a> library.
+		Native bindings to the C API of the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library.
 		"""
 
 	IntConstant(

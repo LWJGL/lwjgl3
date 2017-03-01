@@ -21,7 +21,7 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
 
 	documentation =
 		"""
-		Native bindings to stb_image.h from the <a href="https://github.com/nothings/stb">stb library</a>.
+		Native bindings to stb_image.h from the ${url("https://github.com/nothings/stb", "stb library")}.
 
 		<h3>Quick notes</h3>
 
@@ -38,7 +38,7 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
 			"PNM (PPM and PGM binary only)"
 		)}
 
-		Animated GIF still needs a proper API, but <a href="http://gist.github.com/urraka/685d9a6340b26b830d49">here</a>'s one way to do it.
+		Animated GIF still needs a proper API, but ${url("http://gist.github.com/urraka/685d9a6340b26b830d49", "here")}'s one way to do it.
 
 		Features:
 		${ul(

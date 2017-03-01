@@ -221,9 +221,9 @@ fun config() {
 	packageInfo(
 		OPENCL_PACKAGE,
 		"""
-		Contains bindings to the <a href="https://www.khronos.org/opencl/">OpenCL</a> cross-platform parallel programming API.
+		Contains bindings to the ${url("https://www.khronos.org/opencl/", "OpenCL")} cross-platform parallel programming API.
 
-		The <a href="https://www.khronos.org/registry/cl/">Khronos OpenCL registry</a> is a useful online resource that contains the OpenCL specification, as
+		The ${url("https://www.khronos.org/registry/cl/", "Khronos OpenCL registry")} is a useful online resource that contains the OpenCL specification, as
 		well as the specifications of OpenCL extensions.
 		"""
 	)

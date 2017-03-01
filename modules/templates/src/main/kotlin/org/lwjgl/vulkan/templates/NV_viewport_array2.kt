@@ -34,8 +34,8 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
 			<dd><ul>
 				<li>This extension is written against version 1.0 of the Vulkan API.</li>
 				<li>This extension requires Vulkan 1.0.</li>
-				<li>This extension requires the <a href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_viewport_array2.html">SPV_NV_viewport_array2</a> SPIR-V extension.</li>
-				<li>This extension requires the <a href="https://www.opengl.org/registry/specs/NV/viewport_array2.txt">GL_NV_viewport_array2</a> extension for GLSL source languages.</li>
+				<li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_viewport_array2.html">SPV_NV_viewport_array2</a> SPIR-V extension.</li>
+				<li>This extension requires the <a target="_blank" href="https://www.opengl.org/registry/specs/NV/viewport_array2.txt">GL_NV_viewport_array2</a> extension for GLSL source languages.</li>
 				<li>This extension requires the {@code geometryShader} and {@code multiViewport} features.</li>
 				<li>This extension interacts with the {@code tessellationShader} feature.</li>
 			</ul></dd>

@@ -12,15 +12,15 @@ fun config() {
 	packageInfo(
 		BGFX_PACKAGE,
 		"""
-		Contains bindings to the <a href="https://github.com/bkaradzic/bgfx">bgfx</a> library.
+		Contains bindings to the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library.
 
-		The bgfx documentation can be found online <a href="https://bkaradzic.github.io/bgfx/">here</a>. The API reference is available
-		<a href="https://bkaradzic.github.io/bgfx/bgfx.html">here</a>.
+		The bgfx documentation can be found online ${url("https://bkaradzic.github.io/bgfx/", "here")}. The API reference is available
+		${url("https://bkaradzic.github.io/bgfx/bgfx.html", "here")}.
 
 		The bgfx library is very customizable and can be tailored to specific needs. For this reason, the {@code lwjgl-bgfx} artifact does not include any
 		prebuilt native libraries.
 
-		To compile your own version, follow the <a href="https://bkaradzic.github.io/bgfx/build.html">build instructions</a> for Windows, Linux and MacOS.
+		To compile your own version, follow the ${url("https://bkaradzic.github.io/bgfx/build.html", "build instructions")} for Windows, Linux and MacOS.
 		Please ensure to use the {@code --with-shared-lib} configuration to create a shared library. Just copy the compiled library found in
 		{@code <bgfx>/.build/<platform>/bin/} to the classpath of your LWJGL application.
 
