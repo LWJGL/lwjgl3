@@ -23,10 +23,10 @@ fun config() {
 		${ul(
 			"--with-jemalloc-prefix=je_",
 			"--with-malloc-conf=purge:decay",
+			"--enable-tls",
 			"--disable-stats",
 			"--disable-fill",
-			"--disable-zone-allocator (MacOS)",
-			"--enable-lazy-lock=no (Windows)"
+			"--disable-zone-allocator (MacOS)"
 		)}
 
 		The shared library may be replaced with a custom build that has more features enabled.
