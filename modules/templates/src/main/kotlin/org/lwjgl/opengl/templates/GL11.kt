@@ -1279,7 +1279,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("zFar", "the far depth range")
 	)
 
-	DeprecatedGL..void(
+	IgnoreMissing..void(
 		"DisableClientState",
 		"Disables the specified fixed-function attribute array.",
 
@@ -1385,7 +1385,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Unsafe..ARRAY_BUFFER..const..GLboolean_p.IN("pointer", "the edge flag array data")
 	)
 
-	DeprecatedGL..void(
+	IgnoreMissing..void(
 		"EnableClientState",
 		"Enables the specified fixed-function attribute array.",
 
