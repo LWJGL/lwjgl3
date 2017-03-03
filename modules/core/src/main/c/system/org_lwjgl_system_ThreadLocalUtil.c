@@ -15,7 +15,7 @@ extern jvmtiEnv* jvmti;
 static jint JNICALL functionMissingAbort(void) {
 	fprintf(stderr, "[LWJGL] A function that is not available in the current context was called. The JVM will abort execution. Inspect the crash log to find the responsible Java frames.\n");
 
-	return *((jint *)NULL); // force a segfault
+	return *((volatile jint *)NULL); // force a segfault
 }
 
 EXTERN_C_ENTER
