@@ -4,13 +4,11 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.PointerBuffer;
+import org.lwjgl.*;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -93,6 +91,9 @@ public final class ThreadLocalUtil {
 	/** The global JNIEnv. */
 	private static final long JNI_NATIVE_INTERFACE = getThreadJNIEnv();
 
+	/** A function to delegate to when an unsupported function is called. */
+	private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
+
 	private ThreadLocalUtil() {
 	}
 
@@ -103,6 +104,8 @@ public final class ThreadLocalUtil {
 	private static native long jvmtiGetJNIFunctionTable();
 
 	private static native void jvmtiDeallocate(long mem);
+
+	private static native long getFunctionMissingAbort();
 
 	public static void setEnv(long capabilities, int index) {
 		if ( CHECKS && (index < 0 || 3 < index) ) // reserved0-3
@@ -132,8 +135,10 @@ public final class ThreadLocalUtil {
 		PointerBuffer addresses = BufferUtils.createPointerBuffer(functions.size());
 
 		try {
-			for ( int i = 0; i < functions.size(); i++ )
-				addresses.put(i, functions.get(i).getLong(caps));
+			for ( int i = 0; i < functions.size(); i++ ) {
+				long a = functions.get(i).getLong(caps);
+				addresses.put(i, a != NULL ? a : FUNCTION_MISSING_ABORT);
+			}
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
