@@ -237,6 +237,13 @@ public final class Library {
 			}
 		}
 
+		// Use method 4 before 3 for libraries not bundled with LWJGL.
+		if ( !bundledWithLWJGL ) {
+			lib = loadNativeFromSystem(libName);
+			if ( lib != null )
+				return lib;
+		}
+
 		// METHOD 3: System.loadLibrary (emulated)
 		{
 			if ( Configuration.EMULATE_SYSTEM_LOADLIBRARY.get(false) ) {
@@ -266,16 +273,26 @@ public final class Library {
 		}
 
 		// METHOD 4: system-specific
-		try {
-			lib = apiCreateLibrary(libName);
-			apiLog("\tLoaded from system paths");
-			return lib;
-		} catch (UnsatisfiedLinkError e) {
-			apiLog(String.format("\t%s not found in system paths", libName));
+		if ( bundledWithLWJGL ) {
+			lib = loadNativeFromSystem(libName);
+			if ( lib != null )
+				return lib;
 		}
 
 		printError(bundledWithLWJGL);
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
+	}
+
+	private static SharedLibrary loadNativeFromSystem(String libName) {
+		SharedLibrary lib;
+		try {
+			lib = apiCreateLibrary(libName);
+			apiLog("\tLoaded from system paths");
+		} catch (UnsatisfiedLinkError e) {
+			lib = null;
+			apiLog(String.format("\t%s not found in system paths", libName));
+		}
+		return lib;
 	}
 
 	private static SharedLibrary loadNative(Class<?> context, String libName, Configuration<String> property) {
