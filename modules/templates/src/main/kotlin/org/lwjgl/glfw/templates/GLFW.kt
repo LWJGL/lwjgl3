@@ -57,6 +57,20 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		"REPEAT".."2"
 	)
+	
+	IntConstant(
+		"Joystick hat states.",
+		
+		"HAT_CENTERED".."0",
+		"HAT_UP".."1",
+		"HAT_RIGHT".."2",
+		"HAT_DOWN".."4",
+		"HAT_LEFT".."8",
+		"HAT_RIGHT_UP".."(GLFW_HAT_RIGHT | GLFW_HAT_UP)",
+		"HAT_RIGHT_DOWN".."(GLFW_HAT_RIGHT | GLFW_HAT_DOWN)",
+		"HAT_LEFT_UP".."(GLFW_HAT_LEFT  | GLFW_HAT_UP)",
+		"HAT_LEFT_DOWN".."(GLFW_HAT_LEFT  | GLFW_HAT_DOWN)"
+	)
 
 	IntConstant(
 		"The unknown key.",
@@ -478,6 +492,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"DISCONNECTED"..0x00040002
 	)
 
+	val InitHints = IntConstant(
+		"Init hints.",
+
+		"JOYSTICK_HAT_BUTTONS"..0x00050001,
+
+		"COCOA_CHDIR_RESOURCES"..0x00051001,
+		"COCOA_MENUBAR"..0x00051002
+	).javaDocLinks
+
 	IntConstant(
 		"Don't care value.",
 
@@ -691,7 +714,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"Values for the #CONTEXT_CREATION_API hint.",
 
 		"NATIVE_CONTEXT_API"..0x00036001,
-		"EGL_CONTEXT_API"..0x00036002
+		"EGL_CONTEXT_API"..0x00036002,
+		"OSMESA_CONTEXT_API"..0x00036003
 	).javaDocLinks
 
 	intb(
@@ -709,7 +733,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"This function must only be called from the main thread.",
 			"""
 			<b>macOS</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
-			bundle, if present.
+			bundle, if present. This can be disabled with the #COCOA_CHDIR_RESOURCES init hint.
 			"""
 		)}
 		""",
@@ -736,6 +760,32 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 		since = "version 1.0"
+	)
+
+	void(
+		"InitHint",
+		"""
+		Sets the specified init hint to the desired value.
+
+		This function sets hints for the next initialization of GLFW.
+
+		The values you set are not affected by initialization or termination, but they are only read during initialization. Once GLFW has been initialized,
+		setting new hint values will not affect behavior until the next time the library is terminated and initialized.
+
+		Some hints are platform specific. These are always valid to set on any platform but they will only affect their specific platform. Other platforms will
+		simply ignore them. Setting these hints requires no platform specific headers or calls.
+
+		Notes:
+		${ul(
+			"This function may be called before #Init().",
+			"This function must only be called from the main thread."
+		)}
+		""",
+
+		int.IN("hint", "the init hint to set", InitHints),
+		int.IN("value", "the new value of the init hint"),
+
+		since = "version 3.3"
 	)
 
 	void(
@@ -1152,9 +1202,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		    Developer Library.
 			""",
 			"""
-		    <b>macOS</b>: The first time a window is created the menu bar is populated with common commands like Hide, Quit and About. The About entry opens a
-		    minimal about dialog with information from the application's bundle. The menu bar can be disabled with a
-		    ${url("http://www.glfw.org/docs/latest/compile.html\\#compile_options_osx", "compile-time option")}.
+		    <b>macOS</b>: The first time a window is created the menu bar is created. If GLFW finds a {@code `MainMenu.nib`} it is loaded and assumed to
+		    contain a menu bar. Otherwise a minimal menu bar is created manually with common commands like Hide, Quit and About. The About entry opens a
+		    minimal about dialog with information from the application's bundle. Menu bar creation can be disabled entirely with the #COCOA_MENUBAR init hint.
 		    """,
 			"""
 		    <b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
@@ -1967,10 +2017,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	const..charUTF8_p(
 		"GetKeyName",
 		"""
-		Returns the localized name of the specified printable key. This is intended for displaying key bindings to the user.
+		Returns the localized name of the specified printable key.
 
-		If the key is #KEY_UNKNOWN, the scancode is used instead, otherwise the scancode is ignored. If a non-printable key or (if the key is #KEY_UNKNOWN) a
-		scancode that maps to a non-printable key is specified, this function returns #NULL.
+		This function returns the name of the specified printable key. This is typically the character that key would produce without any modifier keys, intended for displaying key bindings to the user.
+
+		<b>Do not use this function</b> for text input. You will break text input for many languages even if it happens to work for yours.
+
+		If the key is #KEY_UNKNOWN, the scancode is used to identify the key, otherwise the scancode is ignored. If you specify a non-printable key, or
+		#KEY_UNKNOWN and a scancode that maps to a non-printable key, this function returns #NULL but does not emit an error.
+
+		This behavior allows you to always pass in the arguments in the key callback without modification.
 
 		The printable keys are:
 		${ul(
@@ -1996,6 +2052,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"#KEY_KP_ADD",
 			"#KEY_KP_EQUAL"
 		)}
+		Names for printable keys depend on keyboard layout, while names for non-printable keys are the same across layouts but depend on the application
+		language and should be localized along with other user interface text.
+
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetKeyName(), or until the
 		library is terminated.
 
@@ -2375,7 +2434,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
 
-		Querying a joystick slot with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+		Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
 		presence.
 
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2399,7 +2458,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
 
-		Querying a joystick slot with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+		For backward compatibility with earlier versions that did not have #GetJoystickHats(), the button array also includes all hats, each represented as four
+		buttons. The hats are in the same order as returned by #GetJoystickHats() and are in the order up, right, down and left. To disable these extra
+		buttons, set the #JOYSTICK_HAT_BUTTONS init hint before initialization.
+
+ 		Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
 		presence.
 
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2418,12 +2481,116 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 2.2"
 	)
 
+/*! @brief Returns the state of all hats of the specified joystick.
+ *
+ *  This function returns the state of all hats of the specified joystick.
+ *  Each element in the array is one of the following values:
+ *
+ *  Name                  | Value
+ *  --------------------- | --------------------------------
+ *  `GLFW_HAT_CENTERED`   | 0
+ *  `GLFW_HAT_UP`         | 1
+ *  `GLFW_HAT_RIGHT`      | 2
+ *  `GLFW_HAT_DOWN`       | 4
+ *  `GLFW_HAT_LEFT`       | 8
+ *  `GLFW_HAT_RIGHT_UP`   | `GLFW_HAT_RIGHT` \| `GLFW_HAT_UP`
+ *  `GLFW_HAT_RIGHT_DOWN` | `GLFW_HAT_RIGHT` \| `GLFW_HAT_DOWN`
+ *  `GLFW_HAT_LEFT_UP`    | `GLFW_HAT_LEFT` \| `GLFW_HAT_UP`
+ *  `GLFW_HAT_LEFT_DOWN`  | `GLFW_HAT_LEFT` \| `GLFW_HAT_DOWN`
+ *
+ *  The diagonal directions are bitwise combinations of the primary (up, right,
+ *  down and left) directions and you can test for these individually by ANDing
+ *  it with the corresponding direction.
+ *
+ *  @code
+ *  if (hats[2] & GLFW_HAT_RIGHT)
+ *  {
+ *      // State of hat 2 could be right-up, right or right-down
+ *  }
+ *  @endcode
+ *
+ *  Querying a joystick ID with no device present is not an error, but will
+ *  cause this function to return `NULL`.  Call @ref glfwJoystickPresent to
+ *  check device presence.
+ *
+ *  @param[in] jid The [joystick](@ref joysticks) to query.
+ *  @param[out] count Where to store the number of hat states in the returned
+ *  array.  This is set to zero if the joystick is not present or an error
+ *  occurred.
+ *  @return An array of hat states, or `NULL` if the joystick is not present
+ *  or an [error](@ref error_handling) occurred.
+ *
+ *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
+ *  GLFW_INVALID_ENUM and @ref GLFW_PLATFORM_ERROR.
+ *
+ *  @bug @linux Joystick hats are currently unimplemented.
+ *
+ *  @pointer_lifetime The returned array is allocated and freed by GLFW.  You
+ *  should not free it yourself.  It is valid until the specified joystick is
+ *  disconnected, this function is called again for that joystick or the library
+ *  is terminated.
+ *
+ *  @thread_safety This function must only be called from the main thread.
+ *
+ *  @sa @ref joystick_hat
+ *
+ *  @since Added in version 3.3.
+ *
+ *  @ingroup input
+ */
+	const..unsigned_char_p(
+		"GetJoystickHats",
+		"""
+		Returns the state of all hats of the specified joystick.
+
+		This function returns the state of all hats of the specified joystick. Each element in the array is one of the following values:
+${codeBlock("""
+Name                | Value
+------------------- | ------------------------------
+GLFW_HAT_CENTERED   | 0
+GLFW_HAT_UP         | 1
+GLFW_HAT_RIGHT      | 2
+GLFW_HAT_DOWN       | 4
+GLFW_HAT_LEFT       | 8
+GLFW_HAT_RIGHT_UP   | GLFW_HAT_RIGHT | GLFW_HAT_UP
+GLFW_HAT_RIGHT_DOWN | GLFW_HAT_RIGHT | GLFW_HAT_DOWN
+GLFW_HAT_LEFT_UP    | GLFW_HAT_LEFT  | GLFW_HAT_UP
+GLFW_HAT_LEFT_DOWN  | GLFW_HAT_LEFT  | GLFW_HAT_DOWN
+""")}
+		The diagonal directions are bitwise combinations of the primary (up, right, down and left) directions and you can test for these individually by ANDing
+		it with the corresponding direction.
+		${codeBlock("""
+if (hats[2] & GLFW_HAT_RIGHT)
+{
+	// State of hat 2 could be right-up, right or right-down
+}""")}
+		Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+		presence.
+
+		Notes:
+		${ul(
+			"Linux: Joystick hats are currently unimplemented.",
+			"The returned array is allocated and freed by GLFW.  You *  should not free it yourself.  It is valid until the specified joystick is *  disconnected, this function is called again for that joystick or the library *  is terminated.",
+			"This function must only be called from the main thread."
+		)}
+		""",
+
+		int.IN("jid", "the joystick to query"),
+		AutoSizeResult..int_p.OUT(
+			"count",
+			"where to store the number of hat states in the returned array. This is set to zero if the joystick is not present or an error occurred."
+		),
+
+		returnDoc = "an array of hat states, or #NULL if the joystick is not present or an error occurred",
+		since = "version 3.3"
+	)
+
 	const..charUTF8_p(
 		"GetJoystickName",
 		"""
 		Returns the name, encoded as UTF-8, of the specified joystick.
 
-		Querying a joystick slot with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+		Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
 		presence.
 
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
