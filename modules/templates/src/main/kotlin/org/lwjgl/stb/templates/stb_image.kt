@@ -28,7 +28,7 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
 		Primarily of interest to game developers and other people who can avoid problematic images and only need the trivial interface. Supported formats:
 		${ul(
 			"JPEG baseline & progressive (12 bpc/arithmetic not supported, same as stock IJG lib",
-			"PNG 1/2/4/8-bit-per-channel (16 bpc not supported)",
+			"PNG 1/2/4/8/16-bit-per-channel",
 			"TGA (not sure what subset, if a subset)",
 			"BMP non-1bpp, non-RLE",
 			"PSD (composited view only, no extra channels, 8/16 bit-per-channel)",

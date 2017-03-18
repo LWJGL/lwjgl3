@@ -31,7 +31,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		"HEURISTIC_Skyline_BF_sortHeight".enum
 	)
 
-	void(
+	int(
 		"pack_rects",
 		"""
 		Assigns packed locations to rectangles. The rectangles are of type ##STBRPRect, stored in the array {@code rects}, and there are {@code num_rects} many
@@ -51,7 +51,9 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
 		stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
-		AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}")
+		AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}"),
+
+		returnDoc = "1 if all of the rectangles were successfully packed and 0 otherwise"
 	)
 
 	void(

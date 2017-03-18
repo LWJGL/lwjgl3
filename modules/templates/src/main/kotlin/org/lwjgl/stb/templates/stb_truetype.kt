@@ -265,7 +265,7 @@ int main(int arg, char **argv)
 		"BASELINE" above.
 		""",
 
-		Check("char_index + 1")..stbtt_bakedchar_p.IN("chardata", "an array of ##STBTTBakedChar structs"),
+		Check("char_index + 1")..const..stbtt_bakedchar_p.IN("chardata", "an array of ##STBTTBakedChar structs"),
 		int.IN("pw", "the bitmap width, in pixels"),
 		int.IN("ph", "the bitmap height, in pixels"),
 		int.IN("char_index", "the character index in the {@code chardata} array"),
@@ -393,7 +393,7 @@ int main(int arg, char **argv)
 		"BASELINE" above.
 		""",
 
-		Check("char_index + 1")..stbtt_packedchar_p.IN("chardata", "an array of ##STBTTPackedchar structs"),
+		Check("char_index + 1")..const..stbtt_packedchar_p.IN("chardata", "an array of ##STBTTPackedchar structs"),
 		int.IN("pw", "the bitmap width, in pixels"),
 		int.IN("ph", "the bitmap height, in pixels"),
 		int.IN("char_index", "the character index in the {@code chardata} array"),

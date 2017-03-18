@@ -21,7 +21,7 @@
           avoid problematic images and only need the trivial interface
 
       JPEG baseline & progressive (12 bpc/arithmetic not supported, same as stock IJG lib)
-      PNG 1/2/4/8-bit-per-channel (16 bpc not supported)
+      PNG 1/2/4/8/16-bit-per-channel
 
       TGA (not sure what subset, if a subset)
       BMP non-1bpp, non-RLE
@@ -42,115 +42,18 @@
    Full documentation under "DOCUMENTATION" below.
 
 
-   Revision 2.00 release notes:
+LICENSE
 
-      - Progressive JPEG is now supported.
+  See end of file for license information.
 
-      - PPM and PGM binary formats are now supported, thanks to Ken Miller.
+RECENT REVISION HISTORY:
 
-      - x86 platforms now make use of SSE2 SIMD instructions for
-        JPEG decoding, and ARM platforms can use NEON SIMD if requested.
-        This work was done by Fabian "ryg" Giesen. SSE2 is used by
-        default, but NEON must be enabled explicitly; see docs.
-
-        With other JPEG optimizations included in this version, we see
-        2x speedup on a JPEG on an x86 machine, and a 1.5x speedup
-        on a JPEG on an ARM machine, relative to previous versions of this
-        library. The same results will not obtain for all JPGs and for all
-        x86/ARM machines. (Note that progressive JPEGs are significantly
-        slower to decode than regular JPEGs.) This doesn't mean that this
-        is the fastest JPEG decoder in the land; rather, it brings it
-        closer to parity with standard libraries. If you want the fastest
-        decode, look elsewhere. (See "Philosophy" section of docs below.)
-
-        See final bullet items below for more info on SIMD.
-
-      - Added STBI_MALLOC, STBI_REALLOC, and STBI_FREE macros for replacing
-        the memory allocator. Unlike other STBI libraries, these macros don't
-        support a context parameter, so if you need to pass a context in to
-        the allocator, you'll have to store it in a global or a thread-local
-        variable.
-
-      - Split existing STBI_NO_HDR flag into two flags, STBI_NO_HDR and
-        STBI_NO_LINEAR.
-            STBI_NO_HDR:     suppress implementation of .hdr reader format
-            STBI_NO_LINEAR:  suppress high-dynamic-range light-linear float API
-
-      - You can suppress implementation of any of the decoders to reduce
-        your code footprint by #defining one or more of the following
-        symbols before creating the implementation.
-
-            STBI_NO_JPEG
-            STBI_NO_PNG
-            STBI_NO_BMP
-            STBI_NO_PSD
-            STBI_NO_TGA
-            STBI_NO_GIF
-            STBI_NO_HDR
-            STBI_NO_PIC
-            STBI_NO_PNM   (.ppm and .pgm)
-
-      - You can request *only* certain decoders and suppress all other ones
-        (this will be more forward-compatible, as addition of new decoders
-        doesn't require you to disable them explicitly):
-
-            STBI_ONLY_JPEG
-            STBI_ONLY_PNG
-            STBI_ONLY_BMP
-            STBI_ONLY_PSD
-            STBI_ONLY_TGA
-            STBI_ONLY_GIF
-            STBI_ONLY_HDR
-            STBI_ONLY_PIC
-            STBI_ONLY_PNM   (.ppm and .pgm)
-
-         Note that you can define multiples of these, and you will get all
-         of them ("only x" and "only y" is interpreted to mean "only x&y").
-
-       - If you use STBI_NO_PNG (or _ONLY_ without PNG), and you still
-         want the zlib decoder to be available, #define STBI_SUPPORT_ZLIB
-
-      - Compilation of all SIMD code can be suppressed with
-            #define STBI_NO_SIMD
-        It should not be necessary to disable SIMD unless you have issues
-        compiling (e.g. using an x86 compiler which doesn't support SSE
-        intrinsics or that doesn't support the method used to detect
-        SSE2 support at run-time), and even those can be reported as
-        bugs so I can refine the built-in compile-time checking to be
-        smarter.
-
-      - The old STBI_SIMD system which allowed installing a user-defined
-        IDCT etc. has been removed. If you need this, don't upgrade. My
-        assumption is that almost nobody was doing this, and those who
-        were will find the built-in SIMD more satisfactory anyway.
-
-      - RGB values computed for JPEG images are slightly different from
-        previous versions of stb_image. (This is due to using less
-        integer precision in SIMD.) The C code has been adjusted so
-        that the same RGB values will be computed regardless of whether
-        SIMD support is available, so your app should always produce
-        consistent results. But these results are slightly different from
-        previous versions. (Specifically, about 3% of available YCbCr values
-        will compute different RGB results from pre-1.49 versions by +-1;
-        most of the deviating values are one smaller in the G channel.)
-
-      - If you must produce consistent results with previous versions of
-        stb_image, #define STBI_JPEG_OLD and you will get the same results
-        you used to; however, you will not get the SIMD speedups for
-        the YCbCr-to-RGB conversion step (although you should still see
-        significant JPEG speedup from the other changes).
-
-        Please note that STBI_JPEG_OLD is a temporary feature; it will be
-        removed in future versions of the library. It is only intended for
-        near-term back-compatibility use.
-
-
-   Latest revision history:
+      2.14  (2017-03-03) remove deprecated STBI_JPEG_OLD; fixes for Imagenet JPGs
       2.13  (2016-12-04) experimental 16-bit API, only for PNG so far; fixes
       2.12  (2016-04-02) fix typo in 2.11 PSD fix that caused crashes
       2.11  (2016-04-02) 16-bit PNGS; enable SSE2 in non-gcc x64
                          RGB-format JPEG; remove white matting in PSD;
-                         allocate large structures on the stack;
+                         allocate large structures on the stack; 
                          correct channel count for PNG & BMP
       2.10  (2016-01-22) avoid warning introduced in 2.09
       2.09  (2016-01-16) 16-bit TGA; comments in PNM files; STBI_REALLOC_SIZED
@@ -175,6 +78,7 @@
     github:urraka (animated gif)           Junggon Kim (PNM comments)
                                            Daniel Gibson (16-bit TGA)
                                            socks-the-fox (16-bit TGA)
+                                           Jeremy Sawicki (handle all ImageNet JPGs)
  Optimizations & bugfixes
     Fabian "ryg" Giesen
     Arseny Kapoulkine
@@ -193,13 +97,6 @@
     Michaelangel007@github  Oriol Ferrer Mesia Dale Weiler        github:Zelex
     Philipp Wiesemann       Josh Tobin         github:rlyeh       github:grim210@github
     Blazej Dariusz Roszkowski                  github:sammyhw
-
-
-LICENSE
-
-This software is dual-licensed to the public domain and under the following
-license: you are granted a perpetual, irrevocable license to copy, modify,
-publish, and distribute this file as you see fit.
 
 */
 
@@ -274,13 +171,13 @@ publish, and distribute this file as you see fit.
 // and for best performance I may provide less-easy-to-use APIs that give higher
 // performance, in addition to the easy to use ones. Nevertheless, it's important
 // to keep in mind that from the standpoint of you, a client of this library,
-// all you care about is #1 and #3, and stb libraries do not emphasize #3 above all.
+// all you care about is #1 and #3, and stb libraries DO NOT emphasize #3 above all.
 //
 // Some secondary priorities arise directly from the first two, some of which
 // make more explicit reasons why performance can't be emphasized.
 //
 //    - Portable ("ease of use")
-//    - Small footprint ("easy to maintain")
+//    - Small source code footprint ("easy to maintain")
 //    - No dependencies ("ease of use")
 //
 // ===========================================================================
@@ -311,13 +208,6 @@ publish, and distribute this file as you see fit.
 // the typical path is to have separate builds for NEON and non-NEON devices
 // (at least this is true for iOS and Android). Therefore, the NEON support is
 // toggled by a build flag: define STBI_NEON to get NEON loops.
-//
-// The output of the JPEG decoder is slightly different from versions where
-// SIMD support was introduced (that is, for versions before 1.49). The
-// difference is only +-1 in the 8-bit RGB channels, and only on a small
-// fraction of pixels. You can force the pre-1.49 behavior by defining
-// STBI_JPEG_OLD, but this will disable some of the SIMD decoding path
-// and hence cost some performance.
 //
 // If for some reason you do not want to use any of SIMD code, or if
 // you have issues compiling it, you can disable it entirely by
@@ -373,6 +263,41 @@ publish, and distribute this file as you see fit.
 // pixel to remove any premultiplied alpha *only* if the image file explicitly
 // says there's premultiplied data (currently only happens in iPhone images,
 // and only if iPhone convert-to-rgb processing is on).
+//
+// ===========================================================================
+//
+// ADDITIONAL CONFIGURATION
+// 
+//  - You can suppress implementation of any of the decoders to reduce
+//    your code footprint by #defining one or more of the following
+//    symbols before creating the implementation.
+// 
+//        STBI_NO_JPEG
+//        STBI_NO_PNG
+//        STBI_NO_BMP
+//        STBI_NO_PSD
+//        STBI_NO_TGA
+//        STBI_NO_GIF
+//        STBI_NO_HDR
+//        STBI_NO_PIC
+//        STBI_NO_PNM   (.ppm and .pgm)
+// 
+//  - You can request *only* certain decoders and suppress all other ones
+//    (this will be more forward-compatible, as addition of new decoders
+//    doesn't require you to disable them explicitly):
+// 
+//        STBI_ONLY_JPEG
+//        STBI_ONLY_PNG
+//        STBI_ONLY_BMP
+//        STBI_ONLY_PSD
+//        STBI_ONLY_TGA
+//        STBI_ONLY_GIF
+//        STBI_ONLY_HDR
+//        STBI_ONLY_PIC
+//        STBI_ONLY_PNM   (.ppm and .pgm)
+// 
+//   - If you use STBI_NO_PNG (or _ONLY_ without PNG), and you still
+//     want the zlib decoder to be available, #define STBI_SUPPORT_ZLIB
 //
 
 
@@ -1730,7 +1655,7 @@ typedef struct
    stbi__context *s;
    stbi__huffman huff_dc[4];
    stbi__huffman huff_ac[4];
-   stbi_uc dequant[4][64];
+   stbi__uint16 dequant[4][64];
    stbi__int16 fast_ac[4][1 << FAST_BITS];
 
 // sizes for components, interleaved MCUs
@@ -1851,6 +1776,7 @@ static void stbi__grow_buffer_unsafe(stbi__jpeg *j)
       int b = j->nomore ? 0 : stbi__get8(j->s);
       if (b == 0xff) {
          int c = stbi__get8(j->s);
+         while (c == 0xff) c = stbi__get8(j->s); // consume fill bytes
          if (c != 0) {
             j->marker = (unsigned char) c;
             j->nomore = 1;
@@ -1975,7 +1901,7 @@ static stbi_uc stbi__jpeg_dezigzag[64+15] =
 };
 
 // decode one 64-entry block--
-static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman *hdc, stbi__huffman *hac, stbi__int16 *fac, int b, stbi_uc *dequant)
+static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman *hdc, stbi__huffman *hac, stbi__int16 *fac, int b, stbi__uint16 *dequant)
 {
    int diff,dc,k;
    int t;
@@ -2684,7 +2610,7 @@ static stbi_uc stbi__get_marker(stbi__jpeg *j)
    x = stbi__get8(j->s);
    if (x != 0xff) return STBI__MARKER_none;
    while (x == 0xff)
-      x = stbi__get8(j->s);
+      x = stbi__get8(j->s); // consume repeated 0xff fill bytes
    return x;
 }
 
@@ -2831,7 +2757,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
    }
 }
 
-static void stbi__jpeg_dequantize(short *data, stbi_uc *dequant)
+static void stbi__jpeg_dequantize(short *data, stbi__uint16 *dequant)
 {
    int i;
    for (i=0; i < 64; ++i)
@@ -2873,13 +2799,14 @@ static int stbi__process_marker(stbi__jpeg *z, int m)
          L = stbi__get16be(z->s)-2;
          while (L > 0) {
             int q = stbi__get8(z->s);
-            int p = q >> 4;
+            int p = q >> 4, sixteen = (p != 0);
             int t = q & 15,i;
-            if (p != 0) return stbi__err("bad DQT type","Corrupt JPEG");
+            if (p != 0 && p != 1) return stbi__err("bad DQT type","Corrupt JPEG");
             if (t > 3) return stbi__err("bad DQT table","Corrupt JPEG");
+
             for (i=0; i < 64; ++i)
-               z->dequant[t][stbi__jpeg_dezigzag[i]] = stbi__get8(z->s);
-            L -= 65;
+               z->dequant[t][stbi__jpeg_dezigzag[i]] = sixteen ? stbi__get16be(z->s) : stbi__get8(z->s);
+            L -= (sixteen ? 129 : 65);
          }
          return L==0;
 
@@ -2917,7 +2844,7 @@ static int stbi__process_marker(stbi__jpeg *z, int m)
       stbi__skip(z->s, stbi__get16be(z->s)-2);
       return 1;
    }
-   return 0;
+   return stbi__err("unknown marker","Corrupt JPEG");
 }
 
 // after we see SOS
@@ -3004,13 +2931,8 @@ static int stbi__process_frame_header(stbi__jpeg *z, int scan)
    for (i=0; i < s->img_n; ++i) {
       static unsigned char rgb[3] = { 'R', 'G', 'B' };
       z->img_comp[i].id = stbi__get8(s);
-      if (z->img_comp[i].id != i+1)   // JFIF requires
-         if (z->img_comp[i].id != i) {  // some version of jpegtran outputs non-JFIF-compliant files!
-            // somethings output this (see http://fileformats.archiveteam.org/wiki/JPEG#Color_format)
-            if (z->img_comp[i].id != rgb[i])
-               return stbi__err("bad component ID","Corrupt JPEG");
-            ++z->rgb;
-         }
+      if (z->img_comp[i].id == rgb[i])
+         ++z->rgb;
       q = stbi__get8(s);
       z->img_comp[i].h = (q >> 4);  if (!z->img_comp[i].h || z->img_comp[i].h > 4) return stbi__err("bad H","Corrupt JPEG");
       z->img_comp[i].v = q & 15;    if (!z->img_comp[i].v || z->img_comp[i].v > 4) return stbi__err("bad V","Corrupt JPEG");
@@ -3123,12 +3045,15 @@ static int stbi__decode_jpeg_image(stbi__jpeg *j)
                if (x == 255) {
                   j->marker = stbi__get8(j->s);
                   break;
-               } else if (x != 0) {
-                  return stbi__err("junk before marker", "Corrupt JPEG");
                }
             }
             // if we reach eof without hitting a marker, stbi__get_marker() below will fail and we'll eventually return 0
          }
+      } else if (stbi__DNL(m)) {
+         int Ld = stbi__get16be(j->s);
+         stbi__uint32 NL = stbi__get16be(j->s);
+         if (Ld != 4) stbi__err("bad DNL len", "Corrupt JPEG");
+         if (NL != j->s->img_y) stbi__err("bad DNL height", "Corrupt JPEG");
       } else {
          if (!stbi__process_marker(j, m)) return 0;
       }
@@ -3347,38 +3272,9 @@ static stbi_uc *stbi__resample_row_generic(stbi_uc *out, stbi_uc *in_near, stbi_
    return out;
 }
 
-#ifdef STBI_JPEG_OLD
-// this is the same YCbCr-to-RGB calculation that stb_image has used
-// historically before the algorithm changes in 1.49
-#define float2fixed(x)  ((int) ((x) * 65536 + 0.5))
-static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step)
-{
-   int i;
-   for (i=0; i < count; ++i) {
-      int y_fixed = (y[i] << 16) + 32768; // rounding
-      int r,g,b;
-      int cr = pcr[i] - 128;
-      int cb = pcb[i] - 128;
-      r = y_fixed + cr*float2fixed(1.40200f);
-      g = y_fixed - cr*float2fixed(0.71414f) - cb*float2fixed(0.34414f);
-      b = y_fixed                            + cb*float2fixed(1.77200f);
-      r >>= 16;
-      g >>= 16;
-      b >>= 16;
-      if ((unsigned) r > 255) { if (r < 0) r = 0; else r = 255; }
-      if ((unsigned) g > 255) { if (g < 0) g = 0; else g = 255; }
-      if ((unsigned) b > 255) { if (b < 0) b = 0; else b = 255; }
-      out[0] = (stbi_uc)r;
-      out[1] = (stbi_uc)g;
-      out[2] = (stbi_uc)b;
-      out[3] = 255;
-      out += step;
-   }
-}
-#else
 // this is a reduced-precision calculation of YCbCr-to-RGB introduced
 // to make sure the code produces the same results in both SIMD and scalar
-#define float2fixed(x)  (((int) ((x) * 4096.0f + 0.5f)) << 8)
+#define stbi__float2fixed(x)  (((int) ((x) * 4096.0f + 0.5f)) << 8)
 static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step)
 {
    int i;
@@ -3387,9 +3283,9 @@ static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc
       int r,g,b;
       int cr = pcr[i] - 128;
       int cb = pcb[i] - 128;
-      r = y_fixed +  cr* float2fixed(1.40200f);
-      g = y_fixed + (cr*-float2fixed(0.71414f)) + ((cb*-float2fixed(0.34414f)) & 0xffff0000);
-      b = y_fixed                               +   cb* float2fixed(1.77200f);
+      r = y_fixed +  cr* stbi__float2fixed(1.40200f);
+      g = y_fixed + (cr*-stbi__float2fixed(0.71414f)) + ((cb*-stbi__float2fixed(0.34414f)) & 0xffff0000);
+      b = y_fixed                                     +   cb* stbi__float2fixed(1.77200f);
       r >>= 20;
       g >>= 20;
       b >>= 20;
@@ -3403,7 +3299,6 @@ static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc
       out += step;
    }
 }
-#endif
 
 #if defined(STBI_SSE2) || defined(STBI_NEON)
 static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count, int step)
@@ -3522,9 +3417,9 @@ static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc cons
       int r,g,b;
       int cr = pcr[i] - 128;
       int cb = pcb[i] - 128;
-      r = y_fixed + cr* float2fixed(1.40200f);
-      g = y_fixed + cr*-float2fixed(0.71414f) + ((cb*-float2fixed(0.34414f)) & 0xffff0000);
-      b = y_fixed                             +   cb* float2fixed(1.77200f);
+      r = y_fixed + cr* stbi__float2fixed(1.40200f);
+      g = y_fixed + cr*-stbi__float2fixed(0.71414f) + ((cb*-stbi__float2fixed(0.34414f)) & 0xffff0000);
+      b = y_fixed                                   +   cb* stbi__float2fixed(1.77200f);
       r >>= 20;
       g >>= 20;
       b >>= 20;
@@ -3550,18 +3445,14 @@ static void stbi__setup_jpeg(stbi__jpeg *j)
 #ifdef STBI_SSE2
    if (stbi__sse2_available()) {
       j->idct_block_kernel = stbi__idct_simd;
-      #ifndef STBI_JPEG_OLD
       j->YCbCr_to_RGB_kernel = stbi__YCbCr_to_RGB_simd;
-      #endif
       j->resample_row_hv_2_kernel = stbi__resample_row_hv_2_simd;
    }
 #endif
 
 #ifdef STBI_NEON
    j->idct_block_kernel = stbi__idct_simd;
-   #ifndef STBI_JPEG_OLD
    j->YCbCr_to_RGB_kernel = stbi__YCbCr_to_RGB_simd;
-   #endif
    j->resample_row_hv_2_kernel = stbi__resample_row_hv_2_simd;
 #endif
 }
@@ -3596,7 +3487,7 @@ static stbi_uc *load_jpeg_image(stbi__jpeg *z, int *out_x, int *out_y, int *comp
    // determine actual number of components to generate
    n = req_comp ? req_comp : z->s->img_n;
 
-   if (z->s->img_n == 3 && n < 3)
+   if (z->s->img_n == 3 && n < 3 && z->rgb != 3)
       decode_n = 1;
    else
       decode_n = z->s->img_n;
@@ -3674,11 +3565,23 @@ static stbi_uc *load_jpeg_image(stbi__jpeg *z, int *out_x, int *out_y, int *comp
                   out += n;
                }
          } else {
-            stbi_uc *y = coutput[0];
-            if (n == 1)
-               for (i=0; i < z->s->img_x; ++i) out[i] = y[i];
-            else
-               for (i=0; i < z->s->img_x; ++i) *out++ = y[i], *out++ = 255;
+            if (z->rgb == 3) {
+               if (n == 1)
+                  for (i=0; i < z->s->img_x; ++i)
+                     *out++ = stbi__compute_y(coutput[0][i], coutput[1][i], coutput[2][i]);
+               else {
+                  for (i=0; i < z->s->img_x; ++i, out += 2) {
+                     out[0] = stbi__compute_y(coutput[0][i], coutput[1][i], coutput[2][i]);
+                     out[1] = 255;
+                  }
+               }
+            } else {
+               stbi_uc *y = coutput[0];
+               if (n == 1)
+                  for (i=0; i < z->s->img_x; ++i) out[i] = y[i];
+               else
+                  for (i=0; i < z->s->img_x; ++i) *out++ = y[i], *out++ = 255;
+            }
          }
       }
       stbi__cleanup_jpeg(z);
@@ -3703,11 +3606,12 @@ static void *stbi__jpeg_load(stbi__context *s, int *x, int *y, int *comp, int re
 static int stbi__jpeg_test(stbi__context *s)
 {
    int r;
-   stbi__jpeg j;
-   j.s = s;
-   stbi__setup_jpeg(&j);
-   r = stbi__decode_jpeg_header(&j, STBI__SCAN_type);
+   stbi__jpeg* j = (stbi__jpeg*)stbi__malloc(sizeof(stbi__jpeg));
+   j->s = s;
+   stbi__setup_jpeg(j);
+   r = stbi__decode_jpeg_header(j, STBI__SCAN_type);
    stbi__rewind(s);
+   STBI_FREE(j);
    return r;
 }
 
@@ -4984,7 +4888,7 @@ static void *stbi__bmp_parse_header(stbi__context *s, stbi__bmp_data *info)
    info->offset = stbi__get32le(s);
    info->hsz = hsz = stbi__get32le(s);
    info->mr = info->mg = info->mb = info->ma = 0;
-
+   
    if (hsz != 12 && hsz != 40 && hsz != 56 && hsz != 108 && hsz != 124) return stbi__errpuc("unknown BMP", "BMP type not supported: unknown");
    if (hsz == 12) {
       s->img_x = stbi__get16le(s);
@@ -5069,7 +4973,7 @@ static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req
    stbi__bmp_data info;
    STBI_NOTUSED(ri);
 
-   info.all_a = 255;
+   info.all_a = 255;   
    if (stbi__bmp_parse_header(s, &info) == NULL)
       return NULL; // error code already set
 
@@ -5188,7 +5092,7 @@ static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req
          stbi__skip(s, pad);
       }
    }
-
+   
    // if alpha channel is all 0s, replace with all 255s
    if (target == 4 && all_a == 0)
       for (i=4*s->img_x*s->img_y-1; i >= 0; i -= 4)
@@ -6633,7 +6537,7 @@ static int stbi__bmp_info(stbi__context *s, int *x, int *y, int *comp)
    void *p;
    stbi__bmp_data info;
 
-   info.all_a = 255;
+   info.all_a = 255;   
    p = stbi__bmp_parse_header(s, &info);
    stbi__rewind( s );
    if (p == NULL)
@@ -7099,4 +7003,47 @@ STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int
               on 'test' only check type, not whether we support this variant
       0.50  (2006-11-19)
               first released version
+*/
+
+
+/*
+------------------------------------------------------------------------------
+This software is available under 2 licenses -- choose whichever you prefer.
+------------------------------------------------------------------------------
+ALTERNATIVE A - MIT License
+Copyright (c) 2017 Sean Barrett
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal in 
+the Software without restriction, including without limitation the rights to 
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
+of the Software, and to permit persons to whom the Software is furnished to do 
+so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all 
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE.
+------------------------------------------------------------------------------
+ALTERNATIVE B - Public Domain (www.unlicense.org)
+This is free and unencumbered software released into the public domain.
+Anyone is free to copy, modify, publish, use, compile, sell, or distribute this 
+software, either in source code form or as a compiled binary, for any purpose, 
+commercial or non-commercial, and by any means.
+In jurisdictions that recognize copyright laws, the author or authors of this 
+software dedicate any and all copyright interest in the software to the public 
+domain. We make this dedication for the benefit of the public at large and to 
+the detriment of our heirs and successors. We intend this dedication to be an 
+overt act of relinquishment in perpetuity of all present and future rights to 
+this software under copyright law.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+------------------------------------------------------------------------------
 */

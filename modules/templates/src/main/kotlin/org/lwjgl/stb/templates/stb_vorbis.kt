@@ -270,7 +270,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		unsigned_int.IN("sample_number", "the sample index")
 	)
 
-	void(
+	intb(
 		"seek_start",
 		"This function is equivalent to #seek()(f,0).",
 
