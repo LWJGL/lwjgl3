@@ -18,6 +18,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
 
 		"RENDER_FRAME_NO_CONTEXT".enum,
 		"RENDER_FRAME_RENDER".enum,
+		"RENDER_FRAME_TIMEOUT".enum,
 		"RENDER_FRAME_EXITING".enum,
 
 		"RENDER_FRAME_COUNT".enum

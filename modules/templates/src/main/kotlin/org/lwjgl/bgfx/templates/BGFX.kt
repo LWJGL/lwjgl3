@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."35"
+		"API_VERSION".."39"
 	)
 
 	ShortConstant(
@@ -830,7 +830,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT
-		)..nullable..void_p.IN("_dst", "destination index buffer. If this argument it #NULL function will return number of indices after conversion"),
+		)..nullable..void_p.IN("_dst", "destination index buffer. If this argument is #NULL function will return number of indices after conversion"),
 		AutoSize("_dst")..uint32_t.IN(
 			"_dstSize",
 			"""
@@ -1687,6 +1687,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Retrieves occlusion query result from previous frame.",
 
 		bgfx_occlusion_query_handle_t.IN("_handle", "handle to occlusion query object"),
+		Check(1)..nullable..int32_t_p.OUT(
+			"_result",
+			"number of pixels that passed test. This argument can be #NULL if result of occlusion query is not needed."
+		),
 
 		returnDoc = "occlusion query result"
 	)
@@ -2230,9 +2234,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	)
 
 	void(
-		"save_screen_shot",
+		"request_screen_shot",
 		"Requests screen shot.",
 
+		bgfx_frame_buffer_handle_t.IN("_handle", "frame buffer handle"),
 		const..charASCII_p.IN("_filePath", "will be passed to ##BGFXScreenShotCallback")
 	)
 
