@@ -63,7 +63,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 		<ul>
 			<li>create its objects as in unextended Vulkan</li>
 			<li>create a {@code VkObjectTableNVX}, and register the various Vulkan objects that are needed to evaluate the input parameters.</li>
-			<li>create a {@code VkIndirectCommandsLayoutNVX}, which lists the {@code VkIndirectCommandsTokenTypes} it wants to dynamically change as atomic command sequence. This step likely involves some internal device code compilation, since the intent is for the GPU to generate the command buffer in the pipeline.</li>
+			<li>create a {@code VkIndirectCommandsLayoutNVX}, which lists the {@code VkIndirectCommandsTokenTypeNVX} it wants to dynamically change as atomic command sequence. This step likely involves some internal device code compilation, since the intent is for the GPU to generate the command buffer in the pipeline.</li>
 			<li>fill the input buffers with the data for each of the inputs it needs. Each input is an array that will be filled with an index in the object table, instead of using CPU pointers.</li>
 			<li>set up a target secondary command buffer</li>
 			<li>reserve command buffer space via #CmdReserveSpaceForCommandsNVX() in a target command buffer at the position you want the generated commands to be executed.</li>
@@ -80,7 +80,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 			<li>a different index buffer, with an optional dynamic offset</li>
 		</ul>
 
-		It is recommended to register a small number of objects and to use dynamic offsets whenever possible.
+		Applications <b>should</b> register a small number of objects, and use dynamic offsets whenever possible.
 
 		While the GPU can be faster than a CPU to generate the commands, it may not happen asynchronously, therefore the primary use-case is generating "{@code less}" total work (occlusion culling, classification to use specialized shaders...).
 
@@ -292,7 +292,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pProcessCommandsInfo} <b>must</b> be a pointer to a valid ##VkCmdProcessCommandsInfoNVX structure</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 		</ul>
@@ -339,7 +339,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pReserveSpaceInfo} <b>must</b> be a pointer to a valid ##VkCmdReserveSpaceForCommandsInfoNVX structure</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 			<li>{@code commandBuffer} <b>must</b> be a secondary {@code VkCommandBuffer}</li>
@@ -542,7 +542,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 		(no short description available).
 
 		<h5>C Specification</h5>
-		Resource bindings of Vulkan objects are registered at an arbitrary ftext:uint32_t index within an object table. As long as the object table references such objects, they must not be deleted.
+		Resource bindings of Vulkan objects are registered at an arbitrary ftext:uint32_t index within an object table. As long as the object table references such objects, they <b>must</b> not be deleted.
 
 		<pre><code>VkResult vkRegisterObjectsNVX(
 ￿    VkDevice                                    device,
@@ -553,7 +553,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>The contents of {@code pObjectTableEntry} must yield plausible bindings supported by the device.</li>
+			<li>The contents of {@code pObjectTableEntry} <b>must</b> yield plausible bindings supported by the device.</li>
 			<li>At any {@code pObjectIndices} there <b>must</b> not be a registered resource already.</li>
 			<li>Any value inside {@code pObjectIndices} <b>must</b> be below the appropriate ##VkObjectTableCreateInfoNVX{@code ::pObjectEntryCounts} limits provided at {@code objectTable} creation time.</li>
 		</ul>
@@ -617,7 +617,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 		<ul>
 			<li>At any {@code pObjectIndices} there <b>must</b> be a registered resource already.</li>
 			<li>The {@code pObjectEntryTypes} of the resource at {@code pObjectIndices} <b>must</b> match.</li>
-			<li>All operations on the device using the registered resource must have been completed.</li>
+			<li>All operations on the device using the registered resource <b>must</b> have been completed.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>

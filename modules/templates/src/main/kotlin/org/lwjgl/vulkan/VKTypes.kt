@@ -791,7 +791,7 @@ val VkImageFormatProperties = struct(VULKAN_PACKAGE, "VkImageFormatProperties", 
 		If the combination of parameters to #GetPhysicalDeviceImageFormatProperties() is not supported by the implementation for use in #CreateImage(), then all members of ##VkImageFormatProperties will be filled with zero.
 
 		<h5>See Also</h5>
-		##VkExtent3D, ##VkExternalImageFormatPropertiesNV, ##VkImageFormatProperties2KHR, ##VkImageFormatProperties2KHX, #GetPhysicalDeviceImageFormatProperties()
+		##VkExtent3D, ##VkExternalImageFormatPropertiesNV, ##VkImageFormatProperties2KHR, #GetPhysicalDeviceImageFormatProperties()
 		"""
 
 	VkExtent3D.member("maxExtent", "are the maximum image dimensions. See the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-extentperimagetype\">Allowed Extent Values</a> section below for how these values are constrained by {@code type}.")
@@ -826,10 +826,10 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
 		##VkPhysicalDeviceProperties
 		"""
 
-	uint32_t.member("maxImageDimension1D", "the maximum dimension ({@code width}) of an image created with an {@code imageType} of #IMAGE_TYPE_1D.")
-	uint32_t.member("maxImageDimension2D", "the maximum dimension ({@code width} or {@code height}) of an image created with an {@code imageType} of #IMAGE_TYPE_2D and without #IMAGE_CREATE_CUBE_COMPATIBLE_BIT set in {@code flags}.")
-	uint32_t.member("maxImageDimension3D", "the maximum dimension ({@code width}, {@code height}, or {@code depth}) of an image created with an {@code imageType} of #IMAGE_TYPE_3D.")
-	uint32_t.member("maxImageDimensionCube", "the maximum dimension ({@code width} or {@code height}) of an image created with an {@code imageType} of #IMAGE_TYPE_2D and with #IMAGE_CREATE_CUBE_COMPATIBLE_BIT set in {@code flags}.")
+	uint32_t.member("maxImageDimension1D", "the maximum dimension ({@code width}) supported for all images created with an {@code imageType} of #IMAGE_TYPE_1D.")
+	uint32_t.member("maxImageDimension2D", "the maximum dimension ({@code width} or {@code height}) supported for all images created with an {@code imageType} of #IMAGE_TYPE_2D and without #IMAGE_CREATE_CUBE_COMPATIBLE_BIT set in {@code flags}.")
+	uint32_t.member("maxImageDimension3D", "the maximum dimension ({@code width}, {@code height}, or {@code depth}) supported for all images created with an {@code imageType} of #IMAGE_TYPE_3D.")
+	uint32_t.member("maxImageDimensionCube", "the maximum dimension ({@code width} or {@code height}) supported for all images created with an {@code imageType} of #IMAGE_TYPE_2D and with #IMAGE_CREATE_CUBE_COMPATIBLE_BIT set in {@code flags}.")
 	uint32_t.member("maxImageArrayLayers", "the maximum number of layers ({@code arrayLayers}) for an image.")
 	uint32_t.member("maxTexelBufferElements", "the maximum number of addressable texels for a buffer view created on a buffer which was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT set in the {@code usage} member of the ##VkBufferCreateInfo structure.")
 	uint32_t.member("maxUniformBufferRange", "the maximum value that <b>can</b> be specified in the {@code range} member of any ##VkDescriptorBufferInfo structures passed to a call to #UpdateDescriptorSets() for descriptors of type #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC.")
@@ -935,8 +935,8 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
 	float.member("lineWidthGranularity", "the granularity of supported line widths. Not all line widths in the range defined by {@code lineWidthRange} are supported. This limit specifies the granularity (or increment) between successive supported line widths.")
 	VkBool32.member("strictLines", "indicates whether lines are rasterized according to the preferred method of rasterization. If set to #FALSE, lines <b>may</b> be rasterized under a relaxed set of rules. If set to #TRUE, lines are rasterized as per the strict definition. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#primsrast-lines-basic\">Basic Line Segment Rasterization</a>.")
 	VkBool32.member("standardSampleLocations", "indicates whether rasterization uses the standard sample locations as documented in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#primsrast-multisampling\">Multisampling</a>. If set to #TRUE, the implementation uses the documented sample locations. If set to #FALSE, the implementation <b>may</b> use different sample locations.")
-	VkDeviceSize.member("optimalBufferCopyOffsetAlignment", "the optimal buffer offset alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer(). The per texel alignment requirements are still enforced, this is just an additional alignment recommendation for optimal performance and power.")
-	VkDeviceSize.member("optimalBufferCopyRowPitchAlignment", "the optimal buffer row pitch alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer(). Row pitch is the number of bytes between texels with the same X coordinate in adjacent rows (Y coordinates differ by one). The per texel alignment requirements are still enforced, this is just an additional alignment recommendation for optimal performance and power.")
+	VkDeviceSize.member("optimalBufferCopyOffsetAlignment", "the optimal buffer offset alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer(). The per texel alignment requirements are enforced, but applications <b>should</b> use the optimal alignment for optimal performance and power use.")
+	VkDeviceSize.member("optimalBufferCopyRowPitchAlignment", "the optimal buffer row pitch alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer(). Row pitch is the number of bytes between texels with the same X coordinate in adjacent rows (Y coordinates differ by one). The per texel alignment requirements are enforced, but applications <b>should</b> use the optimal alignment for optimal performance and power use.")
 	VkDeviceSize.member("nonCoherentAtomSize", "the size and alignment in bytes that bounds concurrent access to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-device-hostaccess\">host-mapped device memory</a>.")
 }
 
@@ -969,7 +969,7 @@ val VkPhysicalDeviceProperties = struct(VULKAN_PACKAGE, "VkPhysicalDevicePropert
 		</ul>
 
 		<h5>See Also</h5>
-		##VkPhysicalDeviceLimits, ##VkPhysicalDeviceProperties2KHR, ##VkPhysicalDeviceProperties2KHX, ##VkPhysicalDeviceSparseProperties, #GetPhysicalDeviceProperties()
+		##VkPhysicalDeviceLimits, ##VkPhysicalDeviceProperties2KHR, ##VkPhysicalDeviceSparseProperties, #GetPhysicalDeviceProperties()
 		"""
 
 	uint32_t.member("apiVersion", "the version of Vulkan supported by the device, encoded as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#fundamentals-versionnum\">API Version Numbers and Semantics</a> section.")
@@ -1270,13 +1270,6 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> either have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device</li>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> be in the executable state</li>
-			<li>If any given element of {@code pCommandBuffers} contains commands that execute secondary command buffers, those secondary command buffers <b>must</b> have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device</li>
-			<li>If any given element of {@code pCommandBuffers} was recorded with #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, it <b>must</b> not have been previously submitted without re-recording that command buffer</li>
-			<li>If any given element of {@code pCommandBuffers} contains commands that execute secondary command buffers recorded with #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, each such secondary command buffer <b>must</b> not have been previously submitted without re-recording that command buffer</li>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> not contain commands that execute a secondary command buffer, if that secondary command buffer has been recorded in another primary command buffer after it was recorded into this {@code VkCommandBuffer}</li>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> have been allocated from a {@code VkCommandPool} that was created for the same queue family that the calling command&#8217;s {@code queue} belongs to</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> not have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY</li>
 			<li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, any given element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
 			<li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, any given element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
@@ -1322,13 +1315,13 @@ val VkMemoryAllocateInfo = struct(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
 		How exported and imported memory is isolated is left to the implementation, but applications should be aware that such isolation <b>may</b> prevent implementations from placing multiple exportable memory objects in the same physical or virtual page. Hence, applications <b>should</b> avoid creating many small external memory objects whenever possible.
 		</div>
 
-		When performing a memory import operation, it is the responsibility of the application to ensure the external handles meet all valid usage requirements. However, implementations must perform sufficient validation of external handles to ensure that the operation results in a valid memory object which will not cause program termination, device loss, queue stalls, or corruption of other resources when used as allowed according to its allocation parameters. If the external handle provided does not meet these requirements, the implementation <b>must</b> fail the memory import operation with the error code VK_ERROR_INVALID_EXTERNAL_HANDLE_KHX.
+		When performing a memory import operation, it is the responsibility of the application to ensure the external handles meet all valid usage requirements. However, implementations <b>must</b> perform sufficient validation of external handles to ensure that the operation results in a valid memory object which will not cause program termination, device loss, queue stalls, or corruption of other resources when used as allowed according to its allocation parameters. If the external handle provided does not meet these requirements, the implementation <b>must</b> fail the memory import operation with the error code VK_ERROR_INVALID_EXTERNAL_HANDLE_KHX.
 
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code allocationSize} <b>must</b> be less than or equal to the amount of memory available to the ##VkMemoryHeap specified by {@code memoryTypeIndex} and the calling command&#8217;s {@code VkDevice}</li>
 			<li>{@code allocationSize} <b>must</b> be greater than 0</li>
-			<li>If the {@code pNext} extension chain contains an instance of ##VkExportMemoryAllocateInfoKHX, and any of the handle types specified in ##VkExportMemoryAllocateInfoKHX{@code ::handleTypes} require a dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures} or ##VkExternalBufferPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} extension chain must contain an instance of ##VkDedicatedAllocationMemoryAllocateInfoNV with either its {@code image} or {@code buffer} field set to a value other than #NULL_HANDLE.</li>
+			<li>If the {@code pNext} extension chain contains an instance of ##VkExportMemoryAllocateInfoKHX, and any of the handle types specified in ##VkExportMemoryAllocateInfoKHX{@code ::handleTypes} require a dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures} or ##VkExternalBufferPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} extension chain <b>must</b> contain an instance of ##VkDedicatedAllocationMemoryAllocateInfoNV with either its {@code image} or {@code buffer} field set to a value other than #NULL_HANDLE.</li>
 			<li>If the {@code pNext} extension chain contains an instance of ##VkExportMemoryAllocateInfoKHX, it <b>must</b> not contain an instance of ##VkExportMemoryAllocateInfoNV or ##VkExportMemoryWin32HandleInfoNV.</li>
 			<li>If the {@code pNext} extension chain contains an instance of ##VkImportMemoryWin32HandleInfoKHX, it <b>must</b> not contain an instance of ##VkImportMemoryWin32HandleInfoNV.</li>
 			<li>If the parameters define an import operation and the external handle specified was created by the Vulkan API, the values of {@code allocationSize} and {@code memoryTypeIndex} <b>must</b> match those specified when the memory object being imported was created.</li>
@@ -1840,7 +1833,8 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 			<li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseResidencyBuffer">sparse buffer residency</a> feature is not enabled, {@code flags} <b>must</b> not contain #BUFFER_CREATE_SPARSE_RESIDENCY_BIT</li>
 			<li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseResidencyAliased">sparse aliased residency</a> feature is not enabled, {@code flags} <b>must</b> not contain #BUFFER_CREATE_SPARSE_ALIASED_BIT</li>
 			<li>If {@code flags} contains #BUFFER_CREATE_SPARSE_RESIDENCY_BIT or #BUFFER_CREATE_SPARSE_ALIASED_BIT, it <b>must</b> also contain #BUFFER_CREATE_SPARSE_BINDING_BIT</li>
-			<li>If any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHX{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceExternalBufferPropertiesKHX() in ##VkExternalBufferPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} extension chain must contain an instance of ##VkDedicatedAllocationBufferCreateInfoNV with its {@code dedicatedAllocation} field set to #TRUE.</li>
+			<li>If any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHX{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceExternalBufferPropertiesKHX() in ##VkExternalBufferPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} extension chain <b>must</b> contain an instance of ##VkDedicatedAllocationBufferCreateInfoNV with its {@code dedicatedAllocation} field set to #TRUE.</li>
+			<li>If the {@code pNext} extension chain contains an instance of ##VkExternalMemoryBufferCreateInfoKHX, its {@code handleTypes} member <b>must</b> only contain bits that are also in ##VkExternalBufferPropertiesKHX{@code ::externalMemoryProperties}.{@code compatibleHandleTypes}, as returned by #GetPhysicalDeviceExternalBufferPropertiesKHX() with {@code pExternalBufferInfo}&#8594;{@code handleType} equal to any one of the handle types specified in ##VkExternalMemoryBufferCreateInfoKHX{@code ::handleTypes}</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -1942,11 +1936,13 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
 			<li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
 			<li>{@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
-			<li>The {@code width}, {@code height}, and {@code depth} members of {@code extent} <b>must</b> all be greater than 0</li>
+			<li>{@code extent}{@code ::width} <b>must</b> be greater than 0.</li>
+			<li>{@code extent}{@code ::height} <b>must</b> be greater than 0.</li>
+			<li>{@code extent}{@code ::depth} <b>must</b> be greater than 0.</li>
 			<li>{@code mipLevels} <b>must</b> be greater than 0</li>
 			<li>{@code arrayLayers} <b>must</b> be greater than 0</li>
-			<li>If {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code imageType} must be #IMAGE_TYPE_2D</li>
-			<li>If {@code flags} contains #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR, {@code imageType} must be #IMAGE_TYPE_3D</li>
+			<li>If {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code imageType} <b>must</b> be #IMAGE_TYPE_2D</li>
+			<li>If {@code flags} contains #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR, {@code imageType} <b>must</b> be #IMAGE_TYPE_3D</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_1D, {@code extent.width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension1D}, or ##VkImageFormatProperties{@code ::maxExtent}.width (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} does not contain #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension2D}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimensionCube}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
@@ -1988,8 +1984,11 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>If {@code tiling} is #IMAGE_TILING_OPTIMAL, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT, {@code usage} <b>must</b> not contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
 			<li>If {@code flags} contains #IMAGE_CREATE_SPARSE_RESIDENCY_BIT or #IMAGE_CREATE_SPARSE_ALIASED_BIT, it <b>must</b> also contain #IMAGE_CREATE_SPARSE_BINDING_BIT</li>
 			<li>If the {@code pNext} extension chain contains an instance of ##VkExternalMemoryImageCreateInfoNV, it <b>must</b> not contain an instance of ##VkExternalMemoryImageCreateInfoKHX.</li>
-			<li>If the {@code pNext} extension chain contains an instance of ##VkExternalMemoryImageCreateInfoKHX, and any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHX{@code ::handleTypes} require a dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} extension chain must contain an instance of ##VkDedicatedAllocationImageCreateInfoNV with its {@code dedicatedAllocation} field set to #TRUE.</li>
+			<li>If the {@code pNext} extension chain contains an instance of ##VkExternalMemoryImageCreateInfoKHX, and any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHX{@code ::handleTypes} require a dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHX{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} extension chain <b>must</b> contain an instance of ##VkDedicatedAllocationImageCreateInfoNV with its {@code dedicatedAllocation} field set to #TRUE.</li>
+			<li>If the {@code pNext} extension chain contains an instance of ##VkExternalMemoryImageCreateInfoKHX, its {@code handleTypes} member <b>must</b> only contain bits that are also in ##VkExternalImageFormatPropertiesKHX{@code ::externalMemoryProperties}{@code ::compatibleHandleTypes}, as returned by #GetPhysicalDeviceImageFormatProperties2KHR() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure, and with an instance of ##VkPhysicalDeviceExternalImageFormatInfoKHX in the {@code pNext} structure chain, with a {@code handleType} equal to any one of the handle types specified in ##VkExternalMemoryImageCreateInfoKHX{@code ::handleTypes}</li>
+			<li>If the {@code pNext} extension chain contains an instance of ##VkExternalMemoryImageCreateInfoNV, its {@code handleTypes} member <b>must</b> only contain bits that are also in ##VkExternalImageFormatPropertiesNV{@code ::externalMemoryProperties}{@code ::compatibleHandleTypes}, as returned by #GetPhysicalDeviceExternalImageFormatPropertiesNV() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure, and with {@code externalHandleType} equal to any one of the handle types specified in ##VkExternalMemoryImageCreateInfoNV{@code ::handleTypes}</li>
 			<li>If {@code flags} contains #IMAGE_CREATE_BIND_SFR_BIT_KHX, then {@code mipLevels} <b>must</b> be one, {@code arrayLayers} <b>must</b> be one, {@code imageType} <b>must</b> be #IMAGE_TYPE_2D, and {@code tiling} <b>must</b> be #IMAGE_TILING_OPTIMAL.</li>
+			<li>{@code initialLayout} <b>must</b> be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -2025,7 +2024,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 	VkSharingMode.member("sharingMode", "the sharing mode of the image when it will be accessed by multiple queue families, and <b>must</b> be one of the values described for {@code VkSharingMode} in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-sharing\">Resource Sharing</a> section below.")
 	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member("queueFamilyIndexCount", "the number of entries in the {@code pQueueFamilyIndices} array.")
 	const..uint32_t_p.member("pQueueFamilyIndices", "a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT).")
-	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all image subresources of the image. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-layouts\">Image Layouts</a>. {@code initialLayout} <b>must</b> be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED.")
+	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all image subresources of the image. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-layouts\">Image Layouts</a>.")
 }
 
 val VkSubresourceLayout = struct(VULKAN_PACKAGE, "VkSubresourceLayout", mutable = false) {
@@ -2146,8 +2145,8 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel + levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
-			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was #IMAGE_TYPE_3D and the image view is created with the {@code viewType} of ##VkImageViewCreateInfo set to #VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code extent.depth} specified in ##VkImageCreateInfo when the image was created</li>
-			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was not #IMAGE_TYPE_3D or the image view is not created with the {@code viewType} of ##VkImageViewCreateInfo set to #VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was #IMAGE_TYPE_3D and the image view is created with the {@code viewType} of ##VkImageViewCreateInfo set to #IMAGE_VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code extent.depth} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was not #IMAGE_TYPE_3D or the image view is not created with the {@code viewType} of ##VkImageViewCreateInfo set to #IMAGE_VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -2179,7 +2178,7 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 		<table class="lwjgl">
 			<thead><tr><th>Dim, Arrayed, MS</th><th>Image parameters</th><th>View parameters</th></tr></thead>
 			<tbody>
-				<tr><td></td><td>{@code imageType} = ci.{@code imageType} {@code width} = ci.{@code extent.width} {@code height} = ci.{@code extent.height} {@code depth} = ci.{@code extent.depth} {@code arrayLayers} = ci.{@code arrayLayers} {@code samples} = ci.{@code samples} where ci is the ##VkImageCreateInfo used to create {@code image}.</td><td>{@code baseArrayLayer} and {@code layerCount} are members of the {@code subresourceRange} member.</td></tr>
+				<tr><td></td><td>{@code imageType} = ci.{@code imageType} {@code width} = ci.{@code extent.width} {@code height} = ci.{@code extent.height} {@code depth} = ci.{@code extent.depth} {@code arrayLayers} = ci.{@code arrayLayers} {@code samples} = ci.{@code samples} {@code flags} = ci.{@code flags} where ci is the ##VkImageCreateInfo used to create {@code image}.</td><td>{@code baseArrayLayer} and {@code layerCount} are members of the {@code subresourceRange} member.</td></tr>
 				<tr><td>1D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_1D {@code width} ≥ 1 {@code height} = 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_1D {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
 				<tr><td>1D, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_1D {@code width} ≥ 1 {@code height} = 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_1D_ARRAY {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
 				<tr><td>2D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
@@ -2189,8 +2188,8 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 				<tr><td>CUBE, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} = {@code width} {@code depth} = 1 {@code arrayLayers} ≥ 6 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE {@code baseArrayLayer} ≥ 0 {@code layerCount} = 6</td></tr>
 				<tr><td>CUBE, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} = width {@code depth} = 1 <em>N</em> ≥ 1 {@code arrayLayers} ≥ 6 × <em>N</em> {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE_ARRAY {@code baseArrayLayer} ≥ 0 {@code layerCount} = 6 × <em>N</em>, <em>N</em> ≥ 1</td></tr>
 				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_3D {@code baseArrayLayer} = 0 {@code layerCount} = 1</td></tr>
-				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D {@code levelCount} = 1 {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
-				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D_ARRAY {@code levelCount} = 1 {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D {@code levelCount} = 1 {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D_ARRAY {@code levelCount} = 1 {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
 			</tbody>
 		</table>
 
@@ -2879,7 +2878,7 @@ val VkPipelineColorBlendAttachmentState = struct(VULKAN_PACKAGE, "VkPipelineColo
 	VkBlendFactor.member("srcAlphaBlendFactor", "selects which blend factor is used to determine the source factor <code>S<sub>a</sub></code>.")
 	VkBlendFactor.member("dstAlphaBlendFactor", "selects which blend factor is used to determine the destination factor <code>D<sub>a</sub></code>.")
 	VkBlendOp.member("alphaBlendOp", "selects which blend operation is use to calculate the alpha values to write to the color attachment.")
-	VkColorComponentFlags.member("colorWriteMask", "a bitmask selecting which of the R, G, B, and/or A components are enabled for writing, as described later in this chapter.")
+	VkColorComponentFlags.member("colorWriteMask", "a bitmask selecting which of the R, G, B, and/or A components are enabled for writing, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#framebuffer-color-write-mask\">Color Write Mask</a> section.")
 }
 
 val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColorBlendStateCreateInfo") {
@@ -3444,13 +3443,6 @@ val VkDescriptorSetAllocateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetAllocat
 		"""
 		Structure specifying the allocation parameters for descriptor sets.
 
-		<h5>Valid Usage</h5>
-		<ul>
-			<li>{@code descriptorSetCount} <b>must</b> not be greater than the number of sets that are currently available for allocation in {@code descriptorPool}</li>
-			<li>{@code descriptorPool} <b>must</b> have enough free descriptor capacity remaining to allocate the descriptor sets of the specified layouts</li>
-			<li>Any given element of {@code pSetLayouts} <b>must</b> not have been created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR set</li>
-		</ul>
-
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO</li>
@@ -3480,6 +3472,11 @@ val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
 		<h5>Description</h5>
 		Members of ##VkDescriptorImageInfo that are not used in an update (as described above) are ignored.
 
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code imageView} <b>must</b> not be 2D or 2D array image view created from a 3D image</li>
+		</ul>
+
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>Both of {@code imageView}, and {@code sampler} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -3491,7 +3488,7 @@ val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
 
 	VkSampler.member("sampler", "a sampler handle, and is used in descriptor updates for types #DESCRIPTOR_TYPE_SAMPLER and #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER if the binding being updated does not use immutable samplers.")
 	VkImageView.member("imageView", "an image view handle, and is used in descriptor updates for types #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and #DESCRIPTOR_TYPE_INPUT_ATTACHMENT.")
-	VkImageLayout.member("imageLayout", "the layout that the image will be in at the time this descriptor is accessed. {@code imageLayout} is used in descriptor updates for types #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and #DESCRIPTOR_TYPE_INPUT_ATTACHMENT.")
+	VkImageLayout.member("imageLayout", "the layout that the image subresources accessible from {@code imageView} will be in at the time this descriptor is accessed. {@code imageLayout} is used in descriptor updates for types #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and #DESCRIPTOR_TYPE_INPUT_ATTACHMENT.")
 }
 
 val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
@@ -3533,12 +3530,14 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 		<h5>Description</h5>
 		Only one of {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView} members is used according to the descriptor type specified in the {@code descriptorType} member of the containing ##VkWriteDescriptorSet structure, as specified below.
 
-		If the {@code dstBinding} has fewer than {@code descriptorCount} array elements remaining starting from {@code dstArrayElement}, then the remainder will be used to update the subsequent binding - {@code dstBinding}+1 starting at array element zero. If a binding has a {@code descriptorCount} of zero, it is skipped. This behavior applies recursively, with the update affecting consecutive bindings as needed to update all {@code descriptorCount} descriptors. All consecutive bindings updated via a single ##VkWriteDescriptorSet structure, except those with a {@code descriptorCount} of zero, <b>must</b> have identical {@code descriptorType} and {@code stageFlags}, and <b>must</b> all either use immutable samplers or <b>must</b> all not use immutable samplers.
+		If the {@code dstBinding} has fewer than {@code descriptorCount} array elements remaining starting from {@code dstArrayElement}, then the remainder will be used to update the subsequent binding - {@code dstBinding}+1 starting at array element zero. If a binding has a {@code descriptorCount} of zero, it is skipped. This behavior applies recursively, with the update affecting consecutive bindings as needed to update all {@code descriptorCount} descriptors.
 
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code dstBinding} <b>must</b> be less than or equal to the maximum value of {@code binding} of all ##VkDescriptorSetLayoutBinding structures specified when {@code dstSet}&#8217;s descriptor set layout was created</li>
 			<li>{@code dstBinding} <b>must</b> be a binding with a non-zero {@code descriptorCount}</li>
+			<li>All consecutive bindings updated via a single ##VkWriteDescriptorSet structure, except those with a {@code descriptorCount} of zero, <b>must</b> have identical {@code descriptorType} and {@code stageFlags}.</li>
+			<li>All consecutive bindings updated via a single ##VkWriteDescriptorSet structure, except those with a {@code descriptorCount} of zero, <b>must</b> all either use immutable samplers or <b>must</b> all not use immutable samplers.</li>
 			<li>{@code descriptorType} <b>must</b> match the type of {@code dstBinding} within {@code dstSet}</li>
 			<li>The sum of {@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding specified by {@code dstBinding}, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">consecutive binding updates</a></li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} <b>must</b> be a pointer to an array of {@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
@@ -3983,7 +3982,7 @@ val VkCommandPoolCreateInfo = struct(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") 
 
 		<ul>
 			<li>#COMMAND_POOL_CREATE_TRANSIENT_BIT indicates that command buffers allocated from the pool will be short-lived, meaning that they will be reset or freed in a relatively short timeframe. This flag <b>may</b> be used by the implementation to control memory allocation behavior within the pool.</li>
-			<li>#COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT controls whether command buffers allocated from the pool <b>can</b> be individually reset. If this flag is set, individual command buffers allocated from the pool <b>can</b> be reset either explicitly, by calling #ResetCommandBuffer(), or implicitly, by calling #BeginCommandBuffer() on an executable command buffer. If this flag is not set, then #ResetCommandBuffer() and #BeginCommandBuffer() (on an executable command buffer) <b>must</b> not be called on the command buffers allocated from the pool, and they <b>can</b> only be reset in bulk by calling #ResetCommandPool().</li>
+			<li>#COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT allows any command buffer allocated from a pool to be individually reset to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>; either by calling #ResetCommandBuffer(), or via the implicit reset when calling #BeginCommandBuffer(). If this flag is not set on a pool, then #ResetCommandBuffer() <b>must</b> not be called for any command buffer allocated from that pool.</li>
 		</ul>""")
 	uint32_t.member("queueFamilyIndex", "designates a queue family as described in section <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#devsandqueues-queueprops\">Queue Family Properties</a>. All command buffers allocated from this command pool <b>must</b> be submitted on queues from the same queue family.")
 }
@@ -4092,7 +4091,7 @@ val VkCommandBufferBeginInfo = struct(VULKAN_PACKAGE, "VkCommandBufferBeginInfo"
 		<ul>
 			<li>#COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT indicates that each recording of the command buffer will only be submitted once, and the command buffer will be reset and recorded again between each submission.</li>
 			<li>#COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT indicates that a secondary command buffer is considered to be entirely inside a render pass. If this is a primary command buffer, then this bit is ignored.</li>
-			<li>Setting #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT allows the command buffer to be resubmitted to a queue or recorded into a primary command buffer while it is pending execution.</li>
+			<li>Setting #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT allows the command buffer to be resubmitted to a queue while it is in the <em>pending state</em>, and recorded into multiple primary command buffers.</li>
 		</ul>""")
 	nullable..const..VkCommandBufferInheritanceInfo.p.member("pInheritanceInfo", "a pointer to a ##VkCommandBufferInheritanceInfo structure, which is used if {@code commandBuffer} is a secondary command buffer. If this is a primary command buffer, then this value is ignored.")
 }
@@ -4513,8 +4512,8 @@ val VkBufferMemoryBarrier = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_CONCURRENT, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> both be #QUEUE_FAMILY_IGNORED</li>
 			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> either both be #QUEUE_FAMILY_IGNORED, or both be a valid queue family (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>) unless one of them is #QUEUE_FAMILY_EXTERNAL_KHX and the other is #QUEUE_FAMILY_IGNORED.</li>
 			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is #QUEUE_FAMILY_IGNORED, {@code dstQueueFamilyIndex} <b>must</b> also be #QUEUE_FAMILY_IGNORED.</li>
-			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it must be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
-			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code dstQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it must be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
+			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
+			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code dstQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
 			<li>If {@code buffer} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are valid queue families, at least one of them <b>must</b> be the same as the family of the queue that will execute this barrier</li>
 		</ul>
 
@@ -4566,8 +4565,8 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 			<li>{@code newLayout} <b>must</b> not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED</li>
 			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_CONCURRENT, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> both be #QUEUE_FAMILY_IGNORED unless one of them is #QUEUE_FAMILY_EXTERNAL_KHX and the other is #QUEUE_FAMILY_IGNORED.</li>
 			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is #QUEUE_FAMILY_IGNORED, {@code dstQueueFamilyIndex} <b>must</b> also be #QUEUE_FAMILY_IGNORED.</li>
-			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it must be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
-			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code dstQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it must be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
+			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
+			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code dstQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
 			<li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> either both be #QUEUE_FAMILY_IGNORED, or both be a valid queue family (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>)</li>
 		</ul>
 

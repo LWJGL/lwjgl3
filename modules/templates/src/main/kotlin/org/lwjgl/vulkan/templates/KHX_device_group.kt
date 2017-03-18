@@ -353,7 +353,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, compute, or transfer operations</li>
 		</ul>
 
@@ -546,13 +546,13 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 			<li>{@code groupCountX} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[0] minus {@code baseGroupX}</li>
 			<li>{@code groupCountY} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[1] minus {@code baseGroupY}</li>
 			<li>{@code groupCountZ} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[2] minus {@code baseGroupZ}</li>
-			<li>If any of {@code baseGroupX}, {@code baseGroupY}, or {@code baseGroupZ} are not zero, then the currently bound compute pipeline must have been created with the #PIPELINE_CREATE_DISPATCH_BASE_KHX flag.</li>
+			<li>If any of {@code baseGroupX}, {@code baseGroupY}, or {@code baseGroupZ} are not zero, then the currently bound compute pipeline <b>must</b> have been created with the #PIPELINE_CREATE_DISPATCH_BASE_KHX flag.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 		</ul>

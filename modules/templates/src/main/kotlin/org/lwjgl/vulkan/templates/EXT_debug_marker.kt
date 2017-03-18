@@ -279,7 +279,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pMarkerInfo} <b>must</b> be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 		</ul>
 
@@ -316,18 +316,16 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 		<h5>Description</h5>
 		An application <b>may</b> open a marker region in one command buffer and close it in another, or otherwise split marker regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to #CmdDebugMarkerBeginEXT() and #CmdDebugMarkerEndEXT() <b>must</b> be matched and balanced.
 
-		Any calls to #CmdDebugMarkerBeginEXT() within a secondary command buffer must have a matching #CmdDebugMarkerEndEXT() in that same command buffer, and marker regions begun outside of the secondary command buffer must not be ended inside it.
-
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>There <b>must</b> be an outstanding #CmdDebugMarkerBeginEXT() command prior to the #CmdDebugMarkerEndEXT() on the queue that {@code commandBuffer} is submitted to</li>
-			<li>If the matching #CmdDebugMarkerBeginEXT() command was in a secondary command buffer, the #CmdDebugMarkerEndEXT() must be in the same {@code commandBuffer}</li>
+			<li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding #CmdDebugMarkerBeginEXT() command recorded to {@code commandBuffer} that has not previously been ended by a call to #CmdDebugMarkerEndEXT().</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 		</ul>
 
@@ -362,7 +360,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pMarkerInfo} <b>must</b> be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 		</ul>
 

@@ -73,10 +73,7 @@ val KHX_external_memory_capabilities = "KHXExternalMemoryCapabilities".nativeCla
 		"STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHX".."1000071001",
 		"STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX".."1000071002",
 		"STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHX".."1000071003",
-		"STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHX".."1000071004",
-		"STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHX".."1000071005",
-		"STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHX".."1000071006",
-		"STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHX".."1000071007"
+		"STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHX".."1000071004"
 	)
 
 	EnumConstant(
@@ -168,22 +165,5 @@ val KHX_external_memory_capabilities = "KHXExternalMemoryCapabilities".nativeCla
 		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the buffer capabilities."),
 		const..VkPhysicalDeviceExternalBufferInfoKHX.p.IN("pExternalBufferInfo", "points to an instance of the ##VkPhysicalDeviceExternalBufferInfoKHX structure, describing the parameters that would be consumed by #CreateBuffer()."),
 		VkExternalBufferPropertiesKHX.p.OUT("pExternalBufferProperties", "points to an instance of the ##VkExternalBufferPropertiesKHX structure in which capabilities are returned.")
-	)
-
-	void(
-		"GetPhysicalDeviceProperties2KHX",
-		"",
-
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkPhysicalDeviceProperties2KHX.p.OUT("pProperties", "")
-	)
-
-	VkResult(
-		"GetPhysicalDeviceImageFormatProperties2KHX",
-		"",
-
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		const..VkPhysicalDeviceImageFormatInfo2KHX.p.IN("pImageFormatInfo", ""),
-		VkImageFormatProperties2KHX.p.OUT("pImageFormatProperties", "")
 	)
 }

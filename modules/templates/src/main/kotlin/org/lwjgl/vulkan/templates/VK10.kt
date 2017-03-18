@@ -130,7 +130,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkStructureType - Vulkan structure types ({@code stype})
 
 		<h5>See Also</h5>
-		##VkAcquireNextImageInfoKHX, ##VkAndroidSurfaceCreateInfoKHR, ##VkApplicationInfo, ##VkBindBufferMemoryInfoKHX, ##VkBindImageMemoryInfoKHX, ##VkBindImageMemorySwapchainInfoKHX, ##VkBindSparseInfo, ##VkBufferCreateInfo, ##VkBufferMemoryBarrier, ##VkBufferViewCreateInfo, ##VkCmdProcessCommandsInfoNVX, ##VkCmdReserveSpaceForCommandsInfoNVX, ##VkCommandBufferAllocateInfo, ##VkCommandBufferBeginInfo, ##VkCommandBufferInheritanceInfo, ##VkCommandPoolCreateInfo, ##VkComputePipelineCreateInfo, ##VkCopyDescriptorSet, ##VkD3D12FenceSubmitInfoKHX, ##VkDebugMarkerMarkerInfoEXT, ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, ##VkDebugReportCallbackCreateInfoEXT, ##VkDedicatedAllocationBufferCreateInfoNV, ##VkDedicatedAllocationImageCreateInfoNV, ##VkDedicatedAllocationMemoryAllocateInfoNV, ##VkDescriptorPoolCreateInfo, ##VkDescriptorSetAllocateInfo, ##VkDescriptorSetLayoutCreateInfo, ##VkDescriptorUpdateTemplateCreateInfoKHR, ##VkDeviceCreateInfo, ##VkDeviceEventInfoEXT, ##VkDeviceGeneratedCommandsFeaturesNVX, ##VkDeviceGeneratedCommandsLimitsNVX, ##VkDeviceGroupBindSparseInfoKHX, ##VkDeviceGroupCommandBufferBeginInfoKHX, ##VkDeviceGroupDeviceCreateInfoKHX, ##VkDeviceGroupPresentCapabilitiesKHX, ##VkDeviceGroupPresentInfoKHX, ##VkDeviceGroupRenderPassBeginInfoKHX, ##VkDeviceGroupSubmitInfoKHX, ##VkDeviceGroupSwapchainCreateInfoKHX, ##VkDeviceQueueCreateInfo, ##VkDisplayEventInfoEXT, ##VkDisplayModeCreateInfoKHR, ##VkDisplayPowerInfoEXT, ##VkDisplayPresentInfoKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkEventCreateInfo, ##VkExportMemoryAllocateInfoKHX, ##VkExportMemoryAllocateInfoNV, ##VkExportMemoryWin32HandleInfoKHX, ##VkExportMemoryWin32HandleInfoNV, ##VkExportSemaphoreCreateInfoKHX, ##VkExportSemaphoreWin32HandleInfoKHX, ##VkExternalBufferPropertiesKHX, ##VkExternalImageFormatPropertiesKHX, ##VkExternalMemoryBufferCreateInfoKHX, ##VkExternalMemoryImageCreateInfoKHX, ##VkExternalMemoryImageCreateInfoNV, ##VkExternalSemaphorePropertiesKHX, ##VkFenceCreateInfo, ##VkFormatProperties2KHR, ##VkFramebufferCreateInfo, ##VkGraphicsPipelineCreateInfo, ##VkIOSSurfaceCreateInfoMVK, ##VkImageCreateInfo, ##VkImageFormatProperties2KHR, ##VkImageFormatProperties2KHX, ##VkImageMemoryBarrier, ##VkImageSwapchainCreateInfoKHX, ##VkImageViewCreateInfo, ##VkImportMemoryFdInfoKHX, ##VkImportMemoryWin32HandleInfoKHX, ##VkImportMemoryWin32HandleInfoNV, ##VkImportSemaphoreFdInfoKHX, ##VkImportSemaphoreWin32HandleInfoKHX, ##VkIndirectCommandsLayoutCreateInfoNVX, ##VkInstanceCreateInfo, ##VkMacOSSurfaceCreateInfoMVK, ##VkMappedMemoryRange, ##VkMemoryAllocateFlagsInfoKHX, ##VkMemoryAllocateInfo, ##VkMemoryBarrier, ##VkMemoryFdPropertiesKHX, ##VkMemoryWin32HandlePropertiesKHX, ##VkMirSurfaceCreateInfoKHR, ##VkObjectTableCreateInfoNVX, ##VkPhysicalDeviceDiscardRectanglePropertiesEXT, ##VkPhysicalDeviceExternalBufferInfoKHX, ##VkPhysicalDeviceExternalImageFormatInfoKHX, ##VkPhysicalDeviceExternalSemaphoreInfoKHX, ##VkPhysicalDeviceFeatures2KHR, ##VkPhysicalDeviceGroupPropertiesKHX, ##VkPhysicalDeviceIDPropertiesKHX, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceImageFormatInfo2KHX, ##VkPhysicalDeviceMemoryProperties2KHR, ##VkPhysicalDeviceMultiviewFeaturesKHX, ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, ##VkPhysicalDeviceMultiviewPropertiesKHX, ##VkPhysicalDeviceProperties2KHR, ##VkPhysicalDeviceProperties2KHX, ##VkPhysicalDevicePushDescriptorPropertiesKHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, ##VkPipelineCacheCreateInfo, ##VkPipelineColorBlendStateCreateInfo, ##VkPipelineDepthStencilStateCreateInfo, ##VkPipelineDiscardRectangleStateCreateInfoEXT, ##VkPipelineDynamicStateCreateInfo, ##VkPipelineInputAssemblyStateCreateInfo, ##VkPipelineLayoutCreateInfo, ##VkPipelineMultisampleStateCreateInfo, ##VkPipelineRasterizationStateCreateInfo, ##VkPipelineRasterizationStateRasterizationOrderAMD, ##VkPipelineShaderStageCreateInfo, ##VkPipelineTessellationStateCreateInfo, ##VkPipelineVertexInputStateCreateInfo, ##VkPipelineViewportStateCreateInfo, ##VkPipelineViewportSwizzleStateCreateInfoNV, ##VkPipelineViewportWScalingStateCreateInfoNV, ##VkPresentInfoKHR, ##VkQueryPoolCreateInfo, ##VkQueueFamilyProperties2KHR, ##VkRenderPassBeginInfo, ##VkRenderPassCreateInfo, ##VkRenderPassMultiviewCreateInfoKHX, ##VkSamplerCreateInfo, ##VkSemaphoreCreateInfo, ##VkShaderModuleCreateInfo, ##VkSparseImageFormatProperties2KHR, ##VkSubmitInfo, ##VkSurfaceCapabilities2EXT, ##VkSwapchainCounterCreateInfoEXT, ##VkSwapchainCreateInfoKHR, ##VkValidationFlagsEXT, ##VkViSurfaceCreateInfoNN, ##VkWaylandSurfaceCreateInfoKHR, ##VkWin32KeyedMutexAcquireReleaseInfoKHX, ##VkWin32KeyedMutexAcquireReleaseInfoNV, ##VkWin32SurfaceCreateInfoKHR, ##VkWriteDescriptorSet, ##VkXcbSurfaceCreateInfoKHR, ##VkXlibSurfaceCreateInfoKHR
+		##VkAcquireNextImageInfoKHX, ##VkAndroidSurfaceCreateInfoKHR, ##VkApplicationInfo, ##VkBindBufferMemoryInfoKHX, ##VkBindImageMemoryInfoKHX, ##VkBindImageMemorySwapchainInfoKHX, ##VkBindSparseInfo, ##VkBufferCreateInfo, ##VkBufferMemoryBarrier, ##VkBufferViewCreateInfo, ##VkCmdProcessCommandsInfoNVX, ##VkCmdReserveSpaceForCommandsInfoNVX, ##VkCommandBufferAllocateInfo, ##VkCommandBufferBeginInfo, ##VkCommandBufferInheritanceInfo, ##VkCommandPoolCreateInfo, ##VkComputePipelineCreateInfo, ##VkCopyDescriptorSet, ##VkD3D12FenceSubmitInfoKHX, ##VkDebugMarkerMarkerInfoEXT, ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, ##VkDebugReportCallbackCreateInfoEXT, ##VkDedicatedAllocationBufferCreateInfoNV, ##VkDedicatedAllocationImageCreateInfoNV, ##VkDedicatedAllocationMemoryAllocateInfoNV, ##VkDescriptorPoolCreateInfo, ##VkDescriptorSetAllocateInfo, ##VkDescriptorSetLayoutCreateInfo, ##VkDescriptorUpdateTemplateCreateInfoKHR, ##VkDeviceCreateInfo, ##VkDeviceEventInfoEXT, ##VkDeviceGeneratedCommandsFeaturesNVX, ##VkDeviceGeneratedCommandsLimitsNVX, ##VkDeviceGroupBindSparseInfoKHX, ##VkDeviceGroupCommandBufferBeginInfoKHX, ##VkDeviceGroupDeviceCreateInfoKHX, ##VkDeviceGroupPresentCapabilitiesKHX, ##VkDeviceGroupPresentInfoKHX, ##VkDeviceGroupRenderPassBeginInfoKHX, ##VkDeviceGroupSubmitInfoKHX, ##VkDeviceGroupSwapchainCreateInfoKHX, ##VkDeviceQueueCreateInfo, ##VkDisplayEventInfoEXT, ##VkDisplayModeCreateInfoKHR, ##VkDisplayPowerInfoEXT, ##VkDisplayPresentInfoKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkEventCreateInfo, ##VkExportMemoryAllocateInfoKHX, ##VkExportMemoryAllocateInfoNV, ##VkExportMemoryWin32HandleInfoKHX, ##VkExportMemoryWin32HandleInfoNV, ##VkExportSemaphoreCreateInfoKHX, ##VkExportSemaphoreWin32HandleInfoKHX, ##VkExternalBufferPropertiesKHX, ##VkExternalImageFormatPropertiesKHX, ##VkExternalMemoryBufferCreateInfoKHX, ##VkExternalMemoryImageCreateInfoKHX, ##VkExternalMemoryImageCreateInfoNV, ##VkExternalSemaphorePropertiesKHX, ##VkFenceCreateInfo, ##VkFormatProperties2KHR, ##VkFramebufferCreateInfo, ##VkGraphicsPipelineCreateInfo, ##VkHdrMetadataEXT, ##VkIOSSurfaceCreateInfoMVK, ##VkImageCreateInfo, ##VkImageFormatProperties2KHR, ##VkImageMemoryBarrier, ##VkImageSwapchainCreateInfoKHX, ##VkImageViewCreateInfo, ##VkImportMemoryFdInfoKHX, ##VkImportMemoryWin32HandleInfoKHX, ##VkImportMemoryWin32HandleInfoNV, ##VkImportSemaphoreFdInfoKHX, ##VkImportSemaphoreWin32HandleInfoKHX, ##VkIndirectCommandsLayoutCreateInfoNVX, ##VkInstanceCreateInfo, ##VkMacOSSurfaceCreateInfoMVK, ##VkMappedMemoryRange, ##VkMemoryAllocateFlagsInfoKHX, ##VkMemoryAllocateInfo, ##VkMemoryBarrier, ##VkMemoryFdPropertiesKHX, ##VkMemoryWin32HandlePropertiesKHX, ##VkMirSurfaceCreateInfoKHR, ##VkObjectTableCreateInfoNVX, ##VkPhysicalDeviceDiscardRectanglePropertiesEXT, ##VkPhysicalDeviceExternalBufferInfoKHX, ##VkPhysicalDeviceExternalImageFormatInfoKHX, ##VkPhysicalDeviceExternalSemaphoreInfoKHX, ##VkPhysicalDeviceFeatures2KHR, ##VkPhysicalDeviceGroupPropertiesKHX, ##VkPhysicalDeviceIDPropertiesKHX, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceMemoryProperties2KHR, ##VkPhysicalDeviceMultiviewFeaturesKHX, ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, ##VkPhysicalDeviceMultiviewPropertiesKHX, ##VkPhysicalDeviceProperties2KHR, ##VkPhysicalDevicePushDescriptorPropertiesKHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, ##VkPipelineCacheCreateInfo, ##VkPipelineColorBlendStateCreateInfo, ##VkPipelineDepthStencilStateCreateInfo, ##VkPipelineDiscardRectangleStateCreateInfoEXT, ##VkPipelineDynamicStateCreateInfo, ##VkPipelineInputAssemblyStateCreateInfo, ##VkPipelineLayoutCreateInfo, ##VkPipelineMultisampleStateCreateInfo, ##VkPipelineRasterizationStateCreateInfo, ##VkPipelineRasterizationStateRasterizationOrderAMD, ##VkPipelineShaderStageCreateInfo, ##VkPipelineTessellationStateCreateInfo, ##VkPipelineVertexInputStateCreateInfo, ##VkPipelineViewportStateCreateInfo, ##VkPipelineViewportSwizzleStateCreateInfoNV, ##VkPipelineViewportWScalingStateCreateInfoNV, ##VkPresentInfoKHR, ##VkPresentTimesInfoGOOGLE, ##VkQueryPoolCreateInfo, ##VkQueueFamilyProperties2KHR, ##VkRenderPassBeginInfo, ##VkRenderPassCreateInfo, ##VkRenderPassMultiviewCreateInfoKHX, ##VkSamplerCreateInfo, ##VkSemaphoreCreateInfo, ##VkShaderModuleCreateInfo, ##VkSparseImageFormatProperties2KHR, ##VkSubmitInfo, ##VkSurfaceCapabilities2EXT, ##VkSwapchainCounterCreateInfoEXT, ##VkSwapchainCreateInfoKHR, ##VkValidationFlagsEXT, ##VkViSurfaceCreateInfoNN, ##VkWaylandSurfaceCreateInfoKHR, ##VkWin32KeyedMutexAcquireReleaseInfoKHX, ##VkWin32KeyedMutexAcquireReleaseInfoNV, ##VkWin32SurfaceCreateInfoKHR, ##VkWriteDescriptorSet, ##VkXcbSurfaceCreateInfoKHR, ##VkXlibSurfaceCreateInfoKHR
 		""",
 
 		"STRUCTURE_TYPE_APPLICATION_INFO".."0",
@@ -800,7 +800,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		</dl>
 
 		<h5>See Also</h5>
-		##VkAttachmentDescription, ##VkBufferViewCreateInfo, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceImageFormatInfo2KHX, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, ##VkSurfaceFormatKHR, ##VkSwapchainCreateInfoKHR, ##VkVertexInputAttributeDescription, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceFormatProperties(), #GetPhysicalDeviceFormatProperties2KHR(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
+		##VkAttachmentDescription, ##VkBufferViewCreateInfo, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, ##VkSurfaceFormatKHR, ##VkSwapchainCreateInfoKHR, ##VkVertexInputAttributeDescription, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceFormatProperties(), #GetPhysicalDeviceFormatProperties2KHR(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
 		""",
 
 		"FORMAT_UNDEFINED".."0",
@@ -1030,7 +1030,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		These values specify one-, two-, or three-dimensional images, respectively.
 
 		<h5>See Also</h5>
-		##VkImageCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceImageFormatInfo2KHX, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
+		##VkImageCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
 		""",
 
 		"IMAGE_TYPE_1D".."0",
@@ -1046,7 +1046,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		#IMAGE_TILING_OPTIMAL specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access), and #IMAGE_TILING_LINEAR specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).
 
 		<h5>See Also</h5>
-		##VkImageCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceImageFormatInfo2KHX, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
+		##VkImageCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
 		""",
 
 		"IMAGE_TILING_OPTIMAL".."0",
@@ -2057,7 +2057,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkColorComponentFlagBits - Bitmask controlling which components are written to the framebuffer
 
 		<h5>Description</h5>
-		If #COLOR_COMPONENT_R_BIT is set, then the <code>R</code> value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified. The #COLOR_COMPONENT_G_BIT, #COLOR_COMPONENT_B_BIT, and #COLOR_COMPONENT_A_BIT bits similarly control writing of the <code>G, B,</code> and <code>A</code> values. The {@code colorWriteMask} is applied regardless of whether blending is enabled.
+		If #COLOR_COMPONENT_R_BIT is set, then the <code>R</code> value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified. The #COLOR_COMPONENT_G_BIT, #COLOR_COMPONENT_B_BIT, and #COLOR_COMPONENT_A_BIT bits similarly control writing of the <code>G, B,</code> and <code>A</code> values.
+
+		The {@code colorWriteMask} is applied regardless of whether blending is enabled.
 
 		<h5>See Also</h5>
 		{@code VkColorComponentFlags}
@@ -2084,7 +2086,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>#DYNAMIC_STATE_STENCIL_COMPARE_MASK indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
 			<li>#DYNAMIC_STATE_STENCIL_WRITE_MASK indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
 			<li>#DYNAMIC_STATE_STENCIL_REFERENCE indicates that the {@code reference} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilReference() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
-			<li>#DYANMIC_STATE_VIEWPORT_W_SCALING_NV indicates that the {@code pViewportScalings} state in ##VkPipelineViewportWScalingStateCreateInfoNV will be ignored and <b>must</b> be set dynamically with #CmdSetViewportWScaling() before any draws are performed with a pipeline state with {@code VkPipelineViewportWScalingStateCreateInfo} member {@code viewportScalingEnable} set to #TRUE</li>
+			<li>#DYANMIC_STATE_VIEWPORT_W_SCALING_NV indicates that the {@code pViewportScalings} state in ##VkPipelineViewportWScalingStateCreateInfoNV will be ignored and <b>must</b> be set dynamically with #CmdSetViewportWScalingNV() before any draws are performed with a pipeline state with {@code VkPipelineViewportWScalingStateCreateInfo} member {@code viewportScalingEnable} set to #TRUE</li>
 			<li>#DYNAMIC_STATE_DISCARD_RECTANGLES_EXT indicates that the {@code pDiscardRectangles} state in ##VkPipelineDiscardRectangleStateCreateInfoEXT will be ignored and <b>must</b> be set dynamically with #CmdSetDiscardRectangleEXT() before any draw or clear commands. The {@code VkDiscardRectangleModeEXT} and the number of active discard rectangles is still specified by the {@code discardRectangleMode} and {@code discardRectangleCount} members of ##VkPipelineDiscardRectangleStateCreateInfoEXT.</li>
 		</ul>
 
@@ -3386,15 +3388,24 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		The order that batches appear in {@code pSubmits} is used to determine <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-order"> submission order</a>, and thus all the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-implicit"> implicit ordering guarantees</a> that respect it. Other than these implicit ordering guarantees and any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> explicit synchronization primitives</a>, these batches <b>may</b> overlap or otherwise execute out of order.
 
+		If any command buffer submitted to this queue is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> executable state</a>, it is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> pending state</a>. Once execution of all submissions of a command buffer complete, it moves from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> pending state</a>, back to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> executable state</a>. If a command buffer was recorded with the #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT flag, it instead moves back to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid state</a>.
+
+		If #QueueSubmit() fails, it <b>may</b> return #ERROR_OUT_OF_HOST_MEMORY or #ERROR_OUT_OF_DEVICE_MEMORY. If it does, the implementation <b>must</b> ensure that the state and contents of any resources or synchronization primitives referenced by the submitted command buffers and any semaphores referenced by {@code pSubmits} is unaffected by the call or its failure. If #QueueSubmit() fails in such a way that the implementation <b>can</b> not make that guarantee, the implementation <b>must</b> return #ERROR_DEVICE_LOST. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-lost-device">Lost Device</a>.
+
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be unsignaled</li>
 			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
-			<li>Any calls to #CmdSetEvent(), #CmdResetEvent() or #CmdWaitEvents() that have been recorded into any of the command buffer elements of the {@code pCommandBuffers} member of any element of {@code pSubmits}, <b>must</b> not reference any {@code VkEvent} that is referenced by any of those commands that is pending execution on another queue.</li>
+			<li>Any calls to #CmdSetEvent(), #CmdResetEvent() or #CmdWaitEvents() that have been recorded into any of the command buffer elements of the {@code pCommandBuffers} member of any element of {@code pSubmits}, <b>must</b> not reference any {@code VkEvent} that is referenced by any of those commands in a command buffer that has been submitted to another queue and is still in the <em>pending state</em>.</li>
 			<li>Any stage flag included in any element of the {@code pWaitDstStageMask} member of any element of {@code pSubmits} <b>must</b> be a pipeline stage supported by one of the capabilities of {@code queue}, as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-supported">table of supported pipeline stages</a>.</li>
 			<li>Any given element of the {@code pSignalSemaphores} member of any element of {@code pSubmits} <b>must</b> be unsignaled when the semaphore signal operation it defines is executed on the device</li>
 			<li>When a semaphore unsignal operation defined by any element of the {@code pWaitSemaphores} member of any element of {@code pSubmits} executes on {@code queue}, no other queue <b>must</b> be waiting on the same semaphore.</li>
 			<li>All elements of the {@code pWaitSemaphores} member of all elements of {@code pSubmits} <b>must</b> be semaphores that are signaled, or have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution.</li>
+			<li>Any given element of the {@code pCommandBuffers} member of any element of {@code pSubmits} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending or executable state</a>.</li>
+			<li>If any given element of the {@code pCommandBuffers} member of any element of {@code pSubmits} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, it <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a>.</li>
+			<li>Any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-secondary">secondary command buffers recorded</a> into any given element of the {@code pCommandBuffers} member of any element of {@code pSubmits} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending or executable state</a>.</li>
+			<li>If any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-secondary">secondary command buffers recorded</a> into any given element of the {@code pCommandBuffers} member of any element of {@code pSubmits} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, it <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a>.</li>
+			<li>Any given element of the {@code pCommandBuffers} member of any element of {@code pSubmits} <b>must</b> have been allocated from a {@code VkCommandPool} that was created for the same queue family {@code queue} belongs to.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -4440,10 +4451,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<tbody>
 				<tr><td>#SUCCESS</td><td>The fence specified by {@code fence} is signaled.</td></tr>
 				<tr><td>#NOT_READY</td><td>The fence specified by {@code fence} is unsignaled.</td></tr>
+				<tr><td>#DEVICE_LOST</td><td>The device has been lost.  See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-lost-device">Lost Device</a>.</td></tr>
 			</tbody>
 		</table>
 
 		If a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission"> queue submission</a> command is pending execution, then the value returned by this command <b>may</b> immediately be out of date.
+
+		If the device has been lost (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-lost-device">Lost Device</a>), #GetFenceStatus() <b>may</b> return any of the above status codes. If the device has been lost and #GetFenceStatus() is called repeatedly, it will eventually return either #SUCCESS or #DEVICE_LOST.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4494,6 +4508,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		If {@code timeout} is zero, then #WaitForFences() does not wait, but simply returns the current state of the fences. #TIMEOUT will be returned in this case if the condition is not satisfied, even though no actual wait was performed.
 
 		If the specified timeout period expires before the condition is satisfied, #WaitForFences() returns #TIMEOUT. If the condition is satisfied before {@code timeout} nanoseconds has expired, #WaitForFences() returns #SUCCESS.
+
+		If device loss occurs (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-lost-device">Lost Device</a>) before the timeout has expired, #WaitForFences() <b>must</b> return in finite time with either #SUCCESS or #DEVICE_LOST.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		While we guarantee that #WaitForFences() <b>must</b> return in finite time, no guarantees are made that it returns immediately upon device loss. However, the client can reasonably expect that the delay will be on the order of seconds and that calling #WaitForFences() will not result in a permanently (or seemingly permanently) dead process.
+		</div>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4737,7 +4757,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			</tbody>
 		</table>
 
-		If a #CmdSetEvent() or #CmdResetEvent() command is pending execution, then the value returned by this command <b>may</b> immediately be out of date.
+		If a #CmdSetEvent() or #CmdResetEvent() command is in a command buffer that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> pending state</a>, then the value returned by this command <b>may</b> immediately be out of date.
 
 		The state of an event <b>can</b> be updated by the host. The state of the event is immediately changed, and subsequent calls to #GetEventStatus() will return the new state. If an event is already in the requested state, then updating it to the same state has no effect.
 
@@ -5049,7 +5069,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkDevice.IN("device", "the logical device that owns the query pool."),
 		VkQueryPool.IN("queryPool", "the query pool managing the queries containing the desired results."),
 		uint32_t.IN("firstQuery", "the initial query index."),
-		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries."),
+		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries. For pipeline statistics queries, each query index in the pool contains one integer value for each bit that is enabled in ##VkQueryPoolCreateInfo{@code ::pipelineStatistics} when the pool is created."),
 		AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
 		void_p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
 		VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code pData}."),
@@ -6426,14 +6446,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		When a descriptor set is allocated, the initial state is largely uninitialized and all descriptors are undefined. However, the descriptor set <b>can</b> be bound in a command buffer without causing errors or exceptions. All entries that are statically used by a pipeline in a drawing or dispatching command <b>must</b> have been populated before the descriptor set is bound for use by that command. Entries that are not statically used by a pipeline <b>can</b> have uninitialized descriptors or descriptors of resources that have been destroyed, and executing a draw or dispatch with such a descriptor set bound does not cause undefined behavior. This means applications need not populate unused entries with dummy descriptors.
 
-		If an allocation fails due to fragmentation, an indeterminate error is returned with an unspecified error code. Any returned error other than #ERROR_FRAGMENTED_POOL does not imply its usual meaning: applications <b>should</b> assume that the allocation failed due to fragmentation, and create a new descriptor pool.
-
 		If the allocation fails due to no more space in the descriptor pool, and not because of system or device memory exhaustion, then #ERROR_OUT_OF_POOL_MEMORY_KHR <b>must</b> be returned.
+
+		If an allocation fails due to fragmentation, an indeterminate error is returned with an unspecified error code. Any returned error other than #ERROR_OUT_OF_POOL_MEMORY_KHR or #ERROR_FRAGMENTED_POOL does not imply its usual meaning: applications <b>should</b> assume that the allocation failed due to fragmentation, and create a new descriptor pool.
 
 		#AllocateDescriptorSets() <b>can</b> be used to create multiple descriptor sets. If the creation of any of those descriptor sets fails, then the implementation <b>must</b> destroy all successfully created descriptor set objects from this command, set all entries of the {@code pDescriptorSets} array to #NULL_HANDLE and return the error.
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-		Applications <b>should</b> check for a negative return value when allocating new descriptor sets, assume that any error effectively means #ERROR_FRAGMENTED_POOL, and try to create a new descriptor pool. If #ERROR_FRAGMENTED_POOL is the actual return value, it adds certainty to that decision.
+		Applications <b>should</b> check for a negative return value when allocating new descriptor sets, assume that any error other than #ERROR_OUT_OF_POOL_MEMORY_KHR effectively means #ERROR_FRAGMENTED_POOL, and try to create a new descriptor pool. If #ERROR_FRAGMENTED_POOL is the actual return value, it adds certainty to that decision.
 
 		The reason for this is that #ERROR_FRAGMENTED_POOL was only added in a later revision of the 1.0 specification, and so drivers <b>may</b> return other errors if they were written against earlier revisions. To ensure full compatibility with earlier patch revisions, these other errors are allowed.
 		</div>
@@ -6557,6 +6577,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Each element in the {@code pDescriptorWrites} array describes an operation updating the descriptor set using descriptors for resources specified in the structure.
 
 		Each element in the {@code pDescriptorCopies} array is a ##VkCopyDescriptorSet structure describing an operation copying descriptors between sets.
+
+		If the {@code dstSet} member of any given element of {@code pDescriptorWrites} or {@code pDescriptorCopies} is bound, accessed, or modified by any command that was recorded to a command buffer which is currently in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> recording or executable state</a>, that command buffer becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid</a>.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The {@code dstSet} member of any given element of {@code pDescriptorWrites} or {@code pDescriptorCopies} <b>must</b> not be used by any command that was recorded to a command buffer which is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a>.</li>
+		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -6864,11 +6891,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
 		<h5>Description</h5>
-		When a pool is destroyed, all command buffers allocated from the pool are implicitly freed and become invalid. Command buffers allocated from a given pool do not need to be freed before destroying that command pool.
+		When a pool is destroyed, all command buffers allocated from the pool are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vkFreeCommandBuffers"> freed</a>.
+
+		Any primary command buffer allocated from another {@code VkCommandPool} that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> recording or executable state</a> and has a secondary command buffer allocated from {@code commandPool} recorded into it, becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid</a>.
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>All {@code VkCommandBuffer} objects allocated from {@code commandPool} <b>must</b> not be pending execution</li>
+			<li>All {@code VkCommandBuffer} objects allocated from {@code commandPool} <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a>.</li>
 			<li>If ##VkAllocationCallbacks were provided when {@code commandPool} was created, a compatible set of callbacks <b>must</b> be provided here</li>
 			<li>If no ##VkAllocationCallbacks were provided when {@code commandPool} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
 		</ul>
@@ -6909,11 +6938,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkCommandPoolResetFlags                     flags);</code></pre>
 
 		<h5>Description</h5>
-		Resetting a command pool recycles all of the resources from all of the command buffers allocated from the command pool back to the command pool. All command buffers that have been allocated from the command pool are put in the initial state.
+		Resetting a command pool recycles all of the resources from all of the command buffers allocated from the command pool back to the command pool. All command buffers that have been allocated from the command pool are put in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> initial state</a>.
+
+		Any primary command buffer allocated from another {@code VkCommandPool} that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> recording or executable state</a> and has a secondary command buffer allocated from {@code commandPool} recorded into it, becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid</a>.
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>All {@code VkCommandBuffer} objects allocated from {@code commandPool} <b>must</b> not currently be pending execution</li>
+			<li>All {@code VkCommandBuffer} objects allocated from {@code commandPool} <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a></li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -6972,6 +7003,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<h5>Description</h5>
 		#AllocateCommandBuffers() <b>can</b> be used to create multiple command buffers. If the creation of any of those command buffers fails, the implementation <b>must</b> destroy all successfully created command buffer objects from this command, set all entries of the {@code pCommandBuffers} array to {@code NULL} and return the error.
 
+		When command buffers are first allocated, they are in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> initial state</a>.
+
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -7021,9 +7054,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    uint32_t                                    commandBufferCount,
 ￿    const VkCommandBuffer*                      pCommandBuffers);</code></pre>
 
+		<h5>Description</h5>
+		Any primary command buffer that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> recording or executable state</a> and has any element of {@code pCommandBuffers} recorded into it, becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid</a>.
+
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>All elements of {@code pCommandBuffers} <b>must</b> not be pending execution</li>
+			<li>All elements of {@code pCommandBuffers} <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a></li>
 			<li>{@code pCommandBuffers} <b>must</b> be a pointer to an array of {@code commandBufferCount} {@code VkCommandBuffer} handles, each element of which <b>must</b> either be a valid handle or {@code NULL}</li>
 		</ul>
 
@@ -7063,9 +7099,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code commandBuffer} <b>must</b> not be in the recording state</li>
-			<li>{@code commandBuffer} <b>must</b> not currently be pending execution</li>
-			<li>If {@code commandBuffer} was allocated from a {@code VkCommandPool} which did not have the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set, {@code commandBuffer} <b>must</b> be in the initial state</li>
+			<li>{@code commandBuffer} <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording or pending state</a>.</li>
+			<li>If {@code commandBuffer} was allocated from a {@code VkCommandPool} which did not have the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set, {@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>.</li>
 			<li>If {@code commandBuffer} is a secondary command buffer, the {@code pInheritanceInfo} member of {@code pBeginInfo} <b>must</b> be a valid ##VkCommandBufferInheritanceInfo structure</li>
 			<li>If {@code commandBuffer} is a secondary command buffer and either the {@code occlusionQueryEnable} member of the {@code pInheritanceInfo} member of {@code pBeginInfo} is #FALSE, or the precise occlusion queries feature is not enabled, the {@code queryFlags} member of the {@code pInheritanceInfo} member {@code pBeginInfo} <b>must</b> not contain #QUERY_CONTROL_PRECISE_BIT</li>
 		</ul>
@@ -7116,13 +7151,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkCommandBuffer                             commandBuffer);</code></pre>
 
 		<h5>Description</h5>
-		If there was an error during recording, the application will be notified by an unsuccessful return code returned by #EndCommandBuffer(). If the application wishes to further use the command buffer, the command buffer <b>must</b> be reset.
+		If there was an error during recording, the application will be notified by an unsuccessful return code returned by #EndCommandBuffer(). If the application wishes to further use the command buffer, the command buffer <b>must</b> be reset. The command buffer <b>must</b> have been in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> recording state</a>, and is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> executable state</a>.
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a>.</li>
 			<li>If {@code commandBuffer} is a primary command buffer, there <b>must</b> not be an active render pass instance</li>
 			<li>All queries made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a> during the recording of {@code commandBuffer} <b>must</b> have been made inactive</li>
+			<li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> not be an outstanding #CmdDebugMarkerBeginEXT() command recorded to {@code commandBuffer} that has not previously been ended by a call to #CmdDebugMarkerEndEXT().</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -7151,13 +7187,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		</dl>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer to complete recording. The command buffer <b>must</b> have been in the recording state, and is moved to the executable state.")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer to complete recording.")
 	)
 
 	VkResult(
 		"ResetCommandBuffer",
 		"""
-		Reset a command buffer.
+		Reset a command buffer to the initial state.
 
 		<h5>C Specification</h5>
 		To reset command buffers, call:
@@ -7166,9 +7202,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkCommandBufferResetFlags                   flags);</code></pre>
 
+		<h5>Description</h5>
+		Any primary command buffer that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> recording or executable state</a> and has {@code commandBuffer} recorded into it, becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid</a>.
+
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code commandBuffer} <b>must</b> not currently be pending execution</li>
+			<li>{@code commandBuffer} <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a></li>
 			<li>{@code commandBuffer} <b>must</b> have been allocated from a pool that was created with the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT</li>
 		</ul>
 
@@ -7198,13 +7237,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		</dl>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer <b>can</b> be in any state, and is put in the initial state."),
+		VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer <b>can</b> be in any state other than <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#commandbuffers-lifecycle\">pending</a>, and is moved into the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#commandbuffers-lifecycle\">initial state</a>."),
 		VkCommandBufferResetFlags.IN("flags", """a bitmask controlling the reset operation. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkCommandBufferResetFlagBits {
 ￿    VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
 } VkCommandBufferResetFlagBits;</code></pre>
 
-		If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer <b>should</b> be returned to the parent command pool. If this flag is not set, then the command buffer <b>may</b> hold onto memory resources and reuse them when recording commands.""")
+		If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer <b>should</b> be returned to the parent command pool. If this flag is not set, then the command buffer <b>may</b> hold onto memory resources and reuse them when recording commands. {@code commandBuffer} is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> initial state</a>.""")
 	)
 
 	// Command buffer building commands
@@ -7239,7 +7278,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
 			<li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>Both of {@code commandBuffer}, and {@code pipeline} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
@@ -7298,7 +7337,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>{@code viewportCount} <b>must</b> be greater than 0</li>
 		</ul>
@@ -7360,7 +7399,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pScissors} <b>must</b> be a pointer to an array of {@code scissorCount} ##VkRect2D structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>{@code scissorCount} <b>must</b> be greater than 0</li>
 		</ul>
@@ -7408,7 +7447,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7485,7 +7524,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7528,7 +7567,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7572,7 +7611,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7617,7 +7656,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
 			<li>{@code faceMask} <b>must</b> not be 0</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7673,7 +7712,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
 			<li>{@code faceMask} <b>must</b> not be 0</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7718,7 +7757,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
 			<li>{@code faceMask} <b>must</b> not be 0</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 		</ul>
 
@@ -7789,7 +7828,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
 			<li>{@code pDescriptorSets} <b>must</b> be a pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSet} handles</li>
 			<li>If {@code dynamicOffsetCount} is not 0, {@code pDynamicOffsets} <b>must</b> be a pointer to an array of {@code dynamicOffsetCount} {@code uint32_t} values</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>
 			<li>Each of {@code commandBuffer}, {@code layout}, and the elements of {@code pDescriptorSets} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -7845,7 +7884,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
@@ -7905,7 +7944,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pBuffers} <b>must</b> be a pointer to an array of {@code bindingCount} valid {@code VkBuffer} handles</li>
 			<li>{@code pOffsets} <b>must</b> be a pointer to an array of {@code bindingCount} {@code VkDeviceSize} values</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>{@code bindingCount} <b>must</b> be greater than 0</li>
 			<li>Both of {@code commandBuffer}, and the elements of {@code pBuffers} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -7969,13 +8008,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
-			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index must be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
+			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <b>must</b> be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 		</ul>
@@ -8044,13 +8083,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
-			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index must be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
+			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <b>must</b> be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 		</ul>
@@ -8121,14 +8160,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
-			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index must be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
+			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <b>must</b> be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -8199,14 +8238,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
-			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index must be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
+			<li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <b>must</b> be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -8271,7 +8310,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 		</ul>
@@ -8335,7 +8374,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -8397,7 +8436,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} ##VkBufferCopy structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code regionCount} <b>must</b> be greater than 0</li>
@@ -8447,8 +8486,6 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Description</h5>
 		Each region in {@code pRegions} is copied from the source image to the same region of the destination image. {@code srcImage} and {@code dstImage} <b>can</b> be the same image or alias the same memory.
 
-		Copies are done layer by layer starting with {@code baseArrayLayer} member of {@code srcSubresource} for the source and {@code dstSubresource} for the destination. {@code layerCount} layers are copied to the destination image.
-
 		The formats of {@code srcImage} and {@code dstImage} <b>must</b> be compatible. Formats are considered compatible if their element size is the same between both formats. For example, #FORMAT_R8G8B8A8_UNORM is compatible with #FORMAT_R32_UINT because both texels are 4 bytes in size. Depth/stencil formats <b>must</b> match exactly.
 
 		#CmdCopyImage() allows copying between size-compatible compressed and uncompressed internal formats. Formats are size-compatible if the element size of the uncompressed format is equal to the element size (compressed texel block size) of the compressed format. Such a copy does not perform on-the-fly compression or decompression. When copying from an uncompressed format to a compressed format, each texel of uncompressed data of the source image is copied as a raw value to the corresponding compressed texel block of the destination image. When copying from a compressed format to an uncompressed format, each compressed texel block of the source image is copied as a raw value to the corresponding texel of uncompressed data in the destination image. Thus, for example, it is legal to copy between a 128-bit uncompressed format and a compressed format which has a 128-bit sized compressed texel block representing 4x4 texels (using 8 bits per texel), or between a 64-bit uncompressed format and a compressed format which has a 64-bit sized compressed texel block representing 4x4 texels (using 4 bits per texel).
@@ -8484,12 +8521,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
 			<li>If {@code srcImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code srcImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>{@code dstImage} <b>must</b> use a format that supports #FORMAT_FEATURE_TRANSFER_DST_BIT_KHR, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linearly tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>{@code dstImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
 			<li>If {@code dstImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>The {@code VkFormat} of each of {@code srcImage} and {@code dstImage} <b>must</b> be compatible, as defined <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies-images-format-compatibility">below</a></li>
 			<li>The sample count of {@code srcImage} and {@code dstImage} <b>must</b> match</li>
 		</ul>
@@ -8502,7 +8539,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
 			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkImageCopy structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code regionCount} <b>must</b> be greater than 0</li>
@@ -8639,16 +8676,16 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>The source region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage}</li>
 			<li>The destination region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
 			<li>The union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory with any texel that <b>may</b> be sampled during the blit operation</li>
-			<li>{@code srcImage} <b>must</b> use a format that supports #FORMAT_FEATURE_BLIT_SRC_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linear tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>{@code srcImage} <b>must</b> use a format that supports #FORMAT_FEATURE_BLIT_SRC_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linearly tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
 			<li>If {@code srcImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
-			<li>{@code dstImage} <b>must</b> use a format that supports #FORMAT_FEATURE_BLIT_DST_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linear tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>{@code srcImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImage} <b>must</b> use a format that supports #FORMAT_FEATURE_BLIT_DST_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linearly tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>{@code dstImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
 			<li>If {@code dstImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>The sample count of {@code srcImage} and {@code dstImage} <b>must</b> both be equal to #SAMPLE_COUNT_1_BIT</li>
 			<li>If either of {@code srcImage} or {@code dstImage} was created with a signed integer {@code VkFormat}, the other <b>must</b> also have been created with a signed integer {@code VkFormat}</li>
 			<li>If either of {@code srcImage} or {@code dstImage} was created with an unsigned integer {@code VkFormat}, the other <b>must</b> also have been created with an unsigned integer {@code VkFormat}</li>
@@ -8670,7 +8707,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkImageBlit structures</li>
 			<li>{@code filter} <b>must</b> be a valid {@code VkFilter} value</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code regionCount} <b>must</b> be greater than 0</li>
@@ -8734,7 +8771,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>If {@code dstImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code dstImage} <b>must</b> have a sample count equal to #SAMPLE_COUNT_1_BIT</li>
 			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -8744,7 +8781,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
 			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkBufferImageCopy structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code regionCount} <b>must</b> be greater than 0</li>
@@ -8804,7 +8841,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>If {@code srcImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code srcImage} <b>must</b> have a sample count equal to #SAMPLE_COUNT_1_BIT</li>
 			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code srcImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
 			<li>If {@code dstBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 		</ul>
@@ -8816,7 +8853,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkBufferImageCopy structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code regionCount} <b>must</b> be greater than 0</li>
@@ -8885,7 +8922,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>{@code pData} <b>must</b> be a pointer to an array of {@code dataSize} bytes</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code dataSize} <b>must</b> be greater than 0</li>
@@ -8945,7 +8982,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>Both of {@code commandBuffer}, and {@code dstBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -8996,7 +9033,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code image} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
 			<li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code imageLayout} <b>must</b> specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code imageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code imageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>The image range of any given element of {@code pRanges} <b>must</b> be an image subresource range that is contained within {@code image}</li>
 			<li>{@code image} <b>must</b> not have a compressed or depth/stencil format</li>
 		</ul>
@@ -9008,7 +9045,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code pColor} <b>must</b> be a pointer to a valid ##VkClearColorValue union</li>
 			<li>{@code pRanges} <b>must</b> be a pointer to an array of {@code rangeCount} valid ##VkImageSubresourceRange structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code rangeCount} <b>must</b> be greater than 0</li>
@@ -9073,7 +9110,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code pDepthStencil} <b>must</b> be a pointer to a valid ##VkClearDepthStencilValue structure</li>
 			<li>{@code pRanges} <b>must</b> be a pointer to an array of {@code rangeCount} valid ##VkImageSubresourceRange structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code rangeCount} <b>must</b> be greater than 0</li>
@@ -9135,7 +9172,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pAttachments} <b>must</b> be a pointer to an array of {@code attachmentCount} valid ##VkClearAttachment structures</li>
 			<li>{@code pRects} <b>must</b> be a pointer to an array of {@code rectCount} ##VkClearRect structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 			<li>{@code attachmentCount} <b>must</b> be greater than 0</li>
@@ -9199,9 +9236,9 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>If {@code dstImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code dstImage} <b>must</b> have a sample count equal to #SAMPLE_COUNT_1_BIT</li>
 			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code srcImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
-			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImageLayout} <b>must</b> be #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
 			<li>If {@code dstImage} was created with {@code tiling} equal to #IMAGE_TILING_LINEAR, {@code dstImage} <b>must</b> have been created with a {@code format} that supports being a color attachment, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>If {@code dstImage} was created with {@code tiling} equal to #IMAGE_TILING_OPTIMAL, {@code dstImage} <b>must</b> have been created with a {@code format} that supports being a color attachment, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
 		</ul>
@@ -9214,7 +9251,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
 			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
 			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkImageResolve structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code regionCount} <b>must</b> be greater than 0</li>
@@ -9282,7 +9319,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
 			<li>{@code stageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
 			<li>{@code stageMask} <b>must</b> not be 0</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>Both of {@code commandBuffer}, and {@code event} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -9343,7 +9380,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
 			<li>{@code stageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
 			<li>{@code stageMask} <b>must</b> not be 0</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>Both of {@code commandBuffer}, and {@code event} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -9432,7 +9469,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>If {@code memoryBarrierCount} is not 0, {@code pMemoryBarriers} <b>must</b> be a pointer to an array of {@code memoryBarrierCount} valid ##VkMemoryBarrier structures</li>
 			<li>If {@code bufferMemoryBarrierCount} is not 0, {@code pBufferMemoryBarriers} <b>must</b> be a pointer to an array of {@code bufferMemoryBarrierCount} valid ##VkBufferMemoryBarrier structures</li>
 			<li>If {@code imageMemoryBarrierCount} is not 0, {@code pImageMemoryBarriers} <b>must</b> be a pointer to an array of {@code imageMemoryBarrierCount} valid ##VkImageMemoryBarrier structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>{@code eventCount} <b>must</b> be greater than 0</li>
 			<li>Both of {@code commandBuffer}, and the elements of {@code pEvents} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -9547,7 +9584,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>If {@code memoryBarrierCount} is not 0, {@code pMemoryBarriers} <b>must</b> be a pointer to an array of {@code memoryBarrierCount} valid ##VkMemoryBarrier structures</li>
 			<li>If {@code bufferMemoryBarrierCount} is not 0, {@code pBufferMemoryBarriers} <b>must</b> be a pointer to an array of {@code bufferMemoryBarrierCount} valid ##VkBufferMemoryBarrier structures</li>
 			<li>If {@code imageMemoryBarrierCount} is not 0, {@code pImageMemoryBarriers} <b>must</b> be a pointer to an array of {@code imageMemoryBarrierCount} valid ##VkImageMemoryBarrier structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 		</ul>
 
@@ -9627,7 +9664,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
 			<li>{@code flags} <b>must</b> be a valid combination of {@code VkQueryControlFlagBits} values</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
@@ -9648,7 +9685,10 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
 		VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query."),
 		uint32_t.IN("query", "the query index within the query pool that will contain the results."),
-		VkQueryControlFlags.IN("flags", "a bitmask indicating constraints on the types of queries that <b>can</b> be performed. Bits which <b>can</b> be set include:")
+		VkQueryControlFlags.IN("flags", """a bitmask indicating constraints on the types of queries that <b>can</b> be performed. Bits which <b>can</b> be set include:
+<pre><code>typedef enum VkQueryControlFlagBits {
+￿    VK_QUERY_CONTROL_PRECISE_BIT = 0x00000001,
+} VkQueryControlFlagBits;</code></pre>""")
 	)
 
 	void(
@@ -9681,7 +9721,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
@@ -9731,7 +9771,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -9803,7 +9843,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pipelineStage} <b>must</b> be a valid {@code VkPipelineStageFlagBits} value</li>
 			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
@@ -9883,7 +9923,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
 			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>{@code flags} <b>must</b> be a valid combination of {@code VkQueryResultFlagBits} values</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>Each of {@code commandBuffer}, {@code dstBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -9944,7 +9984,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
 			<li>{@code stageFlags} <b>must</b> not be 0</li>
 			<li>{@code pValues} <b>must</b> be a pointer to an array of {@code size} bytes</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>{@code size} <b>must</b> be greater than 0</li>
 			<li>Both of {@code commandBuffer}, and {@code layout} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -10007,7 +10047,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pRenderPassBegin} <b>must</b> be a pointer to a valid ##VkRenderPassBeginInfo structure</li>
 			<li>{@code contents} <b>must</b> be a valid {@code VkSubpassContents} value</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called outside of a render pass instance</li>
 			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
@@ -10068,7 +10108,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code contents} <b>must</b> be a valid {@code VkSubpassContents} value</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
@@ -10113,7 +10153,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>This command <b>must</b> only be called inside of a render pass instance</li>
 			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
@@ -10149,15 +10189,17 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    const VkCommandBuffer*                      pCommandBuffers);</code></pre>
 
 		<h5>Description</h5>
-		Once #CmdExecuteCommands() has been called, any prior executions of the secondary command buffers specified by {@code pCommandBuffers} in any other primary command buffer become invalidated, unless those secondary command buffers were recorded with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT.
+		If any element of {@code pCommandBuffers} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag, and it was recorded into any other primary command buffer which is currently in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> executable or recording state</a>, that primary command buffer becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle"> invalid</a>.
 
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_PRIMARY</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_SECONDARY</li>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> not be already pending execution in {@code commandBuffer}, or appear twice in {@code pCommandBuffers}, unless it was recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag</li>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> not be already pending execution in any other {@code VkCommandBuffer}, unless it was recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag</li>
-			<li>Any given element of {@code pCommandBuffers} <b>must</b> be in the executable state</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending or executable state</a>.</li>
+			<li>If any element of {@code pCommandBuffers} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag, and it was recorded into any other primary command buffer, that primary command buffer <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a></li>
+			<li>If any given element of {@code pCommandBuffers} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag, it <b>must</b> not be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">pending state</a>.</li>
+			<li>If any given element of {@code pCommandBuffers} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag, it <b>must</b> not have already been recorded to {@code commandBuffer}.</li>
+			<li>If any given element of {@code pCommandBuffers} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag, it <b>must</b> not appear more than once in {@code pCommandBuffers}.</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> have been allocated from a {@code VkCommandPool} that was created for the same queue family as the {@code VkCommandPool} from which {@code commandBuffer} was allocated</li>
 			<li>If #CmdExecuteCommands() is being called within a render pass instance, that render pass instance <b>must</b> have been begun with the {@code contents} parameter of #CmdBeginRenderPass() set to #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS</li>
 			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT</li>
@@ -10176,7 +10218,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pCommandBuffers} <b>must</b> be a pointer to an array of {@code commandBufferCount} valid {@code VkCommandBuffer} handles</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
 			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
 			<li>{@code commandBufferCount} <b>must</b> be greater than 0</li>

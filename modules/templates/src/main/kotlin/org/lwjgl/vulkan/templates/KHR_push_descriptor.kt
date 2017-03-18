@@ -125,7 +125,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 			<li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
 			<li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
 			<li>{@code pDescriptorWrites} <b>must</b> be a pointer to an array of {@code descriptorWriteCount} valid ##VkWriteDescriptorSet structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 			<li>{@code descriptorWriteCount} <b>must</b> be greater than 0</li>
 			<li>Both of {@code commandBuffer}, and {@code layout} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>

@@ -125,7 +125,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 			<li>{@code firstDiscardRectangle} <b>must</b> be less than ##VkPhysicalDeviceDiscardRectanglePropertiesEXT.{@code maxDiscardRectangles}</li>
 			<li>The sum of {@code firstDiscardRectangle} and {@code discardRectangleCount} <b>must</b> be between 1 and ##VkPhysicalDeviceDiscardRectanglePropertiesEXT{@code ::maxDiscardRectangles}, inclusive</li>
 			<li>{@code pDiscardRectangles} <b>must</b> be a pointer to an array of {@code discardRectangleCount} valid ##VkRect2D structures</li>
-			<li>The {@code x} and {@code y} members of {@code offset} in ##VkRect2D must b greater than or equal to 0</li>
+			<li>The {@code x} and {@code y} members of {@code offset} in ##VkRect2D <b>must</b> be greater than or equal to 0</li>
 			<li>Evaluation of ({@code offset.x} + {@code extent.width}) in ##VkRect2D <b>must</b> not cause a signed integer addition overflow</li>
 			<li>Evaluation of ({@code offset.y} + {@code extent.height}) in ##VkRect2D <b>must</b> not cause a signed integer addition overflow</li>
 		</ul>
@@ -134,7 +134,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 		<ul>
 			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>{@code pDiscardRectangles} <b>must</b> be a pointer to an array of {@code discardRectangleCount} ##VkRect2D structures</li>
-			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
 			<li>{@code discardRectangleCount} <b>must</b> be greater than 0</li>
 		</ul>

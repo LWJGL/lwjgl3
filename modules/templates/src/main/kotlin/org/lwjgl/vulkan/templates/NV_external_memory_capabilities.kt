@@ -65,15 +65,13 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 
 	EnumConstant(
 		"""
-		VkExternalMemoryHandleTypeFlagBitsNV - Bitmask specifying memory handle types
+		VkExternalMemoryHandleTypeFlagBitsNV - Bitmask specifying external memory handle types
 
 		<h5>Description</h5>
-		For more information, see:
-
 		<ul>
-			<li>The reference page for ##VkImportMemoryWin32HandleInfoNV, where this interface is defined.</li>
-			<li>The See Also section for other reference pages using this type.</li>
-			<li>The Vulkan Specification.</li>
+			<li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV indicate a handle to memory returned by #GetMemoryWin32HandleNV() or, in the case of #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, one duplicated from such a handle using {@code DuplicateHandle()}.</li>
+			<li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV indicates a valid NT handle to memory returned by {@code IDXGIResource1::ftext:CreateSharedHandle()}, or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
+			<li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV indicates a handle to memory returned by {@code IDXGIResource::GetSharedHandle()}.</li>
 		</ul>
 
 		<h5>See Also</h5>
