@@ -87,7 +87,7 @@ val YGMeasureFunc = "YGMeasureFunc".callback(
 	javaImport("static java.lang.Float.*")
 	additionalCode = """
 	public static long toLong(YGSize size) {
-		return ((long)floatToRawIntBits(size.width()) << 32) | floatToRawIntBits(size.height());
+		return floatToRawIntBits(size.width()) | ((long)floatToRawIntBits(size.height()) << 32);
 	}
 	"""
 }
