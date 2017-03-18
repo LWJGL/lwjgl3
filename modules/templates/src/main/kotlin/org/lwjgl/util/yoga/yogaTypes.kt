@@ -47,6 +47,7 @@ float h = layout.dimensions(YGDimensionHeight);""")}
 }
 
 val YGNodeRef = "YGNodeRef".opaque_p
+val YGConfigRef = "YGConfigRef".opaque_p
 
 val YGAlign = "YGAlign".enumType
 val YGDirection = "YGDirection".enumType

@@ -8,10 +8,10 @@
  */
 package org.lwjgl.util.yoga;
 
-import org.lwjgl.system.MemoryStack;
-import org.testng.annotations.Test;
+import org.lwjgl.system.*;
+import org.testng.annotations.*;
 
-import java.nio.ByteBuffer;
+import java.nio.*;
 
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -122,6 +122,7 @@ public class YogaNodeTest {
 		return YGLogger.create((level, format, args) -> {
 			try ( MemoryStack stack = stackPush() ) {
 				ByteBuffer buffer = stack.malloc(256);
+
 				int result = nvsnprintf(memAddress(buffer), buffer.remaining(), format, args);
 
 				mLogLevel = level;

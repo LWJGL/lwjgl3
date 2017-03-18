@@ -8,7 +8,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.Assert.*;
@@ -16,16 +16,18 @@ import static org.testng.Assert.*;
 public class YGDisplayTest {
 	@Test
 	public void test_display_none() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
+
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(100f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setDisplay(YogaDisplay.NONE);
 		root.addChildAt(root_child1, 1);
@@ -68,16 +70,18 @@ public class YGDisplayTest {
 
 	@Test
 	public void test_display_none_fixed_size() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
+
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(100f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setWidth(20f);
 		root_child1.setHeight(20f);
 		root_child1.setDisplay(YogaDisplay.NONE);
@@ -121,12 +125,14 @@ public class YGDisplayTest {
 
 	@Test
 	public void test_display_none_with_margin() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
+
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(100f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setMargin(YogaEdge.LEFT, 10f);
 		root_child0.setMargin(YogaEdge.TOP, 10f);
 		root_child0.setMargin(YogaEdge.RIGHT, 10f);
@@ -136,7 +142,7 @@ public class YGDisplayTest {
 		root_child0.setDisplay(YogaDisplay.NONE);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root.addChildAt(root_child1, 1);
 		root.setDirection(YogaDirection.LTR);
@@ -178,25 +184,27 @@ public class YGDisplayTest {
 
 	@Test
 	public void test_display_none_with_child() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
+
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(100f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root_child0.setFlexShrink(1f);
 		root_child0.setFlexBasisPercent(0f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setFlexShrink(1f);
 		root_child1.setFlexBasisPercent(0f);
 		root_child1.setDisplay(YogaDisplay.NONE);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child1_child0 = new YogaNode();
+		YogaNode root_child1_child0 = new YogaNode(config);
 		root_child1_child0.setFlexGrow(1f);
 		root_child1_child0.setFlexShrink(1f);
 		root_child1_child0.setFlexBasisPercent(0f);
@@ -205,7 +213,7 @@ public class YGDisplayTest {
 		root_child1_child0.setMinHeight(0f);
 		root_child1.addChildAt(root_child1_child0, 0);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root_child2.setFlexShrink(1f);
 		root_child2.setFlexBasisPercent(0f);
@@ -269,16 +277,18 @@ public class YGDisplayTest {
 
 	@Test
 	public void test_display_none_with_position() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
+
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(100f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setPosition(YogaEdge.TOP, 10f);
 		root_child1.setDisplay(YogaDisplay.NONE);

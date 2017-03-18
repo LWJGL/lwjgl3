@@ -1,14 +1,10 @@
 /*
- * Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
  */
 package org.lwjgl.util.yoga;
 
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.Assert.*;
@@ -16,9 +12,11 @@ import static org.testng.Assert.*;
 public class YGDimensionTest {
 	@Test
 	public void test_wrap_child() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root = new YogaNode(config);
+
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setWidth(100f);
 		root_child0.setHeight(100f);
 		root.addChildAt(root_child0, 0);
@@ -51,12 +49,14 @@ public class YGDimensionTest {
 
 	@Test
 	public void test_wrap_grandchild() {
-		YogaNode root = new YogaNode();
+		YogaConfig config = new YogaConfig();
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root = new YogaNode(config);
+
+		YogaNode root_child0 = new YogaNode(config);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child0_child0 = new YogaNode();
+		YogaNode root_child0_child0 = new YogaNode(config);
 		root_child0_child0.setWidth(100f);
 		root_child0_child0.setHeight(100f);
 		root_child0.addChildAt(root_child0_child0, 0);

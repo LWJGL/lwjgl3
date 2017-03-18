@@ -123,7 +123,8 @@ div {
 		"YGExperimentalFeature",
 
 		"ExperimentalFeatureRounding".enum,
-		"ExperimentalFeatureWebFlexBasis".enum
+		"ExperimentalFeatureWebFlexBasis".enum,
+		"ExperimentalFeatureMinFlexFix".enum
 	)
 
 	EnumConstant(
@@ -206,6 +207,13 @@ div {
 	YGNodeRef(
 		"NodeNew",
 		""
+	)
+
+	YGNodeRef(
+		"NodeNewWithConfig",
+		"",
+
+		const..YGConfigRef.IN("config", "")
 	)
 
 	val node = const..YGNodeRef.IN("node", "")
@@ -510,14 +518,7 @@ div {
 	YG_NODE_STYLE_PROPERTY(YGOverflow, "Overflow", "overflow")
 	YG_NODE_STYLE_PROPERTY(YGDisplay, "Display", "display")
 
-	void(
-		"NodeStyleSetFlex",
-		"",
-
-		node,
-		float.IN("flex", "")
-	)
-
+	YG_NODE_STYLE_PROPERTY(float, "Flex", "flex")
 	YG_NODE_STYLE_PROPERTY(float, "FlexGrow", "flexGrow")
 	YG_NODE_STYLE_PROPERTY(float, "FlexShrink", "flexShrink")
 	YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "FlexBasis", "flexBasis")
@@ -580,26 +581,54 @@ div {
 		const..charUTF8_p.IN("message", "")
 	)
 
+	YGConfigRef(
+		"ConfigNew",
+		""
+	)
+
+	void("ConfigFree",
+		"",
+		const..YGConfigRef.IN("config", "")
+	)
+
 	void(
-		"SetPointScaleFactor",
+		"ConfigSetPointScaleFactor",
 		"Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
 
+		const..YGConfigRef.IN("config", ""),
 		float.IN("pixelsInPoint", "")
 	)
 
 	void(
-		"SetExperimentalFeatureEnabled",
+		"ConfigSetExperimentalFeatureEnabled",
 		"",
 
+		const..YGConfigRef.IN("config", ""),
 		YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+"),
 		bool.IN("enabled", "")
 	)
 
 	bool(
-		"IsExperimentalFeatureEnabled",
+		"ConfigIsExperimentalFeatureEnabled",
 		"",
 
+		const..YGConfigRef.IN("config", ""),
 		YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+")
+	)
+
+	void(
+		"ConfigSetUseWebDefaults",
+		"Using the web defaults is the prefered configuration for new projects. Usage of non web defaults should be considered as legacy.",
+
+		const..YGConfigRef.IN("config", ""),
+		bool.IN("enabled", "")
+	)
+
+	bool(
+		"ConfigGetUseWebDefaults",
+		"",
+
+		const..YGConfigRef.IN("config", "")
 	)
 
 	void(

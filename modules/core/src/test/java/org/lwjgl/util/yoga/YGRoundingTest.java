@@ -8,7 +8,7 @@
  */
 package org.lwjgl.util.yoga;
 
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.Assert.*;
@@ -16,22 +16,23 @@ import static org.testng.Assert.*;
 public class YGRoundingTest {
 	@Test
 	public void test_rounding_flex_basis_flex_grow_row_width_of_100() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(100f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root.addChildAt(root_child2, 2);
 		root.setDirection(YogaDirection.LTR);
@@ -79,36 +80,35 @@ public class YGRoundingTest {
 		assertEquals(0f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(33f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_flex_basis_flex_grow_row_prime_number_width() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(113f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root.addChildAt(root_child2, 2);
 
-		YogaNode root_child3 = new YogaNode();
+		YogaNode root_child3 = new YogaNode(config);
 		root_child3.setFlexGrow(1f);
 		root.addChildAt(root_child3, 3);
 
-		YogaNode root_child4 = new YogaNode();
+		YogaNode root_child4 = new YogaNode(config);
 		root_child4.setFlexGrow(1f);
 		root.addChildAt(root_child4, 4);
 		root.setDirection(YogaDirection.LTR);
@@ -176,29 +176,28 @@ public class YGRoundingTest {
 		assertEquals(0f, root_child4.getLayoutY(), 0.0f);
 		assertEquals(23f, root_child4.getLayoutWidth(), 0.0f);
 		assertEquals(100f, root_child4.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_flex_basis_flex_shrink_row() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setFlexDirection(YogaFlexDirection.ROW);
 		root.setWidth(101f);
 		root.setHeight(100f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexShrink(1f);
 		root_child0.setFlexBasis(100f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexBasis(25f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexBasis(25f);
 		root.addChildAt(root_child2, 2);
 		root.setDirection(YogaDirection.LTR);
@@ -246,30 +245,29 @@ public class YGRoundingTest {
 		assertEquals(0f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(25f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_flex_basis_overrides_main_size() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setWidth(100f);
 		root.setHeight(113f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root_child0.setFlexBasis(50f);
 		root_child0.setHeight(20f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root_child2.setHeight(10f);
 		root.addChildAt(root_child2, 2);
@@ -318,30 +316,29 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(24f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_total_fractial() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setWidth(87.4f);
 		root.setHeight(113.4f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(0.7f);
 		root_child0.setFlexBasis(50.3f);
 		root_child0.setHeight(20.3f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1.6f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1.1f);
 		root_child2.setHeight(10.7f);
 		root.addChildAt(root_child2, 2);
@@ -390,44 +387,43 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(87f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(24f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_total_fractial_nested() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setWidth(87.4f);
 		root.setHeight(113.4f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(0.7f);
 		root_child0.setFlexBasis(50.3f);
 		root_child0.setHeight(20.3f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child0_child0 = new YogaNode();
+		YogaNode root_child0_child0 = new YogaNode(config);
 		root_child0_child0.setFlexGrow(1f);
 		root_child0_child0.setFlexBasis(0.3f);
 		root_child0_child0.setPosition(YogaEdge.BOTTOM, 13.3f);
 		root_child0_child0.setHeight(9.9f);
 		root_child0.addChildAt(root_child0_child0, 0);
 
-		YogaNode root_child0_child1 = new YogaNode();
+		YogaNode root_child0_child1 = new YogaNode(config);
 		root_child0_child1.setFlexGrow(4f);
 		root_child0_child1.setFlexBasis(0.3f);
 		root_child0_child1.setPosition(YogaEdge.TOP, 13.3f);
 		root_child0_child1.setHeight(1.1f);
 		root_child0.addChildAt(root_child0_child1, 1);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1.6f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1.1f);
 		root_child2.setHeight(10.7f);
 		root.addChildAt(root_child2, 2);
@@ -496,30 +492,29 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(87f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(24f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_fractial_input_1() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setWidth(100f);
 		root.setHeight(113.4f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root_child0.setFlexBasis(50f);
 		root_child0.setHeight(20f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root_child2.setHeight(10f);
 		root.addChildAt(root_child2, 2);
@@ -568,30 +563,29 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(24f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_fractial_input_2() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setWidth(100f);
 		root.setHeight(113.6f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root_child0.setFlexBasis(50f);
 		root_child0.setHeight(20f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root_child2.setHeight(10f);
 		root.addChildAt(root_child2, 2);
@@ -640,31 +634,30 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(25f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_fractial_input_3() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setPosition(YogaEdge.TOP, 0.3f);
 		root.setWidth(100f);
 		root.setHeight(113.4f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root_child0.setFlexBasis(50f);
 		root_child0.setHeight(20f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root_child2.setHeight(10f);
 		root.addChildAt(root_child2, 2);
@@ -713,31 +706,30 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(24f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 	@Test
 	public void test_rounding_fractial_input_4() {
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
+		YogaConfig config = new YogaConfig();
+		config.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, true);
 
-		YogaNode root = new YogaNode();
+		YogaNode root = new YogaNode(config);
 		root.setPosition(YogaEdge.TOP, 0.7f);
 		root.setWidth(100f);
 		root.setHeight(113.4f);
 
-		YogaNode root_child0 = new YogaNode();
+		YogaNode root_child0 = new YogaNode(config);
 		root_child0.setFlexGrow(1f);
 		root_child0.setFlexBasis(50f);
 		root_child0.setHeight(20f);
 		root.addChildAt(root_child0, 0);
 
-		YogaNode root_child1 = new YogaNode();
+		YogaNode root_child1 = new YogaNode(config);
 		root_child1.setFlexGrow(1f);
 		root_child1.setHeight(10f);
 		root.addChildAt(root_child1, 1);
 
-		YogaNode root_child2 = new YogaNode();
+		YogaNode root_child2 = new YogaNode(config);
 		root_child2.setFlexGrow(1f);
 		root_child2.setHeight(10f);
 		root.addChildAt(root_child2, 2);
@@ -786,8 +778,6 @@ public class YGRoundingTest {
 		assertEquals(89f, root_child2.getLayoutY(), 0.0f);
 		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
 		assertEquals(24f, root_child2.getLayoutHeight(), 0.0f);
-
-		YogaNode.setExperimentalFeatureEnabled(YogaExperimentalFeature.ROUNDING, false);
 	}
 
 }

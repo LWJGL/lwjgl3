@@ -14,13 +14,13 @@ class YogaNode {
 		node = YGNodeNew();
 	}
 
+	YogaNode(YogaConfig config) {
+		node = YGNodeNewWithConfig(config.handle);
+	}
+
 	@Override
 	protected void finalize() throws Throwable {
 		YGNodeFree(node);
-	}
-
-	static void setExperimentalFeatureEnabled(YogaExperimentalFeature feature, boolean enabled) {
-		YGSetExperimentalFeatureEnabled(feature.value, enabled);
 	}
 
 	void setAlignContent(YogaAlign alignContent) {
@@ -295,7 +295,8 @@ class YogaNode {
 
 	enum YogaExperimentalFeature {
 		ROUNDING(YGExperimentalFeatureRounding),
-		WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis);
+		WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis),
+		MIN_FLEX_FIX(YGExperimentalFeatureMinFlexFix);
 
 		final int value;
 
