@@ -674,7 +674,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 	)
 
 	EnumConstant(
-		"{@Code EVRApplicationType}: enum values to pass in to #InitInternal() to identify whether the application will draw a 3D scene.",
+		"{@code EVRApplicationType}: enum values to pass in to #InitInternal() to identify whether the application will draw a 3D scene.",
 
 		"EVRApplicationType_VRApplication_Other".enum("Some other kind of application that isn't covered by the other entries.", "0"),
 		"EVRApplicationType_VRApplication_Scene".enum("Application will submit 3D frames.", "1"),
