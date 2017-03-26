@@ -504,31 +504,31 @@ StringConstant(
 	).noPrefix()
 
 	StringConstant(
-		"{@see #AI_CONFIG_IMPORT_GLOBAL_KEYFRAME}",
+		"@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
 
 		"AI_CONFIG_IMPORT_MD2_KEYFRAME".."IMPORT_MD2_KEYFRAME"
 	).noPrefix()
 
 	StringConstant(
-		"{@see #AI_CONFIG_IMPORT_GLOBAL_KEYFRAME}",
+		"@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
 
 		"AI_CONFIG_IMPORT_MDL_KEYFRAME".."IMPORT_MDL_KEYFRAME"
 	).noPrefix()
 
 	StringConstant(
-		"{@see #AI_CONFIG_IMPORT_GLOBAL_KEYFRAME}",
+		"@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
 
 		"AI_CONFIG_IMPORT_MDC_KEYFRAME".."IMPORT_MDC_KEYFRAME"
 	).noPrefix()
 
 	StringConstant(
-		"{@see #AI_CONFIG_IMPORT_GLOBAL_KEYFRAME}",
+		"@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
 
 		"AI_CONFIG_IMPORT_SMD_KEYFRAME".."IMPORT_SMD_KEYFRAME"
 	).noPrefix()
 
 	StringConstant(
-		"{@see #AI_CONFIG_IMPORT_GLOBAL_KEYFRAME}",
+		"@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
 
 		"AI_CONFIG_IMPORT_UNREAL_KEYFRAME".."IMPORT_UNREAL_KEYFRAME"
 	).noPrefix()
@@ -677,7 +677,7 @@ StringConstant(
 		"""
 		End of the imported time range. 
 		
-		{@see #AI_CONFIG_IMPORT_LWS_ANIM_START}
+		@see \\#AI_CONFIG_IMPORT_LWS_ANIM_START
 		""",
 
 		"AI_CONFIG_IMPORT_LWS_ANIM_END".."IMPORT_LWS_ANIM_END"
@@ -701,7 +701,7 @@ StringConstant(
 		Ogre Importer will try to find referenced materials from this file.
 
 		Ogre meshes reference with material names, this does not tell Assimp the file where it is located in. Assimp will try to find the source file in the
-		following order: {@code <material-name>.material}, {@code<mesh-filename-base>.material} and lastly the material name defined by this config property.
+		following order: {@code <material-name>.material}, {@code <mesh-filename-base>.material} and lastly the material name defined by this config property.
 
 		Property type: String. Default value: {@code Scene.material}.
 		""",
