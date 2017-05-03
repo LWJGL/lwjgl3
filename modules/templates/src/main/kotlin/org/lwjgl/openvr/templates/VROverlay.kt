@@ -28,7 +28,7 @@ val VROverlay = "VROverlay".nativeClass(
 		"Creates a new named overlay. All overlays start hidden and with default settings.",
 
 		const..charASCII_p.IN("pchOverlayKey", ""),
-		const..charASCII_p.IN("pchOverlayFriendlyName", ""),
+		const..charASCII_p.IN("pchOverlayName", ""),
 		Check(1)..VROverlayHandle_t.p.OUT("pOverlayHandle", "")
 	)
 
@@ -85,6 +85,14 @@ val VROverlay = "VROverlay".nativeClass(
 		Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchValue", ""),
 		AutoSize("pchValue")..uint32_t.IN("unBufferSize", ""),
 		Check(1)..EVROverlayError.p.OUT("pError", "")
+	)
+
+	EVROverlayError(
+		"SetOverlayName",
+		"Sets the name to use for this overlay.",
+
+		VROverlayHandle_t.IN("ulOverlayHandle", ""),
+		charASCII_p.IN("pchName", "")
 	)
 
 	EVROverlayError(
@@ -302,6 +310,26 @@ val VROverlay = "VROverlay".nativeClass(
 		VRTextureBounds_t.p.OUT("pOverlayTextureBounds", "")
 	)
 
+	uint32_t(
+		"GetOverlayRenderModel",
+		"Gets render model to draw behind this overlay.",
+
+		VROverlayHandle_t.IN("ulOverlayHandle", ""),
+		charASCII_p.OUT("pchValue", ""),
+		AutoSize("pchValue")..uint32_t.IN("unBufferSize", ""),
+		HmdColor_t.p.OUT("pColor", ""),
+		Check(1)..EVROverlayError.p.OUT("pError", "")
+	)
+
+	EVROverlayError(
+		"SetOverlayRenderModel",
+		"",
+
+		VROverlayHandle_t.IN("ulOverlayHandle", ""),
+		charASCII_p.IN("pchRenderModel", ""),
+		HmdColor_t.p.IN("pColor", "")
+	)
+
 	EVROverlayError(
 		"GetOverlayTransformType",
 		"Returns the transform type of this overlay.",
@@ -366,6 +394,24 @@ val VROverlay = "VROverlay".nativeClass(
 		Check(1)..TrackedDeviceIndex_t.p.OUT("punDeviceIndex", ""),
 		char_p.OUT("pchComponentName", ""),
 		AutoSize("pchComponentName")..uint32_t.IN("unComponentNameSize", "")
+	)
+
+	EVROverlayError(
+		"GetOverlayTransformOverlayRelative",
+		"",
+
+		VROverlayHandle_t.IN("ulOverlayHandle", ""),
+		Check(1)..VROverlayHandle_t.p.OUT("ulOverlayHandleParent", ""),
+		HmdMatrix34_t.p.OUT("pmatParentOverlayToOverlayTransform", "")
+	)
+
+	EVROverlayError(
+		"SetOverlayTransformOverlayRelative",
+		"",
+
+		VROverlayHandle_t.IN("ulOverlayHandle", ""),
+		VROverlayHandle_t.IN("ulOverlayHandleParent", ""),
+		HmdMatrix34_t.p.IN("pmatParentOverlayToOverlayTransform", "")
 	)
 
 	EVROverlayError(

@@ -68,7 +68,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"IVRChaperone_Version".."IVRChaperone_003",
 		"IVRChaperoneSetup_Version".."IVRChaperoneSetup_005",
 		"IVRCompositor_Version".."IVRCompositor_020",
-		"IVROverlay_Version".."IVROverlay_014",
+		"IVROverlay_Version".."IVROverlay_016",
 		"k_pch_Controller_Component_GDC2015".."gdc2015",
 		"k_pch_Controller_Component_Base".."base",
 		"k_pch_Controller_Component_Tip".."tip",
@@ -83,7 +83,6 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"k_pch_SteamVR_ForcedHmdKey_String".."forcedHmd",
 		"k_pch_SteamVR_DisplayDebug_Bool".."displayDebug",
 		"k_pch_SteamVR_DebugProcessPipe_String".."debugProcessPipe",
-		"k_pch_SteamVR_EnableDistortion_Bool".."enableDistortion",
 		"k_pch_SteamVR_DisplayDebugX_Int32".."displayDebugX",
 		"k_pch_SteamVR_DisplayDebugY_Int32".."displayDebugY",
 		"k_pch_SteamVR_SendSystemButtonToAllApps_Bool".."sendSystemButtonToAllApps",
@@ -217,7 +216,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"ETextureType_TextureType_DirectX".enum("Handle is an ID3D11Texture.", "0"),
 		"ETextureType_TextureType_OpenGL".enum("Handle is an OpenGL texture name or an OpenGL render buffer name, depending on submit flags.", "1"),
 		"ETextureType_TextureType_Vulkan".enum("Handle is a pointer to a {@code VRVulkanTextureData_t} structure.", "2"),
-		"ETextureType_TextureType_IOSurface".enum("Handle is a macOS cross-process-sharable IOSurface.", "3"),
+		"ETextureType_TextureType_IOSurface".enum("Handle is a macOS cross-process-sharable {@code IOSurfaceRef}.", "3"),
 		"ETextureType_TextureType_DirectX12".enum("Handle is a pointer to a {@code D3D12TextureData_t} structure.", "4")
 	)
 
@@ -252,7 +251,11 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"ETrackedDeviceClass_TrackedDeviceClass_HMD".enum("Head-Mounted Displays.", "1"),
 		"ETrackedDeviceClass_TrackedDeviceClass_Controller".enum("Tracked controllers.", "2"),
 		"ETrackedDeviceClass_TrackedDeviceClass_GenericTracker".enum("Generic trackers, similar to controllers.", "3"),
-		"ETrackedDeviceClass_TrackedDeviceClass_TrackingReference".enum("Camera and base stations that serve as tracking reference points.", "4")
+		"ETrackedDeviceClass_TrackedDeviceClass_TrackingReference".enum("Camera and base stations that serve as tracking reference points.", "4"),
+		"ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect".enum(
+			"Accessories that aren't necessarily tracked themselves, but may redirect video output from other tracked devices.",
+			"5"
+		)
 	)
 
 	EnumConstant(
@@ -319,6 +322,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"ETrackedDeviceProperty_Prop_Firmware_ForceUpdateRequired_Bool".enum("", "1032"),
 		"ETrackedDeviceProperty_Prop_ViveSystemButtonFixRequired_Bool".enum("", "1033"),
 		"ETrackedDeviceProperty_Prop_ParentDriver_Uint64".enum("", "1034"),
+		"ETrackedDeviceProperty_Prop_ResourceRoot_String".enum("", "1035"),
 		"ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool".enum("", "2000"),
 		"ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float".enum("", "2001"),
 		"ETrackedDeviceProperty_Prop_DisplayFrequency_Float".enum("", "2002"),
@@ -361,7 +365,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"ETrackedDeviceProperty_Prop_DisplayMCImageHeight_Int32".enum("", "2039"),
 		"ETrackedDeviceProperty_Prop_DisplayMCImageNumChannels_Int32".enum("", "2040"),
 		"ETrackedDeviceProperty_Prop_DisplayMCImageData_Binary".enum("", "2041"),
-		"ETrackedDeviceProperty_Prop_UsesDriverDirectMode_Bool".enum("", "2042"),
+		"ETrackedDeviceProperty_Prop_SecondsFromPhotonsToVblank_Float".enum("", "2042"),
 		"ETrackedDeviceProperty_Prop_AttachedDeviceId_String".enum("", "3000"),
 		"ETrackedDeviceProperty_Prop_SupportedButtons_Uint64".enum("", "3001"),
 		"ETrackedDeviceProperty_Prop_Axis0Type_Int32".enum("", "3002"),
@@ -390,6 +394,11 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"ETrackedDeviceProperty_Prop_DisplayHiddenArea_Binary_End".enum("", "5150"),
 		"ETrackedDeviceProperty_Prop_UserConfigPath_String".enum("", "6000"),
 		"ETrackedDeviceProperty_Prop_InstallPath_String".enum("", "6001"),
+		"ETrackedDeviceProperty_Prop_HasDisplayComponent_Bool".enum("", "6002"),
+		"ETrackedDeviceProperty_Prop_HasControllerComponent_Bool".enum("", "6003"),
+		"ETrackedDeviceProperty_Prop_HasCameraComponent_Bool".enum("", "6004"),
+		"ETrackedDeviceProperty_Prop_HasDriverDirectModeComponent_Bool".enum("", "6005"),
+		"ETrackedDeviceProperty_Prop_HasVirtualDisplayComponent_Bool".enum("", "6006"),
 		"ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start".enum("PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others", "10000"),
 		"ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_End".enum("PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others", "10999")
 	)
@@ -550,6 +559,8 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"EVREventType_VREvent_ApplicationListUpdated".enum("", "1303"),
 		"EVREventType_VREvent_ApplicationMimeTypeLoad".enum("", "1304"),
 		"EVREventType_VREvent_ApplicationTransitionNewAppLaunchComplete".enum("", "1305"),
+		"EVREventType_VREvent_ProcessConnected".enum("", "1306"),
+		"EVREventType_VREvent_ProcessDisconnected".enum("", "1307"),
 		"EVREventType_VREvent_Compositor_MirrorWindowShown".enum("", "1400"),
 		"EVREventType_VREvent_Compositor_MirrorWindowHidden".enum("", "1401"),
 		"EVREventType_VREvent_Compositor_ChaperoneBoundsShown".enum("", "1410"),
@@ -571,10 +582,10 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		"{@code EDeviceActivityLevel}: Level of Hmd activity.",
 
 		"EDeviceActivityLevel_k_EDeviceActivityLevel_Unknown".enum("", "-1"),
-		"EDeviceActivityLevel_k_EDeviceActivityLevel_Idle".enum("", "0"),
-		"EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction".enum("", "1"),
-		"EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction_Timeout".enum("", "2"),
-		"EDeviceActivityLevel_k_EDeviceActivityLevel_Standby".enum("", "3")
+		"EDeviceActivityLevel_k_EDeviceActivityLevel_Idle".enum("No activity for the last 10 seconds.", "0"),
+		"EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction".enum("Activity (movement or prox sensor) is happening now.", "1"),
+		"EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction_Timeout".enum("No activity for the last 0.5 seconds.", "2"),
+		"EDeviceActivityLevel_k_EDeviceActivityLevel_Standby".enum("Idle for at least 5 seconds (configurable in Settings -> Power Management).", "3")
 	)
 
 	EnumConstant(
@@ -692,7 +703,8 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		),
 		"EVRApplicationType_VRApplication_VRMonitor".enum("Reserved for vrmonitor.", "5"),
 		"EVRApplicationType_VRApplication_SteamWatchdog".enum("Reserved for Steam", "6"),
-		"EVRApplicationType_VRApplication_Max".enum("", "7")
+		"EVRApplicationType_VRApplication_Bootstrapper".enum("Start up SteamVR", "7"),
+		"EVRApplicationType_VRApplication_Max".enum("", "8")
 	)
 
 	EnumConstant(
