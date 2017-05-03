@@ -780,6 +780,34 @@ StringConstant(
 
 	StringConstant(
 		"""
+		Sets the tessellation conic angle for IFC smoothing curves.
+
+		This is used by the IFC importer to determine the tessellation parameter for smoothing curves.
+
+		The default value is #AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE and the accepted values are in range [5.0, 120.0].
+
+		Property type: Float.
+		""",
+
+		"AI_CONFIG_IMPORT_IFC_SMOOTHING_ANGLE".."IMPORT_IFC_SMOOTHING_ANGLE"
+	).noPrefix()
+
+	StringConstant(
+		"""
+		Set the tessellation for IFC cylindrical shapes.
+
+		This is used by the IFC importer to determine the tessellation parameter for cylindrical shapes, i.e. the number of segments used to aproximate a circle.
+
+		The default value is #AI_IMPORT_IFC_DEFAULT_CYLINDRICAL_TESSELLATION and the accepted values are in range [3, 180].
+
+		Property type: Integer.
+		""",
+
+		"AI_CONFIG_IMPORT_IFC_CYLINDRICAL_TESSELLATION".."IMPORT_IFC_CYLINDRICAL_TESSELLATION"
+	).noPrefix()
+
+	StringConstant(
+		"""
 		Specifies whether the Collada loader will ignore the provided up direction.
 
 		If this property is set to true, the up direction provided in the file header will be ignored and the file will be loaded as is.
@@ -809,13 +837,15 @@ StringConstant(
 		"AI_SLM_DEFAULT_MAX_TRIANGLES"..1000000,
 		"AI_SLM_DEFAULT_MAX_VERTICES"..1000000,
 		"AI_LBW_MAX_WEIGHTS"..0x4,
-		"PP_ICL_PTCACHE_SIZE"..12
+		"PP_ICL_PTCACHE_SIZE"..12,
+		"AI_IMPORT_IFC_DEFAULT_CYLINDRICAL_TESSELLATION"..32
 	).noPrefix()
 
 	FloatConstant(
-		"Default value for #AI_CONFIG_PP_DB_THRESHOLD.",
+		"Default value for configuration properties.",
 
-		"AI_DEBONE_THRESHOLD"..1.0f
+		"AI_DEBONE_THRESHOLD"..1.0f,
+		"AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE"..10.0f
 	).noPrefix()
 
 	IntConstant(
