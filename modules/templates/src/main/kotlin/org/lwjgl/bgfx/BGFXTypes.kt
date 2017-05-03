@@ -102,8 +102,8 @@ val bgfx_hmd_t_p = struct(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mu
 	documentation = "HMD info."
 
 	bgfx_hmd_eye_t.array("eye", "", size = 2)
-	uint16_t.member("width", "framebuffer width")
-	uint16_t.member("height", "framebuffer height")
+	uint16_t.member("width", "frame buffer width")
+	uint16_t.member("height", "frame buffer height")
 	uint32_t.member("deviceWidth", "device resolution width")
 	uint32_t.member("deviceHeight", "device resolution height")
 	uint8_t.member("flags", "status flags")
