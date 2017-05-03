@@ -15,7 +15,7 @@ val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "
 
 		"PRODUCT_VERSION".."1",
 		"MAJOR_VERSION".."1",
-		"MINOR_VERSION".."10",
+		"MINOR_VERSION".."14",
 		"PATCH_VERSION".."0",
 		"BUILD_NUMBER".."0"
 	)

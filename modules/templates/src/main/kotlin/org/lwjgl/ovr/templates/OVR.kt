@@ -52,6 +52,11 @@ ENABLE_WARNINGS()""")
 			""",
 			0x00000004
 		),
+		"Init_Invisible".enum("This client will not be visible in the HMD. Typically set by diagnostic or debugging utilities.", 0x00000010),
+		"Init_MixedRendering".enum(
+			"This client will alternate between VR and 2D rendering. Typically set by game engine editors and VR-enabled web browsers.",
+			0x00000020
+		),
 		"Init_WritableBits".enum("These bits are writable by user code.", 0x00ffffff)
 	)
 
@@ -304,14 +309,20 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"Which controller is connected; multiple can be connected at once. ({@code ovrControllerType})",
 
-		"ControllerType_None".enum("", 0x00),
-		"ControllerType_LTouch".enum,
-		"ControllerType_RTouch".enum,
-		"ControllerType_Touch".enum,
-		"ControllerType_Remote".enum,
-		"ControllerType_XBox".enum("", 0x10),
+		"ControllerType_None".enum("", 0x0000),
+		"ControllerType_LTouch".enum("", 0x0001),
+		"ControllerType_RTouch".enum("", 0x0002),
+		"ControllerType_Touch".enum("", "(ovrControllerType_LTouch | ovrControllerType_RTouch)"),
+		"ControllerType_Remote".enum("", 0x0004),
 
-		"ControllerType_Active".enum("Operate on or query whichever controller is active.", 0xff)
+		"ControllerType_XBox".enum("", 0x0010),
+
+		"ControllerType_Object0".enum("", 0x0100),
+		"ControllerType_Object1".enum("", 0x0200),
+		"ControllerType_Object2".enum("", 0x0400),
+		"ControllerType_Object3".enum("", 0x0800),
+
+		"ControllerType_Active".enum("Operate on or query whichever controller is active.", 0xffffffff.i)
 	)
 
 	EnumConstant(
@@ -326,7 +337,13 @@ ENABLE_WARNINGS()""")
 		"TrackedDevice_HMD".enum("", 0x0001),
 		"TrackedDevice_LTouch".enum("", 0x0002),
 		"TrackedDevice_RTouch".enum("", 0x0004),
-		"TrackedDevice_Touch".enum("", 0x0006),
+		"TrackedDevice_Touch".enum("", "(ovrTrackedDevice_LTouch | ovrTrackedDevice_RTouch)"),
+
+		"TrackedDevice_Object0".enum("", 0x0010),
+		"TrackedDevice_Object1".enum("", 0x0020),
+		"TrackedDevice_Object2".enum("", 0x0040),
+		"TrackedDevice_Object3".enum("", 0x0080),
+
 		"TrackedDevice_All".enum("", 0xFFFF)
 	).javaDocLinks
 
@@ -549,7 +566,7 @@ ovr_IdentifyClient(
 
 		Check(1)..ovrSession_p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
 		ovrGraphicsLuid_p.OUT(
-			"luid",
+			"pLuid",
 			"""
 		    a system specific graphics adapter identifier that locates which graphics adapter has the HMD attached. This must match the adapter used by the
 		    application or no rendering output will be possible. This is important for stability on multi-adapter systems. An application that simply chooses
@@ -602,9 +619,12 @@ ovr_IdentifyClient(
 		"""
 		Re-centers the sensor position and orientation.
 
-		This resets the (x,y,z) positional components and the yaw orientation component. The Roll and pitch orientation components are always determined by
-		gravity and cannot be redefined. All future tracking will report values relative to this new reference position. If you are using ##OVRTrackerPose then
-		you will need to call #GetTrackerPose() after this, because the sensor position(s) will change as a result of this.
+		This resets the (x,y,z) positional components and the yaw orientation component of the tracking space for the HMD and controllers using the HMD's
+		current tracking pose. If the caller requires some tweaks on top of the HMD's current tracking pose, consider using #SpecifyTrackingOrigin() instead.
+
+		The roll and pitch orientation components are always determined by gravity and cannot be redefined. All future tracking will report values relative to
+		this new reference position. If you are using {@code ovrTrackerPoses} then you will need to call #GetTrackerPose() after this, because the sensor
+		position(s) will change as a result of this.
 
 		The headset cannot be facing vertically upward or downward but rather must be roughly level otherwise this function will fail with
 		#Error_InvalidHeadsetOrientation.
@@ -616,13 +636,45 @@ ovr_IdentifyClient(
 		session
 	)
 
+	ovrResult(
+		"SpecifyTrackingOrigin",
+		"""
+		Allows manually tweaking the sensor position and orientation.
+
+		This function is similar to #RecenterTrackingOrigin() in that it modifies the (x,y,z) positional components and the yaw orientation component of the
+		tracking space for the HMD and controllers.
+
+		While {@code ovr_RecenterTrackingOrigin} resets the tracking origin in reference to the HMD's current pose, {@code ovr_SpecifyTrackingOrigin} allows
+		the caller to explicitly specify a transform for the tracking origin. This transform is expected to be an offset to the most recent recentered origin,
+		so calling this function repeatedly with the same originPose will keep nudging the recentered origin in that direction.
+
+		There are several use cases for this function. For example, if the application decides to limit the yaw, or translation of the recentered pose instead
+		of directly using the HMD pose the application can query the current tracking state via #GetTrackingState(), and apply some limitations to the HMD pose
+		because feeding this pose back into this function. Similarly, this can be used to "adjust the seating position" incrementally in apps that feature
+		seated experiences such as cockpit-based games.
+
+		This function can emulate ovr_RecenterTrackingOrigin as such:
+		${codeBlock("""
+ovrTrackingState ts = ovr_GetTrackingState(session, 0.0, ovrFalse);
+ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
+
+		The roll and pitch orientation components are determined by gravity and cannot be redefined. If you are using {@code ovrTrackerPoses} then you will
+		need to call #GetTrackerPose() after this, because the sensor position(s) will change as a result of this.
+
+		For more info, see the notes on each {@code ovrTrackingOrigin} enumeration to understand how recenter will vary slightly in its behavior based on the
+		current {@code ovrTrackingOrigin} setting.
+		""",
+		session,
+		ovrPosef.IN("originPose", "specifies a pose that will be used to transform the current tracking origin")
+	)
+
 	void(
 		"ClearShouldRecenterFlag",
 		"""
-		Clears the ShouldRecenter status bit in ovrSessionStatus.
+		Clears the {@code ShouldRecenter} status bit in ##OVRSessionStatus.
 
 		Clears the {@code ShouldRecenter} status bit in ##OVRSessionStatus, allowing further recenter requests to be detected. Since this is automatically done
-		by #RecenterTrackingOrigin(), this is only needs to be called when application is doing its own re-centering.
+		by #RecenterTrackingOrigin() and #SpecifyTrackingOrigin(), this function only needs to be called when application is doing its own re-centering logic.
 		""",
 
 		session
@@ -1103,9 +1155,10 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 	    ${ul(
 			"#Success: rendering completed successfully.",
 			"""
-	        #Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently
-	        has ownership of the HMD. Applications receiving this result should stop rendering new content, but continue to call {@code ovr_SubmitFrame}
-	        periodically until it returns a value other than #Success_NotVisible.
+	        #Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently has ownership
+	        of the HMD. Applications receiving this result should stop rendering new content, but continue to call {@code ovr_SubmitFrame} periodically until
+	        it returns a value other than #Success_NotVisible. Applications should not loop on calls to {@code ovr_SubmitFrame} in order to detect visibility;
+	        instead #GetSessionStatus() should be used. Similarly, applications should not call {@code ovr_SubmitFrame} with zero layers to detect visibility.
 	        """,
 			"""
 	        #Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
@@ -1129,9 +1182,21 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 		"""
 		Retrieves performance stats for the VR app as well as the SDK compositor.
 
-		If the app calling this function is not the one in focus (i.e. not visible in the HMD), then {@code outStats} will be zero'd out. New stats are
-		populated after each successive call to #SubmitFrame(). So the app should call this function on the same thread it calls #SubmitFrame(), preferably
-		immediately afterwards.
+		This function will return stats for the VR app that is currently visible in the HMD regardless of what VR app is actually calling this function.
+
+		If the VR app is trying to make sure the stats returned belong to the same application,  the caller can compare the {@code VisibleProcessId} with their
+		own process ID. Normally this will be the case if the caller is only calling {@code ovr_GetPerfStats} when #GetSessionStatus() has {@code IsVisible}
+		flag set to be true.
+
+		If the VR app calling {@code ovr_GetPerfStats} is actually the one visible in the HMD, then new perf stats will only be populated after a new call to
+		#SubmitFrame(). That means subsequent calls to {@code ovr_GetPerfStats} after the first one without calling {@code ovr_SubmitFrame} will receive a
+		{@code FrameStatsCount} of zero.
+
+		If the VR app is not visible, or was initially marked as #Init_Invisible, then each call to {@code ovr_GetPerfStats} will immediately fetch new perf
+		stats from the compositor without a need for the {@code ovr_SubmitFrame} call.
+
+		Even though invisible VR apps do not require {@code ovr_SubmitFrame} to be called to gather new perf stats, since stats are generated at the native
+		refresh rate of the HMD (i.e. 90 Hz for CV1), calling it at a higher rate than that would be unnecessary.
 		""",
 
 		session,
@@ -1204,7 +1269,8 @@ ovr_SetInt(session, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"PerfHud_LatencyTiming".enum("Shows latency related timing info"),
 		"PerfHud_AppRenderTiming".enum("Shows render timing info for application"),
 		"PerfHud_CompRenderTiming".enum("Shows render timing info for OVR compositor"),
-		"PerfHud_VersionInfo".enum("Shows SDK & HMD version Info")
+		"PerfHud_AwsStats".enum("Shows Async Spacewarp-specific info", 6),
+		"PerfHud_VersionInfo".enum("Shows SDK & HMD version Info", 5)
 	)
 
 	EnumConstant(

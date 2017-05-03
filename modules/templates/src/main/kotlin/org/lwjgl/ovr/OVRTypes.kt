@@ -34,6 +34,8 @@ val ovrHmdType = "ovrHmdType".enumType
 val ovrEyeType = "ovrEyeType".enumType
 val ovrLayerType = "ovrLayerType".enumType
 
+val ovrProcessId = typedef(int32_t, "ovrProcessId")
+
 val ovrLogCallback = "ovrLogCallback".callback(
 	OVR_PACKAGE, void, "OVRLogCallback",
 	"The logging callback.",
@@ -77,7 +79,10 @@ val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "o
 	ovrBool.member("HmdMounted", "True if the HMD is on the user's head.")
 	ovrBool.member("DisplayLost", "True if the session is in a display-lost state. See #SubmitFrame().")
 	ovrBool.member("ShouldQuit", "True if the application should initiate shutdown.    ")
-	ovrBool.member("ShouldRecenter", "True if UX has requested re-centering. Must call #ClearShouldRecenterFlag() or #RecenterTrackingOrigin().")
+	ovrBool.member(
+		"ShouldRecenter",
+		"True if UX has requested re-centering. Must call #ClearShouldRecenterFlag(), #RecenterTrackingOrigin() or #SpecifyTrackingOrigin()."
+	)
 }.p
 
 val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
@@ -311,10 +316,10 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
 		"""
 		the pose of the origin captured during calibration.
 
-		Like all other poses here, this is expressed in the space set by #RecenterTrackingOrigin(), and so will change every time that is called. This pose can
-		be used to calculate where the calibrated origin lands in the new recentered space. If an application never calls #RecenterTrackingOrigin(), expect
-		this value to be the identity pose and as such will point respective origin based on {@code ovrTrackingOrigin} requested when calling
-		#GetTrackingState().
+		Like all other poses here, this is expressed in the space set by #RecenterTrackingOrigin(), or #SpecifyTrackingOrigin() and so will change every time
+		either of those functions are called. This pose can be used to calculate where the calibrated origin lands in the new recentered space. If an
+		application never calls #RecenterTrackingOrigin() or #SpecifyTrackingOrigin(), expect this value to be the identity pose and as such will point
+		respective origin based on {@code ovrTrackingOrigin} requested when calling #GetTrackingState().
 		""")
 }
 
@@ -495,6 +500,24 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone or filter.",
 		size = "ovrHand_Count"
 	)
+
+    float.array(
+	    "IndexTriggerRaw",
+	    "Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. No deadzone or filter.",
+	    size = "ovrHand_Count"
+    )
+
+	float.array(
+		"HandTriggerRaw",
+		"Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. No deadzone or filter.",
+		size = "ovrHand_Count"
+	)
+
+    ovrVector2f.array(
+	    "ThumbstickRaw",
+	    "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. No deadzone or filter.",
+	    size = "ovrHand_Count"
+    )
 }.p
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
@@ -581,10 +604,10 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
 val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerCompositorFrame", nativeName = "ovrPerfStatsPerCompositorFrame", mutable = false) {
 	documentation =
 		"""
-	Contains the performance stats for a given SDK compositor frame.
+		Contains the performance stats for a given SDK compositor frame.
 
-	All of the int fields can be reset via the #ResetPerfStats() call.
-	"""
+		All of the int fields can be reset via the #ResetPerfStats() call.
+		"""
 
 	int.member(
 		"HmdVsyncIndex",
@@ -653,7 +676,7 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
 		"""
 		increments each time the SDK compositor fails to complete in time.
 
-		This is not tied to the app's performance, but failure to complete can be tied to other factors such as OS capabilities, overall available hardware
+		This is not tied to the app's performance, but failure to complete can be related to other factors such as OS capabilities, overall available hardware
 		cycles to execute the compositor in time and other factors outside of the app's control.
 		"""
 	)
@@ -698,42 +721,82 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
 		In the event the GPU time is not available, expect this value to be -1.0f.
 		"""
 	)
+
+    ///
+    /// Async Spacewarp stats (ASW)
+    ///
+
+    ovrBool.member(
+	    "AswIsActive",
+	    """
+	    Will be true if ASW is active for the given frame such that the application is being forced into  half the frame-rate while the compositor continues to
+	    run at full frame-rate.
+		"""
+    )
+    int.member("AswActivatedToggleCount", "Increments each time ASW it activated where the app was forced in and out of half-rate rendering.")
+    int.member("AswPresentedFrameCount", "Accumulates the number of frames presented by the compositor which had extrapolated ASW frames presented")
+    int.member("AswFailedFrameCount", "Accumulates the number of frames that the compositor tried to present when ASW is active but failed")
 }
 
 val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
 	javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
 
-	documentation =
+	documentation = "This is a complete descriptor of the performance stats provided by the SDK."
+
+	ovrPerfStatsPerCompositorFrame.array(
+		"FrameStats",
 		"""
-	This is a complete descriptor of the performance stats provided by the SDK.
+		an array of performance stats.
 
-	{@code FrameStatsCount} will have a maximum value set by #MaxProvidedFrameStats.
+		The performance entries will be ordered in reverse chronological order such that the first entry will be the most recent one.
+		""",
+		size = "ovrMaxProvidedFrameStats"
+	)
+	AutoSize("FrameStats")..int.member(
+		"FrameStatsCount",
+		"""
+		will have a maximum value set by #MaxProvidedFrameStats.
 
-	If the application calls #GetPerfStats() at the native refresh rate of the HMD then {@code FrameStatsCount} will be 1. If the app's workload happens to
-	force #GetPerfStats() to be called at a lower rate, then {@code FrameStatsCount} will be 2 or more.
+		If the application calls #GetPerfStats() at the native refresh rate of the HMD then {@code FrameStatsCount} will be 1. If the app's workload happens to
+		force #GetPerfStats() to be called at a lower rate, then {@code FrameStatsCount} will be 2 or more.
 
-	If the app does not want to miss any performance data for any frame, it needs to ensure that it is calling #SubmitFrame() and #GetPerfStats() at a rate
-	that is at least: {@code HMD_refresh_rate / ovrMaxProvidedFrameStats}. On the Oculus Rift CV1 HMD, this will be equal to 18 times per second.
+		If the app does not want to miss any performance data for any frame, it needs to ensure that it is calling #SubmitFrame() and #GetPerfStats() at a rate
+		that is at least: {@code HMD_refresh_rate / ovrMaxProvidedFrameStats}. On the Oculus Rift CV1 HMD, this will be equal to 18 times per second.
+		"""
+	)
+	ovrBool.member(
+		"AnyFrameStatsDropped",
+		"""
+		If the app calls #SubmitFrame() at a rate less than 18 fps, then when calling #GetPerfStats(), expect {@code AnyFrameStatsDropped} to become #True
+		while {@code FrameStatsCount} is equal to #MaxProvidedFrameStats.
+		"""
+	)
+	float.member(
+		"AdaptiveGpuPerformanceScale",
+		"""
+		an edge-filtered value that a caller can use to adjust the graphics quality of the application to keep the GPU utilization in check. The value is
+		calculated as: {@code (desired_GPU_utilization / current_GPU_utilization)}
 
-	If the app calls #SubmitFrame() at a rate less than 18 fps, then when calling #GetPerfStats(), expect {@code AnyFrameStatsDropped} to become #True while
-	{@code FrameStatsCount} is equal to #MaxProvidedFrameStats.
-
-	The performance entries will be ordered in reverse chronological order such that the first entry will be the most recent one.
-
-	{@code AdaptiveGpuPerformanceScale} is an edge-filtered value that a caller can use to adjust the graphics quality of the application to keep the GPU
-	utilization in check. The value is calculated as: {@code (desired_GPU_utilization / current_GPU_utilization)}
-
-	As such, when this value is 1.0, the GPU is doing the right amount of work for the app. Lower values mean the app needs to pull back on the GPU
-	utilization. If the app is going to directly drive render-target resolution using this value, then be sure to take the square-root of the value before
-	scaling the resolution with it. Changing render target resolutions however is one of the many things an app can do increase or decrease the amount of GPU
-	utilization. Since {@code AdaptiveGpuPerformanceScale} is edge-filtered and does not change rapidly (i.e. reports non-1.0 values once every couple of
-	seconds) the app can make the necessary adjustments and then keep watching the value to see if it has been satisfied.
-	"""
-
-	ovrPerfStatsPerCompositorFrame.array("FrameStats", "an array of performance stats", size = "ovrMaxProvidedFrameStats")
-	AutoSize("FrameStats")..int.member("FrameStatsCount", "the number of performance stats available in {@code FrameStats}")
-	ovrBool.member("AnyFrameStatsDropped", "if performance stats have been dropped")
-	float.member("AdaptiveGpuPerformanceScale", "the GPU performance scale")
+		As such, when this value is 1.0, the GPU is doing the right amount of work for the app. Lower values mean the app needs to pull back on the GPU
+		utilization. If the app is going to directly drive render-target resolution using this value, then be sure to take the square-root of the value before
+		scaling the resolution with it. Changing render target resolutions however is one of the many things an app can do increase or decrease the amount of
+		GPU utilization. Since {@code AdaptiveGpuPerformanceScale} is edge-filtered and does not change rapidly (i.e. reports non-1.0 values once every couple
+		of seconds) the app can make the necessary adjustments and then keep watching the value to see if it has been satisfied.
+		"""
+	)
+	ovrBool.member(
+		"AswIsAvailable",
+		"""
+		Will be true if Async Spacewarp (ASW) is available for this system which is dependent on several factors such as choice of GPU, OS and debug overrides.
+		"""
+	)
+	ovrProcessId.member(
+		"VisibleProcessId",
+		"""
+		Contains the Process ID of the VR application the stats are being polled for. If an app continues to grab perf stats even when it is not visible, then
+		expect this value to point to the other VR app that has grabbed focus (i.e. became visible).
+		"""
+	)
 }.p
 
 // OVR_CAPI_Util.h
