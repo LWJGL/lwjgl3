@@ -2017,9 +2017,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	const..charUTF8_p(
 		"GetKeyName",
 		"""
-		Returns the localized name of the specified printable key.
+		Returns the layout-specific name of the specified printable key.
 
-		This function returns the name of the specified printable key. This is typically the character that key would produce without any modifier keys, intended for displaying key bindings to the user.
+		This function returns the name of the specified printable key, encoded as UTF-8. This is typically the character that key would produce without any
+		modifier keys, intended for displaying key bindings to the user. For dead keys, it is typically the diacritic it would add to a character.
 
 		<b>Do not use this function</b> for text input. You will break text input for many languages even if it happens to work for yours.
 
@@ -2064,7 +2065,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("key", "the key to query, or #KEY_UNKNOWN"),
 		int.IN("scancode", "the scancode of the key to query"),
 
-		returnDoc = "the localized name of the key, or #NULL",
+		returnDoc = "the UTF-8 encoded, layout-specific name of the key, or #NULL",
 		since = "version 3.2"
 	)
 
