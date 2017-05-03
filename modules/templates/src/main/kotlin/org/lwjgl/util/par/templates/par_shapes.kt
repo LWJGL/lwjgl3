@@ -151,7 +151,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 	)
 
 	par_shapes_mesh_p(
-		"create_octohedron",
+		"create_octahedron",
 		"Generates points for an 8-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated."
 	)
 

@@ -101,7 +101,7 @@ par_shapes_mesh* par_shapes_create_icosahedron();
 par_shapes_mesh* par_shapes_create_dodecahedron();
 
 // More platonic solids.
-par_shapes_mesh* par_shapes_create_octohedron();
+par_shapes_mesh* par_shapes_create_octahedron();
 par_shapes_mesh* par_shapes_create_tetrahedron();
 par_shapes_mesh* par_shapes_create_cube();
 
@@ -906,7 +906,7 @@ par_shapes_mesh* par_shapes_create_dodecahedron()
     return mesh;
 }
 
-par_shapes_mesh* par_shapes_create_octohedron()
+par_shapes_mesh* par_shapes_create_octahedron()
 {
     static float verts[6 * 3] = {
         0.000, 0.000, 1.000,
@@ -1706,9 +1706,9 @@ par_shapes_mesh* par_shapes_weld(par_shapes_mesh const* mesh, float epsilon,
     float maxcell = gridsize - 1;
     par_shapes_compute_aabb(clone, aabb);
     float scale[3] = {
-        aabb[3] == aabb[0] ? 1.0 : maxcell / (aabb[3] - aabb[0]),
-        aabb[4] == aabb[1] ? 1.0 : maxcell / (aabb[4] - aabb[1]),
-        aabb[5] == aabb[2] ? 1.0 : maxcell / (aabb[5] - aabb[2]),
+        aabb[3] == aabb[0] ? 1.0f : maxcell / (aabb[3] - aabb[0]),
+        aabb[4] == aabb[1] ? 1.0f : maxcell / (aabb[4] - aabb[1]),
+        aabb[5] == aabb[2] ? 1.0f : maxcell / (aabb[5] - aabb[2]),
     };
     par_shapes_translate(clone, -aabb[0], -aabb[1], -aabb[2]);
     par_shapes_scale(clone, scale[0], scale[1], scale[2]);
