@@ -18,7 +18,7 @@ object const : FunctionModifier, ParameterModifier {
 		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The const modifier can only be applied on pointer parameters.")
 
-		if (param.paramType != ParameterType.IN)
+		if (param.paramType != ParameterType.IN && param.nativeType.elementType !is PointerType)
 			throw IllegalArgumentException("The const modifier can only be applied on input parameters.")
 	}
 }
