@@ -122,9 +122,7 @@ div {
 	EnumConstant(
 		"YGExperimentalFeature",
 
-		"ExperimentalFeatureRounding".enum,
-		"ExperimentalFeatureWebFlexBasis".enum,
-		"ExperimentalFeatureMinFlexFix".enum
+		"ExperimentalFeatureWebFlexBasis".enum
 	)
 
 	EnumConstant(
@@ -592,11 +590,36 @@ div {
 	)
 
 	void(
+		"ConfigCopy",
+		"",
+
+		const..YGConfigRef.IN("dest", ""),
+		const..YGConfigRef.IN("src", "")
+	)
+
+	int32_t(
+		"ConfigGetInstanceCount",
+		""
+	)
+
+	void(
 		"ConfigSetPointScaleFactor",
 		"Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
 
 		const..YGConfigRef.IN("config", ""),
 		float.IN("pixelsInPoint", "")
+	)
+
+	void(
+		"ConfigSetUseLegacyStretchBehaviour",
+		"""
+		Yoga previously had an error where containers would take the maximum space possible instead of the minimum like they are supposed to. In practice this
+		resulted in implicit behaviour similar to align-self: stretch; Because this was such a long-standing bug we must allow legacy users to switch back to
+		this behaviour.
+		""",
+
+		const..YGConfigRef.IN("config", ""),
+		bool.IN("useLegacyStretchBehaviour", "")
 	)
 
 	void(
@@ -640,4 +663,32 @@ div {
 		YGRealloc.IN("ygrealloc", ""),
 		YGFree.IN("ygfree", "")
 	)
+
+	// Enums
+
+	fun YG_TYPE_TO_STRING(type: IntegerType) {
+		val name = type.name.substring(2)
+		const..charASCII_p(
+			"${name}ToString",
+			"",
+
+			type.IN("value", "", "$name\\w+")
+		)
+	}
+
+	YG_TYPE_TO_STRING(YGAlign)
+	YG_TYPE_TO_STRING(YGDimension)
+	YG_TYPE_TO_STRING(YGDirection)
+	YG_TYPE_TO_STRING(YGDisplay)
+	YG_TYPE_TO_STRING(YGEdge)
+	YG_TYPE_TO_STRING(YGExperimentalFeature)
+	YG_TYPE_TO_STRING(YGFlexDirection)
+	YG_TYPE_TO_STRING(YGJustify)
+	YG_TYPE_TO_STRING(YGLogLevel)
+	YG_TYPE_TO_STRING(YGMeasureMode)
+	YG_TYPE_TO_STRING(YGOverflow)
+	YG_TYPE_TO_STRING(YGPositionType)
+	YG_TYPE_TO_STRING(YGPrintOptions)
+	YG_TYPE_TO_STRING(YGUnit)
+	YG_TYPE_TO_STRING(YGWrap)
 }

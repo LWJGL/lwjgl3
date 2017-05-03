@@ -222,6 +222,9 @@ class YogaNode {
 	static final class YogaConstants {
 		static final float UNDEFINED = YGUndefined;
 
+		private YogaConstants() {
+		}
+
 		static boolean isUndefined(YGValue value) {
 			return isUndefined(value.value());
 		}
@@ -233,6 +236,9 @@ class YogaNode {
 
 	static final class YogaUnit {
 		static final int UNDEFINED = YGUnitUndefined;
+
+		private YogaUnit() {
+		}
 	}
 
 	enum YogaAlign {
@@ -294,9 +300,7 @@ class YogaNode {
 	}
 
 	enum YogaExperimentalFeature {
-		ROUNDING(YGExperimentalFeatureRounding),
-		WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis),
-		MIN_FLEX_FIX(YGExperimentalFeatureMinFlexFix);
+		WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis);
 
 		final int value;
 

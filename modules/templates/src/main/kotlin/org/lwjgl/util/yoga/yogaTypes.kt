@@ -50,6 +50,7 @@ val YGNodeRef = "YGNodeRef".opaque_p
 val YGConfigRef = "YGConfigRef".opaque_p
 
 val YGAlign = "YGAlign".enumType
+val YGDimension = "YGDimension".enumType
 val YGDirection = "YGDirection".enumType
 val YGDisplay = "YGDisplay".enumType
 val YGEdge = "YGEdge".enumType

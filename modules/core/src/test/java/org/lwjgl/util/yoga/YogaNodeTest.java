@@ -87,8 +87,8 @@ public class YogaNodeTest {
 		try ( YGMeasureFunc measureFunc = getTestMeasureFunc(200.5f, 100.5f) ) {
 			YGNodeSetMeasureFunc(node.node, measureFunc);
 			node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-			assertEquals(200.5f, node.getLayoutWidth(), 0.0f);
-			assertEquals(100.5f, node.getLayoutHeight(), 0.0f);
+			assertEquals(201.0f, node.getLayoutWidth(), 0.01f);
+			assertEquals(101.0f, node.getLayoutHeight(), 0.01f);
 		}
 	}
 
@@ -98,8 +98,8 @@ public class YogaNodeTest {
 		try ( YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MIN_VALUE, Float.MIN_VALUE) ) {
 			YGNodeSetMeasureFunc(node.node, measureFunc);
 			node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-			assertEquals(Float.MIN_VALUE, node.getLayoutWidth(), 0.0f);
-			assertEquals(Float.MIN_VALUE, node.getLayoutHeight(), 0.0f);
+			assertEquals(Float.MIN_VALUE, node.getLayoutWidth(), 0.01f);
+			assertEquals(Float.MIN_VALUE, node.getLayoutHeight(), 0.01f);
 		}
 	}
 
