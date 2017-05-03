@@ -478,6 +478,12 @@ namespace miniz {
 #pragma clang diagnostic ignored "-Wsign-conversion"
 #pragma clang diagnostic ignored "-Wc++11-extensions"
 #pragma clang diagnostic ignored "-Wconversion"
+#ifdef __APPLE__
+#if __clang_major__ >= 8 && __clang__minor__ > 1
+#pragma clang diagnostic ignored "-Wcomma"
+#endif
+#endif
+#pragma clang diagnostic ignored "-Wunused-function"
 #endif
 
 /* miniz.c v1.15 - public domain deflate/inflate, zlib-subset, ZIP
@@ -11237,10 +11243,11 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
     } else if ((exr_header->compression_type == TINYEXR_COMPRESSIONTYPE_ZIPS) ||
                (exr_header->compression_type == TINYEXR_COMPRESSIONTYPE_ZIP)) {
 #if TINYEXR_USE_MINIZ
-      std::vector<unsigned char> block(
-          tinyexr::miniz::mz_compressBound(static_cast<unsigned long>(buf.size())));
+      std::vector<unsigned char> block(tinyexr::miniz::mz_compressBound(
+          static_cast<unsigned long>(buf.size())));
 #else
-      std::vector<unsigned char> block(compressBound(static_cast<uLong>(buf.size())));
+      std::vector<unsigned char> block(
+          compressBound(static_cast<uLong>(buf.size())));
 #endif
       tinyexr::tinyexr_uint64 outSize = block.size();
 
@@ -11685,7 +11692,8 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
 
     // decode pixel offset table.
     {
-      unsigned long dstLen = static_cast<unsigned long>(pixelOffsetTable.size() * sizeof(int));
+      unsigned long dstLen =
+          static_cast<unsigned long>(pixelOffsetTable.size() * sizeof(int));
       tinyexr::DecompressZip(
           reinterpret_cast<unsigned char *>(&pixelOffsetTable.at(0)), &dstLen,
           data_ptr + 28, static_cast<unsigned long>(packedOffsetTableSize));
@@ -12383,4 +12391,3 @@ int SaveEXR(const float *data, int width, int height, int components,
 
 #endif  // TINYEXR_IMPLEMENTATION_DEIFNED
 #endif  // TINYEXR_IMPLEMENTATION
-
