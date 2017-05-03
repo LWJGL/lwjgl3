@@ -363,6 +363,16 @@ nk_style_pop_vec2(ctx);""")}
 		"ANTI_ALIASING_ON".enum
 	).javaDocLinks
 
+	EnumConstant(
+		"nk_convert_result",
+
+		"CONVERT_SUCCESS".enum("", 0),
+        "CONVERT_INVALID_PARAM".enum("", 1),
+        "CONVERT_COMMAND_BUFFER_FULL".enum("", 1.NK_FLAG),
+		"CONVERT_VERTEX_BUFFER_FULL".enum("", 2.NK_FLAG),
+		"CONVERT_ELEMENT_BUFFER_FULL".enum("", 3.NK_FLAG)
+	)
+
 	val SymbolTypes = EnumConstant(
 		"nk_symbol_type",
 
@@ -532,8 +542,8 @@ nk_style_pop_vec2(ctx);""")}
 		"EDIT_CTRL_ENTER_NEWLINE".enum("", 7.NK_FLAG),
 		"EDIT_NO_HORIZONTAL_SCROLL".enum("", 8.NK_FLAG),
 		"EDIT_ALWAYS_INSERT_MODE".enum("", 9.NK_FLAG),
-		"EDIT_MULTILINE".enum("", 11.NK_FLAG),
-		"EDIT_GOTO_END_ON_ACTIVATE".enum("", 12.NK_FLAG)
+		"EDIT_MULTILINE".enum("", 10.NK_FLAG),
+		"EDIT_GOTO_END_ON_ACTIVATE".enum("", 11.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -567,7 +577,8 @@ nk_style_pop_vec2(ctx);""")}
 		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 6.NK_FLAG),
 		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction: also requires delta time in {@code nk_context} to be set each frame", 7.NK_FLAG),
 		"WINDOW_BACKGROUND".enum("Always keep window in the background", 8.NK_FLAG),
-		"WINDOW_SCALE_LEFT".enum("Puts window scaler in the left-bottom corner instead right-bottom", 9.NK_FLAG)
+		"WINDOW_SCALE_LEFT".enum("Puts window scaler in the left-bottom corner instead right-bottom", 9.NK_FLAG),
+		"WINDOW_NO_INPUT".enum("Prevents window of scaling, moving or getting focus", 10.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -735,13 +746,13 @@ nk_style_pop_vec2(ctx);""")}
 	val WindowFlags = EnumConstant(
 		"nk_window_flags",
 
-		"WINDOW_PRIVATE".enum("", 10.NK_FLAG),
+		"WINDOW_PRIVATE".enum("", 11.NK_FLAG),
 		"WINDOW_DYNAMIC".enum("special window type growing up in height while being filled to a certain maximum height", "NK_WINDOW_PRIVATE"),
-		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 11.NK_FLAG),
-		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 12.NK_FLAG),
-		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 13.NK_FLAG),
-		"WINDOW_MINIMIZED".enum("marks the window as minimized", 14.NK_FLAG),
-		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 15.NK_FLAG)
+		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 12.NK_FLAG),
+		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 13.NK_FLAG),
+		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 14.NK_FLAG),
+		"WINDOW_MINIMIZED".enum("marks the window as minimized", 15.NK_FLAG),
+		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 16.NK_FLAG)
 	).javaDocLinks
 
 	val ctx = nk_context_p.IN("ctx", "the nuklear context")
@@ -750,47 +761,79 @@ nk_style_pop_vec2(ctx);""")}
 	{
 		intb(
 			"init_fixed",
-			"",
+			"""
+			Initializes context from single fixed size memory block.
+
+			Should be used if you want complete control over nuklears memory management. Especially recommended for system with little memory or systems with
+			virtual memory. For the later case you can just allocate for example 16MB of virtual memory and only the required amount of memory will actually be
+			commited.
+
+			IMPORTANT: make sure the passed memory block is aligned correctly for ##NkDrawCommand.
+			""",
 
 			ctx,
-			void_p.IN("memory", ""),
-			AutoSize("memory")..nk_size.IN("size", ""),
-			nullable..const..nk_user_font_p.IN("font", "")
+			void_p.IN("memory", "must point to a previously allocated memory block"),
+			AutoSize("memory")..nk_size.IN("size", "must contain the total size of {@code memory}"),
+			nullable..const..nk_user_font_p.IN("font", "must point to a previously initialized font handle")
 		)
 
 		intb(
 			"init",
-			"",
+			"""
+			Initializes context with memory allocator callbacks for alloc and free.
+
+			Used internally for {@code nk_init_default} and provides a kitchen sink allocation interface to nuklear. Can be useful for cases like monitoring
+			memory consumption.
+			""",
 
 			ctx,
-			nk_allocator_p.IN("allocator", ""),
-			nullable..const..nk_user_font_p.IN("font", "")
+			nk_allocator_p.IN("allocator", "must point to a previously allocated memory allocator"),
+			nullable..const..nk_user_font_p.IN("font", "must point to a previously initialized font handle")
 		)
 
 		intb(
 			"init_custom",
-			"",
+			"Initializes context from two buffers. One for draw commands the other for window/panel/table allocations.",
 
 			ctx,
-			nk_buffer_p.IN("cmds", ""),
-			nk_buffer_p.IN("pool", ""),
-			nullable..const..nk_user_font_p.IN("font", "")
+			nk_buffer_p.IN("cmds", "must point to a previously initialized memory buffer either fixed or dynamic to store draw commands into"),
+			nk_buffer_p.IN("pool", "must point to a previously initialized memory buffer either fixed or dynamic to store windows, panels and tables"),
+			nullable..const..nk_user_font_p.IN("font", "must point to a previously initialized font handle")
 		)
 
-		void("clear", "", ctx)
-		void("free", "", ctx)
+		void(
+			"clear",
+			"""
+			Called at the end of the frame to reset and prepare the context for the next frame.
+
+			Resets the context state at the end of the frame. This includes mostly garbage collector tasks like removing windows or table not called and
+			therefore used anymore.
+			""",
+
+			ctx
+		)
+		void(
+			"free",
+			"""
+			Shutdown and free all memory allocated inside the context.
+
+			Frees all memory allocated by nuklear. Not needed if context was initialized with #init_fixed().
+			""",
+			
+			ctx
+		)
 
 		void(
 			"set_user_data",
-			"",
+			"Utility function to pass user data to draw command.",
 
 			ctx,
-			nk_handle.IN("handle", "")
+			nk_handle.IN("handle", "handle with either pointer or index to be passed into every draw commands")
 		)
 
 		intb(
 			"begin",
-			"",
+			"Starts a new window; needs to be called every frame for every window (unless hidden) or otherwise the window gets removed.",
 
 			ctx,
 			const..charUTF8_p.IN("title", ""),
@@ -800,7 +843,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		intb(
 			"begin_titled",
-			"",
+			"Extended window start with seperated title and identifier to allow multiple windows with same name but not title.",
 
 			ctx,
 			const..charUTF8_p.IN("name", ""),
@@ -809,37 +852,42 @@ nk_style_pop_vec2(ctx);""")}
 			nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
 		)
 
-		void("end", "", ctx)
+		void(
+			"end",
+			"Needs to be called at the end of the window building process to process scaling, scrollbars and general cleanup.",
+			
+			ctx
+		)
 
 		nk_window_p(
 			"window_find",
-			"",
+			"Finds and returns the window with give name.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
 		)
 
-		nk_rect("window_get_bounds", "", cctx)
-		nk_vec2("window_get_position", "", cctx)
-		nk_vec2("window_get_size", "", cctx)
+		nk_rect("window_get_bounds", "Returns a rectangle with screen position and size of the currently processed window.", cctx)
+		nk_vec2("window_get_position", "Returns the position of the currently processed window.", cctx)
+		nk_vec2("window_get_size", "Returns the size with width and height of the currently processed window.", cctx)
 
-		float("window_get_width", "", cctx)
-		float("window_get_height", "", cctx)
+		float("window_get_width", "Returns the width of the currently processed window.", cctx)
+		float("window_get_height", "Returns the height of the currently processed window.", cctx)
 
-		nk_panel_p("window_get_panel", "", ctx)
+		nk_panel_p("window_get_panel", "Returns the underlying panel which contains all processing state of the currnet window.", ctx)
 
-		nk_rect("window_get_content_region", "", ctx)
-		nk_vec2("window_get_content_region_min", "", ctx)
-		nk_vec2("window_get_content_region_max", "", ctx)
-		nk_vec2("window_get_content_region_size", "", ctx)
+		nk_rect("window_get_content_region", "Returns the position and size of the currently visible and non-clipped space inside the currently processed window.", ctx)
+		nk_vec2("window_get_content_region_min", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
+		nk_vec2("window_get_content_region_max", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
+		nk_vec2("window_get_content_region_size", "Returns the size of the currently visible and non-clipped space inside the currently processed window.", ctx)
 
-		nk_command_buffer_p("window_get_canvas", "", ctx)
+		nk_command_buffer_p("window_get_canvas", "Returns the draw command buffer. Can be used to draw custom widgets.", ctx)
 
-		intb("window_has_focus", "", cctx)
+		intb("window_has_focus", "Returns if the currently processed window is currently active.", cctx)
 
 		intb(
 			"window_is_collapsed",
-			"",
+			"Returns if the window with given name is currently minimized/collapsed.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
@@ -847,7 +895,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		intb(
 			"window_is_closed",
-			"",
+			"Returns if the currently processed window was closed.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
@@ -855,7 +903,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		intb(
 			"window_is_hidden",
-			"",
+			"Returns if the currently processed window was hidden.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
@@ -863,21 +911,21 @@ nk_style_pop_vec2(ctx);""")}
 
 		intb(
 			"window_is_active",
-			"",
+			"Same as #window_has_focus() for some reason.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
 		)
 
-		intb("window_is_hovered", "", ctx)
+		intb("window_is_hovered", "Returns if the currently processed window is currently being hovered by mouse.", ctx)
 
-		intb("window_is_any_hovered", "", ctx)
+		intb("window_is_any_hovered", "Return if any window currently hovered.", ctx)
 
-		intb("item_is_any_active", "", ctx)
+		intb("item_is_any_active", "Returns if any window or widgets is currently hovered or active.", ctx)
 
 		void(
 			"window_set_bounds",
-			"",
+			"Updates position and size of the currently processed window.",
 
 			ctx,
 			nk_rect.IN("bounds", "")
@@ -885,7 +933,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"window_set_position",
-			"",
+			"Updates position of the currently process window.",
 
 			ctx,
 			nk_vec2.IN("position", "")
@@ -893,7 +941,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"window_set_size",
-			"",
+			"Updates the size of the currently processed window.",
 
 			ctx,
 			nk_vec2.IN("size", "")
@@ -901,7 +949,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"window_set_focus",
-			"",
+			"Set the currently processed window as active window.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
@@ -909,7 +957,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"window_close",
-			"",
+			"Closes the window with given window name which deletes the window at the end of the frame.",
 
 			ctx,
 			const..charUTF8_p.IN("name", "")
@@ -917,7 +965,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"window_collapse",
-			"",
+			"Collapses the window with given window name.",
 
 			ctx,
 			const..charUTF8_p.IN("name", ""),
@@ -925,12 +973,32 @@ nk_style_pop_vec2(ctx);""")}
 		)
 
 		void(
+			"window_collapse_if",
+			"Collapses the window with given window name if the given condition was met.",
+
+			ctx,
+			const..charUTF8_p.IN("name", ""),
+			nk_collapse_states.IN("c", "", CollapseStates),
+			intb.IN("cond", "")
+		)
+
+		void(
 			"window_show",
-			"",
+			"Hides a visible or reshows a hidden window.",
 
 			ctx,
 			const..charUTF8_p.IN("name", ""),
 			nk_show_states.IN("s", "", ShowStates)
+		)
+
+		void(
+			"window_show_if",
+			"Hides/shows a window depending on condition.",
+
+			ctx,
+			const..charUTF8_p.IN("name", ""),
+			nk_show_states.IN("s", "", ShowStates),
+			intb.IN("cond", "")
 		)
 
 		void(
@@ -2462,9 +2530,9 @@ nk_style_pop_vec2(ctx);""")}
 	}();
 
 	{
-		void(
+		nk_flags(
 			"convert",
-			"",
+			"Converts from the abstract draw commands list into a hardware accessable vertex format.",
 
 			ctx,
 			nk_buffer_p.IN("cmds", ""),
@@ -2473,11 +2541,16 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_convert_config.p.IN("config", "")
 		)
 
-		void("input_begin", "", ctx)
+		void(
+			"input_begin",
+			"Begins the input mirroring process. Needs to be called before all other {@code nk_input_xxx} calls",
+
+			ctx
+		)
 
 		void(
 			"input_motion",
-			"",
+			"Mirrors mouse cursor position.",
 
 			ctx,
 			int.IN("x", ""),
@@ -2486,7 +2559,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"input_key",
-			"",
+			"Mirrors key state with either pressed or released.",
 
 			ctx,
 			nk_keys.IN("key", "", Keys),
@@ -2495,7 +2568,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"input_button",
-			"",
+			"Mirrors mouse button state with either pressed or released.",
 
 			ctx,
 			nk_buttons.IN("id", "", Buttons),
@@ -2506,15 +2579,23 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"input_scroll",
-			"",
+			"Mirrors mouse scroll values.",
 
 			ctx,
-			float.IN("y", "")
+			nk_vec2.IN("val", "")
 		)
 
 		void(
+			"input_char",
+			"Adds a single ASCII text character into an internal text buffer.",
+
+			ctx,
+			char.IN("c", "")
+		);
+
+		void(
 			"input_glyph",
-			"",
+			"Adds a single multi-byte UTF-8 character into an internal text buffer.",
 
 			ctx,
 			Check(NK_UTF_SIZE)..nk_glyph.IN("glyph", "")
@@ -2522,13 +2603,18 @@ nk_style_pop_vec2(ctx);""")}
 
 		void(
 			"input_unicode",
-			"",
+			"Adds a single unicode rune into an internal text buffer.",
 
 			ctx,
 			nk_rune.IN("unicode", "")
 		)
 
-		void("input_end", "", ctx)
+		void(
+			"input_end",
+			"Ends the input mirroring process by calculating state changes. Don't call any {@code nk_input_xxx} function referenced above after this call.",
+			
+			ctx
+		)
 
 		void("style_default", "", ctx)
 
@@ -3263,7 +3349,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			const..charUTF8_p.IN("str", ""),
-			Check(1)..charUTF8_pp.OUT("endptr", "")
+			Check(1)..const..charUTF8_pp.OUT("endptr", "")
 		)
 
 		float(
@@ -3271,7 +3357,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			const..charUTF8_p.IN("str", ""),
-			Check(1)..charUTF8_pp.OUT("endptr", "")
+			Check(1)..const..charUTF8_pp.OUT("endptr", "")
 		)
 
 		double(
@@ -3279,7 +3365,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			const..charUTF8_p.IN("str", ""),
-			Check(1)..charUTF8_pp.OUT("endptr", "")
+			Check(1)..const..charUTF8_pp.OUT("endptr", "")
 		)
 
 		intb(
@@ -3301,8 +3387,8 @@ nk_style_pop_vec2(ctx);""")}
 		intb(
 			"strmatch_fuzzy_string",
 			"""
-			Returns true if each character in {@code pattern} is found sequentially within {@code str} if found then {@code out_score} is also set. Score value has no
-			intrinsic meaning. Range varies with {@code pattern}. Can only compare scores with same search pattern.
+			Returns true if each character in {@code pattern} is found sequentially within {@code str} if found then {@code out_score} is also set. Score value
+			has no intrinsic meaning. Range varies with {@code pattern}. Can only compare scores with same search pattern.
 
 			""",
 
@@ -4070,7 +4156,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		const..nk_command.p(
 			"_next",
-			"",
+			"Increments the draw command iterator to the next command inside the context draw command list.",
 
 			ctx,
 			const..nk_command.p.IN("cmd", "")
@@ -4078,7 +4164,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		const..nk_command.p(
 			"_begin",
-			"",
+			"Returns the first draw command in the context draw command list to be drawn.",
 
 			ctx
 		)
@@ -4256,7 +4342,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		const..nk_draw_command_p(
 			"_draw_begin",
-			"",
+			"Returns the first vertex command in the context vertex draw list to be executed.",
 
 			cctx,
 			const..nk_buffer_p.IN("buffer", "")
@@ -4264,7 +4350,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		const..nk_draw_command_p(
 			"_draw_end",
-			"",
+			"Returns the end of the vertex draw list.",
 
 			cctx,
 			const..nk_buffer_p.IN("buffer", "")
@@ -4272,7 +4358,7 @@ nk_style_pop_vec2(ctx);""")}
 
 		const..nk_draw_command_p(
 			"_draw_next",
-			"",
+			"Increments the vertex command iterator to the next command inside the context vertex command list.",
 
 			const..nk_draw_command_p.IN("cmd", ""),
 			const..nk_buffer_p.IN("buffer", ""),

@@ -4,15 +4,13 @@
  */
 package org.lwjgl.demo.nuklear;
 
-import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.*;
 import org.lwjgl.nuklear.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.stb.*;
-import org.lwjgl.system.Callback;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.Platform;
+import org.lwjgl.system.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.*;
 
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -378,7 +376,14 @@ public class GLFWDemo {
 	}
 
 	private NkContext setupWindow(long win) {
-		glfwSetScrollCallback(win, (window, xoffset, yoffset) -> nk_input_scroll(ctx, (float)yoffset));
+		glfwSetScrollCallback(win, (window, xoffset, yoffset) -> {
+			try ( MemoryStack stack = stackPush() ) {
+				NkVec2 scroll = NkVec2.mallocStack(stack)
+					.x((float)xoffset)
+					.y((float)yoffset);
+				nk_input_scroll(ctx, scroll);
+			}
+		});
 		glfwSetCharCallback(win, (window, codepoint) -> nk_input_unicode(ctx, codepoint));
 		glfwSetKeyCallback(win, (window, key, scancode, action, mods) -> {
 			boolean press = action == GLFW_PRESS;

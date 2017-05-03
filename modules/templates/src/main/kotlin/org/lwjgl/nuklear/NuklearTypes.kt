@@ -571,7 +571,7 @@ val nk_mouse = struct(NUKLEAR_PACKAGE, "NkMouse", nativeName = "struct nk_mouse"
 	nk_vec2.member("pos", "")
 	nk_vec2.member("prev", "")
 	nk_vec2.member("delta", "")
-	float.member("scroll_delta", "")
+	nk_vec2.member("scroll_delta", "")
 	bool.member("grab", "")
 	bool.member("grabbed", "")
 	bool.member("ungrab", "")
@@ -1147,7 +1147,6 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 	nk_menu_state.member("menu", "")
 	nk_row_layout.member("row", "")
 	nk_chart.member("chart", "")
-	nk_popup_buffer.member("popup_buffer", "")
 	nk_command_buffer_p.member("buffer", "")
 	nk_panel_p.member("parent", "")
 }
@@ -1158,6 +1157,7 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 val nk_popup_state = struct(NUKLEAR_PACKAGE, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
 	nk_window.p.member("win", "")
 	nk_panel_type.member("type", "").links("PANEL_\\w+")
+	nk_popup_buffer.member("buf", "")
 	nk_hash.member("name", "")
 	int.member("active", "")
 	unsigned.member("combo_count", "")
@@ -1189,6 +1189,8 @@ val nk_property_state = struct(NUKLEAR_PACKAGE, "NkPropertyState", nativeName = 
 	char.array("buffer", "", size = "NK_MAX_NUMBER_BUFFER")
 	int.member("length", "")
 	int.member("cursor", "")
+	int.member("select_start", "")
+	int.member("select_end", "")
 	nk_hash.member("name", "")
 	unsigned_int.member("seq", "")
 	unsigned_int.member("old", "")
