@@ -1084,15 +1084,19 @@
 		<release-module package="org.lwjgl.openvr" name="openvr" title="OpenVR" license="openvr" if:true="${binding.openvr}">
 			<natives>
 				<get-release url="linux/x64/liblwjgl_openvr.so"/>
-				<get-release url="linux/x64/libopenvr_api.so"/>
-
 				<get-release url="macosx/x64/liblwjgl_openvr.dylib"/>
-				<get-release url="macosx/x64/libopenvr_api.dylib"/>
-
 				<get-release url="windows/x64/lwjgl_openvr.dll"/>
 				<get-release url="windows/x86/lwjgl_openvr32.dll"/>
+
+				<get-release url="linux/x64/libopenvr_api.so"/>
+				<get-release url="macosx/x64/libopenvr_api.dylib"/>
 				<get-release url="windows/x64/openvr_api.dll"/>
 				<get-release url="windows/x86/openvr_api32.dll"/>
+
+				<get-release url="linux/x64/libopenvr_api.so.git"/>
+				<get-release url="macosx/x64/libopenvr_api.dylib.git"/>
+				<get-release url="windows/x64/openvr_api.dll.git"/>
+				<get-release url="windows/x86/openvr_api32.dll.git"/>
 			</natives>
 		</release-module>
 
