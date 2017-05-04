@@ -106,7 +106,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 	IntConstant(
 		"The extension specification version.",
 
-		"EXT_DEBUG_REPORT_SPEC_VERSION".."5"
+		"EXT_DEBUG_REPORT_SPEC_VERSION".."6"
 	)
 
 	StringConstant(

@@ -50,7 +50,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 			</ul></dd>
 		</dl>
 
-		This extension provides new entry points to query device features, device properties, and format properties in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 feature/limit/formatproperty structures do not include an sType/pNext, this extension wraps them in new structures with sType/pNext so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each ftext:vkGetPhysicalDevice* command in core Vulkan 1.0. The new feature structure (and a chain of extensions) can also be passed in to device creation to enable features.
+		This extension provides new entry points to query device features, device properties, and format properties in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 feature/limit/formatproperty structures do not include {@code sType}/{@code pNext} members. This extension wraps them in new structures with {@code sType}/{@code pNext} members, so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each ftext:vkGetPhysicalDevice* command in core Vulkan 1.0. The new feature structure (and a chain of extension structures) can also be passed in to device creation to enable features.
 
 		This extension also allows applications to use the physical-device components of device extensions before #CreateDevice() is called.
 
@@ -199,7 +199,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkFormatProperties2KHR*                     pFormatProperties);</code></pre>
 
 		<h5>Description</h5>
-		#GetPhysicalDeviceFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceFormatProperties(), with the ability to return extended information via chained output structures.
+		#GetPhysicalDeviceFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -231,7 +231,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkImageFormatProperties2KHR*                pImageFormatProperties);</code></pre>
 
 		<h5>Description</h5>
-		#GetPhysicalDeviceImageFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceImageFormatProperties(), with the ability to return extended information via chained output structures.
+		#GetPhysicalDeviceImageFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceImageFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
 
 		If the loader implementation emulates #GetPhysicalDeviceImageFormatProperties2KHR() on a device that does not support the extension, and the query involves a structure the loader does not support, #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
 
@@ -280,7 +280,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkQueueFamilyProperties2KHR*                pQueueFamilyProperties);</code></pre>
 
 		<h5>Description</h5>
-		#GetPhysicalDeviceQueueFamilyProperties2KHR() behaves similarly to #GetPhysicalDeviceQueueFamilyProperties(), with the ability to return extended information via chained output structures.
+		#GetPhysicalDeviceQueueFamilyProperties2KHR() behaves similarly to #GetPhysicalDeviceQueueFamilyProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -311,7 +311,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkPhysicalDeviceMemoryProperties2KHR*       pMemoryProperties);</code></pre>
 
 		<h5>Description</h5>
-		#GetPhysicalDeviceMemoryProperties2KHR() behaves similarly to #GetPhysicalDeviceMemoryProperties(), with the ability to return extended information via chained output structures.
+		#GetPhysicalDeviceMemoryProperties2KHR() behaves similarly to #GetPhysicalDeviceMemoryProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -342,7 +342,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkSparseImageFormatProperties2KHR*          pProperties);</code></pre>
 
 		<h5>Description</h5>
-		#GetPhysicalDeviceSparseImageFormatProperties2KHR() behaves identically to #GetPhysicalDeviceSparseImageFormatProperties(), with the ability to return extended information via chained output structures.
+		#GetPhysicalDeviceSparseImageFormatProperties2KHR() behaves identically to #GetPhysicalDeviceSparseImageFormatProperties(), with the ability to return extended information by adding extension structures to its {@code pNext} chain.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>

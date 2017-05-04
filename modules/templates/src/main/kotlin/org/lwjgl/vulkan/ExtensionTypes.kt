@@ -151,6 +151,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT = 30,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT = 31,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT = 32,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT = 1000085000,
 } VkDebugReportObjectTypeEXT;</code></pre>
 
 		<ul>
@@ -187,6 +188,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 			<li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT is a {@code VkDisplayModeKHR}.</li>
 			<li>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT is a {@code VkObjectTableNVX}.</li>
 			<li>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT is a {@code VkIndirectCommandsLayoutNVX}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT is a {@code VkDescriptorUpdateTemplateKHR}.</li>
 		</ul>
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -289,7 +291,8 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PRESENT_INFO_KHR</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkDisplayPresentInfoKHR, ##VkDeviceGroupPresentInfoKHX, or ##VkPresentTimesInfoGOOGLE</li>
+			<li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDisplayPresentInfoKHR, ##VkPresentRegionsKHR, ##VkDeviceGroupPresentInfoKHX, or ##VkPresentTimesInfoGOOGLE</li>
+			<li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
 			<li>If {@code waitSemaphoreCount} is not 0, and {@code pWaitSemaphores} is not {@code NULL}, {@code pWaitSemaphores} <b>must</b> be a pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
 			<li>{@code pSwapchains} <b>must</b> be a pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
 			<li>{@code pImageIndices} <b>must</b> be a pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
@@ -336,7 +339,7 @@ val VkDisplayPropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPropertiesKHR", mu
 		"""
 
 	VkDisplayKHR.member("display", "a handle that is used to refer to the display described here. This handle will be valid for the lifetime of the Vulkan instance.")
-	const..charUTF8_p.member("displayName", "a pointer to a NULL-terminated string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available.")
+	const..charUTF8_p.member("displayName", "a pointer to a NULL-terminated string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid.")
 	VkExtent2D.member("physicalDimensions", "describes the physical width and height of the visible portion of the display, in millimeters.")
 	VkExtent2D.member("physicalResolution", "describes the physical, native, or preferred resolution of the display.")
 	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "")
@@ -502,7 +505,6 @@ val VkDisplayPresentInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayPresentInfoKHR") 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkDeviceGroupPresentInfoKHX, or ##VkPresentTimesInfoGOOGLE</li>
 		</ul>
 
 		<h5>See Also</h5>
@@ -626,7 +628,6 @@ val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code rasterizationOrder} <b>must</b> be a valid {@code VkRasterizationOrderAMD} value</li>
 		</ul>
 		"""
@@ -733,7 +734,6 @@ val VkDedicatedAllocationImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicated
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 		</ul>
 		"""
 
@@ -755,7 +755,6 @@ val VkDedicatedAllocationBufferCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicate
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 		</ul>
 		"""
 
@@ -783,7 +782,6 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedica
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> be a valid {@code VkImage} handle</li>
 			<li>If {@code buffer} is not #NULL_HANDLE, {@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>Both of {@code buffer}, and {@code image} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -869,7 +867,6 @@ val VkPhysicalDeviceMultiviewFeaturesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDev
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 		</ul>
 		"""
 
@@ -1012,7 +1009,6 @@ val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(VULKAN_PACKAGE, "VkWin32Keyed
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code acquireCount} is not 0, {@code pAcquireSyncs} <b>must</b> be a pointer to an array of {@code acquireCount} valid {@code VkDeviceMemory} handles</li>
 			<li>If {@code acquireCount} is not 0, {@code pAcquireKeys} <b>must</b> be a pointer to an array of {@code acquireCount} {@code uint64_t} values</li>
 			<li>If {@code acquireCount} is not 0, {@code pAcquireTimeoutMilliseconds} <b>must</b> be a pointer to an array of {@code acquireCount} {@code uint32_t} values</li>
@@ -1050,7 +1046,7 @@ val VkPhysicalDeviceFeatures2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatu
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkPhysicalDeviceMultiviewFeaturesKHX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPhysicalDeviceMultiviewFeaturesKHX</li>
 		</ul>
 
 		<h5>See Also</h5>
@@ -1118,7 +1114,7 @@ val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevi
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkPhysicalDeviceExternalImageFormatInfoKHX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPhysicalDeviceExternalImageFormatInfoKHX</li>
 			<li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
 			<li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
 			<li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
@@ -1231,7 +1227,6 @@ val VkMemoryAllocateFlagsInfoKHX = struct(VULKAN_PACKAGE, "VkMemoryAllocateFlags
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryAllocateFlagBitsKHX} values</li>
 		</ul>
 		"""
@@ -1319,10 +1314,10 @@ val VkBindImageMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHX"
 			<li>
 				For each element of {@code pSFRRects}:
 				<ul>
-					<li>{@code offset.x} <b>must</b> be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of the image</li>
-					<li>{@code extent.width} <b>must</b> either be a multiple of the sparse image block width of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
-					<li>{@code offset.y} <b>must</b> be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of the image</li>
-					<li>{@code extent.height} <b>must</b> either be a multiple of the sparse image block height of the image, or else {@code extent.height} + {@code offset.y} <b>must</b> equal the height of the image subresource</li>
+					<li>{@code offset.x} <b>must</b> be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
+					<li>{@code extent.width} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
+					<li>{@code offset.y} <b>must</b> be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
+					<li>{@code extent.height} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} + {@code offset.y} <b>must</b> equal the height of the image subresource</li>
 				</ul>
 			</li>
 			<li>All instances of memory that are bound <b>must</b> have been allocated</li>
@@ -1332,7 +1327,7 @@ val VkBindImageMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHX"
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkBindImageMemorySwapchainInfoKHX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkBindImageMemorySwapchainInfoKHX</li>
 			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
 			<li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
 			<li>If {@code deviceIndexCount} is not 0, {@code pDeviceIndices} <b>must</b> be a pointer to an array of {@code deviceIndexCount} {@code uint32_t} values</li>
@@ -1378,7 +1373,6 @@ val VkDeviceGroupRenderPassBeginInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupR
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code deviceRenderAreaCount} is not 0, {@code pDeviceRenderAreas} <b>must</b> be a pointer to an array of {@code deviceRenderAreaCount} ##VkRect2D structures</li>
 		</ul>
 
@@ -1412,7 +1406,6 @@ val VkDeviceGroupCommandBufferBeginInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGro
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 		</ul>
 		"""
 
@@ -1441,7 +1434,6 @@ val VkDeviceGroupSubmitInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupSubmitInfo
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphoreDeviceIndices} <b>must</b> be a pointer to an array of {@code waitSemaphoreCount} {@code uint32_t} values</li>
 			<li>If {@code commandBufferCount} is not 0, {@code pCommandBufferDeviceMasks} <b>must</b> be a pointer to an array of {@code commandBufferCount} {@code uint32_t} values</li>
 			<li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphoreDeviceIndices} <b>must</b> be a pointer to an array of {@code signalSemaphoreCount} {@code uint32_t} values</li>
@@ -1477,7 +1469,6 @@ val VkDeviceGroupBindSparseInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupBindSp
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 		</ul>
 		"""
 
@@ -1536,7 +1527,6 @@ val VkImageSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkImageSwapchainCrea
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
 		</ul>
 		"""
@@ -1565,7 +1555,6 @@ val VkBindImageMemorySwapchainInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemor
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
 		</ul>
 
@@ -1656,7 +1645,6 @@ val VkDeviceGroupPresentInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupPresentIn
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkDisplayPresentInfoKHR, or ##VkPresentTimesInfoGOOGLE</li>
 			<li>If {@code swapchainCount} is not 0, {@code pDeviceMasks} <b>must</b> be a pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
 			<li>{@code mode} <b>must</b> be a valid {@code VkDeviceGroupPresentModeFlagBitsKHX} value</li>
 		</ul>
@@ -1680,7 +1668,6 @@ val VkDeviceGroupSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupS
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code modes} <b>must</b> be a valid combination of {@code VkDeviceGroupPresentModeFlagBitsKHX} values</li>
 			<li>{@code modes} <b>must</b> not be 0</li>
 		</ul>
@@ -1726,7 +1713,7 @@ val VkPhysicalDeviceGroupPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDevic
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	uint32_t.member("physicalDeviceCount", "the number of physical devices in the group.")
 	VkPhysicalDevice.array("physicalDevices", "an array of physical device handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid.", size = "VK_MAX_DEVICE_GROUP_SIZE_KHX")
 	VkBool32.member("subsetAllocation", "indicates whether logical devices created from the group support allocating device memory on a subset of devices, via the {@code deviceMask} member of the ##VkMemoryAllocateFlagsInfoKHX. If this is #FALSE, then all device memory allocations are made across all physical devices in the group. If {@code physicalDeviceCount} is 1, then {@code subsetAllocation} <b>must</b> be #FALSE.")
@@ -1752,7 +1739,6 @@ val VkDeviceGroupDeviceCreateInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupDevi
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code physicalDeviceCount} is not 0, {@code pPhysicalDevices} <b>must</b> be a pointer to an array of {@code physicalDeviceCount} valid {@code VkPhysicalDevice} handles</li>
 		</ul>
 		"""
@@ -1793,7 +1779,6 @@ val VkPhysicalDeviceExternalImageFormatInfoKHX = struct(VULKAN_PACKAGE, "VkPhysi
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHX} value</li>
 		</ul>
 		"""
@@ -2099,7 +2084,6 @@ val VkWin32KeyedMutexAcquireReleaseInfoKHX = struct(VULKAN_PACKAGE, "VkWin32Keye
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code acquireCount} is not 0, {@code pAcquireSyncs} <b>must</b> be a pointer to an array of {@code acquireCount} valid {@code VkDeviceMemory} handles</li>
 			<li>If {@code acquireCount} is not 0, {@code pAcquireKeys} <b>must</b> be a pointer to an array of {@code acquireCount} {@code uint64_t} values</li>
 			<li>If {@code acquireCount} is not 0, {@code pAcquireTimeouts} <b>must</b> be a pointer to an array of {@code acquireCount} {@code uint32_t} values</li>
@@ -2306,14 +2290,13 @@ val VkD3D12FenceSubmitInfoKHX = struct(VULKAN_PACKAGE, "VkD3D12FenceSubmitInfoKH
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code waitSemaphoreValuesCount} <b>must</b> be the same value as ##VkSubmitInfo{@code ::waitSemaphoreCount}, where {@code SubmitInfo} is in the pNext-chain of this ##VkD3D12FenceSubmitInfoKHX structure.</li>
-			<li>{@code signalSemaphoreValuesCount} <b>must</b> be the same value as ##VkSubmitInfo{@code ::signalSemaphoreCount}, where {@code SubmitInfo} is in the pNext-chain of this ##VkD3D12FenceSubmitInfoKHX structure.</li>
+			<li>{@code waitSemaphoreValuesCount} <b>must</b> be the same value as ##VkSubmitInfo{@code ::waitSemaphoreCount}, where {@code SubmitInfo} is in the {@code pNext} chain of this ##VkD3D12FenceSubmitInfoKHX structure.</li>
+			<li>{@code signalSemaphoreValuesCount} <b>must</b> be the same value as ##VkSubmitInfo{@code ::signalSemaphoreCount}, where {@code SubmitInfo} is in the {@code pNext} chain of this ##VkD3D12FenceSubmitInfoKHX structure.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHX</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>If {@code waitSemaphoreValuesCount} is not 0, and {@code pWaitSemaphoreValues} is not {@code NULL}, {@code pWaitSemaphoreValues} <b>must</b> be a pointer to an array of {@code waitSemaphoreValuesCount} {@code uint64_t} values</li>
 			<li>If {@code signalSemaphoreValuesCount} is not 0, and {@code pSignalSemaphoreValues} is not {@code NULL}, {@code pSignalSemaphoreValues} <b>must</b> be a pointer to an array of {@code signalSemaphoreValuesCount} {@code uint64_t} values</li>
 		</ul>
@@ -2389,6 +2372,73 @@ val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhys
 	VkStructureType.member("sType", "")
 	nullable..opaque_p.member("pNext", "")
 	uint32_t.member("maxPushDescriptors", "")
+}
+
+val VkRectLayerKHR = struct(VULKAN_PACKAGE, "VkRectLayerKHR") {
+	documentation =
+		"""
+		Structure containing a rectangle, including layer, changed by vkQueuePresentKHR for a given VkImage.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The sum of {@code offset} and {@code extent} <b>must</b> be no greater than the {@code imageExtent} member of the ##VkSwapchainCreateInfoKHR structure given to #CreateSwapchainKHR().</li>
+			<li>{@code layer} <b>must</b> be less than {@code imageArrayLayers} member of the ##VkSwapchainCreateInfoKHR structure given to #CreateSwapchainKHR().</li>
+		</ul>
+
+		Some platforms allow the size of a surface to change, and then scale the pixels of the image to fit the surface. VkRectLayerKHR specifies pixels of the swapchain's image(s), which will be constant for the life of the swapchain.
+
+		<h5>See Also</h5>
+		##VkExtent2D, ##VkOffset2D, ##VkPresentRegionKHR
+		"""
+
+	VkOffset2D.member("offset", "the origin of the rectangle, in pixels.")
+	VkExtent2D.member("extent", "the size of the rectangle, in pixels.")
+	uint32_t.member("layer", "the layer of the image. For images with only one layer, the value of {@code layer} <b>must</b> be 0.")
+}
+
+val VkPresentRegionKHR = struct(VULKAN_PACKAGE, "VkPresentRegionKHR") {
+	documentation =
+		"""
+		Structure containing rectangular region changed by vkQueuePresentKHR for a given VkImage.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>If {@code rectangleCount} is not 0, and {@code pRectangles} is not {@code NULL}, {@code pRectangles} <b>must</b> be a pointer to an array of {@code rectangleCount} ##VkRectLayerKHR structures</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPresentRegionsKHR, ##VkRectLayerKHR
+		"""
+
+	AutoSize("pRectangles", optional = true)..uint32_t.member("rectangleCount", "the number of rectangles in {@code pRectangles}, or zero if the entire image has changed and should be presented.")
+	nullable..const..VkRectLayerKHR.p.buffer("pRectangles", "either {@code NULL} or a pointer to an array of ##VkRectLayerKHR structures. The ##VkRectLayerKHR structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.")
+}
+
+val VkPresentRegionsKHR = struct(VULKAN_PACKAGE, "VkPresentRegionsKHR") {
+	documentation =
+		"""
+		Structure hint of rectangular regions changed by vkQueuePresentKHR.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code swapchainCount} <b>must</b> be the same value as ##VkPresentInfoKHR{@code ::swapchainCount}, where ##VkPresentInfoKHR is in the pNext-chain of this ##VkPresentRegionsKHR structure.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PRESENT_REGIONS_KHR</li>
+			<li>If {@code pRegions} is not {@code NULL}, {@code pRegions} <b>must</b> be a pointer to an array of {@code swapchainCount} valid ##VkPresentRegionKHR structures</li>
+			<li>{@code swapchainCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPresentRegionKHR
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	AutoSize("pRegions", optional = true)..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
+	nullable..const..VkPresentRegionKHR.p.buffer("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
 }
 
 val VkDescriptorUpdateTemplateEntryKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpdateTemplateEntryKHR") {
@@ -2972,7 +3022,6 @@ val VkPipelineViewportWScalingStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipe
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code viewportCount} <b>must</b> be greater than 0</li>
 		</ul>
 
@@ -3174,13 +3223,12 @@ val VkPresentTimesInfoGOOGLE = struct(VULKAN_PACKAGE, "VkPresentTimesInfoGOOGLE"
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code swapchainCount} <b>must</b> be the same value as ##VkPresentInfoKHR{@code ::swapchainCount}, where ##VkPresentInfoKHR is in the pNext-chain of this ##VkPresentTimesInfoGOOGLE structure.</li>
+			<li>{@code swapchainCount} <b>must</b> be the same value as ##VkPresentInfoKHR{@code ::swapchainCount}, where ##VkPresentInfoKHR is in the {@code pNext} chain of this ##VkPresentTimesInfoGOOGLE structure.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkDisplayPresentInfoKHR, or ##VkDeviceGroupPresentInfoKHX</li>
 			<li>If {@code pTimes} is not {@code NULL}, {@code pTimes} <b>must</b> be a pointer to an array of {@code swapchainCount} ##VkPresentTimeGOOGLE structures</li>
 			<li>{@code swapchainCount} <b>must</b> be greater than 0</li>
 		</ul>
@@ -3285,7 +3333,7 @@ val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(VULKAN_PACKAGE, "VkPh
 		"""
 
 	VkStructureType.member("sType", "")
-	nullable..const..opaque_p.member("pNext", "")
+	nullable..opaque_p.member("pNext", "")
 	uint32_t.member("maxDiscardRectangles", "")
 }
 

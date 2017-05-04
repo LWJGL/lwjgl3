@@ -151,24 +151,103 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
 		<h5>Description</h5>
 		<ul>
-			<li>
-				#COLOR_SPACE_SRGB_NONLINEAR_KHR: The presentation engine supports the sRGB color space.
-				<ul>
-					<li>#COLOR_SPACE_SCRGB_LINEAR_EXT - supports the scRGB color space and applies a linear OETF.</li>
-					<li>#COLOR_SPACE_SCRGB_NONLINEAR_EXT - supports the scRGB color space and applies the scRGB OETF.</li>
-					<li>#COLOR_SPACE_DCI_P3_LINEAR_EXT - supports the DCI-P3 color space and applies a linear OETF.</li>
-					<li>#COLOR_SPACE_DCI_P3_NONLINEAR_EXT - supports the DCI-P3 color space and applies the Gamma 2.6 OETF.</li>
-					<li>#COLOR_SPACE_BT709_LINEAR_EXT - supports the BT709 color space and applies a linear OETF.</li>
-					<li>#COLOR_SPACE_BT709_NONLINEAR_EXT - supports the BT709 color space and applies the SMPTE 170M OETF.</li>
-					<li>#COLOR_SPACE_BT2020_LINEAR_EXT - supports the BT2020 color space and applies a linear OETF.</li>
-					<li>#COLOR_SPACE_BT2020_NONLINEAR_EXT - supports the BT2020 color space and applies the SMPTE 170M OETF.</li>
-					<li>#COLOR_SPACE_ADOBERGB_LINEAR_EXT - supports the AdobeRGB color space and applies a linear OETF.</li>
-					<li>#COLOR_SPACE_ADOBERGB_NONLINEAR_EXT - supports the AdobeRGB color space and applies the Gamma 2.2 OETF.</li>
-				</ul>
-			</li>
+			<li>#COLOR_SPACE_SRGB_NONLINEAR_KHR: The presentation engine supports the sRGB color space.</li>
+			<li>#COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT - supports the Display-P3 color space and applies an sRGB-like OETF (defined below).</li>
+			<li>#COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT - supports the extended sRGB color space and applies a linear OETF.</li>
+			<li>#COLOR_SPACE_DCI_P3_LINEAR_EXT - supports the DCI-P3 color space and applies a linear OETF.</li>
+			<li>#COLOR_SPACE_DCI_P3_NONLINEAR_EXT - supports the DCI-P3 color space and applies the Gamma 2.6 OETF.</li>
+			<li>#COLOR_SPACE_BT709_LINEAR_EXT - supports the BT709 color space and applies a linear OETF.</li>
+			<li>#COLOR_SPACE_BT709_NONLINEAR_EXT - supports the BT709 color space and applies the SMPTE 170M OETF.</li>
+			<li>#COLOR_SPACE_BT2020_LINEAR_EXT - supports the BT2020 color space and applies a linear OETF.</li>
+			<li>#COLOR_SPACE_HDR10_ST2084_EXT - supports HDR10 (BT2020 color) space and applies the SMPTE ST2084 Perceptual Quantizer (PQ) OETF.</li>
+			<li>#COLOR_SPACE_DOLBYVISION_EXT - supports Dolby Vision (BT2020 color space), proprietary encoding, and applies the SMPTE ST2084 OETF.</li>
+			<li>#COLOR_SPACE_HDR10_HLG_EXT - supports HDR10 (BT2020 color space) and applies the Hybrid Log Gamma (HLG) OETF.</li>
+			<li>#COLOR_SPACE_ADOBERGB_LINEAR_EXT - supports the AdobeRGB color space and applies a linear OETF.</li>
+			<li>#COLOR_SPACE_ADOBERGB_NONLINEAR_EXT - supports the AdobeRGB color space and applies the Gamma 2.2 OETF.</li>
+			<li>#COLOR_SPACE_PASS_THROUGH_EXT - color components used "as is". Intended to allow application to supply data for color spaces not described here.</li>
 		</ul>
 
-		The color components of Non-linear color space swap chain images have had the appropriate transfer function applied. Vulkan requires that all implementations support the sRGB OETF and EOTF transfer functions when using an SRGB pixel format. Other transfer functions, such as SMPTE 170M, <b>must</b> not be performed by the implementation, but <b>can</b> be performed by the application shader.
+		The color components of Non-linear color space swap chain images have had the appropriate transfer function applied. Vulkan requires that all implementations support the sRGB OETF and EOTF transfer functions when using an SRGB pixel format. Other transfer functions, such as SMPTE 170M or SMPTE2084, <b>must</b> not be performed by the implementation, but <b>can</b> be performed by the application shader. This extension defines enums for {@code VkColorSpaceKHR} that correspond to the following color spaces::
+
+		<h6>Color Spaces and Attributes</h6>
+		<table class="lwjgl">
+			<thead><tr><th>Name</th><th>Red Primary</th><th>Green Primary</th><th>Blue Primary</th><th>White-point</th><th>OETF</th></tr></thead>
+			<tbody>
+				<tr><td>DCI-P3</td><td>0.680, 0.320</td><td>0.265, 0.690</td><td>0.150, 0.060</td><td>0.3127, 0.3290 (D65)</td><td>Gamma 2.6</td></tr>
+				<tr><td>Display-P3</td><td>0.680, 0.320</td><td>0.265, 0.690</td><td>0.150, 0.060</td><td>0.3127, 0.3290 (D65)</td><td>Display-P3</td></tr>
+				<tr><td>BT709</td><td>0.640, 0.330</td><td>0.300, 0.600</td><td>0.150, 0.060</td><td>0.3127, 0.3290 (D65)</td><td>SMPTE 170M</td></tr>
+				<tr><td>sRGB</td><td>0.640, 0.330</td><td>0.300, 0.600</td><td>0.150, 0.060</td><td>0.3127, 0.3290 (D65)</td><td>sRGB</td></tr>
+				<tr><td>extended sRGB</td><td>0.640, 0.330</td><td>0.300, 0.600</td><td>0.150, 0.060</td><td>0.3127, 0.3290 (D65)</td><td>extended sRGB</td></tr>
+				<tr><td>HDR10_ST2084</td><td>0.708, 0.292</td><td>0.170, 0.797</td><td>0.131, 0.046</td><td>0.3127, 0.3290 (D65)</td><td>ST2084</td></tr>
+				<tr><td>DOLBYVISION</td><td>0.708, 0.292</td><td>0.170, 0.797</td><td>0.131, 0.046</td><td>0.3127, 0.3290 (D65)</td><td>ST2084</td></tr>
+				<tr><td>HDR10_HLG</td><td>0.708, 0.292</td><td>0.170, 0.797</td><td>0.131, 0.046</td><td>0.3127, 0.3290 (D65)</td><td>HLG</td></tr>
+				<tr><td>AdobeRGB</td><td>0.640, 0.330</td><td>0.210, 0.710</td><td>0.150, 0.060</td><td>0.3127, 0.3290 (D65)</td><td>AdobeRGB</td></tr>
+			</tbody>
+		</table>
+
+		For Opto-Electrical Transfer Function (OETF), unless otherwise specified, the values of <code>L</code> and <code>E</code> are defined as:
+
+		<code>L</code> - linear luminance of image 0 &le L &le; 1 for conventional colorimetry
+
+		<code>E</code> - corresponding electrical signal (value stored in memory)
+
+		<h5>sRGB OETF</h5>
+		<pre><code>E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0031308 &le; L &le; 1
+￿    12.92  &times; L for 0 &le; L &lt 0.0031308</code></pre>
+
+		<h5>Display-P3 EOTF</h5>
+		<pre><code>E = (a &times; L + b)<sup>2.4</sup> for 0.039 &le; L &le; 1
+￿    b &times; L for 0 &le; L &lt; 0.039</code></pre>
+
+		<pre><code>a = 0.948</code></pre> + <pre><code>b = 0.052</code></pre> + <pre><code>c = 0.077</code></pre> +
+
+		<h5>Display-P3 OETF</h5>
+		<pre><code>E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0030186 &le; L &le; 1
+￿    12.92  &times; L for 0 &le; L &lt 0.0030186</code></pre>
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		For most uses, the sRGB OETF is equivalent.
+		</div>
+
+		<h5>Extended sRGB OETF</h5>
+		<pre><code>￿     1.055 &times;  L<sup>1/2.4</sup> - 0.055 for 0.0031308 &le; L &le; 7.5913
+E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
+￿    -f(-L) for L &lt; 0</code></pre>
+
+		<code>L</code> - luminance of image is within <code>[-0.6038, 7.5913]</code>.
+
+		<code>E</code> can be negative and/or > 1. That is how extended sRGB specifies colors outside the standard sRGB gamut. This means extended sRGB needs a floating point pixel format to cover the intended color range.
+
+		<h5>SMPTE 170M OETF</h5>
+		<pre><code>E = α &times; L^<sup>0.45</sup> - (1 - α) for β &le; L &le; 1
+￿    4.5 &times; L for 0 &le; L &lt; β</code></pre>
+
+		<pre><code>α = 1.099 and β = 0.018 for 10-bits and less per sample system (the values given in Rec.709)</code></pre> + <pre><code>α = 1.0993 and β = 0.0181 for 12-bits per sample system</code></pre>
+
+		<h5>SMPTE ST2084 OETF (Inverse-EOTF)</h5>
+		<pre><code>E = ((c_<sub>1</sub> + c_<sub>2</sub> &times; L^<sup>m_<sub>1</sub></sup>) / (1 + c_<sub>3</sub> &times; L^<sup>m_<sub>1</sub></sup>))^<sup>m_<sub>2</sub></sup></code></pre>
+
+		where:
+
+		<pre><code>m<sub>1</sub> = 2610 / 4096 &times; 1/4 = 0.1593017578125</code></pre> + <pre><code>m<sub>2</sub> = 2523 / 4096 &times; 128 = 78.84375</code></pre> + <pre><code>c<sub>1</sub> = 3424 / 4096 = 0.8359375 = c3 - c2 + 1</code></pre> + <pre><code>c<sub>2</sub> = 2413 / 4096 &times; 32 = 18.8515625</code></pre> + <pre><code>c<sub>3</sub> = 2392 / 4096 &times; 32 = 18.6875</code></pre> +
+
+		<h5>Hybrid Log Gamma (HLG)</h5>
+		<pre><code>E = r &times; sqrt(L) for 0 &le; L &le; 1
+￿    a &times; ln(L - b) + c for 1 &lt L</code></pre>
+
+		<pre><code>L - is the signal normalized by the reference white level</code></pre> + <pre><code>r - is the reference white level and has a signal value of 0.5</code></pre> + <pre><code>a = 0.17883277 and b = 0.28466892, and c = 0.55991073</code></pre>
+
+		<h5>AdobeRGB OETF</h5>
+		<pre><code>E = L^<sup>1 / 2.19921875</sup></code></pre>
+
+		<h5>Gamma 2.6 OETF</h5>
+		<pre><code>E = L^<sup>1 / 2.6</sup></code></pre>
+
+		An implementation supporting this extension indicates support for these color spaces via ##VkSurfaceFormatKHR structures returned from #GetPhysicalDeviceSurfaceFormatsKHR().
+
+		Specifying the supported surface color space when calling #CreateSwapchainKHR() will create a swapchain using that color space.
+
+		Vulkan requires that all implementations support the sRGB Opto-Electrical Transfer Function (OETF) and Electro-optical transfer function (EOTF) when using an SRGB pixel format. Other transfer functions, such as SMPTE 170M, <b>must</b> not be performed by the implementation, but <b>can</b> be performed by the application shader.
 
 		If {@code pSurfaceFormats} includes an entry whose value for {@code colorSpace} is #COLOR_SPACE_SRGB_NONLINEAR_KHR and whose value for {@code format} is a UNORM (or SRGB) format and the corresponding SRGB (or UNORM) format is a color renderable format for #IMAGE_TILING_OPTIMAL, then {@code pSurfaceFormats} <b>must</b> also contain an entry with the same value for {@code colorSpace} and {@code format} equal to the corresponding SRGB (or UNORM) format.
 

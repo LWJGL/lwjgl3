@@ -76,6 +76,12 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 	)
 
 	EnumConstant(
+		"Extends {@code VkDebugReportObjectTypeEXT}.",
+
+		"DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT".."1000085000"
+	)
+
+	EnumConstant(
 		"""
 		VkDescriptorUpdateTemplateTypeKHR - Indicates the valid usage of the descriptor update template
 
