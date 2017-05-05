@@ -706,6 +706,7 @@
 			<arg value="log"/>
 			<arg value="--pretty=format:%H"/>
 			<arg value="HEAD~2..HEAD~1"/> <!-- Skip the CI commit -->
+			<arg value="-1"/>
 		</exec>
 
 		<local name="libraries"/>
