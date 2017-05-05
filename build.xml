@@ -615,7 +615,7 @@
 		</java>
 	</target>
 
-	<target name="-build-version">
+	<target name="-build-version" depends="compile">
 		<local name="stderr"/>
 		<java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version" errorproperty="stderr">
 			<classpath path="${bin.core}"/>
@@ -624,7 +624,7 @@
 	</target>
 
 	<!-- Includes all modules for javadoc.lwjgl.org -->
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-compile-generator,-build-version">
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-compile-generator,-build-version">
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
 			destdir="${bin.html.javadoc}"
