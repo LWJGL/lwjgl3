@@ -57,10 +57,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		"REPEAT".."2"
 	)
-	
+
 	IntConstant(
 		"Joystick hat states.",
-		
+
 		"HAT_CENTERED".."0",
 		"HAT_UP".."1",
 		"HAT_RIGHT".."2",
@@ -272,122 +272,108 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"JOYSTICK_LAST".."GLFW_JOYSTICK_16"
 	)
 
-	IntConstant(
-		"""
-		GLFW has not been initialized.
+	EnumConstant(
+		"Error codes.",
 
-		This occurs if a GLFW function was called that may not be called unless the library is initialized.
-		""",
+		"NO_ERROR".enum("No error has occurred.", "0"),
+		"NOT_INITIALIZED".enum(
+			"""
+			GLFW has not been initialized.
 
-		"NOT_INITIALIZED"..0x00010001
-	)
+			This occurs if a GLFW function was called that may not be called unless the library is initialized.
+			""",
+			0x00010001
+		),
+		"NO_CURRENT_CONTEXT".enum(
+			"""
+			No context is current for this thread.
 
-	IntConstant(
-		"""
-		No context is current for this thread.
+			This occurs if a GLFW function was called that needs and operates on the current OpenGL or OpenGL ES context but no context is current on the
+			calling thread. One such function is #SwapInterval().
+			""",
+			0x00010002
+		),
+		"INVALID_ENUM".enum(
+			"""
+			One of the arguments to the function was an invalid enum value.
 
-		This occurs if a GLFW function was called that needs and operates on the current OpenGL or OpenGL ES context but no context is current on the calling
-		thread. One such function is #SwapInterval().
-		""",
+			One of the arguments to the function was an invalid enum value, for example requesting #RED_BITS with #GetWindowAttrib().
+			""",
+			0x00010003
+		),
+		"INVALID_VALUE".enum(
+			"""
+			One of the arguments to the function was an invalid value.
 
-		"NO_CURRENT_CONTEXT"..0x00010002
-	)
+			One of the arguments to the function was an invalid value, for example requesting a non-existent OpenGL or OpenGL ES version like 2.7.
 
-	IntConstant(
-		"""
-		One of the arguments to the function was an invalid enum value.
+			Requesting a valid but unavailable OpenGL or OpenGL ES version will instead result in a #VERSION_UNAVAILABLE error.
+			""",
+			0x00010004
+		),
+		"OUT_OF_MEMORY".enum(
+			"""
+			A memory allocation failed.
 
-		One of the arguments to the function was an invalid enum value, for example requesting #RED_BITS with #GetWindowAttrib().
-		""",
+			A bug in GLFW or the underlying operating system. Report the bug to our ${url("https://github.com/glfw/glfw/issues", "issue tracker")}.
+			""",
+			0x00010005
+		),
+		"API_UNAVAILABLE".enum(
+			"""
+			GLFW could not find support for the requested API on the system.
 
-		"INVALID_ENUM"..0x00010003
-	)
+			The installed graphics driver does not support the requested API, or does not support it via the chosen context creation backend. Below are a few
+			examples:
 
-	IntConstant(
-		"""
-		One of the arguments to the function was an invalid value.
+			Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via
+			a WGL or GLX extension. macOS does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia
+			binary driver. Older graphics drivers do not support Vulkan.
+			""",
+			0x00010006
+		),
+		"VERSION_UNAVAILABLE".enum(
+			"""
+			The requested OpenGL or OpenGL ES version (including any requested context or framebuffer hints) is not available on this machine.
 
-		One of the arguments to the function was an invalid value, for example requesting a non-existent OpenGL or OpenGL ES version like 2.7.
+			The machine does not support your requirements. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise,
+			inform the user that their machine does not match your requirements.
 
-		Requesting a valid but unavailable OpenGL or OpenGL ES version will instead result in a #VERSION_UNAVAILABLE error.
-		""",
+			Future invalid OpenGL and OpenGL ES versions, for example OpenGL 4.8 if 5.0 comes out before the 4.x series gets that far, also fail with this
+			error and not #INVALID_VALUE, because GLFW cannot know what future versions will exist.
+			""",
+			0x00010007
+		),
+		"PLATFORM_ERROR".enum(
+			"""
+			A platform-specific error occurred that does not match any of the more specific categories.
 
-		"INVALID_VALUE"..0x00010004
-	)
+			A bug or configuration error in GLFW, the underlying operating system or its drivers, or a lack of required resources. Report the issue to our
+			${url("https://github.com/glfw/glfw/issues", "issue tracker")}.
+			""",
+			0x00010008
+		),
+		"FORMAT_UNAVAILABLE".enum(
+			"""
+			The requested format is not supported or available.
 
-	IntConstant(
-		"""
-		A memory allocation failed.
+			If emitted during window creation, one or more hard constraints did not match any of the available pixel formats. If your application is
+			sufficiently flexible, downgrade your requirements and try again. Otherwise, inform the user that their machine does not match your requirements.
 
-		A bug in GLFW or the underlying operating system. Report the bug to our ${url("https://github.com/glfw/glfw/issues", "issue tracker")}.
-		""",
+			If emitted when querying the clipboard, ignore the error or report it to the user, as appropriate.
+			""",
+			0x00010009
+		),
+		"NO_WINDOW_CONTEXT".enum(
+			"""
+			The specified window does not have an OpenGL or OpenGL ES context.
 
-		"OUT_OF_MEMORY"..0x00010005
-	)
+			A window that does not have an OpenGL or OpenGL ES context was passed to a function that requires it to have one.
 
-	IntConstant(
-		"""
-		GLFW could not find support for the requested API on the system.
-
-		The installed graphics driver does not support the requested API, or does not support it via the chosen context creation backend. Below are a few
-		examples:
-
-		Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via a
-		WGL or GLX extension. macOS does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
-		driver. Older graphics drivers do not support Vulkan.
-		""",
-
-		"API_UNAVAILABLE"..0x00010006
-	)
-
-	IntConstant(
-		"""
-		The requested OpenGL or OpenGL ES version (including any requested context or framebuffer hints) is not available on this machine.
-
-		The machine does not support your requirements. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise,
-		inform the user that their machine does not match your requirements.
-
-		Future invalid OpenGL and OpenGL ES versions, for example OpenGL 4.8 if 5.0 comes out before the 4.x series gets that far, also fail with this error and
-		not #INVALID_VALUE, because GLFW cannot know what future versions will exist.
-		""",
-
-		"VERSION_UNAVAILABLE"..0x00010007
-	)
-
-	IntConstant(
-		"""
-		A platform-specific error occurred that does not match any of the more specific categories.
-
-		A bug or configuration error in GLFW, the underlying operating system or its drivers, or a lack of required resources. Report the issue to our
-		${url("https://github.com/glfw/glfw/issues", "issue tracker")}.
-		""",
-
-		"PLATFORM_ERROR"..0x00010008
-	)
-
-	IntConstant(
-		"""
-		The requested format is not supported or available.
-
-		If emitted during window creation, one or more hard constraints did not match any of the available pixel formats. If your application is sufficiently
-		flexible, downgrade your requirements and try again. Otherwise, inform the user that their machine does not match your requirements.
-
-		If emitted when querying the clipboard, ignore the error or report it to the user, as appropriate.
-		""",
-
-		"FORMAT_UNAVAILABLE"..0x00010009
-	)
-
-	IntConstant(
-		"""
-		The specified window does not have an OpenGL or OpenGL ES context.
-
-		A window that does not have an OpenGL or OpenGL ES context was passed to a function that requires it to have one.
-
-		Application programmer error. Fix the offending call.
-		""",
-
-		"NO_WINDOW_CONTEXT"..0x0001000A
+			Application programmer error. Fix the offending call.
+			""",
+			0x0001000A
+		)
 	)
 
 	val WindowHints = EnumConstant(
@@ -830,10 +816,31 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
+	int(
+		"GetError",
+		"""
+		Returns and clears the last error for the calling thread.
+
+		This function returns and clears the error code of the last error that occurred on the calling thread. If no error has occurred since the last call, it
+		returns #NO_ERROR.
+
+		Notes:
+		${ul(
+			"This function may be called before #Init().",
+			"This function may be called from any thread."
+		)}
+		""",
+
+		returnDoc = "the last error code for the calling thread, or #NO_ERROR",
+		since = "version 3.3"
+	)
+
 	GLFWerrorfun(
 		"SetErrorCallback",
 		"""
 		Sets the error callback, which is called with an error code and a human-readable description each time a GLFW error occurs.
+
+		The error code is set before the callback is called. Calling #GetError() from the error callback will return the same value as the error code argument.
 
 		The error callback is called on the thread where the error occurred. If you are using GLFW from multiple threads, your error callback needs to be
 		written accordingly.
@@ -1183,7 +1190,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Notes:
 		${ul(
 			"This function must only be called from the main thread.",
-			"This function must not be called from a callback.",
 			"<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
 			"""
 		    <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the initial icon for the window. If no such icon
@@ -2195,7 +2201,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	    Notes:
 	    ${ul(
 			"This function must only be called from the main thread.",
-			"This function must not be called from a callback.",
 			"The specified image data is copied before this function returns."
 		)}
 	    """,
@@ -2216,7 +2221,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	    Notes:
 	    ${ul(
 			"This function must only be called from the main thread.",
-			"This function must not be called from a callback.",
 			"The specified image data is copied before this function returns."
 		)}
 	    """,
