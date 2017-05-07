@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
-//import org.lwjgl.system.android.*
+import org.lwjgl.system.android.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.*
 
@@ -59,6 +59,7 @@ val VkDisplayPlaneAlphaFlagsKHR = typedef(VkFlags, "VkDisplayPlaneAlphaFlagsKHR"
 val VkDisplayModeCreateFlagsKHR = typedef(VkFlags, "VkDisplayModeCreateFlagsKHR")
 val VkDisplaySurfaceCreateFlagsKHR = typedef(VkFlags, "VkDisplaySurfaceCreateFlagsKHR")
 val VkXlibSurfaceCreateFlagsKHR = typedef(VkFlags, "VkXlibSurfaceCreateFlagsKHR")
+val VkAndroidSurfaceCreateFlagsKHR = typedef(VkFlags, "VkAndroidSurfaceCreateFlagsKHR")
 val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKHR")
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
@@ -551,6 +552,34 @@ val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfo
     VkXlibSurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
     Display.p.member("dpy", "a pointer to an Xlib {@code Display} connection to the X server.")
     Window.member("window", "an Xlib {@code Window} to associate the surface with.")
+}
+
+val VkAndroidSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkAndroidSurfaceCreateInfoKHR") {
+    javaImport("org.lwjgl.system.android.*")
+    documentation =
+        """
+        Structure specifying parameters of a newly created Android surface object.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code window} <b>must</b> point to a valid Android {@code ANativeWindow}.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateAndroidSurfaceKHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkAndroidSurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
+    ANativeWindow_p.member("window", "a pointer to the {@code ANativeWindow} to associate the surface with.")
 }
 
 val VkWin32SurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateInfoKHR") {

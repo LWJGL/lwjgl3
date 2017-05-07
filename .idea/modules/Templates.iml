@@ -6,6 +6,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../modules/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/templates/src/main/kotlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/templates/src/main/android" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

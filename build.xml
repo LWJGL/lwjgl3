@@ -213,6 +213,8 @@
             <compilerarg value="-Xno-param-assertions"/>
             <compilerarg value="-Xreport-perf"/>
 
+            <src path="${src.templates}/android"/>
+
             <src path="${src.templates.kotlin}/org/lwjgl/assimp" if:true="${binding.assimp}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/bgfx" if:true="${binding.bgfx}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
@@ -242,6 +244,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc" if:true="${binding.jemalloc}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/jni"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/system/android"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/linux"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/templates"/>
@@ -374,6 +377,7 @@
             <include name="org/lwjgl/**/*.java"/>
             <exclude name="**/package-info.java"/>
 
+            <include name="android/view/Surface.java" if:set="platform.android"/>
             <include name="lang/invoke/*.java" if:set="platform.android"/>
             <include name="sun/misc/Unsafe.java" if:set="platform.android"/>
 
@@ -421,8 +425,6 @@
         <jar destfile="${bin.android}/classes.jar" level="9" index="true" indexmetainf="true">
             <fileset dir="${bin.android.classes}">
                 <include name="org/lwjgl/**"/>
-                <include name="libcore/io/**"/>
-                <include name="sun/misc/**"/>
             </fileset>
         </jar>
 

@@ -130,6 +130,7 @@
                     <include name="${src.native}/system/*.c"/>
                     <exclude name="${src.native}/system/lwjgl_malloc.c"/>
                     <include name="${src.generated.native}/system/*.c"/>
+                    <include name="${src.generated.native}/system/android/*.c"/>
                     <include name="${src.generated.native}/system/dyncall/*.c"/>
                     <include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
                     <include name="${src.generated.native}/system/jni/*.c"/>

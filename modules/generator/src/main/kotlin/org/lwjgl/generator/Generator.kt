@@ -102,6 +102,7 @@ fun main(args: Array<String>) {
 
         val bindingsSystem = arrayOf(
             "org.lwjgl.system",
+            "org.lwjgl.system.android",
             "org.lwjgl.system.dyncall",
             "org.lwjgl.system.jemalloc",
             "org.lwjgl.system.jni",
