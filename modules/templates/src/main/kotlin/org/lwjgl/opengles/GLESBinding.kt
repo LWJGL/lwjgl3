@@ -163,7 +163,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
 			println("\tpublic final boolean ${it.capName};")
 		}
 
-		println("""
+		print("""
 	/** Off-heap array of the above function addresses. */
 	final PointerBuffer addresses;
 
