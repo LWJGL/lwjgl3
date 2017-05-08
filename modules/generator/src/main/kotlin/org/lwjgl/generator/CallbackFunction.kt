@@ -46,8 +46,10 @@ class CallbackFunction(
 	private val NativeType.argType
 		get() = if (this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Pointer"
-		else if (mapping == PrimitiveMapping.BOOLEAN)
+		else if (mapping === PrimitiveMapping.BOOLEAN)
 			"Bool"
+		else if (mapping === PrimitiveMapping.LONG)
+			"LongLong"
 		else
 			(mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
 

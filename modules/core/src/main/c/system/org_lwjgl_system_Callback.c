@@ -49,7 +49,7 @@ static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *user
 	(*env)->CallVoidMethod(env,
 		(jobject)userdata,
 		javaCallbackV,
-		args
+		(jlong)(intptr_t)args
 	);
 
 	// Check for exception
@@ -69,7 +69,7 @@ static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *user
 		*(Type*)result = (Type)(*env)->Call##JavaType##Method(env, \
 			(jobject)userdata, \
 			javaCallback##Name, \
-			args \
+			(jlong)(intptr_t)args \
 		); \
 \
 		if ( (*env)->ExceptionCheck(env) && async ) \
