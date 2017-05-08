@@ -1883,8 +1883,8 @@ public final class HelloVulkan {
 		vkDestroySurfaceKHR(inst, surface, null);
 		if ( msg_callback != NULL )
 			vkDestroyDebugReportCallbackEXT(inst, msg_callback, null);
-		dbgFunc.free();
 		vkDestroyInstance(inst, null);
+		dbgFunc.free();
 
 		gpu_features.free();
 		gpu_props.free();
