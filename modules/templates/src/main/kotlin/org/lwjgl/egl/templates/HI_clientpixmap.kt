@@ -8,25 +8,25 @@ import org.lwjgl.egl.*
 import org.lwjgl.generator.*
 
 val HI_clientpixmap = "HIClientpixmap".nativeClassEGL("HI_clientpixmap", postfix = HI) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		This extension provides a mechanism for using memory allocated by the application as a color-buffer.
-		"""
+        This extension provides a mechanism for using memory allocated by the application as a color-buffer.
+        """
 
-	IntConstant(
-		"",
+    IntConstant(
+        "",
 
-		"CLIENT_PIXMAP_POINTER_HI"..0x8F74
-	)
+        "CLIENT_PIXMAP_POINTER_HI"..0x8F74
+    )
 
-	EGLSurface(
-		"CreatePixmapSurfaceHI",
-		"",
+    EGLSurface(
+        "CreatePixmapSurfaceHI",
+        "",
 
-		EGLDisplay.IN("dpy", ""),
-		EGLConfig.IN("config", ""),
-		EGLClientPixmapHI_p.IN("pixmap", "")
-	)
+        EGLDisplay.IN("dpy", ""),
+        EGLConfig.IN("config", ""),
+        EGLClientPixmapHI_p.IN("pixmap", "")
+    )
 }

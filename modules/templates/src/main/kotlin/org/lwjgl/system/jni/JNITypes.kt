@@ -9,10 +9,10 @@ import org.lwjgl.generator.*
 val JNI_PACKAGE = "org.lwjgl.system.jni"
 
 fun config() {
-	packageInfo(
-		JNI_PACKAGE,
-		"Contains bindings to the Java Native Interface (JNI)."
-	)
+    packageInfo(
+        JNI_PACKAGE,
+        "Contains bindings to the Java Native Interface (JNI)."
+    )
 }
 
 val jboolean = IntegerType("jboolean", PrimitiveMapping.BOOLEAN)
@@ -55,9 +55,9 @@ val java_nio_ByteBuffer = java.nio.ByteBuffer::class.jobject
 val JavaVM = "JavaVM".opaque_p
 
 val JNINativeMethod_p = struct(JNI_PACKAGE, "JNINativeMethod") {
-	documentation = ""
+    documentation = ""
 
-	charUTF8_p.member("name", "")
-	charUTF8_p.member("signature", "")
-	opaque_p.member("fnPtr", "")
+    charUTF8_p.member("name", "")
+    charUTF8_p.member("signature", "")
+    opaque_p.member("fnPtr", "")
 }.p

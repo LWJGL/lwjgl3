@@ -8,31 +8,31 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_shader_buffer_load = "NVShaderBufferLoad".nativeClassGL("NV_shader_buffer_load", postfix = NV) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		At a very coarse level, GL has evolved in a way that allows applications to replace many of the original state machine variables with blocks of
-		user-defined data. For example, the current vertex state has been augmented by vertex buffer objects, fixed-function shading state and parameters have
-		been replaced by shaders/programs and constant buffers, etc. Applications switch between coarse sets of state by binding objects to the context or to
-		other container objects (e.g. vertex array objects) instead of manipulating state variables of the context. In terms of the number of GL commands
-		required to draw an object, modern applications are orders of magnitude more efficient than legacy applications, but this explosion of objects bound to
-		other objects has led to a new bottleneck - pointer chasing and CPU L2 cache misses in the driver, and general L2 cache pollution.
+        At a very coarse level, GL has evolved in a way that allows applications to replace many of the original state machine variables with blocks of
+        user-defined data. For example, the current vertex state has been augmented by vertex buffer objects, fixed-function shading state and parameters have
+        been replaced by shaders/programs and constant buffers, etc. Applications switch between coarse sets of state by binding objects to the context or to
+        other container objects (e.g. vertex array objects) instead of manipulating state variables of the context. In terms of the number of GL commands
+        required to draw an object, modern applications are orders of magnitude more efficient than legacy applications, but this explosion of objects bound to
+        other objects has led to a new bottleneck - pointer chasing and CPU L2 cache misses in the driver, and general L2 cache pollution.
 
-		This extension provides a mechanism to read from a flat, 64-bit GPU address space from programs/shaders, to query GPU addresses of buffer objects at the
-		API level, and to bind buffer objects to the context in such a way that they can be accessed via their GPU addresses in any shader stage.
+        This extension provides a mechanism to read from a flat, 64-bit GPU address space from programs/shaders, to query GPU addresses of buffer objects at the
+        API level, and to bind buffer objects to the context in such a way that they can be accessed via their GPU addresses in any shader stage.
 
-		The intent is that applications can avoid re-binding buffer objects or updating constants between each Draw call and instead simply use a VertexAttrib
-		(or TexCoord, or InstanceID, or...) to "point" to the new object's state. In this way, one of the cheapest "state" updates (from the CPU's point of
-		view) can be used to effect a significant state change in the shader similarly to how a pointer change may on the CPU. At the same time, this relieves
-		the limits on how many buffer objects can be accessed at once by shaders, and allows these buffer object accesses to be exposed as C-style pointer
-		dereferences in the shading language.
+        The intent is that applications can avoid re-binding buffer objects or updating constants between each Draw call and instead simply use a VertexAttrib
+        (or TexCoord, or InstanceID, or...) to "point" to the new object's state. In this way, one of the cheapest "state" updates (from the CPU's point of
+        view) can be used to effect a significant state change in the shader similarly to how a pointer change may on the CPU. At the same time, this relieves
+        the limits on how many buffer objects can be accessed at once by shaders, and allows these buffer object accesses to be exposed as C-style pointer
+        dereferences in the shading language.
 
-		As a very simple example, imagine packing a group of similar objects' constants into a single buffer object and pointing your program at object
-		&lt;i&gt; by setting ${code("glVertexAttribI1iEXT(attrLoc, i);")} and using a shader as such:
-		${codeBlock("""
+        As a very simple example, imagine packing a group of similar objects' constants into a single buffer object and pointing your program at object
+        &lt;i&gt; by setting ${code("glVertexAttribI1iEXT(attrLoc, i);")} and using a shader as such:
+        ${codeBlock("""
 struct MyObjectType {
-	mat4x4 modelView;
+    mat4x4 modelView;
     vec4 materialPropertyX;
     // etc.
 };
@@ -43,15 +43,15 @@ in int objectID; // bound to attrLoc
 
 mat4x4 thisObjectsMatrix = allObjects[objectID].modelView;
 // do transform, shading, etc.
-		""")}
-		This is beneficial in much the same way that texture arrays allow choosing between similar, but independent, texture maps with a single coordinate
-		identifying which slice of the texture to use. It also resembles instancing, where a lightweight change (incrementing the instance ID) can be used to
-		generate a different and interesting result, but with additional flexibility over instancing because the values are app-controlled and not a single incrementing counter.
+        """)}
+        This is beneficial in much the same way that texture arrays allow choosing between similar, but independent, texture maps with a single coordinate
+        identifying which slice of the texture to use. It also resembles instancing, where a lightweight change (incrementing the instance ID) can be used to
+        generate a different and interesting result, but with additional flexibility over instancing because the values are app-controlled and not a single incrementing counter.
 
-		Dependent pointer fetches are allowed, so more complex scene graph structures can be built into buffer objects providing significant new flexibility in
-		the use of shaders. Another simple example, showing something you can't do with existing functionality, is to do dependent fetches into many buffer
-		objects:
-		${codeBlock("""
+        Dependent pointer fetches are allowed, so more complex scene graph structures can be built into buffer objects providing significant new flexibility in
+        the use of shaders. Another simple example, showing something you can't do with existing functionality, is to do dependent fetches into many buffer
+        objects:
+        ${codeBlock("""
 GenBuffers(N, dataBuffers);
 GenBuffers(1, &pointerBuffer);
 
@@ -76,141 +76,141 @@ MakeBufferResidentNV(target, READ_ONLY);
 // now in the shader, we can use a double indirection
 vec4 **ptrToBuffers = pointerBufferAddr;
 vec4 *ptrToBufferI = ptrToBuffers[i];
-		""")}
-		This allows simultaneous access to more buffers than ${registryLinkTo("EXT", "bindable_uniform")} (MAX_VERTEX_BINDABLE_UNIFORMS, etc.) and each can be
-		larger than MAX_BINDABLE_UNIFORM_SIZE.
-		"""
+        """)}
+        This allows simultaneous access to more buffers than ${registryLinkTo("EXT", "bindable_uniform")} (MAX_VERTEX_BINDABLE_UNIFORMS, etc.) and each can be
+        larger than MAX_BINDABLE_UNIFORM_SIZE.
+        """
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV.",
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV.",
 
-		"BUFFER_GPU_ADDRESS_NV"..0x8F1D
-	)
+        "BUFFER_GPU_ADDRESS_NV"..0x8F1D
+    )
 
-	IntConstant(
-		"Returned by the {@code type} parameter of GetActiveUniform.",
+    IntConstant(
+        "Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"GPU_ADDRESS_NV"..0x8F34
-	)
+        "GPU_ADDRESS_NV"..0x8F34
+    )
 
-	IntConstant(
-		"Accepted by the {@code value} parameter of GetIntegerui64vNV.",
+    IntConstant(
+        "Accepted by the {@code value} parameter of GetIntegerui64vNV.",
 
-		"MAX_SHADER_BUFFER_ADDRESS_NV"..0x8F35
-	)
+        "MAX_SHADER_BUFFER_ADDRESS_NV"..0x8F35
+    )
 
-	void(
-		"MakeBufferResidentNV",
-		"",
+    void(
+        "MakeBufferResidentNV",
+        "",
 
-		GLenum.IN("target", ""),
-		GLenum.IN("access", "")
-	)
+        GLenum.IN("target", ""),
+        GLenum.IN("access", "")
+    )
 
-	void(
-		"MakeBufferNonResidentNV",
-		"",
+    void(
+        "MakeBufferNonResidentNV",
+        "",
 
-		GLenum.IN("target", "")
-	)
+        GLenum.IN("target", "")
+    )
 
-	GLboolean(
-		"IsBufferResidentNV",
-		"",
+    GLboolean(
+        "IsBufferResidentNV",
+        "",
 
-		GLenum.IN("target", "")
-	)
+        GLenum.IN("target", "")
+    )
 
-	void(
-		"MakeNamedBufferResidentNV",
-		"",
+    void(
+        "MakeNamedBufferResidentNV",
+        "",
 
-		GLuint.IN("buffer", ""),
-		GLenum.IN("access", "")
-	)
+        GLuint.IN("buffer", ""),
+        GLenum.IN("access", "")
+    )
 
-	void(
-		"MakeNamedBufferNonResidentNV",
-		"",
+    void(
+        "MakeNamedBufferNonResidentNV",
+        "",
 
-		GLuint.IN("buffer", "")
-	)
+        GLuint.IN("buffer", "")
+    )
 
-	GLboolean(
-		"IsNamedBufferResidentNV",
-		"",
+    GLboolean(
+        "IsNamedBufferResidentNV",
+        "",
 
-		GLuint.IN("buffer", "")
-	)
+        GLuint.IN("buffer", "")
+    )
 
-	void(
-		"GetBufferParameterui64vNV",
-		"",
+    void(
+        "GetBufferParameterui64vNV",
+        "",
 
-		GLenum.IN("target", ""),
-		GLenum.IN("pname", ""),
-		Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
-	)
+        GLenum.IN("target", ""),
+        GLenum.IN("pname", ""),
+        Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
+    )
 
-	void(
-		"GetNamedBufferParameterui64vNV",
-		"",
+    void(
+        "GetNamedBufferParameterui64vNV",
+        "",
 
-		GLuint.IN("buffer", ""),
-		GLenum.IN("pname", ""),
-		Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
-	)
+        GLuint.IN("buffer", ""),
+        GLenum.IN("pname", ""),
+        Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
+    )
 
-	void(
-		"GetIntegerui64vNV",
-		"",
+    void(
+        "GetIntegerui64vNV",
+        "",
 
-		GLenum.IN("value", ""),
-		Check(1)..ReturnParam..GLuint64EXT_p.OUT("result", "")
-	)
+        GLenum.IN("value", ""),
+        Check(1)..ReturnParam..GLuint64EXT_p.OUT("result", "")
+    )
 
-	void(
-		"Uniformui64NV",
-		"",
+    void(
+        "Uniformui64NV",
+        "",
 
-		GLint.IN("location", ""),
-		GLuint64EXT.IN("value", "")
-	)
+        GLint.IN("location", ""),
+        GLuint64EXT.IN("value", "")
+    )
 
-	void(
-		"Uniformui64vNV",
-		"",
+    void(
+        "Uniformui64vNV",
+        "",
 
-		GLint.IN("location", ""),
-		AutoSize("value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
-	)
+        GLint.IN("location", ""),
+        AutoSize("value")..GLsizei.IN("count", ""),
+        const..GLuint64EXT_p.IN("value", "")
+    )
 
-	void(
-		"GetUniformui64vNV",
-		"",
+    void(
+        "GetUniformui64vNV",
+        "",
 
-		GLuint.IN("program", ""),
-		GLint.IN("location", ""),
-		Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
-	)
+        GLuint.IN("program", ""),
+        GLint.IN("location", ""),
+        Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
+    )
 
-	void(
-		"ProgramUniformui64NV",
-		"",
+    void(
+        "ProgramUniformui64NV",
+        "",
 
-		GLuint.IN("program", ""),
-		GLint.IN("location", ""),
-		GLuint64EXT.IN("value", "")
-	)
+        GLuint.IN("program", ""),
+        GLint.IN("location", ""),
+        GLuint64EXT.IN("value", "")
+    )
 
-	void(
-		"ProgramUniformui64vNV",
-		"",
+    void(
+        "ProgramUniformui64vNV",
+        "",
 
-		GLuint.IN("program", ""),
-		GLint.IN("location", ""),
-		AutoSize("value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
-	)
+        GLuint.IN("program", ""),
+        GLint.IN("location", ""),
+        AutoSize("value")..GLsizei.IN("count", ""),
+        const..GLuint64EXT_p.IN("value", "")
+    )
 }

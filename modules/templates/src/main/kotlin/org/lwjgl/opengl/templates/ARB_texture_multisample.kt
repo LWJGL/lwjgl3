@@ -8,98 +8,98 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture_multisample") {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		 This extension provides support for two new types of "multisample textures" - two-dimensional and two-dimensional array - as well as mechanisms to
-		 fetch a specific sample from such a texture in a shader, and to attach such textures to FBOs for rendering.
+         This extension provides support for two new types of "multisample textures" - two-dimensional and two-dimensional array - as well as mechanisms to
+         fetch a specific sample from such a texture in a shader, and to attach such textures to FBOs for rendering.
 
-		This extension also includes the following functionality, first described in ${registryLinkTo("NV", "explicit_multisample")}:
-		${ul(
-			"A query in the API to query the location of samples within the pixel",
-			"An explicit control for the multisample sample mask to augment the control provided by SampleCoverage"
-		)}
+        This extension also includes the following functionality, first described in ${registryLinkTo("NV", "explicit_multisample")}:
+        ${ul(
+            "A query in the API to query the location of samples within the pixel",
+            "An explicit control for the multisample sample mask to augment the control provided by SampleCoverage"
+        )}
 
-		${GL32.promoted}
-		"""
+        ${GL32.promoted}
+        """
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetMultisamplefv.",
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetMultisamplefv.",
 
-		"SAMPLE_POSITION"..0x8E50
-	)
+        "SAMPLE_POSITION"..0x8E50
+    )
 
-	IntConstant(
-		"""
-		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
-		GetDoublev.
-		""",
+    IntConstant(
+        """
+        Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
+        GetDoublev.
+        """,
 
-		"SAMPLE_MASK"..0x8E51
-	)
+        "SAMPLE_MASK"..0x8E51
+    )
 
-	IntConstant(
-		"Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v.",
+    IntConstant(
+        "Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v.",
 
-		"SAMPLE_MASK_VALUE"..0x8E52
-	)
+        "SAMPLE_MASK_VALUE"..0x8E52
+    )
 
-	IntConstant(
-		"Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample.",
+    IntConstant(
+        "Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample.",
 
-		"TEXTURE_2D_MULTISAMPLE"..0x9100
-	)
+        "TEXTURE_2D_MULTISAMPLE"..0x9100
+    )
 
-	IntConstant(
-		"Accepted by the {@code target} parameter of TexImage2DMultisample.",
+    IntConstant(
+        "Accepted by the {@code target} parameter of TexImage2DMultisample.",
 
-		"PROXY_TEXTURE_2D_MULTISAMPLE"..0x9101
-	)
+        "PROXY_TEXTURE_2D_MULTISAMPLE"..0x9101
+    )
 
-	IntConstant(
-		"Accepted by the {@code target} parameter of BindTexture and TexImage3DMultisample.",
+    IntConstant(
+        "Accepted by the {@code target} parameter of BindTexture and TexImage3DMultisample.",
 
-		"TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9102
-	)
+        "TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9102
+    )
 
-	IntConstant(
-		"Accepted by the {@code target} parameter of TexImage3DMultisample.",
+    IntConstant(
+        "Accepted by the {@code target} parameter of TexImage3DMultisample.",
 
-		"PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9103
-	)
+        "PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9103
+    )
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_SAMPLE_MASK_WORDS"..0x8E59,
-		"MAX_COLOR_TEXTURE_SAMPLES"..0x910E,
-		"MAX_DEPTH_TEXTURE_SAMPLES"..0x910F,
-		"MAX_INTEGER_SAMPLES"..0x9110,
-		"TEXTURE_BINDING_2D_MULTISAMPLE"..0x9104,
-		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY"..0x9105
-	)
+        "MAX_SAMPLE_MASK_WORDS"..0x8E59,
+        "MAX_COLOR_TEXTURE_SAMPLES"..0x910E,
+        "MAX_DEPTH_TEXTURE_SAMPLES"..0x910F,
+        "MAX_INTEGER_SAMPLES"..0x9110,
+        "TEXTURE_BINDING_2D_MULTISAMPLE"..0x9104,
+        "TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY"..0x9105
+    )
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_SAMPLES"..0x9106,
-		"TEXTURE_FIXED_SAMPLE_LOCATIONS"..0x9107
-	)
+        "TEXTURE_SAMPLES"..0x9106,
+        "TEXTURE_FIXED_SAMPLE_LOCATIONS"..0x9107
+    )
 
-	IntConstant(
-		"Returned by the {@code type} parameter of GetActiveUniform.",
+    IntConstant(
+        "Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_2D_MULTISAMPLE"..0x9108,
-		"INT_SAMPLER_2D_MULTISAMPLE"..0x9109,
-		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE"..0x910A,
-		"SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910B,
-		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910C,
-		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910D
-	)
+        "SAMPLER_2D_MULTISAMPLE"..0x9108,
+        "INT_SAMPLER_2D_MULTISAMPLE"..0x9109,
+        "UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE"..0x910A,
+        "SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910B,
+        "INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910C,
+        "UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910D
+    )
 
-	GL32 reuse "TexImage2DMultisample"
-	GL32 reuse "TexImage3DMultisample"
-	GL32 reuse "GetMultisamplefv"
-	GL32 reuse "SampleMaski"
+    GL32 reuse "TexImage2DMultisample"
+    GL32 reuse "TexImage3DMultisample"
+    GL32 reuse "GetMultisamplefv"
+    GL32 reuse "SampleMaski"
 }

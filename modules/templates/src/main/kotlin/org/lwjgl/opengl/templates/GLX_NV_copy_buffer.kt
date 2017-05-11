@@ -9,38 +9,38 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_NV_copy_buffer = "GLXNVCopyBuffer".nativeClassGLX("GLX_NV_copy_buffer", postfix = NV) {
-	documentation =
-		"""
-		Native bindings to the ${registryLink("NV", "glx_copy_buffer")} extension.
+    documentation =
+        """
+        Native bindings to the ${registryLink("NV", "glx_copy_buffer")} extension.
 
-		Extends ${ARB_copy_buffer.link} to have GLX bindings.
-		"""
+        Extends ${ARB_copy_buffer.link} to have GLX bindings.
+        """
 
-	void(
-		"CopyBufferSubDataNV",
-		"",
+    void(
+        "CopyBufferSubDataNV",
+        "",
 
-		DISPLAY,
-		GLXContext.IN("readCtx", ""),
-		GLXContext.IN("writeCtx", ""),
-		GLenum.IN("readTarget", ""),
-		GLenum.IN("writeTarget", ""),
-		GLintptr.IN("readOffset", ""),
-		GLintptr.IN("writeOffset", ""),
-		GLsizeiptr.IN("size", "")
-	)
+        DISPLAY,
+        GLXContext.IN("readCtx", ""),
+        GLXContext.IN("writeCtx", ""),
+        GLenum.IN("readTarget", ""),
+        GLenum.IN("writeTarget", ""),
+        GLintptr.IN("readOffset", ""),
+        GLintptr.IN("writeOffset", ""),
+        GLsizeiptr.IN("size", "")
+    )
 
-	void(
-		"NamedCopyBufferSubDataNV",
-		"",
+    void(
+        "NamedCopyBufferSubDataNV",
+        "",
 
-		DISPLAY,
-		GLXContext.IN("readCtx", ""),
-		GLXContext.IN("writeCtx", ""),
-		GLuint.IN("readBuffer", ""),
-		GLuint.IN("writeBuffer", ""),
-		GLintptr.IN("readOffset", ""),
-		GLintptr.IN("writeOffset", ""),
-		GLsizeiptr.IN("size", "")
-	)
+        DISPLAY,
+        GLXContext.IN("readCtx", ""),
+        GLXContext.IN("writeCtx", ""),
+        GLuint.IN("readBuffer", ""),
+        GLuint.IN("writeBuffer", ""),
+        GLintptr.IN("readOffset", ""),
+        GLintptr.IN("writeOffset", ""),
+        GLsizeiptr.IN("size", "")
+    )
 }

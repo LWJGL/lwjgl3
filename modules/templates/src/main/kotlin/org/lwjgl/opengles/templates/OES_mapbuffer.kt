@@ -8,54 +8,54 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OES) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		This extension adds to the vertex buffer object functionality supported by OpenGL ES 1.1 or ES 2.0 by allowing the entire data storage of a buffer
-		object to be mapped into the client's address space.
-		"""
+        This extension adds to the vertex buffer object functionality supported by OpenGL ES 1.1 or ES 2.0 by allowing the entire data storage of a buffer
+        object to be mapped into the client's address space.
+        """
 
-	IntConstant(
-		"Accepted by the {@code access} parameter of MapBufferOES.",
+    IntConstant(
+        "Accepted by the {@code access} parameter of MapBufferOES.",
 
-		"WRITE_ONLY_OES"..0x88B9
-	)
+        "WRITE_ONLY_OES"..0x88B9
+    )
 
-	IntConstant(
-		"Accepted by the {@code value} parameter of GetBufferParameteriv.",
+    IntConstant(
+        "Accepted by the {@code value} parameter of GetBufferParameteriv.",
 
-		"BUFFER_ACCESS_OES"..0x88BB,
-		"BUFFER_MAPPED_OES"..0x88BC
-	)
+        "BUFFER_ACCESS_OES"..0x88BB,
+        "BUFFER_MAPPED_OES"..0x88BC
+    )
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetBufferPointervOES.",
+    IntConstant(
+        "Accepted by the {@code pname} parameter of GetBufferPointervOES.",
 
-		"BUFFER_MAP_POINTER_OES"..0x88BD
-	)
+        "BUFFER_MAP_POINTER_OES"..0x88BD
+    )
 
-	MapPointer("GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE)")..void_p(
-		"MapBufferOES",
-		"",
+    MapPointer("GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE)")..void_p(
+        "MapBufferOES",
+        "",
 
-		GLenum.IN("target", ""),
-		GLenum.IN("access", "")
-	)
+        GLenum.IN("target", ""),
+        GLenum.IN("access", "")
+    )
 
-	GLboolean(
-		"UnmapBufferOES",
-		"",
+    GLboolean(
+        "UnmapBufferOES",
+        "",
 
-		GLenum.IN("target", "")
-	)
+        GLenum.IN("target", "")
+    )
 
-	void(
-		"GetBufferPointervOES",
-		"",
+    void(
+        "GetBufferPointervOES",
+        "",
 
-		GLenum.IN("target", ""),
-		GLenum.IN("pname", ""),
-		ReturnParam..Check(1)..void_pp.OUT("params", "")
-	)
+        GLenum.IN("target", ""),
+        GLenum.IN("pname", ""),
+        ReturnParam..Check(1)..void_pp.OUT("params", "")
+    )
 }

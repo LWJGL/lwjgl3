@@ -8,11 +8,11 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_uniform_buffer_unified_memory = "NVUniformBufferUnifiedMemory".nativeClassGL("NV_uniform_buffer_unified_memory", postfix = NV) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		This extension provides a mechanism to specify uniform buffers
+        This extension provides a mechanism to specify uniform buffers
     using GPU addresses.
 
     Binding uniform buffers is one of the most frequent and expensive
@@ -21,23 +21,23 @@ val NV_uniform_buffer_unified_memory = "NVUniformBufferUnifiedMemory".nativeClas
     NV_shader_buffer_load. The intent of this extension is to enable a 
     way for the application to specify uniform buffer state that alleviates
     the overhead of object binds and driver memory management.
-		"""
+        """
 
-	IntConstant(
-		"Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled.",
+    IntConstant(
+        "Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled.",
 
-		"UNIFORM_BUFFER_UNIFIED_NV"..0x936E
-	)
+        "UNIFORM_BUFFER_UNIFIED_NV"..0x936E
+    )
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV.",
+    IntConstant(
+        "Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV.",
 
-		"UNIFORM_BUFFER_ADDRESS_NV"..0x936F
-	)
+        "UNIFORM_BUFFER_ADDRESS_NV"..0x936F
+    )
 
-	IntConstant(
-		"Accepted by the {@code target} parameter of GetIntegeri_vNV.",
+    IntConstant(
+        "Accepted by the {@code target} parameter of GetIntegeri_vNV.",
 
-		"UNIFORM_BUFFER_LENGTH_NV"..0x9370
-	)
+        "UNIFORM_BUFFER_LENGTH_NV"..0x9370
+    )
 }

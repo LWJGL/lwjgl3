@@ -8,55 +8,55 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_color_buffer_float = "ARBColorBufferFloat".nativeClassGL("ARB_color_buffer_float", postfix = ARB) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		The standard OpenGL pipeline is based on a fixed-point pipeline. While color components are nominally floating-point values in the pipeline, components
-		are frequently clamped to the range [0,1] to accomodate the fixed-point color buffer representation and allow for fixed-point computational hardware.
+        The standard OpenGL pipeline is based on a fixed-point pipeline. While color components are nominally floating-point values in the pipeline, components
+        are frequently clamped to the range [0,1] to accomodate the fixed-point color buffer representation and allow for fixed-point computational hardware.
 
-		This extension adds pixel formats or visuals with floating-point RGBA color components and controls for clamping of color components within the pipeline.
+        This extension adds pixel formats or visuals with floating-point RGBA color components and controls for clamping of color components within the pipeline.
 
-		For a floating-point RGBA pixel format, the size of each float components is specified using the same attributes that are used for defining the size of
-		fixed-point components. 32-bit floating-point components are in the standard IEEE float format. 16-bit floating-point components have 1 sign bit, 5
-		exponent bits, and 10 mantissa bits.
+        For a floating-point RGBA pixel format, the size of each float components is specified using the same attributes that are used for defining the size of
+        fixed-point components. 32-bit floating-point components are in the standard IEEE float format. 16-bit floating-point components have 1 sign bit, 5
+        exponent bits, and 10 mantissa bits.
 
-		Clamping control provides a way to disable certain color clamps and allow programs, and the fixed-function pipeline, to deal in unclamped colors. There
-		are controls to modify clamping of vertex colors, clamping of fragment colors throughout the pipeline, and for pixel return data.
+        Clamping control provides a way to disable certain color clamps and allow programs, and the fixed-function pipeline, to deal in unclamped colors. There
+        are controls to modify clamping of vertex colors, clamping of fragment colors throughout the pipeline, and for pixel return data.
 
-		The default state for fragment clamping is #FIXED_ONLY_ARB, which has the behavior of clamping colors for fixed-point color buffers and not clamping
-		colors for floating-pont color buffers.
+        The default state for fragment clamping is #FIXED_ONLY_ARB, which has the behavior of clamping colors for fixed-point color buffers and not clamping
+        colors for floating-pont color buffers.
 
-		Vertex colors are clamped by default.
+        Vertex colors are clamped by default.
 
-		${GL30.promoted}
-		"""
+        ${GL30.promoted}
+        """
 
-	IntConstant(
-		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+    IntConstant(
+        "Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"RGBA_FLOAT_MODE_ARB"..0x8820
-	)
+        "RGBA_FLOAT_MODE_ARB"..0x8820
+    )
 
-	val Targets = IntConstant(
-		"Accepted by the {@code target} parameter of ClampColorARB and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+    val Targets = IntConstant(
+        "Accepted by the {@code target} parameter of ClampColorARB and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"CLAMP_VERTEX_COLOR_ARB"..0x891A,
-		"CLAMP_FRAGMENT_COLOR_ARB"..0x891B,
-		"CLAMP_READ_COLOR_ARB"..0x891C
-	).javaDocLinks
+        "CLAMP_VERTEX_COLOR_ARB"..0x891A,
+        "CLAMP_FRAGMENT_COLOR_ARB"..0x891B,
+        "CLAMP_READ_COLOR_ARB"..0x891C
+    ).javaDocLinks
 
-	IntConstant(
-		"Accepted by the {@code clamp} parameter of ClampColorARB.",
+    IntConstant(
+        "Accepted by the {@code clamp} parameter of ClampColorARB.",
 
-		"FIXED_ONLY_ARB"..0x891D
-	)
+        "FIXED_ONLY_ARB"..0x891D
+    )
 
-	void(
-		"ClampColorARB",
-		"Controls color clamping.",
+    void(
+        "ClampColorARB",
+        "Controls color clamping.",
 
-		GLenum.IN("target", "the color target", Targets),
-		GLenum.IN("clamp", "the new clamping state", "#TRUE #FALSE #FIXED_ONLY_ARB")
-	)
+        GLenum.IN("target", "the color target", Targets),
+        GLenum.IN("clamp", "the new clamping state", "#TRUE #FALSE #FIXED_ONLY_ARB")
+    )
 }

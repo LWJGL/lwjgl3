@@ -8,36 +8,36 @@ import org.lwjgl.egl.*
 import org.lwjgl.generator.*
 
 val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix = NV) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		This extension allows an application to query which native display, pixmap and surface corresponds to a EGL object.
-		"""
+        This extension allows an application to query which native display, pixmap and surface corresponds to a EGL object.
+        """
 
-	EGLBoolean(
-		"QueryNativeDisplayNV",
-		"",
+    EGLBoolean(
+        "QueryNativeDisplayNV",
+        "",
 
-		EGLDisplay.IN("dpy", ""),
-		Check(1)..EGLNativeDisplayType_p.OUT("display_id", "")
-	)
+        EGLDisplay.IN("dpy", ""),
+        Check(1)..EGLNativeDisplayType_p.OUT("display_id", "")
+    )
 
-	EGLBoolean(
-		"QueryNativeWindowNV",
-		"",
+    EGLBoolean(
+        "QueryNativeWindowNV",
+        "",
 
-		EGLDisplay.IN("dpy", ""),
-		EGLSurface.IN("surf", ""),
-		Check(1)..EGLNativeWindowType_p.OUT("window", "")
-	)
+        EGLDisplay.IN("dpy", ""),
+        EGLSurface.IN("surf", ""),
+        Check(1)..EGLNativeWindowType_p.OUT("window", "")
+    )
 
-	EGLBoolean(
-		"QueryNativePixmapNV",
-		"",
+    EGLBoolean(
+        "QueryNativePixmapNV",
+        "",
 
-		EGLDisplay.IN("dpy", ""),
-		EGLSurface.IN("surf", ""),
-		Check(1)..EGLNativePixmapType_p.OUT("pixmap", "")
-	)
+        EGLDisplay.IN("dpy", ""),
+        EGLSurface.IN("surf", ""),
+        Check(1)..EGLNativePixmapType_p.OUT("pixmap", "")
+    )
 }

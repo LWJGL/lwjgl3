@@ -9,10 +9,10 @@ import org.lwjgl.generator.*
 val LINUX_PACKAGE = "org.lwjgl.system.linux"
 
 fun config() {
-	packageInfo(
-		LINUX_PACKAGE,
-		"Contains bindings to native APIs specific to the Linux operating system."
-	)
+    packageInfo(
+        LINUX_PACKAGE,
+        "Contains bindings to native APIs specific to the Linux operating system."
+    )
 }
 
 val long = IntegerType("long", PrimitiveMapping.POINTER)

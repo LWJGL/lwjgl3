@@ -8,28 +8,28 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GLX_INTEL_swap_event = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_event", INTEL) {
-	documentation =
-		"""
-		Native bindings to the ${registryLink("INTEL", "swap_event")} extension.
+    documentation =
+        """
+        Native bindings to the ${registryLink("INTEL", "swap_event")} extension.
 
-		This extension adds a new event type, #BUFFER_SWAP_COMPLETE_INTEL_MASK, which is sent to the client via the X11 event stream and
-		selected/consumed by the normal GLX event mask mechanisms, to indicate when a previously queued swap has completed.
+        This extension adds a new event type, #BUFFER_SWAP_COMPLETE_INTEL_MASK, which is sent to the client via the X11 event stream and
+        selected/consumed by the normal GLX event mask mechanisms, to indicate when a previously queued swap has completed.
 
-		Requires ${GLX13.glx}.
-		"""
+        Requires ${GLX13.glx}.
+        """
 
-	IntConstant(
-		"Accepted by the {@code mask} parameter of #SelectEvent() and returned in the {@code mask} parameter of #GetSelectedEvent().",
+    IntConstant(
+        "Accepted by the {@code mask} parameter of #SelectEvent() and returned in the {@code mask} parameter of #GetSelectedEvent().",
 
-		"BUFFER_SWAP_COMPLETE_INTEL_MASK"..0x04000000
-	)
+        "BUFFER_SWAP_COMPLETE_INTEL_MASK"..0x04000000
+    )
 
-	IntConstant(
-		"Returned in the {@code event_type} field of a \"swap complete\" event.",
+    IntConstant(
+        "Returned in the {@code event_type} field of a \"swap complete\" event.",
 
-		"EXCHANGE_COMPLETE_INTEL"..0x8180,
-		"COPY_COMPLETE_INTEL"..0x8181,
-		"FLIP_COMPLETE_INTEL"..0x8182
-	)
+        "EXCHANGE_COMPLETE_INTEL"..0x8180,
+        "COPY_COMPLETE_INTEL"..0x8181,
+        "FLIP_COMPLETE_INTEL"..0x8182
+    )
 
 }

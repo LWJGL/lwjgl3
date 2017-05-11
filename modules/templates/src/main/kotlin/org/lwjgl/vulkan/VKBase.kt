@@ -9,18 +9,18 @@ import org.lwjgl.generator.*
 val VULKAN_PACKAGE = "org.lwjgl.vulkan"
 
 fun config() {
-	packageInfo(
-		VULKAN_PACKAGE,
-		"""
-		Contains bindings to ${url("https://www.khronos.org/vulkan", "Vulkan")}, a new generation graphics and compute API that provides high-efficiency,
-		cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.
+    packageInfo(
+        VULKAN_PACKAGE,
+        """
+        Contains bindings to ${url("https://www.khronos.org/vulkan", "Vulkan")}, a new generation graphics and compute API that provides high-efficiency,
+        cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.
 
-		Experimental extensions (KHX, NVX, etc) is not supported API. When such an extension is promoted to stable, the corresponding experimental bindings
-		will be removed.
+        Experimental extensions (KHX, NVX, etc) is not supported API. When such an extension is promoted to stable, the corresponding experimental bindings
+        will be removed.
 
-		<b>macOS</b>: Vulkan can be used on macOS with a solution that emulates it over Metal, like ${url("https://moltengl.com/moltenvk/", "MoltenVK")}.
-		"""
-	)
+        <b>macOS</b>: Vulkan can be used on macOS with a solution that emulates it over Metal, like ${url("https://moltengl.com/moltenvk/", "MoltenVK")}.
+        """
+    )
 }
 
 val VkFlags = typedef(uint32_t, "VkFlags")

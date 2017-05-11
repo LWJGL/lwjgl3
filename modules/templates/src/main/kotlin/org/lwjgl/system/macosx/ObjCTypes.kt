@@ -29,27 +29,27 @@ val objc_property_t_p = objc_property_t.p
 
 // Defines a property attribute
 val objc_property_attribute_t_p = struct(MACOSX_PACKAGE, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
-	documentation = "Defines a property attribute."
+    documentation = "Defines a property attribute."
 
-	charUTF8_p.member("name", "the name of the attribute")
-	charUTF8_p.member("value", "the value of the attribute (usually empty)")
+    charUTF8_p.member("name", "the name of the attribute")
+    charUTF8_p.member("value", "the value of the attribute (usually empty)")
 }.p
 
 // Defines a method
 val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {
-	documentation = "Defines a method."
+    documentation = "Defines a method."
 
-	SEL.member("name", "the name of the method at runtime")
-	charUTF8_p.member("types", "the types of the method arguments")
+    SEL.member("name", "the name of the method at runtime")
+    charUTF8_p.member("types", "the types of the method arguments")
 }
 val objc_method_description_p = objc_method_description.p
 
 val EnumerationMutationHandler = "EnumerationMutationHandler".callback(
-	MACOSX_PACKAGE, void, "EnumerationMutationHandler",
-	"Will be called when an object is mutated during a foreach iteration.",
-	id.IN("id", "the object that was mutated")
+    MACOSX_PACKAGE, void, "EnumerationMutationHandler",
+    "Will be called when an object is mutated during a foreach iteration.",
+    id.IN("id", "the object that was mutated")
 ) {
-	documentation = "A mutation handler."
+    documentation = "A mutation handler."
 }
 
 val objc_AssociationPolicy = typedef(uintptr_t, "objc_AssociationPolicy")

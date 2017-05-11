@@ -9,21 +9,21 @@ import org.lwjgl.opengles.*
 import org.lwjgl.opengles.BufferType.*
 
 val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES("OES_draw_elements_base_vertex", postfix = OES) {
-	documentation =
-		"""
-		Native bindings to the $registryLink extension.
+    documentation =
+        """
+        Native bindings to the $registryLink extension.
 
-		This extension provides a method to specify a "base vertex offset" value which is effectively added to every vertex index that is transferred through
-		DrawElements.
+        This extension provides a method to specify a "base vertex offset" value which is effectively added to every vertex index that is transferred through
+        DrawElements.
 
-		This mechanism can be used to decouple a set of indices from the actual vertex array that it is referencing. This is useful if an application stores
-		multiple indexed models in a single vertex array. The same index array can be used to draw the model no matter where it ends up in a larger vertex
-		array simply by changing the base vertex value. Without this functionality, it would be necessary to rebind all the vertex attributes every time
-		geometry is switched and this can have larger performance penalty.
+        This mechanism can be used to decouple a set of indices from the actual vertex array that it is referencing. This is useful if an application stores
+        multiple indexed models in a single vertex array. The same index array can be used to draw the model no matter where it ends up in a larger vertex
+        array simply by changing the base vertex value. Without this functionality, it would be necessary to rebind all the vertex attributes every time
+        geometry is switched and this can have larger performance penalty.
 
-		For example consider the (very contrived and simple) example of drawing two triangles to form a quad. In the typical example you have the following
-		setup:
-		${codeBlock("""
+        For example consider the (very contrived and simple) example of drawing two triangles to form a quad. In the typical example you have the following
+        setup:
+        ${codeBlock("""
          vertices                indices
          ----------                -----
       0 | (-1,  1) |            0 |  0  |
@@ -33,14 +33,14 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
          ----------             4 |  0  |
                                 5 |  2  |
                                    -----
-		""")}
-		which is normally rendered with the call
-		${codeBlock("""
-		DrawElements(TRIANGLES, 6, UNSIGNED_BYTE, &indices).
-		""")}
-		Now consider the case where the vertices you want to draw are not at the start of a vertex array but are instead located at offset 100 into a larger
-		array:
-		${codeBlock("""
+        """)}
+        which is normally rendered with the call
+        ${codeBlock("""
+        DrawElements(TRIANGLES, 6, UNSIGNED_BYTE, &indices).
+        """)}
+        Now consider the case where the vertices you want to draw are not at the start of a vertex array but are instead located at offset 100 into a larger
+        array:
+        ${codeBlock("""
            vertices2             indices2
            ----------             -----
               ....             0 | 100 |
@@ -50,61 +50,61 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
       103 | ( 1,  1) |         4 | 100 |
               ....             5 | 102 |
            ----------             -----
-		""")}
-		The typical choices for rendering this are to rebind your vertex attributes with an additional offset of 100*stride, or to create an new array of
-		indices (as indices2 in the example). However both rebinding vertex attributes and rebuilding index arrays can be quite costly activities.
+        """)}
+        The typical choices for rendering this are to rebind your vertex attributes with an additional offset of 100*stride, or to create an new array of
+        indices (as indices2 in the example). However both rebinding vertex attributes and rebuilding index arrays can be quite costly activities.
 
-		With the new drawing commands introduced by this extension you can instead draw using vertices2 and the new draw call:
-		${codeBlock("""
-		DrawElementsBaseVertexOES(TRIANGLES, 6, UNSIGNED_BYTE, &indices, 100)""")}
-		Requires ${GLES20.core}.
-		"""
+        With the new drawing commands introduced by this extension you can instead draw using vertices2 and the new draw call:
+        ${codeBlock("""
+        DrawElementsBaseVertexOES(TRIANGLES, 6, UNSIGNED_BYTE, &indices, 100)""")}
+        Requires ${GLES20.core}.
+        """
 
-	void(
-		"DrawElementsBaseVertexOES",
-		"",
+    void(
+        "DrawElementsBaseVertexOES",
+        "",
 
-		GLenum.IN("mode", ""),
-		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
-		GLint.IN("basevertex", "")
-	)
+        GLenum.IN("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        GLint.IN("basevertex", "")
+    )
 
-	DependsOn("GLES30")..void(
-		"DrawRangeElementsBaseVertexOES",
-		"",
+    DependsOn("GLES30")..void(
+        "DrawRangeElementsBaseVertexOES",
+        "",
 
-		GLenum.IN("mode", ""),
-		GLuint.IN("start", ""),
-		GLuint.IN("end", ""),
-		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
-		GLint.IN("basevertex", "")
-	)
+        GLenum.IN("mode", ""),
+        GLuint.IN("start", ""),
+        GLuint.IN("end", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        GLint.IN("basevertex", "")
+    )
 
-	DependsOn("GLES30")..void(
-		"DrawElementsInstancedBaseVertexOES",
-		"",
+    DependsOn("GLES30")..void(
+        "DrawElementsInstancedBaseVertexOES",
+        "",
 
-		GLenum.IN("mode", ""),
-		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
-		GLsizei.IN("instancecount", ""),
-		GLint.IN("basevertex", "")
-	)
+        GLenum.IN("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        GLsizei.IN("instancecount", ""),
+        GLint.IN("basevertex", "")
+    )
 
-	DependsOn("EXT_multi_draw_arrays")..void(
-		"MultiDrawElementsBaseVertexOES",
-		"",
+    DependsOn("EXT_multi_draw_arrays")..void(
+        "MultiDrawElementsBaseVertexOES",
+        "",
 
-		GLenum.IN("mode", ""),
-		const..GLsizei_p.IN("count", ""),
-		GLenum.IN("type", ""),
-		const..void_p.const.p.IN("indices", ""),
-		AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", ""),
-		const..GLint_p.IN("basevertex", "")
-	)
+        GLenum.IN("mode", ""),
+        const..GLsizei_p.IN("count", ""),
+        GLenum.IN("type", ""),
+        const..void_p.const.p.IN("indices", ""),
+        AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", ""),
+        const..GLint_p.IN("basevertex", "")
+    )
 }

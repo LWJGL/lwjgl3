@@ -9,10 +9,10 @@ import org.lwjgl.generator.*
 val OPENAL_PACKAGE = "org.lwjgl.openal"
 
 fun config() {
-	packageInfo(
-		OPENAL_PACKAGE,
-		"""
-		Contains bindings to the ${url("http://www.openal.org/", "OpenAL")} cross-platform 3D audio API.
+    packageInfo(
+        OPENAL_PACKAGE,
+        """
+        Contains bindings to the ${url("http://www.openal.org/", "OpenAL")} cross-platform 3D audio API.
 
         LWJGL comes with a software OpenAL implementation, ${url("http://www.openal-soft.org/", "OpenAL Soft")}.
 
@@ -21,9 +21,9 @@ fun config() {
 
         In addition to standard OpenAL features, OpenAL Soft supports ${url("https://en.wikipedia.org/wiki/Head-related_transfer_function", "HRTF")},
         ${url("https://en.wikipedia.org/wiki/Ambisonics", "Ambisonics")} and ${url("http://www.codemasters.com/research/3D_sound_for_3D_games.pdf", "3D7.1")}.
-		Documentation for these features is available in the OpenAL Soft ${url("https://github.com/kcat/openal-soft/tree/master/docs", "repository")}.
-		"""
-	)
+        Documentation for these features is available in the OpenAL Soft ${url("https://github.com/kcat/openal-soft/tree/master/docs", "repository")}.
+        """
+    )
 }
 
 // void
