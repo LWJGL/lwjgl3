@@ -244,7 +244,7 @@ internal class VectorValueTransform(
 internal class MapPointerTransform(val expression: String) : FunctionTransform<ReturnValue> {
     override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
     override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = $expression;
-		return apiGetMappedBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
+        return apiGetMappedBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
 }
 
 internal class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true) : FunctionTransform<ReturnValue> {

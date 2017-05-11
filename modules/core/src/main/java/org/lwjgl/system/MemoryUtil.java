@@ -88,11 +88,11 @@ public final class MemoryUtil {
     private MemoryUtil() {
     }
 
-	/*  -------------------------------------
+    /*  -------------------------------------
         -------------------------------------
-			EXPLICIT MEMORY MANAGEMENT API
-		-------------------------------------
-	    ------------------------------------- */
+            EXPLICIT MEMORY MANAGEMENT API
+        -------------------------------------
+        ------------------------------------- */
 
     /** The interface implemented by the memory allocator used by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc). */
     public interface MemoryAllocator {
@@ -517,11 +517,11 @@ public final class MemoryUtil {
         DebugAllocator.report(report, groupByStackTrace, groupByThread);
     }
 
-	/*  -------------------------------------
+    /*  -------------------------------------
         -------------------------------------
-				BUFFER MANAGEMENT API
-		-------------------------------------
-	    ------------------------------------- */
+                BUFFER MANAGEMENT API
+        -------------------------------------
+        ------------------------------------- */
 
     // --- [ memAddress0 ] ---
 
@@ -1012,11 +1012,11 @@ public final class MemoryUtil {
         }
     }
 
-	/*  -------------------------------------
+    /*  -------------------------------------
         -------------------------------------
-				UNSAFE MEMORY ACCESS API
-		-------------------------------------
-	    ------------------------------------- */
+               UNSAFE MEMORY ACCESS API
+        -------------------------------------
+        ------------------------------------- */
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1065,11 +1065,11 @@ public final class MemoryUtil {
     public static void memPutDouble(long ptr, double value) { ACCESSOR.memPutDouble(ptr, value);}
     public static void memPutAddress(long ptr, long value)  { ACCESSOR.memPutAddress(ptr, value);}
 
-	/*  -------------------------------------
+    /*  -------------------------------------
         -------------------------------------
-				JNI UTILITIES API
-		-------------------------------------
-	    ------------------------------------- */
+                  JNI UTILITIES API
+        -------------------------------------
+        ------------------------------------- */
 
     /**
      * Returns the object that the specified global reference points to.
@@ -1093,11 +1093,11 @@ public final class MemoryUtil {
     /** Deprecated, use {@link JNINativeInterface#DeleteWeakGlobalRef} instead. */
     @Deprecated public static void memDeleteWeakGlobalRef(long globalRef) { DeleteWeakGlobalRef(globalRef);}
 
-	/*  -------------------------------------
+    /*  -------------------------------------
         -------------------------------------
-				TEXT ENCODING API
-		-------------------------------------
-	    ------------------------------------- */
+                  TEXT ENCODING API
+        -------------------------------------
+        ------------------------------------- */
 
     /**
      * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated. If text is null, null is returned.
@@ -1313,11 +1313,11 @@ public final class MemoryUtil {
         return (value.length() + (nullTerminated ? 1 : 0)) << 1;
     }
 
-	/*  -------------------------------------
+    /*  -------------------------------------
         -------------------------------------
-				TEXT DECODING API
-		-------------------------------------
-	    ------------------------------------- */
+                  TEXT DECODING API
+        -------------------------------------
+        ------------------------------------- */
 
     private static int memLengthNT1(long address, int maxLength) {
         return BITS64

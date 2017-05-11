@@ -3,324 +3,324 @@
   ~ License terms: https://www.lwjgl.org/license
   -->
 <project name="native-macosx" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
-	<import file="../build-definitions.xml"/>
+    <import file="../build-definitions.xml"/>
 
-	<!-- Ask Xcode for correct path to XCode tools -->
-	<!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
-	<exec executable="xcode-select" outputproperty="developer_path" errorproperty="xcode-error" failonerror="false" failifexecutionfails="false">
-		<arg value="--print-path"/>
-	</exec>
-	<!-- Default to /Developer if xcode-select fails -->
-	<condition property="developer_path" value="/Developer">
-		<isset property="xcode-error"/>
-	</condition>
+    <!-- Ask Xcode for correct path to XCode tools -->
+    <!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
+    <exec executable="xcode-select" outputproperty="developer_path" errorproperty="xcode-error" failonerror="false" failifexecutionfails="false">
+        <arg value="--print-path"/>
+    </exec>
+    <!-- Default to /Developer if xcode-select fails -->
+    <condition property="developer_path" value="/Developer">
+        <isset property="xcode-error"/>
+    </condition>
 
-	<!-- Choose a MacOSX SDK -->
-	<macrodef name="find-sdkroot">
-		<attribute name="version"/>
+    <!-- Choose a MacOSX SDK -->
+    <macrodef name="find-sdkroot">
+        <attribute name="version"/>
 
-		<sequential>
-			<condition property="sdkroot" value="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk">
-				<and>
-					<not><isset property="sdkroot"/></not>
-					<available file="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk" type="dir"/>
-				</and>
-			</condition>
-		</sequential>
-	</macrodef>
+        <sequential>
+            <condition property="sdkroot" value="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk">
+                <and>
+                    <not><isset property="sdkroot"/></not>
+                    <available file="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk" type="dir"/>
+                </and>
+            </condition>
+        </sequential>
+    </macrodef>
 
-	<find-sdkroot version="10.12"/>
-	<find-sdkroot version="10.11"/>
-	<find-sdkroot version="10.10"/>
-	<find-sdkroot version="10.9"/>
-	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
+    <find-sdkroot version="10.12"/>
+    <find-sdkroot version="10.11"/>
+    <find-sdkroot version="10.10"/>
+    <find-sdkroot version="10.9"/>
+    <fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
-	<property name="macosx-version-min" value="10.9"/>
+    <property name="macosx-version-min" value="10.9"/>
 
-	<property name="src.native.rel" value="../../../../${src.native}"/>
+    <property name="src.native.rel" value="../../../../${src.native}"/>
 
-	<macrodef name="compile">
-		<attribute name="dest"/>
-		<attribute name="lang" default="c"/>
-		<attribute name="flags"/>
-		<attribute name="relative" default="true"/>
-		<element name="source" implicit="true"/>
-		<sequential>
-			<local name="cpp"/>
-			<condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
-			<local name="clang"/>
-			<condition property="clang" value="clang++" else="clang"><equals arg1="@{lang}" arg2="c++"/></condition>
+    <macrodef name="compile">
+        <attribute name="dest"/>
+        <attribute name="lang" default="c"/>
+        <attribute name="flags"/>
+        <attribute name="relative" default="true"/>
+        <element name="source" implicit="true"/>
+        <sequential>
+            <local name="cpp"/>
+            <condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
+            <local name="clang"/>
+            <condition property="clang" value="clang++" else="clang"><equals arg1="@{lang}" arg2="c++"/></condition>
 
-			<mkdir dir="@{dest}"/>
-			<apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c11 -ObjC" unless:set="cpp"/>
-				<arg line="-c -std=c++11" if:set="cpp"/>
-				<arg line="-O3 -flto -fPIC @{flags} -DNDEBUG -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
+            <mkdir dir="@{dest}"/>
+            <apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+                <arg line="-c -std=c11 -ObjC" unless:set="cpp"/>
+                <arg line="-c -std=c++11" if:set="cpp"/>
+                <arg line="-O3 -flto -fPIC @{flags} -DNDEBUG -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
-				<arg value="-I${jni.headers}"/>
-				<arg value="-I${jni.headers}/darwin"/>
+                <arg value="-I${jni.headers}"/>
+                <arg value="-I${jni.headers}/darwin"/>
 
-				<arg value="-I${src.native.rel}/system"/>
-				<arg value="-I${src.native.rel}/system/macosx"/>
+                <arg value="-I${src.native.rel}/system"/>
+                <arg value="-I${src.native.rel}/system/macosx"/>
 
-				<source/>
+                <source/>
 
-				<regexpmapper from="(\w+)\.(cc?|m)" to="\1.o"/>
-			</apply>
-		</sequential>
-	</macrodef>
+                <regexpmapper from="(\w+)\.(cc?|m)" to="\1.o"/>
+            </apply>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="build">
-		<attribute name="name"/>
-		<attribute name="dest"/>
-		<attribute name="linker" default="clang"/>
-		<attribute name="lang" default="c"/>
-		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
-		<element name="beforeCompile" optional="true"/>
-		<element name="source"/>
-		<element name="beforeLink" optional="true"/>
-		<element name="link" optional="true"/>
-		<sequential>
-			<beforeCompile/>
-			<compile dest="@{dest}" lang="@{lang}" flags="@{flags}">
-				<source/>
-			</compile>
+    <macrodef name="build">
+        <attribute name="name"/>
+        <attribute name="dest"/>
+        <attribute name="linker" default="clang"/>
+        <attribute name="lang" default="c"/>
+        <attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+        <element name="beforeCompile" optional="true"/>
+        <element name="source"/>
+        <element name="beforeLink" optional="true"/>
+        <element name="link" optional="true"/>
+        <sequential>
+            <beforeCompile/>
+            <compile dest="@{dest}" lang="@{lang}" flags="@{flags}">
+                <source/>
+            </compile>
 
-			<local name="lib-uptodate"/>
-			<uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}.dylib">
-				<srcfiles file="config/${platform}/build.xml"/>
-				<srcfiles dir="@{dest}" includes="**"/>
-			</uptodate>
+            <local name="lib-uptodate"/>
+            <uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}.dylib">
+                <srcfiles file="config/${platform}/build.xml"/>
+                <srcfiles dir="@{dest}" includes="**"/>
+            </uptodate>
 
-			<echo message="Linking @{name}" taskname="@{linker}" unless:set="lib-uptodate"/>
-			<beforeLink/>
-			<apply executable="@{linker}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
-				<srcfile/>
-				<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
-				<fileset dir="@{dest}" includes="*.o"/>
-				<link/>
-			</apply>
+            <echo message="Linking @{name}" taskname="@{linker}" unless:set="lib-uptodate"/>
+            <beforeLink/>
+            <apply executable="@{linker}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+                <srcfile/>
+                <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
+                <fileset dir="@{dest}" includes="*.o"/>
+                <link/>
+            </apply>
 
-			<apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
-				<arg value="-u"/>
-				<arg value="-r"/>
-				<filelist dir="${lib}" files="lib@{name}.dylib"/>
-			</apply>
-			<delete file="${lib}/touch_macos.txt" quiet="true" unless:set="lib-uptodate"/>
-		</sequential>
-	</macrodef>
+            <apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+                <arg value="-u"/>
+                <arg value="-r"/>
+                <filelist dir="${lib}" files="lib@{name}.dylib"/>
+            </apply>
+            <delete file="${lib}/touch_macos.txt" quiet="true" unless:set="lib-uptodate"/>
+        </sequential>
+    </macrodef>
 
-	<target name="compile-native-platform">
-		<echo message="${sdkroot}" taskname="SDK Root"/>
+    <target name="compile-native-platform">
+        <echo message="${sdkroot}" taskname="SDK Root"/>
 
-		<parallel threadsPerProcessor="2" failonany="true">
+        <parallel threadsPerProcessor="2" failonany="true">
 
-		<!-- CORE -->
-		<build name="lwjgl" dest="${bin.native}/core">
-			<source>
-				<arg value="-I${src.native.rel}/system/dyncall"/>
-				<fileset dir=".">
-					<include name="${src.native}/system/*.c"/>
-					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
-					<include name="${src.generated.native}/system/*.c"/>
-					<include name="${src.generated.native}/system/dyncall/*.c"/>
-					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
-					<include name="${src.generated.native}/system/jni/*.c"/>
-					<include name="${src.generated.native}/system/libc/*.c"/>
-					<include name="${src.generated.native}/system/macosx/*.c"/>
-				</fileset>
-			</source>
-			<beforeLink>
-				<mkdir dir="${lib}/macosx/x64"/>
-				<parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
-					<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
-					<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
-					<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
-				</parallel>
-			</beforeLink>
-			<link>
-				<arg line="-framework CoreFoundation"/>
-				<fileset dir="${lib}/macosx/${build.arch}/">
-					<include name="libdyn*.a"/>
-				</fileset>
-			</link>
-		</build>
+        <!-- CORE -->
+        <build name="lwjgl" dest="${bin.native}/core">
+            <source>
+                <arg value="-I${src.native.rel}/system/dyncall"/>
+                <fileset dir=".">
+                    <include name="${src.native}/system/*.c"/>
+                    <exclude name="${src.native}/system/lwjgl_malloc.c"/>
+                    <include name="${src.generated.native}/system/*.c"/>
+                    <include name="${src.generated.native}/system/dyncall/*.c"/>
+                    <include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
+                    <include name="${src.generated.native}/system/jni/*.c"/>
+                    <include name="${src.generated.native}/system/libc/*.c"/>
+                    <include name="${src.generated.native}/system/macosx/*.c"/>
+                </fileset>
+            </source>
+            <beforeLink>
+                <mkdir dir="${lib}/macosx/x64"/>
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                    <update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
+                    <update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
+                    <update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+                </parallel>
+            </beforeLink>
+            <link>
+                <arg line="-framework CoreFoundation"/>
+                <fileset dir="${lib}/macosx/${build.arch}/">
+                    <include name="libdyn*.a"/>
+                </fileset>
+            </link>
+        </build>
 
-		<!-- LMDB -->
-		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
-			<beforeCompile>
-				<compile dest="@{dest}" flags="-Wno-format-extra-args">
-					<arg value="-I${src.native.rel}/util/lmdb"/>
-					<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
-				</compile>
-			</beforeCompile>
-			<source>
-				<arg value="-I${src.native.rel}/util/lmdb"/>
-				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
-			</source>
-		</build>
+        <!-- LMDB -->
+        <build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="-Wno-format-extra-args">
+                    <arg value="-I${src.native.rel}/util/lmdb"/>
+                    <fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.native.rel}/util/lmdb"/>
+                <fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
+            </source>
+        </build>
 
-		<!-- NanoVG -->
-		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
-			<source>
-				<arg value="-I${src.native.rel}/nanovg"/>
-				<arg value="-I${src.native.rel}/stb"/>
-				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
-				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
-			</source>
-		</build>
+        <!-- NanoVG -->
+        <build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
+            <source>
+                <arg value="-I${src.native.rel}/nanovg"/>
+                <arg value="-I${src.native.rel}/stb"/>
+                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+                <fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
+            </source>
+        </build>
 
-		<!-- NativeFileDialog -->
-		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
-			<source>
-				<arg value="-I${src.native.rel}/util/nfd"/>
-				<arg value="-I${src.native.rel}/util/nfd/include"/>
-				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
-				<fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
-				<fileset dir="." includes="${src.native}/util/nfd/nfd_cocoa.m"/>
-				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
-			</source>
-			<link>
-				<arg line="-framework AppKit"/>
-			</link>
-		</build>
+        <!-- NativeFileDialog -->
+        <build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
+            <source>
+                <arg value="-I${src.native.rel}/util/nfd"/>
+                <arg value="-I${src.native.rel}/util/nfd/include"/>
+                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+                <fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
+                <fileset dir="." includes="${src.native}/util/nfd/nfd_cocoa.m"/>
+                <fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
+            </source>
+            <link>
+                <arg line="-framework AppKit"/>
+            </link>
+        </build>
 
-		<!-- Nuklear -->
-		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
-			<source>
-				<arg value="-I${src.native.rel}/nuklear"/>
-				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
-			</source>
-		</build>
+        <!-- Nuklear -->
+        <build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
+            <source>
+                <arg value="-I${src.native.rel}/nuklear"/>
+                <fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
+            </source>
+        </build>
 
-		<!-- OpenGL -->
-		<build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
-			<source>
-				<arg value="-I${src.native.rel}/opengl"/>
-				<fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
-			</source>
-		</build>
+        <!-- OpenGL -->
+        <build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
+            <source>
+                <arg value="-I${src.native.rel}/opengl"/>
+                <fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
+            </source>
+        </build>
 
-		<!-- OpenGL ES -->
-		<build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
-			<source>
-				<arg value="-I${src.native.rel}/opengles"/>
-				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
-			</source>
-		</build>
+        <!-- OpenGL ES -->
+        <build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
+            <source>
+                <arg value="-I${src.native.rel}/opengles"/>
+                <fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
+            </source>
+        </build>
 
-		<!-- OpenVR -->
-		<build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
-			<source>
-				<fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
-			</source>
-		</build>
+        <!-- OpenVR -->
+        <build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
+            <source>
+                <fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
+            </source>
+        </build>
 
-		<!-- ParShapes -->
-		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
-			<source>
-				<arg value="-I${src.native.rel}/util/par"/>
-				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
-				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
-			</source>
-		</build>
+        <!-- ParShapes -->
+        <build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
+            <source>
+                <arg value="-I${src.native.rel}/util/par"/>
+                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+                <fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
+            </source>
+        </build>
 
-		<!-- SSE -->
-		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
-			<source>
-				<arg value="-I${src.native.rel}/util"/>
-				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
-			</source>
-		</build>
+        <!-- SSE -->
+        <build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
+            <source>
+                <arg value="-I${src.native.rel}/util"/>
+                <fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
+            </source>
+        </build>
 
-		<!-- stb -->
-		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
-			<source>
-				<arg value="-I${src.native.rel}/stb"/>
-				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
-				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
-			</source>
-		</build>
+        <!-- stb -->
+        <build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
+            <source>
+                <arg value="-I${src.native.rel}/stb"/>
+                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+                <fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+            </source>
+        </build>
 
-		<!-- tinyexr -->
-		<build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" linker="clang++" if:true="${binding.tinyexr}">
-			<beforeCompile>
-				<compile dest="@{dest}" lang="c++" flags="">
-					<arg value="-I${src.native.rel}/util/tinyexr"/>
-					<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
-				</compile>
-			</beforeCompile>
-			<source>
-				<arg value="-I${src.native.rel}/util/tinyexr"/>
-				<fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
-			</source>
-		</build>
+        <!-- tinyexr -->
+        <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" linker="clang++" if:true="${binding.tinyexr}">
+            <beforeCompile>
+                <compile dest="@{dest}" lang="c++" flags="">
+                    <arg value="-I${src.native.rel}/util/tinyexr"/>
+                    <fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.native.rel}/util/tinyexr"/>
+                <fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
+            </source>
+        </build>
 
-		<!-- tiny file dialogs -->
-		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
-			<beforeCompile>
-				<compile dest="@{dest}" flags="">
-					<arg value="-I${src.native.rel}/util/tinyfd"/>
-					<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
-				</compile>
-			</beforeCompile>
-			<source>
-				<arg value="-I${src.native.rel}/util/tinyfd"/>
-				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
-			</source>
-		</build>
+        <!-- tiny file dialogs -->
+        <build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="">
+                    <arg value="-I${src.native.rel}/util/tinyfd"/>
+                    <fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.native.rel}/util/tinyfd"/>
+                <fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
+            </source>
+        </build>
 
-		<!-- xxHash -->
-		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
-			<source>
-				<arg value="-I${src.native.rel}/system"/>
-				<arg value="-I${src.native.rel}/util/xxhash"/>
-				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
-				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
-			</source>
-		</build>
+        <!-- xxHash -->
+        <build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
+            <source>
+                <arg value="-I${src.native.rel}/system"/>
+                <arg value="-I${src.native.rel}/util/xxhash"/>
+                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+                <fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
+            </source>
+        </build>
 
-		<!-- yoga -->
-		<build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
-			<beforeCompile>
-				<compile dest="@{dest}" flags="">
-					<arg value="-I${src.native.rel}/util/yoga"/>
-					<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
-				</compile>
-			</beforeCompile>
-			<source>
-				<arg value="-I${src.native.rel}/util/yoga"/>
-				<fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
-			</source>
-		</build>
+        <!-- yoga -->
+        <build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="">
+                    <arg value="-I${src.native.rel}/util/yoga"/>
+                    <fileset dir="." includes="${src.native}/util/yoga/*.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.native.rel}/util/yoga"/>
+                <fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
+            </source>
+        </build>
 
-		</parallel>
+        </parallel>
 
-		<local name="native-dependencies-uptodate"/>
-		<condition property="native-dependencies-uptodate" value="true">
-			<or>
-				<istrue value="${build.offline}"/>
-				<resourceexists>
-					<file file="${lib}/touch_macos.txt"/>
-				</resourceexists>
-			</or>
-		</condition>
+        <local name="native-dependencies-uptodate"/>
+        <condition property="native-dependencies-uptodate" value="true">
+            <or>
+                <istrue value="${build.offline}"/>
+                <resourceexists>
+                    <file file="${lib}/touch_macos.txt"/>
+                </resourceexists>
+            </or>
+        </condition>
 
-		<sequential unless:set="native-dependencies-uptodate">
-			<mkdir dir="${lib}/macosx/x64"/>
+        <sequential unless:set="native-dependencies-uptodate">
+            <mkdir dir="${lib}/macosx/x64"/>
 
-			<parallel threadsPerProcessor="4" failonany="true">
+            <parallel threadsPerProcessor="4" failonany="true">
 
-			<update-dependency name="Assimp" artifact="x64/libassimp.dylib" dest="${lib}" if:true="${binding.assimp}"/>
-			<update-dependency name="bgfx" artifact="x64/libbgfx.dylib" dest="${lib}" if:true="${binding.bgfx}"/>
-			<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
-			<update-dependency name="GLFW" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
-			<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
-			<update-dependency name="OpenVR" artifact="x64/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Assimp" artifact="x64/libassimp.dylib" dest="${lib}" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="x64/libbgfx.dylib" dest="${lib}" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="x64/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
 
-			</parallel>
+            </parallel>
 
-			<touch file="${lib}/touch_macos.txt" verbose="false"/>
-		</sequential>
-	</target>
+            <touch file="${lib}/touch_macos.txt" verbose="false"/>
+        </sequential>
+    </target>
 </project>

@@ -10,7 +10,7 @@ import java.util.regex.*;
 final class FieldSummaryPostProcess {
 
     /*
-	Group 1: Row class
+    Group 1: Row class
     Group 2: Field type
     Group 3: Link URL
     Group 4: Field name

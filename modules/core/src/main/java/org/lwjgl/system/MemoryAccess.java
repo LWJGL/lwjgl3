@@ -246,9 +246,9 @@ final class MemoryAccess {
         public void memSet(long dst, int value, int bytes) {
             /*
             - Unsafe.setMemory is very slow.
-			- A custom Java loop is fastest at small sizes, approximately up to 192 bytes.
-			- The native memset becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
-			 */
+            - A custom Java loop is fastest at small sizes, approximately up to 192 bytes.
+            - The native memset becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
+             */
 
             //UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
             if (bytes < 192) {
@@ -300,10 +300,10 @@ final class MemoryAccess {
         @Override
         public void memCopy(long src, long dst, int bytes) {
             /*
-			- A custom Java loop is fastest at small sizes, approximately up to 64 bytes.
-			- Unsafe.copyMemory is fastest at moderate sizes, approximately up to 384 bytes.
-			- The native memcpy becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
-			 */
+            - A custom Java loop is fastest at small sizes, approximately up to 64 bytes.
+            - Unsafe.copyMemory is fastest at moderate sizes, approximately up to 384 bytes.
+            - The native memcpy becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
+             */
 
             if (bytes < 64 && ((int)src & 7) == 0 && ((int)dst & 7) == 0) { // both src and dst must be aligned to 8 bytes
                 memCopyAligned(src, dst, bytes);

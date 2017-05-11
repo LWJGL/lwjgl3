@@ -6,76 +6,76 @@
 <!-- Downloads LWJGL's library dependencies. -->
 <project name="LWJGL" basedir="." default="update-dependencies" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
-	<property name="config" location="config" relative="true"/>
-	<import file="${config}/build-definitions.xml" id="defs"/>
+    <property name="config" location="config" relative="true"/>
+    <import file="${config}/build-definitions.xml" id="defs"/>
 
-	<!-- *********************************** -->
-	<property name="testng" value="6.10"/>
-	<property name="jcommander" value="1.60"/>
-	<property name="kotlinc-version" value="1.1.2"/>
-	<property name="kotlinc-build" value="1.1.2"/>
-	<!-- *********************************** -->
+    <!-- *********************************** -->
+    <property name="testng" value="6.10"/>
+    <property name="jcommander" value="1.60"/>
+    <property name="kotlinc-version" value="1.1.2"/>
+    <property name="kotlinc-build" value="1.1.2"/>
+    <!-- *********************************** -->
 
-	<target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
-		<!-- Checks if the Kotlin compiler must be updated -->
-		<local name="kotlinc-build-current"/>
-		<loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
-		<condition property="kotlinc-uptodate">
-			<and>
-				<isset property="kotlinc-build-current"/>
-				<equals arg1="${kotlinc-build-current}" arg2="${kotlinc-build}"/>
-			</and>
-		</condition>
+    <target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
+        <!-- Checks if the Kotlin compiler must be updated -->
+        <local name="kotlinc-build-current"/>
+        <loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
+        <condition property="kotlinc-uptodate">
+            <and>
+                <isset property="kotlinc-build-current"/>
+                <equals arg1="${kotlinc-build-current}" arg2="${kotlinc-build}"/>
+            </and>
+        </condition>
 
-		<uptodate property="lib-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
+        <uptodate property="lib-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
 
-		<local name="dependencies-uptodate"/>
-		<condition property="dependencies-uptodate">
-			<and>
-				<isset property="kotlinc-uptodate"/>
-				<isset property="lib-uptodate"/>
-			</and>
-		</condition>
+        <local name="dependencies-uptodate"/>
+        <condition property="dependencies-uptodate">
+            <and>
+                <isset property="kotlinc-uptodate"/>
+                <isset property="lib-uptodate"/>
+            </and>
+        </condition>
 
-		<antcall target="update-dependencies" unless:set="dependencies-uptodate"/>
-	</target>
+        <antcall target="update-dependencies" unless:set="dependencies-uptodate"/>
+    </target>
 
-	<target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
-		<mkdir dir="${lib}"/>
-		<antcall target="-lib-download"/>
-		<antcall target="-kotlinc-download"/>
-	</target>
+    <target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
+        <mkdir dir="${lib}"/>
+        <antcall target="-lib-download"/>
+        <antcall target="-kotlinc-download"/>
+    </target>
 
-	<!-- Downloads and extracts the Kotlin compiler. -->
-	<target name="-kotlinc-download" unless="kotlinc-uptodate">
-		<local name="kotlinc-archive"/>
-		<property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-version}.zip"/>
+    <!-- Downloads and extracts the Kotlin compiler. -->
+    <target name="-kotlinc-download" unless="kotlinc-uptodate">
+        <local name="kotlinc-archive"/>
+        <property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-version}.zip"/>
 
-		<!-- Download new build -->
-		<get taskname="kotlinc" src="https://github.com/JetBrains/kotlin/releases/download/v${kotlinc-version}/${kotlinc-archive}" dest="${lib}" verbose="true"/>
+        <!-- Download new build -->
+        <get taskname="kotlinc" src="https://github.com/JetBrains/kotlin/releases/download/v${kotlinc-version}/${kotlinc-archive}" dest="${lib}" verbose="true"/>
 
-		<!-- Delete current build -->
-		<delete dir="${kotlinc}" taskname="kotlinc"/>
-		<!-- Extract build -->
-		<unzip src="${lib}/${kotlinc-archive}" dest="${lib}" taskname="kotlinc"/>
-		<!-- Delete build archive -->
-		<delete file="${lib}/${kotlinc-archive}" taskname="kotlinc"/>
+        <!-- Delete current build -->
+        <delete dir="${kotlinc}" taskname="kotlinc"/>
+        <!-- Extract build -->
+        <unzip src="${lib}/${kotlinc-archive}" dest="${lib}" taskname="kotlinc"/>
+        <!-- Delete build archive -->
+        <delete file="${lib}/${kotlinc-archive}" taskname="kotlinc"/>
 
-		<echo message="The Kotlin compiler was updated to build: ${kotlinc-version}" taskname="kotlinc"/>
-	</target>
+        <echo message="The Kotlin compiler was updated to build: ${kotlinc-version}" taskname="kotlinc"/>
+    </target>
 
-	<!-- Downloads the Java dependencies. -->
-	<target name="-lib-download" unless="lib-uptodate">
-		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
-		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
+    <!-- Downloads the Java dependencies. -->
+    <target name="-lib-download" unless="lib-uptodate">
+        <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
+        <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
 
-		<touch file="${lib}/touch.txt" verbose="false"/>
-	</target>
+        <touch file="${lib}/touch.txt" verbose="false"/>
+    </target>
 
-	<target name="clean" description="Deletes LWJGL dependencies">
-		<delete taskname="kotlinc" dir="${lib}/kotlinc"/>
-		<delete taskname="JCommander" file="${lib}/jcommander.jar"/>
-		<delete taskname="TestNG" file="${lib}/testng.jar"/>
-	</target>
+    <target name="clean" description="Deletes LWJGL dependencies">
+        <delete taskname="kotlinc" dir="${lib}/kotlinc"/>
+        <delete taskname="JCommander" file="${lib}/jcommander.jar"/>
+        <delete taskname="TestNG" file="${lib}/testng.jar"/>
+    </target>
 
 </project>

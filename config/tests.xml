@@ -5,17 +5,17 @@
   -->
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="LWJGL Core Tests">
-	<test name="LWJGL 3.0">
-		<packages>
-			<package name="org.lwjgl"/>
-			<package name="org.lwjgl.openal"/>
-			<package name="org.lwjgl.opencl"/>
-			<package name="org.lwjgl.system"/>
-			<package name="org.lwjgl.system.dyncall"/>
-			<package name="org.lwjgl.system.libc"/>
-			<package name="org.lwjgl.util.par"/>
-			<package name="org.lwjgl.util.simd"/>
-			<package name="org.lwjgl.util.yoga"/>
-		</packages>
-	</test>
+    <test name="LWJGL 3.0">
+        <packages>
+            <package name="org.lwjgl"/>
+            <package name="org.lwjgl.openal"/>
+            <package name="org.lwjgl.opencl"/>
+            <package name="org.lwjgl.system"/>
+            <package name="org.lwjgl.system.dyncall"/>
+            <package name="org.lwjgl.system.libc"/>
+            <package name="org.lwjgl.util.par"/>
+            <package name="org.lwjgl.util.simd"/>
+            <package name="org.lwjgl.util.yoga"/>
+        </packages>
+    </test>
 </suite>

@@ -9,292 +9,292 @@ Defines global properties and useful macros.
 This script is included in /build.xml and /config/update-dependencies.xml.
 -->
 <project name="definitions" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
-	<import file="build-bindings.xml"/>
+    <import file="build-bindings.xml"/>
 
-	<!-- ================================================================== -->
-	<!-- Global properties for build 																				-->
-	<!-- ================================================================== -->
-	<property environment="env"/>
+    <!-- ================================================================== -->
+    <!-- Global properties for build                                        -->
+    <!-- ================================================================== -->
+    <property environment="env"/>
 
-	<!--
-		This is used as the source of binary dependencies. Valid values:
-		- nightly
-			the latest successful build. Dependency repos can be found here: https://github.com/LWJGL-CI
-			this is the default, set the LWJGL_BUILD_TYPE environment variable to override.
-		- stable
-			the latest nightly build that has been verified to work with LWJGL.
-		- release/latest
-			the latest stable build that has been promoted to an official LWJGL release.
-		- release/{build.version}
-			a specific previously released build.
-	 -->
-	<condition property="build.type" value="${env.LWJGL_BUILD_TYPE}" else="nightly">
-		<isset property="env.LWJGL_BUILD_TYPE"/>
-	</condition>
+    <!--
+    This is used as the source of binary dependencies. Valid values:
+    - nightly
+        the latest successful build. Dependency repos can be found here: https://github.com/LWJGL-CI
+        this is the default, set the LWJGL_BUILD_TYPE environment variable to override.
+    - stable
+        the latest nightly build that has been verified to work with LWJGL.
+    - release/latest
+        the latest stable build that has been promoted to an official LWJGL release.
+    - release/{build.version}
+        a specific previously released build.
+     -->
+    <condition property="build.type" value="${env.LWJGL_BUILD_TYPE}" else="nightly">
+        <isset property="env.LWJGL_BUILD_TYPE"/>
+    </condition>
 
-	<!--
-		This is used to override the default output directory. By default, the directories
-		bin, generated and release will be created in the same directory as the main build
-		script. These 3 directories will contain thousands of tiny files, so you may want
-		to override their location due to performance characteristics of the storage
-		hardware.
+    <!--
+    This is used to override the default output directory. By default, the directories
+    bin, generated and release will be created in the same directory as the main build
+    script. These 3 directories will contain thousands of tiny files, so you may want
+    to override their location due to performance characteristics of the storage
+    hardware.
 
-		Note that when this property is set, the directories bin, generated and release
-		will be symlinks to the corresponding directories in LWJGL_BUILD_OUTPUT. The ant
-		scripts and IDE projects always work with paths relative to the project root.
-	-->
-	<property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
+    Note that when this property is set, the directories bin, generated and release
+    will be symlinks to the corresponding directories in LWJGL_BUILD_OUTPUT. The ant
+    scripts and IDE projects always work with paths relative to the project root.
+    -->
+    <property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
 
-	<property name="bin" location="bin" relative="true"/>
-	<property name="doc" location="doc" relative="true"/>
-	<property name="lib" location="libs" relative="true"/>
-	<property name="modules" location="modules" relative="true"/>
-	<property name="wiki" location="wiki" relative="true"/>
+    <property name="bin" location="bin" relative="true"/>
+    <property name="doc" location="doc" relative="true"/>
+    <property name="lib" location="libs" relative="true"/>
+    <property name="modules" location="modules" relative="true"/>
+    <property name="wiki" location="wiki" relative="true"/>
 
-	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
+    <property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
 
-	<property name="module.generator" location="${modules}/generator" relative="true"/>
-	<property name="module.templates" location="${modules}/templates" relative="true"/>
-	<property name="module.core" location="${modules}/core" relative="true"/>
+    <property name="module.generator" location="${modules}/generator" relative="true"/>
+    <property name="module.templates" location="${modules}/templates" relative="true"/>
+    <property name="module.core" location="${modules}/core" relative="true"/>
 
-	<property name="src.generator" location="${module.generator}/src/main" relative="true"/>
-	<property name="src.templates" location="${module.templates}/src/main" relative="true"/>
-	<property name="src.templates.kotlin" location="${src.templates}/kotlin" relative="true"/>
-	<property name="src.core" location="${module.core}/src/main/java" relative="true"/>
-	<property name="src.tests" location="${module.core}/src/test/java" relative="true"/>
+    <property name="src.generator" location="${module.generator}/src/main" relative="true"/>
+    <property name="src.templates" location="${module.templates}/src/main" relative="true"/>
+    <property name="src.templates.kotlin" location="${src.templates}/kotlin" relative="true"/>
+    <property name="src.core" location="${module.core}/src/main/java" relative="true"/>
+    <property name="src.tests" location="${module.core}/src/test/java" relative="true"/>
 
-	<property name="src.native" location="${module.core}/src/main/c" relative="true"/>
+    <property name="src.native" location="${module.core}/src/main/c" relative="true"/>
 
-	<property name="src.generated" location="${module.core}/src/generated" relative="true"/>
-	<property name="src.generated.java" location="${src.generated}/java" relative="true"/>
-	<property name="src.generated.native" location="${src.generated}/c" relative="true"/>
+    <property name="src.generated" location="${module.core}/src/generated" relative="true"/>
+    <property name="src.generated.java" location="${src.generated}/java" relative="true"/>
+    <property name="src.generated.native" location="${src.generated}/c" relative="true"/>
 
-	<property name="test.resources" location="${module.core}/src/test/resources" relative="true"/>
+    <property name="test.resources" location="${module.core}/src/test/resources" relative="true"/>
 
-	<property name="bin.generator" location="${bin}/Generator" relative="true"/>
-	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
-	<property name="bin.core" location="${bin}/Core" relative="true"/>
-	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
+    <property name="bin.generator" location="${bin}/Generator" relative="true"/>
+    <property name="bin.templates" location="${bin}/Templates" relative="true"/>
+    <property name="bin.core" location="${bin}/Core" relative="true"/>
+    <property name="bin.tests" location="${bin}/Tests" relative="true"/>
 
-	<property name="bin.html" location="${bin}/HTML" relative="true"/>
-	<property name="bin.html.tests" location="${bin.html}/tests" relative="true"/>
-	<property name="bin.html.javadoc" location="${bin.html}/javadoc" relative="true"/>
+    <property name="bin.html" location="${bin}/HTML" relative="true"/>
+    <property name="bin.html.tests" location="${bin.html}/tests" relative="true"/>
+    <property name="bin.html.javadoc" location="${bin.html}/javadoc" relative="true"/>
 
-	<property name="release" location="${bin}/RELEASE" relative="true"/>
-	<property name="release.jar" location="${release}/jar" relative="true"/>
-	<property name="release.native" location="${release}/native" relative="true"/>
-	<property name="release.doc" location="${release}/doc" relative="true"/>
+    <property name="release" location="${bin}/RELEASE" relative="true"/>
+    <property name="release.jar" location="${release}/jar" relative="true"/>
+    <property name="release.native" location="${release}/native" relative="true"/>
+    <property name="release.doc" location="${release}/doc" relative="true"/>
 
-	<!--
-		The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
-		that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
-	-->
-	<property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
-	<condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
-		<contains string="${os.arch}" substring="64"/>
-	</condition>
+    <!--
+        The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
+        that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
+    -->
+    <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
+    <condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
+        <contains string="${os.arch}" substring="64"/>
+    </condition>
 
-	<!--
-		Offline build flag. This is useful when working offline, or when custom binary dependencies
-		are used (so they are not overriden). Set to one of true/on/yes to enable.
-	-->
-	<condition property="build.offline" value="${env.LWJGL_BUILD_OFFLINE}" else="false">
-		<isset property="env.LWJGL_BUILD_OFFLINE"/>
-	</condition>
+    <!--
+        Offline build flag. This is useful when working offline, or when custom binary dependencies
+        are used (so they are not overriden). Set to one of true/on/yes to enable.
+    -->
+    <condition property="build.offline" value="${env.LWJGL_BUILD_OFFLINE}" else="false">
+        <isset property="env.LWJGL_BUILD_OFFLINE"/>
+    </condition>
 
-	<condition property="platform.windows">
-		<os family="Windows"/>
-	</condition>
-	<condition property="platform.linux">
-		<os name="Linux"/>
-	</condition>
-	<condition property="platform.freebsd">
-		<os name="FreeBSD"/>
-	</condition>
-	<condition property="platform.solaris">
-		<os name="SunOS"/>
-	</condition>
-	<condition property="platform.macosx">
-		<os name="Mac OS X"/>
-	</condition>
+    <condition property="platform.windows">
+        <os family="Windows"/>
+    </condition>
+    <condition property="platform.linux">
+        <os name="Linux"/>
+    </condition>
+    <condition property="platform.freebsd">
+        <os name="FreeBSD"/>
+    </condition>
+    <condition property="platform.solaris">
+        <os name="SunOS"/>
+    </condition>
+    <condition property="platform.macosx">
+        <os name="Mac OS X"/>
+    </condition>
 
-	<property name="platform" value="windows" if:set="platform.windows"/>
-	<property name="platform" value="linux" if:set="platform.linux"/>
-	<property name="platform" value="freebsd" if:set="platform.freebsd"/>
-	<property name="platform" value="solaris" if:set="platform.solaris"/>
-	<property name="platform" value="macosx" if:set="platform.macosx"/>
+    <property name="platform" value="windows" if:set="platform.windows"/>
+    <property name="platform" value="linux" if:set="platform.linux"/>
+    <property name="platform" value="freebsd" if:set="platform.freebsd"/>
+    <property name="platform" value="solaris" if:set="platform.solaris"/>
+    <property name="platform" value="macosx" if:set="platform.macosx"/>
 
-	<!-- JDK version -->
-	<condition property="jdk9">
-		<matches string="${java.version}" pattern="^(9|\d\d+)[.-]"/>
-	</condition>
-	<property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
-	<property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
+    <!-- JDK version -->
+    <condition property="jdk9">
+        <matches string="${java.version}" pattern="^(9|\d\d+)[.-]"/>
+    </condition>
+    <property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
+    <property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
 
-	<!-- Different location per platform/architecture. This is intentional. -->
-	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
+    <!-- Different location per platform/architecture. This is intentional. -->
+    <property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
 
-	<presetdef name="lwjgl.javac">
-		<javac sourcepath="" debug="yes" encoding="UTF-8">
-			<compilerarg line="-source 8"/>
-			<compilerarg line="-target 8"/>
-			<!-- Currently fails with "package sun.misc does not exist" on JDK 9
-			<compilerarg line="-source 8" unless:set="jdk9"/>
-			<compilerarg line="-target 8" unless:set="jdk9"/>
-			<compilerarg line="&#45;&#45;release 8" if:set="jdk9"/>
-			-->
-			<compilerarg value="-Xlint:all"/>
-		</javac>
-	</presetdef>
+    <presetdef name="lwjgl.javac">
+        <javac sourcepath="" debug="yes" encoding="UTF-8">
+            <compilerarg line="-source 8"/>
+            <compilerarg line="-target 8"/>
+            <!-- Currently fails with "package sun.misc does not exist" on JDK 9
+            <compilerarg line="-source 8" unless:set="jdk9"/>
+            <compilerarg line="-target 8" unless:set="jdk9"/>
+            <compilerarg line="&#45;&#45;release 8" if:set="jdk9"/>
+            -->
+            <compilerarg value="-Xlint:all"/>
+        </javac>
+    </presetdef>
 
-	<macrodef name="quiet">
-		<element name="body" implicit="yes"/>
-		<sequential>
-			<script language="javascript">
-				project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_WARN);
-			</script>
-			<body/>
-			<script language="javascript">
-				project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_INFO);
-			</script>
-		</sequential>
-	</macrodef>
+    <macrodef name="quiet">
+        <element name="body" implicit="yes"/>
+        <sequential>
+            <script language="javascript">
+                project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_WARN);
+            </script>
+            <body/>
+            <script language="javascript">
+                project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_INFO);
+            </script>
+        </sequential>
+    </macrodef>
 
-	<scriptdef name="dir-uptodate" language="javascript">
-		<attribute name="src"/>
-		<attribute name="dst"/>
-		<attribute name="property"/>
-		<![CDATA[
-		with (new JavaImporter(java.nio.file)) {
-			var lmt = function(dir) Files
-				.walk(Paths.get(attributes.get(dir)))
-				.filter(function(it) Files.isRegularFile(it))
-				.mapToLong(function(it) Files.getLastModifiedTime(it).toMillis())
-				.max()
-				.orElse(0);
+    <scriptdef name="dir-uptodate" language="javascript">
+        <attribute name="src"/>
+        <attribute name="dst"/>
+        <attribute name="property"/>
+        <![CDATA[
+        with (new JavaImporter(java.nio.file)) {
+            var lmt = function(dir) Files
+                .walk(Paths.get(attributes.get(dir)))
+                .filter(function(it) Files.isRegularFile(it))
+                .mapToLong(function(it) Files.getLastModifiedTime(it).toMillis())
+                .max()
+                .orElse(0);
 
-			if ( lmt("src") <= lmt("dst") )
-				project.setProperty(attributes.get("property"), "true");
-		}
-		]]>
-	</scriptdef>
+            if ( lmt("src") <= lmt("dst") )
+                project.setProperty(attributes.get("property"), "true");
+        }
+        ]]>
+    </scriptdef>
 
-	<macrodef name="mkdir-symlink">
-		<attribute name="dir"/>
+    <macrodef name="mkdir-symlink">
+        <attribute name="dir"/>
 
-		<sequential>
-			<!-- in the repo root -->
-			<mkdir dir="@{dir}" unless:set="build.output"/>
+        <sequential>
+            <!-- in the repo root -->
+            <mkdir dir="@{dir}" unless:set="build.output"/>
 
-			<!-- or in LWJGL_BUILD_OUTPUT -->
-			<local name="useSymlink"/>
-			<condition property="useSymlink" value="1">
-				<and>
-					<isset property="build.output"/>
-					<not>
-						<available property="dirExists" file="@{dir}" type="dir"/>
-					</not>
-				</and>
-			</condition>
+            <!-- or in LWJGL_BUILD_OUTPUT -->
+            <local name="useSymlink"/>
+            <condition property="useSymlink" value="1">
+                <and>
+                    <isset property="build.output"/>
+                    <not>
+                        <available property="dirExists" file="@{dir}" type="dir"/>
+                    </not>
+                </and>
+            </condition>
 
-			<mkdir dir="${build.output}/@{dir}" if:set="useSymlink"/>
+            <mkdir dir="${build.output}/@{dir}" if:set="useSymlink"/>
 
-			<!-- Create symlink from root to LWJGL_BUILD_OUTPUT (Unix) -->
-			<local name="useSymlinkUnix"/>
-			<condition property="useSymlinkUnix" value="1">
-				<and>
-					<isset property="useSymlink"/>
-					<not>
-						<isset property="platform.windows"/>
-					</not>
-				</and>
-			</condition>
+            <!-- Create symlink from root to LWJGL_BUILD_OUTPUT (Unix) -->
+            <local name="useSymlinkUnix"/>
+            <condition property="useSymlinkUnix" value="1">
+                <and>
+                    <isset property="useSymlink"/>
+                    <not>
+                        <isset property="platform.windows"/>
+                    </not>
+                </and>
+            </condition>
 
-			<symlink link="@{dir}" resource="${build.output}/@{dir}" if:set="useSymlinkUnix"/>
+            <symlink link="@{dir}" resource="${build.output}/@{dir}" if:set="useSymlinkUnix"/>
 
-			<!-- Create symlink from root to LWJGL_BUILD_OUTPUT (Windows) -->
-			<local name="useSymlinkWindows"/>
-			<condition property="useSymlinkWindows" value="1">
-				<and>
-					<isset property="useSymlink"/>
-					<isset property="platform.windows"/>
-				</and>
-			</condition>
+            <!-- Create symlink from root to LWJGL_BUILD_OUTPUT (Windows) -->
+            <local name="useSymlinkWindows"/>
+            <condition property="useSymlinkWindows" value="1">
+                <and>
+                    <isset property="useSymlink"/>
+                    <isset property="platform.windows"/>
+                </and>
+            </condition>
 
-			<exec executable="cmd" if:set="useSymlinkWindows" failonerror="true">
-				<arg value="/c"/>
-				<arg value="mklink"/>
-				<arg value="/J"/>
-				<arg value="@{dir}"/>
-				<arg value="${build.output}\@{dir}"/>
-			</exec>
-		</sequential>
-	</macrodef>
+            <exec executable="cmd" if:set="useSymlinkWindows" failonerror="true">
+                <arg value="/c"/>
+                <arg value="mklink"/>
+                <arg value="/J"/>
+                <arg value="@{dir}"/>
+                <arg value="${build.output}\@{dir}"/>
+            </exec>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="delete-symlink">
-		<attribute name="dir"/>
+    <macrodef name="delete-symlink">
+        <attribute name="dir"/>
 
-		<sequential>
-			<delete dir="${build.output}/@{dir}" if:set="build.output"/>
-			<delete dir="@{dir}"/>
-		</sequential>
-	</macrodef>
+        <sequential>
+            <delete dir="${build.output}/@{dir}" if:set="build.output"/>
+            <delete dir="@{dir}"/>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="confirm-replace">
-		<attribute name="dir"/>
-		<attribute name="msg"/>
+    <macrodef name="confirm-replace">
+        <attribute name="dir"/>
+        <attribute name="msg"/>
 
-		<sequential>
-			<local name="dir.exists"/>
-			<available file="@{dir}" type="dir" property="dir.exists"/>
+        <sequential>
+            <local name="dir.exists"/>
+            <available file="@{dir}" type="dir" property="dir.exists"/>
 
-			<local name="replace.input"/>
-			<input
-				message="@{msg}"
-				validargs="y,n"
-				defaultvalue="n"
-				addproperty="replace.input"
-				if:set="dir.exists"
-				/>
-			<condition property="replace.dir" if:set="dir.exists">
-				<equals arg1="y" arg2="${replace.input}"/>
-			</condition>
-			<fail unless="replace.dir" if:set="dir.exists">Cancelled</fail>
-		</sequential>
-	</macrodef>
+            <local name="replace.input"/>
+            <input
+                message="@{msg}"
+                validargs="y,n"
+                defaultvalue="n"
+                addproperty="replace.input"
+                if:set="dir.exists"
+                />
+            <condition property="replace.dir" if:set="dir.exists">
+                <equals arg1="y" arg2="${replace.input}"/>
+            </condition>
+            <fail unless="replace.dir" if:set="dir.exists">Cancelled</fail>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="get-quiet">
-		<attribute name="name"/>
-		<attribute name="url"/>
-		<attribute name="dest"/>
-		<attribute name="skipexisting" default="true"/>
+    <macrodef name="get-quiet">
+        <attribute name="name"/>
+        <attribute name="url"/>
+        <attribute name="dest"/>
+        <attribute name="skipexisting" default="true"/>
 
-		<sequential>
-			<quiet>
-				<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true" skipexisting="@{skipexisting}"/>
-			</quiet>
-		</sequential>
-	</macrodef>
+        <sequential>
+            <quiet>
+                <get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true" skipexisting="@{skipexisting}"/>
+            </quiet>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="update-mvn">
-		<attribute name="name"/>
-		<attribute name="group"/>
-		<attribute name="artifact"/>
-		<attribute name="version"/>
-		<attribute name="dest"/>
+    <macrodef name="update-mvn">
+        <attribute name="name"/>
+        <attribute name="group"/>
+        <attribute name="artifact"/>
+        <attribute name="version"/>
+        <attribute name="dest"/>
 
-		<sequential>
-			<get-quiet name="@{name}" url="http://central.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar" skipexisting="false"/>
-		</sequential>
-	</macrodef>
+        <sequential>
+            <get-quiet name="@{name}" url="http://central.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar" skipexisting="false"/>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="update-dependency">
-		<attribute name="name"/>
-		<attribute name="artifact"/>
-		<attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
+    <macrodef name="update-dependency">
+        <attribute name="name"/>
+        <attribute name="artifact"/>
+        <attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
 
-		<sequential>
-			<get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}" skipexisting="false"/>
-		</sequential>
-	</macrodef>
+        <sequential>
+            <get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}" skipexisting="false"/>
+        </sequential>
+    </macrodef>
 </project>
