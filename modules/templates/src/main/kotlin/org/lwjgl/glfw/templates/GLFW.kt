@@ -533,8 +533,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             {@code WindowHint}: Specifies the client API major version that the created context must be compatible with. The exact behavior of this hint depends on
             the requested client API.
 
-            Notes:
-            ${ul(
+            ${note(ul(
                 """
                 While there is no way to ask the driver for a context of the highest supported version, GLFW will attempt to provide this when you ask for a
                 version 1.0 context, which is the default for these hints.
@@ -549,7 +548,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
                 of the created context is less than the one requested. Additionally, OpenGL ES 1.x cannot be returned if 2.0 or later was requested, and vice
                 versa. This is because OpenGL ES 3.x is backward compatible with 2.0, but OpenGL ES 2.0 is not backward compatible with 1.x.
                 """
-            )}
+            ))}
 
             {@code GetWindowAttrib}: Indicate the client API major version of the window's context.
             """,
@@ -626,15 +625,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             {@code WindowHint}: Specifies which context creation API to use to create the context. Possible values are #NATIVE_CONTEXT_API and #EGL_CONTEXT_API.
             This is a hard constraint. If no client API is requested, this hint is ignored.
 
-            Notes:
-            ${ul(
+            ${note(ul(
                 "<b>macOS</b>: The EGL API is not available on this platform and requests to use it will fail.",
                 "<b>Wayland, Mir</b>: The EGL API <i>is</i> the native context creation API, so this hint will have no effect.",
                 """
                 An OpenGL extension loader library that assumes it knows which context creation API is used on a given platform may fail if you change this
                 hint. This can be resolved by having it load via #GetProcAddress(), which always uses the selected API.
                 """
-            )}
+            ))}
 
             {@code GetWindowAttrib}: Indicates the context creation API used to create the window's context; either #NATIVE_CONTEXT_API or #EGL_CONTEXT_API.
             """,
@@ -714,14 +712,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Additional calls to this function after successful initialization but before termination will return #TRUE immediately.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             """
             <b>macOS</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
             bundle, if present. This can be disabled with the #COCOA_CHDIR_RESOURCES init hint.
             """
-        )}
+        ))}
         """,
 
         returnDoc = "#TRUE if successful, or #FALSE if an error occured.",
@@ -737,13 +734,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         If GLFW has been successfully initialized, this function should be called before the application exits. If initialization fails, there is no need to
         call this function, as it is called by #Init() before it returns failure.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function may be called before #Init().",
             "This function must only be called from the main thread.",
             "This function must not be called from a callback.",
             "No window's context may be current on another thread when this function is called."
-        )}
+        ))}
         """,
         since = "version 1.0"
     )
@@ -761,11 +757,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Some hints are platform specific. These are always valid to set on any platform but they will only affect their specific platform. Other platforms will
         simply ignore them. Setting these hints requires no platform specific headers or calls.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function may be called before #Init().",
             "This function must only be called from the main thread."
-        )}
+        ))}
         """,
 
         int.IN("hint", "the init hint to set", InitHints),
@@ -780,13 +775,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Retrieves the major, minor and revision numbers of the GLFW library. It is intended for when you are using GLFW as a shared library and want to ensure
         that you are using the minimum required version.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "Any or all of the version arguments may be #NULL.",
             "This function always succeeds.",
             "This function may be called before #Init().",
             "This function may be called from any thread."
-        )}
+        ))}
         """,
 
         nullable..Check(1)..int_p.OUT("major", "where to store the major version number, or #NULL"),
@@ -804,13 +798,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         <b>Do not use the version string</b> to parse the GLFW library version. The #GetVersion() function already provides the version of the library binary
         in numerical format.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function always succeeds.",
             "This function may be called before #Init().",
             "This function may be called from any thread.",
             "The returned string is static and compile-time generated."
-        )}
+        ))}
         """,
         returnDoc = "the ASCII encoded GLFW version string",
         since = "version 3.0"
@@ -824,11 +817,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         This function returns and clears the error code of the last error that occurred on the calling thread. If no error has occurred since the last call, it
         returns #NO_ERROR.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function may be called before #Init().",
             "This function may be called from any thread."
-        )}
+        ))}
         """,
 
         returnDoc = "the last error code for the calling thread, or #NO_ERROR",
@@ -850,11 +842,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Once set, the error callback remains set even after the library has been terminated.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function may be called before #Init().",
             "This function must only be called from the main thread."
-        )}
+        ))}
         """,
 
         nullable..GLFWerrorfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
@@ -922,13 +913,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             """
             <b>Windows</b>: The OS calculates the returned physical size from the current resolution and system DPI instead of querying the monitor EDID data.
             """
-        )}
+        ))}
         """,
 
         GLFWmonitor.IN("monitor", "the monitor to query"),
@@ -1054,13 +1044,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         For gamma correct rendering with OpenGL or OpenGL ES, see the #SRGB_CAPABLE hint.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "Gamma ramp sizes other than 256 are not supported by all hardware",
             "<b>Windows</b>: The gamma ramp size must be 256.",
             "The specified gamma ramp is copied before this function returns."
-        )}
+        ))}
         """,
 
         GLFWmonitor.IN("monitor", "the monitor whose gamma ramp to set"),
@@ -1187,8 +1176,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The ${url("http://www.glfw.org/docs/latest/window.html\\#buffer_swap", "swap interval")} is not set during window creation and the initial value may vary
         depending on driver settings and defaults.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
             """
@@ -1226,7 +1214,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             <b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
             to query the final size, position or other attributes directly after window creation.
             """
-        )}
+        ))}
         """,
 
         int.IN("width", "the desired width, in screen coordinates, of the window"),
@@ -1246,12 +1234,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         If the context of the specified window is current on the main thread, it is detached before being destroyed.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "This function must not be called from a callback.",
             "The context of the specified window must not be current on any other thread when this function is called."
-        )}
+        ))}
         """,
 
         nullable..GLFWwindow.IN("window", "the window to destroy"),
@@ -1579,12 +1566,35 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         <b>Do not use this function</b> to steal focus from other applications unless you are certain that is what the user wants. Focus stealing can be
         extremely disruptive.
 
+        For a less disruptive way of getting the user's attention, see #RequestWindowAttention().
+
         This function must only be called from the main thread.
         """,
 
         GLFWwindow.IN("window", "the window to give input focus"),
 
         since = "version 3.2"
+    )
+
+    void(
+        "RequestWindowAttention",
+        """
+        Requests user attention to the specified window.
+
+        This function requests user attention to the specified window. On platforms where this is not supported, attention is requested to the application as
+        a whole.
+
+        Once the user has given attention, usually by focusing the window or application, the system will end the request automatically.
+
+        ${note(ul(
+            "This function must only be called from the main thread.",
+            "<b>macOS:</b> Attention is requested to the application as a whole, not the specific window."
+        ))}
+        """,
+
+        GLFWwindow.IN("window", "the window to request attention to"),
+
+        since = "version 3.3"
     )
 
     GLFWmonitor(
@@ -1761,11 +1771,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         The close callback is not triggered by #DestroyWindow().
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "<b>macOS:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
-        )}
+        ))}
         """,
 
         CALLBACK_WINDOW,
@@ -1876,11 +1885,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Event processing is not required for joystick input to work.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "This function must not be called from a callback."
-        )}
+        ))}
         """,
         since = "version 1.0"
     )
@@ -1910,11 +1918,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Event processing is not required for joystick input to work.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "This function must not be called from a callback."
-        )}
+        ))}
         """,
         since = "version 2.5"
     )
@@ -1945,11 +1952,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Event processing is not required for joystick input to work.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "This function must not be called from a callback."
-        )}
+        ))}
         """,
 
         double.IN("timeout", "the maximum amount of time, in seconds, to wait"),
@@ -2109,11 +2115,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         <b>Do not use this function</b> to implement ${url("http://www.glfw.org/docs/latest/input.html\\#input_char", "text input")}.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "#KEY_UNKNOWN is not a valid key for this function."
-        )}
+        ))}
         """,
 
         GLFWwindow.IN("window", "the desired window"),
@@ -2198,11 +2203,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The cursor hotspot is specified in pixels, relative to the upper-left corner of the cursor image. Like all other coordinate systems in GLFW, the X-axis
         points to the right and the Y-axis points down.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "The specified image data is copied before this function returns."
-        )}
+        ))}
         """,
 
         const..GLFWimage_p.IN("image", "the desired cursor image"),
@@ -2218,11 +2222,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """
         Returns a cursor with a standard shape, that can be set for a window with #SetCursor().
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "The specified image data is copied before this function returns."
-        )}
+        ))}
         """,
 
         int.IN("shape", "one of the standard shapes", CursorShapes),
@@ -2236,11 +2239,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """
         Destroys a cursor previously created with #CreateCursor(). Any remaining cursors will be destroyed by #Terminate().
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "This function must not be called from a callback."
-        )}
+        ))}
         """,
 
         GLFWcursor.IN("cursor", "the cursor object to destroy"),
@@ -2572,12 +2574,11 @@ if (hats[2] & GLFW_HAT_RIGHT)
         Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
         presence.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "Linux: Joystick hats are currently unimplemented.",
             "The returned array is allocated and freed by GLFW.  You *  should not free it yourself.  It is valid until the specified joystick is *  disconnected, this function is called again for that joystick or the library *  is terminated.",
             "This function must only be called from the main thread."
-        )}
+        ))}
         """,
 
         int.IN("jid", "the joystick to query"),
@@ -2651,12 +2652,11 @@ if (hats[2] & GLFW_HAT_RIGHT)
         The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetClipboardString() or
         #SetClipboardString(), or until the library is terminated.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function must only be called from the main thread.",
             "The returned string is allocated and freed by GLFW.  You should not free it yourself.",
             "The returned string is valid only until the next call to #GetClipboardString() or #SetClipboardString()."
-        )}
+        ))}
         """,
 
         GLFWwindow.IN("window", "the window that will request the clipboard contents"),
@@ -2795,8 +2795,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         This function does not apply to Vulkan. If you are rendering with Vulkan, see the present mode of your swapchain instead.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "This function may be called from any thread.",
             """
             This function is not called during window creation, leaving the swap interval set to whatever is the default on that platform. This is done because
@@ -2806,7 +2805,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
             Some GPU drivers do not honor the requested swap interval, either because of a user setting that overrides the application's request or due to bugs
             in the driver.
             """
-        )}
+        ))}
         """,
 
         int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by #SwapBuffers()"),
@@ -2851,8 +2850,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function does not apply to Vulkan. If you are rendering with Vulkan, {@code glfwGetInstanceProcAddress}, {@code vkGetInstanceProcAddr} and
         {@code vkGetDeviceProcAddr} instead.
 
-        Notes:
-        ${ul(
+        ${note(ul(
             "The address of a given function is not guaranteed to be the same between contexts.",
             """
             This function may return a non-#NULL address despite the associated version or extension not being available. Always check the context version or
@@ -2860,7 +2858,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
             """,
             "The returned function pointer is valid until the context is destroyed or the library is terminated.",
             "This function may be called from any thread."
-        )}
+        ))}
         """,
 
         const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),

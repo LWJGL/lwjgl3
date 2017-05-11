@@ -50,6 +50,10 @@ public class Gears extends AbstractGears {
     }
 
     private static void framebufferSizeChanged(long window, int width, int height) {
+        if (width == 0 || height == 0) {
+            return;
+        }
+
         float f = height / (float)width;
 
         glMatrixMode(GL_PROJECTION);
@@ -119,6 +123,9 @@ public class Gears extends AbstractGears {
             switch (key) {
                 case GLFW_KEY_ESCAPE:
                     glfwSetWindowShouldClose(windowHnd, true);
+                    break;
+                case GLFW_KEY_A:
+                    glfwRequestWindowAttention(windowHnd);
                     break;
                 case GLFW_KEY_F:
                     if (glfwGetWindowMonitor(windowHnd) == NULL) {
