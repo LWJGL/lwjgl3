@@ -11,45 +11,6 @@ import org.lwjgl.vulkan.*
 val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type = "device", postfix = EXT) {
     documentation =
         """
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>VK_EXT_debug_marker</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>23</dd>
-
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-01-31</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>4</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.11 of the Vulkan API.</li>
-                <li>Requires VK_EXT_debug_report.</li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Baldur Karlsson</li>
-                <li>Dan Ginsburg, Valve</li>
-                <li>Jon Ashburn, LunarG</li>
-                <li>Kyle Spagnoli, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Baldur Karlsson</li>
-            </ul></dd>
-        </dl>
-
         The {@code VK_EXT_debug_marker} extension is a device extension. It introduces concepts of object naming and tagging, for better tracking of Vulkan objects, as well as additional commands for recording annotations of named sections of a workload to aid organisation and offline analysis in external tools.
 
         <h5>Examples</h5>
@@ -140,6 +101,45 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿    }
 ￿    // End the house annotation started above
 ￿    pfnCmdDebugMarkerEndEXT(commandBuffer);</code></pre>
+
+        <dl>
+            <dt><b>Name String</b></dt>
+            <dd>VK_EXT_debug_marker</dd>
+
+            <dt><b>Extension Type</b></dt>
+            <dd>Device extension</dd>
+
+            <dt><b>Registered Extension Number</b></dt>
+            <dd>23</dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-01-31</dd>
+
+            <dt><b>Revision</b></dt>
+            <dd>4</dd>
+
+            <dt><b>IP Status</b></dt>
+            <dd>No known IP claims.</dd>
+
+            <dt><b>Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension is written against version 1.0.11 of the Vulkan API.</li>
+                <li>Requires VK_EXT_debug_report.</li>
+            </ul></dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>Baldur Karlsson</li>
+                <li>Dan Ginsburg, Valve</li>
+                <li>Jon Ashburn, LunarG</li>
+                <li>Kyle Spagnoli, NVIDIA</li>
+            </ul></dd>
+
+            <dt><b>Contacts</b></dt>
+            <dd><ul>
+                <li>Baldur Karlsson</li>
+            </ul></dd>
+        </dl>
         """
 
     IntConstant(

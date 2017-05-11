@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control", type = "device", postfix = EXT) {
     documentation =
         """
+        This extension defines a set of utility functions for use with the {@code VK_KHR_display} and {@code VK_KHR_display_swapchain} extensions.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_EXT_display_control</dd>
@@ -52,8 +54,6 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
                 <li>James Jones, NVIDIA (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This extension defines a set of utility functions for use with the {@code VK_KHR_display} and {@code VK_KHR_display_swapchain} extensions.
         """
 
     IntConstant(

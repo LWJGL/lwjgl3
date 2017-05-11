@@ -11,6 +11,16 @@ import org.lwjgl.vulkan.*
 val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClassVK("NV_sample_mask_override_coverage", type = "device", postfix = NV) {
     documentation =
         """
+        This extension adds support for the following SPIR-V extension in Vulkan:
+
+        <ul>
+            <li>SPV_NV_sample_mask_override_coverage</li>
+        </ul>
+
+        The extension provides access to the {@code OverrideCoverageNV} decoration under the {@code SampleMaskOverrideCoverageNV} capability. Adding this decoration to a variable with the {@code SampleMask} builtin decoration allows the shader to modify the coverage mask and affect which samples are used to process the fragment.
+
+        When using GLSL source-based shader languages, the {@code override_coverage} layout qualifier from GL_NV_sample_mask_override_coverage maps to the {@code OverrideCoverageNV} decoration. To use the {@code override_coverage} layout qualifier in GLSL the GL_NV_sample_mask_override_coverage extension must be enabled. Behavior is described in the GL_NV_sample_mask_override_coverage extension spec.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_NV_sample_mask_override_coverage</dd>
@@ -51,17 +61,6 @@ val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClas
             <dd><ul>
                 <li>Piers Daniell (pdaniell 'at' nvidia.com)</li>
             </ul></dd>
-
-            <dt><b>Overview</b></dt>
-            <dd>This extension adds support for the following SPIR-V extension in Vulkan:
-
-            <ul>
-                <li>SPV_NV_sample_mask_override_coverage</li>
-            </ul>
-
-            The extension provides access to the {@code OverrideCoverageNV} decoration under the {@code SampleMaskOverrideCoverageNV} capability. Adding this decoration to a variable with the {@code SampleMask} builtin decoration allows the shader to modify the coverage mask and affect which samples are used to process the fragment.
-
-            When using GLSL source-based shader languages, the {@code override_coverage} layout qualifier from GL_NV_sample_mask_override_coverage maps to the {@code OverrideCoverageNV} decoration. To use the {@code override_coverage} layout qualifier in GLSL the GL_NV_sample_mask_override_coverage extension must be enabled. Behavior is described in the GL_NV_sample_mask_override_coverage extension spec.</dd>
         </dl>
         """
 

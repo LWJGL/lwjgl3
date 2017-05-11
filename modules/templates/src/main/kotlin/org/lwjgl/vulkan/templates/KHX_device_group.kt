@@ -11,6 +11,11 @@ import org.lwjgl.vulkan.*
 val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type = "device", postfix = KHX) {
     documentation =
         """
+        This extension provides functionality to use a logical device that consists of multiple physical devices, as created with the {@code VK_KHX_device_group_creation} extension. A device group can allocate memory across the subdevices, bind memory from one subdevice to a resource on another subdevice, record command buffers where some work executes on an arbitrary subset of the subdevices, and potentially present a swapchain image from one or more subdevices.
+
+        <h5>Examples</h5>
+        TODO
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHX_device_group</dd>
@@ -49,11 +54,6 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
                 <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This extension provides functionality to use a logical device that consists of multiple physical devices, as created with the {@code VK_KHX_device_group_creation} extension. A device group can allocate memory across the subdevices, bind memory from one subdevice to a resource on another subdevice, record command buffers where some work executes on an arbitrary subset of the subdevices, and potentially present a swapchain image from one or more subdevices.
-
-        <h5>Examples</h5>
-        TODO
         """
 
     IntConstant(

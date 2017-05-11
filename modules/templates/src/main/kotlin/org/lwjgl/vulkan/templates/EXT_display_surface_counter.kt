@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_display_surface_counter", type = "instance", postfix = EXT) {
     documentation =
         """
+        This is extension defines a vertical blanking period counter associated with display surfaces. It provides a mechanism to query support for such a counter from a {@code VkSurfaceKHR} object.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_EXT_display_surface_counter</dd>
@@ -50,8 +52,6 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
                 <li>James Jones, NVIDIA (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This is extension defines a vertical blanking period counter associated with display surfaces. It provides a mechanism to query support for such a counter from a {@code VkSurfaceKHR} object.
         """
 
     IntConstant(

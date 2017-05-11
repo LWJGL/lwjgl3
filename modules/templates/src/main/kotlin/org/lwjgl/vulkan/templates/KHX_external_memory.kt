@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val KHX_external_memory = "KHXExternalMemory".nativeClassVK("KHX_external_memory", type = "device", postfix = KHX) {
     documentation =
         """
+        An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export non-Vulkan handles from Vulkan memory objects such that the underlying resources can be referenced outside the scope of the Vulkan logical device that created them.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHX_external_memory</dd>
@@ -53,8 +55,6 @@ val KHX_external_memory = "KHXExternalMemory".nativeClassVK("KHX_external_memory
             <dt><b>Contact</b></dt>
             <dd>James Jones (jajones 'at' nvidia.com)</dd>
         </dl>
-
-        An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export non-Vulkan handles from Vulkan memory objects such that the underlying resources can be referenced outside the scope of the Vulkan logical device that created them.
         """
 
     IntConstant(

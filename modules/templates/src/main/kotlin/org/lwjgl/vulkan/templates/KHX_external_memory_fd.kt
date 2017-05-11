@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_memory_fd", type = "device", postfix = KHX) {
     documentation =
         """
+        An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export POSIX file descriptor handles from Vulkan memory objects and to import Vulkan memory objects from POSIX file descriptor handles exported from other Vulkan memory objects or from similar resources in other APIs.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHX_external_memory_fd</dd>
@@ -48,8 +50,6 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
             <dt><b>Contact</b></dt>
             <dd>James Jones (jajones 'at' nvidia.com)</dd>
         </dl>
-
-        An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export POSIX file descriptor handles from Vulkan memory objects and to import Vulkan memory objects from POSIX file descriptor handles exported from other Vulkan memory objects or from similar resources in other APIs.
         """
 
     IntConstant(

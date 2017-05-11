@@ -11,6 +11,13 @@ import org.lwjgl.vulkan.*
 val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swapchain", type = "device", postfix = KHR) {
     documentation =
         """
+        This extension provides an API to create a swapchain directly on a device's display without any underlying window system.
+
+        <h5>Examples</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The example code for the {@code VK_KHR_display} and {@code VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display swapchain creation example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/blob/master/demos/cube.c).
+        </div>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHR_display_swapchain</dd>
@@ -52,13 +59,6 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
                 <li>James Jones (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This extension provides an API to create a swapchain directly on a device's display without any underlying window system.
-
-        <h5>Examples</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The example code for the {@code VK_KHR_display} and {@code VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display swapchain creation example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/blob/master/demos/cube.c).
-        </div>
         """
 
     IntConstant(

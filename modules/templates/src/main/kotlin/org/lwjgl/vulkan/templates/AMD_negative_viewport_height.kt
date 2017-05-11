@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AMD_negative_viewport_height", type = "device", postfix = AMD) {
     documentation =
         """
+        This extension allows an application to specify a negative viewport height. The result is that the viewport transformation will flip along the y-axis.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_AMD_negative_viewport_height</dd>
@@ -47,8 +49,6 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
                 <li>Matthaeus G. Chajdas, AMD (mailto:matthaeus.chajdas@amd.com[matthaeus.chajdas@amd.com])</li>
             </ul></dd>
         </dl>
-
-        This extension allows an application to specify a negative viewport height. The result is that the viewport transformation will flip along the y-axis.
         """
 
     IntConstant(

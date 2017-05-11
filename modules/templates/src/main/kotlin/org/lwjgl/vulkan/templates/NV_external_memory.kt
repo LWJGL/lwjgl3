@@ -11,6 +11,11 @@ import org.lwjgl.vulkan.*
 val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", type = "device", postfix = NV) {
     documentation =
         """
+        Applications may wish to export memory to other Vulkan instances or other APIs, or import memory from other Vulkan instances or other APIs to enable Vulkan workloads to be split up across application module, process, or API boundaries. This extension enables applications to create exportable Vulkan memory objects such that the underlying resources can be referenced outside the Vulkan instance that created them.
+
+        <h5>Examples</h5>
+        <pre><code>￿    // TODO: Write some sample code here.</code></pre>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_NV_external_memory</dd>
@@ -50,11 +55,6 @@ val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", 
                 <li>James Jones (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        Applications may wish to export memory to other Vulkan instances or other APIs, or import memory from other Vulkan instances or other APIs to enable Vulkan workloads to be split up across application module, process, or API boundaries. This extension enables applications to create exportable Vulkan memory objects such that the underlying resources can be referenced outside the Vulkan instance that created them.
-
-        <h5>Examples</h5>
-        <pre><code>￿    // TODO: Write some sample code here.</code></pre>
         """
 
     IntConstant(

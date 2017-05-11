@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_mode_display", type = "instance", postfix = EXT) {
     documentation =
         """
+        This is extension, along with related platform exentions, allows applications to take exclusive control of displays associated with a native windowing system. This is especially useful for virtual reality applications that wish to hide HMDs (head mounted displays) from the native platform's display management system, desktop, and/or other applications.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_EXT_direct_mode_display</dd>
@@ -50,8 +52,6 @@ val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_m
                 <li>James Jones, NVIDIA (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This is extension, along with related platform exentions, allows applications to take exclusive control of displays associated with a native windowing system. This is especially useful for virtual reality applications that wish to hide HMDs (head mounted displays) from the native platform's display management system, desktop, and/or other applications.
         """
 
     IntConstant(

@@ -12,6 +12,8 @@ import org.lwjgl.vulkan.*
 val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquire_xlib_display", type = "instance", postfix = EXT) {
     documentation =
         """
+        This extension allows an application to take exclusive control on a display currently associated with an X11 screen. When control is acquired, the display will be deassociated from the X11 screen until control is released or the specified display connection is closed. Essentially, the X11 screen will behave as if the monitor has been unplugged until control is released.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_EXT_acquire_xlib_display</dd>
@@ -54,8 +56,6 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
                 <li>James Jones, NVIDIA (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This extension allows an application to take exclusive control on a display currently associated with an X11 screen. When control is acquired, the display will be deassociated from the X11 screen until control is released or the specified display connection is closed. Essentially, the X11 screen will behave as if the monitor has been unplugged until control is released.
         """
 
     IntConstant(

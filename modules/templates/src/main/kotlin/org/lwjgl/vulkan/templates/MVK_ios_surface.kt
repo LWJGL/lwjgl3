@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val MVK_ios_surface = "MVKIosSurface".nativeClassVK("MVK_ios_surface", type = "instance", postfix = MVK) {
     documentation =
         """
+        The {@code VK_MVK_ios_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to a {@code UIView}, the native surface type of iOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_MVK_ios_surface</dd>
@@ -46,8 +48,6 @@ val MVK_ios_surface = "MVKIosSurface".nativeClassVK("MVK_ios_surface", type = "i
                 <li>Bill Hollings, The Brenwill Workshop Ltd.</li>
             </ul></dd>
         </dl>
-
-        The {@code VK_MVK_ios_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to a {@code UIView}, the native surface type of iOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
         """
 
     IntConstant(

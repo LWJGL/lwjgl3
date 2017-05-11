@@ -11,45 +11,6 @@ import org.lwjgl.vulkan.*
 val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("NVX_device_generated_commands", type = "device", postfix = NVX) {
     documentation =
         """
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>VK_NVX_device_generated_commands</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>87</dd>
-
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-10-31</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Pierre Boudier, NVIDIA</li>
-                <li>Christoph Kubisch, NVIDIA</li>
-                <li>Mathias Schott, NVIDIA</li>
-                <li>Jeff Bolz, NVIDIA</li>
-                <li>Eric Werness, NVIDIA</li>
-                <li>Detlef Roettger, NVIDIA</li>
-                <li>Daniel Koch, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Pierre Boudier, NVIDIA (mailto:pboudier@nvidia.com[pboudier@nvidia.com])</li>
-                <li>Christoph Kubisch, NVIDIA (mailto:ckubisch@nvidia.com[ckubisch@nvidia.com])</li>
-            </ul></dd>
-        </dl>
-
         This extension allows the device to generate a number of critical commands for command buffers.
 
         When rendering a large number of objects, the device can be leveraged to implement a number of critical functions, like updating matrices, or implementing occlusion culling, frustum culling, front to back sorting... Implementing those on the device does not require any special extension, since an application is free to define its own data structure, and just process them using shaders.
@@ -144,6 +105,45 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 ￿                         // pMemoryBarriers&memoryBarrier,
 ￿                         ...)
 ￿    vkCmdExecuteCommands(mainCmd, 1, &generatedCmdBuffer);</code></pre>
+
+        <dl>
+            <dt><b>Name String</b></dt>
+            <dd>VK_NVX_device_generated_commands</dd>
+
+            <dt><b>Extension Type</b></dt>
+            <dd>Device extension</dd>
+
+            <dt><b>Registered Extension Number</b></dt>
+            <dd>87</dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-10-31</dd>
+
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension is written against version 1.0 of the Vulkan API.</li>
+            </ul></dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>Pierre Boudier, NVIDIA</li>
+                <li>Christoph Kubisch, NVIDIA</li>
+                <li>Mathias Schott, NVIDIA</li>
+                <li>Jeff Bolz, NVIDIA</li>
+                <li>Eric Werness, NVIDIA</li>
+                <li>Detlef Roettger, NVIDIA</li>
+                <li>Daniel Koch, NVIDIA</li>
+            </ul></dd>
+
+            <dt><b>Contacts</b></dt>
+            <dd><ul>
+                <li>Pierre Boudier, NVIDIA (mailto:pboudier@nvidia.com[pboudier@nvidia.com])</li>
+                <li>Christoph Kubisch, NVIDIA (mailto:ckubisch@nvidia.com[ckubisch@nvidia.com])</li>
+            </ul></dd>
+        </dl>
         """
 
     IntConstant(

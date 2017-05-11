@@ -11,6 +11,20 @@ import org.lwjgl.vulkan.*
 val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", type = "device", postfix = NV) {
     documentation =
         """
+        This extension adds support for the following SPIR-V extension in Vulkan:
+
+        <ul>
+            <li>SPV_NV_viewport_array2</li>
+        </ul>
+
+        which allows a single primitive to be broadcast to multiple viewports and/or multiple layers. A new shader built-in output {@code ViewportMaskNV} is provided, which allows a single primitive to be output to multiple viewports simultaneously. Also, a new SPIR-V decoration is added to control whether the effective viewport index is added into the variable decorated with the <b>Layer</b> built-in decoration. These capabilities allow a single primitive to be output to multiple layers simultaneously.
+
+        This extension allows variables decorated with the {@code Layer} and {@code ViewportIndex} built-ins to be exported from vertex or tessellation shaders, using the {@code ShaderViewportIndexLayerNV} capability.
+
+        This extension adds a new {@code ViewportMaskNV} built-in decoration that is available for output variables in vertex, tessellation evaluation, and geometry shaders, and a new {@code ViewportRelativeNV} decoration that can be added on variables decorated with {@code Layer} when using the {@code ShaderViewportMaskNV} capability.
+
+        When using GLSL source-based shading languages, the {@code gl_ViewportMask}[] built-in output variable and {@code viewport_relative} layout qualifier from {@code GL_NV_viewport_array2} map to the {@code ViewportMaskNV} and {@code ViewportRelativeNV} decorations, respectively. Behaviour is described in the GL_NV_viewport_array2 extension specificiation.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_NV_viewport_array2</dd>
@@ -50,21 +64,6 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
             <dd><ul>
                 <li>Daniel Koch (dkoch 'at' nvidia.com)</li>
             </ul></dd>
-
-            <dt><b>Overview</b></dt>
-            <dd>This extension adds support for the following SPIR-V extension in Vulkan:
-
-            <ul>
-                <li>SPV_NV_viewport_array2</li>
-            </ul>
-
-            which allows a single primitive to be broadcast to multiple viewports and/or multiple layers. A new shader built-in output {@code ViewportMaskNV} is provided, which allows a single primitive to be output to multiple viewports simultaneously. Also, a new SPIR-V decoration is added to control whether the effective viewport index is added into the variable decorated with the <b>Layer</b> built-in decoration. These capabilities allow a single primitive to be output to multiple layers simultaneously.
-
-            This extension allows variables decorated with the {@code Layer} and {@code ViewportIndex} built-ins to be exported from vertex or tessellation shaders, using the {@code ShaderViewportIndexLayerNV} capability.
-
-            This extension adds a new {@code ViewportMaskNV} built-in decoration that is available for output variables in vertex, tessellation evaluation, and geometry shaders, and a new {@code ViewportRelativeNV} decoration that can be added on variables decorated with {@code Layer} when using the {@code ShaderViewportMaskNV} capability.
-
-            When using GLSL source-based shading languages, the {@code gl_ViewportMask}[] built-in output variable and {@code viewport_relative} layout qualifier from {@code GL_NV_viewport_array2} map to the {@code ViewportMaskNV} and {@code ViewportRelativeNV} decorations, respectively. Behaviour is described in the GL_NV_viewport_array2 extension specificiation.</dd>
         </dl>
         """
 

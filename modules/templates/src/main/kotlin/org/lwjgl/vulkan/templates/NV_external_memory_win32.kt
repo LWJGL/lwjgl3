@@ -12,47 +12,6 @@ import org.lwjgl.vulkan.*
 val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_external_memory_win32", type = "device", postfix = NV) {
     documentation =
         """
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>VK_NV_external_memory_win32</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>58</dd>
-
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-08-19</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_NV_external_memory_capabilities.</li>
-                <li>Requires VK_NV_external_memory.</li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>James Jones, NVIDIA</li>
-                <li>Carsten Rohde, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>James Jones (jajones 'at' nvidia.com)</li>
-            </ul></dd>
-        </dl>
-
         Applications may wish to export memory to other Vulkan instances or other APIs, or import memory from other Vulkan instances or other APIs to enable Vulkan workloads to be split up across application module, process, or API boundaries. This extension enables win32 applications to export win32 handles from Vulkan memory objects such that the underlying resources can be referenced outside the Vulkan instance that created them, and import win32 handles created in the Direct3D API to Vulkan memory objects.
 
         <h5>Examples</h5>
@@ -187,6 +146,47 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 ￿
 ￿    // Get the external memory opaque FD handle
 ￿    vkGetMemoryWin32HandleNV(device, memory, &memoryHnd);</code></pre>
+
+        <dl>
+            <dt><b>Name String</b></dt>
+            <dd>VK_NV_external_memory_win32</dd>
+
+            <dt><b>Extension Type</b></dt>
+            <dd>Device extension</dd>
+
+            <dt><b>Registered Extension Number</b></dt>
+            <dd>58</dd>
+
+            <dt><b>Status</b></dt>
+            <dd>Complete</dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-08-19</dd>
+
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>IP Status</b></dt>
+            <dd>No known IP claims.</dd>
+
+            <dt><b>Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension is written against version 1.0 of the Vulkan API.</li>
+                <li>Requires VK_NV_external_memory_capabilities.</li>
+                <li>Requires VK_NV_external_memory.</li>
+            </ul></dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>James Jones, NVIDIA</li>
+                <li>Carsten Rohde, NVIDIA</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones (jajones 'at' nvidia.com)</li>
+            </ul></dd>
+        </dl>
         """
 
     IntConstant(

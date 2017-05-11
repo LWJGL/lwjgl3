@@ -11,47 +11,6 @@ import org.lwjgl.vulkan.*
 val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mutex", type = "device", postfix = NV) {
     documentation =
         """
-        <dl>
-            <dt><b>Name</b></dt>
-            <dd>VK_NV_win32_keyed_mutex</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>59</dd>
-
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-08-19</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>2</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_NV_external_memory_capabilities</li>
-                <li>Requires VK_NV_external_memory_win32</li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>James Jones, NVIDIA</li>
-                <li>Carsten Rohde, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Carsten Rohde (crohde 'at' nvidia.com)</li>
-            </ul></dd>
-        </dl>
-
         Applications that wish to import Direct3D 11 memory objects into the Vulkan API may wish to use the native keyed mutex mechanism to synchronize access to the memory between Vulkan and Direct3D. This extension provides a way for an application to access the keyed mutex associated with an imported Vulkan memory object when submitting command buffers to a queue.
 
         <h5>Examples</h5>
@@ -183,6 +142,47 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿    submit_info.commandBufferCount = 1;
 ￿    submit_info.pCommandBuffers = &cmd_buf;
 ￿    vkQueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);</code></pre>
+
+        <dl>
+            <dt><b>Name</b></dt>
+            <dd>VK_NV_win32_keyed_mutex</dd>
+
+            <dt><b>Extension Type</b></dt>
+            <dd>Device extension</dd>
+
+            <dt><b>Registered Extension Number</b></dt>
+            <dd>59</dd>
+
+            <dt><b>Status</b></dt>
+            <dd>Complete</dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-08-19</dd>
+
+            <dt><b>Revision</b></dt>
+            <dd>2</dd>
+
+            <dt><b>IP Status</b></dt>
+            <dd>No known IP claims.</dd>
+
+            <dt><b>Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension is written against version 1.0 of the Vulkan API.</li>
+                <li>Requires VK_NV_external_memory_capabilities</li>
+                <li>Requires VK_NV_external_memory_win32</li>
+            </ul></dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>James Jones, NVIDIA</li>
+                <li>Carsten Rohde, NVIDIA</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Carsten Rohde (crohde 'at' nvidia.com)</li>
+            </ul></dd>
+        </dl>
         """
 
     IntConstant(

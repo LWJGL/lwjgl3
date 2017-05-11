@@ -11,50 +11,13 @@ import org.lwjgl.vulkan.*
 val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space_w_scaling", type = "device", postfix = NV) {
     documentation =
         """
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>VK_NV_clip_space_w_scaling</dd>
+        Virtual Reality (VR) applications often involve a post-processing step to apply a "barrel" distortion to the rendered image to correct the "pincushion" distortion introduced by the optics in a VR device. The barrel distorted image has lower resolution along the edges compared to the center. Since the original image is rendered at high resolution, which is uniform across the complete image, a lot of pixels towards the edges do not make it to the final post-processed image.
 
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
+        This extension provides a mechanism to render VR scenes at a non-uniform resolution, in particular a resolution that falls linearly from the center towards the edges. This is achieved by scaling the "w" coordinate of the vertices in the clip space before perspective divide. The clip space "w" coordinate of the vertices <b>can</b> be offset as of a function of "x" and "y" coordinates as follows:
 
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>88</dd>
+        w' = w + Ax + By
 
-            <dt><b>Status</b></dt>
-            <dd>Complete.</dd>
-
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-02-15</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0. of the Vulkan API.</li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Eric Werness, NVIDIA</li>
-                <li>Kedarnath Thangudu, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Eric Werness (ewerness 'at' nvidia.com)</li>
-            </ul></dd>
-
-            <dt><b>Overview</b></dt>
-            <dd>Virtual Reality (VR) applications often involve a post-processing step to apply a "barrel" distortion to the rendered image to correct the "pincushion" distortion introduced by the optics in a VR device. The barrel distorted image has lower resolution along the edges compared to the center. Since the original image is rendered at high resolution, which is uniform across the complete image, a lot of pixels towards the edges do not make it to the final post-processed image.
-
-            This extension provides a mechanism to render VR scenes at a non-uniform resolution, in particular a resolution that falls linearly from the center towards the edges. This is achieved by scaling the "w" coordinate of the vertices in the clip space before perspective divide. The clip space "w" coordinate of the vertices <b>can</b> be offset as of a function of "x" and "y" coordinates as follows:
-
-            w' = w + Ax + By
-
-            In the intended use case for viewport position scaling, an application should use a set of 4 viewports, one for each of the 4 quadrants of a Cartesian coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify A and B coefficients of the w-scaling equation above, that have the same value, but different signs, for each of the viewports. The signs of A and B should match the signs of X and Y for the quadrant that they represent such that the value of "w'" will always be greater than or equal to the original "w" value for the entire image. Since the offset to "w", (Ax + By), is always positive and increases with the absolute values of "x" and "y", the effective resolution will fall off linearly from the center of the image to its edges.</dd>
-        </dl>
+        In the intended use case for viewport position scaling, an application should use a set of 4 viewports, one for each of the 4 quadrants of a Cartesian coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify A and B coefficients of the w-scaling equation above, that have the same value, but different signs, for each of the viewports. The signs of A and B should match the signs of X and Y for the quadrant that they represent such that the value of "w'" will always be greater than or equal to the original "w" value for the entire image. Since the offset to "w", (Ax + By), is always positive and increases with the absolute values of "x" and "y", the effective resolution will fall off linearly from the center of the image to its edges.
 
         <h5>Examples</h5>
         <pre><code>VkViewport viewports[4];
@@ -134,6 +97,42 @@ void main()
 ￿
 ￿    Color = texture(tex, P * 0.5 + 0.5);
 }</code></pre>
+
+        <dl>
+            <dt><b>Name String</b></dt>
+            <dd>VK_NV_clip_space_w_scaling</dd>
+
+            <dt><b>Extension Type</b></dt>
+            <dd>Device extension</dd>
+
+            <dt><b>Registered Extension Number</b></dt>
+            <dd>88</dd>
+
+            <dt><b>Status</b></dt>
+            <dd>Complete.</dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-02-15</dd>
+
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension is written against version 1.0. of the Vulkan API.</li>
+            </ul></dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>Eric Werness, NVIDIA</li>
+                <li>Kedarnath Thangudu, NVIDIA</li>
+            </ul></dd>
+
+            <dt><b>Contacts</b></dt>
+            <dd><ul>
+                <li>Eric Werness (ewerness 'at' nvidia.com)</li>
+            </ul></dd>
+        </dl>
         """
 
     IntConstant(

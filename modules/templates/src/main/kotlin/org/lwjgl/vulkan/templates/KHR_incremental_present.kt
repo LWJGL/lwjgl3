@@ -11,6 +11,13 @@ import org.lwjgl.vulkan.*
 val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_incremental_present", type = "device", postfix = KHR) {
     documentation =
         """
+        This device extension extends {@code vkQueuePresentKHR}, from the {@code VK_KHR_swapchain} extension, allowing an application to specify a list of rectangular, modified regions of each image to present. This should be used in situations where an application is only changing a small portion of the presentable images within a swapchain, since it enables the presentation engine to avoid wasting time presenting parts of the surface that haven't changed.
+
+        This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.
+
+        <h5>Examples</h5>
+        None.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHR_incremental_present</dd>
@@ -54,13 +61,6 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
                 <li>Ian Elliott, Google</li>
             </ul></dd>
         </dl>
-
-        This device extension extends {@code vkQueuePresentKHR}, from the {@code VK_KHR_swapchain} extension, allowing an application to specify a list of rectangular, modified regions of each image to present. This should be used in situations where an application is only changing a small portion of the presentable images within a swapchain, since it enables the presentation engine to avoid wasting time presenting parts of the surface that haven't changed.
-
-        This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.
-
-        <h5>Examples</h5>
-        None.
         """
 
     IntConstant(

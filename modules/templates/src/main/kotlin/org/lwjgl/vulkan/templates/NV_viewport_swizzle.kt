@@ -11,6 +11,10 @@ import org.lwjgl.vulkan.*
 val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassVK("NV_viewport_swizzle", type = "device", postfix = NV) {
     documentation =
         """
+        This extension provides a new per-viewport swizzle that can modify the position of primitives sent to each viewport. New viewport swizzle state is added for each viewport, and a new position vector is computed for each vertex by selecting from and optionally negating any of the four components of the original position vector.
+
+        This new viewport swizzle is useful for a number of algorithms, including single-pass cubemap rendering (broadcasting a primitive to multiple faces and reorienting the vertex position for each face) and voxel rasterization. The per-viewport component remapping and negation provided by the swizzle allows application code to re-orient three-dimensional geometry with a view along any of the X, Y, or Z axes. If a perspective projection and depth buffering is required, 1/W buffering should be used, as described in the single-pass cubemap rendering example in the "Issues" section below.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_NV_viewport_swizzle</dd>
@@ -47,11 +51,6 @@ val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassVK("NV_viewport_swizzle
             <dd><ul>
                 <li>Piers Daniell (pdaniell 'at' nvidia.com)</li>
             </ul></dd>
-
-            <dt><b>Overview</b></dt>
-            <dd>This extension provides a new per-viewport swizzle that can modify the position of primitives sent to each viewport. New viewport swizzle state is added for each viewport, and a new position vector is computed for each vertex by selecting from and optionally negating any of the four components of the original position vector.
-
-            This new viewport swizzle is useful for a number of algorithms, including single-pass cubemap rendering (broadcasting a primitive to multiple faces and reorienting the vertex position for each face) and voxel rasterization. The per-viewport component remapping and negation provided by the swizzle allows application code to re-orient three-dimensional geometry with a view along any of the X, Y, or Z axes. If a perspective projection and depth buffering is required, 1/W buffering should be used, as described in the single-pass cubemap rendering example in the "Issues" section below.</dd>
         </dl>
         """
 

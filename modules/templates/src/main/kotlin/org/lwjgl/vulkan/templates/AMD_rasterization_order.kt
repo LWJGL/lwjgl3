@@ -11,6 +11,29 @@ import org.lwjgl.vulkan.*
 val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasterization_order", type = "device", postfix = AMD) {
     documentation =
         """
+        This extension introduces the possibility for the application to control the order of primitive rasterization. In unextended Vulkan, the following stages are guaranteed to execute in <em>API order</em>:
+
+        <ul>
+            <li>depth bounds test</li>
+            <li>stencil test, stencil op, and stencil write</li>
+            <li>depth test and depth write</li>
+            <li>occlusion queries</li>
+            <li>blending, logic op, and color write</li>
+        </ul>
+
+        This extension enables applications to opt into a relaxed, implementation defined primitive rasterization order that may allow better parallel processing of primitives and thus enabling higher primitive throughput. It is applicable in cases where the primitive rasterization order is known to not affect the output of the rendering or any differences caused by a different rasterization order are not a concern from the point of view of the application's purpose.
+
+        A few examples of cases when using the relaxed primitive rasterization order would not have an effect on the final rendering:
+
+        <ul>
+            <li>If the primitives rendered are known to not overlap in framebuffer space.</li>
+            <li>If depth testing is used with a comparison operator of #COMPARE_OP_LESS, #COMPARE_OP_LESS_OR_EQUAL, #COMPARE_OP_GREATER, or #COMPARE_OP_GREATER_OR_EQUAL, and the primitives rendered are known to not overlap in clip space.</li>
+            <li>If depth testing is not used and blending is enabled for all attachments with a commutative blend operator.</li>
+        </ul>
+
+        <h5>Examples</h5>
+        None
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_AMD_rasterization_order</dd>
@@ -49,29 +72,6 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
                 <li>Daniel Rakos, AMD</li>
             </ul></dd>
         </dl>
-
-        This extension introduces the possibility for the application to control the order of primitive rasterization. In unextended Vulkan, the following stages are guaranteed to execute in <em>API order</em>:
-
-        <ul>
-            <li>depth bounds test</li>
-            <li>stencil test, stencil op, and stencil write</li>
-            <li>depth test and depth write</li>
-            <li>occlusion queries</li>
-            <li>blending, logic op, and color write</li>
-        </ul>
-
-        This extension enables applications to opt into a relaxed, implementation defined primitive rasterization order that may allow better parallel processing of primitives and thus enabling higher primitive throughput. It is applicable in cases where the primitive rasterization order is known to not affect the output of the rendering or any differences caused by a different rasterization order are not a concern from the point of view of the application's purpose.
-
-        A few examples of cases when using the relaxed primitive rasterization order would not have an effect on the final rendering:
-
-        <ul>
-            <li>If the primitives rendered are known to not overlap in framebuffer space.</li>
-            <li>If depth testing is used with a comparison operator of #COMPARE_OP_LESS, #COMPARE_OP_LESS_OR_EQUAL, #COMPARE_OP_GREATER, or #COMPARE_OP_GREATER_OR_EQUAL, and the primitives rendered are known to not overlap in clip space.</li>
-            <li>If depth testing is not used and blending is enabled for all attachments with a commutative blend operator.</li>
-        </ul>
-
-        <h5>Examples</h5>
-        None
         """
 
     IntConstant(

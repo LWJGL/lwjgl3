@@ -11,6 +11,21 @@ import org.lwjgl.vulkan.*
 val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type = "device", postfix = KHR) {
     documentation =
         """
+        {@code VK_KHR_maintenance1} adds a collection of minor features that were intentionally left out or overlooked from the original Vulkan 1.0 release.
+
+        The new features are as follows:
+
+        <ul>
+            <li>Allow 2D and 2D array image views to be created from 3D images, which can then be used as color framebuffer attachments. This allows applications to render to slices of a 3D image.</li>
+            <li>Support #CmdCopyImage() between 2D array layers and 3D slices. This extension allows copying from layers of a 2D array image to slices of a 3D image and vice versa.</li>
+            <li>Allow negative height to be specified in the slink::VkViewport{@code ::height} field to perform y-inversion of the clip-space to framebuffer-space transform. This allows apps to avoid having to use gl_Position.y = -gl_Position.y in shaders also targeting other APIs.</li>
+            <li>Allow implementations to express support for doing just transfers and clears of image formats that they otherwise support no other format features for. This is done by adding new format feature flags #FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR and #FORMAT_FEATURE_TRANSFER_DST_BIT_KHR.</li>
+            <li>Support #CmdFillBuffer() on transfer-only queues. Previously #CmdFillBuffer() was defined to only work on command buffers allocated from command pools which support graphics or compute queues. It is now allowed on queues that just support transfer operations.</li>
+            <li>Fix the inconsistency of how error conditions are returned between the #CreateGraphicsPipelines() and #CreateComputePipelines() functions and the #AllocateDescriptorSets() and #AllocateCommandBuffers() functions.</li>
+            <li>Add new #ERROR_OUT_OF_POOL_MEMORY_KHR error so implementations can give a more precise reason for #AllocateDescriptorSets() failures.</li>
+            <li>Add a new command #TrimCommandPoolKHR() which gives the implementation an opportunity to release any unused command pool memory back to the system.</li>
+        </ul>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHR_maintenance1</dd>
@@ -57,23 +72,7 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
             <dd><ul>
                 <li>Piers Daniell (pdaniell 'at' nvidia.com)</li>
             </ul></dd>
-
-            <dt><b>Overview</b></dt>
-            <dd>VK_KHR_maintenance1 adds a collection of minor features that were intentionally left out or overlooked from the original Vulkan 1.0 release.</dd>
         </dl>
-
-        The new features are as follows:
-
-        <ul>
-            <li>Allow 2D and 2D array image views to be created from 3D images, which can then be used as color framebuffer attachments. This allows applications to render to slices of a 3D image.</li>
-            <li>Support #CmdCopyImage() between 2D array layers and 3D slices. This extension allows copying from layers of a 2D array image to slices of a 3D image and vice versa.</li>
-            <li>Allow negative height to be specified in the slink::VkViewport{@code ::height} field to perform y-inversion of the clip-space to framebuffer-space transform. This allows apps to avoid having to use gl_Position.y = -gl_Position.y in shaders also targeting other APIs.</li>
-            <li>Allow implementations to express support for doing just transfers and clears of image formats that they otherwise support no other format features for. This is done by adding new format feature flags #FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR and #FORMAT_FEATURE_TRANSFER_DST_BIT_KHR.</li>
-            <li>Support #CmdFillBuffer() on transfer-only queues. Previously #CmdFillBuffer() was defined to only work on command buffers allocated from command pools which support graphics or compute queues. It is now allowed on queues that just support transfer operations.</li>
-            <li>Fix the inconsistency of how error conditions are returned between the #CreateGraphicsPipelines() and #CreateComputePipelines() functions and the #AllocateDescriptorSets() and #AllocateCommandBuffers() functions.</li>
-            <li>Add new #ERROR_OUT_OF_POOL_MEMORY_KHR error so implementations can give a more precise reason for #AllocateDescriptorSets() failures.</li>
-            <li>Add a new command #TrimCommandPoolKHR() which gives the implementation an opportunity to release any unused command pool memory back to the system.</li>
-        </ul>
         """
 
     IntConstant(

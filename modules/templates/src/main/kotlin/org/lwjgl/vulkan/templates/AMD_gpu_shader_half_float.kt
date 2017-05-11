@@ -11,6 +11,12 @@ import org.lwjgl.vulkan.*
 val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_shader_half_float", type = "device", postfix = AMD) {
     documentation =
         """
+        This extension adds support for the following SPIR-V extension in {apiname}:
+
+        <ul>
+            <li>SPV_AMD_gpu_shader_half_float</li>
+        </ul>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_AMD_gpu_shader_half_float</dd>
@@ -50,12 +56,6 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
                 <li>Dominik Witczak, AMD (mailto:Dominik.Witczak@amd.com[Dominik.Witczak@amd.com])</li>
             </ul></dd>
         </dl>
-
-        This extension adds support for the following SPIR-V extension in {apiname}:
-
-        <ul>
-            <li>SPV_AMD_gpu_shader_half_float</li>
-        </ul>
         """
 
     IntConstant(

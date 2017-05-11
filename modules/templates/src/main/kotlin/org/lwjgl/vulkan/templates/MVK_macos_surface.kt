@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", type = "instance", postfix = MVK) {
     documentation =
         """
+        The {@code VK_MVK_macos_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to an {@code NSView}, the native surface type of macOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_MVK_macos_surface</dd>
@@ -46,8 +48,6 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
                 <li>Bill Hollings, The Brenwill Workshop Ltd.</li>
             </ul></dd>
         </dl>
-
-        The {@code VK_MVK_macos_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to an {@code NSView}, the native surface type of macOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
         """
 
     IntConstant(

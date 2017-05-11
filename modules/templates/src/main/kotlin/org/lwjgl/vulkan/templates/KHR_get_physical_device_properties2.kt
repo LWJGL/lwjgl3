@@ -11,45 +11,6 @@ import org.lwjgl.vulkan.*
 val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nativeClassVK("KHR_get_physical_device_properties2", type = "instance", postfix = KHR) {
     documentation =
         """
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>VK_KHR_get_physical_device_properties2</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Instance extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>60</dd>
-
-            <dt><b>Status</b></dt>
-            <dd>Complete.</dd>
-
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-11-02</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>2</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Jeff Bolz, NVIDIA</li>
-                <li>Ian Elliott, Google</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
-            </ul></dd>
-        </dl>
-
         This extension provides new entry points to query device features, device properties, and format properties in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 feature/limit/formatproperty structures do not include {@code sType}/{@code pNext} members. This extension wraps them in new structures with {@code sType}/{@code pNext} members, so an application can query a chain of feature/limit/formatproperty structures by constructing the chain and letting the implementation fill them in. A new command is added for each ftext:vkGetPhysicalDevice* command in core Vulkan 1.0. The new feature structure (and a chain of extension structures) can also be passed in to device creation to enable features.
 
         This extension also allows applications to use the physical-device components of device extensions before #CreateDevice() is called.
@@ -99,6 +60,45 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿
 ￿    VkDevice device;
 ￿    vkCreateDevice(physicalDevice, &deviceCreateInfo, NULL, &device);</code></pre>
+
+        <dl>
+            <dt><b>Name String</b></dt>
+            <dd>VK_KHR_get_physical_device_properties2</dd>
+
+            <dt><b>Extension Type</b></dt>
+            <dd>Instance extension</dd>
+
+            <dt><b>Registered Extension Number</b></dt>
+            <dd>60</dd>
+
+            <dt><b>Status</b></dt>
+            <dd>Complete.</dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-11-02</dd>
+
+            <dt><b>Revision</b></dt>
+            <dd>2</dd>
+
+            <dt><b>IP Status</b></dt>
+            <dd>No known IP claims.</dd>
+
+            <dt><b>Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension is written against version 1.0 of the Vulkan API.</li>
+            </ul></dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>Jeff Bolz, NVIDIA</li>
+                <li>Ian Elliott, Google</li>
+            </ul></dd>
+
+            <dt><b>Contacts</b></dt>
+            <dd><ul>
+                <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
+            </ul></dd>
+        </dl>
         """
 
     IntConstant(

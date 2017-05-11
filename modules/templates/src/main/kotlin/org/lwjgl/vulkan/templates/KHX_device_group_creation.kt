@@ -11,6 +11,37 @@ import org.lwjgl.vulkan.*
 val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_device_group_creation", type = "instance", postfix = KHX) {
     documentation =
         """
+        This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the VK_KHX_device_group extension.
+
+        <h5>Examples</h5>
+        <pre><code>￿    VkDeviceCreateInfo devCreateInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
+￿    // (not shown) fill out devCreateInfo as usual.
+￿    uint32_t deviceGroupCount = 0;
+￿    VkPhysicalDeviceGroupPropertiesKHX *props = NULL;
+￿
+￿    // Query the number of device groups
+￿    vkEnumeratePhysicalDeviceGroupsKHX(g_vkInstance, &deviceGroupCount, NULL);
+￿
+￿    // Allocate and initialize structures to query the device groups
+￿    props = (VkPhysicalDeviceGroupPropertiesKHX *)malloc(deviceGroupCount*sizeof(VkPhysicalDeviceGroupPropertiesKHX));
+￿    for (i = 0; i < deviceGroupCount; ++i) {
+￿        props[i].sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHX;
+￿        props[i].pNext = NULL;
+￿    }
+￿    vkEnumeratePhysicalDeviceGroupsKHX(g_vkInstance, &deviceGroupCount, props);
+￿
+￿    // If the first device group has more than one physical device. create
+￿    // a logical device using all of the physical devices.
+￿    VkDeviceGroupDeviceCreateInfoKHX deviceGroupInfo = { VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHX };
+￿    if (props[0].physicalDeviceCount > 1) {
+￿        deviceGroupInfo.physicalDeviceCount = props[0].physicalDeviceCount;
+￿        deviceGroupInfo.pPhysicalDevices = props[0].physicalDevices;
+￿        devCreateInfo.pNext = &deviceGroupInfo;
+￿    }
+￿
+￿    vkCreateDevice(props[0].physicalDevices[0], &devCreateInfo, NULL, &g_vkDevice);
+￿    free(props);</code></pre>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHX_device_group_creation</dd>
@@ -48,37 +79,6 @@ val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_devi
                 <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
-
-        This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the VK_KHX_device_group extension.
-
-        <h5>Examples</h5>
-        <pre><code>￿    VkDeviceCreateInfo devCreateInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
-￿    // (not shown) fill out devCreateInfo as usual.
-￿    uint32_t deviceGroupCount = 0;
-￿    VkPhysicalDeviceGroupPropertiesKHX *props = NULL;
-￿
-￿    // Query the number of device groups
-￿    vkEnumeratePhysicalDeviceGroupsKHX(g_vkInstance, &deviceGroupCount, NULL);
-￿
-￿    // Allocate and initialize structures to query the device groups
-￿    props = (VkPhysicalDeviceGroupPropertiesKHX *)malloc(deviceGroupCount*sizeof(VkPhysicalDeviceGroupPropertiesKHX));
-￿    for (i = 0; i < deviceGroupCount; ++i) {
-￿        props[i].sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHX;
-￿        props[i].pNext = NULL;
-￿    }
-￿    vkEnumeratePhysicalDeviceGroupsKHX(g_vkInstance, &deviceGroupCount, props);
-￿
-￿    // If the first device group has more than one physical device. create
-￿    // a logical device using all of the physical devices.
-￿    VkDeviceGroupDeviceCreateInfoKHX deviceGroupInfo = { VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHX };
-￿    if (props[0].physicalDeviceCount > 1) {
-￿        deviceGroupInfo.physicalDeviceCount = props[0].physicalDeviceCount;
-￿        deviceGroupInfo.pPhysicalDevices = props[0].physicalDevices;
-￿        devCreateInfo.pNext = &deviceGroupInfo;
-￿    }
-￿
-￿    vkCreateDevice(props[0].physicalDevices[0], &devCreateInfo, NULL, &g_vkDevice);
-￿    free(props);</code></pre>
         """
 
     IntConstant(

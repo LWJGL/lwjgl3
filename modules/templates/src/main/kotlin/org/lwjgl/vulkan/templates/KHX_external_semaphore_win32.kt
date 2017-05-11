@@ -12,6 +12,8 @@ import org.lwjgl.vulkan.*
 val KHX_external_semaphore_win32 = "KHXExternalSemaphoreWin32".nativeClassVK("KHX_external_semaphore_win32", type = "device", postfix = KHX) {
     documentation =
         """
+        An application using external memory may wish to synchronize access to that memory using semaphores. This extension enables an application to export semaphore state to and import semaphore state from Windows handles.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHX_external_semaphore_win32</dd>
@@ -50,8 +52,6 @@ val KHX_external_semaphore_win32 = "KHXExternalSemaphoreWin32".nativeClassVK("KH
             <dt><b>Contact</b></dt>
             <dd>James Jones (jajones 'at' nvidia.com)</dd>
         </dl>
-
-        An application using external memory may wish to synchronize access to that memory using semaphores. This extension enables an application to export semaphore state to and import semaphore state from Windows handles.
         """
 
     IntConstant(

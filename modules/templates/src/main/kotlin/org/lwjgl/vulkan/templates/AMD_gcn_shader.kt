@@ -11,6 +11,12 @@ import org.lwjgl.vulkan.*
 val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "device", postfix = AMD) {
     documentation =
         """
+        This extension adds support for the following SPIR-V extension in {apiname}:
+
+        <ul>
+            <li>SPV_AMD_gcn_shader</li>
+        </ul>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_AMD_gcn_shader</dd>
@@ -48,12 +54,6 @@ val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "devi
                 <li>Dominik Witczak, AMD (mailto:dominik.witczak@amd.com[dominik.witczak@amd.com])</li>
             </ul></dd>
         </dl>
-
-        This extension adds support for the following SPIR-V extension in {apiname}:
-
-        <ul>
-            <li>SPV_AMD_gcn_shader</li>
-        </ul>
         """
 
     IntConstant(

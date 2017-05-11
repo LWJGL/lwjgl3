@@ -12,6 +12,8 @@ import org.lwjgl.vulkan.*
 val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type = "instance", postfix = KHR) {
     documentation =
         """
+        The {@code VK_KHR_xlib_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to an X11 {@code Window}, using the Xlib client-side library, as well as a query to determine support for rendering via Xlib.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_KHR_xlib_surface</dd>
@@ -63,8 +65,6 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type =
                 <li>Ian Elliott, LunarG</li>
             </ul></dd>
         </dl>
-
-        The {@code VK_KHR_xlib_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to an X11 {@code Window}, using the Xlib client-side library, as well as a query to determine support for rendering via Xlib.
         """
 
     IntConstant(

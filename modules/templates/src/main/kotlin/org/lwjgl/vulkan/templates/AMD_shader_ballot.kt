@@ -11,6 +11,12 @@ import org.lwjgl.vulkan.*
 val AMD_shader_ballot = "AMDShaderBallot".nativeClassVK("AMD_shader_ballot", type = "device", postfix = AMD) {
     documentation =
         """
+        This extension adds support for the following SPIR-V extension in {apiname}:
+
+        <ul>
+            <li>SPV_AMD_shader_ballot</li>
+        </ul>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_AMD_shader_ballot</dd>
@@ -50,12 +56,6 @@ val AMD_shader_ballot = "AMDShaderBallot".nativeClassVK("AMD_shader_ballot", typ
                 <li>Dominik Witczak, AMD (mailto:Dominik.Witczak@amd.com[Dominik.Witczak@amd.com])</li>
             </ul></dd>
         </dl>
-
-        This extension adds support for the following SPIR-V extension in {apiname}:
-
-        <ul>
-            <li>SPV_AMD_shader_ballot</li>
-        </ul>
         """
 
     IntConstant(

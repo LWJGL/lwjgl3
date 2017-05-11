@@ -11,6 +11,8 @@ import org.lwjgl.vulkan.*
 val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_indirect_count", type = "device", postfix = AMD) {
     documentation =
         """
+        This extension allows an application to source the number of draw calls for indirect draw calls from a buffer. This enables applications to generate arbitrary amounts of draw commands and execute them without host intervention.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_AMD_draw_indirect_count</dd>
@@ -49,8 +51,6 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
                 <li>Matthaeus G. Chajdas, AMD (mailto:matthaeus.chajdas@amd.com[matthaeus.chajdas@amd.com])</li>
             </ul></dd>
         </dl>
-
-        This extension allows an application to source the number of draw calls for indirect draw calls from a buffer. This enables applications to generate arbitrary amounts of draw commands and execute them without host intervention.
         """
 
     IntConstant(
