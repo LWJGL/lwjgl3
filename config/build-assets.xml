@@ -31,6 +31,7 @@ This script is included in /build.xml and depends on /build-definitions.xml
 		<update-nanovg-asset path="entypo.ttf"/>
 		<update-nanovg-asset path="Roboto-Regular.ttf"/>
 		<update-nanovg-asset path="Roboto-Bold.ttf"/>
+		<update-nanovg-asset path="NotoEmoji-Regular.ttf"/>
 		<update-nanovg-asset path="images/image1.jpg"/>
 		<update-nanovg-asset path="images/image2.jpg"/>
 		<update-nanovg-asset path="images/image3.jpg"/>

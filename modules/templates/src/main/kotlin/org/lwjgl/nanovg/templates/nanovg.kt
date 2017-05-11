@@ -1045,6 +1045,24 @@ nvgFill(vg);""")}
         const..charASCII_p.IN("name", "the font name")
     )
 
+    int(
+        "AddFallbackFontId",
+        "Adds fallback font by handle.",
+
+        ctx,
+        int.IN("baseFont", ""),
+        int.IN("fallbackFont", "")
+    )
+
+    int(
+        "AddFallbackFont",
+        "Adds fallback font by name.",
+
+        ctx,
+        const..charASCII_p.IN("baseFont", ""),
+        const..charASCII_p.IN("fallbackFont", "")
+    )
+
     void(
         "FontSize",
         "Sets the font size of current text style.",

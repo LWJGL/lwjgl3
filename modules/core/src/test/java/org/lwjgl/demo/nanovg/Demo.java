@@ -71,10 +71,8 @@ class Demo {
     private static final NVGTextRow.Buffer       rows      = NVGTextRow.create(3);
     private static final NVGGlyphPosition.Buffer glyphs    = NVGGlyphPosition.create(100);
     private static final ByteBuffer              paragraph = memUTF8(
-        "This is longer chunk of text.\n  \n  Would have used lorem ipsum but she    was busy jumping over the lazy dog with the fox and all the men who " +
-            "came" +
-            " " +
-            "to the aid of the party.",
+        "This is longer chunk of text.\n  \n  Would have used lorem ipsum but she    was busy jumping over the lazy dog with the fox and all the men " +
+        "who came to the aid of the party.🎉",
         false
     );
 
@@ -85,13 +83,15 @@ class Demo {
 
     static class DemoData {
 
-        final ByteBuffer entypo        = loadResource("demo/nanovg/entypo.ttf", 40 * 1024);
-        final ByteBuffer RobotoRegular = loadResource("demo/nanovg/Roboto-Regular.ttf", 150 * 1024);
-        final ByteBuffer RobotoBold    = loadResource("demo/nanovg/Roboto-Bold.ttf", 150 * 1024);
+        final ByteBuffer entypo           = loadResource("demo/nanovg/entypo.ttf", 40 * 1024);
+        final ByteBuffer RobotoRegular    = loadResource("demo/nanovg/Roboto-Regular.ttf", 150 * 1024);
+        final ByteBuffer RobotoBold       = loadResource("demo/nanovg/Roboto-Bold.ttf", 150 * 1024);
+        final ByteBuffer NotoEmojiRegular = loadResource("demo/nanovg/NotoEmoji-Regular.ttf", 450 * 1024);
 
         int fontNormal,
             fontBold,
-            fontIcons;
+            fontIcons,
+            fontEmoji;
 
         int[] images = new int[12];
     }
@@ -935,6 +935,15 @@ class Demo {
             System.err.format("Could not add font bold.\n");
             return -1;
         }
+
+        data.fontEmoji = nvgCreateFontMem(vg, "emoji", data.NotoEmojiRegular, 0);
+        if (data.fontBold == -1) {
+            System.err.format("Could not add font emoji.\n");
+            return -1;
+        }
+
+        nvgAddFallbackFontId(vg, data.fontNormal, data.fontEmoji);
+        nvgAddFallbackFontId(vg, data.fontBold, data.fontEmoji);
 
         return 0;
     }
