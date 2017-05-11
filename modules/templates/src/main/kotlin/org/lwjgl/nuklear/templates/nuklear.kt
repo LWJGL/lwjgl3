@@ -435,6 +435,7 @@ nk_style_pop_vec2(ctx);""")}
         "BUTTON_LEFT".enum,
         "BUTTON_MIDDLE".enum,
         "BUTTON_RIGHT".enum,
+        "BUTTON_DOUBLE".enum,
 
         "BUTTON_MAX".enum
     ).javaDocLinks { !it.name.endsWith("MAX") }
