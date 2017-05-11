@@ -151,7 +151,8 @@ div {
         "LogLevelWarn".enum,
         "LogLevelInfo".enum,
         "LogLevelDebug".enum,
-        "LogLevelVerbose".enum
+        "LogLevelVerbose".enum,
+        "LogLevelFatal".enum
     )
 
     EnumConstant(
@@ -565,9 +566,10 @@ div {
     YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Padding")
 
     void(
-        "SetLogger",
+        "ConfigSetLogger",
         "",
 
+        const..YGConfigRef.IN("config", ""),
         YGLogger.IN("logger", "")
     )
 
@@ -575,7 +577,43 @@ div {
         "Log",
         "",
 
+        const..YGNodeRef.IN("node", ""),
         YGLogLevel.IN("level", "", "LogLevel\\w+"),
+        const..charUTF8_p.IN("message", "")
+    )
+
+    void(
+        "LogWithConfig",
+        "",
+
+        const..YGConfigRef.IN("config", ""),
+        YGLogLevel.IN("level", ""),
+        const..charUTF8_p.IN("message", "")
+    )
+
+    void(
+        "Assert",
+        "",
+
+        bool.IN("condition", ""),
+        const..charUTF8_p.IN("message", "")
+    )
+
+    void(
+        "AssertWithNode",
+        "",
+
+        const..YGNodeRef.IN("node", ""),
+        bool.IN("condition", ""),
+        const..charUTF8_p.IN("message", "")
+    )
+
+    void(
+        "AssertWithConfig",
+        "",
+
+        const..YGConfigRef.IN("config", ""),
+        bool.IN("condition", ""),
         const..charUTF8_p.IN("message", "")
     )
 
@@ -649,6 +687,26 @@ div {
 
     bool(
         "ConfigGetUseWebDefaults",
+        "",
+
+        const..YGConfigRef.IN("config", "")
+    )
+
+    YGConfigRef(
+        "ConfigGetDefault",
+        ""
+    )
+
+    void(
+        "ConfigSetContext",
+        "",
+
+        const..YGConfigRef.IN("config", ""),
+        opaque_p.IN("context", "")
+    )
+
+    opaque_p(
+        "ConfigGetContext",
         "",
 
         const..YGConfigRef.IN("config", "")

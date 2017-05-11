@@ -114,6 +114,8 @@ val YGLogger = "YGLogger".callback(
     YOGA_PACKAGE, int, "YGLogger",
     "",
 
+    const..YGConfigRef.IN("config", ""),
+    const..YGNodeRef.IN("node", ""),
     YGLogLevel.IN("level", ""),
     const..charUTF8_p.IN("format", ""),
     va_list.IN("args", "")

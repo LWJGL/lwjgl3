@@ -11,11 +11,7 @@ package org.lwjgl.util.yoga;
 import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
-import java.nio.*;
-
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libc.LibCStdio.*;
 import static org.lwjgl.util.yoga.Yoga.*;
 import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.Assert.*;
@@ -112,53 +108,6 @@ public class YogaNodeTest {
             node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
             assertEquals(Float.MAX_VALUE, node.getLayoutWidth(), 0.0f);
             assertEquals(Float.MAX_VALUE, node.getLayoutHeight(), 0.0f);
-        }
-    }
-
-    private int    mLogLevel;
-    private String mLogMessage;
-
-    private YGLogger getTestLogger() {
-        return YGLogger.create((level, format, args) -> {
-            try (MemoryStack stack = stackPush()) {
-                ByteBuffer buffer = stack.malloc(256);
-
-                int result = nvsnprintf(memAddress(buffer), buffer.remaining(), format, args);
-
-                mLogLevel = level;
-                mLogMessage = memUTF8(buffer, Math.min(result, buffer.remaining()), 0);
-
-                return result;
-            }
-        });
-    }
-
-    @Test
-    public void testLogger() {
-        try (YGLogger logger = getTestLogger()) {
-            YGSetLogger(logger);
-
-            YGLog(YGLogLevelDebug, "Hello");
-
-            assertEquals(YGLogLevelDebug, mLogLevel);
-            assertEquals("Hello", mLogMessage);
-        }
-    }
-
-    @Test
-    public void testUpdateLogger() {
-        try (
-            YGLogger logger0 = YGLogger.create((level, format, args) -> 0);
-            YGLogger logger = getTestLogger()
-        ) {
-
-            YGSetLogger(logger0);
-            YGSetLogger(logger);
-
-            YGLog(YGLogLevelVerbose, "Flexbox");
-
-            assertEquals(YGLogLevelVerbose, mLogLevel);
-            assertEquals("Flexbox", mLogMessage);
         }
     }
 
