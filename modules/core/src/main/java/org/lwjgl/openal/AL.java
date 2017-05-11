@@ -5,9 +5,8 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
-import org.lwjgl.system.MemoryStack;
 
-import java.nio.ByteBuffer;
+import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.openal.AL10.*;
@@ -44,205 +43,220 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class AL {
 
-	private static FunctionProvider functionProvider;
+    private static FunctionProvider functionProvider;
 
-	private static ALCapabilities processCaps;
+    private static ALCapabilities processCaps;
 
-	private static final ThreadLocal<ALCapabilities> capabilitiesTLS = new ThreadLocal<>();
+    private static final ThreadLocal<ALCapabilities> capabilitiesTLS = new ThreadLocal<>();
 
-	private static ICD icd = new ICDStatic();
+    private static ICD icd = new ICDStatic();
 
-	private AL() {}
+    private AL() {}
 
-	static void init() {
-		functionProvider = new FunctionProvider() {
-			// We'll use alGetProcAddress for both core and extension entry points.
-			// To do that, we need to first grab the alGetProcAddress function from
-			// the OpenAL native library.
-			private final long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress("alGetProcAddress");
+    static void init() {
+        functionProvider = new FunctionProvider() {
+            // We'll use alGetProcAddress for both core and extension entry points.
+            // To do that, we need to first grab the alGetProcAddress function from
+            // the OpenAL native library.
+            private final long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress("alGetProcAddress");
 
-			@Override
-			public long getFunctionAddress(ByteBuffer functionName) {
-				long address = invokePP(alGetProcAddress, memAddress(functionName));
-				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-					apiLog("Failed to locate address for AL function " + memASCII(functionName));
-				return address;
-			}
-		};
-	}
+            @Override
+            public long getFunctionAddress(ByteBuffer functionName) {
+                long address = invokePP(alGetProcAddress, memAddress(functionName));
+                if (address == NULL && Checks.DEBUG_FUNCTIONS) {
+                    apiLog("Failed to locate address for AL function " + memASCII(functionName));
+                }
+                return address;
+            }
+        };
+    }
 
-	static void destroy() {
-		if ( functionProvider == null )
-			return;
+    static void destroy() {
+        if (functionProvider == null) {
+            return;
+        }
 
-		setCurrentProcess(null);
+        setCurrentProcess(null);
 
-		functionProvider = null;
-	}
+        functionProvider = null;
+    }
 
-	/**
-	 * Sets the specified {@link ALCapabilities} for the current process-wide OpenAL context.
-	 *
-	 * <p>If the current thread had a context current (see {@link #setCurrentThread}), those {@code ALCapabilities} are cleared. Any OpenAL functions called in
-	 * the current thread, or any threads that have no context current, will use the specified {@code ALCapabilities}.</p>
-	 *
-	 * @param caps the {@link ALCapabilities} to make current, or null
-	 */
-	public static void setCurrentProcess(ALCapabilities caps) {
-		processCaps = caps;
-		capabilitiesTLS.set(null); // See EXT_thread_local_context, second Q.
-		icd.set(caps);
-	}
+    /**
+     * Sets the specified {@link ALCapabilities} for the current process-wide OpenAL context.
+     *
+     * <p>If the current thread had a context current (see {@link #setCurrentThread}), those {@code ALCapabilities} are cleared. Any OpenAL functions called in
+     * the current thread, or any threads that have no context current, will use the specified {@code ALCapabilities}.</p>
+     *
+     * @param caps the {@link ALCapabilities} to make current, or null
+     */
+    public static void setCurrentProcess(ALCapabilities caps) {
+        processCaps = caps;
+        capabilitiesTLS.set(null); // See EXT_thread_local_context, second Q.
+        icd.set(caps);
+    }
 
-	/**
-	 * Sets the specified {@link ALCapabilities} for the current OpenAL context in the current thread.
-	 *
-	 * <p>Any OpenAL functions called in the current thread will use the specified {@code ALCapabilities}.</p>
-	 *
-	 * @param caps the {@link ALCapabilities} to make current, or null
-	 */
-	public static void setCurrentThread(ALCapabilities caps) {
-		capabilitiesTLS.set(caps);
-		icd.set(caps);
-	}
+    /**
+     * Sets the specified {@link ALCapabilities} for the current OpenAL context in the current thread.
+     *
+     * <p>Any OpenAL functions called in the current thread will use the specified {@code ALCapabilities}.</p>
+     *
+     * @param caps the {@link ALCapabilities} to make current, or null
+     */
+    public static void setCurrentThread(ALCapabilities caps) {
+        capabilitiesTLS.set(caps);
+        icd.set(caps);
+    }
 
-	/**
-	 * Returns the {@link ALCapabilities} for the OpenAL context that is current in the current thread or process.
-	 *
-	 * @throws IllegalStateException if no OpenAL context is current in the current thread or process
-	 */
-	public static ALCapabilities getCapabilities() {
-		ALCapabilities caps = capabilitiesTLS.get();
-		if ( caps == null )
-			caps = processCaps;
+    /**
+     * Returns the {@link ALCapabilities} for the OpenAL context that is current in the current thread or process.
+     *
+     * @throws IllegalStateException if no OpenAL context is current in the current thread or process
+     */
+    public static ALCapabilities getCapabilities() {
+        ALCapabilities caps = capabilitiesTLS.get();
+        if (caps == null) {
+            caps = processCaps;
+        }
 
-		return checkCapabilities(caps);
-	}
+        return checkCapabilities(caps);
+    }
 
-	private static ALCapabilities checkCapabilities(ALCapabilities caps) {
-		if ( CHECKS && caps == null )
-			throw new IllegalStateException("No ALCapabilities instance set for the current thread or process. Possible solutions:\n" +
-				                                "\ta) Call AL.createCapabilities() after making a context current.\n" +
-				                                "\tb) Call AL.setCurrentProcess() or AL.setCurrentThread() if an ALCapabilities instance already exists.");
-		return caps;
-	}
+    private static ALCapabilities checkCapabilities(ALCapabilities caps) {
+        if (CHECKS && caps == null) {
+            throw new IllegalStateException(
+                "No ALCapabilities instance set for the current thread or process. Possible solutions:\n" +
+                "\ta) Call AL.createCapabilities() after making a context current.\n" +
+                "\tb) Call AL.setCurrentProcess() or AL.setCurrentThread() if an ALCapabilities instance already exists."
+            );
+        }
+        return caps;
+    }
 
-	/**
-	 * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
-	 *
-	 * @param alcCaps the {@link ALCCapabilities} of the device associated with the current context
-	 *
-	 * @return the ALCapabilities instance
-	 */
-	public static ALCapabilities createCapabilities(ALCCapabilities alcCaps) {
-		ALCapabilities caps = null;
+    /**
+     * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
+     *
+     * @param alcCaps the {@link ALCCapabilities} of the device associated with the current context
+     *
+     * @return the ALCapabilities instance
+     */
+    public static ALCapabilities createCapabilities(ALCCapabilities alcCaps) {
+        ALCapabilities caps = null;
 
-		try {
-			long GetString = functionProvider.getFunctionAddress("alGetString");
-			long GetError = functionProvider.getFunctionAddress("alGetError");
-			long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
-			if ( GetString == NULL || GetError == NULL || IsExtensionPresent == NULL )
-				throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
+        try {
+            long GetString          = functionProvider.getFunctionAddress("alGetString");
+            long GetError           = functionProvider.getFunctionAddress("alGetError");
+            long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
+            if (GetString == NULL || GetError == NULL || IsExtensionPresent == NULL) {
+                throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
+            }
 
-			long versionString = invokeP(GetString, AL_VERSION);
-			if ( versionString == NULL || invokeI(GetError) != AL_NO_ERROR )
-				throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
+            long versionString = invokeP(GetString, AL_VERSION);
+            if (versionString == NULL || invokeI(GetError) != AL_NO_ERROR) {
+                throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
+            }
 
-			APIVersion apiVersion = apiParseVersion(memASCII(versionString));
-			int majorVersion = apiVersion.major;
-			int minorVersion = apiVersion.minor;
+            APIVersion apiVersion = apiParseVersion(memASCII(versionString));
 
-			int[][] AL_VERSIONS = {
-				{ 0, 1 }  // OpenAL 1
-			};
+            int majorVersion = apiVersion.major;
+            int minorVersion = apiVersion.minor;
 
-			Set<String> supportedExtensions = new HashSet<>(32);
+            int[][] AL_VERSIONS = {
+                {0, 1}  // OpenAL 1
+            };
 
-			for ( int major = 1; major <= AL_VERSIONS.length; major++ ) {
-				int[] minors = AL_VERSIONS[major - 1];
-				for ( int minor : minors ) {
-					if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
-						supportedExtensions.add("OpenAL" + Integer.toString(major) + Integer.toString(minor));
-				}
-			}
+            Set<String> supportedExtensions = new HashSet<>(32);
 
-			// Parse EXTENSIONS string
-			String extensionsString = memASCII(invokeP(GetString, AL_EXTENSIONS));
-			if ( extensionsString != null ) {
-				MemoryStack stack = stackGet();
-				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-				while ( tokenizer.hasMoreTokens() ) {
-					String extName = tokenizer.nextToken();
-					stack.push();
-					try {
-						if ( invokePZ(IsExtensionPresent, memAddress(stack.ASCII(extName, true))) )
-							supportedExtensions.add(extName);
-					} finally {
-						stack.pop();
-					}
-				}
-			}
+            for (int major = 1; major <= AL_VERSIONS.length; major++) {
+                int[] minors = AL_VERSIONS[major - 1];
+                for (int minor : minors) {
+                    if (major < majorVersion || (major == majorVersion && minor <= minorVersion)) {
+                        supportedExtensions.add("OpenAL" + Integer.toString(major) + Integer.toString(minor));
+                    }
+                }
+            }
 
-			if ( alcCaps.ALC_EXT_EFX )
-				supportedExtensions.add("ALC_EXT_EFX");
+            // Parse EXTENSIONS string
+            String extensionsString = memASCII(invokeP(GetString, AL_EXTENSIONS));
+            if (extensionsString != null) {
+                MemoryStack     stack     = stackGet();
+                StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+                while (tokenizer.hasMoreTokens()) {
+                    String extName = tokenizer.nextToken();
+                    stack.push();
+                    try {
+                        if (invokePZ(IsExtensionPresent, memAddress(stack.ASCII(extName, true)))) {
+                            supportedExtensions.add(extName);
+                        }
+                    } finally {
+                        stack.pop();
+                    }
+                }
+            }
 
-			return caps = new ALCapabilities(functionProvider, supportedExtensions);
-		} finally {
-			if ( alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL )
-				setCurrentThread(caps);
-			else
-				setCurrentProcess(caps);
-		}
-	}
+            if (alcCaps.ALC_EXT_EFX) {
+                supportedExtensions.add("ALC_EXT_EFX");
+            }
 
-	static ALCapabilities getICD() {
-		return icd.get();
-	}
+            return caps = new ALCapabilities(functionProvider, supportedExtensions);
+        } finally {
+            if (alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL) {
+                setCurrentThread(caps);
+            } else {
+                setCurrentProcess(caps);
+            }
+        }
+    }
 
-	/** Function pointer provider. */
-	private interface ICD {
-		default void set(ALCapabilities caps) {}
-		ALCapabilities get();
-	}
+    static ALCapabilities getICD() {
+        return icd.get();
+    }
 
-	/**
-	 * Write-once {@link ICD}.
-	 *
-	 * <p>This is the default implementation that skips the thread/process lookup. When a new ALCapabilities is set, we compare it to the write-once
-	 * capabilities. If different function pointers are found, we fall back to the expensive lookup. This will never happen with the OpenAL-Soft
-	 * implementation.</p>
-	 */
-	private static class ICDStatic implements ICD {
+    /** Function pointer provider. */
+    private interface ICD {
+        default void set(ALCapabilities caps) {}
+        ALCapabilities get();
+    }
 
-		private static ALCapabilities tempCaps;
+    /**
+     * Write-once {@link ICD}.
+     *
+     * <p>This is the default implementation that skips the thread/process lookup. When a new ALCapabilities is set, we compare it to the write-once
+     * capabilities. If different function pointers are found, we fall back to the expensive lookup. This will never happen with the OpenAL-Soft
+     * implementation.</p>
+     */
+    private static class ICDStatic implements ICD {
 
-		@Override
-		public void set(ALCapabilities caps) {
-			if ( caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses) ) {
-				apiLog("[WARNING] Incompatible context detected. Falling back to thread/process lookup for AL contexts.");
-				icd = AL::getCapabilities; // fall back to thread/process lookup
-				return;
-			}
+        private static ALCapabilities tempCaps;
 
-			if ( tempCaps == null )
-				tempCaps = caps;
-		}
+        @Override
+        public void set(ALCapabilities caps) {
+            if (caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
+                apiLog("[WARNING] Incompatible context detected. Falling back to thread/process lookup for AL contexts.");
+                icd = AL::getCapabilities; // fall back to thread/process lookup
+                return;
+            }
 
-		@Override
-		public ALCapabilities get() {
-			return WriteOnce.caps;
-		}
+            if (tempCaps == null) {
+                tempCaps = caps;
+            }
+        }
 
-		private static final class WriteOnce {
-			// This will be initialized the first time get() above is called
-			private static final ALCapabilities caps = ICDStatic.tempCaps;
+        @Override
+        public ALCapabilities get() {
+            return WriteOnce.caps;
+        }
 
-			static {
-				if ( caps == null )
-					throw new IllegalStateException("No ALCapabilities instance has been set");
-			}
-		}
+        private static final class WriteOnce {
+            // This will be initialized the first time get() above is called
+            private static final ALCapabilities caps = ICDStatic.tempCaps;
 
-	}
+            static {
+                if (caps == null) {
+                    throw new IllegalStateException("No ALCapabilities instance has been set");
+                }
+            }
+        }
+
+    }
 
 }

@@ -5,31 +5,31 @@
 #pragma once
 
 #ifndef VC_EXTRALEAN
-	#define VC_EXTRALEAN
+    #define VC_EXTRALEAN
 #endif
 
 #ifndef WIN32_LEAN_AND_MEAN
-	#define WIN32_LEAN_AND_MEAN
+    #define WIN32_LEAN_AND_MEAN
 #endif
 
 #ifndef _WIN32_WINDOWS
-	#define _WIN32_WINDOWS 0x0501
+    #define _WIN32_WINDOWS 0x0501
 #endif
 
 #ifndef WINVER
-	#define WINVER 0x0501
+    #define WINVER 0x0501
 #endif
 
 #ifndef _WIN32_WINNT
-	#define _WIN32_WINNT 0x0501
+    #define _WIN32_WINNT 0x0501
 #endif
 
 #ifndef UNICODE
-	#define UNICODE
+    #define UNICODE
 #endif
 
 #ifndef _UNICODE
-	#define _UNICODE
+    #define _UNICODE
 #endif
 
 // Disable optional features we don't need.

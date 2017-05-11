@@ -12,12 +12,12 @@ package org.lwjgl.system;
  */
 public interface NativeResource extends AutoCloseable {
 
-	/** Frees any native resources held by this object. */
-	void free();
+    /** Frees any native resources held by this object. */
+    void free();
 
-	@Override
-	default void close() {
-		free();
-	}
+    @Override
+    default void close() {
+        free();
+    }
 
 }

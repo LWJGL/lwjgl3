@@ -25,25 +25,25 @@ extern aligned_freePROC  org_lwjgl_aligned_free;
 #define XSETUP_MALLOC(classPath) SETUP_MALLOC(classPath)
 #define SETUP_MALLOC(classPath) \
 JNIEXPORT void JNICALL Java_##classPath##_setupMalloc( \
-	JNIEnv *env, jclass clazz, \
+    JNIEnv *env, jclass clazz, \
  \
-	jlong malloc, \
-	jlong calloc, \
-	jlong realloc, \
-	jlong free, \
+    jlong malloc, \
+    jlong calloc, \
+    jlong realloc, \
+    jlong free, \
  \
-	jlong aligned_alloc, \
-	jlong aligned_free \
+    jlong aligned_alloc, \
+    jlong aligned_free \
 ) { \
-	UNUSED_PARAMS(env, clazz) \
+    UNUSED_PARAMS(env, clazz) \
  \
-	org_lwjgl_malloc = (mallocPROC)(intptr_t)malloc; \
-	org_lwjgl_calloc = (callocPROC)(intptr_t)calloc; \
-	org_lwjgl_realloc = (reallocPROC)(intptr_t)realloc; \
-	org_lwjgl_free = (freePROC)(intptr_t)free; \
+    org_lwjgl_malloc = (mallocPROC)(intptr_t)malloc; \
+    org_lwjgl_calloc = (callocPROC)(intptr_t)calloc; \
+    org_lwjgl_realloc = (reallocPROC)(intptr_t)realloc; \
+    org_lwjgl_free = (freePROC)(intptr_t)free; \
  \
-	org_lwjgl_aligned_alloc = (aligned_allocPROC)(intptr_t)aligned_alloc; \
-	org_lwjgl_aligned_free = (aligned_freePROC)(intptr_t)aligned_free; \
+    org_lwjgl_aligned_alloc = (aligned_allocPROC)(intptr_t)aligned_alloc; \
+    org_lwjgl_aligned_free = (aligned_freePROC)(intptr_t)aligned_free; \
 }
 
 mallocPROC        org_lwjgl_malloc;

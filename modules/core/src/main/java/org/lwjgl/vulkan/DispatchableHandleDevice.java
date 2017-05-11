@@ -4,20 +4,20 @@
  */
 package org.lwjgl.vulkan;
 
-import org.lwjgl.system.Pointer;
+import org.lwjgl.system.*;
 
 abstract class DispatchableHandleDevice extends Pointer.Default {
 
-	private final VKCapabilitiesDevice capabilities;
+    private final VKCapabilitiesDevice capabilities;
 
-	DispatchableHandleDevice(long handle, VKCapabilitiesDevice capabilities) {
-		super(handle);
-		this.capabilities = capabilities;
-	}
+    DispatchableHandleDevice(long handle, VKCapabilitiesDevice capabilities) {
+        super(handle);
+        this.capabilities = capabilities;
+    }
 
-	/** Returns the {@link VKCapabilitiesInstance} instance associated with this dispatchable handle. */
-	public VKCapabilitiesDevice getCapabilities() {
-		return capabilities;
-	}
+    /** Returns the {@link VKCapabilitiesInstance} instance associated with this dispatchable handle. */
+    public VKCapabilitiesDevice getCapabilities() {
+        return capabilities;
+    }
 
 }

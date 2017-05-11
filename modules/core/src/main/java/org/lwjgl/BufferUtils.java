@@ -59,166 +59,166 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class BufferUtils {
 
-	private BufferUtils() {}
+    private BufferUtils() {}
 
-	/**
-	 * Allocates a direct native-ordered bytebuffer with the specified capacity.
-	 *
-	 * @param capacity The capacity, in bytes
-	 *
-	 * @return a ByteBuffer
-	 */
-	public static ByteBuffer createByteBuffer(int capacity) {
-		return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
-	}
+    /**
+     * Allocates a direct native-ordered bytebuffer with the specified capacity.
+     *
+     * @param capacity The capacity, in bytes
+     *
+     * @return a ByteBuffer
+     */
+    public static ByteBuffer createByteBuffer(int capacity) {
+        return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
+    }
 
-	/**
-	 * Allocates a direct native-order shortbuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in shorts
-	 *
-	 * @return a ShortBuffer
-	 */
-	public static ShortBuffer createShortBuffer(int capacity) {
-		return createByteBuffer(capacity << 1).asShortBuffer();
-	}
+    /**
+     * Allocates a direct native-order shortbuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in shorts
+     *
+     * @return a ShortBuffer
+     */
+    public static ShortBuffer createShortBuffer(int capacity) {
+        return createByteBuffer(capacity << 1).asShortBuffer();
+    }
 
-	/**
-	 * Allocates a direct native-order charbuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in chars
-	 *
-	 * @return an CharBuffer
-	 */
-	public static CharBuffer createCharBuffer(int capacity) {
-		return createByteBuffer(capacity << 1).asCharBuffer();
-	}
+    /**
+     * Allocates a direct native-order charbuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in chars
+     *
+     * @return an CharBuffer
+     */
+    public static CharBuffer createCharBuffer(int capacity) {
+        return createByteBuffer(capacity << 1).asCharBuffer();
+    }
 
-	/**
-	 * Allocates a direct native-order intbuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in ints
-	 *
-	 * @return an IntBuffer
-	 */
-	public static IntBuffer createIntBuffer(int capacity) {
-		return createByteBuffer(capacity << 2).asIntBuffer();
-	}
+    /**
+     * Allocates a direct native-order intbuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in ints
+     *
+     * @return an IntBuffer
+     */
+    public static IntBuffer createIntBuffer(int capacity) {
+        return createByteBuffer(capacity << 2).asIntBuffer();
+    }
 
-	/**
-	 * Allocates a direct native-order longbuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in longs
-	 *
-	 * @return an LongBuffer
-	 */
-	public static LongBuffer createLongBuffer(int capacity) {
-		return createByteBuffer(capacity << 3).asLongBuffer();
-	}
+    /**
+     * Allocates a direct native-order longbuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in longs
+     *
+     * @return an LongBuffer
+     */
+    public static LongBuffer createLongBuffer(int capacity) {
+        return createByteBuffer(capacity << 3).asLongBuffer();
+    }
 
-	/**
-	 * Allocates a direct native-order floatbuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in floats
-	 *
-	 * @return a FloatBuffer
-	 */
-	public static FloatBuffer createFloatBuffer(int capacity) {
-		return createByteBuffer(capacity << 2).asFloatBuffer();
-	}
+    /**
+     * Allocates a direct native-order floatbuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in floats
+     *
+     * @return a FloatBuffer
+     */
+    public static FloatBuffer createFloatBuffer(int capacity) {
+        return createByteBuffer(capacity << 2).asFloatBuffer();
+    }
 
-	/**
-	 * Allocates a direct native-order doublebuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in doubles
-	 *
-	 * @return a DoubleBuffer
-	 */
-	public static DoubleBuffer createDoubleBuffer(int capacity) {
-		return createByteBuffer(capacity << 3).asDoubleBuffer();
-	}
+    /**
+     * Allocates a direct native-order doublebuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in doubles
+     *
+     * @return a DoubleBuffer
+     */
+    public static DoubleBuffer createDoubleBuffer(int capacity) {
+        return createByteBuffer(capacity << 3).asDoubleBuffer();
+    }
 
-	/**
-	 * Allocates a PointerBuffer with the specified number
-	 * of elements.
-	 *
-	 * @param capacity The capacity, in memory addresses
-	 *
-	 * @return a PointerBuffer
-	 */
-	public static PointerBuffer createPointerBuffer(int capacity) {
-		return PointerBuffer.allocateDirect(capacity);
-	}
+    /**
+     * Allocates a PointerBuffer with the specified number
+     * of elements.
+     *
+     * @param capacity The capacity, in memory addresses
+     *
+     * @return a PointerBuffer
+     */
+    public static PointerBuffer createPointerBuffer(int capacity) {
+        return PointerBuffer.allocateDirect(capacity);
+    }
 
-	// memsets
+    // memsets
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(ByteBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining());
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(ByteBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining());
+    }
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(ShortBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining() << 1);
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(ShortBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining() << 1);
+    }
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(CharBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining() << 1);
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(CharBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining() << 1);
+    }
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(IntBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining() << 2);
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(IntBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining() << 2);
+    }
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(FloatBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining() << 2);
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(FloatBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining() << 2);
+    }
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(LongBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining() << 3);
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(LongBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining() << 3);
+    }
 
-	/**
-	 * Fills the specified buffer with zeros from the current position to the current limit.
-	 *
-	 * @param buffer the buffer to fill with zeros
-	 */
-	public static void zeroBuffer(DoubleBuffer buffer) {
-		memSet(memAddress(buffer), 0, buffer.remaining() << 3);
-	}
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static void zeroBuffer(DoubleBuffer buffer) {
+        memSet(memAddress(buffer), 0, buffer.remaining() << 3);
+    }
 
 }

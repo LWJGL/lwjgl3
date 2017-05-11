@@ -18,7 +18,7 @@ import static org.lwjgl.system.Pointer.*;
 public final class ThreadLocalUtil {
 
 	/*
-	The following applies to GL and GLES only:
+    The following applies to GL and GLES only:
 
 	OpenGL contexts may have different capabilities (core versions, supported extensions, deprecated functionality) and different function pointers (usually
 	in multi-GPU setups). A ThreadLocal is used to store the current capabilities instance for each thread. The thread-local lookup that is required for each
@@ -88,70 +88,74 @@ public final class ThreadLocalUtil {
 	capabilities instance).
 	*/
 
-	/** The global JNIEnv. */
-	private static final long JNI_NATIVE_INTERFACE = getThreadJNIEnv();
+    /** The global JNIEnv. */
+    private static final long JNI_NATIVE_INTERFACE = getThreadJNIEnv();
 
-	/** A function to delegate to when an unsupported function is called. */
-	private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
+    /** A function to delegate to when an unsupported function is called. */
+    private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
 
-	private ThreadLocalUtil() {
-	}
+    private ThreadLocalUtil() {
+    }
 
-	private static native long getThreadJNIEnv();
+    private static native long getThreadJNIEnv();
 
-	private static native void setThreadJNIEnv(long JNIEnv);
+    private static native void setThreadJNIEnv(long JNIEnv);
 
-	private static native long jvmtiGetJNIFunctionTable();
+    private static native long jvmtiGetJNIFunctionTable();
 
-	private static native void jvmtiDeallocate(long mem);
+    private static native void jvmtiDeallocate(long mem);
 
-	private static native long getFunctionMissingAbort();
+    private static native long getFunctionMissingAbort();
 
-	public static void setEnv(long capabilities, int index) {
-		if ( CHECKS && (index < 0 || 3 < index) ) // reserved0-3
-			throw new IndexOutOfBoundsException();
+    public static void setEnv(long capabilities, int index) {
+        if (CHECKS && (index < 0 || 3 < index)) // reserved0-3
+        {
+            throw new IndexOutOfBoundsException();
+        }
 
-		// Get thread's JNIEnv
-		long env = getThreadJNIEnv();
+        // Get thread's JNIEnv
+        long env = getThreadJNIEnv();
 
-		if ( capabilities == NULL ) {
-			if ( env != JNI_NATIVE_INTERFACE ) {
-				setThreadJNIEnv(JNI_NATIVE_INTERFACE);
-				jvmtiDeallocate(env);
-			}
-		} else {
-			if ( env == JNI_NATIVE_INTERFACE )
-				setThreadJNIEnv(env = jvmtiGetJNIFunctionTable());
+        if (capabilities == NULL) {
+            if (env != JNI_NATIVE_INTERFACE) {
+                setThreadJNIEnv(JNI_NATIVE_INTERFACE);
+                jvmtiDeallocate(env);
+            }
+        } else {
+            if (env == JNI_NATIVE_INTERFACE) {
+                setThreadJNIEnv(env = jvmtiGetJNIFunctionTable());
+            }
 
-			memPutAddress(env + index * POINTER_SIZE, capabilities);
-		}
-	}
+            memPutAddress(env + index * POINTER_SIZE, capabilities);
+        }
+    }
 
-	public static PointerBuffer getAddressesFromCapabilities(Object caps) {
-		List<Field> functions = Stream.of(caps.getClass().getFields())
-			.filter(f -> f.getType() == long.class)
-			.collect(Collectors.toList());
+    public static PointerBuffer getAddressesFromCapabilities(Object caps) {
+        List<Field> functions = Stream.of(caps.getClass().getFields())
+            .filter(f -> f.getType() == long.class)
+            .collect(Collectors.toList());
 
-		PointerBuffer addresses = BufferUtils.createPointerBuffer(functions.size());
+        PointerBuffer addresses = BufferUtils.createPointerBuffer(functions.size());
 
-		try {
-			for ( int i = 0; i < functions.size(); i++ ) {
-				long a = functions.get(i).getLong(caps);
-				addresses.put(i, a != NULL ? a : FUNCTION_MISSING_ABORT);
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
+        try {
+            for (int i = 0; i < functions.size(); i++) {
+                long a = functions.get(i).getLong(caps);
+                addresses.put(i, a != NULL ? a : FUNCTION_MISSING_ABORT);
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
-		return addresses;
-	}
+        return addresses;
+    }
 
-	public static boolean compareCapabilities(PointerBuffer ref, PointerBuffer caps) {
-		for ( int i = 0; i < ref.remaining(); i++ ) {
-			if ( ref.get(i) != caps.get(i) && caps.get(i) != NULL )
-				return false;
-		}
-		return true;
-	}
+    public static boolean compareCapabilities(PointerBuffer ref, PointerBuffer caps) {
+        for (int i = 0; i < ref.remaining(); i++) {
+            if (ref.get(i) != caps.get(i) && caps.get(i) != NULL) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
