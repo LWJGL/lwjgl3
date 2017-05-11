@@ -1,14 +1,14 @@
 /*_________
- /         \ tinyfiledialogs.h v2.8 [February 15, 2017] zlib licence
+ /         \ tinyfiledialogs.h v2.8.3 [May 10, 2017] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2017 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
       \|
                                 git://git.code.sf.net/p/tinyfiledialogs/code
-	 ______________________________________________________
-	|                                                      |
-	| direct CONTACT:  mailto:tinyfiledialogs@ysengrin.com |
-	|______________________________________________________|
+		 ______________________________________________
+		|                                              |
+		| DIRECT CONTACT: tinyfiledialogs@ysengrin.com |
+		|______________________________________________|
 
 A big thank you to Don Heyse http://ldglite.sf.net for
                    his code contributions, bug corrections & thorough testing!
@@ -258,7 +258,7 @@ char const * tinyfd_arrayDialog(
 - The code is pure C, perfectly compatible with C++.
 - the windows utf-16 prototypes are in the header file
 - windows is fully supported from XP to 10 (maybe even older versions)
-- C# via dll, see example file
+- C# & LUA via dll, see example files
 - OSX supported from 10.4 to 10.11 (maybe even older versions)
 - Avoid using " and ' in titles and messages.
 - There's one file filter only, it may contain several patterns.
