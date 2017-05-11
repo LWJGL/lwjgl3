@@ -4,51 +4,50 @@
  */
 package org.lwjgl.demo.system.jawt;
 
-import org.lwjgl.system.Platform;
+import org.lwjgl.system.*;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /** AWT integration demo using jawt. */
 public final class JAWTDemo {
 
-	private JAWTDemo() {
-	}
+    private JAWTDemo() {
+    }
 
-	public static void main(String[] args) {
-		if ( Platform.get() != Platform.WINDOWS )
-			throw new UnsupportedOperationException("This demo can only run on Windows.");
+    public static void main(String[] args) {
+        if (Platform.get() != Platform.WINDOWS) {
+            throw new UnsupportedOperationException("This demo can only run on Windows.");
+        }
 
-		LWJGLCanvas canvas = new LWJGLCanvas();
-		canvas.setSize(640, 480);
+        LWJGLCanvas canvas = new LWJGLCanvas();
+        canvas.setSize(640, 480);
 
-		JFrame frame = new JFrame("JAWT Demo");
+        JFrame frame = new JFrame("JAWT Demo");
 
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				canvas.destroy();
-			}
-		});
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                canvas.destroy();
+            }
+        });
 
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
-			if ( e.getKeyCode() == KeyEvent.VK_ESCAPE ) {
-				frame.dispose();
-				return true;
-			}
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                frame.dispose();
+                return true;
+            }
 
-			return false;
-		});
+            return false;
+        });
 
-		frame.setLayout(new BorderLayout());
-		frame.add(canvas, BorderLayout.CENTER);
+        frame.setLayout(new BorderLayout());
+        frame.add(canvas, BorderLayout.CENTER);
 
-		frame.pack();
-		frame.setVisible(true);
-	}
+        frame.pack();
+        frame.setVisible(true);
+    }
 
 }

@@ -4,16 +4,13 @@
  */
 package org.lwjgl.demo.stb;
 
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.Callback;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.*;
+import java.nio.*;
+import java.util.regex.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
@@ -26,203 +23,211 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** STB Easy Font demo. */
 abstract class FontDemo {
 
-	protected final String text;
-	private final   int    lineCount;
+    protected final String text;
+    private final   int    lineCount;
 
-	private long window;
-	private int ww = 800;
-	private int wh = 600;
+    private long window;
+    private int ww = 800;
+    private int wh = 600;
 
-	private boolean ctrlDown;
+    private boolean ctrlDown;
 
-	private int fontHeight;
+    private int fontHeight;
 
-	private int   scale;
-	private int   lineOffset;
-	private float lineHeight;
+    private int   scale;
+    private int   lineOffset;
+    private float lineHeight;
 
-	private Callback debugProc;
+    private Callback debugProc;
 
-	protected FontDemo(int fontHeight, String filePath) {
-		this.fontHeight = fontHeight;
-		this.lineHeight = fontHeight;
+    protected FontDemo(int fontHeight, String filePath) {
+        this.fontHeight = fontHeight;
+        this.lineHeight = fontHeight;
 
-		String t;
-		int lc;
+        String t;
 
-		try {
-			ByteBuffer source = ioResourceToByteBuffer(filePath, 4 * 1024);
-			t = memUTF8(source).replaceAll("\t", "    "); // Replace tabs
+        int lc;
 
-			lc = 0;
-			Matcher m = Pattern.compile("^.*$", Pattern.MULTILINE).matcher(t);
-			while ( m.find() )
-				lc++;
-		} catch (IOException e) {
-			e.printStackTrace();
+        try {
+            ByteBuffer source = ioResourceToByteBuffer(filePath, 4 * 1024);
+            t = memUTF8(source).replaceAll("\t", "    "); // Replace tabs
 
-			t = "Failed to load text.";
-			lc = 1;
-		}
+            lc = 0;
+            Matcher m = Pattern.compile("^.*$", Pattern.MULTILINE).matcher(t);
+            while (m.find()) {
+                lc++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
 
-		text = t;
-		lineCount = lc;
-	}
+            t = "Failed to load text.";
+            lc = 1;
+        }
 
-	public String getText() {
-		return text;
-	}
+        text = t;
+        lineCount = lc;
+    }
 
-	public long getWindow() {
-		return window;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public int getFontHeight() {
-		return fontHeight;
-	}
+    public long getWindow() {
+        return window;
+    }
 
-	public int getScale() {
-		return scale;
-	}
+    public int getFontHeight() {
+        return fontHeight;
+    }
 
-	public int getLineOffset() {
-		return lineOffset;
-	}
+    public int getScale() {
+        return scale;
+    }
 
-	protected void run(String title) {
-		try {
-			init(title);
+    public int getLineOffset() {
+        return lineOffset;
+    }
 
-			loop();
-		} finally {
-			try {
-				destroy();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    protected void run(String title) {
+        try {
+            init(title);
 
-	private void windowSizeChanged(long window, int width, int height) {
-		this.ww = width;
-		this.wh = height;
+            loop();
+        } finally {
+            try {
+                destroy();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
-		glMatrixMode(GL_MODELVIEW);
+    private void windowSizeChanged(long window, int width, int height) {
+        this.ww = width;
+        this.wh = height;
 
-		FontDemo.this.setLineOffset(lineOffset);
-	}
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+        glMatrixMode(GL_MODELVIEW);
 
-	private static void framebufferSizeChanged(long window, int width, int height) {
-		glViewport(0, 0, width, height);
-	}
+        FontDemo.this.setLineOffset(lineOffset);
+    }
 
-	private void init(String title) {
-		GLFWErrorCallback.createPrint().set();
-		if ( !glfwInit() )
-			throw new IllegalStateException("Unable to initialize GLFW");
+    private static void framebufferSizeChanged(long window, int width, int height) {
+        glViewport(0, 0, width, height);
+    }
 
-		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    private void init(String title) {
+        GLFWErrorCallback.createPrint().set();
+        if (!glfwInit()) {
+            throw new IllegalStateException("Unable to initialize GLFW");
+        }
 
-		this.window = glfwCreateWindow(ww, wh, title, NULL, NULL);
-		if ( window == NULL )
-			throw new RuntimeException("Failed to create the GLFW window");
+        glfwDefaultWindowHints();
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
-		glfwSetWindowSizeCallback(window, this::windowSizeChanged);
-		glfwSetFramebufferSizeCallback(window, FontDemo::framebufferSizeChanged);
+        this.window = glfwCreateWindow(ww, wh, title, NULL, NULL);
+        if (window == NULL) {
+            throw new RuntimeException("Failed to create the GLFW window");
+        }
 
-		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
-			if ( action == GLFW_RELEASE )
-				return;
+        glfwSetWindowSizeCallback(window, this::windowSizeChanged);
+        glfwSetFramebufferSizeCallback(window, FontDemo::framebufferSizeChanged);
 
-			switch ( key ) {
-				case GLFW_KEY_ESCAPE:
-					glfwSetWindowShouldClose(window, true);
-					break;
-				case GLFW_KEY_PAGE_UP:
-					setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
-					break;
-				case GLFW_KEY_PAGE_DOWN:
-					setLineOffset(lineOffset + wh / FontDemo.this.lineHeight);
-					break;
-				case GLFW_KEY_HOME:
-					setLineOffset(0);
-					break;
-				case GLFW_KEY_END:
-					setLineOffset(lineCount - wh / FontDemo.this.lineHeight);
-					break;
-				case GLFW_KEY_KP_ADD:
-				case GLFW_KEY_EQUAL:
-					setScale(scale + 1);
-					break;
-				case GLFW_KEY_KP_SUBTRACT:
-				case GLFW_KEY_MINUS:
-					setScale(scale - 1);
-					break;
-				case GLFW_KEY_0:
-				case GLFW_KEY_KP_0:
-					if ( ctrlDown )
-						setScale(0);
-					break;
-			}
-		});
+        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+            ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
+            if (action == GLFW_RELEASE) {
+                return;
+            }
 
-		glfwSetScrollCallback(window, (window, xoffset, yoffset) -> {
-			if ( ctrlDown )
-				setScale(scale + (int)yoffset);
-			else
-				setLineOffset(lineOffset - (int)yoffset * 3);
-		});
+            switch (key) {
+                case GLFW_KEY_ESCAPE:
+                    glfwSetWindowShouldClose(window, true);
+                    break;
+                case GLFW_KEY_PAGE_UP:
+                    setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
+                    break;
+                case GLFW_KEY_PAGE_DOWN:
+                    setLineOffset(lineOffset + wh / FontDemo.this.lineHeight);
+                    break;
+                case GLFW_KEY_HOME:
+                    setLineOffset(0);
+                    break;
+                case GLFW_KEY_END:
+                    setLineOffset(lineCount - wh / FontDemo.this.lineHeight);
+                    break;
+                case GLFW_KEY_KP_ADD:
+                case GLFW_KEY_EQUAL:
+                    setScale(scale + 1);
+                    break;
+                case GLFW_KEY_KP_SUBTRACT:
+                case GLFW_KEY_MINUS:
+                    setScale(scale - 1);
+                    break;
+                case GLFW_KEY_0:
+                case GLFW_KEY_KP_0:
+                    if (ctrlDown) {
+                        setScale(0);
+                    }
+                    break;
+            }
+        });
 
-		// Center window
-		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        glfwSetScrollCallback(window, (window, xoffset, yoffset) -> {
+            if (ctrlDown) {
+                setScale(scale + (int)yoffset);
+            } else {
+                setLineOffset(lineOffset - (int)yoffset * 3);
+            }
+        });
 
-		glfwSetWindowPos(
-			window,
-			(vidmode.width() - ww) / 2,
-			(vidmode.height() - wh) / 2
-		);
+        // Center window
+        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-		// Create context
-		glfwMakeContextCurrent(window);
-		GL.createCapabilities();
-		debugProc = GLUtil.setupDebugMessageCallback();
+        glfwSetWindowPos(
+            window,
+            (vidmode.width() - ww) / 2,
+            (vidmode.height() - wh) / 2
+        );
 
-		glfwSwapInterval(1);
-		glfwShowWindow(window);
+        // Create context
+        glfwMakeContextCurrent(window);
+        GL.createCapabilities();
+        debugProc = GLUtil.setupDebugMessageCallback();
 
-		glfwInvoke(window, this::windowSizeChanged, FontDemo::framebufferSizeChanged);
-	}
+        glfwSwapInterval(1);
+        glfwShowWindow(window);
 
-	private void setScale(int scale) {
-		this.scale = max(-3, scale);
-		this.lineHeight = fontHeight * (1.0f + this.scale * 0.25f);
-		setLineOffset(lineOffset);
-	}
+        glfwInvoke(window, this::windowSizeChanged, FontDemo::framebufferSizeChanged);
+    }
 
-	private void setLineOffset(float offset) {
-		setLineOffset(round(offset));
-	}
+    private void setScale(int scale) {
+        this.scale = max(-3, scale);
+        this.lineHeight = fontHeight * (1.0f + this.scale * 0.25f);
+        setLineOffset(lineOffset);
+    }
 
-	private void setLineOffset(int offset) {
-		lineOffset = max(0, min(offset, lineCount - (int)(wh / lineHeight)));
-	}
+    private void setLineOffset(float offset) {
+        setLineOffset(round(offset));
+    }
 
-	protected abstract void loop();
+    private void setLineOffset(int offset) {
+        lineOffset = max(0, min(offset, lineCount - (int)(wh / lineHeight)));
+    }
 
-	private void destroy() {
-		if ( debugProc != null )
-			debugProc.free();
+    protected abstract void loop();
 
-		glfwFreeCallbacks(window);
-		glfwDestroyWindow(window);
-		glfwTerminate();
-		glfwSetErrorCallback(null).free();
-	}
+    private void destroy() {
+        if (debugProc != null) {
+            debugProc.free();
+        }
+
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
+    }
 
 }

@@ -8,19 +8,19 @@ import static org.lwjgl.util.yoga.Yoga.*;
 
 public class YogaConfig {
 
-	final long handle;
+    final long handle;
 
-	public YogaConfig() {
-		this.handle = YGConfigNew();
-	}
+    public YogaConfig() {
+        this.handle = YGConfigNew();
+    }
 
-	@Override
-	protected void finalize() throws Throwable {
-		YGConfigFree(handle);
-	}
+    @Override
+    protected void finalize() throws Throwable {
+        YGConfigFree(handle);
+    }
 
-	void setExperimentalFeatureEnabled(YogaNode.YogaExperimentalFeature feature, boolean enabled) {
-		YGConfigSetExperimentalFeatureEnabled(handle, feature.value, enabled);
-	}
+    void setExperimentalFeatureEnabled(YogaNode.YogaExperimentalFeature feature, boolean enabled) {
+        YGConfigSetExperimentalFeatureEnabled(handle, feature.value, enabled);
+    }
 
 }

@@ -4,9 +4,9 @@
  */
 package org.lwjgl.demo.stb;
 
-import org.lwjgl.BufferUtils;
+import org.lwjgl.*;
 
-import java.nio.ByteBuffer;
+import java.nio.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -15,55 +15,57 @@ import static org.lwjgl.stb.STBEasyFont.*;
 /** STB Easy Font demo. */
 public final class EasyFont extends FontDemo {
 
-	private static final int BASE_HEIGHT = 12;
+    private static final int BASE_HEIGHT = 12;
 
-	private EasyFont(String filePath) {
-		super(BASE_HEIGHT, filePath);
-	}
+    private EasyFont(String filePath) {
+        super(BASE_HEIGHT, filePath);
+    }
 
-	public static void main(String[] args) {
-		String filePath;
-		if ( args.length == 0 ) {
-			System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.stb.EasyFont -Dargs=<path>' to load a different text file (must be UTF8-encoded).\n");
-			filePath = "doc/README.md";
-		} else
-			filePath = args[0];
+    public static void main(String[] args) {
+        String filePath;
+        if (args.length == 0) {
+            System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.stb.EasyFont -Dargs=<path>' to load a different text file (must be UTF8-encoded).\n");
+            filePath = "doc/README.md";
+        } else {
+            filePath = args[0];
+        }
 
-		new EasyFont(filePath).run("STB Easy Font Demo");
-	}
+        new EasyFont(filePath).run("STB Easy Font Demo");
+    }
 
-	@Override
-	protected void loop() {
-		ByteBuffer charBuffer = BufferUtils.createByteBuffer(text.length() * 270);
-		int quads = stb_easy_font_print(0, 0, getText(), null, charBuffer);
+    @Override
+    protected void loop() {
+        ByteBuffer charBuffer = BufferUtils.createByteBuffer(text.length() * 270);
 
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(2, GL_FLOAT, 16, charBuffer);
+        int quads = stb_easy_font_print(0, 0, getText(), null, charBuffer);
 
-		glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
-		glColor3f(169f / 255f, 183f / 255f, 198f / 255f); // Text color
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glVertexPointer(2, GL_FLOAT, 16, charBuffer);
 
-		while ( !glfwWindowShouldClose(getWindow()) ) {
-			glfwPollEvents();
+        glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
+        glColor3f(169f / 255f, 183f / 255f, 198f / 255f); // Text color
 
-			glClear(GL_COLOR_BUFFER_BIT);
+        while (!glfwWindowShouldClose(getWindow())) {
+            glfwPollEvents();
 
-			float scaleFactor = 1.0f + getScale() * 0.25f;
+            glClear(GL_COLOR_BUFFER_BIT);
 
-			glPushMatrix();
-			// Zoom
-			glScalef(scaleFactor, scaleFactor, 1f);
-			// Scroll
-			glTranslatef(4.0f, 4.0f - getLineOffset() * getFontHeight(), 0f);
+            float scaleFactor = 1.0f + getScale() * 0.25f;
 
-			glDrawArrays(GL_QUADS, 0, quads * 4);
+            glPushMatrix();
+            // Zoom
+            glScalef(scaleFactor, scaleFactor, 1f);
+            // Scroll
+            glTranslatef(4.0f, 4.0f - getLineOffset() * getFontHeight(), 0f);
 
-			glPopMatrix();
+            glDrawArrays(GL_QUADS, 0, quads * 4);
 
-			glfwSwapBuffers(getWindow());
-		}
+            glPopMatrix();
 
-		glDisableClientState(GL_VERTEX_ARRAY);
-	}
+            glfwSwapBuffers(getWindow());
+        }
+
+        glDisableClientState(GL_VERTEX_ARRAY);
+    }
 
 }
