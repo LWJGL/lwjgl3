@@ -128,6 +128,12 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     )
 
     EnumConstant(
+        "Extends {@code VkObjectType}.",
+
+        "OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT".."1000011000"
+    )
+
+    EnumConstant(
         """
         VkDebugReportObjectTypeEXT - Specify the type of an object handle
 

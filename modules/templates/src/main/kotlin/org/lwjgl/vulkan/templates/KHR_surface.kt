@@ -88,6 +88,12 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
     )
 
     EnumConstant(
+        "Extends {@code VkObjectType}.",
+
+        "OBJECT_TYPE_SURFACE_KHR".."1000000000"
+    )
+
+    EnumConstant(
         """
         VkSurfaceTransformFlagBitsKHR - presentation transforms supported on a device
 
@@ -276,7 +282,24 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
             <li>#PRESENT_MODE_MAILBOX_KHR: The presentation engine waits for the next vertical blanking period to update the current image. Tearing <b>cannot</b> be observed. An internal single-entry queue is used to hold pending presentation requests. If the queue is full when a new presentation request is received, the new request replaces the existing entry, and any images associated with the prior entry become available for re-use by the application. One request is removed from the queue and processed during each vertical blanking period in which the queue is non-empty.</li>
             <li>#PRESENT_MODE_FIFO_KHR: The presentation engine waits for the next vertical blanking period to update the current image. Tearing <b>cannot</b> be observed. An internal queue is used to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the queue and processed during each vertical blanking period in which the queue is non-empty. This is the only value of {@code presentMode} that is required: to be supported.</li>
             <li>#PRESENT_MODE_FIFO_RELAXED_KHR: The presentation engine generally waits for the next vertical blanking period to update the current image. If a vertical blanking period has already passed since the last update of the current image then the presentation engine does not wait for another vertical blanking period for the update, meaning this mode <b>may</b> result in visible tearing in this case. This mode is useful for reducing visual stutter with an application that will mostly present a new image before the next vertical blanking period, but may occasionally be late, and present a new image just after the next vertical blanking period. An internal queue is used to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the queue and processed during or after each vertical blanking period in which the queue is non-empty.</li>
+            <li>#PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR: The presentation engine and application have concurrent access to a single image, which is referred to as a <em>shared presentable image</em>. The presentation engine is only required to update the current image after a new presentation request is received. Therefore the application <b>must</b> make a presentation request whenever an update is required. However, the presentation engine <b>may</b> update the current image at any point, meaning this mode <b>may</b> result in visible tearing.</li>
+            <li>#PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR: The presentation engine and application have concurrent access to a single image, which is referred to as a <em>shared presentable image</em>. The presentation engine periodically updates the current image on its regular refresh cycle. The application is only required to make one initial presentation request, after which the presentation engine <b>must</b> update the current image without any need for further presentation requests. The application <b>can</b> indicate the image contents have been updated by making a presentation request, but this does not guarantee the timing of when it will be updated. This mode <b>may</b> result in visible tearing if rendering to the image is not timed correctly.</li>
         </ul>
+
+        The supported {@code VkImageUsageFlagBits} of the presentable images of a swapchain created for a surface <b>may</b> differ depending on the presentation mode, and can be determined as per the table below:
+
+        <h6>Presentable image usage queries</h6>
+        <table class="lwjgl">
+            <thead><tr><th>Presentation mode</th><th>Image usage flags</th></tr></thead>
+            <tbody>
+                <tr><td>#PRESENT_MODE_IMMEDIATE_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_MAILBOX_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_FIFO_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_FIFO_RELAXED_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR</td><td>##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</td><td>##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}</td></tr>
+            </tbody>
+        </table>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         For reference, the mode indicated by #PRESENT_MODE_FIFO_KHR is equivalent to the behavior of {wgl|glX|egl}SwapBuffers with a swap interval of 1, while the mode indicated by #PRESENT_MODE_FIFO_RELAXED_KHR is equivalent to the behavior of {wgl|glX}SwapBuffers with a swap interval of -1 (from the {WGL|GLX}_EXT_swap_control_tear extensions).

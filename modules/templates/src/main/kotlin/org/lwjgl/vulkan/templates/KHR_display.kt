@@ -82,6 +82,13 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
     )
 
     EnumConstant(
+        "Extends {@code VkObjectType}.",
+
+        "OBJECT_TYPE_DISPLAY_KHR".."1000002000",
+        "OBJECT_TYPE_DISPLAY_MODE_KHR".."1000002001"
+    )
+
+    EnumConstant(
         """
         VkDisplayPlaneAlphaFlagBitsKHR - Alpha blending type
 

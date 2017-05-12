@@ -210,11 +210,15 @@ val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR"
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Supported usage flags of a presentable image when using #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR presentation mode are provided by ##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}.
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Formulas such as <code>min(N, maxImageCount)</code> are not correct, since {@code maxImageCount} <b>may</b> be zero.
         </div>
 
         <h5>See Also</h5>
-        ##VkExtent2D, #GetPhysicalDeviceSurfaceCapabilitiesKHR()
+        ##VkExtent2D, ##VkSurfaceCapabilities2KHR, #GetPhysicalDeviceSurfaceCapabilitiesKHR()
         """
 
     uint32_t.member("minImageCount", "the minimum number of images the specified device supports for a swapchain created for the surface, and will be at least one.")
@@ -226,7 +230,7 @@ val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR"
     VkSurfaceTransformFlagsKHR.member("supportedTransforms", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the presentation transforms supported for the surface on the specified device, and at least one bit will be set.")
     VkSurfaceTransformFlagBitsKHR.member("currentTransform", "the surface&#8217;s current transform relative to the presentation engine&#8217;s natural orientation, as described by {@code VkSurfaceTransformFlagBitsKHR}.")
     VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device, and at least one bit will be set. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using an image format that has no alpha component, or by ensuring that all pixels in the presentable images have an alpha value of 1.0.")
-    VkImageUsageFlags.member("supportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
+    VkImageUsageFlags.member("supportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created with {@code VkPresentModeKHR} set to #PRESENT_MODE_IMMEDIATE_KHR, #PRESENT_MODE_MAILBOX_KHR, #PRESENT_MODE_FIFO_KHR or #PRESENT_MODE_FIFO_RELAXED_KHR for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
 
 val VkSurfaceFormatKHR = struct(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutable = false) {
@@ -286,7 +290,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Any given element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout at the time the operation is executed on a {@code VkDevice}</li>
+            <li>Any given element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR or #IMAGE_LAYOUT_SHARED_PRESENT_KHR layout at the time the operation is executed on a {@code VkDevice}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2450,7 +2454,7 @@ val VkDescriptorUpdateTemplateEntryKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpd
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code dstBinding} <b>must</b> be a valid binding in the descriptor set layout implicitly specified when using a descriptor update template to update descriptors.</li>
-            <li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">consecutive binding updates</a></li>
+            <li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">the “consecutive binding updates” section</a></li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3402,6 +3406,63 @@ val VkHdrMetadataEXT = struct(VULKAN_PACKAGE, "VkHdrMetadataEXT") {
     float.member("minLuminance", "the minimum luminance of the mastering display in nits")
     float.member("maxContentLightLevel", "content&#8217;s maximum luminance in nits")
     float.member("maxFrameAverageLightLevel", "the maximum frame average light level in nits")
+}
+
+val VkSharedPresentSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSharedPresentSurfaceCapabilitiesKHR", mutable = false) {
+    documentation =
+        """
+        structure describing capabilities of a surface for shared presentation.
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkImageUsageFlags.member("sharedPresentSupportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the shared presentable image from a swapchain created with {@code VkPresentModeKHR} set to #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
+}
+
+val VkPhysicalDeviceSurfaceInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSurfaceInfo2KHR") {
+    documentation =
+        """
+        Structure specifying a surface and related swapchain creation parameters.
+
+        <h5>Description</h5>
+        The members of ##VkPhysicalDeviceSurfaceInfo2KHR correspond to the arguments to #GetPhysicalDeviceSurfaceCapabilities(), with {@code sType} and {@code pNext} added for extensibility.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPhysicalDeviceSurfaceCapabilities2KHR(), #GetPhysicalDeviceSurfaceFormats2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSurfaceKHR.member("surface", "the surface that will be associated with the swapchain.")
+}
+
+val VkSurfaceCapabilities2KHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2KHR", mutable = false) {
+    documentation =
+        """
+        Structure describing capabilities of a surface.
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSurfaceCapabilitiesKHR.member("surfaceCapabilities", "a structure of type ##VkSurfaceCapabilitiesKHR describing the capabilities of the specified surface.")
+}
+
+val VkSurfaceFormat2KHR = struct(VULKAN_PACKAGE, "VkSurfaceFormat2KHR", mutable = false) {
+    documentation =
+        """
+        Structure describing a supported swapchain format tuple.
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSurfaceFormatKHR.member("surfaceFormat", "an instance of ##VkSurfaceFormatKHR describing a format-color space pair that is compatible with the specified surface.")
 }
 
 val VkIOSSurfaceCreateInfoMVK = struct(VULKAN_PACKAGE, "VkIOSSurfaceCreateInfoMVK") {

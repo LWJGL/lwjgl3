@@ -102,6 +102,12 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         "ERROR_OUT_OF_DATE_KHR".."-1000001004"
     )
 
+    EnumConstant(
+        "Extends {@code VkObjectType}.",
+
+        "OBJECT_TYPE_SWAPCHAIN_KHR".."1000001000"
+    )
+
     VkResult(
         "CreateSwapchainKHR",
         """
