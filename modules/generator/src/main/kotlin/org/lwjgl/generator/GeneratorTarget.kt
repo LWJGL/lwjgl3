@@ -154,6 +154,8 @@ abstract class GeneratorTarget(
         }
 
     var documentation: String? = null
+    var see: Array<String>? = null
+    var since: String = ""
 
     internal val preamble = Preamble()
 
@@ -210,7 +212,7 @@ abstract class GeneratorTarget(
 
         val documentation = this@GeneratorTarget.documentation
         if (documentation != null)
-            println(processDocumentation(documentation).toJavaDoc(indentation = ""))
+            println(processDocumentation(documentation).toJavaDoc(indentation = "", see = see, since = since))
     }
 
     abstract fun PrintWriter.generateJava()

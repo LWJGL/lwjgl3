@@ -11,8 +11,7 @@ private val BLOCK_NODE = "(?:div|h[1-6]|pre|table|thead|tfoot|tbody|td|tr|ul|li|
 private val FRAGMENT = "(</?$BLOCK_NODE(?:\\s[^>]+)?>|^)([\\s\\S]*?)(?=</?$BLOCK_NODE(?:\\s[^>]+)?>|$)".toRegex()
 private val CHILD_NODE = "<(?:tr|thead|tfoot|tbody|li|dt|dd)>".toRegex()
 private val PARAGRAPH_PATTERN = "\\n\\n(?:\\n?[ \\t]*[\\S][^\\n]*)+".toRegex(RegexOption.MULTILINE)
-private val CLEANUP_PATTERN = "^[ \t]++(?![*])".toRegex(RegexOption.MULTILINE)
-private val UNESCAPE_PATTERN = "\uFFFF".toRegex()
+private val PREFIX_PATTERN = "^(?:\uFFFF|[ \t]++(?![*]))".toRegex(RegexOption.MULTILINE)
 
 /*
 Here we perform the following transformation:
@@ -41,9 +40,9 @@ For the purposes of this transformation, the javadoc root is an implicit block.
  */
 private fun String.cleanup(linePrefix: String = "$t * "): String {
     val dom = trim().replace(REDUNDANT_WHITESPACE, "")
-    return StringBuilder(dom.length).layoutDOM(dom, linePrefix)
-        .replace(CLEANUP_PATTERN, linePrefix)
-        .replace(UNESCAPE_PATTERN, "")
+    return StringBuilder(dom.length)
+        .layoutDOM(dom, linePrefix)
+        .replace(PREFIX_PATTERN, linePrefix)
 }
 
 private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuilder {
@@ -122,80 +121,122 @@ private fun StringBuilder.appendParagraph(linePrefix: String, text: String, star
     append("</p>")
 }
 
-fun String.toJavaDoc(indentation: String = t, allowSingleLine: Boolean = true): String {
-    val clean = cleanup("$indentation * ")
-
-    return if (allowSingleLine && clean.indexOf('\n') == -1)
-        "$indentation/** $clean */"
+private fun String.layoutJavadoc(indentation: String = t): String {
+    return if (this.indexOf('\n') == -1)
+        "$indentation/** $this */"
     else
-        "$indentation/**\n$indentation * $clean\n$indentation */"
+        "$indentation/**\n$indentation * $this\n$indentation */"
 }
 
-/** Specialized conversion for methods. */
-internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
-    if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.all { it.documentation == null })
-        return ""
+fun String.toJavaDoc(indentation: String = t, see: Array<String>? = null, since: String = "") =
+    if (see == null && since.isEmpty()) {
+        this
+            .cleanup("$indentation * ")
+            .layoutJavadoc(indentation)
+    } else {
+        StringBuilder(if (this.isEmpty()) "" else this.cleanup("$indentation * "))
+            .apply {
+                if (see != null) {
+                    if (isNotEmpty()) append("\n$t *")
+                    see.forEach {
+                        if (isNotEmpty()) append("\n$t * ")
+                        append("@see ")
+                        append(it)
+                    }
+                }
 
-    if (params.none() && returnDoc.isEmpty())
-        return documentation.toJavaDoc()
+                if (!since.isEmpty()) {
+                    if (isNotEmpty()) append("\n$t *\n$t * ")
+                    append("@since ")
+                    append(since)
+                }
 
-    return StringBuilder("$t/**\n$t * ${documentation.cleanup()}").run {
-        val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
-
-        if (params.any()) {
-            // Find maximum param name length
-            var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
-            if (returnsStructValue)
-                alignment = Math.max(alignment, RESULT.length)
-
-            val multilineAligment = paramMultilineAligment(alignment)
-
-            append("\n$t *")
-            params.forEach {
-                printParam(this, it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
             }
-            if (returnsStructValue)
-                printParam(this, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
-        }
-
-        if (!returnDoc.isEmpty() && !returnsStructValue) {
-            append("\n$t *")
-            append("\n$t * @return ")
-            append(processDocumentation(returnDoc).cleanup("$t *         "))
-        }
-
-        if (!since.isEmpty()) {
-            append("\n$t *")
-            append("\n$t * @since ")
-            append(since)
-        }
-
-        append("\n$t */")
-
-        toString()
+            .toString()
+            .layoutJavadoc(indentation)
     }
+
+/** Specialized formatting for methods. */
+internal fun GeneratorTarget.toJavaDoc(
+    documentation: String,
+    params: Sequence<Parameter>,
+    returns: NativeType,
+    returnDoc: String,
+    see: Array<String>?,
+    since: String
+): String {
+    if (returnDoc.isEmpty() && see == null && since.isEmpty()) {
+        if (documentation.isEmpty() && params.all { it.documentation == null })
+            return ""
+
+        if (params.none())
+            return documentation.toJavaDoc()
+    }
+
+    return StringBuilder(if (documentation.isEmpty()) "" else documentation.cleanup())
+        .apply {
+            val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
+
+            if (params.any()) {
+                // Find maximum param name length
+                var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
+                if (returnsStructValue)
+                    alignment = Math.max(alignment, RESULT.length)
+
+                val multilineAligment = paramMultilineAligment(alignment)
+
+                if (isNotEmpty()) append("\n$t *")
+                params.forEach {
+                    printParam(it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
+                }
+                if (returnsStructValue)
+                    printParam(RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
+            }
+
+            if (!returnDoc.isEmpty() && !returnsStructValue) {
+                if (isNotEmpty()) append("\n$t *\n$t * ")
+                append("@return ")
+                append(processDocumentation(returnDoc).cleanup("$t *         "))
+            }
+
+            if (see != null) {
+                if (isNotEmpty()) append("\n$t *")
+                see.forEach {
+                    if (isNotEmpty()) append("\n$t * ")
+                    append("@see ")
+                    append(it)
+                }
+            }
+
+            if (!since.isEmpty()) {
+                if (isNotEmpty()) append("\n$t *\n$t * ")
+                append("@since ")
+                append(since)
+            }
+        }
+        .toString()
+        .layoutJavadoc()
 }
 
 // Used for aligning parameter javadoc when it spans multiple lines.
 private fun paramMultilineAligment(alignment: Int): String {
     val whitespace = " @param ".length + alignment + 1
-    return StringBuilder("$t *".length + whitespace).run {
+    return StringBuilder("$t *".length + whitespace).apply {
         append("$t *")
         for (i in 0..whitespace - 1)
             append(' ')
-
-        toString()
-    }
+    }.toString()
 }
 
-private fun printParam(builder: StringBuilder, name: String, documentation: String, alignment: Int, multilineAligment: String) {
-    builder.append("\n$t * @param $name")
+private fun StringBuilder.printParam(name: String, documentation: String, alignment: Int, multilineAligment: String) {
+    if (isNotEmpty()) append("\n$t * ")
+    append("@param $name")
 
     // Align
     for (i in 0..(alignment - name.length))
-        builder.append(' ')
+        append(' ')
 
-    builder.append(documentation.cleanup(multilineAligment))
+    append(documentation.cleanup(multilineAligment))
 }
 
 enum class LinkMode {
@@ -268,14 +309,15 @@ enum class LinkMode {
 /** Useful for simple expressions. */
 fun code(code: String) = """<code>$code</code>"""
 
-private val CODE_BLOCK_TRIM_PATTERN = """^\s*\n|\n\s*$""".toRegex() // first and/or last empty lines...
-private val CODE_BLOCK_ESCAPE_PATTERN = "^[ \t\n]".toRegex(RegexOption.MULTILINE) // leading space/tab in line, empty line
+private val CODE_BLOCK_TRIM_PATTERN = """^\s*\n|\n\s*$""".toRegex() // first and/or last empty lines
+private val CODE_BLOCK_ESCAPE_PATTERN = "^".toRegex(RegexOption.MULTILINE) // line starts
 private val CODE_BLOCK_TAB_PATTERN = "\t".toRegex() // tabs
 
 /** Useful for pre-formatted code blocks. */
-fun codeBlock(code: String) = """<pre><code>${code
+fun codeBlock(code: String) = """<pre><code>
+${code
     .replace(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
-    .replace(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF$0") // ...escape
+    .replace(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF") // ...escape
     .replace(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
 }</code></pre>"""
 

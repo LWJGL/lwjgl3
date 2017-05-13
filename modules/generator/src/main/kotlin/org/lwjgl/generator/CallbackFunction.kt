@@ -182,13 +182,14 @@ fun String.callback(
     functionDoc: String,
     vararg signature: Parameter,
     returnDoc: String = "",
+    see: Array<String>? = null,
     since: String = "",
     init: (CallbackFunction.() -> Unit)? = null
 ): CallbackType {
     val callback = CallbackFunction(packageName, className, returns, *signature)
     if (init != null)
         callback.init()
-    callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, since) }
+    callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
     Generator.register(callback)
     Generator.register(CallbackInterface(callback))
     return CallbackType(callback, this)

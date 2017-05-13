@@ -487,8 +487,8 @@ class NativeClass(
         preamble.printJava(this)
 
         val documentation = super.documentation
-        if (documentation != null)
-            println(processDocumentation(documentation).toJavaDoc(indentation = ""))
+        if (!documentation.isNullOrBlank())
+            println(processDocumentation(documentation!!).toJavaDoc(indentation = ""))
         println("${access.modifier}${if (hasFunctions) "" else "final "}class $className {")
 
         constantBlocks.forEach {
@@ -615,8 +615,8 @@ class NativeClass(
 
     // DSL extensions
 
-    operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
-        val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation) }, *constants)
+    operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>, see: Array<String>? = null, access: Access = Access.PUBLIC): ConstantBlock<T> {
+        val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation) }, see, *constants)
         constantBlocks.add(block)
         return block
     }
@@ -642,10 +642,10 @@ class NativeClass(
     fun String.enum(documentation: String, expression: String) =
         Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
-    operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
-        ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
+    operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", see: Array<String>? = null, since: String = "", noPrefix: Boolean = false) =
+        ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, see = see, since = since, noPrefix = noPrefix)
 
-    operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): Func {
+    operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", see: Array<String>? = null, since: String = "", noPrefix: Boolean = false): Func {
         val func = Func(
             returns = this,
             simpleName = name,
@@ -656,6 +656,7 @@ class NativeClass(
                     parameters.asSequence().filter { it !== JNI_ENV && parameterFilter(it) },
                     this.nativeType,
                     returnDoc,
+                    see,
                     since
                 )
             },

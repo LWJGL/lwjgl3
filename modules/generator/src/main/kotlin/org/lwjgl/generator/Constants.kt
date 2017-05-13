@@ -66,7 +66,8 @@ class ConstantBlock<T : Any>(
     val nativeClass: NativeClass,
     var access: Access,
     val constantType: ConstantType<T>,
-    val documentation: () -> String?,
+    val documentation: () -> String,
+    val see: Array<String>?,
     vararg val constants: Constant<T>
 ) {
 
@@ -142,7 +143,7 @@ class ConstantBlock<T : Any>(
                         ).let { enumDoc ->
                             val link = "#${getConstantName(it.name)}"
                             if (enumDoc == null) {
-                                if ((doc != null && doc.contains(link)) || constants.size == 1)
+                                if ((doc.contains(link)) || constants.size == 1)
                                     null
                                 else
                                     "<li>{@link $link ${it.name}}</li>"
@@ -156,7 +157,7 @@ class ConstantBlock<T : Any>(
                             if (enumDoc.isEmpty())
                                 doc
                             else
-                                """${if (doc == null) "" else "$t$doc\n\n"}
+                                """${if (doc.isEmpty()) "" else "$t$doc\n\n"}
         <h5>Enum values:</h5>
         <ul>
             $enumDoc
@@ -164,7 +165,7 @@ class ConstantBlock<T : Any>(
         """
                         }
                     }
-            }, *rootBlock.toArray(emptyArray())).let {
+            }, see, *rootBlock.toArray(emptyArray())).let {
                 it.noPrefix = noPrefix
                 it.generate(writer)
             }
@@ -175,8 +176,8 @@ class ConstantBlock<T : Any>(
     private fun PrintWriter.generateBlock() {
         println()
         val doc = documentation()
-        if (doc != null)
-            println(doc.toJavaDoc())
+        if (doc.isNotEmpty() || see != null)
+            println(doc.toJavaDoc(see = see))
 
         print("$t${access.modifier}static final ${constantType.javaType}")
 
