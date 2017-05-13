@@ -39,7 +39,7 @@ The first text sub-block is not wrapped in <p> because:
 
 For the purposes of this transformation, the javadoc root is an implicit block.
  */
-private fun String.cleanup(linePrefix: String = "$t * "): String {
+private fun String.cleanup(linePrefix: String = ""): String {
     val dom = trim().replace(REDUNDANT_WHITESPACE, "")
     return StringBuilder(dom.length).layoutDOM(dom, linePrefix)
         .replace(CLEANUP_PATTERN, linePrefix)
@@ -122,80 +122,139 @@ private fun StringBuilder.appendParagraph(linePrefix: String, text: String, star
     append("</p>")
 }
 
-fun String.toJavaDoc(indentation: String = t, allowSingleLine: Boolean = true): String {
-    val clean = cleanup("$indentation * ")
+private fun String.toJavaDoc(indentation: String = t, allowSingleLine: Boolean = true): String {
+    return if (allowSingleLine && indexOf('\n') == -1)
+        "$indentation/** $this */"
+    else {
+        val doc = StringBuilder().run {
+            this@toJavaDoc.lines().forEach { append("$indentation * $it\n") }
+            toString().removeSuffix("\n")
+        }
 
-    return if (allowSingleLine && clean.indexOf('\n') == -1)
-        "$indentation/** $clean */"
-    else
-        "$indentation/**\n$indentation * $clean\n$indentation */"
+        "$indentation/**\n$doc\n$indentation */"
+    }
 }
 
-/** Specialized conversion for methods. */
-internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
-    if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.all { it.documentation == null })
+fun String.toJavaDoc(indentation: String = t, allowSingleLine: Boolean = true, see: Array<String> = emptyArray(), since: String = "")
+    = toJavaDoc(if (this.isNotEmpty()) this@toJavaDoc.cleanup("") else "", see = see.map { BlockTagSee(it) }.toList(), since = if (since.isNotEmpty()) BlockTagSince(since) else null).toJavaDoc(indentation, allowSingleLine)
+
+internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String = "", see: Array<String> = emptyArray(), since: String = ""): String {
+    if (documentation.isEmpty() && returnDoc.isEmpty() && see.isEmpty() && since.isEmpty() && params.all { it.documentation == null })
         return ""
 
     if (params.none() && returnDoc.isEmpty())
-        return documentation.toJavaDoc()
+        return documentation.toJavaDoc(see = see, since = since)
 
-    return StringBuilder("$t/**\n$t * ${documentation.cleanup()}").run {
-        val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
+    /* BlockTag - @param */
+    val lParams = mutableListOf<BlockTagParam>()
+    val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
 
-        if (params.any()) {
-            // Find maximum param name length
-            var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
-            if (returnsStructValue)
-                alignment = Math.max(alignment, RESULT.length)
+    if (params.any()) {
+        // Find maximum param name length
+        var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
+        if (returnsStructValue)
+            alignment = Math.max(alignment, RESULT.length)
 
-            val multilineAligment = paramMultilineAligment(alignment)
+        val multilineAligment = paramMultilineAligment(alignment)
 
-            append("\n$t *")
+        params.forEach {
+            lParams.add(BlockTagParam(it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment))
+        }
+
+        if (returnsStructValue)
+            lParams.add(BlockTagParam(RESULT, processDocumentation(returnDoc), alignment, multilineAligment))
+    }
+
+    /* BlockTag - @return */
+    val tReturn = if (!returnDoc.isEmpty() && !returnsStructValue) BlockTagReturn(processDocumentation(returnDoc).cleanup()) else null
+
+    /* BlockTag - @see */
+    val lSee = mutableListOf<BlockTagSee>()
+    if (!see.isEmpty())
+        see.forEach { lSee.add(BlockTagSee(it)) }
+
+    /* BlockTag - @since */
+    val tSince = if (!since.isEmpty()) BlockTagSince(since) else null
+
+    return toJavaDoc(documentation.cleanup(), lParams, tReturn, lSee, tSince).toJavaDoc()
+}
+
+private fun toJavaDoc(documentation: String, params: List<BlockTagParam> = emptyList(), returns: BlockTagReturn? = null, see: List<BlockTagSee> = emptyList(), since: BlockTagSince? = null): String {
+    return StringBuilder(documentation).run {
+        if (params.isNotEmpty()) {
+            if (isNotEmpty()) append("\n")
             params.forEach {
-                printParam(this, it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
+                append("\n@param ")
+                it.print(this)
             }
-            if (returnsStructValue)
-                printParam(this, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
         }
 
-        if (!returnDoc.isEmpty() && !returnsStructValue) {
-            append("\n$t *")
-            append("\n$t * @return ")
-            append(processDocumentation(returnDoc).cleanup("$t *         "))
+        if (returns != null) {
+            if (isNotEmpty()) append("\n")
+            append("\n@return ")
+            returns.print(this)
         }
 
-        if (!since.isEmpty()) {
-            append("\n$t *")
-            append("\n$t * @since ")
-            append(since)
+        if (see.isNotEmpty()) {
+            if (isNotEmpty()) append("\n")
+            see.forEach {
+                append("\n@see ")
+                it.print(this)
+            }
         }
 
-        append("\n$t */")
+        if (since != null) {
+            if (isNotEmpty()) append("\n")
+            append("\n@since ")
+            since.print(this)
+        }
 
         toString()
     }
 }
+
+private abstract class BlockTag(
+    val value: String
+) {
+
+    open fun print(builder: StringBuilder) {
+        builder.append(value)
+    }
+
+}
+
+private class BlockTagParam(
+    name: String,
+    val documentation: String,
+    val alignment: Int,
+    val multilineAligment: String
+) : BlockTag(name) {
+
+    override fun print(builder: StringBuilder) {
+        builder.append(value)
+
+        // Align
+        for (i in 0..(alignment - value.length))
+            builder.append(' ')
+
+        builder.append(documentation.cleanup(multilineAligment))
+    }
+
+}
+
+private class BlockTagReturn(value: String) : BlockTag(value)
+private class BlockTagSee(value: String) : BlockTag(value)
+private class BlockTagSince(value: String) : BlockTag(value)
 
 // Used for aligning parameter javadoc when it spans multiple lines.
 private fun paramMultilineAligment(alignment: Int): String {
     val whitespace = " @param ".length + alignment + 1
     return StringBuilder("$t *".length + whitespace).run {
-        append("$t *")
         for (i in 0..whitespace - 1)
             append(' ')
 
         toString()
     }
-}
-
-private fun printParam(builder: StringBuilder, name: String, documentation: String, alignment: Int, multilineAligment: String) {
-    builder.append("\n$t * @param $name")
-
-    // Align
-    for (i in 0..(alignment - name.length))
-        builder.append(' ')
-
-    builder.append(documentation.cleanup(multilineAligment))
 }
 
 enum class LinkMode {
