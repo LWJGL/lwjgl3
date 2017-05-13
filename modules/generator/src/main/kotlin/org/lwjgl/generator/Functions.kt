@@ -602,7 +602,7 @@ class Func(
             }.let { hiddenParameters ->
                 val documentation = nativeClass.processDocumentation("Unsafe version of: $javaDocLink")
                 println(if (hiddenParameters.any())
-                    nativeClass.toJavaDoc(documentation, hiddenParameters, returns.nativeType, "", "")
+                    nativeClass.toJavaDoc(documentation, hiddenParameters, returns.nativeType)
                 else
                     documentation.toJavaDoc()
                 )

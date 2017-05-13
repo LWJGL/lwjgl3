@@ -67,6 +67,7 @@ class ConstantBlock<T : Any>(
     var access: Access,
     val constantType: ConstantType<T>,
     val documentation: () -> String?,
+    val see: Array<String>,
     vararg val constants: Constant<T>
 ) {
 
@@ -164,7 +165,7 @@ class ConstantBlock<T : Any>(
         """
                         }
                     }
-            }, *rootBlock.toArray(emptyArray())).let {
+            }, see, *rootBlock.toArray(emptyArray())).let {
                 it.noPrefix = noPrefix
                 it.generate(writer)
             }
@@ -176,7 +177,7 @@ class ConstantBlock<T : Any>(
         println()
         val doc = documentation()
         if (doc != null)
-            println(doc.toJavaDoc())
+            println(doc.toJavaDoc(see = see))
 
         print("$t${access.modifier}static final ${constantType.javaType}")
 
