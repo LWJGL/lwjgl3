@@ -497,40 +497,49 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
     ).noPrefix()
 
     StringConstant(
-        """
-        """,
+        "",
 
         "AI_CONFIG_IMPORT_MD3_KEYFRAME".."IMPORT_MD3_KEYFRAME"
     ).noPrefix()
 
     StringConstant(
-        "@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
+        "",
 
-        "AI_CONFIG_IMPORT_MD2_KEYFRAME".."IMPORT_MD2_KEYFRAME"
+        "AI_CONFIG_IMPORT_MD2_KEYFRAME".."IMPORT_MD2_KEYFRAME",
+
+        see = arrayOf("#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME")
     ).noPrefix()
 
     StringConstant(
-        "@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
+        "",
 
-        "AI_CONFIG_IMPORT_MDL_KEYFRAME".."IMPORT_MDL_KEYFRAME"
+        "AI_CONFIG_IMPORT_MDL_KEYFRAME".."IMPORT_MDL_KEYFRAME",
+
+        see = arrayOf("#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME")
     ).noPrefix()
 
     StringConstant(
-        "@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
+        "",
 
-        "AI_CONFIG_IMPORT_MDC_KEYFRAME".."IMPORT_MDC_KEYFRAME"
+        "AI_CONFIG_IMPORT_MDC_KEYFRAME".."IMPORT_MDC_KEYFRAME",
+
+        see = arrayOf("#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME")
     ).noPrefix()
 
     StringConstant(
-        "@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
+        "",
 
-        "AI_CONFIG_IMPORT_SMD_KEYFRAME".."IMPORT_SMD_KEYFRAME"
+        "AI_CONFIG_IMPORT_SMD_KEYFRAME".."IMPORT_SMD_KEYFRAME",
+
+        see = arrayOf("#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME")
     ).noPrefix()
 
     StringConstant(
-        "@see \\#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME",
+        "",
 
-        "AI_CONFIG_IMPORT_UNREAL_KEYFRAME".."IMPORT_UNREAL_KEYFRAME"
+        "AI_CONFIG_IMPORT_UNREAL_KEYFRAME".."IMPORT_UNREAL_KEYFRAME",
+
+        see = arrayOf("#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME")
     ).noPrefix()
 
     StringConstant(
@@ -674,13 +683,11 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
     ).noPrefix()
 
     StringConstant(
-        """
-        End of the imported time range. 
-        
-        @see \\#AI_CONFIG_IMPORT_LWS_ANIM_START
-        """,
+        "End of the imported time range.",
 
-        "AI_CONFIG_IMPORT_LWS_ANIM_END".."IMPORT_LWS_ANIM_END"
+        "AI_CONFIG_IMPORT_LWS_ANIM_END".."IMPORT_LWS_ANIM_END",
+
+        see = arrayOf("#AI_CONFIG_IMPORT_LWS_ANIM_START")
     ).noPrefix()
 
     StringConstant(
