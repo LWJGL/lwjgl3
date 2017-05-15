@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."40"
+        "API_VERSION".."41"
     )
 
     ShortConstant(
@@ -1958,6 +1958,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "set_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
+        MapToInt..uint8_t.IN("_stream", "vertex stream"),
         bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
         uint32_t.IN("_numVertices", "number of vertices to render")
@@ -1967,6 +1968,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "set_dynamic_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
+        MapToInt..uint8_t.IN("_stream", "vertex stream"),
         bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
         uint32_t.IN("_numVertices", "number of vertices to render")
@@ -1976,6 +1978,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "set_transient_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
+        MapToInt..uint8_t.IN("_stream", "vertex stream"),
         const..bgfx_transient_vertex_buffer_t_p.IN("_tvb", "transient vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
         uint32_t.IN("_numVertices", "number of vertices to render")
