@@ -15,7 +15,8 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
         Applications may wish to export memory to other Vulkan instances or other APIs, or import memory from other Vulkan instances or other APIs to enable Vulkan workloads to be split up across application module, process, or API boundaries. This extension enables win32 applications to export win32 handles from Vulkan memory objects such that the underlying resources can be referenced outside the Vulkan instance that created them, and import win32 handles created in the Direct3D API to Vulkan memory objects.
 
         <h5>Examples</h5>
-        <pre><code>￿    //
+        <code><pre>
+￿    //
 ￿    // Create an exportable memory object and export an external
 ￿    // handle from it.
 ￿    //
@@ -145,7 +146,7 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 ￿    }
 ￿
 ￿    // Get the external memory opaque FD handle
-￿    vkGetMemoryWin32HandleNV(device, memory, &memoryHnd);</code></pre>
+￿    vkGetMemoryWin32HandleNV(device, memory, &memoryHnd);</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -216,11 +217,12 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
         <h5>C Specification</h5>
         To retrieve the handle corresponding to a device memory object created with ##VkExportMemoryAllocateInfoNV{@code ::handleTypes} set to include #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, call:
 
-        <pre><code>VkResult vkGetMemoryWin32HandleNV(
+        <code><pre>
+￿VkResult vkGetMemoryWin32HandleNV(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
 ￿    VkExternalMemoryHandleTypeFlagsNV           handleType,
-￿    HANDLE*                                     pHandle);</code></pre>
+￿    HANDLE*                                     pHandle);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>

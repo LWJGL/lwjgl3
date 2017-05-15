@@ -91,13 +91,14 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
         To push descriptor updates into a command buffer, call:
 
-        <pre><code>void vkCmdPushDescriptorSetKHR(
+        <code><pre>
+￿void vkCmdPushDescriptorSetKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineBindPoint                         pipelineBindPoint,
 ￿    VkPipelineLayout                            layout,
 ￿    uint32_t                                    set,
 ￿    uint32_t                                    descriptorWriteCount,
-￿    const VkWriteDescriptorSet*                 pDescriptorWrites);</code></pre>
+￿    const VkWriteDescriptorSet*                 pDescriptorWrites);</pre></code>
 
         <h5>Description</h5>
         <em>Push descriptors</em> are a small bank of descriptors whose storage is internally managed by the command buffer rather than being written into a descriptor set and later bound to a command buffer. Push descriptors allow for incremental updates of descriptors without managing the lifetime of descriptor sets.

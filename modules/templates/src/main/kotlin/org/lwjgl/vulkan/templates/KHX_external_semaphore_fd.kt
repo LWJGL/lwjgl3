@@ -80,9 +80,10 @@ val KHX_external_semaphore_fd = "KHXExternalSemaphoreFd".nativeClassVK("KHX_exte
         <h5>C Specification</h5>
         To import semaphore state from a POSIX file descriptor, call:
 
-        <pre><code>VkResult vkImportSemaphoreFdKHX(
+        <code><pre>
+￿VkResult vkImportSemaphoreFdKHX(
 ￿    VkDevice                                    device,
-￿    const VkImportSemaphoreFdInfoKHX*           pImportSemaphoreFdInfo);</code></pre>
+￿    const VkImportSemaphoreFdInfoKHX*           pImportSemaphoreFdInfo);</pre></code>
 
         <h5>Description</h5>
         Importing semaphore state from a file descriptor transfers ownership of the file descriptor from the application to the Vulkan implementation. The application <b>must</b> not perform any operations on the file descriptor after a successful import.
@@ -128,11 +129,12 @@ val KHX_external_semaphore_fd = "KHXExternalSemaphoreFd".nativeClassVK("KHX_exte
         <h5>C Specification</h5>
         To export a POSIX file descriptor representing the state of a semaphore, call:
 
-        <pre><code>VkResult vkGetSemaphoreFdKHX(
+        <code><pre>
+￿VkResult vkGetSemaphoreFdKHX(
 ￿    VkDevice                                    device,
 ￿    VkSemaphore                                 semaphore,
 ￿    VkExternalSemaphoreHandleTypeFlagBitsKHX    handleType,
-￿    int*                                        pFd);</code></pre>
+￿    int*                                        pFd);</pre></code>
 
         <h5>Description</h5>
         The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalSemaphoreHandleTypeFlagBitsKHX} for a description of the properties of the defined external semaphore handle types.

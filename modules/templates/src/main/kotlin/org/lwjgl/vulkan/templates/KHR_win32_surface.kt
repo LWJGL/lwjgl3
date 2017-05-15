@@ -93,11 +93,12 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for a Win32 window, call:
 
-        <pre><code>VkResult vkCreateWin32SurfaceKHR(
+        <code><pre>
+￿VkResult vkCreateWin32SurfaceKHR(
 ￿    VkInstance                                  instance,
 ￿    const VkWin32SurfaceCreateInfoKHR*          pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSurfaceKHR*                               pSurface);</code></pre>
+￿    VkSurfaceKHR*                               pSurface);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -139,9 +140,10 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
         <h5>C Specification</h5>
         To determine whether a queue family of a physical device supports presentation to the Microsoft Windows desktop, call:
 
-        <pre><code>VkBool32 vkGetPhysicalDeviceWin32PresentationSupportKHR(
+        <code><pre>
+￿VkBool32 vkGetPhysicalDeviceWin32PresentationSupportKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    uint32_t                                    queueFamilyIndex);</code></pre>
+￿    uint32_t                                    queueFamilyIndex);</pre></code>
 
         <h5>Description</h5>
         This platform-specific function <b>can</b> be called prior to creating a surface.

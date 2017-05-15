@@ -112,7 +112,8 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
         <h5>C Specification</h5>
         To determine the image capabilities compatible with an external memory handle type, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceExternalImageFormatPropertiesNV(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceExternalImageFormatPropertiesNV(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
 ￿    VkImageType                                 type,
@@ -120,7 +121,7 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 ￿    VkImageUsageFlags                           usage,
 ￿    VkImageCreateFlags                          flags,
 ￿    VkExternalMemoryHandleTypeFlagsNV           externalHandleType,
-￿    VkExternalImageFormatPropertiesNV*          pExternalImageFormatProperties);</code></pre>
+￿    VkExternalImageFormatPropertiesNV*          pExternalImageFormatProperties);</pre></code>
 
         <h5>Description</h5>
         If {@code externalHandleType} is 0, {@code pExternalImageFormatProperties}::imageFormatProperties will return the same values as a call to #GetPhysicalDeviceImageFormatProperties(), and the other members of {@code pExternalImageFormatProperties} will all be 0. Otherwise, they are filled in as described for ##VkExternalImageFormatPropertiesNV.

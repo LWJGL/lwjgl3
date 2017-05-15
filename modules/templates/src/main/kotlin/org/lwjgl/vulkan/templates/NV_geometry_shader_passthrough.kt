@@ -26,21 +26,22 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
         <h5>Sample Code</h5>
         Consider the following simple geometry shader in unextended GLSL:
 
-        <pre><code>layout(triangles) in;
-layout(triangle_strip) out;
-layout(max_vertices=3) out;
+        <code><pre>
+￿layout(triangles) in;
+￿layout(triangle_strip) out;
+￿layout(max_vertices=3) out;
 ￿
-in Inputs {
+￿in Inputs {
 ￿    vec2 texcoord;
 ￿    vec4 baseColor;
-} v_in[];
-out Outputs {
+￿} v_in[];
+￿out Outputs {
 ￿    vec2 texcoord;
 ￿    vec4 baseColor;
-};
+￿};
 ￿
-void main()
-{
+￿void main()
+￿{
 ￿    int layer = compute_layer();
 ￿    for (int i = 0; i < 3; i++) {
 ￿        gl_Position = gl_in[i].gl_Position;
@@ -49,36 +50,37 @@ void main()
 ￿        gl_Layer = layer;
 ￿        EmitVertex();
 ￿    }
-}</code></pre>
+￿}</pre></code>
 
         In this shader, the inputs "gl_Position", "Inputs.texcoord", and "Inputs.baseColor" are simply copied from the input vertex to the corresponding output vertex. The only "interesting" work done by the geometry shader is computing and emitting a gl_Layer value for the primitive.
 
         The following geometry shader, using this extension, is equivalent:
 
-        <pre><code>\#extension GL_NV_geometry_shader_passthrough : require
+        <code><pre>
+￿\#extension GL_NV_geometry_shader_passthrough : require
 ￿
-layout(triangles) in;
-// No output primitive layout qualifiers required.
+￿layout(triangles) in;
+￿// No output primitive layout qualifiers required.
 ￿
-// Redeclare gl_PerVertex to pass through "gl_Position".
-layout(passthrough) in gl_PerVertex {
+￿// Redeclare gl_PerVertex to pass through "gl_Position".
+￿layout(passthrough) in gl_PerVertex {
 ￿    vec4 gl_Position;
-} gl_in[];
+￿} gl_in[];
 ￿
-// Declare "Inputs" with "passthrough" to automatically copy members.
-layout(passthrough) in Inputs {
+￿// Declare "Inputs" with "passthrough" to automatically copy members.
+￿layout(passthrough) in Inputs {
 ￿    vec2 texcoord;
 ￿    vec4 baseColor;
-} v_in[];
+￿} v_in[];
 ￿
-// No output block declaration required.
+￿// No output block declaration required.
 ￿
-void main()
-{
+￿void main()
+￿{
 ￿    // The shader simply computes and writes gl_Layer.  We don't
 ￿    // loop over three vertices or call EmitVertex().
 ￿    gl_Layer = compute_layer();
-}</code></pre>
+￿}</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>

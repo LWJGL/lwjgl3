@@ -147,10 +147,11 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         <h5>C Specification</h5>
         To set the power state of a display, call:
 
-        <pre><code>VkResult vkDisplayPowerControlEXT(
+        <code><pre>
+￿VkResult vkDisplayPowerControlEXT(
 ￿    VkDevice                                    device,
 ￿    VkDisplayKHR                                display,
-￿    const VkDisplayPowerInfoEXT*                pDisplayPowerInfo);</code></pre>
+￿    const VkDisplayPowerInfoEXT*                pDisplayPowerInfo);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -184,11 +185,12 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         <h5>C Specification</h5>
         To create a fence that will be signaled when an event occurs on a device, call:
 
-        <pre><code>VkResult vkRegisterDeviceEventEXT(
+        <code><pre>
+￿VkResult vkRegisterDeviceEventEXT(
 ￿    VkDevice                                    device,
 ￿    const VkDeviceEventInfoEXT*                 pDeviceEventInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkFence*                                    pFence);</code></pre>
+￿    VkFence*                                    pFence);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -224,12 +226,13 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         <h5>C Specification</h5>
         To create a fence that will be signaled when an event occurs on a VkDisplayKHR object, call:
 
-        <pre><code>VkResult vkRegisterDisplayEventEXT(
+        <code><pre>
+￿VkResult vkRegisterDisplayEventEXT(
 ￿    VkDevice                                    device,
 ￿    VkDisplayKHR                                display,
 ￿    const VkDisplayEventInfoEXT*                pDisplayEventInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkFence*                                    pFence);</code></pre>
+￿    VkFence*                                    pFence);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -267,11 +270,12 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         <h5>C Specification</h5>
         The requested counters become active when the first presentation command for the associated swapchain is processed by the presentation engine. To query the value of an active counter, use:
 
-        <pre><code>VkResult vkGetSwapchainCounterEXT(
+        <code><pre>
+￿VkResult vkGetSwapchainCounterEXT(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
 ￿    VkSurfaceCounterFlagBitsEXT                 counter,
-￿    uint64_t*                                   pCounterValue);</code></pre>
+￿    uint64_t*                                   pCounterValue);</pre></code>
 
         <h5>Description</h5>
         If a counter is not available because the swapchain is out of date, the implementation <b>may</b> return VK_ERROR_OUT_OF_DATE_KHR.

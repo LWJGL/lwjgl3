@@ -467,12 +467,12 @@ val aiMaterialProperty_pp = struct(ASSIMP_PACKAGE, "AIMaterialProperty", nativeN
 
         Material property names follow a simple scheme:
         ${codeBlock("""
-$<name>
-?<name>
+$&lt;name&gt;
+?&lt;name&gt;
     A public property, there must be corresponding AI_MATKEY_XXX define
     2nd: Public, but ignored by the aiProcess_RemoveRedundantMaterials
     post-processing step.
-~<name>
+~&lt;name&gt;
     A temporary property for internal use.
     """)}
         """

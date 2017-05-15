@@ -20,11 +20,12 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         In the intended use case for viewport position scaling, an application should use a set of 4 viewports, one for each of the 4 quadrants of a Cartesian coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify A and B coefficients of the w-scaling equation above, that have the same value, but different signs, for each of the viewports. The signs of A and B should match the signs of X and Y for the quadrant that they represent such that the value of "w'" will always be greater than or equal to the original "w" value for the entire image. Since the offset to "w", (Ax + By), is always positive and increases with the absolute values of "x" and "y", the effective resolution will fall off linearly from the center of the image to its edges.
 
         <h5>Examples</h5>
-        <pre><code>VkViewport viewports[4];
-VkRect2D scissors[4];
-VkViewportWScalingNV scalings[4];
+        <code><pre>
+￿VkViewport viewports[4];
+￿VkRect2D scissors[4];
+￿VkViewportWScalingNV scalings[4];
 ￿
-for (int i = 0; i < 4; i++) {
+￿for (int i = 0; i < 4; i++) {
 ￿    int x = (i & 2) ? 0 : currentWindowWidth / 2;
 ￿    int y = (i & 1) ? 0 : currentWindowHeight / 2;
 ￿
@@ -43,45 +44,46 @@ for (int i = 0; i < 4; i++) {
 ￿    const float factor = 0.15;
 ￿    scalings[i].xcoeff = ((i & 2) ? -1.0 : 1.0) * factor;
 ￿    scalings[i].ycoeff = ((i & 1) ? -1.0 : 1.0) * factor;
-}
+￿}
 ￿
-VkPipelineViewportWScalingStateCreateInfoNV vpWScalingStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV };
+￿VkPipelineViewportWScalingStateCreateInfoNV vpWScalingStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV };
 ￿
-vpWScalingStateInfo.viewportWScalingEnable = VK_TRUE;
-vpWScalingStateInfo.viewportCount = 4;
-vpWScalingStateInfo.pViewportWScalings = &scalings[0];
+￿vpWScalingStateInfo.viewportWScalingEnable = VK_TRUE;
+￿vpWScalingStateInfo.viewportCount = 4;
+￿vpWScalingStateInfo.pViewportWScalings = &scalings[0];
 ￿
-VkPipelineViewportStateCreateInfo vpStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO };
-vpStateInfo.viewportCount = 4;
-vpStateInfo.pViewports = &viewports[0];
-vpStateInfo.scissorCount = 4;
-vpStateInfo.pScissors = &scissors[0];
-vpStateInfo.pNext = &vpWScalingStateInfo;</code></pre>
+￿VkPipelineViewportStateCreateInfo vpStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO };
+￿vpStateInfo.viewportCount = 4;
+￿vpStateInfo.pViewports = &viewports[0];
+￿vpStateInfo.scissorCount = 4;
+￿vpStateInfo.pScissors = &scissors[0];
+￿vpStateInfo.pNext = &vpWScalingStateInfo;</pre></code>
 
         Example shader to read from a w-scaled texture:
 
-        <pre><code>// Vertex Shader
-// Draw a triangle that covers the whole screen
-const vec4 positions[3] = vec4[3](vec4(-1, -1, 0, 1),
+        <code><pre>
+￿// Vertex Shader
+￿// Draw a triangle that covers the whole screen
+￿const vec4 positions[3] = vec4[3](vec4(-1, -1, 0, 1),
 ￿                                  vec4( 3, -1, 0, 1),
 ￿                                  vec4(-1,  3, 0, 1));
-out vec2 uv;
-void main()
-{
+￿out vec2 uv;
+￿void main()
+￿{
 ￿    vec4 pos = positions[ gl_VertexID ];
 ￿    gl_Position = pos;
 ￿    uv = pos.xy;
-}
+￿}
 ￿
-// Fragment Shader
-uniform sampler2D tex;
-uniform float xcoeff;
-uniform float ycoeff;
-out vec4 Color;
-in vec2 uv;
+￿// Fragment Shader
+￿uniform sampler2D tex;
+￿uniform float xcoeff;
+￿uniform float ycoeff;
+￿out vec4 Color;
+￿in vec2 uv;
 ￿
-void main()
-{
+￿void main()
+￿{
 ￿    // Handle uv as if upper right quadrant
 ￿    vec2 uvabs = abs(uv);
 ￿
@@ -96,7 +98,7 @@ void main()
 ￿    P *= sign(uv);
 ￿
 ￿    Color = texture(tex, P * 0.5 + 0.5);
-}</code></pre>
+￿}</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -167,11 +169,12 @@ void main()
         <h5>C Specification</h5>
         If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled, viewport W scaling parameters are specified using the {@code pViewportWScalings} member of ##VkPipelineViewportWScalingStateCreateInfoNV in the pipeline state object. If the pipeline state object was created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:
 
-        <pre><code>void vkCmdSetViewportWScalingNV(
+        <code><pre>
+￿void vkCmdSetViewportWScalingNV(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    firstViewport,
 ￿    uint32_t                                    viewportCount,
-￿    const VkViewportWScalingNV*                 pViewportWScalings);</code></pre>
+￿    const VkViewportWScalingNV*                 pViewportWScalings);</pre></code>
 
         <h5>Description</h5>
         The viewport parameters taken from element <code>i</code> of {@code pViewportScalings} replace the current state for the viewport index <code>firstViewport {plus} i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.

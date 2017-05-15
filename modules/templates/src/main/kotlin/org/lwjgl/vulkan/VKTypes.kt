@@ -178,11 +178,12 @@ val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
         <h5>C Specification</h5>
         The type of {@code pfnAllocation} is:
 
-        <pre><code>typedef void* (VKAPI_PTR *PFN_vkAllocationFunction)(
+        <code><pre>
+￿typedef void* (VKAPI_PTR *PFN_vkAllocationFunction)(
 ￿    void*                                       pUserData,
 ￿    size_t                                      size,
 ￿    size_t                                      alignment,
-￿    VkSystemAllocationScope                     allocationScope);</code></pre>
+￿    VkSystemAllocationScope                     allocationScope);</pre></code>
 
         <h5>Description</h5>
         If {@code pfnAllocation} is unable to allocate the requested memory, it <b>must</b> return {@code NULL}. If the allocation was successful, it <b>must</b> return a valid pointer to memory allocation containing at least {@code size} bytes, and with the pointer value being a multiple of {@code alignment}.
@@ -220,12 +221,13 @@ val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
         <h5>C Specification</h5>
         The type of {@code pfnReallocation} is:
 
-        <pre><code>typedef void* (VKAPI_PTR *PFN_vkReallocationFunction)(
+        <code><pre>
+￿typedef void* (VKAPI_PTR *PFN_vkReallocationFunction)(
 ￿    void*                                       pUserData,
 ￿    void*                                       pOriginal,
 ￿    size_t                                      size,
 ￿    size_t                                      alignment,
-￿    VkSystemAllocationScope                     allocationScope);</code></pre>
+￿    VkSystemAllocationScope                     allocationScope);</pre></code>
 
         <h5>Description</h5>
         {@code pfnReallocation} <b>must</b> return an allocation with enough space for {@code size} bytes, and the contents of the original allocation from bytes zero to <code>min(original size, new size) - 1</code> <b>must</b> be preserved in the returned allocation. If {@code size} is larger than the old size, the contents of the additional space are undefined. If satisfying these requirements involves creating a new allocation, then the old allocation <b>should</b> be freed.
@@ -260,9 +262,10 @@ val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
         <h5>C Specification</h5>
         The type of {@code pfnFree} is:
 
-        <pre><code>typedef void (VKAPI_PTR *PFN_vkFreeFunction)(
+        <code><pre>
+￿typedef void (VKAPI_PTR *PFN_vkFreeFunction)(
 ￿    void*                                       pUserData,
-￿    void*                                       pMemory);</code></pre>
+￿    void*                                       pMemory);</pre></code>
 
         <h5>Description</h5>
         {@code pMemory} <b>may</b> be {@code NULL}, which the callback <b>must</b> handle safely. If {@code pMemory} is non-{@code NULL}, it <b>must</b> be a pointer previously allocated by {@code pfnAllocation} or {@code pfnReallocation}. The application <b>should</b> free this memory.
@@ -289,11 +292,12 @@ val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification
         <h5>C Specification</h5>
         The type of {@code pfnInternalAllocation} is:
 
-        <pre><code>typedef void (VKAPI_PTR *PFN_vkInternalAllocationNotification)(
+        <code><pre>
+￿typedef void (VKAPI_PTR *PFN_vkInternalAllocationNotification)(
 ￿    void*                                       pUserData,
 ￿    size_t                                      size,
 ￿    VkInternalAllocationType                    allocationType,
-￿    VkSystemAllocationScope                     allocationScope);</code></pre>
+￿    VkSystemAllocationScope                     allocationScope);</pre></code>
 
         <h5>Description</h5>
         This is a purely informational callback.
@@ -320,11 +324,12 @@ val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
         <h5>C Specification</h5>
         The type of {@code pfnInternalFree} is:
 
-        <pre><code>typedef void (VKAPI_PTR *PFN_vkInternalFreeNotification)(
+        <code><pre>
+￿typedef void (VKAPI_PTR *PFN_vkInternalFreeNotification)(
 ￿    void*                                       pUserData,
 ￿    size_t                                      size,
 ￿    VkInternalAllocationType                    allocationType,
-￿    VkSystemAllocationScope                     allocationScope);</code></pre>
+￿    VkSystemAllocationScope                     allocationScope);</pre></code>
 
         
 
@@ -671,7 +676,8 @@ val VkFormatProperties = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = 
         <h5>Description</h5>
         Supported features are described as a set of {@code VkFormatFeatureFlagBits}:
 
-        <pre><code>typedef enum VkFormatFeatureFlagBits {
+        <code><pre>
+￿typedef enum VkFormatFeatureFlagBits {
 ￿    VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT = 0x00000001,
 ￿    VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT = 0x00000002,
 ￿    VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT = 0x00000004,
@@ -688,7 +694,7 @@ val VkFormatProperties = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = 
 ￿    VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG = 0x00002000,
 ￿    VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR = 0x00004000,
 ￿    VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR = 0x00008000,
-} VkFormatFeatureFlagBits;</code></pre>
+￿} VkFormatFeatureFlagBits;</pre></code>
 
         The {@code linearTilingFeatures} and {@code optimalTilingFeatures} members of the ##VkFormatProperties structure describe what features are supported by #IMAGE_TILING_LINEAR and #IMAGE_TILING_OPTIMAL images, respectively.
 
@@ -805,7 +811,8 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
         <h5>Description</h5>
         <dl>
             <dt>1</dt>
-            <dd><pre><code>typedef enum VkSampleCountFlagBits {
+            <dd><code><pre>
+￿typedef enum VkSampleCountFlagBits {
 ￿    VK_SAMPLE_COUNT_1_BIT = 0x00000001,
 ￿    VK_SAMPLE_COUNT_2_BIT = 0x00000002,
 ￿    VK_SAMPLE_COUNT_4_BIT = 0x00000004,
@@ -813,7 +820,7 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
 ￿    VK_SAMPLE_COUNT_16_BIT = 0x00000010,
 ￿    VK_SAMPLE_COUNT_32_BIT = 0x00000020,
 ￿    VK_SAMPLE_COUNT_64_BIT = 0x00000040,
-} VkSampleCountFlagBits;</code></pre>
+￿} VkSampleCountFlagBits;</pre></code>
 
             The sample count limits defined above represent the minimum supported sample counts for each image type. Individual images <b>may</b> support additional sample counts, which are queried using #GetPhysicalDeviceImageFormatProperties() as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-supported-sample-counts">Supported Sample Counts</a>.</dd>
         </dl>
@@ -987,12 +994,13 @@ val VkQueueFamilyProperties = struct(VULKAN_PACKAGE, "VkQueueFamilyProperties", 
         <h5>Description</h5>
         The bits specified in {@code queueFlags} are:
 
-        <pre><code>typedef enum VkQueueFlagBits {
+        <code><pre>
+￿typedef enum VkQueueFlagBits {
 ￿    VK_QUEUE_GRAPHICS_BIT = 0x00000001,
 ￿    VK_QUEUE_COMPUTE_BIT = 0x00000002,
 ￿    VK_QUEUE_TRANSFER_BIT = 0x00000004,
 ￿    VK_QUEUE_SPARSE_BINDING_BIT = 0x00000008,
-} VkQueueFlagBits;</code></pre>
+￿} VkQueueFlagBits;</pre></code>
 
         <ul>
             <li>if #QUEUE_GRAPHICS_BIT is set, then the queues in this queue family support graphics operations.</li>
@@ -1052,13 +1060,14 @@ val VkMemoryType = struct(VULKAN_PACKAGE, "VkMemoryType", mutable = false) {
         """
 
     VkMemoryPropertyFlags.member("propertyFlags", """a bitmask of properties for this memory type. The bits specified in {@code propertyFlags} are:
-<pre><code>typedef enum VkMemoryPropertyFlagBits {
+<code><pre>
+￿typedef enum VkMemoryPropertyFlagBits {
 ￿    VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT = 0x00000001,
 ￿    VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT = 0x00000002,
 ￿    VK_MEMORY_PROPERTY_HOST_COHERENT_BIT = 0x00000004,
 ￿    VK_MEMORY_PROPERTY_HOST_CACHED_BIT = 0x00000008,
 ￿    VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT = 0x00000010,
-} VkMemoryPropertyFlagBits;</code></pre>
+￿} VkMemoryPropertyFlagBits;</pre></code>
 
         <ul>
             <li>if {@code propertyFlags} has the #MEMORY_PROPERTY_DEVICE_LOCAL_BIT bit set, memory allocated with this type is the most efficient for device access. This property will only be set for memory types belonging to heaps with the #MEMORY_HEAP_DEVICE_LOCAL_BIT set.</li>
@@ -1078,10 +1087,11 @@ val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
 
     VkDeviceSize.member("size", "the total memory size in bytes in the heap.")
     VkMemoryHeapFlags.member("flags", """a bitmask of attribute flags for the heap. The bits specified in {@code flags} are:
-<pre><code>typedef enum VkMemoryHeapFlagBits {
+<code><pre>
+￿typedef enum VkMemoryHeapFlagBits {
 ￿    VK_MEMORY_HEAP_DEVICE_LOCAL_BIT = 0x00000001,
 ￿    VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX = 0x00000002,
-} VkMemoryHeapFlagBits;</code></pre>
+￿} VkMemoryHeapFlagBits;</pre></code>
 
         <ul>
             <li>if {@code flags} contains #MEMORY_HEAP_DEVICE_LOCAL_BIT, it means the heap corresponds to device local memory. Device local memory <b>may</b> have different performance characteristics than host local memory, and <b>may</b> support different memory property flags.</li>
@@ -1127,9 +1137,10 @@ val VkPhysicalDeviceMemoryProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceM
 
         Memory types are ordered in the list such that X is assigned a lesser {@code memoryTypeIndex} than Y if <code>(X {leq} Y) {land} {lnot} (Y {leq} X)</code> according to the preorder. Note that the list of all allowed memory property flag combinations above satisfies this preorder, but other orders would as well. The goal of this ordering is to enable applications to use a simple search loop in selecting the proper memory type, along the lines of:
 
-        <pre><code>// Find a memory type in "memoryTypeBits" that includes all of "properties"
-int32_t FindProperties(uint32_t memoryTypeBits, VkMemoryPropertyFlags properties)
-{
+        <code><pre>
+￿// Find a memory type in "memoryTypeBits" that includes all of "properties"
+￿int32_t FindProperties(uint32_t memoryTypeBits, VkMemoryPropertyFlags properties)
+￿{
 ￿    for (int32_t i = 0; i < memoryTypeCount; ++i)
 ￿    {
 ￿        if ((memoryTypeBits & (1 << i)) &&
@@ -1137,15 +1148,15 @@ int32_t FindProperties(uint32_t memoryTypeBits, VkMemoryPropertyFlags properties
 ￿            return i;
 ￿    }
 ￿    return -1;
-}
+￿}
 ￿
-// Try to find an optimal memory type, or if it does not exist
-// find any compatible memory type
-VkMemoryRequirements memoryRequirements;
-vkGetImageMemoryRequirements(device, image, &memoryRequirements);
-int32_t memoryType = FindProperties(memoryRequirements.memoryTypeBits, optimalProperties);
-if (memoryType == -1)
-￿    memoryType = FindProperties(memoryRequirements.memoryTypeBits, requiredProperties);</code></pre>
+￿// Try to find an optimal memory type, or if it does not exist
+￿// find any compatible memory type
+￿VkMemoryRequirements memoryRequirements;
+￿vkGetImageMemoryRequirements(device, image, &memoryRequirements);
+￿int32_t memoryType = FindProperties(memoryRequirements.memoryTypeBits, optimalProperties);
+￿if (memoryType == -1)
+￿    memoryType = FindProperties(memoryRequirements.memoryTypeBits, requiredProperties);</pre></code>
 
         The loop will find the first supported memory type that has all bits requested in {@code properties} set. If there is no exact match, it will find a closest match (i.e. a memory type with the fewest additional bits set), which has some additional bits set but which are not detrimental to the behaviors requested by {@code properties}. The application <b>can</b> first search for the optimal properties, e.g. a memory type that is device-local or supports coherent cached accesses, as appropriate for the intended usage, and if such a memory type is not present <b>can</b> fallback to searching for a less optimal but guaranteed set of properties such as "0" or "host-visible and coherent".
 
@@ -1400,11 +1411,12 @@ val VkSparseImageFormatProperties = struct(VULKAN_PACKAGE, "VkSparseImageFormatP
     VkImageAspectFlags.member("aspectMask", "a bitmask of {@code VkImageAspectFlagBits} specifying which aspects of the image the properties apply to.")
     VkExtent3D.member("imageGranularity", "the width, height, and depth of the sparse image block in texels or compressed texel blocks.")
     VkSparseImageFormatFlags.member("flags", """a bitmask specifying additional information about the sparse resource. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkSparseImageFormatFlagBits {
+<code><pre>
+￿typedef enum VkSparseImageFormatFlagBits {
 ￿    VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT = 0x00000001,
 ￿    VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT = 0x00000002,
 ￿    VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT = 0x00000004,
-} VkSparseImageFormatFlagBits;</code></pre>
+￿} VkSparseImageFormatFlagBits;</pre></code>
 
         <ul>
             <li>If #SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT is set, the image uses a single mip tail region for all array layers.</li>
@@ -1481,9 +1493,10 @@ val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
     VkDeviceMemory.member("memory", "the {@code VkDeviceMemory} object that the range of the resource is bound to. If {@code memory} is #NULL_HANDLE, the range is unbound.")
     VkDeviceSize.member("memoryOffset", "the offset into the {@code VkDeviceMemory} object to bind the resource range to. If {@code memory} is #NULL_HANDLE, this value is ignored.")
     VkSparseMemoryBindFlags.member("flags", """a bitmask specifying usage of the binding operation. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkSparseMemoryBindFlagBits {
+<code><pre>
+￿typedef enum VkSparseMemoryBindFlagBits {
 ￿    VK_SPARSE_MEMORY_BIND_METADATA_BIT = 0x00000001,
-} VkSparseMemoryBindFlagBits;</code></pre>
+￿} VkSparseMemoryBindFlagBits;</pre></code>
 
         <ul>
             <li>#SPARSE_MEMORY_BIND_METADATA_BIT indicates that the memory being bound is only for the metadata aspect.</li>
@@ -1686,9 +1699,10 @@ val VkFenceCreateInfo = struct(VULKAN_PACKAGE, "VkFenceCreateInfo") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFenceCreateFlags.member("flags", """defines the initial state and behavior of the fence. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkFenceCreateFlagBits {
+<code><pre>
+￿typedef enum VkFenceCreateFlagBits {
 ￿    VK_FENCE_CREATE_SIGNALED_BIT = 0x00000001,
-} VkFenceCreateFlagBits;</code></pre>
+￿} VkFenceCreateFlagBits;</pre></code>
 
         If {@code flags} contains #FENCE_CREATE_SIGNALED_BIT then the fence object is created in the signaled state; otherwise it is created in the unsignaled state.""")
 }
@@ -1762,11 +1776,12 @@ val VkQueryPoolCreateInfo = struct(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") {
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkQueryPoolCreateFlags.member("flags", "reserved for future use.")
     VkQueryType.member("queryType", """the type of queries managed by the pool, and <b>must</b> be one of the values
-<pre><code>typedef enum VkQueryType {
+<code><pre>
+￿typedef enum VkQueryType {
 ￿    VK_QUERY_TYPE_OCCLUSION = 0,
 ￿    VK_QUERY_TYPE_PIPELINE_STATISTICS = 1,
 ￿    VK_QUERY_TYPE_TIMESTAMP = 2,
-} VkQueryType;</code></pre>""")
+￿} VkQueryType;</pre></code>""")
     uint32_t.member("queryCount", "the number of queries managed by the pool.")
     VkQueryPipelineStatisticFlags.member("pipelineStatistics", "a bitmask indicating which counters will be returned in queries on the new pool, as described below in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#queries-pipestats\">the “Pipeline Statistics Queries” section</a>. {@code pipelineStatistics} is ignored if {@code queryType} is not #QUERY_TYPE_PIPELINE_STATISTICS.")
 }
@@ -1779,7 +1794,8 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
         <h5>Description</h5>
         Bits which <b>can</b> be set in {@code usage} are:
 
-        <pre><code>typedef enum VkBufferUsageFlagBits {
+        <code><pre>
+￿typedef enum VkBufferUsageFlagBits {
 ￿    VK_BUFFER_USAGE_TRANSFER_SRC_BIT = 0x00000001,
 ￿    VK_BUFFER_USAGE_TRANSFER_DST_BIT = 0x00000002,
 ￿    VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT = 0x00000004,
@@ -1789,7 +1805,7 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 ￿    VK_BUFFER_USAGE_INDEX_BUFFER_BIT = 0x00000040,
 ￿    VK_BUFFER_USAGE_VERTEX_BUFFER_BIT = 0x00000080,
 ￿    VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT = 0x00000100,
-} VkBufferUsageFlagBits;</code></pre>
+￿} VkBufferUsageFlagBits;</pre></code>
 
         <ul>
             <li>#BUFFER_USAGE_TRANSFER_SRC_BIT indicates that the buffer <b>can</b> be used as the source of a <em>transfer command</em> (see the definition of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>).</li>
@@ -1807,11 +1823,12 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 
         Bits which <b>can</b> be set in {@code flags} are:
 
-        <pre><code>typedef enum VkBufferCreateFlagBits {
+        <code><pre>
+￿typedef enum VkBufferCreateFlagBits {
 ￿    VK_BUFFER_CREATE_SPARSE_BINDING_BIT = 0x00000001,
 ￿    VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT = 0x00000002,
 ￿    VK_BUFFER_CREATE_SPARSE_ALIASED_BIT = 0x00000004,
-} VkBufferCreateFlagBits;</code></pre>
+￿} VkBufferCreateFlagBits;</pre></code>
 
         These bits have the following meanings:
 
@@ -2032,13 +2049,15 @@ val VkSubresourceLayout = struct(VULKAN_PACKAGE, "VkSubresourceLayout", mutable 
         <h5>Description</h5>
         For images created with linear tiling, {@code rowPitch}, {@code arrayPitch} and {@code depthPitch} describe the layout of the image subresource in linear memory. For uncompressed formats, {@code rowPitch} is the number of bytes between texels with the same x coordinate in adjacent rows (y coordinates differ by one). {@code arrayPitch} is the number of bytes between texels with the same x and y coordinate in adjacent array layers of the image (array layer values differ by one). {@code depthPitch} is the number of bytes between texels with the same x and y coordinate in adjacent slices of a 3D image (z coordinates differ by one). Expressed as an addressing formula, the starting byte of a texel in the image subresource has address:
 
-        <pre><code>// (x,y,z,layer) are in texel coordinates
-address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*elementSize + offset</code></pre>
+        <code><pre>
+￿// (x,y,z,layer) are in texel coordinates
+￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*elementSize + offset</pre></code>
 
         For compressed formats, the {@code rowPitch} is the number of bytes between compressed texel blocks in adjacent rows. {@code arrayPitch} is the number of bytes between compressed texel blocks in adjacent array layers. {@code depthPitch} is the number of bytes between compressed texel blocks in adjacent slices of a 3D image.
 
-        <pre><code>// (x,y,z,layer) are in compressed texel block coordinates
-address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*compressedTexelBlockByteSize + offset;</code></pre>
+        <code><pre>
+￿// (x,y,z,layer) are in compressed texel block coordinates
+￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*compressedTexelBlockByteSize + offset;</pre></code>
 
         {@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.
 
@@ -2063,7 +2082,8 @@ val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
         <h5>Description</h5>
         Each of {@code r}, {@code g}, {@code b}, and {@code a} is one of the values:
 
-        <pre><code>typedef enum VkComponentSwizzle {
+        <code><pre>
+￿typedef enum VkComponentSwizzle {
 ￿    VK_COMPONENT_SWIZZLE_IDENTITY = 0,
 ￿    VK_COMPONENT_SWIZZLE_ZERO = 1,
 ￿    VK_COMPONENT_SWIZZLE_ONE = 2,
@@ -2071,7 +2091,7 @@ val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
 ￿    VK_COMPONENT_SWIZZLE_G = 4,
 ￿    VK_COMPONENT_SWIZZLE_B = 5,
 ￿    VK_COMPONENT_SWIZZLE_A = 6,
-} VkComponentSwizzle;</code></pre>
+￿} VkComponentSwizzle;</pre></code>
 
         <ul>
             <li>#COMPONENT_SWIZZLE_IDENTITY: the component is set to the identity swizzle.</li>
@@ -2126,12 +2146,13 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
         {@code aspectMask} is a bitmask indicating the format being used. Bits which <b>may</b> be set include:
 
-        <pre><code>typedef enum VkImageAspectFlagBits {
+        <code><pre>
+￿typedef enum VkImageAspectFlagBits {
 ￿    VK_IMAGE_ASPECT_COLOR_BIT = 0x00000001,
 ￿    VK_IMAGE_ASPECT_DEPTH_BIT = 0x00000002,
 ￿    VK_IMAGE_ASPECT_STENCIL_BIT = 0x00000004,
 ￿    VK_IMAGE_ASPECT_METADATA_BIT = 0x00000008,
-} VkImageAspectFlagBits;</code></pre>
+￿} VkImageAspectFlagBits;</pre></code>
 
         The mask <b>must</b> be only #IMAGE_ASPECT_COLOR_BIT, #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT if {@code format} is a color, depth-only or stencil-only format, respectively. If using a depth/stencil format with both depth and stencil components, {@code aspectMask} <b>must</b> include at least one of #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT, and <b>can</b> include both.
 
@@ -2261,7 +2282,7 @@ val VkShaderModuleCreateInfo = struct(VULKAN_PACKAGE, "VkShaderModuleCreateInfo"
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pCode} <b>must</b> be a pointer to an array of <code><pre><code>codeSize / 4</code></pre></code> {@code uint32_t} values</li>
+            <li>{@code pCode} <b>must</b> be a pointer to an array of <code><code><pre> ￿codeSize / 4</pre></code></code> {@code uint32_t} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2401,7 +2422,8 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineShaderStageCreateFlags.member("flags", "reserved for future use.")
     VkShaderStageFlagBits.member("stage", """names a single pipeline stage. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkShaderStageFlagBits {
+<code><pre>
+￿typedef enum VkShaderStageFlagBits {
 ￿    VK_SHADER_STAGE_VERTEX_BIT = 0x00000001,
 ￿    VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT = 0x00000002,
 ￿    VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT = 0x00000004,
@@ -2410,7 +2432,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
 ￿    VK_SHADER_STAGE_COMPUTE_BIT = 0x00000020,
 ￿    VK_SHADER_STAGE_ALL_GRAPHICS = 0x0000001F,
 ￿    VK_SHADER_STAGE_ALL = 0x7FFFFFFF,
-} VkShaderStageFlagBits;</code></pre>""")
+￿} VkShaderStageFlagBits;</pre></code>""")
     VkShaderModule.member("module", "a {@code VkShaderModule} object that contains the shader for this stage.")
     const..charUTF8_p.member("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage.")
     nullable..const..VkSpecializationInfo.p.member("pSpecializationInfo", "a pointer to ##VkSpecializationInfo, as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#pipelines-specialization-constants\">Specialization Constants</a>, and <b>can</b> be {@code NULL}.")
@@ -2439,10 +2461,11 @@ val VkVertexInputBindingDescription = struct(VULKAN_PACKAGE, "VkVertexInputBindi
     uint32_t.member("binding", "the binding number that this structure describes.")
     uint32_t.member("stride", "the distance in bytes between two consecutive elements within the buffer.")
     VkVertexInputRate.member("inputRate", """specifies whether vertex attribute addressing is a function of the vertex index or of the instance index. Possible values include:
-<pre><code>typedef enum VkVertexInputRate {
+<code><pre>
+￿typedef enum VkVertexInputRate {
 ￿    VK_VERTEX_INPUT_RATE_VERTEX = 0,
 ￿    VK_VERTEX_INPUT_RATE_INSTANCE = 1,
-} VkVertexInputRate;</code></pre>
+￿} VkVertexInputRate;</pre></code>
 
         <ul>
             <li>#VERTEX_INPUT_RATE_VERTEX indicates that vertex attribute addressing is a function of the vertex index.</li>
@@ -2581,7 +2604,8 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
         Structure specifying a viewport.
 
         <h5>Description</h5>
-        The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <pre><code>k / (2<sup>m</sup> - 1)</code></pre>, where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
+        The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <code><pre>
+￿k / (2<sup>m</sup> - 1)</pre></code>, where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
 
         The viewport parameters shown in the above equations are found from these values as
 
@@ -2756,7 +2780,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a pointer to an array of <code><pre><code>ceil(rasterizationSamples / 32)</code></pre></code> {@code VkSampleMask} values</li>
+            <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a pointer to an array of <code><code><pre> ￿ceil(rasterizationSamples / 32)</pre></code></code> {@code VkSampleMask} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2950,13 +2974,14 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
 
         Bits which <b>can</b> be set in {@code flags} are:
 
-        <pre><code>typedef enum VkPipelineCreateFlagBits {
+        <code><pre>
+￿typedef enum VkPipelineCreateFlagBits {
 ￿    VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT = 0x00000001,
 ￿    VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT = 0x00000002,
 ￿    VK_PIPELINE_CREATE_DERIVATIVE_BIT = 0x00000004,
 ￿    VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHX = 0x00000008,
 ￿    VK_PIPELINE_CREATE_DISPATCH_BASE_KHX = 0x00000010,
-} VkPipelineCreateFlagBits;</code></pre>
+￿} VkPipelineCreateFlagBits;</pre></code>
 
         <ul>
             <li>#PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT specifies that the created pipeline will not be optimized. Using this flag <b>may</b> reduce the time taken to create the pipeline.</li>
@@ -3191,13 +3216,14 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 
         {@code addressModeU}, {@code addressModeV}, and {@code addressModeW} <b>must</b> each have one of the following values:
 
-        <pre><code>typedef enum VkSamplerAddressMode {
+        <code><pre>
+￿typedef enum VkSamplerAddressMode {
 ￿    VK_SAMPLER_ADDRESS_MODE_REPEAT = 0,
 ￿    VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT = 1,
 ￿    VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE = 2,
 ￿    VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER = 3,
 ￿    VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE = 4,
-} VkSamplerAddressMode;</code></pre>
+￿} VkSamplerAddressMode;</pre></code>
 
         These values control the behavior of sampling with coordinates outside the range <code>[0,1]</code> for the respective u, v, or w coordinate as defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-wrapping-operation">Wrapping Operation</a> section.
 
@@ -3251,17 +3277,19 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSamplerCreateFlags.member("flags", "reserved for future use.")
     VkFilter.member("magFilter", """the magnification filter to apply to lookups, and is of type:
-<pre><code>typedef enum VkFilter {
+<code><pre>
+￿typedef enum VkFilter {
 ￿    VK_FILTER_NEAREST = 0,
 ￿    VK_FILTER_LINEAR = 1,
 ￿    VK_FILTER_CUBIC_IMG = 1000015000,
-} VkFilter;</code></pre>""")
+￿} VkFilter;</pre></code>""")
     VkFilter.member("minFilter", "the minification filter to apply to lookups, and is of type {@code VkFilter}.")
     VkSamplerMipmapMode.member("mipmapMode", """the mipmap filter to apply to lookups as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-filtering">Texel Filtering</a> section, and is of type:
-<pre><code>typedef enum VkSamplerMipmapMode {
+<code><pre>
+￿typedef enum VkSamplerMipmapMode {
 ￿    VK_SAMPLER_MIPMAP_MODE_NEAREST = 0,
 ￿    VK_SAMPLER_MIPMAP_MODE_LINEAR = 1,
-} VkSamplerMipmapMode;</code></pre>""")
+￿} VkSamplerMipmapMode;</pre></code>""")
     VkSamplerAddressMode.member("addressModeU", "the addressing mode for outside [0..1] range for U coordinate. See {@code VkSamplerAddressMode}.")
     VkSamplerAddressMode.member("addressModeV", "the addressing mode for outside [0..1] range for V coordinate. See {@code VkSamplerAddressMode}.")
     VkSamplerAddressMode.member("addressModeW", "the addressing mode for outside [0..1] range for W coordinate. See {@code VkSamplerAddressMode}.")
@@ -3276,14 +3304,15 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
     float.member("minLod", "{@code minLod} and {@code maxLod} are the values used to clamp the computed level-of-detail value, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-level-of-detail-operation\">Level-of-Detail Operation</a> section. {@code maxLod} <b>must</b> be greater than or equal to {@code minLod}.")
     float.member("maxLod", "see {@code minLod}")
     VkBorderColor.member("borderColor", """the predefined border color to use, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-replacement">Texel Replacement</a> section, and is of type:
-<pre><code>typedef enum VkBorderColor {
+<code><pre>
+￿typedef enum VkBorderColor {
 ￿    VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK = 0,
 ￿    VK_BORDER_COLOR_INT_TRANSPARENT_BLACK = 1,
 ￿    VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK = 2,
 ￿    VK_BORDER_COLOR_INT_OPAQUE_BLACK = 3,
 ￿    VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE = 4,
 ￿    VK_BORDER_COLOR_INT_OPAQUE_WHITE = 5,
-} VkBorderColor;</code></pre>""")
+￿} VkBorderColor;</pre></code>""")
     VkBool32.member("unnormalizedCoordinates", """controls whether to use unnormalized or normalized texel coordinates to address texels of the image. When set to #TRUE, the range of the image coordinates used to lookup the texel is in the range of zero to the image dimensions for x, y and z. When set to #FALSE the range of image coordinates is zero to one. When {@code unnormalizedCoordinates} is #TRUE, samplers have the following requirements:
 <ul>
             <li>{@code minFilter} and {@code magFilter} <b>must</b> be equal.</li>
@@ -3369,9 +3398,10 @@ val VkDescriptorSetLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetLay
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDescriptorSetLayoutCreateFlags.member("flags", """provides options for descriptor set layout creation, and is of type {@code VkDescriptorSetLayoutCreateFlags}. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkDescriptorSetLayoutCreateFlagBits {
+<code><pre>
+￿typedef enum VkDescriptorSetLayoutCreateFlagBits {
 ￿    VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR = 0x00000001,
-} VkDescriptorSetLayoutCreateFlagBits;</code></pre>
+￿} VkDescriptorSetLayoutCreateFlagBits;</pre></code>
 
         If {@code flags} contains #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR, then descriptor sets <b>must</b> not be allocated using this layout, and descriptors are instead pushed via #CmdPushDescriptorSetKHR().""")
     AutoSize("pBindings", optional = true)..uint32_t.member("bindingCount", "the number of elements in {@code pBindings}.")
@@ -3436,9 +3466,10 @@ val VkDescriptorPoolCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorPoolCreateI
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDescriptorPoolCreateFlags.member("flags", """specifies certain supported operations on the pool. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkDescriptorPoolCreateFlagBits {
+<code><pre>
+￿typedef enum VkDescriptorPoolCreateFlagBits {
 ￿    VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x00000001,
-} VkDescriptorPoolCreateFlagBits;</code></pre>
+￿} VkDescriptorPoolCreateFlagBits;</pre></code>
 
         If {@code flags} includes #DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT, then descriptor sets <b>can</b> return their individual allocations to the pool, i.e. all of #AllocateDescriptorSets(), #FreeDescriptorSets(), and #ResetDescriptorPool() are allowed. Otherwise, descriptor sets allocated from the pool <b>must</b> not be individually freed back to the pool, i.e. only #AllocateDescriptorSets() and #ResetDescriptorPool() are allowed.""")
     uint32_t.member("maxSets", "the maximum number of descriptor sets that <b>can</b> be allocated from the pool.")
@@ -3735,17 +3766,19 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
         """
 
     VkAttachmentDescriptionFlags.member("flags", """a bitmask describing additional properties of the attachment. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkAttachmentDescriptionFlagBits {
+<code><pre>
+￿typedef enum VkAttachmentDescriptionFlagBits {
 ￿    VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT = 0x00000001,
-} VkAttachmentDescriptionFlagBits;</code></pre>""")
+￿} VkAttachmentDescriptionFlagBits;</pre></code>""")
     VkFormat.member("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment.")
     VkSampleCountFlagBits.member("samples", "the number of samples of the image as defined in {@code VkSampleCountFlagBits}.")
     VkAttachmentLoadOp.member("loadOp", """specifies how the contents of color and depth components of the attachment are treated at the beginning of the subpass where it is first used:
-<pre><code>typedef enum VkAttachmentLoadOp {
+<code><pre>
+￿typedef enum VkAttachmentLoadOp {
 ￿    VK_ATTACHMENT_LOAD_OP_LOAD = 0,
 ￿    VK_ATTACHMENT_LOAD_OP_CLEAR = 1,
 ￿    VK_ATTACHMENT_LOAD_OP_DONT_CARE = 2,
-} VkAttachmentLoadOp;</code></pre>
+￿} VkAttachmentLoadOp;</pre></code>
 
         <ul>
             <li>#ATTACHMENT_LOAD_OP_LOAD means the previous contents of the image within the render area will be preserved. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_READ_BIT.</li>
@@ -3753,10 +3786,11 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
             <li>#ATTACHMENT_LOAD_OP_DONT_CARE means the previous contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
         </ul>""")
     VkAttachmentStoreOp.member("storeOp", """specifies how the contents of color and depth components of the attachment are treated at the end of the subpass where it is last used:
-<pre><code>typedef enum VkAttachmentStoreOp {
+<code><pre>
+￿typedef enum VkAttachmentStoreOp {
 ￿    VK_ATTACHMENT_STORE_OP_STORE = 0,
 ￿    VK_ATTACHMENT_STORE_OP_DONT_CARE = 1,
-} VkAttachmentStoreOp;</code></pre>
+￿} VkAttachmentStoreOp;</pre></code>
 
         <ul>
             <li>#ATTACHMENT_STORE_OP_STORE means the contents generated during the render pass and within the render area are written to memory. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
@@ -3840,10 +3874,11 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
         """
 
     VkSubpassDescriptionFlags.member("flags", """a bitmask indicating usage of the subpass. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkSubpassDescriptionFlagBits {
+<code><pre>
+￿typedef enum VkSubpassDescriptionFlagBits {
 ￿    VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX = 0x00000001,
 ￿    VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX = 0x00000002,
-} VkSubpassDescriptionFlagBits;</code></pre>
+￿} VkSubpassDescriptionFlagBits;</pre></code>
 
         <ul>
             <li>#SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX indicates that shaders compiled for this subpass write the attributes for all views in a single invocation of each vertex processing stage. All pipelines compiled against a subpass that includes this bit <b>must</b> write per-view attributes to the *PerViewNV[] shader outputs, in addition to the non-per-view (e.g. {@code Position}) outputs.</li>
@@ -3987,10 +4022,11 @@ val VkCommandPoolCreateInfo = struct(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkCommandPoolCreateFlags.member("flags", """a bitmask indicating usage behavior for the pool and command buffers allocated from it. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkCommandPoolCreateFlagBits {
+<code><pre>
+￿typedef enum VkCommandPoolCreateFlagBits {
 ￿    VK_COMMAND_POOL_CREATE_TRANSIENT_BIT = 0x00000001,
 ￿    VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT = 0x00000002,
-} VkCommandPoolCreateFlagBits;</code></pre>
+￿} VkCommandPoolCreateFlagBits;</pre></code>
 
         <ul>
             <li>#COMMAND_POOL_CREATE_TRANSIENT_BIT indicates that command buffers allocated from the pool will be short-lived, meaning that they will be reset or freed in a relatively short timeframe. This flag <b>may</b> be used by the implementation to control memory allocation behavior within the pool.</li>
@@ -4025,10 +4061,11 @@ val VkCommandBufferAllocateInfo = struct(VULKAN_PACKAGE, "VkCommandBufferAllocat
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkCommandPool.member("commandPool", "the command pool from which the command buffers are allocated.")
     VkCommandBufferLevel.member("level", """determines whether the command buffers are primary or secondary command buffers. Possible values include:
-<pre><code>typedef enum VkCommandBufferLevel {
+<code><pre>
+￿typedef enum VkCommandBufferLevel {
 ￿    VK_COMMAND_BUFFER_LEVEL_PRIMARY = 0,
 ￿    VK_COMMAND_BUFFER_LEVEL_SECONDARY = 1,
-} VkCommandBufferLevel;</code></pre>""")
+￿} VkCommandBufferLevel;</pre></code>""")
     uint32_t.member("commandBufferCount", "the number of command buffers to allocate from the pool.")
 }
 
@@ -4094,11 +4131,12 @@ val VkCommandBufferBeginInfo = struct(VULKAN_PACKAGE, "VkCommandBufferBeginInfo"
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkCommandBufferUsageFlags.member("flags", """a bitmask indicating usage behavior for the command buffer. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkCommandBufferUsageFlagBits {
+<code><pre>
+￿typedef enum VkCommandBufferUsageFlagBits {
 ￿    VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT = 0x00000001,
 ￿    VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT = 0x00000002,
 ￿    VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT = 0x00000004,
-} VkCommandBufferUsageFlagBits;</code></pre>
+￿} VkCommandBufferUsageFlagBits;</pre></code>
 
         <ul>
             <li>#COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT indicates that each recording of the command buffer will only be submitted once, and the command buffer will be reset and recorded again between each submission.</li>

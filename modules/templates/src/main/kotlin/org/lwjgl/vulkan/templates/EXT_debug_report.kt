@@ -20,7 +20,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
         Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.
 
-        <pre><code>￿    VkResult res;
+        <code><pre>
+￿    VkResult res;
 ￿    VkDebugReportCallbackEXT cb1, cb2, cb3;
 ￿
 ￿    VkDebugReportCallbackCreateInfoEXT callback1 = {
@@ -58,7 +59,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 ￿    // remove callbacks when cleaning up 
 ￿    vkDestroyDebugReportCallbackEXT(instance, cb1);
 ￿    vkDestroyDebugReportCallbackEXT(instance, cb2);
-￿    vkDestroyDebugReportCallbackEXT(instance, cb3);</code></pre>
+￿    vkDestroyDebugReportCallbackEXT(instance, cb3);</pre></code>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         In the initial release of the {@code VK_EXT_debug_report} extension, the token #STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT was used. Starting in version 2 of the extension branch, #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
@@ -239,11 +240,12 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
         To register a debug report callback, an application uses #CreateDebugReportCallbackEXT().
 
-        <pre><code>VkResult vkCreateDebugReportCallbackEXT(
+        <code><pre>
+￿VkResult vkCreateDebugReportCallbackEXT(
 ￿    VkInstance                                  instance,
 ￿    const VkDebugReportCallbackCreateInfoEXT*   pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDebugReportCallbackEXT*                   pCallback);</code></pre>
+￿    VkDebugReportCallbackEXT*                   pCallback);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -284,10 +286,11 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>C Specification</h5>
         To destroy a {@code VkDebugReportCallbackEXT} object, call:
 
-        <pre><code>void vkDestroyDebugReportCallbackEXT(
+        <code><pre>
+￿void vkDestroyDebugReportCallbackEXT(
 ￿    VkInstance                                  instance,
 ￿    VkDebugReportCallbackEXT                    callback,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -325,7 +328,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>C Specification</h5>
         To inject its own messages into the debug stream, call:
 
-        <pre><code>void vkDebugReportMessageEXT(
+        <code><pre>
+￿void vkDebugReportMessageEXT(
 ￿    VkInstance                                  instance,
 ￿    VkDebugReportFlagsEXT                       flags,
 ￿    VkDebugReportObjectTypeEXT                  objectType,
@@ -333,7 +337,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 ￿    size_t                                      location,
 ￿    int32_t                                     messageCode,
 ￿    const char*                                 pLayerPrefix,
-￿    const char*                                 pMessage);</code></pre>
+￿    const char*                                 pMessage);</pre></code>
 
         <h5>Description</h5>
         The call will propagate through the layers and cause a callback to the application. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the callback was registered.

@@ -82,9 +82,10 @@ val KHX_external_semaphore_win32 = "KHXExternalSemaphoreWin32".nativeClassVK("KH
         <h5>C Specification</h5>
         To import semaphore state from a Windows handle, call:
 
-        <pre><code>VkResult vkImportSemaphoreWin32HandleKHX(
+        <code><pre>
+￿VkResult vkImportSemaphoreWin32HandleKHX(
 ￿    VkDevice                                    device,
-￿    const VkImportSemaphoreWin32HandleInfoKHX*  pImportSemaphoreWin32HandleInfo);</code></pre>
+￿    const VkImportSemaphoreWin32HandleInfoKHX*  pImportSemaphoreWin32HandleInfo);</pre></code>
 
         <h5>Description</h5>
         Importing semaphore state from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release ownership using the fname:CloseHandle system call when the handle is no longer needed.
@@ -125,11 +126,12 @@ val KHX_external_semaphore_win32 = "KHXExternalSemaphoreWin32".nativeClassVK("KH
         <h5>C Specification</h5>
         To export a Windows handle representing the state of a semaphore, call:
 
-        <pre><code>VkResult vkGetSemaphoreWin32HandleKHX(
+        <code><pre>
+￿VkResult vkGetSemaphoreWin32HandleKHX(
 ￿    VkDevice                                    device,
 ￿    VkSemaphore                                 semaphore,
 ￿    VkExternalSemaphoreHandleTypeFlagBitsKHX    handleType,
-￿    HANDLE*                                     pHandle);</code></pre>
+￿    HANDLE*                                     pHandle);</pre></code>
 
         <h5>Description</h5>
         The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalSemaphoreHandleTypeFlagBitsKHX} for a description of the properties of the defined external semaphore handle types.

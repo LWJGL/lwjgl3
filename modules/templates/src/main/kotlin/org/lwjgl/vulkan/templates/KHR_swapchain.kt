@@ -116,11 +116,12 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To create a swapchain, call:
 
-        <pre><code>VkResult vkCreateSwapchainKHR(
+        <code><pre>
+￿VkResult vkCreateSwapchainKHR(
 ￿    VkDevice                                    device,
 ￿    const VkSwapchainCreateInfoKHR*             pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSwapchainKHR*                             pSwapchain);</code></pre>
+￿    VkSwapchainKHR*                             pSwapchain);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -171,10 +172,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To destroy a swapchain object call:
 
-        <pre><code>void vkDestroySwapchainKHR(
+        <code><pre>
+￿void vkDestroySwapchainKHR(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         {@code swapchain} and all associated {@code VkImage} handles are destroyed, and <b>must</b> not be acquired or used any more by the application. The memory of each {@code VkImage} will only be freed after that image is no longer used by the platform. For example, if one image of the swapchain is being displayed in a window, the memory for that image <b>may</b> not be freed until the window is destroyed, or another swapchain is created for the window. Destroying the swapchain does not invalidate the parent {@code VkSurfaceKHR}, and a new swapchain <b>can</b> be created with it.
@@ -217,11 +219,12 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To obtain the array of presentable images associated with a swapchain, call:
 
-        <pre><code>VkResult vkGetSwapchainImagesKHR(
+        <code><pre>
+￿VkResult vkGetSwapchainImagesKHR(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
 ￿    uint32_t*                                   pSwapchainImageCount,
-￿    VkImage*                                    pSwapchainImages);</code></pre>
+￿    VkImage*                                    pSwapchainImages);</pre></code>
 
         <h5>Description</h5>
         If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written. If {@code pSwapchainImageCount} is smaller than the number of presentable images for {@code swapchain}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -264,13 +267,14 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To acquire an available presentable image to use, and retrieve the index of that image, call:
 
-        <pre><code>VkResult vkAcquireNextImageKHR(
+        <code><pre>
+￿VkResult vkAcquireNextImageKHR(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
 ￿    uint64_t                                    timeout,
 ￿    VkSemaphore                                 semaphore,
 ￿    VkFence                                     fence,
-￿    uint32_t*                                   pImageIndex);</code></pre>
+￿    uint32_t*                                   pImageIndex);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -334,9 +338,10 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         After queueing all rendering commands and transitioning the image to the correct layout, to queue an image for presentation, call:
 
-        <pre><code>VkResult vkQueuePresentKHR(
+        <code><pre>
+￿VkResult vkQueuePresentKHR(
 ￿    VkQueue                                     queue,
-￿    const VkPresentInfoKHR*                     pPresentInfo);</code></pre>
+￿    const VkPresentInfoKHR*                     pPresentInfo);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>

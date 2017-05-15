@@ -16,7 +16,8 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         This extension also allows applications to use the physical-device components of device extensions before #CreateDevice() is called.
 
         <h5>Examples</h5>
-        <pre><code>￿    // Get features with a hypothetical future extension.
+        <code><pre>
+￿    // Get features with a hypothetical future extension.
 ￿    VkHypotheticalExtensionFeaturesKHR hypotheticalFeatures =
 ￿    {
 ￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                            // sType
@@ -59,7 +60,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    }
 ￿
 ￿    VkDevice device;
-￿    vkCreateDevice(physicalDevice, &deviceCreateInfo, NULL, &device);</code></pre>
+￿    vkCreateDevice(physicalDevice, &deviceCreateInfo, NULL, &device);</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -135,9 +136,10 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         To query supported features defined by the core or extensions, call:
 
-        <pre><code>void vkGetPhysicalDeviceFeatures2KHR(
+        <code><pre>
+￿void vkGetPhysicalDeviceFeatures2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceFeatures2KHR*               pFeatures);</code></pre>
+￿    VkPhysicalDeviceFeatures2KHR*               pFeatures);</pre></code>
 
         <h5>Description</h5>
         Each structure in {@code pFeatures} and its {@code pNext} chain contain members corresponding to fine-grained features. #GetPhysicalDeviceFeatures2KHR() writes each member to a boolean value indicating whether that feature is supported.
@@ -164,9 +166,10 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         To query general properties of physical devices once enumerated, call:
 
-        <pre><code>void vkGetPhysicalDeviceProperties2KHR(
+        <code><pre>
+￿void vkGetPhysicalDeviceProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceProperties2KHR*             pProperties);</code></pre>
+￿    VkPhysicalDeviceProperties2KHR*             pProperties);</pre></code>
 
         <h5>Description</h5>
         Each structure in {@code pProperties} and its {@code pNext} chain contain members corresponding to properties or implementation-dependent limits. #GetPhysicalDeviceProperties2KHR() writes each member to a value indicating the value of that property or limit.
@@ -193,10 +196,11 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         To query supported format features which are properties of the physical device, call:
 
-        <pre><code>void vkGetPhysicalDeviceFormatProperties2KHR(
+        <code><pre>
+￿void vkGetPhysicalDeviceFormatProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
-￿    VkFormatProperties2KHR*                     pFormatProperties);</code></pre>
+￿    VkFormatProperties2KHR*                     pFormatProperties);</pre></code>
 
         <h5>Description</h5>
         #GetPhysicalDeviceFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -225,10 +229,11 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         To query additional capabilities specific to image types, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceImageFormatProperties2KHR(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceImageFormatProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceImageFormatInfo2KHR*  pImageFormatInfo,
-￿    VkImageFormatProperties2KHR*                pImageFormatProperties);</code></pre>
+￿    VkImageFormatProperties2KHR*                pImageFormatProperties);</pre></code>
 
         <h5>Description</h5>
         #GetPhysicalDeviceImageFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceImageFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -274,10 +279,11 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         To query properties of queues available on a physical device, call:
 
-        <pre><code>void vkGetPhysicalDeviceQueueFamilyProperties2KHR(
+        <code><pre>
+￿void vkGetPhysicalDeviceQueueFamilyProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pQueueFamilyPropertyCount,
-￿    VkQueueFamilyProperties2KHR*                pQueueFamilyProperties);</code></pre>
+￿    VkQueueFamilyProperties2KHR*                pQueueFamilyProperties);</pre></code>
 
         <h5>Description</h5>
         #GetPhysicalDeviceQueueFamilyProperties2KHR() behaves similarly to #GetPhysicalDeviceQueueFamilyProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -306,9 +312,10 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         To query memory properties, call:
 
-        <pre><code>void vkGetPhysicalDeviceMemoryProperties2KHR(
+        <code><pre>
+￿void vkGetPhysicalDeviceMemoryProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceMemoryProperties2KHR*       pMemoryProperties);</code></pre>
+￿    VkPhysicalDeviceMemoryProperties2KHR*       pMemoryProperties);</pre></code>
 
         <h5>Description</h5>
         #GetPhysicalDeviceMemoryProperties2KHR() behaves similarly to #GetPhysicalDeviceMemoryProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -335,11 +342,12 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         <h5>C Specification</h5>
         #GetPhysicalDeviceSparseImageFormatProperties2KHR() returns an array of ##VkSparseImageFormatProperties2KHR. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.
 
-        <pre><code>void vkGetPhysicalDeviceSparseImageFormatProperties2KHR(
+        <code><pre>
+￿void vkGetPhysicalDeviceSparseImageFormatProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceSparseImageFormatInfo2KHR* pFormatInfo,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkSparseImageFormatProperties2KHR*          pProperties);</code></pre>
+￿    VkSparseImageFormatProperties2KHR*          pProperties);</pre></code>
 
         <h5>Description</h5>
         #GetPhysicalDeviceSparseImageFormatProperties2KHR() behaves identically to #GetPhysicalDeviceSparseImageFormatProperties(), with the ability to return extended information by adding extension structures to its {@code pNext} chain.

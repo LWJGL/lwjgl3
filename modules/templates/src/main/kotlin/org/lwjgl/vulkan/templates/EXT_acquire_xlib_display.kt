@@ -78,10 +78,11 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         <h5>C Specification</h5>
         To acquire permission to directly access a display in Vulkan from an X11 server, call:
 
-        <pre><code>VkResult vkAcquireXlibDisplayEXT(
+        <code><pre>
+￿VkResult vkAcquireXlibDisplayEXT(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    Display*                                    dpy,
-￿    VkDisplayKHR                                display);</code></pre>
+￿    VkDisplayKHR                                display);</pre></code>
 
         <h5>Description</h5>
         All permissions necessary to control the display are granted to the Vulkan instance associated with {@code physicalDevice} until the display is released or the X11 connection specified by {@code dpy} is terminated. Permission to access the display <b>may</b> be temporarily revoked during periods when the X11 server from which control was acquired itself looses access to {@code display}. During such periods, operations which require access to the display <b>must</b> fail with an approriate error code. If the X11 server associated with {@code dpy} does not own {@code display}, or if permission to access it has already been acquired by another entity, the call <b>must</b> return the error code VK_ERROR_INITIALIZATION_FAILED.
@@ -119,11 +120,12 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         <h5>C Specification</h5>
         When acquiring displays from an X11 server, an application may also wish to enumerate and identify them using a native handle rather than a {@code VkDisplayKHR} handle. To determine the {@code VkDisplayKHR} handle corresponding to an X11 RandR Output, call:
 
-        <pre><code>VkResult vkGetRandROutputDisplayEXT(
+        <code><pre>
+￿VkResult vkGetRandROutputDisplayEXT(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    Display*                                    dpy,
 ￿    RROutput                                    rrOutput,
-￿    VkDisplayKHR*                               pDisplay);</code></pre>
+￿    VkDisplayKHR*                               pDisplay);</pre></code>
 
         <h5>Description</h5>
         If there is no VkDisplayKHR corresponding to {@code rrOutput} on {@code physicalDevice}, #NULL_HANDLE <b>must</b> be returned in {@code pDisplay}.

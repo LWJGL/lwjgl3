@@ -74,9 +74,10 @@ val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_m
         <h5>C Specification</h5>
         To release a previously acquired display, call:
 
-        <pre><code>VkResult vkReleaseDisplayEXT(
+        <code><pre>
+￿VkResult vkReleaseDisplayEXT(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkDisplayKHR                                display);</code></pre>
+￿    VkDisplayKHR                                display);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

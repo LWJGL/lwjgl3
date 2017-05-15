@@ -79,11 +79,12 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
         <h5>C Specification</h5>
         To export a POSIX file descriptor representing the underlying resources of a Vulkan device memory object, call:
 
-        <pre><code>VkResult vkGetMemoryFdKHX(
+        <code><pre>
+￿VkResult vkGetMemoryFdKHX(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
 ￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
-￿    int*                                        pFd);</code></pre>
+￿    int*                                        pFd);</pre></code>
 
         <h5>Description</h5>
         The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHX} for a description of the properties of the defined external memory handle types.
@@ -134,11 +135,12 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
         <h5>C Specification</h5>
         POSIX file descriptor memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:
 
-        <pre><code>VkResult vkGetMemoryFdPropertiesKHX(
+        <code><pre>
+￿VkResult vkGetMemoryFdPropertiesKHX(
 ￿    VkDevice                                    device,
 ￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
 ￿    int                                         fd,
-￿    VkMemoryFdPropertiesKHX*                    pMemoryFdProperties);</code></pre>
+￿    VkMemoryFdPropertiesKHX*                    pMemoryFdProperties);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>

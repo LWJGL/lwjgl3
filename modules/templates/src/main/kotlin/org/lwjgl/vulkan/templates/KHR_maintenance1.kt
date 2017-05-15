@@ -114,10 +114,11 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
         <h5>C Specification</h5>
         To trim a command pool, call:
 
-        <pre><code>void vkTrimCommandPoolKHR(
+        <code><pre>
+￿void vkTrimCommandPoolKHR(
 ￿    VkDevice                                    device,
 ￿    VkCommandPool                               commandPool,
-￿    VkCommandPoolTrimFlagsKHR                   flags);</code></pre>
+￿    VkCommandPoolTrimFlagsKHR                   flags);</pre></code>
 
         <h5>Description</h5>
         Trimming a command pool recycles unused memory from the command pool back to the system. Command buffers allocated from the pool are not affected by the command.

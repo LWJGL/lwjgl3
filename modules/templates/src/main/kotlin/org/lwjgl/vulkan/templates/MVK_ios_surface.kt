@@ -76,11 +76,12 @@ val MVK_ios_surface = "MVKIosSurface".nativeClassVK("MVK_ios_surface", type = "i
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for an iOS {@code UIView}, call:
 
-        <pre><code>VkResult vkCreateIOSSurfaceMVK(
+        <code><pre>
+￿VkResult vkCreateIOSSurfaceMVK(
 ￿    VkInstance                                  instance,
 ￿    const VkIOSSurfaceCreateInfoMVK*            pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSurfaceKHR*                               pSurface);</code></pre>
+￿    VkSurfaceKHR*                               pSurface);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

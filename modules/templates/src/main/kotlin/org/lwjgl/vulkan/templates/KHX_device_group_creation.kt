@@ -14,7 +14,8 @@ val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_devi
         This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the VK_KHX_device_group extension.
 
         <h5>Examples</h5>
-        <pre><code>￿    VkDeviceCreateInfo devCreateInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
+        <code><pre>
+￿    VkDeviceCreateInfo devCreateInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
 ￿    // (not shown) fill out devCreateInfo as usual.
 ￿    uint32_t deviceGroupCount = 0;
 ￿    VkPhysicalDeviceGroupPropertiesKHX *props = NULL;
@@ -40,7 +41,7 @@ val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_devi
 ￿    }
 ￿
 ￿    vkCreateDevice(props[0].physicalDevices[0], &devCreateInfo, NULL, &g_vkDevice);
-￿    free(props);</code></pre>
+￿    free(props);</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -120,10 +121,11 @@ val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_devi
         <h5>C Specification</h5>
         To retrieve a list of the device groups present in the system, call:
 
-        <pre><code>VkResult vkEnumeratePhysicalDeviceGroupsKHX(
+        <code><pre>
+￿VkResult vkEnumeratePhysicalDeviceGroupsKHX(
 ￿    VkInstance                                  instance,
 ￿    uint32_t*                                   pPhysicalDeviceGroupCount,
-￿    VkPhysicalDeviceGroupPropertiesKHX*         pPhysicalDeviceGroupProperties);</code></pre>
+￿    VkPhysicalDeviceGroupPropertiesKHX*         pPhysicalDeviceGroupProperties);</pre></code>
 
         <h5>Description</h5>
         If {@code pPhysicalDeviceGroupProperties} is {@code NULL}, then the number of device groups available is returned in {@code pPhysicalDeviceGroupCount}. Otherwise, {@code pPhysicalDeviceGroupCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPhysicalDeviceGroupProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pPhysicalDeviceGroupProperties}. If {@code pPhysicalDeviceGroupCount} is less than the number of device groups available, at most {@code pPhysicalDeviceGroupCount} structures will be written. If {@code pPhysicalDeviceGroupCount} is smaller than the number of device groups available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available device groups were returned.

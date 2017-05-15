@@ -16,7 +16,8 @@ val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicate
         This extension adds a few small structures to resource creation and memory allocation: a new structure that flags whether am image/buffer will have a dedicated allocation, and a structure indicating the image or buffer that an allocation will be bound to.
 
         <h5>Examples</h5>
-        <pre><code>￿    // Create an image with
+        <code><pre>
+￿    // Create an image with
 ￿    // VkDedicatedAllocationImageCreateInfoNV::dedicatedAllocation
 ￿    // set to VK_TRUE
 ￿
@@ -79,7 +80,7 @@ val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicate
 ￿        device,
 ￿        image,
 ￿        memory,
-￿        0);</code></pre>
+￿        0);</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>

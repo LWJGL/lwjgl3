@@ -93,12 +93,13 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
         <h5>C Specification</h5>
         When the {@code VK_KHR_display_swapchain} extension is enabled, multiple swapchains that share presentable images are created by calling:
 
-        <pre><code>VkResult vkCreateSharedSwapchainsKHR(
+        <code><pre>
+￿VkResult vkCreateSharedSwapchainsKHR(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    swapchainCount,
 ￿    const VkSwapchainCreateInfoKHR*             pCreateInfos,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSwapchainKHR*                             pSwapchains);</code></pre>
+￿    VkSwapchainKHR*                             pSwapchains);</pre></code>
 
         <h5>Description</h5>
         #CreateSharedSwapchainsKHR() is similar to #CreateSwapchainKHR(), except that it takes an array of ##VkSwapchainCreateInfoKHR structures, and returns an array of swapchain objects.

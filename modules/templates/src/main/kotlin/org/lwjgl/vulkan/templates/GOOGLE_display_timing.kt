@@ -86,10 +86,11 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
         <h5>C Specification</h5>
         To query the duration of a refresh cycle (RC) for the presentation engine's display, call:
 
-        <pre><code>VkResult vkGetRefreshCycleDurationGOOGLE(
+        <code><pre>
+￿VkResult vkGetRefreshCycleDurationGOOGLE(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
-￿    VkRefreshCycleDurationGOOGLE*               pDisplayTimingProperties);</code></pre>
+￿    VkRefreshCycleDurationGOOGLE*               pDisplayTimingProperties);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -136,11 +137,12 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
 
         To asynchronously query the presentation engine, for newly-available timing information about one or more previous presents to a given swapchain, call:
 
-        <pre><code>VkResult vkGetPastPresentationTimingGOOGLE(
+        <code><pre>
+￿VkResult vkGetPastPresentationTimingGOOGLE(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
 ￿    uint32_t*                                   pPresentationTimingCount,
-￿    VkPastPresentationTimingGOOGLE*             pPresentationTimings);</code></pre>
+￿    VkPastPresentationTimingGOOGLE*             pPresentationTimings);</pre></code>
 
         <h5>Description</h5>
         If {@code pPresentationTimings} is {@code NULL}, then the number of newly-available timing records for the given {@code swapchain} is returned in {@code pPresentationTimingCount}. Otherwise, {@code pPresentationTimingCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPresentationTimings} array, and on return the variable is overwritten with the number of structures actually written to {@code pPresentationTimings}. If the value of {@code pPresentationTimingCount} is less than the number of newly-available timing records, at most {@code pPresentationTimingCount} structures will be written. If {@code pPresentationTimingCount} is smaller than the number of newly-available timing records for the given {@code swapchain}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.

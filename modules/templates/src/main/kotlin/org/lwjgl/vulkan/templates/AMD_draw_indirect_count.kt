@@ -73,14 +73,15 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
         <h5>C Specification</h5>
         To record a non-indexed draw call with a draw call count sourced from a buffer, call:
 
-        <pre><code>void vkCmdDrawIndirectCountAMD(
+        <code><pre>
+￿void vkCmdDrawIndirectCountAMD(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
 ￿    VkDeviceSize                                offset,
 ￿    VkBuffer                                    countBuffer,
 ￿    VkDeviceSize                                countBufferOffset,
 ￿    uint32_t                                    maxDrawCount,
-￿    uint32_t                                    stride);</code></pre>
+￿    uint32_t                                    stride);</pre></code>
 
         <h5>Description</h5>
         #CmdDrawIndirectCountAMD() behaves similar to #CmdDrawIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.
@@ -154,14 +155,15 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
         <h5>C Specification</h5>
         To record an indexed draw call with a draw call count sourced from a buffer, call:
 
-        <pre><code>void vkCmdDrawIndexedIndirectCountAMD(
+        <code><pre>
+￿void vkCmdDrawIndexedIndirectCountAMD(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
 ￿    VkDeviceSize                                offset,
 ￿    VkBuffer                                    countBuffer,
 ￿    VkDeviceSize                                countBufferOffset,
 ￿    uint32_t                                    maxDrawCount,
-￿    uint32_t                                    stride);</code></pre>
+￿    uint32_t                                    stride);</pre></code>
 
         <h5>Description</h5>
         #CmdDrawIndexedIndirectCountAMD() behaves similar to #CmdDrawIndirectCountAMD() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.

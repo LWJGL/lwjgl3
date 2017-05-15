@@ -101,7 +101,8 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
         <h5>C Specification</h5>
         The prototype for the callback function implemented by the application is:
 
-        <pre><code>typedef VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
+        <code><pre>
+￿typedef VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
 ￿    VkDebugReportFlagsEXT                       flags,
 ￿    VkDebugReportObjectTypeEXT                  objectType,
 ￿    uint64_t                                    object,
@@ -109,7 +110,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 ￿    int32_t                                     messageCode,
 ￿    const char*                                 pLayerPrefix,
 ￿    const char*                                 pMessage,
-￿    void*                                       pUserData);</code></pre>
+￿    void*                                       pUserData);</pre></code>
 
         <h5>Description</h5>
         The callback returns a {@code VkBool32} that indicates to the calling layer if the Vulkan call <b>should</b> be aborted or not. Applications <b>should</b> always return #FALSE so that they see the same behavior with and without validation layers enabled.
@@ -118,7 +119,8 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 
         The object types are:
 
-        <pre><code>typedef enum VkDebugReportObjectTypeEXT {
+        <code><pre>
+￿typedef enum VkDebugReportObjectTypeEXT {
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT = 0,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT = 1,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT = 2,
@@ -153,7 +155,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT = 31,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT = 32,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT = 1000085000,
-} VkDebugReportObjectTypeEXT;</code></pre>
+￿} VkDebugReportObjectTypeEXT;</pre></code>
 
         <ul>
             <li>#DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT is an unknown object.</li>
@@ -255,9 +257,10 @@ val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR"
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSwapchainCreateFlagsKHR.member("flags", """a bitmask indicating parameters of swapchain creation. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkSwapchainCreateFlagBitsKHR {
+<code><pre>
+￿typedef enum VkSwapchainCreateFlagBitsKHR {
 ￿    VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX = 0x00000001,
-} VkSwapchainCreateFlagBitsKHR;</code></pre>
+￿} VkSwapchainCreateFlagBitsKHR;</pre></code>
 
         == Description
 
@@ -606,13 +609,14 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDebugReportFlagsEXT.member("flags", """indicate which event(s) will cause this callback to be called. Flags are interpreted as bitmasks and multiple may be set. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkDebugReportFlagBitsEXT {
+<code><pre>
+￿typedef enum VkDebugReportFlagBitsEXT {
 ￿    VK_DEBUG_REPORT_INFORMATION_BIT_EXT = 0x00000001,
 ￿    VK_DEBUG_REPORT_WARNING_BIT_EXT = 0x00000002,
 ￿    VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT = 0x00000004,
 ￿    VK_DEBUG_REPORT_ERROR_BIT_EXT = 0x00000008,
 ￿    VK_DEBUG_REPORT_DEBUG_BIT_EXT = 0x00000010,
-} VkDebugReportFlagBitsEXT;</code></pre>
+￿} VkDebugReportFlagBitsEXT;</pre></code>
 
         <ul>
             <li>#DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause undefined results, including an application crash.</li>
@@ -1239,9 +1243,10 @@ val VkMemoryAllocateFlagsInfoKHX = struct(VULKAN_PACKAGE, "VkMemoryAllocateFlags
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkMemoryAllocateFlagsKHX.member("flags", """a bitmask of flags controlling the allocation. The bits specified in {@code flags} are:
-<pre><code>typedef enum VkMemoryAllocateFlagBitsKHX {
+<code><pre>
+￿typedef enum VkMemoryAllocateFlagBitsKHX {
 ￿    VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX = 0x00000001,
-} VkMemoryAllocateFlagBitsKHX;</code></pre>
+￿} VkMemoryAllocateFlagBitsKHX;</pre></code>
 
         <ul>
             <li>if {@code flags} contains #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX, memory will be allocated for the devices in {@code deviceMask}.</li>
@@ -1504,12 +1509,13 @@ val VkDeviceGroupPresentCapabilitiesKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupP
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.array("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.", size = "VK_MAX_DEVICE_GROUP_SIZE_KHX")
     VkDeviceGroupPresentModeFlagsKHX.member("modes", """a bitmask indicating which device group presentation modes are supported. The bits returned in {@code modes} are:
-<pre><code>typedef enum VkDeviceGroupPresentModeFlagBitsKHX {
+<code><pre>
+￿typedef enum VkDeviceGroupPresentModeFlagBitsKHX {
 ￿    VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX = 0x00000001,
 ￿    VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX = 0x00000002,
 ￿    VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX = 0x00000004,
 ￿    VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX = 0x00000008,
-} VkDeviceGroupPresentModeFlagBitsKHX;</code></pre>
+￿} VkDeviceGroupPresentModeFlagBitsKHX;</pre></code>
 
         <ul>
             <li>if {@code modes} contains #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX, any physical device with a presentation engine <b>can</b> present its own swapchain images.</li>
@@ -1701,9 +1707,10 @@ val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pDisabledValidationChecks")..uint32_t.member("disabledValidationCheckCount", "the number of checks to disable.")
     VkValidationCheckEXT.p.member("pDisabledValidationChecks", """a pointer to an array of values specifying the validation checks to be disabled. Checks which <b>may</b> be specified include:
-<pre><code>typedef enum VkValidationCheckEXT {
+<code><pre>
+￿typedef enum VkValidationCheckEXT {
 ￿    VK_VALIDATION_CHECK_ALL_EXT = 0,
-} VkValidationCheckEXT;</code></pre>
+￿} VkValidationCheckEXT;</pre></code>
 
         <ul>
             <li>#VALIDATION_CHECK_ALL_EXT disables all validation checks.</li>
@@ -1791,7 +1798,8 @@ val VkPhysicalDeviceExternalImageFormatInfoKHX = struct(VULKAN_PACKAGE, "VkPhysi
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagBitsKHX.member("handleType", """a bit indicating a memory handle type that will be used with the memory associated with the image. Bits which can be set include:
-<pre><code>typedef enum VkExternalMemoryHandleTypeFlagBitsKHX {
+<code><pre>
+￿typedef enum VkExternalMemoryHandleTypeFlagBitsKHX {
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX = 0x00000001,
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX = 0x00000002,
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX = 0x00000004,
@@ -1799,7 +1807,7 @@ val VkPhysicalDeviceExternalImageFormatInfoKHX = struct(VULKAN_PACKAGE, "VkPhysi
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX = 0x00000010,
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX = 0x00000020,
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX = 0x00000040,
-} VkExternalMemoryHandleTypeFlagBitsKHX;</code></pre>
+￿} VkExternalMemoryHandleTypeFlagBitsKHX;</pre></code>
 
         <ul>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX is a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls fname:dup, fname:dup2, fname:close, and the non-standard system call fname:dup3. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
@@ -2133,13 +2141,14 @@ val VkPhysicalDeviceExternalSemaphoreInfoKHX = struct(VULKAN_PACKAGE, "VkPhysica
     VkStructureType.member("sType", "the type of this structure")
     nullable..const..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
     VkExternalSemaphoreHandleTypeFlagBitsKHX.member("handleType", """a bit indicating an external semaphore handle type for which capabilities will be returned. Bits which can be set include:
-<pre><code>typedef enum VkExternalSemaphoreHandleTypeFlagBitsKHX {
+<code><pre>
+￿typedef enum VkExternalSemaphoreHandleTypeFlagBitsKHX {
 ￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX = 0x00000001,
 ￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX = 0x00000002,
 ￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX = 0x00000004,
 ￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX = 0x00000008,
 ￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX = 0x00000010,
-} VkExternalSemaphoreHandleTypeFlagBitsKHX;</code></pre>
+￿} VkExternalSemaphoreHandleTypeFlagBitsKHX;</pre></code>
 
         <ul>
             <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX is a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls fname:dup, fname:dup2, fname:close, and the non-standard system call fname:dup3. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
@@ -2622,12 +2631,13 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
         <h5>Description</h5>
         Bits which <b>can</b> be set in {@code flags} are:
 
-        <pre><code>typedef enum VkIndirectCommandsLayoutUsageFlagBitsNVX {
+        <code><pre>
+￿typedef enum VkIndirectCommandsLayoutUsageFlagBitsNVX {
 ￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX = 0x00000001,
 ￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX = 0x00000002,
 ￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX = 0x00000004,
 ￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX = 0x00000008,
-} VkIndirectCommandsLayoutUsageFlagBitsNVX;</code></pre>
+￿} VkIndirectCommandsLayoutUsageFlagBitsNVX;</pre></code>
 
         <ul>
             <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX indicates that the processing of sequences <b>can</b> happen at an implementation-dependent order, which is not guaranteed to be coherent across multiple invocations.</li>
@@ -2638,8 +2648,9 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
 
         The following code illustrates some of the key flags:
 
-        <pre><code>void cmdProcessAllSequences(cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequencesCount, indexbuffer, indexbufferoffset)
-{
+        <code><pre>
+￿void cmdProcessAllSequences(cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequencesCount, indexbuffer, indexbufferoffset)
+￿{
 ￿  for (s = 0; s < sequencesCount; s++)
 ￿  {
 ￿    sequence = s;
@@ -2653,7 +2664,7 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
 ￿
 ￿    cmdProcessSequence( cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequence );
 ￿  }
-}</code></pre>
+￿}</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2783,13 +2794,14 @@ val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfo
         <h5>Description</h5>
         Types which <b>can</b> be set in {@code pObjectEntryTypes} are:
 
-        <pre><code>typedef enum VkObjectEntryTypeNVX {
+        <code><pre>
+￿typedef enum VkObjectEntryTypeNVX {
 ￿    VK_OBJECT_ENTRY_DESCRIPTOR_SET_NVX = 0,
 ￿    VK_OBJECT_ENTRY_PIPELINE_NVX = 1,
 ￿    VK_OBJECT_ENTRY_INDEX_BUFFER_NVX = 2,
 ￿    VK_OBJECT_ENTRY_VERTEX_BUFFER_NVX = 3,
 ￿    VK_OBJECT_ENTRY_PUSH_CONSTANT_NVX = 4,
-} VkObjectEntryTypeNVX;</code></pre>
+￿} VkObjectEntryTypeNVX;</pre></code>
 
         <ul>
             <li>#OBJECT_ENTRY_DESCRIPTOR_SET_NVX indicates a {@code VkDescriptorSet} resource entry that is registered via ##VkObjectTableDescriptorSetEntryNVX.</li>
@@ -2801,10 +2813,11 @@ val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfo
 
         Bits which <b>can</b> be set in {@code pObjectEntryUsageFlags} are:
 
-        <pre><code>typedef enum VkObjectEntryUsageFlagBitsNVX {
+        <code><pre>
+￿typedef enum VkObjectEntryUsageFlagBitsNVX {
 ￿    VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX = 0x00000001,
 ￿    VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX = 0x00000002,
-} VkObjectEntryUsageFlagBitsNVX;</code></pre>
+￿} VkObjectEntryUsageFlagBitsNVX;</pre></code>
 
         <ul>
             <li>#OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
@@ -3096,11 +3109,12 @@ val VkDisplayPowerInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayPowerInfoEXT") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplayPowerStateEXT.member("powerState", """the new power state of the display. Possible values are:
-<pre><code>typedef enum VkDisplayPowerStateEXT {
+<code><pre>
+￿typedef enum VkDisplayPowerStateEXT {
 ￿    VK_DISPLAY_POWER_STATE_OFF_EXT = 0,
 ￿    VK_DISPLAY_POWER_STATE_SUSPEND_EXT = 1,
 ￿    VK_DISPLAY_POWER_STATE_ON_EXT = 2,
-} VkDisplayPowerStateEXT;</code></pre>
+￿} VkDisplayPowerStateEXT;</pre></code>
 
         <ul>
             <li>#DISPLAY_POWER_STATE_OFF_EXT means the display is powered down.</li>
@@ -3149,9 +3163,10 @@ val VkDisplayEventInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayEventInfoEXT") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplayEventTypeEXT.member("displayEvent", """specifies when the fence will be signaled. Possible values are:
-<pre><code>typedef enum VkDisplayEventTypeEXT {
+<code><pre>
+￿typedef enum VkDisplayEventTypeEXT {
 ￿    VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT = 0,
-} VkDisplayEventTypeEXT;</code></pre>
+￿} VkDisplayEventTypeEXT;</pre></code>
 
         <ul>
             <li>#DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT occurs when the first pixel of the next display refresh cycle leaves the display engine for the display.</li>

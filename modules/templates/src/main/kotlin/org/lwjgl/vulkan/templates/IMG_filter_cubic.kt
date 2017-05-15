@@ -16,7 +16,8 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type =
         <h5>Example</h5>
         Creating a sampler with the new filter for both magnification and minification
 
-        <pre><code>￿    VkSamplerCreateInfo createInfo =
+        <code><pre>
+￿    VkSamplerCreateInfo createInfo =
 ￿    {
 ￿        VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO // sType
 ￿        // Other members set to application-desired values
@@ -29,7 +30,7 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type =
 ￿    VkResult result = vkCreateSampler(
 ￿        device,
 ￿        &createInfo,
-￿        &sampler);</code></pre>
+￿        &sampler);</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>

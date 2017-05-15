@@ -2488,63 +2488,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         since = "version 2.2"
     )
 
-/*! @brief Returns the state of all hats of the specified joystick.
- *
- *  This function returns the state of all hats of the specified joystick.
- *  Each element in the array is one of the following values:
- *
- *  Name                  | Value
- *  --------------------- | --------------------------------
- *  `GLFW_HAT_CENTERED`   | 0
- *  `GLFW_HAT_UP`         | 1
- *  `GLFW_HAT_RIGHT`      | 2
- *  `GLFW_HAT_DOWN`       | 4
- *  `GLFW_HAT_LEFT`       | 8
- *  `GLFW_HAT_RIGHT_UP`   | `GLFW_HAT_RIGHT` \| `GLFW_HAT_UP`
- *  `GLFW_HAT_RIGHT_DOWN` | `GLFW_HAT_RIGHT` \| `GLFW_HAT_DOWN`
- *  `GLFW_HAT_LEFT_UP`    | `GLFW_HAT_LEFT` \| `GLFW_HAT_UP`
- *  `GLFW_HAT_LEFT_DOWN`  | `GLFW_HAT_LEFT` \| `GLFW_HAT_DOWN`
- *
- *  The diagonal directions are bitwise combinations of the primary (up, right,
- *  down and left) directions and you can test for these individually by ANDing
- *  it with the corresponding direction.
- *
- *  @code
- *  if (hats[2] & GLFW_HAT_RIGHT)
- *  {
- *      // State of hat 2 could be right-up, right or right-down
- *  }
- *  @endcode
- *
- *  Querying a joystick ID with no device present is not an error, but will
- *  cause this function to return `NULL`.  Call @ref glfwJoystickPresent to
- *  check device presence.
- *
- *  @param[in] jid The [joystick](@ref joysticks) to query.
- *  @param[out] count Where to store the number of hat states in the returned
- *  array.  This is set to zero if the joystick is not present or an error
- *  occurred.
- *  @return An array of hat states, or `NULL` if the joystick is not present
- *  or an [error](@ref error_handling) occurred.
- *
- *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
- *  GLFW_INVALID_ENUM and @ref GLFW_PLATFORM_ERROR.
- *
- *  @bug @linux Joystick hats are currently unimplemented.
- *
- *  @pointer_lifetime The returned array is allocated and freed by GLFW.  You
- *  should not free it yourself.  It is valid until the specified joystick is
- *  disconnected, this function is called again for that joystick or the library
- *  is terminated.
- *
- *  @thread_safety This function must only be called from the main thread.
- *
- *  @sa @ref joystick_hat
- *
- *  @since Added in version 3.3.
- *
- *  @ingroup input
- */
     const..unsigned_char_p(
         "GetJoystickHats",
         """

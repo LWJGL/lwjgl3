@@ -2617,10 +2617,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create an instance object, call:
 
-        <pre><code>VkResult vkCreateInstance(
+        <code><pre>
+￿VkResult vkCreateInstance(
 ￿    const VkInstanceCreateInfo*                 pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkInstance*                                 pInstance);</code></pre>
+￿    VkInstance*                                 pInstance);</pre></code>
 
         <h5>Description</h5>
         #CreateInstance() creates the instance, then enables and initializes global layers and extensions requested by the application. If an extension is provided by a layer, both the layer and extension <b>must</b> be specified at #CreateInstance() time. If a specified layer cannot be found, no {@code VkInstance} will be created and the function will return #ERROR_LAYER_NOT_PRESENT. Likewise, if a specified extension cannot be found the call will return #ERROR_EXTENSION_NOT_PRESENT.
@@ -2667,9 +2668,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy an instance, call:
 
-        <pre><code>void vkDestroyInstance(
+        <code><pre>
+￿void vkDestroyInstance(
 ￿    VkInstance                                  instance,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2705,10 +2707,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To retrieve a list of physical device objects representing the physical devices installed in the system, call:
 
-        <pre><code>VkResult vkEnumeratePhysicalDevices(
+        <code><pre>
+￿VkResult vkEnumeratePhysicalDevices(
 ￿    VkInstance                                  instance,
 ￿    uint32_t*                                   pPhysicalDeviceCount,
-￿    VkPhysicalDevice*                           pPhysicalDevices);</code></pre>
+￿    VkPhysicalDevice*                           pPhysicalDevices);</pre></code>
 
         <h5>Description</h5>
         If {@code pPhysicalDevices} is {@code NULL}, then the number of physical devices available is returned in {@code pPhysicalDeviceCount}. Otherwise, {@code pPhysicalDeviceCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPhysicalDevices} array, and on return the variable is overwritten with the number of handles actually written to {@code pPhysicalDevices}. If {@code pPhysicalDeviceCount} is less than the number of physical devices available, at most {@code pPhysicalDeviceCount} structures will be written. If {@code pPhysicalDeviceCount} is smaller than the number of physical devices available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available physical devices were returned.
@@ -2750,9 +2753,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query supported features, call:
 
-        <pre><code>void vkGetPhysicalDeviceFeatures(
+        <code><pre>
+￿void vkGetPhysicalDeviceFeatures(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceFeatures*                   pFeatures);</code></pre>
+￿    VkPhysicalDeviceFeatures*                   pFeatures);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2776,10 +2780,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query supported format features which are properties of the physical device, call:
 
-        <pre><code>void vkGetPhysicalDeviceFormatProperties(
+        <code><pre>
+￿void vkGetPhysicalDeviceFormatProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
-￿    VkFormatProperties*                         pFormatProperties);</code></pre>
+￿    VkFormatProperties*                         pFormatProperties);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2805,14 +2810,15 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query additional capabilities specific to image types, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceImageFormatProperties(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceImageFormatProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
 ￿    VkImageType                                 type,
 ￿    VkImageTiling                               tiling,
 ￿    VkImageUsageFlags                           usage,
 ￿    VkImageCreateFlags                          flags,
-￿    VkImageFormatProperties*                    pImageFormatProperties);</code></pre>
+￿    VkImageFormatProperties*                    pImageFormatProperties);</pre></code>
 
         <h5>Description</h5>
         The {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} parameters correspond to parameters that would be consumed by #CreateImage() (as members of ##VkImageCreateInfo).
@@ -2869,9 +2875,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query general properties of physical devices once enumerated, call:
 
-        <pre><code>void vkGetPhysicalDeviceProperties(
+        <code><pre>
+￿void vkGetPhysicalDeviceProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceProperties*                 pProperties);</code></pre>
+￿    VkPhysicalDeviceProperties*                 pProperties);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2895,10 +2902,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query properties of queues available on a physical device, call:
 
-        <pre><code>void vkGetPhysicalDeviceQueueFamilyProperties(
+        <code><pre>
+￿void vkGetPhysicalDeviceQueueFamilyProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pQueueFamilyPropertyCount,
-￿    VkQueueFamilyProperties*                    pQueueFamilyProperties);</code></pre>
+￿    VkQueueFamilyProperties*                    pQueueFamilyProperties);</pre></code>
 
         <h5>Description</h5>
         If {@code pQueueFamilyProperties} is {@code NULL}, then the number of queue families available is returned in {@code pQueueFamilyPropertyCount}. Otherwise, {@code pQueueFamilyPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pQueueFamilyProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pQueueFamilyProperties}. If {@code pQueueFamilyPropertyCount} is less than the number of queue families available, at most {@code pQueueFamilyPropertyCount} structures will be written.
@@ -2927,9 +2935,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query memory properties, call:
 
-        <pre><code>void vkGetPhysicalDeviceMemoryProperties(
+        <code><pre>
+￿void vkGetPhysicalDeviceMemoryProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceMemoryProperties*           pMemoryProperties);</code></pre>
+￿    VkPhysicalDeviceMemoryProperties*           pMemoryProperties);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2953,9 +2962,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         Vulkan commands are not necessarily exposed statically on a platform. Function pointers for all Vulkan commands <b>can</b> be obtained with the command:
 
-        <pre><code>PFN_vkVoidFunction vkGetInstanceProcAddr(
+        <code><pre>
+￿PFN_vkVoidFunction vkGetInstanceProcAddr(
 ￿    VkInstance                                  instance,
-￿    const char*                                 pName);</code></pre>
+￿    const char*                                 pName);</pre></code>
 
         <h5>Description</h5>
         #GetInstanceProcAddr() itself is obtained in a platform- and loader- specific manner. Typically, the loader library will export this command as a function symbol, so applications <b>can</b> link against the loader library, or load it dynamically and look up the symbol using platform-specific APIs. Loaders are encouraged to export function symbols for all other core Vulkan commands as well; if this is done, then applications that use only the core Vulkan commands have no need to use #GetInstanceProcAddr().
@@ -3011,9 +3021,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         In order to support systems with multiple Vulkan implementations comprising heterogeneous collections of hardware and software, the function pointers returned by #GetInstanceProcAddr() <b>may</b> point to dispatch code, which calls a different real implementation for different {@code VkDevice} objects (and objects created from them). The overhead of this internal dispatch <b>can</b> be avoided by obtaining device-specific function pointers for any commands that use a device or device-child object as their dispatchable object. Such function pointers <b>can</b> be obtained with the command:
 
-        <pre><code>PFN_vkVoidFunction vkGetDeviceProcAddr(
+        <code><pre>
+￿PFN_vkVoidFunction vkGetDeviceProcAddr(
 ￿    VkDevice                                    device,
-￿    const char*                                 pName);</code></pre>
+￿    const char*                                 pName);</pre></code>
 
         <h5>Description</h5>
         The returned function pointer is of type {@code PFN_vkVoidFunction}, and must be cast to the type of the command being queried.
@@ -3060,11 +3071,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         A logical device is created as a <em>connection</em> to a physical device. To create a logical device, call:
 
-        <pre><code>VkResult vkCreateDevice(
+        <code><pre>
+￿VkResult vkCreateDevice(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkDeviceCreateInfo*                   pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDevice*                                   pDevice);</code></pre>
+￿    VkDevice*                                   pDevice);</pre></code>
 
         <h5>Description</h5>
         Multiple logical devices <b>can</b> be created from the same physical device. Logical device creation <b>may</b> fail due to lack of device-specific resources (in addition to the other errors). If that occurs, #CreateDevice() will return #ERROR_TOO_MANY_OBJECTS.
@@ -3114,9 +3126,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a device, call:
 
-        <pre><code>void vkDestroyDevice(
+        <code><pre>
+￿void vkDestroyDevice(
 ￿    VkDevice                                    device,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         To ensure that no work is active on the device, #DeviceWaitIdle() <b>can</b> be used to gate the destruction of the device. Prior to destroying a device, an application is responsible for destroying/freeing any Vulkan objects that were created using that device as the first parameter of the corresponding ftext:vkCreate* or ftext:vkAllocate* command.
@@ -3161,10 +3174,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the available instance extensions, call:
 
-        <pre><code>VkResult vkEnumerateInstanceExtensionProperties(
+        <code><pre>
+￿VkResult vkEnumerateInstanceExtensionProperties(
 ￿    const char*                                 pLayerName,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkExtensionProperties*                      pProperties);</code></pre>
+￿    VkExtensionProperties*                      pProperties);</pre></code>
 
         <h5>Description</h5>
         When {@code pLayerName} parameter is NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When {@code pLayerName} is the name of a layer, the instance extensions provided by that layer are returned.
@@ -3213,11 +3227,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the extensions available to a given physical device, call:
 
-        <pre><code>VkResult vkEnumerateDeviceExtensionProperties(
+        <code><pre>
+￿VkResult vkEnumerateDeviceExtensionProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const char*                                 pLayerName,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkExtensionProperties*                      pProperties);</code></pre>
+￿    VkExtensionProperties*                      pProperties);</pre></code>
 
         <h5>Description</h5>
         When {@code pLayerName} parameter is NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When {@code pLayerName} is the name of a layer, the device extensions provided by that layer are returned.
@@ -3266,9 +3281,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the available layers, call:
 
-        <pre><code>VkResult vkEnumerateInstanceLayerProperties(
+        <code><pre>
+￿VkResult vkEnumerateInstanceLayerProperties(
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkLayerProperties*                          pProperties);</code></pre>
+￿    VkLayerProperties*                          pProperties);</pre></code>
 
         <h5>Description</h5>
         If {@code pProperties} is {@code NULL}, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of layer properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
@@ -3312,10 +3328,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To enumerate device layers, call:
 
-        <pre><code>VkResult vkEnumerateDeviceLayerProperties(
+        <code><pre>
+￿VkResult vkEnumerateDeviceLayerProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkLayerProperties*                          pProperties);</code></pre>
+￿    VkLayerProperties*                          pProperties);</pre></code>
 
         <h5>Description</h5>
         If {@code pProperties} is {@code NULL}, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of layer properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
@@ -3363,11 +3380,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To retrieve a handle to a VkQueue object, call:
 
-        <pre><code>void vkGetDeviceQueue(
+        <code><pre>
+￿void vkGetDeviceQueue(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    queueFamilyIndex,
 ￿    uint32_t                                    queueIndex,
-￿    VkQueue*                                    pQueue);</code></pre>
+￿    VkQueue*                                    pQueue);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -3396,11 +3414,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To submit command buffers to a queue, call:
 
-        <pre><code>VkResult vkQueueSubmit(
+        <code><pre>
+￿VkResult vkQueueSubmit(
 ￿    VkQueue                                     queue,
 ￿    uint32_t                                    submitCount,
 ￿    const VkSubmitInfo*                         pSubmits,
-￿    VkFence                                     fence);</code></pre>
+￿    VkFence                                     fence);</pre></code>
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -3490,8 +3509,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To wait on the host for the completion of outstanding queue operations for a given queue, call:
 
-        <pre><code>VkResult vkQueueWaitIdle(
-￿    VkQueue                                     queue);</code></pre>
+        <code><pre>
+￿VkResult vkQueueWaitIdle(
+￿    VkQueue                                     queue);</pre></code>
 
         <h5>Description</h5>
         #QueueWaitIdle() is equivalent to submitting a fence to a queue and waiting with an infinite timeout for that fence to signal.
@@ -3534,8 +3554,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To wait on the host for the completion of outstanding queue operations for all queues on a given logical device, call:
 
-        <pre><code>VkResult vkDeviceWaitIdle(
-￿    VkDevice                                    device);</code></pre>
+        <code><pre>
+￿VkResult vkDeviceWaitIdle(
+￿    VkDevice                                    device);</pre></code>
 
         <h5>Description</h5>
         #DeviceWaitIdle() is equivalent to calling #QueueWaitIdle() for all queues owned by {@code device}.
@@ -3579,11 +3600,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To allocate memory objects, call:
 
-        <pre><code>VkResult vkAllocateMemory(
+        <code><pre>
+￿VkResult vkAllocateMemory(
 ￿    VkDevice                                    device,
 ￿    const VkMemoryAllocateInfo*                 pAllocateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDeviceMemory*                             pMemory);</code></pre>
+￿    VkDeviceMemory*                             pMemory);</pre></code>
 
         <h5>Description</h5>
         Allocations returned by #AllocateMemory() are guaranteed to meet any alignment requirement by the implementation. For example, if an implementation requires 128 byte alignment for images and 64 byte alignment for buffers, the device memory returned through this mechanism would be 128-byte aligned. This ensures that applications <b>can</b> correctly suballocate objects of different types (with potentially different alignment requirements) in the same memory object.
@@ -3643,10 +3665,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To free a memory object, call:
 
-        <pre><code>void vkFreeMemory(
+        <code><pre>
+￿void vkFreeMemory(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         Before freeing a memory object, an application <b>must</b> ensure the memory object is no longer in use by the device--for example by command buffers queued for execution. The memory <b>can</b> remain bound to images or buffers at the time the memory object is freed, but any further use of them (on host or device) for anything other than destroying those objects will result in undefined behavior. If there are still any bound images or buffers, the memory <b>may</b> not be immediately released by the implementation, but <b>must</b> be released by the time all bound images and buffers have been destroyed. Once memory is released, it is returned to the heap from which it was allocated.
@@ -3690,13 +3713,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To retrieve a host virtual address pointer to a region of a mappable memory object, call:
 
-        <pre><code>VkResult vkMapMemory(
+        <code><pre>
+￿VkResult vkMapMemory(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
 ￿    VkDeviceSize                                offset,
 ￿    VkDeviceSize                                size,
 ￿    VkMemoryMapFlags                            flags,
-￿    void**                                      ppData);</code></pre>
+￿    void**                                      ppData);</pre></code>
 
         <h5>Description</h5>
         It is an application error to call #MapMemory() on a memory object that is already mapped.
@@ -3769,9 +3793,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To unmap a memory object once host access to it is no longer needed by the application, call:
 
-        <pre><code>void vkUnmapMemory(
+        <code><pre>
+￿void vkUnmapMemory(
 ￿    VkDevice                                    device,
-￿    VkDeviceMemory                              memory);</code></pre>
+￿    VkDeviceMemory                              memory);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -3803,10 +3828,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To flush ranges of non-coherent memory from the host caches, call:
 
-        <pre><code>VkResult vkFlushMappedMemoryRanges(
+        <code><pre>
+￿VkResult vkFlushMappedMemoryRanges(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    memoryRangeCount,
-￿    const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
+￿    const VkMappedMemoryRange*                  pMemoryRanges);</pre></code>
 
         <h5>Description</h5>
         #FlushMappedMemoryRanges() guarantees that host writes to the memory ranges described by {@code pMemoryRanges} <b>can</b> be made available to device access, via <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-available-and-visible">availability operations</a> from the #ACCESS_HOST_WRITE_BIT <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-types">access type</a>.
@@ -3853,10 +3879,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To invalidate ranges of non-coherent memory from the host caches, call:
 
-        <pre><code>VkResult vkInvalidateMappedMemoryRanges(
+        <code><pre>
+￿VkResult vkInvalidateMappedMemoryRanges(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    memoryRangeCount,
-￿    const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
+￿    const VkMappedMemoryRange*                  pMemoryRanges);</pre></code>
 
         <h5>Description</h5>
         #InvalidateMappedMemoryRanges() guarantees that device writes to the memory ranges described by {@code pMemoryRanges}, which have been made visible to the #ACCESS_HOST_WRITE_BIT and #ACCESS_HOST_READ_BIT <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-types">access types</a>, are made visible to the host. If a range of non-coherent memory is written by the host and then invalidated without first being flushed, its contents are undefined.
@@ -3903,10 +3930,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To determine the amount of lazily-allocated memory that is currently committed for a memory object, call:
 
-        <pre><code>void vkGetDeviceMemoryCommitment(
+        <code><pre>
+￿void vkGetDeviceMemoryCommitment(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
-￿    VkDeviceSize*                               pCommittedMemoryInBytes);</code></pre>
+￿    VkDeviceSize*                               pCommittedMemoryInBytes);</pre></code>
 
         <h5>Description</h5>
         The implementation <b>may</b> update the commitment at any time, and the value returned by this query <b>may</b> be out of date.
@@ -3942,11 +3970,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To attach memory to a buffer object, call:
 
-        <pre><code>VkResult vkBindBufferMemory(
+        <code><pre>
+￿VkResult vkBindBufferMemory(
 ￿    VkDevice                                    device,
 ￿    VkBuffer                                    buffer,
 ￿    VkDeviceMemory                              memory,
-￿    VkDeviceSize                                memoryOffset);</code></pre>
+￿    VkDeviceSize                                memoryOffset);</pre></code>
 
         <h5>Description</h5>
         #BindBufferMemory() is equivalent to passing the same parameters through ##VkBindBufferMemoryInfoKHX to #BindBufferMemory2KHX(), with {@code deviceIndexCount} equal to zero.
@@ -4009,11 +4038,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To attach memory to an image object, call:
 
-        <pre><code>VkResult vkBindImageMemory(
+        <code><pre>
+￿VkResult vkBindImageMemory(
 ￿    VkDevice                                    device,
 ￿    VkImage                                     image,
 ￿    VkDeviceMemory                              memory,
-￿    VkDeviceSize                                memoryOffset);</code></pre>
+￿    VkDeviceSize                                memoryOffset);</pre></code>
 
         <h5>Description</h5>
         #BindImageMemory() is equivalent to passing the same parameters through ##VkBindImageMemoryInfoKHX to #BindImageMemory2KHX(), with {@code deviceIndexCount} and {@code SFRRectCount} equal to zero.
@@ -4073,10 +4103,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To determine the memory requirements for a buffer resource, call:
 
-        <pre><code>void vkGetBufferMemoryRequirements(
+        <code><pre>
+￿void vkGetBufferMemoryRequirements(
 ￿    VkDevice                                    device,
 ￿    VkBuffer                                    buffer,
-￿    VkMemoryRequirements*                       pMemoryRequirements);</code></pre>
+￿    VkMemoryRequirements*                       pMemoryRequirements);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4103,10 +4134,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To determine the memory requirements for an image resource, call:
 
-        <pre><code>void vkGetImageMemoryRequirements(
+        <code><pre>
+￿void vkGetImageMemoryRequirements(
 ￿    VkDevice                                    device,
 ￿    VkImage                                     image,
-￿    VkMemoryRequirements*                       pMemoryRequirements);</code></pre>
+￿    VkMemoryRequirements*                       pMemoryRequirements);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4135,11 +4167,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query sparse memory requirements for an image, call:
 
-        <pre><code>void vkGetImageSparseMemoryRequirements(
+        <code><pre>
+￿void vkGetImageSparseMemoryRequirements(
 ￿    VkDevice                                    device,
 ￿    VkImage                                     image,
 ￿    uint32_t*                                   pSparseMemoryRequirementCount,
-￿    VkSparseImageMemoryRequirements*            pSparseMemoryRequirements);</code></pre>
+￿    VkSparseImageMemoryRequirements*            pSparseMemoryRequirements);</pre></code>
 
         <h5>Description</h5>
         If {@code pSparseMemoryRequirements} is {@code NULL}, then the number of sparse memory requirements available is returned in {@code pSparseMemoryRequirementCount}. Otherwise, {@code pSparseMemoryRequirementCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSparseMemoryRequirements} array, and on return the variable is overwritten with the number of structures actually written to {@code pSparseMemoryRequirements}. If {@code pSparseMemoryRequirementCount} is less than the number of sparse memory requirements available, at most {@code pSparseMemoryRequirementCount} structures will be written.
@@ -4177,7 +4210,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         #GetPhysicalDeviceSparseImageFormatProperties() returns an array of ##VkSparseImageFormatProperties. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.
 
-        <pre><code>void vkGetPhysicalDeviceSparseImageFormatProperties(
+        <code><pre>
+￿void vkGetPhysicalDeviceSparseImageFormatProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
 ￿    VkImageType                                 type,
@@ -4185,7 +4219,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkImageUsageFlags                           usage,
 ￿    VkImageTiling                               tiling,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkSparseImageFormatProperties*              pProperties);</code></pre>
+￿    VkSparseImageFormatProperties*              pProperties);</pre></code>
 
         <h5>Description</h5>
         If {@code pProperties} is {@code NULL}, then the number of sparse format properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of sparse format properties available, at most {@code pPropertyCount} structures will be written.
@@ -4236,11 +4270,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To submit sparse binding operations to a queue, call:
 
-        <pre><code>VkResult vkQueueBindSparse(
+        <code><pre>
+￿VkResult vkQueueBindSparse(
 ￿    VkQueue                                     queue,
 ￿    uint32_t                                    bindInfoCount,
 ￿    const VkBindSparseInfo*                     pBindInfo,
-￿    VkFence                                     fence);</code></pre>
+￿    VkFence                                     fence);</pre></code>
 
         <h5>Description</h5>
         #QueueBindSparse() is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pBindInfo} as an instance of the ##VkBindSparseInfo structure. Batches begin execution in the order they appear in {@code pBindInfo}, but <b>may</b> complete out of order.
@@ -4321,11 +4356,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a fence, call:
 
-        <pre><code>VkResult vkCreateFence(
+        <code><pre>
+￿VkResult vkCreateFence(
 ￿    VkDevice                                    device,
 ￿    const VkFenceCreateInfo*                    pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkFence*                                    pFence);</code></pre>
+￿    VkFence*                                    pFence);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4367,10 +4403,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a fence, call:
 
-        <pre><code>void vkDestroyFence(
+        <code><pre>
+￿void vkDestroyFence(
 ￿    VkDevice                                    device,
 ￿    VkFence                                     fence,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -4409,10 +4446,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To set the state of fences to unsignaled from the host, call:
 
-        <pre><code>VkResult vkResetFences(
+        <code><pre>
+￿VkResult vkResetFences(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    fenceCount,
-￿    const VkFence*                              pFences);</code></pre>
+￿    const VkFence*                              pFences);</pre></code>
 
         <h5>Description</h5>
         When #ResetFences() is executed on the host, it defines a <em>fence unsignal operation</em> for each fence, which resets the fence to the unsignaled state.
@@ -4465,9 +4503,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the status of a fence from the host, call:
 
-        <pre><code>VkResult vkGetFenceStatus(
+        <code><pre>
+￿VkResult vkGetFenceStatus(
 ￿    VkDevice                                    device,
-￿    VkFence                                     fence);</code></pre>
+￿    VkFence                                     fence);</pre></code>
 
         <h5>Description</h5>
         Upon success, #GetFenceStatus() returns the status of the fence object, with the following return codes:
@@ -4522,12 +4561,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To wait for one or more fences to enter the signaled state on the host, call:
 
-        <pre><code>VkResult vkWaitForFences(
+        <code><pre>
+￿VkResult vkWaitForFences(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    fenceCount,
 ￿    const VkFence*                              pFences,
 ￿    VkBool32                                    waitAll,
-￿    uint64_t                                    timeout);</code></pre>
+￿    uint64_t                                    timeout);</pre></code>
 
         <h5>Description</h5>
         If the condition is satisfied when #WaitForFences() is called, then #WaitForFences() returns immediately. If the condition is not satisfied at the time #WaitForFences() is called, then #WaitForFences() will block and wait up to {@code timeout} nanoseconds for the condition to become satisfied.
@@ -4584,11 +4624,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a semaphore, call:
 
-        <pre><code>VkResult vkCreateSemaphore(
+        <code><pre>
+￿VkResult vkCreateSemaphore(
 ￿    VkDevice                                    device,
 ￿    const VkSemaphoreCreateInfo*                pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSemaphore*                                pSemaphore);</code></pre>
+￿    VkSemaphore*                                pSemaphore);</pre></code>
 
         <h5>Description</h5>
         When created, the semaphore is in the unsignaled state.
@@ -4633,10 +4674,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a semaphore, call:
 
-        <pre><code>void vkDestroySemaphore(
+        <code><pre>
+￿void vkDestroySemaphore(
 ￿    VkDevice                                    device,
 ￿    VkSemaphore                                 semaphore,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -4677,11 +4719,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create an event, call:
 
-        <pre><code>VkResult vkCreateEvent(
+        <code><pre>
+￿VkResult vkCreateEvent(
 ￿    VkDevice                                    device,
 ￿    const VkEventCreateInfo*                    pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkEvent*                                    pEvent);</code></pre>
+￿    VkEvent*                                    pEvent);</pre></code>
 
         <h5>Description</h5>
         When created, the event object is in the unsignaled state.
@@ -4726,10 +4769,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy an event, call:
 
-        <pre><code>void vkDestroyEvent(
+        <code><pre>
+￿void vkDestroyEvent(
 ￿    VkDevice                                    device,
 ￿    VkEvent                                     event,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -4768,9 +4812,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the state of an event from the host, call:
 
-        <pre><code>VkResult vkGetEventStatus(
+        <code><pre>
+￿VkResult vkGetEventStatus(
 ￿    VkDevice                                    device,
-￿    VkEvent                                     event);</code></pre>
+￿    VkEvent                                     event);</pre></code>
 
         <h5>Description</h5>
         Upon success, #GetEventStatus() returns the state of the event object with the following return codes:
@@ -4824,9 +4869,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To set the state of an event to signaled from the host, call:
 
-        <pre><code>VkResult vkSetEvent(
+        <code><pre>
+￿VkResult vkSetEvent(
 ￿    VkDevice                                    device,
-￿    VkEvent                                     event);</code></pre>
+￿    VkEvent                                     event);</pre></code>
 
         <h5>Description</h5>
         When #SetEvent() is executed on the host, it defines an <em>event signal operation</em> which sets the event to the signaled state.
@@ -4872,9 +4918,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To set the state of an event to unsignaled from the host, call:
 
-        <pre><code>VkResult vkResetEvent(
+        <code><pre>
+￿VkResult vkResetEvent(
 ￿    VkDevice                                    device,
-￿    VkEvent                                     event);</code></pre>
+￿    VkEvent                                     event);</pre></code>
 
         <h5>Description</h5>
         When #ResetEvent() is executed on the host, it defines an <em>event unsignal operation</em> which resets the event to the unsignaled state.
@@ -4927,11 +4974,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a query pool, call:
 
-        <pre><code>VkResult vkCreateQueryPool(
+        <code><pre>
+￿VkResult vkCreateQueryPool(
 ￿    VkDevice                                    device,
 ￿    const VkQueryPoolCreateInfo*                pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkQueryPool*                                pQueryPool);</code></pre>
+￿    VkQueryPool*                                pQueryPool);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4973,10 +5021,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a query pool, call:
 
-        <pre><code>void vkDestroyQueryPool(
+        <code><pre>
+￿void vkDestroyQueryPool(
 ￿    VkDevice                                    device,
 ￿    VkQueryPool                                 queryPool,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5015,7 +5064,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To retrieve status and results for a set of queries, call:
 
-        <pre><code>VkResult vkGetQueryPoolResults(
+        <code><pre>
+￿VkResult vkGetQueryPoolResults(
 ￿    VkDevice                                    device,
 ￿    VkQueryPool                                 queryPool,
 ￿    uint32_t                                    firstQuery,
@@ -5023,7 +5073,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    size_t                                      dataSize,
 ￿    void*                                       pData,
 ￿    VkDeviceSize                                stride,
-￿    VkQueryResultFlags                          flags);</code></pre>
+￿    VkQueryResultFlags                          flags);</pre></code>
 
         <h5>Description</h5>
         If no bits are set in {@code flags}, and all requested queries are in the available state, results are written as an array of 32-bit unsigned integer values. The behavior when not all queries are available, is described <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-wait-bit-not-set">below</a>.
@@ -5101,12 +5151,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         void_p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
         VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code pData}."),
         VkQueryResultFlags.IN("flags", """a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkQueryResultFlagBits {
+<code><pre>
+￿typedef enum VkQueryResultFlagBits {
 ￿    VK_QUERY_RESULT_64_BIT = 0x00000001,
 ￿    VK_QUERY_RESULT_WAIT_BIT = 0x00000002,
 ￿    VK_QUERY_RESULT_WITH_AVAILABILITY_BIT = 0x00000004,
 ￿    VK_QUERY_RESULT_PARTIAL_BIT = 0x00000008,
-} VkQueryResultFlagBits;</code></pre>
+￿} VkQueryResultFlagBits;</pre></code>
 
         <ul>
             <li>#QUERY_RESULT_64_BIT indicates the results will be written as an array of 64-bit unsigned integer values. If this bit is not set, the results will be written as an array of 32-bit unsigned integer values.</li>
@@ -5126,11 +5177,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create buffers, call:
 
-        <pre><code>VkResult vkCreateBuffer(
+        <code><pre>
+￿VkResult vkCreateBuffer(
 ￿    VkDevice                                    device,
 ￿    const VkBufferCreateInfo*                   pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkBuffer*                                   pBuffer);</code></pre>
+￿    VkBuffer*                                   pBuffer);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5177,10 +5229,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a buffer, call:
 
-        <pre><code>void vkDestroyBuffer(
+        <code><pre>
+￿void vkDestroyBuffer(
 ￿    VkDevice                                    device,
 ￿    VkBuffer                                    buffer,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5221,11 +5274,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a buffer view, call:
 
-        <pre><code>VkResult vkCreateBufferView(
+        <code><pre>
+￿VkResult vkCreateBufferView(
 ￿    VkDevice                                    device,
 ￿    const VkBufferViewCreateInfo*               pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkBufferView*                               pView);</code></pre>
+￿    VkBufferView*                               pView);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -5267,10 +5321,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a buffer view, call:
 
-        <pre><code>void vkDestroyBufferView(
+        <code><pre>
+￿void vkDestroyBufferView(
 ￿    VkDevice                                    device,
 ￿    VkBufferView                                bufferView,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5311,11 +5366,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create images, call:
 
-        <pre><code>VkResult vkCreateImage(
+        <code><pre>
+￿VkResult vkCreateImage(
 ￿    VkDevice                                    device,
 ￿    const VkImageCreateInfo*                    pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkImage*                                    pImage);</code></pre>
+￿    VkImage*                                    pImage);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5362,10 +5418,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy an image, call:
 
-        <pre><code>void vkDestroyImage(
+        <code><pre>
+￿void vkDestroyImage(
 ￿    VkDevice                                    device,
 ￿    VkImage                                     image,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5404,11 +5461,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the host access layout of an image subresource, for an image created with linear tiling, call:
 
-        <pre><code>void vkGetImageSubresourceLayout(
+        <code><pre>
+￿void vkGetImageSubresourceLayout(
 ￿    VkDevice                                    device,
 ￿    VkImage                                     image,
 ￿    const VkImageSubresource*                   pSubresource,
-￿    VkSubresourceLayout*                        pLayout);</code></pre>
+￿    VkSubresourceLayout*                        pLayout);</pre></code>
 
         <h5>Description</h5>
         #GetImageSubresourceLayout() is invariant for the lifetime of a single image.
@@ -5448,11 +5506,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create an image view, call:
 
-        <pre><code>VkResult vkCreateImageView(
+        <code><pre>
+￿VkResult vkCreateImageView(
 ￿    VkDevice                                    device,
 ￿    const VkImageViewCreateInfo*                pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkImageView*                                pView);</code></pre>
+￿    VkImageView*                                pView);</pre></code>
 
         <h5>Description</h5>
         Some of the image creation parameters are inherited by the view. The remaining parameters are contained in the {@code pCreateInfo}.
@@ -5497,10 +5556,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy an image view, call:
 
-        <pre><code>void vkDestroyImageView(
+        <code><pre>
+￿void vkDestroyImageView(
 ￿    VkDevice                                    device,
 ￿    VkImageView                                 imageView,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5541,11 +5601,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a shader module, call:
 
-        <pre><code>VkResult vkCreateShaderModule(
+        <code><pre>
+￿VkResult vkCreateShaderModule(
 ￿    VkDevice                                    device,
 ￿    const VkShaderModuleCreateInfo*             pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkShaderModule*                             pShaderModule);</code></pre>
+￿    VkShaderModule*                             pShaderModule);</pre></code>
 
         <h5>Description</h5>
         Once a shader module has been created, any entry points it contains <b>can</b> be used in pipeline shader stages as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#pipelines-compute">Compute Pipelines</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#pipelines-graphics">Graphics Pipelines</a>.
@@ -5593,10 +5654,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a shader module, call:
 
-        <pre><code>void vkDestroyShaderModule(
+        <code><pre>
+￿void vkDestroyShaderModule(
 ￿    VkDevice                                    device,
 ￿    VkShaderModule                              shaderModule,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         A shader module <b>can</b> be destroyed while pipelines created using its shaders are still in use.
@@ -5639,11 +5701,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create pipeline cache objects, call:
 
-        <pre><code>VkResult vkCreatePipelineCache(
+        <code><pre>
+￿VkResult vkCreatePipelineCache(
 ￿    VkDevice                                    device,
 ￿    const VkPipelineCacheCreateInfo*            pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkPipelineCache*                            pPipelineCache);</code></pre>
+￿    VkPipelineCache*                            pPipelineCache);</pre></code>
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -5696,10 +5759,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a pipeline cache, call:
 
-        <pre><code>void vkDestroyPipelineCache(
+        <code><pre>
+￿void vkDestroyPipelineCache(
 ￿    VkDevice                                    device,
 ￿    VkPipelineCache                             pipelineCache,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -5737,11 +5801,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         Data <b>can</b> be retrieved from a pipeline cache object using the command:
 
-        <pre><code>VkResult vkGetPipelineCacheData(
+        <code><pre>
+￿VkResult vkGetPipelineCacheData(
 ￿    VkDevice                                    device,
 ￿    VkPipelineCache                             pipelineCache,
 ￿    size_t*                                     pDataSize,
-￿    void*                                       pData);</code></pre>
+￿    void*                                       pData);</pre></code>
 
         <h5>Description</h5>
         If {@code pData} is {@code NULL}, then the maximum size of the data that <b>can</b> be retrieved from the pipeline cache, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}.
@@ -5768,9 +5833,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         The next four bytes encode the pipeline cache version. This field is interpreted as a {@code VkPipelineCacheHeaderVersion} value, and <b>must</b> have one of the following values:
 
-        <pre><code>typedef enum VkPipelineCacheHeaderVersion {
+        <code><pre>
+￿typedef enum VkPipelineCacheHeaderVersion {
 ￿    VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
-} VkPipelineCacheHeaderVersion;</code></pre>
+￿} VkPipelineCacheHeaderVersion;</pre></code>
 
         A consumer of the pipeline cache <b>should</b> use the cache version to interpret the remainder of the cache header.
 
@@ -5815,11 +5881,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         Pipeline cache objects <b>can</b> be merged using the command:
 
-        <pre><code>VkResult vkMergePipelineCaches(
+        <code><pre>
+￿VkResult vkMergePipelineCaches(
 ￿    VkDevice                                    device,
 ￿    VkPipelineCache                             dstCache,
 ￿    uint32_t                                    srcCacheCount,
-￿    const VkPipelineCache*                      pSrcCaches);</code></pre>
+￿    const VkPipelineCache*                      pSrcCaches);</pre></code>
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -5877,13 +5944,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create graphics pipelines, call:
 
-        <pre><code>VkResult vkCreateGraphicsPipelines(
+        <code><pre>
+￿VkResult vkCreateGraphicsPipelines(
 ￿    VkDevice                                    device,
 ￿    VkPipelineCache                             pipelineCache,
 ￿    uint32_t                                    createInfoCount,
 ￿    const VkGraphicsPipelineCreateInfo*         pCreateInfos,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkPipeline*                                 pPipelines);</code></pre>
+￿    VkPipeline*                                 pPipelines);</pre></code>
 
         <h5>Description</h5>
         The ##VkGraphicsPipelineCreateInfo structure includes an array of shader create info structures containing all the desired active shader stages, as well as creation info to define all relevant fixed-function stages, and a pipeline layout.
@@ -5940,13 +6008,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create compute pipelines, call:
 
-        <pre><code>VkResult vkCreateComputePipelines(
+        <code><pre>
+￿VkResult vkCreateComputePipelines(
 ￿    VkDevice                                    device,
 ￿    VkPipelineCache                             pipelineCache,
 ￿    uint32_t                                    createInfoCount,
 ￿    const VkComputePipelineCreateInfo*          pCreateInfos,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkPipeline*                                 pPipelines);</code></pre>
+￿    VkPipeline*                                 pPipelines);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6001,10 +6070,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a graphics or compute pipeline, call:
 
-        <pre><code>void vkDestroyPipeline(
+        <code><pre>
+￿void vkDestroyPipeline(
 ￿    VkDevice                                    device,
 ￿    VkPipeline                                  pipeline,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6045,11 +6115,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a pipeline layout, call:
 
-        <pre><code>VkResult vkCreatePipelineLayout(
+        <code><pre>
+￿VkResult vkCreatePipelineLayout(
 ￿    VkDevice                                    device,
 ￿    const VkPipelineLayoutCreateInfo*           pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkPipelineLayout*                           pPipelineLayout);</code></pre>
+￿    VkPipelineLayout*                           pPipelineLayout);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6091,10 +6162,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a pipeline layout, call:
 
-        <pre><code>void vkDestroyPipelineLayout(
+        <code><pre>
+￿void vkDestroyPipelineLayout(
 ￿    VkDevice                                    device,
 ￿    VkPipelineLayout                            pipelineLayout,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6134,11 +6206,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a sampler object, call:
 
-        <pre><code>VkResult vkCreateSampler(
+        <code><pre>
+￿VkResult vkCreateSampler(
 ￿    VkDevice                                    device,
 ￿    const VkSamplerCreateInfo*                  pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSampler*                                  pSampler);</code></pre>
+￿    VkSampler*                                  pSampler);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6181,10 +6254,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a sampler, call:
 
-        <pre><code>void vkDestroySampler(
+        <code><pre>
+￿void vkDestroySampler(
 ￿    VkDevice                                    device,
 ￿    VkSampler                                   sampler,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6225,11 +6299,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create descriptor set layout objects, call:
 
-        <pre><code>VkResult vkCreateDescriptorSetLayout(
+        <code><pre>
+￿VkResult vkCreateDescriptorSetLayout(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDescriptorSetLayout*                      pSetLayout);</code></pre>
+￿    VkDescriptorSetLayout*                      pSetLayout);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6271,10 +6346,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a descriptor set layout, call:
 
-        <pre><code>void vkDestroyDescriptorSetLayout(
+        <code><pre>
+￿void vkDestroyDescriptorSetLayout(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorSetLayout                       descriptorSetLayout,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6312,11 +6388,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a descriptor pool object, call:
 
-        <pre><code>VkResult vkCreateDescriptorPool(
+        <code><pre>
+￿VkResult vkCreateDescriptorPool(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorPoolCreateInfo*           pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDescriptorPool*                           pDescriptorPool);</code></pre>
+￿    VkDescriptorPool*                           pDescriptorPool);</pre></code>
 
         <h5>Description</h5>
         {@code pAllocator} controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory-allocation">Memory Allocation</a> chapter.
@@ -6363,10 +6440,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a descriptor pool, call:
 
-        <pre><code>void vkDestroyDescriptorPool(
+        <code><pre>
+￿void vkDestroyDescriptorPool(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorPool                            descriptorPool,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         When a pool is destroyed, all descriptor sets allocated from the pool are implicitly freed and become invalid. Descriptor sets allocated from a given pool do not need to be freed before destroying that descriptor pool.
@@ -6408,10 +6486,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To return all descriptor sets allocated from a given pool to the pool, rather than freeing individual descriptor sets, call:
 
-        <pre><code>VkResult vkResetDescriptorPool(
+        <code><pre>
+￿VkResult vkResetDescriptorPool(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorPool                            descriptorPool,
-￿    VkDescriptorPoolResetFlags                  flags);</code></pre>
+￿    VkDescriptorPoolResetFlags                  flags);</pre></code>
 
         <h5>Description</h5>
         Resetting a descriptor pool recycles all of the resources from all of the descriptor sets allocated from the descriptor pool back to the descriptor pool, and the descriptor sets are implicitly freed.
@@ -6463,10 +6542,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To allocate descriptor sets from a descriptor pool, call:
 
-        <pre><code>VkResult vkAllocateDescriptorSets(
+        <code><pre>
+￿VkResult vkAllocateDescriptorSets(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorSetAllocateInfo*          pAllocateInfo,
-￿    VkDescriptorSet*                            pDescriptorSets);</code></pre>
+￿    VkDescriptorSet*                            pDescriptorSets);</pre></code>
 
         <h5>Description</h5>
         The allocated descriptor sets are returned in {@code pDescriptorSets}.
@@ -6530,11 +6610,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To free allocated descriptor sets, call:
 
-        <pre><code>VkResult vkFreeDescriptorSets(
+        <code><pre>
+￿VkResult vkFreeDescriptorSets(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorPool                            descriptorPool,
 ￿    uint32_t                                    descriptorSetCount,
-￿    const VkDescriptorSet*                      pDescriptorSets);</code></pre>
+￿    const VkDescriptorSet*                      pDescriptorSets);</pre></code>
 
         <h5>Description</h5>
         After a successful call to #FreeDescriptorSets(), all descriptor sets in {@code pDescriptorSets} are invalid.
@@ -6591,12 +6672,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         Once allocated, descriptor sets <b>can</b> be updated with a combination of write and copy operations. To update descriptor sets, call:
 
-        <pre><code>void vkUpdateDescriptorSets(
+        <code><pre>
+￿void vkUpdateDescriptorSets(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    descriptorWriteCount,
 ￿    const VkWriteDescriptorSet*                 pDescriptorWrites,
 ￿    uint32_t                                    descriptorCopyCount,
-￿    const VkCopyDescriptorSet*                  pDescriptorCopies);</code></pre>
+￿    const VkCopyDescriptorSet*                  pDescriptorCopies);</pre></code>
 
         <h5>Description</h5>
         The operations described by {@code pDescriptorWrites} are performed first, followed by the operations described by {@code pDescriptorCopies}. Within each array, the operations are performed in the order they appear in the array.
@@ -6646,11 +6728,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a framebuffer, call:
 
-        <pre><code>VkResult vkCreateFramebuffer(
+        <code><pre>
+￿VkResult vkCreateFramebuffer(
 ￿    VkDevice                                    device,
 ￿    const VkFramebufferCreateInfo*              pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkFramebuffer*                              pFramebuffer);</code></pre>
+￿    VkFramebuffer*                              pFramebuffer);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6692,10 +6775,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a framebuffer, call:
 
-        <pre><code>void vkDestroyFramebuffer(
+        <code><pre>
+￿void vkDestroyFramebuffer(
 ￿    VkDevice                                    device,
 ￿    VkFramebuffer                               framebuffer,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6734,11 +6818,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a render pass, call:
 
-        <pre><code>VkResult vkCreateRenderPass(
+        <code><pre>
+￿VkResult vkCreateRenderPass(
 ￿    VkDevice                                    device,
 ￿    const VkRenderPassCreateInfo*               pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkRenderPass*                               pRenderPass);</code></pre>
+￿    VkRenderPass*                               pRenderPass);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6780,10 +6865,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a render pass, call:
 
-        <pre><code>void vkDestroyRenderPass(
+        <code><pre>
+￿void vkDestroyRenderPass(
 ￿    VkDevice                                    device,
 ￿    VkRenderPass                                renderPass,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -6822,10 +6908,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To query the render area granularity, call:
 
-        <pre><code>void vkGetRenderAreaGranularity(
+        <code><pre>
+￿void vkGetRenderAreaGranularity(
 ￿    VkDevice                                    device,
 ￿    VkRenderPass                                renderPass,
-￿    VkExtent2D*                                 pGranularity);</code></pre>
+￿    VkExtent2D*                                 pGranularity);</pre></code>
 
         <h5>Description</h5>
         The conditions leading to an optimal {@code renderArea} are:
@@ -6866,11 +6953,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To create a command pool, call:
 
-        <pre><code>VkResult vkCreateCommandPool(
+        <code><pre>
+￿VkResult vkCreateCommandPool(
 ￿    VkDevice                                    device,
 ￿    const VkCommandPoolCreateInfo*              pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkCommandPool*                              pCommandPool);</code></pre>
+￿    VkCommandPool*                              pCommandPool);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -6912,10 +7000,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To destroy a command pool, call:
 
-        <pre><code>void vkDestroyCommandPool(
+        <code><pre>
+￿void vkDestroyCommandPool(
 ￿    VkDevice                                    device,
 ￿    VkCommandPool                               commandPool,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         When a pool is destroyed, all command buffers allocated from the pool are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vkFreeCommandBuffers">freed</a>.
@@ -6959,10 +7048,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To reset a command pool, call:
 
-        <pre><code>VkResult vkResetCommandPool(
+        <code><pre>
+￿VkResult vkResetCommandPool(
 ￿    VkDevice                                    device,
 ￿    VkCommandPool                               commandPool,
-￿    VkCommandPoolResetFlags                     flags);</code></pre>
+￿    VkCommandPoolResetFlags                     flags);</pre></code>
 
         <h5>Description</h5>
         Resetting a command pool recycles all of the resources from all of the command buffers allocated from the command pool back to the command pool. All command buffers that have been allocated from the command pool are put in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>.
@@ -7005,9 +7095,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkDevice.IN("device", "the logical device that owns the command pool."),
         VkCommandPool.IN("commandPool", "the command pool to reset."),
         VkCommandPoolResetFlags.IN("flags", """contains additional flags controlling the behavior of the reset. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkCommandPoolResetFlagBits {
+<code><pre>
+￿typedef enum VkCommandPoolResetFlagBits {
 ￿    VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
-} VkCommandPoolResetFlagBits;</code></pre>
+￿} VkCommandPoolResetFlagBits;</pre></code>
 
         If {@code flags} includes #COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT, resetting a command pool recycles all of the resources from the command pool back to the system.""")
     )
@@ -7022,10 +7113,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To allocate command buffers, call:
 
-        <pre><code>VkResult vkAllocateCommandBuffers(
+        <code><pre>
+￿VkResult vkAllocateCommandBuffers(
 ￿    VkDevice                                    device,
 ￿    const VkCommandBufferAllocateInfo*          pAllocateInfo,
-￿    VkCommandBuffer*                            pCommandBuffers);</code></pre>
+￿    VkCommandBuffer*                            pCommandBuffers);</pre></code>
 
         <h5>Description</h5>
         #AllocateCommandBuffers() <b>can</b> be used to create multiple command buffers. If the creation of any of those command buffers fails, the implementation <b>must</b> destroy all successfully created command buffer objects from this command, set all entries of the {@code pCommandBuffers} array to {@code NULL} and return the error.
@@ -7075,11 +7167,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To free command buffers, call:
 
-        <pre><code>void vkFreeCommandBuffers(
+        <code><pre>
+￿void vkFreeCommandBuffers(
 ￿    VkDevice                                    device,
 ￿    VkCommandPool                               commandPool,
 ￿    uint32_t                                    commandBufferCount,
-￿    const VkCommandBuffer*                      pCommandBuffers);</code></pre>
+￿    const VkCommandBuffer*                      pCommandBuffers);</pre></code>
 
         <h5>Description</h5>
         Any primary command buffer that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording or executable state</a> and has any element of {@code pCommandBuffers} recorded into it, becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">invalid</a>.
@@ -7120,9 +7213,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To begin recording a command buffer, call:
 
-        <pre><code>VkResult vkBeginCommandBuffer(
+        <code><pre>
+￿VkResult vkBeginCommandBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkCommandBufferBeginInfo*             pBeginInfo);</code></pre>
+￿    const VkCommandBufferBeginInfo*             pBeginInfo);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7174,8 +7268,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To complete recording of a command buffer, call:
 
-        <pre><code>VkResult vkEndCommandBuffer(
-￿    VkCommandBuffer                             commandBuffer);</code></pre>
+        <code><pre>
+￿VkResult vkEndCommandBuffer(
+￿    VkCommandBuffer                             commandBuffer);</pre></code>
 
         <h5>Description</h5>
         If there was an error during recording, the application will be notified by an unsuccessful return code returned by #EndCommandBuffer(). If the application wishes to further use the command buffer, the command buffer <b>must</b> be reset. The command buffer <b>must</b> have been in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a>, and is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">executable state</a>.
@@ -7225,9 +7320,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         To reset command buffers, call:
 
-        <pre><code>VkResult vkResetCommandBuffer(
+        <code><pre>
+￿VkResult vkResetCommandBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    VkCommandBufferResetFlags                   flags);</code></pre>
+￿    VkCommandBufferResetFlags                   flags);</pre></code>
 
         <h5>Description</h5>
         Any primary command buffer that is in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording or executable state</a> and has {@code commandBuffer} recorded into it, becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">invalid</a>.
@@ -7266,9 +7362,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer <b>can</b> be in any state other than <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#commandbuffers-lifecycle\">pending</a>, and is moved into the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#commandbuffers-lifecycle\">initial state</a>."),
         VkCommandBufferResetFlags.IN("flags", """a bitmask controlling the reset operation. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkCommandBufferResetFlagBits {
+<code><pre>
+￿typedef enum VkCommandBufferResetFlagBits {
 ￿    VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
-} VkCommandBufferResetFlagBits;</code></pre>
+￿} VkCommandBufferResetFlagBits;</pre></code>
 
         If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer <b>should</b> be returned to the parent command pool. If this flag is not set, then the command buffer <b>may</b> hold onto memory resources and reuse them when recording commands. {@code commandBuffer} is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>.""")
     )
@@ -7283,10 +7380,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         Once a pipeline has been created, it <b>can</b> be bound to the command buffer using the command:
 
-        <pre><code>void vkCmdBindPipeline(
+        <code><pre>
+￿void vkCmdBindPipeline(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineBindPoint                         pipelineBindPoint,
-￿    VkPipeline                                  pipeline);</code></pre>
+￿    VkPipeline                                  pipeline);</pre></code>
 
         <h5>Description</h5>
         Once bound, a pipeline binding affects subsequent graphics or compute commands in the command buffer until a different pipeline is bound to the bind point. The pipeline bound to #PIPELINE_BIND_POINT_COMPUTE controls the behavior of #CmdDispatch() and #CmdDispatchIndirect(). The pipeline bound to #PIPELINE_BIND_POINT_GRAPHICS controls the behavior of #CmdDraw(), #CmdDrawIndexed(), #CmdDrawIndirect(), and #CmdDrawIndexedIndirect(). No other commands are affected by the pipeline state.
@@ -7325,10 +7423,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer that the pipeline will be bound to."),
         VkPipelineBindPoint.IN("pipelineBindPoint", """specifies the bind point, and <b>must</b> have one of the values
-<pre><code>typedef enum VkPipelineBindPoint {
+<code><pre>
+￿typedef enum VkPipelineBindPoint {
 ￿    VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
 ￿    VK_PIPELINE_BIND_POINT_COMPUTE = 1,
-} VkPipelineBindPoint;</code></pre>
+￿} VkPipelineBindPoint;</pre></code>
 
         specifying whether {@code pipeline} will be bound as a compute (#PIPELINE_BIND_POINT_COMPUTE) or graphics (#PIPELINE_BIND_POINT_GRAPHICS) pipeline. There are separate bind points for each of graphics and compute, so binding one does not disturb the other."""),
         VkPipeline.IN("pipeline", "the pipeline to be bound.")
@@ -7342,11 +7441,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, viewport transformation parameters are specified using the {@code pViewports} member of ##VkPipelineViewportStateCreateInfo in the pipeline state object. If the pipeline state object was created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:
 
-        <pre><code>void vkCmdSetViewport(
+        <code><pre>
+￿void vkCmdSetViewport(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    firstViewport,
 ￿    uint32_t                                    viewportCount,
-￿    const VkViewport*                           pViewports);</code></pre>
+￿    const VkViewport*                           pViewports);</pre></code>
 
         <h5>Description</h5>
         The viewport parameters taken from element <code>i</code> of {@code pViewports} replace the current state for the viewport index <code>firstViewport {plus} i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
@@ -7399,11 +7499,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         The scissor test determines if a fragment's framebuffer coordinates <code>(x<sub>f</sub>,y<sub>f</sub>)</code> lie within the scissor rectangle corresponding to the viewport index (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>) used by the primitive that generated the fragment. If the pipeline state object is created without #DYNAMIC_STATE_SCISSOR enabled then the scissor rectangles are set by the ##VkPipelineViewportStateCreateInfo state of the pipeline state object. Otherwise, to dynamically set the scissor rectangles call:
 
-        <pre><code>void vkCmdSetScissor(
+        <code><pre>
+￿void vkCmdSetScissor(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    firstScissor,
 ￿    uint32_t                                    scissorCount,
-￿    const VkRect2D*                             pScissors);</code></pre>
+￿    const VkRect2D*                             pScissors);</pre></code>
 
         <h5>Description</h5>
         The scissor rectangles taken from element <code>i</code> of {@code pScissors} replace the current state for the scissor index <code>firstScissor + i</code>, for <code>i</code> in <code>[0, scissorCount)</code>.
@@ -7461,9 +7562,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         The line width is set by the {@code lineWidth} property of ##VkPipelineRasterizationStateCreateInfo in the currently active pipeline if the pipeline was not created with #DYNAMIC_STATE_LINE_WIDTH enabled. Otherwise, the line width is set by calling #CmdSetLineWidth():
 
-        <pre><code>void vkCmdSetLineWidth(
+        <code><pre>
+￿void vkCmdSetLineWidth(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    float                                       lineWidth);</code></pre>
+￿    float                                       lineWidth);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7503,11 +7605,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>C Specification</h5>
         The depth values of all fragments generated by the rasterization of a polygon <b>can</b> be offset by a single value that is computed for that polygon. This behavior is controlled by the {@code depthBiasEnable}, {@code depthBiasConstantFactor}, {@code depthBiasClamp}, and {@code depthBiasSlopeFactor} members of ##VkPipelineRasterizationStateCreateInfo, or by the corresponding parameters to the #CmdSetDepthBias() command if depth bias state is dynamic.
 
-        <pre><code>void vkCmdSetDepthBias(
+        <code><pre>
+￿void vkCmdSetDepthBias(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    float                                       depthBiasConstantFactor,
 ￿    float                                       depthBiasClamp,
-￿    float                                       depthBiasSlopeFactor);</code></pre>
+￿    float                                       depthBiasSlopeFactor);</pre></code>
 
         <h5>Description</h5>
         If {@code depthBiasEnable} is #FALSE, no depth bias is applied and the fragment's depth values are unchanged.
@@ -7516,11 +7619,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         The maximum depth slope <code>m</code> of a triangle is
 
-        <pre><code>￿      m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)</code></pre>
+        <code><pre>
+￿      m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)</pre></code>
 
         where <code>(x<sub>f</sub>, y<sub>f</sub>, z<sub>f</sub>)</code> is a point on the triangle. <code>m</code> <b>may</b> be approximated as
 
-        <pre><code>￿      m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))</code></pre>
+        <code><pre>
+￿      m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))</pre></code>
 
         The minimum resolvable difference <code>r</code> is an implementation-dependent parameter that depends on the depth buffer representation. It is the smallest difference in framebuffer coordinate <code>z</code> values that is guaranteed to remain distinct throughout polygon rasterization and in the depth buffer. All pairs of fragments generated by the rasterization of two polygons with otherwise identical vertices, but <code>z<sub>f</sub></code> values that differ by <code>r</code>, will have distinct depth values.
 
@@ -7534,9 +7639,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         The bias value <code>o</code> for a polygon is
 
-        <pre><code>￿        m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor                     depthBiasClamp = 0 or NaN
-o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &gt; 0
-￿    max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &lt; 0</code></pre>
+        <code><pre>
+￿        m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor                     depthBiasClamp = 0 or NaN
+￿o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &gt; 0
+￿    max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &lt; 0</pre></code>
 
         <code>m</code> is computed as described above. If the depth buffer uses a fixed-point representation, <code>m</code> is a function of depth values in the range <code>[0,1]</code>, and <code>o</code> is applied to depth values in the same range.
 
@@ -7582,9 +7688,10 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         Otherwise, to dynamically set and change the blend constant, call:
 
-        <pre><code>void vkCmdSetBlendConstants(
+        <code><pre>
+￿void vkCmdSetBlendConstants(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const float                                 blendConstants[4]);</code></pre>
+￿    const float                                 blendConstants[4]);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7623,10 +7730,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         The depth bounds test conditionally disables coverage of a sample based on the outcome of a comparison between the value <code>z<sub>a</sub></code> in the depth attachment at location <code>(x<sub>f</sub>,y<sub>f</sub>)</code> (for the appropriate sample) and a range of values. The test is enabled or disabled by the {@code depthBoundsTestEnable} member of ##VkPipelineDepthStencilStateCreateInfo: If the pipeline state object is created without the #DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled then the range of values used in the depth bounds test are defined by the {@code minDepthBounds} and {@code maxDepthBounds} members of the ##VkPipelineDepthStencilStateCreateInfo structure. Otherwise, to dynamically set the depth bounds range values call:
 
-        <pre><code>void vkCmdSetDepthBounds(
+        <code><pre>
+￿void vkCmdSetDepthBounds(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    float                                       minDepthBounds,
-￿    float                                       maxDepthBounds);</code></pre>
+￿    float                                       maxDepthBounds);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7668,10 +7776,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled, then to dynamically set the stencil compare mask call:
 
-        <pre><code>void vkCmdSetStencilCompareMask(
+        <code><pre>
+￿void vkCmdSetStencilCompareMask(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkStencilFaceFlags                          faceMask,
-￿    uint32_t                                    compareMask);</code></pre>
+￿    uint32_t                                    compareMask);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7702,11 +7811,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
         VkStencilFaceFlags.IN("faceMask", """a bitmask specifying the set of stencil state for which to update the compare mask. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkStencilFaceFlagBits {
+<code><pre>
+￿typedef enum VkStencilFaceFlagBits {
 ￿    VK_STENCIL_FACE_FRONT_BIT = 0x00000001,
 ￿    VK_STENCIL_FACE_BACK_BIT = 0x00000002,
 ￿    VK_STENCIL_FRONT_AND_BACK = 0x00000003,
-} VkStencilFaceFlagBits;</code></pre>
+￿} VkStencilFaceFlagBits;</pre></code>
 
         <ul>
             <li>#STENCIL_FACE_FRONT_BIT indicates that only the front set of stencil state is updated.</li>
@@ -7724,10 +7834,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled, then to dynamically set the stencil write mask call:
 
-        <pre><code>void vkCmdSetStencilWriteMask(
+        <code><pre>
+￿void vkCmdSetStencilWriteMask(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkStencilFaceFlags                          faceMask,
-￿    uint32_t                                    writeMask);</code></pre>
+￿    uint32_t                                    writeMask);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7769,10 +7880,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled, then to dynamically set the stencil reference value call:
 
-        <pre><code>void vkCmdSetStencilReference(
+        <code><pre>
+￿void vkCmdSetStencilReference(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkStencilFaceFlags                          faceMask,
-￿    uint32_t                                    reference);</code></pre>
+￿    uint32_t                                    reference);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7814,7 +7926,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To bind one or more descriptor sets to a command buffer, call:
 
-        <pre><code>void vkCmdBindDescriptorSets(
+        <code><pre>
+￿void vkCmdBindDescriptorSets(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineBindPoint                         pipelineBindPoint,
 ￿    VkPipelineLayout                            layout,
@@ -7822,7 +7935,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    uint32_t                                    descriptorSetCount,
 ￿    const VkDescriptorSet*                      pDescriptorSets,
 ￿    uint32_t                                    dynamicOffsetCount,
-￿    const uint32_t*                             pDynamicOffsets);</code></pre>
+￿    const uint32_t*                             pDynamicOffsets);</pre></code>
 
         <h5>Description</h5>
         #CmdBindDescriptorSets() causes the sets numbered [{@code firstSet}.. {@code firstSet}+{@code descriptorSetCount}-1] to use the bindings stored in {@code pDescriptorSets}[0..{@code descriptorSetCount}-1] for subsequent rendering commands (either compute or graphics, according to the {@code pipelineBindPoint}). Any bindings that were previously applied via these sets are no longer valid.
@@ -7892,11 +8005,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To bind an index buffer to a command buffer, call:
 
-        <pre><code>void vkCmdBindIndexBuffer(
+        <code><pre>
+￿void vkCmdBindIndexBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
 ￿    VkDeviceSize                                offset,
-￿    VkIndexType                                 indexType);</code></pre>
+￿    VkIndexType                                 indexType);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -7933,10 +8047,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         VkBuffer.IN("buffer", "the buffer being bound."),
         VkDeviceSize.IN("offset", "the starting offset in bytes within {@code buffer} used in index buffer address calculations."),
         VkIndexType.IN("indexType", """selects whether indices are treated as 16 bits or 32 bits. Possible values include:
-<pre><code>typedef enum VkIndexType {
+<code><pre>
+￿typedef enum VkIndexType {
 ￿    VK_INDEX_TYPE_UINT16 = 0,
 ￿    VK_INDEX_TYPE_UINT32 = 1,
-} VkIndexType;</code></pre>""")
+￿} VkIndexType;</pre></code>""")
     )
 
     void(
@@ -7947,12 +8062,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To bind vertex buffers to a command buffer for use in subsequent draw commands, call:
 
-        <pre><code>void vkCmdBindVertexBuffers(
+        <code><pre>
+￿void vkCmdBindVertexBuffers(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    firstBinding,
 ￿    uint32_t                                    bindingCount,
 ￿    const VkBuffer*                             pBuffers,
-￿    const VkDeviceSize*                         pOffsets);</code></pre>
+￿    const VkDeviceSize*                         pOffsets);</pre></code>
 
         <h5>Description</h5>
         The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent draw commands.
@@ -8005,12 +8121,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record a non-indexed draw, call:
 
-        <pre><code>void vkCmdDraw(
+        <code><pre>
+￿void vkCmdDraw(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    vertexCount,
 ￿    uint32_t                                    instanceCount,
 ￿    uint32_t                                    firstVertex,
-￿    uint32_t                                    firstInstance);</code></pre>
+￿    uint32_t                                    firstInstance);</pre></code>
 
         <h5>Description</h5>
         When the command is executed, primitives are assembled using the current primitive topology and {@code vertexCount} consecutive vertex indices with the first {@code vertexIndex} value equal to {@code firstVertex}. The primitives are drawn {@code instanceCount} times with {@code instanceIndex} starting with {@code firstInstance} and increasing sequentially for each instance. The assembled primitives execute the currently bound graphics pipeline.
@@ -8074,13 +8191,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record an indexed draw, call:
 
-        <pre><code>void vkCmdDrawIndexed(
+        <code><pre>
+￿void vkCmdDrawIndexed(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    indexCount,
 ￿    uint32_t                                    instanceCount,
 ￿    uint32_t                                    firstIndex,
 ￿    int32_t                                     vertexOffset,
-￿    uint32_t                                    firstInstance);</code></pre>
+￿    uint32_t                                    firstInstance);</pre></code>
 
         <h5>Description</h5>
         When the command is executed, primitives are assembled using the current primitive topology and {@code indexCount} vertices whose indices are retrieved from the index buffer. The index buffer is treated as an array of tightly packed unsigned integers of size defined by the #CmdBindIndexBuffer(){@code ::indexType} parameter with which the buffer was bound.
@@ -8150,12 +8268,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record a non-indexed indirect draw, call:
 
-        <pre><code>void vkCmdDrawIndirect(
+        <code><pre>
+￿void vkCmdDrawIndirect(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
 ￿    VkDeviceSize                                offset,
 ￿    uint32_t                                    drawCount,
-￿    uint32_t                                    stride);</code></pre>
+￿    uint32_t                                    stride);</pre></code>
 
         <h5>Description</h5>
         #CmdDrawIndirect() behaves similarly to #CmdDraw() except that the parameters are read by the device from a buffer during execution. {@code drawCount} draws are executed by the command, with parameters taken from {@code buffer} starting at {@code offset} and increasing by {@code stride} bytes for each successive draw. The parameters of each draw are encoded in an array of ##VkDrawIndirectCommand structures. If {@code drawCount} is less than or equal to one, {@code stride} is ignored.
@@ -8228,12 +8347,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record an indexed indirect draw, call:
 
-        <pre><code>void vkCmdDrawIndexedIndirect(
+        <code><pre>
+￿void vkCmdDrawIndexedIndirect(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
 ￿    VkDeviceSize                                offset,
 ￿    uint32_t                                    drawCount,
-￿    uint32_t                                    stride);</code></pre>
+￿    uint32_t                                    stride);</pre></code>
 
         <h5>Description</h5>
         #CmdDrawIndexedIndirect() behaves similarly to #CmdDrawIndexed() except that the parameters are read by the device from a buffer during execution. {@code drawCount} draws are executed by the command, with parameters taken from {@code buffer} starting at {@code offset} and increasing by {@code stride} bytes for each successive draw. The parameters of each draw are encoded in an array of ##VkDrawIndexedIndirectCommand structures. If {@code drawCount} is less than or equal to one, {@code stride} is ignored.
@@ -8306,11 +8426,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record a dispatch, call:
 
-        <pre><code>void vkCmdDispatch(
+        <code><pre>
+￿void vkCmdDispatch(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    groupCountX,
 ￿    uint32_t                                    groupCountY,
-￿    uint32_t                                    groupCountZ);</code></pre>
+￿    uint32_t                                    groupCountZ);</pre></code>
 
         <h5>Description</h5>
         When the command is executed, a global workgroup consisting of <code>groupCountX {times} groupCountY {times} groupCountZ</code> local workgroups is assembled.
@@ -8369,10 +8490,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record an indirect command dispatch, call:
 
-        <pre><code>void vkCmdDispatchIndirect(
+        <code><pre>
+￿void vkCmdDispatchIndirect(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
-￿    VkDeviceSize                                offset);</code></pre>
+￿    VkDeviceSize                                offset);</pre></code>
 
         <h5>Description</h5>
         #CmdDispatchIndirect() behaves similarly to #CmdDispatch() except that the parameters are read by the device from a buffer during execution. The parameters of the dispatch are encoded in a ##VkDispatchIndirectCommand structure taken from {@code buffer} starting at {@code offset}.
@@ -8433,12 +8555,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To copy data between buffer objects, call:
 
-        <pre><code>void vkCmdCopyBuffer(
+        <code><pre>
+￿void vkCmdCopyBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    srcBuffer,
 ￿    VkBuffer                                    dstBuffer,
 ￿    uint32_t                                    regionCount,
-￿    const VkBufferCopy*                         pRegions);</code></pre>
+￿    const VkBufferCopy*                         pRegions);</pre></code>
 
         <h5>Description</h5>
         Each region in {@code pRegions} is copied from the source buffer to the same region of the destination buffer. {@code srcBuffer} and {@code dstBuffer} <b>can</b> be the same buffer or alias the same memory, but the result is undefined if the copy regions overlap in memory.
@@ -8501,14 +8624,15 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To copy data between image objects, call:
 
-        <pre><code>void vkCmdCopyImage(
+        <code><pre>
+￿void vkCmdCopyImage(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkImage                                     srcImage,
 ￿    VkImageLayout                               srcImageLayout,
 ￿    VkImage                                     dstImage,
 ￿    VkImageLayout                               dstImageLayout,
 ￿    uint32_t                                    regionCount,
-￿    const VkImageCopy*                          pRegions);</code></pre>
+￿    const VkImageCopy*                          pRegions);</pre></code>
 
         <h5>Description</h5>
         Each region in {@code pRegions} is copied from the source image to the same region of the destination image. {@code srcImage} and {@code dstImage} <b>can</b> be the same image or alias the same memory.
@@ -8606,7 +8730,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To copy regions of a source image into a destination image, potentially performing format conversion, arbitrary scaling, and filtering, call:
 
-        <pre><code>void vkCmdBlitImage(
+        <code><pre>
+￿void vkCmdBlitImage(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkImage                                     srcImage,
 ￿    VkImageLayout                               srcImageLayout,
@@ -8614,7 +8739,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    VkImageLayout                               dstImageLayout,
 ￿    uint32_t                                    regionCount,
 ￿    const VkImageBlit*                          pRegions,
-￿    VkFilter                                    filter);</code></pre>
+￿    VkFilter                                    filter);</pre></code>
 
         <h5>Description</h5>
         #CmdBlitImage() <b>must</b> not be used for multisampled source or destination images. Use #CmdResolveImage() for this purpose.
@@ -8775,13 +8900,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To copy data from a buffer object to an image object, call:
 
-        <pre><code>void vkCmdCopyBufferToImage(
+        <code><pre>
+￿void vkCmdCopyBufferToImage(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    srcBuffer,
 ￿    VkImage                                     dstImage,
 ￿    VkImageLayout                               dstImageLayout,
 ￿    uint32_t                                    regionCount,
-￿    const VkBufferImageCopy*                    pRegions);</code></pre>
+￿    const VkBufferImageCopy*                    pRegions);</pre></code>
 
         <h5>Description</h5>
         Each region in {@code pRegions} is copied from the specified region of the source buffer to the specified region of the destination image.
@@ -8847,13 +8973,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To copy data from an image object to a buffer object, call:
 
-        <pre><code>void vkCmdCopyImageToBuffer(
+        <code><pre>
+￿void vkCmdCopyImageToBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkImage                                     srcImage,
 ￿    VkImageLayout                               srcImageLayout,
 ￿    VkBuffer                                    dstBuffer,
 ￿    uint32_t                                    regionCount,
-￿    const VkBufferImageCopy*                    pRegions);</code></pre>
+￿    const VkBufferImageCopy*                    pRegions);</pre></code>
 
         <h5>Description</h5>
         Each region in {@code pRegions} is copied from the specified region of the source image to the specified region of the destination buffer.
@@ -8919,12 +9046,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To update buffer data inline in a command buffer, call:
 
-        <pre><code>void vkCmdUpdateBuffer(
+        <code><pre>
+￿void vkCmdUpdateBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    dstBuffer,
 ￿    VkDeviceSize                                dstOffset,
 ￿    VkDeviceSize                                dataSize,
-￿    const void*                                 pData);</code></pre>
+￿    const void*                                 pData);</pre></code>
 
         <h5>Description</h5>
         {@code dataSize} <b>must</b> be less than or equal to 65536 bytes. For larger updates, applications <b>can</b> use buffer to buffer <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies-buffers">copies</a>.
@@ -8984,12 +9112,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To clear buffer data, call:
 
-        <pre><code>void vkCmdFillBuffer(
+        <code><pre>
+￿void vkCmdFillBuffer(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    dstBuffer,
 ￿    VkDeviceSize                                dstOffset,
 ￿    VkDeviceSize                                size,
-￿    uint32_t                                    data);</code></pre>
+￿    uint32_t                                    data);</pre></code>
 
         <h5>Description</h5>
         #CmdFillBuffer() is treated as "{@code transfer}" operation for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdFillBuffer().
@@ -9043,13 +9172,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To clear one or more subranges of a color image, call:
 
-        <pre><code>void vkCmdClearColorImage(
+        <code><pre>
+￿void vkCmdClearColorImage(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkImage                                     image,
 ￿    VkImageLayout                               imageLayout,
 ￿    const VkClearColorValue*                    pColor,
 ￿    uint32_t                                    rangeCount,
-￿    const VkImageSubresourceRange*              pRanges);</code></pre>
+￿    const VkImageSubresourceRange*              pRanges);</pre></code>
 
         <h5>Description</h5>
         Each specified range in {@code pRanges} is cleared to the value specified by {@code pColor}.
@@ -9111,13 +9241,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To clear one or more subranges of a depth/stencil image, call:
 
-        <pre><code>void vkCmdClearDepthStencilImage(
+        <code><pre>
+￿void vkCmdClearDepthStencilImage(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkImage                                     image,
 ￿    VkImageLayout                               imageLayout,
 ￿    const VkClearDepthStencilValue*             pDepthStencil,
 ￿    uint32_t                                    rangeCount,
-￿    const VkImageSubresourceRange*              pRanges);</code></pre>
+￿    const VkImageSubresourceRange*              pRanges);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -9176,12 +9307,13 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To clear one or more regions of color and depth/stencil attachments inside a render pass instance, call:
 
-        <pre><code>void vkCmdClearAttachments(
+        <code><pre>
+￿void vkCmdClearAttachments(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    attachmentCount,
 ￿    const VkClearAttachment*                    pAttachments,
 ￿    uint32_t                                    rectCount,
-￿    const VkClearRect*                          pRects);</code></pre>
+￿    const VkClearRect*                          pRects);</pre></code>
 
         <h5>Description</h5>
         #CmdClearAttachments() <b>can</b> clear multiple regions of each attachment used in the current subpass of a render pass instance. This command <b>must</b> be called only inside a render pass instance, and implicitly selects the images to clear based on the current framebuffer attachments and the command parameters.
@@ -9237,14 +9369,15 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To resolve a multisample image to a non-multisample image, call:
 
-        <pre><code>void vkCmdResolveImage(
+        <code><pre>
+￿void vkCmdResolveImage(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkImage                                     srcImage,
 ￿    VkImageLayout                               srcImageLayout,
 ￿    VkImage                                     dstImage,
 ￿    VkImageLayout                               dstImageLayout,
 ￿    uint32_t                                    regionCount,
-￿    const VkImageResolve*                       pRegions);</code></pre>
+￿    const VkImageResolve*                       pRegions);</pre></code>
 
         <h5>Description</h5>
         During the resolve the samples corresponding to each pixel location in the source are converted to a single sample before being written to the destination. If the source formats are floating-point or normalized types, the sample values for each pixel are resolved in an implementation-dependent manner. If the source formats are integer types, a single sample's value is selected for each pixel.
@@ -9318,10 +9451,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To set the state of an event to signaled from a device, call:
 
-        <pre><code>void vkCmdSetEvent(
+        <code><pre>
+￿void vkCmdSetEvent(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkEvent                                     event,
-￿    VkPipelineStageFlags                        stageMask);</code></pre>
+￿    VkPipelineStageFlags                        stageMask);</pre></code>
 
         <h5>Description</h5>
         When #CmdSetEvent() is submitted to a queue, it defines an execution dependency on commands that were submitted before it, and defines an event signal operation which sets the event to the signaled state.
@@ -9378,10 +9512,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To set the state of an event to unsignaled from a device, call:
 
-        <pre><code>void vkCmdResetEvent(
+        <code><pre>
+￿void vkCmdResetEvent(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkEvent                                     event,
-￿    VkPipelineStageFlags                        stageMask);</code></pre>
+￿    VkPipelineStageFlags                        stageMask);</pre></code>
 
         <h5>Description</h5>
         When #CmdResetEvent() is submitted to a queue, it defines an execution dependency on commands that were submitted before it, and defines an event unsignal operation which resets the event to the unsignaled state.
@@ -9439,7 +9574,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To wait for one or more events to enter the signaled state on a device, call:
 
-        <pre><code>void vkCmdWaitEvents(
+        <code><pre>
+￿void vkCmdWaitEvents(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    eventCount,
 ￿    const VkEvent*                              pEvents,
@@ -9450,7 +9586,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    uint32_t                                    bufferMemoryBarrierCount,
 ￿    const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
 ￿    uint32_t                                    imageMemoryBarrierCount,
-￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
+￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</pre></code>
 
         <h5>Description</h5>
         When #CmdWaitEvents() is submitted to a queue, it defines a memory dependency between prior event signal operations, and subsequent commands.
@@ -9539,7 +9675,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record a pipeline barrier, call:
 
-        <pre><code>void vkCmdPipelineBarrier(
+        <code><pre>
+￿void vkCmdPipelineBarrier(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineStageFlags                        srcStageMask,
 ￿    VkPipelineStageFlags                        dstStageMask,
@@ -9549,7 +9686,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    uint32_t                                    bufferMemoryBarrierCount,
 ￿    const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
 ￿    uint32_t                                    imageMemoryBarrierCount,
-￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
+￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</pre></code>
 
         <h5>Description</h5>
         When #CmdPipelineBarrier() is submitted to a queue, it defines a memory dependency between commands that were submitted before it, and those submitted after it.
@@ -9626,11 +9763,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         VkPipelineStageFlags.IN("srcStageMask", "defines a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">source stage mask</a>."),
         VkPipelineStageFlags.IN("dstStageMask", "defines a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">destination stage mask</a>."),
         VkDependencyFlags.IN("dependencyFlags", """a bitmask of {@code VkDependencyFlagBits}. The bits that <b>can</b> be included in {@code dependencyFlags} are:
-<pre><code>typedef enum VkDependencyFlagBits {
+<code><pre>
+￿typedef enum VkDependencyFlagBits {
 ￿    VK_DEPENDENCY_BY_REGION_BIT = 0x00000001,
 ￿    VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX = 0x00000002,
 ￿    VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX = 0x00000004,
-} VkDependencyFlagBits;</code></pre>
+￿} VkDependencyFlagBits;</pre></code>
 
         <ul>
             <li>#DEPENDENCY_BY_REGION_BIT signifies that dependencies will be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions">framebuffer-local</a>.</li>
@@ -9651,11 +9789,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To begin a query, call:
 
-        <pre><code>void vkCmdBeginQuery(
+        <code><pre>
+￿void vkCmdBeginQuery(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkQueryPool                                 queryPool,
 ￿    uint32_t                                    query,
-￿    VkQueryControlFlags                         flags);</code></pre>
+￿    VkQueryControlFlags                         flags);</pre></code>
 
         <h5>Description</h5>
         If the {@code queryType} of the pool is #QUERY_TYPE_OCCLUSION and {@code flags} contains #QUERY_CONTROL_PRECISE_BIT, an implementation <b>must</b> return a result that matches the actual number of samples passed. This is described in more detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-occlusion">Occlusion Queries</a>.
@@ -9704,9 +9843,10 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query."),
         uint32_t.IN("query", "the query index within the query pool that will contain the results."),
         VkQueryControlFlags.IN("flags", """a bitmask indicating constraints on the types of queries that <b>can</b> be performed. Bits which <b>can</b> be set include:
-<pre><code>typedef enum VkQueryControlFlagBits {
+<code><pre>
+￿typedef enum VkQueryControlFlagBits {
 ￿    VK_QUERY_CONTROL_PRECISE_BIT = 0x00000001,
-} VkQueryControlFlagBits;</code></pre>""")
+￿} VkQueryControlFlagBits;</pre></code>""")
     )
 
     void(
@@ -9717,10 +9857,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To end a query after the set of desired draw or dispatch commands is executed, call:
 
-        <pre><code>void vkCmdEndQuery(
+        <code><pre>
+￿void vkCmdEndQuery(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkQueryPool                                 queryPool,
-￿    uint32_t                                    query);</code></pre>
+￿    uint32_t                                    query);</pre></code>
 
         <h5>Description</h5>
         As queries operate asynchronously, ending a query does not immediately set the query's status to available. A query is considered <em>finished</em> when the final results of the query are ready to be retrieved by #GetQueryPoolResults() and #CmdCopyQueryPoolResults(), and this is when the query's status is set to available.
@@ -9770,11 +9911,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To reset a range of queries in a query pool, call:
 
-        <pre><code>void vkCmdResetQueryPool(
+        <code><pre>
+￿void vkCmdResetQueryPool(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkQueryPool                                 queryPool,
 ￿    uint32_t                                    firstQuery,
-￿    uint32_t                                    queryCount);</code></pre>
+￿    uint32_t                                    queryCount);</pre></code>
 
         <h5>Description</h5>
         When executed on a queue, this command sets the status of query indices <code>[firstQuery, firstQuery + queryCount - 1]</code> to unavailable.
@@ -9822,11 +9964,12 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To request a timestamp, call:
 
-        <pre><code>void vkCmdWriteTimestamp(
+        <code><pre>
+￿void vkCmdWriteTimestamp(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineStageFlagBits                     pipelineStage,
 ￿    VkQueryPool                                 queryPool,
-￿    uint32_t                                    query);</code></pre>
+￿    uint32_t                                    query);</pre></code>
 
         <h5>Description</h5>
         #CmdWriteTimestamp() latches the value of the timer when all previous commands have completed executing as far as the specified pipeline stage, and writes the timestamp value to memory. When the timestamp value is written, the availability status of the query is set to available.
@@ -9893,7 +10036,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To copy query statuses and numerical results directly to buffer memory, call:
 
-        <pre><code>void vkCmdCopyQueryPoolResults(
+        <code><pre>
+￿void vkCmdCopyQueryPoolResults(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkQueryPool                                 queryPool,
 ￿    uint32_t                                    firstQuery,
@@ -9901,7 +10045,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    VkBuffer                                    dstBuffer,
 ￿    VkDeviceSize                                dstOffset,
 ￿    VkDeviceSize                                stride,
-￿    VkQueryResultFlags                          flags);</code></pre>
+￿    VkQueryResultFlags                          flags);</pre></code>
 
         <h5>Description</h5>
         #CmdCopyQueryPoolResults() is guaranteed to see the effect of previous uses of #CmdResetQueryPool() in the same queue, without any additional synchronization. Thus, the results will always reflect the most recent use of the query.
@@ -9978,13 +10122,14 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To update push constants, call:
 
-        <pre><code>void vkCmdPushConstants(
+        <code><pre>
+￿void vkCmdPushConstants(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineLayout                            layout,
 ￿    VkShaderStageFlags                          stageFlags,
 ￿    uint32_t                                    offset,
 ￿    uint32_t                                    size,
-￿    const void*                                 pValues);</code></pre>
+￿    const void*                                 pValues);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -10037,10 +10182,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To begin a render pass instance, call:
 
-        <pre><code>void vkCmdBeginRenderPass(
+        <code><pre>
+￿void vkCmdBeginRenderPass(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    const VkRenderPassBeginInfo*                pRenderPassBegin,
-￿    VkSubpassContents                           contents);</code></pre>
+￿    VkSubpassContents                           contents);</pre></code>
 
         <h5>Description</h5>
         After beginning a render pass instance, the command buffer is ready to record the commands for the first subpass of that render pass.
@@ -10086,10 +10232,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         VkCommandBuffer.IN("commandBuffer", "the command buffer in which to record the command."),
         const..VkRenderPassBeginInfo.p.IN("pRenderPassBegin", "a pointer to a ##VkRenderPassBeginInfo structure (defined below) which indicates the render pass to begin an instance of, and the framebuffer the instance uses."),
         VkSubpassContents.IN("contents", """specifies how the commands in the first subpass will be provided, and is one of the values:
-<pre><code>typedef enum VkSubpassContents {
+<code><pre>
+￿typedef enum VkSubpassContents {
 ￿    VK_SUBPASS_CONTENTS_INLINE = 0,
 ￿    VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS = 1,
-} VkSubpassContents;</code></pre>
+￿} VkSubpassContents;</pre></code>
 
         If {@code contents} is #SUBPASS_CONTENTS_INLINE, the contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers <b>must</b> not be executed within the subpass. If {@code contents} is #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS, the contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().""")
     )
@@ -10102,9 +10249,10 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To transition to the next subpass in the render pass instance after recording the commands for a subpass, call:
 
-        <pre><code>void vkCmdNextSubpass(
+        <code><pre>
+￿void vkCmdNextSubpass(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    VkSubpassContents                           contents);</code></pre>
+￿    VkSubpassContents                           contents);</pre></code>
 
         <h5>Description</h5>
         The subpass index for a render pass begins at zero when #CmdBeginRenderPass() is recorded, and increments each time #CmdNextSubpass() is recorded.
@@ -10153,8 +10301,9 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         To record a command to end a render pass instance after recording the commands for the last subpass, call:
 
-        <pre><code>void vkCmdEndRenderPass(
-￿    VkCommandBuffer                             commandBuffer);</code></pre>
+        <code><pre>
+￿void vkCmdEndRenderPass(
+￿    VkCommandBuffer                             commandBuffer);</pre></code>
 
         <h5>Description</h5>
         Ending a render pass instance performs any multisample resolve operations on the final subpass.
@@ -10197,10 +10346,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
         <h5>C Specification</h5>
         A secondary command buffer <b>must</b> not be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary command buffer with the command:
 
-        <pre><code>void vkCmdExecuteCommands(
+        <code><pre>
+￿void vkCmdExecuteCommands(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    commandBufferCount,
-￿    const VkCommandBuffer*                      pCommandBuffers);</code></pre>
+￿    const VkCommandBuffer*                      pCommandBuffers);</pre></code>
 
         <h5>Description</h5>
         If any element of {@code pCommandBuffers} was not recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag, and it was recorded into any other primary command buffer which is currently in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">executable or recording state</a>, that primary command buffer becomes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">invalid</a>.

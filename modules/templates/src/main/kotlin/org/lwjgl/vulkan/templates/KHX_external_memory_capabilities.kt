@@ -146,10 +146,11 @@ val KHX_external_memory_capabilities = "KHXExternalMemoryCapabilities".nativeCla
         <h5>C Specification</h5>
         To query the external handle types supported by buffers, call:
 
-        <pre><code>void vkGetPhysicalDeviceExternalBufferPropertiesKHX(
+        <code><pre>
+￿void vkGetPhysicalDeviceExternalBufferPropertiesKHX(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalBufferInfoKHX* pExternalBufferInfo,
-￿    VkExternalBufferPropertiesKHX*              pExternalBufferProperties);</code></pre>
+￿    VkExternalBufferPropertiesKHX*              pExternalBufferProperties);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

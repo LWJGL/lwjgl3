@@ -187,12 +187,13 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         To determine how peer memory <b>can</b> be accessed, call:
 
-        <pre><code>void vkGetDeviceGroupPeerMemoryFeaturesKHX(
+        <code><pre>
+￿void vkGetDeviceGroupPeerMemoryFeaturesKHX(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    heapIndex,
 ￿    uint32_t                                    localDeviceIndex,
 ￿    uint32_t                                    remoteDeviceIndex,
-￿    VkPeerMemoryFeatureFlagsKHX*                pPeerMemoryFeatures);</code></pre>
+￿    VkPeerMemoryFeatureFlagsKHX*                pPeerMemoryFeatures);</pre></code>
 
         <h5>Description</h5>
         #PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX <b>must</b> be supported for all heaps.
@@ -220,12 +221,13 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         uint32_t.IN("localDeviceIndex", "the device index of the physical device that performs the memory access."),
         uint32_t.IN("remoteDeviceIndex", "the device index of the physical device that the memory is allocated for."),
         Check(1)..VkPeerMemoryFeatureFlagsKHX.p.OUT("pPeerMemoryFeatures", """a pointer to a bitmask indicating which types of memory accesses are supported for the combination of heap, local, and remote devices. The bits returned in {@code pPeerMemoryFeatures} are:
-<pre><code>typedef enum VkPeerMemoryFeatureFlagBitsKHX {
+<code><pre>
+￿typedef enum VkPeerMemoryFeatureFlagBitsKHX {
 ￿    VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX = 0x00000001,
 ￿    VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX = 0x00000002,
 ￿    VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX = 0x00000004,
 ￿    VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX = 0x00000008,
-} VkPeerMemoryFeatureFlagBitsKHX;</code></pre>
+￿} VkPeerMemoryFeatureFlagBitsKHX;</pre></code>
 
         <ul>
             <li>if {@code pPeerMemoryFeatures} contains #PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX, the memory <b>can</b> be accessed as the source of a ftext:vkCmdCopy* command.</li>
@@ -243,10 +245,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>C Specification</h5>
         To attach memory to buffer objects for one or more buffers at a time, call:
 
-        <pre><code>VkResult vkBindBufferMemory2KHX(
+        <code><pre>
+￿VkResult vkBindBufferMemory2KHX(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    bindInfoCount,
-￿    const VkBindBufferMemoryInfoKHX*            pBindInfos);</code></pre>
+￿    const VkBindBufferMemoryInfoKHX*            pBindInfos);</pre></code>
 
         <h5>Description</h5>
         On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
@@ -289,10 +292,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>C Specification</h5>
         To attach memory to image objects for one or more images at a time, call:
 
-        <pre><code>VkResult vkBindImageMemory2KHX(
+        <code><pre>
+￿VkResult vkBindImageMemory2KHX(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    bindInfoCount,
-￿    const VkBindImageMemoryInfoKHX*             pBindInfos);</code></pre>
+￿    const VkBindImageMemoryInfoKHX*             pBindInfos);</pre></code>
 
         <h5>Description</h5>
         On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
@@ -335,9 +339,10 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>C Specification</h5>
         To update the current device mask of a command buffer, call:
 
-        <pre><code>void vkCmdSetDeviceMaskKHX(
+        <code><pre>
+￿void vkCmdSetDeviceMaskKHX(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    deviceMask);</code></pre>
+￿    uint32_t                                    deviceMask);</pre></code>
 
         <h5>Description</h5>
         {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask.
@@ -384,9 +389,10 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         To query these capabilities, call:
 
-        <pre><code>VkResult vkGetDeviceGroupPresentCapabilitiesKHX(
+        <code><pre>
+￿VkResult vkGetDeviceGroupPresentCapabilitiesKHX(
 ￿    VkDevice                                    device,
-￿    VkDeviceGroupPresentCapabilitiesKHX*        pDeviceGroupPresentCapabilities);</code></pre>
+￿    VkDeviceGroupPresentCapabilitiesKHX*        pDeviceGroupPresentCapabilities);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -426,10 +432,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         To query the supported device group present modes for a particular surface, call:
 
-        <pre><code>VkResult vkGetDeviceGroupSurfacePresentModesKHX(
+        <code><pre>
+￿VkResult vkGetDeviceGroupSurfacePresentModesKHX(
 ￿    VkDevice                                    device,
 ￿    VkSurfaceKHR                                surface,
-￿    VkDeviceGroupPresentModeFlagsKHX*           pModes);</code></pre>
+￿    VkDeviceGroupPresentModeFlagsKHX*           pModes);</pre></code>
 
         <h5>Description</h5>
         The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHX().
@@ -476,10 +483,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>C Specification</h5>
         To acquire an available presentable image to use, and retrieve the index of that image, call:
 
-        <pre><code>VkResult vkAcquireNextImage2KHX(
+        <code><pre>
+￿VkResult vkAcquireNextImage2KHX(
 ￿    VkDevice                                    device,
 ￿    const VkAcquireNextImageInfoKHX*            pAcquireInfo,
-￿    uint32_t*                                   pImageIndex);</code></pre>
+￿    uint32_t*                                   pImageIndex);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -525,14 +533,15 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>C Specification</h5>
         To record a dispatch using non-zero base values for the components of {@code WorkgroupId}, call:
 
-        <pre><code>void vkCmdDispatchBaseKHX(
+        <code><pre>
+￿void vkCmdDispatchBaseKHX(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    baseGroupX,
 ￿    uint32_t                                    baseGroupY,
 ￿    uint32_t                                    baseGroupZ,
 ￿    uint32_t                                    groupCountX,
 ￿    uint32_t                                    groupCountY,
-￿    uint32_t                                    groupCountZ);</code></pre>
+￿    uint32_t                                    groupCountZ);</pre></code>
 
         <h5>Description</h5>
         When the command is executed, a global workgroup consisting of <code>groupCountX {times} groupCountY {times} groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup {plus} groupCount)</code> in each component. #CmdDispatch() is equivalent to vkCmdDispatchBaseKHX(0,0,0,groupCountX,groupCountY,groupCountZ).
@@ -589,11 +598,12 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         To query a set of rectangles used in presentation on the physical device, call:
 
-        <pre><code>VkResult vkGetPhysicalDevicePresentRectanglesKHX(
+        <code><pre>
+￿VkResult vkGetPhysicalDevicePresentRectanglesKHX(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
 ￿    uint32_t*                                   pRectCount,
-￿    VkRect2D*                                   pRects);</code></pre>
+￿    VkRect2D*                                   pRects);</pre></code>
 
         <h5>Description</h5>
         If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written. If {@code pRectCount} is smaller than the number of rectangles used for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.

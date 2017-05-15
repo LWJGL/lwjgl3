@@ -82,11 +82,12 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
         <h5>C Specification</h5>
         To export a Windows handle representing the underlying resources of a Vulkan device memory object, call:
 
-        <pre><code>VkResult vkGetMemoryWin32HandleKHX(
+        <code><pre>
+￿VkResult vkGetMemoryWin32HandleKHX(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
 ￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
-￿    HANDLE*                                     pHandle);</code></pre>
+￿    HANDLE*                                     pHandle);</pre></code>
 
         <h5>Description</h5>
         The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHX} for a description of the properties of the defined external memory handle types.
@@ -138,11 +139,12 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
         <h5>C Specification</h5>
         Windows memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:
 
-        <pre><code>VkResult vkGetMemoryWin32HandlePropertiesKHX(
+        <code><pre>
+￿VkResult vkGetMemoryWin32HandlePropertiesKHX(
 ￿    VkDevice                                    device,
 ￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
 ￿    HANDLE                                      handle,
-￿    VkMemoryWin32HandlePropertiesKHX*           pMemoryWin32HandleProperties);</code></pre>
+￿    VkMemoryWin32HandlePropertiesKHX*           pMemoryWin32HandleProperties);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>

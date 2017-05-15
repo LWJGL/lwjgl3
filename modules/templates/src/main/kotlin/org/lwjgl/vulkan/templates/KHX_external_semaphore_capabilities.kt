@@ -130,10 +130,11 @@ val KHX_external_semaphore_capabilities = "KHXExternalSemaphoreCapabilities".nat
         <h5>C Specification</h5>
         Semaphores <b>may</b> support import and export of external semaphore handles. To query the external handle types supported by semaphores, call:
 
-        <pre><code>void vkGetPhysicalDeviceExternalSemaphorePropertiesKHX(
+        <code><pre>
+￿void vkGetPhysicalDeviceExternalSemaphorePropertiesKHX(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalSemaphoreInfoKHX* pExternalSemaphoreInfo,
-￿    VkExternalSemaphorePropertiesKHX*           pExternalSemaphoreProperties);</code></pre>
+￿    VkExternalSemaphorePropertiesKHX*           pExternalSemaphoreProperties);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

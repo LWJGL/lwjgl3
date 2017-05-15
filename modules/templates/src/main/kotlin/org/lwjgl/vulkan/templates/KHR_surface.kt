@@ -198,56 +198,78 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         <code>E</code> - corresponding electrical signal (value stored in memory)
 
         <h5>sRGB OETF</h5>
-        <pre><code>E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0031308 &le; L &le; 1
-￿    12.92  &times; L for 0 &le; L &lt 0.0031308</code></pre>
+        <code><pre>
+￿E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0031308 &le; L &le; 1
+￿    12.92  &times; L for 0 &le; L &lt 0.0031308</pre></code>
 
         <h5>Display-P3 EOTF</h5>
-        <pre><code>E = (a &times; L + b)<sup>2.4</sup> for 0.039 &le; L &le; 1
-￿    b &times; L for 0 &le; L &lt; 0.039</code></pre>
+        <code><pre>
+￿E = (a &times; L + b)<sup>2.4</sup> for 0.039 &le; L &le; 1
+￿    b &times; L for 0 &le; L &lt; 0.039</pre></code>
 
-        <pre><code>a = 0.948</code></pre> + <pre><code>b = 0.052</code></pre> + <pre><code>c = 0.077</code></pre> +
+        <code><pre>
+￿a = 0.948</pre></code> + <code><pre>
+￿b = 0.052</pre></code> + <code><pre>
+￿c = 0.077</pre></code> +
 
         <h5>Display-P3 OETF</h5>
-        <pre><code>E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0030186 &le; L &le; 1
-￿    12.92  &times; L for 0 &le; L &lt 0.0030186</code></pre>
+        <code><pre>
+￿E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0030186 &le; L &le; 1
+￿    12.92  &times; L for 0 &le; L &lt 0.0030186</pre></code>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         For most uses, the sRGB OETF is equivalent.
         </div>
 
         <h5>Extended sRGB OETF</h5>
-        <pre><code>￿     1.055 &times;  L<sup>1/2.4</sup> - 0.055 for 0.0031308 &le; L &le; 7.5913
-E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
-￿    -f(-L) for L &lt; 0</code></pre>
+        <code><pre>
+￿     1.055 &times;  L<sup>1/2.4</sup> - 0.055 for 0.0031308 &le; L &le; 7.5913
+￿E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
+￿    -f(-L) for L &lt; 0</pre></code>
 
         <code>L</code> - luminance of image is within <code>[-0.6038, 7.5913]</code>.
 
         <code>E</code> can be negative and/or > 1. That is how extended sRGB specifies colors outside the standard sRGB gamut. This means extended sRGB needs a floating point pixel format to cover the intended color range.
 
         <h5>SMPTE 170M OETF</h5>
-        <pre><code>E = α &times; L^<sup>0.45</sup> - (1 - α) for β &le; L &le; 1
-￿    4.5 &times; L for 0 &le; L &lt; β</code></pre>
+        <code><pre>
+￿E = α &times; L^<sup>0.45</sup> - (1 - α) for β &le; L &le; 1
+￿    4.5 &times; L for 0 &le; L &lt; β</pre></code>
 
-        <pre><code>α = 1.099 and β = 0.018 for 10-bits and less per sample system (the values given in Rec.709)</code></pre> + <pre><code>α = 1.0993 and β = 0.0181 for 12-bits per sample system</code></pre>
+        <code><pre>
+￿α = 1.099 and β = 0.018 for 10-bits and less per sample system (the values given in Rec.709)</pre></code> + <code><pre>
+￿α = 1.0993 and β = 0.0181 for 12-bits per sample system</pre></code>
 
         <h5>SMPTE ST2084 OETF (Inverse-EOTF)</h5>
-        <pre><code>E = ((c_<sub>1</sub> + c_<sub>2</sub> &times; L^<sup>m_<sub>1</sub></sup>) / (1 + c_<sub>3</sub> &times; L^<sup>m_<sub>1</sub></sup>))^<sup>m_<sub>2</sub></sup></code></pre>
+        <code><pre>
+￿E = ((c_<sub>1</sub> + c_<sub>2</sub> &times; L^<sup>m_<sub>1</sub></sup>) / (1 + c_<sub>3</sub> &times; L^<sup>m_<sub>1</sub></sup>))^<sup>m_<sub>2</sub></sup></pre></code>
 
         where:
 
-        <pre><code>m<sub>1</sub> = 2610 / 4096 &times; 1/4 = 0.1593017578125</code></pre> + <pre><code>m<sub>2</sub> = 2523 / 4096 &times; 128 = 78.84375</code></pre> + <pre><code>c<sub>1</sub> = 3424 / 4096 = 0.8359375 = c3 - c2 + 1</code></pre> + <pre><code>c<sub>2</sub> = 2413 / 4096 &times; 32 = 18.8515625</code></pre> + <pre><code>c<sub>3</sub> = 2392 / 4096 &times; 32 = 18.6875</code></pre> +
+        <code><pre>
+￿m<sub>1</sub> = 2610 / 4096 &times; 1/4 = 0.1593017578125</pre></code> + <code><pre>
+￿m<sub>2</sub> = 2523 / 4096 &times; 128 = 78.84375</pre></code> + <code><pre>
+￿c<sub>1</sub> = 3424 / 4096 = 0.8359375 = c3 - c2 + 1</pre></code> + <code><pre>
+￿c<sub>2</sub> = 2413 / 4096 &times; 32 = 18.8515625</pre></code> + <code><pre>
+￿c<sub>3</sub> = 2392 / 4096 &times; 32 = 18.6875</pre></code> +
 
         <h5>Hybrid Log Gamma (HLG)</h5>
-        <pre><code>E = r &times; sqrt(L) for 0 &le; L &le; 1
-￿    a &times; ln(L - b) + c for 1 &lt L</code></pre>
+        <code><pre>
+￿E = r &times; sqrt(L) for 0 &le; L &le; 1
+￿    a &times; ln(L - b) + c for 1 &lt L</pre></code>
 
-        <pre><code>L - is the signal normalized by the reference white level</code></pre> + <pre><code>r - is the reference white level and has a signal value of 0.5</code></pre> + <pre><code>a = 0.17883277 and b = 0.28466892, and c = 0.55991073</code></pre>
+        <code><pre>
+￿L - is the signal normalized by the reference white level</pre></code> + <code><pre>
+￿r - is the reference white level and has a signal value of 0.5</pre></code> + <code><pre>
+￿a = 0.17883277 and b = 0.28466892, and c = 0.55991073</pre></code>
 
         <h5>AdobeRGB OETF</h5>
-        <pre><code>E = L^<sup>1 / 2.19921875</sup></code></pre>
+        <code><pre>
+￿E = L^<sup>1 / 2.19921875</sup></pre></code>
 
         <h5>Gamma 2.6 OETF</h5>
-        <pre><code>E = L^<sup>1 / 2.6</sup></code></pre>
+        <code><pre>
+￿E = L^<sup>1 / 2.6</sup></pre></code>
 
         An implementation supporting this extension indicates support for these color spaces via ##VkSurfaceFormatKHR structures returned from #GetPhysicalDeviceSurfaceFormatsKHR().
 
@@ -323,10 +345,11 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
         <h5>C Specification</h5>
         To destroy a {@code VkSurfaceKHR} object, call:
 
-        <pre><code>void vkDestroySurfaceKHR(
+        <code><pre>
+￿void vkDestroySurfaceKHR(
 ￿    VkInstance                                  instance,
 ￿    VkSurfaceKHR                                surface,
-￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
 
         <h5>Description</h5>
         Destroying a {@code VkSurfaceKHR} merely severs the connection between Vulkan and the native surface, and does not imply destroying the native surface, closing a window, or similar behavior.
@@ -368,11 +391,12 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
         <h5>C Specification</h5>
         To determine whether a queue family of a physical device supports presentation to a given surface, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceSurfaceSupportKHR(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceSurfaceSupportKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t                                    queueFamilyIndex,
 ￿    VkSurfaceKHR                                surface,
-￿    VkBool32*                                   pSupported);</code></pre>
+￿    VkBool32*                                   pSupported);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -416,10 +440,11 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
         <h5>C Specification</h5>
         To query the basic capabilities of a surface, needed in order to create a swapchain, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
-￿    VkSurfaceCapabilitiesKHR*                   pSurfaceCapabilities);</code></pre>
+￿    VkSurfaceCapabilitiesKHR*                   pSurfaceCapabilities);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -460,11 +485,12 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
         <h5>C Specification</h5>
         To query the supported swapchain format-color space pairs for a surface, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceSurfaceFormatsKHR(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceSurfaceFormatsKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
 ￿    uint32_t*                                   pSurfaceFormatCount,
-￿    VkSurfaceFormatKHR*                         pSurfaceFormats);</code></pre>
+￿    VkSurfaceFormatKHR*                         pSurfaceFormats);</pre></code>
 
         <h5>Description</h5>
         If {@code pSurfaceFormats} is {@code NULL}, then the number of format pairs supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. The number of format pairs supported will be greater than or equal to 1. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format pairs supported, at most {@code pSurfaceFormatCount} structures will be written. If {@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -511,11 +537,12 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
         <h5>C Specification</h5>
         To query the supported presentation modes for a surface, call:
 
-        <pre><code>VkResult vkGetPhysicalDeviceSurfacePresentModesKHR(
+        <code><pre>
+￿VkResult vkGetPhysicalDeviceSurfacePresentModesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
 ￿    uint32_t*                                   pPresentModeCount,
-￿    VkPresentModeKHR*                           pPresentModes);</code></pre>
+￿    VkPresentModeKHR*                           pPresentModes);</pre></code>
 
         <h5>Description</h5>
         If {@code pPresentModes} is {@code NULL}, then the number of presentation modes supported for the given {@code surface} is returned in {@code pPresentModeCount}. Otherwise, {@code pPresentModeCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPresentModes} array, and on return the variable is overwritten with the number of values actually written to {@code pPresentModes}. If the value of {@code pPresentModeCount} is less than the number of presentation modes supported, at most {@code pPresentModeCount} values will be written. If {@code pPresentModeCount} is smaller than the number of presentation modes supported for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.

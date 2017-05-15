@@ -22,22 +22,23 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
         If {@code VK_NV_viewport_array2} is not also supported and enabled, the per-view viewport mask <b>must</b> not be used.
 
         <h5>Examples</h5>
-        <pre><code>\#version 450 core
+        <code><pre>
+￿\#version 450 core
 ￿
-\#extension GL_KHX_multiview : enable
-\#extension GL_NVX_multiview_per_view_attributes : enable
+￿\#extension GL_KHX_multiview : enable
+￿\#extension GL_NVX_multiview_per_view_attributes : enable
 ￿
-layout(location = 0) in vec4 position;
-layout(set = 0, binding = 0) uniform Block { mat4 mvpPerView[2]; } buf;
+￿layout(location = 0) in vec4 position;
+￿layout(set = 0, binding = 0) uniform Block { mat4 mvpPerView[2]; } buf;
 ￿
-void main()
-{
+￿void main()
+￿{
 ￿    // Output both per-view positions and gl_Position as a function
 ￿    // of gl_ViewIndex
 ￿    gl_PositionPerViewNV[0] = buf.mvpPerView[0] * position;
 ￿    gl_PositionPerViewNV[1] = buf.mvpPerView[1] * position;
 ￿    gl_Position = buf.mvpPerView[gl_ViewIndex] * position;
-}</code></pre>
+￿}</pre></code>
 
         <dl>
             <dt><b>Name String</b></dt>
