@@ -29,9 +29,9 @@ This build includes the following changes:
 - lmdb: Updated to 0.9.20 (up from 0.9.18)
 - NanoVG: Added support for fallback fonts.
 - nuklear: Updated to 1.37.0 (up from 1.29.1, with the new versioning)
-- OpenAL: Added `AL_SOFT_source_resampler` extension.
+- OpenAL: Added `AL_SOFT_source_resampler` and `AL_SOFT_source_spatialize` extensions.
 - stb
-	* Updated `stb_dxt` to 1.0.6 (up from 1.0.4)
+    * Updated `stb_dxt` to 1.0.6 (up from 1.0.4)
     * Updated `stb_easy_font` to 1.0 (up from 0.7)
     * Updated `stb_image` to 2.15 (up from 2.13)
     * Updated `stb_image_resize` to 0.94 (up from 0.91)
@@ -51,6 +51,9 @@ This build includes the following changes:
 - Migrated windows builds to [appveyor](https://ci.appveyor.com/project/LWJGL-CI/lwjgl3) and updated to Visual Studio 2017 (up from 2015)
 - EGL: The core API now includes javadoc links to the Khronos references pages
 - OpenGL ES: The core API now includes javadoc links to the Khronos references pages
+- Added support for OSGi (#277)
+    * LWJGL OSGi bundles are available under the `org.lwjgl.osgi` Maven `groupId`.
+    * Contributed and maintained by @io7m. 
 
 #### Fixes
 
@@ -63,7 +66,7 @@ This build includes the following changes:
 - Fixed callback invocation bugs on 32-bit architectures.
 - Fixed various javadoc formatting issues (#308)
 
-### Breaking Changes
+#### Breaking Changes
 
 - Mapped more integer parameters and return values to Java `boolean`, that were missed while working on #181.
     * Xlib's `Bool`
