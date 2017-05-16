@@ -135,6 +135,8 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 
 // OES_EGL_image
 val GLeglImageOES = "GLeglImageOES".opaque_p
+// NV_draw_vulkan_image
+val VULKANPROCNV = "VULKANPROCNV".opaque_p
 
 // AutoType tokens
 enum class BufferType(
