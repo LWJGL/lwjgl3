@@ -2820,6 +2820,12 @@ kernel void image_filter (
             {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.
             """,
             """
+            #MAX_SIZE_RESTRICTION_EXCEEDED if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
+            (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
+            optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
+            defined in SPIR-V 1.2 Specification.
+            """,
+            """
             $INVALID_ARG_VALUE if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
             object created with {@code cl_mem_flags} of #MEM_WRITE_ONLY or if the image argument is declared with the {@code write_only} qualifier
             and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of #MEM_READ_ONLY.

@@ -350,6 +350,23 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
     useSystemCallConvention()
 }
 
+val cl_program_release_callback = "cl_program_release_callback".callback(
+    OPENCL_PACKAGE, void, "CLProgramReleaseCallback",
+    "Will be called after destructors (if any) for program scope global variables (if any) are called and before the program is released.",
+
+    cl_program.IN(
+        "program",
+        """
+        the program object whose destructors are being called. When the user callback is called by the implementation, this program object is no longer valid.
+        {@code program} is only provided for reference purposes.
+        """
+    ),
+    void_p.IN("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
+) {
+    documentation = "Instances of this interface may be passed to the #SetProgramReleaseCallback() method."
+    useSystemCallConvention()
+}
+
 // OpenGL interop
 
 val cl_gl_context_info = IntegerType("cl_gl_context_info", PrimitiveMapping.INT)

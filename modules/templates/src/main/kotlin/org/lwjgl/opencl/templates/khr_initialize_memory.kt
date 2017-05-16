@@ -9,7 +9,17 @@ import org.lwjgl.opencl.*
 
 val khr_initialize_memory = "KHRInitializeMemory".nativeClassCL("khr_initialize_memory", KHR) {
 
-    documentation = "Native bindings to the $extensionName extension."
+    documentation =
+        """
+        Native bindings to the $extensionName extension.
+
+        This extension adds support for initializing local and private memory before a kernel begins execution.
+
+        Memory is allocated in various forms in OpenCL both explicitly (global memory) or implicitly (local, private memory). This allocation so far does not
+        provide a straightforward mechanism to initialize the memory on allocation. In other words what is lacking is the equivalent of calloc for the
+        currently supported malloc like capability. This functionality is useful for a variety of reasons including ease of debugging, application controlled
+        limiting of visibility to previous contents of memory and in some cases, optimization.
+        """
 
     IntConstant(
         """
