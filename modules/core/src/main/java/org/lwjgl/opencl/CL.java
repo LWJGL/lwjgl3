@@ -308,8 +308,8 @@ public final class CL {
         addCLVersions(
             MAJOR, MINOR, supportedExtensions, "",
             new int[][] {
-                {0, 1, 2},    // 10, 11, 12
-                {0, 1},       // 20, 21
+                {0, 1, 2}, // 10, 11, 12
+                {0, 1, 2}, // 20, 21, 22
             }
         );
 
