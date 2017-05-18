@@ -239,14 +239,14 @@ public class TemplateFormatter {
                     COMMENT_CLEANUP.matcher(description).replaceAll(" ").trim()
                 ).replaceAll("{@code $1}");
 
-            builder.append("\tIntConstant(\n");
+            builder.append("    IntConstant(\n");
             if (description.length() <= 160 - (4 + 4 + 2 + 1)) {
-                builder.append("\t\t\"");
+                builder.append("        \"");
                 builder.append(description);
                 builder.append('\"');
             } else {
-                builder.append("\t\t\"\"\"\n");
-                builder.append("\t\t");
+                builder.append("        \"\"\"\n");
+                builder.append("        ");
 
                 String[] tokens          = TOKEN_SPLIT.split(description);
                 int      MAX_LINE_LENGTH = 160 - (4 + 4);
@@ -256,7 +256,7 @@ public class TemplateFormatter {
                     lineLength += token.length();
                     if (token.length() < lineLength) {
                         if (MAX_LINE_LENGTH < 1 + lineLength) {
-                            builder.append("\n\t\t");
+                            builder.append("\n        ");
                             lineLength = token.length();
                         } else {
                             builder.append(' ');
@@ -267,7 +267,7 @@ public class TemplateFormatter {
                     builder.append(token);
                 }
 
-                builder.append("\n\t\t\"\"\"");
+                builder.append("\n        \"\"\"");
             }
             builder.append(",\n\n");
 
@@ -278,7 +278,7 @@ public class TemplateFormatter {
                     builder.append(",\n");
                 }
 
-                builder.append("\t\t\"");
+                builder.append("        \"");
                 builder.append(strip(constantMatcher.group(1), prefix + '_'));
 
                 String value = constantMatcher.group(2);
@@ -301,7 +301,7 @@ public class TemplateFormatter {
                     builder.append("\"");
                 }
             }
-            builder.append("\n\t)\n");
+            builder.append("\n    )\n");
         }
 
         return builder.toString();
@@ -322,8 +322,8 @@ public class TemplateFormatter {
             }
 
             builder
-                .append("\tEnumConstant(\n")
-                .append("\t\t\"")
+                .append("    EnumConstant(\n")
+                .append("        \"")
                 .append(enumMatcher.group(1))
                 .append("\",\n\n");
 
@@ -337,7 +337,7 @@ public class TemplateFormatter {
                 }
 
                 builder
-                    .append("\t\t\"")
+                    .append("        \"")
                     .append(strip(constantMatcher.group(1), prefix + '_'))
                     .append("\".enum");
 
@@ -370,7 +370,7 @@ public class TemplateFormatter {
                 }
                 builder.append(")");
             }
-            builder.append("\n\t)\n");
+            builder.append("\n    )\n");
         }
 
         return builder.toString();
@@ -455,7 +455,7 @@ public class TemplateFormatter {
             while (paramMatcher.find()) {
                 if (paramCount == -1) {
                     // Return type + function name
-                    builder.append('\t');
+                    builder.append("    ");
                     // const
                     if (paramMatcher.group(1) != null || paramMatcher.group(4) != null) {
                         builder.append("const..");
@@ -467,10 +467,10 @@ public class TemplateFormatter {
                         writerPointer(builder, paramMatcher);
                     }
                     builder.append("(\n");
-                    builder.append("\t\t\"");
+                    builder.append("        \"");
                     builder.append(strip(paramMatcher.group(6), prefix));
                     builder.append("\",\n");
-                    builder.append("\t\t\"\"");
+                    builder.append("        \"\"");
 
                     paramCount = 0;
                     if ("void".equals(funcMatcher.group(1))) {
@@ -483,7 +483,7 @@ public class TemplateFormatter {
                         builder.append('\n');
                     }
 
-                    builder.append("\t\t");
+                    builder.append("        ");
                     // const
                     if (paramMatcher.group(1) != null || paramMatcher.group(4) != null) // const
                     {
@@ -507,7 +507,7 @@ public class TemplateFormatter {
                 }
             }
 
-            builder.append("\n\t)");
+            builder.append("\n    )");
         }
 
         return builder.toString();
@@ -546,7 +546,7 @@ public class TemplateFormatter {
                     lineLen = 8;
                 }
 
-                builder.append(lineLen == 8 ? "\t\t" : " ");
+                builder.append(lineLen == 8 ? "        " : " ");
                 builder.append(paragraph, lastMatch, matcher.start());
 
                 lineLen += wordLen + 1;

@@ -12,8 +12,8 @@ val AL_SOFT_source_spatialize = "SOFTSourceSpatialize".nativeClassAL("SOFT_sourc
         Native bindings to the $specLinkOpenALSoft extension.
 
         This extension provides more control over the spatialization behavior of sources. By default, OpenAL will spatialize sources playing a mono buffer and
-		not spatialize sources playing a multi-channel buffer. Spatialization features include positional panning, distance attenuation, cone-related
-		attenuation, and doppler effects. This extension allows such features to be enabled and disabled per-source independently of the buffer format.
+        not spatialize sources playing a multi-channel buffer. Spatialization features include positional panning, distance attenuation, cone-related
+        attenuation, and doppler effects. This extension allows such features to be enabled and disabled per-source independently of the buffer format.
         """
 
     IntConstant(

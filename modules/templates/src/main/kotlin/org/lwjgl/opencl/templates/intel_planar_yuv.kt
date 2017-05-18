@@ -12,11 +12,11 @@ val intel_planar_yuv = "INTELPlanarYUV".nativeClassCL("intel_planar_yuv", INTEL)
         """
         Native bindings to the $extensionLink extension.
 
-		The purpose of this extension is to provide OpenCL support for the Planar YUV (YCbCr) image formats. #NV12_INTEL format must be supported; support for
-		other Planar YUV formats that may be defined in this extension is optional.
+        The purpose of this extension is to provide OpenCL support for the Planar YUV (YCbCr) image formats. #NV12_INTEL format must be supported; support for
+        other Planar YUV formats that may be defined in this extension is optional.
 
-		The extension introduces two new cl_mem_flags:
-		${ul(
+        The extension introduces two new cl_mem_flags:
+        ${ul(
             """
             #MEM_NO_ACCESS_INTEL which should be used together with image formats for which device does not support reading from or writing to at OpenCL
             kernels level, but are still useful in other use cases.

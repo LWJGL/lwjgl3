@@ -166,12 +166,12 @@ val EXT_gpu_shader5 = EXT_FLAG.nativeClassGLES("EXT_gpu_shader5", postfix = EXT)
 val EXT_multisampled_render_to_texture2 = EXT_FLAG.nativeClassGLES("EXT_multisampled_render_to_texture2", postfix = EXT) {
     documentation =
         """
-		The {@code attachment} parameters for #FramebufferTexture2DMultisampleEXT() is no longer required to be #COLOR_ATTACHMENT0. The attachment parameter
-		now matches what is allowed in #FramebufferTexture2D(). This means values like {@code GL_COLOR_ATTACHMENTi}, #DEPTH_ATTACHMENT, #STENCIL_ATTACHMENT, or
-		#DEPTH_STENCIL_ATTACHMENT may be used. After the application has rendered into the mutisampled buffer, the application should be careful to not
-		trigger an implicit flush by performing a client side read of the buffer (readpixels, copyteximage, blitframebuffer, etc) before any subsequent
-		rendering which uses the contents of the buffer. This may cause the attachment to be downsampled before the following draw, which would potentially
-		cause corruption.
+        The {@code attachment} parameters for #FramebufferTexture2DMultisampleEXT() is no longer required to be #COLOR_ATTACHMENT0. The attachment parameter
+        now matches what is allowed in #FramebufferTexture2D(). This means values like {@code GL_COLOR_ATTACHMENTi}, #DEPTH_ATTACHMENT, #STENCIL_ATTACHMENT, or
+        #DEPTH_STENCIL_ATTACHMENT may be used. After the application has rendered into the mutisampled buffer, the application should be careful to not
+        trigger an implicit flush by performing a client side read of the buffer (readpixels, copyteximage, blitframebuffer, etc) before any subsequent
+        rendering which uses the contents of the buffer. This may cause the attachment to be downsampled before the following draw, which would potentially
+        cause corruption.
         """
 }
 

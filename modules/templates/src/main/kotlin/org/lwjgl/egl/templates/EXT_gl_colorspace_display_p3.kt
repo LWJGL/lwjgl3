@@ -13,8 +13,8 @@ val EXT_gl_colorspace_display_p3_linear = "EXTGLColorspaceDisplayP3Linear".nativ
         Native bindings to the $registryLink extension.
 
         Applications that want to use the Display-P3 color space (DCI-P3 primaries and linear or sRGB-like transfer function) can use this extension to
-		communicate to the platform that framebuffer contents represent colors in the Display-P3 color space. The application is responsible for producing
-		appropriate framebuffer contents, but will typically use built-in sRGB encoding in OpenGL and OpenGL ES to accomplish this.
+        communicate to the platform that framebuffer contents represent colors in the Display-P3 color space. The application is responsible for producing
+        appropriate framebuffer contents, but will typically use built-in sRGB encoding in OpenGL and OpenGL ES to accomplish this.
 
         Requires ${KHR_gl_colorspace.link}.
         """

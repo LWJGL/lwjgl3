@@ -539,15 +539,15 @@ val arm_core_id = EXT_FLAG.nativeClassCL("arm_core_id", ARM) {
 val intel_media_block_io = EXT_FLAG.nativeClassCL("intel_media_block_io", INTEL) {
     documentation =
         """
-		This extension augments the block read/write functionality available in the Intel vendor extensions ${intel_subgroups.link} and
+        This extension augments the block read/write functionality available in the Intel vendor extensions ${intel_subgroups.link} and
         ${extensionLink("intel_subgroups_short")} by the specification of additional built-in functions to facilitate the reading and writing of flexible 2D
         regions from images. This API allows for the explicit specification of the width and height of the image regions.
 
-		While not required, this extension is most useful when the subgroup size is known at compile-time. The primary use case for this extension is to
-		support the reading of the edge texels (or image elements) of neighboring macro-blocks as described in the Intel vendor extension
-		${intel_device_side_avc_motion_estimation.link}. When using the built-in functions from {@code cl_intel_device_ side_avc_motion_estimation} the
-		subgroup size is implicitly fixed to 16. In other use cases the subgroup size may be fixed using the ${intel_required_subgroup_size.link} extension, if
-		needed.
+        While not required, this extension is most useful when the subgroup size is known at compile-time. The primary use case for this extension is to
+        support the reading of the edge texels (or image elements) of neighboring macro-blocks as described in the Intel vendor extension
+        ${intel_device_side_avc_motion_estimation.link}. When using the built-in functions from {@code cl_intel_device_ side_avc_motion_estimation} the
+        subgroup size is implicitly fixed to 16. In other use cases the subgroup size may be fixed using the ${intel_required_subgroup_size.link} extension, if
+        needed.
         """
 }
 val intel_printf = EXT_FLAG.nativeClassCL("intel_printf", INTEL)
