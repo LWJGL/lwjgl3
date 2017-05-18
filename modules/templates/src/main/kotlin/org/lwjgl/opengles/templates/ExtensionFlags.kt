@@ -114,6 +114,16 @@ val EXT_conservative_depth = EXT_FLAG.nativeClassGLES("EXT_conservative_depth", 
         """
 }
 
+val EXT_EGL_image_array = EXT_FLAG.nativeClassGLES("EXT_EGL_image_array", postfix = EXT) {
+    documentation =
+        """
+        This extension adds functionality to that provided by ${OES_EGL_image.link} in order to support EGLImage 2D arrays. It extends the existing
+        {@code EGLImageTargetTexture2DOES} entry point from {@code OES_EGL_image}. Render buffers are not extended to include array support.
+
+        {@code EGLImage} 2D arrays are created using {@code eglCreateImageKHR} as defined in the {@code EGL_EXT_gl_texture_2D_image_array} extension.
+        """
+}
+
 val EXT_float_blend = EXT_FLAG.nativeClassGLES("EXT_float_blend", postfix = EXT) {
     documentation =
         """
@@ -376,7 +386,7 @@ val EXT_sparse_texture2 = EXT_FLAG.nativeClassGLES("EXT_sparse_texture2", postfi
         """
 }
 
-val GL_EXT_texture_compression_astc_decode_mode_rgb9e5 = EXT_FLAG.nativeClassGLES("GL_EXT_texture_compression_astc_decode_mode_rgb9e5", postfix = EXT) {
+val EXT_texture_compression_astc_decode_mode_rgb9e5 = EXT_FLAG.nativeClassGLES("GL_EXT_texture_compression_astc_decode_mode_rgb9e5", postfix = EXT) {
     documentation = "See ${EXT_texture_compression_astc_decode_mode.link}."
 }
 

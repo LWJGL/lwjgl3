@@ -931,6 +931,15 @@ val AMD_shader_trinary_minmax = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minma
         Requires ${GL20.core} or ${ARB_shader_objects.cap}.
         """
 }
+val AMD_texture_gather_bias_lod = EXT_FLAG.nativeClassGL("AMD_texture_gather_bias_lod", postfix = AMD) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension was developed based on existing built-in texture gather functions to allow implementations supporting bias of implicit level of detail
+        and explicit control of level of detail in texture gather operations.
+        """
+}
 val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfix = AMD) {
     documentation =
         """
