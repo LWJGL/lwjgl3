@@ -11,12 +11,12 @@ import org.lwjgl.vulkan.*
 val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type = "instance", postfix = EXT) {
     documentation =
         """
-        Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By enabling optional validation layers and using the {@code VK_EXT_debug_report} extension, developers <b>can</b> obtain much more detailed feedback on the application's use of Vulkan. This extension define a way for layers and the implementation to call back to the application for events of interest to the application.
+        Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By enabling optional validation layers and using the {@code VK_EXT_debug_report} extension, developers <b>can</b> obtain much more detailed feedback on the application's use of Vulkan. This extension defines a way for layers and the implementation to call back to the application for events of interest to the application.
 
         <h5>Examples</h5>
-        {@code VK_EXT_debug_report} allows an application to register multiple callbacks with the validation layers. Some callbacks may log the information to a file, others may cause a debug break point or other application defined behavior. An application can register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
+        {@code VK_EXT_debug_report} allows an application to register multiple callbacks with the validation layers. Some callbacks may log the information to a file, others may cause a debug break point or other application defined behavior. An application <b>can</b> register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
 
-        To capture issues found while creating or destroying an instance an application can link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the #CreateInstance() and the #DestroyInstance() call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
+        To capture events that occur while creating or destroying an instance an application <b>can</b> link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the #CreateInstance() and the #DestroyInstance() call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
 
         Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.
 
@@ -65,6 +65,10 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         In the initial release of the {@code VK_EXT_debug_report} extension, the token #STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT was used. Starting in version 2 of the extension branch, #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
         </div>
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        In the initial release of the {@code VK_EXT_debug_report} extension, the token #DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT was used. Starting in version 8 of the extension branch, #DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
+        </div>
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>VK_EXT_debug_report</dd>
@@ -76,10 +80,10 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
             <dd>12</dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-01-31</dd>
+            <dd>2017-04-27</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>5</dd>
+            <dd>8</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -107,7 +111,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     IntConstant(
         "The extension specification version.",
 
-        "EXT_DEBUG_REPORT_SPEC_VERSION".."6"
+        "EXT_DEBUG_REPORT_SPEC_VERSION".."8"
     )
 
     StringConstant(
@@ -179,31 +183,11 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         "DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT".."25",
         "DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT".."26",
         "DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT".."27",
-        "DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT".."28",
+        "DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT".."28",
         "DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT".."29",
         "DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT".."30",
         "DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT".."31",
         "DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT".."32"
-    )
-
-    EnumConstant(
-        """
-        VkDebugReportErrorEXT - Unknown VK_EXT_debug_report enumeration type
-
-        <h5>Description</h5>
-        For more information, see:
-
-        <ul>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        No cross-references are available
-        """,
-
-        "DEBUG_REPORT_ERROR_NONE_EXT".."0",
-        "DEBUG_REPORT_ERROR_CALLBACK_REF_EXT".."1"
     )
 
     EnumConstant(
@@ -274,7 +258,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
         VkInstance.IN("instance", "the instance the callback will be logged on."),
         const..VkDebugReportCallbackCreateInfoEXT.p.IN("pCreateInfo", "points to a ##VkDebugReportCallbackCreateInfoEXT structure which defines the conditions under which this callback will be called."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", ""),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDebugReportCallbackEXT.p.OUT("pCallback", "a pointer to record the {@code VkDebugReportCallbackEXT} object created.")
     )
 
@@ -294,8 +278,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkAllocationCallbacks were provided when {@code instance} was created, a compatible set of callbacks <b>must</b> be provided here</li>
-            <li>If no ##VkAllocationCallbacks were provided when {@code instance} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+            <li>If ##VkAllocationCallbacks were provided when {@code callback} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+            <li>If no ##VkAllocationCallbacks were provided when {@code callback} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -316,8 +300,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         """,
 
         VkInstance.IN("instance", "the instance where the callback was created."),
-        VkDebugReportCallbackEXT.IN("callback", "the {@code VkDebugReportCallbackEXT} object to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "")
+        VkDebugReportCallbackEXT.IN("callback", "the {@code VkDebugReportCallbackEXT} object to destroy. {@code callback} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that #DestroyDebugReportCallbackEXT() <b>must</b> not be called when a callback is active."),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
@@ -340,7 +324,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 ￿    const char*                                 pMessage);</pre></code>
 
         <h5>Description</h5>
-        The call will propagate through the layers and cause a callback to the application. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the callback was registered.
+        The call will propagate through the layers and generate callback(s) as indicated by the message's flags. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the callback was registered.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -358,13 +342,13 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         </ul>
         """,
 
-        VkInstance.IN("instance", "the instance the callback will be logged on."),
-        VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
+        VkInstance.IN("instance", "the debug stream&#8217;s {@code VkInstance}."),
+        VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} classification of this event/message."),
         VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
-        uint64_t.IN("object", "object where the issue was detected. {@code object} may be #NULL_HANDLE if there is no object associated with the event."),
-        size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional value."),
-        int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
-        const..charUTF8_p.IN("pLayerPrefix", "the abbreviation of the component making the callback."),
+        uint64_t.IN("object", "this is the object where the issue was detected. {@code object} <b>can</b> be #NULL_HANDLE if there is no object associated with the event."),
+        size_t.IN("location", "an application defined value."),
+        int32_t.IN("messageCode", "an application defined value."),
+        const..charUTF8_p.IN("pLayerPrefix", "the abbreviation of the component making this event/message."),
         const..charUTF8_p.IN("pMessage", "a null-terminated string detailing the trigger conditions.")
     )
 }

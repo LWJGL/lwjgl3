@@ -374,7 +374,7 @@ val VkInstanceCreateInfo = struct(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INSTANCE_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkDebugReportCallbackCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>If {@code pApplicationInfo} is not {@code NULL}, {@code pApplicationInfo} <b>must</b> be a pointer to a valid ##VkApplicationInfo structure</li>
             <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a pointer to an array of {@code enabledLayerCount} null-terminated strings</li>
@@ -1886,15 +1886,10 @@ val VkBufferViewCreateInfo = struct(VULKAN_PACKAGE, "VkBufferViewCreateInfo") {
         <ul>
             <li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
             <li>{@code offset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}</li>
-            <li>
-                If {@code range} is not equal to #WHOLE_SIZE:
-                <ul>
-                    <li>{@code range} <b>must</b> be greater than 0</li>
-                    <li>{@code range} <b>must</b> be a multiple of the element size of {@code format}</li>
-                    <li>{@code range} divided by the element size of {@code format}, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}</li>
-                    <li>the sum of {@code offset} and {@code range} <b>must</b> be less than or equal to the size of {@code buffer}</li>
-                </ul>
-            </li>
+            <li>If {@code range} is not equal to #WHOLE_SIZE, {@code range} <b>must</b> be greater than 0</li>
+            <li>If {@code range} is not equal to #WHOLE_SIZE, {@code range} <b>must</b> be a multiple of the element size of {@code format}</li>
+            <li>If {@code range} is not equal to #WHOLE_SIZE, {@code range} divided by the element size of {@code format} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}</li>
+            <li>If {@code range} is not equal to #WHOLE_SIZE, the sum of {@code offset} and {@code range} <b>must</b> be less than or equal to the size of {@code buffer}</li>
             <li>{@code buffer} <b>must</b> have been created with a {@code usage} value containing at least one of #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</li>
             <li>If {@code buffer} was created with {@code usage} containing #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT, {@code format} <b>must</b> be supported for uniform texel buffers, as specified by the #FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT flag in ##VkFormatProperties{@code ::bufferFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>If {@code buffer} was created with {@code usage} containing #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code format} <b>must</b> be supported for storage texel buffers, as specified by the #FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT flag in ##VkFormatProperties{@code ::bufferFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
@@ -4213,24 +4208,14 @@ val VkImageCopy = struct(VULKAN_PACKAGE, "VkImageCopy") {
             <li>{@code dstOffset.z} and ({@code extent.depth} + {@code dstOffset.z}) <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource depth</li>
             <li>If the calling command&#8217;s {@code dstImage} is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code dstOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
             <li>{@code dstSubresource.baseArrayLayer} <b>must</b> be less than and ({@code dstSubresource.layerCount} + {@code dstSubresource.baseArrayLayer}) <b>must</b> be less than or equal to the number of layers in the destination image</li>
-            <li>
-                If the calling command&#8217;s {@code srcImage} is a compressed format image:
-                <ul>
-                    <li>all members of {@code srcOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
-                    <li>{@code extent.width} <b>must</b> be a multiple of the compressed texel block width or ({@code extent.width} + {@code srcOffset.x}) <b>must</b> equal the source image subresource width</li>
-                    <li>{@code extent.height} <b>must</b> be a multiple of the compressed texel block height or ({@code extent.height} + {@code srcOffset.y}) <b>must</b> equal the source image subresource height</li>
-                    <li>{@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code srcOffset.z}) <b>must</b> equal the source image subresource depth</li>
-                </ul>
-            </li>
-            <li>
-                If the calling command&#8217;s {@code dstImage} is a compressed format image:
-                <ul>
-                    <li>all members of {@code dstOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
-                    <li>{@code extent.width} <b>must</b> be a multiple of the compressed texel block width or ({@code extent.width} + {@code dstOffset.x}) <b>must</b> equal the destination image subresource width</li>
-                    <li>{@code extent.height} <b>must</b> be a multiple of the compressed texel block height or ({@code extent.height} + {@code dstOffset.y}) <b>must</b> equal the destination image subresource height</li>
-                    <li>{@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code dstOffset.z}) <b>must</b> equal the destination image subresource depth</li>
-                </ul>
-            </li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, all members of {@code srcOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or ({@code extent.width} + {@code srcOffset.x}) <b>must</b> equal the source image subresource width</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or ({@code extent.height} + {@code srcOffset.y}) <b>must</b> equal the source image subresource height</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, {@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code srcOffset.z}) <b>must</b> equal the source image subresource depth</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, all members of {@code dstOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or ({@code extent.width} + {@code dstOffset.x}) <b>must</b> equal the destination image subresource width</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or ({@code extent.height} + {@code dstOffset.y}) <b>must</b> equal the destination image subresource height</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, {@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code dstOffset.z}) <b>must</b> equal the destination image subresource depth</li>
             <li>{@code srcOffset}, {@code dstOffset}, and {@code extent} <b>must</b> respect the image transfer granularity requirements of the queue family that it will be submitted against, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-physical-device-enumeration">Physical Device Enumeration</a></li>
         </ul>
 
@@ -4328,18 +4313,13 @@ val VkBufferImageCopy = struct(VULKAN_PACKAGE, "VkBufferImageCopy") {
             <li>If the calling command&#8217;s {@code srcImage} (#CmdCopyImageToBuffer()) or {@code dstImage} (#CmdCopyBufferToImage()) is of type #IMAGE_TYPE_1D, then {@code imageOffset.y} <b>must</b> be 0 and {@code imageExtent.height} <b>must</b> be 1.</li>
             <li>{@code imageOffset.z} and (imageExtent.depth + {@code imageOffset.z}) <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource depth</li>
             <li>If the calling command&#8217;s {@code srcImage} (#CmdCopyImageToBuffer()) or {@code dstImage} (#CmdCopyBufferToImage()) is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code imageOffset.z} <b>must</b> be 0 and {@code imageExtent.depth} <b>must</b> be 1.</li>
-            <li>
-                If the calling command&#8217;s {@code VkImage} parameter is a compressed format image:
-                <ul>
-                    <li>{@code bufferRowLength} <b>must</b> be a multiple of the compressed texel block width</li>
-                    <li>{@code bufferImageHeight} <b>must</b> be a multiple of the compressed texel block height</li>
-                    <li>all members of {@code imageOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
-                    <li>{@code bufferOffset} <b>must</b> be a multiple of the compressed texel block size in bytes</li>
-                    <li>{@code imageExtent.width} <b>must</b> be a multiple of the compressed texel block width or ({@code imageExtent.width} + {@code imageOffset.x}) <b>must</b> equal the image subresource width</li>
-                    <li>{@code imageExtent.height} <b>must</b> be a multiple of the compressed texel block height or ({@code imageExtent.height} + {@code imageOffset.y}) <b>must</b> equal the image subresource height</li>
-                    <li>{@code imageExtent.depth} <b>must</b> be a multiple of the compressed texel block depth or ({@code imageExtent.depth} + {@code imageOffset.z}) <b>must</b> equal the image subresource depth</li>
-                </ul>
-            </li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code bufferRowLength} <b>must</b> be a multiple of the compressed texel block width</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code bufferImageHeight} <b>must</b> be a multiple of the compressed texel block height</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, all members of {@code imageOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code bufferOffset} <b>must</b> be a multiple of the compressed texel block size in bytes</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code imageExtent.width} <b>must</b> be a multiple of the compressed texel block width or ({@code imageExtent.width} + {@code imageOffset.x}) <b>must</b> equal the image subresource width</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code imageExtent.height} <b>must</b> be a multiple of the compressed texel block height or ({@code imageExtent.height} + {@code imageOffset.y}) <b>must</b> equal the image subresource height</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code imageExtent.depth} <b>must</b> be a multiple of the compressed texel block depth or ({@code imageExtent.depth} + {@code imageOffset.z}) <b>must</b> equal the image subresource depth</li>
             <li>{@code bufferOffset}, {@code bufferRowLength}, {@code bufferImageHeight} and all members of {@code imageOffset} and {@code imageExtent} <b>must</b> respect the image transfer granularity requirements of the queue family that it will be submitted against, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-physical-device-enumeration">Physical Device Enumeration</a></li>
             <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code VkImage} parameter</li>
             <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
@@ -4618,7 +4598,6 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is #QUEUE_FAMILY_IGNORED, {@code dstQueueFamilyIndex} <b>must</b> also be #QUEUE_FAMILY_IGNORED.</li>
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code dstQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or VK_QUEUE_FAMILY_EXTERNAL_KHX (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
-            <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> either both be #QUEUE_FAMILY_IGNORED, or both be a valid queue family (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>)</li>
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are valid queue families, at least one of them <b>must</b> be the same as the family of the queue that will execute this barrier</li>
             <li>{@code subresourceRange} <b>must</b> be a valid image subresource range for the image (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views">the “Image Views” section</a>)</li>
             <li>If {@code image} has a depth/stencil format with both depth and stencil components, then {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>

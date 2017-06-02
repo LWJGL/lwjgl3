@@ -98,6 +98,11 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
 
         <h5>Return Codes</h5>
         <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
             <dt>On failure, this command returns</dt>
             <dd><ul>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>

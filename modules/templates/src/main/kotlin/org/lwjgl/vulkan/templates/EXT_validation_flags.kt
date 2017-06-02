@@ -85,6 +85,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
         ##VkValidationFlagsEXT
         """,
 
-        "VALIDATION_CHECK_ALL_EXT".."0"
+        "VALIDATION_CHECK_ALL_EXT".."0",
+        "VALIDATION_CHECK_SHADERS_EXT".."1"
     )
 }

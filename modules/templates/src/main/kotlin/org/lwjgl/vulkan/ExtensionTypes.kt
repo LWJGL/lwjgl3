@@ -27,7 +27,6 @@ val VkPresentModeKHR = "VkPresentModeKHR".enumType
 val VkCompositeAlphaFlagBitsKHR = "VkCompositeAlphaFlagBitsKHR".enumType
 val VkDisplayPlaneAlphaFlagBitsKHR = "VkDisplayPlaneAlphaFlagBitsKHR".enumType
 val VkDebugReportObjectTypeEXT = "VkDebugReportObjectTypeEXT".enumType
-val VkDebugReportErrorEXT = "VkDebugReportErrorEXT".enumType
 val VkRasterizationOrderAMD = "VkRasterizationOrderAMD".enumType
 val VkExternalMemoryHandleTypeFlagBitsNV = "VkExternalMemoryHandleTypeFlagBitsNV".enumType
 val VkExternalMemoryFeatureFlagBitsNV = "VkExternalMemoryFeatureFlagBitsNV".enumType
@@ -87,12 +86,12 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 
     VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
     VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
-    uint64_t.IN("object", "gives the object where the issue was detected. {@code object} may be #NULL_HANDLE if there is no object associated with the event."),
+    uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT {@code object} is undefined."),
     size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional value."),
     int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
-    const..char_p.IN("pLayerPrefix", "the abbreviation of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
+    const..char_p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
     const..char_p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
-    opaque_p.IN("pUserData", "the user data given when the DebugReportCallback was created.")
+    opaque_p.IN("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created.")
 ) {
     documentation =
         """
@@ -113,7 +112,9 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 ￿    void*                                       pUserData);</pre></code>
 
         <h5>Description</h5>
-        The callback returns a {@code VkBool32} that indicates to the calling layer if the Vulkan call <b>should</b> be aborted or not. Applications <b>should</b> always return #FALSE so that they see the same behavior with and without validation layers enabled.
+        The callback <b>must</b> not call #DestroyDebugReportCallbackEXT().
+
+        The callback returns a {@code VkBool32} that indicates to the calling layer the application's desire to abort the call. A value of #TRUE indicates that the application wants to abort this call. If the application returns #FALSE, the command <b>must</b> not be aborted. Applications <b>should</b> always return #FALSE so that they see the same behavior with and without validation layers enabled.
 
         If the application returns #TRUE from its callback and the Vulkan call being aborted returns a {@code VkResult}, the layer will return #ERROR_VALIDATION_FAILED_EXT.
 
@@ -149,7 +150,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT = 25,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT = 26,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT = 27,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT = 28,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT = 28,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT = 29,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT = 30,
 ￿    VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT = 31,
@@ -186,7 +187,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
             <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT is a {@code VkCommandPool}.</li>
             <li>#DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT is a {@code VkSurfaceKHR}.</li>
             <li>#DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT is a {@code VkSwapchainKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT is a {@code VkDebugReportCallbackEXT}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT is a {@code VkDebugReportCallbackEXT}.</li>
             <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT is a {@code VkDisplayKHR}.</li>
             <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT is a {@code VkDisplayModeKHR}.</li>
             <li>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT is a {@code VkObjectTableNVX}.</li>
@@ -592,14 +593,22 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
         Structure specifying parameters of a newly created debug report callback.
 
         <h5>Description</h5>
-        For each {@code VkDebugReportCallbackEXT} that is created the flags determine when that function is called. A callback will be made for issues that match any bit set in its flags. The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in different way, log to system error log, etc.) An application may receive multiple callbacks if multiple {@code VkDebugReportCallbackEXT} objects were created. A callback will always be executed in the same thread as the originating Vulkan call. A callback may be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).
+        For each {@code VkDebugReportCallbackEXT} that is created the ##VkDebugReportCallbackCreateInfoEXT{@code ::flags} determine when that ##VkDebugReportCallbackCreateInfoEXT{@code ::pfnCallback} is called. When an event happens, the implementation will do a bitwise AND of the event's {@code VkDebugReportFlagBitsEXT} flags to each {@code VkDebugReportCallbackEXT} object's flags. For each non-zero result the corresponding callback will be called. The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in a different way, log to a system error log, etc.).
+
+        An application <b>may</b> receive multiple callbacks if multiple {@code VkDebugReportCallbackEXT} objects were created. A callback will always be executed in the same thread as the originating Vulkan call.
+
+        A callback may be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pfnCallback} <b>must</b> be a valid ##VkDebugReportCallbackEXT</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkDebugReportFlagBitsEXT} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
         </ul>
 
         <h5>See Also</h5>
@@ -608,7 +617,7 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDebugReportFlagsEXT.member("flags", """indicate which event(s) will cause this callback to be called. Flags are interpreted as bitmasks and multiple may be set. Bits which <b>can</b> be set include:
+    VkDebugReportFlagsEXT.member("flags", """indicate which event(s) will cause this callback to be called. Flags are interpreted as bitmasks and multiple <b>can</b> be set. Bits which <b>can</b> be set include:
 <code><pre>
 ￿typedef enum VkDebugReportFlagBitsEXT {
 ￿    VK_DEBUG_REPORT_INFORMATION_BIT_EXT = 0x00000001,
@@ -621,9 +630,9 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
         <ul>
             <li>#DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause undefined results, including an application crash.</li>
             <li>#DEBUG_REPORT_WARNING_BIT_EXT indicates use of Vulkan that may expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases may point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
-            <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a potentially non-optimal use of Vulkan. E.g. using #CmdClearColorImage() when a RenderPass load_op would have worked.</li>
+            <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
             <li>#DEBUG_REPORT_INFORMATION_BIT_EXT indicates an informational message such as resource details that may be handy when debugging an application.</li>
-            <li>#DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information from the loader and layers.</li>
+            <li>#DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information from the implementation and layers.</li>
         </ul>""")
     PFN_vkDebugReportCallbackEXT.member("pfnCallback", "the application callback function to call.")
     nullable..opaque_p.member("pUserData", "user data to be passed to the callback.")
@@ -801,6 +810,17 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedica
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImage.member("image", "{@code VK_NULL_HANDLE} or a handle of an image which this memory will be bound to.")
     VkBuffer.member("buffer", "{@code VK_NULL_HANDLE} or a handle of a buffer which this memory will be bound to.")
+}
+
+val VkTextureLODGatherFormatPropertiesAMD = struct(VULKAN_PACKAGE, "VkTextureLODGatherFormatPropertiesAMD", mutable = false) {
+    documentation =
+        """
+        Structure informing whether or not texture gather bias/LOD functionality is supported for a given image format and a given physical device.
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL}.")
+    VkBool32.member("supportsTextureGatherLODBiasAMD", "tells if the image format can be used with texture gather bias/LOD functions, as introduced by the #AMD_texture_gather_bias_lod extension. (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#VK_AMD_texture_gather_bias_lod\">VK_AMD_texture_gather_bias_lod</a>). This field is set by the implementation. User-specified value is ignored.")
 }
 
 val VkRenderPassMultiviewCreateInfoKHX = struct(VULKAN_PACKAGE, "VkRenderPassMultiviewCreateInfoKHX") {
@@ -1108,7 +1128,7 @@ val VkImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkImageFormatPropertie
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkImageFormatProperties2KHR is used to allow the specification of additional capabilities to be returned from #GetPhysicalDeviceImageFormatProperties2KHR().")
     VkImageFormatProperties.member("imageFormatProperties", "an instance of a ##VkImageFormatProperties structure in which capabilities are returned.")
 }
 
@@ -1137,7 +1157,7 @@ val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevi
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2KHR is used to provide additional image parameters to #GetPhysicalDeviceImageFormatProperties2KHR().")
     VkFormat.member("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
     VkImageType.member("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
     VkImageTiling.member("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
@@ -1321,15 +1341,10 @@ val VkBindImageMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHX"
             <li>If {@code SFRRectCount} is not zero, then {@code image} <b>must</b> have been created with the #IMAGE_CREATE_BIND_SFR_BIT_KHX bit set.</li>
             <li>All elements of {@code pSFRRects} <b>must</b> be valid rectangles contained within the dimensions of the image</li>
             <li>Elements of {@code pSFRRects} that correspond to the same instance of the image <b>must</b> not overlap and their union <b>must</b> cover the entire image.</li>
-            <li>
-                For each element of {@code pSFRRects}:
-                <ul>
-                    <li>{@code offset.x} <b>must</b> be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
-                    <li>{@code extent.width} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
-                    <li>{@code offset.y} <b>must</b> be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
-                    <li>{@code extent.height} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} + {@code offset.y} <b>must</b> equal the height of the image subresource</li>
-                </ul>
-            </li>
+            <li>For each element of {@code pSFRRects}, {@code offset.x} <b>must</b> be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
+            <li>For each element of {@code pSFRRects}, {@code extent.width} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
+            <li>For each element of {@code pSFRRects}, {@code offset.y} <b>must</b> be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
+            <li>For each element of {@code pSFRRects}, {@code extent.height} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} + {@code offset.y} <b>must</b> equal the height of the image subresource</li>
             <li>All instances of memory that are bound <b>must</b> have been allocated</li>
             <li>If {@code image} was created with a valid swapchain handle in ##VkImageSwapchainCreateInfoKHX{@code ::swapchain}, then the image <b>must</b> be bound to memory from that swapchain (using ##VkBindImageMemorySwapchainInfoKHX).</li>
         </ul>
@@ -1589,6 +1604,10 @@ val VkAcquireNextImageInfoKHX = struct(VULKAN_PACKAGE, "VkAcquireNextImageInfoKH
         <h5>Description</h5>
         If #AcquireNextImageKHR() is used, the device mask is considered to include all physical devices in the logical device.
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        #AcquireNextImage2KHX() signals at most one semaphore, even if the application requests waiting for multiple physical devices to be ready via the {@code deviceMask}. However, only a single physical device <b>can</b> wait on that semaphore, since the semaphore becomes unsignaled when the wait succeeds. For other physical devices to wait for the image to be ready, it is necessary for the application to submit semaphore signal operation(s) to that first physical device to signal additional semaphore(s) after the wait succeeds, which the other physical device(s) <b>can</b> wait upon.
+        </div>
+
         <h5>Valid Usage</h5>
         <ul>
             <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> be unsignaled</li>
@@ -1710,10 +1729,12 @@ val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
 <code><pre>
 ￿typedef enum VkValidationCheckEXT {
 ￿    VK_VALIDATION_CHECK_ALL_EXT = 0,
+￿    VK_VALIDATION_CHECK_SHADERS_EXT = 1,
 ￿} VkValidationCheckEXT;</pre></code>
 
         <ul>
             <li>#VALIDATION_CHECK_ALL_EXT disables all validation checks.</li>
+            <li>#VALIDATION_CHECK_SHADERS_EXT disables all shader validation.</li>
         </ul>""")
 }
 
