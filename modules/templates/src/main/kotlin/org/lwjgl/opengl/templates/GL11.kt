@@ -2543,7 +2543,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Float version of #PixelStorei().",
 
         GLenum.IN("pname", "the pixel store parameter to set"),
-        GLint.IN("param", "the parameter value")
+        GLfloat.IN("param", "the parameter value")
     )
 
     DeprecatedGL..void(
