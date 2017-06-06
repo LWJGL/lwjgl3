@@ -37,57 +37,92 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
         "QUERY_TARGET"..0x82EA
     )
 
-    GL45 reuse "CreateTransformFeedbacks"
-    GL45 reuse "TransformFeedbackBufferBase"
-    GL45 reuse "TransformFeedbackBufferRange"
-    GL45 reuse "GetTransformFeedbackiv"
-    GL45 reuse "GetTransformFeedbacki_v"
-    GL45 reuse "GetTransformFeedbacki64_v"
+    fun checkExtensionPresent(core: String, extension: String) {
+        customMethod("""
+    private static boolean $extension(java.util.Set<String> ext) {
+        return ext.contains("OpenGL$core") || ext.contains("GL_$extension");
+    }
+    """)
+    }
+
+    checkExtensionPresent("30", "ARB_framebuffer_object")
+    checkExtensionPresent("30", "ARB_map_buffer_range")
+    checkExtensionPresent("30", "ARB_vertex_array_object")
+    checkExtensionPresent("31", "ARB_copy_buffer")
+    checkExtensionPresent("31", "ARB_texture_buffer_object") // TextureBuffer
+    checkExtensionPresent("31", "ARB_uniform_buffer_object") // TransformFeedbackBufferBase, TransformFeedbackBufferRange
+    checkExtensionPresent("33", "ARB_instanced_arrays")
+    checkExtensionPresent("33", "ARB_sampler_objects")
+    checkExtensionPresent("40", "ARB_transform_feedback2")
+    checkExtensionPresent("41", "ARB_vertex_attrib_64bit")
+    checkExtensionPresent("41", "ARB_separate_shader_objects")
+    checkExtensionPresent("42", "ARB_texture_storage")
+    checkExtensionPresent("43", "ARB_texture_storage_multisample")
+    checkExtensionPresent("43", "ARB_vertex_attrib_binding")
+    checkExtensionPresent("43", "ARB_invalidate_subdata")
+    checkExtensionPresent("43", "ARB_texture_buffer_range")
+    checkExtensionPresent("43", "ARB_clear_buffer_object")
+    checkExtensionPresent("43", "ARB_framebuffer_no_attachments")
+    checkExtensionPresent("44", "ARB_buffer_storage")
+    checkExtensionPresent("44", "ARB_clear_texture")
+    checkExtensionPresent("44", "ARB_multi_bind")
+    checkExtensionPresent("44", "ARB_query_buffer_object")
+
+    fun dsa(extension: String, func: String) {
+        DependsOn("$extension(ext)")..(GL45 reuse func)
+    }
+
+    dsa("ARB_transform_feedback2", "CreateTransformFeedbacks")
+    dsa("ARB_uniform_buffer_object", "TransformFeedbackBufferBase") // TODO: interaction not mentioned, spec bug?
+    dsa("ARB_uniform_buffer_object", "TransformFeedbackBufferRange") // TODO: interaction not mentioned, spec bug?
+    dsa("ARB_transform_feedback2", "GetTransformFeedbackiv")
+    dsa("ARB_transform_feedback2", "GetTransformFeedbacki_v")
+    dsa("ARB_transform_feedback2", "GetTransformFeedbacki64_v")
     GL45 reuse "CreateBuffers"
-    GL45 reuse "NamedBufferStorage"
+    dsa("ARB_buffer_storage", "NamedBufferStorage")
     GL45 reuse "NamedBufferData"
     GL45 reuse "NamedBufferSubData"
-    GL45 reuse "CopyNamedBufferSubData"
-    GL45 reuse "ClearNamedBufferData"
-    GL45 reuse "ClearNamedBufferSubData"
+    dsa("ARB_copy_buffer", "CopyNamedBufferSubData")
+    dsa("ARB_clear_texture", "ClearNamedBufferData")
+    dsa("ARB_clear_texture", "ClearNamedBufferSubData")
     GL45 reuse "MapNamedBuffer"
-    GL45 reuse "MapNamedBufferRange"
+    dsa("ARB_map_buffer_range", "MapNamedBufferRange")
     GL45 reuse "UnmapNamedBuffer"
-    GL45 reuse "FlushMappedNamedBufferRange"
+    dsa("ARB_map_buffer_range", "FlushMappedNamedBufferRange")
     GL45 reuse "GetNamedBufferParameteriv"
     GL45 reuse "GetNamedBufferParameteri64v"
     GL45 reuse "GetNamedBufferPointerv"
     GL45 reuse "GetNamedBufferSubData"
-    GL45 reuse "CreateFramebuffers"
-    GL45 reuse "NamedFramebufferRenderbuffer"
-    GL45 reuse "NamedFramebufferParameteri"
-    GL45 reuse "NamedFramebufferTexture"
-    GL45 reuse "NamedFramebufferTextureLayer"
-    GL45 reuse "NamedFramebufferDrawBuffer"
-    GL45 reuse "NamedFramebufferDrawBuffers"
-    GL45 reuse "NamedFramebufferReadBuffer"
-    GL45 reuse "InvalidateNamedFramebufferData"
-    GL45 reuse "InvalidateNamedFramebufferSubData"
-    GL45 reuse "ClearNamedFramebufferiv"
-    GL45 reuse "ClearNamedFramebufferuiv"
-    GL45 reuse "ClearNamedFramebufferfv"
-    GL45 reuse "ClearNamedFramebufferfi"
-    GL45 reuse "BlitNamedFramebuffer"
-    GL45 reuse "CheckNamedFramebufferStatus"
-    GL45 reuse "GetNamedFramebufferParameteriv"
-    GL45 reuse "GetNamedFramebufferAttachmentParameteriv"
-    GL45 reuse "CreateRenderbuffers"
-    GL45 reuse "NamedRenderbufferStorage"
-    GL45 reuse "NamedRenderbufferStorageMultisample"
-    GL45 reuse "GetNamedRenderbufferParameteriv"
+    dsa("ARB_framebuffer_object", "CreateFramebuffers")
+    dsa("ARB_framebuffer_object", "NamedFramebufferRenderbuffer")
+    dsa("ARB_framebuffer_no_attachments", "NamedFramebufferParameteri")
+    dsa("ARB_framebuffer_object", "NamedFramebufferTexture")
+    dsa("ARB_framebuffer_object", "NamedFramebufferTextureLayer")
+    dsa("ARB_framebuffer_object", "NamedFramebufferDrawBuffer")
+    dsa("ARB_framebuffer_object", "NamedFramebufferDrawBuffers")
+    dsa("ARB_framebuffer_object", "NamedFramebufferReadBuffer")
+    dsa("ARB_invalidate_subdata", "InvalidateNamedFramebufferData")
+    dsa("ARB_invalidate_subdata", "InvalidateNamedFramebufferSubData")
+    dsa("ARB_framebuffer_object", "ClearNamedFramebufferiv")
+    dsa("ARB_framebuffer_object", "ClearNamedFramebufferuiv")
+    dsa("ARB_framebuffer_object", "ClearNamedFramebufferfv")
+    dsa("ARB_framebuffer_object", "ClearNamedFramebufferfi")
+    dsa("ARB_framebuffer_object", "BlitNamedFramebuffer")
+    dsa("ARB_framebuffer_object", "CheckNamedFramebufferStatus")
+    dsa("ARB_framebuffer_no_attachments", "GetNamedFramebufferParameteriv")
+    dsa("ARB_framebuffer_object", "GetNamedFramebufferAttachmentParameteriv")
+    dsa("ARB_framebuffer_object", "CreateRenderbuffers")
+    dsa("ARB_framebuffer_object", "NamedRenderbufferStorage")
+    dsa("ARB_framebuffer_object", "NamedRenderbufferStorageMultisample")
+    dsa("ARB_framebuffer_object", "GetNamedRenderbufferParameteriv")
     GL45 reuse "CreateTextures"
-    GL45 reuse "TextureBuffer"
-    GL45 reuse "TextureBufferRange"
-    GL45 reuse "TextureStorage1D"
-    GL45 reuse "TextureStorage2D"
-    GL45 reuse "TextureStorage3D"
-    GL45 reuse "TextureStorage2DMultisample"
-    GL45 reuse "TextureStorage3DMultisample"
+    dsa("ARB_texture_buffer_object", "TextureBuffer") // TODO: TextureBuffer depends on ARB_transform_feedback2? spec bug?
+    dsa("ARB_texture_buffer_range", "TextureBufferRange")
+    dsa("ARB_texture_storage", "TextureStorage1D")
+    dsa("ARB_texture_storage", "TextureStorage2D")
+    dsa("ARB_texture_storage", "TextureStorage3D")
+    dsa("ARB_texture_storage_multisample", "TextureStorage2DMultisample")
+    dsa("ARB_texture_storage_multisample", "TextureStorage3DMultisample")
     GL45 reuse "TextureSubImage1D"
     GL45 reuse "TextureSubImage2D"
     GL45 reuse "TextureSubImage3D"
@@ -103,7 +138,7 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     GL45 reuse "TextureParameterIiv"
     GL45 reuse "TextureParameterIuiv"
     GL45 reuse "TextureParameteriv"
-    GL45 reuse "GenerateTextureMipmap"
+    dsa("ARB_framebuffer_object", "GenerateTextureMipmap")
     GL45 reuse "BindTextureUnit"
     GL45 reuse "GetTextureImage"
     GL45 reuse "GetCompressedTextureImage"
@@ -113,25 +148,25 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     GL45 reuse "GetTextureParameterIiv"
     GL45 reuse "GetTextureParameterIuiv"
     GL45 reuse "GetTextureParameteriv"
-    GL45 reuse "CreateVertexArrays"
-    GL45 reuse "DisableVertexArrayAttrib"
-    GL45 reuse "EnableVertexArrayAttrib"
-    GL45 reuse "VertexArrayElementBuffer"
-    GL45 reuse "VertexArrayVertexBuffer"
-    GL45 reuse "VertexArrayVertexBuffers"
-    GL45 reuse "VertexArrayAttribFormat"
-    GL45 reuse "VertexArrayAttribIFormat"
-    GL45 reuse "VertexArrayAttribLFormat"
-    GL45 reuse "VertexArrayAttribBinding"
-    GL45 reuse "VertexArrayBindingDivisor"
-    GL45 reuse "GetVertexArrayiv"
-    GL45 reuse "GetVertexArrayIndexediv"
-    GL45 reuse "GetVertexArrayIndexed64iv"
-    GL45 reuse "CreateSamplers"
-    GL45 reuse "CreateProgramPipelines"
+    dsa("ARB_vertex_array_object", "CreateVertexArrays")
+    dsa("ARB_vertex_array_object", "DisableVertexArrayAttrib")
+    dsa("ARB_vertex_array_object", "EnableVertexArrayAttrib")
+    dsa("ARB_vertex_array_object", "VertexArrayElementBuffer")
+    dsa("ARB_vertex_attrib_binding", "VertexArrayVertexBuffer")
+    dsa("ARB_multi_bind", "VertexArrayVertexBuffers")
+    dsa("ARB_vertex_attrib_binding", "VertexArrayAttribFormat")
+    dsa("ARB_vertex_attrib_binding", "VertexArrayAttribIFormat")
+    dsa("ARB_vertex_attrib_binding", "VertexArrayAttribLFormat")
+    dsa("ARB_vertex_attrib_binding", "VertexArrayAttribBinding")
+    dsa("ARB_vertex_attrib_binding", "VertexArrayBindingDivisor")
+    dsa("ARB_vertex_array_object", "GetVertexArrayiv")
+    dsa("ARB_vertex_array_object", "GetVertexArrayIndexediv")
+    dsa("ARB_vertex_array_object", "GetVertexArrayIndexed64iv")
+    dsa("ARB_sampler_objects", "CreateSamplers")
+    dsa("ARB_separate_shader_objects", "CreateProgramPipelines")
     GL45 reuse "CreateQueries"
-    GL45 reuse "GetQueryBufferObjecti64v"
-    GL45 reuse "GetQueryBufferObjectiv"
-    GL45 reuse "GetQueryBufferObjectui64v"
-    GL45 reuse "GetQueryBufferObjectuiv"
+    dsa("ARB_query_buffer_object", "GetQueryBufferObjecti64v")
+    dsa("ARB_query_buffer_object", "GetQueryBufferObjectiv")
+    dsa("ARB_query_buffer_object", "GetQueryBufferObjectui64v")
+    dsa("ARB_query_buffer_object", "GetQueryBufferObjectuiv")
 }
