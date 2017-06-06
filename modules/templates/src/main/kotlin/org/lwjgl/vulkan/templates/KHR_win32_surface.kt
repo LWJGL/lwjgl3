@@ -25,10 +25,10 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
             <dd>10</dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2015-11-28</dd>
+            <dd>2017-04-24</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>5</dd>
+            <dd>6</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -70,7 +70,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
     IntConstant(
         "The extension specification version.",
 
-        "KHR_WIN32_SURFACE_SPEC_VERSION".."5"
+        "KHR_WIN32_SURFACE_SPEC_VERSION".."6"
     )
 
     StringConstant(

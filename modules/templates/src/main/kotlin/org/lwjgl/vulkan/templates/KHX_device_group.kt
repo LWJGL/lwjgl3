@@ -116,13 +116,16 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         VkPeerMemoryFeatureFlagBitsKHX - Bitmask specifying supported peer memory features
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #GetDeviceGroupPeerMemoryFeaturesKHX(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX indicates that the memory <b>can</b> be accessed as the source of a ftext:vkCmdCopy* command.</li>
+            <li>#PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX indicates that the memory <b>can</b> be accessed as the destination of a ftext:vkCmdCopy* command.</li>
+            <li>#PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX indicates that the memory <b>can</b> be read as any other memory access type.</li>
+            <li>#PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX indicates that the memory <b>can</b> be written as any other memory access type. Shader atomics are considered to be writes.</li>
         </ul>
+
+        #PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX <b>must</b> be supported for all heaps.
+
+        If a device does not support a peer memory feature, it is still valid to use a resource that includes both local and peer memory bindings with the corresponding access type as long as only the local bindings are actually accessed. For example, an application doing split-frame rendering would use framebuffer attachments that include both local and peer memory bindings, but would scissor the rendering to only update local memory.
 
         <h5>See Also</h5>
         {@code VkPeerMemoryFeatureFlagsKHX}
@@ -139,12 +142,8 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         VkMemoryAllocateFlagBitsKHX - Bitmask specifying flags for a device memory allocation
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkMemoryAllocateFlagsInfoKHX, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX specifies that memory will be allocated for the devices in ##VkMemoryAllocateFlagsInfoKHX{@code ::deviceMask}.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -159,12 +158,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         VkDeviceGroupPresentModeFlagBitsKHX - Bitmask specifying supported device group present modes
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkDeviceGroupPresentCapabilitiesKHX, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX indicates that any physical device with a presentation engine <b>can</b> present its own swapchain images.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX indicates that any physical device with a presentation engine <b>can</b> present swapchain images from any physical device in its {@code presentMask}.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX indicates that any physical device with a presentation engine <b>can</b> present the sum of swapchain images from any physical devices in its {@code presentMask}.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX indicates that multiple physical devices with a presentation engine <b>can</b> each present their own swapchain images.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -195,11 +193,6 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 ￿    uint32_t                                    remoteDeviceIndex,
 ￿    VkPeerMemoryFeatureFlagsKHX*                pPeerMemoryFeatures);</pre></code>
 
-        <h5>Description</h5>
-        #PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX <b>must</b> be supported for all heaps.
-
-        If a device doesn't support a peer memory feature, it is still valid to use a resource that includes both local and peer memory bindings with the corresponding access type as long as only the local bindings are actually accessed. For example, an application doing split-frame rendering would use framebuffer attachments that include both local and peer memory bindings, but would scissor the rendering to only update local memory.
-
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code heapIndex} <b>must</b> be less than {@code memoryHeapCount}</li>
@@ -220,21 +213,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         uint32_t.IN("heapIndex", "the index of the memory heap from which the memory is allocated."),
         uint32_t.IN("localDeviceIndex", "the device index of the physical device that performs the memory access."),
         uint32_t.IN("remoteDeviceIndex", "the device index of the physical device that the memory is allocated for."),
-        Check(1)..VkPeerMemoryFeatureFlagsKHX.p.OUT("pPeerMemoryFeatures", """a pointer to a bitmask indicating which types of memory accesses are supported for the combination of heap, local, and remote devices. The bits returned in {@code pPeerMemoryFeatures} are:
-<code><pre>
-￿typedef enum VkPeerMemoryFeatureFlagBitsKHX {
-￿    VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX = 0x00000001,
-￿    VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX = 0x00000002,
-￿    VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX = 0x00000004,
-￿    VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX = 0x00000008,
-￿} VkPeerMemoryFeatureFlagBitsKHX;</pre></code>
-
-        <ul>
-            <li>if {@code pPeerMemoryFeatures} contains #PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX, the memory <b>can</b> be accessed as the source of a ftext:vkCmdCopy* command.</li>
-            <li>if {@code pPeerMemoryFeatures} contains #PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX, the memory <b>can</b> be accessed as the destination of a ftext:vkCmdCopy* command.</li>
-            <li>if {@code pPeerMemoryFeatures} contains #PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX, the memory <b>can</b> be read as any other memory access type.</li>
-            <li>if {@code pPeerMemoryFeatures} contains #PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX, the memory <b>can</b> be written as any other memory access type. Shader atomics are considered to be writes.</li>
-        </ul>""")
+        Check(1)..VkPeerMemoryFeatureFlagsKHX.p.OUT("pPeerMemoryFeatures", "a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBitsKHX} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.")
     )
 
     VkResult(

@@ -46,7 +46,11 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         While the GPU can be faster than a CPU to generate the commands, it may not happen asynchronously, therefore the primary use-case is generating "{@code less}" total work (occlusion culling, classification to use specialized shaders...).
 
         <h5>Example Code</h5>
-        TODO links to gameworks & designworks samples
+        Open-Source samples illustrating the usage of the extension can be found at the following locations:
+
+        https://github.com/nvpro-samples/gl_vk_threaded_cadscene/blob/master/doc/vulkan_nvxdevicegenerated.md
+
+        https://github.com/NVIDIAGameWorks/GraphicsSamples/tree/master/samples/vk10-kepler/BasicDeviceGeneratedCommandsVk
 
         <code><pre>
 ￿  // setup secondary command buffer
@@ -195,12 +199,11 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkIndirectCommandsLayoutUsageFlagBitsNVX - Bitmask specifying allowed usage of a indirect commands layout
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkIndirectCommandsLayoutCreateInfoNVX, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX indicates that the processing of sequences <b>can</b> happen at an implementation-dependent order, which is not guaranteed to be coherent across multiple invocations.</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX indicates that there is likely a high difference between allocated number of sequences and actually used.</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX indicates that there are likely many draw or dispatch calls that are zero-sized (zero grid dimension, no primitives to render).</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX indicates that the input data for the sequences is not implicitly indexed from 0..sequencesUsed but a user provided {@code VkBuffer} encoding the index is provided.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -218,12 +221,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkObjectEntryUsageFlagBitsNVX - Bitmask specifying allowed usage of an object entry
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkObjectTableCreateInfoNVX, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
+            <li>#OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_COMPUTE</li>
         </ul>
 
         <h5>See Also</h5>
@@ -239,25 +239,33 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkIndirectCommandsTokenTypeNVX - Enum specifying
 
         <h5>Description</h5>
-        For more information, see:
-
-        <ul>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
-        </ul>
+        <h6>Supported indirect command tokens</h6>
+        <table class="lwjgl">
+            <thead><tr><th>Token type</th><th>Equivalent command</th></tr></thead>
+            <tbody>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX</td><td>#CmdBindPipeline()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX</td><td>#CmdBindDescriptorSets()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX</td><td>#CmdBindIndexBuffer()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX</td><td>#CmdBindVertexBuffers()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX</td><td>#CmdPushConstants()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX</td><td>#CmdDrawIndexedIndirect()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX</td><td>#CmdDrawIndirect()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX</td><td>#CmdDispatchIndirect()</td></tr>
+            </tbody>
+        </table>
 
         <h5>See Also</h5>
         ##VkIndirectCommandsLayoutTokenNVX, ##VkIndirectCommandsTokenNVX
         """,
 
-        "INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX".."0",
-        "INDIRECT_COMMANDS_TOKEN_DESCRIPTOR_SET_NVX".."1",
-        "INDIRECT_COMMANDS_TOKEN_INDEX_BUFFER_NVX".."2",
-        "INDIRECT_COMMANDS_TOKEN_VERTEX_BUFFER_NVX".."3",
-        "INDIRECT_COMMANDS_TOKEN_PUSH_CONSTANT_NVX".."4",
-        "INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX".."5",
-        "INDIRECT_COMMANDS_TOKEN_DRAW_NVX".."6",
-        "INDIRECT_COMMANDS_TOKEN_DISPATCH_NVX".."7"
+        "INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX".."0",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX".."1",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX".."2",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX".."3",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX".."4",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX".."5",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX".."6",
+        "INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX".."7"
     )
 
     EnumConstant(
@@ -265,23 +273,23 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkObjectEntryTypeNVX - Enum specifying object table entry type
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkObjectTableCreateInfoNVX, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX indicates a {@code VkDescriptorSet} resource entry that is registered via ##VkObjectTableDescriptorSetEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_PIPELINE_NVX indicates a {@code VkPipeline} resource entry that is registered via ##VkObjectTablePipelineEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableIndexBufferEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableVertexBufferEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX indicates the resource entry is registered via ##VkObjectTablePushConstantEntryNVX.</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkObjectTableCreateInfoNVX, ##VkObjectTableDescriptorSetEntryNVX, ##VkObjectTableEntryNVX, ##VkObjectTableIndexBufferEntryNVX, ##VkObjectTablePipelineEntryNVX, ##VkObjectTablePushConstantEntryNVX, ##VkObjectTableVertexBufferEntryNVX, #UnregisterObjectsNVX()
         """,
 
-        "OBJECT_ENTRY_DESCRIPTOR_SET_NVX".."0",
-        "OBJECT_ENTRY_PIPELINE_NVX".."1",
-        "OBJECT_ENTRY_INDEX_BUFFER_NVX".."2",
-        "OBJECT_ENTRY_VERTEX_BUFFER_NVX".."3",
-        "OBJECT_ENTRY_PUSH_CONSTANT_NVX".."4"
+        "OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX".."0",
+        "OBJECT_ENTRY_TYPE_PIPELINE_NVX".."1",
+        "OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX".."2",
+        "OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX".."3",
+        "OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX".."4"
     )
 
     void(

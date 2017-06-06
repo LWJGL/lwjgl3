@@ -146,7 +146,6 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         For more information, see:
 
         <ul>
-            <li>The reference page for ##VkDebugReportCallbackEXT, where this interface is defined.</li>
             <li>The See Also section for other reference pages using this type.</li>
             <li>The Vulkan Specification.</li>
         </ul>
@@ -195,12 +194,12 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         VkDebugReportFlagBitsEXT - Bitmask specifying events which cause a debug report callback
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkDebugReportCallbackCreateInfoEXT, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DEBUG_REPORT_ERROR_BIT_EXT specifies that an error that may cause undefined results, including an application crash.</li>
+            <li>#DEBUG_REPORT_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
+            <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT specifies a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
+            <li>#DEBUG_REPORT_INFORMATION_BIT_EXT specifies an informational message such as resource details that may be handy when debugging an application.</li>
+            <li>#DEBUG_REPORT_DEBUG_BIT_EXT specifies diagnostic information from the implementation and layers.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -307,7 +306,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     void(
         "DebugReportMessageEXT",
         """
-        (no short description available).
+        Inject a message into a debug stream.
 
         <h5>C Specification</h5>
         To inject its own messages into the debug stream, call:
@@ -337,8 +336,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkDebugReportFlagBitsEXT} values</li>
             <li>{@code flags} <b>must</b> not be 0</li>
             <li>{@code objectType} <b>must</b> be a valid {@code VkDebugReportObjectTypeEXT} value</li>
-            <li>{@code pLayerPrefix} <b>must</b> be a null-terminated string</li>
-            <li>{@code pMessage} <b>must</b> be a null-terminated string</li>
+            <li>{@code pLayerPrefix} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>{@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
         </ul>
         """,
 

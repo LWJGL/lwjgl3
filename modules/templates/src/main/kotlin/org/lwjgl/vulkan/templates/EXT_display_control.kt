@@ -79,15 +79,13 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
     EnumConstant(
         """
-        VkDisplayPowerStateEXT - Possible power states for a VkDisplay
+        VkDisplayPowerStateEXT - Possible power states for a display
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkDisplayPowerInfoEXT, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DISPLAY_POWER_STATE_OFF_EXT specifies that the display is powered down.</li>
+            <li>#DISPLAY_POWER_STATE_SUSPEND_EXT specifies that the display is put into a low power mode, from which it <b>may</b> be able to transition back to #DISPLAY_POWER_STATE_ON_EXT more quickly than if it were in #DISPLAY_POWER_STATE_OFF_EXT. This state <b>may</b> be the same as #DISPLAY_POWER_STATE_OFF_EXT.</li>
+            <li>#DISPLAY_POWER_STATE_ON_EXT specifies that the display is powered on.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -104,12 +102,8 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         VkDeviceEventTypeEXT - Events that can occur on a device object
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkDeviceEventInfoEXT, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT specifies that the fence is signaled when a display is plugged into or unplugged from the specified device. Applications <b>can</b> use this notification to determine when they need to re-enumerate the available displays on a device.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -124,12 +118,8 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         VkDisplayEventTypeEXT - Events that can occur on a display object
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkDisplayEventInfoEXT, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT specifies that the fence is signaled when the first pixel of the next display refresh cycle leaves the display engine for the display.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -278,7 +268,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 ￿    uint64_t*                                   pCounterValue);</pre></code>
 
         <h5>Description</h5>
-        If a counter is not available because the swapchain is out of date, the implementation <b>may</b> return VK_ERROR_OUT_OF_DATE_KHR.
+        If a counter is not available because the swapchain is out of date, the implementation <b>may</b> return #ERROR_OUT_OF_DATE_KHR.
 
         <h5>Valid Usage</h5>
         <ul>

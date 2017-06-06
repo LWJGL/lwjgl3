@@ -94,8 +94,8 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         <h5>Description</h5>
         <ul>
-            <li>#DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR indicates that the descriptor update template will be used for descriptor set updates only.</li>
-            <li>#DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR indicates that the descriptor update template will be used for push descriptor updates only.</li>
+            <li>#DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR specifies that the descriptor update template will be used for descriptor set updates only.</li>
+            <li>#DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR specifies that the descriptor update template will be used for push descriptor updates only.</li>
         </ul>
 
         <h5>See Also</h5>

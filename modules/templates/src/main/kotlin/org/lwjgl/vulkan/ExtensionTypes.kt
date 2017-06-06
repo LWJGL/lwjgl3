@@ -85,8 +85,8 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
     "Application-defined debug report callback function.",
 
     VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
-    VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
-    uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT {@code object} is undefined."),
+    VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered."),
+    uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
     size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional value."),
     int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
     const..char_p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
@@ -98,7 +98,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
         Application-defined debug report callback function.
 
         <h5>C Specification</h5>
-        The prototype for the callback function implemented by the application is:
+        The prototype for the ##VkDebugReportCallbackCreateInfoEXT{@code ::pfnCallback} function implemented by the application is:
 
         <code><pre>
 ￿typedef VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
@@ -117,87 +117,6 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
         The callback returns a {@code VkBool32} that indicates to the calling layer the application's desire to abort the call. A value of #TRUE indicates that the application wants to abort this call. If the application returns #FALSE, the command <b>must</b> not be aborted. Applications <b>should</b> always return #FALSE so that they see the same behavior with and without validation layers enabled.
 
         If the application returns #TRUE from its callback and the Vulkan call being aborted returns a {@code VkResult}, the layer will return #ERROR_VALIDATION_FAILED_EXT.
-
-        The object types are:
-
-        <code><pre>
-￿typedef enum VkDebugReportObjectTypeEXT {
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT = 0,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT = 1,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT = 2,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT = 3,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT = 4,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT = 5,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT = 6,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT = 7,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT = 8,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT = 9,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT = 10,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT = 11,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT = 12,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT = 13,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT = 14,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT = 15,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT = 16,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT = 17,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT = 18,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT = 19,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT = 20,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT = 21,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT = 22,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT = 23,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT = 24,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT = 25,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT = 26,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT = 27,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT = 28,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT = 29,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT = 30,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT = 31,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT = 32,
-￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT = 1000085000,
-￿} VkDebugReportObjectTypeEXT;</pre></code>
-
-        <ul>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT is an unknown object.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT is a {@code VkInstance}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT is a {@code VkPhysicalDevice}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT is a {@code VkDevice}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT is a {@code VkQueue}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT is a {@code VkSemaphore}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT is a {@code VkCommandBuffer}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT is a {@code VkFence}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT is a {@code VkDeviceMemory}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT is a {@code VkBuffer}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT is a {@code VkImage}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT is a {@code VkEvent}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT is a {@code VkQueryPool}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT is a {@code VkBufferView}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT is a {@code VkImageView}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT is a {@code VkShaderModule}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT is a {@code VkPipelineCache}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT is a {@code VkPipelineLayout}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT is a {@code VkRenderPass}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT is a {@code VkPipeline}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT is a {@code VkDescriptorSetLayout}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT is a {@code VkSampler}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT is a {@code VkDescriptorPool}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT is a {@code VkDescriptorSet}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT is a {@code VkFramebuffer}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT is a {@code VkCommandPool}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT is a {@code VkSurfaceKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT is a {@code VkSwapchainKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT is a {@code VkDebugReportCallbackEXT}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT is a {@code VkDisplayKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT is a {@code VkDisplayModeKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT is a {@code VkObjectTableNVX}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT is a {@code VkIndirectCommandsLayoutNVX}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT is a {@code VkDescriptorUpdateTemplateKHR}.</li>
-        </ul>
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The primary expected use of #ERROR_VALIDATION_FAILED_EXT is for validation layer testing. It is not expected that an application would see this error code during normal use of the validation layers.
-        </div>
 
         <h5>See Also</h5>
         ##VkDebugReportCallbackCreateInfoEXT
@@ -230,8 +149,8 @@ val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR"
     VkExtent2D.member("minImageExtent", "contains the smallest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be less than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above.")
     VkExtent2D.member("maxImageExtent", "contains the largest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code minImageExtent}. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above.")
     uint32_t.member("maxImageArrayLayers", "the maximum number of layers presentable images <b>can</b> have for a swapchain created for this device and surface, and will be at least one.")
-    VkSurfaceTransformFlagsKHR.member("supportedTransforms", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the presentation transforms supported for the surface on the specified device, and at least one bit will be set.")
-    VkSurfaceTransformFlagBitsKHR.member("currentTransform", "the surface&#8217;s current transform relative to the presentation engine&#8217;s natural orientation, as described by {@code VkSurfaceTransformFlagBitsKHR}.")
+    VkSurfaceTransformFlagsKHR.member("supportedTransforms", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR} indicating the presentation transforms supported for the surface on the specified device. At least one bit will be set.")
+    VkSurfaceTransformFlagBitsKHR.member("currentTransform", "{@code VkSurfaceTransformFlagBitsKHR} value indicating the surface&#8217;s current transform relative to the presentation engine&#8217;s natural orientation.")
     VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device, and at least one bit will be set. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using an image format that has no alpha component, or by ensuring that all pixels in the presentable images have an alpha value of 1.0.")
     VkImageUsageFlags.member("supportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created with {@code VkPresentModeKHR} set to #PRESENT_MODE_IMMEDIATE_KHR, #PRESENT_MODE_MAILBOX_KHR, #PRESENT_MODE_FIFO_KHR or #PRESENT_MODE_FIFO_RELAXED_KHR for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
@@ -251,21 +170,59 @@ val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR"
         """
         Structure specifying parameters of a newly created swapchain object.
 
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Applications <b>should</b> set this value to #TRUE if they do not expect to read back the content of presentable images before presenting them or after reacquiring them and if their pixel shaders do not have any side effects that require them to run for all pixels in the presentable image.
+        </div>
+
+        <ul>
+            <li>{@code oldSwapchain}, if not #NULL_HANDLE, specifies the swapchain that will be replaced by the new swapchain being created. The new swapchain will be a descendant of {@code oldSwapchain}. Further, any descendants of the new swapchain will also be descendants of {@code oldSwapchain}. Upon calling #CreateSwapchainKHR() with a {@code oldSwapchain} that is not #NULL_HANDLE, any images not acquired by the application <b>may</b> be freed by the implementation, which <b>may</b> occur even if creation of the new swapchain fails. The application <b>must</b> destroy the old swapchain to free all memory associated with the old swapchain. The application <b>must</b> wait for the completion of any outstanding rendering to images it currently has acquired at the time the swapchain is destroyed. The application <b>can</b> continue to present any images it acquired and has not yet presented using the old swapchain, as long as it has not entered a state that causes it to return #ERROR_OUT_OF_DATE_KHR. However, the application <b>cannot</b> acquire any more images from the old swapchain regardless of whether or not creation of the new swapchain succeeds. The application <b>can</b> continue to use a shared presentable image obtained from {@code oldSwapchain} until a presentable image is acquired from the new swapchain, as long as it has not entered a state that causes it to return #ERROR_OUT_OF_DATE_KHR.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code surface} <b>must</b> be a surface that is supported by the device as determined using #GetPhysicalDeviceSurfaceSupportKHR()</li>
+            <li>{@code minImageCount} <b>must</b> be greater than or equal to the value returned in the {@code minImageCount} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
+            <li>{@code minImageCount} <b>must</b> be less than or equal to the value returned in the {@code maxImageCount} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface if the returned {@code maxImageCount} is not zero</li>
+            <li>{@code minImageCount} <b>must</b> be 1 if {@code presentMode} is either #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</li>
+            <li>{@code imageFormat} and {@code imageColorSpace} <b>must</b> match the {@code format} and {@code colorSpace} members, respectively, of one of the ##VkSurfaceFormatKHR structures returned by #GetPhysicalDeviceSurfaceFormatsKHR() for the surface</li>
+            <li>{@code imageExtent} <b>must</b> be between {@code minImageExtent} and {@code maxImageExtent}, inclusive, where {@code minImageExtent} and {@code maxImageExtent} are members of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
+            <li>{@code imageArrayLayers} <b>must</b> be greater than 0 and less than or equal to the {@code maxImageArrayLayers} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
+            <li>{@code imageUsage} <b>must</b> be a subset of the supported usage flags present in the {@code supportedUsageFlags} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface if {@code presentMode} is set to #PRESENT_MODE_IMMEDIATE_KHR, #PRESENT_MODE_MAILBOX_KHR, #PRESENT_MODE_FIFO_KHR or #PRESENT_MODE_FIFO_RELAXED_KHR</li>
+            <li>{@code imageUsage} <b>must</b> be a subset of the supported usage flags present in the {@code sharedPresentSupportedUsageFlags} member of the ##VkSharedPresentSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilities2KHR() for the surface if {@code presentMode} is set to either #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</li>
+            <li>If {@code imageSharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
+            <li>If {@code imageSharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
+            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by either #GetPhysicalDeviceQueueFamilyProperties() or #GetPhysicalDeviceQueueFamilyProperties2KHR() for the {@code physicalDevice} that was used to create {@code device}</li>
+            <li>{@code preTransform} <b>must</b> be one of the bits present in the {@code supportedTransforms} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
+            <li>{@code compositeAlpha} <b>must</b> be one of the bits present in the {@code supportedCompositeAlpha} member of the ##VkSurfaceCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR() for the surface</li>
+            <li>{@code presentMode} <b>must</b> be one of the {@code VkPresentModeKHR} values returned by #GetPhysicalDeviceSurfacePresentModesKHR() for the surface</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupSwapchainCreateInfoKHX</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkSwapchainCreateFlagBitsKHR} values</li>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>{@code imageFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+            <li>{@code imageColorSpace} <b>must</b> be a valid {@code VkColorSpaceKHR} value</li>
+            <li>{@code imageUsage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
+            <li>{@code imageUsage} <b>must</b> not be 0</li>
+            <li>{@code imageSharingMode} <b>must</b> be a valid {@code VkSharingMode} value</li>
+            <li>{@code preTransform} <b>must</b> be a valid {@code VkSurfaceTransformFlagBitsKHR} value</li>
+            <li>{@code compositeAlpha} <b>must</b> be a valid {@code VkCompositeAlphaFlagBitsKHR} value</li>
+            <li>{@code presentMode} <b>must</b> be a valid {@code VkPresentModeKHR} value</li>
+            <li>If {@code oldSwapchain} is not #NULL_HANDLE, {@code oldSwapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+            <li>If {@code oldSwapchain} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code surface}</li>
+        </ul>
+
         <h5>See Also</h5>
-        {@code VkBool32}, {@code VkColorSpaceKHR}, {@code VkCompositeAlphaFlagBitsKHR}, ##VkExtent2D, {@code VkFormat}, {@code VkImageUsageFlags}, {@code VkPresentModeKHR}, {@code VkSharingMode}, {@code VkStructureType}, {@code VkSurfaceKHR}, {@code VkSurfaceTransformFlagBitsKHR}, {@code VkSwapchainCreateFlagsKHR}, {@code VkSwapchainKHR}, #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR()
+        ##VkExtent2D, #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR()
         """
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSwapchainCreateFlagsKHR.member("flags", """a bitmask indicating parameters of swapchain creation. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkSwapchainCreateFlagBitsKHR {
-￿    VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX = 0x00000001,
-￿} VkSwapchainCreateFlagBitsKHR;</pre></code>
-
-        == Description
-
-        If {@code flags} includes #SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX, then images created from the swapchain (i.e. with the {@code swapchain} member of ##VkImageSwapchainCreateInfoKHX set to this swapchain's handle) <b>must</b> use #IMAGE_CREATE_BIND_SFR_BIT_KHX.""")
+    VkSwapchainCreateFlagsKHR.member("flags", "a bitmask of {@code VkSwapchainCreateFlagBitsKHR} indicating parameters of swapchain creation.")
     VkSurfaceKHR.member("surface", "the surface that the swapchain will present images to.")
     uint32_t.member("minImageCount", "the minimum number of presentable images that the application needs. The platform will either create the swapchain with at least that many images, or will fail to create the swapchain.")
     VkFormat.member("imageFormat", "a {@code VkFormat} that is valid for swapchains on the specified surface.")
@@ -277,7 +234,7 @@ val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR"
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member("queueFamilyIndexCount", "the number of queue families having access to the images of the swapchain in case {@code imageSharingMode} is #SHARING_MODE_CONCURRENT.")
     const..uint32_t_p.member("pQueueFamilyIndices", "an array of queue family indices having access to the images of the swapchain in case {@code imageSharingMode} is #SHARING_MODE_CONCURRENT.")
     VkSurfaceTransformFlagBitsKHR.member("preTransform", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the transform, relative to the presentation engine&#8217;s natural orientation, applied to the image content prior to presentation. If it does not match the {@code currentTransform} value returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR(), the presentation engine will transform the image content as part of the presentation operation.")
-    VkCompositeAlphaFlagBitsKHR.member("compositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, indicating the alpha compositing mode to use when this surface is composited together with other surfaces on certain window systems.")
+    VkCompositeAlphaFlagBitsKHR.member("compositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR} indicating the alpha compositing mode to use when this surface is composited together with other surfaces on certain window systems.")
     VkPresentModeKHR.member("presentMode", "the presentation mode the swapchain will use. A swapchain&#8217;s present mode determines how incoming present requests will be processed and queued internally.")
     VkBool32.member("clipped", """indicates whether the Vulkan implementation is allowed to discard rendering operations that affect regions of the surface which are not visible.
 <ul>
@@ -487,12 +444,12 @@ val VkDisplaySurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCrea
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplaySurfaceCreateFlagsKHR.member("flags", "reserved for future use, and <b>must</b> be zero.")
-    VkDisplayModeKHR.member("displayMode", "the mode to use when displaying this surface.")
+    VkDisplayModeKHR.member("displayMode", "a {@code VkDisplayModeKHR} handle specifying the mode to use when displaying this surface.")
     uint32_t.member("planeIndex", "the plane on which this surface appears.")
     uint32_t.member("planeStackIndex", "the z-order of the plane.")
-    VkSurfaceTransformFlagBitsKHR.member("transform", "the transform to apply to the images as part of the scanout operation.")
+    VkSurfaceTransformFlagBitsKHR.member("transform", "a {@code VkSurfaceTransformFlagBitsKH} value specifying the transformation to apply to images as part of the scanout operation.")
     float.member("globalAlpha", "the global alpha value. This value is ignored if {@code alphaMode} is not #DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR.")
-    VkDisplayPlaneAlphaFlagBitsKHR.member("alphaMode", "the type of alpha blending to use.")
+    VkDisplayPlaneAlphaFlagBitsKHR.member("alphaMode", "a {@code VkDisplayPlaneAlphaFlagBitsKHR} value specifying the type of alpha blending to use.")
     VkExtent2D.member("imageExtent", "The size of the presentable images to use with the surface.")
 }
 
@@ -617,23 +574,7 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDebugReportFlagsEXT.member("flags", """indicate which event(s) will cause this callback to be called. Flags are interpreted as bitmasks and multiple <b>can</b> be set. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkDebugReportFlagBitsEXT {
-￿    VK_DEBUG_REPORT_INFORMATION_BIT_EXT = 0x00000001,
-￿    VK_DEBUG_REPORT_WARNING_BIT_EXT = 0x00000002,
-￿    VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT = 0x00000004,
-￿    VK_DEBUG_REPORT_ERROR_BIT_EXT = 0x00000008,
-￿    VK_DEBUG_REPORT_DEBUG_BIT_EXT = 0x00000010,
-￿} VkDebugReportFlagBitsEXT;</pre></code>
-
-        <ul>
-            <li>#DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause undefined results, including an application crash.</li>
-            <li>#DEBUG_REPORT_WARNING_BIT_EXT indicates use of Vulkan that may expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases may point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
-            <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
-            <li>#DEBUG_REPORT_INFORMATION_BIT_EXT indicates an informational message such as resource details that may be handy when debugging an application.</li>
-            <li>#DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information from the implementation and layers.</li>
-        </ul>""")
+    VkDebugReportFlagsEXT.member("flags", "a bitmask of {@code VkDebugReportFlagBitsEXT} specifying which event(s) will cause this callback to be called.")
     PFN_vkDebugReportCallbackEXT.member("pfnCallback", "the application callback function to call.")
     nullable..opaque_p.member("pUserData", "user data to be passed to the callback.")
 }
@@ -641,18 +582,20 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateRasterizationOrderAMD") {
     documentation =
         """
-        (no short description available).
+        Structure defining rasterization order for a graphics pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD</li>
             <li>{@code rasterizationOrder} <b>must</b> be a valid {@code VkRasterizationOrderAMD} value</li>
         </ul>
+
+        If the {@code VK_AMD_rasterization_order} device extension is not enabled or the application does not request a particular rasterization order through specifying a ##VkPipelineRasterizationStateRasterizationOrderAMD structure then the rasterization order used by the graphics pipeline defaults to #RASTERIZATION_ORDER_STRICT_AMD.
         """
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkRasterizationOrderAMD.member("rasterizationOrder", "the primitive rasterization order to use.")
+    VkRasterizationOrderAMD.member("rasterizationOrder", "a {@code VkRasterizationOrderAMD} value specifying the primitive rasterization order to use.")
 }
 
 val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectNameInfoEXT") {
@@ -668,7 +611,7 @@ val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObject
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code objectType} <b>must</b> be a valid {@code VkDebugReportObjectTypeEXT} value</li>
-            <li>{@code pObjectName} <b>must</b> be a null-terminated string</li>
+            <li>{@code pObjectName} <b>must</b> be a null-terminated UTF-8 string</li>
         </ul>
 
         <h5>See Also</h5>
@@ -721,7 +664,7 @@ val VkDebugMarkerMarkerInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfo
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code pMarkerName} <b>must</b> be a null-terminated string</li>
+            <li>{@code pMarkerName} <b>must</b> be a null-terminated UTF-8 string</li>
         </ul>
 
         <h5>See Also</h5>
@@ -933,7 +876,7 @@ val VkExternalImageFormatPropertiesNV = struct(VULKAN_PACKAGE, "VkExternalImageF
         """
 
     VkImageFormatProperties.member("imageFormatProperties", "will be filled in as when calling #GetPhysicalDeviceImageFormatProperties(), but the values returned <b>may</b> vary depending on the external handle type requested.")
-    VkExternalMemoryFeatureFlagsNV.member("externalMemoryFeatures", "a bitmask of {@code VkExternalMemoryFeatureFlagBitsNV} indicating properties of the external memory handle type (#GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType}) being queried, or 0 if the external memory handle type is 0.")
+    VkExternalMemoryFeatureFlagsNV.member("externalMemoryFeatures", "a bitmask of {@code VkExternalMemoryFeatureFlagBitsNV}, indicating properties of the external memory handle type (#GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType}) being queried, or 0 if the external memory handle type is 0.")
     VkExternalMemoryHandleTypeFlagsNV.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be used to create memory from which the handles of the type specified in #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType} <b>can</b> be exported, or 0 if the external memory handle type is 0.")
     VkExternalMemoryHandleTypeFlagsNV.member("compatibleHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be specified simultaneously with the handle type specified by #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType} when calling #AllocateMemory(), or 0 if the external memory handle type is 0. {@code compatibleHandleTypes} will always contain #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType}")
 }
@@ -999,7 +942,7 @@ val VkImportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkImportMemoryWin3
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagsNV.member("handleType", "0 or a bit specifying the type of memory handle in {@code handle}. See {@code VkExternalMemoryHandleTypeFlagBitsNV} below for a description of the supported bits.")
+    VkExternalMemoryHandleTypeFlagsNV.member("handleType", "0 or a {@code VkExternalMemoryHandleTypeFlagBitsNV} value specifying the type of memory handle in {@code handle}.")
     HANDLE.member("handle", "a Windows {@code HANDLE} referring to the memory.")
 }
 
@@ -1158,11 +1101,11 @@ val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevi
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2KHR is used to provide additional image parameters to #GetPhysicalDeviceImageFormatProperties2KHR().")
-    VkFormat.member("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
-    VkImageType.member("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
-    VkImageTiling.member("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
-    VkImageUsageFlags.member("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}.")
-    VkImageCreateFlags.member("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}.")
+    VkFormat.member("format", "a {@code VkFormat} value indicating the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
+    VkImageType.member("type", "a {@code VkImateType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
+    VkImageTiling.member("tiling", "a {@code VkImageTiling} value indicating the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
+    VkImageUsageFlags.member("usage", "a bitmask of {@code VkImageUsageFlagBits} indicating the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}.")
+    VkImageCreateFlags.member("flags", "a bitmask of {@code VkImageCreateFlagBits} indicating additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}.")
 }
 
 val VkQueueFamilyProperties2KHR = struct(VULKAN_PACKAGE, "VkQueueFamilyProperties2KHR", mutable = false) {
@@ -1236,12 +1179,12 @@ val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysic
 val VkMemoryAllocateFlagsInfoKHX = struct(VULKAN_PACKAGE, "VkMemoryAllocateFlagsInfoKHX") {
     documentation =
         """
-        (no short description available).
+        Structure controlling how many instances of memory will be allocated.
 
         <h5>Description</h5>
         If #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is not set, the number of instances allocated depends on whether #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX is set in the memory heap. If #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX is set, then memory is allocated for every physical device in the logical device (as if {@code deviceMask} has bits set for all device indices). If #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX is not set, then a single instance of memory is allocated (as if {@code deviceMask} is set to one).
 
-        On some implementations, allocations from a multi-instance heap <b>may</b> consume memory on all physical devices even if the {@code deviceMask} excludes some devices. If ##VkPhysicalDeviceGroupPropertiesKHX{@code ::subsetAllocation} is #TRUE then memory is only consumed for the devices in the device mask.
+        On some implementations, allocations from a multi-instance heap <b>may</b> consume memory on all physical devices even if the {@code deviceMask} excludes some devices. If ##VkPhysicalDeviceGroupPropertiesKHX{@code ::subsetAllocation} is #TRUE, then memory is only consumed for the devices in the device mask.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         In practice, most allocations on a multi-instance heap will be allocated across all physical devices. Unicast allocation support is an optional optimization for a minority of allocations.
@@ -1262,16 +1205,8 @@ val VkMemoryAllocateFlagsInfoKHX = struct(VULKAN_PACKAGE, "VkMemoryAllocateFlags
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkMemoryAllocateFlagsKHX.member("flags", """a bitmask of flags controlling the allocation. The bits specified in {@code flags} are:
-<code><pre>
-￿typedef enum VkMemoryAllocateFlagBitsKHX {
-￿    VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX = 0x00000001,
-￿} VkMemoryAllocateFlagBitsKHX;</pre></code>
-
-        <ul>
-            <li>if {@code flags} contains #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX, memory will be allocated for the devices in {@code deviceMask}.</li>
-        </ul>""")
-    uint32_t.member("deviceMask", "a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set.")
+    VkMemoryAllocateFlagsKHX.member("flags", "a bitmask of {@code VkMemoryAllocateFlagBitsKHX} controlling the allocation.")
+    uint32_t.member("deviceMask", "a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set in {@code flags}.")
 }
 
 val VkBindBufferMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindBufferMemoryInfoKHX") {
@@ -1342,9 +1277,9 @@ val VkBindImageMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHX"
             <li>All elements of {@code pSFRRects} <b>must</b> be valid rectangles contained within the dimensions of the image</li>
             <li>Elements of {@code pSFRRects} that correspond to the same instance of the image <b>must</b> not overlap and their union <b>must</b> cover the entire image.</li>
             <li>For each element of {@code pSFRRects}, {@code offset.x} <b>must</b> be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
-            <li>For each element of {@code pSFRRects}, {@code extent.width} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
+            <li>For each element of {@code pSFRRects}, {@code extent.width} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else <code>(extent.width + offset.x)</code> <b>must</b> equal the width of the image subresource</li>
             <li>For each element of {@code pSFRRects}, {@code offset.y} <b>must</b> be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
-            <li>For each element of {@code pSFRRects}, {@code extent.height} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} + {@code offset.y} <b>must</b> equal the height of the image subresource</li>
+            <li>For each element of {@code pSFRRects}, {@code extent.height} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else <code>(extent.height + offset.y)</code> <b>must</b> equal the height of the image subresource</li>
             <li>All instances of memory that are bound <b>must</b> have been allocated</li>
             <li>If {@code image} was created with a valid swapchain handle in ##VkImageSwapchainCreateInfoKHX{@code ::swapchain}, then the image <b>must</b> be bound to memory from that swapchain (using ##VkBindImageMemorySwapchainInfoKHX).</li>
         </ul>
@@ -1523,21 +1458,7 @@ val VkDeviceGroupPresentCapabilitiesKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupP
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.array("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.", size = "VK_MAX_DEVICE_GROUP_SIZE_KHX")
-    VkDeviceGroupPresentModeFlagsKHX.member("modes", """a bitmask indicating which device group presentation modes are supported. The bits returned in {@code modes} are:
-<code><pre>
-￿typedef enum VkDeviceGroupPresentModeFlagBitsKHX {
-￿    VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX = 0x00000001,
-￿    VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX = 0x00000002,
-￿    VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX = 0x00000004,
-￿    VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX = 0x00000008,
-￿} VkDeviceGroupPresentModeFlagBitsKHX;</pre></code>
-
-        <ul>
-            <li>if {@code modes} contains #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX, any physical device with a presentation engine <b>can</b> present its own swapchain images.</li>
-            <li>if {@code modes} contains #DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX, any physical device with a presentation engine <b>can</b> present swapchain images from any physical device in its {@code presentMask}.</li>
-            <li>if {@code modes} contains #DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX, any physical device with a presentation engine <b>can</b> present the sum of swapchain images from any physical devices in its {@code presentMask}.</li>
-            <li>if {@code modes} contains #DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX, multiple physical devices with a presentation engine <b>can</b> each present their own swapchain images.</li>
-        </ul>""")
+    VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHX} indicating which device group presentation modes are supported.")
 }
 
 val VkImageSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkImageSwapchainCreateInfoKHX") {
@@ -1725,17 +1646,7 @@ val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pDisabledValidationChecks")..uint32_t.member("disabledValidationCheckCount", "the number of checks to disable.")
-    VkValidationCheckEXT.p.member("pDisabledValidationChecks", """a pointer to an array of values specifying the validation checks to be disabled. Checks which <b>may</b> be specified include:
-<code><pre>
-￿typedef enum VkValidationCheckEXT {
-￿    VK_VALIDATION_CHECK_ALL_EXT = 0,
-￿    VK_VALIDATION_CHECK_SHADERS_EXT = 1,
-￿} VkValidationCheckEXT;</pre></code>
-
-        <ul>
-            <li>#VALIDATION_CHECK_ALL_EXT disables all validation checks.</li>
-            <li>#VALIDATION_CHECK_SHADERS_EXT disables all shader validation.</li>
-        </ul>""")
+    VkValidationCheckEXT.p.member("pDisabledValidationChecks", "a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled.")
 }
 
 val VkPhysicalDeviceGroupPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceGroupPropertiesKHX", mutable = false) {
@@ -1794,9 +1705,9 @@ val VkExternalMemoryPropertiesKHX = struct(VULKAN_PACKAGE, "VkExternalMemoryProp
         ##VkExternalBufferPropertiesKHX, ##VkExternalImageFormatPropertiesKHX
         """
 
-    VkExternalMemoryFeatureFlagsKHX.member("externalMemoryFeatures", "a bitmask describing the features of {@code handleType}. See {@code VkExternalMemoryFeatureFlagBitsKHX} below for a description of the possible bits.")
-    VkExternalMemoryHandleTypeFlagsKHX.member("exportFromImportedHandleTypes", "a bitmask specifying handle types that can be used to import objects from which {@code handleType} can be exported.")
-    VkExternalMemoryHandleTypeFlagsKHX.member("compatibleHandleTypes", "a bitmask specifying handle types which can be specified at the same time as {@code handleType} when creating an image compatible with external memory.")
+    VkExternalMemoryFeatureFlagsKHX.member("externalMemoryFeatures", "a bitmask of {@code VkExternalMemoryFeatureFlagBitsKHX} specifying the features of {@code handleType}.")
+    VkExternalMemoryHandleTypeFlagsKHX.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHX} specifying which types of imported handle {@code handleType} <b>can</b> be exported from.")
+    VkExternalMemoryHandleTypeFlagsKHX.member("compatibleHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHX} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating an image compatible with external memory.")
 }
 
 val VkPhysicalDeviceExternalImageFormatInfoKHX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalImageFormatInfoKHX") {
@@ -1805,7 +1716,7 @@ val VkPhysicalDeviceExternalImageFormatInfoKHX = struct(VULKAN_PACKAGE, "VkPhysi
         Structure specifying external image creation parameters.
 
         <h5>Description</h5>
-        If {@code handleType} is 0, #GetPhysicalDeviceImageFormatProperties2KHR() will behave as if ##VkPhysicalDeviceExternalImageFormatInfoKHX was not present and ##VkExternalImageFormatPropertiesKHX will be ignored.
+        If {@code handleType} is 0, #GetPhysicalDeviceImageFormatProperties2KHR() will behave as if ##VkPhysicalDeviceExternalImageFormatInfoKHX was not present, and ##VkExternalImageFormatPropertiesKHX will be ignored.
 
         If {@code handleType} is not compatible with the {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} specified in ##VkPhysicalDeviceImageFormatInfo2KHR, then #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
 
@@ -1818,27 +1729,7 @@ val VkPhysicalDeviceExternalImageFormatInfoKHX = struct(VULKAN_PACKAGE, "VkPhysi
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagBitsKHX.member("handleType", """a bit indicating a memory handle type that will be used with the memory associated with the image. Bits which can be set include:
-<code><pre>
-￿typedef enum VkExternalMemoryHandleTypeFlagBitsKHX {
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX = 0x00000001,
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX = 0x00000002,
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX = 0x00000004,
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHX = 0x00000008,
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX = 0x00000010,
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX = 0x00000020,
-￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX = 0x00000040,
-￿} VkExternalMemoryHandleTypeFlagBitsKHX;</pre></code>
-
-        <ul>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX is a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls fname:dup, fname:dup2, fname:close, and the non-standard system call fname:dup3. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_WIN32_BIT_KHX is an NT handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the functions fname:DuplicateHandle, fname:CloseHandle, fname:CompareObjectHandles, fname:GetHandleInformation, and fname:SetHandleInformation. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX is a global share handle that has only limited valid usage outside of Vulkan and other compatible APIs. It is not compatible with any native APIs. It does not own own a reference to the underlying memory resource represented its Vulkan memory object, and will therefore become invalid when all Vulkan memory objects associated with it are destroyed.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHX is an NT handle returned by {@code IDXGIResource1}::fname:CreateSharedHandle referring to a Direct3D 10 or 11 texture resource. It owns a reference to the memory used by the Direct3D resource.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX is a global share handle returned by {@code IDXGIResource}::fname:GetSharedHandle referring to a Direct3D 10 or 11 texture resource. It does not own own a reference to the underlying Direct3D resource, and will therefore become invalid when all Vulkan memory objects and Direct3D resources associated with it are destroyed.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX is an NT handle returned by {@code ID3D12Device}::fname:CreateSharedHandle referring to a Direct3D 12 heap resource. It owns a reference to the resources used by the Direct3D heap.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX is an NT handle returned by {@code ID3D12Device}::fname:CreateSharedHandle referring to a Direct3D 12 committed resource. It owns a reference to the memory used by the Direct3D resource.</li>
-        </ul>""")
+    VkExternalMemoryHandleTypeFlagBitsKHX.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHX} value specifying the memory handle type that will be used with the memory associated with the image.")
 }
 
 val VkExternalImageFormatPropertiesKHX = struct(VULKAN_PACKAGE, "VkExternalImageFormatPropertiesKHX", mutable = false) {
@@ -1873,9 +1764,9 @@ val VkPhysicalDeviceExternalBufferInfoKHX = struct(VULKAN_PACKAGE, "VkPhysicalDe
 
     VkStructureType.member("sType", "the type of this structure")
     nullable..const..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
-    VkBufferCreateFlags.member("flags", "a bitmask describing additional parameters of the buffer, corresponding to ##VkBufferCreateInfo{@code ::flags}.")
-    VkBufferUsageFlags.member("usage", "a bitmask describing the intended usage of the buffer, corresponding to ##VkBufferCreateInfo{@code ::usage}.")
-    VkExternalMemoryHandleTypeFlagBitsKHX.member("handleType", "a bit indicating a memory handle type that will be used with the memory associated with the buffer. See {@code VkExternalMemoryHandleTypeFlagBitsKHX} for details.")
+    VkBufferCreateFlags.member("flags", "a bitmask of {@code VkBufferCreateFlagBits} describing additional parameters of the buffer, corresponding to ##VkBufferCreateInfo{@code ::flags}.")
+    VkBufferUsageFlags.member("usage", "a bitmask of {@code VkBufferUsageFlagBits} describing the intended usage of the buffer, corresponding to ##VkBufferCreateInfo{@code ::usage}.")
+    VkExternalMemoryHandleTypeFlagBitsKHX.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHX} value specifying the memory handle type that will be used with the memory associated with the buffer.")
 }
 
 val VkExternalBufferPropertiesKHX = struct(VULKAN_PACKAGE, "VkExternalBufferPropertiesKHX", mutable = false) {
@@ -2050,7 +1941,7 @@ val VkExportMemoryWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkExportMemoryWin
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
-    LPCWSTR.member("name", "a NULL-terminated UNICODE string to associate with the underlying synchronization primitive referenced by NT handles exported from the created memory.")
+    LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.")
 }
 
 val VkMemoryWin32HandlePropertiesKHX = struct(VULKAN_PACKAGE, "VkMemoryWin32HandlePropertiesKHX", mutable = false) {
@@ -2143,11 +2034,6 @@ val VkPhysicalDeviceExternalSemaphoreInfoKHX = struct(VULKAN_PACKAGE, "VkPhysica
         """
         Structure specifying semaphore creation parameters.
 
-        <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Applications <b>must</b> not perform operations on handles of type #EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX that are specific to only one of Linux Fences or Android Fences. Implementations are free to return either type of file descriptor using this handle type. While most userspace functions accepting a fence FD are compatible with either type of fence, attempting to use the file descriptors directly with system calls compatible with only one of the fence types <b>may</b> result in undefined behavior.
-        </div>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHX</li>
@@ -2161,23 +2047,7 @@ val VkPhysicalDeviceExternalSemaphoreInfoKHX = struct(VULKAN_PACKAGE, "VkPhysica
 
     VkStructureType.member("sType", "the type of this structure")
     nullable..const..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
-    VkExternalSemaphoreHandleTypeFlagBitsKHX.member("handleType", """a bit indicating an external semaphore handle type for which capabilities will be returned. Bits which can be set include:
-<code><pre>
-￿typedef enum VkExternalSemaphoreHandleTypeFlagBitsKHX {
-￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX = 0x00000001,
-￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX = 0x00000002,
-￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX = 0x00000004,
-￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX = 0x00000008,
-￿    VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX = 0x00000010,
-￿} VkExternalSemaphoreHandleTypeFlagBitsKHX;</pre></code>
-
-        <ul>
-            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX is a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls fname:dup, fname:dup2, fname:close, and the non-standard system call fname:dup3. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
-            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_WIN32_BIT_KHX is an NT handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the functions fname:DuplicateHandle, fname:CloseHandle, fname:CompareObjectHandles, fname:GetHandleInformation, and fname:SetHandleInformation. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
-            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX is a global share handle that has only limited valid usage outside of Vulkan and other compatible APIs. It is not compatible with any native APIs. It does not own own a reference to the underlying synchronization primitive represented its Vulkan semaphore object, and will therefore become invalid when all Vulkan semaphore objects associated with it are destroyed.</li>
-            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX is an NT handle returned by {@code ID3D12Device}::fname:CreateSharedHandle referring to a Direct3D 12 fence. It owns a reference to the underlying synchronization primitive associated with the Direct3D fence.</li>
-            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX is a POSIX file descriptor handle to a Linux or Android Fence object. It can be used with any native API accepting a valid fence object file descriptor as input. It owns a reference to the underlying synchronization primitive associated with the file descriptor. Implementations which support importing this handle type <b>must</b> accept any type of fence FD supported by the native system they are running on.</li>
-        </ul>""")
+    VkExternalSemaphoreHandleTypeFlagBitsKHX.member("handleType", "a {@code VkExternalSemaphoreHandleTypeFlagBitsKHX} value specifying the external semaphore handle type for which capabilities will be returned.")
 }
 
 val VkExternalSemaphorePropertiesKHX = struct(VULKAN_PACKAGE, "VkExternalSemaphorePropertiesKHX", mutable = false) {
@@ -2194,9 +2064,9 @@ val VkExternalSemaphorePropertiesKHX = struct(VULKAN_PACKAGE, "VkExternalSemapho
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkExternalSemaphoreHandleTypeFlagsKHX.member("exportFromImportedHandleTypes", "a bitmask specifying handle types that can be used to import objects from which {@code handleType} can be exported.")
-    VkExternalSemaphoreHandleTypeFlagsKHX.member("compatibleHandleTypes", "a bitmask specifying handle types which can be specified at the same time as {@code handleType} when creating a semaphore.")
-    VkExternalSemaphoreFeatureFlagsKHX.member("externalSemaphoreFeatures", "a bitmask describing the features of {@code handleType}. See {@code VkExternalSemaphoreFeatureFlagBitsKHX} below for a description of the possible bits.")
+    VkExternalSemaphoreHandleTypeFlagsKHX.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHX} specifying which types of imported handle {@code handleType} <b>can</b> be exported from.")
+    VkExternalSemaphoreHandleTypeFlagsKHX.member("compatibleHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHX} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a semaphore.")
+    VkExternalSemaphoreFeatureFlagsKHX.member("externalSemaphoreFeatures", "a bitmask of {@code VkExternalSemaphoreFeatureFlagBitsKHX} describing the features of {@code handleType}.")
 }
 
 val VkExportSemaphoreCreateInfoKHX = struct(VULKAN_PACKAGE, "VkExportSemaphoreCreateInfoKHX") {
@@ -2226,7 +2096,7 @@ val VkImportSemaphoreWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkImportSemaph
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
-        (no short description available).
+        Structure specifying Windows handle to import to a semaphore.
 
         <h5>Description</h5>
         The handle types supported by {@code handleType} are:
@@ -2235,9 +2105,9 @@ val VkImportSemaphoreWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkImportSemaph
         <table class="lwjgl">
             <thead><tr><th>Handle Type</th><th>Permanence</th></tr></thead>
             <tbody>
-                <tr><td>VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX</td><td>Permanent</td></tr>
-                <tr><td>VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX</td><td>Permanent</td></tr>
-                <tr><td>VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX</td><td>Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX</td><td>Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX</td><td>Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX</td><td>Permanent</td></tr>
             </tbody>
         </table>
 
@@ -2297,7 +2167,7 @@ val VkExportSemaphoreWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkExportSemaph
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkExportSemaphoreCreateInfoKHX{@code ::handleTypes} does not include #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX or VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX, VkExportSemaphoreWin32HandleInfoKHX <b>must</b> not be in the {@code pNext} chain of ##VkSemaphoreCreateInfo.</li>
+            <li>If ##VkExportSemaphoreCreateInfoKHX{@code ::handleTypes} does not include #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX, VkExportSemaphoreWin32HandleInfoKHX <b>must</b> not be in the {@code pNext} chain of ##VkSemaphoreCreateInfo.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2312,7 +2182,7 @@ val VkExportSemaphoreWin32HandleInfoKHX = struct(VULKAN_PACKAGE, "VkExportSemaph
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
-    LPCWSTR.member("name", "a NULL-terminated UNICODE string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.")
+    LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.")
 }
 
 val VkD3D12FenceSubmitInfoKHX = struct(VULKAN_PACKAGE, "VkD3D12FenceSubmitInfoKHX") {
@@ -2348,7 +2218,7 @@ val VkD3D12FenceSubmitInfoKHX = struct(VULKAN_PACKAGE, "VkD3D12FenceSubmitInfoKH
 val VkImportSemaphoreFdInfoKHX = struct(VULKAN_PACKAGE, "VkImportSemaphoreFdInfoKHX") {
     documentation =
         """
-        (no short description available).
+        Structure specifying POSIX file descriptor to import to a semaphore.
 
         <h5>Description</h5>
         The handle types supported by {@code handleType} are:
@@ -2357,8 +2227,8 @@ val VkImportSemaphoreFdInfoKHX = struct(VULKAN_PACKAGE, "VkImportSemaphoreFdInfo
         <table class="lwjgl">
             <thead><tr><th>Handle Type</th><th>Permanence</th></tr></thead>
             <tbody>
-                <tr><td>VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX</td><td>Permanent</td></tr>
-                <tr><td>VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX</td><td>Temporary</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX</td><td>Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX</td><td>Temporary</td></tr>
             </tbody>
         </table>
 
@@ -2650,23 +2520,6 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
         Structure specifying the parameters of a newly created indirect commands layout object.
 
         <h5>Description</h5>
-        Bits which <b>can</b> be set in {@code flags} are:
-
-        <code><pre>
-￿typedef enum VkIndirectCommandsLayoutUsageFlagBitsNVX {
-￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX = 0x00000001,
-￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX = 0x00000002,
-￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX = 0x00000004,
-￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX = 0x00000008,
-￿} VkIndirectCommandsLayoutUsageFlagBitsNVX;</pre></code>
-
-        <ul>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX indicates that the processing of sequences <b>can</b> happen at an implementation-dependent order, which is not guaranteed to be coherent across multiple invocations.</li>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX indicates that there is likely a high difference between allocated number of sequences and actually used.</li>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX indicates that there is likely many draw or dispatch calls that are zero-sized (zero grid dimension, no primitives to render).</li>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX indicates that the input data for the sequences is not implicitly indexed from 0..sequencesUsed but a user provided {@code VkBuffer} encoding the index is provided.</li>
-        </ul>
-
         The following code illustrates some of the key flags:
 
         <code><pre>
@@ -2691,9 +2544,9 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
         <ul>
             <li>{@code tokenCount} <b>must</b> be greater than 0 and below ##VkDeviceGeneratedCommandsLimitsNVX{@code ::maxIndirectCommandsLayoutTokenCount}</li>
             <li>If the ##VkDeviceGeneratedCommandsFeaturesNVX{@code ::computeBindingPointSupport} feature is not enabled, then {@code pipelineBindPoint} <b>must</b> not be #PIPELINE_BIND_POINT_COMPUTE</li>
-            <li>If {@code pTokens} contains an entry of #INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX it <b>must</b> be the first element of the array and there <b>must</b> be only a single element of such token type.</li>
-            <li>All state binding tokens in {@code pTokens} <b>must</b> occur prior work provoking tokens (#INDIRECT_COMMANDS_TOKEN_DRAW_NVX, #INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX, #INDIRECT_COMMANDS_TOKEN_DISPATCH_NVX).</li>
-            <li>The content of {@code pTokens} <b>must</b> include at least one work provoking token.</li>
+            <li>If {@code pTokens} contains an entry of #INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX it <b>must</b> be the first element of the array and there <b>must</b> be only a single element of such token type.</li>
+            <li>All state binding tokens in {@code pTokens} <b>must</b> occur prior work provoking tokens (#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX, #INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX, #INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX).</li>
+            <li>The content of {@code pTokens} <b>must</b> include one single work provoking token that is compatible with the {@code pipelineBindPoint}.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2714,7 +2567,7 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineBindPoint.member("pipelineBindPoint", "the {@code VkPipelineBindPoint} that this layout targets.")
-    VkIndirectCommandsLayoutUsageFlagsNVX.member("flags", "a bitmask providing usage hints of this layout. See {@code VkIndirectCommandsLayoutUsageFlagBitsNVX} below for a description of the supported bits.")
+    VkIndirectCommandsLayoutUsageFlagsNVX.member("flags", "a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsNVX} specifying usage hints of this layout.")
     AutoSize("pTokens")..uint32_t.member("tokenCount", "the length of the individual command sequnce.")
     const..VkIndirectCommandsLayoutTokenNVX.p.buffer("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
 }
@@ -2812,39 +2665,6 @@ val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfo
         """
         Structure specifying the parameters of a newly created object table.
 
-        <h5>Description</h5>
-        Types which <b>can</b> be set in {@code pObjectEntryTypes} are:
-
-        <code><pre>
-￿typedef enum VkObjectEntryTypeNVX {
-￿    VK_OBJECT_ENTRY_DESCRIPTOR_SET_NVX = 0,
-￿    VK_OBJECT_ENTRY_PIPELINE_NVX = 1,
-￿    VK_OBJECT_ENTRY_INDEX_BUFFER_NVX = 2,
-￿    VK_OBJECT_ENTRY_VERTEX_BUFFER_NVX = 3,
-￿    VK_OBJECT_ENTRY_PUSH_CONSTANT_NVX = 4,
-￿} VkObjectEntryTypeNVX;</pre></code>
-
-        <ul>
-            <li>#OBJECT_ENTRY_DESCRIPTOR_SET_NVX indicates a {@code VkDescriptorSet} resource entry that is registered via ##VkObjectTableDescriptorSetEntryNVX.</li>
-            <li>#OBJECT_ENTRY_PIPELINE_NVX indicates a {@code VkPipeline} resource entry that is registered via ##VkObjectTablePipelineEntryNVX.</li>
-            <li>#OBJECT_ENTRY_INDEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableIndexBufferEntryNVX.</li>
-            <li>#OBJECT_ENTRY_VERTEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableVertexBufferEntryNVX.</li>
-            <li>#OBJECT_ENTRY_PUSH_CONSTANT_NVX indicates the resource entry is registered via ##VkObjectTablePushConstantEntryNVX.</li>
-        </ul>
-
-        Bits which <b>can</b> be set in {@code pObjectEntryUsageFlags} are:
-
-        <code><pre>
-￿typedef enum VkObjectEntryUsageFlagBitsNVX {
-￿    VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX = 0x00000001,
-￿    VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX = 0x00000002,
-￿} VkObjectEntryUsageFlagBitsNVX;</pre></code>
-
-        <ul>
-            <li>#OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
-            <li>#OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_COMPUTE</li>
-        </ul>
-
         <h5>Valid Usage</h5>
         <ul>
             <li>If the ##VkDeviceGeneratedCommandsFeaturesNVX{@code ::computeBindingPointSupport} feature is not enabled, {@code pObjectEntryUsageFlags} <b>must</b> not contain #OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX</li>
@@ -2873,9 +2693,9 @@ val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfo
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pObjectEntryTypes", "pObjectEntryCounts", "pObjectEntryUsageFlags")..uint32_t.member("objectCount", "the number of entry configurations that the object table supports.")
-    const..VkObjectEntryTypeNVX.p.member("pObjectEntryTypes", "an array of {@code VkObjectEntryTypeNVX} providing the entry type of a given configuration.")
-    const..uint32_t_p.member("pObjectEntryCounts", "an array of counts how many objects can be registered in the table.")
-    const..VkObjectEntryUsageFlagsNVX.p.member("pObjectEntryUsageFlags", "an array of bitmasks describing the binding usage of the entry. See {@code VkObjectEntryUsageFlagBitsNVX} below for a description of the supported bits.")
+    const..VkObjectEntryTypeNVX.p.member("pObjectEntryTypes", "an array of {@code VkObjectEntryTypeNVX} values providing the entry type of a given configuration.")
+    const..uint32_t_p.member("pObjectEntryCounts", "an array of counts of how many objects can be registered in the table.")
+    const..VkObjectEntryUsageFlagsNVX.p.member("pObjectEntryUsageFlags", "an array of bitmasks of {@code VkObjectEntryUsageFlagBitsNVX} specifying the binding usage of the entry.")
     uint32_t.member("maxUniformBuffersPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC used by any single registered {@code VkDescriptorSet} in this table.")
     uint32_t.member("maxStorageBuffersPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC used by any single registered {@code VkDescriptorSet} in this table.")
     uint32_t.member("maxStorageImagesPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_STORAGE_IMAGE or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER used by any single registered {@code VkDescriptorSet} in this table.")
@@ -2915,7 +2735,7 @@ val VkObjectTablePipelineEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePipelin
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_PIPELINE_NVX</li>
+            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_TYPE_PIPELINE_NVX</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2939,7 +2759,7 @@ val VkObjectTableDescriptorSetEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableDe
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_DESCRIPTOR_SET_NVX</li>
+            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2966,7 +2786,7 @@ val VkObjectTableVertexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableVer
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_VERTEX_BUFFER_NVX</li>
+            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2990,7 +2810,7 @@ val VkObjectTableIndexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableInde
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_INDEX_BUFFER_NVX</li>
+            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3016,7 +2836,7 @@ val VkObjectTablePushConstantEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePus
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_PUSH_CONSTANT_NVX</li>
+            <li>{@code type} <b>must</b> be #OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3084,7 +2904,7 @@ val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EX
         <ul>
             <li>{@code sType} is the type of this structure.</li>
             <li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
-            <li>{@code supportedSurfaceCounters} is a bitfield containing one bit set for each surface counter type supported.</li>
+            <li>{@code supportedSurfaceCounters} is a bitmask of {@code VkSurfaceCounterFlagBitsEXT} indicating the supported surface counter types.</li>
         </ul>
 
         <h5>Valid Usage</h5>
@@ -3129,19 +2949,7 @@ val VkDisplayPowerInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayPowerInfoEXT") {
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDisplayPowerStateEXT.member("powerState", """the new power state of the display. Possible values are:
-<code><pre>
-￿typedef enum VkDisplayPowerStateEXT {
-￿    VK_DISPLAY_POWER_STATE_OFF_EXT = 0,
-￿    VK_DISPLAY_POWER_STATE_SUSPEND_EXT = 1,
-￿    VK_DISPLAY_POWER_STATE_ON_EXT = 2,
-￿} VkDisplayPowerStateEXT;</pre></code>
-
-        <ul>
-            <li>#DISPLAY_POWER_STATE_OFF_EXT means the display is powered down.</li>
-            <li>#DISPLAY_POWER_STATE_SUSPEND_EXT means the display is in a low power mode, but <b>may</b> be able to transition back to #DISPLAY_POWER_STATE_ON_EXT more quickly than if it were in #DISPLAY_POWER_STATE_OFF_EXT. This state <b>may</b> be the same as #DISPLAY_POWER_STATE_OFF_EXT.</li>
-            <li>#DISPLAY_POWER_STATE_ON_EXT is powered on.</li>
-        </ul>""")
+    VkDisplayPowerStateEXT.member("powerState", "a {@code VkDisplayPowerStateEXT} value specifying the new power state of the display.")
 }
 
 val VkDeviceEventInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceEventInfoEXT") {
@@ -3183,15 +2991,7 @@ val VkDisplayEventInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayEventInfoEXT") {
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDisplayEventTypeEXT.member("displayEvent", """specifies when the fence will be signaled. Possible values are:
-<code><pre>
-￿typedef enum VkDisplayEventTypeEXT {
-￿    VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT = 0,
-￿} VkDisplayEventTypeEXT;</pre></code>
-
-        <ul>
-            <li>#DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT occurs when the first pixel of the next display refresh cycle leaves the display engine for the display.</li>
-        </ul>""")
+    VkDisplayEventTypeEXT.member("displayEvent", "a {@code VkDisplayEventTypeEXT} specifying when the fence will be signaled.")
 }
 
 val VkSwapchainCounterCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSwapchainCounterCreateInfoEXT") {
@@ -3214,7 +3014,7 @@ val VkSwapchainCounterCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSwapchainCounter
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSurfaceCounterFlagsEXT.member("surfaceCounters", "a bitmask containing a bit set for each surface counter to enable for the swapchain.")
+    VkSurfaceCounterFlagsEXT.member("surfaceCounters", "a bitmask of {@code VkSurfaceCounterFlagBitsEXT} specifying surface counters to enable for the swapchain.")
 }
 
 val VkRefreshCycleDurationGOOGLE = struct(VULKAN_PACKAGE, "VkRefreshCycleDurationGOOGLE") {
@@ -3319,16 +3119,16 @@ val VkViewportSwizzleNV = struct(VULKAN_PACKAGE, "VkViewportSwizzleNV") {
         ##VkPipelineViewportSwizzleStateCreateInfoNV
         """
 
-    VkViewportCoordinateSwizzleNV.member("x", "the swizzle operation to apply to the x component of the primitive")
-    VkViewportCoordinateSwizzleNV.member("y", "the swizzle operation to apply to the y component of the primitive")
-    VkViewportCoordinateSwizzleNV.member("z", "the swizzle operation to apply to the z component of the primitive")
-    VkViewportCoordinateSwizzleNV.member("w", "the swizzle operation to apply to the w component of the primitive")
+    VkViewportCoordinateSwizzleNV.member("x", "a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the x component of the primitive")
+    VkViewportCoordinateSwizzleNV.member("y", "a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the y component of the primitive")
+    VkViewportCoordinateSwizzleNV.member("z", "a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the z component of the primitive")
+    VkViewportCoordinateSwizzleNV.member("w", "a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the w component of the primitive")
 }
 
 val VkPipelineViewportSwizzleStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipelineViewportSwizzleStateCreateInfoNV") {
     documentation =
         """
-        (no short description available).
+        Structure specifying swizzle applied to primitive clip coordinates.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -3361,7 +3161,7 @@ val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(VULKAN_PACKAGE, "VkPh
 
         <h5>Description</h5>
         <ul>
-            <li>{@code maxDiscardRectangles} is the maximum number of discard rectangles that can be specified.</li>
+            <li>{@code maxDiscardRectangles} is the maximum number of discard rectangles that <b>can</b> be specified.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3381,7 +3181,7 @@ val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(VULKAN_PACKAGE, "VkPh
 val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPipelineDiscardRectangleStateCreateInfoEXT") {
     documentation =
         """
-        (no short description available).
+        Structure specifying discard rectangle.
 
         <h5>Valid Usage</h5>
         <ul>

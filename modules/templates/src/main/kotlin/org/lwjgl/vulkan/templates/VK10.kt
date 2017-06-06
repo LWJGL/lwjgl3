@@ -190,11 +190,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Description</h5>
         <ul>
-            <li>#SYSTEM_ALLOCATION_SCOPE_COMMAND - The allocation is scoped to the duration of the Vulkan command.</li>
-            <li>#SYSTEM_ALLOCATION_SCOPE_OBJECT - The allocation is scoped to the lifetime of the Vulkan object that is being created or used.</li>
-            <li>#SYSTEM_ALLOCATION_SCOPE_CACHE - The allocation is scoped to the lifetime of a {@code VkPipelineCache} object.</li>
-            <li>#SYSTEM_ALLOCATION_SCOPE_DEVICE - The allocation is scoped to the lifetime of the Vulkan device.</li>
-            <li>#SYSTEM_ALLOCATION_SCOPE_INSTANCE - The allocation is scoped to the lifetime of the Vulkan instance.</li>
+            <li>#SYSTEM_ALLOCATION_SCOPE_COMMAND specifies that the allocation is scoped to the duration of the Vulkan command.</li>
+            <li>#SYSTEM_ALLOCATION_SCOPE_OBJECT specifies that the allocation is scoped to the lifetime of the Vulkan object that is being created or used.</li>
+            <li>#SYSTEM_ALLOCATION_SCOPE_CACHE specifies that the allocation is scoped to the lifetime of a {@code VkPipelineCache} object.</li>
+            <li>#SYSTEM_ALLOCATION_SCOPE_DEVICE specifies that the allocation is scoped to the lifetime of the Vulkan device.</li>
+            <li>#SYSTEM_ALLOCATION_SCOPE_INSTANCE specifies that the allocation is scoped to the lifetime of the Vulkan instance.</li>
         </ul>
 
         Most Vulkan commands operate on a single object, or there is a sole object that is being created or manipulated. When an allocation uses an allocation scope of #SYSTEM_ALLOCATION_SCOPE_OBJECT or #SYSTEM_ALLOCATION_SCOPE_CACHE, the allocation is scoped to the object being created or manipulated.
@@ -227,7 +227,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Description</h5>
         <ul>
-            <li>#INTERNAL_ALLOCATION_TYPE_EXECUTABLE - The allocation is intended for execution by the host.</li>
+            <li>#INTERNAL_ALLOCATION_TYPE_EXECUTABLE specifies that the allocation is intended for execution by the host.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -242,562 +242,193 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkFormat - Available image formats
 
         <h5>Description</h5>
-        <dl>
-            <dt>#FORMAT_UNDEFINED</dt>
-            <dd>The format is not specified.</dd>
-
-            <dt>#FORMAT_R4G4_UNORM_PACK8</dt>
-            <dd>A two-component, 8-bit packed unsigned normalized format that has a 4-bit R component in bits 4..7, and a 4-bit G component in bits 0..3.</dd>
-
-            <dt>#FORMAT_R4G4B4A4_UNORM_PACK16</dt>
-            <dd>A four-component, 16-bit packed unsigned normalized format that has a 4-bit R component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit B component in bits 4..7, and a 4-bit A component in bits 0..3.</dd>
-
-            <dt>#FORMAT_B4G4R4A4_UNORM_PACK16</dt>
-            <dd>A four-component, 16-bit packed unsigned normalized format that has a 4-bit B component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit R component in bits 4..7, and a 4-bit A component in bits 0..3.</dd>
-
-            <dt>#FORMAT_R5G6B5_UNORM_PACK16</dt>
-            <dd>A three-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit B component in bits 0..4.</dd>
-
-            <dt>#FORMAT_B5G6R5_UNORM_PACK16</dt>
-            <dd>A three-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit R component in bits 0..4.</dd>
-
-            <dt>#FORMAT_R5G5B5A1_UNORM_PACK16</dt>
-            <dd>A four-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit B component in bits 1..5, and a 1-bit A component in bit 0.</dd>
-
-            <dt>#FORMAT_B5G5R5A1_UNORM_PACK16</dt>
-            <dd>A four-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit R component in bits 1..5, and a 1-bit A component in bit 0.</dd>
-
-            <dt>#FORMAT_A1R5G5B5_UNORM_PACK16</dt>
-            <dd>A four-component, 16-bit packed unsigned normalized format that has a 1-bit A component in bit 15, a 5-bit R component in bits 10..14, a 5-bit G component in bits 5..9, and a 5-bit B component in bits 0..4.</dd>
-
-            <dt>#FORMAT_R8_UNORM</dt>
-            <dd>A one-component, 8-bit unsigned normalized format that has a single 8-bit R component.</dd>
-
-            <dt>#FORMAT_R8_SNORM</dt>
-            <dd>A one-component, 8-bit signed normalized format that has a single 8-bit R component.</dd>
-
-            <dt>#FORMAT_R8_USCALED</dt>
-            <dd>A one-component, 8-bit unsigned scaled integer format that has a single 8-bit R component.</dd>
-
-            <dt>#FORMAT_R8_SSCALED</dt>
-            <dd>A one-component, 8-bit signed scaled integer format that has a single 8-bit R component.</dd>
-
-            <dt>#FORMAT_R8_UINT</dt>
-            <dd>A one-component, 8-bit unsigned integer format that has a single 8-bit R component.</dd>
-
-            <dt>#FORMAT_R8_SINT</dt>
-            <dd>A one-component, 8-bit signed integer format that has a single 8-bit R component.</dd>
-
-            <dt>#FORMAT_R8_SRGB</dt>
-            <dd>A one-component, 8-bit unsigned normalized format that has a single 8-bit R component stored with sRGB nonlinear encoding.</dd>
-
-            <dt>#FORMAT_R8G8_UNORM</dt>
-            <dd>A two-component, 16-bit unsigned normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8_SNORM</dt>
-            <dd>A two-component, 16-bit signed normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8_USCALED</dt>
-            <dd>A two-component, 16-bit unsigned scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8_SSCALED</dt>
-            <dd>A two-component, 16-bit signed scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8_UINT</dt>
-            <dd>A two-component, 16-bit unsigned integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8_SINT</dt>
-            <dd>A two-component, 16-bit signed integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8_SRGB</dt>
-            <dd>A two-component, 16-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, and an 8-bit G component stored with sRGB nonlinear encoding in byte 1.</dd>
-
-            <dt>#FORMAT_R8G8B8_UNORM</dt>
-            <dd>A three-component, 24-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8_SNORM</dt>
-            <dd>A three-component, 24-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8_USCALED</dt>
-            <dd>A three-component, 24-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8_SSCALED</dt>
-            <dd>A three-component, 24-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8_UINT</dt>
-            <dd>A three-component, 24-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8_SINT</dt>
-            <dd>A three-component, 24-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8_SRGB</dt>
-            <dd>A three-component, 24-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit B component stored with sRGB nonlinear encoding in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_UNORM</dt>
-            <dd>A three-component, 24-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_SNORM</dt>
-            <dd>A three-component, 24-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_USCALED</dt>
-            <dd>A three-component, 24-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_SSCALED</dt>
-            <dd>A three-component, 24-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_UINT</dt>
-            <dd>A three-component, 24-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_SINT</dt>
-            <dd>A three-component, 24-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
-
-            <dt>#FORMAT_B8G8R8_SRGB</dt>
-            <dd>A three-component, 24-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit R component stored with sRGB nonlinear encoding in byte 2.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_UNORM</dt>
-            <dd>A four-component, 32-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_SNORM</dt>
-            <dd>A four-component, 32-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_USCALED</dt>
-            <dd>A four-component, 32-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_SSCALED</dt>
-            <dd>A four-component, 32-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_UINT</dt>
-            <dd>A four-component, 32-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_SINT</dt>
-            <dd>A four-component, 32-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_R8G8B8A8_SRGB</dt>
-            <dd>A four-component, 32-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit B component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_UNORM</dt>
-            <dd>A four-component, 32-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_SNORM</dt>
-            <dd>A four-component, 32-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_USCALED</dt>
-            <dd>A four-component, 32-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_SSCALED</dt>
-            <dd>A four-component, 32-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_UINT</dt>
-            <dd>A four-component, 32-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_SINT</dt>
-            <dd>A four-component, 32-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_B8G8R8A8_SRGB</dt>
-            <dd>A four-component, 32-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit R component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_UNORM_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_SNORM_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_USCALED_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_SSCALED_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_UINT_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_SINT_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
-
-            <dt>#FORMAT_A8B8G8R8_SRGB_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component stored with sRGB nonlinear encoding in bits 16..23, an 8-bit G component stored with sRGB nonlinear encoding in bits 8..15, and an 8-bit R component stored with sRGB nonlinear encoding in bits 0..7.</dd>
-
-            <dt>#FORMAT_A2R10G10B10_UNORM_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2R10G10B10_SNORM_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2R10G10B10_USCALED_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2R10G10B10_SSCALED_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2R10G10B10_UINT_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2R10G10B10_SINT_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2B10G10R10_UNORM_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2B10G10R10_SNORM_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2B10G10R10_USCALED_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2B10G10R10_SSCALED_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2B10G10R10_UINT_PACK32</dt>
-            <dd>A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
-
-            <dt>#FORMAT_A2B10G10R10_SINT_PACK32</dt>
-            <dd>A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
-
-            <dt>#FORMAT_R16_UNORM</dt>
-            <dd>A one-component, 16-bit unsigned normalized format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16_SNORM</dt>
-            <dd>A one-component, 16-bit signed normalized format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16_USCALED</dt>
-            <dd>A one-component, 16-bit unsigned scaled integer format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16_SSCALED</dt>
-            <dd>A one-component, 16-bit signed scaled integer format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16_UINT</dt>
-            <dd>A one-component, 16-bit unsigned integer format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16_SINT</dt>
-            <dd>A one-component, 16-bit signed integer format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16_SFLOAT</dt>
-            <dd>A one-component, 16-bit signed floating-point format that has a single 16-bit R component.</dd>
-
-            <dt>#FORMAT_R16G16_UNORM</dt>
-            <dd>A two-component, 32-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16_SNORM</dt>
-            <dd>A two-component, 32-bit signed normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16_USCALED</dt>
-            <dd>A two-component, 32-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16_SSCALED</dt>
-            <dd>A two-component, 32-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16_UINT</dt>
-            <dd>A two-component, 32-bit unsigned integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16_SINT</dt>
-            <dd>A two-component, 32-bit signed integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16_SFLOAT</dt>
-            <dd>A two-component, 32-bit signed floating-point format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
-
-            <dt>#FORMAT_R16G16B16_UNORM</dt>
-            <dd>A three-component, 48-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16_SNORM</dt>
-            <dd>A three-component, 48-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16_USCALED</dt>
-            <dd>A three-component, 48-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16_SSCALED</dt>
-            <dd>A three-component, 48-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16_UINT</dt>
-            <dd>A three-component, 48-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16_SINT</dt>
-            <dd>A three-component, 48-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16_SFLOAT</dt>
-            <dd>A three-component, 48-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_UNORM</dt>
-            <dd>A four-component, 64-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_SNORM</dt>
-            <dd>A four-component, 64-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_USCALED</dt>
-            <dd>A four-component, 64-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_SSCALED</dt>
-            <dd>A four-component, 64-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_UINT</dt>
-            <dd>A four-component, 64-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_SINT</dt>
-            <dd>A four-component, 64-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R16G16B16A16_SFLOAT</dt>
-            <dd>A four-component, 64-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
-
-            <dt>#FORMAT_R32_UINT</dt>
-            <dd>A one-component, 32-bit unsigned integer format that has a single 32-bit R component.</dd>
-
-            <dt>#FORMAT_R32_SINT</dt>
-            <dd>A one-component, 32-bit signed integer format that has a single 32-bit R component.</dd>
-
-            <dt>#FORMAT_R32_SFLOAT</dt>
-            <dd>A one-component, 32-bit signed floating-point format that has a single 32-bit R component.</dd>
-
-            <dt>#FORMAT_R32G32_UINT</dt>
-            <dd>A two-component, 64-bit unsigned integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</dd>
-
-            <dt>#FORMAT_R32G32_SINT</dt>
-            <dd>A two-component, 64-bit signed integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</dd>
-
-            <dt>#FORMAT_R32G32_SFLOAT</dt>
-            <dd>A two-component, 64-bit signed floating-point format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</dd>
-
-            <dt>#FORMAT_R32G32B32_UINT</dt>
-            <dd>A three-component, 96-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</dd>
-
-            <dt>#FORMAT_R32G32B32_SINT</dt>
-            <dd>A three-component, 96-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</dd>
-
-            <dt>#FORMAT_R32G32B32_SFLOAT</dt>
-            <dd>A three-component, 96-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</dd>
-
-            <dt>#FORMAT_R32G32B32A32_UINT</dt>
-            <dd>A four-component, 128-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</dd>
-
-            <dt>#FORMAT_R32G32B32A32_SINT</dt>
-            <dd>A four-component, 128-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</dd>
-
-            <dt>#FORMAT_R32G32B32A32_SFLOAT</dt>
-            <dd>A four-component, 128-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</dd>
-
-            <dt>#FORMAT_R64_UINT</dt>
-            <dd>A one-component, 64-bit unsigned integer format that has a single 64-bit R component.</dd>
-
-            <dt>#FORMAT_R64_SINT</dt>
-            <dd>A one-component, 64-bit signed integer format that has a single 64-bit R component.</dd>
-
-            <dt>#FORMAT_R64_SFLOAT</dt>
-            <dd>A one-component, 64-bit signed floating-point format that has a single 64-bit R component.</dd>
-
-            <dt>#FORMAT_R64G64_UINT</dt>
-            <dd>A two-component, 128-bit unsigned integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</dd>
-
-            <dt>#FORMAT_R64G64_SINT</dt>
-            <dd>A two-component, 128-bit signed integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</dd>
-
-            <dt>#FORMAT_R64G64_SFLOAT</dt>
-            <dd>A two-component, 128-bit signed floating-point format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</dd>
-
-            <dt>#FORMAT_R64G64B64_UINT</dt>
-            <dd>A three-component, 192-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</dd>
-
-            <dt>#FORMAT_R64G64B64_SINT</dt>
-            <dd>A three-component, 192-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</dd>
-
-            <dt>#FORMAT_R64G64B64_SFLOAT</dt>
-            <dd>A three-component, 192-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</dd>
-
-            <dt>#FORMAT_R64G64B64A64_UINT</dt>
-            <dd>A four-component, 256-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</dd>
-
-            <dt>#FORMAT_R64G64B64A64_SINT</dt>
-            <dd>A four-component, 256-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</dd>
-
-            <dt>#FORMAT_R64G64B64A64_SFLOAT</dt>
-            <dd>A four-component, 256-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</dd>
-
-            <dt>#FORMAT_B10G11R11_UFLOAT_PACK32</dt>
-            <dd>A three-component, 32-bit packed unsigned floating-point format that has a 10-bit B component in bits 22..31, an 11-bit G component in bits 11..21, an 11-bit R component in bits 0..10. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fp10">the “Unsigned 10-Bit Floating-Point Numbers” section</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fp11">the “Unsigned 11-Bit Floating-Point Numbers” section</a>.</dd>
-
-            <dt>#FORMAT_E5B9G9R9_UFLOAT_PACK32</dt>
-            <dd>A three-component, 32-bit packed unsigned floating-point format that has a 5-bit shared exponent in bits 27..31, a 9-bit B component mantissa in bits 18..26, a 9-bit G component mantissa in bits 9..17, and a 9-bit R component mantissa in bits 0..8.</dd>
-
-            <dt>#FORMAT_D16_UNORM</dt>
-            <dd>A one-component, 16-bit unsigned normalized format that has a single 16-bit depth component.</dd>
-
-            <dt>#FORMAT_X8_D24_UNORM_PACK32</dt>
-            <dd>A two-component, 32-bit format that has 24 unsigned normalized bits in the depth component and, optionally:, 8 bits that are unused.</dd>
-
-            <dt>#FORMAT_D32_SFLOAT</dt>
-            <dd>A one-component, 32-bit signed floating-point format that has 32-bits in the depth component.</dd>
-
-            <dt>#FORMAT_S8_UINT</dt>
-            <dd>A one-component, 8-bit unsigned integer format that has 8-bits in the stencil component.</dd>
-
-            <dt>#FORMAT_D16_UNORM_S8_UINT</dt>
-            <dd>A two-component, 24-bit format that has 16 unsigned normalized bits in the depth component and 8 unsigned integer bits in the stencil component.</dd>
-
-            <dt>#FORMAT_D24_UNORM_S8_UINT</dt>
-            <dd>A two-component, 32-bit packed format that has 8 unsigned integer bits in the stencil component, and 24 unsigned normalized bits in the depth component.</dd>
-
-            <dt>#FORMAT_D32_SFLOAT_S8_UINT</dt>
-            <dd>A two-component format that has 32 signed float bits in the depth component and 8 unsigned integer bits in the stencil component. There are optionally: 24-bits that are unused.</dd>
-
-            <dt>#FORMAT_BC1_RGB_UNORM_BLOCK</dt>
-            <dd>A three-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data. This format has no alpha and is considered opaque.</dd>
-
-            <dt>#FORMAT_BC1_RGB_SRGB_BLOCK</dt>
-            <dd>A three-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding. This format has no alpha and is considered opaque.</dd>
-
-            <dt>#FORMAT_BC1_RGBA_UNORM_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data, and provides 1 bit of alpha.</dd>
-
-            <dt>#FORMAT_BC1_RGBA_SRGB_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding, and provides 1 bit of alpha.</dd>
-
-            <dt>#FORMAT_BC2_UNORM_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</dd>
-
-            <dt>#FORMAT_BC2_SRGB_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding.</dd>
-
-            <dt>#FORMAT_BC3_UNORM_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</dd>
-
-            <dt>#FORMAT_BC3_SRGB_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding.</dd>
-
-            <dt>#FORMAT_BC4_UNORM_BLOCK</dt>
-            <dd>A one-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized red texel data.</dd>
-
-            <dt>#FORMAT_BC4_SNORM_BLOCK</dt>
-            <dd>A one-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of signed normalized red texel data.</dd>
-
-            <dt>#FORMAT_BC5_UNORM_BLOCK</dt>
-            <dd>A two-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
-
-            <dt>#FORMAT_BC5_SNORM_BLOCK</dt>
-            <dd>A two-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
-
-            <dt>#FORMAT_BC6H_UFLOAT_BLOCK</dt>
-            <dd>A three-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned floating-point RGB texel data.</dd>
-
-            <dt>#FORMAT_BC6H_SFLOAT_BLOCK</dt>
-            <dd>A three-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed floating-point RGB texel data.</dd>
-
-            <dt>#FORMAT_BC7_UNORM_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_BC7_SRGB_BLOCK</dt>
-            <dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ETC2_R8G8B8_UNORM_BLOCK</dt>
-            <dd>A three-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data. This format has no alpha and is considered opaque.</dd>
-
-            <dt>#FORMAT_ETC2_R8G8B8_SRGB_BLOCK</dt>
-            <dd>A three-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding. This format has no alpha and is considered opaque.</dd>
-
-            <dt>#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK</dt>
-            <dd>A four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data, and provides 1 bit of alpha.</dd>
-
-            <dt>#FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK</dt>
-            <dd>A four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding, and provides 1 bit of alpha.</dd>
-
-            <dt>#FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK</dt>
-            <dd>A four-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</dd>
-
-            <dt>#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK</dt>
-            <dd>A four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding applied.</dd>
-
-            <dt>#FORMAT_EAC_R11_UNORM_BLOCK</dt>
-            <dd>A one-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized red texel data.</dd>
-
-            <dt>#FORMAT_EAC_R11_SNORM_BLOCK</dt>
-            <dd>A one-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of signed normalized red texel data.</dd>
-
-            <dt>#FORMAT_EAC_R11G11_UNORM_BLOCK</dt>
-            <dd>A two-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
-
-            <dt>#FORMAT_EAC_R11G11_SNORM_BLOCK</dt>
-            <dd>A two-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
-
-            <dt>#FORMAT_ASTC_4x4_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_4x4_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_5x4_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x4 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_5x4_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_5x5_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x5 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_5x5_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_6x5_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x5 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_6x5_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_6x6_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x6 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_6x6_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_8x5_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x5 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_8x5_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_8x6_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x6 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_8x6_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_8x8_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x8 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_8x8_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x8 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_10x5_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x5 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_10x5_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_10x6_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x6 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_10x6_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_10x8_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x8 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_10x8_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x8 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_10x10_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x10 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_10x10_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x10 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_12x10_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x10 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_12x10_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x10 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-
-            <dt>#FORMAT_ASTC_12x12_UNORM_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x12 rectangle of unsigned normalized RGBA texel data.</dd>
-
-            <dt>#FORMAT_ASTC_12x12_SRGB_BLOCK</dt>
-            <dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x12 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
-        </dl>
+        <ul>
+            <li>#FORMAT_UNDEFINED indicates that the format is not specified.</li>
+            <li>#FORMAT_R4G4_UNORM_PACK8 specifies a two-component, 8-bit packed unsigned normalized format that has a 4-bit R component in bits 4..7, and a 4-bit G component in bits 0..3.</li>
+            <li>#FORMAT_R4G4B4A4_UNORM_PACK16 specifies a four-component, 16-bit packed unsigned normalized format that has a 4-bit R component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit B component in bits 4..7, and a 4-bit A component in bits 0..3.</li>
+            <li>#FORMAT_B4G4R4A4_UNORM_PACK16 specifies a four-component, 16-bit packed unsigned normalized format that has a 4-bit B component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit R component in bits 4..7, and a 4-bit A component in bits 0..3.</li>
+            <li>#FORMAT_R5G6B5_UNORM_PACK16 specifies a three-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit B component in bits 0..4.</li>
+            <li>#FORMAT_B5G6R5_UNORM_PACK16 specifies a three-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit R component in bits 0..4.</li>
+            <li>#FORMAT_R5G5B5A1_UNORM_PACK16 specifies a four-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit B component in bits 1..5, and a 1-bit A component in bit 0.</li>
+            <li>#FORMAT_B5G5R5A1_UNORM_PACK16 specifies a four-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit R component in bits 1..5, and a 1-bit A component in bit 0.</li>
+            <li>#FORMAT_A1R5G5B5_UNORM_PACK16 specifies a four-component, 16-bit packed unsigned normalized format that has a 1-bit A component in bit 15, a 5-bit R component in bits 10..14, a 5-bit G component in bits 5..9, and a 5-bit B component in bits 0..4.</li>
+            <li>#FORMAT_R8_UNORM specifies a one-component, 8-bit unsigned normalized format that has a single 8-bit R component.</li>
+            <li>#FORMAT_R8_SNORM specifies a one-component, 8-bit signed normalized format that has a single 8-bit R component.</li>
+            <li>#FORMAT_R8_USCALED specifies a one-component, 8-bit unsigned scaled integer format that has a single 8-bit R component.</li>
+            <li>#FORMAT_R8_SSCALED specifies a one-component, 8-bit signed scaled integer format that has a single 8-bit R component.</li>
+            <li>#FORMAT_R8_UINT specifies a one-component, 8-bit unsigned integer format that has a single 8-bit R component.</li>
+            <li>#FORMAT_R8_SINT specifies a one-component, 8-bit signed integer format that has a single 8-bit R component.</li>
+            <li>#FORMAT_R8_SRGB specifies a one-component, 8-bit unsigned normalized format that has a single 8-bit R component stored with sRGB nonlinear encoding.</li>
+            <li>#FORMAT_R8G8_UNORM specifies a two-component, 16-bit unsigned normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</li>
+            <li>#FORMAT_R8G8_SNORM specifies a two-component, 16-bit signed normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</li>
+            <li>#FORMAT_R8G8_USCALED specifies a two-component, 16-bit unsigned scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</li>
+            <li>#FORMAT_R8G8_SSCALED specifies a two-component, 16-bit signed scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</li>
+            <li>#FORMAT_R8G8_UINT specifies a two-component, 16-bit unsigned integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</li>
+            <li>#FORMAT_R8G8_SINT specifies a two-component, 16-bit signed integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</li>
+            <li>#FORMAT_R8G8_SRGB specifies a two-component, 16-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, and an 8-bit G component stored with sRGB nonlinear encoding in byte 1.</li>
+            <li>#FORMAT_R8G8B8_UNORM specifies a three-component, 24-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</li>
+            <li>#FORMAT_R8G8B8_SNORM specifies a three-component, 24-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</li>
+            <li>#FORMAT_R8G8B8_USCALED specifies a three-component, 24-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</li>
+            <li>#FORMAT_R8G8B8_SSCALED specifies a three-component, 24-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</li>
+            <li>#FORMAT_R8G8B8_UINT specifies a three-component, 24-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</li>
+            <li>#FORMAT_R8G8B8_SINT specifies a three-component, 24-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</li>
+            <li>#FORMAT_R8G8B8_SRGB specifies a three-component, 24-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit B component stored with sRGB nonlinear encoding in byte 2.</li>
+            <li>#FORMAT_B8G8R8_UNORM specifies a three-component, 24-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</li>
+            <li>#FORMAT_B8G8R8_SNORM specifies a three-component, 24-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</li>
+            <li>#FORMAT_B8G8R8_USCALED specifies a three-component, 24-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</li>
+            <li>#FORMAT_B8G8R8_SSCALED specifies a three-component, 24-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</li>
+            <li>#FORMAT_B8G8R8_UINT specifies a three-component, 24-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</li>
+            <li>#FORMAT_B8G8R8_SINT specifies a three-component, 24-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</li>
+            <li>#FORMAT_B8G8R8_SRGB specifies a three-component, 24-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit R component stored with sRGB nonlinear encoding in byte 2.</li>
+            <li>#FORMAT_R8G8B8A8_UNORM specifies a four-component, 32-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_R8G8B8A8_SNORM specifies a four-component, 32-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_R8G8B8A8_USCALED specifies a four-component, 32-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_R8G8B8A8_SSCALED specifies a four-component, 32-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_R8G8B8A8_UINT specifies a four-component, 32-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_R8G8B8A8_SINT specifies a four-component, 32-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_R8G8B8A8_SRGB specifies a four-component, 32-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit B component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_UNORM specifies a four-component, 32-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_SNORM specifies a four-component, 32-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_USCALED specifies a four-component, 32-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_SSCALED specifies a four-component, 32-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_UINT specifies a four-component, 32-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_SINT specifies a four-component, 32-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_B8G8R8A8_SRGB specifies a four-component, 32-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit R component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3.</li>
+            <li>#FORMAT_A8B8G8R8_UNORM_PACK32 specifies a four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</li>
+            <li>#FORMAT_A8B8G8R8_SNORM_PACK32 specifies a four-component, 32-bit packed signed normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</li>
+            <li>#FORMAT_A8B8G8R8_USCALED_PACK32 specifies a four-component, 32-bit packed unsigned scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</li>
+            <li>#FORMAT_A8B8G8R8_SSCALED_PACK32 specifies a four-component, 32-bit packed signed scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</li>
+            <li>#FORMAT_A8B8G8R8_UINT_PACK32 specifies a four-component, 32-bit packed unsigned integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</li>
+            <li>#FORMAT_A8B8G8R8_SINT_PACK32 specifies a four-component, 32-bit packed signed integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</li>
+            <li>#FORMAT_A8B8G8R8_SRGB_PACK32 specifies a four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component stored with sRGB nonlinear encoding in bits 16..23, an 8-bit G component stored with sRGB nonlinear encoding in bits 8..15, and an 8-bit R component stored with sRGB nonlinear encoding in bits 0..7.</li>
+            <li>#FORMAT_A2R10G10B10_UNORM_PACK32 specifies a four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</li>
+            <li>#FORMAT_A2R10G10B10_SNORM_PACK32 specifies a four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</li>
+            <li>#FORMAT_A2R10G10B10_USCALED_PACK32 specifies a four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</li>
+            <li>#FORMAT_A2R10G10B10_SSCALED_PACK32 specifies a four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</li>
+            <li>#FORMAT_A2R10G10B10_UINT_PACK32 specifies a four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</li>
+            <li>#FORMAT_A2R10G10B10_SINT_PACK32 specifies a four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</li>
+            <li>#FORMAT_A2B10G10R10_UNORM_PACK32 specifies a four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</li>
+            <li>#FORMAT_A2B10G10R10_SNORM_PACK32 specifies a four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</li>
+            <li>#FORMAT_A2B10G10R10_USCALED_PACK32 specifies a four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</li>
+            <li>#FORMAT_A2B10G10R10_SSCALED_PACK32 specifies a four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</li>
+            <li>#FORMAT_A2B10G10R10_UINT_PACK32 specifies a four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</li>
+            <li>#FORMAT_A2B10G10R10_SINT_PACK32 specifies a four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</li>
+            <li>#FORMAT_R16_UNORM specifies a one-component, 16-bit unsigned normalized format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16_SNORM specifies a one-component, 16-bit signed normalized format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16_USCALED specifies a one-component, 16-bit unsigned scaled integer format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16_SSCALED specifies a one-component, 16-bit signed scaled integer format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16_UINT specifies a one-component, 16-bit unsigned integer format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16_SINT specifies a one-component, 16-bit signed integer format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16_SFLOAT specifies a one-component, 16-bit signed floating-point format that has a single 16-bit R component.</li>
+            <li>#FORMAT_R16G16_UNORM specifies a two-component, 32-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16_SNORM specifies a two-component, 32-bit signed normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16_USCALED specifies a two-component, 32-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16_SSCALED specifies a two-component, 32-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16_UINT specifies a two-component, 32-bit unsigned integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16_SINT specifies a two-component, 32-bit signed integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16_SFLOAT specifies a two-component, 32-bit signed floating-point format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</li>
+            <li>#FORMAT_R16G16B16_UNORM specifies a three-component, 48-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16_SNORM specifies a three-component, 48-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16_USCALED specifies a three-component, 48-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16_SSCALED specifies a three-component, 48-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16_UINT specifies a three-component, 48-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16_SINT specifies a three-component, 48-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16_SFLOAT specifies a three-component, 48-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</li>
+            <li>#FORMAT_R16G16B16A16_UNORM specifies a four-component, 64-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R16G16B16A16_SNORM specifies a four-component, 64-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R16G16B16A16_USCALED specifies a four-component, 64-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R16G16B16A16_SSCALED specifies a four-component, 64-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R16G16B16A16_UINT specifies a four-component, 64-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R16G16B16A16_SINT specifies a four-component, 64-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R16G16B16A16_SFLOAT specifies a four-component, 64-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</li>
+            <li>#FORMAT_R32_UINT specifies a one-component, 32-bit unsigned integer format that has a single 32-bit R component.</li>
+            <li>#FORMAT_R32_SINT specifies a one-component, 32-bit signed integer format that has a single 32-bit R component.</li>
+            <li>#FORMAT_R32_SFLOAT specifies a one-component, 32-bit signed floating-point format that has a single 32-bit R component.</li>
+            <li>#FORMAT_R32G32_UINT specifies a two-component, 64-bit unsigned integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</li>
+            <li>#FORMAT_R32G32_SINT specifies a two-component, 64-bit signed integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</li>
+            <li>#FORMAT_R32G32_SFLOAT specifies a two-component, 64-bit signed floating-point format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</li>
+            <li>#FORMAT_R32G32B32_UINT specifies a three-component, 96-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</li>
+            <li>#FORMAT_R32G32B32_SINT specifies a three-component, 96-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</li>
+            <li>#FORMAT_R32G32B32_SFLOAT specifies a three-component, 96-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</li>
+            <li>#FORMAT_R32G32B32A32_UINT specifies a four-component, 128-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</li>
+            <li>#FORMAT_R32G32B32A32_SINT specifies a four-component, 128-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</li>
+            <li>#FORMAT_R32G32B32A32_SFLOAT specifies a four-component, 128-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</li>
+            <li>#FORMAT_R64_UINT specifies a one-component, 64-bit unsigned integer format that has a single 64-bit R component.</li>
+            <li>#FORMAT_R64_SINT specifies a one-component, 64-bit signed integer format that has a single 64-bit R component.</li>
+            <li>#FORMAT_R64_SFLOAT specifies a one-component, 64-bit signed floating-point format that has a single 64-bit R component.</li>
+            <li>#FORMAT_R64G64_UINT specifies a two-component, 128-bit unsigned integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</li>
+            <li>#FORMAT_R64G64_SINT specifies a two-component, 128-bit signed integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</li>
+            <li>#FORMAT_R64G64_SFLOAT specifies a two-component, 128-bit signed floating-point format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</li>
+            <li>#FORMAT_R64G64B64_UINT specifies a three-component, 192-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</li>
+            <li>#FORMAT_R64G64B64_SINT specifies a three-component, 192-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</li>
+            <li>#FORMAT_R64G64B64_SFLOAT specifies a three-component, 192-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</li>
+            <li>#FORMAT_R64G64B64A64_UINT specifies a four-component, 256-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</li>
+            <li>#FORMAT_R64G64B64A64_SINT specifies a four-component, 256-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</li>
+            <li>#FORMAT_R64G64B64A64_SFLOAT specifies a four-component, 256-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</li>
+            <li>#FORMAT_B10G11R11_UFLOAT_PACK32 specifies a three-component, 32-bit packed unsigned floating-point format that has a 10-bit B component in bits 22..31, an 11-bit G component in bits 11..21, an 11-bit R component in bits 0..10. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fp10">the “Unsigned 10-Bit Floating-Point Numbers” section</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fp11">the “Unsigned 11-Bit Floating-Point Numbers” section</a>.</li>
+            <li>#FORMAT_E5B9G9R9_UFLOAT_PACK32 specifies a three-component, 32-bit packed unsigned floating-point format that has a 5-bit shared exponent in bits 27..31, a 9-bit B component mantissa in bits 18..26, a 9-bit G component mantissa in bits 9..17, and a 9-bit R component mantissa in bits 0..8.</li>
+            <li>#FORMAT_D16_UNORM specifies a one-component, 16-bit unsigned normalized format that has a single 16-bit depth component.</li>
+            <li>#FORMAT_X8_D24_UNORM_PACK32 specifies a two-component, 32-bit format that has 24 unsigned normalized bits in the depth component and, optionally:, 8 bits that are unused.</li>
+            <li>#FORMAT_D32_SFLOAT specifies a one-component, 32-bit signed floating-point format that has 32-bits in the depth component.</li>
+            <li>#FORMAT_S8_UINT specifies a one-component, 8-bit unsigned integer format that has 8-bits in the stencil component.</li>
+            <li>#FORMAT_D16_UNORM_S8_UINT specifies a two-component, 24-bit format that has 16 unsigned normalized bits in the depth component and 8 unsigned integer bits in the stencil component.</li>
+            <li>#FORMAT_D24_UNORM_S8_UINT specifies a two-component, 32-bit packed format that has 8 unsigned integer bits in the stencil component, and 24 unsigned normalized bits in the depth component.</li>
+            <li>#FORMAT_D32_SFLOAT_S8_UINT specifies a two-component format that has 32 signed float bits in the depth component and 8 unsigned integer bits in the stencil component. There are optionally: 24-bits that are unused.</li>
+            <li>#FORMAT_BC1_RGB_UNORM_BLOCK specifies a three-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data. This format has no alpha and is considered opaque.</li>
+            <li>#FORMAT_BC1_RGB_SRGB_BLOCK specifies a three-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding. This format has no alpha and is considered opaque.</li>
+            <li>#FORMAT_BC1_RGBA_UNORM_BLOCK specifies a four-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data, and provides 1 bit of alpha.</li>
+            <li>#FORMAT_BC1_RGBA_SRGB_BLOCK specifies a four-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding, and provides 1 bit of alpha.</li>
+            <li>#FORMAT_BC2_UNORM_BLOCK specifies a four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</li>
+            <li>#FORMAT_BC2_SRGB_BLOCK specifies a four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding.</li>
+            <li>#FORMAT_BC3_UNORM_BLOCK specifies a four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</li>
+            <li>#FORMAT_BC3_SRGB_BLOCK specifies a four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding.</li>
+            <li>#FORMAT_BC4_UNORM_BLOCK specifies a one-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized red texel data.</li>
+            <li>#FORMAT_BC4_SNORM_BLOCK specifies a one-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of signed normalized red texel data.</li>
+            <li>#FORMAT_BC5_UNORM_BLOCK specifies a two-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</li>
+            <li>#FORMAT_BC5_SNORM_BLOCK specifies a two-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</li>
+            <li>#FORMAT_BC6H_UFLOAT_BLOCK specifies a three-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned floating-point RGB texel data.</li>
+            <li>#FORMAT_BC6H_SFLOAT_BLOCK specifies a three-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed floating-point RGB texel data.</li>
+            <li>#FORMAT_BC7_UNORM_BLOCK specifies a four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_BC7_SRGB_BLOCK specifies a four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ETC2_R8G8B8_UNORM_BLOCK specifies a three-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data. This format has no alpha and is considered opaque.</li>
+            <li>#FORMAT_ETC2_R8G8B8_SRGB_BLOCK specifies a three-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding. This format has no alpha and is considered opaque.</li>
+            <li>#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK specifies a four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data, and provides 1 bit of alpha.</li>
+            <li>#FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK specifies a four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding, and provides 1 bit of alpha.</li>
+            <li>#FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK specifies a four-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</li>
+            <li>#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK specifies a four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding applied.</li>
+            <li>#FORMAT_EAC_R11_UNORM_BLOCK specifies a one-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized red texel data.</li>
+            <li>#FORMAT_EAC_R11_SNORM_BLOCK specifies a one-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of signed normalized red texel data.</li>
+            <li>#FORMAT_EAC_R11G11_UNORM_BLOCK specifies a two-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</li>
+            <li>#FORMAT_EAC_R11G11_SNORM_BLOCK specifies a two-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</li>
+            <li>#FORMAT_ASTC_4x4_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_4x4_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_5x4_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x4 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_5x4_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_5x5_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x5 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_5x5_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_6x5_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x5 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_6x5_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_6x6_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x6 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_6x6_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_8x5_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x5 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_8x5_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_8x6_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x6 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_8x6_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_8x8_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x8 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_8x8_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x8 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_10x5_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x5 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_10x5_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_10x6_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x6 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_10x6_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_10x8_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x8 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_10x8_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x8 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_10x10_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x10 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_10x10_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x10 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_12x10_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x10 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_12x10_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x10 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+            <li>#FORMAT_ASTC_12x12_UNORM_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x12 rectangle of unsigned normalized RGBA texel data.</li>
+            <li>#FORMAT_ASTC_12x12_SRGB_BLOCK specifies a four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x12 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</li>
+        </ul>
 
         <h5>See Also</h5>
         ##VkAttachmentDescription, ##VkBufferViewCreateInfo, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, ##VkSurfaceFormatKHR, ##VkSwapchainCreateInfoKHR, ##VkVertexInputAttributeDescription, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceFormatProperties(), #GetPhysicalDeviceFormatProperties2KHR(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
@@ -995,12 +626,38 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkFormatFeatureFlagBits - Bitmask specifying features supported by a buffer
 
         <h5>Description</h5>
-        For more information, see:
+        The following bits <b>may</b> be set in {@code linearTilingFeatures} and {@code optimalTilingFeatures}, specifying that the features are supported by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VkImage">images</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VkImageView">image views</a> created with the queried #GetPhysicalDeviceFormatProperties(){@code ::format}:
 
         <ul>
-            <li>The reference page for ##VkFormatProperties, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#FORMAT_FEATURE_SAMPLED_IMAGE_BIT specifies that an image view <b>can</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-sampledimage">sampled from</a>.</li>
+            <li>#FORMAT_FEATURE_STORAGE_IMAGE_BIT specifies that an image view <b>can</b> be used as a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storageimage">storage images</a>.</li>
+            <li>#FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT specifies that an image view <b>can</b> be used as storage image that supports atomic operations.</li>
+            <li>#FORMAT_FEATURE_COLOR_ATTACHMENT_BIT specifies that an image view <b>can</b> be used as a framebuffer color attachment and as an input attachment.</li>
+            <li>#FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT specifies that an image view <b>can</b> be used as a framebuffer color attachment that supports blending and as an input attachment.</li>
+            <li>#FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT specifies that an image view <b>can</b> be used as a framebuffer depth/stencil attachment and as an input attachment.</li>
+            <li>#FORMAT_FEATURE_BLIT_SRC_BIT specifies that an image <b>can</b> be used as {@code srcImage} for the #CmdBlitImage() command.</li>
+            <li>#FORMAT_FEATURE_BLIT_DST_BIT specifies that an image <b>can</b> be used as {@code dstImage} for the #CmdBlitImage() command.</li>
+            <li>
+                #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT specifies that if #FORMAT_FEATURE_SAMPLED_IMAGE_BIT is also set, an image view <b>can</b> be used with a sampler that has either of {@code magFilter} or {@code minFilter} set to #FILTER_LINEAR, or {@code mipmapMode} set to #SAMPLER_MIPMAP_MODE_LINEAR. If #FORMAT_FEATURE_BLIT_SRC_BIT is also set, an image can be used as the {@code srcImage} to #CmdBlitImage() with a {@code filter} of #FILTER_LINEAR. This bit <b>must</b> only be exposed for formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT or #FORMAT_FEATURE_BLIT_SRC_BIT.
+                If the format being queried is a depth/stencil format, this bit only indicates that the depth aspect (not the stencil aspect) of an image of this format supports linear filtering, and that linear filtering of the depth aspect is supported whether depth compare is enabled in the sampler or not. If this bit is not present, linear filtering with depth compare disabled is unsupported and linear filtering with depth compare enabled is supported, but <b>may</b> compute the filtered value in an implementation-dependent manner which differs from the normal rules of linear filtering. The resulting value <b>must</b> be in the range <code>[0,1]</code> and <b>should</b> be proportional to, or a weighted average of, the number of comparison passes or failures.
+            </li>
+            <li>#FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR specifies that an image <b>can</b> be used as a source image for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a>.</li>
+            <li>
+                #FORMAT_FEATURE_TRANSFER_DST_BIT_KHR specifies that an image <b>can</b> be used as a destination image for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">clear commands</a>.
+                <dl>
+            <dt>#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</dt>
+                    <dd>{@code VkImage} <b>can</b> be used with a sampler that has either of {@code magFilter} or {@code minFilter} set to #FILTER_CUBIC_IMG, or be the source image for a blit with {@code filter} set to #FILTER_CUBIC_IMG. This bit <b>must</b> only be exposed for formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT. If the format being queried is a depth/stencil format, this only indicates that the depth aspect is cubic filterable.</dd>
+                </dl>
+            </li>
+        </ul>
+
+        The following bits <b>may</b> be set in {@code bufferFeatures}, specifying that the features are supported by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VkBuffer">buffers</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VkBufferView">buffer views</a> created with the queried #GetPhysicalDeviceProperties(){@code ::format}:
+
+        <ul>
+            <li>#FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT specifies that the format <b>can</b> be used to create a buffer view that <b>can</b> be bound to a #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER descriptor.</li>
+            <li>#FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT specifies that the format <b>can</b> be used to create a buffer view that <b>can</b> be bound to a #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER descriptor.</li>
+            <li>#FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT specifies that atomic operations are supported on #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER with this format.</li>
+            <li>#FORMAT_FEATURE_VERTEX_BUFFER_BIT specifies that the format <b>can</b> be used as a vertex attribute format (##VkVertexInputAttributeDescription{@code ::format}).</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1027,7 +684,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkImageType - Specifies the type of an image object
 
         <h5>Description</h5>
-        These values specify one-, two-, or three-dimensional images, respectively.
+        <ul>
+            <li>#IMAGE_TYPE_1D specifies a one-dimensional image.</li>
+            <li>#IMAGE_TYPE_2D specifies a two-dimensional image.</li>
+            <li>#IMAGE_TYPE_3D specifies a three-dimensional image.</li>
+        </ul>
 
         <h5>See Also</h5>
         ##VkImageCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
@@ -1043,7 +704,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkImageTiling - Specifies the tiling arrangement of data in an image
 
         <h5>Description</h5>
-        #IMAGE_TILING_OPTIMAL specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access), and #IMAGE_TILING_LINEAR specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).
+        <ul>
+            <li>#IMAGE_TILING_OPTIMAL specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).</li>
+            <li>#IMAGE_TILING_LINEAR specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).</li>
+        </ul>
 
         <h5>See Also</h5>
         ##VkImageCreateInfo, ##VkPhysicalDeviceImageFormatInfo2KHR, ##VkPhysicalDeviceSparseImageFormatInfo2KHR, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
@@ -1058,17 +722,15 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkImageUsageFlagBits - Bitmask specifying intended usage of an image
 
         <h5>Description</h5>
-        These bits have the following meanings:
-
         <ul>
-            <li>#IMAGE_USAGE_TRANSFER_SRC_BIT indicates that the image <b>can</b> be used as the source of a transfer command.</li>
-            <li>#IMAGE_USAGE_TRANSFER_DST_BIT indicates that the image <b>can</b> be used as the destination of a transfer command.</li>
-            <li>#IMAGE_USAGE_SAMPLED_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and be sampled by a shader.</li>
-            <li>#IMAGE_USAGE_STORAGE_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_STORAGE_IMAGE.</li>
-            <li>#IMAGE_USAGE_COLOR_ATTACHMENT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for use as a color or resolve attachment in a {@code VkFramebuffer}.</li>
-            <li>#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for use as a depth/stencil attachment in a {@code VkFramebuffer}.</li>
-            <li>#IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT indicates that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory">the “Memory Allocation” chapter</a> for more detail). This bit <b>can</b> be set for any image that <b>can</b> be used to create a {@code VkImageView} suitable for use as a color, resolve, depth/stencil, or input attachment.</li>
-            <li>#IMAGE_USAGE_INPUT_ATTACHMENT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_INPUT_ATTACHMENT; be read from a shader as an input attachment; and be used as an input attachment in a framebuffer.</li>
+            <li>#IMAGE_USAGE_TRANSFER_SRC_BIT specifies that the image <b>can</b> be used as the source of a transfer command.</li>
+            <li>#IMAGE_USAGE_TRANSFER_DST_BIT specifies that the image <b>can</b> be used as the destination of a transfer command.</li>
+            <li>#IMAGE_USAGE_SAMPLED_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and be sampled by a shader.</li>
+            <li>#IMAGE_USAGE_STORAGE_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_STORAGE_IMAGE.</li>
+            <li>#IMAGE_USAGE_COLOR_ATTACHMENT_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} suitable for use as a color or resolve attachment in a {@code VkFramebuffer}.</li>
+            <li>#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} suitable for use as a depth/stencil attachment in a {@code VkFramebuffer}.</li>
+            <li>#IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT specifies that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory">the “Memory Allocation” chapter</a> for more detail). This bit <b>can</b> be set for any image that <b>can</b> be used to create a {@code VkImageView} suitable for use as a color, resolve, depth/stencil, or input attachment.</li>
+            <li>#IMAGE_USAGE_INPUT_ATTACHMENT_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_INPUT_ATTACHMENT; be read from a shader as an input attachment; and be used as an input attachment in a framebuffer.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1090,16 +752,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkImageCreateFlagBits - Bitmask specifying additional parameters of an image
 
         <h5>Description</h5>
-        These bits have the following meanings:
-
         <ul>
-            <li>#IMAGE_CREATE_SPARSE_BINDING_BIT indicates that the image will be backed using sparse memory binding.</li>
-            <li>#IMAGE_CREATE_SPARSE_RESIDENCY_BIT indicates that the image <b>can</b> be partially backed using sparse memory binding. Images created with this flag <b>must</b> also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag.</li>
-            <li>#IMAGE_CREATE_SPARSE_ALIASED_BIT indicates that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or another portion of the same image). Images created with this flag <b>must</b> also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag</li>
-            <li>#IMAGE_CREATE_MUTABLE_FORMAT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} with a different format from the image.</li>
-            <li>#IMAGE_CREATE_CUBE_COMPATIBLE_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY.</li>
-            <li>#IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR indicates that the image <b>can</b> be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY.</li>
-            <li>#IMAGE_CREATE_BIND_SFR_BIT_KHX indicates that the image <b>can</b> be used with a non-zero value of the {@code SFRRectCount} member of the ##VkBindImageMemoryInfoKHX structure passed into #BindImageMemory2KHX(). This flag also has the effect of making the image use the standard sparse image block dimensions.</li>
+            <li>#IMAGE_CREATE_SPARSE_BINDING_BIT specifies that the image will be backed using sparse memory binding.</li>
+            <li>#IMAGE_CREATE_SPARSE_RESIDENCY_BIT specifies that the image <b>can</b> be partially backed using sparse memory binding. Images created with this flag <b>must</b> also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag.</li>
+            <li>#IMAGE_CREATE_SPARSE_ALIASED_BIT specifies that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or another portion of the same image). Images created with this flag <b>must</b> also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag</li>
+            <li>#IMAGE_CREATE_MUTABLE_FORMAT_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} with a different format from the image.</li>
+            <li>#IMAGE_CREATE_CUBE_COMPATIBLE_BIT specifies that the image <b>can</b> be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY.</li>
+            <li>#IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR specifies that the image <b>can</b> be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY.</li>
+            <li>#IMAGE_CREATE_BIND_SFR_BIT_KHX specifies that the image <b>can</b> be used with a non-zero value of the {@code SFRRectCount} member of the ##VkBindImageMemoryInfoKHX structure passed into #BindImageMemory2KHX(). This flag also has the effect of making the image use the standard sparse image block dimensions.</li>
         </ul>
 
         If any of the bits #IMAGE_CREATE_SPARSE_BINDING_BIT, #IMAGE_CREATE_SPARSE_RESIDENCY_BIT, or #IMAGE_CREATE_SPARSE_ALIASED_BIT are set, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT <b>must</b> not also be set.
@@ -1122,12 +782,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkSampleCountFlagBits - Bitmask specifying sample counts supported for an image used for storage operations
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkPhysicalDeviceLimits, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SAMPLE_COUNT_1_BIT specifies an image with one sample per pixel.</li>
+            <li>#SAMPLE_COUNT_2_BIT specifies an image with 2 samples per pixel.</li>
+            <li>#SAMPLE_COUNT_4_BIT specifies an image with 4 samples per pixel.</li>
+            <li>#SAMPLE_COUNT_8_BIT specifies an image with 8 samples per pixel.</li>
+            <li>#SAMPLE_COUNT_16_BIT specifies an image with 16 samples per pixel.</li>
+            <li>#SAMPLE_COUNT_32_BIT specifies an image with 32 samples per pixel.</li>
+            <li>#SAMPLE_COUNT_64_BIT specifies an image with 64 samples per pixel.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1149,11 +811,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Description</h5>
         <ul>
-            <li>#PHYSICAL_DEVICE_TYPE_OTHER The device does not match any other available types.</li>
-            <li>#PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU The device is typically one embedded in or tightly coupled with the host.</li>
-            <li>#PHYSICAL_DEVICE_TYPE_DISCRETE_GPU The device is typically a separate processor connected to the host via an interlink.</li>
-            <li>#PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU The device is typically a virtual node in a virtualization environment.</li>
-            <li>#PHYSICAL_DEVICE_TYPE_CPU The device is typically running on the same processors as the host.</li>
+            <li>#PHYSICAL_DEVICE_TYPE_OTHER - the device does not match any other available types.</li>
+            <li>#PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU - the device is typically one embedded in or tightly coupled with the host.</li>
+            <li>#PHYSICAL_DEVICE_TYPE_DISCRETE_GPU - the device is typically a separate processor connected to the host via an interlink.</li>
+            <li>#PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU - the device is typically a virtual node in a virtualization environment.</li>
+            <li>#PHYSICAL_DEVICE_TYPE_CPU - the device is typically running on the same processors as the host.</li>
         </ul>
 
         The physical device type is advertised for informational purposes only, and does not directly affect the operation of the system. However, the device type <b>may</b> correlate with other advertised properties or capabilities of the system, such as how many memory heaps there are.
@@ -1174,13 +836,20 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkQueueFlagBits - Bitmask specifying capabilities of queues in a queue family
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkQueueFamilyProperties, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#QUEUE_GRAPHICS_BIT indicates that queues in this queue family support graphics operations.</li>
+            <li>#QUEUE_COMPUTE_BIT indicates that queues in this queue family support compute operations.</li>
+            <li>#QUEUE_TRANSFER_BIT indicates that queues in this queue family support transfer operations.</li>
+            <li>#QUEUE_SPARSE_BINDING_BIT indicates that queues in this queue family support sparse memory management operations (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#sparsememory">Sparse Resources</a>). If any of the sparse resource features are enabled, then at least one queue family <b>must</b> support this bit.</li>
         </ul>
+
+        If an implementation exposes any queue family that supports graphics operations, at least one queue family of at least one physical device exposed by the implementation <b>must</b> support both graphics and compute operations.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        All commands that are allowed on a queue that supports transfer operations are also allowed on a queue that supports either graphics or compute operations. Thus, if the capabilities of a queue family include #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT, then reporting the #QUEUE_TRANSFER_BIT capability separately for that queue family is optional:.
+        </div>
+
+        For further details see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queues">Queues</a>.
 
         <h5>See Also</h5>
         {@code VkQueueFlags}
@@ -1197,12 +866,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkMemoryPropertyFlagBits - Bitmask specifying properties for a memory type
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkMemoryType, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#MEMORY_PROPERTY_DEVICE_LOCAL_BIT bit indicates that memory allocated with this type is the most efficient for device access. This property will only be set for memory types belonging to heaps with the #MEMORY_HEAP_DEVICE_LOCAL_BIT set.</li>
+            <li>#MEMORY_PROPERTY_HOST_VISIBLE_BIT bit indicates that memory allocated with this type <b>can</b> be mapped for host access using #MapMemory().</li>
+            <li>#MEMORY_PROPERTY_HOST_COHERENT_BIT bit indicates that the host cache management commands #FlushMappedMemoryRanges() and #InvalidateMappedMemoryRanges() are not needed to flush host writes to the device or make device writes visible to the host, respectively.</li>
+            <li>#MEMORY_PROPERTY_HOST_CACHED_BIT bit indicates that memory allocated with this type is cached on the host. Host memory accesses to uncached memory are slower than to cached memory, however uncached memory is always host coherent.</li>
+            <li>#MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT bit indicates that the memory type only allows device access to the memory. Memory types <b>must</b> not have both #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT and #MEMORY_PROPERTY_HOST_VISIBLE_BIT set. Additionally, the object&#8217;s backing memory <b>may</b> be provided by the implementation lazily as specified in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory-device-lazy_allocation">Lazily Allocated Memory</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1221,12 +890,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkMemoryHeapFlagBits - Bitmask specifying attribute flags for a heap
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkMemoryHeap, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#MEMORY_HEAP_DEVICE_LOCAL_BIT indicates that the heap corresponds to device local memory. Device local memory <b>may</b> have different performance characteristics than host local memory, and <b>may</b> support different memory property flags.</li>
+            <li>#MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX indicates that in a logical device representing more than one physical device, there is a per-physical device instance of the heap memory. By default, an allocation from such a heap will be replicated to each physical device&#8217;s instance of the heap.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1241,27 +907,25 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkPipelineStageFlagBits - Bitmask specifying pipeline stages
 
         <h5>Description</h5>
-        The meaning of each bit is:
-
         <ul>
-            <li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT: Stage of the pipeline where any commands are initially received by the queue.</li>
-            <li>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX: Stage of the pipeline where device-side generation of commands via #CmdProcessCommandsNVX() is handled.</li>
-            <li>#PIPELINE_STAGE_DRAW_INDIRECT_BIT: Stage of the pipeline where Draw/DispatchIndirect data structures are consumed. This stage also includes reading commands written by #CmdProcessCommandsNVX().</li>
-            <li>#PIPELINE_STAGE_VERTEX_INPUT_BIT: Stage of the pipeline where vertex and index buffers are consumed.</li>
-            <li>#PIPELINE_STAGE_VERTEX_SHADER_BIT: Vertex shader stage.</li>
-            <li>#PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT: Tessellation control shader stage.</li>
-            <li>#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT: Tessellation evaluation shader stage.</li>
-            <li>#PIPELINE_STAGE_GEOMETRY_SHADER_BIT: Geometry shader stage.</li>
-            <li>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT: Fragment shader stage.</li>
-            <li>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT: Stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed. This stage also includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load operations</a> for framebuffer attachments with a depth/stencil format.</li>
-            <li>#PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT: Stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed. This stage also includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass store operations</a> for framebuffer attachments with a depth/stencil format.</li>
-            <li>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT: Stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a> and multisample resolve operations for framebuffer attachments with a color format.</li>
-            <li>#PIPELINE_STAGE_TRANSFER_BIT: Execution of copy commands. This includes the operations resulting from all <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">clear commands</a> (with the exception of #CmdClearAttachments()), and #CmdCopyQueryPoolResults().</li>
-            <li>#PIPELINE_STAGE_COMPUTE_SHADER_BIT: Execution of a compute shader.</li>
-            <li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT: Final stage in the pipeline where operations generated by all commands complete execution.</li>
-            <li>#PIPELINE_STAGE_HOST_BIT: A pseudo-stage indicating execution on the host of reads/writes of device memory. This stage is not invoked by any commands recorded in a command buffer.</li>
+            <li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT specifies the stage of the pipeline where any commands are initially received by the queue.</li>
+            <li>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX specifies the stage of the pipeline where device-side generation of commands via #CmdProcessCommandsNVX() is handled.</li>
+            <li>#PIPELINE_STAGE_DRAW_INDIRECT_BIT specifies the stage of the pipeline where Draw/DispatchIndirect data structures are consumed. This stage also includes reading commands written by #CmdProcessCommandsNVX().</li>
+            <li>#PIPELINE_STAGE_VERTEX_INPUT_BIT specifies the stage of the pipeline where vertex and index buffers are consumed.</li>
+            <li>#PIPELINE_STAGE_VERTEX_SHADER_BIT specifies the vertex shader stage.</li>
+            <li>#PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT specifies the tessellation control shader stage.</li>
+            <li>#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT specifies the tessellation evaluation shader stage.</li>
+            <li>#PIPELINE_STAGE_GEOMETRY_SHADER_BIT specifies the geometry shader stage.</li>
+            <li>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT specifies the fragment shader stage.</li>
+            <li>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT specifies the stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed. This stage also includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load operations</a> for framebuffer attachments with a depth/stencil format.</li>
+            <li>#PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT specifies the stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed. This stage also includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass store operations</a> for framebuffer attachments with a depth/stencil format.</li>
+            <li>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT specifies the stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a> and multisample resolve operations for framebuffer attachments with a color format.</li>
+            <li>#PIPELINE_STAGE_TRANSFER_BIT specifies the execution of copy commands. This includes the operations resulting from all <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">clear commands</a> (with the exception of #CmdClearAttachments()), and #CmdCopyQueryPoolResults().</li>
+            <li>#PIPELINE_STAGE_COMPUTE_SHADER_BIT specifies the execution of a compute shader.</li>
+            <li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT specifies the final stage in the pipeline where operations generated by all commands complete execution.</li>
+            <li>#PIPELINE_STAGE_HOST_BIT specifies a pseudo-stage indicating execution on the host of reads/writes of device memory. This stage is not invoked by any commands recorded in a command buffer.</li>
             <li>
-                #PIPELINE_STAGE_ALL_GRAPHICS_BIT: Execution of all graphics pipeline stages. Equivalent to the logical or of:
+                #PIPELINE_STAGE_ALL_GRAPHICS_BIT specifies the execution of all graphics pipeline stages, and is equivalent to the logical OR of:
                 <ul>
                     <li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT</li>
                     <li>#PIPELINE_STAGE_DRAW_INDIRECT_BIT</li>
@@ -1277,7 +941,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
                     <li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT</li>
                 </ul>
             </li>
-            <li>#PIPELINE_STAGE_ALL_COMMANDS_BIT: Equivalent to the logical or of every other pipeline stage flag that is supported on the queue it is used with.</li>
+            <li>#PIPELINE_STAGE_ALL_COMMANDS_BIT is equivalent to the logical OR of every other pipeline stage flag that is supported on the queue it is used with.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -1316,12 +980,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkImageAspectFlagBits - Bitmask specifying which aspects of an image are included in a view
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkImageSubresourceRange, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#IMAGE_ASPECT_COLOR_BIT specifies the color aspect.</li>
+            <li>#IMAGE_ASPECT_DEPTH_BIT specifies the depth aspect.</li>
+            <li>#IMAGE_ASPECT_STENCIL_BIT specifies the stencil aspect.</li>
+            <li>#IMAGE_ASPECT_METADATA_BIT specifies the metadata aspect, used for sparse <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#sparsememory">sparse resource</a> operations.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1339,12 +1002,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkSparseImageFormatFlagBits - Bitmask specifying additional information about a sparse image resource
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkSparseImageFormatProperties, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT specifies that the image uses a single mip tail region for all array layers.</li>
+            <li>#SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT specifies that the first mip level whose dimensions are not integer multiples of the corresponding dimensions of the sparse image block begins the mip tail region.</li>
+            <li>#SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT specifies that the image uses non-standard sparse image block dimensions, and the {@code imageGranularity} values do not match the standard sparse image block dimensions for the given pixel format.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1361,12 +1022,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkSparseMemoryBindFlagBits - Bitmask specifying usage of a sparse memory binding operation
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkSparseMemoryBind, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SPARSE_MEMORY_BIND_METADATA_BIT specifies that the memory being bound is only for the metadata aspect.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1381,12 +1038,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkFenceCreateFlagBits - Bitmask specifying initial state and behavior of a fence
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkFenceCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#FENCE_CREATE_SIGNALED_BIT specifies that the fence object is created in the signaled state. Otherwise, it is created in the unsignaled state.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1401,12 +1054,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkQueryType - Specify the type of queries managed by a query pool
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkQueryPoolCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#QUERY_TYPE_OCCLUSION specifies an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-occlusion">occlusion query</a>.</li>
+            <li>#QUERY_TYPE_PIPELINE_STATISTICS specifies a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-pipestats">pipeline statistics query</a>.</li>
+            <li>#QUERY_TYPE_TIMESTAMP specifies a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-timestamps">timestamp query</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1423,26 +1074,24 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkQueryPipelineStatisticFlagBits - Bitmask specifying queried pipeline statistics
 
         <h5>Description</h5>
-        These bits have the following meanings:
-
         <ul>
-            <li>If #QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT is set, queries managed by the pool will count the number of vertices processed by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing">input assembly</a> stage. Vertices corresponding to incomplete primitives <b>may</b> contribute to the count.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT is set, queries managed by the pool will count the number of primitives processed by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing">input assembly</a> stage. If primitive restart is enabled, restarting the primitive topology has no effect on the count. Incomplete primitives <b>may</b> be counted.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of vertex shader invocations. This counter&#8217;s value is incremented each time a vertex shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-vertex-execution">invoked</a>.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of geometry shader invocations. This counter&#8217;s value is incremented each time a geometry shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-geometry-execution">invoked</a>. In the case of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#geometry-invocations">instanced geometry shaders</a>, the geometry shader invocations count is incremented for each separate instanced invocation.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT is set, queries managed by the pool will count the number of primitives generated by geometry shader invocations. The counter&#8217;s value is incremented each time the geometry shader emits a primitive. Restarting primitive topology using the SPIR-V instructions {@code OpEndPrimitive} or {@code OpEndStreamPrimitive} has no effect on the geometry shader output primitives count.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT is set, queries managed by the pool will count the number of primitives processed by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-clipping">Primitive Clipping</a> stage of the pipeline. The counter&#8217;s value is incremented each time a primitive reaches the primitive clipping stage.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT specifies that queries managed by the pool will count the number of vertices processed by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing">input assembly</a> stage. Vertices corresponding to incomplete primitives <b>may</b> contribute to the count.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT specifies that queries managed by the pool will count the number of primitives processed by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing">input assembly</a> stage. If primitive restart is enabled, restarting the primitive topology has no effect on the count. Incomplete primitives <b>may</b> be counted.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT specifies that queries managed by the pool will count the number of vertex shader invocations. This counter&#8217;s value is incremented each time a vertex shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-vertex-execution">invoked</a>.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT specifies that queries managed by the pool will count the number of geometry shader invocations. This counter&#8217;s value is incremented each time a geometry shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-geometry-execution">invoked</a>. In the case of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#geometry-invocations">instanced geometry shaders</a>, the geometry shader invocations count is incremented for each separate instanced invocation.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT specifies that queries managed by the pool will count the number of primitives generated by geometry shader invocations. The counter&#8217;s value is incremented each time the geometry shader emits a primitive. Restarting primitive topology using the SPIR-V instructions {@code OpEndPrimitive} or {@code OpEndStreamPrimitive} has no effect on the geometry shader output primitives count.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT specifies that queries managed by the pool will count the number of primitives processed by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-clipping">Primitive Clipping</a> stage of the pipeline. The counter&#8217;s value is incremented each time a primitive reaches the primitive clipping stage.</li>
             <li>
-                If #QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT is set, queries managed by the pool will count the number of primitives output by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-clipping">Primitive Clipping</a> stage of the pipeline. The counter&#8217;s value is incremented each time a primitive passes the primitive clipping stage. The actual number of primitives output by the primitive clipping stage for a particular input primitive is implementation-dependent but <b>must</b> satisfy the following conditions:
+                #QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT specifies that queries managed by the pool will count the number of primitives output by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-clipping">Primitive Clipping</a> stage of the pipeline. The counter&#8217;s value is incremented each time a primitive passes the primitive clipping stage. The actual number of primitives output by the primitive clipping stage for a particular input primitive is implementation-dependent but <b>must</b> satisfy the following conditions:
                 <ul>
                     <li>If at least one vertex of the input primitive lies inside the clipping volume, the counter is incremented by one or more.</li>
                     <li>Otherwise, the counter is incremented by zero or more.</li>
                 </ul>
             </li>
-            <li>If #QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of fragment shader invocations. The counter&#8217;s value is incremented each time the fragment shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-fragment-execution">invoked</a>.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT is set, queries managed by the pool will count the number of patches processed by the tessellation control shader. The counter&#8217;s value is incremented once for each patch for which a tessellation control shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-tessellation-control-execution">invoked</a>.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of invocations of the tessellation evaluation shader. The counter&#8217;s value is incremented each time the tessellation evaluation shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-tessellation-evaluation-execution">invoked</a>.</li>
-            <li>If #QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of compute shader invocations. The counter&#8217;s value is incremented every time the compute shader is invoked. Implementations <b>may</b> skip the execution of certain compute shader invocations or execute additional compute shader invocations for implementation-dependent reasons as long as the results of rendering otherwise remain unchanged.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT specifies that queries managed by the pool will count the number of fragment shader invocations. The counter&#8217;s value is incremented each time the fragment shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-fragment-execution">invoked</a>.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT specifies that queries managed by the pool will count the number of patches processed by the tessellation control shader. The counter&#8217;s value is incremented once for each patch for which a tessellation control shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-tessellation-control-execution">invoked</a>.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT specifies that queries managed by the pool will count the number of invocations of the tessellation evaluation shader. The counter&#8217;s value is incremented each time the tessellation evaluation shader is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-tessellation-evaluation-execution">invoked</a>.</li>
+            <li>#QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT specifies that queries managed by the pool will count the number of compute shader invocations. The counter&#8217;s value is incremented every time the compute shader is invoked. Implementations <b>may</b> skip the execution of certain compute shader invocations or execute additional compute shader invocations for implementation-dependent reasons as long as the results of rendering otherwise remain unchanged.</li>
         </ul>
 
         These values are intended to measure relative statistics on one implementation. Various device architectures will count these values differently. Any or all counters <b>may</b> be affected by the issues described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-undefined">Query Operation</a>.
@@ -1477,12 +1126,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkQueryResultFlagBits - Bitmask specifying how and when query results are returned
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #GetQueryPoolResults(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#QUERY_RESULT_64_BIT specifies the results will be written as an array of 64-bit unsigned integer values. If this bit is not set, the results will be written as an array of 32-bit unsigned integer values.</li>
+            <li>#QUERY_RESULT_WAIT_BIT specifies that Vulkan will wait for each query&#8217;s status to become available before retrieving its results.</li>
+            <li>#QUERY_RESULT_WITH_AVAILABILITY_BIT specifies that the availability status accompanies the results.</li>
+            <li>#QUERY_RESULT_PARTIAL_BIT specifies that returning partial results is acceptable.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1500,13 +1148,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkBufferCreateFlagBits - Bitmask specifying additional parameters of a buffer
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkBufferCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#BUFFER_CREATE_SPARSE_BINDING_BIT specifies that the buffer will be backed using sparse memory binding.</li>
+            <li>#BUFFER_CREATE_SPARSE_RESIDENCY_BIT specifies that the buffer <b>can</b> be partially backed using sparse memory binding. Buffers created with this flag <b>must</b> also be created with the #BUFFER_CREATE_SPARSE_BINDING_BIT flag.</li>
+            <li>#BUFFER_CREATE_SPARSE_ALIASED_BIT specifies that the buffer will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another buffer (or another portion of the same buffer). Buffers created with this flag <b>must</b> also be created with the #BUFFER_CREATE_SPARSE_BINDING_BIT flag.</li>
         </ul>
+
+        See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#sparsememory-sparseresourcefeatures">Sparse Resource Features</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features">Physical Device Features</a> for details of the sparse memory features supported on a device.
 
         <h5>See Also</h5>
         {@code VkBufferCreateFlags}
@@ -1522,12 +1170,16 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkBufferUsageFlagBits - Bitmask specifying allowed usage of a buffer
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkBufferCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#BUFFER_USAGE_TRANSFER_SRC_BIT specifies that the buffer <b>can</b> be used as the source of a <em>transfer command</em> (see the definition of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>).</li>
+            <li>#BUFFER_USAGE_TRANSFER_DST_BIT specifies that the buffer <b>can</b> be used as the destination of a transfer command.</li>
+            <li>#BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT specifies that the buffer <b>can</b> be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER.</li>
+            <li>#BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT specifies that the buffer <b>can</b> be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER.</li>
+            <li>#BUFFER_USAGE_UNIFORM_BUFFER_BIT specifies that the buffer <b>can</b> be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC.</li>
+            <li>#BUFFER_USAGE_STORAGE_BUFFER_BIT specifies that the buffer <b>can</b> be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC.</li>
+            <li>#BUFFER_USAGE_INDEX_BUFFER_BIT specifies that the buffer is suitable for passing as the {@code buffer} parameter to #CmdBindIndexBuffer().</li>
+            <li>#BUFFER_USAGE_VERTEX_BUFFER_BIT specifies that the buffer is suitable for passing as an element of the {@code pBuffers} array to #CmdBindVertexBuffers().</li>
+            <li>#BUFFER_USAGE_INDIRECT_BUFFER_BIT specifies that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), or #CmdDispatchIndirect(). It is also suitable for passing as the {@code buffer} member of ##VkIndirectCommandsTokenNVX, or {@code sequencesCountBuffer} or {@code sequencesIndexBuffer} member of ##VkCmdProcessCommandsInfoNVX</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1587,17 +1239,17 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         The type(s) of device access supported by each layout are:
 
         <ul>
-            <li>#IMAGE_LAYOUT_UNDEFINED: Supports no device access. This layout <b>must</b> only be used as the {@code initialLayout} member of ##VkImageCreateInfo or ##VkAttachmentDescription, or as the {@code oldLayout} in an image transition. When transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.</li>
-            <li>#IMAGE_LAYOUT_PREINITIALIZED: Supports no device access. This layout <b>must</b> only be used as the {@code initialLayout} member of ##VkImageCreateInfo or ##VkAttachmentDescription, or as the {@code oldLayout} in an image transition. When transitioning out of this layout, the contents of the memory are preserved. This layout is intended to be used as the initial layout for an image whose contents are written by the host, and hence the data <b>can</b> be written to memory immediately, without first executing a layout transition. Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for #IMAGE_TILING_OPTIMAL images.</li>
-            <li>#IMAGE_LAYOUT_GENERAL: Supports all types of device access.</li>
-            <li>#IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL: <b>must</b> only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.</li>
-            <li>#IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL: <b>must</b> only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.</li>
-            <li>#IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled. Only image subresources of images created with #IMAGE_USAGE_SAMPLED_BIT <b>can</b> be used as sampled image or combined image/sampler in a shader. Similarly, only image subresources of images created with #IMAGE_USAGE_INPUT_ATTACHMENT_BIT <b>can</b> be used as input attachments.</li>
-            <li>#IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.</li>
-            <li>#IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL: <b>must</b> only be used as a source image of a transfer command (see the definition of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.</li>
-            <li>#IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL: <b>must</b> only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.</li>
-            <li>#IMAGE_LAYOUT_PRESENT_SRC_KHR: <b>must</b> only be used for presenting a presentable image for display. A swapchain&#8217;s image <b>must</b> be transitioned to this layout before calling #QueuePresentKHR(), and <b>must</b> be transitioned away from this layout after calling #AcquireNextImageKHR().</li>
-            <li>#IMAGE_LAYOUT_SHARED_PRESENT_KHR: is valid only for shared presentable images, and <b>must</b> be used for any usage the image supports.</li>
+            <li>#IMAGE_LAYOUT_UNDEFINED does not support device access. This layout <b>must</b> only be used as the {@code initialLayout} member of ##VkImageCreateInfo or ##VkAttachmentDescription, or as the {@code oldLayout} in an image transition. When transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.</li>
+            <li>#IMAGE_LAYOUT_PREINITIALIZED does not support device access. This layout <b>must</b> only be used as the {@code initialLayout} member of ##VkImageCreateInfo or ##VkAttachmentDescription, or as the {@code oldLayout} in an image transition. When transitioning out of this layout, the contents of the memory are preserved. This layout is intended to be used as the initial layout for an image whose contents are written by the host, and hence the data <b>can</b> be written to memory immediately, without first executing a layout transition. Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for #IMAGE_TILING_OPTIMAL images.</li>
+            <li>#IMAGE_LAYOUT_GENERAL supports all types of device access.</li>
+            <li>#IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL <b>must</b> only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.</li>
+            <li>#IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL <b>must</b> only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.</li>
+            <li>#IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL <b>must</b> only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled. Only image subresources of images created with #IMAGE_USAGE_SAMPLED_BIT <b>can</b> be used as sampled image or combined image/sampler in a shader. Similarly, only image subresources of images created with #IMAGE_USAGE_INPUT_ATTACHMENT_BIT <b>can</b> be used as input attachments.</li>
+            <li>#IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL <b>must</b> only be used as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.</li>
+            <li>#IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL <b>must</b> only be used as a source image of a transfer command (see the definition of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.</li>
+            <li>#IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL <b>must</b> only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.</li>
+            <li>#IMAGE_LAYOUT_PRESENT_SRC_KHR <b>must</b> only be used for presenting a presentable image for display. A swapchain&#8217;s image <b>must</b> be transitioned to this layout before calling #QueuePresentKHR(), and <b>must</b> be transitioned away from this layout after calling #AcquireNextImageKHR().</li>
+            <li>#IMAGE_LAYOUT_SHARED_PRESENT_KHR is valid only for shared presentable images, and <b>must</b> be used for any usage the image supports.</li>
         </ul>
 
         For each mechanism of accessing an image in the API, there is a parameter or structure member that controls the image layout used to access the image. For transfer commands, this is a parameter to the command (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">the “Clear Commands” section</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">the “Copy Commands” section</a>). For use as a framebuffer attachment, this is a member in the substructures of the ##VkRenderPassCreateInfo (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">Render Pass</a>). For use in a descriptor set, this is a member in the ##VkDescriptorImageInfo structure (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates">the “Descriptor Set Updates” section</a>). At the time that any command buffer command accessing an image executes on any queue, the layouts of the image subresources that are accessed <b>must</b> all match the layout specified via the API controlling those accesses.
@@ -1624,7 +1276,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkImageViewType - Image view types
 
         <h5>Description</h5>
-        The exact image view type is partially implicit, based on the image's type and sample count, as well as the view creation parameters as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views-compatibility">table below</a>. This table also shows which SPIR-V OpTypeImage Dim and Arrayed parameters correspond to each image view type.
+        The exact image view type is partially implicit, based on the image's type and sample count, as well as the view creation parameters as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views-compatibility">image view compatibility table</a> for #CreateImageView(). This table also shows which SPIR-V {@code OpTypeImage} {@code Dim} and {@code Arrayed} parameters correspond to each image view type.
 
         <h5>See Also</h5>
         ##VkImageViewCreateInfo
@@ -1644,13 +1296,28 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkComponentSwizzle - Specify how a component is swizzled
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkComponentMapping, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#COMPONENT_SWIZZLE_IDENTITY specifies that the component is set to the identity swizzle.</li>
+            <li>#COMPONENT_SWIZZLE_ZERO specifies that the component is set to zero.</li>
+            <li>#COMPONENT_SWIZZLE_ONE specifies that the component is set to either 1 or 1.0, depending on whether the type of the image view format is integer or floating-point respectively, as determined by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-definition">Format Definition</a> section for each {@code VkFormat}.</li>
+            <li>#COMPONENT_SWIZZLE_R specifies that the component is set to the value of the R component of the image.</li>
+            <li>#COMPONENT_SWIZZLE_G specifies that the component is set to the value of the G component of the image.</li>
+            <li>#COMPONENT_SWIZZLE_B specifies that the component is set to the value of the B component of the image.</li>
+            <li>#COMPONENT_SWIZZLE_A specifies that the component is set to the value of the A component of the image.</li>
         </ul>
+
+        Setting the identity swizzle on a component is equivalent to setting the identity mapping on that component. That is:
+
+        <h6>Component Mappings Equivalent To ename:VK_COMPONENT_SWIZZLE_IDENTITY</h6>
+        <table class="lwjgl">
+            <thead><tr><th>Component</th><th>Identity Mapping</th></tr></thead>
+            <tbody>
+                <tr><td>{@code components.r}</td><td>#COMPONENT_SWIZZLE_R</td></tr>
+                <tr><td>{@code components.g}</td><td>#COMPONENT_SWIZZLE_G</td></tr>
+                <tr><td>{@code components.b}</td><td>#COMPONENT_SWIZZLE_B</td></tr>
+                <tr><td>{@code components.a}</td><td>#COMPONENT_SWIZZLE_A</td></tr>
+            </tbody>
+        </table>
 
         <h5>See Also</h5>
         ##VkComponentMapping
@@ -1667,16 +1334,18 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
     EnumConstant(
         """
-        VkPipelineCreateFlagBits - Bitmask controlling how a pipeline is generated
+        VkPipelineCreateFlagBits - Bitmask controlling how a pipeline is created
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkGraphicsPipelineCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT specifies that the created pipeline will not be optimized. Using this flag <b>may</b> reduce the time taken to create the pipeline.</li>
+            <li>#PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT specifies that the pipeline to be created is allowed to be the parent of a pipeline that will be created in a subsequent call to #CreateGraphicsPipelines().</li>
+            <li>#PIPELINE_CREATE_DERIVATIVE_BIT specifies that the pipeline to be created will be a child of a previously created parent pipeline.</li>
+            <li>#PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHX specifies that any shader input variables decorated as {@code DeviceIndex} will be assigned values as if they were decorated as {@code ViewIndex}.</li>
+            <li>#PIPELINE_CREATE_DISPATCH_BASE_KHX specifies that a compute pipeline <b>can</b> be used with #CmdDispatchBaseKHX() with a non-zero base workgroup.</li>
         </ul>
+
+        It is valid to set both #PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT and #PIPELINE_CREATE_DERIVATIVE_BIT. This allows a pipeline to be both a parent and possibly a child in a pipeline hierarchy. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#pipelines-pipeline-derivatives">Pipeline Derivatives</a> for more information.
 
         <h5>See Also</h5>
         {@code VkPipelineCreateFlags}
@@ -1692,12 +1361,15 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkShaderStageFlagBits - Bitmask specifying a pipeline stage
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkPipelineShaderStageCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SHADER_STAGE_VERTEX_BIT specifies the vertex stage.</li>
+            <li>#SHADER_STAGE_TESSELLATION_CONTROL_BIT specifies the tessellation control stage.</li>
+            <li>#SHADER_STAGE_TESSELLATION_EVALUATION_BIT specifies the tessellation evaluation stage.</li>
+            <li>#SHADER_STAGE_GEOMETRY_BIT specifies the geometry stage.</li>
+            <li>#SHADER_STAGE_FRAGMENT_BIT specifies the fragment stage.</li>
+            <li>#SHADER_STAGE_COMPUTE_BIT specifies the compute stage.</li>
+            <li>#SHADER_STAGE_ALL_GRAPHICS is a combination of bits used as shorthand to specify all graphics stages defined above (excluding the compute stage).</li>
+            <li>#SHADER_STAGE_ALL is a combination of bits used as shorthand to specify all shader stages supported by the device, including all additional stages which are introduced by extensions.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1719,12 +1391,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkVertexInputRate - Specify rate at which vertex attributes are pulled from buffers
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkVertexInputBindingDescription, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#VERTEX_INPUT_RATE_VERTEX specifies that vertex attribute addressing is a function of the vertex index.</li>
+            <li>#VERTEX_INPUT_RATE_INSTANCE specifies that vertex attribute addressing is a function of the instance index.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1761,9 +1430,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkPolygonMode - Control polygon rasterization mode
 
         <h5>Description</h5>
-        The {@code polygonMode} selects which method of rasterization is used for polygons. If {@code polygonMode} is #POLYGON_MODE_POINT, then the vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points. #POLYGON_MODE_LINE causes polygon edges to be drawn as line segments. #POLYGON_MODE_FILL causes polygons to render using the polygon rasterization rules in this section.
+        <ul>
+            <li>#POLYGON_MODE_POINT specifies that polygon vertices are drawn as points.</li>
+            <li>#POLYGON_MODE_LINE specifies that polygon edges are drawn as line segments.</li>
+            <li>#POLYGON_MODE_FILL specifies that polygons are rendered using the polygon rasterization rules in this section.</li>
+        </ul>
 
-        Note that these modes affect only the final rasterization of polygons: in particular, a polygon's vertices are shaded and the polygon is clipped and possibly culled before these modes are applied.
+        These modes affect only the final rasterization of polygons: in particular, a polygon's vertices are shaded and the polygon is clipped and possibly culled before these modes are applied.
 
         <h5>See Also</h5>
         ##VkPipelineRasterizationStateCreateInfo
@@ -1779,7 +1452,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCullModeFlagBits - Bitmask controlling triangle culling
 
         <h5>Description</h5>
-        If the {@code cullMode} is set to #CULL_MODE_NONE no triangles are discarded, if it is set to #CULL_MODE_FRONT_BIT front-facing triangles are discarded, if it is set to #CULL_MODE_BACK_BIT then back-facing triangles are discarded and if it is set to #CULL_MODE_FRONT_AND_BACK then all triangles are discarded. Following culling, fragments are produced for any triangles which have not been discarded.
+        <ul>
+            <li>#CULL_MODE_NONE specifies that no triangles are discarded</li>
+            <li>#CULL_MODE_FRONT_BIT specifies that front-facing triangles are discarded</li>
+            <li>#CULL_MODE_BACK_BIT specifies that back-facing triangles are discarded</li>
+            <li>#CULL_MODE_FRONT_AND_BACK specifies that all triangles are discarded.</li>
+        </ul>
+
+        Following culling, fragments are produced for any triangles which have not been discarded.
 
         <h5>See Also</h5>
         {@code VkCullModeFlags}
@@ -1796,7 +1476,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkFrontFace - Interpret polygon front-facing orientation
 
         <h5>Description</h5>
-        If {@code frontFace} is set to #FRONT_FACE_COUNTER_CLOCKWISE, a triangle with positive area is considered front-facing. If it is set to #FRONT_FACE_CLOCKWISE, a triangle with negative area is considered front-facing. Any triangle which is not front-facing is back-facing, including zero-area triangles.
+        <ul>
+            <li>#FRONT_FACE_COUNTER_CLOCKWISE specifies that a triangle with positive area is considered front-facing.</li>
+            <li>#FRONT_FACE_CLOCKWISE specifies that a triangle with negative area is considered front-facing.</li>
+        </ul>
+
+        Any triangle which is not front-facing is back-facing, including zero-area triangles.
 
         <h5>See Also</h5>
         ##VkPipelineRasterizationStateCreateInfo
@@ -1812,14 +1497,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Description</h5>
         <ul>
-            <li>#COMPARE_OP_NEVER: the test never passes.</li>
-            <li>#COMPARE_OP_LESS: the test passes when <code>R &lt; S</code>.</li>
-            <li>#COMPARE_OP_EQUAL: the test passes when <code>R = S</code>.</li>
-            <li>#COMPARE_OP_LESS_OR_EQUAL: the test passes when <code>R ≤ S</code>.</li>
-            <li>#COMPARE_OP_GREATER: the test passes when <code>R &gt; S</code>.</li>
-            <li>#COMPARE_OP_NOT_EQUAL: the test passes when <code>R ≠ S</code>.</li>
-            <li>#COMPARE_OP_GREATER_OR_EQUAL: the test passes when <code>R ≥ S</code>.</li>
-            <li>#COMPARE_OP_ALWAYS: the test always passes.</li>
+            <li>#COMPARE_OP_NEVER specifies that the test never passes.</li>
+            <li>#COMPARE_OP_LESS specifies that the test passes when <code>R &lt; S</code>.</li>
+            <li>#COMPARE_OP_EQUAL specifies that the test passes when <code>R = S</code>.</li>
+            <li>#COMPARE_OP_LESS_OR_EQUAL specifies that the test passes when <code>R ≤ S</code>.</li>
+            <li>#COMPARE_OP_GREATER specifies that the test passes when <code>R &gt; S</code>.</li>
+            <li>#COMPARE_OP_NOT_EQUAL specifies that the test passes when <code>R ≠ S</code>.</li>
+            <li>#COMPARE_OP_GREATER_OR_EQUAL specifies that the test passes when <code>R ≥ S</code>.</li>
+            <li>#COMPARE_OP_ALWAYS specifies that the test always passes.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1841,8 +1526,6 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkStencilOp - Stencil comparison function
 
         <h5>Description</h5>
-        The possible values are:
-
         <ul>
             <li>#STENCIL_OP_KEEP keeps the current value.</li>
             <li>#STENCIL_OP_ZERO sets the value to 0.</li>
@@ -2058,9 +1741,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkColorComponentFlagBits - Bitmask controlling which components are written to the framebuffer
 
         <h5>Description</h5>
-        If #COLOR_COMPONENT_R_BIT is set, then the <code>R</code> value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified. The #COLOR_COMPONENT_G_BIT, #COLOR_COMPONENT_B_BIT, and #COLOR_COMPONENT_A_BIT bits similarly control writing of the <code>G, B,</code> and <code>A</code> values.
+        <ul>
+            <li>#COLOR_COMPONENT_R_BIT specifies that the <code>R</code> value is written to the color attachment for the appropriate sample. Otherwise, the value in memory is unmodified.</li>
+            <li>#COLOR_COMPONENT_G_BIT specifies that the <code>G</code> value is written to the color attachment for the appropriate sample. Otherwise, the value in memory is unmodified.</li>
+            <li>#COLOR_COMPONENT_B_BIT specifies that the <code>B</code> value is written to the color attachment for the appropriate sample. Otherwise, the value in memory is unmodified.</li>
+            <li>#COLOR_COMPONENT_A_BIT specifies that the <code>A</code> value is written to the color attachment for the appropriate sample. Otherwise, the value in memory is unmodified.</li>
+        </ul>
 
-        The {@code colorWriteMask} is applied regardless of whether blending is enabled.
+        The color write mask operation is applied regardless of whether blending is enabled.
 
         <h5>See Also</h5>
         {@code VkColorComponentFlags}
@@ -2078,17 +1766,17 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Description</h5>
         <ul>
-            <li>#DYNAMIC_STATE_VIEWPORT indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of ##VkPipelineViewportStateCreateInfo.</li>
-            <li>#DYNAMIC_STATE_SCISSOR indicates that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetScissor() before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount} member of ##VkPipelineViewportStateCreateInfo.</li>
-            <li>#DYNAMIC_STATE_LINE_WIDTH indicates that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetLineWidth() before any draw commands that generate line primitives for the rasterizer.</li>
-            <li>#DYNAMIC_STATE_DEPTH_BIAS indicates that the {@code depthBiasConstantFactor}, {@code depthBiasClamp} and {@code depthBiasSlopeFactor} states in ##VkPipelineRasterizationStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetDepthBias() before any draws are performed with {@code depthBiasEnable} in ##VkPipelineRasterizationStateCreateInfo set to #TRUE.</li>
-            <li>#DYNAMIC_STATE_BLEND_CONSTANTS indicates that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetBlendConstants() before any draws are performed with a pipeline state with ##VkPipelineColorBlendAttachmentState member {@code blendEnable} set to #TRUE and any of the blend functions using a constant blend color.</li>
-            <li>#DYNAMIC_STATE_DEPTH_BOUNDS indicates that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetDepthBounds() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code depthBoundsTestEnable} set to #TRUE.</li>
-            <li>#DYNAMIC_STATE_STENCIL_COMPARE_MASK indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
-            <li>#DYNAMIC_STATE_STENCIL_WRITE_MASK indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
-            <li>#DYNAMIC_STATE_STENCIL_REFERENCE indicates that the {@code reference} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilReference() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
-            <li>#DYANMIC_STATE_VIEWPORT_W_SCALING_NV indicates that the {@code pViewportScalings} state in ##VkPipelineViewportWScalingStateCreateInfoNV will be ignored and <b>must</b> be set dynamically with #CmdSetViewportWScalingNV() before any draws are performed with a pipeline state with {@code VkPipelineViewportWScalingStateCreateInfo} member {@code viewportScalingEnable} set to #TRUE</li>
-            <li>#DYNAMIC_STATE_DISCARD_RECTANGLES_EXT indicates that the {@code pDiscardRectangles} state in ##VkPipelineDiscardRectangleStateCreateInfoEXT will be ignored and <b>must</b> be set dynamically with #CmdSetDiscardRectangleEXT() before any draw or clear commands. The {@code VkDiscardRectangleModeEXT} and the number of active discard rectangles is still specified by the {@code discardRectangleMode} and {@code discardRectangleCount} members of ##VkPipelineDiscardRectangleStateCreateInfoEXT.</li>
+            <li>#DYNAMIC_STATE_VIEWPORT specifies that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of ##VkPipelineViewportStateCreateInfo.</li>
+            <li>#DYNAMIC_STATE_SCISSOR specifies that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetScissor() before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount} member of ##VkPipelineViewportStateCreateInfo.</li>
+            <li>#DYNAMIC_STATE_LINE_WIDTH specifies that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetLineWidth() before any draw commands that generate line primitives for the rasterizer.</li>
+            <li>#DYNAMIC_STATE_DEPTH_BIAS specifies that the {@code depthBiasConstantFactor}, {@code depthBiasClamp} and {@code depthBiasSlopeFactor} states in ##VkPipelineRasterizationStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetDepthBias() before any draws are performed with {@code depthBiasEnable} in ##VkPipelineRasterizationStateCreateInfo set to #TRUE.</li>
+            <li>#DYNAMIC_STATE_BLEND_CONSTANTS specifies that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetBlendConstants() before any draws are performed with a pipeline state with ##VkPipelineColorBlendAttachmentState member {@code blendEnable} set to #TRUE and any of the blend functions using a constant blend color.</li>
+            <li>#DYNAMIC_STATE_DEPTH_BOUNDS specifies that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetDepthBounds() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code depthBoundsTestEnable} set to #TRUE.</li>
+            <li>#DYNAMIC_STATE_STENCIL_COMPARE_MASK specifies that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
+            <li>#DYNAMIC_STATE_STENCIL_WRITE_MASK specifies that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
+            <li>#DYNAMIC_STATE_STENCIL_REFERENCE specifies that the {@code reference} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilReference() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
+            <li>#DYNAMIC_STATE_VIEWPORT_W_SCALING_NV specifies that the {@code pViewportScalings} state in ##VkPipelineViewportWScalingStateCreateInfoNV will be ignored and <b>must</b> be set dynamically with #CmdSetViewportWScalingNV() before any draws are performed with a pipeline state with {@code VkPipelineViewportWScalingStateCreateInfo} member {@code viewportScalingEnable} set to #TRUE</li>
+            <li>#DYNAMIC_STATE_DISCARD_RECTANGLES_EXT specifies that the {@code pDiscardRectangles} state in ##VkPipelineDiscardRectangleStateCreateInfoEXT will be ignored and <b>must</b> be set dynamically with #CmdSetDiscardRectangleEXT() before any draw or clear commands. The {@code VkDiscardRectangleModeEXT} and the number of active discard rectangles is still specified by the {@code discardRectangleMode} and {@code discardRectangleCount} members of ##VkPipelineDiscardRectangleStateCreateInfoEXT.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2111,13 +1799,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkFilter - Specify filters used for texture lookups
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#FILTER_NEAREST specifies nearest filtering.</li>
+            <li>#FILTER_LINEAR specifies linear filtering.</li>
         </ul>
+
+        These filters are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-filtering">Texel Filtering</a>.
 
         <h5>See Also</h5>
         ##VkSamplerCreateInfo, #CmdBlitImage()
@@ -2132,13 +1819,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkSamplerMipmapMode - Specify mipmap mode used for texture lookups
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SAMPLER_MIPMAP_MODE_NEAREST specifies nearest filtering.</li>
+            <li>#SAMPLER_MIPMAP_MODE_LINEAR specifies linear filtering.</li>
         </ul>
+
+        These modes are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-filtering">Texel Filtering</a>.
 
         <h5>See Also</h5>
         ##VkSamplerCreateInfo
@@ -2153,12 +1839,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkSamplerAddressMode - Specify behavior of sampling with texture coordinates outside an image
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SAMPLER_ADDRESS_MODE_REPEAT specifies that the repeat wrap mode will be used.</li>
+            <li>#SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT specifies that the mirrored repeat wrap mode will be used.</li>
+            <li>#SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE specifies that the clamp to edge wrap mode will be used.</li>
+            <li>#SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER specifies that the clamp to border wrap mode will be used.</li>
+            <li>#SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE specifies that the mirror clamp to edge wrap mode will be used. This is only valid if the VK_KHR_mirror_clamp_to_edge extension is enabled.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2176,13 +1862,16 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkBorderColor - Specify border color used for texture lookups
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#BORDER_COLOR_FLOAT_TRANSPARENT_BLACK specifies a transparent, floating-point format, black color.</li>
+            <li>#BORDER_COLOR_INT_TRANSPARENT_BLACK specifies a transparent, integer format, black color.</li>
+            <li>#BORDER_COLOR_FLOAT_OPAQUE_BLACK specifies an opaque, floating-point format, black color.</li>
+            <li>#BORDER_COLOR_INT_OPAQUE_BLACK specifies an opaque, integer format, black color.</li>
+            <li>#BORDER_COLOR_FLOAT_OPAQUE_WHITE specifies an opaque, floating-point format, white color.</li>
+            <li>#BORDER_COLOR_INT_OPAQUE_WHITE specifies an opaque, integer format, white color.</li>
         </ul>
+
+        These colors are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-replacement">Texel Replacement</a>.
 
         <h5>See Also</h5>
         ##VkSamplerCreateInfo
@@ -2201,11 +1890,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkDescriptorType - Specifies the type of a descriptor in a descriptor set
 
         <h5>Description</h5>
-        If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the elements of the ##VkWriteDescriptorSet{@code ::pBufferInfo} array of ##VkDescriptorBufferInfo structures will be used to update the descriptors, and other arrays will be ignored.
-
-        If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, the ##VkWriteDescriptorSet{@code ::pTexelBufferView} array will be used to update the descriptors, and other arrays will be ignored.
-
-        If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the elements of the ##VkWriteDescriptorSet{@code ::pImageInfo} array of ##VkDescriptorImageInfo structures will be used to update the descriptors, and other arrays will be ignored.
+        <ul>
+            <li>#DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC specify that the elements of the ##VkWriteDescriptorSet{@code ::pBufferInfo} array of ##VkDescriptorBufferInfo structures will be used to update the descriptors, and other arrays will be ignored.</li>
+            <li>#DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER specify that the ##VkWriteDescriptorSet{@code ::pTexelBufferView} array will be used to update the descriptors, and other arrays will be ignored.</li>
+            <li>#DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT specify that the elements of the ##VkWriteDescriptorSet{@code ::pImageInfo} array of ##VkDescriptorImageInfo structures will be used to update the descriptors, and other arrays will be ignored.</li>
+        </ul>
 
         <h5>See Also</h5>
         ##VkDescriptorPoolSize, ##VkDescriptorSetLayoutBinding, ##VkDescriptorUpdateTemplateEntryKHR, ##VkWriteDescriptorSet
@@ -2229,12 +1918,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkDescriptorPoolCreateFlagBits - Bitmask specifying certain supported operations on a descriptor pool
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkDescriptorPoolCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT specifies that descriptor sets <b>can</b> return their individual allocations to the pool, i.e. all of #AllocateDescriptorSets(), #FreeDescriptorSets(), and #ResetDescriptorPool() are allowed. Otherwise, descriptor sets allocated from the pool <b>must</b> not be individually freed back to the pool, i.e. only #AllocateDescriptorSets() and #ResetDescriptorPool() are allowed.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2249,12 +1934,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkAttachmentDescriptionFlagBits - Bitmask specifying additional properties of an attachment
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkAttachmentDescription, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT specifies that the attachment aliases the same device memory as other attachments.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2269,12 +1950,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkAttachmentLoadOp - Specify how contents of an attachment are treated at the beginning of a subpass
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkAttachmentDescription, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#ATTACHMENT_LOAD_OP_LOAD specifies that the previous contents of the image within the render area will be preserved. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_READ_BIT.</li>
+            <li>#ATTACHMENT_LOAD_OP_CLEAR specifies that the contents within the render area will be cleared to a uniform value, which is specified when a render pass instance is begun. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
+            <li>#ATTACHMENT_LOAD_OP_DONT_CARE specifies that the previous contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2291,12 +1970,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkAttachmentStoreOp - Specify how contents of an attachment are treated at the end of a subpass
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkAttachmentDescription, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#ATTACHMENT_STORE_OP_STORE specifies the contents generated during the render pass and within the render area are written to memory. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
+            <li>#ATTACHMENT_STORE_OP_DONT_CARE specifies the contents within the render area are not needed after rendering, and <b>may</b> be discarded; the contents of the attachment will be undefined inside the render area. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2312,12 +1988,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkPipelineBindPoint - Specify the bind point of a pipeline object to a command buffer
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #CmdBindPipeline(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#PIPELINE_BIND_POINT_COMPUTE specifies binding as a compute pipeline.</li>
+            <li>#PIPELINE_BIND_POINT_GRAPHICS specifies binding as a graphics pipeline.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2333,12 +2006,63 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkAccessFlagBits - Bitmask specifying memory access types that will participate in a memory dependency
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#ACCESS_INDIRECT_COMMAND_READ_BIT specifies read access to an indirect command structure read as part of an indirect drawing or dispatch command.</li>
+            <li>#ACCESS_INDEX_READ_BIT specifies read access to an index buffer as part of an indexed drawing command, bound by #CmdBindIndexBuffer().</li>
+            <li>#ACCESS_VERTEX_ATTRIBUTE_READ_BIT specifies read access to a vertex buffer as part of a drawing command, bound by #CmdBindVertexBuffers().</li>
+            <li>#ACCESS_UNIFORM_READ_BIT specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-uniformbuffer">uniform buffer</a>.</li>
+            <li>#ACCESS_INPUT_ATTACHMENT_READ_BIT specifies read access to an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">input attachment</a> within a renderpass during fragment shading.</li>
+            <li>#ACCESS_SHADER_READ_BIT specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storagebuffer">storage buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-uniformtexelbuffer">uniform texel buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storagetexelbuffer">storage texel buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-sampledimage">sampled image</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storageimage">storage image</a>.</li>
+            <li>#ACCESS_SHADER_WRITE_BIT specifies write access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storagebuffer">storage buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storagetexelbuffer">storage texel buffer</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-storageimage">storage image</a>.</li>
+            <li>#ACCESS_COLOR_ATTACHMENT_READ_BIT specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">color attachment</a>, such as via <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#framebuffer-blending">blending</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#framebuffer-logicop">logic operations</a>, or via certain <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load operations</a>.</li>
+            <li>#ACCESS_COLOR_ATTACHMENT_WRITE_BIT specifies write access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">color or resolve attachment</a> during a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">render pass</a> or via certain <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a>.</li>
+            <li>#ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">depth/stencil attachment</a>, via <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fragops-ds-state">depth or stencil operations</a> or via certain <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load operations</a>.</li>
+            <li>#ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT specifies write access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">depth/stencil attachment</a>, via <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fragops-ds-state">depth or stencil operations</a> or via certain <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a>.</li>
+            <li>#ACCESS_TRANSFER_READ_BIT specifies read access to an image or buffer in a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy</a> operation.</li>
+            <li>#ACCESS_TRANSFER_WRITE_BIT specifies write access to an image or buffer in a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">clear</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy</a> operation.</li>
+            <li>#ACCESS_HOST_READ_BIT specifies read access by a host operation. Accesses of this type are not performed through a resource, but directly on memory.</li>
+            <li>#ACCESS_HOST_WRITE_BIT specifies write access by a host operation. Accesses of this type are not performed through a resource, but directly on memory.</li>
+            <li>#ACCESS_MEMORY_READ_BIT specifies read access via non-specific entities. These entities include the Vulkan device and host, but <b>may</b> also include entities external to the Vulkan device or otherwise not part of the core Vulkan pipeline. When included in a destination access mask, makes all available writes visible to all future read accesses on entities known to the Vulkan device.</li>
+            <li>#ACCESS_MEMORY_WRITE_BIT specifies write access via non-specific entities. These entities include the Vulkan device and host, but <b>may</b> also include entities external to the Vulkan device or otherwise not part of the core Vulkan pipeline. When included in a source access mask, all writes that are performed by entities known to the Vulkan device are made available. When included in a destination access mask, makes all available writes visible to all future write accesses on entities known to the Vulkan device.</li>
+            <li>#ACCESS_COMMAND_PROCESS_READ_BIT_NVX specifies reads from {@code VkBuffer} inputs to #CmdProcessCommandsNVX().</li>
+            <li>#ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX specifies writes to the target command buffer in #CmdProcessCommandsNVX().</li>
         </ul>
+
+        Certain access types are only performed by a subset of pipeline stages. Any synchronization command that takes both stage masks and access masks uses both to define the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes">access scopes</a> - only the specified access types performed by the specified stages are included in the access scope. An application <b>must</b> not specify an access flag in a synchronization command if it does not include a pipeline stage in the corresponding stage mask that is able to perform accesses of that type. The following table lists, for each access flag, which pipeline stages <b>can</b> perform that type of access.
+
+        <h6>Supported access types</h6>
+        <table class="lwjgl">
+            <thead><tr><th>Access flag</th><th>Supported pipeline stages</th></tr></thead>
+            <tbody>
+                <tr><td>#ACCESS_INDIRECT_COMMAND_READ_BIT</td><td>#PIPELINE_STAGE_DRAW_INDIRECT_BIT</td></tr>
+                <tr><td>#ACCESS_INDEX_READ_BIT</td><td>#PIPELINE_STAGE_VERTEX_INPUT_BIT</td></tr>
+                <tr><td>#ACCESS_VERTEX_ATTRIBUTE_READ_BIT</td><td>#PIPELINE_STAGE_VERTEX_INPUT_BIT</td></tr>
+                <tr><td>#ACCESS_UNIFORM_READ_BIT</td><td>#PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_INPUT_ATTACHMENT_READ_BIT</td><td>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_SHADER_READ_BIT</td><td>#PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_SHADER_WRITE_BIT</td><td>#PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_COLOR_ATTACHMENT_READ_BIT</td><td>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</td></tr>
+                <tr><td>#ACCESS_COLOR_ATTACHMENT_WRITE_BIT</td><td>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</td></tr>
+                <tr><td>#ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT</td><td>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT, or #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT</td></tr>
+                <tr><td>#ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT</td><td>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT, or #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT</td></tr>
+                <tr><td>#ACCESS_TRANSFER_READ_BIT</td><td>#PIPELINE_STAGE_TRANSFER_BIT</td></tr>
+                <tr><td>#ACCESS_TRANSFER_WRITE_BIT</td><td>#PIPELINE_STAGE_TRANSFER_BIT</td></tr>
+                <tr><td>#ACCESS_HOST_READ_BIT</td><td>#PIPELINE_STAGE_HOST_BIT</td></tr>
+                <tr><td>#ACCESS_HOST_WRITE_BIT</td><td>#PIPELINE_STAGE_HOST_BIT</td></tr>
+                <tr><td>#ACCESS_MEMORY_READ_BIT</td><td>N/A</td></tr>
+                <tr><td>#ACCESS_MEMORY_WRITE_BIT</td><td>N/A</td></tr>
+                <tr><td>#ACCESS_COMMAND_PROCESS_READ_BIT_NVX</td><td>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX</td></tr>
+                <tr><td>#ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX</td><td>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX</td></tr>
+            </tbody>
+        </table>
+
+        If a memory object does not have the #MEMORY_PROPERTY_HOST_COHERENT_BIT property, then #FlushMappedMemoryRanges() <b>must</b> be called in order to guarantee that writes to the memory object from the host are made visible to the #ACCESS_HOST_WRITE_BIT <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-types">access type</a>, where it <b>can</b> be further made available to the device by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization">synchronization commands</a>. Similarly, #InvalidateMappedMemoryRanges() <b>must</b> be called to guarantee that writes which are visible to the #ACCESS_HOST_READ_BIT <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-types">access type</a> are made visible to host operations.
+
+        If the memory object does have the #MEMORY_PROPERTY_HOST_COHERENT_BIT property flag, writes to the memory object from the host are automatically made visible to the #ACCESS_HOST_WRITE_BIT <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-types">access type</a>. Similarly, writes made visible to the #ACCESS_HOST_READ_BIT <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-types">access type</a> are automatically made visible to the host.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The #QueueSubmit() command <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-host-writes">automatically guarantees that host writes flushed to #ACCESS_HOST_WRITE_BIT are made available</a> if they were flushed before the command executed, so in most cases an explicit memory barrier is not needed for this case. In the few circumstances where a submit does not occur between the host write and the device read access, writes <b>can</b> be made available by using an explicit memory barrier.
+        </div>
 
         <h5>See Also</h5>
         {@code VkAccessFlags}
@@ -2368,12 +2092,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkDependencyFlagBits - Bitmask specifying how execution and memory dependencies are formed
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #CmdPipelineBarrier(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DEPENDENCY_BY_REGION_BIT specifies that dependencies will be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions">framebuffer-local</a>.</li>
+            <li>#DEPENDENCY_VIEW_LOCAL_BIT_KHX specifies that a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-barriers-subpass-self-dependencies">subpass has more than one view</a>.</li>
+            <li>#DEPENDENCY_DEVICE_GROUP_BIT_KHX specifies that dependencies are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-device-local-dependencies">non-device-local dependency</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2388,12 +2110,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandPoolCreateFlagBits - Bitmask specifying usage behavior for a command pool
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkCommandPoolCreateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#COMMAND_POOL_CREATE_TRANSIENT_BIT indicates that command buffers allocated from the pool will be short-lived, meaning that they will be reset or freed in a relatively short timeframe. This flag <b>may</b> be used by the implementation to control memory allocation behavior within the pool.</li>
+            <li>#COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT allows any command buffer allocated from a pool to be individually reset to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>; either by calling #ResetCommandBuffer(), or via the implicit reset when calling #BeginCommandBuffer(). If this flag is not set on a pool, then #ResetCommandBuffer() <b>must</b> not be called for any command buffer allocated from that pool.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2409,12 +2128,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandPoolResetFlagBits - Bitmask controlling behavior of a command pool reset
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #ResetCommandPool(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT specifies that resetting a command pool recycles all of the resources from the command pool back to the system.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2426,15 +2141,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
     EnumConstant(
         """
-        VkCommandBufferLevel - Structure specifying a command buffer level
+        VkCommandBufferLevel - Enumerant specifying a command buffer level
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkCommandBufferAllocateInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#COMMAND_BUFFER_LEVEL_PRIMARY specifies a primary command buffer.</li>
+            <li>#COMMAND_BUFFER_LEVEL_SECONDARY specifies a secondary command buffer.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2450,12 +2162,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandBufferUsageFlagBits - Bitmask specifying usage behavior for command buffer
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkCommandBufferBeginInfo, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT specifies that each recording of the command buffer will only be submitted once, and the command buffer will be reset and recorded again between each submission.</li>
+            <li>#COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT specifies that a secondary command buffer is considered to be entirely inside a render pass. If this is a primary command buffer, then this bit is ignored.</li>
+            <li>#COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT specifies that a command buffer <b>can</b> be resubmitted to a queue while it is in the <em>pending state</em>, and recorded into multiple primary command buffers.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2472,12 +2182,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkQueryControlFlagBits - Bitmask specifying constraints on a query
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #CmdBeginQuery(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#QUERY_CONTROL_PRECISE_BIT specifies the precision of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-occlusion">occlusion queries</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2492,12 +2198,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandBufferResetFlagBits - Bitmask controlling behavior of a command buffer reset
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #ResetCommandBuffer(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT specifies that most or all memory resources currently owned by the command buffer <b>should</b> be returned to the parent command pool. If this flag is not set, then the command buffer <b>may</b> hold onto memory resources and reuse them when recording commands. {@code commandBuffer} is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2512,12 +2214,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkStencilFaceFlagBits - Bitmask specifying sets of stencil state for which to update the compare mask
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #CmdSetStencilCompareMask(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#STENCIL_FACE_FRONT_BIT specifies that only the front set of stencil state is updated.</li>
+            <li>#STENCIL_FACE_BACK_BIT specifies that only the back set of stencil state is updated.</li>
+            <li>#STENCIL_FRONT_AND_BACK is the combination of #STENCIL_FACE_FRONT_BIT and #STENCIL_FACE_BACK_BIT, and specifies that both sets of stencil state are updated.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2534,16 +2234,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkIndexType - Type of index buffer indices
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #CmdBindIndexBuffer(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#INDEX_TYPE_UINT16 specifies that indices are 16-bit unsigned integer values.</li>
+            <li>#INDEX_TYPE_UINT32 specifies that indices are 32-bit unsigned integer values.</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkObjectTableIndexBufferEntryNVX, #CmdBindIndexBuffer()
+        UNKNOWN:Type, ##VkObjectTableIndexBufferEntryNVX, UNKNOWN:buffer, UNKNOWN:index, UNKNOWN:indices, UNKNOWN:of, #CmdBindIndexBuffer()
         """,
 
         "INDEX_TYPE_UINT16".."0",
@@ -2555,12 +2252,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkSubpassContents - Specify how commands in the first subpass of a render pass are provided
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for #CmdBeginRenderPass(), where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#SUBPASS_CONTENTS_INLINE specifies that the contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers <b>must</b> not be executed within the subpass.</li>
+            <li>#SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS specifies that the contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2625,6 +2319,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Description</h5>
         #CreateInstance() verifies that the requested layers exist. If not, #CreateInstance() will return #ERROR_LAYER_NOT_PRESENT. Next #CreateInstance() verifies that the requested extensions are supported (e.g. in the implementation or in any enabled instance layer) and if any requested extension is not supported, #CreateInstance() <b>must</b> return #ERROR_EXTENSION_NOT_PRESENT. After verifying and enabling the instance layers and extensions the {@code VkInstance} object is created and returned to the application. If a requested extension is only supported by a layer, both the layer and the extension need to be specified at #CreateInstance() time for the creation to succeed.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#extended-functionality-extensions-dependencies">required extensions</a> for each extension in the ##VkInstanceCreateInfo{@code ::ppEnabledExtensionNames} list <b>must</b> also be present in that list.</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2859,11 +2558,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         """,
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities."),
-        VkFormat.IN("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}."),
-        VkImageType.IN("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}."),
-        VkImageTiling.IN("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}."),
-        VkImageUsageFlags.IN("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
-        VkImageCreateFlags.IN("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
+        VkFormat.IN("format", "a {@code VkFormat} value specifying the image format, corresponding to ##VkImageCreateInfo{@code ::format}."),
+        VkImageType.IN("type", "a {@code VkImageType} value specifying the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}."),
+        VkImageTiling.IN("tiling", "a {@code VkImageTiling} value specifying the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}."),
+        VkImageUsageFlags.IN("usage", "a bitmask of {@code VkImageUsageFlagBits} specifying the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
+        VkImageCreateFlags.IN("flags", "a bitmask of {@code VkImageCreateFlagBits} specifying additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
         VkImageFormatProperties.p.OUT("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned.")
     )
 
@@ -3002,7 +2701,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>If {@code instance} is not {@code NULL}, {@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-            <li>{@code pName} <b>must</b> be a null-terminated string</li>
+            <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3050,7 +2749,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pName} <b>must</b> be a null-terminated string</li>
+            <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3079,9 +2778,16 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkDevice*                                   pDevice);</pre></code>
 
         <h5>Description</h5>
-        #CreateDevice() verifies that the requested extensions are supported (e.g. in the implementation or in any enabled instance layer) and if any requested extension is not supported, #CreateDevice() <b>must</b> return #ERROR_EXTENSION_NOT_PRESENT. After verifying and enabling the extensions the {@code VkDevice} object is created and returned to the application. If a requested extension is only supported by a layer, both the layer and the extension need to be specified at #CreateInstance() time for the creation to succeed.
+        #CreateDevice() verifies that extensions and features requested in the {@code ppEnabledExtensionNames} and {@code pEnabledFeatures} members of {@code pCreateInfo}, respectively, are supported by the implementation. If any requested extension is not supported, #CreateDevice() <b>must</b> return #ERROR_EXTENSION_NOT_PRESENT. If any requested feature is not supported, #CreateDevice() <b>must</b> return #ERROR_FEATURE_NOT_PRESENT. Support for extensions <b>can</b> be checked before creating a device by querying #EnumerateDeviceExtensionProperties(). Support for features <b>can</b> similarly be checked by querying #GetPhysicalDeviceFeatures().
+
+        After verifying and enabling the extensions the {@code VkDevice} object is created and returned to the application. If a requested extension is only supported by a layer, both the layer and the extension need to be specified at #CreateInstance() time for the creation to succeed.
 
         Multiple logical devices <b>can</b> be created from the same physical device. Logical device creation <b>may</b> fail due to lack of device-specific resources (in addition to the other errors). If that occurs, #CreateDevice() will return #ERROR_TOO_MANY_OBJECTS.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#extended-functionality-extensions-dependencies">required extensions</a> for each extension in the ##VkDeviceCreateInfo{@code ::ppEnabledExtensionNames} list <b>must</b> also be present in that list.</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -3191,7 +2897,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>If {@code pLayerName} is not {@code NULL}, {@code pLayerName} <b>must</b> be a null-terminated string</li>
+            <li>If {@code pLayerName} is not {@code NULL}, {@code pLayerName} <b>must</b> be a null-terminated UTF-8 string</li>
             <li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
             <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkExtensionProperties structures</li>
         </ul>
@@ -3242,7 +2948,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>If {@code pLayerName} is not {@code NULL}, {@code pLayerName} <b>must</b> be a null-terminated string</li>
+            <li>If {@code pLayerName} is not {@code NULL}, {@code pLayerName} <b>must</b> be a null-terminated UTF-8 string</li>
             <li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
             <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkExtensionProperties structures</li>
         </ul>
@@ -3728,7 +3434,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         It is an application error to call #MapMemory() on a memory object that is already mapped.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        #MapMemory() will fail if the implementation is unable to allocate an appropriately sized contiguous virtual address range, e.g. due to virtual address space fragmentation or platform limits. In such cases, #MapMemory() <b>must</b> return VK_ERROR_MEMORY_MAP_FAILED. The application <b>can</b> improve the likelihood of success by reducing the size of the mapped range and/or removing unneeded mappings using fname:VkUnmapMemory.
+        #MapMemory() will fail if the implementation is unable to allocate an appropriately sized contiguous virtual address range, e.g. due to virtual address space fragmentation or platform limits. In such cases, #MapMemory() <b>must</b> return #ERROR_MEMORY_MAP_FAILED. The application <b>can</b> improve the likelihood of success by reducing the size of the mapped range and/or removing unneeded mappings using fname:VkUnmapMemory.
         </div>
 
         #MapMemory() does not check whether the device memory is currently in use before returning the host-accessible pointer. The application <b>must</b> guarantee that any previously submitted command that writes to this range has completed before the host reads from or writes to that range, and that any previously submitted command that reads from that range has completed before the host writes to that region (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-host-writes">here</a> for details on fulfilling such a guarantee). If the device memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, these guarantees <b>must</b> be made for an extended range: the application <b>must</b> round down the start of the range to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}, and round the end of the range up to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}.
@@ -5152,21 +4858,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
         void_p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
         VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code pData}."),
-        VkQueryResultFlags.IN("flags", """a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkQueryResultFlagBits {
-￿    VK_QUERY_RESULT_64_BIT = 0x00000001,
-￿    VK_QUERY_RESULT_WAIT_BIT = 0x00000002,
-￿    VK_QUERY_RESULT_WITH_AVAILABILITY_BIT = 0x00000004,
-￿    VK_QUERY_RESULT_PARTIAL_BIT = 0x00000008,
-￿} VkQueryResultFlagBits;</pre></code>
-
-        <ul>
-            <li>#QUERY_RESULT_64_BIT indicates the results will be written as an array of 64-bit unsigned integer values. If this bit is not set, the results will be written as an array of 32-bit unsigned integer values.</li>
-            <li>#QUERY_RESULT_WAIT_BIT indicates that Vulkan will wait for each query&#8217;s status to become available before retrieving its results.</li>
-            <li>#QUERY_RESULT_WITH_AVAILABILITY_BIT indicates that the availability status accompanies the results.</li>
-            <li>#QUERY_RESULT_PARTIAL_BIT indicates that returning partial results is acceptable.</li>
-        </ul>""")
+        VkQueryResultFlags.IN("flags", "a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned.")
     )
 
     // Buffer commands
@@ -5833,7 +5525,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         The first four bytes encode the length of the entire pipeline header, in bytes. This value includes all fields in the header including the pipeline cache version field and the size of the length field.
 
-        The next four bytes encode the pipeline cache version. This field is interpreted as a {@code VkPipelineCacheHeaderVersion} value, and <b>must</b> have one of the following values:
+        The next four bytes in the header returned by #GetPipelineCacheData() encode the pipeline cache version. This field is interpreted as a {@code VkPipelineCacheHeaderVersion} value, and <b>must</b> have one of the following values:
 
         <code><pre>
 ￿typedef enum VkPipelineCacheHeaderVersion {
@@ -7094,13 +6786,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         VkDevice.IN("device", "the logical device that owns the command pool."),
         VkCommandPool.IN("commandPool", "the command pool to reset."),
-        VkCommandPoolResetFlags.IN("flags", """contains additional flags controlling the behavior of the reset. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkCommandPoolResetFlagBits {
-￿    VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
-￿} VkCommandPoolResetFlagBits;</pre></code>
-
-        If {@code flags} includes #COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT, resetting a command pool recycles all of the resources from the command pool back to the system.""")
+        VkCommandPoolResetFlags.IN("flags", "a bitmask of {@code VkCommandPoolResetFlagBits} controlling the reset operation.")
     )
 
     // Command buffer commands
@@ -7361,13 +7047,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer <b>can</b> be in any state other than <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#commandbuffers-lifecycle\">pending</a>, and is moved into the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#commandbuffers-lifecycle\">initial state</a>."),
-        VkCommandBufferResetFlags.IN("flags", """a bitmask controlling the reset operation. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkCommandBufferResetFlagBits {
-￿    VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
-￿} VkCommandBufferResetFlagBits;</pre></code>
-
-        If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer <b>should</b> be returned to the parent command pool. If this flag is not set, then the command buffer <b>may</b> hold onto memory resources and reuse them when recording commands. {@code commandBuffer} is moved to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">initial state</a>.""")
+        VkCommandBufferResetFlags.IN("flags", "a bitmask of {@code VkCommandBufferResetFlagBits} controlling the reset operation.")
     )
 
     // Command buffer building commands
@@ -7422,14 +7102,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer that the pipeline will be bound to."),
-        VkPipelineBindPoint.IN("pipelineBindPoint", """specifies the bind point, and <b>must</b> have one of the values
-<code><pre>
-￿typedef enum VkPipelineBindPoint {
-￿    VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
-￿    VK_PIPELINE_BIND_POINT_COMPUTE = 1,
-￿} VkPipelineBindPoint;</pre></code>
-
-        specifying whether {@code pipeline} will be bound as a compute (#PIPELINE_BIND_POINT_COMPUTE) or graphics (#PIPELINE_BIND_POINT_GRAPHICS) pipeline. There are separate bind points for each of graphics and compute, so binding one does not disturb the other."""),
+        VkPipelineBindPoint.IN("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying whether to bind to the compute or graphics bind point. Binding one does not disturb the other."),
         VkPipeline.IN("pipeline", "the pipeline to be bound.")
     )
 
@@ -7507,7 +7180,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    const VkRect2D*                             pScissors);</pre></code>
 
         <h5>Description</h5>
-        The scissor rectangles taken from element <code>i</code> of {@code pScissors} replace the current state for the scissor index <code>firstScissor + i</code>, for <code>i</code> in <code>[0, scissorCount)</code>.
+        The scissor rectangles taken from element <code>i</code> of {@code pScissors} replace the current state for the scissor index <code>firstScissor {plus} i</code>, for <code>i</code> in <code>[0, scissorCount)</code>.
 
         Each scissor rectangle is described by a ##VkRect2D structure, with the {@code offset.x} and {@code offset.y} values determining the upper left corner of the scissor rectangle, and the {@code extent.width} and {@code extent.height} values determining the size in pixels.
 
@@ -7519,8 +7192,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiViewport">multiple viewports</a> feature is not enabled, {@code firstScissor} <b>must</b> be 0</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
             <li>The {@code x} and {@code y} members of {@code offset} <b>must</b> be greater than or equal to 0</li>
-            <li>Evaluation of ({@code offset.x} + {@code extent.width}) <b>must</b> not cause a signed integer addition overflow</li>
-            <li>Evaluation of ({@code offset.y} + {@code extent.height}) <b>must</b> not cause a signed integer addition overflow</li>
+            <li>Evaluation of <code>(offset.x + extent.width)</code> <b>must</b> not cause a signed integer addition overflow</li>
+            <li>Evaluation of <code>(offset.y + extent.height)</code> <b>must</b> not cause a signed integer addition overflow</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -7560,7 +7233,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         Set the dynamic line width state.
 
         <h5>C Specification</h5>
-        The line width is set by the {@code lineWidth} property of ##VkPipelineRasterizationStateCreateInfo in the currently active pipeline if the pipeline was not created with #DYNAMIC_STATE_LINE_WIDTH enabled. Otherwise, the line width is set by calling #CmdSetLineWidth():
+        The line width is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::lineWidth} property of the currently active pipeline, if the pipeline was not created with #DYNAMIC_STATE_LINE_WIDTH enabled.
+
+        Otherwise, the line width is set by calling #CmdSetLineWidth():
 
         <code><pre>
 ￿void vkCmdSetLineWidth(
@@ -7810,19 +7485,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkStencilFaceFlags.IN("faceMask", """a bitmask specifying the set of stencil state for which to update the compare mask. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkStencilFaceFlagBits {
-￿    VK_STENCIL_FACE_FRONT_BIT = 0x00000001,
-￿    VK_STENCIL_FACE_BACK_BIT = 0x00000002,
-￿    VK_STENCIL_FRONT_AND_BACK = 0x00000003,
-￿} VkStencilFaceFlagBits;</pre></code>
-
-        <ul>
-            <li>#STENCIL_FACE_FRONT_BIT indicates that only the front set of stencil state is updated.</li>
-            <li>#STENCIL_FACE_BACK_BIT indicates that only the back set of stencil state is updated.</li>
-            <li>#STENCIL_FRONT_AND_BACK is the combination of #STENCIL_FACE_FRONT_BIT and #STENCIL_FACE_BACK_BIT and indicates that both sets of stencil state are updated.</li>
-        </ul>"""),
+        VkStencilFaceFlags.IN("faceMask", "a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the compare mask."),
         uint32_t.IN("compareMask", "the new value to use as the stencil compare mask.")
     )
 
@@ -8046,12 +7709,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
         VkBuffer.IN("buffer", "the buffer being bound."),
         VkDeviceSize.IN("offset", "the starting offset in bytes within {@code buffer} used in index buffer address calculations."),
-        VkIndexType.IN("indexType", """selects whether indices are treated as 16 bits or 32 bits. Possible values include:
-<code><pre>
-￿typedef enum VkIndexType {
-￿    VK_INDEX_TYPE_UINT16 = 0,
-￿    VK_INDEX_TYPE_UINT32 = 1,
-￿} VkIndexType;</pre></code>""")
+        VkIndexType.IN("indexType", "a {@code VkIndexType} value specifying whether indices are treated as 16 bits or 32 bits.")
     )
 
     void(
@@ -8071,7 +7729,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    const VkDeviceSize*                         pOffsets);</pre></code>
 
         <h5>Description</h5>
-        The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent draw commands.
+        The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding {plus} i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent draw commands.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -8218,7 +7876,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
             <li>For a given vertex buffer binding, any attribute data fetched <b>must</b> be entirely contained within the corresponding vertex buffer binding, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fxvertex-input">the “Vertex Input Description” section</a></li>
             <li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
             <li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
-            <li>({@code indexSize} * ({@code firstIndex} + {@code indexCount}) + {@code offset}) <b>must</b> be less than or equal to the size of the currently bound index buffer, with indexSize being based on the type specified by {@code indexType}, where the index buffer, {@code indexType}, and {@code offset} are specified via #CmdBindIndexBuffer()</li>
+            <li><code>(indexSize * (firstIndex + indexCount) + offset)</code> <b>must</b> be less than or equal to the size of the currently bound index buffer, with indexSize being based on the type specified by {@code indexType}, where the index buffer, {@code indexType}, and {@code offset} are specified via #CmdBindIndexBuffer()</li>
             <li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
             <li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
@@ -9401,6 +9059,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
             <li>{@code dstImageLayout} <b>must</b> be #IMAGE_LAYOUT_SHARED_PRESENT_KHR, #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
             <li>If {@code dstImage} was created with {@code tiling} equal to #IMAGE_TILING_LINEAR, {@code dstImage} <b>must</b> have been created with a {@code format} that supports being a color attachment, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>If {@code dstImage} was created with {@code tiling} equal to #IMAGE_TILING_OPTIMAL, {@code dstImage} <b>must</b> have been created with a {@code format} that supports being a color attachment, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
+            <li>{@code srcImage} and {@code dstImage} <b>must</b> have been created with the same image format</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -9563,7 +9222,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
         VkEvent.IN("event", "the event that will be unsignaled."),
-        VkPipelineStageFlags.IN("stageMask", "specifies the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a> used to determine when the {@code event} is unsignaled.")
+        VkPipelineStageFlags.IN("stageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a> used to determine when the {@code event} is unsignaled.")
     )
 
     void(
@@ -9657,8 +9316,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
         AutoSize("pEvents")..uint32_t.IN("eventCount", "the length of the {@code pEvents} array."),
         const..VkEvent.p.IN("pEvents", "an array of event object handles to wait on."),
-        VkPipelineStageFlags.IN("srcStageMask", "the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a>"),
-        VkPipelineStageFlags.IN("dstStageMask", "the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">destination stage mask</a>."),
+        VkPipelineStageFlags.IN("srcStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a>."),
+        VkPipelineStageFlags.IN("dstStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">destination stage mask</a>."),
         AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array."),
         nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of ##VkMemoryBarrier structures."),
         AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the length of the {@code pBufferMemoryBarriers} array."),
@@ -9756,19 +9415,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkPipelineStageFlags.IN("srcStageMask", "defines a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">source stage mask</a>."),
-        VkPipelineStageFlags.IN("dstStageMask", "defines a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">destination stage mask</a>."),
-        VkDependencyFlags.IN("dependencyFlags", """a bitmask of {@code VkDependencyFlagBits}. The bits that <b>can</b> be included in {@code dependencyFlags} are:
-<code><pre>
-￿typedef enum VkDependencyFlagBits {
-￿    VK_DEPENDENCY_BY_REGION_BIT = 0x00000001,
-￿    VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX = 0x00000002,
-￿    VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX = 0x00000004,
-￿} VkDependencyFlagBits;</pre></code>
-
-        <ul>
-            <li>#DEPENDENCY_BY_REGION_BIT signifies that dependencies will be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions">framebuffer-local</a>.</li>
-        </ul>"""),
+        VkPipelineStageFlags.IN("srcStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">source stage mask</a>."),
+        VkPipelineStageFlags.IN("dstStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">destination stage mask</a>."),
+        VkDependencyFlags.IN("dependencyFlags", "a bitmask of {@code VkDependencyFlagBits} specifying how execution and memory dependencies are formed."),
         AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array."),
         nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of ##VkMemoryBarrier structures."),
         AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the length of the {@code pBufferMemoryBarriers} array."),
@@ -9838,11 +9487,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
         VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query."),
         uint32_t.IN("query", "the query index within the query pool that will contain the results."),
-        VkQueryControlFlags.IN("flags", """a bitmask indicating constraints on the types of queries that <b>can</b> be performed. Bits which <b>can</b> be set include:
-<code><pre>
-￿typedef enum VkQueryControlFlagBits {
-￿    VK_QUERY_CONTROL_PRECISE_BIT = 0x00000001,
-￿} VkQueryControlFlagBits;</pre></code>""")
+        VkQueryControlFlags.IN("flags", "a bitmask of {@code VkQueryControlFlagBits} specifying constraints on the types of queries that <b>can</b> be performed.")
     )
 
     void(
@@ -9915,7 +9560,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    uint32_t                                    queryCount);</pre></code>
 
         <h5>Description</h5>
-        When executed on a queue, this command sets the status of query indices <code>[firstQuery, firstQuery + queryCount - 1]</code> to unavailable.
+        When executed on a queue, this command sets the status of query indices <code>[firstQuery, firstQuery {plus} queryCount - 1]</code> to unavailable.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -10227,14 +9872,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer in which to record the command."),
         const..VkRenderPassBeginInfo.p.IN("pRenderPassBegin", "a pointer to a ##VkRenderPassBeginInfo structure (defined below) which indicates the render pass to begin an instance of, and the framebuffer the instance uses."),
-        VkSubpassContents.IN("contents", """specifies how the commands in the first subpass will be provided, and is one of the values:
-<code><pre>
-￿typedef enum VkSubpassContents {
-￿    VK_SUBPASS_CONTENTS_INLINE = 0,
-￿    VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS = 1,
-￿} VkSubpassContents;</pre></code>
-
-        If {@code contents} is #SUBPASS_CONTENTS_INLINE, the contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers <b>must</b> not be executed within the subpass. If {@code contents} is #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS, the contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().""")
+        VkSubpassContents.IN("contents", "a {@code VkSubpassContents} value specifying how the commands in the first subpass will be provided.")
     )
 
     void(

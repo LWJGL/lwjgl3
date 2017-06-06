@@ -83,13 +83,17 @@ val KHX_external_semaphore_capabilities = "KHXExternalSemaphoreCapabilities".nat
         VkExternalSemaphoreHandleTypeFlagBitsKHX - Bitmask of valid external semaphore handle types
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkPhysicalDeviceExternalSemaphoreInfoKHX, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX specifies a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls {@code dup}, {@code dup2}, {@code close}, and the non-standard system call {@code dup3}. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
+            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX specifies an NT handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the functions {@code DuplicateHandle}, {@code CloseHandle}, {@code CompareObjectHandles}, {@code GetHandleInformation}, and {@code SetHandleInformation}. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
+            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX specifies a global share handle that has only limited valid usage outside of Vulkan and other compatible APIs. It is not compatible with any native APIs. It does not own a reference to the underlying synchronization primitive represented its Vulkan semaphore object, and will therefore become invalid when all Vulkan semaphore objects associated with it are destroyed.</li>
+            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX specifies an NT handle returned by code::ID3D12Device::{@code CreateSharedHandle} referring to a Direct3D 12 fence. It owns a reference to the underlying synchronization primitive associated with the Direct3D fence.</li>
+            <li>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX specifies a POSIX file descriptor handle to a Linux or Android Fence object. It can be used with any native API accepting a valid fence object file descriptor as input. It owns a reference to the underlying synchronization primitive associated with the file descriptor. Implementations which support importing this handle type <b>must</b> accept any type of fence FD supported by the native system they are running on.</li>
         </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Applications <b>must</b> not perform operations on handles of type #EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX that are specific to only one of Linux Fences or Android Fences. Implementations are free to return either type of file descriptor using this handle type. While most userspace functions accepting a fence FD are compatible with either type of fence, attempting to use the file descriptors directly with system calls compatible with only one of the fence types <b>may</b> result in undefined behavior.
+        </div>
 
         <h5>See Also</h5>
         {@code VkExternalSemaphoreHandleTypeFlagsKHX}, ##VkImportSemaphoreFdInfoKHX, ##VkPhysicalDeviceExternalSemaphoreInfoKHX, #GetSemaphoreFdKHX(), #GetSemaphoreWin32HandleKHX()
@@ -107,11 +111,9 @@ val KHX_external_semaphore_capabilities = "KHXExternalSemaphoreCapabilities".nat
         VkExternalSemaphoreFeatureFlagBitsKHX - Bitfield describing features of an external semaphore handle type
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHX specifies that handles of this type <b>can</b> be exported from Vulkan semaphore objects.</li>
+            <li>#EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHX specifies that handles of this type <b>can</b> be imported as Vulkan semaphore objects.</li>
         </ul>
 
         <h5>See Also</h5>

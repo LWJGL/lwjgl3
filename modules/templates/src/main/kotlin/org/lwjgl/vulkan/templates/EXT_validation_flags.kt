@@ -73,12 +73,9 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
         VkValidationCheckEXT - Specify validation checks to disable
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The reference page for ##VkValidationFlagsEXT, where this interface is defined.</li>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#VALIDATION_CHECK_ALL_EXT specifies that all validation checks are disabled.</li>
+            <li>#VALIDATION_CHECK_SHADERS_EXT specifies that shader validation is disabled.</li>
         </ul>
 
         <h5>See Also</h5>

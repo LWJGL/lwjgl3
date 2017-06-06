@@ -69,7 +69,8 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 
         <h5>Description</h5>
         <ul>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV indicate a handle to memory returned by #GetMemoryWin32HandleNV() or, in the case of #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, one duplicated from such a handle using {@code DuplicateHandle()}.</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV indicates a handle to memory returned by #GetMemoryWin32HandleNV().</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV indicates a handle to memory returned by #GetMemoryWin32HandleNV(), or one duplicated from such a handle using {@code DuplicateHandle()}.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV indicates a valid NT handle to memory returned by {@code IDXGIResource1::ftext:CreateSharedHandle()}, or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV indicates a handle to memory returned by {@code IDXGIResource::GetSharedHandle()}.</li>
         </ul>
@@ -90,9 +91,9 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 
         <h5>Description</h5>
         <ul>
-            <li>#EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV: External memory of the specified type <b>must</b> be created as a dedicated allocation when used in the manner specified.</li>
-            <li>#EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV: The implementation supports exporting handles of the specified type.</li>
-            <li>#EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV: The implementation supports importing handles of the specified type.</li>
+            <li>#EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV indicates that external memory of the specified type <b>must</b> be created as a dedicated allocation when used in the manner specified.</li>
+            <li>#EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV indicates that the implementation supports exporting handles of the specified type.</li>
+            <li>#EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV indicates that the implementation supports importing handles of the specified type.</li>
         </ul>
 
         <h5>See Also</h5>

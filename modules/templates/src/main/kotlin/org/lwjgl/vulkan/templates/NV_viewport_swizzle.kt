@@ -74,15 +74,10 @@ val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassVK("NV_viewport_swizzle
 
     EnumConstant(
         """
-        VkViewportCoordinateSwizzleNV - (no short description available)
+        VkViewportCoordinateSwizzleNV - Specify how a viewport coordinate is swizzled
 
         <h5>Description</h5>
-        For more information, see:
-
-        <ul>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
-        </ul>
+        These values are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport-swizzle">Viewport Swizzle</a>.
 
         <h5>See Also</h5>
         ##VkViewportSwizzleNV
