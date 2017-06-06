@@ -121,6 +121,8 @@ private val GLESBinding = Generator.register(object : APIBinding(
         writer.println("$t${t}long $FUNCTION_ADDRESS = GLES.getICD().${function.name};")
     }
 
+    private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
+
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
         print("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps")
         if (nativeClass.functions.any { it.has<DependsOn>() }) print(", java.util.Set<String> ext")
@@ -128,7 +130,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
 
         val printPointer = { func: Func ->
             if (func.has<DependsOn>())
-                "${func.get<DependsOn>().reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+                "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
             else
                 "caps.${func.name}"
         }
