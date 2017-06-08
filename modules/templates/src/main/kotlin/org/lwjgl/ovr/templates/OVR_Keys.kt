@@ -50,7 +50,7 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
     StringConstant(
         "",
 
-        "DEBUG_HUD_STEREO_MODE".."DebugHudStereoMode", // int, allowed values are defined in enum ovrDebugHudStereoMode
+        "DEBUG_HUD_STEREO_MODE".."DebugHudStereoMode", // int, see enum ovrDebugHudStereoMode
         "DEBUG_HUD_STEREO_GUIDE_INFO_ENABLE".."DebugHudStereoGuideInfoEnable", // bool
         "DEBUG_HUD_STEREO_GUIDE_SIZE".."DebugHudStereoGuideSize2f", // float[2]
         "DEBUG_HUD_STEREO_GUIDE_POSITION".."DebugHudStereoGuidePosition3f", // float[3]

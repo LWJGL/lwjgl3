@@ -94,7 +94,7 @@ ENABLE_WARNINGS()""")
         "Tracking capability bits reported by the device. ({@code ovrTrackingCaps})",
 
         "TrackingCap_Orientation".enum("Supports orientation tracking (IMU).", 0x0010),
-        "TrackingCap_MagYawCorrection".enum("Supports yaw drift correction via a magnetometer or other means.", 0x0020),
+        "TrackingCap_MagYawCorrection".enum("Supports yaw drift correction.", 0x0020),
         "TrackingCap_Position".enum("Supports positional tracking.", 0x0040)
     ).javaDocLinks
 
@@ -182,9 +182,9 @@ ENABLE_WARNINGS()""")
         "The format of a texture. ({@code ovrTextureFormat})",
 
         "OVR_FORMAT_UNKNOWN".enum,
-        "OVR_FORMAT_B5G6R5_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
-        "OVR_FORMAT_B5G5R5A1_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
-        "OVR_FORMAT_B4G4R4A4_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
+        "OVR_FORMAT_B5G6R5_UNORM".enum("Not currently supported on PC. Requires a DirectX 11.1 device."),
+        "OVR_FORMAT_B5G5R5A1_UNORM".enum("Not currently supported on PC. Requires a DirectX 11.1 device."),
+        "OVR_FORMAT_B4G4R4A4_UNORM".enum("Not currently supported on PC. Requires a DirectX 11.1 device."),
         "OVR_FORMAT_R8G8B8A8_UNORM".enum,
         "OVR_FORMAT_R8G8B8A8_UNORM_SRGB".enum,
         "OVR_FORMAT_B8G8R8A8_UNORM".enum,
@@ -334,6 +334,7 @@ ENABLE_WARNINGS()""")
     val TrackedDeviceTypes = EnumConstant(
         "Position tracked devices. ({@code ovrTrackedDeviceType})",
 
+        "TrackedDevice_None".enum("", 0x0000),
         "TrackedDevice_HMD".enum("", 0x0001),
         "TrackedDevice_LTouch".enum("", 0x0002),
         "TrackedDevice_RTouch".enum("", 0x0004),
@@ -346,6 +347,16 @@ ENABLE_WARNINGS()""")
 
         "TrackedDevice_All".enum("", 0xFFFF)
     ).javaDocLinks
+
+    EnumConstant(
+        "Camera status flags. ({@code ovrCameraStatusFlags})",
+
+        "CameraStatus_None".enum("Initial state of camera.", 0x0),
+        "CameraStatus_Connected".enum("Bit set when the camera is connected to the system.", 0x1),
+        "CameraStatus_Calibrating".enum("Bit set when the camera is undergoing calibration.", 0x2),
+        "CameraStatus_CalibrationFailed".enum("Bit set when the camera has tried & failed calibration.", 0x4),
+        "CameraStatus_Calibrated".enum("Bit set when the camera has tried & passed calibration.", 0x8)
+    )
 
     val BoundaryTypes = EnumConstant(
         "Boundary types that specified while using the boundary system. ({@code ovrBoundaryType})",
@@ -565,7 +576,7 @@ ovr_IdentifyClient(
         """,
 
         Check(1)..ovrSession_p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
-        ovrGraphicsLuid_p.OUT(
+        ovrGraphicsLuid.p.OUT(
             "pLuid",
             """
             a system specific graphics adapter identifier that locates which graphics adapter has the HMD attached. This must match the adapter used by the
@@ -704,6 +715,25 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         ),
 
         returnDoc = "the ##OVRTrackingState that is predicted for the given {@code absTime}"
+    )
+
+    ovrResult(
+        "GetDevicePoses",
+        "Returns an array of poses, where each pose matches a device type provided by the {@code deviceTypes} array parameter.",
+
+        session,
+        ovrTrackedDeviceType.p.IN("deviceTypes", "array of device types to query for their poses"),
+        AutoSize("deviceTypes", "outDevicePoses")..int.IN(
+            "deviceCount",
+            "number of queried poses. This number must match the length of the {@code outDevicePoses} and {@code deviceTypes} array."
+        ),
+        double.IN(
+            "absTime",
+            "specifies the absolute future time to predict the return {@code ovrTrackingState} value. Use 0 to request the most recent tracking state."
+        ),
+        ovrPoseStatef.p.OUT("outDevicePoses", "array of poses, one for each device type in {@code deviceTypes} arrays"),
+
+        returnDoc = "an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success"
     )
 
     ovrTrackerPose(
@@ -1445,5 +1475,35 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         const..charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
+    )
+
+    ovrResult(
+        "GetExternalCameras",
+        "Returns the number of camera properties of all cameras.",
+
+        session,
+        nullable..ovrExternalCamera_p.OUT(
+            "cameras",
+            "the array. If #NULL or {@code *inoutCameraCount} is too small, will return #Error_InsufficientArraySize."),
+        AutoSize("cameras")..Check(1)..unsigned_int_p.INOUT(
+            "inoutCameraCount",
+            "supplies the array capacity, will return the actual number of cameras defined"
+        ),
+
+        returnDoc = "the ids of external cameras the system knows about. Returns #Error_NoExternalCameraInfo if there is not any external camera information."
+    )
+
+    ovrResult(
+        "SetExternalCameraProperties",
+        """
+        Sets the camera intrinsics and/or extrinsics stored for the {@code name} camera.
+
+        Names must be &lt; 32 characters and null-terminated.
+        """,
+
+        session,
+        const..charASCII_p.IN("name", "specifies which camera to set the intrinsics or extrinsics for"),
+        nullable..const..ovrCameraIntrinsics.p.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
+        nullable..const..ovrCameraExtrinsics.p.IN("extrinsics", "contains the extrinsic parameters to set, can be null")
     )
 }

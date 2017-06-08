@@ -17,6 +17,11 @@ fun GeneratorTargetNative.includeOVRCAPI_GL() = nativeDirective(
 #include "OVR_CAPI_GL.h"
 ENABLE_WARNINGS()""")
 
+fun GeneratorTargetNative.includeOVRCAPI_VK() = nativeDirective(
+    """DISABLE_WARNINGS()
+#include "OVR_CAPI_Vk.h"
+ENABLE_WARNINGS()""")
+
 val OVR_PACKAGE = "org.lwjgl.ovr"
 val OVR_LIBRARY = "LibOVR.initialize();"
 
@@ -212,15 +217,15 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
         ${codeBlock("{ UpTan = tan(90 degrees / 2), DownTan = tan(90 degrees / 2) }")}
         """
 
-    float.member("UpTan", "the tangent of the angle between the viewing vector and the top edge of the field of view")
-    float.member("DownTan", "the tangent of the angle between the viewing vector and the bottom edge of the field of view")
-    float.member("LeftTan", "the tangent of the angle between the viewing vector and the left edge of the field of view")
-    float.member("RightTan", "the tangent of the angle between the viewing vector and the right edge of the field of view")
+    float.member("UpTan", "tangent of the angle between the viewing vector and top edge of the FOV")
+    float.member("DownTan", "tangent of the angle between the viewing vector and bottom edge of the FOV")
+    float.member("LeftTan", "tangent of the angle between the viewing vector and left edge of the FOV")
+    float.member("RightTan", "tangent of the angle between the viewing vector and right edge of the FOV")
 }
 
 val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
 
-val ovrGraphicsLuid_p = struct(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
+val ovrGraphicsLuid = struct(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
     documentation =
         """
         Identifies a graphics device in a platform-specific way.
@@ -229,7 +234,7 @@ val ovrGraphicsLuid_p = struct(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovr
         """
 
     char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
-}.p
+}
 
 val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
@@ -245,16 +250,16 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
     short.member("FirmwareMajor", "HMD firmware major version number")
     short.member("FirmwareMinor", "HMD firmware minor version number")
 
-    unsigned_int.member("AvailableHmdCaps", "capability bits described by {@code ovrHmdCaps} which the HMD currently supports")
-    unsigned_int.member("DefaultHmdCaps", "capability bits described by {@code ovrHmdCaps} which are default for the current {@code Hmd}")
-    unsigned_int.member("AvailableTrackingCaps", "capability bits described by {@code ovrTrackingCaps} which the system currently supports")
-    unsigned_int.member("DefaultTrackingCaps", "capability bits described by {@code ovrTrackingCaps} which are default for the current system")
+    unsigned_int.member("AvailableHmdCaps", "available {@code ovrHmdCaps} bits")
+    unsigned_int.member("DefaultHmdCaps", "default {@code ovrHmdCaps} bits")
+    unsigned_int.member("AvailableTrackingCaps", "available {@code ovrTrackingCaps} bits")
+    unsigned_int.member("DefaultTrackingCaps", "default {@code ovrTrackingCaps} bits")
 
     ovrFovPort.array("DefaultEyeFov", "the recommended optical FOV for the HMD", size = "ovrEye_Count")
     ovrFovPort.array("MaxEyeFov", "the maximum optical FOV for the HMD", size = "ovrEye_Count")
 
     ovrSizei.member("Resolution", "resolution of the full HMD screen (both eyes) in pixels")
-    float.member("DisplayRefreshRate", "nominal refresh rate of the display in cycles per second at the time of HMD creation")
+    float.member("DisplayRefreshRate", "refresh rate of the display in cycles per second at the time of HMD creation")
     padding(4, "Pointer.BITS64")
 }
 
@@ -275,7 +280,7 @@ val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrac
     ovrPosef.member(
         "LeveledPose",
         """t
-        the sensor's leveled pose, aligned with gravity. This value includes position and yaw of the sensor, but not roll and pitch. It can be used as a
+        the sensor's leveled pose, aligned with gravity. This value includes pos and yaw of the sensor, but not roll and pitch. It can be used as a
         reference point to render real-world objects in the correct location.
         """
     )
@@ -487,7 +492,7 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 
     float.array(
         "IndexTriggerNoDeadzone",
-        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
+        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
         size = "ovrHand_Count"
     )
     float.array(
@@ -503,7 +508,7 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 
     float.array(
         "IndexTriggerRaw",
-        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. No deadzone or filter.",
+        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in range 0.0 to 1.0f. No deadzone or filter.",
         size = "ovrHand_Count"
     )
 
@@ -515,9 +520,52 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 
     ovrVector2f.array(
         "ThumbstickRaw",
-        "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. No deadzone or filter.",
+        "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in range -1.0f to 1.0f. No deadzone or filter.",
         size = "ovrHand_Count"
     )
+}.p
+
+val ovrCameraIntrinsics = struct(OVR_PACKAGE, "OVRCameraIntrinsics", nativeName = "ovrCameraIntrinsics") {
+    double.member("LastChangedTime", "time in seconds from last change to the parameters")
+    ovrFovPort.member("FOVPort", "angles of all 4 sides of viewport")
+    float.member("VirtualNearPlaneDistanceMeters", "near plane of the virtual camera used to match the external camera")
+    float.member("VirtualFarPlaneDistanceMeters", "far plane of the virtual camera used to match the external camera")
+    ovrSizei.member("ImageSensorPixelResolution", "height in pixels of image sensor")
+    ovrMatrix4f.member("LensDistortionMatrix", "the lens distortion matrix of camera")
+    double.member("ExposurePeriodSeconds", "how often, in seconds, the exposure is taken")
+    double.member("ExposureDurationSeconds", "length of the exposure time")
+}
+
+val ovrCameraExtrinsics = struct(OVR_PACKAGE, "OVRCameraExtrinsics", nativeName = "ovrCameraExtrinsics") {
+    double.member(
+        "LastChangedTimeSeconds",
+        "time in seconds from last change to the parameters. For instance, if the pose changes, or a camera exposure happens, this struct will be updated."
+    )
+    unsigned_int.member("CameraStatusFlags", "current Status of the camera, a mix of bits from {@code ovrCameraStatusFlags}")
+    ovrTrackedDeviceType.member(
+        "AttachedToDevice",
+        """
+        which Tracked device, if any, is the camera rigidly attached to. If set to #TrackedDevice_None, then the camera is not attached to a tracked object. If
+        the external camera moves while unattached (i.e. set to {@code ovrTrackedDevice_None}), its {@code Pose} won't be updated.
+        """
+    )
+    ovrPosef.member(
+        "RelativePose",
+        "the relative Pose of the External Camera. If {@code AttachedToDevice} is #TrackedDevice_None, then this is a absolute pose in tracking space."
+    )
+    double.member("LastExposureTimeSeconds", "the time, in seconds, when the last successful exposure was taken")
+    double.member("ExposureLatencySeconds", "estimated exposure latency to get from the exposure time to the system")
+    double.member(
+        "AdditionalLatencySeconds",
+        "additional latency to get from the exposure time of the real camera to match the render time of the virtual camera"
+    )
+}
+
+val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
+val ovrExternalCamera_p = struct(OVR_PACKAGE, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
+    charASCII.array("Name", "", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
+    ovrCameraIntrinsics.member("Intrinsics", "")
+    ovrCameraExtrinsics.member("Extrinsics", "")
 }.p
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
@@ -636,7 +684,7 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
     float.member(
         "AppQueueAheadTime",
         """
-        amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU & GPU utilization
+        amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU and GPU utilization.
 
         A value of 0.0 would mean the CPU & GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would indicate
         that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.

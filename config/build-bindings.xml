@@ -54,14 +54,15 @@ This script is included in /config/build-definitions.xml.
         <local name="dependency_problem"/>
         <condition property="dependency_problem" value="1">
             <and>
-                <or>
-                    <!--<istrue value="${binding.glfw}"/>-->
-                    <istrue value="${binding.ovr}"/>
-                </or>
-                <isfalse value="${binding.opengl}"/>
+                <istrue value="${binding.ovr}"/>
+
+                <and>
+                    <isfalse value="${binding.opengl}"/>
+                    <isfalse value="${binding.vulkan}"/>
+                </and>
             </and>
         </condition>
-        <fail if="dependency_problem" message="The OpenGL bindings are required."/>
+        <fail if="dependency_problem" message="The OpenGL or Vulkan bindings are required."/>
 
         <condition property="dependency_problem" value="1">
             <and>

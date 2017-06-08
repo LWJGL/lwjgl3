@@ -45,6 +45,8 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
         "Error_ClientSkippedShutdown".enum("The client failed to call OVR#ovr_Shutdown() or the client crashed.", "-1013"),
         "Error_ServiceDeadlockDetected".enum("The service watchdog discovered a deadlock.", "-1014"),
         "Error_InvalidOperation".enum("Function call is invalid for object's current state.", "-1015"),
+        "Error_InsufficientArraySize".enum("Increase size of output array", "-1016"),
+        "Error_NoExternalCameraInfo".enum("There is not any external camera information stored by ovrServer.", "-1017"),
 
         /* Audio error range, reserved for Audio errors. */
         "Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),
@@ -76,6 +78,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
         "Error_LibPath".enum("LibOVRRT path failure.", "-3022"),
         "Error_LibSymbols".enum("LibOVRRT symbol resolution failure.", "-3023"),
         "Error_RemoteSession".enum("Failed to connect to the service because remote connections to the service are not allowed.", "-3024"),
+        "Error_InitializeVulkan".enum("Vulkan initialization error.", "-3025"),
 
         /* Synchronization errors */
         "Error_Incomplete".enum("Requested async work not yet complete.", "-5000"),
