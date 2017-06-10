@@ -161,7 +161,7 @@ enum Artifacts {
         Platforms.ALL
     ),
     TINYEXR(
-        "lwjgl-tinyexr", "LWJGL - Tiny OpenEXR",
+        "lwjgl-tinyexr", "LWJGL - Tiny OpenEXR bindings",
         "A small library to load and save OpenEXR(.exr) images.",
         Platforms.ALL
     ),
