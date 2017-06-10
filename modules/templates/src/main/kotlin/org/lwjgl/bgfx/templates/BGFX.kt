@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."41"
+        "API_VERSION".."42"
     )
 
     ShortConstant(
@@ -533,6 +533,8 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "ATTRIB_BITANGENT".enum,
         "ATTRIB_COLOR0".enum,
         "ATTRIB_COLOR1".enum,
+        "ATTRIB_COLOR2".enum,
+        "ATTRIB_COLOR3".enum,
         "ATTRIB_INDICES".enum,
         "ATTRIB_WEIGHT".enum,
         "ATTRIB_TEXCOORD0".enum,
