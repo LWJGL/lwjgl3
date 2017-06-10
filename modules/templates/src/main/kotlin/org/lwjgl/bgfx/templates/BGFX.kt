@@ -1533,7 +1533,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
     bgfx_frame_buffer_handle_t(
         "create_frame_buffer_from_handles",
-        "Creates frame buffer.",
+        "Creates MRT frame buffer from texture handles (simple).",
 
         AutoSize("_handles")..uint8_t.IN("_num", "number of texture attachments"),
         const..bgfx_texture_handle_t.p.IN("_handles", "texture attachments"),
@@ -1544,10 +1544,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
     bgfx_frame_buffer_handle_t(
         "create_frame_buffer_from_attachment",
-        "Creates frame buffer.",
+        "Create MRT frame buffer from texture handles with specific layer and mip level.",
 
         AutoSize("_attachment")..uint8_t.IN("_num", "number of texture attachments"),
-        const..bgfx_attachment_t_p.p.IN("_attachment", "attachment texture info"),
+        const..bgfx_attachment_t_p.IN("_attachment", "attachment texture info"),
         bool.IN("_destroyTextures", "if true, textures will be destroyed when frame buffer is destroyed"),
 
         returnDoc = "handle to frame buffer object"
