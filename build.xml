@@ -832,15 +832,14 @@
             <sequential>
                 <jar destfile="${release}/${module}/${module}.jar" level="9" index="true" indexmetainf="true">
                     <manifest>
-                        <section name="org/lwjgl/">
-                            <attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
-                            <attribute name="Specification-Version" value="${build.version}"/>
-                            <attribute name="Specification-Vendor" value="lwjgl.org"/>
-                            <attribute name="Implementation-Title" value="${module}"/>
-                            <attribute name="Implementation-Version" value="${revision}"/>
-                            <attribute name="Implementation-Vendor" value="lwjgl.org"/>
-                            <attribute name="Multi-Release" value="true" if:true="@{multi-release}"/>
-                        </section>
+                        <attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
+                        <attribute name="Specification-Version" value="${build.version}"/>
+                        <attribute name="Specification-Vendor" value="lwjgl.org"/>
+                        <attribute name="Implementation-Title" value="${module}"/>
+                        <attribute name="Implementation-Version" value="${revision}"/>
+                        <attribute name="Implementation-Vendor" value="lwjgl.org"/>
+                        <attribute name="Automatic-Module-Name" value="@{package}"/>
+                        <attribute name="Multi-Release" value="true" if:true="@{multi-release}"/>
                     </manifest>
 
                     <fileset dir="${release}/${module}/native" unless:true="@{java-only}">
