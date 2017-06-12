@@ -285,7 +285,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
-        Check("width * height")..unsigned_char_p.OUT(
+        Check("width * height")..nullable..unsigned_char_p.OUT(
             "pixels",
             "a buffer in which to store the bitmap data"
         ),
