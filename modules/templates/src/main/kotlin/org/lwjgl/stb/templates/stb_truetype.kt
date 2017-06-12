@@ -416,7 +416,7 @@ int main(int arg, char **argv)
         stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
         stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
-        stbrp_rect_p.IN("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
+        Unsafe..stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
 
         returnDoc = "the number of structs written in {@code rects}"
     )
@@ -436,9 +436,9 @@ int main(int arg, char **argv)
 
         stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
         stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
+        stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
-        stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
+        Unsafe..stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
 
         returnDoc = "1 on success, 0 on failure"
     )
