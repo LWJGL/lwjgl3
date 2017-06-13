@@ -137,16 +137,16 @@ fun String.toJavaDoc(indentation: String = t, see: Array<String>? = null, since:
         StringBuilder(if (this.isEmpty()) "" else this.cleanup("$indentation * "))
             .apply {
                 if (see != null) {
-                    if (isNotEmpty()) append("\n$t *")
+                    if (isNotEmpty()) append("\n$indentation *")
                     see.forEach {
-                        if (isNotEmpty()) append("\n$t * ")
+                        if (isNotEmpty()) append("\n$indentation * ")
                         append("@see ")
                         append(it)
                     }
                 }
 
                 if (!since.isEmpty()) {
-                    if (isNotEmpty()) append("\n$t *\n$t * ")
+                    if (isNotEmpty()) append("\n$indentation *\n$indentation * ")
                     append("@since ")
                     append(since)
                 }
