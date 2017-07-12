@@ -68,6 +68,20 @@ val GLFWimage_p = struct(GLFW_PACKAGE, "GLFWImage", nativeName = "GLFWimage") {
     unsigned_char_p.member("pixels", "the pixel data of this image, arranged left-to-right, top-to-bottom")
 }.p
 
+val GLFW_GAMEPAD_STATE_BUTTONS = 16
+val GLFW_GAMEPAD_STATE_AXES = 5
+val GLFWgamepadstate_p = struct(GLFW_PACKAGE, "GLFWGamepadState", nativeName = "GLFWgamepadstate") {
+    documentation =
+        """
+        Gamepad input state
+
+        This describes the input state of a gamepad.
+        """
+
+    char.array("buttons", "The states of each gamepad button, #PRESS or #RELEASE.", GLFW_GAMEPAD_STATE_BUTTONS)
+    float.array("axes", "The states of each gamepad axis, in the range -1.0 to 1.0 inclusive.", GLFW_GAMEPAD_STATE_AXES)
+}.p
+
 // callback functions
 
 val GLFWerrorfun = "GLFWerrorfun".callback(
