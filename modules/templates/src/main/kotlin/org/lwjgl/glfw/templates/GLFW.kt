@@ -814,8 +814,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """
         Returns and clears the last error for the calling thread.
 
-        This function returns and clears the error code of the last error that occurred on the calling thread. If no error has occurred since the last call, it
-        returns #NO_ERROR.
+        This function returns and clears the error code of the last error that occurred on the calling thread and optionally a UTF-8 encoded human-readable
+        description of it. If no error has occurred since the last call, it returns #NO_ERROR (zero), and the description pointer is set to {@code NULL}.
 
         ${note(ul(
             "This function may be called before #Init().",
@@ -823,7 +823,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         ))}
         """,
 
-        returnDoc = "the last error code for the calling thread, or #NO_ERROR",
+        const..Check("1")..charUTF8_pp.IN("description", "Where to store the error description pointer, or {@code NULL}"),
+
+        returnDoc = "the last error code for the calling thread, or #NO_ERROR (zero)",
         since = "version 3.3"
     )
 
