@@ -1298,6 +1298,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         This function sets the icon of the specified window. If passed an array of candidate images, those of or closest to the sizes desired by the system are
         selected. If no images are specified, the window reverts to its default icon.
 
+        The pixels are 32-bit, little-endian, non-premultiplied RGBA, i.e. eight bits per channel with the red channel first. They are arranged canonically as
+        packed sequential rows, starting from the top-left corner.
+
         The desired image sizes varies depending on platform and system settings. The selected images will be rescaled as needed. Good sizes include 16x16,
         32x32 and 48x48.
 
@@ -2197,8 +2200,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Creates a new custom cursor image that can be set for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
         cursors are destroyed by #Terminate().
 
-        The pixels are 32-bit, little-endian, non-premultiplied RGBA, i.e. eight bits per channel. They are arranged canonically as packed sequential rows,
-        starting from the top-left corner.
+        The pixels are 32-bit, little-endian, non-premultiplied RGBA, i.e. eight bits per channel with the red channel first. They are arranged canonically as
+        packed sequential rows, starting from the top-left corner.
 
         The cursor hotspot is specified in pixels, relative to the upper-left corner of the cursor image. Like all other coordinate systems in GLFW, the X-axis
         points to the right and the Y-axis points down.

@@ -56,7 +56,12 @@ val GLFWgammaramp_p = struct(GLFW_PACKAGE, "GLFWGammaRamp", nativeName = "GLFWga
 val GLFWcursor = "GLFWcursor".p
 
 val GLFWimage_p = struct(GLFW_PACKAGE, "GLFWImage", nativeName = "GLFWimage") {
-    documentation = "Image data."
+    documentation =
+        """
+        Image data.
+
+        This describes a single 2D image. See the documentation for each related function to see what the expected pixel format is.
+        """
 
     int.member("width", "the width, in pixels, of this image")
     int.member("height", "the height, in pixels, of this image")
