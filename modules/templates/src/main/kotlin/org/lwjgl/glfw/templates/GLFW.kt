@@ -272,6 +272,43 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         "JOYSTICK_LAST".."GLFW_JOYSTICK_16"
     )
 
+    IntConstant(
+        """Gamepad buttons. See ${url("http://www.glfw.org/docs/latest/input.html\\#gamepad", "gamepad")} for how these are used.""",
+
+        "GAMEPAD_BUTTON_A".."0",
+        "GAMEPAD_BUTTON_B".."1",
+        "GAMEPAD_BUTTON_X".."2",
+        "GAMEPAD_BUTTON_Y".."3",
+        "GAMEPAD_BUTTON_LEFT_BUMPER".."4",
+        "GAMEPAD_BUTTON_RIGHT_BUMPER".."5",
+        "GAMEPAD_BUTTON_BACK".."6",
+        "GAMEPAD_BUTTON_START".."7",
+        "GAMEPAD_BUTTON_GUIDE".."8",
+        "GAMEPAD_BUTTON_LEFT_THUMB".."9",
+        "GAMEPAD_BUTTON_RIGHT_THUMB".."10",
+        "GAMEPAD_BUTTON_DPAD_UP".."11",
+        "GAMEPAD_BUTTON_DPAD_RIGHT".."12",
+        "GAMEPAD_BUTTON_DPAD_DOWN".."13",
+        "GAMEPAD_BUTTON_DPAD_LEFT".."14",
+        "GAMEPAD_BUTTON_LAST".."GLFW_GAMEPAD_BUTTON_DPAD_LEFT",
+        "GAMEPAD_BUTTON_CROSS".."GLFW_GAMEPAD_BUTTON_A",
+        "GAMEPAD_BUTTON_CIRCLE".."GLFW_GAMEPAD_BUTTON_B",
+        "GAMEPAD_BUTTON_SQUARE".."GLFW_GAMEPAD_BUTTON_X",
+        "GAMEPAD_BUTTON_TRIANGLE".."GLFW_GAMEPAD_BUTTON_Y"
+    )
+
+    IntConstant(
+        """Gamepad axes. See ${url("http://www.glfw.org/docs/latest/input.html\\#gamepad", "gamepad")} for how these are used.""",
+
+        "GAMEPAD_AXIS_LEFT_X".."0",
+        "GAMEPAD_AXIS_LEFT_Y".."1",
+        "GAMEPAD_AXIS_RIGHT_X".."2",
+        "GAMEPAD_AXIS_RIGHT_Y".."3",
+        "GAMEPAD_AXIS_LEFT_TRIGGER".."4",
+        "GAMEPAD_AXIS_RIGHT_TRIGGER".."5",
+        "GAMEPAD_AXIS_LAST".."GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER"
+    )
+
     EnumConstant(
         "Error codes.",
 
@@ -2446,7 +2483,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """
         Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
 
-        Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
         presence.
 
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2474,7 +2511,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         buttons. The hats are in the same order as returned by #GetJoystickHats() and are in the order up, right, down and left. To disable these extra
         buttons, set the #JOYSTICK_HAT_BUTTONS init hint before initialization.
 
-         Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
         presence.
 
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2519,7 +2556,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
 {
     // State of hat 2 could be right-up, right or right-down
 }""")}
-        Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
         presence.
 
         ${note(ul(
@@ -2544,7 +2581,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """
         Returns the name, encoded as UTF-8, of the specified joystick.
 
-        Querying a joystick ID with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
         presence.
 
         The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2557,6 +2594,87 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         returnDoc = "the UTF-8 encoded name of the joystick, or #NULL if the joystick is not present",
         since = "version 3.0"
+    )
+
+    intb(
+        "JoystickIsGamepad",
+        """
+        Returns whether the specified joystick is both present and has a gamepad mapping.
+
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
+        presence.
+
+        This function must only be called from the main thread.
+        """,
+
+        int.IN("jid", "the joystick id to query"),
+
+        returnDoc = "{@code true} if a joystick is both present and has a gamepad mapping or {@code false} otherwise",
+        since = "version 3.3"
+    )
+
+    intb(
+        "UpdateGamepadMappings",
+        """
+        Adds the specified SDL_GameControllerDB gamepad mappings.
+
+        This function parses the specified ASCII encoded string and updates the internal list with any gamepad mappings it finds. This string may contain either
+        a single gamepad mapping or many mappings separated by newlines. The parser supports the full format of the {@code gamecontrollerdb.txt} source file
+        including empty lines and comments.
+
+        See ${url("http://www.glfw.org/docs/latest/input.html\\#gamepad_mapping", "gamepad_mapping")} for a description of the format.
+
+        If there is already a gamepad mapping for a given GUID in the internal list, it will be replaced by the one passed to this function. If the library is
+        terminated and re-initialized the internal list will revert to the built-in default.
+
+        This function must only be called from the main thread.
+        """,
+
+        const..Check("1")..char_p.IN("string", "the string containing the gamepad mappings"),
+
+        returnDoc = "{@code ture}, or {@code false} if an error occured",
+        since = "version 3.3"
+    )
+
+    const..charUTF8_p(
+        "GetGamepadName",
+        """
+        Returns the human-readable UTF-8 encoded gamepad name for the specified joystick.
+
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
+        presence.
+
+        The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, the
+        gamepad mappings are updated or the library is terminated.
+
+        This function must only be called from the main thread.
+        """,
+
+        int.IN("jid", "the joystick to query"),
+
+        returnDoc = "the UTF-8 encoded name of the gamepad, or `NULL` if the joystick is not present, does not have a mapping or an error occurred",
+        since = "version 3.3"
+    )
+
+    intb(
+        "GetGamepadState",
+        """
+        Retrieves the state of the specified joystick remapped to an Xbox-like gamepad.
+
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
+        presence.
+
+        The Guide button may not be available for input as it is often hooked by the system or the Steam client.
+
+        Not all devices have all the buttons or axes provided by {@code GLFWGamepadState}. Unavailable buttons and axes will always report #RELEASE and 1.0
+        respectively.
+        """,
+
+        int.IN("jid", "the joystick to query"),
+        GLFWgamepadstate_p.OUT("state", "the gamepad input state of the joystick"),
+
+        returnDoc = "{@code true} if successful, or {@code false} if no joystick is connected, it has no gamepad mapping or an error occured",
+        since = "version 3.3"
     )
 
     GLFWjoystickfun(
