@@ -78,7 +78,7 @@ val GLFWgamepadstate_p = struct(GLFW_PACKAGE, "GLFWGamepadState", nativeName = "
         This describes the input state of a gamepad.
         """
 
-    char.array("buttons", "The states of each gamepad button, #PRESS or #RELEASE.", GLFW_GAMEPAD_STATE_BUTTONS)
+    unsigned_char.array("buttons", "The states of each gamepad button, #PRESS or #RELEASE.", GLFW_GAMEPAD_STATE_BUTTONS)
     float.array("axes", "The states of each gamepad axis, in the range -1.0 to 1.0 inclusive.", GLFW_GAMEPAD_STATE_AXES)
 }.p
 
