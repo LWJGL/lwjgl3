@@ -758,7 +758,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         ))}
         """,
 
-        returnDoc = "#TRUE if successful, or #FALSE if an error occured.",
+        returnDoc = "#TRUE if successful, or #FALSE if an error occurred.",
         since = "version 1.0"
     )
 
@@ -852,15 +852,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Returns and clears the last error for the calling thread.
 
         This function returns and clears the error code of the last error that occurred on the calling thread and optionally a UTF-8 encoded human-readable
-        description of it. If no error has occurred since the last call, it returns #NO_ERROR (zero), and the description pointer is set to {@code NULL}.
+        description of it. If no error has occurred since the last call, it returns #NO_ERROR (zero), and the description pointer is set to #NULL.
 
         ${note(ul(
             "This function may be called before #Init().",
-            "This function may be called from any thread."
+            "This function may be called from any thread.",
+            """
+            The returned string is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the next error occurs
+            or the library is terminated.
+            """
         ))}
         """,
 
-        const..Check("1")..charUTF8_pp.IN("description", "Where to store the error description pointer, or {@code NULL}"),
+        Check("1")..nullable..const..charUTF8_pp.OUT("description", "where to store the error description pointer, or #NULL"),
 
         returnDoc = "the last error code for the calling thread, or #NO_ERROR (zero)",
         since = "version 3.3"
@@ -907,7 +911,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         AutoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
-        returnDoc = "an array of monitor handlers, or #NULL if no monitors were found or if an error occured",
+        returnDoc = "an array of monitor handlers, or #NULL if no monitors were found or if an error occurred",
         since = "version 3.0"
     )
 
@@ -921,7 +925,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The primary monitor is always first in the array returned by #GetMonitors().
         """,
 
-        returnDoc = "the primary monitor, or #NULL if no monitors were found or if an error occured",
+        returnDoc = "the primary monitor, or #NULL if no monitors were found or if an error occurred",
         since = "version 3.0"
     )
 
@@ -980,7 +984,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         GLFWmonitor.IN("monitor", "the monitor to query"),
 
-        returnDoc = "the UTF-8 encoded name of the monitor, or #NULL if an error occured",
+        returnDoc = "the UTF-8 encoded name of the monitor, or #NULL if an error occurred",
         since = "version 3.0"
     )
 
@@ -1014,7 +1018,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         GLFWmonitor.IN("monitor", "the monitor to query"),
         AutoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
-        returnDoc = "an array of video modes, or #NULL if an error occured",
+        returnDoc = "an array of video modes, or #NULL if an error occurred",
         since = "version 1.0"
     )
 
@@ -1027,7 +1031,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified monitor is disconnected or the
         library is terminated.
 
-          This function must only be called from the main thread.
+        This function must only be called from the main thread.
         """,
 
         GLFWmonitor.IN("monitor", "the monitor to query"),
@@ -1063,7 +1067,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The returned structure and its arrays are allocated and freed by GLFW. You should not free them yourself. They are valid until the specified monitor is
         disconnected, this function is called again for that monitor or the library is terminated.
 
-          This function must only be called from the main thread.
+        This function must only be called from the main thread.
         """,
 
         GLFWmonitor.IN("monitor", "the monitor to query"),
@@ -1705,7 +1709,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             "${WindowHints.replace("#AUTO_ICONIFY ", "")} ${ClientAPIHints.replace("GLFW#(CONTEXT_RELEASE_BEHAVIOR|CONTEXT_NO_ERROR) ", "")}"
         ),
 
-        returnDoc = "the value of the attribute, or zero if an error occured",
+        returnDoc = "the value of the attribute, or zero if an error occurred",
         since = "version 3.0"
     )
 
@@ -1778,7 +1782,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         upper-left corner of the client area of the window.
 
         This function must only be called from the main thread.
-         """,
+        """,
 
         CALLBACK_WINDOW,
         nullable..GLFWwindowposfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
@@ -1850,8 +1854,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """
         Sets the focus callback of the specified window, which is called when the window gains or loses input focus.
 
-          After the focus callback is called for a window that lost input focus, synthetic key and mouse button release events will be generated for all such
-          that had been pressed. For more information, see #SetKeyCallback() and #SetMouseButtonCallback().
+        After the focus callback is called for a window that lost input focus, synthetic key and mouse button release events will be generated for all such
+        that had been pressed. For more information, see #SetKeyCallback() and #SetMouseButtonCallback().
 
         This function must only be called from the main thread.
         """,
@@ -2221,7 +2225,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         <b>Do not use this function</b> to implement things like camera controls. GLFW already provides the #CURSOR_DISABLED cursor mode that hides the cursor,
         transparently re-centers it and provides unconstrained cursor motion. See #SetInputMode() for more information.
 
-          If the cursor mode is #CURSOR_DISABLED then the cursor position is unconstrained and limited only by the minimum and maximum values of <b>double</b>.
+        If the cursor mode is #CURSOR_DISABLED then the cursor position is unconstrained and limited only by the minimum and maximum values of <b>double</b>.
 
         This function must only be called from the main thread.
         """,
@@ -2300,7 +2304,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         On some platforms, the set cursor may not be visible unless the window also has input focus.
 
-          This function must only be called from the main thread.
+        This function must only be called from the main thread.
         """,
 
         GLFWwindow.IN("window", "the window to set the system cursor for"),
@@ -2517,7 +2521,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
         function is called again for that joystick or the library is terminated.
 
-          This function must only be called from the main thread.
+        This function must only be called from the main thread.
         """,
 
         int.IN("jid", "the joystick to query"),
@@ -2560,9 +2564,11 @@ if (hats[2] & GLFW_HAT_RIGHT)
         presence.
 
         ${note(ul(
-            "Linux: Joystick hats are currently unimplemented.",
-            "The returned array is allocated and freed by GLFW.  You *  should not free it yourself.  It is valid until the specified joystick is *  disconnected, this function is called again for that joystick or the library *  is terminated.",
-            "This function must only be called from the main thread."
+            "This function must only be called from the main thread.",
+            """
+            The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
+            function is called again for that joystick or the library is terminated.
+            """
         ))}
         """,
 
@@ -2601,8 +2607,8 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """
         Returns whether the specified joystick is both present and has a gamepad mapping.
 
-        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
-        presence.
+        If the specified joystick is present but does not have a gamepad mapping this function will return {@code false} but will not generate an error. Call
+        #JoystickPresent() to only check device presence.
 
         This function must only be called from the main thread.
         """,
@@ -2611,6 +2617,25 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         returnDoc = "{@code true} if a joystick is both present and has a gamepad mapping or {@code false} otherwise",
         since = "version 3.3"
+    )
+
+    GLFWjoystickfun(
+        "SetJoystickCallback",
+        """
+        Sets the joystick configuration callback, or removes the currently set callback. This is called when a joystick is connected to or disconnected from
+        the system.
+
+        For joystick connection and disconnection events to be delivered on all platforms, you need to call one of the event processing functions. Joystick
+        disconnection may also be detected and the callback called by joystick functions. The function will then return whatever it returns if the joystick is
+        not present.
+
+        This function must only be called from the main thread.
+        """,
+
+        nullable..GLFWjoystickfun.IN("cbfun", "the new callback, or #NULL to remove the currently set callback"),
+
+        returnDoc = "the previously set callback, or #NULL if no callback was set or the library had not been initialized",
+        since = "version 3.2"
     )
 
     intb(
@@ -2630,19 +2655,19 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function must only be called from the main thread.
         """,
 
-        const..Check("1")..char_p.IN("string", "the string containing the gamepad mappings"),
+        const..charASCII_p.IN("string", "the string containing the gamepad mappings"),
 
-        returnDoc = "{@code ture}, or {@code false} if an error occured",
+        returnDoc = "{@code true}, or {@code false} if an error occurred",
         since = "version 3.3"
     )
 
     const..charUTF8_p(
         "GetGamepadName",
         """
-        Returns the human-readable UTF-8 encoded gamepad name for the specified joystick.
+        Returns the human-readable name of the gamepad from the gamepad mapping assigned to the specified joystick.
 
-        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
-        presence.
+        If the specified joystick is not present or does not have a gamepad mapping this function will return #NULL but will not generate an error. Call
+        #JoystickIsGamepad() to check whether it is present and has a gamepad mapping.
 
         The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, the
         gamepad mappings are updated or the library is terminated.
@@ -2652,7 +2677,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         int.IN("jid", "the joystick to query"),
 
-        returnDoc = "the UTF-8 encoded name of the gamepad, or `NULL` if the joystick is not present, does not have a mapping or an error occurred",
+        returnDoc = "the UTF-8 encoded name of the gamepad, or #NULL if the joystick is not present, does not have a mapping or an error occurred",
         since = "version 3.3"
     )
 
@@ -2661,36 +2686,20 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """
         Retrieves the state of the specified joystick remapped to an Xbox-like gamepad.
 
-        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
-        presence.
+        If the specified joystick is not present this function will return {@code false} but will not generate an error. Call #JoystickIsGamepad() to check
+        whether it is present and has a gamepad mapping.
 
         The Guide button may not be available for input as it is often hooked by the system or the Steam client.
 
-        Not all devices have all the buttons or axes provided by {@code GLFWGamepadState}. Unavailable buttons and axes will always report #RELEASE and 1.0
+        Not all devices have all the buttons or axes provided by ##GLFWGamepadState. Unavailable buttons and axes will always report #RELEASE and 1.0
         respectively.
         """,
 
         int.IN("jid", "the joystick to query"),
         GLFWgamepadstate_p.OUT("state", "the gamepad input state of the joystick"),
 
-        returnDoc = "{@code true} if successful, or {@code false} if no joystick is connected, it has no gamepad mapping or an error occured",
+        returnDoc = "{@code true} if successful, or {@code false} if no joystick is connected, it has no gamepad mapping or an error occurred",
         since = "version 3.3"
-    )
-
-    GLFWjoystickfun(
-        "SetJoystickCallback",
-        """
-        Sets the joystick configuration callback, or removes the currently set callback.
-
-        This is called when a joystick is connected to or disconnected from the system.
-
-        This function must only be called from the main thread.
-        """,
-
-        nullable..GLFWjoystickfun.IN("cbfun", "the new callback, or #NULL to remove the currently set callback"),
-
-        returnDoc = "the previously set callback, or #NULL if no callback was set or the library had not been initialized",
-        since = "version 3.2"
     )
 
     void(
@@ -2929,7 +2938,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
 
-        returnDoc = "the address of the function, or #NULL if an error occured",
+        returnDoc = "the address of the function, or #NULL if an error occurred",
         since = "version 1.0"
     )
 }
