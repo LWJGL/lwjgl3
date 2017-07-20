@@ -477,6 +477,16 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
 
     StringConstant(
         """
+        Set whether the fbx importer will search for embedded loaded textures, where no embedded texture data is provided.
+
+        Property type: bool. The default value is false (0)
+        """,
+
+        "AI_CONFIG_IMPORT_FBX_SEARCH_EMBEDDED_TEXTURES".."IMPORT_FBX_SEARCH_EMBEDDED_TEXTURES"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Set the vertex animation keyframe to be imported.
 
         ASSIMP does not support vertex keyframes (only bone animation is supported). The library reads only one frame of models with vertex animations. By
