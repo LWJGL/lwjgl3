@@ -76,7 +76,7 @@ public final class ExampleGL3 extends Demo {
 
         boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
         if (DEMO_MSAA) {
-            glfwWindowHint(GLFW_SAMPLES, 4);
+            glfwWindowHint(GLFW_SAMPLES, 8);
         }
 
         long window = glfwCreateWindow(1000, 600, "NanoVG", NULL, NULL);
@@ -104,10 +104,7 @@ public final class ExampleGL3 extends Demo {
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
 
-        long vg = DEMO_MSAA
-            ? nvgCreate(NVG_STENCIL_STROKES | NVG_DEBUG)
-            : nvgCreate(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
-
+        long vg = nvgCreate(DEMO_MSAA ? 0 : NVG_ANTIALIAS);
         if (vg == NULL) {
             throw new RuntimeException("Could not init nanovg.");
         }

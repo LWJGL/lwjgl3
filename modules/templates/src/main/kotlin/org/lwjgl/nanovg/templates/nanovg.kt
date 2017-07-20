@@ -392,6 +392,14 @@ nvgFill(vg);""")}
     // Render styles
 
     void(
+        "ShapeAntiAlias",
+        "Sets whether to draw antialias for #Stroke() and #Fill(). It's enabled by default.",
+
+        ctx,
+        intb.IN("enabled", "the flag to set")
+    )
+
+    void(
         "StrokeColor",
         "Sets current stroke style to a solid color.",
 
