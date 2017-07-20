@@ -29,9 +29,14 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
         """
         Render frame.
 
+        {@code bgfx_render_frame} is blocking call. It waits for #frame() to be called from API thread to process frame. If timeout value is passed call will
+        timeout and return even if {@code bgfx_frame} is not called.
+
         This call should be only used on platforms that don't allow creating separate rendering thread. If it is called before to #init(), render thread won't
         be created by #init() call.
         """,
+
+        int32_t.IN("_msecs", "timeout in milliseconds"),
 
         returnDoc = "current renderer state"
     )

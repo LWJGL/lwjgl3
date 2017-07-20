@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."42"
+        "API_VERSION".."45"
     )
 
     ShortConstant(
@@ -499,23 +499,23 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     ).javaDocLinks
 
     val RendererType = EnumConstant(
-        "Renderer type. ({@code bgfx_renderer_type_t})",
+        "Renderer backend type. ({@code bgfx_renderer_type_t})",
 
-        "RENDERER_TYPE_NOOP".enum,
-        "RENDERER_TYPE_DIRECT3D9".enum,
-        "RENDERER_TYPE_DIRECT3D11".enum,
-        "RENDERER_TYPE_DIRECT3D12".enum,
-        "RENDERER_TYPE_GNM".enum,
-        "RENDERER_TYPE_METAL".enum,
-        "RENDERER_TYPE_OPENGLES".enum,
-        "RENDERER_TYPE_OPENGL".enum,
-        "RENDERER_TYPE_VULKAN".enum,
+        "RENDERER_TYPE_NOOP".enum("No rendering."),
+        "RENDERER_TYPE_DIRECT3D9".enum("Direct3D 9.0"),
+        "RENDERER_TYPE_DIRECT3D11".enum("Direct3D 11.0"),
+        "RENDERER_TYPE_DIRECT3D12".enum("Direct3D 12.0"),
+        "RENDERER_TYPE_GNM".enum("GNM"),
+        "RENDERER_TYPE_METAL".enum("Metal"),
+        "RENDERER_TYPE_OPENGLES".enum("OpenGL ES 2.0+"),
+        "RENDERER_TYPE_OPENGL".enum("OpenGL 2.1+"),
+        "RENDERER_TYPE_VULKAN".enum("Vulkan"),
 
         "RENDERER_TYPE_COUNT".enum
     ).javaDocLinks
 
     val Access = EnumConstant(
-        "bgfx_access_t",
+        "Access mode ({@code bgfx_access_t})",
 
         "ACCESS_READ".enum,
         "ACCESS_WRITE".enum,
@@ -525,7 +525,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     ).javaDocLinksSkipCount
 
     val Attrib = EnumConstant(
-        "bgfx_attrib_t",
+        "Vertex attribute ({@code bgfx_attrib_t}).",
 
         "ATTRIB_POSITION".enum,
         "ATTRIB_NORMAL".enum,
@@ -550,37 +550,51 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     ).javaDocLinksSkipCount
 
     val AttribType = EnumConstant(
-        "bgfx_attrib_type_t",
+        "Vertex attribute type ({@code bgfx_attrib_type_t}).",
 
-        "ATTRIB_TYPE_UINT8".enum,
-        "ATTRIB_TYPE_UINT10".enum,
-        "ATTRIB_TYPE_INT16".enum,
-        "ATTRIB_TYPE_HALF".enum,
-        "ATTRIB_TYPE_FLOAT".enum,
+        "ATTRIB_TYPE_UINT8".enum("Uint8"),
+        "ATTRIB_TYPE_UINT10".enum("Uint10, availability depends on: #CAPS_VERTEX_ATTRIB_UINT10."),
+        "ATTRIB_TYPE_INT16".enum("Int16"),
+        "ATTRIB_TYPE_HALF".enum("Half, availability depends on: #CAPS_VERTEX_ATTRIB_HALF`."),
+        "ATTRIB_TYPE_FLOAT".enum("Float"),
 
         "ATTRIB_TYPE_COUNT".enum("", "BGFX_ATTRIB_TYPE_FLOAT + 1")
     ).javaDocLinks
 
     val TextureFormat = EnumConstant(
-        "bgfx_texture_format_t",
+        """
+        Texture format ({@code bgfx_texture_format_t}). Notation:
+        ${codeBlock("""
+RGBA16S
+^   ^ ^
+|   | +-- [ ]Unorm
+|   |     [F]loat
+|   |     [S]norm
+|   |     [I]nt
+|   |     [U]int
+|   +---- Number of bits per component
++-------- Components""")}
 
-        "TEXTURE_FORMAT_BC1".enum,
-        "TEXTURE_FORMAT_BC2".enum,
-        "TEXTURE_FORMAT_BC3".enum,
-        "TEXTURE_FORMAT_BC4".enum,
-        "TEXTURE_FORMAT_BC5".enum,
-        "TEXTURE_FORMAT_BC6H".enum,
-        "TEXTURE_FORMAT_BC7".enum,
-        "TEXTURE_FORMAT_ETC1".enum,
-        "TEXTURE_FORMAT_ETC2".enum,
-        "TEXTURE_FORMAT_ETC2A".enum,
-        "TEXTURE_FORMAT_ETC2A1".enum,
-        "TEXTURE_FORMAT_PTC12".enum,
-        "TEXTURE_FORMAT_PTC14".enum,
-        "TEXTURE_FORMAT_PTC12A".enum,
-        "TEXTURE_FORMAT_PTC14A".enum,
-        "TEXTURE_FORMAT_PTC22".enum,
-        "TEXTURE_FORMAT_PTC24".enum,
+        Availability depends on Caps.
+        """,
+
+        "TEXTURE_FORMAT_BC1".enum("DXT1"),
+        "TEXTURE_FORMAT_BC2".enum("DXT3"),
+        "TEXTURE_FORMAT_BC3".enum("DXT5"),
+        "TEXTURE_FORMAT_BC4".enum("LATC1/ATI1"),
+        "TEXTURE_FORMAT_BC5".enum("LATC2/ATI2"),
+        "TEXTURE_FORMAT_BC6H".enum("BC6H"),
+        "TEXTURE_FORMAT_BC7".enum("BC7"),
+        "TEXTURE_FORMAT_ETC1".enum("ETC1 RGB8"),
+        "TEXTURE_FORMAT_ETC2".enum("ETC2 RGB8"),
+        "TEXTURE_FORMAT_ETC2A".enum("ETC2 RGBA8"),
+        "TEXTURE_FORMAT_ETC2A1".enum("ETC2 RGB8A1"),
+        "TEXTURE_FORMAT_PTC12".enum("PVRTC1 RGB 2BPP"),
+        "TEXTURE_FORMAT_PTC14".enum("PVRTC1 RGB 4BPP"),
+        "TEXTURE_FORMAT_PTC12A".enum("PVRTC1 RGBA 2BPP"),
+        "TEXTURE_FORMAT_PTC14A".enum("PVRTC1 RGBA 4BPP"),
+        "TEXTURE_FORMAT_PTC22".enum("PVRTC2 RGBA 2BPP"),
+        "TEXTURE_FORMAT_PTC24".enum("PVRTC2 RGBA 4BPP"),
 
         "TEXTURE_FORMAT_UNKNOWN".enum,
 
@@ -649,7 +663,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     ).javaDocLinksSkipCount
 
     val UniformType = EnumConstant(
-        "bgfx_uniform_type_t",
+        "Uniform type ({@code bgfx_uniform_type_t}).",
 
         "UNIFORM_TYPE_INT1".enum,
         "UNIFORM_TYPE_END".enum,
@@ -662,41 +676,41 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     ).javaDocLinksSkipCount
 
     val BackbufferRatio = EnumConstant(
-        "bgfx_backbuffer_ratio_t",
+        "Backbuffer ratio ({@code bgfx_backbuffer_ratio_t}).",
 
-        "BACKBUFFER_RATIO_EQUAL".enum,
-        "BACKBUFFER_RATIO_HALF".enum,
-        "BACKBUFFER_RATIO_QUARTER".enum,
-        "BACKBUFFER_RATIO_EIGHTH".enum,
-        "BACKBUFFER_RATIO_SIXTEENTH".enum,
-        "BACKBUFFER_RATIO_DOUBLE".enum,
+        "BACKBUFFER_RATIO_EQUAL".enum("Equal to backbuffer."),
+        "BACKBUFFER_RATIO_HALF".enum("One half size of backbuffer."),
+        "BACKBUFFER_RATIO_QUARTER".enum("One quarter size of backbuffer."),
+        "BACKBUFFER_RATIO_EIGHTH".enum("One eighth size of backbuffer."),
+        "BACKBUFFER_RATIO_SIXTEENTH".enum("One sixteenth size of backbuffer."),
+        "BACKBUFFER_RATIO_DOUBLE".enum("Double size of backbuffer."),
 
         "BACKBUFFER_RATIO_COUNT".enum
     ).javaDocLinksSkipCount
 
     EnumConstant(
-        "bgfx_occlusion_query_result_t",
+        "Occlusion query result ({@code bgfx_occlusion_query_result_t}).",
 
-        "OCCLUSION_QUERY_RESULT_INVISIBLE".enum,
-        "OCCLUSION_QUERY_RESULT_VISIBLE".enum,
-        "OCCLUSION_QUERY_RESULT_NORESULT".enum,
+        "OCCLUSION_QUERY_RESULT_INVISIBLE".enum("Query failed test."),
+        "OCCLUSION_QUERY_RESULT_VISIBLE".enum("Query passed test."),
+        "OCCLUSION_QUERY_RESULT_NORESULT".enum("Query result is not available yet."),
 
         "OCCLUSION_QUERY_RESULT_COUNT".enum
     )
 
     val TopologyConvert = EnumConstant(
-        "bgfx_topology_convert_t",
+        "Topology conversion function ({@code bgfx_topology_convert_t}).",
 
-        "TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING".enum,
-        "TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST".enum,
-        "TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST".enum,
-        "TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST".enum,
+        "TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING".enum("Flip winding order of triangle list."),
+        "TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST".enum("Convert triangle list to line list."),
+        "TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST".enum("Convert triangle strip to triangle list."),
+        "TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST".enum("Convert line strip to line list."),
 
         "TOPOLOGY_CONVERT_COUNT".enum
     ).javaDocLinksSkipCount
 
     val TopologySort = EnumConstant(
-        "bgfx_topology_sort_t",
+        "Topology sort order ({@code bgfx_topology_sort_t}).",
 
         "TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_MIN".enum,
         "TOPOLOGY_SORT_DIRECTION_FRONT_TO_BACK_AVG".enum,
@@ -714,8 +728,19 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "TOPOLOGY_SORT_COUNT".enum
     ).javaDocLinksSkipCount
 
+    val ViewMode = EnumConstant(
+        "View mode sets draw call sort order ({@code bgfx_view_mode_t}).",
+
+        "VIEW_MODE_DEFAULT".enum("Default sort order."),
+        "VIEW_MODE_SEQUENTIAL".enum("Sort in the same order in which submit calls were called."),
+        "VIEW_MODE_DEPTH_ASCENDING".enum("Sort draw call depth in ascending order."),
+        "VIEW_MODE_DEPTH_DESCENDING".enum("Sort draw call depth in descending order."),
+
+        "VIEW_MODE_CCOUNT".enum
+    ).javaDocLinksSkipCount
+
     EnumConstant(
-        "bgfx_fatal_t",
+        "Fatal errors ({@code bgfx_fatal_t}).",
 
         "FATAL_DEBUG_CHECK".enum,
         "FATAL_INVALID_SHADER".enum,
@@ -779,25 +804,25 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
     void(
         "vertex_pack",
-        "Packs {@code vec4} into vertex stream format.",
+        "Packs vertex attribute into vertex stream format.",
 
-        Check(4)..const..float_p.IN("_input", ""),
-        bool.IN("_inputNormalized", ""),
-        bgfx_attrib_t.IN("_attr", "", Attrib),
-        const..bgfx_vertex_decl_t_p.IN("_decl", ""),
-        Unsafe..void_p.IN("_data", ""),
-        uint32_t.IN("_index", "")
+        Check(4)..const..float_p.IN("_input", "value to be packed into vertex stream"),
+        bool.IN("_inputNormalized", "true if input value is already normalized"),
+        bgfx_attrib_t.IN("_attr", "attribute to pack", Attrib),
+        const..bgfx_vertex_decl_t_p.IN("_decl", "vertex stream declaration"),
+        Unsafe..void_p.IN("_data", "destination vertex stream where data will be packed"),
+        uint32_t.IN("_index", "vertex index that will be modified")
     )
 
     void(
         "vertex_unpack",
-        "Unpacks {@code vec4} from vertex stream format.",
+        "Unpacks vertex attribute from vertex stream format.",
 
-        Check(4)..float_p.OUT("_output", ""),
-        bgfx_attrib_t.IN("_attr", "", Attrib),
-        const..bgfx_vertex_decl_t_p.IN("_decl", ""),
-        Unsafe..const..void_p.IN("_data", ""),
-        uint32_t.IN("_index", "")
+        Check(4)..float_p.OUT("_output", "result of unpacking"),
+        bgfx_attrib_t.IN("_attr", "attribute to unpack", Attrib),
+        const..bgfx_vertex_decl_t_p.IN("_decl", "vertex stream declaration"),
+        Unsafe..const..void_p.IN("_data", "source vertex stream from where data will be unpacked"),
+        uint32_t.IN("_index", "vertex index that will be unpacked")
     )
 
     void(
@@ -962,7 +987,11 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
     const..bgfx_stats_t_p(
         "get_stats",
-        "Returns performance counters."
+        """
+        Returns performance counters.
+
+        The pointer returned is valid until #frame() is called.
+        """
     )
 
     const..bgfx_memory_t_p(
@@ -985,7 +1014,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         """
         Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
 
-        You must make sure data is available for at least 2 #frame() calls.
+        Data passed must be available for at least 2 #frame() calls.
         """,
 
         MultiTypeAll..const..void_p.IN("_data", "the data to reference"),
@@ -1754,11 +1783,11 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     )
 
     void(
-        "set_view_seq",
-        "Sets view into sequential mode. Draw calls will be sorted in the same order in which submit calls were called.",
+        "set_view_mode",
+        "Sets view sorting mode.",
 
         MapToInt..uint8_t.IN("_id", "view id"),
-        bool.IN("_enabled", "if true, sequential mode is enabled")
+        bgfx_view_mode_t.IN("_mode", "view sort mode", ViewMode)
     )
 
     void(
@@ -1836,7 +1865,16 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
         Remarks:
         ${ol(
-            "Use #BGFX_STATE_ALPHA_REF(), #BGFX_STATE_POINT_SIZE() and #BGFX_STATE_BLEND_FUNC() macros to setup more complex states.",
+            """
+            To setup more complex states use:
+            ${codeBlock("""
+BGFX_STATE_ALPHA_REF(_ref),
+BGFX_STATE_POINT_SIZE(_size),
+BGFX_STATE_BLEND_FUNC(_src, _dst),
+BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA)
+BGFX_STATE_BLEND_EQUATION(_equation)
+BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
+            """,
             "#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
         )}
         """,
@@ -1898,7 +1936,11 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
     uint32_t(
         "alloc_transform",
-        "Reserves {@code _num} matrices in internal matrix cache. Pointer returned can be modifed until #frame()) is called.",
+        """
+        Reserves {@code _num} matrices in internal matrix cache.
+
+        Pointer returned can be modifed until #frame() is called.
+        """,
 
         bgfx_transform_t_p.IN("_transform", "pointer to ##BGFXTransform structure"),
         MapToInt..uint16_t.IN("_num", "number of matrices"),

@@ -43,6 +43,7 @@ val bgfx_backbuffer_ratio_t = "bgfx_backbuffer_ratio_t".enumType
 val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
+val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
 /*
 #define BGFX_HANDLE_T(_name) \
