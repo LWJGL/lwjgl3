@@ -81,6 +81,7 @@ val ScreenshotHandle_t = typedef(uint32_t, "ScreenshotHandle_t")
 val TextureID_t = typedef(int32_t, "TextureID_t")
 val TrackedCameraHandle_t = typedef(uint64_t, "TrackedCameraHandle_t")
 val TrackedDeviceIndex_t = typedef(uint32_t, "TrackedDeviceIndex_t")
+val DriverId_t = typedef(uint32_t, "DriverId_t")
 
 val VRComponentProperties = typedef(uint32_t, "VRComponentProperties")
 val VRNotificationId = typedef(uint32_t, "VRNotificationId")

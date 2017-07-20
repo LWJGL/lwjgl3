@@ -61,6 +61,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
             VRChaperone,
             VRChaperoneSetup,
             VRCompositor,
+            VRDriverManager,
             VRExtendedDisplay,
             VRNotifications,
             VROverlay,
@@ -71,9 +72,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
             VRTrackedCamera
         )
 
-        println(interfaces
-            .map { "public static ${it.capabilitiesClass} ${it.capabilitiesField};" }
-            .joinToString("\n$t", prefix = t))
+        println(interfaces.joinToString("\n$t", prefix = t) { "public static ${it.capabilitiesClass} ${it.capabilitiesField};" })
 
         // Common constructor
         print("""
@@ -123,9 +122,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
     public static void destroy() {
         token = 0;
 
-        ${interfaces
-            .map { "${it.capabilitiesField} = null;" }
-            .joinToString("\n$t$t")}
+        ${interfaces.joinToString("\n$t$t") { "${it.capabilitiesField} = null;" }}
     }""")
 
         interfaces.forEach {

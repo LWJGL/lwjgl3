@@ -158,6 +158,28 @@ typedef struct HiddenAreaMesh_t
         Check(1)..int32_t_p.OUT("pnAdapterIndex", "the index of the adapter to use for this display")
     )
 
+    void(
+        "GetOutputDevice",
+        """
+        Returns platform- and texture-type specific adapter identification so that applications and the compositor are creating textures and swap chains on the
+        same GPU. If an error occurs the device will be set to 0.
+
+        <h3>D3D10/11/12 Only (D3D9 Not Supported)</h3>
+        Returns the adapter LUID that identifies the GPU attached to the HMD. The user should enumerate all adapters using {@code IDXGIFactory::EnumAdapters}
+        and {@code IDXGIAdapter::GetDesc} to find the adapter with the matching LUID, or use {@code IDXGIFactory4::EnumAdapterByLuid}. The discovered
+        {@code IDXGIAdapter} should be used to create the device and swap chain.
+
+        <h3>Vulkan Only</h3>
+        Returns the {@code vk::PhysicalDevice} that should be used by the application.
+
+        <h3>macOS Only</h3>
+        Returns an {@code id<MTLDevice>} that should be used by the application.
+        """,
+
+        Check(1)..uint64_t_p.OUT("pnDevice", ""),
+        ETextureType.IN("textureType", "")
+    )
+
     bool(
         "IsDisplayOnDesktop",
         "Use to determine if the headset display is part of the desktop (i.e. extended) or hidden (i.e. direct mode)."
