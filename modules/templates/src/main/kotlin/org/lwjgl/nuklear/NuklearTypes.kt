@@ -612,15 +612,22 @@ val nk_draw_list = struct(NUKLEAR_PACKAGE, "NkDrawList", nativeName = "struct nk
     nk_rect.member("clip_rect", "")
     nk_vec2.array("circle_vtx", "", size = 12)
     nk_convert_config.member("config", "")
+
     nullable..nk_buffer_p.member("buffer", "")
     nullable..nk_buffer_p.member("vertices", "")
     nullable..nk_buffer_p.member("elements", "")
+
     unsigned_int.member("element_count", "")
     unsigned_int.member("vertex_count", "")
     unsigned_int.member("cmd_count", "")
     nk_size.member("cmd_offset", "")
+
     unsigned_int.member("path_count", "")
     unsigned_int.member("path_offset", "")
+
+    nk_anti_aliasing.member("line_AA", "")
+    nk_anti_aliasing.member("shape_AA", "")
+
     nk_handle.member("userdata", "")
 }
 val nk_draw_list_p = nk_draw_list.p
@@ -1030,6 +1037,7 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
     float.member("group_border", "")
     float.member("tooltip_border", "")
     float.member("popup_border", "")
+    float.member("min_row_height_padding", "")
 
     float.member("rounding", "")
     nk_vec2.member("spacing", "")
@@ -1102,6 +1110,7 @@ val nk_row_layout = struct(NUKLEAR_PACKAGE, "NkRowLayout", nativeName = "struct 
     nk_panel_row_layout_type.member("type", "").links("LAYOUT_\\w+")
     int.member("index", "")
     float.member("height", "")
+    float.member("min_height", "")
     int.member("columns", "")
     const..float_p.member("ratio", "")
     float.member("item_width", "")
@@ -1216,8 +1225,7 @@ val nk_window_p = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wi
     unsigned_int.member("scrolled", "")
 
     "nk_table".p.member("tables", "") // TODO: private API?
-    unsigned_short.member("table_count", "")
-    unsigned_short.member("table_size", "")
+    unsigned_int.member("table_count", "")
 
     /* window list hooks */
     nk_window.p.member("next", "")

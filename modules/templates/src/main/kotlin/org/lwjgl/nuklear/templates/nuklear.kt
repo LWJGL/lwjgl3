@@ -684,6 +684,7 @@ nk_style_pop_vec2(ctx);""")}
         "FORMAT_R32G32B32".enum,
 
         "FORMAT_R8G8B8A8".enum,
+        "FORMAT_B8G8R8A8".enum,
         "FORMAT_R16G15B16A16".enum,
         "FORMAT_R32G32B32A32".enum,
         "FORMAT_R32G32B32A32_FLOAT".enum,
@@ -1003,139 +1004,194 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         void(
-            "layout_row_dynamic",
-            "",
+            "layout_set_min_row_height",
+            """
+            Sets the currently used minimum row height.
+
+            IMPORTANT: The passed height needs to include both your prefered row height as well as padding. No internal padding is added.
+            """,
 
             ctx,
-            float.IN("height", ""),
-            nk_int.IN("cols", "")
+            float.IN("height", "new minimum row height to be used for auto generating the row height")
+        )
+
+        void(
+            "layout_reset_min_row_height",
+            """
+            Resets the currently used minimum row height back to font height + text padding + additional padding
+            ({@code style_window.min_row_height_padding}).
+            """,
+
+            ctx
+        )
+
+        nk_rect(
+            "layout_widget_bounds",
+            "Returns the width of the next row allocate by one of the layouting functions.",
+
+            ctx
+        )
+
+        float(
+            "layout_ratio_from_pixel",
+            "Utility function to calculate window ratio from pixel size.",
+
+            ctx,
+            float.IN("pixel_width", "pixel width to convert to window ratio")
+        )
+
+        void(
+            "layout_row_dynamic",
+            """
+            Sets current row layout to share horizontal space between {@code cols} number of widgets evenly. Once called all subsequent widget calls greater
+            than {@code cols} will allocate a new row with same layout.
+            """,
+
+            ctx,
+            float.IN("height", "holds height of each widget in row or zero for auto layouting"),
+            nk_int.IN("cols", "number of widgets inside row")
         )
         void(
             "layout_row_static",
-            "",
+            """
+            Sets current row layout to fill {@code cols} number of widgets in row with same {@code item_width} horizontal size. Once called all subsequent
+            widget calls greater than {@code cols} will allocate a new row with same layout.
+            """,
 
             ctx,
-            float.IN("height", ""),
-            nk_int.IN("item_width", ""),
-            nk_int.IN("cols", "")
+            float.IN("height", "holds row height to allocate from panel for widget height"),
+            nk_int.IN("item_width", "holds width of each widget in row"),
+            nk_int.IN("cols", "number of widgets inside row")
         )
 
         void(
             "layout_row_begin",
-            "",
+            "Starts a new dynamic or fixed row with given height and columns.",
 
             ctx,
-            nk_layout_format.IN("fmt", "", LayoutFormats),
-            float.IN("row_height", ""),
-            nk_int.IN("cols", "")
+            nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
+            float.IN("row_height", "holds height of each widget in row or zero for auto layouting"),
+            nk_int.IN("cols", "number of widgets inside row")
         )
         void(
             "layout_row_push",
-            "",
+            "Specifies either window ratio or width of a single column.",
 
             ctx,
-            float.IN("value", "")
+            float.IN("value", "either a window ratio or fixed width depending on {@code fmt} in previous #layout_row_begin() call")
         )
-        void("layout_row_end", "", ctx)
+        void(
+            "layout_row_end",
+            "Finishes previously started row",
+            
+            ctx
+        )
         void(
             "layout_row",
-            "",
+            "Specifies row columns in array as either window ratio or size.",
 
             ctx,
-            nk_layout_format.IN("fmt", "", LayoutFormats),
-            float.IN("height", ""),
-            AutoSize("ratio")..nk_int.IN("cols", ""),
+            nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
+            float.IN("height", "holds height of each widget in row or zero for auto layouting"),
+            AutoSize("ratio")..nk_int.IN("cols", "number of widgets inside row"),
             const..float_p.IN("ratio", "")
         )
 
         void(
             "layout_row_template_begin",
-            "",
+            "Begins the row template declaration.",
 
             ctx,
-            float.IN("height", "")
+            float.IN("height", "holds height of each widget in row or zero for auto layouting")
         )
-        void("layout_row_template_push_dynamic", "", ctx)
+        void(
+            "layout_row_template_push_dynamic",
+            "Adds a dynamic column that dynamically grows and can go to zero if not enough space.",
+            
+            ctx
+        )
         void(
             "layout_row_template_push_variable",
-            "",
+            "Adds a variable column that dynamically grows but does not shrink below specified pixel width.",
 
             ctx,
-            float.IN("min_width", "")
+            float.IN("min_width", "holds the minimum pixel width the next column must be")
         )
         void(
             "layout_row_template_push_static",
-            "",
+            "Adds a static column that does not grow and will always have the same size.",
 
             ctx,
-            float.IN("width", "")
+            float.IN("width", "holds the absolute pixel width value the next column must be")
         )
 
         void(
             "layout_row_template_end",
-            "",
+            "Marks the end of the row template.",
 
-            nk_context_p.OUT("ctx", "")
+            ctx
         )
 
         void(
             "layout_space_begin",
-            "",
+            "Begins a new layouting space that allows to specify each widgets position and size.",
 
             ctx,
-            nk_layout_format.IN("fmt", "", LayoutFormats),
-            float.IN("height", ""),
-            nk_int.IN("widget_count", "")
+            nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
+            float.IN("height", "holds height of each widget in row or zero for auto layouting"),
+            nk_int.IN("widget_count", "number of widgets inside row")
         )
         void(
             "layout_space_push",
-            "",
+            "Pushes position and size of the next widget in own coordiante space either as pixel or ratio.",
 
             ctx,
-            nk_rect.IN("rect", "")
+            nk_rect.IN("rect", "position and size in layout space local coordinates")
         )
-        void("layout_space_end", "", ctx)
+        void(
+            "layout_space_end",
+            "Marks the end of the layout space.",
+            
+            ctx
+        )
 
-        nk_rect("layout_space_bounds", "", ctx)
+        nk_rect(
+            "layout_space_bounds",
+            "Returns total space allocated for {@code nk_layout_space}.",
+            
+            ctx
+        )
 
         nk_vec2(
             "layout_space_to_screen",
-            "",
+            "Converts vector from {@code nk_layout_space} coordinate space into screen space.",
 
             ctx,
-            ReturnParam..nk_vec2.IN("ret", "")
+            ReturnParam..nk_vec2.IN("ret", "position to convert from layout space into screen coordinate space")
         )
 
         nk_vec2(
             "layout_space_to_local",
-            "",
+            "Converts vector from layout space into screen space.",
 
             ctx,
-            ReturnParam..nk_vec2.IN("ret", "")
+            ReturnParam..nk_vec2.IN("ret", "position to convert from screen space into layout coordinate space")
         )
 
         nk_rect(
             "layout_space_rect_to_screen",
-            "",
+            "Converts rectangle from screen space into layout space.",
 
             ctx,
-            ReturnParam..nk_rect.IN("ret", "")
+            ReturnParam..nk_rect.IN("ret", "rectangle to convert from layout space into screen space")
         )
 
         nk_rect(
             "layout_space_rect_to_local",
-            "",
+            "Converts rectangle from layout space into screen space.",
 
             ctx,
-            ReturnParam..nk_rect.IN("ret", "")
-        )
-
-        float(
-            "layout_ratio_from_pixel",
-            "",
-
-            ctx,
-            float.IN("pixel_width", "")
+            ReturnParam..nk_rect.IN("ret", "rectangle to convert from screen space into layout space")
         )
 
         intb(
@@ -1466,17 +1522,6 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         intb(
-            "button_symbol_label_styled",
-            "",
-
-            ctx,
-            const..nk_style_button_p.IN("style", ""),
-            nk_symbol_type.IN("symbol", ""),
-            const..charUTF8_p.IN("title", ""),
-            nk_flags.IN("text_alignment", "")
-        )
-
-        intb(
             "button_symbol_text_styled",
             "",
 
@@ -1486,6 +1531,17 @@ nk_style_pop_vec2(ctx);""")}
             const..charUTF8_p.IN("title", ""),
             int.IN("len", ""),
             nk_flags.IN("alignment", "")
+        )
+
+        intb(
+            "button_symbol_label_styled",
+            "",
+
+            ctx,
+            const..nk_style_button_p.IN("style", ""),
+            nk_symbol_type.IN("symbol", ""),
+            const..charUTF8_p.IN("title", ""),
+            nk_flags.IN("text_alignment", "")
         )
 
         intb(
@@ -2675,7 +2731,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_user_font_p.IN("font", "")
+            const..nk_user_font_p.IN("font", "")
         )
 
         int(
@@ -4314,7 +4370,9 @@ nk_style_pop_vec2(ctx);""")}
             const..nk_convert_config.p.IN("config", ""),
             nk_buffer_p.IN("cmds", ""),
             nk_buffer_p.IN("vertices", ""),
-            nk_buffer_p.IN("elements", "")
+            nk_buffer_p.IN("elements", ""),
+            nk_anti_aliasing.IN("line_aa", ""),
+            nk_anti_aliasing.IN("shape_aa", "")
         )
 
         void(
