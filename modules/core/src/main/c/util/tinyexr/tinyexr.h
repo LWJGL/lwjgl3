@@ -478,12 +478,16 @@ namespace miniz {
 #pragma clang diagnostic ignored "-Wsign-conversion"
 #pragma clang diagnostic ignored "-Wc++11-extensions"
 #pragma clang diagnostic ignored "-Wconversion"
+#pragma clang diagnostic ignored "-Wunused-function"
 #ifdef __APPLE__
-#if __clang_major__ >= 8 && __clang__minor__ > 1
+#if __clang_major__ >= 8 && __clang_minor__ >= 1
 #pragma clang diagnostic ignored "-Wcomma"
 #endif
+#else  // __APPLE__
+#if (__clang_major__ >= 4) || (__clang_major__ >= 3 && __clang_minor__ > 8)
+#pragma clang diagnostic ignored "-Wcomma"
 #endif
-#pragma clang diagnostic ignored "-Wunused-function"
+#endif  // __APPLE__
 #endif
 
 /* miniz.c v1.15 - public domain deflate/inflate, zlib-subset, ZIP
@@ -1913,11 +1917,11 @@ static void def_free_func(void *opaque, void *address) {
   (void)opaque, (void)address;
   MZ_FREE(address);
 }
-static void *def_realloc_func(void *opaque, void *address, size_t items,
-                              size_t size) {
-  (void)opaque, (void)address, (void)items, (void)size;
-  return MZ_REALLOC(address, items * size);
-}
+//static void *def_realloc_func(void *opaque, void *address, size_t items,
+//                              size_t size) {
+//  (void)opaque, (void)address, (void)items, (void)size;
+//  return MZ_REALLOC(address, items * size);
+//}
 
 const char *mz_version(void) { return MZ_VERSION; }
 
@@ -2889,8 +2893,9 @@ void *tinfl_decompress_mem_to_heap(const void *pSrc_buf, size_t src_buf_len,
     tinfl_status status = tinfl_decompress(
         &decomp, (const mz_uint8 *)pSrc_buf + src_buf_ofs, &src_buf_size,
         (mz_uint8 *)pBuf, pBuf ? (mz_uint8 *)pBuf + *pOut_len : NULL,
-        &dst_buf_size, (flags & ~TINFL_FLAG_HAS_MORE_INPUT) |
-                           TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF);
+        &dst_buf_size,
+        (flags & ~TINFL_FLAG_HAS_MORE_INPUT) |
+            TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF);
     if ((status < 0) || (status == TINFL_STATUS_NEEDS_MORE_INPUT)) {
       MZ_FREE(pBuf);
       *pOut_len = 0;
@@ -3537,9 +3542,10 @@ static int tdefl_flush_block(tdefl_compressor *d, int flush) {
   mz_uint saved_bit_buf, saved_bits_in;
   mz_uint8 *pSaved_output_buf;
   mz_bool comp_block_succeeded = MZ_FALSE;
-  int n, use_raw_block =
-             ((d->m_flags & TDEFL_FORCE_ALL_RAW_BLOCKS) != 0) &&
-             (d->m_lookahead_pos - d->m_lz_code_buf_dict_pos) <= d->m_dict_size;
+  int n,
+      use_raw_block =
+          ((d->m_flags & TDEFL_FORCE_ALL_RAW_BLOCKS) != 0) &&
+          (d->m_lookahead_pos - d->m_lz_code_buf_dict_pos) <= d->m_dict_size;
   mz_uint8 *pOutput_buf_start =
       ((d->m_pPut_buf_func == NULL) &&
        ((*d->m_pOut_buf_size - d->m_out_buf_ofs) >= TDEFL_OUT_BUF_SIZE))
@@ -3569,8 +3575,9 @@ static int tdefl_flush_block(tdefl_compressor *d, int flush) {
 
   if (!use_raw_block)
     comp_block_succeeded =
-        tdefl_compress_block(d, (d->m_flags & TDEFL_FORCE_ALL_STATIC_BLOCKS) ||
-                                    (d->m_total_lz_bytes < 48));
+        tdefl_compress_block(d,
+                             (d->m_flags & TDEFL_FORCE_ALL_STATIC_BLOCKS) ||
+                                 (d->m_total_lz_bytes < 48));
 
   // If the block gets expanded, forget the current contents of the output
   // buffer and send a raw block instead.
@@ -5215,9 +5222,10 @@ mz_bool mz_zip_reader_file_stat(mz_zip_archive *pZip, mz_uint file_index,
   n = MZ_READ_LE16(p + MZ_ZIP_CDH_COMMENT_LEN_OFS);
   n = MZ_MIN(n, MZ_ZIP_MAX_ARCHIVE_FILE_COMMENT_SIZE - 1);
   pStat->m_comment_size = n;
-  memcpy(pStat->m_comment, p + MZ_ZIP_CENTRAL_DIR_HEADER_SIZE +
-                               MZ_READ_LE16(p + MZ_ZIP_CDH_FILENAME_LEN_OFS) +
-                               MZ_READ_LE16(p + MZ_ZIP_CDH_EXTRA_LEN_OFS),
+  memcpy(pStat->m_comment,
+         p + MZ_ZIP_CENTRAL_DIR_HEADER_SIZE +
+             MZ_READ_LE16(p + MZ_ZIP_CDH_FILENAME_LEN_OFS) +
+             MZ_READ_LE16(p + MZ_ZIP_CDH_EXTRA_LEN_OFS),
          n);
   pStat->m_comment[n] = '\0';
 
@@ -7338,11 +7346,23 @@ static void CompressZip(unsigned char *dst,
 
   compressedSize = outSize;
 #endif
+
+  // Use uncompressed data when compressed data is larger than uncompressed.
+  // (Issue 40)
+  if (compressedSize >= src_size) {
+    compressedSize = src_size;
+    memcpy(dst, src, src_size);
+  }
 }
 
 static void DecompressZip(unsigned char *dst,
                           unsigned long *uncompressed_size /* inout */,
                           const unsigned char *src, unsigned long src_size) {
+  if ((*uncompressed_size) == src_size) {
+    // Data is not compressed(Issue 40).
+    memcpy(dst, src, src_size);
+    return;
+  }
   std::vector<unsigned char> tmpBuf(*uncompressed_size);
 
 #if TINYEXR_USE_MINIZ
@@ -7554,11 +7574,24 @@ static void CompressRle(unsigned char *dst,
   assert(outSize > 0);
 
   compressedSize = static_cast<tinyexr::tinyexr_uint64>(outSize);
+
+  // Use uncompressed data when compressed data is larger than uncompressed.
+  // (Issue 40)
+  if (compressedSize >= src_size) {
+    compressedSize = src_size;
+    memcpy(dst, src, src_size);
+  }
 }
 
 static void DecompressRle(unsigned char *dst,
                           const unsigned long uncompressed_size,
                           const unsigned char *src, unsigned long src_size) {
+  if (uncompressed_size == src_size) {
+    // Data is not compressed(Issue 40).
+    memcpy(dst, src, src_size);
+    return;
+  }
+
   std::vector<unsigned char> tmpBuf(uncompressed_size);
 
   int ret = rleUncompress(static_cast<int>(src_size),
@@ -8874,7 +8907,7 @@ static void applyLut(const unsigned short lut[USHORT_RANGE],
 #pragma clang diagnostic pop
 #endif  // __clang__
 
-static bool CompressPiz(unsigned char *outPtr, unsigned int &outSize,
+static bool CompressPiz(unsigned char *outPtr, unsigned int *outSize,
                         const unsigned char *inPtr, size_t inSize,
                         const std::vector<ChannelInfo> &channelInfo,
                         int data_width, int num_lines) {
@@ -8981,16 +9014,29 @@ static bool CompressPiz(unsigned char *outPtr, unsigned int &outSize,
       hufCompress(&tmpBuffer.at(0), static_cast<int>(tmpBuffer.size()), buf);
   memcpy(lengthPtr, &length, sizeof(int));
 
-  outSize = static_cast<unsigned int>(
+  (*outSize) = static_cast<unsigned int>(
       (reinterpret_cast<unsigned char *>(buf) - outPtr) +
       static_cast<unsigned int>(length));
+
+  // Use uncompressed data when compressed data is larger than uncompressed.
+  // (Issue 40)
+  if ((*outSize) >= inSize) {
+    (*outSize) = inSize;
+    memcpy(outPtr, inPtr, inSize);
+  }
   return true;
 }
 
 static bool DecompressPiz(unsigned char *outPtr, const unsigned char *inPtr,
-                          size_t tmpBufSize, int num_channels,
+                          size_t tmpBufSize, size_t inLen, int num_channels,
                           const EXRChannelInfo *channels, int data_width,
                           int num_lines) {
+  if (inLen == tmpBufSize) {
+    // Data is not compressed(Issue 40).
+    memcpy(outPtr, inPtr, inLen);
+    return true;
+  }
+
   unsigned char bitmap[BITMAP_SIZE];
   unsigned short minNonZero;
   unsigned short maxNonZero;
@@ -9165,6 +9211,11 @@ static bool DecompressZfp(float *dst, int dst_width, int dst_num_lines,
                           const ZFPCompressionParam &param) {
   size_t uncompressed_size = dst_width * dst_num_lines * num_channels;
 
+  if (uncompressed_size == src_size) {
+    // Data is not compressed(Issue 40).
+    memcpy(dst, src, src_size);
+  }
+
   zfp_stream *zfp = NULL;
   zfp_field *field = NULL;
 
@@ -9309,12 +9360,11 @@ static void DecodePixelData(/* out */ unsigned char **out_images,
     // Allocate original data size.
     std::vector<unsigned char> outBuf(static_cast<size_t>(
         static_cast<size_t>(width * num_lines) * pixel_data_size));
-    size_t tmpBufLen = static_cast<size_t>(
-        static_cast<size_t>(width * num_lines) * pixel_data_size);
+    size_t tmpBufLen = outBuf.size();
 
     bool ret = tinyexr::DecompressPiz(
         reinterpret_cast<unsigned char *>(&outBuf.at(0)), data_ptr, tmpBufLen,
-        static_cast<int>(num_channels), channels, width, num_lines);
+        data_len, static_cast<int>(num_channels), channels, width, num_lines);
 
     assert(ret);
     (void)ret;
@@ -10039,8 +10089,7 @@ static int ParseEXRHeader(HeaderInfo *info, bool *empty_header,
 
     } else if (attr_name.compare("compression") == 0) {
       bool ok = false;
-      if ((data[0] >= TINYEXR_COMPRESSIONTYPE_NONE) &&
-          (data[0] < TINYEXR_COMPRESSIONTYPE_PIZ)) {
+      if (data[0] < TINYEXR_COMPRESSIONTYPE_PIZ) {
         ok = true;
       }
 
@@ -10712,7 +10761,11 @@ int ParseEXRHeaderFromMemory(EXRHeader *exr_header, const EXRVersion *version,
 
   if (ret != TINYEXR_SUCCESS) {
     if (err && !err_str.empty()) {
+#ifdef _WIN32
+      (*err) = _strdup(err_str.c_str());  // May leak
+#else
       (*err) = strdup(err_str.c_str());  // May leak
+#endif
     }
   }
 
@@ -11304,7 +11357,7 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
       std::vector<unsigned char> block(bufLen);
       unsigned int outSize = static_cast<unsigned int>(block.size());
 
-      CompressPiz(&block.at(0), outSize,
+      CompressPiz(&block.at(0), &outSize,
                   reinterpret_cast<const unsigned char *>(&buf.at(0)),
                   buf.size(), channels, exr_image->width, h);
 
@@ -11961,7 +12014,11 @@ int ParseEXRMultipartHeaderFromMemory(EXRHeader ***exr_headers,
 
     if (ret != TINYEXR_SUCCESS) {
       if (err) {
+#ifdef _WIN32
+        (*err) = _strdup(err_str.c_str());  // may leak
+#else
         (*err) = strdup(err_str.c_str());  // may leak
+#endif
       }
       return ret;
     }
