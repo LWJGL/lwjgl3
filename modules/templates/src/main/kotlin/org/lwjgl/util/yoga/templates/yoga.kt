@@ -164,6 +164,13 @@ div {
     )
 
     EnumConstant(
+        "YGNodeType",
+
+        "NodeTypeDefault".enum,
+        "NodeTypeText".enum
+    )
+
+    EnumConstant(
         "YGOverflow",
 
         "OverflowVisible".enum,
@@ -341,7 +348,8 @@ div {
         float.IN("lastComputedWidth", ""),
         float.IN("lastComputedHeight", ""),
         float.IN("marginRow", ""),
-        float.IN("marginColumn", "")
+        float.IN("marginColumn", ""),
+        const..YGConfigRef.IN("config", "")
     )
 
     void(
@@ -505,6 +513,7 @@ div {
     YG_NODE_PROPERTY(YGBaselineFunc, "BaselineFunc", "baselineFunc")
     YG_NODE_PROPERTY(YGPrintFunc, "PrintFunc", "printFunc")
     YG_NODE_PROPERTY(bool, "HasNewLayout", "hasNewLayout")
+    YG_NODE_PROPERTY(YGNodeType, "NodeType", "nodeType")
 
     YG_NODE_STYLE_PROPERTY(YGDirection, "Direction", "direction")
     YG_NODE_STYLE_PROPERTY(YGFlexDirection, "FlexDirection", "flexDirection")
@@ -560,6 +569,7 @@ div {
     YG_NODE_LAYOUT_PROPERTY(float, "Width")
     YG_NODE_LAYOUT_PROPERTY(float, "Height")
     YG_NODE_LAYOUT_PROPERTY(YGDirection, "Direction")
+    YG_NODE_LAYOUT_PROPERTY(bool, "HadOverflow")
 
     YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Margin")
     YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Border")
@@ -744,6 +754,7 @@ div {
     YG_TYPE_TO_STRING(YGJustify)
     YG_TYPE_TO_STRING(YGLogLevel)
     YG_TYPE_TO_STRING(YGMeasureMode)
+    YG_TYPE_TO_STRING(YGNodeType)
     YG_TYPE_TO_STRING(YGOverflow)
     YG_TYPE_TO_STRING(YGPositionType)
     YG_TYPE_TO_STRING(YGPrintOptions)

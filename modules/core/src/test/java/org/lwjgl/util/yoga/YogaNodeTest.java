@@ -106,8 +106,8 @@ public class YogaNodeTest {
         try (YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MAX_VALUE, Float.MAX_VALUE)) {
             YGNodeSetMeasureFunc(node.node, measureFunc);
             node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-            assertEquals(Float.MAX_VALUE, node.getLayoutWidth(), 0.0f);
-            assertEquals(Float.MAX_VALUE, node.getLayoutHeight(), 0.0f);
+            assertEquals(Float.MAX_VALUE, node.getLayoutWidth(), 0.01f);
+            assertEquals(Float.MAX_VALUE, node.getLayoutHeight(), 0.01f);
         }
     }
 
@@ -177,6 +177,15 @@ public class YogaNodeTest {
         assertEquals(3, (int)node.getLayoutBorder(YogaEdge.TOP));
         assertEquals(4, (int)node.getLayoutBorder(YogaEdge.BOTTOM));
     }
+
+    @Test
+    public void testUseWebDefaults() {
+        YogaConfig config = new YogaConfig();
+        config.setUseWebDefaults(true);
+        YogaNode node = new YogaNode(config);
+        assertEquals(YogaFlexDirection.ROW.value, node.getFlexDirection());
+    }
+
 
     @Test
     public void testPercentPaddingOnRoot() {

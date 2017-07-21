@@ -207,6 +207,10 @@ class YogaNode {
         return YGNodeStyleGetBorder(node, edge.value);
     }
 
+    int getFlexDirection() {
+        return YGNodeStyleGetFlexDirection(node);
+    }
+
     YGValue getMargin(YogaEdge edge, YGValue __result) {
         return YGNodeStyleGetMargin(node, edge.value, __result);
     }

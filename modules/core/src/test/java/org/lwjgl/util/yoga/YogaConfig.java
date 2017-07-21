@@ -23,4 +23,8 @@ public class YogaConfig {
         YGConfigSetExperimentalFeatureEnabled(handle, feature.value, enabled);
     }
 
+    void setUseWebDefaults(boolean enabled) {
+        YGConfigSetUseWebDefaults(handle, enabled);
+    }
+
 }

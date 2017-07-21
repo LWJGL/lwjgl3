@@ -59,6 +59,7 @@ val YGFlexDirection = "YGFlexDirection".enumType
 val YGJustify = "YGJustify".enumType
 val YGLogLevel = "YGLogLevel".enumType
 val YGMeasureMode = "YGMeasureMode".enumType
+val YGNodeType = "YGNodeType".enumType
 val YGOverflow = "YGOverflow".enumType
 val YGPositionType = "YGPositionType".enumType
 val YGPrintOptions = "YGPrintOptions".enumType
@@ -174,6 +175,7 @@ val YGLayout = struct(YOGA_PACKAGE, "YGLayout", mutable = false) {
 
     uint32_t.member("computedFlexBasisGeneration", "")
     float.member("computedFlexBasis", "")
+    bool.member("hadOverflow", "")
 
     uint32_t.member("generationCount", "")
     YGDirection.member("lastParentDirection", "")
@@ -231,6 +233,7 @@ val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
 
     bool.member("isDirty", "")
     bool.member("hasNewLayout", "")
+    YGNodeType.member("nodeType", "")
 
     YGValue.p.array("resolvedDimensions", "", size = 2)
 }
