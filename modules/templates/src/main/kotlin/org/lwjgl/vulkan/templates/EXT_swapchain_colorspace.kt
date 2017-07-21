@@ -51,7 +51,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
     IntConstant(
         "The extension specification version.",
 
-        "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."2"
+        "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -75,6 +75,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
         "COLOR_SPACE_HDR10_HLG_EXT".."1000104010",
         "COLOR_SPACE_ADOBERGB_LINEAR_EXT".."1000104011",
         "COLOR_SPACE_ADOBERGB_NONLINEAR_EXT".."1000104012",
-        "COLOR_SPACE_PASS_THROUGH_EXT".."1000104013"
+        "COLOR_SPACE_PASS_THROUGH_EXT".."1000104013",
+        "COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT".."1000104014"
     )
 }

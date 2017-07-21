@@ -1756,7 +1756,6 @@ public final class HelloVulkan {
             VkPresentInfoKHR present = VkPresentInfoKHR.callocStack(stack)
                 .sType(VK_STRUCTURE_TYPE_PRESENT_INFO_KHR)
                 .pNext(NULL)
-                .waitSemaphoreCount(1)
                 .pWaitSemaphores(lp2)
                 .swapchainCount(1)
                 .pSwapchains(lp.put(0, swapchain))

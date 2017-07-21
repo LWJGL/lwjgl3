@@ -9,14 +9,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 import org.lwjgl.vulkan.*
 
-val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_external_memory_win32", type = "device", postfix = KHX) {
+val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_external_memory_win32", type = "device", postfix = KHR) {
     documentation =
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export Windows handles from Vulkan memory objects and to import Vulkan memory objects from Windows handles exported from other Vulkan memory objects or from similar resources in other APIs.
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHX_external_memory_win32</dd>
+            <dd>VK_KHR_external_memory_win32</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -57,25 +57,26 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
     IntConstant(
         "The extension specification version.",
 
-        "KHX_EXTERNAL_MEMORY_WIN32_SPEC_VERSION".."1"
+        "KHR_EXTERNAL_MEMORY_WIN32_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "KHX_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME".."VK_KHX_external_memory_win32"
+        "KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME".."VK_KHR_external_memory_win32"
     )
 
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHX".."1000073000",
-        "STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHX".."1000073001",
-        "STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX".."1000073002"
+        "STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR".."1000073000",
+        "STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR".."1000073001",
+        "STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR".."1000073002",
+        "STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR".."1000073003"
     )
 
     VkResult(
-        "GetMemoryWin32HandleKHX",
+        "GetMemoryWin32HandleKHR",
         """
         Get a Windows HANDLE for a memory object.
 
@@ -83,31 +84,19 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
         To export a Windows handle representing the underlying resources of a Vulkan device memory object, call:
 
         <code><pre>
-￿VkResult vkGetMemoryWin32HandleKHX(
+￿VkResult vkGetMemoryWin32HandleKHR(
 ￿    VkDevice                                    device,
-￿    VkDeviceMemory                              memory,
-￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
+￿    const VkMemoryGetWin32HandleInfoKHR*        pGetWin32HandleInfo,
 ￿    HANDLE*                                     pHandle);</pre></code>
 
         <h5>Description</h5>
-        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHX} for a description of the properties of the defined external memory handle types.
-
-        For handle types defined as NT handles, the handles returned by #GetMemoryWin32HandleKHX() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportMemoryAllocateInfoKHX{@code ::handleTypes} when {@code memory} was created.</li>
-            <li>If {@code handleType} is defined as an NT handle, #GetMemoryWin32HandleKHX() <b>must</b> be called no more than once for each valid unique combination of {@code memory} and {@code handleType}.</li>
-            <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
-        </ul>
+        For handle types defined as NT handles, the handles returned by #GetMemoryWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHX} value</li>
+            <li>{@code pGetWin32HandleInfo} <b>must</b> be a pointer to a valid ##VkMemoryGetWin32HandleInfoKHR structure</li>
             <li>{@code pHandle} <b>must</b> be a pointer to a {@code HANDLE} value</li>
-            <li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -123,16 +112,18 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
             </ul></dd>
         </dl>
+
+        <h5>See Also</h5>
+        ##VkMemoryGetWin32HandleInfoKHR
         """,
 
-        VkDevice.IN("device", "the logical device that created {@code memory}."),
-        VkDeviceMemory.IN("memory", "the memory object from which the handle will be exported."),
-        VkExternalMemoryHandleTypeFlagBitsKHX.IN("handleType", "the type of handle requested."),
+        VkDevice.IN("device", "the logical device that created the device memory being exported."),
+        const..VkMemoryGetWin32HandleInfoKHR.p.IN("pGetWin32HandleInfo", "a pointer to an instance of the ##VkMemoryGetWin32HandleInfoKHR structure containing parameters of the export operation."),
         Check(1)..HANDLE.p.OUT("pHandle", "will return the Windows handle representing the underlying resources of the device memory object.")
     )
 
     VkResult(
-        "GetMemoryWin32HandlePropertiesKHX",
+        "GetMemoryWin32HandlePropertiesKHR",
         """
         Get Properties of External Memory Win32 Handles.
 
@@ -140,11 +131,11 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
         Windows memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:
 
         <code><pre>
-￿VkResult vkGetMemoryWin32HandlePropertiesKHX(
+￿VkResult vkGetMemoryWin32HandlePropertiesKHR(
 ￿    VkDevice                                    device,
-￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
+￿    VkExternalMemoryHandleTypeFlagBitsKHR       handleType,
 ￿    HANDLE                                      handle,
-￿    VkMemoryWin32HandlePropertiesKHX*           pMemoryWin32HandleProperties);</pre></code>
+￿    VkMemoryWin32HandlePropertiesKHR*           pMemoryWin32HandleProperties);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -155,8 +146,8 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHX} value</li>
-            <li>{@code pMemoryWin32HandleProperties} <b>must</b> be a pointer to a ##VkMemoryWin32HandlePropertiesKHX structure</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code pMemoryWin32HandleProperties} <b>must</b> be a pointer to a ##VkMemoryWin32HandlePropertiesKHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -168,17 +159,17 @@ val KHX_external_memory_win32 = "KHXExternalMemoryWin32".nativeClassVK("KHX_exte
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHX</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
             </ul></dd>
         </dl>
 
         <h5>See Also</h5>
-        ##VkMemoryWin32HandlePropertiesKHX
+        ##VkMemoryWin32HandlePropertiesKHR
         """,
 
         VkDevice.IN("device", "the logical device that will be importing {@code handle}."),
-        VkExternalMemoryHandleTypeFlagBitsKHX.IN("handleType", "the type of the handle {@code handle}."),
+        VkExternalMemoryHandleTypeFlagBitsKHR.IN("handleType", "the type of the handle {@code handle}."),
         HANDLE.IN("handle", "the handle which will be imported."),
-        VkMemoryWin32HandlePropertiesKHX.p.OUT("pMemoryWin32HandleProperties", "will return properties of {@code handle}.")
+        VkMemoryWin32HandlePropertiesKHR.p.OUT("pMemoryWin32HandleProperties", "will return properties of {@code handle}.")
     )
 }

@@ -143,12 +143,46 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         VkDebugReportObjectTypeEXT - Specify the type of an object handle
 
         <h5>Description</h5>
-        For more information, see:
-
         <ul>
-            <li>The See Also section for other reference pages using this type.</li>
-            <li>The Vulkan Specification.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT specifies an unknown object.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT specifies a {@code VkInstance}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT specifies a {@code VkPhysicalDevice}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT specifies a {@code VkDevice}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT specifies a {@code VkQueue}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT specifies a {@code VkSemaphore}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT specifies a {@code VkCommandBuffer}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT specifies a {@code VkFence}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT specifies a {@code VkDeviceMemory}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT specifies a {@code VkBuffer}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT specifies a {@code VkImage}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT specifies a {@code VkEvent}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT specifies a {@code VkQueryPool}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT specifies a {@code VkBufferView}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT specifies a {@code VkImageView}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT specifies a {@code VkShaderModule}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT specifies a {@code VkPipelineCache}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT specifies a {@code VkPipelineLayout}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT specifies a {@code VkRenderPass}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT specifies a {@code VkPipeline}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT specifies a {@code VkDescriptorSetLayout}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT specifies a {@code VkSampler}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT specifies a {@code VkDescriptorPool}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT specifies a {@code VkDescriptorSet}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT specifies a {@code VkFramebuffer}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT specifies a {@code VkCommandPool}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT specifies a {@code VkSurfaceKHR}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT specifies a {@code VkSwapchainKHR}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT specifies a {@code VkDebugReportCallbackEXT}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT specifies a {@code VkDisplayKHR}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT specifies a {@code VkDisplayModeKHR}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT specifies a {@code VkObjectTableNVX}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT specifies a {@code VkIndirectCommandsLayoutNVX}.</li>
+            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT specifies a {@code VkDescriptorUpdateTemplateKHR}.</li>
         </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The primary expected use of #ERROR_VALIDATION_FAILED_EXT is for validation layer testing. It is not expected that an application would see this error code during normal use of the validation layers.
+        </div>
 
         <h5>See Also</h5>
         ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, #DebugReportMessageEXT()

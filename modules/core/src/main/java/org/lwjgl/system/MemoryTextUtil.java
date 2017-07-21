@@ -362,7 +362,6 @@ class MemoryTextUtil {
                 checkMalformed3(b0, b1, b2);
 
                 string[i++] = checkSurrogate((char)((b0 << 12) ^ (b1 << 6) ^ (b2 ^ (((byte)0xE0 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0)))));
-                ;
             } else if ((b0 >> 3) == -2) {
                 int b1 = buffer.get(position++);
                 int b2 = buffer.get(position++);

@@ -86,6 +86,12 @@ class Parameter(
         null
     )
 
+    init {
+        if (name.isEmpty()) {
+            throw IllegalArgumentException("Parameter name cannot be empty.")
+        }
+    }
+
     override fun hashCode() = name.hashCode()
 
     override fun equals(other: Any?) = other === this || (other is Parameter && other.name == this.name)

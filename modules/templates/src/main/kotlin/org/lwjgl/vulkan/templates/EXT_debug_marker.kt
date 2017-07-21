@@ -175,7 +175,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <code><pre>
 ￿VkResult vkDebugMarkerSetObjectTagEXT(
 ￿    VkDevice                                    device,
-￿    VkDebugMarkerObjectTagInfoEXT*              pTagInfo);</pre></code>
+￿    const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -186,7 +186,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pTagInfo} <b>must</b> be a pointer to a ##VkDebugMarkerObjectTagInfoEXT structure</li>
+            <li>{@code pTagInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerObjectTagInfoEXT structure</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -213,7 +213,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkDevice.IN("device", "the device that created the object."),
-        VkDebugMarkerObjectTagInfoEXT.p.IN("pTagInfo", "a pointer to an instance of the ##VkDebugMarkerObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
+        const..VkDebugMarkerObjectTagInfoEXT.p.IN("pTagInfo", "a pointer to an instance of the ##VkDebugMarkerObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
     )
 
     VkResult(
@@ -227,7 +227,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <code><pre>
 ￿VkResult vkDebugMarkerSetObjectNameEXT(
 ￿    VkDevice                                    device,
-￿    VkDebugMarkerObjectNameInfoEXT*             pNameInfo);</pre></code>
+￿    const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -237,7 +237,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pNameInfo} <b>must</b> be a pointer to a ##VkDebugMarkerObjectNameInfoEXT structure</li>
+            <li>{@code pNameInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerObjectNameInfoEXT structure</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -264,7 +264,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkDevice.IN("device", "the device that created the object."),
-        VkDebugMarkerObjectNameInfoEXT.p.IN("pNameInfo", "a pointer to an instance of the ##VkDebugMarkerObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
+        const..VkDebugMarkerObjectNameInfoEXT.p.IN("pNameInfo", "a pointer to an instance of the ##VkDebugMarkerObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
     )
 
     void(
@@ -278,12 +278,12 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <code><pre>
 ￿void vkCmdDebugMarkerBeginEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    VkDebugMarkerMarkerInfoEXT*                 pMarkerInfo);</pre></code>
+￿    const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pMarkerInfo} <b>must</b> be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure</li>
+            <li>{@code pMarkerInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerMarkerInfoEXT structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
         </ul>
@@ -304,7 +304,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugMarkerMarkerInfoEXT.p.IN("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker region to open.")
+        const..VkDebugMarkerMarkerInfoEXT.p.IN("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker region to open.")
     )
 
     void(
@@ -361,12 +361,12 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <code><pre>
 ￿void vkCmdDebugMarkerInsertEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    VkDebugMarkerMarkerInfoEXT*                 pMarkerInfo);</pre></code>
+￿    const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</pre></code>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pMarkerInfo} <b>must</b> be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure</li>
+            <li>{@code pMarkerInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerMarkerInfoEXT structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
         </ul>
@@ -387,6 +387,6 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugMarkerMarkerInfoEXT.p.IN("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker to insert.")
+        const..VkDebugMarkerMarkerInfoEXT.p.IN("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker to insert.")
     )
 }

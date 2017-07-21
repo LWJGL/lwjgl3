@@ -8,14 +8,14 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val KHX_external_memory = "KHXExternalMemory".nativeClassVK("KHX_external_memory", type = "device", postfix = KHX) {
+val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory", type = "device", postfix = KHR) {
     documentation =
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export non-Vulkan handles from Vulkan memory objects such that the underlying resources can be referenced outside the scope of the Vulkan logical device that created them.
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHX_external_memory</dd>
+            <dd>VK_KHR_external_memory</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -39,17 +39,23 @@ val KHX_external_memory = "KHXExternalMemory".nativeClassVK("KHX_external_memory
             <dd><ul>
                 <li>This extension is written against version 1.0 of the Vulkan API.</li>
                 <li>Requires VK_KHR_external_memory_capabilities.</li>
+                <li>Interacts with VK_KHR_dedicated_allocation.</li>
                 <li>Interacts with VK_NV_dedicated_allocation.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
+                <li>Jason Ekstrand, Intel</li>
                 <li>Ian Elliot, Google</li>
                 <li>Jesse Hall, Google</li>
+                <li>Tobias Hector, Imagination Technologies</li>
                 <li>James Jones, NVIDIA</li>
                 <li>Jeff Juliano, NVIDIA</li>
+                <li>Matthew Netsch, Qualcomm Technologies, Inc.</li>
+                <li>Daniel Rakos, AMD</li>
                 <li>Carsten Rohde, NVIDIA</li>
-                <li>Tobias Hector, Imagination</li>
+                <li>Ray Smith, ARM</li>
+                <li>Chad Versace, Google</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -60,32 +66,32 @@ val KHX_external_memory = "KHXExternalMemory".nativeClassVK("KHX_external_memory
     IntConstant(
         "The extension specification version.",
 
-        "KHX_EXTERNAL_MEMORY_SPEC_VERSION".."1"
+        "KHR_EXTERNAL_MEMORY_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "KHX_EXTERNAL_MEMORY_EXTENSION_NAME".."VK_KHX_external_memory"
+        "KHR_EXTERNAL_MEMORY_EXTENSION_NAME".."VK_KHR_external_memory"
     )
 
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHX".."1000072000",
-        "STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHX".."1000072001",
-        "STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHX".."1000072002"
+        "STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR".."1000072000",
+        "STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR".."1000072001",
+        "STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR".."1000072002"
     )
 
     EnumConstant(
         "Extends {@code VkResult}.",
 
-        "ERROR_INVALID_EXTERNAL_HANDLE_KHX".."-1000072003"
+        "ERROR_INVALID_EXTERNAL_HANDLE_KHR".."-1000072003"
     )
 
     EnumConstant(
-        "VK_QUEUE_FAMILY_EXTERNAL_KHX",
+        "VK_QUEUE_FAMILY_EXTERNAL_KHR",
 
-        "QUEUE_FAMILY_EXTERNAL_KHX".."(~0-1)"
+        "QUEUE_FAMILY_EXTERNAL_KHR".."(~0-1)"
     )
 }

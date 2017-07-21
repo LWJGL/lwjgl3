@@ -14,24 +14,23 @@ val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_sh
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>
-                SPV_KHR_shader_draw_parameters
-                The extension provides access to three additional built-in shader variables in Vulkan:
+            <li>SPV_KHR_shader_draw_parameters</li>
+        </ul>
 
-                <ul>
-                    <li>{@code BaseInstance}, which contains the firstInstance parameter passed to draw commands,</li>
-                    <li>{@code BaseVertex}, which contains the firstVertex/vertexOffset parameter passed to draw commands, and</li>
-                    <li>{@code DrawIndex}, which contains the index of the draw call currently being processed from an indirect draw call.</li>
-                </ul>
+        The extension provides access to three additional built-in shader variables in Vulkan:
 
-                When using GLSL source-based shader languages, the following variables from {@code GL_ARB_shader_draw_parameters} can map to these SPIR-V built-in decorations:
+        <ul>
+            <li>{@code BaseInstance}, which contains the firstInstance parameter passed to draw commands,</li>
+            <li>{@code BaseVertex}, which contains the firstVertex/vertexOffset parameter passed to draw commands, and</li>
+            <li>{@code DrawIndex}, which contains the index of the draw call currently being processed from an indirect draw call.</li>
+        </ul>
 
-                <ul>
-                    <li>in int gl_BaseInstanceARB; &#8594; {@code BaseInstance},</li>
-                    <li>in int gl_BaseVertexARB &#8594; {@code BaseVertex}, and</li>
-                    <li>in int gl_DrawIDARB; &#8594; {@code DrawIndex}.</li>
-                </ul>
-            </li>
+        When using GLSL source-based shader languages, the following variables from {@code GL_ARB_shader_draw_parameters} can map to these SPIR-V built-in decorations:
+
+        <ul>
+            <li>in int gl_BaseInstanceARB; &#8594; {@code BaseInstance},</li>
+            <li>in int gl_BaseVertexARB &#8594; {@code BaseVertex}, and</li>
+            <li>in int gl_DrawIDARB; &#8594; {@code DrawIndex}.</li>
         </ul>
 
         <dl>

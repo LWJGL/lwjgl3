@@ -121,7 +121,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 
             <dt><b>Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0. of the Vulkan API.</li>
+                <li>This extension is written against version 1.0 of the Vulkan API.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

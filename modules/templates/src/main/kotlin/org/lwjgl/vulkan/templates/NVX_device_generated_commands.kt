@@ -386,7 +386,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     VkResult(
         "CreateIndirectCommandsLayoutNVX",
         """
-        (no short description available).
+        Create an indirect command layout object.
 
         <h5>C Specification</h5>
         Indirect command layouts are created by:
@@ -471,7 +471,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     VkResult(
         "CreateObjectTableNVX",
         """
-        (no short description available).
+        Create an object table.
 
         <h5>C Specification</h5>
         To create object tables, call:
@@ -561,7 +561,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     VkResult(
         "RegisterObjectsNVX",
         """
-        (no short description available).
+        Register resource bindings in an object table.
 
         <h5>C Specification</h5>
         Resource bindings of Vulkan objects are registered at an arbitrary ftext:uint32_t index within an object table. As long as the object table references such objects, they <b>must</b> not be deleted.
@@ -624,10 +624,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     VkResult(
         "UnregisterObjectsNVX",
         """
-        (no short description available).
+        Unregister resource bindings in an object table.
 
         <h5>C Specification</h5>
-        Using the following command to unregister resources from an object table:
+        Use the following command to unregister resources from an object table:
 
         <code><pre>
 ￿VkResult vkUnregisterObjectsNVX(

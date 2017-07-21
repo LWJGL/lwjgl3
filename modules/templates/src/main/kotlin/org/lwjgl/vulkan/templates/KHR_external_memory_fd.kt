@@ -8,14 +8,14 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_memory_fd", type = "device", postfix = KHX) {
+val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_memory_fd", type = "device", postfix = KHR) {
     documentation =
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export POSIX file descriptor handles from Vulkan memory objects and to import Vulkan memory objects from POSIX file descriptor handles exported from other Vulkan memory objects or from similar resources in other APIs.
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHX_external_memory_fd</dd>
+            <dd>VK_KHR_external_memory_fd</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -55,24 +55,25 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
     IntConstant(
         "The extension specification version.",
 
-        "KHX_EXTERNAL_MEMORY_FD_SPEC_VERSION".."1"
+        "KHR_EXTERNAL_MEMORY_FD_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "KHX_EXTERNAL_MEMORY_FD_EXTENSION_NAME".."VK_KHX_external_memory_fd"
+        "KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME".."VK_KHR_external_memory_fd"
     )
 
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHX".."1000074000",
-        "STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHX".."1000074001"
+        "STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR".."1000074000",
+        "STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR".."1000074001",
+        "STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR".."1000074002"
     )
 
     VkResult(
-        "GetMemoryFdKHX",
+        "GetMemoryFdKHR",
         """
         Get a POSIX file descriptor for a memory object.
 
@@ -80,30 +81,19 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
         To export a POSIX file descriptor representing the underlying resources of a Vulkan device memory object, call:
 
         <code><pre>
-￿VkResult vkGetMemoryFdKHX(
+￿VkResult vkGetMemoryFdKHR(
 ￿    VkDevice                                    device,
-￿    VkDeviceMemory                              memory,
-￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
+￿    const VkMemoryGetFdInfoKHR*                 pGetFdInfo,
 ￿    int*                                        pFd);</pre></code>
 
         <h5>Description</h5>
-        The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHX} for a description of the properties of the defined external memory handle types.
-
-        Each call to #GetMemoryFdKHX() <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the fname:close system call when it is no longer needed, or by importing a Vulkan memory object from it.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportMemoryAllocateInfoKHX{@code ::handleTypes} when {@code memory} was created.</li>
-            <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
-        </ul>
+        Each call to #GetMemoryFdKHR() <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the fname:close system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an fname:execve system call is made.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHX} value</li>
+            <li>{@code pGetFdInfo} <b>must</b> be a pointer to a valid ##VkMemoryGetFdInfoKHR structure</li>
             <li>{@code pFd} <b>must</b> be a pointer to a {@code int} value</li>
-            <li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -119,16 +109,18 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
             </ul></dd>
         </dl>
+
+        <h5>See Also</h5>
+        ##VkMemoryGetFdInfoKHR
         """,
 
-        VkDevice.IN("device", "the logical device that created {@code memory}."),
-        VkDeviceMemory.IN("memory", "the memory object from which the handle will be exported."),
-        VkExternalMemoryHandleTypeFlagBitsKHX.IN("handleType", "the type of handle requested."),
+        VkDevice.IN("device", "the logical device that created the device memory being exported."),
+        const..VkMemoryGetFdInfoKHR.p.IN("pGetFdInfo", "a pointer to an instance of the ##VkMemoryGetFdInfoKHR structure containing parameters of the export operation."),
         Check(1)..int_p.OUT("pFd", "will return a file descriptor representing the underlying resources of the device memory object.")
     )
 
     VkResult(
-        "GetMemoryFdPropertiesKHX",
+        "GetMemoryFdPropertiesKHR",
         """
         Get Properties of External Memory File Descriptors.
 
@@ -136,11 +128,11 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
         POSIX file descriptor memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:
 
         <code><pre>
-￿VkResult vkGetMemoryFdPropertiesKHX(
+￿VkResult vkGetMemoryFdPropertiesKHR(
 ￿    VkDevice                                    device,
-￿    VkExternalMemoryHandleTypeFlagBitsKHX       handleType,
+￿    VkExternalMemoryHandleTypeFlagBitsKHR       handleType,
 ￿    int                                         fd,
-￿    VkMemoryFdPropertiesKHX*                    pMemoryFdProperties);</pre></code>
+￿    VkMemoryFdPropertiesKHR*                    pMemoryFdProperties);</pre></code>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -151,8 +143,8 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHX} value</li>
-            <li>{@code pMemoryFdProperties} <b>must</b> be a pointer to a ##VkMemoryFdPropertiesKHX structure</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code pMemoryFdProperties} <b>must</b> be a pointer to a ##VkMemoryFdPropertiesKHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -164,17 +156,17 @@ val KHX_external_memory_fd = "KHXExternalMemoryFd".nativeClassVK("KHX_external_m
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHX</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
             </ul></dd>
         </dl>
 
         <h5>See Also</h5>
-        ##VkMemoryFdPropertiesKHX
+        ##VkMemoryFdPropertiesKHR
         """,
 
         VkDevice.IN("device", "the logical device that will be importing {@code fd}."),
-        VkExternalMemoryHandleTypeFlagBitsKHX.IN("handleType", "the type of the handle {@code fd}."),
+        VkExternalMemoryHandleTypeFlagBitsKHR.IN("handleType", "the type of the handle {@code fd}."),
         int.IN("fd", "the handle which will be imported."),
-        VkMemoryFdPropertiesKHX.p.OUT("pMemoryFdProperties", "will return properties of the handle {@code fd}.")
+        VkMemoryFdPropertiesKHR.p.OUT("pMemoryFdProperties", "will return properties of the handle {@code fd}.")
     )
 }

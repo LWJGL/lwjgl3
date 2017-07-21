@@ -140,10 +140,7 @@ fun templateCustomization() {
         javaImport("static org.lwjgl.vulkan.KHXDeviceGroupCreation.*")
     }
 
-    VkPhysicalDeviceIDPropertiesKHX.definition.apply {
-        javaImport(
-            "static org.lwjgl.vulkan.VK10.*",
-            "static org.lwjgl.vulkan.KHXExternalMemoryCapabilities.*"
-        )
+    VkPhysicalDeviceIDPropertiesKHR.definition.apply {
+        javaImport("static org.lwjgl.vulkan.VK10.*")
     }
 }
