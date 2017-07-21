@@ -162,7 +162,7 @@ ENABLE_WARNINGS()""")
 
         "Texture_2D".enum("2D textures"),
         "Texture_2D_External".enum("External 2D texture. Not used on PC"),
-        "Texture_Cube".enum("Cube maps. Not currently supported on PC.")
+        "Texture_Cube".enum("Cube maps.")
     )
 
     EnumConstant(
@@ -175,7 +175,10 @@ ENABLE_WARNINGS()""")
         "TextureBind_None".enum,
         "TextureBind_DX_RenderTarget".enum("The application can write into the chain with pixel shader", 0x0001),
         "TextureBind_DX_UnorderedAccess".enum("The application can write to the chain with compute shader", 0x0002),
-        "TextureBind_DX_DepthStencil".enum("The chain buffers can be bound as depth and/or stencil buffers", 0x0004)
+        "TextureBind_DX_DepthStencil".enum(
+            "The chain buffers can be bound as depth and/or stencil buffers. This flag cannot be combined with #TextureBind_DX_RenderTarget.",
+            0x0004
+        )
     )
 
     EnumConstant(
@@ -523,18 +526,13 @@ ovr_IdentifyClient(
         """
         Returns information about the current HMD.
 
-        #Initialize() must have first been called in order for this to succeed, otherwise ovrHmdDesc::Type will be reported as #Hmd_None.
+        #Initialize() must be called prior to calling this function, otherwise {@code ovrHmdDesc::Type} will be set to #Hmd_None without checking for the HMD
+        presence.
         """,
 
-        nullable..ovrSession.IN(
-            "session",
-            """
-            an {@code ovrSession} previously returned by #Create(), else #NULL in which case this function detects whether an HMD is present and returns its
-            info if so.
-            """
-        ),
+        nullable..ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create() or #NULL"),
 
-        returnDoc = "an ##OVRHmdDesc. If the {@code hmd} is #NULL and ovrHmdDesc::Type is #Hmd_None then no HMD is present."
+        returnDoc = "an ##OVRHmdDesc. If invoked with #NULL session argument, {@code ovrHmdDesc::Type} to #Hmd_None indicates that the HMD is not connected."
     )
 
     val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()")
@@ -1339,6 +1337,39 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
     )
 
     // ----------------
+    // Mixed reality support
+
+    ovrResult(
+        "GetExternalCameras",
+        "Returns the number of camera properties of all cameras.",
+
+        session,
+        nullable..ovrExternalCamera_p.OUT(
+            "cameras",
+            "the array. If #NULL or {@code *inoutCameraCount} is too small, will return #Error_InsufficientArraySize."),
+        AutoSize("cameras")..Check(1)..unsigned_int_p.INOUT(
+            "inoutCameraCount",
+            "supplies the array capacity, will return the actual number of cameras defined"
+        ),
+
+        returnDoc = "the ids of external cameras the system knows about. Returns #Error_NoExternalCameraInfo if there is not any external camera information."
+    )
+
+    ovrResult(
+        "SetExternalCameraProperties",
+        """
+        Sets the camera intrinsics and/or extrinsics stored for the {@code name} camera.
+
+        Names must be &lt; 32 characters and null-terminated.
+        """,
+
+        session,
+        const..charASCII_p.IN("name", "specifies which camera to set the intrinsics or extrinsics for"),
+        nullable..const..ovrCameraIntrinsics.p.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
+        nullable..const..ovrCameraExtrinsics.p.IN("extrinsics", "contains the extrinsic parameters to set, can be null")
+    )
+
+    // ----------------
     // Property Access
 
     ovrBool(
@@ -1475,35 +1506,5 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         const..charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
-    )
-
-    ovrResult(
-        "GetExternalCameras",
-        "Returns the number of camera properties of all cameras.",
-
-        session,
-        nullable..ovrExternalCamera_p.OUT(
-            "cameras",
-            "the array. If #NULL or {@code *inoutCameraCount} is too small, will return #Error_InsufficientArraySize."),
-        AutoSize("cameras")..Check(1)..unsigned_int_p.INOUT(
-            "inoutCameraCount",
-            "supplies the array capacity, will return the actual number of cameras defined"
-        ),
-
-        returnDoc = "the ids of external cameras the system knows about. Returns #Error_NoExternalCameraInfo if there is not any external camera information."
-    )
-
-    ovrResult(
-        "SetExternalCameraProperties",
-        """
-        Sets the camera intrinsics and/or extrinsics stored for the {@code name} camera.
-
-        Names must be &lt; 32 characters and null-terminated.
-        """,
-
-        session,
-        const..charASCII_p.IN("name", "specifies which camera to set the intrinsics or extrinsics for"),
-        nullable..const..ovrCameraIntrinsics.p.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
-        nullable..const..ovrCameraExtrinsics.p.IN("extrinsics", "contains the extrinsic parameters to set, can be null")
     )
 }
