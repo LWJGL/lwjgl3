@@ -680,7 +680,7 @@ int main(int arg, char **argv)
         "Frees a bitmap allocated by #GetCodepointBitmap(), #GetCodepointBitmapSubpixel(), #GetGlyphBitmap() or #GetGlyphBitmapSubpixel().",
 
         Unsafe..unsigned_char_p.IN("bitmap", "the bitmap to free"),
-        nullable..opaque_p.IN("userdata", "a pointer to user data")
+        Expression("NULL")..nullable..opaque_p.IN("userdata", "a pointer to an allocation context")
     )
 
     unsigned_char_p(
@@ -743,6 +743,26 @@ int main(int arg, char **argv)
         float.IN("scale_y", "the vertical scale"),
         float.IN("shift_x", "the horizontal subpixel shift"),
         float.IN("shift_y", "the vertical subpixel shift"),
+        int.IN("codepoint", "the unicode codepoint to render")
+    )
+
+    void(
+        "MakeCodepointBitmapSubpixelPrefilter",
+        "Same as #MakeCodepointBitmapSubpixel(), but prefiltering is performed (see #PackSetOversampling()).",
+
+        const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
+        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        int.IN("out_w", "the bitmap width"),
+        int.IN("out_h", "the bitmap height"),
+        int.IN("out_stride", "the row stride, in bytes"),
+        float.IN("scale_x", "the horizontal scale"),
+        float.IN("scale_y", "the vertical scale"),
+        float.IN("shift_x", "the horizontal subpixel shift"),
+        float.IN("shift_y", "the vertical subpixel shift"),
+        int.IN("oversample_x", "the horizontal oversampling amount"),
+        int.IN("oversample_y", "the vertical oversampling amount"),
+        Check(1)..float_p.OUT("sub_x", "returns the horizontal oversample shift"),
+        Check(1)..float_p.OUT("sub_y", "returns the vertical oversample shift"),
         int.IN("codepoint", "the unicode codepoint to render")
     )
 
@@ -845,6 +865,26 @@ int main(int arg, char **argv)
     )
 
     void(
+        "MakeGlyphBitmapSubpixelPrefilter",
+        "Same as #MakeGlyphBitmapSubpixel(), but prefiltering is performed (see #PackSetOversampling()).",
+
+        const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
+        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        int.IN("out_w", "the bitmap width"),
+        int.IN("out_h", "the bitmap height"),
+        int.IN("out_stride", "the row stride, in bytes"),
+        float.IN("scale_x", "the horizontal scale"),
+        float.IN("scale_y", "the vertical scale"),
+        float.IN("shift_x", "the horizontal subpixel shift"),
+        float.IN("shift_y", "the vertical subpixel shift"),
+        int.IN("oversample_x", "the horizontal oversampling amount"),
+        int.IN("oversample_y", "the vertical oversampling amount"),
+        Check(1)..float_p.OUT("sub_x", "returns the horizontal oversample shift"),
+        Check(1)..float_p.OUT("sub_y", "returns the vertical oversample shift"),
+        int.IN("glyph", "the glyph index to render")
+    )
+
+    void(
         "GetGlyphBitmapBox",
         """
         Get the bbox of the bitmap centered around the glyph origin; so the bitmap width is {@code ix1-ix0}, height is {@code iy1-iy0}, and location to place
@@ -879,25 +919,107 @@ int main(int arg, char **argv)
         nullable..Check(1)..int_p.OUT("iy1", "returns the top coordinate")
     )
 
-    /*
     void(
-        "stbtt_Rasterize",
-        "",
+        "Rasterize",
+        "Rasterize a shape with quadratic beziers into a bitmap.",
 
-        stbtt__bitmap_p.OUT("result", ""),
-        float.IN("flatness_in_pixels", ""),
-        stbtt_vertex_p.OUT("vertices", ""),
-        int.IN("num_verts", ""),
-        float.IN("scale_x", ""),
-        float.IN("scale_y", ""),
-        float.IN("shift_x", ""),
-        float.IN("shift_y", ""),
-        int.IN("x_off", ""),
-        int.IN("y_off", ""),
-        int.IN("invert", ""),
-        void_p.OUT("userdata", "")
+        stbtt__bitmap_p.OUT("result", "1-channel bitmap to draw into"),
+        float.IN("flatness_in_pixels", "allowable error of curve in pixels"),
+        stbtt_vertex_p.IN("vertices", "array of vertices defining shape"),
+        AutoSize("vertices")..int.IN("num_verts", "number of vertices in above array"),
+        float.IN("scale_x", "horizontal scale applied to input vertices"),
+        float.IN("scale_y", "vertical scale applied to input vertices"),
+        float.IN("shift_x", "horizontal translation applied to input vertices"),
+        float.IN("shift_y", "vertical translation applied to input vertices"),
+        int.IN("x_off", "another horizontal translation applied to input"),
+        int.IN("y_off", "another vertical translation applied to input"),
+        intb.IN("invert", "if non-zero, vertically flip shape"),
+        Expression("NULL")..nullable..opaque_p.IN("alloc_context", "a pointer to an allocation context")
     )
-    */
+
+    // Signed Distance Function (or Field) rendering
+
+    void(
+        "FreeSDF",
+        "Frees an SDF bitmap.",
+
+        Unsafe..unsigned_char_p.IN("bitmap", "the SDF bitmap to free"),
+        Expression("NULL")..nullable..opaque_p.IN("userdata", "a pointer to an allocation context")
+    )
+
+    unsigned_char_p(
+        "GetGlyphSDF",
+        """
+        Computes a discretized SDF field for a single character, suitable for storing in a single-channel texture, sampling with bilinear filtering, and
+        testing against larger than some threshhold to produce scalable fonts.
+        
+        {@code pixel_dist_scale} & {@code onedge_value} are a scale & bias that allows you to make optimal use of the limited {@code 0..255} for your
+        application, trading off precision and special effects. SDF values outside the range {@code 0..255} are clamped to {@code 0..255}.
+        
+        Example:
+        ${codeBlock("""
+scale = stbtt_ScaleForPixelHeight(22)
+padding = 5
+onedge_value = 180
+pixel_dist_scale = 180/5.0 = 36.0""")}
+
+        This will create an SDF bitmap in which the character is about 22 pixels high but the whole bitmap is about {@code 22+5+5=32} pixels high. To produce a
+        filled shape, sample the SDF at each pixel and fill the pixel if the SDF value is greater than or equal to {@code 180/255}. (You'll actually want to
+        antialias, which is beyond the scope of this example.) Additionally, you can compute offset outlines (e.g. to stroke the character border inside &
+        outside, or only outside). For example, to fill outside the character up to 3 SDF pixels, you would compare against {@code (180-36.0*3)/255 = 72/255}.
+        The above choice of variables maps a range from 5 pixels outside the shape to 2 pixels inside the shape to {@code 0..255}; this is intended primarily
+        for apply outside effects only (the interior range is needed to allow proper antialiasing of the font at <i>smaller</i> sizes).
+
+        The function computes the SDF analytically at each SDF pixel, not by e.g. building a higher-res bitmap and approximating it. In theory the quality
+        should be as high as possible for an SDF of this size & representation, but unclear if this is true in practice (perhaps building a higher-res bitmap
+        and computing from that can allow drop-out prevention).
+
+        The algorithm has not been optimized at all, so expect it to be slow if computing lots of characters or very large sizes.
+        """,
+
+        const..stbtt_fontinfo_p.IN("font", "an ##STBTTFontinfo struct"),
+        float.IN("scale", "controls the size of the resulting SDF bitmap, same as it would be creating a regular bitmap"),
+        int.IN("glyph", "the glyph to generate the SDF for"),
+        int.IN(
+            "padding",
+            "extra \"pixels\" around the character which are filled with the distance to the character (not 0), which allows effects like bit outlines"
+        ),
+        unsigned_char.IN("onedge_value", "value 0-255 to test the SDF against to reconstruct the character (i.e. the isocontour of the character)"),
+        float.IN(
+            "pixel_dist_scale",
+            """
+            what value the SDF should increase by when moving one SDF "pixel" away from the edge (on the 0..255 scale). If positive, &gt; {@code onedge_value}
+            is inside; if negative, &lt; {@code onedge_value} is inside.
+            """),
+        AutoSizeResult..Check(1)..int_p.OUT("width", "output width of the SDF bitmap (including padding)"),
+        AutoSizeResult..Check(1)..int_p.OUT("height", "output height of the SDF bitmap (including padding)"),
+        Check(1)..int_p.OUT("xoff", "output horizontal origin of the character"),
+        Check(1)..int_p.OUT("yoff", "output vertical origin of the character")
+    )
+
+    unsigned_char_p(
+        "GetCodepointSDF",
+        "Codepoint version of #GetGlyphSDF().",
+
+        const..stbtt_fontinfo_p.IN("font", "an ##STBTTFontinfo struct"),
+        float.IN("scale", "controls the size of the resulting SDF bitmap, same as it would be creating a regular bitmap"),
+        int.IN("codepoint", "the codepoint to generate the SDF for"),
+        int.IN(
+            "padding",
+            "extra \"pixels\" around the character which are filled with the distance to the character (not 0), which allows effects like bit outlines"
+        ),
+        unsigned_char.IN("onedge_value", "value 0-255 to test the SDF against to reconstruct the character (i.e. the isocontour of the character)"),
+        float.IN(
+            "pixel_dist_scale",
+            """
+            what value the SDF should increase by when moving one SDF "pixel" away from the edge (on the 0..255 scale). If positive, &gt; {@code onedge_value}
+            is inside; if negative, &lt; {@code onedge_value} is inside.
+            """),
+        AutoSizeResult..Check(1)..int_p.OUT("width", "output width of the SDF bitmap (including padding)"),
+        AutoSizeResult..Check(1)..int_p.OUT("height", "output height of the SDF bitmap (including padding)"),
+        Check(1)..int_p.OUT("xoff", "output horizontal origin of the character"),
+        Check(1)..int_p.OUT("yoff", "output vertical origin of the character")
+    )
 
     // Finding the right font...
 

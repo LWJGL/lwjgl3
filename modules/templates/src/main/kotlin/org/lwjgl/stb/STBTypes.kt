@@ -242,6 +242,15 @@ val stbtt_vertex_p = struct(STB_PACKAGE, "STBTTVertex", nativeName = "stbtt_vert
 }.p
 val stbtt_vertex_pp = stbtt_vertex_p.p
 
+val stbtt__bitmap_p = struct(STB_PACKAGE, "STBTTBitmap", nativeName = "stbtt__bitmap") {
+    documentation = "Bitmap data."
+
+    int.member("w", "the bitmap width")
+    int.member("h", "the bitmap height")
+    int.member("stride", "the row stride, in bytes")
+    unsigned_char_p.member("pixels", "the bitmap data")
+}.p
+
 // stb_vorbis.c
 
 val stb_vorbis_p = "stb_vorbis".p
