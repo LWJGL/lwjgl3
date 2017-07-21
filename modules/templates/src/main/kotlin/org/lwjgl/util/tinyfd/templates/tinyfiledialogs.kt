@@ -72,11 +72,11 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 
         nullable..const..charUTF8_p.IN("aTitle", "the dialog title or #NULL"),
         nullable..const..charUTF8_p.IN("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
-        const..charASCII_p.IN("aDialogType", "the dialog type", """"ok" "okcancel" "yesno""""),
+        const..charASCII_p.IN("aDialogType", "the dialog type", """"ok" "okcancel" "yesno" "yesnocancel""""),
         const..charASCII_p.IN("aIconType", "the icon type", """"info" "warning" "error" "question""""),
         intb.IN("aDefaultButton", "0 for cancel/no, 1 for ok/yes"),
 
-        returnDoc = "0 for cancel/no, 1 for ok/yes"
+        returnDoc = "0 for cancel/no, 1 for ok/yes, 2 for no in yesnocancel"
     )
 
     const..charUTF8_p(

@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v2.8.3 [May 10, 2017] zlib licence
+ /         \ tinyfiledialogs.h v2.9.3 [July 12, 2017] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2017 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -7,7 +7,7 @@
                                 git://git.code.sf.net/p/tinyfiledialogs/code
 		 ______________________________________________
 		|                                              |
-		| DIRECT CONTACT: tinyfiledialogs@ysengrin.com |
+		|     email: tinyfiledialogs@ysengrin.com      |
 		|______________________________________________|
 
 A big thank you to Don Heyse http://ldglite.sf.net for
@@ -26,32 +26,34 @@ tiny file dialogs (cross-platform C C++)
 InputBox PasswordBox MessageBox ColorPicker
 OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
+SSH supported via automatic switch to console mode or X11 forwarding
 
-A single C file (add it to your C or C++ project) with 6 functions:
+One C file (add it to your C or C++ project) with 6 functions:
 - message & question
 - input & password
 - save file
 - open file(s)
 - select folder
-- color picker.
+- color picker
 
-Complements OpenGL GLFW GLUT GLUI VTK SFML SDL Ogre Unity ION
-CEGUI MathGL CPW GLOW IMGUI MyGUI GLT NGL STB & GUI less programs
+Complements OpenGL GLFW GLUT GLUI VTK SFML TGUI SDL Ogre Unity3d ION OpenCV
+CEGUI MathGL GLM CPW GLOW IMGUI MyGUI GLT NGL STB & GUI less programs
 
 NO INIT
 NO MAIN LOOP
+NO LINKING
 
 The dialogs can be forced into console mode
 
-Windows (XP to 10) ASCII + MBCS + UTF-8 + UTF-16
+Windows (XP to 10) ASCII MBCS UTF-8 UTF-16
 - native code & vbs create the graphic dialogs
 - enhanced console mode can use dialog.exe from
 http://andrear.altervista.org/home/cdialog.php
 - basic console input
 
-Unix (command line call attempts) ASCII + UTF-8
+Unix (command line calls) ASCII UTF-8
 - applescript
-- zenity / matedialog
+- zenity / matedialog / qarma (zenity for qt)
 - kdialog
 - Xdialog
 - python2 tkinter
@@ -62,9 +64,10 @@ The same executable can run across desktops & distributions
 tested with C & C++ compilers
 on VisualStudio MinGW Mac Linux Bsd Solaris Minix Raspbian
 using Gnome Kde Enlightenment Mate Cinnamon Unity
-Lxde Lxqt Xfce WindowMaker IceWm Cde Jds OpenBox
+Lxde Lxqt Xfce WindowMaker IceWm Cde Jds OpenBox Awesome Jwm
 
 bindings for LUA and C# dll
+included in LWJGL(java), rust, Allegrobasic
 
 - License -
 
@@ -127,7 +130,7 @@ but will return 0 for console mode, 1 for graphic mode.
 tinyfd_response is then filled with the retain solution.
 possible values for tinyfd_response are (all lowercase)
 for the graphic mode:
-  windows applescript zenity zenity3 matedialog kdialog
+  windows applescript zenity zenity3 matedialog qarma kdialog
   xdialog tkinter gdialog gxmessage xmessage
 for the console mode:
   dialog whiptail basicinput */
@@ -135,10 +138,10 @@ for the console mode:
 int tinyfd_messageBox (
 	char const * const aTitle , /* "" */
 	char const * const aMessage , /* "" may contain \n \t */
-	char const * const aDialogType , /* "ok" "okcancel" "yesno" */
+	char const * const aDialogType , /* "ok" "okcancel" "yesno" "yesnocancel" */
 	char const * const aIconType , /* "info" "warning" "error" "question" */
-	int const aDefaultButton ) ; /* 0 for cancel/no , 1 for ok/yes */
-		/* returns 0 for cancel/no , 1 for ok/yes */
+	int const aDefaultButton ) ;
+		/* 0 for cancel/no , 1 for ok/yes , 2 for no in yesnocancel */
 
 char const * tinyfd_inputBox (
 	char const * const aTitle , /* "" */
@@ -256,7 +259,7 @@ char const * tinyfd_arrayDialog(
 /*
 - This is not for android nor ios.
 - The code is pure C, perfectly compatible with C++.
-- the windows utf-16 prototypes are in the header file
+- the windows only wchar_t (utf-16) prototypes are in the header file
 - windows is fully supported from XP to 10 (maybe even older versions)
 - C# & LUA via dll, see example files
 - OSX supported from 10.4 to 10.11 (maybe even older versions)
@@ -268,13 +271,13 @@ char const * tinyfd_arrayDialog(
 - On windows link against Comdlg32.lib and Ole32.lib
   This linking is not compulsary for console mode (see above).
 - On unix: it tries command line calls, so no such need.
-- On unix you need applescript, zenity, matedialog, kdialog, Xdialog,
+- On unix you need applescript, zenity, matedialog, qarma, kdialog, Xdialog,
   python2/tkinter or dialog (will open a terminal if running without console).
 - One of those is already included on most (if not all) desktops.
 - In the absence of those it will use gdialog, gxmessage or whiptail
   with a textinputbox.
 - If nothing is found, it switches to basic console input,
-  it opens a console if needed.
+  it opens a console if needed (requires xterm + bash).
 - Use windows separators on windows and unix separators on unix.
 - String memory is preallocated statically for all the returned values.
 - File and path names are tested before return, they are valid.
@@ -295,4 +298,3 @@ char const * tinyfd_arrayDialog(
 - MinGW needs gcc >= v4.9 otherwise some headers are incomplete.
 - The Hello World (and a bit more) is on the sourceforge site:
 */
-
