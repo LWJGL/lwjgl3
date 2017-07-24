@@ -116,9 +116,10 @@ stbi_is_hdr(char *filename);""")}
         The return value from an image loader is an {@code 'unsigned char *'} which points to the pixel data, or #NULL on an allocation failure or if the image
         is corrupt or invalid. The pixel data consists of {@code *y} scanlines of {@code *x} pixels, with each pixel consisting of N interleaved 8-bit
         components; the first pixel pointed to is top-left-most in the image. There is no padding between image scanlines or between pixels, regardless of
-        format. The number of components N is {@code 'desired_channels'} if {@code desired_channels} is non-zero, or {@code *channels_in_file} otherwise. If {@code desired_channels} is non-zero,
-        {@code *channels_in_file} has the number of components that <i>would</i> have been output otherwise. E.g. if you set {@code desired_channels} to 4, you will always get
-        RGBA output, but you can check {@code *channels_in_file} to see if it's trivially opaque because e.g. there were only 3 channels in the source image.
+        format. The number of components N is {@code 'desired_channels'} if {@code desired_channels} is non-zero, or {@code *channels_in_file} otherwise. If
+        {@code desired_channels} is non-zero, {@code *channels_in_file} has the number of components that <i>would</i> have been output otherwise. E.g. if you
+        set {@code desired_channels} to 4, you will always get RGBA output, but you can check {@code *channels_in_file} to see if it's trivially opaque because
+        e.g. there were only 3 channels in the source image.
 
         An output image with N components has the following components interleaved in this order in each pixel:
         ${codeBlock("""
@@ -177,6 +178,30 @@ N=\#channels_in_file     components
         "16-bits-per-channel version of #load().",
 
         const..charASCII_p.IN("filename", "the file name"),
+        load["x"],
+        load["y"],
+        load["channels_in_file"],
+        load["desired_channels"]
+    )
+
+    stbi_us_p(
+        "load_16_from_memory",
+        "In-memory version of #load_16().",
+
+        const..stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
+        AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+        load["x"],
+        load["y"],
+        load["channels_in_file"],
+        load["desired_channels"]
+    )
+
+    stbi_us_p(
+        "load_16_from_callbacks",
+        "Callback version of #load_16().",
+
+        const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
+        nullable..opaque_p.IN("user", "a pointer to user data"),
         load["x"],
         load["y"],
         load["channels_in_file"],

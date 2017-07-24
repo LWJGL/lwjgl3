@@ -330,7 +330,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
-        Unsafe..unsigned_char_p.IN("fontdata", "the font data"),
+        Unsafe..const..unsigned_char_p.IN("fontdata", "the font data"),
         int.IN("font_index", "the font index (use 0 if you don't know what that is"),
         float.IN(
             "font_size",
@@ -357,7 +357,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
-        Unsafe..unsigned_char_p.IN("fontdata", "the font data"),
+        Unsafe..const..unsigned_char_p.IN("fontdata", "the font data"),
         int.IN("font_index", "the font index (use 0 if you don't know what that is"),
         stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
@@ -541,6 +541,18 @@ int main(int arg, char **argv)
         nullable..Check(1)..int_p.OUT("ascent", "returns the coordinate above the baseline the font extends"),
         nullable..Check(1)..int_p.OUT("descent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
         nullable..Check(1)..int_p.OUT("lineGap", "returns the spacing between one row's descent and the next row's ascent")
+    )
+
+    intb(
+        "GetFontVMetricsOS2",
+        "Analogous to #GetFontVMetrics(), but returns the \"typographic\" values from the OS/2 table (specific to MS/Windows TTF files).",
+
+        const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
+        nullable..Check(1)..int_p.OUT("typoAscent", "returns the coordinate above the baseline the font extends"),
+        nullable..Check(1)..int_p.OUT("typoDescent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
+        nullable..Check(1)..int_p.OUT("typoLineGap", "returns the spacing between one row's descent and the next row's ascent"),
+
+        returnDoc = "1 on success (table present), 0 on failure"
     )
 
     void(

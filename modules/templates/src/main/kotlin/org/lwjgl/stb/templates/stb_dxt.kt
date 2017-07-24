@@ -10,6 +10,7 @@ import org.lwjgl.stb.*
 val stb_dxt = "STBDXT".nativeClass(packageName = STB_PACKAGE, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
     includeSTBAPI(
         """#define STB_DXT_IMPLEMENTATION
+#define STB_DXT_STATIC
 #include "stb_dxt.h"""")
 
     documentation =
@@ -34,6 +35,14 @@ val stb_dxt = "STBDXT".nativeClass(packageName = STB_PACKAGE, prefix = "STB", pr
         Check(4 * 4 * 4)..const..unsigned_char_p.IN("src_rgba_four_bytes_per_pixel", "the block to compress"),
         intb.IN("alpha", "1 to compress the alpha channel, 0 to ignore it"),
         int.IN("mode", "the compression mode", "#DXT_NORMAL #DXT_DITHER #DXT_HIGHQUAL")
+    )
+
+    void(
+        "compress_bc4_block",
+        "Call this function for every block (you must pad). The source should be a 4x4 block of A data in row-major order.",
+
+        Check("8")..unsigned_char_p.OUT("dest", "a buffer in which to store the compressed block"),
+        Check(4 * 4)..const..unsigned_char_p.IN("src_r_one_byte_per_pixel", "the block to compress")
     )
 
     void(

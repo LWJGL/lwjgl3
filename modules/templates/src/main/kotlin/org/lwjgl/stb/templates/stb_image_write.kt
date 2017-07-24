@@ -138,6 +138,26 @@ void stbi_write_func(void *context, void *data, int size);""")}
         returnDoc = "1 on success, 0 on failure"
     )
 
+    val write_jpg = intb(
+        "write_jpg",
+        """
+        Writes a JPEG image file.
+
+        JPEG does ignore alpha channels in input data; quality is between 1 and 100. Higher quality looks better but results in a bigger image. JPEG baseline
+        (no JPEG progressive).
+        """,
+
+        write["filename"],
+        write["w"],
+        write["h"],
+        write["comp"],
+        Check("w * h * comp")..const..float_p.IN("data", "the image data"),
+        int.IN("quality", "the compression quality"),
+
+        returnDoc = "1 on success, 0 on failure"
+
+    )
+
     val write_to_func = intb(
         "write_png_to_func",
         "Callback version of #write_png().",
@@ -193,5 +213,21 @@ void stbi_write_func(void *context, void *data, int size);""")}
         write_hdr["data"],
 
         returnDoc = "1 on success, 0 on failure"
+    )
+
+    int(
+        "write_jpg_to_func",
+        "Callback version of #write_jpg().",
+
+        write_to_func["func"],
+        write_to_func["context"],
+        write["w"],
+        write["h"],
+        write["comp"],
+        write["data"],
+        write_jpg["quality"],
+
+        returnDoc = "1 on success, 0 on failure"
+
     )
 }
