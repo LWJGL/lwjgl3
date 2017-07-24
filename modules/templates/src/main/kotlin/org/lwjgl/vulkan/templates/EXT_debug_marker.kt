@@ -177,12 +177,6 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿    VkDevice                                    device,
 ￿    const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);</pre></code>
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code pTagInfo.object} <b>must</b> be a Vulkan object</li>
-            <li>{@code pTagInfo.tagName} <b>must</b> not be 0</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -228,11 +222,6 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿VkResult vkDebugMarkerSetObjectNameEXT(
 ￿    VkDevice                                    device,
 ￿    const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);</pre></code>
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code pNameInfo.object} <b>must</b> be a Vulkan object</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

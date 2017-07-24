@@ -143,42 +143,46 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         VkDebugReportObjectTypeEXT - Specify the type of an object handle
 
         <h5>Description</h5>
-        <ul>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT specifies an unknown object.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT specifies a {@code VkInstance}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT specifies a {@code VkPhysicalDevice}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT specifies a {@code VkDevice}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT specifies a {@code VkQueue}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT specifies a {@code VkSemaphore}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT specifies a {@code VkCommandBuffer}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT specifies a {@code VkFence}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT specifies a {@code VkDeviceMemory}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT specifies a {@code VkBuffer}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT specifies a {@code VkImage}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT specifies a {@code VkEvent}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT specifies a {@code VkQueryPool}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT specifies a {@code VkBufferView}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT specifies a {@code VkImageView}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT specifies a {@code VkShaderModule}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT specifies a {@code VkPipelineCache}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT specifies a {@code VkPipelineLayout}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT specifies a {@code VkRenderPass}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT specifies a {@code VkPipeline}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT specifies a {@code VkDescriptorSetLayout}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT specifies a {@code VkSampler}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT specifies a {@code VkDescriptorPool}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT specifies a {@code VkDescriptorSet}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT specifies a {@code VkFramebuffer}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT specifies a {@code VkCommandPool}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT specifies a {@code VkSurfaceKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT specifies a {@code VkSwapchainKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT specifies a {@code VkDebugReportCallbackEXT}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT specifies a {@code VkDisplayKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT specifies a {@code VkDisplayModeKHR}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT specifies a {@code VkObjectTableNVX}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT specifies a {@code VkIndirectCommandsLayoutNVX}.</li>
-            <li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT specifies a {@code VkDescriptorUpdateTemplateKHR}.</li>
-        </ul>
+        <h6>VkDebugReportObjectTypeEXT and Vulkan Handle Relationship</h6>
+        <table class="lwjgl">
+            <thead><tr><th>{@code VkDebugReportObjectTypeEXT}</th><th>Vulkan Handle Type</th></tr></thead>
+            <tbody>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT</td><td>Unknown/Undefined Handle</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT</td><td>{@code VkInstance}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT</td><td>{@code VkPhysicalDevice}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT</td><td>{@code VkDevice}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT</td><td>{@code VkQueue}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT</td><td>{@code VkSemaphore}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT</td><td>{@code VkCommandBuffer}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT</td><td>{@code VkFence}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT</td><td>{@code VkDeviceMemory}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT</td><td>{@code VkBuffer}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT</td><td>{@code VkImage}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT</td><td>{@code VkEvent}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT</td><td>{@code VkQueryPool}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT</td><td>{@code VkBufferView}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT</td><td>{@code VkImageView}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT</td><td>{@code VkShaderModule}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT</td><td>{@code VkPipelineCache}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT</td><td>{@code VkPipelineLayout}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT</td><td>{@code VkRenderPass}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT</td><td>{@code VkPipeline}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT</td><td>{@code VkDescriptorSetLayout}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT</td><td>{@code VkSampler}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT</td><td>{@code VkDescriptorPool}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT</td><td>{@code VkDescriptorSet}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT</td><td>{@code VkFramebuffer}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT</td><td>{@code VkCommandPool}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT</td><td>{@code VkSurfaceKHR}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT</td><td>{@code VkSwapchainKHR}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT</td><td>{@code VkDebugReportCallbackEXT}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT</td><td>{@code VkDisplayKHR}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT</td><td>{@code VkDisplayModeKHR}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT</td><td>{@code VkObjectTableNVX}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT</td><td>{@code VkDescriptorUpdateTemplateKHR}</td></tr>
+            </tbody>
+        </table>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The primary expected use of #ERROR_VALIDATION_FAILED_EXT is for validation layer testing. It is not expected that an application would see this error code during normal use of the validation layers.
@@ -362,6 +366,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE</li>
+            <li>If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

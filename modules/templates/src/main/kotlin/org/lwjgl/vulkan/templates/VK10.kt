@@ -2282,6 +2282,48 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         """
         VkObjectType - Specify an enumeration to track object handle types
 
+        <h5>Description</h5>
+        <h6>VkObjectType and Vulkan Handle Relationship</h6>
+        <table class="lwjgl">
+            <thead><tr><th>{@code VkObjectType}</th><th>Vulkan Handle Type</th></tr></thead>
+            <tbody>
+                <tr><td>#OBJECT_TYPE_UNKNOWN</td><td>Unknown/Undefined Handle</td></tr>
+                <tr><td>#OBJECT_TYPE_INSTANCE</td><td>{@code VkInstance}</td></tr>
+                <tr><td>#OBJECT_TYPE_PHYSICAL_DEVICE</td><td>{@code VkPhysicalDevice}</td></tr>
+                <tr><td>#OBJECT_TYPE_DEVICE</td><td>{@code VkDevice}</td></tr>
+                <tr><td>#OBJECT_TYPE_QUEUE</td><td>{@code VkQueue}</td></tr>
+                <tr><td>#OBJECT_TYPE_SEMAPHORE</td><td>{@code VkSemaphore}</td></tr>
+                <tr><td>#OBJECT_TYPE_COMMAND_BUFFER</td><td>{@code VkCommandBuffer}</td></tr>
+                <tr><td>#OBJECT_TYPE_FENCE</td><td>{@code VkFence}</td></tr>
+                <tr><td>#OBJECT_TYPE_DEVICE_MEMORY</td><td>{@code VkDeviceMemory}</td></tr>
+                <tr><td>#OBJECT_TYPE_BUFFER</td><td>{@code VkBuffer}</td></tr>
+                <tr><td>#OBJECT_TYPE_IMAGE</td><td>{@code VkImage}</td></tr>
+                <tr><td>#OBJECT_TYPE_EVENT</td><td>{@code VkEvent}</td></tr>
+                <tr><td>#OBJECT_TYPE_QUERY_POOL</td><td>{@code VkQueryPool}</td></tr>
+                <tr><td>#OBJECT_TYPE_BUFFER_VIEW</td><td>{@code VkBufferView}</td></tr>
+                <tr><td>#OBJECT_TYPE_IMAGE_VIEW</td><td>{@code VkImageView}</td></tr>
+                <tr><td>#OBJECT_TYPE_SHADER_MODULE</td><td>{@code VkShaderModule}</td></tr>
+                <tr><td>#OBJECT_TYPE_PIPELINE_CACHE</td><td>{@code VkPipelineCache}</td></tr>
+                <tr><td>#OBJECT_TYPE_PIPELINE_LAYOUT</td><td>{@code VkPipelineLayout}</td></tr>
+                <tr><td>#OBJECT_TYPE_RENDER_PASS</td><td>{@code VkRenderPass}</td></tr>
+                <tr><td>#OBJECT_TYPE_PIPELINE</td><td>{@code VkPipeline}</td></tr>
+                <tr><td>#OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT</td><td>{@code VkDescriptorSetLayout}</td></tr>
+                <tr><td>#OBJECT_TYPE_SAMPLER</td><td>{@code VkSampler}</td></tr>
+                <tr><td>#OBJECT_TYPE_DESCRIPTOR_POOL</td><td>{@code VkDescriptorPool}</td></tr>
+                <tr><td>#OBJECT_TYPE_DESCRIPTOR_SET</td><td>{@code VkDescriptorSet}</td></tr>
+                <tr><td>#OBJECT_TYPE_FRAMEBUFFER</td><td>{@code VkFramebuffer}</td></tr>
+                <tr><td>#OBJECT_TYPE_COMMAND_POOL</td><td>{@code VkCommandPool}</td></tr>
+                <tr><td>#OBJECT_TYPE_SURFACE_KHR</td><td>{@code VkSurfaceKHR}</td></tr>
+                <tr><td>#OBJECT_TYPE_SWAPCHAIN_KHR</td><td>{@code VkSwapchainKHR}</td></tr>
+                <tr><td>#OBJECT_TYPE_DISPLAY_KHR</td><td>{@code VkDisplayKHR}</td></tr>
+                <tr><td>#OBJECT_TYPE_DISPLAY_MODE_KHR</td><td>{@code VkDisplayModeKHR}</td></tr>
+                <tr><td>#OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT</td><td>{@code VkDebugReportCallbackEXT}</td></tr>
+                <tr><td>#OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR</td><td>{@code VkDescriptorUpdateTemplateKHR}</td></tr>
+                <tr><td>#OBJECT_TYPE_OBJECT_TABLE_NVX</td><td>{@code VkObjectTableNVX}</td></tr>
+                <tr><td>#OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
+            </tbody>
+        </table>
+
         <h5>See Also</h5>
         No cross-references are available
         """,
@@ -7429,8 +7471,6 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>Valid Usage</h5>
         <ul>
             <li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled</li>
-            <li>{@code minDepthBounds} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
-            <li>{@code maxDepthBounds} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

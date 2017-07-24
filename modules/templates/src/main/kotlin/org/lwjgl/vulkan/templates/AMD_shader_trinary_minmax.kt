@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val AMD_shader_trinary_minmax = "AMDShaderTrinaryMinmax".nativeClassVK("AMD_shader_trinary_minmax", type = "device", postfix = AMD) {
     documentation =
         """
-        This extension adds support for the following SPIR-V extension in {apiname}:
+        This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
             <li>SPV_AMD_shader_trinary_minmax</li>

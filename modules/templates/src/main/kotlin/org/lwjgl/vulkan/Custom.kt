@@ -7,8 +7,6 @@ package org.lwjgl.vulkan
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.templates.*
 
-val KHX = "KHX"
-
 fun templateCustomization() {
     PFN_vkDebugReportCallbackEXT.signature.apply {
         additionalCode = """
