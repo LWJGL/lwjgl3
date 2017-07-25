@@ -48,7 +48,7 @@ val GLBinding = Generator.register(object : APIBinding(
             .filter { it.hasNativeFunctions }
             .map { it.functions }
             .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
     }
 
     private val functionOrdinals: Map<String, Int> by lazy {
@@ -92,12 +92,11 @@ val GLBinding = Generator.register(object : APIBinding(
                 "gl${it.groupValues[1]}"
         }.let { page ->
             VECTOR_SUFFIX2.find(page).let {
-                if (it == null)
-                    page
-                else if (page == "glScissorIndexedv")
-                    "glScissorIndexed"
-                else
-                    "gl${it.groupValues[1]}${it.groupValues[2]}"
+                when {
+                    it == null                  -> page
+                    page == "glScissorIndexedv" -> "glScissorIndexed"
+                    else                        -> "gl${it.groupValues[1]}${it.groupValues[2]}"
+                }
             }
         }.let { page ->
             NAMED.find(page).let {
@@ -158,15 +157,15 @@ val GLBinding = Generator.register(object : APIBinding(
 
         if (hasDeprecated) {
             print("(fc || checkFunctions(")
-            nativeClass.printPointers(this, printPointer) { it has DeprecatedGL }
+            nativeClass.printPointers(this, printPointer) { it has DeprecatedGL && !it.has<DependsOn>() }
             print(")) && ")
         }
 
         print("checkFunctions(")
         if (hasDeprecated)
-            nativeClass.printPointers(this, printPointer) { !(it has DeprecatedGL || it has IgnoreMissing) }
+            nativeClass.printPointers(this, printPointer) { (!it.has(DeprecatedGL) || it.has<DependsOn>()) && !it.has(IgnoreMissing) }
         else
-            nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
+            nativeClass.printPointers(this, printPointer) { !it.has(IgnoreMissing) }
         println(");")
         println("$t}")
     }
@@ -206,12 +205,12 @@ val GLBinding = Generator.register(object : APIBinding(
         forwardCompatible = fc;
 """)
 
-        println(functions.map {
-            if (it has DeprecatedGL)
+        println(functions.joinToString(prefix = "$t$t", separator = "\n$t$t") {
+            if (it has DeprecatedGL && !it.has<DependsOn>())
                 "${it.name} = getFunctionAddress(fc, provider, ${it.functionAddress});"
             else
                 "${it.name} = provider.getFunctionAddress(${it.functionAddress});"
-        }.joinToString(prefix = "$t$t", separator = "\n$t$t"))
+        })
 
         for (extension in classes) {
             val capName = extension.capName
@@ -270,11 +269,12 @@ fun String.nativeClassGL(
 )
 
 private val REGISTRY_PATTERN = "([A-Z]+)_(\\w+)".toRegex()
-val NativeClass.registryLink: String get() = (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName"))
-    .destructured
-    .let { (group, extension) ->
-        url("http://www.opengl.org/registry/specs/$group/$extension.txt", templateName)
-    }
+val NativeClass.registryLink: String
+    get() = (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName"))
+        .destructured
+        .let { (group, extension) ->
+            url("http://www.opengl.org/registry/specs/$group/$extension.txt", templateName)
+        }
 
 fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
 fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =

@@ -1279,14 +1279,21 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLdouble.IN("zFar", "the far depth range")
     )
 
-    IgnoreMissing..void(
+    DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
         "DisableClientState",
-        "Disables the specified fixed-function attribute array.",
+        """
+        Disables a client-side capability.
+
+        If the ##NVVertexBufferUnifiedMemory extension is supported, this function is available even in a core profile context.
+        """,
 
         GLenum.IN(
-            "array",
-            "the attribute array to disable",
-            "#VERTEX_ARRAY #NORMAL_ARRAY #COLOR_ARRAY #SECONDARY_COLOR_ARRAY #EDGE_FLAG_ARRAY #FOG_COORD_ARRAY #TEXTURE_COORD_ARRAY"
+            "cap",
+            "the capability to disable",
+            """
+            #COLOR_ARRAY #EDGE_FLAG_ARRAY #FOG_COORD_ARRAY #INDEX_ARRAY #NORMAL_ARRAY #SECONDARY_COLOR_ARRAY #TEXTURE_COORD_ARRAY #VERTEX_ARRAY
+            #VERTEX_ATTRIB_ARRAY_UNIFIED_NV #ELEMENT_ARRAY_UNIFIED_NV
+            """
         )
     )
 
@@ -1385,14 +1392,21 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Unsafe..ARRAY_BUFFER..const..GLboolean_p.IN("pointer", "the edge flag array data")
     )
 
-    IgnoreMissing..void(
+    DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
         "EnableClientState",
-        "Enables the specified fixed-function attribute array.",
+        """
+        Enables a client-side capability.
+
+        If the ##NVVertexBufferUnifiedMemory extension is supported, this function is available even in a core profile context.
+        """,
 
         GLenum.IN(
-            "array",
-            "the attribute array to enable",
-            "#VERTEX_ARRAY #NORMAL_ARRAY #COLOR_ARRAY #SECONDARY_COLOR_ARRAY #EDGE_FLAG_ARRAY #FOG_COORD_ARRAY #TEXTURE_COORD_ARRAY"
+            "cap",
+            "the capability to enable",
+            """
+            #COLOR_ARRAY #EDGE_FLAG_ARRAY #FOG_COORD_ARRAY #INDEX_ARRAY #NORMAL_ARRAY #SECONDARY_COLOR_ARRAY #TEXTURE_COORD_ARRAY #VERTEX_ARRAY
+            #VERTEX_ATTRIB_ARRAY_UNIFIED_NV #ELEMENT_ARRAY_UNIFIED_NV
+            """
         )
     )
 
