@@ -514,6 +514,9 @@ $indentation}"""
         preamble.printJava(this)
 
         printDocumentation()
+        if (className != nativeName) {
+            println("@NativeType(\"$nativeNameQualified\")")
+        }
         print("${access.modifier}class $className extends ")
         print(extends?.className ?: "Struct${if (mallocable) " implements NativeResource" else ""}"
         )
@@ -920,9 +923,9 @@ ${validations.joinToString("\n")}
         members: Sequence<StructMember>,
         indentation: String = "$t$t",
         parentField: String = "",
-        more: Boolean = false
+        moreOverride: Boolean = false
     ) {
-        members.forEachWithMore(more) { member, more ->
+        members.forEachWithMore(moreOverride) { member, more ->
             if (member.name === ANONYMOUS && member.isNestedStruct) {
                 generateOffsetFields(member.nestedMembers, indentation, parentField, more) // recursion
             } else {
@@ -1372,6 +1375,8 @@ ${validations.joinToString("\n")}
         }
     }
 
+    private fun StructMember.annotate(type: String, arraySize: String? = null) = nativeType.annotate(type, has(const), arraySize)
+
     private fun PrintWriter.generateSetters(
         accessMode: AccessMode,
         members: Sequence<StructMember>,
@@ -1397,7 +1402,7 @@ ${validations.joinToString("\n")}
                 else {
                     println("$indent/** Copies the specified {@link $structType} to the {@code $field} field. */")
                     if (overrides) println("$indent@Override")
-                    println("${indent}public $returnType $setter($structType value) { $n$setter($ADDRESS, value); return this; }")
+                    println("${indent}public $returnType $setter(${it.annotate(structType)} value) { $n$setter($ADDRESS, value); return this; }")
                 }
             } else {
                 // Setter
@@ -1405,7 +1410,7 @@ ${validations.joinToString("\n")}
                 if (it !is StructMemberArray && !it.nativeType.isPointerData) {
                     println("$indent/** Sets the specified value to the {@code $field} field. */")
                     if (overrides) println("$indent@Override")
-                    println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " ? 1 : 0" else ""}); return this; }")
+                    println("${indent}public $returnType $setter(${it.annotate(it.nativeType.javaMethodType)} value) { $n$setter($ADDRESS, value${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " ? 1 : 0" else ""}); return this; }")
                 }
 
                 // Alternative setters
@@ -1416,43 +1421,43 @@ ${validations.joinToString("\n")}
                         if (it.nativeType is PointerType) {
                             println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $field} field. */")
                             if (overrides) println("$indent@Override")
-                            println("${indent}public $returnType $setter(PointerBuffer value) { $n$setter($ADDRESS, value); return this; }")
+                            println("${indent}public $returnType $setter(${it.annotate("PointerBuffer", it.size)} value) { $n$setter($ADDRESS, value); return this; }")
                             println("$indent/** Copies the address of the specified {@link $structType} at the specified index of the {@code $field} field. */")
                         } else {
                             println("$indent/** Copies the specified {@link $structType.Buffer} to the {@code $field} field. */")
                             if (overrides) println("$indent@Override")
-                            println("${indent}public $returnType $setter($structType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
+                            println("${indent}public $returnType $setter(${it.annotate("$structType.Buffer", it.size)} value) { $n$setter($ADDRESS, value); return this; }")
                             println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $field} field. */")
                         }
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter(int index, $structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"} value) { $n$setter($ADDRESS, index, value); return this; }")
+                        println("${indent}public $returnType $setter(int index, ${it.annotate("$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}")} value) { $n$setter($ADDRESS, index, value); return this; }")
                     } else if (it is StructMemberCharArray) {
                         println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
+                        println("${indent}public $returnType $setter(${it.annotate("ByteBuffer", it.size)} value) { $n$setter($ADDRESS, value); return this; }")
                     } else {
                         val bufferType = it.primitiveMapping.toPointer.javaMethodName
                         println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter($bufferType value) { $n$setter($ADDRESS, value); return this; }")
+                        println("${indent}public $returnType $setter(${it.annotate(bufferType, it.size)} value) { $n$setter($ADDRESS, value); return this; }")
                         println("$indent/** Sets the specified value at the specified index of the {@code $field} field. */")
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter(int index, ${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, index, value); return this; }")
+                        println("${indent}public $returnType $setter(int index, ${it.annotate(it.nativeType.javaMethodType)} value) { $n$setter($ADDRESS, index, value); return this; }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
                     if (overrides) println("$indent@Override")
-                    println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
+                    println("${indent}public $returnType $setter(${it.annotate("ByteBuffer")} value) { $n$setter($ADDRESS, value); return this; }")
                 } else if (it.nativeType.isPointerData) {
                     val pointerType = it.nativeType.javaMethodType
                     if (it is StructMemberBuffer) {
                         println("$indent/** Sets the address of the specified {@link $pointerType.Buffer} to the {@code $field} field. */")
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter($pointerType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
+                        println("${indent}public $returnType $setter(${it.annotate("$pointerType.Buffer")} value) { $n$setter($ADDRESS, value); return this; }")
                     } else {
                         println("$indent/** Sets the address of the specified {@link $pointerType} to the {@code $field} field. */")
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter($pointerType value) { $n$setter($ADDRESS, value); return this; }")
+                        println("${indent}public $returnType $setter(${it.annotate(pointerType)} value) { $n$setter($ADDRESS, value); return this; }")
                     }
                 }
             }
@@ -1604,6 +1609,14 @@ ${validations.joinToString("\n")}
         }
     }
 
+    private fun PrintWriter.generateGetterAnnotations(indent: String, overrides: Boolean, member: StructMember, type: String, arraySize: String? = null) {
+        if (overrides) println("$indent@Override")
+        member.nativeType.annotation(type, member.has(const), arraySize).let {
+            if (it != null)
+                println("$indent$it")
+        }
+    }
+
     private fun PrintWriter.generateGetters(
         accessMode: AccessMode,
         members: Sequence<StructMember>,
@@ -1623,7 +1636,7 @@ ${validations.joinToString("\n")}
                     generateGetters(accessMode, it.nestedMembers, if (it.name === ANONYMOUS) parentMember else getter)
                 else {
                     println("$indent/** Returns a {@link $structType} view of the {@code $getter} field. */")
-                    if (overrides) println("$indent@Override")
+                    generateGetterAnnotations(indent, overrides, it, structType)
                     println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
                 }
             } else {
@@ -1636,7 +1649,7 @@ ${validations.joinToString("\n")}
                         else            -> it.nativeType.javaMethodType
                     }
                     println("$indent/** Returns the value of the {@code $getter} field. */")
-                    if (overrides) println("$indent@Override")
+                    generateGetterAnnotations(indent, overrides, it, returnType)
                     println("${indent}public $returnType $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
                 }
 
@@ -1647,41 +1660,43 @@ ${validations.joinToString("\n")}
                         val structType = it.nativeType.javaMethodType
                         if (it.nativeType is PointerType) {
                             println("$indent/** Returns a {@link PointerBuffer} view of the {@code $getter} field. */")
-                            if (overrides) println("$indent@Override")
+                            generateGetterAnnotations(indent, overrides, it, "PointerBuffer", it.size)
                             println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
+
+                            val retType = "$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}"
                             println("$indent/** Returns a {@link $structType} view of the pointer at the specified index of the {@code $getter}. */")
-                            if (overrides) println("$indent@Override")
-                            println("${indent}public $structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"} $getter(int index) { return $n$getter($ADDRESS, index); }")
+                            generateGetterAnnotations(indent, overrides, it, retType)
+                            println("${indent}public $retType $getter(int index) { return $n$getter($ADDRESS, index); }")
                         } else {
                             println("$indent/** Returns a {@link $structType}.Buffer view of the {@code $getter} field. */")
-                            if (overrides) println("$indent@Override")
+                            generateGetterAnnotations(indent, overrides, it, "$structType.Buffer", it.size)
                             println("${indent}public $structType.Buffer $getter() { return $n$getter($ADDRESS); }")
                             println("$indent/** Returns a {@link $structType} view of the struct at the specified index of the {@code $getter} field. */")
-                            if (overrides) println("$indent@Override")
+                            generateGetterAnnotations(indent, overrides, it, structType)
                             println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
                         }
                     } else if (it is StructMemberCharArray) {
                         println("$indent/** Returns a {@link ByteBuffer} view of the {@code $getter} field. */")
-                        if (overrides) println("$indent@Override")
+                        generateGetterAnnotations(indent, overrides, it, "ByteBuffer", it.size)
                         println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
                         println("$indent/** Decodes the null-terminated string stored in the {@code $getter} field. */")
-                        if (overrides) println("$indent@Override")
+                        generateGetterAnnotations(indent, overrides, it, "String", it.size)
                         println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
                     } else {
                         val bufferType = it.primitiveMapping.toPointer.javaMethodName
                         println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
-                        if (overrides) println("$indent@Override")
+                        generateGetterAnnotations(indent, overrides, it, bufferType, it.size)
                         println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
                         println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
-                        if (overrides) println("$indent@Override")
+                        generateGetterAnnotations(indent, overrides, it, it.nativeType.nativeMethodType)
                         println("${indent}public ${it.nativeType.nativeMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $getter} field. */")
-                    if (overrides) println("$indent@Override")
+                    generateGetterAnnotations(indent, overrides, it, "ByteBuffer")
                     println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
                     println("$indent/** Decodes the null-terminated string pointed to by the {@code $getter} field. */")
-                    if (overrides) println("$indent@Override")
+                    generateGetterAnnotations(indent, overrides, it, "String")
                     println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
                 } else if (it.nativeType.isPointerData) {
                     val returnType = it.nativeType.javaMethodType
@@ -1693,16 +1708,16 @@ $indent * Returns a {@link $returnType.Buffer} view of the struct array pointed 
 $indent *
 $indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned buffer
 $indent */""")
-                                if (overrides) println("$indent@Override")
+                                generateGetterAnnotations(indent, overrides, it, "$returnType.Buffer")
                                 println("${indent}public $returnType.Buffer $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
                             } else {
                                 println("$indent/** Returns a {@link $returnType.Buffer} view of the struct array pointed to by the {@code $getter} field. */")
-                                if (overrides) println("$indent@Override")
+                                generateGetterAnnotations(indent, overrides, it, "$returnType.Buffer")
                                 println("${indent}public $returnType.Buffer $getter() { return $n$getter($ADDRESS); }")
                             }
                         } else {
                             println("$indent/** Returns a {@link $returnType} view of the struct pointed to by the {@code $getter} field. */")
-                            if (overrides) println("$indent@Override")
+                            generateGetterAnnotations(indent, overrides, it, returnType)
                             println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
                         }
                     } else {
@@ -1713,11 +1728,11 @@ $indent * Returns a {@link $returnType} view of the data pointed to by the {@cod
 $indent *
 $indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned buffer
 $indent */""")
-                            if (overrides) println("$indent@Override")
+                            generateGetterAnnotations(indent, overrides, it, returnType)
                             println("${indent}public $returnType $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
                         } else {
                             println("$indent/** Returns a {@link $returnType} view of the data pointed to by the {@code $getter} field. */")
-                            if (overrides) println("$indent@Override")
+                            generateGetterAnnotations(indent, overrides, it, returnType)
                             println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
                         }
                     }

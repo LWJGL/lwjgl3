@@ -199,23 +199,36 @@ class Func(
         throw IllegalArgumentException("$msg [${nativeClass.className}.${this@Func.name}, parameter: ${this.name}]")
     }
 
-    private val Parameter.asJavaMethodParam
-        get() = this.name.let { name ->
+    private fun Parameter.asJavaMethodParam(annotate: Boolean) =
+        (
             if (nativeType is PointerType && nativeType.elementType is StructType && (has<Check>() || getReferenceParam<AutoSize>(name) != null))
-                "$javaMethodType.Buffer $name"
+                "$javaMethodType.Buffer"
             else if (nativeType is ArrayType)
-                "${(nativeType.mapping as PointerMapping).primitive}[] $name"
+                "${(nativeType.mapping as PointerMapping).primitive}[]"
             else if (has<MapToInt>())
-                "int $name"
+                "int"
             else
-                "$javaMethodType $name"
+                javaMethodType
+        ).let {
+            if (annotate) {
+                "${nativeType.annotate(it, has(const))} $name"
+            } else {
+                "$it $name"
+            }
         }
 
-    private val Parameter.asNativeMethodParam get() =
-    if (nativeType is ArrayType)
-        "${(nativeType.mapping as PointerMapping).primitive}[] ${this.name}"
-    else
-        "${nativeType.nativeMethodType} ${this.name}"
+    private fun Parameter.asNativeMethodParam(nativeOnly: Boolean) =
+        (if (nativeType is ArrayType)
+            "${(nativeType.mapping as PointerMapping).primitive}[]"
+        else
+            nativeType.nativeMethodType
+        ).let {
+            if (nativeOnly) {
+                "${nativeType.annotate(it, has(const))} $name"
+            } else {
+                "$it $name"
+            }
+        }
 
     private fun Parameter.asNativeMethodCallParam(mode: GenerationMode) = when {
         nativeType.dereference is StructType || nativeType is ObjectType
@@ -614,7 +627,16 @@ class Func(
         println()
 
         printUnsafeJavadoc(constantMacro, nativeOnly)
-        print("$t${if (constantMacro) "private " else accessModifier}static native $returnsNativeMethodType ")
+
+        val retType = returnsNativeMethodType
+
+        if (nativeOnly) {
+            val retTypeAnnotation = returns.nativeType.annotation(retType, has(const))
+            if (retTypeAnnotation != null)
+                println("$t$retTypeAnnotation")
+        }
+
+        print("$t${if (constantMacro) "private " else accessModifier}static native $retType ")
         if (!nativeOnly) print('n')
         print(nativeName)
         print("(")
@@ -625,7 +647,7 @@ class Func(
             if (nativeParams.any()) print(", ")
         }
         printList(nativeParams) {
-            it.asNativeMethodParam
+            it.asNativeMethodParam(nativeOnly)
         }
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
             if (nativeClass.binding != null || nativeParams.any()) print(", ")
@@ -642,9 +664,9 @@ class Func(
         print("$t${if (constantMacro) "private " else accessModifier}static $returnsNativeMethodType n$name(")
         printList(getNativeParams()) {
             if (it.isFunctionProvider)
-                it.asJavaMethodParam
+                it.asJavaMethodParam(false)
             else
-                it.asNativeMethodParam
+                it.asNativeMethodParam(false)
         }
 
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
@@ -745,12 +767,18 @@ class Func(
 
         // Method signature
 
-        print("$t${if (constantMacro) "private " else accessModifier}static $returnsJavaMethodType $name(")
+        val retType = returnsJavaMethodType
+
+        val retTypeAnnotation = returns.nativeType.annotation(retType, has(const))
+        if (retTypeAnnotation != null)
+            println("$t$retTypeAnnotation")
+
+        print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
         printList(getNativeParams()) {
             if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
                 null
             else
-                it.asJavaMethodParam
+                it.asJavaMethodParam(true)
         }
 
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
@@ -1275,13 +1303,20 @@ class Func(
             generateAlternativeMethod(stripPostfix(), transforms)
     }
 
-    private fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, Transform>, original: String): String? {
+    private fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, Transform>, original: String, annotate: Boolean, hasConst: Boolean): String? {
         val transform = transforms[this]
-        if (transform == null)
-            return original
-        else
-            @Suppress("UNCHECKED_CAST")
-            return (transform as FunctionTransform<T>).transformDeclaration(this, original)
+        return (
+            if (transform == null)
+                original
+            else
+                @Suppress("UNCHECKED_CAST")
+                (transform as FunctionTransform<T>).transformDeclaration(this, original)
+               ).let {
+            if (!annotate || it == null)
+                it
+            else
+                nativeType.annotate(it, hasConst)
+        }
     }
 
     private fun <T : QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, Transform>, original: String): String {
@@ -1325,14 +1360,18 @@ class Func(
 
         // Method signature
 
-        val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
+        val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType, false, false)!!
+
+        val retTypeAnnotation = returns.nativeType.annotation(retType, has(const))
+        if (retTypeAnnotation != null)
+            println("$t$retTypeAnnotation")
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
         printList(getParams { it !== JNI_ENV }) {
             if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
                 null
             else
-                it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
+                it.transformDeclarationOrElse(transforms, it.asJavaMethodParam(false), true, it.has(const))
         }
         val returnTransform = transforms[returns]
         if (returnTransform is MapPointerTransform) {
@@ -1389,7 +1428,7 @@ class Func(
                 val param = it.key as Parameter
                 @Suppress("UNCHECKED_CAST")
                 val transform = it.value as FunctionTransform<Parameter>
-                println("$t$t${param.asJavaMethodParam} = ${transform.transformCall(param, param.name)};")
+                println("$t$t${param.asJavaMethodParam(false)} = ${transform.transformCall(param, param.name)};")
             }
 
         printCode(code.javaInit, ApplyTo.ALTERNATIVE)
@@ -1509,7 +1548,7 @@ class Func(
         printList(getNativeParams().filter {
             @Suppress("UNCHECKED_CAST")
             val t = transforms[it] as FunctionTransform<Parameter>?
-            t == null || t is ExpressionTransform || t.transformDeclaration(it, it.asJavaMethodParam) != null
+            t == null || t is ExpressionTransform || t.transformDeclaration(it, it.asJavaMethodParam(false)) != null
         }) {
             val t = transforms[it]
             if (t is ExpressionTransform)

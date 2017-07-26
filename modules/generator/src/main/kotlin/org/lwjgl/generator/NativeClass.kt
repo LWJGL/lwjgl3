@@ -442,9 +442,8 @@ class NativeClass(
                 }
             }
 
-            if (hasMemoryStack || (binding is SimpleBinding && !binding.libraryExpression.contains('.')) || (binding == null && (library == null || !library.endsWith(");")))) {
-                if (packageName != "org.lwjgl.system")
-                    println("import org.lwjgl.system.*;\n")
+            if ((hasFunctions || binding != null) && packageName != "org.lwjgl.system") {
+                println("import org.lwjgl.system.*;\n")
             }
 
             if (hasFunctions && (binding is SimpleBinding || (binding != null && functions.any { it.has<MapPointer>() })))

@@ -44,6 +44,32 @@ open class NativeType(
     internal open val javaMethodType
         get() = if (this.mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodName
 
+    internal fun annotation(type: String, hasConst: Boolean, arraySize: String? = null): String? {
+        val nativeType = this.name.let {
+            if (this is PointerType && !this.includesPointer) {
+                if (!it.endsWith('*')) "$it *" else "$it*"
+            } else
+                it
+        }.let {
+            if (hasConst)
+                "const $it"
+            else
+                it
+        }
+
+        return if (type == nativeType)
+            null
+        else
+            "@NativeType(\"$nativeType${if (arraySize == null) "" else "[$arraySize]"}\")"
+    }
+
+    internal fun annotate(type: String, hasConst: Boolean, arraySize: String? = null) = annotation(type, hasConst, arraySize).let {
+        if (it == null)
+            type
+        else
+            "$it $type"
+    }
+
     override fun toString() =
         "${this::class.java.simpleName}: $name | $jniFunctionType | $nativeMethodType | $javaMethodType"
 }

@@ -9,6 +9,7 @@ import java.io.*
 class CallbackFunction(
     packageName: String,
     className: String,
+    val nativeType: String,
     val returns: NativeType,
     vararg val signature: Parameter
 ) : GeneratorTarget(packageName, className) {
@@ -20,10 +21,6 @@ class CallbackFunction(
     fun useSystemCallConvention() {
         stdcall = true
     }
-
-    private val signatureJava = signature.asSequence().map {
-        "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
-    }.joinToString(", ")
 
     private val NativeType.dyncall
         get() = when (this) {
@@ -113,7 +110,9 @@ import static org.lwjgl.system.MemoryUtil.*;
         }
 
         @Override
-        public ${returns.nativeMethodType} invoke($signatureJava) {
+        public ${returns.nativeMethodType} invoke(${signature.asSequence().joinToString(", ") {
+            "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
+        }}) {
             ${if (returns.mapping != TypeMapping.VOID) "return " else ""}delegate.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
         }
 
@@ -136,6 +135,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
             print(processDocumentation(documentation).toJavaDoc(indentation = ""))
         print("""
 @FunctionalInterface
+@NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jniSignature} {
 
     String SIGNATURE = ${"\"(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
@@ -156,11 +156,16 @@ ${signature.asSequence().map {
         }.joinToString(",\n")}
         );
     }
-
 """)
-        print(functionDoc(this@CallbackFunction))
+        val doc = functionDoc(this@CallbackFunction)
+        if (doc.isNotEmpty()) {
+            println()
+            print(doc)
+        }
         print("""
-    ${returns.nativeMethodType} invoke($signatureJava);
+    ${returns.annotate(returns.nativeMethodType, false)} invoke(${signature.asSequence().joinToString(", ") {
+            "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType, it.has(const))} ${it.name}"
+        }});
 
 }""")
     }
@@ -186,7 +191,7 @@ fun String.callback(
     since: String = "",
     init: (CallbackFunction.() -> Unit)? = null
 ): CallbackType {
-    val callback = CallbackFunction(packageName, className, returns, *signature)
+    val callback = CallbackFunction(packageName, className, this, returns, *signature)
     if (init != null)
         callback.init()
     callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
