@@ -289,7 +289,7 @@ ENABLE_WARNINGS()""")
         "CP_COMPACT"..0x01
     )
 
-    EnumConstant(
+    val CursorOps = EnumConstant(
         "MDB_cursor_op",
 
         "FIRST".enum("Position at first key/data item."),
@@ -313,7 +313,7 @@ ENABLE_WARNINGS()""")
         "SET_KEY".enum("Position at specified key, return key + data."),
         "SET_RANGE".enum("Position at first key greater than or equal to specified key."),
         "PREV_MULTIPLE".enum("Position at previous page and return key and up to a page of duplicate data items. Only for #DUPFIXED.")
-    )
+    ).javaDocLinks
 
     IntConstant(
         "Successful result.",
@@ -1434,7 +1434,7 @@ ENABLE_WARNINGS()""")
         cursor_close["cursor"],
         MDB_val_p.IN("key", "the key for a retrieved item"),
         MDB_val_p.OUT("data", "the data of a retrieved item"),
-        MDB_cursor_op.IN("op", "a cursor operation {@code MDB_cursor_op}")
+        MDB_cursor_op.IN("op", "a cursor operation {@code MDB_cursor_op}", CursorOps)
     )
 
     int(
