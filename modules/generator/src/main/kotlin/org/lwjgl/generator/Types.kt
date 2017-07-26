@@ -119,12 +119,11 @@ fun ValueType.p(name: String) = PointerType(
 /** Pointer to pointer */
 val PointerType.p get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 /** Const pointer */
-val PointerType.const get() = if (this.includesPointer)
-    throw IllegalArgumentException("The const keyword cannot be applied to opaque pointer types.")
-else if (this.name.endsWith("*"))
-    PointerType("${this.name} const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = false)
-else
-    PointerType("${this.name} * const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = true)
+val PointerType.const get() = when {
+    this.includesPointer    -> throw IllegalArgumentException("The const keyword cannot be applied to opaque pointer types.")
+    this.name.endsWith("*") -> PointerType("${this.name} const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = false)
+    else                    -> PointerType("${this.name} * const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = true)
+}
 /** Simple pointer shortcut */
 val String.p get() = PointerType(this, includesPointer = false)
 /** Opaque pointer shortcut */

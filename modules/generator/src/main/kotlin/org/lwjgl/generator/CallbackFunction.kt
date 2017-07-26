@@ -25,7 +25,7 @@ class CallbackFunction(
         "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
     }.joinToString(", ")
 
-    internal val NativeType.dyncall
+    private val NativeType.dyncall
         get() = when (this) {
             is PointerType   -> 'p'
             is PrimitiveType -> when (mapping) {

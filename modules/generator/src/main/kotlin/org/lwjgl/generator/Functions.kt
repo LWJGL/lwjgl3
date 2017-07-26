@@ -103,7 +103,7 @@ class Func(
 
     val nativeName get() = if (has<NativeName>() && !get<NativeName>().nativeName.contains(' ')) get<NativeName>().nativeName else this.name
 
-    internal val accessModifier
+    private val accessModifier
         get() = (if (has<AccessModifier>()) get<AccessModifier>().access else nativeClass.access).modifier
 
     private fun stripPostfix(functionName: String = name): String {
@@ -130,7 +130,7 @@ class Func(
     val javaDocLink
         get() = "#${this.simpleName}()"
 
-    internal val hasFunctionAddressParam: Boolean by lazy(LazyThreadSafetyMode.NONE) {
+    private val hasFunctionAddressParam: Boolean by lazy(LazyThreadSafetyMode.NONE) {
         nativeClass.binding != null && (nativeClass.binding.apiCapabilities !== APICapabilities.JNI_CAPABILITIES || hasParam { it.nativeType is ArrayType })
     }
 
@@ -156,7 +156,7 @@ class Func(
                     || (has<Macro>() && get<Macro>().expression != null)
                  )
 
-    internal val hasUnsafeMethod by lazy(LazyThreadSafetyMode.NONE) {
+    private val hasUnsafeMethod by lazy(LazyThreadSafetyMode.NONE) {
         hasFunctionAddressParam
         && !(hasExplicitFunctionAddress && hasNativeCode)
         && (this.returns.hasUnsafe || hasParam { it.hasUnsafe || it has MapToInt })
@@ -376,7 +376,7 @@ class Func(
         val checks = ArrayList<String>()
 
         // Validate function address
-        if (hasFunctionAddressParam && (has<DependsOn>() || has<IgnoreMissing>() || (nativeClass.binding?.shouldCheckFunctionAddress(this@Func) ?: false)) && !hasUnsafeMethod)
+        if (hasFunctionAddressParam && (has<DependsOn>() || has<IgnoreMissing>() || (nativeClass.binding?.shouldCheckFunctionAddress(this@Func) == true)) && !hasUnsafeMethod)
             checks.add("check($FUNCTION_ADDRESS);")
 
         // We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -447,10 +447,10 @@ class Func(
                 if (mode === NORMAL || it.paramType === INOUT) {
                     var expression = it.name
                     if (it.paramType === INOUT) {
-                        if (it.nativeType is ArrayType)
-                            expression += "[0]"
+                        expression += if (it.nativeType is ArrayType)
+                            "[0]"
                         else
-                            expression += ".get($expression.position())"
+                            ".get($expression.position())"
                     } else if (autoSize.factor != null)
                         expression = autoSize.factor.scaleInv(expression)
 
@@ -586,7 +586,7 @@ class Func(
         }
 
         if (verbose) {
-            if (!(nativeClass.binding?.printCustomJavadoc(this, this@Func, javadoc) ?: false))
+            if (nativeClass.binding?.printCustomJavadoc(this, this@Func, javadoc) != true)
                 println(javadoc)
         } else if (hasParam { it.nativeType is ArrayType }) {
             println(nativeClass.processDocumentation("Array version of: ${nativeClass.className}#n$name()").toJavaDoc())
@@ -672,15 +672,12 @@ class Func(
                         "${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
                             if (it.has<Check>()) it.get<Check>().expression else null,
                             getReferenceParam<AutoSize>(it.name).let { autoSize ->
-                                if (autoSize == null)
-                                    null
-                                else
-                                    autoSize.name.let {
-                                        if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
-                                            it
-                                        else
-                                            "(int)$it"
-                                    }
+                                autoSize?.name?.let {
+                                    if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
+                                        it
+                                    else
+                                        "(int)$it"
+                                }
                             }
                         ).firstOrNull { it != null }.let { if (it == null) "" else ", $it" }});".let { validation ->
                             if (it.has<Nullable>())
@@ -763,7 +760,7 @@ class Func(
 
         println(") {")
 
-        val code = if (has<Code>()) get<Code>() else Code.NO_CODE
+        val code = if (has<Code>()) get() else Code.NO_CODE
 
         // Get function address
 
@@ -871,14 +868,11 @@ class Func(
                 custom?.replace("\$original", it) ?: it.let { if (param.nativeType.mapping === PrimitiveMapping.INT) it else "(int)$it" }
             }
         else
-            (
-                if (single)
-                    "${param.name}.get(0)"
-                else if (param.nativeType is ArrayType)
-                    "${param.name}[0]"
-                else
-                    "${param.name}.get(${param.name}.position())"
-            ).let {
+            when {
+                single                        -> "${param.name}.get(0)"
+                param.nativeType is ArrayType -> "${param.name}[0]"
+                else                          -> "${param.name}.get(${param.name}.position())"
+            }.let {
                 val custom = param.get<AutoSizeResultParam>().expression
                 custom?.replace("\$original", it) ?: it.let { if (param.nativeType.mapping === PointerMapping.DATA_INT) it else "(int)$it" }
             }
@@ -1375,7 +1369,7 @@ class Func(
         val code = transforms
             .asSequence()
             .filter { it.value is CodeFunctionTransform<*> }
-            .fold(if (has<Code>()) get<Code>() else Code.NO_CODE) { code, entry ->
+            .fold(if (has<Code>()) get() else Code.NO_CODE) { code, entry ->
                 val (qtype, transform) = entry
                 @Suppress("UNCHECKED_CAST")
                 (transform as CodeFunctionTransform<QualifiedType>).generate(qtype, code)
@@ -1616,7 +1610,7 @@ class Func(
 
         // Custom code
 
-        var code = if (has<Code>()) get<Code>() else Code.NO_CODE
+        var code = if (has<Code>()) get() else Code.NO_CODE
         if (hasArrays && !critical) {
             code = code.append(
                 nativeBeforeCall = getParams { it.nativeType is ArrayType }.map {

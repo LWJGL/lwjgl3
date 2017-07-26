@@ -160,7 +160,7 @@ class Parameter(
      */
     internal inline fun <reified T : ParameterModifier> replaceModifier(replaceWith: (T) -> T): Parameter {
         if (this.has<T>())
-            _modifiers[T::class] = replaceWith(this.get<T>())
+            _modifiers[T::class] = replaceWith(this.get())
 
         return this
     }

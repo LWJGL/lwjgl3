@@ -167,7 +167,7 @@ class Struct(
         get() = members.asSequence().filter { it.public }
 
     private fun mutableMembers(members: Sequence<StructMember> = publicMembers): Sequence<StructMember> = members.let {
-        if (mutable) it else it.filter { it -> it.mutable }
+        if (mutable) it else it.filter { member -> member.mutable }
     }
 
     private val settableMembers: Sequence<StructMember> by lazy(LazyThreadSafetyMode.NONE) {
@@ -216,9 +216,7 @@ class Struct(
     fun padding(size: String, condition: String? = null) = add(StructMemberPadding(size, condition))
 
     /** Anonymous nested member struct definition. */
-    fun struct(init: Struct.() -> Unit): StructMember {
-        return struct(ANONYMOUS, ANONYMOUS, init)
-    }
+    fun struct(init: Struct.() -> Unit): StructMember = struct(ANONYMOUS, ANONYMOUS, init)
 
     /** Nested member struct definition. */
     fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
@@ -228,9 +226,7 @@ class Struct(
     }
 
     /** Anonymous nested member union definition. */
-    fun union(init: Struct.() -> Unit): StructMember {
-        return union(ANONYMOUS, ANONYMOUS, init)
-    }
+    fun union(init: Struct.() -> Unit): StructMember = union(ANONYMOUS, ANONYMOUS, init)
 
     /** Nested member union definition. */
     fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
@@ -396,7 +392,7 @@ $indent}"""
     private fun Struct.printStructLayout(indentation: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
-${members.map {
+${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {
             if (it.isNestedStructDefinition)
                 "${(it.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (it.name === ANONYMOUS) "" else " ${it.name}"};"
             else {
@@ -423,11 +419,11 @@ ${members.map {
                 }
                 "${if (it has ConstMember) "const " else ""}$nativeType${if (it.name === ANONYMOUS) "" else " ${it.name}"}${if (it is StructMemberArray) "[${it.size}]" else ""};"
             }
-        }.joinToString("\n$memberIndentation", prefix = memberIndentation)}
+        }}
 $indentation}"""
     }
 
-    private fun Struct.printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList<String>()): List<String> {
+    private fun Struct.printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList()): List<String> {
         members.forEach {
             if (it.isNestedStructDefinition)
                 (it.nativeType as StructType).definition.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", documentation)
@@ -1250,12 +1246,13 @@ ${validations.joinToString("\n")}
                                     "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else javaType}) $setter}. */"
                             )
                         print("${t}public static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, ")
-                        if (javaType == "boolean")
-                            print("value ? (byte)1 : (byte)0")
-                        else if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-                            print(it.pointerValue)
-                        else
-                            print("value")
+                        print(when {
+                            javaType == "boolean"
+                                 -> "value ? (byte)1 : (byte)0"
+                            it.nativeType.mapping === PointerMapping.OPAQUE_POINTER
+                                 -> it.pointerValue
+                            else -> "value"
+                        })
                         println("); }")
                     }
                 }

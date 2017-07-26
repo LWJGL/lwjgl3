@@ -114,16 +114,12 @@ abstract class SimpleBinding(
 
         /** Function address. */
         public static final long
-            ${
-        bindingFunctions
-            .map {
-                "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = ${if (it has IgnoreMissing)
-                    "$libraryExpression.getFunctionAddress(${it.functionAddress})"
-                else
-                    "apiGetFunctionAddress($libraryExpression, ${it.functionAddress})"}"
-            }
-            .joinToString(separator = ",\n$t$t$t", postfix = ";")
-        }
+            ${bindingFunctions.joinToString(separator = ",\n$t$t$t", postfix = ";") {
+            "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = ${if (it has IgnoreMissing)
+                "$libraryExpression.getFunctionAddress(${it.functionAddress})"
+            else
+                "apiGetFunctionAddress($libraryExpression, ${it.functionAddress})"}"
+        }}
 
     }""")
     }
@@ -711,14 +707,14 @@ class NativeClass(
         }
     }
 
-    private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String = documentation.replace(JDOC_LINK_PATTERN) { match ->
+    private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String) = documentation.replace(JDOC_LINK_PATTERN) { match ->
         match.value.let {
             val element = match.groupValues[1]
             if ((
                     referenceClass.prefixConstant.isNotEmpty() &&
                     element.startsWith(referenceClass.prefixConstant) &&
                     !constantLinks.containsKey(element.substring(referenceClass.prefixConstant.length))
-                ) || (referenceFunction != element && !this.functions.any { it -> it.name == element })
+                ) || (referenceFunction != element && !this.functions.any { func -> func.name == element })
                 )
                 "${referenceClass.className}$it"
             else
@@ -728,12 +724,11 @@ class NativeClass(
 
     fun getCapabilityJavadoc(): String {
         val documentation = this.documentation
-        return (if (documentation == null)
-            "When true, {@code $templateName} is supported."
-        else if (hasBody)
-            "When true, {@link $className} is supported."
-        else
-            processDocumentation(documentation)).toJavaDoc()
+        return when {
+            documentation == null -> "When true, {@code $templateName} is supported."
+            hasBody               -> "When true, {@link $className} is supported."
+            else                  -> processDocumentation(documentation)
+        }.toJavaDoc()
     }
 
 }

@@ -66,14 +66,12 @@ fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boole
     AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 
 fun Struct.AutoSize(div: Int, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    if (div < 1)
-        throw IllegalArgumentException()
-    else if (div == 1)
-        AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
-    else if (Integer.bitCount(div) == 1)
-        AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
-    else
-        AutoSizeDiv(div.toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+    when {
+        div < 1                    -> throw IllegalArgumentException()
+        div == 1                   -> AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+        Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+        else                       -> AutoSizeDiv(div.toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+    }
 
 @Suppress("unused")
 fun Struct.AutoSizeDiv(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =

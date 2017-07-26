@@ -178,8 +178,8 @@ private fun generate(
 }
 
 class Generator(
-    val srcPath: String,
-    val trgPath: String
+    private val srcPath: String,
+    private val trgPath: String
 ) {
 
     companion object {
@@ -536,7 +536,7 @@ private fun <T> generateOutput(
             if (before.remaining() != after.size)
                 return true
 
-            return (0..before.limit() - 1).any { before.get(it) != after[it] }
+            return (0 until before.limit()).any { before.get(it) != after[it] }
         }
 
         if (somethingChanged(before, after)) {

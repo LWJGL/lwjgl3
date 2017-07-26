@@ -223,7 +223,7 @@ private fun paramMultilineAligment(alignment: Int): String {
     val whitespace = " @param ".length + alignment + 1
     return StringBuilder("$t *".length + whitespace).apply {
         append("$t *")
-        for (i in 0..whitespace - 1)
+        for (i in 0 until whitespace)
             append(' ')
     }.toString()
 }

@@ -81,14 +81,14 @@ private class AutoSizeBytesTransform(
             try {
                 val f = factor.expression.toInt()
                 val b = byteShift.toInt()
-                if (factor.operator == "/") {
-                    expression = "$expression / ${f / (1 shl b)}"
+                expression = if (factor.operator == "/") {
+                    "$expression / ${f / (1 shl b)}"
                 } else {
                     val s = (if (factor.operator == ">>") f else -f) - b
                     if (s < 0)
-                        expression = "$expression << ${-s}"
+                        "$expression << ${-s}"
                     else
-                        expression = "$expression >> $s"
+                        "$expression >> $s"
                 }
             } catch(e: NumberFormatException) {
                 // ignored (MultiType with non-numeric expression)
@@ -102,7 +102,7 @@ private class AutoSizeBytesTransform(
     }
 }
 
-internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
+internal open class AutoSizeCharSequenceTransform(private val bufferParam: Parameter) : FunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String): String {
         var expression = if (bufferParam has nullable)
@@ -124,7 +124,7 @@ internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : 
     }
 }
 
-internal class AutoTypeParamTransform(val autoType: String) : FunctionTransform<Parameter> {
+internal class AutoTypeParamTransform(private val autoType: String) : FunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type
 }
@@ -136,8 +136,8 @@ internal class AutoTypeTargetTransform(val autoType: PointerMapping) : FunctionT
 
 internal open class ExpressionTransform(
     val expression: String,
-    val keepParam: Boolean = false,
-    val paramTransform: FunctionTransform<Parameter>? = null
+    private val keepParam: Boolean = false,
+    private val paramTransform: FunctionTransform<Parameter>? = null
 ) : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) =
         if (keepParam) paramTransform?.transformDeclaration(param, original) ?: original else null
@@ -146,7 +146,7 @@ internal open class ExpressionTransform(
 }
 
 internal class CharSequenceTransform(
-    val nullTerminated: Boolean
+    private val nullTerminated: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
     override fun transformCall(param: Parameter, original: String) = if (param.has<Nullable>())
@@ -175,10 +175,10 @@ internal object StringReturnTransform : FunctionTransform<ReturnValue> {
 }
 
 internal class PrimitiveValueReturnTransform(
-    val bufferType: PointerType,
+    private val bufferType: PointerType,
     val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
-    override fun transformDeclaration(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
+    override fun transformDeclaration(param: ReturnValue, original: String): String = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
         bufferType.elementType.javaMethodType
     else
         (bufferType.mapping as PointerMapping).primitive // Replace void with the buffer value type
@@ -205,9 +205,9 @@ internal object Expression1Transform : FunctionTransform<Parameter> {
 }
 
 internal class SingleValueTransform(
-    val paramType: String,
-    val elementType: String,
-    val newName: String
+    private val paramType: String,
+    private val elementType: String,
+    private val newName: String
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) = "$paramType $newName" // Replace with element type + new name
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
@@ -215,20 +215,20 @@ internal class SingleValueTransform(
 }
 
 internal class SingleValueStructTransform(
-    val newName: String
+    private val newName: String
 ) : FunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String) = "${param.nativeType.javaMethodType} $newName" // Replace with element type + new name
     override fun transformCall(param: Parameter, original: String): String = "$newName.address()"
 }
 
 internal class VectorValueTransform(
-    val paramType: PointerMapping,
-    val elementType: String,
-    val newName: String,
+    private val paramType: PointerMapping,
+    private val elementType: String,
+    private val newName: String,
     val size: Int
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) = paramType.primitive.let { paramType ->
-        (0..size - 1).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" }
+        (0 until size).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" }
     } // Replace with vector elements
 
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
@@ -259,7 +259,7 @@ internal val BufferLengthTransform: FunctionTransform<Parameter> = object : Func
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) = writer.println("$t$t${t}IntBuffer ${qtype.name} = stack.ints(0);")
 }
 
-internal class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal class StringAutoSizeTransform(private val autoSizeParam: Parameter) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
     override fun generate(qtype: Parameter, code: Code): Code {
@@ -271,7 +271,7 @@ internal class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionT
     }
 }
 
-internal class StringAutoSizeStackTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal class StringAutoSizeStackTransform(private val autoSizeParam: Parameter) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
@@ -289,11 +289,11 @@ internal val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object
 }
 
 internal class BufferAutoSizeReturnTransform(
-    val outParam: Parameter,
-    val lengthExpression: String,
+    private val outParam: Parameter,
+    private val lengthExpression: String,
     val encoding: String? = null
 ) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
-    override fun transformDeclaration(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
+    override fun transformDeclaration(param: ReturnValue, original: String): String = (outParam.nativeType as PointerType).elementType!!.let {
         if (it.dereference is StructType)
             "${it.javaMethodType}.Buffer"
         else
@@ -310,8 +310,8 @@ internal class BufferAutoSizeReturnTransform(
 }
 
 internal class BufferReturnTransform(
-    val outParam: Parameter,
-    val lengthParam: String,
+    private val outParam: Parameter,
+    private val lengthParam: String,
     val charMapping: CharMapping? = null,
     val includesNT: Boolean = false
 ) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
@@ -337,8 +337,8 @@ internal class BufferReturnTransform(
 }
 
 internal class BufferReturnNTTransform(
-    val outParam: Parameter,
-    val maxLengthParam: String
+    private val outParam: Parameter,
+    private val maxLengthParam: String
 ) : FunctionTransform<ReturnValue> {
     override fun transformDeclaration(param: ReturnValue, original: String) = "String"
     override fun transformCall(param: ReturnValue, original: String): String {
@@ -347,7 +347,7 @@ internal class BufferReturnNTTransform(
     }
 }
 
-internal open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
+internal open class PointerArrayTransform(private val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String): String? {
         val pointerArray = param.get<PointerArray>()
         val name = if (paramType.isEmpty()) pointerArray.singleName else param.name
@@ -396,7 +396,7 @@ internal val PointerArrayTransformArray = PointerArrayTransform("[]")
 internal val PointerArrayTransformVararg = PointerArrayTransform("...")
 
 internal class PointerArrayLengthsTransform(
-    val arrayParam: Parameter,
+    private val arrayParam: Parameter,
     val multi: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
