@@ -515,14 +515,17 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         "DISCONNECTED"..0x00040002
     )
 
-    val InitHints = IntConstant(
+    IntConstant(
         "Init hints.",
 
         "JOYSTICK_HAT_BUTTONS"..0x00050001,
 
         "COCOA_CHDIR_RESOURCES"..0x00051001,
-        "COCOA_MENUBAR"..0x00051002
-    ).javaDocLinks
+        "COCOA_MENUBAR"..0x00051002,
+
+        "X11_WM_CLASS_NAME"..0x00052001,
+        "X11_WM_CLASS_CLASS"..0x00052002
+    )
 
     IntConstant(
         "Don't care value.",
@@ -784,15 +787,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
     void(
         "InitHint",
         """
-        Sets the specified init hint to the desired value.
+        Sets hints for the next initialization of GLFW. Only integer type hints can be set with this function.
 
-        This function sets hints for the next initialization of GLFW.
+        The values you set hints to are never reset by GLFW, but they only take effect during initialization. Once GLFW has been initialized, any values you
+        set will be ignored until the library is terminated and initialized again.
 
-        The values you set are not affected by initialization or termination, but they are only read during initialization. Once GLFW has been initialized,
-        setting new hint values will not affect behavior until the next time the library is terminated and initialized.
-
-        Some hints are platform specific. These are always valid to set on any platform but they will only affect their specific platform. Other platforms will
-        simply ignore them. Setting these hints requires no platform specific headers or calls.
+        Some hints are platform specific. These may be set on any platform but they will only affect their specific platform. Other platforms will simply
+        ignore them. Setting these hints requires no platform specific headers or functions.
 
         ${note(ul(
             "This function may be called before #Init().",
@@ -800,8 +801,31 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         ))}
         """,
 
-        int.IN("hint", "the init hint to set", InitHints),
+        int.IN("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR"),
         int.IN("value", "the new value of the init hint"),
+
+        since = "version 3.3"
+    )
+
+    void(
+        "InitHintString",
+        """
+        Sets hints for the next initialization of GLFW. Only string type hints can be set with this function.
+
+        The values you set hints to are never reset by GLFW, but they only take effect during initialization. Once GLFW has been initialized, any values you
+        set will be ignored until the library is terminated and initialized again.
+
+        Some hints are platform specific. These may be set on any platform but they will only affect their specific platform. Other platforms will simply
+        ignore them. Setting these hints requires no platform specific headers or functions.
+
+        ${note(ul(
+            "This function may be called before #Init().",
+            "This function must only be called from the main thread."
+        ))}
+        """,
+
+        int.IN("hint", "the init hint to set", "#X11_WM_CLASS_NAME #X11_WM_CLASS_CLASS"),
+        const..charUTF8_p.IN("value", "the new value of the init hint"),
 
         since = "version 3.3"
     )
