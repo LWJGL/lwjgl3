@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."45"
+        "API_VERSION".."46"
     )
 
     ShortConstant(
@@ -259,8 +259,8 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "BUFFER_COMPUTE_FORMAT_SHIFT".."0",
         "BUFFER_COMPUTE_FORMAT_MASK"..0x000f.s,
 
-        "BUFFER_COMPUTE_TYPE_UINT"..0x0010.s,
-        "BUFFER_COMPUTE_TYPE_INT"..0x0020.s,
+        "BUFFER_COMPUTE_TYPE_INT"..0x0010.s,
+        "BUFFER_COMPUTE_TYPE_UINT"..0x0020.s,
         "BUFFER_COMPUTE_TYPE_FLOAT"..0x0030.s,
         "BUFFER_COMPUTE_TYPE_SHIFT".."4",
         "BUFFER_COMPUTE_TYPE_MASK"..0x0030.s
@@ -2180,9 +2180,9 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
         MapToInt..uint8_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "compute program"),
-        MapToInt..uint16_t.IN("_numX", "number of groups X"),
-        MapToInt..uint16_t.IN("_numY", "number of groups Y"),
-        MapToInt..uint16_t.IN("_numZ", "number of groups Z"),
+        uint32_t.IN("_numX", "number of groups X"),
+        uint32_t.IN("_numY", "number of groups Y"),
+        uint32_t.IN("_numZ", "number of groups Z"),
         MapToInt..uint8_t.IN("_flags", "view flags", SubmitFlags)
     )
 
