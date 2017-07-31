@@ -2626,6 +2626,30 @@ if (hats[2] & GLFW_HAT_RIGHT)
         since = "version 3.0"
     )
 
+    const..charUTF8_p(
+        "GetJoystickGUID",
+        """
+        Returns the SDL compatible GUID, as a UTF-8 encoded hexadecimal string, of the specified joystick.
+
+        The GUID uses the format introduced in SDL 2.0.5. This GUID tries to uniquely identify the make and model of a joystick but does not identify a
+        specific unit, e.g. all wired Xbox 360 controllers will have the same GUID on that platform. The GUID for a unit may vary between platforms depending
+        on what hardware information the platform specific APIs provide.
+
+        If the specified joystick is not present this function will return #NULL but will not generate an error. Call #JoystickPresent() to check device
+        presence.
+
+        The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected or the
+        library is terminated.
+
+        This function must only be called from the main thread.
+        """,
+
+        int.IN("jid", "the joystick to query"),
+
+        returnDoc = "the UTF-8 encoded GUID of the joystick, or #NULL if the joystick is not present or an error occurred",
+        since = "version 3.3"
+    )
+
     intb(
         "JoystickIsGamepad",
         """
