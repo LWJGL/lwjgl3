@@ -12,12 +12,15 @@ fun config() {
     packageInfo(
         ASSIMP_PACKAGE,
         """
-        Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library.
+        Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library, a library to import and export various 3d-model-formats including
+        scene-post-processing to generate missing render data.
 
-        Assimp comes with fairly outdated documentation, which you can read online ${url("http://www.assimp.org/lib_html/", "here")}. The
-        ${url("http://www.assimp.org/faq.html", "Frequently Asked Questions")} are also useful.
+        Assimp aims to provide a full asset conversion pipeline for use in game engines / realtime rendering systems of any kind, but it is not limited to this
+        purpose. In the past, it has been used in a wide range of applications.
 
-        The bindings only consist of the C API of the Assimp model import library.
+        Written in C++, it is available under a liberal BSD license. Assimp loads all input model formats into one straightforward data structure for further
+        processing. This feature set is augmented by various post processing tools, including frequently-needed operations such as computing normal and tangent
+        vectors.
         """
     )
 }

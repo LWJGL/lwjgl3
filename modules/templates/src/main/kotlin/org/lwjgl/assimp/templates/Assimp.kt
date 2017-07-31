@@ -12,10 +12,133 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
         """
         Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library.
 
-        Assimp comes with fairly outdated documentation, which you can read online ${url("http://www.assimp.org/lib_html/", "here")}. The
-        ${url("http://www.assimp.org/FAQ.html", "Frequently Asked Questions")} are also useful.
+        <h3>General Features</h3>
+        ${ul(
+            "Written in portable, ISO-compliant C++",
+            "Easily configurable and customizable",
+            "Core interface / API is provided for both C++ and C",
+            "Command-line interface to perform common operations (i.e. quick file stats, convert models, extract embedded textures) from the shell",
+            "Imports bones, vertex weights and animations (i.e. skinning, skeletal animations)",
+            "Loads multiple UV and vertex color channels (current limit is 8)",
+            "Works well with UNICODE input files",
+            "Supports complex multi-layer materials",
+            "Supports embedded textures, both compressed (e.g. PNG) or just raw color data",
+            "No external dependencies except boost (zlib and irrxml are also needed, but they're included in the repository so you don't need to bother). And there's even a workaround to compile Assimp without boost - with some minor limitations.",
+            "Due to its export interface, Assimp serves as general-purpose 3D model converter"
+        )}
 
-        The bindings only consist of the C API of the Assimp model import library.
+        <h3>Import Formats</h3>
+
+        COMMON INTERCHANGE FORMATS (An asterisk indicates limited support)
+        ${ul(
+            "Autodesk ( .fbx )",
+            "Collada ( .dae )",
+            "glTF ( .gltf, .glb )",
+            "Blender 3D ( .blend )",
+            "3ds Max 3DS ( .3ds )",
+            "3ds Max ASE ( .ase )",
+            "Wavefront Object ( .obj )",
+            "Industry Foundation Classes (IFC/Step) ( .ifc )",
+            "XGL ( .xgl,.zgl )",
+            "Stanford Polygon Library ( .ply )",
+            "*AutoCAD DXF ( .dxf )",
+            "LightWave ( .lwo )",
+            "LightWave Scene ( .lws )",
+            "Modo ( .lxo )",
+            "Stereolithography ( .stl )",
+            "DirectX X ( .x )",
+            "AC3D ( .ac )",
+            "Milkshape 3D ( .ms3d )",
+            "* TrueSpace ( .cob,.scn )",
+            "*OpenGEX ( .ogex )",
+            "*X3D ( .x3d )",
+            "*3MF ( .3mf )"
+        )}
+
+        MOTION CAPTURE FORMATS
+        ${ul(
+            "Biovision BVH ( .bvh )",
+            "* CharacterStudio Motion ( .csm )"
+        )}
+
+        GRAPHICS ENGINE FORMATS
+        ${ul(
+            "Ogre XML ( .xml )",
+            "Irrlicht Mesh ( .irrmesh )",
+            "* Irrlicht Scene ( .irr )"
+        )}
+
+        GAME FILE FORMATS
+        ${ul(
+            "Quake I ( .mdl )",
+            "Quake II ( .md2 )",
+            "Quake III Mesh ( .md3 )",
+            "Quake III Map/BSP ( .pk3 )",
+            "* Return to Castle Wolfenstein ( .mdc )",
+            "Doom 3 ( .md5* )",
+            "*Valve Model ( .smd,.vta )",
+            "*Open Game Engine Exchange ( .ogex )",
+            "*Unreal ( .3d )"
+        )}
+
+        OTHER FILE FORMATS
+        ${ul(
+            "BlitzBasic 3D ( .b3d )",
+            "Quick3D ( .q3d,.q3s )",
+            "Neutral File Format ( .nff )",
+            "Sense8 WorldToolKit ( .nff )",
+            "Object File Format ( .off )",
+            "PovRAY Raw ( .raw )",
+            "Terragen Terrain ( .ter )",
+            "3D GameStudio (3DGS) ( .mdl )",
+            "3D GameStudio (3DGS) Terrain ( .hmp )",
+            "Izware Nendo ( .ndo )"
+        )}
+
+        <h3>Export Formats</h3>
+
+        COMMON INTERCHANGE FORMATS
+        ${ul(
+            "Collada ( .dae )",
+            "Wavefront Object ( .obj )",
+            "Stereolithography ( .stl )",
+            "Stanford Polygon Library ( .ply )"
+        )}
+
+        <h3>Post-processing</h3>
+
+        REAL TIME RENDERING
+        ${ul(
+            "Improve vertex cache locality",
+            "Convert from right-handed to left-handed space",
+            "Limit weights affecting a single vertex",
+            "Split meshes to avoid exceeding bone count limits",
+            "Triangulate arbitrary polygons",
+            "Join identical vertices, optimize indexing",
+            "Find degenerate polygons",
+            "Split large meshes to overcome GPU limitations (i.e. vertex count)"
+        )}
+
+        VERTEX DATA
+        ${ul(
+            "Compute \"hard\" per-face normal vectors",
+            "Compute \"smooth\" per-vertex normal vectors",
+            "Compute tangents and bitangents"
+        )}
+
+        SCENEGRAPH
+        ${ul(
+            "Collapse the scene graph, transform everything to world coordinates",
+            "Optimize meshes & nodes for fewer drawcalls"
+        )}
+
+        OTHER
+        ${ul(
+            "Validate the output structure to ensure maximum data integrity",
+            "Remove unrequired materials, effectively detect and merge duplicates",
+            "Try to correct face winding",
+            "Drop dummy bones introduced somewhere in your content pipeline"
+        )}
         """
 
     // config.h
