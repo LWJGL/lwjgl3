@@ -188,6 +188,10 @@ private val GLESBinding = Generator.register(object : APIBinding(
         addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
     }
 
+    boolean hasDSA(Set<String> ext) {
+        return ext.contains("GL_ARB_direct_state_access") || ext.contains("GL_EXT_direct_state_access");
+    }
+
     private static boolean checkExtension(String extension, boolean supported) {
         if (supported) {
             return true;
@@ -233,8 +237,9 @@ val NativeClass.registryLink: String get() = (REGISTRY_PATTERN.matchEntire(templ
         url("https://www.khronos.org/registry/gles/extensions/${it.groupValues[1]}/$templateName.txt", templateName)
     }
 
-fun NativeClass.registryLink(prefix: String, name: String): String =
-    url("https://www.khronos.org/registry/gles/extensions/$prefix/$name.txt", templateName)
+fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
+fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
+    url("https://www.khronos.org/registry/gles/extensions/$prefix/$name.txt", extensionName)
 
 val NativeClass.core: String get() = "{@link ${this.className} GLES ${this.className[4]}.${this.className[5]}}"
 val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

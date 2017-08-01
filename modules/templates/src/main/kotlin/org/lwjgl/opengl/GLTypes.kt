@@ -138,6 +138,8 @@ val GLhandleARB = IntegerType("GLhandleARB", PrimitiveMapping.INT, unsigned = tr
 val GLhandleARB_p = GLhandleARB.p
 // ARB_sync
 val GLsync = "GLsync".opaque_p
+// EXT_external_buffer
+val GLeglClientBufferEXT = "GLeglClientBufferEXT".opaque_p
 // KHR_debug
 val GLDEBUGPROC = "GLDEBUGPROC".callback(
     OPENGL_PACKAGE, void, "GLDebugMessageCallback",

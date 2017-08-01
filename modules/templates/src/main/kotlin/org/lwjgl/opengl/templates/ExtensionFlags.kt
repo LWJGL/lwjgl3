@@ -866,6 +866,24 @@ val AMD_gcn_shader = EXT_FLAG.nativeClassGL("AMD_gcn_shader", postfix = AMD) {
         Requires ${AMD_gpu_shader_int64.cap} or ${NV_gpu_shader5.cap}.
         """
 }
+val AMD_gpu_shader_int16 = EXT_FLAG.nativeClassGL("AMD_gpu_shader_int16", postfix = AMD) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension was developed to allow implementations supporting 16-bit integers to expose the feature in GLSL.
+
+        The extension introduces the following features for all shader types:
+        ${ul(
+            "new built-in functions to pack and unpack 32-bit integer types into a two-component 16-bit integer vector;",
+            "new built-in functions to convert half-precision floating-point values to or from their 16-bit integer bit encodings;",
+            "vector relational functions supporting comparisons of vectors of 16-bit integer types; and",
+            "common functions abs, frexp, ldexp, sign, min, max, clamp, and mix supporting arguments of 16-bit integer types."
+        )}
+
+        Requires GLSL 4.00.
+        """
+}
 val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_counter_ops", postfix = AMD) {
     documentation =
         """
@@ -1231,6 +1249,15 @@ val NV_texture_compression_vtc = EXT_FLAG.nativeClassGL("NV_texture_compression_
         This extension adds support for the VTC 3D texture compression formats, which are analogous to the S3TC texture compression formats, with the addition
         of some retiling in the Z direction. VTC has the same compression ratio as S3TC and uses 4x4x1, 4x4x2, (4x4x3 when non-power-of-two textures are
         supported), or 4x4x4 blocks.
+        """
+}
+val NV_texture_rectangle_compressed = EXT_FLAG.nativeClassGL("NV_texture_rectangle_compressed", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension allows applications to use compressed texture formats with the #TEXTURE_RECTANGLE texture target, removing an old limitation that
+        prohibited such usage globally for rectangle textures.
         """
 }
 val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = NV) {

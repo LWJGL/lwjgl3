@@ -95,7 +95,7 @@ val EXT_texture_storage = "EXTTextureStorage".nativeClassGLES("EXT_texture_stora
         GLsizei.IN("depth", "")
     )
 
-    void(
+    DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorage1DEXT",
         "",
 
@@ -106,7 +106,7 @@ val EXT_texture_storage = "EXTTextureStorage".nativeClassGLES("EXT_texture_stora
         GLsizei.IN("width", "")
     )
 
-    void(
+    DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorage2DEXT",
         "",
 
@@ -118,7 +118,7 @@ val EXT_texture_storage = "EXTTextureStorage".nativeClassGLES("EXT_texture_stora
         GLsizei.IN("height", "")
     )
 
-    void(
+    DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorage3DEXT",
         "",
 

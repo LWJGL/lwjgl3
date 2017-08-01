@@ -102,6 +102,8 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
     """
 }
 
+// EXT_external_buffer
+val GLeglClientBufferEXT = "GLeglClientBufferEXT".opaque_p
 // KHR_debug
 val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
     GLES_PACKAGE, void, "GLDebugMessageKHRCallback",
@@ -132,7 +134,6 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
     }
     """
 }
-
 // OES_EGL_image
 val GLeglImageOES = "GLeglImageOES".opaque_p
 // NV_draw_vulkan_image
