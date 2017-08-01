@@ -43,12 +43,56 @@ val ARB_gl_spirv = "ARBGLSPIRV".nativeClassGL("ARB_gl_spirv") {
 
     void(
         "SpecializeShaderARB",
-        "Specializes a shader created from a SPIR-V module.",
+        """
+        Specializes a shader created from a SPIR-V module.
 
-        GLuint.IN("shader", ""),
-        const..GLcharUTF8_p.IN("pEntryPoint", ""),
-        AutoSize("pConstantIndex", "pConstantValue")..GLuint.IN("numSpecializationConstants", ""),
-        const..GLuint_p.IN("pConstantIndex", ""),
-        const..GLuint_p.IN("pConstantValue", "")
+        Shaders associated with SPIR-V modules must be specialized before they can be linked into a program object. It is not necessary to specialize the
+        shader before it is attached to a program object. Once specialized, a shader may not be specialized again without first re-associating the original
+        SPIR-V module with it, through #ShaderBinary().
+
+        Specialization does two things:
+        ${ul(
+            "Selects the name of the entry point, for that shader’s stage, from the SPIR-V module.",
+            "Sets the values of all, or a subset of, the specialization constants in the SPIRV module."
+        )}
+
+        On successful shader specialization, the compile status for shader is set to #TRUE. On failure, the compile status for shader is set to #FALSE and
+        additional information about the cause of the failure may be available in the shader compilation log.
+        """,
+
+        GLuint.IN(
+            "shader",
+            """
+            the name of a shader object containing unspecialized SPIR-V as created from a successful call to #ShaderBinary() to which a SPIR-V module was
+            passed
+            """
+        ),
+        const..GLcharUTF8_p.IN(
+            "pEntryPoint",
+            "a pointer to a null-terminated UTF-8 string specifying the name of the entry point in the SPIR-V module to use for this shader"
+        ),
+        AutoSize("pConstantIndex", "pConstantValue")..GLuint.IN(
+            "numSpecializationConstants",
+            "the number of specialization constants whose values to set in this call"
+        ),
+        const..GLuint_p.IN(
+            "pConstantIndex",
+            """
+            is a pointer to an array of {@code numSpecializationConstants} unsigned integers, each holding the index of a specialization constant in the SPIR-V
+            module whose value to set.
+
+            Specialization constants not referenced by {@code pConstantIndex} retain their default values as specified in the SPIR-V module.
+            """
+        ),
+        const..GLuint_p.IN(
+            "pConstantValue",
+            """
+            an entry in {@code pConstantValue} is used to set the value of the specialization constant indexed by the corresponding entry in
+            {@code pConstantIndex}.
+
+            Although this array is of unsigned integer, each entry is bitcast to the appropriate type for the module, and therefore, floating-point constants
+            may be set by including their IEEE-754 bit representation in the {@code pConstantValue} array.
+            """
+        )
     )
 }

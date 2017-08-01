@@ -24,7 +24,6 @@ val ARB_pipeline_statistics_query = "ARBPipelineStatisticsQuery".nativeClassGL("
         Requires ${GL30.core}.
         """
 
-
     IntConstant(
         """
         Accepted by the {@code target} parameter of #BeginQuery(), #EndQuery(), #GetQueryiv(),

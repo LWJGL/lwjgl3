@@ -378,7 +378,7 @@ public final class GL {
                 5, // OpenGL 1.1 to 1.5
                 1, // OpenGL 2.0 to 2.1
                 3, // OpenGL 3.0 to 3.3
-                5, // OpenGL 4.0 to 4.5
+                6, // OpenGL 4.0 to 4.6
             };
 
             Set<String> supportedExtensions = new HashSet<>(512);

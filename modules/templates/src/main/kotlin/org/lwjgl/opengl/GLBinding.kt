@@ -227,6 +227,10 @@ val GLBinding = Generator.register(object : APIBinding(
         addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
     }
 
+    boolean hasDSA(Set<String> ext) {
+        return ext.contains("GL45") || ext.contains("GL_ARB_direct_state_access") || ext.contains("GL_EXT_direct_state_access");
+    }
+
     private static long getFunctionAddress(boolean fc, FunctionProvider provider, String functionName) {
         return fc ? NULL : provider.getFunctionAddress(functionName);
     }
