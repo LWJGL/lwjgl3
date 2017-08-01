@@ -30,6 +30,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.opengles" value="true"/>
     <property name="binding.openvr" value="true"/>
     <property name="binding.par" value="true"/>
+    <property name="binding.rpmalloc" value="true"/>
     <property name="binding.sse" value="true"/>
     <property name="binding.stb" value="true"/>
     <property name="binding.tinyexr" value="true"/>

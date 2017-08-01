@@ -27,9 +27,14 @@ final class MemoryManage {
         }
 
         if (!"system".equals(allocator)) {
-            String className = allocator == null || "jemalloc".equals(allocator)
-                ? "org.lwjgl.system.jemalloc.JEmallocAllocator"
-                : allocator.toString();
+            String className;
+            if (allocator == null || "jemalloc".equals(allocator)) {
+                className = "org.lwjgl.system.jemalloc.JEmallocAllocator";
+            } else if ("rpmalloc".equals(allocator)) {
+                className = "org.lwjgl.system.rpmalloc.RPmallocAllocator";
+            } else {
+                className = allocator.toString();
+            }
 
             try {
                 Class<?> allocatorClass = Class.forName(className);

@@ -235,6 +235,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc" if:true="${binding.jemalloc}"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/system/rpmalloc" if:true="${binding.rpmalloc}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/jni"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
             <src path="${src.templates.kotlin}/org/lwjgl/system/linux"/>
@@ -345,6 +346,7 @@
             <exclude name="org/lwjgl/stb/**" unless:true="${binding.stb}"/>
 
             <exclude name="org/lwjgl/system/jemalloc/**" unless:true="${binding.jemalloc}"/>
+            <exclude name="org/lwjgl/system/rpmalloc/**" unless:true="${binding.rpmalloc}"/>
             <exclude name="org/lwjgl/system/jawt/**" unless:true="${binding.jawt}"/>
 
             <exclude name="org/lwjgl/util/lmdb/**" unless:true="${binding.lmdb}"/>
@@ -972,6 +974,7 @@
                     <include name="org/lwjgl/system/**"/>
                     <exclude name="org/lwjgl/system/jawt/**"/>
                     <exclude name="org/lwjgl/system/jemalloc/**"/>
+                    <exclude name="org/lwjgl/system/rpmalloc/**"/>
                 </fileset>
 
                 <fileset dir="${bin.core}" if:set="jdk9">
@@ -988,6 +991,7 @@
                     <include name="org/lwjgl/system/**"/>
                     <exclude name="org/lwjgl/system/jawt/**"/>
                     <exclude name="org/lwjgl/system/jemalloc/**"/>
+                    <exclude name="org/lwjgl/system/rpmalloc/**"/>
                 </fileset>
             </sources>
             <custom>
@@ -1110,6 +1114,9 @@
 
         <!-- Par -->
         <release-module package="org.lwjgl.util.par" name="par" native-library="lwjgl_par" title="par" if:true="${binding.par}"/>
+
+        <!-- rpmalloc -->
+        <release-module package="org.lwjgl.system.rpmalloc" name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>
 
         <!-- SSE -->
         <release-module package="org.lwjgl.util.simd" name="sse" native-library="lwjgl_sse" title="SSE" if:true="${binding.sse}"/>

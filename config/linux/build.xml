@@ -32,7 +32,7 @@
                 <arg line="-c -std=c++11" if:set="cpp"/>
                 <arg line="-m64" if:true="${build.arch.x64}"/>
                 <arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
-                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
                 <arg value="-I${jni.headers}"/>
                 <arg value="-I${jni.headers}/linux"/>
@@ -224,6 +224,14 @@
                 <arg value="-I${src.native.rel}/util/par"/>
                 <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
+            </source>
+        </build>
+
+        <!-- rpmalloc -->
+        <build name="lwjgl_rpmalloc" dest="${bin.native}/rpmalloc" if:true="${binding.rpmalloc}">
+            <source>
+                <arg value="-I${src.native.rel}/system/rpmalloc"/>
+                <fileset dir="." includes="${src.generated.native}/system/rpmalloc/*.c"/>
             </source>
         </build>
 

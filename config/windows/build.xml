@@ -265,6 +265,16 @@ EXPORTS
             </source>
         </build>
 
+        <!-- rpmalloc -->
+        <build name="lwjgl_rpmalloc" dest="${bin.native}/rpmalloc" if:true="${binding.rpmalloc}">
+            <compileargs>
+                <arg value="/I${src.native}\system\rpmalloc"/>
+            </compileargs>
+            <source>
+                <fileset dir="." includes="${src.generated.native}/system/rpmalloc/*.c"/>
+            </source>
+        </build>
+
         <!-- SSE -->
         <build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
             <compileargs>

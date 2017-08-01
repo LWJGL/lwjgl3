@@ -225,6 +225,14 @@
             </source>
         </build>
 
+        <!-- rpmalloc -->
+        <build name="lwjgl_rpmalloc" dest="${bin.native}/rpmalloc" if:true="${binding.rpmalloc}">
+            <source>
+                <arg value="-I${src.native.rel}/system/rpmalloc"/>
+                <fileset dir="." includes="${src.generated.native}/system/rpmalloc/*.c"/>
+            </source>
+        </build>
+
         <!-- SSE -->
         <build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
             <source>
