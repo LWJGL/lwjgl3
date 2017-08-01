@@ -822,7 +822,7 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
     uint32_t.member("maxFramebufferWidth", "the maximum width for a framebuffer. The {@code width} member of the ##VkFramebufferCreateInfo structure <b>must</b> be less than or equal to this limit.")
     uint32_t.member("maxFramebufferHeight", "the maximum height for a framebuffer. The {@code height} member of the ##VkFramebufferCreateInfo structure <b>must</b> be less than or equal to this limit.")
     uint32_t.member("maxFramebufferLayers", "the maximum layer count for a layered framebuffer. The {@code layers} member of the ##VkFramebufferCreateInfo structure <b>must</b> be less than or equal to this limit.")
-    VkSampleCountFlags.member("framebufferColorSampleCounts", "a bitmask<sup>1</sup> of {@code VkSampleCountFlagBits} indicating the color sample counts that are supported for all framebuffer color attachments.")
+    VkSampleCountFlags.member("framebufferColorSampleCounts", "a bitmask<sup>1</sup> of {@code VkSampleCountFlagBits} indicating the color sample counts that are supported for all framebuffer color attachments with floating- or fixed-point formats. There is no limit that indicates the color sample counts that are supported for all color attachments with integer formats.")
     VkSampleCountFlags.member("framebufferDepthSampleCounts", "a bitmask<sup>1</sup> of {@code VkSampleCountFlagBits} indicating the supported depth sample counts for all framebuffer depth/stencil attachments, when the format includes a depth component.")
     VkSampleCountFlags.member("framebufferStencilSampleCounts", "a bitmask<sup>1</sup> of {@code VkSampleCountFlagBits} indicating the supported stencil sample counts for all framebuffer depth/stencil attachments, when the format includes a stencil component.")
     VkSampleCountFlags.member("framebufferNoAttachmentsSampleCounts", "a bitmask<sup>1</sup> of {@code VkSampleCountFlagBits} indicating the supported sample counts for a framebuffer with no attachments.")
@@ -1923,6 +1923,10 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
         <h5>Description</h5>
         If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} <b>can</b> be different from the image's format, but if they are not equal they <b>must</b> be <em>compatible</em>. Image format compatibility is defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a> section. Views of compatible formats will have the same mapping between texel coordinates and memory locations irrespective of the {@code format}, with only the interpretation of the bit pattern changing.
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Values intended to be used with one view format <b>may</b> not be exactly preserved when written or read through a different format. For example, an integer value that happens to have the bit pattern of a floating point denorm or NaN <b>may</b> be flushed or canonicalized when written or read through a view with a floating point format. Similarly, a value written through a signed normalized format that has a bit pattern exactly equal to <code>-2<sup>b</sup></code> <b>may</b> be changed to <code>-2<sup>b</sup> {plus} 1</code> as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fixedfpconv">Conversion from Normalized Fixed-Point to Floating-Point</a>.
+        </div>
+
         <h6>Image and image view parameter compatibility requirements</h6>
         <table class="lwjgl">
             <thead><tr><th>Dim, Arrayed, MS</th><th>Image parameters</th><th>View parameters</th></tr></thead>
@@ -2739,6 +2743,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses color attachments, {@code pColorBlendState} <b>must</b> be a pointer to a valid ##VkPipelineColorBlendStateCreateInfo structure</li>
             <li>If the depth bias clamping feature is not enabled, no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_DEPTH_BIAS, and the {@code depthBiasEnable} member of {@code pDepthStencil} is #TRUE, the {@code depthBiasClamp} member of {@code pDepthStencil} <b>must</b> be {@code 0.0}</li>
             <li>{@code layout} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-pipelinelayout-consistency">consistent</a> with all shaders specified in {@code pStages}</li>
+            <li>If {@code subpass} uses color and/or depth/stencil attachments, then the {@code rasterizationSamples} member of {@code pMultisampleState} <b>must</b> equal the maximum of the sample counts of those subpass attachments</li>
             <li>If {@code subpass} has a depth/stencil attachment and depth test, stencil test, or depth bounds test are enabled, then the {@code rasterizationSamples} member of {@code pMultisampleState} <b>must</b> be the same as the sample count of the depth/stencil attachment</li>
             <li>If {@code subpass} has any color attachments, then the {@code rasterizationSamples} member of {@code pMultisampleState} <b>must</b> be greater than or equal to the sample count for those subpass attachments</li>
             <li>If {@code subpass} does not use any color and/or depth/stencil attachments, then the {@code rasterizationSamples} member of {@code pMultisampleState} <b>must</b> follow the rules for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-noattachments">zero-attachment subpass</a></li>
@@ -3333,7 +3338,7 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
         Structure specifying parameters of a newly created framebuffer.
 
         <h5>Description</h5>
-        Image subresources used as attachments <b>must</b> not be used via any non-attachment usage for the duration of a render pass instance.
+        Image subresources used as attachments <b>must</b> not be accessed in any other way for the duration of a render pass instance.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         This restriction means that the render pass has full knowledge of all uses of all of the attachments, so that the implementation is able to make correct decisions about when and how to perform layout transitions, when to overlap execution of subpasses, etc.
@@ -3488,6 +3493,7 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
             <li>Any given element of {@code pResolveAttachments} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
             <li>Any given element of {@code pResolveAttachments} <b>must</b> have the same {@code VkFormat} as its corresponding color attachment</li>
             <li>All attachments in {@code pColorAttachments} that are not #ATTACHMENT_UNUSED <b>must</b> have the same sample count</li>
+            <li>All attachments in {@code pColorAttachments} that are not #ATTACHMENT_UNUSED <b>must</b> have a sample count that is smaller than or equal to the sample count of {@code pDepthStencilAttachment} if it is not #ATTACHMENT_UNUSED</li>
             <li>If any input attachments are #ATTACHMENT_UNUSED, then any pipelines bound during the subpass <b>must</b> not access those input attachments from the fragment shader</li>
             <li>The {@code attachment} member of any element of {@code pPreserveAttachments} <b>must</b> not be #ATTACHMENT_UNUSED</li>
             <li>Any given element of {@code pPreserveAttachments} <b>must</b> not also be an element of any other member of the subpass description</li>

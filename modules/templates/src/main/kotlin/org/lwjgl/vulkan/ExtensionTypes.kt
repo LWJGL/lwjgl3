@@ -1307,11 +1307,11 @@ val VkBindBufferMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindBufferMemoryInfoKH
         Structure specifying how to bind a buffer to memory.
 
         <h5>Description</h5>
-        If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> the buffer is attached to the instance of memory on the physical device with device index <code>pDeviceIndices[i]</code>.
+        If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> the buffer is attached to the instance of {@code memory} on the physical device with device index <code>pDeviceIndices[i]</code>.
 
-        If {@code deviceIndexCount} is zero and the memory comes from a memory heap with the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains consecutive indices from zero to the number of physical devices in the logical device, minus one. In other words, by default each physical device attaches to its own instance of the memory.
+        If {@code deviceIndexCount} is zero and {@code memory} comes from a memory heap with the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains consecutive indices from zero to the number of physical devices in the logical device, minus one. In other words, by default each physical device attaches to its own instance of {@code memory}.
 
-        If {@code deviceIndexCount} is zero and the memory comes from a memory heap without the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains an array of zeros. In other words, by default each physical device attaches to instance zero.
+        If {@code deviceIndexCount} is zero and {@code memory} comes from a memory heap without the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains an array of zeros. In other words, by default each physical device attaches to instance zero.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1350,9 +1350,9 @@ val VkBindImageMemoryInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHX"
         Structure specifying how to bind an image to memory.
 
         <h5>Description</h5>
-        If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> the image is attached to the instance of memory on the physical device with device index <code>pDeviceIndices[i]</code>.
+        If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> {@code image} is attached to the instance of the memory on the physical device with device index <code>pDeviceIndices[i]</code>.
 
-        Let <code>N</code> be the number of physical devices in the logical device. If {@code SFRRectCount} is greater than zero, then {@code pSFRRects} is an array of <code>N<sup>2</sup></code> rectangles, where the image region specified by the rectangle at element <code>i*N+j</code> in resource instance <code>i</code> is bound to memory instance <code>j</code>. The blocks of memory that are bound to each sparse image block region use an offset in memory, relative to {@code memoryOffset}, computed as if the whole image were being bound to a contiguous range of memory. In other words, horizontally adjacent image blocks use consecutive blocks of memory, vertically adjacent image blocks are separated by the number of bytes per block multiplied by the width in blocks of the image, and the block at <code>(0,0)</code> corresponds to memory starting at {@code memoryOffset}.
+        Let <code>N</code> be the number of physical devices in the logical device. If {@code SFRRectCount} is greater than zero, then {@code pSFRRects} is an array of <code>N<sup>2</sup></code> rectangles, where the image region specified by the rectangle at element <code>i*N+j</code> in resource instance <code>i</code> is bound to memory instance <code>j</code>. The blocks of memory that are bound to each sparse image block region use an offset in memory, relative to {@code memoryOffset}, computed as if the whole image were being bound to a contiguous range of memory. In other words, horizontally adjacent image blocks use consecutive blocks of memory, vertically adjacent image blocks are separated by the number of bytes per block multiplied by the width in blocks of {@code image}, and the block at <code>(0,0)</code> corresponds to memory starting at {@code memoryOffset}.
 
         If {@code SFRRectCount} and {@code deviceIndexCount} are zero and the memory comes from a memory heap with the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains consecutive indices from zero to the number of physical devices in the logical device, minus one. In other words, by default each physical device attaches to its own instance of the memory.
 
