@@ -26,7 +26,7 @@ final class MemoryManage {
             return (MemoryAllocator)allocator;
         }
 
-        if (!"system".equals(allocator)) {
+        if (!((allocator == null && Platform.get() == Platform.WINDOWS) || "system".equals(allocator))) {
             String className;
             if (allocator == null || "jemalloc".equals(allocator)) {
                 className = "org.lwjgl.system.jemalloc.JEmallocAllocator";
