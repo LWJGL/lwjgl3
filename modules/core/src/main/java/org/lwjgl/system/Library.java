@@ -429,7 +429,15 @@ public final class Library {
                 : getSHA1(nativesURL);
 
             if (!Arrays.equals(expected, actual)) {
-                DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries.");
+                DEBUG_STREAM.println(
+                    "[LWJGL] [ERROR] Incompatible Java and native library versions detected.\n" +
+                    "Possible reasons:\n" +
+                    "\ta) -Djava.library.path is set to a folder containing shared libraries of an older LWJGL version.\n" +
+                    "\tb) The classpath contains jar files of an older LWJGL version.\n" +
+                    "Possible solutions:\n" +
+                    "\ta) Make sure to not set -Djava.library.path (it is not needed for developing with LWJGL 3) or make\n" +
+                    "\t   sure the folder it points to contains the shared libraries of the correct LWJGL version.\n" +
+                    "\tb) Check the classpath and make sure to only have jar files of the same LWJGL version in it.");
             }
         } catch (Throwable t) {
             if (DEBUG) {
