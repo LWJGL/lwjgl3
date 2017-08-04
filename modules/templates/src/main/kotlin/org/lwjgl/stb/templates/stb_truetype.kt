@@ -1156,8 +1156,8 @@ pixel_dist_scale = 180/5.0 = 36.0""")}
 
         See the truetype spec:
         ${ul(
-            """${url("https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html", "TrueType Reference Manual - The 'name' table")}""",
-            """${url("http://www.microsoft.com/typography/otspec/name.htm", "OpenType™ Specification - The Naming Table")}"""
+            url("https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html", "TrueType Reference Manual - The 'name' table"),
+            url("http://www.microsoft.com/typography/otspec/name.htm", "OpenType™ Specification - The Naming Table")
         )}
         """,
 
