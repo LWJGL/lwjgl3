@@ -150,6 +150,11 @@ enum Artifacts {
         "Generate parametric surfaces and other simple shapes.",
         Platforms.ALL
     ),
+    RPMALLOC(
+        "lwjgl-rpmalloc", "LWJGL - rpmalloc bindings",
+        "A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.",
+        Platforms.ALL
+    ),
     SSE(
         "lwjgl-sse", "LWJGL - SSE bindings",
         "Simple SSE intrinsics.",
