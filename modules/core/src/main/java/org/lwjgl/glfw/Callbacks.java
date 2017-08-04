@@ -20,7 +20,7 @@ public final class Callbacks {
      *
      * @param window the GLFW window
      */
-    public static void glfwFreeCallbacks(long window) {
+    public static void glfwFreeCallbacks(@NativeType("GLFWwindow *") long window) {
         if (Checks.CHECKS) {
             check(window);
         }
