@@ -14,7 +14,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 )) {
     documentation =
         """
-        Native bindings to jemalloc.
+        Native bindings to ${url("http://jemalloc.net/", "jemalloc")}.
 
         jemalloc is a general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support. jemalloc first came into
         use as the FreeBSD libc allocator in 2005, and since then it has found its way into numerous applications that rely on its predictable behavior. In
@@ -23,6 +23,124 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
         development efforts trend toward making jemalloc among the best allocators for a broad range of demanding applications, and eliminating/mitigating
         weaknesses that have practical repercussions for real world applications.
         """
+
+    /*
+        /** The major version. */
+    public static final int JEMALLOC_VERSION_MAJOR = 5;
+
+    /** The minor version. */
+    public static final int JEMALLOC_VERSION_MINOR = 0;
+
+    /** The bugfix version. */
+    public static final int JEMALLOC_VERSION_BUGFIX = 1;
+
+    /** Tthe revision number. */
+    public static final int JEMALLOC_VERSION_NREV = 0;
+
+    /** The globally unique identifier (git commit hash). */
+    public static final String JEMALLOC_VERSION_GID = "3f5049340e66c6929c3270f7359617f62e053b11";
+
+    /** Returns the version string. */
+    public static final String JEMALLOC_VERSION =
+        JEMALLOC_VERSION_MAJOR + "." + JEMALLOC_VERSION_MINOR + "." + JEMALLOC_VERSION_BUGFIX + "-" + JEMALLOC_VERSION_NREV + "-g" + JEMALLOC_VERSION_GID;
+
+     */
+
+    IntConstant("The major version.", "JEMALLOC_VERSION_MAJOR".."5")
+    IntConstant("The minor version.", "JEMALLOC_VERSION_MINOR".."0")
+    IntConstant("The bugfix version.", "JEMALLOC_VERSION_BUGFIX".."1")
+    IntConstant("The revision number.", "JEMALLOC_VERSION_NREV".."3")
+
+    StringConstant(
+        "The globally unique identifier (git commit hash).",
+
+        "JEMALLOC_VERSION_GID".."3f5049340e66c6929c3270f7359617f62e053b11"
+    )
+
+    StringConstant(
+        "The version string.",
+
+        "JEMALLOC_VERSION".."JEMALLOC_VERSION_MAJOR + \".\" + JEMALLOC_VERSION_MINOR + \".\" + JEMALLOC_VERSION_BUGFIX + \"-\" + JEMALLOC_VERSION_NREV + \"-g\" + JEMALLOC_VERSION_GID"
+    )
+
+    IntConstant(
+        """
+        Initialize newly allocated memory to contain zero bytes. In the growing reallocation case, the real size prior to reallocation defines the boundary
+        between untouched bytes and those that are initialized to contain zero bytes. If this macro is absent, newly allocated memory is uninitialized.
+        """,
+
+        "MALLOCX_ZERO"..0x40
+    )
+
+    IntConstant(
+        """
+        Do not use a thread-specific cache (tcache). Unless JEmalloc#MALLOCX_TCACHE() or {@code MALLOCX_TCACHE_NONE} is specified, an automatically managed
+        tcache will be used under many circumstances. This macro cannot be used in the same {@code flags} argument as {@code MALLOCX_TCACHE(tc)}.
+        """,
+
+        "MALLOCX_TCACHE_NONE".."MALLOCX_TCACHE(-1)"
+    )
+
+    IntConstant(
+        "Use as arena index in \"arena.&lt;i&gt;.{purge,decay,dss}\" and \"stats.arenas.&lt;i&gt;.*\" mallctl interfaces to select all arenas.",
+
+        "MALLCTL_ARENAS_ALL"..4096
+    )
+
+    IntConstant(
+        "Use as arena index in \"stats.arenas.&lt;i&gt;.*\" mallctl interfaces to select destroyed arenas.",
+
+        "MALLCTL_ARENAS_DESTROYED"..4097
+    )
+
+    customMethod("""
+    static {
+        // Force jemalloc to initialize before anyone else uses it.
+        // This avoids a dangerous race when the first jemalloc functions are called concurrently.
+        if (Platform.get() == Platform.WINDOWS) {
+            nje_free(nje_malloc(8));
+        }
+    }
+
+    /**
+     * Align the memory allocation to start at an address that is a multiple of {@code (1 << la)}. This macro does not validate that {@code la} is within the
+     * valid range.
+     *
+     * @param la the alignment shift
+     */
+    public static int MALLOCX_LG_ALIGN(int la) {
+        return la;
+    }
+
+    /**
+     * Align the memory allocation to start at an address that is a multiple of {@code a}, where {@code a} is a power of two. This macro does not validate
+     * that {@code a} is a power of 2.
+     *
+     * @param a the alignment
+     */
+    public static int MALLOCX_ALIGN(int a) {
+        return Integer.numberOfTrailingZeros(a);
+    }
+
+    /**
+     * Use the thread-specific cache (tcache) specified by the identifier {@code tc}, which must have been acquired via the {@code tcache.create} mallctl.
+     * This macro does not validate that {@code tc} specifies a valid identifier.
+     *
+     * @param tc the thread-specific cache
+     */
+    public static int MALLOCX_TCACHE(int tc) {
+        return (tc + 2) << 8;
+    }
+
+    /**
+     * Use the arena specified by the index {@code a} (and by necessity bypass the thread cache). This macro has no effect for huge regions, nor for regions
+     * that were allocated via an arena other than the one specified. This macro does not validate that {@code a} specifies an arena index in the valid range.
+     *
+     * @param a the arena index
+     */
+    public static int MALLOCX_ARENA(int a) {
+        return (a + 1) << 20;
+    }""")
 
     // Error & stats output
 
@@ -100,7 +218,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 
     // Non-standard API
 
-    val flags = int.IN("flags", "a bitfield of zero or more of the {@code MALLOCX} macros in ##JEmacros")
+    val flags = int.IN("flags", "a bitfield of zero or more of the {@code MALLOCX} macros")
 
     void_p(
         "mallocx",

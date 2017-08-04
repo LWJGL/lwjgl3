@@ -40,7 +40,7 @@ val LongConstant = ConstantType(Long::class) { "0x%XL".format(it) }
 val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 val DoubleConstant = ConstantType(Double::class) { "%sd".format(it) }
 
-val StringConstant = ConstantType(String::class) { "\"$it\"" }
+val StringConstant = ConstantType(String::class) { if (it.contains(" + \"")) it else "\"$it\"" }
 
 open class EnumValue(
     val documentation: (() -> String?) = { null },
