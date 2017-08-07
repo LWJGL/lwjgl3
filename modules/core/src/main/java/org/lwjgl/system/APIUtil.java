@@ -403,9 +403,12 @@ public final class APIUtil {
 
         for (CharSequence s : strings) {
             ByteBuffer buffer = encoder.encode(s, false);
-
-            pointers.put(buffer);
-            lengths.put(buffer.capacity());
+            try {
+                pointers.put(buffer);
+                lengths.put(buffer.capacity());
+            } finaly {
+                memFree(buffer);
+            }
         }
 
         return memAddress0(pointers);
