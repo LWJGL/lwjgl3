@@ -121,17 +121,27 @@ final class MemoryManage {
 
         @Override
         public long realloc(long ptr, long size) {
+            /*
+            realloc semantics:
+            a) if size == 0 and ptr != NULL => free(ptr), return NULL
+            b) if size != 0 and ptr == NULL => malloc(size), return new address
+            c) if ptr != NULL and size < oldSize =>
+                1) reduce size, return ptr
+                2) malloc new address, memcpy, free(ptr), return new address
+            d) if ptr != NULL and oldSize < size =>
+                1) expand size, return ptr
+                2) malloc new address, memcpy, free(ptr), return new address
+                3) malloc fails, return NULL
+             */
+
+            long oldSize = untrack(ptr);
+
             long address = allocator.realloc(ptr, size);
 
-            if (size == 0L) {
-                if (ptr != NULL) {
-                    untrack(ptr);
-                }
-            } else if (address != NULL) {
-                if (ptr != NULL) {
-                    untrack(ptr);
-                }
+            if (address != NULL) {
                 track(address, size);
+            } else if (size != 0L) {
+                track(ptr, oldSize); // d3
             }
 
             return address;
@@ -139,8 +149,8 @@ final class MemoryManage {
 
         @Override
         public void free(long ptr) {
-            allocator.free(ptr);
             untrack(ptr);
+            allocator.free(ptr);
         }
 
         @Override
@@ -150,8 +160,8 @@ final class MemoryManage {
 
         @Override
         public void aligned_free(long ptr) {
-            allocator.aligned_free(ptr);
             untrack(ptr);
+            allocator.aligned_free(ptr);
         }
 
         static long track(long address, long size) {
@@ -171,15 +181,17 @@ final class MemoryManage {
             return address;
         }
 
-        static void untrack(long address) {
+        static long untrack(long address) {
             if (address == NULL) {
-                return;
+                return 0L;
             }
 
             Allocation allocation = ALLOCATIONS.remove(address);
             if (allocation == null) {
                 throw new IllegalStateException("The memory address specified is not being tracked");
             }
+
+            return allocation.size;
         }
 
         private static class Allocation {
