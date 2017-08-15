@@ -103,7 +103,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
 ￿    VkSurfaceCapabilities2EXT*                  pSurfaceCapabilities);</pre></code>
 
         <h5>Description</h5>
-        #GetPhysicalDeviceSurfaceCapabilities2EXT() behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to return extended information by adding extension structures to its {@code pNext} chain.
+        #GetPhysicalDeviceSurfaceCapabilities2EXT() behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pSurfaceCapabilities} parameter.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

@@ -350,7 +350,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    VkSparseImageFormatProperties2KHR*          pProperties);</pre></code>
 
         <h5>Description</h5>
-        #GetPhysicalDeviceSparseImageFormatProperties2KHR() behaves identically to #GetPhysicalDeviceSparseImageFormatProperties(), with the ability to return extended information by adding extension structures to its {@code pNext} chain.
+        #GetPhysicalDeviceSparseImageFormatProperties2KHR() behaves identically to #GetPhysicalDeviceSparseImageFormatProperties(), with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pProperties} parameter.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

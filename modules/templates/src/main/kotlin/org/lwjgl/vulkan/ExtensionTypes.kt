@@ -863,7 +863,7 @@ val VkPhysicalDeviceMultiviewFeaturesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDev
             <li>{@code multiviewTessellationShader} indicates whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#tessellation">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.</li>
         </ul>
 
-        If the ##VkPhysicalDeviceMultiviewFeaturesKHX structure is included in the {@code pNext} chain of #GetPhysicalDeviceFeatures2KHR(), it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceMultiviewFeaturesKHX <b>can</b> also be used in the {@code pNext} chain of #CreateDevice() to enable features.
+        If the ##VkPhysicalDeviceMultiviewFeaturesKHX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceMultiviewFeaturesKHX <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -901,7 +901,7 @@ val VkPhysicalDeviceMultiviewPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalD
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        If the ##VkPhysicalDeviceMultiviewPropertiesKHX structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceMultiviewPropertiesKHX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")
@@ -3410,7 +3410,7 @@ val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(VULKAN_PACK
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        If the ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")
@@ -3486,7 +3486,7 @@ val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(VULKAN_PACKAGE, "VkPh
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        If the ##VkPhysicalDeviceDiscardRectanglePropertiesEXT structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceDiscardRectanglePropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")
@@ -3944,7 +3944,7 @@ val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(VULKAN_PACKAGE, "VkPhysi
             <li>{@code variablePointers} indicates whether the implementation supports the SPIR-V VariablePointers capability. When this feature is not enabled, shader modules <b>must</b> not declare the VariablePointers capability.</li>
         </ul>
 
-        If the ##VkPhysicalDeviceVariablePointerFeaturesKHR structure is included in the {@code pNext} chain of #GetPhysicalDeviceFeatures2KHR(), it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceVariablePointerFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of #CreateDevice() to enable the features.
+        If the ##VkPhysicalDeviceVariablePointerFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceVariablePointerFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -4026,25 +4026,25 @@ val VkMemoryDedicatedRequirementsKHR = struct(VULKAN_PACKAGE, "VkMemoryDedicated
         Structure describing dedicated allocation requirements of buffer and image resources.
 
         <h5>Description</h5>
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of a #GetBufferMemoryRequirements2KHR() call, {@code requiresDedicatedAllocation} <b>may</b> be #TRUE under one of the following conditions:
+        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetBufferMemoryRequirements2KHR() call, {@code requiresDedicatedAllocation} <b>may</b> be #TRUE under one of the following conditions:
 
         <ul>
-            <li>The {@code pNext} chain for the call to #CreateBuffer() used to create the buffer being queried contained an instance of ##VkExternalMemoryBufferCreateInfoKHR and any of the handle types specified in ##VkExternalMemoryBufferCreateInfoKHR{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceExternalBufferPropertiesKHR() in ##VkExternalBufferPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code requiresDedicatedAllocation} field will be set to #TRUE.</li>
+            <li>The {@code pNext} chain of ##VkBufferCreateInfo for the call to #CreateBuffer() used to create the buffer being queried contained an instance of ##VkExternalMemoryBufferCreateInfoKHR, and any of the handle types specified in ##VkExternalMemoryBufferCreateInfoKHR{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceExternalBufferPropertiesKHR() in ##VkExternalBufferPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code requiresDedicatedAllocation} field will be set to #TRUE.</li>
         </ul>
 
-        In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to #FALSE by the implementation whenever a ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of a call to #GetBufferMemoryRequirements2KHR().
+        In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to #FALSE by the implementation whenever a ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed to a call to #GetBufferMemoryRequirements2KHR().
 
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of a #GetBufferMemoryRequirements2KHR() call and #BUFFER_CREATE_SPARSE_BINDING_BIT was set in ##VkBufferCreateInfo{@code ::flags} when {@code buffer} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to #FALSE.
+        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetBufferMemoryRequirements2KHR() call and #BUFFER_CREATE_SPARSE_BINDING_BIT was set in ##VkBufferCreateInfo{@code ::flags} when {@code buffer} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to #FALSE.
 
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of a #GetImageMemoryRequirements2KHR() call, {@code requiresDedicatedAllocation} <b>may</b> be #TRUE under one of the following conditions:
+        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetImageMemoryRequirements2KHR() call, {@code requiresDedicatedAllocation} <b>may</b> be #TRUE under one of the following conditions:
 
         <ul>
-            <li>The {@code pNext} chain for the call to #CreateImage() used to create the image being queried contained an instance of ##VkExternalMemoryImageCreateInfoKHR and any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHR{@code ::handleTypes} require a dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code requiresDedicatedAllocation} field will be set to #TRUE.</li>
+            <li>The {@code pNext} chain of ##VkImageCreateInfo for the call to #CreateImage() used to create the image being queried contained an instance of ##VkExternalMemoryImageCreateInfoKHR, and any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHR{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code requiresDedicatedAllocation} field will be set to #TRUE.</li>
         </ul>
 
-        In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to #FALSE by the implementation whenever a ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of a call to #GetImageMemoryRequirements2KHR().
+        In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to #FALSE by the implementation whenever a ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed to a call to #GetImageMemoryRequirements2KHR().
 
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of a #GetImageMemoryRequirements2KHR() call and #IMAGE_CREATE_SPARSE_BINDING_BIT was set in ##VkImageCreateInfo{@code ::flags} when {@code image} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to #FALSE.
+        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetImageMemoryRequirements2KHR() call and #IMAGE_CREATE_SPARSE_BINDING_BIT was set in ##VkImageCreateInfo{@code ::flags} when {@code image} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to #FALSE.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4123,7 +4123,7 @@ val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(VULKAN_PACKAGE, "V
             <li>{@code filterMinmaxImageComponentMapping} is a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.</li>
         </ul>
 
-        If the ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
 
         If {@code filterMinmaxSingleComponentFormats} is #TRUE, the following formats <b>must</b> support the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT feature with #IMAGE_TILING_OPTIMAL, if they support #FORMAT_FEATURE_SAMPLED_IMAGE_BIT.
 
@@ -4243,7 +4243,7 @@ val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(VULKAN_PACKAGE, "
             <li>{@code advancedBlendCoherentOperations} indicates whether blending using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#framebuffer-blend-advanced">advanced blend operations</a> is guaranteed to execute atomically and in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing-primitive-order">primitive order</a>. If this is #TRUE, {@code VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT} is treated the same as VK_ACCESS_COLOR_ATTACHMENT_READ_BIT and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.</li>
         </ul>
 
-        If the ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT structure is included in the {@code pNext} chain of #GetPhysicalDeviceFeatures2KHR(), it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of #CreateDevice() to enable features.
+        If the ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT <b>can</b> also be used in {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4276,7 +4276,7 @@ val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(VULKAN_PACKAGE,
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT</li>
         </ul>
 
-        If the ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")

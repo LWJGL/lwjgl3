@@ -122,10 +122,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
             <dd>87</dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-10-31</dd>
+            <dd>2017-07-25</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>3</dd>
 
             <dt><b>Dependencies</b></dt>
             <dd><ul>
@@ -141,6 +141,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
                 <li>Eric Werness, NVIDIA</li>
                 <li>Detlef Roettger, NVIDIA</li>
                 <li>Daniel Koch, NVIDIA</li>
+                <li>Chris Hebert, NVIDIA</li>
             </ul></dd>
 
             <dt><b>Contacts</b></dt>
@@ -154,7 +155,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     IntConstant(
         "The extension specification version.",
 
-        "NVX_DEVICE_GENERATED_COMMANDS_SPEC_VERSION".."1"
+        "NVX_DEVICE_GENERATED_COMMANDS_SPEC_VERSION".."3"
     )
 
     StringConstant(
