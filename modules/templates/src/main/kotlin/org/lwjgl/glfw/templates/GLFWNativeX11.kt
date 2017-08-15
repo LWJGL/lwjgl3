@@ -60,4 +60,34 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
         returnDoc = " The ${code("Window")} of the specified window, or {@code None} if an error occurred.",
         since = "version 3.0"
     )
+
+    void(
+        "SetX11SelectionString",
+        """
+        Sets the current primary selection to the specified string.
+
+        This function must only be called from the main thread.
+        """,
+
+        const..charUTF8_p.IN("string", "a UTF-8 encoded string. The specified string is copied before this function returns."),
+
+        since = "version 3.3"
+    )
+
+    const..charUTF8_p(
+        "GetX11SelectionString",
+        """
+        Returns the contents of the current primary selection as a string.
+
+        If the selection is empty or if its contents cannot be converted, #NULL is returned and a #FORMAT_UNAVAILABLE error is generated.
+
+        The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetX11SelectionString() or
+        #SetX11SelectionString(), or until the library is terminated.
+
+        This function must only be called from the main thread.
+        """,
+
+        returnDoc = "the contents of the selection as a UTF-8 encoded string, or #NULL if an error occurred",
+        since = "version 3.3"
+    )
 }
