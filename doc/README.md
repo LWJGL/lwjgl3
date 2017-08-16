@@ -122,3 +122,12 @@ The supported options can be found in the [Configuration](https://github.com/LWJ
 # CODE STYLE
 Tab-size: 4 spaces  
 Right margin: 160 chars
+
+# COMMIT STYLE
+As of May 2017, LWJGL commit messages loosely follow the [Conventional Commits](http://conventionalcommits.org/) structure.
+
+A commit should have a type prefix and an appropriate scope. The scope in particular is especially helpful when browsing LWJGL's commit history, given the variety of modules and library bindings in the repository.
+
+Other than that, there's no intention to be overly strict about this. There will be a lot of flexibility on the allowed types and scopes, as well as the exact message formatting.   
+
+Contributors are encouraged but not required to submit PRs using these guidelines. Commit messages will be changed during review or when a patch is rebased, as needed. 
