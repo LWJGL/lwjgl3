@@ -133,160 +133,51 @@ ENABLE_WARNINGS()""")
         It is very rarely necessary to close a database handle, and in general they should just be left open.
         """
 
-    IntConstant(
-        "mmap at a fixed address (experimental).",
+    EnumConstant(
+        "Environment flags.",
 
-        "FIXEDMAP"..0x01
+        "FIXEDMAP".enum("mmap at a fixed address (experimental).", 0x01),
+        "NOSUBDIR".enum("No environment directory.", 0x4000),
+        "NOSYNC".enum("Don't fsync after commit.", 0x10000),
+        "RDONLY".enum("Read only.", 0x20000),
+        "NOMETASYNC".enum("Don't fsync metapage after commit.", 0x40000),
+        "WRITEMAP".enum("Use writable mmap.", 0x80000),
+        "MAPASYNC".enum("Use asynchronous msync when #WRITEMAP is used.", 0x100000),
+        "NOTLS".enum("Tie reader locktable slots to {@code MDB_txn} objects instead of to threads.", 0x200000),
+        "NOLOCK".enum("Don't do any locking, caller must manage their own locks.", 0x400000),
+        "NORDAHEAD".enum("Don't do readahead (no effect on Windows).", 0x800000),
+        "NOMEMINIT".enum("Don't initialize malloc'd memory before writing to datafile.", 0x1000000),
+        "PREVMETA".enum("Use the previous meta page rather than the latest one.", 0x2000000)
     )
 
-    IntConstant(
-        "No environment directory.",
+    EnumConstant(
+        "Database flags.",
 
-        "NOSUBDIR"..0x4000
+        "REVERSEKEY".enum("Use reverse string keys.", 0x02),
+        "DUPSORT".enum("Use sorted duplicates.", 0x04),
+        "INTEGERKEY".enum("Numeric keys in native byte order: either {@code unsigned int} or {@code size_t}. The keys must all be of the same size.", 0x08),
+        "DUPFIXED".enum("With #DUPSORT, sorted dup items have fixed size.", 0x10),
+        "INTEGERDUP".enum("With #DUPSORT, dups are #INTEGERKEY -style integers.", 0x20),
+        "REVERSEDUP".enum("With #DUPSORT, use reverse string dups.", 0x40),
+        "CREATE".enum("Create DB if not already existing.", 0x40000)
     )
 
-    IntConstant(
-        "Don't fsync after commit.",
+    EnumConstant(
+        "Write flags.",
 
-        "NOSYNC"..0x10000
+        "NOOVERWRITE".enum("Don't write if the key already exists.", 0x10),
+        "NODUPDATA".enum("Remove all duplicate data items.", 0x20),
+        "CURRENT".enum("Overwrite the current key/data pair.", 0x40),
+        "RESERVE".enum("Just reserve space for data, don't copy it. Return a pointer to the reserved space.", 0x10000),
+        "APPEND".enum("Data is being appended, don't split full pages.", 0x20000),
+        "APPENDDUP".enum("Duplicate data is being appended, don't split full pages.", 0x40000),
+        "MULTIPLE".enum("Store multiple data items in one call. Only for #DUPFIXED.", 0x80000)
     )
 
-    IntConstant(
-        "Read only.",
+    EnumConstant(
+        "Copy flags.",
 
-        "RDONLY"..0x20000
-    )
-
-    IntConstant(
-        "Don't fsync metapage after commit.",
-
-        "NOMETASYNC"..0x40000
-    )
-
-    IntConstant(
-        "Use writable mmap.",
-
-        "WRITEMAP"..0x80000
-    )
-
-    IntConstant(
-        "Use asynchronous msync when #WRITEMAP is used.",
-
-        "MAPASYNC"..0x100000
-    )
-
-    IntConstant(
-        "Tie reader locktable slots to {@code MDB_txn} objects instead of to threads.",
-
-        "NOTLS"..0x200000
-    )
-
-    IntConstant(
-        "Don't do any locking, caller must manage their own locks.",
-
-        "NOLOCK"..0x400000
-    )
-
-    IntConstant(
-        "Don't do readahead (no effect on Windows).",
-
-        "NORDAHEAD"..0x800000
-    )
-
-    IntConstant(
-        "Don't initialize malloc'd memory before writing to datafile.",
-
-        "NOMEMINIT"..0x1000000
-    )
-
-    IntConstant(
-        "Use reverse string keys.",
-
-        "REVERSEKEY"..0x02
-    )
-
-    IntConstant(
-        "Use sorted duplicates.",
-
-        "DUPSORT"..0x04
-    )
-
-    IntConstant(
-        "Numeric keys in native byte order: either {@code unsigned int} or {@code size_t}. The keys must all be of the same size.",
-
-        "INTEGERKEY"..0x08
-    )
-
-    IntConstant(
-        "With #DUPSORT, sorted dup items have fixed size.",
-
-        "DUPFIXED"..0x10
-    )
-
-    IntConstant(
-        "With #DUPSORT, dups are #INTEGERKEY -style integers.",
-
-        "INTEGERDUP"..0x20
-    )
-
-    IntConstant(
-        "With #DUPSORT, use reverse string dups.",
-
-        "REVERSEDUP"..0x40
-    )
-
-    IntConstant(
-        "Create DB if not already existing.",
-
-        "CREATE"..0x40000
-    )
-
-    IntConstant(
-        "Don't write if the key already exists.",
-
-        "NOOVERWRITE"..0x10
-    )
-
-    IntConstant(
-        "Remove all duplicate data items.",
-
-        "NODUPDATA"..0x20
-    )
-
-    IntConstant(
-        "Overwrite the current key/data pair.",
-
-        "CURRENT"..0x40
-    )
-
-    IntConstant(
-        "Just reserve space for data, don't copy it. Return a pointer to the reserved space.",
-
-        "RESERVE"..0x10000
-    )
-
-    IntConstant(
-        "Data is being appended, don't split full pages.",
-
-        "APPEND"..0x20000
-    )
-
-    IntConstant(
-        "Duplicate data is being appended, don't split full pages.",
-
-        "APPENDDUP"..0x40000
-    )
-
-    IntConstant(
-        "Store multiple data items in one call. Only for #DUPFIXED.",
-
-        "MULTIPLE"..0x80000
-    )
-
-    IntConstant(
-        "Omit free space from copy, and renumber all pages sequentially.",
-
-        "CP_COMPACT"..0x01
+        "CP_COMPACT".enum("Omit free space from copy, and renumber all pages sequentially.", 0x01)
     )
 
     val CursorOps = EnumConstant(
@@ -315,145 +206,38 @@ ENABLE_WARNINGS()""")
         "PREV_MULTIPLE".enum("Position at previous page and return key and up to a page of duplicate data items. Only for #DUPFIXED.")
     ).javaDocLinks
 
-    IntConstant(
-        "Successful result.",
+    EnumConstant(
+        "Return codes.",
 
-        "SUCCESS".."0"
-    )
-
-    IntConstant(
-        "Key/data pair already exists.",
-
-        "KEYEXIST".."-30799"
-    )
-
-    IntConstant(
-        "Key/data pair not found (EOF).",
-
-        "NOTFOUND".."-30798"
-    )
-
-    IntConstant(
-        "Requested page not found - this usually indicates corruption.",
-
-        "PAGE_NOTFOUND".."-30797"
-    )
-
-    IntConstant(
-        "Located page was wrong type.",
-
-        "CORRUPTED".."-30796"
-    )
-
-    IntConstant(
-        "Update of meta page failed or environment had fatal error.",
-
-        "PANIC".."-30795"
-    )
-
-    IntConstant(
-        "Environment version mismatch.",
-
-        "VERSION_MISMATCH".."-30794"
-    )
-
-    IntConstant(
-        "File is not a valid LMDB file.",
-
-        "INVALID".."-30793"
-    )
-
-    IntConstant(
-        "Environment mapsize reached.",
-
-        "MAP_FULL".."-30792"
-    )
-
-    IntConstant(
-        "Environment maxdbs reached.",
-
-        "DBS_FULL".."-30791"
-    )
-
-    IntConstant(
-        "Environment maxreaders reached.",
-
-        "READERS_FULL".."-30790"
-    )
-
-    IntConstant(
-        "Too many TLS keys in use - Windows only.",
-
-        "TLS_FULL".."-30789"
-    )
-
-    IntConstant(
-        "Txn has too many dirty pages.",
-
-        "TXN_FULL".."-30788"
-    )
-
-    IntConstant(
-        "Cursor stack too deep - internal error.",
-
-        "CURSOR_FULL".."-30787"
-    )
-
-    IntConstant(
-        "Page has not enough space - internal error.",
-
-        "PAGE_FULL".."-30786"
-    )
-
-    IntConstant(
-        "Database contents grew beyond environment mapsize.",
-
-        "MAP_RESIZED".."-30785"
-    )
-
-    IntConstant(
-        """
-        The operation expects an #DUPSORT / #DUPFIXED database. Opening a named DB when the unnamed DB has #DUPSORT / #INTEGERKEY. Accessing a data record as a
-        database, or vice versa. The database was dropped and recreated with different flags.
-        """,
-
-        "INCOMPATIBLE".."-30784"
-    )
-
-    IntConstant(
-        "Invalid reuse of reader locktable slot.",
-
-        "BAD_RSLOT".."-30783"
-    )
-
-    IntConstant(
-        "Transaction must abort, has a child, or is invalid.",
-
-        "BAD_TXN".."-30782"
-    )
-
-    IntConstant(
-        "Unsupported size of key/DB name/data, or wrong #DUPFIXED size.",
-
-        "BAD_VALSIZE".."-30781"
-    )
-
-    IntConstant(
-        "The specified DBI was changed unexpectedly.",
-
-        "BAD_DBI".."-30780"
-    )
-
-    IntConstant(
-        "Unexpected problem - txn should abort.",
-
-        "PROBLEM".."-30779"
-    )
-
-    IntConstant(
-        "The last defined error code.",
-
-        "LAST_ERRCODE".."MDB_PROBLEM"
+        "SUCCESS".enum("Successful result.", "0"),
+        "KEYEXIST".enum("Key/data pair already exists.", "-30799"),
+        "NOTFOUND".enum("Key/data pair not found (EOF).", "-30798"),
+        "PAGE_NOTFOUND".enum("Requested page not found - this usually indicates corruption.", "-30797"),
+        "CORRUPTED".enum("Located page was wrong type.", "-30796"),
+        "PANIC".enum("Update of meta page failed or environment had fatal error.", "-30795"),
+        "VERSION_MISMATCH".enum("Environment version mismatch.", "-30794"),
+        "INVALID".enum("File is not a valid LMDB file.", "-30793"),
+        "MAP_FULL".enum("Environment mapsize reached.", "-30792"),
+        "DBS_FULL".enum("Environment maxdbs reached.", "-30791"),
+        "READERS_FULL".enum("Environment maxreaders reached.", "-30790"),
+        "TLS_FULL".enum("Too many TLS keys in use - Windows only.", "-30789"),
+        "TXN_FULL".enum("Txn has too many dirty pages.", "-30788"),
+        "CURSOR_FULL".enum("Cursor stack too deep - internal error.", "-30787"),
+        "PAGE_FULL".enum("Page has not enough space - internal error.", "-30786"),
+        "MAP_RESIZED".enum("Database contents grew beyond environment mapsize.", "-30785"),
+        "INCOMPATIBLE".enum(
+            """
+            The operation expects an #DUPSORT / #DUPFIXED database. Opening a named DB when the unnamed DB has #DUPSORT / #INTEGERKEY. Accessing a data record as a
+            database, or vice versa. The database was dropped and recreated with different flags.
+            """,
+            "-30784"
+        ),
+        "BAD_RSLOT".enum("Invalid reuse of reader locktable slot.", "-30783"),
+        "BAD_TXN".enum("Transaction must abort, has a child, or is invalid.", "-30782"),
+        "BAD_VALSIZE".enum("Unsupported size of key/DB name/data, or wrong #DUPFIXED size.", "-30781"),
+        "BAD_DBI".enum("The specified DBI was changed unexpectedly.", "-30780"),
+        "PROBLEM".enum("Unexpected problem - txn should abort.", "-30779"),
+        "LAST_ERRCODE".enum("The last defined error code.", "MDB_PROBLEM")
     )
 
     charASCII_p(
@@ -520,19 +304,19 @@ ENABLE_WARNINGS()""")
                 database will be constant across multiple invocations. This option may not always work, depending on how the operating system has allocated
                 memory to shared libraries and other uses.
 
-                 The feature is highly experimental.
-                 """,
+                The feature is highly experimental.
+                """,
                 """#NOSUBDIR
 
                 By default, LMDB creates its environment in a directory whose pathname is given in {@code path}, and creates its data and lock files under that
                 directory. With this option, {@code path} is used as-is for the database main data file. The database lock file is the {@code path}    with
                 "-lock" appended.
-                 """,
+                """,
                 """#RDONLY
 
                 Open the environment in read-only mode. No write operations will be allowed. LMDB will still modify the lock file - except on read-only
                 filesystems, where LMDB does not use locks.
-                 """,
+                """,
                 """#WRITEMAP
 
                 Use a writeable memory map unless #RDONLY is set. This uses fewer mallocs but loses protection from application bugs like wild pointer writes
@@ -541,7 +325,7 @@ ENABLE_WARNINGS()""")
                 Incompatible with nested transactions.
 
                 Do not mix processes with and without #WRITEMAP on the same environment. This can defeat durability (#env_sync() etc).
-                 """,
+                """,
                 """#NOMETASYNC
 
                 Flush system buffers to disk only once per transaction, omit the metadata flush. Defer that until the system flushes files to disk, or next
@@ -549,7 +333,7 @@ ENABLE_WARNINGS()""")
                 I.e. it preserves the ACI (atomicity, consistency, isolation) but not D (durability) database property.
 
                 This flag may be changed at any time using #env_set_flags().
-                 """,
+                """,
                 """#NOSYNC
 
                 Don't flush system buffers to disk when committing a transaction. This optimization means a system crash can corrupt the database or lose the
@@ -567,14 +351,14 @@ ENABLE_WARNINGS()""")
                 transactions. Calling #env_sync() ensures on-disk database integrity until next commit.
 
                 This flag may be changed at any time using #env_set_flags().
-                 """,
+                """,
                 """#NOTLS
 
                 Don't use Thread-Local Storage. Tie reader locktable slots to {@code MDB_txn} objects instead of to threads. I.e. #txn_reset() keeps the slot
                 reseved for the {@code MDB_txn} object. A thread may use parallel read-only transactions. A read-only transaction may span threads if the user
                 synchronizes its use. Applications that multiplex many user threads over individual OS threads need this option. Such an application must also
                 serialize the write transactions in an OS thread, since LMDB's write locking is unaware of the user threads.
-                 """,
+                """,
                 """#NOLOCK
 
                 Don't do any locking. If concurrent access is anticipated, the caller must manage all concurrency itself. For proper operation the caller must
@@ -582,12 +366,14 @@ ENABLE_WARNINGS()""")
                 to use an exclusive lock so that no readers may be active at all when a writer begins.
                 """,
                 """#NORDAHEAD
+
                 Turn off readahead. Most operating systems perform readahead on read requests by default. This option turns it off if the OS supports it.
                 Turning it off may help random read performance when the DB is larger than RAM and system RAM is full.
 
                 The option is not implemented on Windows.
-                 """,
+                """,
                 """#NOMEMINIT
+
                 Don't initialize malloc'd memory before writing to unused spaces in the data file. By default, memory for pages written to the data file is
                 obtained using malloc. While these pages may be reused in subsequent transactions, freshly malloc'd pages will be initialized to zeroes before
                 use. This avoids persisting leftover data from other code (that used the heap and subsequently freed the memory) into the data file. Note that
@@ -598,6 +384,11 @@ ENABLE_WARNINGS()""")
                 the caller is expected to overwrite all of the memory that was reserved in that case.
 
                 This flag may be changed at any time using #env_set_flags().
+                """,
+                """#PREVMETA
+
+                Open the environment with the previous meta page rather than the latest one. This loses the latest transaction, but may help work around some
+                types of corruption.
                 """
             )}
             """
