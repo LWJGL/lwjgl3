@@ -223,7 +223,7 @@ if (nk_begin(...)) {
 nk_end(..)""")}
         Important to know if you want to create your own widgets is the #widget() call. It allocates space on the panel reserved for this widget to be used,
         but also returns the state of the widget space. If your widget is not seen and does not have to be updated it is '0' and you can just return. If it
-        only has to be drawn the state will be #WIDGET_ROM otherwise you can do both update and draw your widget. The reason for seperating is to onl draw and
+        only has to be drawn the state will be #WIDGET_ROM otherwise you can do both update and draw your widget. The reason for separating is to only draw and
         update what is actually neccessary which is crucial for performance.
 
         <h3>STACK</h3>
@@ -768,7 +768,7 @@ nk_style_pop_vec2(ctx);""")}
 
             Should be used if you want complete control over nuklears memory management. Especially recommended for system with little memory or systems with
             virtual memory. For the later case you can just allocate for example 16MB of virtual memory and only the required amount of memory will actually be
-            commited.
+            committed.
 
             IMPORTANT: make sure the passed memory block is aligned correctly for ##NkDrawCommand.
             """,
@@ -845,7 +845,7 @@ nk_style_pop_vec2(ctx);""")}
 
         intb(
             "begin_titled",
-            "Extended window start with seperated title and identifier to allow multiple windows with same name but not title.",
+            "Extended window start with separated title and identifier to allow multiple windows with same name but not title.",
 
             ctx,
             const..charUTF8_p.IN("name", ""),
@@ -876,7 +876,7 @@ nk_style_pop_vec2(ctx);""")}
         float("window_get_width", "Returns the width of the currently processed window.", cctx)
         float("window_get_height", "Returns the height of the currently processed window.", cctx)
 
-        nk_panel_p("window_get_panel", "Returns the underlying panel which contains all processing state of the currnet window.", ctx)
+        nk_panel_p("window_get_panel", "Returns the underlying panel which contains all processing state of the current window.", ctx)
 
         nk_rect("window_get_content_region", "Returns the position and size of the currently visible and non-clipped space inside the currently processed window.", ctx)
         nk_vec2("window_get_content_region_min", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
@@ -1008,7 +1008,7 @@ nk_style_pop_vec2(ctx);""")}
             """
             Sets the currently used minimum row height.
 
-            IMPORTANT: The passed height needs to include both your prefered row height as well as padding. No internal padding is added.
+            IMPORTANT: The passed height needs to include both your preferred row height as well as padding. No internal padding is added.
             """,
 
             ctx,
