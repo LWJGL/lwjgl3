@@ -23,15 +23,20 @@ Useful links:
 
 - [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki)
 - [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)  
-- [Forum](http://forum.lwjgl.org)
 - [JavaDoc](http://javadoc.lwjgl.org)
 - [Blog](http://blog.lwjgl.org)
+
+Contact:
+
+- [Forum](http://forum.lwjgl.org)
+- [Slack](https://slack.lwjgl.org/)
 - [Twitter](https://twitter.com/LWJGL)
 
-For a quick overview of the project structure, installation instructions and
-configuration options, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc).
+If you'd like to contribute, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc)
+for a quick overview of the project structure, installation instructions and
+configuration options.
 
-For migrating LWJGL 2 code to LWJGL 3, see the [Migration Guide](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.6-LWJGL3-migration).
+### Getting Started
 
 As of version `3.1.0`, LWJGL is distributed as a set of modules. Only the
 core module is required and all bindings are optional (but some bindings
@@ -72,7 +77,26 @@ Example code:
 - [Demo suite](https://github.com/LWJGL/lwjgl3-demos) (includes advanced OpenGL and Vulkan demos)
 - [Wiki tutorials](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.-Tutorial-Index)
 
-LWJGL 3 includes the following bindings:
+For migrating LWJGL 2 code to LWJGL 3, see the [Migration Guide](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.6-LWJGL3-migration).
+
+### Troubleshooting
+
+Most common issues faced by LWJGL users are trivially addressed with the
+following:
+
+- [Installation guide](https://github.com/LWJGL/lwjgl3-wiki/wiki/1.2.-Install) (lwjgl3-wiki)
+- [Troubleshooting guide](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.5.-Troubleshooting) (lwjgl3-wiki)
+- [Memory FAQ](https://github.com/LWJGL/lwjgl3-wiki/wiki/1.3.-Memory-FAQ) (lwjgl3-wiki)
+
+[LWJGLX/debug](https://github.com/LWJGLX/debug) is a Java Agent that will
+automatically detect a lot of these issues. It can also generate a trace log
+that's useful when reporting issues to LWJGL.
+
+When asking for help or when you suspect a bug in LWJGL, preparing an [MVCE](https://stackoverflow.com/help/mcve)
+(Minimal, Complete, and Verifiable example) that reproduces the issue will
+improve the chances of a quick and useful response.
+
+## List of Supported Bindings
 
 #### Khronos APIs
 
