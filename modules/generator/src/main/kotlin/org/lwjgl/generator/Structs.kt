@@ -381,12 +381,11 @@ $indent}"""
     }
 
     private val nativeNameQualified get() = (if (union) "union " else "struct ").let { type ->
-        if (nativeName.startsWith(type))
-            nativeName
-        else if (nativeName === ANONYMOUS)
-            type.substring(0, type.length - 1)
-        else
-            "$type$nativeName"
+        when {
+            nativeName.startsWith(type) -> nativeName
+            nativeName === ANONYMOUS    -> type.substring(0, type.length - 1)
+            else                        -> "$type$nativeName"
+        }
     }
 
     private fun Struct.printStructLayout(indentation: String = ""): String {

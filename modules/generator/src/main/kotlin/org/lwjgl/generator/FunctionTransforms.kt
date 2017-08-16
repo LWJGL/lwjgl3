@@ -352,12 +352,11 @@ internal open class PointerArrayTransform(private val paramType: String) : Funct
         val pointerArray = param.get<PointerArray>()
         val name = if (paramType.isEmpty()) pointerArray.singleName else param.name
         val paramClass = pointerArray.elementType.let {
-            if (it.mapping === PointerMapping.OPAQUE_POINTER)
-                "long"
-            else if (it is CharSequenceType)
-                "CharSequence"
-            else
-                "ByteBuffer"
+            when {
+                it.mapping === PointerMapping.OPAQUE_POINTER -> "long"
+                it is CharSequenceType                       -> "CharSequence"
+                else                                         -> "ByteBuffer"
+            }
         }
         return "$paramClass$paramType $name"
     }

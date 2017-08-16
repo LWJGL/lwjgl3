@@ -65,7 +65,7 @@ internal class ConstantExpression<out T : Any>(
 class ConstantBlock<T : Any>(
     val nativeClass: NativeClass,
     var access: Access,
-    val constantType: ConstantType<T>,
+    private val constantType: ConstantType<T>,
     val documentation: () -> String,
     val see: Array<String>?,
     vararg val constants: Constant<T>
@@ -78,7 +78,7 @@ class ConstantBlock<T : Any>(
         return this
     }
 
-    internal fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
+    private fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
 
     internal fun getClassLink(name: String) = if (noPrefix && nativeClass.prefixConstant.isNotEmpty())
         "${nativeClass.className}#$name"
@@ -181,12 +181,11 @@ class ConstantBlock<T : Any>(
 
         print("$t${access.modifier}static final ${constantType.javaType}")
 
-        val indent: String
-        if (constants.size == 1) {
-            indent = " "
+        val indent = if (constants.size == 1) {
+            " "
         } else {
             print('\n')
-            indent = "$t$t"
+            "$t$t"
         }
 
         // Find maximum constant name length

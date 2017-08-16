@@ -60,14 +60,12 @@ class AutoSizeFactor(
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 fun AutoSize(div: Int, reference: String, vararg dependent: String) =
-    if (div < 1)
-        throw IllegalArgumentException()
-    else if (div == 1)
-        AutoSize(reference, *dependent)
-    else if (Integer.bitCount(div) == 1)
-        AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent)
-    else
-        AutoSizeDiv(div.toString(), reference, dependent = *dependent)
+    when {
+        div < 1                    -> throw IllegalArgumentException()
+        div == 1                   -> AutoSize(reference, *dependent)
+        Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent)
+        else                       -> AutoSizeDiv(div.toString(), reference, dependent = *dependent)
+    }
 
 fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
     AutoSize(reference, *dependent, factor = AutoSizeFactor.div(expression))

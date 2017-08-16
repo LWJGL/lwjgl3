@@ -70,13 +70,11 @@ class Code(
     private fun List<Code.Statement>.append(other: List<Code.Statement>) =
         if (this === Code.NO_STATEMENTS && other === Code.NO_STATEMENTS) Code.NO_STATEMENTS else this + other
 
-    private fun String?.append(other: String?) =
-        if (this == null)
-            other
-        else if (other == null)
-            this
-        else
-            "$this\n$other"
+    private fun String?.append(other: String?) = when {
+        this == null  -> other
+        other == null -> this
+        else          -> "$this\n$other"
+    }
 
     internal fun append(
         javaInit: List<Code.Statement> = Code.NO_STATEMENTS,

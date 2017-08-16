@@ -92,7 +92,7 @@ abstract class APIBinding(
 
 /** An APIBinding without an associated capabilities class.  */
 abstract class SimpleBinding(
-    val libraryExpression: String,
+    private val libraryExpression: String,
     callingConvention: CallingConvention
 ) : APIBinding("n/a", "n/a", callingConvention = callingConvention) {
     override fun PrintWriter.generateJava() = Unit
@@ -371,13 +371,13 @@ class NativeClass(
         duplicate: MutableSet<String>
     ) {
         val prev = registry[name]
-        if (prev == null) {
-            registry.put(name, link)
-        } else if (link.length < prev.length) { // Short link == shorter class == usually core API
-            registry.put(name, link)
-            duplicate.remove(name) // sometimes there are more than 2 definitions of the same symbol
-        } else if (link.length == prev.length) {
-            duplicate.add(name)
+        when {
+            prev == null               -> registry.put(name, link)
+            link.length < prev.length  -> { // Short link == shorter class == usually core API
+                registry.put(name, link)
+                duplicate.remove(name) // sometimes there are more than 2 definitions of the same symbol
+            }
+            link.length == prev.length -> duplicate.add(name)
         }
     }
 
