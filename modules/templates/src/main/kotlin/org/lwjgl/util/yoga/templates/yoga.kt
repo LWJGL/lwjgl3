@@ -420,7 +420,7 @@ div {
     }
 
     fun YG_NODE_STYLE_PROPERTY_UNIT_AUTO(type: NativeType, name: String, paramName: String, documentation: String = "") {
-        YG_NODE_STYLE_PROPERTY_UNIT(type, name, paramName, documentation);
+        YG_NODE_STYLE_PROPERTY_UNIT(type, name, paramName, documentation)
         void(
             "NodeStyleSet${name}Auto",
             documentation,
