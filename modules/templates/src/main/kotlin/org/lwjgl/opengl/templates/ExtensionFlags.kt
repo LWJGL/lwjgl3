@@ -24,6 +24,8 @@ val OVR = "OVR"
 val SGI = "SGI"
 val SGIX = "SGIX"
 
+val GREMEDY = "GREMEDY"
+
 private val NativeClass.cap: String get() = "{@link \\#$capName $templateName}"
 
 val ARB_arrays_of_arrays = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", postfix = ARB) {
