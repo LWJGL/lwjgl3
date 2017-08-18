@@ -3,7 +3,7 @@
  * License terms: https://www.lwjgl.org/license
  */
 #ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710))
+    __pragma(warning(disable : 4710 4711))
 #endif
 #include "common_tools.h"
 DISABLE_WARNINGS()
