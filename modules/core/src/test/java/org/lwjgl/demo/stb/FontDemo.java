@@ -38,6 +38,9 @@ abstract class FontDemo {
     private int   lineOffset;
     private float lineHeight;
 
+    private boolean kerningEnabled = true;
+    private boolean lineBBEnabled;
+
     private Callback debugProc;
 
     protected FontDemo(int fontHeight, String filePath) {
@@ -88,6 +91,14 @@ abstract class FontDemo {
         return lineOffset;
     }
 
+    public boolean isKerningEnabled() {
+        return kerningEnabled;
+    }
+
+    public boolean isLineBBEnabled() {
+        return lineBBEnabled;
+    }
+
     protected void run(String title) {
         try {
             init(title);
@@ -127,6 +138,7 @@ abstract class FontDemo {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
         this.window = glfwCreateWindow(ww, wh, title, NULL, NULL);
         if (window == NULL) {
@@ -171,6 +183,12 @@ abstract class FontDemo {
                     if (ctrlDown) {
                         setScale(0);
                     }
+                    break;
+                case GLFW_KEY_B:
+                    lineBBEnabled = !lineBBEnabled;
+                    break;
+                case GLFW_KEY_K:
+                    kerningEnabled = !kerningEnabled;
                     break;
             }
         });
