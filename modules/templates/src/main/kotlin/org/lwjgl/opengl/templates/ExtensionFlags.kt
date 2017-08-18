@@ -14,6 +14,8 @@ val KHR = "KHR"
 val AMD = "AMD"
 val ATI = "ATI"
 
+val GREMEDY = "GREMEDY"
+
 val INTEL = "INTEL"
 
 val NV = "NV"
