@@ -235,6 +235,7 @@ val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR"
             <li>{@code presentMode} <b>must</b> be a valid {@code VkPresentModeKHR} value</li>
             <li>If {@code oldSwapchain} is not #NULL_HANDLE, {@code oldSwapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
             <li>If {@code oldSwapchain} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code surface}</li>
+            <li>Both of {@code oldSwapchain}, and {@code surface} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>See Also</h5>
@@ -285,6 +286,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
             <li>{@code pImageIndices} <b>must</b> be a pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
             <li>If {@code pResults} is not {@code NULL}, {@code pResults} <b>must</b> be a pointer to an array of {@code swapchainCount} {@code VkResult} values</li>
             <li>{@code swapchainCount} <b>must</b> be greater than 0</li>
+            <li>Both of the elements of {@code pSwapchains}, and the elements of {@code pWaitSemaphores} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1642,6 +1644,7 @@ val VkAcquireNextImageInfoKHX = struct(VULKAN_PACKAGE, "VkAcquireNextImageInfoKH
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
             <li>If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
             <li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+            <li>Each of {@code fence}, {@code semaphore}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -3218,7 +3221,7 @@ val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EX
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 

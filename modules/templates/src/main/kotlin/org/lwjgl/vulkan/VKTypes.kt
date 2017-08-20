@@ -2141,6 +2141,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
             <li>If {@code stage} is #SHADER_STAGE_GEOMETRY_BIT, and the identified entry point writes to {@code ViewportIndex} for any primitive, it <b>must</b> write the same value to {@code ViewportIndex} for all vertices of a given primitive</li>
             <li>If {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, the identified entry point <b>must</b> not include any output variables in its interface decorated with {@code CullDistance}</li>
             <li>If {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, and the identified entry point writes to {@code FragDepth} in any execution path, it <b>must</b> write to {@code FragDepth} in all execution paths</li>
+            <li>If {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, and the identified entry point writes to {@code FragStencilRefEXT} in any execution path, it <b>must</b> write to {@code FragStencilRefEXT} in all execution paths</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3028,6 +3029,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
         <ul>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code descriptorCount} is not 0 and {@code pImmutableSamplers} is not {@code NULL}, {@code pImmutableSamplers} <b>must</b> be a pointer to an array of {@code descriptorCount} valid {@code VkSampler} handles</li>
             <li>If {@code descriptorCount} is not 0, {@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_INPUT_ATTACHMENT and {@code descriptorCount} is not 0, then {@code stageFlags} <b>must</b> be 0 or #SHADER_STAGE_FRAGMENT_BIT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3043,7 +3045,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
     VkDescriptorType.member("descriptorType", "a {@code VkDescriptorType} specifying which type of resource descriptors are used for this binding.")
     AutoSize("pImmutableSamplers", optional = true)..uint32_t.member("descriptorCount", "the number of descriptors contained in the binding, accessed in a shader as an array. If {@code descriptorCount} is zero this binding entry is reserved and the resource <b>must</b> not be accessed from any stage via this binding within any pipeline using the set layout.")
     VkShaderStageFlags.member("stageFlags", """member is a bitmask of {@code VkShaderStageFlagBits} specifying which pipeline shader stages <b>can</b> access a resource for this binding. #SHADER_STAGE_ALL is a shorthand specifying that all defined shader stages, including any additional stages defined by extensions, <b>can</b> access the resource.
-If a shader stage is not included in {@code stageFlags}, then a resource <b>must</b> not be accessed from that stage via this binding within any pipeline using the set layout. There are no limitations on what combinations of stages <b>can</b> be used by a descriptor binding, and in particular a binding <b>can</b> be used by both graphics stages and the compute stage.""")
+If a shader stage is not included in {@code stageFlags}, then a resource <b>must</b> not be accessed from that stage via this binding within any pipeline using the set layout. Other than input attachments which are limited to the fragment shader, there are no limitations on what combinations of stages <b>can</b> be used by a descriptor binding, and in particular a binding <b>can</b> be used by both graphics stages and the compute stage.""")
     nullable..const..VkSampler.p.member("pImmutableSamplers", "")
 }
 
@@ -3399,9 +3401,9 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
         <h5>Description</h5>
         If the attachment uses a color format, then {@code loadOp} and {@code storeOp} are used, and {@code stencilLoadOp} and {@code stencilStoreOp} are ignored. If the format has depth and/or stencil components, {@code loadOp} and {@code storeOp} apply only to the depth data, while {@code stencilLoadOp} and {@code stencilStoreOp} define how the stencil data is handled. {@code loadOp} and {@code stencilLoadOp} define the <em>load operations</em> that execute as part of the first subpass that uses the attachment. {@code storeOp} and {@code stencilStoreOp} define the <em>store operations</em> that execute as part of the last subpass that uses the attachment.
 
-        The load operation for each value in an attachment used by a subpass happens-before any command recorded into that subpass reads from that value. Load operations for attachments with a depth/stencil format execute in the #PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT pipeline stage. Load operations for attachments with a color format execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.
+        The load operation for each sample in an attachment happens-before any recorded command which accesses the sample in the first subpass where the attachment is used. Load operations for attachments with a depth/stencil format execute in the #PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT pipeline stage. Load operations for attachments with a color format execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.
 
-        Store operations for each value in an attachment used by a subpass happen-after any command recorded into that subpass writes to that value. Store operations for attachments with a depth/stencil format execute in the #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT pipeline stage. Store operations for attachments with a color format execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.
+        The store operation for each sample in an attachment happens-after any recorded command which accesses the sample in the last subpass where the attachment is used. Store operations for attachments with a depth/stencil format execute in the #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT pipeline stage. Store operations for attachments with a color format execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.
 
         If an attachment is not used by any subpass, then {@code loadOp}, {@code storeOp}, {@code stencilStoreOp}, and {@code stencilLoadOp} are ignored, and the attachment's memory contents will not be modified by execution of a render pass instance.
 
@@ -3545,6 +3547,17 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
         The second <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes">access scope</a> is limited to access in the pipeline stages determined by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks">destination stage mask</a> specified by {@code dstStageMask}. It is also limited to access types in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks">destination access mask</a> specified by {@code dstAccessMask}.
 
         The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-available-and-visible">availability and visibility operations</a> defined by a subpass dependency affect the execution of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-layout-transitions">image layout transitions</a> within the render pass.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        For non-attachment resources, the memory dependency expressed by subpass dependency is nearly identical to that of a ##VkMemoryBarrier (with matching {@code srcAccessMask}/{@code dstAccessMask} parameters) submitted as a part of a #CmdPipelineBarrier() (with matching {@code srcStageMask}/{@code dstStageMask} parameters). The only difference being that its scopes are limited to the identified subpasses rather than potentially affecting everything before and after.
+
+        For attachments however, subpass dependencies work more like an ##VkImageMemoryBarrier defined similarly to the ##VkMemoryBarrier above, the queue family indices set to #QUEUE_FAMILY_IGNORED, and layouts as follows:
+
+        <ul>
+            <li>The equivalent to {@code oldLayout} is the attachment&#8217;s layout according to the subpass description for {@code srcSubpass}.</li>
+            <li>The equivalent to {@code newLayout} is the attachment&#8217;s layout according to the subpass description for {@code dstSubpass}.</li>
+        </ul>
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>

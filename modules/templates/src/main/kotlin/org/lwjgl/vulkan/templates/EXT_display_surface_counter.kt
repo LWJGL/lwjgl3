@@ -69,7 +69,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT".."1000090000"
+        "STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT".."1000090000"
     )
 
     EnumConstant(
@@ -110,6 +110,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
             <li>{@code pSurfaceCapabilities} <b>must</b> be a pointer to a ##VkSurfaceCapabilities2EXT structure</li>
+            <li>Both of {@code physicalDevice}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>Return Codes</h5>
