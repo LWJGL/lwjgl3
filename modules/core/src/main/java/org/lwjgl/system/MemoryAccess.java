@@ -65,11 +65,11 @@ final class MemoryAccess {
         default FloatBuffer memFloatBuffer(long address, int capacity)   { return memByteBuffer(address, capacity << 2).asFloatBuffer(); }
         default DoubleBuffer memDoubleBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
-        default void memSet(long dst, int value, int bytes) {
+        default void memSet(long dst, int value, long bytes) {
             nmemset(dst, value, bytes);
         }
 
-        default void memCopy(long src, long dst, int bytes) {
+        default void memCopy(long src, long dst, long bytes) {
             nmemcpy(dst, src, bytes); // Note the swapped src & dst
         }
 
@@ -243,7 +243,7 @@ final class MemoryAccess {
         }
 
         @Override
-        public void memSet(long dst, int value, int bytes) {
+        public void memSet(long dst, int value, long bytes) {
             /*
             - Unsafe.setMemory is very slow.
             - A custom Java loop is fastest at small sizes, approximately up to 192 bytes.
@@ -252,7 +252,7 @@ final class MemoryAccess {
 
             //UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
             if (bytes < 192) {
-                memSetLoop(dst, (byte)(value & 0xFF), bytes);
+                memSetLoop(dst, (byte)(value & 0xFF), (int)bytes);
             } else {
                 nmemset(dst, value, bytes);
             }
@@ -298,7 +298,7 @@ final class MemoryAccess {
         }
 
         @Override
-        public void memCopy(long src, long dst, int bytes) {
+        public void memCopy(long src, long dst, long bytes) {
             /*
             - A custom Java loop is fastest at small sizes, approximately up to 64 bytes.
             - Unsafe.copyMemory is fastest at moderate sizes, approximately up to 384 bytes.
@@ -306,7 +306,7 @@ final class MemoryAccess {
              */
 
             if (bytes < 64 && ((int)src & 7) == 0 && ((int)dst & 7) == 0) { // both src and dst must be aligned to 8 bytes
-                memCopyAligned(src, dst, bytes);
+                memCopyAligned(src, dst, (int)bytes);
             } else if (bytes < 384) {
                 UNSAFE.copyMemory(src, dst, bytes);
             } else {

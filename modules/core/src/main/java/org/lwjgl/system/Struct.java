@@ -4,9 +4,12 @@
  */
 package org.lwjgl.system;
 
+import org.lwjgl.*;
+
 import java.nio.*;
 import java.util.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -42,6 +45,8 @@ public abstract class Struct extends Pointer.Default {
         nmemFree(address());
     }
 
+    // ---------------- Implementation utilities ----------------
+
     protected static ByteBuffer checkContainer(ByteBuffer container, int sizeof) {
         if (Checks.CHECKS && container != null) {
             check(container, sizeof);
@@ -50,8 +55,15 @@ public abstract class Struct extends Pointer.Default {
         return container;
     }
 
-    protected static long addressSafe(Pointer pointer) {
-        return pointer == null ? NULL : pointer.address();
+    protected static long __malloc(int elements, int elementSize) {
+        long bytes = apiGetBytes(elements, elementSize);
+        apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
+        return nmemAlloc(bytes);
+    }
+
+    protected static ByteBuffer __create(int elements, int elementSize) {
+        apiCheckAllocation(elements, apiGetBytes(elements, elementSize), 0x7FFFFFFFL);
+        return BufferUtils.createByteBuffer(elements * elementSize);
     }
 
     // ---------------- Struct Member Layout ----------------

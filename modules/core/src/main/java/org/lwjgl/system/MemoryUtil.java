@@ -166,13 +166,19 @@ public final class MemoryUtil {
         return memByteBuffer(nmemAlloc(size), size);
     }
 
+    private static long getAllocationSize(int elements, int elementShift) {
+        long bytes = apiGetBytes(elements, elementShift);
+        apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
+        return bytes;
+    }
+
     /**
      * ShortBuffer version of {@link #memAlloc}.
      *
      * @param size the number of short values to allocate.
      */
     public static ShortBuffer memAllocShort(int size) {
-        return memShortBuffer(nmemAlloc(size << 1), size);
+        return memShortBuffer(nmemAlloc(getAllocationSize(size, 1)), size);
     }
 
     /**
@@ -181,7 +187,7 @@ public final class MemoryUtil {
      * @param size the number of int values to allocate.
      */
     public static IntBuffer memAllocInt(int size) {
-        return memIntBuffer(nmemAlloc(size << 2), size);
+        return memIntBuffer(nmemAlloc(getAllocationSize(size, 2)), size);
     }
 
     /**
@@ -190,7 +196,7 @@ public final class MemoryUtil {
      * @param size the number of float values to allocate.
      */
     public static FloatBuffer memAllocFloat(int size) {
-        return memFloatBuffer(nmemAlloc(size << 2), size);
+        return memFloatBuffer(nmemAlloc(getAllocationSize(size, 2)), size);
     }
 
     /**
@@ -199,7 +205,7 @@ public final class MemoryUtil {
      * @param size the number of long values to allocate.
      */
     public static LongBuffer memAllocLong(int size) {
-        return memLongBuffer(nmemAlloc(size << 3), size);
+        return memLongBuffer(nmemAlloc(getAllocationSize(size, 3)), size);
     }
 
     /**
@@ -208,7 +214,7 @@ public final class MemoryUtil {
      * @param size the number of double values to allocate.
      */
     public static DoubleBuffer memAllocDouble(int size) {
-        return memDoubleBuffer(nmemAlloc(size << 3), size);
+        return memDoubleBuffer(nmemAlloc(getAllocationSize(size, 3)), size);
     }
 
     /**
@@ -217,7 +223,7 @@ public final class MemoryUtil {
      * @param size the number of pointer values to allocate.
      */
     public static PointerBuffer memAllocPointer(int size) {
-        return memPointerBuffer(nmemAlloc(size << POINTER_SHIFT), size);
+        return memPointerBuffer(nmemAlloc(getAllocationSize(size, POINTER_SHIFT)), size);
     }
 
     /** Unsafe version of {@link #memFree}. */
@@ -376,7 +382,7 @@ public final class MemoryUtil {
      * @param size the number of short values to allocate.
      */
     public static ShortBuffer memRealloc(ShortBuffer ptr, int size) {
-        return realloc(ptr, memShortBuffer(nmemRealloc(memAddress0Safe(ptr), size << 1), size), size);
+        return realloc(ptr, memShortBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 1)), size), size);
     }
 
     /**
@@ -385,7 +391,7 @@ public final class MemoryUtil {
      * @param size the number of int values to allocate.
      */
     public static IntBuffer memRealloc(IntBuffer ptr, int size) {
-        return realloc(ptr, memIntBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size), size);
+        return realloc(ptr, memIntBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
     }
 
     /**
@@ -394,7 +400,7 @@ public final class MemoryUtil {
      * @param size the number of long values to allocate.
      */
     public static LongBuffer memRealloc(LongBuffer ptr, int size) {
-        return realloc(ptr, memLongBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size), size);
+        return realloc(ptr, memLongBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
     }
 
     /**
@@ -403,7 +409,7 @@ public final class MemoryUtil {
      * @param size the number of float values to allocate.
      */
     public static FloatBuffer memRealloc(FloatBuffer ptr, int size) {
-        return realloc(ptr, memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size), size);
+        return realloc(ptr, memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
     }
 
     /**
@@ -412,7 +418,7 @@ public final class MemoryUtil {
      * @param size the number of double values to allocate.
      */
     public static DoubleBuffer memRealloc(DoubleBuffer ptr, int size) {
-        return realloc(ptr, memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size), size);
+        return realloc(ptr, memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
     }
 
     /**
@@ -421,7 +427,7 @@ public final class MemoryUtil {
      * @param size the number of pointer values to allocate.
      */
     public static PointerBuffer memRealloc(PointerBuffer ptr, int size) {
-        PointerBuffer buffer = memPointerBuffer(nmemRealloc(memAddress0Safe(ptr), size << POINTER_SHIFT), size);
+        PointerBuffer buffer = memPointerBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, POINTER_SHIFT)), size);
         if (ptr != null && buffer != null) {
             buffer.position(min(ptr.position(), size));
         }
@@ -568,34 +574,38 @@ public final class MemoryUtil {
     public static long memAddress(ByteBuffer buffer, int position) { return memAddress0(buffer) + position; }
     /** ShortBuffer version of {@link #memAddress(ByteBuffer)}. */
 
+    private static long address(Buffer buffer, int position, int elementShift) {
+        return memAddress0(buffer) + ((long)position << elementShift);
+    }
+
     public static long memAddress(ShortBuffer buffer) { return memAddress(buffer, buffer.position()); }
     /** ShortBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-    public static long memAddress(ShortBuffer buffer, int position) { return memAddress0(buffer) + (position << 1); }
+    public static long memAddress(ShortBuffer buffer, int position) { return address(buffer, position, 1); }
 
     /** CharBuffer version of {@link #memAddress(ByteBuffer)}. */
     public static long memAddress(CharBuffer buffer) { return memAddress(buffer, buffer.position()); }
     /** CharBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-    public static long memAddress(CharBuffer buffer, int position) { return memAddress0(buffer) + (position << 1); }
+    public static long memAddress(CharBuffer buffer, int position) { return address(buffer, position, 1); }
 
     /** IntBuffer version of {@link #memAddress(ByteBuffer)}. */
     public static long memAddress(IntBuffer buffer) { return memAddress(buffer, buffer.position()); }
     /** IntBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-    public static long memAddress(IntBuffer buffer, int position) { return memAddress0(buffer) + (position << 2); }
+    public static long memAddress(IntBuffer buffer, int position) { return address(buffer, position, 2); }
 
     /** FloatBuffer version of {@link #memAddress(ByteBuffer)}. */
     public static long memAddress(FloatBuffer buffer) { return memAddress(buffer, buffer.position()); }
     /** FloatBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-    public static long memAddress(FloatBuffer buffer, int position) { return memAddress0(buffer) + (position << 2); }
+    public static long memAddress(FloatBuffer buffer, int position) { return address(buffer, position, 2); }
 
     /** LongBuffer version of {@link #memAddress(ByteBuffer)}. */
     public static long memAddress(LongBuffer buffer) { return memAddress(buffer, buffer.position()); }
     /** LongBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-    public static long memAddress(LongBuffer buffer, int position) { return memAddress0(buffer) + (position << 3); }
+    public static long memAddress(LongBuffer buffer, int position) { return address(buffer, position, 3); }
 
     /** DoubleBuffer version of {@link #memAddress(ByteBuffer)}. */
     public static long memAddress(DoubleBuffer buffer) { return memAddress(buffer, buffer.position()); }
     /** DoubleBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-    public static long memAddress(DoubleBuffer buffer, int position) { return memAddress0(buffer) + (position << 3); }
+    public static long memAddress(DoubleBuffer buffer, int position) { return address(buffer, position, 3); }
 
     /** CustomBuffer version of {@link #memAddress(ByteBuffer)}. */
     public static long memAddress(CustomBuffer<?> buffer) { return buffer.address(); }
@@ -1025,7 +1035,7 @@ public final class MemoryUtil {
      * @param value the value to set (memSet will convert it to unsigned byte)
      * @param bytes the number of bytes to set
      */
-    public static void memSet(long ptr, int value, int bytes) {
+    public static void memSet(long ptr, int value, long bytes) {
         if (Checks.DEBUG && (ptr == NULL || bytes < 0)) {
             throw new IllegalArgumentException();
         }
@@ -1040,7 +1050,7 @@ public final class MemoryUtil {
      * @param dst   the destination memory address
      * @param bytes the number of bytes to copy
      */
-    public static void memCopy(long src, long dst, int bytes) {
+    public static void memCopy(long src, long dst, long bytes) {
         if (Checks.DEBUG && (src == NULL || dst == NULL || bytes < 0)) {
             throw new IllegalArgumentException();
         }

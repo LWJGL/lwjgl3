@@ -6,6 +6,7 @@ package org.lwjgl;
 
 import java.nio.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -72,6 +73,11 @@ public final class BufferUtils {
         return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
     }
 
+    static int getAllocationSize(int elements, int elementShift) {
+        apiCheckAllocation(elements, apiGetBytes(elements, elementShift), 0x7FFFFFFFL);
+        return elements << elementShift;
+    }
+
     /**
      * Allocates a direct native-order shortbuffer with the specified number
      * of elements.
@@ -81,7 +87,7 @@ public final class BufferUtils {
      * @return a ShortBuffer
      */
     public static ShortBuffer createShortBuffer(int capacity) {
-        return createByteBuffer(capacity << 1).asShortBuffer();
+        return createByteBuffer(getAllocationSize(capacity, 1)).asShortBuffer();
     }
 
     /**
@@ -93,7 +99,7 @@ public final class BufferUtils {
      * @return an CharBuffer
      */
     public static CharBuffer createCharBuffer(int capacity) {
-        return createByteBuffer(capacity << 1).asCharBuffer();
+        return createByteBuffer(getAllocationSize(capacity, 1)).asCharBuffer();
     }
 
     /**
@@ -105,7 +111,7 @@ public final class BufferUtils {
      * @return an IntBuffer
      */
     public static IntBuffer createIntBuffer(int capacity) {
-        return createByteBuffer(capacity << 2).asIntBuffer();
+        return createByteBuffer(getAllocationSize(capacity, 2)).asIntBuffer();
     }
 
     /**
@@ -117,7 +123,7 @@ public final class BufferUtils {
      * @return an LongBuffer
      */
     public static LongBuffer createLongBuffer(int capacity) {
-        return createByteBuffer(capacity << 3).asLongBuffer();
+        return createByteBuffer(getAllocationSize(capacity, 3)).asLongBuffer();
     }
 
     /**
@@ -129,7 +135,7 @@ public final class BufferUtils {
      * @return a FloatBuffer
      */
     public static FloatBuffer createFloatBuffer(int capacity) {
-        return createByteBuffer(capacity << 2).asFloatBuffer();
+        return createByteBuffer(getAllocationSize(capacity, 2)).asFloatBuffer();
     }
 
     /**
@@ -141,7 +147,7 @@ public final class BufferUtils {
      * @return a DoubleBuffer
      */
     public static DoubleBuffer createDoubleBuffer(int capacity) {
-        return createByteBuffer(capacity << 3).asDoubleBuffer();
+        return createByteBuffer(getAllocationSize(capacity, 3)).asDoubleBuffer();
     }
 
     /**
@@ -173,7 +179,7 @@ public final class BufferUtils {
      * @param buffer the buffer to fill with zeros
      */
     public static void zeroBuffer(ShortBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining() << 1);
+        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 1));
     }
 
     /**
@@ -182,7 +188,7 @@ public final class BufferUtils {
      * @param buffer the buffer to fill with zeros
      */
     public static void zeroBuffer(CharBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining() << 1);
+        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 1));
     }
 
     /**
@@ -191,7 +197,7 @@ public final class BufferUtils {
      * @param buffer the buffer to fill with zeros
      */
     public static void zeroBuffer(IntBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining() << 2);
+        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 2));
     }
 
     /**
@@ -200,7 +206,7 @@ public final class BufferUtils {
      * @param buffer the buffer to fill with zeros
      */
     public static void zeroBuffer(FloatBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining() << 2);
+        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 2));
     }
 
     /**
@@ -209,7 +215,7 @@ public final class BufferUtils {
      * @param buffer the buffer to fill with zeros
      */
     public static void zeroBuffer(LongBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining() << 3);
+        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 3));
     }
 
     /**
@@ -218,7 +224,7 @@ public final class BufferUtils {
      * @param buffer the buffer to fill with zeros
      */
     public static void zeroBuffer(DoubleBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining() << 3);
+        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 3));
     }
 
 }

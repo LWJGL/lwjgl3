@@ -688,7 +688,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static Buffer malloc(int $BUFFER_CAPACITY_PARAM) {
-        return create(nmemAlloc($BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return create(__malloc($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -706,7 +706,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static Buffer create(int $BUFFER_CAPACITY_PARAM) {
-        return new Buffer(BufferUtils.createByteBuffer($BUFFER_CAPACITY_PARAM * SIZEOF));
+        return new Buffer(__create($BUFFER_CAPACITY_PARAM, SIZEOF));
     }
 """)
         }
@@ -1151,7 +1151,7 @@ ${validations.joinToString("\n")}
         get() = has(nullable) ||
                 getReferenceMember<AutoSizeMember>(name)?.get<AutoSizeMember>()?.optional ?: false ||
                 (this is StructMemberArray && this.validSize < this.size)
-    private val StructMember.addressValue get() = if (isNullable) "addressSafe(value)" else "value.address()"
+    private val StructMember.addressValue get() = if (isNullable) "memAddressSafe(value)" else "value.address()"
     private val StructMember.memAddressValue get() = if (isNullable) "memAddressSafe(value)" else "memAddress(value)"
     private val StructMember.autoSize get() = "n$name($STRUCT)"
         .let {

@@ -120,6 +120,22 @@ public final class APIUtil {
             : buffer;
     }
 
+    public static long apiGetBytes(int elements, int elementShift) {
+        return Integer.toUnsignedLong(elements) << elementShift;
+    }
+
+    public static void apiCheckAllocation(int elements, long bytes, long maxBytes) {
+        if (!DEBUG) {
+            return;
+        }
+        if (elements < 0) {
+            throw new IllegalArgumentException("Invalid number of elements");
+        }
+        if ((maxBytes + Long.MIN_VALUE) < (bytes + Long.MIN_VALUE)) { // unsigned comparison
+            throw new IllegalArgumentException("The request allocation is too large");
+        }
+    }
+
     /** A data class for API versioning information. */
     public static class APIVersion {
 

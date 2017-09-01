@@ -29,7 +29,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws IllegalArgumentException If the <tt>capacity</tt> is a negative integer
      */
     public static PointerBuffer allocateDirect(int capacity) {
-        ByteBuffer source = BufferUtils.createByteBuffer(capacity << POINTER_SHIFT);
+        ByteBuffer source = BufferUtils.createByteBuffer(BufferUtils.getAllocationSize(capacity, POINTER_SHIFT));
         return new PointerBuffer(memAddress(source), source, -1, 0, capacity, capacity);
     }
 

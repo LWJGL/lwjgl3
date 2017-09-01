@@ -42,7 +42,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     /** Returns the memory address at the specified buffer position. */
     public long address(int position) {
-        return address + position * sizeof();
+        return address + (long)position * sizeof();
     }
 
     /**
@@ -268,7 +268,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
             throw new IllegalArgumentException();
         }
 
-        return newBufferInstance(address() + offset * sizeof(), container, -1, 0, capacity, capacity);
+        return newBufferInstance(address() + (long)offset * sizeof(), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -322,7 +322,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
             throw new BufferOverflowException();
         }
 
-        memCopy(src.address(), this.address(), n * sizeof());
+        memCopy(src.address(), this.address(), (long)n * sizeof());
         position += n;
 
         return self();
@@ -345,7 +345,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public SELF compact() {
-        memCopy(address(), address, remaining() * sizeof());
+        memCopy(address(), address, (long)remaining() * sizeof());
         position(remaining());
         limit(capacity());
         mark = -1;
@@ -370,21 +370,21 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     protected abstract SELF newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity);
 
-    protected int nextGetIndex() {
+    protected long nextGetIndex() {
         if (position >= limit) {
             throw new BufferUnderflowException();
         }
         return position++;
     }
 
-    protected int nextPutIndex() {
+    protected long nextPutIndex() {
         if (position >= limit) {
             throw new BufferOverflowException();
         }
         return position++;
     }
 
-    protected int checkIndex(int index) {
+    protected long checkIndex(int index) {
         if (index < 0 || limit < index) {
             throw new IndexOutOfBoundsException();
         }
