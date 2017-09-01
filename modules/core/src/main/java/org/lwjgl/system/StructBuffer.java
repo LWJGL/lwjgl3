@@ -5,11 +5,14 @@
 package org.lwjgl.system;
 
 import java.nio.*;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of struct custom buffers. */
-public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> extends CustomBuffer<SELF> {
+public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> extends CustomBuffer<SELF> implements Iterable<T> {
 
     protected StructBuffer(ByteBuffer container, int remaining) {
         this(memAddress(container), container, -1, 0, remaining, remaining);
@@ -108,6 +111,113 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
     public SELF put(int index, T value) {
         memCopy(value.address(), address + checkIndex(index) * sizeof(), sizeof());
         return self();
+    }
+
+    // --------------------------------------
+
+    @Override public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            int cursor = position;
+
+            @Override public boolean hasNext() {
+                return cursor < limit;
+            }
+
+            @Override public T next() {
+                return get(cursor++);
+            }
+
+            @Override public void forEachRemaining(Consumer<? super T> action) {
+                Objects.requireNonNull(action);
+                int i = cursor;
+                for (; i < limit; i++) {
+                    action.accept(get(i));
+                }
+                cursor = i;
+            }
+        };
+    }
+
+    @Override public void forEach(Consumer<? super T> action) {
+        Objects.requireNonNull(action);
+        for (int i = position; i < limit; i++) {
+            action.accept(get(i));
+        }
+    }
+
+    @Override public Spliterator<T> spliterator() {
+        return new StructSpliterator();
+    }
+
+    private class StructSpliterator implements Spliterator<T> {
+        private int index;
+
+        private final int fence;
+
+        StructSpliterator() {
+            this(position, limit);
+        }
+
+        StructSpliterator(int origin, int fence) {
+            this.index = origin;
+            this.fence = fence;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super T> action) {
+            Objects.requireNonNull(action);
+
+            if (index < fence) {
+                action.accept(get(index++));
+                return true;
+            }
+
+            return false;
+        }
+        @Override
+        public Spliterator<T> trySplit() {
+            int lo = index,
+                mid = (lo + fence) >>> 1;
+
+            return lo < mid
+                ? new StructSpliterator(lo, index = mid)
+                : null;
+        }
+
+        @Override
+        public long estimateSize() {
+            return fence - index;
+        }
+
+        @Override
+        public int characteristics() {
+            return Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.SIZED | Spliterator.SUBSIZED;
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> action) {
+            Objects.requireNonNull(action);
+            int i = index;
+            for (; i < fence; i++) {
+                action.accept(get(i));
+            }
+            index = i;
+        }
+
+        @Override
+        public Comparator<? super T> getComparator() {
+            throw new IllegalStateException();
+        }
+    }
+
+    /** Returns a sequential {@code Stream} with this struct buffer as its source. */
+    public Stream<T> stream() {
+        return StreamSupport.stream(spliterator(), false);
+    }
+
+    /** Returns a parallel {@code Stream} with this struct buffer as its source. */
+    public Stream<T> parallelStream() {
+        return StreamSupport.stream(spliterator(), true);
     }
 
     // --------------------------------------

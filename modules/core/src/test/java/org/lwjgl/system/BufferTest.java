@@ -35,4 +35,55 @@ public class BufferTest {
         memFree(buffer);
     }
 
+    private static long fillBuffer(JNINativeMethod.Buffer buffer) {
+        long sum = 0;
+        for (int i = 0; i < buffer.remaining(); i++) {
+            buffer.get(i).fnPtr(i + 1);
+            sum += (i + 1);
+        }
+        return sum;
+    }
+
+    public void testStructBufferIterable() {
+        JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(10);
+
+        long expected = fillBuffer(buffer);
+        long actual   = 0;
+        for (JNINativeMethod struct : buffer) {
+            actual += struct.fnPtr();
+        }
+
+        assertEquals(actual, expected);
+
+        buffer.free();
+    }
+
+    public void testStructBufferStream() {
+        JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(10);
+
+        long expected = fillBuffer(buffer);
+        long actual = buffer
+            .stream()
+            .mapToLong(JNINativeMethod::fnPtr)
+            .sum();
+
+        assertEquals(actual, expected);
+
+        buffer.free();
+    }
+
+    public void testStructBufferParallelStream() {
+        JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(10 * 1024);
+
+        long expected = fillBuffer(buffer);
+        long actual = buffer
+            .parallelStream()
+            .mapToLong(JNINativeMethod::fnPtr)
+            .sum();
+
+        assertEquals(actual, expected);
+
+        buffer.free();
+    }
+
 }
