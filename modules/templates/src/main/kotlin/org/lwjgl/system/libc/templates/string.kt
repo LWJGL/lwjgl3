@@ -38,6 +38,20 @@ val string = "LibCString".nativeClass(packageName = LIBC_PACKAGE) {
         returnDoc = "the value of {@code dest}"
     )
 
+    customMethod("""
+    /**
+     * Fills memory with a constant byte.
+     *
+     * @param dest pointer to destination
+     * @param c    character to set
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static <T extends CustomBuffer<T>> long memset(@NativeType("void *") T dest, @NativeType("int") int c) {
+        return nmemset(memAddress(dest), c, (long)dest.remaining() * dest.sizeof());
+    }""")
+
     opaque_p(
         "memcpy",
         "Copies characters between buffers.",
@@ -62,4 +76,21 @@ val string = "LibCString".nativeClass(packageName = LIBC_PACKAGE) {
 
         returnDoc = "the value of {@code dest}"
     )
+
+    customMethod("""
+    /**
+     * Copies characters between buffers.
+     *
+     * @param dest new buffer
+     * @param src  buffer to copy from
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static <T extends CustomBuffer<T>> long memcpy(@NativeType("void *") T dest, @NativeType("const void *") T src) {
+        if (CHECKS) {
+            check(src, dest.remaining());
+        }
+        return nmemcpy(memAddress(dest), memAddress(src), (long)src.remaining() * src.sizeof());
+    }""")
 }
