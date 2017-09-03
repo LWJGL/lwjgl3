@@ -28,7 +28,7 @@ public abstract class Struct extends Pointer.Default {
         this.container = container;
     }
 
-    /** Returns the {@code sizeof(struct)}. */
+    /** Returns {@code sizeof(struct)}. */
     public abstract int sizeof();
 
     /** Zeroes-out the struct data. */

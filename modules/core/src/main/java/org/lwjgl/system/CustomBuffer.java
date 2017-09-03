@@ -31,6 +31,9 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
         this.capacity = capacity;
     }
 
+    /** Returns the {@code sizeof} a single element in the buffer. */
+    public abstract int sizeof();
+
     /** Returns the buffer's base address. [INTERNAL USE ONLY] */
     public long address0() {
         return address;
@@ -365,8 +368,6 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
     // -----------------------------
 
     protected abstract SELF self();
-
-    protected abstract int sizeof();
 
     protected abstract SELF newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity);
 

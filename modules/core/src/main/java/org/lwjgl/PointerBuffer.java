@@ -59,8 +59,8 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     }
 
     @Override
-    protected int sizeof() {
-        return Pointer.POINTER_SIZE;
+    public int sizeof() {
+        return POINTER_SIZE;
     }
 
     @Override

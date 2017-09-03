@@ -897,7 +897,7 @@ ${validations.joinToString("\n")}
         }
 
         @Override
-        protected int sizeof() {
+        public int sizeof() {
             return SIZEOF;
         }
 """)
