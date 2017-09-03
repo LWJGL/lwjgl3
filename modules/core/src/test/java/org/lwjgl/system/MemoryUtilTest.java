@@ -64,7 +64,7 @@ public class MemoryUtilTest {
             src.put(i, (byte)i);
         }
 
-        memCopy(memAddress(src), memAddress(dst), src.capacity());
+        memCopy(src, dst);
 
         for (int i = 0; i < src.capacity(); i++) {
             assertEquals(src.get(i), dst.get(i));

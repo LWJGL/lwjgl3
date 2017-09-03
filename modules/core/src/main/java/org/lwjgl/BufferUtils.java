@@ -4,6 +4,8 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.*;
+
 import java.nio.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -169,62 +171,55 @@ public final class BufferUtils {
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(ByteBuffer buffer) {
-        memSet(memAddress(buffer), 0, buffer.remaining());
-    }
+    public static void zeroBuffer(ByteBuffer buffer) { memSet(buffer, 0); }
 
     /**
      * Fills the specified buffer with zeros from the current position to the current limit.
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(ShortBuffer buffer) {
-        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 1));
-    }
+    public static void zeroBuffer(ShortBuffer buffer) { memSet(buffer, 0); }
 
     /**
      * Fills the specified buffer with zeros from the current position to the current limit.
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(CharBuffer buffer) {
-        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 1));
-    }
+    public static void zeroBuffer(CharBuffer buffer) { memSet(buffer, 0); }
 
     /**
      * Fills the specified buffer with zeros from the current position to the current limit.
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(IntBuffer buffer) {
-        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 2));
-    }
+    public static void zeroBuffer(IntBuffer buffer) { memSet(buffer, 0); }
 
     /**
      * Fills the specified buffer with zeros from the current position to the current limit.
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(FloatBuffer buffer) {
-        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 2));
-    }
+    public static void zeroBuffer(FloatBuffer buffer) { memSet(buffer, 0); }
 
     /**
      * Fills the specified buffer with zeros from the current position to the current limit.
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(LongBuffer buffer) {
-        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 3));
-    }
+    public static void zeroBuffer(LongBuffer buffer) { memSet(buffer, 0); }
 
     /**
      * Fills the specified buffer with zeros from the current position to the current limit.
      *
      * @param buffer the buffer to fill with zeros
      */
-    public static void zeroBuffer(DoubleBuffer buffer) {
-        memSet(memAddress(buffer), 0, apiGetBytes(buffer.remaining(), 3));
-    }
+    public static void zeroBuffer(DoubleBuffer buffer) { memSet(buffer, 0); }
+
+    /**
+     * Fills the specified buffer with zeros from the current position to the current limit.
+     *
+     * @param buffer the buffer to fill with zeros
+     */
+    public static <T extends CustomBuffer<T>> void zeroBuffer(T buffer) { memSet(buffer, 0); }
 
 }

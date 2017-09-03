@@ -15,6 +15,7 @@ import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.LazyInit.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
@@ -688,7 +689,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG && (address & (2 - 1)) != 0L) {
+        if (DEBUG && (address & (2 - 1)) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
 
@@ -710,7 +711,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG && (address & (2 - 1)) != 0L) {
+        if (DEBUG && (address & (2 - 1)) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
 
@@ -732,7 +733,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG && (address & (4 - 1)) != 0L) {
+        if (DEBUG && (address & (4 - 1)) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
 
@@ -754,7 +755,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG && (address & (8 - 1)) != 0L) {
+        if (DEBUG && (address & (8 - 1)) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
 
@@ -776,7 +777,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG && (address & (4 - 1)) != 0L) {
+        if (DEBUG && (address & (4 - 1)) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
 
@@ -798,7 +799,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG && (address & (8 - 1)) != 0L) {
+        if (DEBUG && (address & (8 - 1)) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
 
@@ -1022,6 +1023,174 @@ public final class MemoryUtil {
         }
     }
 
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(ByteBuffer ptr, int value) { memSet(memAddress(ptr), value, ptr.remaining()); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(ShortBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 1)); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(CharBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 1)); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(IntBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 2)); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(LongBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 3)); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(FloatBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 2)); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(DoubleBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 3)); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static <T extends CustomBuffer<T>> void memSet(T ptr, int value) { memSet(memAddress(ptr), value, (long)ptr.remaining() * ptr.sizeof()); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(ByteBuffer src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), src.remaining());
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(ShortBuffer src, ShortBuffer dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(CharBuffer src, CharBuffer dst) {
+        if (CHECKS) {
+            check((Buffer)src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(IntBuffer src, IntBuffer dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(LongBuffer src, LongBuffer dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(FloatBuffer src, FloatBuffer dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(DoubleBuffer src, DoubleBuffer dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
+    }
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static <T extends CustomBuffer<T>> void memCopy(T src, T dst) {
+        if (CHECKS) {
+            check(src, dst.remaining());
+        }
+        memCopy(memAddress(src), memAddress(dst), (long)src.remaining() * src.sizeof());
+    }
+
     /*  -------------------------------------
         -------------------------------------
                UNSAFE MEMORY ACCESS API
@@ -1036,7 +1205,7 @@ public final class MemoryUtil {
      * @param bytes the number of bytes to set
      */
     public static void memSet(long ptr, int value, long bytes) {
-        if (Checks.DEBUG && (ptr == NULL || bytes < 0)) {
+        if (DEBUG && (ptr == NULL || bytes < 0)) {
             throw new IllegalArgumentException();
         }
 
@@ -1051,7 +1220,7 @@ public final class MemoryUtil {
      * @param bytes the number of bytes to copy
      */
     public static void memCopy(long src, long dst, long bytes) {
-        if (Checks.DEBUG && (src == NULL || dst == NULL || bytes < 0)) {
+        if (DEBUG && (src == NULL || dst == NULL || bytes < 0)) {
             throw new IllegalArgumentException();
         }
 
@@ -1431,7 +1600,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (Checks.DEBUG) {
+        if (DEBUG) {
             if ((address & 1L) != 0L) {
                 throw new IllegalArgumentException("The string address is not aligned.");
             }
