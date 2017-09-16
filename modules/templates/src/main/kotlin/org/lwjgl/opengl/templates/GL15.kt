@@ -187,6 +187,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
         )..const..void_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
@@ -203,6 +204,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
         )..const..void_p.IN("data", "a pointer to the new data that will be copied into the data store")
@@ -218,6 +220,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
         )..void_p.IN("data", "a pointer to the location where buffer object data is returned")
