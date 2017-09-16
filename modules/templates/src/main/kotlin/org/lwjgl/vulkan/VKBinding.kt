@@ -5,6 +5,7 @@
 package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
+import org.lwjgl.vulkan.VKFunctionType.*
 import org.lwjgl.vulkan.templates.*
 import java.io.*
 
@@ -24,21 +25,34 @@ private val CAPS_DEVICE = "VKCapabilitiesDevice"
 private val EXTENSION_TYPES = HashMap<String, String>()
 private val DEVICE_EXTENSIONS = ArrayList<NativeClass>()
 
-private val Func.addressType: Long get() {
-    return when {
-        name == "vkGetInstanceProcAddr" -> 0 // dlsym/GetProcAddress
+private enum class VKFunctionType {
+    PROC,
+    GLOBAL,
+    INSTANCE,
+    DEVICE
+}
+
+private val Func.type: VKFunctionType
+    get() = when {
+        name == "vkGetInstanceProcAddr" -> PROC // dlsym/GetProcAddress
         when (name) {
             "vkEnumerateInstanceExtensionProperties",
             "vkEnumerateInstanceLayerProperties",
             "vkCreateInstance" -> true
             else               -> false
-        }                               -> 1 // vkGetInstanceProcAddr: VK_NULL_HANDLE
+        }                               -> GLOBAL // vkGetInstanceProcAddr: VK_NULL_HANDLE
         parameters[0].nativeType.let {
             it === VkInstance || it === VkPhysicalDevice
-        }                               -> 2 // vkGetInstanceProcAddr: instance handle
-        else                            -> 3 // vkGetDeviceProcAddr  : device handle
+        }                               -> INSTANCE // vkGetInstanceProcAddr: instance handle
+        else                            -> DEVICE // vkGetDeviceProcAddr  : device handle
     }
-}
+
+private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
+
+private fun printPointer(func: Func) = if (func.has<DependsOn>())
+    "${func.get<DependsOn>().reference.let { if (EXTENSION_NAME.matches(it)) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+else
+    "caps.${func.name}"
 
 val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     VULKAN_PACKAGE,
@@ -57,22 +71,27 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     }
 
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        val hasInstanceFunctions = EXTENSION_TYPES[nativeClass.templateName] == "instance" || nativeClass.functions.any { it.addressType == 2L }
+        val hasInstanceFunctions = EXTENSION_TYPES[nativeClass.templateName] == "instance" || nativeClass.functions.any { it.type === INSTANCE }
+        val hasInstanceDependencies = hasInstanceFunctions && nativeClass.functions.any { it.type === INSTANCE && it.has<DependsOn>() }
         if (hasInstanceFunctions) {
-            println("\n${t}static boolean isAvailable($CAPS_INSTANCE caps) {")
+            println("\n${t}static boolean isAvailable($CAPS_INSTANCE caps${if (hasInstanceDependencies) ", java.util.Set<String> ext" else ""}) {")
             print("$t${t}return checkFunctions(")
-            nativeClass.printPointers(this, { "caps.${it.name}" }) {
-                it.addressType == 2L && !it.has<Macro>()
+            nativeClass.printPointers(this, ::printPointer) {
+                it.type === INSTANCE && !it.has<Macro>()
             }
             println(");")
             println("$t}")
         }
 
-        if (EXTENSION_TYPES[nativeClass.templateName] == "device" || (nativeClass.templateName.startsWith("VK") && nativeClass.functions.any { it.addressType == 3L })) {
-            println("\n${t}static boolean isAvailable(${if (hasInstanceFunctions) "$CAPS_INSTANCE capsInstance, " else ""}$CAPS_DEVICE caps) {")
-            print("$t${t}return ${if (hasInstanceFunctions) "isAvailable(capsInstance) && " else ""}checkFunctions(")
-            nativeClass.printPointers(this, { "caps.${it.name}" }) {
-                it.addressType == 3L && !it.has<Macro>()
+        val hasDeviceFunctions = EXTENSION_TYPES[nativeClass.templateName] == "device" || (nativeClass.templateName.startsWith("VK") && nativeClass.functions.any { it.type === DEVICE })
+        if (hasDeviceFunctions) {
+            val hasDeviceDependencies = nativeClass.functions.any { it.type === DEVICE && it.has<DependsOn>() }
+            print("\n${t}static boolean isAvailable(${if (hasInstanceFunctions) "$CAPS_INSTANCE capsInstance, " else ""}$CAPS_DEVICE caps")
+            if (hasInstanceDependencies || hasDeviceDependencies) print(", java.util.Set<String> ext")
+            println(") {")
+            print("$t${t}return ${if (hasInstanceFunctions) "isAvailable(capsInstance${if (hasInstanceDependencies) ", ext" else ""}) && " else ""}checkFunctions(")
+            nativeClass.printPointers(this, ::printPointer) {
+                it.type === DEVICE && !it.has<Macro>()
             }
             println(");")
             println("$t}")
@@ -99,7 +118,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
             else
                 o1.templateName.compareTo(o2.templateName, ignoreCase = true)
         }.filter {
-            EXTENSION_TYPES[it.templateName] ?: "instance" == "instance" || it.functions.any { it.addressType == 2L }
+            EXTENSION_TYPES[it.templateName] ?: "instance" == "instance" || it.functions.any { it.type === INSTANCE }
         }
 
         classes.asSequence()
@@ -108,7 +127,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
                 println("\n$t// ${it.templateName}")
                 println("${t}public final long")
                 println(it.functions.asSequence()
-                    .filter { it.addressType == 2L && !it.has<Macro>() }
+                    .filter { it.type === INSTANCE && !it.has<Macro>() }
                     .map(Func::name)
                     .joinToString(",\n$t$t", prefix = "$t$t", postfix = ";")
                 )
@@ -138,11 +157,16 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
                 val isInstanceExtension = EXTENSION_TYPES[it.templateName] ?: "instance" == "instance"
                 if (isInstanceExtension)
                     println("$t$t${t}supported = ext.contains(\"$capName\");")
-                println(it.functions.asSequence()
-                    .filter { it.addressType == 2L && !it.has<Macro>() }
+                print(it.functions.asSequence()
+                    .filter { it.type === INSTANCE && !it.has<Macro>() }
                     .map { "${it.name} = isSupported(provider, ${it.functionAddress}, ${if (isInstanceExtension) "supported" else "true"});" }.joinToString("\n$t$t$t", prefix = "$t$t$t"))
-                if (isInstanceExtension)
-                    println("$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
+                if (isInstanceExtension) {
+                    println("\n$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${
+                    if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className
+                    }.isAvailable(this${
+                    if (it.functions.any { it.has<DependsOn>() }) ", ext" else ""
+                    }));")
+                }
                 print("$t$t}")
             } else {
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
@@ -192,7 +216,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(VULKAN_PACKA
                 println("\n$t// ${it.templateName}")
                 println("${t}public final long")
                 println(it.functions.asSequence()
-                    .filter { it.addressType == 3L && !it.has<Macro>() }
+                    .filter { it.type === DEVICE && !it.has<Macro>() }
                     .map(Func::name)
                     .joinToString(",\n$t$t", prefix = "$t$t", postfix = ";")
                 )
@@ -219,11 +243,15 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(VULKAN_PACKA
                 println("\n$t$t{")
                 println("$t$t${t}supported = ext.contains(\"$capName\");")
                 println(it.functions.asSequence()
-                    .filter { it.addressType == 3L && !it.has<Macro>() }
+                    .filter { it.type === DEVICE && !it.has<Macro>() }
                     .map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n$t$t$t", prefix = "$t$t$t"))
-                println("$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(${
-                if (it.functions.any { it.addressType == 2L }) "capsInstance, " else ""
-                }this));")
+                println("$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${
+                if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className
+                }.isAvailable(${
+                if (it.functions.any { it.type === INSTANCE }) "capsInstance, " else ""
+                }this${
+                if (it.functions.any { it.has<DependsOn>() }) ", ext" else ""
+                }));")
                 print("$t$t}")
             } else {
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
