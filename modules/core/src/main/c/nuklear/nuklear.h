@@ -1,5 +1,5 @@
 /*
- Nuklear - 1.40.0 - public domain
+ Nuklear - 2.00.0 - public domain
  no warranty implied; use at your own risk.
  authored from 2015-2017 by Micha Mettke
 
@@ -17,7 +17,7 @@ VALUES:
     - Graphical user interface toolkit
     - Single header library
     - Written in C89 (a.k.a. ANSI C or ISO C90)
-    - Small codebase (~17kLOC)
+    - Small codebase (~18kLOC)
     - Focus on portability, efficiency and simplicity
     - No dependencies (not even the standard library if not wanted)
     - Fully skinnable and customizable
@@ -724,13 +724,12 @@ NK_API void nk_input_key(struct nk_context*, enum nk_keys, int down);
  *      @y must contain an integer describing mouse cursor y-position on click up/down
  *      @down must be 0 for key is up and 1 for key is down */
 NK_API void nk_input_button(struct nk_context*, enum nk_buttons, int x, int y, int down);
-/*  nk_input_char - Copies a single ASCII character into an internal text buffer
- *  This is basically a helper function to quickly push ASCII characters into
- *  nuklear. Note that you can only push up to NK_INPUT_MAX bytes into
- *  struct `nk_input` between `nk_input_begin` and `nk_input_end`.
+/*  nk_input_scroll - Copies the last mouse scroll value to nuklear. Is generally
+ *  a  scroll value. So does not have to come from mouse and could also originate
+ *  from touch for example.
  *  Parameters:
  *      @ctx must point to an previously initialized `nk_context` struct
- *      @c must be a single ASCII character preferable one that can be printed */
+ *      @val vector with both X- as well as Y-scroll value */
 NK_API void nk_input_scroll(struct nk_context*, struct nk_vec2 val);
 /*  nk_input_char - Copies a single ASCII character into an internal text buffer
  *  This is basically a helper function to quickly push ASCII characters into
@@ -1352,20 +1351,23 @@ NK_API int nk_item_is_any_active(struct nk_context*);
  *  IMPORTANT: only call this function between calls `nk_begin_xxx` and `nk_end`
  *  Parameters:
  *      @ctx must point to an previously initialized `nk_context` struct
+ *      @name of the window to modify both position and size
  *      @bounds points to a `nk_rect` struct with the new position and size of currently active window */
-NK_API void nk_window_set_bounds(struct nk_context*, struct nk_rect bounds);
+NK_API void nk_window_set_bounds(struct nk_context*, const char *name, struct nk_rect bounds);
 /*  nk_window_set_position - updates position of the currently processed window
  *  IMPORTANT: only call this function between calls `nk_begin_xxx` and `nk_end`
  *  Parameters:
  *      @ctx must point to an previously initialized `nk_context` struct
+ *      @name of the window to modify position of
  *      @pos points to a `nk_vec2` struct with the new position of currently active window */
-NK_API void nk_window_set_position(struct nk_context*, struct nk_vec2 pos);
+NK_API void nk_window_set_position(struct nk_context*, const char *name, struct nk_vec2 pos);
 /*  nk_window_set_size - updates size of the currently processed window
  *  IMPORTANT: only call this function between calls `nk_begin_xxx` and `nk_end`
  *  Parameters:
  *      @ctx must point to an previously initialized `nk_context` struct
- *      @bounds points to a `nk_vec2` struct with the new size of currently active window */
-NK_API void nk_window_set_size(struct nk_context*, struct nk_vec2);
+ *      @name of the window to modify size of
+ *      @size points to a `nk_vec2` struct with the new size of currently active window */
+NK_API void nk_window_set_size(struct nk_context*, const char *name, struct nk_vec2);
 /*  nk_window_set_focus - sets the window with given name as active
  *  Parameters:
  *      @ctx must point to an previously initialized `nk_context` struct
@@ -5067,7 +5069,7 @@ nk_iceilf(float x)
 {
     if (x >= 0) {
         int i = (int)x;
-        return i;
+        return (x > i) ? i+1: i;
     } else {
         int t = (int)x;
         float r = x - (float)t;
@@ -17373,8 +17375,12 @@ nk_clear(struct nk_context *ctx)
         /* remove hotness from hidden or closed windows*/
         if (((iter->flags & NK_WINDOW_HIDDEN) ||
             (iter->flags & NK_WINDOW_CLOSED)) &&
-            iter == ctx->active)
-            ctx->active = iter->next;
+            iter == ctx->active) {
+            ctx->active = iter->prev;
+            ctx->end = iter->prev;
+            if (ctx->active)
+                ctx->active->flags &= ~NK_WINDOW_ROM;
+        }
 
         /* free unused popup windows */
         if (iter->popup.win && iter->popup.win->seq != ctx->seq) {
@@ -18469,7 +18475,7 @@ nk_insert_window(struct nk_context *ctx, struct nk_window *win,
         ctx->active = ctx->end;
         ctx->end->flags &= ~(nk_flags)NK_WINDOW_ROM;
     } else {
-        ctx->end->flags |= NK_WINDOW_ROM;
+        /*ctx->end->flags |= NK_WINDOW_ROM;*/
         ctx->begin->prev = win;
         win->next = ctx->begin;
         win->prev = 0;
@@ -18575,8 +18581,10 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
          *      provided demo backends). */
         NK_ASSERT(win->seq != ctx->seq);
         win->seq = ctx->seq;
-        if (!ctx->active && !(win->flags & NK_WINDOW_HIDDEN))
+        if (!ctx->active && !(win->flags & NK_WINDOW_HIDDEN)) {
             ctx->active = win;
+            ctx->end = win;
+        }
     }
     if (win->flags & NK_WINDOW_HIDDEN) {
         ctx->current = win;
@@ -18588,7 +18596,7 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
     if (!(win->flags & NK_WINDOW_HIDDEN) && !(win->flags & NK_WINDOW_NO_INPUT))
     {
         int inpanel, ishovered;
-        const struct nk_window *iter = win;
+        struct nk_window *iter = win;
         float h = ctx->style.font->height + 2.0f * style->window.header.padding.y +
             (2.0f * style->window.header.label_padding.y);
         struct nk_rect win_bounds = (!(win->flags & NK_WINDOW_MINIMIZED))?
@@ -18606,7 +18614,7 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
                     iter->bounds: nk_rect(iter->bounds.x, iter->bounds.y, iter->bounds.w, h);
                 if (NK_INTERSECT(win_bounds.x, win_bounds.y, win_bounds.w, win_bounds.h,
                     iter_bounds.x, iter_bounds.y, iter_bounds.w, iter_bounds.h) &&
-                    (!(iter->flags & NK_WINDOW_HIDDEN) || !(iter->flags & NK_WINDOW_BACKGROUND)))
+                    (!(iter->flags & NK_WINDOW_HIDDEN)))
                     break;
 
                 if (iter->popup.win && iter->popup.active && !(iter->flags & NK_WINDOW_HIDDEN) &&
@@ -18619,7 +18627,7 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
         }
 
         /* activate window if clicked */
-        if (iter && inpanel && (win != ctx->end) && !(iter->flags & NK_WINDOW_BACKGROUND)) {
+        if (iter && inpanel && (win != ctx->end)) {
             iter = win->next;
             while (iter) {
                 /* try to find a panel with higher priority in the same position */
@@ -18637,19 +18645,30 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
                 iter = iter->next;
             }
         }
-
-        if (!iter && ctx->end != win) {
-            if (!(win->flags & NK_WINDOW_BACKGROUND)) {
+        if (iter && !(win->flags & NK_WINDOW_ROM) && (win->flags & NK_WINDOW_BACKGROUND)) {
+            win->flags |= (nk_flags)NK_WINDOW_ROM;
+            iter->flags &= ~(nk_flags)NK_WINDOW_ROM;
+            ctx->active = iter;
+            if (!(iter->flags & NK_WINDOW_BACKGROUND)) {
                 /* current window is active in that position so transfer to top
                  * at the highest priority in stack */
-                nk_remove_window(ctx, win);
-                nk_insert_window(ctx, win, NK_INSERT_BACK);
+                nk_remove_window(ctx, iter);
+                nk_insert_window(ctx, iter, NK_INSERT_BACK);
             }
-            win->flags &= ~(nk_flags)NK_WINDOW_ROM;
-            ctx->active = win;
+        } else {
+            if (!iter && ctx->end != win) {
+                if (!(win->flags & NK_WINDOW_BACKGROUND)) {
+                    /* current window is active in that position so transfer to top
+                     * at the highest priority in stack */
+                    nk_remove_window(ctx, win);
+                    nk_insert_window(ctx, win, NK_INSERT_BACK);
+                }
+                win->flags &= ~(nk_flags)NK_WINDOW_ROM;
+                ctx->active = win;
+            }
+            if (ctx->end != win && !(win->flags & NK_WINDOW_BACKGROUND))
+                win->flags |= NK_WINDOW_ROM;
         }
-        if (ctx->end != win && !(win->flags & NK_WINDOW_BACKGROUND))
-            win->flags |= NK_WINDOW_ROM;
     }
 
     win->layout = (struct nk_panel*)nk_create_panel(ctx);
@@ -18814,6 +18833,10 @@ nk_window_is_any_hovered(struct nk_context *ctx)
     while (iter) {
         /* check if window is being hovered */
         if(!(iter->flags & NK_WINDOW_HIDDEN)) {
+            /* check if window popup is being hovered */
+            if (iter->popup.active && iter->popup.win && nk_input_is_mouse_hovering_rect(&ctx->input, iter->popup.win->bounds))
+                return 1;
+
             if (iter->flags & NK_WINDOW_MINIMIZED) {
                 struct nk_rect header = iter->bounds;
                 header.h = ctx->style.font->height + 2 * ctx->style.window.header.padding.y;
@@ -18823,9 +18846,6 @@ nk_window_is_any_hovered(struct nk_context *ctx)
                 return 1;
             }
         }
-        /* check if window popup is being hovered */
-        if (iter->popup.active && iter->popup.win && nk_input_is_mouse_hovering_rect(&ctx->input, iter->popup.win->bounds))
-            return 1;
         iter = iter->next;
     }
     return 0;
@@ -18928,29 +18948,40 @@ nk_window_close(struct nk_context *ctx, const char *name)
 }
 
 NK_API void
-nk_window_set_bounds(struct nk_context *ctx, struct nk_rect bounds)
+nk_window_set_bounds(struct nk_context *ctx,
+    const char *name, struct nk_rect bounds)
 {
-    NK_ASSERT(ctx); NK_ASSERT(ctx->current);
-    if (!ctx || !ctx->current) return;
-    ctx->current->bounds = bounds;
+    struct nk_window *win;
+    NK_ASSERT(ctx);
+    if (!ctx) return;
+    win = nk_window_find(ctx, name);
+    if (!win) return;
+    NK_ASSERT(ctx->current != win && "You cannot update a currently in procecss window");
+    win->bounds = bounds;
 }
 
 NK_API void
-nk_window_set_position(struct nk_context *ctx, struct nk_vec2 pos)
+nk_window_set_position(struct nk_context *ctx,
+    const char *name, struct nk_vec2 pos)
 {
-    NK_ASSERT(ctx); NK_ASSERT(ctx->current);
-    if (!ctx || !ctx->current) return;
-    ctx->current->bounds.x = pos.x;
-    ctx->current->bounds.y = pos.y;
+    struct nk_rect bounds;
+    bounds.x = pos.x;
+    bounds.y = pos.y;
+    bounds.w = ctx->current->bounds.w;
+    bounds.h = ctx->current->bounds.h;
+    nk_window_set_bounds(ctx, name, bounds);
 }
 
 NK_API void
-nk_window_set_size(struct nk_context *ctx, struct nk_vec2 size)
+nk_window_set_size(struct nk_context *ctx,
+    const char *name, struct nk_vec2 size)
 {
-    NK_ASSERT(ctx); NK_ASSERT(ctx->current);
-    if (!ctx || !ctx->current) return;
-    ctx->current->bounds.w = size.x;
-    ctx->current->bounds.h = size.y;
+    struct nk_rect bounds;
+    bounds.x = ctx->current->bounds.x;
+    bounds.y = ctx->current->bounds.y;
+    bounds.w = size.x;
+    bounds.h = size.y;
+    nk_window_set_bounds(ctx, name, bounds);
 }
 
 NK_API void
@@ -21283,7 +21314,9 @@ nk_edit_buffer(struct nk_context *ctx, nk_flags flags,
         }
         if (flags & NK_EDIT_CLIPBOARD)
             edit->clip = ctx->clip;
-    }
+        edit->active = win->edit.active;
+    } else edit->active = nk_false;
+    edit->mode = win->edit.mode;
 
     filter = (!filter) ? nk_filter_default: filter;
     prev_state = (unsigned char)edit->active;

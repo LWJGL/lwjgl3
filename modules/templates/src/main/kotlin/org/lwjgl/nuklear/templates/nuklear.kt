@@ -927,10 +927,11 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "window_set_bounds",
-            "Updates position and size of the currently processed window.",
+            "Updates position and size of the specified window.",
 
             ctx,
-            nk_rect.IN("bounds", "")
+            const..charUTF8_p.IN("name", "name of the window to modify both position and size"),
+            nk_rect.IN("bounds", "points to a {@code nk_rect} struct with the new position and size of the specified window")
         )
 
         void(
@@ -938,23 +939,25 @@ nk_style_pop_vec2(ctx);""")}
             "Updates position of the currently process window.",
 
             ctx,
-            nk_vec2.IN("position", "")
+            const..charUTF8_p.IN("name", "name of the window to modify position of"),
+            nk_vec2.IN("position", "points to a {@code nk_vec2} struct with the new position of currently active window")
         )
 
         void(
             "window_set_size",
-            "Updates the size of the currently processed window.",
+            "Updates the size of the specified window.",
 
             ctx,
-            nk_vec2.IN("size", "")
+            const..charUTF8_p.IN("name", "name of the window to modify size of"),
+            nk_vec2.IN("size", "points to a {@code nk_vec2} struct with the new size of currently active window")
         )
 
         void(
             "window_set_focus",
-            "Set the currently processed window as active window.",
+            "Sets the specified window as active window.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            const..charUTF8_p.IN("name", "name of the window to be set active")
         )
 
         void(
@@ -2636,10 +2639,13 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "input_scroll",
-            "Mirrors mouse scroll values.",
+            """
+            Copies the last mouse scroll value to nuklear. Is generally a  scroll value. So does not have to come from mouse and could also originate from
+            touch for example.
+            """,
 
             ctx,
-            nk_vec2.IN("val", "")
+            nk_vec2.IN("val", "vector with both X- as well as Y-scroll value")
         )
 
         void(
