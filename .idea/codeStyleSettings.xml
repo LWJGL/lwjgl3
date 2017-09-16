@@ -22,9 +22,6 @@
           <option name="NAME_COUNT_TO_USE_STAR_IMPORT" value="1" />
           <option name="NAME_COUNT_TO_USE_STAR_IMPORT_FOR_MEMBERS" value="1" />
         </JetCodeStyleSettings>
-        <editorconfig>
-          <option name="ENABLED" value="false" />
-        </editorconfig>
         <codeStyleSettings language="JAVA">
           <option name="BLANK_LINES_AROUND_CLASS" value="0" />
           <option name="BLANK_LINES_AROUND_METHOD" value="0" />
