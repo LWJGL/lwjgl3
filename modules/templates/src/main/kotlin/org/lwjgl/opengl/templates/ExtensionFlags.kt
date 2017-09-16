@@ -923,6 +923,17 @@ val AMD_shader_explicit_vertex_parameter = EXT_FLAG.nativeClassGL("AMD_shader_ex
         Requires ${GL20.core} or ${ARB_shader_objects.link}.
         """
 }
+val AMD_shader_image_load_store_lod = EXT_FLAG.nativeClassGL("AMD_shader_image_load_store_lod", postfix = AMD) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension was developed based on the ${ARB_shader_image_load_store.link} extension to allow implementations supporting loads and stores on mipmap
+        texture images.
+
+        Requires ${GL40.core} and GLSL 4.00
+        """
+}
 val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_export", postfix = AMD) {
     documentation =
         """

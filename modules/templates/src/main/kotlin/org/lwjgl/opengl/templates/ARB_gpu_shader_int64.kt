@@ -40,7 +40,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
         "UNSIGNED_INT64_VEC4_ARB"..0x8FF7
     )
 
-    var args = arrayOf(
+    val args = arrayOf(
         GLuint.IN("program", "the program object"),
         GLint.IN("location", "the location of the uniform variable to be modified"),
         GLint64.IN("x", "the uniform x value"),
