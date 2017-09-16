@@ -41,7 +41,7 @@ configuration options.
 As of version `3.1.0`, LWJGL is distributed as a set of modules. Only the
 core module is required and all bindings are optional (but some bindings
 depend on other bindings). The easiest way to download LWJGL is to use the
-[build configurator](https://www.lwjgl.org/download) on the website.
+[build configurator](https://www.lwjgl.org/customize) on the website.
 
 The build configurator generates **Maven & Gradle** declarations that can be
 added to existing projects. This is the easiest way to use LWJGL while
