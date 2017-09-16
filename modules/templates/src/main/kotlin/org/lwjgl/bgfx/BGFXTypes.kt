@@ -110,6 +110,15 @@ val bgfx_hmd_t_p = struct(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mu
     uint8_t.member("flags", "status flags")
 }.p
 
+val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx_view_stats_t", mutable = false) {
+    documentation = "View stats."
+
+    charASCII.array("name", "view name", size = 256)
+    uint8_t.member("view", "view id")
+    uint64_t.member("cpuTimeElapsed", "CPU (submit) time elapsed")
+    uint64_t.member("gpuTimeElapsed", "GPU time elapsed")
+}
+
 val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
     documentation = "Renderer statistics data."
 
@@ -132,6 +141,9 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint16_t.member("height", "backbuffer height in pixels")
     uint16_t.member("textWidth", "debug text width in characters")
     uint16_t.member("textHeight", "debug text height in characters")
+
+    AutoSize("viewStats")..uint16_t.member("numViews", "number of view stats")
+    bgfx_view_stats_t.array("viewStats", "view stats", size = 256)
 }.p
 
 val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {

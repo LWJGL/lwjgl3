@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."46"
+        "API_VERSION".."48"
     )
 
     ShortConstant(
@@ -218,14 +218,21 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         """
     ).javaDocLinks
 
-    val DebugFlags = IntConstant(
+    val DebugFlags = EnumConstant(
         "Debug",
 
-        "DEBUG_NONE"..0x00000000,
-        "DEBUG_WIREFRAME"..0x00000001,
-        "DEBUG_IFH"..0x00000002,
-        "DEBUG_STATS"..0x00000004,
-        "DEBUG_TEXT"..0x00000008
+        "DEBUG_NONE".enum("", 0x00000000),
+        "DEBUG_WIREFRAME".enum("Wireframe rendering. All rendering primitives will be rendered as lines.", 0x00000001),
+        "DEBUG_IFH".enum(
+            """
+            Infinitely fast hardware. When this flag is set all rendering calls will be skipped. It's useful when profiling to quickly assess bottleneck
+            between CPU and GPU.
+            """,
+            0x00000002
+        ),
+        "DEBUG_STATS".enum("Display internal statistics.", 0x00000004),
+        "DEBUG_TEXT".enum("Display debug text.", 0x00000008),
+        "DEBUG_PROFILER".enum("Enabled profiler.", 0x00000010)
     ).javaDocLinks
 
     val BufferFlags = ShortConstant(
@@ -1312,6 +1319,14 @@ RGBA16S
     )
 
     void(
+        "set_shader_name",
+        "Sets shader debug name.",
+
+        bgfx_shader_handle_t.IN("_handle", "shader handle"),
+        const..charUTF8_p.IN("_name", "shader name")
+    )
+
+    void(
         "destroy_shader",
         "Destroys shader. Once program is created with shader it is safe to destroy shader.",
 
@@ -1530,6 +1545,14 @@ RGBA16S
         MapToInt..uint8_t.IN("_mip", "mip level"),
 
         returnDoc = "frame number when the result will be available"
+    )
+
+    void(
+        "set_texture_name",
+        "Sets texture debug name.",
+
+        bgfx_texture_handle_t.IN("_handle", "texture handle"),
+        const..charUTF8_p.IN("_name", "texture name")
     )
 
     void(
@@ -1991,7 +2014,11 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_transient_index_buffer",
-        "Sets index buffer for draw primitive.",
+        """
+        Sets index buffer for draw primitive.
+
+        ${note("{@code _tib} pointer after this call is invalid.")}
+        """,
 
         const..bgfx_transient_index_buffer_t_p.IN("_tib", "transient index buffer"),
         uint32_t.IN("_firstIndex", "first index to render"),
@@ -2020,7 +2047,11 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_transient_vertex_buffer",
-        "Sets vertex buffer for draw primitive.",
+        """
+        Sets vertex buffer for draw primitive.
+
+        ${note("{@code _tvb} pointer after this call is invalid.")}
+        """,
 
         MapToInt..uint8_t.IN("_stream", "vertex stream"),
         const..bgfx_transient_vertex_buffer_t_p.IN("_tvb", "transient vertex buffer"),
@@ -2030,10 +2061,14 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_instance_data_buffer",
-        "Sets instance data buffer for draw primitive.",
+        """
+        Sets instance data buffer for draw primitive.
 
-        const..bgfx_instance_data_buffer_t_p.IN("_idb", "instance data buffer"),
-        uint32_t.IN("_num", "number of instances to render")
+        ${note("{@code _idb} pointer after this call is invalid.")}
+        """,
+
+        const..bgfx_instance_data_buffer_t_p.IN("_idb", "transient instance data buffer"),
+        uint32_t.IN("_num", "number of data instances")
     )
 
     void(
@@ -2041,8 +2076,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Set instance data buffer for draw primitive.",
 
         bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
-        uint32_t.IN("_startVertex", "first vertex to render"),
-        uint32_t.IN("_numVertices", "number of vertices to render")
+        uint32_t.IN("_start", "first instance data"),
+        uint32_t.IN("_num", "number of data instances")
     )
 
     void(
@@ -2050,8 +2085,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Set instance data buffer for draw primitive.",
 
         bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
-        uint32_t.IN("_startVertex", "first vertex to render"),
-        uint32_t.IN("_numVertices", "number of vertices to render")
+        uint32_t.IN("_start", "first instance data"),
+        uint32_t.IN("_num", "number of data instances")
     )
 
     void(
