@@ -48,14 +48,31 @@ class AutoSizeFactor(
     val expression: String
 ) {
     companion object {
+        val OPERAND = "\$operand"
+
         fun div(expression: String) = AutoSizeFactor("/", "*", expression)
         fun mul(expression: String) = AutoSizeFactor("*", "/", expression)
         fun shl(expression: String) = AutoSizeFactor("<<", ">>", expression)
         fun shr(expression: String) = AutoSizeFactor(">>", "<<", expression)
+
+        // Normal factors: operand operator expression => operand operatorInv expression
+        // This enables: operator(operand) => operatorInv(operand)
+        // Usage example: AutoSizeFactor.custom { "op($it)" to "opInv($it)" }
+        fun custom(operators: (String)->Pair<String, String>): AutoSizeFactor {
+            val (operator, operatorInv) = operators(OPERAND)
+            return AutoSizeFactor(operator, operatorInv, OPERAND)
+        }
     }
 
-    fun scale(operand: String) = "$operand $operator $expression"
-    fun scaleInv(operand: String) = "$operand $operatorInv $expression"
+    fun scale(operand: String) = if (expression === OPERAND)
+        operator.replace(OPERAND, operand)
+    else
+        "$operand $operator $expression"
+
+    fun scaleInv(operand: String) = if (expression === OPERAND)
+        operatorInv.replace(OPERAND, operand)
+    else
+        "$operand $operatorInv $expression"
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
