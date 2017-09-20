@@ -611,7 +611,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         kernel dereferences that pointer, then a pointer to B must either be passed as an argument in the call to that kernel or it must be made available to
         the kernel using {@code SetKernelExecInfo}. For example, we might pass extra SVM pointers as follows:
 
-        ${code("clSetKernelExecInfo(kernel, CL_KERNEL_EXEC_INFO_SVM_PTRS, num_ptrs * sizeof(void *), extra_svm_ptr_list);")}
+        {@code clSetKernelExecInfo(kernel, CL_KERNEL_EXEC_INFO_SVM_PTRS, num_ptrs * sizeof(void *), extra_svm_ptr_list);}
 
         Here {@code num_ptrs} specifies the number of additional SVM pointers while {@code extra_svm_ptr_list} specifies a pointer to memory containing those
         SVM pointers. When calling {@code SetKernelExecInfo} with #KERNEL_EXEC_INFO_SVM_PTRS to specify pointers to non-argument SVM buffers as extra

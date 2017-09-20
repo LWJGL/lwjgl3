@@ -14,13 +14,13 @@ val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(packageName = GLFW_PACKAGE, na
     id(
         "GetNSGLContext",
         """
-        Returns the ${code("NSOpenGLContext")} of the specified GLFW window.
+        Returns the {@code NSOpenGLContext} of the specified GLFW window.
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
         GLFWwindow.IN("window", "the GLFW window"),
-        returnDoc = "The ${code("NSOpenGLContext")} of the specified window, or nil if an error occurred.",
+        returnDoc = "The {@code NSOpenGLContext} of the specified window, or nil if an error occurred.",
         since = "version 3.0"
     )
 }

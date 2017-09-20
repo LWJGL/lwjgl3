@@ -459,7 +459,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         """
         Returns the function pointer that would be called if a particular message were sent to an instance of a class.
 
-        class_getMethodImplementation may be faster than ${code("method_getImplementation(class_getInstanceMethod(cls, name))")}.
+        class_getMethodImplementation may be faster than {@code method_getImplementation(class_getInstanceMethod(cls, name))}.
 
         The function pointer returned may be a function internal to the runtime instead of an actual method implementation. For example, if instances of the
         class do not respond to the selector, the function pointer returned will be part of the runtime's message forwarding machinery.
@@ -469,7 +469,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         SEL.IN("name", "a selector"),
 
         returnDoc =
-        "the function pointer that would be called if ${code("[object name]")} were called with an instance of the class, or #NULL if {@code cls} is Nil"
+        "the function pointer that would be called if {@code [object name]} were called with an instance of the class, or #NULL if {@code cls} is Nil"
     )
 
     // class_getMethodImplementation_stret
@@ -678,8 +678,8 @@ void myMethodIMP(id self, SEL _cmd)
 
         The class must not be a metaclass. Adding an instance variable to a metaclass is not supported.
 
-        The instance variable's minimum alignment in bytes is ${code("1<<align")}. The minimum alignment of an instance variable depends on the ivar's type and
-        the machine architecture. For variables of any pointer type, pass ${code("log2(sizeof(pointer_type))")}.
+        The instance variable's minimum alignment in bytes is {@code 1<<align}. The minimum alignment of an instance variable depends on the ivar's type and
+        the machine architecture. For variables of any pointer type, pass {@code log2(sizeof(pointer_type))}.
         """,
 
         Class.IN("cls", ""),
@@ -766,7 +766,7 @@ void myMethodIMP(id self, SEL _cmd)
         Check("class_getInstanceSize(cls)", debug = true)..nullable..void_p.IN(
             "bytes",
             """
-            the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least ${code("class_getInstanceSize(cls)")}
+            the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least {@code class_getInstanceSize(cls)}
             bytes of well-aligned, zero-filled memory.
             """
         ),
@@ -798,7 +798,7 @@ void myMethodIMP(id self, SEL _cmd)
         """
         Creates a new class and metaclass.
 
-        You can get a pointer to the new metaclass by calling ${code("object_getClass(newClass)")}.
+        You can get a pointer to the new metaclass by calling {@code object_getClass(newClass)}.
 
         To create a new class, start by calling objc_allocateClassPair. Then set the class's attributes with functions like #class_addMethod() and
         #class_addIvar(). When you are done building the class, call #objc_registerClassPair(). The new class is now ready for use.
@@ -838,7 +838,7 @@ void myMethodIMP(id self, SEL _cmd)
         """
         Returns the name of a method.
 
-        To get the method name as a C string, call ${code("sel_getName(method_getName(method))")}.
+        To get the method name as a C string, call {@code sel_getName(method_getName(method))}.
         """,
 
         Method.IN("m", "the method to inspect"),
@@ -901,7 +901,7 @@ void myMethodIMP(id self, SEL _cmd)
         """
         Returns by reference a string describing a method's return type.
 
-        The method's return type string is copied to {@code dst}. {@code dst} is filled as if ${code("strncpy(dst, parameter_type, dst_len)")} were called.
+        The method's return type string is copied to {@code dst}. {@code dst} is filled as if {@code strncpy(dst, parameter_type, dst_len)} were called.
         """,
 
         Method.IN("m", "the method to inspect"),
@@ -914,8 +914,8 @@ void myMethodIMP(id self, SEL _cmd)
         """
         Returns by reference a string describing a single parameter type of a method.
 
-        The parameter type string is copied to {@code dst}. {@code dst} is filled as if ${code("strncpy(dst, parameter_type, dst_len)")} were called. If the
-        method contains no parameter with that index, {@code dst} is filled as if ${code("""strncpy(dst, "", dst_len)""")} were called.
+        The parameter type string is copied to {@code dst}. {@code dst} is filled as if {@code strncpy(dst, parameter_type, dst_len)} were called. If the
+        method contains no parameter with that index, {@code dst} is filled as if {@code strncpy(dst, "", dst_len)} were called.
         """,
 
         Method.IN("m", "the method you want to inquire about"),
@@ -1057,7 +1057,7 @@ void myMethodIMP(id self, SEL _cmd)
 
         One protocol can incorporate other protocols using the same syntax that classes use to adopt a protocol:
 
-        ${code("""@protocol ProtocolName < protocol list >""")}
+        {@code @protocol ProtocolName < protocol list >}
 
         All the protocols listed between angle brackets are considered part of the {@code ProtocolName} protocol.
         """,
@@ -1101,7 +1101,7 @@ void myMethodIMP(id self, SEL _cmd)
         an objc_method_description structure that describes the method specified by {@code aSel}, {@code isRequiredMethod}, and {@code isInstanceMethod} for
         the protocol {@code p}.
 
-        If the protocol does not contain the specified method, returns an objc_method_description structure with the value ${code("{NULL, NULL}")}.
+        If the protocol does not contain the specified method, returns an objc_method_description structure with the value {@code {NULL, NULL}}.
         """
     )
 
@@ -1380,8 +1380,8 @@ void myMethodIMP(id self, SEL _cmd)
         id.IN(
             "block",
             """
-            the block that implements this method. The signature of {@code block} should be ${code("method_return_type ^(id self, self, method_args …)")}. The
-            selector of the method is not available to {@code block}. {@code block} is copied with ${code("Block_copy()")}.
+            the block that implements this method. The signature of {@code block} should be {@code method_return_type ^(id self, self, method_args …)}. The
+            selector of the method is not available to {@code block}. {@code block} is copied with {@code Block_copy()}.
             """
         ),
 

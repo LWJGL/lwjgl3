@@ -14,27 +14,27 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(packageName = GLFW_PACKAGE, 
     CGDirectDisplayID(
         "GetCocoaMonitor",
         """
-        Returns the ${code("CGDirectDisplayID")} of the specified monitor.
+        Returns the {@code CGDirectDisplayID} of the specified monitor.
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
         GLFWmonitor.IN("monitor", "the GLFW monitor"),
 
-        returnDoc = "The ${code("CGDirectDisplayID")} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.",
+        returnDoc = "The {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.",
         since = "version 3.1"
     )
 
     id(
         "GetCocoaWindow",
         """
-        Returns the ${code("NSWindow")} of the specified GLFW window.
+        Returns the {@code NSWindow} of the specified GLFW window.
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
         GLFWwindow.IN("window", "the GLFW window"),
-        returnDoc = "The ${code("NSWindow")} of the specified window, or nil if an error occurred.",
+        returnDoc = "The {@code NSWindow} of the specified window, or nil if an error occurred.",
         since = "version 3.0"
     )
 }

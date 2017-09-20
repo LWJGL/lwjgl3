@@ -21,7 +21,7 @@ val ARB_transform_feedback2 = "ARBTransformFeedback2".nativeClassGL("ARB_transfo
         object. When transform feedback is resumed, additional primitives are captured and appended to previously captured primitives for the object.
 
         Additionally, this extension provides the ability to draw primitives captured in transform feedback mode without querying the captured primitive count.
-        The command #DrawTransformFeedback() is equivalent to ${code("glDrawArrays(&lt;mode&gt;, 0, &lt;count&gt;)")}, where {@code count} is the number of
+        The command #DrawTransformFeedback() is equivalent to {@code glDrawArrays(<mode>, 0, <count>)}, where {@code count} is the number of
         vertices captured to buffer objects during the last transform feedback capture operation on the transform feedback object used. This draw operation
         only provides a vertex count -- it does not automatically set up vertex array state or vertex buffer object bindings, which must be done separately by
         the application.

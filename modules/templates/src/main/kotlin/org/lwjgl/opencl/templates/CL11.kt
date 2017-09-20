@@ -208,14 +208,14 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         "buffer_offset",
         """
         the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
-        should be 0. The offset in bytes is computed as ${code("buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]")}.
+        should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
         """
     )
     val BufferRectHostOffset = Check(3)..const..size_t_p.IN(
         "host_offset",
         """
         the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
-        should be 0. The offset in bytes is computed as ${code("host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]")}.
+        should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
         """
     )
     val BufferRectRegion = Check(3)..const..size_t_p.IN(
@@ -439,14 +439,14 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             "src_origin",
             """
             the {@code (x, y, z)} offset in the memory region associated with {@code src_buffer}. For a 2D rectangle region, the z value given by {@code src_origin[2]}
-            should be 0. The offset in bytes is computed as ${code("src_origin[2] * src_slice_pitch + src_origin[1] * src_row_pitch + src_origin[0]")}.
+            should be 0. The offset in bytes is computed as {@code src_origin[2] * src_slice_pitch + src_origin[1] * src_row_pitch + src_origin[0]}.
             """
         ),
         Check(3)..size_t_p.IN(
             "dst_origin",
             """
             the {@code (x, y, z)} offset in the memory region associated with {@code dst_buffer}. For a 2D rectangle region, the z value given by {@code dst_origin[2]}
-            should be 0. The offset in bytes is computed as ${code("dst_origin[2] * dst_slice_pitch + dst_origin[1] * dst_row_pitch + dst_origin[0]")}.
+            should be 0. The offset in bytes is computed as {@code dst_origin[2] * dst_slice_pitch + dst_origin[1] * dst_row_pitch + dst_origin[0]}.
             """
         ),
         Check(3)..size_t_p.IN(

@@ -23,7 +23,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
         """
         Accepted by the {@code properties} argument to #CreateContext().
 
-        Property value: ${code("void printf_callback(const char *buffer, size_t len, size_t complete, void *user_data)")}
+        Property value: {@code void printf_callback(const char *buffer, size_t len, size_t complete, void *user_data)}
 
         Specifies a pointer to function to be invoked when printf data is available. Upon invocation the arguments are set to the following values.
         ${ul(

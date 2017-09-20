@@ -29,7 +29,7 @@ val NV_shader_buffer_load = "NVShaderBufferLoad".nativeClassGL("NV_shader_buffer
         dereferences in the shading language.
 
         As a very simple example, imagine packing a group of similar objects' constants into a single buffer object and pointing your program at object
-        &lt;i&gt; by setting ${code("glVertexAttribI1iEXT(attrLoc, i);")} and using a shader as such:
+        &lt;i&gt; by setting {@code glVertexAttribI1iEXT(attrLoc, i);} and using a shader as such:
         ${codeBlock("""
 struct MyObjectType {
     mat4x4 modelView;

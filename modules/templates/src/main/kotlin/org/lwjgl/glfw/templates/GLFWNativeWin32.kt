@@ -40,13 +40,13 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, 
     HWND(
         "GetWin32Window",
         """
-        Returns the ${code("HWND")} of the specified window.
+        Returns the {@code HWND} of the specified window.
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
         GLFWwindow.IN("window", "the GLFW window"),
-        returnDoc = "The ${code("HWND")} of the specified window, or #NULL if an error occurred.",
+        returnDoc = "The {@code HWND} of the specified window, or #NULL if an error occurred.",
         since = "version 3.0"
     )
 }

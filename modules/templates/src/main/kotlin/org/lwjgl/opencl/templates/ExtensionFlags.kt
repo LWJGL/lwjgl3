@@ -41,7 +41,7 @@ val khr_device_enqueue_local_arg_types = EXT_FLAG.nativeClassCL("khr_device_enqu
         When true, the $extensionName extension is supported.
 
         This extension allows arguments to blocks passed to enqueue_kernel functions to be declared as a pointer to any type (built-in or user-defined) in
-        local memory instead of just ${code("local void *")}.
+        local memory instead of just {@code local void *}.
         """
 }
 
@@ -112,10 +112,10 @@ val khr_select_fprounding_mode = EXT_FLAG.nativeClassCL("khr_select_fprounding_m
 
         This extension adds support for specifying the rounding mode for an instruction or group of instructions in the program source.
 
-        The appropriate rounding mode can be specified using ${code("\\#pragma OPENCL SELECT_ROUNDING_MODE")} rounding-mode in the program source.
+        The appropriate rounding mode can be specified using {@code \#pragma OPENCL SELECT_ROUNDING_MODE} rounding-mode in the program source.
 
-        The ${code("\\#pragma OPENCL SELECT_ROUNDING_MODE")} sets the rounding mode for all instructions that operate on floating-point types (scalar or vector
-        types) or produce floating-point values that follow this pragma in the program source until the next ${code("\\#pragma OPENCL SELECT_ROUNDING_MODE")} is
+        The {@code \#pragma OPENCL SELECT_ROUNDING_MODE} sets the rounding mode for all instructions that operate on floating-point types (scalar or vector
+        types) or produce floating-point values that follow this pragma in the program source until the next {@code \#pragma OPENCL SELECT_ROUNDING_MODE} is
         encountered. Note that the rounding mode specified for a block of code is known at compile time. Except where otherwise documented, the callee
         functions do not inherit the rounding mode of the caller function.
 
@@ -478,7 +478,7 @@ val amd_printf = EXT_FLAG.nativeClassCL("amd_printf", AMD) {
         """
         When true, the $extensionLink extension is supported.
 
-        This extension adds the built-in function ${code("printf(__constant char * restrict format, …);")}
+        This extension adds the built-in function {@code printf(__constant char * restrict format, …);}
 
         This function writes output to the stdout stream associated with the host application. The format string is a character sequence that:
         ${ul(
@@ -622,7 +622,7 @@ val nv_pragma_unroll = EXT_FLAG.nativeClassCL("nv_pragma_unroll", NV) {
 
         A user may specify that a loop in the source program be unrolled. This is done via a pragma. The syntax of this pragma is as follows
 
-        ${code("\\#pragma unroll [unroll-factor]")}
+        {@code \#pragma unroll [unroll-factor]}
 
         The pragma unroll may optionally specify an unroll factor. The pragma must be placed immediately before the loop and only applies to that loop.
 

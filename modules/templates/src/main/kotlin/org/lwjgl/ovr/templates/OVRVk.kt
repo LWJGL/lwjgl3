@@ -26,7 +26,7 @@ val OVRVk = "OVRVk".dependsOn(Binding.VULKAN)?.nativeClass(packageName = OVR_PAC
         """
         Finds {@code VkPhysicalDevice} matching {@code ovrGraphicsLuid}.
 
-        ${code(
+        ${note(
             """
             This function enumerates the current physical devices and returns the one matching the {@code luid}. It must be called at least once prior to any
             #CreateTextureSwapChainVk() or #CreateMirrorTextureWithOptionsVk() calls, and the instance must remain valid for the lifetime of the returned
@@ -48,7 +48,7 @@ val OVRVk = "OVRVk".dependsOn(Binding.VULKAN)?.nativeClass(packageName = OVR_PAC
         """
         Selects {@code VkQueue} to block on till rendering is complete.
 
-        ${code(
+        ${note(
             """
             The queue may be changed at any time but only the value at the time #SubmitFrame() is called will be used. {@code ovr_SetSynchonizationQueueVk}
             must be called with a valid {@code VkQueue} created on the same {@code VkDevice} the texture sets were created on prior to the first call to

@@ -14,13 +14,13 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(packageName = GLFW_PACKAGE, nati
     HGLRC(
         "GetWGLContext",
         """
-        Returns the ${code("HGLRC")} of the specified window.
+        Returns the {@code HGLRC} of the specified window.
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
         GLFWwindow.IN("window", "the GLFW window"),
-        returnDoc = "The ${code("HGLRC")} of the specified window, or #NULL if an error occurred.",
+        returnDoc = "The {@code HGLRC} of the specified window, or #NULL if an error occurred.",
         since = "version 3.0"
     )
 }

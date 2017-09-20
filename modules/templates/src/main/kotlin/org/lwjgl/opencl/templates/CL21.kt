@@ -309,7 +309,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
             "$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same",
             "$INVALID_VALUE if {@code num_svm_pointers} is zero or {@code svm_pointers} is #NULL.",
             """
-            $INVALID_VALUE if {@code sizes[i]} is non-zero range ${code("[svm_pointers[i], svm_pointers[i]+sizes[i])")} is not contained within an existing
+            $INVALID_VALUE if {@code sizes[i]} is non-zero range {@code [svm_pointers[i], svm_pointers[i]+sizes[i])} is not contained within an existing
             #SVMAlloc() allocation.
             """,
             IEWLE,

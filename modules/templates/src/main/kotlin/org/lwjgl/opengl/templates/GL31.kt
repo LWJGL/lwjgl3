@@ -173,7 +173,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
         When a buffer object is attached to a buffer texture, the buffer object's data store is taken as the texture's texel array. The number of texels in the
         buffer texture's texel array is given by
 
-        ${code("floor(buffer_size / (components * sizeof(base_type))")},
+        {@code floor(buffer_size / (components * sizeof(base_type))},
 
         where {@code buffer_size} is the size of the buffer object, in basic machine units and {@code components} and {@code base_type} are the element count
         and base data type for elements. The number of texels in the texel array is then clamped to the implementation-dependent limit #MAX_TEXTURE_BUFFER_SIZE.

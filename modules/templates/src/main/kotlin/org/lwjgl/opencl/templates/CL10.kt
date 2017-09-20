@@ -1450,7 +1450,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         Enqueues a command to read from an image or image array object to host memory.
 
         Calling {@code clEnqueueReadImage} to read a region of the image with the {@code ptr} argument value set to
-        ${code("host_ptr + (origin[2] * image slice pitch + origin[1] * image row pitch + origin[0] * bytes per pixel)")}, where {@code host_ptr} is a pointer
+        {@code host_ptr + (origin[2] * image slice pitch + origin[1] * image row pitch + origin[0] * bytes per pixel)}, where {@code host_ptr} is a pointer
         to the memory region specified when the image being read is created with #MEM_USE_HOST_PTR, must meet the following requirements in order to
         avoid undefined behavior:
         ${ul(
@@ -1574,7 +1574,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         Enqueues a command to write to an image or image array object from host memory.
 
         Calling {@code clEnqueueWriteImage} to update the latest bits in a region of the image with the {@code ptr} argument value set to
-        ${code("host_ptr + (origin[2] * image slice pitch + origin[1] * image row pitch + origin[0] * bytes per pixel)")}, where {@code host_ptr} is a pointer
+        {@code host_ptr + (origin[2] * image slice pitch + origin[1] * image row pitch + origin[0] * bytes per pixel)}, where {@code host_ptr} is a pointer
         to the memory region specified when the image being written is created with #MEM_USE_HOST_PTR, must meet the following requirements in order
         to avoid undefined behavior:
         ${ul(
@@ -1832,11 +1832,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             "dst_offset",
             """
             the offset where to begin copying data into {@code dst_buffer}. The size in bytes of the region to be copied referred to as {@code dst_cb} is
-            computed as ${code("width * height * depth * bytes/image element")} if {@code src_image} is a 3D image object, is computed as
-            ${code("width * height * bytes/image element")} if {@code src_image} is a 2D image, is computed as
-            ${code("width * height * arraysize * bytes/image element")} if {@code src_image} is a 2D image array object, is computed as
-            ${code("width * bytes/image element")} if {@code src_image} is a 1D image or 1D image buffer object and is computed as
-            ${code("width * arraysize * bytes/image element")} if {@code src_image} is a 1D image array object.
+            computed as {@code width * height * depth * bytes/image element} if {@code src_image} is a 3D image object, is computed as
+            {@code width * height * bytes/image element} if {@code src_image} is a 2D image, is computed as
+            {@code width * height * arraysize * bytes/image element} if {@code src_image} is a 2D image array object, is computed as
+            {@code width * bytes/image element} if {@code src_image} is a 1D image or 1D image buffer object and is computed as
+            {@code width * arraysize * bytes/image element} if {@code src_image} is a 1D image array object.
             """
         ),
         NEWL,
@@ -2936,13 +2936,13 @@ kernel void image_filter (
             ${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")}. The total number of work-items in the work-group must be less than or equal to
             the #DEVICE_MAX_WORK_GROUP_SIZE value and the number of work-items specified in ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}
             must be less than or equal to the corresponding values specified by #DEVICE_MAX_WORK_ITEM_SIZES${code("[0]")}, &hellip;
-            #DEVICE_MAX_WORK_ITEM_SIZES${code("[work_dim – 1]")}. The explicitly specified {@code local_work_size} will be used to determine how to
+            #DEVICE_MAX_WORK_ITEM_SIZES{@code [work_dim – 1]}. The explicitly specified {@code local_work_size} will be used to determine how to
             break the global work-items specified by {@code global_work_size} into appropriate work-group instances. If {@code local_work_size} is specified, the
             values specified in ${code("global_work_size[0], &hellip; global_work_size[work_dim - 1]")} must be evenly divisible by the corresponding values
             specified in ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}.
 
             The work-group size to be used for kernel can also be specified in the program source using the
-            ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier. In this case the size of work group specified by {@code local_work_size} must
+            {@code __attribute__((reqd_work_group_size(X, Y, Z)))} qualifier. In this case the size of work group specified by {@code local_work_size} must
             match the value specified by the {@code reqd_work_group_size} attribute qualifier.
 
             {@code local_work_size} can also be a #NULL value in which case the OpenCL implementation will determine how to be break the global work-items into
@@ -2978,15 +2978,15 @@ kernel void image_filter (
             """
             $INVALID_WORK_GROUP_SIZE if {@code local_work_size} is specified and number of work-items specified by {@code global_work_size} is not
             evenly divisible by size of work-group given by {@code local_work_size} or does not match the work-group size specified for kernel using the
-            ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier in program source.
+            {@code __attribute__((reqd_work_group_size(X, Y, Z)))} qualifier in program source.
             """,
             """
             $INVALID_WORK_GROUP_SIZE if {@code local_work_size} is specified and the total number of work-items in the work-group computed as
             ${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")} is greater than the value specified by #DEVICE_MAX_WORK_GROUP_SIZE
             """,
             """
-            $INVALID_WORK_GROUP_SIZE if {@code local_work_size} is #NULL and the ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier
-            is used to declare the work-group size for kernel in the program source.
+            $INVALID_WORK_GROUP_SIZE if {@code local_work_size} is #NULL and the {@code __attribute__((reqd_work_group_size(X, Y, Z)))} qualifier is used to
+            declare the work-group size for kernel in the program source.
             """,
             """
             $INVALID_WORK_ITEM_SIZE if the number of work-items specified in any of ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}
