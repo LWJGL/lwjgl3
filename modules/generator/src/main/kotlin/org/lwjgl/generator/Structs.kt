@@ -1566,8 +1566,10 @@ ${validations.joinToString("\n")}
                         println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
                         if (Binding.CHECKS)
                             println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
-                        println("$t${t}return memGet${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement);")
-                        println("$t}")
+                        print("$t${t}return memGet${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement)")
+                        if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
+                            print(" != 0")
+                        println(";\n$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     val mapping = it.nativeType.charMapping
