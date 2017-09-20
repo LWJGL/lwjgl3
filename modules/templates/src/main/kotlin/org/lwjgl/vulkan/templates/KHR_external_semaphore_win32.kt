@@ -16,7 +16,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_external_semaphore_win32</dd>
+            <dd>{@code VK_KHR_external_semaphore_win32}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -24,23 +24,25 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
             <dt><b>Registered Extension Number</b></dt>
             <dd>79</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_external_semaphore">{@code VK_KHR_external_semaphore}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones @cubanismo</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-21</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_external_semaphore_capabilities.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -48,9 +50,6 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
                 <li>Jeff Juliano, NVIDIA</li>
                 <li>Carsten Rohde, NVIDIA</li>
             </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd>James Jones (jajones 'at' nvidia.com)</dd>
         </dl>
         """
 

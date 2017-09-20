@@ -36,7 +36,7 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_AMD_rasterization_order</dd>
+            <dd>{@code VK_AMD_rasterization_order}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -44,19 +44,24 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
             <dt><b>Registered Extension Number</b></dt>
             <dd>19</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-04-25</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Daniel Rakos @aqnuep</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-04-25</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.11 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -65,11 +70,6 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
                 <li>Daniel Rakos, AMD</li>
                 <li>Graham Sellers, AMD</li>
                 <li>Dominik Witczak, AMD</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Daniel Rakos, AMD</li>
             </ul></dd>
         </dl>
         """

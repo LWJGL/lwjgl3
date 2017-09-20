@@ -412,7 +412,7 @@ val VkAllocationCallbacks = struct(VULKAN_PACKAGE, "VkAllocationCallbacks") {
         </ul>
 
         <h5>See Also</h5>
-        ##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDescriptorUpdateTemplateKHR(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateIOSSurfaceMVK(), #CreateImage(), #CreateImageView(), #CreateIndirectCommandsLayoutNVX(), #CreateInstance(), #CreateMacOSSurfaceMVK(), #CreateMirSurfaceKHR(), #CreateObjectTableNVX(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateViSurfaceNN(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDescriptorUpdateTemplateKHR(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyIndirectCommandsLayoutNVX(), #DestroyInstance(), #DestroyObjectTableNVX(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #FreeMemory(), #RegisterDeviceEventEXT(), #RegisterDisplayEventEXT()
+        ##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDescriptorUpdateTemplateKHR(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateIOSSurfaceMVK(), #CreateImage(), #CreateImageView(), #CreateIndirectCommandsLayoutNVX(), #CreateInstance(), #CreateMacOSSurfaceMVK(), #CreateMirSurfaceKHR(), #CreateObjectTableNVX(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSamplerYcbcrConversionKHR(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateValidationCacheEXT(), #CreateViSurfaceNN(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDescriptorUpdateTemplateKHR(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyIndirectCommandsLayoutNVX(), #DestroyInstance(), #DestroyObjectTableNVX(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySamplerYcbcrConversionKHR(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #DestroyValidationCacheEXT(), #FreeMemory(), #RegisterDeviceEventEXT(), #RegisterDisplayEventEXT()
         """
 
     nullable..opaque_p.member("pUserData", "a value to be interpreted by the implementation of the callbacks. When any of the callbacks in ##VkAllocationCallbacks are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.")
@@ -1078,7 +1078,7 @@ val VkDeviceCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_CREATE_INFO</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupDeviceCreateInfoKHX, ##VkPhysicalDevice16BitStorageFeaturesKHR, ##VkPhysicalDeviceFeatures2KHR, ##VkPhysicalDeviceMultiviewFeaturesKHX, or ##VkPhysicalDeviceVariablePointerFeaturesKHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupDeviceCreateInfoKHX, ##VkPhysicalDevice16BitStorageFeaturesKHR, ##VkPhysicalDeviceFeatures2KHR, ##VkPhysicalDeviceMultiviewFeaturesKHX, ##VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR, or ##VkPhysicalDeviceVariablePointerFeaturesKHR</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code pQueueCreateInfos} <b>must</b> be a pointer to an array of {@code queueCreateInfoCount} valid ##VkDeviceQueueCreateInfo structures</li>
@@ -1636,6 +1636,7 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseResidencyAliased">sparse aliased residency</a> feature is not enabled, {@code flags} <b>must</b> not contain #BUFFER_CREATE_SPARSE_ALIASED_BIT</li>
             <li>If {@code flags} contains #BUFFER_CREATE_SPARSE_RESIDENCY_BIT or #BUFFER_CREATE_SPARSE_ALIASED_BIT, it <b>must</b> also contain #BUFFER_CREATE_SPARSE_BINDING_BIT</li>
             <li>If the {@code pNext} chain contains an instance of ##VkExternalMemoryBufferCreateInfoKHR, its {@code handleTypes} member <b>must</b> only contain bits that are also in ##VkExternalBufferPropertiesKHR{@code ::externalMemoryProperties}.{@code compatibleHandleTypes}, as returned by #GetPhysicalDeviceExternalBufferPropertiesKHR() with {@code pExternalBufferInfo}&#8594;{@code handleType} equal to any one of the handle types specified in ##VkExternalMemoryBufferCreateInfoKHR{@code ::handleTypes}</li>
+            <li>If the {@code pNext} chain contains an instance of ##VkDedicatedAllocationBufferCreateInfoNV, and the {@code dedicatedAllocation} member of the chained structure is #TRUE, then {@code flags} <b>must</b> not include #BUFFER_CREATE_SPARSE_BINDING_BIT, #BUFFER_CREATE_SPARSE_RESIDENCY_BIT, or #BUFFER_CREATE_SPARSE_ALIASED_BIT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1727,6 +1728,12 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 
         To determine the set of valid {@code usage} bits for a given format, call #GetPhysicalDeviceFormatProperties().
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        For images created without #IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR a {@code usage} bit is valid if it is supported for the format the image is created with.
+
+        For images created with #IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR a {@code usage} bit is valid if it is supported for at least one of the formats a {@code VkImageView} created from the image <b>can</b> have (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views">Image Views</a> for more detail).
+        </div>
+
         <h5>Valid Usage</h5>
         <ul>
             <li>The combination of {@code format}, {@code imageType}, {@code tiling}, {@code usage}, and {@code flags} <b>must</b> be supported, as indicated by a #SUCCESS return value from #GetPhysicalDeviceImageFormatProperties() invoked with the same values passed to the corresponding parameters.</li>
@@ -1783,14 +1790,29 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
             <li>If the {@code pNext} chain contains an instance of ##VkExternalMemoryImageCreateInfoNV, its {@code handleTypes} member <b>must</b> only contain bits that are also in ##VkExternalImageFormatPropertiesNV{@code ::externalMemoryProperties}{@code ::compatibleHandleTypes}, as returned by #GetPhysicalDeviceExternalImageFormatPropertiesNV() with {@code format}, {@code imageType}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure, and with {@code externalHandleType} equal to any one of the handle types specified in ##VkExternalMemoryImageCreateInfoNV{@code ::handleTypes}</li>
             <li>If the logical device was created with ##VkDeviceGroupDeviceCreateInfoKHX{@code ::physicalDeviceCount} equal to 1, {@code flags} <b>must</b> not contain #IMAGE_CREATE_BIND_SFR_BIT_KHX</li>
             <li>If {@code flags} contains #IMAGE_CREATE_BIND_SFR_BIT_KHX, then {@code mipLevels} <b>must</b> be one, {@code arrayLayers} <b>must</b> be one, {@code imageType} <b>must</b> be #IMAGE_TYPE_2D, and {@code tiling} <b>must</b> be #IMAGE_TILING_OPTIMAL</li>
+            <li>If {@code flags} contains #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR, then {@code format} <b>must</b> be a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#appendix-compressedtex-bc">block-compressed image format</a>, an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#appendix-compressedtex-etc2">ETC compressed image format</a>, or an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#appendix-compressedtex-astc">ASTC compressed image format</a>.</li>
+            <li>If {@code flags} contains #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR, then {@code flags} <b>must</b> also contain #IMAGE_CREATE_MUTABLE_FORMAT_BIT.</li>
             <li>{@code initialLayout} <b>must</b> be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED.</li>
             <li>If the {@code pNext} chain includes a ##VkExternalMemoryImageCreateInfoKHR or ##VkExternalMemoryImageCreateInfoNV structure whose {@code handleTypes} member is not 0, {@code initialLayout} <b>must</b> be #IMAGE_LAYOUT_UNDEFINED</li>
+            <li>
+                If the image {@code format} is one of those listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">the “Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for #IMAGE_ASPECT_COLOR_BIT image views” table</a>:
+                <ul>
+                    <li>{@code mipLevels} <b>must</b> be 1</li>
+                    <li>{@code samples} must be #SAMPLE_COUNT_1_BIT</li>
+                    <li>{@code imageType} <b>must</b> be #IMAGE_TYPE_2D</li>
+                    <li>{@code arrayLayers} <b>must</b> be 1</li>
+                </ul>
+            </li>
+            <li>If {@code tiling} is #IMAGE_TILING_OPTIMAL, {@code format} is a <em>multi-planar</em> format, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_DISJOINT_BIT_KHR, {@code flags} <b>must</b> not contain #IMAGE_CREATE_DISJOINT_BIT_KHR</li>
+            <li>If {@code tiling} is #IMAGE_TILING_LINEAR, {@code format} is a <em>multi-planar</em> format, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_DISJOINT_BIT_KHR, {@code flags} <b>must</b> not contain #IMAGE_CREATE_DISJOINT_BIT_KHR</li>
+            <li>If {@code format} is not a <em>multi-planar</em> format, and {@code flags} does not include #IMAGE_CREATE_ALIAS_BIT_KHR, {@code flags} <b>must</b> not contain #IMAGE_CREATE_DISJOINT_BIT_KHR</li>
+            <li>If {@code flags} contains #IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT {@code format} <b>must</b> be a depth or depth/stencil format</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_CREATE_INFO</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDedicatedAllocationImageCreateInfoNV, ##VkExternalMemoryImageCreateInfoKHR, ##VkExternalMemoryImageCreateInfoNV, or ##VkImageSwapchainCreateInfoKHX</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDedicatedAllocationImageCreateInfoNV, ##VkExternalMemoryImageCreateInfoKHR, ##VkExternalMemoryImageCreateInfoNV, ##VkImageFormatListCreateInfoKHR, or ##VkImageSwapchainCreateInfoKHX</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkImageCreateFlagBits} values</li>
             <li>{@code imageType} <b>must</b> be a valid {@code VkImageType} value</li>
@@ -1844,7 +1866,9 @@ val VkSubresourceLayout = struct(VULKAN_PACKAGE, "VkSubresourceLayout", mutable 
 
         {@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.
 
-        For color formats, the {@code aspectMask} member of ##VkImageSubresource <b>must</b> be #IMAGE_ASPECT_COLOR_BIT. For depth/stencil formats, {@code aspectMask} <b>must</b> be either #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT. On implementations that store depth and stencil aspects separately, querying each of these image subresource layouts will return a different {@code offset} and {@code size} representing the region of memory used for that aspect. On implementations that store depth and stencil aspects interleaved, the same {@code offset} and {@code size} are returned and represent the interleaved memory allocation.
+        For <em>single-plane</em> color formats, the {@code aspectMask} member of ##VkImageSubresource <b>must</b> be #IMAGE_ASPECT_COLOR_BIT. For depth/stencil formats, {@code aspectMask} <b>must</b> be either #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT. On implementations that store depth and stencil aspects separately, querying each of these image subresource layouts will return a different {@code offset} and {@code size} representing the region of memory used for that aspect. On implementations that store depth and stencil aspects interleaved, the same {@code offset} and {@code size} are returned and represent the interleaved memory allocation.
+
+        For <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar formats</a>, the {@code aspectMask} member of ##VkImageSubresource <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or (for 3-plane formats only) #IMAGE_ASPECT_PLANE_2_BIT_KHR. Querying each of these image subresource layouts will return a different {@code offset} and {@code size} representing the region of memory used for that plane.
 
         <h5>See Also</h5>
         #GetImageSubresourceLayout()
@@ -1871,7 +1895,7 @@ val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
         </ul>
 
         <h5>See Also</h5>
-        ##VkImageViewCreateInfo
+        ##VkImageViewCreateInfo, ##VkSamplerYcbcrConversionCreateInfoKHR
         """
 
     VkComponentSwizzle.member("r", "a {@code VkComponentSwizzle} specifying the component value placed in the R component of the output vector.")
@@ -1890,13 +1914,17 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
         For cube and cube array image views, the layers of the image view starting at {@code baseArrayLayer} correspond to faces in the order +X, -X, +Y, -Y, +Z, -Z. For cube arrays, each set of six sequential layers is a single cube, so the number of cube maps in a cube map array view is <em>{@code layerCount} / 6</em>, and image array layer <code>(baseArrayLayer {plus} i)</code> is face index <code>(i mod 6)</code> of cube <em>i / 6</em>. If the number of layers in the view, whether set explicitly in {@code layerCount} or implied by #REMAINING_ARRAY_LAYERS, is not a multiple of 6, behavior when indexing the last cube is undefined.
 
-        {@code aspectMask} <b>must</b> be only #IMAGE_ASPECT_COLOR_BIT, #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT if {@code format} is a color, depth-only or stencil-only format, respectively. If using a depth/stencil format with both depth and stencil components, {@code aspectMask} <b>must</b> include at least one of #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT, and <b>can</b> include both.
+        {@code aspectMask} <b>must</b> be only #IMAGE_ASPECT_COLOR_BIT, #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT if {@code format} is a color, depth-only or stencil-only format, respectively, except if {@code format} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>. If using a depth/stencil format with both depth and stencil components, {@code aspectMask} <b>must</b> include at least one of #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT, and <b>can</b> include both.
 
         When the ##VkImageSubresourceRange structure is used to select a subset of the slices of a 3D image's mip level in order to create a 2D or 2D array image view of a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT, {@code baseArrayLayer} and {@code layerCount} specify the first slice index and the number of slices to include in the created image view. Such an image view <b>can</b> be used as a framebuffer attachment that refers only to the specified range of slices of the selected mip level. However, any layout transitions performed on such an attachment view during a render pass instance still apply to the entire subresource referenced which includes all the slices of the selected mip level.
 
         When using an imageView of a depth/stencil image to populate a descriptor set (e.g. for sampling in the shader, or for use as an input attachment), the {@code aspectMask} <b>must</b> only include one bit and selects whether the imageView is used for depth reads (i.e. using a floating-point sampler or input attachment in the shader) or stencil reads (i.e. using an unsigned integer sampler or input attachment in the shader). When an imageView of a depth/stencil image is used as a depth/stencil framebuffer attachment, the {@code aspectMask} is ignored and both depth and stencil image subresources are used.
 
-        The {@code components} member is of type ##VkComponentMapping, and describes a remapping from components of the image to components of the vector returned by shader image instructions. This remapping <b>must</b> be identity for storage image descriptors, input attachment descriptors, and framebuffer attachments.
+        The {@code components} member is of type ##VkComponentMapping, and describes a remapping from components of the image to components of the vector returned by shader image instructions. This remapping <b>must</b> be identity for storage image descriptors, input attachment descriptors, framebuffer attachments, and any {@code VkImageView} used with a combined image sampler that enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>.
+
+        If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled in the sampler, the {@code aspectMask} used by a {@code VkImageView} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT.
+
+        If sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is not enabled in the sampler and the format is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, the image <b>must</b> have been created with #IMAGE_CREATE_MUTABLE_FORMAT_BIT, and the {@code aspectMask} of the {@code VkImageView}'s ##VkImageSubresourceRange <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR or #IMAGE_ASPECT_PLANE_2_BIT_KHR.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1921,11 +1949,21 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
         Structure specifying parameters of a newly created image view.
 
         <h5>Description</h5>
-        If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} <b>can</b> be different from the image's format, but if they are not equal they <b>must</b> be <em>compatible</em>. Image format compatibility is defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a> section. Views of compatible formats will have the same mapping between texel coordinates and memory locations irrespective of the {@code format}, with only the interpretation of the bit pattern changing.
+        If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, and if the {@code format} of the image is not <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, {@code format} <b>can</b> be different from the image's format, but if {@code image} was created without the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag and they are not equal they <b>must</b> be <em>compatible</em>. Image format compatibility is defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a> section. Views of compatible formats will have the same mapping between texel coordinates and memory locations irrespective of the {@code format}, with only the interpretation of the bit pattern changing.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Values intended to be used with one view format <b>may</b> not be exactly preserved when written or read through a different format. For example, an integer value that happens to have the bit pattern of a floating point denorm or NaN <b>may</b> be flushed or canonicalized when written or read through a view with a floating point format. Similarly, a value written through a signed normalized format that has a bit pattern exactly equal to <code>-2<sup>b</sup></code> <b>may</b> be changed to <code>-2<sup>b</sup> {plus} 1</code> as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fixedfpconv">Conversion from Normalized Fixed-Point to Floating-Point</a>.
         </div>
+
+        If {@code image} was created with the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag, {@code format} <b>must</b> be <em>compatible</em> with the image's format as described above, or <b>must</b> be an uncompressed format in which case it <b>must</b> be size-compatible with the image's format, meaning that the element size of the uncompressed format <b>must</b> equal the element size (compressed texel block size) of the image's format. In this case the resulting image view's texel dimensions equal the dimensions of the selected mip level divided by the compressed texel block size and rounded up.
+
+        If the image view is to be used with a sampler which supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>, an <em>identically defined object</em> of type {@code VkSamplerYcbcrConversionKHR} to that used to create the sampler <b>must</b> be passed to #CreateImageView() in a ##VkSamplerYcbcrConversionInfoKHR added to the {@code pNext} chain of ##VkImageViewCreateInfo.
+
+        If the image has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format} and {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_COLOR_BIT, {@code format} <b>must</b> be identical to the image {@code format}, and the sampler to be used with the image view <b>must</b> enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>.
+
+        If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT and the image has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format}, and if {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR, {@code format} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">compatible</a> with the corresponding plane of the image, as defined in, and the sampler to be used with the image view <b>must</b> not enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>. The {@code width} and {@code height} of the single-plane image view <b>must</b> be derived from the multi-planar image's dimensions in the manner listed for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">plane compatibility</a> for the plane.
+
+        Any view of an image plane will have the same mapping between texel coordinates and memory locations as used by the channels of the color aspect, subject to the formulae relating texel coordinates to lower-resolution planes as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-chroma-reconstruction">Chroma Reconstruction</a>. That is, if an R or B plane has a reduced resolution relative to the G plane of the multi-planar image, the image view operates using the (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) unnormalized coordinates of the reduced-resolution plane, and these coordinates access the same memory locations as the (<em>u<sub>color</sub></em>, <em>v<sub>color</sub></em>) unnormalized coordinates of the color aspect for which chroma reconstruction operations operate on the same (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) or (<em>i<sub>plane</sub></em>, <em>j<sub>plane</sub></em>) coordinates.
 
         <h6>Image and image view parameter compatibility requirements</h6>
         <table class="lwjgl">
@@ -1968,8 +2006,12 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
             <li>If {@code subresourceRange}{@code ::layerCount} is not #REMAINING_ARRAY_LAYERS, {@code image} is not a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set, or {@code viewType} is not #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY, {@code subresourceRange}{@code ::layerCount} <b>must</b> be non-zero and <code>subresourceRange::baseArrayLayer subresourceRange::layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code image} is a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set, and {@code viewType} is #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY, {@code subresourceRange}{@code ::baseArrayLayer} <b>must</b> be less than the {@code extent.depth} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code subresourceRange}{@code ::layerCount} is not #REMAINING_ARRAY_LAYERS, {@code image} is a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set, and {@code viewType} is #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY, {@code subresourceRange}{@code ::layerCount} <b>must</b> be non-zero and <code>subresourceRange::baseArrayLayer subresourceRange::layerCount</code> <b>must</b> be less than or equal to the {@code extent.depth} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} <b>must</b> be compatible with the {@code format} used to create {@code image}, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a></li>
-            <li>If {@code image} was not created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} <b>must</b> be identical to the {@code format} used to create {@code image}</li>
+            <li>If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, but without the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag, and if the {@code format} of the {@code image} is not a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, {@code format} <b>must</b> be compatible with the {@code format} used to create {@code image}, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a></li>
+            <li>If {@code image} was created with the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag, {@code format} <b>must</b> be compatible with, or <b>must</b> be an uncompressed format that is size-compatible with, the {@code format} used to create {@code image}.</li>
+            <li>If {@code image} was created with the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag, the {@code levelCount} and {@code layerCount} members of {@code subresourceRange} <b>must</b> both be 1.</li>
+            <li>If a ##VkImageFormatListCreateInfoKHR structure was included in the {@code pNext} chain of the ##VkImageCreateInfo struct used when creating {@code image} and the {@code viewFormatCount} field of ##VkImageFormatListCreateInfoKHR is not zero then {@code format} <b>must</b> be one of the formats in ##VkImageFormatListCreateInfoKHR{@code ::pViewFormats}.</li>
+            <li>If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, if the {@code format} of the {@code image} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, and if {@code subresourceRange.aspectMask} is one of #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR, then {@code format} <b>must</b> be compatible with the {@code VkFormat} for the plane of the {@code image} {@code format} indicated by {@code subresourceRange.aspectMask}, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">the “Compatible formats of planes of multi-planar formats” section</a></li>
+            <li>If {@code image} was not created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, or if the {@code format} of the {@code image} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format and if {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_COLOR_BIT, {@code format} <b>must</b> be identical to the {@code format} used to create {@code image}</li>
             <li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>{@code subresourceRange} and {@code viewType} <b>must</b> be compatible with the image, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views-compatibility">compatibility table</a></li>
         </ul>
@@ -1977,7 +2019,8 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkImageViewUsageCreateInfoKHR or ##VkSamplerYcbcrConversionInfoKHR</li>
+            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
             <li>{@code viewType} <b>must</b> be a valid {@code VkImageViewType} value</li>
@@ -2020,9 +2063,9 @@ val VkShaderModuleCreateInfo = struct(VULKAN_PACKAGE, "VkShaderModuleCreateInfo"
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkShaderModuleValidationCacheCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pCode} <b>must</b> be a pointer to an array of <code><code><pre> ￿codeSize / 4</pre></code></code> {@code uint32_t} values</li>
+            <li>{@code pCode} <b>must</b> be a pointer to an array of {@code codeSize / 4} {@code uint32_t} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2304,7 +2347,7 @@ val VkPipelineTessellationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineTe
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineTessellationDomainOriginStateCreateInfoKHR</li>
             <li>{@code flags} <b>must</b> be 0</li>
         </ul>
 
@@ -2324,8 +2367,7 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
         Structure specifying a viewport.
 
         <h5>Description</h5>
-        The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <code><pre>
-￿k / (2<sup>m</sup> - 1)</pre></code>, where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
+        The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <code>k / (2<sup>m</sup> - 1)</code>, where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
 
         The viewport parameters shown in the above equations are found from these values as
 
@@ -2498,11 +2540,11 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPipelineCoverageModulationStateCreateInfoNV or ##VkPipelineCoverageToColorStateCreateInfoNV</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPipelineCoverageModulationStateCreateInfoNV, ##VkPipelineCoverageToColorStateCreateInfoNV, or ##VkPipelineSampleLocationsStateCreateInfoEXT</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a pointer to an array of <code><code><pre> ￿ceil(rasterizationSamples / 32)</pre></code></code> {@code VkSampleMask} values</li>
+            <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a pointer to an array of {@code ceil(rasterizationSamples / 32)} {@code VkSampleMask} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2731,8 +2773,8 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If {@code pStages} includes a fragment shader stage and a geometry shader stage, and the fragment shader code reads from an input variable that is decorated with {@code PrimitiveID}, then the geometry shader code <b>must</b> write to a matching output variable, decorated with {@code PrimitiveID}, in all execution paths</li>
             <li>If {@code pStages} includes a fragment shader stage, its shader code <b>must</b> not read from any input attachment that is defined as #ATTACHMENT_UNUSED in {@code subpass}</li>
             <li>The shader code for the entry points identified by {@code pStages}, and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
-            <li>If rasterization is not disabled and {@code subpass} uses a depth/stencil attachment in {@code renderpass} that has a layout of #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL in the ##VkAttachmentReference defined by {@code subpass}, the {@code depthWriteEnable} member of {@code pDepthStencilState} <b>must</b> be #FALSE</li>
-            <li>If rasterization is not disabled and {@code subpass} uses a depth/stencil attachment in {@code renderpass} that has a layout of #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL in the ##VkAttachmentReference defined by {@code subpass}, the {@code failOp}, {@code passOp} and {@code depthFailOp} members of each of the {@code front} and {@code back} members of {@code pDepthStencilState} <b>must</b> be #STENCIL_OP_KEEP</li>
+            <li>If rasterization is not disabled and {@code subpass} uses a depth/stencil attachment in {@code renderpass} that has a layout of #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL or #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR in the ##VkAttachmentReference defined by {@code subpass}, the {@code depthWriteEnable} member of {@code pDepthStencilState} <b>must</b> be #FALSE</li>
+            <li>If rasterization is not disabled and {@code subpass} uses a depth/stencil attachment in {@code renderpass} that has a layout of #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL or #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR in the ##VkAttachmentReference defined by {@code subpass}, the {@code failOp}, {@code passOp} and {@code depthFailOp} members of each of the {@code front} and {@code back} members of {@code pDepthStencilState} <b>must</b> be #STENCIL_OP_KEEP</li>
             <li>If rasterization is not disabled and the subpass uses color attachments, then for each color attachment in the subpass the {@code blendEnable} member of the corresponding element of the {@code pAttachment} member of {@code pColorBlendState} <b>must</b> be #FALSE if the {@code format} of the attachment does not support color blend operations, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} or ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>If rasterization is not disabled and the subpass uses color attachments, the {@code attachmentCount} member of {@code pColorBlendState} <b>must</b> be equal to the {@code colorAttachmentCount} used to create {@code subpass}</li>
             <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_VIEWPORT, the {@code pViewports} member of {@code pViewportState} <b>must</b> be a pointer to an array of {@code pViewportState}{@code ::viewportCount} ##VkViewport structures</li>
@@ -2743,6 +2785,10 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses a depth/stencil attachment, {@code pDepthStencilState} <b>must</b> be a pointer to a valid ##VkPipelineDepthStencilStateCreateInfo structure</li>
             <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses color attachments, {@code pColorBlendState} <b>must</b> be a pointer to a valid ##VkPipelineColorBlendStateCreateInfo structure</li>
             <li>If the depth bias clamping feature is not enabled, no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_DEPTH_BIAS, and the {@code depthBiasEnable} member of {@code pDepthStencil} is #TRUE, the {@code depthBiasClamp} member of {@code pDepthStencil} <b>must</b> be {@code 0.0}</li>
+            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationGridSize.width} <b>must</b> evenly divide ##VkMultisamplePropertiesEXT{@code ::sampleLocationGridSize}.width as returned by #GetPhysicalDeviceMultisamplePropertiesEXT() with a {@code samples} parameter equaling {@code rasterizationSamples}</li>
+            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationGridSize.height} <b>must</b> evenly divide ##VkMultisamplePropertiesEXT{@code ::sampleLocationGridSize}.height as returned by #GetPhysicalDeviceMultisamplePropertiesEXT() with a {@code samples} parameter equaling {@code rasterizationSamples}</li>
+            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationsPerPixel} <b>must</b> equal {@code rasterizationSamples}</li>
+            <li>If the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, the fragment shader code <b>must</b> not statically use the extended instruction {@code InterpolateAtSample}</li>
             <li>{@code layout} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-pipelinelayout-consistency">consistent</a> with all shaders specified in {@code pStages}</li>
             <li>If {@code subpass} uses color and/or depth/stencil attachments, then the {@code rasterizationSamples} member of {@code pMultisampleState} <b>must</b> equal the maximum of the sample counts of those subpass attachments</li>
             <li>If {@code subpass} has a depth/stencil attachment and depth test, stencil test, or depth bounds test are enabled, then the {@code rasterizationSamples} member of {@code pMultisampleState} <b>must</b> be the same as the sample count of the depth/stencil attachment</li>
@@ -2754,6 +2800,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If the {@code renderPass} has multiview enabled and {@code subpass} has more than one bit set in the view mask, shaders in the pipeline <b>must</b> not write to the {@code Layer} built-in output</li>
             <li>If the {@code renderPass} has multiview enabled, then all shaders <b>must</b> not include variables decorated with the {@code Layer} built-in decoration in their interfaces.</li>
             <li>{@code flags} <b>must</b> not contain the #PIPELINE_CREATE_DISPATCH_BASE_KHX flag.</li>
+            <li>If {@code pStages} includes a fragment shader stage and an input attachment was referenced by the ##VkRenderPassInputAttachmentAspectCreateInfoKHR at renderpass create time, its shader code <b>must</b> not read from any aspect that was not specified in the {@code aspectMask} of the corresponding ##VkInputAttachmentAspectReferenceKHR structure.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2935,6 +2982,7 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
             <li>The absolute value of {@code mipLodBias} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxSamplerLodBias}</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-samplerAnisotropy">anisotropic sampling</a> feature is not enabled, {@code anisotropyEnable} <b>must</b> be #FALSE</li>
             <li>If {@code anisotropyEnable} is #TRUE, {@code maxAnisotropy} <b>must</b> be between {@code 1.0} and ##VkPhysicalDeviceLimits{@code ::maxSamplerAnisotropy}, inclusive</li>
+            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled and #FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR is not set for the format, {@code minFilter} and {@code magFilter} <b>must</b> be equal to the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion&#8217;s {@code chromaFilter}</li>
             <li>If {@code unnormalizedCoordinates} is #TRUE, {@code minFilter} and {@code magFilter} <b>must</b> be equal</li>
             <li>If {@code unnormalizedCoordinates} is #TRUE, {@code mipmapMode} <b>must</b> be #SAMPLER_MIPMAP_MODE_NEAREST</li>
             <li>If {@code unnormalizedCoordinates} is #TRUE, {@code minLod} and {@code maxLod} <b>must</b> be zero</li>
@@ -2942,6 +2990,8 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
             <li>If {@code unnormalizedCoordinates} is #TRUE, {@code anisotropyEnable} <b>must</b> be #FALSE</li>
             <li>If {@code unnormalizedCoordinates} is #TRUE, {@code compareEnable} <b>must</b> be #FALSE</li>
             <li>If any of {@code addressModeU}, {@code addressModeV} or {@code addressModeW} are #SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER, {@code borderColor} <b>must</b> be a valid {@code VkBorderColor} value</li>
+            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled, {@code addressModeU}, {@code addressModeV}, and {@code addressModeW} <b>must</b> be #SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE, {@code anisotropyEnable} <b>must</b> be #FALSE, and {@code unnormalizedCoordinates} <b>must</b> be #FALSE</li>
+            <li>The sampler reduction mode <b>must</b> be set to #SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled</li>
             <li>If the VK_KHR_sampler_mirror_clamp_to_edge extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW} <b>must</b> not be #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</li>
             <li>If {@code compareEnable} is #TRUE, {@code compareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
             <li>If either {@code magFilter} or {@code minFilter} is #FILTER_CUBIC_IMG, {@code anisotropyEnable} <b>must</b> be #FALSE</li>
@@ -2952,7 +3002,8 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLER_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkSamplerReductionModeCreateInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkSamplerReductionModeCreateInfoEXT or ##VkSamplerYcbcrConversionInfoKHR</li>
+            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code magFilter} <b>must</b> be a valid {@code VkFilter} value</li>
             <li>{@code minFilter} <b>must</b> be a valid {@code VkFilter} value</li>
@@ -2994,6 +3045,7 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
             <li>{@code addressModeU} and {@code addressModeV} <b>must</b> each be either #SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE or #SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER.</li>
             <li>{@code anisotropyEnable} <b>must</b> be #FALSE.</li>
             <li>{@code compareEnable} <b>must</b> be #FALSE.</li>
+            <li>The sampler <b>must</b> not enable sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion.</li>
         </ul>
 
         When {@code unnormalizedCoordinates} is #TRUE, images the sampler is used with in the shader have the following requirements:
@@ -3181,6 +3233,19 @@ val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
         <ul>
             <li>{@code imageView} <b>must</b> not be 2D or 2D array image view created from a 3D image</li>
             <li>{@code imageLayout} <b>must</b> match the actual {@code VkImageLayout} of each subresource accessible from {@code imageView} at the time this descriptor is accessed</li>
+            <li>
+                If {@code sampler} is used and enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>:
+                <ul>
+                    <li>The {@code format} of the {@code imageView} <b>must</b> be the same as the {@code VkFormat} of the image</li>
+                    <li>The {@code aspectMask} of the {@code imageView} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
+                    <li>The {@code components.a} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
+                    <li>The {@code components.r} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
+                    <li>The {@code components.g} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
+                    <li>The {@code components.b} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
+                    <li>The {@code pNext} chain of the {@code imageView} <b>must</b> contain a ##VkSamplerYcbcrConversionInfoKHR which has a {@code conversion} which is an <em>identically defined object</em> to the {@code conversion} of the ##VkSamplerYcbcrConversionInfoKHR which is in the {@code pNext} chain of the {@code sampler}</li>
+                </ul>
+            </li>
+            <li>If {@code sampler} is used and does not enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> and the {@code VkFormat} of the image is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, the image <b>must</b> have been created with #IMAGE_CREATE_MUTABLE_FORMAT_BIT, and the {@code aspectMask} of the {@code imageView} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR or (for three-plane formats only) #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3340,10 +3405,10 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
         Structure specifying parameters of a newly created framebuffer.
 
         <h5>Description</h5>
-        Image subresources used as attachments <b>must</b> not be accessed in any other way for the duration of a render pass instance.
+        Image subresources used as attachments <b>must</b> not be accessed in any other way for the duration of a render pass instance. For depth/stencil attachments, they <b>can</b> be used as both attachments and non-attachments as long as the layout of the image subresource is #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR and the non-attachment usage only accesses the depth aspect, or the layout of the image subresource is #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR and the non-attachment usage only accesses the stencil aspect. Use of non-attachment aspects in this case is only well defined if the attachment is used in the subpass where the non-attachment access is being made, or the layout of the image subresource is constant throughout the entire render pass instance, including the {@code initialLayout} and {@code finalLayout}.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        This restriction means that the render pass has full knowledge of all uses of all of the attachments, so that the implementation is able to make correct decisions about when and how to perform layout transitions, when to overlap execution of subpasses, etc.
+        These restrictions mean that the render pass has full knowledge of all uses of all of the attachments, so that the implementation is able to make correct decisions about when and how to perform layout transitions, when to overlap execution of subpasses, etc.
         </div>
 
         It is legal for a subpass to use no color or depth/stencil attachments, and rather use shader side effects such as image stores and atomics to produce an output. In this case, the subpass continues to use the {@code width}, {@code height}, and {@code layers} of the framebuffer to define the dimensions of the rendering area, and the {@code rasterizationSamples} from each pipeline's ##VkPipelineMultisampleStateCreateInfo to define the number of samples used in rasterization; however, if ##VkPhysicalDeviceFeatures{@code ::variableMultisampleRate} is #FALSE, then all pipelines to be bound with a given zero-attachment subpass <b>must</b> have the same value for ##VkPipelineMultisampleStateCreateInfo{@code ::rasterizationSamples}.
@@ -3614,6 +3679,8 @@ val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
             <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is not #ATTACHMENT_UNUSED, it <b>must</b> be less than {@code attachmentCount}</li>
             <li>The value of any element of the {@code pPreserveAttachments} member in any given element of {@code pSubpasses} <b>must</b> not be #ATTACHMENT_UNUSED</li>
             <li>For any member of {@code pAttachments} with a {@code loadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL} or {@code VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}.</li>
+            <li>For any member of {@code pAttachments} with a {@code loadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR}.</li>
+            <li>For any member of {@code pAttachments} with a {@code stencilLoadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR}.</li>
             <li>For any element of {@code pDependencies}, if the {@code srcSubpass} is not #SUBPASS_EXTERNAL, all stage flags included in the {@code srcStageMask} member of that dependency <b>must</b> be a pipeline stage supported by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-types">pipeline</a> identified by the {@code pipelineBindPoint} member of the source subpass.</li>
             <li>For any element of {@code pDependencies}, if the {@code dstSubpass} is not #SUBPASS_EXTERNAL, all stage flags included in the {@code dstStageMask} member of that dependency <b>must</b> be a pipeline stage supported by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-types">pipeline</a> identified by the {@code pipelineBindPoint} member of the source subpass.</li>
         </ul>
@@ -3621,7 +3688,8 @@ val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkRenderPassMultiviewCreateInfoKHX</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkRenderPassInputAttachmentAspectCreateInfoKHR or ##VkRenderPassMultiviewCreateInfoKHX</li>
+            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a pointer to an array of {@code attachmentCount} valid ##VkAttachmentDescription structures</li>
             <li>{@code pSubpasses} <b>must</b> be a pointer to an array of {@code subpassCount} valid ##VkSubpassDescription structures</li>
@@ -3813,9 +3881,17 @@ val VkImageCopy = struct(VULKAN_PACKAGE, "VkImageCopy") {
         <h5>Description</h5>
         For #IMAGE_TYPE_3D images, copies are performed slice by slice starting with the {@code z} member of the {@code srcOffset} or {@code dstOffset}, and copying {@code depth} slices. For images with multiple layers, copies are performed layer by layer starting with the {@code baseArrayLayer} member of the {@code srcSubresource} or {@code dstSubresource} and copying {@code layerCount} layers. Image data <b>can</b> be copied between images with different image types. If one image is #IMAGE_TYPE_3D and the other image is #IMAGE_TYPE_2D with multiple layers, then each slice is copied to or from a different layer.
 
+        Copies involving a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a> specify the region to be copied in terms of the <em>plane</em> to be copied, not the coordinates of the multi-planar image. This means that copies accessing the R/B planes of "{@code etext:_422}" format images <b>must</b> fit the copied region within half the {@code width} of the parent image, and that copies accessing the R/B planes of "{@code etext:_420}" format images <b>must</b> fit the copied region within half the {@code width} and {@code height} of the parent image.
+
         <h5>Valid Usage</h5>
         <ul>
-            <li>The {@code aspectMask} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
+            <li>If neither the calling command&#8217;s {@code srcImage} nor the calling command&#8217;s {@code dstImage} has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a> then the {@code aspectMask} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
+            <li>If the calling command&#8217;s {@code srcImage} has a {@code VkFormat} with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">two planes</a> then the {@code srcSubresource} {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR or #IMAGE_ASPECT_PLANE_1_BIT_KHR</li>
+            <li>If the calling command&#8217;s {@code srcImage} has a {@code VkFormat} with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">three planes</a> then the {@code srcSubresource} {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
+            <li>If the calling command&#8217;s {@code dstImage} has a {@code VkFormat} with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">two planes</a> then the {@code dstSubresource} {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR or #IMAGE_ASPECT_PLANE_1_BIT_KHR</li>
+            <li>If the calling command&#8217;s {@code dstImage} has a {@code VkFormat} with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">three planes</a> then the {@code dstSubresource} {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
+            <li>If the calling command&#8217;s {@code srcImage} has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a> and the {@code dstImage} does not have a multi-planar image format, the {@code dstSubresource} {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If the calling command&#8217;s {@code dstImage} has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a> and the {@code srcImage} does not have a multi-planar image format, the {@code srcSubresource} {@code aspectMask} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
             <li>The number of slices of the {@code extent} (for 3D) or layers of the {@code srcSubresource} (for non-3D) <b>must</b> match the number of slices of the {@code extent} (for 3D) or layers of the {@code dstSubresource} (for non-3D)</li>
             <li>If either of the calling command&#8217;s {@code srcImage} or {@code dstImage} parameters are of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount} members of the corresponding subresource <b>must</b> be 0 and 1, respectively</li>
             <li>The {@code aspectMask} member of {@code srcSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code srcImage}</li>
@@ -3832,14 +3908,14 @@ val VkImageCopy = struct(VULKAN_PACKAGE, "VkImageCopy") {
             <li>{@code dstOffset.z} and <code>(extent.depth dstOffset.z)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource depth</li>
             <li>If the calling command&#8217;s {@code dstImage} is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code dstOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
             <li>{@code dstSubresource.baseArrayLayer} <b>must</b> be less than and <code>(dstSubresource.layerCount dstSubresource.baseArrayLayer)</code> <b>must</b> be less than or equal to the number of layers in the destination image</li>
-            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, all members of {@code srcOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
-            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(extent.width + srcOffset.x)</code> <b>must</b> equal the source image subresource width</li>
-            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(extent.height + srcOffset.y)</code> <b>must</b> equal the source image subresource height</li>
-            <li>If the calling command&#8217;s {@code srcImage} is a compressed format image, {@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(extent.depth + srcOffset.z)</code> <b>must</b> equal the source image subresource depth</li>
-            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, all members of {@code dstOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
-            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(extent.width + dstOffset.x)</code> <b>must</b> equal the destination image subresource width</li>
-            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(extent.height + dstOffset.y)</code> <b>must</b> equal the destination image subresource height</li>
-            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, {@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(extent.depth + dstOffset.z)</code> <b>must</b> equal the destination image subresource depth</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, all members of {@code srcOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(extent.width + srcOffset.x)</code> <b>must</b> equal the source image subresource width</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(extent.height + srcOffset.y)</code> <b>must</b> equal the source image subresource height</li>
+            <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(extent.depth + srcOffset.z)</code> <b>must</b> equal the source image subresource depth</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, or a <em>single-plane</em>, “etext:_422” image format, all members of {@code dstOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(extent.width + dstOffset.x)</code> <b>must</b> equal the destination image subresource width</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(extent.height + dstOffset.y)</code> <b>must</b> equal the destination image subresource height</li>
+            <li>If the calling command&#8217;s {@code dstImage} is a compressed format image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(extent.depth + dstOffset.z)</code> <b>must</b> equal the destination image subresource depth</li>
             <li>{@code srcOffset}, {@code dstOffset}, and {@code extent} <b>must</b> respect the image transfer granularity requirements of the queue family that it will be submitted against, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-physical-device-enumeration">Physical Device Enumeration</a></li>
         </ul>
 
@@ -3928,24 +4004,26 @@ val VkBufferImageCopy = struct(VULKAN_PACKAGE, "VkBufferImageCopy") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the the calling command&#8217;s {@code VkImage} parameter&#8217;s format is not a depth/stencil format, then {@code bufferOffset} <b>must</b> be a multiple of the format&#8217;s element size</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is not a depth/stencil format or a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>,cthen {@code bufferOffset} <b>must</b> be a multiple of the format&#8217;s element size</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, then {@code bufferOffset} <b>must</b> be a multiple of the element size of the compatible format for the format and the {@code aspectMask} of the {@code imageSubresource} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">the “Compatible formats of planes of multi-planar formats” section</a></li>
             <li>{@code bufferOffset} <b>must</b> be a multiple of 4</li>
             <li>{@code bufferRowLength} <b>must</b> be 0, or greater than or equal to the {@code width} member of {@code imageExtent}</li>
             <li>{@code bufferImageHeight} <b>must</b> be 0, or greater than or equal to the {@code height} member of {@code imageExtent}</li>
-            <li>{@code imageOffset.x} and <code>(imageExtent.width imageOffset.x)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource width</li>
-            <li>{@code imageOffset.y} and <code>(imageExtent.height imageOffset.y)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource height</li>
+            <li>{@code imageOffset.x} and <code>(imageExtent.width imageOffset.x)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource width where this refers to the width of the <em>plane</em> of the image involved in the copy in the case of a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
+            <li>{@code imageOffset.y} and <code>(imageExtent.height imageOffset.y)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource height where this refers to the height of the <em>plane</em> of the image involved in the copy in the case of a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
             <li>If the calling command&#8217;s {@code srcImage} (#CmdCopyImageToBuffer()) or {@code dstImage} (#CmdCopyBufferToImage()) is of type #IMAGE_TYPE_1D, then {@code imageOffset.y} <b>must</b> be 0 and {@code imageExtent.height} <b>must</b> be 1.</li>
             <li>{@code imageOffset.z} and <code>(imageExtent.depth imageOffset.z)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource depth</li>
-            <li>If the calling command&#8217;s {@code srcImage} (#CmdCopyImageToBuffer()) or {@code dstImage} (#CmdCopyBufferToImage()) is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code imageOffset.z} <b>must</b> be 0 and {@code imageExtent.depth} <b>must</b> be 1.</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code bufferRowLength} <b>must</b> be a multiple of the compressed texel block width</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code bufferImageHeight} <b>must</b> be a multiple of the compressed texel block height</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, all members of {@code imageOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code bufferOffset} <b>must</b> be a multiple of the compressed texel block size in bytes</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code imageExtent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(imageExtent.width imageOffset.x)</code> <b>must</b> equal the image subresource width</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code imageExtent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(imageExtent.height imageOffset.y)</code> <b>must</b> equal the image subresource height</li>
-            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed format image, {@code imageExtent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(imageExtent.depth imageOffset.z)</code> <b>must</b> equal the image subresource depth</li>
+            <li>If the calling command&#8217;s {@code srcImage} (#CmdCopyImageToBuffer()) or {@code dstImage} (#CmdCopyBufferToImage()) is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code imageOffset.z} <b>must</b> be 0 and {@code imageExtent.depth} <b>must</b> be 1</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code bufferRowLength} <b>must</b> be a multiple of the compressed texel block width</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code bufferImageHeight} <b>must</b> be a multiple of the compressed texel block height</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, all members of {@code imageOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code bufferOffset} <b>must</b> be a multiple of the compressed texel block size in bytes</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code imageExtent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(imageExtent.width imageOffset.x)</code> <b>must</b> equal the image subresource width</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code imageExtent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(imageExtent.height imageOffset.y)</code> <b>must</b> equal the image subresource height</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code imageExtent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(imageExtent.depth imageOffset.z)</code> <b>must</b> equal the image subresource depth</li>
             <li>{@code bufferOffset}, {@code bufferRowLength}, {@code bufferImageHeight} and all members of {@code imageOffset} and {@code imageExtent} <b>must</b> respect the image transfer granularity requirements of the queue family that it will be submitted against, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-physical-device-enumeration">Physical Device Enumeration</a></li>
             <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code VkImage} parameter</li>
+            <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, then the {@code aspectMask} member of {@code imageSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR (with #IMAGE_ASPECT_PLANE_2_BIT_KHR valid only for image formats with three planes)</li>
             <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
             <li>If the calling command&#8217;s {@code VkImage} parameter is of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount} members of {@code imageSubresource} <b>must</b> be 0 and 1, respectively</li>
             <li>When copying to the depth aspect of an image subresource, the data in the source buffer <b>must</b> be in the range <code>[0,1]</code></li>
@@ -4205,6 +4283,10 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 
         Layout transitions that are performed via image memory barriers execute in their entirety in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-order">submission order</a>, relative to other image layout transitions submitted to the same queue, including those performed by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass">render passes</a>. In effect there is an implicit execution dependency from each such layout transition to all layout transitions previously submitted to the same queue.
 
+        The image layout of each image subresource of a depth/stencil image created with #IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT is dependent on the last sample locations used to render to the image subresource as a depth/stencil attachment, thus when the {@code image} member of an ##VkImageMemoryBarrier is an image created with this flag the application <b>can</b> chain a ##VkSampleLocationsInfoEXT structure to the {@code pNext} chain of ##VkImageMemoryBarrier to specify the sample locations to use during the image layout transition.
+
+        If the ##VkSampleLocationsInfoEXT structure in the {@code pNext} chain of ##VkImageMemoryBarrier does not match the sample location state last used to render to the image subresource range specified by {@code subresourceRange} or if no ##VkSampleLocationsInfoEXT structure is in the {@code pNext} chain of ##VkImageMemoryBarrier then the contents of the given image subresource range becomes undefined as if {@code oldLayout} would equal #IMAGE_LAYOUT_UNDEFINED.
+
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code oldLayout} <b>must</b> be #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources affected by the barrier</li>
@@ -4223,6 +4305,8 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
+            <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR then {@code image} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
+            <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR then {@code image} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT set</li>
@@ -4231,7 +4315,7 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkSampleLocationsInfoEXT</li>
             <li>{@code srcAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits} values</li>
             <li>{@code dstAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits} values</li>
             <li>{@code oldLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
@@ -4280,7 +4364,8 @@ val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupRenderPassBeginInfoKHX</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupRenderPassBeginInfoKHX or ##VkRenderPassSampleLocationsBeginInfoEXT</li>
+            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
             <li>{@code framebuffer} <b>must</b> be a valid {@code VkFramebuffer} handle</li>
             <li>Both of {@code framebuffer}, and {@code renderPass} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>

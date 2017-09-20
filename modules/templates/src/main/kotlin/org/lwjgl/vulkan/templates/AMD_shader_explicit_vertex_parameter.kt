@@ -14,12 +14,12 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>SPV_AMD_shader_explicit_vertex_parameter</li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_explicit_vertex_parameter.html">SPV_AMD_shader_explicit_vertex_parameter</a></li>
         </ul>
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_AMD_shader_explicit_vertex_parameter</dd>
+            <dd>{@code VK_AMD_shader_explicit_vertex_parameter}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -27,19 +27,24 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
             <dt><b>Registered Extension Number</b></dt>
             <dd>22</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-05-10</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>mailto:quentin.lin@amd.com[quentin.lin@amd.com]</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-05-10</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.11 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -48,11 +53,6 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
                 <li>Daniel Rakos, AMD</li>
                 <li>Graham Sellers, AMD</li>
                 <li>Rex Xu, AMD</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Qun Lin, AMD (mailto:quentin.lin@amd.com[quentin.lin@amd.com])</li>
             </ul></dd>
         </dl>
         """

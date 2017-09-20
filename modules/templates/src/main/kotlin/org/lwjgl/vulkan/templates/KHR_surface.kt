@@ -22,7 +22,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_surface</dd>
+            <dd>{@code VK_KHR_surface}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Instance extension</dd>
@@ -30,19 +30,24 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
             <dt><b>Registered Extension Number</b></dt>
             <dd>1</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-08-25</dd>
-
             <dt><b>Revision</b></dt>
             <dd>25</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones @cubanismo,Ian Elliott mailto:ianelliott@google.com[ianelliott@google.com]</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-08-25</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -58,12 +63,6 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
                 <li>Jeff Vigil, Qualcomm</li>
                 <li>Chia-I Wu, LunarG</li>
                 <li>Jason Ekstrand, Intel</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>James Jones, NVIDIA</li>
-                <li>Ian Elliott, LunarG</li>
             </ul></dd>
         </dl>
         """

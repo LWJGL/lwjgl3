@@ -96,7 +96,7 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_dedicated_allocation</dd>
+            <dd>{@code VK_KHR_dedicated_allocation}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -104,33 +104,30 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
             <dt><b>Registered Extension Number</b></dt>
             <dd>128</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft.</dd>
+            <dt><b>Revision</b></dt>
+            <dd>3</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_memory_requirements2">{@code VK_KHR_get_memory_requirements2}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones @cubanismo</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-08-07</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>3</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_get_memory_requirements2.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Jason Ekstrand, Intel</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Jason Ekstrand (jason.ekstrand 'at' intel.com)</li>
             </ul></dd>
         </dl>
         """

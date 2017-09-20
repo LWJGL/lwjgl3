@@ -19,7 +19,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_descriptor_update_template</dd>
+            <dd>{@code VK_KHR_descriptor_update_template}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -27,21 +27,27 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
             <dt><b>Registered Extension Number</b></dt>
             <dd>86</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>In Work</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Markus Tavenrath @mtavenrath</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-01-11</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
                 <li>Interacts with VK_KHR_push_descriptor</li>
             </ul></dd>
 
@@ -49,11 +55,6 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Michael Worcester, Imagination Technologies</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Markus Tavenrath (matavenrath 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

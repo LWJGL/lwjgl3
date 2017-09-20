@@ -13,35 +13,35 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
         """
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_swapchain_colorspace</dd>
+            <dd>{@code VK_EXT_swapchain_colorspace}</dd>
 
             <dt><b>Extension Type</b></dt>
-            <dd>Instance</dd>
+            <dd>Instance extension</dd>
 
             <dt><b>Registered Extension Number</b></dt>
             <dd>105</dd>
 
+            <dt><b>Revision</b></dt>
+            <dd>3</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_surface">{@code VK_KHR_surface}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Courtney Goeltzenleuchter @courtneygo</li>
+            </ul></dd>
+
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-03-15</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires VK_KHR_surface</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Courtney Goeltzenleuchter, Google</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
             <dd><ul>
                 <li>Courtney Goeltzenleuchter, Google</li>
             </ul></dd>

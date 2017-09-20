@@ -15,7 +15,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_AMD_draw_indirect_count</dd>
+            <dd>{@code VK_AMD_draw_indirect_count}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -23,19 +23,24 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
             <dt><b>Registered Extension Number</b></dt>
             <dd>34</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-08-23</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Daniel Rakos @aqnuep</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-08-23</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -44,11 +49,6 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
                 <li>Graham Sellers, AMD</li>
                 <li>Daniel Rakos, AMD</li>
                 <li>Dominik Witczak, AMD</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Matthaeus G. Chajdas, AMD (mailto:matthaeus.chajdas@amd.com[matthaeus.chajdas@amd.com])</li>
             </ul></dd>
         </dl>
         """
@@ -113,6 +113,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
             <li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>Image subresources used as attachments in the current render pass <b>must</b> not be accessed in any way other than as an attachment by this command.</li>
             <li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <b>must</b> be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
+            <li>If the currently bound graphics pipeline was created with ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} set to #TRUE and the current subpass has a depth/stencil attachment, then that attachment <b>must</b> have been created with the #IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT bit set</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -196,6 +197,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
             <li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>Image subresources used as attachments in the current render pass <b>must</b> not be accessed in any way other than as an attachment by this command.</li>
             <li>If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <b>must</b> be less than or equal to ##VkPhysicalDeviceMultiviewPropertiesKHX{@code ::maxMultiviewInstanceIndex}.</li>
+            <li>If the currently bound graphics pipeline was created with ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} set to #TRUE and the current subpass has a depth/stencil attachment, then that attachment <b>must</b> have been created with the #IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT bit set</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

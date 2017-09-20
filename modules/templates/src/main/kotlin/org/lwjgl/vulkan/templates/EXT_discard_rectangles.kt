@@ -19,7 +19,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_discard_rectangles</dd>
+            <dd>{@code VK_EXT_discard_rectangles}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -27,31 +27,27 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
             <dt><b>Registered Extension Number</b></dt>
             <dd>100</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Data</b></dt>
-            <dd>2016-12-22</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires Vulkan 1.0.</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a>.</li>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
             </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Piers Daniell @pdaniell</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-12-22</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Daniel Koch, NVIDIA</li>
                 <li>Jeff Bolz, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Piers Daniell (pdaniell 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

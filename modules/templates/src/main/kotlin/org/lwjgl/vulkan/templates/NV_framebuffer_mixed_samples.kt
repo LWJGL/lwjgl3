@@ -26,7 +26,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_NV_framebuffer_mixed_samples</dd>
+            <dd>{@code VK_NV_framebuffer_mixed_samples}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -34,24 +34,25 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV
             <dt><b>Registered Extension Number</b></dt>
             <dd>153</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Data</b></dt>
-            <dd>2017-06-04</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires Vulkan 1.0.</li>
+                <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
+                <li>Jeff Bolz @jbolz</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-06-04</dd>
+
+            <dt><b>Contributors</b></dt>
+            <dd><ul>
+                <li>Jeff Bolz, NVIDIA</li>
             </ul></dd>
         </dl>
         """

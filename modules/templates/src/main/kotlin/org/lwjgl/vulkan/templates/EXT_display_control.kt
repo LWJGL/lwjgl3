@@ -15,7 +15,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_display_control</dd>
+            <dd>{@code VK_EXT_display_control}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -23,22 +23,26 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <dt><b>Registered Extension Number</b></dt>
             <dd>92</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-12-13</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_EXT_display_surface_counter">{@code VK_EXT_display_surface_counter}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones @cubanismo</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-12-13</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.37 of the Vulkan API.</li>
-                <li>Requires VK_KHR_display</li>
-                <li>Requires VK_EXT_display_surface_counter</li>
-                <li>Requires VK_KHR_swapchain</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -47,11 +51,6 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
                 <li>Damien Leone, NVIDIA</li>
                 <li>Pierre-Loup Griffais, Valve</li>
                 <li>Daniel Vetter, Intel</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>James Jones, NVIDIA (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """
@@ -186,7 +185,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code pDeviceEventInfo} <b>must</b> be a pointer to a valid ##VkDeviceEventInfoEXT structure</li>
-            <li>{@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>{@code pFence} <b>must</b> be a pointer to a {@code VkFence} handle</li>
         </ul>
 
@@ -204,7 +203,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         VkDevice.IN("device", "a logical device on which the event <b>may</b> occur."),
         const..VkDeviceEventInfoEXT.p.IN("pDeviceEventInfo", "a pointer to an instance of the ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
-        const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 
@@ -229,7 +228,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
             <li>{@code pDisplayEventInfo} <b>must</b> be a pointer to a valid ##VkDisplayEventInfoEXT structure</li>
-            <li>{@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>{@code pFence} <b>must</b> be a pointer to a {@code VkFence} handle</li>
         </ul>
 
@@ -248,7 +247,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         VkDevice.IN("device", "a logical device associated with {@code display}"),
         VkDisplayKHR.IN("display", "the display on which the event <b>may</b> occur."),
         const..VkDisplayEventInfoEXT.p.IN("pDisplayEventInfo", "a pointer to an instance of the ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
-        const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 

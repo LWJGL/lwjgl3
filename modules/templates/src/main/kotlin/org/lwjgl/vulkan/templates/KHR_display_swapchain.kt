@@ -20,7 +20,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_display_swapchain</dd>
+            <dd>{@code VK_KHR_display_swapchain}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -28,35 +28,32 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
             <dt><b>Registered Extension Number</b></dt>
             <dd>4</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft.</dd>
+            <dt><b>Revision</b></dt>
+            <dd>9</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_display">{@code VK_KHR_display}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones @cubanismo</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-03-13</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>10</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_swapchain.</li>
-                <li>Requires VK_KHR_display.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>James Jones, NVIDIA</li>
                 <li>Jeff Vigil, Qualcomm</li>
                 <li>Jesse Hall, Google</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>James Jones (jajones 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

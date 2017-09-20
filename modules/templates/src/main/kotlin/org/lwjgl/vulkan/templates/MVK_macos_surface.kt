@@ -15,7 +15,7 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_MVK_macos_surface</dd>
+            <dd>{@code VK_MVK_macos_surface}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Instance extension</dd>
@@ -23,27 +23,27 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
             <dt><b>Registered Extension Number</b></dt>
             <dd>124</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-02-24</dd>
-
             <dt><b>Revision</b></dt>
             <dd>2</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_surface">{@code VK_KHR_surface}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Bill Hollings @billhollings</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-02-24</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_surface.</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Bill Hollings, The Brenwill Workshop Ltd.</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
             <dd><ul>
                 <li>Bill Hollings, The Brenwill Workshop Ltd.</li>
             </ul></dd>

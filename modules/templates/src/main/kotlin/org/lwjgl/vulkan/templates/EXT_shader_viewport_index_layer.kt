@@ -11,11 +11,11 @@ import org.lwjgl.vulkan.*
 val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassVK("EXT_shader_viewport_index_layer", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension adds support for the {@code ShaderViewportIndexLayerEXT} capability from the SPV_EXT_shader_viewport_index_layer extension in Vulkan.
+        This extension adds support for the {@code ShaderViewportIndexLayerEXT} capability from the {@code SPV_EXT_shader_viewport_index_layer} extension in Vulkan.
 
         This extension allows variables decorated with the {@code Layer} and {@code ViewportIndex} built-ins to be exported from vertex or tessellation shaders, using the {@code ShaderViewportIndexLayerEXT} capability.
 
-        When using GLSL source-based shading languages, the {@code gl_ViewportIndex} and {@code gl_Layer} built-in variables map to the SPIR-V {@code ViewportIndex} and {@code Layer} built-in decorations, respectively. Behaviour of these variables is extended as described in the GL_ARB_shader_viewport_layer_array (or the precursor GL_AMD_vertex_shader_layer, AMD_vertex_shader_viewport_index, and GL_NV_viewport_array2 extensions).
+        When using GLSL source-based shading languages, the {@code gl_ViewportIndex} and {@code gl_Layer} built-in variables map to the SPIR-V {@code ViewportIndex} and {@code Layer} built-in decorations, respectively. Behaviour of these variables is extended as described in the {@code GL_ARB_shader_viewport_layer_array} (or the precursor {@code GL_AMD_vertex_shader_layer}, {@code GL_AMD_vertex_shader_viewport_index}, and +GL_NV_viewport_array2 extensions+).
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The {@code ShaderViewportIndexLayerEXT} capability is equivalent to the  {@code ShaderViewportIndexLayerNV} capability added by  <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_NV_viewport_array2">VK_NV_viewport_array2</a>.
@@ -23,7 +23,7 @@ val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassV
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_shader_viewport_index_layer</dd>
+            <dd>{@code VK_EXT_shader_viewport_index_layer}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -31,22 +31,27 @@ val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassV
             <dt><b>Registered Extension Number</b></dt>
             <dd>163</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Data</b></dt>
-            <dd>2017-08-08</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires Vulkan 1.0.</li>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Daniel Koch @dgkoch</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-08-08</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_shader_viewport_index_layer.html">SPV_EXT_shader_viewport_index_layer</a> SPIR-V extension.</li>
-                <li>This extension requires the <a target="_blank" href="https://www.opengl.org/registry/specs/ARB/shader_viewport_layer_array.txt">GL_ARB_shader_viewport_layer_array</a>, <a target="_blank" href="https://www.opengl.org/registry/specs/AMD/vertex_shader_layer.txt">GL_AMD_vertex_shader_layer</a>, <a target="_blank" href="https://www.opengl.org/registry/specs/AMD/vertex_shader_viewport_index.txt">GL_AMD_vertex_shader_viewport_index</a>, or <a target="_blank" href="https://www.opengl.org/registry/specs/NV/viewport_array2.txt">GL_NV_viewport_array2</a> extensions for GLSL source languages.</li>
-                <li>This extension requires the {@code geometryShader} and {@code multiViewport} features.</li>
+                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_viewport_layer_array.txt">GL_ARB_shader_viewport_layer_array</a>, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_layer.txt">GL_AMD_vertex_shader_layer</a>, <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_viewport_index.txt">GL_AMD_vertex_shader_viewport_index</a>, or <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">GL_NV_viewport_array2</a> extensions for GLSL source languages.</li>
+                <li>This extension requires the {@code multiViewport} feature.</li>
                 <li>This extension interacts with the {@code tessellationShader} feature.</li>
             </ul></dd>
 
@@ -57,11 +62,6 @@ val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassV
                 <li>Jan-Harald Fredriksen, ARM</li>
                 <li>Daniel Rakos, AMD</li>
                 <li>Slawomir Grajeswki, Intel</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Daniel Koch (dkoch 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

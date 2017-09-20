@@ -23,7 +23,7 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
 
         This extension adds a new {@code ViewportMaskNV} built-in decoration that is available for output variables in vertex, tessellation evaluation, and geometry shaders, and a new {@code ViewportRelativeNV} decoration that can be added on variables decorated with {@code Layer} when using the {@code ShaderViewportMaskNV} capability.
 
-        When using GLSL source-based shading languages, the {@code gl_ViewportMask}[] built-in output variable and {@code viewport_relative} layout qualifier from {@code GL_NV_viewport_array2} map to the {@code ViewportMaskNV} and {@code ViewportRelativeNV} decorations, respectively. Behaviour is described in the GL_NV_viewport_array2 extension specificiation.
+        When using GLSL source-based shading languages, the {@code gl_ViewportMask}[] built-in output variable and {@code viewport_relative} layout qualifier from {@code GL_NV_viewport_array2} map to the {@code ViewportMaskNV} and {@code ViewportRelativeNV} decorations, respectively. Behaviour is described in the {@code GL_NV_viewport_array2} extension specificiation.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The {@code ShaderViewportIndexLayerNV} capability is equivalent to the  {@code ShaderViewportIndexLayerEXT} capability added by  <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_EXT_shader_viewport_index_layer">VK_EXT_shader_viewport_index_layer</a>.
@@ -31,7 +31,7 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_NV_viewport_array2</dd>
+            <dd>{@code VK_NV_viewport_array2}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -39,21 +39,26 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
             <dt><b>Registered Extension Number</b></dt>
             <dd>97</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Data</b></dt>
-            <dd>2017-02-15</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires Vulkan 1.0.</li>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Daniel Koch @dgkoch</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-02-15</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_viewport_array2.html">SPV_NV_viewport_array2</a> SPIR-V extension.</li>
-                <li>This extension requires the <a target="_blank" href="https://www.opengl.org/registry/specs/NV/viewport_array2.txt">GL_NV_viewport_array2</a> extension for GLSL source languages.</li>
+                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">GL_NV_viewport_array2</a> extension for GLSL source languages.</li>
                 <li>This extension requires the {@code geometryShader} and {@code multiViewport} features.</li>
                 <li>This extension interacts with the {@code tessellationShader} feature.</li>
             </ul></dd>
@@ -62,11 +67,6 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
             <dd><ul>
                 <li>Piers Daniell, NVIDIA</li>
                 <li>Jeff Bolz, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Daniel Koch (dkoch 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

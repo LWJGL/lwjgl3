@@ -145,8 +145,8 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿    vkQueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);</pre></code>
 
         <dl>
-            <dt><b>Name</b></dt>
-            <dd>VK_NV_win32_keyed_mutex</dd>
+            <dt><b>Name String</b></dt>
+            <dd>{@code VK_NV_win32_keyed_mutex}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -154,34 +154,30 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
             <dt><b>Registered Extension Number</b></dt>
             <dd>59</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_NV_external_memory_win32">{@code VK_NV_external_memory_win32}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Carsten Rohde</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-08-19</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>2</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_NV_external_memory_capabilities</li>
-                <li>Requires VK_NV_external_memory_win32</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>James Jones, NVIDIA</li>
                 <li>Carsten Rohde, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Carsten Rohde (crohde 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

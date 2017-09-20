@@ -15,7 +15,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_shared_presentable_image</dd>
+            <dd>{@code VK_KHR_shared_presentable_image}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -23,23 +23,27 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
             <dt><b>Registered Extension Number</b></dt>
             <dd>112</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-03-20</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_surface_capabilities2">{@code VK_KHR_get_surface_capabilities2}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Alon Or-bach @alonorbach</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-03-20</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires VK_KHR_swapchain.</li>
-                <li>This extension requires VK_KHR_surface.</li>
-                <li>This extension requires VK_KHR_get_physical_device_properties2.</li>
-                <li>This extension requires VK_KHR_get_surface_capabilities2.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -56,11 +60,6 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
                 <li>Michael Worcester, Imagination Technologies</li>
                 <li>Cass Everitt, Oculus</li>
                 <li>Johannes Van Waveren, Oculus</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Alon Or-bach, Samsung Electronics</li>
             </ul></dd>
         </dl>
         """

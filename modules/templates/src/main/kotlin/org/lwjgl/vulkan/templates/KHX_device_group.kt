@@ -18,7 +18,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHX_device_group</dd>
+            <dd>{@code VK_KHX_device_group}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -26,33 +26,30 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
             <dt><b>Registered Extension Number</b></dt>
             <dd>61</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft.</dd>
+            <dt><b>Revision</b></dt>
+            <dd>2</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHX_device_group_creation">{@code VK_KHX_device_group_creation}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Jeff Bolz @jbolz</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-10-19</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2017-05-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_swapchain revision 68.</li>
-                <li>Requires VK_KHX_device_group_creation revision 1.</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
+                <li>Tobias Hector, Imagination Technologies</li>
             </ul></dd>
         </dl>
         """
@@ -60,7 +57,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
     IntConstant(
         "The extension specification version.",
 
-        "KHX_DEVICE_GROUP_SPEC_VERSION".."1"
+        "KHX_DEVICE_GROUP_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -73,24 +70,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHX".."1000060000",
-        "STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHX".."1000060001",
-        "STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHX".."1000060002",
         "STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHX".."1000060003",
         "STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHX".."1000060004",
         "STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHX".."1000060005",
         "STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHX".."1000060006",
-        "STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHX".."1000060007",
-        "STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHX".."1000060008",
-        "STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHX".."1000060009",
-        "STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHX".."1000060010",
-        "STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHX".."1000060011",
-        "STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHX".."1000060012"
-    )
-
-    EnumConstant(
-        "Extends {@code VkImageCreateFlagBits}.",
-
-        "IMAGE_CREATE_BIND_SFR_BIT_KHX".enum(0x00000040)
+        "STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHX".."1000060010"
     )
 
     EnumConstant(
@@ -107,6 +91,34 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
     )
 
     EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHX".."1000060013",
+        "STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHX".."1000060014"
+    )
+
+    EnumConstant(
+        "Extends {@code VkImageCreateFlagBits}.",
+
+        "IMAGE_CREATE_BIND_SFR_BIT_KHX".enum(0x00000040)
+    )
+
+    EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHX".."1000060007"
+    )
+
+    EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHX".."1000060008",
+        "STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHX".."1000060009",
+        "STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHX".."1000060011",
+        "STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHX".."1000060012"
+    )
+
+    EnumConstant(
         "Extends {@code VkSwapchainCreateFlagBitsKHR}.",
 
         "SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX".enum(0x00000001)
@@ -118,13 +130,13 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         <h5>Description</h5>
         <ul>
-            <li>#PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX indicates that the memory <b>can</b> be accessed as the source of a ftext:vkCmdCopy* command.</li>
-            <li>#PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX indicates that the memory <b>can</b> be accessed as the destination of a ftext:vkCmdCopy* command.</li>
-            <li>#PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX indicates that the memory <b>can</b> be read as any other memory access type.</li>
-            <li>#PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX indicates that the memory <b>can</b> be written as any other memory access type. Shader atomics are considered to be writes.</li>
+            <li>#PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX indicates that the memory <b>can</b> be accessed as the source of a ftext:vkCmdCopyBuffer, ftext:vkCmdCopyImage, ftext:vkCmdCopyBufferToImage, or ftext:vkCmdCopyImageToBuffer command.</li>
+            <li>#PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX indicates that the memory <b>can</b> be accessed as the destination of a ftext:vkCmdCopyBuffer, ftext:vkCmdCopyImage, ftext:vkCmdCopyBufferToImage, or ftext:vkCmdCopyImageToBuffer command.</li>
+            <li>#PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX indicates that the memory <b>can</b> be read as any memory access type.</li>
+            <li>#PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX indicates that the memory <b>can</b> be written as any memory access type. Shader atomics are considered to be writes.</li>
         </ul>
 
-        #PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX <b>must</b> be supported for all heaps.
+        #PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX <b>must</b> be supported for all host local heaps and for at least one device local heap.
 
         If a device does not support a peer memory feature, it is still valid to use a resource that includes both local and peer memory bindings with the corresponding access type as long as only the local bindings are actually accessed. For example, an application doing split-frame rendering would use framebuffer attachments that include both local and peer memory bindings, but would scissor the rendering to only update local memory.
 
@@ -217,100 +229,6 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         Check(1)..VkPeerMemoryFeatureFlagsKHX.p.OUT("pPeerMemoryFeatures", "a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBitsKHX} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.")
     )
 
-    VkResult(
-        "BindBufferMemory2KHX",
-        """
-        Bind device memory to buffer objects.
-
-        <h5>C Specification</h5>
-        To attach memory to buffer objects for one or more buffers at a time, call:
-
-        <code><pre>
-￿VkResult vkBindBufferMemory2KHX(
-￿    VkDevice                                    device,
-￿    uint32_t                                    bindInfoCount,
-￿    const VkBindBufferMemoryInfoKHX*            pBindInfos);</pre></code>
-
-        <h5>Description</h5>
-        On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pBindInfos} <b>must</b> be a pointer to an array of {@code bindInfoCount} valid ##VkBindBufferMemoryInfoKHX structures</li>
-            <li>{@code bindInfoCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkBindBufferMemoryInfoKHX
-        """,
-
-        VkDevice.IN("device", "the logical device that owns the buffers and memory."),
-        AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        const..VkBindBufferMemoryInfoKHX.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindBufferMemoryInfoKHX, describing buffers and memory to bind.")
-    )
-
-    VkResult(
-        "BindImageMemory2KHX",
-        """
-        Bind device memory to image objects.
-
-        <h5>C Specification</h5>
-        To attach memory to image objects for one or more images at a time, call:
-
-        <code><pre>
-￿VkResult vkBindImageMemory2KHX(
-￿    VkDevice                                    device,
-￿    uint32_t                                    bindInfoCount,
-￿    const VkBindImageMemoryInfoKHX*             pBindInfos);</pre></code>
-
-        <h5>Description</h5>
-        On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pBindInfos} <b>must</b> be a pointer to an array of {@code bindInfoCount} valid ##VkBindImageMemoryInfoKHX structures</li>
-            <li>{@code bindInfoCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkBindImageMemoryInfoKHX
-        """,
-
-        VkDevice.IN("device", "the logical device that owns the images and memory."),
-        AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        const..VkBindImageMemoryInfoKHX.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindImageMemoryInfoKHX, describing images and memory to bind.")
-    )
-
     void(
         "CmdSetDeviceMaskKHX",
         """
@@ -357,153 +275,6 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         VkCommandBuffer.IN("commandBuffer", "command buffer whose current device mask is modified."),
         uint32_t.IN("deviceMask", "the new value of the current device mask.")
-    )
-
-    VkResult(
-        "GetDeviceGroupPresentCapabilitiesKHX",
-        """
-        Query present capabilities from other physical devices.
-
-        <h5>C Specification</h5>
-        A logical device that represents multiple physical devices <b>may</b> support presenting from images on more than one physical device, or combining images from multiple physical devices.
-
-        To query these capabilities, call:
-
-        <code><pre>
-￿VkResult vkGetDeviceGroupPresentCapabilitiesKHX(
-￿    VkDevice                                    device,
-￿    VkDeviceGroupPresentCapabilitiesKHX*        pDeviceGroupPresentCapabilities);</pre></code>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pDeviceGroupPresentCapabilities} <b>must</b> be a pointer to a ##VkDeviceGroupPresentCapabilitiesKHX structure</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkDeviceGroupPresentCapabilitiesKHX
-        """,
-
-        VkDevice.IN("device", "the logical device."),
-        VkDeviceGroupPresentCapabilitiesKHX.p.OUT("pDeviceGroupPresentCapabilities", "a pointer to a structure of type ##VkDeviceGroupPresentCapabilitiesKHX that is filled with the logical device&#8217;s capabilities.")
-    )
-
-    VkResult(
-        "GetDeviceGroupSurfacePresentModesKHX",
-        """
-        Query present capabilities for a surface.
-
-        <h5>C Specification</h5>
-        Some surfaces <b>may</b> not be capable of using all the device group present modes.
-
-        To query the supported device group present modes for a particular surface, call:
-
-        <code><pre>
-￿VkResult vkGetDeviceGroupSurfacePresentModesKHX(
-￿    VkDevice                                    device,
-￿    VkSurfaceKHR                                surface,
-￿    VkDeviceGroupPresentModeFlagsKHX*           pModes);</pre></code>
-
-        <h5>Description</h5>
-        The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHX().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-            <li>{@code pModes} <b>must</b> be a pointer to a combination of {@code VkDeviceGroupPresentModeFlagBitsKHX} values</li>
-            <li>{@code pModes} <b>must</b> not be 0</li>
-            <li>Both of {@code device}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code surface} <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_SURFACE_LOST_KHR</li>
-            </ul></dd>
-        </dl>
-        """,
-
-        VkDevice.IN("device", "the logical device."),
-        VkSurfaceKHR.IN("surface", "the surface."),
-        Check(1)..VkDeviceGroupPresentModeFlagsKHX.p.OUT("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHX} that is filled with the supported device group present modes for the surface.")
-    )
-
-    VkResult(
-        "AcquireNextImage2KHX",
-        """
-        Retrieve the index of the next available presentable image.
-
-        <h5>C Specification</h5>
-        To acquire an available presentable image to use, and retrieve the index of that image, call:
-
-        <code><pre>
-￿VkResult vkAcquireNextImage2KHX(
-￿    VkDevice                                    device,
-￿    const VkAcquireNextImageInfoKHX*            pAcquireInfo,
-￿    uint32_t*                                   pImageIndex);</pre></code>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pAcquireInfo} <b>must</b> be a pointer to a valid ##VkAcquireNextImageInfoKHX structure</li>
-            <li>{@code pImageIndex} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#TIMEOUT</li>
-                <li>#NOT_READY</li>
-                <li>#SUBOPTIMAL_KHR</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_DEVICE_LOST</li>
-                <li>#ERROR_OUT_OF_DATE_KHR</li>
-                <li>#ERROR_SURFACE_LOST_KHR</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkAcquireNextImageInfoKHX
-        """,
-
-        VkDevice.IN("device", "the device associated with {@code swapchain}."),
-        const..VkAcquireNextImageInfoKHX.p.IN("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHX containing parameters of the acquire."),
-        Check(1)..uint32_t_p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
     )
 
     void(
@@ -569,7 +340,104 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         uint32_t.IN("groupCountZ", "the number of local workgroups to dispatch in the Z dimension.")
     )
 
-    VkResult(
+    DependsOn("VK_KHR_surface")..VkResult(
+        "GetDeviceGroupPresentCapabilitiesKHX",
+        """
+        Query present capabilities from other physical devices.
+
+        <h5>C Specification</h5>
+        A logical device that represents multiple physical devices <b>may</b> support presenting from images on more than one physical device, or combining images from multiple physical devices.
+
+        To query these capabilities, call:
+
+        <code><pre>
+￿VkResult vkGetDeviceGroupPresentCapabilitiesKHX(
+￿    VkDevice                                    device,
+￿    VkDeviceGroupPresentCapabilitiesKHX*        pDeviceGroupPresentCapabilities);</pre></code>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pDeviceGroupPresentCapabilities} <b>must</b> be a pointer to a ##VkDeviceGroupPresentCapabilitiesKHX structure</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkDeviceGroupPresentCapabilitiesKHX
+        """,
+
+        VkDevice.IN("device", "the logical device."),
+        VkDeviceGroupPresentCapabilitiesKHX.p.OUT("pDeviceGroupPresentCapabilities", "a pointer to a structure of type ##VkDeviceGroupPresentCapabilitiesKHX that is filled with the logical device&#8217;s capabilities.")
+    )
+
+    DependsOn("VK_KHR_surface")..VkResult(
+        "GetDeviceGroupSurfacePresentModesKHX",
+        """
+        Query present capabilities for a surface.
+
+        <h5>C Specification</h5>
+        Some surfaces <b>may</b> not be capable of using all the device group present modes.
+
+        To query the supported device group present modes for a particular surface, call:
+
+        <code><pre>
+￿VkResult vkGetDeviceGroupSurfacePresentModesKHX(
+￿    VkDevice                                    device,
+￿    VkSurfaceKHR                                surface,
+￿    VkDeviceGroupPresentModeFlagsKHX*           pModes);</pre></code>
+
+        <h5>Description</h5>
+        The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHX().
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>{@code pModes} <b>must</b> be a pointer to a combination of {@code VkDeviceGroupPresentModeFlagBitsKHX} values</li>
+            <li>{@code pModes} <b>must</b> not be 0</li>
+            <li>Both of {@code device}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code surface} <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_SURFACE_LOST_KHR</li>
+            </ul></dd>
+        </dl>
+        """,
+
+        VkDevice.IN("device", "the logical device."),
+        VkSurfaceKHR.IN("surface", "the surface."),
+        Check(1)..VkDeviceGroupPresentModeFlagsKHX.p.OUT("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHX} that is filled with the supported device group present modes for the surface.")
+    )
+
+    DependsOn("VK_KHR_surface")..VkResult(
         "GetPhysicalDevicePresentRectanglesKHX",
         """
         Query present rectangles for a surface on a physical device.
@@ -630,5 +498,55 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         VkSurfaceKHR.IN("surface", "the surface."),
         AutoSize("pRects")..Check(1)..uint32_t_p.INOUT("pRectCount", "a pointer to an integer related to the number of rectangles available or queried, as described below."),
         nullable..VkRect2D.p.OUT("pRects", "either {@code NULL} or a pointer to an array of ##VkRect2D structures.")
+    )
+
+    DependsOn("VK_KHR_swapchain")..VkResult(
+        "AcquireNextImage2KHX",
+        """
+        Retrieve the index of the next available presentable image.
+
+        <h5>C Specification</h5>
+        To acquire an available presentable image to use, and retrieve the index of that image, call:
+
+        <code><pre>
+￿VkResult vkAcquireNextImage2KHX(
+￿    VkDevice                                    device,
+￿    const VkAcquireNextImageInfoKHX*            pAcquireInfo,
+￿    uint32_t*                                   pImageIndex);</pre></code>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pAcquireInfo} <b>must</b> be a pointer to a valid ##VkAcquireNextImageInfoKHX structure</li>
+            <li>{@code pImageIndex} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+                <li>#TIMEOUT</li>
+                <li>#NOT_READY</li>
+                <li>#SUBOPTIMAL_KHR</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_DEVICE_LOST</li>
+                <li>#ERROR_OUT_OF_DATE_KHR</li>
+                <li>#ERROR_SURFACE_LOST_KHR</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkAcquireNextImageInfoKHX
+        """,
+
+        VkDevice.IN("device", "the device associated with {@code swapchain}."),
+        const..VkAcquireNextImageInfoKHX.p.IN("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHX containing parameters of the acquire."),
+        Check(1)..uint32_t_p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
     )
 }

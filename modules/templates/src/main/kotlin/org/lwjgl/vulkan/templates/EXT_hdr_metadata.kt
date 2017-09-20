@@ -17,35 +17,35 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_hdr_metadata</dd>
+            <dd>{@code VK_EXT_hdr_metadata}</dd>
 
             <dt><b>Extension Type</b></dt>
-            <dd>Device</dd>
+            <dd>Device extension</dd>
 
             <dt><b>Registered Extension Number</b></dt>
             <dd>106</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-03-04</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Courtney Goeltzenleuchter @courtneygo</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-03-04</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires VK_KHR_surface.</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Courtney Goeltzenleuchter, Google</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
             <dd><ul>
                 <li>Courtney Goeltzenleuchter, Google</li>
             </ul></dd>

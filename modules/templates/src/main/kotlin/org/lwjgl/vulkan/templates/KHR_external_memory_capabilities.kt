@@ -15,7 +15,7 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_external_memory_capabilities</dd>
+            <dd>{@code VK_KHR_external_memory_capabilities}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Instance extension</dd>
@@ -23,19 +23,27 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
             <dt><b>Registered Extension Number</b></dt>
             <dd>72</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>James Jones @cubanismo</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-17</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>This extension is written against version 1.0 of the Vulkan API.</li>
                 <li>Requires VK_KHR_get_physical_device_properties2.</li>
@@ -49,9 +57,6 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
                 <li>Jesse Hall, Google</li>
                 <li>James Jones, NVIDIA</li>
             </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd>James Jones (jajones 'at' nvidia.com)</dd>
         </dl>
         """
 
@@ -97,6 +102,24 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR specifies an NT handle returned by {@code ID3D12Device}::{@code CreateSharedHandle} referring to a Direct3D 12 heap resource. It owns a reference to the resources used by the Direct3D heap.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR specifies an NT handle returned by {@code ID3D12Device}::{@code CreateSharedHandle} referring to a Direct3D 12 committed resource. It owns a reference to the memory used by the Direct3D resource.</li>
         </ul>
+
+        
+
+        Some external memory handle types can only be shared within the same underlying physical device and/or the same driver version, as defined in the following table:
+
+        <h6>External memory handle types compatibility</h6>
+        <table class="lwjgl">
+            <tbody>
+                <tr><td>Handle type</td><td>##VkPhysicalDeviceIDPropertiesKHR{@code ::driverUUID}</td><td>##VkPhysicalDeviceIDPropertiesKHR{@code ::deviceUUID}</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+            </tbody>
+        </table>
 
         <h5>See Also</h5>
         {@code VkExternalMemoryHandleTypeFlagsKHR}, ##VkImportMemoryFdInfoKHR, ##VkImportMemoryWin32HandleInfoKHR, ##VkMemoryGetFdInfoKHR, ##VkMemoryGetWin32HandleInfoKHR, ##VkPhysicalDeviceExternalBufferInfoKHR, ##VkPhysicalDeviceExternalImageFormatInfoKHR, #GetMemoryFdPropertiesKHR(), #GetMemoryWin32HandlePropertiesKHR()

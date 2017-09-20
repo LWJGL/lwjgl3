@@ -37,7 +37,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_sampler_mirror_clamp_to_edge</dd>
+            <dd>{@code VK_KHR_sampler_mirror_clamp_to_edge}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -45,28 +45,25 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
             <dt><b>Registered Extension Number</b></dt>
             <dd>15</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Final</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Tobias Hector @tobias</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-02-16</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-            </ul></dd>
-
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Tobias Hector, Imagination Technologies</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Tobias Hector (mailto:tobias.hector@imgtec.com[tobias.hector@imgtec.com])</li>
             </ul></dd>
         </dl>
         """

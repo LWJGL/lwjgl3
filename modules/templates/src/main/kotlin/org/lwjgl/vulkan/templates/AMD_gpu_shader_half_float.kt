@@ -14,12 +14,12 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>SPV_AMD_gpu_shader_half_float</li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_half_float.html">SPV_AMD_gpu_shader_half_float</a></li>
         </ul>
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_AMD_gpu_shader_half_float</dd>
+            <dd>{@code VK_AMD_gpu_shader_half_float}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -27,19 +27,24 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
             <dt><b>Registered Extension Number</b></dt>
             <dd>37</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-09-21</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Dominik Witczak @dominikwitczak_amd</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-09-21</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.27 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -49,11 +54,6 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
                 <li>Graham Sellers, AMD</li>
                 <li>Qun Lin, AMD</li>
                 <li>Rex Xu, AMD</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Dominik Witczak, AMD (mailto:Dominik.Witczak@amd.com[Dominik.Witczak@amd.com])</li>
             </ul></dd>
         </dl>
         """

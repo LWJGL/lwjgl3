@@ -65,7 +65,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_AMD_texture_gather_bias_lod</dd>
+            <dd>{@code VK_AMD_texture_gather_bias_lod}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -73,19 +73,28 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
             <dt><b>Registered Extension Number</b></dt>
             <dd>42</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>03/21/2017</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Rex Xu @amdrexu</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>03/21/2017</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_get_physical_device_properties2.</li>
                 <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_texture_gather_bias_lod.html">SPV_AMD_texture_gather_bias_lod</a> SPIR-V extension.</li>
             </ul></dd>
 
@@ -98,11 +107,6 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
                 <li>Qun Lin, AMD</li>
                 <li>Rex Xu, AMD</li>
                 <li>Timothy Lottes, AMD</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Rex Xu, AMD (mailto:Rex.Xu@amd.com[Rex.Xu@amd.com])</li>
             </ul></dd>
         </dl>
         """

@@ -21,7 +21,7 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 
         This extension provides access to the {@code PassthroughNV} decoration under the {@code GeometryShaderPassthroughNV} capability. Adding this to a geometry shader input variable indicates that the values of this input are copied to the corresponding vertex of the output primitive.
 
-        When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from GL_NV_geometry_shader_passthrough maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the GL_NV_geometry_shader_passthrough extension must be enabled. Behaviour is described in the GL_NV_geometry_shader_passthrough extension specification.
+        When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from {@code GL_NV_geometry_shader_passthrough} maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the {@code GL_NV_geometry_shader_passthrough} extension must be enabled. Behaviour is described in the {@code GL_NV_geometry_shader_passthrough} extension specification.
 
         <h5>Sample Code</h5>
         Consider the following simple geometry shader in unextended GLSL:
@@ -84,7 +84,7 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_NV_geometry_shader_passthrough</dd>
+            <dd>{@code VK_NV_geometry_shader_passthrough}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -92,21 +92,26 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
             <dt><b>Registered Extension Number</b></dt>
             <dd>96</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Data</b></dt>
-            <dd>2017-02-15</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires Vulkan 1.0.</li>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Daniel Koch @dgkoch</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-02-15</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_geometry_shader_passthrough.html">SPV_NV_geometry_shader_passthrough</a> SPIR-V extension.</li>
-                <li>This extension requires the <a target="_blank" href="https://www.opengl.org/registry/specs/NV/geometry_shader_passthrough.txt">GL_NV_geometry_shader_passthrough</a> extension for GLSL source languages.</li>
+                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">GL_NV_geometry_shader_passthrough</a> extension for GLSL source languages.</li>
                 <li>This extension requires the {@code geometryShader} feature.</li>
             </ul></dd>
 
@@ -114,11 +119,6 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
             <dd><ul>
                 <li>Piers Daniell, NVIDIA</li>
                 <li>Jeff Bolz, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Daniel Koch (dkoch 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

@@ -15,7 +15,7 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_validation_flags</dd>
+            <dd>{@code VK_EXT_validation_flags}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Instance extension</dd>
@@ -23,29 +23,29 @@ val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_fl
             <dt><b>Registered Extension Number</b></dt>
             <dd>62</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2016-09-06</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Tobin Ehlis @tobine</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2016-09-06</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.25 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Tobin Ehlis, Google</li>
                 <li>Courtney Goeltzenleuchter, Google</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Tobin Ehlis, Google (mailto:tobine@google.com[tobine@google.com])</li>
             </ul></dd>
         </dl>
         """

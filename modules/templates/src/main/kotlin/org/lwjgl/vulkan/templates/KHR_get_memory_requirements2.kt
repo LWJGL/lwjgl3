@@ -15,7 +15,7 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_get_memory_requirements2</dd>
+            <dd>{@code VK_KHR_get_memory_requirements2}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -23,33 +23,30 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
             <dt><b>Registered Extension Number</b></dt>
             <dd>147</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete.</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Jason Ekstrand @jekstrand</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-03-23</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jason Ekstrand, Intel</li>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Jesse Hall, Google</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Jason Ekstrand (jason.ekstrand 'at' intel.com)</li>
             </ul></dd>
         </dl>
         """

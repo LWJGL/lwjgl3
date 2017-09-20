@@ -106,7 +106,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_debug_marker</dd>
+            <dd>{@code VK_EXT_debug_marker}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -114,20 +114,25 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
             <dt><b>Registered Extension Number</b></dt>
             <dd>23</dd>
 
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-01-31</dd>
-
             <dt><b>Revision</b></dt>
             <dd>4</dd>
 
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_EXT_debug_report">{@code VK_EXT_debug_report}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>mailto:baldurk@baldurk.org[baldurk@baldurk.org]</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-01-31</dd>
+
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0.11 of the Vulkan API.</li>
-                <li>Requires VK_EXT_debug_report.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -135,11 +140,6 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
                 <li>Dan Ginsburg, Valve</li>
                 <li>Jon Ashburn, LunarG</li>
                 <li>Kyle Spagnoli, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Baldur Karlsson</li>
             </ul></dd>
         </dl>
         """

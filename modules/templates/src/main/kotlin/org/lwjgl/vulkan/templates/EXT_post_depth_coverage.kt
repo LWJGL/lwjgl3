@@ -25,7 +25,7 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_EXT_post_depth_coverage</dd>
+            <dd>{@code VK_EXT_post_depth_coverage}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -33,31 +33,31 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
             <dt><b>Registered Extension Number</b></dt>
             <dd>156</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Complete</dd>
-
-            <dt><b>Last Modified Data</b></dt>
-            <dd>2017-07-17</dd>
-
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Dependencies</b></dt>
+            <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>This extension requires Vulkan 1.0.</li>
+                <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Daniel Koch @dgkoch</li>
+            </ul></dd>
+
+            <dt><b>Last Modified Date</b></dt>
+            <dd>2017-07-17</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_post_depth_coverage.html">SPV_KHR_post_depth_coverage</a> SPIR-V extension.</li>
-                <li>This extension requires <a target="_blank" href="https://www.opengl.org/registry/specs/ARB/post_depth_coverage.txt">GL_ARB_post_depth_coverage</a> or <a target="_blank" href="https://www.opengl.org/registry/specs/EXT/post_depth_coverage.txt">GL_EXT_post_depth_coverage</a> for GLSL-based source languages.</li>
+                <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_post_depth_coverage.txt">GL_ARB_post_depth_coverage</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">GL_EXT_post_depth_coverage</a> for GLSL-based source languages.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Daniel Koch (dkoch 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """

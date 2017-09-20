@@ -18,7 +18,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>VK_KHR_push_descriptor</dd>
+            <dd>{@code VK_KHR_push_descriptor}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -26,33 +26,30 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
             <dt><b>Registered Extension Number</b></dt>
             <dd>81</dd>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft.</dd>
+            <dt><b>Revision</b></dt>
+            <dd>1</dd>
+
+            <dt><b>Extension and Version Dependencies</b></dt>
+            <dd><ul>
+                <li>Requires Vulkan 1.0</li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+            </ul></dd>
+
+            <dt><b>Contact</b></dt>
+            <dd><ul>
+                <li>Jeff Bolz @jbolz</li>
+            </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-15</dd>
 
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires VK_KHR_get_physical_device_properties2.</li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Michael Worcester, Imagination Technologies</li>
-            </ul></dd>
-
-            <dt><b>Contacts</b></dt>
-            <dd><ul>
-                <li>Jeff Bolz (jbolz 'at' nvidia.com)</li>
             </ul></dd>
         </dl>
         """
