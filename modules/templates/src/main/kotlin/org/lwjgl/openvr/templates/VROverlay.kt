@@ -791,4 +791,9 @@ val VROverlay = "VROverlay".nativeClass(
         nullable..const..charASCII_p.IN("pchButton2Text", ""),
         nullable..const..charASCII_p.IN("pchButton3Text", "")
     )
+
+    void(
+        "CloseMessageOverlay",
+        "If the calling process owns the overlay and it's open, this will close it."
+    )
 }

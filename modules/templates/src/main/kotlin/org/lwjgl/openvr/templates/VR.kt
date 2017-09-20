@@ -60,7 +60,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
     StringConstant(
         "OpenVR constants.",
 
-        "IVRSystem_Version".."IVRSystem_016",
+        "IVRSystem_Version".."IVRSystem_017",
         "IVRExtendedDisplay_Version".."IVRExtendedDisplay_001",
         "IVRTrackedCamera_Version".."IVRTrackedCamera_003",
         "k_pch_MimeType_HomeApp".."vr/home",
@@ -68,7 +68,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
         "IVRApplications_Version".."IVRApplications_006",
         "IVRChaperone_Version".."IVRChaperone_003",
         "IVRChaperoneSetup_Version".."IVRChaperoneSetup_005",
-        "IVRCompositor_Version".."IVRCompositor_020",
+        "IVRCompositor_Version".."IVRCompositor_021",
         "IVROverlay_Version".."IVROverlay_016",
         "k_pch_Controller_Component_GDC2015".."gdc2015",
         "k_pch_Controller_Component_Base".."base",
@@ -121,6 +121,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
         "k_pch_SteamVR_RetailDemo_Bool".."retailDemo",
         "k_pch_SteamVR_IpdOffset_Float".."ipdOffset",
         "k_pch_SteamVR_AllowSupersampleFiltering_Bool".."allowSupersampleFiltering",
+        "k_pch_SteamVR_EnableLinuxVulkanAsync_Bool".."enableLinuxVulkanAsync",
         "k_pch_Lighthouse_Section".."driver_lighthouse",
         "k_pch_Lighthouse_DisableIMU_Bool".."disableimu",
         "k_pch_Lighthouse_UseDisambiguation_String".."usedisambiguation",
@@ -447,7 +448,8 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
             "If the texture pointer passed in is actually a renderbuffer (e.g. for MSAA in OpenGL) then set this flag.",
             "2"
         ),
-        "EVRSubmitFlags_Submit_Reserved".enum("Do not use.", "4")
+        "EVRSubmitFlags_Submit_Reserved".enum("Do not use.", "4"),
+        "EVRSubmit_TextureWithPose".enum("Set to indicate that {@code pTexture} is a pointer to a ##VRTextureWithPose.", "8")
     )
 
     EnumConstant(
@@ -585,6 +587,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
         "EVREventType_VREvent_PerformanceTest_DisableCapture".enum("", "1601"),
         "EVREventType_VREvent_PerformanceTest_FidelityLevel".enum("", "1602"),
         "EVREventType_VREvent_MessageOverlay_Closed".enum("", "1650"),
+        "EVREventType_VREvent_MessageOverlayCloseRequested".enum("", "1651"),
         "EVREventType_VREvent_VendorSpecific_Reserved_Start".enum("", "10000"),
         "EVREventType_VREvent_VendorSpecific_Reserved_End".enum("", "19999")
     )
@@ -778,6 +781,9 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
         "EVRInitError_VRInitError_Init_VRDashboardStartupFailed".enum("", "134"),
         "EVRInitError_VRInitError_Init_VRHomeNotFound".enum("", "135"),
         "EVRInitError_VRInitError_Init_VRHomeStartupFailed".enum("", "136"),
+        "EVRInitError_VRInitError_Init_RebootingBusy".enum("", "137"),
+	    "EVRInitError_VRInitError_Init_FirmwareUpdateBusy".enum("", "138"),
+	    "EVRInitError_VRInitError_Init_FirmwareRecoveryBusy".enum("", "139"),
         "EVRInitError_VRInitError_Driver_Failed".enum("", "200"),
         "EVRInitError_VRInitError_Driver_Unknown".enum("", "201"),
         "EVRInitError_VRInitError_Driver_HmdUnknown".enum("", "202"),

@@ -23,7 +23,7 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "CommitWorkingCopy",
         "Saves the current working copy to disk.",
 
-        EChaperoneConfigFile.IN("configFile", "")
+        EChaperoneConfigFile.IN("configFile", "", "EChaperoneConfigFile_\\w+")
     )
 
     void(

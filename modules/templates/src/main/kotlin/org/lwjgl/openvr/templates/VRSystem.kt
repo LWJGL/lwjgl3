@@ -170,14 +170,17 @@ typedef struct HiddenAreaMesh_t
         {@code IDXGIAdapter} should be used to create the device and swap chain.
 
         <h3>Vulkan Only</h3>
-        Returns the {@code vk::PhysicalDevice} that should be used by the application.
+        Returns the {@code VkPhysicalDevice} that should be used by the application. {@code pInstance} must be the instance the application will use to query
+        for the {@code VkPhysicalDevice}. The application must create the {@code VkInstance} with extensions returned by #GetVulkanInstanceExtensionsRequired()
+        enabled.
 
         <h3>macOS Only</h3>
         Returns an {@code id<MTLDevice>} that should be used by the application.
         """,
 
         Check(1)..uint64_t_p.OUT("pnDevice", ""),
-        ETextureType.IN("textureType", "")
+        ETextureType.IN("textureType", "", "ETextureType_\\w+"),
+        Check(1)..VkInstance_T.p.IN("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
     )
 
     bool(
