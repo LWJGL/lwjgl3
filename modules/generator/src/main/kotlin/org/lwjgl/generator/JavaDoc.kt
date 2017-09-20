@@ -306,6 +306,8 @@ enum class LinkMode {
 
 // DSL extensions
 
+infix fun String.mergeLargeLiteral(other: String): String = this.plus(other)
+
 /** Useful for simple expressions. */
 fun code(code: String) = """<code>$code</code>"""
 
