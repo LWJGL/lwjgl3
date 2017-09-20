@@ -15,7 +15,7 @@ val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "
 
         "PRODUCT_VERSION".."1",
         "MAJOR_VERSION".."1",
-        "MINOR_VERSION".."16",
+        "MINOR_VERSION".."18",
         "PATCH_VERSION".."0",
         "BUILD_NUMBER".."0"
     )
@@ -24,6 +24,15 @@ val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "
         "The {@code ((product * 100) + major)} version of the service that the DLL is compatible with.",
 
         "DLL_COMPATIBLE_VERSION".."101"
+    )
+
+    IntConstant(
+        """
+        This is the minor version representing the minimum version an application can query with this SDK. Calls to #Initialize() will fail if the application
+        requests a version that is less than this.
+        """,
+
+        "MIN_REQUESTABLE_MINOR_VERSION".."17"
     )
 
     IntConstant(

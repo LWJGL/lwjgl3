@@ -122,11 +122,11 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
         "Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
 
         ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
-        Check(2)..const..ovrVector3f_p.IN(
-            "HmdToEyeOffset",
+        Check(2)..const..ovrPosef_p.IN(
+            "HmdToEyePose",
             """
-            can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from #GetRenderDesc(). For monoscopic rendering, use a vector that is the
-            average of the two vectors for both eyes.
+            can be ##OVREyeRenderDesc{@code .HmdToEyePose} returned from #GetRenderDesc(). For monoscopic rendering, use a position vector that is average of
+            the two position vectors for each eye   .
             """
         ),
         Check(2)..ovrPosef_p.OUT(
@@ -145,7 +145,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
         This is a thread-safe function where caller should increment {@code frameIndex} with every frame and pass that index where applicable to functions
         called on the rendering thread. Assuming {@code outEyePoses} are used for rendering, it should be passed as a part of ##OVRLayerEyeFov. The caller does
-        not need to worry about applying {@code HmdToEyeOffset} to the returned {@code outEyePoses} variables.
+        not need to worry about applying {@code HmdToEyePose} to the returned {@code outEyePoses} variables.
         """,
 
         ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()"),
@@ -157,11 +157,11 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
             "SensorSampleTimestamp", that will override the value stored here.
             """
         ),
-        Check(2)..const..ovrVector3f_p.IN(
-            "hmdToEyeOffset",
+        Check(2)..const..ovrPosef_p.IN(
+            "HmdToEyePose",
             """
-            can be ##OVREyeRenderDesc{@code .HmdToEyeOffset} returned from #GetRenderDesc(). For monoscopic rendering, use a vector that is the
-            average of the two vectors for both eyes.
+            can be ##OVREyeRenderDesc{@code .HmdToEyePose} returned from #GetRenderDesc(). For monoscopic rendering, use a position vector that is the
+            average of the two position vectors for each eye.
             """
         ),
         Check(2)..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),

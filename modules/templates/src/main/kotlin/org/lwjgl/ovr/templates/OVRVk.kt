@@ -21,6 +21,79 @@ val OVRVk = "OVRVk".dependsOn(Binding.VULKAN)?.nativeClass(packageName = OVR_PAC
 
     val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()")
 
+    val GetInstanceExtensionsVk = ovrResult(
+        "GetInstanceExtensionsVk",
+        """
+        Gets a list of Vulkan {@code vkInstance} extensions required for VR.
+
+        Returns a list of strings delimited by a single space identifying Vulkan extensions that must be enabled in order for the VR runtime to support
+        Vulkan-based applications. The returned list reflects the current runtime version and the GPU the VR system is currently connected to.
+
+        Example code:
+        ${codeBlock("""
+ char extensionNames[4096];
+ uint32_t extensionNamesSize = sizeof(extensionNames);
+ ovr_GetInstanceExtensionsVk(luid, extensionsnames, &extensionNamesSize);
+
+ uint32_t extensionCount = 0;
+ const char* extensionNamePtrs[256];
+ for(const char* p = extensionNames; *p; ++p) {
+     if((p == extensionNames) || (p[-1] == ' ')) {
+         extensionNamePtrs[extensionCount++] = p;
+         if (p[-1] == ' ')
+             p[-1] = '\0';
+     }
+ }
+
+ VkInstanceCreateInfo info = { ... };
+ info.enabledExtensionCount = extensionCount;
+ info.ppEnabledExtensionNames = extensionNamePtrs;
+ [...]""")}
+        """,
+
+        ovrGraphicsLuid.IN("luid", "specifies the {@code luid} for the relevant GPU, which is returned from #Create()."),
+        charASCII_p.OUT(
+            "extensionNames",
+            "a character buffer which will receive a list of extension name strings, separated by a single space char between each extension"
+        ),
+        AutoSize("extensionNames")..Check(1)..uint32_t_p.INOUT(
+            "inoutExtensionNamesSize",
+            """
+            indicates on input the capacity of {@code extensionNames} in chars. On output it returns the number of characters written to
+            {@code extensionNames}, including the terminating 0 char. In the case of this function returning #Error_InsufficientArraySize, the required
+            {@code inoutExtensionNamesSize} is returned.
+            """
+        ),
+
+        returnDoc =
+        """
+        an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information. Returns
+        #Error_InsufficientArraySize in the case that {@code inoutExtensionNameSize} didn't have enough space, in which case {@code inoutExtensionNameSize}
+        will return the required {@code inoutExtensionNamesSize}.
+        """
+    )
+
+    ovrResult(
+        "GetDeviceExtensionsVk",
+        """
+        Gets a list of Vulkan {@code vkDevice} extensions required for VR.
+
+        Returns a list of strings delimited by a single space identifying Vulkan extensions that must be enabled in order for the VR runtime to support
+        Vulkan-based applications. The returned list reflects the current runtime version and the GPU the VR system is currently connected to.
+        """,
+
+        GetInstanceExtensionsVk["luid"],
+        GetInstanceExtensionsVk["extensionNames"],
+        GetInstanceExtensionsVk["inoutExtensionNamesSize"],
+
+        returnDoc =
+        """
+        an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information. Returns
+        #Error_InsufficientArraySize in the case that {@code inoutExtensionNameSize} didn't have enough space, in which case {@code inoutExtensionNameSize}
+        will return the required {@code inoutExtensionNamesSize}.
+        """
+    )
+
     ovrResult(
         "GetSessionPhysicalDeviceVk",
         """

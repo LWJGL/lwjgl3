@@ -161,8 +161,8 @@ ENABLE_WARNINGS()""")
         "The type of texture resource. ({@code ovrTextureType})",
 
         "Texture_2D".enum("2D textures"),
-        "Texture_2D_External".enum("External 2D texture. Not used on PC"),
-        "Texture_Cube".enum("Cube maps.")
+        "Texture_2D_External".enum("Application-provided 2D texture. Not supported on PC."),
+        "Texture_Cube".enum("Cube maps. ##OVRTextureSwapChainDesc{@code ::ArraySize} must be 6 for this type.")
     )
 
     EnumConstant(
@@ -385,6 +385,12 @@ ENABLE_WARNINGS()""")
 
         "MaxProvidedFrameStats".enum("Maximum number of frames of performance stats provided back to the caller of #GetPerfStats().", 5)
     )
+
+    IntConstant(
+        "Maximum number of samples in ##OVRHapticsBuffer.",
+
+        "OVR_HAPTICS_BUFFER_SAMPLES_MAX".."256"
+    ).noPrefix()
 
     ovrResult(
         "Initialize",
@@ -1184,13 +1190,11 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
             "#Success: rendering completed successfully.",
             """
             #Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently has ownership
-            of the HMD. Applications receiving this result should stop rendering new content, but continue to call {@code ovr_SubmitFrame} periodically until
-            it returns a value other than #Success_NotVisible. Applications should not loop on calls to {@code ovr_SubmitFrame} in order to detect visibility;
-            instead #GetSessionStatus() should be used. Similarly, applications should not call {@code ovr_SubmitFrame} with zero layers to detect visibility.
+            of the HMD. Applications receiving this result should stop rendering new content, call #GetSessionStatus() to detect visibility.
             """,
             """
             #Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
-            (#DestroyTextureSwapChain()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
+            (#DestroyTextureSwapChain()), the session needs to be destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
             ({@code ovr_CreateTextureSwapChainXXX}). The application's existing private graphics resources do not need to be recreated unless the new
             {@code ovr_Create} call returns a different {@code GraphicsLuid}.
             """,
@@ -1337,7 +1341,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
     )
 
     // ----------------
-    // Mixed reality support
+    // Mixed reality capture support
 
     ovrResult(
         "GetExternalCameras",
@@ -1346,10 +1350,13 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         session,
         nullable..ovrExternalCamera_p.OUT(
             "cameras",
-            "the array. If #NULL or {@code *inoutCameraCount} is too small, will return #Error_InsufficientArraySize."),
+            "pointer to the array. If #NULL and the provided array capacity is sufficient, will return {@code ovrError_NullArrayPointer}."),
         AutoSize("cameras")..Check(1)..unsigned_int_p.INOUT(
             "inoutCameraCount",
-            "supplies the array capacity, will return the actual number of cameras defined"
+            """
+            supplies the array capacity, will return the actual \# of cameras defined. If {@code inoutCameraCount} is too small, will return
+            #Error_InsufficientArraySize.
+            """
         ),
 
         returnDoc = "the ids of external cameras the system knows about. Returns #Error_NoExternalCameraInfo if there is not any external camera information."

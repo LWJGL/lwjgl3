@@ -47,6 +47,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
         "Error_InvalidOperation".enum("Function call is invalid for object's current state.", "-1015"),
         "Error_InsufficientArraySize".enum("Increase size of output array", "-1016"),
         "Error_NoExternalCameraInfo".enum("There is not any external camera information stored by ovrServer.", "-1017"),
+        "Error_LostTracking".enum("Tracking is lost when #GetDevicePoses() is called.", "-1018"),
 
         /* Audio error range, reserved for Audio errors. */
         "Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),

@@ -88,6 +88,7 @@ val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "o
         "ShouldRecenter",
         "True if UX has requested re-centering. Must call #ClearShouldRecenterFlag(), #RecenterTrackingOrigin() or #SpecifyTrackingOrigin()."
     )
+    ovrBool.array("Internal", "", size = "2")
 }.p
 
 val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
@@ -339,7 +340,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
     ovrFovPort.member("Fov", "the field of view")
     ovrRecti.member("DistortedViewport", "distortion viewport")
     ovrVector2f.member("PixelsPerTanAngleAtCenter", "wow many display pixels will fit in tan(angle) = 1")
-    ovrVector3f.member("HmdToEyeOffset", "translation of each eye, in meters.")
+    ovrPosef.member("HmdToEyePose", "transform of eye from the HMD center, in meters")
 }
 
 val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc", mutable = false) {
@@ -361,7 +362,10 @@ val ovrViewScaleDesc_p = struct(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "o
         """
         Contains the data necessary to properly calculate position info for various layer types.
         ${ul(
-            "{@code HmdToEyeOffset} is the same value pair provided in ##OVREyeRenderDesc.",
+            """
+            {@code HmdToEyePose} is the same value-pair provided in ##OVREyeRenderDesc. Modifying this value is suggested only if the app is forcing monoscopic
+            rendering and requires that all layers including quad layers show up in a monoscopic fashion.
+            """,
             "{@code HmdSpaceToWorldScaleInMeters} is used to scale player motion into in-application units."
         )}
         In other words, it is how big an in-application unit is in the player's physical meters. For example, if the application uses inches as its units then
@@ -369,7 +373,7 @@ val ovrViewScaleDesc_p = struct(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "o
         units are inches, but you're shrinking the player to half their normal size, then {@code HmdSpaceToWorldScaleInMeters} would be {@code 0.0254*2.0}.
         """
 
-    ovrVector3f.array("HmdToEyeOffset", "translation of each eye", size = "ovrEye_Count")
+    ovrPosef.array("HmdToEyePose", "transform of each eye from the HMD center, in meters", size = "ovrEye_Count")
     float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
 }.p
 
@@ -379,13 +383,13 @@ val ovrTextureFormat = "ovrTextureFormat".enumType
 val ovrTextureSwapChainDesc_p = struct(OVR_PACKAGE, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
     documentation = "Description used to create a texture swap chain."
 
-    ovrTextureType.member("Type", "").links("Texture_\\w+")
+    ovrTextureType.member("Type", "Must not be {@code ovrTexture_Window}").links("Texture_\\w+")
     ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
-    int.member("ArraySize", "only supported with #Texture_2D. Not supported on PC at this time.")
+    int.member("ArraySize", "must be 6 for #Texture_Cube, 1 for other types")
     int.member("Width", "")
     int.member("Height", "")
     int.member("MipLevels", "")
-    int.member("SampleCount", "current only supported on depth textures")
+    int.member("SampleCount", "only supported with depth textures")
     ovrBool.member("StaticImage", "not buffered in a chain. For images that don't change")
     unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
     unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.").links("TextureBind_\\w+", LinkMode.BITFIELD)
@@ -428,7 +432,7 @@ val ovrHapticsBuffer_p = struct(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "o
     documentation = "Haptics buffer descriptor, contains amplitude samples used for Touch vibration."
 
     void_p.member("Samples", "samples stored in opaque format")
-    int.member("SamplesCount", "sumber of samples")
+    int.member("SamplesCount", "number of samples (up to #OVR_HAPTICS_BUFFER_SAMPLES_MAX)")
     ovrHapticsBufferSubmitMode.member("SubmitMode", "how samples are submitted to the hardware").links("HapticsBufferSubmit_\\w+")
 }.p
 
