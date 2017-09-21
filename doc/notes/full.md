@@ -1,3 +1,84 @@
+### 3.1.3
+
+_Released 2017 Sep 22_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Added [rpmalloc](https://github.com/rampantpixels/rpmalloc) bindings.
+    * Use `-Dorg.lwjgl.system.allocator=rpmalloc` to make it the default memory allocator.
+- Added new extensions to OpenCL, EGL, OpenGL and OpenGL ES.
+- Assimp: Updated to 4.0.1 (up from 3.3.1)
+- bgfx: Updated to API version 48 (up from 41)
+- EGL: Added support for latest extensions
+- glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
+    * Improvements to error code query (`glfwGetError`)
+    * More library initialization hints (`glfwInitHintString`)
+    * SDL_GameControllerDB support
+        * Import gamepad mappings (`glfwUpdateGamepadMappings`)
+        * Query to determine whether a joystick has a gamepad mapping (`glfwJoystickIsGamepad`)
+        * Query the name of a controller provided by its gamepad mapping (`glfwGetGamepadName`)
+        * Retrieve gamepad input state (`glfwGetGamepadState`, `GLFW_GAMEPAD_*`, `GLFWgamepadstate`)
+        * Query the SDL compatible GUID of a joystick (`glfwGetJoystickGUID`)
+    * Linux: Moved to [evdev](https://www.freedesktop.org/software/libevdev/doc/latest/) for joystick input
+    * EGL: Fixed support for `EGL_KHR_create_context_no_error`
+    * GLX: Added support for `GLX_ARB_create_context_no_error`
+    * WGL: Added support for `WGL_ARB_create_context_no_error` and `WGL_EXT_colorspace`
+- jemalloc: Updated to 5.0.1 (up from 4.5.0)
+- LibOVR: Updated to 1.18.0 (up from 1.14.0)
+- lmdb: Updated to 0.9.21 (up from withdrawn 0.9.20)
+- NanoVG: Updated to latest version (performance updates and new `nvgShapeAntiAlias` function).
+- Nuklear: Updated to 2.00.2 (up from 1.37.0)
+- OpenAL: Added `ALC_SOFT_output_limiter` extension.
+- OpenAL Soft: Updated to 1.18.2 (up from 1.17.2)
+- OpenCL: Added support for OpenCL 2.2
+- OpenGL: Added support for OpenGL 4.6 and latest extensions
+- OpenGL ES: Added support for latest extensions
+- OpenVR: Update to 1.0.10 (up from 1.0.7)
+- stb
+    * Updated `stb_dxt` to 1.07 (up from 1.06)
+    * Updated `stb_image` to 2.16 (up from 2.15)
+    * Updated `stb_image_resize` to 0.95 (up from 0.94)
+    * Updated `stb_image_write` to 1.07 (up from 1.05)
+    * Updated `stb_truetype` to 1.17 (up from 1.15)
+    * Updated `stb_vorbis` to 1.11 (up from 1.10)
+- tinyfiledialogs: Updated to 3.0.5 (up from 2.8.3)
+- Vulkan: Updated to 1.0.61 (up from 1.0.49)
+- xxhash: Updated to 0.6.3 (up from 0.6.2)
+- Yoga: Updated to 1.6.0 (up from 1.5.0)
+
+#### Improvements
+
+- Generator: Added `@NativeType` annotations to generated bindings. Documents the native type of:
+    * Callback and struct classes.
+    * Struct members.
+    * Function parameters and return values.
+- The default memory allocator on Windows is now the system allocator instead of jemalloc.
+    * jemalloc is not properly optimized for Windows and its performance is not competitive.
+    * jemalloc is still a major performance win on Linux and macOS.
+    * rpmalloc is faster on all platforms but requires per-thread setup, so must be enabled manually.
+- Buffers created via `MemoryUtil` may now have up to `Integer.MAX_VALUE` elements, regardless of element size.
+    * For example this allows a `LongBuffer` allocation of up to 16GB.
+- Added typed overloads to `MemoryUtil::memSet` and `MemoryUtil::memCopy`.
+- `StructBuffer` subclasses are now `Iterable` and have `stream()` and `parallelStream()` methods.
+- OpenGL: Added `LongBuffer` overloads to buffer object functions.
+
+#### Fixes
+
+- bgfx: Fixed signature of `bgfx_create_frame_buffer_from_attachment`.
+- OpenGL: Fixed signature of `glPixelStoref`.
+- OpenGL: `ARB_direct_state_access` interactions are now respected when checking if the extension is available.
+- stb_image: added `ShortBuffer` overload to `stbi_image_free`.
+- stb_truetype: Fixed signature of `stbtt_PackFontRangesGatherRects` and `stbtt_PackFontRangesRenderIntoRects`.
+
+#### Breaking Changes
+
+- glfw: Signature of `glfwGetError` has changed.
+- jemalloc: Removed `JEmacros` and moved its functionality to `JEmalloc`.
+- jemalloc: `ChunkHooks` has been replaced by `ExtentHooks`.
+- OpenCL: Removed two confusing `clCompileProgram` overloads.
+
 ### 3.1.2
 
 _Released 2017 May 15_

@@ -1,82 +1,80 @@
-### 3.1.2
+### 3.1.3
 
-_Released 2017 May 15_
+_Released 2017 Sep 22_
 
 This build includes the following changes:
 
 #### Bindings
 
-- Added [OpenVR](https://github.com/ValveSoftware/openvr) bindings.
-- Added [Tiny OpenEXR](https://github.com/syoyo/tinyexr) bindings.
-- Added [Yoga](https://facebook.github.io/yoga/) bindings.
-- bgfx: Updated to API version 41 (up from 34)
-- glfw: Updated to pre-release 3.3.0 version (up from 3.2.1). Includes many fixes and new features:
-    * Last error code query (`glfwGetError`)
-    * Requesting attention from the user (`glfwRequestWindowAttention`) 
-    * Platform dependent scancodes for keys (`glfwGetKeyScancode`)
-    * Window maximization events (`glfwSetWindowMaximizeCallback`)
-    * Window attribute modification (`glfwSetWindowAttrib`)
-    * Joystick hats (`glfwGetJoystickHats`)
-    * Library initialization hints (`glfwInitHint`)
-    * Headless [OSMesa](https://www.mesa3d.org/osmesa.html) backend
-    * Cursor centering control (`GLFW_CENTER_CURSOR`)
-    * macOS: Cocoa hints (`GLFW_COCOA_RETINA_FRAMEBUFFER`, `GLFW_COCOA_FRAME_AUTOSAVE`, `GLFW_COCOA_GRAPHICS_SWITCHING`, `GLFW_COCOA_CHDIR_RESOURCES`, `GLFW_COCOA_MENUBAR`)
-    * macOS: Vulkan support via [MoltenVK](https://moltengl.com/moltenvk/)
-    * X11: Moved to XI2 `XI_RawMotion` for disabled cursor mode motion input 
-    * EGL: Added support for `EGL_KHR_get_all_proc_addresses` and `EGL_KHR_context_flush_control` 
-- jemalloc: Updated to 4.5.0 (up from 4.4.0)
-- LibOVR: Update to 1.14.0 (up from 1.10.0)
-- lmdb: Updated to 0.9.20 (up from 0.9.18)
-- NanoVG: Added support for fallback fonts.
-- nuklear: Updated to 1.37.0 (up from 1.29.1, with the new versioning)
-- OpenAL: Added `AL_SOFT_source_resampler` and `AL_SOFT_source_spatialize` extensions.
+- Added [rpmalloc](https://github.com/rampantpixels/rpmalloc) bindings.
+    * Use `-Dorg.lwjgl.system.allocator=rpmalloc` to make it the default memory allocator.
+- Added new extensions to OpenCL, EGL, OpenGL and OpenGL ES.
+- Assimp: Updated to 4.0.1 (up from 3.3.1)
+- bgfx: Updated to API version 48 (up from 41)
+- EGL: Added support for latest extensions
+- glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
+    * Improvements to error code query (`glfwGetError`)
+    * More library initialization hints (`glfwInitHintString`)
+    * SDL_GameControllerDB support
+        * Import gamepad mappings (`glfwUpdateGamepadMappings`)
+        * Query to determine whether a joystick has a gamepad mapping (`glfwJoystickIsGamepad`)
+        * Query the name of a controller provided by its gamepad mapping (`glfwGetGamepadName`)
+        * Retrieve gamepad input state (`glfwGetGamepadState`, `GLFW_GAMEPAD_*`, `GLFWgamepadstate`)
+        * Query the SDL compatible GUID of a joystick (`glfwGetJoystickGUID`)
+    * Linux: Moved to [evdev](https://www.freedesktop.org/software/libevdev/doc/latest/) for joystick input
+    * EGL: Fixed support for `EGL_KHR_create_context_no_error`
+    * GLX: Added support for `GLX_ARB_create_context_no_error`
+    * WGL: Added support for `WGL_ARB_create_context_no_error` and `WGL_EXT_colorspace`
+- jemalloc: Updated to 5.0.1 (up from 4.5.0)
+- LibOVR: Updated to 1.18.0 (up from 1.14.0)
+- lmdb: Updated to 0.9.21 (up from withdrawn 0.9.20)
+- NanoVG: Updated to latest version (performance updates and new `nvgShapeAntiAlias` function).
+- Nuklear: Updated to 2.00.2 (up from 1.37.0)
+- OpenAL: Added `ALC_SOFT_output_limiter` extension.
+- OpenAL Soft: Updated to 1.18.2 (up from 1.17.2)
+- OpenCL: Added support for OpenCL 2.2
+- OpenGL: Added support for OpenGL 4.6 and latest extensions
+- OpenGL ES: Added support for latest extensions
+- OpenVR: Update to 1.0.10 (up from 1.0.7)
 - stb
-    * Updated `stb_dxt` to 1.0.6 (up from 1.0.4)
-    * Updated `stb_easy_font` to 1.0 (up from 0.7)
-    * Updated `stb_image` to 2.15 (up from 2.13)
-    * Updated `stb_image_resize` to 0.94 (up from 0.91)
-    * Updated `stb_image_write` to 1.05 (up from 1.02)
-    * Updated `stb_perlin` to 0.3 (up from 0.2)
-    * Updated `stb_rect_pack` to 0.11 (up from 0.10)
-    * Updated `stb_truetype` to 1.15 (up from 1.12)
-    * Updated `stb_vorbis` to 1.10 (up from 1.09)
-- tinyfiledialogs: Updated to 2.8.3 (up from 2.7.2)
-- Vulkan: Updated to 1.0.49 (up from 1.0.38)
+    * Updated `stb_dxt` to 1.07 (up from 1.06)
+    * Updated `stb_image` to 2.16 (up from 2.15)
+    * Updated `stb_image_resize` to 0.95 (up from 0.94)
+    * Updated `stb_image_write` to 1.07 (up from 1.05)
+    * Updated `stb_truetype` to 1.17 (up from 1.15)
+    * Updated `stb_vorbis` to 1.11 (up from 1.10)
+- tinyfiledialogs: Updated to 3.0.5 (up from 2.8.3)
+- Vulkan: Updated to 1.0.61 (up from 1.0.49)
+- xxhash: Updated to 0.6.3 (up from 0.6.2)
+- Yoga: Updated to 1.6.0 (up from 1.5.0)
 
 #### Improvements
 
-- `MemoryStack`: Increased default stack size to 64kb (up from 32kb)
-- Shared library loading can now utilize a `ClassLoader` specified by the caller. (#277)
-- Significantly reduced `DEBUG_MEMORY_ALLOCATOR` and `DEBUG_STACK` overhead in Java 9 using the new `StackWalker` API.
-- Migrated windows builds to [appveyor](https://ci.appveyor.com/project/LWJGL-CI/lwjgl3) and updated to Visual Studio 2017 (up from 2015)
-- EGL: The core API now includes javadoc links to the Khronos references pages
-- OpenGL ES: The core API now includes javadoc links to the Khronos references pages
-- Added support for OSGi (#277)
-    * LWJGL OSGi bundles are available under the `org.lwjgl.osgi` Maven `groupId`.
-    * Contributed and maintained by @io7m. 
+- Generator: Added `@NativeType` annotations to generated bindings. Documents the native type of:
+    * Callback and struct classes.
+    * Struct members.
+    * Function parameters and return values.
+- The default memory allocator on Windows is now the system allocator instead of jemalloc.
+    * jemalloc is not properly optimized for Windows and its performance is not competitive.
+    * jemalloc is still a major performance win on Linux and macOS.
+    * rpmalloc is faster on all platforms but requires per-thread setup, so must be enabled manually.
+- Buffers created via `MemoryUtil` may now have up to `Integer.MAX_VALUE` elements, regardless of element size.
+    * For example this allows a `LongBuffer` allocation of up to 16GB.
+- Added typed overloads to `MemoryUtil::memSet` and `MemoryUtil::memCopy`.
+- `StructBuffer` subclasses are now `Iterable` and have `stream()` and `parallelStream()` methods.
+- OpenGL: Added `LongBuffer` overloads to buffer object functions.
 
 #### Fixes
 
-- Assimp: Struct member nullability fixes
-- Linux: Removed dependencies to newer GLIBC versions.
-- LibOVR: Fixed layout of the `ovrInputState` struct.
-- OpenAL: Removed buffer auto-sizing from `alcCaptureSamples`. The number of samples must now be specified explicitly, similar to `alcRenderSamplesSOFT`.
-- Vulkan: Function addresses are now retrieved only once, using the optimal method for each function type.
-    * This avoids warnings on pedantic validation layers.
-- Fixed callback invocation bugs on 32-bit architectures.
-- Fixed various javadoc formatting issues (#308)
+- bgfx: Fixed signature of `bgfx_create_frame_buffer_from_attachment`.
+- OpenGL: Fixed signature of `glPixelStoref`.
+- OpenGL: `ARB_direct_state_access` interactions are now respected when checking if the extension is available.
+- stb_image: added `ShortBuffer` overload to `stbi_image_free`.
+- stb_truetype: Fixed signature of `stbtt_PackFontRangesGatherRects` and `stbtt_PackFontRangesRenderIntoRects`.
 
 #### Breaking Changes
 
-- Mapped more integer parameters and return values to Java `boolean`, that were missed while working on #181.
-    * Xlib's `Bool`
-    * OpenCL's `cl_bool`
-    * DynCall's `DCbool`
-- Moved JNI global reference functions from `MemoryUtil` to the generated `org.lwjgl.system.jni.JNINativeInterface`.
-- The Vulkan capabilities have been split into two classes: `VKCapabilitiesInstance` and `VKCapabilitiesDevice`.
-    * Flags for core Vulkan versions exist in both classes.
-    * Flags for instance extensions exist only in `VKCapabilitiesInstance`.
-    * Flags for device extensions exist only in `VKCapabilitiesDevice`.
-    * Functions that dispatch on `VkInstance` or `VkPhysicalDevice` exist only in `VKCapabilitiesInstance`.
-    * Functions that dispatch on `VkDevice` and device-derived handles exist only in `VKCapabilitiesDevice`.
-    * Bootstrapping functions can be retrieved with `VK.getFunctionProvider()`.
+- glfw: Signature of `glfwGetError` has changed.
+- jemalloc: Removed `JEmacros` and moved its functionality to `JEmalloc`.
+- jemalloc: `ChunkHooks` has been replaced by `ExtentHooks`.
+- OpenCL: Removed two confusing `clCompileProgram` overloads.
