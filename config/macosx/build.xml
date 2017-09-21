@@ -29,11 +29,12 @@
         </sequential>
     </macrodef>
 
+    <find-sdkroot version="10.13"/>
     <find-sdkroot version="10.12"/>
     <find-sdkroot version="10.11"/>
     <find-sdkroot version="10.10"/>
     <find-sdkroot version="10.9"/>
-    <fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
+    <fail unless="sdkroot" message="Failed to find the macOS SDK."/>
 
     <property name="macosx-version-min" value="10.9"/>
 
