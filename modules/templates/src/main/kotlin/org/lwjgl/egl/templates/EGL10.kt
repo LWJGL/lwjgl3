@@ -220,9 +220,9 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("draw", ""),
-        EGLSurface.IN("read", ""),
-        EGLContext.IN("ctx", "")
+        nullable..EGLSurface.IN("draw", ""),
+        nullable..EGLSurface.IN("read", ""),
+        nullable..EGLContext.IN("ctx", "")
     )
 
     EGLBoolean(
