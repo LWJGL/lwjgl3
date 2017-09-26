@@ -122,8 +122,9 @@ val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx
 val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
     documentation = "Renderer statistics data."
 
-    uint64_t.member("cpuTimeBegin", "CPU frame begin time")
-    uint64_t.member("cpuTimeEnd", "CPU frame end time")
+    uint64_t.member("cpuTimeFrame", "CPU time between two #frame() calls")
+    uint64_t.member("cpuTimeBegin", "Render thread CPU submit begin time")
+    uint64_t.member("cpuTimeEnd", "Render thread CPU submit end time")
     uint64_t.member("cpuTimerFreq", "CPU timer frequency")
 
     uint64_t.member("gpuTimeBegin", "GPU frame begin time")
