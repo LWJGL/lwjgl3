@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."49"
+        "API_VERSION".."50"
     )
 
     ShortConstant(

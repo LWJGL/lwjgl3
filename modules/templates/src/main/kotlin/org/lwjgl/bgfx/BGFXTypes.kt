@@ -122,14 +122,14 @@ val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx
 val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
     documentation = "Renderer statistics data."
 
-    uint64_t.member("cpuTimeFrame", "CPU time between two #frame() calls")
-    uint64_t.member("cpuTimeBegin", "Render thread CPU submit begin time")
-    uint64_t.member("cpuTimeEnd", "Render thread CPU submit end time")
-    uint64_t.member("cpuTimerFreq", "CPU timer frequency")
+    int64_t.member("cpuTimeFrame", "CPU time between two #frame() calls")
+    int64_t.member("cpuTimeBegin", "Render thread CPU submit begin time")
+    int64_t.member("cpuTimeEnd", "Render thread CPU submit end time")
+    int64_t.member("cpuTimerFreq", "CPU timer frequency")
 
-    uint64_t.member("gpuTimeBegin", "GPU frame begin time")
-    uint64_t.member("gpuTimeEnd", "GPU frame end time")
-    uint64_t.member("gpuTimerFreq", "GPU timer frequency")
+    int64_t.member("gpuTimeBegin", "GPU frame begin time")
+    int64_t.member("gpuTimeEnd", "GPU frame end time")
+    int64_t.member("gpuTimerFreq", "GPU timer frequency")
 
     int64_t.member("waitRender", "time spent waiting for render backend thread to finish issuing draw commands to underlying graphics API")
     int64_t.member("waitSubmit", "time spent waiting for submit thread to advance to next frame")
@@ -137,6 +137,9 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint32_t.member("numDraw", "number of draw calls submitted")
     uint32_t.member("numCompute", "number of compute calls submitted")
     uint32_t.member("maxGpuLatency", "GPU driver latency")
+
+    int64_t.member("gpuMemoryMax", "maximum available GPU memory")
+    int64_t.member("gpuMemoryUsed", "available GPU memory")
 
     uint16_t.member("width", "backbuffer width in pixels")
     uint16_t.member("height", "backbuffer height in pixels")
