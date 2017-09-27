@@ -73,6 +73,7 @@ public class Gears extends AbstractGears {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        glfwWindowHint(GLFW_TRANSPARENT, GLFW_TRUE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
@@ -145,11 +146,6 @@ public class Gears extends AbstractGears {
                         glfwSwapInterval(1);
                     }
                     break;
-                case GLFW_KEY_W:
-                    if (glfwGetWindowMonitor(windowHnd) != NULL) {
-                        glfwSetWindowMonitor(windowHnd, NULL, xpos, ypos, width, height, 0);
-                    }
-                    break;
                 case GLFW_KEY_G:
                     glfwSetInputMode(windowHnd, GLFW_CURSOR, glfwGetInputMode(windowHnd, GLFW_CURSOR) == GLFW_CURSOR_NORMAL
                         ? GLFW_CURSOR_DISABLED
@@ -161,6 +157,11 @@ public class Gears extends AbstractGears {
                     break;
                 case GLFW_KEY_U:
                     glfwSetWindowAttrib(windowHnd, GLFW_DECORATED, 1 - glfwGetWindowAttrib(windowHnd, GLFW_DECORATED));
+                    break;
+                case GLFW_KEY_W:
+                    if (glfwGetWindowMonitor(windowHnd) != NULL) {
+                        glfwSetWindowMonitor(windowHnd, NULL, xpos, ypos, width, height, 0);
+                    }
                     break;
             }
         });

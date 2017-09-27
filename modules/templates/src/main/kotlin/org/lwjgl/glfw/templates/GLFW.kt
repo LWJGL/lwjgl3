@@ -478,7 +478,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             {@code WindowHint}: Specifies whether the cursor should be centered over newly created full screen windows. This hint is ignored for windowed mode
             windows.
             """,
-            0x00020009)
+            0x00020009),
+        "TRANSPARENT".enum(
+            """
+            {@code WindowHint}: specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
+            alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations.
+            """,
+            0x0002000A)
     ).javaDocLinks
 
     IntConstant(
@@ -1155,6 +1161,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             tr(td("#FLOATING"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#MAXIMIZED"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#CENTER_CURSOR"), td("#TRUE"), td("#TRUE or #FALSE")),
+            tr(td("#TRANSPARENT"), td("#FALSE"), td("#TRUE or #FALSE")),
 
             tr(td("#RED_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
             tr(td("#GREEN_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
