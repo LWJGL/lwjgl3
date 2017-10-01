@@ -868,7 +868,8 @@ error:
 int fonsAddFont(FONScontext* stash, const char* name, const char* path)
 {
 	FILE* fp = 0;
-	int dataSize = 0, readed;
+	int dataSize = 0;
+	size_t readed;
 	unsigned char* data = NULL;
 
 	// Read in the font data.
@@ -882,7 +883,7 @@ int fonsAddFont(FONScontext* stash, const char* name, const char* path)
 	readed = fread(data, 1, dataSize, fp);
 	fclose(fp);
 	fp = 0;
-	if (readed != dataSize) goto error;
+	if (readed != (size_t)dataSize) goto error;
 
 	return fonsAddFontMem(stash, name, data, dataSize, 1);
 

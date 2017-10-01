@@ -110,6 +110,7 @@ typedef ptrdiff_t GLintptr;
 #define GL_DECR_WRAP                      0x8508
 #define GL_DEPTH                          0x1801
 #define GL_DEPTH_TEST                     0x0B71
+#define GL_DEPTH24_STENCIL8               0x88F0
 #define GL_DST_ALPHA                      0x0304
 #define GL_DST_COLOR                      0x0306
 #define GL_EQUAL                          0x0202
@@ -126,12 +127,12 @@ typedef ptrdiff_t GLintptr;
 #define GL_INVALID_ENUM                   0x0500
 #define GL_KEEP                           0x1E00
 #define GL_LINE                           0x1B01
-#define GL_NEAREST                        0x2600
 #define GL_LINEAR                         0x2601
-#define GL_NEAREST_MIPMAP_NEAREST         0x2700
 #define GL_LINEAR_MIPMAP_LINEAR           0x2703
 #define GL_LINK_STATUS                    0x8B82
 #define GL_LUMINANCE                      0x1909
+#define GL_NEAREST                        0x2600
+#define GL_NEAREST_MIPMAP_NEAREST         0x2700
 #define GL_NOTEQUAL                       0x0205
 #define GL_NO_ERROR                       0
 #define GL_ONE                            1
@@ -1159,10 +1160,18 @@ static int glnvg__convertPaint(GLNVGcontext* gl, GLNVGfragUniforms* frag, NVGpai
 		}
 		frag->type = NSVG_SHADER_FILLIMG;
 
+		#if NANOVG_GL_USE_UNIFORMBUFFER
 		if (tex->type == NVG_TEXTURE_RGBA)
 			frag->texType = (tex->flags & NVG_IMAGE_PREMULTIPLIED) ? 0 : 1;
 		else
 			frag->texType = 2;
+		#else
+		if (tex->type == NVG_TEXTURE_RGBA)
+			frag->texType = (tex->flags & NVG_IMAGE_PREMULTIPLIED) ? 0.0f : 1.0f;
+		else
+			frag->texType = 2.0f;
+		#endif
+
 //		printf("frag->texType = %d\n", frag->texType);
 	} else {
 		frag->type = NSVG_SHADER_FILLGRAD;
