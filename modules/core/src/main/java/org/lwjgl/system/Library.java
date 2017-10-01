@@ -97,7 +97,7 @@ public final class Library {
         String libName = Platform.get().mapLibraryName(name);
 
         // METHOD 2: org.lwjgl.librarypath
-        URL libURL = context.getResource("/" + libName);
+        URL libURL = context.getClassLoader().getResource(libName);
         if (libURL == null) {
             if (loadSystem(load, context, libName, Configuration.LIBRARY_PATH)) {
                 return;
@@ -215,7 +215,7 @@ public final class Library {
         SharedLibrary lib;
 
         // METHOD 2: org.lwjgl.librarypath
-        URL libURL = context.getResource("/" + libName);
+        URL libURL = context.getClassLoader().getResource(libName);
         if (libURL == null) {
             lib = loadNative(context, libName, Configuration.LIBRARY_PATH);
             if (lib != null) {
