@@ -746,7 +746,32 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="lwjgl-jar">
+        <attribute name="destfile"/>
+        <attribute name="package"/>
+        <attribute name="title"/>
+        <attribute name="multi-release" default="false"/>
+        <element name="content" optional="true" implicit="true"/>
+        <sequential>
+            <jar destfile="@{destfile}" level="9" index="true" indexmetainf="true" whenmanifestonly="skip">
+                <manifest>
+                    <attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
+                    <attribute name="Specification-Version" value="${build.version}"/>
+                    <attribute name="Specification-Vendor" value="lwjgl.org"/>
+                    <attribute name="Implementation-Title" value="${module}"/>
+                    <attribute name="Implementation-Version" value="${revision}"/>
+                    <attribute name="Implementation-Vendor" value="lwjgl.org"/>
+                    <attribute name="Automatic-Module-Name" value="@{package}"/>
+                    <attribute name="Multi-Release" value="true" if:true="@{multi-release}"/>
+                </manifest>
+                <content/>
+            </jar>
+        </sequential>
+    </macrodef>
+
     <macrodef name="release-natives">
+        <attribute name="package"/>
+        <attribute name="title"/>
         <attribute name="native-library"/>
         <element name="content" optional="true" implicit="true"/>
         <sequential>
@@ -788,11 +813,17 @@
                 </fileset>
             </checksum>
 
-            <parallel threadsPerProcessor="2" failonany="true">
-                <zip destfile="${release}/${module}/${module}-natives-windows.jar" basedir="${release}/${module}/native" includes="*.dll*" level="9"/>
-                <zip destfile="${release}/${module}/${module}-natives-macos.jar" basedir="${release}/${module}/native" includes="*.dylib*" level="9"/>
-                <zip destfile="${release}/${module}/${module}-natives-linux.jar" basedir="${release}/${module}/native" includes="*.so*" level="9"/>
-            </parallel>
+            <lwjgl-jar destfile="${release}/${module}/${module}-natives-linux.jar" package="@{package}.natives.linux" title="@{title}">
+                <fileset dir="${release}/${module}/native" includes="*.so*"/>
+            </lwjgl-jar>
+
+            <lwjgl-jar destfile="${release}/${module}/${module}-natives-macos.jar" package="@{package}.natives.macos" title="@{title}">
+                <fileset dir="${release}/${module}/native" includes="*.dylib*"/>
+            </lwjgl-jar>
+
+            <lwjgl-jar destfile="${release}/${module}/${module}-natives-windows.jar" package="@{package}.natives.windows" title="@{title}">
+                <fileset dir="${release}/${module}/native" includes="*.dll*"/>
+            </lwjgl-jar>
         </sequential>
     </macrodef>
 
@@ -814,7 +845,7 @@
             <property name="module" value="@{module-name}"/>
 
             <!-- Bundle natives -->
-            <release-natives native-library="@{native-library}" unless:true="@{java-only}">
+            <release-natives package="@{package}" title="@{title}" native-library="@{native-library}" unless:true="@{java-only}">
                 <natives/>
             </release-natives>
 
@@ -832,26 +863,11 @@
 
             <!-- Bundle classes -->
             <sequential>
-                <jar destfile="${release}/${module}/${module}.jar" level="9" index="true" indexmetainf="true">
-                    <manifest>
-                        <attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
-                        <attribute name="Specification-Version" value="${build.version}"/>
-                        <attribute name="Specification-Vendor" value="lwjgl.org"/>
-                        <attribute name="Implementation-Title" value="${module}"/>
-                        <attribute name="Implementation-Version" value="${revision}"/>
-                        <attribute name="Implementation-Vendor" value="lwjgl.org"/>
-                        <attribute name="Automatic-Module-Name" value="@{package}"/>
-                        <attribute name="Multi-Release" value="true" if:true="@{multi-release}"/>
-                    </manifest>
-
-                    <fileset dir="${release}/${module}/native" unless:true="@{java-only}">
-                        <include name="*.sha1"/>
-                    </fileset>
-                    <fileset dir="${bin.core}" unless:set="module.package.skip">
-                        <include name="${module.package}/**"/>
-                    </fileset>
+                <lwjgl-jar destfile="${release}/${module}/${module}.jar" package="@{package}" title="@{title}" multi-release="@{multi-release}">
+                    <fileset dir="${release}/${module}/native" includes="*.sha1" unless:true="@{java-only}"/>
+                    <fileset dir="${bin.core}" includes="${module.package}/**" unless:set="module.package.skip"/>
                     <classes/>
-                </jar>
+                </lwjgl-jar>
                 <delete dir="${release}/${module}/native" unless:true="@{java-only}"/>
             </sequential>
 
@@ -881,9 +897,7 @@
                         <pathelement path="${src.generated.java}"/>
                     </classpath>
 
-                    <fileset dir="${src.generated.java}" unless:set="module.package.skip">
-                        <include name="${module.package}/**"/>
-                    </fileset>
+                    <fileset dir="${src.generated.java}" includes="${module.package}/**" unless:set="module.package.skip"/>
                     <sources/>
 
                     <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
@@ -908,9 +922,7 @@
 
             <!-- Bundle source -->
             <jar destfile="${release}/${module}/${module}-sources.jar" level="9">
-                <fileset dir="${src.generated.java}" unless:set="module.package.skip">
-                    <include name="${module.package}/**"/>
-                </fileset>
+                <fileset dir="${src.generated.java}" includes="${module.package}/**" unless:set="module.package.skip"/>
                 <sources/>
             </jar>
 
@@ -921,9 +933,7 @@
                     <length string="@{license}" length="0"/>
                 </condition>
                 <copy todir="${release}/${module}" if:true="${auto-license}">
-                    <fileset dir="${doc}/3rdparty">
-                        <include name="@{license}*"/>
-                    </fileset>
+                    <fileset dir="${doc}/3rdparty" includes="@{license}*"/>
                 </copy>
 
                 <custom/>
@@ -977,9 +987,7 @@
                     <exclude name="org/lwjgl/system/rpmalloc/**"/>
                 </fileset>
 
-                <fileset dir="${bin.core}" if:set="jdk9">
-                    <include name="META-INF/versions/9/**"/>
-                </fileset>
+                <fileset dir="${bin.core}" includes="META-INF/versions/9/**" if:set="jdk9"/>
             </classes>
             <sources>
                 <fileset dir="${src.core}">
@@ -996,9 +1004,7 @@
             </sources>
             <custom>
                 <copy todir="${release}/lwjgl">
-                    <fileset dir="${doc}/3rdparty">
-                        <include name="dyncall*"/>
-                    </fileset>
+                    <fileset dir="${doc}/3rdparty" includes="dyncall*"/>
                 </copy>
             </custom>
         </release-module>
@@ -1012,14 +1018,14 @@
         <!-- EGL -->
         <release-module package="org.lwjgl.egl" name="egl" java-only="true" title="EGL" license="khronos" if:true="${binding.egl}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/egl/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/egl/**"/>
             </sources>
         </release-module>
 
         <!-- GLFW -->
         <release-module package="org.lwjgl.glfw" name="glfw" native-library="glfw" title="GLFW" license="glfw" if:true="${binding.glfw}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/glfw/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/glfw/**"/>
             </sources>
         </release-module>
 
@@ -1035,7 +1041,7 @@
         <!-- NanoVG -->
         <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" license="nanovg" if:true="${binding.nanovg}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/nanovg/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/nanovg/**"/>
             </sources>
         </release-module>
 
@@ -1059,28 +1065,28 @@
                 <get-release url="windows/x86/OpenAL32.dll.git"/>
             </natives>
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/openal/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/openal/**"/>
             </sources>
         </release-module>
 
         <!-- OpenCL -->
         <release-module package="org.lwjgl.opencl" name="opencl" java-only="true" title="OpenCL" license="khronos" if:true="${binding.opencl}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/opencl/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/opencl/**"/>
             </sources>
         </release-module>
 
         <!-- OpenGL -->
         <release-module package="org.lwjgl.opengl" name="opengl" native-library="lwjgl_opengl" title="OpenGL" license="khronos" if:true="${binding.opengl}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/opengl/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/opengl/**"/>
             </sources>
         </release-module>
 
         <!-- OpenGL ES -->
         <release-module package="org.lwjgl.opengles" name="opengles" native-library="lwjgl_opengles" title="OpenGL ES" license="khronos" if:true="${binding.opengles}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/opengles/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/opengles/**"/>
             </sources>
         </release-module>
 
@@ -1133,7 +1139,7 @@
         <!-- Vulkan -->
         <release-module package="org.lwjgl.vulkan" name="vulkan" java-only="true" title="Vulkan" license="khronos" if:true="${binding.vulkan}">
             <sources>
-                <fileset dir="${src.core}"><include name="org/lwjgl/vulkan/**"/></fileset>
+                <fileset dir="${src.core}" includes="org/lwjgl/vulkan/**"/>
             </sources>
         </release-module>
 
