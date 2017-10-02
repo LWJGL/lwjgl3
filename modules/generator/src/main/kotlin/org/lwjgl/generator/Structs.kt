@@ -1512,18 +1512,18 @@ ${validations.joinToString("\n")}
                 if (it is StructMemberArray) {
                     if (it.nativeType.dereference is StructType) {
                         val nestedStruct = it.nativeType.javaMethodType
+                        val size = getReferenceMember<AutoSizeMember>(it.name)?.autoSize ?: it.size
                         if (it.nativeType is PointerType) {
-                            val autoSize = getReferenceMember<AutoSizeMember>(it.name)
                             val autoSizeIndirect = getReferenceMember<AutoSizeIndirect>(it.name)
 
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter}. */")
-                            println("${t}public static PointerBuffer n$getter(long $STRUCT) { return memPointerBuffer($STRUCT + $field, ${autoSize?.autoSize ?: it.size}); }")
+                            println("${t}public static PointerBuffer n$getter(long $STRUCT) { return memPointerBuffer($STRUCT + $field, $size); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("${t}public static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
                             if (Binding.CHECKS)
-                                println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
+                                println("$t${t}if (CHECKS) { check(index, $size); }")
                             println("$t${t}return $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE)${autoSizeIndirect.let {
                                 if (it == null) "" else ", n${it.name}($STRUCT)"
                             }});")
@@ -1531,12 +1531,12 @@ ${validations.joinToString("\n")}
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter}. */")
-                            println("${t}public static $nestedStruct.Buffer n$getter(long $STRUCT) { return $nestedStruct.create($STRUCT + $field, ${getReferenceMember<AutoSizeMember>(it.name)?.autoSize ?: it.size}); }")
+                            println("${t}public static $nestedStruct.Buffer n$getter(long $STRUCT) { return $nestedStruct.create($STRUCT + $field, $size); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("${t}public static $nestedStruct n$getter(long $STRUCT, int index) {")
                             if (Binding.CHECKS)
-                                println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
+                                println("$t${t}if (CHECKS) { check(index, $size); }")
                             println("$t${t}return $nestedStruct.create($STRUCT + $field + index * $nestedStruct.SIZEOF);")
                             println("$t}")
                         }
