@@ -15,11 +15,6 @@ open class StructMember(
     val documentation: String
 ) : ModifierTarget<StructMemberModifier>() {
 
-    init {
-        if (nativeType is PointerType && nativeType.elementType is StructType)
-            nativeType.elementType.definition.hasUsageInput()
-    }
-
     override fun validate(modifier: StructMemberModifier) = modifier.validate(this)
 
     internal val offsetField
@@ -444,7 +439,14 @@ $indentation}"""
         throw IllegalArgumentException("$msg [${this@Struct.className}, member: $name]")
     }
 
-    private fun validate() {
+    private fun validate(mallocable: Boolean) {
+        if (mallocable) {
+            members.forEach {
+                if (it.nativeType is PointerType && it.nativeType.elementType is StructType)
+                    it.nativeType.elementType.definition.hasUsageInput()
+            }
+        }
+
         members.filter { it.has<AutoSizeMember>() }.forEach {
             val autoSize = it.get<AutoSizeMember>()
 
@@ -473,7 +475,8 @@ $indentation}"""
     }
 
     override fun PrintWriter.generateJava() {
-        validate()
+        val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
+        validate(mallocable)
 
         val nativeLayout = this@Struct.nativeLayout || members.isEmpty()
         if (!nativeLayout && preamble.hasNativeDirectives)
@@ -483,8 +486,6 @@ $indentation}"""
         println("package $packageName;\n")
 
         println("import java.nio.*;\n")
-
-        val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
 
         if (mallocable || members.any { m -> m.nativeType.let { it is PointerType && it.mapping === PointerMapping.DATA_POINTER && (it.elementType !is StructType || m is StructMemberArray) } })
             println("import org.lwjgl.*;")
