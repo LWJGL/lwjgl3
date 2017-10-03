@@ -9,6 +9,7 @@ import org.lwjgl.nanovg.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import java.io.*;
 import java.net.*;
 import java.nio.*;
 import java.nio.channels.*;
@@ -87,9 +88,13 @@ public class SVGDemo {
 
             URL website = new URL(spec);
 
-            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            while (rbc.read(svgData) != -1) {
-                ;
+            try (ReadableByteChannel rbc = Channels.newChannel(website.openStream())) {
+                int c;
+                while ((c = rbc.read(svgData)) != -1) {
+                    if (c == 0) {
+                        svgData = memRealloc(svgData, (svgData.capacity() * 3) >> 1);
+                    }
+                }
             }
 
             t = System.nanoTime() - t;
@@ -99,7 +104,7 @@ public class SVGDemo {
             svgData.flip();
 
             demo = new SVGDemo(svgData);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
             memFree(svgData);
@@ -156,7 +161,7 @@ public class SVGDemo {
         ww = max(800, min(w, vidmode.width() - 160));
         wh = max(600, min(h, vidmode.height() - 120));
 
-        this.window = glfwCreateWindow(wh, wh, "NanoSVG Demo", NULL, NULL);
+        this.window = glfwCreateWindow(ww, wh, "NanoSVG Demo", NULL, NULL);
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
@@ -292,6 +297,7 @@ public class SVGDemo {
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
         glEnable(GL_TEXTURE_2D);
+        glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f);
 
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();

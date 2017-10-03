@@ -278,6 +278,7 @@ public final class Image {
         int texID = createTexture();
 
         glEnable(GL_TEXTURE_2D);
+        glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f);
 
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
