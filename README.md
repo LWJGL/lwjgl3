@@ -131,6 +131,7 @@ improve the chances of a quick and useful response.
 |[Assimp](http://www.assimp.org/)|A portable Open Source library to import various well-known 3D model formats in a uniform manner.|
 |[bgfx](https://bkaradzic.github.io/bgfx/)|Cross-platform, graphics API agnostic, “Bring Your Own Engine/Framework” style rendering library, licensed under permissive BSD-2 clause open source license.|
 |[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
+|[NanoSVG](https://github.com/memononen/nanosvg)|A simple stupid SVG parser.|
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|
 |[Nuklear](https://github.com/vurtun/nuklear)|A minimal state immediate mode graphical user interface toolkit written in ANSI C and licensed under public domain.|
 |[par_shapes](https://github.com/prideout/par)|Generate parametric surfaces and other simple shapes.|

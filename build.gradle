@@ -101,8 +101,8 @@ enum Artifacts {
         Platforms.ALL
     ),
     NANOVG(
-        "lwjgl-nanovg", "LWJGL - NanoVG bindings",
-        "A small antialiased vector graphics rendering library for OpenGL.",
+        "lwjgl-nanovg", "LWJGL - NanoVG & NanoSVG bindings",
+        "A small antialiased vector graphics rendering library for OpenGL. Also includes NanoSVG, a simple SVG parser.",
         Platforms.ALL
     ),
     NFD(

@@ -1039,7 +1039,7 @@
         <release-module package="org.lwjgl.util.lmdb" name="lmdb" native-library="lwjgl_lmdb" title="LMDB" license="lmdb" if:true="${binding.lmdb}"/>
 
         <!-- NanoVG -->
-        <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" license="nanovg" if:true="${binding.nanovg}">
+        <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" license="nano" if:true="${binding.nanovg}">
             <sources>
                 <fileset dir="${src.core}" includes="org/lwjgl/nanovg/**"/>
             </sources>
