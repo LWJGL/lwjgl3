@@ -50,7 +50,7 @@ ENABLE_WARNINGS()""")
         "free",
         "aligned_alloc"
     ).forEach {
-        Code(nativeCall = "    return (jlong)(intptr_t)&rp$it;")..internal..opaque_p(
+        Code(nativeCall = "${t}return (jlong)(intptr_t)&rp$it;")..internal..opaque_p(
             "${it}_address",
             "The #$it() function address."
         )

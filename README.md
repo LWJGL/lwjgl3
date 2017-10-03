@@ -159,6 +159,7 @@ improve the chances of a quick and useful response.
 |[dyncall](http://www.dyncall.org/)|Encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to right and then call interface allowing programmers to call C functions in a completely dynamic manner.|
 |[jemalloc](http://www.canonware.com/jemalloc/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
 |[LMDB](https://symas.com/products/lightning-memory-mapped-database/)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
+|[Remotery](https://github.com/Celtoys/Remotery)|A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.|
 |[rpmalloc](https://github.com/rampantpixels/rpmalloc)|A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.|
 |[xxHash](https://github.com/Cyan4973/xxHash)|An Extremely fast Hash algorithm, running at RAM speed limits.|
 

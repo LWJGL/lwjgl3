@@ -150,6 +150,11 @@ enum Artifacts {
         "Generate parametric surfaces and other simple shapes.",
         Platforms.ALL
     ),
+    REMOTERY(
+        "lwjgl-remotery", "LWJGL - Remotery bindings",
+        "A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.",
+        Platforms.ALL
+    ),
     RPMALLOC(
         "lwjgl-rpmalloc", "LWJGL - rpmalloc bindings",
         "A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.",

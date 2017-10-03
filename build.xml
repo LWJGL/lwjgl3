@@ -246,6 +246,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/util/lmdb" if:true="${binding.lmdb}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/util/remotery" if:true="${binding.remotery}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/simd" if:true="${binding.sse}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/tinyexr" if:true="${binding.tinyexr}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/tinyfd" if:true="${binding.tinyfd}"/>
@@ -352,6 +353,7 @@
             <exclude name="org/lwjgl/util/lmdb/**" unless:true="${binding.lmdb}"/>
             <exclude name="org/lwjgl/util/nfd/**" unless:true="${binding.nfd}"/>
             <exclude name="org/lwjgl/util/par/**" unless:true="${binding.par}"/>
+            <exclude name="org/lwjgl/util/remotery/**" unless:true="${binding.remotery}"/>
             <exclude name="org/lwjgl/util/simd/**" unless:true="${binding.sse}"/>
             <exclude name="org/lwjgl/util/tinyexr/**" unless:true="${binding.tinyexr}"/>
             <exclude name="org/lwjgl/util/tinyfd/**" unless:true="${binding.tinyfd}"/>
@@ -1120,6 +1122,9 @@
 
         <!-- Par -->
         <release-module package="org.lwjgl.util.par" name="par" native-library="lwjgl_par" title="par" if:true="${binding.par}"/>
+
+        <!-- Remotery -->
+        <release-module package="org.lwjgl.util.remotery" name="remotery" native-library="lwjgl_remotery" title="remotery" if:true="${binding.remotery}"/>
 
         <!-- rpmalloc -->
         <release-module package="org.lwjgl.system.rpmalloc" name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>

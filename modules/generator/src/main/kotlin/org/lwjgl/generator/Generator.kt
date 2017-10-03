@@ -54,6 +54,7 @@ enum class Binding(
     OPENVR("binding.openvr", "org.lwjgl.openvr", arrayOverloads = false),
     OVR("binding.ovr", "org.lwjgl.ovr"),
     PAR("binding.par", "org.lwjgl.util.par"),
+    REMOTERY("binding.remotery", "org.lwjgl.util.remotery", arrayOverloads = false),
     RPMALLOC("binding.rpmalloc", "org.lwjgl.system.rpmalloc", arrayOverloads = false),
     SSE("binding.sse", "org.lwjgl.util.simd"),
     STB("binding.stb", "org.lwjgl.stb"),

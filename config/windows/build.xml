@@ -265,6 +265,16 @@ EXPORTS
             </source>
         </build>
 
+        <!-- Remotery -->
+        <build name="lwjgl_remotery" dest="${bin.native}/remotery" if:true="${binding.remotery}">
+            <compileargs>
+                <arg value="/I${src.native}\util\remotery"/>
+            </compileargs>
+            <source>
+                <fileset dir="." includes="${src.generated.native}/util/remotery/*.c" excludes="**/*Metal.c"/>
+            </source>
+        </build>
+
         <!-- rpmalloc -->
         <build name="lwjgl_rpmalloc" dest="${bin.native}/rpmalloc" if:true="${binding.rpmalloc}">
             <compileargs>

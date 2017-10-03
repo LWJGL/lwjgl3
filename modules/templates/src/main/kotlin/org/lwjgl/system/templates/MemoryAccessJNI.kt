@@ -88,14 +88,14 @@ ${primitives
     }
 
     Code(
-        nativeCall = "return (jlong)(intptr_t)&__aligned_alloc;"
+        nativeCall = "${t}return (jlong)(intptr_t)&__aligned_alloc;"
     )..macro..Address..opaque_p(
         "aligned_alloc",
         "Returns the address of the stdlib {@code aligned_alloc} function."
     )
 
     Code(
-        nativeCall = "return (jlong)(intptr_t)&__aligned_free;"
+        nativeCall = "${t}return (jlong)(intptr_t)&__aligned_free;"
     )..macro..Address..opaque_p(
         "aligned_free",
         "Returns the address of the stdlib {@code aligned_free} function."
