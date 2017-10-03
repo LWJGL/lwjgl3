@@ -4,7 +4,6 @@
  */
 package org.lwjgl.demo.stb;
 
-import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -19,6 +18,8 @@ import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
+import static org.lwjgl.stb.STBImageResize.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** STB Image demo. */
@@ -31,8 +32,8 @@ public final class Image {
     private final int comp;
 
     private long window;
-    private int ww = 800;
-    private int wh = 600;
+    private int  ww;
+    private int  wh;
 
     private boolean ctrlDown;
 
@@ -48,30 +49,32 @@ public final class Image {
             throw new RuntimeException(e);
         }
 
-        IntBuffer w    = BufferUtils.createIntBuffer(1);
-        IntBuffer h    = BufferUtils.createIntBuffer(1);
-        IntBuffer comp = BufferUtils.createIntBuffer(1);
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer w    = stack.mallocInt(1);
+            IntBuffer h    = stack.mallocInt(1);
+            IntBuffer comp = stack.mallocInt(1);
 
-        // Use info to read image metadata without decoding the entire image.
-        // We don't need this for this demo, just testing the API.
-        if (!stbi_info_from_memory(imageBuffer, w, h, comp)) {
-            throw new RuntimeException("Failed to read image information: " + stbi_failure_reason());
+            // Use info to read image metadata without decoding the entire image.
+            // We don't need this for this demo, just testing the API.
+            if (!stbi_info_from_memory(imageBuffer, w, h, comp)) {
+                throw new RuntimeException("Failed to read image information: " + stbi_failure_reason());
+            }
+
+            System.out.println("Image width: " + w.get(0));
+            System.out.println("Image height: " + h.get(0));
+            System.out.println("Image components: " + comp.get(0));
+            System.out.println("Image HDR: " + stbi_is_hdr_from_memory(imageBuffer));
+
+            // Decode the image
+            image = stbi_load_from_memory(imageBuffer, w, h, comp, 0);
+            if (image == null) {
+                throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
+            }
+
+            this.w = w.get(0);
+            this.h = h.get(0);
+            this.comp = comp.get(0);
         }
-
-        System.out.println("Image width: " + w.get(0));
-        System.out.println("Image height: " + h.get(0));
-        System.out.println("Image components: " + comp.get(0));
-        System.out.println("Image HDR: " + stbi_is_hdr_from_memory(imageBuffer));
-
-        // Decode the image
-        image = stbi_load_from_memory(imageBuffer, w, h, comp, 0);
-        if (image == null) {
-            throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
-        }
-
-        this.w = w.get(0);
-        this.h = h.get(0);
-        this.comp = comp.get(0);
     }
 
     public static void main(String[] args) {
@@ -125,11 +128,24 @@ public final class Image {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
+        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+        ww = max(800, min(w, vidmode.width() - 160));
+        wh = max(600, min(h, vidmode.height() - 120));
+
         this.window = glfwCreateWindow(ww, wh, "STB Image Demo", NULL, NULL);
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
+        // Center window
+        glfwSetWindowPos(
+            window,
+            (vidmode.width() - ww) / 2,
+            (vidmode.height() - wh) / 2
+        );
+
+        glfwSetWindowRefreshCallback(window, window -> render());
         glfwSetWindowSizeCallback(window, this::windowSizeChanged);
         glfwSetFramebufferSizeCallback(window, Image::framebufferSizeChanged);
 
@@ -166,15 +182,6 @@ public final class Image {
             }
         });
 
-        // Center window
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
-        glfwSetWindowPos(
-            window,
-            (vidmode.width() - ww) / 2,
-            (vidmode.height() - wh) / 2
-        );
-
         // Create context
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
@@ -187,68 +194,132 @@ public final class Image {
     }
 
     private void setScale(int scale) {
-        this.scale = max(-3, scale);
+        this.scale = max(-9, scale);
     }
 
-    private void loop() {
+    private void premultiplyAlpha() {
+        int stride = w * 4;
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int i = y * stride + x * 4;
+
+                float alpha = (image.get(i + 3) & 0xFF) / 255.0f;
+                image.put(i + 0, (byte)round(((image.get(i + 0) & 0xFF) * alpha)));
+                image.put(i + 1, (byte)round(((image.get(i + 1) & 0xFF) * alpha)));
+                image.put(i + 2, (byte)round(((image.get(i + 2) & 0xFF) * alpha)));
+            }
+        }
+    }
+
+    private int createTexture() {
         int texID = glGenTextures();
 
         glBindTexture(GL_TEXTURE_2D, texID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
+        int format;
         if (comp == 3) {
             if ((w & 3) != 0) {
                 glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w & 1));
             }
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+            format = GL_RGB;
         } else {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+            premultiplyAlpha();
 
             glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+            format = GL_RGBA;
         }
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0, format, GL_UNSIGNED_BYTE, image);
+
+        ByteBuffer input_pixels = image;
+        int        input_w      = w;
+        int        input_h      = h;
+        int        mipmapLevel  = 0;
+        while (1 < input_w || 1 < input_h) {
+            int output_w = Math.max(1, input_w >> 1);
+            int output_h = Math.max(1, input_h >> 1);
+
+            ByteBuffer output_pixels = memAlloc(output_w * output_h * comp);
+            stbir_resize_uint8_generic(
+                input_pixels, input_w, input_h, input_w * comp,
+                output_pixels, output_w, output_h, output_w * comp,
+                comp, comp == 4 ? 3 : STBIR_ALPHA_CHANNEL_NONE, STBIR_FLAG_ALPHA_PREMULTIPLIED,
+                STBIR_EDGE_CLAMP,
+                STBIR_FILTER_MITCHELL,
+                STBIR_COLORSPACE_SRGB
+            );
+
+            if (mipmapLevel == 0) {
+                stbi_image_free(image);
+            } else {
+                memFree(input_pixels);
+            }
+
+            glTexImage2D(GL_TEXTURE_2D, ++mipmapLevel, format, output_w, output_h, 0, format, GL_UNSIGNED_BYTE, output_pixels);
+
+            input_pixels = output_pixels;
+            input_w = output_w;
+            input_h = output_h;
+        }
+        if (mipmapLevel == 0) {
+            stbi_image_free(image);
+        } else {
+            memFree(input_pixels);
+        }
+
+        return texID;
+    }
+
+    private void loop() {
+        int texID = createTexture();
 
         glEnable(GL_TEXTURE_2D);
 
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
-
-            glClear(GL_COLOR_BUFFER_BIT);
-
-            float scaleFactor = 1.0f + scale * 0.25f;
-
-            glPushMatrix();
-            glScalef(scaleFactor, scaleFactor, 1f);
-
-            glBegin(GL_QUADS);
-            {
-                glTexCoord2f(0.0f, 0.0f);
-                glVertex2f(0.0f, 0.0f);
-
-                glTexCoord2f(1.0f, 0.0f);
-                glVertex2f(w, 0.0f);
-
-                glTexCoord2f(1.0f, 1.0f);
-                glVertex2f(w, h);
-
-                glTexCoord2f(0.0f, 1.0f);
-                glVertex2f(0.0f, h);
-            }
-            glEnd();
-
-            glPopMatrix();
-
-            glfwSwapBuffers(window);
+            render();
         }
 
         glDisable(GL_TEXTURE_2D);
+        glDeleteTextures(texID);
+    }
+
+    private void render() {
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        float scaleFactor = 1.0f + scale * 0.1f;
+
+        glPushMatrix();
+        glTranslatef(ww * 0.5f, wh * 0.5f, 0.0f);
+        glScalef(scaleFactor, scaleFactor, 1f);
+        glTranslatef(-w * 0.5f, -h * 0.5f, 0.0f);
+
+        glBegin(GL_QUADS);
+        {
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex2f(0.0f, 0.0f);
+
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex2f(w, 0.0f);
+
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex2f(w, h);
+
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex2f(0.0f, h);
+        }
+        glEnd();
+
+        glPopMatrix();
+
+        glfwSwapBuffers(window);
     }
 
     private void destroy() {
-        stbi_image_free(image);
-
         if (debugProc != null) {
             debugProc.free();
         }
