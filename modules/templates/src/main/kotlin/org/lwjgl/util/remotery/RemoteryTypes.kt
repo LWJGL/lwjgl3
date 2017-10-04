@@ -31,7 +31,11 @@ fun NativeClass.remoteryIncludes(type: String) {
         """DISABLE_WARNINGS()
 #define RMT_USE_OPENGL 1
 #ifdef LWJGL_LINUX
-    #define RMT_USE_POSIX_THREADNAMES 1
+    #define RMT_USE_POSIX_THREADNAMES 1${if (type == "h") "" else """
+    #pragma GCC diagnostic ignored "-Wunused-parameter"
+    #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+    #pragma GCC diagnostic ignored "-Wunused-function"
+    #pragma GCC diagnostic ignored "-Wpedantic""""}
 #elif LWJGL_MACOS
     #define RMT_USE_METAL 1
 #endif

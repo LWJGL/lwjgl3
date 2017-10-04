@@ -44,6 +44,6 @@ static void SetTimestamp(void* data)
 void rmtMetal_MeasureCommandBuffer(unsigned long long* out_start, unsigned long long* out_end, unsigned int* out_ready)
 {
     id command_buffer = GetCommandBuffer();
-    [command_buffer addScheduledHandler:^(id <MTLCommandBuffer>){ SetTimestamp(out_start); }];
-    [command_buffer addCompletedHandler:^(id <MTLCommandBuffer>){ SetTimestamp(out_end); *out_ready = 1; }];
+    [command_buffer addScheduledHandler:^(id <MTLCommandBuffer> buffer){ SetTimestamp(out_start); }];
+    [command_buffer addCompletedHandler:^(id <MTLCommandBuffer> buffer){ SetTimestamp(out_end); *out_ready = 1; }];
 }

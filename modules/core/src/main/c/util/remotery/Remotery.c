@@ -501,10 +501,8 @@ static void WriteFence()
 {
 #if defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
     _WriteBarrier();
-#elif defined (__clang__)
-	__asm__ volatile("" : : : "memory");
 #else
-    asm volatile ("" : : : "memory");
+	__asm__ volatile("" : : : "memory");
 #endif
 }
 

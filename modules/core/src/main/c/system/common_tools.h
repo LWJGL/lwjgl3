@@ -10,7 +10,7 @@
 #ifdef LWJGL_LINUX
     #include "LinuxConfig.h"
 #endif
-#ifdef LWJGL_MACOSX
+#ifdef LWJGL_MACOS
     #include "MacOSXConfig.h"
 #endif
 

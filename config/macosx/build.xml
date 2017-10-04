@@ -232,6 +232,9 @@
                 <arg value="-I${src.native.rel}/util/remotery"/>
                 <fileset dir="." includes="${src.generated.native}/util/remotery/*.c"/>
             </source>
+            <link>
+                <arg line="-framework Foundation"/>
+            </link>
         </build>
 
         <!-- rpmalloc -->
