@@ -143,11 +143,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <javac sourcepath="" debug="yes" encoding="UTF-8">
             <compilerarg line="-source 8"/>
             <compilerarg line="-target 8"/>
-            <!-- Currently fails with "package sun.misc does not exist" on JDK 9
-            <compilerarg line="-source 8" unless:set="jdk9"/>
-            <compilerarg line="-target 8" unless:set="jdk9"/>
-            <compilerarg line="&#45;&#45;release 8" if:set="jdk9"/>
-            -->
+            <!--<compilerarg line='&#45;&#45;boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar" if:set="env.JAVA8_HOME"/>-->
+            <compilerarg value="--boot-class-path" if:set="env.JAVA8_HOME"/>
+            <compilerarg value="${env.JAVA8_HOME}/jre/lib/rt.jar" if:set="env.JAVA8_HOME"/>
             <compilerarg value="-Xlint:all"/>
         </javac>
     </presetdef>
