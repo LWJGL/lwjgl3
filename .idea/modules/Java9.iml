@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_9">
+    <output url="file://$MODULE_DIR$/../../bin/Core/META-INF/versions/9" />
+    <output-test url="file://$MODULE_DIR$/../../bin/Tests/META-INF/versions/9" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../modules/java9">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/java9/src/main/java" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="9" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Core" />
+  </component>
+</module>

@@ -949,7 +949,7 @@
         <mkdir dir="${bin.core}/META-INF/versions/9"/>
         <lwjgl.javac destdir="${bin.core}/META-INF/versions/9" taskname="javac: Core - Java 9">
             <src>
-                <pathelement path="${src.core}9"/>
+                <pathelement path="${modules}/java9/src/main/java"/>
             </src>
             <include name="**/*.java"/>
         </lwjgl.javac>
