@@ -763,7 +763,6 @@
                     <attribute name="Implementation-Title" value="${module}"/>
                     <attribute name="Implementation-Version" value="${revision}"/>
                     <attribute name="Implementation-Vendor" value="lwjgl.org"/>
-                    <attribute name="Automatic-Module-Name" value="@{package}"/>
                     <attribute name="Multi-Release" value="true" if:true="@{multi-release}"/>
                 </manifest>
                 <content/>
@@ -815,24 +814,28 @@
                 </fileset>
             </checksum>
 
-            <lwjgl-jar destfile="${release}/${module}/${module}-natives-linux.jar" package="@{package}.natives.linux" title="@{title}">
-                <fileset dir="${release}/${module}/native" includes="*.so*"/>
-            </lwjgl-jar>
+            <parallel threadsPerProcessor="1" failonany="true">
+                <lwjgl-jar destfile="${release}/${module}/${module}-natives-linux.jar" package="@{package}.natives.linux" title="@{title}">
+                    <fileset dir="${release}/${module}/native" includes="*.so*"/>
+                    <fileset dir="${bin.modules}/${module.java}.natives" includes="module-info.class"/>
+                </lwjgl-jar>
 
-            <lwjgl-jar destfile="${release}/${module}/${module}-natives-macos.jar" package="@{package}.natives.macos" title="@{title}">
-                <fileset dir="${release}/${module}/native" includes="*.dylib*"/>
-            </lwjgl-jar>
+                <lwjgl-jar destfile="${release}/${module}/${module}-natives-macos.jar" package="@{package}.natives.macos" title="@{title}">
+                    <fileset dir="${release}/${module}/native" includes="*.dylib*"/>
+                    <fileset dir="${bin.modules}/${module.java}.natives" includes="module-info.class"/>
+                </lwjgl-jar>
 
-            <lwjgl-jar destfile="${release}/${module}/${module}-natives-windows.jar" package="@{package}.natives.windows" title="@{title}">
-                <fileset dir="${release}/${module}/native" includes="*.dll*"/>
-            </lwjgl-jar>
+                <lwjgl-jar destfile="${release}/${module}/${module}-natives-windows.jar" package="@{package}.natives.windows" title="@{title}">
+                    <fileset dir="${release}/${module}/native" includes="*.dll*"/>
+                    <fileset dir="${bin.modules}/${module.java}.natives" includes="module-info.class"/>
+                </lwjgl-jar>
+            </parallel>
         </sequential>
     </macrodef>
 
     <macrodef name="release-module">
         <attribute name="package"/>
         <attribute name="name"/>
-        <attribute name="module-name" default="lwjgl-@{name}"/>
         <attribute name="title"/>
         <attribute name="java-only" default="false"/>
         <attribute name="native-library" default=""/>
@@ -844,7 +847,14 @@
         <element name="custom" optional="true"/>
         <sequential>
             <local name="module"/>
-            <property name="module" value="@{module-name}"/>
+            <condition property="module" value="lwjgl" else="lwjgl-@{name}">
+                <equals arg1="@{name}" arg2="core"/>
+            </condition>
+
+            <local name="module.java"/>
+            <condition property="module.java" value="org.lwjgl" else="org.lwjgl.@{name}">
+                <equals arg1="@{name}" arg2="core"/>
+            </condition>
 
             <!-- Bundle natives -->
             <release-natives package="@{package}" title="@{title}" native-library="@{native-library}" unless:true="@{java-only}">
@@ -861,66 +871,61 @@
                 <equals arg1="@{name}" arg2="core"/>
             </condition>
 
-            <parallel threadsPerProcessor="1" failonany="true">
-
             <!-- Bundle classes -->
-            <sequential>
-                <lwjgl-jar destfile="${release}/${module}/${module}.jar" package="@{package}" title="@{title}" multi-release="@{multi-release}">
-                    <fileset dir="${release}/${module}/native" includes="*.sha1" unless:true="@{java-only}"/>
-                    <fileset dir="${bin.core}" includes="${module.package}/**" unless:set="module.package.skip"/>
-                    <classes/>
-                </lwjgl-jar>
-                <delete dir="${release}/${module}/native" unless:true="@{java-only}"/>
-            </sequential>
+            <lwjgl-jar destfile="${release}/${module}/${module}.jar" package="@{package}" title="@{title}" multi-release="@{multi-release}">
+                <fileset dir="${release}/${module}/native" includes="*.sha1" unless:true="@{java-only}"/>
+                <fileset dir="${bin.core}" includes="${module.package}/**" unless:set="module.package.skip"/>
+                <fileset dir="${bin.modules}/${module.java}" includes="module-info.class"/>
+                <classes/>
+            </lwjgl-jar>
+            <delete dir="${release}/${module}/native" unless:true="@{java-only}"/>
 
             <!-- Bundle javadoc -->
-            <sequential>
-                <mkdir dir="${release}/${module}/javadoc"/>
-                <javadoc
-                    destdir="${release}/${module}/javadoc"
-                    source="1.8"
-                    windowtitle="LWJGL ${build.version} - @{title}"
-                    encoding="UTF-8"
-                    docencoding="UTF-8"
-                    charset="UTF-8"
-                    useexternalfile="true"
-                    nohelp="true"
-                    notree="true"
-                    public="true"
-                    doclet="org.lwjgl.system.ExcludeDoclet"
-                    docletpath="${bin.generator}"
-                    failonerror="true"
-                >
-                    <doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
-                    <bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
+            <mkdir dir="${release}/${module}/javadoc"/>
+            <javadoc
+                destdir="${release}/${module}/javadoc"
+                source="1.8"
+                windowtitle="LWJGL ${build.version} - @{title}"
+                encoding="UTF-8"
+                docencoding="UTF-8"
+                charset="UTF-8"
+                useexternalfile="true"
+                nohelp="true"
+                notree="true"
+                public="true"
+                doclet="org.lwjgl.system.ExcludeDoclet"
+                docletpath="${bin.generator}"
+                failonerror="true"
+            >
+                <doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
+                <bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
 
-                    <classpath>
-                        <pathelement path="${src.core}"/>
-                        <pathelement path="${src.generated.java}"/>
-                    </classpath>
+                <classpath>
+                    <pathelement path="${src.core}"/>
+                    <pathelement path="${src.generated.java}"/>
+                </classpath>
 
-                    <fileset dir="${src.generated.java}" includes="${module.package}/**" unless:set="module.package.skip"/>
-                    <sources/>
+                <fileset dir="${src.generated.java}" includes="${module.package}/**" unless:set="module.package.skip"/>
+                <sources/>
 
-                    <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+                <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
-                    <arg value="-Xdoclint:none"/>
-                    <arg line="-Xmaxwarns 1"/>
-                    <arg value="-html5" if:set="jdk9"/>
-                    <arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
-                    <arg line="-J-Dfile.encoding=UTF8"/>
-                    <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
-                </javadoc>
-                <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc"/>
+                <arg value="-Xdoclint:none"/>
+                <arg line="-Xmaxwarns 1"/>
+                <arg value="-html5" if:set="jdk9"/>
+                <arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
+                <arg line="-J-Dfile.encoding=UTF8"/>
+                <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
+            </javadoc>
+            <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc"/>
 
-                <java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
-                    <classpath path="${bin.generator}"/>
+            <java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
+                <classpath path="${bin.generator}"/>
 
-                    <arg value="${release}/${module}/javadoc/org/lwjgl"/>
-                </java>
-                <zip destfile="${release}/${module}/${module}-javadoc.jar" basedir="${release}/${module}/javadoc" includes="**" level="9"/>
-                <delete dir="${release}/${module}/javadoc"/>
-            </sequential>
+                <arg value="${release}/${module}/javadoc/org/lwjgl"/>
+            </java>
+            <zip destfile="${release}/${module}/${module}-javadoc.jar" basedir="${release}/${module}/javadoc" includes="**" level="9"/>
+            <delete dir="${release}/${module}/javadoc"/>
 
             <!-- Bundle source -->
             <jar destfile="${release}/${module}/${module}-sources.jar" level="9">
@@ -929,19 +934,15 @@
             </jar>
 
             <!-- Copy license -->
-            <sequential>
-                <local name="auto-license"/>
-                <condition property="auto-license" value="false" else="true">
-                    <length string="@{license}" length="0"/>
-                </condition>
-                <copy todir="${release}/${module}" if:true="${auto-license}">
-                    <fileset dir="${doc}/3rdparty" includes="@{license}*"/>
-                </copy>
+            <local name="auto-license"/>
+            <condition property="auto-license" value="false" else="true">
+                <length string="@{license}" length="0"/>
+            </condition>
+            <copy todir="${release}/${module}" if:true="${auto-license}">
+                <fileset dir="${doc}/3rdparty" includes="@{license}*"/>
+            </copy>
 
-                <custom/>
-            </sequential>
-
-            </parallel>
+            <custom/>
         </sequential>
     </macrodef>
 
@@ -953,6 +954,23 @@
             </src>
             <include name="**/*.java"/>
         </lwjgl.javac>
+
+        <mkdir dir="${bin}/ModuleInfoGen"/>
+        <javac destdir="${bin}/ModuleInfoGen" sourcepath="" debug="yes" encoding="UTF-8" taskname="javac: module-info-gen">
+            <compilerarg line="--release 9"/>
+            <compilerarg value="-Xlint:all"/>
+            <src>
+                <pathelement path="${modules}/module-info-gen/src/main/java"/>
+            </src>
+            <include name="**/*.java"/>
+        </javac>
+
+        <mkdir dir="${bin.modules}"/>
+        <java classname="org.lwjgl.tool.ModuleInfoGen" fork="true" failonerror="true" taskname="module-info-gen">
+            <classpath>
+                <pathelement path="${bin}/ModuleInfoGen"/>
+            </classpath>
+        </java>
     </target>
 
     <target name="release" depends="compile,-build-version">
@@ -978,8 +996,10 @@
 
         <antcall target="-multi-release-9" if:set="jdk9"/>
 
+        <parallel threadcount="4" failonany="true">
+
         <!-- CORE -->
-        <release-module package="org.lwjgl" name="core" module-name="lwjgl" native-library="lwjgl" multi-release="${multi-release}" title="Core">
+        <release-module package="org.lwjgl" name="core" native-library="lwjgl" multi-release="${multi-release}" title="Core">
             <classes>
                 <fileset dir="${bin.core}">
                     <include name="org/lwjgl/*.class"/>
@@ -1153,5 +1173,7 @@
 
         <!-- yoga -->
         <release-module package="org.lwjgl.util.yoga" name="yoga" native-library="lwjgl_yoga" title="yoga" license="yoga" if:true="${binding.yoga}"/>
+
+        </parallel>
     </target>
 </project>

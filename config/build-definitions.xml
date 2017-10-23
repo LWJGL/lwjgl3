@@ -80,6 +80,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.html.tests" location="${bin.html}/tests" relative="true"/>
     <property name="bin.html.javadoc" location="${bin.html}/javadoc" relative="true"/>
 
+    <property name="bin.modules" location="${bin}/MODULES" relative="true"/>
+
     <property name="release" location="${bin}/RELEASE" relative="true"/>
     <property name="release.jar" location="${release}/jar" relative="true"/>
     <property name="release.native" location="${release}/native" relative="true"/>
