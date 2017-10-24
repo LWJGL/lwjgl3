@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
 val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_", prefixConstant = "ovr", library = OVR_LIBRARY) {
-    nativeImport("OVR_ErrorCode.h")
-
     documentation = "LibOVR error code declarations."
 
     EnumConstant(
@@ -105,7 +103,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
         "Error_MisformattedBlock".enum("Result of a bad calibration block due to lengths.", "-9002")
     )
 
-    val SUCCESS = macro()..bool(
+    val SUCCESS = macro(expression = "result >= 0")..bool(
         "SUCCESS",
         """
         Indicates if an {@code ovrResult} indicates success.
@@ -116,7 +114,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
         ovrResult.IN("result", "the {@code ovrResult} to check")
     )
 
-    macro()..bool(
+    macro(expression = "result == ovrSuccess")..bool(
         "UNQUALIFIED_SUCCESS",
         """
         Indicates if an {@code ovrResult} indicates an unqualified success.
@@ -128,7 +126,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
         SUCCESS["result"]
     )
 
-    macro()..bool(
+    macro(expression = "!OVR_SUCCESS(result)")..bool(
         "FAILURE",
         "Indicates if an {@code ovrResult} indicates failure.",
 
