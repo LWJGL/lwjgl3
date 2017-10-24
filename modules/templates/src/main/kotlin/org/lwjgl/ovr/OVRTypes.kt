@@ -38,6 +38,7 @@ val ovrSession_p = ovrSession.p
 val ovrHmdType = "ovrHmdType".enumType
 val ovrEyeType = "ovrEyeType".enumType
 val ovrLayerType = "ovrLayerType".enumType
+val ovrExtensions = "ovrExtensions".enumType
 
 val ovrProcessId = typedef(int32_t, "ovrProcessId")
 
@@ -88,7 +89,20 @@ val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "o
         "ShouldRecenter",
         "True if UX has requested re-centering. Must call #ClearShouldRecenterFlag(), #RecenterTrackingOrigin() or #SpecifyTrackingOrigin()."
     )
-    ovrBool.array("Internal", "", size = "2")
+    ovrBool.member(
+        "HasInputFocus",
+        """
+        True if the application is the foreground application and receives input (e.g. Touch controller state). If this is false then the application is in the
+        background (but possibly still visible) should hide any input representations such as hands.
+        """
+    )
+    ovrBool.member(
+        "OverlayPresent",
+        """
+        True if a system overlay is present, such as a dashboard. In this case the application (if visible) should pause while still drawing, avoid drawing
+        near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
+        """
+    )
 }.p
 
 val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
@@ -567,7 +581,7 @@ val ovrCameraExtrinsics = struct(OVR_PACKAGE, "OVRCameraExtrinsics", nativeName 
 
 val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
 val ovrExternalCamera_p = struct(OVR_PACKAGE, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
-    charASCII.array("Name", "", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
+    charASCII.array("Name", "camera identifier: vid + pid + serial number etc.", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
     ovrCameraIntrinsics.member("Intrinsics", "")
     ovrCameraExtrinsics.member("Extrinsics", "")
 }.p
@@ -593,7 +607,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
         #SubmitFrame(), as it is the kind of layer used to render a 3D stereoscopic view.
         """
 
-    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFov.")
+    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFov")
     ovrTextureSwapChain.array(
         "ColorTexture",
         "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL.",
@@ -624,6 +638,131 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
     )
 }
 
+val ovrTextureLayoutOctilinear = struct(OVR_PACKAGE, "OVRTextureLayoutOctilinear", nativeName = "ovrTextureLayoutOctilinear") {
+    documentation = 
+        """
+        Multiresolution descriptor for Octilinear.
+        ${codeBlock("""
+SizeLeft + SizeRight <= Viewport.Size.w
+SizeUp   + sizeDown  <= Viewport.Size.h
+
+Clip space (0,0) is located at Viewport.Pos + (SizeLeft,SizeUp) where
+Viewport is given in the layer description.
+
+Viewport Top left
++-----------------------------------------------------+
+|                        ^                       |    |
+|                        |                       |    |
+|           0          SizeUp         1          |    |
+|                        |                       |<--Portion of viewport
+|                        |                       |   determined by sizes
+|                        |                       |    |
+|<--------SizeLeft-------+-------SizeRight------>|    |
+|                        |                       |    |
+|                        |                       |    |
+|           2         SizeDown        3          |    |
+|                        |                       |    |
+|                        |                       |    |
+|                        v                       |    |
++------------------------------------------------+    |
+|                                                     |
++-----------------------------------------------------+
+                                                      Viewport bottom right
+
+For example, when rendering quadrant 0 its scissor rectangle will be
+
+ Top    = 0
+ Left   = 0
+ Right  = SizeLeft
+ Bottom = SizeUp
+
+and the scissor rectangle for quadrant 1 will be:
+
+ Top    = 0
+ Left   = SizeLeft
+ Right  = SizeLeft + SizeRight
+ Bottom = SizeUp""")}
+        """
+
+    float.member("WarpLeft", "left W warping")
+    float.member("WarpRight", "right W warping")
+    float.member("WarpUp", "up W warping")
+    float.member("WarpDown", "down W warping")
+    
+    float.member("SizeLeft", "left W quadrant size")
+    float.member("SizeRight", "right W quadrant size")
+    float.member("SizeUp", "up W quadrant size")
+    float.member("SizeDown", "down W quadrant size")
+}
+
+val ovrTextureLayoutDesc_Union = union(OVR_PACKAGE, "OVRTextureLayoutDescUnion", nativeName = "ovrTextureLayoutDesc_Union") {
+    javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
+    documentation = "Combines texture layout descriptors."
+
+    ovrTextureLayoutOctilinear.array("Octilinear", "", size = "ovrEye_Count")
+}
+
+val ovrTextureLayout = "ovrTextureLayout".enumType
+
+val ovrLayerEyeFovMultires = struct(OVR_PACKAGE, "OVRLayerEyeFovMultires", nativeName = "ovrLayerEyeFovMultires") {
+    javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
+    documentation =
+        """
+        Describes a layer that specifies a monoscopic or stereoscopic view with support for optional multiresolution textures. This struct is the same as
+        ##OVRLayerEyeFov plus texture layout parameters.
+
+        Three options exist with respect to mono/stereo texture usage:
+        ${ul(
+            """
+            {@code ColorTexture[0]} and {@code ColorTexture[1]} contain the left and right stereo renderings, respectively. {@code Viewport[0]} and
+            {@code Viewport[1]} refer to {@code ColorTexture[0]} and {@code ColorTexture[1]}, respectively.
+            """,
+            """
+            {@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is #NULL, and {@code Viewport[0]} and
+            {@code Viewport[1]} refer to sub-rects with {@code ColorTexture[0]}.
+            """,
+            "{@code ColorTexture[0]} contains a single monoscopic rendering, and {@code Viewport[0]} and {@code Viewport[1]} both refer to that rendering."
+        )}
+        """
+
+    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFovMultires")
+
+    ovrTextureSwapChain.array(
+        "ColorTexture",
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
+        size = "ovrEye_Count"
+    )
+
+    ovrRecti.array(
+        "Viewport",
+        "specifies the ColorTexture sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
+        size = "ovrEye_Count"
+    )
+
+    ovrFovPort.array("Fov", "the viewport field of view", size = "ovrEye_Count")
+
+    ovrPosef.array(
+        "RenderPose",
+        """
+        specifies the position and orientation of each eye view, with position specified in meters. {@code RenderPose} will typically be the value returned
+        from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+        """,
+        size = "ovrEye_Count"
+    )
+
+    double.member(
+        "SensorSampleTime",
+        """
+        specifies the timestamp when the source ##OVRPosef (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by calling
+        #GetTimeInSeconds() around the instant the application calls #GetTrackingState(). The main purpose for this is to accurately track app tracking
+        latency.
+        """
+    )
+
+    ovrTextureLayout.member("TextureLayout", "specifies layout type of textures")
+    ovrTextureLayoutDesc_Union.member("TextureLayoutDesc", "specifies texture layout parameters")
+}
+
 val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
     documentation =
         """
@@ -651,6 +790,21 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
         """
     )
     ovrVector2f.member("QuadSize", "width and height (respectively) of the quad in meters")
+}
+
+val ovrLayerCube = struct(OVR_PACKAGE, "OVRLayerCube", nativeName = "ovrLayerCube") {
+    documentation =
+        """
+        Describes a layer of type #LayerType_Cube which is a single timewarped cubemap at infinity. When looking down the recentered origin's -Z axis, +X face
+        is left and +Y face is up. Similarly, if headlocked the +X face is left, +Y face is up and -Z face is forward. Note that the coordinate system is
+        left-handed.
+
+        #LayerFlag_TextureOriginAtBottomLeft flag is not supported by {@code ovrLayerCube}.
+        """
+
+    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_Cube")
+    ovrQuatf.member("Orientation", "orientation of the cube")
+    ovrTextureSwapChain.member("CubeMapTexture", "contains a single cubemap swapchain (not a stereo pair of swapchains)")
 }
 
 val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerCompositorFrame", nativeName = "ovrPerfStatsPerCompositorFrame", mutable = false) {
@@ -935,7 +1089,7 @@ fun config() {
             )}
             """
 
-        ovrLayerHeader.member("Header", "must be #LayerType_EyeMatrix")
+        ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeMatrix")
         ovrTextureSwapChain.array(
             "ColorTexture",
             "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
@@ -981,6 +1135,8 @@ TexV  = P.y/P.z""")}
 
         ovrLayerHeader.member("Header", "the layer header")
         ovrLayerEyeFov.member("EyeFov", "")
+        ovrLayerEyeFovMultires.member("Multires", "")
+        ovrLayerCube.member("Cube", "")
         ovrLayerQuad.member("Quad", "")
     }
 }

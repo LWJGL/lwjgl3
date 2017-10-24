@@ -57,6 +57,13 @@ ENABLE_WARNINGS()""")
             "This client will alternate between VR and 2D rendering. Typically set by game engine editors and VR-enabled web browsers.",
             0x00000020
         ),
+        "Init_FocusAware".enum(
+            """
+            This client is aware of ##OVRSessionStatus focus states (e.g. {@code ovrSessionStatus::HasInputFocus}), and responds to them appropriately
+            (e.g. pauses and stops drawing hands when lacking focus).
+            """,
+            0x00000040
+        ),
         "Init_WritableBits".enum("These bits are writable by user code.", 0x00ffffff)
     )
 
@@ -97,6 +104,12 @@ ENABLE_WARNINGS()""")
         "TrackingCap_MagYawCorrection".enum("Supports yaw drift correction.", 0x0020),
         "TrackingCap_Position".enum("Supports positional tracking.", 0x0040)
     ).javaDocLinks
+
+    EnumConstant(
+        "Optional extensions. ({@code ovrExtensions})",
+
+        "Extension_TextureLayout_Octilinear".enum("Enable before first layer submission.", "0")
+    )
 
     val EyeType = EnumConstant(
         """
@@ -239,6 +252,16 @@ ENABLE_WARNINGS()""")
             redirection of any frame containing this contents
             """,
             0x0004
+        ),
+
+        "TextureMisc_AutoGenerateMips".enum(
+            """
+            Automatically generate and use the mip chain in composition on each submission. Mips are regenerated from highest quality level, ignoring other
+            pre-existing mip levels.
+
+            Not supported for depth or compressed (BC) formats.
+            """,
+            0x0008
         )
     )
 
@@ -605,6 +628,31 @@ ovr_IdentifyClient(
 
         session,
         ovrSessionStatus_p.OUT("sessionStatus", "an ##OVRSessionStatus that is filled in")
+    )
+
+    ovrResult(
+        "IsExtensionSupported",
+        "Queries extension support status.",
+
+        session,
+        ovrExtensions.IN("extension", "extension to query"),
+        Check(1)..ovrBool_p.OUT("outExtensionSupported", "set to extension support status. #True if supported."),
+
+        returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure use #GetLastErrorInfo() to get more information."
+    )
+
+    ovrResult(
+        "EnableExtension",
+        "Enable extension. Extensions must be enabled after #Create() is called.",
+
+        session,
+        ovrExtensions.IN("extension", "extension to enable."),
+
+        returnDoc =
+        """
+        an {@code ovrResult} indicating success or failure. Extension is only enabled if successful. In the case of failure use #GetLastErrorInfo() to get more
+        information.
+        """
     )
 
     // ----------------
@@ -1000,7 +1048,9 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         "LayerType_Disabled".enum("Layer is disabled.", "0"),
         "LayerType_EyeFov".enum("Described by ##OVRLayerEyeFov."),
         "LayerType_Quad".enum("Described by ##OVRLayerQuad.", "3"),
-        "LayerType_EyeMatrix".enum("Described by ##OVRLayerEyeMatrix.", "5")
+        "LayerType_EyeMatrix".enum("Described by ##OVRLayerEyeMatrix.", "5"),
+        "LayerType_EyeFovMultires".enum("Described by ##OVRLayerEyeFovMultires.", "7"),
+        "LayerType_Cube".enum("Described by ##OVRLayerCube.", "10")
     )
 
     EnumConstant(
@@ -1024,6 +1074,13 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
             """,
             0x04
         )
+    )
+
+    EnumConstant(
+        "Describes eye texture layouts. Used with ##OVRLayerEyeFovMultires. ({@code ovrTextureLayout})",
+
+        "TextureLayout_Rectilinear".enum("Regular eyeFov layer.", "0"),
+        "TextureLayout_Octilinear".enum("Octilinear extension must be enabled.", "1")
     )
 
     // ----------------
@@ -1127,12 +1184,143 @@ ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.Def
     )
 
     ovrResult(
+        "WaitToBeginFrame",
+        """
+        Waits until surfaces are available and it is time to begin rendering the frame. Must be called before #BeginFrame(), but not necessarily from the same
+        thread.
+        """,
+
+        session,
+        long_long.IN("frameIndex", "specifies the targeted application frame index"),
+
+        returnDoc =
+        """
+        an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+        ${ul(
+            "#Success: command completed successfully.",
+            """
+            #Success_NotVisible: rendering of a previous frame completed successfully but was not displayed on the HMD, usually because another application
+            currently has ownership of the HMD. Applications receiving this result should stop rendering new content and call #GetSessionStatus() to detect
+            visibility.
+            """,
+            """
+            #Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
+            (#DestroyTextureSwapChain()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
+            ({@code ovr_CreateTextureSwapChainXXX}). The application's existing private graphics resources do not need to be recreated unless the new
+            {@code ovr_Create} call returns a different {@code GraphicsLuid}.
+            """
+        )}
+        """
+    )
+
+    ovrResult(
+        "BeginFrame",
+        """
+        Called from render thread before application begins rendering. Must be called after #WaitToBeginFrame() and before #EndFrame(), but not necessarily
+        from the same threads.
+        """,
+
+        session,
+        long_long.IN("frameIndex", "specifies the targeted application frame index. It must match what was passed to #WaitToBeginFrame()."),
+
+        returnDoc =
+        """
+        an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+        ${ul(
+            "#Success: command completed successfully.",
+            """
+            #Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
+            (#DestroyTextureSwapChain()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
+            ({@code ovr_CreateTextureSwapChainXXX}). The application's existing private graphics resources do not need to be recreated unless the new
+            {@code ovr_Create} call returns a different {@code GraphicsLuid}.
+            """
+        )}
+        """
+    )
+
+    ovrResult(
+        "EndFrame",
+        """
+        Called from render thread after application has finished rendering. Must be called after #BeginFrame(), but not necessarily from the same thread.
+        Submits layers for distortion and display, which will happen asynchronously.
+
+        ${ul(
+            "Layers are drawn in the order they are specified in the array, regardless of the layer type.",
+            """
+            Layers are not remembered between successive calls to #SubmitFrame(). A layer must be specified in every call to {@code ovr_SubmitFrame} or it
+            won't be displayed.
+            """,
+            """
+            If a {@code layerPtrList} entry that was specified in a previous call to #SubmitFrame() is passed as #NULL or is of type #LayerType_Disabled, that
+            layer is no longer displayed.
+            """,
+            """
+            A {@code layerPtrList} entry can be of any layer type and multiple entries of the same layer type are allowed. No {@code layerPtrList} entry may be
+            duplicated (i.e. the same pointer as an earlier entry).
+            """
+        )}
+
+        <h3>Example code</h3>
+        ${codeBlock("""
+ovrLayerEyeFov  layer0;
+ovrLayerQuad    layer1;
+...
+ovrLayerHeader* layers[2] = { &layer0.Header, &layer1.Header };
+ovrResult result = ovr_EndFrame(session, frameIndex, nullptr, layers, 2);""")}
+        """,
+
+        session,
+        long_long.IN("frameIndex", "specifies the targeted application frame index. It must match what was passed to #BeginFrame()."),
+        nullable..const..ovrViewScaleDesc_p.IN(
+            "viewScaleDesc",
+            """
+            provides additional information needed only if {@code layerPtrList} contains an #LayerType_Quad. If #NULL, a default version is used based on the
+            current configuration and a 1.0 world scale.
+            """),
+        const..ovrLayerHeader.p.const.p.IN(
+            "layerPtrList",
+            """
+            specifies a list of ovrLayer pointers, which can include #NULL entries to indicate that any previously shown layer at that index is to not be
+            displayed. Each layer header must be a part of a layer structure such as ##OVRLayerEyeFov or ##OVRLayerQuad, with {@code Header.Type} identifying
+            its type. A #NULL layerPtrList entry in the array indicates the absence of the given layer.
+            """
+        ),
+        AutoSize("layerPtrList")..unsigned_int.IN(
+            "layerCount",
+            """
+            indicates the number of valid elements in {@code layerPtrList}. The maximum supported {@code layerCount} is not currently specified, but may be
+            specified in a future version.
+            """
+        ),
+
+        returnDoc =
+        """
+        an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+        ${ul(
+            "#Success: rendering completed successfully.",
+            """
+            #Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
+            (#DestroyTextureSwapChain()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
+            ({@code ovr_CreateTextureSwapChainXXX}). The application's existing private graphics resources do not need to be recreated unless the new
+            {@code ovr_Create} call returns a different {@code GraphicsLuid}.
+            """,
+            """
+            #Error_TextureSwapChainInvalid: The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure #CommitTextureSwapChain() was
+            called at least once first.
+            """
+        )}
+        """
+    )
+
+    ovrResult(
         "SubmitFrame",
         """
         Submits layers for distortion and display.
 
-        {@code ovr_SubmitFrame} triggers distortion and processing which might happen asynchronously. The function will return when there is room in the submission
-        queue and surfaces are available. Distortion might or might not have completed.
+        Deprecated. Use WaitToBeginFrame(), BeginFrame(), and #EndFrame() instead.
+
+        {@code ovr_SubmitFrame} triggers distortion and processing which might happen asynchronously. The function will return when there is room in the
+        submission queue and surfaces are available. Distortion might or might not have completed.
         ${ul(
             "Layers are drawn in the order they are specified in the array, regardless of the layer type.",
             """
