@@ -2468,7 +2468,7 @@ typedef void(*nk_query_font_glyph_f)(nk_handle handle, float font_height,
                                     struct nk_user_font_glyph *glyph,
                                     nk_rune codepoint, nk_rune next_codepoint);
 
-#ifdef NK_INCLUDE_VERTEX_BUFFER_OUTPUT
+#if defined(NK_INCLUDE_VERTEX_BUFFER_OUTPUT) || defined(NK_INCLUDE_SOFTWARE_FONT)
 struct nk_user_font_glyph {
     struct nk_vec2 uv[2];
     /* texture coordinates */
@@ -4243,7 +4243,7 @@ template<typename T> struct nk_alignof{struct Big {T x; char c;}; enum {
 #define NK_ALIGNOF(t) ((char*)(&((struct {char c; t _h;}*)0)->_h) - (char*)0)
 #endif
 
-#endif /* NK_H_ */
+#endif /* NK_NUKLEAR_H_ */
 /*
  * ==============================================================
  *
@@ -14944,7 +14944,7 @@ nk_draw_progress(struct nk_command_buffer *out, nk_flags state,
     } else nk_draw_image(out, *bounds, &background->data.image, nk_white);
 
     /* draw cursor */
-    if (background->type == NK_STYLE_ITEM_COLOR) {
+    if (cursor->type == NK_STYLE_ITEM_COLOR) {
         nk_fill_rect(out, *scursor, style->rounding, cursor->data.color);
         nk_stroke_rect(out, *scursor, style->rounding, style->border, style->border_color);
     } else nk_draw_image(out, *scursor, &cursor->data.image, nk_white);
@@ -23653,4 +23653,4 @@ NK_API void
 nk_menu_end(struct nk_context *ctx)
 {nk_contextual_end(ctx);}
 
-#endif
+#endif /* NK_IMPLEMENTATION */
