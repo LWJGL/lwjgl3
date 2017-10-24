@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."50"
+        "API_VERSION".."53"
     )
 
     ShortConstant(
@@ -524,9 +524,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     val Access = EnumConstant(
         "Access mode ({@code bgfx_access_t})",
 
-        "ACCESS_READ".enum,
-        "ACCESS_WRITE".enum,
-        "ACCESS_READWRITE".enum,
+        "ACCESS_READ".enum("Read"),
+        "ACCESS_WRITE".enum("Write"),
+        "ACCESS_READWRITE".enum("Read and write"),
 
         "ACCESS_COUNT".enum
     ).javaDocLinksSkipCount
@@ -672,12 +672,12 @@ RGBA16S
     val UniformType = EnumConstant(
         "Uniform type ({@code bgfx_uniform_type_t}).",
 
-        "UNIFORM_TYPE_INT1".enum,
-        "UNIFORM_TYPE_END".enum,
+        "UNIFORM_TYPE_INT1".enum("Int, used for samplers only."),
+        "UNIFORM_TYPE_END".enum("Reserved, do not use."),
 
-        "UNIFORM_TYPE_VEC4".enum,
-        "UNIFORM_TYPE_MAT3".enum,
-        "UNIFORM_TYPE_MAT4".enum,
+        "UNIFORM_TYPE_VEC4".enum("4 floats vector."),
+        "UNIFORM_TYPE_MAT3".enum("3x3 matrix."),
+        "UNIFORM_TYPE_MAT4".enum("4x4 matrix."),
 
         "UNIFORM_TYPE_COUNT".enum
     ).javaDocLinksSkipCount
@@ -1012,8 +1012,8 @@ RGBA16S
         "copy",
         "Allocates buffer and copies data into it. Data will be freed inside bgfx.",
 
-        MultiTypeAll..const..void_p.IN("_data", "the source data"),
-        AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to copy")
+        MultiTypeAll..const..void_p.IN("_data", "pointer to data to be copied"),
+        AutoSize("_data")..uint32_t.IN("_size", "size of data to be copied")
     )
 
     OffHeapOnly..const..bgfx_memory_t_p(
@@ -1225,8 +1225,6 @@ RGBA16S
         """
         Allocates transient index buffer.
 
-        You must call #set_index_buffer() after alloc in order to avoid memory leak.
-
         Only 16-bit index buffer is supported.
         """,
 
@@ -1270,7 +1268,7 @@ RGBA16S
         uint32_t.IN("_numIndices", "number of indices to allocate")
     )
 
-    const..bgfx_instance_data_buffer_t_p(
+    void(
         "alloc_instance_data_buffer",
         """
         Allocates instance data buffer.
@@ -1278,15 +1276,19 @@ RGBA16S
         You must call #set_instance_data_buffer() after alloc in order to avoid memory leak.
         """,
 
-        uint32_t.IN("_num", "number of instances to allocate"),
-        MapToInt..uint16_t.IN("_stride", "stride per instance")
+        bgfx_instance_data_buffer_t_p.OUT(
+            "_idb",
+            "##BGFXInstanceDataBuffer structure is filled and is valid for duration of frame, and it can be reused for multiple draw calls"
+        ),
+        uint32_t.IN("_num", "number of instances"),
+        MapToInt..uint16_t.IN("_stride", "instance stride. Must be multiple of 16")
     )
 
     bgfx_indirect_buffer_handle_t(
         "create_indirect_buffer",
         "Creates draw indirect buffer.",
 
-        uint32_t.IN("_num", "")
+        uint32_t.IN("_num", "number of indirect calls")
     )
 
     void(
@@ -1759,7 +1761,7 @@ RGBA16S
         MapToInt..uint8_t.IN("_id", "view id"),
         MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
         MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
-        bgfx_backbuffer_ratio_t.IN("_ratio", "view rectangle ratio", BackbufferRatio)
+        bgfx_backbuffer_ratio_t.IN("_ratio", "width and height will be set in respect to back-buffer size", BackbufferRatio)
     )
 
     void(
@@ -1864,7 +1866,7 @@ RGBA16S
 
         MapToInt..uint8_t.IN("_id", "view id"),
         MapToInt..uint8_t.IN("_num", "number of views to remap"),
-        Check("_num")..nullable..const..void_p.IN("_order", "view remap id table. Passing #NULL will reset view ids to default state")
+        Check("_num")..nullable..const..uint8_t.p.IN("_order", "view remap id table. Passing #NULL will reset view ids to default state")
     )
 
     void(

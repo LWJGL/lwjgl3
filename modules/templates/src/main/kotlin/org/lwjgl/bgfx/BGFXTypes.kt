@@ -68,8 +68,8 @@ val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
     BGFX_PACKAGE, void, "BGFXReleaseFunctionCallback",
     "Memory release callback.",
 
-    opaque_p.IN("_ptr", ""),
-    nullable..void_p.IN("_userData", "")
+    opaque_p.IN("_ptr", "pointer to allocated data"),
+    nullable..void_p.IN("_userData", "user defined data if needed")
 ) {
     documentation = "Instances of this interface may be passed to the #make_ref_release() method."
 }
@@ -77,8 +77,8 @@ val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
 val bgfx_memory_t_p = struct(BGFX_PACKAGE, "BGFXMemory", nativeName = "bgfx_memory_t") {
     documentation = "Memory obtained by calling #alloc(), #copy(), or #make_ref()."
 
-    uint8_t.p.member("data", "pointer to allocated memory")
-    AutoSize("data")..uint32_t.member("size", "size of {@code data}, in bytes")
+    uint8_t.p.member("data", "pointer to data")
+    AutoSize("data")..uint32_t.member("size", "data size")
 }.p
 
 val bgfx_transform_t_p = struct(BGFX_PACKAGE, "BGFXTransform", nativeName = "bgfx_transform_t", mutable = false) {
@@ -138,8 +138,8 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint32_t.member("numCompute", "number of compute calls submitted")
     uint32_t.member("maxGpuLatency", "GPU driver latency")
 
-    int64_t.member("gpuMemoryMax", "maximum available GPU memory")
-    int64_t.member("gpuMemoryUsed", "available GPU memory")
+    int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
+    int64_t.member("gpuMemoryUsed", "amount of GPU memory used")
 
     uint16_t.member("width", "backbuffer width in pixels")
     uint16_t.member("height", "backbuffer height in pixels")
@@ -309,6 +309,53 @@ val trace_vargs = "trace_vargs".callback(
 
     Not thread safe and it can be called from any thread.
     """
+}
+
+val profiler_begin = "profiler_begin".callback(
+    BGFX_PACKAGE, void, "BGFXProfilerBegin",
+    """
+    Will be called when a profiler region begins.
+
+    Not thread safe and it can be called from any thread.
+    """,
+
+    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+    const..charASCII_p.IN("_name", "region name, contains dynamic string"),
+    uint32_t.IN("_abgr", "color of profiler region"),
+    const..charASCII_p.IN("_filePath", "file path where {@code profilerBegin} was called"),
+    uint16_t.IN("_line", "line where {@code profilerBegin} was called")
+) {
+    documentation = "Profiler region begin."
+}
+
+val profiler_begin_literal = "profiler_begin_literal".callback(
+    BGFX_PACKAGE, void, "BGFXProfilerBeginLiteral",
+    """
+    Will be called when a profiler region with string literal begins.
+
+    Not thread safe and it can be called from any thread.
+    """,
+
+    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+    const..charASCII_p.IN("_name", "region name, contains string literal"),
+    uint32_t.IN("_abgr", "color of profiler region"),
+    const..charASCII_p.IN("_filePath", "file path where {@code profilerBeginLiteral} was called"),
+    uint16_t.IN("_line", "line where {@code profilerBeginLiteral} was called")
+) {
+    documentation = "Profiler region begin with string literal name."
+}
+
+val profiler_end = "profiler_end".callback(
+    BGFX_PACKAGE, void, "BGFXProfilerEnd",
+    """
+    Will be called when a profiler region ends.
+
+    Not thread safe and it can be called from any thread.
+    """,
+
+    bgfx_callback_interface_t_p.IN("_this", "the callback interface")
+) {
+    documentation = "Profiler region end."
 }
 
 val cache_read_size = "cache_read_size".callback(
