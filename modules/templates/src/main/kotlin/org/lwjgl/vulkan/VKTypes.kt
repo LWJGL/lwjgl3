@@ -427,243 +427,177 @@ val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures"
     documentation =
         """
         Structure describing the fine-grained features that can be supported by an implementation.
-
-        <h5>Description</h5>
-        <ul>
-            <li>
-                {@code robustBufferAccess} indicates that accesses to buffers are bounds-checked against the range of the buffer descriptor (as determined by ##VkDescriptorBufferInfo{@code ::range}, ##VkBufferViewCreateInfo{@code ::range}, or the size of the buffer). Out of bounds accesses <b>must</b> not cause application termination, and the effects of shader loads, stores, and atomics <b>must</b> conform to an implementation-dependent behavior as described below.
-                <ul>
-                    <li>
-                        A buffer access is considered to be out of bounds if any of the following are true:
-                        <ul>
-                            <li>The pointer was formed by {@code OpImageTexelPointer} and the coordinate is less than zero or greater than or equal to the number of whole elements in the bound range.</li>
-                            <li>
-                                The pointer was not formed by {@code OpImageTexelPointer} and the object pointed to is not wholly contained within the bound range. This includes accesses performed via <em>variable pointers</em> where the buffer descriptor being accessed cannot be statically determined. Uninitialized pointers and pointers equal to {@code OpConstantNull} are treated as pointing to a zero-sized object, so all accesses through such pointers are considered to be out of bounds.
-                                <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        If a SPIR-V {@code OpLoad} instruction loads a structure and the tail end of the structure is out of bounds, then all members of the structure are considered out of bounds even if the members at the end are not statically used.
-                                </div>
-                            </li>
-                            <li>If any buffer access in a given SPIR-V block is determined to be out of bounds, then any other access of the same type (load, store, or atomic) in the same SPIR-V block that accesses an address less than 16 bytes away from the out of bounds address <b>may</b> also be considered out of bounds.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Out-of-bounds buffer loads will return any of the following values:
-                        <ul>
-                            <li>Values from anywhere within the memory range(s) bound to the buffer (possibly including bytes of memory past the end of the buffer, up to the end of the bound range).</li>
-                            <li>
-                                Zero values, or <code>(0,0,0,x)</code> vectors for vector reads where x is a valid value represented in the type of the vector components and <b>may</b> be any of:
-                                <ul>
-                                    <li>0, 1, or the maximum representable positive integer value, for signed or unsigned integer components</li>
-                                    <li>0.0 or 1.0, for floating-point components</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>Out-of-bounds writes <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory.</li>
-                    <li>Out-of-bounds atomics <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory, and return an undefined value.</li>
-                    <li>
-                        Vertex input attributes are considered out of bounds if the address of the attribute plus the size of the attribute is greater than the size of the bound buffer. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.
-                        <ul>
-                            <li>
-                                If a vertex input attribute is out of bounds, it will be assigned one of the following values:
-                                <ul>
-                                    <li>Values from anywhere within the memory range(s) bound to the buffer, converted according to the format of the attribute.</li>
-                                    <li>Zero values, format converted according to the format of the attribute.</li>
-                                    <li>Zero values, or <code>(0,0,0,x)</code> vectors, as described above.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>If {@code robustBufferAccess} is not enabled, out of bounds accesses <b>may</b> corrupt any memory within the process and cause undefined behavior up to and including application termination.</li>
-                </ul>
-            </li>
-            <li>{@code fullDrawIndexUint32} indicates the full 32-bit range of indices is supported for indexed draw calls when using a {@code VkIndexType} of #INDEX_TYPE_UINT32. {@code maxDrawIndexedIndexValue} is the maximum index value that <b>may</b> be used (aside from the primitive restart index, which is always 2<sup>32</sup>-1 when the {@code VkIndexType} is #INDEX_TYPE_UINT32). If this feature is supported, {@code maxDrawIndexedIndexValue} <b>must</b> be 2<sup>32</sup>-1; otherwise it <b>must</b> be no smaller than 2<sup>24</sup>-1. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-maxDrawIndexedIndexValue">maxDrawIndexedIndexValue</a>.</li>
-            <li>{@code imageCubeArray} indicates whether image views with a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_CUBE_ARRAY <b>can</b> be created, and that the corresponding {@code SampledCubeArray} and {@code ImageCubeArray} SPIR-V capabilities <b>can</b> be used in shader code.</li>
-            <li>{@code independentBlend} indicates whether the ##VkPipelineColorBlendAttachmentState settings are controlled independently per-attachment. If this feature is not enabled, the ##VkPipelineColorBlendAttachmentState settings for all color attachments <b>must</b> be identical. Otherwise, a different ##VkPipelineColorBlendAttachmentState <b>can</b> be provided for each bound color attachment.</li>
-            <li>{@code geometryShader} indicates whether geometry shaders are supported. If this feature is not enabled, the #SHADER_STAGE_GEOMETRY_BIT and #PIPELINE_STAGE_GEOMETRY_SHADER_BIT enum values <b>must</b> not be used. This also indicates whether shader modules <b>can</b> declare the {@code Geometry} capability.</li>
-            <li>{@code tessellationShader} indicates whether tessellation control and evaluation shaders are supported. If this feature is not enabled, the #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, and #STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO enum values <b>must</b> not be used. This also indicates whether shader modules <b>can</b> declare the {@code Tessellation} capability.</li>
-            <li>{@code sampleRateShading} indicates whether per-sample shading and multisample interpolation are supported. If this feature is not enabled, the {@code sampleShadingEnable} member of the ##VkPipelineMultisampleStateCreateInfo structure <b>must</b> be set to #FALSE and the {@code minSampleShading} member is ignored. This also indicates whether shader modules <b>can</b> declare the {@code SampleRateShading} capability.</li>
-            <li>{@code dualSrcBlend} indicates whether blend operations which take two sources are supported. If this feature is not enabled, the #BLEND_FACTOR_SRC1_COLOR, #BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, and #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA enum values <b>must</b> not be used as source or destination blending factors. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#framebuffer-dsb">the “Dual-Source Blending” section</a>.</li>
-            <li>{@code logicOp} indicates whether logic operations are supported. If this feature is not enabled, the {@code logicOpEnable} member of the ##VkPipelineColorBlendStateCreateInfo structure <b>must</b> be set to #FALSE, and the {@code logicOp} member is ignored.</li>
-            <li>{@code multiDrawIndirect} indicates whether multiple draw indirect is supported. If this feature is not enabled, the {@code drawCount} parameter to the #CmdDrawIndirect() and #CmdDrawIndexedIndirect() commands <b>must</b> be 0 or 1. The {@code maxDrawIndirectCount} member of the ##VkPhysicalDeviceLimits structure <b>must</b> also be 1 if this feature is not supported. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-maxDrawIndirectCount">maxDrawIndirectCount</a>.</li>
-            <li>{@code drawIndirectFirstInstance} indicates whether indirect draw calls support the {@code firstInstance} parameter. If this feature is not enabled, the {@code firstInstance} member of all ##VkDrawIndirectCommand and ##VkDrawIndexedIndirectCommand structures that are provided to the #CmdDrawIndirect() and #CmdDrawIndexedIndirect() commands <b>must</b> be 0.</li>
-            <li>{@code depthClamp} indicates whether depth clamping is supported. If this feature is not enabled, the {@code depthClampEnable} member of the ##VkPipelineRasterizationStateCreateInfo structure <b>must</b> be set to #FALSE. Otherwise, setting {@code depthClampEnable} to #TRUE will enable depth clamping.</li>
-            <li>{@code depthBiasClamp} indicates whether depth bias clamping is supported. If this feature is not enabled, the {@code depthBiasClamp} member of the ##VkPipelineRasterizationStateCreateInfo structure <b>must</b> be set to 0.0 unless the #DYNAMIC_STATE_DEPTH_BIAS dynamic state is enabled, and the {@code depthBiasClamp} parameter to #CmdSetDepthBias() <b>must</b> be set to 0.0.</li>
-            <li>{@code fillModeNonSolid} indicates whether point and wireframe fill modes are supported. If this feature is not enabled, the #POLYGON_MODE_POINT and #POLYGON_MODE_LINE enum values <b>must</b> not be used.</li>
-            <li>{@code depthBounds} indicates whether depth bounds tests are supported. If this feature is not enabled, the {@code depthBoundsTestEnable} member of the ##VkPipelineDepthStencilStateCreateInfo structure <b>must</b> be set to #FALSE. When {@code depthBoundsTestEnable} is set to #FALSE, the {@code minDepthBounds} and {@code maxDepthBounds} members of the ##VkPipelineDepthStencilStateCreateInfo structure are ignored.</li>
-            <li>{@code wideLines} indicates whether lines with width other than 1.0 are supported. If this feature is not enabled, the {@code lineWidth} member of the ##VkPipelineRasterizationStateCreateInfo structure <b>must</b> be set to 1.0 unless the #DYNAMIC_STATE_LINE_WIDTH dynamic state is enabled, and the {@code lineWidth} parameter to #CmdSetLineWidth() <b>must</b> be set to 1.0. When this feature is supported, the range and granularity of supported line widths are indicated by the {@code lineWidthRange} and {@code lineWidthGranularity} members of the ##VkPhysicalDeviceLimits structure, respectively.</li>
-            <li>{@code largePoints} indicates whether points with size greater than 1.0 are supported. If this feature is not enabled, only a point size of 1.0 written by a shader is supported. The range and granularity of supported point sizes are indicated by the {@code pointSizeRange} and {@code pointSizeGranularity} members of the ##VkPhysicalDeviceLimits structure, respectively.</li>
-            <li>{@code alphaToOne} indicates whether the implementation is able to replace the alpha value of the color fragment output from the fragment shader with the maximum representable alpha value for fixed-point colors or 1.0 for floating-point colors. If this feature is not enabled, then the {@code alphaToOneEnable} member of the ##VkPipelineMultisampleStateCreateInfo structure <b>must</b> be set to #FALSE. Otherwise setting {@code alphaToOneEnable} to #TRUE will enable alpha-to-one behavior.</li>
-            <li>{@code multiViewport} indicates whether more than one viewport is supported. If this feature is not enabled, the {@code viewportCount} and {@code scissorCount} members of the ##VkPipelineViewportStateCreateInfo structure <b>must</b> be set to 1. Similarly, the {@code viewportCount} parameter to the #CmdSetViewport() command and the {@code scissorCount} parameter to the #CmdSetScissor() command <b>must</b> be 1, and the {@code firstViewport} parameter to the #CmdSetViewport() command and the {@code firstScissor} parameter to the #CmdSetScissor() command <b>must</b> be 0.</li>
-            <li>{@code samplerAnisotropy} indicates whether anisotropic filtering is supported. If this feature is not enabled, the {@code maxAnisotropy} member of the ##VkSamplerCreateInfo structure <b>must</b> be 1.0.</li>
-            <li>
-                {@code textureCompressionETC2} indicates whether all of the ETC2 and EAC compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
-                <ul>
-                    <li>#FORMAT_ETC2_R8G8B8_UNORM_BLOCK</li>
-                    <li>#FORMAT_ETC2_R8G8B8_SRGB_BLOCK</li>
-                    <li>#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK</li>
-                    <li>#FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK</li>
-                    <li>#FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK</li>
-                    <li>#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK</li>
-                    <li>#FORMAT_EAC_R11_UNORM_BLOCK</li>
-                    <li>#FORMAT_EAC_R11_SNORM_BLOCK</li>
-                    <li>#FORMAT_EAC_R11G11_UNORM_BLOCK</li>
-                    <li>#FORMAT_EAC_R11G11_SNORM_BLOCK</li>
-                </ul>
-
-                #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.
-            </li>
-            <li>
-                {@code textureCompressionASTC_LDR} indicates whether all of the ASTC LDR compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
-                <ul>
-                    <li>#FORMAT_ASTC_4x4_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_4x4_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_5x4_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_5x4_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_5x5_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_5x5_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_6x5_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_6x5_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_6x6_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_6x6_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_8x5_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_8x5_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_8x6_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_8x6_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_8x8_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_8x8_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x5_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x5_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x6_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x6_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x8_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x8_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x10_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_10x10_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_12x10_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_12x10_SRGB_BLOCK</li>
-                    <li>#FORMAT_ASTC_12x12_UNORM_BLOCK</li>
-                    <li>#FORMAT_ASTC_12x12_SRGB_BLOCK</li>
-                </ul>
-
-                #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.
-            </li>
-            <li>
-                {@code textureCompressionBC} indicates whether all of the BC compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
-                <ul>
-                    <li>#FORMAT_BC1_RGB_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC1_RGB_SRGB_BLOCK</li>
-                    <li>#FORMAT_BC1_RGBA_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC1_RGBA_SRGB_BLOCK</li>
-                    <li>#FORMAT_BC2_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC2_SRGB_BLOCK</li>
-                    <li>#FORMAT_BC3_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC3_SRGB_BLOCK</li>
-                    <li>#FORMAT_BC4_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC4_SNORM_BLOCK</li>
-                    <li>#FORMAT_BC5_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC5_SNORM_BLOCK</li>
-                    <li>#FORMAT_BC6H_UFLOAT_BLOCK</li>
-                    <li>#FORMAT_BC6H_SFLOAT_BLOCK</li>
-                    <li>#FORMAT_BC7_UNORM_BLOCK</li>
-                    <li>#FORMAT_BC7_SRGB_BLOCK</li>
-                </ul>
-
-                #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.
-            </li>
-            <li>{@code occlusionQueryPrecise} indicates whether occlusion queries returning actual sample counts are supported. Occlusion queries are created in a {@code VkQueryPool} by specifying the {@code queryType} of #QUERY_TYPE_OCCLUSION in the ##VkQueryPoolCreateInfo structure which is passed to #CreateQueryPool(). If this feature is enabled, queries of this type <b>can</b> enable #QUERY_CONTROL_PRECISE_BIT in the {@code flags} parameter to #CmdBeginQuery(). If this feature is not supported, the implementation supports only boolean occlusion queries. When any samples are passed, boolean queries will return a non-zero result value, otherwise a result value of zero is returned. When this feature is enabled and #QUERY_CONTROL_PRECISE_BIT is set, occlusion queries will report the actual number of samples passed.</li>
-            <li>{@code pipelineStatisticsQuery} indicates whether the pipeline statistics queries are supported. If this feature is not enabled, queries of type #QUERY_TYPE_PIPELINE_STATISTICS <b>cannot</b> be created, and none of the {@code VkQueryPipelineStatisticFlagBits} bits <b>can</b> be set in the {@code pipelineStatistics} member of the ##VkQueryPoolCreateInfo structure.</li>
-            <li>{@code vertexPipelineStoresAndAtomics} indicates whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by these stages in shader modules <b>must</b> be decorated with the {@code NonWriteable} decoration (or the {@code readonly} memory qualifier in GLSL).</li>
-            <li>{@code fragmentStoresAndAtomics} indicates whether storage buffers and images support stores and atomic operations in the fragment shader stage. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by the fragment stage in shader modules <b>must</b> be decorated with the {@code NonWriteable} decoration (or the {@code readonly} memory qualifier in GLSL).</li>
-            <li>{@code shaderTessellationAndGeometryPointSize} indicates whether the {@code PointSize} built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader stages. If this feature is not enabled, members decorated with the {@code PointSize} built-in decoration <b>must</b> not be read from or written to and all points written from a tessellation or geometry shader will have a size of 1.0. This also indicates whether shader modules <b>can</b> declare the {@code TessellationPointSize} capability for tessellation control and evaluation shaders, or if the shader modules <b>can</b> declare the {@code GeometryPointSize} capability for geometry shaders. An implementation supporting this feature <b>must</b> also support one or both of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">{@code tessellationShader}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">{@code geometryShader}</a> features.</li>
-            <li>{@code shaderImageGatherExtended} indicates whether the extended set of image gather instructions are available in shader code. If this feature is not enabled, the {@code OpImage}*{@code Gather} instructions do not support the {@code Offset} and {@code ConstOffsets} operands. This also indicates whether shader modules <b>can</b> declare the {@code ImageGatherExtended} capability.</li>
-            <li>{@code shaderStorageImageExtendedFormats} indicates whether the extended storage image formats are available in shader code. If this feature is not enabled, the formats requiring the {@code StorageImageExtendedFormats} capability are not supported for storage images. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageExtendedFormats} capability.</li>
-            <li>{@code shaderStorageImageMultisample} indicates whether multisampled storage images are supported. If this feature is not enabled, images that are created with a {@code usage} that includes #IMAGE_USAGE_STORAGE_BIT <b>must</b> be created with {@code samples} equal to #SAMPLE_COUNT_1_BIT. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageMultisample} capability.</li>
-            <li>{@code shaderStorageImageReadWithoutFormat} indicates whether storage images require a format qualifier to be specified when reading from storage images. If this feature is not enabled, the {@code OpImageRead} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageReadWithoutFormat} capability.</li>
-            <li>{@code shaderStorageImageWriteWithoutFormat} indicates whether storage images require a format qualifier to be specified when writing to storage images. If this feature is not enabled, the {@code OpImageWrite} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageWriteWithoutFormat} capability.</li>
-            <li>{@code shaderUniformBufferArrayDynamicIndexing} indicates whether arrays of uniform buffers <b>can</b> be indexed by <em>dynamically uniform</em> integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformBufferArrayDynamicIndexing} capability.</li>
-            <li>{@code shaderSampledImageArrayDynamicIndexing} indicates whether arrays of samplers or sampled images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, or #DESCRIPTOR_TYPE_SAMPLED_IMAGE <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SampledImageArrayDynamicIndexing} capability.</li>
-            <li>{@code shaderStorageBufferArrayDynamicIndexing} indicates whether arrays of storage buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageBufferArrayDynamicIndexing} capability.</li>
-            <li>{@code shaderStorageImageArrayDynamicIndexing} indicates whether arrays of storage images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_IMAGE <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageArrayDynamicIndexing} capability.</li>
-            <li>{@code shaderClipDistance} indicates whether clip distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code ClipDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also indicates whether shader modules <b>can</b> declare the {@code ClipDistance} capability.</li>
-            <li>{@code shaderCullDistance} indicates whether cull distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code CullDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also indicates whether shader modules <b>can</b> declare the {@code CullDistance} capability.</li>
-            <li>{@code shaderFloat64} indicates whether 64-bit floats (doubles) are supported in shader code. If this feature is not enabled, 64-bit floating-point types <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float64} capability.</li>
-            <li>{@code shaderInt64} indicates whether 64-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 64-bit integer types <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int64} capability.</li>
-            <li>{@code shaderInt16} indicates whether 16-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 16-bit integer types <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int16} capability.</li>
-            <li>{@code shaderResourceResidency} indicates whether image operations that return resource residency information are supported in shader code. If this feature is not enabled, the {@code OpImageSparse}* instructions <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SparseResidency} capability. The feature requires at least one of the {@code sparseResidency}* features to be supported.</li>
-            <li>{@code shaderResourceMinLod} indicates whether image operations that specify the minimum resource level-of-detail (LOD) are supported in shader code. If this feature is not enabled, the {@code MinLod} image operand <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code MinLod} capability.</li>
-            <li>{@code sparseBinding} indicates whether resource memory <b>can</b> be managed at opaque sparse block level instead of at the object level. If this feature is not enabled, resource memory <b>must</b> be bound only on a per-object basis using the #BindBufferMemory() and #BindImageMemory() commands. In this case, buffers and images <b>must</b> not be created with #BUFFER_CREATE_SPARSE_BINDING_BIT and #IMAGE_CREATE_SPARSE_BINDING_BIT set in the {@code flags} member of the ##VkBufferCreateInfo and ##VkImageCreateInfo structures, respectively. Otherwise resource memory <b>can</b> be managed as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#sparsememory-sparseresourcefeatures">Sparse Resource Features</a>.</li>
-            <li>{@code sparseResidencyBuffer} indicates whether the device <b>can</b> access partially resident buffers. If this feature is not enabled, buffers <b>must</b> not be created with #BUFFER_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkBufferCreateInfo structure.</li>
-            <li>{@code sparseResidencyImage2D} indicates whether the device <b>can</b> access partially resident 2D images with 1 sample per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_1_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.</li>
-            <li>{@code sparseResidencyImage3D} indicates whether the device <b>can</b> access partially resident 3D images. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_3D <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.</li>
-            <li>{@code sparseResidency2Samples} indicates whether the physical device <b>can</b> access partially resident 2D images with 2 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_2_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.</li>
-            <li>{@code sparseResidency4Samples} indicates whether the physical device <b>can</b> access partially resident 2D images with 4 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_4_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.</li>
-            <li>{@code sparseResidency8Samples} indicates whether the physical device <b>can</b> access partially resident 2D images with 8 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_8_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.</li>
-            <li>{@code sparseResidency16Samples} indicates whether the physical device <b>can</b> access partially resident 2D images with 16 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_16_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.</li>
-            <li>{@code sparseResidencyAliased} indicates whether the physical device <b>can</b> correctly access data aliased into multiple locations. If this feature is not enabled, the #BUFFER_CREATE_SPARSE_ALIASED_BIT and #IMAGE_CREATE_SPARSE_ALIASED_BIT enum values <b>must</b> not be used in {@code flags} members of the ##VkBufferCreateInfo and ##VkImageCreateInfo structures, respectively.</li>
-            <li>{@code variableMultisampleRate} indicates whether all pipelines that will be bound to a command buffer during a subpass with no attachments <b>must</b> have the same value for ##VkPipelineMultisampleStateCreateInfo{@code ::rasterizationSamples}. If set to #TRUE, the implementation supports variable multisample rates in a subpass with no attachments. If set to #FALSE, then all pipelines bound in such a subpass <b>must</b> have the same multisample rate. This has no effect in situations where a subpass uses any attachments.</li>
-            <li>{@code inheritedQueries} indicates whether a secondary command buffer <b>may</b> be executed while a query is active.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDeviceCreateInfo, ##VkPhysicalDeviceFeatures2KHR, #GetPhysicalDeviceFeatures()
         """
 
-    VkBool32.member("robustBufferAccess", "")
-    VkBool32.member("fullDrawIndexUint32", "")
-    VkBool32.member("imageCubeArray", "")
-    VkBool32.member("independentBlend", "")
-    VkBool32.member("geometryShader", "")
-    VkBool32.member("tessellationShader", "")
-    VkBool32.member("sampleRateShading", "")
-    VkBool32.member("dualSrcBlend", "")
-    VkBool32.member("logicOp", "")
-    VkBool32.member("multiDrawIndirect", "")
-    VkBool32.member("drawIndirectFirstInstance", "")
-    VkBool32.member("depthClamp", "")
-    VkBool32.member("depthBiasClamp", "")
-    VkBool32.member("fillModeNonSolid", "")
-    VkBool32.member("depthBounds", "")
-    VkBool32.member("wideLines", "")
-    VkBool32.member("largePoints", "")
-    VkBool32.member("alphaToOne", "")
-    VkBool32.member("multiViewport", "")
-    VkBool32.member("samplerAnisotropy", "")
-    VkBool32.member("textureCompressionETC2", "")
-    VkBool32.member("textureCompressionASTC_LDR", "")
-    VkBool32.member("textureCompressionBC", "")
-    VkBool32.member("occlusionQueryPrecise", "")
-    VkBool32.member("pipelineStatisticsQuery", "")
-    VkBool32.member("vertexPipelineStoresAndAtomics", "")
-    VkBool32.member("fragmentStoresAndAtomics", "")
-    VkBool32.member("shaderTessellationAndGeometryPointSize", "")
-    VkBool32.member("shaderImageGatherExtended", "")
-    VkBool32.member("shaderStorageImageExtendedFormats", "")
-    VkBool32.member("shaderStorageImageMultisample", "")
-    VkBool32.member("shaderStorageImageReadWithoutFormat", "")
-    VkBool32.member("shaderStorageImageWriteWithoutFormat", "")
-    VkBool32.member("shaderUniformBufferArrayDynamicIndexing", "")
-    VkBool32.member("shaderSampledImageArrayDynamicIndexing", "")
-    VkBool32.member("shaderStorageBufferArrayDynamicIndexing", "")
-    VkBool32.member("shaderStorageImageArrayDynamicIndexing", "")
-    VkBool32.member("shaderClipDistance", "")
-    VkBool32.member("shaderCullDistance", "")
-    VkBool32.member("shaderFloat64", "")
-    VkBool32.member("shaderInt64", "")
-    VkBool32.member("shaderInt16", "")
-    VkBool32.member("shaderResourceResidency", "")
-    VkBool32.member("shaderResourceMinLod", "")
-    VkBool32.member("sparseBinding", "")
-    VkBool32.member("sparseResidencyBuffer", "")
-    VkBool32.member("sparseResidencyImage2D", "")
-    VkBool32.member("sparseResidencyImage3D", "")
-    VkBool32.member("sparseResidency2Samples", "")
-    VkBool32.member("sparseResidency4Samples", "")
-    VkBool32.member("sparseResidency8Samples", "")
-    VkBool32.member("sparseResidency16Samples", "")
-    VkBool32.member("sparseResidencyAliased", "")
-    VkBool32.member("variableMultisampleRate", "")
-    VkBool32.member("inheritedQueries", "")
+    VkBool32.member("robustBufferAccess", """indicates that accesses to buffers are bounds-checked against the range of the buffer descriptor (as determined by ##VkDescriptorBufferInfo{@code ::range}, ##VkBufferViewCreateInfo{@code ::range}, or the size of the buffer). Out of bounds accesses <b>must</b> not cause application termination, and the effects of shader loads, stores, and atomics <b>must</b> conform to an implementation-dependent behavior as described below.
+
+        <ul>
+            <li>
+                A buffer access is considered to be out of bounds if any of the following are true:
+                <ul>
+                    <li>The pointer was formed by {@code OpImageTexelPointer} and the coordinate is less than zero or greater than or equal to the number of whole elements in the bound range.</li>
+                    <li>
+                        The pointer was not formed by {@code OpImageTexelPointer} and the object pointed to is not wholly contained within the bound range. This includes accesses performed via <em>variable pointers</em> where the buffer descriptor being accessed cannot be statically determined. Uninitialized pointers and pointers equal to {@code OpConstantNull} are treated as pointing to a zero-sized object, so all accesses through such pointers are considered to be out of bounds.
+                        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        If a SPIR-V {@code OpLoad} instruction loads a structure and the tail end of the structure is out of bounds, then all members of the structure are considered out of bounds even if the members at the end are not statically used.
+                        </div>
+                    </li>
+                    <li>If any buffer access in a given SPIR-V block is determined to be out of bounds, then any other access of the same type (load, store, or atomic) in the same SPIR-V block that accesses an address less than 16 bytes away from the out of bounds address <b>may</b> also be considered out of bounds.</li>
+                </ul>
+            </li>
+            <li>
+                Out-of-bounds buffer loads will return any of the following values:
+                <ul>
+                    <li>Values from anywhere within the memory range(s) bound to the buffer (possibly including bytes of memory past the end of the buffer, up to the end of the bound range).</li>
+                    <li>
+                        Zero values, or <code>(0,0,0,x)</code> vectors for vector reads where x is a valid value represented in the type of the vector components and <b>may</b> be any of:
+                        <ul>
+                            <li>0, 1, or the maximum representable positive integer value, for signed or unsigned integer components</li>
+                            <li>0.0 or 1.0, for floating-point components</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Out-of-bounds writes <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory.</li>
+            <li>Out-of-bounds atomics <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory, and return an undefined value.</li>
+            <li>
+                Vertex input attributes are considered out of bounds if the address of the attribute plus the size of the attribute is greater than the size of the bound buffer. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.
+                <ul>
+                    <li>
+                        If a vertex input attribute is out of bounds, it will be assigned one of the following values:
+                        <ul>
+                            <li>Values from anywhere within the memory range(s) bound to the buffer, converted according to the format of the attribute.</li>
+                            <li>Zero values, format converted according to the format of the attribute.</li>
+                            <li>Zero values, or <code>(0,0,0,x)</code> vectors, as described above.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>If {@code robustBufferAccess} is not enabled, out of bounds accesses <b>may</b> corrupt any memory within the process and cause undefined behavior up to and including application termination.</li>
+        </ul>""")
+    VkBool32.member("fullDrawIndexUint32", "indicates the full 32-bit range of indices is supported for indexed draw calls when using a {@code VkIndexType} of #INDEX_TYPE_UINT32. {@code maxDrawIndexedIndexValue} is the maximum index value that <b>may</b> be used (aside from the primitive restart index, which is always 2<sup>32</sup>-1 when the {@code VkIndexType} is #INDEX_TYPE_UINT32). If this feature is supported, {@code maxDrawIndexedIndexValue} <b>must</b> be 2<sup>32</sup>-1; otherwise it <b>must</b> be no smaller than 2<sup>24</sup>-1. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-limits-maxDrawIndexedIndexValue\">maxDrawIndexedIndexValue</a>.")
+    VkBool32.member("imageCubeArray", "indicates whether image views with a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_CUBE_ARRAY <b>can</b> be created, and that the corresponding {@code SampledCubeArray} and {@code ImageCubeArray} SPIR-V capabilities <b>can</b> be used in shader code.")
+    VkBool32.member("independentBlend", "indicates whether the ##VkPipelineColorBlendAttachmentState settings are controlled independently per-attachment. If this feature is not enabled, the ##VkPipelineColorBlendAttachmentState settings for all color attachments <b>must</b> be identical. Otherwise, a different ##VkPipelineColorBlendAttachmentState <b>can</b> be provided for each bound color attachment.")
+    VkBool32.member("geometryShader", "indicates whether geometry shaders are supported. If this feature is not enabled, the #SHADER_STAGE_GEOMETRY_BIT and #PIPELINE_STAGE_GEOMETRY_SHADER_BIT enum values <b>must</b> not be used. This also indicates whether shader modules <b>can</b> declare the {@code Geometry} capability.")
+    VkBool32.member("tessellationShader", "indicates whether tessellation control and evaluation shaders are supported. If this feature is not enabled, the #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, and #STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO enum values <b>must</b> not be used. This also indicates whether shader modules <b>can</b> declare the {@code Tessellation} capability.")
+    VkBool32.member("sampleRateShading", "indicates whether per-sample shading and multisample interpolation are supported. If this feature is not enabled, the {@code sampleShadingEnable} member of the ##VkPipelineMultisampleStateCreateInfo structure <b>must</b> be set to #FALSE and the {@code minSampleShading} member is ignored. This also indicates whether shader modules <b>can</b> declare the {@code SampleRateShading} capability.")
+    VkBool32.member("dualSrcBlend", "indicates whether blend operations which take two sources are supported. If this feature is not enabled, the #BLEND_FACTOR_SRC1_COLOR, #BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, and #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA enum values <b>must</b> not be used as source or destination blending factors. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#framebuffer-dsb\">the “Dual-Source Blending” section</a>.")
+    VkBool32.member("logicOp", "indicates whether logic operations are supported. If this feature is not enabled, the {@code logicOpEnable} member of the ##VkPipelineColorBlendStateCreateInfo structure <b>must</b> be set to #FALSE, and the {@code logicOp} member is ignored.")
+    VkBool32.member("multiDrawIndirect", "indicates whether multiple draw indirect is supported. If this feature is not enabled, the {@code drawCount} parameter to the #CmdDrawIndirect() and #CmdDrawIndexedIndirect() commands <b>must</b> be 0 or 1. The {@code maxDrawIndirectCount} member of the ##VkPhysicalDeviceLimits structure <b>must</b> also be 1 if this feature is not supported. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-limits-maxDrawIndirectCount\">maxDrawIndirectCount</a>.")
+    VkBool32.member("drawIndirectFirstInstance", "indicates whether indirect draw calls support the {@code firstInstance} parameter. If this feature is not enabled, the {@code firstInstance} member of all ##VkDrawIndirectCommand and ##VkDrawIndexedIndirectCommand structures that are provided to the #CmdDrawIndirect() and #CmdDrawIndexedIndirect() commands <b>must</b> be 0.")
+    VkBool32.member("depthClamp", "indicates whether depth clamping is supported. If this feature is not enabled, the {@code depthClampEnable} member of the ##VkPipelineRasterizationStateCreateInfo structure <b>must</b> be set to #FALSE. Otherwise, setting {@code depthClampEnable} to #TRUE will enable depth clamping.")
+    VkBool32.member("depthBiasClamp", "indicates whether depth bias clamping is supported. If this feature is not enabled, the {@code depthBiasClamp} member of the ##VkPipelineRasterizationStateCreateInfo structure <b>must</b> be set to 0.0 unless the #DYNAMIC_STATE_DEPTH_BIAS dynamic state is enabled, and the {@code depthBiasClamp} parameter to #CmdSetDepthBias() <b>must</b> be set to 0.0.")
+    VkBool32.member("fillModeNonSolid", "indicates whether point and wireframe fill modes are supported. If this feature is not enabled, the #POLYGON_MODE_POINT and #POLYGON_MODE_LINE enum values <b>must</b> not be used.")
+    VkBool32.member("depthBounds", "indicates whether depth bounds tests are supported. If this feature is not enabled, the {@code depthBoundsTestEnable} member of the ##VkPipelineDepthStencilStateCreateInfo structure <b>must</b> be set to #FALSE. When {@code depthBoundsTestEnable} is set to #FALSE, the {@code minDepthBounds} and {@code maxDepthBounds} members of the ##VkPipelineDepthStencilStateCreateInfo structure are ignored.")
+    VkBool32.member("wideLines", "indicates whether lines with width other than 1.0 are supported. If this feature is not enabled, the {@code lineWidth} member of the ##VkPipelineRasterizationStateCreateInfo structure <b>must</b> be set to 1.0 unless the #DYNAMIC_STATE_LINE_WIDTH dynamic state is enabled, and the {@code lineWidth} parameter to #CmdSetLineWidth() <b>must</b> be set to 1.0. When this feature is supported, the range and granularity of supported line widths are indicated by the {@code lineWidthRange} and {@code lineWidthGranularity} members of the ##VkPhysicalDeviceLimits structure, respectively.")
+    VkBool32.member("largePoints", "indicates whether points with size greater than 1.0 are supported. If this feature is not enabled, only a point size of 1.0 written by a shader is supported. The range and granularity of supported point sizes are indicated by the {@code pointSizeRange} and {@code pointSizeGranularity} members of the ##VkPhysicalDeviceLimits structure, respectively.")
+    VkBool32.member("alphaToOne", "indicates whether the implementation is able to replace the alpha value of the color fragment output from the fragment shader with the maximum representable alpha value for fixed-point colors or 1.0 for floating-point colors. If this feature is not enabled, then the {@code alphaToOneEnable} member of the ##VkPipelineMultisampleStateCreateInfo structure <b>must</b> be set to #FALSE. Otherwise setting {@code alphaToOneEnable} to #TRUE will enable alpha-to-one behavior.")
+    VkBool32.member("multiViewport", "indicates whether more than one viewport is supported. If this feature is not enabled, the {@code viewportCount} and {@code scissorCount} members of the ##VkPipelineViewportStateCreateInfo structure <b>must</b> be set to 1. Similarly, the {@code viewportCount} parameter to the #CmdSetViewport() command and the {@code scissorCount} parameter to the #CmdSetScissor() command <b>must</b> be 1, and the {@code firstViewport} parameter to the #CmdSetViewport() command and the {@code firstScissor} parameter to the #CmdSetScissor() command <b>must</b> be 0.")
+    VkBool32.member("samplerAnisotropy", "indicates whether anisotropic filtering is supported. If this feature is not enabled, the {@code maxAnisotropy} member of the ##VkSamplerCreateInfo structure <b>must</b> be 1.0.")
+    VkBool32.member("textureCompressionETC2", """indicates whether all of the ETC2 and EAC compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+
+        <ul>
+            <li>#FORMAT_ETC2_R8G8B8_UNORM_BLOCK</li>
+            <li>#FORMAT_ETC2_R8G8B8_SRGB_BLOCK</li>
+            <li>#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK</li>
+            <li>#FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK</li>
+            <li>#FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK</li>
+            <li>#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK</li>
+            <li>#FORMAT_EAC_R11_UNORM_BLOCK</li>
+            <li>#FORMAT_EAC_R11_SNORM_BLOCK</li>
+            <li>#FORMAT_EAC_R11G11_UNORM_BLOCK</li>
+            <li>#FORMAT_EAC_R11G11_SNORM_BLOCK</li>
+        </ul>
+
+        #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.""")
+    VkBool32.member("textureCompressionASTC_LDR", """indicates whether all of the ASTC LDR compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+
+        <ul>
+            <li>#FORMAT_ASTC_4x4_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_4x4_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_5x4_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_5x4_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_5x5_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_5x5_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_6x5_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_6x5_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_6x6_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_6x6_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_8x5_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_8x5_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_8x6_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_8x6_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_8x8_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_8x8_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_10x5_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_10x5_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_10x6_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_10x6_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_10x8_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_10x8_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_10x10_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_10x10_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_12x10_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_12x10_SRGB_BLOCK</li>
+            <li>#FORMAT_ASTC_12x12_UNORM_BLOCK</li>
+            <li>#FORMAT_ASTC_12x12_SRGB_BLOCK</li>
+        </ul>
+
+        #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.""")
+    VkBool32.member("textureCompressionBC", """indicates whether all of the BC compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+
+        <ul>
+            <li>#FORMAT_BC1_RGB_UNORM_BLOCK</li>
+            <li>#FORMAT_BC1_RGB_SRGB_BLOCK</li>
+            <li>#FORMAT_BC1_RGBA_UNORM_BLOCK</li>
+            <li>#FORMAT_BC1_RGBA_SRGB_BLOCK</li>
+            <li>#FORMAT_BC2_UNORM_BLOCK</li>
+            <li>#FORMAT_BC2_SRGB_BLOCK</li>
+            <li>#FORMAT_BC3_UNORM_BLOCK</li>
+            <li>#FORMAT_BC3_SRGB_BLOCK</li>
+            <li>#FORMAT_BC4_UNORM_BLOCK</li>
+            <li>#FORMAT_BC4_SNORM_BLOCK</li>
+            <li>#FORMAT_BC5_UNORM_BLOCK</li>
+            <li>#FORMAT_BC5_SNORM_BLOCK</li>
+            <li>#FORMAT_BC6H_UFLOAT_BLOCK</li>
+            <li>#FORMAT_BC6H_SFLOAT_BLOCK</li>
+            <li>#FORMAT_BC7_UNORM_BLOCK</li>
+            <li>#FORMAT_BC7_SRGB_BLOCK</li>
+        </ul>
+
+        #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.""")
+    VkBool32.member("occlusionQueryPrecise", "indicates whether occlusion queries returning actual sample counts are supported. Occlusion queries are created in a {@code VkQueryPool} by specifying the {@code queryType} of #QUERY_TYPE_OCCLUSION in the ##VkQueryPoolCreateInfo structure which is passed to #CreateQueryPool(). If this feature is enabled, queries of this type <b>can</b> enable #QUERY_CONTROL_PRECISE_BIT in the {@code flags} parameter to #CmdBeginQuery(). If this feature is not supported, the implementation supports only boolean occlusion queries. When any samples are passed, boolean queries will return a non-zero result value, otherwise a result value of zero is returned. When this feature is enabled and #QUERY_CONTROL_PRECISE_BIT is set, occlusion queries will report the actual number of samples passed.")
+    VkBool32.member("pipelineStatisticsQuery", "indicates whether the pipeline statistics queries are supported. If this feature is not enabled, queries of type #QUERY_TYPE_PIPELINE_STATISTICS <b>cannot</b> be created, and none of the {@code VkQueryPipelineStatisticFlagBits} bits <b>can</b> be set in the {@code pipelineStatistics} member of the ##VkQueryPoolCreateInfo structure.")
+    VkBool32.member("vertexPipelineStoresAndAtomics", "indicates whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by these stages in shader modules <b>must</b> be decorated with the {@code NonWriteable} decoration (or the {@code readonly} memory qualifier in GLSL).")
+    VkBool32.member("fragmentStoresAndAtomics", "indicates whether storage buffers and images support stores and atomic operations in the fragment shader stage. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by the fragment stage in shader modules <b>must</b> be decorated with the {@code NonWriteable} decoration (or the {@code readonly} memory qualifier in GLSL).")
+    VkBool32.member("shaderTessellationAndGeometryPointSize", "indicates whether the {@code PointSize} built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader stages. If this feature is not enabled, members decorated with the {@code PointSize} built-in decoration <b>must</b> not be read from or written to and all points written from a tessellation or geometry shader will have a size of 1.0. This also indicates whether shader modules <b>can</b> declare the {@code TessellationPointSize} capability for tessellation control and evaluation shaders, or if the shader modules <b>can</b> declare the {@code GeometryPointSize} capability for geometry shaders. An implementation supporting this feature <b>must</b> also support one or both of the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-features-tessellationShader\">{@code tessellationShader}</a> or <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-features-geometryShader\">{@code geometryShader}</a> features.")
+    VkBool32.member("shaderImageGatherExtended", "indicates whether the extended set of image gather instructions are available in shader code. If this feature is not enabled, the {@code OpImage}*{@code Gather} instructions do not support the {@code Offset} and {@code ConstOffsets} operands. This also indicates whether shader modules <b>can</b> declare the {@code ImageGatherExtended} capability.")
+    VkBool32.member("shaderStorageImageExtendedFormats", "indicates whether the extended storage image formats are available in shader code. If this feature is not enabled, the formats requiring the {@code StorageImageExtendedFormats} capability are not supported for storage images. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageExtendedFormats} capability.")
+    VkBool32.member("shaderStorageImageMultisample", "indicates whether multisampled storage images are supported. If this feature is not enabled, images that are created with a {@code usage} that includes #IMAGE_USAGE_STORAGE_BIT <b>must</b> be created with {@code samples} equal to #SAMPLE_COUNT_1_BIT. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageMultisample} capability.")
+    VkBool32.member("shaderStorageImageReadWithoutFormat", "indicates whether storage images require a format qualifier to be specified when reading from storage images. If this feature is not enabled, the {@code OpImageRead} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageReadWithoutFormat} capability.")
+    VkBool32.member("shaderStorageImageWriteWithoutFormat", "indicates whether storage images require a format qualifier to be specified when writing to storage images. If this feature is not enabled, the {@code OpImageWrite} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageWriteWithoutFormat} capability.")
+    VkBool32.member("shaderUniformBufferArrayDynamicIndexing", "indicates whether arrays of uniform buffers <b>can</b> be indexed by <em>dynamically uniform</em> integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformBufferArrayDynamicIndexing} capability.")
+    VkBool32.member("shaderSampledImageArrayDynamicIndexing", "indicates whether arrays of samplers or sampled images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, or #DESCRIPTOR_TYPE_SAMPLED_IMAGE <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SampledImageArrayDynamicIndexing} capability.")
+    VkBool32.member("shaderStorageBufferArrayDynamicIndexing", "indicates whether arrays of storage buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageBufferArrayDynamicIndexing} capability.")
+    VkBool32.member("shaderStorageImageArrayDynamicIndexing", "indicates whether arrays of storage images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_IMAGE <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageArrayDynamicIndexing} capability.")
+    VkBool32.member("shaderClipDistance", "indicates whether clip distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code ClipDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also indicates whether shader modules <b>can</b> declare the {@code ClipDistance} capability.")
+    VkBool32.member("shaderCullDistance", "indicates whether cull distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code CullDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also indicates whether shader modules <b>can</b> declare the {@code CullDistance} capability.")
+    VkBool32.member("shaderFloat64", "indicates whether 64-bit floats (doubles) are supported in shader code. If this feature is not enabled, 64-bit floating-point types <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float64} capability.")
+    VkBool32.member("shaderInt64", "indicates whether 64-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 64-bit integer types <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int64} capability.")
+    VkBool32.member("shaderInt16", "indicates whether 16-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 16-bit integer types <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int16} capability.")
+    VkBool32.member("shaderResourceResidency", "indicates whether image operations that return resource residency information are supported in shader code. If this feature is not enabled, the {@code OpImageSparse}* instructions <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SparseResidency} capability. The feature requires at least one of the {@code sparseResidency}* features to be supported.")
+    VkBool32.member("shaderResourceMinLod", "indicates whether image operations that specify the minimum resource LOD are supported in shader code. If this feature is not enabled, the {@code MinLod} image operand <b>must</b> not be used in shader code. This also indicates whether shader modules <b>can</b> declare the {@code MinLod} capability.")
+    VkBool32.member("sparseBinding", "indicates whether resource memory <b>can</b> be managed at opaque sparse block level instead of at the object level. If this feature is not enabled, resource memory <b>must</b> be bound only on a per-object basis using the #BindBufferMemory() and #BindImageMemory() commands. In this case, buffers and images <b>must</b> not be created with #BUFFER_CREATE_SPARSE_BINDING_BIT and #IMAGE_CREATE_SPARSE_BINDING_BIT set in the {@code flags} member of the ##VkBufferCreateInfo and ##VkImageCreateInfo structures, respectively. Otherwise resource memory <b>can</b> be managed as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#sparsememory-sparseresourcefeatures\">Sparse Resource Features</a>.")
+    VkBool32.member("sparseResidencyBuffer", "indicates whether the device <b>can</b> access partially resident buffers. If this feature is not enabled, buffers <b>must</b> not be created with #BUFFER_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkBufferCreateInfo structure.")
+    VkBool32.member("sparseResidencyImage2D", "indicates whether the device <b>can</b> access partially resident 2D images with 1 sample per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_1_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.")
+    VkBool32.member("sparseResidencyImage3D", "indicates whether the device <b>can</b> access partially resident 3D images. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_3D <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.")
+    VkBool32.member("sparseResidency2Samples", "indicates whether the physical device <b>can</b> access partially resident 2D images with 2 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_2_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.")
+    VkBool32.member("sparseResidency4Samples", "indicates whether the physical device <b>can</b> access partially resident 2D images with 4 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_4_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.")
+    VkBool32.member("sparseResidency8Samples", "indicates whether the physical device <b>can</b> access partially resident 2D images with 8 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_8_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.")
+    VkBool32.member("sparseResidency16Samples", "indicates whether the physical device <b>can</b> access partially resident 2D images with 16 samples per pixel. If this feature is not enabled, images with an {@code imageType} of #IMAGE_TYPE_2D and {@code samples} set to #SAMPLE_COUNT_16_BIT <b>must</b> not be created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the {@code flags} member of the ##VkImageCreateInfo structure.")
+    VkBool32.member("sparseResidencyAliased", "indicates whether the physical device <b>can</b> correctly access data aliased into multiple locations. If this feature is not enabled, the #BUFFER_CREATE_SPARSE_ALIASED_BIT and #IMAGE_CREATE_SPARSE_ALIASED_BIT enum values <b>must</b> not be used in {@code flags} members of the ##VkBufferCreateInfo and ##VkImageCreateInfo structures, respectively.")
+    VkBool32.member("variableMultisampleRate", "indicates whether all pipelines that will be bound to a command buffer during a subpass with no attachments <b>must</b> have the same value for ##VkPipelineMultisampleStateCreateInfo{@code ::rasterizationSamples}. If set to #TRUE, the implementation supports variable multisample rates in a subpass with no attachments. If set to #FALSE, then all pipelines bound in such a subpass <b>must</b> have the same multisample rate. This has no effect in situations where a subpass uses any attachments.")
+    VkBool32.member("inheritedQueries", "indicates whether a secondary command buffer <b>may</b> be executed while a query is active.")
 }
 
 val VkFormatProperties = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = false) {
@@ -794,17 +728,19 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
     uint32_t.member("subPixelPrecisionBits", "the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code>. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#primsrast\">the “Rasterization” chapter</a>.")
     uint32_t.member("subTexelPrecisionBits", "the number of bits of precision in the division along an axis of an image used for minification and magnification filters. <code>2<sup>subTexelPrecisionBits</sup></code> is the actual number of divisions along each axis of the image represented. The filtering hardware will snap to these locations when computing the filtered results.")
     uint32_t.member("mipmapPrecisionBits", """the number of bits of division that the LOD calculation for mipmap fetching get snapped to when determining the contribution from each mip level to the mip filtered results. <code>2<sup>mipmapPrecisionBits</sup></code> is the actual number of divisions.
-<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         For example, if this value is 2 bits then when linearly filtering between two levels, each level could: contribute: 0%, 33%, 66%, or 100% (this is just an example and the amount of contribution <b>should</b> be covered by different equations in the spec).
         </div>""")
     uint32_t.member("maxDrawIndexedIndexValue", "the maximum index value that <b>can</b> be used for indexed draw calls when using 32-bit indices. This excludes the primitive restart index value of 0xFFFFFFFF. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-features-fullDrawIndexUint32\">fullDrawIndexUint32</a>.")
     uint32_t.member("maxDrawIndirectCount", "the maximum draw count that is supported for indirect draw calls. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-features-multiDrawIndirect\">multiDrawIndirect</a>.")
-    float.member("maxSamplerLodBias", "the maximum absolute sampler level of detail bias. The sum of the {@code mipLodBias} member of the ##VkSamplerCreateInfo structure and the {@code Bias} operand of image sampling operations in shader modules (or 0 if no {@code Bias} operand is provided to an image sampling operation) are clamped to the range <code>[-maxSamplerLodBias,+maxSamplerLodBias]</code>. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#samplers-mipLodBias\">samplers-mipLodBias</a>.")
+    float.member("maxSamplerLodBias", "the maximum absolute sampler LOD bias. The sum of the {@code mipLodBias} member of the ##VkSamplerCreateInfo structure and the {@code Bias} operand of image sampling operations in shader modules (or 0 if no {@code Bias} operand is provided to an image sampling operation) are clamped to the range <code>[-maxSamplerLodBias,+maxSamplerLodBias]</code>. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#samplers-mipLodBias\">samplers-mipLodBias</a>.")
     float.member("maxSamplerAnisotropy", "the maximum degree of sampler anisotropy. The maximum degree of anisotropic filtering used for an image sampling operation is the minimum of the {@code maxAnisotropy} member of the ##VkSamplerCreateInfo structure and this limit. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#samplers-maxAnisotropy\">samplers-maxAnisotropy</a>.")
     uint32_t.member("maxViewports", "the maximum number of active viewports. The {@code viewportCount} member of the ##VkPipelineViewportStateCreateInfo structure that is provided at pipeline creation <b>must</b> be less than or equal to this limit.")
     uint32_t.array("maxViewportDimensions", "are the maximum viewport dimensions in the X (width) and Y (height) dimensions, respectively. The maximum viewport dimensions <b>must</b> be greater than or equal to the largest image which <b>can</b> be created and used as a framebuffer attachment. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#vertexpostproc-viewport\">Controlling the Viewport</a>.", size = 2)
     float.array("viewportBoundsRange", """the <code>[minimum, maximum]</code> range that the corners of a viewport <b>must</b> be contained in. This range <b>must</b> be at least <code>[-2 × size, 2 × size - 1]</code>, where <code>size = max(maxViewportDimensions[0], maxViewportDimensions[1])</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>.
-<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The intent of the {@code viewportBoundsRange} limit is to allow a maximum sized viewport to be arbitrarily shifted relative to the output target as long as at least some portion intersects. This would give a bounds limit of <code>[-size {plus} 1, 2 {times} size - 1]</code> which would allow all possible non-empty-set intersections of the output target and the viewport. Since these numbers are typically powers of two, picking the signed number range using the smallest possible number of bits ends up with the specified range.
         </div>""", size = 2)
     uint32_t.member("viewportSubPixelBits", "the number of bits of subpixel precision for viewport bounds. The subpixel precision that floating-point viewport bounds are interpreted at is given by this limit.")
@@ -1045,7 +981,7 @@ val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkDeviceQueueGlobalPriorityCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code pQueuePriorities} <b>must</b> be a pointer to an array of {@code queueCount} {@code float} values</li>
             <li>{@code queueCount} <b>must</b> be greater than 0</li>
@@ -1070,7 +1006,7 @@ val VkDeviceCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The {@code queueFamilyIndex} member of any given element of {@code pQueueCreateInfos} <b>must</b> be unique within {@code pQueueCreateInfos}</li>
+            <li>The {@code queueFamilyIndex} member of each element of {@code pQueueCreateInfos} <b>must</b> be unique within {@code pQueueCreateInfos}</li>
             <li>If the {@code pNext} chain includes a ##VkPhysicalDeviceFeatures2KHR structure, then {@code pEnabledFeatures} <b>must</b> be {@code NULL}</li>
             <li>{@code ppEnabledExtensionNames} <b>must</b> not contain both #KHR_maintenance1 and #AMD_negative_viewport_height</li>
         </ul>
@@ -1138,10 +1074,10 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Any given element of {@code pCommandBuffers} <b>must</b> not have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, any given element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, any given element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
-            <li>Any given element of {@code pWaitDstStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT.</li>
+            <li>Each element of {@code pCommandBuffers} <b>must</b> not have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, each element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, each element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+            <li>Each element of {@code pWaitDstStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1226,7 +1162,7 @@ val VkMappedMemoryRange = struct(VULKAN_PACKAGE, "VkMappedMemoryRange") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code memory} <b>must</b> currently be mapped</li>
+            <li>{@code memory} <b>must</b> be currently mapped</li>
             <li>If {@code size} is not equal to #WHOLE_SIZE, {@code offset} and {@code size} <b>must</b> specify a range contained within the currently mapped range of {@code memory}</li>
             <li>If {@code size} is equal to #WHOLE_SIZE, {@code offset} <b>must</b> be within the currently mapped range of {@code memory}</li>
             <li>If {@code size} is equal to #WHOLE_SIZE, the end of the current mapping of {@code memory} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize} bytes from the beginning of the memory object.</li>
@@ -1285,7 +1221,8 @@ val VkSparseImageMemoryRequirements = struct(VULKAN_PACKAGE, "VkSparseImageMemor
         {@code formatProperties.imageGranularity} describes the dimensions of a single bindable sparse image block in pixel units. For aspect #IMAGE_ASPECT_METADATA_BIT, all dimensions will be zero pixels. All metadata is located in the mip tail region.
 
         {@code formatProperties.flags} is a bitmask of {@code VkSparseImageFormatFlagBits}:
-<ul>
+
+        <ul>
             <li>If #SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT is set the image uses a single mip tail region for all array layers.</li>
             <li>If #SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT is set the dimensions of mip levels <b>must</b> be integer multiples of the corresponding dimensions of the sparse image block for levels not located in the mip tail.</li>
             <li>If #SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT is set the image uses non-standard sparse image block dimensions. The {@code formatProperties.imageGranularity} values do not match the standard sparse image block dimension corresponding to the image&#8217;s pixel format.</li>
@@ -1372,7 +1309,7 @@ val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpa
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>For any given element of {@code pBinds}, if the {@code flags} member of that element contains #SPARSE_MEMORY_BIND_METADATA_BIT, the binding range defined <b>must</b> be within the mip tail region of the metadata aspect of {@code image}</li>
+            <li>If the {@code flags} member of any element of {@code pBinds} contains #SPARSE_MEMORY_BIND_METADATA_BIT, the binding range defined <b>must</b> be within the mip tail region of the metadata aspect of {@code image}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1901,7 +1838,7 @@ val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
     VkComponentSwizzle.member("r", "a {@code VkComponentSwizzle} specifying the component value placed in the R component of the output vector.")
     VkComponentSwizzle.member("g", "a {@code VkComponentSwizzle} specifying the component value placed in the G component of the output vector.")
     VkComponentSwizzle.member("b", "a {@code VkComponentSwizzle} specifying the component value placed in the B component of the output vector.")
-    VkComponentSwizzle.member("a", "")
+    VkComponentSwizzle.member("a", "a {@code VkComponentSwizzle} specifying the component value placed in the A component of the output vector.")
 }
 
 val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") {
@@ -1922,9 +1859,14 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
         The {@code components} member is of type ##VkComponentMapping, and describes a remapping from components of the image to components of the vector returned by shader image instructions. This remapping <b>must</b> be identity for storage image descriptors, input attachment descriptors, framebuffer attachments, and any {@code VkImageView} used with a combined image sampler that enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>.
 
-        If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled in the sampler, the {@code aspectMask} used by a {@code VkImageView} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT.
+        When creating a {@code VkImageView}, if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled in the sampler, the {@code aspectMask} of a {@code subresourceRange} used by the {@code VkImageView} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT.
 
-        If sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is not enabled in the sampler and the format is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, the image <b>must</b> have been created with #IMAGE_CREATE_MUTABLE_FORMAT_BIT, and the {@code aspectMask} of the {@code VkImageView}'s ##VkImageSubresourceRange <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR or #IMAGE_ASPECT_PLANE_2_BIT_KHR.
+        When creating a {@code VkImageView}, if sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is not enabled in the sampler and the image {@code format} is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, the image <b>must</b> have been created with #IMAGE_CREATE_MUTABLE_FORMAT_BIT, and the {@code aspectMask} of the {@code VkImageView}'s {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR or #IMAGE_ASPECT_PLANE_2_BIT_KHR.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code aspectMask} includes #IMAGE_ASPECT_COLOR_BIT, then it <b>must</b> not include any of #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1961,7 +1903,7 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 
         If the image has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format} and {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_COLOR_BIT, {@code format} <b>must</b> be identical to the image {@code format}, and the sampler to be used with the image view <b>must</b> enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>.
 
-        If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT and the image has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format}, and if {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR, {@code format} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">compatible</a> with the corresponding plane of the image, as defined in, and the sampler to be used with the image view <b>must</b> not enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>. The {@code width} and {@code height} of the single-plane image view <b>must</b> be derived from the multi-planar image's dimensions in the manner listed for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">plane compatibility</a> for the plane.
+        If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT and the image has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format}, and if {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR, {@code format} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">compatible</a> with the corresponding plane of the image, and the sampler to be used with the image view <b>must</b> not enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#samplers-YCbCr-conversion">sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a>. The {@code width} and {@code height} of the single-plane image view <b>must</b> be derived from the multi-planar image's dimensions in the manner listed for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatible-planes">plane compatibility</a> for the plane.
 
         Any view of an image plane will have the same mapping between texel coordinates and memory locations as used by the channels of the color aspect, subject to the formulae relating texel coordinates to lower-resolution planes as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-chroma-reconstruction">Chroma Reconstruction</a>. That is, if an R or B plane has a reduced resolution relative to the G plane of the multi-planar image, the image view operates using the (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) unnormalized coordinates of the reduced-resolution plane, and these coordinates access the same memory locations as the (<em>u<sub>color</sub></em>, <em>v<sub>color</sub></em>) unnormalized coordinates of the color aspect for which chroma reconstruction operations operate on the same (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) or (<em>i<sub>plane</sub></em>, <em>j<sub>plane</sub></em>) coordinates.
 
@@ -2141,8 +2083,8 @@ val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The {@code offset} member of any given element of {@code pMapEntries} <b>must</b> be less than {@code dataSize}</li>
-            <li>For any given element of {@code pMapEntries}, {@code size} <b>must</b> be less than or equal to {@code dataSize} minus {@code offset}</li>
+            <li>The {@code offset} member of each element of {@code pMapEntries} <b>must</b> be less than {@code dataSize}</li>
+            <li>The {@code size} member of each element of {@code pMapEntries} <b>must</b> be less than or equal to {@code dataSize} minus {@code offset}</li>
             <li>If {@code mapEntryCount} is not 0, {@code pMapEntries} <b>must</b> be a pointer to an array of {@code mapEntryCount} valid ##VkSpecializationMapEntry structures</li>
         </ul>
 
@@ -2273,7 +2215,7 @@ val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVer
         <ul>
             <li>{@code vertexBindingDescriptionCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
             <li>{@code vertexAttributeDescriptionCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputAttributes}</li>
-            <li>For every {@code binding} specified by any given element of {@code pVertexAttributeDescriptions}, a ##VkVertexInputBindingDescription <b>must</b> exist in {@code pVertexBindingDescriptions} with the same value of {@code binding}</li>
+            <li>For every {@code binding} specified by each element of {@code pVertexAttributeDescriptions}, a ##VkVertexInputBindingDescription <b>must</b> exist in {@code pVertexBindingDescriptions} with the same value of {@code binding}</li>
             <li>All elements of {@code pVertexBindingDescriptions} <b>must</b> describe distinct binding numbers</li>
             <li>All elements of {@code pVertexAttributeDescriptions} <b>must</b> describe distinct attribute locations</li>
         </ul>
@@ -2534,7 +2476,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sampleRateShading">sample rate shading</a> feature is not enabled, {@code sampleShadingEnable} <b>must</b> be #FALSE</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-alphaToOne">alpha to one</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be #FALSE</li>
             <li>{@code minSampleShading} <b>must</b> be in the range <code>[0,1]</code></li>
-            <li>If the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code minSampleShading} <b>must</b> be #FALSE</li>
+            <li>If the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code sampleShadingEnable} <b>must</b> be #FALSE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2758,7 +2700,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be -1</li>
             <li>The {@code stage} member of each element of {@code pStages} <b>must</b> be unique</li>
             <li>The {@code stage} member of one element of {@code pStages} <b>must</b> be #SHADER_STAGE_VERTEX_BIT</li>
-            <li>The {@code stage} member of any given element of {@code pStages} <b>must</b> not be #SHADER_STAGE_COMPUTE_BIT</li>
+            <li>The {@code stage} member of each element of {@code pStages} <b>must</b> not be #SHADER_STAGE_COMPUTE_BIT</li>
             <li>If {@code pStages} includes a tessellation control shader stage, it <b>must</b> include a tessellation evaluation shader stage</li>
             <li>If {@code pStages} includes a tessellation evaluation shader stage, it <b>must</b> include a tessellation control shader stage</li>
             <li>If {@code pStages} includes a tessellation control shader stage and a tessellation evaluation shader stage, {@code pTessellationState} <b>must</b> be a pointer to a valid ##VkPipelineTessellationStateCreateInfo structure</li>
@@ -2784,7 +2726,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, {@code pMultisampleState} <b>must</b> be a pointer to a valid ##VkPipelineMultisampleStateCreateInfo structure</li>
             <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses a depth/stencil attachment, {@code pDepthStencilState} <b>must</b> be a pointer to a valid ##VkPipelineDepthStencilStateCreateInfo structure</li>
             <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses color attachments, {@code pColorBlendState} <b>must</b> be a pointer to a valid ##VkPipelineColorBlendStateCreateInfo structure</li>
-            <li>If the depth bias clamping feature is not enabled, no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_DEPTH_BIAS, and the {@code depthBiasEnable} member of {@code pDepthStencil} is #TRUE, the {@code depthBiasClamp} member of {@code pDepthStencil} <b>must</b> be {@code 0.0}</li>
+            <li>If the depth bias clamping feature is not enabled, no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_DEPTH_BIAS, and the {@code depthBiasEnable} member of {@code pRasterizationState} is #TRUE, the {@code depthBiasClamp} member of {@code pRasterizationState} <b>must</b> be {@code 0.0}</li>
             <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationGridSize.width} <b>must</b> evenly divide ##VkMultisamplePropertiesEXT{@code ::sampleLocationGridSize}.width as returned by #GetPhysicalDeviceMultisamplePropertiesEXT() with a {@code samples} parameter equaling {@code rasterizationSamples}</li>
             <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationGridSize.height} <b>must</b> evenly divide ##VkMultisamplePropertiesEXT{@code ::sampleLocationGridSize}.height as returned by #GetPhysicalDeviceMultisamplePropertiesEXT() with a {@code samples} parameter equaling {@code rasterizationSamples}</li>
             <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationsPerPixel} <b>must</b> equal {@code rasterizationSamples}</li>
@@ -2801,6 +2743,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If the {@code renderPass} has multiview enabled, then all shaders <b>must</b> not include variables decorated with the {@code Layer} built-in decoration in their interfaces.</li>
             <li>{@code flags} <b>must</b> not contain the #PIPELINE_CREATE_DISPATCH_BASE_KHX flag.</li>
             <li>If {@code pStages} includes a fragment shader stage and an input attachment was referenced by the ##VkRenderPassInputAttachmentAspectCreateInfoKHR at renderpass create time, its shader code <b>must</b> not read from any aspect that was not specified in the {@code aspectMask} of the corresponding ##VkInputAttachmentAspectReferenceKHR structure.</li>
+            <li>The number of resources in {@code layout} accessible to each shader stage that is used by the pipeline <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageResources}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2863,6 +2806,7 @@ val VkComputePipelineCreateInfo = struct(VULKAN_PACKAGE, "VkComputePipelineCreat
             <li>The {@code stage} member of {@code stage} <b>must</b> be #SHADER_STAGE_COMPUTE_BIT</li>
             <li>The shader code for the entry point identified by {@code stage} and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
             <li>{@code layout} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-pipelinelayout-consistency">consistent</a> with the layout of the compute shader specified in {@code stage}</li>
+            <li>The number of resources in {@code layout} accessible to the compute shader stage <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageResources}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2930,6 +2874,15 @@ val VkPipelineLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineLayoutCreateI
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_BUFFER and #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageDescriptorStorageBuffers}</li>
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, and #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageDescriptorSampledImages}</li>
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_IMAGE, and #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageDescriptorStorageImages}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_INPUT_ATTACHMENT accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageDescriptorInputAttachments}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_SAMPLER and #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetSamplers}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_UNIFORM_BUFFER accessible across all shader stagess and and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetUniformBuffers}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetUniformBuffersDynamic}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetStorageBuffers}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetStorageBuffersDynamic}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, and #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetSampledImages}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_IMAGE, and #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetStorageImages}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_INPUT_ATTACHMENT accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetInputAttachments}</li>
             <li>Any two elements of {@code pPushConstantRanges} <b>must</b> not include the same stage in {@code stageFlags}</li>
             <li>{@code pSetLayouts} <b>must</b> not contain more than one descriptor set layout that was created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR set</li>
         </ul>
@@ -2954,7 +2907,8 @@ val VkPipelineLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineLayoutCreateI
     const..VkDescriptorSetLayout.p.member("pSetLayouts", "a pointer to an array of {@code VkDescriptorSetLayout} objects.")
     AutoSize("pPushConstantRanges", optional = true)..uint32_t.member("pushConstantRangeCount", "the number of push constant ranges included in the pipeline layout.")
     const..VkPushConstantRange.p.buffer("pPushConstantRanges", """a pointer to an array of ##VkPushConstantRange structures defining a set of push constant ranges for use in a single pipeline layout. In addition to descriptor set layouts, a pipeline layout also describes how many push constants <b>can</b> be accessed by each stage of the pipeline.
-<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Push constants represent a high speed path to modify constant data in pipelines that is expected to outperform memory-backed resource updates.
         </div>""")
 }
@@ -3026,19 +2980,21 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
     VkSamplerAddressMode.member("addressModeU", "a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for U coordinate.")
     VkSamplerAddressMode.member("addressModeV", "a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for V coordinate.")
     VkSamplerAddressMode.member("addressModeW", "a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for W coordinate.")
-    float.member("mipLodBias", "the bias to be added to mipmap LOD calculation and bias provided by image sampling functions in SPIR-V, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-level-of-detail-operation\">Level-of-Detail Operation</a> section.")
+    float.member("mipLodBias", "the bias to be added to mipmap LOD (level-of-detail) calculation and bias provided by image sampling functions in SPIR-V, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-level-of-detail-operation\">Level-of-Detail Operation</a> section.")
     VkBool32.member("anisotropyEnable", "#TRUE to enable anisotropic filtering, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-texel-anisotropic-filtering\">Texel Anisotropic Filtering</a> section, or #FALSE otherwise.")
     float.member("maxAnisotropy", "the anisotropy value clamp.")
     VkBool32.member("compareEnable", """#TRUE to enable comparison against a reference value during lookups, or #FALSE otherwise.
-<ul>
+
+        <ul>
             <li>Note: Some implementations will default to shader state if this member does not match.</li>
         </ul>""")
     VkCompareOp.member("compareOp", "a {@code VkCompareOp} value specifying the comparison function to apply to fetched data before filtering as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-depth-compare-operation\">Depth Compare Operation</a> section.")
-    float.member("minLod", "{@code minLod} and {@code maxLod} are the values used to clamp the computed level-of-detail value, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-level-of-detail-operation\">Level-of-Detail Operation</a> section. {@code maxLod} <b>must</b> be greater than or equal to {@code minLod}.")
+    float.member("minLod", "{@code minLod} and {@code maxLod} are the values used to clamp the computed LOD value, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-level-of-detail-operation\">Level-of-Detail Operation</a> section. {@code maxLod} <b>must</b> be greater than or equal to {@code minLod}.")
     float.member("maxLod", "see {@code minLod}")
     VkBorderColor.member("borderColor", "a {@code VkBorderColor} value specifying the predefined border color to use.")
     VkBool32.member("unnormalizedCoordinates", """controls whether to use unnormalized or normalized texel coordinates to address texels of the image. When set to #TRUE, the range of the image coordinates used to lookup the texel is in the range of zero to the image dimensions for x, y and z. When set to #FALSE the range of image coordinates is zero to one. When {@code unnormalizedCoordinates} is #TRUE, samplers have the following requirements:
-<ul>
+
+        <ul>
             <li>{@code minFilter} and {@code magFilter} <b>must</b> be equal.</li>
             <li>{@code mipmapMode} <b>must</b> be #SAMPLER_MIPMAP_MODE_NEAREST.</li>
             <li>{@code minLod} and {@code maxLod} <b>must</b> be zero.</li>
@@ -3049,13 +3005,15 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
         </ul>
 
         When {@code unnormalizedCoordinates} is #TRUE, images the sampler is used with in the shader have the following requirements:
-<ul>
+
+        <ul>
             <li>The {@code viewType} <b>must</b> be either #IMAGE_VIEW_TYPE_1D or #IMAGE_VIEW_TYPE_2D.</li>
             <li>The image view <b>must</b> have a single layer and a single mip level.</li>
         </ul>
 
         When {@code unnormalizedCoordinates} is #TRUE, image built-in functions in the shader that use the sampler have the following requirements:
-<ul>
+
+        <ul>
             <li>The functions <b>must</b> not use projection.</li>
             <li>The functions <b>must</b> not use offsets.</li>
         </ul>""")
@@ -3097,7 +3055,8 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
     VkDescriptorType.member("descriptorType", "a {@code VkDescriptorType} specifying which type of resource descriptors are used for this binding.")
     AutoSize("pImmutableSamplers", optional = true)..uint32_t.member("descriptorCount", "the number of descriptors contained in the binding, accessed in a shader as an array. If {@code descriptorCount} is zero this binding entry is reserved and the resource <b>must</b> not be accessed from any stage via this binding within any pipeline using the set layout.")
     VkShaderStageFlags.member("stageFlags", """member is a bitmask of {@code VkShaderStageFlagBits} specifying which pipeline shader stages <b>can</b> access a resource for this binding. #SHADER_STAGE_ALL is a shorthand specifying that all defined shader stages, including any additional stages defined by extensions, <b>can</b> access the resource.
-If a shader stage is not included in {@code stageFlags}, then a resource <b>must</b> not be accessed from that stage via this binding within any pipeline using the set layout. Other than input attachments which are limited to the fragment shader, there are no limitations on what combinations of stages <b>can</b> be used by a descriptor binding, and in particular a binding <b>can</b> be used by both graphics stages and the compute stage.""")
+
+        If a shader stage is not included in {@code stageFlags}, then a resource <b>must</b> not be accessed from that stage via this binding within any pipeline using the set layout. Other than input attachments which are limited to the fragment shader, there are no limitations on what combinations of stages <b>can</b> be used by a descriptor binding, and in particular a binding <b>can</b> be used by both graphics stages and the compute stage.""")
     nullable..const..VkSampler.p.member("pImmutableSamplers", "")
 }
 
@@ -3199,6 +3158,11 @@ val VkDescriptorSetAllocateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetAllocat
     documentation =
         """
         Structure specifying the allocation parameters for descriptor sets.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Each element of {@code pSetLayouts} <b>must</b> not have been created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR set</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -3317,23 +3281,23 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} <b>must</b> be a pointer to an array of {@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pTexelBufferView} <b>must</b> be a pointer to an array of {@code descriptorCount} valid {@code VkBufferView} handles</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, {@code pBufferInfo} <b>must</b> be a pointer to an array of {@code descriptorCount} valid ##VkDescriptorBufferInfo structures</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was not allocated with a layout that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of any given element of {@code pImageInfo} <b>must</b> be a valid {@code VkSampler} object</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} and {@code imageLayout} members of any given element of {@code pImageInfo} <b>must</b> be a valid {@code VkImageView} and {@code VkImageLayout}, respectively</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was not allocated with a layout that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkSampler} object</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} and {@code imageLayout} members of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkImageView} and {@code VkImageLayout}, respectively</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE, for each descriptor that will be accessed via load or store operations the {@code imageLayout} member for corresponding elements of {@code pImageInfo} <b>must</b> be #IMAGE_LAYOUT_GENERAL</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code offset} member of any given element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code offset} member of any given element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, #DESCRIPTOR_TYPE_STORAGE_BUFFER, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code buffer} member of any given element of {@code pBufferInfo} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code buffer} member of any given element of {@code pBufferInfo} <b>must</b> have been created with #BUFFER_USAGE_UNIFORM_BUFFER_BIT set</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code buffer} member of any given element of {@code pBufferInfo} <b>must</b> have been created with #BUFFER_USAGE_STORAGE_BUFFER_BIT set</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code range} member of any given element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxUniformBufferRange}</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code range} member of any given element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxStorageBufferRange}</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, the {@code VkBuffer} that any given element of {@code pTexelBufferView} was created from <b>must</b> have been created with #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT set</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, the {@code VkBuffer} that any given element of {@code pTexelBufferView} was created from <b>must</b> have been created with #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT set</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} member of any given element of {@code pImageInfo} <b>must</b> have been created with the identity swizzle</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, the {@code imageView} member of any given element of {@code pImageInfo} <b>must</b> have been created with #IMAGE_USAGE_SAMPLED_BIT set</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, the {@code imageLayout} member of any given element of {@code pImageInfo} <b>must</b> be #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} member of any given element of {@code pImageInfo} <b>must</b> have been created with #IMAGE_USAGE_INPUT_ATTACHMENT_BIT set</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE, the {@code imageView} member of any given element of {@code pImageInfo} <b>must</b> have been created with #IMAGE_USAGE_STORAGE_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code offset} member of each element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code offset} member of each element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, #DESCRIPTOR_TYPE_STORAGE_BUFFER, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, and the {@code buffer} member of any element of {@code pBufferInfo} is the handle of a non-sparse buffer, then that buffer <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code buffer} member of each element of {@code pBufferInfo} <b>must</b> have been created with #BUFFER_USAGE_UNIFORM_BUFFER_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code buffer} member of each element of {@code pBufferInfo} <b>must</b> have been created with #BUFFER_USAGE_STORAGE_BUFFER_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code range} member of each element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxUniformBufferRange}</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code range} member of each element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxStorageBufferRange}</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, the {@code VkBuffer} that each element of {@code pTexelBufferView} was created from <b>must</b> have been created with #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, the {@code VkBuffer} that each element of {@code pTexelBufferView} was created from <b>must</b> have been created with #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> have been created with the identity swizzle</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> have been created with #IMAGE_USAGE_SAMPLED_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, the {@code imageLayout} member of each element of {@code pImageInfo} <b>must</b> be #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> have been created with #IMAGE_USAGE_INPUT_ATTACHMENT_BIT set</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> have been created with #IMAGE_USAGE_STORAGE_BIT set</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3416,21 +3380,21 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code attachmentCount} <b>must</b> be equal to the attachment count specified in {@code renderPass}</li>
-            <li>Any given element of {@code pAttachments} that is used as a color attachment or resolve attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_COLOR_ATTACHMENT_BIT</li>
-            <li>Any given element of {@code pAttachments} that is used as a depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
-            <li>Any given element of {@code pAttachments} that is used as an input attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_INPUT_ATTACHMENT_BIT</li>
-            <li>Any given element of {@code pAttachments} <b>must</b> have been created with an {@code VkFormat} value that matches the {@code VkFormat} specified by the corresponding ##VkAttachmentDescription in {@code renderPass}</li>
-            <li>Any given element of {@code pAttachments} <b>must</b> have been created with a {@code samples} value that matches the {@code samples} value specified by the corresponding ##VkAttachmentDescription in {@code renderPass}</li>
-            <li>Any given element of {@code pAttachments} <b>must</b> have dimensions at least as large as the corresponding framebuffer dimension</li>
-            <li>Any given element of {@code pAttachments} <b>must</b> only specify a single mip level</li>
-            <li>Any given element of {@code pAttachments} <b>must</b> have been created with the identity swizzle</li>
+            <li>Each element of {@code pAttachments} that is used as a color attachment or resolve attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_COLOR_ATTACHMENT_BIT</li>
+            <li>Each element of {@code pAttachments} that is used as a depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>Each element of {@code pAttachments} that is used as an input attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_INPUT_ATTACHMENT_BIT</li>
+            <li>Each element of {@code pAttachments} <b>must</b> have been created with an {@code VkFormat} value that matches the {@code VkFormat} specified by the corresponding ##VkAttachmentDescription in {@code renderPass}</li>
+            <li>Each element of {@code pAttachments} <b>must</b> have been created with a {@code samples} value that matches the {@code samples} value specified by the corresponding ##VkAttachmentDescription in {@code renderPass}</li>
+            <li>Each element of {@code pAttachments} <b>must</b> have dimensions at least as large as the corresponding framebuffer dimension</li>
+            <li>Each element of {@code pAttachments} <b>must</b> only specify a single mip level</li>
+            <li>Each element of {@code pAttachments} <b>must</b> have been created with the identity swizzle</li>
             <li>{@code width} <b>must</b> be greater than 0.</li>
             <li>{@code width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}</li>
             <li>{@code height} <b>must</b> be greater than 0.</li>
             <li>{@code height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}</li>
             <li>{@code layers} <b>must</b> be greater than 0.</li>
             <li>{@code layers} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferLayers}</li>
-            <li>Any given element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
+            <li>Each element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3557,13 +3521,13 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
             <li>If the first use of an attachment in this render pass is as an input attachment, and the attachment is not also used as a color or depth/stencil attachment in the same subpass, then {@code loadOp} <b>must</b> not be #ATTACHMENT_LOAD_OP_CLEAR</li>
             <li>If {@code pResolveAttachments} is not {@code NULL}, for each resolve attachment that does not have the value #ATTACHMENT_UNUSED, the corresponding color attachment <b>must</b> not have the value #ATTACHMENT_UNUSED</li>
             <li>If {@code pResolveAttachments} is not {@code NULL}, the sample count of each element of {@code pColorAttachments} <b>must</b> be anything other than #SAMPLE_COUNT_1_BIT</li>
-            <li>Any given element of {@code pResolveAttachments} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
-            <li>Any given element of {@code pResolveAttachments} <b>must</b> have the same {@code VkFormat} as its corresponding color attachment</li>
+            <li>Each element of {@code pResolveAttachments} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>Each element of {@code pResolveAttachments} <b>must</b> have the same {@code VkFormat} as its corresponding color attachment</li>
             <li>All attachments in {@code pColorAttachments} that are not #ATTACHMENT_UNUSED <b>must</b> have the same sample count</li>
             <li>All attachments in {@code pColorAttachments} that are not #ATTACHMENT_UNUSED <b>must</b> have a sample count that is smaller than or equal to the sample count of {@code pDepthStencilAttachment} if it is not #ATTACHMENT_UNUSED</li>
             <li>If any input attachments are #ATTACHMENT_UNUSED, then any pipelines bound during the subpass <b>must</b> not access those input attachments from the fragment shader</li>
-            <li>The {@code attachment} member of any element of {@code pPreserveAttachments} <b>must</b> not be #ATTACHMENT_UNUSED</li>
-            <li>Any given element of {@code pPreserveAttachments} <b>must</b> not also be an element of any other member of the subpass description</li>
+            <li>The {@code attachment} member of each element of {@code pPreserveAttachments} <b>must</b> not be #ATTACHMENT_UNUSED</li>
+            <li>Each element of {@code pPreserveAttachments} <b>must</b> not also be an element of any other member of the subpass description</li>
             <li>If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use <b>must</b> use the same {@code layout}</li>
             <li>If {@code flags} includes #SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX, it <b>must</b> also include #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX.</li>
         </ul>
@@ -3586,7 +3550,7 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
     VkSubpassDescriptionFlags.member("flags", "a bitmask of {@code VkSubpassDescriptionFlagBits} specifying usage of the subpass.")
     VkPipelineBindPoint.member("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying whether this is a compute or graphics subpass. Currently, only graphics subpasses are supported.")
     AutoSize("pInputAttachments", optional = true)..uint32_t.member("inputAttachmentCount", "the number of input attachments.")
-    const..VkAttachmentReference.p.buffer("pInputAttachments", "an array of ##VkAttachmentReference structures (defined below) that lists which of the render pass&#8217;s attachments <b>can</b> be read in the shader during the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to an input attachment unit number in the shader, i.e. if the shader declares an input variable {@code layout(input_attachment_index=X, set=Y, binding=Z)} then it uses the attachment provided in {@code pInputAttachments}[X]. Input attachments <b>must</b> also be bound to the pipeline with a descriptor set, with the input attachment descriptor written in the location (set=Y, binding=Z).")
+    const..VkAttachmentReference.p.buffer("pInputAttachments", "an array of ##VkAttachmentReference structures (defined below) that lists which of the render pass&#8217;s attachments <b>can</b> be read in the fragment shader stage during the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to an input attachment unit number in the shader, i.e. if the shader declares an input variable {@code layout(input_attachment_index=X, set=Y, binding=Z)} then it uses the attachment provided in {@code pInputAttachments}[X]. Input attachments <b>must</b> also be bound to the pipeline with a descriptor set, with the input attachment descriptor written in the location (set=Y, binding=Z). Fragment shaders <b>can</b> use subpass input variables to access the contents of an input attachment at the fragment&#8217;s (x, y, layer) framebuffer coordinates.")
     AutoSize("pColorAttachments", "pResolveAttachments", optional = true)..uint32_t.member("colorAttachmentCount", "the number of color attachments.")
     const..VkAttachmentReference.p.buffer("pColorAttachments", "an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments will be used as color attachments in the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to a fragment shader output location, i.e. if the shader declared an output variable {@code layout(location=X)} then it uses the attachment provided in {@code pColorAttachments}[X].")
     nullable..const..VkAttachmentReference.p.buffer("pResolveAttachments", "{@code NULL} or an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments are resolved to at the end of the subpass, and what layout each attachment will be in during the multisample resolve operation. If {@code pResolveAttachments} is not {@code NULL}, each of its elements corresponds to a color attachment (the element in {@code pColorAttachments} at the same index), and a multisample resolve operation is defined for each attachment. At the end of each subpass, multisample resolve operations read the subpass&#8217;s color attachments, and resolve the samples for each pixel to the same pixel location in the corresponding resolve attachments, unless the resolve attachment index is #ATTACHMENT_UNUSED. If the first use of an attachment in a render pass is as a resolve attachment, then the {@code loadOp} is effectively ignored as the resolve is guaranteed to overwrite all pixels in the render area.")
@@ -3675,9 +3639,9 @@ val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
         <h5>Valid Usage</h5>
         <ul>
             <li>If any two subpasses operate on attachments with overlapping ranges of the same {@code VkDeviceMemory} object, and at least one subpass writes to that area of {@code VkDeviceMemory}, a subpass dependency <b>must</b> be included (either directly or via some intermediate subpasses) between them</li>
-            <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or the attachment indexed by any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is bound to a range of a {@code VkDeviceMemory} object that overlaps with any other attachment in any subpass (including the same subpass), the ##VkAttachmentDescription structures describing them <b>must</b> include #ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT in {@code flags}</li>
-            <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is not #ATTACHMENT_UNUSED, it <b>must</b> be less than {@code attachmentCount}</li>
-            <li>The value of any element of the {@code pPreserveAttachments} member in any given element of {@code pSubpasses} <b>must</b> not be #ATTACHMENT_UNUSED</li>
+            <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or the attachment indexed by any element of {@code pPreserveAttachments} in any element of {@code pSubpasses} is bound to a range of a {@code VkDeviceMemory} object that overlaps with any other attachment in any subpass (including the same subpass), the ##VkAttachmentDescription structures describing them <b>must</b> include #ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT in {@code flags}</li>
+            <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or any element of {@code pPreserveAttachments} in any element of {@code pSubpasses} is not #ATTACHMENT_UNUSED, it <b>must</b> be less than {@code attachmentCount}</li>
+            <li>The value of each element of the {@code pPreserveAttachments} member in each element of {@code pSubpasses} <b>must</b> not be #ATTACHMENT_UNUSED</li>
             <li>For any member of {@code pAttachments} with a {@code loadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL} or {@code VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}.</li>
             <li>For any member of {@code pAttachments} with a {@code loadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR}.</li>
             <li>For any member of {@code pAttachments} with a {@code stencilLoadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR}.</li>
@@ -3796,7 +3760,8 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
     VkRenderPass.member("renderPass", "a {@code VkRenderPass} object defining which render passes the {@code VkCommandBuffer} will be <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#renderpass-compatibility\">compatible</a> with and <b>can</b> be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code renderPass} is ignored.")
     uint32_t.member("subpass", "the index of the subpass within the render pass instance that the {@code VkCommandBuffer} will be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code subpass} is ignored.")
     VkFramebuffer.member("framebuffer", """optionally refers to the {@code VkFramebuffer} object that the {@code VkCommandBuffer} will be rendering to if it is executed within a render pass instance. It <b>can</b> be #NULL_HANDLE if the framebuffer is not known, or if the {@code VkCommandBuffer} will not be executed within a render pass instance.
-<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Specifying the exact framebuffer that the secondary command buffer will be executed with <b>may</b> result in better performance at command buffer execution time.
         </div>""")
     VkBool32.member("occlusionQueryEnable", "indicates whether the command buffer <b>can</b> be executed while an occlusion query is active in the primary command buffer. If this is #TRUE, then this command buffer <b>can</b> be executed whether the primary command buffer has an occlusion query active or not. If this is #FALSE, then the primary command buffer <b>must</b> not have an occlusion query active.")
@@ -4287,6 +4252,8 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 
         If the ##VkSampleLocationsInfoEXT structure in the {@code pNext} chain of ##VkImageMemoryBarrier does not match the sample location state last used to render to the image subresource range specified by {@code subresourceRange} or if no ##VkSampleLocationsInfoEXT structure is in the {@code pNext} chain of ##VkImageMemoryBarrier then the contents of the given image subresource range becomes undefined as if {@code oldLayout} would equal #IMAGE_LAYOUT_UNDEFINED.
 
+        If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then including #IMAGE_ASPECT_COLOR_BIT in the {@code aspectMask} member of {@code subresourceRange} is equivalent to including #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, and (for three-plane formats only) #IMAGE_ASPECT_PLANE_2_BIT_KHR.
+
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code oldLayout} <b>must</b> be #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources affected by the barrier</li>
@@ -4301,7 +4268,10 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
             <li>If {@code subresourceRange}{@code ::levelCount} is not #REMAINING_MIP_LEVELS, {@code subresourceRange}{@code ::levelCount} <b>must</b> be non-zero and <code>subresourceRange::baseMipLevel + subresourceRange::levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>{@code subresourceRange}{@code ::baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code subresourceRange}{@code ::layerCount} is not #REMAINING_ARRAY_LAYERS, {@code subresourceRange}{@code ::layerCount} <b>must</b> be non-zero and <code>subresourceRange::baseArrayLayer subresourceRange::layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>If {@code image} has a depth/stencil format with both depth and stencil components, then {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
+            <li>If {@code image} has a depth/stencil format with both depth and stencil components, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
+            <li>If {@code image} has a single-plane color format or is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either at least one of #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, and #IMAGE_ASPECT_PLANE_2_BIT_KHR; or <b>must</b> include #IMAGE_ASPECT_COLOR_BIT</li>
+            <li>If {@code image} has a multi-planar format with only two planes, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> not include #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
             <li>If either {@code oldLayout} or {@code newLayout} is #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then {@code image} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>

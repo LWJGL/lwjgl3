@@ -217,8 +217,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pPeerMemoryFeatures} <b>must</b> be a pointer to a combination of {@code VkPeerMemoryFeatureFlagBitsKHX} values</li>
-            <li>{@code pPeerMemoryFeatures} <b>must</b> not be 0</li>
+            <li>{@code pPeerMemoryFeatures} <b>must</b> be a pointer to a {@code VkPeerMemoryFeatureFlagsKHX} value</li>
         </ul>
         """,
 
@@ -226,7 +225,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         uint32_t.IN("heapIndex", "the index of the memory heap from which the memory is allocated."),
         uint32_t.IN("localDeviceIndex", "the device index of the physical device that performs the memory access."),
         uint32_t.IN("remoteDeviceIndex", "the device index of the physical device that the memory is allocated for."),
-        Check(1)..VkPeerMemoryFeatureFlagsKHX.p.OUT("pPeerMemoryFeatures", "a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBitsKHX} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.")
+        Check(1)..VkPeerMemoryFeatureFlagsKHX.p.INOUT("pPeerMemoryFeatures", "a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBitsKHX} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.")
     )
 
     void(
@@ -406,8 +405,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-            <li>{@code pModes} <b>must</b> be a pointer to a combination of {@code VkDeviceGroupPresentModeFlagBitsKHX} values</li>
-            <li>{@code pModes} <b>must</b> not be 0</li>
+            <li>{@code pModes} <b>must</b> be a pointer to a {@code VkDeviceGroupPresentModeFlagsKHX} value</li>
             <li>Both of {@code device}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
@@ -434,7 +432,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         VkDevice.IN("device", "the logical device."),
         VkSurfaceKHR.IN("surface", "the surface."),
-        Check(1)..VkDeviceGroupPresentModeFlagsKHX.p.OUT("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHX} that is filled with the supported device group present modes for the surface.")
+        Check(1)..VkDeviceGroupPresentModeFlagsKHX.p.INOUT("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHX} that is filled with the supported device group present modes for the surface.")
     )
 
     DependsOn("VK_KHR_surface")..VkResult(

@@ -127,6 +127,19 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
             <li>{@code pValidationCache} <b>must</b> be a pointer to a {@code VkValidationCacheEXT} handle</li>
         </ul>
 
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+            </ul></dd>
+        </dl>
+
         <h5>See Also</h5>
         ##VkAllocationCallbacks, ##VkValidationCacheCreateInfoEXT
         """,

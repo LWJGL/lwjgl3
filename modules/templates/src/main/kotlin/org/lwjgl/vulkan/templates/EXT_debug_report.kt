@@ -80,7 +80,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
             <dd>12</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>8</dd>
+            <dd>9</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -111,7 +111,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     IntConstant(
         "The extension specification version.",
 
-        "EXT_DEBUG_REPORT_SPEC_VERSION".."8"
+        "EXT_DEBUG_REPORT_SPEC_VERSION".."9"
     )
 
     StringConstant(
