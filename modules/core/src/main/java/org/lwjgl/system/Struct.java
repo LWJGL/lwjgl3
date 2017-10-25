@@ -55,14 +55,18 @@ public abstract class Struct extends Pointer.Default {
         return container;
     }
 
+    private static long getBytes(int elements, int elementSize) {
+        return Integer.toUnsignedLong(elements) * elementSize;
+    }
+
     protected static long __malloc(int elements, int elementSize) {
-        long bytes = apiGetBytes(elements, elementSize);
+        long bytes = getBytes(elements, elementSize);
         apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
         return nmemAlloc(bytes);
     }
 
     protected static ByteBuffer __create(int elements, int elementSize) {
-        apiCheckAllocation(elements, apiGetBytes(elements, elementSize), 0x7FFFFFFFL);
+        apiCheckAllocation(elements, getBytes(elements, elementSize), 0x7FFFFFFFL);
         return BufferUtils.createByteBuffer(elements * elementSize);
     }
 

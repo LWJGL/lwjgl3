@@ -78,3 +78,8 @@ This build includes the following changes:
 - jemalloc: Removed `JEmacros` and moved its functionality to `JEmalloc`.
 - jemalloc: `ChunkHooks` has been replaced by `ExtentHooks`.
 - OpenCL: Removed two confusing `clCompileProgram` overloads.
+
+#### Known Issues
+
+- The `<StructType>.malloc(capacity)` methods allocate memory with invalid size.
+    * Workaround: `<StructType>.calloc(capacity)` or `<StructType>.create(nmemAlloc(capacity * <StructType>.SIZEOF))`

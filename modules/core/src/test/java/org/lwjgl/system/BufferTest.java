@@ -18,12 +18,12 @@ import static org.testng.Assert.*;
 public class BufferTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public static void testLargeBufferNIO() {
+    public void testLargeBufferNIO() {
         // ByteBuffer.allocateDirect supports up to Integer.MAX_VALUE bytes
         BufferUtils.createShortBuffer(0x3FFFFFFF + 1);
     }
 
-    public static void testLargeBuffer() {
+    public void testLargeBuffer() {
         ShortBuffer buffer = memCallocShort(0x3FFFFFFF + 1);
         if (buffer == null) {
             throw new SkipException("Large buffer allocation failed."); // 32-bit JVM
@@ -45,7 +45,7 @@ public class BufferTest {
     }
 
     public void testStructBufferIterable() {
-        JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(10);
+        JNINativeMethod.Buffer buffer = JNINativeMethod.malloc(10);
 
         long expected = fillBuffer(buffer);
         long actual   = 0;
@@ -59,7 +59,7 @@ public class BufferTest {
     }
 
     public void testStructBufferStream() {
-        JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(10);
+        JNINativeMethod.Buffer buffer = JNINativeMethod.malloc(10);
 
         long expected = fillBuffer(buffer);
         long actual = buffer
@@ -73,7 +73,7 @@ public class BufferTest {
     }
 
     public void testStructBufferParallelStream() {
-        JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(10 * 1024);
+        JNINativeMethod.Buffer buffer = JNINativeMethod.malloc(10 * 1024);
 
         long expected = fillBuffer(buffer);
         long actual = buffer

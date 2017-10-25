@@ -79,6 +79,11 @@ This build includes the following changes:
 - jemalloc: `ChunkHooks` has been replaced by `ExtentHooks`.
 - OpenCL: Removed two confusing `clCompileProgram` overloads.
 
+#### Known Issues
+
+- The `<StructType>.malloc(capacity)` methods allocate memory with invalid size.
+    * Workaround: `<StructType>.calloc(capacity)` or `<StructType>.create(nmemAlloc(capacity * <StructType>.SIZEOF))`
+
 ### 3.1.2
 
 _Released 2017 May 15_

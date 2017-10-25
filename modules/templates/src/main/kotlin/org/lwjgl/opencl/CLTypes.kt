@@ -321,7 +321,7 @@ val cl_event_callback = "cl_event_callback".callback(
     OPENCL_PACKAGE, void, "CLEventCallback",
     """
     Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
-    {@code command_exec_status}."
+    {@code command_exec_status}.
     """,
     cl_event.IN("event", "the event"),
     cl_int.IN(

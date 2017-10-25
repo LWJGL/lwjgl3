@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.testng.Assert.*;
 
-@Test
+@Test(singleThreaded = true)
 public class CLTest {
 
     private static CLContextCallback CONTEXT_CALLBACK;
@@ -112,15 +112,15 @@ public class CLTest {
 
             long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(context);
+            assertNotEquals(context, NULL);
 
             long queue = clCreateCommandQueue(context, device, 0, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(queue);
+            assertNotEquals(queue, NULL);
 
             long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(buffer);
+            assertNotEquals(buffer, NULL);
 
             checkCLError(clReleaseCommandQueue(queue));
             checkCLError(clReleaseMemObject(buffer));
@@ -197,7 +197,7 @@ public class CLTest {
             );
 
             long e = eventOut.get(0);
-            assertNotNull(e);
+            assertNotEquals(e, NULL);
 
             CountDownLatch  latch = new CountDownLatch(1);
             CLEventCallback eventCallback;
@@ -230,7 +230,7 @@ public class CLTest {
 
             long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(buffer);
+            assertNotEquals(buffer, NULL);
 
             CountDownLatch eventLatch = new CountDownLatch(1);
 
@@ -271,11 +271,11 @@ public class CLTest {
 
             long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(context);
+            assertNotEquals(context, NULL);
 
             long e = clCreateUserEvent(context, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(e);
+            assertNotEquals(e, NULL);
 
             CountDownLatch eventLatch = new CountDownLatch(1);
 
@@ -284,9 +284,10 @@ public class CLTest {
                 clSetEventCallback(e, CL_COMPLETE, eventCallback = CLEventCallback.create((event, event_command_exec_status, user_data) -> {
                     assertEquals(event, e);
                     assertEquals(event_command_exec_status, CL_COMPLETE);
+                    assertEquals(user_data, 0xDEADBEEF);
 
                     eventLatch.countDown();
-                }), NULL)
+                }), 0xDEADBEEF)
             );
 
             checkCLError(clSetUserEventStatus(e, CL_COMPLETE));
@@ -311,11 +312,11 @@ public class CLTest {
 
             long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(context);
+            assertNotEquals(context, NULL);
 
             long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
             checkCLError(errcode_ret);
-            assertNotNull(buffer);
+            assertNotEquals(buffer, NULL);
 
             long subbuffer;
             try (CLBufferRegion bufferRegion = CLBufferRegion.malloc()) {
@@ -325,7 +326,7 @@ public class CLTest {
                 subbuffer = nclCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion.address(), memAddress(errcode_ret));
                 checkCLError(errcode_ret);
             }
-            assertNotNull(subbuffer);
+            assertNotEquals(subbuffer, NULL);
 
             checkCLError(clReleaseMemObject(buffer));
             checkCLError(clReleaseMemObject(subbuffer));
