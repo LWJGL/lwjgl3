@@ -172,7 +172,7 @@ final class MemoryManage {
                     THREADS.put(threadId, t.getName());
                 }
 
-                Allocation allocation = ALLOCATIONS.put(address, new Allocation(stackWalkGetTrace(4, MemoryUtil.class), size));
+                Allocation allocation = ALLOCATIONS.put(address, new Allocation(stackWalkGetTrace(), size));
                 if (allocation != null) {
                     throw new IllegalStateException("The memory address specified is already being tracked");
                 }

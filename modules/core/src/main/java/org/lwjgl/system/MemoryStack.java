@@ -150,7 +150,7 @@ public class MemoryStack implements AutoCloseable {
                 frameOverflow();
             }
 
-            debugFrames[frameIndex] = stackWalkGetMethod(2, MemoryStack.class);
+            debugFrames[frameIndex] = stackWalkGetMethod(MemoryStack.class);
 
             return super.push();
         }
@@ -161,26 +161,24 @@ public class MemoryStack implements AutoCloseable {
 
         @Override
         public MemoryStack pop() {
-            checkPop(
-                stackWalkGetMethod(2, MemoryStack.class),
-                debugFrames[frameIndex - 1]
-            );
+            Object pushed = debugFrames[frameIndex - 1];
+            Object popped = stackWalkCheckPop(MemoryStack.class, pushed);
+            if (popped != null) {
+                reportAsymmetricPop(pushed, popped);
+            }
             debugFrames[frameIndex - 1] = null;
 
             return super.pop();
         }
 
-        private static void checkPop(Object popped, Object pushed) {
-            if (!stackWalkIsSameMethod(popped, pushed))
+        private static void reportAsymmetricPop(Object pushed, Object popped) {
             //noinspection resource
-            {
-                DEBUG_STREAM.format(
-                    "[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
-                    pushed.toString(),
-                    popped.toString(),
-                    Thread.currentThread()
-                );
-            }
+            DEBUG_STREAM.format(
+                "[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
+                pushed.toString(),
+                popped.toString(),
+                Thread.currentThread()
+            );
         }
 
     }

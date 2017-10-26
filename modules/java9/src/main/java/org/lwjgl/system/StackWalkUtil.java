@@ -14,34 +14,83 @@ final class StackWalkUtil {
     private StackWalkUtil() {
     }
 
-    static boolean stackWalkIsSameMethod(Object a, Object b) {
-        StackWalker.StackFrame f1 = (StackWalker.StackFrame)a;
-        StackWalker.StackFrame f2 = (StackWalker.StackFrame)b;
-
-        return f1.getClassName().equals(f2.getClassName()) && f1.getMethodName().equals(f2.getMethodName());
-    }
-
     static StackTraceElement[] stackWalkArray(Object[] a) {
         return Arrays.stream(((StackWalker.StackFrame[])a))
             .map(StackWalker.StackFrame::toStackTraceElement)
             .toArray(StackTraceElement[]::new);
     }
 
-    static Object stackWalkGetMethod(int offset, Class<?> after) {
+    static Object stackWalkGetMethod(Class<?> after) {
         return StackWalker.getInstance()
             .walk(s -> s
-                .skip(offset)
+                .skip(2)
                 .filter(f -> !f.getClassName().startsWith(after.getName()))
                 .findFirst()
             )
             .orElseThrow(IllegalStateException::new);
     }
 
-    static Object[] stackWalkGetTrace(int offset, Class<?> after) {
+    private static boolean isSameMethod(StackWalker.StackFrame a, StackWalker.StackFrame b) {
+        return isSameMethod(a, b, b.getMethodName());
+    }
+
+    private static boolean isSameMethod(StackWalker.StackFrame a, StackWalker.StackFrame b, String methodName) {
+        return a.getMethodName() == methodName &&
+               a.getClassName().equals(b.getClassName()) &&
+               a.getFileName().equals(b.getFileName());
+    }
+
+    private static boolean isAutoCloseable(StackWalker.StackFrame element, StackWalker.StackFrame pushed) {
+        // Java 9 try-with-resources: synthetic $closeResource
+        if (isSameMethod(element, pushed, "$closeResource")) {
+            return true;
+        }
+
+        // Kotlin T.use: kotlin.AutoCloseable::closeFinally
+        if ("closeFinally".equals(element.getMethodName()) && "AutoCloseable.kt".equals(element.getFileName())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    static Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
+        return StackWalker.getInstance().walk(s -> {
+            Iterator<StackWalker.StackFrame> iter = s
+                .skip(2)
+                .dropWhile(f -> f.getClassName().startsWith(after.getName()))
+                .iterator();
+
+            if (iter.hasNext()) {
+                StackWalker.StackFrame element = iter.next();
+
+                StackWalker.StackFrame pushed = (StackWalker.StackFrame)pushedObj;
+                if (isSameMethod(element, pushed)) {
+                    return null;
+                }
+
+                if (isAutoCloseable(element, pushed) && iter.hasNext()) {
+                    // Some runtimes use a separate method to call AutoCloseable::close in try-with-resources blocks.
+                    // That method suppresses any exceptions thrown by close if necessary.
+                    // When that happens, the pop is 1 level deeper than expected.
+                    element = iter.next();
+                    if (isSameMethod(pushed, element)) {
+                        return null;
+                    }
+                }
+
+                return element;
+            }
+
+            throw new IllegalStateException();
+        });
+    }
+
+    static Object[] stackWalkGetTrace() {
         return StackWalker.getInstance()
             .walk(s -> s
-                .skip(offset)
-                .filter(f -> !f.getClassName().startsWith(after.getName()))
+                .skip(2)
+                .dropWhile(f -> f.getClassName().startsWith("org.lwjgl.system.Memory"))
                 .toArray(StackWalker.StackFrame[]::new)
             );
     }
