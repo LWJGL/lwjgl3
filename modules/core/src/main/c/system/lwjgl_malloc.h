@@ -3,6 +3,7 @@
  * License terms: https://www.lwjgl.org/license
  */
 #pragma once
+#define LWJGL_MALLOC(function) org_lwjgl_##function
 
 // Overridable memory management functions
 
