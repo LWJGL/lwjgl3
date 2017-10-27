@@ -162,5 +162,6 @@ improve the chances of a quick and useful response.
 |[Remotery](https://github.com/Celtoys/Remotery)|A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.|
 |[rpmalloc](https://github.com/rampantpixels/rpmalloc)|A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.|
 |[xxHash](https://github.com/Cyan4973/xxHash)|An Extremely fast Hash algorithm, running at RAM speed limits.|
+|[Zstandard](http://facebook.github.io/zstd/) (zstd)|A fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.|
 
 Use of a binding is subject to the terms of the [corresponding license](https://github.com/LWJGL/lwjgl3/tree/master/doc/3rdparty).

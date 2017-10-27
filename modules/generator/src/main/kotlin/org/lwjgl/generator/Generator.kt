@@ -62,7 +62,8 @@ enum class Binding(
     TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
     VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
     XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
-    YOGA("binding.yoga", "org.lwjgl.util.yoga", arrayOverloads = false);
+    YOGA("binding.yoga", "org.lwjgl.util.yoga", arrayOverloads = false),
+    ZSTD("binding.zstd", "org.lwjgl.util.zstd", arrayOverloads = false);
 
     companion object {
         val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()

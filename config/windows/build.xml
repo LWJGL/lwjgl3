@@ -365,6 +365,33 @@ EXPORTS
             </source>
         </build>
 
+        <!-- zstd -->
+        <build name="lwjgl_zstd" dest="${bin.native}/zstd" if:true="${binding.zstd}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="/DZSTD_MULTITHREAD">
+                    <arg value="/I${src.native}\util\zstd"/>
+                    <arg value="/I${src.native}\util\zstd\common"/>
+                    <arg value="/I${src.native}\util\zstd\compress"/>
+                    <arg value="/I${src.native}\util\zstd\decompress"/>
+                    <arg value="/I${src.native}\util\zstd\dictBuilder"/>
+                    <arg value="/I${src.native}\util\xxhash"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/common/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/compress/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/decompress/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/dictBuilder/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/xxhash/*.c"/>
+                </compile>
+            </beforeCompile>
+            <compileargs>
+                <arg value="/I${src.native}\util\zstd"/>
+                <arg value="/I${src.native}\util\zstd\common"/>
+                <arg value="/I${src.native}\util\zstd\dictBuilder"/>
+            </compileargs>
+            <source>
+                <fileset dir="." includes="${src.generated.native}/util/zstd/*.c"/>
+            </source>
+        </build>
+
         </parallel>
 
         <local name="native-dependencies-uptodate"/>

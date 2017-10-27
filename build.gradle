@@ -194,6 +194,11 @@ enum Artifacts {
         "lwjgl-yoga", "LWJGL - Yoga bindings",
         "An open-source, cross-platform layout library that implements Flexbox.",
         Platforms.ALL
+    ),
+    ZSTD(
+        "lwjgl-zstd", "LWJGL - Zstandard bindings",
+        "Zstandard (zstd) is a fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.",
+        Platforms.ALL
     )
 
     String artifact

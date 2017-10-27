@@ -252,6 +252,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/util/tinyfd" if:true="${binding.tinyfd}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/yoga" if:true="${binding.yoga}"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/util/zstd" if:true="${binding.zstd}"/>
         </kotlinc>
         <touch file="${bin.templates}/touch.txt"/>
     </target>
@@ -359,6 +360,7 @@
             <exclude name="org/lwjgl/util/tinyfd/**" unless:true="${binding.tinyfd}"/>
             <exclude name="org/lwjgl/util/xxhash/**" unless:true="${binding.xxhash}"/>
             <exclude name="org/lwjgl/util/yoga/**" unless:true="${binding.yoga}"/>
+            <exclude name="org/lwjgl/util/zstd/**" unless:true="${binding.zstd}"/>
         </patternset>
     </target>
 
@@ -1174,6 +1176,9 @@
 
         <!-- yoga -->
         <release-module package="org.lwjgl.util.yoga" name="yoga" native-library="lwjgl_yoga" title="yoga" license="yoga" if:true="${binding.yoga}"/>
+
+        <!-- zstd -->
+        <release-module package="org.lwjgl.util.zstd" name="zstd" native-library="lwjgl_zstd" title="zstd" license="zstd" if:true="${binding.zstd}"/>
 
         </parallel>
     </target>

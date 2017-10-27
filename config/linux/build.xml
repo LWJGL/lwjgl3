@@ -305,6 +305,31 @@
                 <fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
             </source>
         </build>
+            
+        <!-- zstd -->
+        <build name="lwjgl_zstd" dest="${bin.native}/zstd" if:true="${binding.zstd}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="-DZSTD_MULTITHREAD">
+                    <arg value="-I${src.native.rel}/util/zstd"/>
+                    <arg value="-I${src.native.rel}/util/zstd/common"/>
+                    <arg value="-I${src.native.rel}/util/zstd/compress"/>
+                    <arg value="-I${src.native.rel}/util/zstd/decompress"/>
+                    <arg value="-I${src.native.rel}/util/zstd/dictBuilder"/>
+                    <arg value="-I${src.native.rel}/util/xxhash"/>
+                    <fileset dir="." includes="${src.native.rel}/util/zstd/common/*.c"/>
+                    <fileset dir="." includes="${src.native.rel}/util/zstd/compress/*.c"/>
+                    <fileset dir="." includes="${src.native.rel}/util/zstd/decompress/*.c"/>
+                    <fileset dir="." includes="${src.native.rel}/util/zstd/dictBuilder/*.c"/>
+                    <fileset dir="." includes="${src.native.rel}/util/xxhash/*.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.native.rel}/util/zstd"/>
+                <arg value="-I${src.native.rel}/util/zstd/common"/>
+                <arg value="-I${src.native.rel}/util/zstd/dictBuilder"/>
+                <fileset dir="." includes="${src.generated.native}/util/zstd/*.c"/>
+            </source>
+        </build>
 
         </parallel>
 
