@@ -4,9 +4,11 @@
  */
 package org.lwjgl.demo.glfw;
 
+import org.lwjgl.*;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
@@ -18,6 +20,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** GLFW events demo. */
@@ -50,7 +53,73 @@ public final class Events {
         }
     }
 
+    private static int gcd(int a, int b) {
+        return b != 0 ? gcd(b, a % b) : a;
+    }
+
+    private static String ratio(int w, int h) {
+        int gcd = gcd(w, h);
+
+        int ratioX = w / gcd;
+        int ratioY = h / gcd;
+
+        if (ratioX == 8) {
+            ratioX <<= 1;
+            ratioY <<= 1;
+        }
+
+        return ratioX + ":" + ratioY;
+    }
+
     private static void demo() {
+        try (MemoryStack s = stackPush()) {
+            IntBuffer pi = s.mallocInt(1);
+            IntBuffer pj = s.mallocInt(1);
+
+            FloatBuffer px = s.mallocFloat(1);
+            FloatBuffer py = s.mallocFloat(1);
+
+            long primaryMonitor = glfwGetPrimaryMonitor();
+
+            PointerBuffer monitors = glfwGetMonitors();
+            for (int i = 0; i < monitors.remaining(); i++) {
+                long monitor = monitors.get(0);
+
+                System.out.format("%nMonitor %d:%n----------%n", i);
+                System.out.format("\tName: %s%s%n", glfwGetMonitorName(monitor), primaryMonitor == monitor ? " (primary)" : "");
+
+                glfwGetMonitorPhysicalSize(monitor, pi, pj);
+                int widthMM  = pi.get(0);
+                int heightMM = pj.get(0);
+
+                glfwGetMonitorPos(monitor, pi, pj);
+                int xpos = pi.get(0);
+                int ypos = pj.get(0);
+
+                glfwGetMonitorContentScale(monitor, px, py);
+                float xscale = px.get(0);
+                float yscale = py.get(0);
+
+                double MM_TO_INCH = 0.0393701;
+
+                GLFWVidMode mode = glfwGetVideoMode(monitor);
+
+                System.out.format("\tCurrent mode: %d x %d @ %d Hz (%s, R%dG%dB%d)%n",
+                    mode.width(), mode.height(),
+                    mode.refreshRate(),
+                    ratio(mode.width(), mode.height()),
+                    mode.redBits(), mode.greenBits(), mode.blueBits()
+                );
+                System.out.format("\tContent scale: %f x %f%n", xscale, yscale);
+                System.out.format("\tPhysical size: %dmm x %dmm (%d\", %d ppi)%n",
+                    widthMM, heightMM,
+                    Math.round(Math.sqrt(widthMM * widthMM + heightMM * heightMM) * MM_TO_INCH), // inches
+                    Math.round(mode.width() / (widthMM * MM_TO_INCH) * xscale) // dpi
+                );
+                System.out.format("\tVirtual position: %d, %d%n", xpos, ypos);
+            }
+        }
+
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
@@ -59,7 +128,27 @@ public final class Events {
             throw new IllegalStateException("Failed to create GLFW window.");
         }
 
-        System.out.println("Window opened.");
+        System.out.format("%nWindow opened:%n--------------%n");
+        try (MemoryStack s = stackPush()) {
+            IntBuffer pi = s.mallocInt(1);
+            IntBuffer pj = s.mallocInt(1);
+            IntBuffer pk = s.mallocInt(1);
+            IntBuffer pl = s.mallocInt(1);
+
+            FloatBuffer px = s.mallocFloat(1);
+            FloatBuffer py = s.mallocFloat(1);
+
+            glfwGetWindowSize(window, pi, pj);
+            System.out.format("\tSize: %d x %d%n", pi.get(0), pj.get(0));
+            glfwGetWindowFrameSize(window, pi, pj, pk, pl);
+            System.out.format("\tFrame size: %d, %d, %d, %d%n", pi.get(0), pj.get(0), pk.get(0), pl.get(0));
+            glfwGetWindowContentScale(window, px, py);
+            System.out.format("\tContent scale: %f x %f%n", px.get(0), py.get(0));
+            glfwGetFramebufferSize(window, pi, pj);
+            System.out.format("\tFramebuffer size: %d x %d%n", pi.get(0), pj.get(0));
+            glfwGetWindowPos(window, pi, pj);
+            System.out.format("\tPosition: %d, %d%n%n", pi.get(0), pj.get(0));
+        }
 
         IntBuffer w    = memAllocInt(1);
         IntBuffer h    = memAllocInt(1);

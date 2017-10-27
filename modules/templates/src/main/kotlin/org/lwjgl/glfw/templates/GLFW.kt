@@ -1000,6 +1000,28 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         since = "version 3.0"
     )
 
+    void(
+        "GetMonitorContentScale",
+        """
+        Retrieves the content scale for the specified monitor.
+
+        This function retrieves the content scale for the specified monitor. The content scale is the ratio between the current DPI and the platform's default
+        DPI. If you scale all pixel dimensions by this scale then your content should appear at an appropriate size. This is especially important for text and
+        any UI elements.
+
+        The content scale may depend on both the monitor resolution and pixel density and on user settings. It may be very different from the raw DPI
+        calculated from the physical size and current resolution.
+
+        This function must only be called from the main thread.
+        """,
+
+        GLFWmonitor.IN("monitor", "the monitor to query"),
+        nullable..Check(1)..float_p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
+        nullable..Check(1)..float_p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+
+        since = "version 3.3"
+    )
+
     const..charUTF8_p(
         "GetMonitorName",
         """
@@ -1558,6 +1580,26 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or #NULL"),
 
         since = "version 3.1"
+    )
+
+    void(
+        "GetWindowContentScale",
+        """
+        Retrieves the content scale for the specified window.
+
+        This function retrieves the content scale for the specified window. The content scale is the ratio between the current DPI and the platform's default
+        DPI. If you scale all pixel dimensions by this scale then your content should appear at an appropriate size. This is especially important for text and
+        any UI elements.
+
+        On systems where each monitor can have its own content scale, the window content scale will depend on which monitor the system considers the window to
+        be on.
+        """,
+
+        GLFWwindow.IN("window", "the window to query"),
+        nullable..Check(1)..float_p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
+        nullable..Check(1)..float_p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+
+        since = "version 3.3"
     )
 
     void(
