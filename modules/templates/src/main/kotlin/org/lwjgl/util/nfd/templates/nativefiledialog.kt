@@ -17,11 +17,6 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
     nativeImport("nfd_common.h")
     nativeImport("nfd.h")
 
-    nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4711))
-#endif""")
-
     documentation =
         """
         Bindings to ${url("https://github.com/mlabbe/nativefiledialog", "Native File Dialog")}, a tiny, neat C library that portably invokes native file open

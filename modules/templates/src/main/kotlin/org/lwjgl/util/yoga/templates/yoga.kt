@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.util.yoga.*
 
 val yoga = "Yoga".nativeClass(YOGA_PACKAGE, prefix = "YG", prefixConstant = "YG", prefixMethod = "YG", library = "lwjgl_yoga") {
-    nativeDirective("""#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4711))
-#endif""", beforeIncludes = true)
-
     nativeDirective("""#define FB_ASSERTIONS_ENABLED 0
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()

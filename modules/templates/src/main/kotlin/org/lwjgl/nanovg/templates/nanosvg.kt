@@ -10,7 +10,7 @@ import org.lwjgl.nanovg.*
 val nanosvg = "NanoSVG".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NSVG", library = NANOVG_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710 4711))
+    __pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
     includeNanoVGAPI("""#define NANOSVG_IMPLEMENTATION

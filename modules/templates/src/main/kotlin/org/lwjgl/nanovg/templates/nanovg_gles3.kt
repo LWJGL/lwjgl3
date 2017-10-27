@@ -11,7 +11,7 @@ import org.lwjgl.opengl.*
 val nanovg_gles3 = "NanoVGGLES3".dependsOn(Binding.OPENGLES)?.nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG", library = NANOVG_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710 4711))
+    __pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
     includeNanoVGAPI("""#define NANOVG_GLES3_IMPLEMENTATION

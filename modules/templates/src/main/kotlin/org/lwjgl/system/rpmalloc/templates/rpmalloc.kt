@@ -10,11 +10,7 @@ import org.lwjgl.system.rpmalloc.*
 val RPMALLOC_LIBRARY = "LibRPmalloc.initialize();"
 
 val rpmalloc = "RPmalloc".nativeClass(RPMALLOC_PACKAGE, prefix = "RP", prefixConstant = "RP", library = RPMALLOC_LIBRARY) {
-    nativeDirective("""#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4711))
-#endif
-
-DISABLE_WARNINGS()
+    nativeDirective("""DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
 #include "rpmalloc.c"
 ENABLE_WARNINGS()""")

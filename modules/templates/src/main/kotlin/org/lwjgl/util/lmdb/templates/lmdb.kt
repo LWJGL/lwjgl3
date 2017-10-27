@@ -10,7 +10,7 @@ import org.lwjgl.util.lmdb.*
 val lmdb = "LMDB".nativeClass(LMDB_PACKAGE, prefix = "MDB", prefixMethod = "mdb_", library = "lwjgl_lmdb") {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710 4711))
+    __pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
     nativeDirective(

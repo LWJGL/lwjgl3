@@ -22,11 +22,6 @@ fun config() {
 }
 
 fun NativeClass.remoteryIncludes(type: String) {
-     nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4711))
-#endif""", beforeIncludes = true)
-
     nativeDirective(
         """DISABLE_WARNINGS()
 #define RMT_USE_OPENGL 1

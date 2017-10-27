@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.util.tinyexr.*
 
 val tinyexr = "TinyEXR".nativeClass(TINYEXR_PACKAGE, prefix = "TINYEXR", prefixMethod = "", library = "lwjgl_tinyexr") {
-    nativeDirective("""#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4711))
-#endif""", beforeIncludes = true)
-
     nativeDirective("""DISABLE_WARNINGS()
 #include "tinyexr.h"
 ENABLE_WARNINGS()""")

@@ -37,7 +37,7 @@
     <macrodef name="build">
         <attribute name="name"/>
         <attribute name="dest"/>
-        <attribute name="flags" default="/Wall /WX"/>
+        <attribute name="flags" default="/Wall /WX /wd4711"/>
         <element name="beforeCompile" optional="true"/>
         <element name="compileargs" optional="true"/>
         <element name="source"/>
