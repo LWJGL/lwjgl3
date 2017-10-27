@@ -91,7 +91,7 @@ public final class TruetypeOversample {
         chardata = STBTTPackedchar.malloc(6 * 128);
 
         try (STBTTPackContext pc = STBTTPackContext.malloc()) {
-            ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
+            ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 512 * 1024);
 
             ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
 

@@ -59,7 +59,7 @@ public final class IOUtil {
                         break;
                     }
                     if (buffer.remaining() == 0) {
-                        buffer = resizeBuffer(buffer, buffer.capacity() * 2);
+                        buffer = resizeBuffer(buffer, buffer.capacity() * 3 / 2); // 50%
                     }
                 }
             }

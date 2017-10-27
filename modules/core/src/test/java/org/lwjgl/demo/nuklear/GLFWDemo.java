@@ -102,7 +102,7 @@ public class GLFWDemo {
 
     public GLFWDemo() {
         try {
-            this.ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
+            this.ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 512 * 1024);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

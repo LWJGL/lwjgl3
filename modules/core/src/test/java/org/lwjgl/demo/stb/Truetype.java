@@ -32,7 +32,7 @@ public final class Truetype extends FontDemo {
         super(24, filePath);
 
         try {
-            ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
+            ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 512 * 1024);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
