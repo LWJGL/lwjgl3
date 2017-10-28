@@ -29,7 +29,7 @@ class ReturnValue(override val nativeType: NativeType) : QualifiedType {
     // --- [ Helper functions & properties ] ---
 
     internal val isSpecial
-        get() = (hasUnsafe && nativeType !is ArrayType)
+        get() = (hasUnsafe && nativeType !is ArrayType) || nativeType.mapping === PrimitiveMapping.BOOLEAN4
 
     internal val isVoid
         get() = nativeType.mapping === TypeMapping.VOID
