@@ -548,6 +548,7 @@
             <include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
             <include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
             <include name="org/lwjgl/demo/util/yoga/**" if:true="${yoga}"/>
+            <include name="org/lwjgl/demo/util/zstd/**" if:true="${binding.zstd}"/>
 
             <include name="org/lwjgl/demo/vulkan/**" if:true="${vulkan}"/>
 

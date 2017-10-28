@@ -122,7 +122,6 @@
                 <arg value="-I${src.native.rel}/system/dyncall"/>
                 <fileset dir=".">
                     <include name="${src.native}/system/*.c"/>
-                    <exclude name="${src.native}/system/lwjgl_malloc.c"/>
                     <include name="${src.generated.native}/system/*.c"/>
                     <include name="${src.generated.native}/system/dyncall/*.c"/>
                     <include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
@@ -166,7 +165,6 @@
             <source>
                 <arg value="-I${src.native.rel}/nanovg"/>
                 <arg value="-I${src.native.rel}/stb"/>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
             </source>
         </build>
@@ -176,7 +174,6 @@
             <source>
                 <arg value="-I${src.native.rel}/util/nfd"/>
                 <arg value="-I${src.native.rel}/util/nfd/include"/>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
                 <fileset dir="." includes="${src.native}/util/nfd/nfd_cocoa.m"/>
                 <fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
@@ -221,7 +218,6 @@
         <build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
             <source>
                 <arg value="-I${src.native.rel}/util/par"/>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
             </source>
         </build>
@@ -257,7 +253,6 @@
         <build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
             <source>
                 <arg value="-I${src.native.rel}/stb"/>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/stb/*.c"/>
             </source>
         </build>
@@ -293,9 +288,7 @@
         <!-- xxHash -->
         <build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
             <source>
-                <arg value="-I${src.native.rel}/system"/>
                 <arg value="-I${src.native.rel}/util/xxhash"/>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
             </source>
         </build>

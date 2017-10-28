@@ -120,7 +120,6 @@ EXPORTS
             <source>
                 <fileset dir=".">
                     <include name="${src.native}/system/*.c"/>
-                    <exclude name="${src.native}/system/lwjgl_malloc.c"/>
                     <include name="${src.generated.native}/system/*.c"/>
                     <include name="${src.generated.native}/system/dyncall/*.c"/>
                     <include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
@@ -171,7 +170,6 @@ EXPORTS
                 <arg value="/I${src.native}\stb"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
             </source>
         </build>
@@ -191,7 +189,6 @@ EXPORTS
                 <arg value="/I${src.native}\util\nfd\include"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
             </source>
             <linkargs>
@@ -260,7 +257,6 @@ EXPORTS
                 <arg value="/I${src.native}\util\par"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
             </source>
         </build>
@@ -301,7 +297,6 @@ EXPORTS
                 <arg value="/I${src.native}\stb"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/stb/*.c"/>
             </source>
         </build>
@@ -347,11 +342,9 @@ EXPORTS
         <!-- xxHash -->
         <build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
             <compileargs>
-                <arg value="/I${src.native}\system"/>
                 <arg value="/I${src.native}\util\xxhash"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
                 <fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
             </source>
         </build>
