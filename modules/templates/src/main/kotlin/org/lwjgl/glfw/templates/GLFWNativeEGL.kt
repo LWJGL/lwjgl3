@@ -35,7 +35,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(packageName = GLFW_PACKAGE, nati
             This function may be called from any thread. Access is not synchronized.
             """,
 
-        GLFWwindow.IN("window", "a GLFW window"),
+        GLFWwindow_p.IN("window", "a GLFW window"),
 
         returnDoc = "the {@code EGLContext} of the specified window, or EGL10#EGL_NO_CONTEXT if an error occurred",
         since = "version 3.0"
@@ -49,7 +49,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(packageName = GLFW_PACKAGE, nati
             This function may be called from any thread. Access is not synchronized.
             """,
 
-        GLFWwindow.IN("window", ""),
+        GLFWwindow_p.IN("window", ""),
 
         returnDoc = "the {@code EGLSurface} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred",
         since = "version 3.0"

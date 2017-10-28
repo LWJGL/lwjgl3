@@ -30,7 +30,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
         returnDoc = "The {@code RRCrtc} of the specified monitor, or {@code None} if an error occurred.",
         since = "version 3.1"
     )
@@ -43,7 +43,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
         returnDoc = "The {@code RROutput} of the specified monitor, or {@code None} if an error occurred.",
         since = "version 3.1"
     )
@@ -56,7 +56,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow.IN("window", "a GLFW window"),
+        GLFWwindow_p.IN("window", "a GLFW window"),
         returnDoc = " The {@code Window} of the specified window, or {@code None} if an error occurred.",
         since = "version 3.0"
     )

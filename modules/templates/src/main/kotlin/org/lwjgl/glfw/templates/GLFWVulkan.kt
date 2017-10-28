@@ -141,7 +141,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Binding.VULKAN)?.nativeClass(packageName
         """,
 
         VkInstance.IN("instance", "the Vulkan instance to create the surface in"),
-        GLFWwindow.IN("window", "the window to create the surface for"),
+        GLFWwindow_p.IN("window", "the window to create the surface for"),
         nullable..const..VkAllocationCallbacks.p.IN("allocator", "the allocator to use, or #NULL to use the default allocator."),
         Check(1)..VkSurfaceKHR.p.OUT("surface", "where to store the handle of the surface. This is set to VK10#VK_NULL_HANDLE if an error occurred."),
 
