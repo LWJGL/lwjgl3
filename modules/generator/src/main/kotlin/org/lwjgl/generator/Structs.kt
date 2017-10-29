@@ -487,7 +487,10 @@ $indentation}"""
 
         println("import java.nio.*;\n")
 
-        if (mallocable || members.any { m -> m.nativeType.let { it is PointerType && it.mapping === PointerMapping.DATA_POINTER && (it.elementType !is StructType || m is StructMemberArray) } })
+        if (mallocable || members.any { m -> m.nativeType.let {
+            (it.mapping === PointerMapping.DATA_POINTER && it is PointerType && (it.elementType !is StructType || m is StructMemberArray)) ||
+            (it.mapping === PrimitiveMapping.POINTER && m is StructMemberArray && it !is StructType)
+        } })
             println("import org.lwjgl.*;")
         println("import org.lwjgl.system.*;\n")
 
