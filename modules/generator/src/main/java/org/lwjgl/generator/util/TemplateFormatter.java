@@ -40,8 +40,8 @@ public class TemplateFormatter {
         radioFunc = new JRadioButton("Functions");
         radioDoc = new JRadioButton("Documentation");
 
-        prefix = new JTextField("GL", 4);
-        prefixTypes = new JCheckBox("Prefix types", true);
+        prefix = new JTextField("", 4);
+        prefixTypes = new JCheckBox("Prefix types", false);
 
         ButtonGroup radioGroup = new ButtonGroup();
 
@@ -391,7 +391,7 @@ public class TemplateFormatter {
         "(?:const\\s+)?" + // const
         "(?:(?:un)?signed\\s+)?" + // (un)signed
         "(?:(?:struct|enum)\\s+)?" + // struct or enum (ignored)
-        "[0-9a-zA-Z_]++" + // type
+        "(?:long\\s+)*[0-9a-zA-Z_]++" + // type
         "(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)" + // pointer. This is a little funny because we can have whitespace on either side of *
         "(?:/[*]\\s*)?" + // name may be wrapped in comments /*
         "[0-9a-zA-Z_]+" + // function or parameter name
@@ -411,7 +411,7 @@ public class TemplateFormatter {
         "(const\\s+)?" +
         "((?:un)?signed\\s+)?" +
         "(?:(?:struct|enum)\\s+)?" +
-        "([0-9a-zA-Z_]++)" +
+        "((?:long\\s+)*[0-9a-zA-Z_]++)" +
         "(\\s+const)?\\s*([*]+)?\\s*" +
         "(?:/[*]\\s*)?" +
         "([0-9a-zA-Z_]+)" +
@@ -430,10 +430,7 @@ public class TemplateFormatter {
         if (!prefix.isEmpty() && !type.substring(0, prefix.length()).equalsIgnoreCase(prefix)) {
             builder.append(prefix);
         }
-        builder.append(type);
-        if ("unsigned".equals(type) || "signed".equals(type)) {
-            builder.append("_int");
-        }
+        builder.append(type.replace(' ', '_'));
     }
 
     private static String formatFunctions(String input, String prefix, boolean prefixTypes) {
