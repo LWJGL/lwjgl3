@@ -272,9 +272,9 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDebugReportCallbackCreateInfoEXT structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pCallback} <b>must</b> be a pointer to a {@code VkDebugReportCallbackEXT} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkDebugReportCallbackCreateInfoEXT structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pCallback} <b>must</b> be a valid pointer to a {@code VkDebugReportCallbackEXT} handle</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -324,7 +324,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <ul>
             <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
             <li>{@code callback} <b>must</b> be a valid {@code VkDebugReportCallbackEXT} handle</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>{@code callback} <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
         </ul>
 

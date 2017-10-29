@@ -41,7 +41,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>06/08/2017</dd>
+            <dd>2017-06-08</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

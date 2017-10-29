@@ -88,7 +88,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>03/21/2017</dd>
+            <dd>2017-03-21</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

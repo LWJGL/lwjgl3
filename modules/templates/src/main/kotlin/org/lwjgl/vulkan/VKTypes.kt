@@ -379,9 +379,9 @@ val VkInstanceCreateInfo = struct(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDebugReportCallbackCreateInfoEXT or ##VkValidationFlagsEXT</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>If {@code pApplicationInfo} is not {@code NULL}, {@code pApplicationInfo} <b>must</b> be a pointer to a valid ##VkApplicationInfo structure</li>
-            <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
-            <li>If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} <b>must</b> be a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings</li>
+            <li>If {@code pApplicationInfo} is not {@code NULL}, {@code pApplicationInfo} <b>must</b> be a valid pointer to a valid ##VkApplicationInfo structure</li>
+            <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a valid pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
+            <li>If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} <b>must</b> be a valid pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings</li>
         </ul>
 
         <h5>See Also</h5>
@@ -405,9 +405,9 @@ val VkAllocationCallbacks = struct(VULKAN_PACKAGE, "VkAllocationCallbacks") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pfnAllocation} <b>must</b> be a pointer to a valid user-defined ##VkAllocationFunction</li>
-            <li>{@code pfnReallocation} <b>must</b> be a pointer to a valid user-defined ##VkReallocationFunction</li>
-            <li>{@code pfnFree} <b>must</b> be a pointer to a valid user-defined ##VkFreeFunction</li>
+            <li>{@code pfnAllocation} <b>must</b> be a valid pointer to a valid user-defined ##VkAllocationFunction</li>
+            <li>{@code pfnReallocation} <b>must</b> be a valid pointer to a valid user-defined ##VkReallocationFunction</li>
+            <li>{@code pfnFree} <b>must</b> be a valid pointer to a valid user-defined ##VkFreeFunction</li>
             <li>If either of {@code pfnInternalAllocation} or {@code pfnInternalFree} is not {@code NULL}, both <b>must</b> be valid callbacks</li>
         </ul>
 
@@ -461,7 +461,14 @@ val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures"
             <li>Out-of-bounds writes <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory.</li>
             <li>Out-of-bounds atomics <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory, and return an undefined value.</li>
             <li>
-                Vertex input attributes are considered out of bounds if the address of the attribute plus the size of the attribute is greater than the size of the bound buffer. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.
+                Vertex input attributes are considered out of bounds if the offset of the attribute in the bound vertex buffer range plus the size of the attribute is greater than either:
+                <ul>
+                    <li>{@code vertexBufferRangeSize}, if <code>bindingStride == 0</code>; or</li>
+                    <li><code>(vertexBufferRangeSize - (vertexBufferRangeSize % bindingStride))</code></li>
+                </ul>
+
+                where {@code vertexBufferRangeSize} is the byte size of the memory range bound to the vertex buffer binding and {@code bindingStride} is the byte stride of the corresponding vertex input binding. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.
+
                 <ul>
                     <li>
                         If a vertex input attribute is out of bounds, it will be assigned one of the following values:
@@ -493,7 +500,7 @@ val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures"
     VkBool32.member("largePoints", "indicates whether points with size greater than 1.0 are supported. If this feature is not enabled, only a point size of 1.0 written by a shader is supported. The range and granularity of supported point sizes are indicated by the {@code pointSizeRange} and {@code pointSizeGranularity} members of the ##VkPhysicalDeviceLimits structure, respectively.")
     VkBool32.member("alphaToOne", "indicates whether the implementation is able to replace the alpha value of the color fragment output from the fragment shader with the maximum representable alpha value for fixed-point colors or 1.0 for floating-point colors. If this feature is not enabled, then the {@code alphaToOneEnable} member of the ##VkPipelineMultisampleStateCreateInfo structure <b>must</b> be set to #FALSE. Otherwise setting {@code alphaToOneEnable} to #TRUE will enable alpha-to-one behavior.")
     VkBool32.member("multiViewport", "indicates whether more than one viewport is supported. If this feature is not enabled, the {@code viewportCount} and {@code scissorCount} members of the ##VkPipelineViewportStateCreateInfo structure <b>must</b> be set to 1. Similarly, the {@code viewportCount} parameter to the #CmdSetViewport() command and the {@code scissorCount} parameter to the #CmdSetScissor() command <b>must</b> be 1, and the {@code firstViewport} parameter to the #CmdSetViewport() command and the {@code firstScissor} parameter to the #CmdSetScissor() command <b>must</b> be 0.")
-    VkBool32.member("samplerAnisotropy", "indicates whether anisotropic filtering is supported. If this feature is not enabled, the {@code maxAnisotropy} member of the ##VkSamplerCreateInfo structure <b>must</b> be 1.0.")
+    VkBool32.member("samplerAnisotropy", "indicates whether anisotropic filtering is supported. If this feature is not enabled, the {@code anisotropyEnable} member of the ##VkSamplerCreateInfo structure <b>must</b> be #FALSE.")
     VkBool32.member("textureCompressionETC2", """indicates whether all of the ETC2 and EAC compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
 
         <ul>
@@ -741,7 +748,7 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
     float.array("viewportBoundsRange", """the <code>[minimum, maximum]</code> range that the corners of a viewport <b>must</b> be contained in. This range <b>must</b> be at least <code>[-2 × size, 2 × size - 1]</code>, where <code>size = max(maxViewportDimensions[0], maxViewportDimensions[1])</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The intent of the {@code viewportBoundsRange} limit is to allow a maximum sized viewport to be arbitrarily shifted relative to the output target as long as at least some portion intersects. This would give a bounds limit of <code>[-size {plus} 1, 2 {times} size - 1]</code> which would allow all possible non-empty-set intersections of the output target and the viewport. Since these numbers are typically powers of two, picking the signed number range using the smallest possible number of bits ends up with the specified range.
+        The intent of the {@code viewportBoundsRange} limit is to allow a maximum sized viewport to be arbitrarily shifted relative to the output target as long as at least some portion intersects. This would give a bounds limit of <code>[-size + 1, 2 × size - 1]</code> which would allow all possible non-empty-set intersections of the output target and the viewport. Since these numbers are typically powers of two, picking the signed number range using the smallest possible number of bits ends up with the specified range.
         </div>""", size = 2)
     uint32_t.member("viewportSubPixelBits", "the number of bits of subpixel precision for viewport bounds. The subpixel precision that floating-point viewport bounds are interpreted at is given by this limit.")
     size_t.member("minMemoryMapAlignment", "the minimum required: alignment, in bytes, of host visible memory allocations within the host address space. When mapping a memory allocation with #MapMemory(), subtracting {@code offset} bytes from the returned pointer will always produce an integer multiple of this limit. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-device-hostaccess\">the “Host Access to Device Memory Objects” section</a>.")
@@ -904,9 +911,9 @@ val VkPhysicalDeviceMemoryProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceM
         <h5>Description</h5>
         The ##VkPhysicalDeviceMemoryProperties structure describes a number of <em>memory heaps</em> as well as a number of <em>memory types</em> that <b>can</b> be used to access memory allocated in those heaps. Each heap describes a memory resource of a particular size, and each memory type describes a set of memory properties (e.g. host cached vs uncached) that <b>can</b> be used with a given memory heap. Allocations using a particular memory type will consume resources from the heap indicated by that memory type's heap index. More than one memory type <b>may</b> share each heap, and the heaps and memory types provide a mechanism to advertise an accurate size of the physical memory resources while allowing the memory to be used with a variety of different properties.
 
-        The number of memory heaps is given by {@code memoryHeapCount} and is less than or equal to #MAX_MEMORY_HEAPS. Each heap is described by an element of the {@code memoryHeaps} array, as a ##VkMemoryHeap structure. The number of memory types available across all memory heaps is given by {@code memoryTypeCount} and is less than or equal to #MAX_MEMORY_TYPES. Each memory type is described by an element of the {@code memoryTypes} array, as a ##VkMemoryType structure.
+        The number of memory heaps is given by {@code memoryHeapCount} and is less than or equal to #MAX_MEMORY_HEAPS. Each heap is described by an element of the {@code memoryHeaps} array as a ##VkMemoryHeap structure. The number of memory types available across all memory heaps is given by {@code memoryTypeCount} and is less than or equal to #MAX_MEMORY_TYPES. Each memory type is described by an element of the {@code memoryTypes} array as a ##VkMemoryType structure.
 
-        At least one heap <b>must</b> include #MEMORY_HEAP_DEVICE_LOCAL_BIT in ##VkMemoryHeap{@code ::flags}. If there are multiple heaps that all have similar performance characteristics, they <b>may</b> all include #MEMORY_HEAP_DEVICE_LOCAL_BIT. In a unified memory architecture (UMA) system, there is often only a single memory heap which is considered to be equally "{@code local}" to the host and to the device, and such an implementation <b>must</b> advertise the heap as device-local.
+        At least one heap <b>must</b> include #MEMORY_HEAP_DEVICE_LOCAL_BIT in ##VkMemoryHeap{@code ::flags}. If there are multiple heaps that all have similar performance characteristics, they <b>may</b> all include #MEMORY_HEAP_DEVICE_LOCAL_BIT. In a unified memory architecture (UMA) system there is often only a single memory heap which is considered to be equally "{@code local}" to the host and to the device, and such an implementation <b>must</b> advertise the heap as device-local.
 
         Each memory type returned by #GetPhysicalDeviceMemoryProperties() <b>must</b> have its {@code propertyFlags} set to one of the following values:
 
@@ -924,37 +931,55 @@ val VkPhysicalDeviceMemoryProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceM
 
         There <b>must</b> be at least one memory type with both the #MEMORY_PROPERTY_HOST_VISIBLE_BIT and #MEMORY_PROPERTY_HOST_COHERENT_BIT bits set in its {@code propertyFlags}. There <b>must</b> be at least one memory type with the #MEMORY_PROPERTY_DEVICE_LOCAL_BIT bit set in its {@code propertyFlags}.
 
-        The memory types are sorted according to a preorder which serves to aid in easily selecting an appropriate memory type. Given two memory types X and Y, the preorder defines <code>X {leq} Y</code> if:
+        For each pair of elements <b>X</b> and <b>Y</b> returned in {@code memoryTypes}, <b>X</b> <b>must</b> be placed at a lower index position than <b>Y</b> if:
 
         <ul>
-            <li>the memory property bits set for X are a strict subset of the memory property bits set for Y. Or,</li>
-            <li>the memory property bits set for X are the same as the memory property bits set for Y, and X uses a memory heap with greater or equal performance (as determined in an implementation-specific manner).</li>
+            <li>either the set of bit flags returned in the {@code propertyFlags} member of <b>X</b> is a strict subset of the set of bit flags returned in the {@code propertyFlags} member of <b>Y</b>.</li>
+            <li>or the {@code propertyFlags} members of <b>X</b> and <b>Y</b> are equal, and <b>X</b> belongs to a memory heap with greater performance (as determined in an implementation-specific manner).</li>
         </ul>
 
-        Memory types are ordered in the list such that X is assigned a lesser {@code memoryTypeIndex} than Y if <code>(X {leq} Y) {land} {lnot} (Y {leq} X)</code> according to the preorder. Note that the list of all allowed memory property flag combinations above satisfies this preorder, but other orders would as well. The goal of this ordering is to enable applications to use a simple search loop in selecting the proper memory type, along the lines of:
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        There is no ordering requirement between <b>X</b> and <b>Y</b> elements for the case their {@code propertyFlags} members are not in a subset relation. That potentially allows more than one possible way to order the same set of memory types. Notice that the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory-device-bitmask-list">list of all allowed memory property flag combinations</a> is written in the required order. But if instead #MEMORY_PROPERTY_DEVICE_LOCAL_BIT was before #MEMORY_PROPERTY_HOST_VISIBLE_BIT | #MEMORY_PROPERTY_HOST_COHERENT_BIT, the list would still be in the required order.
+        </div>
+
+        This ordering requirement enables applications to use a simple search loop to select the desired memory type along the lines of:
 
         <code><pre>
-￿// Find a memory type in "memoryTypeBits" that includes all of "properties"
-￿int32_t FindProperties(uint32_t memoryTypeBits, VkMemoryPropertyFlags properties)
-￿{
-￿    for (int32_t i = 0; i < memoryTypeCount; ++i)
-￿    {
-￿        if ((memoryTypeBits & (1 << i)) &&
-￿            ((memoryTypes[i].propertyFlags & properties) == properties))
-￿            return i;
+￿// Find a memory in `memoryTypeBitsRequirement` that includes all of `requiredProperties`
+￿int32_t findProperties(const VkPhysicalDeviceMemoryProperties* pMemoryProperties,
+￿                       uint32_t memoryTypeBitsRequirement,
+￿                       VkMemoryPropertyFlags requiredProperties) {
+￿    const uint32_t memoryCount = pMemoryProperties->memoryTypeCount;
+￿    for (uint32_t memoryIndex = 0; memoryIndex < memoryCount; ++memoryIndex) {
+￿        const uint32_t memoryTypeBits = (1 << memoryIndex);
+￿        const bool isRequiredMemoryType = memoryTypeBitsRequirement & memoryTypeBits;
+￿
+￿        const VkMemoryPropertyFlags properties =
+￿            pMemoryProperties->memoryTypes[memoryIndex].propertyFlags;
+￿        const bool hasRequiredProperties =
+￿            (properties & requiredProperties) == requiredProperties;
+￿
+￿        if (isRequiredMemoryType && hasRequiredProperties)
+￿            return static_cast<int32_t>(memoryIndex);
 ￿    }
+￿
+￿    // failed to find memory type
 ￿    return -1;
 ￿}
 ￿
-￿// Try to find an optimal memory type, or if it does not exist
-￿// find any compatible memory type
+￿// Try to find an optimal memory type, or if it does not exist try fallback memory type
+￿// `device` is the VkDevice
+￿// `image` is the VkImage that requires memory to be bound
+￿// `memoryProperties` properties as returned by vkGetPhysicalDeviceMemoryProperties
+￿// `requiredProperties` are the property flags that must be present
+￿// `optimalProperties` are the property flags that are preferred by the application
 ￿VkMemoryRequirements memoryRequirements;
 ￿vkGetImageMemoryRequirements(device, image, &memoryRequirements);
-￿int32_t memoryType = FindProperties(memoryRequirements.memoryTypeBits, optimalProperties);
-￿if (memoryType == -1)
-￿    memoryType = FindProperties(memoryRequirements.memoryTypeBits, requiredProperties);</pre></code>
-
-        The loop will find the first supported memory type that has all bits requested in {@code properties} set. If there is no exact match, it will find a closest match (i.e. a memory type with the fewest additional bits set), which has some additional bits set but which are not detrimental to the behaviors requested by {@code properties}. The application <b>can</b> first search for the optimal properties, e.g. a memory type that is device-local or supports coherent cached accesses, as appropriate for the intended usage, and if such a memory type is not present <b>can</b> fallback to searching for a less optimal but guaranteed set of properties such as "0" or "host-visible and coherent".
+￿int32_t memoryType =
+￿    findProperties(&memoryProperties, memoryRequirements.memoryTypeBits, optimalProperties);
+￿if (memoryType == -1) // not found; try fallback properties
+￿    memoryType =
+￿        findProperties(&memoryProperties, memoryRequirements.memoryTypeBits, requiredProperties);</pre></code>
 
         <h5>See Also</h5>
         ##VkMemoryHeap, ##VkMemoryType, ##VkPhysicalDeviceMemoryProperties2KHR, #GetPhysicalDeviceMemoryProperties()
@@ -983,7 +1008,7 @@ val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") 
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkDeviceQueueGlobalPriorityCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pQueuePriorities} <b>must</b> be a pointer to an array of {@code queueCount} {@code float} values</li>
+            <li>{@code pQueuePriorities} <b>must</b> be a valid pointer to an array of {@code queueCount} {@code float} values</li>
             <li>{@code queueCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -1017,10 +1042,10 @@ val VkDeviceCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupDeviceCreateInfoKHX, ##VkPhysicalDevice16BitStorageFeaturesKHR, ##VkPhysicalDeviceFeatures2KHR, ##VkPhysicalDeviceMultiviewFeaturesKHX, ##VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR, or ##VkPhysicalDeviceVariablePointerFeaturesKHR</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pQueueCreateInfos} <b>must</b> be a pointer to an array of {@code queueCreateInfoCount} valid ##VkDeviceQueueCreateInfo structures</li>
-            <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
-            <li>If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} <b>must</b> be a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings</li>
-            <li>If {@code pEnabledFeatures} is not {@code NULL}, {@code pEnabledFeatures} <b>must</b> be a pointer to a valid ##VkPhysicalDeviceFeatures structure</li>
+            <li>{@code pQueueCreateInfos} <b>must</b> be a valid pointer to an array of {@code queueCreateInfoCount} valid ##VkDeviceQueueCreateInfo structures</li>
+            <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a valid pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
+            <li>If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} <b>must</b> be a valid pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings</li>
+            <li>If {@code pEnabledFeatures} is not {@code NULL}, {@code pEnabledFeatures} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceFeatures structure</li>
             <li>{@code queueCreateInfoCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -1085,11 +1110,11 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SUBMIT_INFO</li>
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkD3D12FenceSubmitInfoKHR, ##VkDeviceGroupSubmitInfoKHX, ##VkWin32KeyedMutexAcquireReleaseInfoKHR, or ##VkWin32KeyedMutexAcquireReleaseInfoNV</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
-            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitDstStageMask} <b>must</b> be a pointer to an array of {@code waitSemaphoreCount} valid combinations of {@code VkPipelineStageFlagBits} values</li>
+            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
+            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitDstStageMask} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid combinations of {@code VkPipelineStageFlagBits} values</li>
             <li>Each element of {@code pWaitDstStageMask} <b>must</b> not be 0</li>
-            <li>If {@code commandBufferCount} is not 0, {@code pCommandBuffers} <b>must</b> be a pointer to an array of {@code commandBufferCount} valid {@code VkCommandBuffer} handles</li>
-            <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphores} <b>must</b> be a pointer to an array of {@code signalSemaphoreCount} valid {@code VkSemaphore} handles</li>
+            <li>If {@code commandBufferCount} is not 0, {@code pCommandBuffers} <b>must</b> be a valid pointer to an array of {@code commandBufferCount} valid {@code VkCommandBuffer} handles</li>
+            <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphores} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreCount} valid {@code VkSemaphore} handles</li>
             <li>Each of the elements of {@code pCommandBuffers}, the elements of {@code pSignalSemaphores}, and the elements of {@code pWaitSemaphores} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
 
@@ -1124,7 +1149,6 @@ val VkMemoryAllocateInfo = struct(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code allocationSize} <b>must</b> be less than or equal to the amount of memory available to the ##VkMemoryHeap specified by {@code memoryTypeIndex} and the calling command&#8217;s {@code VkDevice}</li>
             <li>{@code allocationSize} <b>must</b> be greater than 0</li>
             <li>If the {@code pNext} chain contains an instance of ##VkExportMemoryAllocateInfoKHR, and any of the handle types specified in ##VkExportMemoryAllocateInfoKHR{@code ::handleTypes} require a dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures} or ##VkExternalBufferPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code pNext} chain must contain an instance of ##VkMemoryDedicatedAllocateInfoKHR or ##VkDedicatedAllocationMemoryAllocateInfoNV with either its {@code image} or {@code buffer} field set to a value other than #NULL_HANDLE.</li>
             <li>If the {@code pNext} chain contains an instance of ##VkExportMemoryAllocateInfoKHR, it <b>must</b> not contain an instance of ##VkExportMemoryAllocateInfoNV or ##VkExportMemoryWin32HandleInfoNV.</li>
@@ -1152,7 +1176,7 @@ val VkMemoryAllocateInfo = struct(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceSize.member("allocationSize", "the size of the allocation in bytes")
-    uint32_t.member("memoryTypeIndex", "the memory type index, which selects the properties of the memory to be allocated, as well as the heap the memory will come from.")
+    uint32_t.member("memoryTypeIndex", "an index identifying a memory type from the {@code memoryTypes} array of the ##VkPhysicalDeviceMemoryProperties structure")
 }
 
 val VkMappedMemoryRange = struct(VULKAN_PACKAGE, "VkMappedMemoryRange") {
@@ -1218,14 +1242,14 @@ val VkSparseImageMemoryRequirements = struct(VULKAN_PACKAGE, "VkSparseImageMemor
 
     VkSparseImageFormatProperties.member("formatProperties", """{@code formatProperties.aspectMask} is the set of aspects of the image that this sparse memory requirement applies to. This will usually have a single aspect specified. However, depth/stencil images <b>may</b> have depth and stencil data interleaved in the same sparse block, in which case both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT would be present.
 
-        {@code formatProperties.imageGranularity} describes the dimensions of a single bindable sparse image block in pixel units. For aspect #IMAGE_ASPECT_METADATA_BIT, all dimensions will be zero pixels. All metadata is located in the mip tail region.
+        {@code formatProperties.imageGranularity} describes the dimensions of a single bindable sparse image block in texel units. For aspect #IMAGE_ASPECT_METADATA_BIT, all dimensions will be zero. All metadata is located in the mip tail region.
 
         {@code formatProperties.flags} is a bitmask of {@code VkSparseImageFormatFlagBits}:
 
         <ul>
             <li>If #SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT is set the image uses a single mip tail region for all array layers.</li>
             <li>If #SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT is set the dimensions of mip levels <b>must</b> be integer multiples of the corresponding dimensions of the sparse image block for levels not located in the mip tail.</li>
-            <li>If #SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT is set the image uses non-standard sparse image block dimensions. The {@code formatProperties.imageGranularity} values do not match the standard sparse image block dimension corresponding to the image&#8217;s pixel format.</li>
+            <li>If #SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT is set the image uses non-standard sparse image block dimensions. The {@code formatProperties.imageGranularity} values do not match the standard sparse image block dimension corresponding to the image&#8217;s format.</li>
         </ul>""")
     uint32_t.member("imageMipTailFirstLod", "the first mip level at which image subresources are included in the mip tail region.")
     VkDeviceSize.member("imageMipTailSize", "the memory size (in bytes) of the mip tail region. If {@code formatProperties.flags} contains #SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT, this is the size of the whole mip tail, otherwise this is the size of the mip tail of a single array layer. This value is guaranteed to be a multiple of the sparse block size in bytes.")
@@ -1239,7 +1263,7 @@ val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
         Structure specifying a sparse memory bind operation.
 
         <h5>Description</h5>
-        The <em>binding range</em> <code>[resourceOffset, resourceOffset {plus} size)</code> has different constraints based on {@code flags}. If {@code flags} contains #SPARSE_MEMORY_BIND_METADATA_BIT, the binding range <b>must</b> be within the mip tail region of the metadata aspect. This metadata region is defined by:
+        The <em>binding range</em> <code>[resourceOffset, resourceOffset + size)</code> has different constraints based on {@code flags}. If {@code flags} contains #SPARSE_MEMORY_BIND_METADATA_BIT, the binding range <b>must</b> be within the mip tail region of the metadata aspect. This metadata region is defined by:
 
         <dl>
             <dd><code>metadataRegion = [base, base + imageMipTailSize)</code></dd>
@@ -1289,7 +1313,7 @@ val VkSparseBufferMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseBufferMemoryB
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-            <li>{@code pBinds} <b>must</b> be a pointer to an array of {@code bindCount} valid ##VkSparseMemoryBind structures</li>
+            <li>{@code pBinds} <b>must</b> be a valid pointer to an array of {@code bindCount} valid ##VkSparseMemoryBind structures</li>
             <li>{@code bindCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -1315,7 +1339,7 @@ val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpa
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
-            <li>{@code pBinds} <b>must</b> be a pointer to an array of {@code bindCount} valid ##VkSparseMemoryBind structures</li>
+            <li>{@code pBinds} <b>must</b> be a valid pointer to an array of {@code bindCount} valid ##VkSparseMemoryBind structures</li>
             <li>{@code bindCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -1332,12 +1356,6 @@ val VkImageSubresource = struct(VULKAN_PACKAGE, "VkImageSubresource") {
     documentation =
         """
         Structure specifying a image subresource.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code mipLevel} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
-            <li>{@code arrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1407,10 +1425,16 @@ val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBin
         """
         Structure specifying sparse image memory bind info.
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code subresource.mipLevel} member of each element of {@code pBinds} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>The {@code subresource.arrayLayer} member of each element of {@code pBinds} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
-            <li>{@code pBinds} <b>must</b> be a pointer to an array of {@code bindCount} valid ##VkSparseImageMemoryBind structures</li>
+            <li>{@code pBinds} <b>must</b> be a valid pointer to an array of {@code bindCount} valid ##VkSparseImageMemoryBind structures</li>
             <li>{@code bindCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -1432,11 +1456,11 @@ val VkBindSparseInfo = struct(VULKAN_PACKAGE, "VkBindSparseInfo") {
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_SPARSE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupBindSparseInfoKHX</li>
-            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
-            <li>If {@code bufferBindCount} is not 0, {@code pBufferBinds} <b>must</b> be a pointer to an array of {@code bufferBindCount} valid ##VkSparseBufferMemoryBindInfo structures</li>
-            <li>If {@code imageOpaqueBindCount} is not 0, {@code pImageOpaqueBinds} <b>must</b> be a pointer to an array of {@code imageOpaqueBindCount} valid ##VkSparseImageOpaqueMemoryBindInfo structures</li>
-            <li>If {@code imageBindCount} is not 0, {@code pImageBinds} <b>must</b> be a pointer to an array of {@code imageBindCount} valid ##VkSparseImageMemoryBindInfo structures</li>
-            <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphores} <b>must</b> be a pointer to an array of {@code signalSemaphoreCount} valid {@code VkSemaphore} handles</li>
+            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
+            <li>If {@code bufferBindCount} is not 0, {@code pBufferBinds} <b>must</b> be a valid pointer to an array of {@code bufferBindCount} valid ##VkSparseBufferMemoryBindInfo structures</li>
+            <li>If {@code imageOpaqueBindCount} is not 0, {@code pImageOpaqueBinds} <b>must</b> be a valid pointer to an array of {@code imageOpaqueBindCount} valid ##VkSparseImageOpaqueMemoryBindInfo structures</li>
+            <li>If {@code imageBindCount} is not 0, {@code pImageBinds} <b>must</b> be a valid pointer to an array of {@code imageBindCount} valid ##VkSparseImageMemoryBindInfo structures</li>
+            <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphores} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreCount} valid {@code VkSemaphore} handles</li>
             <li>Both of the elements of {@code pSignalSemaphores}, and the elements of {@code pWaitSemaphores} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
 
@@ -1565,7 +1589,7 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code size} <b>must</b> be greater than 0</li>
-            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
+            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by either #GetPhysicalDeviceQueueFamilyProperties() or #GetPhysicalDeviceQueueFamilyProperties2KHR() for the {@code physicalDevice} that was used to create {@code device}</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseBinding">sparse bindings</a> feature is not enabled, {@code flags} <b>must</b> not contain #BUFFER_CREATE_SPARSE_BINDING_BIT</li>
@@ -1674,7 +1698,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
         <h5>Valid Usage</h5>
         <ul>
             <li>The combination of {@code format}, {@code imageType}, {@code tiling}, {@code usage}, and {@code flags} <b>must</b> be supported, as indicated by a #SUCCESS return value from #GetPhysicalDeviceImageFormatProperties() invoked with the same values passed to the corresponding parameters.</li>
-            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
+            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by either #GetPhysicalDeviceQueueFamilyProperties() or #GetPhysicalDeviceQueueFamilyProperties2KHR() for the {@code physicalDevice} that was used to create {@code device}</li>
             <li>{@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
@@ -1849,7 +1873,7 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
         <h5>Description</h5>
         The number of mipmap levels and array layers <b>must</b> be a subset of the image subresources in the image. If an application wants to use all mip levels or layers in an image after the {@code baseMipLevel} or {@code baseArrayLayer}, it <b>can</b> set {@code levelCount} and {@code layerCount} to the special values #REMAINING_MIP_LEVELS and #REMAINING_ARRAY_LAYERS without knowing the exact number of mip levels or layers.
 
-        For cube and cube array image views, the layers of the image view starting at {@code baseArrayLayer} correspond to faces in the order +X, -X, +Y, -Y, +Z, -Z. For cube arrays, each set of six sequential layers is a single cube, so the number of cube maps in a cube map array view is <em>{@code layerCount} / 6</em>, and image array layer <code>(baseArrayLayer {plus} i)</code> is face index <code>(i mod 6)</code> of cube <em>i / 6</em>. If the number of layers in the view, whether set explicitly in {@code layerCount} or implied by #REMAINING_ARRAY_LAYERS, is not a multiple of 6, behavior when indexing the last cube is undefined.
+        For cube and cube array image views, the layers of the image view starting at {@code baseArrayLayer} correspond to faces in the order +X, -X, +Y, -Y, +Z, -Z. For cube arrays, each set of six sequential layers is a single cube, so the number of cube maps in a cube map array view is <em>{@code layerCount} / 6</em>, and image array layer <code>(baseArrayLayer + i)</code> is face index <code>(i mod 6)</code> of cube <em>i / 6</em>. If the number of layers in the view, whether set explicitly in {@code layerCount} or implied by #REMAINING_ARRAY_LAYERS, is not a multiple of 6, behavior when indexing the last cube is undefined.
 
         {@code aspectMask} <b>must</b> be only #IMAGE_ASPECT_COLOR_BIT, #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT if {@code format} is a color, depth-only or stencil-only format, respectively, except if {@code format} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>. If using a depth/stencil format with both depth and stencil components, {@code aspectMask} <b>must</b> include at least one of #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT, and <b>can</b> include both.
 
@@ -1865,6 +1889,8 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, it <b>must</b> be greater than 0</li>
+            <li>If {@code layerCount} is not #REMAINING_ARRAY_LAYERS, it <b>must</b> be greater than 0</li>
             <li>If {@code aspectMask} includes #IMAGE_ASPECT_COLOR_BIT, then it <b>must</b> not include any of #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
         </ul>
 
@@ -1894,7 +1920,7 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
         If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, and if the {@code format} of the image is not <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, {@code format} <b>can</b> be different from the image's format, but if {@code image} was created without the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag and they are not equal they <b>must</b> be <em>compatible</em>. Image format compatibility is defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a> section. Views of compatible formats will have the same mapping between texel coordinates and memory locations irrespective of the {@code format}, with only the interpretation of the bit pattern changing.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Values intended to be used with one view format <b>may</b> not be exactly preserved when written or read through a different format. For example, an integer value that happens to have the bit pattern of a floating point denorm or NaN <b>may</b> be flushed or canonicalized when written or read through a view with a floating point format. Similarly, a value written through a signed normalized format that has a bit pattern exactly equal to <code>-2<sup>b</sup></code> <b>may</b> be changed to <code>-2<sup>b</sup> {plus} 1</code> as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fixedfpconv">Conversion from Normalized Fixed-Point to Floating-Point</a>.
+        Values intended to be used with one view format <b>may</b> not be exactly preserved when written or read through a different format. For example, an integer value that happens to have the bit pattern of a floating point denorm or NaN <b>may</b> be flushed or canonicalized when written or read through a view with a floating point format. Similarly, a value written through a signed normalized format that has a bit pattern exactly equal to <code>-2<sup>b</sup></code> <b>may</b> be changed to <code>-2<sup>b</sup> + 1</code> as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fixedfpconv">Conversion from Normalized Fixed-Point to Floating-Point</a>.
         </div>
 
         If {@code image} was created with the #IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR flag, {@code format} <b>must</b> be <em>compatible</em> with the image's format as described above, or <b>must</b> be an uncompressed format in which case it <b>must</b> be size-compatible with the image's format, meaning that the element size of the uncompressed format <b>must</b> equal the element size (compressed texel block size) of the image's format. In this case the resulting image view's texel dimensions equal the dimensions of the selected mip level divided by the compressed texel block size and rounded up.
@@ -1942,8 +1968,8 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
             <li>If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} contains #IMAGE_USAGE_STORAGE_BIT, {@code format} <b>must</b> be supported for storage images, as specified by the #FORMAT_FEATURE_STORAGE_IMAGE_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
             <li>If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} contains #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code format} <b>must</b> be supported for color attachments, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
             <li>If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} contains #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, {@code format} <b>must</b> be supported for depth/stencil attachments, as specified by the #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
-            <li>{@code subresourceRange}{@code ::baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>If {@code subresourceRange}{@code ::levelCount} is not #REMAINING_MIP_LEVELS, {@code subresourceRange}{@code ::levelCount} <b>must</b> be non-zero and <code>subresourceRange::baseMipLevel + subresourceRange::levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>{@code subresourceRange.baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>If {@code subresourceRange.levelCount} is not #REMAINING_MIP_LEVELS, <code>subresourceRange.baseMipLevel + subresourceRange.levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code image} is not a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set, or {@code viewType} is not #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY, {@code subresourceRange}{@code ::baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code subresourceRange}{@code ::layerCount} is not #REMAINING_ARRAY_LAYERS, {@code image} is not a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set, or {@code viewType} is not #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY, {@code subresourceRange}{@code ::layerCount} <b>must</b> be non-zero and <code>subresourceRange::baseArrayLayer subresourceRange::layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code image} is a 3D image created with #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set, and {@code viewType} is #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY, {@code subresourceRange}{@code ::baseArrayLayer} <b>must</b> be less than the {@code extent.depth} specified in ##VkImageCreateInfo when {@code image} was created</li>
@@ -2007,7 +2033,7 @@ val VkShaderModuleCreateInfo = struct(VULKAN_PACKAGE, "VkShaderModuleCreateInfo"
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkShaderModuleValidationCacheCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pCode} <b>must</b> be a pointer to an array of {@code codeSize / 4} {@code uint32_t} values</li>
+            <li>{@code pCode} <b>must</b> be a valid pointer to an array of {@code codeSize / 4} {@code uint32_t} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2037,7 +2063,7 @@ val VkPipelineCacheCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineCacheCreateInf
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>If {@code initialDataSize} is not 0, {@code pInitialData} <b>must</b> be a pointer to an array of {@code initialDataSize} bytes</li>
+            <li>If {@code initialDataSize} is not 0, {@code pInitialData} <b>must</b> be a valid pointer to an array of {@code initialDataSize} bytes</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2085,12 +2111,12 @@ val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
         <ul>
             <li>The {@code offset} member of each element of {@code pMapEntries} <b>must</b> be less than {@code dataSize}</li>
             <li>The {@code size} member of each element of {@code pMapEntries} <b>must</b> be less than or equal to {@code dataSize} minus {@code offset}</li>
-            <li>If {@code mapEntryCount} is not 0, {@code pMapEntries} <b>must</b> be a pointer to an array of {@code mapEntryCount} valid ##VkSpecializationMapEntry structures</li>
+            <li>If {@code mapEntryCount} is not 0, {@code pMapEntries} <b>must</b> be a valid pointer to an array of {@code mapEntryCount} valid ##VkSpecializationMapEntry structures</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a pointer to an array of {@code dataSize} bytes</li>
+            <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2137,7 +2163,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
             <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
             <li>{@code module} <b>must</b> be a valid {@code VkShaderModule} handle</li>
             <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
-            <li>If {@code pSpecializationInfo} is not {@code NULL}, {@code pSpecializationInfo} <b>must</b> be a pointer to a valid ##VkSpecializationInfo structure</li>
+            <li>If {@code pSpecializationInfo} is not {@code NULL}, {@code pSpecializationInfo} <b>must</b> be a valid pointer to a valid ##VkSpecializationInfo structure</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2225,8 +2251,8 @@ val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVer
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>If {@code vertexBindingDescriptionCount} is not 0, {@code pVertexBindingDescriptions} <b>must</b> be a pointer to an array of {@code vertexBindingDescriptionCount} valid ##VkVertexInputBindingDescription structures</li>
-            <li>If {@code vertexAttributeDescriptionCount} is not 0, {@code pVertexAttributeDescriptions} <b>must</b> be a pointer to an array of {@code vertexAttributeDescriptionCount} valid ##VkVertexInputAttributeDescription structures</li>
+            <li>If {@code vertexBindingDescriptionCount} is not 0, {@code pVertexBindingDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexBindingDescriptionCount} valid ##VkVertexInputBindingDescription structures</li>
+            <li>If {@code vertexAttributeDescriptionCount} is not 0, {@code pVertexAttributeDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexAttributeDescriptionCount} valid ##VkVertexInputAttributeDescription structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2309,7 +2335,7 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
         Structure specifying a viewport.
 
         <h5>Description</h5>
-        The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <code>k / (2<sup>m</sup> - 1)</code>, where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
+        The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value <code>k / (2<sup>m</sup> - 1)</code>, where <code>k ∈ { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
 
         The viewport parameters shown in the above equations are found from these values as
 
@@ -2397,6 +2423,7 @@ val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewpo
             <li>{@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
             <li>{@code scissorCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
             <li>{@code scissorCount} and {@code viewportCount} <b>must</b> be identical</li>
+            <li>If the {@code viewportWScalingEnable} member of a ##VkPipelineViewportWScalingStateCreateInfoNV structure chained to the {@code pNext} chain is #TRUE, the {@code viewportCount} member of the ##VkPipelineViewportWScalingStateCreateInfoNV structure <b>must</b> be equal to {@code viewportCount}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2486,7 +2513,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a pointer to an array of {@code ceil(rasterizationSamples / 32)} {@code VkSampleMask} values</li>
+            <li>If {@code pSampleMask} is not {@code NULL}, {@code pSampleMask} <b>must</b> be a valid pointer to an array of {@code ceil(rasterizationSamples / 32)} {@code VkSampleMask} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2631,7 +2658,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColo
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineColorBlendAdvancedStateCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a pointer to an array of {@code attachmentCount} valid ##VkPipelineColorBlendAttachmentState structures</li>
+            <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid ##VkPipelineColorBlendAttachmentState structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2663,7 +2690,7 @@ val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamic
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pDynamicStates} <b>must</b> be a pointer to an array of {@code dynamicStateCount} valid {@code VkDynamicState} values</li>
+            <li>{@code pDynamicStates} <b>must</b> be a valid pointer to an array of {@code dynamicStateCount} valid {@code VkDynamicState} values</li>
             <li>{@code dynamicStateCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -2703,7 +2730,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>The {@code stage} member of each element of {@code pStages} <b>must</b> not be #SHADER_STAGE_COMPUTE_BIT</li>
             <li>If {@code pStages} includes a tessellation control shader stage, it <b>must</b> include a tessellation evaluation shader stage</li>
             <li>If {@code pStages} includes a tessellation evaluation shader stage, it <b>must</b> include a tessellation control shader stage</li>
-            <li>If {@code pStages} includes a tessellation control shader stage and a tessellation evaluation shader stage, {@code pTessellationState} <b>must</b> be a pointer to a valid ##VkPipelineTessellationStateCreateInfo structure</li>
+            <li>If {@code pStages} includes a tessellation control shader stage and a tessellation evaluation shader stage, {@code pTessellationState} <b>must</b> be a valid pointer to a valid ##VkPipelineTessellationStateCreateInfo structure</li>
             <li>If {@code pStages} includes tessellation shader stages, the shader code of at least one stage <b>must</b> contain an {@code OpExecutionMode} instruction that specifies the type of subdivision in the pipeline</li>
             <li>If {@code pStages} includes tessellation shader stages, and the shader code of both stages contain an {@code OpExecutionMode} instruction that specifies the type of subdivision in the pipeline, they <b>must</b> both specify the same subdivision mode</li>
             <li>If {@code pStages} includes tessellation shader stages, the shader code of at least one stage <b>must</b> contain an {@code OpExecutionMode} instruction that specifies the output patch size in the pipeline</li>
@@ -2719,13 +2746,13 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>If rasterization is not disabled and {@code subpass} uses a depth/stencil attachment in {@code renderpass} that has a layout of #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL or #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR in the ##VkAttachmentReference defined by {@code subpass}, the {@code failOp}, {@code passOp} and {@code depthFailOp} members of each of the {@code front} and {@code back} members of {@code pDepthStencilState} <b>must</b> be #STENCIL_OP_KEEP</li>
             <li>If rasterization is not disabled and the subpass uses color attachments, then for each color attachment in the subpass the {@code blendEnable} member of the corresponding element of the {@code pAttachment} member of {@code pColorBlendState} <b>must</b> be #FALSE if the {@code format} of the attachment does not support color blend operations, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} or ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>If rasterization is not disabled and the subpass uses color attachments, the {@code attachmentCount} member of {@code pColorBlendState} <b>must</b> be equal to the {@code colorAttachmentCount} used to create {@code subpass}</li>
-            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_VIEWPORT, the {@code pViewports} member of {@code pViewportState} <b>must</b> be a pointer to an array of {@code pViewportState}{@code ::viewportCount} ##VkViewport structures</li>
-            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SCISSOR, the {@code pScissors} member of {@code pViewportState} <b>must</b> be a pointer to an array of {@code pViewportState}{@code ::scissorCount} ##VkRect2D structures</li>
+            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_VIEWPORT, the {@code pViewports} member of {@code pViewportState} <b>must</b> be a valid pointer to an array of {@code pViewportState}{@code ::viewportCount} ##VkViewport structures</li>
+            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SCISSOR, the {@code pScissors} member of {@code pViewportState} <b>must</b> be a valid pointer to an array of {@code pViewportState}{@code ::scissorCount} ##VkRect2D structures</li>
             <li>If the wide lines feature is not enabled, and no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_LINE_WIDTH, the {@code lineWidth} member of {@code pRasterizationState} <b>must</b> be {@code 1.0}</li>
-            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, {@code pViewportState} <b>must</b> be a pointer to a valid ##VkPipelineViewportStateCreateInfo structure</li>
-            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, {@code pMultisampleState} <b>must</b> be a pointer to a valid ##VkPipelineMultisampleStateCreateInfo structure</li>
-            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses a depth/stencil attachment, {@code pDepthStencilState} <b>must</b> be a pointer to a valid ##VkPipelineDepthStencilStateCreateInfo structure</li>
-            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses color attachments, {@code pColorBlendState} <b>must</b> be a pointer to a valid ##VkPipelineColorBlendStateCreateInfo structure</li>
+            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, {@code pViewportState} <b>must</b> be a valid pointer to a valid ##VkPipelineViewportStateCreateInfo structure</li>
+            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, {@code pMultisampleState} <b>must</b> be a valid pointer to a valid ##VkPipelineMultisampleStateCreateInfo structure</li>
+            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses a depth/stencil attachment, {@code pDepthStencilState} <b>must</b> be a valid pointer to a valid ##VkPipelineDepthStencilStateCreateInfo structure</li>
+            <li>If the {@code rasterizerDiscardEnable} member of {@code pRasterizationState} is #FALSE, and {@code subpass} uses color attachments, {@code pColorBlendState} <b>must</b> be a valid pointer to a valid ##VkPipelineColorBlendStateCreateInfo structure</li>
             <li>If the depth bias clamping feature is not enabled, no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_DEPTH_BIAS, and the {@code depthBiasEnable} member of {@code pRasterizationState} is #TRUE, the {@code depthBiasClamp} member of {@code pRasterizationState} <b>must</b> be {@code 0.0}</li>
             <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationGridSize.width} <b>must</b> evenly divide ##VkMultisamplePropertiesEXT{@code ::sampleLocationGridSize}.width as returned by #GetPhysicalDeviceMultisamplePropertiesEXT() with a {@code samples} parameter equaling {@code rasterizationSamples}</li>
             <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT, and the {@code sampleLocationsEnable} member of a ##VkPipelineSampleLocationsStateCreateInfoEXT structure chained to the {@code pNext} chain of {@code pMultisampleState} is #TRUE, {@code sampleLocationsInfo.sampleLocationGridSize.height} <b>must</b> evenly divide ##VkMultisamplePropertiesEXT{@code ::sampleLocationGridSize}.height as returned by #GetPhysicalDeviceMultisamplePropertiesEXT() with a {@code samples} parameter equaling {@code rasterizationSamples}</li>
@@ -2744,6 +2771,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>{@code flags} <b>must</b> not contain the #PIPELINE_CREATE_DISPATCH_BASE_KHX flag.</li>
             <li>If {@code pStages} includes a fragment shader stage and an input attachment was referenced by the ##VkRenderPassInputAttachmentAspectCreateInfoKHR at renderpass create time, its shader code <b>must</b> not read from any aspect that was not specified in the {@code aspectMask} of the corresponding ##VkInputAttachmentAspectReferenceKHR structure.</li>
             <li>The number of resources in {@code layout} accessible to each shader stage that is used by the pipeline <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageResources}</li>
+            <li>If no element of the {@code pDynamicStates} member of {@code pDynamicState} is #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV, and the {@code viewportWScalingEnable} member of a ##VkPipelineViewportWScalingStateCreateInfoNV structure, chained to the {@code pNext} chain of {@code pViewportState}, is #TRUE, the {@code pViewportWScalings} member of the ##VkPipelineViewportWScalingStateCreateInfoNV <b>must</b> be a pointer to an array of ##VkPipelineViewportWScalingStateCreateInfoNV{@code ::viewportCount} valid ##VkViewportWScalingNV structures</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2751,11 +2779,11 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineDiscardRectangleStateCreateInfoEXT</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
-            <li>{@code pStages} <b>must</b> be a pointer to an array of {@code stageCount} valid ##VkPipelineShaderStageCreateInfo structures</li>
-            <li>{@code pVertexInputState} <b>must</b> be a pointer to a valid ##VkPipelineVertexInputStateCreateInfo structure</li>
-            <li>{@code pInputAssemblyState} <b>must</b> be a pointer to a valid ##VkPipelineInputAssemblyStateCreateInfo structure</li>
-            <li>{@code pRasterizationState} <b>must</b> be a pointer to a valid ##VkPipelineRasterizationStateCreateInfo structure</li>
-            <li>If {@code pDynamicState} is not {@code NULL}, {@code pDynamicState} <b>must</b> be a pointer to a valid ##VkPipelineDynamicStateCreateInfo structure</li>
+            <li>{@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid ##VkPipelineShaderStageCreateInfo structures</li>
+            <li>{@code pVertexInputState} <b>must</b> be a valid pointer to a valid ##VkPipelineVertexInputStateCreateInfo structure</li>
+            <li>{@code pInputAssemblyState} <b>must</b> be a valid pointer to a valid ##VkPipelineInputAssemblyStateCreateInfo structure</li>
+            <li>{@code pRasterizationState} <b>must</b> be a valid pointer to a valid ##VkPipelineRasterizationStateCreateInfo structure</li>
+            <li>If {@code pDynamicState} is not {@code NULL}, {@code pDynamicState} <b>must</b> be a valid pointer to a valid ##VkPipelineDynamicStateCreateInfo structure</li>
             <li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
             <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
             <li>{@code stageCount} <b>must</b> be greater than 0</li>
@@ -2892,8 +2920,8 @@ val VkPipelineLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineLayoutCreateI
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>If {@code setLayoutCount} is not 0, {@code pSetLayouts} <b>must</b> be a pointer to an array of {@code setLayoutCount} valid {@code VkDescriptorSetLayout} handles</li>
-            <li>If {@code pushConstantRangeCount} is not 0, {@code pPushConstantRanges} <b>must</b> be a pointer to an array of {@code pushConstantRangeCount} valid ##VkPushConstantRange structures</li>
+            <li>If {@code setLayoutCount} is not 0, {@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code setLayoutCount} valid {@code VkDescriptorSetLayout} handles</li>
+            <li>If {@code pushConstantRangeCount} is not 0, {@code pPushConstantRanges} <b>must</b> be a valid pointer to an array of {@code pushConstantRangeCount} valid ##VkPushConstantRange structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2924,7 +2952,7 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 
         There are no Vulkan filter modes that directly correspond to OpenGL minification filters of {@code GL_LINEAR} or {@code GL_NEAREST}, but they <b>can</b> be emulated using #SAMPLER_MIPMAP_MODE_NEAREST, {@code minLod} = 0, and {@code maxLod} = 0.25, and using {@code minFilter} = #FILTER_LINEAR or {@code minFilter} = #FILTER_NEAREST, respectively.
 
-        Note that using a {@code maxLod} of zero would cause <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-filtering">magnification</a> to always be performed, and the {@code magFilter} to always be used. This is valid, just not an exact match for OpenGL behavior. Clamping the maximum LOD to 0.25 allows the <code>{lambda}</code> value to be non-zero and minification to be performed, while still always rounding down to the base level. If the {@code minFilter} and {@code magFilter} are equal, then using a {@code maxLod} of zero also works.
+        Note that using a {@code maxLod} of zero would cause <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-texel-filtering">magnification</a> to always be performed, and the {@code magFilter} to always be used. This is valid, just not an exact match for OpenGL behavior. Clamping the maximum LOD to 0.25 allows the <code>λ</code> value to be non-zero and minification to be performed, while still always rounding down to the base level. If the {@code minFilter} and {@code magFilter} are equal, then using a {@code maxLod} of zero also works.
         </div>
 
         The maximum number of sampler objects which <b>can</b> be simultaneously created on a device is implementation-dependent and specified by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-maxSamplerAllocationCount">{@code maxSamplerAllocationCount}</a> member of the ##VkPhysicalDeviceLimits structure. If {@code maxSamplerAllocationCount} is exceeded, #CreateSampler() will return #ERROR_TOO_MANY_OBJECTS.
@@ -2982,7 +3010,7 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
     VkSamplerAddressMode.member("addressModeW", "a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for W coordinate.")
     float.member("mipLodBias", "the bias to be added to mipmap LOD (level-of-detail) calculation and bias provided by image sampling functions in SPIR-V, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-level-of-detail-operation\">Level-of-Detail Operation</a> section.")
     VkBool32.member("anisotropyEnable", "#TRUE to enable anisotropic filtering, as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-texel-anisotropic-filtering\">Texel Anisotropic Filtering</a> section, or #FALSE otherwise.")
-    float.member("maxAnisotropy", "the anisotropy value clamp.")
+    float.member("maxAnisotropy", "the anisotropy value clamp used by the sampler when {@code anisotropyEnable} is #TRUE. If {@code anisotropyEnable} is #FALSE, {@code maxAnisotropy} is ignored.")
     VkBool32.member("compareEnable", """#TRUE to enable comparison against a reference value during lookups, or #FALSE otherwise.
 
         <ul>
@@ -3025,10 +3053,6 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
         Structure specifying a descriptor set layout binding.
 
         <h5>Description</h5>
-        <ul>
-            <li>{@code pImmutableSamplers} affects initialization of samplers. If {@code descriptorType} specifies a #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER type descriptor, then {@code pImmutableSamplers} <b>can</b> be used to initialize a set of <em>immutable samplers</em>. Immutable samplers are permanently bound into the set layout; later binding a sampler into an immutable sampler slot in a descriptor set is not allowed. If {@code pImmutableSamplers} is not {@code NULL}, then it is considered to be a pointer to an array of sampler handles that will be consumed by the set layout and used for the corresponding binding. If {@code pImmutableSamplers} is {@code NULL}, then the sampler slots are dynamic and sampler handles <b>must</b> be bound into descriptor sets using this layout. If {@code descriptorType} is not one of these descriptor types, then {@code pImmutableSamplers} is ignored.</li>
-        </ul>
-
         The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. Bindings that are not specified have a {@code descriptorCount} and {@code stageFlags} of zero, and the {@code descriptorType} is treated as undefined. However, all binding numbers between 0 and the maximum binding number in the ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -3037,7 +3061,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code descriptorCount} is not 0 and {@code pImmutableSamplers} is not {@code NULL}, {@code pImmutableSamplers} <b>must</b> be a pointer to an array of {@code descriptorCount} valid {@code VkSampler} handles</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code descriptorCount} is not 0 and {@code pImmutableSamplers} is not {@code NULL}, {@code pImmutableSamplers} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid {@code VkSampler} handles</li>
             <li>If {@code descriptorCount} is not 0, {@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_INPUT_ATTACHMENT and {@code descriptorCount} is not 0, then {@code stageFlags} <b>must</b> be 0 or #SHADER_STAGE_FRAGMENT_BIT</li>
         </ul>
@@ -3057,7 +3081,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
     VkShaderStageFlags.member("stageFlags", """member is a bitmask of {@code VkShaderStageFlagBits} specifying which pipeline shader stages <b>can</b> access a resource for this binding. #SHADER_STAGE_ALL is a shorthand specifying that all defined shader stages, including any additional stages defined by extensions, <b>can</b> access the resource.
 
         If a shader stage is not included in {@code stageFlags}, then a resource <b>must</b> not be accessed from that stage via this binding within any pipeline using the set layout. Other than input attachments which are limited to the fragment shader, there are no limitations on what combinations of stages <b>can</b> be used by a descriptor binding, and in particular a binding <b>can</b> be used by both graphics stages and the compute stage.""")
-    nullable..const..VkSampler.p.member("pImmutableSamplers", "")
+    nullable..const..VkSampler.p.member("pImmutableSamplers", "affects initialization of samplers. If {@code descriptorType} specifies a #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER type descriptor, then {@code pImmutableSamplers} <b>can</b> be used to initialize a set of <em>immutable samplers</em>. Immutable samplers are permanently bound into the set layout; later binding a sampler into an immutable sampler slot in a descriptor set is not allowed. If {@code pImmutableSamplers} is not {@code NULL}, then it is considered to be a pointer to an array of sampler handles that will be consumed by the set layout and used for the corresponding binding. If {@code pImmutableSamplers} is {@code NULL}, then the sampler slots are dynamic and sampler handles <b>must</b> be bound into descriptor sets using this layout. If {@code descriptorType} is not one of these descriptor types, then {@code pImmutableSamplers} is ignored.")
 }
 
 val VkDescriptorSetLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetLayoutCreateInfo") {
@@ -3077,7 +3101,7 @@ val VkDescriptorSetLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetLay
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkDescriptorSetLayoutCreateFlagBits} values</li>
-            <li>If {@code bindingCount} is not 0, {@code pBindings} <b>must</b> be a pointer to an array of {@code bindingCount} valid ##VkDescriptorSetLayoutBinding structures</li>
+            <li>If {@code bindingCount} is not 0, {@code pBindings} <b>must</b> be a valid pointer to an array of {@code bindingCount} valid ##VkDescriptorSetLayoutBinding structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3138,7 +3162,7 @@ val VkDescriptorPoolCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorPoolCreateI
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkDescriptorPoolCreateFlagBits} values</li>
-            <li>{@code pPoolSizes} <b>must</b> be a pointer to an array of {@code poolSizeCount} valid ##VkDescriptorPoolSize structures</li>
+            <li>{@code pPoolSizes} <b>must</b> be a valid pointer to an array of {@code poolSizeCount} valid ##VkDescriptorPoolSize structures</li>
             <li>{@code poolSizeCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -3169,7 +3193,7 @@ val VkDescriptorSetAllocateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetAllocat
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code descriptorPool} <b>must</b> be a valid {@code VkDescriptorPool} handle</li>
-            <li>{@code pSetLayouts} <b>must</b> be a pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSetLayout} handles</li>
+            <li>{@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSetLayout} handles</li>
             <li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>
             <li>Both of {@code descriptorPool}, and the elements of {@code pSetLayouts} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
@@ -3267,7 +3291,7 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
         <h5>Description</h5>
         Only one of {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView} members is used according to the descriptor type specified in the {@code descriptorType} member of the containing ##VkWriteDescriptorSet structure, as specified below.
 
-        If the {@code dstBinding} has fewer than {@code descriptorCount} array elements remaining starting from {@code dstArrayElement}, then the remainder will be used to update the subsequent binding - {@code dstBinding}+1 starting at array element zero. If a binding has a {@code descriptorCount} of zero, it is skipped. This behavior applies recursively, with the update affecting consecutive bindings as needed to update all {@code descriptorCount} descriptors.
+        If the {@code dstBinding} has fewer than {@code descriptorCount} array elements remaining starting from {@code dstArrayElement}, then the remainder will be used to update the subsequent binding - <code>dstBinding+1</code> starting at array element zero. If a binding has a {@code descriptorCount} of zero, it is skipped. This behavior applies recursively, with the update affecting consecutive bindings as needed to update all {@code descriptorCount} descriptors.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -3278,9 +3302,9 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
             <li>{@code descriptorType} <b>must</b> match the type of {@code dstBinding} within {@code dstSet}</li>
             <li>{@code dstSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
             <li>The sum of {@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding specified by {@code dstBinding}, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">the “consecutive binding updates” section</a></li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} <b>must</b> be a pointer to an array of {@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pTexelBufferView} <b>must</b> be a pointer to an array of {@code descriptorCount} valid {@code VkBufferView} handles</li>
-            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, {@code pBufferInfo} <b>must</b> be a pointer to an array of {@code descriptorCount} valid ##VkDescriptorBufferInfo structures</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, {@code pTexelBufferView} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid {@code VkBufferView} handles</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, {@code pBufferInfo} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid ##VkDescriptorBufferInfo structures</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was not allocated with a layout that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkSampler} object</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} and {@code imageLayout} members of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkImageView} and {@code VkImageLayout}, respectively</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE, for each descriptor that will be accessed via load or store operations the {@code imageLayout} member for corresponding elements of {@code pImageInfo} <b>must</b> be #IMAGE_LAYOUT_GENERAL</li>
@@ -3369,7 +3393,9 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
         Structure specifying parameters of a newly created framebuffer.
 
         <h5>Description</h5>
-        Image subresources used as attachments <b>must</b> not be accessed in any other way for the duration of a render pass instance. For depth/stencil attachments, they <b>can</b> be used as both attachments and non-attachments as long as the layout of the image subresource is #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR and the non-attachment usage only accesses the depth aspect, or the layout of the image subresource is #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR and the non-attachment usage only accesses the stencil aspect. Use of non-attachment aspects in this case is only well defined if the attachment is used in the subpass where the non-attachment access is being made, or the layout of the image subresource is constant throughout the entire render pass instance, including the {@code initialLayout} and {@code finalLayout}.
+        Applications <b>must</b> ensure that all accesses to memory that backs image subresources used as attachments in a given renderpass instance either happen-before the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">load operations</a> for those attachments, or happen-after the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">store operations</a> for those attachments.
+
+        For depth/stencil attachments, each aspect <b>can</b> be used separately as attachments and non-attachments as long as the non-attachment accesses are also via an image subresource in either the #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR layout or the #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR layout, and the attachment resource uses whichever of those two layouts the image accesses do not. Use of non-attachment aspects in this case is only well defined if the attachment is used in the subpass where the non-attachment access is being made, or the layout of the image subresource is constant throughout the entire render pass instance, including the {@code initialLayout} and {@code finalLayout}.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         These restrictions mean that the render pass has full knowledge of all uses of all of the attachments, so that the implementation is able to make correct decisions about when and how to perform layout transitions, when to overlap execution of subpasses, etc.
@@ -3403,7 +3429,7 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
-            <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
+            <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
             <li>Both of {@code renderPass}, and the elements of {@code pAttachments} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
 
@@ -3536,11 +3562,11 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
         <ul>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkSubpassDescriptionFlagBits} values</li>
             <li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
-            <li>If {@code inputAttachmentCount} is not 0, {@code pInputAttachments} <b>must</b> be a pointer to an array of {@code inputAttachmentCount} valid ##VkAttachmentReference structures</li>
-            <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachments} <b>must</b> be a pointer to an array of {@code colorAttachmentCount} valid ##VkAttachmentReference structures</li>
-            <li>If {@code colorAttachmentCount} is not 0, and {@code pResolveAttachments} is not {@code NULL}, {@code pResolveAttachments} <b>must</b> be a pointer to an array of {@code colorAttachmentCount} valid ##VkAttachmentReference structures</li>
-            <li>If {@code pDepthStencilAttachment} is not {@code NULL}, {@code pDepthStencilAttachment} <b>must</b> be a pointer to a valid ##VkAttachmentReference structure</li>
-            <li>If {@code preserveAttachmentCount} is not 0, {@code pPreserveAttachments} <b>must</b> be a pointer to an array of {@code preserveAttachmentCount} {@code uint32_t} values</li>
+            <li>If {@code inputAttachmentCount} is not 0, {@code pInputAttachments} <b>must</b> be a valid pointer to an array of {@code inputAttachmentCount} valid ##VkAttachmentReference structures</li>
+            <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachments} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid ##VkAttachmentReference structures</li>
+            <li>If {@code colorAttachmentCount} is not 0, and {@code pResolveAttachments} is not {@code NULL}, {@code pResolveAttachments} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid ##VkAttachmentReference structures</li>
+            <li>If {@code pDepthStencilAttachment} is not {@code NULL}, {@code pDepthStencilAttachment} <b>must</b> be a valid pointer to a valid ##VkAttachmentReference structure</li>
+            <li>If {@code preserveAttachmentCount} is not 0, {@code pPreserveAttachments} <b>must</b> be a valid pointer to an array of {@code preserveAttachmentCount} {@code uint32_t} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3655,9 +3681,9 @@ val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
             <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkRenderPassInputAttachmentAspectCreateInfoKHR or ##VkRenderPassMultiviewCreateInfoKHX</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a pointer to an array of {@code attachmentCount} valid ##VkAttachmentDescription structures</li>
-            <li>{@code pSubpasses} <b>must</b> be a pointer to an array of {@code subpassCount} valid ##VkSubpassDescription structures</li>
-            <li>If {@code dependencyCount} is not 0, {@code pDependencies} <b>must</b> be a pointer to an array of {@code dependencyCount} valid ##VkSubpassDependency structures</li>
+            <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid ##VkAttachmentDescription structures</li>
+            <li>{@code pSubpasses} <b>must</b> be a valid pointer to an array of {@code subpassCount} valid ##VkSubpassDescription structures</li>
+            <li>If {@code dependencyCount} is not 0, {@code pDependencies} <b>must</b> be a valid pointer to an array of {@code dependencyCount} valid ##VkSubpassDependency structures</li>
             <li>{@code subpassCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -3818,8 +3844,7 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
         <ul>
             <li>If {@code aspectMask} contains #IMAGE_ASPECT_COLOR_BIT, it <b>must</b> not contain either of #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>{@code aspectMask} <b>must</b> not contain #IMAGE_ASPECT_METADATA_BIT</li>
-            <li>{@code mipLevel} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
-            <li><code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
+            <li>{@code layerCount} <b>must</b> be greater than 0</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3866,13 +3891,11 @@ val VkImageCopy = struct(VULKAN_PACKAGE, "VkImageCopy") {
             <li>If the calling command&#8217;s {@code srcImage} is of type #IMAGE_TYPE_1D, then {@code srcOffset.y} <b>must</b> be 0 and {@code extent.height} <b>must</b> be 1.</li>
             <li>{@code srcOffset.z} and <code>(extent.depth srcOffset.z)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource depth</li>
             <li>If the calling command&#8217;s {@code srcImage} is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code srcOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
-            <li>{@code srcSubresource.baseArrayLayer} <b>must</b> be less than and <code>(srcSubresource.layerCount srcSubresource.baseArrayLayer)</code> <b>must</b> be less than or equal to the number of layers in the source image</li>
             <li>{@code dstOffset.x} and <code>(extent.width dstOffset.x)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource width</li>
             <li>{@code dstOffset.y} and <code>(extent.height dstOffset.y)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource height</li>
             <li>If the calling command&#8217;s {@code dstImage} is of type #IMAGE_TYPE_1D, then {@code dstOffset.y} <b>must</b> be 0 and {@code extent.height} <b>must</b> be 1.</li>
             <li>{@code dstOffset.z} and <code>(extent.depth dstOffset.z)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource depth</li>
             <li>If the calling command&#8217;s {@code dstImage} is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code dstOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
-            <li>{@code dstSubresource.baseArrayLayer} <b>must</b> be less than and <code>(dstSubresource.layerCount dstSubresource.baseArrayLayer)</code> <b>must</b> be less than or equal to the number of layers in the destination image</li>
             <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, all members of {@code srcOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
             <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(extent.width + srcOffset.x)</code> <b>must</b> equal the source image subresource width</li>
             <li>If the calling command&#8217;s {@code srcImage} is a compressed image, or a <em>single-plane</em>, “etext:_422” image format, {@code extent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(extent.height + srcOffset.y)</code> <b>must</b> equal the source image subresource height</li>
@@ -4101,7 +4124,7 @@ val VkClearRect = struct(VULKAN_PACKAGE, "VkClearRect") {
         Structure specifying a clear rectangle.
 
         <h5>Description</h5>
-        The layers <code>[baseArrayLayer, baseArrayLayer {plus} layerCount)</code> counting from the base layer of the attachment image view are cleared.
+        The layers <code>[baseArrayLayer, baseArrayLayer + layerCount)</code> counting from the base layer of the attachment image view are cleared.
 
         <h5>See Also</h5>
         ##VkRect2D, #CmdClearAttachments()
@@ -4264,10 +4287,10 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code srcQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or #QUEUE_FAMILY_EXTERNAL_KHR (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE and {@code dstQueueFamilyIndex} is not #QUEUE_FAMILY_IGNORED, it <b>must</b> be a valid queue family or #QUEUE_FAMILY_EXTERNAL_KHR (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queueprops">the “Queue Family Properties” section</a>).</li>
             <li>If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not #QUEUE_FAMILY_IGNORED, at least one of them <b>must</b> be the same as the family of the queue that will execute this barrier</li>
-            <li>{@code subresourceRange}{@code ::baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>If {@code subresourceRange}{@code ::levelCount} is not #REMAINING_MIP_LEVELS, {@code subresourceRange}{@code ::levelCount} <b>must</b> be non-zero and <code>subresourceRange::baseMipLevel + subresourceRange::levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>{@code subresourceRange}{@code ::baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
-            <li>If {@code subresourceRange}{@code ::layerCount} is not #REMAINING_ARRAY_LAYERS, {@code subresourceRange}{@code ::layerCount} <b>must</b> be non-zero and <code>subresourceRange::baseArrayLayer subresourceRange::layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>{@code subresourceRange.baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>If {@code subresourceRange.levelCount} is not #REMAINING_MIP_LEVELS, <code>subresourceRange.baseMipLevel + subresourceRange.levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>{@code subresourceRange.baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
+            <li>If {@code subresourceRange.layerCount} is not #REMAINING_ARRAY_LAYERS, <code>subresourceRange.baseArrayLayer subresourceRange.layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>If {@code image} has a depth/stencil format with both depth and stencil components, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If {@code image} has a single-plane color format or is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
             <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either at least one of #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, and #IMAGE_ASPECT_PLANE_2_BIT_KHR; or <b>must</b> include #IMAGE_ASPECT_COLOR_BIT</li>
@@ -4327,7 +4350,7 @@ val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code clearValueCount} <b>must</b> be greater than the largest attachment index in {@code renderPass} that specifies a {@code loadOp} (or {@code stencilLoadOp}, if the attachment has a depth/stencil format) of #ATTACHMENT_LOAD_OP_CLEAR</li>
-            <li>If {@code clearValueCount} is not 0, {@code pClearValues} <b>must</b> be a pointer to an array of {@code clearValueCount} valid ##VkClearValue unions</li>
+            <li>If {@code clearValueCount} is not 0, {@code pClearValues} <b>must</b> be a valid pointer to an array of {@code clearValueCount} valid ##VkClearValue unions</li>
             <li>{@code renderPass} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the ##VkFramebufferCreateInfo structure specified when creating {@code framebuffer}.</li>
         </ul>
 

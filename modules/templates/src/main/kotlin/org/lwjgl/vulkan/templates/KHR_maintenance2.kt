@@ -85,7 +85,7 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>Tue 28 Apr 2017</dd>
+            <dd>2017-04-28</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

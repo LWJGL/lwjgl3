@@ -132,8 +132,8 @@ val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_devi
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-            <li>{@code pPhysicalDeviceGroupCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pPhysicalDeviceGroupCount} is not 0, and {@code pPhysicalDeviceGroupProperties} is not {@code NULL}, {@code pPhysicalDeviceGroupProperties} <b>must</b> be a pointer to an array of {@code pPhysicalDeviceGroupCount} ##VkPhysicalDeviceGroupPropertiesKHX structures</li>
+            <li>{@code pPhysicalDeviceGroupCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pPhysicalDeviceGroupCount} is not 0, and {@code pPhysicalDeviceGroupProperties} is not {@code NULL}, {@code pPhysicalDeviceGroupProperties} <b>must</b> be a valid pointer to an array of {@code pPhysicalDeviceGroupCount} ##VkPhysicalDeviceGroupPropertiesKHX structures</li>
         </ul>
 
         <h5>Return Codes</h5>

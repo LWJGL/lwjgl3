@@ -26,7 +26,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿    PFN_vkDebugMarkerSetObjectNameEXT pfnDebugMarkerSetObjectNameEXT = (PFN_vkDebugMarkerSetObjectNameEXT)vkGetDeviceProcAddr(device, "vkDebugMarkerSetObjectNameEXT");
 ￿
 ￿    // Set a name on the image
-￿    const VkDeviceCreateInfo imageNameInfo =
+￿    const VkDebugMarkerObjectNameInfoEXT imageNameInfo =
 ￿    {
 ￿        VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT, // sType
 ￿        NULL,                                           // pNext
@@ -180,7 +180,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pTagInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerObjectTagInfoEXT structure</li>
+            <li>{@code pTagInfo} <b>must</b> be a valid pointer to a valid ##VkDebugMarkerObjectTagInfoEXT structure</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -226,7 +226,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pNameInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerObjectNameInfoEXT structure</li>
+            <li>{@code pNameInfo} <b>must</b> be a valid pointer to a valid ##VkDebugMarkerObjectNameInfoEXT structure</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -272,7 +272,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pMarkerInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerMarkerInfoEXT structure</li>
+            <li>{@code pMarkerInfo} <b>must</b> be a valid pointer to a valid ##VkDebugMarkerMarkerInfoEXT structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
         </ul>
@@ -355,7 +355,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pMarkerInfo} <b>must</b> be a pointer to a valid ##VkDebugMarkerMarkerInfoEXT structure</li>
+            <li>{@code pMarkerInfo} <b>must</b> be a valid pointer to a valid ##VkDebugMarkerMarkerInfoEXT structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
         </ul>

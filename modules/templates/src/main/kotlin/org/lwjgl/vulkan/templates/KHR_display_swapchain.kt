@@ -106,9 +106,9 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCreateInfos} <b>must</b> be a pointer to an array of {@code swapchainCount} valid ##VkSwapchainCreateInfoKHR structures</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pSwapchains} <b>must</b> be a pointer to an array of {@code swapchainCount} {@code VkSwapchainKHR} handles</li>
+            <li>{@code pCreateInfos} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid ##VkSwapchainCreateInfoKHR structures</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pSwapchains} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code VkSwapchainKHR} handles</li>
             <li>{@code swapchainCount} <b>must</b> be greater than 0</li>
         </ul>
 

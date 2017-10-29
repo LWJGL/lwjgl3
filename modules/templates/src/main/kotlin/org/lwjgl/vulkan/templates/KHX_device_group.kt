@@ -217,7 +217,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pPeerMemoryFeatures} <b>must</b> be a pointer to a {@code VkPeerMemoryFeatureFlagsKHX} value</li>
+            <li>{@code pPeerMemoryFeatures} <b>must</b> be a valid pointer to a {@code VkPeerMemoryFeatureFlagsKHX} value</li>
         </ul>
         """,
 
@@ -295,7 +295,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 ￿    uint32_t                                    groupCountZ);</pre></code>
 
         <h5>Description</h5>
-        When the command is executed, a global workgroup consisting of <code>groupCountX {times} groupCountY {times} groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup {plus} groupCount)</code> in each component. #CmdDispatch() is equivalent to vkCmdDispatchBaseKHX(0,0,0,groupCountX,groupCountY,groupCountZ).
+        When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. #CmdDispatch() is equivalent to vkCmdDispatchBaseKHX(0,0,0,groupCountX,groupCountY,groupCountZ).
 
         <h5>Valid Usage</h5>
         <ul>
@@ -357,7 +357,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pDeviceGroupPresentCapabilities} <b>must</b> be a pointer to a ##VkDeviceGroupPresentCapabilitiesKHX structure</li>
+            <li>{@code pDeviceGroupPresentCapabilities} <b>must</b> be a valid pointer to a ##VkDeviceGroupPresentCapabilitiesKHX structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -405,7 +405,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-            <li>{@code pModes} <b>must</b> be a pointer to a {@code VkDeviceGroupPresentModeFlagsKHX} value</li>
+            <li>{@code pModes} <b>must</b> be a valid pointer to a {@code VkDeviceGroupPresentModeFlagsKHX} value</li>
             <li>Both of {@code device}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
@@ -463,8 +463,8 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-            <li>{@code pRectCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pRectCount} is not 0, and {@code pRects} is not {@code NULL}, {@code pRects} <b>must</b> be a pointer to an array of {@code pRectCount} ##VkRect2D structures</li>
+            <li>{@code pRectCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pRectCount} is not 0, and {@code pRects} is not {@code NULL}, {@code pRects} <b>must</b> be a valid pointer to an array of {@code pRectCount} ##VkRect2D structures</li>
             <li>Both of {@code physicalDevice}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
@@ -515,8 +515,8 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pAcquireInfo} <b>must</b> be a pointer to a valid ##VkAcquireNextImageInfoKHX structure</li>
-            <li>{@code pImageIndex} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+            <li>{@code pAcquireInfo} <b>must</b> be a valid pointer to a valid ##VkAcquireNextImageInfoKHX structure</li>
+            <li>{@code pImageIndex} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
         </ul>
 
         <h5>Return Codes</h5>

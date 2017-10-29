@@ -98,7 +98,7 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pImportSemaphoreFdInfo} <b>must</b> be a pointer to a valid ##VkImportSemaphoreFdInfoKHR structure</li>
+            <li>{@code pImportSemaphoreFdInfo} <b>must</b> be a valid pointer to a valid ##VkImportSemaphoreFdInfoKHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -151,8 +151,8 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pGetFdInfo} <b>must</b> be a pointer to a valid ##VkSemaphoreGetFdInfoKHR structure</li>
-            <li>{@code pFd} <b>must</b> be a pointer to a {@code int} value</li>
+            <li>{@code pGetFdInfo} <b>must</b> be a valid pointer to a valid ##VkSemaphoreGetFdInfoKHR structure</li>
+            <li>{@code pFd} <b>must</b> be a valid pointer to a {@code int} value</li>
         </ul>
 
         <h5>Return Codes</h5>

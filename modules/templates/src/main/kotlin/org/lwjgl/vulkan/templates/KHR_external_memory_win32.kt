@@ -89,13 +89,13 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 ￿    HANDLE*                                     pHandle);</pre></code>
 
         <h5>Description</h5>
-        For handle types defined as NT handles, the handles returned by #GetMemoryWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.
+        For handle types defined as NT handles, the handles returned by #GetMemoryWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pGetWin32HandleInfo} <b>must</b> be a pointer to a valid ##VkMemoryGetWin32HandleInfoKHR structure</li>
-            <li>{@code pHandle} <b>must</b> be a pointer to a {@code HANDLE} value</li>
+            <li>{@code pGetWin32HandleInfo} <b>must</b> be a valid pointer to a valid ##VkMemoryGetWin32HandleInfoKHR structure</li>
+            <li>{@code pHandle} <b>must</b> be a valid pointer to a {@code HANDLE} value</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -146,7 +146,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
-            <li>{@code pMemoryWin32HandleProperties} <b>must</b> be a pointer to a ##VkMemoryWin32HandlePropertiesKHR structure</li>
+            <li>{@code pMemoryWin32HandleProperties} <b>must</b> be a valid pointer to a ##VkMemoryWin32HandlePropertiesKHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>

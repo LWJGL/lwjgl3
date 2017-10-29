@@ -308,7 +308,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pProcessCommandsInfo} <b>must</b> be a pointer to a valid ##VkCmdProcessCommandsInfoNVX structure</li>
+            <li>{@code pProcessCommandsInfo} <b>must</b> be a valid pointer to a valid ##VkCmdProcessCommandsInfoNVX structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
             <li>This command <b>must</b> only be called inside of a render pass instance</li>
@@ -356,7 +356,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pReserveSpaceInfo} <b>must</b> be a pointer to a valid ##VkCmdReserveSpaceForCommandsInfoNVX structure</li>
+            <li>{@code pReserveSpaceInfo} <b>must</b> be a valid pointer to a valid ##VkCmdReserveSpaceForCommandsInfoNVX structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
             <li>This command <b>must</b> only be called inside of a render pass instance</li>
@@ -401,9 +401,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkIndirectCommandsLayoutCreateInfoNVX structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pIndirectCommandsLayout} <b>must</b> be a pointer to a {@code VkIndirectCommandsLayoutNVX} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkIndirectCommandsLayoutCreateInfoNVX structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pIndirectCommandsLayout} <b>must</b> be a valid pointer to a {@code VkIndirectCommandsLayoutNVX} handle</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -455,7 +455,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutNVX} handle</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>{@code indirectCommandsLayout} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
@@ -486,9 +486,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkObjectTableCreateInfoNVX structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pObjectTable} <b>must</b> be a pointer to a {@code VkObjectTableNVX} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkObjectTableCreateInfoNVX structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pObjectTable} <b>must</b> be a valid pointer to a {@code VkObjectTableNVX} handle</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -540,7 +540,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code objectTable} <b>must</b> be a valid {@code VkObjectTableNVX} handle</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>{@code objectTable} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
@@ -585,8 +585,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code objectTable} <b>must</b> be a valid {@code VkObjectTableNVX} handle</li>
-            <li>{@code ppObjectTableEntries} <b>must</b> be a pointer to an array of {@code objectCount} valid ##VkObjectTableEntryNVX structures</li>
-            <li>{@code pObjectIndices} <b>must</b> be a pointer to an array of {@code objectCount} {@code uint32_t} values</li>
+            <li>{@code ppObjectTableEntries} <b>must</b> be a valid pointer to an array of {@code objectCount} valid ##VkObjectTableEntryNVX structures</li>
+            <li>{@code pObjectIndices} <b>must</b> be a valid pointer to an array of {@code objectCount} {@code uint32_t} values</li>
             <li>{@code objectCount} <b>must</b> be greater than 0</li>
             <li>{@code objectTable} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
@@ -648,8 +648,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code objectTable} <b>must</b> be a valid {@code VkObjectTableNVX} handle</li>
-            <li>{@code pObjectEntryTypes} <b>must</b> be a pointer to an array of {@code objectCount} valid {@code VkObjectEntryTypeNVX} values</li>
-            <li>{@code pObjectIndices} <b>must</b> be a pointer to an array of {@code objectCount} {@code uint32_t} values</li>
+            <li>{@code pObjectEntryTypes} <b>must</b> be a valid pointer to an array of {@code objectCount} valid {@code VkObjectEntryTypeNVX} values</li>
+            <li>{@code pObjectIndices} <b>must</b> be a valid pointer to an array of {@code objectCount} {@code uint32_t} values</li>
             <li>{@code objectCount} <b>must</b> be greater than 0</li>
             <li>{@code objectTable} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
@@ -698,8 +698,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pFeatures} <b>must</b> be a pointer to a ##VkDeviceGeneratedCommandsFeaturesNVX structure</li>
-            <li>{@code pLimits} <b>must</b> be a pointer to a ##VkDeviceGeneratedCommandsLimitsNVX structure</li>
+            <li>{@code pFeatures} <b>must</b> be a valid pointer to a ##VkDeviceGeneratedCommandsFeaturesNVX structure</li>
+            <li>{@code pLimits} <b>must</b> be a valid pointer to a ##VkDeviceGeneratedCommandsLimitsNVX structure</li>
         </ul>
 
         <h5>See Also</h5>

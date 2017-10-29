@@ -179,8 +179,8 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pExternalBufferInfo} <b>must</b> be a pointer to a valid ##VkPhysicalDeviceExternalBufferInfoKHR structure</li>
-            <li>{@code pExternalBufferProperties} <b>must</b> be a pointer to a ##VkExternalBufferPropertiesKHR structure</li>
+            <li>{@code pExternalBufferInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceExternalBufferInfoKHR structure</li>
+            <li>{@code pExternalBufferProperties} <b>must</b> be a valid pointer to a ##VkExternalBufferPropertiesKHR structure</li>
         </ul>
 
         <h5>See Also</h5>

@@ -41,7 +41,7 @@ val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>08/21/2017</dd>
+            <dd>2017-08-21</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>

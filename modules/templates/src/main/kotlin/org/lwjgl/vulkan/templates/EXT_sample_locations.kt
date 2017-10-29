@@ -115,7 +115,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pSampleLocationsInfo} <b>must</b> be a pointer to a valid ##VkSampleLocationsInfoEXT structure</li>
+            <li>{@code pSampleLocationsInfo} <b>must</b> be a valid pointer to a valid ##VkSampleLocationsInfoEXT structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
         </ul>
@@ -160,7 +160,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>{@code pMultisampleProperties} <b>must</b> be a pointer to a ##VkMultisamplePropertiesEXT structure</li>
+            <li>{@code pMultisampleProperties} <b>must</b> be a valid pointer to a ##VkMultisamplePropertiesEXT structure</li>
         </ul>
 
         <h5>See Also</h5>

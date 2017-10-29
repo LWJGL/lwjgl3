@@ -13,11 +13,11 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         """
         Virtual Reality (VR) applications often involve a post-processing step to apply a "barrel" distortion to the rendered image to correct the "pincushion" distortion introduced by the optics in a VR device. The barrel distorted image has lower resolution along the edges compared to the center. Since the original image is rendered at high resolution, which is uniform across the complete image, a lot of pixels towards the edges do not make it to the final post-processed image.
 
-        This extension provides a mechanism to render VR scenes at a non-uniform resolution, in particular a resolution that falls linearly from the center towards the edges. This is achieved by scaling the "w" coordinate of the vertices in the clip space before perspective divide. The clip space "w" coordinate of the vertices <b>can</b> be offset as of a function of "x" and "y" coordinates as follows:
+        This extension provides a mechanism to render VR scenes at a non-uniform resolution, in particular a resolution that falls linearly from the center towards the edges. This is achieved by scaling the <code>w</code> coordinate of the vertices in the clip space before perspective divide. The clip space <code>w</code> coordinate of the vertices <b>can</b> be offset as of a function of <code>x</code> and <code>y</code> coordinates as follows:
 
-        w' = w + Ax + By
+        <code>w' = w + Ax + By</code>
 
-        In the intended use case for viewport position scaling, an application should use a set of 4 viewports, one for each of the 4 quadrants of a Cartesian coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify A and B coefficients of the w-scaling equation above, that have the same value, but different signs, for each of the viewports. The signs of A and B should match the signs of X and Y for the quadrant that they represent such that the value of "w'" will always be greater than or equal to the original "w" value for the entire image. Since the offset to "w", (Ax + By), is always positive and increases with the absolute values of "x" and "y", the effective resolution will fall off linearly from the center of the image to its edges.
+        In the intended use case for viewport position scaling, an application should use a set of 4 viewports, one for each of the 4 quadrants of a Cartesian coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify <code>A</code> and <code>B</code> coefficients of the <code>w</code>-scaling equation above, that have the same value, but different signs, for each of the viewports. The signs of <code>A</code> and <code>B</code> should match the signs of <code>x</code> and <code>y</code> for the quadrant that they represent such that the value of <code>w'</code> will always be greater than or equal to the original <code>w</code> value for the entire image. Since the offset to <code>w</code>, (<code>Ax + By</code>), is always positive, and increases with the absolute values of <code>x</code> and <code>y</code>, the effective resolution will fall off linearly from the center of the image to its edges.
 
         <h5>Examples</h5>
         <code><pre>
@@ -174,7 +174,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 ￿    const VkViewportWScalingNV*                 pViewportWScalings);</pre></code>
 
         <h5>Description</h5>
-        The viewport parameters taken from element <code>i</code> of {@code pViewportScalings} replace the current state for the viewport index <code>firstViewport {plus} i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
+        The viewport parameters taken from element <code>i</code> of {@code pViewportScalings} replace the current state for the viewport index <code>firstViewport + i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
 
         <h5>Valid Usage</h5>
         <ul>

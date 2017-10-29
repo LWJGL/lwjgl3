@@ -96,7 +96,7 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pImportFenceWin32HandleInfo} <b>must</b> be a pointer to a valid ##VkImportFenceWin32HandleInfoKHR structure</li>
+            <li>{@code pImportFenceWin32HandleInfo} <b>must</b> be a valid pointer to a valid ##VkImportFenceWin32HandleInfoKHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -143,8 +143,8 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pGetWin32HandleInfo} <b>must</b> be a pointer to a valid ##VkFenceGetWin32HandleInfoKHR structure</li>
-            <li>{@code pHandle} <b>must</b> be a pointer to a {@code HANDLE} value</li>
+            <li>{@code pGetWin32HandleInfo} <b>must</b> be a valid pointer to a valid ##VkFenceGetWin32HandleInfoKHR structure</li>
+            <li>{@code pHandle} <b>must</b> be a valid pointer to a {@code HANDLE} value</li>
         </ul>
 
         <h5>Return Codes</h5>

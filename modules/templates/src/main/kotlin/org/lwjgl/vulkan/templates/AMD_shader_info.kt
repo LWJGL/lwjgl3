@@ -165,8 +165,8 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
             <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
             <li>{@code shaderStage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
             <li>{@code infoType} <b>must</b> be a valid {@code VkShaderInfoTypeAMD} value</li>
-            <li>{@code pInfoSize} <b>must</b> be a pointer to a {@code size_t} value</li>
-            <li>If the value referenced by {@code pInfoSize} is not 0, and {@code pInfo} is not {@code NULL}, {@code pInfo} <b>must</b> be a pointer to an array of {@code pInfoSize} bytes</li>
+            <li>{@code pInfoSize} <b>must</b> be a valid pointer to a {@code size_t} value</li>
+            <li>If the value referenced by {@code pInfoSize} is not 0, and {@code pInfo} is not {@code NULL}, {@code pInfo} <b>must</b> be a valid pointer to an array of {@code pInfoSize} bytes</li>
             <li>{@code pipeline} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 

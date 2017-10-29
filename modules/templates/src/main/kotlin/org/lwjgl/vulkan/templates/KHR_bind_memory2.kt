@@ -97,7 +97,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pBindInfos} <b>must</b> be a pointer to an array of {@code bindInfoCount} valid ##VkBindBufferMemoryInfoKHR structures</li>
+            <li>{@code pBindInfos} <b>must</b> be a valid pointer to an array of {@code bindInfoCount} valid ##VkBindBufferMemoryInfoKHR structures</li>
             <li>{@code bindInfoCount} <b>must</b> be greater than 0</li>
         </ul>
 
@@ -144,7 +144,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pBindInfos} <b>must</b> be a pointer to an array of {@code bindInfoCount} valid ##VkBindImageMemoryInfoKHR structures</li>
+            <li>{@code pBindInfos} <b>must</b> be a valid pointer to an array of {@code bindInfoCount} valid ##VkBindImageMemoryInfoKHR structures</li>
             <li>{@code bindInfoCount} <b>must</b> be greater than 0</li>
         </ul>
 

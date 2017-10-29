@@ -285,9 +285,9 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkSamplerYcbcrConversionCreateInfoKHR structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pYcbcrConversion} <b>must</b> be a pointer to a {@code VkSamplerYcbcrConversionKHR} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkSamplerYcbcrConversionCreateInfoKHR structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pYcbcrConversion} <b>must</b> be a valid pointer to a {@code VkSamplerYcbcrConversionKHR} handle</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -332,7 +332,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>If {@code ycbcrConversion} is not #NULL_HANDLE, {@code ycbcrConversion} <b>must</b> be a valid {@code VkSamplerYcbcrConversionKHR} handle</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>If {@code ycbcrConversion} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 

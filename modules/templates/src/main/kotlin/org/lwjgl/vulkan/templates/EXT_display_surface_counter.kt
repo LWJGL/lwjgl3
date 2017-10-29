@@ -109,7 +109,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-            <li>{@code pSurfaceCapabilities} <b>must</b> be a pointer to a ##VkSurfaceCapabilities2EXT structure</li>
+            <li>{@code pSurfaceCapabilities} <b>must</b> be a valid pointer to a ##VkSurfaceCapabilities2EXT structure</li>
             <li>Both of {@code physicalDevice}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 

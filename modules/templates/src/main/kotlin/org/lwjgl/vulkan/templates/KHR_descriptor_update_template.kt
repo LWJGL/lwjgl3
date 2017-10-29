@@ -129,9 +129,9 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDescriptorUpdateTemplateCreateInfoKHR structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pDescriptorUpdateTemplate} <b>must</b> be a pointer to a {@code VkDescriptorUpdateTemplateKHR} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkDescriptorUpdateTemplateCreateInfoKHR structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pDescriptorUpdateTemplate} <b>must</b> be a valid pointer to a {@code VkDescriptorUpdateTemplateKHR} handle</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -182,7 +182,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>If {@code descriptorUpdateTemplate} is not #NULL_HANDLE, {@code descriptorUpdateTemplate} <b>must</b> be a valid {@code VkDescriptorUpdateTemplateKHR} handle</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>If {@code descriptorUpdateTemplate} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
@@ -217,7 +217,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pData} <b>must</b> be a pointer to a memory that contains one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplateKHR()</li>
+            <li>{@code pData} <b>must</b> be a valid pointer to a memory that contains one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplateKHR()</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -335,7 +335,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         <h5>Valid Usage</h5>
         <ul>
             <li>The pipelineBindPoint specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
-            <li>{@code pData} <b>must</b> be a pointer to a memory that contains one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplateKHR()</li>
+            <li>{@code pData} <b>must</b> be a valid pointer to a memory that contains one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplateKHR()</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

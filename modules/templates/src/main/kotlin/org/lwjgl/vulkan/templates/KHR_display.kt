@@ -126,8 +126,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkDisplayPropertiesKHR structures</li>
+            <li>{@code pPropertyCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a valid pointer to an array of {@code pPropertyCount} ##VkDisplayPropertiesKHR structures</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -174,8 +174,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkDisplayPlanePropertiesKHR structures</li>
+            <li>{@code pPropertyCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a valid pointer to an array of {@code pPropertyCount} ##VkDisplayPlanePropertiesKHR structures</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -228,8 +228,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pDisplayCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pDisplayCount} is not 0, and {@code pDisplays} is not {@code NULL}, {@code pDisplays} <b>must</b> be a pointer to an array of {@code pDisplayCount} {@code VkDisplayKHR} handles</li>
+            <li>{@code pDisplayCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pDisplayCount} is not 0, and {@code pDisplays} is not {@code NULL}, {@code pDisplays} <b>must</b> be a valid pointer to an array of {@code pDisplayCount} {@code VkDisplayKHR} handles</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -276,8 +276,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
-            <li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkDisplayModePropertiesKHR structures</li>
+            <li>{@code pPropertyCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a valid pointer to an array of {@code pPropertyCount} ##VkDisplayModePropertiesKHR structures</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -325,9 +325,9 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDisplayModeCreateInfoKHR structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pMode} <b>must</b> be a pointer to a {@code VkDisplayModeKHR} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkDisplayModeCreateInfoKHR structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pMode} <b>must</b> be a valid pointer to a {@code VkDisplayModeKHR} handle</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -380,7 +380,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code mode} <b>must</b> be a valid {@code VkDisplayModeKHR} handle</li>
-            <li>{@code pCapabilities} <b>must</b> be a pointer to a ##VkDisplayPlaneCapabilitiesKHR structure</li>
+            <li>{@code pCapabilities} <b>must</b> be a valid pointer to a ##VkDisplayPlaneCapabilitiesKHR structure</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -430,9 +430,9 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDisplaySurfaceCreateInfoKHR structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pSurface} <b>must</b> be a pointer to a {@code VkSurfaceKHR} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkDisplaySurfaceCreateInfoKHR structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pSurface} <b>must</b> be a valid pointer to a {@code VkSurfaceKHR} handle</li>
         </ul>
 
         <h5>Return Codes</h5>

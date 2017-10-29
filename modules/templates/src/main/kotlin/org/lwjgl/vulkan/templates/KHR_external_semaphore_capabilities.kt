@@ -156,8 +156,8 @@ val KHR_external_semaphore_capabilities = "KHRExternalSemaphoreCapabilities".nat
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pExternalSemaphoreInfo} <b>must</b> be a pointer to a valid ##VkPhysicalDeviceExternalSemaphoreInfoKHR structure</li>
-            <li>{@code pExternalSemaphoreProperties} <b>must</b> be a pointer to a ##VkExternalSemaphorePropertiesKHR structure</li>
+            <li>{@code pExternalSemaphoreInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceExternalSemaphoreInfoKHR structure</li>
+            <li>{@code pExternalSemaphoreProperties} <b>must</b> be a valid pointer to a ##VkExternalSemaphorePropertiesKHR structure</li>
         </ul>
 
         <h5>See Also</h5>

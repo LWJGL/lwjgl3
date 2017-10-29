@@ -122,9 +122,9 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkValidationCacheCreateInfoEXT structure</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code pValidationCache} <b>must</b> be a pointer to a {@code VkValidationCacheEXT} handle</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkValidationCacheCreateInfoEXT structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pValidationCache} <b>must</b> be a valid pointer to a {@code VkValidationCacheEXT} handle</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -174,7 +174,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>If {@code validationCache} is not #NULL_HANDLE, {@code validationCache} <b>must</b> be a valid {@code VkValidationCacheEXT} handle</li>
-            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
             <li>If {@code validationCache} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
@@ -221,7 +221,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code dstCache} <b>must</b> be a valid {@code VkValidationCacheEXT} handle</li>
-            <li>{@code pSrcCaches} <b>must</b> be a pointer to an array of {@code srcCacheCount} valid {@code VkValidationCacheEXT} handles</li>
+            <li>{@code pSrcCaches} <b>must</b> be a valid pointer to an array of {@code srcCacheCount} valid {@code VkValidationCacheEXT} handles</li>
             <li>{@code srcCacheCount} <b>must</b> be greater than 0</li>
             <li>{@code dstCache} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
             <li>Each element of {@code pSrcCaches} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
@@ -297,8 +297,8 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code validationCache} <b>must</b> be a valid {@code VkValidationCacheEXT} handle</li>
-            <li>{@code pDataSize} <b>must</b> be a pointer to a {@code size_t} value</li>
-            <li>If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a pointer to an array of {@code pDataSize} bytes</li>
+            <li>{@code pDataSize} <b>must</b> be a valid pointer to a {@code size_t} value</li>
+            <li>If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code pDataSize} bytes</li>
             <li>{@code validationCache} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 

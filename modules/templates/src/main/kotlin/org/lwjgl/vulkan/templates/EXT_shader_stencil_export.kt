@@ -37,7 +37,7 @@ val EXT_shader_stencil_export = "EXTShaderStencilExport".nativeClassVK("EXT_shad
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>07/19/2017</dd>
+            <dd>2017-07-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

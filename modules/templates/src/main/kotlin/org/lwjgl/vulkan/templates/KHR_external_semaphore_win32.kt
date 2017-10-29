@@ -95,7 +95,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pImportSemaphoreWin32HandleInfo} <b>must</b> be a pointer to a valid ##VkImportSemaphoreWin32HandleInfoKHR structure</li>
+            <li>{@code pImportSemaphoreWin32HandleInfo} <b>must</b> be a valid pointer to a valid ##VkImportSemaphoreWin32HandleInfoKHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -142,8 +142,8 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pGetWin32HandleInfo} <b>must</b> be a pointer to a valid ##VkSemaphoreGetWin32HandleInfoKHR structure</li>
-            <li>{@code pHandle} <b>must</b> be a pointer to a {@code HANDLE} value</li>
+            <li>{@code pGetWin32HandleInfo} <b>must</b> be a valid pointer to a valid ##VkSemaphoreGetWin32HandleInfoKHR structure</li>
+            <li>{@code pHandle} <b>must</b> be a valid pointer to a {@code HANDLE} value</li>
         </ul>
 
         <h5>Return Codes</h5>

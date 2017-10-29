@@ -92,8 +92,8 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pSurfaceInfo} <b>must</b> be a pointer to a valid ##VkPhysicalDeviceSurfaceInfo2KHR structure</li>
-            <li>{@code pSurfaceCapabilities} <b>must</b> be a pointer to a ##VkSurfaceCapabilities2KHR structure</li>
+            <li>{@code pSurfaceInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceSurfaceInfo2KHR structure</li>
+            <li>{@code pSurfaceCapabilities} <b>must</b> be a valid pointer to a ##VkSurfaceCapabilities2KHR structure</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -141,9 +141,9 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pSurfaceInfo} <b>must</b> be a pointer to a valid ##VkPhysicalDeviceSurfaceInfo2KHR structure</li>
-            <li>{@code pSurfaceFormatCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pSurfaceFormatCount} is not 0, and {@code pSurfaceFormats} is not {@code NULL}, {@code pSurfaceFormats} <b>must</b> be a pointer to an array of {@code pSurfaceFormatCount} ##VkSurfaceFormat2KHR structures</li>
+            <li>{@code pSurfaceInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceSurfaceInfo2KHR structure</li>
+            <li>{@code pSurfaceFormatCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pSurfaceFormatCount} is not 0, and {@code pSurfaceFormats} is not {@code NULL}, {@code pSurfaceFormats} <b>must</b> be a valid pointer to an array of {@code pSurfaceFormatCount} ##VkSurfaceFormat2KHR structures</li>
         </ul>
 
         <h5>Return Codes</h5>

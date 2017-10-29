@@ -90,8 +90,8 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a pointer to a valid ##VkImageMemoryRequirementsInfo2KHR structure</li>
-            <li>{@code pMemoryRequirements} <b>must</b> be a pointer to a ##VkMemoryRequirements2KHR structure</li>
+            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkImageMemoryRequirementsInfo2KHR structure</li>
+            <li>{@code pMemoryRequirements} <b>must</b> be a valid pointer to a ##VkMemoryRequirements2KHR structure</li>
         </ul>
 
         <h5>See Also</h5>
@@ -120,8 +120,8 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a pointer to a valid ##VkBufferMemoryRequirementsInfo2KHR structure</li>
-            <li>{@code pMemoryRequirements} <b>must</b> be a pointer to a ##VkMemoryRequirements2KHR structure</li>
+            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkBufferMemoryRequirementsInfo2KHR structure</li>
+            <li>{@code pMemoryRequirements} <b>must</b> be a valid pointer to a ##VkMemoryRequirements2KHR structure</li>
         </ul>
 
         <h5>See Also</h5>

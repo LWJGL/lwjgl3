@@ -151,8 +151,8 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code pExternalFenceInfo} <b>must</b> be a pointer to a valid ##VkPhysicalDeviceExternalFenceInfoKHR structure</li>
-            <li>{@code pExternalFenceProperties} <b>must</b> be a pointer to a ##VkExternalFencePropertiesKHR structure</li>
+            <li>{@code pExternalFenceInfo} <b>must</b> be a valid pointer to a valid ##VkPhysicalDeviceExternalFenceInfoKHR structure</li>
+            <li>{@code pExternalFenceProperties} <b>must</b> be a valid pointer to a ##VkExternalFencePropertiesKHR structure</li>
         </ul>
 
         <h5>See Also</h5>
