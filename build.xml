@@ -244,6 +244,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/system/windows"/>
 
             <src path="${src.templates.kotlin}/org/lwjgl/util/lmdb" if:true="${binding.lmdb}"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/util/lz4" if:true="${binding.lz4}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/remotery" if:true="${binding.remotery}"/>
@@ -352,6 +353,7 @@
             <exclude name="org/lwjgl/system/jawt/**" unless:true="${binding.jawt}"/>
 
             <exclude name="org/lwjgl/util/lmdb/**" unless:true="${binding.lmdb}"/>
+            <exclude name="org/lwjgl/util/lz4/**" unless:true="${binding.lz4}"/>
             <exclude name="org/lwjgl/util/nfd/**" unless:true="${binding.nfd}"/>
             <exclude name="org/lwjgl/util/par/**" unless:true="${binding.par}"/>
             <exclude name="org/lwjgl/util/remotery/**" unless:true="${binding.remotery}"/>
@@ -544,6 +546,7 @@
 
             <include name="org/lwjgl/demo/util/*.java"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
+            <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
             <include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
             <include name="org/lwjgl/demo/util/par/**" if:true="${par}"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:true="${tinyexr}"/>
@@ -1062,6 +1065,9 @@
 
         <!-- LMDB -->
         <release-module package="org.lwjgl.util.lmdb" name="lmdb" native-library="lwjgl_lmdb" title="LMDB" license="lmdb" if:true="${binding.lmdb}"/>
+
+        <!-- lz4 -->
+        <release-module package="org.lwjgl.util.lz4" name="lz4" native-library="lwjgl_lz4" title="lz4" license="lz4" if:true="${binding.lz4}"/>
 
         <!-- NanoVG -->
         <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" license="nano" if:true="${binding.nanovg}">

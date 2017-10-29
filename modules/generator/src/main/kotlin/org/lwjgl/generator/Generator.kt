@@ -44,6 +44,7 @@ enum class Binding(
     JAWT("binding.jawt", "org.lwjgl.system.jawt"),
     JEMALLOC("binding.jemalloc", "org.lwjgl.system.jemalloc"),
     LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),
+    LZ4("binding.lz4", "org.lwjgl.util.lz4"),
     NANOVG("binding.nanovg", "org.lwjgl.nanovg"),
     NFD("binding.nfd", "org.lwjgl.util.nfd"),
     NUKLEAR("binding.nuklear", "org.lwjgl.nuklear"),

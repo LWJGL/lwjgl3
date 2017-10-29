@@ -100,6 +100,11 @@ enum Artifacts {
         "A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API.",
         Platforms.ALL
     ),
+    LZ4(
+        "lwjgl-lz4", "LWJGL - LZ4 bindings",
+        "A lossless data compression algorithm that is focused on compression and decompression speed.",
+        Platforms.ALL
+    ),
     NANOVG(
         "lwjgl-nanovg", "LWJGL - NanoVG & NanoSVG bindings",
         "A small antialiased vector graphics rendering library for OpenGL. Also includes NanoSVG, a simple SVG parser.",

@@ -148,6 +148,22 @@
             </source>
         </build>
 
+        <!-- LZ4 -->
+        <build name="lwjgl_lz4" dest="${bin.native}/lz4" if:true="${binding.lz4}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="">
+                    <arg value="-I${src.native.rel}/util/lz4"/>
+                    <arg value="-I${src.native.rel}/util/xxhash"/>
+                    <fileset dir="." includes="${src.native}/util/lz4/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/xxhash/*.c"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-I${src.native.rel}/util/lz4"/>
+                <fileset dir="." includes="${src.generated.native}/util/lz4/*.c"/>
+            </source>
+        </build>
+
         <!-- NanoVG -->
         <build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
             <source>
