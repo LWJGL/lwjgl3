@@ -131,3 +131,36 @@ A commit should have a type prefix and an appropriate scope. The scope in partic
 Other than that, there's no intention to be overly strict about this. There will be a lot of flexibility on the allowed types and scopes, as well as the exact message formatting.
 
 Contributors are encouraged but not required to submit PRs using these guidelines. Commit messages will be changed during review or when a patch is rebased, as needed.
+
+# ADDING A NEW BINDING
+
+Changes to several different places are required in order to add a new binding to LWJGL. These are listed below.
+
+In the `lwjgl3` repository:
+
+- `build.xml`
+    * `compile-templates`: add path to binding templates
+    * `-init-compile`: add binding package
+    * `compile-tests`: add demo & test packages (if applicable)
+    * `release`: add `release-module` definition for the binding
+- `config/build-bindings.xml`
+    * Add `binding.<name>` property so that the binding can be conditionally enabled.
+- `config/<platform>/build.xml`
+    * Add `build` definition to the applicable platforms. 
+- `modules/generator/src/main/kotlin/org/lwjgl/generator/Generator.kt`
+    * Add to the `Binding` enum.
+- `modules/module-info-gen/src/main/resources/`
+    * Add module definition for the binding.
+- `README.MD`
+    * Add to the `List of Supported Bindings`.
+- `doc/3rdparty/`
+    * Add license file for the binding.
+- `doc/notes/<version>.md`
+    * Add to the next version release notes.
+- `build.gradle`
+    * Add to the `Artifacts` enum.
+    
+In the `lwjgl3-www` repository:
+
+- `client/routes/customize/BuildConfigurator/lwjgl/nightly.js` (`lwjgl3-www` repository)
+    * Add definition for the binding.
