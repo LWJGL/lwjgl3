@@ -333,11 +333,11 @@
                     <arg value="-I${src.native.rel}/util/zstd/decompress"/>
                     <arg value="-I${src.native.rel}/util/zstd/dictBuilder"/>
                     <arg value="-I${src.native.rel}/util/xxhash"/>
-                    <fileset dir="." includes="${src.native.rel}/util/zstd/common/*.c"/>
-                    <fileset dir="." includes="${src.native.rel}/util/zstd/compress/*.c"/>
-                    <fileset dir="." includes="${src.native.rel}/util/zstd/decompress/*.c"/>
-                    <fileset dir="." includes="${src.native.rel}/util/zstd/dictBuilder/*.c"/>
-                    <fileset dir="." includes="${src.native.rel}/util/xxhash/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/common/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/compress/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/decompress/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/zstd/dictBuilder/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/xxhash/*.c"/>
                 </compile>
             </beforeCompile>
             <source>
