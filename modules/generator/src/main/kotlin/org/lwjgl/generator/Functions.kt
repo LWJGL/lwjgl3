@@ -196,7 +196,7 @@ class Func(
     internal val hideAutoSizeResultParam = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
 
     private fun Parameter.error(msg: String) {
-        throw IllegalArgumentException("$msg [${nativeClass.className}.${this@Func.name}, parameter: ${this.name}]")
+        throw IllegalArgumentException("$msg [${nativeClass.className}.${this@Func.simpleName}, parameter: ${this.name}]")
     }
 
     private fun Parameter.asJavaMethodParam(annotate: Boolean) =

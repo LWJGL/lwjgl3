@@ -540,7 +540,7 @@ class NativeClass(
             try {
                 func.generateMethods(this)
             } catch (e: Exception) {
-                throw RuntimeException("Uncaught exception while generating method: $className.${func.name}", e)
+                throw RuntimeException("Uncaught exception while generating method: $className.${func.simpleName}", e)
             }
         }
 
