@@ -15,7 +15,7 @@ public final class ModuleInfoGen {
 
     private static final String JAVA_PACKAGE = "\\p{javaJavaIdentifierStart}\\p{javaJavaIdentifierPart}*(\\s*\\.\\s*\\p{javaJavaIdentifierStart}\\p{javaJavaIdentifierPart}*)*";
 
-    private static final Pattern MODULE_NAME = Pattern.compile("^\\s*(?:open\\s+)?module\\s+(" + JAVA_PACKAGE + ")\\s*\\{");
+    private static final Pattern MODULE_NAME = Pattern.compile("^\\s*(?:open\\s+)?module\\s+(" + JAVA_PACKAGE + ")\\s*\\{", Pattern.MULTILINE);
 
     private static final Pattern EXPORTS = Pattern.compile(
         "[{;]\\s*exports\\s+(" + JAVA_PACKAGE + ")(?:\\s+to\\s+" + JAVA_PACKAGE + ")?\\s*(?=;)",
