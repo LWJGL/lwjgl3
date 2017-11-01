@@ -14,6 +14,7 @@ import java.io.*;
 import java.nio.*;
 import java.util.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -38,6 +39,7 @@ public final class Events {
         System.err.println("---- [ Error callback test ] ----");
         glfwDefaultWindowHints();
         System.err.println("---- [ Error callback done ] ----");
+        System.err.flush();
 
         if (!glfwInit()) {
             throw new IllegalStateException("Failed to initialize GLFW.");
@@ -72,6 +74,9 @@ public final class Events {
     }
 
     private static void demo() {
+        int WIDTH  = 640;
+        int HEIGHT = 480;
+
         try (MemoryStack s = stackPush()) {
             IntBuffer pi = s.mallocInt(1);
             IntBuffer pj = s.mallocInt(1);
@@ -83,7 +88,7 @@ public final class Events {
 
             PointerBuffer monitors = glfwGetMonitors();
             for (int i = 0; i < monitors.remaining(); i++) {
-                long monitor = monitors.get(0);
+                long monitor = monitors.get(i);
 
                 System.out.format("%nMonitor %d:%n----------%n", i);
                 System.out.format("\tName: %s%s%n", glfwGetMonitorName(monitor), primaryMonitor == monitor ? " (primary)" : "");
@@ -100,21 +105,29 @@ public final class Events {
                 float xscale = px.get(0);
                 float yscale = py.get(0);
 
+                if (primaryMonitor == monitor && Platform.get() != Platform.MACOSX) {
+                    WIDTH = round(WIDTH * xscale);
+                    HEIGHT = round(HEIGHT * yscale);
+                }
+
                 double MM_TO_INCH = 0.0393701;
 
                 GLFWVidMode mode = glfwGetVideoMode(monitor);
 
-                System.out.format("\tCurrent mode: %d x %d @ %d Hz (%s, R%dG%dB%d)%n",
+                System.out.format("\tCurrent mode    : %d x %d @ %d Hz (%s, R%dG%dB%d)%n",
                     mode.width(), mode.height(),
                     mode.refreshRate(),
                     ratio(mode.width(), mode.height()),
                     mode.redBits(), mode.greenBits(), mode.blueBits()
                 );
-                System.out.format("\tContent scale: %f x %f%n", xscale, yscale);
-                System.out.format("\tPhysical size: %dmm x %dmm (%d\", %d ppi)%n",
+                System.out.format("\tContent scale   : %f x %f%n", xscale, yscale);
+                if (xscale != 1.0f || yscale != 1.0f) {
+                    System.out.format("\tContent size    : %d x %d%n", round(mode.width() / xscale), round(mode.height() / yscale));
+                }
+                System.out.format("\tPhysical size   : %dmm x %dmm (%d\", %d ppi)%n",
                     widthMM, heightMM,
-                    Math.round(Math.sqrt(widthMM * widthMM + heightMM * heightMM) * MM_TO_INCH), // inches
-                    Math.round(mode.width() / (widthMM * MM_TO_INCH) * xscale) // dpi
+                    round(Math.sqrt(widthMM * widthMM + heightMM * heightMM) * MM_TO_INCH), // inches
+                    round(mode.width() / (widthMM * MM_TO_INCH)) // dpi
                 );
                 System.out.format("\tVirtual position: %d, %d%n", xpos, ypos);
             }
@@ -123,7 +136,7 @@ public final class Events {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
-        long window = glfwCreateWindow(640, 480, "GLFW Event Demo", NULL, NULL);
+        long window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Event Demo", NULL, NULL);
         if (window == NULL) {
             throw new IllegalStateException("Failed to create GLFW window.");
         }

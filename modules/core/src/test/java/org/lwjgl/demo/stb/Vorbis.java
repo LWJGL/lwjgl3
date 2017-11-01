@@ -280,12 +280,6 @@ public final class Vorbis {
         private static final int WIDTH  = 640;
         private static final int HEIGHT = 320;
 
-        private final GLFWErrorCallback           errorCallback;
-        private final GLFWFramebufferSizeCallback framebufferSizeCallback;
-        private final GLFWKeyCallback             keyCallback;
-        private final GLFWCursorPosCallback       cursorPosCallback;
-        private final GLFWMouseButtonCallback     mouseButtonCallback;
-
         private final Callback debugProc;
 
         private final long window;
@@ -299,7 +293,7 @@ public final class Vorbis {
         private boolean buttonPressed;
 
         Renderer(Decoder decoder, String title) {
-            errorCallback = GLFWErrorCallback.createPrint().set();
+            GLFWErrorCallback.createPrint().set();
             if (!glfwInit()) {
                 throw new IllegalStateException("Unable to initialize GLFW");
             }
@@ -313,67 +307,53 @@ public final class Vorbis {
                 throw new RuntimeException("Failed to create the GLFW window");
             }
 
-            framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
-                @Override
-                public void invoke(long window, int width, int height) {
-                    glViewport(0, 0, width, height);
+            glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+
+            glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+                if (action == GLFW_RELEASE) {
+                    return;
                 }
-            }.set(window);
 
-            keyCallback = new GLFWKeyCallback() {
-                @Override
-                public void invoke(long window, int key, int scancode, int action, int mods) {
-                    if (action == GLFW_RELEASE) {
-                        return;
-                    }
-
-                    switch (key) {
-                        case GLFW_KEY_ESCAPE:
-                            glfwSetWindowShouldClose(window, true);
-                            break;
-                        case GLFW_KEY_HOME:
-                            decoder.rewind();
-                            break;
-                        case GLFW_KEY_LEFT:
-                            decoder.skip(-1);
-                            break;
-                        case GLFW_KEY_RIGHT:
-                            decoder.skip(1);
-                            break;
-                        case GLFW_KEY_SPACE:
-                            paused = !paused;
-                            break;
-                    }
+                switch (key) {
+                    case GLFW_KEY_ESCAPE:
+                        glfwSetWindowShouldClose(window, true);
+                        break;
+                    case GLFW_KEY_HOME:
+                        decoder.rewind();
+                        break;
+                    case GLFW_KEY_LEFT:
+                        decoder.skip(-1);
+                        break;
+                    case GLFW_KEY_RIGHT:
+                        decoder.skip(1);
+                        break;
+                    case GLFW_KEY_SPACE:
+                        paused = !paused;
+                        break;
                 }
-            }.set(window);
+            });
 
-            mouseButtonCallback = new GLFWMouseButtonCallback() {
-                @Override
-                public void invoke(long window, int button, int action, int mods) {
-                    if (button != GLFW_MOUSE_BUTTON_LEFT) {
-                        return;
-                    }
+            glfwSetMouseButtonCallback(window, (window, button, action, mods) -> {
+                if (button != GLFW_MOUSE_BUTTON_LEFT) {
+                    return;
+                }
 
-                    buttonPressed = action == GLFW_PRESS;
-                    if (!buttonPressed) {
-                        return;
-                    }
+                buttonPressed = action == GLFW_PRESS;
+                if (!buttonPressed) {
+                    return;
+                }
 
+                seek(decoder);
+            });
+
+            glfwSetCursorPosCallback(window, (window, xpos, ypos) -> {
+                cursorX = xpos - WIDTH * 0.5f;
+                cursorY = ypos - HEIGHT * 0.5f;
+
+                if (buttonPressed) {
                     seek(decoder);
                 }
-            }.set(window);
-
-            cursorPosCallback = new GLFWCursorPosCallback() {
-                @Override
-                public void invoke(long window, double xpos, double ypos) {
-                    cursorX = xpos - WIDTH * 0.5f;
-                    cursorY = ypos - HEIGHT * 0.5f;
-
-                    if (buttonPressed) {
-                        seek(decoder);
-                    }
-                }
-            }.set(window);
+            });
 
             // Center window
             GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
