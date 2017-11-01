@@ -180,7 +180,7 @@ typedef struct HiddenAreaMesh_t
 
         Check(1)..uint64_t_p.OUT("pnDevice", ""),
         ETextureType.IN("textureType", "", "ETextureType_\\w+"),
-        Check(1)..VkInstance_T.p.IN("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
+        VkInstance_T_p.IN("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
     )
 
     bool(

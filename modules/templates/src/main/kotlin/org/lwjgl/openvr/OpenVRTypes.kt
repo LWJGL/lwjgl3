@@ -94,10 +94,10 @@ val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
 val glInt_t = typedef(int32_t, "glInt_t")
 val glUInt_t = typedef(uint32_t, "glUInt_t")
 
-val VkInstance_T = "VkInstance_T".opaque_p
-val VkPhysicalDevice_T = "VkPhysicalDevice_T".opaque_p
-val VkDevice_T = "VkDevice_T".opaque_p
-val VkQueue_T = "VkQueue_T".opaque_p
+val VkInstance_T_p = "VkInstance_T".p
+val VkPhysicalDevice_T_p = "VkPhysicalDevice_T".p
+val VkDevice_T_p = "VkDevice_T".p
+val VkQueue_T_p = "VkQueue_T".p
 
 val HmdMatrix34_t = struct(OPENVR_PACKAGE, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
     float.array("m", "", size = 3 x 4)
@@ -417,10 +417,10 @@ val VRVulkanTextureData_t = struct(OPENVR_PACKAGE, "VRVulkanTextureData", native
     documentation = "Data required for passing Vulkan textures to #Submit(). Be sure to call #ShutdownInternal() before destroying these resources."
 
     uint64_t.member("m_nImage", "VkImage")
-    VkDevice_T.p.member("m_pDevice", "")
-    VkPhysicalDevice_T.p.member("m_pPhysicalDevice", "")
-    VkInstance_T.p.member("m_pInstance", "")
-    VkQueue_T.p.member("m_pQueue", "")
+    VkDevice_T_p.member("m_pDevice", "")
+    VkPhysicalDevice_T_p.member("m_pPhysicalDevice", "")
+    VkInstance_T_p.member("m_pInstance", "")
+    VkQueue_T_p.member("m_pQueue", "")
     uint32_t.member("m_nQueueFamilyIndex", "")
     uint32_t.member("m_nWidth", "")
     uint32_t.member("m_nHeight", "")

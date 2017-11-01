@@ -382,7 +382,7 @@ typedef struct HmdColor_t
         separated list of required device extensions to enable in {@code VkCreateDevice}.
         """,
 
-        VkPhysicalDevice_T.IN("pPhysicalDevice", ""),
+        VkPhysicalDevice_T_p.IN("pPhysicalDevice", ""),
         Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchValue", ""),
         AutoSize("pchValue")..uint32_t.IN("unBufferSize", "")
     )
