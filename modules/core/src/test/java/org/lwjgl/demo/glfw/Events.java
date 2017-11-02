@@ -9,6 +9,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.windows.*;
 
 import java.io.*;
 import java.nio.*;
@@ -23,6 +24,7 @@ import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.windows.User32.*;
 
 /** GLFW events demo. */
 public final class Events {
@@ -74,6 +76,14 @@ public final class Events {
     }
 
     private static void demo() {
+        if (Platform.get() == Platform.WINDOWS) {
+            if (User32.Functions.SetThreadDpiAwarenessContext != NULL) {
+                SetThreadDpiAwarenessContext(IsValidDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)
+                    ? DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
+                    : DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
+            }
+        }
+
         int WIDTH  = 640;
         int HEIGHT = 480;
 

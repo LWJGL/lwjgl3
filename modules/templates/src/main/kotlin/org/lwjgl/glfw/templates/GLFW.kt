@@ -1851,8 +1851,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
     GLFWwindowposfun(
         "SetWindowPosCallback",
         """
-        Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the screen position of the
-        upper-left corner of the client area of the window.
+        Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the position, in screen
+        coordinates, of the upper-left corner of the client area of the window.
 
         This function must only be called from the main thread.
         """,

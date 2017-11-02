@@ -18,6 +18,7 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** STB Easy Font demo. */
@@ -29,6 +30,10 @@ abstract class FontDemo {
     private long window;
     private int ww = 800;
     private int wh = 600;
+
+    private float
+        contentScaleX,
+        contentScaleY;
 
     private boolean ctrlDown;
 
@@ -87,6 +92,14 @@ abstract class FontDemo {
         return scale;
     }
 
+    public float getContentScaleX() {
+        return contentScaleX;
+    }
+
+    public float getContentScaleY() {
+        return contentScaleY;
+    }
+
     public int getLineOffset() {
         return lineOffset;
     }
@@ -114,6 +127,11 @@ abstract class FontDemo {
     }
 
     private void windowSizeChanged(long window, int width, int height) {
+        if (Platform.get() != Platform.MACOSX) {
+            width /= contentScaleX;
+            height /= contentScaleY;
+        }
+
         this.ww = width;
         this.wh = height;
 
@@ -140,7 +158,29 @@ abstract class FontDemo {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-        this.window = glfwCreateWindow(ww, wh, title, NULL, NULL);
+        long monitor = glfwGetPrimaryMonitor();
+
+        int framebufferW;
+        int framebufferH;
+        try (MemoryStack s = stackPush()) {
+            FloatBuffer px = s.mallocFloat(1);
+            FloatBuffer py = s.mallocFloat(1);
+
+            glfwGetMonitorContentScale(monitor, px, py);
+
+            contentScaleX = px.get(0);
+            contentScaleY = py.get(0);
+
+            if (Platform.get() == Platform.MACOSX) {
+                framebufferW = ww;
+                framebufferH = wh;
+            } else {
+                framebufferW = round(ww * contentScaleX);
+                framebufferH = round(wh * contentScaleY);
+            }
+        }
+
+        this.window = glfwCreateWindow(framebufferW, framebufferH, title, NULL, NULL);
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
@@ -195,19 +235,19 @@ abstract class FontDemo {
 
         glfwSetScrollCallback(window, (window, xoffset, yoffset) -> {
             if (ctrlDown) {
-                setScale(scale + (int)yoffset);
+                setScale(scale + (int)round(yoffset));
             } else {
-                setLineOffset(lineOffset - (int)yoffset * 3);
+                setLineOffset(lineOffset - (int)round(yoffset) * 3);
             }
         });
 
         // Center window
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
         glfwSetWindowPos(
             window,
-            (vidmode.width() - ww) / 2,
-            (vidmode.height() - wh) / 2
+            (vidmode.width() - framebufferW) / 2,
+            (vidmode.height() - framebufferH) / 2
         );
 
         // Create context

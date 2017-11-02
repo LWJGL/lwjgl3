@@ -10,6 +10,7 @@ import org.lwjgl.openal.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.stb.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.windows.*;
 
 import java.io.*;
 import java.nio.*;
@@ -18,6 +19,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFWNativeWin32.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
@@ -25,7 +27,9 @@ import static org.lwjgl.openal.SOFTDirectChannels.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.stb.STBVorbis.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.windows.User32.*;
 
 /**
  * STB Vorbis demo.
@@ -88,6 +92,7 @@ public final class Vorbis {
                 float progress = decoder.getProgress();
                 float time     = decoder.getProgressTime(progress);
 
+                glfwPollEvents();
                 renderer.render(progress, time);
             }
         } finally {
@@ -277,12 +282,23 @@ public final class Vorbis {
 
     private static class Renderer {
 
-        private static final int WIDTH  = 640;
-        private static final int HEIGHT = 320;
-
         private final Callback debugProc;
 
         private final long window;
+
+        private int
+            clientW = 640,
+            clientH = 320;
+
+        private int
+            framebufferW,
+            framebufferH;
+
+        private float
+            scaleX,
+            scaleY;
+
+        private final Callback windowProc;
 
         private final ByteBuffer charBuffer;
 
@@ -292,7 +308,30 @@ public final class Vorbis {
 
         private boolean buttonPressed;
 
+        private float
+            lastProgress,
+            lastTime;
+
         Renderer(Decoder decoder, String title) {
+            if (Platform.get() == Platform.WINDOWS) {
+                // DPI changes work perfectly on Java 9, which is PER_MONITOR_AWARE.
+
+                // Java 8 is only SYSTEM_AWARE. The call below will work and
+                // dpi-aware functions will return the correct values for each
+                // monitor, but the OpenGL framebuffer will be scaled automatically
+                // by the system on monitors that do not match the system DPI. This
+                // causes rendering problems.
+                //
+                // Workaround: Build a custom executable and launch the JVM using JNI
+                // after calling SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE)
+
+                if (User32.Functions.SetThreadDpiAwarenessContext != NULL) {
+                    SetThreadDpiAwarenessContext(IsValidDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)
+                        ? DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
+                        : DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
+                }
+            }
+
             GLFWErrorCallback.createPrint().set();
             if (!glfwInit()) {
                 throw new IllegalStateException("Unable to initialize GLFW");
@@ -301,13 +340,95 @@ public final class Vorbis {
             glfwDefaultWindowHints();
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
             glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-            window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
+            long monitor = glfwGetPrimaryMonitor();
+
+            if (Platform.get() == Platform.MACOSX) {
+                glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+
+                framebufferW = clientW;
+                framebufferH = clientH;
+                scaleX = 1.0f;
+                scaleY = 1.0f;
+            } else {
+                // Emulating GLFW_COCOA_RETINA_FRAMEBUFFER == GLFW_FALSE:
+                //     * Client coordinates are the same, regardless of window dpi.
+                //     * Normally we'd render to an FBO and upscale to the window framebuffer. We simply use a scaled glOrtho in this demo.
+                try (MemoryStack s = stackPush()) {
+                    FloatBuffer px = s.mallocFloat(1);
+                    FloatBuffer py = s.mallocFloat(1);
+
+                    glfwGetMonitorContentScale(monitor, px, py);
+
+                    scaleX = px.get(0);
+                    scaleY = py.get(0);
+
+                    framebufferW = round(clientW * scaleX);
+                    framebufferH = round(clientH * scaleY);
+                }
+            }
+
+            window = glfwCreateWindow(framebufferW, framebufferH, title, NULL, NULL);
             if (window == NULL) {
                 throw new RuntimeException("Failed to create the GLFW window");
             }
 
-            glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+            // TODO: Remove if GLFW#1115 is merged
+            if (Platform.get() == Platform.WINDOWS) {
+                long hwnd = glfwGetWin32Window(window);
+
+                long glfwProc = GetWindowLongPtr(hwnd, GWL_WNDPROC);
+                windowProc = new WindowProc() {
+                    @Override public long invoke(long hwnd, int uMsg, long wParam, long lParam) {
+                        switch (uMsg) {
+                            case 0x02E0: // WM_DPICHANGED
+                                RECT rect = RECT.create(lParam);
+                                SetWindowPos(hwnd, NULL,
+                                    rect.left(),
+                                    rect.top(),
+                                    rect.right() - rect.left(),
+                                    rect.bottom() - rect.top(),
+                                    SWP_NOZORDER | SWP_NOACTIVATE
+                                );
+                                return 0;
+                        }
+                        return nCallWindowProc(glfwProc, hwnd, uMsg, wParam, lParam);
+                    }
+                };
+
+                SetWindowLongPtr(hwnd, GWL_WNDPROC, windowProc.address());
+            } else {
+                windowProc = null;
+            }
+
+            glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
+                this.framebufferW = width;
+                this.framebufferH = height;
+
+                glViewport(0, 0, width, height);
+
+                try (MemoryStack s = stackPush()) {
+                    FloatBuffer px = s.mallocFloat(1);
+                    FloatBuffer py = s.mallocFloat(1);
+
+                    glfwGetWindowContentScale(window, px, py);
+
+                    if (scaleX != px.get(0) || scaleY != py.get(0)) {
+                        scaleX = px.get(0);
+                        scaleY = py.get(0);
+
+                        System.out.println("New content scale: " + scaleX + " x " + scaleY);
+                    }
+                }
+
+                this.clientW = round(width / scaleX);
+                this.clientH = round(height / scaleY);
+
+                updateProjection();
+            });
+
+            glfwSetWindowRefreshCallback(window, window -> doRender(lastProgress, lastTime));
 
             glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
                 if (action == GLFW_RELEASE) {
@@ -347,8 +468,8 @@ public final class Vorbis {
             });
 
             glfwSetCursorPosCallback(window, (window, xpos, ypos) -> {
-                cursorX = xpos - WIDTH * 0.5f;
-                cursorY = ypos - HEIGHT * 0.5f;
+                cursorX = (xpos / scaleX - clientW * 0.5);
+                cursorY = (ypos / scaleY - clientH * 0.5);
 
                 if (buttonPressed) {
                     seek(decoder);
@@ -356,12 +477,12 @@ public final class Vorbis {
             });
 
             // Center window
-            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+            GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
             glfwSetWindowPos(
                 window,
-                (vidmode.width() - WIDTH) / 2,
-                (vidmode.height() - HEIGHT) / 2
+                (vidmode.width() - framebufferW) / 2,
+                (vidmode.height() - framebufferH) / 2
             );
 
             // Create context
@@ -372,10 +493,7 @@ public final class Vorbis {
             glfwSwapInterval(1);
             glfwShowWindow(window);
 
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-            glOrtho(0.0, WIDTH, HEIGHT, 0.0, -1.0, 1.0);
-            glMatrixMode(GL_MODELVIEW);
+            updateProjection();
 
             charBuffer = BufferUtils.createByteBuffer(256 * 270);
 
@@ -397,13 +515,26 @@ public final class Vorbis {
             decoder.skipTo((float)((cursorX + 254.0) / 508.0));
         }
 
+        private void updateProjection() {
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(0.0, clientW, clientH, 0.0, -1.0, 1.0);
+            glMatrixMode(GL_MODELVIEW);
+        }
+
         void render(float progress, float time) {
-            glfwPollEvents();
+            this.lastProgress = progress;
+            this.lastTime = time;
+
+            doRender(progress, time);
+        }
+
+        private void doRender(float progress, float time) {
             glClear(GL_COLOR_BUFFER_BIT);
 
             // Progress bar
             glPushMatrix();
-            glTranslatef(WIDTH * 0.5f, HEIGHT * 0.5f, 0.0f);
+            glTranslatef(clientW * 0.5f, clientH * 0.5f, 0.0f);
             glBegin(GL_QUADS);
             {
                 glColor3f(0.5f * 43f / 255f, 0.5f * 43f / 255f, 0.5f * 43f / 255f);
@@ -427,7 +558,7 @@ public final class Vorbis {
             // Progress text
             int minutes = (int)floor(time / 60.0f);
             int seconds = (int)floor((time - minutes * 60.0f));
-            int quads   = stb_easy_font_print(WIDTH * 0.5f - 13, HEIGHT * 0.5f - 4, String.format("%02d:%02d", minutes, seconds), null, charBuffer);
+            int quads   = stb_easy_font_print(clientW * 0.5f - 13, clientH * 0.5f - 4, String.format("%02d:%02d", minutes, seconds), null, charBuffer);
             glDrawArrays(GL_QUADS, 0, quads * 4);
 
             // HUD
@@ -450,6 +581,10 @@ public final class Vorbis {
 
             glfwFreeCallbacks(window);
             glfwDestroyWindow(window);
+
+            if (windowProc != null) {
+                windowProc.free();
+            }
 
             glfwTerminate();
             glfwSetErrorCallback(null).free();

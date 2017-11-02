@@ -11,6 +11,7 @@ import org.lwjgl.system.*;
 import java.io.*;
 import java.nio.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -72,7 +73,7 @@ public final class Truetype extends FontDemo {
         STBTTBakedChar.Buffer cdata = STBTTBakedChar.malloc(96);
 
         ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
-        stbtt_BakeFontBitmap(ttf, getFontHeight(), bitmap, BITMAP_W, BITMAP_H, 32, cdata);
+        stbtt_BakeFontBitmap(ttf, getFontHeight() * getContentScaleY(), bitmap, BITMAP_W, BITMAP_H, 32, cdata);
 
         glBindTexture(GL_TEXTURE_2D, texID);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, BITMAP_W, BITMAP_H, 0, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap);
@@ -91,8 +92,8 @@ public final class Truetype extends FontDemo {
 
     @Override
     protected void loop() {
-        int BITMAP_W = 512;
-        int BITMAP_H = 512;
+        int BITMAP_W = round(512 * getContentScaleX());
+        int BITMAP_H = round(512 * getContentScaleY());
 
         STBTTBakedChar.Buffer cdata = init(BITMAP_W, BITMAP_H);
 
@@ -119,6 +120,10 @@ public final class Truetype extends FontDemo {
         cdata.free();
     }
 
+    private static float scale(float center, float offset, float factor) {
+        return (offset - center) * factor + center;
+    }
+
     private void renderText(STBTTBakedChar.Buffer cdata, int BITMAP_W, int BITMAP_H) {
         float scale = stbtt_ScaleForPixelHeight(info, getFontHeight());
 
@@ -132,11 +137,13 @@ public final class Truetype extends FontDemo {
 
             int lineStart = 0;
 
-            int i  = 0;
-            int to = text.length();
+            float factorX = 1.0f / getContentScaleX();
+            float factorY = 1.0f / getContentScaleY();
+
+            float lineY = 0.0f;
 
             glBegin(GL_QUADS);
-            while (i < to) {
+            for (int i = 0, to = text.length(); i < to; ) {
                 i += getCP(text, to, i, pCodePoint);
 
                 int cp = pCodePoint.get(0);
@@ -147,7 +154,7 @@ public final class Truetype extends FontDemo {
                         glBegin(GL_QUADS);
                     }
 
-                    y.put(0, y.get(0) + (ascent - descent + lineGap) * scale);
+                    y.put(0, lineY = y.get(0) + (ascent - descent + lineGap) * scale);
                     x.put(0, 0.0f);
 
                     lineStart = i;
@@ -156,27 +163,35 @@ public final class Truetype extends FontDemo {
                     continue;
                 }
 
+                float cpX = x.get(0);
                 stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, cp - 32, x, y, q, true);
+                x.put(0, scale(cpX, x.get(0), factorX));
                 if (isKerningEnabled() && i < to) {
                     getCP(text, to, i, pCodePoint);
                     x.put(0, x.get(0) + stbtt_GetCodepointKernAdvance(info, cp, pCodePoint.get(0)) * scale);
                 }
 
+                float
+                    x0 = scale(cpX, q.x0(), factorX),
+                    x1 = scale(cpX, q.x1(), factorX),
+                    y0 = scale(lineY, q.y0(), factorY),
+                    y1 = scale(lineY, q.y1(), factorY);
+
                 glTexCoord2f(q.s0(), q.t0());
-                glVertex2f(q.x0(), q.y0());
+                glVertex2f(x0, y0);
 
                 glTexCoord2f(q.s1(), q.t0());
-                glVertex2f(q.x1(), q.y0());
+                glVertex2f(x1, y0);
 
                 glTexCoord2f(q.s1(), q.t1());
-                glVertex2f(q.x1(), q.y1());
+                glVertex2f(x1, y1);
 
                 glTexCoord2f(q.s0(), q.t1());
-                glVertex2f(q.x0(), q.y1());
+                glVertex2f(x0, y1);
             }
             glEnd();
             if (isLineBBEnabled()) {
-                renderLineBB(lineStart, text.length(), y.get(0), scale);
+                renderLineBB(lineStart, text.length(), lineY, scale);
             }
         }
     }
