@@ -7,7 +7,7 @@ package org.lwjgl.opengles.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
-val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OVR) {
+val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = org.lwjgl.opengl.templates.OVR) {
     documentation =
         """
         Native bindings to the ${registryLink("OVR", "multiview")} extension.
@@ -17,7 +17,7 @@ val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OV
 
         This extension seeks to address the inefficiency of sequential multiview rendering by adding a means to render to multiple elements of a 2D texture
         array simultaneously. In multiview rendering, draw calls are instanced into each corresponding element of the texture array. The vertex program uses a
-        new ViewID variable to compute per-view values, typically the vertex position and view-dependent variables like reflection.
+        new {@code gl_ViewID_OVR} variable to compute per-view values, typically the vertex position and view-dependent variables like reflection.
 
         The formulation of this extension is high level in order to allow implementation freedom. On existing hardware, applications and drivers can realize
         the benefits of a single scene traversal, even if all GPU work is fully duplicated per-view. But future support could enable simultaneous rendering via
@@ -31,7 +31,7 @@ val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OV
         """
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
+        "Accepted by the {@code pname} parameter of #GetFramebufferAttachmentParameteriv().",
 
         "FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR"..0x9630,
         "FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR"..0x9632
@@ -44,7 +44,7 @@ val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OV
     )
 
     IntConstant(
-        "Returned by CheckFramebufferStatus.",
+        "Returned by #CheckFramebufferStatus().",
 
         "FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR"..0x9633
     )
