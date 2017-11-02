@@ -122,6 +122,16 @@ val YGLogger = "YGLogger".callback(
     va_list.IN("args", "")
 )
 
+val YGNodeClonedFunc = "YGNodeClonedFunc".callback(
+    YOGA_PACKAGE, void, "YGNodeClonedFunc",
+    "",
+
+    YGNodeRef.IN("oldNode", ""),
+    YGNodeRef.IN("newNode", ""),
+    YGNodeRef.IN("parent", ""),
+    int.IN("childIndex", "")
+)
+
 val YGMalloc = "YGMalloc".callback(
     YOGA_PACKAGE, opaque_p, "YGMalloc",
     "",

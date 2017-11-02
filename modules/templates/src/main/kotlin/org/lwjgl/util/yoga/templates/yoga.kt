@@ -218,6 +218,13 @@ div {
         const..YGConfigRef.IN("config", "")
     )
 
+    YGNodeRef(
+        "NodeClone",
+        "",
+
+        const..YGNodeRef.IN("node", "")
+    )
+
     val node = const..YGNodeRef.IN("node", "")
 
     void(
@@ -261,6 +268,13 @@ div {
 
         node,
         const..YGNodeRef.IN("child", "")
+    )
+
+    void(
+        "NodeRemoveAllChildren",
+        "",
+
+        const..YGNodeRef.IN("node", "")
     )
 
     YGNodeRef(
@@ -472,7 +486,7 @@ div {
         )
     }
 
-    fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(type: NativeType, name: String) {
+    fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(/*type: NativeType, */name: String) {
         void(
             "NodeStyleSet${name}Auto",
             "",
@@ -529,7 +543,7 @@ div {
 
     YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Position", "position")
     YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Margin", "margin")
-    YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(YGValue, "Margin")
+    YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(/*YGValue, */"Margin")
     YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Padding", "padding")
     YG_NODE_STYLE_EDGE_PROPERTY(float, "Border", "border")
 
@@ -696,6 +710,14 @@ div {
         "",
 
         const..YGConfigRef.IN("config", "")
+    )
+
+    void(
+        "ConfigSetNodeClonedFunc",
+        "",
+
+        const..YGConfigRef.IN("config", ""),
+        const..YGNodeClonedFunc.IN("callback", "")
     )
 
     YGConfigRef(
