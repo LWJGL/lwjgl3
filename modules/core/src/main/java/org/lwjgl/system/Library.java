@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
@@ -231,7 +232,10 @@ public final class Library {
                 }
                 // Extract from classpath and try org.lwjgl.librarypath
                 try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL)) {
-                    return loadNative(context, libName, Configuration.LIBRARY_PATH);
+                    lib = loadNative(context, libName, Configuration.LIBRARY_PATH);
+                    if (lib != null) {
+                        return lib;
+                    }
                 }
             } catch (Exception e) {
                 if (debugLoader) {
@@ -289,6 +293,7 @@ public final class Library {
         throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
     }
 
+    @Nullable
     private static SharedLibrary loadNativeFromSystem(String libName) {
         SharedLibrary lib;
         try {
@@ -301,6 +306,7 @@ public final class Library {
         return lib;
     }
 
+    @Nullable
     private static SharedLibrary loadNative(Class<?> context, String libName, Configuration<String> property) {
         String paths = property.get();
         if (paths != null) {
@@ -312,6 +318,7 @@ public final class Library {
         return null;
     }
 
+    @Nullable
     private static SharedLibrary loadNative(Class<?> context, String libName, String property, String paths) {
         Path libFile = findLibrary(paths, libName);
         if (libFile == null) {
@@ -337,34 +344,32 @@ public final class Library {
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     public static SharedLibrary loadNative(Class<?> context, Configuration<String> name, String... defaultNames) {
-        if (name.get() != null) {
-            return loadNative(context, name.get());
-        } else if (defaultNames.length <= 1) {
+        String libraryName = name.get();
+        if (libraryName != null) {
+            return loadNative(context, libraryName);
+        }
+
+        if (defaultNames.length <= 1) {
             if (defaultNames.length == 0) {
                 throw new RuntimeException("No default names specified.");
             }
-
             return loadNative(context, defaultNames[0]);
-        } else {
-            SharedLibrary library = null;
-            try {
-                library = Library.loadNative(context, defaultNames[0]); // try first
-            } catch (Throwable t) {
-                for (int i = 1; i < defaultNames.length; i++) { // try alternatives
-                    try {
-                        library = Library.loadNative(context, defaultNames[i]);
-                        break;
-                    } catch (Throwable ignored) {
-                    }
-                }
-                if (library == null) {
-                    throw t; // original error
+        }
+
+        try {
+            return loadNative(context, defaultNames[0]); // try first
+        } catch (Throwable t) {
+            for (int i = 1; i < defaultNames.length; i++) { // try alternatives
+                try {
+                    return loadNative(context, defaultNames[i]);
+                } catch (Throwable ignored) {
                 }
             }
-            return library;
+            throw t; // original error
         }
     }
 
+    @Nullable
     private static Path findLibrary(String path, String libName) {
         for (String directory : PATH_SEPARATOR.split(path)) {
             Path p = Paths.get(directory, libName);

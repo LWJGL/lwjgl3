@@ -1105,7 +1105,7 @@ void myMethodIMP(id self, SEL _cmd)
         """
     )
 
-    (objc_method_description_p)(
+    objc_method_description_p(
         "protocol_copyMethodDescriptionList",
         """
         Returns an array of method descriptions of methods meeting a given specification for a given protocol.

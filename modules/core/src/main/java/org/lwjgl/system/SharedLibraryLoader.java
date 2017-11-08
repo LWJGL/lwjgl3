@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
@@ -25,6 +26,7 @@ import static org.lwjgl.system.APIUtil.*;
  */
 final class SharedLibraryLoader {
 
+    @Nullable
     private static Path extractPath;
 
     private SharedLibraryLoader() {

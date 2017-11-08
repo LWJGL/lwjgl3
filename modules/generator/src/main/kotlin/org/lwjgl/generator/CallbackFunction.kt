@@ -54,7 +54,9 @@ class CallbackFunction(
         print(HEADER)
         println("package $packageName;\n")
 
-        print("""import org.lwjgl.system.*;
+        print("""import javax.annotation.*;
+
+import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -69,6 +71,7 @@ import static org.lwjgl.system.MemoryUtil.*;
         print("""${access.modifier}abstract class $className extends Callback implements ${className}I {
 
     /** Creates a {@code $className} instance from the specified function pointer. */
+    @Nullable
     public static $className create(long functionPointer) {
         if (functionPointer == NULL) {
             return null;

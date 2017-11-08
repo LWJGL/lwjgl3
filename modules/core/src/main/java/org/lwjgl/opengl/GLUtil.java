@@ -6,6 +6,7 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.io.*;
 
 import static org.lwjgl.opengl.AMDDebugOutput.*;
@@ -26,6 +27,7 @@ public final class GLUtil {
      * Detects the best debug output functionality to use and creates a callback that prints information to {@link APIUtil#DEBUG_STREAM}. The callback
      * function is returned as a {@link Callback}, that should be {@link Callback#free freed} when no longer needed.
      */
+    @Nullable
     public static Callback setupDebugMessageCallback() {
         return setupDebugMessageCallback(APIUtil.DEBUG_STREAM);
     }
@@ -36,6 +38,7 @@ public final class GLUtil {
      *
      * @param stream the output {@link PrintStream}
      */
+    @Nullable
     public static Callback setupDebugMessageCallback(PrintStream stream) {
         GLCapabilities caps = GL.getCapabilities();
 

@@ -34,7 +34,7 @@ fun config() {
 val DCCallVM_p = "DCCallVM".p
 val DCstruct_p = "DCstruct".p
 
-val DCvoid = NativeType("DCvoid", TypeMapping.VOID)
+val DCvoid = "DCvoid".void
 
 val DCbool = typedef(intb, "DCbool")
 val DCchar = typedef(char, "DCchar")

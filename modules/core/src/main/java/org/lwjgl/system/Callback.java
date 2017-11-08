@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.lang.reflect.*;
 
 import static org.lwjgl.system.MemoryStack.*;
@@ -164,6 +165,7 @@ public abstract class Callback implements Pointer, NativeResource {
      *
      * @return the {@code CallbackI} instance, or null if the function pointer is {@code NULL}.
      */
+    @Nullable
     public static <T extends CallbackI> T get(long functionPointer) {
         if (functionPointer == NULL) {
             return null;

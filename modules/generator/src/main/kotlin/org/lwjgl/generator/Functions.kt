@@ -215,6 +215,12 @@ class Func(
             } else {
                 "$it $name"
             }
+        }.let {
+            if (nativeType.isReference && has(nullable)) {
+                "@Nullable $it"
+            } else {
+                it
+            }
         }
 
     private fun Parameter.asNativeMethodParam(nativeOnly: Boolean) =
@@ -637,6 +643,10 @@ class Func(
 
         printUnsafeJavadoc(constantMacro, nativeOnly)
 
+        if (returns.nativeType is JObjectType && !has(Nonnull)) {
+            println("$t@Nullable")
+        }
+
         val retType = returnsNativeMethodType
 
         if (nativeOnly) {
@@ -670,6 +680,9 @@ class Func(
         println()
 
         printUnsafeJavadoc(constantMacro)
+        if (returns.nativeType is JObjectType && !has(Nonnull)) {
+            println("$t@Nullable")
+        }
         print("$t${if (constantMacro) "private " else accessModifier}static $returnsNativeMethodType n$name(")
         printList(getNativeParams()) {
             if (it.isFunctionProvider)

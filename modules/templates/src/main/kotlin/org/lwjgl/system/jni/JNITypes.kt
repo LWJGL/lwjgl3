@@ -25,27 +25,27 @@ val jlong = IntegerType("jlong", PrimitiveMapping.LONG)
 val jfloat = IntegerType("jfloat", PrimitiveMapping.FLOAT)
 val jdouble = IntegerType("jdouble", PrimitiveMapping.DOUBLE)
 
-val jbooleanArray = NativeType("jbooleanArray", TypeMapping("jbooleanArray", ByteArray::class, ByteArray::class))
-val jbyteArray = NativeType("jbyteArray", TypeMapping("jbyteArray", ByteArray::class, ByteArray::class))
-val jcharArray = NativeType("jcharArray", TypeMapping("jcharArray", CharArray::class, CharArray::class))
-val jshortArray = NativeType("jshortArray", TypeMapping("jshortArray", ShortArray::class, ShortArray::class))
-val jintArray = NativeType("jintArray", TypeMapping("jintArray", IntArray::class, IntArray::class))
-val jlongArray = NativeType("jlongArray", TypeMapping("jlongArray", LongArray::class, LongArray::class))
-val jfloatArray = NativeType("jfloatArray", TypeMapping("jfloatArray", FloatArray::class, FloatArray::class))
-val jdoubleArray = NativeType("jdoubleArray", TypeMapping("jdoubleArray", DoubleArray::class, DoubleArray::class))
+val jbooleanArray = JObjectType("jbooleanArray", ByteArray::class)
+val jbyteArray = JObjectType("jbyteArray", ByteArray::class)
+val jcharArray = JObjectType("jcharArray", CharArray::class)
+val jshortArray = JObjectType("jshortArray", ShortArray::class)
+val jintArray = JObjectType("jintArray", IntArray::class)
+val jlongArray = JObjectType("jlongArray", LongArray::class)
+val jfloatArray = JObjectType("jfloatArray", FloatArray::class)
+val jdoubleArray = JObjectType("jdoubleArray", DoubleArray::class)
 
 val jsize = typedef(jint, "jsize")
 
-val jclass = NativeType("jclass", TypeMapping("jclass", Class::class, Class::class))
+val jclass = JObjectType("jclass", Class::class)
 val jmethodID = "jmethodID".opaque_p
 val jfieldID = "jfieldID".opaque_p
 
-val jobject = NativeType("jobject", TypeMapping("jobject", Any::class.java, Any::class.java))
+val jobject = Any::class.jobject
 val jobject_p = "jobject".opaque_p
 
 val jobjectRefType = "jobjectRefType".enumType
 
-val jstring = NativeType("jstring", TypeMapping("jstring", String::class, String::class))
+val jstring = JObjectType("jstring", String::class)
 
 val java_lang_reflect_Method = java.lang.reflect.Method::class.jobject
 val java_lang_reflect_Field = java.lang.reflect.Field::class.jobject

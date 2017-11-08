@@ -10,7 +10,9 @@ import kotlin.reflect.*
 
 /*
 - NativeType
+    - JObjectType
     - ValueType
+        - VoidType
         - PrimitiveType
             - IntegerType
             - CharType
@@ -23,7 +25,7 @@ import kotlin.reflect.*
             - C++ classes (if we add support in the future)
 */
 
-open class NativeType(
+open class NativeType internal constructor(
     /** The type used in the native API. */
     val name: String,
     /** The type we map the native type to. */
@@ -75,9 +77,13 @@ open class NativeType(
 }
 
 // Java instance passed as jobject to native code
-val KClass<*>.jobject: NativeType get() = NativeType("jobject", TypeMapping("jobject", this, this))
+class JObjectType(name: String, type: KClass<*>) : NativeType(name, TypeMapping(name, type, type))
+val KClass<*>.jobject: NativeType get() = JObjectType("jobject", this)
 
 abstract class ValueType internal constructor(name: String, mapping: TypeMapping) : NativeType(name, mapping)
+
+class VoidType constructor(name: String) : ValueType(name, TypeMapping.VOID)
+val String.void: VoidType get() = VoidType(this)
 
 // Specialization for primitives.
 open class PrimitiveType(name: String, mapping: PrimitiveMapping) : ValueType(name, mapping)
@@ -230,7 +236,7 @@ open class TypeMapping(
     ) : this(jniFunctionType, nativeMethodClass.java, javaMethodClass.java)
 
     companion object {
-        val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
+        internal val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
     }
 
     private val Class<*>.javaName get() = this.typeParameters.let {
@@ -364,6 +370,9 @@ val NativeType.isPointer
 
 val NativeType.isPointerData
     get() = this is PointerType && this.mapping !== PointerMapping.OPAQUE_POINTER
+
+val NativeType.isReference
+    get() = this !is ValueType && (this.mapping !== PointerMapping.OPAQUE_POINTER || this is ObjectType)
 
 val TypeMapping.isPointerSize
     get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER

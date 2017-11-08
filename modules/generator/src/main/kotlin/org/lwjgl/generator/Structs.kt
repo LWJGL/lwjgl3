@@ -485,6 +485,8 @@ $indentation}"""
         print(HEADER)
         println("package $packageName;\n")
 
+        println("import javax.annotation.*;\n")
+
         println("import java.nio.*;\n")
 
         if (mallocable || members.any { m -> m.nativeType.let {
@@ -603,7 +605,7 @@ $indentation}"""
 
         print("""
 
-    $className(long address, ByteBuffer container) {
+    $className(long address, @Nullable ByteBuffer container) {
         super(address, container);
     }
 
@@ -680,6 +682,7 @@ $indentation}"""
 
         print("""
     /** Returns a new {@link $className} instance for the specified memory address or {@code null} if the address is {@code NULL}. */
+    @Nullable
     public static $className create(long address) {
         return address == NULL ? null : new $className(address, null);
     }
@@ -691,6 +694,7 @@ $indentation}"""
      *
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
+    @Nullable
     public static Buffer malloc(int $BUFFER_CAPACITY_PARAM) {
         return create(__malloc($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
@@ -700,6 +704,7 @@ $indentation}"""
      *
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
+    @Nullable
     public static Buffer calloc(int $BUFFER_CAPACITY_PARAM) {
         return create(nmemCalloc($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
@@ -722,6 +727,7 @@ $indentation}"""
      * @param address  the memory address
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
+    @Nullable
     public static Buffer create(long address, int $BUFFER_CAPACITY_PARAM) {
         return address == NULL ? null : new Buffer(address, null, -1, 0, $BUFFER_CAPACITY_PARAM, $BUFFER_CAPACITY_PARAM);
     }
@@ -881,7 +887,7 @@ ${validations.joinToString("\n")}
 
         print("""
 
-        Buffer(long address, ByteBuffer container, int mark, int pos, int lim, int cap) {
+        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
             super(address, container, mark, pos, lim, cap);
         }
 
@@ -891,7 +897,7 @@ ${validations.joinToString("\n")}
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, ByteBuffer container, int mark, int pos, int lim, int cap) {
+        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
             return new Buffer(address, container, mark, pos, lim, cap);
         }
 
