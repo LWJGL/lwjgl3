@@ -670,14 +670,11 @@ public final class GL {
 
         @Override
         public void set(GLCapabilities caps) {
-            if (caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
-                apiLog("[WARNING] Incompatible context detected. Falling back to thread-local lookup for GL contexts.");
-                icd = GL::getCapabilities; // fall back to thread/process lookup
-                return;
-            }
-
             if (tempCaps == null) {
                 tempCaps = caps;
+            } else if (caps != null && caps != tempCaps && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
+                apiLog("[WARNING] Incompatible context detected. Falling back to thread-local lookup for GL contexts.");
+                icd = GL::getCapabilities; // fall back to thread/process lookup
             }
         }
 
