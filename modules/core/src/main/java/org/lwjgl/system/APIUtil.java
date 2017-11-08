@@ -87,7 +87,7 @@ public final class APIUtil {
             String classURL = url.toString();
             if (classURL.startsWith("jar:")) {
                 try (InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME).openStream()) {
-                    return Optional.ofNullable(new Manifest(stream).getAttributes("org/lwjgl/")).map(attr -> attr.getValue(attributeName));
+                    return Optional.ofNullable(new Manifest(stream).getMainAttributes().getValue(attributeName));
                 } catch (Exception e) {
                     e.printStackTrace(APIUtil.DEBUG_STREAM);
                 }
