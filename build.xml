@@ -383,13 +383,16 @@
 
     <target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
         <lwjgl.javac destdir="${bin.core}" taskname="javac: Core">
+            <classpath>
+                <pathelement path="${lib}/jsr305.jar"/>
+            </classpath>
+
             <src>
                 <pathelement path="${src.core}"/>
                 <pathelement path="${src.generated.java}"/>
             </src>
 
             <include name="**/*.java"/>
-            <exclude name="**/package-info.java"/>
 
             <patternset refid="excluded.sources.withCore"/>
             <patternset refid="excluded.sources"/>
@@ -541,6 +544,7 @@
         <lwjgl.javac srcdir="${src.tests}" destdir="${bin.tests}" taskname="javac: Tests">
             <classpath>
                 <pathelement path="${bin.core}"/>
+                <pathelement path="${lib}/jsr305.jar"/>
                 <pathelement path="${lib}/testng.jar"/>
                 <pathelement path="${lib}/joml.jar"/>
             </classpath>
@@ -687,6 +691,7 @@
             <classpath>
                 <pathelement path="${src.core}"/>
                 <pathelement path="${src.generated.java}"/>
+                <pathelement path="${lib}/jsr305.jar"/>
             </classpath>
 
             <fileset dir="${src.core}">

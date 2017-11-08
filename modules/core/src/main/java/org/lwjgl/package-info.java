@@ -18,4 +18,5 @@
  *
  * @see <a href="https://www.lwjgl.org/">www.lwjgl.org</a>
  */
+@org.lwjgl.system.NonnullDefault
 package org.lwjgl;

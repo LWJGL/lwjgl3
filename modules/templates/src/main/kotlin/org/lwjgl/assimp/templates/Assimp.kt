@@ -1349,7 +1349,7 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
             "Will be used to open the model file itself and any other files the loader needs to open. Pass #NULL to use the default implementation."
         ),
 
-        returnDoc = "Pointer to the imported data or NULL if the import failed."
+        returnDoc = "Pointer to the imported data or #NULL if the import failed."
     )
 
     aiScene_p(
@@ -2869,7 +2869,7 @@ x1""")}
         "ASSIMP_CFLAGS_SINGLETHREADED"..0x10
     ).noPrefix()
 
-    const..charASCII_p(
+    Nonnull..const..charASCII_p(
         "GetLegalString",
         "Returns a string with legal copyright and licensing information about Assimp. The string may include multiple lines.",
 

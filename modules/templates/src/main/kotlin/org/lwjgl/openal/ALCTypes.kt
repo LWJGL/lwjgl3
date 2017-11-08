@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 
 // void
 
-val ALCvoid = NativeType("ALCvoid", TypeMapping.VOID)
+val ALCvoid = "ALCvoid".void
 val ALCvoid_p = PointerType("ALCvoid", PointerMapping.DATA)
 
 // numeric

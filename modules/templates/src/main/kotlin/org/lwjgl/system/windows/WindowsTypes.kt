@@ -19,7 +19,7 @@ val SaveLastError = Code(nativeAfterCall = "${t}saveLastError();")
 
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.
 
-val VOID = NativeType("VOID", TypeMapping.VOID)
+val VOID = "VOID".void
 
 val HANDLE = "HANDLE".opaque_p
 val HANDLE_p = HANDLE.p

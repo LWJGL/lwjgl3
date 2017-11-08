@@ -6,6 +6,7 @@ package org.lwjgl;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -13,7 +14,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
 public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Comparable<PointerBuffer> {
 
-    protected PointerBuffer(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
+    protected PointerBuffer(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
         super(address, container, mark, position, limit, capacity);
     }
 
@@ -64,7 +65,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     }
 
     @Override
-    protected PointerBuffer newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
+    protected PointerBuffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
         return new PointerBuffer(address, container, mark, position, limit, capacity);
     }
 

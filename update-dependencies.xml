@@ -10,6 +10,7 @@
     <import file="${config}/build-definitions.xml" id="defs"/>
 
     <!-- *********************************** -->
+    <property name="findbugs" value="3.0.2"/>
     <property name="testng" value="6.11"/>
     <property name="jcommander" value="1.72"/>
     <property name="joml" value="1.9.7"/>
@@ -67,6 +68,7 @@
 
     <!-- Downloads the Java dependencies. -->
     <target name="-lib-download" unless="lib-uptodate">
+        <update-mvn name="findbugs" group="com/google/code/findbugs" artifact="jsr305" version="${findbugs}" dest="${lib}"/>
         <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}" sources="false"/>
         <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
         <update-mvn name="JOML" group="org/joml" artifact="joml" version="${joml}" dest="${lib}"/>

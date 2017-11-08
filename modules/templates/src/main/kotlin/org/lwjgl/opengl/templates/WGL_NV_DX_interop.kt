@@ -49,7 +49,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
         "",
 
         HANDLE.IN("device", "")
-    );
+    )
 
     HANDLE(
         "DXRegisterObjectNV",
@@ -63,7 +63,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
         ),
         GLenum.IN("type", "the GL object type that will map to the DirectX resource being shared"),
         GLenum.IN("access", "indicates the intended usage of the resource in GL", accessModes)
-    );
+    )
 
 
     BOOL(

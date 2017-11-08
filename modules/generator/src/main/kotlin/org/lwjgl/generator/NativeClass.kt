@@ -408,6 +408,14 @@ class NativeClass(
         val hasFunctions = !_functions.isEmpty()
         if (hasFunctions || binding is SimpleBinding) {
             // TODO: This is horrible. Refactor so that we build imports after code generation.
+            if (functions.any {
+                it.parameters.any {
+                    it.nativeType.isReference && it.has(nullable)
+                }
+            }) {
+                println("import javax.annotation.*;\n")
+            }
+
             val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.hasParam { it.nativeType.isPointerData } }
 
             if (hasBuffers) {

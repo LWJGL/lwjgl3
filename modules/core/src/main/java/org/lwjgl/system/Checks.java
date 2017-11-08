@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -62,13 +63,13 @@ public final class Checks {
     private Checks() {
     }
 
-    public static int lengthSafe(short[] array)             { return array == null ? 0 : array.length;}
-    public static int lengthSafe(int[] array)               { return array == null ? 0 : array.length;}
-    public static int lengthSafe(long[] array)              { return array == null ? 0 : array.length; }
-    public static int lengthSafe(float[] array)             { return array == null ? 0 : array.length;}
-    public static int lengthSafe(double[] array)            { return array == null ? 0 : array.length;}
-    public static int remainingSafe(Buffer buffer)          { return buffer == null ? 0 : buffer.remaining(); }
-    public static int remainingSafe(CustomBuffer<?> buffer) { return buffer == null ? 0 : buffer.remaining(); }
+    public static int lengthSafe(@Nullable short[] array)             { return array == null ? 0 : array.length;}
+    public static int lengthSafe(@Nullable int[] array)               { return array == null ? 0 : array.length;}
+    public static int lengthSafe(@Nullable long[] array)              { return array == null ? 0 : array.length; }
+    public static int lengthSafe(@Nullable float[] array)             { return array == null ? 0 : array.length;}
+    public static int lengthSafe(@Nullable double[] array)            { return array == null ? 0 : array.length;}
+    public static int remainingSafe(@Nullable Buffer buffer)          { return buffer == null ? 0 : buffer.remaining(); }
+    public static int remainingSafe(@Nullable CustomBuffer<?> buffer) { return buffer == null ? 0 : buffer.remaining(); }
 
     /**
      * Checks if any of the specified functions pointers is {@code NULL}.
@@ -188,62 +189,62 @@ public final class Checks {
         }
     }
 
-    public static void checkNTSafe(int[] buf) {
+    public static void checkNTSafe(@Nullable int[] buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNTSafe(int[] buf, int terminator) {
+    public static void checkNTSafe(@Nullable int[] buf, int terminator) {
         if (buf != null) {
             checkNT(buf, terminator);
         }
     }
-    public static void checkNTSafe(long[] buf) {
+    public static void checkNTSafe(@Nullable long[] buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNTSafe(float[] buf) {
+    public static void checkNTSafe(@Nullable float[] buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNT1Safe(ByteBuffer buf) {
+    public static void checkNT1Safe(@Nullable ByteBuffer buf) {
         if (buf != null) {
             checkNT1(buf);
         }
     }
-    public static void checkNT2Safe(ByteBuffer buf) {
+    public static void checkNT2Safe(@Nullable ByteBuffer buf) {
         if (buf != null) {
             checkNT2(buf);
         }
     }
-    public static void checkNTSafe(IntBuffer buf) {
+    public static void checkNTSafe(@Nullable IntBuffer buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNTSafe(IntBuffer buf, int terminator) {
+    public static void checkNTSafe(@Nullable IntBuffer buf, int terminator) {
         if (buf != null) {
             checkNT(buf, terminator);
         }
     }
-    public static void checkNTSafe(LongBuffer buf) {
+    public static void checkNTSafe(@Nullable LongBuffer buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNTSafe(FloatBuffer buf) {
+    public static void checkNTSafe(@Nullable FloatBuffer buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNTSafe(PointerBuffer buf) {
+    public static void checkNTSafe(@Nullable PointerBuffer buf) {
         if (buf != null) {
             checkNT(buf);
         }
     }
-    public static void checkNTSafe(PointerBuffer buf, long terminator) {
+    public static void checkNTSafe(@Nullable PointerBuffer buf, long terminator) {
         if (buf != null) {
             checkNT(buf, terminator);
         }
@@ -383,42 +384,42 @@ public final class Checks {
         check(buf, (int)size);
     }
 
-    public static void checkSafe(short[] buf, int size) {
+    public static void checkSafe(@Nullable short[] buf, int size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(int[] buf, int size) {
+    public static void checkSafe(@Nullable int[] buf, int size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(long[] buf, int size) {
+    public static void checkSafe(@Nullable long[] buf, int size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(float[] buf, int size) {
+    public static void checkSafe(@Nullable float[] buf, int size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(double[] buf, int size) {
+    public static void checkSafe(@Nullable double[] buf, int size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(Buffer buf, int size) {
+    public static void checkSafe(@Nullable Buffer buf, int size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(Buffer buf, long size) {
+    public static void checkSafe(@Nullable Buffer buf, long size) {
         if (buf != null) {
             check(buf, size);
         }
     }
-    public static void checkSafe(CustomBuffer<?> buf, int size) {
+    public static void checkSafe(@Nullable CustomBuffer<?> buf, int size) {
         if (buf != null) {
             check(buf, size);
         }

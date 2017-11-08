@@ -4,6 +4,7 @@
  */
 package org.lwjgl.openal;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -22,6 +23,7 @@ public final class ALUtil {
      * @param deviceHandle the device to query
      * @param token        the information to query. One of:<br>{@link ALC11#ALC_ALL_DEVICES_SPECIFIER}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
      */
+    @Nullable
     public static List<String> getStringList(long deviceHandle, int token) {
         long __result = nalcGetString(deviceHandle, token);
         if (__result == NULL) {

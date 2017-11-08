@@ -42,6 +42,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
         javaImport(
             "java.nio.*",
             "java.util.function.*",
+            "javax.annotation.Nullable",
             "org.lwjgl.*",
             "static org.lwjgl.openvr.VR.*",
             "static org.lwjgl.system.MemoryStack.*",
@@ -72,7 +73,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
             VRTrackedCamera
         )
 
-        println(interfaces.joinToString("\n$t", prefix = t) { "public static ${it.capabilitiesClass} ${it.capabilitiesField};" })
+        println(interfaces.joinToString("\n$t", prefix = t) { "@Nullable public static ${it.capabilitiesClass} ${it.capabilitiesField};" })
 
         // Common constructor
         print("""
@@ -99,6 +100,7 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
         print("""
     }
 
+    @Nullable
     private static <T> T getGenericInterface(String interfaceNameVersion, LongFunction<T> supplier) {
         try (MemoryStack stack = stackPush()) {
             IntBuffer peError = stack.mallocInt(1);

@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system;
 
+import javax.annotation.*;
 import java.util.*;
 
 // Multi-release version: Java 8
@@ -54,6 +55,7 @@ final class StackWalkUtil {
         return false;
     }
 
+    @Nullable
     static Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 

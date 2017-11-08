@@ -74,8 +74,8 @@ val JAWT_p = struct(JAWT_PACKAGE, "JAWT") {
     nullable..opaque_p.member("SynthesizeWindowActivation", "")
 }.p
 
-val Component = NativeType("jobject", TypeMapping("jobject", java.awt.Component::class.java, java.awt.Component::class.java))
-val Frame = NativeType("jobject", TypeMapping("jobject", java.awt.Frame::class.java, java.awt.Frame::class.java))
+val Component = java.awt.Component::class.jobject
+val Frame = java.awt.Frame::class.jobject
 
 fun config() {
     packageInfo(

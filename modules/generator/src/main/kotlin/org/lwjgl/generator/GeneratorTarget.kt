@@ -358,7 +358,9 @@ fun packageInfo(
             print(HEADER)
             println()
             println(processDocumentation(documentation, forcePackage = true).toJavaDoc(indentation = "", see = see, since = since))
-            println("package $packageName;\n")
+            println("""@org.lwjgl.system.NonnullDefault
+package $packageName;
+""")
         }
     }
 

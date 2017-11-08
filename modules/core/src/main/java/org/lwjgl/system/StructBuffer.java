@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
@@ -18,7 +19,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         this(memAddress(container), container, -1, 0, remaining, remaining);
     }
 
-    protected StructBuffer(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
+    protected StructBuffer(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
         super(address, container, mark, position, limit, capacity);
     }
 
@@ -115,7 +116,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
     // --------------------------------------
 
-    @Override public Iterator<T> iterator() {
+    @Override
+    public Iterator<T> iterator() {
         return new Iterator<T>() {
             int cursor = position;
 
@@ -138,14 +140,16 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         };
     }
 
-    @Override public void forEach(Consumer<? super T> action) {
+    @Override
+    public void forEach(Consumer<? super T> action) {
         Objects.requireNonNull(action);
         for (int i = position; i < limit; i++) {
             action.accept(get(i));
         }
     }
 
-    @Override public Spliterator<T> spliterator() {
+    @Override
+    public Spliterator<T> spliterator() {
         return new StructSpliterator();
     }
 
@@ -174,7 +178,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
             return false;
         }
+
         @Override
+        @Nullable
         public Spliterator<T> trySplit() {
             int lo = index,
                 mid = (lo + fence) >>> 1;

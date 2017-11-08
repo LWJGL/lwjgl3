@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system;
 
+import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -13,6 +14,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     protected long address;
 
+    @Nullable
     protected ByteBuffer container;
 
     protected int
@@ -21,7 +23,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
         limit,
         capacity;
 
-    protected CustomBuffer(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
+    protected CustomBuffer(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
         this.address = address;
         this.container = container;
 
@@ -369,7 +371,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     protected abstract SELF self();
 
-    protected abstract SELF newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity);
+    protected abstract SELF newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity);
 
     protected long nextGetIndex() {
         if (position >= limit) {

@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -21,9 +22,10 @@ public abstract class Struct extends Pointer.Default {
     }
 
     @SuppressWarnings({"unused", "FieldCanBeLocal"})
+    @Nullable
     private ByteBuffer container;
 
-    protected Struct(long address, ByteBuffer container) {
+    protected Struct(long address, @Nullable ByteBuffer container) {
         super(address);
         this.container = container;
     }

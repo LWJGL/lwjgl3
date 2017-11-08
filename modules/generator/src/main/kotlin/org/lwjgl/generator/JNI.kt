@@ -57,6 +57,7 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
                 """
             )}
             """
+		javaImport("javax.annotation.*")
     }
 
     override fun PrintWriter.generateJava() {
@@ -84,7 +85,7 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
         sortedSignaturesArray.forEach {
             print("${t}public static native ${it.returnType.nativeMethodType} ${it.signature}(long $FUNCTION_ADDRESS")
             if (it.arguments.isNotEmpty())
-                print(it.arguments.asSequence().mapIndexed { i, param -> if (param is ArrayType) "${(param.mapping as PointerMapping).primitive}[] param$i" else "${param.nativeMethodType} param$i" }.joinToString(", ", prefix = ", "))
+                print(it.arguments.asSequence().mapIndexed { i, param -> if (param is ArrayType) "@Nullable ${(param.mapping as PointerMapping).primitive}[] param$i" else "${param.nativeMethodType} param$i" }.joinToString(", ", prefix = ", "))
             println(");")
         }
         println("\n}")

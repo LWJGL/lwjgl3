@@ -9,6 +9,7 @@ import org.lwjgl.system.linux.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
+import javax.annotation.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
@@ -69,7 +70,7 @@ public final class APIUtil {
      *
      * @param msg the message to print
      */
-    public static void apiLog(CharSequence msg) {
+    public static void apiLog(@Nullable CharSequence msg) {
         if (DEBUG) {
             DEBUG_STREAM.print("[LWJGL] ");
             DEBUG_STREAM.println(msg);
@@ -142,7 +143,8 @@ public final class APIUtil {
         }
     }
 
-    public static ByteBuffer apiGetMappedBuffer(ByteBuffer buffer, long mappedAddress, int capacity) {
+    @Nullable
+    public static ByteBuffer apiGetMappedBuffer(@Nullable ByteBuffer buffer, long mappedAddress, int capacity) {
         return buffer == null || memAddress(buffer) != mappedAddress || buffer.capacity() != capacity
             ? memByteBuffer(mappedAddress, capacity)
             : buffer;
@@ -173,15 +175,17 @@ public final class APIUtil {
         public final int minor;
 
         /** Returns the API revision. May be null. */
+        @Nullable
         public final String revision;
         /** Returns the API implementation-specific versioning information. May be null. */
+        @Nullable
         public final String implementation;
 
         public APIVersion(int major, int minor) {
             this(major, minor, null, null);
         }
 
-        public APIVersion(int major, int minor, String revision, String implementation) {
+        public APIVersion(int major, int minor, @Nullable String revision, @Nullable String implementation) {
             this.major = major;
             this.minor = minor;
             this.revision = revision;
@@ -207,6 +211,7 @@ public final class APIUtil {
      *
      * @param option the option to query
      */
+    @Nullable
     public static APIVersion apiParseVersion(Configuration<?> option) {
         APIVersion version;
 
@@ -245,7 +250,7 @@ public final class APIUtil {
      *
      * @return the parsed {@link APIVersion}
      */
-    public static APIVersion apiParseVersion(String version, String prefix) {
+    public static APIVersion apiParseVersion(String version, @Nullable String prefix) {
         String pattern = "([0-9]+)[.]([0-9]+)([.]\\S+)?\\s*(.+)?";
         if (prefix != null) {
             pattern = "(?:" + prefix + "\\s+)?" + pattern;
@@ -284,7 +289,7 @@ public final class APIUtil {
      *
      * @return the token map
      */
-    public static Map<Integer, String> apiClassTokens(BiPredicate<Field, Integer> filter, Map<Integer, String> target, Class<?>... tokenClasses) {
+    public static Map<Integer, String> apiClassTokens(@Nullable BiPredicate<Field, Integer> filter, @Nullable Map<Integer, String> target, Class<?>... tokenClasses) {
         if (target == null) {
             target = new HashMap<>(64);
         }
