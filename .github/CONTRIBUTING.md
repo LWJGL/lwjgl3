@@ -2,13 +2,13 @@
 
 ## Introduction
 
-First, thank you for considering contributing to lwjgl! It's people like you that make the open source community such a great community! 😊
+First, thank you for considering contributing to LWJGL!
 
 We welcome any type of contribution, not only code. You can help with 
-- **QA**: file bug reports, the more details you can give the better (e.g. screenshots with the console open)
-- **Marketing**: writing blog posts, howto's, printing stickers, ...
-- **Community**: presenting the project at meetups, organizing a dedicated meetup for the local community, ...
-- **Code**: take a look at the [open issues](issues). Even if you can't write code, commenting on them, showing that you care about a given issue matters. It helps us triage them.
+- **QA**: file bug reports, the more details you can give the better
+- **Marketing**: writing blog posts, guides, tweets ...
+- **Community**: presenting the project at meetups or conventions, ...
+- **Code**: take a look at the [open issues](https://github.com/LWJGL/lwjgl3/issues). Even if you can't write code, commenting on them, showing that you care about a given issue matters. It helps us triage them.
 - **Money**: we welcome financial contributions in full transparency on our [open collective](https://opencollective.com/lwjgl).
 
 ## Your First Contribution
@@ -17,7 +17,7 @@ Working on your first Pull Request? You can learn how from this *free* series, [
 
 ## Submitting code
 
-Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it. The pull request should also contain tests.
+Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
 ## Code review process
 
@@ -31,8 +31,8 @@ Anyone can file an expense. If the expense makes sense for the development of th
 
 ## Questions
 
-If you have any questions, create an [issue](issue) (protip: do a quick search first to see if someone else didn't ask the same question before!).
-You can also reach us at hello@lwjgl.opencollective.com.
+If you have any questions, create an [issue](https://github.com/LWJGL/lwjgl3/issues) (protip: do a quick search first to see if someone else didn't ask the same question before!).
+You can also reach us at the LWJGL [forum](http://forum.lwjgl.org/) and [slack](https://slack.lwjgl.org/) team.
 
 ## Credits
 
