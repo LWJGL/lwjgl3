@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
+[![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors) [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
 ![Size](https://reposs.herokuapp.com/?path=lwjgl/lwjgl3)
 [![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
 [![Slack Status](https://slack.lwjgl.org/badge.svg)](https://slack.lwjgl.org/)
@@ -166,3 +166,33 @@ improve the chances of a quick and useful response.
 |[Zstandard](http://facebook.github.io/zstd/) (zstd)|A fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.|
 
 Use of a binding is subject to the terms of the [corresponding license](https://github.com/LWJGL/lwjgl3/tree/master/doc/3rdparty).
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
+<a href="graphs/contributors"><img src="https://opencollective.com/lwjgl/contributors.svg?width=890" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/lwjgl#backer)]
+
+<a href="https://opencollective.com/lwjgl#backers" target="_blank"><img src="https://opencollective.com/lwjgl/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/lwjgl#sponsor)]
+
+<a href="https://opencollective.com/lwjgl/sponsor/0/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/1/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/2/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/3/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/4/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/5/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/6/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/7/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/8/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/sponsor/9/website" target="_blank"><img src="https://opencollective.com/lwjgl/sponsor/9/avatar.svg"></a>
+
+
