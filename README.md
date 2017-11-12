@@ -169,8 +169,8 @@ Use of a binding is subject to the terms of the [corresponding license](https://
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
-<a href="graphs/contributors"><img src="https://opencollective.com/lwjgl/contributors.svg?width=890" /></a>
+This project exists thanks to all the people who contribute. [[Contribute]](/.github/CONTRIBUTING.md).
+<a href="../../graphs/contributors"><img src="https://opencollective.com/lwjgl/contributors.svg?width=890" /></a>
 
 
 ## Backers
