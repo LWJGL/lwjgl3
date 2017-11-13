@@ -13,5 +13,5 @@ val libc = "LibC".nativeClass(MACOSX_PACKAGE, binding = libSystem.binding!!.dele
     pid_t(
         "getpid",
         "Returns the process ID of the calling process."
-    );
+    )
 }

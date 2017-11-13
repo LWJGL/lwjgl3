@@ -104,7 +104,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
         jboolean.IN("isStatic", "must be set to #TRUE if the method ID refers to a static field, and # FALSE otherwise")
     )
 
-    java_lang_reflect_Method(
+    java_lang_reflect_Field(
         "ToReflectedField",
         "Converts a field ID derived from {@code cls} to a ##Field object.",
 
