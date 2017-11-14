@@ -657,6 +657,13 @@ public final class MemoryUtil {
 
     // --- [ Buffer allocation ] ---
 
+    private static long checkAlignment(long address, int mask) {
+        if (DEBUG && (address & mask) != 0L) {
+            throw new IllegalArgumentException("Unaligned memory address");
+        }
+        return address;
+    }
+
     /**
      * Creates a new direct ByteBuffer that starts at the specified memory address and has the specified capacity. The returned ByteBuffer instance will be set
      * to the native ByteOrder.
@@ -689,11 +696,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (DEBUG && (address & (2 - 1)) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-
-        return ACCESSOR.memShortBuffer(address, capacity);
+        return ACCESSOR.memShortBuffer(checkAlignment(address, 2 - 1), capacity);
     }
 
     /**
@@ -711,11 +714,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (DEBUG && (address & (2 - 1)) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-
-        return ACCESSOR.memCharBuffer(address, capacity);
+        return ACCESSOR.memCharBuffer(checkAlignment(address, 2 - 1), capacity);
     }
 
     /**
@@ -733,11 +732,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (DEBUG && (address & (4 - 1)) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-
-        return ACCESSOR.memIntBuffer(address, capacity);
+        return ACCESSOR.memIntBuffer(checkAlignment(address, 4 - 1), capacity);
     }
 
     /**
@@ -755,11 +750,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (DEBUG && (address & (8 - 1)) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-
-        return ACCESSOR.memLongBuffer(address, capacity);
+        return ACCESSOR.memLongBuffer(checkAlignment(address, 8 - 1), capacity);
     }
 
     /**
@@ -777,11 +768,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (DEBUG && (address & (4 - 1)) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-
-        return ACCESSOR.memFloatBuffer(address, capacity);
+        return ACCESSOR.memFloatBuffer(checkAlignment(address, 4 - 1), capacity);
     }
 
     /**
@@ -799,11 +786,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        if (DEBUG && (address & (8 - 1)) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-
-        return ACCESSOR.memDoubleBuffer(address, capacity);
+        return ACCESSOR.memDoubleBuffer(checkAlignment(address, 8 - 1), capacity);
     }
 
     /**
@@ -822,7 +805,7 @@ public final class MemoryUtil {
             return null;
         }
 
-        return PointerBuffer.create(address, capacity);
+        return PointerBuffer.create(checkAlignment(address, POINTER_SIZE - 1), capacity);
     }
 
     // --- [ Buffer slicing ] ---
