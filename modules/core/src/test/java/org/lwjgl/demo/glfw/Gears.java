@@ -73,7 +73,6 @@ public class Gears extends AbstractGears {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_TRANSPARENT, GLFW_TRUE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
@@ -151,6 +150,9 @@ public class Gears extends AbstractGears {
                         ? GLFW_CURSOR_DISABLED
                         : GLFW_CURSOR_NORMAL
                     );
+                    break;
+                case GLFW_KEY_O:
+                    glfwSetWindowOpacity(window, glfwGetWindowOpacity(window) == 1.0f ? 0.5f : 1.0f);
                     break;
                 case GLFW_KEY_R:
                     glfwSetWindowAttrib(windowHnd, GLFW_RESIZABLE, 1 - glfwGetWindowAttrib(windowHnd, GLFW_RESIZABLE));

@@ -378,7 +378,12 @@ val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
     unsigned_int.IN("codepoint", "the Unicode code point of the character"),
     int.IN("mods", "bitfield describing which modifier keys were held down")
 ) {
-    documentation = "Instances of this interface may be passed to the #SetCharModsCallback() method."
+    documentation =
+        """
+        Instances of this interface may be passed to the #SetCharModsCallback() method.
+
+        Deprecared: scheduled for removal in version 4.0.
+        """
     javaImport("static org.lwjgl.glfw.GLFW.*")
     additionalCode = """
     /** See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}. */

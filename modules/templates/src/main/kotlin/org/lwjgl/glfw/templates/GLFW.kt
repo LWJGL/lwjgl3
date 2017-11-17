@@ -479,7 +479,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             windows.
             """,
             0x00020009),
-        "TRANSPARENT".enum(
+        "TRANSPARENT_FRAMEBUFFER".enum(
             """
             {@code WindowHint}: specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
             alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations.
@@ -1183,7 +1183,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             tr(td("#FLOATING"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#MAXIMIZED"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#CENTER_CURSOR"), td("#TRUE"), td("#TRUE or #FALSE")),
-            tr(td("#TRANSPARENT"), td("#FALSE"), td("#TRUE or #FALSE")),
+            tr(td("#TRANSPARENT_FRAMEBUFFER"), td("#FALSE"), td("#TRUE or #FALSE")),
 
             tr(td("#RED_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
             tr(td("#GREEN_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
@@ -1277,7 +1277,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             "<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
             """
             <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the initial icon for the window. If no such icon
-            is present, the {@code IDI_WINLOGO} icon will be used instead. To set a different icon, see #SetWindowIcon().
+            is present, the {@code IDI_APPLICATION} icon will be used instead. To set a different icon, see #SetWindowIcon().
             """,
             "<b>Windows</b>: The context to share resources with may not be current on any other thread.",
             """
@@ -1598,6 +1598,49 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         GLFWwindow_p.IN("window", "the window to query"),
         nullable..Check(1)..float_p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
         nullable..Check(1)..float_p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+
+        since = "version 3.3"
+    )
+
+    float(
+        "GetWindowOpacity",
+        """
+        Returns the opacity of the whole window.
+
+        This function returns the opacity of the window, including any decorations.
+
+        The opacity (or alpha) value is a positive finite number between zero and one, where zero is fully transparent and one is fully opaque.  If the system
+        does not support whole window transparency, this function always returns one.
+
+        The initial opacity value for newly created windows is one.
+
+        This function must only be called from the main thread.
+        """,
+
+        GLFWwindow_p.IN("window", "the window to query"),
+
+        returnDoc = "the opacity value of the specified window",
+        since = "version 3.3"
+    )
+
+    void(
+        "SetWindowOpacity",
+        """
+        Sets the opacity of the whole window.
+
+        This function sets the opacity of the window, including any decorations.
+
+        The opacity (or alpha) value is a positive finite number between zero and one, where zero is fully transparent and one is fully opaque.
+
+        The initial opacity value for newly created windows is one.
+
+        A window created with framebuffer transparency may not use whole window transparency. The results of doing this are undefined.
+
+        This function must only be called from the main thread.
+        """,
+
+        GLFWwindow_p.IN("window", "the window to set the opacity for"),
+        float.IN("opacity", "the desired opacity of the specified window"),
 
         since = "version 3.3"
     )
@@ -2447,6 +2490,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         pressed or released, see #SetKeyCallback() instead.
 
         This function must only be called from the main thread.
+
+        Deprecared: scheduled for removal in version 4.0.
         """,
 
         GLFWwindow_p.IN("window", "the window whose callback to set"),
@@ -2812,7 +2857,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window that will own the clipboard contents"),
+        GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
         const..charUTF8_p.IN("string", "a UTF-8 encoded string"),
 
         since = "version 3.0"
@@ -2834,7 +2879,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ))}
         """,
 
-        GLFWwindow_p.IN("window", "the window that will request the clipboard contents"),
+        GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
 
         returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or #NULL if an error occurred",
         since = "version 3.0"
@@ -2905,8 +2950,10 @@ if (hats[2] & GLFW_HAT_RIGHT)
     void(
         "MakeContextCurrent",
         """
-        Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. A context can only be made current on a single thread at a
-        time and each thread can have only a single current context at a time.
+        Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. A context must only be made current on a single thread at
+        a time and each thread can have only a single current context at a time.
+
+        When moving a context between threads, you must make it non-current on the old thread before making it current on the new one.
 
         By default, making a context non-current implicitly forces a pipeline flush. On machines that support
         ${url("https://www.opengl.org/registry/specs/KHR/context_flush_control.txt", "GL_KHR_context_flush_control")}, you can control whether a context
