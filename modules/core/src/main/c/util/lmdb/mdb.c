@@ -1486,6 +1486,10 @@ struct MDB_env {
 	mdb_size_t	me_mapsize;		/**< size of the data memory map */
 	off_t		me_size;		/**< current file size */
 	pgno_t		me_maxpg;		/**< me_mapsize / me_psize */
+#ifdef _WIN32
+    /**< size of committed memory with VirtualAlloc. */
+    void        *me_map_committed;
+#endif
 	MDB_dbx		*me_dbxs;		/**< array of static DB info */
 	uint16_t	*me_dbflags;	/**< array of flags from MDB_db.md_flags */
 	unsigned int	*me_dbiseqs;	/**< array of dbi sequence numbers */
@@ -2562,6 +2566,9 @@ mdb_page_alloc(MDB_cursor *mc, int num, MDB_page **mp)
 	}
 #if defined(_WIN32) && !defined(MDB_VL32)
 	if (!(env->me_flags & MDB_RDONLY)) {
+	// LWJGL: The original implementation calls VirtualAlloc for
+	// every page (usually 4KB) and performance suffers.
+	/*
 		void *p;
 		p = (MDB_page *)(env->me_map + env->me_psize * pgno);
 		p = VirtualAlloc(p, env->me_psize * num, MEM_COMMIT,
@@ -2572,6 +2579,50 @@ mdb_page_alloc(MDB_cursor *mc, int num, MDB_page **mp)
 			rc = ErrCode();
 			goto fail;
 		}
+	//*/
+
+	//*
+		char *mapFrom = env->me_map + env->me_psize * pgno;
+		char *mapTo = mapFrom + env->me_psize * num;
+
+		char *mapCommitted = env->me_map_committed;
+		if (mapCommitted < mapTo) { // early-out to avoid calling VirtualQuery
+			MEMORY_BASIC_INFORMATION mi = { 0 };
+			VirtualQuery(mapFrom, &mi, sizeof(mi));
+
+			mapCommitted = mi.State == MEM_RESERVE
+				? mapFrom
+				: (char*)mi.BaseAddress + mi.RegionSize;
+
+			if (mapCommitted < mapTo) {
+				// Commit memory in 2MB batches, even if page size
+				// is smaller (usually 4KB).
+				SIZE_T regionSize = mapTo - mapCommitted;
+				if (regionSize < 2 * 1024 * 1024) {
+					regionSize = 2 * 1024 * 1024;
+					// cap to map size
+					if (env->me_map + env->me_mapsize < mapCommitted + regionSize) {
+						regionSize = env->me_map + env->me_mapsize - mapCommitted;
+					}
+				}
+
+				if (!VirtualAlloc(
+					mapCommitted,
+					regionSize,
+					MEM_COMMIT,
+					(env->me_flags & MDB_WRITEMAP) ? PAGE_READWRITE : PAGE_READONLY
+				)) {
+					DPUTS("VirtualAlloc failed");
+					rc = ErrCode();
+					goto fail;
+				}
+
+				env->me_map_committed = mapCommitted + regionSize;
+			} else {
+				env->me_map_committed = mapCommitted;
+			}
+		}
+	//*/
 	}
 #endif
 
