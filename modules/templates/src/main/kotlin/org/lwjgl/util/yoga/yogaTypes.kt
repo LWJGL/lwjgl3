@@ -232,14 +232,14 @@ val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
     YGLayout.member("layout", "")
     uint32_t.member("lineIndex", "")
 
-    YGNodeRef.member("parent", "")
-    YGNodeListRef.member("children", "")
+    nullable..YGNodeRef.member("parent", "")
+    nullable..YGNodeListRef.member("children", "")
 
-    YGNode_p.member("nextChild", "")
+    nullable..YGNode_p.member("nextChild", "")
 
-    YGMeasureFunc.member("measure", "")
-    YGPrintFunc.member("print", "")
-    opaque_p.member("context", "")
+    nullable..YGMeasureFunc.member("measure", "")
+    nullable..YGPrintFunc.member("print", "")
+    nullable..opaque_p.member("context", "")
 
     bool.member("isDirty", "")
     bool.member("hasNewLayout", "")

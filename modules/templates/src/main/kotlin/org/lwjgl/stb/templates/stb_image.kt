@@ -128,8 +128,8 @@ N=\#channels_in_file     components
   2                     grey, alpha
   3                     red, green, blue
   4                     red, green, blue, alpha""")}
-        If image loading fails for any reason, the return value will be #NULL, and {@code *x}, {@code *y}, {@code *channels_in_file} will be unchanged. The function
-        #failure_reason() can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.
+        If image loading fails for any reason, the return value will be #NULL, and {@code *x}, {@code *y}, {@code *channels_in_file} will be unchanged. The
+        function #failure_reason() can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.
 
         Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.
         """,
@@ -137,7 +137,10 @@ N=\#channels_in_file     components
         const..charASCII_p.IN("filename", "the file name"),
         Check(1)..AutoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
         Check(1)..AutoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int_p.OUT("channels_in_file", "outputs number of components in image"),
+        Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int_p.OUT(
+            "channels_in_file",
+            "outputs number of components in image"
+        ),
         int.IN("desired_channels", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
     )
 

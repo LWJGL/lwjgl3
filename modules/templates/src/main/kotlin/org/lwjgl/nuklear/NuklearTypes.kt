@@ -1056,7 +1056,7 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 val nk_style = struct(NUKLEAR_PACKAGE, "NkStyle", nativeName = "struct nk_style") {
     javaImport("static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT")
 
-    nk_user_font_p.member("font", "")
+    nullable..nk_user_font_p.member("font", "")
     nullable..nk_cursor_p.array("cursors", "", size = "NK_CURSOR_COUNT")
     nullable..nk_cursor_p.member("cursor_active", "")
     nullable..nk_cursor_p.member("cursor_last", "")
