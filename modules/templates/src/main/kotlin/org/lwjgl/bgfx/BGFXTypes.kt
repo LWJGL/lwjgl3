@@ -45,6 +45,8 @@ val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
 val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
+val bgfx_encoder_p = "struct bgfx_encoder".p
+
 /*
 #define BGFX_HANDLE_T(_name) \
     typedef struct _name { uint16_t idx; } _name##_t
@@ -115,8 +117,15 @@ val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx
 
     charASCII.array("name", "view name", size = 256)
     uint8_t.member("view", "view id")
-    uint64_t.member("cpuTimeElapsed", "CPU (submit) time elapsed")
-    uint64_t.member("gpuTimeElapsed", "GPU time elapsed")
+    int64_t.member("cpuTimeElapsed", "CPU (submit) time elapsed")
+    int64_t.member("gpuTimeElapsed", "GPU time elapsed")
+}
+
+val bgfx_encoder_stats_t = struct(BGFX_PACKAGE, "BGFXEncoderStats", nativeName = "bgfx_encoder_stats_t", mutable = false) {
+    documentation = "Encoder stats."
+
+    int64_t.member("cpuTimeBegin", "encoder thread CPU submit begin time")
+    int64_t.member("cpuTimeEnd", "encoder thread CPU submit end time")
 }
 
 val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
@@ -147,7 +156,10 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint16_t.member("textHeight", "debug text height in characters")
 
     AutoSize("viewStats")..uint16_t.member("numViews", "number of view stats")
-    bgfx_view_stats_t.array("viewStats", "view stats", size = 256)
+    bgfx_view_stats_t.p.buffer("viewStats", "view stats")
+
+    AutoSize("encoderStats")..uint16_t.member("numEncoder", "number of encoders used during frame")
+    bgfx_encoder_stats_t.p.buffer("encoderStats", "encoder stats")
 }.p
 
 val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
@@ -249,6 +261,7 @@ val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bg
     uint32_t.member("maxDynamicVertexBuffers", "maximum number of vertex buffer handles")
     uint32_t.member("maxUniforms", "maximum number of uniform handles")
     uint32_t.member("maxOcclusionQueries", "maximum number of occlusion query handles")
+    uint32_t.member("maxEncoders", "maximum number of encoder threads")
 }
 
 val bgfx_caps_t_p = struct(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {

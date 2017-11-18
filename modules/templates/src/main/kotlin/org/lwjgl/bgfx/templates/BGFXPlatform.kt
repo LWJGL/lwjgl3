@@ -13,7 +13,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
         Native bindings to the C platform API of the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library.
         """
 
-    EnumConstant(
+    val RenderFrame = EnumConstant(
         "Render frame. ({@code bgfx_renderer_frame_t})",
 
         "RENDER_FRAME_NO_CONTEXT".enum,
@@ -22,7 +22,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
         "RENDER_FRAME_EXITING".enum,
 
         "RENDER_FRAME_COUNT".enum
-    )
+    ).javaDocLinks
 
     bgfx_renderer_frame_t(
         "render_frame",
@@ -38,7 +38,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
 
         int32_t.IN("_msecs", "timeout in milliseconds"),
 
-        returnDoc = "current renderer state"
+        returnDoc = "current renderer state. One of: $RenderFrame"
     )
 
     void(

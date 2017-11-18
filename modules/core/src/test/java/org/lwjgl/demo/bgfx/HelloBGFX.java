@@ -13,6 +13,7 @@ import java.nio.*;
 import static org.lwjgl.bgfx.BGFX.*;
 import static org.lwjgl.bgfx.BGFXPlatform.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -46,7 +47,19 @@ public final class HelloBGFX {
             throw new RuntimeException("Error creating GLFW window");
         }
 
-        try (MemoryStack stack = MemoryStack.stackPush()) {
+        glfwSetKeyCallback(window, (windowHnd, key, scancode, action, mods) -> {
+            if (action != GLFW_RELEASE) {
+                return;
+            }
+
+            switch (key) {
+                case GLFW_KEY_ESCAPE:
+                    glfwSetWindowShouldClose(windowHnd, true);
+                    break;
+            }
+        });
+
+        try (MemoryStack stack = stackPush()) {
             BGFXPlatformData platformData = BGFXPlatformData.callocStack(stack);
 
             switch (Platform.get()) {
@@ -68,6 +81,9 @@ public final class HelloBGFX {
         if (!bgfx_init(renderer, pciId, 0, null, null)) {
             throw new RuntimeException("Error initializing bgfx renderer");
         }
+
+        System.out.println("bgfx renderer: " + bgfx_get_renderer_name(bgfx_get_renderer_type()));
+
         bgfx_reset(width, height, reset);
 
         // Enable debug text.
@@ -83,9 +99,11 @@ public final class HelloBGFX {
             // Set view 0 default viewport.
             bgfx_set_view_rect(0, 0, 0, width, height);
 
+            long encoder = bgfx_begin();
+
             // This dummy draw call is here to make sure that view 0 is cleared
             // if no other draw calls are submitted to view 0.
-            bgfx_touch(0);
+            bgfx_encoder_touch(encoder, (byte)0);
 
             // Use debug font to print information about this example.
             bgfx_dbg_text_clear(0, false);
@@ -98,6 +116,8 @@ public final class HelloBGFX {
             );
             bgfx_dbg_text_printf(0, 1, 0x4f, "bgfx/examples/25-c99");
             bgfx_dbg_text_printf(0, 2, 0x6f, "Description: Initialization and debug text with C99 API.");
+
+            bgfx_end(encoder);
 
             // Advance to next frame. Rendering thread will be kicked to
             // process submitted rendering primitives.
