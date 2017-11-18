@@ -266,6 +266,43 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
+        "Bit flags used as part of ##OVRMirrorTextureDesc's {@code MirrorOptions} field. {@code ovrMirrorOptions}",
+
+        "MirrorOption_Default".enum(
+            """
+            By default the mirror texture will be:
+            ${ul(
+                "Pre-distortion (i.e. rectilinear)",
+                "Contain both eye textures",
+                "Exclude Guardian, Notifications, System Menu GUI"
+            )}
+            """,
+            0x0000
+        ),
+
+        "MirrorOption_PostDistortion".enum(
+            """
+            Retrieves the barrel distorted texture contents instead of the rectilinear one.
+
+            This is only recommended for debugging purposes, and not for final desktop presentation.
+            """,
+            0x0001
+        ),
+
+        "MirrorOption_LeftEyeOnly".enum(
+            "Since #MirrorOption_Default renders both eyes into the mirror texture, these two flags are exclusive (i.e. cannot use them simultaneously)",
+            0x0002
+        ),
+        "MirrorOption_RightEyeOnly".enum(
+            "See #MirrorOption_LeftEyeOnly",
+            0x0004
+        ),
+        "MirrorOption_IncludeGuardian".enum("Shows the boundary system aka Guardian on the mirror texture.", 0x0008),
+        "MirrorOption_IncludeNotifications".enum("Shows system notifications the user receives on the mirror texture.", 0x0010),
+        "MirrorOption_IncludeSystemGui".enum("Shows the system menu (triggered by hitting the Home button) on the mirror texture.", 0x0020)
+    )
+
+    EnumConstant(
         "Button input types. ({@code ovrTouch})",
 
         "Button_A".enum("Button A", 0x00000001),
@@ -1047,9 +1084,11 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         "LayerType_Disabled".enum("Layer is disabled.", "0"),
         "LayerType_EyeFov".enum("Described by ##OVRLayerEyeFov."),
-        "LayerType_Quad".enum("Described by ##OVRLayerQuad.", "3"),
+        "LayerType_EyeFovDepth".enum("Described by ##OVRLayerEyeFovDepth."),
+        "LayerType_Quad".enum("Described by ##OVRLayerQuad."),
         "LayerType_EyeMatrix".enum("Described by ##OVRLayerEyeMatrix.", "5"),
         "LayerType_EyeFovMultires".enum("Described by ##OVRLayerEyeFovMultires.", "7"),
+        "LayerType_Cylinder".enum("Described by ##OVRLayerCylinder."),
         "LayerType_Cube".enum("Described by ##OVRLayerCube.", "10")
     )
 

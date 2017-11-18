@@ -230,12 +230,12 @@ EXPORTS
             <beforeCompile>
                 <compile dest="@{dest}" flags="" relative="false">
                     <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-                    <fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
+                    <fileset dir="${OCULUS_SDK_PATH}/LibOVR/Shim" includes="*.cpp"/>
                 </compile>
             </beforeCompile>
             <compileargs>
                 <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-                <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Src"/>
+                <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Shim"/>
             </compileargs>
             <source>
                 <fileset dir="." includes="${src.generated.native}/ovr/*.c"/>

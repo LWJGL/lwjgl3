@@ -638,6 +638,67 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
     )
 }
 
+val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName = "ovrLayerEyeFovDepth") {
+    javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
+    documentation =
+        """
+        Describes a layer that specifies a monoscopic or stereoscopic view, with depth textures in addition to color textures. This is typically used to
+        support positional time warp. This struct is the same as ##OVRLayerEyeFov, but with the addition of {@code DepthTexture} and {@code ProjectionDesc}.
+
+        {@code ProjectionDesc} can be created using #TimewarpProjectionDesc_FromProjection().
+
+        Three options exist with respect to mono/stereo texture usage:
+        ${ul(
+            """
+            {@code ColorTexture[0]} and {@code ColorTexture[1]} contain the left and right stereo renderings, respectively. {@code Viewport[0]} and
+            {@code Viewport[1]} refer to {@code ColorTexture[0]} and {@code ColorTexture[1]}, respectively.
+            """,
+            """
+            {@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is #NULL, and {@code Viewport[0]} and
+            {@code Viewport[1]} refer to sub-rects with {@code ColorTexture[0]}.
+            """,
+            "{@code ColorTexture[0]} contains a single monoscopic rendering, and {@code Viewport[0]} and {@code Viewport[1]} both refer to that rendering."
+        )}
+        """
+
+    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFovDepth")
+    ovrTextureSwapChain.array(
+        "ColorTexture",
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
+        size = "ovrEye_Count",
+        validSize = "1"
+    )
+    ovrRecti.array(
+        "Viewport",
+        "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
+        size = "ovrEye_Count"
+    )
+    ovrFovPort.array("Fov", "the viewport field of view", size = "ovrEye_Count")
+    ovrPosef.array(
+        "RenderPose",
+        """
+        specifies the position and orientation of each eye view, with position specified in meters. {@code RenderPose} will typically be the value returned
+        from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+        """,
+        size = "ovrEye_Count"
+    )
+    double.member(
+        "SensorSampleTime",
+        """
+        specifies the timestamp when the source ##OVRPosef (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by calling
+        #GetTimeInSeconds() around the instant the application calls #GetTrackingState(). The main purpose for this is to accurately track app tracking
+        latency.
+        """
+    )
+    ovrTextureSwapChain.array(
+        "DepthTexture",
+        "depth texture for positional timewarp. Must map 1:1 to the {@code ColorTexture}.",
+        size = "ovrEye_Count",
+        validSize = "1"
+    )
+    ovrTimewarpProjectionDesc.member("ProjectionDesc", "specifies how to convert {@code DepthTexture} information into meters")
+}
+
 val ovrTextureLayoutOctilinear = struct(OVR_PACKAGE, "OVRTextureLayoutOctilinear", nativeName = "ovrTextureLayoutOctilinear") {
     documentation = 
         """
@@ -790,6 +851,61 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
         """
     )
     ovrVector2f.member("QuadSize", "width and height (respectively) of the quad in meters")
+}
+
+val ovrLayerCylinder = struct(OVR_PACKAGE, "OVRLayerCylinder", nativeName = "ovrLayerCylinder") {
+    documentation =
+        """
+        Describes a layer of type #LayerType_Cylinder which is a single cylinder relative to the recentered origin. This type of layer represents a single
+        object placed in the world and not a stereo view of the world itself.
+        ${codeBlock("""
+               -Z                                       +Y
+        U=0  +--+--+  U=1
+         +---+  |  +---+            +-----------------+  - V=0
+      +--+ \    |    / +--+         |                 |  |
+    +-+     \       /     +-+       |                 |  |
+   ++        \  A  /        ++      |                 |  |
+  ++          \---/          ++     |                 |  |
+  |            \ /            |     |              +X |  |
+  +-------------C------R------+ +X  +--------C--------+  | <--- Height
+      (+Y is out of screen)         |                 |  |
+                                    |                 |  |
+  R = Radius                        |                 |  |
+  A = Angle (0,2*Pi)                |                 |  |
+  C = CylinderPoseCenter            |                 |  |
+  U/V = UV Coordinates              +-----------------+  - V=1""")}
+
+        An identity {@code CylinderPoseCenter} places the center of the cylinder at the recentered origin unless the headlocked flag is set.
+
+        Does not utilize {@code HmdSpaceToWorldScaleInMeters}. If necessary, adjust translation and radius.
+
+        ${note("""
+        Only the interior surface of the cylinder is visible. Use cylinder layers when the user cannot leave the extents of the cylinder. Artifacts may appear
+        when viewing the cylinder's exterior surface. Additionally, while the interface supports an Angle that ranges from {@code [0,2*Pi]} the angle should
+        remain less than {@code 1.9*PI} to avoid artifacts where the cylinder edges converge.""")}
+        """
+
+    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_Cylinder")
+    ovrTextureSwapChain.member("ColorTexture", "contains a single image, never with any stereo view")
+    ovrRecti.member("Viewport", "specifies the ColorTexture sub-rect UV coordinates")
+    ovrPosef.member(
+        "CylinderPoseCenter",
+        """
+        specifies the orientation and position of the center point of a cylinder layer type. The position is in real-world meters not the application's virtual
+        world, but the physical world the user is in. It is relative to the "zero" position set by #RecenterTrackingOrigin() unless the
+        #LayerFlag_HeadLocked flag is used.
+        """
+    )
+    float.member("CylinderRadius", "radius of the cylinder in meters")
+    float.member("CylinderAngle", "angle in radians. Range is from 0 to {@code 2*Pi} exclusive covering the entire cylinder (see diagram and note above).")
+    float.member(
+        "CylinderAspectRatio",
+        """
+        custom aspect ratio presumably set based on {@code Viewport}. Used to calculate the height of the cylinder based on the arc-length
+        ({@code CylinderAngle}) and radius ({@code CylinderRadius}) given above. The height of the cylinder is given by:
+        {@code height = (CylinderRadius * CylinderAngle) / CylinderAspectRatio}. Aspect ratio is {@code width / height}.
+        """
+    )
 }
 
 val ovrLayerCube = struct(OVR_PACKAGE, "OVRLayerCube", nativeName = "ovrLayerCube") {
@@ -1135,7 +1251,9 @@ TexV  = P.y/P.z""")}
 
         ovrLayerHeader.member("Header", "the layer header")
         ovrLayerEyeFov.member("EyeFov", "")
+        ovrLayerEyeFovDepth.member("EyeFovDepth", "")
         ovrLayerEyeFovMultires.member("Multires", "")
+        ovrLayerCylinder.member("Cylinder", "")
         ovrLayerCube.member("Cube", "")
         ovrLayerQuad.member("Quad", "")
     }

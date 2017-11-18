@@ -64,15 +64,41 @@ val OVRGL = "OVRGL".dependsOn(Binding.OPENGL)?.nativeClass(packageName = OVR_PAC
     )
 
     ovrResult(
-        "CreateMirrorTextureGL",
+        "CreateMirrorTextureWithOptionsGL",
         """
         Creates a Mirror Texture which is auto-refreshed to mirror Rift contents produced by this application.
 
-        The format provided should be thought of as the format the distortion compositor will use when writing into the mirror texture. It is highly
+        A second call to {@code ovr_CreateMirrorTextureWithOptionsGL} for a given {@code ovrSession} before destroying the first one is not supported and will
+        result in an error return.
+
+        ${note("""
+        The {@code format} provided should be thought of as the format the distortion compositor will use when writing into the mirror texture. It is highly
         recommended that mirror textures are requested as sRGB formats because the distortion compositor does sRGB-correct rendering. If the application
         requests a non-sRGB format (e.g. {@code R8G8B8A8_UNORM}) as the mirror texture, then the application might have to apply a manual linear-to-gamma
         conversion when reading from the mirror texture. Failure to do so can result in incorrect gamma conversions leading to gamma-curve artifacts and color
-        banding.
+        banding.""")}
+        """,
+
+        session,
+        const..ovrMirrorTextureDesc_p.IN("desc", "specifies the requested mirror texture description"),
+        Check(1)..ovrMirrorTexture_p.OUT(
+            "out_MirrorTexture",
+            """
+            specifies the created {@code ovrMirrorTexture}, which will be valid upon a successful return value, else it will be #NULL. This texture must be
+            eventually destroyed via #DestroyMirrorTexture() before destroying the session with #Destroy().
+            """
+        ),
+
+        returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
+    )
+
+    ovrResult(
+        "CreateMirrorTextureGL",
+        """
+         Deprecated. Use #CreateMirrorTextureWithOptionsGL() instead.
+
+        Same as {@code ovr_CreateMirrorTextureWithOptionsGL} except doesn't use {@code ovrMirrorOptions} flags as part of ##OVRMirrorTextureDesc's
+        {@code MirrorOptions} field, and defaults to #MirrorOption_PostDistortion.
         """,
 
         session,
@@ -93,7 +119,7 @@ val OVRGL = "OVRGL".dependsOn(Binding.OPENGL)?.nativeClass(packageName = OVR_PAC
         "Gets a the underlying buffer as a GL texture name.",
 
         session,
-        ovrMirrorTexture.IN("mirrorTexture", "an {@code OVRMirrorTexture} previously returned by #CreateMirrorTextureGL()"),
+        ovrMirrorTexture.IN("mirrorTexture", "an {@code OVRMirrorTexture} previously returned by #CreateMirrorTextureWithOptionsGL()"),
         Check(1)..unsigned_int_p.OUT("out_TexId", "returns the GL texture object name associated with the mirror texture"),
 
         returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
