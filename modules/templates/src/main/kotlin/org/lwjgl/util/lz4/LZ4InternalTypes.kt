@@ -50,8 +50,7 @@ val LZ4HC_CCtx_internal = struct(LZ4_PACKAGE, "LZ4HCCCtxInternal", nativeName = 
     uint32_t.member("dictLimit", "below that point, need {@code extDict}")
     uint32_t.member("lowLimit", "below that point, no more {@code dict}")
     uint32_t.member("nextToUpdate", "index from which to continue dictionary update")
-    uint32_t.member("searchNum", "only for optimal parser")
-    uint32_t.member("compressionLevel", "")
+    int.member("compressionLevel", "")
 }
 
 val LZ4_streamHC_u = union(LZ4_PACKAGE, "LZ4StreamHC", nativeName = "LZ4_streamHC_u", mutable = false) {

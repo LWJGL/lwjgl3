@@ -44,7 +44,7 @@ ENABLE_WARNINGS()""")
         "CLEVEL_MAX".."12"
     )
 
-    IntConstant("", "DICTIONARY_LOGSIZE".."17")
+    IntConstant("", "DICTIONARY_LOGSIZE".."16")
     IntConstant("", "MAXD".."(1 << LZ4HC_DICTIONARY_LOGSIZE)")
     IntConstant("", "MAXD_MASK".."(LZ4HC_MAXD - 1)")
 
@@ -67,15 +67,14 @@ ENABLE_WARNINGS()""")
         char_p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", "max supported value is #MAX_INPUT_SIZE"),
         AutoSize("dst")..int.IN("dstCapacity", ""),
-        int.IN(
-            "compressionLevel",
-            """
-            recommended values are between 4 and 9, although any value between 1 and #CLEVEL_MAX will work. Values &gt; #CLEVEL_MAX behave the same as
-            #CLEVEL_MAX.
-            """
-        ),
+        int.IN("compressionLevel", "any value between 1 and #CLEVEL_MAX will work. Values &gt; #CLEVEL_MAX behave the same as #CLEVEL_MAX."),
 
         returnDoc = "the number of bytes written into {@code dst} or 0 if compression fails"
+    )
+
+    int(
+        "sizeofStateHC",
+        ""
     )
 
     int(
@@ -83,7 +82,7 @@ ENABLE_WARNINGS()""")
         """
         Same as #compress_HC(), but using an externally allocated memory segment for {@code state}.
 
-        {@code state} size is provided by #sizeofStateHC(). Memory segment must be aligned on 8-bytes boundaries (which a normal {@code malloc()} will do
+        {@code state} size is provided by #sizeofStateHC(). Memory segment must be aligned on 8-bytes boundaries (which a normal {@code malloc()} should do
         properly).
         """,
 
@@ -95,19 +94,12 @@ ENABLE_WARNINGS()""")
         int.IN("compressionLevel", "")
     )
 
-    int(
-        "sizeofStateHC",
-        ""
-    )
-
     LZ4_streamHC_t_p(
         "createStreamHC",
         """
         Creates memory for LZ4 HC streaming state.
 
         Newly created states are automatically initialized. Existing states can be re-used several times, using #resetStreamHC().
-
-
         """
     )
 
@@ -171,12 +163,7 @@ ENABLE_WARNINGS()""")
 
     int(
         "compress_HC_continue_destSize",
-        """
-        Similar as #compress_HC_continue(), but will read a variable nb of bytes from {@code src} to fit into {@code targetDstSize} budget.
-
-        Important: due to limitations, this prototype only works well up to {@code cLevel} &lt; #CLEVEL_OPT_MIN. Beyond that level, compression performance
-        will be much reduced due to internal incompatibilities.
-        """,
+        "Similar as #compress_HC_continue(), but will read a variable nb of bytes from {@code src} to fit into {@code targetDstSize} budget.",
 
         LZ4_streamHC_t_p.IN("LZ4_streamHCPtr", ""),
         const..char_p.IN("src", ""),
@@ -189,10 +176,7 @@ ENABLE_WARNINGS()""")
 
     void(
         "setCompressionLevel",
-        """
-        It's possible to change compression level after #resetStreamHC(), between 2 invocations of {@code LZ4_compress_HC_continue*()}, but that requires to
-        stay in the same mode (aka 1-10 or 11-12). This function ensures this condition.
-        """,
+        "It's possible to change compression level between 2 invocations of {@code LZ4_compress_HC_continue*()}.",
 
         LZ4_streamHC_t_p.IN("LZ4_streamHCPtr", ""),
         int.IN("compressionLevel", "")
