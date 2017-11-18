@@ -106,6 +106,9 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
         #endif
         #undef min
         #undef max
+        #ifdef _XBOX_ONE
+            #include "xmem.h"
+        #endif
     #endif
 
     #ifdef RMT_PLATFORM_LINUX
@@ -501,8 +504,10 @@ static void WriteFence()
 {
 #if defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
     _WriteBarrier();
-#else
+#elif defined (__clang__)
 	__asm__ volatile("" : : : "memory");
+#else
+    asm volatile ("" : : : "memory");
 #endif
 }
 
@@ -584,7 +589,12 @@ typedef struct VirtualMirrorBuffer
     rmtU8* ptr;
 
 #ifdef RMT_PLATFORM_WINDOWS
-    HANDLE file_map_handle;
+    #ifdef _XBOX_ONE
+	    size_t page_count;
+	    size_t* page_mapping;
+    #else
+        HANDLE file_map_handle;
+    #endif
 #endif
 
 } VirtualMirrorBuffer;
@@ -674,10 +684,62 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
     buffer->size = size;
     buffer->ptr = NULL;
 #ifdef RMT_PLATFORM_WINDOWS
-    buffer->file_map_handle = INVALID_HANDLE_VALUE;
+    #ifdef _XBOX_ONE
+	    buffer->page_count = 0;
+	    buffer->page_mapping = NULL;
+    #else
+        buffer->file_map_handle = INVALID_HANDLE_VALUE;
+    #endif
 #endif
 
 #ifdef RMT_PLATFORM_WINDOWS
+#ifdef _XBOX_ONE
+
+    // Xbox version based on Windows version and XDK reference
+
+	buffer->page_count = size / k_64;
+	if (buffer->page_mapping)
+	{
+		free( buffer->page_mapping );
+	}
+	buffer->page_mapping = malloc( sizeof( ULONG )*buffer->page_count );
+
+	while(nb_attempts-- > 0)
+	{
+		rmtU8* desired_addr;
+
+		// Create a page mapping for pointing to its physical address with multiple virtual pages
+		if (!AllocateTitlePhysicalPages( GetCurrentProcess(), MEM_LARGE_PAGES, &buffer->page_count, buffer->page_mapping ))
+		{
+			free( buffer->page_mapping );
+			buffer->page_mapping = NULL;
+			break;
+		}
+
+		// Reserve two contiguous pages of virtual memory
+		desired_addr = (rmtU8*)VirtualAlloc( 0, size * 2, MEM_RESERVE, PAGE_NOACCESS );
+		if (desired_addr == NULL)
+			break;
+
+		// Release the range immediately but retain the address for the next sequence of code to
+		// try and map to it. In the mean-time some other OS thread may come along and allocate this
+		// address range from underneath us so multiple attempts need to be made.
+		VirtualFree( desired_addr, 0, MEM_RELEASE );
+
+		// Immediately try to point both pages at the file mapping
+		if (MapTitlePhysicalPages( desired_addr, buffer->page_count, MEM_LARGE_PAGES, PAGE_READWRITE, buffer->page_mapping ) == desired_addr &&
+			MapTitlePhysicalPages( desired_addr + size, buffer->page_count, MEM_LARGE_PAGES, PAGE_READWRITE, buffer->page_mapping ) == desired_addr + size)
+		{
+			buffer->ptr = desired_addr;
+			break;
+		}
+
+		// Failed to map the virtual pages; cleanup and try again
+		FreeTitlePhysicalPages( GetCurrentProcess(), buffer->page_count, buffer->page_mapping );
+		buffer->page_mapping = NULL;
+	}
+
+#else
 
     // Windows version based on https://gist.github.com/rygorous/3158316
 
@@ -718,6 +780,8 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
         CloseHandle(buffer->file_map_handle);
         buffer->file_map_handle = NULL;
     }
+
+#endif  // _XBOX_ONE
 
 #endif
 
@@ -860,11 +924,21 @@ static void VirtualMirrorBuffer_Destructor(VirtualMirrorBuffer* buffer)
     assert(buffer != 0);
 
 #ifdef RMT_PLATFORM_WINDOWS
-    if (buffer->file_map_handle != NULL)
-    {
-        CloseHandle(buffer->file_map_handle);
-        buffer->file_map_handle = NULL;
-    }
+    #ifdef _XBOX_ONE
+	    if (buffer->page_mapping != NULL)
+	    {
+		    VirtualFree( buffer->ptr, 0, MEM_DECOMMIT );	//needed in conjunction with FreeTitlePhysicalPages
+		    FreeTitlePhysicalPages( GetCurrentProcess(), buffer->page_count, buffer->page_mapping );
+		    free( buffer->page_mapping );
+		    buffer->page_mapping = NULL;
+	    }
+    #else
+        if (buffer->file_map_handle != NULL)
+        {
+            CloseHandle(buffer->file_map_handle);
+            buffer->file_map_handle = NULL;
+        }
+    #endif
 #endif
 
 #ifdef RMT_PLATFORM_MACOS
@@ -3738,6 +3812,12 @@ typedef struct Sample
     rmtU64 us_end;
     rmtU64 us_length;
 
+    // Total sampled length of all children
+    rmtU64 us_sampled_length;
+
+    // Number of times this sample was used in a call in aggregate mode, 1 otherwise
+    rmtU32 call_count;
+
 } Sample;
 
 
@@ -3762,6 +3842,8 @@ static rmtError Sample_Constructor(Sample* sample)
     sample->us_start = 0;
     sample->us_end = 0;
     sample->us_length = 0;
+    sample->us_sampled_length =0;
+    sample->call_count = 0;
 
     return RMT_ERROR_NONE;
 }
@@ -3785,6 +3867,8 @@ static void Sample_Prepare(Sample* sample, rmtU32 name_hash, Sample* parent)
     sample->us_start = 0;
     sample->us_end = 0;
     sample->us_length = 0;
+    sample->us_sampled_length = 0;
+    sample->call_count = 1;
 }
 
 
@@ -3804,7 +3888,9 @@ static rmtError bin_Sample(Buffer* buffer, Sample* sample)
     BIN_ERROR_CHECK(Buffer_WriteU32(buffer, sample->unique_id));
     BIN_ERROR_CHECK(Buffer_Write(buffer, sample->unique_id_html_colour, 7));
     BIN_ERROR_CHECK(Buffer_WriteU64(buffer, sample->us_start));
-    BIN_ERROR_CHECK(Buffer_WriteU64(buffer, maxS64(sample->us_length, 0)));
+    BIN_ERROR_CHECK(Buffer_WriteU64(buffer, sample->us_length));
+    BIN_ERROR_CHECK(Buffer_WriteU64(buffer, maxS64(sample->us_length - sample->us_sampled_length, 0)));
+    BIN_ERROR_CHECK(Buffer_WriteU32(buffer, sample->call_count));
     BIN_ERROR_CHECK(bin_SampleArray(buffer, sample));
 
     return RMT_ERROR_NONE;
@@ -3921,6 +4007,7 @@ static rmtError SampleTree_Push(SampleTree* tree, rmtU32 name_hash, rmtU32 flags
             if (sibling->name_hash == name_hash)
             {
                 tree->current_parent = sibling;
+                sibling->call_count++;
                 *sample = sibling;
                 return RMT_ERROR_NONE;
             }
@@ -4290,8 +4377,8 @@ static void GetSampleDigest(Sample* sample, rmtU32* digest_hash, rmtU32* nb_samp
     {
         rmtU8 shift = 4;
 
-        // Get 6 nibbles for lower 3 bytes of the unique sample ID
-        rmtU8* sample_id = (rmtU8*)&sample->unique_id;
+        // Get 6 nibbles for lower 3 bytes of the name hash
+        rmtU8* sample_id = (rmtU8*)&sample->name_hash;
         rmtU8 hex_sample_id[6];
         hex_sample_id[0] = sample_id[0] & 15;
         hex_sample_id[1] = sample_id[0] >> 4;
@@ -5095,7 +5182,7 @@ RMT_API void _rmt_BeginCPUSample(rmtPStr name, rmtU32 flags, rmtU32* hash_cache)
         if (ThreadSampler_Push(ts->sample_trees[SampleType_CPU], name_hash, flags, &sample) == RMT_ERROR_NONE)
         {
             // If this is an aggregate sample, store the time in 'end' as we want to preserve 'start'
-            if (sample->us_length != 0)
+            if (sample->call_count > 1)
                 sample->us_end = usTimer_Get(&g_Remotery->timer);
             else
                 sample->us_start = usTimer_Get(&g_Remotery->timer);
@@ -5117,19 +5204,19 @@ RMT_API void _rmt_EndCPUSample(void)
 
         rmtU64 us_end = usTimer_Get(&g_Remotery->timer);
 
-        // Is this an aggregate sample?
-        if (sample->us_length != 0)
-        {
-            sample->us_length += (us_end - sample->us_end);
-            sample->us_end = us_end;
-        }
+        // Aggregate samples use us_end to store start so that us_start is preserved
+        rmtU64 us_length = 0;
+        if (sample->call_count > 1)
+            us_length = (us_end - sample->us_end);
         else
-        {
-            sample->us_end = us_end;
-            sample->us_length = (us_end - sample->us_start);
-        }
+            us_length = (us_end - sample->us_start);
 
-        sample->us_end = usTimer_Get(&g_Remotery->timer);
+        sample->us_length += us_length;
+
+        // Sum length on the parent to track un-sampled time in the parent
+        if (sample->parent != NULL)
+            sample->parent->us_sampled_length += us_length;
+
         ThreadSampler_Pop(ts, g_Remotery->mq_to_rmt_thread, sample);
     }
 }
