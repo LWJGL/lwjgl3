@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v3.1.4 [Oct 19, 2017] zlib licence
+ /         \ tinyfiledialogs.h v3.2.4 [Nov 5, 2017] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2017 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -26,7 +26,8 @@ OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
 SSH supported via automatic switch to console mode or X11 forwarding
 
-One C file (add it to your C or C++ project) with 7 functions:
+One C file (add it to your C or C++ project) with 8 functions:
+- beep
 - notify popup
 - message & question
 - input & password
@@ -52,19 +53,16 @@ http://andrear.altervista.org/home/cdialog.php
 - basic console input
 
 Unix (command line calls) ASCII UTF-8
-- applescript
-- zenity / matedialog / qarma (zenity for qt)
-- kdialog
-- Xdialog
-- python2 tkinter
+- applescript, kdialog, zenity
+- python (2 or 3) + tkinter + python-dbus (optional)
 - dialog (opens a console if needed)
 - basic console input
 The same executable can run across desktops & distributions
 
-tested with C & C++ compilers
+C89 & C++98 compliant: tested with C & C++ compilers
 on VisualStudio MinGW Mac Linux Bsd Solaris Minix Raspbian
-using Gnome Kde Enlightenment Mate Cinnamon Unity
-Lxde Lxqt Xfce WindowMaker IceWm Cde Jds OpenBox Awesome Jwm
+using Gnome Kde Enlightenment Mate Cinnamon Unity Lxde Lxqt Xfce
+WindowMaker IceWm Cde Jds OpenBox Awesome Jwm Xdm
 
 bindings for LUA and C# dll, Haskell
 included in LWJGL(java), Rust, Allegrobasic
@@ -96,8 +94,8 @@ misrepresented as being the original software.
 if you don't want to include the code creating the graphic dialogs.
 Then you won't need to link against Comdlg32.lib and Ole32.lib */
 
-/* if tinydialogs.c is compiled with a C++ compiler rather than with a C compiler
-(ie. you change the extension from .c to .cpp), you need to comment out:
+/* if tinydialogs.c is compiled as C++ code rather than C code,
+you may need to comment out:
 extern "C" {
 and the corresponding closing bracket near the end of this file:
 }
@@ -107,6 +105,8 @@ extern "C" {
 #endif
 
 extern char tinyfd_version[8]; /* contains tinyfd current version number */
+
+extern int tinyfd_verbose; /* 0 (default) or 1 : on unix, prints the command line calls */
 
 #ifdef _WIN32
 /* for UTF-16 use the functions at the end of this files */
@@ -130,10 +130,14 @@ but will return 0 for console mode, 1 for graphic mode.
 tinyfd_response is then filled with the retain solution.
 possible values for tinyfd_response are (all lowercase)
 for graphic mode:
-  windows_wchar windows applescript zenity zenity3 matedialog qarma kdialog
-  tkinter python-dbus perl gxmessage gmessage xmessage xdialog gdialog
+  windows_wchar windows
+  applescript kdialog zenity zenity3 matedialog qarma
+  python2-tkinter python3-tkinter python-dbus perl-dbus
+  gxmessage gmessage xmessage xdialog gdialog
 for console mode:
   dialog whiptail basicinput */
+
+void tinyfd_beep(void);
 
 int tinyfd_notifyPopup(
 	char const * const aTitle, /* NULL or "" */
@@ -280,7 +284,7 @@ char const * tinyfd_arrayDialog(
 - the windows only wchar_t (utf-16) prototypes are in the header file
 - windows is fully supported from XP to 10 (maybe even older versions)
 - C# & LUA via dll, see example files
-- OSX supported from 10.4 to 10.11 (maybe even older versions)
+- OSX supported from 10.4 to latest (maybe even older versions)
 - Avoid using " and ' in titles and messages.
 - There's one file filter only, it may contain several patterns.
 - If no filter description is provided,
@@ -290,9 +294,9 @@ char const * tinyfd_arrayDialog(
 - On windows link against Comdlg32.lib and Ole32.lib
   This linking is not compulsary for console mode (see above).
 - On unix: it tries command line calls, so no such need.
-- On unix you need applescript, zenity, matedialog, qarma, kdialog,
-  Xdialog, python2/tkinter/dbus(for python)
-  or dialog (opens terminal if running without console).
+- On unix you need applescript, kdialog, zenity, matedialog, qarma,
+  python (2 or 3)/tkinter/python-dbus (optional),
+  Xdialog or dialog (opens terminal if running without console).
 - One of those is already included on most (if not all) desktops.
 - In the absence of those it will use gdialog, gxmessage or whiptail
   with a textinputbox.
@@ -309,7 +313,8 @@ char const * tinyfd_arrayDialog(
 - Mutiple selects are not allowed in console mode.
 - The package dialog must be installed to run in enhanced console mode.
   It is already installed on most unix systems.
-- On osx, the package dialog can be installed via http://macports.org
+- On osx, the package dialog can be installed via
+  http://macappstore.org/dialog or http://macports.org
 - On windows, for enhanced console mode,
   dialog.exe should be copied somewhere on your executable path.
   It can be found at the bottom of the following page:

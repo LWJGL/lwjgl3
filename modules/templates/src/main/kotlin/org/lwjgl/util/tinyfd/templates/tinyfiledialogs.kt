@@ -66,6 +66,20 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
         """
     )
 
+    void(
+        "beep",
+        ""
+    )
+
+    int(
+        "notifyPopup",
+        "Displays a notification popup.",
+
+        nullable..const..charUTF8_p.IN("aTitle", "the dialog title or #NULL"),
+        nullable..const..charUTF8_p.IN("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
+        const..charASCII_p.IN("aIconType", "the icon type", """"info" "warning" "error"""")
+    )
+
     val messageBox = intb(
         "messageBox",
         "Displays a message dialog.",

@@ -43,6 +43,13 @@ public final class HelloTinyFD {
                 case GLFW_KEY_ESCAPE:
                     glfwSetWindowShouldClose(windowHnd, true);
                     break;
+                case GLFW_KEY_B:
+                    tinyfd_beep();
+                    break;
+                case GLFW_KEY_N:
+                    System.out.println("\nOpening notification popup...");
+                    System.out.println(tinyfd_notifyPopup("Please read...", "...this message.", "info"));
+                    break;
                 case GLFW_KEY_1:
                     System.out.println("\nOpening message dialog...");
                     System.out.println(tinyfd_messageBox("Please read...", "...this message.", "okcancel", "info", true) ? "OK" : "Cancel");
