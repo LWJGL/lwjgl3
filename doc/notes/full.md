@@ -1,3 +1,47 @@
+### 3.1.4
+
+_Released 2017 Nov 19_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Added [LZ4](http://lz4.github.io/lz4/) bindings.
+- Added [NanoSVG](https://github.com/memononen/nanosvg) to the existing `NanoVG` bindings.
+- Added [ODBC](https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc) bindings.
+- Added [Remotery](https://github.com/Celtoys/Remotery) bindings.
+- Added [Zstandard](http://facebook.github.io/zstd/) bindings.
+- bgfx: Updated to API version 55 (up from 48)
+- glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
+    * Support for transparent window framebuffers (`GLFW_TRANSPARENT_FRAMEBUFFER` window hint)
+    * Support for whole window opacity (`glfwGetWindowOpacity` and `glfwSetWindowOpacity`)
+    * Support for content scale queries (`glfwGetMonitorContentScale` and `glfwGetWindowContentScale`)
+    * Linux: Added support for the experimental Wayland backend. Enable with `-Dorg.lwjgl.glfw.libname=glfw_wayland`.
+- LibOVR: Updated to 1.20.0 (up from 1.18.0)
+- Nuklear: Updated to 2.00.4 (up from 2.00.2)
+- tinyfiledialogs: Updated to 3.2.4 (up from 3.0.5)
+- Vulkan: Updated to 1.0.65 (up from 1.0.61)
+- Yoga: Updated to 1.7.0 (up from 1.6.0)
+
+#### Improvements
+
+- Replaced `Automatic-Module-Name` with explicit JPMS modules.
+    * Enables applications using LWJGL to be bundled in custom run-time images with the `jlink` tool.
+- lmdb: Significantly improved incremental growth performance on Windows.
+    * Granularity of mapped memory commits increased from `4KB` (page size) to `2MB`.
+    * This is an unofficial patch of `ITS#8324`.
+
+#### Fixes
+
+- EGL: Fixed nullability of `eglMakeCurrent` arguments.
+- OpenVR: Fixed mapping of Vulkan forward declarations.
+- Fixed native library resource discovery when running LWJGL as JPMS modules.
+- Fixed invalid size calculation in `<StructType>.malloc(capacity)` methods.
+- Fixed `MemoryStack` debugging when a try-with-resources block does not inline the call to `AutoCloseable::close`.
+    * Supports Java 9 try-with-resources, which generates a synthetic `$closeResource` method.
+    * Supports Kotlin's `T.use`, which uses the `kotlin.AutoCloseable::closeFinally` extension function.
+- Fixed build number lookup from the jar manifest.
+
 ### 3.1.3
 
 _Released 2017 Sep 22_
