@@ -100,10 +100,12 @@ abstract class SimpleBinding(
         writer.println("$t${t}long ${if (function has Address) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
     }
 
-    protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass) {
+    protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass, javadoc: String) {
         val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has<Macro>() }
         if (bindingFunctions.isEmpty())
             return
+
+        print(javadoc)
 
         val alignment = bindingFunctions.map { it.simpleName.length }.max()!!
 
@@ -135,9 +137,8 @@ fun simpleBinding(
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
         val libraryReference = libraryName.toUpperCase()
 
-        println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, $libraryExpression${if (bundledWithLWJGL) ", true" else ""});\n")
-        print("$t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
-        generateFunctionsClass(nativeClass)
+        println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, $libraryExpression${if (bundledWithLWJGL) ", true" else ""});")
+        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
         println("""
     /** Returns the $libraryName {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
@@ -151,8 +152,7 @@ fun APIBinding.delegate(
     libraryExpression: String
 ) = object : SimpleBinding(libraryExpression, callingConvention) {
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        print("\n$t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
-        generateFunctionsClass(nativeClass)
+        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
     }
 }
 
