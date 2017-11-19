@@ -1052,6 +1052,19 @@
 
         <!-- GLFW -->
         <release-module package="org.lwjgl.glfw" name="glfw" native-library="glfw" title="GLFW" license="glfw" if:true="${binding.glfw}">
+            <natives>
+                <get-release url="linux/x64/libglfw.so"/>
+                <get-release url="linux/x64/libglfw_wayland.so"/>
+                <get-release url="macosx/x64/libglfw.dylib"/>
+                <get-release url="windows/x64/glfw.dll"/>
+                <get-release url="windows/x86/glfw32.dll"/>
+
+                <get-release url="linux/x64/libglfw.so.git"/>
+                <get-release url="linux/x64/libglfw_wayland.so.git"/>
+                <get-release url="macosx/x64/libglfw.dylib.git"/>
+                <get-release url="windows/x64/glfw.dll.git"/>
+                <get-release url="windows/x86/glfw32.dll.git"/>
+            </natives>
             <sources>
                 <fileset dir="${src.core}" includes="org/lwjgl/glfw/**"/>
             </sources>
