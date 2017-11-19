@@ -9,8 +9,8 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.lmdb.*;
 
 import java.io.*;
-import java.nio.*;
 
+import static org.lwjgl.demo.util.lmdb.LMDBUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lmdb.LMDB.*;
@@ -22,19 +22,8 @@ public final class LMDBDemo {
     private LMDBDemo() {
     }
 
-    private static void E(int rc) {
-        if (rc != MDB_SUCCESS) {
-            throw new IllegalStateException(mdb_strerror(rc));
-        }
-    }
-
     public static void main(String[] args) {
-        // Database dictory
-        File dir = new File("lmdb");
-        dir.mkdir();
-        dir.deleteOnExit();
-        new File(dir, "data.mdb").deleteOnExit();
-        new File(dir, "lock.mdb").deleteOnExit();
+        File dir = createDatabaseDirectory("lmdb");
 
         long env;
         try (MemoryStack stack = stackPush()) {
@@ -61,35 +50,6 @@ public final class LMDBDemo {
             // Close environment
             mdb_env_close(env);
         }
-    }
-
-    private interface Transaction<T> {
-        T exec(MemoryStack stack, long txn);
-    }
-
-    private static <T> T transaction(long env, Transaction<T> transaction) {
-        long txn = NULL;
-        try (MemoryStack stack = stackPush()) {
-            PointerBuffer pp = stack.mallocPointer(1);
-
-            E(mdb_txn_begin(env, NULL, 0, pp));
-            txn = pp.get(0);
-
-            return transaction.exec(stack, txn);
-        } finally {
-            if (txn != NULL) {
-                E(mdb_txn_commit(txn));
-            }
-        }
-    }
-
-    private static int openDatabase(long env) {
-        return transaction(env, (stack, txn) -> {
-            IntBuffer ip = stack.mallocInt(1);
-
-            E(mdb_dbi_open(txn, (CharSequence)null, MDB_INTEGERKEY, ip));
-            return ip.get(0);
-        });
     }
 
     private static void put(long env, int dbi, int key, String value) {
