@@ -65,6 +65,8 @@ public final class Checks {
     public static int lengthSafe(short[] array)             { return array == null ? 0 : array.length;}
     public static int lengthSafe(int[] array)               { return array == null ? 0 : array.length;}
     public static int lengthSafe(long[] array)              { return array == null ? 0 : array.length; }
+    public static int lengthSafe(float[] array)             { return array == null ? 0 : array.length;}
+    public static int lengthSafe(double[] array)            { return array == null ? 0 : array.length;}
     public static int remainingSafe(Buffer buffer)          { return buffer == null ? 0 : buffer.remaining(); }
     public static int remainingSafe(CustomBuffer<?> buffer) { return buffer == null ? 0 : buffer.remaining(); }
 

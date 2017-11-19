@@ -28,11 +28,13 @@ val BOOL = PrimitiveType("BOOL", PrimitiveMapping.BOOLEAN4)
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
 val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
 val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)
+val USHORT = IntegerType("USHORT", PrimitiveMapping.SHORT, unsigned = true)
 val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
 val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
 val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val ULONG = IntegerType("ULONG", PrimitiveMapping.INT, unsigned = true)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
+val LDOUBLE = PrimitiveType("LDOUBLE", PrimitiveMapping.DOUBLE)
 
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 

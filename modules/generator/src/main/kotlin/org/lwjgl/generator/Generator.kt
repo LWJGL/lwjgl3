@@ -48,6 +48,7 @@ enum class Binding(
     NANOVG("binding.nanovg", "org.lwjgl.nanovg"),
     NFD("binding.nfd", "org.lwjgl.util.nfd"),
     NUKLEAR("binding.nuklear", "org.lwjgl.nuklear"),
+    ODBC("binding.odbc", "org.lwjgl.odbc"),
     OPENAL("binding.openal", "org.lwjgl.openal"),
     OPENCL("binding.opencl", "org.lwjgl.opencl"),
     OPENGL("binding.opengl", "org.lwjgl.opengl"),

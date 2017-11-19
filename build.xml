@@ -216,6 +216,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/hwloc" if:true="${binding.hwloc}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/nanovg" if:true="${binding.nanovg}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/nuklear" if:true="${binding.nuklear}"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/odbc" if:true="${binding.odbc}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" if:true="${opencl_types}"/>
@@ -344,6 +345,7 @@
             <exclude name="org/lwjgl/assimp/**" unless:true="${binding.assimp}"/>
             <exclude name="org/lwjgl/bgfx/**" unless:true="${binding.bgfx}"/>
             <exclude name="org/lwjgl/nuklear/**" unless:true="${binding.nuklear}"/>
+            <exclude name="org/lwjgl/odbc/**" unless:true="${binding.odbc}"/>
             <exclude name="org/lwjgl/openvr/**" unless:true="${binding.openvr}"/>
             <exclude name="org/lwjgl/ovr/**" unless:true="${binding.ovr}"/>
             <exclude name="org/lwjgl/stb/**" unless:true="${binding.stb}"/>
@@ -1094,6 +1096,9 @@
 
         <!-- Nuklear -->
         <release-module package="org.lwjgl.nuklear" name="nuklear" native-library="lwjgl_nuklear" title="Nuklear" if:true="${binding.nuklear}"/>
+
+        <!-- ODBC -->
+        <release-module package="org.lwjgl.odbc" name="odbc" java-only="true" title="ODBC" if:true="${binding.odbc}"/>
 
         <!-- OpenAL -->
         <release-module package="org.lwjgl.openal" name="openal" title="OpenAL" license="openal" if:true="${binding.openal}">

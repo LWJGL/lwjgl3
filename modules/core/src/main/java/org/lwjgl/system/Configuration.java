@@ -251,6 +251,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
     public static final Configuration<String> JEMALLOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.jemalloc.libname", StateInit.STRING);
 
+    // -- ODBC
+
+    /** Similar to {@link #LIBRARY_NAME} for the ODBC library (<b>org.lwjgl.odbc.libname</b>). */
+    public static final Configuration<String> ODBC_LIBRARY_NAME = new Configuration<>("org.lwjgl.odbc.libname", StateInit.STRING);
+
     // -- OPENAL
 
     /** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenAL library (<b>org.lwjgl.openal.explicitInit</b>). */

@@ -120,6 +120,11 @@ enum Artifacts {
         "A minimal state immediate mode graphical user interface toolkit.",
         Platforms.ALL
     ),
+    ODBC(
+        "lwjgl-odbc", "LWJGL - ODBC bindings",
+        "A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs).",
+        Platforms.JAVA_ONLY
+    ),
     OPENAL(
         "lwjgl-openal", "LWJGL - OpenAL bindings",
         "A cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications.",

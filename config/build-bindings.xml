@@ -25,6 +25,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.nanovg" value="true"/>
     <property name="binding.nfd" value="true"/>
     <property name="binding.nuklear" value="true"/>
+    <property name="binding.odbc" value="true"/>
     <property name="binding.openal" value="true"/>
     <property name="binding.opencl" value="true"/>
     <property name="binding.opengl" value="true"/>
@@ -43,7 +44,8 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.zstd" value="true"/>
 
     <!-- Set the path to the Oculus SDK to enable. -->
-    <property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
+    <!-- TODO: add headers in here -->
+    <property name="OCULUS_SDK_PATH" location="../../CLONES/OculusSDK" relative="false"/>
 
     <!-- // ================================ // -->
 
