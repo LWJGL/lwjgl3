@@ -131,7 +131,7 @@ ZSTDLIB_API unsigned long long ZSTD_getDecompressedSize(const void* src, size_t 
 
 
 /*======  Helper functions  ======*/
-#define ZSTD_COMPRESSBOUND(srcSize)   ((srcSize) + ((srcSize)>>8) + (((srcSize) < 128 KB) ? ((128 KB - (srcSize)) >> 11) /* margin, from 64 to 0 */ : 0))  /* this formula ensures that bound(A) + bound(B) <= bound(A+B) as long as A and B >= 128 KB */
+#define ZSTD_COMPRESSBOUND(srcSize)   ((srcSize) + ((srcSize)>>8) + (((srcSize) < (128<<10)) ? (((128<<10) - (srcSize)) >> 11) /* margin, from 64 to 0 */ : 0))  /* this formula ensures that bound(A) + bound(B) <= bound(A+B) as long as A and B >= 128 KB */
 ZSTDLIB_API size_t      ZSTD_compressBound(size_t srcSize); /*!< maximum compressed size in worst case scenario */
 ZSTDLIB_API unsigned    ZSTD_isError(size_t code);          /*!< tells if a `size_t` function result is an error code */
 ZSTDLIB_API const char* ZSTD_getErrorName(size_t code);     /*!< provides readable string from an error code */
@@ -1059,7 +1059,8 @@ typedef enum {
 /*! ZSTD_CCtx_setParameter() :
  *  Set one compression parameter, selected by enum ZSTD_cParameter.
  *  Note : when `value` is an enum, cast it to unsigned for proper type checking.
- *  @result : 0, or an error code (which can be tested with ZSTD_isError()). */
+ *  @result : informational value (typically, the one being set, possibly corrected),
+ *            or an error code (which can be tested with ZSTD_isError()). */
 ZSTDLIB_API size_t ZSTD_CCtx_setParameter(ZSTD_CCtx* cctx, ZSTD_cParameter param, unsigned value);
 
 /*! ZSTD_CCtx_setPledgedSrcSize() :

@@ -740,7 +740,7 @@ ENABLE_WARNINGS()""")
         ZSTD_cParameter.IN("param", "", cParameters),
         unsigned_int.IN("value", ""),
 
-        returnDoc = "0, or an error code (which can be tested with #isError())"
+        returnDoc = "informational value (typically, the one being set, possibly corrected), 0, or an error code (which can be tested with #isError())"
     )
 
     size_t(

@@ -181,6 +181,18 @@ ENABLE_WARNINGS()""")
         """
     )
 
+    customMethod("""
+    /** Pure Java version of {@link #ZSTD_compressBound}. */
+    public static long ZSTD_COMPRESSBOUND(long srcSize) {
+        /* this formula ensures that bound(A) + bound(B) <= bound(A+B) as long as A and B >= 128 KB */
+        return srcSize
+            + (srcSize >> 8)
+            + (srcSize < (128 << 10)
+                ? (128 << 10) - srcSize >> 11 /* margin, from 64 to 0 */
+                : 0
+            );
+    }""")
+
     size_t(
         "compressBound",
         "Returns the maximum compressed size in worst case scenario.",

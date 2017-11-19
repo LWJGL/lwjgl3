@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
+import java.nio.file.*;
 import java.util.zip.*;
 
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -19,20 +20,36 @@ import static org.lwjgl.util.zstd.ZstdX.*;
 
 public class HelloZstd {
 
-    private static final int BENCH_WARMUP = 16;
-    private static final int BENCH_ITERS  = 128;
+    private static final int BENCH_WARMUP = 4;
+    private static final int BENCH_ITERS  = 32;
 
     public static void main(String[] args) {
         ByteBuffer uncompressed;
         try {
             String filePath;
             if (args.length == 0) {
-                System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.util.zstd.HelloZstd -Dargs=<path>' to test a different file.\n");
-                filePath = "demo/FiraSans.ttf";
+                System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.util.zstd.HelloZstd -Dargs=<path>' to test a different file.");
+
+                filePath = Files.list(Paths.get("libs"))
+                    .filter(Files::isRegularFile)
+                    .sorted((a, b) -> {
+                        try {
+                            return Long.compare(
+                                Files.size(b), // DESC
+                                Files.size(a)
+                            );
+                        } catch (IOException e) {
+                            return a.compareTo(b);
+                        }
+                    })
+                    .findFirst()
+                    .map(Path::toString)
+                    .orElse("demo/FiraSans.ttf");
             } else {
                 filePath = args[0];
             }
 
+            System.out.println("Test file: " + filePath + "\n");
             uncompressed = ioResourceToByteBuffer(filePath, 512 * 1024);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -48,7 +65,7 @@ public class HelloZstd {
 
         int compressionLevelZSTD = ZSTD_CLEVEL_DEFAULT;
 
-        ByteBuffer compressed     = memAlloc((int)ZSTD_compressBound(uncompressed.remaining()));
+        ByteBuffer compressed     = memAlloc((int)ZSTD_COMPRESSBOUND(uncompressed.remaining()));
         long       compressedSize = ZSTD_compress(compressed, uncompressed, compressionLevelZSTD);
         compressed.limit((int)compressedSize);
         compressed = compressed.slice();
@@ -127,7 +144,7 @@ public class HelloZstd {
     // ZSTD Simple API
 
     private static long benchZSTDCompression(ByteBuffer uncompressed, int cLevel) {
-        ByteBuffer compressed = memAlloc((int)ZSTD_compressBound(uncompressed.remaining()));
+        ByteBuffer compressed = memAlloc((int)ZSTD_COMPRESSBOUND(uncompressed.remaining()));
         try {
             // warmup
             long compressedSize = benchZSTDCompression(uncompressed, compressed, cLevel, BENCH_WARMUP);
@@ -157,7 +174,7 @@ public class HelloZstd {
     // ZSTD Advanced API
 
     private static long benchZSTDCompressionAdvanced(ByteBuffer uncompressed, int cLevel) {
-        ByteBuffer compressed = memAlloc((int)ZSTD_compressBound(uncompressed.remaining()));
+        ByteBuffer compressed = memAlloc((int)ZSTD_COMPRESSBOUND(uncompressed.remaining()));
         try {
             // warmup
             long compressedSize = benchZSTDCompressionAdvanced(uncompressed, compressed, cLevel, BENCH_WARMUP);
