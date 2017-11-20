@@ -301,6 +301,35 @@
             </source>
         </build>
 
+        <!-- AMD Tootle -->
+        <build name="lwjgl_tootle" dest="${bin.native}/tootle" lang="c++" if:true="${binding.tootle}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="-D_SOFTWARE_ONLY_VERSION -D_LINUX">
+                    <arg value="-I${src.native.rel}/util/tootle"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/*.c"/>
+                </compile>
+                <compile dest="@{dest}" lang="c++" flags="-D_SOFTWARE_ONLY_VERSION -D_LINUX">
+                    <arg value="-I${src.native.rel}/util/tootle"/>
+                    <arg value="-I${src.native.rel}/util/tootle/include"/>
+                    <arg value="-I${src.native.rel}/util/tootle/RayTracer"/>
+                    <arg value="-I${src.native.rel}/util/tootle/RayTracer/JRT"/>
+                    <arg value="-I${src.native.rel}/util/tootle/RayTracer/Math"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/JRT/*.cpp"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/Math/*.cpp"/>
+                </compile>
+            </beforeCompile>
+            <source>
+                <arg value="-D_LINUX"/>
+                <arg value="-I${src.native.rel}/util/tootle/include"/>
+                <fileset dir="." includes="${src.generated.native}/util/tootle/*.cpp"/>
+            </source>
+            <link>
+                <arg value="-lstdc++"/>
+            </link>
+        </build>
+
         <!-- xxHash -->
         <build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
             <source>

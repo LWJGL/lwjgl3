@@ -357,6 +357,30 @@ EXPORTS
             </linkargs>
         </build>
 
+        <!-- AMD Tootle -->
+        <build name="lwjgl_tootle" dest="${bin.native}/tootle" if:true="${binding.tootle}">
+            <beforeCompile>
+                <compile dest="@{dest}" flags="/D_SOFTWARE_ONLY_VERSION">
+                    <arg value="/I${src.native}\util\tootle"/>
+                    <arg value="/I${src.native}\util\tootle\include"/>
+                    <arg value="/I${src.native}\util\tootle\RayTracer"/>
+                    <arg value="/I${src.native}\util\tootle\RayTracer\JRT"/>
+                    <arg value="/I${src.native}\util\tootle\RayTracer\Math"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/JRT/*.cpp"/>
+                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/Math/*.cpp"/>
+                </compile>
+            </beforeCompile>
+            <compileargs>
+                <arg value="/I${src.native}\util\tootle\include"/>
+            </compileargs>
+            <source>
+                <fileset dir="." includes="${src.generated.native}/util/tootle/*.cpp"/>
+            </source>
+        </build>
+
         <!-- xxHash -->
         <build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
             <compileargs>

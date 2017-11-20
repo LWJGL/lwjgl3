@@ -62,6 +62,7 @@ enum class Binding(
     STB("binding.stb", "org.lwjgl.stb"),
     TINYEXR("binding.tinyexr", "org.lwjgl.util.tinyexr", arrayOverloads = false),
     TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
+    TOOTLE("binding.tootle", "org.lwjgl.util.tootle", arrayOverloads = false),
     VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
     XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
     YOGA("binding.yoga", "org.lwjgl.util.yoga", arrayOverloads = false),

@@ -250,6 +250,7 @@
             <src path="${src.templates.kotlin}/org/lwjgl/util/simd" if:true="${binding.sse}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/tinyexr" if:true="${binding.tinyexr}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/tinyfd" if:true="${binding.tinyfd}"/>
+            <src path="${src.templates.kotlin}/org/lwjgl/util/tootle" if:true="${binding.tootle}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/yoga" if:true="${binding.yoga}"/>
             <src path="${src.templates.kotlin}/org/lwjgl/util/zstd" if:true="${binding.zstd}"/>
@@ -360,6 +361,7 @@
             <exclude name="org/lwjgl/util/simd/**" unless:true="${binding.sse}"/>
             <exclude name="org/lwjgl/util/tinyexr/**" unless:true="${binding.tinyexr}"/>
             <exclude name="org/lwjgl/util/tinyfd/**" unless:true="${binding.tinyfd}"/>
+            <exclude name="org/lwjgl/util/tootle/**" unless:true="${binding.tootle}"/>
             <exclude name="org/lwjgl/util/xxhash/**" unless:true="${binding.xxhash}"/>
             <exclude name="org/lwjgl/util/yoga/**" unless:true="${binding.yoga}"/>
             <exclude name="org/lwjgl/util/zstd/**" unless:true="${binding.zstd}"/>
@@ -497,6 +499,14 @@
             </and>
         </condition>
 
+        <local name="tootle"/>
+        <condition property="tootle" value="true" else="false">
+            <and>
+                <istrue value="${binding.par}"/>
+                <istrue value="${binding.tootle}"/>
+            </and>
+        </condition>
+
         <local name="vulkan"/>
         <condition property="vulkan" value="true" else="false">
             <and>
@@ -551,6 +561,7 @@
             <include name="org/lwjgl/demo/util/par/**" if:true="${par}"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:true="${tinyexr}"/>
             <include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
+            <include name="org/lwjgl/demo/util/tootle/**" if:true="${tootle}"/>
             <include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
             <include name="org/lwjgl/demo/util/yoga/**" if:true="${yoga}"/>
             <include name="org/lwjgl/demo/util/zstd/**" if:true="${binding.zstd}"/>
@@ -1193,6 +1204,9 @@
 
         <!-- tiny file dialogs -->
         <release-module package="org.lwjgl.util.tinyfd" name="tinyfd" native-library="lwjgl_tinyfd" title="tiny file dialogs" license="tinyfd" if:true="${binding.tinyfd}"/>
+
+        <!-- AMD Tootle -->
+        <release-module package="org.lwjgl.util.tootle" name="tootle" native-library="lwjgl_tootle" title="tootle" license="tootle" if:true="${binding.tootle}"/>
 
         <!-- Vulkan -->
         <release-module package="org.lwjgl.vulkan" name="vulkan" java-only="true" title="Vulkan" license="khronos" if:true="${binding.vulkan}">
