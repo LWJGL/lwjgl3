@@ -16,9 +16,7 @@
     <target name="init" description="Initializes the directories required by the build process">
         <fail message="LWJGL requires Ant version 1.9.3 or higher.">
             <condition>
-                <not>
-                    <antversion atleast="1.9.3"/>
-                </not>
+                <not><antversion atleast="1.9.3"/></not>
             </condition>
         </fail>
 
@@ -637,6 +635,7 @@
 
     <!-- Includes all modules for javadoc.lwjgl.org -->
     <target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-compile-generator,-build-version">
+        <echo message="It is recommended to generate JavaDoc on JDK 9 or higher." unless:set="jdk9" taskname="Warning"/>
         <delete dir="${bin.html.javadoc}"/>
         <javadoc
             destdir="${bin.html.javadoc}"
@@ -956,22 +955,20 @@
 
     <target name="-multi-release-9">
         <mkdir dir="${bin.core}/META-INF/versions/9"/>
-        <lwjgl.javac destdir="${bin.core}/META-INF/versions/9" taskname="javac: Core - Java 9">
+        <lwjgl.javac9 destdir="${bin.core}/META-INF/versions/9" taskname="javac: Core - Java 9">
             <src>
                 <pathelement path="${modules}/java9/src/main/java"/>
             </src>
             <include name="**/*.java"/>
-        </lwjgl.javac>
+        </lwjgl.javac9>
 
         <mkdir dir="${bin}/ModuleInfoGen"/>
-        <javac destdir="${bin}/ModuleInfoGen" sourcepath="" debug="yes" encoding="UTF-8" taskname="javac: module-info-gen">
-            <compilerarg line="--release 9"/>
-            <compilerarg value="-Xlint:all"/>
+        <lwjgl.javac9 destdir="${bin}/ModuleInfoGen" taskname="javac: module-info-gen">
             <src>
                 <pathelement path="${modules}/module-info-gen/src/main/java"/>
             </src>
             <include name="**/*.java"/>
-        </javac>
+        </lwjgl.javac9>
 
         <mkdir dir="${bin.modules}"/>
         <java classname="org.lwjgl.tool.ModuleInfoGen" fork="true" failonerror="true" taskname="module-info-gen">
@@ -981,7 +978,16 @@
         </java>
     </target>
 
-    <target name="release" depends="compile,-build-version">
+    <target name="-check-release-jdk">
+        <fail message="The JAVA8_HOME environment variable is not set." if:set="jdk9">
+            <condition>
+                <not><isset property="env.JAVA8_HOME"/></not>
+            </condition>
+        </fail>
+        <echo message="It is recommended to build LWJGL releases on JDK 9 or higher." unless:set="jdk9" taskname="Warning"/>
+    </target>
+
+    <target name="release" depends="-check-release-jdk,clean-java,compile,-build-version">
         <local name="revision"/>
         <condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
             <isset property="build.revision"/>

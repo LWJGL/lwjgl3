@@ -137,6 +137,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </condition>
     <property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
     <property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
+    <condition property="set-boot-class-path">
+        <and>
+            <isset property="jdk9"/>
+            <isset property="env.JAVA8_HOME"/>
+        </and>
+    </condition>
 
     <!-- Different location per platform/architecture. This is intentional. -->
     <property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
@@ -145,9 +151,15 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <javac sourcepath="" debug="yes" encoding="UTF-8">
             <compilerarg line="-source 8"/>
             <compilerarg line="-target 8"/>
-            <!--<compilerarg line='&#45;&#45;boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar" if:set="env.JAVA8_HOME"/>-->
-            <compilerarg value="--boot-class-path" if:set="env.JAVA8_HOME"/>
-            <compilerarg value="${env.JAVA8_HOME}/jre/lib/rt.jar" if:set="env.JAVA8_HOME"/>
+            <compilerarg value="--boot-class-path" if:set="set-boot-class-path"/>
+            <compilerarg value="${env.JAVA8_HOME}/jre/lib/rt.jar" if:set="set-boot-class-path"/>
+            <compilerarg value="-Xlint:all"/>
+        </javac>
+    </presetdef>
+
+    <presetdef name="lwjgl.javac9">
+        <javac sourcepath="" debug="yes" encoding="UTF-8">
+            <compilerarg line="--release 9"/>
             <compilerarg value="-Xlint:all"/>
         </javac>
     </presetdef>
