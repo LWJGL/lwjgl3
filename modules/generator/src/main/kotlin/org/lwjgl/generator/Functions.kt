@@ -278,6 +278,15 @@ class Func(
             if (it === EXPLICIT_FUNCTION_ADDRESS && i != 0)
                 it.error("The explicit function address parameter must be the first parameter.")
 
+            if (it.has<Check>()) {
+                val checkReference = paramMap[it.get<Check>().expression]
+                if (checkReference != null) {
+                    if (checkReference.nativeType !is IntegerType) {
+                        it.error("The Check expression refers to an invalid parameter: ${checkReference.name}")
+                    }
+                }
+            }
+
             if (it.has<AutoSize>()) {
                 val autoSize = it.get<AutoSize>()
                 val nullableReference = paramMap[autoSize.reference]?.has(nullable) ?: false

@@ -480,7 +480,7 @@ internal fun Path.lastModified(
     matcher: PathMatcher = if (glob == null) KOTLIN_PATH_MATCHER else FileSystems.getDefault().getPathMatcher("glob:$glob")
 ): Long {
     if (!Files.isDirectory(this))
-        throw IllegalStateException()
+        throw IllegalStateException("$this is not a directory")
 
     return Files
         .find(this, maxDepth, BiPredicate { path, _ -> matcher.matches(path) })
