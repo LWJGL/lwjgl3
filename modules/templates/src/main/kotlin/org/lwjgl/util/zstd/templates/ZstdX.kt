@@ -542,7 +542,7 @@ ENABLE_WARNINGS()""")
 
         Limitations:
         ${ol(
-            "currently not compatible with internal {@code CDict} creation, such as #CCtx_loadDictionary() or {@code ZSTD_initCStream_usingDict().",
+            "currently not compatible with internal {@code CDict} creation, such as #CCtx_loadDictionary() or {@code ZSTD_initCStream_usingDict()}.",
             "currently not compatible with multi-threading"
         )}
         """,

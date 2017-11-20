@@ -106,7 +106,7 @@ val KHR_external_semaphore_capabilities = "KHRExternalSemaphoreCapabilities".nat
                 <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
                 <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
                 <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
-                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHR</td><td>No restriction</td><td>No restriction</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR</td><td>No restriction</td><td>No restriction</td></tr>
             </tbody>
         </table>
 
