@@ -1644,7 +1644,7 @@ class Func(
         // Cast addresses to pointers
 
         getNativeParams(withExplicitFunctionAddress = false)
-            .filter { it.nativeType.let { (it is PointerType && it !is ArrayType) || it is StructType } }
+            .filter { it.nativeType.castAddressToPointer }
             .forEach {
                 val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
                 print("$t$pointerType")
@@ -1731,13 +1731,19 @@ class Func(
                     print("(*$JNIENV)->")
                 print(nativeName)
                 if (!has<Macro>() || get<Macro>().function) print('(')
-                printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
-                    if (it.nativeType.let { it is StructType || it === va_list })
-                        "*${it.name}"
-                    else if ((it.nativeType.mapping === PrimitiveMapping.POINTER || it.nativeType is ArrayType) && it.nativeType !is ObjectType)
-                        "(${it.toNativeType(nativeClass.binding, pointerMode = true)})${it.name}" // Avoid implicit cast warnings
-                    else
-                        it.name
+                printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) { param ->
+                    param.nativeType.let {
+                        if (it is StructType || it === va_list)
+                            "*${param.name}"
+                        else if (!it.castAddressToPointer) {
+                            val nativeType = param.toNativeType(nativeClass.binding)
+                            if (nativeType != it.jniFunctionType && "j$nativeType" != it.jniFunctionType)
+                                "($nativeType)${param.name}" // Avoid implicit cast warnings
+                            else
+                                param.name
+                        } else
+                            param.name
+                    }
                 }
                 if (!has<Macro>() || get<Macro>().function) print(')')
                 println(';')

@@ -336,6 +336,7 @@ abstract class GeneratorTargetNative(
         .joinToString("_")
 
     open val skipNative = false
+    var cpp = false
 
     protected fun PrintWriter.generateNativePreamble() {
         print(HEADER)

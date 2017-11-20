@@ -356,6 +356,9 @@ open class PointerMapping private constructor(
 
 }
 
+val NativeType.castAddressToPointer
+    get() = (this is PointerType && this !is ArrayType) || this is StructType
+
 val NativeType.isPointer
     get() = this is PointerType || this.mapping === PrimitiveMapping.POINTER
 

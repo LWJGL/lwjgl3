@@ -458,7 +458,7 @@ class Generator(
         if (!target.nativeSubPath.isEmpty())
             subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
-        generate(Paths.get("$trgPath/c/$subPackagePath/${target.nativeFileName}.c"))
+        generate(Paths.get("$trgPath/c/$subPackagePath/${target.nativeFileName}.${if (target.cpp) "cpp" else "c"}"))
     }
 
 }
