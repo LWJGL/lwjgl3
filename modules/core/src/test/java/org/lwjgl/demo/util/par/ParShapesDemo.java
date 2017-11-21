@@ -17,7 +17,6 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -35,7 +34,6 @@ public final class ParShapesDemo {
 
     private Callback debugCB;
 
-    private int vao;
     private int vbo;
     private int ibo;
 
@@ -189,9 +187,6 @@ public final class ParShapesDemo {
         glTranslatef(0.0f, 0.0f, -3.0f);
         glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
 
-        vao = glGenVertexArrays();
-        glBindVertexArray(vao);
-
         vbo = glGenBuffers();
         ibo = glGenBuffers();
         hudVBO = glGenBuffers();
@@ -209,7 +204,7 @@ public final class ParShapesDemo {
             "\n" +
             "void main(void) {\n" +
             "  viewNormal = gl_NormalMatrix * normal;\n" +
-            "  gl_Position = ftransform();\n" +
+            "  gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);\n" +
             "}\n"
         );
         glCompileShader(vshader);
@@ -235,6 +230,8 @@ public final class ParShapesDemo {
         program = glCreateProgram();
         glAttachShader(program, vshader);
         glAttachShader(program, fshader);
+        glBindAttribLocation(program, 0, "position");
+        glBindAttribLocation(program, 1, "normal");
         glLinkProgram(program);
         if (glGetProgrami(program, GL_LINK_STATUS) == GL_FALSE) {
             throw new IllegalStateException(glGetProgramInfoLog(program));
@@ -466,7 +463,6 @@ public final class ParShapesDemo {
         glDeleteBuffers(hudVBO);
         glDeleteBuffers(ibo);
         glDeleteBuffers(vbo);
-        glDeleteVertexArrays(vao);
 
         glfwFreeCallbacks(window);
         glfwTerminate();
@@ -486,7 +482,6 @@ public final class ParShapesDemo {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             if (mesh != null) {
-
                 glUseProgram(program);
                 glEnableVertexAttribArray(0);
                 if (hasNormals) {
