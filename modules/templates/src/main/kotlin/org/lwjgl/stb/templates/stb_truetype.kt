@@ -285,7 +285,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
-        Check("width * height")..nullable..unsigned_char_p.OUT(
+        Check("(stride_in_bytes != 0 ? stride_in_bytes : width) * height")..nullable..unsigned_char_p.OUT(
             "pixels",
             "a buffer in which to store the bitmap data"
         ),
@@ -733,7 +733,7 @@ int main(int arg, char **argv)
         """,
 
         const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
         int.IN("out_w", "the bitmap width"),
         int.IN("out_h", "the bitmap height"),
         int.IN("out_stride", "the row stride, in bytes"),
@@ -747,7 +747,7 @@ int main(int arg, char **argv)
         "Same as #MakeCodepointBitmap(), but you can specify a subpixel shift for the character.",
 
         const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
         int.IN("out_w", "the bitmap width"),
         int.IN("out_h", "the bitmap height"),
         int.IN("out_stride", "the row stride, in bytes"),
@@ -763,7 +763,7 @@ int main(int arg, char **argv)
         "Same as #MakeCodepointBitmapSubpixel(), but prefiltering is performed (see #PackSetOversampling()).",
 
         const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
         int.IN("out_w", "the bitmap width"),
         int.IN("out_h", "the bitmap height"),
         int.IN("out_stride", "the row stride, in bytes"),
@@ -851,7 +851,7 @@ int main(int arg, char **argv)
         """,
 
         const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
         int.IN("out_w", "the bitmap width"),
         int.IN("out_h", "the bitmap height"),
         int.IN("out_stride", "the row stride, in bytes"),
@@ -865,7 +865,7 @@ int main(int arg, char **argv)
         "Same as #MakeGlyphBitmap(), but you can specify a subpixel shift for the character.",
 
         const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
         int.IN("out_w", "the bitmap width"),
         int.IN("out_h", "the bitmap height"),
         int.IN("out_stride", "the row stride, in bytes"),
@@ -881,7 +881,7 @@ int main(int arg, char **argv)
         "Same as #MakeGlyphBitmapSubpixel(), but prefiltering is performed (see #PackSetOversampling()).",
 
         const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-        Check("out_w * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char_p.OUT("output", "the bitmap storage"),
         int.IN("out_w", "the bitmap width"),
         int.IN("out_h", "the bitmap height"),
         int.IN("out_stride", "the row stride, in bytes"),

@@ -74,7 +74,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
         int.IN("w", "the image width, in pixels"),
         int.IN("h", "the image height, in pixels"),
         int.IN("comp", "the number of channels in each pixel"),
-        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
+        Check("(stride_in_bytes != 0 ? stride_in_bytes : w * comp) * h")..const..void_p.IN("data", "the image data"),
         int.IN("stride_in_bytes", "the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels"),
 
         returnDoc = "1 on success, 0 on failure"
@@ -92,7 +92,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
         write["w"],
         write["h"],
         write["comp"],
-        write["data"],
+        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -110,7 +110,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
         write["w"],
         write["h"],
         write["comp"],
-        write["data"],
+        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -182,7 +182,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
         write["w"],
         write["h"],
         write["comp"],
-        write["data"],
+        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -196,7 +196,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
         write["w"],
         write["h"],
         write["comp"],
-        write["data"],
+        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -224,7 +224,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
         write["w"],
         write["h"],
         write["comp"],
-        write["data"],
+        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
         write_jpg["quality"],
 
         returnDoc = "1 on success, 0 on failure"

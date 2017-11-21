@@ -181,7 +181,8 @@ val EGLClientPixmapHI_p = struct(EGL_PACKAGE, "EGLClientPixmapHI", nativeName = 
         """
         pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
         that the buffer size corresponds to {@code iHeight * iStride * sizeof(pixel)}.
-    """)
+        """
+    )
     EGLint.member("iWidth", "width of the buffer in pixels")
     EGLint.member(
         "iHeight",
