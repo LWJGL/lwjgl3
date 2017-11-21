@@ -77,8 +77,8 @@ private class AutoSizeBytesTransform(
         if (factor == null)
             expression = "$expression << $byteShift"
         else {
-            // TODO: may need to handle more cases in the future (e.g. integer factor + POINTER_SHIFT)
             try {
+                // optimize to single operation
                 val f = factor.expression.toInt()
                 val b = byteShift.toInt()
                 expression = if (factor.operator == "/") {
@@ -91,7 +91,11 @@ private class AutoSizeBytesTransform(
                         "$expression >> $s"
                 }
             } catch(e: NumberFormatException) {
-                // ignored (MultiType with non-numeric expression)
+                // non-numeric expressions
+                expression = if (param.nativeType.mapping.let { it === PrimitiveMapping.POINTER || it === PrimitiveMapping.LONG })
+                    "($expression << $byteShift) ${factor.operator} ${factor.expression}"
+                else
+                    "(${param.nativeType.javaMethodType})(((long)$expression << $byteShift) ${factor.operator} ${factor.expression})"
             }
         }
 

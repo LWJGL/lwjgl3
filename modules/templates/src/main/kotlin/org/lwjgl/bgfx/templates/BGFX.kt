@@ -890,7 +890,7 @@ RGBA16S
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT
-        )..void_p.IN("_dst", "destination index buffer"),
+        )..void_p.OUT("_dst", "destination index buffer"),
         AutoSize("_dst")..uint32_t.IN(
             "_dstSize",
             """
@@ -900,7 +900,7 @@ RGBA16S
         ),
         Check(3)..const..float_p.IN("_dir", "direction (vector must be normalized)"),
         Check(3)..const..float_p.IN("_pos", "position"),
-        Check("_numIndices * _stride")..const..void_p.IN(
+        Unsafe..const..void_p.IN(
             "_vertices",
             "pointer to first vertex represented as float x, y, z. Must contain at least number of vertices referenced by index buffer."
         ),
@@ -909,7 +909,7 @@ RGBA16S
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT
         )..const..void_p.IN("_indices", "source indices"),
-        UseVariable..AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t.IN("_numIndices", "number of input indices"),
+        AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t.IN("_numIndices", "number of input indices"),
         bool.IN("_index32", "set to `true` if input indices are 32-bit")
     )
 
