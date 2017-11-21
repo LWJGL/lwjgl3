@@ -43,6 +43,7 @@ extern "C" {
 #  define false 0
 # endif
 #endif
+#include <locale.h>
 
 #ifndef PAR_SHAPES_T
 #define PAR_SHAPES_T uint16_t
@@ -1020,6 +1021,7 @@ par_shapes_mesh* par_shapes_create_cube()
 typedef struct {
     char* cmd;
     char* arg;
+    float argf;
 } par_shapes__command;
 
 typedef struct {
@@ -1167,6 +1169,8 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
     current_rule->ncommands = 0;
     current_rule->commands = current_command;
 
+    char decimal_point = localeconv()->decimal_point[0];
+
     // The second pass fills in the structures.
     strcpy(program, text);
     cmd = strtok(program, " ");
@@ -1191,6 +1195,20 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
             current_rule->ncommands++;
             current_command->cmd = cmd;
             current_command->arg = arg;
+            if (strcmp(cmd, "shape") && strcmp(cmd, "call")) {
+                if (decimal_point != '.') {
+                    char *s = arg;
+                    while (*s != 0) {
+                        if (*s == '.') {
+                            *s = decimal_point;
+                            break;
+                        }
+                        s++;
+                    }
+                }
+                current_command->argf = atof(arg);
+            }
+
             current_command++;
         }
         cmd = strtok(0, " ");
@@ -1250,7 +1268,6 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
             frame->pc - 1, stackptr);
         #endif
 
-        float value;
         if (!strcmp(cmd->cmd, "shape")) {
             par_shapes_mesh* m = par_shapes__apply_turtle(tube, turtle,
                 position, scale);
@@ -1270,7 +1287,7 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
             par_shapes__copy3(frame->position, position);
             continue;
         } else {
-            value = atof(cmd->arg);
+            float value = cmd->argf;
             if (!strcmp(cmd->cmd, "rx")) {
                 par_shapes_rotate(turtle, value * PAR_PI / 180.0, xaxis);
             } else if (!strcmp(cmd->cmd, "ry")) {
