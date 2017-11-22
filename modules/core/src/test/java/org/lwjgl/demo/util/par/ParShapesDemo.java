@@ -155,7 +155,11 @@ public final class ParShapesDemo {
             }
         });
 
-        glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+        glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
+            this.width = width;
+            this.height = height;
+            updateViewport(width, height);
+        });
 
         // center window
         long monitor = glfwGetPrimaryMonitor();
@@ -177,12 +181,8 @@ public final class ParShapesDemo {
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
+        updateViewport(width, height);
 
-        perspectiveGL(45.0, 4.0 / 3.0, 0.01, 100.0);
-
-        glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         glTranslatef(0.0f, 0.0f, -3.0f);
         glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
@@ -241,10 +241,23 @@ public final class ParShapesDemo {
         glDeleteShader(vshader);
     }
 
-    private static void perspectiveGL(double fovY, double aspect, double zNear, double zFar) {
+    private static void updateViewport(int width, int height) {
+        glViewport(0, 0, width, height);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+
+        double fovY  = 45.0;
+        double zNear = 0.01;
+        double zFar  = 100.0;
+
+        double aspect = (double)width / (double)height;
+
         double fH = Math.tan(fovY / 360 * Math.PI) * zNear;
         double fW = fH * aspect;
         glFrustum(-fW, fW, -fH, fH, zNear, zFar);
+
+        glMatrixMode(GL_MODELVIEW);
     }
 
     private void updateMesh() {
