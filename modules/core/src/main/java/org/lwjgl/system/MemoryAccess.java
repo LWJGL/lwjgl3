@@ -5,6 +5,7 @@
 package org.lwjgl.system;
 
 import java.nio.*;
+import java.util.*;
 
 import static java.lang.Character.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -56,7 +57,7 @@ final class MemoryAccess {
             return GetDirectBufferAddress(buffer);
         }
 
-        default ByteBuffer memByteBuffer(long address, int capacity)     { return NewDirectByteBuffer(address, capacity).order(ByteOrder.nativeOrder()); }
+        default ByteBuffer memByteBuffer(long address, int capacity)     { return Objects.requireNonNull(NewDirectByteBuffer(address, capacity)).order(ByteOrder.nativeOrder()); }
 
         default ShortBuffer memShortBuffer(long address, int capacity)   { return memByteBuffer(address, capacity << 1).asShortBuffer(); }
         default CharBuffer memCharBuffer(long address, int capacity)     { return memByteBuffer(address, capacity << 1).asCharBuffer(); }
@@ -141,7 +142,7 @@ final class MemoryAccess {
                 MAGIC_ADDRESS &= 0xFFFFFFFFL;
             }
 
-            ByteBuffer bb = NewDirectByteBuffer(MAGIC_ADDRESS, 0);
+            ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(MAGIC_ADDRESS, 0));
 
             long offset = 8L; // 8 byte aligned, cannot be at 0
             while (true) {
@@ -155,7 +156,7 @@ final class MemoryAccess {
         private static long getCapacityOffset() {
             int MAGIC_CAPACITY = 0x0D15EA5E;
 
-            ByteBuffer bb = NewDirectByteBuffer(-1L, MAGIC_CAPACITY);
+            ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
             bb.limit(0);
 
             long offset = 4L; // 4 byte aligned, cannot be at 0

@@ -9,6 +9,7 @@ import org.lwjgl.*;
 import javax.annotation.*;
 import java.lang.reflect.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
@@ -88,6 +89,9 @@ public abstract class Callback implements Pointer, NativeResource {
      * @param address the function address
      */
     protected Callback(long address) {
+        if (CHECKS) {
+            check(address);
+        }
         this.address = address;
     }
 
@@ -163,15 +167,16 @@ public abstract class Callback implements Pointer, NativeResource {
      * @param functionPointer a function pointer
      * @param <T>             the {@code CallbackI} instance type
      *
-     * @return the {@code CallbackI} instance, or null if the function pointer is {@code NULL}.
+     * @return the {@code CallbackI} instance
      */
-    @Nullable
     public static <T extends CallbackI> T get(long functionPointer) {
-        if (functionPointer == NULL) {
-            return null;
-        }
-
         return memGlobalRefToObject(dcbGetUserData(functionPointer));
+    }
+
+    /** Like {@link #get}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
+    @Nullable
+    public static <T extends CallbackI> T getSafe(long functionPointer) {
+        return functionPointer == NULL ? null : get(functionPointer);
     }
 
     /**

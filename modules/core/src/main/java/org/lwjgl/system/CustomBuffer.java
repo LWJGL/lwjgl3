@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import javax.annotation.*;
 import java.nio.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of custom buffers with an API that mirrors {@code java.nio} for convenience. */
@@ -24,6 +25,9 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
         capacity;
 
     protected CustomBuffer(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+        if (CHECKS) {
+            check(address);
+        }
         this.address = address;
         this.container = container;
 

@@ -8,6 +8,7 @@ import org.lwjgl.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.macosx.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -33,8 +34,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class CL {
 
+    @Nullable
     private static FunctionProviderLocal functionProvider;
 
+    @Nullable
     private static CLCapabilities icd;
 
     static {
@@ -213,12 +216,13 @@ public final class CL {
     }
 
     /** Returns the {@link FunctionProviderLocal} for the OpenCL native library. */
+    @Nullable
     public static FunctionProviderLocal getFunctionProvider() {
         return functionProvider;
     }
 
     /** Returns the {@link CLCapabilities} of the ICD. */
-    public static CLCapabilities getICD() { return icd; }
+    @Nullable public static CLCapabilities getICD() { return icd; }
 
     /**
      * Creates a {@link CLCapabilities} instance for the specified OpenCL platform.
@@ -236,33 +240,21 @@ public final class CL {
         CL.addExtensions(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_EXTENSIONS), supportedExtensions);
 
         // Enumerate devices
-        {
-            int    num_devices;
-            long[] devices;
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer pi = stack.mallocInt(1);
 
-            try (MemoryStack stack = stackPush()) {
-                IntBuffer pi = stack.mallocInt(1);
-
-                checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi)));
-                num_devices = pi.get(0);
-                if (num_devices == 0) {
-                    return null;
-                }
-
+            checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi)));
+            int num_devices = pi.get(0);
+            if (num_devices != 0) {
                 PointerBuffer pp = stack.mallocPointer(num_devices);
 
                 checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, memAddress(pp), NULL));
 
-                devices = new long[num_devices];
+                // Add device extensions to the set
                 for (int i = 0; i < num_devices; i++) {
-                    devices[i] = pp.get(i);
+                    String extensionsString = getDeviceInfoStringASCII(pp.get(i), CL_DEVICE_EXTENSIONS);
+                    CL.addExtensions(extensionsString, supportedExtensions);
                 }
-            }
-
-            // Add device extensions to the set
-            for (int i = 0; i < num_devices; i++) {
-                String extensionsString = getDeviceInfoStringASCII(devices[i], CL_DEVICE_EXTENSIONS);
-                CL.addExtensions(extensionsString, supportedExtensions);
             }
         }
 

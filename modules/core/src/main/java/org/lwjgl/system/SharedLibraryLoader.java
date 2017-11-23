@@ -75,16 +75,16 @@ final class SharedLibraryLoader {
         if (extractPath == null) {
             extractPath = extractedFile.getParent();
 
+            String newLibPath = extractPath.toAbsolutePath().toString();
+
             // Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
             String libPath = Configuration.LIBRARY_PATH.get();
-            if (libPath == null || libPath.isEmpty()) {
-                libPath = extractPath.toAbsolutePath().toString();
-            } else {
-                libPath = extractPath.toAbsolutePath() + File.pathSeparator + libPath;
+            if (libPath != null && !libPath.isEmpty()) {
+                newLibPath += File.pathSeparator + libPath;
             }
 
-            System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libPath);
-            Configuration.LIBRARY_PATH.set(libPath);
+            System.setProperty(Configuration.LIBRARY_PATH.getProperty(), newLibPath);
+            Configuration.LIBRARY_PATH.set(newLibPath);
         }
 
         extractFile(libURL, extractedFile);
@@ -100,14 +100,15 @@ final class SharedLibraryLoader {
      *
      * @return the extracted library
      */
-    private static Path getExtractedFile(Path libraryPath, String fileName) {
+    private static Path getExtractedFile(@Nullable Path libraryPath, String fileName) {
         // Reuse the lwjgl shared library location
         if (libraryPath != null && Files.isDirectory(libraryPath)) {
             return libraryPath.resolve(fileName);
         }
 
-        if (Configuration.SHARED_LIBRARY_EXTRACT_PATH.get() != null) {
-            return Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_PATH.get(), fileName);
+        String override = Configuration.SHARED_LIBRARY_EXTRACT_PATH.get();
+        if (override != null) {
+            return Paths.get(override, fileName);
         }
 
         String version = Version.getVersion().replace(' ', '-');

@@ -138,7 +138,7 @@ public final class APIUtil {
     }
 
     private static void requiredFunctionMissing(String functionName) {
-        if (!Configuration.DISABLE_FUNCTION_CHECKS.get()) {
+        if (!Configuration.DISABLE_FUNCTION_CHECKS.get(false)) {
             throw new NullPointerException("A required function is missing: " + functionName);
         }
     }
@@ -146,7 +146,7 @@ public final class APIUtil {
     @Nullable
     public static ByteBuffer apiGetMappedBuffer(@Nullable ByteBuffer buffer, long mappedAddress, int capacity) {
         return buffer == null || memAddress(buffer) != mappedAddress || buffer.capacity() != capacity
-            ? memByteBuffer(mappedAddress, capacity)
+            ? memByteBufferSafe(mappedAddress, capacity)
             : buffer;
     }
 

@@ -8,6 +8,8 @@ import org.lwjgl.*;
 
 import javax.annotation.*;
 
+import static org.lwjgl.system.Checks.*;
+
 /**
  * Pointer interface.
  *
@@ -46,6 +48,9 @@ public interface Pointer {
         private long address;
 
         protected Default(long address) {
+            if (CHECKS) {
+                check(address);
+            }
             this.address = address;
         }
 

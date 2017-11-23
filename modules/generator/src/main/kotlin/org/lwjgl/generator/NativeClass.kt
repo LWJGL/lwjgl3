@@ -411,7 +411,7 @@ class NativeClass(
             if (functions.any {
                 (it.returns.nativeType.isReference && !it.has(Nonnull)) || it.parameters.any {
                     it.nativeType.isReference && it.has(nullable)
-                }
+                } || it.has<MapPointer>()
             }) {
                 println("import javax.annotation.*;\n")
             }
