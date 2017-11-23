@@ -85,10 +85,18 @@ public final class ParShapesDemo {
                 return;
             }
 
+            int scale;
+            if ((mods & GLFW_MOD_CONTROL) != 0) {
+                scale = 100;
+            } else if ((mods & GLFW_MOD_SHIFT) != 0) {
+                scale = 10;
+            } else {
+                scale = 1;
+            }
             switch (key) {
                 case GLFW_KEY_DOWN:
                     if (slices > 3) {
-                        slices -= (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+                        slices -= scale;
                         if (slices < 3) {
                             slices = 3;
                         }
@@ -96,12 +104,12 @@ public final class ParShapesDemo {
                     }
                     break;
                 case GLFW_KEY_UP:
-                    slices += (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+                    slices += scale;
                     updateMesh();
                     break;
                 case GLFW_KEY_LEFT:
                     if (stacks > 1) {
-                        stacks -= (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+                        stacks -= scale;
                         if (stacks < 1) {
                             stacks = 1;
                         }
@@ -109,7 +117,7 @@ public final class ParShapesDemo {
                     }
                     break;
                 case GLFW_KEY_RIGHT:
-                    stacks += (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+                    stacks += scale;
                     updateMesh();
                     break;
                 case GLFW_KEY_PAGE_DOWN:
@@ -504,7 +512,7 @@ public final class ParShapesDemo {
                 }
 
                 glBindBuffer(GL_ARRAY_BUFFER, vbo);
-                glDrawElements(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_SHORT, 0);
+                glDrawElements(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_INT, 0);
 
                 if (hasNormals) {
                     glDisableVertexAttribArray(1);
@@ -517,7 +525,7 @@ public final class ParShapesDemo {
                     glPolygonOffset(-1, -1);
 
                     glColor3f(1.0f, 1.0f, 1.0f);
-                    glDrawElements(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_SHORT, 0);
+                    glDrawElements(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_INT, 0);
 
                     glPolygonOffset(0.0f, 0.0f);
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

@@ -299,7 +299,7 @@ static void par_shapes__compute_welded_normals(par_shapes_mesh* m)
 {
     m->normals = PAR_MALLOC(float, m->npoints * 3);
     PAR_SHAPES_T* weldmap = PAR_MALLOC(PAR_SHAPES_T, m->npoints);
-    par_shapes_mesh* welded = par_shapes_weld(m, 0.01, weldmap);
+    par_shapes_mesh* welded = par_shapes_weld(m, 0.000001, weldmap); // LWJGL: smaller epsilon
     par_shapes_compute_normals(welded);
     float* pdst = m->normals;
     for (int i = 0; i < m->npoints; i++, pdst += 3) {
@@ -1450,7 +1450,7 @@ par_shapes_mesh* par_shapes_create_subdivided_sphere(int nsubd)
         mesh->triangles[i] = i;
     }
     par_shapes_mesh* tmp = mesh;
-    mesh = par_shapes_weld(mesh, 0.01, 0);
+    mesh = par_shapes_weld(mesh, 0.000001, 0); // LWJGL: smaller epsilon
     par_shapes_free_mesh(tmp);
     par_shapes_compute_normals(mesh);
     return mesh;
@@ -1647,7 +1647,12 @@ static void par_shapes__weld_points(par_shapes_mesh* mesh, int gridsize,
                     float const* thatpt = mesh->points + nindex * 3;
                     float dist2 = par_shapes__sqrdist3(thatpt, pt);
                     if (dist2 < epsilon) {
+                        // LWJGL: With greater epsilons, the check below fails and the condensed_map loop below produces garbage
+                        //if (p < nindex ) {
                         weldmap[nindex] = p;
+                        //} else {
+                            //weldmap[p] = weldmap[nindex];
+                        //}
                         nremoved++;
                     }
                 }
@@ -2025,6 +2030,7 @@ static double par__simplex_noise2(struct osn_context* ctx, double x, double y)
 
 void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
 {
+    /* LWJGL: disabled to support dense geometry
     int ntriangles = 0;
     PAR_SHAPES_T* triangles = PAR_MALLOC(PAR_SHAPES_T, mesh->ntriangles * 3);
     PAR_SHAPES_T* dst = triangles;
@@ -2051,6 +2057,7 @@ void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
     mesh->ntriangles = ntriangles;
     PAR_FREE(mesh->triangles);
     mesh->triangles = triangles;
+    */
 }
 
 #endif // PAR_SHAPES_IMPLEMENTATION

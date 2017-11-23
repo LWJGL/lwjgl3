@@ -19,11 +19,16 @@ fun config() {
     Generator.registerLibraryInit(PAR_PACKAGE, "LibPar", "par", setupAllocator = true)
 }
 
-val PAR_SHAPES_T = typedef(uint16_t, "PAR_SHAPES_T")
+val PAR_SHAPES_T = typedef(uint32_t, "PAR_SHAPES_T")
 val PAR_SHAPES_T_p = PAR_SHAPES_T.p
 
 val par_shapes_mesh_p = struct(PAR_PACKAGE, "ParShapesMesh", nativeName = "par_shapes_mesh", mutable = false) {
-    documentation = "The {@code par_shapes.h} mesh structure."
+    documentation =
+        """
+        The {@code par_shapes.h} mesh structure.
+
+        <b>LWJGL note</b>: in the default build, {@code PAR_SHAPES_T} is {@code uint32_t}.
+        """
 
     float_p.member("points", "a flat list of 3-tuples (X Y Z X Y Z...) for the vertex positions")
     int.member("npoints", "the number of points")

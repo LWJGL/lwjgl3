@@ -27,8 +27,10 @@ DISABLE_WARNINGS()
     __pragma(warning(disable : 4738))
 #elif LWJGL_LINUX
     #pragma GCC diagnostic ignored "-Wunused-parameter"
+    #pragma GCC diagnostic ignored "-Wsign-compare"
 #endif
 #define PAR_SHAPES_IMPLEMENTATION
+#define PAR_SHAPES_T uint32_t
 #include "par_shapes.h"
 ENABLE_WARNINGS()""")
 
