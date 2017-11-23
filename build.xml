@@ -276,6 +276,19 @@
         </java>
     </target>
 
+    <target name="urlValidator" description="Runs the URL validator tool" depends="-compile-generator">
+        <java
+            classname="org.lwjgl.generator.util.URLValidator"
+            fork="true"
+        >
+            <classpath>
+                <pathelement path="${bin.generator}"/>
+                <pathelement path="${test.resources}"/>
+            </classpath>
+            <arg line="${args}" if:set="args"/>
+        </java>
+    </target>
+
     <target name="generate" description="Runs the Generator" depends="init, bindings">
         <local name="has-compiled-templates"/>
         <available file="${bin.templates}/META-INF/Templates.kotlin_module" property="has-compiled-templates"/>
