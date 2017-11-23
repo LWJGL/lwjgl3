@@ -159,22 +159,26 @@ internal class CharSequenceTransform(
         "memAddress(${param.name}Encoded)"
 
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
-        writer.print("$t$t${t}ByteBuffer ${qtype.name}Encoded = ")
-        writer.print("stack.${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}")
+        writer.print("$t$t${t}ByteBuffer ${qtype.name}Encoded = stack.")
+        writer.print((qtype.nativeType as CharSequenceType).charMapping.charset)
+        if (qtype.has(nullable)) {
+            writer.print("Safe")
+        }
+        writer.print("(${qtype.name}")
         if (!nullTerminated)
             writer.print(", false")
         writer.println(");")
     }
 }
 
-internal object StringReturnTransform : FunctionTransform<ReturnValue> {
+internal class StringReturnTransform(private val nullable: Boolean) : FunctionTransform<ReturnValue> {
     override fun transformDeclaration(param: ReturnValue, original: String) = "String"
     override fun transformCall(param: ReturnValue, original: String): String {
         val expression = if (original.startsWith("memByteBufferNT"))
             original.substring(17, original.length - 1)
         else
             original
-        return "mem${(param.nativeType as CharSequenceType).charMapping.charset}($expression)"
+        return "mem${(param.nativeType as CharSequenceType).charMapping.charset}${if (nullable) "Safe" else ""}($expression)"
     }
 }
 
@@ -187,7 +191,7 @@ internal class PrimitiveValueReturnTransform(
     else
         (bufferType.mapping as PointerMapping).primitive // Replace void with the buffer value type
     override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
-        "$t${t}return ${bufferType.elementType.javaMethodType}.create($paramName.get(0));"
+        "$t${t}return ${bufferType.elementType.javaMethodType}.createSafe($paramName.get(0));"
     else if (bufferType.mapping === PointerMapping.DATA_BOOLEAN)
         "$t${t}return $paramName.get(0) != 0;"
     else
@@ -306,9 +310,9 @@ internal class BufferAutoSizeReturnTransform(
 
     override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
         "$t${t}return ${if (it.dereference is StructType)
-            "${it.javaMethodType}.create"
+            "${it.javaMethodType}.createSafe"
         else
-            "mem${it.javaMethodType}"
+            "mem${it.javaMethodType}Safe"
         }(${outParam.name}.get(0), $lengthExpression);"
     }
 }

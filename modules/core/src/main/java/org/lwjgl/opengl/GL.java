@@ -8,6 +8,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -57,17 +58,22 @@ import static org.lwjgl.system.windows.WindowsUtil.*;
  */
 public final class GL {
 
+    @Nullable
     private static final APIVersion MAX_VERSION;
 
+    @Nullable
     private static FunctionProvider functionProvider;
 
     private static final ThreadLocal<GLCapabilities> capabilitiesTLS = new ThreadLocal<>();
 
     private static ICD icd = new ICDStatic();
 
+    @Nullable
     private static WGLCapabilities capabilitiesWGL;
 
+    @Nullable
     private static GLXCapabilities capabilitiesGLXClient;
+    @Nullable
     private static GLXCapabilities capabilitiesGLX;
 
     static {
@@ -197,7 +203,7 @@ public final class GL {
      */
     public static void create(FunctionProvider functionProvider) {
         if (GL.functionProvider != null) {
-            throw new IllegalStateException("OpenGL has already been created.");
+            throw new IllegalStateException("OpenGL library has already been loaded.");
         }
 
         GL.functionProvider = functionProvider;
@@ -219,6 +225,7 @@ public final class GL {
     }
 
     /** Returns the {@link FunctionProvider} for the OpenGL native library. */
+    @Nullable
     public static FunctionProvider getFunctionProvider() {
         return functionProvider;
     }
@@ -229,7 +236,7 @@ public final class GL {
      * <p>This {@code GLCapabilities} instance will be used by any OpenGL call in the current thread, until {@code setCapabilities} is called again with a
      * different value.</p>
      */
-    public static void setCapabilities(GLCapabilities caps) {
+    public static void setCapabilities(@Nullable GLCapabilities caps) {
         capabilitiesTLS.set(caps);
         ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
         icd.set(caps);
@@ -244,7 +251,7 @@ public final class GL {
         return checkCapabilities(capabilitiesTLS.get());
     }
 
-    private static GLCapabilities checkCapabilities(GLCapabilities caps) {
+    private static GLCapabilities checkCapabilities(@Nullable GLCapabilities caps) {
         if (CHECKS && caps == null) {
             throw new IllegalStateException(
                 "No GLCapabilities instance set for the current thread. Possible solutions:\n" +
@@ -252,6 +259,7 @@ public final class GL {
                 "\tb) Call GL.setCapabilities() if a GLCapabilities instance already exists for the current context."
             );
         }
+        //noinspection ConstantConditions
         return caps;
     }
 
@@ -326,6 +334,11 @@ public final class GL {
      */
     @SuppressWarnings("AssignmentToMethodParameter")
     public static GLCapabilities createCapabilities(boolean forwardCompatible) {
+        FunctionProvider functionProvider = GL.functionProvider;
+        if (functionProvider == null) {
+            throw new IllegalStateException("OpenGL library has not been loaded.");
+        }
+
         GLCapabilities caps = null;
 
         try {
@@ -358,12 +371,12 @@ public final class GL {
                     minorVersion = version.get(0);
                 } else {
                     // Fallback to the string query.
-                    long versionString = callP(GetString, GL_VERSION);
-                    if (versionString == NULL || callI(GetError) != GL_NO_ERROR) {
+                    String versionString = memUTF8Safe(callP(GetString, GL_VERSION));
+                    if (versionString == null || callI(GetError) != GL_NO_ERROR) {
                         throw new IllegalStateException("There is no OpenGL context current in the current thread.");
                     }
 
-                    APIVersion apiVersion = apiParseVersion(memUTF8(versionString));
+                    APIVersion apiVersion = apiParseVersion(versionString);
 
                     majorVersion = apiVersion.major;
                     minorVersion = apiVersion.minor;
@@ -403,7 +416,7 @@ public final class GL {
 
             if (majorVersion < 3) {
                 // Parse EXTENSIONS string
-                String extensionsString = memASCII(callP(GetString, GL_EXTENSIONS));
+                String extensionsString = memASCIISafe(callP(GetString, GL_EXTENSIONS));
                 if (extensionsString != null) {
                     StringTokenizer tokenizer = new StringTokenizer(extensionsString);
                     while (tokenizer.hasMoreTokens()) {
@@ -448,7 +461,7 @@ public final class GL {
                 }
             }
 
-            return caps = new GLCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
+            return caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible);
         } finally {
             setCapabilities(caps);
         }
@@ -548,6 +561,11 @@ public final class GL {
      * @param hdc the device context handle ({@code HDC})
      */
     private static WGLCapabilities createCapabilitiesWGL(long hdc) {
+        FunctionProvider functionProvider = GL.functionProvider;
+        if (functionProvider == null) {
+            throw new IllegalStateException("OpenGL library has not been loaded.");
+        }
+
         String extensionsString = null;
 
         long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
@@ -592,6 +610,11 @@ public final class GL {
      * @param screen  the screen index
      */
     public static GLXCapabilities createCapabilitiesGLX(long display, int screen) {
+        FunctionProvider functionProvider = GL.functionProvider;
+        if (functionProvider == null) {
+            throw new IllegalStateException("OpenGL library has not been loaded.");
+        }
+
         int majorVersion;
         int minorVersion;
 
@@ -630,10 +653,10 @@ public final class GL {
 
             if (screen == -1) {
                 long glXGetClientString = functionProvider.getFunctionAddress("glXGetClientString");
-                extensionsString = memASCII(callPP(glXGetClientString, display, GLX_EXTENSIONS));
+                extensionsString = memASCIISafe(callPP(glXGetClientString, display, GLX_EXTENSIONS));
             } else {
                 long glXQueryExtensionsString = functionProvider.getFunctionAddress("glXQueryExtensionsString");
-                extensionsString = memASCII(callPP(glXQueryExtensionsString, display, screen));
+                extensionsString = memASCIISafe(callPP(glXQueryExtensionsString, display, screen));
             }
 
             if (extensionsString != null) {
@@ -649,13 +672,13 @@ public final class GL {
 
     // Only used by array overloads
     static GLCapabilities getICD() {
-        return icd.get();
+        return checkCapabilities(icd.get());
     }
 
     /** Function pointer provider. */
     private interface ICD {
-        default void set(GLCapabilities caps) {}
-        GLCapabilities get();
+        default void set(@Nullable GLCapabilities caps) {}
+        @Nullable GLCapabilities get();
     }
 
     /**
@@ -666,10 +689,11 @@ public final class GL {
      */
     private static class ICDStatic implements ICD {
 
+        @Nullable
         private static GLCapabilities tempCaps;
 
         @Override
-        public void set(GLCapabilities caps) {
+        public void set(@Nullable GLCapabilities caps) {
             if (tempCaps == null) {
                 tempCaps = caps;
             } else if (caps != null && caps != tempCaps && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
@@ -685,6 +709,7 @@ public final class GL {
 
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
+            @Nullable
             private static final GLCapabilities caps = ICDStatic.tempCaps;
 
             static {

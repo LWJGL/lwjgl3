@@ -10,6 +10,7 @@ import org.lwjgl.system.MemoryManage.*;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.*;
 import org.lwjgl.system.jni.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -150,6 +151,26 @@ public final class MemoryUtil {
     }
 
     /**
+     * Unsafe version of {@link #memAlloc} that checks the requested {@code size}.
+     *
+     * @return {@link #NULL} if {@code size} is zero, otherwise a pointer to the memory block allocated by the function on success.
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
+     */
+    public static long nmemAllocChecked(long size) {
+        long address;
+        if (size == 0L) {
+            address = NULL;
+        } else {
+            address = nmemAlloc(size);
+            if (CHECKS && address == NULL) {
+                throw new OutOfMemoryError();
+            }
+        }
+        return address;
+    }
+
+    /**
      * The standard C malloc function.
      *
      * <p>Allocates a block of {@code size} bytes of memory, returning a pointer to the beginning of the block. The content of the newly allocated block of
@@ -160,11 +181,12 @@ public final class MemoryUtil {
      * @param size the size of the memory block to allocate, in bytes. If {@code size} is zero, the return value depends on the particular library
      *             implementation (it may or may not be a null pointer), but the returned pointer shall not be dereferenced.
      *
-     * @return on success, a pointer to the memory block allocated by the function. If the function failed to allocate the requested block of memory, a {@link
-     * #NULL} pointer is returned.
+     * @return on success, a pointer to the memory block allocated by the function
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
      */
     public static ByteBuffer memAlloc(int size) {
-        return memByteBuffer(nmemAlloc(size), size);
+        return ACCESSOR.memByteBuffer(nmemAllocChecked(size), size);
     }
 
     private static long getAllocationSize(int elements, int elementShift) {
@@ -179,7 +201,7 @@ public final class MemoryUtil {
      * @param size the number of short values to allocate.
      */
     public static ShortBuffer memAllocShort(int size) {
-        return memShortBuffer(nmemAlloc(getAllocationSize(size, 1)), size);
+        return ACCESSOR.memShortBuffer(nmemAllocChecked(getAllocationSize(size, 1)), size);
     }
 
     /**
@@ -188,7 +210,7 @@ public final class MemoryUtil {
      * @param size the number of int values to allocate.
      */
     public static IntBuffer memAllocInt(int size) {
-        return memIntBuffer(nmemAlloc(getAllocationSize(size, 2)), size);
+        return ACCESSOR.memIntBuffer(nmemAllocChecked(getAllocationSize(size, 2)), size);
     }
 
     /**
@@ -197,7 +219,7 @@ public final class MemoryUtil {
      * @param size the number of float values to allocate.
      */
     public static FloatBuffer memAllocFloat(int size) {
-        return memFloatBuffer(nmemAlloc(getAllocationSize(size, 2)), size);
+        return ACCESSOR.memFloatBuffer(nmemAllocChecked(getAllocationSize(size, 2)), size);
     }
 
     /**
@@ -206,7 +228,7 @@ public final class MemoryUtil {
      * @param size the number of long values to allocate.
      */
     public static LongBuffer memAllocLong(int size) {
-        return memLongBuffer(nmemAlloc(getAllocationSize(size, 3)), size);
+        return ACCESSOR.memLongBuffer(nmemAllocChecked(getAllocationSize(size, 3)), size);
     }
 
     /**
@@ -215,7 +237,7 @@ public final class MemoryUtil {
      * @param size the number of double values to allocate.
      */
     public static DoubleBuffer memAllocDouble(int size) {
-        return memDoubleBuffer(nmemAlloc(getAllocationSize(size, 3)), size);
+        return ACCESSOR.memDoubleBuffer(nmemAllocChecked(getAllocationSize(size, 3)), size);
     }
 
     /**
@@ -224,7 +246,7 @@ public final class MemoryUtil {
      * @param size the number of pointer values to allocate.
      */
     public static PointerBuffer memAllocPointer(int size) {
-        return memPointerBuffer(nmemAlloc(getAllocationSize(size, POINTER_SHIFT)), size);
+        return PointerBuffer.create(nmemAllocChecked(getAllocationSize(size, POINTER_SHIFT)), size);
     }
 
     /** Unsafe version of {@link #memFree}. */
@@ -242,12 +264,12 @@ public final class MemoryUtil {
      *            point to a block of memory allocated with the above functions, it causes undefined behavior. If {@code ptr} is a {@link #NULL} pointer, the
      *            function does nothing.
      */
-    public static void memFree(Buffer ptr) {
+    public static void memFree(@Nullable Buffer ptr) {
         nmemFree(memAddress0Safe(ptr));
     }
 
     /** PointerBuffer version of {@link #memFree}. */
-    public static void memFree(PointerBuffer ptr) {
+    public static void memFree(@Nullable PointerBuffer ptr) {
         nmemFree(memAddress0Safe(ptr));
     }
 
@@ -256,6 +278,26 @@ public final class MemoryUtil {
     /** Unsafe version of {@link #memCalloc}. */
     public static long nmemCalloc(long num, long size) {
         return ALLOCATOR.calloc(num, size);
+    }
+
+    /**
+     * Unsafe version of {@link #memCalloc} that checks the requested {@code size}.
+     *
+     * @return {@link #NULL} if {@code num} or {@code size} are zero, otherwise a pointer to the memory block allocated by the function on success.
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
+     */
+    public static long nmemCallocChecked(long num, long size) {
+        long address;
+        if (num == 0L || size == 0L) {
+            address = NULL;
+        } else {
+            address = nmemCalloc(num, size);
+            if (CHECKS && address == NULL) {
+                throw new OutOfMemoryError();
+            }
+        }
+        return address;
     }
 
     /**
@@ -270,11 +312,12 @@ public final class MemoryUtil {
      * @param size the size of each element. If {@code size} is zero, the return value depends on the particular library implementation (it may or may not be
      *             a null pointer), but the returned pointer shall not be dereferenced.
      *
-     * @return on success, a pointer to the memory block allocated by the function. If the function failed to allocate the requested block of memory, a {@link
-     * #NULL} pointer is returned.
+     * @return on success, a pointer to the memory block allocated by the function
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
      */
     public static ByteBuffer memCalloc(int num, int size) {
-        return memByteBuffer(nmemCalloc(num, size), num * size);
+        return ACCESSOR.memByteBuffer(nmemCallocChecked(num, size), num * size);
     }
 
     /**
@@ -283,7 +326,7 @@ public final class MemoryUtil {
      * @param num the number of bytes to allocate.
      */
     public static ByteBuffer memCalloc(int num) {
-        return memByteBuffer(nmemCalloc(num, 1), num);
+        return ACCESSOR.memByteBuffer(nmemCallocChecked(num, 1), num);
     }
 
     /**
@@ -292,7 +335,7 @@ public final class MemoryUtil {
      * @param num the number of short values to allocate.
      */
     public static ShortBuffer memCallocShort(int num) {
-        return memShortBuffer(nmemCalloc(num, 2), num);
+        return ACCESSOR.memShortBuffer(nmemCallocChecked(num, 2), num);
     }
 
     /**
@@ -301,7 +344,7 @@ public final class MemoryUtil {
      * @param num the number of int values to allocate.
      */
     public static IntBuffer memCallocInt(int num) {
-        return memIntBuffer(nmemCalloc(num, 4), num);
+        return ACCESSOR.memIntBuffer(nmemCallocChecked(num, 4), num);
     }
 
     /**
@@ -310,7 +353,7 @@ public final class MemoryUtil {
      * @param num the number of float values to allocate.
      */
     public static FloatBuffer memCallocFloat(int num) {
-        return memFloatBuffer(nmemCalloc(num, 4), num);
+        return ACCESSOR.memFloatBuffer(nmemCallocChecked(num, 4), num);
     }
 
     /**
@@ -319,7 +362,7 @@ public final class MemoryUtil {
      * @param num the number of long values to allocate.
      */
     public static LongBuffer memCallocLong(int num) {
-        return memLongBuffer(nmemCalloc(num, 8), num);
+        return ACCESSOR.memLongBuffer(nmemCallocChecked(num, 8), num);
     }
 
     /**
@@ -328,7 +371,7 @@ public final class MemoryUtil {
      * @param num the number of double values to allocate.
      */
     public static DoubleBuffer memCallocDouble(int num) {
-        return memDoubleBuffer(nmemCalloc(num, 8), num);
+        return ACCESSOR.memDoubleBuffer(nmemCallocChecked(num, 8), num);
     }
 
     /**
@@ -337,7 +380,7 @@ public final class MemoryUtil {
      * @param num the number of pointer values to allocate.
      */
     public static PointerBuffer memCallocPointer(int num) {
-        return memPointerBuffer(nmemCalloc(num, POINTER_SIZE), num);
+        return PointerBuffer.create(nmemCallocChecked(num, POINTER_SIZE), num);
     }
 
     // --- [ memRealloc] ---
@@ -347,7 +390,8 @@ public final class MemoryUtil {
         return ALLOCATOR.realloc(ptr, size);
     }
 
-    private static <T extends Buffer> T realloc(T old_p, T new_p, int size) {
+    @Nullable
+    private static <T extends Buffer> T realloc(@Nullable T old_p, @Nullable T new_p, int size) {
         if (old_p != null && new_p != null) {
             new_p.position(min(old_p.position(), size));
         }
@@ -373,7 +417,8 @@ public final class MemoryUtil {
      * requested block of memory, a {@link #NULL} pointer is returned, and the memory block pointed to by argument {@code ptr} is not deallocated (it is still
      * valid, and with its contents unchanged).
      */
-    public static ByteBuffer memRealloc(ByteBuffer ptr, int size) {
+    @Nullable
+    public static ByteBuffer memRealloc(@Nullable ByteBuffer ptr, int size) {
         return realloc(ptr, memByteBuffer(nmemRealloc(memAddress0Safe(ptr), size), size), size);
     }
 
@@ -382,7 +427,8 @@ public final class MemoryUtil {
      *
      * @param size the number of short values to allocate.
      */
-    public static ShortBuffer memRealloc(ShortBuffer ptr, int size) {
+    @Nullable
+    public static ShortBuffer memRealloc(@Nullable ShortBuffer ptr, int size) {
         return realloc(ptr, memShortBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 1)), size), size);
     }
 
@@ -391,7 +437,8 @@ public final class MemoryUtil {
      *
      * @param size the number of int values to allocate.
      */
-    public static IntBuffer memRealloc(IntBuffer ptr, int size) {
+    @Nullable
+    public static IntBuffer memRealloc(@Nullable IntBuffer ptr, int size) {
         return realloc(ptr, memIntBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
     }
 
@@ -400,7 +447,8 @@ public final class MemoryUtil {
      *
      * @param size the number of long values to allocate.
      */
-    public static LongBuffer memRealloc(LongBuffer ptr, int size) {
+    @Nullable
+    public static LongBuffer memRealloc(@Nullable LongBuffer ptr, int size) {
         return realloc(ptr, memLongBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
     }
 
@@ -409,7 +457,8 @@ public final class MemoryUtil {
      *
      * @param size the number of float values to allocate.
      */
-    public static FloatBuffer memRealloc(FloatBuffer ptr, int size) {
+    @Nullable
+    public static FloatBuffer memRealloc(@Nullable FloatBuffer ptr, int size) {
         return realloc(ptr, memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
     }
 
@@ -418,7 +467,8 @@ public final class MemoryUtil {
      *
      * @param size the number of double values to allocate.
      */
-    public static DoubleBuffer memRealloc(DoubleBuffer ptr, int size) {
+    @Nullable
+    public static DoubleBuffer memRealloc(@Nullable DoubleBuffer ptr, int size) {
         return realloc(ptr, memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
     }
 
@@ -427,8 +477,9 @@ public final class MemoryUtil {
      *
      * @param size the number of pointer values to allocate.
      */
-    public static PointerBuffer memRealloc(PointerBuffer ptr, int size) {
-        PointerBuffer buffer = memPointerBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, POINTER_SHIFT)), size);
+    @Nullable
+    public static PointerBuffer memRealloc(@Nullable PointerBuffer ptr, int size) {
+        PointerBuffer buffer = memPointerBufferSafe(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, POINTER_SHIFT)), size);
         if (ptr != null && buffer != null) {
             buffer.position(min(ptr.position(), size));
         }
@@ -443,6 +494,26 @@ public final class MemoryUtil {
     }
 
     /**
+     * Unsafe version of {@link #memAlignedAlloc} that checks the requested {@code size}.
+     *
+     * @return {@link #NULL} if {@code size} is zero, otherwise a pointer to the memory block allocated by the function on success.
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
+     */
+    public static long nmemAlignedAllocChecked(long alignment, long size) {
+        long address;
+        if (size == 0L) {
+            address = NULL;
+        } else {
+            address = nmemAlignedAlloc(alignment, size);
+            if (DEBUG && address == NULL) {
+                throw new OutOfMemoryError();
+            }
+        }
+        return address;
+    }
+
+    /**
      * The standard C aligned_alloc function.
      *
      * <p>Allocate {@code size} bytes of uninitialized storage whose alignment is specified by {@code alignment}. The size parameter must be an integral
@@ -452,7 +523,7 @@ public final class MemoryUtil {
      * @param size      the number of bytes to allocate. Must be a multiple of {@code alignment}.
      */
     public static ByteBuffer memAlignedAlloc(int alignment, int size) {
-        return memByteBuffer(ALLOCATOR.aligned_alloc(alignment, size), size);
+        return ACCESSOR.memByteBuffer(nmemAlignedAllocChecked(alignment, size), size);
     }
 
     // --- [ memAlignedFree ] ---
@@ -482,9 +553,9 @@ public final class MemoryUtil {
          * @param memory     the amount of memory allocated, in bytes
          * @param threadId   id of the thread that allocated the memory. May be {@link #NULL}.
          * @param threadName name of the thread that allocated the memory. May be {@code null}.
-         * @param stacktrace the allocation stacktrace. May be null.
+         * @param stacktrace the allocation stacktrace. May be {@code null}.
          */
-        void invoke(long memory, long threadId, String threadName, StackTraceElement... stacktrace);
+        void invoke(long memory, long threadId, @Nullable String threadName, @Nullable StackTraceElement... stacktrace);
 
         /** Specifies how to aggregate the reported allocations. */
         enum Aggregate {
@@ -542,13 +613,13 @@ public final class MemoryUtil {
     public static long memAddress0(Buffer buffer) { return ACCESSOR.memAddress0(buffer); }
 
     /** Null-safe version of {@link #memAddress0(Buffer)}. Returns {@link #NULL} if the specified buffer is null. */
-    public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer); }
+    public static long memAddress0Safe(@Nullable Buffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer); }
 
     /** CustomBuffer version of {@link #memAddress0(Buffer)}. */
     public static long memAddress0(CustomBuffer<?> buffer) { return buffer.address0(); }
 
     /** CustomBuffer version of {@link #memAddress0Safe(Buffer)}. */
-    public static long memAddress0Safe(CustomBuffer<?> buffer) { return buffer == null ? NULL : buffer.address0(); }
+    public static long memAddress0Safe(@Nullable CustomBuffer<?> buffer) { return buffer == null ? NULL : buffer.address0(); }
 
     // --- [ Buffer address ] ---
 
@@ -616,48 +687,51 @@ public final class MemoryUtil {
     // --- [ Buffer address - Safe ] ---
 
     /** Null-safe version of {@link #memAddress(ByteBuffer)}. Returns {@link #NULL} if the specified buffer is null. */
-    public static long memAddressSafe(ByteBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable ByteBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** Null-safe version of {@link #memAddress(ByteBuffer, int)}. Returns {@link #NULL} if the specified buffer is null. */
-    public static long memAddressSafe(ByteBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable ByteBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** ShortBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(ShortBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable ShortBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** ShortBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(ShortBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable ShortBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** CharBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(CharBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable CharBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** CharBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(CharBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable CharBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** IntBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(IntBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable IntBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** IntBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(IntBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable IntBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** FloatBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(FloatBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable FloatBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** FloatBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(FloatBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable FloatBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** LongBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(LongBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable LongBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** LongBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(LongBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable LongBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** DoubleBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(DoubleBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+    public static long memAddressSafe(@Nullable DoubleBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
     /** DoubleBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(DoubleBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable DoubleBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
     /** CustomBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-    public static long memAddressSafe(CustomBuffer<?> buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+    public static long memAddressSafe(@Nullable CustomBuffer<?> buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
     /** Pointer version of {@link #memAddressSafe(ByteBuffer)}. */
-    public static long memAddressSafe(Pointer pointer) { return pointer == null ? NULL : pointer.address(); }
+    public static long memAddressSafe(@Nullable Pointer pointer) { return pointer == null ? NULL : pointer.address(); }
 
     // --- [ Buffer allocation ] ---
 
     private static long checkAlignment(long address, int mask) {
+        if (CHECKS) {
+            check(address);
+        }
         if (DEBUG && (address & mask) != 0L) {
             throw new IllegalArgumentException("Unaligned memory address");
         }
@@ -666,7 +740,7 @@ public final class MemoryUtil {
 
     /**
      * Creates a new direct ByteBuffer that starts at the specified memory address and has the specified capacity. The returned ByteBuffer instance will be set
-     * to the native ByteOrder.
+     * to the native {@link ByteOrder}.
      *
      * @param address  the starting memory address
      * @param capacity the buffer capacity
@@ -674,6 +748,15 @@ public final class MemoryUtil {
      * @return the new ByteBuffer
      */
     public static ByteBuffer memByteBuffer(long address, int capacity) {
+        if (CHECKS) {
+            check(address);
+        }
+        return ACCESSOR.memByteBuffer(address, capacity);
+    }
+
+    /** Like {@link #memByteBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static ByteBuffer memByteBufferSafe(long address, int capacity) {
         if (address == NULL) {
             return null;
         }
@@ -692,11 +775,13 @@ public final class MemoryUtil {
      * @return the new ShortBuffer
      */
     public static ShortBuffer memShortBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return ACCESSOR.memShortBuffer(checkAlignment(address, 2 - 1), capacity);
+    }
+
+    /** Like {@link #memShortBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static ShortBuffer memShortBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memShortBuffer(address, capacity);
     }
 
     /**
@@ -710,11 +795,13 @@ public final class MemoryUtil {
      * @return the new CharBuffer
      */
     public static CharBuffer memCharBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return ACCESSOR.memCharBuffer(checkAlignment(address, 2 - 1), capacity);
+    }
+
+    /** Like {@link #memCharBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static CharBuffer memCharBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memCharBuffer(address, capacity);
     }
 
     /**
@@ -728,11 +815,13 @@ public final class MemoryUtil {
      * @return the new IntBuffer
      */
     public static IntBuffer memIntBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return ACCESSOR.memIntBuffer(checkAlignment(address, 4 - 1), capacity);
+    }
+
+    /** Like {@link #memIntBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static IntBuffer memIntBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memIntBuffer(address, capacity);
     }
 
     /**
@@ -746,11 +835,13 @@ public final class MemoryUtil {
      * @return the new LongBuffer
      */
     public static LongBuffer memLongBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return ACCESSOR.memLongBuffer(checkAlignment(address, 8 - 1), capacity);
+    }
+
+    /** Like {@link #memLongBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static LongBuffer memLongBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memLongBuffer(address, capacity);
     }
 
     /**
@@ -764,11 +855,13 @@ public final class MemoryUtil {
      * @return the new FloatBuffer
      */
     public static FloatBuffer memFloatBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return ACCESSOR.memFloatBuffer(checkAlignment(address, 4 - 1), capacity);
+    }
+
+    /** Like {@link #memFloatBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static FloatBuffer memFloatBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memFloatBuffer(address, capacity);
     }
 
     /**
@@ -782,11 +875,13 @@ public final class MemoryUtil {
      * @return the new DoubleBuffer
      */
     public static DoubleBuffer memDoubleBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return ACCESSOR.memDoubleBuffer(checkAlignment(address, 8 - 1), capacity);
+    }
+
+    /** Like {@link #memDoubleBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static DoubleBuffer memDoubleBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memDoubleBuffer(address, capacity);
     }
 
     /**
@@ -801,11 +896,13 @@ public final class MemoryUtil {
      * @return the new PointerBuffer
      */
     public static PointerBuffer memPointerBuffer(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
         return PointerBuffer.create(checkAlignment(address, POINTER_SIZE - 1), capacity);
+    }
+
+    /** Like {@link #memPointerBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static PointerBuffer memPointerBufferSafe(long address, int capacity) {
+        return address == NULL ? null : memPointerBuffer(address, capacity);
     }
 
     // --- [ Buffer slicing ] ---
@@ -1262,32 +1359,40 @@ public final class MemoryUtil {
         ------------------------------------- */
 
     /**
-     * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated. If text is null, null is returned.
+     * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated.
      *
      * @param text the text to encode
      *
-     * @return the encoded text or null
+     * @return the encoded text
      */
     public static ByteBuffer memASCII(CharSequence text) {
         return memASCII(text, true);
     }
 
+    /** Like {@link #memASCII(CharSequence) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public static ByteBuffer memASCIISafe(@Nullable CharSequence text) {
+        return memASCIISafe(text, true);
+    }
+
     /**
-     * Returns a ByteBuffer containing the specified text ASCII encoded and optionally null-terminated. If text is null, null is returned.
+     * Returns a ByteBuffer containing the specified text ASCII encoded and optionally null-terminated.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
-     * @return the encoded text or null
+     * @return the encoded text
      */
     public static ByteBuffer memASCII(CharSequence text, boolean nullTerminated) {
-        if (text == null) {
-            return null;
-        }
-
         ByteBuffer target = memAlloc(memLengthASCII(text, nullTerminated));
         memASCII(text, nullTerminated, target);
         return target;
+    }
+
+    /** Like {@link #memASCII(CharSequence, boolean) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public static ByteBuffer memASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? null : memASCII(text, nullTerminated);
     }
 
     /**
@@ -1332,32 +1437,40 @@ public final class MemoryUtil {
     }
 
     /**
-     * Returns a ByteBuffer containing the specified text UTF-8 encoded and null-terminated. If text is null, null is returned.
+     * Returns a ByteBuffer containing the specified text UTF-8 encoded and null-terminated.
      *
      * @param text the text to encode
      *
-     * @return the encoded text or null
+     * @return the encoded text
      */
     public static ByteBuffer memUTF8(CharSequence text) {
         return memUTF8(text, true);
     }
 
+    /** Like {@link #memUTF8(CharSequence) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public static ByteBuffer memUTF8Safe(@Nullable CharSequence text) {
+        return memUTF8Safe(text, true);
+    }
+
     /**
-     * Returns a ByteBuffer containing the specified text UTF-8 encoded and optionally null-terminated. If text is null, null is returned.
+     * Returns a ByteBuffer containing the specified text UTF-8 encoded and optionally null-terminated.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
-     * @return the encoded text or null
+     * @return the encoded text
      */
     public static ByteBuffer memUTF8(CharSequence text, boolean nullTerminated) {
-        if (text == null) {
-            return null;
-        }
-
         ByteBuffer target = memAlloc(memLengthUTF8(text, nullTerminated));
         memUTF8(text, nullTerminated, target);
         return target;
+    }
+
+    /** Like {@link #memUTF8(CharSequence, boolean) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public static ByteBuffer memUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? null : memUTF8(text, nullTerminated);
     }
 
     /**
@@ -1404,7 +1517,7 @@ public final class MemoryUtil {
     }
 
     /**
-     * Returns a ByteBuffer containing the specified text UTF-16 encoded and null-terminated. If text is null, null is returned.
+     * Returns a ByteBuffer containing the specified text UTF-16 encoded and null-terminated.
      *
      * @param text the text to encode
      *
@@ -1414,8 +1527,14 @@ public final class MemoryUtil {
         return memUTF16(text, true);
     }
 
+    /** Like {@link #memUTF16(CharSequence) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public static ByteBuffer memUTF16Safe(@Nullable CharSequence text) {
+        return memUTF16Safe(text, true);
+    }
+
     /**
-     * Returns a ByteBuffer containing the specified text UTF-16 encoded and optionally null-terminated. If text is null, null is returned.
+     * Returns a ByteBuffer containing the specified text UTF-16 encoded and optionally null-terminated.
      *
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -1423,13 +1542,15 @@ public final class MemoryUtil {
      * @return the encoded text
      */
     public static ByteBuffer memUTF16(CharSequence text, boolean nullTerminated) {
-        if (text == null) {
-            return null;
-        }
-
         ByteBuffer target = memAlloc(memLengthUTF16(text, nullTerminated));
         memUTF16(text, nullTerminated, target);
         return target;
+    }
+
+    /** Like {@link #memUTF16(CharSequence, boolean) memASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public static ByteBuffer memUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? null : memUTF16(text, nullTerminated);
     }
 
     /**
@@ -1482,6 +1603,9 @@ public final class MemoryUtil {
         ------------------------------------- */
 
     private static int memLengthNT1(long address, int maxLength) {
+        if (CHECKS) {
+            check(address);
+        }
         return BITS64
             ? TEXT_UTIL.strlen64NT1(address, maxLength)
             : TEXT_UTIL.strlen32NT1(address, maxLength);
@@ -1502,6 +1626,9 @@ public final class MemoryUtil {
     }
 
     private static int memLengthNT2(long address, int maxLength) {
+        if (CHECKS) {
+            check(address);
+        }
         return BITS64
             ? TEXT_UTIL.strlen64NT2(address, maxLength)
             : TEXT_UTIL.strlen32NT2(address, maxLength);
@@ -1547,11 +1674,19 @@ public final class MemoryUtil {
      * @return the new ByteBuffer
      */
     public static ByteBuffer memByteBufferNT1(long address, int maxLength) {
-        if (address == NULL) {
-            return null;
-        }
-
         return memByteBuffer(address, memLengthNT1(address, maxLength));
+    }
+
+    /** Like {@link #memByteBufferNT1(long) memByteBufferNT1}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static ByteBuffer memByteBufferNT1Safe(long address) {
+        return memByteBufferNT1Safe(address, Integer.MAX_VALUE);
+    }
+
+    /** Like {@link #memByteBufferNT1(long, int) memByteBufferNT1}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static ByteBuffer memByteBufferNT1Safe(long address, int maxLength) {
+        return address == NULL ? null : memByteBufferNT1(address, maxLength);
     }
 
     /**
@@ -1579,10 +1714,6 @@ public final class MemoryUtil {
      * @return the new ByteBuffer
      */
     public static ByteBuffer memByteBufferNT2(long address, int maxLength) {
-        if (address == NULL) {
-            return null;
-        }
-
         if (DEBUG) {
             if ((address & 1L) != 0L) {
                 throw new IllegalArgumentException("The string address is not aligned.");
@@ -1592,8 +1723,19 @@ public final class MemoryUtil {
                 throw new IllegalArgumentException("The maximum length must be an even number.");
             }
         }
-
         return memByteBuffer(address, memLengthNT2(address, maxLength));
+    }
+
+    /** Like {@link #memByteBufferNT2(long) memByteBufferNT2}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static ByteBuffer memByteBufferNT2Safe(long address) {
+        return memByteBufferNT2Safe(address, Integer.MAX_VALUE - 1);
+    }
+
+    /** Like {@link #memByteBufferNT2(long, int) memByteBufferNT2}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static ByteBuffer memByteBufferNT2Safe(long address, int maxLength) {
+        return address == NULL ? null : memByteBufferNT2(address, maxLength);
     }
 
     /**
@@ -1601,13 +1743,9 @@ public final class MemoryUtil {
      *
      * @param address the string memory address
      *
-     * @return the decoded {@link String} or null if the specified {@code address} is null
+     * @return the decoded {@link String}
      */
     public static String memASCII(long address) {
-        if (address == NULL) {
-            return null;
-        }
-
         ByteBuffer buffer = memByteBufferNT1(address);
         return memASCII(buffer, buffer.remaining(), 0);
     }
@@ -1617,16 +1755,24 @@ public final class MemoryUtil {
      *
      * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
      *
-     * @param buffer the {@link ByteBuffer} to decode, or null
+     * @param buffer the {@link ByteBuffer} to decode
      *
-     * @return the decoded {@link String} or null if the specified {@code buffer} is null
+     * @return the decoded {@link String}
      */
     public static String memASCII(ByteBuffer buffer) {
-        if (buffer == null) {
-            return null;
-        }
-
         return memASCII(buffer, buffer.remaining());
+    }
+
+    /** Like {@link #memASCII(long) memASCII}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static String memASCIISafe(long address) {
+        return address == NULL ? null : memASCII(address);
+    }
+
+    /** Like {@link #memASCII(ByteBuffer) memASCII}, but returns {@code null} if {@code buffer} is {@code null}. */
+    @Nullable
+    public static String memASCIISafe(@Nullable ByteBuffer buffer) {
+        return buffer == null ? null : memASCII(buffer);
     }
 
     /**
@@ -1664,13 +1810,9 @@ public final class MemoryUtil {
      *
      * @param address the string memory address
      *
-     * @return the decoded {@link String} or null if the specified {@code address} is null
+     * @return the decoded {@link String}
      */
     public static String memUTF8(long address) {
-        if (address == NULL) {
-            return null;
-        }
-
         ByteBuffer buffer = memByteBufferNT1(address);
         return memUTF8(buffer, buffer.remaining(), 0);
     }
@@ -1680,16 +1822,24 @@ public final class MemoryUtil {
      *
      * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
      *
-     * @param buffer the {@link ByteBuffer} to decode, or null
+     * @param buffer the {@link ByteBuffer} to decode
      *
-     * @return the decoded {@link String} or null if the specified {@code buffer} is null
+     * @return the decoded {@link String}
      */
     public static String memUTF8(ByteBuffer buffer) {
-        if (buffer == null) {
-            return null;
-        }
-
         return memUTF8(buffer, buffer.remaining());
+    }
+
+    /** Like {@link #memUTF8(long) memUTF8}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static String memUTF8Safe(long address) {
+        return address == NULL ? null : memUTF8(address);
+    }
+
+    /** Like {@link #memUTF8(ByteBuffer) memUTF8}, but returns {@code null} if {@code buffer} is {@code null}. */
+    @Nullable
+    public static String memUTF8Safe(@Nullable ByteBuffer buffer) {
+        return buffer == null ? null : memUTF8(buffer);
     }
 
     /**
@@ -1727,10 +1877,10 @@ public final class MemoryUtil {
      *
      * @param address the string memory address
      *
-     * @return the decoded {@link String} or null if the specified {@code address} is null
+     * @return the decoded {@link String}
      */
     public static String memUTF16(long address) {
-        return address == NULL ? null : memUTF16(memByteBufferNT2(address));
+        return memUTF16(memByteBufferNT2(address));
     }
 
     /**
@@ -1738,16 +1888,24 @@ public final class MemoryUtil {
      *
      * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
      *
-     * @param buffer the {@link ByteBuffer} to decode, or null
+     * @param buffer the {@link ByteBuffer} to decode
      *
-     * @return the decoded {@link String} or null if the specified {@code buffer} is null
+     * @return the decoded {@link String}
      */
     public static String memUTF16(ByteBuffer buffer) {
-        if (buffer == null) {
-            return null;
-        }
-
         return memUTF16(buffer, buffer.remaining() >> 1);
+    }
+
+    /** Like {@link #memUTF16(long) memUTF16}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static String memUTF16Safe(long address) {
+        return address == NULL ? null : memUTF16(address);
+    }
+
+    /** Like {@link #memUTF16(ByteBuffer) memUTF16}, but returns {@code null} if {@code buffer} is {@code null}. */
+    @Nullable
+    public static String memUTF16Safe(@Nullable ByteBuffer buffer) {
+        return buffer == null ? null : memUTF16(buffer);
     }
 
     /**

@@ -7,6 +7,7 @@ package org.lwjgl.vulkan;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.util.*;
 
 import static java.lang.Math.*;
@@ -24,8 +25,10 @@ import static org.lwjgl.vulkan.VK10.*;
  */
 public final class VK {
 
+    @Nullable
     private static FunctionProvider functionProvider;
 
+    @Nullable
     private static GlobalCommands globalCommands;
 
     static {
@@ -100,9 +103,16 @@ public final class VK {
         globalCommands = null;
     }
 
+    private static <T> T check(@Nullable T t) {
+        if (t == null) {
+            throw new IllegalStateException("Vulkan library has not been loaded.");
+        }
+        return t;
+    }
+
     /** Returns the {@link FunctionProvider} for the Vulkan shared library. */
     public static FunctionProvider getFunctionProvider() {
-        return functionProvider;
+        return check(functionProvider);
     }
 
     static class GlobalCommands {
@@ -136,9 +146,9 @@ public final class VK {
     }
 
     /** Returns the Vulkan global commands. */
-    static GlobalCommands getGlobalCommands() { return globalCommands; }
+    static GlobalCommands getGlobalCommands() { return check(globalCommands); }
 
-    static Set<String> getEnabledExtensionSet(int apiVersion, PointerBuffer extensionNames) {
+    static Set<String> getEnabledExtensionSet(int apiVersion, @Nullable PointerBuffer extensionNames) {
         Set<String> enabledExtensions = new HashSet<>(16);
 
         int majorVersion = VK_VERSION_MAJOR(apiVersion);
@@ -168,7 +178,8 @@ public final class VK {
         return enabledExtensions;
     }
 
-    static <T> T checkExtension(String extension, T functions) {
+    @Nullable
+    static <T> T checkExtension(String extension, @Nullable T functions) {
         if (functions != null) {
             return functions;
         }

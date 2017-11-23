@@ -47,13 +47,34 @@ public abstract class Struct extends Pointer.Default {
         nmemFree(address());
     }
 
+    /**
+     * Returns true if the pointer member that corresponds to the specified {@code memberOffset} is {@code NULL}.
+     *
+     * <p>This is useful to verify that not nullable members of an untrusted struct instance are indeed not {@code NULL}.</p>
+     *
+     * @param memberOffset the byte offset of the member to query
+     *
+     * @return true if the member is {@code NULL}
+     */
+    public boolean isNull(int memberOffset) {
+        if (DEBUG) {
+            checkMemberOffset(memberOffset);
+        }
+        return memGetAddress(address() + memberOffset) == NULL;
+    }
+
     // ---------------- Implementation utilities ----------------
 
-    protected static ByteBuffer checkContainer(ByteBuffer container, int sizeof) {
-        if (Checks.CHECKS && container != null) {
+    private void checkMemberOffset(int memberOffset) {
+        if (memberOffset < 0 || memberOffset + POINTER_SIZE > sizeof()) {
+            throw new IllegalArgumentException("Invalid member offset.");
+        }
+    }
+
+    protected static ByteBuffer __checkContainer(ByteBuffer container, int sizeof) {
+        if (CHECKS) {
             check(container, sizeof);
         }
-
         return container;
     }
 
@@ -64,7 +85,7 @@ public abstract class Struct extends Pointer.Default {
     protected static long __malloc(int elements, int elementSize) {
         long bytes = getBytes(elements, elementSize);
         apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
-        return nmemAlloc(bytes);
+        return nmemAllocChecked(bytes);
     }
 
     protected static ByteBuffer __create(int elements, int elementSize) {

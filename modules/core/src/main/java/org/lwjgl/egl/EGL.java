@@ -6,6 +6,7 @@ package org.lwjgl.egl;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -35,8 +36,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class EGL {
 
+    @Nullable
     private static FunctionProvider functionProvider;
 
+    @Nullable
     private static EGLCapabilities caps;
 
     static {
@@ -135,6 +138,7 @@ public final class EGL {
     }
 
     /** Returns the {@link FunctionProvider} for the EGL native library. */
+    @Nullable
     public static FunctionProvider getFunctionProvider() {
         return functionProvider;
     }
@@ -145,11 +149,17 @@ public final class EGL {
      * The capability flags in this instance are only set for the core EGL versions and client extensions. This may only happen if EGL 1.5 or the
      * {@link EGLCapabilities#EGL_EXT_client_extensions} extension are supported. If not, all flags will be false and the version fields zero.
      */
+    @Nullable
     public static EGLCapabilities getCapabilities() {
         return caps;
     }
 
     private static EGLCapabilities createClientCapabilities() {
+        FunctionProvider functionProvider = EGL.functionProvider;
+        if (functionProvider == null) {
+            throw new IllegalStateException("EGL library has not been loaded.");
+        }
+
         Set<String> ext = new HashSet<>(32);
 
         long QueryString = functionProvider.getFunctionAddress("eglQueryString");
@@ -160,11 +170,11 @@ public final class EGL {
             callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
         } else {
             // Available on EGL 1.5 only
-            long versionString = callPP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
-            if (versionString == NULL) {
+            String versionString = memASCIISafe(callPP(QueryString, EGL_NO_DISPLAY, EGL_VERSION));
+            if (versionString == null) {
                 callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
             } else {
-                APIVersion version = apiParseVersion(memASCII(versionString), "EGL");
+                APIVersion version = apiParseVersion(versionString, "EGL");
                 addEGLVersions(version.major, version.minor, ext);
             }
         }
@@ -182,7 +192,11 @@ public final class EGL {
      * @return the {@link EGLCapabilities instance}
      */
     public static EGLCapabilities createDisplayCapabilities(long dpy) {
-        APIVersion version = apiParseVersion(eglQueryString(dpy, EGL_VERSION));
+        String versionString = eglQueryString(dpy, EGL_VERSION);
+        if (versionString == null) {
+            throw new IllegalArgumentException("Invalid EGLDisplay handle specified.");
+        }
+        APIVersion version = apiParseVersion(versionString);
         return createDisplayCapabilities(dpy, version.major, version.minor);
     }
 
@@ -198,12 +212,20 @@ public final class EGL {
      * @return the {@link EGLCapabilities instance}
      */
     public static EGLCapabilities createDisplayCapabilities(long dpy, int majorVersion, int minorVersion) {
+        FunctionProvider functionProvider = EGL.functionProvider;
+        if (functionProvider == null) {
+            throw new IllegalStateException("EGL library has not been loaded.");
+        }
+
         Set<String> supportedExtensions = new HashSet<>(32);
 
         // Add EGL versions
         addEGLVersions(majorVersion, minorVersion, supportedExtensions);
         // Parse display EGL_EXTENSIONS string
-        addExtensions(eglQueryString(dpy, EGL_EXTENSIONS), supportedExtensions);
+        String extensionsString = eglQueryString(dpy, EGL_EXTENSIONS);
+        if (extensionsString != null) {
+            addExtensions(extensionsString, supportedExtensions);
+        }
 
         return new EGLCapabilities(functionProvider, supportedExtensions);
     }

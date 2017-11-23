@@ -216,7 +216,7 @@ class Func(
                 "$it $name"
             }
         }.let {
-            if (nativeType.isReference && has(nullable)) {
+            if (annotate && nativeType.isReference && has(nullable)) {
                 "@Nullable $it"
             } else {
                 it
@@ -866,7 +866,7 @@ class Func(
                     print(t)
                 print("$t$t")
                 if (returns.nativeType.dereference is StructType) {
-                    println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it.has<AutoSizeResultParam>() }.let { if (it != null) ", ${it.name}.get(0)" else "" }});")
+                    println("return ${returns.nativeType.javaMethodType}.createSafe($RESULT${parameters.asSequence().singleOrNull { it.has<AutoSizeResultParam>() }.let { if (it != null) ", ${it.name}.get(0)" else "" }});")
                 } else {
                     val isNullTerminated = returns.nativeType is CharSequenceType
                     val bufferType = if (isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA)
@@ -875,8 +875,10 @@ class Func(
                         returns.nativeType.mapping.javaMethodName
 
                     print("return mem$bufferType")
-                    if (isNullTerminated)
-                        print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                    print(if (isNullTerminated)
+                        "NT${(returns.nativeType as CharSequenceType).charMapping.bytes}"
+                    else
+                        "Safe")
                     print("($RESULT")
                     if (has<MapPointer>())
                         get<MapPointer>().sizeExpression.let { expression ->
@@ -971,11 +973,11 @@ class Func(
             if (returnLater || returns.nativeType.isPointerData) {
                 print("$returnType $RESULT = ")
                 if (returnsObject)
-                    print("$returnType.create(")
+                    print("$returnType.createSafe(")
             } else {
                 print("return ")
                 if (returnsObject)
-                    print("$returnType.create(")
+                    print("$returnType.createSafe(")
             }
         }
 
@@ -1024,7 +1026,7 @@ class Func(
         nativeClass.binding?.generateAlternativeMethods(this, this@Func, transforms)
 
         if (returns.nativeType is CharSequenceType)
-            transforms[returns] = StringReturnTransform
+            transforms[returns] = StringReturnTransform(!has<Nonnull>())
         else if (has<MapPointer>()) {
             val mapPointer = get<MapPointer>()
 
@@ -1399,24 +1401,30 @@ class Func(
         }
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
-        printList(getParams { it !== JNI_ENV }) {
-            if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
+        printList(getParams { it !== JNI_ENV }) { param ->
+            if (param.isAutoSizeResultOut && hideAutoSizeResultParam)
                 null
             else
-                it.transformDeclarationOrElse(transforms, it.asJavaMethodParam(false), true, it.has(const))
+                param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true, param.has(const)).let {
+                    if (it != null && param.nativeType.isReference && param.has(nullable)) {
+                        "@Nullable $it"
+                    } else {
+                        it
+                    }
+                }
         }
         val returnTransform = transforms[returns]
         if (returnTransform is MapPointerTransform) {
             if (!parameters.isEmpty())
                 print(", ")
-            print("ByteBuffer $MAP_OLD")
+            print("@Nullable ByteBuffer $MAP_OLD")
         } else if (returnTransform != null && returnTransform::class.java === MapPointerExplicitTransform::class.java) {
             if (!parameters.isEmpty())
                 print(", ")
             val mapPointerExplicit = returnTransform as MapPointerExplicitTransform
             if (mapPointerExplicit.addParam)
                 print("long ${mapPointerExplicit.lengthParam}, ")
-            print("ByteBuffer $MAP_OLD")
+            print("@Nullable ByteBuffer $MAP_OLD")
         }
         if (returns.isStructValue) {
             if (!parameters.isEmpty()) print(", ")
@@ -1520,7 +1528,7 @@ class Func(
                     print(t)
                 print("$t$t")
                 if (returns.nativeType.dereference is StructType) {
-                    println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it.has<AutoSizeResultParam>() }.let { if (it != null) ", ${it.name}.get(${it.name}.position()" else "" }});")
+                    println("return ${returns.nativeType.javaMethodType}.createSafe($RESULT${parameters.asSequence().singleOrNull { it.has<AutoSizeResultParam>() }.let { if (it != null) ", ${it.name}.get(${it.name}.position()" else "" }});")
                 } else {
                     val isNullTerminated = returns.nativeType is CharSequenceType
                     val bufferType = if (isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA)
@@ -1530,8 +1538,10 @@ class Func(
 
                     val builder = StringBuilder()
                     builder.append("mem$bufferType")
-                    if (isNullTerminated)
-                        builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                    builder.append(if (isNullTerminated)
+                        "NT${(returns.nativeType as CharSequenceType).charMapping.bytes}"
+                    else
+                        "Safe")
                     builder.append("($RESULT")
                     if (has<MapPointer>())
                         builder.append(", ${get<MapPointer>().sizeExpression}")

@@ -6,12 +6,12 @@ package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -37,8 +37,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class ALC {
 
+    @Nullable
     private static FunctionProviderLocal functionProvider;
 
+    @Nullable
     private static ALCCapabilities icd;
 
     static {
@@ -146,14 +148,21 @@ public final class ALC {
         functionProvider = null;
     }
 
+    static <T> T check(@Nullable T t) {
+        if (t == null) {
+            throw new IllegalStateException("OpenAL library has not been loaded.");
+        }
+        return t;
+    }
+
     /** Returns the {@link FunctionProviderLocal} for the OpenAL native library. */
     public static FunctionProviderLocal getFunctionProvider() {
-        return functionProvider;
+        return check(ALC.functionProvider);
     }
 
     /** Returns the {@link ALCCapabilities} of the OpenAL implementation. */
     static ALCCapabilities getICD() {
-        return icd;
+        return check(icd);
     }
 
     /**
@@ -162,6 +171,8 @@ public final class ALC {
      * @return the {@code ALCCapabilities} instance
      */
     public static ALCCapabilities createCapabilities(long device) {
+        FunctionProviderLocal functionProvider = getFunctionProvider();
+
         // We don't have an ALCCapabilities instance when this method is called
         // so we have to use the native bindings directly.
         long GetIntegerv        = functionProvider.getFunctionAddress("alcGetIntegerv");
@@ -201,7 +212,7 @@ public final class ALC {
         }
 
         // Parse EXTENSIONS string
-        String extensionsString = memASCII(check(invokePP(GetString, device, ALC_EXTENSIONS)));
+        String extensionsString = memASCIISafe(invokePP(GetString, device, ALC_EXTENSIONS));
         if (extensionsString != null) {
             StringTokenizer tokenizer = new StringTokenizer(extensionsString);
             while (tokenizer.hasMoreTokens()) {
@@ -214,7 +225,7 @@ public final class ALC {
             }
         }
 
-        return new ALCCapabilities(getFunctionProvider(), device, supportedExtensions);
+        return new ALCCapabilities(functionProvider, device, supportedExtensions);
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system;
 
+import javax.annotation.*;
 import java.util.*;
 import java.util.Map.*;
 import java.util.concurrent.*;
@@ -198,6 +199,7 @@ final class MemoryManage {
 
             private final Object[] stackTrace;
 
+            @Nullable
             private StackTraceElement[] elements; // lazy init
 
             final long size;

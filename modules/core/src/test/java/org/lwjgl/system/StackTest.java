@@ -77,27 +77,29 @@ public class StackTest {
         }
     }
 
-    @Test(expectedExceptions = OutOfMemoryError.class)
     public void testOOME() {
         if (!CHECKS) {
             throw new SkipException("This test may not run with checks disabled.");
         }
 
-        MemoryStack stack = new MemoryStack(8);
+        expectThrows(OutOfMemoryError.class, () -> {
+            MemoryStack stack = new MemoryStack(8);
 
-        stack.push();
-        stack.malloc(8);
-        stack.malloc(1);
-        stack.pop();
+            stack.push();
+            stack.malloc(8);
+            stack.malloc(1);
+            stack.pop();
+        });
     }
 
-    @Test(expectedExceptions = StackOverflowError.class)
     public void testSOE() {
-        MemoryStack stack = MemoryStack.create();
+        expectThrows(StackOverflowError.class, () -> {
+            MemoryStack stack = MemoryStack.create();
 
-        // Test growing of the stack frame array,
-        // the Java stack should overflow before we have any issues
-        recursivePush(stack);
+            // Test growing of the stack frame array,
+            // the Java stack should overflow before we have any issues
+            recursivePush(stack);
+        });
     }
 
     private static void recursivePush(MemoryStack stack) {

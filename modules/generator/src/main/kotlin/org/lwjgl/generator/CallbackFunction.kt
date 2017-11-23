@@ -70,17 +70,22 @@ import static org.lwjgl.system.MemoryUtil.*;
                 .toJavaDoc(indentation = "", see = see, since = since))
         print("""${access.modifier}abstract class $className extends Callback implements ${className}I {
 
-    /** Creates a {@code $className} instance from the specified function pointer. */
-    @Nullable
+    /**
+     * Creates a {@code $className} instance from the specified function pointer.
+     *
+     * @return the new {@code $className}
+     */
     public static $className create(long functionPointer) {
-        if (functionPointer == NULL) {
-            return null;
-        }
-
         ${className}I instance = Callback.get(functionPointer);
         return instance instanceof $className
             ? ($className)instance
             : new Container(functionPointer, instance);
+    }
+
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@link #NULL}. */
+    @Nullable
+    public static $className createSafe(long functionPointer) {
+        return functionPointer == NULL ? null : create(functionPointer);
     }
 
     /** Creates a {@code $className} instance that delegates to the specified {@code ${className}I} instance. */

@@ -6,13 +6,13 @@ package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -43,8 +43,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class AL {
 
+    @Nullable
     private static FunctionProvider functionProvider;
 
+    @Nullable
     private static ALCapabilities processCaps;
 
     private static final ThreadLocal<ALCapabilities> capabilitiesTLS = new ThreadLocal<>();
@@ -89,7 +91,7 @@ public final class AL {
      *
      * @param caps the {@link ALCapabilities} to make current, or null
      */
-    public static void setCurrentProcess(ALCapabilities caps) {
+    public static void setCurrentProcess(@Nullable ALCapabilities caps) {
         processCaps = caps;
         capabilitiesTLS.set(null); // See EXT_thread_local_context, second Q.
         icd.set(caps);
@@ -102,7 +104,7 @@ public final class AL {
      *
      * @param caps the {@link ALCapabilities} to make current, or null
      */
-    public static void setCurrentThread(ALCapabilities caps) {
+    public static void setCurrentThread(@Nullable ALCapabilities caps) {
         capabilitiesTLS.set(caps);
         icd.set(caps);
     }
@@ -121,8 +123,8 @@ public final class AL {
         return checkCapabilities(caps);
     }
 
-    private static ALCapabilities checkCapabilities(ALCapabilities caps) {
-        if (CHECKS && caps == null) {
+    private static ALCapabilities checkCapabilities(@Nullable ALCapabilities caps) {
+        if (caps == null) {
             throw new IllegalStateException(
                 "No ALCapabilities instance set for the current thread or process. Possible solutions:\n" +
                 "\ta) Call AL.createCapabilities() after making a context current.\n" +
@@ -140,6 +142,8 @@ public final class AL {
      * @return the ALCapabilities instance
      */
     public static ALCapabilities createCapabilities(ALCCapabilities alcCaps) {
+        FunctionProvider functionProvider = ALC.check(AL.functionProvider);
+
         ALCapabilities caps = null;
 
         try {
@@ -150,12 +154,12 @@ public final class AL {
                 throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
             }
 
-            long versionString = invokeP(GetString, AL_VERSION);
-            if (versionString == NULL || invokeI(GetError) != AL_NO_ERROR) {
+            String versionString = memASCIISafe(invokeP(GetString, AL_VERSION));
+            if (versionString == null || invokeI(GetError) != AL_NO_ERROR) {
                 throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
             }
 
-            APIVersion apiVersion = apiParseVersion(memASCII(versionString));
+            APIVersion apiVersion = apiParseVersion(versionString);
 
             int majorVersion = apiVersion.major;
             int minorVersion = apiVersion.minor;
@@ -176,19 +180,17 @@ public final class AL {
             }
 
             // Parse EXTENSIONS string
-            String extensionsString = memASCII(invokeP(GetString, AL_EXTENSIONS));
+            String extensionsString = memASCIISafe(invokeP(GetString, AL_EXTENSIONS));
             if (extensionsString != null) {
-                MemoryStack     stack     = stackGet();
+                MemoryStack stack = stackGet();
+
                 StringTokenizer tokenizer = new StringTokenizer(extensionsString);
                 while (tokenizer.hasMoreTokens()) {
                     String extName = tokenizer.nextToken();
-                    stack.push();
-                    try {
-                        if (invokePZ(IsExtensionPresent, memAddress(stack.ASCII(extName, true)))) {
+                    try (MemoryStack frame = stack.push()) {
+                        if (invokePZ(IsExtensionPresent, memAddress(frame.ASCII(extName, true)))) {
                             supportedExtensions.add(extName);
                         }
-                    } finally {
-                        stack.pop();
                     }
                 }
             }
@@ -208,13 +210,13 @@ public final class AL {
     }
 
     static ALCapabilities getICD() {
-        return icd.get();
+        return ALC.check(icd.get());
     }
 
     /** Function pointer provider. */
     private interface ICD {
-        default void set(ALCapabilities caps) {}
-        ALCapabilities get();
+        default void set(@Nullable ALCapabilities caps) {}
+        @Nullable ALCapabilities get();
     }
 
     /**
@@ -226,10 +228,11 @@ public final class AL {
      */
     private static class ICDStatic implements ICD {
 
+        @Nullable
         private static ALCapabilities tempCaps;
 
         @Override
-        public void set(ALCapabilities caps) {
+        public void set(@Nullable ALCapabilities caps) {
             if (tempCaps == null) {
                 tempCaps = caps;
             } else if (caps != null && caps != tempCaps && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
@@ -239,12 +242,14 @@ public final class AL {
         }
 
         @Override
+        @Nullable
         public ALCapabilities get() {
             return WriteOnce.caps;
         }
 
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
+            @Nullable
             private static final ALCapabilities caps = ICDStatic.tempCaps;
 
             static {

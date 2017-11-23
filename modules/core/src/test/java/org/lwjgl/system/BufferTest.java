@@ -17,22 +17,22 @@ import static org.testng.Assert.*;
 @Test
 public class BufferTest {
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLargeBufferNIO() {
         // ByteBuffer.allocateDirect supports up to Integer.MAX_VALUE bytes
-        BufferUtils.createShortBuffer(0x3FFFFFFF + 1);
+        expectThrows(IllegalArgumentException.class, () -> BufferUtils.createShortBuffer(0x3FFFFFFF + 1));
     }
 
     public void testLargeBuffer() {
-        ShortBuffer buffer = memCallocShort(0x3FFFFFFF + 1);
-        if (buffer == null) {
+        try {
+            ShortBuffer buffer = memCallocShort(0x3FFFFFFF + 1);
+
+            buffer.put(buffer.limit() - 1, (short)0xBEEF);
+            assertEquals(buffer.get(buffer.limit() - 1), (short)0xBEEF);
+
+            memFree(buffer);
+        } catch (OutOfMemoryError e) {
             throw new SkipException("Large buffer allocation failed."); // 32-bit JVM
         }
-
-        buffer.put(buffer.limit() - 1, (short)0xBEEF);
-        assertEquals(buffer.get(buffer.limit() - 1), (short)0xBEEF);
-
-        memFree(buffer);
     }
 
     private static long fillBuffer(JNINativeMethod.Buffer buffer) {

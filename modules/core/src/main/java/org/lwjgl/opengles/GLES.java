@@ -7,6 +7,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.egl.*;
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -48,8 +49,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class GLES {
 
+    @Nullable
     private static final APIVersion MAX_VERSION;
 
+    @Nullable
     private static FunctionProvider functionProvider;
 
     private static final ThreadLocal<GLESCapabilities> capabilitiesTLS = new ThreadLocal<>();
@@ -148,6 +151,7 @@ public final class GLES {
     }
 
     /** Returns the {@link FunctionProvider} for the OpenGL ES native library. */
+    @Nullable
     public static FunctionProvider getFunctionProvider() {
         return functionProvider;
     }
@@ -158,7 +162,7 @@ public final class GLES {
      * <p>This {@code GLESCapabilities} instance will be used by any OpenGL ES call in the current thread, until {@code setCapabilities} is called again with
      * a different value.</p>
      */
-    public static void setCapabilities(GLESCapabilities caps) {
+    public static void setCapabilities(@Nullable GLESCapabilities caps) {
         capabilitiesTLS.set(caps);
         ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
         icd.set(caps);
@@ -173,8 +177,8 @@ public final class GLES {
         return checkCapabilities(capabilitiesTLS.get());
     }
 
-    private static GLESCapabilities checkCapabilities(GLESCapabilities caps) {
-        if (CHECKS && caps == null) {
+    private static GLESCapabilities checkCapabilities(@Nullable GLESCapabilities caps) {
+        if (caps == null) {
             throw new IllegalStateException(
                 "No GLESCapabilities instance set for the current thread. Possible solutions:\n" +
                 "\ta) Call GLES.createCapabilities() after making a context current in the current thread.\n" +
@@ -194,6 +198,11 @@ public final class GLES {
      * @throws IllegalStateException if no OpenGL ES context is current in the current thread
      */
     public static GLESCapabilities createCapabilities() {
+        FunctionProvider functionProvider = GLES.functionProvider;
+        if (functionProvider == null) {
+            throw new IllegalStateException("OpenGL ES library not been loaded.");
+        }
+
         GLESCapabilities caps = null;
 
         try {
@@ -228,12 +237,12 @@ public final class GLES {
                     minorVersion = pi.get(0);
                 } else {
                     // Fallback to the string query.
-                    long versionString = callP(GetString, GL_VERSION);
-                    if (versionString == NULL || callI(GetError) != GL_NO_ERROR) {
+                    String versionString = memUTF8Safe(callP(GetString, GL_VERSION));
+                    if (versionString == null || callI(GetError) != GL_NO_ERROR) {
                         throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
                     }
 
-                    APIVersion version = apiParseVersion(memUTF8(versionString), "OpenGL ES");
+                    APIVersion version = apiParseVersion(versionString, "OpenGL ES");
 
                     majorVersion = version.major;
                     minorVersion = version.minor;
@@ -272,7 +281,7 @@ public final class GLES {
 
             if (majorVersion < 3) {
                 // Parse EXTENSIONS string
-                String extensionsString = memASCII(check(callP(GetString, GL_EXTENSIONS)));
+                String extensionsString = memASCIISafe(callP(GetString, GL_EXTENSIONS));
                 if (extensionsString != null) {
                     StringTokenizer tokenizer = new StringTokenizer(extensionsString);
                     while (tokenizer.hasMoreTokens()) {
@@ -292,11 +301,11 @@ public final class GLES {
 
                 long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
                 for (int i = 0; i < extensionCount; i++) {
-                    supportedExtensions.add(memASCII(check(callP(GetStringi, GL_EXTENSIONS, i))));
+                    supportedExtensions.add(memASCII(callP(GetStringi, GL_EXTENSIONS, i)));
                 }
             }
 
-            caps = new GLESCapabilities(getFunctionProvider(), supportedExtensions);
+            caps = new GLESCapabilities(functionProvider, supportedExtensions);
         } finally {
             setCapabilities(caps);
         }
@@ -306,13 +315,13 @@ public final class GLES {
 
     // Only used by array overloads
     static GLESCapabilities getICD() {
-        return icd.get();
+        return checkCapabilities(icd.get());
     }
 
     /** Function pointer provider. */
     private interface ICD {
-        default void set(GLESCapabilities caps) {}
-        GLESCapabilities get();
+        default void set(@Nullable GLESCapabilities caps) {}
+        @Nullable GLESCapabilities get();
     }
 
     /**
@@ -323,10 +332,11 @@ public final class GLES {
      */
     private static class ICDStatic implements ICD {
 
+        @Nullable
         private static GLESCapabilities tempCaps;
 
         @Override
-        public void set(GLESCapabilities caps) {
+        public void set(@Nullable GLESCapabilities caps) {
             if (tempCaps == null) {
                 tempCaps = caps;
             } else if (caps != null && caps != tempCaps && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
@@ -336,12 +346,14 @@ public final class GLES {
         }
 
         @Override
+        @Nullable
         public GLESCapabilities get() {
             return WriteOnce.caps;
         }
 
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
+            @Nullable
             private static final GLESCapabilities caps = ICDStatic.tempCaps;
 
             static {

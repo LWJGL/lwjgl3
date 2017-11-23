@@ -5,17 +5,43 @@
 package org.lwjgl.system;
 
 import org.lwjgl.*;
+import org.testng.*;
 import org.testng.annotations.*;
 
 import java.nio.*;
 import java.nio.charset.*;
+import java.util.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
 import static org.testng.Assert.*;
 
 @Test
 public class MemoryUtilTest {
+
+    public void testZeroAllocation() {
+        long address = nmemAllocChecked(0);
+        assertEquals(address, NULL);
+        nmemFree(address);
+
+        address = nmemCallocChecked(1, 0);
+        assertEquals(address, NULL);
+        nmemFree(address);
+
+        address = nmemCallocChecked(0, 8);
+        assertEquals(address, NULL);
+        nmemFree(address);
+    }
+
+    public void testOOME() {
+        if (!CHECKS) {
+            throw new SkipException("This test may not run with checks disabled.");
+        }
+
+        expectThrows(OutOfMemoryError.class, () -> nmemAllocChecked(-1L));
+        expectThrows(OutOfMemoryError.class, () -> nmemCallocChecked(1, -1L));
+    }
 
     public void testMemSet() {
         ByteBuffer buffer = BufferUtils.createByteBuffer(32);
@@ -80,7 +106,7 @@ public class MemoryUtilTest {
         long address = GetDirectBufferAddress(buffer);
         assertTrue(address != NULL);
 
-        ByteBuffer view = NewDirectByteBuffer(address + 8, 16);
+        ByteBuffer view = Objects.requireNonNull(NewDirectByteBuffer(address + 8, 16));
         assertEquals(view.order(), ByteOrder.BIG_ENDIAN);
         for (int i = 0; i < view.capacity(); i++) {
             assertEquals(view.get(i), buffer.get(i + 8));

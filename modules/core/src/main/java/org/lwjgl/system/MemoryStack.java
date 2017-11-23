@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
@@ -522,7 +523,7 @@ public class MemoryStack implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using ASCII encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
      *
-     * @param text the text to encode. If {@code text} is null, null is returned.
+     * @param text the text to encode
      */
     public ByteBuffer ASCII(CharSequence text) {
         return ASCII(text, true);
@@ -531,23 +532,31 @@ public class MemoryStack implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using ASCII encoding and returns a ByteBuffer that points to the encoded text.
      *
-     * @param text           the text to encode. If {@code text} is null, null is returned.
+     * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
-        if (text == null) {
-            return null;
-        }
-
         ByteBuffer encoded = malloc(memLengthASCII(text, nullTerminated));
         memASCII(text, nullTerminated, encoded);
         return encoded;
     }
 
+    /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public ByteBuffer ASCIISafe(@Nullable CharSequence text) {
+        return ASCIISafe(text, true);
+    }
+
+    /** Like {@link #ASCII(CharSequence, boolean) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public ByteBuffer ASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? null : ASCII(text, nullTerminated);
+    }
+
     /**
      * Encodes the specified text on the stack using UTF8 encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
      *
-     * @param text the text to encode. If {@code text} is null, null is returned.
+     * @param text the text to encode
      */
     public ByteBuffer UTF8(CharSequence text) {
         return UTF8(text, true);
@@ -556,23 +565,31 @@ public class MemoryStack implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using UTF8 encoding and returns a ByteBuffer that points to the encoded text.
      *
-     * @param text           the text to encode. If {@code text} is null, null is returned.
+     * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
-        if (text == null) {
-            return null;
-        }
-
         ByteBuffer encoded = malloc(memLengthUTF8(text, nullTerminated));
         memUTF8(text, nullTerminated, encoded);
         return encoded;
     }
 
+    /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public ByteBuffer UTF8Safe(@Nullable CharSequence text) {
+        return UTF8Safe(text, true);
+    }
+
+    /** Like {@link #UTF8(CharSequence, boolean) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public ByteBuffer UTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? null : UTF8(text, nullTerminated);
+    }
+
     /**
      * Encodes the specified text on the stack using UTF16 encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
      *
-     * @param text the text to encode. If {@code text} is null, null is returned.
+     * @param text the text to encode
      */
     public ByteBuffer UTF16(CharSequence text) {
         return UTF16(text, true);
@@ -581,17 +598,25 @@ public class MemoryStack implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using UTF16 encoding and returns a ByteBuffer that points to the encoded text.
      *
-     * @param text           the text to encode. If {@code text} is null, null is returned.
+     * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
-        if (text == null) {
-            return null;
-        }
-
         ByteBuffer encoded = malloc(2, memLengthUTF16(text, nullTerminated));
         memUTF16(text, nullTerminated, encoded);
         return encoded;
+    }
+
+    /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public ByteBuffer UTF16Safe(@Nullable CharSequence text) {
+        return UTF16Safe(text, true);
+    }
+
+    /** Like {@link #UTF16(CharSequence, boolean) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
+    @Nullable
+    public ByteBuffer UTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? null : UTF16(text, nullTerminated);
     }
 
     // -----------------------------------------------------
@@ -784,5 +809,23 @@ public class MemoryStack implements AutoCloseable {
 
     /** Thread-local version of {@link #UTF16(CharSequence, boolean)}. */
     public static ByteBuffer stackUTF16(CharSequence text, boolean nullTerminated) { return stackGet().UTF16(text, nullTerminated); }
+
+    /** Thread-local version of {@link #ASCII(CharSequence)}. */
+    @Nullable public static ByteBuffer stackASCIISafe(@Nullable CharSequence text) { return stackGet().ASCIISafe(text); }
+
+    /** Thread-local version of {@link #ASCII(CharSequence, boolean)}. */
+    @Nullable public static ByteBuffer stackASCIISafe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().ASCIISafe(text, nullTerminated); }
+
+    /** Thread-local version of {@link #UTF8(CharSequence)}. */
+    @Nullable public static ByteBuffer stackUTF8Safe(@Nullable CharSequence text) { return stackGet().UTF8Safe(text); }
+
+    /** Thread-local version of {@link #UTF8(CharSequence, boolean)}. */
+    @Nullable public static ByteBuffer stackUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().UTF8Safe(text, nullTerminated); }
+
+    /** Thread-local version of {@link #UTF16(CharSequence)}. */
+    @Nullable public static ByteBuffer stackUTF16Safe(@Nullable CharSequence text) { return stackGet().UTF16Safe(text); }
+
+    /** Thread-local version of {@link #UTF16(CharSequence, boolean)}. */
+    @Nullable public static ByteBuffer stackUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) { return stackGet().UTF16Safe(text, nullTerminated); }
 
 }
