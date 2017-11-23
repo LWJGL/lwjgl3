@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_texture_compression_rgtc = "EXTTextureCompressionRGTC".nativeClassGLES("EXT_texture_compression_rgtc", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "texture_compression_dxt1")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension introduces four new block-based texture compression formats suited for unsigned and signed red and red-green textures (hence the name
         "rgtc" for Red-Green Texture Compression).

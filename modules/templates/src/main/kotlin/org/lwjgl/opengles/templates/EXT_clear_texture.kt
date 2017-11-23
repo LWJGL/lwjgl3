@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_clear_texture = "EXTClearTexture".nativeClassGLES("EXT_clear_texture", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "EXT_clear_texture")} extension.
+        Native bindings to the $registryLink extension.
 
         Texture objects are fundamental to the operation of OpenGL. They are used as a source for texture sampling and destination for rendering as well as
         being accessed in shaders for image load/store operations It is also possible to invalidate the contents of a texture. It is currently only possible to

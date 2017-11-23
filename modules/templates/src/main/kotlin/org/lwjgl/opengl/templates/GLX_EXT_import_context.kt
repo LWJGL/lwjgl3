@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_import_context", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "import_context")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows multiple X clients to share an indirect rendering context.
 

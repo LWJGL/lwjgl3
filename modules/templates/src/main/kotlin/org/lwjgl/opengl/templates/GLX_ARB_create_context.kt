@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_create_context", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "glx_create_context")} extension.
+        Native bindings to the $registryLink extension.
 
         With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
         to indicate at context creation which interface will be used. These extensions add a new context creation routine with attributes specifying the GL

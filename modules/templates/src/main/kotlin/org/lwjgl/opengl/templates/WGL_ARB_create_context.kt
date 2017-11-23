@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_create_context", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_create_context")} extension.
+        Native bindings to the $registryLink extension.
 
         With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
         to indicate at context creation which interface will be used. This extension add a new context creation routine with attributes specifying the GL

@@ -2425,7 +2425,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "AllocHandle",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms712455.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlallochandle-function">MSDN Reference</a>
 
         Allocates an environment, connection, statement, or descriptor handle.
         """,
@@ -2453,7 +2453,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLConnectW")..SQLRETURN(
         "Connect",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms711810.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlconnect-function">MSDN Reference</a>
 
         Establishes connections to a driver and a data source. The connection handle references storage of all information about the connection to the data
         source, including status, transaction state, and error information.
@@ -2480,7 +2480,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLDataSourcesW")..SQLRETURN(
         "DataSources",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms711004.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldatasources-function">MSDN Reference</a>
 
         Returns information about a data source. This function is implemented only by the Driver Manager.
         """,
@@ -2546,7 +2546,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLGetInfoW")..SQLRETURN(
         "GetInfo",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms711681.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetinfo-function">MSDN Reference</a>
 
         Returns general information about the driver and data source associated with a connection.
         """,
@@ -2563,7 +2563,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetFunctions",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms709291.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetfunctions-function">MSDN Reference</a>
 
         Returns information about whether a driver supports a specific ODBC function. This function is implemented in the Driver Manager; it can also be
         implemented in drivers. If a driver implements SQLGetFunctions, the Driver Manager calls the function in the driver. Otherwise, it executes the
@@ -2578,7 +2578,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetTypeInfo",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714632.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgettypeinfo-function">MSDN Reference</a>
 
         Returns information about data types supported by the data source. The driver returns the information in the form of an SQL result set. The data types
         are intended for use in Data Definition Language (DDL) statements.
@@ -2601,7 +2601,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "SetConnectAttr",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713605.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function">MSDN Reference</a>
 
         Sets attributes that govern aspects of connections.
         """,
@@ -2647,7 +2647,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetConnectAttr",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710297.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetconnectattr-function">MSDN Reference</a>
 
         Returns the current setting of a connection attribute.
         """,
@@ -2662,7 +2662,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "SetEnvAttr",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms709285.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetenvattr-function">MSDN Reference</a>
 
         Sets attributes that govern aspects of environments.
         """,
@@ -2690,7 +2690,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetEnvAttr",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms709276.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetenvattr-function">MSDN Reference</a>
 
         Returns the current setting of a connection attribute.
         """,
@@ -2705,7 +2705,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "SetStmtAttr",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms712631.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetstmtattr-function">MSDN Reference</a>
 
         Sets attributes related to a statement.
         """,
@@ -2719,7 +2719,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetStmtAttr",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms715438.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetstmtattr-function">MSDN Reference</a>
 
         Returns the current setting of a statement attribute.
         """,
@@ -2738,7 +2738,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetDescField",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms716370.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdescfield-function">MSDN Reference</a>
 
         Returns the current setting or value of a single field of a descriptor record.
         """,
@@ -2754,7 +2754,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLGetDescRecW")..SQLRETURN(
         "GetDescRec",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710921.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdescrec-function">MSDN Reference</a>
 
         Returns the current settings or values of multiple fields of a descriptor record. The fields returned describe the name, data type, and storage of
         column or parameter data.
@@ -2776,7 +2776,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "SetDescField",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713560.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetdescfield-function">MSDN Reference</a>
 
         Sets the value of a single field of a descriptor record.
         """,
@@ -2791,7 +2791,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "SetDescRec",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714675.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetdescrec-function">MSDN Reference</a>
 
         Sets multiple descriptor fields that affect the data type and buffer bound to a column or parameter data.
         """,
@@ -2811,7 +2811,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "CopyDesc",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms715378.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcopydesc-function">MSDN Reference</a>
 
         Copies descriptor information from one descriptor handle to another.
         """,
@@ -2827,7 +2827,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLPrepareW")..SQLRETURN(
         "Prepare",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710926.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlprepare-function">MSDN Reference</a>
 
         Prepares an SQL string for execution.
         """,
@@ -2840,7 +2840,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLGetCursorNameW")..SQLRETURN(
         "GetCursorName",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms716209.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetcursorname-function">MSDN Reference</a>
 
         Returns the cursor name associated with a specified statement.
         """,
@@ -2854,7 +2854,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLSetCursorNameW")..SQLRETURN(
         "SetCursorName",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms711707.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetcursorname-function">MSDN Reference</a>
 
         Associates a cursor name with an active statement. If an application does not call SQLSetCursorName, the driver generates cursor names as needed for
         SQL statement processing.
@@ -2872,7 +2872,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "Execute",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713584.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlexecute-function">MSDN Reference</a>
 
         Executes a prepared statement, using the current values of the parameter marker variables if any parameter markers exist in the statement.
         """,
@@ -2883,7 +2883,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLExecDirectW")..SQLRETURN(
         "ExecDirect",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713611.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlexecdirect-function">MSDN Reference</a>
 
         Executes a preparable statement, using the current values of the parameter marker variables if any parameters exist in the statement. SQLExecDirect is
         the fastest way to submit an SQL statement for one-time execution.
@@ -2897,7 +2897,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "ParamData",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms712366.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlparamdata-function">MSDN Reference</a>
 
         SQLParamData is used together with #PutData() to supply parameter data at statement execution time, and with #GetData() to retrieve streamed output
         parameter data.
@@ -2910,7 +2910,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "PutData",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713824.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlputdata-function">MSDN Reference</a>
 
         Allows an application to send data for a parameter or column to the driver at statement execution time. This function can be used to send character or
         binary data values in parts to a column with a character, binary, or data source–specific data type (for example, parameters of the #LONGVARBINARY or
@@ -2929,7 +2929,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "RowCount",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms711835.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlrowcount-function">MSDN Reference</a>
 
         Returns the number of rows affected by an UPDATE, INSERT, or DELETE statement; an #ADD, #UPDATE_BY_BOOKMARK, or #DELETE_BY_BOOKMARK operation in
         #BulkOperations(); or an #UPDATE or #DELETE operation in #SetPos().
@@ -2942,7 +2942,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "NumResultCols",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms715393.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlnumresultcols-function">MSDN Reference</a>
 
         Returns the number of columns in a result set.
         """,
@@ -2954,7 +2954,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLDescribeColW")..SQLRETURN(
         "DescribeCol",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms716289.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldescribecol-function">MSDN Reference</a>
 
         Returns the result descriptor — column name,type, column size, decimal digits, and nullability — for one column in the result set. This information
         also is available in the fields of the IRD.
@@ -2974,7 +2974,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "ColAttribute",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713558.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcolattribute-function">MSDN Reference</a>
 
         Returns descriptor information for a column in a result set. Descriptor information is returned as a character string, a descriptor-dependent value, or
         an integer value.
@@ -2992,7 +2992,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "BindCol",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms711010.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindcol-function">MSDN Reference</a>
 
         Binds application data buffers to columns in the result set.
         """,
@@ -3014,7 +3014,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "Fetch",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms712424.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlfetch-function">MSDN Reference</a>
 
         Fetches the next rowset of data from the result set and returns data for all bound columns.
         """,
@@ -3025,7 +3025,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "FetchScroll",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714682.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlfetchscroll-function">MSDN Reference</a>
 
         Fetches the specified rowset of data from the result set and returns data for all bound columns. Rowsets can be specified at an absolute or relative
         position or by bookmark.
@@ -3039,7 +3039,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetData",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms715441.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdata-function">MSDN Reference</a>
 
         Retrieves data for a single column in the result set or for a single parameter after #ParamData() returns #PARAM_DATA_AVAILABLE. It can be called
         multiple times to retrieve variable-length data in parts.
@@ -3056,7 +3056,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "GetDiagField",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710181.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdiagfield-function">MSDN Reference</a>
 
         Returns the current value of a field of a record of the diagnostic data structure (associated with a specified handle) that contains error, warning,
         and status information.
@@ -3133,7 +3133,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLGetDiagRecW")..SQLRETURN(
         "GetDiagRec",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms716256.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdiagrec-function">MSDN Reference</a>
 
         Returns the current values of multiple fields of a diagnostic record that contains error, warning, and status information. Unlike #GetDiagField(),
         which returns one diagnostic field per call, SQLGetDiagRec returns several commonly used fields of a diagnostic record, including the SQLSTATE, the
@@ -3163,7 +3163,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "FreeStmt",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms709284.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlfreestmt-function">MSDN Reference</a>
 
         Stops processing associated with a specific statement, closes any open cursors associated with the statement, discards pending results, or, optionally,
         frees all resources associated with the statement handle.
@@ -3176,7 +3176,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "CloseCursor",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms709301.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlclosecursor-function">MSDN Reference</a>
 
         Closes a cursor that has been opened on a statement and discards pending results.
         """,
@@ -3187,7 +3187,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "Cancel",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714112.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcancel-function">MSDN Reference</a>
 
         Cancels the processing on a statement.
 
@@ -3200,7 +3200,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "CancelHandle",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ee388578.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcancelhandle-function">MSDN Reference</a>
 
         Cancels the processing on a connection or statement. The Driver Manager maps a call to SQLCancelHandle to a call to #Cancel() when {@code HandleType}
         is #HANDLE_STMT.
@@ -3213,7 +3213,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "EndTran",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms716544.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlendtran-function">MSDN Reference</a>
 
         Requests a commit or rollback operation for all active operations on all statements associated with a connection. SQLEndTran can also request that a
         commit or rollback operation be performed for all connections associated with an environment.
@@ -3231,7 +3231,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "Disconnect",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713946.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldisconnect-function">MSDN Reference</a>
 
         Closes the connection associated with a specific connection handle.
         """,
@@ -3242,7 +3242,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "FreeHandle",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710123.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlfreehandle-function">MSDN Reference</a>
 
         Frees resources associated with a specific environment, connection, statement, or descriptor handle.
         """,
@@ -3259,7 +3259,10 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
         "CompleteAsync",
         """
         SQLCompleteAsync can be used to determine when an asynchronous function is complete using either notification- or polling-based processing. For more
-        information about asynchronous operations, see <a href="https://msdn.microsoft.com/en-us/library/hh405040.aspx">Asynchronous Execution</a>.
+        information about asynchronous operations, see ${url(
+            "https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/asynchronous-execution",
+            "Asynchronous Execution"
+        )}.
 
         SQLCompleteAsync is only implemented in the ODBC Driver Manager.
 
@@ -3405,7 +3408,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLDriverConnectW")..SQLRETURN(
         "DriverConnect",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms715433.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function">MSDN Reference</a>
 
         SQLDriverConnect is an alternative to #Connect(). It supports data sources that require more connection information than the three arguments in
         SQLConnect, dialog boxes to prompt the user for all connection information, and data sources that are not defined in the system information.
@@ -3470,7 +3473,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLBrowseConnectW")..SQLRETURN(
         "BrowseConnect",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714565.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbrowseconnect-function">MSDN Reference</a>
 
         Supports an iterative method of discovering and enumerating the attributes and attribute values required to connect to a data source. Each call to
         SQLBrowseConnect returns successive levels of attributes and attribute values. When all levels have been enumerated, a connection to the data source is
@@ -3505,7 +3508,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "BulkOperations",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms712471.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbulkoperations-function">MSDN Reference</a>
 
         Performs bulk insertions and bulk bookmark operations, including update, delete, and fetch by bookmark.
         """,
@@ -3532,7 +3535,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "DescribeParam",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710188.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldescribeparam-function">MSDN Reference</a>
 
         Returns the description of a parameter marker associated with a prepared SQL statement. This information is also available in the fields of the IPD.
         """,
@@ -3578,7 +3581,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "MoreResults",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714673.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlmoreresults-function">MSDN Reference</a>
 
         Determines whether more results are available on a statement containing SELECT, UPDATE, INSERT, or DELETE statements and, if so, initializes processing
         for those results.
@@ -3590,7 +3593,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLNativeSqlW")..SQLRETURN(
         "NativeSql",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms714575.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlnativesql-function">MSDN Reference</a>
 
         Returns the SQL string as modified by the driver. SQLNativeSql does not execute the SQL statement.
         """,
@@ -3606,7 +3609,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "NumParams",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms715409.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlnumparams-function">MSDN Reference</a>
 
         Returns the number of parameters in an SQL statement.
         """,
@@ -3668,7 +3671,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "SetPos",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms713507.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetpos-function">MSDN Reference</a>
 
         Sets the cursor position in a rowset and allows an application to refresh data in the rowset or to update or delete data in the result set.
         """,
@@ -3695,7 +3698,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     NativeName("SQLDriversW")..SQLRETURN(
         "Drivers",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms712400.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldrivers-function">MSDN Reference</a>
 
         Lists driver descriptions and driver attribute keywords. This function is implemented only by the Driver Manager.""",
 
@@ -3712,7 +3715,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
     SQLRETURN(
         "BindParameter",
         """
-        <a href="https://msdn.microsoft.com/en-us/library/ms710963.aspx">MSDN Reference</a>
+        <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindparameter-function">MSDN Reference</a>
 
         Binds a buffer to a parameter marker in an SQL statement. SQLBindParameter supports binding to a Unicode C data type, even if the underlying driver
         does not support Unicode data.

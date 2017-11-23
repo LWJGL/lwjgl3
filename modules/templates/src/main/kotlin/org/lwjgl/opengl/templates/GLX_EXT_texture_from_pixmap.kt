@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_EXT_texture_from_pixmap", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "texture_from_pixmap")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows a color buffer to be used for both rendering and texturing.
 

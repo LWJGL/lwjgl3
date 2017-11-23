@@ -18,10 +18,10 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
             """
             Integrate multiple disjoint extensions into a single ARB extension. These extensions are:
             ${ul(
-                registryLinkTo("EXT", "framebuffer_object"),
-                registryLinkTo("EXT", "framebuffer_blit"),
-                registryLinkTo("EXT", "framebuffer_multisample"),
-                registryLinkTo("EXT", "packed_depth_stencil")
+                EXT_framebuffer_object.link,
+                EXT_framebuffer_blit.link,
+                EXT_framebuffer_multisample.link,
+                EXT_packed_depth_stencil.link
             )}
             """,
             """

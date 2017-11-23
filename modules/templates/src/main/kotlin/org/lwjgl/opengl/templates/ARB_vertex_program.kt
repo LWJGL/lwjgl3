@@ -14,10 +14,10 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         Unextended OpenGL mandates a certain set of configurable per-vertex computations defining vertex transformation, texture coordinate generation and
         transformation, and lighting. Several extensions have added further per-vertex computations to OpenGL. For example, extensions have defined new texture
-        coordinate generation modes (${ARB_texture_cube_map.link}, ${registryLinkTo("NV", "texgen_reflection")}, ${registryLinkTo("NV", "texgen_emboss")}),
-        new vertex transformation modes (${ARB_vertex_blend.link}, ${registryLinkTo("EXT", "vertex_weighting")}), new lighting modes (OpenGL 1.2's separate
-        specular and rescale normal functionality), several modes for fog distance generation (${registryLinkTo("NV", "fog_distance")}), and eye-distance point
-        size attenuation (${ARB_point_parameters.link}).
+        coordinate generation modes (${ARB_texture_cube_map.link}, ${NV_texgen_reflection.link}, ${registryLinkTo("NV", "texgen_emboss")}), new vertex
+        transformation modes (${ARB_vertex_blend.link}, ${registryLinkTo("EXT", "vertex_weighting")}), new lighting modes (OpenGL 1.2's separate specular and
+        rescale normal functionality), several modes for fog distance generation (${NV_fog_distance.link}), and eye-distance point size attenuation
+        (${ARB_point_parameters.link}).
 
         Each such extension adds a small set of relatively inflexible per-vertex computations.
 

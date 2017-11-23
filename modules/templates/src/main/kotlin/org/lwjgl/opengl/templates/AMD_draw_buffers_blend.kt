@@ -18,7 +18,7 @@ val AMD_draw_buffers_blend = "AMDDrawBuffersBlend".nativeClassGL("AMD_draw_buffe
 
         This extension provides the ability to set individual blend equations and blend functions for each color output.
 
-        Requires ${GL20.core} and ${registryLink("EXT", "draw_buffers2")}.
+        Requires ${GL20.core} and ${EXT_draw_buffers2.link}.
         """
 
     void(

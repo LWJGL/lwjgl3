@@ -37,7 +37,7 @@ val ARB_separate_shader_objects = "ARBSeparateShaderObjects".nativeClassGL("ARB_
         While #ActiveShaderProgram() allows the use of conventional Uniform* commands to update uniform variable values for separable program objects, this
         extension provides a preferrable interface in a set of ProgramUniform* commands that update the same uniform variables but take a parameter indicating
         the program object to be updated, rather than updating the currently active program object. These commands mirror those introduced in
-        ${registryLinkTo("EXT", "direct_state_access")}.
+        ${EXT_direct_state_access.link}.
 
         While #ActiveShaderProgram() provides a selector for setting and querying uniform values of a program object, the glProgramUniform* commands provide a
         selector-free way to modify uniforms of a GLSL program object without an explicit bind. This selector-free model reduces API overhead and provides a
@@ -47,8 +47,8 @@ val ARB_separate_shader_objects = "ARBSeparateShaderObjects".nativeClassGL("ARB_
         case, the output varyings are simply ignored. It is also possible input varyings from a shader may not be written as output varyings of a preceding
         shader. In this case, the unwritten input varying values are undefined.
 
-        This extension builds on the proof-of-concept provided by ${registryLinkTo("EXT", "separate_shader_objects")} which demonstrated that separate shader
-        objects can work for GLSL. EXT_separate_shader_objects was a response to repeated requests for this functionality from 3D developers.
+        This extension builds on the proof-of-concept provided by ${EXT_separate_shader_objects.link} which demonstrated that separate shader objects can work
+        for GLSL. {@code EXT_separate_shader_objects} was a response to repeated requests for this functionality from 3D developers.
 
         This ARB version addresses several "loose ends" in the prior EXT extension. In particular, it allows user-defined varyings with explicitly defined
         locations or implicitly assigned locations.

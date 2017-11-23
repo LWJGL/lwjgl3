@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KHR_blend_equation_advanced", postfix = KHR) {
     documentation =
         """
-        Native bindings to the ${registryLink("KHR", "blend_equation_advanced")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds a number of "advanced" blending equations that can be used to perform new color blending operations, many of which are more complex
         than the standard blend modes provided by unextended OpenGL. This extension provides two different extension string entries:
@@ -89,7 +89,7 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KH
 val KHR_blend_equation_advanced_coherent = "KHRBlendEquationAdvancedCoherent".nativeClassGLES("KHR_blend_equation_advanced_coherent", postfix = KHR) {
     documentation =
         """
-        Native bindings to the ${registryLink("KHR", "blend_equation_advanced")} extension.
+        Native bindings to the ${registryLink("KHR_blend_equation_advanced")} extension.
 
         This extension guarantees that blending is done coherently and in API primitive order. An enable is provided to allow implementations to opt out of
         fully coherent blending and instead behave as though only ${KHR_blend_equation_advanced.link} were supported.

@@ -25,7 +25,7 @@ val OES_texture_float = EXT_FLAG.nativeClassGLES("OES_texture_float", postfix = 
 val OES_texture_half_float = "OESTextureHalfFloat".nativeClassGLES("OES_texture_half_float", postfix = OES) {
     documentation =
         """
-        Native bindings to the ${registryLink("OES", "OES_texture_float")} extension.
+        Native bindings to the ${registryLink("OES_texture_float")} extension.
 
         These extensions add texture formats with 16- (aka half float) and 32-bit floating-point components. The 32-bit floating-point components are in the
         standard IEEE float format. The 16-bit floating-point components have 1 sign bit, 5 exponent bits, and 10 mantissa bits. Floating-point components are

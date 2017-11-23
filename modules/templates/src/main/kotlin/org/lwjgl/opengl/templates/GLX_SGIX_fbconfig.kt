@@ -13,7 +13,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 
     documentation =
         """
-        Native bindings to the ${registryLink("SGIX", "fbconfig")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension introduces a new way to describe the capabilities of a GLX drawable (i.e., to describe the depth of color buffer components and the type
         and size of ancillary buffers), removes the "similarity" requirement when making a context current to a drawable, and supports  RGBA rendering to

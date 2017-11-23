@@ -26,8 +26,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
         Textures or render buffers with unnormalized integer formats may also be attached to framebuffer objects to receive fragment color values written by a
         fragment shader. Per-fragment operations that require floating-point color components, including multisample alpha operations, alpha test, blending, and
         dithering, have no effect when the corresponding colors are written to an integer color buffer. The ${registryLinkTo("NV", "gpu_program4")} and
-        ${registryLinkTo("EXT", "gpu_shader4")} extensions add the capability to fragment programs and fragment shaders to write signed and unsigned integer
-        output values.
+        ${EXT_gpu_shader4.link} extensions add the capability to fragment programs and fragment shaders to write signed and unsigned integer output values.
 
         This extension does not enforce type consistency for texture accesses or between fragment shaders and the corresponding framebuffer attachments. The
         results of a texture lookup from an integer texture are undefined:
@@ -41,7 +40,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
             "for fragment shaders that write floating-point color components to an integer color buffer, or",
             "for fragment shaders that write integer color components to a color buffer with floating point or normalized integer components."
         )}
-        Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${registryLinkTo("EXT", "gpu_shader4")}. ${GL30.promoted}
+        Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${EXT_gpu_shader4.link}. ${GL30.promoted}
         """
 
     IntConstant(

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGL("EXT_separate_shader_objects", postfix = EXT) {
     documentation =
         """
-        Native bindings to the $registryLink extension.
+        Native bindings to the ${registryLink("EXT_separate_shader_objects.gl")} extension.
 
         rior to this extension, GLSL requires multiple shader domains (vertex, fragment, geometry) to be linked into a single monolithic program object to
         specify a GLSL shader for each domain.

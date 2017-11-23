@@ -32,7 +32,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
             registryLinkTo("SGI", "color_matrix"),
             registryLinkTo("EXT", "histogram"),
             registryLinkTo("EXT", "blend_color"),
-            "${registryLinkTo("EXT", "blend_minmax")} and ${registryLinkTo("EXT", "EXT_blend_subtract")}"
+            "${registryLinkTo("EXT", "blend_minmax")} and ${registryLinkTo("EXT", "blend_subtract")}"
         )}
         """
 

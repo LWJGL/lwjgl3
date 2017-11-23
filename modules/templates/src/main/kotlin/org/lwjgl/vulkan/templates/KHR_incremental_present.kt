@@ -34,7 +34,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

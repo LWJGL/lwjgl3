@@ -272,17 +272,20 @@ fun String.nativeClassGL(
     }
 )
 
-private val REGISTRY_PATTERN = "([A-Z]+)_(\\w+)".toRegex()
+private val REGISTRY_PATTERN = "([A-Z]+)_\\w+".toRegex()
 val NativeClass.registryLink: String
-    get() = (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName"))
-        .destructured
-        .let { (group, extension) ->
-            url("http://www.opengl.org/registry/specs/$group/$extension.txt", templateName)
-        }
+    get() = url("https://www.khronos.org/registry/OpenGL/extensions/${if (postfix.isNotEmpty()) postfix else {
+        (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName")).groups[1]!!.value
+    }}/$templateName.txt", templateName)
 
-fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
-fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
-    url("http://www.opengl.org/registry/specs/$prefix/$name.txt", extensionName)
+fun NativeClass.registryLink(group: String, name: String): String =
+    url("https://www.khronos.org/registry/OpenGL/extensions/$group/${group}_$name.txt", templateName)
+fun NativeClass.registryLink(spec: String): String =
+    url("https://www.khronos.org/registry/OpenGL/extensions/$postfix/$spec.txt", templateName)
+
+fun registryLinkTo(group: String, name: String): String = "${group}_$name".let {
+    url("https://www.khronos.org/registry/OpenGL/extensions/$group/$it.txt", it)
+}
 
 val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
 val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"

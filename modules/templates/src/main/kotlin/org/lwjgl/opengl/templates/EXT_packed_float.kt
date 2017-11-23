@@ -52,7 +52,7 @@ val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfi
 val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "packed_float")} extension.
+        Native bindings to the ${registryLink("EXT_packed_float")} extension.
 
         This extension adds a new 3-component floating-point texture format that fits within a single 32-bit word.  This format stores 5 bits of biased exponent
         per component in the same manner as 16-bit floating-point formats, but rather than 10 mantissa bits, the red, green, and blue components have 6, 6, and
@@ -88,7 +88,7 @@ val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("
 val WGL_EXT_pixel_format_packed_float = "WGLEXTPixelFormatPackedFloat".nativeClassWGL("WGL_EXT_pixel_format_packed_float", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "packed_float")} extension.
+        Native bindings to the ${registryLink("EXT_packed_float")} extension.
 
         This extension provides support for rendering into an unsigned floating-point rendering format with the assumption that the texture format described in
         ##EXTPackedFloat could also be advertised as an unsigned floating-point format for rendering.

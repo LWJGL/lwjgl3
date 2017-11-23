@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_EXT_create_context_es_profile = "GLXEXTCreateContextESProfile".nativeClassGLX("GLX_EXT_create_context_es_profile", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "glx_create_context_es2_profile")} extension.
+        Native bindings to the ${registryLink("WGL_EXT_create_context_es2_profile")} extension.
 
         This extension allows creating an OpenGL ES context.
 
@@ -27,7 +27,7 @@ val GLX_EXT_create_context_es_profile = "GLXEXTCreateContextESProfile".nativeCla
 val GLX_EXT_create_context_es2_profile = "GLXEXTCreateContextES2Profile".nativeClassGLX("GLX_EXT_create_context_es2_profile", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "glx_create_context_es2_profile")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows creating an OpenGL ES context.
 

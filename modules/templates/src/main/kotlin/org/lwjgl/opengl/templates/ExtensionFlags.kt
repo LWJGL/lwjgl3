@@ -235,7 +235,7 @@ val ARB_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("ARB_robust_buffe
         Requires ${ARB_robustness.link}. ${GL43.promoted}
         """
 }
-val ARB_robustness_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_isolation", postfix = ARB) {
+val ARB_robustness_application_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_application_isolation", postfix = ARB) {
     documentation =
         """
         When true, the $registryLink extension is supported.
@@ -248,7 +248,35 @@ val ARB_robustness_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_isolation"
         expected that implementations might only advertise the strings in this extension if both the implementation supports the desired isolation properties,
         and the context was created with the appropriate reset isolation bit.
 
+        If the graphics driver advertises the {@code GL_ARB_robustness_application_isolation} extension string, then the driver guarantees that if a particular
+        application causes a graphics reset to occur:
+        ${ol(
+            "No other application on the system is affected by the graphics reset.",
+            "No other application on the system receives any notification that the graphics reset occurred."
+        )}
+
         Requires ${ARB_robustness.link}. ${GL43.promoted}
+        """
+}
+val ARB_robustness_share_group_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_share_group_isolation", postfix = ARB) {
+    documentation =
+        """
+        When true, the ${registryLink("ARB_robustness_application_isolation")} extension is supported.
+
+        See ${ARB_robustness_application_isolation.cap}.
+
+        If the graphics driver advertises the {@code GL_ARB_robustness_share_group_isolation} extension string, then the driver guarantees that if a context in
+        a particular share group causes a graphics reset to occur:
+        ${ol(
+            """
+            No other share group within the application is affected by the graphics reset. Additionally, no other application on the system is affected by the
+            graphics reset.
+            """,
+            """
+            No other share group within the application receives any notification that the graphics reset occurred. Additionally, no other application on the
+            system receives any notification that the graphics reset occurred.
+            """
+        )}
         """
 }
 val ARB_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("ARB_shader_atomic_counter_ops", postfix = ARB) {
@@ -1035,7 +1063,7 @@ val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader
 
 val ATI_shader_texture_lod = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", postfix = ATI) { documentation = "When true, the $registryLink extension is supported." }
 
-val INTEL_fragment_shader_ordering = EXT_FLAG.nativeClassGL("INTEL_fragment_shader_ordering", postfix = ATI) {
+val INTEL_fragment_shader_ordering = EXT_FLAG.nativeClassGL("INTEL_fragment_shader_ordering", postfix = INTEL) {
     documentation =
         """
         When true, the $registryLink extension is supported.
@@ -1050,7 +1078,7 @@ val INTEL_fragment_shader_ordering = EXT_FLAG.nativeClassGL("INTEL_fragment_shad
         """
 }
 
-val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", postfix = ARB) {
+val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", postfix = KHR) {
     documentation =
         """
         When true, the $registryLink extension is supported.
@@ -1182,7 +1210,7 @@ val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", po
 
         This extension provides GLSL support for atomics targeting image uniforms (if GLSL 4.20, ${ARB_shader_image_load_store.cap}, or
         ${EXT_shader_image_load_store.cap} is supported) or floating-point pointers (if ${NV_gpu_shader5.cap} is supported). Additionally, assembly opcodes
-        for these operations is also provided if ${registryLink("NV", "gpu_program5")} is supported.
+        for these operations is also provided if ${registryLinkTo("NV", "gpu_program5")} is supported.
         """
 }
 val NV_shader_atomic_float64 = EXT_FLAG.nativeClassGL("NV_shader_atomic_float64", postfix = NV) {
@@ -1294,7 +1322,7 @@ val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = 
 val NVX_blend_equation_advanced_multi_draw_buffers = EXT_FLAG.nativeClassGL("NVX_blend_equation_advanced_multi_draw_buffers", postfix = NVX) {
     documentation =
         """
-        When true, the ${registryLink("NVX", "nvx_blend_equation_advanced_multi_draw_buffers")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension adds support for using advanced blend equations introduced with ${NV_blend_equation_advanced.link} (and standardized by
         ${KHR_blend_equation_advanced.link}) in conjunction with multiple draw buffers. The NV_blend_equation_advanced extension supports advanced blending
@@ -1322,7 +1350,7 @@ val OVR_multiview2 = "OVRMultiview2".nativeClassGL("OVR_multiview2", postfix = O
 val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_tear", postfix = EXT) {
     documentation =
         """
-        When true, the ${registryLink("EXT", "wgl_swap_control_tear")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension extends the existing ${WGL_EXT_swap_control.link} extension by allowing a negative {@code interval} parameter to
         WGLEXTSwapControl#wglSwapIntervalEXT(). The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
@@ -1332,10 +1360,10 @@ val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_te
 val WGL_NV_DX_interop2 = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "DX_interop2")} extension is supported.
+        When true, the $registryLink extension is supported.
 
-        This extension expands on the specification of ${registryLinkTo("NV", "DX_interop")} to add support for DirectX version 10, 10.1 and 11 resources.
+        This extension expands on the specification of ${WGL_NV_DX_interop.link} to add support for DirectX version 10, 10.1 and 11 resources.
 
-        Requires ${GL20.core} and ${registryLinkTo("NV", "DX_interop")}.
+        Requires ${GL20.core} and ${WGL_NV_DX_interop.link}.
         """
 }

@@ -29,10 +29,10 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_maintenance1">{@code VK_KHR_maintenance1}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_bind_memory2">{@code VK_KHR_bind_memory2}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_memory_requirements2">{@code VK_KHR_get_memory_requirements2}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_maintenance1">{@code VK_KHR_maintenance1}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_bind_memory2">{@code VK_KHR_bind_memory2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_memory_requirements2">{@code VK_KHR_get_memory_requirements2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -181,9 +181,9 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         <ul>
             <li>#SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR specifies that the input values to the conversion are unmodified.</li>
             <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR specifies no model conversion but the inputs are range expanded as for Y&#8217;C<sub>B</sub>C<sub>R</sub>.</li>
-            <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.709 and described in the “BT.709 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
-            <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.601 and described in the “BT.601 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
-            <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.2020 and described in the “BT.2020 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
+            <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.709 and described in the “BT.709 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
+            <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.601 and described in the “BT.601 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
+            <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.2020 and described in the “BT.2020 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
         </ul>
 
         In the etext:VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_*_KHR color models, for the input to the sampler Y'C<sub>B</sub>C<sub>R</sub> range expansion and model conversion:
@@ -229,7 +229,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <li>#SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR indicates that headroom and foot room are reserved in the numerical range of encoded values, and the remaining values are expanded according to the ITU “narrow range” quantization rules.</li>
         </ul>
 
-        The formulae for these conversions is described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-sampler-YCbCr-conversion-rangeexpand">Sampler Y'C<sub>B</sub>C<sub>R</sub> Range Expansion</a> section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures">Image Operations</a> chapter.
+        The formulae for these conversions is described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-sampler-YCbCr-conversion-rangeexpand">Sampler Y'C<sub>B</sub>C<sub>R</sub> Range Expansion</a> section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures">Image Operations</a> chapter.
 
         No range modification takes place if {@code ycbcrModel} is #SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR; the {@code ycbcrRange} field of ##VkSamplerYcbcrConversionCreateInfoKHR is ignored in this case.
 
@@ -275,11 +275,11 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 ￿    VkSamplerYcbcrConversionKHR*                pYcbcrConversion);</pre></code>
 
         <h5>Description</h5>
-        The interpretation of the configured sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is described in more detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures">Image Operations</a> chapter.
+        The interpretation of the configured sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is described in more detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures">Image Operations</a> chapter.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sampler-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion feature</a> <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-sampler-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion feature</a> <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -310,7 +310,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
         VkDevice.IN("device", "the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
         const..VkSamplerYcbcrConversionCreateInfoKHR.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSamplerYcbcrConversionCreateInfoKHR specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkSamplerYcbcrConversionKHR.p.OUT("pYcbcrConversion", "points to a {@code VkSamplerYcbcrConversionKHR} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.")
     )
 
@@ -347,6 +347,6 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
         VkDevice.IN("device", "the logical device that destroys the Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
         VkSamplerYcbcrConversionKHR.IN("ycbcrConversion", "the conversion to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 }

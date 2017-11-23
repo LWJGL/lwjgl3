@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val WGL_EXT_extensions_string = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", EXT) {
-    documentation = "Native bindings to the ${registryLink("EXT", "wgl_extensions_string")} extension."
+    documentation = "Native bindings to the $registryLink extension."
 
     const..charASCII_p(
         "GetExtensionsStringEXT",

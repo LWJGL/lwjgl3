@@ -110,7 +110,7 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 val NV_blend_equation_advanced_coherent = "NVBlendEquationAdvancedCoherent".nativeClassGL("NV_blend_equation_advanced_coherent", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "blend_equation_advanced")} extension.
+        Native bindings to the ${registryLink("NV_blend_equation_advanced")} extension.
 
         Similar to NV_blend_equation_advanced, but guarantees that blending is done coherently and in API primitive ordering. An enable is provided to allow
         implementations to opt out of fully coherent blending and instead behave as though only NV_blend_equation_advanced were supported.

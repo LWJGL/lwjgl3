@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EXT_separate_shader_objects", postfix = EXT) {
     documentation =
         """
-        Native bindings to the $registryLink extension.
+        Native bindings to the ${registryLink("EXT_separate_shader_objects.gles")} extension.
 
         This extension is a subset of ARB_separate_shader_objects appropriate for OpenGL ES, and also tacks on ARB_explicit_attrib_location functionality.
 

@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_delay_before_swap", NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "glx_delay_before_swap")} extension.
+        Native bindings to the $registryLink extension.
 
         For most interactive applications, the standard rendering loop responding to input events on a frame granularity is sufficient. Some more demanding
         applications may want to exchange performance for the ability to sample input closer to the final frame swap and adjust rendering accordingly. This

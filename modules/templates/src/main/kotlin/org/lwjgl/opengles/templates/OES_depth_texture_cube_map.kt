@@ -14,7 +14,7 @@ val OES_depth_texture_cube_map = "OESDepthTextureCubeMap".nativeClassGLES("OES_d
 
         This extension extends OES_depth_texture and OES_packed_depth_stencil to support depth and depth-stencil cube-map textures.
 
-        Requires ${GLES20.core} and ${registryLink("OES", "OES_depth_texture")}.
+        Requires ${GLES20.core} and ${OES_depth_texture.link}.
         """
 
     IntConstant(

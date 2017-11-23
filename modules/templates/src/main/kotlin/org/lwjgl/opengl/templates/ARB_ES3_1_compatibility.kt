@@ -36,7 +36,7 @@ val ARB_ES3_1_compatibility = "ARBES31Compatibility".nativeClassGL("ARB_ES3_1_co
             "",
             ""
         )}
-        Requires ${GL44.core}, ${registryLinkTo("ARB", "ES2_compatibility")}, ${registryLinkTo("ARB", "ES3_compatibility")}. ${GL45.promoted}
+        Requires ${GL44.core}, ${ARB_ES2_compatibility.link}, ${ARB_ES3_compatibility.link}. ${GL45.promoted}
         """
 
     GL45 reuse "MemoryBarrierByRegion"

@@ -12,8 +12,8 @@ val ARB_transform_feedback2 = "ARBTransformFeedback2".nativeClassGL("ARB_transfo
         """
         Native bindings to the $registryLink extension.
 
-        The ${registryLinkTo("EXT", "transform_feedback")} extension allows applications to capture primitives to one or more buffer objects when transformed by
-        the GL. This extension provides a few additional capabilities to these extensions, making transform feedback mode more useful.
+        The ${EXT_transform_feedback.link} extension allows applications to capture primitives to one or more buffer objects when transformed by the GL. This
+        extension provides a few additional capabilities to these extensions, making transform feedback mode more useful.
 
         First, it provides transform feedback objects which encapsulate transform feedback-related state, allowing applications to replace the entire transform
         feedback configuration in a single bind call. Second, it provides the ability to pause and resume transform feedback operations. When transform feedback
@@ -26,7 +26,7 @@ val ARB_transform_feedback2 = "ARBTransformFeedback2".nativeClassGL("ARB_transfo
         only provides a vertex count -- it does not automatically set up vertex array state or vertex buffer object bindings, which must be done separately by
         the application.
 
-        Requires ${GL20.link} or ${ARB_shader_objects.link} and ${registryLinkTo("NV", "transform_feedback")} or ${registryLinkTo("EXT", "transform_feedback")}.
+        Requires ${GL20.link} or ${ARB_shader_objects.link} and ${NV_transform_feedback.link} or ${EXT_transform_feedback.link}.
         ${GL40.promoted}
         """
 

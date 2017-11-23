@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val KHR_no_error = "KHRNoError".nativeClassGLES("KHR_no_error", postfix = KHR) {
     documentation =
         """
-        Native bindings to the ${registryLink("KHR", "no_error")} extension.
+        Native bindings to the $registryLink extension.
 
         With this extension enabled any behavior that generates a GL error will have undefined behavior. The reason this extension exists is performance can be
         increased and power usage decreased. When this mode is used, a GL driver can have undefined behavior where it would have generated a GL error without

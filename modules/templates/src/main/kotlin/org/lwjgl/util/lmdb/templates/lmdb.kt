@@ -24,7 +24,7 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Contains bindings to ${url("http://symas.com/mdb/", "LMDB")}, the Symas Lightning Memory-Mapped Database.
+        Contains bindings to ${url("https://symas.com/lmdb/", "LMDB")}, the Symas Lightning Memory-Mapped Database.
 
         <h3>Getting Started</h3>
 

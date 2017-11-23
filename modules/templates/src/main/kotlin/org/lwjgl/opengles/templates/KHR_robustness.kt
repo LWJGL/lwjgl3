@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix = KHR) {
     documentation =
         """
-        Native bindings to the ${registryLink("KHR", "robustness")} extension.
+        Native bindings to the $registryLink extension.
 
         Several recent trends in how OpenGL ES integrates into modern computer systems have created new requirements for robustness and security for GL
         rendering contexts.

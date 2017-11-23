@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val FJ_shader_binary_GCCSO = "FJShaderBinaryGCCSO".nativeClassGLES("FJ_shader_binary_GCCSO", postfix = FJ) {
     documentation =
         """
-        Native bindings to the ${registryLink("FJ", "shader_binary_GCCSO")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension enables loading precompiled binary shaders compatible with chips designed by Fujitsu Semiconductor.
         """

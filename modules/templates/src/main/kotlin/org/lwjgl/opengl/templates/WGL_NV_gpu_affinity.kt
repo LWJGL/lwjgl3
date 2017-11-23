@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "gpu_affinity")} extension.
+        Native bindings to the $registryLink extension.
 
         On systems with more than one GPU it is desirable to be able to select which GPU(s) in the system become the target for OpenGL rendering commands. This
         extension introduces the concept of a GPU affinity mask. OpenGL rendering commands are directed to the GPU(s) specified by the affinity mask. GPU

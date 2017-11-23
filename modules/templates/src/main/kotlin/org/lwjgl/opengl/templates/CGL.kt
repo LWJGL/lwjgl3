@@ -776,7 +776,7 @@ val CGL = "CGL".nativeClass(
 
         You must capture the display prior to entering full-screen mode and release it after exiting. After calling this function, subsequent OpenGL drawing is
         rendered into the entire screen. For more information, see ${url(
-            "https://developer.apple.com/library/mac/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_intro/opengl_intro.html\\#//apple_ref/doc/uid/TP40001987",
+            "https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_intro/opengl_intro.html",
             "OpenGL Programming Guide for Mac")
         }.
 

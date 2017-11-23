@@ -29,8 +29,8 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_EXT_display_surface_counter">{@code VK_EXT_display_surface_counter}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_display_surface_counter">{@code VK_EXT_display_surface_counter}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_swapchain">{@code VK_KHR_swapchain}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -203,7 +203,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         VkDevice.IN("device", "a logical device on which the event <b>may</b> occur."),
         const..VkDeviceEventInfoEXT.p.IN("pDeviceEventInfo", "a pointer to an instance of the ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 
@@ -247,7 +247,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         VkDevice.IN("device", "a logical device associated with {@code display}"),
         VkDisplayKHR.IN("display", "the display on which the event <b>may</b> occur."),
         const..VkDisplayEventInfoEXT.p.IN("pDisplayEventInfo", "a pointer to an instance of the ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 

@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_path_rendering_shared_edge = "NVPathRenderingSharedEdge".nativeClassGLES("NV_path_rendering_shared_edge", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "path_rendering_shared_edge")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension introduces a new path command modifier to the NV_path_rendering extension to indicate that a path command represents an edge (either
         straight or curved) that is shared with another path.

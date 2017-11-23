@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_EXT_stereo_tree = "GLXEXTStereoTree".nativeClassGLX("GLX_EXT_stereo_tree", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "glx_stereo_tree")} extension.
+        Native bindings to the $registryLink extension.
 
         When using stereoscopic rendering with the X composite extension, a stereo-aware GLX composite manager can be used to composite both the left and right
         buffers of a window's backing pixmap to the left and right buffers of the root or composite overlay window to preserve the stereo effect of a

@@ -40,7 +40,7 @@ val NV_multisample_coverage = "NVMultisampleCoverage".nativeClassGL("NV_multisam
 val GLX_NV_multisample_coverage = "GLXNVMultisampleCoverage".nativeClassGLX("GLX_NV_multisample_coverage", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "multisample_coverage")} extension.
+        Native bindings to the ${registryLink("NV_multisample_coverage")} extension.
 
         GLX functionality for ${NV_multisample_coverage.link}.
         """
@@ -59,7 +59,7 @@ val GLX_NV_multisample_coverage = "GLXNVMultisampleCoverage".nativeClassGLX("GLX
 val WGL_NV_multisample_coverage = "WGLNVMultisampleCoverage".nativeClassWGL("WGL_NV_multisample_coverage", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "multisample_coverage")} extension.
+        Native bindings to the ${registryLink("NV_multisample_coverage")} extension.
 
         WGL functionality for ${NV_multisample_coverage.link}.
         """

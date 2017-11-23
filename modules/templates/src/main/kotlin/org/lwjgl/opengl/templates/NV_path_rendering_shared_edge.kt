@@ -19,7 +19,7 @@ val NV_path_rendering_shared_edge = "NVPathRenderingSharedEdge".nativeClassGL("N
         rasterization rules in order to ensure that groups of raster samples associated with a given coverage sample will all produce consistent coverage
         results, in order to avoid artifacts described further in the issues section at the end of this document.
 
-        Requires ${registryLinkTo("NV", "path_rendering")}.
+        Requires ${NV_path_rendering.link}.
         """
 
     IntConstant(

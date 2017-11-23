@@ -96,6 +96,13 @@ val EXT_color_buffer_float = EXT_FLAG.nativeClassGLES("EXT_color_buffer_float", 
         """
 }
 
+val EXT_compressed_ETC1_RGB8_sub_texture = EXT_FLAG.nativeClassGLES("EXT_compressed_ETC1_RGB8_sub_texture", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+        """
+}
+
 val EXT_conservative_depth = EXT_FLAG.nativeClassGLES("EXT_conservative_depth", postfix = EXT) {
     documentation =
         """
@@ -189,7 +196,7 @@ val EXT_multisampled_render_to_texture2 = EXT_FLAG.nativeClassGLES("EXT_multisam
 val EXT_post_depth_coverage = EXT_FLAG.nativeClassGLES("EXT_post_depth_coverage", postfix = EXT) {
     documentation =
         """
-        When true, the ${registryLink("EXT", "post_depth_coverage")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension allows the fragment shader to control whether values in gl_SampleMaskIn[] reflect the coverage after application of the early depth and
         stencil tests. This feature can be enabled with the following layout qualifier in the fragment shader:
@@ -254,7 +261,7 @@ val EXT_shader_implicit_conversions = EXT_FLAG.nativeClassGLES("EXT_shader_impli
 val EXT_shader_integer_mix = EXT_FLAG.nativeClassGLES("EXT_shader_integer_mix", postfix = EXT) {
     documentation =
         """
-        When true, the ${registryLink("EXT", "shader_integer_mix")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         GLSL 1.30 (and GLSL ES 3.00) expanded the mix() built-in function to operate on a boolean third argument that does not interpolate but selects. This
         extension extends mix() to select between int, uint, and bool components.
@@ -394,7 +401,7 @@ val EXT_texture_compression_astc_decode_mode_rgb9e5 = EXT_FLAG.nativeClassGLES("
 val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGLES("KHR_robust_buffer_access_behavior", postfix = KHR) {
     documentation =
         """
-        When true, the ${registryLink("KHR", "robust_buffer_access_behavior")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension specifies the behavior of out-of-bounds buffer and array accesses. This is an improvement over the existing KHR_robustness extension
         which states that the application should not crash, but that behavior is otherwise undefined. This extension specifies the access protection provided
@@ -408,7 +415,7 @@ val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGLES("KHR_robust_buf
 val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGLES("KHR_texture_compression_astc_sliced_3d", postfix = KHR) {
     documentation =
         """
-        When true, the ${registryLink("KHR", "texture_compression_astc_sliced_3d")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
         comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high
@@ -437,7 +444,7 @@ val NV_explicit_attrib_location = EXT_FLAG.nativeClassGLES("NV_explicit_attrib_l
 val NV_fragment_shader_interlock = EXT_FLAG.nativeClassGLES("NV_fragment_shader_interlock", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "fragment_shader_interlock")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         In unextended OpenGL 4.3 or OpenGL ES 3.1, applications may produce a large number of fragment shader invocations that perform loads and stores to
         memory using image uniforms, atomic counter uniforms, buffer variables, or pointers. The order in which loads and stores to common addresses are
@@ -487,7 +494,7 @@ val NV_generate_mipmap_sRGB = EXT_FLAG.nativeClassGLES("NV_generate_mipmap_sRGB"
 val NV_geometry_shader_passthrough = EXT_FLAG.nativeClassGLES("NV_geometry_shader_passthrough", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "geometry_shader_passthrough")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         Geometry shaders provide the ability for applications to process each primitive sent through the GL using a programmable shader. While geometry shaders
         can be used to perform a number of different operations, including subdividing primitives and changing primitive type, one common use case treats
@@ -570,7 +577,7 @@ val NV_image_formats = EXT_FLAG.nativeClassGLES("NV_image_formats", postfix = NV
 val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGLES("NV_sample_mask_override_coverage", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "sample_mask_override_coverage")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension allows the fragment shader to control whether the gl_SampleMask output can enable samples that were not covered by the original
         primitive, or that failed the early depth/stencil tests. This can be enabled by redeclaring the gl_SampleMask output with the "override_coverage"
@@ -647,7 +654,7 @@ val NV_texture_npot_2D_mipmap = EXT_FLAG.nativeClassGLES("NV_texture_npot_2D_mip
 val NV_viewport_array2 = EXT_FLAG.nativeClassGLES("NV_viewport_array2", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "viewport_array2")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension provides new support allowing a single primitive to be broadcast to multiple viewports and/or multiple layers. A shader output
         gl_ViewportMask[] is provided, allowing a single primitive to be output to multiple viewports simultaneously. Also, a new shader option is provided to
@@ -668,7 +675,7 @@ val NV_viewport_array2 = EXT_FLAG.nativeClassGLES("NV_viewport_array2", postfix 
 val NVX_blend_equation_advanced_multi_draw_buffers = EXT_FLAG.nativeClassGLES("NVX_blend_equation_advanced_multi_draw_buffers", postfix = NVX) {
     documentation =
         """
-        When true, the ${registryLink("NVX", "nvx_blend_equation_advanced_multi_draw_buffers")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension adds support for using advanced blend equations introduced with ${NV_blend_equation_advanced.link} (and standardized by
         ${KHR_blend_equation_advanced.link}) in conjunction with multiple draw buffers. The NV_blend_equation_advanced extension supports advanced blending
@@ -676,13 +683,6 @@ val NVX_blend_equation_advanced_multi_draw_buffers = EXT_FLAG.nativeClassGLES("N
         used. This extension removes this restriction.
 
         Requires either ${NV_blend_equation_advanced.link} or ${KHR_blend_equation_advanced.link}.
-        """
-}
-
-val OES_compressed_ETC1_RGB8_sub_texture = EXT_FLAG.nativeClassGLES("OES_compressed_ETC1_RGB8_sub_texture", postfix = OES) {
-    documentation =
-        """
-        When true, the $registryLink extension is supported.
         """
 }
 
@@ -843,7 +843,7 @@ val OES_texture_float_linear = EXT_FLAG.nativeClassGLES("OES_texture_float_linea
 val OES_texture_half_float_linear = EXT_FLAG.nativeClassGLES("OES_texture_half_float_linear", postfix = OES) {
     documentation =
         """
-        When true, the ${registryLink("OES", "OES_texture_float_linear")} extension is supported.
+        When true, the ${registryLink("OES_texture_float_linear")} extension is supported.
 
         These extensions expand upon the OES_texture_half_float and OES_texture_float extensions by allowing support for LINEAR magnification filter and
         LINEAR, NEAREST_MIPMAP_LINEAR, LINEAR_MIPMAP_NEAREST and LINEAR_MIPMAP_NEAREST minification filters.
@@ -885,7 +885,7 @@ val OES_texture_stencil8 = EXT_FLAG.nativeClassGLES("OES_texture_stencil8", post
 val OVR_multiview2 = EXT_FLAG.nativeClassGLES("OVR_multiview2", postfix = OVR) {
     documentation =
         """
-        When true, the ${registryLink("OVR", "multiview2")} extension is supported.
+        When true, the $registryLink extension is supported.
 
         This extension relaxes the restriction in OVR_multiview that only gl_Position can depend on ViewID in the vertex shader. With this change,
         view-dependent outputs like reflection vectors and similar are allowed.

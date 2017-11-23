@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_blend_minmax = "EXTBlendMinmax".nativeClassGLES("EXT_blend_minmax", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "blend_minmax")} extension.
+        Native bindings to the $registryLink extension.
 
         Blending capability is extended by respecifying the entire blend equation. While this document defines only two new equations, the BlendEquationEXT
         procedure that it defines will be used by subsequent extensions to define additional blending equations.

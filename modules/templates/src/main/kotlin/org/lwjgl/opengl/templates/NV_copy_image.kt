@@ -44,7 +44,7 @@ val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
 val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "copy_image")} extension.
+        Native bindings to the ${registryLink("NV_copy_image")} extension.
 
         This extension enables efficient image data transfer between image objects (i.e. textures and renderbuffers) without the need to bind the objects or
         otherwise configure the rendering pipeline. The GLX version allows copying between images in different contexts, even if those contexts are in different
@@ -83,7 +83,7 @@ val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV)
 val WGL_NV_copy_image = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "copy_image")} extension.
+        Native bindings to the ${registryLink("NV_copy_image")} extension.
 
         This extension enables efficient image data transfer between image objects (i.e. textures and renderbuffers) without the need to bind the objects or
         otherwise configure the rendering pipeline. The WGL version allows copying between images in different contexts, even if those contexts are in

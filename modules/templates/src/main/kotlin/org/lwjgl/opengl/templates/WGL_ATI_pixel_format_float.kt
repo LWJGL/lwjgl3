@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val WGL_ATI_pixel_format_float = "WGLATIPixelFormatFloat".nativeClassWGL("WGL_ATI_pixel_format_float", postfix = ATI) {
     documentation =
         """
-        Native bindings to the ${registryLink("ATI", "pixel_format_float")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds pixel formats with floating-point RGBA color components.
 

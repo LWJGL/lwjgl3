@@ -25,7 +25,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
         coordinate can either be zero, the input S coordinate, or the input R coordinate. This allows applications to use a 3D texture to represent a point
         sprite that goes through an animation, with filtering between frames, for example.
     
-        Requires ${registryLinkTo("EXT", "point_parameters")}
+        Requires ${EXT_point_parameters.link}.
         """
 
     IntConstant(

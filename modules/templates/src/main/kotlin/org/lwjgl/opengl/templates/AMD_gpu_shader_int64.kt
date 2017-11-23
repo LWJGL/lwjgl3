@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val AMD_gpu_shader_int64 = "AMDGPUShaderInt64".nativeClassGL("AMD_gpu_shader_int64", postfix = NV) {
     documentation =
         """
-        Native bindings to the $registryLink extension.
+        Native bindings to the ${registryLink("AMD", "gpu_shader_int64")} extension.
 
         This extension was developed based on the NV_gpu_shader5 extension to allow implementations supporting 64-bit integers to expose the feature without
         the additional requirements that are present in NV_gpu_shader5.

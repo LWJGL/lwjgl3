@@ -29,7 +29,7 @@ val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_m
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_display">{@code VK_KHR_display}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_display">{@code VK_KHR_display}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

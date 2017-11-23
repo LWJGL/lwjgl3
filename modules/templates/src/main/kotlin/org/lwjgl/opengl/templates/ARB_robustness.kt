@@ -65,8 +65,8 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
         There are other well-known robustness issues with the OpenGL API which this extension does not address. For example, selector-based OpenGL commands are
         a well-known source of programming errors. Code to manipulate texture state may assume the active texture selector is set appropriately when an
         intervening function call obscures a change to the active texture state resulting in incorrectly updated or queried state. The
-        ${registryLinkTo("EXT", "direct_state_access")} extension introduces selector-free OpenGL commands and queries to address that particular issue so this
-        extension does not.
+        ${EXT_direct_state_access.link} extension introduces selector-free OpenGL commands and queries to address that particular issue so this extension does
+        not.
 
         The intent of this extension is NOT to deprecate any existing API and thereby introduce compatibility issues and coding burdens on existing code, but
         rather to provide new APIs to ensure a level of robustness commensurate with the expectations of modern applications of OpenGL.

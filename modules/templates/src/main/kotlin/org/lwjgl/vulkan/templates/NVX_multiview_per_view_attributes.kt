@@ -56,7 +56,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHX_multiview">{@code VK_KHX_multiview}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHX_multiview">{@code VK_KHX_multiview}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -74,7 +74,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
             <dd><ul>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NVX_multiview_per_view_attributes.html">SPV_NVX_multiview_per_view_attributes</a> SPIR-V extension.</li>
                 <li>This extension requires the GL_NVX_multiview_per_view_attributes extension for GLSL source languages.</li>
-                <li>This extension interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_NV_viewport_array2">VK_NV_viewport_array2</a>.</li>
+                <li>This extension interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_viewport_array2">VK_NV_viewport_array2</a>.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

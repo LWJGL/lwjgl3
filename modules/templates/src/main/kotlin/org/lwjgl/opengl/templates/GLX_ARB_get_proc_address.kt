@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_ARB_get_proc_address = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_get_proc_address", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "get_proc_address")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds a function to return the address of GLX and GL extension functions, given the function name. This is necessary with (for example)
         heterogenous implementations where hardware drivers may implement extension functions not known to the link library; a similar situation on Windows

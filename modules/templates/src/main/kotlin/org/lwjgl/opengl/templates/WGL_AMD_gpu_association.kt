@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu_association", AMD) {
     documentation =
         """
-        Native bindings to the ${registryLink("AMD", "wgl_gpu_association")} extension.
+        Native bindings to the $registryLink extension.
 
         There currently is no way for applications to efficiently use GPU resources in systems that contain more than one GPU. Vendors have provided methods
         that attempt to split the workload for an application among the available GPU resources. This has proven to be very inefficient because most
@@ -20,7 +20,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         This extension provides a mechanism for applications to explicitly use the GPU resources on a given system individually. By providing this
         functionality, a driver allows applications to make appropriate decisions regarding where and when to distribute rendering tasks.
 
-        Requires ${WGL_ARB_extensions_string.link} and ${registryLinkTo("EXT", "framebuffer_object")}.
+        Requires ${WGL_ARB_extensions_string.link} and ${EXT_framebuffer_object.link}.
         """
 
     val properties = IntConstant(

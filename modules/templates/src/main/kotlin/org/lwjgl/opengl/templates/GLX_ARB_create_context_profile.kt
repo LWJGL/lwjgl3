@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_ARB_create_context_profile = "GLXARBCreateContextProfile".nativeClassGLX("GLX_ARB_create_context_profile", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "glx_create_context")} extension.
+        Native bindings to the ${registryLink("GLX_ARB_create_context")} extension.
 
         Adds an attribute to ##GLXARBCreateContext, specifying the GL profile requested for a context of OpenGL 3.2 or later.
 

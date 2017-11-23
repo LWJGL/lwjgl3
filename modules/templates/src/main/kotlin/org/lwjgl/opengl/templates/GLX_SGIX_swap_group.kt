@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_SGIX_swap_group = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_group", SGIX) {
     documentation =
         """
-        Native bindings to the ${registryLink("SGIX", "swap_group")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides the capability to synchronize the buffer swaps of a group of GLX drawables.  A swap group is created, and drawables are added as
         members to the swap group. Buffer swaps to members of the swap group will then take place concurrently.

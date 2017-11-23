@@ -31,7 +31,7 @@ val EXT_texture_buffer_object = "EXTTextureBufferObject".nativeClassGL("EXT_text
         object is attached to a buffer texture, a size is not specified; rather, the number of texels in the texture is taken by dividing the size of the
         buffer object by the size of each texel.
 
-        Requires ${GL20.core} and ${EXT_gpu_shader4.link} or ${registryLink("NV", "gpu_program4")}.
+        Requires ${GL20.core} and ${EXT_gpu_shader4.link} or ${registryLinkTo("NV", "gpu_program4")}.
         """
 
     IntConstant(

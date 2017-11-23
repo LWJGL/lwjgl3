@@ -160,8 +160,8 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
 
         <h5>Description</h5>
         <ul>
-            <li>#TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR indicates that the origin of the domain space is in the upper left corner, flipped vertically from what is shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#img-tessellation-topology">img-tessellation-topology</a>.</li>
-            <li>#TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR indicates that the origin of the domain space is in the lower left corner, as shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#img-tessellation-topology">img-tessellation-topology</a>.</li>
+            <li>#TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR indicates that the origin of the domain space is in the upper left corner, flipped vertically from what is shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#img-tessellation-topology">img-tessellation-topology</a>.</li>
+            <li>#TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR indicates that the origin of the domain space is in the lower left corner, as shown in figure <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#img-tessellation-topology">img-tessellation-topology</a>.</li>
         </ul>
 
         This enum affects how the {@code VertexOrderCw} and {@code VertexOrderCcw} tessellation execution modes are interpreted, since the winding is defined relative to the orientation of the domain.

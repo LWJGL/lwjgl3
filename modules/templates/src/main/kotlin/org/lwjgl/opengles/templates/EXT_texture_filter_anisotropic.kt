@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_texture_filter_anisotropic = "EXTTextureFilterAnisotropic".nativeClassGLES("EXT_texture_filter_anisotropic", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "texture_filter_anisotropic")} extension.
+        Native bindings to the $registryLink extension.
 
         Texture mapping using OpenGL's existing mipmap texture filtering modes assumes that the projection of the pixel filter footprint into texture space is
         a square (ie, isotropic). In practice however, the footprint may be long and narrow (ie, anisotropic). Consequently, mipmap filtering severely blurs

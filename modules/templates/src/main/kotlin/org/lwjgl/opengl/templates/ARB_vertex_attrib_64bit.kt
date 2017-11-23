@@ -21,8 +21,7 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
         single-precision attributes are not automatically converted to double-precision or vice versa. For shader variables with 64-bit component types, the
         "VertexAttribL" functions must be used to specify attribute values. For other shader variables, the "VertexAttribL" functions must not be used. If a
         vertex attribute is specified using the wrong attribute function, the values of the corresponding shader input are undefined. This approach requiring
-        matching types is identical to that used for the "VertexAttribI" functions provided by OpenGL 3.0 and the ${registryLinkTo("EXT", "gpu_shader4")}
-        extension.
+        matching types is identical to that used for the "VertexAttribI" functions provided by OpenGL 3.0 and the ${EXT_gpu_shader4.link} extension.
 
         Additionally, some vertex shader inputs using the wider 64-bit components may count double against the implementation-dependent limit on the number of
         vertex shader attribute vectors. A 64-bit scalar or a two-component vector consumes only a single generic vertex attribute; three- and four-component
@@ -33,7 +32,7 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 
         Support for 64-bit floating-point vertex attributes in this extension can be combined with other extensions. In particular, this extension provides an
         entry point that can be used with EXT_direct_state_access to directly set state for any vertex array object. Also, the related
-        ${registryLinkTo("NV", "vertex_attrib_integer_64bit")} extension provides an entry point to specify bindless vertex attribute arrays with 64-bit
+        ${NV_vertex_attrib_integer_64bit.link} extension provides an entry point to specify bindless vertex attribute arrays with 64-bit
         components, integer or floating-point.
 
         Requires ${GL30.core}, GLSL 1.30 and ${ARB_gpu_shader_fp64.link}. ${GL41.promoted}

@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_clip_cull_distance = "EXTClipCullDistance".nativeClassGLES("EXT_clip_cull_distance", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "EXT_clip_cull_distance")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds support for hardware clip planes and cull distances to OpenGL ES.
         """

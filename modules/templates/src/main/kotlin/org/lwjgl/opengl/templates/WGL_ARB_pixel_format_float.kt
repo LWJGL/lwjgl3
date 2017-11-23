@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val WGL_ARB_pixel_format_float = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_ARB_pixel_format_float", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "color_buffer_float")} extension.
+        Native bindings to the ${registryLink("ARB_color_buffer_float")} extension.
 
         This extension adds pixel formats with floating-point RGBA color components.
 

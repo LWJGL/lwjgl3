@@ -77,8 +77,8 @@ MakeBufferResidentNV(target, READ_ONLY);
 vec4 **ptrToBuffers = pointerBufferAddr;
 vec4 *ptrToBufferI = ptrToBuffers[i];
         """)}
-        This allows simultaneous access to more buffers than ${registryLinkTo("EXT", "bindable_uniform")} (MAX_VERTEX_BINDABLE_UNIFORMS, etc.) and each can be
-        larger than MAX_BINDABLE_UNIFORM_SIZE.
+        This allows simultaneous access to more buffers than ${EXT_bindable_uniform.link} (#MAX_VERTEX_BINDABLE_UNIFORMS_EXT, etc.) and each can be larger than
+        #MAX_BINDABLE_UNIFORM_SIZE_EXT.
         """
 
     IntConstant(

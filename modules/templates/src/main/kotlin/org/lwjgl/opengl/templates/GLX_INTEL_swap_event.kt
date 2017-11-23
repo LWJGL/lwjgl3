@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_INTEL_swap_event = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_event", INTEL) {
     documentation =
         """
-        Native bindings to the ${registryLink("INTEL", "swap_event")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds a new event type, #BUFFER_SWAP_COMPLETE_INTEL_MASK, which is sent to the client via the X11 event stream and
         selected/consumed by the normal GLX event mask mechanisms, to indicate when a previously queued swap has completed.

@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_texture_compression_s3tc = "EXTTextureCompressionS3TC".nativeClassGLES("EXT_texture_compression_s3tc", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "texture_compression_s3tc")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides additional texture compression functionality specific to S3's S3TC format (called DXTC in Microsoft's DirectX API), subject to
         all the requirements and limitations described by the extension GL_ARB_texture_compression.

@@ -26,7 +26,7 @@ val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", 
         By using the instance ID or multiples thereof as an index into a uniform array containing transform data, vertex shaders can draw multiple instances of
         an object with a single draw call.
     
-        Requires ${GL30.core} or ${registryLinkTo("EXT", "gpu_shader4")} or ${registryLinkTo("NV", "vertex_program4")}. ${GL31.promoted}
+        Requires ${GL30.core} or ${EXT_gpu_shader4.link} or ${registryLinkTo("NV", "vertex_program4")}. ${GL31.promoted}
         """
 
     void(

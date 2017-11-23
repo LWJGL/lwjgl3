@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_sample_locations = "NVSampleLocations".nativeClassGLES("NV_sample_locations", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "sample_locations")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows an application to modify the locations of samples within a pixel used in multisample rasterization. Additionally, it allows
         applications to specify different sample locations for each pixel in a group of adjacent pixels, which may increase antialiasing quality (particularly

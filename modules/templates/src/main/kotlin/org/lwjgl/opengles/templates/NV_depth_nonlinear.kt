@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_depth_nonlinear = "NVDepthNonlinear".nativeClassGLES("NV_depth_nonlinear", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "EGL_NV_depth_nonlinear")} extension.
+        Native bindings to the ${registryLink("EGL_NV_depth_nonlinear")} extension.
 
         Due to the perspective divide, conventional integer Z-buffers have a hyperbolic distribution of encodings between the near plane and the far plane.
         This can result in inaccurate depth testing, particularly when the number of depth buffer bits is small and objects are rendered near the far plane.

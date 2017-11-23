@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_performance_monitor", postfix = AMD) {
     documentation =
         """
-        Native bindings to the ${registryLink("AMD", "performance_monitor")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension enables the capture and reporting of performance monitors. Performance monitors contain groups of counters which hold arbitrary counted
         data. Typically, the counters hold information on performance-related counters in the underlying hardware. The extension is general enough to allow the

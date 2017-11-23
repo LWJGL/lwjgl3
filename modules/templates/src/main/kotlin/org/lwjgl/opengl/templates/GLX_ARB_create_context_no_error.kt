@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_ARB_create_context_no_error = "GLXARBCreateContextNoError".nativeClassGLX("GLX_ARB_create_context_no_error", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "create_context_no_error")} extension.
+        Native bindings to the ${registryLink("ARB_create_context_no_error")} extension.
 
         This extension allows the creation of an OpenGL or OpenGL ES context that doesn't generate errors if the context supports a no error mode. The
         implications of this feature are discussed in the ${KHR_no_error.link} extension.

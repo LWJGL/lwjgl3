@@ -25,7 +25,7 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
         rectangle to be selected for each. This extension also exposes a separate scissor rectangle for each viewport. Finally, the viewport bounds are now
         floating point quantities allowing fractional pixel offsets to be applied during the viewport transform.
 
-        Requires ${GL32.core} or ${registryLinkTo("EXT", "geometry_shader4")} or ${ARB_geometry_shader4.link}. ${GL41.promoted}
+        Requires ${GL32.core} or ${EXT_geometry_shader4.link} or ${ARB_geometry_shader4.link}. ${GL41.promoted}
         """
 
     IntConstant(

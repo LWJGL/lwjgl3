@@ -160,6 +160,6 @@ val OES_tessellation_shader = "OESTessellationShader".nativeClassGLES("OES_tesse
 val OES_tessellation_point_size = EXT_FLAG.nativeClassGLES("OES_tessellation_point_size", postfix = OES) {
     documentation =
         """
-        When true, the $registryLink extension is supported.
+        When true, the ${registryLink("OES_tessellation_shader")} extension is supported.
         """
 }

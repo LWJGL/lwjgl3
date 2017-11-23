@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_EXT_swap_control = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_control", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "wgl_swap_control")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
 

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val WGL_ARB_create_context_robustness = "WGLARBCreateContextRobustness".nativeClassWGL("WGL_ARB_create_context_robustness", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_create_context_robustness")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows creating an OpenGL context supporting robust buffer access behavior and a specified graphics reset notification behavior.
 

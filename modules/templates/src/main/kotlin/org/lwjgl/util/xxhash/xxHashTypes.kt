@@ -14,8 +14,8 @@ fun config() {
         """
         Contains bindings to ${url("https://github.com/Cyan4973/xxHash", "xxHash")}, an extremely fash non-cryptographic hash algorithm.
 
-        xxHash successfully completes the ${url("https://code.google.com/p/smhasher/wiki/SMHasher", "SMHasher")} test suite which evaluates collision,
-        dispersion and randomness qualities of hash functions.
+        xxHash successfully completes the ${url("https://github.com/aappleby/smhasher", "SMHasher")} test suite which evaluates collision, dispersion and
+        randomness qualities of hash functions.
         """
     )
 

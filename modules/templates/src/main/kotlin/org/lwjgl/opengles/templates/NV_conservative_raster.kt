@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_conservative_raster = "NVConservativeRaster".nativeClassGLES("NV_conservative_raster", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "conservative_raster")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds a "conservative" rasterization mode where any pixel that is partially covered, even if no sample location is covered, is treated as
         fully covered and a corresponding fragment will be shaded.

@@ -38,7 +38,7 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
             "PNM (PPM and PGM binary only)"
         )}
 
-        Animated GIF still needs a proper API, but ${url("http://gist.github.com/urraka/685d9a6340b26b830d49", "here")}'s one way to do it.
+        Animated GIF still needs a proper API, but ${url("https://gist.github.com/urraka/685d9a6340b26b830d49", "here")}'s one way to do it.
 
         Features:
         ${ul(

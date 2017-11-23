@@ -7,7 +7,7 @@ package org.lwjgl.egl.templates
 import org.lwjgl.egl.*
 import org.lwjgl.generator.*
 
-val EXT_gl_colorspace_display_p3_linear = "EXTGLColorspaceDisplayP3Linear".nativeClassEGL("EXT_gl_colorspace_display_p3_linear", postfix = EXT) {
+val EXT_gl_colorspace_display_p3 = "EXTGLColorspaceDisplayP3".nativeClassEGL("EXT_gl_colorspace_display_p3", postfix = EXT) {
     documentation =
         """
         Native bindings to the $registryLink extension.
@@ -22,19 +22,16 @@ val EXT_gl_colorspace_display_p3_linear = "EXTGLColorspaceDisplayP3Linear".nativ
     IntConstant(
         "Accepted as attribute values for #GL_COLORSPACE by #CreateWindowSurface(), #CreatePbufferSurface() and #CreatePixmapSurface().",
 
-        "GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT"..0x3362
+        "GL_COLORSPACE_DISPLAY_P3_EXT"..0x3363
     )
 }
 
-val EXT_gl_colorspace_display_p3 = "EXTGLColorspaceDisplayP3".nativeClassEGL("EXT_gl_colorspace_display_p3", postfix = EXT) {
-    documentation =
-        """
-        See ${EXT_gl_colorspace_display_p3_linear.link}.
-        """
+val EXT_gl_colorspace_display_p3_linear = "EXTGLColorspaceDisplayP3Linear".nativeClassEGL("EXT_gl_colorspace_display_p3_linear", postfix = EXT) {
+    documentation = "See ${EXT_gl_colorspace_display_p3.link}."
 
     IntConstant(
         "Accepted as attribute values for #GL_COLORSPACE by #CreateWindowSurface(), #CreatePbufferSurface() and #CreatePixmapSurface().",
 
-        "GL_COLORSPACE_DISPLAY_P3_EXT"..0x3363
+        "GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT"..0x3362
     )
 }

@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_pixel_format")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.
 

@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_barrier", SGIX) {
     documentation =
         """
-        Native bindings to the ${registryLink("SGIX", "swap_barrier")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides the capability to sychronize the buffer swaps of different swap groups.
 

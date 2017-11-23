@@ -12,9 +12,9 @@ val ARB_texture_cube_map_array = "ARBTextureCubeMapArray".nativeClassGL("ARB_tex
         """
         Native bindings to the $registryLink extension.
 
-        The ${registryLinkTo("EXT", "texture_array")} extension, and subsequently OpenGL 3.0 have introduced the concept of one- and two-dimensional array
-        textures. An array texture is an ordered set of images with the same size and format. Each image in an array texture has a unique level. This extension
-        expands texture array support to include cube map textures.
+        The ${EXT_texture_array.link} extension, and subsequently OpenGL 3.0 have introduced the concept of one- and two-dimensional array textures. An array
+        texture is an ordered set of images with the same size and format. Each image in an array texture has a unique level. This extension expands texture
+        array support to include cube map textures.
 
         A cube map array texture is a 2-dimensional array texture that may contain many cube map layers. Each cube map layer is a unique cube map image set.
         Images in a cube map array have the same size and format limitations as one- and two-dimensional array textures. A cube map array texture is specified

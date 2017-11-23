@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_coverage_sample = "NVCoverageSample".nativeClassGLES("NV_coverage_sample", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "EGL_NV_coverage_sample")} extension.
+        Native bindings to the ${registryLink("EGL_NV_coverage_sample")} extension.
 
         Anti-aliasing is a critical component for delivering high-quality OpenGL rendering. Traditionally, OpenGL implementations have implemented two
         anti-aliasing algorithms: edge anti-aliasing and multisampling.

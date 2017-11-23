@@ -50,7 +50,7 @@ val NV_float_buffer = "NVFloatBuffer".nativeClassGL("NV_float_buffer", postfix =
 val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer", postfix = NV) {
     documentation =
         """
-        Native bindings to the $registryLink extension.
+        Native bindings to the ${registryLink("NV_float_buffer")} extension.
 
         WGL functionality for ${NV_float_buffer.link}.
         """
@@ -84,7 +84,7 @@ val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer
 val GLX_NV_float_buffer = "GLXNVFloatBuffer".nativeClassGLX("GLX_NV_float_buffer", postfix = NV) {
     documentation =
         """
-        Native bindings to the $registryLink extension.
+        Native bindings to the ${registryLink("NV_float_buffer")} extension.
 
         GLX functionality for ${NV_float_buffer.link}.
         """

@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassGLES("NV_fragment_coverage_to_color", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "fragment_coverage_to_color")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows the fragment coverage value, represented as an integer bitfield, to be substituted for a color output being written to a
         single-component color buffer with integer components (e.g., R8UI). The capability provided by this extension is different from simply writing the

@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_make_current_read", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_make_current_read")} extension.
+        Native bindings to the $registryLink extension.
 
         The association of a separate "read" and "draw" DC with the current context allows for preprocessing of image data in an "off screen" DC which is then
         read into a visible DC for final display.

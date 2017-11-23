@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_bindless_texture = "NVBindlessTexture".nativeClassGLES("NV_bindless_texture", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "bindless_texture")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows OpenGL applications to access texture objects in shaders without first binding each texture to one of a limited number of texture
         image units. Using this extension, an application can query a 64-bit unsigned integer texture handle for each texture that it wants to access and then

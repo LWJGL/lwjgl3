@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_texture_compression_dxt1 = "EXTTextureCompressionDXT1".nativeClassGLES("EXT_texture_compression_dxt1", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "texture_compression_dxt1")} extension.
+        Native bindings to the $registryLink extension.
 
         Support of EXT_texture_compression_s3tc is attractive for OpenGL-ES implementations because it provides compressed textures that allow for
         significantly reduced texture storage. Reducing texture storage is advantageous because of the smaller memory capacity of many embedded systems

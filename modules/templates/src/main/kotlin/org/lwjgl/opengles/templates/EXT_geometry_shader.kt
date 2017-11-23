@@ -151,5 +151,5 @@ val EXT_geometry_shader = "EXTGeometryShader".nativeClassGLES("EXT_geometry_shad
 
 val EXT_geometry_point_size = EXT_FLAG.nativeClassGLES("EXT_geometry_point_size", postfix = EXT) {
     documentation =
-        "When true, the ${registryLink("EXT", "EXT_geometry_shader")} extension is supported."
+        "When true, the ${registryLink("EXT_geometry_shader")} extension is supported."
 }

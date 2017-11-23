@@ -29,7 +29,7 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_external_fence_capabilities">{@code VK_KHR_external_fence_capabilities}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_fence_capabilities">{@code VK_KHR_external_fence_capabilities}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -49,7 +49,7 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
                 <li>James Jones, NVIDIA</li>
                 <li>Jeff Juliano, NVIDIA</li>
                 <li>Cass Everitt, Oculus</li>
-                <li>Contributors to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a></li>
+                <li>Contributors to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a></li>
             </ul></dd>
         </dl>
         """
@@ -78,7 +78,7 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
 
         <h5>Description</h5>
         <ul>
-            <li>#FENCE_IMPORT_TEMPORARY_BIT_KHR specifies that the fence payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a>, regardless of the permanence of {@code handleType}.</li>
+            <li>#FENCE_IMPORT_TEMPORARY_BIT_KHR specifies that the fence payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a>, regardless of the permanence of {@code handleType}.</li>
         </ul>
 
         <h5>See Also</h5>

@@ -14,7 +14,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "path_rendering")} extension.
+        Native bindings to the $registryLink extension.
 
         Conventional OpenGL supports rendering images (pixel rectangles and bitmaps) and simple geometric primitives (points, lines, polygons).
 

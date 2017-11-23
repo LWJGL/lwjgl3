@@ -12,7 +12,10 @@ val sqlncli = "SQLNCLI".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod =
 
     documentation =
         """
-        Native bindings to the ${url("https://msdn.microsoft.com/en-US/library/ms130892.aspx", "SQL Server Native Client")}.
+        Native bindings to the ${url(
+            "https://docs.microsoft.com/en-us/sql/relational-databases/native-client/sql-server-native-client-programming",
+            "SQL Server Native Client"
+        )}.
 
         Microsoft SQL Server Native Client is a single native dynamic link library (DLL) that contains the ODBC driver and OLE DB provider, which together
         support applications using native-code APIs (ODBC, OLE DB and ADO) to access Microsoft SQL Server. SQL Server Native Client is a component of SQL

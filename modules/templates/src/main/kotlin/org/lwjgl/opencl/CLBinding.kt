@@ -27,13 +27,13 @@ private val CLBinding = Generator.register(object : APIBinding(
 
     override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
         if (function.nativeClass.templateName.startsWith("CL")) {
-            writer.printOpenGLJavaDoc(documentation, function.nativeName, if (function.has<DeprecatedCL>()) function.get<DeprecatedCL>().after else "2.1")
+            writer.printOpenCLJavaDoc(documentation, function.nativeName, if (function.has<DeprecatedCL>()) function.get<DeprecatedCL>().after else "2.1") // TODO: update to 2.2 when available
             return true
         }
         return false
     }
 
-    private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, version: String) {
+    private fun PrintWriter.printOpenCLJavaDoc(documentation: String, function: String, version: String) {
         val link = url("https://www.khronos.org/registry/OpenCL/sdk/$version/docs/man/xhtml/$function.html", "Reference Page")
         val injectedJavaDoc =
             if (version != "2.1")
@@ -148,7 +148,7 @@ fun NativeClass.extensionLink(
     txt: String,
     prefix: String = txt.substring(0, txt.indexOf('_')),
     name: String = templateName
-) = url("http://www.khronos.org/registry/cl/extensions/$prefix/cl_$txt.txt", name)
+) = url("http://www.khronos.org/registry/OpenCL/extensions/$prefix/cl_$txt.txt", name)
 
 val NativeClass.extensionName: String
     get() = "<strong>$templateName</strong>"

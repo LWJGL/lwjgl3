@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val KHR_context_flush_control = "KHRContextFlushControl".nativeClassEGL("KHR_context_flush_control", postfix = KHR) {
     documentation =
         """
-        Native bindings to the $registryLink extension.
+        Native bindings to the ${url("https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt", templateName)} extension.
 
         OpenGL and OpenGL ES have long supported multiple contexts. The semantics of switching contexts is generally left to window system binding APIs such as
         WGL, GLX and EGL. Most of these APIs (if not all) specify that when the current context for a thread is changed, the outgoing context performs an

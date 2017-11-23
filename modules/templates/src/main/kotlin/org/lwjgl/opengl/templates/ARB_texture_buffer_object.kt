@@ -30,7 +30,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
         object is attached to a buffer texture, a size is not specified; rather, the number of texels in the texture is taken by dividing the size of the buffer
         object by the size of each texel.
 
-        Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${registryLinkTo("EXT", "gpu_shader4")}. ${GL31.promoted}
+        Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${EXT_gpu_shader4.link}. ${GL31.promoted}
         """
 
     IntConstant(

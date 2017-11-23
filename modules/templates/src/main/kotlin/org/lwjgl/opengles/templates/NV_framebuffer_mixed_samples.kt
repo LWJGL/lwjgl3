@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("NV_framebuffer_mixed_samples", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "framebuffer_mixed_samples")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows multisample rendering with a raster and depth/stencil sample count that is larger than the color sample count. Rasterization and
         the results of the depth and stencil tests together determine the portion of a pixel that is "covered". It can be useful to evaluate coverage at a

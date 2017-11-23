@@ -29,7 +29,7 @@ val KHR_external_semaphore_capabilities = "KHRExternalSemaphoreCapabilities".nat
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -145,7 +145,7 @@ val KHR_external_semaphore_capabilities = "KHRExternalSemaphoreCapabilities".nat
         Function for querying external semaphore handle capabilities.
 
         <h5>C Specification</h5>
-        Semaphores <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-payloads">payload</a> to external handles. To query the external handle types supported by semaphores, call:
+        Semaphores <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-payloads">payload</a> to external handles. To query the external handle types supported by semaphores, call:
 
         <code><pre>
 ￿void vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(

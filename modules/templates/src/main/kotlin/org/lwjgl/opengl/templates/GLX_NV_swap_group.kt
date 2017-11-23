@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_NV_swap_group = "GLXNVSwapGroup".nativeClassGLX("GLX_NV_swap_group", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "glx_swap_group")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides the capability to synchronize the buffer swaps of a group of OpenGL windows. A swap group is created, and windows are added as
         members to the swap group. Buffer swaps to members of the swap group will then take place concurrently.

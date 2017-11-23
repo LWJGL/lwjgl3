@@ -1288,7 +1288,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             """
             <b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For
             more information on bundles, see the
-            ${url("https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/", "Bundle Programming Guide")} in the Mac
+            ${url("https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/", "Bundle Programming Guide")} in the Mac
             Developer Library.
             """,
             """
@@ -1300,7 +1300,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             <b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
             #COCOA_RETINA_FRAMEBUFFER hint is #TRUE and the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For
             more information, see ${url(
-                "https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html",
+                "https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html",
                 "High Resolution Guidelines for macOS")
             } in the Mac Developer Library.
             """,
@@ -1404,8 +1404,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         <b>macOS</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
         application bundle's icon. For more information on bundles, see the
-        ${url("https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/", "Bundle Programming Guide")} in the Mac Developer
-        Library.
+        ${url("https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/", "Bundle Programming Guide")} in the Mac
+        Developer Library.
 
         This function must only be called from the main thread.
         """,
@@ -2956,8 +2956,9 @@ if (hats[2] & GLFW_HAT_RIGHT)
         When moving a context between threads, you must make it non-current on the old thread before making it current on the new one.
 
         By default, making a context non-current implicitly forces a pipeline flush. On machines that support
-        ${url("https://www.opengl.org/registry/specs/KHR/context_flush_control.txt", "GL_KHR_context_flush_control")}, you can control whether a context
-        performs this flush by setting the #CONTEXT_RELEASE_BEHAVIOR ${url("http://www.glfw.org/docs/latest/window.html\\#window_hints_ctx", "window hint")}.
+        ${url("https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt", "GL_KHR_context_flush_control")}, you can control whether
+        a context performs this flush by setting the #CONTEXT_RELEASE_BEHAVIOR
+        ${url("http://www.glfw.org/docs/latest/window.html\\#window_hints_ctx", "window hint")}.
 
         The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
 
@@ -3008,10 +3009,11 @@ if (hats[2] & GLFW_HAT_RIGHT)
         before swapping the buffers and returning. This is sometimes called <i>vertical synchronization</i>, <i>vertical retrace synchronization</i> or just
         <i>vsync</i>.
 
-        Contexts that support either of the ${url("https://www.opengl.org/registry/specs/EXT/wgl_swap_control_tear.txt", "WGL_EXT_swap_control_tear")} and
-        ${url("https://www.opengl.org/registry/specs/EXT/glx_swap_control_tear.txt", "GLX_EXT_swap_control_tear")} extensions also accept negative swap
-        intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions using
-        #ExtensionSupported(). For more information about swap tearing, see the extension specifications.
+        Contexts that support either of the
+        ${url("https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_swap_control_tear.txt", "WGL_EXT_swap_control_tear")} and
+        ${url("https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_swap_control_tear.txt", "GLX_EXT_swap_control_tear")} extensions also accept
+        negative swap intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions
+        using #ExtensionSupported(). For more information about swap tearing, see the extension specifications.
 
         A context must be current on the calling thread. Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 

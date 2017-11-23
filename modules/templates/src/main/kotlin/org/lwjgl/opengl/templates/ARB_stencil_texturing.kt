@@ -16,7 +16,7 @@ val ARB_stencil_texturing = "ARBStencilTexturing".nativeClassGL("ARB_stencil_tex
         possible to sample both depth and stencil values from the same texture, and this extension allows the app to select which is sampled for the bound
         texture.
 
-        Requires ${ARB_depth_texture.link} and ${registryLinkTo("EXT", "packed_depth_stencil")}. ${GL43.promoted}
+        Requires ${ARB_depth_texture.link} and ${EXT_packed_depth_stencil.link}. ${GL43.promoted}
         """
 
     IntConstant(

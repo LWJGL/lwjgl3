@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_conditional_render = "NVConditionalRender".nativeClassGLES("NV_conditional_render", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "conditional_render")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides support for conditional rendering based on the results of an occlusion query. This mechanism allows an application to
         potentially reduce the latency between the completion of an occlusion query and the rendering commands depending on its result. It additionally allows

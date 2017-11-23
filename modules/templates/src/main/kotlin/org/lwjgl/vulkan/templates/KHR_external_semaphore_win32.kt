@@ -30,7 +30,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_KHR_external_semaphore">{@code VK_KHR_external_semaphore}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_semaphore">{@code VK_KHR_external_semaphore}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -137,7 +137,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         <h5>Description</h5>
         For handle types defined as NT handles, the handles returned by #GetSemaphoreWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.
 
-        Exporting a Windows handle from a semaphore <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>.
+        Exporting a Windows handle from a semaphore <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

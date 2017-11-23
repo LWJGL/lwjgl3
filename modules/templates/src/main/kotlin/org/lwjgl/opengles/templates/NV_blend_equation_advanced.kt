@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGLES("NV_blend_equation_advanced", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "blend_equation_advanced")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension adds a number of "advanced" blending equations that can be used to perform new color blending operations, many of which are more complex
         than the standard blend modes provided by unextended OpenGL. This extension provides two different extension string entries:
@@ -146,7 +146,7 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGLES("NV_b
 val NV_blend_equation_advanced_coherent = "NVBlendEquationAdvancedCoherent".nativeClassGLES("NV_blend_equation_advanced_coherent", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "blend_equation_advanced")} extension.
+        Native bindings to the ${registryLink("NV_blend_equation_advanced")} extension.
 
         Requires ${GLES20.core}.
         """

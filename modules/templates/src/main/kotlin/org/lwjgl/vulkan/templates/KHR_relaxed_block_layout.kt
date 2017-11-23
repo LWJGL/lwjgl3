@@ -13,7 +13,7 @@ val KHR_relaxed_block_layout = "KHRRelaxedBlockLayout".nativeClassVK("KHR_relaxe
         """
         The {@code VK_KHR_relaxed_block_layout} extension allows implementations to indicate they can support more variation in block {@code Offset} decorations. For example, placing a vector of three floats at an offset of 16*N + 4.
 
-        See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#interfaces-resources-layout">Offset and Stride Assignment</a> for details.
+        See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#interfaces-resources-layout">Offset and Stride Assignment</a> for details.
 
         <dl>
             <dt><b>Name String</b></dt>

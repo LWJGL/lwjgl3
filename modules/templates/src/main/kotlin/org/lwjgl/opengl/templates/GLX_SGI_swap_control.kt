@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_SGI_swap_control = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_control", SGI) {
     documentation =
         """
-        Native bindings to the ${registryLink("SGI", "swap_control")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
         """

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val KHR_texture_compression_astc_ldr = "KHRTextureCompressionASTCLDR".nativeClassGL("KHR_texture_compression_astc_ldr", postfix = KHR) {
     documentation =
         """
-        Native bindings to the ${registryLink("KHR", "texture_compression_astc_hdr")} extension.
+        Native bindings to the ${registryLink("KHR_texture_compression_astc_hdr")} extension.
 
         Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
         comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high

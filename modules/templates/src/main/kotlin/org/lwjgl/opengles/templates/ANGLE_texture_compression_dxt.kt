@@ -9,7 +9,7 @@ import org.lwjgl.opengles.*
 
 val ANGLE_texture_compression_dxt1 = "ANGLETextureCompressionDXT1".nativeClassGLES("ANGLE_texture_compression_dxt1", postfix = ANGLE) {
     documentation =
-        "Native bindings to the ${registryLink("ANGLE", "ANGLE_texture_compression_dxt")} extension."
+        "Native bindings to the ${registryLink("ANGLE_texture_compression_dxt")} extension."
 
     IntConstant(
         "Accepted by the {@code internalformat} parameter of CompressedTexImage2D and the {@code format} parameter of CompressedTexSubImage2D.",
@@ -21,7 +21,7 @@ val ANGLE_texture_compression_dxt1 = "ANGLETextureCompressionDXT1".nativeClassGL
 
 val ANGLE_texture_compression_dxt3 = "ANGLETextureCompressionDXT3".nativeClassGLES("ANGLE_texture_compression_dxt3", postfix = ANGLE) {
     documentation =
-        "Native bindings to the ${registryLink("ANGLE", "ANGLE_texture_compression_dxt")} extension."
+        "Native bindings to the ${registryLink("ANGLE_texture_compression_dxt")} extension."
 
     IntConstant(
         "Accepted by the {@code internalformat} parameter of CompressedTexImage2D and the {@code format} parameter of CompressedTexSubImage2D.",
@@ -32,7 +32,7 @@ val ANGLE_texture_compression_dxt3 = "ANGLETextureCompressionDXT3".nativeClassGL
 
 val ANGLE_texture_compression_dxt5 = "ANGLETextureCompressionDXT5".nativeClassGLES("ANGLE_texture_compression_dxt5", postfix = ANGLE) {
     documentation =
-        "Native bindings to the ${registryLink("ANGLE", "ANGLE_texture_compression_dxt")} extension."
+        "Native bindings to the ${registryLink("ANGLE_texture_compression_dxt")} extension."
 
     IntConstant(
         "Accepted by the {@code internalformat} parameter of CompressedTexImage2D and the {@code format} parameter of CompressedTexSubImage2D.",

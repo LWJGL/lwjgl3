@@ -77,7 +77,7 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "multisample")} extension.
+        Native bindings to the ${registryLink("ARB_multisample")} extension.
 
         See ##ARBMultisample for details.
         """
@@ -93,7 +93,7 @@ val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisampl
 val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "multisample")} extension.
+        Native bindings to the ${registryLink("ARB_multisample")} extension.
 
         See ##ARBMultisample for details.
 

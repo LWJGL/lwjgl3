@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGLES("EXT_texture_filter_minmax", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "texture_filter_minmax")} extension.
+        Native bindings to the $registryLink extension.
 
         In unextended OpenGL 4.3, minification and magnification filters such as LINEAR allow texture lookups to returned a filtered texel value produced by
         computing an weighted average of a collection of texels in the neighborhood of the texture coordinate provided.

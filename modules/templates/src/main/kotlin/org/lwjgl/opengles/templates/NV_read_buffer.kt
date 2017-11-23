@@ -39,7 +39,7 @@ val NV_read_buffer = "NVReadBuffer".nativeClassGLES("NV_read_buffer", postfix = 
 val NV_read_buffer_front = EXT_FLAG.nativeClassGLES("NV_read_buffer_front", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "NV_read_buffer")} extension is supported.
+        When true, the ${registryLink("NV_read_buffer")} extension is supported.
 
         Adds the ability to select the system-provided FRONT color buffer as the source for read operations when the system-provided framebuffer is bound and
         contains both a front and back buffer.

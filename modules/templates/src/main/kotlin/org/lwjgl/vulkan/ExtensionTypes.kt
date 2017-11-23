@@ -144,7 +144,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE.</li>
-            <li>If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
+            <li>If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -650,7 +650,7 @@ val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObject
         <ul>
             <li>{@code objectType} <b>must</b> not be #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT</li>
             <li>{@code object} <b>must</b> not be #NULL_HANDLE</li>
-            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
+            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -684,7 +684,7 @@ val VkDebugMarkerObjectTagInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectT
         <ul>
             <li>{@code objectType} <b>must</b> not be #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT</li>
             <li>{@code object} <b>must</b> not be #NULL_HANDLE</li>
-            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
+            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -812,7 +812,7 @@ val VkTextureLODGatherFormatPropertiesAMD = struct(VULKAN_PACKAGE, "VkTextureLOD
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_p.member("pNext", "{@code NULL}.")
-    VkBool32.member("supportsTextureGatherLODBiasAMD", "tells if the image format can be used with texture gather bias/LOD functions, as introduced by the ##AMDTextureGatherBiasLod extension. (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#VK_AMD_texture_gather_bias_lod\">VK_AMD_texture_gather_bias_lod</a>). This field is set by the implementation. User-specified value is ignored.")
+    VkBool32.member("supportsTextureGatherLODBiasAMD", "tells if the image format can be used with texture gather bias/LOD functions, as introduced by the ##AMDTextureGatherBiasLod extension. (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#VK_AMD_texture_gather_bias_lod\">VK_AMD_texture_gather_bias_lod</a>). This field is set by the implementation. User-specified value is ignored.")
 }
 
 val VkShaderResourceUsageAMD = struct(VULKAN_PACKAGE, "VkShaderResourceUsageAMD", mutable = false) {
@@ -861,7 +861,7 @@ val VkRenderPassMultiviewCreateInfoKHX = struct(VULKAN_PACKAGE, "VkRenderPassMul
 
         If the view mask is zero for all subpasses, multiview is considered to be disabled and all drawing commands execute normally, without this additional broadcasting.
 
-        Some implementations <b>may</b> not support multiview in conjunction with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiview-gs">geometry shaders</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiview-tess">tessellation shaders</a>.
+        Some implementations <b>may</b> not support multiview in conjunction with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-multiview-gs">geometry shaders</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-multiview-tess">tessellation shaders</a>.
 
         When multiview is enabled, the #DEPENDENCY_VIEW_LOCAL_BIT_KHX bit in a dependency <b>can</b> be used to express a view-local dependency, meaning that each view in the destination subpass depends on a single view in the source subpass. Unlike pipeline barriers, a subpass dependency <b>can</b> potentially have a different view mask in the source subpass and the destination subpass. If the dependency is view-local, then each view (<code>dstView</code>) in the destination subpass depends on the view <code>dstView + pViewOffsets[dependency]</code> in the source subpass. If there is not such a view in the source subpass, then this dependency does not affect that view in the destination subpass. If the dependency is not view-local, then all views in the destination subpass depend on all views in the source subpass, and the view offset is ignored. A non-zero view offset is not allowed in a self-dependency.
 
@@ -924,8 +924,8 @@ val VkPhysicalDeviceMultiviewFeaturesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDev
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkBool32.member("multiview", "indicates whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero.")
-    VkBool32.member("multiviewGeometryShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#geometry\">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.")
-    VkBool32.member("multiviewTessellationShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#tessellation\">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.")
+    VkBool32.member("multiviewGeometryShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#geometry\">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.")
+    VkBool32.member("multiviewTessellationShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#tessellation\">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.")
 }
 
 val VkPhysicalDeviceMultiviewPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMultiviewPropertiesKHX", mutable = false) {
@@ -1596,7 +1596,7 @@ val VkImageSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkImageSwapchainCrea
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code swapchain} is not #NULL_HANDLE, the fields of ##VkImageCreateInfo <b>must</b> match the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
+            <li>If {@code swapchain} is not #NULL_HANDLE, the fields of ##VkImageCreateInfo <b>must</b> match the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1940,9 +1940,9 @@ val VkPhysicalDeviceIDPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceID
         {@code deviceUUID} and/or {@code driverUUID} <b>must</b> be used to determine whether a particular external object can be shared between driver components, where such a restriction exists as defined in the compatibility table for the particular object type:
 
         <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-semaphore-handle-types-compatibility">External semaphore handle types compatibility</a></li>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">External semaphore handle types compatibility</a></li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
         </ul>
 
         If {@code deviceLUIDValid} is #FALSE, the contents of {@code deviceLUID} and {@code deviceNodeMask} are undefined. If {@code deviceLUIDValid} is #TRUE and Vulkan is running on the Windows operating system, the contents of {@code deviceLUID} <b>can</b> be cast to an {@code LUID} object and <b>must</b> be equal to the locally unique identifier of a {@code IDXGIAdapter1} object that corresponds to {@code physicalDevice}. If {@code deviceLUIDValid} is #TRUE, {@code deviceNodeMask} <b>must</b> contain exactly one bit. If Vulkan is running on an operating system that supports the Direct3D 12 API and {@code physicalDevice} corresponds to an individual device in a linked device adapter, {@code deviceNodeMask} identifies the Direct3D 12 node corresponding to {@code physicalDevice}. Otherwise, {@code deviceNodeMask} <b>must</b> be 1.
@@ -2051,8 +2051,8 @@ val VkImportMemoryWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryWin
             <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid memory resource of the type specified by {@code handleType}.</li>
             <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>if {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
-            <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
-            <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
+            <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
+            <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2178,7 +2178,7 @@ val VkImportMemoryFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryFdInfoKHR") 
             <li>The memory from which {@code fd} was exported <b>must</b> have been created on the same underlying physical device as {@code device}.</li>
             <li>If {@code handleType} is not 0, it <b>must</b> be defined as a POSIX file descriptor handle.</li>
             <li>If {@code handleType} is not 0, {@code fd} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
-            <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
+            <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2361,13 +2361,13 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportSemaph
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphore-handletypes-win32">Handle Types Supported by VkImportSemaphoreWin32HandleInfoKHR</a> table.</li>
+            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphore-handletypes-win32">Handle Types Supported by VkImportSemaphoreWin32HandleInfoKHR</a> table.</li>
             <li>If {@code handleType} is not #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, {@code name} <b>must</b> be {@code NULL}.</li>
             <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid synchronization primitive of the type specified by {@code handleType}.</li>
             <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
-            <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
-            <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
+            <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
+            <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2451,7 +2451,7 @@ val VkD3D12FenceSubmitInfoKHR = struct(VULKAN_PACKAGE, "VkD3D12FenceSubmitInfoKH
         Structure specifying values for Direct3D 12 fence-backed semaphores.
 
         <h5>Description</h5>
-        If the semaphore in ##VkSubmitInfo{@code ::pWaitSemaphores} or ##VkSubmitInfo{@code ::pSignalSemaphores} corresponding to an entry in {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} respectively does not currently have a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-payloads">payload</a> referring to a Direct3D 12 fence, the implementation <b>must</b> ignore the value in the {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} entry.
+        If the semaphore in ##VkSubmitInfo{@code ::pWaitSemaphores} or ##VkSubmitInfo{@code ::pSignalSemaphores} corresponding to an entry in {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} respectively does not currently have a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-payloads">payload</a> referring to a Direct3D 12 fence, the implementation <b>must</b> ignore the value in the {@code pWaitSemaphoreValues} or {@code pSignalSemaphoreValues} entry.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2487,9 +2487,9 @@ val VkSemaphoreGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkSemaphoreGetWin
         <ul>
             <li>{@code handleType} <b>must</b> have been included in ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} when the {@code semaphore}&#8217;s current payload was created.</li>
             <li>If {@code handleType} is defined as an NT handle, #GetSemaphoreWin32HandleKHR() <b>must</b> be called no more than once for each valid unique combination of {@code semaphore} and {@code handleType}.</li>
-            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphorePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
+            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphorePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
         </ul>
 
@@ -2530,8 +2530,8 @@ val VkImportSemaphoreFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportSemaphoreFdInfo
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphore-handletypes-fd">Handle Types Supported by VkImportSemaphoreFdInfoKHR</a> table.</li>
-            <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
+            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphore-handletypes-fd">Handle Types Supported by VkImportSemaphoreFdInfoKHR</a> table.</li>
+            <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2571,9 +2571,9 @@ val VkSemaphoreGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkSemaphoreGetFdInfoKHR") 
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code handleType} <b>must</b> have been included in ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} when {@code semaphore}&#8217;s current payload was created.</li>
-            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphorePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
+            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphorePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
         </ul>
 
@@ -2696,7 +2696,7 @@ val VkDescriptorUpdateTemplateEntryKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpd
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code dstBinding} <b>must</b> be a valid binding in the descriptor set layout implicitly specified when using a descriptor update template to update descriptors.</li>
-            <li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">the “consecutive binding updates” section</a></li>
+            <li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-updates-consecutive">the “consecutive binding updates” section</a></li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3237,7 +3237,7 @@ val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EX
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code supportedSurfaceCounters} <b>must</b> not include #SURFACE_COUNTER_VBLANK_EXT unless the surface queried is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#wsi-display-surfaces">display surface</a>.</li>
+            <li>{@code supportedSurfaceCounters} <b>must</b> not include #SURFACE_COUNTER_VBLANK_EXT unless the surface queried is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#wsi-display-surfaces">display surface</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3684,13 +3684,13 @@ val VkImportFenceWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportFenceWin32
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fence-handletypes-win32">Handle Types Supported by VkImportFenceWin32HandleInfoKHR</a> table.</li>
+            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fence-handletypes-win32">Handle Types Supported by VkImportFenceWin32HandleInfoKHR</a> table.</li>
             <li>If {@code handleType} is not #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, {@code name} <b>must</b> be {@code NULL}.</li>
             <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid synchronization primitive of the type specified by {@code handleType}.</li>
             <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
-            <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
-            <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
+            <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
+            <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3772,8 +3772,8 @@ val VkFenceGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkFenceGetWin32Handle
         <ul>
             <li>{@code handleType} <b>must</b> have been included in ##VkExportFenceCreateInfoKHR{@code ::handleTypes} when the {@code fence}&#8217;s current payload was created.</li>
             <li>If {@code handleType} is defined as an NT handle, #GetFenceWin32HandleKHR() <b>must</b> be called no more than once for each valid unique combination of {@code fence} and {@code handleType}.</li>
-            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFencePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
+            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFencePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
         </ul>
 
@@ -3814,8 +3814,8 @@ val VkImportFenceFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportFenceFdInfoKHR") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fence-handletypes-fd">Handle Types Supported by VkImportFenceFdInfoKHR</a> table.</li>
-            <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
+            <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fence-handletypes-fd">Handle Types Supported by VkImportFenceFdInfoKHR</a> table.</li>
+            <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
         </ul>
 
         If {@code handleType} is #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR, the special value {@code -1} for {@code fd} is treated like a valid sync file descriptor referring to an object that has already signaled. The import operation will succeed and the {@code VkFence} will have a temporarily imported payload as if a valid file descriptor had been provided.
@@ -3861,8 +3861,8 @@ val VkFenceGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkFenceGetFdInfoKHR") {
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code handleType} <b>must</b> have been included in ##VkExportFenceCreateInfoKHR{@code ::handleTypes} when {@code fence}&#8217;s current payload was created.</li>
-            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
-            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFencePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
+            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFencePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
         </ul>
 
@@ -4584,7 +4584,7 @@ val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(VULKAN_PACKAGE, "
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("advancedBlendCoherentOperations", "indicates whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, {@code VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT} is treated the same as VK_ACCESS_COLOR_ATTACHMENT_READ_BIT and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
+    VkBool32.member("advancedBlendCoherentOperations", "indicates whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, {@code VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT} is treated the same as VK_ACCESS_COLOR_ATTACHMENT_READ_BIT and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
 }
 
 val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", mutable = false) {
@@ -4602,7 +4602,7 @@ val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(VULKAN_PACKAGE,
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    uint32_t.member("advancedBlendMaxColorAttachments", "one greater than the highest color attachment index that <b>can</b> be used in a subpass, for a pipeline that uses an <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operation</a>.")
+    uint32_t.member("advancedBlendMaxColorAttachments", "one greater than the highest color attachment index that <b>can</b> be used in a subpass, for a pipeline that uses an <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operation</a>.")
     VkBool32.member("advancedBlendIndependentBlend", "indicates whether advanced blend operations <b>can</b> vary per-attachment.")
     VkBool32.member("advancedBlendNonPremultipliedSrcColor", "indicates whether the source color <b>can</b> be treated as non-premultiplied. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::srcPremultiplied} <b>must</b> be #TRUE.")
     VkBool32.member("advancedBlendNonPremultipliedDstColor", "indicates whether the destination color <b>can</b> be treated as non-premultiplied. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::dstPremultiplied} <b>must</b> be #TRUE.")
@@ -4620,9 +4620,9 @@ val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkP
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-advancedBlendNonPremultipliedSrcColor">non-premultiplied source color</a> property is not supported, {@code srcPremultiplied} <b>must</b> be #TRUE</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-advancedBlendNonPremultipliedDstColor">non-premultiplied destination color</a> property is not supported, {@code dstPremultiplied} <b>must</b> be #TRUE</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-advancedBlendCorrelatedOverlap">correlated overlap</a> property is not supported, {@code blendOverlap} <b>must</b> be #BLEND_OVERLAP_UNCORRELATED_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-limits-advancedBlendNonPremultipliedSrcColor">non-premultiplied source color</a> property is not supported, {@code srcPremultiplied} <b>must</b> be #TRUE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-limits-advancedBlendNonPremultipliedDstColor">non-premultiplied destination color</a> property is not supported, {@code dstPremultiplied} <b>must</b> be #TRUE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-limits-advancedBlendCorrelatedOverlap">correlated overlap</a> property is not supported, {@code blendOverlap} <b>must</b> be #BLEND_OVERLAP_UNCORRELATED_EXT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4646,9 +4646,9 @@ val VkPipelineCoverageToColorStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipel
         Structure specifying whether fragment coverage replaces a color.
 
         <h5>Description</h5>
-        If {@code coverageToColorEnable} is #TRUE, the fragment coverage information is treated as a bitmask with one bit for each sample (as in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fragops-samplemask">Sample Mask</a> section), and this bitmask replaces the first component of the color value corresponding to the fragment shader output location with {@code Location} equal to {@code coverageToColorLocation} and {@code Index} equal to zero. If the color attachment format has fewer bits than the sample coverage, the low bits of the sample coverage bitmask are taken without any clamping. If the color attachment format has more bits than the sample coverage, the high bits of the sample coverage bitmask are filled with zeros.
+        If {@code coverageToColorEnable} is #TRUE, the fragment coverage information is treated as a bitmask with one bit for each sample (as in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#fragops-samplemask">Sample Mask</a> section), and this bitmask replaces the first component of the color value corresponding to the fragment shader output location with {@code Location} equal to {@code coverageToColorLocation} and {@code Index} equal to zero. If the color attachment format has fewer bits than the sample coverage, the low bits of the sample coverage bitmask are taken without any clamping. If the color attachment format has more bits than the sample coverage, the high bits of the sample coverage bitmask are filled with zeros.
 
-        If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#primsrast-sampleshading">Sample Shading</a> is in use, the coverage bitmask only has bits set for samples that correspond to the fragment shader invocation that shades those samples.
+        If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#primsrast-sampleshading">Sample Shading</a> is in use, the coverage bitmask only has bits set for samples that correspond to the fragment shader invocation that shades those samples.
 
         This pipeline stage occurs after sample counting and before blending, and is always performed after fragment shading regardless of the setting of {@code EarlyFragmentTests}.
 
@@ -4753,7 +4753,7 @@ val VkSamplerYcbcrConversionCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcb
                     <li>If either {@code components.r} or {@code components.b} is #COMPONENT_SWIZZLE_IDENTITY, both values <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
                 </ul>
             </li>
-            <li>If {@code ycbcrModel} is not #SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR, then {@code components.r}, {@code components.g}, and {@code components.b} <b>must</b> correspond to channels of the {@code format}; that is, {@code components.r}, {@code components.g}, and {@code components.b} <b>must</b> not be #COMPONENT_SWIZZLE_ZERO or #COMPONENT_SWIZZLE_ONE, and <b>must</b> not correspond to a channel which contains zero or one as a consequence of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-conversion-to-rgba">conversion to RGBA</a></li>
+            <li>If {@code ycbcrModel} is not #SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR, then {@code components.r}, {@code components.g}, and {@code components.b} <b>must</b> correspond to channels of the {@code format}; that is, {@code components.r}, {@code components.g}, and {@code components.b} <b>must</b> not be #COMPONENT_SWIZZLE_ZERO or #COMPONENT_SWIZZLE_ONE, and <b>must</b> not correspond to a channel which contains zero or one as a consequence of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-conversion-to-rgba">conversion to RGBA</a></li>
             <li>If the format does not support #FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR, {@code forceExplicitReconstruction} <b>must</b> be FALSE</li>
             <li>If the format does not support #FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR, {@code chromaFilter} <b>must</b> be #FILTER_NEAREST</li>
         </ul>
@@ -4771,7 +4771,7 @@ val VkSamplerYcbcrConversionCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcb
             <li>{@code chromaFilter} <b>must</b> be a valid {@code VkFilter} value</li>
         </ul>
 
-        If {@code chromaFilter} is #FILTER_NEAREST, chroma samples are reconstructed to luma channel resolution using nearest-neighbour sampling. Otherwise, chroma samples are reconstructed using interpolation. More details can be found in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures">Image Operations</a> chapter.
+        If {@code chromaFilter} is #FILTER_NEAREST, chroma samples are reconstructed to luma channel resolution using nearest-neighbour sampling. Otherwise, chroma samples are reconstructed using interpolation. More details can be found in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures">Image Operations</a> chapter.
 
         <h5>See Also</h5>
         ##VkComponentMapping, #CreateSamplerYcbcrConversionKHR()
@@ -4783,8 +4783,8 @@ val VkSamplerYcbcrConversionCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcb
     VkSamplerYcbcrModelConversionKHR.member("ycbcrModel", "describes the color matrix for conversion between color models.")
     VkSamplerYcbcrRangeKHR.member("ycbcrRange", "describes whether the encoded values have headroom and foot room, or whether the encoding uses the full numerical range.")
     VkComponentMapping.member("components", "applies a <em>swizzle</em> based on {@code VkComponentSwizzle} enums prior to range expansion and color model conversion.")
-    VkChromaLocationKHR.member("xChromaOffset", "describes the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-chroma-reconstruction\">sample location</a> associated with downsampled chroma channels in the x dimension. {@code xChromaOffset} has no effect for formats in which chroma channels are the same resolution as the luma channel.")
-    VkChromaLocationKHR.member("yChromaOffset", "describes the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#textures-chroma-reconstruction\">sample location</a> associated with downsampled chroma channels in the y dimension. {@code yChromaOffset} has no effect for formats in which the chroma channels are not downsampled vertically.")
+    VkChromaLocationKHR.member("xChromaOffset", "describes the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#textures-chroma-reconstruction\">sample location</a> associated with downsampled chroma channels in the x dimension. {@code xChromaOffset} has no effect for formats in which chroma channels are the same resolution as the luma channel.")
+    VkChromaLocationKHR.member("yChromaOffset", "describes the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#textures-chroma-reconstruction\">sample location</a> associated with downsampled chroma channels in the y dimension. {@code yChromaOffset} has no effect for formats in which the chroma channels are not downsampled vertically.")
     VkFilter.member("chromaFilter", "the filter for chroma reconstruction.")
     VkBool32.member("forceExplicitReconstruction", "<b>can</b> be used to ensure that reconstruction is done explicitly, if supported.")
 }
@@ -4864,7 +4864,7 @@ val VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR = struct(VULKAN_PACKAGE, "
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("samplerYcbcrConversion", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is #FALSE, sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.")
+    VkBool32.member("samplerYcbcrConversion", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is #FALSE, sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.")
 }
 
 val VkSamplerYcbcrConversionImageFormatPropertiesKHR = struct(VULKAN_PACKAGE, "VkSamplerYcbcrConversionImageFormatPropertiesKHR", mutable = false) {

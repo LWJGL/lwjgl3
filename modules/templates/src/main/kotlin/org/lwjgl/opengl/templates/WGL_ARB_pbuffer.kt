@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_pbuffer")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension defines pixel buffers (pbuffer for short). Pbuffers are additional non-visible rendering buffers for an OpenGL renderer. Pbuffers are
         equivalent to a window that has the same pixel format descriptor with the following exceptions:

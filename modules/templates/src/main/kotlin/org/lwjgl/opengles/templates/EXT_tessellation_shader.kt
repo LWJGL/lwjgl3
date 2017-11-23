@@ -159,5 +159,5 @@ val EXT_tessellation_shader = "EXTTessellationShader".nativeClassGLES("EXT_tesse
 
 val EXT_tessellation_point_size = EXT_FLAG.nativeClassGLES("EXT_tessellation_point_size", postfix = EXT) {
     documentation =
-        "When true, the ${registryLink("EXT", "EXT_tessellation_shader")} extension is supported."
+        "When true, the ${registryLink("EXT_tessellation_shader")} extension is supported."
 }

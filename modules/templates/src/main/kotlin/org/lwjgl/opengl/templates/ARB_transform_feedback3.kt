@@ -12,9 +12,9 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
         """
         Native bindings to the $registryLink extension.
 
-        This extension further extends the transform feedback capabilities provided by the ${registryLinkTo("EXT", "transform_feedback")},
-        ${registryLinkTo("NV", "transform_feedback")}, and ${registryLinkTo("NV", "transform_feedback2")} extensions. Those extensions provided a new transform
-        feedback mode, where selected vertex attributes can be recorded to a buffer object for each primitive processed by the GL.
+        This extension further extends the transform feedback capabilities provided by the ${EXT_transform_feedback.link}, ${NV_transform_feedback.link}, and
+        ${NV_transform_feedback2.link} extensions. Those extensions provided a new transform feedback mode, where selected vertex attributes can be recorded to
+        a buffer object for each primitive processed by the GL.
 
         This extension provides increased flexibility in how vertex attributes can be written to buffer objects. Previous extensions allowed applications to
         record a set of attributes interleaved into a single buffer object (interleaved mode) or to record into multiple objects, but with only a single
@@ -22,17 +22,17 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
         capability is supported for all three styles of transform feedback:
         ${ul(
             """
-            "EXT"-style GLSL transform feedback (${registryLinkTo("EXT", "transform_feedback")}), where a list of varyings is provided prior to linking a
-            program object and is used whenever that program object is used.
+            "EXT"-style GLSL transform feedback (${EXT_transform_feedback.link}), where a list of varyings is provided prior to linking a program object and is
+            used whenever that program object is used.
             """,
             """
-            "NV"-style GLSL transform feedback (${registryLinkTo("NV", "transform_feedback2")}), where "locations" of active varyings are queried after linking
+            "NV"-style GLSL transform feedback (${NV_transform_feedback2.link}), where "locations" of active varyings are queried after linking
             and are then passed to a function that sets the active transform feedback varyings for the program object. Unlike the "EXT"-style mode, the set of
             varyings to capture can be changed without relinking.
             """,
             """
-            Transform feedback for fixed-function or assembly vertex/geometry shaders (${registryLinkTo("NV", "transform_feedback2")}), where applications
-            specify a set of canonical attribute enums/numbers to capture.
+            Transform feedback for fixed-function or assembly vertex/geometry shaders (${NV_transform_feedback2.link}), where applications specify a set of
+            canonical attribute enums/numbers to capture.
             """
         )}
 
@@ -46,7 +46,7 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
         feedback-related query targets is extended to accommodate multiple vertex streams, so it is possible to count the number of processed and recorded
         primitives for each stream separately.
 
-        Requires ${GL30.core} or ${registryLinkTo("EXT", "transform_feedback")} or ${registryLinkTo("NV", "transform_feedback")}. ${GL40.promoted}
+        Requires ${GL30.core} or ${EXT_transform_feedback.link} or ${NV_transform_feedback.link}. ${GL40.promoted}
         """
 
     IntConstant(

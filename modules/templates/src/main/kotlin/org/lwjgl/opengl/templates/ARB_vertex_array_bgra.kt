@@ -45,7 +45,7 @@ val ARB_vertex_array_bgra = "ARBVertexArrayBGRA".nativeClassGL("ARB_vertex_array
         Rather than force a re-ordering of either vertex array components in memory or a vertex array format-dependent re-ordering of vertex shader inputs,
         OpenGL can simply provide a vertex array format that matches the Direct3D color component ordering.
 
-        This approach mimics that of the ${registryLinkTo("EXT", "bgra")} extension for pixel and texel formats except for vertex instead of image data.
+        This approach mimics that of the ${EXT_bgra.link} extension for pixel and texel formats except for vertex instead of image data.
 
         ${GL32.promoted}
         """

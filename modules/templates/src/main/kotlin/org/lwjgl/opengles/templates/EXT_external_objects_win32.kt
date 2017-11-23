@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_memory_object_win32 = "EXTMemoryObjectWin32".nativeClassGLES("EXT_memory_object_win32", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "external_objects_win32")} extension.
+        Native bindings to the ${registryLink("EXT_external_objects_win32")} extension.
 
         Building upon the OpenGL memory object and semaphore framework defined in ${registryLinkTo("EXT", "external_objects")}, this extension enables an
         OpenGL application to import a memory object or semaphore from a Win32 NT handle or a KMT share handle.
@@ -85,7 +85,7 @@ val EXT_memory_object_win32 = "EXTMemoryObjectWin32".nativeClassGLES("EXT_memory
 val EXT_semaphore_win32 = "EXTSemaphoreWin32".nativeClassGLES("EXT_semaphore_win32", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "external_objects_win32")} extension.
+        Native bindings to the ${registryLink("EXT_external_objects_win32")} extension.
 
         Building upon the OpenGL memory object and semaphore framework defined in ${registryLinkTo("EXT", "external_objects")}, this extension enables an
         OpenGL application to import a memory object or semaphore from a Win32 NT handle or a KMT share handle.

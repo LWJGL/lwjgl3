@@ -50,7 +50,7 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 val GLX_EXT_framebuffer_sRGB = "GLXEXTFramebufferSRGB".nativeClassGLX("GLX_EXT_framebuffer_sRGB", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "framebuffer_sRGB")} extension.
+        Native bindings to the ${registryLink("EXT_framebuffer_sRGB")} extension.
 
         GLX functionality for ${EXT_framebuffer_sRGB.link}.
         """
@@ -65,7 +65,7 @@ val GLX_EXT_framebuffer_sRGB = "GLXEXTFramebufferSRGB".nativeClassGLX("GLX_EXT_f
 val WGL_EXT_framebuffer_sRGB = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "framebuffer_sRGB")} extension.
+        Native bindings to the ${registryLink("EXT_framebuffer_sRGB")} extension.
 
         WGL functionality for ${EXT_framebuffer_sRGB.link}.
 

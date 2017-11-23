@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val WGL_ARB_create_context_profile = "WGLARBCreateContextProfile".nativeClassWGL("WGL_ARB_create_context_profile", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_create_context")} extension.
+        Native bindings to the ${registryLink("WGL_ARB_create_context")} extension.
 
         Adds an attribute to ##WGLARBCreateContext, specifying the GL profile requested for a context of OpenGL 3.2 or later.
 

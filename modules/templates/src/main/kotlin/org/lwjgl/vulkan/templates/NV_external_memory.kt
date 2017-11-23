@@ -33,7 +33,7 @@ val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#VK_NV_external_memory_capabilities">{@code VK_NV_external_memory_capabilities}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_external_memory_capabilities">{@code VK_NV_external_memory_capabilities}</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

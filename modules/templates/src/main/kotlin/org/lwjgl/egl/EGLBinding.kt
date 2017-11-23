@@ -142,7 +142,7 @@ fun config() {
         the underlying native platform window system. It handles graphics context management, surface/buffer binding and rendering synchronization and enables
         high-performance, accelerated, mixed-mode 2D and 3D rendering using other Khronos APIs.
 
-        The ${url("https://www.khronos.org/registry/egl/", "Khronos EGL registry")} is a useful online resource that contains the EGL specification, as well
+        The ${url("https://www.khronos.org/registry/EGL/", "Khronos EGL registry")} is a useful online resource that contains the EGL specification, as well
         as specifications of EGL extensions.
         """
     )
@@ -151,12 +151,12 @@ fun config() {
 private val REGISTRY_PATTERN = "([A-Z]+)_(\\w+)".toRegex()
 val NativeClass.registryLink: String get() = (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName"))
     .let {
-        url("https://www.khronos.org/registry/egl/extensions/${it.groupValues[1]}/EGL_$templateName.txt", templateName)
+        url("https://www.khronos.org/registry/EGL/extensions/${it.groupValues[1]}/EGL_$templateName.txt", templateName)
     }
 
 fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
 private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
-    url("https://www.khronos.org/registry/egl/extensions/$prefix/$name.txt", extensionName)
+    url("https://www.khronos.org/registry/EGL/extensions/$prefix/$name.txt", extensionName)
 
 val NativeClass.core: String get() = "{@link ${this.className} EGL ${this.className[3]}.${this.className[4]}}"
 val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_read_depth = EXT_FLAG.nativeClassGLES("NV_read_depth", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "NV_read_depth_stencil")} extension is supported.
+        When true, the ${registryLink("NV_read_depth_stencil")} extension is supported.
 
         Unextended OpenGL-ES 2.0 only supports using ReadPixels to read from the default color buffer of the currently-bound framebuffer. However, it is useful
         for debugging to be able to read from depth and stencil buffers. This extension re-introduces these features into OpenGL-ES 2.0.
@@ -34,7 +34,7 @@ val NV_read_depth_stencil = EXT_FLAG.nativeClassGLES("NV_read_depth_stencil", po
 val NV_read_stencil = EXT_FLAG.nativeClassGLES("NV_read_stencil", postfix = NV) {
     documentation =
         """
-        When true, the ${registryLink("NV", "NV_read_depth_stencil")} extension is supported.
+        When true, the ${registryLink("NV_read_depth_stencil")} extension is supported.
 
         Unextended OpenGL-ES 2.0 only supports using ReadPixels to read from the default color buffer of the currently-bound framebuffer. However, it is useful
         for debugging to be able to read from depth and stencil buffers. This extension re-introduces these features into OpenGL-ES 2.0.

@@ -11,7 +11,7 @@ import org.lwjgl.system.linux.*
 val GLX_NV_copy_buffer = "GLXNVCopyBuffer".nativeClassGLX("GLX_NV_copy_buffer", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "glx_copy_buffer")} extension.
+        Native bindings to the $registryLink extension.
 
         Extends ${ARB_copy_buffer.link} to have GLX bindings.
         """

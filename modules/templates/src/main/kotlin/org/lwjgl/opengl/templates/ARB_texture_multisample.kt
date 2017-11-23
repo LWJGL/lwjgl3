@@ -15,7 +15,7 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
          This extension provides support for two new types of "multisample textures" - two-dimensional and two-dimensional array - as well as mechanisms to
          fetch a specific sample from such a texture in a shader, and to attach such textures to FBOs for rendering.
 
-        This extension also includes the following functionality, first described in ${registryLinkTo("NV", "explicit_multisample")}:
+        This extension also includes the following functionality, first described in ${NV_explicit_multisample.link}:
         ${ul(
             "A query in the API to query the location of samples within the pixel",
             "An explicit control for the multisample sample mask to augment the control provided by SampleCoverage"

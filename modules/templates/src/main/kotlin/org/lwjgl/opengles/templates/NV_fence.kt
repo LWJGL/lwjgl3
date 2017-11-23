@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val NV_fence = "NVFence".nativeClassGLES("NV_fence", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLink("NV", "fence")} extension.
+        Native bindings to the $registryLink extension.
 
         The goal of this extension is provide a finer granularity of synchronizing GL command completion than offered by standard OpenGL, which offers only two
         mechanisms for synchronization: Flush and Finish. Since Flush merely assures the user that the commands complete in a finite (though undetermined)

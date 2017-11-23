@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_ARB_extensions_string = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB_extensions_string", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_extensions_string")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides a way for applications to determine which WGL extensions are supported by a device. This is the foundation upon which other WGL
         extensions are built.

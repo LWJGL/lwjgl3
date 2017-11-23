@@ -51,7 +51,7 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
     DependsOn("GL_EXT_direct_state_access")..IgnoreMissing..void(
         "VertexArrayVertexAttribDivisorEXT",
         """
-        ${registryLinkTo("EXT", "direct_state_access")} version of #VertexAttribDivisorARB().
+        ${EXT_direct_state_access.link} version of #VertexAttribDivisorARB().
 
         This function was added to the extension specification in July 2013. Implemenations are allowed to expose ARB_instanced_arrays without providing this
         function. The correct way to test its availability is:

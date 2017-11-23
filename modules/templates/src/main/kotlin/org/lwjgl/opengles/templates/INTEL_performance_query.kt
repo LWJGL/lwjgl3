@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_performance_query", postfix = INTEL) {
     documentation =
         """
-        Native bindings to the ${registryLink("INTEL", "performance_query")} extension.
+        Native bindings to the $registryLink extension.
 
         The purpose of this extension is to expose Intel proprietary hardware performance counters to the OpenGL applications. Performance counters may count:
         ${ul(

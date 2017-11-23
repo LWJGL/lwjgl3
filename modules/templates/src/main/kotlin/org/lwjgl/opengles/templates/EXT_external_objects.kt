@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "external_objects")} extension.
+        Native bindings to the ${registryLink("EXT_external_objects")} extension.
 
         The Vulkan API introduces the concept of explicit memory objects and reusable synchronization objects. This extension brings those concepts to the
         OpenGL API via two new object types:
@@ -280,7 +280,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
 val EXT_semaphore = "EXTSemaphore".nativeClassGLES("EXT_semaphore", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "external_objects")} extension.
+        Native bindings to the ${registryLink("EXT_external_objects")} extension.
 
         The Vulkan API introduces the concept of explicit memory objects and reusable synchronization objects. This extension brings those concepts to the
         OpenGL API via two new object types:

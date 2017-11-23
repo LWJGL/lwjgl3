@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGLES("EXT_raster_multisample", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "raster_multisample")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows rendering to a non-multisample color buffer while rasterizing with more than one sample. The result of rasterization (coverage)
         is available in the gl_SampleMaskIn[] fragment shader input, multisample rasterization is enabled for all primitives, and several per- fragment

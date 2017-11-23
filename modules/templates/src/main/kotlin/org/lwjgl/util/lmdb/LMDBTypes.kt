@@ -12,7 +12,7 @@ fun config() {
     packageInfo(
         LMDB_PACKAGE,
         """
-        Bindings to ${url("http://symas.com/mdb/", "LMDB")}, the Symas Lightning Memory-Mapped Database.
+        Bindings to ${url("https://symas.com/lmdb/", "LMDB")}, the Symas Lightning Memory-Mapped Database.
 
         LMDB is a Btree-based database management library modeled loosely on the BerkeleyDB API, but much simplified. The entire database is exposed in a
         memory map, and all data fetches return data directly from the mapped memory, so no malloc's or memcpy's occur during data fetches. As such, the

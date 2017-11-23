@@ -21,7 +21,7 @@ val ARB_blend_func_extended = "ARBBlendFuncExtended".nativeClassGL("ARB_blend_fu
         used as a blending factor for either source or destination colors. Furthermore, this extension increases orthogonality by allowing the
         #SRC_ALPHA_SATURATE function to be used as the destination weight.
 
-        Requires ${ARB_fragment_shader.link} and ${registryLinkTo("EXT", "gpu_shader4")}. ${GL33.promoted}
+        Requires ${ARB_fragment_shader.link} and ${EXT_gpu_shader4.link}. ${GL33.promoted}
         """
 
     IntConstant(

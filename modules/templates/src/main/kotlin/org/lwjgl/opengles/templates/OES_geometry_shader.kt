@@ -152,6 +152,6 @@ val OES_geometry_shader = "OESGeometryShader".nativeClassGLES("OES_geometry_shad
 val OES_geometry_point_size = EXT_FLAG.nativeClassGLES("OES_geometry_point_size", postfix = OES) {
     documentation =
         """
-        When true, the $registryLink extension is supported.
+        When true, the ${registryLink("OES_geometry_shader")} extension is supported.
         """
 }

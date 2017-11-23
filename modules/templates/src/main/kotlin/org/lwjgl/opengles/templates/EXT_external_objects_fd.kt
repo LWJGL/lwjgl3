@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_memory_object_fd = "EXTMemoryObjectFD".nativeClassGLES("EXT_memory_object_fd", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "external_objects_fd")} extension.
+        Native bindings to the ${registryLink("EXT_external_objects_fd")} extension.
 
         Building upon the OpenGL memory object and semaphore framework defined in ${registryLinkTo("EXT", "external_objects")} this extension enables an OpenGL
         application to import a memory object or semaphore from POSIX file descriptor external handles.
@@ -38,7 +38,7 @@ val EXT_memory_object_fd = "EXTMemoryObjectFD".nativeClassGLES("EXT_memory_objec
 val EXT_semaphore_fd = "EXTSemaphoreFD".nativeClassGLES("EXT_semaphore_fd", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "external_objects_fd")} extension.
+        Native bindings to the ${registryLink("EXT_external_objects_fd")} extension.
 
         Building upon the OpenGL memory object and semaphore framework defined in ${registryLinkTo("EXT", "external_objects")} this extension enables an OpenGL
         application to import a memory object or semaphore from POSIX file descriptor external handles.

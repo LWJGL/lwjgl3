@@ -37,7 +37,7 @@ val NV_robustness_video_memory_purge = "NVRobustnessVideoMemoryPurge".nativeClas
 val GLX_NV_robustness_video_memory_purge = "GLXNVRobustnessVideoMemoryPurge".nativeClassGLX("GLX_NV_robustness_video_memory_purge", postfix = NV) {
     documentation =
         """
-        Native bindings to the ${registryLinkTo("NV", "robustness_video_memory_purge", "GLX_NV_robustness_video_memory_purge")} extension.
+        Native bindings to the ${registryLink("NV_robustness_video_memory_purge")} extension.
 
         GLX functionality for ${NV_robustness_video_memory_purge.link}.
         """

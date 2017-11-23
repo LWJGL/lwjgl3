@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_SGI_video_sync = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync", SGI) {
     documentation =
         """
-        Native bindings to the ${registryLink("SGI", "video_sync")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension provides a means for synchronization with the video frame rate of a monitor.
         """

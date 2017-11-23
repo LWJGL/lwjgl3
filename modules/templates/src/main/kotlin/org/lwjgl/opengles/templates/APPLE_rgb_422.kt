@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val APPLE_rgb_422 = "APPLERGB422".nativeClassGLES("APPLE_rgb_422", postfix = APPLE) {
     documentation =
         """
-        Native bindings to the ${registryLink("APPLE", "rgb_422")} extension.
+        Native bindings to the $registryLink extension.
 
         A common storage format for video data is 8-bit 422, with every four bytes encoding two pixels. Within the four bytes there are two luminance samples,
         and two chrominance samples that are shared between both pixels.

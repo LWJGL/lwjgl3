@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val EXT_protected_textures = "EXTProtectedTextures".nativeClassGLES("EXT_protected_textures", postfix = EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "EXT_protected_textures")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension requires another extension like {@code EGL_EXT_protected_content} to have created a protected context. A protected context enables the
         driver to put the GPU into a protected mode where it is able to operate on protected surfaces.

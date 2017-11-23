@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info", EXT) {
     documentation =
         """
-        Native bindings to the ${registryLink("EXT", "visual_rating")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows the user to request a particular X visual type to be associated with a GLX visual, and allows the user to query the X visual type
         underlying a GLX visual.

@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
     documentation =
         """
-        Native bindings to the ${registryLink("KHR", "debug")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows the GL to notify applications when various events occur that may be useful during application development, debugging and
         profiling.

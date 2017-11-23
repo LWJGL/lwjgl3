@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsolation".nativeClassWGL("WGL_ARB_robustness_application_isolation", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_robustness_isolation")} extension.
+        Native bindings to the $registryLink extension.
 
         GL_ARB_robustness and WGL_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
         WGL_ARB_robustness_application_isolation provides stronger guarantees about the possible side-effects of a graphics reset.
@@ -38,7 +38,7 @@ val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsola
 val WGL_ARB_robustness_share_group_isolation = EXT_FLAG.nativeClassWGL("WGL_ARB_robustness_share_group_isolation", postfix = ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_robustness_isolation")} extension.
+        Native bindings to the ${registryLink("WGL_ARB_robustness_application_isolation")} extension.
 
         GL_ARB_robustness and WGL_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
         WGL_ARB_robustness_share_group_isolation provides stronger guarantees about the possible side-effects of a graphics reset.

@@ -12,17 +12,16 @@ val EXT_blend_equation_separate = "EXTBlendEquationSeparate".nativeClassGL("EXT_
         """
         Native bindings to the $registryLink extension.
 
-        ${registryLinkTo("EXT", "blend_func_separate")} introduced separate RGB and alpha blend factors. ${registryLinkTo("EXT", "blend_minmax")} introduced a
-        distinct blend equation for combining source and destination blend terms. (${registryLinkTo("EXT_blend_subtract", "blend_subtract")} &
-        ${registryLinkTo("EXT", "blend_logic_op")} added other blend equation modes.) OpenGL 1.4 integrated both functionalities into the core standard.
+        ${EXT_blend_func_separate.link} introduced separate RGB and alpha blend factors. ${EXT_blend_minmax.link} introduced a distinct blend equation for
+        combining source and destination blend terms. (${EXT_blend_subtract.link} & ${registryLinkTo("EXT", "blend_logic_op")} added other blend equation
+        modes.) OpenGL 1.4 integrated both functionalities into the core standard.
 
         While there are separate blend functions for the RGB and alpha blend factors, OpenGL 1.4 provides a single blend equation that applies to both RGB and
         alpha portions of blending.
 
         This extension provides a separate blend equation for RGB and alpha to match the generality available for blend factors.
 
-        Requires ${GL14.core} or ${ARB_imaging.link} or ${registryLinkTo("EXT", "blend_minmax")} and/or
-        ${registryLinkTo("EXT_blend_subtract", "blend_subtract")}. ${GL20.promoted}
+        Requires ${GL14.core} or ${ARB_imaging.link} or ${EXT_blend_minmax.link} and/or ${EXT_blend_subtract.link}. ${GL20.promoted}
         """
 
     IntConstant(

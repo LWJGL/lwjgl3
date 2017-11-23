@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val GLX_ARB_vertex_buffer_object = "GLXARBVertexBufferObject".nativeClassGLX("GLX_ARB_vertex_buffer_object", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "vertex_buffer_object")} extension.
+        Native bindings to the ${registryLink("ARB_vertex_buffer_object")} extension.
 
         It is the client's responsibility to convert buffer data to and from the server's byte order. Since only the client knows the correct format of the
         data, and there may be multiple clients with different byte orderings sharing a single buffer object, it is unreasonable to ask the GL to handle buffer

@@ -44,7 +44,7 @@ val ARB_framebuffer_sRGB = "ARBFramebufferSRGB".nativeClassGL("ARB_framebuffer_s
 val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_framebuffer_sRGB", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "framebuffer_sRGB")} extension.
+        Native bindings to the ${registryLink("ARB_framebuffer_sRGB")} extension.
 
         GLX functionality for ${ARB_framebuffer_sRGB.link}.
         """
@@ -59,7 +59,7 @@ val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_f
 val WGL_ARB_framebuffer_sRGB = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_framebuffer_sRGB", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "framebuffer_sRGB")} extension.
+        Native bindings to the ${registryLink("ARB_framebuffer_sRGB")} extension.
 
         WGL functionality for ${ARB_framebuffer_sRGB.link}.
 

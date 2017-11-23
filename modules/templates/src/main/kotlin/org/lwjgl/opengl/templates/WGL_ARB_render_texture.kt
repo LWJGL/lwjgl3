@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_render_texture", ARB) {
     documentation =
         """
-        Native bindings to the ${registryLink("ARB", "wgl_render_texture")} extension.
+        Native bindings to the $registryLink extension.
 
         This extension allows a color buffer to be used for both rendering and texturing. When a color buffer is bound to a texture target it cannot be
         rendered to. Once it has been released from the texture it can be  rendered to once again.
