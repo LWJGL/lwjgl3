@@ -1190,7 +1190,6 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         """
         Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped region.
 
-
         The pointer returned maps a region starting at {@code offset} and is at least {@code size} bytes in size. The result of a memory access outside this
         region is undefined.
 

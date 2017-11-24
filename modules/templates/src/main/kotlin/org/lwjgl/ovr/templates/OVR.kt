@@ -537,7 +537,7 @@ ENABLE_WARNINGS()""")
         returnDoc = "a UTF8-encoded null-terminated version string"
     )
 
-    const..charUTF8_p(
+    int(
         "TraceMessage",
         """
         Writes a message string to the LibOVR tracing mechanism (if enabled).

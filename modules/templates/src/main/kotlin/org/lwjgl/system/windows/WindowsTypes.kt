@@ -185,6 +185,7 @@ val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
 val WNDPROC = "WNDPROC".callback(
     WINDOWS_PACKAGE, LRESULT, "WindowProc",
     "Will be called for each message sent to the window.",
+
     HWND.IN("hwnd", "a handle to the window procedure that received the message"),
     UINT.IN("uMsg", "the message"),
     WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
