@@ -32,10 +32,12 @@ public final class HelloTootle {
 
         FloatBuffer pVB = mesh.points(nVertices * 3);
 
-        IntBuffer pnIB = mesh.triangles(nFaces * 3);
+        IntBuffer pnIB    = mesh.triangles(nFaces * 3);
         IntBuffer pnIBOut = memAllocInt(pnIB.remaining());
 
-        System.out.println("\n(overdraw calculation may take several seconds, please be patient)");
+        if (Platform.get() != Platform.WINDOWS) {
+            System.out.println("\n(overdraw calculation may take several seconds, please be patient)");
+        }
 
         printStats("BEFORE", pVB, pnIB);
 
@@ -219,9 +221,7 @@ public final class HelloTootle {
             "     shape connect" +
             "     call llimb";
 
-        //return par_shapes_create_lsystem(program, 32, 60);
-        //return par_shapes_create_rock(1, 4);
-        return par_shapes_create_trefoil_knot(64, 64,1.0f);
+        return par_shapes_create_lsystem(program, Platform.get() == Platform.WINDOWS ? 512 : 32, 60);
     }
 
 }

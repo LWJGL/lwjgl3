@@ -360,12 +360,17 @@ EXPORTS
         <!-- AMD Tootle -->
         <build name="lwjgl_tootle" dest="${bin.native}/tootle" if:true="${binding.tootle}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="/D_SOFTWARE_ONLY_VERSION">
+                <compile dest="@{dest}" flags="">
+                    <fileset dir="." includes="${src.native}/util/DirectXMesh/*.cpp"/>
+                </compile>
+
+                <compile dest="@{dest}" flags="/TP /D_DX11_1_">
                     <arg value="/I${src.native}\util\tootle"/>
                     <arg value="/I${src.native}\util\tootle\include"/>
                     <arg value="/I${src.native}\util\tootle\RayTracer"/>
                     <arg value="/I${src.native}\util\tootle\RayTracer\JRT"/>
                     <arg value="/I${src.native}\util\tootle\RayTracer\Math"/>
+                    <arg value="/I${src.native}\util\DirectXMesh"/>
                     <fileset dir="." includes="${src.native}/util/tootle/*.c"/>
                     <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
@@ -379,6 +384,10 @@ EXPORTS
             <source>
                 <fileset dir="." includes="${src.generated.native}/util/tootle/*.cpp"/>
             </source>
+            <linkargs>
+                <arg value="User32.lib"/>
+                <arg value="D3d9.lib"/>
+            </linkargs>
         </build>
 
         <!-- xxHash -->
