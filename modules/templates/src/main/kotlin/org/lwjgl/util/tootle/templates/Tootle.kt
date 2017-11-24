@@ -191,7 +191,7 @@ val Tootle = "Tootle".nativeClass(packageName = TOOTLE_PACKAGE, prefix = "TOOTLE
         UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "the number of faces in the index buffer"),
         unsigned_int.IN("nVertices", "the number of vertices in the vertex buffer"),
         unsigned_int.IN("nCacheSize", "hardware cache size (12 to 24 are good options)"),
-        unsigned_int_p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL."),
+        unsigned_int_p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
         Check("nFaces + 1")..unsigned_int_p.OUT(
             "pnClustersOut",
             """
@@ -351,7 +351,7 @@ val Tootle = "Tootle".nativeClass(packageName = TOOTLE_PACKAGE, prefix = "TOOTLE
         ),
         unsigned_int.IN("nCacheSize", "hardware cache size (12 to 24 are good options)"),
         TootleFaceWinding.IN("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
-        unsigned_int_p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL."),
+        unsigned_int_p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
         Check(1)..nullable..unsigned_int_p.OUT("pnNumClustersOut", "the number of output clusters. May be #NULL if not requested."),
         float.IN("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
 
@@ -485,7 +485,7 @@ val Tootle = "Tootle".nativeClass(packageName = TOOTLE_PACKAGE, prefix = "TOOTLE
         ),
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void_p.OUT("pVBOut", "the output vertex buffer. May not be #NULL. May equal {@code pVB}."),
+        )..void_p.OUT("pVBOut", "the output vertex buffer. May be #NULL. May equal {@code pVB}."),
         unsigned_int_p.OUT("pnIBOut", "the output index buffer. May not be #NULL. May equal {@code pnIB}."),
         Check("nVertices")..nullable..unsigned_int_p.OUT(
             "pnVertexRemapOut",

@@ -1984,7 +1984,11 @@ TootleResult TOOTLE_DLL TootleOptimizeVertexMemory(const void*         pVB,
     }
 
     // create an array of vertex id map.
-    unsigned int* pnVIDRemap = new unsigned int[ nVertices ];
+    unsigned int* pnVIDRemap = pnVertexRemapOut;
+    if (pnVertexRemapOut == NULL)
+    {
+        pnVIDRemap = new unsigned int[ nVertices ];
+    }
 
     unsigned int i;
 
@@ -2083,13 +2087,11 @@ TootleResult TOOTLE_DLL TootleOptimizeVertexMemory(const void*         pVB,
         delete[] pnIBOutTmp;
     }
 
-    // if the vertex id remap is asked by the caller
-    if (pnVertexRemapOut)
+    // if no vertex id remap is asked by the caller
+    if (pnVertexRemapOut == NULL)
     {
-        memcpy(pnVertexRemapOut, pnVIDRemap, nVertices * sizeof(unsigned int));
+        delete [] pnVIDRemap;
     }
-
-    delete [] pnVIDRemap;
 
     return TOOTLE_OK;
 
