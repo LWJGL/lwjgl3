@@ -12,9 +12,11 @@
 #include "JRTCore.h"
 
 #ifdef _LINUX
-    #include "../aligned_malloc.h"
-    #define _aligned_malloc aligned_malloc
-    #define _aligned_free aligned_free
+    inline void* _aligned_malloc(size_t size, size_t alignment) {
+        void *p;
+        return posix_memalign(&p, alignment, size) ? NULL : p;
+    }
+    #define _aligned_free free
 #endif
 
 // ***********************************************************
