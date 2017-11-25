@@ -257,7 +257,7 @@ val Tootle = "Tootle".nativeClass(packageName = TOOTLE_PACKAGE, prefix = "TOOTLE
             """
         ),
         nullable..unsigned_int_p.OUT("pnIBOut", "an array that will receive the re-ordered index buffer. May be #NULL. May equal {@code pnIB}."),
-        Unsafe..unsigned_int_p.OUT(
+        Check("pnFaceClusters.get(nFaces)")..nullable..unsigned_int_p.OUT(
             "pnClusterRemapOut",
             """
             an array that will receive the cluster ordering. May be #NULL. If non-null, the size of the array must be equal to the number of clusters in the
