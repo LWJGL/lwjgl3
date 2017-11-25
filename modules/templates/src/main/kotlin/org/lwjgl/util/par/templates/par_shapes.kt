@@ -47,7 +47,7 @@ ENABLE_WARNINGS()""")
         The library provides a set of functions that populate fields of the ##ParShapesMesh structure.
 
         The {@code normals} and {@code tcoords} fields might be null, but every other field is guaranteed to have valid values. This mesh representation is
-        very limited: indices must be unsigned 16-bit integers, points must be three-tuples, and there is no support for face-varying data.
+        very limited: indices must be unsigned 32-bit integers, points must be three-tuples, and there is no support for face-varying data.
 
         When you’re done extracting the data you need from the mesh, be sure to free it:
         ${codeBlock("""
@@ -313,7 +313,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         float.IN("epsilon", "the maximum distance to consider when welding vertices"),
         Check("mesh.npoints()")..nullable..PAR_SHAPES_T_p.OUT(
             "mapping",
-            "null, or a pointer to {@code npoints} 16-bit integers, which gets filled with the mapping from old vertex indices to new indices"
+            "null, or a pointer to {@code npoints} 32-bit integers, which gets filled with the mapping from old vertex indices to new indices"
         )
     )
 

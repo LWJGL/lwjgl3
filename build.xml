@@ -515,6 +515,7 @@
         <local name="tootle"/>
         <condition property="tootle" value="true" else="false">
             <and>
+                <istrue value="${binding.assimp}"/>
                 <istrue value="${binding.par}"/>
                 <istrue value="${binding.tootle}"/>
             </and>

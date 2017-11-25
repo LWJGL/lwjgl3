@@ -19,6 +19,7 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.stb.STBEasyFont.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.nfd.NativeFileDialog.*;
 import static org.lwjgl.util.par.ParShapes.*;
@@ -155,7 +156,7 @@ public final class ParShapesDemo {
                     break;
                 case GLFW_KEY_W:
                     wireframe = !wireframe;
-                    updateHUD(mesh == null);
+                    updateHUD();
                     break;
                 case GLFW_KEY_ESCAPE:
                     glfwSetWindowShouldClose(window, true);
@@ -362,10 +363,10 @@ public final class ParShapesDemo {
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.triangles(tc * 3), GL_STATIC_DRAW);
         }
 
-        updateHUD(mesh == null);
+        updateHUD();
     }
 
-    private void updateHUD(boolean error) {
+    private void updateHUD() {
         ByteBuffer color  = memAlloc(4);
         ByteBuffer buffer = memAlloc(1024 * 60);
 
@@ -393,12 +394,8 @@ public final class ParShapesDemo {
 
         if (mesh != null) {
             setColor(color, 255, 255, 255, 255);
-            print(0, meshes.length * 10 + 20, "Triangle count: " + mesh.ntriangles(), color, buffer);
-            if (0xFFFF < mesh.npoints()) // GL_UNSIGNED_SHORT
-            {
-                setColor(color, 255, 0, 0, 255);
-            }
-            print(0, meshes.length * 10 + 10, "Vertex count: " + mesh.npoints(), color, buffer);
+            print(0, meshes.length * 10 + 20, "Triangles: " + mesh.ntriangles(), color, buffer);
+            print(4, meshes.length * 10 + 10, "Vertices: " + mesh.npoints(), color, buffer);
         }
 
         String[] controls = {
@@ -412,7 +409,7 @@ public final class ParShapesDemo {
 
         int alignment = stb_easy_font_width(controls[4]);
 
-        int y = height / 2 - 6 * 10 - 4;
+        int y = height / 2 - controls.length * 10 - 4;
 
         setColor(color, 255, 255, 0, 255);
         y = print(alignment - stb_easy_font_width(controls[0]), y, controls[0], color, buffer);
@@ -435,7 +432,7 @@ public final class ParShapesDemo {
         y = print(alignment - stb_easy_font_width(controls[4]), y, controls[4] + " " + seed, color, buffer);
         print(alignment - stb_easy_font_width(controls[5]), y, controls[5] + " " + subdivisions, color, buffer);
 
-        if (error) {
+        if (mesh == null) {
             String msg = "Error in mesh generation!";
 
             setColor(color, 255, 0, 0, 255);
@@ -568,21 +565,19 @@ public final class ParShapesDemo {
     }
 
     private void exportMesh() {
-        PointerBuffer outPath = memAllocPointer(1);
+        try (MemoryStack stack = stackPush()) {
+            PointerBuffer pp = stack.mallocPointer(1);
 
-        try {
-            int result = NFD_SaveDialog("obj", null, outPath);
+            int result = NFD_SaveDialog("obj", null, pp);
             switch (result) {
                 case NFD_OKAY:
-                    long path = outPath.get(0);
+                    long path = pp.get(0);
                     npar_shapes_export(mesh.address(), path);
                     nNFDi_Free(path);
                     break;
                 case NFD_ERROR:
                     System.err.format("Error: %s\n", NFD_GetError());
             }
-        } finally {
-            memFree(outPath);
         }
     }
 
