@@ -29,7 +29,7 @@
 
                 <source/>
 
-                <regexpmapper from="(\w+)\.c(c|pp)?$" to="\1.obj"/>
+                <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.obj"/>
             </apply>
         </sequential>
     </macrodef>

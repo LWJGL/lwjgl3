@@ -1998,8 +1998,6 @@ TootleResult TOOTLE_DLL TootleOptimizeVertexMemory(const void*         pVB,
         pnVIDRemap[ i ] = TOOTLE_MAX_VERTICES;
     }
 
-    memcpy(pnIBOutTmp, pnIB, 3 * nFaces * sizeof(unsigned int));
-
     // REMAP THE VERTICES based on the vertex ids in indices array
     unsigned int nVID;
     unsigned int nVIDCount = 0;
@@ -2008,7 +2006,7 @@ TootleResult TOOTLE_DLL TootleOptimizeVertexMemory(const void*         pVB,
 
     for (i = 0; i < nFaces3; i++)
     {
-        nVID = pnIBOutTmp[ i ];
+        nVID = pnIB[ i ];
 
         // check whether the vertex has been mapped
         if (nVID < nVertices)
@@ -2027,6 +2025,7 @@ TootleResult TOOTLE_DLL TootleOptimizeVertexMemory(const void*         pVB,
                 fprintf(stderr, "TootleOptimizeVertexMemory's warning: triangle indices are referencing out-of-bounds vertex buffer.\n");
                 bWarning = false;
             }
+            pnIBOutTmp[ i ] = nVID;
         }
     }
 

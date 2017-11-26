@@ -48,9 +48,9 @@
         <element name="source" implicit="true"/>
         <sequential>
             <local name="cpp"/>
-            <condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
+            <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
             <local name="clang"/>
-            <condition property="clang" value="clang++" else="clang"><equals arg1="@{lang}" arg2="c++"/></condition>
+            <condition property="clang" value="clang" else="clang++"><equals arg1="@{lang}" arg2="c"/></condition>
 
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
@@ -66,7 +66,7 @@
 
                 <source/>
 
-                <regexpmapper from="(\w+)\.(cc?|m)" to="\1.o"/>
+                <regexpmapper from="(\w+)\.(?:c(?:c|pp)?|m)$" to="\1.o"/>
             </apply>
         </sequential>
     </macrodef>
@@ -93,9 +93,13 @@
                 <srcfiles dir="@{dest}" includes="**"/>
             </uptodate>
 
-            <echo message="Linking @{name}" taskname="@{linker}" unless:set="lib-uptodate"/>
+            <local name="clang"/>
+            <condition property="clang" value="@{linker}"><not><equals arg1="@{linker}" arg2="clang"/></not></condition>
+            <condition property="clang" value="clang" else="clang++"><equals arg1="@{lang}" arg2="c"/></condition>
+
+            <echo message="Linking @{name}" taskname="${clang}" unless:set="lib-uptodate"/>
             <beforeLink/>
-            <apply executable="@{linker}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+            <apply executable="${clang}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
                 <fileset dir="@{dest}" includes="*.o"/>
@@ -314,9 +318,11 @@
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer"/>
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer/JRT"/>
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer/Math"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
-                    <fileset dir="." excludes="${src.native}/util/tootle/d3d*.cpp"/>
-                    <fileset dir="." excludes="${src.native}/util/tootle/gdi*.cpp"/>
+                    <fileset dir=".">
+                        <include name="${src.native}/util/tootle/*.cpp"/>
+                        <exclude name="${src.native}/util/tootle/d3d*.cpp"/>
+                        <exclude name="${src.native}/util/tootle/gdi*.cpp"/>
+                    </fileset>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/JRT/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/Math/*.cpp"/>
@@ -327,9 +333,6 @@
                 <arg value="-I${src.native.rel}/util/tootle/include"/>
                 <fileset dir="." includes="${src.generated.native}/util/tootle/*.cpp"/>
             </source>
-            <link>
-                <arg value="-lstdc++"/>
-            </link>
         </build>
 
         <!-- xxHash -->

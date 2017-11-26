@@ -24,10 +24,12 @@
         <element name="source" implicit="true"/>
         <sequential>
             <local name="cpp"/>
-            <condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
+            <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
+            <local name="gcc"/>
+            <condition property="gcc" value="gcc" else="g++"><equals arg1="@{lang}" arg2="c"/></condition>
 
             <mkdir dir="@{dest}"/>
-            <apply dir="@{dest}" executable="gcc" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+            <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++11" if:set="cpp"/>
                 <arg line="-m64" if:true="${build.arch.x64}"/>
@@ -42,7 +44,7 @@
 
                 <source/>
 
-                <regexpmapper from="(\w+)\.cc?" to="\1.o"/>
+                <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.o"/>
             </apply>
         </sequential>
     </macrodef>
@@ -50,6 +52,7 @@
     <macrodef name="build">
         <attribute name="name"/>
         <attribute name="dest"/>
+        <attribute name="linker" default="gcc"/>
         <attribute name="lang" default="c"/>
         <attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
         <element name="beforeCompile" optional="true"/>
@@ -72,9 +75,13 @@
             <local name="version.script"/>
             <property name="version.script" location="config/linux/version.script"/>
 
-            <echo message="Linking @{name}" taskname="gcc" unless:set="lib-uptodate"/>
+            <local name="gcc"/>
+            <condition property="gcc" value="@{linker}"><not><equals arg1="@{linker}" arg2="gcc"/></not></condition>
+            <condition property="gcc" value="gcc" else="g++"><equals arg1="@{lang}" arg2="c"/></condition>
+
+            <echo message="Linking @{name}" taskname="${gcc}" unless:set="lib-uptodate"/>
             <beforeLink/>
-            <apply executable="gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+            <apply executable="${gcc}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
                 <arg value="-m64" if:true="${build.arch.x64}"/>
@@ -273,7 +280,7 @@
         </build>
 
         <!-- tinyexr -->
-        <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
+        <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" linker="g++" if:true="${binding.tinyexr}">
             <beforeCompile>
                 <compile dest="@{dest}" lang="c++" flags="">
                     <arg value="-I${src.native.rel}/util/tinyexr"/>
@@ -313,9 +320,11 @@
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer"/>
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer/JRT"/>
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer/Math"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
-                    <fileset dir="." excludes="${src.native}/util/tootle/d3d*.cpp"/>
-                    <fileset dir="." excludes="${src.native}/util/tootle/gdi*.cpp"/>
+                    <fileset dir=".">
+                        <include name="${src.native}/util/tootle/*.cpp"/>
+                        <exclude name="${src.native}/util/tootle/d3d*.cpp"/>
+                        <exclude name="${src.native}/util/tootle/gdi*.cpp"/>
+                    </fileset>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/JRT/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/Math/*.cpp"/>
@@ -326,9 +335,6 @@
                 <arg value="-I${src.native.rel}/util/tootle/include"/>
                 <fileset dir="." includes="${src.generated.native}/util/tootle/*.cpp"/>
             </source>
-            <link>
-                <arg value="-lstdc++"/>
-            </link>
         </build>
 
         <!-- xxHash -->

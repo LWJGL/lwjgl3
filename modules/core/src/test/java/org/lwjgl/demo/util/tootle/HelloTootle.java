@@ -4,25 +4,29 @@
  */
 package org.lwjgl.demo.util.tootle;
 
+import org.joml.*;
 import org.lwjgl.*;
 import org.lwjgl.assimp.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.Platform;
 import org.lwjgl.util.par.*;
 
 import java.nio.*;
 import java.nio.file.*;
 import java.util.concurrent.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.assimp.Assimp.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.ARBTimerQuery.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL31.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -41,6 +45,8 @@ public final class HelloTootle {
     private ParShapesMesh mesh;
     private ParShapesMesh meshOptimized;
 
+    private boolean hasNormals;
+
     private float acmr;
     private float acmrOptimized;
     private float ovdr;
@@ -48,13 +54,21 @@ public final class HelloTootle {
 
     private final Callback debugCB;
 
-    private int vbo;
-    private int ibo;
+    private final int vao;
+    private final int vboMesh;
+    private final int iboMesh;
 
-    private boolean hasNormals;
+    private final int programMesh;
+    private final int uniformModelViewProjectionMatrix;
+    private final int uniformNormalMatrix;
+    private final int uniformCubeSize;
+    private final int uniformDiscardFS;
 
-    private final int program;
-    private final int cubeSizeLocation;
+    private final Matrix4d modelViewMatrix  = new Matrix4d();
+    private final Matrix4d projectionMatrix = new Matrix4d();
+
+    private final Matrix4d modelViewProjectionMatrix = new Matrix4d();
+    private final Matrix3d normalMatrix              = new Matrix3d();
 
     private int meshKey = 1;
 
@@ -68,7 +82,7 @@ public final class HelloTootle {
 
     private final AIPropertyStore propertyStore;
 
-    private int     vacheMethod          = 2;
+    private int     vcacheMethod         = Platform.get() == Platform.WINDOWS ? 2 : 0;
     private int     vcacheSize           = TOOTLE_DEFAULT_VCACHE_SIZE;
     private boolean optimizeVertexMemory = true;
 
@@ -76,8 +90,14 @@ public final class HelloTootle {
     private boolean optimized      = true;
     private boolean wireframe;
 
-    private final int hudVBO;
-    private       int hudVertexCount;
+    private final int vboHUD;
+    private       int vboHUDVertexCount;
+    private final int vboPerf;
+
+    private final int programHUD;
+    private final int uniformModelViewProjectionMatrixHUD;
+
+    private final Matrix4d modelViewProjectionMatrixHUD = new Matrix4d();
 
     private final PerfGraph gpuGraph;
     private final GPUTimer  gpuTimer;
@@ -91,6 +111,13 @@ public final class HelloTootle {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        if (Platform.get() == Platform.MACOSX) {
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        }
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
         window = glfwCreateWindow(width, height, "AMD Tootle demo", NULL, NULL);
@@ -99,10 +126,17 @@ public final class HelloTootle {
         }
 
         glfwMakeContextCurrent(window);
-        GL.createCapabilities();
+        GLCapabilities caps = GL.createCapabilities();
+        if (!caps.OpenGL33) {
+            throw new IllegalStateException("OpenGL 3.3 is required to run this demo.");
+        }
         debugCB = GLUtil.setupDebugMessageCallback();
-        if (debugCB != null && GL.getCapabilities().OpenGL43) {
-            glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, (IntBuffer)null, false);
+        if (debugCB != null) {
+            if (caps.OpenGL43) {
+                glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, (IntBuffer)null, false);
+            } else if (caps.GL_KHR_debug) {
+                KHRDebug.glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, (IntBuffer)null, false);
+            }
         }
 
         glfwSwapInterval(0);
@@ -198,7 +232,7 @@ public final class HelloTootle {
                 case GLFW_KEY_F1:
                 case GLFW_KEY_F2:
                 case GLFW_KEY_F3:
-                    vacheMethod = key - GLFW_KEY_F1;
+                    vcacheMethod = key - GLFW_KEY_F1;
                     setMesh(mesh);
                     break;
                 case GLFW_KEY_F4:
@@ -264,75 +298,84 @@ public final class HelloTootle {
 
         updateViewport(width, height);
 
-        vbo = glGenBuffers();
-        ibo = glGenBuffers();
-        hudVBO = glGenBuffers();
+        vao = glGenVertexArrays();
+        glBindVertexArray(vao); // bind and ignore
+
+        vboMesh = glGenBuffers();
+        iboMesh = glGenBuffers();
+        vboHUD = glGenBuffers();
+        vboPerf = glGenBuffers();
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboPerf);
+        glBufferData(GL_ARRAY_BUFFER, 4 * 1024, GL_DYNAMIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         updateMesh(GLFW_KEY_1);
         setCubeSize(8);
 
-        int vshader = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vshader,
-            "#version 140\n" +
+        programMesh = buildShaderProgram(
+            "#version 330\n" +
             "\n" +
-            "uniform mat4 gl_ModelViewProjectionMatrix;\n" +
-            "uniform mat3 gl_NormalMatrix;\n" +
+            "uniform mat4 mMVP;\n" +
+            "uniform mat3 mNORMAL;\n" +
             "uniform int cubeSize;\n" +
             "\n" +
-            "in vec3 position;\n" +
-            "in vec3 normal;\n" +
+            "layout(location = 0) in vec3 iPosition;\n" +
+            "layout(location = 1) in vec3 iNormal;\n" +
             "\n" +
-            "out vec3 viewNormal;\n" +
-            "out vec4 gl_Position;\n" +
+            "out vec3 vNormal;\n" +
             "\n" +
             "void main(void) {\n" +
             "  int x = gl_InstanceID / (cubeSize * cubeSize);\n" +
             "  int y = (gl_InstanceID / cubeSize) % cubeSize;\n" +
             "  int z = gl_InstanceID % cubeSize;\n" +
-            "  float offset = -cubeSize / 2;\n" +
-            "  if (cubeSize % 2 == 0) {\n" +
+            "  float offset = -(cubeSize / 2);\n" +
+            "  if (cubeSize + offset * 2 == 0) {\n" +
             "    offset += 0.5;" +
             "  }\n" +
-            "  gl_Position = gl_ModelViewProjectionMatrix * vec4(position + vec3(offset + float(x), offset + float(y), offset + float(z)), 1.0);\n" +
-            "  viewNormal = gl_NormalMatrix * normal;\n" +
-            "}\n"
-        );
-        glCompileShader(vshader);
-        if (glGetShaderi(vshader, GL_COMPILE_STATUS) == GL_FALSE) {
-            throw new IllegalStateException(glGetShaderInfoLog(vshader));
-        }
-
-        int fshader = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fshader,
-            "#version 140\n" +
+            "  gl_Position = mMVP * vec4(iPosition + vec3(offset + float(x), offset + float(y), offset + float(z)), 1.0);\n" +
+            "  vNormal = mNORMAL * iNormal;\n" +
+            "}\n",
+            "#version 330\n" +
             "\n" +
-            "in vec3 viewNormal;\n" +
+            "in vec3 vNormal;\n" +
             "\n" +
-            "out vec4 gl_FragColor;\n" +
+            "layout(location = 0) out vec4 oColor;\n" +
             "\n" +
             "void main(void) {\n" +
-            "  gl_FragColor = vec4(normalize(viewNormal), 1.0);\n" +
+            "  oColor = vec4(normalize(vNormal), 1.0);\n" +
             "}\n"
         );
-        glCompileShader(fshader);
-        if (glGetShaderi(fshader, GL_COMPILE_STATUS) == GL_FALSE) {
-            throw new IllegalStateException(glGetShaderInfoLog(fshader));
-        }
+        uniformModelViewProjectionMatrix = glGetUniformLocation(programMesh, "mMVP");
+        uniformNormalMatrix = glGetUniformLocation(programMesh, "mNORMAL");
+        uniformCubeSize = glGetUniformLocation(programMesh, "cubeSize");
+        uniformDiscardFS = glGetUniformLocation(programMesh, "discardFS");
 
-        program = glCreateProgram();
-        glAttachShader(program, vshader);
-        glAttachShader(program, fshader);
-        glBindAttribLocation(program, 0, "position");
-        glBindAttribLocation(program, 1, "normal");
-        glLinkProgram(program);
-        if (glGetProgrami(program, GL_LINK_STATUS) == GL_FALSE) {
-            throw new IllegalStateException(glGetProgramInfoLog(program));
-        }
-
-        cubeSizeLocation = glGetUniformLocation(program, "cubeSize");
-
-        glDeleteShader(fshader);
-        glDeleteShader(vshader);
+        programHUD = buildShaderProgram(
+            "#version 330\n" +
+            "\n" +
+            "uniform mat4 mMVP;\n" +
+            "\n" +
+            "layout(location = 0) in vec2 iPosition;\n" +
+            "layout(location = 1) in vec4 iColor;\n" +
+            "\n" +
+            "out vec4 vColor;\n" +
+            "\n" +
+            "void main(void) {\n" +
+            "  gl_Position = mMVP * vec4(iPosition, 0.0, 1.0);\n" +
+            "  vColor = iColor;\n" +
+            "}\n",
+            "#version 330\n" +
+            "\n" +
+            "in vec4 vColor;\n" +
+            "\n" +
+            "layout(location = 0) out vec4 oColor;\n" +
+            "\n" +
+            "void main(void) {\n" +
+            "  oColor = vColor;\n" +
+            "}\n"
+        );
+        uniformModelViewProjectionMatrixHUD = glGetUniformLocation(programHUD, "mMVP");
 
         gpuGraph = new PerfGraph();
         gpuTimer = new GPUTimer();
@@ -354,8 +397,8 @@ public final class HelloTootle {
         System.out.println("-----------------------------------------------------------------------------");
 
         TootleInit();
-        try (MemoryStack stack = stackPush()) {
-            new HelloTootle().run(stack);
+        try {
+            new HelloTootle().run();
         } finally {
             TootleCleanup();
         }
@@ -372,11 +415,15 @@ public final class HelloTootle {
             mesh = null;
         }
 
-        glDeleteProgram(program);
+        glDeleteProgram(programHUD);
+        glDeleteProgram(programMesh);
 
-        glDeleteBuffers(hudVBO);
-        glDeleteBuffers(ibo);
-        glDeleteBuffers(vbo);
+        glDeleteBuffers(vboPerf);
+        glDeleteBuffers(vboHUD);
+        glDeleteBuffers(iboMesh);
+        glDeleteBuffers(vboMesh);
+
+        glDeleteVertexArrays(vao);
 
         glfwFreeCallbacks(window);
         glfwTerminate();
@@ -387,29 +434,57 @@ public final class HelloTootle {
         }
     }
 
-    private void run(MemoryStack stack) {
-        FloatBuffer gpuTimes = stack.callocFloat(3);
+    private void run() {
+        try (MemoryStack stack = stackPush()) {
+            FloatBuffer gpuTimes = stack.callocFloat(3);
 
-        while (!glfwWindowShouldClose(window)) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            while (!glfwWindowShouldClose(window)) {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            if (mesh != null) {
-                renderMesh(gpuTimes);
+                if (mesh != null) {
+                    renderMesh(gpuTimes);
+                }
+                renderHUD();
+
+                glfwSwapBuffers(window);
+                glfwPollEvents();
             }
-            renderHUD(stack);
-
-            glfwSwapBuffers(window);
-            glfwPollEvents();
+        } finally {
+            cleanup();
         }
-
-        cleanup();
     }
 
-    private static void updateViewport(int width, int height) {
-        glViewport(0, 0, width, height);
+    private static int buildShaderProgram(String vsh, String fsh) {
+        int vshader = glCreateShader(GL_VERTEX_SHADER);
+        glShaderSource(vshader, vsh);
+        glCompileShader(vshader);
+        if (glGetShaderi(vshader, GL_COMPILE_STATUS) == GL_FALSE) {
+            throw new IllegalStateException(glGetShaderInfoLog(vshader));
+        }
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
+        int fshader = glCreateShader(GL_FRAGMENT_SHADER);
+        glShaderSource(fshader, fsh);
+        glCompileShader(fshader);
+        if (glGetShaderi(fshader, GL_COMPILE_STATUS) == GL_FALSE) {
+            throw new IllegalStateException(glGetShaderInfoLog(fshader));
+        }
+
+        int program = glCreateProgram();
+        glAttachShader(program, vshader);
+        glAttachShader(program, fshader);
+        glLinkProgram(program);
+        if (glGetProgrami(program, GL_LINK_STATUS) == GL_FALSE) {
+            throw new IllegalStateException(glGetProgramInfoLog(program));
+        }
+
+        glDeleteShader(fshader);
+        glDeleteShader(vshader);
+
+        return program;
+    }
+
+    private void updateViewport(int width, int height) {
+        glViewport(0, 0, width, height);
 
         double fovY  = 45.0;
         double zNear = 0.01;
@@ -417,29 +492,57 @@ public final class HelloTootle {
 
         double aspect = (double)width / (double)height;
 
-        double fH = Math.tan(fovY / 360 * Math.PI) * zNear;
+        double fH = tan(fovY / 360 * PI) * zNear;
         double fW = fH * aspect;
-        glFrustum(-fW, fW, -fH, fH, zNear, zFar);
 
-        glMatrixMode(GL_MODELVIEW);
+        projectionMatrix
+            .setFrustum(-fW, fW, -fH, fH, zNear, zFar);
+
+        modelViewProjectionMatrixHUD
+            .setOrtho(0.0, width, height, 0.0, -1.0, 1.0)
+            .translate(4.0, 4.0, 0.0)
+            .scale(2.0, 2.0, 1.0);
     }
 
     private void renderMesh(FloatBuffer gpuTimes) {
         if (!fragmentShader) {
-            glViewport(0, 0, 0, 0);
+            if (Platform.get() != Platform.MACOSX) {
+                glEnable(GL_RASTERIZER_DISCARD); // slower on macOS
+            } else {
+                glViewport(0, 0, 0, 0);
+                glColorMask(false, false, false, false);
+                glDepthMask(false);
+            }
         }
 
-        glUseProgram(program);
-        glUniform1i(cubeSizeLocation, cubeSize);
+        glUseProgram(programMesh);
 
+        try (MemoryStack frame = stackPush()) {
+            FloatBuffer uniform = frame.mallocFloat(4 * 4);
+
+            glUniformMatrix4fv(uniformModelViewProjectionMatrix, false,
+                projectionMatrix
+                    .mul(modelViewMatrix, modelViewProjectionMatrix)
+                    .get(uniform));
+
+            glUniformMatrix3fv(uniformNormalMatrix, false,
+                normalMatrix
+                    .set(modelViewMatrix)
+                    .transpose()
+                    .invert()
+                    .get(uniform));
+        }
+        glUniform1i(uniformCubeSize, cubeSize);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboMesh);
         glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
         if (hasNormals) {
             glEnableVertexAttribArray(1);
+            glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, mesh.npoints() * 3 * 4);
         } else {
-            glVertexAttrib3f(1, 1.0f, 1.0f, 1.0f);
+            setDefaultNormal();
         }
-
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
         gpuTimer.startGPUTimer();
 
@@ -448,14 +551,15 @@ public final class HelloTootle {
         if (hasNormals) {
             glDisableVertexAttribArray(1);
         }
-        glUseProgram(0);
 
         if (wireframe) {
             glEnable(GL_POLYGON_OFFSET_LINE);
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
             glPolygonOffset(-1, -1);
 
-            glColor3f(1.0f, 1.0f, 1.0f);
+            if (hasNormals) {
+                setDefaultNormal();
+            }
             glDrawElementsInstanced(GL_TRIANGLES, mesh.ntriangles() * 3, GL_UNSIGNED_INT, 0, cubeSize * cubeSize * cubeSize);
 
             glPolygonOffset(0.0f, 0.0f);
@@ -464,10 +568,19 @@ public final class HelloTootle {
         }
 
         glDisableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         if (!fragmentShader) {
-            glViewport(0, 0, width, height);
+            if (Platform.get() != Platform.MACOSX) {
+                glDisable(GL_RASTERIZER_DISCARD);
+            } else {
+                glDepthMask(true);
+                glColorMask(true, true, true, true);
+                glViewport(0, 0, width, height);
+            }
         }
+
+        glUseProgram(0);
 
         // We may get multiple results.
         int n = gpuTimer.stopGPUTimer(gpuTimes, 3);
@@ -476,58 +589,65 @@ public final class HelloTootle {
         }
     }
 
-    private void renderHUD(MemoryStack stack) {
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_COLOR_ARRAY);
+    private void setDefaultNormal() {
+        Vector3f v = new Matrix3d()
+            .set(modelViewMatrix)
+            .transpose()
+            .transform(new Vector3f(0.0f, 1.0f, 0.0f))
+            .normalize();
 
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glLoadIdentity();
-        glTranslatef(4.0f, 4.0f, 0.0f);
-        glScalef(2.0f, 2.0f, 1.0f);
+        glVertexAttrib3f(1, v.x, v.y, v.z);
+    }
 
-        glMatrixMode(GL_PROJECTION);
-        glPushMatrix();
-        glLoadIdentity();
-        glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+    private void renderHUD() {
+        glUseProgram(programHUD);
 
-        glFrontFace(GL_CW);
-        glBindBuffer(GL_ARRAY_BUFFER, hudVBO);
-        glVertexPointer(2, GL_FLOAT, 4 * 4, 0);
-        glColorPointer(4, GL_UNSIGNED_BYTE, 4 * 4, 3 * 4);
+        try (MemoryStack frame = stackPush()) {
+            glUniformMatrix4fv(uniformModelViewProjectionMatrixHUD, false, modelViewProjectionMatrixHUD.get(frame.mallocFloat(4 * 4)));
+        }
 
-        glDrawArrays(GL_QUADS, 0, hudVertexCount);
+        glBindBuffer(GL_ARRAY_BUFFER, vboHUD);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, false, 4 * 4, 0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, true, 4 * 4, 3 * 4);
 
-        glDisableClientState(GL_COLOR_ARRAY);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDrawArrays(GL_TRIANGLES, 0, vboHUDVertexCount);
+
+        glDisableVertexAttribArray(1);
 
         float avg = gpuGraph.getAverage();
         if (avg != 0.0f) {
-            try (MemoryStack frame = stack.push()) {
-                ByteBuffer text = frame.malloc(4 * 1024);
+            try (MemoryStack frame = stackPush()) {
+                ByteBuffer text  = frame.malloc(4 * 1024);
+                int        quads = stb_easy_font_print((width - 100) / 2, 8, String.format("%.2f ms", avg * 1000.0f), null, text);
+                text.limit(quads * 4 * 16);
 
-                int quads = stb_easy_font_print((width - 100) / 2, 8, String.format("%.2f ms", avg * 1000.0f), null, text);
+                ByteBuffer triangles = frame.malloc(quads * 6 * 16);
+                copyQuadsToTriangles(text, triangles);
 
-                glVertexPointer(2, GL_FLOAT, 4 * 4, text);
-                glDrawArrays(GL_QUADS, 0, quads * 4);
+                glBindBuffer(GL_ARRAY_BUFFER, vboPerf);
+                glBufferSubData(GL_ARRAY_BUFFER, 0, triangles);
+
+                glVertexAttribPointer(0, 2, GL_FLOAT, false, 4 * 4, 0);
+                glVertexAttrib4f(1, 1.0f, 1.0f, 1.0f, 1.0f);
+                glDrawArrays(GL_TRIANGLES, 0, quads * 6);
             }
         }
 
-        glDisableClientState(GL_VERTEX_ARRAY);
-        glFrontFace(GL_CCW);
+        glDisableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-        glPopMatrix();
-        glMatrixMode(GL_MODELVIEW);
-        glPopMatrix();
+        glUseProgram(0);
     }
 
     private void setCubeSize(int size) {
         cubeSize = size;
 
-        glLoadIdentity();
-        glTranslatef(0.0f, 0.0f, -cubeSize * 2);
-        glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
-        glRotatef(45.0f, 0.0f, 1.0f, 0.0f);
+        modelViewMatrix
+            .translation(0.0, 0.0, -cubeSize * 2)
+            .rotateX(toRadians(45.0))
+            .rotateY(toRadians(45.0));
 
         updateHUD();
     }
@@ -631,21 +751,19 @@ public final class HelloTootle {
 
         int vc = mesh.npoints();
 
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vboMesh);
         glBufferData(GL_ARRAY_BUFFER, vc * (3 + 3 + 2) * 4, GL_STATIC_DRAW);
 
         glBufferSubData(GL_ARRAY_BUFFER, vc * (0 + 0) * 4, mesh.points(vc * 3));
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, vc * (0 + 0) * 4);
 
         hasNormals = memGetAddress(mesh.address() + ParShapesMesh.NORMALS) != NULL;
         if (hasNormals) {
             glBufferSubData(GL_ARRAY_BUFFER, vc * (3 + 0) * 4, mesh.normals(vc * 3));
-            glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, vc * (3 + 0) * 4);
         }
 
         int tc = mesh.ntriangles();
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboMesh);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.triangles(tc * 3), GL_STATIC_DRAW);
     }
 
@@ -711,7 +829,7 @@ public final class HelloTootle {
         setColor(color, 255, 255, 0, 255);
 
         i = 0;
-        y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + (vacheMethod + 1), color, buffer);
+        y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + (vcacheMethod + 1), color, buffer);
         i++;
         y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + vcacheSize, color, buffer);
         i++;
@@ -765,10 +883,17 @@ public final class HelloTootle {
         }
 
         buffer.flip();
-        hudVertexCount = buffer.limit() >> 4;
 
-        glBindBuffer(GL_ARRAY_BUFFER, hudVBO);
-        glBufferData(GL_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
+        // convert to triangles
+        ByteBuffer triangles = copyQuadsToTriangles(buffer, null);
+        try {
+            vboHUDVertexCount = triangles.limit() >> 4;
+
+            glBindBuffer(GL_ARRAY_BUFFER, vboHUD);
+            glBufferData(GL_ARRAY_BUFFER, triangles, GL_STATIC_DRAW);
+        } finally {
+            memFree(triangles);
+        }
 
         memFree(color);
         memFree(buffer);
@@ -786,6 +911,34 @@ public final class HelloTootle {
         int quads = stb_easy_font_print(x, y, text, color, buffer);
         buffer.position(buffer.position() + quads * (4 * 4 * 4));
         return y + 10;
+    }
+
+    private static ByteBuffer copyQuadsToTriangles(ByteBuffer quads, ByteBuffer triangles) {
+        int vertexCount = quads.remaining() >> 4;
+        int quadCount   = vertexCount >> 2;
+
+        if (triangles == null) {
+            triangles = memAlloc(quadCount * 6 * 16);
+        }
+
+        long s = memAddress(quads);
+        long t = memAddress(triangles);
+
+        for (int i = 0; i < quadCount; i++) {
+            long quad = s + i * (4 * 16);
+
+            long triangle = t + i * (6 * 16);
+
+            memCopy(quad + 0 * 16, triangle + 0 * 16, 16);
+            memCopy(quad + 2 * 16, triangle + 1 * 16, 16);
+            memCopy(quad + 1 * 16, triangle + 2 * 16, 16);
+
+            memCopy(quad + 0 * 16, triangle + 3 * 16, 16);
+            memCopy(quad + 3 * 16, triangle + 4 * 16, 16);
+            memCopy(quad + 2 * 16, triangle + 5 * 16, 16);
+        }
+
+        return triangles;
     }
 
     private void importMesh() {
@@ -943,7 +1096,7 @@ public final class HelloTootle {
             System.out.println("\nOptimizing...");
             long t = System.nanoTime();
             int  err;
-            switch (vacheMethod) {
+            switch (vcacheMethod) {
                 case 1:
                     err = optimize(pVB, pnIB, pnIBOut);
                     break;
@@ -1107,26 +1260,30 @@ public final class HelloTootle {
                 acmrOptimized = pfA.get(0);
             }
 
-            err = TootleMeasureOverdraw(
-                pVB,
-                pnIB,
-                3 * Float.BYTES,
-                null,
-                TOOTLE_CCW,
-                pfA,
-                pfB,
-                TOOTLE_OVERDRAW_AUTO
-            );
-            if (err != TOOTLE_OK) {
-                throw new IllegalStateException("Failed: " + err);
-            }
-            float avg = Math.max(0.0f, pfA.get(0));
-            System.out.println("\tOverdraw AVG: " + avg);
-            System.out.println("\tOverdraw MAX: " + pfB.get(0));
-            if ("BEFORE".equals(title)) {
-                ovdr = avg;
+            if (Platform.get() == Platform.WINDOWS || vcacheMethod != 0) {
+                err = TootleMeasureOverdraw(
+                    pVB,
+                    pnIB,
+                    3 * Float.BYTES,
+                    null,
+                    TOOTLE_CCW,
+                    pfA,
+                    pfB,
+                    TOOTLE_OVERDRAW_AUTO
+                );
+                if (err != TOOTLE_OK) {
+                    throw new IllegalStateException("Failed: " + err);
+                }
+                float avg = max(0.0f, pfA.get(0));
+                System.out.println("\tOverdraw AVG: " + avg);
+                System.out.println("\tOverdraw MAX: " + pfB.get(0));
+                if ("BEFORE".equals(title)) {
+                    ovdr = avg;
+                } else {
+                    ovdrOptimized = avg;
+                }
             } else {
-                ovdrOptimized = avg;
+                ovdr = ovdrOptimized = -1.0f;
             }
         }
     }
