@@ -12,6 +12,7 @@
     <!-- *********************************** -->
     <property name="testng" value="6.11"/>
     <property name="jcommander" value="1.72"/>
+    <property name="joml" value="1.9.6"/>
     <property name="kotlinc-version" value="1.1.60"/>
     <property name="kotlinc-build" value="1.1.60"/>
     <!-- *********************************** -->
@@ -66,8 +67,9 @@
 
     <!-- Downloads the Java dependencies. -->
     <target name="-lib-download" unless="lib-uptodate">
-        <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
+        <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}" sources="false"/>
         <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
+        <update-mvn name="JOML" group="org/joml" artifact="joml" version="${joml}" dest="${lib}"/>
 
         <touch file="${lib}/touch.txt" verbose="false"/>
     </target>

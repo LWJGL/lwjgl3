@@ -542,6 +542,7 @@
             <classpath>
                 <pathelement path="${bin.core}"/>
                 <pathelement path="${lib}/testng.jar"/>
+                <pathelement path="${lib}/joml.jar"/>
             </classpath>
 
             <!-- Demos -->
@@ -634,6 +635,7 @@
         <java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
             <classpath>
                 <pathelement path="${lib}/testng.jar"/>
+                <pathelement path="${lib}/joml.jar"/>
             </classpath>
 
             <jvmarg value="-Djava.library.path=${lib}"/>
