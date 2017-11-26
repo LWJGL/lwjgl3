@@ -62,7 +62,6 @@ public final class HelloTootle {
     private final int uniformModelViewProjectionMatrix;
     private final int uniformNormalMatrix;
     private final int uniformCubeSize;
-    private final int uniformDiscardFS;
 
     private final Matrix4d modelViewMatrix  = new Matrix4d();
     private final Matrix4d projectionMatrix = new Matrix4d();
@@ -349,7 +348,6 @@ public final class HelloTootle {
         uniformModelViewProjectionMatrix = glGetUniformLocation(programMesh, "mMVP");
         uniformNormalMatrix = glGetUniformLocation(programMesh, "mNORMAL");
         uniformCubeSize = glGetUniformLocation(programMesh, "cubeSize");
-        uniformDiscardFS = glGetUniformLocation(programMesh, "discardFS");
 
         programHUD = buildShaderProgram(
             "#version 330\n" +
