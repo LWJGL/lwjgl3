@@ -314,6 +314,8 @@
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer/JRT"/>
                     <arg value="-I${src.native.rel}/util/tootle/RayTracer/Math"/>
                     <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
+                    <fileset dir="." excludes="${src.native}/util/tootle/d3d*.cpp"/>
+                    <fileset dir="." excludes="${src.native}/util/tootle/gdi*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/JRT/*.cpp"/>
                     <fileset dir="." includes="${src.native}/util/tootle/RayTracer/Math/*.cpp"/>

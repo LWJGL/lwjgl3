@@ -13,6 +13,7 @@ import org.lwjgl.util.par.*;
 
 import java.nio.*;
 import java.nio.file.*;
+import java.util.concurrent.*;
 
 import static org.lwjgl.assimp.Assimp.*;
 import static org.lwjgl.glfw.Callbacks.*;
@@ -39,6 +40,11 @@ public final class HelloTootle {
 
     private ParShapesMesh mesh;
     private ParShapesMesh meshOptimized;
+
+    private float acmr;
+    private float acmrOptimized;
+    private float ovdr;
+    private float ovdrOptimized;
 
     private final Callback debugCB;
 
@@ -222,6 +228,11 @@ public final class HelloTootle {
                 case GLFW_KEY_ESCAPE:
                     glfwSetWindowShouldClose(window, true);
                     break;
+                case GLFW_KEY_SPACE:
+                    if (mesh != null) {
+                        shuffleMesh();
+                    }
+                    break;
             }
         });
 
@@ -331,6 +342,17 @@ public final class HelloTootle {
     }
 
     public static void main(String[] args) {
+        System.out.println("Press <SPACE> to shuffle the index buffer of the unoptimized mesh.");
+        System.out.println("Press <CTRL+O> to load a custom mesh using Assimp.");
+        System.out.println("Press <F1> to perform ACMR optimization.");
+        System.out.println("Press <F2> to perform slow ACMR+Overdraw optimization.");
+        System.out.println("Press <F3> to perform fast ACMR+Overdraw optimization.");
+        System.out.println("Press <F4> to toggle vertex prefetch cache optimization.");
+        System.out.println("Press <F> to toggle fragment shader (ON: full viewport, OFF: null viewport).");
+        System.out.println("\tACMR is best measured with FS OFF");
+        System.out.println("\tOVDR is best measured with FS ON");
+        System.out.println("-----------------------------------------------------------------------------");
+
         TootleInit();
         try (MemoryStack stack = stackPush()) {
             new HelloTootle().run(stack);
@@ -734,6 +756,12 @@ public final class HelloTootle {
                 (height / 2 - 5) / 2,
                 msg, color, buffer
             );
+        } else {
+            String msg = "ACMR: " + (optimized ? acmrOptimized : acmr);
+            print((width / 2) - stb_easy_font_width(msg) - 2, 20, msg, color, buffer);
+
+            msg = "OVDR: " + (optimized ? ovdrOptimized : ovdr);
+            print((width / 2) - stb_easy_font_width(msg) - 2, 30, msg, color, buffer);
         }
 
         buffer.flip();
@@ -847,13 +875,49 @@ public final class HelloTootle {
         return ps;
     }
 
+    private void shuffleMesh() {
+        int ntriangles = mesh.ntriangles();
+
+        int[] order = new int[ntriangles];
+        for (int i = 0; i < ntriangles; i++) {
+            order[i] = i;
+        }
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        for (int i = order.length - 1; 0 < i; i--) {
+            int index = random.nextInt(i + 1);
+            int tmp   = order[index];
+            order[index] = order[i];
+            order[i] = tmp;
+        }
+
+        IntBuffer triangles = mesh.triangles(mesh.ntriangles() * 3);
+        IntBuffer shuffled  = memAllocInt(triangles.remaining());
+        try {
+            for (int i = 0; i < ntriangles; i++) {
+                int src = i * 3;
+                int trg = order[i] * 3;
+
+                shuffled.put(trg + 0, triangles.get(src + 0));
+                shuffled.put(trg + 1, triangles.get(src + 1));
+                shuffled.put(trg + 2, triangles.get(src + 2));
+            }
+            triangles.put(shuffled);
+            triangles.flip();
+            shuffled.flip();
+        } finally {
+            memFree(shuffled);
+        }
+
+        printStats("BEFORE", mesh.points(mesh.npoints() * 3), triangles);
+        if (!optimized) {
+            updateMeshGPU();
+        }
+        updateHUD();
+    }
+
     private void optimize(ParShapesMesh mesh) {
         int nVertices = mesh.npoints();
         int nFaces    = mesh.ntriangles();
-
-        System.out.println("Vertex   #: " + nVertices);
-        System.out.println("Triangle #: " + nFaces);
-        System.out.println("Index    #: " + (nFaces * 3));
 
         FloatBuffer pVB  = mesh.points(nVertices * 3);
         IntBuffer   pnIB = mesh.triangles(nFaces * 3);
@@ -929,6 +993,7 @@ public final class HelloTootle {
                     }
                 } finally {
                     memFree(pnVertexRemap);
+                    buffer.clear();
                     memFree(buffer);
                 }
                 t = System.nanoTime() - t;
@@ -1026,19 +1091,23 @@ public final class HelloTootle {
     ) {
         System.out.println();
         System.out.println(title);
-        for (int i = 0; i < title.length(); i++) {
-            System.out.print("-");
-        }
-        System.out.println();
 
         try (MemoryStack stack = stackPush()) {
             FloatBuffer pfA = stack.mallocFloat(1);
             FloatBuffer pfB = stack.mallocFloat(1);
 
-            TootleMeasureCacheEfficiency(pnIB, vcacheSize, pfA);
+            int err = TootleMeasureCacheEfficiency(pnIB, vcacheSize, pfA);
+            if (err != TOOTLE_OK) {
+                throw new IllegalStateException("Failed: " + err);
+            }
             System.out.println("\tACMR: " + pfA.get(0));
+            if ("BEFORE".equals(title)) {
+                acmr = pfA.get(0);
+            } else {
+                acmrOptimized = pfA.get(0);
+            }
 
-            TootleMeasureOverdraw(
+            err = TootleMeasureOverdraw(
                 pVB,
                 pnIB,
                 3 * Float.BYTES,
@@ -1048,8 +1117,17 @@ public final class HelloTootle {
                 pfB,
                 TOOTLE_OVERDRAW_AUTO
             );
-            System.out.println("\tOverdraw AVG: " + pfA.get(0));
+            if (err != TOOTLE_OK) {
+                throw new IllegalStateException("Failed: " + err);
+            }
+            float avg = Math.max(0.0f, pfA.get(0));
+            System.out.println("\tOverdraw AVG: " + avg);
             System.out.println("\tOverdraw MAX: " + pfB.get(0));
+            if ("BEFORE".equals(title)) {
+                ovdr = avg;
+            } else {
+                ovdrOptimized = avg;
+            }
         }
     }
 
