@@ -329,7 +329,7 @@ par_shapes_mesh* par_shapes_create_parametric_sphere(int slices, int stacks)
     }
     par_shapes_mesh* m = par_shapes_create_parametric(par_shapes__sphere,
         slices, stacks, 0);
-    par_shapes_remove_degenerate(m, 0.0001);
+    par_shapes_remove_degenerate(m, 0.0000001);
     return m;
 }
 
@@ -340,7 +340,7 @@ par_shapes_mesh* par_shapes_create_hemisphere(int slices, int stacks)
     }
     par_shapes_mesh* m = par_shapes_create_parametric(par_shapes__hemisphere,
         slices, stacks, 0);
-    par_shapes_remove_degenerate(m, 0.0001);
+    par_shapes_remove_degenerate(m, 0.0000001);
     return m;
 }
 
@@ -2030,7 +2030,6 @@ static double par__simplex_noise2(struct osn_context* ctx, double x, double y)
 
 void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
 {
-    /* LWJGL: disabled to support dense geometry
     int ntriangles = 0;
     PAR_SHAPES_T* triangles = PAR_MALLOC(PAR_SHAPES_T, mesh->ntriangles * 3);
     PAR_SHAPES_T* dst = triangles;
@@ -2057,7 +2056,6 @@ void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
     mesh->ntriangles = ntriangles;
     PAR_FREE(mesh->triangles);
     mesh->triangles = triangles;
-    */
 }
 
 #endif // PAR_SHAPES_IMPLEMENTATION
