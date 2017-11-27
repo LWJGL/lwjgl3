@@ -300,7 +300,6 @@ public class YGAbsolutePositionTest {
         root_child3.setWidth(50f);
         root_child3.setHeight(50f);
         root.addChildAt(root_child3, 3);
-
         root.setDirection(YogaDirection.LTR);
         root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 

@@ -137,7 +137,8 @@ div {
         "JustifyCenter".enum,
         "JustifyFlexEnd".enum,
         "JustifySpaceBetween".enum,
-        "JustifySpaceAround".enum
+        "JustifySpaceAround".enum,
+        "JustifySpaceEvenly".enum
     )
 
     EnumConstant(
@@ -738,16 +739,6 @@ div {
         "",
 
         const..YGConfigRef.IN("config", "")
-    )
-
-    void(
-        "SetMemoryFuncs",
-        "",
-
-        YGMalloc.IN("ygmalloc", ""),
-        YGCalloc.IN("yccalloc", ""),
-        YGRealloc.IN("ygrealloc", ""),
-        YGFree.IN("ygfree", "")
     )
 
     // Enums

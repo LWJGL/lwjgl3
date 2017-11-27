@@ -331,7 +331,8 @@ class YogaNode {
         CENTER(YGJustifyCenter),
         FLEX_END(YGJustifyFlexEnd),
         SPACE_BETWEEN(YGJustifySpaceBetween),
-        SPACE_AROUND(YGJustifySpaceAround);
+        SPACE_AROUND(YGJustifySpaceAround),
+        SPACE_EVENLY(YGJustifySpaceEvenly);
 
         final int value;
 

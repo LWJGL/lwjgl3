@@ -132,36 +132,6 @@ val YGNodeClonedFunc = "YGNodeClonedFunc".callback(
     int.IN("childIndex", "")
 )
 
-val YGMalloc = "YGMalloc".callback(
-    YOGA_PACKAGE, opaque_p, "YGMalloc",
-    "",
-
-    size_t.IN("size", "")
-)
-
-val YGCalloc = "YGCalloc".callback(
-    YOGA_PACKAGE, opaque_p, "YGMalloc",
-    "",
-
-    size_t.IN("count", ""),
-    size_t.IN("size", "")
-)
-
-val YGRealloc = "YGRealloc".callback(
-    YOGA_PACKAGE, opaque_p, "YGRealloc",
-    "",
-
-    nullable..opaque_p.IN("ptr", ""),
-    size_t.IN("size", "")
-)
-
-val YGFree = "YGFree".callback(
-    YOGA_PACKAGE, opaque_p, "YGFree",
-    "",
-
-    nullable..opaque_p.IN("ptr", "")
-)
-
 // Internal API, exposed for efficiency.
 
 val YGCachedMeasurement = struct(YOGA_PACKAGE, "YGCachedMeasurement", mutable = false) {

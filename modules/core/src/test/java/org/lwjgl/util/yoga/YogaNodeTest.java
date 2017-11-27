@@ -186,7 +186,6 @@ public class YogaNodeTest {
         assertEquals(YogaFlexDirection.ROW.value, node.getFlexDirection());
     }
 
-
     @Test
     public void testPercentPaddingOnRoot() {
         YogaNode node = new YogaNode();

@@ -405,7 +405,7 @@ EXPORTS
             <beforeCompile>
                 <compile dest="@{dest}" flags="">
                     <arg value="/I${src.native}\util\yoga"/>
-                    <fileset dir="." includes="${src.native}/util/yoga/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/yoga/*.cpp"/>
                 </compile>
             </beforeCompile>
             <compileargs>
