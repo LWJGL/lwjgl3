@@ -132,7 +132,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
 ￿    VkDisplayKHR*                               pDisplay);</pre></code>
 
         <h5>Description</h5>
-        If there is no VkDisplayKHR corresponding to {@code rrOutput} on {@code physicalDevice}, #NULL_HANDLE <b>must</b> be returned in {@code pDisplay}.
+        If there is no {@code VkDisplayKHR} corresponding to {@code rrOutput} on {@code physicalDevice}, #NULL_HANDLE <b>must</b> be returned in {@code pDisplay}.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -153,6 +153,6 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         VkPhysicalDevice.IN("physicalDevice", "The physical device to query the display handle on."),
         Display.p.IN("dpy", "A connection to the X11 server from which {@code rrOutput} was queried."),
         RROutput.IN("rrOutput", "An X11 RandR output ID."),
-        Check(1)..VkDisplayKHR.p.OUT("pDisplay", "The corresponding VkDisplayKHR handle will be returned here.")
+        Check(1)..VkDisplayKHR.p.OUT("pDisplay", "The corresponding {@code VkDisplayKHR} handle will be returned here.")
     )
 }

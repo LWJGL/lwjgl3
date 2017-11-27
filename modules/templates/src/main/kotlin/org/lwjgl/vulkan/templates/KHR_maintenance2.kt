@@ -25,14 +25,14 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
         </ul>
 
         <h5>Input Attachment Specification</h5>
-        Input attachment specification allows an application to specify which aspect of a multi-aspect image (e.g. a combined depth stencil format) will be accessed via a subpassLoad operation.
+        Input attachment specification allows an application to specify which aspect of a multi-aspect image (e.g. a combined depth stencil format) will be accessed via a {@code subpassLoad} operation.
 
         On some implementations there <b>may</b> be a performance penalty if the implementation does not know (at #CreateRenderPass() time) which aspect(s) of multi-aspect images <b>can</b> be be accessed as input attachments.
 
         <h5>Input Attachment Specification Example</h5>
         Consider the case where a render pass has two subpasses and two attachments.
 
-        Attachment 0 has the format VK_FORMAT_D24_UNORM_S8_UINT, attachment 1 has some color format.
+        Attachment 0 has the format #FORMAT_D24_UNORM_S8_UINT, attachment 1 has some color format.
 
         Subpass 0 writes to attachment 0, subpass 1 reads only the depth information from attachment 0 (using inputAttachmentRead) and writes to attachment 1.
 

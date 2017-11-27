@@ -17,7 +17,7 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
             <li>SPV_NV_viewport_array2</li>
         </ul>
 
-        which allows a single primitive to be broadcast to multiple viewports and/or multiple layers. A new shader built-in output {@code ViewportMaskNV} is provided, which allows a single primitive to be output to multiple viewports simultaneously. Also, a new SPIR-V decoration is added to control whether the effective viewport index is added into the variable decorated with the <b>Layer</b> built-in decoration. These capabilities allow a single primitive to be output to multiple layers simultaneously.
+        which allows a single primitive to be broadcast to multiple viewports and/or multiple layers. A new shader built-in output {@code ViewportMaskNV} is provided, which allows a single primitive to be output to multiple viewports simultaneously. Also, a new SPIR-V decoration is added to control whether the effective viewport index is added into the variable decorated with the {@code Layer} built-in decoration. These capabilities allow a single primitive to be output to multiple layers simultaneously.
 
         This extension allows variables decorated with the {@code Layer} and {@code ViewportIndex} built-ins to be exported from vertex or tessellation shaders, using the {@code ShaderViewportIndexLayerNV} capability.
 

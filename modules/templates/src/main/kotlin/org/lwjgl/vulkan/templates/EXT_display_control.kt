@@ -213,7 +213,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         Signal a fence when a display event occurs.
 
         <h5>C Specification</h5>
-        To create a fence that will be signaled when an event occurs on a VkDisplayKHR object, call:
+        To create a fence that will be signaled when an event occurs on a {@code VkDisplayKHR} object, call:
 
         <code><pre>
 ￿VkResult vkRegisterDisplayEventEXT(

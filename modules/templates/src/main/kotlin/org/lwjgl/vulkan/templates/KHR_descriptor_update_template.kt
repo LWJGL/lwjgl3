@@ -312,7 +312,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         VkDevice.IN("device", "the logical device that updates the descriptor sets."),
         VkDescriptorSet.IN("descriptorSet", "the descriptor set to update"),
-        VkDescriptorUpdateTemplateKHR.IN("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplateKHR} which specifies the update mapping between the application pointer and the descriptor set to update."),
+        VkDescriptorUpdateTemplateKHR.IN("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplateKHR} which specifies the update mapping between {@code pData} and the descriptor set to update."),
         const..opaque_p.IN("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
     )
 

@@ -186,7 +186,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <li>#SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR specifies the color model conversion from Y&#8217;C<sub>B</sub>C<sub>R</sub> to R&#8217;G&#8217;B' defined in BT.2020 and described in the “BT.2020 Y’C<sub>B</sub>C<sub>R</sub> conversion” section of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#data-format">Khronos Data Format Specification</a>.</li>
         </ul>
 
-        In the etext:VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_*_KHR color models, for the input to the sampler Y'C<sub>B</sub>C<sub>R</sub> range expansion and model conversion:
+        In the {@code VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_*_KHR} color models, for the input to the sampler Y'C<sub>B</sub>C<sub>R</sub> range expansion and model conversion:
 
         <ul>
             <li>the Y (Y' luma) channel corresponds to the G channel of an RGB image.</li>

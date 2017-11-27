@@ -136,7 +136,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code fd} <b>must</b> be an external memory handle created outside of the Vulkan API.</li>
-            <li>{@code handleType} <b>must</b> not be one of the handle types defined as opaque.</li>
+            <li>{@code handleType} <b>must</b> not be #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

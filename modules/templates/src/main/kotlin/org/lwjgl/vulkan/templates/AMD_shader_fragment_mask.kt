@@ -13,9 +13,9 @@ val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader
         """
         This extension provides efficient read access to the fragment mask in compressed multisampled color surfaces. The fragment mask is a lookup table that associates color samples with color fragment values.
 
-        The fragment mask can be fetched with a call to {@code fragmentMaskFetchAMD} from a shader, which returns a single uint where each subsequent 4 bit specifies the color fragment index corresponding to the color sample, starting from the least significant bit. For example, when 8 color samples are used, the color fragment index for color sample 0 will be in bits 0-3 of the fragment mask, for color sample 7 the index will be in bits 28-31.
+        The fragment mask can be fetched with a call to {@code fragmentMaskFetchAMD} from a shader, which returns a single {@code uint} where each subsequent 4 bit specifies the color fragment index corresponding to the color sample, starting from the least significant bit. For example, when 8 color samples are used, the color fragment index for color sample 0 will be in bits 0-3 of the fragment mask, for color sample 7 the index will be in bits 28-31.
 
-        The color fragment for a particular color sample may then be fetched with the correspoding fragment mask value using the {@code fragmentFetchAMD} shader function.
+        The color fragment for a particular color sample may then be fetched with the corresponding fragment mask value using the {@code fragmentFetchAMD} shader function.
 
         <h5>Examples</h5>
         This example shows a shader that queries the fragment mask from a multisampled compressed surface and uses it to query fragment values.

@@ -101,6 +101,9 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR specifies a global share handle returned by {@code IDXGIResource}::{@code GetSharedHandle} referring to a Direct3D 10 or 11 texture resource. It does not own a reference to the underlying Direct3D resource, and will therefore become invalid when all Vulkan memory objects and Direct3D resources associated with it are destroyed.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR specifies an NT handle returned by {@code ID3D12Device}::{@code CreateSharedHandle} referring to a Direct3D 12 heap resource. It owns a reference to the resources used by the Direct3D heap.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR specifies an NT handle returned by {@code ID3D12Device}::{@code CreateSharedHandle} referring to a Direct3D 12 committed resource. It owns a reference to the memory used by the Direct3D resource.</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT specifies a host pointer returned by a host memory allocation command. It does not own a reference to the underlying memory resource, and will therefore become invalid if the host memory is freed.</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT specifies a host pointer to <em>host mapped foreign memory</em>. It does not own a reference to the underlying memory resource, and will therefore become invalid if the foreign memory is unmapped or otherwise becomes no longer available.</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT is a file descriptor for a Linux dma_buf. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
         </ul>
 
         
@@ -118,11 +121,22 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR</td><td>Must match</td><td>Must match</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT</td><td>No restriction</td><td>No restriction</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT</td><td>No restriction</td><td>No restriction</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT</td><td>No restriction</td><td>No restriction</td></tr>
             </tbody>
         </table>
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The above table does not restrict the drivers and devices with which #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT and #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT <b>may</b> be shared, as these handle types inherently mean memory that does not come from the same device, as they import memory from the host or a foreign device, respectively.
+        </div>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Even though the above table does not restrict the drivers and devices with which #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT <b>may</b> be shared, query mechanisms exist in the Vulkan API that prevent the import of incompatible dma-bufs (such as #GetMemoryFdPropertiesKHR()) and that prevent incompatible usage of dma-bufs (such as ##VkPhysicalDeviceExternalBufferInfoKHR and ##VkPhysicalDeviceExternalImageFormatInfoKHR).
+        </div>
+
         <h5>See Also</h5>
-        {@code VkExternalMemoryHandleTypeFlagsKHR}, ##VkImportMemoryFdInfoKHR, ##VkImportMemoryWin32HandleInfoKHR, ##VkMemoryGetFdInfoKHR, ##VkMemoryGetWin32HandleInfoKHR, ##VkPhysicalDeviceExternalBufferInfoKHR, ##VkPhysicalDeviceExternalImageFormatInfoKHR, #GetMemoryFdPropertiesKHR(), #GetMemoryWin32HandlePropertiesKHR()
+        {@code VkExternalMemoryHandleTypeFlagsKHR}, ##VkImportMemoryFdInfoKHR, ##VkImportMemoryHostPointerInfoEXT, ##VkImportMemoryWin32HandleInfoKHR, ##VkMemoryGetFdInfoKHR, ##VkMemoryGetWin32HandleInfoKHR, ##VkPhysicalDeviceExternalBufferInfoKHR, ##VkPhysicalDeviceExternalImageFormatInfoKHR, #GetMemoryFdPropertiesKHR(), #GetMemoryHostPointerPropertiesEXT(), #GetMemoryWin32HandlePropertiesKHR()
         """,
 
         "EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR".enum(0x00000001),

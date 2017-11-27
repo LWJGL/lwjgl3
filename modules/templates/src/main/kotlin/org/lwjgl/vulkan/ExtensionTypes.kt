@@ -432,7 +432,7 @@ val VkDisplayPlaneCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPlaneCapabi
     VkOffset2D.member("maxSrcPosition", "the maximum source rectangle offset supported by this plane using the specified mode. The {@code x} and {@code y} components of {@code maxSrcPosition} <b>must</b> each be greater than or equal to the {@code x} and {@code y} components of {@code minSrcPosition}, respectively.")
     VkExtent2D.member("minSrcExtent", "the minimum source rectangle size supported by this plane using the specified mode.")
     VkExtent2D.member("maxSrcExtent", "the maximum source rectangle size supported by this plane using the specified mode.")
-    VkOffset2D.member("minDstPosition", "{@code minDstPosition}, {@code maxDstPosition}, {@code minDstExtent}, {@code maxDstExtent} all have similar semantics to their corresponding \"Src\" equivalents, but apply to the output region within the mode rather than the input region within the source image. Unlike the \"Src\" offsets, {@code minDstPosition} and {@code maxDstPosition} <b>may</b> contain negative values.")
+    VkOffset2D.member("minDstPosition", "{@code minDstPosition}, {@code maxDstPosition}, {@code minDstExtent}, {@code maxDstExtent} all have similar semantics to their corresponding {@code Src}<b> equivalents, but apply to the output region within the mode rather than the input region within the source image. Unlike the {@code Src}</b> offsets, {@code minDstPosition} and {@code maxDstPosition} <b>may</b> contain negative values.")
     VkOffset2D.member("maxDstPosition", "see {@code minDstPosition}")
     VkExtent2D.member("minDstExtent", "see {@code minDstPosition}")
     VkExtent2D.member("maxDstExtent", "see {@code minDstPosition}")
@@ -445,7 +445,7 @@ val VkDisplayPlanePropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPlaneProperti
         """
 
     VkDisplayKHR.member("currentDisplay", "the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be {@code VK_NULL_HANDLE}.")
-    uint32_t.member("currentStackIndex", "the current z-order of the plane. This will be between 0 and the value returned by #GetPhysicalDeviceDisplayPlanePropertiesKHR()() in {@code pPropertyCount}.")
+    uint32_t.member("currentStackIndex", "the current z-order of the plane. This will be between 0 and the value returned by #GetPhysicalDeviceDisplayPlanePropertiesKHR() in {@code pPropertyCount}.")
 }
 
 val VkDisplaySurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCreateInfoKHR") {
@@ -487,7 +487,7 @@ val VkDisplaySurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCrea
     VkDisplayModeKHR.member("displayMode", "a {@code VkDisplayModeKHR} handle specifying the mode to use when displaying this surface.")
     uint32_t.member("planeIndex", "the plane on which this surface appears.")
     uint32_t.member("planeStackIndex", "the z-order of the plane.")
-    VkSurfaceTransformFlagBitsKHR.member("transform", "a {@code VkSurfaceTransformFlagBitsKH} value specifying the transformation to apply to images as part of the scanout operation.")
+    VkSurfaceTransformFlagBitsKHR.member("transform", "a {@code VkSurfaceTransformFlagBitsKHR} value specifying the transformation to apply to images as part of the scanout operation.")
     float.member("globalAlpha", "the global alpha value. This value is ignored if {@code alphaMode} is not #DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR.")
     VkDisplayPlaneAlphaFlagBitsKHR.member("alphaMode", "a {@code VkDisplayPlaneAlphaFlagBitsKHR} value specifying the type of alpha blending to use.")
     VkExtent2D.member("imageExtent", "The size of the presentable images to use with the surface.")
@@ -644,7 +644,7 @@ val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObject
         Specify parameters of a name to give to an object.
 
         <h5>Description</h5>
-        Applications <b>may</b> change the name associated with an object simply by calling #DebugMarkerSetObjectNameEXT() again with a new string. To remove a previously set name, {@code pName} <b>should</b> be set to an empty string.
+        Applications <b>may</b> change the name associated with an object simply by calling #DebugMarkerSetObjectNameEXT() again with a new string. To remove a previously set name, {@code pObjectName} <b>should</b> be set to an empty string.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1034,7 +1034,7 @@ val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin3
         <h5>Description</h5>
         If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"[1]. Further, if the structure is not present, the access rights will be
 
-        {@code DXGI_SHARED_RESOURCE_READ} | {@code DXGI_SHARED_RESOURCE_WRITE}
+        DXGI_SHARED_RESOURCE_READ | DXGI_SHARED_RESOURCE_WRITE
 
         [1] https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx
 
@@ -1115,7 +1115,7 @@ val VkPhysicalDeviceProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevicePro
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT, ##VkPhysicalDeviceDiscardRectanglePropertiesEXT, ##VkPhysicalDeviceIDPropertiesKHR, ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, ##VkPhysicalDeviceMultiviewPropertiesKHX, ##VkPhysicalDevicePointClippingPropertiesKHR, ##VkPhysicalDevicePushDescriptorPropertiesKHR, ##VkPhysicalDeviceSampleLocationsPropertiesEXT, or ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT, ##VkPhysicalDeviceDiscardRectanglePropertiesEXT, ##VkPhysicalDeviceExternalMemoryHostPropertiesEXT, ##VkPhysicalDeviceIDPropertiesKHR, ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, ##VkPhysicalDeviceMultiviewPropertiesKHX, ##VkPhysicalDevicePointClippingPropertiesKHR, ##VkPhysicalDevicePushDescriptorPropertiesKHR, ##VkPhysicalDeviceSampleLocationsPropertiesEXT, or ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -1199,7 +1199,7 @@ val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevi
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2KHR is used to provide additional image parameters to #GetPhysicalDeviceImageFormatProperties2KHR().")
     VkFormat.member("format", "a {@code VkFormat} value indicating the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
-    VkImageType.member("type", "a {@code VkImateType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
+    VkImageType.member("type", "a {@code VkImageType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
     VkImageTiling.member("tiling", "a {@code VkImageTiling} value indicating the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
     VkImageUsageFlags.member("usage", "a bitmask of {@code VkImageUsageFlagBits} indicating the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}.")
     VkImageCreateFlags.member("flags", "a bitmask of {@code VkImageCreateFlagBits} indicating additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}.")
@@ -1847,7 +1847,7 @@ val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(VULKAN_PACKAGE, "VkPhysi
         <h5>Description</h5>
         If {@code handleType} is 0, #GetPhysicalDeviceImageFormatProperties2KHR() will behave as if ##VkPhysicalDeviceExternalImageFormatInfoKHR was not present, and ##VkExternalImageFormatPropertiesKHR will be ignored.
 
-        If {@code handleType} is not compatible with the {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} specified in ##VkPhysicalDeviceImageFormatInfo2KHR, then #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
+        If {@code handleType} is not compatible with the parameters specified in ##VkPhysicalDeviceImageFormatInfo2KHR and its {@code pNext} chain, then #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2175,9 +2175,9 @@ val VkImportMemoryFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryFdInfoKHR") 
         <h5>Valid Usage</h5>
         <ul>
             <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by ##VkExternalImageFormatPropertiesKHR or ##VkExternalBufferPropertiesKHR.</li>
-            <li>The memory from which {@code fd} was exported <b>must</b> have been created on the same underlying physical device as {@code device}.</li>
             <li>If {@code handleType} is not 0, it <b>must</b> be defined as a POSIX file descriptor handle.</li>
             <li>If {@code handleType} is not 0, {@code fd} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
+            <li>The memory represented by {@code fd} <b>must</b> have been created from a physical device and driver that is compatible with {@code device} and {@code handleType}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">External memory handle types compatibility</a>.</li>
             <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
         </ul>
 
@@ -2213,6 +2213,10 @@ val VkMemoryGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryGetFdInfoKHR") {
 
         <h5>Description</h5>
         The properties of the file descriptor exported depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHR} for a description of the properties of the defined external memory handle types.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The size of the exported file <b>may</b> be larger than the size requested by ##VkMemoryAllocateInfo::allocationSize. If {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT, then the application <b>can</b> query the file's actual size with link:man:lseek(2)[lseek(2)].
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2427,7 +2431,7 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportSemaph
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} does not include #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, VkExportSemaphoreWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkSemaphoreCreateInfo.</li>
+            <li>If ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} does not include #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, ##VkExportSemaphoreWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkSemaphoreCreateInfo.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2632,7 +2636,7 @@ val VkRectLayerKHR = struct(VULKAN_PACKAGE, "VkRectLayerKHR") {
             <li>{@code layer} <b>must</b> be less than {@code imageArrayLayers} member of the ##VkSwapchainCreateInfoKHR structure given to #CreateSwapchainKHR().</li>
         </ul>
 
-        Some platforms allow the size of a surface to change, and then scale the pixels of the image to fit the surface. VkRectLayerKHR specifies pixels of the swapchain's image(s), which will be constant for the life of the swapchain.
+        Some platforms allow the size of a surface to change, and then scale the pixels of the image to fit the surface. ##VkRectLayerKHR specifies pixels of the swapchain's image(s), which will be constant for the life of the swapchain.
 
         <h5>See Also</h5>
         ##VkExtent2D, ##VkOffset2D, ##VkPresentRegionKHR
@@ -3374,10 +3378,10 @@ val VkPastPresentationTimingGOOGLE = struct(VULKAN_PACKAGE, "VkPastPresentationT
         #GetPastPresentationTimingGOOGLE()
         """
 
-    uint32_t.member("presentID", "an application-provided value that was given to a previous #QueuePresentKHR() command via {@code VkPresentTimeInfoGOOGLE}{@code ::presentID} (see below). It <b>can</b> be used to uniquely identify a previous present with the #QueuePresentKHR() command.")
-    uint64_t.member("desiredPresentTime", "an application-provided value that was given to a previous #QueuePresentKHR() command via {@code VkPresentTimeInfoGOOGLE}{@code ::desiredPresentTime}. If non-zero, it was used by the application to indicate that an image not be presented any sooner than {@code desiredPresentTime}.")
+    uint32_t.member("presentID", "an application-provided value that was given to a previous #QueuePresentKHR() command via ##VkPresentTimeGOOGLE{@code ::presentID} (see below). It <b>can</b> be used to uniquely identify a previous present with the #QueuePresentKHR() command.")
+    uint64_t.member("desiredPresentTime", "an application-provided value that was given to a previous #QueuePresentKHR() command via ##VkPresentTimeGOOGLE{@code ::desiredPresentTime}. If non-zero, it was used by the application to indicate that an image not be presented any sooner than {@code desiredPresentTime}.")
     uint64_t.member("actualPresentTime", "the time when the image of the {@code swapchain} was actually displayed.")
-    uint64_t.member("earliestPresentTime", "the time when the image of the {@code swapchain} could have been displayed. This <b>may</b> differ from {@code actualPresentTime} if the application requested that the image be presented no sooner than {@code VkPresentTimeInfoGOOGLE}{@code ::desiredPresentTime}.")
+    uint64_t.member("earliestPresentTime", "the time when the image of the {@code swapchain} could have been displayed. This <b>may</b> differ from {@code actualPresentTime} if the application requested that the image be presented no sooner than ##VkPresentTimeGOOGLE{@code ::desiredPresentTime}.")
     uint64_t.member("presentMargin", "an indication of how early the #QueuePresentKHR() command was processed compared to how soon it needed to be processed, and still be presented at {@code earliestPresentTime}.")
 }
 
@@ -4371,7 +4375,7 @@ val VkSubpassSampleLocationsEXT = struct(VULKAN_PACKAGE, "VkSubpassSampleLocatio
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code subpassIndex} <b>must</b> be less than the {@code subpassCount} specified in ##VkRenderPassCreateInfo the render pass specified by ##VkRenderPassBeginInfo::pname::renderPass was created with</li>
+            <li>{@code subpassIndex} <b>must</b> be less than the {@code subpassCount} specified in ##VkRenderPassCreateInfo the render pass specified by ##VkRenderPassBeginInfo{@code ::renderPass} was created with</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4584,7 +4588,7 @@ val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(VULKAN_PACKAGE, "
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("advancedBlendCoherentOperations", "indicates whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, {@code VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT} is treated the same as VK_ACCESS_COLOR_ATTACHMENT_READ_BIT and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
+    VkBool32.member("advancedBlendCoherentOperations", "indicates whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, #ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT is treated the same as #ACCESS_COLOR_ATTACHMENT_READ_BIT and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
 }
 
 val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", mutable = false) {
@@ -4742,9 +4746,9 @@ val VkSamplerYcbcrConversionCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcb
             <li>{@code format} <b>must</b> support #FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR or #FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR</li>
             <li>If the format does not support #FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be #CHROMA_LOCATION_COSITED_EVEN_KHR</li>
             <li>If the format does not support #FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be #CHROMA_LOCATION_MIDPOINT_KHR</li>
-            <li>{@code format} <b>must</b> represent unsigned normalized values (i.e. the format must be a etext:UNORM format)</li>
+            <li>{@code format} <b>must</b> represent unsigned normalized values (i.e. the format must be a {@code UNORM} format)</li>
             <li>
-                If the format has a _422 or _420 suffix:
+                If the format has a {@code _422} or {@code _420} suffix:
                 <ul>
                     <li>{@code components.g} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
                     <li>{@code components.a} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY, #COMPONENT_SWIZZLE_ONE, or #COMPONENT_SWIZZLE_ZERO</li>
@@ -4802,7 +4806,7 @@ val VkSamplerYcbcrConversionInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcbcrConv
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "'NULL' or a pointer to an extension-specific structure.")
+    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSamplerYcbcrConversionKHR.member("conversion", "a {@code VkSamplerYcbcrConversionKHR} handle created with #CreateSamplerYcbcrConversionKHR().")
 }
 
@@ -4813,7 +4817,7 @@ val VkBindImagePlaneMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindImagePlaneMemo
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code planeAspect} <b>must</b> be a single valid plane aspect for the image format (that is, {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR or #IMAGE_ASPECT_PLANE_1_BIT_KHR for {@code etext:_2PLANE'' formats and {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR for }etext:_3PLANE'' formats)</li>
+            <li>{@code planeAspect} <b>must</b> be a single valid plane aspect for the image format (that is, {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR or #IMAGE_ASPECT_PLANE_1_BIT_KHR for “{@code _2PLANE}” formats and {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR for “{@code _3PLANE}” formats)</li>
             <li>A single call to #BindImageMemory2KHR() <b>must</b> bind all or none of the planes of an image (i.e. bindings to all planes of an image <b>must</b> be made in a single #BindImageMemory2KHR() call), as separate bindings</li>
         </ul>
 
@@ -4946,7 +4950,7 @@ val VkBindImageMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHR"
             <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, all instances of {@code memory} specified by ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
             <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, and ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::SFRRectCount} is not zero, then {@code image} <b>must</b> have been created with the #IMAGE_CREATE_BIND_SFR_BIT_KHX bit set</li>
             <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, all elements of ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pSFRRects} <b>must</b> be valid rectangles contained within the dimensions of {@code image}</li>
-            <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, the union of the areas of all elements of ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pSFRRects} that correspond to the same instance of pname: image <b>must</b> cover the entire image.</li>
+            <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, the union of the areas of all elements of ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pSFRRects} that correspond to the same instance of {@code image} <b>must</b> cover the entire image.</li>
             <li>If {@code image} was created with a valid swapchain handle in ##VkImageSwapchainCreateInfoKHX{@code ::swapchain}, then the {@code pNext} chain <b>must</b> include a valid instance of ##VkBindImageMemorySwapchainInfoKHX</li>
             <li>If the {@code pNext} chain includes an instance of ##VkBindImageMemorySwapchainInfoKHX, {@code memory} <b>must</b> be #NULL_HANDLE</li>
             <li>If the {@code pNext} chain does not include an instance of ##VkBindImageMemorySwapchainInfoKHX, {@code memory} <b>must</b> be a valid dname:VkDeviceMemory handle</li>
@@ -5026,7 +5030,7 @@ val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceQ
         Specify a system wide priority.
 
         <h5>Description</h5>
-        A queue created without specifying ##VkDeviceQueueGlobalPriorityCreateInfoEXT will default to #QUEUE_GLOBAL_PRIORITY_MEDIUM.
+        A queue created without specifying ##VkDeviceQueueGlobalPriorityCreateInfoEXT will default to #QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -5039,4 +5043,53 @@ val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceQ
     VkStructureType.member("sType", "the type of this structure.")
     nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkQueueGlobalPriorityEXT.member("globalPriority", "the system-wide priority associated to this queue as specified by {@code VkQueueGlobalPriorityEXT}")
+}
+
+val VkImportMemoryHostPointerInfoEXT = struct(VULKAN_PACKAGE, "VkImportMemoryHostPointerInfoEXT") {
+    documentation =
+        """
+        import memory from a host pointer.
+
+        <h5>Description</h5>
+        Importing memory from a host pointer shares ownership of the memory between the host and the Vulkan implementation. The application <b>can</b> continue to access the memory through the host pointer but it is the application's responsibility to synchronize device and non-device access to the underlying memory as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#memory-device-hostaccess">Host Access to Device Memory Objects</a>.
+
+        Applications <b>can</b> import the same underlying memory into multiple instances of Vulkan and multiple times into a given Vulkan instance. However, implementations <b>may</b> fail to import the same underlying memory multiple times into a given physical device due to platform constraints.
+
+        Importing memory from a particular host pointer <b>may</b> not be possible due to additional platform-specific restrictions beyond the scope of this specification in which case the implementation <b>must</b> fail the memory import operation with the error code #ERROR_INVALID_EXTERNAL_HANDLE_KHR.
+
+        The application <b>must</b> ensure that the imported memory range remains valid and accessible for the lifetime of the imported memory object.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported in ##VkExternalMemoryPropertiesKHR</li>
+            <li>If {@code handleType} is not 0, it <b>must</b> be #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT</li>
+            <li>{@code pHostPointer} <b>must</b> be a pointer aligned to an integer multiple of ##VkPhysicalDeviceExternalMemoryHostPropertiesEXT{@code ::minImportedHostPointerAlignment}</li>
+            <li>If {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT, {@code pHostPointer} <b>must</b> be a pointer to {@code allocationSize} number of bytes of host memory, where {@code allocationSize} is the member of the ##VkMemoryAllocateInfo structure this structure is chained to</li>
+            <li>If {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT, {@code pHostPointer} <b>must</b> be a pointer to {@code allocationSize} number of bytes of host mapped foreign memory, where {@code allocationSize} is the member of the ##VkMemoryAllocateInfo structure this structure is chained to</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the handle type.")
+    nullable..opaque_p.member("pHostPointer", "the host pointer to import from.")
+}
+
+val VkMemoryHostPointerPropertiesEXT = struct(VULKAN_PACKAGE, "VkMemoryHostPointerPropertiesEXT") {
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("memoryTypeBits", "")
+}
+
+val VkPhysicalDeviceExternalMemoryHostPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalMemoryHostPropertiesEXT") {
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkDeviceSize.member("minImportedHostPointerAlignment", "")
 }

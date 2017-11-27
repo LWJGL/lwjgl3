@@ -116,7 +116,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
         <h5>Valid Usage</h5>
         <ul>
             <li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled</li>
-            <li>{@code firstDiscardRectangle} <b>must</b> be less than ##VkPhysicalDeviceDiscardRectanglePropertiesEXT.{@code maxDiscardRectangles}</li>
+            <li>{@code firstDiscardRectangle} <b>must</b> be less than ##VkPhysicalDeviceDiscardRectanglePropertiesEXT{@code ::maxDiscardRectangles}</li>
             <li>The sum of {@code firstDiscardRectangle} and {@code discardRectangleCount} <b>must</b> be between 1 and ##VkPhysicalDeviceDiscardRectanglePropertiesEXT{@code ::maxDiscardRectangles}, inclusive</li>
             <li>{@code pDiscardRectangles} <b>must</b> be a valid pointer to an array of {@code discardRectangleCount} valid ##VkRect2D structures</li>
             <li>The {@code x} and {@code y} members of {@code offset} in ##VkRect2D <b>must</b> be greater than or equal to 0</li>

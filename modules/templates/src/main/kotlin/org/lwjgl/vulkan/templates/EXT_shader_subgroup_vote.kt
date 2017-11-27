@@ -46,7 +46,7 @@ val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader
 ￿  result = do_general_path();
 ￿}</pre></code>
 
-        where {@code condition} diverges between invocations, an implementation might first execute {@code do_fast_path}() for the invocations where {@code condition} is true and leave the other invocations dormant. Once {@code do_fast_path}() returns, it might call {@code do_general_path}() for invocations where {@code condition} is false and leave the other invocations dormant. In this case, the shader executes <b>both</b> the fast and the general path and might be better off just using the general path for all invocations.
+        where {@code condition} diverges between invocations, an implementation might first execute {@code do_fast_path}() for the invocations where {@code condition} is true and leave the other invocations dormant. Once {@code do_fast_path}() returns, it might call {@code do_general_path}() for invocations where {@code condition} is {@code false} and leave the other invocations dormant. In this case, the shader executes <b>both</b> the fast and the general path and might be better off just using the general path for all invocations.
 
         This extension provides the ability to avoid divergent execution by evaluating a condition across an entire subgroup using code like:
 

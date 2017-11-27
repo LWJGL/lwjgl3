@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KHR_get_memory_requirements2", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension provides new entry points to query memory requirements of images and buffers in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 VkMemoryRequirements and VkSparseImageMemoryRequirements structures do not include an sType/pNext, this extension wraps them in new structures with sType/pNext so an application can query a chain of memory requirements structures by constructing the chain and letting the implementation fill them in. A new command is added for each ftext:vkGet*MemoryRequrements command in core Vulkan 1.0.
+        This extension provides new entry points to query memory requirements of images and buffers in a way that can be easily extended by other extensions, without introducing any further entry points. The Vulkan 1.0 ##VkMemoryRequirements and ##VkSparseImageMemoryRequirements structures do not include a {@code sType}/{@code pNext}, this extension wraps them in new structures with {@code sType}/{@code pNext} so an application can query a chain of memory requirements structures by constructing the chain and letting the implementation fill them in. A new command is added for each ftext:vkGet*MemoryRequrements command in core Vulkan 1.0.
 
         <dl>
             <dt><b>Name String</b></dt>

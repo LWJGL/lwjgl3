@@ -20,17 +20,17 @@ val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_sh
         The extension provides access to three additional built-in shader variables in Vulkan:
 
         <ul>
-            <li>{@code BaseInstance}, which contains the firstInstance parameter passed to draw commands,</li>
-            <li>{@code BaseVertex}, which contains the firstVertex/vertexOffset parameter passed to draw commands, and</li>
+            <li>{@code BaseInstance}, which contains the {@code firstInstance} parameter passed to draw commands,</li>
+            <li>{@code BaseVertex}, which contains the {@code firstVertex}/{@code vertexOffset} parameter passed to draw commands, and</li>
             <li>{@code DrawIndex}, which contains the index of the draw call currently being processed from an indirect draw call.</li>
         </ul>
 
         When using GLSL source-based shader languages, the following variables from {@code GL_ARB_shader_draw_parameters} can map to these SPIR-V built-in decorations:
 
         <ul>
-            <li>in int gl_BaseInstanceARB; &#8594; {@code BaseInstance},</li>
-            <li>in int gl_BaseVertexARB &#8594; {@code BaseVertex}, and</li>
-            <li>in int gl_DrawIDARB; &#8594; {@code DrawIndex}.</li>
+            <li>{@code in int gl_BaseInstanceARB;} &#8594; {@code BaseInstance},</li>
+            <li>{@code in int gl_BaseVertexARB;} &#8594; {@code BaseVertex}, and</li>
+            <li>{@code in int gl_DrawIDARB;} &#8594; {@code DrawIndex}.</li>
         </ul>
 
         <dl>

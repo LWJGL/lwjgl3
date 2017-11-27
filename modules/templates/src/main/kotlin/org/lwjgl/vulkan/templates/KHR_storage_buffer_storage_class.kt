@@ -17,7 +17,7 @@ val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClas
             <li>SPV_KHR_storage_buffer_storage_class</li>
         </ul>
 
-        This extension provides a new SPIR-V {@code StorageBuffer} storage class. A {@code Block}-decorated object in this class is equivalent to a {@code BufferBlock}-decorated object in the <b>Uniform</b> storage class.
+        This extension provides a new SPIR-V {@code StorageBuffer} storage class. A {@code Block}-decorated object in this class is equivalent to a {@code BufferBlock}-decorated object in the {@code Uniform} storage class.
 
         <dl>
             <dt><b>Name String</b></dt>

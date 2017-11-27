@@ -164,7 +164,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         Set the viewport W scaling on a command buffer.
 
         <h5>C Specification</h5>
-        If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled, viewport W scaling parameters are specified using the {@code pViewportWScalings} member of ##VkPipelineViewportWScalingStateCreateInfoNV in the pipeline state object. If the pipeline state object was created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:
+        If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled, viewport <b>W</b> scaling parameters are specified using the {@code pViewportWScalings} member of ##VkPipelineViewportWScalingStateCreateInfoNV in the pipeline state object. If the pipeline state object was created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:
 
         <code><pre>
 ￿void vkCmdSetViewportWScalingNV(
@@ -174,7 +174,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 ￿    const VkViewportWScalingNV*                 pViewportWScalings);</pre></code>
 
         <h5>Description</h5>
-        The viewport parameters taken from element <code>i</code> of {@code pViewportScalings} replace the current state for the viewport index <code>firstViewport + i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
+        The viewport parameters taken from element <code>i</code> of {@code pViewportWScalings} replace the current state for the viewport index <code>firstViewport + i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -211,6 +211,6 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
         uint32_t.IN("firstViewport", "the index of the first viewport whose parameters are updated by the command."),
         AutoSize("pViewportWScalings")..uint32_t.IN("viewportCount", "the number of viewports whose parameters are updated by the command."),
-        const..VkViewportWScalingNV.p.IN("pViewportWScalings", "")
+        const..VkViewportWScalingNV.p.IN("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures specifying viewport parameters.")
     )
 }

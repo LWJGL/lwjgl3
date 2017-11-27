@@ -17,7 +17,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
 
         Some Vulkan implementations only support the position attribute varying between views in the X component. A subpass can declare via a second creation flag whether all pipelines compiled for this subpass will obey this restriction.
 
-        Shaders that use the new per-view outputs (e.g. gl_PositionPerViewNV) <b>must</b> also write the non-per-view output (gl_Position), and the values written <b>must</b> be such that gl_Position = gl_PositionPerViewNV[gl_ViewIndex] for all views in the subpass. Implementations are free to either use the per-view outputs or the non-per-view outputs, whichever would be more efficient.
+        Shaders that use the new per-view outputs (e.g. {@code gl_PositionPerViewNV}) <b>must</b> also write the non-per-view output ({@code gl_Position}), and the values written <b>must</b> be such that {@code gl_Position = gl_PositionPerViewNV[gl_ViewIndex]} for all views in the subpass. Implementations are free to either use the per-view outputs or the non-per-view outputs, whichever would be more efficient.
 
         If {@code VK_NV_viewport_array2} is not also supported and enabled, the per-view viewport mask <b>must</b> not be used.
 
