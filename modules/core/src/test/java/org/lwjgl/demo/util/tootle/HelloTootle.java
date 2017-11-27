@@ -520,14 +520,12 @@ public final class HelloTootle {
 
             glUniformMatrix4fv(uniformModelViewProjectionMatrix, false,
                 projectionMatrix
-                    .mul(modelViewMatrix, modelViewProjectionMatrix)
+                    .mulPerspectiveAffine(modelViewMatrix, modelViewProjectionMatrix)
                     .get(uniform));
 
             glUniformMatrix3fv(uniformNormalMatrix, false,
-                normalMatrix
-                    .set(modelViewMatrix)
-                    .transpose()
-                    .invert()
+                modelViewMatrix
+                    .normal(normalMatrix)
                     .get(uniform));
         }
         glUniform1i(uniformCubeSize, cubeSize);
@@ -588,13 +586,8 @@ public final class HelloTootle {
     }
 
     private void setDefaultNormal() {
-        Vector3f v = new Matrix3d()
-            .set(modelViewMatrix)
-            .transpose()
-            .transform(new Vector3f(0.0f, 1.0f, 0.0f))
-            .normalize();
-
-        glVertexAttrib3f(1, v.x, v.y, v.z);
+        Vector3d v = modelViewMatrix.normalizedPositiveY(new Vector3d());
+        glVertexAttrib3f(1, (float)v.x, (float)v.y, (float)v.z);
     }
 
     private void renderHUD() {
