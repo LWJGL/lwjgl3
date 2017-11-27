@@ -246,6 +246,11 @@ public class Configuration<T> {
      */
     public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
+    // -- JAWT
+
+    /** Similar to {@link #LIBRARY_NAME} for the jawt library (<b>org.lwjgl.system.jawt.libname</b>). */
+    public static final Configuration<String> JAWT_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.jawt.libname", StateInit.STRING);
+
     // -- JEMALLOC
 
     /** Similar to {@link #LIBRARY_NAME} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
