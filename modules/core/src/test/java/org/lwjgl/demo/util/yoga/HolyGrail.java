@@ -102,14 +102,6 @@ public final class HolyGrail {
         //          Yoga
         // ----------------------
 
-        MemoryAllocator memFuncs = MemoryUtil.getAllocator();
-        nYGSetMemoryFuncs(
-            memFuncs.getMalloc(),
-            memFuncs.getCalloc(),
-            memFuncs.getRealloc(),
-            memFuncs.getFree()
-        );
-
         root = YGNodeNew();
         YGNodeStyleSetFlexDirection(root, YGFlexDirectionColumn);
 

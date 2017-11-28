@@ -346,11 +346,11 @@
         </build>
 
         <!-- yoga -->
-        <build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
+        <build name="lwjgl_yoga" dest="${bin.native}/yoga" linker="g++" if:true="${binding.yoga}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
+                <compile dest="@{dest}" lang="c++" flags="">
                     <arg value="-I${src.native.rel}/util/yoga"/>
-                    <fileset dir="." includes="${src.native}/util/yoga/*.c"/>
+                    <fileset dir="." includes="${src.native}/util/yoga/*.cpp"/>
                 </compile>
             </beforeCompile>
             <source>

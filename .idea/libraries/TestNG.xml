@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/libs/testng.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/testng-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
