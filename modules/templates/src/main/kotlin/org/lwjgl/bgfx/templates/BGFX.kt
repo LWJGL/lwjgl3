@@ -9,14 +9,12 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     documentation =
-        """
-        Native bindings to the C API of the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library.
-        """
+        "Native bindings to the C API of the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library."
 
     IntConstant(
         "API version",
 
-        "API_VERSION".."55"
+        "API_VERSION".."57"
     )
 
     ShortConstant(
@@ -1749,7 +1747,7 @@ RGBA16S
  +------ view id""")}
         """,
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         const..charASCII_p.IN("_name", "view name")
     )
 
@@ -1757,7 +1755,7 @@ RGBA16S
         "set_view_rect",
         "Sets view rectangle. Draw primitive outside view will be clipped.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
         MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
         MapToInt..uint16_t.IN("_width", "width of view port region"),
@@ -1768,7 +1766,7 @@ RGBA16S
         "set_view_rect_auto",
         "Sets view rectangle. Draw primitive outside view will be clipped.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
         MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
         bgfx_backbuffer_ratio_t.IN("_ratio", "width and height will be set in respect to back-buffer size", BackbufferRatio)
@@ -1781,7 +1779,7 @@ RGBA16S
         will be disabled.
         """,
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
         MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
         MapToInt..uint16_t.IN("_width", "width of scissor region"),
@@ -1792,7 +1790,7 @@ RGBA16S
         "set_view_clear",
         "Sets view clear flags.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MapToInt..uint16_t.IN("_flags", "clear flags. Use #CLEAR_NONE to remove any clear operation.", ClearFlags, LinkMode.BITFIELD),
         uint32_t.IN("_rgba", "color clear value"),
         float.IN("_depth", "depth clear value"),
@@ -1803,7 +1801,7 @@ RGBA16S
         "set_view_clear_mrt",
         "Sets view clear flags with different clear color for each frame buffer texture. Must use {@code setClearColor} to setup clear color palette.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MapToInt..uint16_t.IN("_flags", "clear flags. Use #CLEAR_NONE to remove any clear operation.", ClearFlags, LinkMode.BITFIELD),
         float.IN("_depth", "depth clear value"),
         MapToInt..uint8_t.IN("_stencil", "stencil clear value"),
@@ -1821,7 +1819,7 @@ RGBA16S
         "set_view_mode",
         "Sets view sorting mode.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_view_mode_t.IN("_mode", "view sort mode", ViewMode)
     )
 
@@ -1833,7 +1831,7 @@ RGBA16S
         Not persistent after #reset() call.
         """,
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_frame_buffer_handle_t.IN(
             "_handle",
             "frame buffer handle. Passing #INVALID_HANDLE as frame buffer handle will draw primitives from this view into default back buffer."
@@ -1844,7 +1842,7 @@ RGBA16S
         "set_view_transform",
         "Sets view view and projection matrices, all draw primitives in this view will use these matrices.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MultiType(
             PointerMapping.DATA_FLOAT
         )..Check(4 x 4 x 4)..nullable..const..void_p.IN("_view", "view matrix"),
@@ -1857,7 +1855,7 @@ RGBA16S
         "set_view_transform_stereo",
         "Sets view view and projection matrices, all draw primitives in this view will use these matrices.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         MultiType(
             PointerMapping.DATA_FLOAT
         )..Check(4 x 4 x 4)..nullable..const..void_p.IN("_view", "project matrix"),
@@ -1874,16 +1872,408 @@ RGBA16S
         "set_view_order",
         "Post submit view reordering.",
 
-        MapToInt..uint8_t.IN("_id", "view id"),
-        MapToInt..uint8_t.IN("_num", "number of views to remap"),
-        Check("_num")..nullable..const..uint8_t.p.IN("_order", "view remap id table. Passing #NULL will reset view ids to default state")
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        MapToInt..uint16_t.IN("_num", "number of views to remap"),
+        Check("_num")..nullable..const..bgfx_view_id_t.p.IN("_order", "view remap id table. Passing #NULL will reset view ids to default state")
     )
 
     void(
         "reset_view",
         "Resets all view settings to default.",
 
-        MapToInt..uint8_t.IN("_id", "view id")
+        MapToInt..bgfx_view_id_t.IN("_id", "view id")
+    )
+
+    void(
+        "set_marker",
+        "Sets debug marker.",
+
+        const..charASCII_p.IN("_marker", "debug marker")
+    )
+
+    void(
+        "set_state",
+        """
+        Sets render states for draw primitive.
+
+        Remarks:
+        ${ol(
+            """
+            To setup more complex states use:
+            ${codeBlock("""
+BGFX_STATE_ALPHA_REF(_ref),
+BGFX_STATE_POINT_SIZE(_size),
+BGFX_STATE_BLEND_FUNC(_src, _dst),
+BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA)
+BGFX_STATE_BLEND_EQUATION(_equation)
+BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
+            """,
+            "#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
+        )}
+        """,
+
+        uint64_t.IN("_state", "state flags", StateFlags, LinkMode.BITFIELD),
+        uint32_t.IN("_rgba", "blend factor used by #STATE_BLEND_FACTOR and #STATE_BLEND_INV_FACTOR blend modes")
+    )
+
+    void(
+        "set_condition",
+        "Sets condition for rendering.",
+
+        bgfx_occlusion_query_handle_t.IN("_handle", "occlusion query handle"),
+        bool.IN("_visible", "render if occlusion query is visible")
+    )
+
+    void(
+        "set_stencil",
+        "Sets stencil test state.",
+
+        uint32_t.IN("_fstencil", "front stencil state", StencilFlags, LinkMode.BITFIELD),
+        uint32_t.IN(
+            "_bstencil",
+            "back stencil state. If back is set to #STENCIL_NONE {@code _fstencil} is applied to both front and back facing primitives.",
+            StencilFlags, LinkMode.BITFIELD
+        )
+    )
+
+    uint16_t(
+        "set_scissor",
+        "Sets scissor for draw primitive. For scissor for all primitives in view see #set_view_scissor().",
+
+        MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
+        MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
+        MapToInt..uint16_t.IN("_width", "width of scissor region"),
+        MapToInt..uint16_t.IN("_height", "height of scissor region"),
+
+        returnDoc = "scissor cache index"
+    )
+
+    void(
+        "set_scissor_cached",
+        "Sets scissor from cache for draw primitive.",
+
+        MapToInt..uint16_t.IN("_cache", "index in scissor cache. Passing {@code UINT16_MAX} unsets primitive scissor and primitive will use view scissor instead.")
+    )
+
+    uint32_t(
+        "set_transform",
+        "Sets model matrix for draw primitive. If it is not called model will be rendered with identity model matrix.",
+
+        MultiType(
+            PointerMapping.DATA_FLOAT
+        )..const..void_p.IN("_mtx", "pointer to first matrix in array"),
+        AutoSize(4 x 4 x 4, "_mtx")..uint16_t.IN("_num", "number of matrices in array"),
+
+        returnDoc = "index into matrix cache in case the same model matrix has to be used for other draw primitive call"
+    )
+
+    uint32_t(
+        "alloc_transform",
+        """
+        Reserves {@code _num} matrices in internal matrix cache.
+
+        Pointer returned can be modifed until #frame() is called.
+        """,
+
+        bgfx_transform_t_p.IN("_transform", "pointer to ##BGFXTransform structure"),
+        MapToInt..uint16_t.IN("_num", "number of matrices"),
+
+        returnDoc = "index into matrix cache"
+    )
+
+    void(
+        "set_transform_cached",
+        "Sets model matrix from matrix cache for draw primitive.",
+
+        uint32_t.IN("_cache", "index in matrix cache"),
+        MapToInt..uint16_t.IN("_num", "number of matrices from cache")
+    )
+
+    void(
+        "set_uniform",
+        "Sets shader uniform parameter for draw primitive.",
+
+        bgfx_uniform_handle_t.IN("_handle", "uniform"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..Unsafe..const..void_p.IN("_value", "pointer to uniform data"),
+        MapToInt..uint16_t.IN("_num", "number of elements. Passing {@code UINT16_MAX} will use the {@code _num} passed on uniform creation.")
+    )
+
+    void(
+        "set_index_buffer",
+        "Sets index buffer for draw primitive.",
+
+        bgfx_index_buffer_handle_t.IN("_handle", "index buffer"),
+        uint32_t.IN("_firstIndex", "first index to render"),
+        uint32_t.IN("_numIndices", "number of indices to render")
+    )
+
+    void(
+        "set_dynamic_index_buffer",
+        "Sets index buffer for draw primitive.",
+
+        bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer"),
+        uint32_t.IN("_firstIndex", "first index to render"),
+        uint32_t.IN("_numIndices", "number of indices to render")
+    )
+
+    void(
+        "set_transient_index_buffer",
+        """
+        Sets index buffer for draw primitive.
+
+        ${note("{@code _tib} pointer after this call is invalid.")}
+        """,
+
+        const..bgfx_transient_index_buffer_t_p.IN("_tib", "transient index buffer"),
+        uint32_t.IN("_firstIndex", "first index to render"),
+        uint32_t.IN("_numIndices", "number of indices to render")
+    )
+
+    void(
+        "set_vertex_buffer",
+        "Sets vertex buffer for draw primitive.",
+
+        MapToInt..uint8_t.IN("_stream", "vertex stream"),
+        bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
+        uint32_t.IN("_startVertex", "first vertex to render"),
+        uint32_t.IN("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "set_dynamic_vertex_buffer",
+        "Sets vertex buffer for draw primitive.",
+
+        MapToInt..uint8_t.IN("_stream", "vertex stream"),
+        bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
+        uint32_t.IN("_startVertex", "first vertex to render"),
+        uint32_t.IN("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "set_transient_vertex_buffer",
+        """
+        Sets vertex buffer for draw primitive.
+
+        ${note("{@code _tvb} pointer after this call is invalid.")}
+        """,
+
+        MapToInt..uint8_t.IN("_stream", "vertex stream"),
+        const..bgfx_transient_vertex_buffer_t_p.IN("_tvb", "transient vertex buffer"),
+        uint32_t.IN("_startVertex", "first vertex to render"),
+        uint32_t.IN("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "set_instance_data_buffer",
+        """
+        Sets instance data buffer for draw primitive.
+
+        ${note("{@code _idb} pointer after this call is invalid.")}
+        """,
+
+        const..bgfx_instance_data_buffer_t_p.IN("_idb", "transient instance data buffer"),
+        uint32_t.IN("_num", "number of data instances")
+    )
+
+    void(
+        "set_instance_data_from_vertex_buffer",
+        "Set instance data buffer for draw primitive.",
+
+        bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
+        uint32_t.IN("_start", "first instance data"),
+        uint32_t.IN("_num", "number of data instances")
+    )
+
+    void(
+        "set_instance_data_from_dynamic_vertex_buffer",
+        "Set instance data buffer for draw primitive.",
+
+        bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
+        uint32_t.IN("_start", "first instance data"),
+        uint32_t.IN("_num", "number of data instances")
+    )
+
+    void(
+        "set_texture",
+        "Sets texture stage for draw primitive.",
+
+        MapToInt..uint8_t.IN("_stage", "texture unit"),
+        bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
+        bgfx_texture_handle_t.IN("_handle", "texture handle"),
+        uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
+    )
+
+    void(
+        "touch",
+        """
+        Submits an empty primitive for rendering. Uniforms and draw state will be applied but no geometry will be submitted.
+
+        These empty draw calls will sort before ordinary draw calls.
+        """,
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id")
+    )
+
+    void(
+        "submit",
+        "Submits primitive for rendering.",
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        bgfx_program_handle_t.IN("_handle", "program"),
+        int32_t.IN("_depth", "depth for sorting"),
+        bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
+    )
+
+    void(
+        "submit_occlusion_query",
+        "Submits primitive with occlusion query for rendering.",
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        bgfx_program_handle_t.IN("_program", "program"),
+        bgfx_occlusion_query_handle_t.IN("_occlusionQuery", "occlusion query"),
+        int32_t.IN("_depth", "depth for sorting"),
+        bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
+    )
+
+    void(
+        "submit_indirect",
+        "Submits primitive for rendering with index and instance data info from indirect buffer.",
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        bgfx_program_handle_t.IN("_handle", "program"),
+        bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
+        MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
+        MapToInt..uint16_t.IN("_num", "number of dispatches"),
+        int32_t.IN("_depth", "depth for sorting"),
+        bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
+    )
+
+    void(
+        "set_image",
+        "Sets compute image from texture.",
+
+        MapToInt..uint8_t.IN("_stage", "texture unit"),
+        bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
+        bgfx_texture_handle_t.IN("_handle", "texture handle"),
+        MapToInt..uint8_t.IN("_mip", "mip level"),
+        bgfx_access_t.IN("_access", "texture access", Access),
+        bgfx_texture_format_t.IN("_format", "texture format", TextureFormat)
+    )
+
+    void(
+        "set_compute_index_buffer",
+        "Sets compute index buffer.",
+
+        MapToInt..uint8_t.IN("_stage", "compute stage"),
+        bgfx_index_buffer_handle_t.IN("_handle", "index buffer handle"),
+        bgfx_access_t.IN("_access", "buffer access", Access)
+    )
+
+    void(
+        "set_compute_vertex_buffer",
+        "Sets compute vertex buffer.",
+
+        MapToInt..uint8_t.IN("_stage", "compute stage"),
+        bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer handle"),
+        bgfx_access_t.IN("_access", "buffer access", Access)
+    )
+
+    void(
+        "set_compute_dynamic_index_buffer",
+        "Sets compute dynamic index buffer.",
+
+        MapToInt..uint8_t.IN("_stage", "compute stage"),
+        bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer handle"),
+        bgfx_access_t.IN("_access", "buffer access", Access)
+    )
+
+    void(
+        "set_compute_dynamic_vertex_buffer",
+        "Sets compute dynamic vertex buffer.",
+
+        MapToInt..uint8_t.IN("_stage", "compute stage"),
+        bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer handle"),
+        bgfx_access_t.IN("_access", "buffer access", Access)
+    )
+
+    void(
+        "set_compute_indirect_buffer",
+        "Sets compute indirect buffer.",
+
+        MapToInt..uint8_t.IN("_stage", "compute stage"),
+        bgfx_indirect_buffer_handle_t.IN("_handle", "indirect buffer handle"),
+        bgfx_access_t.IN("_access", "buffer access", Access)
+    )
+
+    void(
+        "dispatch",
+        "Dispatches compute.",
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        bgfx_program_handle_t.IN("_handle", "compute program"),
+        uint32_t.IN("_numX", "number of groups X"),
+        uint32_t.IN("_numY", "number of groups Y"),
+        uint32_t.IN("_numZ", "number of groups Z"),
+        MapToInt..uint8_t.IN("_flags", "view flags", SubmitFlags)
+    )
+
+    void(
+        "dispatch_indirect",
+        "Dispatches compute indirect.",
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        bgfx_program_handle_t.IN("_handle", "compute program"),
+        bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
+        MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
+        MapToInt..uint16_t.IN("_num", "number of dispatches"),
+        MapToInt..uint8_t.IN("_flags", "view flags", SubmitFlags)
+    )
+
+    void(
+        "discard",
+        "Discards all previously set state for draw or compute call."
+    )
+
+    void(
+        "blit",
+        """
+        Blits texture region between two textures.
+
+        Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
+        """,
+
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
+        bgfx_texture_handle_t.IN("_dst", "destination texture handle"),
+        MapToInt..uint8_t.IN("_dstMip", "destination texture mip level"),
+        MapToInt..uint16_t.IN("_dstX", "destination texture X position"),
+        MapToInt..uint16_t.IN("_dstY", "destination texture Y position"),
+        MapToInt..uint16_t.IN(
+            "_dstZ",
+            """
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+            this argument represent destination texture Z position.
+            """
+        ),
+        bgfx_texture_handle_t.IN("_src", "source texture handle"),
+        MapToInt..uint8_t.IN("_srcMip", "source texture mip level"),
+        MapToInt..uint16_t.IN("_srcX", "source texture X position"),
+        MapToInt..uint16_t.IN("_srcY", "source texture Y position"),
+        MapToInt..uint16_t.IN(
+            "_srcZ",
+            """
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+            this argument represent destination texture Z position.
+            """
+        ),
+        MapToInt..uint16_t.IN("_width", "width of region"),
+        MapToInt..uint16_t.IN("_height", "height of region"),
+        MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represent depth of region, otherwise is unused")
     )
 
     void(
@@ -2140,7 +2530,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         """,
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id")
+        MapToInt..bgfx_view_id_t.IN("_id", "view id")
     )
 
     void(
@@ -2148,7 +2538,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Submits primitive for rendering.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "program"),
         int32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
@@ -2159,7 +2549,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Submits primitive with occlusion query for rendering.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_program", "program"),
         bgfx_occlusion_query_handle_t.IN("_occlusionQuery", "occlusion query"),
         int32_t.IN("_depth", "depth for sorting"),
@@ -2171,7 +2561,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Submits primitive for rendering with index and instance data info from indirect buffer.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "program"),
         bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
@@ -2248,7 +2638,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Dispatches compute.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "compute program"),
         uint32_t.IN("_numX", "number of groups X"),
         uint32_t.IN("_numY", "number of groups Y"),
@@ -2261,7 +2651,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Dispatches compute indirect.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "compute program"),
         bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
@@ -2285,7 +2675,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         """,
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint8_t.IN("_id", "view id"),
+        MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_texture_handle_t.IN("_dst", "destination texture handle"),
         MapToInt..uint8_t.IN("_dstMip", "destination texture mip level"),
         MapToInt..uint16_t.IN("_dstX", "destination texture X position"),

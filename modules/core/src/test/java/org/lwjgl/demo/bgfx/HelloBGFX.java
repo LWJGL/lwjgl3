@@ -99,11 +99,9 @@ public final class HelloBGFX {
             // Set view 0 default viewport.
             bgfx_set_view_rect(0, 0, 0, width, height);
 
-            long encoder = bgfx_begin();
-
             // This dummy draw call is here to make sure that view 0 is cleared
             // if no other draw calls are submitted to view 0.
-            bgfx_encoder_touch(encoder, (byte)0);
+            bgfx_touch((byte)0);
 
             // Use debug font to print information about this example.
             bgfx_dbg_text_clear(0, false);
@@ -116,8 +114,6 @@ public final class HelloBGFX {
             );
             bgfx_dbg_text_printf(0, 1, 0x4f, "bgfx/examples/25-c99");
             bgfx_dbg_text_printf(0, 2, 0x6f, "Description: Initialization and debug text with C99 API.");
-
-            bgfx_end(encoder);
 
             // Advance to next frame. Rendering thread will be kicked to
             // process submitted rendering primitives.

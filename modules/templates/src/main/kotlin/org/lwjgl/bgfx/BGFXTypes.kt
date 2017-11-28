@@ -45,6 +45,8 @@ val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
 val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
+val bgfx_view_id_t = typedef(uint16_t, "bgfx_view_id_t")
+
 val bgfx_encoder_p = "struct bgfx_encoder".p
 
 /*
@@ -116,7 +118,7 @@ val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx
     documentation = "View stats."
 
     charASCII.array("name", "view name", size = 256)
-    uint8_t.member("view", "view id")
+    bgfx_view_id_t.member("view", "view id")
     int64_t.member("cpuTimeElapsed", "CPU (submit) time elapsed")
     int64_t.member("gpuTimeElapsed", "GPU time elapsed")
 }
@@ -243,12 +245,12 @@ val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_cap
 val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
     documentation = "Rendering limits."
 
-    uint32_t.member("maxDrawCalls", "maximum draw calls")
+    uint32_t.member("maxDrawCalls", "maximum number of draw calls")
     uint32_t.member("maxBlits", "maximum number of blit calls")
     uint32_t.member("maxTextureSize", "maximum texture size")
-    uint32_t.member("maxViews", "maximum views")
+    uint32_t.member("maxViews", "maximum number of views")
     uint32_t.member("maxFrameBuffers", "maximum number of frame buffer handles")
-    uint32_t.member("maxFBAttachments", "maximum frame buffer attachments")
+    uint32_t.member("maxFBAttachments", "maximum number of frame buffer attachments")
     uint32_t.member("maxPrograms", "maximum number of program handles")
     uint32_t.member("maxShaders", "maximum number of shader handles")
     uint32_t.member("maxTextures", "maximum number of texture handles")
