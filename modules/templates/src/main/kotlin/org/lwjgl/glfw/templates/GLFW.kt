@@ -2939,7 +2939,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         )}
         """,
 
-        GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
+        nullable..GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
         const..charUTF8_p.IN("string", "a UTF-8 encoded string"),
 
         since = "version 3.0"
@@ -2962,7 +2962,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ))}
         """,
 
-        GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
+        nullable..GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
 
         returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or #NULL if an error occurred",
         since = "version 3.0"
