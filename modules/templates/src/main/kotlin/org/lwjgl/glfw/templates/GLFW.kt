@@ -1103,7 +1103,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         For gamma correct rendering with OpenGL or OpenGL ES, see the #SRGB_CAPABLE hint.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: Gamma handling is a privileged protocol, this function will thus never be implemented and emits #PLATFORM_ERROR."
+        )}
         """,
 
         GLFWmonitor_p.IN("monitor", "the monitor whose gamma ramp to set"),
@@ -1119,7 +1123,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The returned structure and its arrays are allocated and freed by GLFW. You should not free them yourself. They are valid until the specified monitor is
         disconnected, this function is called again for that monitor or the library is terminated.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            """
+            <b>Wayland</b>: Gamma handling is a privileged protocol, this function will thus never be implemented and emits #PLATFORM_ERROR while returning
+            #NULL.
+            """
+        )}
         """,
 
         GLFWmonitor_p.IN("monitor", "the monitor to query"),
@@ -1143,6 +1154,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             "This function must only be called from the main thread.",
             "Gamma ramp sizes other than 256 are not supported by all hardware",
             "<b>Windows</b>: The gamma ramp size must be 256.",
+            "<b>Wayland</b>: Gamma handling is a privileged protocol, this function will thus never be implemented and emits #PLATFORM_ERROR.",
             "The specified gamma ramp is copied before this function returns."
         ))}
         """,
@@ -1309,7 +1321,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             """
             <b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
             to query the final size, position or other attributes directly after window creation.
+            """,
             """
+            <b>Wayland</b>: The window frame is currently unimplemented, as if #DECORATED) was always set to #FALSE. A compositor can still emit close, resize
+            or maximize events, using for example a keybind mechanism.
+            """,
+            "<b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.",
+            "<b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor."
         ))}
         """,
 
@@ -1400,14 +1418,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         The desired image sizes varies depending on platform and system settings. The selected images will be rescaled as needed. Good sizes include 16x16,
         32x32 and 48x48.
 
-        The specified image data is copied before this function returns.
-
-        <b>macOS</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
-        application bundle's icon. For more information on bundles, see the
-        ${url("https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/", "Bundle Programming Guide")} in the Mac
-        Developer Library.
-
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "The specified image data is copied before this function returns.",
+            """
+            <b>macOS</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
+            application bundle's icon. For more information on bundles, see the ${url(
+                "https://developer.apple.com/library/content/documentation/CoreFoundation/Conceptual/CFBundles/",
+                "Bundle Programming Guide")} in the Mac Developer Library.
+            """,
+            """
+            <b>Wayland</b>: The {@code wl_shell} protocol does not support window icons, the window will inherit the one defined in the application's desktop
+            file, so this function emits #PLATFORM_ERROR.
+            """
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window whose icon to set"),
@@ -1424,7 +1449,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Any or all of the position arguments may be #NULL. If an error occurs, all non-#NULL position arguments will be set to zero.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: There is no way for an application to retrieve the global position of its windows, this function will always emit #PLATFORM_ERROR."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to query"),
@@ -1445,7 +1474,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         The window manager may put limits on what positions are allowed. GLFW cannot and should not override these limits.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: There is no way for an application to set the global position of its windows, this function will always emit #PLATFORM_ERROR."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to query"),
@@ -1483,7 +1516,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         The maximum dimensions must be greater than or equal to the minimum dimensions and all must be greater than or equal to zero.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: The size limits will not be applied until the window is actually resized, either by the user or by the compositor."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to set limits for"),
@@ -1508,7 +1545,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         The aspect ratio is applied immediately to a windowed mode window and may cause it to be resized.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: The aspect ratio will not be applied until the window is actually resized, either by the user or by the compositor."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to set limits for"),
@@ -1530,7 +1571,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         The window manager may put limits on what sizes are allowed. GLFW cannot and should not override these limits.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to resize"),
@@ -1570,7 +1615,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: The window frame is currently unimplemented, as if #DECORATED was always set to #FALSE, so the returned values will always be zero."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window whose frame size to query"),
@@ -1652,7 +1701,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         If the specified window is a full screen window, the original monitor resolution is restored until the window is restored.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: There is no concept of iconification in {@code wl_shell}, this function will always emit #PLATFORM_ERROR."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to iconify"),
@@ -1730,7 +1783,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         For a less disruptive way of getting the user's attention, see #RequestWindowAttention().
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: It is not possible for an application to bring its windows to front, this function will always emit #PLATFORM_ERROR."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window to give input focus"),
@@ -1791,7 +1848,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         When a window transitions from full screen to windowed mode, this function restores any previous window settings such as whether it is decorated,
         floating, resizable, has size or aspect ratio limits, etc.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: The desired window position is ignored, as there is no way for an application to set this property.",
+            "<b>Wayland</b>: Setting the window to full screen will not attempt to change the mode, no matter what the requested size or refresh rate."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window whose monitor, size or video mode to set"),
@@ -1897,7 +1959,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the position, in screen
         coordinates, of the upper-left corner of the client area of the window.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: This callback will never be called, as there is no way for an application to know its global position."
+        )}
         """,
 
         CALLBACK_WINDOW,
@@ -1988,7 +2054,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """
         Sets the iconification callback of the specified window, which is called when the window is iconified or restored.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: The {@code wl_shell} protocol has no concept of iconification, this callback will never be called."
+        )}
         """,
 
         CALLBACK_WINDOW,
@@ -2343,7 +2413,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         If the cursor mode is #CURSOR_DISABLED then the cursor position is unconstrained and limited only by the minimum and maximum values of <b>double</b>.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: This function will only work when the cursor mode is #CURSOR_DISABLED, otherwise it will do nothing."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the desired window"),
@@ -2576,7 +2650,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         Because the path array and its strings may have been generated specifically for that event, they are not guaranteed to be valid after the callback has
         returned. If you wish to use them after the callback returns, you need to make a deep copy.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: File drop is currently unimplemented."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "the window whose callback to set"),
@@ -2854,7 +2932,11 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         The specified string is copied before this function returns.
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            "<b>Wayland</b>: Clipboard is currently unimplemented."
+        )}
         """,
 
         GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
@@ -2875,7 +2957,8 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ${note(ul(
             "This function must only be called from the main thread.",
             "The returned string is allocated and freed by GLFW.  You should not free it yourself.",
-            "The returned string is valid only until the next call to #GetClipboardString() or #SetClipboardString()."
+            "The returned string is valid only until the next call to #GetClipboardString() or #SetClipboardString().",
+            "<b>Wayland</b>: Clipboard is currently unimplemented."
         ))}
         """,
 
