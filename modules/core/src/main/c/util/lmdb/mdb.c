@@ -7699,8 +7699,12 @@ prep_subDB:
 				} else {
 					memcpy((char *)mp + mp->mp_upper + PAGEBASE, (char *)fp + fp->mp_upper + PAGEBASE,
 						olddata.mv_size - fp->mp_upper - PAGEBASE);
+					// LWJGL: fp->mp_ptrs[i] is misaligned, the loop below crashes on GCC-O3
+					//for (i=0; i<NUMKEYS(fp); i++)
+						//mp->mp_ptrs[i] = fp->mp_ptrs[i] + offset;
+					memcpy(mp->mp_ptrs, fp->mp_ptrs, NUMKEYS(fp) * sizeof(indx_t));
 					for (i=0; i<NUMKEYS(fp); i++)
-						mp->mp_ptrs[i] = fp->mp_ptrs[i] + offset;
+						mp->mp_ptrs[i] += offset;
 				}
 			}
 
