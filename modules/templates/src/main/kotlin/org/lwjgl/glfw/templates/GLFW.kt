@@ -827,7 +827,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         since = "version 1.0"
     )
 
-    const..charASCII_p(
+    Nonnull..const..charASCII_p(
         "GetVersionString",
         """
         Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific

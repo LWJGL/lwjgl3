@@ -179,3 +179,14 @@ class Construct(
 object Address : FunctionModifier {
     override val isSpecial = false
 }
+
+/** Marks a pointer or Java instance return type as non-nullable. */
+object Nonnull : FunctionModifier {
+    override val isSpecial = false
+
+    override fun validate(func: Func) {
+        if (func.returns.nativeType !is PointerType && func.returns.nativeType !is JObjectType)
+            throw IllegalArgumentException("The Nonnull modifier can only be applied on functions with pointer or Java instance return types.")
+    }
+
+}

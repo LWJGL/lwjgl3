@@ -789,11 +789,16 @@ class Func(
 
         // Method signature
 
+        if (returns.nativeType.isReference && !has(Nonnull)) {
+            println("$t@Nullable")
+        }
+
         val retType = returnsJavaMethodType
 
         val retTypeAnnotation = returns.nativeType.annotation(retType, has(const))
-        if (retTypeAnnotation != null)
+        if (retTypeAnnotation != null) {
             println("$t$retTypeAnnotation")
+        }
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
         printList(getNativeParams()) {
@@ -1382,11 +1387,16 @@ class Func(
 
         // Method signature
 
+        if (returns.nativeType.isReference && !has(Nonnull)) {
+            println("$t@Nullable")
+        }
+
         val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType, false, false)!!
 
         val retTypeAnnotation = returns.nativeType.annotation(retType, has(const))
-        if (retTypeAnnotation != null)
+        if (retTypeAnnotation != null) {
             println("$t$retTypeAnnotation")
+        }
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
         printList(getParams { it !== JNI_ENV }) {

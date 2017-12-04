@@ -87,7 +87,7 @@ ENABLE_WARNINGS()""")
     StringConstant("Version string.", "VERSION_STRING".."""ZSTD_VERSION_MAJOR + "." + ZSTD_VERSION_MINOR + "." + ZSTD_VERSION_RELEASE""")
 
     unsigned("versionNumber", "Returns the version number.")
-    const..charASCII_p("versionString", "Returns the version string.")
+    Nonnull..const..charASCII_p("versionString", "Returns the version string.")
 
     LongConstant(
         "Content size.",
@@ -207,7 +207,7 @@ ENABLE_WARNINGS()""")
         size_t.IN("code", "")
     )
 
-    const..charASCII_p(
+    Nonnull..const..charASCII_p(
         "getErrorName",
         "Provides readable string from an error code.",
 
