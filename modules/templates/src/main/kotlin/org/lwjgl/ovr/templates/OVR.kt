@@ -521,7 +521,7 @@ ENABLE_WARNINGS()""")
         ovrErrorInfo_p.OUT("errorInfo", "The last ##OVRErrorInfo for the current thread")
     )
 
-    const..charUTF8_p(
+    Nonnull..const..charUTF8_p(
         "GetVersionString",
         """
         Returns the version string representing the LibOVRRT version.

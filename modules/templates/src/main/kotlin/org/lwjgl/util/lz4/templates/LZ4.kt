@@ -43,7 +43,7 @@ ENABLE_WARNINGS()""")
     StringConstant("Version string.", "VERSION_STRING".."""LZ4_VERSION_MAJOR + "." + LZ4_VERSION_MINOR + "." + LZ4_VERSION_RELEASE""")
 
     int("versionNumber", "Returns the version number.")
-    const..charASCII_p("versionString", "Returns the version string.")
+    Nonnull..const..charASCII_p("versionString", "Returns the version string.")
 
     IntConstant(
         "Maximum input size.",

@@ -254,7 +254,7 @@ ENABLE_WARNINGS()""")
         returnDoc = "the library version as a string"
     )
 
-    charASCII_p(
+    Nonnull..charASCII_p(
         "strerror",
         """
         Returns a string describing a given error code.

@@ -755,7 +755,7 @@ div {
 
     fun YG_TYPE_TO_STRING(type: IntegerType) {
         val name = type.name.substring(2)
-        const..charASCII_p(
+        Nonnull..const..charASCII_p(
             "${name}ToString",
             "",
 
