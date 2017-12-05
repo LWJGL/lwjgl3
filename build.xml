@@ -962,7 +962,13 @@
             <delete dir="${release}/${module}/javadoc"/>
 
             <!-- Bundle source -->
+            <copy
+                file="${modules}/module-info-gen/src/main/resources/${module.java}.java"
+                tofile="${bin.modules}/${module.java}/module-info.java"
+                if:set="jdk9"
+            />
             <jar destfile="${release}/${module}/${module}-sources.jar" level="9">
+                <fileset dir="${bin.modules}/${module.java}" includes="module-info.java" if:set="jdk9"/>
                 <fileset dir="${src.generated.java}" includes="${module.package}/**" unless:set="module.package.skip"/>
                 <sources/>
             </jar>
