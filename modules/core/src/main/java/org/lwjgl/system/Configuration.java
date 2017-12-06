@@ -124,13 +124,23 @@ public class Configuration<T> {
 
     /**
      * Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development.
-     * Their performance impact is usually minimal, but may they be disabled for release builds.
+     * Their performance impact is usually minimal, but they may be disabled for release builds.
      *
      * <p style="font-family: monospace">
      * Property: <b>org.lwjgl.util.NoChecks</b><br>
      * &nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DISABLE_CHECKS = new Configuration<>("org.lwjgl.util.NoChecks", StateInit.BOOLEAN);
+
+    /**
+     * Set to true to disable LWJGL's function lookup checks. These checks ensure that required functions are not missing from dynamically loaded shared
+     * libraries. This setting is useful when a trusted incompatible library must be loaded.
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.util.NoFunctionChecks</b><br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Boolean> DISABLE_FUNCTION_CHECKS = new Configuration<>("org.lwjgl.util.NoFunctionChecks", StateInit.BOOLEAN);
 
     /**
      * Set to true to enable LWJGL's debug mode. Information messages will be printed to the {@link APIUtil#DEBUG_STREAM} and extra runtime checks will

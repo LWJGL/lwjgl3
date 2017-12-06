@@ -111,7 +111,17 @@ public final class APIUtil {
     }
 
     public static long apiGetFunctionAddress(FunctionProvider provider, String functionName) {
-        return check(provider.getFunctionAddress(functionName));
+        long a = provider.getFunctionAddress(functionName);
+        if (a == NULL) {
+            requiredFunctionMissing(functionName);
+        }
+        return a;
+    }
+
+    private static void requiredFunctionMissing(String functionName) {
+        if (!Configuration.DISABLE_FUNCTION_CHECKS.get()) {
+            throw new NullPointerException("A required function is missing: " + functionName);
+        }
     }
 
     public static ByteBuffer apiGetMappedBuffer(ByteBuffer buffer, long mappedAddress, int capacity) {
