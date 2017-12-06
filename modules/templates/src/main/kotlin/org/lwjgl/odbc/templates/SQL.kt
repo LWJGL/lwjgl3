@@ -3197,7 +3197,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
         SQLHSTMT.IN("StatementHandle", "")
     )
 
-    SQLRETURN(
+    IgnoreMissing..SQLRETURN(
         "CancelHandle",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcancelhandle-function">MSDN Reference</a>
@@ -3207,7 +3207,9 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
         """,
 
         SQLSMALLINT.IN("HandleType", "", "#HANDLE_DBC #HANDLE_STMT"),
-        SQLHANDLE.IN("Handle", "")
+        SQLHANDLE.IN("Handle", ""),
+
+        since = "ODBC 3.8"
     )
 
     SQLRETURN(
@@ -3251,11 +3253,7 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
         SQLHANDLE.IN("Handle", "")
     )
 
-    // ---
-    // ODBC 3.8
-    // ---
-
-    SQLRETURN(
+    IgnoreMissing..SQLRETURN(
         "CompleteAsync",
         """
         SQLCompleteAsync can be used to determine when an asynchronous function is complete using either notification- or polling-based processing. For more
@@ -3287,10 +3285,10 @@ val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", 
             pointer to a buffer that will contain the return code of the asynchronous API. If {@code AsyncRetCodePtr} is #NULL, SQLCompleteAsync returns
             #ERROR.
             """
-        )
-    )
+        ),
 
-    // -------------------------------------------------------
+        since = "ODBC 3.8"
+    )
 
     NativeName("SQLColumnsW")..SQLRETURN(
         "Columns",
