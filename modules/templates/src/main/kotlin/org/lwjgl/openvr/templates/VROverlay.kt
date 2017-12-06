@@ -570,6 +570,26 @@ val VROverlay = "VROverlay".nativeClass(
     )
 
     EVROverlayError(
+        "SetOverlayDualAnalogTransform",
+        "Sets the analog input to Dual Analog coordinate scale for the specified overlay.",
+
+        VROverlayHandle_t.IN("ulOverlay", ""),
+        EDualAnalogWhich.IN("eWhich", "", "EDualAnalogWhich_\\w+"),
+        HmdVector2_t.p.IN("pvCenter", ""), // TODO: bug in C header? (struct HmdVector2_t & vCenter)
+        float.IN("fRadius", "")
+    )
+
+    EVROverlayError(
+        "GetOverlayDualAnalogTransform",
+        "Gets the analog input to Dual Analog coordinate scale for the specified overlay.",
+
+        VROverlayHandle_t.IN("ulOverlay", ""),
+        EDualAnalogWhich.IN("eWhich", "", "EDualAnalogWhich_\\w+"),
+        HmdVector2_t.p.OUT("pvCenter", ""),
+        Check(1)..float_p.OUT("pfRadius", "")
+    )
+
+    EVROverlayError(
         "SetOverlayTexture",
         "Texture to draw for the overlay. This function can only be called by the overlay's creator or renderer process (see #SetOverlayRenderingPid()).",
 

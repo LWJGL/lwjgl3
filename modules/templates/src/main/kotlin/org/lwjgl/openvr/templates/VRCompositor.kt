@@ -407,13 +407,14 @@ typedef struct HmdColor_t
         {@code SubmitExplicitTimingData}, the timestamp is recorded at the same place for Vulkan/D3D12 as it is for D3D11, resulting in a more accurate GPU
         time measurement for the frame.
 
-        Avoiding {@code WaitGetPoses} accessing the Vulkan queue can be achieved using {@code SetExplicitTimingMode} as well. If this is desired, the
-        application <b>MUST</b> call #PostPresentHandoff() itself prior to {@code WaitGetPoses}. If {@code SetExplicitTimingMode} is true and the application
-        calls {@code PostPresentHandoff}, then {@code WaitGetPoses} is guaranteed not to access the queue. Note that {@code PostPresentHandoff} and
-        {@code SubmitExplicitTimingData} will access the queue, so only {@code WaitGetPoses} becomes safe for accessing the queue from another thread.
+        Avoiding #WaitGetPoses() accessing the Vulkan queue can be achieved using {@code SetExplicitTimingMode} as well. If this is desired, the application
+        should set the timing mode to #EVRCompositorTimingMode_VRCompositorTimingMode_Explicit_ApplicationPerformsPostPresentHandoff and <b>MUST</b> call
+        #PostPresentHandoff() itself. If these conditions are met, then {@code WaitGetPoses} is guaranteed not to access the queue. Note that
+        {@code PostPresentHandoff} and {@code SubmitExplicitTimingData} will access the queue, so only {@code WaitGetPoses} becomes safe for accessing the
+        queue from another thread.
         """,
 
-        bool.IN("bExplicitTimingMode", "")
+        EVRCompositorTimingMode.IN("eTimingMode", "")
     )
 
     EVRCompositorError(

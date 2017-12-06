@@ -42,6 +42,7 @@ val EVRApplicationProperty = "EVRApplicationProperty".enumType
 val EVRApplicationTransitionState = "EVRApplicationTransitionState".enumType
 val EVRApplicationType = "EVRApplicationType".enumType
 val EVRButtonId = "EVRButtonId".enumType
+val EVRCompositorTimingMode = "EVRCompositorTimingMode".enumType
 val EVRControllerAxisType = "EVRControllerAxisType".enumType
 val EVREye = "EVREye".enumType
 val EVREventType = "EVREventType".enumType
@@ -58,6 +59,7 @@ val ChaperoneCalibrationState = "ChaperoneCalibrationState".enumType
 val EChaperoneConfigFile = "EChaperoneConfigFile".enumType
 val EColorSpace = "EColorSpace".enumType
 val EDeviceActivityLevel = "EDeviceActivityLevel".enumType
+val EDualAnalogWhich = "EDualAnalogWhich".enumType
 val EGamepadTextInputMode = "EGamepadTextInputMode".enumType
 val EGamepadTextInputLineMode = "EGamepadTextInputLineMode".enumType
 val EHiddenAreaMeshType = "EHiddenAreaMeshType".enumType
@@ -79,7 +81,7 @@ val PropertyContainerHandle_t = typedef(uint64_t, "PropertyContainerHandle_t")
 val PropertyTypeTag_t = typedef(uint32_t, "PropertyTypeTag_t")
 val VRActionHandle_t = typedef(uint64_t, "VRActionHandle_t")
 val VRActionSetHandle_t = typedef(uint64_t, "VRActionSetHandle_t")
-val VRInputOriginHandle_t = typedef(uint64_t, "VRInputOriginHandle_t")
+val VRInputValueHandle_t = typedef(uint64_t, "VRInputValueHandle")
 val ScreenshotHandle_t = typedef(uint32_t, "ScreenshotHandle_t")
 val TextureID_t = typedef(int32_t, "TextureID_t")
 val TrackedCameraHandle_t = typedef(uint64_t, "TrackedCameraHandle_t")
@@ -253,7 +255,7 @@ val VREvent_TouchPadMove_t = struct(OPENVR_PACKAGE, "VREventTouchPadMove", nativ
     documentation =
     """
     When in mouse input mode you can receive data from the touchpad, these events are only sent if the users finger is on the touchpad (or just released from
-    it).
+    it). These events are sent to overlays with the #VROverlayFlags_SendVRTouchpadEvents flag set.
     """
 
     bool.member("bFingerDown", "true if the users finger is detected on the touch pad")
@@ -294,6 +296,14 @@ val VREvent_MessageOverlay_t = struct(OPENVR_PACKAGE, "VREventMessageOverlay", n
 val VREvent_Property_t = struct(OPENVR_PACKAGE, "VREventProperty", nativeName = "VREvent_Property_t", mutable = false) {
     PropertyContainerHandle_t.member("container", "")
     ETrackedDeviceProperty.member("prop", "").links("ETrackedDeviceProperty_\\w+")
+}
+
+val VREvent_DualAnalog_t = struct(OPENVR_PACKAGE, "VREventDualAnalog", nativeName = "VREvent_DualAnalog_t", mutable = false) {
+    float.member("x", "coordinates are -1..1 analog values")
+	float.member("y", "coordinates are -1..1 analog values")
+	float.member("transformedX", "transformed by the center and radius numbers provided by the overlay")
+	float.member("transformedY", "transformed by the center and radius numbers provided by the overlay")
+	EDualAnalogWhich.member("which", "")
 }
 
 val VREvent_Data_t = union(OPENVR_PACKAGE, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
@@ -585,6 +595,16 @@ val CameraVideoStreamFrameHeader_t = struct(OPENVR_PACKAGE, "CameraVideoStreamFr
     uint32_t.member("nFrameSequence", "")
 
     TrackedDevicePose_t.member("standingTrackedDevicePose", "")
+}
+
+val DriverDirectMode_FrameTiming = struct(OPENVR_PACKAGE, "DriverDirectModeFrameTiming", nativeName = "DriverDirectMode_FrameTiming", mutable = false) {
+    documentation = "Frame timing data provided by direct mode drivers."
+
+    uint32_t.member("m_nSize", "sSet to {@code sizeof( DriverDirectMode_FrameTiming )}")
+	uint32_t.member("m_nNumFramePresents", "number of times frame was presented")
+	uint32_t.member("m_nNumMisPresented", "number of times frame was presented on a vsync other than it was originally predicted to")
+	uint32_t.member("m_nNumDroppedFrames", "number of additional times previous frame was scanned out (i.e. compositor missed vsync)")
+	uint32_t.member("m_nReprojectionFlags", "")
 }
 
 val VROverlayIntersectionParams_t = struct(OPENVR_PACKAGE, "VROverlayIntersectionParams", nativeName = "VROverlayIntersectionParams_t") {
