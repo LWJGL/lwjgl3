@@ -204,15 +204,14 @@ public final class Library {
     public static SharedLibrary loadNative(Class<?> context, String name, boolean bundledWithLWJGL) {
         apiLog("Loading library: " + name);
 
-        String libName = Platform.get().mapLibraryName(name);
-
         // METHOD 1: absolute path
-        if (new File(libName).isAbsolute()) {
-            SharedLibrary lib = apiCreateLibrary(libName);
+        if (new File(name).isAbsolute()) {
+            SharedLibrary lib = apiCreateLibrary(name);
             apiLog("\tSuccess");
             return lib;
         }
 
+        String        libName = Platform.get().mapLibraryName(name);
         SharedLibrary lib;
 
         // METHOD 2: org.lwjgl.librarypath

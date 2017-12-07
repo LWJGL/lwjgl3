@@ -10,7 +10,7 @@ import org.lwjgl.system.jni.*
 
 val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = simpleBinding(
     "jawt",
-    libraryExpression = """Configuration.JAWT_LIBRARY_NAME, "jawt", System.getProperty("java.home") + "/bin/jawt"""",
+    libraryExpression = """Configuration.JAWT_LIBRARY_NAME, "jawt", apiFindLibrary(System.getProperty("java.home"), "jawt")""",
     callingConvention = CallingConvention.STDCALL
 )) {
     nativeDirective(

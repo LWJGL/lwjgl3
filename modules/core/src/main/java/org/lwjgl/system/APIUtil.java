@@ -13,10 +13,12 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
 import java.nio.*;
+import java.nio.file.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.jar.*;
 import java.util.regex.*;
+import java.util.stream.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -95,6 +97,22 @@ public final class APIUtil {
         }
 
         return Optional.empty();
+    }
+
+    public static String apiFindLibrary(String start, String name) {
+        String libName = Platform.get().mapLibraryName(name);
+        try (Stream<Path> paths = Files.find(
+            Paths.get(start).toAbsolutePath(),
+            Integer.MAX_VALUE,
+            (path, attributes) -> attributes.isRegularFile() && path.getFileName().toString().equals(libName)
+        )) {
+            return paths
+                .findFirst()
+                .map(Path::toString)
+                .orElse(name);
+        } catch (IOException e) {
+            return name;
+        }
     }
 
     public static SharedLibrary apiCreateLibrary(String name) {
