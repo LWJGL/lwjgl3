@@ -139,12 +139,6 @@ val stbi_write_func = "stbi_write_func *".callback(
 
 val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supported if STBRP_LARGE_RECTS is defined
 
-val stbrp_context_p = struct(STB_PACKAGE, "STBRPContext", nativeName = "stbrp_context", mutable = false) {
-    documentation = "The opaque {@code stbrp_context} struct."
-    includeSTBAPI("#include \"stb_rect_pack.h\"")
-    static(STB_LIBRARY)
-}.p
-
 val stbrp_rect_p = struct(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect") {
     documentation = "A packed rectangle."
 
@@ -153,13 +147,30 @@ val stbrp_rect_p = struct(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect") {
     stbrp_coord.member("h", "input height")
     stbrp_coord.member("x", "output x coordinate")
     stbrp_coord.member("y", "output y coordinate")
-    int.member("was_packed", "non-zero if valid packing")
+    intb.member("was_packed", "non-zero if valid packing")
 }.p
 
-val stbrp_node_p = struct(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node") {
+val stbrp_node_p = struct(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node").p
+val stbrp_node = struct(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node", mutable = false) {
     documentation = "The opaque {@code stbrp_node} struct."
-    includeSTBAPI("#include \"stb_rect_pack.h\"")
-    static(STB_LIBRARY)
+
+    stbrp_coord.member("x", "")
+    stbrp_coord.member("y", "")
+    nullable..stbrp_node_p.member("next", "")
+}
+
+val stbrp_context_p = struct(STB_PACKAGE, "STBRPContext", nativeName = "stbrp_context", mutable = false) {
+    documentation = "The opaque {@code stbrp_context} struct."
+
+    int.member("width", "")
+    int.member("height", "")
+    int.member("align", "")
+    int.member("init_mode", "")
+    int.member("heuristic", "")
+    int.member("num_nodes", "")
+    nullable..stbrp_node_p.member("active_head", "")
+    nullable..stbrp_node_p.member("free_head", "")
+    stbrp_node.array("extra", "we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}", size = 2)
 }.p
 
 // stb_truetype.h
@@ -191,11 +202,20 @@ val stbtt_aligned_quad_p = struct(STB_PACKAGE, "STBTTAlignedQuad", nativeName = 
 
 val stbtt_pack_context_p = struct(STB_PACKAGE, "STBTTPackContext", nativeName = "stbtt_pack_context", mutable = false) {
     documentation = "An opaque structure which holds all the context needed from #PackBegin() to #PackEnd()."
-    includeSTBAPI("#include \"stb_truetype.h\"")
-    static(STB_LIBRARY)
+
+    nullable..opaque_p.member("user_allocator_context", "")
+    stbrp_context_p.member("pack_info", "")
+    int.member("width", "")
+    int.member("height", "")
+    int.member("stride_in_bytes", "")
+    int.member("padding", "")
+    unsigned_int.member("h_oversample", "")
+    unsigned_int.member("v_oversample", "")
+    unsigned_char_p.member("pixels", "")
+    stbrp_node_p.buffer("nodes", "")
 }.p
 
-val stbtt_packedchar_p = struct(STB_PACKAGE, "STBTTPackedchar", nativeName = "stbtt_packedchar", mutable = false) {
+val stbtt_packedchar_p = struct(STB_PACKAGE, "STBTTPackedchar", nativeName = "stbtt_packedchar") {
     documentation = "Packed character data, returned by #PackFontRange()"
 
     unsigned_short.member("x0", "")
