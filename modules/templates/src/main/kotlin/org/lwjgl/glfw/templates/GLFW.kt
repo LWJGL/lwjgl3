@@ -35,6 +35,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
     )
 
     IntConstant(
+        "NULL value.",
+
+        "NULL".."0"
+    )
+
+    IntConstant(
         "Boolean values.",
         "TRUE".."1",
         "FALSE".."0"
