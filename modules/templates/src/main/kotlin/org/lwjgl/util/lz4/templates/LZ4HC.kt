@@ -40,7 +40,7 @@ ENABLE_WARNINGS()""")
 
         "CLEVEL_MIN".."3",
         "CLEVEL_DEFAULT".."9",
-        "CLEVEL_OPT_MIN".."11",
+        "CLEVEL_OPT_MIN".."10",
         "CLEVEL_MAX".."12"
     )
 

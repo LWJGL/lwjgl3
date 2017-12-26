@@ -74,21 +74,20 @@ ENABLE_WARNINGS()""")
     int(
         "compress_default",
         """
-        Compresses {@code sourceSize} bytes from buffer {@code source} into already allocated {@code dest} buffer of size {@code maxDestSize}.
+        Compresses {@code srcSize} bytes from buffer {@code src} into already allocated {@code dst} buffer of size {@code dstCapacity}.
 
-        Compression is guaranteed to succeed if {@code maxDestSize} &ge; #compressBound(){@code (sourceSize)}. It also runs faster, so it's a recommended
-        setting.
+        Compression is guaranteed to succeed if {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}. It also runs faster, so it's a recommended setting.
 
-        If the function cannot compress {@code source} into a more limited {@code dest} budget, compression stops <i>immediately</i>, and the function result
-        is zero. As a consequence, {@code dest} content is not valid.
+        If the function cannot compress {@code src} into a limited {@code dst} budget, compression stops <i>immediately</i>, and the function result is
+        zero. As a consequence, {@code dst} content is not valid.
 
-        This function never writes outside {@code dest} buffer, nor read outside {@code source} buffer.
+        This function never writes outside {@code dst} buffer, nor read outside {@code src} buffer.
         """,
 
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("sourceSize", "max supported value is #MAX_INPUT_SIZE"),
-        AutoSize("dest")..int.IN("maxDestSize", "full or partial size of buffer {@code dest} (which must be already allocated)"),
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", "supported max value is #MAX_INPUT_SIZE"),
+        AutoSize("dst")..int.IN("dstCapacity", "full or partial size of buffer {@code dst} (which must be already allocated)"),
 
         returnDoc = "the number of bytes written into buffer {@code dest} (necessarily &le; {@code maxOutputSize}) or 0 if compression fails"
     )
@@ -96,7 +95,7 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_safe",
         """
-        If destination buffer is not large enough, decoding will stop and output an error code (&lt;0).
+        If destination buffer is not large enough, decoding will stop and output an error code (negative value).
 
         If the source stream is detected malformed, the function will stop decoding and return a negative result.
 
@@ -104,12 +103,12 @@ ENABLE_WARNINGS()""")
         input buffer.
         """,
 
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("compressedSize", "is the precise full size of the compressed block"),
-        AutoSize("dest")..int.IN("maxDecompressedSize", "is the size of destination buffer, which must be already allocated"),
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("compressedSize", "is the exact complete size of the compressed block"),
+        AutoSize("dst")..int.IN("dstCapacity", "is the size of destination buffer, which must be already allocated"),
 
-        returnDoc = "the number of bytes decompressed into destination buffer (necessarily &le; {@code maxDecompressedSize})"
+        returnDoc = "the number of bytes decompressed into destination buffer (necessarily &le; {@code dstCapacity})"
     )
 
     macro(expression = "LZ4_MAX_INPUT_SIZE < isize ? 0 : isize + isize / 255 + 16")..int(
@@ -145,10 +144,10 @@ ENABLE_WARNINGS()""")
         replaced by {@code ACCELERATION_DEFAULT} (see {@code lz4.c}), which is 1.
         """,
 
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("sourceSize", ""),
-        AutoSize("dest")..int.IN("maxDestSize", ""),
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", ""),
         int.IN("acceleration", "")
     )
 
@@ -167,30 +166,30 @@ ENABLE_WARNINGS()""")
         """,
 
         Unsafe..void_p.OUT("state", ""),
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("inputSize", ""),
-        AutoSize("dest")..int.IN("maxDestSize", ""),
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", ""),
         int.IN("acceleration", "")
     )
 
     int(
         "compress_destSize",
         """
-        Reverse the logic, by compressing as much data as possible from {@code source} buffer into already allocated buffer {@code dest} of size
-        {@code targetDestSize}.
+        Reverse the logic: compresses as much data as possible from {@code src} buffer into already allocated buffer {@code dst} of size
+        {@code targetDstSize}.
 
-        This function either compresses the entire {@code source} content into {@code dest} if it's large enough, or fill {@code dest} buffer completely with
-        as much data as possible from {@code source}.
+        This function either compresses the entire {@code src} content into {@code dst} if it's large enough, or fill {@code dst} buffer completely with as
+        much data as possible from {@code src}.
         """,
 
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..Check(1)..int_p.INOUT(
-            "sourceSizePtr",
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..Check(1)..int_p.INOUT(
+            "srcSizePtr",
             "will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; old value."
         ),
-        AutoSize("dest")..int.IN("targetDestSize", ""),
+        AutoSize("dst")..int.IN("targetDstSize", ""),
 
         returnDoc = "nb bytes written into {@code dest} (necessarily &le; {@code targetDestSize}) or 0 if compression fails"
     )
@@ -198,42 +197,43 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_fast",
         """
-        This function fully respect memory boundaries for properly formed compressed data. It is a bit faster than #decompress_safe(). However, it does not
+        This function respects memory boundaries for properly formed compressed data. It is a bit faster than #decompress_safe(). However, it does not
         provide any protection against intentionally modified data stream (malicious input). Use this function in trusted environment only (data to decode
         comes from a trusted source).
         """,
 
-        Unsafe..const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("dest")..int.IN("originalSize", "is the original and therefore uncompressed size"),
+        Unsafe..const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("dst")..int.IN("originalSize", "is the original uncompressed size"),
 
         returnDoc =
         """
         the number of bytes read from the source buffer (in other words, the compressed size). If the source stream is detected malformed, the function will
-        stop decoding and return a negative result. Destination buffer must be already allocated. Its size must be a minimum of {@code originalSize} bytes.
+        stop decoding and return a negative result. Destination buffer must be already allocated. Its size must be &ge; {@code originalSize} bytes.
         """
     )
 
     int(
         "decompress_safe_partial",
         """
-        This function decompress a compressed block of size {@code compressedSize} at position {@code source} into destination buffer {@code dest} of size
-        {@code maxDecompressedSize}.
+        This function decompress a compressed block of size {@code compressedSize} at position {@code src} into destination buffer {@code dst} of size
+        {@code dstCapacity}.
 
-        The function tries to stop decompressing operation as soon as {@code targetOutputSize} has been reached, reducing decompression time.
+        The function will decompress a minimum of {@code targetOutputSize} bytes, and stop after that. However, it's not accurate, and may write more than
+        {@code targetOutputSize} (but &le; {@code dstCapacity}).
 
         This function never writes outside of output buffer, and never reads outside of input buffer. It is therefore protected against malicious data packets.
         """,
 
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("compressedSize", ""),
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("compressedSize", ""),
         int.IN("targetOutputSize", ""),
-        AutoSize("dest")..int.IN("maxDecompressedSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", ""),
 
         returnDoc =
         """
-        the number of bytes decoded in the destination buffer (necessarily &le; {@code maxDecompressedSize})
+        the number of bytes decoded in the destination buffer (necessarily &le; {@code dstCapacity})
 
         Note: this number can be &lt; {@code targetOutputSize} should the compressed block to decode be smaller. Always control how many bytes were decoded. If
         the source stream is detected malformed, the function will stop decoding and return a negative result.
@@ -383,10 +383,10 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4_streamDecode_t_p.IN("LZ4_streamDecode", ""),
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("compressedSize", ""),
-        AutoSize("dest")..int.IN("maxDecompressedSize", "")
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", "")
     )
 
     int(
@@ -394,9 +394,9 @@ ENABLE_WARNINGS()""")
         "See #decompress_safe_continue().",
 
         LZ4_streamDecode_t_p.IN("LZ4_streamDecode", ""),
-        Unsafe..const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("dest")..int.IN("originalSize", "")
+        Unsafe..const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("dst")..int.IN("originalSize", "")
     )
 
     int(
@@ -406,10 +406,10 @@ ENABLE_WARNINGS()""")
         and don't need an {@code LZ4_streamDecode_t} structure.
         """,
 
-        const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("source")..int.IN("compressedSize", ""),
-        AutoSize("dest")..int.IN("maxDecompressedSize", ""),
+        const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", ""),
         const..char_p.IN("dictStart", ""),
         AutoSize("dictStart")..int.IN("dictSize", "")
     )
@@ -418,9 +418,9 @@ ENABLE_WARNINGS()""")
         "decompress_fast_usingDict",
         "See {@code decompress_safe_usingDict}.",
 
-        Unsafe..const..char_p.IN("source", ""),
-        char_p.OUT("dest", ""),
-        AutoSize("dest")..int.IN("originalSize", ""),
+        Unsafe..const..char_p.IN("src", ""),
+        char_p.OUT("dst", ""),
+        AutoSize("dst")..int.IN("originalSize", ""),
         const..char_p.IN("dictStart", ""),
         AutoSize("dictStart")..int.IN("dictSize", "")
     )
