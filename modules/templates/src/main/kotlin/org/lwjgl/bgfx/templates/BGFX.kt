@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
     IntConstant(
         "API version",
 
-        "API_VERSION".."57"
+        "API_VERSION".."59"
     )
 
     ShortConstant(
@@ -424,8 +424,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "CAPS_TEXTURE_COMPARE_ALL"..0x00000000000C0000L,
         "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000080000L,
         "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000100000L,
-        "CAPS_TEXTURE_READ_BACK"..0x0000000000200000L,
-        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000000400000L,
+        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000200000L,
+        "CAPS_TEXTURE_READ_BACK"..0x0000000000400000L,
+        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000000800000L,
         "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000000800000L
     )
 
@@ -1563,6 +1564,22 @@ RGBA16S
 
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
         const..charUTF8_p.IN("_name", "texture name")
+    )
+
+    opaque_p(
+        "get_direct_access_ptr",
+        """
+        Returns texture direct access pointer.
+
+        Returns pointer to texture memory. If returned pointer is #NULL direct access is not available for this texture. If pointer is {@code UINTPTR_MAX}
+        sentinel value it means texture is pending creation. Pointer returned can be cached and it will be valid until texture is destroyed.
+
+        ${note(
+            "Availability depends on: #CAPS_TEXTURE_DIRECT_ACCESS. This feature is available on GPUs that have unified memory architecture (UMA) support."
+        )}
+        """,
+
+        bgfx_texture_handle_t.IN("_handle", "")
     )
 
     void(

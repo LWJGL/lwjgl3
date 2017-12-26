@@ -149,6 +149,18 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint32_t.member("numCompute", "number of compute calls submitted")
     uint32_t.member("maxGpuLatency", "GPU driver latency")
 
+    uint16_t.member("numDynamicIndexBuffers", "number of used dynamic index buffers")
+    uint16_t.member("numDynamicVertexBuffers", "number of used dynamic vertex buffers")
+    uint16_t.member("numFrameBuffers", "number of used frame buffers")
+    uint16_t.member("numIndexBuffers", "number of used index buffers")
+    uint16_t.member("numOcclusionQueries", "number of used occlusion queries")
+    uint16_t.member("numPrograms", "number of used programs")
+    uint16_t.member("numShaders", "number of used shaders")
+    uint16_t.member("numTextures", "number of used textures")
+    uint16_t.member("numUniforms", "number of used uniforms")
+    uint16_t.member("numVertexBuffers", "number of used vertex buffers")
+    uint16_t.member("numVertexDecls", "number of used vertex declarations")
+
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
     int64_t.member("gpuMemoryUsed", "amount of GPU memory used")
 
