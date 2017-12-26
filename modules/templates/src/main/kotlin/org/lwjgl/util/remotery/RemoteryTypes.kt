@@ -25,6 +25,7 @@ fun NativeClass.remoteryIncludes(type: String) {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define RMT_USE_OPENGL 1
+#define RMT_ASSUME_LITTLE_ENDIAN 1
 #ifdef LWJGL_LINUX
     #define RMT_USE_POSIX_THREADNAMES 1${if (type == "h") "" else """
     #pragma GCC diagnostic ignored "-Wunused-parameter"

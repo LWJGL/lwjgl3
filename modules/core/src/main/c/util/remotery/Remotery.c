@@ -152,21 +152,29 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 
 
 
-rmtU8 minU8(rmtU8 a, rmtU8 b)
+static rmtU8 minU8(rmtU8 a, rmtU8 b)
 {
     return a < b ? a : b;
 }
-rmtS64 minS64(rmtS64 a, rmtS64 b)
+static rmtU16 minU16(rmtU16 a, rmtU16 b)
+{
+    return a < b ? a : b;
+}
+static rmtS64 minS64(rmtS64 a, rmtS64 b)
 {
     return a < b ? a : b;
 }
 
 
-rmtU8 maxU8(rmtU8 a, rmtU8 b)
+static rmtU8 maxU8(rmtU8 a, rmtU8 b)
 {
     return a > b ? a : b;
 }
-rmtS64 maxS64(rmtS64 a, rmtS64 b)
+static rmtU16 maxU16(rmtU16 a, rmtU16 b)
+{
+    return a > b ? a : b;
+}
+static rmtS64 maxS64(rmtS64 a, rmtS64 b)
 {
     return a > b ? a : b;
 }
@@ -1744,6 +1752,22 @@ static void Buffer_Destructor(Buffer* buffer)
 }
 
 
+static rmtError Buffer_Grow(Buffer* buffer, rmtU32 length)
+{
+    // Calculate size increase rounded up to the requested allocation granularity
+    rmtU32 granularity = buffer->alloc_granularity;
+    rmtU32 allocate = buffer->bytes_allocated + length;
+    allocate = allocate + ((granularity - 1) - ((allocate - 1) % granularity));
+
+    buffer->bytes_allocated = allocate;
+    buffer->data = (rmtU8*)rmtRealloc(buffer->data, buffer->bytes_allocated);
+    if (buffer->data == NULL)
+        return RMT_ERROR_MALLOC_FAIL;
+
+    return RMT_ERROR_NONE;
+}
+
+
 static rmtError Buffer_Write(Buffer* buffer, void* data, rmtU32 length)
 {
     assert(buffer != NULL);
@@ -1751,23 +1775,14 @@ static rmtError Buffer_Write(Buffer* buffer, void* data, rmtU32 length)
     // Reallocate the buffer on overflow
     if (buffer->bytes_used + length > buffer->bytes_allocated)
     {
-        // Calculate size increase rounded up to the requested allocation granularity
-        rmtU32 g = buffer->alloc_granularity;
-        rmtU32 a = buffer->bytes_allocated + length;
-        a = a + ((g - 1) - ((a - 1) % g));
-        buffer->bytes_allocated = a;
-        buffer->data = (rmtU8*)rmtRealloc(buffer->data, buffer->bytes_allocated);
-        if (buffer->data == NULL)
-            return RMT_ERROR_MALLOC_FAIL;
+        rmtError error = Buffer_Grow(buffer, length);
+        if (error != RMT_ERROR_NONE)
+            return error;
     }
 
     // Copy all bytes
     memcpy(buffer->data + buffer->bytes_used, data, length);
     buffer->bytes_used += length;
-
-    // NULL terminate (if possible) for viewing in debug
-    if (buffer->bytes_used < buffer->bytes_allocated)
-        buffer->data[buffer->bytes_used] = 0;
 
     return RMT_ERROR_NONE;
 }
@@ -1791,9 +1806,26 @@ static void U32ToByteArray(rmtU8* dest, rmtU32 value)
 
 static rmtError Buffer_WriteU32(Buffer* buffer, rmtU32 value)
 {
-    rmtU8 temp[4];
-    U32ToByteArray(temp, value);
-    return Buffer_Write(buffer, temp, sizeof(temp));
+    assert(buffer != NULL);
+
+    // Reallocate the buffer on overflow
+    if (buffer->bytes_used + sizeof(value) > buffer->bytes_allocated)
+    {
+        rmtError error = Buffer_Grow(buffer, sizeof(value));
+        if (error != RMT_ERROR_NONE)
+            return error;
+    }
+
+    // Copy all bytes
+    #if RMT_ASSUME_LITTLE_ENDIAN
+        *(rmtU32*)(buffer->data + buffer->bytes_used) = value;
+    #else
+        U32ToByteArray(buffer->data + buffer->bytes_used, value);
+    #endif
+
+    buffer->bytes_used += sizeof(value);
+
+    return RMT_ERROR_NONE;
 }
 
 
@@ -1814,36 +1846,57 @@ static rmtBool IsLittleEndian()
 static rmtError Buffer_WriteU64(Buffer* buffer, rmtU64 value)
 {
     // Write as a double as Javascript DataView doesn't have a 64-bit integer read
-    union
+
+    assert(buffer != NULL);
+
+    // Reallocate the buffer on overflow
+    if (buffer->bytes_used + sizeof(value) > buffer->bytes_allocated)
     {
-        double d;
-        unsigned char c[sizeof(double)];
-    } u;
-    char temp[8];
-    u.d = (double)value;
-    if (IsLittleEndian())
-    {
-        temp[0] = u.c[0];
-        temp[1] = u.c[1];
-        temp[2] = u.c[2];
-        temp[3] = u.c[3];
-        temp[4] = u.c[4];
-        temp[5] = u.c[5];
-        temp[6] = u.c[6];
-        temp[7] = u.c[7];
+        rmtError error = Buffer_Grow(buffer, sizeof(value));
+        if (error != RMT_ERROR_NONE)
+            return error;
     }
-    else
+
+    // Copy all bytes
+    #if RMT_ASSUME_LITTLE_ENDIAN
+        *(double*)(buffer->data + buffer->bytes_used) = (double)value;
+    #else
     {
-        temp[0] = u.c[7];
-        temp[1] = u.c[6];
-        temp[2] = u.c[5];
-        temp[3] = u.c[4];
-        temp[4] = u.c[3];
-        temp[5] = u.c[2];
-        temp[6] = u.c[1];
-        temp[7] = u.c[0];
+        union
+        {
+            double d;
+            unsigned char c[sizeof(double)];
+        } u;
+        rmtU8* dest = buffer->data + buffer->bytes_used;
+        u.d = (double)value;
+        if (IsLittleEndian())
+        {
+            dest[0] = u.c[0];
+            dest[1] = u.c[1];
+            dest[2] = u.c[2];
+            dest[3] = u.c[3];
+            dest[4] = u.c[4];
+            dest[5] = u.c[5];
+            dest[6] = u.c[6];
+            dest[7] = u.c[7];
+        }
+        else
+        {
+            dest[0] = u.c[7];
+            dest[1] = u.c[6];
+            dest[2] = u.c[5];
+            dest[3] = u.c[4];
+            dest[4] = u.c[3];
+            dest[5] = u.c[2];
+            dest[6] = u.c[1];
+            dest[7] = u.c[0];
+        }
     }
-    return Buffer_Write(buffer, temp, sizeof(temp));
+    #endif
+
+    buffer->bytes_used += sizeof(value);
+
+    return RMT_ERROR_NONE;
 }
 
 
@@ -2003,7 +2056,7 @@ static rmtError rmtHashTable_Resize(rmtHashTable* table)
             rmtHashTable_Insert(table, slot->key, slot->value);
     }
 
-    free(old_slots);
+    rmtFree(old_slots);
 
     return RMT_ERROR_NONE;
 }
@@ -3816,6 +3869,10 @@ typedef struct Sample
     // Number of times this sample was used in a call in aggregate mode, 1 otherwise
     rmtU32 call_count;
 
+    // Current and maximum sample recursion depths
+    rmtU16 recurse_depth;
+    rmtU16 max_recurse_depth;
+
 } Sample;
 
 
@@ -3842,6 +3899,8 @@ static rmtError Sample_Constructor(Sample* sample)
     sample->us_length = 0;
     sample->us_sampled_length =0;
     sample->call_count = 0;
+    sample->recurse_depth = 0;
+    sample->max_recurse_depth = 0;
 
     return RMT_ERROR_NONE;
 }
@@ -3867,6 +3926,8 @@ static void Sample_Prepare(Sample* sample, rmtU32 name_hash, Sample* parent)
     sample->us_length = 0;
     sample->us_sampled_length = 0;
     sample->call_count = 1;
+    sample->recurse_depth = 0;
+    sample->max_recurse_depth = 0;
 }
 
 
@@ -3889,6 +3950,7 @@ static rmtError bin_Sample(Buffer* buffer, Sample* sample)
     BIN_ERROR_CHECK(Buffer_WriteU64(buffer, sample->us_length));
     BIN_ERROR_CHECK(Buffer_WriteU64(buffer, maxS64(sample->us_length - sample->us_sampled_length, 0)));
     BIN_ERROR_CHECK(Buffer_WriteU32(buffer, sample->call_count));
+    BIN_ERROR_CHECK(Buffer_WriteU32(buffer, sample->max_recurse_depth));
     BIN_ERROR_CHECK(bin_SampleArray(buffer, sample));
 
     return RMT_ERROR_NONE;
@@ -4012,9 +4074,14 @@ static rmtError SampleTree_Push(SampleTree* tree, rmtU32 name_hash, rmtU32 flags
         }
     }
 
-    if (parent->name_hash == name_hash)
+    // Collapse sample on recursion
+    if ((flags & RMTSF_Recursive) != 0 && parent->name_hash == name_hash)
     {
-        // TODO: Collapse recursion on flag?
+        parent->recurse_depth++;
+        parent->max_recurse_depth = maxU16(parent->max_recurse_depth, parent->recurse_depth);
+        parent->call_count++;
+        *sample = parent;
+        return RMT_ERROR_RECURSIVE_SAMPLE;
     }
 
     // Allocate a new sample
@@ -4370,7 +4437,7 @@ static void GetSampleDigest(Sample* sample, rmtU32* digest_hash, rmtU32* nb_samp
 
     // Concatenate this sample
     (*nb_samples)++;
-    *digest_hash = MurmurHash3_x86_32(&sample->unique_id, sizeof(sample->unique_id), *digest_hash);
+    *digest_hash = HashCombine(*digest_hash, sample->unique_id);
 
     {
         rmtU8 shift = 4;
@@ -5200,22 +5267,29 @@ RMT_API void _rmt_EndCPUSample(void)
     {
         Sample* sample = ts->sample_trees[SampleType_CPU]->current_parent;
 
-        rmtU64 us_end = usTimer_Get(&g_Remotery->timer);
-
-        // Aggregate samples use us_end to store start so that us_start is preserved
-        rmtU64 us_length = 0;
-        if (sample->call_count > 1)
-            us_length = (us_end - sample->us_end);
+        if (sample->recurse_depth > 0)
+        {
+            sample->recurse_depth--;
+        }
         else
-            us_length = (us_end - sample->us_start);
+        {
+            rmtU64 us_end = usTimer_Get(&g_Remotery->timer);
 
-        sample->us_length += us_length;
+            // Aggregate samples use us_end to store start so that us_start is preserved
+            rmtU64 us_length = 0;
+            if (sample->call_count > 1 && sample->max_recurse_depth == 0)
+                us_length = (us_end - sample->us_end);
+            else
+                us_length = (us_end - sample->us_start);
 
-        // Sum length on the parent to track un-sampled time in the parent
-        if (sample->parent != NULL)
-            sample->parent->us_sampled_length += us_length;
+            sample->us_length += us_length;
 
-        ThreadSampler_Pop(ts, g_Remotery->mq_to_rmt_thread, sample);
+            // Sum length on the parent to track un-sampled time in the parent
+            if (sample->parent != NULL)
+                sample->parent->us_sampled_length += us_length;
+
+            ThreadSampler_Pop(ts, g_Remotery->mq_to_rmt_thread, sample);
+        }
     }
 }
 
@@ -5522,8 +5596,15 @@ RMT_API void _rmt_EndCUDASample(void* stream)
     if (Remotery_GetThreadSampler(g_Remotery, &ts) == RMT_ERROR_NONE)
     {
         CUDASample* sample = (CUDASample*)ts->sample_trees[SampleType_CUDA]->current_parent;
-        CUDAEventRecord(sample->event_end, stream);
-        ThreadSampler_Pop(ts, g_Remotery->mq_to_rmt_thread, (Sample*)sample);
+        if (sample->Sample.recurse_depth > 0)
+        {
+            sample->Sample.recurse_depth--;
+        }
+        else
+        {
+            CUDAEventRecord(sample->event_end, stream);
+            ThreadSampler_Pop(ts, g_Remotery->mq_to_rmt_thread, (Sample*)sample);
+        }
     }
 }
 
@@ -6117,13 +6198,20 @@ RMT_API void _rmt_EndD3D11Sample(void)
     {
         // Close the timestamp
         D3D11Sample* d3d_sample = (D3D11Sample*)ts->sample_trees[SampleType_D3D11]->current_parent;
-        if (d3d_sample->timestamp != NULL)
-            D3D11Timestamp_End(d3d_sample->timestamp, d3d11->context);
+        if (d3d_sample->Sample.recurse_depth > 0)
+        {
+            d3d_sample->Sample.recurse_depth--;
+        }
+        else
+        {
+            if (d3d_sample->timestamp != NULL)
+                D3D11Timestamp_End(d3d_sample->timestamp, d3d11->context);
 
-        // Send to the update loop for ready-polling
-        if (ThreadSampler_Pop(ts, d3d11->mq_to_d3d11_main, (Sample*)d3d_sample))
-            // Perform ready-polling on popping of the root sample
-            UpdateD3D11Frame();
+            // Send to the update loop for ready-polling
+            if (ThreadSampler_Pop(ts, d3d11->mq_to_d3d11_main, (Sample*)d3d_sample))
+                // Perform ready-polling on popping of the root sample
+                UpdateD3D11Frame();
+        }
     }
 }
 
@@ -6483,7 +6571,7 @@ static rmtBool OpenGLTimestamp_GetData(OpenGLTimestamp* stamp, rmtU64* out_start
 typedef struct OpenGLSample
 {
     // IS-A inheritance relationship
-    Sample m_sample;
+    Sample Sample;
 
     OpenGLTimestamp* timestamp;
 
@@ -6498,8 +6586,8 @@ static rmtError OpenGLSample_Constructor(OpenGLSample* sample)
 
     // Chain to sample constructor
     Sample_Constructor((Sample*)sample);
-    sample->m_sample.type = SampleType_OpenGL;
-    sample->m_sample.size_bytes = sizeof(OpenGLSample);
+    sample->Sample.type = SampleType_OpenGL;
+    sample->Sample.size_bytes = sizeof(OpenGLSample);
 	New_0(OpenGLTimestamp, sample->timestamp);
 
     return RMT_ERROR_NONE;
@@ -6690,13 +6778,20 @@ RMT_API void _rmt_EndOpenGLSample(void)
     {
         // Close the timestamp
         OpenGLSample* ogl_sample = (OpenGLSample*)ts->sample_trees[SampleType_OpenGL]->current_parent;
-        if (ogl_sample->timestamp != NULL)
-            OpenGLTimestamp_End(ogl_sample->timestamp);
+        if (ogl_sample->Sample.recurse_depth > 0)
+        {
+            ogl_sample->Sample.recurse_depth--;
+        }
+        else
+        {
+            if (ogl_sample->timestamp != NULL)
+                OpenGLTimestamp_End(ogl_sample->timestamp);
 
-        // Send to the update loop for ready-polling
-        if (ThreadSampler_Pop(ts, g_Remotery->opengl->mq_to_opengl_main, (Sample*)ogl_sample))
-            // Perform ready-polling on popping of the root sample
-            UpdateOpenGLFrame();
+            // Send to the update loop for ready-polling
+            if (ThreadSampler_Pop(ts, g_Remotery->opengl->mq_to_opengl_main, (Sample*)ogl_sample))
+                // Perform ready-polling on popping of the root sample
+                UpdateOpenGLFrame();
+        }
     }
 }
 
@@ -6836,7 +6931,7 @@ static rmtBool MetalTimestamp_GetData(MetalTimestamp* stamp, rmtU64* out_start, 
 typedef struct MetalSample
 {
     // IS-A inheritance relationship
-    Sample m_sample;
+    Sample Sample;
 
     MetalTimestamp* timestamp;
 
@@ -6851,8 +6946,8 @@ static rmtError MetalSample_Constructor(MetalSample* sample)
 
     // Chain to sample constructor
     Sample_Constructor((Sample*)sample);
-    sample->m_sample.type = SampleType_Metal;
-    sample->m_sample.size_bytes = sizeof(MetalSample);
+    sample->Sample.type = SampleType_Metal;
+    sample->Sample.size_bytes = sizeof(MetalSample);
     New_0(MetalTimestamp, sample->timestamp);
 
     return RMT_ERROR_NONE;
@@ -6999,13 +7094,20 @@ RMT_API void _rmt_EndMetalSample(void)
     {
         // Close the timestamp
         MetalSample* metal_sample = (MetalSample*)ts->sample_trees[SampleType_Metal]->current_parent;
-        if (metal_sample->timestamp != NULL)
-            MetalTimestamp_End(metal_sample->timestamp);
-        
-        // Send to the update loop for ready-polling
-        if (ThreadSampler_Pop(ts, g_Remotery->metal->mq_to_metal_main, (Sample*)metal_sample))
-            // Perform ready-polling on popping of the root sample
-            UpdateMetalFrame();
+        if (metal_sample->Sample.recurse_depth > 0)
+        {
+            metal_sample->Sample.recurse_depth--;
+        }
+        else
+        {
+            if (metal_sample->timestamp != NULL)
+                MetalTimestamp_End(metal_sample->timestamp);
+            
+            // Send to the update loop for ready-polling
+            if (ThreadSampler_Pop(ts, g_Remotery->metal->mq_to_metal_main, (Sample*)metal_sample))
+                // Perform ready-polling on popping of the root sample
+                UpdateMetalFrame();
+        }
     }
 }
 

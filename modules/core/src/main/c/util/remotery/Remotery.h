@@ -47,6 +47,11 @@ documented just below this comment.
 #define RMT_ENABLED 1
 #endif
 
+// Help performance of the server sending data to the client by marking this machine as little-endian 
+#ifndef RMT_ASSUME_LITTLE_ENDIAN
+#define RMT_ASSUME_LITTLE_ENDIAN 0
+#endif
+
 // Used by the Celtoys TinyCRT library (not released yet)
 #ifndef RMT_USE_TINYCRT
 #define RMT_USE_TINYCRT 0
@@ -217,6 +222,7 @@ typedef struct Remotery Remotery;
 typedef enum rmtError
 {
     RMT_ERROR_NONE,
+    RMT_ERROR_RECURSIVE_SAMPLE,                 // Not an error but an internal message to calling code
 
     // System errors
     RMT_ERROR_MALLOC_FAIL,                      // Malloc call within remotery failed
@@ -280,10 +286,13 @@ typedef enum rmtError
 typedef enum rmtSampleFlags
 {
     // Default behaviour
-    RMTSF_None          = 0,
+    RMTSF_None = 0,
 
     // Search parent for same-named samples and merge timing instead of adding a new sample
-    RMTSF_Aggregate     = 1,
+    RMTSF_Aggregate = 1,
+
+    // Merge sample with parent if it's the same sample
+    RMTSF_Recursive = 2,
 } rmtSampleFlags;
 
 

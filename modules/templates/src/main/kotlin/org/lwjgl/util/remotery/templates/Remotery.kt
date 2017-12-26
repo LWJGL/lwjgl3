@@ -30,6 +30,7 @@ val Remotery = "Remotery".nativeClass(packageName = REMOTERY_PACKAGE, prefix = "
         "All possible error codes ({@code rmtError}).",
 
         "ERROR_NONE".enum,
+        "ERROR_RECURSIVE_SAMPLE".enum("Not an error but an internal message to calling code"),
 
         // System errors
         "ERROR_MALLOC_FAIL".enum("Malloc call within remotery failed"),
@@ -93,7 +94,8 @@ val Remotery = "Remotery".nativeClass(packageName = REMOTERY_PACKAGE, prefix = "
         "{@code rmtSampleFlags}",
 
         "RMTSF_None".enum("Default behaviour", "0"),
-        "RMTSF_Aggregate".enum("Search parent for same-named samples and merge timing instead of adding a new sample", "1")
+        "RMTSF_Aggregate".enum("Search parent for same-named samples and merge timing instead of adding a new sample"),
+        "RMTSF_Recursive".enum("Merge sample with parent if it's the same sample")
     ).noPrefix().javaDocLinks
 
     rmtSettings.p(
