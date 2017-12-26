@@ -1,5 +1,5 @@
 /*
- Nuklear - 2.00.4 - public domain
+ Nuklear - 2.00.7 - public domain
  no warranty implied; use at your own risk.
  authored from 2015-2017 by Micha Mettke
 
@@ -2106,6 +2106,9 @@ NK_API void nk_contextual_end(struct nk_context*);
  *
  * ============================================================================= */
 NK_API void nk_tooltip(struct nk_context*, const char*);
+#ifdef NK_INCLUDE_STANDARD_VARARGS
+NK_API void nk_tooltipf(struct nk_context*, const char*, ...);
+#endif
 NK_API int nk_tooltip_begin(struct nk_context*, float width);
 NK_API void nk_tooltip_end(struct nk_context*);
 /* =============================================================================
@@ -5643,7 +5646,7 @@ nk_file_load(const char* path, nk_size* siz, struct nk_allocator *alloc)
         fclose(fd);
         return 0;
     }
-    *siz = (nk_size)fread(buf, *siz, 1, fd);
+    *siz = (nk_size)fread(buf, 1,*siz, fd);
     fclose(fd);
     return buf;
 }
@@ -7968,10 +7971,16 @@ nk_draw_list_push_image(struct nk_draw_list *list, nk_handle texture)
         nk_draw_list_push_command(list, nk_null_rect, texture);
     } else {
         struct nk_draw_command *prev = nk_draw_list_command_last(list);
-        if (prev->elem_count == 0)
+        if (prev->elem_count == 0) {
             prev->texture = texture;
-        else if (prev->texture.id != texture.id)
-            nk_draw_list_push_command(list, prev->clip_rect, texture);
+        #ifdef NK_INCLUDE_COMMAND_USERDATA
+            prev->userdata = list->userdata;
+        #endif
+    } else if (prev->texture.id != texture.id
+        #ifdef NK_INCLUDE_COMMAND_USERDATA
+            || prev->userdata.id != list->userdata.id
+        #endif
+        ) nk_draw_list_push_command(list, prev->clip_rect, texture);
     }
 }
 
@@ -8610,22 +8619,23 @@ nk_draw_list_path_arc_to(struct nk_draw_list *list, struct nk_vec2 center,
 
         [1] https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Angle_sum_and_difference_identities
     */
-    const float d_angle = (a_max - a_min) / (float)segments;
+    {const float d_angle = (a_max - a_min) / (float)segments;
     const float sin_d = (float)NK_SIN(d_angle);
     const float cos_d = (float)NK_COS(d_angle);
 
     float cx = (float)NK_COS(a_min) * radius;
     float cy = (float)NK_SIN(a_min) * radius;
     for(i = 0; i <= segments; ++i) {
+        float new_cx, new_cy;
         const float x = center.x + cx;
         const float y = center.y + cy;
         nk_draw_list_path_line_to(list, nk_vec2(x, y));
 
-        const float new_cx = cx * cos_d - cy * sin_d;
-        const float new_cy = cy * cos_d + cx * sin_d;
+        new_cx = cx * cos_d - cy * sin_d;
+        new_cy = cy * cos_d + cx * sin_d;
         cx = new_cx;
         cy = new_cy;
-    }
+    }}
 }
 
 NK_API void
@@ -12162,11 +12172,11 @@ nk_font_atlas_add(struct nk_font_atlas *atlas, const struct nk_font_config *conf
             atlas->config = cfg;
             cfg->next = 0;
         } else {
-            atlas->config->next = cfg;
-            cfg->next = atlas->config;
-            atlas->config = cfg;
+            struct nk_font_config *i = atlas->config;
+            while (i->next) i = i->next;
+            i->next = cfg;
+            cfg->next = 0;
         }
-
         /* allocate new font */
         font = (struct nk_font*)
             atlas->permanent.alloc(atlas->permanent.userdata,0, sizeof(struct nk_font));
@@ -12180,8 +12190,10 @@ nk_font_atlas_add(struct nk_font_atlas *atlas, const struct nk_font_config *conf
             atlas->fonts = font;
             font->next = 0;
         } else {
-            font->next = atlas->fonts;
-            atlas->fonts = font;
+            struct nk_font *i = atlas->fonts;
+            while (i->next) i = i->next;
+            i->next = font;
+            font->next = 0;
         }
         cfg->font = &font->info;
     } else {
@@ -12516,23 +12528,18 @@ nk_font_atlas_cleanup(struct nk_font_atlas *atlas)
     NK_ASSERT(atlas->temporary.free);
     NK_ASSERT(atlas->permanent.alloc);
     NK_ASSERT(atlas->permanent.free);
-
     if (!atlas || !atlas->permanent.alloc || !atlas->permanent.free) return;
     if (atlas->config) {
-        struct nk_font_config *iter, *next;
-        for (iter = atlas->config; iter; iter = next) {
-            struct nk_font_config *i, *n;
-            for (i = iter->n; i != iter; i = n) {
-                n = i->n;
+        struct nk_font_config *iter;
+        for (iter = atlas->config; iter; iter = iter->next) {
+            struct nk_font_config *i;
+            for (i = iter->n; i != iter; i = i->n) {
                 atlas->permanent.free(atlas->permanent.userdata, i->ttf_blob);
-                atlas->permanent.free(atlas->permanent.userdata, i);
+                i->ttf_blob = 0;
             }
-
-            next = iter->next;
             atlas->permanent.free(atlas->permanent.userdata, iter->ttf_blob);
-            atlas->permanent.free(atlas->permanent.userdata, iter);
+            iter->ttf_blob = 0;
         }
-        atlas->config = 0;
     }
 }
 
@@ -12546,7 +12553,23 @@ nk_font_atlas_clear(struct nk_font_atlas *atlas)
     NK_ASSERT(atlas->permanent.free);
     if (!atlas || !atlas->permanent.alloc || !atlas->permanent.free) return;
 
-    nk_font_atlas_cleanup(atlas);
+    if (atlas->config) {
+        struct nk_font_config *iter, *next;
+        for (iter = atlas->config; iter; iter = next) {
+            struct nk_font_config *i, *n;
+            for (i = iter->n; i != iter; i = n) {
+                n = i->n;
+                if (i->ttf_blob)
+                    atlas->permanent.free(atlas->permanent.userdata, i->ttf_blob);
+                atlas->permanent.free(atlas->permanent.userdata, i);
+            }
+            next = iter->next;
+            if (i->ttf_blob)
+                atlas->permanent.free(atlas->permanent.userdata, iter->ttf_blob);
+            atlas->permanent.free(atlas->permanent.userdata, iter);
+        }
+        atlas->config = 0;
+    }
     if (atlas->fonts) {
         struct nk_font *iter, *next;
         for (iter = atlas->fonts; iter; iter = next) {
@@ -14729,8 +14752,7 @@ nk_slider_behavior(nk_flags *state, struct nk_rect *logical_cursor,
     left_mouse_click_in_cursor = in && nk_input_has_mouse_click_down_in_rect(in,
             NK_BUTTON_LEFT, *visual_cursor, nk_true);
 
-    if (left_mouse_down && left_mouse_click_in_cursor)
-    {
+    if (left_mouse_down && left_mouse_click_in_cursor) {
         float ratio = 0;
         const float d = in->mouse.pos.x - (visual_cursor->x+visual_cursor->w*0.5f);
         const float pxstep = bounds.w / slider_steps;
@@ -14915,30 +14937,37 @@ nk_do_slider(nk_flags *state,
  *
  * ===============================================================*/
 NK_INTERN nk_size
-nk_progress_behavior(nk_flags *state, const struct nk_input *in,
-    struct nk_rect r, nk_size max, nk_size value, int modifiable)
+nk_progress_behavior(nk_flags *state, struct nk_input *in,
+    struct nk_rect r, struct nk_rect cursor, nk_size max, nk_size value, int modifiable)
 {
+    int left_mouse_down = 0;
+    int left_mouse_click_in_cursor = 0;
+
     nk_widget_state_reset(state);
-    if (in && modifiable && nk_input_is_mouse_hovering_rect(in, r)) {
+    if (!in) return value;
+    left_mouse_down = in && in->mouse.buttons[NK_BUTTON_LEFT].down;
+    left_mouse_click_in_cursor = in && nk_input_has_mouse_click_down_in_rect(in,
+            NK_BUTTON_LEFT, cursor, nk_true);
+    if (nk_input_is_mouse_hovering_rect(in, r))
+        *state = NK_WIDGET_STATE_HOVERED;
+
+    if (in && left_mouse_down && left_mouse_click_in_cursor) {
         int left_mouse_down = in->mouse.buttons[NK_BUTTON_LEFT].down;
         int left_mouse_click_in_cursor = nk_input_has_mouse_click_down_in_rect(in,
             NK_BUTTON_LEFT, r, nk_true);
 
         if (left_mouse_down && left_mouse_click_in_cursor) {
-            float ratio = NK_MAX(0, (float)(in->mouse.pos.x - r.x)) / (float)r.w;
-            value = (nk_size)NK_MAX(0,((float)max * ratio));
-            *state = NK_WIDGET_STATE_ACTIVE;
-        } else *state = NK_WIDGET_STATE_HOVERED;
+            float ratio = NK_MAX(0, (float)(in->mouse.pos.x - cursor.x)) / (float)cursor.w;
+            value = (nk_size)NK_CLAMP(0, (float)max * ratio, max);
+            in->mouse.buttons[NK_BUTTON_LEFT].clicked_pos.x = cursor.x + cursor.w/2.0f;
+            *state |= NK_WIDGET_STATE_ACTIVE;
+        }
     }
-
     /* set progressbar widget state */
     if (*state & NK_WIDGET_STATE_HOVER && !nk_input_is_mouse_prev_hovering_rect(in, r))
         *state |= NK_WIDGET_STATE_ENTERED;
     else if (nk_input_is_mouse_prev_hovering_rect(in, r))
         *state |= NK_WIDGET_STATE_LEFT;
-
-    if (!max) return value;
-    value = NK_MIN(value, max);
     return value;
 }
 
@@ -14982,7 +15011,7 @@ NK_INTERN nk_size
 nk_do_progress(nk_flags *state,
     struct nk_command_buffer *out, struct nk_rect bounds,
     nk_size value, nk_size max, int modifiable,
-    const struct nk_style_progress *style, const struct nk_input *in)
+    const struct nk_style_progress *style, struct nk_input *in)
 {
     float prog_scale;
     nk_size prog_value;
@@ -14997,11 +15026,11 @@ nk_do_progress(nk_flags *state,
     cursor.h = NK_MAX(bounds.h, 2 * style->padding.y + 2 * style->border);
     cursor = nk_pad_rect(bounds, nk_vec2(style->padding.x + style->border, style->padding.y + style->border));
     prog_scale = (float)value / (float)max;
-    cursor.w = (bounds.w - 2) * prog_scale;
 
     /* update progressbar */
     prog_value = NK_MIN(value, max);
-    prog_value = nk_progress_behavior(state, in, bounds, max, prog_value, modifiable);
+    prog_value = nk_progress_behavior(state, in, bounds, cursor,max, prog_value, modifiable);
+    cursor.w = cursor.w * prog_scale;
 
     /* draw progressbar */
     if (style->draw_begin) style->draw_begin(out, style->userdata);
@@ -15501,8 +15530,6 @@ nk_do_edit(nk_flags *state, struct nk_command_buffer *out,
         const enum nk_text_edit_type type = (flags & NK_EDIT_MULTILINE) ?
             NK_TEXT_EDIT_MULTI_LINE: NK_TEXT_EDIT_SINGLE_LINE;
         nk_textedit_clear_state(edit, type, filter);
-        if (flags & NK_EDIT_ALWAYS_INSERT_MODE)
-            edit->mode = NK_TEXT_EDIT_MODE_INSERT;
         if (flags & NK_EDIT_AUTO_SELECT)
             select_all = nk_true;
         if (flags & NK_EDIT_GOTO_END_ON_ACTIVATE) {
@@ -15512,6 +15539,8 @@ nk_do_edit(nk_flags *state, struct nk_command_buffer *out,
     } else if (!edit->active) edit->mode = NK_TEXT_EDIT_MODE_VIEW;
     if (flags & NK_EDIT_READ_ONLY)
         edit->mode = NK_TEXT_EDIT_MODE_VIEW;
+    else if (flags & NK_EDIT_ALWAYS_INSERT_MODE)
+        edit->mode = NK_TEXT_EDIT_MODE_INSERT;
 
     ret = (edit->active) ? NK_EDIT_ACTIVE: NK_EDIT_INACTIVE;
     if (prev_state != edit->active)
@@ -17408,7 +17437,7 @@ nk_clear(struct nk_context *ctx)
             ctx->active = iter->prev;
             ctx->end = iter->prev;
             if (ctx->active)
-                ctx->active->flags &= ~NK_WINDOW_ROM;
+                ctx->active->flags &= ~(unsigned)NK_WINDOW_ROM;
         }
         /* free unused popup windows */
         if (iter->popup.win && iter->popup.win->seq != ctx->seq) {
@@ -19931,6 +19960,9 @@ nk_layout_peek(struct nk_rect *bounds, struct nk_context *ctx)
         layout->row.index = 0;
     }
     nk_layout_widget_space(bounds, ctx, win, nk_false);
+    if (!layout->row.index) {
+        bounds->x -= layout->row.item_offset;
+    }
     layout->at_y = y;
     layout->row.index = index;
 }
@@ -21173,7 +21205,7 @@ nk_progress(struct nk_context *ctx, nk_size *cur, nk_size max, int is_modifyable
     struct nk_window *win;
     struct nk_panel *layout;
     const struct nk_style *style;
-    const struct nk_input *in;
+    struct nk_input *in;
 
     struct nk_rect bounds;
     enum nk_widget_layout_states state;
@@ -21292,8 +21324,7 @@ nk_edit_string(struct nk_context *ctx, nk_flags flags,
         win->edit.mode = edit->mode;
         win->edit.scrollbar.x = (nk_uint)edit->scrollbar.x;
         win->edit.scrollbar.y = (nk_uint)edit->scrollbar.y;
-    }
-    return state;
+    } return state;
 }
 
 NK_API nk_flags
@@ -21336,7 +21367,7 @@ nk_edit_buffer(struct nk_context *ctx, nk_flags flags,
         }
         if (flags & NK_EDIT_CLIPBOARD)
             edit->clip = ctx->clip;
-        edit->active = win->edit.active;
+        edit->active = (unsigned char)win->edit.active;
     } else edit->active = nk_false;
     edit->mode = win->edit.mode;
 
@@ -21355,8 +21386,7 @@ nk_edit_buffer(struct nk_context *ctx, nk_flags flags,
     } else if (prev_state && !edit->active) {
         /* current edit is now cold */
         win->edit.active = nk_false;
-    }
-    return ret_flags;
+    } return ret_flags;
 }
 
 NK_API nk_flags
@@ -22449,10 +22479,10 @@ nk_tooltip_begin(struct nk_context *ctx, float width)
     if (win->popup.win && (win->popup.type & NK_PANEL_SET_NONBLOCK))
         return 0;
 
-    bounds.w = width;
-    bounds.h = nk_null_rect.h;
-    bounds.x = (in->mouse.pos.x + 1) - win->layout->clip.x;
-    bounds.y = (in->mouse.pos.y + 1) - win->layout->clip.y;
+    bounds.w = nk_iceilf(width);
+    bounds.h = nk_iceilf(nk_null_rect.h);
+    bounds.x = nk_ifloorf(in->mouse.pos.x + 1) - win->layout->clip.x;
+    bounds.y = nk_ifloorf(in->mouse.pos.y + 1) - win->layout->clip.y;
 
     ret = nk_popup_begin(ctx, NK_POPUP_DYNAMIC,
         "__##Tooltip##__", NK_WINDOW_NO_SCROLLBAR|NK_WINDOW_BORDER, bounds);
@@ -22508,6 +22538,19 @@ nk_tooltip(struct nk_context *ctx, const char *text)
         nk_tooltip_end(ctx);
     }
 }
+#ifdef NK_INCLUDE_STANDARD_VARARGS
+NK_API void
+nk_tooltipf(struct nk_context *ctx, const char *fmt, ...)
+{
+    char buf[256];
+    va_list args;
+    va_start(args, fmt);
+    nk_strfmt(buf, NK_LEN(buf), fmt, args);
+    va_end(args);
+    nk_tooltip(ctx, buf);
+}
+#endif
+
 /* -------------------------------------------------------------
  *
  *                          CONTEXTUAL
