@@ -1119,6 +1119,19 @@ val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGL("KHR_texture
 }
 
 val NV_blend_square = EXT_FLAG.nativeClassGL("NV_blend_square", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_conservative_raster_underestimation = EXT_FLAG.nativeClassGL("NV_conservative_raster_underestimation", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        The extension ${NV_conservative_raster.link} provides a new rasterization mode known as "Overestimated Conservative Rasterization", where any pixel
+        that is partially covered, even if no sample location is covered, is treated as fully covered and a corresponding fragment will be shaded. There is
+        also an "Underestimated Conservative Rasterization" variant, where only the pixels that are completely covered by the primitive are rasterized.
+
+        This extension provides the underestimated conservative rasterization information for each fragment in the fragment shader through a new built-in
+        {@code gl_FragFullyCoveredNV}.
+        """
+}
 val NV_ES3_1_compatibility = EXT_FLAG.nativeClassGL("NV_ES3_1_compatibility", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_program4 = EXT_FLAG.nativeClassGL("NV_fragment_program4", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_program_option = EXT_FLAG.nativeClassGL("NV_fragment_program_option", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
@@ -1346,6 +1359,18 @@ val OVR_multiview2 = "OVRMultiview2".nativeClassGL("OVR_multiview2", postfix = O
 }
 
 // Platform-specific
+
+val GLX_EXT_no_config_context = EXT_FLAG.nativeClassGLX("GLX_EXT_no_config_context", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        Modern GPUs allow contexts to render to almost any combination of supported color and auxiliary buffer formats. Traditionally GLX context creation is
+        done with respect to a GLXFBConfig specifying buffer formats, and constrains contexts to only work with drawables created with a "compatible" config.
+
+        This extension allows creation of GL & ES contexts without specifying a {@code GLXFBConfig}.
+        """
+}
 
 val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_tear", postfix = EXT) {
     documentation =

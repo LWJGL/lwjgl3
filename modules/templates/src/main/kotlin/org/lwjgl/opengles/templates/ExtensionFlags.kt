@@ -619,6 +619,28 @@ val NV_shader_noperspective_interpolation = EXT_FLAG.nativeClassGLES("NV_shader_
         """
 }
 
+val NV_stereo_view_rendering = EXT_FLAG.nativeClassGLES("NV_stereo_view_rendering", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        Virtual reality (VR) applications often render a single logical scene from multiple views corresponding to a pair of eyes. The views (eyes) are
+        separated by a fixed offset in the X direction.
+
+        Traditionally, multiple views are rendered via multiple rendering passes. This is expensive for the GPU because the objects in the scene must be
+        transformed, rasterized, shaded, and fragment processed redundantly. This is expensive for the CPU because the scene graph needs to be visited multiple
+        times and driver validation happens for each view. Rendering N passes tends to take N times longer than a single pass.
+
+        This extension provides a mechanism to render binocular (stereo) views from a single stream of OpenGL rendering commands. Vertex, tessellation, and
+        geometry (VTG) shaders can output two positions for each vertex corresponding to the two eye views. A built-in "gl_SecondaryPositionNV" is added to
+        specify the second position. The positions from each view may be sent to different viewports and/or layers. A built-in "gl_SecondaryViewportMaskNV[]"
+        is also added to specify the viewport mask for the second view. A new layout-qualifier "secondary_view_offset" is added for built-in output "gl_Layer"
+        which allows for the geometry from each view to be sent to different layers for rendering.
+
+        Requires {@link \#GL_NV_viewport_array2 NV_viewport_array2}.
+        """
+}
+
 val NV_texture_compression_s3tc_update = EXT_FLAG.nativeClassGLES("NV_texture_compression_s3tc_update", postfix = NV) {
     documentation =
         """
