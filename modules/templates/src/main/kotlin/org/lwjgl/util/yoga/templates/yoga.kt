@@ -741,6 +741,16 @@ div {
         const..YGConfigRef.IN("config", "")
     )
 
+    float(
+        "RoundValueToPixelGrid",
+        "",
+
+        float.IN("value", ""),
+        float.IN("pointScaleFactor", ""),
+        bool.IN("forceCeil", ""),
+        bool.IN("forceFloor", "")
+    )
+
     // Enums
 
     fun YG_TYPE_TO_STRING(type: IntegerType) {

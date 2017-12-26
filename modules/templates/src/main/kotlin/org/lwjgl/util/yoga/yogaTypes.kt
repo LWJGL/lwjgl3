@@ -198,22 +198,22 @@ val YGStyle = struct(YOGA_PACKAGE, "YGStyle", mutable = false) {
 val YGNodeListRef = "YGNodeListRef".opaque_p
 val YGNode_p = struct(YOGA_PACKAGE, "YGNode").p
 val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
+    nullable..opaque_p.member("context", "")
+    nullable..YGPrintFunc.member("print", "")
+    bool.member("hasNewLayout", "")
+    YGNodeType.member("nodeType", "")
+    nullable..YGMeasureFunc.member("measure", "")
+    nullable..YGBaselineFunc.member("baseline", "")
+
     YGStyle.member("style", "")
     YGLayout.member("layout", "")
     uint32_t.member("lineIndex", "")
 
     nullable..YGNodeRef.member("parent", "")
     nullable..YGNodeListRef.member("children", "")
-
     nullable..YGNode_p.member("nextChild", "")
 
-    nullable..YGMeasureFunc.member("measure", "")
-    nullable..YGPrintFunc.member("print", "")
-    nullable..opaque_p.member("context", "")
-
+    nullable..YGConfigRef.member("config", "")
     bool.member("isDirty", "")
-    bool.member("hasNewLayout", "")
-    YGNodeType.member("nodeType", "")
-
     YGValue.p.array("resolvedDimensions", "", size = 2)
 }
