@@ -209,29 +209,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         "KEY_LAST".."GLFW_KEY_MENU"
     )
 
-    IntConstant(
-        "If this bit is set one or more Shift keys were held down.",
-
-        "MOD_SHIFT"..0x0001
-    )
-
-    IntConstant(
-        "If this bit is set one or more Control keys were held down.",
-
-        "MOD_CONTROL"..0x0002
-    )
-
-    IntConstant(
-        "If this bit is set one or more Alt keys were held down.",
-
-        "MOD_ALT"..0x0004
-    )
-
-    IntConstant(
-        "If this bit is set one or more Super keys were held down.",
-
-        "MOD_SUPER"..0x0008
-    )
+    IntConstant("If this bit is set one or more Shift keys were held down.", "MOD_SHIFT"..0x0001)
+    IntConstant("If this bit is set one or more Control keys were held down.", "MOD_CONTROL"..0x0002)
+    IntConstant("If this bit is set one or more Alt keys were held down.", "MOD_ALT"..0x0004)
+    IntConstant("If this bit is set one or more Super keys were held down.", "MOD_SUPER"..0x0008)
+    IntConstant("If this bit is set the Caps Lock key is enabled and the #LOCK_KEY_MODS input mode is set.", "MOD_CAPS_LOCK"..0x0010)
+    IntConstant("If this bit is set the Num Lock key is enabled and the #LOCK_KEY_MODS input mode is set.", "MOD_NUM_LOCK"..0x0020)
 
     IntConstant(
         """Mouse buttons. See ${url("http://www.glfw.org/docs/latest/input.html\\#input_mouse_button", "mouse button input")} for how these are used.""",
@@ -487,13 +470,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             0x0002000A)
     ).javaDocLinks
 
-    IntConstant(
+    val InputModes = IntConstant(
         "Input options.",
 
         "CURSOR"..0x00033001,
         "STICKY_KEYS"..0x00033002,
-        "STICKY_MOUSE_BUTTONS"..0x00033003
-    )
+        "STICKY_MOUSE_BUTTONS"..0x00033003,
+        "LOCK_KEY_MODS"..0x00033004
+    ).javaDocLinks
 
     IntConstant(
         "Cursor state.",
@@ -527,10 +511,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         "JOYSTICK_HAT_BUTTONS"..0x00050001,
 
         "COCOA_CHDIR_RESOURCES"..0x00051001,
-        "COCOA_MENUBAR"..0x00051002,
-
-        "X11_WM_CLASS_NAME"..0x00052001,
-        "X11_WM_CLASS_CLASS"..0x00052002
+        "COCOA_MENUBAR"..0x00051002
     )
 
     IntConstant(
@@ -693,9 +674,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
     )
 
     IntConstant(
-        "Specifies whether to activate frame autosaving on macOS. This is ignored on other platforms.",
+        """
+        Specifies the UTF-8 encoded name to use for autosaving the window frame, or if empty disables frame autosaving for the window. This is ignored on other
+        platforms. This is set with #WindowHintString().
+        """,
 
-        "COCOA_FRAME_AUTOSAVE"..0x00023002
+        "COCOA_FRAME_NAME"..0x00023002
     )
 
     IntConstant(
@@ -706,6 +690,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """,
 
         "COCOA_GRAPHICS_SWITCHING"..0x00023003
+    )
+
+    IntConstant(
+        "The desired ASCII encoded class and instance parts of the ICCCM {@code WM_CLASS} window property. These are set with #WindowHintString().",
+
+        "X11_CLASS_NAME"..0x00024001,
+        "X11_INSTANCE_NAME"..0x00024002
     )
 
     val ClientAPIValues = IntConstant(
@@ -793,7 +784,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
     void(
         "InitHint",
         """
-        Sets hints for the next initialization of GLFW. Only integer type hints can be set with this function.
+        Sets hints for the next initialization of GLFW.
 
         The values you set hints to are never reset by GLFW, but they only take effect during initialization. Once GLFW has been initialized, any values you
         set will be ignored until the library is terminated and initialized again.
@@ -809,29 +800,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         int.IN("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR"),
         int.IN("value", "the new value of the init hint"),
-
-        since = "version 3.3"
-    )
-
-    void(
-        "InitHintString",
-        """
-        Sets hints for the next initialization of GLFW. Only string type hints can be set with this function.
-
-        The values you set hints to are never reset by GLFW, but they only take effect during initialization. Once GLFW has been initialized, any values you
-        set will be ignored until the library is terminated and initialized again.
-
-        Some hints are platform specific. These may be set on any platform but they will only affect their specific platform. Other platforms will simply
-        ignore them. Setting these hints requires no platform specific headers or functions.
-
-        ${note(ul(
-            "This function may be called before #Init().",
-            "This function must only be called from the main thread."
-        ))}
-        """,
-
-        int.IN("hint", "the init hint to set", "#X11_WM_CLASS_NAME #X11_WM_CLASS_CLASS"),
-        const..charUTF8_p.IN("value", "the new value of the init hint"),
 
         since = "version 3.3"
     )
@@ -1040,6 +1008,42 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         since = "version 3.0"
     )
 
+    void(
+        "SetMonitorUserPointer",
+        """
+        Sets the user pointer of the specified monitor.
+
+        This function sets the user-defined pointer of the specified monitor. The current value is retained until the monitor is disconnected. The initial
+        value is #NULL.
+
+        This function may be called from the monitor callback, even for a monitor that is being disconnected.
+
+        This function may be called from any thread. Access is not synchronized.
+        """,
+
+        GLFWmonitor_p.IN("monitor", "the monitor whose pointer to set"),
+        opaque_p.IN("pointer", "the new value"),
+
+        since = "version 3.3"
+    )
+
+    opaque_p(
+        "GetMonitorUserPointer",
+        """
+        Returns the user pointer of the specified monitor.
+
+        This function returns the current value of the user-defined pointer of the specified monitor. The initial value is #NULL.
+
+        This function may be called from the monitor callback, even for a monitor that is being disconnected.
+
+        This function may be called from any thread. Access is not synchronized.
+        """,
+
+        GLFWmonitor_p.IN("monitor", "the monitor whose pointer to return"),
+
+        since = "version 3.3"
+    )
+
     GLFWmonitorfun(
         "SetMonitorCallback",
         """
@@ -1177,11 +1181,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
     void(
         "WindowHint",
         """
-        Sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to glfwWindowHint or
+        Sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to this function or
         #DefaultWindowHints(), or until the library is terminated.
+
+        Only integer value hints can be set with this function. String value hints are set with #WindowHintString().
 
         This function does not check whether the specified hint values are valid. If you set hints to invalid values this will instead be reported by the next
         call to #CreateWindow().
+
+        Some hints are platform specific. These may be set on any platform but they will only affect their specific platform. Other platforms will ignore them.
+        Setting these hints requires no platform specific headers or functions.
 
         <h5>Supported and default values</h5>
         ${table(
@@ -1229,7 +1238,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues)),
 
             tr(td("#COCOA_RETINA_FRAMEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE")),
-            tr(td("#COCOA_FRAME_AUTOSAVE"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#COCOA_GRAPHICS_SWITCHING"), td("#FALSE"), td("#TRUE or #FALSE"))
         )}
 
@@ -1239,10 +1247,47 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         int.IN(
             "hint",
             "the window hint to set",
-            "${WindowHints.replace("#ICONIFIED ", "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints #COCOA_RETINA_FRAMEBUFFER"
+            """
+            ${WindowHints.replace("#ICONIFIED ", "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints #COCOA_RETINA_FRAMEBUFFER
+            #COCOA_GRAPHICS_SWITCHING
+            """
         ),
         int.IN("value", "the new value of the window hint"),
         since = "version 2.2"
+    )
+
+    void(
+        "WindowHintString",
+        """
+        Sets the specified window hint to the desired value.
+
+        This function sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to this function or
+        #DefaultWindowHints(), or until the library is terminated.
+
+        Only string type hints can be set with this function. Integer value hints are set with #WindowHint().
+
+        This function does not check whether the specified hint values are valid. If you set hints to invalid values this will instead be reported by the next
+        call to #CreateWindow().
+
+        Some hints are platform specific. These may be set on any platform but they will only affect their specific platform. Other platforms will ignore them.
+        Setting these hints requires no platform specific headers or functions.
+
+        <h5>Supported and default values</h5>
+        ${table(
+            tr(th("Name"), th("Default value"), th("Supported values")),
+
+            tr(td("#COCOA_FRAME_NAME"), td("\"\""), td("A UTF-8 encoded frame autosave name")),
+            tr(td("#X11_CLASS_NAME"), td("\"\""), td("An ASCII encoded {@code WM_CLASS} class name")),
+            tr(td("#X11_INSTANCE_NAME"), td("\"\""), td("An ASCII encoded {@code WM_CLASS} instance name"))
+        )}
+
+        This function must only be called from the main thread.
+        """,
+
+        int.IN("hint", "the window hint to set", "#COCOA_FRAME_NAME #X11_CLASS_NAME #X11_INSTANCE_NAME"),
+        const..charUTF8_p.IN("value", "the new value of the window hint. The specified string is copied before this function returns."),
+
+        since = "version 3.3"
     )
 
     Code(
@@ -1316,11 +1361,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
                 "High Resolution Guidelines for macOS")
             } in the Mac Developer Library.
             """,
-            "When activating frame autosaving with #COCOA_FRAME_AUTOSAVE, the specified window size may be overriden by a previously saved size and position.",
+            """
+            <b>macOS</b>: When activating frame autosaving with #COCOA_FRAME_NAME, the specified window size and position may be overriden by previously saved
+            values.
+            """,
             "<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",
             """
             <b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
             to query the final size, position or other attributes directly after window creation.
+            """,
+            """
+            <b>X11</b>: The class part of the {@code WM_CLASS} window property will by default be set to the window title passed to this function. The instance
+            part will use the contents of the {@code RESOURCE_NAME} environment variable, if present and not empty, or fall back to the window title. Set the
+            #X11_CLASS_NAME and #X11_INSTANCE_NAME window hints to override this.
             """,
             """
             <b>Wayland</b>: The window frame is currently unimplemented, as if #DECORATED) was always set to #FALSE. A compositor can still emit close, resize
@@ -2218,7 +2271,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         """,
 
         GLFWwindow_p.IN("window", "the window to query"),
-        int.IN("mode", "the input mode whose value to return", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS"),
+        int.IN("mode", "the input mode whose value to return", InputModes),
 
         returnDoc = "the input mode value",
         since = "version 3.0"
@@ -2247,6 +2300,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
         disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that #GetMouseButton() returns #PRESS the next
         time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
         been pressed but not when or in which order.
+
+        If {@code mode} is #LOCK_KEY_MODS, the value must be either #TRUE to enable lock key modifier bits, or #FALSE to disable them. If enabled, callbacks
+        that receive modifier bits will also have the #MOD_CAPS_LOCK bit set when the event was generated with Caps Lock on, and the #MOD_NUM_LOCK bit when Num
+        Lock was on.
 
         This function must only be called from the main thread.
         """,
@@ -2825,6 +2882,42 @@ if (hats[2] & GLFW_HAT_RIGHT)
         since = "version 3.3"
     )
 
+    void(
+        "SetJoystickUserPointer",
+        """
+        Sets the user pointer of the specified joystick.
+
+        This function sets the user-defined pointer of the specified joystick. The current value is retained until the joystick is disconnected. The initial
+        value is #NULL.
+
+        This function may be called from the joystick callback, even for a joystick that is being disconnected.
+
+        This function may be called from any thread. Access is not synchronized.
+        """,
+
+        int.IN("jid", "the joystick whose pointer to set"),
+        opaque_p.IN("pointer", "the new value"),
+
+        since = "version 3.3"
+    )
+
+    opaque_p(
+        "GetJoystickUserPointer",
+        """
+        Returns the user pointer of the specified joystick.
+
+        This function returns the current value of the user-defined pointer of the specified joystick. The initial value is #NULL.
+
+        This function may be called from the joystick callback, even for a joystick that is being disconnected.
+
+        This function may be called from any thread. Access is not synchronized.
+        """,
+
+        int.IN("jid", "the joystick whose pointer to set"),
+
+        since = "version 3.3"
+    )
+
     intb(
         "JoystickIsGamepad",
         """
@@ -3092,11 +3185,11 @@ if (hats[2] & GLFW_HAT_RIGHT)
         before swapping the buffers and returning. This is sometimes called <i>vertical synchronization</i>, <i>vertical retrace synchronization</i> or just
         <i>vsync</i>.
 
-        Contexts that support either of the
+        A context that supports either of the
         ${url("https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_swap_control_tear.txt", "WGL_EXT_swap_control_tear")} and
-        ${url("https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_swap_control_tear.txt", "GLX_EXT_swap_control_tear")} extensions also accept
-        negative swap intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions
-        using #ExtensionSupported(). For more information about swap tearing, see the extension specifications.
+        ${url("https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_swap_control_tear.txt", "GLX_EXT_swap_control_tear")} extensions also accepts
+        <b>negative</b> swap intervals, which allows the driver to swap immediately even if a frame arrives a little bit late. You can check for these
+        extensions with #ExtensionSupported(). For more information about swap tearing, see the extension specifications.
 
         A context must be current on the calling thread. Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 
