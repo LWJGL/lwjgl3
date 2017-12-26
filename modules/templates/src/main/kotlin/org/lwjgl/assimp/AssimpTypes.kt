@@ -141,6 +141,7 @@ val aiTexture_pp = struct(ASSIMP_PACKAGE, "AITexture", nativeName = "struct aiTe
         compressed texture data. Good luck, have fun!
         """
     )
+    aiString.member("mFilename", "texture original filename. Used to get the texture reference.")
 }.p.p
 
 val aiColor4D_p = struct(ASSIMP_PACKAGE, "AIColor4D", nativeName = "struct aiColor4D") {

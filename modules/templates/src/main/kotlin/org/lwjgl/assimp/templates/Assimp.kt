@@ -322,6 +322,17 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
 
     StringConstant(
         """
+        Configures the #Process_FindDegenerates to check the area of a triangle to be greater than e-6. If this is not the case the triangle will be removed if
+        #AI_CONFIG_PP_FD_REMOVE is set to true.
+
+        Property type: bool. Default value: false.
+        """,
+
+        "AI_CONFIG_PP_FD_CHECKAREA".."PP_FD_CHECKAREA"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Configures the #Process_OptimizeGraph step to preserve nodes matching a name in a given list.
 
         This is a list of 1 to n strings, ' ' serves as delimiter character. Identifiers containing whitespaces must be enclosed in *single* quotation marks.
@@ -600,12 +611,12 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
 
     StringConstant(
         """
-        Set whether the fbx importer will search for embedded loaded textures, where no embedded texture data is provided.
+        Set whether the fbx importer will use the legacy embedded texture naming.
 
         Property type: bool. The default value is false (0)
         """,
 
-        "AI_CONFIG_IMPORT_FBX_SEARCH_EMBEDDED_TEXTURES".."IMPORT_FBX_SEARCH_EMBEDDED_TEXTURES"
+        "AI_CONFIG_IMPORT_FBX_EMBEDDED_TEXTURES_LEGACY_NAMING".."AI_CONFIG_IMPORT_FBX_EMBEDDED_TEXTURES_LEGACY_NAMING"
     ).noPrefix()
 
     StringConstant(
@@ -970,6 +981,16 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
         "AI_CONFIG_EXPORT_XFILE_64BIT".."EXPORT_XFILE_64BIT"
     ).noPrefix()
 
+    StringConstant(
+        """
+        Specifies a global key factor for scale.
+
+        Property type: float. Default value: 1.0f
+        """,
+
+        "AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY".."GLOBAL_SCALE_FACTOR"
+    ).noPrefix()
+
     IntConstant(
         "Default values for configuration properties.",
 
@@ -985,7 +1006,8 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
         "Default value for configuration properties.",
 
         "AI_DEBONE_THRESHOLD"..1.0f,
-        "AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE"..10.0f
+        "AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE"..10.0f,
+        "AI_CONFIG_GLOBAL_SCALE_FACTOR_DEFAULT"..1.0f
     ).noPrefix()
 
     IntConstant(
@@ -2643,6 +2665,17 @@ x1""")}
             within the scene qualify for removal.
             """,
             0x4000000
+        ),
+
+        "Process_GlobalScale".enum(
+            """
+            This step will perform a global scale of the model.
+
+            Some importers are providing a mechanism to define a scaling unit for the model. This post processing step can be used to do so.
+
+            Use #AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY to control this.
+            """,
+            0x8000000
         )
     )
 
