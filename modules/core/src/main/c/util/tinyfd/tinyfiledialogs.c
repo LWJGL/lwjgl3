@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.c v3.2.4 [Nov 5, 2017] zlib licence
+ /         \ tinyfiledialogs.c v3.2.5 [Dec 5, 2017] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2017 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -19,7 +19,7 @@ A big thank you for contributions, bug corrections & thorough testing to:
 - Paul Rouget
 		
 Please 1) Let me know If you are using it on exotic hardware / OS / compiler
-       2) If yo have a sourceforge account, leave a 3-word review on Sourceforge.
+       2) If yo have a sourceforge account, leave a 1-word review on Sourceforge.
           It helps the ranking on google.
 
 tiny file dialogs (cross-platform C C++)
@@ -125,7 +125,7 @@ misrepresented as being the original software.
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char tinyfd_version [8] = "3.2.4";
+char tinyfd_version [8] = "3.2.5";
 
 int tinyfd_verbose = 0 ; /* print on unix the command line calls */
 
@@ -1446,7 +1446,7 @@ wchar_t const * tinyfd_saveFileDialogW(
 	ofn.nMaxFileTitle = MAX_PATH_OR_CMD/2;
 	ofn.lpstrInitialDir = lDirname && wcslen(lDirname) ? lDirname : NULL;
 	ofn.lpstrTitle = aTitle && wcslen(aTitle) ? aTitle : NULL;
-	ofn.Flags = OFN_OVERWRITEPROMPT | OFN_NOCHANGEDIR;
+	ofn.Flags = OFN_OVERWRITEPROMPT | OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST ;
 	ofn.nFileOffset = 0;
 	ofn.nFileExtension = 0;
 	ofn.lpstrDefExt = NULL;
@@ -1596,7 +1596,7 @@ wchar_t const * tinyfd_openFileDialogW(
 	ofn.nMaxFileTitle = MAX_PATH_OR_CMD / 2;
 	ofn.lpstrInitialDir = lDirname && wcslen(lDirname) ? lDirname : NULL;
 	ofn.lpstrTitle = aTitle && wcslen(aTitle) ? aTitle : NULL;
-	ofn.Flags = OFN_EXPLORER | OFN_NOCHANGEDIR;
+	ofn.Flags = OFN_EXPLORER | OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	ofn.nFileOffset = 0;
 	ofn.nFileExtension = 0;
 	ofn.lpstrDefExt = NULL;
@@ -1841,7 +1841,7 @@ wchar_t const * tinyfd_colorChooserW(
 	cc.hInstance = NULL;
 	cc.rgbResult = RGB(lDefaultRGB[0], lDefaultRGB[1], lDefaultRGB[2]);
 	cc.lpCustColors = crCustColors;
-	cc.Flags = CC_RGBINIT | CC_FULLOPEN;
+	cc.Flags = CC_RGBINIT | CC_FULLOPEN | CC_ANYCOLOR ;
 	cc.lCustData = 0;
 	cc.lpfnHook = NULL;
 	cc.lpTemplateName = NULL;
@@ -3921,6 +3921,14 @@ static int pythonDbusPresent( )
     return lDbusPresent && graphicMode() && !(isDarwin() && getenv("SSH_TTY") );
 }
 
+static void sigHandler(int sig)
+{
+	FILE * lIn ;
+	if ( ( lIn = popen( "pactl unload-module module-sine" , "r" ) ) )
+	{
+		pclose( lIn ) ;
+	}
+}
 
 void tinyfd_beep()
 {
@@ -3940,13 +3948,14 @@ void tinyfd_beep()
 	}
 	else if ( pactlPresent() ) 
 	{
+		signal(SIGINT, sigHandler);
 		/*strcpy( lDialogString , "pactl load-module module-sine frequency=440;sleep .3;pactl unload-module module-sine" ) ;*/
 		strcpy( lDialogString , "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum" ) ;
 	}
 	else if ( speakertestPresent() ) 
 	{
 		/*strcpy( lDialogString , "timeout -k .3 .3 speaker-test --frequency 440 --test sine > /dev/tty" ) ;*/
-		strcpy( lDialogString , "( speaker-test -t sine -f 440 > /dev/tty )& pid=$! ; sleep 0.3s ; kill -9 $pid" ) ;
+		strcpy( lDialogString , "( speaker-test -t sine -f 440 > /dev/tty )& pid=$!;sleep .3; kill -9 $pid" ) ;
 	}
 	else if ( beepexePresent() ) 
 	{
@@ -3962,6 +3971,11 @@ void tinyfd_beep()
 	if ( ( lIn = popen( lDialogString , "r" ) ) )
 	{
 		pclose( lIn ) ;
+	}
+
+	if ( pactlPresent() )
+	{
+		signal(SIGINT, SIG_DFL);
 	}
 }
 

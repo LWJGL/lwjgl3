@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v3.2.4 [Nov 5, 2017] zlib licence
+ /         \ tinyfiledialogs.h v3.2.5 [Dec 5, 2017] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2017 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -17,7 +17,7 @@
 A big thank you to Don Heyse http://ldglite.sf.net for bug corrections & thorough testing!
 
 Please 1) Let me know If you are using it on exotic hardware / OS / compiler
-       2) If yo have a sourceforge account, leave a 3-word review on Sourceforge.
+       2) If yo have a sourceforge account, leave a 1-word review on Sourceforge.
           It helps the ranking on google.
 
 tiny file dialogs (cross-platform C C++)
@@ -137,7 +137,7 @@ for graphic mode:
 for console mode:
   dialog whiptail basicinput */
 
-void tinyfd_beep(void);
+void tinyfd_beep();
 
 int tinyfd_notifyPopup(
 	char const * const aTitle, /* NULL or "" */
