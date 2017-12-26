@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val MVK_ios_surface = "MVKIosSurface".nativeClassVK("MVK_ios_surface", type = "instance", postfix = MVK) {
     documentation =
         """
-        The {@code VK_MVK_ios_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to a {@code UIView}, the native surface type of iOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
+        The {@code VK_MVK_ios_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_surface">VK_KHR_surface</a> extension) that refers to a {@code UIView}, the native surface type of iOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -29,7 +29,7 @@ val MVK_ios_surface = "MVKIosSurface".nativeClassVK("MVK_ios_surface", type = "i
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_surface">{@code VK_KHR_surface}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_surface">VK_KHR_surface</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

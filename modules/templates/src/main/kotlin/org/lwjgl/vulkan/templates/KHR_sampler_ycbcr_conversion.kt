@@ -29,10 +29,10 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_maintenance1">{@code VK_KHR_maintenance1}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_bind_memory2">{@code VK_KHR_bind_memory2}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_memory_requirements2">{@code VK_KHR_get_memory_requirements2}</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_maintenance1">VK_KHR_maintenance1</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_memory_requirements2">VK_KHR_get_memory_requirements2</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -48,7 +48,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension interacts with VK_EXT_debug_report</li>
+                <li>This extension interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_debug_report">VK_EXT_debug_report</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
@@ -198,7 +198,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         These rules reflect the mapping of channels after the channel swizzle operation (controlled by ##VkSamplerYcbcrConversionCreateInfoKHR{@code ::components}).
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        For example, an "YUVA" 32-bit format comprising four 8-bit channels can be implemented as #FORMAT_R8G8B8A8_UNORM with a component mapping:
+        For example, an "{@code YUVA}" 32-bit format comprising four 8-bit channels can be implemented as #FORMAT_R8G8B8A8_UNORM with a component mapping:
 
         <ul>
             <li>{@code components.a} = #COMPONENT_SWIZZLE_IDENTITY</li>

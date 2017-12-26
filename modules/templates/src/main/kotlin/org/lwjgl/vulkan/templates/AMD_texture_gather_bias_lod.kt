@@ -19,7 +19,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
             <li>SPV_AMD_texture_gather_bias_lod</li>
         </ul>
 
-        Secondly, the extension allows the application to query, which formats can be used together with the new function prototypes introduced by the SPIR-V extension.
+        Secondly, the extension allows the application to query which formats can be used together with the new function prototypes introduced by the SPIR-V extension.
 
         <h5>Examples</h5>
         <code><pre>
@@ -79,7 +79,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">{@code VK_KHR_get_physical_device_properties2}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

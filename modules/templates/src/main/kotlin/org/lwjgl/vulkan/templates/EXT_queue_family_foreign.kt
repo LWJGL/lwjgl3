@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_family_foreign", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension defines a special queue family, #QUEUE_FAMILY_FOREIGN_EXT, which can be used to transfer ownership of resources backed by external memory to foreign, external queues. This is similar to #QUEUE_FAMILY_EXTERNAL_KHR, defined in <<VK_KHR_external_memory>>. The key differences between the two are:
+        This extension defines a special queue family, #QUEUE_FAMILY_FOREIGN_EXT, which can be used to transfer ownership of resources backed by external memory to foreign, external queues. This is similar to #QUEUE_FAMILY_EXTERNAL_KHR, defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_memory">VK_KHR_external_memory</a>. The key differences between the two are:
 
         <ul>
             <li>The queues represented by #QUEUE_FAMILY_EXTERNAL_KHR must share the same physical device and the same driver version as the current {@code VkInstance}. #QUEUE_FAMILY_FOREIGN_EXT has no such restrictions. It can represent devices and drivers from other vendors, and can even represent non-Vulkan-capable devices.</li>
@@ -35,7 +35,7 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_memory">{@code VK_KHR_external_memory}</a></li>
+                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_memory">VK_KHR_external_memory</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

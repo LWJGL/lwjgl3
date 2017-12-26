@@ -44,8 +44,8 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Interacts with VK_KHR_dedicated_allocation.</li>
-                <li>Interacts with VK_NV_dedicated_allocation.</li>
+                <li>Interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a>.</li>
+                <li>Interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_dedicated_allocation">VK_NV_dedicated_allocation</a>.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

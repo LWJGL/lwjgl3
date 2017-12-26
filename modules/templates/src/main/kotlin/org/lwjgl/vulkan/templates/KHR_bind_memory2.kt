@@ -13,7 +13,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
         """
         This extension provides versions of #BindBufferMemory() and #BindImageMemory() that allow multiple bindings to be performed at once, and are extensible.
 
-        This extension also introduces #IMAGE_CREATE_ALIAS_BIT_KHR, which allows "identical" images that alias the same memory to interpret the contents consistently, even across image layout changes.
+        This extension also introduces #IMAGE_CREATE_ALIAS_BIT_KHR, which allows "{@code identical}" images that alias the same memory to interpret the contents consistently, even across image layout changes.
 
         <dl>
             <dt><b>Name String</b></dt>
