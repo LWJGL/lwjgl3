@@ -19,13 +19,16 @@ extern "C" {
 
 #if defined(__clang__) || defined(__GNUC__)
 # define RPMALLOC_ATTRIBUTE __attribute__((__malloc__))
-# define RPMALLOC_CALL
+# define RPMALLOC_RESTRICT
+# define RPMALLOC_CDECL
 #elif defined(_MSC_VER)
 # define RPMALLOC_ATTRIBUTE
-# define RPMALLOC_CALL __declspec(restrict)
+# define RPMALLOC_RESTRICT __declspec(restrict)
+# define RPMALLOC_CDECL __cdecl
 #else
 # define RPMALLOC_ATTRIBUTE
-# define RPMALLOC_CALL
+# define RPMALLOC_RESTRICT
+# define RPMALLOC_CDECL
 #endif
 
 //! Flag to rpaligned_realloc to not preserve content in reallocation
@@ -87,13 +90,13 @@ rpmalloc_thread_statistics(rpmalloc_thread_statistics_t* stats);
 extern void
 rpmalloc_global_statistics(rpmalloc_global_statistics_t* stats);
 
-extern RPMALLOC_CALL void*
+extern RPMALLOC_RESTRICT void*
 rpmalloc(size_t size) RPMALLOC_ATTRIBUTE;
 
 extern void
 rpfree(void* ptr);
 
-extern RPMALLOC_CALL void*
+extern RPMALLOC_RESTRICT void*
 rpcalloc(size_t num, size_t size) RPMALLOC_ATTRIBUTE;
 
 extern void*
@@ -102,10 +105,10 @@ rprealloc(void* ptr, size_t size);
 extern void*
 rpaligned_realloc(void* ptr, size_t alignment, size_t size, size_t oldsize, unsigned int flags);
 
-extern RPMALLOC_CALL void*
+extern RPMALLOC_RESTRICT void*
 rpaligned_alloc(size_t alignment, size_t size) RPMALLOC_ATTRIBUTE;
 
-extern RPMALLOC_CALL void*
+extern RPMALLOC_RESTRICT void*
 rpmemalign(size_t alignment, size_t size) RPMALLOC_ATTRIBUTE;
 
 extern int

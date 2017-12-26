@@ -64,29 +64,31 @@
 #define ENABLE_ASSERTS            0
 #endif
 
+#ifndef ENABLE_PRELOAD
+//! Support preloading
+#define ENABLE_PRELOAD            0
+#endif
+
 // Platform and arch specifics
 
 #ifdef _MSC_VER
 #  define ALIGNED_STRUCT(name, alignment) __declspec(align(alignment)) struct name
 #  define FORCEINLINE __forceinline
-#  define TLS_MODEL
 #  define _Static_assert static_assert
-#  define _Thread_local __declspec(thread)
 #  define atomic_thread_fence_acquire() //_ReadWriteBarrier()
 #  define atomic_thread_fence_release() //_ReadWriteBarrier()
 #  if ENABLE_VALIDATE_ARGS
 #    include <Intsafe.h>
 #  endif
 #else
+#  if defined(__APPLE__) && ENABLE_PRELOAD
+#    include <pthread.h>
+#  endif
 #  define ALIGNED_STRUCT(name, alignment) struct __attribute__((__aligned__(alignment))) name
 #  define FORCEINLINE inline __attribute__((__always_inline__))
-#  define TLS_MODEL __attribute__((tls_model("initial-exec")))
-#  if !defined(__clang__) && defined(__GNUC__)
-#    define _Thread_local __thread
-#  endif
 #  ifdef __arm__
-#    define atomic_thread_fence_acquire() __asm volatile("dmb sy" ::: "memory")
-#    define atomic_thread_fence_release() __asm volatile("dmb st" ::: "memory")
+#    define atomic_thread_fence_acquire() __asm volatile("dmb ish" ::: "memory")
+#    define atomic_thread_fence_release() __asm volatile("dmb ishst" ::: "memory")
 #  else
 #    define atomic_thread_fence_acquire() //__asm volatile("" ::: "memory")
 #    define atomic_thread_fence_release() //__asm volatile("" ::: "memory")
@@ -377,14 +379,14 @@ static atomicptr_t _memory_span_cache[SPAN_CLASS_COUNT];
 //! Global large cache
 static atomicptr_t _memory_large_cache[LARGE_CLASS_COUNT];
 
-//! Current thread heap
-static _Thread_local heap_t* _memory_thread_heap TLS_MODEL;
-
 //! All heaps
 static atomicptr_t _memory_heaps[HEAP_ARRAY_SIZE];
 
 //! Orphaned heaps
 static atomicptr_t _memory_orphan_heaps;
+
+//! Running orphan counter to avoid ABA issues in linked list
+static atomic32_t _memory_orphan_counter;
 
 //! Active heap count
 static atomic32_t _memory_active_heaps;
@@ -403,6 +405,40 @@ static atomic32_t _mapped_total;
 //! Running counter of total number of unmapped memory pages since start
 static atomic32_t _unmapped_total;
 #endif
+
+//! Current thread heap
+#if defined(__APPLE__) && ENABLE_PRELOAD
+static pthread_key_t _memory_thread_heap;
+#else
+#  ifdef _MSC_VER
+#    define _Thread_local __declspec(thread)
+#    define TLS_MODEL
+#  else
+#    define TLS_MODEL __attribute__((tls_model("initial-exec")))
+#    if !defined(__clang__) && defined(__GNUC__)
+#      define _Thread_local __thread
+#    endif
+#  endif
+static _Thread_local heap_t* _memory_thread_heap TLS_MODEL;
+#endif
+
+static FORCEINLINE heap_t*
+get_thread_heap(void) {
+#if defined(__APPLE__) && ENABLE_PRELOAD
+	return pthread_getspecific(_memory_thread_heap);
+#else
+	return _memory_thread_heap;
+#endif
+}
+
+static void
+set_thread_heap(heap_t* heap) {
+#if defined(__APPLE__) && ENABLE_PRELOAD
+	pthread_setspecific(_memory_thread_heap, heap);
+#else
+	_memory_thread_heap = heap;
+#endif
+}
 
 static void*
 _memory_map(size_t page_count);
@@ -868,17 +904,22 @@ use_cache:
 //! Allocate a new heap
 static heap_t*
 _memory_allocate_heap(void) {
+	uintptr_t raw_heap, next_raw_heap;
+	uintptr_t orphan_counter;
 	heap_t* heap;
 	heap_t* next_heap;
 	//Try getting an orphaned heap
 	atomic_thread_fence_acquire();
 	do {
-		heap = atomic_load_ptr(&_memory_orphan_heaps);
+		raw_heap = (uintptr_t)atomic_load_ptr(&_memory_orphan_heaps);
+		heap = (void*)(raw_heap & ~(uintptr_t)0xFFFF);
 		if (!heap)
 			break;
 		next_heap = heap->next_orphan;
+		orphan_counter = atomic_incr32(&_memory_orphan_counter);
+		next_raw_heap = (uintptr_t)next_heap | (orphan_counter & 0xFFFF);
 	}
-	while (!atomic_cas_ptr(&_memory_orphan_heaps, next_heap, heap));
+	while (!atomic_cas_ptr(&_memory_orphan_heaps, (void*)next_raw_heap, (void*)raw_heap));
 
 	if (heap) {
 		heap->next_orphan = 0;
@@ -1119,6 +1160,8 @@ static void
 _memory_deallocate_defer(int32_t heap_id, void* p) {
 	//Get the heap and link in pointer in list of deferred opeations
 	heap_t* heap = _memory_heap_lookup(heap_id);
+	if (!heap)
+		return;
 	void* last_ptr;
 	do {
 		last_ptr = atomic_load_ptr(&heap->defer_deallocate);
@@ -1130,9 +1173,9 @@ _memory_deallocate_defer(int32_t heap_id, void* p) {
 static void*
 _memory_allocate(size_t size) {
 	if (size <= MEDIUM_SIZE_LIMIT)
-		return _memory_allocate_from_heap(_memory_thread_heap, size);
+		return _memory_allocate_from_heap(get_thread_heap(), size);
 	else if (size <= LARGE_SIZE_LIMIT)
-		return _memory_allocate_large_from_heap(_memory_thread_heap, size);
+		return _memory_allocate_large_from_heap(get_thread_heap(), size);
 
 	//Oversized, allocate pages directly
 	size += SPAN_HEADER_SIZE;
@@ -1156,7 +1199,7 @@ _memory_deallocate(void* p) {
 	//Grab the span (always at start of span, using 64KiB alignment)
 	span_t* span = (void*)((uintptr_t)p & SPAN_MASK);
 	int32_t heap_id = atomic_load32(&span->heap_id);
-	heap_t* heap = _memory_thread_heap;
+	heap_t* heap = get_thread_heap();
 	//Check if block belongs to this heap or if deallocation should be deferred
 	if (heap_id == heap->id) {
 		if (span->size_class < SIZE_CLASS_COUNT)
@@ -1292,11 +1335,11 @@ _memory_adjust_size_class(size_t iclass) {
 #else
 #  include <sys/mman.h>
 #  include <sched.h>
-#  include <errno.h>
 #  ifndef MAP_UNINITIALIZED
 #    define MAP_UNINITIALIZED 0
 #  endif
 #endif
+#include <errno.h>
 
 //! Initialize the allocator and setup global data
 int
@@ -1308,14 +1351,19 @@ rpmalloc_initialize(void) {
 	if (system_info.dwAllocationGranularity < SPAN_ADDRESS_GRANULARITY)
 		return -1;
 #else
-#if ARCH_64BIT
+#  if defined(__APPLE__) && ENABLE_PRELOAD
+	if (pthread_key_create(&_memory_thread_heap, 0))
+		return -1;
+#  endif
+#  if ARCH_64BIT
 	atomic_store64(&_memory_addr, 0x1000000000ULL);
-#else
+#  else
 	atomic_store64(&_memory_addr, 0x1000000ULL);
-#endif
+#  endif
 #endif
 
 	atomic_store32(&_memory_heap_id, 0);
+	atomic_store32(&_memory_orphan_counter, 0);
 
 	//Setup all small and medium size classes
 	size_t iclass;
@@ -1331,7 +1379,7 @@ rpmalloc_initialize(void) {
 		_memory_size_class[SMALL_CLASS_COUNT + iclass].size = (uint16_t)size;
 		_memory_adjust_size_class(SMALL_CLASS_COUNT + iclass);
 	}
-	
+
 	//Initialize this thread
 	rpmalloc_thread_initialize();
 	return 0;
@@ -1417,18 +1465,22 @@ rpmalloc_finalize(void) {
 	}
 
 	atomic_thread_fence_release();
+
+#if defined(__APPLE__) && ENABLE_PRELOAD
+	pthread_key_delete(_memory_thread_heap);
+#endif
 }
 
 //! Initialize thread, assign heap
 void
 rpmalloc_thread_initialize(void) {
-	if (!_memory_thread_heap) {
+	if (!get_thread_heap()) {
 		heap_t* heap =  _memory_allocate_heap();
 #if ENABLE_STATISTICS
 		heap->thread_to_global = 0;
 		heap->global_to_thread = 0;
 #endif
-		_memory_thread_heap = heap;
+		set_thread_heap(heap);
 		atomic_incr32(&_memory_active_heaps);
 	}
 }
@@ -1436,7 +1488,7 @@ rpmalloc_thread_initialize(void) {
 //! Finalize thread, orphan heap
 void
 rpmalloc_thread_finalize(void) {
-	heap_t* heap = _memory_thread_heap;
+	heap_t* heap = get_thread_heap();
 	if (!heap)
 		return;
 
@@ -1508,19 +1560,22 @@ rpmalloc_thread_finalize(void) {
 #endif
 
 	//Orphan the heap
+	uintptr_t raw_heap, orphan_counter;
 	heap_t* last_heap;
 	do {
 		last_heap = atomic_load_ptr(&_memory_orphan_heaps);
-		heap->next_orphan = last_heap;
+		heap->next_orphan = (void*)((uintptr_t)last_heap & ~(uintptr_t)0xFFFF);
+		orphan_counter = atomic_incr32(&_memory_orphan_counter);
+		raw_heap = (uintptr_t)heap | (orphan_counter & 0xFFFF);
 	}
-	while (!atomic_cas_ptr(&_memory_orphan_heaps, heap, last_heap));
+	while (!atomic_cas_ptr(&_memory_orphan_heaps, (void*)raw_heap, last_heap));
 	
-	_memory_thread_heap = 0;
+	set_thread_heap(0);
 }
 
 int
 rpmalloc_is_thread_initialized(void) {
-	return (_memory_thread_heap != 0) ? 1 : 0;
+	return (get_thread_heap() != 0) ? 1 : 0;
 }
 
 //! Map new pages to virtual memory
@@ -1574,6 +1629,7 @@ _memory_unmap(void* ptr, size_t page_count) {
 
 #ifdef PLATFORM_WINDOWS
 	VirtualFree(ptr, 0, MEM_RELEASE);
+	(void)sizeof(page_count);
 #else
 	munmap(ptr, PAGE_SIZE * page_count);
 #endif
@@ -1606,7 +1662,7 @@ thread_yield(void) {
 
 // Extern interface
 
-void* 
+RPMALLOC_RESTRICT void*
 rpmalloc(size_t size) {
 #if ENABLE_VALIDATE_ARGS
 	if (size >= MAX_ALLOC_SIZE) {
@@ -1622,7 +1678,7 @@ rpfree(void* ptr) {
 	_memory_deallocate(ptr);
 }
 
-void*
+RPMALLOC_RESTRICT void*
 rpcalloc(size_t num, size_t size) {
 	size_t total;
 #if ENABLE_VALIDATE_ARGS
@@ -1667,12 +1723,17 @@ rpaligned_realloc(void* ptr, size_t alignment, size_t size, size_t oldsize,
 		return 0;
 	}
 #endif
-	//TODO: If alignment > 16, we need to copy to new aligned position
-	(void)sizeof(alignment);
+	if (alignment > 16) {
+		void* block = rpaligned_alloc(alignment, size);
+		if (!(flags & RPMALLOC_NO_PRESERVE))
+			memcpy(block, ptr, oldsize < size ? oldsize : size);
+		rpfree(ptr);
+		return block;
+	}
 	return _memory_reallocate(ptr, size, oldsize, flags);
 }
 
-void*
+RPMALLOC_RESTRICT void*
 rpaligned_alloc(size_t alignment, size_t size) {
 	if (alignment <= 16)
 		return rpmalloc(size);
@@ -1690,7 +1751,7 @@ rpaligned_alloc(size_t alignment, size_t size) {
 	return ptr;
 }
 
-void*
+RPMALLOC_RESTRICT void*
 rpmemalign(size_t alignment, size_t size) {
 	return rpaligned_alloc(alignment, size);
 }
@@ -1711,13 +1772,13 @@ rpmalloc_usable_size(void* ptr) {
 
 void
 rpmalloc_thread_collect(void) {
-	_memory_deallocate_deferred(_memory_thread_heap, 0);
+	_memory_deallocate_deferred(get_thread_heap(), 0);
 }
 
 void
 rpmalloc_thread_statistics(rpmalloc_thread_statistics_t* stats) {
 	memset(stats, 0, sizeof(rpmalloc_thread_statistics_t));
-	heap_t* heap = _memory_thread_heap;
+	heap_t* heap = get_thread_heap();
 #if ENABLE_STATISTICS
 	stats->allocated = heap->allocated;
 	stats->requested = heap->requested;
