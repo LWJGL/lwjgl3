@@ -36,7 +36,7 @@ ENABLE_WARNINGS()""")
 
     val major = 0
     val minor = 6
-    val patch = 2
+    val patch = 4
 
     IntConstant("The major version number.", "VERSION_MAJOR".."$major")
     IntConstant("The minor version number.", "VERSION_MINOR".."$minor")
