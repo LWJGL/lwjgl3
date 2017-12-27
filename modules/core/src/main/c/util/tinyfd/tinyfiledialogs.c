@@ -114,6 +114,7 @@ misrepresented as being the original software.
  #define SLASH "\\"
  int tinyfd_winUtf8 = 0 ; /* on windows string char can be 0:MBCS or 1:UTF-8 */
 #else
+ #include <signal.h>
  #include <limits.h>
  #include <unistd.h>
  #include <dirent.h> /* on old systems try <sys/dir.h> instead */
