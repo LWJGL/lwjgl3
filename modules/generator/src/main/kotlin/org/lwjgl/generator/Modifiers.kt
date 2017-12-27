@@ -26,6 +26,11 @@ interface ParameterModifier : TemplateModifier {
     }
 }
 
+/** A modifier that can be applied on either functions or parameters. */
+interface FuncParamModifier :
+    FunctionModifier,
+    ParameterModifier
+
 /** A modifier that can be applied on struct members. */
 interface StructMemberModifier : TemplateModifier {
     /** Implementations should check that the specified struct member is valid for this modifier. */
@@ -110,8 +115,8 @@ operator fun Array<FunctionModifier>.rangeTo(function: Func) = function.let {
     it
 }
 
-inline operator fun <reified T : FunctionModifier> T.rangeTo(other: T) = arrayOf(this, other)
-inline operator fun <reified T : FunctionModifier> Array<T>.rangeTo(other: T) = arrayOf(*this, other)
+operator fun FunctionModifier.rangeTo(other: FunctionModifier) = arrayOf(this, other)
+operator fun Array<FunctionModifier>.rangeTo(other: FunctionModifier) = arrayOf(*this, other)
 
 // Parameter modifiers
 
@@ -125,8 +130,24 @@ operator fun Array<ParameterModifier>.rangeTo(param: Parameter) = param.let {
     it
 }
 
-inline operator fun <reified T : ParameterModifier> T.rangeTo(other: T) = arrayOf(this, other)
-inline operator fun <reified T : ParameterModifier> Array<T>.rangeTo(other: T) = arrayOf(*this, other)
+operator fun ParameterModifier.rangeTo(other: ParameterModifier) = arrayOf(this, other)
+operator fun Array<ParameterModifier>.rangeTo(other: ParameterModifier) = arrayOf(*this, other)
+
+// Function/Parameter modifiers
+
+operator fun FuncParamModifier.rangeTo(other: FuncParamModifier) = arrayOf(this, other)
+operator fun FuncParamModifier.rangeTo(other: FunctionModifier) = arrayOf(this, other)
+operator fun FuncParamModifier.rangeTo(other: ParameterModifier) = arrayOf(this, other)
+
+operator fun Array<FuncParamModifier>.rangeTo(function: Func) = function.let {
+    it.setModifiers(*this)
+    it
+}
+
+operator fun Array<FuncParamModifier>.rangeTo(param: Parameter) = param.let {
+    it.setModifiers(*this)
+    it
+}
 
 // Struct member modifiers
 
@@ -140,5 +161,5 @@ operator fun Array<StructMemberModifier>.rangeTo(member: StructMember) = member.
     it
 }
 
-inline operator fun <reified T : StructMemberModifier> T.rangeTo(other: T) = arrayOf(this, other)
-inline operator fun <reified T : StructMemberModifier> Array<T>.rangeTo(other: T) = arrayOf(*this, other)
+operator fun StructMemberModifier.rangeTo(other: StructMemberModifier) = arrayOf(this, other)
+operator fun Array<StructMemberModifier>.rangeTo(other: StructMemberModifier) = arrayOf(*this, other)

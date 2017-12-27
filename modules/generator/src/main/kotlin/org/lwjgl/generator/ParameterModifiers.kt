@@ -7,7 +7,7 @@ package org.lwjgl.generator
 // General
 
 /** Marks the function parameter or return value as const. */
-object const : FunctionModifier, ParameterModifier {
+object const : FuncParamModifier {
     override val isSpecial = false
     override fun validate(func: Func) {
         if (func.returns.nativeType !is PointerType)
