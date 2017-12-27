@@ -237,8 +237,7 @@ ENABLE_WARNINGS()""")
 
             Content size must be known at the beginning of compression, it is provided using #CCtx_setPledgedSrcSize().
             """,
-            "200"
-        ),
+            "200"),
         "p_checksumFlag".enum("A 32-bits checksum of content is written at end of frame (default:0)."),
         "p_dictIDFlag".enum("When applicable, dictionary's ID is written into frame header (default:1)."),
 
@@ -251,14 +250,14 @@ ENABLE_WARNINGS()""")
 
             Special: value 0 means "do not change {@code nbThreads}"
             """,
-            "400"
-        ),
+            "400"),
         "p_jobSize".enum(
             """
             Size of a compression job.
 
-            Each compression job is completed in parallel. 0 means default, which is dynamically determined based on compression parameters. Job size must be a
-            minimum of {@code overlapSize}, or 1 KB, whichever is largest. The minimum size is automatically and transparently enforced.
+            This value is only enforced in streaming (non-blocking) mode. Each compression job is completed in parallel, so indirectly controls the {@code nb}
+            of active threads. 0 means default, which is dynamically determined based on compression parameters. Job size must be a minimum of
+            {@code overlapSize}, or 1 KB, whichever is largest. The minimum size is automatically and transparently enforced.
             """),
         "p_overlapSizeLog".enum(
             """
@@ -326,7 +325,7 @@ ENABLE_WARNINGS()""")
         "",
 
         const..void_p.IN("src", "should point to the start of a ZSTD encoded frame or skippable frame"),
-        AutoSize("src")..size_t.IN("srcSize", "must be at least as large as the frame"),
+        AutoSize("src")..size_t.IN("srcSize", "must be &ge; first frame size"),
 
         returnDoc =
         "the compressed size of the first frame starting at {@code src}, suitable to pass to #decompress() or similar, or an error code if input is invalid"
@@ -553,7 +552,7 @@ ENABLE_WARNINGS()""")
             "use #estimateCCtxSize() or #estimateCStreamSize() to determine how large workspace must be to support scenario"
         ),
 
-        returnDoc = "pointer to {@code ZSTD_CCtx*}, or #NULL if error (size too small)"
+        returnDoc = "pointer to {@code ZSTD_CCtx*} (same address as workspace, but different type), or #NULL if error (typically size too small)"
     )
 
     unsignedb(
@@ -599,7 +598,7 @@ ENABLE_WARNINGS()""")
             "use #estimateDCtxSize() or #estimateDStreamSize() to determine how large workspace must be to support scenario"
         ),
 
-        returnDoc = "pointer to {@code ZSTD_DCtx*}, or #NULL if error (size too small)"
+        returnDoc = "pointer to {@code ZSTD_DCtx*} (same address as workspace, but different type), or #NULL if error (typically size too small)"
     )
 
     ZSTD_DDict_p(
@@ -888,9 +887,19 @@ ENABLE_WARNINGS()""")
             "Compression parameters cannot be changed once compression is started.",
             "{@code output->pos} must be &le; {@code dstCapacity}, {@code input->pos} must be &le; {@code srcSize}.",
             "{@code outpot->pos} and {@code input->pos} will be updated. They are guaranteed to remain below their respective limit.",
+            "In single-thread mode (default), function is blocking: it completed its job before returning to caller.",
             """
-            after a #e_end directive, if internal buffer is not fully flushed, only #e_end or #e_flush operations are allowed. It is necessary to fully flush
-            internal buffers before starting a new compression job, or changing compression parameters.
+            In multi-thread mode, function is non-blocking: it just acquires a copy of input, and distribute job to internal worker threads, and then
+            immediately returns, just indicating that there is some data remaining to be flushed. The function nonetheless guarantees forward progress: it will
+            return only after it reads or write at least 1+ byte.
+            """,
+            """
+            Exception: in multi-threading mode, if the first call requests a #e_end directive, it is blocking: it will complete compression before giving back
+            control to caller.
+            """,
+            """
+            after a #e_end directive, if internal buffer is not fully flushed (return != 0), only #e_end or #e_flush operations are allowed. Before starting a
+            new compression job, or changing compression parameters, it is required to fully flush internal buffers.
             """
         )}
          """,
@@ -902,8 +911,9 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        provides the minimum amount of data still to flush from internal buffers or an error code, which can be tested using #isError(). If
-        {@code @return != 0}, flush is not fully completed, there is some data left within internal buffers.
+        provides the minimum amount of data remaining to be flushed from internal buffers or an error code, which can be tested using #isError(). If
+        {@code @return != 0}, flush is not fully completed, there is still some data left within internal buffers. This is useful to determine if a #e_flush or
+        #e_end directive is completed.
         """
     )
 

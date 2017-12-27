@@ -64,7 +64,7 @@ typedef struct {
 } ZSTD_match_t;
 
 typedef struct {
-    U32 price;
+    int price;
     U32 off;
     U32 mlen;
     U32 litlen;
@@ -72,29 +72,25 @@ typedef struct {
 } ZSTD_optimal_t;
 
 typedef struct {
-    U32* litFreq;
-    U32* litLengthFreq;
-    U32* matchLengthFreq;
-    U32* offCodeFreq;
-    ZSTD_match_t* matchTable;
-    ZSTD_optimal_t* priceTable;
+    /* All tables are allocated inside cctx->workspace by ZSTD_resetCCtx_internal() */
+    U32* litFreq;               /* table of literals statistics, of size 256 */
+    U32* litLengthFreq;         /* table of litLength statistics, of size (MaxLL+1) */
+    U32* matchLengthFreq;       /* table of matchLength statistics, of size (MaxML+1) */
+    U32* offCodeFreq;           /* table of offCode statistics, of size (MaxOff+1) */
+    ZSTD_match_t* matchTable;   /* list of found matches, of size ZSTD_OPT_NUM+1 */
+    ZSTD_optimal_t* priceTable; /* All positions tracked by optimal parser, of size ZSTD_OPT_NUM+1 */
 
     U32  litSum;                 /* nb of literals */
     U32  litLengthSum;           /* nb of litLength codes */
     U32  matchLengthSum;         /* nb of matchLength codes */
-    U32  matchSum;               /* one argument to calculate `factor` */
     U32  offCodeSum;             /* nb of offset codes */
     /* begin updated by ZSTD_setLog2Prices */
     U32  log2litSum;             /* pow2 to compare log2(litfreq) to */
     U32  log2litLengthSum;       /* pow2 to compare log2(llfreq) to */
     U32  log2matchLengthSum;     /* pow2 to compare log2(mlfreq) to */
     U32  log2offCodeSum;         /* pow2 to compare log2(offreq) to */
-    U32  factor;                 /* added to calculate ZSTD_getPrice() (but why?) */
     /* end : updated by ZSTD_setLog2Prices */
-    U32  staticPrices;           /* prices follow a static cost structure, statistics are irrelevant */
-    U32  cachedPrice;
-    U32  cachedLitLength;
-    const BYTE* cachedLiterals;
+    U32  staticPrices;           /* prices follow a pre-defined cost structure, statistics are irrelevant */
 } optState_t;
 
 typedef struct {
@@ -272,7 +268,7 @@ MEM_STATIC void ZSTD_storeSeq(seqStore_t* seqStorePtr, size_t litLength, const v
 /*-*************************************
 *  Match length counter
 ***************************************/
-static unsigned ZSTD_NbCommonBytes (register size_t val)
+static unsigned ZSTD_NbCommonBytes (size_t val)
 {
     if (MEM_isLittleEndian()) {
         if (MEM_64bits()) {
@@ -346,13 +342,17 @@ MEM_STATIC size_t ZSTD_count(const BYTE* pIn, const BYTE* pMatch, const BYTE* co
     const BYTE* const pStart = pIn;
     const BYTE* const pInLoopLimit = pInLimit - (sizeof(size_t)-1);
 
-    while (pIn < pInLoopLimit) {
-        size_t const diff = MEM_readST(pMatch) ^ MEM_readST(pIn);
-        if (!diff) { pIn+=sizeof(size_t); pMatch+=sizeof(size_t); continue; }
-        pIn += ZSTD_NbCommonBytes(diff);
-        return (size_t)(pIn - pStart);
-    }
-    if (MEM_64bits()) if ((pIn<(pInLimit-3)) && (MEM_read32(pMatch) == MEM_read32(pIn))) { pIn+=4; pMatch+=4; }
+    if (pIn < pInLoopLimit) {
+        { size_t const diff = MEM_readST(pMatch) ^ MEM_readST(pIn);
+          if (diff) return ZSTD_NbCommonBytes(diff); }
+        pIn+=sizeof(size_t); pMatch+=sizeof(size_t);
+        while (pIn < pInLoopLimit) {
+            size_t const diff = MEM_readST(pMatch) ^ MEM_readST(pIn);
+            if (!diff) { pIn+=sizeof(size_t); pMatch+=sizeof(size_t); continue; }
+            pIn += ZSTD_NbCommonBytes(diff);
+            return (size_t)(pIn - pStart);
+    }   }
+    if (MEM_64bits() && (pIn<(pInLimit-3)) && (MEM_read32(pMatch) == MEM_read32(pIn))) { pIn+=4; pMatch+=4; }
     if ((pIn<(pInLimit-1)) && (MEM_read16(pMatch) == MEM_read16(pIn))) { pIn+=2; pMatch+=2; }
     if ((pIn<pInLimit) && (*pMatch == *pIn)) pIn++;
     return (size_t)(pIn - pStart);
@@ -447,6 +447,7 @@ ZSTD_compressionParameters ZSTD_getCParamsFromCDict(const ZSTD_CDict* cdict);
 size_t ZSTD_compressBegin_advanced_internal(ZSTD_CCtx* cctx,
                                     const void* dict, size_t dictSize,
                                     ZSTD_dictMode_e dictMode,
+                                    const ZSTD_CDict* cdict,
                                     ZSTD_CCtx_params params,
                                     unsigned long long pledgedSrcSize);
 

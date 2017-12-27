@@ -57,20 +57,19 @@ extern "C" {
 extern int g_debuglog_enable;
 /* recommended values for ZSTD_DEBUG display levels :
  * 1 : no display, enables assert() only
- * 2 : reserved for currently active debugging path
- * 3 : events once per object lifetime (CCtx, CDict)
+ * 2 : reserved for currently active debug path
+ * 3 : events once per object lifetime (CCtx, CDict, etc.)
  * 4 : events once per frame
  * 5 : events once per block
  * 6 : events once per sequence (*very* verbose) */
-#  define RAWLOG(l, ...) {                                 \
-                if ((g_debuglog_enable) & (l<=ZSTD_DEBUG)) { \
-                    fprintf(stderr, __VA_ARGS__);            \
+#  define RAWLOG(l, ...) {                                      \
+                if ((g_debuglog_enable) & (l<=ZSTD_DEBUG)) {    \
+                    fprintf(stderr, __VA_ARGS__);               \
             }   }
-#  define DEBUGLOG(l, ...) {                                 \
-                if ((g_debuglog_enable) & (l<=ZSTD_DEBUG)) { \
-                    fprintf(stderr, __FILE__ ": ");          \
-                    fprintf(stderr, __VA_ARGS__);            \
-                    fprintf(stderr, " \n");                  \
+#  define DEBUGLOG(l, ...) {                                    \
+                if ((g_debuglog_enable) & (l<=ZSTD_DEBUG)) {    \
+                    fprintf(stderr, __FILE__ ": " __VA_ARGS__); \
+                    fprintf(stderr, " \n");                     \
             }   }
 #else
 #  define RAWLOG(l, ...)      {}    /* disabled */
@@ -253,16 +252,14 @@ MEM_STATIC U32 ZSTD_highbit32(U32 val)   /* compress, dictBuilder, decodeCorpus 
 #   elif defined(__GNUC__) && (__GNUC__ >= 3)   /* GCC Intrinsic */
         return 31 - __builtin_clz(val);
 #   else   /* Software version */
-        static const int DeBruijnClz[32] = { 0, 9, 1, 10, 13, 21, 2, 29, 11, 14, 16, 18, 22, 25, 3, 30, 8, 12, 20, 28, 15, 17, 24, 7, 19, 27, 23, 6, 26, 5, 4, 31 };
+        static const U32 DeBruijnClz[32] = { 0, 9, 1, 10, 13, 21, 2, 29, 11, 14, 16, 18, 22, 25, 3, 30, 8, 12, 20, 28, 15, 17, 24, 7, 19, 27, 23, 6, 26, 5, 4, 31 };
         U32 v = val;
-        int r;
         v |= v >> 1;
         v |= v >> 2;
         v |= v >> 4;
         v |= v >> 8;
         v |= v >> 16;
-        r = DeBruijnClz[(U32)(v * 0x07C4ACDDU) >> 27];
-        return r;
+        return DeBruijnClz[(v * 0x07C4ACDDU) >> 27];
 #   endif
     }
 }
