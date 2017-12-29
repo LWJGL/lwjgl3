@@ -237,8 +237,8 @@ val stbtt_pack_range_p = struct(STB_PACKAGE, "STBTTPackRange", nativeName = "stb
     nullable..int_p.member("array_of_unicode_codepoints", "if non-zero, then this is an array of unicode codepoints")
     AutoSize("array_of_unicode_codepoints", "chardata_for_range")..int.member("num_chars", "the number of codepoints in the range")
     stbtt_packedchar_p.buffer("chardata_for_range", "output")
-    unsigned_char.member("h_oversample", "").public = false
-    unsigned_char.member("v_oversample", "").public = false
+    unsigned_char.member("h_oversample", "used internally")
+    unsigned_char.member("v_oversample", "used internally")
 }.p
 
 val stbtt_fontinfo_p = struct(STB_PACKAGE, "STBTTFontinfo", nativeName = "stbtt_fontinfo", mutable = false) {
