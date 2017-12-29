@@ -747,9 +747,9 @@ public final class HelloTootle {
 
         glBufferSubData(GL_ARRAY_BUFFER, vc * (0 + 0) * 4, mesh.points(vc * 3));
 
-        hasNormals = memGetAddress(mesh.address() + ParShapesMesh.NORMALS) != NULL;
-        if (hasNormals) {
-            glBufferSubData(GL_ARRAY_BUFFER, vc * (3 + 0) * 4, mesh.normals(vc * 3));
+        FloatBuffer normals = mesh.normals(vc * 3);
+        if (hasNormals = normals != null) {
+            glBufferSubData(GL_ARRAY_BUFFER, vc * (3 + 0) * 4, normals);
         }
 
         int tc = mesh.ntriangles();
