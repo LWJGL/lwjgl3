@@ -72,7 +72,7 @@ public final class ModuleInfoGen {
             .orElseThrow(() -> new IllegalStateException("Failed to find module name"))
             .group(1);
 
-        if (Pattern.compile("[{;]\\s*requires(?:\\s+transitive)?\\s+" + module + ".natives\\s*;").matcher(moduleInfo).find()) {
+        if (Pattern.compile("[{;]\\s*requires(?:\\s+static)?\\s+" + module + ".natives\\s*;").matcher(moduleInfo).find()) {
             compileModuleInfo(module + ".natives", "module " + module + ".natives {}");
         }
 
