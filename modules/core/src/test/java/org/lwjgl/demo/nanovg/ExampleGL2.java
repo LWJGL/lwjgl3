@@ -7,6 +7,8 @@ package org.lwjgl.demo.nanovg;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
+import java.util.*;
+
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
@@ -148,7 +150,7 @@ public final class ExampleGL2 extends Demo {
 
         glfwFreeCallbacks(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

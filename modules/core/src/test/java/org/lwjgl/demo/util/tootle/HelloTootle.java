@@ -15,6 +15,7 @@ import org.lwjgl.util.par.*;
 
 import java.nio.*;
 import java.nio.file.*;
+import java.util.*;
 import java.util.concurrent.*;
 
 import static java.lang.Math.*;
@@ -276,10 +277,7 @@ public final class HelloTootle {
         });
 
         // center window
-        long monitor = glfwGetPrimaryMonitor();
-
-        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
-
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
         glfwSetWindowPos(
             window,
             (vidmode.width() - width) / 2,
@@ -379,6 +377,9 @@ public final class HelloTootle {
         gpuTimer = new GPUTimer();
 
         propertyStore = aiCreatePropertyStore();
+        if (propertyStore == null) {
+            throw new OutOfMemoryError();
+        }
         aiSetImportPropertyInteger(propertyStore, AI_CONFIG_PP_PTV_NORMALIZE, 1);
     }
 
@@ -425,7 +426,7 @@ public final class HelloTootle {
 
         glfwFreeCallbacks(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
 
         if (debugCB != null) {
             debugCB.free();
@@ -952,7 +953,7 @@ public final class HelloTootle {
                     if (scene != null) {
                         try {
                             PointerBuffer meshes = scene.mMeshes();
-                            for (int i = 0; i < meshes.remaining(); i++) {
+                            for (int i = 0; i < (meshes == null ? 0 : meshes.remaining()); i++) {
                                 AIMesh aiMesh = AIMesh.create(meshes.get(i));
                                 try {
                                     ParShapesMesh mesh = copyAssimpToParShapes(aiMesh);
@@ -978,13 +979,17 @@ public final class HelloTootle {
 
     private static ParShapesMesh copyAssimpToParShapes(AIMesh aiMesh) {
         ParShapesMesh mesh = par_shapes_create_empty();
+        if (mesh == null) {
+            throw new OutOfMemoryError();
+        }
 
         memPutInt(mesh.address() + ParShapesMesh.NPOINTS, aiMesh.mNumVertices());
         memPutInt(mesh.address() + ParShapesMesh.NTRIANGLES, aiMesh.mNumFaces());
 
         memPutAddress(mesh.address() + ParShapesMesh.POINTS, memAddress(copyAssimpToParShapes(aiMesh.mVertices())));
-        if (aiMesh.mNormals() != null) {
-            memPutAddress(mesh.address() + ParShapesMesh.NORMALS, memAddress(copyAssimpToParShapes(aiMesh.mNormals())));
+        AIVector3D.Buffer normals = aiMesh.mNormals();
+        if (normals != null) {
+            memPutAddress(mesh.address() + ParShapesMesh.NORMALS, memAddress(copyAssimpToParShapes(normals)));
         }
 
         AIFace.Buffer faces = aiMesh.mFaces();

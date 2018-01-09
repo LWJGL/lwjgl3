@@ -22,13 +22,11 @@ public class StackTest {
         assertEquals(stack.getPointer(), size);
         assertEquals(stack.getFrameIndex(), 0);
 
-        stack.push();
-        {
-            stack.malloc(8);
-            assertEquals(stack.getPointer(), size - 8);
-            assertEquals(stack.getFrameIndex(), 1);
+        try (MemoryStack frame = stack.push()) {
+            frame.malloc(8);
+            assertEquals(frame.getPointer(), size - 8);
+            assertEquals(frame.getFrameIndex(), 1);
         }
-        stack.pop();
 
         assertEquals(stack.getPointer(), size);
         assertEquals(stack.getFrameIndex(), 0);
@@ -41,39 +39,27 @@ public class StackTest {
 
         assertEquals(stack.getPointer(), size);
 
-        stack.push();
-        try {
-            stack.malloc(1);
-            assertEquals(stack.getPointer(), size - 1);
-        } finally {
-            stack.pop();
+        try (MemoryStack frame = stack.push()) {
+            frame.malloc(1);
+            assertEquals(frame.getPointer(), size - 1);
         }
 
-        stack.push();
-        try {
-            stack.malloc(1);
-            stack.mallocShort(1);
-            assertEquals(stack.getPointer(), size - 4);
-        } finally {
-            stack.pop();
+        try (MemoryStack frame = stack.push()) {
+            frame.malloc(1);
+            frame.mallocShort(1);
+            assertEquals(frame.getPointer(), size - 4);
         }
 
-        stack.push();
-        try {
-            stack.malloc(1);
-            stack.mallocInt(1);
-            assertEquals(stack.getPointer(), size - 8);
-        } finally {
-            stack.pop();
+        try (MemoryStack frame = stack.push()) {
+            frame.malloc(1);
+            frame.mallocInt(1);
+            assertEquals(frame.getPointer(), size - 8);
         }
 
-        stack.push();
-        try {
-            stack.malloc(1);
-            stack.mallocLong(1);
-            assertEquals(stack.getPointer(), size - 16);
-        } finally {
-            stack.pop();
+        try (MemoryStack frame = stack.push()) {
+            frame.malloc(1);
+            frame.mallocLong(1);
+            assertEquals(frame.getPointer(), size - 16);
         }
     }
 
@@ -85,10 +71,10 @@ public class StackTest {
         expectThrows(OutOfMemoryError.class, () -> {
             MemoryStack stack = new MemoryStack(8);
 
-            stack.push();
-            stack.malloc(8);
-            stack.malloc(1);
-            stack.pop();
+            try (MemoryStack frame = stack.push()) {
+                frame.malloc(8);
+                frame.malloc(1);
+            }
         });
     }
 

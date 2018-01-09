@@ -32,7 +32,7 @@ public final class MultipleWindows {
             demo();
         } finally {
             glfwTerminate();
-            glfwSetErrorCallback(null).free();
+            Objects.requireNonNull(glfwSetErrorCallback(null)).free();
         }
     }
 
@@ -63,7 +63,7 @@ public final class MultipleWindows {
             glfwSetKeyCallback(handle, (windowHnd, key, scancode, action, mods) -> {
                 if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
                     Arrays.stream(windows)
-                        .filter(w -> w != null)
+                        .filter(Objects::nonNull)
                         .forEach(w -> glfwSetWindowShouldClose(w.handle, true));
                 }
             });

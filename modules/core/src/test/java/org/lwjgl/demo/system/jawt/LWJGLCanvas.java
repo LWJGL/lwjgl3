@@ -38,7 +38,7 @@ public class LWJGLCanvas extends Canvas {
         awt = JAWT.calloc();
         awt.version(JAWT_VERSION_1_4);
         if (!JAWT_GetAWT(awt)) {
-            throw new RuntimeException("GetAWT failed");
+            throw new IllegalStateException("GetAWT failed");
         }
 
         gears = new AbstractGears();
@@ -54,19 +54,22 @@ public class LWJGLCanvas extends Canvas {
         // Get the drawing surface
         JAWTDrawingSurface ds = JAWT_GetDrawingSurface(awt.GetDrawingSurface(), this);
         if (ds == null) {
-            throw new RuntimeException("awt->GetDrawingSurface() failed");
+            throw new IllegalStateException("awt->GetDrawingSurface() failed");
         }
 
         try {
             // Lock the drawing surface
             int lock = JAWT_DrawingSurface_Lock(ds.Lock(), ds);
             if ((lock & JAWT_LOCK_ERROR) != 0) {
-                throw new RuntimeException("ds->Lock() failed");
+                throw new IllegalStateException("ds->Lock() failed");
             }
 
             try {
                 // Get the drawing surface info
                 JAWTDrawingSurfaceInfo dsi = JAWT_DrawingSurface_GetDrawingSurfaceInfo(ds.GetDrawingSurfaceInfo(), ds);
+                if (dsi == null) {
+                    throw new IllegalStateException("ds->GetDrawingSurfaceInfo() failed");
+                }
 
                 try {
                     // Get the platform-specific drawing info

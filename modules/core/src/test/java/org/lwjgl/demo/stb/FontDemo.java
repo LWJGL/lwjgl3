@@ -10,6 +10,7 @@ import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
+import java.util.*;
 import java.util.regex.*;
 
 import static java.lang.Math.*;
@@ -242,7 +243,7 @@ abstract class FontDemo {
         });
 
         // Center window
-        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(monitor));
 
         glfwSetWindowPos(
             window,
@@ -285,7 +286,7 @@ abstract class FontDemo {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

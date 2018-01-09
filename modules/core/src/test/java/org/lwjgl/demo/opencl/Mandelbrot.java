@@ -267,13 +267,14 @@ public class Mandelbrot {
             vbo = glGenBuffers();
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-            glBufferData(GL_ARRAY_BUFFER, stackPush().floats(
-                0.0f, 0.0f, 0.0f, 0.0f,
-                1.0f, 0.0f, 1.0f, 0.0f,
-                0.0f, 1.0f, 0.0f, 1.0f,
-                1.0f, 1.0f, 1.0f, 1.0f
-            ), GL_STATIC_DRAW);
-            stackPop();
+            try (MemoryStack stack = stackPush()) {
+                glBufferData(GL_ARRAY_BUFFER, stack.floats(
+                    0.0f, 0.0f, 0.0f, 0.0f,
+                    1.0f, 0.0f, 1.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f, 1.0f,
+                    1.0f, 1.0f, 1.0f, 1.0f
+                ), GL_STATIC_DRAW);
+            }
 
             vsh = glCreateShader(GL_VERTEX_SHADER);
             glShaderSource(vsh,

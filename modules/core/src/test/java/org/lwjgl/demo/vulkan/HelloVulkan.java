@@ -10,6 +10,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.vulkan.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -299,13 +300,13 @@ public final class HelloVulkan {
                 type, memASCII(pLayerPrefix), messageCode, VkDebugReportCallbackEXT.getString(pMessage)
             );
 
-			/*
+            /*
              * false indicates that layer should not bail-out of an
-			 * API call that had validation failures. This may mean that the
-			 * app dies inside the driver due to invalid parameter(s).
-			 * That's what would happen without validation layers, so we'll
-			 * keep that behavior here.
-			 */
+             * API call that had validation failures. This may mean that the
+             * app dies inside the driver due to invalid parameter(s).
+             * That's what would happen without validation layers, so we'll
+             * keep that behavior here.
+             */
             return VK_FALSE;
         }
     );
@@ -454,20 +455,20 @@ public final class HelloVulkan {
 
             inst = new VkInstance(pp.get(0), inst_info);
 
-			/* Make initial call to query gpu_count, then second call for gpu info */
+            /* Make initial call to query gpu_count, then second call for gpu info */
             check(vkEnumeratePhysicalDevices(inst, ip, null));
 
             if (ip.get(0) > 0) {
                 PointerBuffer physical_devices = stack.mallocPointer(ip.get(0));
                 check(vkEnumeratePhysicalDevices(inst, ip, physical_devices));
 
-				/* For tri demo we just grab the first physical device */
+                /* For tri demo we just grab the first physical device */
                 gpu = new VkPhysicalDevice(physical_devices.get(0), inst);
             } else {
                 throw new IllegalStateException("vkEnumeratePhysicalDevices reported zero accessible devices.");
             }
 
-			/* Look for device extensions */
+            /* Look for device extensions */
             boolean swapchainExtFound = false;
             check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, null));
 
@@ -912,15 +913,15 @@ public final class HelloVulkan {
                 .height(height)
                 .depth(1);
 
-		    /* create image */
+            /* create image */
             check(vkCreateImage(device, image, null, lp));
             depth.image = lp.get(0);
 
-		    /* get memory requirements for this object */
+            /* get memory requirements for this object */
             VkMemoryRequirements mem_reqs = VkMemoryRequirements.mallocStack(stack);
             vkGetImageMemoryRequirements(device, depth.image, mem_reqs);
 
-		    /* select memory size and type */
+            /* select memory size and type */
             VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.mallocStack(stack)
                 .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
                 .pNext(NULL)
@@ -931,11 +932,11 @@ public final class HelloVulkan {
                 mem_alloc);
             assert (pass);
 
-		    /* allocate memory */
+            /* allocate memory */
             check(vkAllocateMemory(device, mem_alloc, null, lp));
             depth.mem = lp.get(0);
 
-		    /* bind memory */
+            /* bind memory */
             check(vkBindImageMemory(device, depth.image, depth.mem, 0));
 
             demo_set_image_layout(depth.image, VK_IMAGE_ASPECT_DEPTH_BIT,
@@ -943,7 +944,7 @@ public final class HelloVulkan {
                 VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
                 0);
 
-		    /* create image view */
+            /* create image view */
             VkImageViewCreateInfo view = VkImageViewCreateInfo.callocStack(stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
                 .pNext(NULL)
@@ -1020,11 +1021,11 @@ public final class HelloVulkan {
             pass = memory_type_from_properties(mem_reqs.memoryTypeBits(), required_props, mem_alloc);
             assert (pass);
 
-	    /* allocate memory */
+            /* allocate memory */
             check(vkAllocateMemory(device, mem_alloc, null, lp));
             tex_obj.mem = lp.get(0);
 
-	    /* bind memory */
+            /* bind memory */
             check(vkBindImageMemory(device, tex_obj.image, tex_obj.mem, 0));
 
             if ((required_props & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) != 0) {
@@ -1050,13 +1051,13 @@ public final class HelloVulkan {
 
             tex_obj.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             demo_set_image_layout(tex_obj.image, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_PREINITIALIZED, tex_obj.imageLayout, VK_ACCESS_HOST_WRITE_BIT);
-		/* setting the image layout does not reference the actual memory so no need
-		 * to add a mem ref */
+            /* setting the image layout does not reference the actual memory so no need
+             * to add a mem ref */
         }
     }
 
     private void demo_destroy_texture_image(TextureObject tex_obj) {
-	    /* clean up staging resources */
+        /* clean up staging resources */
         vkDestroyImage(device, tex_obj.image, null);
         vkFreeMemory(device, tex_obj.mem, null);
     }
@@ -1093,13 +1094,13 @@ public final class HelloVulkan {
 
             for (int i = 0; i < DEMO_TEXTURE_COUNT; i++) {
                 if ((props.linearTilingFeatures() & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) != 0 && !USE_STAGING_BUFFER) {
-				    /* Device can texture using linear textures */
+                    /* Device can texture using linear textures */
                     demo_prepare_texture_image(
                         tex_colors[i], textures[i], VK_IMAGE_TILING_LINEAR,
                         VK_IMAGE_USAGE_SAMPLED_BIT,
                         VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
                 } else if ((props.optimalTilingFeatures() & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) != 0) {
-				    /* Must use staging buffer to copy linear texture to optimized */
+                    /* Must use staging buffer to copy linear texture to optimized */
                     TextureObject staging_texture = new TextureObject();
 
                     demo_prepare_texture_image(
@@ -1165,7 +1166,7 @@ public final class HelloVulkan {
 
                     demo_destroy_texture_image(staging_texture);
                 } else {
-				    /* Can't support VK_FORMAT_B8G8R8A8_UNORM !? */
+                    /* Can't support VK_FORMAT_B8G8R8A8_UNORM !? */
                     throw new IllegalStateException("No support for B8G8R8A8_UNORM as texture image format");
                 }
 
@@ -1187,7 +1188,7 @@ public final class HelloVulkan {
                     .borderColor(VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE)
                     .unnormalizedCoordinates(false);
 
-				/* create sampler */
+                /* create sampler */
                 check(vkCreateSampler(device, sampler, null, lp));
                 textures[i].sampler = lp.get(0);
 
@@ -1210,7 +1211,7 @@ public final class HelloVulkan {
                     .baseArrayLayer(0)
                     .layerCount(1);
 
-		        /* create image view */
+                /* create image view */
                 view.image(textures[i].image);
                 check(vkCreateImageView(device, view, null, lp));
                 textures[i].view = lp.get(0);
@@ -1229,7 +1230,7 @@ public final class HelloVulkan {
 
     private void demo_prepare_vertices() {
         float[][] vb = {
-		    /*      position             texcoord */
+            /*      position             texcoord */
             {-1.0f, -1.0f, 0.25f, 0.0f, 0.0f},
             {1.0f, -1.0f, 0.25f, 1.0f, 0.0f},
             {0.0f, 1.0f, 1.0f, 0.5f, 1.0f},
@@ -1915,7 +1916,7 @@ public final class HelloVulkan {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
 
         memFree(extension_names);
 

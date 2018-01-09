@@ -12,6 +12,7 @@ import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
@@ -49,15 +50,7 @@ public class GLFWDemo {
 
     static {
         ALLOCATOR = NkAllocator.create();
-        ALLOCATOR.alloc((handle, old, size) -> {
-            long mem = nmemAlloc(size);
-            if (mem == NULL) {
-                throw new OutOfMemoryError();
-            }
-
-            return mem;
-
-        });
+        ALLOCATOR.alloc((handle, old, size) -> nmemAllocChecked(size));
         ALLOCATOR.mfree((handle, ptr) -> nmemFree(ptr));
 
         VERTEX_LAYOUT = NkDrawVertexLayoutElement.create(4)
@@ -289,7 +282,7 @@ public class GLFWDemo {
             debugProc.free();
         }
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     private void setupContext() {
@@ -487,25 +480,26 @@ public class GLFWDemo {
         });
 
         nk_init(ctx, ALLOCATOR, null);
-        ctx.clip().copy((handle, text, len) -> {
-            if (len == 0) {
-                return;
-            }
+        ctx.clip()
+            .copy((handle, text, len) -> {
+                if (len == 0) {
+                    return;
+                }
 
-            try (MemoryStack stack = stackPush()) {
-                ByteBuffer str = stack.malloc(len + 1);
-                memCopy(text, memAddress(str), len);
-                str.put(len, (byte)0);
+                try (MemoryStack stack = stackPush()) {
+                    ByteBuffer str = stack.malloc(len + 1);
+                    memCopy(text, memAddress(str), len);
+                    str.put(len, (byte)0);
 
-                glfwSetClipboardString(win, str);
-            }
-        });
-        ctx.clip().paste((handle, edit) -> {
-            long text = nglfwGetClipboardString(win);
-            if (text != NULL) {
-                nnk_textedit_paste(edit, text, nnk_strlen(text));
-            }
-        });
+                    glfwSetClipboardString(win, str);
+                }
+            })
+            .paste((handle, edit) -> {
+                long text = nglfwGetClipboardString(win);
+                if (text != NULL) {
+                    nnk_textedit_paste(edit, text, nnk_strlen(text));
+                }
+            });
         setupContext();
         return ctx;
     }
@@ -578,8 +572,8 @@ public class GLFWDemo {
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, max_element_buffer, GL_STREAM_DRAW);
 
             // load draw vertices & elements directly into vertex + element buffer
-            ByteBuffer vertices = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY, max_vertex_buffer, null);
-            ByteBuffer elements = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY, max_element_buffer, null);
+            ByteBuffer vertices = Objects.requireNonNull(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY, max_vertex_buffer, null));
+            ByteBuffer elements = Objects.requireNonNull(glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY, max_element_buffer, null));
             try (MemoryStack stack = stackPush()) {
                 // fill convert configuration
                 NkConvertConfig config = NkConvertConfig.callocStack(stack)
@@ -650,17 +644,17 @@ public class GLFWDemo {
     }
 
     private void shutdown() {
-        ctx.clip().copy().free();
-        ctx.clip().paste().free();
+        Objects.requireNonNull(ctx.clip().copy()).free();
+        Objects.requireNonNull(ctx.clip().paste()).free();
         nk_free(ctx);
         destroy();
-        default_font.query().free();
-        default_font.width().free();
+        Objects.requireNonNull(default_font.query()).free();
+        Objects.requireNonNull(default_font.width()).free();
 
         calc.numberFilter.free();
 
-        ALLOCATOR.alloc().free();
-        ALLOCATOR.mfree().free();
+        Objects.requireNonNull(ALLOCATOR.alloc()).free();
+        Objects.requireNonNull(ALLOCATOR.mfree()).free();
     }
 
 }

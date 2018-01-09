@@ -11,6 +11,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.glfw.Callbacks.*;
@@ -253,7 +254,7 @@ public final class ExampleFBO extends Demo {
 
         glfwFreeCallbacks(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

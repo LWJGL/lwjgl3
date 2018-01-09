@@ -24,13 +24,12 @@ public final class HelloLibOVR {
             System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.IsOculusServiceRunning());
         }
 
-        OVRLogCallback callback;
+        OVRLogCallback callback = OVRLogCallback.create((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)));
         try (
             OVRInitParams initParams = OVRInitParams.calloc()
-                .LogCallback((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)))
+                .LogCallback(callback)
                 .Flags(ovrInit_Debug)
         ) {
-            callback = initParams.LogCallback();
             System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));
         }
 

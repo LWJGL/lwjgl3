@@ -9,6 +9,7 @@ import org.lwjgl.openal.*;
 import org.lwjgl.stb.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.openal.AL10.*;
@@ -60,7 +61,7 @@ public final class HRTFDemo {
             soundname = args[0];
         }
 
-		/* Enumerate available HRTFs, and reset the device using one. */
+        /* Enumerate available HRTFs, and reset the device using one. */
         int num_hrtf = alcGetInteger(device, ALC_NUM_HRTF_SPECIFIERS_SOFT);
         if (num_hrtf == 0) {
             System.out.println("No HRTFs found");
@@ -69,10 +70,10 @@ public final class HRTFDemo {
 
             System.out.println("Available HRTFs:");
             for (int i = 0; i < num_hrtf; i++) {
-                String name = alcGetStringiSOFT(device, ALC_HRTF_SPECIFIER_SOFT, i);
+                String name = Objects.requireNonNull(alcGetStringiSOFT(device, ALC_HRTF_SPECIFIER_SOFT, i));
                 System.out.format("    %d: %s\n", i, name);
 
-				/* Check if this is the HRTF the user requested. */
+                /* Check if this is the HRTF the user requested. */
                 if (hrtfname != null && name.equals(hrtfname)) {
                     index = i;
                 }
@@ -100,7 +101,7 @@ public final class HRTFDemo {
                 System.out.format("Failed to reset device: %s\n", alcGetString(device, alcGetError(device)));
             }
 
-			 /* Check if HRTF is enabled, and show which is being used. */
+            /* Check if HRTF is enabled, and show which is being used. */
             int hrtf_state = alcGetInteger(device, ALC_HRTF_SOFT);
             if (hrtf_state == 0) {
                 System.out.format("HRTF not enabled!\n");
@@ -109,14 +110,14 @@ public final class HRTFDemo {
                 System.out.format("HRTF enabled, using %s\n", name);
             }
 
-			/* Load the sound into a buffer. */
+            /* Load the sound into a buffer. */
             int buffer = alGenBuffers();
             try (STBVorbisInfo info = STBVorbisInfo.malloc()) {
                 ShortBuffer pcm = ALCDemo.readVorbis(soundname, 32 * 1024, info);
                 alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
             }
 
-			 /* Create the source to play the sound with. */
+            /* Create the source to play the sound with. */
             int source = alGenSources();
             alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
             alSource3f(source, AL_POSITION, 0.0f, 0.0f, -1.0f);
@@ -126,7 +127,7 @@ public final class HRTFDemo {
                 throw new IllegalStateException("Failed to setup sound source");
             }
 
-			/* Play the sound until it finishes. */
+            /* Play the sound until it finishes. */
             double angle = 0.0;
             alSourcePlay(source);
             int state;
@@ -137,16 +138,16 @@ public final class HRTFDemo {
                     e.printStackTrace();
                 }
 
-				/* Rotate the source around the listener by about 1/8th cycle per second.
+                /* Rotate the source around the listener by about 1/8th cycle per second.
                  * Only affects mono sounds.
-				 */
+                 */
                 angle += (Math.PI / 4 / 100);
                 alSource3f(source, AL_POSITION, (float)sin(angle), 0.0f, -(float)cos(angle));
 
                 state = alGetSourcei(source, AL_SOURCE_STATE);
             } while (alGetError() == AL_NO_ERROR && state == AL_PLAYING);
 
-		    /* All done. Delete resources, and close OpenAL. */
+            /* All done. Delete resources, and close OpenAL. */
             alDeleteSources(source);
             alDeleteBuffers(buffer);
 

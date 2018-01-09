@@ -10,6 +10,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
@@ -106,8 +107,7 @@ public class Gears extends AbstractGears {
 
         long monitor = glfwGetPrimaryMonitor();
 
-        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
-
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(monitor));
         // Center window
         glfwSetWindowPos(
             window,
@@ -223,7 +223,7 @@ public class Gears extends AbstractGears {
         }
 
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }
