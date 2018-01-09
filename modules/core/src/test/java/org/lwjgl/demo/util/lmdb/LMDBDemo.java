@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.lmdb.*;
 
 import java.io.*;
+import java.util.*;
 
 import static org.lwjgl.demo.util.lmdb.LMDBUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -80,7 +81,7 @@ public final class LMDBDemo {
             // no copy, LMDB updates dv.mv_data with a pointer to the database
             E(mdb_put(txn, dbi, kv, dv, MDB_RESERVE));
             // value is encoded directly to the memory-mapped file
-            memUTF8(value, false, dv.mv_data());
+            memUTF8(value, false, Objects.requireNonNull(dv.mv_data()));
 
             return null;
         });
@@ -94,7 +95,7 @@ public final class LMDBDemo {
             MDBVal dv = MDBVal.callocStack(stack);
 
             E(mdb_get(txn, dbi, kv, dv));
-            return memUTF8(dv.mv_data());
+            return memUTF8(Objects.requireNonNull(dv.mv_data()));
         });
     }
 

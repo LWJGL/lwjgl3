@@ -7,6 +7,7 @@ package org.lwjgl.util.par;
 import org.testng.annotations.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.par.ParShapes.*;
@@ -16,17 +17,11 @@ import static org.testng.Assert.*;
 public class ParTest {
 
     public void testCylindersAndSpheres() {
-        ParShapesMesh bad1 = par_shapes_create_cylinder(1, 1);
-        ParShapesMesh bad2 = par_shapes_create_cylinder(1, 3);
-        ParShapesMesh good = par_shapes_create_cylinder(3, 1);
+        assertEquals(par_shapes_create_cylinder(1, 1), null); // bad
+        assertEquals(par_shapes_create_cylinder(1, 3), null); // bad
+        par_shapes_free_mesh(Objects.requireNonNull(par_shapes_create_cylinder(3, 1))); // good
 
-        assertEquals(bad1, null);
-        assertEquals(bad2, null);
-        assertNotEquals(good, null);
-
-        par_shapes_free_mesh(good);
-
-        ParShapesMesh m = par_shapes_create_cylinder(5, 6);
+        ParShapesMesh m = Objects.requireNonNull(par_shapes_create_cylinder(5, 6));
         assertEquals(m.npoints(), 42);
         par_shapes_free_mesh(m);
 
@@ -34,32 +29,32 @@ public class ParTest {
 
         slices = 5;
         stacks = 6;
-        m = par_shapes_create_cylinder(slices, stacks);
+        m = Objects.requireNonNull(par_shapes_create_cylinder(slices, stacks));
         assertEquals(m.ntriangles(), slices * stacks * 2);
         par_shapes_free_mesh(m);
 
         slices = 5;
         stacks = 6;
-        m = par_shapes_create_parametric_sphere(slices, stacks);
+        m = Objects.requireNonNull(par_shapes_create_parametric_sphere(slices, stacks));
         assertEquals(m.ntriangles(), slices * 2 + (stacks - 2) * slices * 2);
         par_shapes_free_mesh(m);
 
         slices = 12;
         stacks = 13;
-        m = par_shapes_create_parametric_sphere(slices, stacks);
+        m = Objects.requireNonNull(par_shapes_create_parametric_sphere(slices, stacks));
         assertEquals(m.ntriangles(), slices * 2 + (stacks - 2) * slices * 2);
         par_shapes_free_mesh(m);
 
         slices = 16;
         stacks = 16;
-        m = par_shapes_create_parametric_sphere(slices, stacks);
+        m = Objects.requireNonNull(par_shapes_create_parametric_sphere(slices, stacks));
         assertEquals(m.ntriangles(), slices * 2 + (stacks - 2) * slices * 2);
         par_shapes_free_mesh(m);
     }
 
     public void testMerge() {
-        ParShapesMesh a = par_shapes_create_klein_bottle(10, 20);
-        ParShapesMesh b = par_shapes_create_plane(3, 3);
+        ParShapesMesh a = Objects.requireNonNull(par_shapes_create_klein_bottle(10, 20));
+        ParShapesMesh b = Objects.requireNonNull(par_shapes_create_plane(3, 3));
 
         int npts  = a.npoints();
         int ntris = a.ntriangles();
@@ -77,8 +72,8 @@ public class ParTest {
         ParShapesMesh a, b;
 
         // should support translation
-        a = par_shapes_create_cylinder(20, 3);
-        b = par_shapes_create_cylinder(4, 3);
+        a = Objects.requireNonNull(par_shapes_create_cylinder(20, 3));
+        b = Objects.requireNonNull(par_shapes_create_cylinder(4, 3));
 
         par_shapes_translate(a, 0.5f, 0.5f, 0.25f);
         par_shapes_merge(a, b);
@@ -88,8 +83,8 @@ public class ParTest {
 
         // should support rotation
 
-        a = par_shapes_create_cylinder(20, 3);
-        b = par_shapes_create_cylinder(4, 3);
+        a = Objects.requireNonNull(par_shapes_create_cylinder(20, 3));
+        b = Objects.requireNonNull(par_shapes_create_cylinder(4, 3));
 
         FloatBuffer axis1 = memAllocFloat(3);
         axis1
@@ -116,7 +111,7 @@ public class ParTest {
 
         // should support non-uniform scale
 
-        a = par_shapes_create_cylinder(15, 3);
+        a = Objects.requireNonNull(par_shapes_create_cylinder(15, 3));
 
         par_shapes_scale(a, 1.0f, 1.0f, 5.0f);
 
@@ -142,7 +137,7 @@ public class ParTest {
 
         ParShapesMesh a, b;
 
-        a = par_shapes_create_disk(1.0f, slices, center, normal);
+        a = Objects.requireNonNull(par_shapes_create_disk(1.0f, slices, center, normal));
 
         normal
             .put(0, 0.0f)
@@ -153,7 +148,7 @@ public class ParTest {
             .put(1, 0.0f)
             .put(2, 0.2f);
 
-        b = par_shapes_create_disk(0.2f, slices, center, normal);
+        b = Objects.requireNonNull(par_shapes_create_disk(0.2f, slices, center, normal));
 
         par_shapes_merge(a, b);
 
@@ -168,8 +163,8 @@ public class ParTest {
             .put(1, 0.0f)
             .put(2, 0.0f);
 
-        a = par_shapes_create_disk(2.0f, slices, center, normal);
-        b = par_shapes_create_rock(1, 2);
+        a = Objects.requireNonNull(par_shapes_create_disk(2.0f, slices, center, normal));
+        b = Objects.requireNonNull(par_shapes_create_rock(1, 2));
 
         FloatBuffer aabb = memAllocFloat(6);
         par_shapes_compute_aabb(b, aabb);
@@ -185,8 +180,8 @@ public class ParTest {
 
         // create a polyhedron on the Y plane
 
-        a = par_shapes_create_disk(2.0f, slices, center, normal);
-        b = par_shapes_create_dodecahedron();
+        a = Objects.requireNonNull(par_shapes_create_disk(2.0f, slices, center, normal));
+        b = Objects.requireNonNull(par_shapes_create_dodecahedron());
 
         par_shapes_translate(b, 0, 0.934f, 0);
 
@@ -233,10 +228,10 @@ public class ParTest {
 
         int tess = 30;
 
-        a = par_shapes_create_disk(2.5f, tess, O, J);
-        b = par_shapes_create_cylinder(tess, 3);
-        ParShapesMesh c = par_shapes_create_torus(15, tess, 0.1f);
-        ParShapesMesh d = par_shapes_create_disk(1, tess, top_center, J);
+        a = Objects.requireNonNull(par_shapes_create_disk(2.5f, tess, O, J));
+        b = Objects.requireNonNull(par_shapes_create_cylinder(tess, 3));
+        ParShapesMesh c = Objects.requireNonNull(par_shapes_create_torus(15, tess, 0.1f));
+        ParShapesMesh d = Objects.requireNonNull(par_shapes_create_disk(1, tess, top_center, J));
 
         par_shapes_rotate(c, (float)(Math.PI / tess), K);
         par_shapes_translate(c, 0, 0, 1);
@@ -304,8 +299,8 @@ public class ParTest {
             .put(1, 1.0f)
             .put(2, 0.0f);
 
-        ParShapesMesh mesh = par_shapes_create_lsystem(program, 5, 60);
-        ParShapesMesh disk = par_shapes_create_disk(10, 30, O, J);
+        ParShapesMesh mesh = Objects.requireNonNull(par_shapes_create_lsystem(program, 5, 60));
+        ParShapesMesh disk = Objects.requireNonNull(par_shapes_create_disk(10, 30, O, J));
 
         par_shapes_merge(mesh, disk);
 

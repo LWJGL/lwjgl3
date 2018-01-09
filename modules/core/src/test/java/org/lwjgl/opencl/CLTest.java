@@ -9,6 +9,7 @@ import org.lwjgl.system.*;
 import org.testng.*;
 import org.testng.annotations.*;
 
+import javax.annotation.*;
 import java.nio.*;
 import java.util.concurrent.*;
 
@@ -23,6 +24,7 @@ import static org.testng.Assert.*;
 @Test(singleThreaded = true)
 public class CLTest {
 
+    @Nullable
     private static CLContextCallback CONTEXT_CALLBACK;
 
     @BeforeClass

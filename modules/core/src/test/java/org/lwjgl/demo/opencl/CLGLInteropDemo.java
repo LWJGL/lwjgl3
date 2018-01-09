@@ -127,7 +127,7 @@ public final class CLGLInteropDemo {
             throw new IllegalStateException("No OpenCL platform found that supports OpenGL context sharing.");
         }
 
-        Collections.sort(platforms, (p1, p2) -> {
+        platforms.sort((p1, p2) -> {
             // Prefer platforms that support GPU devices
             boolean gpu1 = !getDevices(p1, CL_DEVICE_TYPE_GPU).isEmpty();
             boolean gpu2 = !getDevices(p2, CL_DEVICE_TYPE_GPU).isEmpty();
@@ -224,7 +224,7 @@ public final class CLGLInteropDemo {
 
         CL.destroy();
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
 
         System.out.println("GAME OVER!");
     }

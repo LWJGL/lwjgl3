@@ -50,16 +50,16 @@ public final class MTest {
     private static void print_p(MDBVal key, MDBVal data) {
         System.out.printf(
             "key: %X %s, data: %X %s\n",
-            memGetAddress(key.address() + MDBVal.MV_DATA), memASCII(key.mv_data()),
-            memGetAddress(data.address() + MDBVal.MV_DATA), memASCII(data.mv_data())
+            memGetAddress(key.address() + MDBVal.MV_DATA), memASCII(Objects.requireNonNull(key.mv_data())),
+            memGetAddress(data.address() + MDBVal.MV_DATA), memASCII(Objects.requireNonNull(data.mv_data()))
         );
     }
 
     private static void print(MDBVal key, MDBVal data) {
         System.out.printf(
             "key: %s, data: %s\n",
-            memASCII(key.mv_data()),
-            memASCII(data.mv_data())
+            memASCII(Objects.requireNonNull(key.mv_data())),
+            memASCII(Objects.requireNonNull(data.mv_data()))
         );
     }
 
@@ -162,20 +162,20 @@ public final class MTest {
         txn = pp.get(0);
         E(mdb_cursor_open(txn, dbi, pp));
         cursor = pp.get(0);
-        System.out.printf("Cursor next\n");
+        System.out.print("Cursor next\n");
         while ((rc = mdb_cursor_get(cursor, key, data, MDB_NEXT)) == 0) {
             print(key, data);
         }
         CHECK(rc, rc == MDB_NOTFOUND, "mdb_cursor_get");
-        System.out.printf("Cursor last\n");
+        System.out.print("Cursor last\n");
         E(mdb_cursor_get(cursor, key, data, MDB_LAST));
         print(key, data);
-        System.out.printf("Cursor prev\n");
+        System.out.print("Cursor prev\n");
         while ((rc = mdb_cursor_get(cursor, key, data, MDB_PREV)) == 0) {
             print(key, data);
         }
         CHECK(rc, rc == MDB_NOTFOUND, "mdb_cursor_get");
-        System.out.printf("Cursor last/prev\n");
+        System.out.print("Cursor last/prev\n");
         E(mdb_cursor_get(cursor, key, data, MDB_LAST));
         print(key, data);
         E(mdb_cursor_get(cursor, key, data, MDB_PREV));
@@ -184,7 +184,7 @@ public final class MTest {
         mdb_cursor_close(cursor);
         mdb_txn_abort(txn);
 
-        System.out.printf("Deleting with cursor\n");
+        System.out.print("Deleting with cursor\n");
         E(mdb_txn_begin(env, NULL, 0, pp));
         txn = pp.get(0);
         E(mdb_cursor_open(txn, dbi, pp));
@@ -197,7 +197,7 @@ public final class MTest {
             E(mdb_del(txn, dbi, key, null));
         }
 
-        System.out.printf("Restarting cursor in txn\n");
+        System.out.print("Restarting cursor in txn\n");
         for (int op = MDB_FIRST, i = 0; i <= 32; op = MDB_NEXT, i++) {
             if (RES(MDB_NOTFOUND, mdb_cursor_get(cur2, key, data, op))) {
                 break;
@@ -207,7 +207,7 @@ public final class MTest {
         mdb_cursor_close(cur2);
         E(mdb_txn_commit(txn));
 
-        System.out.printf("Restarting cursor outside txn\n");
+        System.out.print("Restarting cursor outside txn\n");
         E(mdb_txn_begin(env, NULL, 0, pp));
         txn = pp.get(0);
         E(mdb_cursor_open(txn, dbi, pp));

@@ -4,8 +4,6 @@
  */
 package org.lwjgl.demo.openal;
 
-import org.lwjgl.openal.*;
-
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTEfx.*;
 
@@ -182,7 +180,7 @@ public final class EFXUtil {
             }
 
         } else if (genError == AL_OUT_OF_MEMORY) {
-            throw new RuntimeException(AL10.alGetString(genError));
+            throw new RuntimeException(alGetString(AL_OUT_OF_MEMORY));
         }
 
         return supported;

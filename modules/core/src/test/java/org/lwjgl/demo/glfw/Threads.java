@@ -7,6 +7,7 @@ package org.lwjgl.demo.glfw;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
+import java.util.*;
 import java.util.concurrent.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -87,7 +88,7 @@ public final class Threads {
         }
 
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     private static class GLFWThread extends Thread {

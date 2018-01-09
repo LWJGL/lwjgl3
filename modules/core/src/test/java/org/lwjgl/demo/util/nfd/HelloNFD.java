@@ -11,6 +11,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.nfd.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -73,7 +74,7 @@ public final class HelloNFD {
         });
 
         // Center window
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
         glfwSetWindowPos(
             window,
             (vidmode.width() - 300) / 2,
@@ -100,7 +101,7 @@ public final class HelloNFD {
         glfwDestroyWindow(window);
         glfwTerminate();
 
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     private static void openSingle() {

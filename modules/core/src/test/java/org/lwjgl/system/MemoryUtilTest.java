@@ -234,21 +234,23 @@ public class MemoryUtilTest {
         }
 
         // encode null returns null
-        assertNull(memUTF8((String)null));
-        assertNull(memUTF8(null, false));
+        assertNull(memUTF8Safe((String)null));
+        assertNull(memUTF8Safe(null, false));
 
         // decode null/NULL returns null
-        assertNull(memUTF8(NULL));
-        assertNull(memUTF8((ByteBuffer)null));
+        assertNull(memUTF8Safe(NULL));
+        assertNull(memUTF8Safe((ByteBuffer)null));
 
         // decode null/NULL with specific length/offset throws NPE
         try {
+            //noinspection ConstantConditions
             memUTF8(null, 0);
             fail();
         } catch (NullPointerException ignored) {
         }
 
         try {
+            //noinspection ConstantConditions
             memUTF8(null, 0, 0);
             fail();
         } catch (NullPointerException ignored) {

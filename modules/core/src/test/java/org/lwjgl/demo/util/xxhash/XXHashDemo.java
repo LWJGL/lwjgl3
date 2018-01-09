@@ -46,7 +46,7 @@ public final class XXHashDemo {
         String resource = "lwjgl32.png";
         try {
             // Allocate and free using the API
-            XXH64State state = XXH64_createState();
+            XXH64State state = Objects.requireNonNull(XXH64_createState());
             try {
                 hash64 = streamingHash(buffer, resource, state, SEED);
                 System.out.format("streaming 64-bit hash: 0x%X (%s, malloc)\n", hash64, resource);

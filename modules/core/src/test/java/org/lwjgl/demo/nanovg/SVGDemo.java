@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.nio.*;
 import java.nio.channels.*;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
@@ -59,9 +60,6 @@ public class SVGDemo {
         this.h = (int)svg.height();
 
         image = memAlloc(w * h * 4);
-        if (image == null) {
-            throw new IllegalStateException("Failed to allocate image buffer.");
-        }
 
         System.out.format("Rasterizing image %d x %d...", w, h);
         long t = System.nanoTime();
@@ -93,7 +91,11 @@ public class SVGDemo {
                 int c;
                 while ((c = rbc.read(svgData)) != -1) {
                     if (c == 0) {
-                        svgData = memRealloc(svgData, (svgData.capacity() * 3) >> 1);
+                        ByteBuffer newData = memRealloc(svgData, (svgData.capacity() * 3) >> 1);
+                        if (newData == null) {
+                            throw new OutOfMemoryError();
+                        }
+                        svgData = newData;
                     }
                 }
             }
@@ -157,8 +159,7 @@ public class SVGDemo {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
         ww = max(800, min(w, vidmode.width() - 160));
         wh = max(600, min(h, vidmode.height() - 120));
 
@@ -350,7 +351,7 @@ public class SVGDemo {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

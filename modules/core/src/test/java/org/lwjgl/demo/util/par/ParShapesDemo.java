@@ -11,6 +11,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.par.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -171,10 +172,7 @@ public final class ParShapesDemo {
         });
 
         // center window
-        long monitor = glfwGetPrimaryMonitor();
-
-        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
-
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
         glfwSetWindowPos(
             window,
             (vidmode.width() - width) / 2,
@@ -484,7 +482,7 @@ public final class ParShapesDemo {
 
         glfwFreeCallbacks(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
 
         if (debugCB != null) {
             debugCB.free();

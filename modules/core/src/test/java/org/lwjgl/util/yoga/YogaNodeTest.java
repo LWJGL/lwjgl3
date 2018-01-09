@@ -11,6 +11,8 @@ package org.lwjgl.util.yoga;
 import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
+import java.util.*;
+
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.yoga.Yoga.*;
 import static org.lwjgl.util.yoga.YogaNode.*;
@@ -49,7 +51,7 @@ public class YogaNodeTest {
         assertEquals(0, (int)child1.getLayoutY());
         assertEquals(40, (int)child2.getLayoutY());
 
-        YGNodeGetBaselineFunc(child2.node).free();
+        Objects.requireNonNull(YGNodeGetBaselineFunc(child2.node)).free();
     }
 
     private static YGMeasureFunc getTestMeasureFunc(float testWidth, float testHeight) {

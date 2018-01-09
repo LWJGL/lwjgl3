@@ -13,6 +13,7 @@ import org.lwjgl.system.windows.*;
 
 import java.io.*;
 import java.nio.*;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
 
@@ -143,7 +144,7 @@ public final class Vorbis implements AutoCloseable {
         }
 
         // Center window
-        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(monitor));
         glfwSetWindowPos(
             window,
             (vidmode.width() - framebufferW) / 2,
@@ -257,7 +258,7 @@ public final class Vorbis implements AutoCloseable {
         }
 
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     public static void main(String[] args) {

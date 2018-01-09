@@ -1338,9 +1338,6 @@ class Demo {
 
     static void saveScreenShot(int w, int h, boolean premult, String name) {
         ByteBuffer image = memAlloc(w * h * 4);
-        if (image == null) {
-            return;
-        }
 
         // TODO: Make this work for GLES
         glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image);

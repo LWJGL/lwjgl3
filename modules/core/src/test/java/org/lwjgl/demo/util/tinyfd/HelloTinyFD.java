@@ -10,6 +10,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -96,7 +97,7 @@ public final class HelloTinyFD {
         });
 
         // Center window
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
         glfwSetWindowPos(
             window,
             (vidmode.width() - 300) / 2,
@@ -127,7 +128,7 @@ public final class HelloTinyFD {
         glfwDestroyWindow(window);
         glfwTerminate();
 
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

@@ -6,6 +6,8 @@ package org.lwjgl.demo.assimp;
 
 import org.lwjgl.assimp.*;
 
+import java.util.*;
+
 import static org.lwjgl.assimp.Assimp.*;
 
 public final class HelloAssimp {
@@ -24,7 +26,7 @@ public final class HelloAssimp {
         System.out.println("\nImport formats:");
 
         for (int i = 0; i < c; i++) {
-            AIImporterDesc desc = aiGetImportFormatDescription(i);
+            AIImporterDesc desc = Objects.requireNonNull(aiGetImportFormatDescription(i));
             System.out.println("\t" + (i + 1) + ". " + desc.mNameString() + " (" + desc.mFileExtensionsString() + ")");
         }
 
@@ -32,7 +34,7 @@ public final class HelloAssimp {
         System.out.println("\nExport formats:");
 
         for (int i = 0; i < c; i++) {
-            AIExportFormatDesc desc = aiGetExportFormatDescription(i);
+            AIExportFormatDesc desc = Objects.requireNonNull(aiGetExportFormatDescription(i));
             System.out.println("\t" + (i + 1) + ". " + desc.descriptionString() + " (" + desc.fileExtensionString() + ")");
         }
     }

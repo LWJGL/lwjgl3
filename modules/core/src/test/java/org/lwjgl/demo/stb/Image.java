@@ -10,6 +10,7 @@ import org.lwjgl.system.*;
 
 import java.io.*;
 import java.nio.*;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
@@ -59,6 +60,8 @@ public final class Image {
             // We don't need this for this demo, just testing the API.
             if (!stbi_info_from_memory(imageBuffer, w, h, comp)) {
                 throw new RuntimeException("Failed to read image information: " + stbi_failure_reason());
+            } else {
+                System.out.println("OK with reason: " + stbi_failure_reason());
             }
 
             System.out.println("Image width: " + w.get(0));
@@ -129,7 +132,7 @@ public final class Image {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
 
         ww = max(800, min(w, vidmode.width() - 160));
         wh = max(600, min(h, vidmode.height() - 120));
@@ -331,7 +334,7 @@ public final class Image {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

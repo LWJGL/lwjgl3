@@ -77,7 +77,7 @@ public class OpenALInfo {
         System.out.println("ALC version: " + majorVersion + "." + minorVersion);
 
         System.out.println("ALC extensions:");
-        String[] extensions = alcGetString(device, ALC_EXTENSIONS).split(" ");
+        String[] extensions = Objects.requireNonNull(alcGetString(device, ALC_EXTENSIONS)).split(" ");
         checkALCError(device);
         for (String extension : extensions) {
             if (extension.trim().isEmpty()) {
@@ -92,7 +92,7 @@ public class OpenALInfo {
         System.out.println("OpenAL renderer string: " + alGetString(AL_RENDERER));
         System.out.println("OpenAL version string: " + alGetString(AL_VERSION));
         System.out.println("AL extensions:");
-        String[] extensions = alGetString(AL_EXTENSIONS).split(" ");
+        String[] extensions = Objects.requireNonNull(alGetString(AL_EXTENSIONS)).split(" ");
         for (String extension : extensions) {
             if (extension.trim().isEmpty()) {
                 continue;
@@ -146,7 +146,7 @@ public class OpenALInfo {
     }
 
     private static void printDevices(int which, String kind) {
-        List<String> devices = ALUtil.getStringList(NULL, which);
+        List<String> devices = Objects.requireNonNull(ALUtil.getStringList(NULL, which));
         System.out.println("Available " + kind + " devices: ");
         for (String d : devices) {
             System.out.println("    " + d);

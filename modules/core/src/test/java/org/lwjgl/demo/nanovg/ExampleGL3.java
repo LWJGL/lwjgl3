@@ -8,6 +8,8 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import java.util.*;
+
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
@@ -189,7 +191,7 @@ public final class ExampleGL3 extends Demo {
 
         glfwFreeCallbacks(window);
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
 }

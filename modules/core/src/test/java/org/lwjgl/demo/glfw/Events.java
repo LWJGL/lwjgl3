@@ -53,7 +53,7 @@ public final class Events {
             demo();
         } finally {
             glfwTerminate();
-            glfwSetErrorCallback(null).free();
+            Objects.requireNonNull(glfwSetErrorCallback(null)).free();
         }
     }
 
@@ -96,7 +96,7 @@ public final class Events {
 
             long primaryMonitor = glfwGetPrimaryMonitor();
 
-            PointerBuffer monitors = glfwGetMonitors();
+            PointerBuffer monitors = Objects.requireNonNull(glfwGetMonitors());
             for (int i = 0; i < monitors.remaining(); i++) {
                 long monitor = monitors.get(i);
 
@@ -122,8 +122,7 @@ public final class Events {
 
                 double MM_TO_INCH = 0.0393701;
 
-                GLFWVidMode mode = glfwGetVideoMode(monitor);
-
+                GLFWVidMode mode = Objects.requireNonNull(glfwGetVideoMode(monitor));
                 System.out.format("\tCurrent mode    : %d x %d @ %d Hz (%s, R%dG%dB%d)%n",
                     mode.width(), mode.height(),
                     mode.refreshRate(),
@@ -188,14 +187,13 @@ public final class Events {
                 throw new RuntimeException(e);
             }
 
-            ByteBuffer pixels = stbi_load_from_memory(png, w, h, comp, 0);
-
+            ByteBuffer pixels = Objects.requireNonNull(stbi_load_from_memory(png, w, h, comp, 0));
             try (GLFWImage img = GLFWImage.malloc().set(w.get(0), h.get(0), pixels)) {
                 cursor = glfwCreateCursor(img, 0, 8);
                 glfwSetCursor(window, cursor);
+            } finally {
+                stbi_image_free(pixels);
             }
-
-            stbi_image_free(pixels);
         }
 
         // Icons
@@ -210,14 +208,14 @@ public final class Events {
             }
 
             try (GLFWImage.Buffer icons = GLFWImage.malloc(2)) {
-                ByteBuffer pixels16 = stbi_load_from_memory(icon16, w, h, comp, 4);
+                ByteBuffer pixels16 = Objects.requireNonNull(stbi_load_from_memory(icon16, w, h, comp, 4));
                 icons
                     .position(0)
                     .width(w.get(0))
                     .height(h.get(0))
                     .pixels(pixels16);
 
-                ByteBuffer pixels32 = stbi_load_from_memory(icon32, w, h, comp, 4);
+                ByteBuffer pixels32 = Objects.requireNonNull(stbi_load_from_memory(icon32, w, h, comp, 4));
                 icons
                     .position(1)
                     .width(w.get(0))
@@ -319,8 +317,8 @@ public final class Events {
         }
 
         glfwFreeCallbacks(window);
-        glfwSetJoystickCallback(null).free();
-        glfwSetMonitorCallback(null).free();
+        Objects.requireNonNull(glfwSetJoystickCallback(null)).free();
+        Objects.requireNonNull(glfwSetMonitorCallback(null)).free();
 
         glfwDestroyCursor(cursor);
         glfwDestroyWindow(window);

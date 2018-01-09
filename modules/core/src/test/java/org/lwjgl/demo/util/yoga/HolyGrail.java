@@ -11,6 +11,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.util.yoga.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -64,10 +65,8 @@ public final class HolyGrail {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
-        long        monitor = glfwGetPrimaryMonitor();
-        GLFWVidMode vidmode = glfwGetVideoMode(monitor);
-
         // Center window
+        GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(glfwGetPrimaryMonitor()));
         glfwSetWindowPos(
             window,
             (vidmode.width() - width) / 2,
@@ -266,7 +265,7 @@ public final class HolyGrail {
         }
 
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     public static void main(String[] args) {
