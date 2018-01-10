@@ -12,7 +12,7 @@
     <!-- *********************************** -->
     <property name="testng" value="6.11"/>
     <property name="jcommander" value="1.72"/>
-    <property name="joml" value="1.9.6"/>
+    <property name="joml" value="1.9.7"/>
     <property name="kotlinc-version" value="1.2.10"/>
     <property name="kotlinc-build" value="1.2.10"/>
     <!-- *********************************** -->
