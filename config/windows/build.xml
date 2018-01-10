@@ -146,8 +146,13 @@ EXPORTS
         <!-- LMDB -->
         <build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
             <beforeCompile>
+                <local name="VL32"/>
+                <condition property="VL32">
+                    <equals arg1="${build.arch}" arg2="x86"/>
+                </condition>
                 <compile dest="@{dest}" flags="/W0">
                     <arg value="/I${src.native}\util\lmdb"/>
+                    <arg value="/DMDB_VL32=1" if:set="VL32"/>
                     <fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
                 </compile>
             </beforeCompile>
