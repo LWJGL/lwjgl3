@@ -306,6 +306,14 @@ val VREvent_DualAnalog_t = struct(OPENVR_PACKAGE, "VREventDualAnalog", nativeNam
 	EDualAnalogWhich.member("which", "")
 }
 
+val VREvent_HapticVibration_t = struct(OPENVR_PACKAGE, "VREvent_HapticVibration", nativeName = "VREvent_HapticVibration_t", mutable = false) {
+    uint64_t.member("containerHandle", "property container handle of the device with the haptic component")
+	uint64_t.member("componentHandle", "which haptic component needs to vibrate")
+	float.member("fDurationSeconds", "")
+	float.member("fFrequency", "")
+	float.member("fAmplitude", "")
+}
+
 val VREvent_Data_t = union(OPENVR_PACKAGE, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
     VREvent_Reserved_t.member("reserved", "")
     VREvent_Controller_t.member("controller", "")
@@ -421,6 +429,26 @@ val VRTextureWithPose_t = struct(OPENVR_PACKAGE, "VRTextureWithPose", nativeName
     documentation = "Allows specifying pose used to render provided scene texture (if different from value returned by #WaitGetPoses())."
 
 	HmdMatrix34_t.member("mDeviceToAbsoluteTracking", "actual pose used to render scene textures")
+}
+
+val VRTextureDepthInfo_t = struct(OPENVR_PACKAGE, "VRTextureDepthInfo", nativeName = "VRTextureDepthInfo_t") {
+    documentation = ""
+
+	opaque_p.member("handle", "")
+	HmdMatrix44_t.member("mProjection", "")
+	HmdVector2_t.member("vRange", "")
+}
+
+val VRTextureWithDepth_t = struct(OPENVR_PACKAGE, "VRTextureWithDepth", nativeName = "VRTextureWithDepth_t") {
+    documentation = ""
+
+	VRTextureDepthInfo_t.member("depth", "")
+}
+
+val VRTextureWithPoseAndDepth_t = struct(OPENVR_PACKAGE, "VRTextureWithPoseAndDepth", nativeName = "VRTextureWithPoseAndDepth_t") {
+    documentation = ""
+
+	VRTextureDepthInfo_t.member("depth", "")
 }
 
 val VRVulkanTextureData_t = struct(OPENVR_PACKAGE, "VRVulkanTextureData", nativeName = "VRVulkanTextureData_t") {

@@ -175,7 +175,13 @@ typedef struct HiddenAreaMesh_t
         enabled.
 
         <h3>macOS Only</h3>
-        Returns an {@code id<MTLDevice>} that should be used by the application.
+        For #ETextureType_TextureType_IOSurface returns the {@code id<MTLDevice>} that should be used by the application.
+
+        On 10.13+ for #ETextureType_TextureType_OpenGL returns the {@code registryId} of the renderer which should be used by the application. See Apple
+        Technical Q&A QA1168 for information on enumerating GL Renderers, and the new {@code kCGLRPRegistryIDLow} and {@code kCGLRPRegistryIDHigh}
+        {@code CGLRendererProperty} values in the 10.13 SDK.
+
+        Pre 10.13 for #ETextureType_TextureType_OpenGL returns 0, as there is no dependable way to correlate the HMDs {@code MTLDevice} with a GL Renderer.
         """,
 
         Check(1)..uint64_t_p.OUT("pnDevice", ""),
@@ -374,6 +380,24 @@ typedef struct HiddenAreaMesh_t
     )
 
     uint32_t(
+        "GetArrayTrackedDeviceProperty",
+        """
+        Returns an array of one type of property.
+
+        If the device index is not valid or the property is not a single value or an array of the specified type, this function will return 0. Otherwise it
+        returns the number of bytes necessary to hold the array of properties. If {@code unBufferSize} is greater than the returned size and {@code pBuffer} is
+        non-#NULL, {@code pBuffer} is filled with the contents of array of properties.
+        """,
+
+        GetTrackedDeviceProperty["unDeviceIndex"],
+        GetTrackedDeviceProperty["prop"],
+        PropertyTypeTag_t.IN("propType", ""),
+        nullable..void_p.OUT("pBuffer", ""),
+        AutoSize("pBuffer")..uint32_t.IN("unBufferSize", ""),
+        GetTrackedDeviceProperty["pError"]
+    )
+
+    uint32_t(
         "GetStringTrackedDeviceProperty",
         """
         Returns a string property. If the device index is not valid or the property is not a string type this function will return 0. Otherwise it returns the
@@ -495,24 +519,35 @@ typedef struct HiddenAreaMesh_t
     )
 
     bool(
-        "CaptureInputFocus",
+        "IsInputAvailable",
         """
-        Tells OpenVR that this process wants exclusive access to controller button states and button events. Other apps will be notified that they have lost
-        input focus with a #EVREventType_VREvent_InputFocusCaptured event. Returns false if input focus could not be captured for some reason.
-        """
-    )
-
-    void(
-        "ReleaseInputFocus",
-        """
-        Tells OpenVR that this process no longer wants exclusive access to button states and button events. Other apps will be notified that input focus has
-        been released with a #EVREventType_VREvent_InputFocusReleased event.
+        Returns true if this application is receiving input from the system. This would return false if system-related functionality is consuming the input
+        stream.
         """
     )
 
     bool(
-        "IsInputFocusCapturedByAnotherProcess",
-        "Returns true if input focus is captured by another process."
+        "IsSteamVRDrawingControllers",
+        """
+        Returns true if SteamVR is drawing controllers on top of the application. Applications should consider not drawing anything attached to the user's
+        hands in this case.
+        """
+    )
+
+    bool(
+        "ShouldApplicationPause",
+        """
+        Returns true if the user has put SteamVR into a mode that is distracting them from the application. For applications where this is appropriate, the
+        application should pause ongoing activity.
+        """
+    )
+
+    bool(
+        "ShouldApplicationReduceRenderingWork",
+        """
+        Returns true if SteamVR is doing significant rendering work and the game should do what it can to reduce its own workload. One common way to do this is
+        to reduce the size of the render target provided for each eye.
+        """
     )
 
     uint32_t(

@@ -512,20 +512,6 @@ val VROverlay = "VROverlay".nativeClass(
     )
 
     bool(
-        "HandleControllerOverlayInteractionAsMouse",
-        """
-        Processes mouse input from the specified controller as though it were a mouse pointed at a compositor overlay with the specified settings. The
-        controller is treated like a laser pointer on the -z axis. The point where the laser pointer would intersect with the overlay is the mouse position,
-        the trigger is left mouse, and the track pad is right mouse.
-        """,
-
-        VROverlayHandle_t.IN("ulOverlayHandle", ""),
-        TrackedDeviceIndex_t.IN("unControllerDeviceIndex", ""),
-
-        returnDoc = "true if the controller is pointed at the overlay and an event was generated."
-    )
-
-    bool(
         "IsHoverTargetOverlay",
         """
         Returns true if the specified overlay is the hover target. An overlay is the hover target when it is the last overlay "moused over" by the virtual
