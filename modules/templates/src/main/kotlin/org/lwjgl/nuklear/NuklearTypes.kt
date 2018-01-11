@@ -87,6 +87,13 @@ val nk_color = struct(NUKLEAR_PACKAGE, "NkColor", nativeName = "struct nk_color"
     nk_byte.member("a", "")
 }
 
+val nk_colorf = struct(NUKLEAR_PACKAGE, "NkColorf", nativeName = "struct nk_colorf") {
+    float.member("r", "")
+    float.member("g", "")
+    float.member("b", "")
+    float.member("a", "")
+}
+
 val nk_vec2 = struct(NUKLEAR_PACKAGE, "NkVec2", nativeName = "struct nk_vec2") {
     float.member("x", "")
     float.member("y", "")

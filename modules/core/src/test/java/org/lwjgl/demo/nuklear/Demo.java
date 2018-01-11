@@ -22,15 +22,17 @@ class Demo {
     private static final int EASY = 0;
     private static final int HARD = 1;
 
-    NkColor background;
+    NkColorf background = NkColorf.create()
+        .r(0.10f)
+        .g(0.18f)
+        .b(0.24f)
+        .a(1.0f);
 
     private int op = EASY;
 
     private IntBuffer compression = BufferUtils.createIntBuffer(1).put(0, 20);
 
     Demo() {
-        background = NkColor.create();
-        nk_rgb(28, 48, 62, background);
     }
 
     void layout(NkContext ctx, int x, int y) {
@@ -62,14 +64,14 @@ class Demo {
                 nk_layout_row_dynamic(ctx, 20, 1);
                 nk_label(ctx, "background:", NK_TEXT_LEFT);
                 nk_layout_row_dynamic(ctx, 25, 1);
-                if (nk_combo_begin_color(ctx, background, NkVec2.mallocStack(stack).set(nk_widget_width(ctx), 400))) {
+                if (nk_combo_begin_color(ctx, nk_rgb_cf(background, NkColor.mallocStack(stack)), NkVec2.mallocStack(stack).set(nk_widget_width(ctx), 400))) {
                     nk_layout_row_dynamic(ctx, 120, 1);
                     nk_color_picker(ctx, background, NK_RGBA);
                     nk_layout_row_dynamic(ctx, 25, 1);
-                    background.r((byte)(nk_propertyi(ctx, "#R:", 0, background.r() & 0xFF, 255, 1, 1) & 0xFF));
-                    background.g((byte)(nk_propertyi(ctx, "#G:", 0, background.g() & 0xFF, 255, 1, 1) & 0xFF));
-                    background.b((byte)(nk_propertyi(ctx, "#B:", 0, background.b() & 0xFF, 255, 1, 1) & 0xFF));
-                    background.a((byte)(nk_propertyi(ctx, "#A:", 0, background.a() & 0xFF, 255, 1, 1) & 0xFF));
+                    background.r(nk_propertyf(ctx, "#R:", 0, background.r(), 1.0f, 0.01f, 0.005f));
+                    background.g(nk_propertyf(ctx, "#G:", 0, background.g(), 1.0f, 0.01f, 0.005f));
+                    background.b(nk_propertyf(ctx, "#B:", 0, background.b(), 1.0f, 0.01f, 0.005f));
+                    background.a(nk_propertyf(ctx, "#A:", 0, background.a(), 1.0f, 0.01f, 0.005f));
                     nk_combo_end(ctx);
                 }
             }

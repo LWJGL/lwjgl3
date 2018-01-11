@@ -219,7 +219,7 @@ public class GLFWDemo {
                         stbtt_GetCodepointHMetrics(fontInfo, unicode.get(0), advance, null);
                         text_width += advance.get(0) * scale;
 
-						/* offset next glyph */
+                        /* offset next glyph */
                         glyph_len = nnk_utf_decode(text + text_len, memAddress(unicode), len - text_len);
                         text_len += glyph_len;
                     }
@@ -261,25 +261,23 @@ public class GLFWDemo {
             calc.layout(ctx, 300, 50);
 
             try (MemoryStack stack = stackPush()) {
-                FloatBuffer bg = stack.mallocFloat(4);
-                nk_color_fv(bg, demo.background);
-
                 IntBuffer width  = stack.mallocInt(1);
                 IntBuffer height = stack.mallocInt(1);
 
                 glfwGetWindowSize(win, width, height);
                 glViewport(0, 0, width.get(0), height.get(0));
 
-                glClearColor(bg.get(0), bg.get(1), bg.get(2), bg.get(3));
+                NkColorf bg = demo.background;
+                glClearColor(bg.r(), bg.g(), bg.b(), bg.a());
             }
             glClear(GL_COLOR_BUFFER_BIT);
-			/*
-			 * IMPORTANT: `nk_glfw_render` modifies some global OpenGL state
-			 * with blending, scissor, face culling, depth test and viewport and
-			 * defaults everything back into a default state.
-			 * Make sure to either a.) save and restore or b.) reset your own state after
-			 * rendering the UI.
-			 */
+            /*
+             * IMPORTANT: `nk_glfw_render` modifies some global OpenGL state
+             * with blending, scissor, face culling, depth test and viewport and
+             * defaults everything back into a default state.
+             * Make sure to either a.) save and restore or b.) reset your own state after
+             * rendering the UI.
+             */
             render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
             glfwSwapBuffers(win);
         }

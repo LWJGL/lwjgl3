@@ -1840,12 +1840,12 @@ nk_style_pop_vec2(ctx);""")}
             intb.IN("modifyable", "")
         )
 
-        nk_color(
+        nk_colorf(
             "color_picker",
             "",
 
             ctx,
-            ReturnParam..nk_color.IN("color", ""),
+            ReturnParam..nk_colorf.IN("color", ""),
             nk_color_format.IN("fmt", "", ColorFormats)
         )
 
@@ -1854,7 +1854,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_color.p.INOUT("color", ""),
+            nk_colorf.p.INOUT("color", ""),
             nk_color_format.IN("fmt", "", ColorFormats)
         )
 
@@ -2885,6 +2885,13 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_color(
+            "rgb_cf",
+            "",
+
+            nk_colorf.IN("c", "")
+        )
+
+        nk_color(
             "rgb_hex",
             "",
 
@@ -2940,10 +2947,53 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_color(
+            "rgba_cf",
+            "",
+
+            nk_colorf.IN("c", "")
+        )
+
+        nk_color(
             "rgba_hex",
             "",
 
             Check(8)..const..charASCII_p.IN("rgba", "")
+        )
+
+        nk_colorf(
+            "hsva_colorf",
+            "",
+
+            float.IN("h", ""),
+            float.IN("s", ""),
+            float.IN("v", ""),
+            float.IN("a", "")
+        )
+
+        nk_colorf(
+            "hsva_colorfv",
+            "",
+
+            Check(4)..float_p.IN("c", "")
+        )
+
+        void(
+            "colorf_hsva_f",
+            "",
+
+            Check(1)..float_p.OUT("out_h", ""),
+            Check(1)..float_p.OUT("out_s", ""),
+            Check(1)..float_p.OUT("out_v", ""),
+            Check(1)..float_p.OUT("out_a", ""),
+            nk_colorf.IN("in", "")
+        )
+
+        void(
+            "colorf_hsva_fv",
+            "",
+
+            Check(4)..float_p.OUT("hsva", ""),
+            nk_colorf.IN("in", "")
         )
 
         nk_color(
@@ -3042,6 +3092,13 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..float_p.OUT("rgba_out", ""),
+            nk_color.IN("color", "")
+        )
+
+        nk_colorf(
+            "color_cf",
+            "",
+
             nk_color.IN("color", "")
         )
 
