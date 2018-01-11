@@ -249,6 +249,7 @@ public final class Events {
         glfwSetWindowFocusCallback(window, (windowHnd, focused) -> printEvent(focused ? "gained focus" : "lost focus", windowHnd));
         glfwSetWindowIconifyCallback(window, (windowHnd, iconified) -> printEvent(iconified ? "iconified" : "restored", windowHnd));
         glfwSetWindowMaximizeCallback(window, (windowHnd, maximized) -> printEvent(maximized ? "maximized" : "restored", windowHnd));
+        glfwSetWindowContentScaleCallback(window, (windowHnd, xscale, yscale) -> printEvent("content scale changed to %d x %d", windowHnd, xscale, yscale));
 
         glfwSetFramebufferSizeCallback(window, (windowHnd, width, height) -> printEvent("framebuffer resized to %d x %d", windowHnd, width, height));
 

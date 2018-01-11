@@ -467,6 +467,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             {@code WindowHint}: specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
             alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations.
             """,
+            0x0002000A),
+        "HOVERED".enum(
+            "{@code GetWindowAttrib}: indicates whether the cursor is currently directly over the client area of the window, with no other windows between.",
             0x0002000A)
     ).javaDocLinks
 
@@ -1248,7 +1251,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
             "hint",
             "the window hint to set",
             """
-            ${WindowHints.replace("#ICONIFIED ", "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints #COCOA_RETINA_FRAMEBUFFER
+            ${WindowHints.replace(" ?#(?:ICONIFIED|HOVERED)".toRegex(), "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints #COCOA_RETINA_FRAMEBUFFER
             #COCOA_GRAPHICS_SWITCHING
             """
         ),
@@ -2149,6 +2152,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         returnDoc = CallbackReturnDoc,
         since = "version 3.0"
+    )
+
+    GLFWwindowcontentscalefun(
+        "SetWindowContentScaleCallback",
+        """
+        Sets the window content scale callback for the specified window, which is called when the content scale of the specified window changes.
+
+        This function must only be called from the main thread.
+        """,
+
+        CALLBACK_WINDOW,
+        nullable..GLFWwindowcontentscalefun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
+
+        returnDoc = CallbackReturnDoc,
+        since = "version 3.3"
     )
 
     Code(
