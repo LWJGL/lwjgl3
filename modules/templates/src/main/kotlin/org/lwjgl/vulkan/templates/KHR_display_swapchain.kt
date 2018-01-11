@@ -88,7 +88,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
         Create multiple swapchains that share presentable images.
 
         <h5>C Specification</h5>
-        When the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a> extension is enabled, multiple swapchains that share presentable images are created by calling:
+        When the {@code VK_KHR_display_swapchain} extension is enabled, multiple swapchains that share presentable images are created by calling:
 
         <code><pre>
 ￿VkResult vkCreateSharedSwapchainsKHR(

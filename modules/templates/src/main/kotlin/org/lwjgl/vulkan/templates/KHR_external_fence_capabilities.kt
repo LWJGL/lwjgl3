@@ -49,7 +49,7 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
                 <li>James Jones, NVIDIA</li>
                 <li>Jeff Juliano, NVIDIA</li>
                 <li>Cass Everitt, Oculus</li>
-                <li>Contributors to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_semaphore_capabilities">VK_KHR_external_semaphore_capablities</a></li>
+                <li>Contributors to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_semaphore_capablities">VK_KHR_external_semaphore_capablities</a></li>
             </ul></dd>
         </dl>
         """
