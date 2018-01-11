@@ -29,10 +29,8 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
     internal fun register(function: Func) = signatures.put(Signature(function), Unit)
     internal fun registerArray(function: Func) = signaturesArray.put(SignatureArray(function), Unit)
 
-    override fun PrintWriter.generateJava() {
-        print(HEADER)
-        println("package $packageName;\n")
-        print(
+    init {
+        documentation =
             """
             This class contains native methods that can be used to call dynamically loaded functions. It is used internally by the LWJGL bindings, but can also
             be used to call other dynamically loaded functions. Not all possible signatures are available, only those needed by the LWJGL bindings. To call a
@@ -54,12 +52,16 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
                 {@code J} parameters represent 64-bit integer values. {@code P} parameters represent pointer addresses. A pointer address is a 32-bit value on
                 32-bit architectures and a 64-bit value on 64-bit architectures.
                 """,
-                "the return value <a href=\"http://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html#type_signatures\">JNI type signature</a>"
+                """
+                the return value <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html\#type_signatures">JNI type signature</a>
+                """
             )}
-            """.toJavaDoc(indentation = "")
-        )
-        print("""
-public final class JNI {
+            """
+    }
+
+    override fun PrintWriter.generateJava() {
+        generateJavaPreamble()
+        print("""public final class JNI {
 
     static {
         Library.initialize();

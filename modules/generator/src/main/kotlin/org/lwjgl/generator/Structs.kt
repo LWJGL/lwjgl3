@@ -372,7 +372,7 @@ $indent}"""
         }
 
         if (builder.isNotEmpty())
-            println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
+            println(processDocumentation(builder.toString()).toJavaDoc(indentation = "", see = see, since = since))
     }
 
     private val nativeNameQualified get() = (if (union) "union " else "struct ").let { type ->

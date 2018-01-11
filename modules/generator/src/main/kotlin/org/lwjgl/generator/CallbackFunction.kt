@@ -63,7 +63,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 
         val documentation = super.documentation
         if (documentation != null)
-            println(processDocumentation(documentation.replace("Instances of this interface", "Instances of this class")).toJavaDoc(indentation = ""))
+            println(processDocumentation(documentation
+                .replace("Instances of this interface", "Instances of this class"))
+                .toJavaDoc(indentation = "", see = see, since = since))
         print("""${access.modifier}abstract class $className extends Callback implements ${className}I {
 
     /** Creates a {@code $className} instance from the specified function pointer. */
@@ -132,7 +134,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 """)
         val documentation = super.documentation
         if (documentation != null)
-            print(processDocumentation(documentation).toJavaDoc(indentation = ""))
+            print(processDocumentation(documentation).toJavaDoc(indentation = "", see = see, since = since))
         print("""
 @FunctionalInterface
 @NativeType("$nativeType")

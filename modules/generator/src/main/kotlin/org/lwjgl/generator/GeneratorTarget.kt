@@ -357,7 +357,7 @@ fun packageInfo(
         override fun PrintWriter.generateJava() {
             print(HEADER)
             println()
-            println(processDocumentation(documentation, forcePackage = true).toJavaDoc(indentation = ""))
+            println(processDocumentation(documentation, forcePackage = true).toJavaDoc(indentation = "", see = see, since = since))
             println("package $packageName;\n")
         }
     }
