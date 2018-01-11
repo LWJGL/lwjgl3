@@ -104,6 +104,13 @@ val YGBaselineFunc = "YGBaselineFunc".callback(
     float.IN("height", "")
 )
 
+val YGDirtiedFunc = "YGDirtiedFunc".callback(
+    YOGA_PACKAGE, void, "YGDirtiedFunc",
+    "",
+
+    YGNodeRef.IN("node", "")
+)
+
 val YGPrintFunc = "YGPrintFunc".callback(
     YOGA_PACKAGE, void, "YGPrintFunc",
     "",
@@ -197,13 +204,14 @@ val YGStyle = struct(YOGA_PACKAGE, "YGStyle", mutable = false) {
 
 val YGNodeListRef = "YGNodeListRef".opaque_p
 val YGNode_p = struct(YOGA_PACKAGE, "YGNode").p
-val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
+val YGNode = struct(YOGA_PACKAGE, "YGNode") {
     nullable..opaque_p.member("context", "")
     nullable..YGPrintFunc.member("print", "")
     bool.member("hasNewLayout", "")
     YGNodeType.member("nodeType", "")
     nullable..YGMeasureFunc.member("measure", "")
     nullable..YGBaselineFunc.member("baseline", "")
+    nullable..YGDirtiedFunc.member("dirtied", "")
 
     YGStyle.member("style", "")
     YGLayout.member("layout", "")
