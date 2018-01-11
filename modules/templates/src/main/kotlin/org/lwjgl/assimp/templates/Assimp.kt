@@ -2676,6 +2676,17 @@ x1""")}
             Use #AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY to control this.
             """,
             0x8000000
+        ),
+
+        "Process_EmbedTextures".enum(
+            """
+            A postprocessing step to embed of textures.
+
+            This will remove external data dependencies for textures. If a texture's file does not exist at the specified path (due, for instance, to an
+            absolute path generated on another system), it will check if a file with the same name exists at the root folder of the imported model. And if so,
+            it uses that.
+            """,
+            0x10000000
         )
     )
 
@@ -2884,6 +2895,13 @@ x1""")}
         "Returns the repository revision of the Assimp runtime.",
 
         returnDoc = "SVN Repository revision number of the Assimp runtime the application was linked/built against."
+    )
+
+    const..charUTF8_p(
+        "GetBranchName",
+        "Returns the branch name of the Assimp runtime.",
+
+        returnDoc = "the current branch name"
     )
 
     unsigned_int(
