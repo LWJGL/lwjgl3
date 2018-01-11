@@ -131,12 +131,17 @@ val bgfx_encoder_stats_t = struct(BGFX_PACKAGE, "BGFXEncoderStats", nativeName =
 }
 
 val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
-    documentation = "Renderer statistics data."
+    documentation =
+        """
+        Renderer statistics data.
+
+        All time values are high-resolution timestamps, while time frequencies define timestamps-per-second for that hardware.
+        """
 
     int64_t.member("cpuTimeFrame", "CPU time between two #frame() calls")
     int64_t.member("cpuTimeBegin", "Render thread CPU submit begin time")
     int64_t.member("cpuTimeEnd", "Render thread CPU submit end time")
-    int64_t.member("cpuTimerFreq", "CPU timer frequency")
+    int64_t.member("cpuTimerFreq", "CPU timer frequency. Timestamps-per-second.")
 
     int64_t.member("gpuTimeBegin", "GPU frame begin time")
     int64_t.member("gpuTimeEnd", "GPU frame end time")
@@ -162,7 +167,7 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint16_t.member("numVertexDecls", "number of used vertex declarations")
 
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
-    int64_t.member("gpuMemoryUsed", "amount of GPU memory used")
+    int64_t.member("gpuMemoryUsed", "amount of GPU memory used by the application")
 
     uint16_t.member("width", "backbuffer width in pixels")
     uint16_t.member("height", "backbuffer height in pixels")
@@ -170,10 +175,10 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     uint16_t.member("textHeight", "debug text height in characters")
 
     AutoSize("viewStats")..uint16_t.member("numViews", "number of view stats")
-    bgfx_view_stats_t.p.buffer("viewStats", "view stats")
+    bgfx_view_stats_t.p.buffer("viewStats", "array of view stats")
 
     AutoSize("encoderStats")..uint16_t.member("numEncoder", "number of encoders used during frame")
-    bgfx_encoder_stats_t.p.buffer("encoderStats", "encoder stats")
+    bgfx_encoder_stats_t.p.buffer("encoderStats", "array of encoder stats")
 }.p
 
 val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
@@ -240,7 +245,7 @@ val bgfx_uniform_info_t_p = struct(BGFX_PACKAGE, "BGFXUniformInfo", nativeName =
 }.p
 
 val bgfx_attachment_t_p = struct(BGFX_PACKAGE, "BGFXAttachment", nativeName = "bgfx_attachment_t") {
-    documentation = "Frame buffer texture attachemnt info."
+    documentation = "Frame buffer texture attachment info."
 
     bgfx_texture_handle_t.member("handle", "texture handle")
     uint16_t.member("mip", "mip level")
@@ -288,7 +293,7 @@ val bgfx_caps_t_p = struct(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t",
 
     uint16_t.member("vendorId", "selected GPU vendor PCI id").links("PCI_ID_\\w+")
     uint16_t.member("deviceId", "selected GPU device id")
-    bool.member("homogeneousDepth", "true when NDC depth is in [-1, 1] range")
+    bool.member("homogeneousDepth", "true when NDC depth is in [-1, 1] range, otherwise its [0, 1]")
     bool.member("originBottomLeft", "true when NDC origin is at bottom left")
     AutoSize("gpu")..uint8_t.member("numGPUs", "number of enumerated GPUs")
 
@@ -305,7 +310,7 @@ val bgfx_callback_interface_t_p = struct(BGFX_PACKAGE, "BGFXCallbackInterface", 
 val bgfx_fatal_t = "bgfx_fatal_t".enumType
 val fatal = "fatal".callback(
     BGFX_PACKAGE, void, "BGFXFatalCallback",
-    "Will be called when a fatal error occurs.",
+    "This callback is called on unrecoverable errors.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
     bgfx_fatal_t.IN("_code", "the error code"),
@@ -394,7 +399,7 @@ val cache_read_size = "cache_read_size".callback(
 
     returnDoc = "number of bytes to read"
 ) {
-    documentation = "Returns size of cached item. Returns 0 if no cached item was found."
+    documentation = "Returns the size of a cached item. Returns 0 if no cached item was found."
 }
 
 val cache_read = "cache_read".callback(
@@ -431,17 +436,17 @@ val screen_shot = "screen_shot".callback(
     charASCII_p.IN("_filePath", "file path"),
     uint32_t.IN("_width", "image width"),
     uint32_t.IN("_height", "image height"),
-    uint32_t.IN("_pitch", "number of bytes to skip to next line"),
+    uint32_t.IN("_pitch", "number of bytes to skip between the start of each horizontal line of the image"),
     const..void_p.IN("_data", "image data"),
     uint32_t.IN("_size", "image size"),
-    bool.IN("_yflip", "if true image origin is bottom left")
+    bool.IN("_yflip", "if true, image origin is bottom left")
 ) {
     documentation = "Screenshot captured. Screenshot format is always 4-byte BGRA."
 }
 
 val capture_begin = "capture_begin".callback(
     BGFX_PACKAGE, void, "BGFXCaptureBeginCallback",
-    "Will be called when capture begins.",
+    "Will be called when video capture begins.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
     uint32_t.IN("_width", "image width"),
@@ -450,16 +455,16 @@ val capture_begin = "capture_begin".callback(
     bgfx_texture_format_t.IN("_format", "texture format"),
     bool.IN("_yflip", "if true image origin is bottom left")
 ) {
-    documentation = "Called when capture begins."
+    documentation = "Called when video capture begins."
 }
 
 val capture_end = "capture_end".callback(
     BGFX_PACKAGE, void, "BGFXCaptureEndCallback",
-    "Will be called when capture ends.",
+    "Will be called when video capture ends.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface")
 ) {
-    documentation = "Called when capture ends."
+    documentation = "Called when video capture ends."
 }
 
 val capture_frame = "capture_frame".callback(

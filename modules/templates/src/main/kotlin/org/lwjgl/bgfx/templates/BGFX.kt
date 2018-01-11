@@ -223,14 +223,14 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
         "DEBUG_WIREFRAME".enum("Wireframe rendering. All rendering primitives will be rendered as lines.", 0x00000001),
         "DEBUG_IFH".enum(
             """
-            Infinitely fast hardware. When this flag is set all rendering calls will be skipped. It's useful when profiling to quickly assess bottleneck
-            between CPU and GPU.
+            Infinitely fast hardware. When this flag is set all rendering calls will be skipped. This is useful when profiling to quickly assess potential
+            bottlenecks between CPU and GPU.
             """,
             0x00000002
         ),
         "DEBUG_STATS".enum("Display internal statistics.", 0x00000004),
         "DEBUG_TEXT".enum("Display debug text.", 0x00000008),
-        "DEBUG_PROFILER".enum("Enabled profiler.", 0x00000010)
+        "DEBUG_PROFILER".enum("Enable profiler.", 0x00000010)
     ).javaDocLinks
 
     val BufferFlags = ShortConstant(
@@ -933,11 +933,18 @@ RGBA16S
         "init",
         "Initializes bgfx library.",
 
-        bgfx_renderer_type_t.IN("_type", "select rendering backend. When set to #RENDERER_TYPE_COUNT, default rendering backend will be selected.", RendererType),
+        bgfx_renderer_type_t.IN(
+            "_type",
+            "select rendering backend. When set to #RENDERER_TYPE_COUNT, a default rendering backend will be selected appropriate to the platform.",
+            RendererType
+        ),
         MapToInt..uint16_t.IN("_vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device."),
         MapToInt..uint16_t.IN("_deviceId", "device id. If set to 0 it will select first device, or device with matching id."),
         nullable..bgfx_callback_interface_t_p.IN("_callback", "provide application specific callback interface"),
-        nullable..bgfx_allocator_interface_t_p.IN("_allocator", "custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."),
+        nullable..bgfx_allocator_interface_t_p.IN(
+            "_allocator",
+            "custom allocator. When custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes custom allocator is thread safe."
+        ),
 
         returnDoc = "`true` if initialization was successful"
     )
@@ -1032,7 +1039,7 @@ RGBA16S
     OffHeapOnly..const..bgfx_memory_t_p(
         "make_ref",
         """
-        Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
+        Makes reference to data to pass to bgfx. Unlike #alloc(), this call doesn't allocate memory for data. It just copies the {@code _data} pointer.
 
         Data passed must be available for at least 2 #frame() calls.
         """,
@@ -1044,7 +1051,7 @@ RGBA16S
     OffHeapOnly..const..bgfx_memory_t_p(
         "make_ref_release",
         """
-        Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
+        Makes reference to data to pass to bgfx. Unlike #alloc(), this call doesn't allocate memory for data. It just copies the {@code _data} pointer.
 
         The {@code bgfx_release_fn_t} function pointer will release this memory after it's consumed. The {@code bgfx_release_fn_t} function must be able to be
         called from any thread.
@@ -1052,7 +1059,7 @@ RGBA16S
 
         MultiTypeAll..const..void_p.IN("_data", "the data to reference"),
         AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to reference"),
-        nullable..bgfx_release_fn_t.IN("_releaseFn", "the release function"),
+        bgfx_release_fn_t.IN("_releaseFn", "the release function"),
         nullable..opaque_p.IN("_userData", "user data to pass to {@code _releaseFn}")
     )
 
@@ -1317,7 +1324,7 @@ RGBA16S
     uint16_t(
         "get_shader_uniforms",
         """
-        Returns num of uniforms, and uniform handles used inside shader.
+        Returns the number of uniforms and uniform handles used inside shader.
 
         Only non-predefined uniforms are returned.
         """,
@@ -1339,7 +1346,7 @@ RGBA16S
 
     void(
         "destroy_shader",
-        "Destroys shader. Once program is created with shader it is safe to destroy shader.",
+        "Destroys shader. Once a shader program is created with {@code _handle}, it is safe to destroy that shader.",
 
         bgfx_shader_handle_t.IN("_handle", "the shader  to destroy")
     )
@@ -1678,7 +1685,7 @@ RGBA16S
 
         Predefined uniforms (declared in `bgfx_shader.sh`):
         ${ul(
-            "{@code u_viewRect vec4(x, y, width, height)} - view rectangle for current view.",
+            "{@code u_viewRect vec4(x, y, width, height)} - view rectangle for current view, in pixels.",
             "{@code u_viewTexel vec4(1.0/width, 1.0/height, undef, undef)} - inverse width and height",
             "{@code u_view mat4} - view matrix",
             "{@code u_invView mat4} - inverted view matrix",
@@ -2262,7 +2269,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         """
         Blits texture region between two textures.
 
-        Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
+        Destination texture must be created with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
         """,
 
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
@@ -2273,8 +2280,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t.IN(
             "_dstZ",
             """
-            if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
-            this argument represent destination texture Z position.
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
+            this argument represents destination texture Z position.
             """
         ),
         bgfx_texture_handle_t.IN("_src", "source texture handle"),
@@ -2284,13 +2291,13 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t.IN(
             "_srcZ",
             """
-            if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
-            this argument represent destination texture Z position.
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
+            this argument represents destination texture Z position.
             """
         ),
         MapToInt..uint16_t.IN("_width", "width of region"),
         MapToInt..uint16_t.IN("_height", "height of region"),
-        MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represent depth of region, otherwise is unused")
+        MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represents depth of region, otherwise it's unused")
     )
 
     void(
@@ -2351,11 +2358,11 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     uint16_t(
         "encoder_set_scissor",
-        "Sets scissor for draw primitive. For scissor for all primitives in view see #set_view_scissor().",
+        "Sets scissor for draw primitive. To scissor for all primitives in view see #set_view_scissor().",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
-        MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
+        MapToInt..uint16_t.IN("_x", "position x from the left side of the window"),
+        MapToInt..uint16_t.IN("_y", "position y from the top side of the window"),
         MapToInt..uint16_t.IN("_width", "width of scissor region"),
         MapToInt..uint16_t.IN("_height", "height of scissor region"),
 
@@ -2367,12 +2374,12 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Sets scissor from cache for draw primitive.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
-        MapToInt..uint16_t.IN("_cache", "index in scissor cache. Passing {@code UINT16_MAX} unsets primitive scissor and primitive will use view scissor instead.")
+        MapToInt..uint16_t.IN("_cache", "index in scissor cache. Pass {@code UINT16_MAX} to have primitive use view scissor instead.")
     )
 
     uint32_t(
         "encoder_set_transform",
-        "Sets model matrix for draw primitive. If it is not called model will be rendered with identity model matrix.",
+        "Sets model matrix for draw primitive. If it is not called, the model will be rendered with identity model matrix.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
         MultiType(
@@ -2688,7 +2695,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         """
         Blits texture region between two textures.
 
-        Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
+        Destination texture must be created with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
         """,
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
@@ -2700,8 +2707,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t.IN(
             "_dstZ",
             """
-            if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
-            this argument represent destination texture Z position.
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
+            this argument represents destination texture Z position.
             """
         ),
         bgfx_texture_handle_t.IN("_src", "source texture handle"),
@@ -2711,13 +2718,13 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint16_t.IN(
             "_srcZ",
             """
-            if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+            if texture is 2D this argument should be 0. If destination texture is cube this argument represents destination texture cube face. For 3D texture
             this argument represent destination texture Z position.
             """
         ),
         MapToInt..uint16_t.IN("_width", "width of region"),
         MapToInt..uint16_t.IN("_height", "height of region"),
-        MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represent depth of region, otherwise is unused")
+        MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represents depth of region, otherwise it's unused")
     )
 
     void(
