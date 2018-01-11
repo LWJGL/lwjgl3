@@ -29,7 +29,7 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_fence_capabilities">VK_KHR_external_fence_capabilities</a></li>
+                <li>Requires {@link KHRExternalFenceCapabilities VK_KHR_external_fence_capabilities}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -49,7 +49,7 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
                 <li>James Jones, NVIDIA</li>
                 <li>Jeff Juliano, NVIDIA</li>
                 <li>Cass Everitt, Oculus</li>
-                <li>Contributors to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_semaphore">VK_KHR_external_semaphore</a></li>
+                <li>Contributors to {@link KHRExternalSemaphore VK_KHR_external_semaphore}</li>
             </ul></dd>
         </dl>
         """

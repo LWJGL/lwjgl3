@@ -29,10 +29,10 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_maintenance1">VK_KHR_maintenance1</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_bind_memory2">VK_KHR_bind_memory2</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_memory_requirements2">VK_KHR_get_memory_requirements2</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></li>
+                <li>Requires {@link KHRMaintenance1 VK_KHR_maintenance1}</li>
+                <li>Requires {@link KHRBindMemory2 VK_KHR_bind_memory2}</li>
+                <li>Requires {@link KHRGetMemoryRequirements2 VK_KHR_get_memory_requirements2}</li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -48,7 +48,7 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_debug_report">VK_EXT_debug_report</a></li>
+                <li>This extension interacts with {@link EXTDebugReport VK_EXT_debug_report}</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

@@ -120,7 +120,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_debug_report">VK_EXT_debug_report</a></li>
+                <li>Requires {@link EXTDebugReport VK_EXT_debug_report}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

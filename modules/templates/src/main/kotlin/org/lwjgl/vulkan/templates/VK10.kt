@@ -95,7 +95,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
             <li>#ERROR_NATIVE_WINDOW_IN_USE_KHR The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again.</li>
             <li>#ERROR_OUT_OF_DATE_KHR A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail. Applications <b>must</b> query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface.</li>
             <li>#ERROR_INCOMPATIBLE_DISPLAY_KHR The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image.</li>
-            <li>#ERROR_INVALID_SHADER_NV One or more shaders failed to compile or link. More details are reported back to the application via <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_debug_report">VK_EXT_debug_report</a> if enabled.</li>
+            <li>#ERROR_INVALID_SHADER_NV One or more shaders failed to compile or link. More details are reported back to the application via {@link EXTDebugReport VK_EXT_debug_report} if enabled.</li>
             <li>#ERROR_OUT_OF_POOL_MEMORY_KHR A pool memory allocation has failed. This <b>must</b> only be returned if no attempt to allocate host or device memory was made to accomodate the new allocation. If the failure was definitely due to fragmentation of the pool, #ERROR_FRAGMENTED_POOL <b>should</b> be returned instead.</li>
             <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR An external handle is not a valid handle of the specified type.</li>
         </ul>
@@ -1906,7 +1906,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
             <li>#SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT specifies that the mirrored repeat wrap mode will be used.</li>
             <li>#SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE specifies that the clamp to edge wrap mode will be used.</li>
             <li>#SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER specifies that the clamp to border wrap mode will be used.</li>
-            <li>#SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE specifies that the mirror clamp to edge wrap mode will be used. This is only valid if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_sampler_mirror_clamp_to_edge">VK_KHR_sampler_mirror_clamp_to_edge</a> extension is enabled.</li>
+            <li>#SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE specifies that the mirror clamp to edge wrap mode will be used. This is only valid if the {@link KHRSamplerMirrorClampToEdge VK_KHR_sampler_mirror_clamp_to_edge} extension is enabled.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -5435,7 +5435,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
         <h5>Description</h5>
         Once a shader module has been created, any entry points it contains <b>can</b> be used in pipeline shader stages as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#pipelines-compute">Compute Pipelines</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#pipelines-graphics">Graphics Pipelines</a>.
 
-        If the shader stage fails to compile #ERROR_INVALID_SHADER_NV will be generated and the compile log will be reported back to the application by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_debug_report">VK_EXT_debug_report</a> if enabled.
+        If the shader stage fails to compile #ERROR_INVALID_SHADER_NV will be generated and the compile log will be reported back to the application by {@link EXTDebugReport VK_EXT_debug_report} if enabled.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

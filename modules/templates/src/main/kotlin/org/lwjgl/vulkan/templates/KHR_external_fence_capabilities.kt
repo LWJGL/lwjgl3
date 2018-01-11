@@ -29,7 +29,7 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -49,7 +49,7 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
                 <li>James Jones, NVIDIA</li>
                 <li>Jeff Juliano, NVIDIA</li>
                 <li>Cass Everitt, Oculus</li>
-                <li>Contributors to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_external_semaphore_capablities">VK_KHR_external_semaphore_capablities</a></li>
+                <li>Contributors to {@link KHRExternalSemaphoreCapablities VK_KHR_external_semaphore_capablities}</li>
             </ul></dd>
         </dl>
         """

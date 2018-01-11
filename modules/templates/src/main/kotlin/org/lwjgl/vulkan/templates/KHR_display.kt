@@ -15,7 +15,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
         <h5>Examples</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The example code for the {@code VK_KHR_display} and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a> extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/blob/master/demos/cube.c).
+        The example code for the {@code VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/blob/master/demos/cube.c).
         </div>
 
         <dl>
@@ -34,7 +34,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_surface">VK_KHR_surface</a></li>
+                <li>Requires {@link KHRSurface VK_KHR_surface}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

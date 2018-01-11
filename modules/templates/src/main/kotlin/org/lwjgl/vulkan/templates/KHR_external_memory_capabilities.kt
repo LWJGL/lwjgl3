@@ -29,7 +29,7 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a></li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -46,9 +46,9 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>This extension is written against version 1.0 of the Vulkan API.</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_get_physical_device_properties2">VK_KHR_get_physical_device_properties2</a>.</li>
-                <li>Interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation</a>.</li>
-                <li>Interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_dedicated_allocation">VK_NV_dedicated_allocation</a>.</li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}.</li>
+                <li>Interacts with {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation}.</li>
+                <li>Interacts with {@link NVDedicatedAllocation VK_NV_dedicated_allocation}.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
@@ -154,7 +154,7 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
 
         <h5>Description</h5>
         <ul>
-            <li>#EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_dedicated_allocation">VK_NV_dedicated_allocation</a> extension to create (or import) a dedicated allocation for the image or buffer.</li>
+            <li>#EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined in the {@link NVDedicatedAllocation VK_NV_dedicated_allocation} extension to create (or import) a dedicated allocation for the image or buffer.</li>
             <li>#EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR specifies that handles of this type <b>can</b> be exported from Vulkan memory objects.</li>
             <li>#INTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
         </ul>

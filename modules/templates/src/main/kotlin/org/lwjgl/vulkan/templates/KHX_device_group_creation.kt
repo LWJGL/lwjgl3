@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_device_group_creation", type = "instance", postfix = KHX) {
     documentation =
         """
-        This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHX_device_group">VK_KHX_device_group</a> extension.
+        This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the {@link KHXDeviceGroup VK_KHX_device_group} extension.
 
         <h5>Examples</h5>
         <code><pre>

@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension defines a set of utility functions for use with the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_display">VK_KHR_display</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_display_swapchain">VK_KHR_display_swapchain</a> extensions.
+        This extension defines a set of utility functions for use with the {@link KHRDisplay VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -29,8 +29,8 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_display_surface_counter">VK_EXT_display_surface_counter</a></li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_swapchain">VK_KHR_swapchain</a></li>
+                <li>Requires {@link EXTDisplaySurfaceCounter VK_EXT_display_surface_counter}</li>
+                <li>Requires {@link KHRSwapchain VK_KHR_swapchain}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

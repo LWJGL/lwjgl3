@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", type = "instance", postfix = MVK) {
     documentation =
         """
-        The {@code VK_MVK_macos_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_surface">VK_KHR_surface</a> extension) that refers to an {@code NSView}, the native surface type of macOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
+        The {@code VK_MVK_macos_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to an {@code NSView}, the native surface type of macOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -29,7 +29,7 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_surface">VK_KHR_surface</a></li>
+                <li>Requires {@link KHRSurface VK_KHR_surface}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

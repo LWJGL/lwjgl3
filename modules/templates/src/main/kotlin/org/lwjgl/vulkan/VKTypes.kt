@@ -1033,7 +1033,7 @@ val VkDeviceCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
         <ul>
             <li>The {@code queueFamilyIndex} member of each element of {@code pQueueCreateInfos} <b>must</b> be unique within {@code pQueueCreateInfos}</li>
             <li>If the {@code pNext} chain includes a ##VkPhysicalDeviceFeatures2KHR structure, then {@code pEnabledFeatures} <b>must</b> be {@code NULL}</li>
-            <li>{@code ppEnabledExtensionNames} <b>must</b> not contain both <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_maintenance1">VK_KHR_maintenance1</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_AMD_negative_viewport_height">VK_AMD_negative_viewport_height</a></li>
+            <li>{@code ppEnabledExtensionNames} <b>must</b> not contain both {@link KHRMaintenance1 VK_KHR_maintenance1} and {@link AMDNegativeViewportHeight VK_AMD_negative_viewport_height}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2470,7 +2470,7 @@ val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineR
         <ul>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-depthClamp">depth clamping</a> feature is not enabled, {@code depthClampEnable} <b>must</b> be #FALSE</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-fillModeNonSolid">non-solid fill modes</a> feature is not enabled, {@code polygonMode} <b>must</b> be #POLYGON_MODE_FILL or #POLYGON_MODE_FILL_RECTANGLE_NV</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_fill_rectangle">VK_NV_fill_rectangle</a> extension is not enabled, {@code polygonMode} <b>must</b> not be #POLYGON_MODE_FILL_RECTANGLE_NV</li>
+            <li>If the {@link NVFillRectangle VK_NV_fill_rectangle} extension is not enabled, {@code polygonMode} <b>must</b> not be #POLYGON_MODE_FILL_RECTANGLE_NV</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2984,7 +2984,7 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
             <li>If any of {@code addressModeU}, {@code addressModeV} or {@code addressModeW} are #SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER, {@code borderColor} <b>must</b> be a valid {@code VkBorderColor} value</li>
             <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled, {@code addressModeU}, {@code addressModeV}, and {@code addressModeW} <b>must</b> be #SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE, {@code anisotropyEnable} <b>must</b> be #FALSE, and {@code unnormalizedCoordinates} <b>must</b> be #FALSE</li>
             <li>The sampler reduction mode <b>must</b> be set to #SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_sampler_mirror_clamp_to_edge">VK_KHR_sampler_mirror_clamp_to_edge</a> extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW} <b>must</b> not be #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</li>
+            <li>If the {@link KHRSamplerMirrorClampToEdge VK_KHR_sampler_mirror_clamp_to_edge} extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW} <b>must</b> not be #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</li>
             <li>If {@code compareEnable} is #TRUE, {@code compareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
             <li>If either {@code magFilter} or {@code minFilter} is #FILTER_CUBIC_IMG, {@code anisotropyEnable} <b>must</b> be #FALSE</li>
             <li>If either {@code magFilter} or {@code minFilter} is #FILTER_CUBIC_IMG, the {@code reductionMode} member of ##VkSamplerReductionModeCreateInfoEXT <b>must</b> be #SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT</li>

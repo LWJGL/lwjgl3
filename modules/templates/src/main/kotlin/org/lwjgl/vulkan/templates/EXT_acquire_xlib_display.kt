@@ -30,7 +30,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_direct_mode_display">VK_EXT_direct_mode_display</a></li>
+                <li>Requires {@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

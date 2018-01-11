@@ -11,7 +11,7 @@ import org.lwjgl.vulkan.*
 val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_incremental_present", type = "device", postfix = KHR) {
     documentation =
         """
-        This device extension extends {@code vkQueuePresentKHR}, from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_swapchain">VK_KHR_swapchain</a> extension, allowing an application to specify a list of rectangular, modified regions of each image to present. This should be used in situations where an application is only changing a small portion of the presentable images within a swapchain, since it enables the presentation engine to avoid wasting time presenting parts of the surface that haven't changed.
+        This device extension extends {@code vkQueuePresentKHR}, from the {@link KHRSwapchain VK_KHR_swapchain} extension, allowing an application to specify a list of rectangular, modified regions of each image to present. This should be used in situations where an application is only changing a small portion of the presentable images within a swapchain, since it enables the presentation engine to avoid wasting time presenting parts of the surface that haven't changed.
 
         This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.
 
@@ -34,7 +34,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_swapchain">VK_KHR_swapchain</a></li>
+                <li>Requires {@link KHRSwapchain VK_KHR_swapchain}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

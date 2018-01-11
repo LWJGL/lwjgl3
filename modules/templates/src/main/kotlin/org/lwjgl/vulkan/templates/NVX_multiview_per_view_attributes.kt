@@ -19,7 +19,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
 
         Shaders that use the new per-view outputs (e.g. {@code gl_PositionPerViewNV}) <b>must</b> also write the non-per-view output ({@code gl_Position}), and the values written <b>must</b> be such that {@code gl_Position = gl_PositionPerViewNV[gl_ViewIndex]} for all views in the subpass. Implementations are free to either use the per-view outputs or the non-per-view outputs, whichever would be more efficient.
 
-        If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_viewport_array2">VK_NV_viewport_array2</a> is not also supported and enabled, the per-view viewport mask <b>must</b> not be used.
+        If {@link NVViewportArray2 VK_NV_viewport_array2} is not also supported and enabled, the per-view viewport mask <b>must</b> not be used.
 
         <h5>Examples</h5>
         <code><pre>
@@ -56,7 +56,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
-                <li>Requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHX_multiview">VK_KHX_multiview</a></li>
+                <li>Requires {@link KHXMultiview VK_KHX_multiview}</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -74,7 +74,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
             <dd><ul>
                 <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NVX_multiview_per_view_attributes.html">SPV_NVX_multiview_per_view_attributes</a> SPIR-V extension.</li>
                 <li>This extension requires the GL_NVX_multiview_per_view_attributes extension for GLSL source languages.</li>
-                <li>This extension interacts with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_NV_viewport_array2">VK_NV_viewport_array2</a>.</li>
+                <li>This extension interacts with {@link NVViewportArray2 VK_NV_viewport_array2}.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
