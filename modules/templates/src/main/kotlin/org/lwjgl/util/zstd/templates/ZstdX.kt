@@ -81,9 +81,9 @@ ENABLE_WARNINGS()""")
         "WINDOWLOG_MAX_64".."31",
         "WINDOWLOG_MAX".."(Pointer.BITS32 ? ZSTD_WINDOWLOG_MAX_32 : ZSTD_WINDOWLOG_MAX_64)",
         "WINDOWLOG_MIN".."10",
-        "HASHLOG_MAX".."Math.min(ZSTD_WINDOWLOG_MAX, 30)",
+        "HASHLOG_MAX".."(ZSTD_WINDOWLOG_MAX < 30) ? ZSTD_WINDOWLOG_MAX : 30",
         "HASHLOG_MIN".."6",
-        "CHAINLOG_MAX".."Math.min(ZSTD_WINDOWLOG_MAX+1, 30)",
+        "CHAINLOG_MAX".."(ZSTD_WINDOWLOG_MAX < 29) ? ZSTD_WINDOWLOG_MAX+1 : 30",
         "CHAINLOG_MIN".."ZSTD_HASHLOG_MIN",
         "HASHLOG3_MAX".."17",
         "SEARCHLOG_MAX".."(ZSTD_WINDOWLOG_MAX-1)",
@@ -429,7 +429,7 @@ ENABLE_WARNINGS()""")
         Will provide a budget large enough for any compression level up to selected one. It will also consider {@code src} size to be arbitrarily "large",
         which is worst case. If {@code srcSize} is known to always be small, #estimateCCtxSize_usingCCtxParams() can provide a tighter estimation.
 
-        Note: {@code CCtx} estimation is only correct for single-threaded compression.
+        Note: {@code CCtx} size estimation is only correct for single-threaded compression.
         """,
 
         int.IN("compressionLevel", "")
@@ -679,7 +679,7 @@ ENABLE_WARNINGS()""")
         ZSTD_customMem.IN("customMem", "")
     )
 
-        ZSTD_CStream_p(
+    ZSTD_CStream_p(
         "initStaticCStream",
         "",
 

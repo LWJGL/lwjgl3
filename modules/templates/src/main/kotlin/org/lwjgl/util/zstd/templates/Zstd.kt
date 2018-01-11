@@ -27,14 +27,14 @@ ENABLE_WARNINGS()""")
         Compression can be done in:
         ${ul(
             "a single step (described as Simple API)",
-            "a single step, reusing a context (described as Explicit memory management)",
+            "a single step, reusing a context (described as Explicit context)",
             "unbounded multiple steps (described as Streaming compression)"
         )}
 
         The compression ratio achievable on small data can be highly improved using a dictionary in:
         ${ul(
             "a single step (described as Simple dictionary API)",
-            "a single step, reusing a dictionary (described as Fast dictionary API)"
+            "a single step, reusing a dictionary (described as Bulk-processing dictionary API)"
         )}
 
         Advanced experimental functions can be accessed using {@code \#define ZSTD_STATIC_LINKING_ONLY} before including {@code zstd.h}. Advanced experimental
@@ -195,7 +195,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "compressBound",
-        "Returns the maximum compressed size in worst case scenario.",
+        "Returns the maximum compressed size in worst case single-pass scenario.",
 
         size_t.IN("srcSize", "")
     )
@@ -220,7 +220,7 @@ ENABLE_WARNINGS()""")
     )
 
     /***************************************
-    *  Explicit memory management
+    *  Explicit context
     ***************************************/
 
     ZSTD_CCtx_p(
