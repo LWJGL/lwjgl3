@@ -942,6 +942,7 @@
                 <classpath>
                     <pathelement path="${src.core}"/>
                     <pathelement path="${src.generated.java}"/>
+                    <pathelement path="${lib}/jsr305.jar"/>
                 </classpath>
 
                 <fileset dir="${src.generated.java}" includes="${module.package}/**" unless:set="module.package.skip"/>
