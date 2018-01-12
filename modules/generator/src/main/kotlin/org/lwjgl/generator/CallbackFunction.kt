@@ -82,7 +82,7 @@ import static org.lwjgl.system.MemoryUtil.*;
             : new Container(functionPointer, instance);
     }
 
-    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@link #NULL}. */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static $className createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);

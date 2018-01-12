@@ -16,7 +16,7 @@ val ARB_explicit_uniform_location = "ARBExplicitUniformLocation".nativeClassGL("
         allows an application to modify the uniform values without requiring a GL query like #GetUniformLocation(), #GetSubroutineUniformLocation() and
         #GetSubroutineIndex().
 
-        Requires ${GL33.core} or ${ARB_explicit_attrib_location.link}. ${GL43.promoted}
+        Requires ${GL33.core} or ${ARB_explicit_attrib_location.registryLink}. ${GL43.promoted}
         """
 
     IntConstant(

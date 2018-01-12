@@ -482,7 +482,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
             """
             Set to indicate that {@code pTexture} is a pointer to a ##VRTextureWithDepth.
 
-            This flag can be combined with #EVRSubmit_TextureWithPose to pass a ##VRTextureWithPoseAndDepth_t.
+            This flag can be combined with #EVRSubmit_TextureWithPose to pass a ##VRTextureWithPoseAndDepth.
             """,
             "16"
         )

@@ -1126,7 +1126,7 @@ val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfSt
 val ovrHapticsGenMode = "ovrHapticsGenMode".enumType
 
 val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDetectResult", mutable = false) {
-    documentation = "Return values for OVRUtil#Detect()"
+    documentation = "Return values for #_Detect()."
 
     ovrBool.member(
         "IsOculusServiceRunning",
