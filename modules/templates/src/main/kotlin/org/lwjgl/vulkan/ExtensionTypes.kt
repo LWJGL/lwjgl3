@@ -799,8 +799,8 @@ val VkShaderResourceUsageAMD = struct(VULKAN_PACKAGE, "VkShaderResourceUsageAMD"
         Resource usage information about a particular shader within a pipeline.
         """
 
-    uint32_t.member("numUsedVgprs", "the number of vector instruction general purpose registers used by this shader.")
-    uint32_t.member("numUsedSgprs", "the number of scalar instruction general purpose registers used by this shader.")
+    uint32_t.member("numUsedVgprs", "the number of vector instruction general-purpose registers used by this shader.")
+    uint32_t.member("numUsedSgprs", "the number of scalar instruction general-purpose registers used by this shader.")
     uint32_t.member("ldsSizePerLocalWorkGroup", "the maximum local data store size per work group in bytes.")
     size_t.member("ldsUsageSizeInBytes", "the LDS usage size in bytes per work group by this shader.")
     size_t.member("scratchMemUsageInBytes", "the scratch memory usage in bytes by this shader.")
@@ -1133,6 +1133,10 @@ val VkImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkImageFormatPropertie
 
         <h5>Description</h5>
         If the combination of parameters to #GetPhysicalDeviceImageFormatProperties2KHR() is not supported by the implementation for use in #CreateImage(), then all members of {@code imageFormatProperties} will be filled with zero.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Filling {@code imageFormatProperties} with zero for unsupported formats is an exception to the usual rule that output structures have undefined contents on error. This exception was unintentional, but is preserved for backwards compatibility. This exeption only applies to {@code imageFormatProperties}, not {@code sType}, {@code pNext}, or any structures chained from {@code pNext}.
+        </div>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

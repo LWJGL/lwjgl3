@@ -156,7 +156,7 @@ val KHR_external_memory_capabilities = "KHRExternalMemoryCapabilities".nativeCla
         <ul>
             <li>#EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined in the {@link NVDedicatedAllocation VK_NV_dedicated_allocation} extension to create (or import) a dedicated allocation for the image or buffer.</li>
             <li>#EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR specifies that handles of this type <b>can</b> be exported from Vulkan memory objects.</li>
-            <li>#INTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
+            <li>#EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
         </ul>
 
         Because their semantics in external APIs roughly align with that of an image or buffer with a dedicated allocation in Vulkan, implementations are required: to report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR for the following external handle types:
