@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.system.linux.*
+import opengl.*
+import core.linux.*
 
 val GLX13 = "GLX13".nativeClassGLX("GLX13") {
     javaImport("org.lwjgl.system.linux.*")

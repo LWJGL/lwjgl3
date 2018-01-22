@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.tinyexr.templates
+package tinyexr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.tinyexr.*
+import tinyexr.*
 
-val tinyexr = "TinyEXR".nativeClass(TINYEXR_PACKAGE, prefix = "TINYEXR", prefixMethod = "", library = "lwjgl_tinyexr") {
+val tinyexr = "TinyEXR".nativeClass(Module.TINYEXR, prefix = "TINYEXR", prefixMethod = "", library = "lwjgl_tinyexr") {
     nativeDirective("""DISABLE_WARNINGS()
 #include "tinyexr.h"
 ENABLE_WARNINGS()""")

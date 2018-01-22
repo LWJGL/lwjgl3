@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.glfw.templates
+package glfw.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.glfw.*
-import org.lwjgl.system.linux.*
+import glfw.*
+import core.linux.*
 
-val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "linux", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
+val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "linux", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     documentation = "Native bindings to the GLFW library's X11 native access functions."
 
     Display_p(

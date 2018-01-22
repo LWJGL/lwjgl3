@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.jni
+package core.jni
 
 import org.lwjgl.generator.*
 
-val JNI_PACKAGE = "org.lwjgl.system.jni"
-
 fun config() {
     packageInfo(
-        JNI_PACKAGE,
+        Module.CORE_JNI,
         "Contains bindings to the Java Native Interface (JNI)."
     )
 }
@@ -54,7 +52,7 @@ val java_nio_ByteBuffer = java.nio.ByteBuffer::class.jobject
 
 val JavaVM = "JavaVM".opaque_p
 
-val JNINativeMethod_p = struct(JNI_PACKAGE, "JNINativeMethod") {
+val JNINativeMethod_p = struct(Module.CORE_JNI, "JNINativeMethod") {
     documentation = ""
 
     charUTF8_p.member("name", "")

@@ -15,7 +15,6 @@ import static org.lwjgl.demo.util.lmdb.LMDBUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lmdb.LMDB.*;
-import static org.testng.Assert.*;
 
 /** LMDB sample demonstrating zero-copy string persistence. */
 public final class LMDBDemo {
@@ -42,11 +41,15 @@ public final class LMDBDemo {
 
             // Put a value
             put(env, dbi, 1, "LWJGL");
-            assertEquals(get(env, dbi, 1), "LWJGL");
+            if (!"LWJGL".equals(get(env, dbi, 1))) {
+                throw new IllegalStateException();
+            }
 
             // Put a value, zero copy encoding
             putZeroCopy(env, dbi, 2, "LMDB");
-            assertEquals(get(env, dbi, 2), "LMDB");
+            if (!"LMDB".equals(get(env, dbi, 2))) {
+                throw new IllegalStateException();
+            }
         } finally {
             // Close environment
             mdb_env_close(env);

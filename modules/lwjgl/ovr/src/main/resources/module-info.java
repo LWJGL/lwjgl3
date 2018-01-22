@@ -4,7 +4,6 @@
  */
 module org.lwjgl.ovr {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.ovr.natives;
 
     exports org.lwjgl.ovr;
 }

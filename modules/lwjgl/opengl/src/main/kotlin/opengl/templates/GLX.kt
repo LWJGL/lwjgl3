@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.system.linux.*
+import opengl.*
+import core.linux.*
 
-val GLX = "GLX".nativeClass(OPENGL_PACKAGE, prefix = "GLX", prefixMethod = "glX", binding = GLBinding.delegate("GL.getFunctionProvider()")) {
+val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX", binding = GLBinding.delegate("GL.getFunctionProvider()")) {
     javaImport(
         "org.lwjgl.system.linux.*"
     )

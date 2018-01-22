@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val EXT_image_implicit_sync_control = "EXTImageImplicitSyncControl".nativeClassEGL("EXT_image_implicit_sync_control", postfix = EXT) {

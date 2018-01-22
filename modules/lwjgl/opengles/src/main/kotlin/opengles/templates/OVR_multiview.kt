@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
-val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = org.lwjgl.opengl.templates.OVR) {
+val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OVR) {
     documentation =
         """
         Native bindings to the $registryLink extension.

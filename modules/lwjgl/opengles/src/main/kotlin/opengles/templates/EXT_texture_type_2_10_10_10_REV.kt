@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val EXT_texture_type_2_10_10_10_REV = "EXTTextureType2101010REV".nativeClassGLES("EXT_texture_type_2_10_10_10_REV", postfix = EXT) {
     documentation =

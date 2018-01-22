@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.windows
+package core.windows
 
 import org.lwjgl.generator.*
 
-val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
-
 fun config() {
     packageInfo(
-        WINDOWS_PACKAGE,
+        Module.CORE_WINDOWS,
         "Contains bindings to native APIs specific to the Windows operating system."
     )
 }
@@ -78,14 +76,14 @@ val DPI_AWARENESS_CONTEXT = typedef(HANDLE, "DPI_AWARENESS_CONTEXT")
 
 val COLORREF = typedef(DWORD, "COLORREF")
 
-/*val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
+/*val POINTFLOAT = struct(Binding.CORE_WINDOWS, "POINTFLOAT") {
     documentation = "Contains the x and y coordinates of a point."
 
     FLOAT.member("x", "specifies the horizontal (x) coordinate of a point")
     FLOAT.member("y", "specifies the vertical (y) coordinate of a point")
 }
 
-val GLYPHMETRICSFLOAT = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
+val GLYPHMETRICSFLOAT = struct(Binding.CORE_WINDOWS, "GLYPHMETRICSFLOAT", mutable = false) {
     documentation = "Contains information about the placement and orientation of a glyph in a character cell."
 
     FLOAT.member("gmfBlackBoxX", "specifies the width of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
@@ -96,7 +94,7 @@ val GLYPHMETRICSFLOAT = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = f
 }
 val LPGLYPHMETRICSFLOAT = GLYPHMETRICSFLOAT.p("LPGLYPHMETRICSFLOAT")*/
 
-val POINT = struct(WINDOWS_PACKAGE, "POINT") {
+val POINT = struct(Module.CORE_WINDOWS, "POINT") {
     documentation = "Defines the x- and y- coordinates of a point."
 
     LONG.member("x", "the x-coordinate of the point")
@@ -104,7 +102,7 @@ val POINT = struct(WINDOWS_PACKAGE, "POINT") {
 }
 val LPPOINT = POINT.p("LPPOINT")
 
-val RECT = struct(WINDOWS_PACKAGE, "RECT") {
+val RECT = struct(Module.CORE_WINDOWS, "RECT") {
     documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
 
     LONG.member("left", "the x-coordinate of the upper-left corner of the rectangle")
@@ -115,7 +113,7 @@ val RECT = struct(WINDOWS_PACKAGE, "RECT") {
 val RECT_p = RECT.p
 val LPRECT = RECT.p("LPRECT")
 
-val MSG = struct(WINDOWS_PACKAGE, "MSG") {
+val MSG = struct(Module.CORE_WINDOWS, "MSG") {
     documentation = "Contains message information from a thread's message queue."
 
     nullable..HWND.member(
@@ -131,7 +129,7 @@ val MSG = struct(WINDOWS_PACKAGE, "MSG") {
 val LPMSG = MSG.p("LPMSG")
 val MSG_p = MSG.p
 
-val PIXELFORMATDESCRIPTOR = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
+val PIXELFORMATDESCRIPTOR = struct(Module.CORE_WINDOWS, "PIXELFORMATDESCRIPTOR") {
     documentation = "Describes the pixel format of a drawing surface."
 
     WORD.member("nSize", "specifies the size of this data structure. This value should be set to PIXELFORMATDESCRIPTOR#SIZEOF.")
@@ -183,7 +181,7 @@ val LPPIXELFORMATDESCRIPTOR = PIXELFORMATDESCRIPTOR.p("LPPIXELFORMATDESCRIPTOR")
 val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
 
 val WNDPROC = "WNDPROC".callback(
-    WINDOWS_PACKAGE, LRESULT, "WindowProc",
+    Module.CORE_WINDOWS, LRESULT, "WindowProc",
     "Will be called for each message sent to the window.",
 
     HWND.IN("hwnd", "a handle to the window procedure that received the message"),
@@ -195,7 +193,7 @@ val WNDPROC = "WNDPROC".callback(
     useSystemCallConvention()
 }
 
-val WNDCLASSEX_p = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
+val WNDCLASSEX_p = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {
     documentation = "Contains the window class attributes that are registered by the #RegisterClassEx() function."
 
     UINT.member("cbSize", "the size, in bytes, of this structure")
@@ -239,7 +237,7 @@ val WNDCLASSEX_p = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
     )
 }.p
 
-val WINDOWPLACEMENT_p = struct(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
+val WINDOWPLACEMENT_p = struct(Module.CORE_WINDOWS, "WINDOWPLACEMENT") {
     documentation = "Contains information about the placement of a window on the screen."
 
     UINT.member(
@@ -260,7 +258,7 @@ val WINDOWPLACEMENT_p = struct(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
     RECT.member("rcNormalPosition", "the window's coordinates when the window is in the restored position")
 }.p
 
-val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
+val TOUCHINPUT = struct(Module.CORE_WINDOWS, "TOUCHINPUT", mutable = false) {
     documentation = "Encapsulates data for touch input."
 
     LONG.member(
@@ -317,7 +315,7 @@ val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 }
 val PTOUCHINPUT = TOUCHINPUT.p("PTOUCHINPUT")
 
-val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
+val MONITORINFOEX = struct(Module.CORE_WINDOWS, "MONITORINFOEX", mutable = false) {
     documentation = "Contains information about a display monitor."
 
     DWORD.member(
@@ -350,14 +348,14 @@ val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
 }
 val LPMONITORINFOEX = MONITORINFOEX.p("LPMONITORINFOEX")
 
-val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
+val POINTL = struct(Module.CORE_WINDOWS, "POINTL") {
     documentation = "Contains the coordinates of a point."
 
     LONG.member("x", "the horizontal (x) coordinate of the point")
     LONG.member("y", "the vertical (y) coordinate of the point.")
 }
 
-val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
+val DEVMODE_p = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
     documentation = "Contains information about the initialization and environment of a printer or a display device."
 
     TCHAR.array(
@@ -483,7 +481,7 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
     DWORD.member("dmPanningHeight", "this member must be zero")
 }.p
 
-val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) {
+val DISPLAY_DEVICE = struct(Module.CORE_WINDOWS, "DISPLAY_DEVICE", mutable = false) {
     documentation =
         """
         Receives information about the display device specified by the {@code iDevNum} parameter of the #EnumDisplayDevices() function.
@@ -509,7 +507,7 @@ val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) 
 }
 val PDISPLAY_DEVICE = DISPLAY_DEVICE.p("PDISPLAY_DEVICE")
 
-val SECURITY_ATTRIBUTES = struct(WINDOWS_PACKAGE, "SECURITY_ATTRIBUTES") {
+val SECURITY_ATTRIBUTES = struct(Module.CORE_WINDOWS, "SECURITY_ATTRIBUTES") {
     documentation =
         """
         Contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable. This structure

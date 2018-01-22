@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.opengl.BufferType.*
+import opengl.*
+import opengl.BufferType.*
 
 val GL31 = "GL31".nativeClassGL("GL31") {
     documentation =

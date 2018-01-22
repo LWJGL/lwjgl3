@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.bgfx.templates
+package bgfx.templates
 
-import org.lwjgl.bgfx.*
+import bgfx.*
 import org.lwjgl.generator.*
 
-val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
+val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     documentation =
         "Native bindings to the C API of the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library."
 

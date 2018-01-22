@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.lmdb
+package lmdb
 
 import org.lwjgl.generator.*
 
-val LMDB_PACKAGE = "org.lwjgl.util.lmdb"
-
 fun config() {
     packageInfo(
-        LMDB_PACKAGE,
+        Module.LMDB,
         """
         Bindings to ${url("https://symas.com/lmdb/", "LMDB")}, the Symas Lightning Memory-Mapped Database.
 
@@ -133,7 +131,7 @@ val MDB_dbi_p = MDB_dbi.p
 val MDB_txn_p = "MDB_txn".p
 val MDB_txn_pp = MDB_txn_p.p
 
-val MDB_val_p = struct(LMDB_PACKAGE, "MDBVal", nativeName = "MDB_val") {
+val MDB_val_p = struct(Module.LMDB, "MDBVal", nativeName = "MDB_val") {
     documentation =
         """
         Generic structure used for passing keys and data in and out of the database.
@@ -154,7 +152,7 @@ val MDB_cursor_pp = MDB_cursor_p.p
 
 val MDB_cursor_op = "MDB_cursor_op".enumType
 
-val MDB_stat_p = struct(LMDB_PACKAGE, "MDBStat", nativeName = "MDB_stat", mutable = false) {
+val MDB_stat_p = struct(Module.LMDB, "MDBStat", nativeName = "MDB_stat", mutable = false) {
     documentation = "Statistics for a database in the environment."
 
     unsigned_int.member("ms_psize", "Size of a database page. This is currently the same for all databases.")
@@ -165,7 +163,7 @@ val MDB_stat_p = struct(LMDB_PACKAGE, "MDBStat", nativeName = "MDB_stat", mutabl
     mdb_size_t.member("ms_entries", "Number of data items.")
 }.p
 
-val MDB_envinfo_p = struct(LMDB_PACKAGE, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
+val MDB_envinfo_p = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
     documentation = "Information about the environment."
 
     opaque_p.member("me_mapaddr", "Address of map, if fixed.")
@@ -177,7 +175,7 @@ val MDB_envinfo_p = struct(LMDB_PACKAGE, "MDBEnvInfo", nativeName = "MDB_envinfo
 }.p
 
 val MDB_cmp_func = "MDB_cmp_func *".callback(
-    LMDB_PACKAGE, int, "MDBCmpFunc",
+    Module.LMDB, int, "MDBCmpFunc",
     "A callback function used to compare two keys in a database.",
 
     const..MDB_val_p.IN("a", "the first item to compare"),
@@ -187,7 +185,7 @@ val MDB_cmp_func = "MDB_cmp_func *".callback(
 )
 
 val MDB_rel_func = "MDB_rel_func *".callback(
-    LMDB_PACKAGE, void, "MDBRelFunc",
+    Module.LMDB, void, "MDBRelFunc",
     "A callback function used to relocate a position-dependent data item in a fixed-address database.",
 
     MDB_val_p.IN("item", "the item that is to be relocated"),
@@ -206,7 +204,7 @@ val MDB_rel_func = "MDB_rel_func *".callback(
 }
 
 val MDB_msg_func = "MDB_msg_func *".callback(
-    LMDB_PACKAGE, int, "MDBMsgFunc",
+    Module.LMDB, int, "MDBMsgFunc",
     "A callback function used to print a message from the library.",
 
     const..charASCII_p.IN("msg", "the string to be printed"),

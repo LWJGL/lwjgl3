@@ -8,7 +8,6 @@
     <test name="LWJGL 3.0">
         <packages>
             <package name="org.lwjgl"/>
-            <package name="org.lwjgl.openal"/>
             <package name="org.lwjgl.opencl"/>
             <package name="org.lwjgl.system"/>
             <package name="org.lwjgl.system.dyncall"/>

@@ -2,14 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.macosx.templates
+package core.macos.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.macosx.*
 
-val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
+val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "macos") {
     nativeImport(
-        "MacOSXLWJGL.h",
+        "macOSLWJGL.h",
         "<dlfcn.h>"
     )
 

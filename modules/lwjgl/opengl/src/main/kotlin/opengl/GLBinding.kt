@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl
+package opengl
 
 import org.lwjgl.generator.*
 import java.io.*
@@ -25,7 +25,7 @@ private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFu
 }
 
 val GLBinding = Generator.register(object : APIBinding(
-    OPENGL_PACKAGE,
+    Module.OPENGL,
     CAPABILITIES_CLASS,
     APICapabilities.JNI_CAPABILITIES
 ) {
@@ -215,7 +215,7 @@ val GLBinding = Generator.register(object : APIBinding(
         for (extension in classes) {
             val capName = extension.capName
             if (extension.hasNativeFunctions) {
-                print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+                print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this")
                 if (extension.functions.any { it.has<DependsOn>() }) print(", ext")
                 if (extension.functions.hasDeprecated) print(", fc")
                 print("));")
@@ -258,7 +258,7 @@ fun String.nativeClassGL(
     postfix: String = "",
     init: NativeClass.() -> Unit
 ) = nativeClass(
-    OPENGL_PACKAGE,
+    Module.OPENGL,
     templateName,
     prefix = prefix,
     prefixMethod = prefixMethod,

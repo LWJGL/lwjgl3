@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.libc
+package core.libc
 
 import org.lwjgl.generator.*
 
-val LIBC_PACKAGE = "org.lwjgl.system.libc"
-
 fun config() {
     packageInfo(
-        LIBC_PACKAGE,
+        Module.CORE_LIBC,
         "Contains bindings to standard C library APIs."
     )
 }

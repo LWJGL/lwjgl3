@@ -48,7 +48,7 @@ class AutoSizeFactor(
     val expression: String
 ) {
     companion object {
-        val OPERAND = "\$operand"
+        const val OPERAND = "\$operand"
 
         fun div(expression: String) = AutoSizeFactor("/", "*", expression)
         fun mul(expression: String) = AutoSizeFactor("*", "/", expression)

@@ -5,8 +5,6 @@
 module org.lwjgl {
     requires jdk.unsupported;
 
-    requires static org.lwjgl.natives;
-
     exports org.lwjgl;
     exports org.lwjgl.system;
     exports org.lwjgl.system.dyncall;

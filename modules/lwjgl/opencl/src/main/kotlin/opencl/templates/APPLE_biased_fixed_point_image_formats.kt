@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
+import opencl.*
 
 val APPLE_biased_fixed_point_image_formats = "APPLEBiasedFixedPointImageFormats".nativeClassCL("APPLE_biased_fixed_point_image_formats", APPLE) {
     documentation =

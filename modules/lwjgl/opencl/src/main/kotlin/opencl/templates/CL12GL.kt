@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
-import org.lwjgl.opengl.*
+import opencl.*
+import opengl.*
 
-val CL12GL = "CL12GL".dependsOn(Binding.OPENGL, Binding.OPENGLES)?.nativeClassCL("CL12GL") {
+val CL12GL = "CL12GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("CL12GL") {
     documentation = "The OpenCL 1.2 OpenGL interoperability functionality."
 
     IntConstant(

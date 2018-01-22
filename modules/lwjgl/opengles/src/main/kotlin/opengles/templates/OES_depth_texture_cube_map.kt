@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val OES_depth_texture_cube_map = "OESDepthTextureCubeMap".nativeClassGLES("OES_depth_texture_cube_map", postfix = OES) {
     documentation =

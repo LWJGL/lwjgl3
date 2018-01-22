@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.odbc.templates
+package odbc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.odbc.*
+import odbc.*
 
-val sql = "SQL".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", binding = ODBC_BINDING) {
+val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", binding = ODBC_BINDING) {
     documentation =
         """
         Native bindings to ${url("https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc", "ODBC")}.

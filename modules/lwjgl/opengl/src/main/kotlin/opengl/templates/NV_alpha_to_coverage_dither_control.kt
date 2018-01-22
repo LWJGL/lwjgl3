@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val NV_alpha_to_coverage_dither_control = "NVAlphaToCoverageDitherControl".nativeClassGL("NV_alpha_to_coverage_dither_control", postfix = NV) {
     documentation =

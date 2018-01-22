@@ -2,12 +2,16 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.windows.templates
+package core.windows.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.windows.*
+import core.windows.*
 
-val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user32", callingConvention = CallingConvention.STDCALL)) {
+val User32 = "User32".nativeClass(
+    Module.CORE_WINDOWS,
+    nativeSubPath = "windows",
+    binding = simpleBinding(Module.CORE_WINDOWS, "user32", callingConvention = CallingConvention.STDCALL)
+) {
     nativeDirective("#define APIENTRY __stdcall")
 
     documentation = "Native bindings to WinUser.h and user32.dll."

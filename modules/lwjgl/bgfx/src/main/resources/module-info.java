@@ -4,7 +4,6 @@
  */
 module org.lwjgl.bgfx {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.bgfx.natives;
 
     exports org.lwjgl.bgfx;
 }

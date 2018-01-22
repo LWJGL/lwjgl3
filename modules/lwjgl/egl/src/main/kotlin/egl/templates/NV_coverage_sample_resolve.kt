@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val NV_coverage_sample_resolve = "NVCoverageSampleResolve".nativeClassEGL("NV_coverage_sample_resolve", postfix = NV) {

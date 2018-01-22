@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.glfw.templates
+package glfw.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.glfw.*
-import org.lwjgl.system.windows.*
+import glfw.*
+import core.windows.*
 
-val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "windows", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
+val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath = "windows", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     documentation = "Native bindings to the GLFW library's Win32 native access functions."
 
     const..charUTF8_p(

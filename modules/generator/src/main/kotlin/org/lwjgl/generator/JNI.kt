@@ -8,7 +8,7 @@ import java.io.*
 import java.util.concurrent.*
 
 /** Deduplicates JNI signatures from bindings and generates the org.lwjgl.system.JNI class. */
-object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
+object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
 
     private val signatures = ConcurrentHashMap<Signature, Unit>()
     private val signaturesArray = ConcurrentHashMap<SignatureArray, Unit>()
@@ -18,9 +18,9 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
         // bootstrapping or other internal functionality.
 
         // callP(GetStringi, GL_EXTENSIONS, i)
-        signatures.put(Signature(CallingConvention.STDCALL, opaque_p, listOf(int, int)), Unit)
+        signatures[Signature(CallingConvention.STDCALL, opaque_p, listOf(int, int))] = Unit
         // invokePPV(objc_msgSend, NSView, setWantsBestResolutionOpenGLSurface, true/false);
-        signatures.put(Signature(CallingConvention.DEFAULT, void, listOf(opaque_p, opaque_p, bool)), Unit)
+        signatures[Signature(CallingConvention.DEFAULT, void, listOf(opaque_p, opaque_p, bool))] = Unit
     }
 
     private val sortedSignatures by lazy(LazyThreadSafetyMode.NONE) { signatures.keys.sorted() }

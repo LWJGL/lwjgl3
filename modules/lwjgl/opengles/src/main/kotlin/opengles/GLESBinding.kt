@@ -2,23 +2,25 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles
+package opengles
 
 import org.lwjgl.generator.*
+import org.lwjgl.generator.Generator.Companion.register
 import java.io.*
+import java.util.SortedSet
 
 val NativeClass.capName: String
     get() = if (templateName.startsWith(prefixTemplate)) templateName else "${prefixTemplate}_$templateName"
 
-private val CAPABILITIES_CLASS = "GLESCapabilities"
+private const val CAPABILITIES_CLASS = "GLESCapabilities"
 
 private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
     override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}"
     override fun transformCall(param: Parameter, original: String) = param.name
 }
 
-private val GLESBinding = Generator.register(object : APIBinding(
-    GLES_PACKAGE,
+private val GLESBinding = register(object : APIBinding(
+    Module.OPENGLES,
     CAPABILITIES_CLASS,
     APICapabilities.JNI_CAPABILITIES
 ) {
@@ -36,7 +38,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
         }
     }
 
-    private val functions: java.util.SortedSet<Func> by lazy {
+    private val functions: SortedSet<Func> by lazy {
         classes
             .filter { it.hasNativeFunctions }
             .map { it.functions }
@@ -172,12 +174,12 @@ private val GLESBinding = Generator.register(object : APIBinding(
     $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {
 """)
 
-        println(functions.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString(prefix = "$t$t", separator = "\n$t$t"))
+        println(functions.joinToString(prefix = "$t$t", separator = "\n$t$t") { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" })
 
         for (extension in classes) {
             val capName = extension.capName
             if (extension.hasNativeFunctions) {
-                print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+                print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this")
                 if (extension.functions.any { it.has<DependsOn>() }) print(", ext")
                 print("));")
             } else
@@ -214,7 +216,7 @@ fun String.nativeClassGLES(
     postfix: String = "",
     init: NativeClass.() -> Unit
 ) = nativeClass(
-    GLES_PACKAGE,
+    Module.OPENGLES,
     templateName,
     nativeSubPath = nativeSubPath,
     prefix = prefix,

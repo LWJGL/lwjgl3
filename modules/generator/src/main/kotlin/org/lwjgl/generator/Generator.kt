@@ -22,21 +22,29 @@ import java.util.function.*
     - Any file in the source package has later timestamp than the target.
     - Any file in the generator itself has later timestamp than the target. (implies re-generation of all templates)
 
-    Example template: /src/main/kotlin/org/lwjgl/opengl/templates/ARB_imaging.kt
+    Example template: <templates>/opengl/templates/ARB_imaging.kt
 
-    - Generator source      -> /src/main/kotlin/org/lwjgl/generator/
-    - Source package        -> /src/main/kotlin/org/lwjgl/opengl/
-    - Source template       -> /src/main/kotlin/org/lwjgl/opengl/templates/ARB_imaging.kt
+    - Generator source      -> <generator>/src/main/kotlin/org/lwjgl/generator/
+    - Source package        -> <templates>/opengl/
+    - Source template       -> <templates>/opengl/templates/ARB_imaging.kt
 
-    - Target source (Java)  -> modules/core/src/generated/java/org/lwjgl/opengl/ARBImaging.java
-    - Target source (C)     -> modules/core/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
+    - Target source (Java)  -> <module>/src/generated/java/opengl/org/lwjgl/opengl/ARBImaging.java
+    - Target source (C)     -> <module>/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 
-enum class Binding(
+enum class Module(
     val key: String,
     val packageName: String,
     val arrayOverloads: Boolean = true
 ) {
+    CORE("core", "org.lwjgl.system"),
+    CORE_DYNCALL("core.dyncall", "org.lwjgl.system.dyncall"),
+    CORE_JNI("core.jni", "org.lwjgl.system.jni"),
+    CORE_LIBC("core.libc", "org.lwjgl.system.libc"),
+    CORE_LINUX("core.linux", "org.lwjgl.system.linux"),
+    CORE_MACOS("core.macos", "org.lwjgl.system.macosx"),
+    CORE_WINDOWS("core.windows", "org.lwjgl.system.windows"),
+
     ASSIMP("binding.assimp", "org.lwjgl.assimp"),
     BGFX("binding.bgfx", "org.lwjgl.bgfx"),
     EGL("binding.egl", "org.lwjgl.egl"),
@@ -69,32 +77,41 @@ enum class Binding(
     ZSTD("binding.zstd", "org.lwjgl.util.zstd", arrayOverloads = false);
 
     companion object {
-        val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
-
-        private val PACKAGES = enumValues<Binding>().associateBy { it.packageName }
-
-        fun isEnabled(packageName: String) = Binding.PACKAGES[packageName]?.enabled ?: true
+        internal val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
     }
 
     val enabled
-        get() = System.getProperty(key, "false").toBoolean()
+        get() = key.startsWith("core") || System.getProperty(key, "false").toBoolean()
+
+    internal val java
+        get() = name.let {
+            if (it.startsWith("CORE_")) {
+                "core"
+            } else {
+                it.toLowerCase()
+            }
+        }
+
+    internal val packageKotlin
+        get() = name.let {
+            if (it.startsWith("CORE_")) {
+                this.key
+            } else {
+                it.toLowerCase()
+            }
+        }
 }
 
-fun String.dependsOn(vararg bindings: Binding): String? = if (bindings.any { it.enabled }) this else null
+fun String.dependsOn(vararg modules: Module): String? = if (modules.any { it.enabled }) this else null
 
 fun main(args: Array<String>) {
-    if (args.size < 2)
-        throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
+    if (args.size < 1)
+        throw IllegalArgumentException("Module root path not specified")
 
-    val validateDirectory = { name: String, path: String ->
-        if (!Files.isDirectory(Paths.get(path)))
-            throw IllegalArgumentException("Invalid $name path: $path")
-    }
+    if (!Files.isDirectory(Paths.get(args[0])))
+            throw IllegalArgumentException("Invalid module root path: ${args[0]}")
 
-    validateDirectory("template source", args[0])
-    validateDirectory("generation target", args[1])
-
-    generate(args[0], args[1]) {
+    Generator(args[0]).apply {
         // We discover templates reflectively.
         // For a package passed to the generate function, we  search for <package>.templates.* class files and run any public static methods that return
         // NativeClass objects.
@@ -105,26 +122,15 @@ fun main(args: Array<String>) {
         val pool = ForkJoinPool.commonPool()
 
         // Generate bindings
-
-        val bindingsSystem = arrayOf(
-            "org.lwjgl.system",
-            "org.lwjgl.system.dyncall",
-            "org.lwjgl.system.jni",
-            "org.lwjgl.system.libc",
-            "org.lwjgl.system.linux",
-            "org.lwjgl.system.macosx",
-            "org.lwjgl.system.windows"
-        )
-        val bindingsModular = Binding.values().asSequence()
-
         try {
             val errors = AtomicInteger()
 
-            CountDownLatch(bindingsSystem.size + bindingsModular.count()).let { latch ->
-                fun generate(packageName: String, binding: Binding? = null) {
+            Module.values().let { modules ->
+                val latch = CountDownLatch(modules.size)
+                modules.forEach {
                     pool.submit {
                         try {
-                            this.generate(packageName, binding)
+                            this.generateModule(it)
                         } catch(t: Throwable) {
                             errors.incrementAndGet()
                             t.printStackTrace()
@@ -132,10 +138,6 @@ fun main(args: Array<String>) {
                         latch.countDown()
                     }
                 }
-
-                bindingsSystem.forEach { generate(it) }
-                bindingsModular.forEach { generate(it.packageName, it) }
-
                 latch.await()
             }
 
@@ -157,11 +159,21 @@ fun main(args: Array<String>) {
                     }
                 }
 
-                submit { generate("struct", Generator.structs) }
-                submit { generate("callback", Generator.callbacks) }
-                submit { generate("custom class", Generator.customClasses) }
+                fun <T : GeneratorTarget> generateRegistered(typeName: String, targets: Iterable<T>) {
+                    targets.forEach {
+                        try {
+                            generateSimple(it)
+                        } catch (e: Exception) {
+                            throw RuntimeException("Uncaught exception while generating $typeName: ${it.packageName}.${it.className}", e)
+                        }
+                    }
+                }
 
-                submit { generate(JNI) }
+                submit { generateRegistered("struct", Generator.structs) }
+                submit { generateRegistered("callback", Generator.callbacks) }
+                submit { generateRegistered("custom class", Generator.customClasses) }
+
+                submit { generateSimple(JNI) }
 
                 latch.await()
             }
@@ -174,24 +186,13 @@ fun main(args: Array<String>) {
     }
 }
 
-private fun generate(
-    srcPath: String,
-    trgPath: String,
-    generate: Generator.() -> Unit
-) {
-    Generator(srcPath, trgPath).generate()
-}
-
-class Generator(
-    private val srcPath: String,
-    private val trgPath: String
-) {
+class Generator(private val moduleRoot: String) {
 
     companion object {
         // package -> #name -> class#prefix_name
-        internal val tokens = ConcurrentHashMap<String, MutableMap<String, String>>()
+        internal val tokens = ConcurrentHashMap<Module, MutableMap<String, String>>()
         // package -> #name() -> class#prefix_name()
-        internal val functions = ConcurrentHashMap<String, MutableMap<String, String>>()
+        internal val functions = ConcurrentHashMap<Module, MutableMap<String, String>>()
 
         internal val structs = ConcurrentLinkedQueue<Struct>()
         internal val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
@@ -199,29 +200,29 @@ class Generator(
 
         /** Registers a struct definition. */
         fun register(struct: Struct): Struct {
-            if (Binding.isEnabled(struct.packageName))
+            if (struct.module.enabled)
                 structs.add(struct)
             return struct
         }
 
         /** Registers a callback function. */
         fun register(callback: CallbackFunction) {
-            if (Binding.isEnabled(callback.packageName))
+            if (callback.module.enabled)
                 callbacks.add(callback)
         }
 
         /** Registers a custom class. */
         fun <T : GeneratorTarget> register(customClass: T): T {
-            if (Binding.isEnabled(customClass.packageName))
+            if (customClass.module.enabled)
                 customClasses.add(customClass)
             return customClass
         }
 
-        fun registerLibraryInit(packageName: String, className: String, libraryName: String, setupAllocator: Boolean = false) {
-            if (!Binding.isEnabled(packageName))
+        fun registerLibraryInit(module: Module, className: String, libraryName: String, setupAllocator: Boolean = false) {
+            if (!module.enabled)
                 return
 
-            Generator.register(object : GeneratorTargetNative(packageName, className) {
+            Generator.register(object : GeneratorTargetNative(module, className) {
                 init {
                     access = Access.INTERNAL
                     documentation = "Initializes the $libraryName shared library."
@@ -318,32 +319,35 @@ class Generator(
             }
     }
 
-    internal fun generate(packageName: String, binding: Binding? = null) {
-        val packagePath = "$srcPath/${packageName.replace('.', '/')}"
+    internal fun generateModule(module: Module) {
+        val packageKotlin = module.packageKotlin
+        val pathKotlin = "$moduleRoot/${module.java}/src/main/kotlin/${packageKotlin.replace('.', '/')}"
 
-        val packageLastModified = Paths.get(packagePath).lastModified(maxDepth = 1)
-        packageLastModifiedMap[packageName] = packageLastModified
+        val moduleLastModified = Paths.get(pathKotlin).lastModified(maxDepth = 1)
+        moduleLastModifiedMap[module] = moduleLastModified
 
-        if (binding?.enabled == false)
+        if (!module.enabled)
             return
 
         // Find and run configuration methods
         //runConfiguration(packagePath, packageName)
-        apply(packagePath, packageName) {
+        apply(pathKotlin, packageKotlin) {
             this
                 .filter { methodFilter(it, Void.TYPE) }
-                .forEach { it.invoke(null) }
+                .forEach {
+                    it.invoke(null)
+                }
         }
 
         // Find the template methods
         val templates = java.util.TreeSet<Method> { o1, o2 -> o1.name.compareTo(o2.name) }
-        apply("$packagePath/templates", "$packageName.templates") {
+        apply("$pathKotlin/templates", "$packageKotlin.templates") {
             this.filterTo(templates) {
                 methodFilter(it, NativeClass::class.java)
             }
         }
         if (templates.isEmpty()) {
-            println("*WARNING* No templates found in $packageName.templates package.")
+            println("*WARNING* No templates found in $packageKotlin.templates package.")
             return
         }
 
@@ -358,8 +362,8 @@ class Generator(
         for (template in templates) {
             val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
-            if (nativeClass.packageName != packageName)
-                throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
+            if (nativeClass.module !== module)
+                throw IllegalStateException("NativeClass ${nativeClass.className} has invalid module [${nativeClass.module.name}]. Should be: [${module.name}]")
 
             if (nativeClass.hasBody) {
                 classes.add(nativeClass)
@@ -377,22 +381,21 @@ class Generator(
         packageTokens.keys.removeAll(duplicateTokens)
         packageFunctions.keys.removeAll(duplicateFunctions)
 
-        tokens.put(packageName, packageTokens)
-        functions.put(packageName, packageFunctions)
+        tokens[module] = packageTokens
+        functions[module] = packageFunctions
 
         // Generate the template code
         classes.forEach {
-            it.registerFunctions(binding?.arrayOverloads ?: true)
-            generate(it, max(packageLastModified, GENERATOR_LAST_MODIFIED))
+            it.registerFunctions(module.arrayOverloads)
+            generate(pathKotlin, it, max(moduleLastModified, GENERATOR_LAST_MODIFIED))
         }
     }
 
-    private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
-        val packagePath = nativeClass.packageName.replace('.', '/')
+    private fun generate(pathKotlin: String, nativeClass: NativeClass, moduleLastModified: Long) {
+        val outputJava = Paths
+            .get("$moduleRoot/${nativeClass.module.java}/src/generated/java/${nativeClass.packageName.replace('.', '/')}/${nativeClass.className}.java")
 
-        val outputJava = Paths.get("$trgPath/java/$packagePath/${nativeClass.className}.java")
-
-        val lmt = max(nativeClass.getLastModified("$srcPath/$packagePath/templates"), packageLastModified)
+        val lmt = max(nativeClass.getLastModified("$pathKotlin/templates"), moduleLastModified)
         if (lmt < outputJava.lastModified) {
             //println("SKIPPED: ${nativeClass.packageName}.${nativeClass.className}")
             return
@@ -414,24 +417,16 @@ class Generator(
             nativeClass.nativeDirectivesWarning()
     }
 
-    internal fun <T : GeneratorTarget> generate(typeName: String, targets: Iterable<T>) {
-        targets.forEach {
-            try {
-                generate(it)
-            } catch (e: Exception) {
-                throw RuntimeException("Uncaught exception while generating $typeName: ${it.packageName}.${it.className}", e)
-            }
-        }
-    }
+    internal fun generateSimple(target: GeneratorTarget) {
+        val modulePath = "$moduleRoot/${target.module.java}"
+        val packageKotlin = target.module.packageKotlin
+        val pathKotlin = "$modulePath/src/main/kotlin/${packageKotlin.replace('.', '/')}"
 
-    internal fun generate(target: GeneratorTarget) {
-        val packagePath = target.packageName.replace('.', '/')
-
-        val outputJava = Paths.get("$trgPath/java/$packagePath/${target.className}.java")
+        val outputJava = Paths.get("$modulePath/src/generated/java/${target.packageName.replace('.', '/')}/${target.className}.java")
 
         val lmt = if (target.sourceFile == null) null else max(
-            target.getLastModified("$srcPath/$packagePath"),
-            max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED)
+            target.getLastModified(pathKotlin),
+            max(moduleLastModifiedMap[target.module]!!, GENERATOR_LAST_MODIFIED)
         )
 
         if (lmt != null && lmt < outputJava.lastModified) {
@@ -455,18 +450,16 @@ class Generator(
     }
 
     private fun generateNative(target: GeneratorTargetNative, generate: (Path) -> Unit) {
-        var subPackagePath = target.packageName.substring("org.lwjgl.".length).replace('.', '/')
-        if (!target.nativeSubPath.isEmpty())
-            subPackagePath = "$subPackagePath/${target.nativeSubPath}"
-
-        generate(Paths.get("$trgPath/c/$subPackagePath/${target.nativeFileName}.${if (target.cpp) "cpp" else "c"}"))
+        val targetFile =
+            "${target.nativeSubPath.let { if (it.isEmpty()) "" else "$it/" }}${target.nativeFileName}.${if (target.cpp) "cpp" else "c"}"
+        generate(Paths.get("$moduleRoot/${target.module.java}/src/generated/c/$targetFile"))
     }
 
 }
 
 // File management
 
-private val packageLastModifiedMap: MutableMap<String, Long> = ConcurrentHashMap()
+private val moduleLastModifiedMap: MutableMap<Module, Long> = ConcurrentHashMap()
 
 internal val Path.lastModified get() = if (Files.isRegularFile(this))
     Files.getLastModifiedTime(this).toMillis()

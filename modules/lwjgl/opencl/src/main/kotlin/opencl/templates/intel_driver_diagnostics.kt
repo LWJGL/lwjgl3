@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
+import opencl.*
 
 val intel_driver_diagnostics = "INTELDriverDiagnostics".nativeClassCL("intel_driver_diagnostics", INTEL) {
     documentation =

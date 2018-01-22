@@ -703,7 +703,7 @@ class Func(
         if (!hasExplicitFunctionAddress && !constantMacro)
             binding.generateFunctionAddress(this, this@Func)
 
-        if (Binding.CHECKS) {
+        if (Module.CHECKS) {
             // Basic checks
             val checks = ArrayList<String>(4)
             if (has<DependsOn>() || has<IgnoreMissing>() || binding.shouldCheckFunctionAddress(this@Func))
@@ -824,7 +824,7 @@ class Func(
 
         // Generate checks
         printCode(code.javaInit, ApplyTo.NORMAL)
-        if (Binding.CHECKS && !has<Macro>())
+        if (Module.CHECKS && !has<Macro>())
             generateChecks(NORMAL)
 
         // Prepare stack parameters
@@ -1472,7 +1472,7 @@ class Func(
             }
 
         printCode(code.javaInit, ApplyTo.ALTERNATIVE)
-        if (Binding.CHECKS && !macro)
+        if (Module.CHECKS && !macro)
             generateChecks(ALTERNATIVE, transforms)
 
         // Prepare stack parameters

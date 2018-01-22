@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.glfw.templates
+package glfw.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
-import org.lwjgl.glfw.*
+import glfw.*
 
-val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "egl", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
+val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "egl", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport(
         "org.lwjgl.egl.EGL10"
     )

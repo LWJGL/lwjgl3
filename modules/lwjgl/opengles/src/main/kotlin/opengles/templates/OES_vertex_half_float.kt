@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val OES_vertex_half_float = "OESVertexHalfFloat".nativeClassGLES("OES_vertex_half_float", postfix = OES) {
     documentation =

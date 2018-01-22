@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.assimp
+package assimp
 
 import org.lwjgl.generator.*
 
-val ASSIMP_PACKAGE = "org.lwjgl.assimp"
-
 fun config() {
     packageInfo(
-        ASSIMP_PACKAGE,
+        Module.ASSIMP,
         """
         Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library, a library to import and export various 3d-model-formats including
         scene-post-processing to generate missing render data.
@@ -25,9 +23,13 @@ fun config() {
     )
 }
 
-val ASSIMP_BINDING = simpleBinding("assimp", """Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("assimp"))""", bundledWithLWJGL = true)
+val ASSIMP_BINDING = simpleBinding(
+    Module.ASSIMP,
+    libraryExpression = """Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("assimp"))""",
+    bundledWithLWJGL = true
+)
 
-/*val aiPlane = struct(ASSIMP_PACKAGE, "AIPlane", nativeName = "struct aiPlane") {
+/*val aiPlane = struct(Binding.ASSIMP, "AIPlane", nativeName = "struct aiPlane") {
     documentation = "Represents a plane in a three-dimensional, euclidean space."
 
     float.member("a", "Plane equation")
@@ -36,26 +38,26 @@ val ASSIMP_BINDING = simpleBinding("assimp", """Configuration.ASSIMP_LIBRARY_NAM
     float.member("d", "Plane equation")
 }*/
 
-val aiVector2D = struct(ASSIMP_PACKAGE, "AIVector2D", nativeName = "struct aiVector2D", mutable = false) {
+val aiVector2D = struct(Module.ASSIMP, "AIVector2D", nativeName = "struct aiVector2D", mutable = false) {
     float.member("x", "")
     float.member("y", "")
 }
 
-val aiVector3D = struct(ASSIMP_PACKAGE, "AIVector3D", nativeName = "struct aiVector3D") {
+val aiVector3D = struct(Module.ASSIMP, "AIVector3D", nativeName = "struct aiVector3D") {
     float.member("x", "")
     float.member("y", "")
     float.member("z", "")
 }
 val aiVector3D_p = aiVector3D.p
 
-/*val aiRay = struct(ASSIMP_PACKAGE, "AIRay", nativeName = "struct aiRay") {
+/*val aiRay = struct(Binding.ASSIMP, "AIRay", nativeName = "struct aiRay") {
     documentation = "Represents a ray."
 
     aiVector3D.member("pos", "Position of the ray")
     aiVector3D.member("dir", "Direction of the ray")
 }*/
 
-val aiColor3D = struct(ASSIMP_PACKAGE, "AIColor3D", nativeName = "struct aiColor3D", mutable = false) {
+val aiColor3D = struct(Module.ASSIMP, "AIColor3D", nativeName = "struct aiColor3D", mutable = false) {
     documentation = "Represents a color in Red-Green-Blue space."
 
     float.member("r", "The red color value")
@@ -63,7 +65,7 @@ val aiColor3D = struct(ASSIMP_PACKAGE, "AIColor3D", nativeName = "struct aiColor
     float.member("b", "The blue color value")
 }
 
-val aiString = struct(ASSIMP_PACKAGE, "AIString", nativeName = "struct aiString") {
+val aiString = struct(Module.ASSIMP, "AIString", nativeName = "struct aiString") {
     documentation = "Represents an UTF-8 string, zero byte terminated."
 
     AutoSize("data")..size_t.member("length", "Binary length of the string excluding the terminal 0.")
@@ -71,7 +73,7 @@ val aiString = struct(ASSIMP_PACKAGE, "AIString", nativeName = "struct aiString"
 }
 val aiString_p = aiString.p
 
-val aiMemoryInfo_p = struct(ASSIMP_PACKAGE, "AIMemoryInfo", nativeName = "struct aiMemoryInfo", mutable = false) {
+val aiMemoryInfo_p = struct(Module.ASSIMP, "AIMemoryInfo", nativeName = "struct aiMemoryInfo", mutable = false) {
     documentation = "Stores the memory requirements for different components (e.g. meshes, materials, animations) of an import. All sizes are in bytes."
 
     unsigned_int.member("textures", "Storage allocated for texture data")
@@ -84,7 +86,7 @@ val aiMemoryInfo_p = struct(ASSIMP_PACKAGE, "AIMemoryInfo", nativeName = "struct
     unsigned_int.member("total", "Total storage allocated for the full import.")
 }.p
 
-val aiTexel_p = struct(ASSIMP_PACKAGE, "AITexel", nativeName = "struct aiTexel", mutable = false) {
+val aiTexel_p = struct(Module.ASSIMP, "AITexel", nativeName = "struct aiTexel", mutable = false) {
     documentation = "Helper structure to represent a texel in a ARGB8888 format. Used by aiTexture."
 
     unsigned_char.member("b", "The blue color component")
@@ -93,7 +95,7 @@ val aiTexel_p = struct(ASSIMP_PACKAGE, "AITexel", nativeName = "struct aiTexel",
     unsigned_char.member("a", "The alpha color component")
 }.p
 
-val aiTexture_pp = struct(ASSIMP_PACKAGE, "AITexture", nativeName = "struct aiTexture", mutable = false) {
+val aiTexture_pp = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTexture", mutable = false) {
     documentation =
         """
         Helper structure to describe an embedded texture.
@@ -144,7 +146,7 @@ val aiTexture_pp = struct(ASSIMP_PACKAGE, "AITexture", nativeName = "struct aiTe
     aiString.member("mFilename", "texture original filename. Used to get the texture reference.")
 }.p.p
 
-val aiColor4D_p = struct(ASSIMP_PACKAGE, "AIColor4D", nativeName = "struct aiColor4D") {
+val aiColor4D_p = struct(Module.ASSIMP, "AIColor4D", nativeName = "struct aiColor4D") {
     documentation = "Represents a color in Red-Green-Blue space including an alpha component. Color values range from 0 to 1."
 
     float.member("r", "The red color component")
@@ -153,7 +155,7 @@ val aiColor4D_p = struct(ASSIMP_PACKAGE, "AIColor4D", nativeName = "struct aiCol
     float.member("a", "The alpha color component")
 }.p
 
-val aiMatrix4x4 = struct(ASSIMP_PACKAGE, "AIMatrix4x4", nativeName = "struct aiMatrix4x4") {
+val aiMatrix4x4 = struct(Module.ASSIMP, "AIMatrix4x4", nativeName = "struct aiMatrix4x4") {
     documentation = "Represents a row-major 4x4 matrix, use this for homogeneous coordinates."
 
     float.member("a1", "")
@@ -178,7 +180,7 @@ val aiMatrix4x4 = struct(ASSIMP_PACKAGE, "AIMatrix4x4", nativeName = "struct aiM
 }
 val aiMatrix4x4_p = aiMatrix4x4.p
 
-val aiMatrix3x3_p = struct(ASSIMP_PACKAGE, "AIMatrix3x3", nativeName = "struct aiMatrix3x3") {
+val aiMatrix3x3_p = struct(Module.ASSIMP, "AIMatrix3x3", nativeName = "struct aiMatrix3x3") {
     documentation = "Represents a row-major 3x3 matrix."
 
     float.member("a1", "")
@@ -200,12 +202,12 @@ val aiMatrix3x3_p = struct(ASSIMP_PACKAGE, "AIMatrix3x3", nativeName = "struct a
 
 val aiMetadataType = "aiMetadataType".enumType
 
-val aiMetadataEntry_p = struct(ASSIMP_PACKAGE, "AIMetaDataEntry", nativeName = "struct aiMetadataEntry") {
+val aiMetadataEntry_p = struct(Module.ASSIMP, "AIMetaDataEntry", nativeName = "struct aiMetadataEntry") {
     aiMetadataType.member("mType", "")
     void_p.member("mData", "")
 }.p
 
-val aiMetadata_p = struct(ASSIMP_PACKAGE, "AIMetaData", nativeName = "struct aiMetadata") {
+val aiMetadata_p = struct(Module.ASSIMP, "AIMetaData", nativeName = "struct aiMetadata") {
     AutoSize("mKeys", "mValues")..unsigned_int.member("mNumProperties", "Length of the {@code mKeys} and {@code mValues} arrays, respectively")
     aiString_p.buffer("mKeys", "Arrays of keys, may not be #NULL. Entries in this array may not be #NULL as well.")
     aiMetadataEntry_p.buffer(
@@ -214,8 +216,8 @@ val aiMetadata_p = struct(ASSIMP_PACKAGE, "AIMetaData", nativeName = "struct aiM
     )
 }.p
 
-val aiNode_p = struct(ASSIMP_PACKAGE, "AINode", nativeName = "struct aiNode").p
-val aiNode = struct(ASSIMP_PACKAGE, "AINode", nativeName = "struct aiNode") {
+val aiNode_p = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode").p
+val aiNode = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode") {
     documentation =
         """
         A node in the imported hierarchy.
@@ -234,7 +236,7 @@ val aiNode = struct(ASSIMP_PACKAGE, "AINode", nativeName = "struct aiNode") {
     nullable..aiMetadata_p.member("mMetadata", "Metadata associated with this node or #NULL if there is no metadata.")
 }
 
-val aiFace_p = struct(ASSIMP_PACKAGE, "AIFace", nativeName = "struct aiFace") {
+val aiFace_p = struct(Module.ASSIMP, "AIFace", nativeName = "struct aiFace") {
     documentation =
         """
         A single face in a mesh, referring to multiple vertices.
@@ -254,14 +256,14 @@ val aiFace_p = struct(ASSIMP_PACKAGE, "AIFace", nativeName = "struct aiFace") {
     unsigned_int_p.member("mIndices", "Pointer to the indices array. Size of the array is given in {@code numIndices}.")
 }.p
 
-val aiVertexWeight_p = struct(ASSIMP_PACKAGE, "AIVertexWeight", nativeName = "struct aiVertexWeight") {
+val aiVertexWeight_p = struct(Module.ASSIMP, "AIVertexWeight", nativeName = "struct aiVertexWeight") {
     documentation = "A single influence of a bone on a vertex."
 
     unsigned_int.member("mVertexId", "Index of the vertex which is influenced by the bone.")
     float.member("mWeight", "The strength of the influence in the range (0...1). The influence from all bones at one vertex amounts to 1.")
 }.p
 
-val aiBone_pp = struct(ASSIMP_PACKAGE, "AIBone", nativeName = "struct aiBone") {
+val aiBone_pp = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
     documentation =
         """
         A single bone of a mesh.
@@ -279,7 +281,7 @@ val aiBone_pp = struct(ASSIMP_PACKAGE, "AIBone", nativeName = "struct aiBone") {
     aiMatrix4x4.member("mOffsetMatrix", "Matrix that transforms from mesh space to bone space in bind pose")
 }.p.p
 
-val aiAnimMesh_pp = struct(ASSIMP_PACKAGE, "AIAnimMesh", nativeName = "struct aiAnimMesh") {
+val aiAnimMesh_pp = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnimMesh") {
     documentation =
         """
         NOT CURRENTLY IN USE. An AnimMesh is an attachment to an ##AIMesh stores per-vertex animations for a particular frame.
@@ -316,7 +318,7 @@ val aiAnimMesh_pp = struct(ASSIMP_PACKAGE, "AIAnimMesh", nativeName = "struct ai
     )
 }.p.p
 
-val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
+val aiMesh_pp = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     documentation =
         """
         A mesh represents a geometry or model with a single material.
@@ -440,7 +442,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
     )
 }.p.p
 
-val aiUVTransform_p = struct(ASSIMP_PACKAGE, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {
+val aiUVTransform_p = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {
     documentation =
         """
         Defines how an UV channel is transformed.
@@ -461,7 +463,7 @@ val aiUVTransform_p = struct(ASSIMP_PACKAGE, "AIUVTransform", nativeName = "stru
 
 val aiPropertyTypeInfo = "aiPropertyTypeInfo".enumType
 
-val aiMaterialProperty_pp = struct(ASSIMP_PACKAGE, "AIMaterialProperty", nativeName = "struct aiMaterialProperty", mutable = false) {
+val aiMaterialProperty_pp = struct(Module.ASSIMP, "AIMaterialProperty", nativeName = "struct aiMaterialProperty", mutable = false) {
     documentation =
         """
         Data structure for a single material property.
@@ -498,7 +500,7 @@ $&lt;name&gt;
     char_p.member("mData", "Binary buffer to hold the property's value. The size of the buffer is always mDataLength.")
 }.p.p
 
-val aiMaterial_p = struct(ASSIMP_PACKAGE, "AIMaterial", nativeName = "struct aiMaterial") {
+val aiMaterial_p = struct(Module.ASSIMP, "AIMaterial", nativeName = "struct aiMaterial") {
     documentation =
         """
         Data structure for a material.
@@ -514,7 +516,7 @@ val aiMaterial_p = struct(ASSIMP_PACKAGE, "AIMaterial", nativeName = "struct aiM
 }.p
 val aiMaterial_pp = aiMaterial_p.p
 
-val aiQuaternion = struct(ASSIMP_PACKAGE, "AIQuaternion", nativeName = "struct aiQuaternion") {
+val aiQuaternion = struct(Module.ASSIMP, "AIQuaternion", nativeName = "struct aiQuaternion") {
     documentation = "Represents a quaternion in a 4D vector."
 
     float.member("w", "The w component")
@@ -524,21 +526,21 @@ val aiQuaternion = struct(ASSIMP_PACKAGE, "AIQuaternion", nativeName = "struct a
 }
 val aiQuaternion_p = aiQuaternion.p
 
-val aiVectorKey_p = struct(ASSIMP_PACKAGE, "AIVectorKey", nativeName = "struct aiVectorKey") {
+val aiVectorKey_p = struct(Module.ASSIMP, "AIVectorKey", nativeName = "struct aiVectorKey") {
     documentation = "A time-value pair specifying a certain 3D vector for the given time."
 
     double.member("mTime", "The time of this key")
     aiVector3D.member("mValue", "The value of this key")
 }.p
 
-val aiQuatKey_p = struct(ASSIMP_PACKAGE, "AIQuatKey", nativeName = "struct aiQuatKey") {
+val aiQuatKey_p = struct(Module.ASSIMP, "AIQuatKey", nativeName = "struct aiQuatKey") {
     documentation = "A time-value pair specifying a rotation for the given time. Rotations are expressed with quaternions."
 
     double.member("mTime", "The time of this key")
     aiQuaternion.member("mValue", "The value of this key")
 }.p
 
-val aiMeshKey_p = struct(ASSIMP_PACKAGE, "AIMeshKey", nativeName = "struct aiMeshKey") {
+val aiMeshKey_p = struct(Module.ASSIMP, "AIMeshKey", nativeName = "struct aiMeshKey") {
     documentation = "Binds a anim mesh to a specific point in time."
 
     double.member("mTime", "The time of this key")
@@ -553,7 +555,7 @@ val aiMeshKey_p = struct(ASSIMP_PACKAGE, "AIMeshKey", nativeName = "struct aiMes
 
 val aiAnimBehaviour = "aiAnimBehaviour".enumType
 
-val aiNodeAnim_pp = struct(ASSIMP_PACKAGE, "AINodeAnim", nativeName = "struct aiNodeAnim") {
+val aiNodeAnim_pp = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNodeAnim") {
     documentation =
         """
         Describes the animation of a single node. The name specifies the bone/node which is affected by this animation channel. The keyframes are given in
@@ -610,7 +612,7 @@ val aiNodeAnim_pp = struct(ASSIMP_PACKAGE, "AINodeAnim", nativeName = "struct ai
     )
 }.p.p
 
-val aiMeshAnim_pp = struct(ASSIMP_PACKAGE, "AIMeshAnim", nativeName = "struct aiMeshAnim") {
+val aiMeshAnim_pp = struct(Module.ASSIMP, "AIMeshAnim", nativeName = "struct aiMeshAnim") {
     documentation =
         """
         Describes vertex-based animations for a single mesh or a group of meshes. Meshes carry the animation data for each frame in their
@@ -628,7 +630,7 @@ val aiMeshAnim_pp = struct(ASSIMP_PACKAGE, "AIMeshAnim", nativeName = "struct ai
     aiMeshKey_p.buffer("mKeys", "Key frames of the animation. May not be #NULL.")
 }.p.p
 
-val aiAnimation_pp = struct(ASSIMP_PACKAGE, "AIAnimation", nativeName = "struct aiAnimation") {
+val aiAnimation_pp = struct(Module.ASSIMP, "AIAnimation", nativeName = "struct aiAnimation") {
     documentation =
         """
         An animation consists of keyframe data for a number of nodes. For each node affected by the animation a separate series of data is given.
@@ -654,7 +656,7 @@ val aiAnimation_pp = struct(ASSIMP_PACKAGE, "AIAnimation", nativeName = "struct 
 
 val aiLightSourceType = "aiLightSourceType".enumType
 
-val aiLight_pp = struct(ASSIMP_PACKAGE, "AILight", nativeName = "struct aiLight", mutable = false) {
+val aiLight_pp = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mutable = false) {
     documentation =
         """
         Helper structure to describe a light source.
@@ -758,7 +760,7 @@ val aiLight_pp = struct(ASSIMP_PACKAGE, "AILight", nativeName = "struct aiLight"
     aiVector2D.member("mSize", "Size of area light source.")
 }.p.p
 
-val aiCamera_pp = struct(ASSIMP_PACKAGE, "AICamera", nativeName = "struct aiCamera") {
+val aiCamera_pp = struct(Module.ASSIMP, "AICamera", nativeName = "struct aiCamera") {
     documentation =
         """
         Helper structure to describe a virtual camera.
@@ -821,7 +823,7 @@ val aiCamera_pp = struct(ASSIMP_PACKAGE, "AICamera", nativeName = "struct aiCame
     )
 }.p.p
 
-val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene") {
+val aiScene_p = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
     documentation =
         """
         The root structure of the imported data.
@@ -903,7 +905,7 @@ val aiTextureMapping_p = "aiTextureMapping".enumType.p
 val aiTextureOp_p = "aiTextureOp".enumType.p
 val aiTextureMapMode_p = "aiTextureMapMode".enumType.p
 
-val aiImporterDesc_p = struct(ASSIMP_PACKAGE, "AIImporterDesc", nativeName = "struct aiImporterDesc") {
+val aiImporterDesc_p = struct(Module.ASSIMP, "AIImporterDesc", nativeName = "struct aiImporterDesc") {
     documentation =
         """
         Meta information about a particular importer. Importers need to fill this structure, but they can freely decide how talkative they are. A common use
@@ -935,11 +937,11 @@ val aiImporterDesc_p = struct(ASSIMP_PACKAGE, "AIImporterDesc", nativeName = "st
     )
 }.p
 
-val aiFile_p = struct(ASSIMP_PACKAGE, "AIFile", nativeName = "struct aiFile").p
-val aiFileIO_p = struct(ASSIMP_PACKAGE, "AIFileIO", nativeName = "struct aiFileIO").p
+val aiFile_p = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile").p
+val aiFileIO_p = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO").p
 
 val aiFileWriteProc = "aiFileWriteProc".callback(
-    ASSIMP_PACKAGE, size_t, "AIFileWriteProc",
+    Module.ASSIMP, size_t, "AIFileWriteProc",
     "File write procedure.",
 
     aiFile_p.IN("pFile", "File pointer to write to"),
@@ -949,7 +951,7 @@ val aiFileWriteProc = "aiFileWriteProc".callback(
 )
 
 val aiFileReadProc = "aiFileReadProc".callback(
-    ASSIMP_PACKAGE, size_t, "AIFileReadProc",
+    Module.ASSIMP, size_t, "AIFileReadProc",
     "File read procedure",
 
     aiFile_p.IN("pFile", "File pointer to read from"),
@@ -959,14 +961,14 @@ val aiFileReadProc = "aiFileReadProc".callback(
 )
 
 val aiFileTellProc = "aiFileTellProc".callback(
-    ASSIMP_PACKAGE, size_t, "AIFileTellProc",
+    Module.ASSIMP, size_t, "AIFileTellProc",
     "File tell procedure.",
 
     aiFile_p.IN("pFile", "File pointer to find ftell() on")
 )
 
 val aiFileFlushProc = "aiFileFlushProc".callback(
-    ASSIMP_PACKAGE, void, "AIFileFlushProc",
+    Module.ASSIMP, void, "AIFileFlushProc",
     "File flush procedure.",
 
     aiFile_p.IN("pFile", "File pointer to flush")
@@ -975,7 +977,7 @@ val aiFileFlushProc = "aiFileFlushProc".callback(
 val aiOrigin = "aiOrigin".enumType
 
 val aiFileSeek = "aiFileSeek".callback(
-    ASSIMP_PACKAGE, aiReturn, "AIFileSeek",
+    Module.ASSIMP, aiReturn, "AIFileSeek",
     "File seek procedure",
 
     aiFile_p.IN("pFile", "File pointer to seek to"),
@@ -984,7 +986,7 @@ val aiFileSeek = "aiFileSeek".callback(
 )
 
 val aiFileOpenProc = "aiFileOpenProc".callback(
-    ASSIMP_PACKAGE, aiFile_p, "AIFileOpenProc",
+    Module.ASSIMP, aiFile_p, "AIFileOpenProc",
     "File open procedure",
 
     aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
@@ -993,7 +995,7 @@ val aiFileOpenProc = "aiFileOpenProc".callback(
 )
 
 val aiFileCloseProc = "aiFileCloseProc".callback(
-    ASSIMP_PACKAGE, void, "AIFileCloseProc",
+    Module.ASSIMP, void, "AIFileCloseProc",
     "File close procedure",
 
     aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
@@ -1002,7 +1004,7 @@ val aiFileCloseProc = "aiFileCloseProc".callback(
 
 val aiUserData = typedef(opaque_p, "aiUserData")
 
-val aiFileIO = struct(ASSIMP_PACKAGE, "AIFileIO", nativeName = "struct aiFileIO") {
+val aiFileIO = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO") {
     documentation =
         """
         Provided are functions to open and close files. Supply a custom structure to the import function. If you don't, a default implementation is used. Use
@@ -1014,7 +1016,7 @@ val aiFileIO = struct(ASSIMP_PACKAGE, "AIFileIO", nativeName = "struct aiFileIO"
     aiUserData.member("UserData", "User-defined, opaque data")
 }
 
-val aiFile = struct(ASSIMP_PACKAGE, "AIFile", nativeName = "struct aiFile") {
+val aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile") {
     documentation = """
         Actually, it's a data structure to wrap a set of fXXXX (e.g fopen) replacement functions.
 
@@ -1032,14 +1034,14 @@ val aiFile = struct(ASSIMP_PACKAGE, "AIFile", nativeName = "struct aiFile") {
 }
 
 val aiLogStreamCallback = "aiLogStreamCallback".callback(
-    ASSIMP_PACKAGE, void, "AILogStreamCallback",
+    Module.ASSIMP, void, "AILogStreamCallback",
     "Callback to be called for log stream messages",
 
     const..charUTF8_p.IN("message", "The message to be logged"),
     opaque_p.IN("user", "The user data from the log stream")
 )
 
-val aiLogStream = struct(ASSIMP_PACKAGE, "AILogStream", nativeName = "struct aiLogStream") {
+val aiLogStream = struct(Module.ASSIMP, "AILogStream", nativeName = "struct aiLogStream") {
     documentation = "Represents a log stream. A log stream receives all log messages and streams them somewhere"
 
     aiLogStreamCallback.member("callback", "callback to be called")
@@ -1047,7 +1049,7 @@ val aiLogStream = struct(ASSIMP_PACKAGE, "AILogStream", nativeName = "struct aiL
 }
 val aiLogStream_p = aiLogStream.p
 
-val aiPropertyStore_p = struct(ASSIMP_PACKAGE, "AIPropertyStore", nativeName = "struct aiPropertyStore") {
+val aiPropertyStore_p = struct(Module.ASSIMP, "AIPropertyStore", nativeName = "struct aiPropertyStore") {
     documentation = "Represents an opaque set of settings to be used during importing."
 
     char.member("sentinel", "")
@@ -1056,7 +1058,7 @@ val aiPropertyStore_p = struct(ASSIMP_PACKAGE, "AIPropertyStore", nativeName = "
 val aiBool = typedef(intb, "aiBool")
 val aiDefaultLogStream = "aiDefaultLogStream".enumType
 
-val aiExportFormatDesc_p = struct(ASSIMP_PACKAGE, "AIExportFormatDesc", nativeName = "struct aiExportFormatDesc") {
+val aiExportFormatDesc_p = struct(Module.ASSIMP, "AIExportFormatDesc", nativeName = "struct aiExportFormatDesc") {
     documentation = """
         Describes an file format which Assimp can export to. Use #GetExportFormatCount() to learn how many export formats the current Assimp build supports and
         #GetExportFormatDescription() to retrieve a description of an export format option.
@@ -1076,8 +1078,8 @@ val aiExportFormatDesc_p = struct(ASSIMP_PACKAGE, "AIExportFormatDesc", nativeNa
     const..charUTF8_p.member("fileExtension", "Recommended file extension for the exported file in lower case.")
 }.p
 
-val aiExportDataBlob_p = struct(ASSIMP_PACKAGE, "AIExportDataBlob", nativeName = "struct aiExportDataBlob").p
-val aiExportDataBlob = struct(ASSIMP_PACKAGE, "AIExportDataBlob", nativeName = "struct aiExportDataBlob") {
+val aiExportDataBlob_p = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "struct aiExportDataBlob").p
+val aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "struct aiExportDataBlob") {
     documentation = """
         Describes a blob of exported scene data. Use #ExportSceneToBlob() to create a blob containing an exported scene. The memory referred by this structure
         is owned by Assimp. to free its resources. Don't try to free the memory on your side - it will crash for most build configurations due to conflicting

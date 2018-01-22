@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val KHR_texture_compression_astc_ldr = "KHRTextureCompressionASTCLDR".nativeClassGLES("KHR_texture_compression_astc_ldr", postfix = KHR) {
     documentation =

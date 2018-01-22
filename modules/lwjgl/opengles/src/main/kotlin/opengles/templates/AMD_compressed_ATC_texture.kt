@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val AMD_compressed_ATC_texture = "AMDCompressedATCTexture".nativeClassGLES("AMD_compressed_ATC_texture", postfix = AMD) {
     documentation =

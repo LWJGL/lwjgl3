@@ -3,12 +3,12 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan.templates
+package vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.*
+import vulkan.*
 
-val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = VK_BINDING_INSTANCE) {
+val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK_BINDING_INSTANCE) {
     documentation =
         """
         The core Vulkan 1.0 functionality.

@@ -2,14 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.jawt.templates
+package jawt.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.jawt.*
-import org.lwjgl.system.jni.*
+import jawt.*
+import core.jni.*
 
-val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = simpleBinding(
-    "jawt",
+val jawt = "JAWTFunctions".nativeClass(Module.JAWT, prefix = "JAWT_", prefixMethod = "JAWT_", binding = simpleBinding(
+    Module.JAWT,
     libraryExpression = """Configuration.JAWT_LIBRARY_NAME, "jawt", apiFindLibrary(System.getProperty("java.home"), "jawt")""",
     callingConvention = CallingConvention.STDCALL
 )) {

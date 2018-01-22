@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.glfw.templates
+package glfw.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.glfw.*
+import glfw.*
 
-val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFW_BINDING) {
+val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDING) {
     documentation =
         """
         Native bindings to the ${url("http://www.glfw.org/docs/latest/", "GLFW")} library.

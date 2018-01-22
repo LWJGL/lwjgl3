@@ -3,10 +3,10 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan.templates
+package vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.*
+import vulkan.*
 
 val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type = "device", postfix = KHX) {
     documentation =

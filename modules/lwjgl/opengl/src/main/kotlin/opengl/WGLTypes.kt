@@ -2,17 +2,17 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl
+package opengl
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.windows.*
+import core.windows.*
 
 val HPBUFFERARB = "HPBUFFERARB".opaque_p
 
 // WGL_NV_gpu_affinity
 val HGPUNV = "HGPUNV".opaque_p
 val HGPUNV_p = HGPUNV.p
-val GPU_DEVICE = struct(OPENGL_PACKAGE, "GPU_DEVICE", nativeSubPath = "wgl", mutable = false) {
+val GPU_DEVICE = struct(Module.OPENGL, "GPU_DEVICE", nativeSubPath = "wgl", mutable = false) {
     documentation =
         "Receives information about the display device specified by the {@code deviceIndex} parameter of the #EnumGpuDevicesNV() function."
     javaImport("org.lwjgl.system.windows.*")

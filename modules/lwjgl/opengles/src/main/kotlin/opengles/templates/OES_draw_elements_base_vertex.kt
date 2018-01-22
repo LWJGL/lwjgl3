@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
-import org.lwjgl.opengles.BufferType.*
+import opengles.*
+import opengles.BufferType.*
 
 val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES("OES_draw_elements_base_vertex", postfix = OES) {
     documentation =

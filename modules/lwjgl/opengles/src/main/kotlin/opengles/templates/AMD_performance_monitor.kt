@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_performance_monitor", postfix = AMD) {
     documentation =

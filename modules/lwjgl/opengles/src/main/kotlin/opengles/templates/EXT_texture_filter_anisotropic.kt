@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val EXT_texture_filter_anisotropic = "EXTTextureFilterAnisotropic".nativeClassGLES("EXT_texture_filter_anisotropic", postfix = EXT) {
     documentation =

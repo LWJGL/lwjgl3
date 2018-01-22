@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../bin/classes/samples" />
+    <output-test url="file://$MODULE_DIR$/../../bin/classes/samples" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../modules/samples">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/samples/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/samples/src/test/resources" type="java-test-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
+    <orderEntry type="library" scope="TEST" name="JOML" level="project" />
+    <orderEntry type="library" scope="TEST" name="jsr305" level="project" />
+    <orderEntry type="module" module-name="core" scope="TEST" />
+    <orderEntry type="module" module-name="assimp" scope="TEST" />
+    <orderEntry type="module" module-name="bgfx" scope="TEST" />
+    <orderEntry type="module" module-name="egl" scope="TEST" />
+    <orderEntry type="module" module-name="glfw" scope="TEST" />
+    <orderEntry type="module" module-name="jawt" scope="TEST" />
+    <orderEntry type="module" module-name="jemalloc" scope="TEST" />
+    <orderEntry type="module" module-name="lmdb" scope="TEST" />
+    <orderEntry type="module" module-name="lz4" scope="TEST" />
+    <orderEntry type="module" module-name="nanovg" scope="TEST" />
+    <orderEntry type="module" module-name="nfd" scope="TEST" />
+    <orderEntry type="module" module-name="nuklear" scope="TEST" />
+    <orderEntry type="module" module-name="odbc" scope="TEST" />
+    <orderEntry type="module" module-name="openal" scope="TEST" />
+    <orderEntry type="module" module-name="opencl" scope="TEST" />
+    <orderEntry type="module" module-name="opengl" scope="TEST" />
+    <orderEntry type="module" module-name="opengles" scope="TEST" />
+    <orderEntry type="module" module-name="openvr" scope="TEST" />
+    <orderEntry type="module" module-name="ovr" scope="TEST" />
+    <orderEntry type="module" module-name="par" scope="TEST" />
+    <orderEntry type="module" module-name="remotery" scope="TEST" />
+    <orderEntry type="module" module-name="rpmalloc" scope="TEST" />
+    <orderEntry type="module" module-name="sse" scope="TEST" />
+    <orderEntry type="module" module-name="stb" scope="TEST" />
+    <orderEntry type="module" module-name="tinyexr" scope="TEST" />
+    <orderEntry type="module" module-name="tinyfd" scope="TEST" />
+    <orderEntry type="module" module-name="tootle" scope="TEST" />
+    <orderEntry type="module" module-name="vulkan" scope="TEST" />
+    <orderEntry type="module" module-name="xxhash" scope="TEST" />
+    <orderEntry type="module" module-name="yoga" scope="TEST" />
+    <orderEntry type="module" module-name="zstd" scope="TEST" />
+  </component>
+</module>

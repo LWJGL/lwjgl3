@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.odbc.templates
+package odbc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.odbc.*
+import odbc.*
 
-val sqlncli = "SQLNCLI".nativeClass(ODBC_PACKAGE, prefix = "SQL", prefixMethod = "SQL", binding = ODBC_BINDING_DELEGATE) {
+val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", binding = ODBC_BINDING_DELEGATE) {
     javaImport("static org.lwjgl.system.MemoryUtil.*")
 
     documentation =

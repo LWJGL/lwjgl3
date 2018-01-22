@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
-import org.lwjgl.opengl.*
-import org.lwjgl.system.linux.*
+import opengl.*
+import core.linux.*
 
 val GLX12 = "GLX12".nativeClassGLX("GLX12") {
     documentation = "Native bindings to GLX 1.2."

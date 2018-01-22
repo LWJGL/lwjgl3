@@ -17,8 +17,8 @@ import static org.testng.Assert.*;
 public class ParTest {
 
     public void testCylindersAndSpheres() {
-        assertEquals(par_shapes_create_cylinder(1, 1), null); // bad
-        assertEquals(par_shapes_create_cylinder(1, 3), null); // bad
+        assertNull(par_shapes_create_cylinder(1, 1)); // bad
+        assertNull(par_shapes_create_cylinder(1, 3)); // bad
         par_shapes_free_mesh(Objects.requireNonNull(par_shapes_create_cylinder(3, 1))); // good
 
         ParShapesMesh m = Objects.requireNonNull(par_shapes_create_cylinder(5, 6));

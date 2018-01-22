@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
-import org.lwjgl.opengl.*
+import opencl.*
+import opengl.*
 
-val khr_gl_event = "KHRGLEvent".dependsOn(Binding.OPENGL, Binding.OPENGLES)?.nativeClassCL("khr_gl_event", KHR) {
+val khr_gl_event = "KHRGLEvent".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("khr_gl_event", KHR) {
     documentation =
         """
         Native bindings to the $extensionName extension.

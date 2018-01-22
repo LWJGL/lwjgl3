@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val EXT_memory_object_win32 = "EXTMemoryObjectWin32".nativeClassGL("EXT_memory_object_win32", postfix = EXT) {
     documentation =

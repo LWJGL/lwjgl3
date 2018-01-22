@@ -7,12 +7,12 @@ package org.lwjgl.generator
 import java.io.*
 
 class CallbackFunction(
-    packageName: String,
+    module: Module,
     className: String,
     val nativeType: String,
     val returns: NativeType,
     vararg val signature: Parameter
-) : GeneratorTarget(packageName, className) {
+) : GeneratorTarget(module, className) {
 
     internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
@@ -184,14 +184,14 @@ ${signature.asSequence().map {
 
 private class CallbackInterface(
     val callback: CallbackFunction
-) : GeneratorTarget(callback.packageName, "${callback.className}I") {
+) : GeneratorTarget(callback.module, "${callback.className}I") {
     override fun PrintWriter.generateJava() = callback.run {
         this@generateJava.generateInterface()
     }
 }
 
 fun String.callback(
-    packageName: String,
+    module: Module,
     returns: NativeType,
     className: String,
     functionDoc: String,
@@ -201,7 +201,7 @@ fun String.callback(
     since: String = "",
     init: (CallbackFunction.() -> Unit)? = null
 ): CallbackType {
-    val callback = CallbackFunction(packageName, className, this, returns, *signature)
+    val callback = CallbackFunction(module, className, this, returns, *signature)
     if (init != null)
         callback.init()
     callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }

@@ -4,7 +4,6 @@
  */
 module org.lwjgl.zstd {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.zstd.natives;
 
     exports org.lwjgl.util.zstd;
 }

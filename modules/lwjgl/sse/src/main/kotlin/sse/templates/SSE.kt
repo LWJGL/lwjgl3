@@ -2,14 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.simd.templates
+package sse.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.simd.*
+import sse.*
 
-val SSE = "SSE".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMethod = "_MM_", library = SSE_LIBRARY) {
+val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_", library = SSE_LIBRARY) {
     nativeImport(
-        "simd/intrinsics.h"
+        "intrinsics.h"
     )
 
     documentation = "Bindings to SSE macros."

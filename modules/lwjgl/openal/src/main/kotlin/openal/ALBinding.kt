@@ -2,15 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal
+package openal
 
 import org.lwjgl.generator.*
 import java.io.*
 
-private val CAPABILITIES_CLASS = "ALCapabilities"
+private const val CAPABILITIES_CLASS = "ALCapabilities"
 
 private val ALBinding = Generator.register(object : APIBinding(
-    OPENAL_PACKAGE,
+    Module.OPENAL,
     CAPABILITIES_CLASS,
     APICapabilities.JAVA_CAPABILITIES,
     callingConvention = CallingConvention.DEFAULT
@@ -58,7 +58,7 @@ private val ALBinding = Generator.register(object : APIBinding(
         val addresses = classesWithFunctions
             .map { it.functions }
             .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
 
         println("${t}public final long")
         println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))
@@ -74,13 +74,13 @@ private val ALBinding = Generator.register(object : APIBinding(
 
     $CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {""")
 
-        println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n$t$t", prefix = "$t$t"))
+        println(addresses.joinToString("\n$t$t", prefix = "$t$t") { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" })
 
         for (extension in classes) {
             val capName = extension.capName("AL")
             print("\n$t$t$capName = ext.contains(\"$capName\")")
             if (extension.hasNativeFunctions)
-                print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+                print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
             print(";")
         }
         print("""
@@ -105,7 +105,7 @@ private val ALBinding = Generator.register(object : APIBinding(
 // DSL Extensions
 
 fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-    nativeClass(OPENAL_PACKAGE, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = ALBinding, init = init)
+    nativeClass(Module.OPENAL, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = ALBinding, init = init)
 
 val NativeClass.specLinkOpenALSoft: String get() = url("http://kcat.strangesoft.net/openal-extensions/$templateName.txt", templateName)
 val NativeClass.extensionName: String get() = "{@code ${prefixTemplate}_$templateName}"

@@ -2,12 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.libc.templates
+package core.libc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.libc.*
 
-val errno = "LibCErrno".nativeClass(packageName = LIBC_PACKAGE) {
+val errno = "LibCErrno".nativeClass(Module.CORE_LIBC) {
     nativeImport(
         "<errno.h>"
     )

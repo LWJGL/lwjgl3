@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.zstd.templates
+package zstd.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.zstd.*
+import zstd.*
 
-val ZstdX = "ZstdX".nativeClass(ZSTD_PACKAGE, prefix = "ZSTD", prefixMethod = "ZSTD_", library = ZSTD_LIBRARY) {
+val ZstdX = "ZstdX".nativeClass(Module.ZSTD, prefix = "ZSTD", prefixMethod = "ZSTD_", library = ZSTD_LIBRARY) {
     nativeDirective(
         """DISABLE_WARNINGS()
 #define ZSTD_STATIC_LINKING_ONLY

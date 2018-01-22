@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.linux
+package core.linux
 
 import org.lwjgl.generator.*
 
@@ -18,11 +18,11 @@ val Font = typedef(XID, "Font")
 val Pixmap = typedef(XID, "Pixmap")
 val Window = typedef(XID, "Window")
 
-val Display = "Display"
+const val Display = "Display"
 val Display_p = Display.p // Display is a struct, but should be treated as an opaque type by apps
 val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
 
-val Visual_p = struct(LINUX_PACKAGE, "Visual") {
+val Visual_p = struct(Module.CORE_LINUX, "Visual") {
     documentation = "Visual structure; contains information about colormapping possible."
 
     nullable..opaque_p.member("ext_data", "")
@@ -35,7 +35,7 @@ val Visual_p = struct(LINUX_PACKAGE, "Visual") {
     int.member("map_entries", "")
 }.p
 
-val XVisualInfo_p = struct(LINUX_PACKAGE, "XVisualInfo") {
+val XVisualInfo_p = struct(Module.CORE_LINUX, "XVisualInfo") {
     documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
 
     Visual_p.member("visual", "")
@@ -50,7 +50,7 @@ val XVisualInfo_p = struct(LINUX_PACKAGE, "XVisualInfo") {
     int.member("bits_per_rgb", "")
 }.p
 
-val XSetWindowAttributes_p = struct(LINUX_PACKAGE, "XSetWindowAttributes") {
+val XSetWindowAttributes_p = struct(Module.CORE_LINUX, "XSetWindowAttributes") {
     documentation = "Data structure for setting window attributes."
 
     Pixmap.member("background_pixmap", "")

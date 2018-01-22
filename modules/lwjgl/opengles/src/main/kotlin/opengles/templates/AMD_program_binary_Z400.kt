@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val AMD_program_binary_Z400 = "AMDProgramBinaryZ400".nativeClassGLES("AMD_program_binary_Z400", postfix = AMD) {
     documentation =

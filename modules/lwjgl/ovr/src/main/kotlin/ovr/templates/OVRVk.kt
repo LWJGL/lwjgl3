@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.ovr.templates
+package ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.*
-import org.lwjgl.vulkan.*
+import ovr.*
+import vulkan.*
 
-val OVRVk = "OVRVk".dependsOn(Binding.VULKAN)?.nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
     includeOVRCAPI_VK()
     javaImport("org.lwjgl.vulkan.*")
 

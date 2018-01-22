@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.templates
+package core.templates
 
 import org.lwjgl.generator.*
 
-val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(packageName = "org.lwjgl.system") {
+val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(Module.CORE) {
     nativeImport(
         "<stdlib.h>",
         "<stdint.h>"

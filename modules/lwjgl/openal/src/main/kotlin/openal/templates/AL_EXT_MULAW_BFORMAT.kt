@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal.templates
+package openal.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openal.*
+import openal.*
 
 val AL_EXT_MULAW_BFORMAT = "EXTMulawBFormat".nativeClassAL("EXT_MULAW_BFORMAT") {
     documentation =

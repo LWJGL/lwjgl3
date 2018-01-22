@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
-import org.lwjgl.opengl.*
+import opencl.*
+import opengl.*
 
-val ARB_cl_event = "ARBCLEvent".dependsOn(Binding.OPENCL)?.nativeClassGL("ARB_cl_event", postfix = ARB) {
+val ARB_cl_event = "ARBCLEvent".dependsOn(Module.OPENCL)?.nativeClassGL("ARB_cl_event", postfix = ARB) {
     javaImport(
         "org.lwjgl.opencl.*"
     )

@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_easy_font = "STBEasyFont".nativeClass(packageName = STB_PACKAGE, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
+val stb_easy_font = "STBEasyFont".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
     includeSTBAPI("#include \"stb_easy_font.h\"")
 
     documentation =

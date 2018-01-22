@@ -5,7 +5,7 @@
   -->
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="LWJGL Platform Tests">
-    <test name="MacOSX">
+    <test name="macOS">
         <packages>
             <package name="org.lwjgl.system.macosx"/>
         </packages>

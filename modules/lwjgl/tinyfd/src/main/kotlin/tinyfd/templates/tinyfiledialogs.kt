@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.tinyfd.templates
+package tinyfd.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.tinyfd.*
+import tinyfd.*
 
-val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE, prefix = "tinyfd_", library = TinyFD_LIBRARY) {
+val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tinyfd_", library = TinyFD_LIBRARY) {
     nativeImport("tinyfiledialogs.h")
     nativeDirective(
         """#ifndef LWJGL_WINDOWS

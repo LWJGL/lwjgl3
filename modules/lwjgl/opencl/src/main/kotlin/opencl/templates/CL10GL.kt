@@ -2,22 +2,22 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
-import org.lwjgl.opengl.*
+import opencl.*
+import opengl.*
 
 val INVALID_GL_OBJECT = "#INVALID_GL_OBJECT"
 val INVALID_MIP_LEVEL = "#INVALID_MIP_LEVEL"
 
-val CL10GL = "CL10GL".dependsOn(Binding.OPENGL, Binding.OPENGLES)?.nativeClassCL("CL10GL") {
+val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("CL10GL") {
     documentation =
         """
         The OpenCL 1.0 OpenGL interoperability functionality.
 
         OpenCL memory objects may be created from OpenGL objects if and only if the OpenCL context has been created from an OpenGL share group object or
-        context. OpenGL share groups and contexts are created using platform specific APIs such as EGL, CGL, WGL, and GLX. On MacOS X, an OpenCL context
+        context. OpenGL share groups and contexts are created using platform specific APIs such as EGL, CGL, WGL, and GLX. On macOS, an OpenCL context
         may be created from an OpenGL share group object using the OpenCL platform extension <strong>cl_apple_gl_sharing</strong>. On other platforms
         including Microsoft Windows, Linux/Unix and others, an OpenCL context may be created from an OpenGL context using the Khronos platform extension
         <strong>cl_khr_gl_sharing</strong>.

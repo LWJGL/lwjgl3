@@ -2,27 +2,25 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.par
+package par
 
 import org.lwjgl.generator.*
 
-val PAR_PACKAGE = "org.lwjgl.util.par"
-
 fun config() {
     packageInfo(
-        PAR_PACKAGE,
+        Module.PAR,
         """
         Contains bindings to the ${url("https://github.com/prideout/par", "par")} library.
         """
     )
 
-    Generator.registerLibraryInit(PAR_PACKAGE, "LibPar", "par", setupAllocator = true)
+    Generator.registerLibraryInit(Module.PAR, "LibPar", "par", setupAllocator = true)
 }
 
 val PAR_SHAPES_T = typedef(uint32_t, "PAR_SHAPES_T")
 val PAR_SHAPES_T_p = PAR_SHAPES_T.p
 
-val par_shapes_mesh_p = struct(PAR_PACKAGE, "ParShapesMesh", nativeName = "par_shapes_mesh", mutable = false) {
+val par_shapes_mesh_p = struct(Module.PAR, "ParShapesMesh", nativeName = "par_shapes_mesh", mutable = false) {
     documentation =
         """
         The {@code par_shapes.h} mesh structure.

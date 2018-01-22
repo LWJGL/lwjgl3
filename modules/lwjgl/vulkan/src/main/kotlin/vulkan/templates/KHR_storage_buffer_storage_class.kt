@@ -3,10 +3,10 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan.templates
+package vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.*
+import vulkan.*
 
 val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClassVK("KHR_storage_buffer_storage_class", type = "device", postfix = KHR) {
     documentation =

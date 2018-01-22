@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
+import opencl.*
 
-val intel_egl_image_yuv = "INTELEGLImageYUV".dependsOn(Binding.EGL)?.nativeClassCL("intel_egl_image_yuv", INTEL) {
+val intel_egl_image_yuv = "INTELEGLImageYUV".dependsOn(Module.EGL)?.nativeClassCL("intel_egl_image_yuv", INTEL) {
     documentation =
         """
         Native bindings to the $extensionLink extension.

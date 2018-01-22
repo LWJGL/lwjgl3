@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.dyncall
+package core.dyncall
 
 import org.lwjgl.generator.*
 
-val DYNCALL_PACKAGE = "org.lwjgl.system.dyncall"
-
 fun config() {
     packageInfo(
-        DYNCALL_PACKAGE,
+        Module.CORE_DYNCALL,
         """
         Contains bindings to the ${url("http://www.dyncall.org/", "dyncall")} library.
 

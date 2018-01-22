@@ -4,7 +4,6 @@
  */
 module org.lwjgl.yoga {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.yoga.natives;
 
     exports org.lwjgl.util.yoga;
 }

@@ -3,12 +3,12 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan
+package vulkan
 
 import org.lwjgl.generator.*
-//import org.lwjgl.system.android.*
-import org.lwjgl.system.linux.*
-import org.lwjgl.system.windows.*
+//import core.android.*
+import core.linux.*
+import core.windows.*
 
 // Handle types
 val VkSurfaceKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSurfaceKHR")
@@ -108,7 +108,7 @@ val VkValidationCacheCreateFlagsEXT = typedef(VkFlags, "VkValidationCacheCreateF
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
-    VULKAN_PACKAGE, VkBool32, "VkDebugReportCallbackEXT",
+    Module.VULKAN, VkBool32, "VkDebugReportCallbackEXT",
     "Application-defined debug report callback function.",
 
     VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
@@ -156,7 +156,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 }
 
 // Struct types
-val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR", mutable = false) {
+val VkSurfaceCapabilitiesKHR = struct(Module.VULKAN, "VkSurfaceCapabilitiesKHR", mutable = false) {
     documentation =
         """
         Structure describing capabilities of a surface.
@@ -186,7 +186,7 @@ val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR"
     VkImageUsageFlags.member("supportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created with {@code VkPresentModeKHR} set to #PRESENT_MODE_IMMEDIATE_KHR, #PRESENT_MODE_MAILBOX_KHR, #PRESENT_MODE_FIFO_KHR or #PRESENT_MODE_FIFO_RELAXED_KHR for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
 
-val VkSurfaceFormatKHR = struct(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutable = false) {
+val VkSurfaceFormatKHR = struct(Module.VULKAN, "VkSurfaceFormatKHR", mutable = false) {
     documentation =
         """
         Structure describing a supported swapchain format-color space pair.
@@ -196,7 +196,7 @@ val VkSurfaceFormatKHR = struct(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutable = 
     VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface.")
 }
 
-val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR") {
+val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR") {
     documentation =
         """
         Structure specifying parameters of a newly created swapchain object.
@@ -271,7 +271,7 @@ val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR"
         </div>""")
 }
 
-val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
+val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
     documentation =
         """
         Structure describing parameters of a queue presentation.
@@ -308,7 +308,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
     nullable..VkResult.p.member("pResults", "an array of {@code VkResult} typed elements with {@code swapchainCount} entries. Applications that do not need per-swapchain results <b>can</b> use {@code NULL} for {@code pResults}. If non-{@code NULL}, each entry in {@code pResults} will be set to the {@code VkResult} for presenting the swapchain corresponding to the same index in {@code pSwapchains}.")
 }
 
-val VkDisplayPropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPropertiesKHR", mutable = false) {
+val VkDisplayPropertiesKHR = struct(Module.VULKAN, "VkDisplayPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing an available display device.
@@ -331,7 +331,7 @@ val VkDisplayPropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPropertiesKHR", mu
         </div>""")
 }
 
-val VkDisplayModeParametersKHR = struct(VULKAN_PACKAGE, "VkDisplayModeParametersKHR") {
+val VkDisplayModeParametersKHR = struct(Module.VULKAN, "VkDisplayModeParametersKHR") {
     documentation =
         """
         Structure describing display parameters associated with a display mode.
@@ -349,7 +349,7 @@ val VkDisplayModeParametersKHR = struct(VULKAN_PACKAGE, "VkDisplayModeParameters
     uint32_t.member("refreshRate", "a {@code uint32_t} that is the number of times the display is refreshed each second multiplied by 1000.")
 }
 
-val VkDisplayModePropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayModePropertiesKHR", mutable = false) {
+val VkDisplayModePropertiesKHR = struct(Module.VULKAN, "VkDisplayModePropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing display mode properties.
@@ -359,7 +359,7 @@ val VkDisplayModePropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayModeProperties
     VkDisplayModeParametersKHR.member("parameters", "a ##VkDisplayModeParametersKHR structure describing the display parameters associated with {@code displayMode}.")
 }
 
-val VkDisplayModeCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayModeCreateInfoKHR") {
+val VkDisplayModeCreateInfoKHR = struct(Module.VULKAN, "VkDisplayModeCreateInfoKHR") {
     documentation =
         """
         Structure specifying parameters of a newly created display mode object.
@@ -387,7 +387,7 @@ val VkDisplayModeCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayModeCreateInfo
     VkDisplayModeParametersKHR.member("parameters", "a ##VkDisplayModeParametersKHR structure describing the display parameters to use in creating the new mode. If the parameters are not compatible with the specified display, the implementation <b>must</b> return #ERROR_INITIALIZATION_FAILED.")
 }
 
-val VkDisplayPlaneCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPlaneCapabilitiesKHR", mutable = false) {
+val VkDisplayPlaneCapabilitiesKHR = struct(Module.VULKAN, "VkDisplayPlaneCapabilitiesKHR", mutable = false) {
     documentation =
         """
         Structure describing capabilities of a mode and plane combination.
@@ -416,7 +416,7 @@ val VkDisplayPlaneCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPlaneCapabi
     VkExtent2D.member("maxDstExtent", "see {@code minDstPosition}")
 }
 
-val VkDisplayPlanePropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPlanePropertiesKHR", mutable = false) {
+val VkDisplayPlanePropertiesKHR = struct(Module.VULKAN, "VkDisplayPlanePropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing display plane properties.
@@ -426,7 +426,7 @@ val VkDisplayPlanePropertiesKHR = struct(VULKAN_PACKAGE, "VkDisplayPlaneProperti
     uint32_t.member("currentStackIndex", "the current z-order of the plane. This will be between 0 and the value returned by #GetPhysicalDeviceDisplayPlanePropertiesKHR() in {@code pPropertyCount}.")
 }
 
-val VkDisplaySurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCreateInfoKHR") {
+val VkDisplaySurfaceCreateInfoKHR = struct(Module.VULKAN, "VkDisplaySurfaceCreateInfoKHR") {
     documentation =
         """
         Structure specifying parameters of a newly created display plane surface object.
@@ -471,7 +471,7 @@ val VkDisplaySurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCrea
     VkExtent2D.member("imageExtent", "The size of the presentable images to use with the surface.")
 }
 
-val VkDisplayPresentInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayPresentInfoKHR") {
+val VkDisplayPresentInfoKHR = struct(Module.VULKAN, "VkDisplayPresentInfoKHR") {
     documentation =
         """
         Structure describing parameters of a queue presentation to a swapchain.
@@ -502,7 +502,7 @@ val VkDisplayPresentInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayPresentInfoKHR") 
     VkBool32.member("persistent", "If this is #TRUE, the display engine will enable buffered mode on displays that support it. This allows the display engine to stop sending content to the display until a new image is presented. The display will instead maintain a copy of the last presented image. This allows less power to be used, but <b>may</b> increase presentation latency. If ##VkDisplayPresentInfoKHR is not specified, persistent mode will not be used.")
 }
 
-val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfoKHR") {
+val VkXlibSurfaceCreateInfoKHR = struct(Module.VULKAN, "VkXlibSurfaceCreateInfoKHR") {
     javaImport("org.lwjgl.system.linux.*")
     documentation =
         """
@@ -532,7 +532,7 @@ val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfo
     Window.member("window", "an Xlib {@code Window} to associate the surface with.")
 }
 
-val VkWin32SurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateInfoKHR") {
+val VkWin32SurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWin32SurfaceCreateInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -562,7 +562,7 @@ val VkWin32SurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateIn
     HWND.member("hwnd", "see {@code hinstance}")
 }
 
-val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCallbackCreateInfoEXT") {
+val VkDebugReportCallbackCreateInfoEXT = struct(Module.VULKAN, "VkDebugReportCallbackCreateInfoEXT") {
     documentation =
         """
         Structure specifying parameters of a newly created debug report callback.
@@ -597,7 +597,7 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
     nullable..opaque_p.member("pUserData", "user data to be passed to the callback.")
 }
 
-val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateRasterizationOrderAMD") {
+val VkPipelineRasterizationStateRasterizationOrderAMD = struct(Module.VULKAN, "VkPipelineRasterizationStateRasterizationOrderAMD") {
     documentation =
         """
         Structure defining rasterization order for a graphics pipeline.
@@ -616,7 +616,7 @@ val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "
     VkRasterizationOrderAMD.member("rasterizationOrder", "a {@code VkRasterizationOrderAMD} value specifying the primitive rasterization order to use.")
 }
 
-val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectNameInfoEXT") {
+val VkDebugMarkerObjectNameInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectNameInfoEXT") {
     documentation =
         """
         Specify parameters of a name to give to an object.
@@ -650,7 +650,7 @@ val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObject
     const..charUTF8_p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code object}.")
 }
 
-val VkDebugMarkerObjectTagInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectTagInfoEXT") {
+val VkDebugMarkerObjectTagInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectTagInfoEXT") {
     documentation =
         """
         Specify parameters of a tag to attach to an object.
@@ -687,7 +687,7 @@ val VkDebugMarkerObjectTagInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectT
     const..void_p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object.")
 }
 
-val VkDebugMarkerMarkerInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfoEXT") {
+val VkDebugMarkerMarkerInfoEXT = struct(Module.VULKAN, "VkDebugMarkerMarkerInfoEXT") {
     documentation =
         """
         Specify parameters of a command buffer marker region.
@@ -709,7 +709,7 @@ val VkDebugMarkerMarkerInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfo
     float.array("color", "an optional: RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.", size = 4)
 }
 
-val VkDedicatedAllocationImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicatedAllocationImageCreateInfoNV") {
+val VkDedicatedAllocationImageCreateInfoNV = struct(Module.VULKAN, "VkDedicatedAllocationImageCreateInfoNV") {
     documentation =
         """
         Specify that an image is bound to a dedicated memory resource.
@@ -735,7 +735,7 @@ val VkDedicatedAllocationImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicated
     VkBool32.member("dedicatedAllocation", "indicates whether the image will have a dedicated allocation bound to it.")
 }
 
-val VkDedicatedAllocationBufferCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicatedAllocationBufferCreateInfoNV") {
+val VkDedicatedAllocationBufferCreateInfoNV = struct(Module.VULKAN, "VkDedicatedAllocationBufferCreateInfoNV") {
     documentation =
         """
         Specify that a buffer is bound to a dedicated memory resource.
@@ -751,7 +751,7 @@ val VkDedicatedAllocationBufferCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicate
     VkBool32.member("dedicatedAllocation", "indicates whether the buffer will have a dedicated allocation bound to it.")
 }
 
-val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedicatedAllocationMemoryAllocateInfoNV") {
+val VkDedicatedAllocationMemoryAllocateInfoNV = struct(Module.VULKAN, "VkDedicatedAllocationMemoryAllocateInfoNV") {
     documentation =
         """
         Specify a dedicated memory allocation resource.
@@ -782,7 +782,7 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedica
     VkBuffer.member("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
 }
 
-val VkTextureLODGatherFormatPropertiesAMD = struct(VULKAN_PACKAGE, "VkTextureLODGatherFormatPropertiesAMD", mutable = false) {
+val VkTextureLODGatherFormatPropertiesAMD = struct(Module.VULKAN, "VkTextureLODGatherFormatPropertiesAMD", mutable = false) {
     documentation =
         """
         Structure informing whether or not texture gather bias/LOD functionality is supported for a given image format and a given physical device.
@@ -793,7 +793,7 @@ val VkTextureLODGatherFormatPropertiesAMD = struct(VULKAN_PACKAGE, "VkTextureLOD
     VkBool32.member("supportsTextureGatherLODBiasAMD", "tells if the image format can be used with texture gather bias/LOD functions, as introduced by the {@link AMDTextureGatherBiasLod VK_AMD_texture_gather_bias_lod} extension. This field is set by the implementation. User-specified value is ignored.")
 }
 
-val VkShaderResourceUsageAMD = struct(VULKAN_PACKAGE, "VkShaderResourceUsageAMD", mutable = false) {
+val VkShaderResourceUsageAMD = struct(Module.VULKAN, "VkShaderResourceUsageAMD", mutable = false) {
     documentation =
         """
         Resource usage information about a particular shader within a pipeline.
@@ -806,7 +806,7 @@ val VkShaderResourceUsageAMD = struct(VULKAN_PACKAGE, "VkShaderResourceUsageAMD"
     size_t.member("scratchMemUsageInBytes", "the scratch memory usage in bytes by this shader.")
 }
 
-val VkShaderStatisticsInfoAMD = struct(VULKAN_PACKAGE, "VkShaderStatisticsInfoAMD", mutable = false) {
+val VkShaderStatisticsInfoAMD = struct(Module.VULKAN, "VkShaderStatisticsInfoAMD", mutable = false) {
     documentation =
         """
         Statistical information about a particular shader within a pipeline.
@@ -829,7 +829,7 @@ val VkShaderStatisticsInfoAMD = struct(VULKAN_PACKAGE, "VkShaderStatisticsInfoAM
     uint32_t.array("computeWorkGroupSize", "the local workgroup size of this shader in { X, Y, Z } dimensions.", size = 3)
 }
 
-val VkRenderPassMultiviewCreateInfoKHX = struct(VULKAN_PACKAGE, "VkRenderPassMultiviewCreateInfoKHX") {
+val VkRenderPassMultiviewCreateInfoKHX = struct(Module.VULKAN, "VkRenderPassMultiviewCreateInfoKHX") {
     documentation =
         """
         Structure containing multiview info for all subpasses.
@@ -879,7 +879,7 @@ val VkRenderPassMultiviewCreateInfoKHX = struct(VULKAN_PACKAGE, "VkRenderPassMul
     const..uint32_t_p.member("pCorrelationMasks", "an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.")
 }
 
-val VkPhysicalDeviceMultiviewFeaturesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMultiviewFeaturesKHX") {
+val VkPhysicalDeviceMultiviewFeaturesKHX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewFeaturesKHX") {
     documentation =
         """
         Structure describing multiview features that can be supported by an implementation.
@@ -906,7 +906,7 @@ val VkPhysicalDeviceMultiviewFeaturesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDev
     VkBool32.member("multiviewTessellationShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#tessellation\">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.")
 }
 
-val VkPhysicalDeviceMultiviewPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMultiviewPropertiesKHX", mutable = false) {
+val VkPhysicalDeviceMultiviewPropertiesKHX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPropertiesKHX", mutable = false) {
     documentation =
         """
         Structure describing multiview limits that can be supported by an implementation.
@@ -926,7 +926,7 @@ val VkPhysicalDeviceMultiviewPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalD
     uint32_t.member("maxMultiviewInstanceIndex", "the maximum valid value of instance index allowed to be generated by a drawing command recorded within a subpass of a multiview render pass instance.")
 }
 
-val VkExternalImageFormatPropertiesNV = struct(VULKAN_PACKAGE, "VkExternalImageFormatPropertiesNV", mutable = false) {
+val VkExternalImageFormatPropertiesNV = struct(Module.VULKAN, "VkExternalImageFormatPropertiesNV", mutable = false) {
     documentation =
         """
         Structure specifying external image format properties.
@@ -938,7 +938,7 @@ val VkExternalImageFormatPropertiesNV = struct(VULKAN_PACKAGE, "VkExternalImageF
     VkExternalMemoryHandleTypeFlagsNV.member("compatibleHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be specified simultaneously with the handle type specified by #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType} when calling #AllocateMemory(), or 0 if the external memory handle type is 0. {@code compatibleHandleTypes} will always contain #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType}")
 }
 
-val VkExternalMemoryImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkExternalMemoryImageCreateInfoNV") {
+val VkExternalMemoryImageCreateInfoNV = struct(Module.VULKAN, "VkExternalMemoryImageCreateInfoNV") {
     documentation =
         """
         Specify that an image may be backed by external memory.
@@ -956,7 +956,7 @@ val VkExternalMemoryImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkExternalMemory
     VkExternalMemoryHandleTypeFlagsNV.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types.")
 }
 
-val VkExportMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryAllocateInfoNV") {
+val VkExportMemoryAllocateInfoNV = struct(Module.VULKAN, "VkExportMemoryAllocateInfoNV") {
     documentation =
         """
         Specify memory handle types that may be exported.
@@ -974,7 +974,7 @@ val VkExportMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryAllocat
     VkExternalMemoryHandleTypeFlagsNV.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more memory handle types that <b>may</b> be exported. Multiple handle types <b>may</b> be requested for the same allocation as long as they are compatible, as reported by #GetPhysicalDeviceExternalImageFormatPropertiesNV().")
 }
 
-val VkImportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkImportMemoryWin32HandleInfoNV") {
+val VkImportMemoryWin32HandleInfoNV = struct(Module.VULKAN, "VkImportMemoryWin32HandleInfoNV") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -1003,7 +1003,7 @@ val VkImportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkImportMemoryWin3
     HANDLE.member("handle", "a Windows {@code HANDLE} referring to the memory.")
 }
 
-val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin32HandleInfoNV") {
+val VkExportMemoryWin32HandleInfoNV = struct(Module.VULKAN, "VkExportMemoryWin32HandleInfoNV") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -1030,7 +1030,7 @@ val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin3
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
 }
 
-val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(VULKAN_PACKAGE, "VkWin32KeyedMutexAcquireReleaseInfoNV") {
+val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(Module.VULKAN, "VkWin32KeyedMutexAcquireReleaseInfoNV") {
     documentation =
         """
         use Windows keyex mutex mechanism to synchronize work.
@@ -1058,7 +1058,7 @@ val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(VULKAN_PACKAGE, "VkWin32Keyed
     const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
-val VkPhysicalDeviceFeatures2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures2KHR") {
+val VkPhysicalDeviceFeatures2KHR = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2KHR") {
     documentation =
         """
         Structure describing the fine-grained features that can be supported by an implementation.
@@ -1082,7 +1082,7 @@ val VkPhysicalDeviceFeatures2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatu
     VkPhysicalDeviceFeatures.member("features", "a structure of type ##VkPhysicalDeviceFeatures describing the fine-grained features of the Vulkan 1.0 API.")
 }
 
-val VkPhysicalDeviceProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceProperties2KHR", mutable = false) {
+val VkPhysicalDeviceProperties2KHR = struct(Module.VULKAN, "VkPhysicalDeviceProperties2KHR", mutable = false) {
     documentation =
         """
         Structure specifying physical device properties.
@@ -1106,7 +1106,7 @@ val VkPhysicalDeviceProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevicePro
     VkPhysicalDeviceProperties.member("properties", "a structure of type ##VkPhysicalDeviceProperties describing the properties of the physical device. This structure is written with the same values as if it were written by #GetPhysicalDeviceProperties().")
 }
 
-val VkFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkFormatProperties2KHR", mutable = false) {
+val VkFormatProperties2KHR = struct(Module.VULKAN, "VkFormatProperties2KHR", mutable = false) {
     documentation =
         """
         Structure specifying image format properties.
@@ -1126,7 +1126,7 @@ val VkFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkFormatProperties2KHR", mu
     VkFormatProperties.member("formatProperties", "a structure of type ##VkFormatProperties describing features supported by the requested format.")
 }
 
-val VkImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkImageFormatProperties2KHR", mutable = false) {
+val VkImageFormatProperties2KHR = struct(Module.VULKAN, "VkImageFormatProperties2KHR", mutable = false) {
     documentation =
         """
         Structure specifying a image format properties.
@@ -1154,7 +1154,7 @@ val VkImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkImageFormatPropertie
     VkImageFormatProperties.member("imageFormatProperties", "an instance of a ##VkImageFormatProperties structure in which capabilities are returned.")
 }
 
-val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceImageFormatInfo2KHR") {
+val VkPhysicalDeviceImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceImageFormatInfo2KHR") {
     documentation =
         """
         Structure specifying image creation parameters.
@@ -1187,7 +1187,7 @@ val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDevi
     VkImageCreateFlags.member("flags", "a bitmask of {@code VkImageCreateFlagBits} indicating additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}.")
 }
 
-val VkQueueFamilyProperties2KHR = struct(VULKAN_PACKAGE, "VkQueueFamilyProperties2KHR", mutable = false) {
+val VkQueueFamilyProperties2KHR = struct(Module.VULKAN, "VkQueueFamilyProperties2KHR", mutable = false) {
     documentation =
         """
         Structure providing information about a queue family.
@@ -1207,7 +1207,7 @@ val VkQueueFamilyProperties2KHR = struct(VULKAN_PACKAGE, "VkQueueFamilyPropertie
     VkQueueFamilyProperties.member("queueFamilyProperties", "a structure of type ##VkQueueFamilyProperties which is populated with the same values as in #GetPhysicalDeviceQueueFamilyProperties().")
 }
 
-val VkPhysicalDeviceMemoryProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties2KHR", mutable = false) {
+val VkPhysicalDeviceMemoryProperties2KHR = struct(Module.VULKAN, "VkPhysicalDeviceMemoryProperties2KHR", mutable = false) {
     documentation =
         """
         Structure specifying physical device memory properties.
@@ -1227,7 +1227,7 @@ val VkPhysicalDeviceMemoryProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDev
     VkPhysicalDeviceMemoryProperties.member("memoryProperties", "a structure of type ##VkPhysicalDeviceMemoryProperties which is populated with the same values as in #GetPhysicalDeviceMemoryProperties().")
 }
 
-val VkSparseImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkSparseImageFormatProperties2KHR", mutable = false) {
+val VkSparseImageFormatProperties2KHR = struct(Module.VULKAN, "VkSparseImageFormatProperties2KHR", mutable = false) {
     documentation =
         """
         Structure specifying sparse image format properties.
@@ -1247,7 +1247,7 @@ val VkSparseImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkSparseImageFor
     VkSparseImageFormatProperties.member("properties", "a structure of type ##VkSparseImageFormatProperties which is populated with the same values as in #GetPhysicalDeviceSparseImageFormatProperties().")
 }
 
-val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSparseImageFormatInfo2KHR") {
+val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSparseImageFormatInfo2KHR") {
     documentation =
         """
         Structure specifying sparse image format inputs.
@@ -1282,7 +1282,7 @@ val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysic
     VkImageTiling.member("tiling", "the tiling arrangement of the data elements in memory.")
 }
 
-val VkMemoryAllocateFlagsInfoKHX = struct(VULKAN_PACKAGE, "VkMemoryAllocateFlagsInfoKHX") {
+val VkMemoryAllocateFlagsInfoKHX = struct(Module.VULKAN, "VkMemoryAllocateFlagsInfoKHX") {
     documentation =
         """
         Structure controlling how many instances of memory will be allocated.
@@ -1315,7 +1315,7 @@ val VkMemoryAllocateFlagsInfoKHX = struct(VULKAN_PACKAGE, "VkMemoryAllocateFlags
     uint32_t.member("deviceMask", "a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set in {@code flags}.")
 }
 
-val VkDeviceGroupRenderPassBeginInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupRenderPassBeginInfoKHX") {
+val VkDeviceGroupRenderPassBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGroupRenderPassBeginInfoKHX") {
     documentation =
         """
         Set the initial device mask and render areas for a render pass instance.
@@ -1352,7 +1352,7 @@ val VkDeviceGroupRenderPassBeginInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupR
     const..VkRect2D.p.buffer("pDeviceRenderAreas", "an array of structures of type ##VkRect2D defining the render area for each physical device.")
 }
 
-val VkDeviceGroupCommandBufferBeginInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupCommandBufferBeginInfoKHX") {
+val VkDeviceGroupCommandBufferBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGroupCommandBufferBeginInfoKHX") {
     documentation =
         """
         Set the initial device mask for a command buffer.
@@ -1379,7 +1379,7 @@ val VkDeviceGroupCommandBufferBeginInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGro
     uint32_t.member("deviceMask", "the initial value of the command buffer&#8217;s device mask.")
 }
 
-val VkDeviceGroupSubmitInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupSubmitInfoKHX") {
+val VkDeviceGroupSubmitInfoKHX = struct(Module.VULKAN, "VkDeviceGroupSubmitInfoKHX") {
     documentation =
         """
         Structure indicating which physical devices execute semaphore operations and command buffers.
@@ -1415,7 +1415,7 @@ val VkDeviceGroupSubmitInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupSubmitInfo
     const..uint32_t_p.member("pSignalSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore signal operation in the corresponding element of ##VkSubmitInfo{@code ::pSignalSemaphores}.")
 }
 
-val VkDeviceGroupBindSparseInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupBindSparseInfoKHX") {
+val VkDeviceGroupBindSparseInfoKHX = struct(Module.VULKAN, "VkDeviceGroupBindSparseInfoKHX") {
     documentation =
         """
         Structure indicating which instances are bound.
@@ -1443,7 +1443,7 @@ val VkDeviceGroupBindSparseInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupBindSp
     uint32_t.member("memoryDeviceIndex", "a device index indicating which instance of the memory the resource instance is bound to.")
 }
 
-val VkBindBufferMemoryDeviceGroupInfoKHX = struct(VULKAN_PACKAGE, "VkBindBufferMemoryDeviceGroupInfoKHX") {
+val VkBindBufferMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindBufferMemoryDeviceGroupInfoKHX") {
     documentation =
         """
         Structure specifying device within a group to bind to.
@@ -1484,7 +1484,7 @@ val VkBindBufferMemoryDeviceGroupInfoKHX = struct(VULKAN_PACKAGE, "VkBindBufferM
     const..uint32_t_p.member("pDeviceIndices", "")
 }
 
-val VkBindImageMemoryDeviceGroupInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemoryDeviceGroupInfoKHX") {
+val VkBindImageMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindImageMemoryDeviceGroupInfoKHX") {
     documentation =
         """
         Structure specifying device within a group to bind to.
@@ -1542,7 +1542,7 @@ val VkBindImageMemoryDeviceGroupInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMem
     const..VkRect2D.p.buffer("pSFRRects", "")
 }
 
-val VkDeviceGroupPresentCapabilitiesKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupPresentCapabilitiesKHX", mutable = false) {
+val VkDeviceGroupPresentCapabilitiesKHX = struct(Module.VULKAN, "VkDeviceGroupPresentCapabilitiesKHX", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     documentation =
         """
@@ -1571,7 +1571,7 @@ val VkDeviceGroupPresentCapabilitiesKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupP
     VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHX} indicating which device group presentation modes are supported.")
 }
 
-val VkImageSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkImageSwapchainCreateInfoKHX") {
+val VkImageSwapchainCreateInfoKHX = struct(Module.VULKAN, "VkImageSwapchainCreateInfoKHX") {
     documentation =
         """
         Specify that an image will be bound to swapchain memory.
@@ -1593,7 +1593,7 @@ val VkImageSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkImageSwapchainCrea
     VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a handle of a swapchain that the image will be bound to.")
 }
 
-val VkBindImageMemorySwapchainInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemorySwapchainInfoKHX") {
+val VkBindImageMemorySwapchainInfoKHX = struct(Module.VULKAN, "VkBindImageMemorySwapchainInfoKHX") {
     documentation =
         """
         Structure specifying swapchain image memory to bind to.
@@ -1626,7 +1626,7 @@ val VkBindImageMemorySwapchainInfoKHX = struct(VULKAN_PACKAGE, "VkBindImageMemor
     uint32_t.member("imageIndex", "an image index within {@code swapchain}.")
 }
 
-val VkAcquireNextImageInfoKHX = struct(VULKAN_PACKAGE, "VkAcquireNextImageInfoKHX") {
+val VkAcquireNextImageInfoKHX = struct(Module.VULKAN, "VkAcquireNextImageInfoKHX") {
     documentation =
         """
         Structure specifying parameters of the acquire.
@@ -1679,7 +1679,7 @@ val VkAcquireNextImageInfoKHX = struct(VULKAN_PACKAGE, "VkAcquireNextImageInfoKH
     uint32_t.member("deviceMask", "a mask of physical devices for which the swapchain image will be ready to use when the semaphore or fence is signaled.")
 }
 
-val VkDeviceGroupPresentInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupPresentInfoKHX") {
+val VkDeviceGroupPresentInfoKHX = struct(Module.VULKAN, "VkDeviceGroupPresentInfoKHX") {
     documentation =
         """
         Mode and mask controlling which physical devices' images are presented.
@@ -1721,7 +1721,7 @@ val VkDeviceGroupPresentInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupPresentIn
     VkDeviceGroupPresentModeFlagBitsKHX.member("mode", "the device group present mode that will be used for this present.")
 }
 
-val VkDeviceGroupSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupSwapchainCreateInfoKHX") {
+val VkDeviceGroupSwapchainCreateInfoKHX = struct(Module.VULKAN, "VkDeviceGroupSwapchainCreateInfoKHX") {
     documentation =
         """
         Structure specifying parameters of a newly created swapchain object.
@@ -1742,7 +1742,7 @@ val VkDeviceGroupSwapchainCreateInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupS
     VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitfield of modes that the swapchain <b>can</b> be used with.")
 }
 
-val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
+val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
     documentation =
         """
         Specify validation checks to disable for a Vulkan instance.
@@ -1762,7 +1762,7 @@ val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
     VkValidationCheckEXT.p.member("pDisabledValidationChecks", "a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled.")
 }
 
-val VkPhysicalDeviceGroupPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceGroupPropertiesKHX", mutable = false) {
+val VkPhysicalDeviceGroupPropertiesKHX = struct(Module.VULKAN, "VkPhysicalDeviceGroupPropertiesKHX", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     documentation =
         """
@@ -1776,7 +1776,7 @@ val VkPhysicalDeviceGroupPropertiesKHX = struct(VULKAN_PACKAGE, "VkPhysicalDevic
     VkBool32.member("subsetAllocation", "indicates whether logical devices created from the group support allocating device memory on a subset of devices, via the {@code deviceMask} member of the ##VkMemoryAllocateFlagsInfoKHX. If this is #FALSE, then all device memory allocations are made across all physical devices in the group. If {@code physicalDeviceCount} is 1, then {@code subsetAllocation} <b>must</b> be #FALSE.")
 }
 
-val VkDeviceGroupDeviceCreateInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupDeviceCreateInfoKHX") {
+val VkDeviceGroupDeviceCreateInfoKHX = struct(Module.VULKAN, "VkDeviceGroupDeviceCreateInfoKHX") {
     documentation =
         """
         Create a logical device from multiple physical devices.
@@ -1806,7 +1806,7 @@ val VkDeviceGroupDeviceCreateInfoKHX = struct(VULKAN_PACKAGE, "VkDeviceGroupDevi
     const..VkPhysicalDevice.p.member("pPhysicalDevices", "an array of physical device handles belonging to the same device group.")
 }
 
-val VkExternalMemoryPropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalMemoryPropertiesKHR", mutable = false) {
+val VkExternalMemoryPropertiesKHR = struct(Module.VULKAN, "VkExternalMemoryPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure specifying external memory handle type capabilities.
@@ -1823,7 +1823,7 @@ val VkExternalMemoryPropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalMemoryProp
     VkExternalMemoryHandleTypeFlagsKHR.member("compatibleHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating an image compatible with external memory.")
 }
 
-val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalImageFormatInfoKHR") {
+val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalImageFormatInfoKHR") {
     documentation =
         """
         Structure specifying external image creation parameters.
@@ -1845,7 +1845,7 @@ val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(VULKAN_PACKAGE, "VkPhysi
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHR} value specifying the memory handle type that will be used with the memory associated with the image.")
 }
 
-val VkExternalImageFormatPropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalImageFormatPropertiesKHR", mutable = false) {
+val VkExternalImageFormatPropertiesKHR = struct(Module.VULKAN, "VkExternalImageFormatPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure specifying supported external handle properties.
@@ -1865,7 +1865,7 @@ val VkExternalImageFormatPropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalImage
     VkExternalMemoryPropertiesKHR.member("externalMemoryProperties", "an instance of the ##VkExternalMemoryPropertiesKHR structure specifying various capabilities of the external handle type when used with the specified image creation parameters.")
 }
 
-val VkPhysicalDeviceExternalBufferInfoKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalBufferInfoKHR") {
+val VkPhysicalDeviceExternalBufferInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalBufferInfoKHR") {
     documentation =
         """
         Structure specifying buffer creation parameters.
@@ -1891,7 +1891,7 @@ val VkPhysicalDeviceExternalBufferInfoKHR = struct(VULKAN_PACKAGE, "VkPhysicalDe
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHR} value specifying the memory handle type that will be used with the memory associated with the buffer.")
 }
 
-val VkExternalBufferPropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalBufferPropertiesKHR", mutable = false) {
+val VkExternalBufferPropertiesKHR = struct(Module.VULKAN, "VkExternalBufferPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure specifying supported external handle capabilities.
@@ -1911,7 +1911,7 @@ val VkExternalBufferPropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalBufferProp
     VkExternalMemoryPropertiesKHR.member("externalMemoryProperties", "an instance of the ##VkExternalMemoryPropertiesKHR structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.")
 }
 
-val VkPhysicalDeviceIDPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceIDPropertiesKHR", mutable = false) {
+val VkPhysicalDeviceIDPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIDPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure specifying IDs related to the physical device.
@@ -1955,7 +1955,7 @@ val VkPhysicalDeviceIDPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceID
     VkBool32.member("deviceLUIDValid", "a boolean value that will be #TRUE if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and #FALSE if they do not.")
 }
 
-val VkExternalMemoryImageCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExternalMemoryImageCreateInfoKHR") {
+val VkExternalMemoryImageCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemoryImageCreateInfoKHR") {
     documentation =
         """
         Specify that an image may be backed by external memory.
@@ -1974,7 +1974,7 @@ val VkExternalMemoryImageCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExternalMemor
     VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more external memory handle types.")
 }
 
-val VkExternalMemoryBufferCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExternalMemoryBufferCreateInfoKHR") {
+val VkExternalMemoryBufferCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemoryBufferCreateInfoKHR") {
     documentation =
         """
         Specify that a buffer may be backed by external memory.
@@ -1992,7 +1992,7 @@ val VkExternalMemoryBufferCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExternalMemo
     VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more external memory handle types.")
 }
 
-val VkExportMemoryAllocateInfoKHR = struct(VULKAN_PACKAGE, "VkExportMemoryAllocateInfoKHR") {
+val VkExportMemoryAllocateInfoKHR = struct(Module.VULKAN, "VkExportMemoryAllocateInfoKHR") {
     documentation =
         """
         Specify exportable handle types for a device memory object.
@@ -2015,7 +2015,7 @@ val VkExportMemoryAllocateInfoKHR = struct(VULKAN_PACKAGE, "VkExportMemoryAlloca
     VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more memory handle types the application <b>can</b> export from the resulting allocation. The application <b>can</b> request multiple handle types for the same allocation.")
 }
 
-val VkImportMemoryWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryWin32HandleInfoKHR") {
+val VkImportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportMemoryWin32HandleInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -2054,7 +2054,7 @@ val VkImportMemoryWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryWin
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.")
 }
 
-val VkExportMemoryWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportMemoryWin32HandleInfoKHR") {
+val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin32HandleInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -2102,7 +2102,7 @@ val VkExportMemoryWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportMemoryWin
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.")
 }
 
-val VkMemoryWin32HandlePropertiesKHR = struct(VULKAN_PACKAGE, "VkMemoryWin32HandlePropertiesKHR", mutable = false) {
+val VkMemoryWin32HandlePropertiesKHR = struct(Module.VULKAN, "VkMemoryWin32HandlePropertiesKHR", mutable = false) {
     documentation =
         """
         Properties of External Memory Windows Handles.
@@ -2113,7 +2113,7 @@ val VkMemoryWin32HandlePropertiesKHR = struct(VULKAN_PACKAGE, "VkMemoryWin32Hand
     uint32_t.member("memoryTypeBits", "a bitmask containing one bit set for every memory type which the specified windows handle <b>can</b> be imported as.")
 }
 
-val VkMemoryGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryGetWin32HandleInfoKHR") {
+val VkMemoryGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkMemoryGetWin32HandleInfoKHR") {
     documentation =
         """
         Structure describing a Win32 handle semaphore export operation.
@@ -2146,7 +2146,7 @@ val VkMemoryGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryGetWin32Hand
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
 
-val VkImportMemoryFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryFdInfoKHR") {
+val VkImportMemoryFdInfoKHR = struct(Module.VULKAN, "VkImportMemoryFdInfoKHR") {
     documentation =
         """
         import memory created on the same physical device from a file descriptor.
@@ -2179,7 +2179,7 @@ val VkImportMemoryFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportMemoryFdInfoKHR") 
     int.member("fd", "the external handle to import.")
 }
 
-val VkMemoryFdPropertiesKHR = struct(VULKAN_PACKAGE, "VkMemoryFdPropertiesKHR", mutable = false) {
+val VkMemoryFdPropertiesKHR = struct(Module.VULKAN, "VkMemoryFdPropertiesKHR", mutable = false) {
     documentation =
         """
         Properties of External Memory File Descriptors.
@@ -2190,7 +2190,7 @@ val VkMemoryFdPropertiesKHR = struct(VULKAN_PACKAGE, "VkMemoryFdPropertiesKHR", 
     uint32_t.member("memoryTypeBits", "a bitmask containing one bit set for every memory type which the specified file descriptor <b>can</b> be imported as.")
 }
 
-val VkMemoryGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryGetFdInfoKHR") {
+val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
     documentation =
         """
         Structure describing a POSIX FD semaphore export operation.
@@ -2226,7 +2226,7 @@ val VkMemoryGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryGetFdInfoKHR") {
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
 
-val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(VULKAN_PACKAGE, "VkWin32KeyedMutexAcquireReleaseInfoKHR") {
+val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(Module.VULKAN, "VkWin32KeyedMutexAcquireReleaseInfoKHR") {
     documentation =
         """
         Use the Windows keyed mutex mechanism to synchronize work.
@@ -2259,7 +2259,7 @@ val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(VULKAN_PACKAGE, "VkWin32Keye
     const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
-val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalSemaphoreInfoKHR") {
+val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalSemaphoreInfoKHR") {
     documentation =
         """
         Structure specifying semaphore creation parameters.
@@ -2280,7 +2280,7 @@ val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(VULKAN_PACKAGE, "VkPhysica
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value specifying the external semaphore handle type for which capabilities will be returned.")
 }
 
-val VkExternalSemaphorePropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalSemaphorePropertiesKHR", mutable = false) {
+val VkExternalSemaphorePropertiesKHR = struct(Module.VULKAN, "VkExternalSemaphorePropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing supported external semaphore handle features.
@@ -2305,7 +2305,7 @@ val VkExternalSemaphorePropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalSemapho
     VkExternalSemaphoreFeatureFlagsKHR.member("externalSemaphoreFeatures", "a bitmask of {@code VkExternalSemaphoreFeatureFlagBitsKHR} describing the features of {@code handleType}.")
 }
 
-val VkExportSemaphoreCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExportSemaphoreCreateInfoKHR") {
+val VkExportSemaphoreCreateInfoKHR = struct(Module.VULKAN, "VkExportSemaphoreCreateInfoKHR") {
     documentation =
         """
         Structure specifying handle types that can be exported from a semaphore.
@@ -2328,7 +2328,7 @@ val VkExportSemaphoreCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExportSemaphoreCr
     VkExternalSemaphoreHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} specifying one or more semaphore handle types the application <b>can</b> export from the resulting semaphore. The application <b>can</b> request multiple handle types for the same semaphore.")
 }
 
-val VkImportSemaphoreWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportSemaphoreWin32HandleInfoKHR") {
+val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreWin32HandleInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -2385,7 +2385,7 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportSemaph
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
 }
 
-val VkExportSemaphoreWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportSemaphoreWin32HandleInfoKHR") {
+val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemaphoreWin32HandleInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -2433,7 +2433,7 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportSemaph
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.")
 }
 
-val VkD3D12FenceSubmitInfoKHR = struct(VULKAN_PACKAGE, "VkD3D12FenceSubmitInfoKHR") {
+val VkD3D12FenceSubmitInfoKHR = struct(Module.VULKAN, "VkD3D12FenceSubmitInfoKHR") {
     documentation =
         """
         Structure specifying values for Direct3D 12 fence-backed semaphores.
@@ -2463,7 +2463,7 @@ val VkD3D12FenceSubmitInfoKHR = struct(VULKAN_PACKAGE, "VkD3D12FenceSubmitInfoKH
     nullable..const..uint64_t_p.member("pSignalSemaphoreValues", "an array of length {@code signalSemaphoreValuesCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pSignalSemaphores} to set when signaled.")
 }
 
-val VkSemaphoreGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkSemaphoreGetWin32HandleInfoKHR") {
+val VkSemaphoreGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetWin32HandleInfoKHR") {
     documentation =
         """
         Structure describing a Win32 handle semaphore export operation.
@@ -2499,7 +2499,7 @@ val VkSemaphoreGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkSemaphoreGetWin
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
 
-val VkImportSemaphoreFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportSemaphoreFdInfoKHR") {
+val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoKHR") {
     documentation =
         """
         Structure specifying POSIX file descriptor to import to a semaphore.
@@ -2548,7 +2548,7 @@ val VkImportSemaphoreFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportSemaphoreFdInfo
     int.member("fd", "the external handle to import.")
 }
 
-val VkSemaphoreGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkSemaphoreGetFdInfoKHR") {
+val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
     documentation =
         """
         Structure describing a POSIX FD semaphore export operation.
@@ -2583,7 +2583,7 @@ val VkSemaphoreGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkSemaphoreGetFdInfoKHR") 
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
 
-val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDevicePushDescriptorPropertiesKHR") {
+val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevicePushDescriptorPropertiesKHR") {
     documentation =
         """
         Structure describing push descriptor limits that can be supported by an implementation.
@@ -2600,7 +2600,7 @@ val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhys
     uint32_t.member("maxPushDescriptors", "the maximum number of descriptors that <b>can</b> be used in a descriptor set created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR set.")
 }
 
-val VkPhysicalDevice16BitStorageFeaturesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDevice16BitStorageFeaturesKHR") {
+val VkPhysicalDevice16BitStorageFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevice16BitStorageFeaturesKHR") {
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkBool32.member("storageBuffer16BitAccess", "")
@@ -2609,7 +2609,7 @@ val VkPhysicalDevice16BitStorageFeaturesKHR = struct(VULKAN_PACKAGE, "VkPhysical
     VkBool32.member("storageInputOutput16", "")
 }
 
-val VkRectLayerKHR = struct(VULKAN_PACKAGE, "VkRectLayerKHR") {
+val VkRectLayerKHR = struct(Module.VULKAN, "VkRectLayerKHR") {
     documentation =
         """
         Structure containing a rectangle, including layer, changed by vkQueuePresentKHR for a given VkImage.
@@ -2631,7 +2631,7 @@ val VkRectLayerKHR = struct(VULKAN_PACKAGE, "VkRectLayerKHR") {
     uint32_t.member("layer", "the layer of the image. For images with only one layer, the value of {@code layer} <b>must</b> be 0.")
 }
 
-val VkPresentRegionKHR = struct(VULKAN_PACKAGE, "VkPresentRegionKHR") {
+val VkPresentRegionKHR = struct(Module.VULKAN, "VkPresentRegionKHR") {
     documentation =
         """
         Structure containing rectangular region changed by vkQueuePresentKHR for a given VkImage.
@@ -2649,7 +2649,7 @@ val VkPresentRegionKHR = struct(VULKAN_PACKAGE, "VkPresentRegionKHR") {
     nullable..const..VkRectLayerKHR.p.buffer("pRectangles", "either {@code NULL} or a pointer to an array of ##VkRectLayerKHR structures. The ##VkRectLayerKHR structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.")
 }
 
-val VkPresentRegionsKHR = struct(VULKAN_PACKAGE, "VkPresentRegionsKHR") {
+val VkPresentRegionsKHR = struct(Module.VULKAN, "VkPresentRegionsKHR") {
     documentation =
         """
         Structure hint of rectangular regions changed by vkQueuePresentKHR.
@@ -2676,7 +2676,7 @@ val VkPresentRegionsKHR = struct(VULKAN_PACKAGE, "VkPresentRegionsKHR") {
     nullable..const..VkPresentRegionKHR.p.buffer("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
 }
 
-val VkDescriptorUpdateTemplateEntryKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpdateTemplateEntryKHR") {
+val VkDescriptorUpdateTemplateEntryKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntryKHR") {
     documentation =
         """
         Describes a single descriptor update of the descriptor update template.
@@ -2709,7 +2709,7 @@ val VkDescriptorUpdateTemplateEntryKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpd
         The stride is useful in case the bindings are stored in structs along with other data.""")
 }
 
-val VkDescriptorUpdateTemplateCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDescriptorUpdateTemplateCreateInfoKHR") {
+val VkDescriptorUpdateTemplateCreateInfoKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateCreateInfoKHR") {
     documentation =
         """
         Structure specifying parameters of a newly created descriptor update template.
@@ -2752,7 +2752,7 @@ val VkDescriptorUpdateTemplateCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDescript
     uint32_t.member("set", "the set number of the descriptor set in the pipeline layout that will be updated. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR")
 }
 
-val VkDeviceGeneratedCommandsFeaturesNVX = struct(VULKAN_PACKAGE, "VkDeviceGeneratedCommandsFeaturesNVX") {
+val VkDeviceGeneratedCommandsFeaturesNVX = struct(Module.VULKAN, "VkDeviceGeneratedCommandsFeaturesNVX") {
     documentation =
         """
         Structure specifying physical device support.
@@ -2772,7 +2772,7 @@ val VkDeviceGeneratedCommandsFeaturesNVX = struct(VULKAN_PACKAGE, "VkDeviceGener
     VkBool32.member("computeBindingPointSupport", "indicates whether the {@code VkObjectTableNVX} supports entries with #OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX bit set and {@code VkIndirectCommandsLayoutNVX} supports #PIPELINE_BIND_POINT_COMPUTE.")
 }
 
-val VkDeviceGeneratedCommandsLimitsNVX = struct(VULKAN_PACKAGE, "VkDeviceGeneratedCommandsLimitsNVX") {
+val VkDeviceGeneratedCommandsLimitsNVX = struct(Module.VULKAN, "VkDeviceGeneratedCommandsLimitsNVX") {
     documentation =
         """
         Structure specifying physical device limits.
@@ -2796,7 +2796,7 @@ val VkDeviceGeneratedCommandsLimitsNVX = struct(VULKAN_PACKAGE, "VkDeviceGenerat
     uint32_t.member("minCommandsTokenBufferOffsetAlignment", "the minimum alignment for memory addresses optionally used in #CmdProcessCommandsNVX().")
 }
 
-val VkIndirectCommandsTokenNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsTokenNVX") {
+val VkIndirectCommandsTokenNVX = struct(Module.VULKAN, "VkIndirectCommandsTokenNVX") {
     documentation =
         """
         Structure specifying parameters for the reservation of command buffer space.
@@ -2822,7 +2822,7 @@ val VkIndirectCommandsTokenNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsToken
     VkDeviceSize.member("offset", "specified an offset into {@code buffer} where the arguments start.")
 }
 
-val VkIndirectCommandsLayoutTokenNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsLayoutTokenNVX") {
+val VkIndirectCommandsLayoutTokenNVX = struct(Module.VULKAN, "VkIndirectCommandsLayoutTokenNVX") {
     documentation =
         """
         Struct specifying the details of an indirect command layout token.
@@ -2849,7 +2849,7 @@ val VkIndirectCommandsLayoutTokenNVX = struct(VULKAN_PACKAGE, "VkIndirectCommand
     uint32_t.member("divisor", "defines the rate at which the input data buffers are accessed.")
 }
 
-val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsLayoutCreateInfoNVX") {
+val VkIndirectCommandsLayoutCreateInfoNVX = struct(Module.VULKAN, "VkIndirectCommandsLayoutCreateInfoNVX") {
     documentation =
         """
         Structure specifying the parameters of a newly created indirect commands layout object.
@@ -2907,7 +2907,7 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCo
     const..VkIndirectCommandsLayoutTokenNVX.p.buffer("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
 }
 
-val VkCmdProcessCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdProcessCommandsInfoNVX") {
+val VkCmdProcessCommandsInfoNVX = struct(Module.VULKAN, "VkCmdProcessCommandsInfoNVX") {
     documentation =
         """
         Structure specifying parameters for the generation of commands.
@@ -2965,7 +2965,7 @@ val VkCmdProcessCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdProcessCommandsIn
     VkDeviceSize.member("sequencesIndexOffset", "the byte offset into {@code sequencesIndexBuffer} where the index values start.")
 }
 
-val VkCmdReserveSpaceForCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdReserveSpaceForCommandsInfoNVX") {
+val VkCmdReserveSpaceForCommandsInfoNVX = struct(Module.VULKAN, "VkCmdReserveSpaceForCommandsInfoNVX") {
     documentation =
         """
         Structure specifying parameters for the reservation of command buffer space.
@@ -2995,7 +2995,7 @@ val VkCmdReserveSpaceForCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdReserveSp
     uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved.")
 }
 
-val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfoNVX") {
+val VkObjectTableCreateInfoNVX = struct(Module.VULKAN, "VkObjectTableCreateInfoNVX") {
     documentation =
         """
         Structure specifying the parameters of a newly created object table.
@@ -3038,7 +3038,7 @@ val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfo
     uint32_t.member("maxPipelineLayouts", "the maximum number of unique {@code VkPipelineLayout} used by any registered {@code VkDescriptorSet} or {@code VkPipeline} in this table.")
 }
 
-val VkObjectTableEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableEntryNVX") {
+val VkObjectTableEntryNVX = struct(Module.VULKAN, "VkObjectTableEntryNVX") {
     documentation =
         """
         Common parameters of an object table resource entry.
@@ -3063,7 +3063,7 @@ val VkObjectTableEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableEntryNVX") {
     VkObjectEntryUsageFlagsNVX.member("flags", "defines which {@code VkPipelineBindPoint} the resource can be used with. Some entry types allow only a single flag to be set.")
 }
 
-val VkObjectTablePipelineEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePipelineEntryNVX") {
+val VkObjectTablePipelineEntryNVX = struct(Module.VULKAN, "VkObjectTablePipelineEntryNVX") {
     documentation =
         """
         Parameters of an object table pipeline entry.
@@ -3087,7 +3087,7 @@ val VkObjectTablePipelineEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePipelin
     VkPipeline.member("pipeline", "specifies the {@code VkPipeline} that this resource entry references.")
 }
 
-val VkObjectTableDescriptorSetEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableDescriptorSetEntryNVX") {
+val VkObjectTableDescriptorSetEntryNVX = struct(Module.VULKAN, "VkObjectTableDescriptorSetEntryNVX") {
     documentation =
         """
         Parameters of an object table descriptor set entry.
@@ -3114,7 +3114,7 @@ val VkObjectTableDescriptorSetEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableDe
     VkDescriptorSet.member("descriptorSet", "specifies the {@code VkDescriptorSet} that can be bound with this entry.")
 }
 
-val VkObjectTableVertexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableVertexBufferEntryNVX") {
+val VkObjectTableVertexBufferEntryNVX = struct(Module.VULKAN, "VkObjectTableVertexBufferEntryNVX") {
     documentation =
         """
         Parameters of an object table vertex buffer entry.
@@ -3138,7 +3138,7 @@ val VkObjectTableVertexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableVer
     VkBuffer.member("buffer", "specifies the {@code VkBuffer} that can be bound as vertex bufer")
 }
 
-val VkObjectTableIndexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableIndexBufferEntryNVX") {
+val VkObjectTableIndexBufferEntryNVX = struct(Module.VULKAN, "VkObjectTableIndexBufferEntryNVX") {
     documentation =
         """
         Parameters of an object table index buffer entry.
@@ -3164,7 +3164,7 @@ val VkObjectTableIndexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableInde
     VkIndexType.member("indexType", "specifies the {@code VkIndexType} used with this index buffer")
 }
 
-val VkObjectTablePushConstantEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePushConstantEntryNVX") {
+val VkObjectTablePushConstantEntryNVX = struct(Module.VULKAN, "VkObjectTablePushConstantEntryNVX") {
     documentation =
         """
         Parameters of an object table push constant entry.
@@ -3191,7 +3191,7 @@ val VkObjectTablePushConstantEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePus
     VkShaderStageFlags.member("stageFlags", "specifies the {@code VkShaderStageFlags} that the pushconstants are used with")
 }
 
-val VkViewportWScalingNV = struct(VULKAN_PACKAGE, "VkViewportWScalingNV") {
+val VkViewportWScalingNV = struct(Module.VULKAN, "VkViewportWScalingNV") {
     documentation =
         """
         Structure specifying a viewport.
@@ -3201,7 +3201,7 @@ val VkViewportWScalingNV = struct(VULKAN_PACKAGE, "VkViewportWScalingNV") {
     float.member("ycoeff", "see {@code xcoeff}")
 }
 
-val VkPipelineViewportWScalingStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipelineViewportWScalingStateCreateInfoNV") {
+val VkPipelineViewportWScalingStateCreateInfoNV = struct(Module.VULKAN, "VkPipelineViewportWScalingStateCreateInfoNV") {
     documentation =
         """
         Structure specifying parameters of a newly created pipeline viewport W scaling state.
@@ -3223,7 +3223,7 @@ val VkPipelineViewportWScalingStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipe
     const..VkViewportWScalingNV.p.buffer("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures, which define the <b>W</b> scaling parameters for the corresponding viewport. If the viewport <b>W</b> scaling state is dynamic, this member is ignored.")
 }
 
-val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EXT", mutable = false) {
+val VkSurfaceCapabilities2EXT = struct(Module.VULKAN, "VkSurfaceCapabilities2EXT", mutable = false) {
     documentation =
         """
         Structure describing capabilities of a surface.
@@ -3258,7 +3258,7 @@ val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EX
     VkSurfaceCounterFlagsEXT.member("supportedSurfaceCounters", "a bitmask of {@code VkSurfaceCounterFlagBitsEXT} indicating the supported surface counter types.")
 }
 
-val VkDisplayPowerInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayPowerInfoEXT") {
+val VkDisplayPowerInfoEXT = struct(Module.VULKAN, "VkDisplayPowerInfoEXT") {
     documentation =
         """
         Describe the power state of a display.
@@ -3279,7 +3279,7 @@ val VkDisplayPowerInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayPowerInfoEXT") {
     VkDisplayPowerStateEXT.member("powerState", "a {@code VkDisplayPowerStateEXT} value specifying the new power state of the display.")
 }
 
-val VkDeviceEventInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceEventInfoEXT") {
+val VkDeviceEventInfoEXT = struct(Module.VULKAN, "VkDeviceEventInfoEXT") {
     documentation =
         """
         Describe a device event to create.
@@ -3300,7 +3300,7 @@ val VkDeviceEventInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceEventInfoEXT") {
     VkDeviceEventTypeEXT.member("deviceEvent", "")
 }
 
-val VkDisplayEventInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayEventInfoEXT") {
+val VkDisplayEventInfoEXT = struct(Module.VULKAN, "VkDisplayEventInfoEXT") {
     documentation =
         """
         Describe a display event to create.
@@ -3321,7 +3321,7 @@ val VkDisplayEventInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayEventInfoEXT") {
     VkDisplayEventTypeEXT.member("displayEvent", "a {@code VkDisplayEventTypeEXT} specifying when the fence will be signaled.")
 }
 
-val VkSwapchainCounterCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSwapchainCounterCreateInfoEXT") {
+val VkSwapchainCounterCreateInfoEXT = struct(Module.VULKAN, "VkSwapchainCounterCreateInfoEXT") {
     documentation =
         """
         Specify the surface counters desired.
@@ -3344,7 +3344,7 @@ val VkSwapchainCounterCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSwapchainCounter
     VkSurfaceCounterFlagsEXT.member("surfaceCounters", "a bitmask of {@code VkSurfaceCounterFlagBitsEXT} specifying surface counters to enable for the swapchain.")
 }
 
-val VkRefreshCycleDurationGOOGLE = struct(VULKAN_PACKAGE, "VkRefreshCycleDurationGOOGLE") {
+val VkRefreshCycleDurationGOOGLE = struct(Module.VULKAN, "VkRefreshCycleDurationGOOGLE") {
     documentation =
         """
         Structure containing the RC duration of a display.
@@ -3353,7 +3353,7 @@ val VkRefreshCycleDurationGOOGLE = struct(VULKAN_PACKAGE, "VkRefreshCycleDuratio
     uint64_t.member("refreshDuration", "the number of nanoseconds from the start of one refresh cycle to the next.")
 }
 
-val VkPastPresentationTimingGOOGLE = struct(VULKAN_PACKAGE, "VkPastPresentationTimingGOOGLE") {
+val VkPastPresentationTimingGOOGLE = struct(Module.VULKAN, "VkPastPresentationTimingGOOGLE") {
     documentation =
         """
         Structure containing timing information about a previously-presented image.
@@ -3374,7 +3374,7 @@ val VkPastPresentationTimingGOOGLE = struct(VULKAN_PACKAGE, "VkPastPresentationT
     uint64_t.member("presentMargin", "an indication of how early the #QueuePresentKHR() command was processed compared to how soon it needed to be processed, and still be presented at {@code earliestPresentTime}.")
 }
 
-val VkPresentTimeGOOGLE = struct(VULKAN_PACKAGE, "VkPresentTimeGOOGLE") {
+val VkPresentTimeGOOGLE = struct(Module.VULKAN, "VkPresentTimeGOOGLE") {
     documentation =
         """
         The earliest time image should be presented.
@@ -3384,7 +3384,7 @@ val VkPresentTimeGOOGLE = struct(VULKAN_PACKAGE, "VkPresentTimeGOOGLE") {
     uint64_t.member("desiredPresentTime", "indicates that the image given <b>should</b> not be displayed to the user any earlier than this time. {@code desiredPresentTime} is a time in nanoseconds, relative to a monotonically-increasing clock (e.g. {@code CLOCK_MONOTONIC} (see clock_gettime(2)) on Android and Linux). A value of zero indicates that the presentation engine <b>may</b> display the image at any time. This is useful when the application desires to provide {@code presentID}, but doesn&#8217;t need a specific {@code desiredPresentTime}.")
 }
 
-val VkPresentTimesInfoGOOGLE = struct(VULKAN_PACKAGE, "VkPresentTimesInfoGOOGLE") {
+val VkPresentTimesInfoGOOGLE = struct(Module.VULKAN, "VkPresentTimesInfoGOOGLE") {
     documentation =
         """
         The earliest time each image should be presented.
@@ -3411,7 +3411,7 @@ val VkPresentTimesInfoGOOGLE = struct(VULKAN_PACKAGE, "VkPresentTimesInfoGOOGLE"
     nullable..const..VkPresentTimeGOOGLE.p.buffer("pTimes", "{@code NULL} or a pointer to an array of ##VkPresentTimeGOOGLE elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pTimes} contains the earliest time to present the image corresponding to the entry in the ##VkPresentInfoKHR{@code ::pImageIndices} array.")
 }
 
-val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", mutable = false) {
+val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", mutable = false) {
     documentation =
         """
         Structure describing multiview limits that can be supported by an implementation.
@@ -3430,7 +3430,7 @@ val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(VULKAN_PACK
     VkBool32.member("perViewPositionAllComponents", "#TRUE if the implementation supports per-view position values that differ in components other than the X component.")
 }
 
-val VkViewportSwizzleNV = struct(VULKAN_PACKAGE, "VkViewportSwizzleNV") {
+val VkViewportSwizzleNV = struct(Module.VULKAN, "VkViewportSwizzleNV") {
     documentation =
         """
         Structure specifying a viewport swizzle.
@@ -3453,7 +3453,7 @@ val VkViewportSwizzleNV = struct(VULKAN_PACKAGE, "VkViewportSwizzleNV") {
     VkViewportCoordinateSwizzleNV.member("w", "a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the w component of the primitive")
 }
 
-val VkPipelineViewportSwizzleStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipelineViewportSwizzleStateCreateInfoNV") {
+val VkPipelineViewportSwizzleStateCreateInfoNV = struct(Module.VULKAN, "VkPipelineViewportSwizzleStateCreateInfoNV") {
     documentation =
         """
         Structure specifying swizzle applied to primitive clip coordinates.
@@ -3482,7 +3482,7 @@ val VkPipelineViewportSwizzleStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipel
     nullable..const..VkViewportSwizzleNV.p.buffer("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures, defining the viewport swizzles.")
 }
 
-val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceDiscardRectanglePropertiesEXT") {
+val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDiscardRectanglePropertiesEXT") {
     documentation =
         """
         Structure describing discard rectangle limits that can be supported by an implementation.
@@ -3501,7 +3501,7 @@ val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(VULKAN_PACKAGE, "VkPh
     uint32_t.member("maxDiscardRectangles", "the maximum number of discard rectangles that <b>can</b> be specified.")
 }
 
-val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPipelineDiscardRectangleStateCreateInfoEXT") {
+val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineDiscardRectangleStateCreateInfoEXT") {
     documentation =
         """
         Structure specifying discard rectangle.
@@ -3531,7 +3531,7 @@ val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPip
     nullable..const..VkRect2D.p.buffer("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures, defining the discard rectangles. If the discard rectangle state is dynamic, this member is ignored.")
 }
 
-val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceConservativeRasterizationPropertiesEXT") {
+val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceConservativeRasterizationPropertiesEXT") {
     documentation =
         """
         Structure describing conservative raster properties that can be supported by an implementation.
@@ -3558,7 +3558,7 @@ val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(VULKAN_PACKA
     VkBool32.member("conservativeRasterizationPostDepthCoverage", "true if the implementation supports conservative rasterization with the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#shaders-fragment-earlytest-postdepthcoverage\">{@code PostDepthCoverage}</a> execution mode enabled. When supported the {@code SampleMask} built-in input variable will reflect the coverage after the early per-fragment depth and stencil tests are applied even when conservative rasterization is enabled. Otherwise <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#shaders-fragment-earlytest-postdepthcoverage\">{@code PostDepthCoverage}</a> execution mode <b>must</b> not be used when conservative rasterization is enabled.")
 }
 
-val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPipelineRasterizationConservativeStateCreateInfoEXT") {
+val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRasterizationConservativeStateCreateInfoEXT") {
     documentation =
         """
         Structure specifying conservative raster state.
@@ -3584,7 +3584,7 @@ val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(VULKAN_PACKAG
     float.member("extraPrimitiveOverestimationSize", "the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in ##VkPhysicalDeviceConservativeRasterizationPropertiesEXT{@code ::primitiveOverestimationSize}.")
 }
 
-val VkXYColorEXT = struct(VULKAN_PACKAGE, "VkXYColorEXT") {
+val VkXYColorEXT = struct(Module.VULKAN, "VkXYColorEXT") {
     documentation =
         """
         structure to specify X,Y chromaticity coordinates.
@@ -3594,7 +3594,7 @@ val VkXYColorEXT = struct(VULKAN_PACKAGE, "VkXYColorEXT") {
     float.member("y", "")
 }
 
-val VkHdrMetadataEXT = struct(VULKAN_PACKAGE, "VkHdrMetadataEXT") {
+val VkHdrMetadataEXT = struct(Module.VULKAN, "VkHdrMetadataEXT") {
     documentation =
         """
         structure to specify Hdr metadata.
@@ -3620,7 +3620,7 @@ val VkHdrMetadataEXT = struct(VULKAN_PACKAGE, "VkHdrMetadataEXT") {
     float.member("maxFrameAverageLightLevel", "the maximum frame average light level in nits")
 }
 
-val VkSharedPresentSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSharedPresentSurfaceCapabilitiesKHR", mutable = false) {
+val VkSharedPresentSurfaceCapabilitiesKHR = struct(Module.VULKAN, "VkSharedPresentSurfaceCapabilitiesKHR", mutable = false) {
     documentation =
         """
         structure describing capabilities of a surface for shared presentation.
@@ -3636,7 +3636,7 @@ val VkSharedPresentSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSharedPres
     VkImageUsageFlags.member("sharedPresentSupportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the shared presentable image from a swapchain created with {@code VkPresentModeKHR} set to #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
 
-val VkPhysicalDeviceExternalFenceInfoKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalFenceInfoKHR") {
+val VkPhysicalDeviceExternalFenceInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalFenceInfoKHR") {
     documentation =
         """
         Structure specifying fence creation parameters.
@@ -3662,7 +3662,7 @@ val VkPhysicalDeviceExternalFenceInfoKHR = struct(VULKAN_PACKAGE, "VkPhysicalDev
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalFenceHandleTypeFlagBitsKHR} value indicating an external fence handle type for which capabilities will be returned.")
 }
 
-val VkExternalFencePropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalFencePropertiesKHR", mutable = false) {
+val VkExternalFencePropertiesKHR = struct(Module.VULKAN, "VkExternalFencePropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing supported external fence handle features.
@@ -3687,7 +3687,7 @@ val VkExternalFencePropertiesKHR = struct(VULKAN_PACKAGE, "VkExternalFenceProper
     VkExternalFenceFeatureFlagsKHR.member("externalFenceFeatures", "a bitmask of {@code VkExternalFenceFeatureFlagBitsKHR} indicating the features of {@code handleType}.")
 }
 
-val VkExportFenceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExportFenceCreateInfoKHR") {
+val VkExportFenceCreateInfoKHR = struct(Module.VULKAN, "VkExportFenceCreateInfoKHR") {
     documentation =
         """
         Structure specifying handle types that can be exported from a fence.
@@ -3710,7 +3710,7 @@ val VkExportFenceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkExportFenceCreateInfo
     VkExternalFenceHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBitsKHR} specifying one or more fence handle types the application <b>can</b> export from the resulting fence. The application <b>can</b> request multiple handle types for the same fence.")
 }
 
-val VkImportFenceWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportFenceWin32HandleInfoKHR") {
+val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32HandleInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -3766,7 +3766,7 @@ val VkImportFenceWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkImportFenceWin32
     LPCWSTR.member("name", "the NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
 }
 
-val VkExportFenceWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportFenceWin32HandleInfoKHR") {
+val VkExportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportFenceWin32HandleInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
@@ -3806,7 +3806,7 @@ val VkExportFenceWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkExportFenceWin32
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created fence.")
 }
 
-val VkFenceGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkFenceGetWin32HandleInfoKHR") {
+val VkFenceGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkFenceGetWin32HandleInfoKHR") {
     documentation =
         """
         Structure describing a Win32 handle fence export operation.
@@ -3841,7 +3841,7 @@ val VkFenceGetWin32HandleInfoKHR = struct(VULKAN_PACKAGE, "VkFenceGetWin32Handle
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
 
-val VkImportFenceFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportFenceFdInfoKHR") {
+val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
     documentation =
         """
         (None).
@@ -3896,7 +3896,7 @@ val VkImportFenceFdInfoKHR = struct(VULKAN_PACKAGE, "VkImportFenceFdInfoKHR") {
     int.member("fd", "the external handle to import.")
 }
 
-val VkFenceGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkFenceGetFdInfoKHR") {
+val VkFenceGetFdInfoKHR = struct(Module.VULKAN, "VkFenceGetFdInfoKHR") {
     documentation =
         """
         Structure describing a POSIX FD fence export operation.
@@ -3930,7 +3930,7 @@ val VkFenceGetFdInfoKHR = struct(VULKAN_PACKAGE, "VkFenceGetFdInfoKHR") {
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
 
-val VkPhysicalDevicePointClippingPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDevicePointClippingPropertiesKHR", mutable = false) {
+val VkPhysicalDevicePointClippingPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevicePointClippingPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure describing the point clipping behavior supported by an implementation.
@@ -3950,7 +3950,7 @@ val VkPhysicalDevicePointClippingPropertiesKHR = struct(VULKAN_PACKAGE, "VkPhysi
     VkPointClippingBehaviorKHR.member("pointClippingBehavior", "the point clipping behavior supported by the implementation, and is of type {@code VkPointClippingBehaviorKHR}.")
 }
 
-val VkInputAttachmentAspectReferenceKHR = struct(VULKAN_PACKAGE, "VkInputAttachmentAspectReferenceKHR") {
+val VkInputAttachmentAspectReferenceKHR = struct(Module.VULKAN, "VkInputAttachmentAspectReferenceKHR") {
     documentation =
         """
         Structure specifying a subpass/input attachment pair and an aspect mask that <b>can</b> be read.
@@ -3977,7 +3977,7 @@ val VkInputAttachmentAspectReferenceKHR = struct(VULKAN_PACKAGE, "VkInputAttachm
     VkImageAspectFlags.member("aspectMask", "a mask of which aspect(s) <b>can</b> be accessed within the specified subpass.")
 }
 
-val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(VULKAN_PACKAGE, "VkRenderPassInputAttachmentAspectCreateInfoKHR") {
+val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(Module.VULKAN, "VkRenderPassInputAttachmentAspectCreateInfoKHR") {
     documentation =
         """
         Structure specifying, for a given subpass/input attachment pair, which aspect <b>can</b> be read.
@@ -4000,7 +4000,7 @@ val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(VULKAN_PACKAGE, "VkR
     const..VkInputAttachmentAspectReferenceKHR.p.buffer("pAspectReferences", "points to an array of {@code aspectReferenceCount} number of ##VkInputAttachmentAspectReferenceKHR structures describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.")
 }
 
-val VkImageViewUsageCreateInfoKHR = struct(VULKAN_PACKAGE, "VkImageViewUsageCreateInfoKHR") {
+val VkImageViewUsageCreateInfoKHR = struct(Module.VULKAN, "VkImageViewUsageCreateInfoKHR") {
     documentation =
         """
         Specify the intended usage of an image view.
@@ -4027,7 +4027,7 @@ val VkImageViewUsageCreateInfoKHR = struct(VULKAN_PACKAGE, "VkImageViewUsageCrea
     VkImageUsageFlags.member("usage", "a bitmask describing the allowed usages of the image view. See {@code VkImageUsageFlagBits} for a description of the supported bits.")
 }
 
-val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(VULKAN_PACKAGE, "VkPipelineTessellationDomainOriginStateCreateInfoKHR") {
+val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineTessellationDomainOriginStateCreateInfoKHR") {
     documentation =
         """
         Structure specifying the orientation of the tessellation domain.
@@ -4048,7 +4048,7 @@ val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(VULKAN_PACKAGE
     VkTessellationDomainOriginKHR.member("domainOrigin", "controls the origin of the tessellation domain space, and is of type {@code VkTessellationDomainOriginKHR}.")
 }
 
-val VkPhysicalDeviceSurfaceInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSurfaceInfo2KHR") {
+val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSurfaceInfo2KHR") {
     documentation =
         """
         Structure specifying a surface and related swapchain creation parameters.
@@ -4072,7 +4072,7 @@ val VkPhysicalDeviceSurfaceInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSu
     VkSurfaceKHR.member("surface", "the surface that will be associated with the swapchain.")
 }
 
-val VkSurfaceCapabilities2KHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2KHR", mutable = false) {
+val VkSurfaceCapabilities2KHR = struct(Module.VULKAN, "VkSurfaceCapabilities2KHR", mutable = false) {
     documentation =
         """
         Structure describing capabilities of a surface.
@@ -4092,7 +4092,7 @@ val VkSurfaceCapabilities2KHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2KH
     VkSurfaceCapabilitiesKHR.member("surfaceCapabilities", "a structure of type ##VkSurfaceCapabilitiesKHR describing the capabilities of the specified surface.")
 }
 
-val VkSurfaceFormat2KHR = struct(VULKAN_PACKAGE, "VkSurfaceFormat2KHR", mutable = false) {
+val VkSurfaceFormat2KHR = struct(Module.VULKAN, "VkSurfaceFormat2KHR", mutable = false) {
     documentation =
         """
         Structure describing a supported swapchain format tuple.
@@ -4112,7 +4112,7 @@ val VkSurfaceFormat2KHR = struct(VULKAN_PACKAGE, "VkSurfaceFormat2KHR", mutable 
     VkSurfaceFormatKHR.member("surfaceFormat", "an instance of ##VkSurfaceFormatKHR describing a format-color space pair that is compatible with the specified surface.")
 }
 
-val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceVariablePointerFeaturesKHR") {
+val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointerFeaturesKHR") {
     documentation =
         """
         Structure describing variable pointers features that can be supported by an implementation.
@@ -4138,7 +4138,7 @@ val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(VULKAN_PACKAGE, "VkPhysi
     VkBool32.member("variablePointers", "indicates whether the implementation supports the SPIR-V VariablePointers capability. When this feature is not enabled, shader modules <b>must</b> not declare the VariablePointers capability.")
 }
 
-val VkIOSSurfaceCreateInfoMVK = struct(VULKAN_PACKAGE, "VkIOSSurfaceCreateInfoMVK") {
+val VkIOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkIOSSurfaceCreateInfoMVK") {
     documentation =
         """
         Structure specifying parameters of a newly created iOS surface object.
@@ -4165,7 +4165,7 @@ val VkIOSSurfaceCreateInfoMVK = struct(VULKAN_PACKAGE, "VkIOSSurfaceCreateInfoMV
     const..opaque_p.member("pView", "a reference to a {@code UIView} object which will display this surface. This {@code UIView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
 }
 
-val VkMacOSSurfaceCreateInfoMVK = struct(VULKAN_PACKAGE, "VkMacOSSurfaceCreateInfoMVK") {
+val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInfoMVK") {
     documentation =
         """
         Structure specifying parameters of a newly created macOS surface object.
@@ -4192,7 +4192,7 @@ val VkMacOSSurfaceCreateInfoMVK = struct(VULKAN_PACKAGE, "VkMacOSSurfaceCreateIn
     const..opaque_p.member("pView", "a reference to a {@code NSView} object which will display this surface. This {@code NSView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
 }
 
-val VkMemoryDedicatedRequirementsKHR = struct(VULKAN_PACKAGE, "VkMemoryDedicatedRequirementsKHR", mutable = false) {
+val VkMemoryDedicatedRequirementsKHR = struct(Module.VULKAN, "VkMemoryDedicatedRequirementsKHR", mutable = false) {
     documentation =
         """
         Structure describing dedicated allocation requirements of buffer and image resources.
@@ -4231,7 +4231,7 @@ val VkMemoryDedicatedRequirementsKHR = struct(VULKAN_PACKAGE, "VkMemoryDedicated
     VkBool32.member("requiresDedicatedAllocation", "indicates that a dedicated allocation is required for this resource.")
 }
 
-val VkMemoryDedicatedAllocateInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryDedicatedAllocateInfoKHR") {
+val VkMemoryDedicatedAllocateInfoKHR = struct(Module.VULKAN, "VkMemoryDedicatedAllocateInfoKHR") {
     documentation =
         """
         Specify a dedicated memory allocation resource.
@@ -4263,7 +4263,7 @@ val VkMemoryDedicatedAllocateInfoKHR = struct(VULKAN_PACKAGE, "VkMemoryDedicated
     VkBuffer.member("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
 }
 
-val VkSamplerReductionModeCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSamplerReductionModeCreateInfoEXT") {
+val VkSamplerReductionModeCreateInfoEXT = struct(Module.VULKAN, "VkSamplerReductionModeCreateInfoEXT") {
     documentation =
         """
         Structure specifying sampler reduction mode.
@@ -4284,7 +4284,7 @@ val VkSamplerReductionModeCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSamplerReduc
     VkSamplerReductionModeEXT.member("reductionMode", "an enum of type {@code VkSamplerReductionModeEXT} that controls how texture filtering combines texel values.")
 }
 
-val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT", mutable = false) {
+val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT", mutable = false) {
     documentation =
         """
         Structure describing sampler filter minmax limits that can be supported by an implementation.
@@ -4326,7 +4326,7 @@ val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(VULKAN_PACKAGE, "V
     VkBool32.member("filterMinmaxImageComponentMapping", "a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.")
 }
 
-val VkSampleLocationEXT = struct(VULKAN_PACKAGE, "VkSampleLocationEXT") {
+val VkSampleLocationEXT = struct(Module.VULKAN, "VkSampleLocationEXT") {
     documentation =
         """
         Structure specifying the coordinates of a sample location.
@@ -4344,7 +4344,7 @@ val VkSampleLocationEXT = struct(VULKAN_PACKAGE, "VkSampleLocationEXT") {
     float.member("y", "the vertical coordinate of the sample&#8217;s location.")
 }
 
-val VkSampleLocationsInfoEXT = struct(VULKAN_PACKAGE, "VkSampleLocationsInfoEXT") {
+val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT") {
     documentation =
         """
         Structure specifying a set of sample locations.
@@ -4381,7 +4381,7 @@ val VkSampleLocationsInfoEXT = struct(VULKAN_PACKAGE, "VkSampleLocationsInfoEXT"
     const..VkSampleLocationEXT.p.buffer("pSampleLocations", "an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures.")
 }
 
-val VkAttachmentSampleLocationsEXT = struct(VULKAN_PACKAGE, "VkAttachmentSampleLocationsEXT") {
+val VkAttachmentSampleLocationsEXT = struct(Module.VULKAN, "VkAttachmentSampleLocationsEXT") {
     documentation =
         """
         Structure specifying the sample locations state to use in the initial layout transition of attachments.
@@ -4407,7 +4407,7 @@ val VkAttachmentSampleLocationsEXT = struct(VULKAN_PACKAGE, "VkAttachmentSampleL
     VkSampleLocationsInfoEXT.member("sampleLocationsInfo", "the sample locations state to use for the layout transition of the given attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.")
 }
 
-val VkSubpassSampleLocationsEXT = struct(VULKAN_PACKAGE, "VkSubpassSampleLocationsEXT") {
+val VkSubpassSampleLocationsEXT = struct(Module.VULKAN, "VkSubpassSampleLocationsEXT") {
     documentation =
         """
         Structure specifying the sample locations state to use for layout transitions of attachments performed after a given subpass.
@@ -4433,7 +4433,7 @@ val VkSubpassSampleLocationsEXT = struct(VULKAN_PACKAGE, "VkSubpassSampleLocatio
     VkSampleLocationsInfoEXT.member("sampleLocationsInfo", "the sample locations state to use for the layout transition of the depth/stencil attachment away from the image layout the attachment is used with in the subpass specified in {@code subpassIndex}.")
 }
 
-val VkRenderPassSampleLocationsBeginInfoEXT = struct(VULKAN_PACKAGE, "VkRenderPassSampleLocationsBeginInfoEXT") {
+val VkRenderPassSampleLocationsBeginInfoEXT = struct(Module.VULKAN, "VkRenderPassSampleLocationsBeginInfoEXT") {
     documentation =
         """
         Structure specifying sample locations to use for the layout transition of custom sample locations compatible depth/stencil attachments.
@@ -4458,7 +4458,7 @@ val VkRenderPassSampleLocationsBeginInfoEXT = struct(VULKAN_PACKAGE, "VkRenderPa
     const..VkSubpassSampleLocationsEXT.p.buffer("pPostSubpassSampleLocations", "an array of {@code postSubpassSampleLocationsCount} ##VkSubpassSampleLocationsEXT structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is #TRUE, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}.")
 }
 
-val VkPipelineSampleLocationsStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPipelineSampleLocationsStateCreateInfoEXT") {
+val VkPipelineSampleLocationsStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineSampleLocationsStateCreateInfoEXT") {
     documentation =
         """
         Structure specifying sample locations for a pipeline.
@@ -4480,7 +4480,7 @@ val VkPipelineSampleLocationsStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPipe
     VkSampleLocationsInfoEXT.member("sampleLocationsInfo", "the sample locations to use during rasterization if {@code sampleLocationsEnable} is #TRUE and the graphics pipeline isn&#8217;t created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT.")
 }
 
-val VkPhysicalDeviceSampleLocationsPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSampleLocationsPropertiesEXT", mutable = false) {
+val VkPhysicalDeviceSampleLocationsPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceSampleLocationsPropertiesEXT", mutable = false) {
     documentation =
         """
         Structure describing sample location limits that can be supported by an implementation.
@@ -4506,7 +4506,7 @@ val VkPhysicalDeviceSampleLocationsPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhy
     VkBool32.member("variableSampleLocations", "indicates whether the sample locations used by all pipelines that will be bound to a command buffer during a subpass <b>must</b> match. If set to #TRUE, the implementation supports variable sample locations in a subpass. If set to #FALSE, then the sample locations <b>must</b> stay constant in any given subpass.")
 }
 
-val VkMultisamplePropertiesEXT = struct(VULKAN_PACKAGE, "VkMultisamplePropertiesEXT", mutable = false) {
+val VkMultisamplePropertiesEXT = struct(Module.VULKAN, "VkMultisamplePropertiesEXT", mutable = false) {
     documentation =
         """
         Structure returning information about sample count specific additional multisampling capabilities.
@@ -4526,7 +4526,7 @@ val VkMultisamplePropertiesEXT = struct(VULKAN_PACKAGE, "VkMultisampleProperties
     VkExtent2D.member("maxSampleLocationGridSize", "the maximum size of the pixel grid in which sample locations <b>can</b> vary.")
 }
 
-val VkBufferMemoryRequirementsInfo2KHR = struct(VULKAN_PACKAGE, "VkBufferMemoryRequirementsInfo2KHR") {
+val VkBufferMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkBufferMemoryRequirementsInfo2KHR") {
     documentation =
         """
         (None).
@@ -4547,7 +4547,7 @@ val VkBufferMemoryRequirementsInfo2KHR = struct(VULKAN_PACKAGE, "VkBufferMemoryR
     VkBuffer.member("buffer", "the buffer to query.")
 }
 
-val VkImageMemoryRequirementsInfo2KHR = struct(VULKAN_PACKAGE, "VkImageMemoryRequirementsInfo2KHR") {
+val VkImageMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageMemoryRequirementsInfo2KHR") {
     documentation =
         """
         (None).
@@ -4575,13 +4575,13 @@ val VkImageMemoryRequirementsInfo2KHR = struct(VULKAN_PACKAGE, "VkImageMemoryReq
     VkImage.member("image", "the image to query.")
 }
 
-val VkImageSparseMemoryRequirementsInfo2KHR = struct(VULKAN_PACKAGE, "VkImageSparseMemoryRequirementsInfo2KHR") {
+val VkImageSparseMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageSparseMemoryRequirementsInfo2KHR") {
     VkStructureType.member("sType", "")
     nullable..const..opaque_p.member("pNext", "")
     VkImage.member("image", "")
 }
 
-val VkMemoryRequirements2KHR = struct(VULKAN_PACKAGE, "VkMemoryRequirements2KHR", mutable = false) {
+val VkMemoryRequirements2KHR = struct(Module.VULKAN, "VkMemoryRequirements2KHR", mutable = false) {
     documentation =
         """
         Structure specifying memory requirements.
@@ -4601,20 +4601,20 @@ val VkMemoryRequirements2KHR = struct(VULKAN_PACKAGE, "VkMemoryRequirements2KHR"
     VkMemoryRequirements.member("memoryRequirements", "a structure of type ##VkMemoryRequirements describing the memory requirements of the resource.")
 }
 
-val VkSparseImageMemoryRequirements2KHR = struct(VULKAN_PACKAGE, "VkSparseImageMemoryRequirements2KHR", mutable = false) {
+val VkSparseImageMemoryRequirements2KHR = struct(Module.VULKAN, "VkSparseImageMemoryRequirements2KHR", mutable = false) {
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkSparseImageMemoryRequirements.member("memoryRequirements", "")
 }
 
-val VkImageFormatListCreateInfoKHR = struct(VULKAN_PACKAGE, "VkImageFormatListCreateInfoKHR") {
+val VkImageFormatListCreateInfoKHR = struct(Module.VULKAN, "VkImageFormatListCreateInfoKHR") {
     VkStructureType.member("sType", "")
     nullable..const..opaque_p.member("pNext", "")
     AutoSize("pViewFormats", optional = true)..uint32_t.member("viewFormatCount", "")
     const..VkFormat.p.member("pViewFormats", "")
 }
 
-val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT") {
+val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT") {
     documentation =
         """
         Structure describing advanced blending features that can be supported by an implementation.
@@ -4633,7 +4633,7 @@ val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(VULKAN_PACKAGE, "
     VkBool32.member("advancedBlendCoherentOperations", "indicates whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, #ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT is treated the same as #ACCESS_COLOR_ATTACHMENT_READ_BIT, and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
 }
 
-val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", mutable = false) {
+val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", mutable = false) {
     documentation =
         """
         Structure describing advanced blending limits that can be supported by an implementation.
@@ -4656,7 +4656,7 @@ val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(VULKAN_PACKAGE,
     VkBool32.member("advancedBlendAllOperations", "indicates whether all advanced blend operation enums are supported. See the valid usage of ##VkPipelineColorBlendAttachmentState.")
 }
 
-val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkPipelineColorBlendAdvancedStateCreateInfoEXT") {
+val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineColorBlendAdvancedStateCreateInfoEXT") {
     documentation =
         """
         Structure specifying parameters that affect advanced blend operations.
@@ -4686,7 +4686,7 @@ val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(VULKAN_PACKAGE, "VkP
     VkBlendOverlapEXT.member("blendOverlap", "a {@code VkBlendOverlapEXT} value specifying how the source and destination sample&#8217;s coverage is correlated.")
 }
 
-val VkPipelineCoverageToColorStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipelineCoverageToColorStateCreateInfoNV") {
+val VkPipelineCoverageToColorStateCreateInfoNV = struct(Module.VULKAN, "VkPipelineCoverageToColorStateCreateInfoNV") {
     documentation =
         """
         Structure specifying whether fragment coverage replaces a color.
@@ -4720,7 +4720,7 @@ val VkPipelineCoverageToColorStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipel
     uint32_t.member("coverageToColorLocation", "controls which fragment shader color output value is replaced.")
 }
 
-val VkPipelineCoverageModulationStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPipelineCoverageModulationStateCreateInfoNV") {
+val VkPipelineCoverageModulationStateCreateInfoNV = struct(Module.VULKAN, "VkPipelineCoverageModulationStateCreateInfoNV") {
     documentation =
         """
         Structure specifying parameters controlling coverage modulation.
@@ -4772,7 +4772,7 @@ val VkPipelineCoverageModulationStateCreateInfoNV = struct(VULKAN_PACKAGE, "VkPi
     nullable..const..float_p.member("pCoverageModulationTable", "a table of modulation factors containing a value for each number of covered samples.")
 }
 
-val VkSamplerYcbcrConversionCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcbcrConversionCreateInfoKHR") {
+val VkSamplerYcbcrConversionCreateInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionCreateInfoKHR") {
     documentation =
         """
         Structure specifying the parameters of the newly created conversion.
@@ -4835,7 +4835,7 @@ val VkSamplerYcbcrConversionCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcb
     VkBool32.member("forceExplicitReconstruction", "<b>can</b> be used to ensure that reconstruction is done explicitly, if supported.")
 }
 
-val VkSamplerYcbcrConversionInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcbcrConversionInfoKHR") {
+val VkSamplerYcbcrConversionInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionInfoKHR") {
     documentation =
         """
         Structure specifying Y'CbCr conversion to a sampler or image view.
@@ -4852,7 +4852,7 @@ val VkSamplerYcbcrConversionInfoKHR = struct(VULKAN_PACKAGE, "VkSamplerYcbcrConv
     VkSamplerYcbcrConversionKHR.member("conversion", "a {@code VkSamplerYcbcrConversionKHR} handle created with #CreateSamplerYcbcrConversionKHR().")
 }
 
-val VkBindImagePlaneMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindImagePlaneMemoryInfoKHR") {
+val VkBindImagePlaneMemoryInfoKHR = struct(Module.VULKAN, "VkBindImagePlaneMemoryInfoKHR") {
     documentation =
         """
         Structure specifying how to bind an image plane to memory.
@@ -4875,7 +4875,7 @@ val VkBindImagePlaneMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindImagePlaneMemo
     VkImageAspectFlagBits.member("planeAspect", "the aspect of the disjoint image plane to bind.")
 }
 
-val VkImagePlaneMemoryRequirementsInfoKHR = struct(VULKAN_PACKAGE, "VkImagePlaneMemoryRequirementsInfoKHR") {
+val VkImagePlaneMemoryRequirementsInfoKHR = struct(Module.VULKAN, "VkImagePlaneMemoryRequirementsInfoKHR") {
     documentation =
         """
         Structure specifying image plane for memory requirements.
@@ -4897,7 +4897,7 @@ val VkImagePlaneMemoryRequirementsInfoKHR = struct(VULKAN_PACKAGE, "VkImagePlane
     VkImageAspectFlagBits.member("planeAspect", "the aspect corresponding to the image plane to query.")
 }
 
-val VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR") {
+val VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR") {
     documentation =
         """
         Structure describing Y'CbCr conversion features that can be supported by an implementation.
@@ -4913,7 +4913,7 @@ val VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR = struct(VULKAN_PACKAGE, "
     VkBool32.member("samplerYcbcrConversion", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is #FALSE, sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.")
 }
 
-val VkSamplerYcbcrConversionImageFormatPropertiesKHR = struct(VULKAN_PACKAGE, "VkSamplerYcbcrConversionImageFormatPropertiesKHR", mutable = false) {
+val VkSamplerYcbcrConversionImageFormatPropertiesKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionImageFormatPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure specifying combined image sampler descriptor count for multi-planar images.
@@ -4929,7 +4929,7 @@ val VkSamplerYcbcrConversionImageFormatPropertiesKHR = struct(VULKAN_PACKAGE, "V
     uint32_t.member("combinedImageSamplerDescriptorCount", "the number of combined image sampler descriptors that the implementation uses to access the format.")
 }
 
-val VkBindBufferMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindBufferMemoryInfoKHR") {
+val VkBindBufferMemoryInfoKHR = struct(Module.VULKAN, "VkBindBufferMemoryInfoKHR") {
     documentation =
         """
         Structure specifying how to bind a buffer to memory.
@@ -4970,7 +4970,7 @@ val VkBindBufferMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindBufferMemoryInfoKH
     VkDeviceSize.member("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.")
 }
 
-val VkBindImageMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHR") {
+val VkBindImageMemoryInfoKHR = struct(Module.VULKAN, "VkBindImageMemoryInfoKHR") {
     documentation =
         """
         Structure specifying how to bind an image to memory.
@@ -5018,7 +5018,7 @@ val VkBindImageMemoryInfoKHR = struct(VULKAN_PACKAGE, "VkBindImageMemoryInfoKHR"
     VkDeviceSize.member("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.")
 }
 
-val VkValidationCacheCreateInfoEXT = struct(VULKAN_PACKAGE, "VkValidationCacheCreateInfoEXT") {
+val VkValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkValidationCacheCreateInfoEXT") {
     documentation =
         """
         Structure specifying parameters of a newly created validation cache.
@@ -5048,7 +5048,7 @@ val VkValidationCacheCreateInfoEXT = struct(VULKAN_PACKAGE, "VkValidationCacheCr
     const..void_p.member("pInitialData", "a pointer to previously retrieved validation cache data. If the validation cache data is incompatible (as defined below) with the device, the validation cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored.")
 }
 
-val VkShaderModuleValidationCacheCreateInfoEXT = struct(VULKAN_PACKAGE, "VkShaderModuleValidationCacheCreateInfoEXT") {
+val VkShaderModuleValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkShaderModuleValidationCacheCreateInfoEXT") {
     documentation =
         """
         Specify validation cache to use during shader module creation.
@@ -5066,7 +5066,7 @@ val VkShaderModuleValidationCacheCreateInfoEXT = struct(VULKAN_PACKAGE, "VkShade
     VkValidationCacheEXT.member("validationCache", "the validation cache object from which the results of prior validation attempts will be written, and to which new validation results for this VkShaderModule will be written (if not already present).")
 }
 
-val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceQueueGlobalPriorityCreateInfoEXT") {
+val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(Module.VULKAN, "VkDeviceQueueGlobalPriorityCreateInfoEXT") {
     documentation =
         """
         Specify a system wide priority.
@@ -5087,7 +5087,7 @@ val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceQ
     VkQueueGlobalPriorityEXT.member("globalPriority", "the system-wide priority associated to this queue as specified by {@code VkQueueGlobalPriorityEXT}")
 }
 
-val VkImportMemoryHostPointerInfoEXT = struct(VULKAN_PACKAGE, "VkImportMemoryHostPointerInfoEXT") {
+val VkImportMemoryHostPointerInfoEXT = struct(Module.VULKAN, "VkImportMemoryHostPointerInfoEXT") {
     documentation =
         """
         import memory from a host pointer.
@@ -5124,13 +5124,13 @@ val VkImportMemoryHostPointerInfoEXT = struct(VULKAN_PACKAGE, "VkImportMemoryHos
     nullable..opaque_p.member("pHostPointer", "the host pointer to import from.")
 }
 
-val VkMemoryHostPointerPropertiesEXT = struct(VULKAN_PACKAGE, "VkMemoryHostPointerPropertiesEXT") {
+val VkMemoryHostPointerPropertiesEXT = struct(Module.VULKAN, "VkMemoryHostPointerPropertiesEXT") {
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     uint32_t.member("memoryTypeBits", "")
 }
 
-val VkPhysicalDeviceExternalMemoryHostPropertiesEXT = struct(VULKAN_PACKAGE, "VkPhysicalDeviceExternalMemoryHostPropertiesEXT") {
+val VkPhysicalDeviceExternalMemoryHostPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceExternalMemoryHostPropertiesEXT") {
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkDeviceSize.member("minImportedHostPointerAlignment", "")

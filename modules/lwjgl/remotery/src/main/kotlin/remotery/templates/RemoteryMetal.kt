@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.remotery.templates
+package remotery.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.remotery.*
+import remotery.*
 
-val RemoteryMetal = "RemoteryMetal".nativeClass(packageName = REMOTERY_PACKAGE, prefix = "RMT_", library = REMOTERY_LIBRARY) {
+val RemoteryMetal = "RemoteryMetal".nativeClass(Module.REMOTERY, prefix = "RMT_", library = REMOTERY_LIBRARY) {
     remoteryIncludes("h")
 
     documentation =

@@ -2,12 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.linux.templates
+package core.linux.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.linux.*
 
-val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
+val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
     nativeImport(
         "LinuxLWJGL.h",
         "<dlfcn.h>"

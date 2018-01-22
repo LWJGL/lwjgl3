@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val ANGLE_texture_compression_dxt1 = "ANGLETextureCompressionDXT1".nativeClassGLES("ANGLE_texture_compression_dxt1", postfix = ANGLE) {
     documentation =

@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val EXT_surface_CTA861_3_metadata = "EXTSurfaceCTA861_3Metadata".nativeClassEGL("EXT_surface_CTA861_3_metadata", postfix = EXT) {

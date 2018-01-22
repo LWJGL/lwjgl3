@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
+import opencl.*
 
-val khr_gl_sharing = "KHRGLSharing".dependsOn(Binding.OPENGL, Binding.OPENGLES)?.nativeClassCL("khr_gl_sharing", KHR) {
+val khr_gl_sharing = "KHRGLSharing".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("khr_gl_sharing", KHR) {
     documentation = "Native bindings to the $extensionLink extension."
 
     IntConstant(

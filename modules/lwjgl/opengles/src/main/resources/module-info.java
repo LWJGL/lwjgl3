@@ -4,7 +4,6 @@
  */
 module org.lwjgl.opengles {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.opengles.natives;
 
     exports org.lwjgl.opengles;
 }

@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
-import org.lwjgl.opengl.*
+import opengl.*
 
 val EXT_win32_keyed_mutex = "EXTWin32KeyedMutex".nativeClassGL("EXT_win32_keyed_mutex", postfix = EXT) {
     documentation =

@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.nanovg.templates
+package nanovg.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.nanovg.*
+import nanovg.*
 
-val nanovg = "NanoVG".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG", library = NANOVG_LIBRARY) {
+val nanovg = "NanoVG".nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     #define _CRT_SECURE_NO_WARNINGS

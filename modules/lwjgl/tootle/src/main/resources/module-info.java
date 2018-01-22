@@ -4,7 +4,6 @@
  */
 module org.lwjgl.tootle {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.tootle.natives;
 
     exports org.lwjgl.util.tootle;
 }

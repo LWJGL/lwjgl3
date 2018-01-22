@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal.templates
+package openal.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openal.*
+import openal.*
 
 val ALC_EXT_DEDICATED = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix = AL) {
     documentation =

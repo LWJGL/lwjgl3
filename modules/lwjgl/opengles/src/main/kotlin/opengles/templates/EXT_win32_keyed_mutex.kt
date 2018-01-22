@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
-import org.lwjgl.opengles.*
+import opengles.*
 
 val EXT_win32_keyed_mutex = "EXTWin32KeyedMutex".nativeClassGLES("EXT_win32_keyed_mutex", postfix = EXT) {
     documentation =

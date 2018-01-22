@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl.templates
+package opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.*
+import opencl.*
 
 val intel_device_partition_by_names = "INTELDevicePartitionByNames".nativeClassCL("intel_device_partition_by_names", INTEL) {
 

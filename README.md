@@ -60,20 +60,20 @@ the core module and each binding used should be added to the classpath. LWJGL
 extracts the natives to a temporary folder and loads them automatically, so
 no further configuration is necessary. If more customization is required
 (e.g. when creating a platform-specific installer) the natives may be
-extracted manually and loaded via `java.library.path`. See the [Configuration](https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/main/java/org/lwjgl/system/Configuration.java)
+extracted manually and loaded via `java.library.path`. See the [Configuration](https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/core/src/main/java/org/lwjgl/system/Configuration.java)
 class for more options.
 
 LWJGL 3 requires Java 8 or later to build and run and currently supports the
 following platforms/architectures:
 
 - Linux x64
-- MacOS X x64
+- macOS x64
 - Windows x86
 - Windows x64
 
 Example code:
 
-- [Test suite](https://github.com/LWJGL/lwjgl3/tree/master/modules/core/src/test/java/org/lwjgl/demo) (simple samples covering basic usage of LWJGL bindings)
+- [Samples](https://github.com/LWJGL/lwjgl3/tree/master/modules/samples/src/test/java/org/lwjgl/demo) (simple samples covering basic usage of LWJGL bindings)
 - [Demo suite](https://github.com/LWJGL/lwjgl3-demos) (includes advanced OpenGL and Vulkan demos)
 - [Wiki tutorials](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.-Tutorial-Index)
 

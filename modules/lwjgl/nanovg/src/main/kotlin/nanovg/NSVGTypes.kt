@@ -2,16 +2,16 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.nanovg
+package nanovg
 
 import org.lwjgl.generator.*
 
-val NSVGgradientStop = struct(NANOVG_PACKAGE, "NSVGGradientStop", nativeName = "NSVGgradientStop", mutable = false) {
+val NSVGgradientStop = struct(Module.NANOVG, "NSVGGradientStop", nativeName = "NSVGgradientStop", mutable = false) {
     unsigned_int.member("color", "")
     float.member("offset", "")
 }
 
-val NSVGgradient = struct(NANOVG_PACKAGE, "NSVGGradient", nativeName = "NSVGgradient", mutable = false) {
+val NSVGgradient = struct(Module.NANOVG, "NSVGGradient", nativeName = "NSVGgradient", mutable = false) {
     float.array("xform", "", size = 6)
     char.member("spread", "")
     float.member("fx", "")
@@ -20,7 +20,7 @@ val NSVGgradient = struct(NANOVG_PACKAGE, "NSVGGradient", nativeName = "NSVGgrad
     NSVGgradientStop.array("pstops", "", size = "1")
 }
 
-val NSVGpaint = struct(NANOVG_PACKAGE, "NSVGPaint", nativeName = "NSVGpaint", mutable = false) {
+val NSVGpaint = struct(Module.NANOVG, "NSVGPaint", nativeName = "NSVGpaint", mutable = false) {
     char.member("type", "")
     union {
         unsigned_int.member("color", "")
@@ -28,8 +28,8 @@ val NSVGpaint = struct(NANOVG_PACKAGE, "NSVGPaint", nativeName = "NSVGpaint", mu
     }
 }
 
-val NSVGpath_p = struct(NANOVG_PACKAGE, "NSVGPath", nativeName = "NSVGpath", mutable = false).p
-val NSVGpath = struct(NANOVG_PACKAGE, "NSVGPath", nativeName = "NSVGpath", mutable = false) {
+val NSVGpath_p = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false).p
+val NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false) {
     float.p.member("pts", "cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...}")
     AutoSize("pts")..int.member("npts", "total number of bezier points")
     char.member("closed", "flag indicating if shapes should be treated as closed")
@@ -37,8 +37,8 @@ val NSVGpath = struct(NANOVG_PACKAGE, "NSVGPath", nativeName = "NSVGpath", mutab
     NSVGpath_p.member("next", "pointer to next path, or #NULL if last element")
 }
 
-val NSVGshape_p = struct(NANOVG_PACKAGE, "NSVGShape", nativeName = "NSVGshape", mutable = false).p
-val NSVGshape = struct(NANOVG_PACKAGE, "NSVGShape", nativeName = "NSVGshape", mutable = false) {
+val NSVGshape_p = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false).p
+val NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false) {
     char.array("id", "optional 'id' attr of the shape or its group", size = 64)
     NSVGpaint.member("fill", "fill paint")
     NSVGpaint.member("stroke", "stroke paint")
@@ -57,7 +57,7 @@ val NSVGshape = struct(NANOVG_PACKAGE, "NSVGShape", nativeName = "NSVGshape", mu
     NSVGshape_p.member("next", "pointer to next shape, or #NULL if last element")
 }
 
-val NSVGimage = struct(NANOVG_PACKAGE, "NSVGImage", nativeName = "NSVGimage", mutable = false) {
+val NSVGimage = struct(Module.NANOVG, "NSVGImage", nativeName = "NSVGimage", mutable = false) {
     float.member("width", "Width of the image.")
     float.member("height", "Height of the image.")
     NSVGshape_p.member("shapes", "lLinked list of shapes in the image")

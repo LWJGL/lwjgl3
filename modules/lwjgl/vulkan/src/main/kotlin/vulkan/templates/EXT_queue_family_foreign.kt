@@ -3,10 +3,10 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan.templates
+package vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.*
+import vulkan.*
 
 val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_family_foreign", type = "device", postfix = EXT) {
     documentation =

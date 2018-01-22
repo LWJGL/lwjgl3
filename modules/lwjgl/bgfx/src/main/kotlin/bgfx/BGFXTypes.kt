@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.bgfx
+package bgfx
 
 import org.lwjgl.generator.*
 
-val BGFX_PACKAGE = "org.lwjgl.bgfx"
-
 fun config() {
     packageInfo(
-        BGFX_PACKAGE,
+        Module.BGFX,
         """
         Contains bindings to the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library.
 
@@ -30,7 +28,11 @@ fun config() {
     )
 }
 
-val BGFX_BINDING = simpleBinding("bgfx", """Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx"))""", bundledWithLWJGL = true)
+val BGFX_BINDING = simpleBinding(
+    Module.BGFX,
+    libraryExpression = """Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx"))""",
+    bundledWithLWJGL = true
+)
 val BGFX_BINDING_DELEGATE = BGFX_BINDING.delegate("BGFX.getLibrary()")
 
 val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType
@@ -69,7 +71,7 @@ val bgfx_vertex_buffer_handle_t = BGFX_HANDLE_T("vertex_buffer")
 val bgfx_vertex_decl_handle_t = BGFX_HANDLE_T("vertex_decl")
 
 val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
-    BGFX_PACKAGE, void, "BGFXReleaseFunctionCallback",
+    Module.BGFX, void, "BGFXReleaseFunctionCallback",
     "Memory release callback.",
 
     opaque_p.IN("_ptr", "pointer to allocated data"),
@@ -78,21 +80,21 @@ val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
     documentation = "Instances of this interface may be passed to the #make_ref_release() method."
 }
 
-val bgfx_memory_t_p = struct(BGFX_PACKAGE, "BGFXMemory", nativeName = "bgfx_memory_t") {
+val bgfx_memory_t_p = struct(Module.BGFX, "BGFXMemory", nativeName = "bgfx_memory_t") {
     documentation = "Memory obtained by calling #alloc(), #copy(), or #make_ref()."
 
     uint8_t.p.member("data", "pointer to data")
     AutoSize("data")..uint32_t.member("size", "data size")
 }.p
 
-val bgfx_transform_t_p = struct(BGFX_PACKAGE, "BGFXTransform", nativeName = "bgfx_transform_t", mutable = false) {
+val bgfx_transform_t_p = struct(Module.BGFX, "BGFXTransform", nativeName = "bgfx_transform_t", mutable = false) {
     documentation = "Transform data."
 
     float_p.member("data", "pointer to first 4x4 matrix")
     AutoSizeShl("4", "data")..uint16_t.member("num", "number of matrices")
 }.p
 
-val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_eye_t", mutable = false) {
+val bgfx_hmd_eye_t = struct(Module.BGFX, "BGFXHmdEye", nativeName = "bgfx_hmd_eye_t", mutable = false) {
     documentation = "Eye."
 
     float.array("rotation", "eye rotation represented as quaternion", size = 4)
@@ -103,7 +105,7 @@ val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_e
     float.array("pixelsPerTanAngle", "number of pixels that fit in tan(angle) = 1.", size = 2)
 }
 
-val bgfx_hmd_t_p = struct(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mutable = false) {
+val bgfx_hmd_t_p = struct(Module.BGFX, "BGFXHmd", nativeName = "bgfx_hmd_t", mutable = false) {
     documentation = "HMD info."
 
     bgfx_hmd_eye_t.array("eye", "", size = 2)
@@ -114,7 +116,7 @@ val bgfx_hmd_t_p = struct(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mu
     uint8_t.member("flags", "status flags")
 }.p
 
-val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx_view_stats_t", mutable = false) {
+val bgfx_view_stats_t = struct(Module.BGFX, "BGFXViewStats", nativeName = "bgfx_view_stats_t", mutable = false) {
     documentation = "View stats."
 
     charASCII.array("name", "view name", size = 256)
@@ -123,14 +125,14 @@ val bgfx_view_stats_t = struct(BGFX_PACKAGE, "BGFXViewStats", nativeName = "bgfx
     int64_t.member("gpuTimeElapsed", "GPU time elapsed")
 }
 
-val bgfx_encoder_stats_t = struct(BGFX_PACKAGE, "BGFXEncoderStats", nativeName = "bgfx_encoder_stats_t", mutable = false) {
+val bgfx_encoder_stats_t = struct(Module.BGFX, "BGFXEncoderStats", nativeName = "bgfx_encoder_stats_t", mutable = false) {
     documentation = "Encoder stats."
 
     int64_t.member("cpuTimeBegin", "encoder thread CPU submit begin time")
     int64_t.member("cpuTimeEnd", "encoder thread CPU submit end time")
 }
 
-val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
+val bgfx_stats_t_p = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
     documentation =
         """
         Renderer statistics data.
@@ -181,7 +183,7 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
     bgfx_encoder_stats_t.p.buffer("encoderStats", "array of encoder stats")
 }.p
 
-val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
+val bgfx_vertex_decl_t_p = struct(Module.BGFX, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
     javaImport("static org.lwjgl.bgfx.BGFX.BGFX_ATTRIB_COUNT")
     documentation = "Vertex declaration."
 
@@ -191,7 +193,7 @@ val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "
     uint16_t.array("attributes", "", size = "BGFX_ATTRIB_COUNT")
 }.p
 
-val bgfx_transient_index_buffer_t_p = struct(BGFX_PACKAGE, "BGFXTransientIndexBuffer", nativeName = "bgfx_transient_index_buffer_t") {
+val bgfx_transient_index_buffer_t_p = struct(Module.BGFX, "BGFXTransientIndexBuffer", nativeName = "bgfx_transient_index_buffer_t") {
     documentation = "Transient index buffer."
 
     uint8_t.p.member("data", "pointer to data")
@@ -200,7 +202,7 @@ val bgfx_transient_index_buffer_t_p = struct(BGFX_PACKAGE, "BGFXTransientIndexBu
     uint32_t.member("startIndex", "first index")
 }.p
 
-val bgfx_transient_vertex_buffer_t_p = struct(BGFX_PACKAGE, "BGFXTransientVertexBuffer", nativeName = "bgfx_transient_vertex_buffer_t") {
+val bgfx_transient_vertex_buffer_t_p = struct(Module.BGFX, "BGFXTransientVertexBuffer", nativeName = "bgfx_transient_vertex_buffer_t") {
     documentation = "Transient vertex buffer."
 
     uint8_t.p.member("data", "pointer to data")
@@ -211,7 +213,7 @@ val bgfx_transient_vertex_buffer_t_p = struct(BGFX_PACKAGE, "BGFXTransientVertex
     bgfx_vertex_decl_handle_t.member("decl", "vertex declaration handle")
 }.p
 
-val bgfx_instance_data_buffer_t_p = struct(BGFX_PACKAGE, "BGFXInstanceDataBuffer", nativeName = "bgfx_instance_data_buffer_t") {
+val bgfx_instance_data_buffer_t_p = struct(Module.BGFX, "BGFXInstanceDataBuffer", nativeName = "bgfx_instance_data_buffer_t") {
     documentation = "Instance data buffer info."
 
     uint8_t.p.member("data", "pointer to data")
@@ -222,7 +224,7 @@ val bgfx_instance_data_buffer_t_p = struct(BGFX_PACKAGE, "BGFXInstanceDataBuffer
     bgfx_vertex_buffer_handle_t.member("handle", "vertex buffer object handle")
 }.p
 
-val bgfx_texture_info_t_p = struct(BGFX_PACKAGE, "BGFXTextureInfo", nativeName = "bgfx_texture_info_t", mutable = false) {
+val bgfx_texture_info_t_p = struct(Module.BGFX, "BGFXTextureInfo", nativeName = "bgfx_texture_info_t", mutable = false) {
     documentation = "Texture info."
 
     bgfx_texture_format_t.member("format", "texture format").links("TEXTURE_FORMAT_(?!COUNT)\\w+")
@@ -236,7 +238,7 @@ val bgfx_texture_info_t_p = struct(BGFX_PACKAGE, "BGFXTextureInfo", nativeName =
     bool.member("cubeMap", "texture is cubemap")
 }.p
 
-val bgfx_uniform_info_t_p = struct(BGFX_PACKAGE, "BGFXUniformInfo", nativeName = "bgfx_uniform_info_t") {
+val bgfx_uniform_info_t_p = struct(Module.BGFX, "BGFXUniformInfo", nativeName = "bgfx_uniform_info_t") {
     documentation = "Uniform info."
 
     charASCII.array("name", "uniform name", size = 256)
@@ -244,7 +246,7 @@ val bgfx_uniform_info_t_p = struct(BGFX_PACKAGE, "BGFXUniformInfo", nativeName =
     uint16_t.member("num", "number of elements in array")
 }.p
 
-val bgfx_attachment_t_p = struct(BGFX_PACKAGE, "BGFXAttachment", nativeName = "bgfx_attachment_t") {
+val bgfx_attachment_t_p = struct(Module.BGFX, "BGFXAttachment", nativeName = "bgfx_attachment_t") {
     documentation = "Frame buffer texture attachment info."
 
     bgfx_texture_handle_t.member("handle", "texture handle")
@@ -252,14 +254,14 @@ val bgfx_attachment_t_p = struct(BGFX_PACKAGE, "BGFXAttachment", nativeName = "b
     uint16_t.member("layer", "cubemap side or depth layer/slice")
 }.p
 
-val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t", mutable = false) {
+val bgfx_caps_gpu_t = struct(Module.BGFX, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t", mutable = false) {
     documentation = "GPU info."
 
     uint16_t.member("vendorId", "vendor PCI id").links("PCI_ID_\\w+")
     uint16_t.member("deviceId", "device id")
 }
 
-val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
+val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
     documentation = "Rendering limits."
 
     uint32_t.member("maxDrawCalls", "maximum number of draw calls")
@@ -283,7 +285,7 @@ val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bg
     uint32_t.member("maxEncoders", "maximum number of encoder threads")
 }
 
-val bgfx_caps_t_p = struct(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {
+val bgfx_caps_t_p = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {
     javaImport("static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT")
     documentation = "Renderer capabilities."
 
@@ -305,11 +307,11 @@ val bgfx_caps_t_p = struct(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t",
 
 // Callback interface
 
-val bgfx_callback_interface_t_p = struct(BGFX_PACKAGE, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t").p
+val bgfx_callback_interface_t_p = struct(Module.BGFX, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t").p
 
 val bgfx_fatal_t = "bgfx_fatal_t".enumType
 val fatal = "fatal".callback(
-    BGFX_PACKAGE, void, "BGFXFatalCallback",
+    Module.BGFX, void, "BGFXFatalCallback",
     "This callback is called on unrecoverable errors.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -326,7 +328,7 @@ val fatal = "fatal".callback(
 }
 
 val trace_vargs = "trace_vargs".callback(
-    BGFX_PACKAGE, void, "BGFXTraceVarArgsCallback",
+    Module.BGFX, void, "BGFXTraceVarArgsCallback",
     "Will be called when a debug message is produced.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -344,7 +346,7 @@ val trace_vargs = "trace_vargs".callback(
 }
 
 val profiler_begin = "profiler_begin".callback(
-    BGFX_PACKAGE, void, "BGFXProfilerBegin",
+    Module.BGFX, void, "BGFXProfilerBegin",
     """
     Will be called when a profiler region begins.
 
@@ -361,7 +363,7 @@ val profiler_begin = "profiler_begin".callback(
 }
 
 val profiler_begin_literal = "profiler_begin_literal".callback(
-    BGFX_PACKAGE, void, "BGFXProfilerBeginLiteral",
+    Module.BGFX, void, "BGFXProfilerBeginLiteral",
     """
     Will be called when a profiler region with string literal begins.
 
@@ -378,7 +380,7 @@ val profiler_begin_literal = "profiler_begin_literal".callback(
 }
 
 val profiler_end = "profiler_end".callback(
-    BGFX_PACKAGE, void, "BGFXProfilerEnd",
+    Module.BGFX, void, "BGFXProfilerEnd",
     """
     Will be called when a profiler region ends.
 
@@ -391,7 +393,7 @@ val profiler_end = "profiler_end".callback(
 }
 
 val cache_read_size = "cache_read_size".callback(
-    BGFX_PACKAGE, uint32_t, "BGFXCacheReadSizeCallback",
+    Module.BGFX, uint32_t, "BGFXCacheReadSizeCallback",
     "Will be called to determine size of cached item.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -403,7 +405,7 @@ val cache_read_size = "cache_read_size".callback(
 }
 
 val cache_read = "cache_read".callback(
-    BGFX_PACKAGE, bool, "BGFXCacheReadCallback",
+    Module.BGFX, bool, "BGFXCacheReadCallback",
     "Will be called to read a cached item.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -417,7 +419,7 @@ val cache_read = "cache_read".callback(
 }
 
 val cache_write = "cache_write".callback(
-    BGFX_PACKAGE, void, "BGFXCacheWriteCallback",
+    Module.BGFX, void, "BGFXCacheWriteCallback",
     "Will be called to writes a cached item.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -429,7 +431,7 @@ val cache_write = "cache_write".callback(
 }
 
 val screen_shot = "screen_shot".callback(
-    BGFX_PACKAGE, void, "BGFXScreenShotCallback",
+    Module.BGFX, void, "BGFXScreenShotCallback",
     "",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -445,7 +447,7 @@ val screen_shot = "screen_shot".callback(
 }
 
 val capture_begin = "capture_begin".callback(
-    BGFX_PACKAGE, void, "BGFXCaptureBeginCallback",
+    Module.BGFX, void, "BGFXCaptureBeginCallback",
     "Will be called when video capture begins.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -459,7 +461,7 @@ val capture_begin = "capture_begin".callback(
 }
 
 val capture_end = "capture_end".callback(
-    BGFX_PACKAGE, void, "BGFXCaptureEndCallback",
+    Module.BGFX, void, "BGFXCaptureEndCallback",
     "Will be called when video capture ends.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface")
@@ -468,7 +470,7 @@ val capture_end = "capture_end".callback(
 }
 
 val capture_frame = "capture_frame".callback(
-    BGFX_PACKAGE, void, "BGFXCaptureFrameCallback",
+    Module.BGFX, void, "BGFXCaptureFrameCallback",
     "Will be called when a frame is captured.",
 
     bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -478,7 +480,7 @@ val capture_frame = "capture_frame".callback(
     documentation = "Captured frame."
 }
 
-val bgfx_callback_vtbl_t = struct(BGFX_PACKAGE, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t") {
+val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t") {
     documentation = "Callback virtual table."
 
     fatal.member("fatal", "the fatal error callback")
@@ -492,7 +494,7 @@ val bgfx_callback_vtbl_t = struct(BGFX_PACKAGE, "BGFXCallbackVtbl", nativeName =
     capture_frame.member("capture_frame", "the capture framecallback")
 }
 
-val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t") {
+val bgfx_callback_interface_t = struct(Module.BGFX, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t") {
     documentation =
         """
     Callback interface to implement application specific behavior.
@@ -507,10 +509,10 @@ val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", na
 
 // Allocator interface
 
-val bgfx_allocator_interface_t_p = struct(BGFX_PACKAGE, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t").p
+val bgfx_allocator_interface_t_p = struct(Module.BGFX, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t").p
 
 val realloc = "realloc".callback(
-    BGFX_PACKAGE, opaque_p, "BGFXReallocCallback",
+    Module.BGFX, opaque_p, "BGFXReallocCallback",
     "Will be called when an allocation is requested.",
 
     bgfx_allocator_interface_t_p.IN("_this", "the allocator interface"),
@@ -523,13 +525,13 @@ val realloc = "realloc".callback(
     documentation = "Allocates memory."
 }
 
-val bgfx_allocator_vtbl_t = struct(BGFX_PACKAGE, "BGFXAllocatorVtbl", nativeName = "bgfx_allocator_vtbl_t") {
+val bgfx_allocator_vtbl_t = struct(Module.BGFX, "BGFXAllocatorVtbl", nativeName = "bgfx_allocator_vtbl_t") {
     documentation = "Allocator virtual table"
 
     realloc.member("realloc", "the reallocation callback")
 }
 
-val bgfx_allocator_interface_t = struct(BGFX_PACKAGE, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t") {
+val bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t") {
     documentation =
         "Custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."
 
@@ -540,7 +542,7 @@ val bgfx_allocator_interface_t = struct(BGFX_PACKAGE, "BGFXAllocatorInterface", 
 
 val bgfx_renderer_frame_t = "bgfx_renderer_frame_t".enumType
 
-val bgfx_platform_data_t_p = struct(BGFX_PACKAGE, "BGFXPlatformData", nativeName = "bgfx_platform_data_t") {
+val bgfx_platform_data_t_p = struct(Module.BGFX, "BGFXPlatformData", nativeName = "bgfx_platform_data_t") {
     documentation = "Platform data."
 
     nullable..opaque_p.member("ndt", "native display type")
@@ -551,7 +553,7 @@ val bgfx_platform_data_t_p = struct(BGFX_PACKAGE, "BGFXPlatformData", nativeName
     nullable..opaque_p.member("session", "{@code ovrSession}, for Oculus SDK")
 }.p
 
-val bgfx_internal_data_t_p = struct(BGFX_PACKAGE, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false) {
+val bgfx_internal_data_t_p = struct(Module.BGFX, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false) {
     documentation = "Internal data."
 
     bgfx_caps_t_p.member("caps", "renderer capabilities")

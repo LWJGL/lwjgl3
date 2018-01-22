@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.yoga.templates
+package yoga.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.yoga.*
+import yoga.*
 
-val yoga = "Yoga".nativeClass(YOGA_PACKAGE, prefix = "YG", prefixConstant = "YG", prefixMethod = "YG", library = "lwjgl_yoga") {
+val yoga = "Yoga".nativeClass(Module.YOGA, prefix = "YG", prefixConstant = "YG", prefixMethod = "YG", library = "lwjgl_yoga") {
     nativeDirective("""#define FB_ASSERTIONS_ENABLED 0
 #define YG_ASSERT(X, message)
 DISABLE_WARNINGS()

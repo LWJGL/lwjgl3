@@ -10,10 +10,11 @@
     </condition>
 
     <macrodef name="compile">
-        <attribute name="dest"/>
-        <attribute name="flags"/>
+        <attribute name="dest" default="${dest}"/>
+        <attribute name="flags" default=""/>
+        <attribute name="simple" default="false"/>
         <attribute name="relative" default="true"/>
-        <element name="source" implicit="true"/>
+        <element name="source" implicit="true" optional="true"/>
         <sequential>
             <mkdir dir="@{dest}"/>
             <apply executable="cl" dest="@{dest}" skipemptyfilesets="true" failonerror="true" relative="@{relative}" parallel="true" taskname="Compiler">
@@ -24,10 +25,13 @@
                 <arg value="/I${jni.headers}"/>
                 <arg value="/I${jni.headers}\win32"/>
 
-                <arg value="/I${src.native}\system"/>
-                <arg value="/I${src.native}\system\windows"/>
+                <arg value="/I${module.lwjgl}\core\src\main\c"/>
+                <arg value="/I${module.lwjgl}\core\src\main\c\${platform}"/>
+
+                <arg value="/I${src.main}" if:true="@{simple}"/>
 
                 <source/>
+                <fileset dir="." includes="${src.generated}/*.c" if:true="@{simple}"/>
 
                 <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.obj"/>
             </apply>
@@ -35,26 +39,39 @@
     </macrodef>
 
     <macrodef name="build">
-        <attribute name="name"/>
-        <attribute name="dest"/>
+        <attribute name="module"/>
         <attribute name="flags" default="/Wall /WX /wd4711"/>
+        <attribute name="simple" default="false"/>
         <element name="beforeCompile" optional="true"/>
         <element name="compileargs" optional="true"/>
-        <element name="source"/>
+        <element name="source" optional="true"/>
         <element name="beforeLink" optional="true"/>
         <element name="link" optional="true"/>
         <element name="linkargs" optional="true"/>
         <sequential>
+            <local name="src.main"/>
+            <local name="src.generated"/>
+            <property name="src.main" location="${module.lwjgl}\@{module}\src\main\c" relative="true"/>
+            <property name="src.generated" location="${module.lwjgl}\@{module}\src\generated\c" relative="true"/>
+
+            <local name="name"/>
+            <condition property="name" value="lwjgl" else="lwjgl_@{module}">
+                <equals arg1="@{module}" arg2="core"/>
+            </condition>
+
+            <local name="dest"/>
+            <property name="dest" value="${bin.native}/@{module}"/>
+
             <beforeCompile/>
-            <compile dest="@{dest}" flags="@{flags}">
+            <compile flags="@{flags}" simple="@{simple}">
                 <compileargs/>
                 <source/>
             </compile>
 
             <local name="lib-uptodate"/>
-            <uptodate property="lib-uptodate" targetfile="${lib}/@{name}${LIB_POSTFIX}.dll">
+            <uptodate property="lib-uptodate" targetfile="${lib}/${name}${LIB_POSTFIX}.dll">
                 <srcfiles file="config/${platform}/build.xml"/>
-                <srcfiles dir="@{dest}" includes="**"/>
+                <srcfiles dir="${bin.native}/@{module}" includes="**"/>
             </uptodate>
 
             <!--
@@ -69,8 +86,8 @@
                     <equals arg1="${build.arch}" arg2="x86"/>
                 </and>
             </condition>
-            <concat destfile="${bin.native}/build/@{name}${LIB_POSTFIX}.def" if:set="undecorate">
-                <header filtering="no">LIBRARY    @{name}${LIB_POSTFIX}.dll
+            <concat destfile="${bin.native}/build/${name}${LIB_POSTFIX}.def" if:set="undecorate">
+                <header filtering="no">LIBRARY    ${name}${LIB_POSTFIX}.dll
 EXPORTS
 </header>
                 <!-- For each source file -->
@@ -87,9 +104,9 @@ EXPORTS
 
             <beforeLink/>
             <apply executable="cl" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
-                <arg line='/LD /WX /nologo /Fe:"${bin.native}\build\@{name}${LIB_POSTFIX}.dll"'/>
+                <arg line='/LD /WX /nologo /Fe:"${bin.native}\build\${name}${LIB_POSTFIX}.dll"'/>
 
-                <fileset dir="@{dest}" includes="*.obj"/>
+                <fileset dir="${dest}" includes="*.obj"/>
                 <link/>
 
                 <srcfile/>
@@ -97,13 +114,20 @@ EXPORTS
                 <arg value="/OPT:REF,ICF"/>
                 <arg value="/DLL"/>
                 <arg value="/LTCG"/>
-                <arg value="/DEF:${bin.native}\build\@{name}${LIB_POSTFIX}.def" if:set="undecorate"/>
+                <arg value="/DEF:${bin.native}\build\${name}${LIB_POSTFIX}.def" if:set="undecorate"/>
 
                 <linkargs/>
             </apply>
 
-            <move file="${bin.native}/build/@{name}${LIB_POSTFIX}.dll" todir="${lib}" unless:set="lib-uptodate"/>
-            <delete file="${lib}/touch_windows_${build.arch}.txt" quiet="true" unless:set="lib-uptodate"/>
+            <move file="${bin.native}/build/${name}${LIB_POSTFIX}.dll" todir="${lib}" unless:set="lib-uptodate"/>
+            <delete file="${lib}/touch_${platform}_${build.arch}.txt" quiet="true" unless:set="lib-uptodate"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="build_simple">
+        <attribute name="module"/>
+        <sequential>
+            <build module="@{module}" simple="true" if:true="${binding.@{module}}"/>
         </sequential>
     </macrodef>
 
@@ -113,23 +137,20 @@ EXPORTS
         <parallel threadsPerProcessor="1" failonany="true">
 
         <!-- CORE -->
-        <build name="lwjgl" dest="${bin.native}/core">
+        <build module="core">
             <compileargs>
-                <arg value="/I${src.native}\system\dyncall"/>
+                <arg value="/I${src.main}\dyncall"/>
             </compileargs>
             <source>
                 <fileset dir=".">
-                    <include name="${src.native}/system/*.c"/>
-                    <include name="${src.generated.native}/system/*.c"/>
-                    <include name="${src.generated.native}/system/dyncall/*.c"/>
-                    <include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
-                    <include name="${src.generated.native}/system/jni/*.c"/>
-                    <include name="${src.generated.native}/system/libc/*.c"/>
-                    <include name="${src.generated.native}/system/windows/*.c"/>
+                    <include name="${src.main}/*.c"/>
+                    <include name="${src.generated}/*.c"/>
+                    <include name="${src.generated}/${platform}/*.c"/>
+                    <include name="${module.lwjgl}/jawt/src/generated/c/*.c" if:true="${binding.jawt}"/>
                 </fileset>
             </source>
             <beforeLink>
-                <mkdir dir="${lib}/windows/${build.arch}"/>
+                <mkdir dir="${lib}/${platform}/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
                     <update-dependency name="dyncall" artifact="${build.arch}/dyncall_s.lib"/>
                     <update-dependency name="dyncallback" artifact="${build.arch}/dyncallback_s.lib"/>
@@ -137,31 +158,25 @@ EXPORTS
                 </parallel>
             </beforeLink>
             <link>
-                <fileset dir="${lib}/windows/${build.arch}/">
+                <fileset dir="${lib}/${platform}/${build.arch}/">
                     <include name="dyn*.lib"/>
                 </fileset>
             </link>
         </build>
 
         <!-- LMDB -->
-        <build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+        <build module="lmdb" simple="true" if:true="${binding.lmdb}">
             <beforeCompile>
                 <local name="VL32"/>
                 <condition property="VL32">
                     <equals arg1="${build.arch}" arg2="x86"/>
                 </condition>
-                <compile dest="@{dest}" flags="/W0">
-                    <arg value="/I${src.native}\util\lmdb"/>
+                <compile flags="/W0">
+                    <arg value="/I${src.main}"/>
                     <arg value="/DMDB_VL32=1" if:set="VL32"/>
-                    <fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
                 </compile>
             </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.native}\util\lmdb"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
-            </source>
             <linkargs>
                 <arg value="ntdll.lib"/>
                 <arg value="Advapi32.lib"/>
@@ -169,51 +184,37 @@ EXPORTS
         </build>
 
         <!-- LZ4 -->
-        <build name="lwjgl_lz4" dest="${bin.native}/lz4" if:true="${binding.lz4}">
+        <build module="lz4" simple="true" if:true="${binding.lz4}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
-                    <arg value="/I${src.native}\util\lz4"/>
-                    <arg value="/I${src.native}\util\xxhash"/>
-                    <fileset dir="." includes="${src.native}/util/lz4/*.c"/>
-                    <fileset dir="." includes="${src.native}/util/xxhash/*.c"/>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <arg value="/I${module.lwjgl}\xxhash\src\main\c"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/*.c"/>
                 </compile>
             </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.native}\util\lz4"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/lz4/*.c"/>
-            </source>
         </build>
 
         <!-- NanoVG -->
-        <build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
+        <build module="nanovg" simple="true" if:true="${binding.nanovg}">
             <compileargs>
-                <arg value="/I${src.native}\nanovg"/>
-                <arg value="/I${src.native}\stb"/>
+                <arg value="/I${module.lwjgl}\stb\src\main\c"/>
             </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
-            </source>
         </build>
 
         <!-- NativeFileDialog -->
-        <build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
+        <build module="nfd" simple="true" if:true="${binding.nfd}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
-                    <arg value="/I${src.native}\util\nfd"/>
-                    <arg value="/I${src.native}\util\nfd\include"/>
-                    <fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
-                    <fileset dir="." includes="${src.native}/util/nfd/nfd_win.cpp"/>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <arg value="/I${src.main}\include"/>
+                    <fileset dir="." includes="${src.main}/nfd_common.c"/>
+                    <fileset dir="." includes="${src.main}/nfd_win.cpp"/>
                 </compile>
             </beforeCompile>
             <compileargs>
-                <arg value="/I${src.native}\util\nfd"/>
-                <arg value="/I${src.native}\util\nfd\include"/>
+                <arg value="/I${src.main}\include"/>
             </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
-            </source>
             <linkargs>
                 <arg value="Ole32.lib"/>
                 <arg value="Shell32.lib"/>
@@ -221,19 +222,12 @@ EXPORTS
         </build>
 
         <!-- Nuklear -->
-        <build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
-            <compileargs>
-                <arg value="/I${src.native}\nuklear"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
-            </source>
-        </build>
+        <build_simple module="nuklear"/>
 
         <!-- LibOVR -->
-        <build name="lwjgl_ovr" dest="${bin.native}/ovr" if:true="${binding.ovr}">
+        <build module="ovr" if:true="${binding.ovr}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="" relative="false">
+                <compile relative="false">
                     <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
                     <fileset dir="${OCULUS_SDK_PATH}/LibOVR/Shim" includes="*.cpp"/>
                 </compile>
@@ -243,117 +237,59 @@ EXPORTS
                 <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Shim"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.generated.native}/ovr/*.c"/>
+                <fileset dir="." includes="${src.generated}/*.c"/>
             </source>
         </build>
 
         <!-- OpenGL -->
-        <build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
-            <compileargs>
-                <arg value="/I${src.native}\opengl"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
-            </source>
-        </build>
+        <build_simple module="opengl"/>
 
         <!-- OpenGL ES -->
-        <build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
-            <compileargs>
-                <arg value="/I${src.native}\opengles"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
-            </source>
-        </build>
+        <build_simple module="opengles"/>
 
         <!-- OpenVR -->
-        <build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
-            <source>
-                <fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
-            </source>
-        </build>
+        <build_simple module="openvr"/>
 
         <!-- ParShapes -->
-        <build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
-            <compileargs>
-                <arg value="/I${src.native}\util\par"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
-            </source>
-        </build>
+        <build_simple module="par"/>
 
         <!-- Remotery -->
-        <build name="lwjgl_remotery" dest="${bin.native}/remotery" if:true="${binding.remotery}">
+        <build module="remotery" if:true="${binding.remotery}">
             <compileargs>
-                <arg value="/I${src.native}\util\remotery"/>
+                <arg value="/I${src.main}"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.generated.native}/util/remotery/*.c" excludes="**/*Metal.c"/>
+                <fileset dir="." includes="${src.generated}/*.c" excludes="**/*Metal.c"/>
             </source>
         </build>
 
         <!-- rpmalloc -->
-        <build name="lwjgl_rpmalloc" dest="${bin.native}/rpmalloc" if:true="${binding.rpmalloc}">
-            <compileargs>
-                <arg value="/I${src.native}\system\rpmalloc"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/system/rpmalloc/*.c"/>
-            </source>
-        </build>
+        <build_simple module="rpmalloc"/>
 
         <!-- SSE -->
-        <build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
-            <compileargs>
-                <arg value="/I${src.native}\util"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
-            </source>
-        </build>
+        <build_simple module="sse"/>
 
         <!-- stb -->
-        <build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
-            <compileargs>
-                <arg value="/I${src.native}\stb"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/stb/*.c"/>
-            </source>
-        </build>
+        <build_simple module="stb"/>
 
         <!-- tinyexr -->
-        <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
+        <build module="tinyexr" simple="true" if:true="${binding.tinyexr}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
-                    <arg value="/I${src.native}\util\tinyexr"/>
-                    <fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <fileset dir="." includes="${src.main}/*.cc"/>
                 </compile>
             </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.native}\util\tinyexr"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
-            </source>
         </build>
 
         <!-- tiny file dialogs -->
-        <build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
+        <build module="tinyfd" simple="true" if:true="${binding.tinyfd}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
-                    <arg value="/I${src.native}\util\tinyfd"/>
-                    <fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
                 </compile>
             </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.native}\util\tinyfd"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
-            </source>
             <linkargs>
                 <arg value="Comdlg32.lib"/>
                 <arg value="Ole32.lib"/>
@@ -363,31 +299,31 @@ EXPORTS
         </build>
 
         <!-- AMD Tootle -->
-        <build name="lwjgl_tootle" dest="${bin.native}/tootle" if:true="${binding.tootle}">
+        <build module="tootle" if:true="${binding.tootle}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
-                    <fileset dir="." includes="${src.native}/util/DirectXMesh/*.cpp"/>
+                <compile>
+                    <fileset dir="." includes="${src.main}/DirectXMesh/*.cpp"/>
                 </compile>
 
-                <compile dest="@{dest}" flags="/TP /D_DX11_1_">
-                    <arg value="/I${src.native}\util\tootle"/>
-                    <arg value="/I${src.native}\util\tootle\include"/>
-                    <arg value="/I${src.native}\util\tootle\RayTracer"/>
-                    <arg value="/I${src.native}\util\tootle\RayTracer\JRT"/>
-                    <arg value="/I${src.native}\util\tootle\RayTracer\Math"/>
-                    <arg value="/I${src.native}\util\DirectXMesh"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/*.c"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/*.cpp"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/*.cpp"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/JRT/*.cpp"/>
-                    <fileset dir="." includes="${src.native}/util/tootle/RayTracer/Math/*.cpp"/>
+                <compile flags="/TP /D_DX11_1_">
+                    <arg value="/I${src.main}"/>
+                    <arg value="/I${src.main}\include"/>
+                    <arg value="/I${src.main}\RayTracer"/>
+                    <arg value="/I${src.main}\RayTracer\JRT"/>
+                    <arg value="/I${src.main}\RayTracer\Math"/>
+                    <arg value="/I${src.main}\DirectXMesh"/>
+                    <fileset dir="." includes="${src.main}/*.c"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/RayTracer/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/RayTracer/JRT/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/RayTracer/Math/*.cpp"/>
                 </compile>
             </beforeCompile>
             <compileargs>
-                <arg value="/I${src.native}\util\tootle\include"/>
+                <arg value="/I${src.main}\include"/>
             </compileargs>
             <source>
-                <fileset dir="." includes="${src.generated.native}/util/tootle/*.cpp"/>
+                <fileset dir="." includes="${src.generated}/*.cpp"/>
             </source>
             <linkargs>
                 <arg value="User32.lib"/>
@@ -396,56 +332,39 @@ EXPORTS
         </build>
 
         <!-- xxHash -->
-        <build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
-            <compileargs>
-                <arg value="/I${src.native}\util\xxhash"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
-            </source>
-        </build>
+        <build_simple module="xxhash"/>
 
         <!-- yoga -->
-        <build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
+        <build module="yoga" simple="true" if:true="${binding.yoga}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="">
-                    <arg value="/I${src.native}\util\yoga"/>
-                    <fileset dir="." includes="${src.native}/util/yoga/*.cpp"/>
+                <compile>
+                    <arg value="/I${src.main}"/>
+                    <fileset dir="." includes="${src.main}/*.cpp"/>
                 </compile>
             </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.native}\util\yoga"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
-            </source>
         </build>
 
         <!-- zstd -->
-        <build name="lwjgl_zstd" dest="${bin.native}/zstd" if:true="${binding.zstd}">
+        <build module="zstd" simple="true" if:true="${binding.zstd}">
             <beforeCompile>
-                <compile dest="@{dest}" flags="/DZSTD_MULTITHREAD">
-                    <arg value="/I${src.native}\util\zstd"/>
-                    <arg value="/I${src.native}\util\zstd\common"/>
-                    <arg value="/I${src.native}\util\zstd\compress"/>
-                    <arg value="/I${src.native}\util\zstd\decompress"/>
-                    <arg value="/I${src.native}\util\zstd\dictBuilder"/>
-                    <arg value="/I${src.native}\util\xxhash"/>
-                    <fileset dir="." includes="${src.native}/util/zstd/common/*.c"/>
-                    <fileset dir="." includes="${src.native}/util/zstd/compress/*.c"/>
-                    <fileset dir="." includes="${src.native}/util/zstd/decompress/*.c"/>
-                    <fileset dir="." includes="${src.native}/util/zstd/dictBuilder/*.c"/>
-                    <fileset dir="." includes="${src.native}/util/xxhash/*.c"/>
+                <compile flags="/DZSTD_MULTITHREAD">
+                    <arg value="/I${src.main}"/>
+                    <arg value="/I${src.main}\common"/>
+                    <arg value="/I${src.main}\compress"/>
+                    <arg value="/I${src.main}\decompress"/>
+                    <arg value="/I${src.main}\dictBuilder"/>
+                    <arg value="/I${module.lwjgl}\xxhash\src\main\c"/>
+                    <fileset dir="." includes="${src.main}/common/*.c"/>
+                    <fileset dir="." includes="${src.main}/compress/*.c"/>
+                    <fileset dir="." includes="${src.main}/decompress/*.c"/>
+                    <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/*.c"/>
                 </compile>
             </beforeCompile>
             <compileargs>
-                <arg value="/I${src.native}\util\zstd"/>
-                <arg value="/I${src.native}\util\zstd\common"/>
-                <arg value="/I${src.native}\util\zstd\dictBuilder"/>
+                <arg value="/I${src.main}\common"/>
+                <arg value="/I${src.main}\dictBuilder"/>
             </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated.native}/util/zstd/*.c"/>
-            </source>
         </build>
 
         </parallel>
@@ -455,13 +374,13 @@ EXPORTS
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
-                    <file file="${lib}/touch_windows_${build.arch}.txt"/>
+                    <file file="${lib}/touch_${platform}_${build.arch}.txt"/>
                 </resourceexists>
             </or>
         </condition>
 
         <sequential unless:set="native-dependencies-uptodate">
-            <mkdir dir="${lib}/windows/${build.arch}"/>
+            <mkdir dir="${lib}/${platform}/${build.arch}"/>
 
             <parallel threadsPerProcessor="4" failonany="true">
 
@@ -474,7 +393,7 @@ EXPORTS
 
             </parallel>
 
-            <touch file="${lib}/touch_windows_${build.arch}.txt" verbose="false"/>
+            <touch file="${lib}/touch_${platform}_${build.arch}.txt" verbose="false"/>
         </sequential>
     </target>
 </project>

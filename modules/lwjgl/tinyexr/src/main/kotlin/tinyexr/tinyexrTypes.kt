@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.tinyexr
+package tinyexr
 
 import org.lwjgl.generator.*
 
-val TINYEXR_PACKAGE = "org.lwjgl.util.tinyexr"
-
 fun config() {
     packageInfo(
-        TINYEXR_PACKAGE,
+        Module.TINYEXR,
         """
         Contains bindings to the ${url("https://github.com/syoyo/tinyexr", "Tiny OpenEXR")} image library.
 
@@ -19,7 +17,7 @@ fun config() {
     )
 }
 
-val EXRVersion_p = struct(TINYEXR_PACKAGE, "EXRVersion") {
+val EXRVersion_p = struct(Module.TINYEXR, "EXRVersion") {
     int.member("version", "this must be 2")
     intb.member("tiled", "tile format image")
     intb.member("long_name", "long name attribute")
@@ -27,7 +25,7 @@ val EXRVersion_p = struct(TINYEXR_PACKAGE, "EXRVersion") {
     intb.member("multipart", "multi-part(EXR 2.0)")
 }.p
 
-val EXRAttribute = struct(TINYEXR_PACKAGE, "EXRAttribute") {
+val EXRAttribute = struct(Module.TINYEXR, "EXRAttribute") {
     charASCII.array("name", "", size = 256)
     charASCII.array("type", "", size = 256)
     unsigned_char_p.member("value", "")
@@ -35,7 +33,7 @@ val EXRAttribute = struct(TINYEXR_PACKAGE, "EXRAttribute") {
     padding(4)
 }
 
-val EXRChannelInfo_p = struct(TINYEXR_PACKAGE, "EXRChannelInfo") {
+val EXRChannelInfo_p = struct(Module.TINYEXR, "EXRChannelInfo") {
     charASCII.array("name", "", size = 256)
     int.member("pixel_type", "")
     int.member("x_sampling", "")
@@ -44,7 +42,7 @@ val EXRChannelInfo_p = struct(TINYEXR_PACKAGE, "EXRChannelInfo") {
     padding(3)
 }.p
 
-val EXRTile_p = struct(TINYEXR_PACKAGE, "EXRTile") {
+val EXRTile_p = struct(Module.TINYEXR, "EXRTile") {
     int.member("offset_x", "")
     int.member("offset_y", "")
     int.member("level_x", "")
@@ -56,7 +54,7 @@ val EXRTile_p = struct(TINYEXR_PACKAGE, "EXRTile") {
     unsigned_char_p.p.member("images", "image[channels][pixels]")
 }.p
 
-val EXRHeader_p = struct(TINYEXR_PACKAGE, "EXRHeader") {
+val EXRHeader_p = struct(Module.TINYEXR, "EXRHeader") {
     javaImport("static org.lwjgl.util.tinyexr.TinyEXR.*")
 
     float.member("pixel_aspect_ratio", "")
@@ -102,12 +100,12 @@ val EXRHeader_p = struct(TINYEXR_PACKAGE, "EXRHeader") {
     )
 }.p
 
-/*val EXRMultiPartHeader = struct(TINYEXR_PACKAGE, "EXRMultiPartHeader") {
+/*val EXRMultiPartHeader = struct(Binding.TINYEXR, "EXRMultiPartHeader") {
     AutoSize("headers")..int.member("num_headers", "")
     EXRHeader_p.member("headers", "")
 }*/
 
-val EXRImage_p = struct(TINYEXR_PACKAGE, "EXRImage") {
+val EXRImage_p = struct(Module.TINYEXR, "EXRImage") {
     EXRTile_p.buffer("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. #NULL if scanline format.")
     nullable..unsigned_char_p.p.member("images", "{@code image[channels][pixels]}. #NULL if tiled format.")
     int.member("width", "")
@@ -118,12 +116,12 @@ val EXRImage_p = struct(TINYEXR_PACKAGE, "EXRImage") {
     AutoSize("tiles", optional = true)..int.member("num_tiles", "")
 }.p
 
-/*val EXRMultiPartImage = struct(TINYEXR_PACKAGE, "EXRMultiPartImage") {
+/*val EXRMultiPartImage = struct(Binding.TINYEXR, "EXRMultiPartImage") {
     AutoSize("images")..int.member("num_images", "")
     EXRImage_p.member("images", "")
 }*/
 
-val DeepImage_p = struct(TINYEXR_PACKAGE, "DeepImage") {
+val DeepImage_p = struct(Module.TINYEXR, "DeepImage") {
     const..charUTF8_pp.member("channel_names", "")
     float_pp.p.member("image", "image[channels][scanlines][samples]")
     int_p.p.member("offset_table", "offset_table[scanline][offsets]")

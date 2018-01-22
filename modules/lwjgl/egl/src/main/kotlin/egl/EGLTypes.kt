@@ -2,11 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl
+package egl
 
 import org.lwjgl.generator.*
-
-val EGL_PACKAGE = "org.lwjgl.egl"
 
 val noneTerminated = Terminated("EGL10.EGL_NONE") // EGL_NONE is not zero
 
@@ -60,7 +58,7 @@ val EGLAttribKHR_p = EGLAttribKHR.p
 val EGLObjectKHR = "EGLObjectKHR".opaque_p
 val EGLLabelKHR = "EGLLabelKHR".opaque_p
 val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
-    EGL_PACKAGE, void, "EGLDebugMessageKHRCallback",
+    Module.EGL, void, "EGLDebugMessageKHRCallback",
     "Will be called when a debug message is generated.",
     EGLenum.IN("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
     const..charASCII_p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
@@ -140,7 +138,7 @@ val EGLNativeFileDescriptorKHR = typedef(int, "EGLNativeFileDescriptorKHR")
 // ANDROID_blob_cache
 val EGLsizeiANDROID = typedef(khronos_ssize_t, "EGLsizeiANDROID")
 val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
-    EGL_PACKAGE, void, "EGLSetBlobFuncANDROID", "",
+    Module.EGL, void, "EGLSetBlobFuncANDROID", "",
     const..void_p.IN("key", ""),
     AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
     const..void_p.IN("value", ""),
@@ -149,7 +147,7 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
     documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
 }
 val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
-    EGL_PACKAGE, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
+    Module.EGL, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
     const..void_p.IN("key", ""),
     AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
     void_p.IN("value", ""),
@@ -169,7 +167,7 @@ val EGLOutputPortEXT = "EGLOutputPortEXT".opaque_p
 val EGLOutputPortEXT_p = EGLOutputPortEXT.p
 
 // HI_clientpixmap
-val EGLClientPixmapHI_p = struct(EGL_PACKAGE, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
+val EGLClientPixmapHI_p = struct(Module.EGL, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
     documentation =
         """
         Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function #CreatePixmapSurfaceHI() to

@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl
+package opencl
 
 import org.lwjgl.generator.*
 import java.io.*
@@ -17,10 +17,10 @@ private val NativeClass.capName: String
         "${prefixTemplate}_$templateName"
     }
 
-private val CAPABILITIES_CLASS = "CLCapabilities"
+private const val CAPABILITIES_CLASS = "CLCapabilities"
 
 private val CLBinding = Generator.register(object : APIBinding(
-    OPENCL_PACKAGE,
+    Module.OPENCL,
     CAPABILITIES_CLASS,
     APICapabilities.JAVA_CAPABILITIES
 ) {
@@ -126,7 +126,7 @@ private val CLBinding = Generator.register(object : APIBinding(
             val capName = extension.capName
             print("$t$t$capName = ext.contains(\"$capName\")")
             if (extension.hasNativeFunctions)
-                print(" && CL.checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENCL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+                print(" && CL.checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
             println(";")
         }
         println("$t}")
@@ -139,7 +139,7 @@ private val CLBinding = Generator.register(object : APIBinding(
 // DSL Extensions
 
 fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-    nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = CLBinding, init = init)
+    nativeClass(Module.OPENCL, templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = CLBinding, init = init)
 
 val NativeClass.extensionLink: String
     get() = extensionLink(templateName)

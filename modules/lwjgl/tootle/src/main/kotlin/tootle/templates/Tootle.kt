@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.tootle.templates
+package tootle.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.tootle.*
+import tootle.*
 
-val Tootle = "Tootle".nativeClass(packageName = TOOTLE_PACKAGE, prefix = "TOOTLE", prefixMethod = "Tootle", library = "lwjgl_tootle") {
+val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod = "Tootle", library = "lwjgl_tootle") {
     nativeImport("tootlelib.h")
 
     cpp = true

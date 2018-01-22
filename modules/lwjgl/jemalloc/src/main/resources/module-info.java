@@ -4,7 +4,6 @@
  */
 module org.lwjgl.jemalloc {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.jemalloc.natives;
 
     exports org.lwjgl.system.jemalloc;
 }

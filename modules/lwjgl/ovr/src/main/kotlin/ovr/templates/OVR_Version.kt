@@ -2,12 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.ovr.templates
+package ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.*
 
-val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") {
+val OVR_Version = "OVRVersion".nativeClass(Module.OVR, prefix = "OVR") {
     documentation = "LibOVR version identification."
 
     IntConstant(

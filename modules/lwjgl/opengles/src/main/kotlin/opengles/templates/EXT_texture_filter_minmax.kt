@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGLES("EXT_texture_filter_minmax", postfix = EXT) {
     documentation =

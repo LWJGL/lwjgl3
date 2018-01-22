@@ -22,7 +22,13 @@ public final class URLValidator {
     public static void main(String[] args) throws IOException {
         HttpURLConnection.setFollowRedirects(false);
 
-        parseDirectory(Paths.get("modules/core/src/generated/java/org/lwjgl", args));
+        if (0 < args.length) {
+            parseDirectory(Paths.get("modules/lwjgl", args[0], "src/generated/java/org/lwjgl"));
+        } else {
+            Files.list(Paths.get("modules/lwjgl"))
+                .filter(it -> Files.isDirectory(it))
+                .forEach(it -> parseDirectory(it.resolve("src/generated/java/org/lwjgl")));
+        }
 
         System.out.println("Found " + LINKS.size() + " links.");
         System.out.println("Testing...");
@@ -75,21 +81,25 @@ public final class URLValidator {
         }
     }
 
-    private static void parseDirectory(Path path) throws IOException {
-        Files.list(path)
-            .forEach((it) -> {
-                try {
-                    if (Files.isDirectory(it)) {
-                        parseDirectory(it);
-                    } else if (Files.isRegularFile(it)) {
-                        parseFile(it);
-                    } else {
-                        System.err.println("Invalid file: " + it);
+    private static void parseDirectory(Path path) {
+        try {
+            Files.list(path)
+                .forEach((it) -> {
+                    try {
+                        if (Files.isDirectory(it)) {
+                            parseDirectory(it);
+                        } else if (Files.isRegularFile(it)) {
+                            parseFile(it);
+                        } else {
+                            System.err.println("Invalid file: " + it);
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+                });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void parseFile(Path path) throws IOException {

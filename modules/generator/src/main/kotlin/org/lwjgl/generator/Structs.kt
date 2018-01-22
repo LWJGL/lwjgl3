@@ -122,7 +122,7 @@ private enum class AccessMode(val indent: String) {
 }
 
 class Struct(
-    packageName: String,
+    module: Module,
     className: String,
     nativeSubPath: String = "",
     /** The native struct name. May be different than className. */
@@ -136,7 +136,7 @@ class Struct(
     private val extends: Struct?,
     /** when true, the struct layout will be built using native code. */
     private val nativeLayout: Boolean
-) : GeneratorTargetNative(packageName, className, nativeSubPath) {
+) : GeneratorTargetNative(module, className, nativeSubPath) {
 
     companion object {
         private val bufferMethodMap = mapOf(
@@ -245,7 +245,7 @@ class Struct(
 
     /** Nested member struct definition. */
     fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-        val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false)
+        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false)
         struct.init()
         return StructType(struct).member(name, documentation)
     }
@@ -255,7 +255,7 @@ class Struct(
 
     /** Nested member union definition. */
     fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-        val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false)
+        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false)
         struct.init()
         return StructType(struct).member(name, documentation)
     }
@@ -510,7 +510,7 @@ $indentation}"""
 
         val nativeLayout = this@Struct.nativeLayout || members.isEmpty()
         if (!nativeLayout && preamble.hasNativeDirectives)
-            kotlin.io.println("${t}Unnecessary native directives in struct: $packageName.$className")
+            kotlin.io.println("${t}Unnecessary native directives in struct: ${module.packageKotlin}.$className")
 
         print(HEADER)
         println("package $packageName;\n")
@@ -539,7 +539,7 @@ $indentation}"""
             it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
         }
 
-        if (Binding.CHECKS && hasChecks())
+        if (Module.CHECKS && hasChecks())
             println("import static org.lwjgl.system.Checks.*;")
         println("import static org.lwjgl.system.MemoryUtil.*;")
         if (nativeLayout || mallocable)
@@ -857,7 +857,7 @@ $indentation}"""
                 generateStaticSetters(mutableMembers(visibleMembers))
                 println()
 
-                if (Binding.CHECKS && validations.any()) {
+                if (Module.CHECKS && validations.any()) {
                     println(
                         """    /**
      * Validates pointer members that should not be {@code NULL}.
@@ -1198,7 +1198,7 @@ ${validations.joinToString("\n")}
     else
         throw IllegalStateException()
 
-    private val StructMember.pointerValue get() = if (!Binding.CHECKS || has(nullable)) "value" else "check(value)"
+    private val StructMember.pointerValue get() = if (!Module.CHECKS || has(nullable)) "value" else "check(value)"
     private val StructMember.isNullable
         get() = has(nullable) ||
                 getReferenceMember<AutoSizeMember>(name)?.get<AutoSizeMember>()?.optional ?: false ||
@@ -1320,7 +1320,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, PointerBuffer value) {")
-                            if (Binding.CHECKS)
+                            if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
                             println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
                             setRemaining(it, prefix = "$t$t", suffix = "\n")
@@ -1329,7 +1329,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(int, $structTypeIndexed) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, int index, ${it.nullable(structTypeIndexed, isArray = false)} value) {")
-                            if (Binding.CHECKS)
+                            if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
                             println("$t${t}memPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue});")
                             println("$t}")
@@ -1337,7 +1337,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, $structType.Buffer value) {")
-                            if (Binding.CHECKS)
+                            if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
                             println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field, value.remaining() * $structType.SIZEOF);")
                             setRemaining(it, prefix = "$t$t", suffix = "\n")
@@ -1345,7 +1345,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, int index, $structType value) {")
-                            if (Binding.CHECKS)
+                            if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
                             println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF);")
                             println("$t}")
@@ -1357,7 +1357,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, ByteBuffer value) {")
-                        if (Binding.CHECKS) {
+                        if (Module.CHECKS) {
                             println("$t${t}if (CHECKS) {")
                             println("$t$t${t}checkNT${mapping.bytes}(value);")
                             println("$t$t${t}checkGT(value, $byteSize);")
@@ -1374,7 +1374,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, $bufferType value) {")
-                        if (Binding.CHECKS)
+                        if (Module.CHECKS)
                             println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
                         println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining() * $bytesPerElement);")
                         setRemaining(it, prefix = "$t$t", suffix = "\n")
@@ -1385,7 +1385,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        if (Binding.CHECKS)
+                        if (Module.CHECKS)
                             println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
                         println("$t${t}memPut${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement, value);")
                         println("$t}")
@@ -1396,7 +1396,7 @@ ${validations.joinToString("\n")}
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
                     println("${t}public static void n$setter(long $STRUCT, ${it.nullable("ByteBuffer")} value) {")
-                    if (Binding.CHECKS)
+                    if (Module.CHECKS)
                         println("$t${t}if (CHECKS) { checkNT${mapping.bytes}${if (it.isNullable) "Safe" else ""}(value); }")
                     println("$t${t}memPutAddress($STRUCT + $field, ${it.memAddressValue});")
                     println("$t}")
@@ -1603,7 +1603,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public", isArray = false)} static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
-                            if (Binding.CHECKS)
+                            if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { check(index, $size); }")
                             println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + index * POINTER_SIZE)${autoSizeIndirect.let {
                                 if (it == null) "" else ", n${it.name}($STRUCT)"
@@ -1616,7 +1616,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public")} static $nestedStruct n$getter(long $STRUCT, int index) {")
-                            if (Binding.CHECKS)
+                            if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { check(index, $size); }")
                             println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + index * $nestedStruct.SIZEOF);")
                             println("$t}")
@@ -1646,7 +1646,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                         println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
-                        if (Binding.CHECKS)
+                        if (Module.CHECKS)
                             println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
                         print("$t${t}return memGet${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement)")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
@@ -1924,7 +1924,7 @@ else
     throw IllegalStateException("Invalid struct parent type specified.")
 
 fun struct(
-    packageName: String,
+    module: Module,
     className: String,
     nativeSubPath: String = "",
     nativeName: String = className,
@@ -1934,7 +1934,7 @@ fun struct(
     nativeLayout: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(packageName, className, nativeSubPath, nativeName, false, virtual, mutable, extends.toStruct, nativeLayout)
+    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, extends.toStruct, nativeLayout)
     if (init != null) {
         struct.init()
         Generator.register(struct)
@@ -1943,7 +1943,7 @@ fun struct(
 }
 
 fun union(
-    packageName: String,
+    module: Module,
     className: String,
     nativeSubPath: String = "",
     nativeName: String = className,
@@ -1953,7 +1953,7 @@ fun union(
     nativeLayout: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(packageName, className, nativeSubPath, nativeName, true, virtual, mutable, extends.toStruct, nativeLayout)
+    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, extends.toStruct, nativeLayout)
     if (init != null) {
         struct.init()
         Generator.register(struct)

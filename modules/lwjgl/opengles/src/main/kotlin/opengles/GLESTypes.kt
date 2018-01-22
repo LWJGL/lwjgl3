@@ -2,15 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles
+package opengles
 
 import org.lwjgl.generator.*
 
-val GLES_PACKAGE = "org.lwjgl.opengles"
+const val GLES_PACKAGE = "org.lwjgl.opengles"
 
 fun config() {
     packageInfo(
-        GLES_PACKAGE,
+        Module.OPENGLES,
         """
         Contains bindings to the ${url("https://www.khronos.org/opengles/", "OpenGL ES")}, a royalty-free, cross-platform API for full-function 2D and 3D
         graphics on embedded systems - including consoles, phones, appliances and vehicles. It consists of well-defined subsets of desktop OpenGL, creating a
@@ -73,7 +73,7 @@ val GLsync = "GLsync".opaque_p
 
 // GLES 3.2
 val GLDEBUGPROC = "GLDEBUGPROC".callback(
-    GLES_PACKAGE, void, "GLDebugMessageCallback",
+    Module.OPENGLES, void, "GLDebugMessageCallback",
     "Will be called when a debug message is generated.",
     GLenum.IN("source", "the message source"),
     GLenum.IN("type", "the message type"),
@@ -106,7 +106,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 val GLeglClientBufferEXT = "GLeglClientBufferEXT".opaque_p
 // KHR_debug
 val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
-    GLES_PACKAGE, void, "GLDebugMessageKHRCallback",
+    Module.OPENGLES, void, "GLDebugMessageKHRCallback",
     "Will be called when a debug message is generated.",
     GLenum.IN("source", "the message source"),
     GLenum.IN("type", "the message type"),

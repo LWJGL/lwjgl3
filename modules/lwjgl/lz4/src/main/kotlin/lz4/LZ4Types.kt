@@ -2,16 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.lz4
+package lz4
 
 import org.lwjgl.generator.*
 
-val LZ4_PACKAGE = "org.lwjgl.util.lz4"
-val LZ4_LIBRARY = "LibLZ4.initialize();"
+const val LZ4_LIBRARY = "LibLZ4.initialize();"
 
 fun config() {
     packageInfo(
-        LZ4_PACKAGE,
+        Module.LZ4,
         """
         Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed at 400 MB/s per core,
         scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
@@ -23,7 +22,7 @@ fun config() {
         """
     )
 
-    Generator.registerLibraryInit(LZ4_PACKAGE, "LibLZ4", "lz4")
+    Generator.registerLibraryInit(Module.LZ4, "LibLZ4", "lz4")
 }
 
 val LZ4_stream_t_p = "LZ4_stream_t".p
@@ -49,7 +48,7 @@ val LZ4F_dctx_p = "LZ4F_dctx".p
 /*! LZ4F_frameInfo_t :
  *  makes it possible to set or read frame parameters.
  *   */
-val LZ4F_frameInfo_t = struct(LZ4_PACKAGE, "LZ4FFrameInfo", nativeName = "LZ4F_frameInfo_t") {
+val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_frameInfo_t") {
     documentation =
         """
         Makes it possible to set or read frame parameters.
@@ -69,7 +68,7 @@ val LZ4F_frameInfo_t = struct(LZ4_PACKAGE, "LZ4FFrameInfo", nativeName = "LZ4F_f
  *  makes it possible to supply detailed compression parameters to the stream interface.
  *  It's not required to set all fields, as long as the structure was initially memset() to zero.
  *  All reserved fields must be set to zero. */
-val LZ4F_preferences_t_p = struct(LZ4_PACKAGE, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
+val LZ4F_preferences_t_p = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
     LZ4F_frameInfo_t.member("frameInfo", "")
     int.member(
         "compressionLevel",
@@ -79,7 +78,7 @@ val LZ4F_preferences_t_p = struct(LZ4_PACKAGE, "LZ4FPreferences", nativeName = "
     unsigned.array("reserved", "must be zero for forward compatibility", size = 4)
 }.p
 
-val LZ4F_compressOptions_t_p = struct(LZ4_PACKAGE, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
+val LZ4F_compressOptions_t_p = struct(Module.LZ4, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
     unsigned.member(
         "stableSrc",
         "{@code 1 == src} content will remain present on future calls to {@code LZ4F_compress()}; skip copying {@code src} content within {@code tmp} buffer"
@@ -87,7 +86,7 @@ val LZ4F_compressOptions_t_p = struct(LZ4_PACKAGE, "LZ4FCompressOptions", native
     unsigned.array("reserved", "", size = 3)
 }.p
 
-val LZ4F_decompressOptions_t_p = struct(LZ4_PACKAGE, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
+val LZ4F_decompressOptions_t_p = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
     unsigned.member(
         "stableDst",
         """

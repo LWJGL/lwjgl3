@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.dyncall.templates
+package core.dyncall.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.dyncall.*
+import core.dyncall.*
 
-val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
+val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
     nativeImport(
         "dyncall.h"
     )

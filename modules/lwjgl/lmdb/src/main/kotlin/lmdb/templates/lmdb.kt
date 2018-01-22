@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.lmdb.templates
+package lmdb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.lmdb.*
+import lmdb.*
 
-val lmdb = "LMDB".nativeClass(LMDB_PACKAGE, prefix = "MDB", prefixMethod = "mdb_", library = "lwjgl_lmdb") {
+val lmdb = "LMDB".nativeClass(Module.LMDB, prefix = "MDB", prefixMethod = "mdb_", library = "lwjgl_lmdb") {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     __pragma(warning(disable : 4710))

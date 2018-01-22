@@ -2,11 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opencl
+package opencl
 
 import org.lwjgl.generator.*
-
-val OPENCL_PACKAGE = "org.lwjgl.opencl"
 
 // numeric
 
@@ -125,7 +123,7 @@ val cl_charUTF8_pp = cl_charUTF8_p.p
 
 // structs
 
-val cl_image_format_p = struct(OPENCL_PACKAGE, "CLImageFormat", nativeName = "cl_image_format") {
+val cl_image_format_p = struct(Module.OPENCL, "CLImageFormat", nativeName = "cl_image_format") {
     documentation = "The image format descriptor struct."
 
     cl_channel_order.member(
@@ -141,7 +139,7 @@ val cl_image_format_p = struct(OPENCL_PACKAGE, "CLImageFormat", nativeName = "cl
     )
 }.p
 
-val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_image_desc") {
+val cl_image_desc_p = struct(Module.OPENCL, "CLImageDesc", nativeName = "cl_image_desc") {
     documentation = "Describes the type and dimensions of the image or image array."
 
     cl_mem_object_type.member("image_type", "describes the image type")
@@ -204,7 +202,7 @@ val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_ima
     )
 }.p
 
-val cl_bus_address_amd_p = struct(OPENCL_PACKAGE, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
+val cl_bus_address_amd_p = struct(Module.OPENCL, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
     documentation = "Bus address information used in #EnqueueMakeBuffersResidentAMD()."
 
     cl_long.member(
@@ -219,7 +217,7 @@ val cl_bus_address_amd_p = struct(OPENCL_PACKAGE, "CLBusAddressAMD", nativeName 
 
 fun config() {
     packageInfo(
-        OPENCL_PACKAGE,
+        Module.OPENCL,
         """
         Contains bindings to the ${url("https://www.khronos.org/opencl/", "OpenCL")} cross-platform parallel programming API.
 
@@ -228,14 +226,14 @@ fun config() {
         """
     )
 
-    struct(OPENCL_PACKAGE, "CLBufferRegion", nativeName = "cl_buffer_region") {
+    struct(Module.OPENCL, "CLBufferRegion", nativeName = "cl_buffer_region") {
         documentation = "Buffer region struct."
 
         size_t.member("origin", "the region offset, in bytes")
         size_t.member("size", "the region size, in bytes")
     }.definition.hasUsageOutput()
 
-    union(OPENCL_PACKAGE, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
+    union(Module.OPENCL, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
         documentation =
             "The struct returned by #GetDeviceInfo() with {@code param_name} set to #DEVICE_TOPOLOGY_AMD."
 
@@ -252,7 +250,7 @@ fun config() {
         }
     }.definition.hasUsageOutput()
 
-    struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
+    struct(Module.OPENCL, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
         documentation = "Describes the configuration of the motion estimation algorithm."
 
         cl_uint.member("mb_block_type", "describes the size of the blocks described by the motion estimator")
@@ -271,7 +269,7 @@ fun config() {
 
 // callback functions
 val cl_context_callback = "cl_context_callback".callback(
-    OPENCL_PACKAGE, void, "CLContextCallback",
+    Module.OPENCL, void, "CLContextCallback",
     "Will be called when a debug message is generated.",
     NullTerminated..const..cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
     const..void_p.IN(
@@ -286,7 +284,7 @@ val cl_context_callback = "cl_context_callback".callback(
 }
 
 val cl_program_callback = "cl_program_callback".callback(
-    OPENCL_PACKAGE, void, "CLProgramCallback",
+    Module.OPENCL, void, "CLProgramCallback",
     "Will be called when the program is built, compiled or linked.",
     cl_program.IN("program", "the program that was built, compiled or linked"),
     void_p.IN(
@@ -299,7 +297,7 @@ val cl_program_callback = "cl_program_callback".callback(
 }
 
 val cl_native_kernel = "cl_native_kernel".callback(
-    OPENCL_PACKAGE, void, "CLNativeKernel",
+    Module.OPENCL, void, "CLNativeKernel",
     "Will be called by the OpenCL using #EnqueueNativeKernel().",
     void_p.IN("args", "a pointer to the arguments list")
 ) {
@@ -308,7 +306,7 @@ val cl_native_kernel = "cl_native_kernel".callback(
 }
 
 val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".callback(
-    OPENCL_PACKAGE, void, "CLMemObjectDestructorCallback",
+    Module.OPENCL, void, "CLMemObjectDestructorCallback",
     "Will be called when a memory object is deleted.",
     cl_mem.IN("memobj", "the memory object that was deleted"),
     void_p.IN("user_data", "the user-specified value that was passed when calling #SetMemObjectDestructorCallback()")
@@ -318,7 +316,7 @@ val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".call
 }
 
 val cl_event_callback = "cl_event_callback".callback(
-    OPENCL_PACKAGE, void, "CLEventCallback",
+    Module.OPENCL, void, "CLEventCallback",
     """
     Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
     {@code command_exec_status}.
@@ -339,7 +337,7 @@ val cl_event_callback = "cl_event_callback".callback(
 }
 
 val cl_svmfree_callback = "cl_svmfree_callback".callback(
-    OPENCL_PACKAGE, void, "CLSVMFreeCallback",
+    Module.OPENCL, void, "CLSVMFreeCallback",
     "Will be called to free shared virtual memory pointers.",
     cl_command_queue.IN("queue", "a valid host command-queue"),
     AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
@@ -351,7 +349,7 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
 }
 
 val cl_program_release_callback = "cl_program_release_callback".callback(
-    OPENCL_PACKAGE, void, "CLProgramReleaseCallback",
+    Module.OPENCL, void, "CLProgramReleaseCallback",
     "Will be called after destructors (if any) for program scope global variables (if any) are called and before the program is released.",
 
     cl_program.IN(
@@ -394,7 +392,7 @@ val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 // EXT
 
 val cl_report_live_objects_altera_callback = "cl_report_live_objects_altera".callback(
-    OPENCL_PACKAGE, void, "CLReportLiveObjectsAlteraCallback",
+    Module.OPENCL, void, "CLReportLiveObjectsAlteraCallback",
     "Reports a live OpenCL API object.",
     void_p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),
     void_p.IN("obj_ptr", "a pointer to the live object"),
@@ -413,7 +411,7 @@ val cl_device_partition_property_ext_p = cl_device_partition_property_ext.p
 val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ext")
 
 val cl_image_pitch_info_qcom = typedef(cl_uint, "cl_image_pitch_info_qcom")
-val cl_mem_ext_host_ptr = struct(OPENCL_PACKAGE, "CLMemEXTHostPtr", nativeName = "cl_mem_ext_host_ptr") {
+val cl_mem_ext_host_ptr = struct(Module.OPENCL, "CLMemEXTHostPtr", nativeName = "cl_mem_ext_host_ptr") {
     documentation = "Accepted by the {@code host_ptr} argument of #CreateBuffer(), #CreateImage2D() and #CreateImage3D()."
 
     cl_uint.member("allocation_type", "type of external memory allocation. Legal values will be defined in layered extensions.")

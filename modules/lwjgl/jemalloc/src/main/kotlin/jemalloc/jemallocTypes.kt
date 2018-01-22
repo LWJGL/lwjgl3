@@ -2,16 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.jemalloc
+package jemalloc
 
 import org.lwjgl.generator.*
 import java.io.*
 
-val JEMALLOC_PACKAGE = "org.lwjgl.system.jemalloc"
-
 fun config() {
     packageInfo(
-        JEMALLOC_PACKAGE,
+        Module.JEMALLOC,
         """
         Contains bindings to the ${url("http://jemalloc.net/", "jemalloc")} library. jemalloc is a general purpose malloc implementation that emphasizes
         fragmentation avoidance and scalable concurrency support.
@@ -35,7 +33,7 @@ fun config() {
         """
     )
 
-    Generator.register(object : GeneratorTarget(JEMALLOC_PACKAGE, "JEmallocAllocator") {
+    Generator.register(object : GeneratorTarget(Module.JEMALLOC, "JEmallocAllocator") {
 
         init {
             javaImport("org.lwjgl.system.MemoryUtil.*")
@@ -106,7 +104,7 @@ fun config() {
 }
 
 val je_malloc_message_cb = "je_malloc_message_cb".callback(
-    JEMALLOC_PACKAGE, void, "MallocMessageCallback",
+    Module.JEMALLOC, void, "MallocMessageCallback",
     "Will be called by the #malloc_usable_size() method.",
 
     void_p.IN("cbopaque", "the opaque pointer passed to #malloc_usable_size()"),
@@ -129,10 +127,10 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
     """
 }
 
-val extent_hooks_t_p = struct(JEMALLOC_PACKAGE, "ExtentHooks", nativeName = "extent_hooks_t").p
+val extent_hooks_t_p = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t").p
 
 val extent_alloc_t = "extent_alloc_t".callback(
-    JEMALLOC_PACKAGE, void_p, "ExtentAlloc",
+    Module.JEMALLOC, void_p, "ExtentAlloc",
     """
     Extent allocation hook.
 
@@ -159,7 +157,7 @@ val extent_alloc_t = "extent_alloc_t".callback(
 }
 
 val extent_dalloc_t = "extent_dalloc_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentDalloc",
+    Module.JEMALLOC, bool, "ExtentDalloc",
     """
     Extent deallocation hook.
 
@@ -179,7 +177,7 @@ val extent_dalloc_t = "extent_dalloc_t".callback(
 }
 
 val extent_destroy_t = "extent_destroy_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentDestroy",
+    Module.JEMALLOC, bool, "ExtentDestroy",
     """
     Extent destruction hook.
 
@@ -198,7 +196,7 @@ val extent_destroy_t = "extent_destroy_t".callback(
 }
 
 val extent_commit_t = "extent_commit_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentCommit",
+    Module.JEMALLOC, bool, "ExtentCommit",
     """
     Extent commit hook.
 
@@ -220,7 +218,7 @@ val extent_commit_t = "extent_commit_t".callback(
 }
 
 val extent_decommit_t = "extent_decommit_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentDecommit",
+    Module.JEMALLOC, bool, "ExtentDecommit",
     """
     Extent decommit hook.
 
@@ -241,7 +239,7 @@ val extent_decommit_t = "extent_decommit_t".callback(
 }
 
 val extent_purge_t = "extent_purge_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentPurge",
+    Module.JEMALLOC, bool, "ExtentPurge",
     """
     Extent purge hook.
 
@@ -263,7 +261,7 @@ val extent_purge_t = "extent_purge_t".callback(
 }
 
 val extent_split_t = "extent_split_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentSplit",
+    Module.JEMALLOC, bool, "ExtentSplit",
     """
     Extent split hook.
 
@@ -285,7 +283,7 @@ val extent_split_t = "extent_split_t".callback(
 }
 
 val extent_merge_t = "extent_merge_t".callback(
-    JEMALLOC_PACKAGE, bool, "ExtentMerge",
+    Module.JEMALLOC, bool, "ExtentMerge",
     """
     Extent merge hook.
 
@@ -306,7 +304,7 @@ val extent_merge_t = "extent_merge_t".callback(
     documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
 }
 
-val extent_hooks_t = struct(JEMALLOC_PACKAGE, "ExtentHooks", nativeName = "extent_hooks_t") {
+val extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t") {
     documentation =
         """
         The {@code extent_hooks_t} structure comprises function pointers which are described individually below. jemalloc uses these functions to manage extent

@@ -114,7 +114,7 @@ enum class Access(val modifier: String) {
 }
 
 abstract class GeneratorTarget(
-    val packageName: String,
+    val module: Module,
     val className: String
 ) {
 
@@ -143,8 +143,10 @@ abstract class GeneratorTarget(
     internal val sourceFile = getSourceFileName()
     internal open fun getLastModified(root: String): Long = Paths.get(root, sourceFile).let {
         if (Files.isRegularFile(it)) it else
-            throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")
+            throw IllegalStateException("The source file for template ${module.packageKotlin}.$className does not exist ($it).")
     }.lastModified
+
+    val packageName get() = module.packageName
 
     var access = Access.PUBLIC
         set(access) {
@@ -190,7 +192,7 @@ abstract class GeneratorTarget(
         Parameter(this, name, paramType) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
 
     protected fun linksFromRegex(pattern: String) = pattern.toRegex().let { regex ->
-        Generator.tokens[packageName]!!
+        Generator.tokens[module]!!
             .asSequence()
             .mapNotNull { if (regex.matches(it.key)) it.key else null }
             .joinToString(" #", prefix = "#")
@@ -246,10 +248,10 @@ abstract class GeneratorTarget(
                 if (hashes == 1) {
                     if (className.isEmpty()) {
                         val qualifiedLink = if (linkType === LinkType.FIELD)
-                            getFieldLink(classElement) ?: Generator.tokens[packageName]!![classElement]
+                            getFieldLink(classElement) ?: Generator.tokens[module]!![classElement]
                         else
                             classElement.substring(0, classElement.lastIndexOf('(')).let {
-                                getMethodLink(it) ?: Generator.functions[packageName]!![it]
+                                getMethodLink(it) ?: Generator.functions[module]!![it]
                             }
 
                         if (qualifiedLink != null) {
@@ -264,7 +266,7 @@ abstract class GeneratorTarget(
                             else
                                 classElement.lastIndexOf('(') + 2
                             )
-                        } else if (this.packageName != "org.lwjgl.vulkan")
+                        } else if (module !== Module.VULKAN)
                             throw IllegalStateException("Failed to resolve link: ${match.value} in ${this.className}")
                     } else {
                         if (classElement.startsWith(prefix))
@@ -321,10 +323,10 @@ abstract class GeneratorTarget(
 }
 
 abstract class GeneratorTargetNative(
-    packageName: String,
+    module: Module,
     className: String,
     val nativeSubPath: String = ""
-) : GeneratorTarget(packageName, className) {
+) : GeneratorTarget(module, className) {
 
     internal val nativeFileName
         get() = "${this.packageName.replace('.', '_')}_${this.className}"
@@ -350,10 +352,10 @@ abstract class GeneratorTargetNative(
 // ------------------------------------
 
 fun packageInfo(
-    packageName: String,
+    module: Module,
     documentation: String
 ) {
-    val pi = object : GeneratorTarget(packageName, "package-info") {
+    val pi = object : GeneratorTarget(module, "package-info") {
         override fun PrintWriter.generateJava() {
             print(HEADER)
             println()

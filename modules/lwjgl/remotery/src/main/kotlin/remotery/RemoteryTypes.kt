@@ -2,23 +2,22 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.remotery
+package remotery
 
 import org.lwjgl.generator.*
 
-val REMOTERY_PACKAGE = "org.lwjgl.util.remotery"
-val REMOTERY_LIBRARY = "LibRemotery.initialize();"
+const val REMOTERY_LIBRARY = "LibRemotery.initialize();"
 
 fun config() {
     packageInfo(
-        REMOTERY_PACKAGE,
+        Module.REMOTERY,
         """
         Contains bindings to ${url("https://github.com/Celtoys/Remotery", "Remotery")}, a realtime CPU/GPU profiler hosted in a single C file with a viewer
         that runs in a web browser.
         """
     )
 
-    Generator.registerLibraryInit(REMOTERY_PACKAGE, "LibRemotery", "remotery")
+    Generator.registerLibraryInit(Module.REMOTERY, "LibRemotery", "remotery")
 }
 
 fun NativeClass.remoteryIncludes(type: String) {
@@ -67,14 +66,14 @@ val rmtError = "rmtError".enumType
 
 // Callback function pointer types
 val rmtMallocPtr = "rmtMalloc".callback(
-    REMOTERY_PACKAGE, opaque_p, "RMTMalloc", "",
+    Module.REMOTERY, opaque_p, "RMTMalloc", "",
 
     opaque_p.IN("mm_context", ""),
     rmtU32.IN("size", "")
 )
 
 val rmtReallocPtr = "rmtRealloc".callback(
-    REMOTERY_PACKAGE, opaque_p, "RMTRealloc", "",
+    Module.REMOTERY, opaque_p, "RMTRealloc", "",
 
     opaque_p.IN("mm_context", ""),
     void_p.IN("ptr", ""),
@@ -82,20 +81,20 @@ val rmtReallocPtr = "rmtRealloc".callback(
 )
 
 val rmtFreePtr = "rmtFreePtr".callback(
-    REMOTERY_PACKAGE, opaque_p, "RMTFree", "",
+    Module.REMOTERY, opaque_p, "RMTFree", "",
 
     opaque_p.IN("mm_context", ""),
     void_p.IN("ptr", "")
 )
 
 val rmtInputHandlerPtr = "rmtInputHandlerPtr".callback(
-    REMOTERY_PACKAGE, opaque_p, "RMTInputHandler", "",
+    Module.REMOTERY, opaque_p, "RMTInputHandler", "",
 
     const..charASCII_p.IN("text", ""),
     opaque_p.IN("context", "")
 )
 
-val rmtSettings = struct(REMOTERY_PACKAGE, "RMTSettings", nativeName = "rmtSettings") {
+val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettings") {
     documentation = "Structure to fill in to modify Remotery default settings."
 
     rmtU16.member("port", "which port to listen for incoming connections on")

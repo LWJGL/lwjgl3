@@ -27,11 +27,11 @@ enum class APICapabilities {
  * is not necessary for libraries that are static compiled/linked into the LWJGL natives.
  */
 abstract class APIBinding(
-    packageName: String,
+    module: Module,
     className: String,
     val apiCapabilities: APICapabilities = APICapabilities.NONE,
     val callingConvention: CallingConvention = CallingConvention.STDCALL
-) : GeneratorTarget(packageName, className) {
+) : GeneratorTarget(module, className) {
 
     init {
         javaImport(
@@ -92,9 +92,10 @@ abstract class APIBinding(
 
 /** An APIBinding without an associated capabilities class.  */
 abstract class SimpleBinding(
+    module: Module,
     private val libraryExpression: String,
     callingConvention: CallingConvention
-) : APIBinding("n/a", "n/a", callingConvention = callingConvention) {
+) : APIBinding(module, "*", callingConvention = callingConvention) { // TODO
     override fun PrintWriter.generateJava() = Unit
     override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
         writer.println("$t${t}long ${if (function has Address) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
@@ -129,11 +130,12 @@ abstract class SimpleBinding(
 
 /** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
 fun simpleBinding(
-    libraryName: String,
+    module: Module,
+    libraryName: String = module.name.toLowerCase(),
     libraryExpression: String = "\"$libraryName\"",
     callingConvention: CallingConvention = CallingConvention.DEFAULT,
     bundledWithLWJGL: Boolean = false
-) = object : SimpleBinding(libraryName.toUpperCase(), callingConvention) {
+) = object : SimpleBinding(module, libraryName.toUpperCase(), callingConvention) {
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
         val libraryReference = libraryName.toUpperCase()
 
@@ -150,7 +152,7 @@ fun simpleBinding(
 /** Creates a simple APIBinding that delegates function pointer loading to this APIBinding. */
 fun APIBinding.delegate(
     libraryExpression: String
-) = object : SimpleBinding(libraryExpression, callingConvention) {
+) = object : SimpleBinding(module, libraryExpression, callingConvention) {
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
         generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
     }
@@ -160,7 +162,7 @@ fun APIBinding.delegate(
 private fun APIBinding.generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
 
 class NativeClass(
-    packageName: String,
+    module: Module,
     className: String,
     nativeSubPath: String,
     val templateName: String = className,
@@ -171,7 +173,7 @@ class NativeClass(
     val postfix: String,
     val binding: APIBinding?,
     val library: String?
-) : GeneratorTargetNative(packageName, className, nativeSubPath) {
+) : GeneratorTargetNative(module, className, nativeSubPath) {
     companion object {
         private val JDOC_LINK_PATTERN = """(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""".toRegex()
     }
@@ -372,9 +374,9 @@ class NativeClass(
     ) {
         val prev = registry[name]
         when {
-            prev == null               -> registry.put(name, link)
+            prev == null               -> registry[name] = link
             link.length < prev.length  -> { // Short link == shorter class == usually core API
-                registry.put(name, link)
+                registry[name] = link
                 duplicate.remove(name) // sometimes there are more than 2 definitions of the same symbol
             }
             link.length == prev.length -> duplicate.add(name)
@@ -450,7 +452,7 @@ class NativeClass(
                 }
             }
 
-            if ((hasFunctions || binding != null) && packageName != "org.lwjgl.system") {
+            if ((hasFunctions || binding != null) && module !== Module.CORE) {
                 println("import org.lwjgl.system.*;\n")
             }
 
@@ -583,7 +585,7 @@ class NativeClass(
 
     internal fun nativeDirectivesWarning() {
         if (preamble.hasNativeDirectives)
-            println("${t}Unnecessary native directives in: $packageName.$templateName")
+            println("${t}Unnecessary native directives in: ${module.packageKotlin}.$templateName")
     }
 
     fun printPointers(
@@ -667,7 +669,7 @@ class NativeClass(
             parameters = *parameters
         )
 
-        _functions.put(name, func)
+        _functions[name] = func
         return func
     }
 
@@ -695,7 +697,7 @@ class NativeClass(
             parameters = *reference.parameters
         ).copyModifiers(reference)
 
-        this@NativeClass._functions.put(functionName, func)
+        this@NativeClass._functions[functionName] = func
         return func
     }
 
@@ -743,7 +745,7 @@ class NativeClass(
 // DSL extensions
 
 fun String.nativeClass(
-    packageName: String,
+    module: Module,
     templateName: String = this,
     nativeSubPath: String = "",
     prefix: String = "",
@@ -755,7 +757,7 @@ fun String.nativeClass(
     library: String? = null,
     init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
-    val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding, library)
+    val ext = NativeClass(module, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding, library)
     if (init != null)
         ext.init()
 

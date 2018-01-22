@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openvr
+package openvr
 
 import org.lwjgl.generator.*
 
-val OPENVR_PACKAGE = "org.lwjgl.openvr"
-
 fun config() {
     packageInfo(
-        OPENVR_PACKAGE, // TODO
+        Module.OPENVR, // TODO
         """
         Contains bindings to ${url("https://github.com/ValveSoftware/openvr", "OpenVR")}.
 
@@ -20,10 +18,10 @@ fun config() {
     )
 }
 
-val OPENVR_LIBRARY = "OpenVR.initialize();"
+const val OPENVR_LIBRARY = "OpenVR.initialize();"
 val OPENVR_API_BINDING = simpleBinding(
-    "openvr",
-    """Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api"))""",
+    Module.OPENVR,
+    libraryExpression = """Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api"))""",
     bundledWithLWJGL = true
 )
 
@@ -101,54 +99,54 @@ val VkPhysicalDevice_T_p = "VkPhysicalDevice_T".p
 val VkDevice_T_p = "VkDevice_T".p
 val VkQueue_T_p = "VkQueue_T".p
 
-val HmdMatrix34_t = struct(OPENVR_PACKAGE, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
+val HmdMatrix34_t = struct(Module.OPENVR, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
     float.array("m", "", size = 3 x 4)
 }
 
-val HmdMatrix44_t = struct(OPENVR_PACKAGE, "HmdMatrix44", nativeName = "HmdMatrix44_t") {
+val HmdMatrix44_t = struct(Module.OPENVR, "HmdMatrix44", nativeName = "HmdMatrix44_t") {
     float.array("m", "", size = 4 x 4)
 }
 
-val HmdVector3_t = struct(OPENVR_PACKAGE, "HmdVector3", nativeName = "HmdVector3_t") {
+val HmdVector3_t = struct(Module.OPENVR, "HmdVector3", nativeName = "HmdVector3_t") {
     float.array("v", "", size = 3)
 }
 
-val HmdVector4_t = struct(OPENVR_PACKAGE, "HmdVector4", nativeName = "HmdVector4_t") {
+val HmdVector4_t = struct(Module.OPENVR, "HmdVector4", nativeName = "HmdVector4_t") {
     float.array("v", "", size = 4)
 }
 
-val HmdVector3d_t = struct(OPENVR_PACKAGE, "HmdVector3d", nativeName = "HmdVector3d_t") {
+val HmdVector3d_t = struct(Module.OPENVR, "HmdVector3d", nativeName = "HmdVector3d_t") {
     double.array("v", "", size = 3)
 }
 
-val HmdVector2_t = struct(OPENVR_PACKAGE, "HmdVector2", nativeName = "HmdVector2_t") {
+val HmdVector2_t = struct(Module.OPENVR, "HmdVector2", nativeName = "HmdVector2_t") {
     float.array("v", "", size = 2)
 }
 
-val HmdQuaternion_t = struct(OPENVR_PACKAGE, "HmdQuaternion", nativeName = "HmdQuaternion_t") {
+val HmdQuaternion_t = struct(Module.OPENVR, "HmdQuaternion", nativeName = "HmdQuaternion_t") {
     double.member("w", "")
     double.member("x", "")
     double.member("y", "")
     double.member("z", "")
 }
 
-val HmdColor_t = struct(OPENVR_PACKAGE, "HmdColor", nativeName = "HmdColor_t") {
+val HmdColor_t = struct(Module.OPENVR, "HmdColor", nativeName = "HmdColor_t") {
     float.member("r", "")
     float.member("g", "")
     float.member("b", "")
     float.member("a", "")
 }
 
-val HmdQuad_t = struct(OPENVR_PACKAGE, "HmdQuad", nativeName = "HmdQuad_t") {
+val HmdQuad_t = struct(Module.OPENVR, "HmdQuad", nativeName = "HmdQuad_t") {
     HmdVector3_t.array("vCorners", "", size = 4)
 }
 
-val HmdRect2_t = struct(OPENVR_PACKAGE, "HmdRect2", nativeName = "HmdRect2_t") {
+val HmdRect2_t = struct(Module.OPENVR, "HmdRect2", nativeName = "HmdRect2_t") {
     HmdVector2_t.member("vTopLeft", "")
     HmdVector2_t.member("vBottomRight", "")
 }
 
-val DistortionCoordinates_t = struct(OPENVR_PACKAGE, "DistortionCoordinates", nativeName = "DistortionCoordinates_t", mutable = false) {
+val DistortionCoordinates_t = struct(Module.OPENVR, "DistortionCoordinates", nativeName = "DistortionCoordinates_t", mutable = false) {
     documentation =
     """
     Used to return the post-distortion UVs for each color channel.
@@ -161,7 +159,7 @@ val DistortionCoordinates_t = struct(OPENVR_PACKAGE, "DistortionCoordinates", na
     float.array("rfBlue", "the UVs for the blue channel", size = 2)
 }
 
-val TrackedDevicePose_t = struct(OPENVR_PACKAGE, "TrackedDevicePose", nativeName = "TrackedDevicePose_t") {
+val TrackedDevicePose_t = struct(Module.OPENVR, "TrackedDevicePose", nativeName = "TrackedDevicePose_t") {
     documentation = "Describes a single pose for a tracked object."
 
     HmdMatrix34_t.member("mDeviceToAbsoluteTracking", "")
@@ -175,20 +173,20 @@ val TrackedDevicePose_t = struct(OPENVR_PACKAGE, "TrackedDevicePose", nativeName
     )
 }
 
-val VREvent_Reserved_t = struct(OPENVR_PACKAGE, "VREventReserved", nativeName = "VREvent_Reserved_t", mutable = false) {
+val VREvent_Reserved_t = struct(Module.OPENVR, "VREventReserved", nativeName = "VREvent_Reserved_t", mutable = false) {
     documentation = "Not actually used for any events."
 
     uint64_t.member("reserved0", "")
     uint64_t.member("reserved1", "")
 }
 
-val VREvent_Controller_t = struct(OPENVR_PACKAGE, "VREventController", nativeName = "VREvent_Controller_t", mutable = false) {
+val VREvent_Controller_t = struct(Module.OPENVR, "VREventController", nativeName = "VREvent_Controller_t", mutable = false) {
     documentation = "Used for controller button events."
 
     uint32_t.member("button", "").links("EVRButtonId_\\w+")
 }
 
-val VREvent_Mouse_t = struct(OPENVR_PACKAGE, "VREventMouse", nativeName = "VREvent_Mouse_t", mutable = false) {
+val VREvent_Mouse_t = struct(Module.OPENVR, "VREventMouse", nativeName = "VREvent_Mouse_t", mutable = false) {
     documentation = "Used for simulated mouse events in overlay space."
 
     float.member("x", "coords are in GL space, bottom left of the texture is 0,0")
@@ -196,7 +194,7 @@ val VREvent_Mouse_t = struct(OPENVR_PACKAGE, "VREventMouse", nativeName = "VREve
     uint32_t.member("button", "").links("EVRMouseButton_\\w+")
 }
 
-val VREvent_Scroll_t = struct(OPENVR_PACKAGE, "VREventScroll", nativeName = "VREvent_Scroll_t", mutable = false) {
+val VREvent_Scroll_t = struct(Module.OPENVR, "VREventScroll", nativeName = "VREvent_Scroll_t", mutable = false) {
     documentation = "Used for simulated mouse wheel scroll in overlay space."
 
     float.member("xdelta", "movement in fraction of the pad traversed since last delta, 1.0 for a full swipe")
@@ -204,7 +202,7 @@ val VREvent_Scroll_t = struct(OPENVR_PACKAGE, "VREventScroll", nativeName = "VRE
     uint32_t.member("repeatCount", "")
 }
 
-val VREvent_Process_t = struct(OPENVR_PACKAGE, "VREventProcess", nativeName = "VREvent_Process_t", mutable = false) {
+val VREvent_Process_t = struct(Module.OPENVR, "VREventProcess", nativeName = "VREvent_Process_t", mutable = false) {
     documentation = "Used for events about processes."
 
     uint32_t.member("pid", "")
@@ -212,46 +210,46 @@ val VREvent_Process_t = struct(OPENVR_PACKAGE, "VREventProcess", nativeName = "V
     bool.member("bForced", "")
 }
 
-val VREvent_Notification_t = struct(OPENVR_PACKAGE, "VREventNotification", nativeName = "VREvent_Notification_t", mutable = false) {
+val VREvent_Notification_t = struct(Module.OPENVR, "VREventNotification", nativeName = "VREvent_Notification_t", mutable = false) {
     documentation = "Notification related events. Details will still change at this point."
 
     uint64_t.member("ulUserValue", "")
     uint32_t.member("notificationId", "")
 }
 
-val VREvent_Overlay_t = struct(OPENVR_PACKAGE, "VREventOverlay", nativeName = "VREvent_Overlay_t", mutable = false) {
+val VREvent_Overlay_t = struct(Module.OPENVR, "VREventOverlay", nativeName = "VREvent_Overlay_t", mutable = false) {
     documentation = "Used for a few events about overlays."
 
     uint64_t.member("overlayHandle", "").links("EVRState_\\w+")
 }
 
-val VREvent_Status_t = struct(OPENVR_PACKAGE, "VREventStatus", nativeName = "VREvent_Status_t", mutable = false) {
+val VREvent_Status_t = struct(Module.OPENVR, "VREventStatus", nativeName = "VREvent_Status_t", mutable = false) {
     documentation = "Used for a few events about overlays."
 
     uint32_t.member("statusState", "")
 }
 
-val VREvent_Keyboard_t = struct(OPENVR_PACKAGE, "VREventKeyboard", nativeName = "VREvent_Keyboard_t", mutable = false) {
+val VREvent_Keyboard_t = struct(Module.OPENVR, "VREventKeyboard", nativeName = "VREvent_Keyboard_t", mutable = false) {
     documentation = "Used for keyboard events."
 
     char.array("cNewInput", "up to 8 bytes of new input", size = 8)
     uint64_t.member("uUserValue", "possible flags about the new input")
 }
 
-val VREvent_Ipd_t = struct(OPENVR_PACKAGE, "VREventIpd", nativeName = "VREvent_Ipd_t", mutable = false) {
+val VREvent_Ipd_t = struct(Module.OPENVR, "VREventIpd", nativeName = "VREvent_Ipd_t", mutable = false) {
     float.member("ipdMeters", "")
 }
 
-val VREvent_Chaperone_t = struct(OPENVR_PACKAGE, "VREventChaperone", nativeName = "VREvent_Chaperone_t", mutable = false) {
+val VREvent_Chaperone_t = struct(Module.OPENVR, "VREventChaperone", nativeName = "VREvent_Chaperone_t", mutable = false) {
     uint64_t.member("m_nPreviousUniverse", "")
     uint64_t.member("m_nCurrentUniverse", "")
 }
 
-val VREvent_PerformanceTest_t = struct(OPENVR_PACKAGE, "VREventPerformanceTest", nativeName = "VREvent_PerformanceTest_t", mutable = false) {
+val VREvent_PerformanceTest_t = struct(Module.OPENVR, "VREventPerformanceTest", nativeName = "VREvent_PerformanceTest_t", mutable = false) {
     uint32_t.member("m_nFidelityLevel", "")
 }
 
-val VREvent_TouchPadMove_t = struct(OPENVR_PACKAGE, "VREventTouchPadMove", nativeName = "VREvent_TouchPadMove_t", mutable = false) {
+val VREvent_TouchPadMove_t = struct(Module.OPENVR, "VREventTouchPadMove", nativeName = "VREvent_TouchPadMove_t", mutable = false) {
     documentation =
     """
     When in mouse input mode you can receive data from the touchpad, these events are only sent if the users finger is on the touchpad (or just released from
@@ -266,39 +264,39 @@ val VREvent_TouchPadMove_t = struct(OPENVR_PACKAGE, "VREventTouchPadMove", nativ
     float.member("fValueYRaw", "")
 }
 
-val VREvent_SeatedZeroPoseReset_t = struct(OPENVR_PACKAGE, "VREventSeatedZeroPoseReset", nativeName = "VREvent_SeatedZeroPoseReset_t", mutable = false) {
+val VREvent_SeatedZeroPoseReset_t = struct(Module.OPENVR, "VREventSeatedZeroPoseReset", nativeName = "VREvent_SeatedZeroPoseReset_t", mutable = false) {
     bool.member("bResetBySystemMenu", "")
 }
 
-val VREvent_Screenshot_t = struct(OPENVR_PACKAGE, "VREventScreenshot", nativeName = "VREvent_Screenshot_t", mutable = false) {
+val VREvent_Screenshot_t = struct(Module.OPENVR, "VREventScreenshot", nativeName = "VREvent_Screenshot_t", mutable = false) {
     uint32_t.member("handle", "")
     uint32_t.member("type", "")
 }
 
-val VREvent_ScreenshotProgress_t = struct(OPENVR_PACKAGE, "VREventScreenshotProgress", nativeName = "VREvent_ScreenshotProgress_t", mutable = false) {
+val VREvent_ScreenshotProgress_t = struct(Module.OPENVR, "VREventScreenshotProgress", nativeName = "VREvent_ScreenshotProgress_t", mutable = false) {
     float.member("progress", "")
 }
 
-val VREvent_ApplicationLaunch_t = struct(OPENVR_PACKAGE, "VREventApplicationLaunch", nativeName = "VREvent_ApplicationLaunch_t", mutable = false) {
+val VREvent_ApplicationLaunch_t = struct(Module.OPENVR, "VREventApplicationLaunch", nativeName = "VREvent_ApplicationLaunch_t", mutable = false) {
     uint32_t.member("pid", "")
     uint32_t.member("unArgsHandle", "")
 }
 
-val VREvent_EditingCameraSurface_t = struct(OPENVR_PACKAGE, "VREventEditingCameraSurface", nativeName = "VREvent_EditingCameraSurface_t", mutable = false) {
+val VREvent_EditingCameraSurface_t = struct(Module.OPENVR, "VREventEditingCameraSurface", nativeName = "VREvent_EditingCameraSurface_t", mutable = false) {
     uint64_t.member("overlayHandle", "")
     uint32_t.member("nVisualMode", "")
 }
 
-val VREvent_MessageOverlay_t = struct(OPENVR_PACKAGE, "VREventMessageOverlay", nativeName = "VREvent_MessageOverlay_t", mutable = false) {
+val VREvent_MessageOverlay_t = struct(Module.OPENVR, "VREventMessageOverlay", nativeName = "VREvent_MessageOverlay_t", mutable = false) {
     uint32_t.member("unVRMessageOverlayResponse", "").links("VRMessageOverlayResponse_\\w+")
 }
 
-val VREvent_Property_t = struct(OPENVR_PACKAGE, "VREventProperty", nativeName = "VREvent_Property_t", mutable = false) {
+val VREvent_Property_t = struct(Module.OPENVR, "VREventProperty", nativeName = "VREvent_Property_t", mutable = false) {
     PropertyContainerHandle_t.member("container", "")
     ETrackedDeviceProperty.member("prop", "").links("ETrackedDeviceProperty_\\w+")
 }
 
-val VREvent_DualAnalog_t = struct(OPENVR_PACKAGE, "VREventDualAnalog", nativeName = "VREvent_DualAnalog_t", mutable = false) {
+val VREvent_DualAnalog_t = struct(Module.OPENVR, "VREventDualAnalog", nativeName = "VREvent_DualAnalog_t", mutable = false) {
     float.member("x", "coordinates are -1..1 analog values")
 	float.member("y", "coordinates are -1..1 analog values")
 	float.member("transformedX", "transformed by the center and radius numbers provided by the overlay")
@@ -306,7 +304,7 @@ val VREvent_DualAnalog_t = struct(OPENVR_PACKAGE, "VREventDualAnalog", nativeNam
 	EDualAnalogWhich.member("which", "")
 }
 
-val VREvent_HapticVibration_t = struct(OPENVR_PACKAGE, "VREvent_HapticVibration", nativeName = "VREvent_HapticVibration_t", mutable = false) {
+val VREvent_HapticVibration_t = struct(Module.OPENVR, "VREvent_HapticVibration", nativeName = "VREvent_HapticVibration_t", mutable = false) {
     uint64_t.member("containerHandle", "property container handle of the device with the haptic component")
 	uint64_t.member("componentHandle", "which haptic component needs to vibrate")
 	float.member("fDurationSeconds", "")
@@ -314,7 +312,7 @@ val VREvent_HapticVibration_t = struct(OPENVR_PACKAGE, "VREvent_HapticVibration"
 	float.member("fAmplitude", "")
 }
 
-val VREvent_Data_t = union(OPENVR_PACKAGE, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
+val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
     VREvent_Reserved_t.member("reserved", "")
     VREvent_Controller_t.member("controller", "")
     VREvent_Mouse_t.member("mouse", "")
@@ -337,7 +335,7 @@ val VREvent_Data_t = union(OPENVR_PACKAGE, "VREventData", nativeName = "VREvent_
     VREvent_Property_t.member("property", "")
 }
 
-val VREvent_t = struct(OPENVR_PACKAGE, "VREvent", nativeName = "VREvent_t", mutable = false) {
+val VREvent_t = struct(Module.OPENVR, "VREvent", nativeName = "VREvent_t", mutable = false) {
     documentation = "An event posted by the server to all running applications."
 
     uint32_t.member("eventType", "the type of the event").links("EVREventType_\\w+")
@@ -355,30 +353,30 @@ val VREvent_t = struct(OPENVR_PACKAGE, "VREvent", nativeName = "VREvent_t", muta
     )
 }
 
-val IntersectionMaskRectangle_t = struct(OPENVR_PACKAGE, "IntersectionMaskRectangle", nativeName = "IntersectionMaskRectangle_t") {
+val IntersectionMaskRectangle_t = struct(Module.OPENVR, "IntersectionMaskRectangle", nativeName = "IntersectionMaskRectangle_t") {
     float.member("m_flTopLeftX", "")
     float.member("m_flTopLeftY", "")
     float.member("m_flWidth", "")
     float.member("m_flHeight", "")
 }
 
-val IntersectionMaskCircle_t = struct(OPENVR_PACKAGE, "IntersectionMaskCircle", nativeName = "IntersectionMaskCircle_t") {
+val IntersectionMaskCircle_t = struct(Module.OPENVR, "IntersectionMaskCircle", nativeName = "IntersectionMaskCircle_t") {
     float.member("m_flCenterX", "")
     float.member("m_flCenterY", "")
     float.member("m_flRadius", "")
 }
 
-val VROverlayIntersectionMaskPrimitive_Data_t = union(OPENVR_PACKAGE, "VROverlayIntersectionMaskPrimitiveData", nativeName = "VROverlayIntersectionMaskPrimitive_Data_t") {
+val VROverlayIntersectionMaskPrimitive_Data_t = union(Module.OPENVR, "VROverlayIntersectionMaskPrimitiveData", nativeName = "VROverlayIntersectionMaskPrimitive_Data_t") {
     IntersectionMaskRectangle_t.member("m_Rectangle", "")
     IntersectionMaskCircle_t.member("m_Circle", "")
 }
 
-val VROverlayIntersectionMaskPrimitive_t = struct(OPENVR_PACKAGE, "VROverlayIntersectionMaskPrimitive", nativeName = "VROverlayIntersectionMaskPrimitive_t") {
+val VROverlayIntersectionMaskPrimitive_t = struct(Module.OPENVR, "VROverlayIntersectionMaskPrimitive", nativeName = "VROverlayIntersectionMaskPrimitive_t") {
     EVROverlayIntersectionMaskPrimitiveType.member("m_nPrimitiveType", "")
     VROverlayIntersectionMaskPrimitive_Data_t.member("m_Primitive", "");
 }
 
-val HiddenAreaMesh_t = struct(OPENVR_PACKAGE, "HiddenAreaMesh", nativeName = "HiddenAreaMesh_t", mutable = false) {
+val HiddenAreaMesh_t = struct(Module.OPENVR, "HiddenAreaMesh", nativeName = "HiddenAreaMesh_t", mutable = false) {
     documentation =
     """
     The mesh to draw into the stencil (or depth) buffer to perform early stencil (or depth) kills of pixels that will never appear on the HMD. This mesh draws
@@ -391,14 +389,14 @@ val HiddenAreaMesh_t = struct(OPENVR_PACKAGE, "HiddenAreaMesh", nativeName = "Hi
     AutoSize("pVertexData", optional = true)..uint32_t.member("unTriangleCount", "")
 }
 
-val VRControllerAxis_t = struct(OPENVR_PACKAGE, "VRControllerAxis", nativeName = "VRControllerAxis_t") {
+val VRControllerAxis_t = struct(Module.OPENVR, "VRControllerAxis", nativeName = "VRControllerAxis_t") {
     documentation = "Contains information about one axis on the controller."
 
     float.member("x", "Ranges from -1.0 to 1.0 for joysticks and track pads. Ranges from 0.0 to 1.0 for triggers were 0 is fully released.")
     float.member("y", "Ranges from -1.0 to 1.0 for joysticks and track pads. Is always 0.0 for triggers.")
 }
 
-val VRControllerState_t = struct(OPENVR_PACKAGE, "VRControllerState", nativeName = "VRControllerState_t") {
+val VRControllerState_t = struct(Module.OPENVR, "VRControllerState", nativeName = "VRControllerState_t") {
     documentation = "Holds all the state of a controller at one moment in time."
 
     uint32_t.member(
@@ -410,13 +408,13 @@ val VRControllerState_t = struct(OPENVR_PACKAGE, "VRControllerState", nativeName
     VRControllerAxis_t.array("rAxis", "axis data for the controller's analog inputs", size = 5)
 }
 
-val Texture_t = struct(OPENVR_PACKAGE, "Texture", nativeName = "Texture_t") {
+val Texture_t = struct(Module.OPENVR, "Texture", nativeName = "Texture_t") {
     opaque_p.member("handle", "") // See ETextureType definition above
     ETextureType.member("eType", "").links("ETextureType_\\w+")
     EColorSpace.member("eColorSpace", "").links("EColorSpace_\\w+")
 }
 
-val VRTextureBounds_t = struct(OPENVR_PACKAGE, "VRTextureBounds", nativeName = "VRTextureBounds_t") {
+val VRTextureBounds_t = struct(Module.OPENVR, "VRTextureBounds", nativeName = "VRTextureBounds_t") {
     documentation = "Allows the application to control what part of the provided texture will be used in the frame buffer."
 
     float.member("uMin", "")
@@ -425,13 +423,13 @@ val VRTextureBounds_t = struct(OPENVR_PACKAGE, "VRTextureBounds", nativeName = "
     float.member("vMax", "")
 }
 
-val VRTextureWithPose_t = struct(OPENVR_PACKAGE, "VRTextureWithPose", nativeName = "VRTextureWithPose_t") {
+val VRTextureWithPose_t = struct(Module.OPENVR, "VRTextureWithPose", nativeName = "VRTextureWithPose_t") {
     documentation = "Allows specifying pose used to render provided scene texture (if different from value returned by #WaitGetPoses())."
 
 	HmdMatrix34_t.member("mDeviceToAbsoluteTracking", "actual pose used to render scene textures")
 }
 
-val VRTextureDepthInfo_t = struct(OPENVR_PACKAGE, "VRTextureDepthInfo", nativeName = "VRTextureDepthInfo_t") {
+val VRTextureDepthInfo_t = struct(Module.OPENVR, "VRTextureDepthInfo", nativeName = "VRTextureDepthInfo_t") {
     documentation = ""
 
 	opaque_p.member("handle", "")
@@ -439,19 +437,19 @@ val VRTextureDepthInfo_t = struct(OPENVR_PACKAGE, "VRTextureDepthInfo", nativeNa
 	HmdVector2_t.member("vRange", "")
 }
 
-val VRTextureWithDepth_t = struct(OPENVR_PACKAGE, "VRTextureWithDepth", nativeName = "VRTextureWithDepth_t") {
+val VRTextureWithDepth_t = struct(Module.OPENVR, "VRTextureWithDepth", nativeName = "VRTextureWithDepth_t") {
     documentation = ""
 
 	VRTextureDepthInfo_t.member("depth", "")
 }
 
-val VRTextureWithPoseAndDepth_t = struct(OPENVR_PACKAGE, "VRTextureWithPoseAndDepth", nativeName = "VRTextureWithPoseAndDepth_t") {
+val VRTextureWithPoseAndDepth_t = struct(Module.OPENVR, "VRTextureWithPoseAndDepth", nativeName = "VRTextureWithPoseAndDepth_t") {
     documentation = ""
 
 	VRTextureDepthInfo_t.member("depth", "")
 }
 
-val VRVulkanTextureData_t = struct(OPENVR_PACKAGE, "VRVulkanTextureData", nativeName = "VRVulkanTextureData_t") {
+val VRVulkanTextureData_t = struct(Module.OPENVR, "VRVulkanTextureData", nativeName = "VRVulkanTextureData_t") {
     documentation = "Data required for passing Vulkan textures to #Submit(). Be sure to call #ShutdownInternal() before destroying these resources."
 
     uint64_t.member("m_nImage", "VkImage")
@@ -466,7 +464,7 @@ val VRVulkanTextureData_t = struct(OPENVR_PACKAGE, "VRVulkanTextureData", native
     uint32_t.member("m_nSampleCount", "")
 }
 
-val Compositor_OverlaySettings = struct(OPENVR_PACKAGE, "CompositorOverlaySettings", nativeName = "Compositor_OverlaySettings") {
+val Compositor_OverlaySettings = struct(Module.OPENVR, "CompositorOverlaySettings", nativeName = "Compositor_OverlaySettings") {
     documentation = "Allows the application to customize how the overlay appears in the compositor."
 
     uint32_t.member("size", "{@code sizeof(Compositor_OverlaySettings)}")
@@ -485,12 +483,12 @@ val Compositor_OverlaySettings = struct(OPENVR_PACKAGE, "CompositorOverlaySettin
     HmdMatrix44_t.member("transform", "")
 }
 
-val AppOverrideKeys_t = struct(OPENVR_PACKAGE, "AppOverrideKeys", nativeName = "AppOverrideKeys_t") {
+val AppOverrideKeys_t = struct(Module.OPENVR, "AppOverrideKeys", nativeName = "AppOverrideKeys_t") {
     charASCII_p.member("pchKey", "")
     char_p.member("pchValue", "")
 }
 
-val Compositor_FrameTiming = struct(OPENVR_PACKAGE, "CompositorFrameTiming", nativeName = "Compositor_FrameTiming", mutable = false) {
+val Compositor_FrameTiming = struct(Module.OPENVR, "CompositorFrameTiming", nativeName = "Compositor_FrameTiming", mutable = false) {
     documentation = "Provides a single frame's timing information to the app."
 
     uint32_t.member("m_nSize", "Set to {@code sizeof( Compositor_FrameTiming )}")
@@ -530,7 +528,7 @@ val Compositor_FrameTiming = struct(OPENVR_PACKAGE, "CompositorFrameTiming", nat
     TrackedDevicePose_t.member("m_HmdPose", "pose used by app to render this frame")
 }
 
-val Compositor_CumulativeStats = struct(OPENVR_PACKAGE, "CompositorCumulativeStats", nativeName = "Compositor_CumulativeStats", mutable = false) {
+val Compositor_CumulativeStats = struct(Module.OPENVR, "CompositorCumulativeStats", nativeName = "Compositor_CumulativeStats", mutable = false) {
     documentation =
     """
     Cumulative stats for current application.  These are not cleared until a new app connects, but they do stop accumulating once the associated app
@@ -563,7 +561,7 @@ val Compositor_CumulativeStats = struct(OPENVR_PACKAGE, "CompositorCumulativeSta
     uint32_t.member("m_nNumReprojectedFramesTimedOut", "")
 }
 
-val NotificationBitmap_t = struct(OPENVR_PACKAGE, "NotificationBitmap", nativeName = "NotificationBitmap_t") {
+val NotificationBitmap_t = struct(Module.OPENVR, "NotificationBitmap", nativeName = "NotificationBitmap_t") {
     documentation = "Used for passing graphic data."
 
     void_p.member("m_pImageData", "")
@@ -572,7 +570,7 @@ val NotificationBitmap_t = struct(OPENVR_PACKAGE, "NotificationBitmap", nativeNa
     int32_t.member("m_nBytesPerPixel", "")
 }
 
-val RenderModel_Vertex_t = struct(OPENVR_PACKAGE, "RenderModelVertex", nativeName = "RenderModel_Vertex_t", mutable = false) {
+val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName = "RenderModel_Vertex_t", mutable = false) {
     documentation = "A single vertex in a render model."
 
     HmdVector3_t.member("vPosition", "position in meters in device space")
@@ -580,7 +578,7 @@ val RenderModel_Vertex_t = struct(OPENVR_PACKAGE, "RenderModelVertex", nativeNam
     float.array("rfTextureCoord", "", size = 2)
 }
 
-val RenderModel_t = struct(OPENVR_PACKAGE, "RenderModel", nativeName = "RenderModel_t", mutable = false) {
+val RenderModel_t = struct(Module.OPENVR, "RenderModel", nativeName = "RenderModel_t", mutable = false) {
     const..RenderModel_Vertex_t.p.buffer("rVertexData", "Vertex data for the mesh")
     AutoSize("rVertexData")..uint32_t.member("unVertexCount", "Number of vertices in the vertex data")
     const..uint16_t.p.member("IndexData", "Indices into the vertex data for each triangle")
@@ -591,7 +589,7 @@ val RenderModel_t = struct(OPENVR_PACKAGE, "RenderModel", nativeName = "RenderMo
     )
 }
 
-val RenderModel_TextureMap_t = struct(OPENVR_PACKAGE, "RenderModelTextureMap", nativeName = "RenderModel_TextureMap_t", mutable = false) {
+val RenderModel_TextureMap_t = struct(Module.OPENVR, "RenderModelTextureMap", nativeName = "RenderModel_TextureMap_t", mutable = false) {
     documentation = "A texture map for use on a render model."
     uint16_t.member("unWidth", "")
     uint16_t.member("unHeight", "width and height of the texture map in pixels")
@@ -601,11 +599,11 @@ val RenderModel_TextureMap_t = struct(OPENVR_PACKAGE, "RenderModelTextureMap", n
     )
 }
 
-val RenderModel_ControllerMode_State_t = struct(OPENVR_PACKAGE, "RenderModelControllerModeState", nativeName = "RenderModel_ControllerMode_State_t") {
+val RenderModel_ControllerMode_State_t = struct(Module.OPENVR, "RenderModelControllerModeState", nativeName = "RenderModel_ControllerMode_State_t") {
     bool.member("bScrollWheelVisible", "is this controller currently set to be in a scroll wheel mode")
 }
 
-val RenderModel_ComponentState_t = struct(OPENVR_PACKAGE, "RenderModelComponentState", nativeName = "RenderModel_ComponentState_t", mutable = false) {
+val RenderModel_ComponentState_t = struct(Module.OPENVR, "RenderModelComponentState", nativeName = "RenderModel_ComponentState_t", mutable = false) {
     documentation = "Describes state information about a render-model component, including transforms and other dynamic properties."
 
     HmdMatrix34_t.member("mTrackingToComponentRenderModel", "Transform required when drawing the component render model")
@@ -613,7 +611,7 @@ val RenderModel_ComponentState_t = struct(OPENVR_PACKAGE, "RenderModelComponentS
     VRComponentProperties.member("uProperties", "")
 }
 
-val CameraVideoStreamFrameHeader_t = struct(OPENVR_PACKAGE, "CameraVideoStreamFrameHeader", nativeName = "CameraVideoStreamFrameHeader_t", mutable = false) {
+val CameraVideoStreamFrameHeader_t = struct(Module.OPENVR, "CameraVideoStreamFrameHeader", nativeName = "CameraVideoStreamFrameHeader_t", mutable = false) {
     EVRTrackedCameraFrameType.member("eFrameType", "")
 
     uint32_t.member("nWidth", "")
@@ -625,7 +623,7 @@ val CameraVideoStreamFrameHeader_t = struct(OPENVR_PACKAGE, "CameraVideoStreamFr
     TrackedDevicePose_t.member("standingTrackedDevicePose", "")
 }
 
-val DriverDirectMode_FrameTiming = struct(OPENVR_PACKAGE, "DriverDirectModeFrameTiming", nativeName = "DriverDirectMode_FrameTiming", mutable = false) {
+val DriverDirectMode_FrameTiming = struct(Module.OPENVR, "DriverDirectModeFrameTiming", nativeName = "DriverDirectMode_FrameTiming", mutable = false) {
     documentation = "Frame timing data provided by direct mode drivers."
 
     uint32_t.member("m_nSize", "sSet to {@code sizeof( DriverDirectMode_FrameTiming )}")
@@ -635,13 +633,13 @@ val DriverDirectMode_FrameTiming = struct(OPENVR_PACKAGE, "DriverDirectModeFrame
 	uint32_t.member("m_nReprojectionFlags", "")
 }
 
-val VROverlayIntersectionParams_t = struct(OPENVR_PACKAGE, "VROverlayIntersectionParams", nativeName = "VROverlayIntersectionParams_t") {
+val VROverlayIntersectionParams_t = struct(Module.OPENVR, "VROverlayIntersectionParams", nativeName = "VROverlayIntersectionParams_t") {
     HmdVector3_t.member("vSource", "")
     HmdVector3_t.member("vDirection", "")
     ETrackingUniverseOrigin.member("eOrigin", "")
 }
 
-val VROverlayIntersectionResults_t = struct(OPENVR_PACKAGE, "VROverlayIntersectionResults", nativeName = "VROverlayIntersectionResults_t", mutable = false) {
+val VROverlayIntersectionResults_t = struct(Module.OPENVR, "VROverlayIntersectionResults", nativeName = "VROverlayIntersectionResults_t", mutable = false) {
     HmdVector3_t.member("vPoint", "")
     HmdVector3_t.member("vNormal", "")
     HmdVector2_t.member("vUVs", "")

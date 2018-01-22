@@ -12,7 +12,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
 
-/** Implements a {@link SharedLibrary} on the MacOS X using dlopen. */
+/** Implements a {@link SharedLibrary} on the macOS using {@link DynamicLinkLoader#dlopen dlopen}. */
 public class MacOSXLibraryDL extends MacOSXLibrary {
 
     public MacOSXLibraryDL(String name) {

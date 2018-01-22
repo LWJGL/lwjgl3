@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl
+package opengl
 
 import org.lwjgl.generator.*
 
-val OPENGL_PACKAGE = "org.lwjgl.opengl"
-
 fun config() {
     packageInfo(
-        OPENGL_PACKAGE,
+        Module.OPENGL,
         """
         Contains bindings to the ${url("https://www.opengl.org/", "OpenGL")} cross-platform 2D and 3D rendering API.
 
@@ -73,7 +71,7 @@ val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping
 
 // AMD_debug_output
 val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
-    OPENGL_PACKAGE, void, "GLDebugMessageAMDCallback",
+    Module.OPENGL, void, "GLDebugMessageAMDCallback",
     "Will be called when a debug message is generated.",
     GLuint.IN("id", "the message ID"),
     GLenum.IN("category", "the message category"),
@@ -103,7 +101,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 }
 // ARB_debug_output
 val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
-    OPENGL_PACKAGE, void, "GLDebugMessageARBCallback",
+    Module.OPENGL, void, "GLDebugMessageARBCallback",
     "Will be called when a debug message is generated.",
     GLenum.IN("source", "the message source"),
     GLenum.IN("type", "the message type"),
@@ -142,7 +140,7 @@ val GLsync = "GLsync".opaque_p
 val GLeglClientBufferEXT = "GLeglClientBufferEXT".opaque_p
 // KHR_debug
 val GLDEBUGPROC = "GLDEBUGPROC".callback(
-    OPENGL_PACKAGE, void, "GLDebugMessageCallback",
+    Module.OPENGL, void, "GLDebugMessageCallback",
     "Will be called when a debug message is generated.",
     GLenum.IN("source", "the message source"),
     GLenum.IN("type", "the message type"),

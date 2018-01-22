@@ -2,17 +2,17 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.zstd
+package zstd
 
 import org.lwjgl.generator.*
 
-val ZDICT_params_t = struct(ZSTD_PACKAGE, "ZDICTParams", nativeName = "ZDICT_params_t") {
+val ZDICT_params_t = struct(Module.ZSTD, "ZDICTParams", nativeName = "ZDICT_params_t") {
     int.member("compressionLevel", "optimize for a specific zstd compression level; 0 means default")
     unsigned.member("notificationLevel", "write log to {@code stderr}; 0 = none (default); 1 = errors; 2 = progression; 3 = details; 4 = debug;")
     unsigned.member("dictID", "force {@code dictID} value; 0 means auto mode (32-bits random value)")
 }
 
-val ZDICT_cover_params_t = struct(ZSTD_PACKAGE, "ZDICTCoverParams", nativeName = "ZDICT_cover_params_t") {
+val ZDICT_cover_params_t = struct(Module.ZSTD, "ZDICTCoverParams", nativeName = "ZDICT_cover_params_t") {
     documentation = "{@code k} and {@code d} are the only required parameters. For others, value 0 means default."
 
     unsigned.member("k", "segment size : constraint: {@code 0 < k} : Reasonable range {@code [16, 2048+]}")

@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.system.windows.*
+import opengl.*
+import core.windows.*
 
 val WGL_NV_swap_group = "WGLNVSwapGroup".nativeClassWGL("WGL_NV_swap_group", postfix = NV) {
     documentation =

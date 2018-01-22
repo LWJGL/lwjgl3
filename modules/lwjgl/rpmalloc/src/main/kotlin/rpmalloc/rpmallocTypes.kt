@@ -2,25 +2,23 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.rpmalloc
+package rpmalloc
 
 import org.lwjgl.generator.*
 import java.io.*
 
-val RPMALLOC_PACKAGE = "org.lwjgl.system.rpmalloc"
-
 fun config() {
     packageInfo(
-        RPMALLOC_PACKAGE,
+        Module.RPMALLOC,
         """
         Contains bindings to the ${url("https://github.com/rampantpixels/rpmalloc", "rpmalloc")} library. rpmalloc is a public domain cross platform lock free
         thread caching 16-byte aligned memory allocator implemented in C.
         """
     )
 
-    Generator.registerLibraryInit(RPMALLOC_PACKAGE, "LibRPmalloc", "rpmalloc")
+    Generator.registerLibraryInit(Module.RPMALLOC, "LibRPmalloc", "rpmalloc")
 
-    Generator.register(object : GeneratorTarget(RPMALLOC_PACKAGE, "RPmallocAllocator") {
+    Generator.register(object : GeneratorTarget(Module.RPMALLOC, "RPmallocAllocator") {
 
         init {
             javaImport("org.lwjgl.system.MemoryUtil.*")
@@ -92,7 +90,7 @@ fun config() {
 }
 
 val rpmalloc_global_statistics_t_p = struct(
-    RPMALLOC_PACKAGE,
+    Module.RPMALLOC,
     "RPmallocGlobalStatistics",
     nativeName = "rpmalloc_global_statistics_t",
     mutable = false
@@ -105,7 +103,7 @@ val rpmalloc_global_statistics_t_p = struct(
 }.p
 
 val rpmalloc_thread_statistics_t_p = struct(
-    RPMALLOC_PACKAGE,
+    Module.RPMALLOC,
     "RPmallocThreadStatistics",
     nativeName = "rpmalloc_thread_statistics_t",
     mutable = false

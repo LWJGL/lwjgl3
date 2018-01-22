@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openvr.templates
+package openvr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openvr.*
+import openvr.*
 
-val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", binding = OPENVR_API_BINDING) {
+val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_API_BINDING) {
     documentation =
         """
         Because the OpenVR API causes the game to connect to any attached VR hardware, it is not initialized automatically. To initialize the API and get

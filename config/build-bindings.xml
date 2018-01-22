@@ -8,7 +8,7 @@ Defines which library bindings will be build with LWJGL.
 
 This script is included in /config/build-definitions.xml.
 -->
-<project name="bindings" basedir="../">
+<project name="bindings" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
     <property name="binding.DISABLE_CHECKS" value="false"/>
 
@@ -43,6 +43,13 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.xxhash" value="true"/>
     <property name="binding.yoga" value="true"/>
     <property name="binding.zstd" value="true"/>
+
+    <!-- TODO: automate -->
+    <property name="java-only.binding.egl" value="true"/>
+    <property name="java-only.binding.jawt" value="true"/>
+    <property name="java-only.binding.odbc" value="true"/>
+    <property name="java-only.binding.opencl" value="true"/>
+    <property name="java-only.binding.vulkan" value="true"/>
 
     <!-- Set the path to the Oculus SDK to enable. -->
     <!-- TODO: add headers in here -->
@@ -84,6 +91,104 @@ This script is included in /config/build-definitions.xml.
             </and>
         </condition>
         <fail if="dependency_problem" message="The stb and OpenGL or OpenGL ES bindings are required."/>
+
+        <local name="test"/>
+        <script language="javascript">
+        var props = LWJGL.getProperties();
+
+        var modules = ["core"];
+        var bindings = ["-Dbinding.DISABLE_CHECKS=" + props.get("binding.DISABLE_CHECKS")];
+        var javaOnly = [];
+
+        for each (p in props.entrySet()) {
+            var name = p.key;
+            if (name.startsWith("binding.") &amp;&amp; p.value == "true") {
+                var module = name.substring(8);
+
+                modules.push(module);
+                bindings.push("-D" + name + "=true");
+
+                if (props.containsKey("java-only." + name)) {
+                    javaOnly.push(module);
+                }
+            }
+        }
+
+        LWJGL.setProperty("generator.bindings", bindings.join(" "));
+        LWJGL.setProperty("module.list", modules.join(","));
+        LWJGL.setProperty("module.list.java-only", javaOnly.join(","));
+
+        var classes = [];
+        var templates = [];
+        var sources = [];
+
+        modules.forEach(function(it) {
+            classes.push("bin/classes/lwjgl/" + it);
+
+            var src = "modules/lwjgl/" + it + "/src";
+
+            templates.push(src + "/main/kotlin");
+            sources.push(src + "/generated/java");
+            if (java.nio.file.Files.isDirectory(java.nio.file.Paths.get(src + "/main/java"))) {
+                sources.push(src + "/main/java");
+            }
+        });
+
+        LWJGL.setProperty("module.classpath", classes.join(java.io.File.pathSeparator));
+        LWJGL.setProperty("module.templatepath", templates.join(java.io.File.pathSeparator));
+        LWJGL.setProperty("module.sourcepath", sources.join(java.io.File.pathSeparator));
+        </script>
     </target>
+
+    <macrodef name="forEachBinding">
+        <element name="body" implicit="yes"/>
+        <sequential>
+            <parallel threadsPerProcessor="1">
+                <sequential if:set="binding.assimp"><local name="module"/><property name="module" value="assimp"/><body/></sequential>
+                <sequential if:set="binding.bgfx"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
+                <sequential if:set="binding.egl"><local name="module"/><property name="module" value="egl"/><body/></sequential>
+                <sequential if:set="binding.glfw"><local name="module"/><property name="module" value="glfw"/><body/></sequential>
+                <sequential if:set="binding.jawt"><local name="module"/><property name="module" value="jawt"/><body/></sequential>
+                <sequential if:set="binding.jemalloc"><local name="module"/><property name="module" value="jemalloc"/><body/></sequential>
+                <sequential if:set="binding.lmdb"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
+                <sequential if:set="binding.lz4"><local name="module"/><property name="module" value="lz4"/><body/></sequential>
+                <sequential if:set="binding.nanovg"><local name="module"/><property name="module" value="nanovg"/><body/></sequential>
+                <sequential if:set="binding.nfd"><local name="module"/><property name="module" value="nfd"/><body/></sequential>
+                <sequential if:set="binding.nuklear"><local name="module"/><property name="module" value="nuklear"/><body/></sequential>
+                <sequential if:set="binding.odbc"><local name="module"/><property name="module" value="odbc"/><body/></sequential>
+                <sequential if:set="binding.openal"><local name="module"/><property name="module" value="openal"/><body/></sequential>
+                <sequential if:set="binding.opencl"><local name="module"/><property name="module" value="opencl"/><body/></sequential>
+                <sequential if:set="binding.opengl"><local name="module"/><property name="module" value="opengl"/><body/></sequential>
+                <sequential if:set="binding.opengles"><local name="module"/><property name="module" value="opengles"/><body/></sequential>
+                <sequential if:set="binding.openvr"><local name="module"/><property name="module" value="openvr"/><body/></sequential>
+                <sequential if:set="binding.ovr"><local name="module"/><property name="module" value="ovr"/><body/></sequential>
+                <sequential if:set="binding.par"><local name="module"/><property name="module" value="par"/><body/></sequential>
+                <sequential if:set="binding.remotery"><local name="module"/><property name="module" value="remotery"/><body/></sequential>
+                <sequential if:set="binding.rpmalloc"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>
+                <sequential if:set="binding.sse"><local name="module"/><property name="module" value="sse"/><body/></sequential>
+                <sequential if:set="binding.stb"><local name="module"/><property name="module" value="stb"/><body/></sequential>
+                <sequential if:set="binding.tinyexr"><local name="module"/><property name="module" value="tinyexr"/><body/></sequential>
+                <sequential if:set="binding.tinyfd"><local name="module"/><property name="module" value="tinyfd"/><body/></sequential>
+                <sequential if:set="binding.tootle"><local name="module"/><property name="module" value="tootle"/><body/></sequential>
+                <sequential if:set="binding.vulkan"><local name="module"/><property name="module" value="vulkan"/><body/></sequential>
+                <sequential if:set="binding.xxhash"><local name="module"/><property name="module" value="xxhash"/><body/></sequential>
+                <sequential if:set="binding.yoga"><local name="module"/><property name="module" value="yoga"/><body/></sequential>
+                <sequential if:set="binding.zstd"><local name="module"/><property name="module" value="zstd"/><body/></sequential>
+            </parallel>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="forEachModule">
+        <element name="body" implicit="yes"/>
+        <sequential>
+            <sequential>
+                <local name="module"/><property name="module" value="core"/>
+                <body/>
+            </sequential>
+            <forEachBinding>
+                <body/>
+            </forEachBinding>
+        </sequential>
+    </macrodef>
 
 </project>

@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val ANGLE_device_d3d = "ANGLEDeviceD3D".nativeClassEGL("ANGLE_device_d3d", postfix = ANGLE) {

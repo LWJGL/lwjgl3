@@ -20,7 +20,6 @@ import static org.lwjgl.openal.ALC11.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.stb.STBVorbis.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.testng.Assert.*;
 
 public final class ALCDemo {
 
@@ -35,7 +34,9 @@ public final class ALCDemo {
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
-        assertTrue(deviceCaps.OpenALC10);
+        if (!deviceCaps.OpenALC10) {
+            throw new IllegalStateException();
+        }
 
         System.out.println("OpenALC10: " + deviceCaps.OpenALC10);
         System.out.println("OpenALC11: " + deviceCaps.OpenALC11);
@@ -52,8 +53,7 @@ public final class ALCDemo {
             }
         }
 
-        String defaultDeviceSpecifier = alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
-        assertTrue(defaultDeviceSpecifier != null);
+        String defaultDeviceSpecifier = Objects.requireNonNull(alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER));
         System.out.println("Default device: " + defaultDeviceSpecifier);
 
         long context = alcCreateContext(device, (IntBuffer)null);
@@ -107,7 +107,7 @@ public final class ALCDemo {
         try {
             System.out.println("Waiting 5 seconds for sound to complete");
             Thread.sleep(5000);
-        } catch (InterruptedException inte) {
+        } catch (InterruptedException ignored) {
         }
 
         //stop source 0

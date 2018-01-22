@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="TestNG">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/testng.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/testng.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/libs/testng-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/testng-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

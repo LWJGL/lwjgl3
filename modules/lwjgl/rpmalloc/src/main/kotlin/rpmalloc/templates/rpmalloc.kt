@@ -2,14 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.rpmalloc.templates
+package rpmalloc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.rpmalloc.*
+import rpmalloc.*
 
 val RPMALLOC_LIBRARY = "LibRPmalloc.initialize();"
 
-val rpmalloc = "RPmalloc".nativeClass(RPMALLOC_PACKAGE, prefix = "RP", prefixConstant = "RP", library = RPMALLOC_LIBRARY) {
+val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixConstant = "RP", library = RPMALLOC_LIBRARY) {
     nativeDirective("""DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
 #include "rpmalloc.c"

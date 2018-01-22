@@ -4,7 +4,6 @@
  */
 module org.lwjgl.rpmalloc {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.rpmalloc.natives;
 
     exports org.lwjgl.system.rpmalloc;
 }

@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val AMD_seamless_cubemap_per_texture = "AMDSeamlessCubemapPerTexture".nativeClassGL("AMD_seamless_cubemap_per_texture", postfix = AMD) {
     documentation =

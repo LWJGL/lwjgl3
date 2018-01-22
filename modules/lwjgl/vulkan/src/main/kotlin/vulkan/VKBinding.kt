@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.vulkan
+package vulkan
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.VKFunctionType.*
-import org.lwjgl.vulkan.templates.*
+import vulkan.VKFunctionType.*
+import vulkan.templates.*
 import java.io.*
 
 private val NativeClass.capName: String
@@ -19,8 +19,8 @@ private val NativeClass.capName: String
         "${prefixTemplate}_$templateName"
     }
 
-private val CAPS_INSTANCE = "VKCapabilitiesInstance"
-private val CAPS_DEVICE = "VKCapabilitiesDevice"
+private const val CAPS_INSTANCE = "VKCapabilitiesInstance"
+private const val CAPS_DEVICE = "VKCapabilitiesDevice"
 
 private val EXTENSION_TYPES = HashMap<String, String>()
 private val DEVICE_EXTENSIONS = ArrayList<NativeClass>()
@@ -55,7 +55,7 @@ else
     "caps.${func.name}"
 
 val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
-    VULKAN_PACKAGE,
+    Module.VULKAN,
     CAPS_INSTANCE,
     APICapabilities.PARAM_CAPABILITIES
 ) {
@@ -162,7 +162,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
                     .map { "${it.name} = isSupported(provider, ${it.functionAddress}, ${if (isInstanceExtension) "supported" else "true"});" }.joinToString("\n$t$t$t", prefix = "$t$t$t"))
                 if (isInstanceExtension) {
                     println("\n$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${
-                    if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className
+                    if (capName == it.className) "$packageName.${it.className}" else it.className
                     }.isAvailable(this${
                     if (it.functions.any { it.has<DependsOn>() }) ", ext" else ""
                     }));")
@@ -180,7 +180,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
 })
 
-val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(VULKAN_PACKAGE, CAPS_DEVICE) {
+val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKAN, CAPS_DEVICE) {
 
     init {
         javaImport(
@@ -246,7 +246,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(VULKAN_PACKA
                     .filter { it.type === DEVICE && !it.has<Macro>() }
                     .map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n$t$t$t", prefix = "$t$t$t"))
                 println("$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${
-                if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className
+                if (capName == it.className) "$packageName.${it.className}" else it.className
                 }.isAvailable(${
                 if (it.functions.any { it.type === INSTANCE }) "capsInstance, " else ""
                 }this${
@@ -280,7 +280,7 @@ fun String.nativeClassVK(
     EXTENSION_TYPES[templateName] = type
 
     val ext = nativeClass(
-        VULKAN_PACKAGE,
+        Module.VULKAN,
         templateName,
         prefix = prefix,
         prefixMethod = prefixMethod,

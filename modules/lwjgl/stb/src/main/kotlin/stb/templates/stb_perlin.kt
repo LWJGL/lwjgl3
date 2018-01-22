@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_perlin = "STBPerlin".nativeClass(packageName = STB_PACKAGE, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
+val stb_perlin = "STBPerlin".nativeClass(Module.STB, prefix = "STB", prefixMethod = "stb_", library = STB_LIBRARY) {
     includeSTBAPI(
         """#define STB_PERLIN_IMPLEMENTATION
 #include "stb_perlin.h"""")

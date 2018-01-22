@@ -2,14 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.system.macosx.*
+import opengl.*
+import core.macos.*
 
 val CGL = "CGL".nativeClass(
-    OPENGL_PACKAGE,
+    Module.OPENGL,
     prefix = "CGL",
     prefixConstant = "kCGL",
     prefixMethod = "CGL",

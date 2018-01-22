@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val KHR_parallel_shader_compile = "KHRParallelShaderCompile".nativeClassGLES("KHR_parallel_shader_compile", postfix = KHR) {
     documentation =

@@ -3,11 +3,11 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan.templates
+package vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.windows.*
-import org.lwjgl.vulkan.*
+import core.windows.*
+import vulkan.*
 
 val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KHR_external_semaphore_win32", type = "device", postfix = KHR) {
     documentation =

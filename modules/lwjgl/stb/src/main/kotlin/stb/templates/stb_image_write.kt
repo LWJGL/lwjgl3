@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_", library = STB_LIBRARY) {
+val stb_image_write = "STBImageWrite".nativeClass(Module.STB, prefix = "STBI", prefixMethod = "stbi_", library = STB_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     __pragma(warning(disable : 4710))

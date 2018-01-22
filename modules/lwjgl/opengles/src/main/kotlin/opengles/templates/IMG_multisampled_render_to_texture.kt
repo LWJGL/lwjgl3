@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val IMG_multisampled_render_to_texture = "IMGMultisampledRenderToTexture".nativeClassGLES("IMG_multisampled_render_to_texture", postfix = IMG) {
     documentation =

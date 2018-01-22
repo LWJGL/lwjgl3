@@ -2,15 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.linux
+package core.linux
 
 import org.lwjgl.generator.*
 
-val LINUX_PACKAGE = "org.lwjgl.system.linux"
+const val LINUX_PACKAGE = "org.lwjgl.system.linux"
 
 fun config() {
     packageInfo(
-        LINUX_PACKAGE,
+        Module.CORE_LINUX,
         "Contains bindings to native APIs specific to the Linux operating system."
     )
 }

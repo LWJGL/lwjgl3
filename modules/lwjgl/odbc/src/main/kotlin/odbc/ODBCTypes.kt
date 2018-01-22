@@ -2,19 +2,21 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.odbc
+package odbc
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.windows.*
+import core.windows.*
 
-val ODBC_PACKAGE = "org.lwjgl.odbc"
-
-val ODBC_BINDING = simpleBinding("odbc", "Configuration.ODBC_LIBRARY_NAME, \"odbc32\", \"odbc\"", callingConvention = CallingConvention.STDCALL)
+val ODBC_BINDING = simpleBinding(
+    Module.ODBC,
+    libraryExpression = "Configuration.ODBC_LIBRARY_NAME, \"odbc32\", \"odbc\"",
+    callingConvention = CallingConvention.STDCALL
+)
 val ODBC_BINDING_DELEGATE = ODBC_BINDING.delegate("SQL.getLibrary()")
 
 fun config() {
     packageInfo(
-        ODBC_PACKAGE,
+        Module.ODBC,
         """
         Contains bindings to ${url("https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc", "ODBC")}.
 
@@ -76,19 +78,19 @@ val RETCODE_p = RETCODE.p
 
 // sqltypes.h structs
 
-val SQL_DATE_STRUCT = struct(ODBC_PACKAGE, "SQL_DATE_STRUCT") {
+val SQL_DATE_STRUCT = struct(Module.ODBC, "SQL_DATE_STRUCT") {
     SQLSMALLINT.member("year", "")
     SQLUSMALLINT.member("month", "")
     SQLUSMALLINT.member("day", "")
 }
 
-val SQL_TIME_STRUCT = struct(ODBC_PACKAGE, "SQL_TIME_STRUCT") {
+val SQL_TIME_STRUCT = struct(Module.ODBC, "SQL_TIME_STRUCT") {
     SQLUSMALLINT.member("hour", "")
     SQLUSMALLINT.member("minute", "")
     SQLUSMALLINT.member("second", "")
 }
 
-val SQL_TIMESTAMP_STRUCT = struct(ODBC_PACKAGE, "SQL_TIMESTAMP_STRUCT") {
+val SQL_TIMESTAMP_STRUCT = struct(Module.ODBC, "SQL_TIMESTAMP_STRUCT") {
     SQLSMALLINT.member("year", "")
     SQLUSMALLINT.member("month", "")
     SQLUSMALLINT.member("day", "")
@@ -98,12 +100,12 @@ val SQL_TIMESTAMP_STRUCT = struct(ODBC_PACKAGE, "SQL_TIMESTAMP_STRUCT") {
     SQLUINTEGER.member("fraction", "")
 }
 
-val SQL_YEAR_MONTH_STRUCT = struct(ODBC_PACKAGE, "SQL_YEAR_MONTH_STRUCT") {
+val SQL_YEAR_MONTH_STRUCT = struct(Module.ODBC, "SQL_YEAR_MONTH_STRUCT") {
     SQLUINTEGER.member("year", "")
     SQLUINTEGER.member("month", "")
 }
 
-val SQL_DAY_SECOND_STRUCT = struct(ODBC_PACKAGE, "SQL_DAY_SECOND_STRUCT") {
+val SQL_DAY_SECOND_STRUCT = struct(Module.ODBC, "SQL_DAY_SECOND_STRUCT") {
     SQLUINTEGER.member("day", "")
     SQLUINTEGER.member("hour", "")
     SQLUINTEGER.member("minute", "")
@@ -112,7 +114,7 @@ val SQL_DAY_SECOND_STRUCT = struct(ODBC_PACKAGE, "SQL_DAY_SECOND_STRUCT") {
 }
 
 val SQLINTERVAL = typedef(int, "SQLINTERVAL")
-val SQL_INTERVAL_STRUCT = struct(ODBC_PACKAGE, "SQL_INTERVAL_STRUCT") {
+val SQL_INTERVAL_STRUCT = struct(Module.ODBC, "SQL_INTERVAL_STRUCT") {
     SQLINTERVAL.member("interval_type", "")
     SQLSMALLINT.member("interval_sign", "")
     struct("intval", "") {
@@ -121,7 +123,7 @@ val SQL_INTERVAL_STRUCT = struct(ODBC_PACKAGE, "SQL_INTERVAL_STRUCT") {
     }
 }
 
-val SQL_NUMERIC_STRUCT = struct(ODBC_PACKAGE, "SQL_NUMERIC_STRUCT") {
+val SQL_NUMERIC_STRUCT = struct(Module.ODBC, "SQL_NUMERIC_STRUCT") {
     SQLCHAR.member("precision", "")
     SQLSCHAR.member("scale", "")
     SQLCHAR.member("sign", "")
@@ -130,29 +132,29 @@ val SQL_NUMERIC_STRUCT = struct(ODBC_PACKAGE, "SQL_NUMERIC_STRUCT") {
 
 // sqlncli.h structs
 
-val DBMONEY = struct(ODBC_PACKAGE, "DBMONEY") {
+val DBMONEY = struct(Module.ODBC, "DBMONEY") {
     LONG.member("mnyhigh", "")
     ULONG.member("mnylow", "")
 }
 
-val DBDATETIME = struct(ODBC_PACKAGE, "DBDATETIME") {
+val DBDATETIME = struct(Module.ODBC, "DBDATETIME") {
     LONG.member("dtdays", "")
     ULONG.member("dttime", "")
 }
 
-val DBDATETIM4 = struct(ODBC_PACKAGE, "DBDATETIM4") {
+val DBDATETIM4 = struct(Module.ODBC, "DBDATETIM4") {
     USHORT.member("numdays", "")
     USHORT.member("nummins", "")
 }
 
-val SQL_SS_TIME2_STRUCT = struct(ODBC_PACKAGE, "SQL_SS_TIME2_STRUCT") {
+val SQL_SS_TIME2_STRUCT = struct(Module.ODBC, "SQL_SS_TIME2_STRUCT") {
     SQLUSMALLINT.member("hour", "")
     SQLUSMALLINT.member("minute", "")
     SQLUSMALLINT.member("second", "")
     SQLUINTEGER.member("fraction", "")
 }
 
-val SQL_SS_TIMESTAMPOFFSET_STRUCT = struct(ODBC_PACKAGE, "SQL_SS_TIMESTAMPOFFSET_STRUCT") {
+val SQL_SS_TIMESTAMPOFFSET_STRUCT = struct(Module.ODBC, "SQL_SS_TIMESTAMPOFFSET_STRUCT") {
     SQLSMALLINT.member("year", "")
     SQLUSMALLINT.member("month", "")
     SQLUSMALLINT.member("day", "")
@@ -164,7 +166,7 @@ val SQL_SS_TIMESTAMPOFFSET_STRUCT = struct(ODBC_PACKAGE, "SQL_SS_TIMESTAMPOFFSET
     SQLSMALLINT.member("timezone_minute", "")
 }
 
-val SQLPERF = struct(ODBC_PACKAGE, "SQLPERF") {
+val SQLPERF = struct(Module.ODBC, "SQLPERF") {
     // Application Profile Statistics
     DWORD.member("TimerResolution", "")
     DWORD.member("SQLidu", "")

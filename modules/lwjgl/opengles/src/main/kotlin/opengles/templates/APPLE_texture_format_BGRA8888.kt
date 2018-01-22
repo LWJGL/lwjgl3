@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val APPLE_texture_format_BGRA8888 = "APPLETextureFormatBGRA8888".nativeClassGLES("APPLE_texture_format_BGRA8888", postfix = APPLE) {
     documentation =

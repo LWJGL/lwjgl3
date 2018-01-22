@@ -34,7 +34,7 @@ internal open class AutoSizeTransform(
     val relaxedCast: Boolean,
     val applyFactor: Boolean = true
 ) : FunctionTransform<Parameter> {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String): String {
         var expression = if (bufferParam.nativeType is ArrayType) {
             if (bufferParam has nullable)
@@ -107,7 +107,7 @@ private class AutoSizeBytesTransform(
 }
 
 internal open class AutoSizeCharSequenceTransform(private val bufferParam: Parameter) : FunctionTransform<Parameter> {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String): String {
         var expression = if (bufferParam has nullable)
             "remainingSafe(${bufferParam.name}Encoded)"
@@ -129,7 +129,7 @@ internal open class AutoSizeCharSequenceTransform(private val bufferParam: Param
 }
 
 internal class AutoTypeParamTransform(private val autoType: String) : FunctionTransform<Parameter> {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type
 }
 
@@ -203,12 +203,12 @@ internal class PrimitiveValueReturnTransform(
 }
 
 internal object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
 }
 
 internal object Expression1Transform : FunctionTransform<Parameter> {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "1" // Replace with 1
 }
 
@@ -262,13 +262,13 @@ internal class MapPointerExplicitTransform(val lengthParam: String, val addParam
 }
 
 internal val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) = writer.println("$t$t${t}IntBuffer ${qtype.name} = stack.ints(0);")
 }
 
 internal class StringAutoSizeTransform(private val autoSizeParam: Parameter) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
     override fun generate(qtype: Parameter, code: Code): Code {
         val len = "${if (4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name}"
@@ -280,7 +280,7 @@ internal class StringAutoSizeTransform(private val autoSizeParam: Parameter) : F
 }
 
 internal class StringAutoSizeStackTransform(private val autoSizeParam: Parameter) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
         val len = "${if (4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name}"
@@ -289,7 +289,7 @@ internal class StringAutoSizeStackTransform(private val autoSizeParam: Parameter
 }
 
 internal val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stuck buffer
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
         writer.println("$t$t${t}PointerBuffer ${qtype.name} = stack.pointers(NULL);")
@@ -406,7 +406,7 @@ internal class PointerArrayLengthsTransform(
     private val arrayParam: Parameter,
     val multi: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-    override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+    override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String) = // Replace with stack address - length(s) offset
         if (multi)
             "${arrayParam.name}$POINTER_POSTFIX - (${arrayParam.name}.length << ${if (param.nativeType.mapping == PointerMapping.DATA_INT) "2" else "POINTER_SHIFT"})"

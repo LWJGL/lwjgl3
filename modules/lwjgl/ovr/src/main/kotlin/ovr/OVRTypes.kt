@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.ovr
+package ovr
 
 import org.lwjgl.generator.*
 
@@ -22,8 +22,7 @@ fun GeneratorTargetNative.includeOVRCAPI_VK() = nativeDirective(
 #include "OVR_CAPI_Vk.h"
 ENABLE_WARNINGS()""")
 
-val OVR_PACKAGE = "org.lwjgl.ovr"
-val OVR_LIBRARY = "LibOVR.initialize();"
+const val OVR_LIBRARY = "LibOVR.initialize();"
 
 val long_long = IntegerType("long long", PrimitiveMapping.LONG)
 
@@ -43,7 +42,7 @@ val ovrExtensions = "ovrExtensions".enumType
 val ovrProcessId = typedef(int32_t, "ovrProcessId")
 
 val ovrLogCallback = "ovrLogCallback".callback(
-    OVR_PACKAGE, void, "OVRLogCallback",
+    Module.OVR, void, "OVRLogCallback",
     "The logging callback.",
     uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
     int.IN("level", "one of the {@code ovrLogLevel} constants"),
@@ -66,7 +65,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
     """
 }
 
-val ovrErrorInfo_p = struct(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
+val ovrErrorInfo_p = struct(Module.OVR, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
     documentation = "Provides information about the last error."
 
     ovrResult.member("Result", "the result from the last API call that generated an error {@code ovrResult}")
@@ -77,7 +76,7 @@ val ovrErrorInfo_p = struct(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErrorI
     )
 }.p
 
-val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
+val ovrSessionStatus_p = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
     documentation = "Specifies status information for the current session."
 
     ovrBool.member("IsVisible", "True if the process has VR focus and thus is visible in the HMD.")
@@ -105,7 +104,7 @@ val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "o
     )
 }.p
 
-val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
+val ovrInitParams_p = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitParams") {
     documentation = "Parameters for #Initialize()."
 
     uint32_t.member("Flags", "flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults.")
@@ -138,7 +137,7 @@ val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInit
     padding(4, condition = "Pointer.BITS64")
 }.p
 
-val ovrColorf = struct(OVR_PACKAGE, "OVRColorf", nativeName = "ovrColorf") {
+val ovrColorf = struct(Module.OVR, "OVRColorf", nativeName = "ovrColorf") {
     documentation = "An RGBA color with normalized float components."
 
     float.member("r", "the R component")
@@ -147,28 +146,28 @@ val ovrColorf = struct(OVR_PACKAGE, "OVRColorf", nativeName = "ovrColorf") {
     float.member("a", "the A component")
 }
 
-val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", nativeName = "ovrVector2i") {
+val ovrVector2i = struct(Module.OVR, "OVRVector2i", nativeName = "ovrVector2i") {
     documentation = "A 2D vector with integer components."
 
     int.member("x", "the vector x component")
     int.member("y", "the vector y component")
 }
 
-val ovrSizei = struct(OVR_PACKAGE, "OVRSizei", nativeName = "ovrSizei") {
+val ovrSizei = struct(Module.OVR, "OVRSizei", nativeName = "ovrSizei") {
     documentation = "A 2D size with integer components."
 
     int.member("w", "the width")
     int.member("h", "the height")
 }
 
-val ovrRecti = struct(OVR_PACKAGE, "OVRRecti", nativeName = "ovrRecti") {
+val ovrRecti = struct(Module.OVR, "OVRRecti", nativeName = "ovrRecti") {
     documentation = "A 2D rectangle with a position and size. All components are integers."
 
     ovrVector2i.member("Pos", "the rectangle position")
     ovrSizei.member("Size", "the rectangle size")
 }
 
-val ovrQuatf = struct(OVR_PACKAGE, "OVRQuatf", nativeName = "ovrQuatf") {
+val ovrQuatf = struct(Module.OVR, "OVRQuatf", nativeName = "ovrQuatf") {
     documentation = "A quaternion rotation."
 
     float.member("x", "the vector x component")
@@ -177,14 +176,14 @@ val ovrQuatf = struct(OVR_PACKAGE, "OVRQuatf", nativeName = "ovrQuatf") {
     float.member("w", "the vector w component")
 }
 
-val ovrVector2f = struct(OVR_PACKAGE, "OVRVector2f", nativeName = "ovrVector2f") {
+val ovrVector2f = struct(Module.OVR, "OVRVector2f", nativeName = "ovrVector2f") {
     documentation = "A 2D vector with float components."
 
     float.member("x", "the vector x component")
     float.member("y", "the vector y component")
 }
 
-val ovrVector3f = struct(OVR_PACKAGE, "OVRVector3f", nativeName = "ovrVector3f") {
+val ovrVector3f = struct(Module.OVR, "OVRVector3f", nativeName = "ovrVector3f") {
     documentation = "A 3D vector with float components."
 
     float.member("x", "the vector x component")
@@ -193,13 +192,13 @@ val ovrVector3f = struct(OVR_PACKAGE, "OVRVector3f", nativeName = "ovrVector3f")
 }
 val ovrVector3f_p = ovrVector3f.p
 
-val ovrMatrix4f = struct(OVR_PACKAGE, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
+val ovrMatrix4f = struct(Module.OVR, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
     documentation = "A 4x4 matrix with float components."
 
     float.array("M", "the matrix components", 16)
 }
 
-val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", nativeName = "ovrPosef") {
+val ovrPosef = struct(Module.OVR, "OVRPosef", nativeName = "ovrPosef") {
     documentation = "Position and orientation together."
 
     ovrQuatf.member("Orientation", "the pose orientation")
@@ -207,7 +206,7 @@ val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", nativeName = "ovrPosef") {
 }
 val ovrPosef_p = ovrPosef.p
 
-val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseStatef", mutable = false) {
+val ovrPoseStatef = struct(Module.OVR, "OVRPoseStatef", nativeName = "ovrPoseStatef", mutable = false) {
     documentation =
         """
         A full pose (rigid body) configuration with first and second derivatives.
@@ -225,7 +224,7 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
     double.member("TimeInSeconds", "absolute time that this pose refers to. See #GetTimeInSeconds()")
 }
 
-val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
+val ovrFovPort = struct(Module.OVR, "OVRFovPort", nativeName = "ovrFovPort") {
     documentation =
         """
         Field Of View (FOV) in tangent of the angle units. As an example, for a standard 90 degree vertical FOV, we would have:
@@ -240,7 +239,7 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 
 val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
 
-val ovrGraphicsLuid = struct(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
+val ovrGraphicsLuid = struct(Module.OVR, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
     documentation =
         """
         Identifies a graphics device in a platform-specific way.
@@ -251,7 +250,7 @@ val ovrGraphicsLuid = struct(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGr
     char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
 }
 
-val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
+val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation = "A complete descriptor of the HMD."
 
@@ -278,7 +277,7 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
     padding(4, "Pointer.BITS64")
 }
 
-val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrackerDesc", mutable = false) {
+val ovrTrackerDesc = struct(Module.OVR, "OVRTrackerDesc", nativeName = "ovrTrackerDesc", mutable = false) {
     documentation = "Specifies the description of a single sensor."
 
     float.member("FrustumHFovInRadians", "sensor frustum horizontal field-of-view (if present).")
@@ -287,7 +286,7 @@ val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrac
     float.member("FrustumFarZInMeters", "sensor frustum far Z (if present).")
 }
 
-val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrackerPose", mutable = false) {
+val ovrTrackerPose = struct(Module.OVR, "OVRTrackerPose", nativeName = "ovrTrackerPose", mutable = false) {
     documentation = "Specifies the pose for a single sensor."
 
     unsigned_int.member("TrackerFlags", "{@code ovrTrackerFlags}.")
@@ -302,7 +301,7 @@ val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrac
     padding(4)
 }
 
-val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
+val ovrTrackingState = struct(Module.OVR, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
     documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by #GetTrackingState()."
 
     ovrPoseStatef.member(
@@ -343,7 +342,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
         """)
 }
 
-val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovrEyeRenderDesc", mutable = false) {
+val ovrEyeRenderDesc = struct(Module.OVR, "OVREyeRenderDesc", nativeName = "ovrEyeRenderDesc", mutable = false) {
     documentation =
         """
         rendering information for each eye. Computed by either #GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not
@@ -357,7 +356,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
     ovrPosef.member("HmdToEyePose", "transform of eye from the HMD center, in meters")
 }
 
-val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc", mutable = false) {
+val ovrTimewarpProjectionDesc = struct(Module.OVR, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc", mutable = false) {
     documentation =
         """
         Projection information for ##OVRLayerEyeFovDepth.
@@ -370,7 +369,7 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
     float.member("Projection32", "projection matrix element [3][2]")
 }
 
-val ovrViewScaleDesc_p = struct(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
+val ovrViewScaleDesc_p = struct(Module.OVR, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation =
         """
@@ -394,7 +393,7 @@ val ovrViewScaleDesc_p = struct(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "o
 val ovrTextureType = "ovrTextureType".enumType
 val ovrTextureFormat = "ovrTextureFormat".enumType
 
-val ovrTextureSwapChainDesc_p = struct(OVR_PACKAGE, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
+val ovrTextureSwapChainDesc_p = struct(Module.OVR, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
     documentation = "Description used to create a texture swap chain."
 
     ovrTextureType.member("Type", "Must not be {@code ovrTexture_Window}").links("Texture_\\w+")
@@ -409,7 +408,7 @@ val ovrTextureSwapChainDesc_p = struct(OVR_PACKAGE, "OVRTextureSwapChainDesc", n
     unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.").links("TextureBind_\\w+", LinkMode.BITFIELD)
 }.p
 
-val ovrMirrorTextureDesc_p = struct(OVR_PACKAGE, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
+val ovrMirrorTextureDesc_p = struct(Module.OVR, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
     documentation = "Description used to create a mirror texture."
 
     ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
@@ -424,7 +423,7 @@ val ovrTextureSwapChain_p = ovrTextureSwapChain.p
 val ovrMirrorTexture = "ovrMirrorTexture".opaque_p
 val ovrMirrorTexture_p = ovrMirrorTexture.p
 
-val ovrTouchHapticsDesc = struct(OVR_PACKAGE, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
+val ovrTouchHapticsDesc = struct(Module.OVR, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
     documentation = "Describes the Touch Haptics engine."
 
     int.member("SampleRateHz", "Haptics engine frequency/sample-rate, sample time in seconds equals {@code 1.0/sampleRateHz}")
@@ -442,7 +441,7 @@ val ovrTouchHapticsDesc = struct(OVR_PACKAGE, "OVRTouchHapticsDesc", nativeName 
 
 val ovrHapticsBufferSubmitMode = "ovrHapticsBufferSubmitMode".enumType
 
-val ovrHapticsBuffer_p = struct(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
+val ovrHapticsBuffer_p = struct(Module.OVR, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
     documentation = "Haptics buffer descriptor, contains amplitude samples used for Touch vibration."
 
     void_p.member("Samples", "samples stored in opaque format")
@@ -450,7 +449,7 @@ val ovrHapticsBuffer_p = struct(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "o
     ovrHapticsBufferSubmitMode.member("SubmitMode", "how samples are submitted to the hardware").links("HapticsBufferSubmit_\\w+")
 }.p
 
-val ovrHapticsPlaybackState_p = struct(OVR_PACKAGE, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
+val ovrHapticsPlaybackState_p = struct(Module.OVR, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
     documentation = "State of the Haptics playback for Touch vibration."
 
     int.member("RemainingQueueSpace", "Remaining space available to queue more samples")
@@ -462,13 +461,13 @@ val ovrControllerType = "ovrControllerType".enumType
 val ovrTrackedDeviceType = "ovrTrackedDeviceType".enumType
 val ovrBoundaryType = "ovrBoundaryType".enumType
 
-val ovrBoundaryLookAndFeel_p = struct(OVR_PACKAGE, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
+val ovrBoundaryLookAndFeel_p = struct(Module.OVR, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
     documentation = "Boundary system look and feel."
 
     ovrColorf.member("Color", "Boundary color (alpha channel is ignored)")
 }.p
 
-val ovrBoundaryTestResult_p = struct(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
+val ovrBoundaryTestResult_p = struct(Module.OVR, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
     documentation = "Provides boundary test information."
 
     ovrBool.member(
@@ -480,7 +479,7 @@ val ovrBoundaryTestResult_p = struct(OVR_PACKAGE, "OVRBoundaryTestResult", nativ
     ovrVector3f.member("ClosestPointNormal", "Unit surface normal of the closest boundary surface")
 }.p
 
-val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
+val ovrInputState_p = struct(Module.OVR, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
     javaImport("static org.lwjgl.ovr.OVR.ovrHand_Count")
     documentation =
         """
@@ -543,7 +542,7 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
     )
 }.p
 
-val ovrCameraIntrinsics = struct(OVR_PACKAGE, "OVRCameraIntrinsics", nativeName = "ovrCameraIntrinsics") {
+val ovrCameraIntrinsics = struct(Module.OVR, "OVRCameraIntrinsics", nativeName = "ovrCameraIntrinsics") {
     double.member("LastChangedTime", "time in seconds from last change to the parameters")
     ovrFovPort.member("FOVPort", "angles of all 4 sides of viewport")
     float.member("VirtualNearPlaneDistanceMeters", "near plane of the virtual camera used to match the external camera")
@@ -554,7 +553,7 @@ val ovrCameraIntrinsics = struct(OVR_PACKAGE, "OVRCameraIntrinsics", nativeName 
     double.member("ExposureDurationSeconds", "length of the exposure time")
 }
 
-val ovrCameraExtrinsics = struct(OVR_PACKAGE, "OVRCameraExtrinsics", nativeName = "ovrCameraExtrinsics") {
+val ovrCameraExtrinsics = struct(Module.OVR, "OVRCameraExtrinsics", nativeName = "ovrCameraExtrinsics") {
     double.member(
         "LastChangedTimeSeconds",
         "time in seconds from last change to the parameters. For instance, if the pose changes, or a camera exposure happens, this struct will be updated."
@@ -580,13 +579,13 @@ val ovrCameraExtrinsics = struct(OVR_PACKAGE, "OVRCameraExtrinsics", nativeName 
 }
 
 val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
-val ovrExternalCamera_p = struct(OVR_PACKAGE, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
+val ovrExternalCamera_p = struct(Module.OVR, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
     charASCII.array("Name", "camera identifier: vid + pid + serial number etc.", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
     ovrCameraIntrinsics.member("Intrinsics", "")
     ovrCameraExtrinsics.member("Extrinsics", "")
 }.p
 
-val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
+val ovrLayerHeader = struct(Module.OVR, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
     documentation =
         """
         Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov.
@@ -599,7 +598,7 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLaye
     unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
 }
 
-val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLayerEyeFov") {
+val ovrLayerEyeFov = struct(Module.OVR, "OVRLayerEyeFov", nativeName = "ovrLayerEyeFov") {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation =
         """
@@ -638,7 +637,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
     )
 }
 
-val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName = "ovrLayerEyeFovDepth") {
+val ovrLayerEyeFovDepth = struct(Module.OVR, "OVRLayerEyeFovDepth", nativeName = "ovrLayerEyeFovDepth") {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation =
         """
@@ -699,7 +698,7 @@ val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName 
     ovrTimewarpProjectionDesc.member("ProjectionDesc", "specifies how to convert {@code DepthTexture} information into meters")
 }
 
-val ovrTextureLayoutOctilinear = struct(OVR_PACKAGE, "OVRTextureLayoutOctilinear", nativeName = "ovrTextureLayoutOctilinear") {
+val ovrTextureLayoutOctilinear = struct(Module.OVR, "OVRTextureLayoutOctilinear", nativeName = "ovrTextureLayoutOctilinear") {
     documentation = 
         """
         Multiresolution descriptor for Octilinear.
@@ -756,7 +755,7 @@ and the scissor rectangle for quadrant 1 will be:
     float.member("SizeDown", "down W quadrant size")
 }
 
-val ovrTextureLayoutDesc_Union = union(OVR_PACKAGE, "OVRTextureLayoutDescUnion", nativeName = "ovrTextureLayoutDesc_Union") {
+val ovrTextureLayoutDesc_Union = union(Module.OVR, "OVRTextureLayoutDescUnion", nativeName = "ovrTextureLayoutDesc_Union") {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation = "Combines texture layout descriptors."
 
@@ -765,7 +764,7 @@ val ovrTextureLayoutDesc_Union = union(OVR_PACKAGE, "OVRTextureLayoutDescUnion",
 
 val ovrTextureLayout = "ovrTextureLayout".enumType
 
-val ovrLayerEyeFovMultires = struct(OVR_PACKAGE, "OVRLayerEyeFovMultires", nativeName = "ovrLayerEyeFovMultires") {
+val ovrLayerEyeFovMultires = struct(Module.OVR, "OVRLayerEyeFovMultires", nativeName = "ovrLayerEyeFovMultires") {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation =
         """
@@ -824,7 +823,7 @@ val ovrLayerEyeFovMultires = struct(OVR_PACKAGE, "OVRLayerEyeFovMultires", nativ
     ovrTextureLayoutDesc_Union.member("TextureLayoutDesc", "specifies texture layout parameters")
 }
 
-val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
+val ovrLayerQuad = struct(Module.OVR, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
     documentation =
         """
         Describes a layer of Quad type, which is a single quad in world or viewer space. It is used for both #LayerType_Quad. This type of layer
@@ -853,7 +852,7 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
     ovrVector2f.member("QuadSize", "width and height (respectively) of the quad in meters")
 }
 
-val ovrLayerCylinder = struct(OVR_PACKAGE, "OVRLayerCylinder", nativeName = "ovrLayerCylinder") {
+val ovrLayerCylinder = struct(Module.OVR, "OVRLayerCylinder", nativeName = "ovrLayerCylinder") {
     documentation =
         """
         Describes a layer of type #LayerType_Cylinder which is a single cylinder relative to the recentered origin. This type of layer represents a single
@@ -908,7 +907,7 @@ val ovrLayerCylinder = struct(OVR_PACKAGE, "OVRLayerCylinder", nativeName = "ovr
     )
 }
 
-val ovrLayerCube = struct(OVR_PACKAGE, "OVRLayerCube", nativeName = "ovrLayerCube") {
+val ovrLayerCube = struct(Module.OVR, "OVRLayerCube", nativeName = "ovrLayerCube") {
     documentation =
         """
         Describes a layer of type #LayerType_Cube which is a single timewarped cubemap at infinity. When looking down the recentered origin's -Z axis, +X face
@@ -923,7 +922,7 @@ val ovrLayerCube = struct(OVR_PACKAGE, "OVRLayerCube", nativeName = "ovrLayerCub
     ovrTextureSwapChain.member("CubeMapTexture", "contains a single cubemap swapchain (not a stereo pair of swapchains)")
 }
 
-val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerCompositorFrame", nativeName = "ovrPerfStatsPerCompositorFrame", mutable = false) {
+val ovrPerfStatsPerCompositorFrame = struct(Module.OVR, "OVRPerfStatsPerCompositorFrame", nativeName = "ovrPerfStatsPerCompositorFrame", mutable = false) {
     documentation =
         """
         Contains the performance stats for a given SDK compositor frame.
@@ -1060,7 +1059,7 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
     int.member("AswFailedFrameCount", "Accumulates the number of frames that the compositor tried to present when ASW is active but failed")
 }
 
-val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
+val ovrPerfStats_p = struct(Module.OVR, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
     javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
 
     documentation = "This is a complete descriptor of the performance stats provided by the SDK."
@@ -1125,7 +1124,7 @@ val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfSt
 
 val ovrHapticsGenMode = "ovrHapticsGenMode".enumType
 
-val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDetectResult", mutable = false) {
+val ovrDetectResult = struct(Module.OVR, "OVRDetectResult", nativeName = "ovrDetectResult", mutable = false) {
     documentation = "Return values for #_Detect()."
 
     ovrBool.member(
@@ -1149,7 +1148,7 @@ val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDe
     padding(6)
 }
 
-val ovrAudioChannelData_p = struct(OVR_PACKAGE, "OVRAudioChannelData", nativeName = "ovrAudioChannelData", mutable = false) {
+val ovrAudioChannelData_p = struct(Module.OVR, "OVRAudioChannelData", nativeName = "ovrAudioChannelData", mutable = false) {
     documentation =
         """
         Store audio PCM data (as 32b float samples) for an audio channel.
@@ -1162,7 +1161,7 @@ val ovrAudioChannelData_p = struct(OVR_PACKAGE, "OVRAudioChannelData", nativeNam
     int.member("Frequency", "frequency (e.g. 44100)")
 }.p
 
-val ovrHapticsClip_p = struct(OVR_PACKAGE, "OVRHapticsClip", nativeName = "ovrHapticsClip", mutable = false) {
+val ovrHapticsClip_p = struct(Module.OVR, "OVRHapticsClip", nativeName = "ovrHapticsClip", mutable = false) {
     documentation = "Store a full Haptics clip, which can be used as data source for multiple ##OVRHapticsBuffer."
 
     const..void_p.member("Samples", "samples stored in opaque format")
@@ -1171,7 +1170,7 @@ val ovrHapticsClip_p = struct(OVR_PACKAGE, "OVRHapticsClip", nativeName = "ovrHa
 
 fun config() {
     packageInfo(
-        OVR_PACKAGE,
+        Module.OVR,
         """
         Contains bindings to LibOVR, the ${url("https://developer.oculus.com/", "Oculus SDK")} library.
 
@@ -1179,9 +1178,9 @@ fun config() {
         """
     )
 
-    Generator.registerLibraryInit(OVR_PACKAGE, "LibOVR", "ovr")
+    Generator.registerLibraryInit(Module.OVR, "LibOVR", "ovr")
 
-    struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
+    struct(Module.OVR, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
         javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
         documentation =
             """
@@ -1246,7 +1245,7 @@ TexV  = P.y/P.z""")}
         )
     }
 
-    union(OVR_PACKAGE, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
+    union(Module.OVR, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
         documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."
 
         ovrLayerHeader.member("Header", "the layer header")

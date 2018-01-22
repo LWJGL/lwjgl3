@@ -2,12 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.macosx.templates
+package core.macos.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.macosx.*
 
-val libSystem = "LibSystem".nativeClass(MACOSX_PACKAGE, binding = simpleBinding("System")) {
+val libSystem = "LibSystem".nativeClass(
+    Module.CORE_MACOS,
+    nativeSubPath = "macos",
+    binding = simpleBinding(Module.CORE_MACOS, "System")
+) {
     documentation =
         """
         Native bindings to libSystem, the MacOS system library.

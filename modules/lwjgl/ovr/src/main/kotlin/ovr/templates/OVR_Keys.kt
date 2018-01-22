@@ -2,12 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.ovr.templates
+package ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.*
 
-val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") {
+val OVR_Keys = "OVRKeys".nativeClass(Module.OVR, prefix = "OVR") {
     documentation = "Keys for libOVR's CAPI calls."
 
     StringConstant(

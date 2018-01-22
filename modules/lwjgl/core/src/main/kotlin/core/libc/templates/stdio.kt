@@ -2,12 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.libc.templates
+package core.libc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.libc.*
 
-val stdio = "LibCStdio".nativeClass(packageName = LIBC_PACKAGE) {
+val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     #define _CRT_SECURE_NO_WARNINGS

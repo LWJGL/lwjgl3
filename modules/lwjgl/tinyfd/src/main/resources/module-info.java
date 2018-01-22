@@ -4,7 +4,6 @@
  */
 module org.lwjgl.tinyfd {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.tinyfd.natives;
 
     exports org.lwjgl.util.tinyfd;
 }

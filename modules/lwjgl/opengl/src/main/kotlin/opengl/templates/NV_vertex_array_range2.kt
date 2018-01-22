@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val NV_vertex_array_range2 = "NVVertexArrayRange2".nativeClassGL("NV_vertex_array_range2", postfix = NV) {
     documentation =

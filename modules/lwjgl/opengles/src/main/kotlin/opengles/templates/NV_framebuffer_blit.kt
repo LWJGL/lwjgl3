@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val NV_framebuffer_blit = "NVFramebufferBlit".nativeClassGLES("NV_framebuffer_blit", postfix = NV) {
     documentation =

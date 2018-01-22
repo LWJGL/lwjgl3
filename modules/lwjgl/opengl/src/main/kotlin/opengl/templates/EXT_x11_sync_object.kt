@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val EXT_x11_sync_object = "EXTX11SyncObject".nativeClassGL("EXT_x11_sync_object", postfix = EXT) {
     documentation =

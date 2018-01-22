@@ -2,23 +2,22 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.nanovg
+package nanovg
 
 import org.lwjgl.generator.*
 
-val NANOVG_PACKAGE = "org.lwjgl.nanovg"
-val NANOVG_LIBRARY = "LibNanoVG.initialize();"
+const val NANOVG_LIBRARY = "LibNanoVG.initialize();"
 
 fun config() {
     packageInfo(
-        NANOVG_PACKAGE,
+        Module.NANOVG,
         """
         Contains bindings to ${url("https://github.com/memononen/nanovg", "NanoVG")}, a small antialiased vector graphics rendering library for OpenGL. It has
         lean API modeled after HTML5 canvas API. It is aimed to be a practical and fun toolset for building scalable user interfaces and visualizations.
         """
     )
 
-    Generator.registerLibraryInit(NANOVG_PACKAGE, "LibNanoVG", "nanovg", setupAllocator = true)
+    Generator.registerLibraryInit(Module.NANOVG, "LibNanoVG", "nanovg", setupAllocator = true)
 }
 
 fun GeneratorTargetNative.includeNanoVGAPI(directives: String) = nativeDirective(
@@ -28,7 +27,7 @@ ENABLE_WARNINGS()""")
 
 val NVGcontext_p = "NVGcontext".p
 
-val NVGcolor = struct(NANOVG_PACKAGE, "NVGColor", nativeName = "NVGcolor") {
+val NVGcolor = struct(Module.NANOVG, "NVGColor", nativeName = "NVGcolor") {
     documentation = "A NanoVG color."
 
     union {
@@ -42,7 +41,7 @@ val NVGcolor = struct(NANOVG_PACKAGE, "NVGColor", nativeName = "NVGcolor") {
     }
 }
 
-val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
+val NVGpaint = struct(Module.NANOVG, "NVGPaint", nativeName = "NVGpaint") {
     documentation = "A NanoVG paint."
 
     float.array("xform", "the transformation matrix", size = 6)
@@ -56,7 +55,7 @@ val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
 
 val charptr = "char".p // address, not data
 
-val NVGglyphPosition_p = struct(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
+val NVGglyphPosition_p = struct(Module.NANOVG, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
     documentation = "A glyph position."
 
     charptr.member("str", "position of the glyph in the input string")
@@ -65,7 +64,7 @@ val NVGglyphPosition_p = struct(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName =
     float.member("maxx", "the right bound of the glyph shape")
 }.p
 
-val NVGtextRow_p = struct(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
+val NVGtextRow_p = struct(Module.NANOVG, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
     documentation = "A text row."
 
     charptr.member("start", "pointer to the input text where the row starts")

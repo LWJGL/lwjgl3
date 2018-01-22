@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS_", library = STB_LIBRARY) {
+val stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS_", library = STB_LIBRARY) {
     includeSTBAPI(
         """#ifdef LWJGL_LINUX
     #include <alloca.h>

@@ -11,7 +11,7 @@
     #include "LinuxConfig.h"
 #endif
 #ifdef LWJGL_MACOS
-    #include "MacOSXConfig.h"
+    #include "macOSConfig.h"
 #endif
 
 #ifndef DISABLE_WARNINGS

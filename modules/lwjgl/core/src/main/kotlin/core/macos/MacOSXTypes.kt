@@ -2,16 +2,16 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.macosx
+package core.macos
 
 import org.lwjgl.generator.*
 
-val MACOSX_PACKAGE = "org.lwjgl.system.macosx"
+const val MACOS_PACKAGE = "org.lwjgl.system.macosx"
 
 fun config() {
     packageInfo(
-        MACOSX_PACKAGE,
-        "Contains bindings to native APIs specific to the Mac OS X operating system."
+        Module.CORE_MACOS,
+        "Contains bindings to native APIs specific to the macOS operating system."
     )
 }
 

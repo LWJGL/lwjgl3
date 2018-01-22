@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.xxhash.templates
+package xxhash.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.xxhash.*
+import xxhash.*
 
-val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
+val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     __pragma(warning(disable : 4710))

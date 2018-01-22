@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.nuklear.templates
+package nuklear.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.nuklear.*
+import nuklear.*
 
-val nuklear = "Nuklear".nativeClass(packageName = NUKLEAR_PACKAGE, prefix = "NK", prefixMethod = "nk_", library = "lwjgl_nuklear") {
+val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod = "nk_", library = "lwjgl_nuklear") {
     nativeDirective("""#ifdef LWJGL_LINUX
     #pragma GCC diagnostic ignored "-Wunused-function"
     #pragma GCC diagnostic ignored "-Wunused-but-set-variable"

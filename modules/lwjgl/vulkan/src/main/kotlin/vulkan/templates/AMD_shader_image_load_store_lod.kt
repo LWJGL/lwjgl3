@@ -3,10 +3,10 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-package org.lwjgl.vulkan.templates
+package vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.*
+import vulkan.*
 
 val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK("AMD_shader_image_load_store_lod", type = "device", postfix = AMD) {
     documentation =

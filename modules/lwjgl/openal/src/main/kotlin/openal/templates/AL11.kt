@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal.templates
+package openal.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openal.*
+import openal.*
 
 val AL11 = "AL11".nativeClassAL("AL11") {
     documentation = "Native bindings to AL 1.1 functionality."

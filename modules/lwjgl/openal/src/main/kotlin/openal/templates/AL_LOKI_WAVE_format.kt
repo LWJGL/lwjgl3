@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal.templates
+package openal.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openal.*
+import openal.*
 
 val AL_LOKI_WAVE_format = "LOKIWAVEFormat".nativeClassAL("LOKI_WAVE_format") {
     documentation = "Native bindings to the $extensionName extension."

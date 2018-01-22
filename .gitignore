@@ -1,7 +1,7 @@
 /.idea/workspace.xml
 /bin
-/modules/core/src/generated
-/libs
+/modules/lwjgl/*/src/generated/**
+/modules/lwjgl/.git
 /wiki
 .gradle
 .DS_Store

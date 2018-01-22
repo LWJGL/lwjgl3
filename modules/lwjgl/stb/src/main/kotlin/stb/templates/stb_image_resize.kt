@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, prefix = "STBIR", prefixMethod = "stbir_", library = STB_LIBRARY) {
+val stb_image_resize = "STBImageResize".nativeClass(Module.STB, prefix = "STBIR", prefixMethod = "stbir_", library = STB_LIBRARY) {
     includeSTBAPI(
         """#include "lwjgl_malloc.h"
 #define STBIR_MALLOC(size,c) org_lwjgl_malloc(size)

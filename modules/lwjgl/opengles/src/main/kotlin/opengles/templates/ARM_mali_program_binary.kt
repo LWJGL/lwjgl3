@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val ARM_mali_program_binary = "ARMMaliProgramBinary".nativeClassGLES("ARM_mali_program_binary", postfix = ARM) {
     documentation =

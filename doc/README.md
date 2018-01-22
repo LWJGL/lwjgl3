@@ -3,31 +3,43 @@ LWJGL is organized in modules, described below:
 
 ### Core
 The LWJGL core.
-* `modules/core/src/main/c`
-* `modules/core/src/main/java`
-* `modules/core/src/generated/c`
-* `modules/core/src/generated/java`
-* `modules/core/src/test/java` (unit tests and demo/tutorial code)
-* `modules/core/src/test/resources` (images and other resources used in tests)
+* `modules/lwjgl/core/src/main/c`
+* `modules/lwjgl/core/src/main/java`
+* `modules/lwjgl/core/src/main/java9` (multi-release)
+* `modules/lwjgl/core/src/main/kotlin` (native binding templates)
+* `modules/lwjgl/core/src/generated/c`
+* `modules/lwjgl/core/src/generated/java`
+* `modules/lwjgl/core/src/test`
 
-Dependencies: n/a (but the Generator has to execute successfully first)
-Library Dependencies: n/a
-Test Library Dependencies: TestNG, JCommander
+Module dependencies: n/a (but the Generator has to execute successfully first)
+Compile dependencies: n/a
+Test dependencies: TestNG, JCommander
+
+### Bindings
+A module per LWJGL binding.
+* `modules/lwjgl/<binding>/src/main/c` (optional)
+* `modules/lwjgl/<binding>/src/main/java` (optional)
+* `modules/lwjgl/<binding>/src/main/kotlin`
+* `modules/lwjgl/<binding>/src/generated/c` (optional)
+* `modules/lwjgl/<binding>/src/generated/java`
+* `modules/lwjgl/<binding>/src/test` (optional)
+
+Module dependencies: the core module
+
+### Samples
+The LWJGL demo suite.
+* `modules/samples/src/test/java` (demo/tutorial code)
+* `modules/samples/src/test/resources` (images and other resources used in demos)
+
+Module dependencies: all core and binding modules
 
 ### Generator
 The source code Generator and related tools.
 * `modules/generator/src/main/java`
 * `modules/generator/src/main/kotlin`
 
-Dependencies: n/a
-Library Dependencies: Kotlin runtime, JDK tools
-
-### Templates
-The templates used to define the native bindings.
-* `modules/templates/src/main/kotlin`
-
-Dependencies: Generator module
-Library Dependencies: Kotlin runtime
+Module dependencies: n/a
+Compile dependencies: Kotlin runtime, JDK tools
 
 # INSTALLATION
 Requirements:
@@ -66,8 +78,8 @@ LWJGL uses Ant for the build process, which goes like so:
 LWJGL uses the **Generator** to automatically generate native code bindings. The Generator uses template files as input. Both the Generator itself and the template files are written in Kotlin, which is a new JVM-based language, more info [here](http://kotlinlang.org/). The Generator defines a handy DSL that the templates use to define the native code structure.
 
 * Generator source: `modules/generator/src/main/kotlin/org/lwjgl/generator`
-* Template configuration: `modules/templates/src/main/kotlin/org/lwjgl/<PACKAGE>`
-* Template source: `modules/templates/src/main/kotlin/org/lwjgl/<PACKAGE>/templates`
+* Template configuration: `modules/lwjgl/<module>/src/main/kotlin/<module>`
+* Template source: `modules/lwjgl/<module>/src/main/kotlin/<module>/templates`
 
 The Generator is very aggressive with skipping work during the generation process. It does that by comparing timestamps of the input template source and the output Java source files. The output file timestamp is also compared against the timestamp of the latest change in the Generator source. Even when all attemps to skip generation fail, the generation happens in-memory and the output file contents are compared against the new content. Only when something has changed is the file overwritten.
 
@@ -110,14 +122,14 @@ LWJGL can be configured at runtime with system properties. There are two types o
 * `DYNAMIC`
     These may be read once or more times, changing LWJGL's behavior dynamically.
 
-The supported options can be found in the [Configuration](https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/main/java/org/lwjgl/system/Configuration.java) class. This class can also be used to set the option values programmatically.
+The supported options can be found in the [Configuration](https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/core/src/main/java/org/lwjgl/system/Configuration.java) class. This class can also be used to set the option values programmatically.
 
 # LIBRARY DEPENDENCIES
 * Kotlin
-    - `libs/kotlinc`
+    - `bin/libs/kotlinc`
 * TestNG
-    - `libs/testng.jar`
-    - `libs/jcommander.jar`
+    - `bin/libs/java/testng.jar`
+    - `bin/libs/java/jcommander.jar`
 
 # CODE STYLE
 Tab-size: 4 spaces
@@ -134,31 +146,35 @@ Contributors are encouraged but not required to submit PRs using these guideline
 
 # ADDING A NEW BINDING
 
-Changes to several different places are required in order to add a new binding to LWJGL. These are listed below.
+When starting a new binding, it is recommended to copy the structure of an existing binding under `modules/lwjgl/`. LWJGL includes bindings with different styles of definition and configuration, depending on the nature of the library. Search for an existing binding that is similar to the new one.
+
+Besides adding the appropriate files under `modules/lwjgl/<binding>/`, a few other places must be editted to correctly support the new binding. These are listed below.
 
 In the `lwjgl3` repository:
 
 - `build.xml`
-    * `compile-templates`: add path to binding templates
-    * `-init-compile`: add binding package
-    * `compile-tests`: add demo & test packages (if applicable)
-    * `release`: add `release-module` definition for the binding
+    * `compile`: add `compileBinding` tag for the binding
+    * `compile-tests`: add demo packages (if applicable)
+    * `release`: add `release-module` tag for the binding
 - `config/build-bindings.xml`
     * Add `binding.<name>` property so that the binding can be conditionally enabled.
+    * Update the `forEachBinding` macro definition to include the binding.
 - `config/<platform>/build.xml`
-    * Add `build` definition to the applicable platforms. 
+    * Add `build` definition to the applicable platforms.
+- `config/tests.xml`
+    * Add test package for the binding. (if applicable)
 - `modules/generator/src/main/kotlin/org/lwjgl/generator/Generator.kt`
     * Add to the `Binding` enum.
-- `modules/module-info-gen/src/main/resources/`
-    * Add module definition for the binding.
 - `README.MD`
     * Add to the `List of Supported Bindings`.
-- `doc/3rdparty/`
-    * Add license file for the binding.
 - `doc/notes/<version>.md`
     * Add to the next version release notes.
 - `build.gradle`
     * Add to the `Artifacts` enum.
+- IDEA project (optional)
+    * `.idea/modules.xml`: add the Java and Kotlin modules
+    * The Java module should be stored at `.idea/modules/lwjgl`
+    * The Kotlin module should be stored at `.idea/modules/templates`
     
 In the `lwjgl3-www` repository:
 

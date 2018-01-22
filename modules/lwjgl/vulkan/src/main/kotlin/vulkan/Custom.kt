@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.vulkan
+package vulkan
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.templates.*
+import vulkan.templates.*
 
 fun templateCustomization() {
     PFN_vkDebugReportCallbackEXT.signature.apply {

@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.vulkan
+package vulkan
 
 import org.lwjgl.generator.*
 
-val VULKAN_PACKAGE = "org.lwjgl.vulkan"
-
 fun config() {
     packageInfo(
-        VULKAN_PACKAGE,
+        Module.VULKAN,
         """
         Contains bindings to ${url("https://www.khronos.org/vulkan/", "Vulkan")}, a new generation graphics and compute API that provides high-efficiency,
         cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.

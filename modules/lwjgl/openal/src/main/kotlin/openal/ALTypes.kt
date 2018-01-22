@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal
+package openal
 
 import org.lwjgl.generator.*
 
-val OPENAL_PACKAGE = "org.lwjgl.openal"
-
 fun config() {
     packageInfo(
-        OPENAL_PACKAGE,
+        Module.OPENAL,
         """
         Contains bindings to the ${url("http://www.openal.org/", "OpenAL")} cross-platform 3D audio API.
 

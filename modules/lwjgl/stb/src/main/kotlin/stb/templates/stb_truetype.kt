@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix = "STBTT", prefixMethod = "stbtt_", library = STB_LIBRARY) {
+val stb_truetype = "STBTruetype".nativeClass(Module.STB, prefix = "STBTT", prefixMethod = "stbtt_", library = STB_LIBRARY) {
     includeSTBAPI(
         """#include "lwjgl_malloc.h"
 #define STBTT_malloc(x,u)  ((void)(u),org_lwjgl_malloc(x))

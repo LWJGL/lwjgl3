@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val KHR_stream_producer_eglsurface = "KHRStreamProducerEGLSurface".nativeClassEGL("KHR_stream_producer_eglsurface", postfix = KHR) {

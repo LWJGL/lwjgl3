@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.glfw.templates
+package glfw.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.glfw.*
-import org.lwjgl.vulkan.*
+import glfw.*
+import vulkan.*
 
-val GLFWVulkan = "GLFWVulkan".dependsOn(Binding.VULKAN)?.nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
+val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport("org.lwjgl.vulkan.*")
 
     documentation =

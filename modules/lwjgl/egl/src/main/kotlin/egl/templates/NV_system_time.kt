@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 
 val NV_system_time = "NVSystemTime".nativeClassEGL("NV_system_time", postfix = NV) {
     documentation =

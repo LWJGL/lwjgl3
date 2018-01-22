@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.stb.templates
+package stb.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.stb.*
+import stb.*
 
-val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix = "STBRP", prefixMethod = "stbrp_", library = STB_LIBRARY) {
+val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", prefixMethod = "stbrp_", library = STB_LIBRARY) {
     includeSTBAPI(
         """#define STBRP_ASSERT
 #define STB_RECT_PACK_IMPLEMENTATION

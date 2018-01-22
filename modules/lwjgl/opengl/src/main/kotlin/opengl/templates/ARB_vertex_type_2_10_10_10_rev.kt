@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val ARB_vertex_type_2_10_10_10_rev = "ARBVertexType2_10_10_10_REV".nativeClassGL("ARB_vertex_type_2_10_10_10_rev") {
     documentation =

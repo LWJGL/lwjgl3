@@ -44,6 +44,7 @@
 
     <target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
         <mkdir dir="${lib}"/>
+        <mkdir dir="${lib}/java"/>
         <antcall target="-lib-download"/>
         <antcall target="-kotlinc-download"/>
     </target>
@@ -68,18 +69,17 @@
 
     <!-- Downloads the Java dependencies. -->
     <target name="-lib-download" unless="lib-uptodate">
-        <update-mvn name="findbugs" group="com/google/code/findbugs" artifact="jsr305" version="${findbugs}" dest="${lib}"/>
-        <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}" sources="false"/>
-        <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
-        <update-mvn name="JOML" group="org/joml" artifact="joml" version="${joml}" dest="${lib}"/>
+        <update-mvn name="findbugs" group="com/google/code/findbugs" artifact="jsr305" version="${findbugs}"/>
+        <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" sources="false"/>
+        <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}"/>
+        <update-mvn name="JOML" group="org/joml" artifact="joml" version="${joml}"/>
 
         <touch file="${lib}/touch.txt" verbose="false"/>
     </target>
 
     <target name="clean" description="Deletes LWJGL dependencies">
         <delete taskname="kotlinc" dir="${lib}/kotlinc"/>
-        <delete taskname="JCommander" file="${lib}/jcommander.jar"/>
-        <delete taskname="TestNG" file="${lib}/testng.jar"/>
+        <delete taskname="Java dependencies" dir="${lib}/java"/>
     </target>
 
 </project>

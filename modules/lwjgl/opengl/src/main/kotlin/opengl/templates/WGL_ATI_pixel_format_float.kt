@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val WGL_ATI_pixel_format_float = "WGLATIPixelFormatFloat".nativeClassWGL("WGL_ATI_pixel_format_float", postfix = ATI) {
     documentation =

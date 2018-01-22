@@ -2,16 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.jawt
+package jawt
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.jni.*
-import org.lwjgl.system.linux.*
-import org.lwjgl.system.windows.*
+import core.jni.*
+import core.linux.*
+import core.windows.*
 
-val JAWT_PACKAGE = "org.lwjgl.system.jawt"
-
-val JAWT_Rectangle = struct(JAWT_PACKAGE, "JAWTRectangle", nativeName = "JAWT_Rectangle") {
+val JAWT_Rectangle = struct(Module.JAWT, "JAWTRectangle", nativeName = "JAWT_Rectangle") {
     documentation = "Structure for a native rectangle."
 
     jint.member("x", "the rectangle X axis coordinate")
@@ -21,7 +19,7 @@ val JAWT_Rectangle = struct(JAWT_PACKAGE, "JAWTRectangle", nativeName = "JAWT_Re
 }
 val JAWT_Rectangle_p = JAWT_Rectangle.p
 
-val JAWT_DrawingSurface_p = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
+val JAWT_DrawingSurface_p = struct(Module.JAWT, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
     documentation =
         """
         Structure for containing the underlying drawing information of a component.
@@ -45,7 +43,7 @@ val JAWT_DrawingSurface_p = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeNam
     opaque_p.member("Unlock", "")
 }.p
 
-val JAWT_DrawingSurfaceInfo_p = struct(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
+val JAWT_DrawingSurfaceInfo_p = struct(Module.JAWT, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
     opaque_p.member(
         "platformInfo",
         """
@@ -60,7 +58,7 @@ val JAWT_DrawingSurfaceInfo_p = struct(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo", n
     JAWT_Rectangle_p.buffer("clip", "Clip rectangle array.")
 }.p
 
-val JAWT_p = struct(JAWT_PACKAGE, "JAWT") {
+val JAWT_p = struct(Module.JAWT, "JAWT") {
     documentation = "Structure for containing native AWT functions."
 
     jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()")
@@ -79,11 +77,11 @@ val Frame = java.awt.Frame::class.jobject
 
 fun config() {
     packageInfo(
-        JAWT_PACKAGE,
+        Module.JAWT,
         "Contains bindings to the AWT native interface (jawt.h)."
     )
 
-    struct(JAWT_PACKAGE, "JAWTX11DrawingSurfaceInfo", nativeName = "JAWT_X11DrawingSurfaceInfo", mutable = false) {
+    struct(Module.JAWT, "JAWTX11DrawingSurfaceInfo", nativeName = "JAWT_X11DrawingSurfaceInfo", mutable = false) {
         documentation = "X11-specific declarations for AWT native interface."
 
         Drawable.member("drawable", "the drawable")
@@ -93,7 +91,7 @@ fun config() {
         int.member("depth", "the depth")
     }
 
-    struct(JAWT_PACKAGE, "JAWTWin32DrawingSurfaceInfo", nativeName = "JAWT_Win32DrawingSurfaceInfo", mutable = false) {
+    struct(Module.JAWT, "JAWTWin32DrawingSurfaceInfo", nativeName = "JAWT_Win32DrawingSurfaceInfo", mutable = false) {
         javaImport("org.lwjgl.system.windows.User32")
 
         documentation = "Win32-specific declarations for AWT native interface."

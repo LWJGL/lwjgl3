@@ -2,15 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl
+package opengl
 
 import org.lwjgl.generator.*
 import java.io.*
 
-private val CAPABILITIES_CLASS = "GLXCapabilities"
+private const val CAPABILITIES_CLASS = "GLXCapabilities"
 
 val GLXBinding = Generator.register(object : APIBinding(
-    OPENGL_PACKAGE,
+    Module.OPENGL,
     CAPABILITIES_CLASS,
     APICapabilities.JAVA_CAPABILITIES
 ) {
@@ -68,7 +68,7 @@ val GLXBinding = Generator.register(object : APIBinding(
         for (extension in classes) {
             val capName = extension.capName
             print(if (extension.hasNativeFunctions)
-                "\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this));"
+                "\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this));"
             else
                 "\n$t$t$capName = ext.contains(\"$capName\");"
             )
@@ -91,7 +91,7 @@ val GLXBinding = Generator.register(object : APIBinding(
 })
 
 fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) = nativeClass(
-    OPENGL_PACKAGE,
+    Module.OPENGL,
     templateName,
     prefix = "GLX",
     prefixMethod = "glX",

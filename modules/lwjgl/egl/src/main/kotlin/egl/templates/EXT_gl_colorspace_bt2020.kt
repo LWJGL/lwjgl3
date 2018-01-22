@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val EXT_gl_colorspace_bt2020_linear = "EXTGLColorspaceBT2020Linear".nativeClassEGL("EXT_gl_colorspace_bt2020_linear", postfix = EXT) {

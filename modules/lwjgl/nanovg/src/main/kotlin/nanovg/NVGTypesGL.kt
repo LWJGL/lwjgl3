@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.nanovg
+package nanovg
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
-val NVGLUframebuffer_p = struct(NANOVG_PACKAGE, "NVGLUFramebuffer", nativeName = "NVGLUframebuffer", mutable = false) {
+val NVGLUframebuffer_p = struct(Module.NANOVG, "NVGLUFramebuffer", nativeName = "NVGLUframebuffer", mutable = false) {
     documentation = "A framebuffer object."
 
     GLuint.member("fbo", "the OpenGL framebuffer object handle")

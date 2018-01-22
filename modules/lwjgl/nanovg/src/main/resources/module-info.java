@@ -4,7 +4,6 @@
  */
 module org.lwjgl.nanovg {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.nanovg.natives;
 
     exports org.lwjgl.nanovg;
 }

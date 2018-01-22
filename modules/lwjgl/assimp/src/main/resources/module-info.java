@@ -4,7 +4,6 @@
  */
 module org.lwjgl.assimp {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.assimp.natives;
 
     exports org.lwjgl.assimp;
 }

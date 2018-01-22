@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassGL("AMD_gpu_shader_half_float", postfix = AMD) {
     documentation =

@@ -2,12 +2,16 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.linux.templates
+package core.linux.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.linux.*
+import core.linux.*
 
-val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
+val X11 = "X11".nativeClass(
+    Module.CORE_LINUX,
+    nativeSubPath = "linux",
+    binding = simpleBinding(Module.CORE_LINUX, "X11")
+) {
     documentation = "Native bindings to libX11."
 
     IntConstant(

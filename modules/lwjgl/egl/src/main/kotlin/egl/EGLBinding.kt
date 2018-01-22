@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl
+package egl
 
 import org.lwjgl.generator.*
 import java.io.*
@@ -10,10 +10,10 @@ import java.io.*
 val NativeClass.capName: String
     get() = if (templateName.startsWith(prefixTemplate)) templateName else "${prefixTemplate}_$templateName"
 
-private val CAPABILITIES_CLASS = "EGLCapabilities"
+private const val CAPABILITIES_CLASS = "EGLCapabilities"
 
 private val EGLBinding = Generator.register(object : APIBinding(
-    EGL_PACKAGE,
+    Module.EGL,
     CAPABILITIES_CLASS,
     APICapabilities.JAVA_CAPABILITIES
 ) {
@@ -81,7 +81,7 @@ private val EGLBinding = Generator.register(object : APIBinding(
         val addresses = classesWithFunctions
             .map { it.functions }
             .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
 
         println("${t}public final long")
         println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))
@@ -93,11 +93,11 @@ private val EGLBinding = Generator.register(object : APIBinding(
 
         // Client constructor
         println("\n$t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
-        println(addresses.map { "provider.getFunctionAddress(${it.functionAddress})" }.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}"))
+        println(addresses.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}") { "provider.getFunctionAddress(${it.functionAddress})" })
 
         // Display constructor
         println("\n$t$CAPABILITIES_CLASS(EGLCapabilities caps, Set<String> ext) {")
-        println(addresses.map { "caps.${it.name}" }.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}"))
+        println(addresses.joinToString(",\n$t$t$t", prefix = "$t${t}this(ext,\n$t$t$t", postfix = "\n$t$t);\n$t}") { "caps.${it.name}" })
 
         // Common constructor
         println("\n${t}private $CAPABILITIES_CLASS(Set<String> ext, long... functions) {")
@@ -106,7 +106,7 @@ private val EGLBinding = Generator.register(object : APIBinding(
             val capName = extension.capName
             print("$t$t$capName = ext.contains(\"$capName\")")
             if (extension.hasNativeFunctions)
-                print(" && EGL.checkExtension(\"$capName\", ${if (capName == extension.className) "$EGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+                print(" && EGL.checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
             println(";")
         }
         println("$t}")
@@ -124,7 +124,7 @@ fun String.nativeClassEGL(
     postfix: String = "",
     init: (NativeClass.() -> Unit)? = null
 ) = nativeClass(
-    EGL_PACKAGE,
+    Module.EGL,
     templateName,
     nativeSubPath = nativeSubPath,
     prefix = prefix,
@@ -136,7 +136,7 @@ fun String.nativeClassEGL(
 
 fun config() {
     packageInfo(
-        EGL_PACKAGE,
+        Module.EGL,
         """
         Contains bindings to the ${url("https://www.khronos.org/egl", "EGL")} API, an interface between Khronos rendering APIs such as OpenGL ES or OpenVG and
         the underlying native platform window system. It handles graphics context management, surface/buffer binding and rendering synchronization and enables

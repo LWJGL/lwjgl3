@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/../../bin/Templates" />
-    <output-test url="file://$MODULE_DIR$/../../bin/Templates" />
+    <output url="file://$MODULE_DIR$/../../bin/classes/templates" />
+    <output-test url="file://$MODULE_DIR$/../../bin/classes/templates" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../modules/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/templates" isTestSource="false" />
-    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Ant Launcher" level="project" />
-    <orderEntry type="module" module-name="Generator" />
+    <orderEntry type="module" module-name="assimp-templates" />
+    <orderEntry type="module" module-name="bgfx-templates" />
+    <orderEntry type="module" module-name="core-templates" />
+    <orderEntry type="module" module-name="egl-templates" />
+    <orderEntry type="module" module-name="glfw-templates" />
+    <orderEntry type="module" module-name="jawt-templates" />
+    <orderEntry type="module" module-name="jemalloc-templates" />
+    <orderEntry type="module" module-name="lmdb-templates" />
+    <orderEntry type="module" module-name="lz4-templates" />
+    <orderEntry type="module" module-name="nanovg-templates" />
+    <orderEntry type="module" module-name="nfd-templates" />
+    <orderEntry type="module" module-name="nuklear-templates" />
+    <orderEntry type="module" module-name="odbc-templates" />
+    <orderEntry type="module" module-name="openal-templates" />
+    <orderEntry type="module" module-name="opencl-templates" />
+    <orderEntry type="module" module-name="opengl-templates" />
+    <orderEntry type="module" module-name="opengles-templates" />
+    <orderEntry type="module" module-name="openvr-templates" />
+    <orderEntry type="module" module-name="ovr-templates" />
+    <orderEntry type="module" module-name="par-templates" />
+    <orderEntry type="module" module-name="remotery-templates" />
+    <orderEntry type="module" module-name="rpmalloc-templates" />
+    <orderEntry type="module" module-name="sse-templates" />
+    <orderEntry type="module" module-name="stb-templates" />
+    <orderEntry type="module" module-name="tinyexr-templates" />
+    <orderEntry type="module" module-name="tinyfd-templates" />
+    <orderEntry type="module" module-name="tootle-templates" />
+    <orderEntry type="module" module-name="vulkan-templates" />
+    <orderEntry type="module" module-name="xxhash-templates" />
+    <orderEntry type="module" module-name="yoga-templates" />
+    <orderEntry type="module" module-name="zstd-templates" />
   </component>
 </module>

@@ -937,7 +937,7 @@ public final class HelloTootle {
         try (MemoryStack stack = stackPush()) {
             PointerBuffer pp = stack.mallocPointer(1);
 
-            int result = NFD_OpenDialog(null, Paths.get("modules/core/src/test/resources/demo").toString(), pp);
+            int result = NFD_OpenDialog(null, Paths.get("modules/samples/src/test/resources/demo").toString(), pp);
             switch (result) {
                 case NFD_OKAY:
                     AIScene scene = aiImportFileExWithProperties(pp.getStringUTF8(0),

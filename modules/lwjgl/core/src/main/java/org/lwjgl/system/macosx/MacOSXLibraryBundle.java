@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.CoreFoundation.*;
 
-/** Implements a {@link SharedLibrary} on the MacOS X using {@code CFBundle}. */
+/** Implements a {@link SharedLibrary} on the macOS using {@code CFBundle}. */
 public class MacOSXLibraryBundle extends MacOSXLibrary {
 
     public MacOSXLibraryBundle(String name, long bundleRef) {

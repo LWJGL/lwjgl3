@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.jni.templates
+package core.jni.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.jni.*
+import core.jni.*
 
-val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefixMethod = "") {
+val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefix = "JNI", prefixMethod = "") {
     javaImport("java.lang.reflect.*")
     documentation =
         """

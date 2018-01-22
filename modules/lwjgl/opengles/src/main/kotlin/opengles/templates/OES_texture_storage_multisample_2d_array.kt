@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val OES_texture_storage_multisample_2d_array = "OESTextureStorageMultisample2DArray".nativeClassGLES("OES_texture_storage_multisample_2d_array", postfix = OES) {
     documentation =

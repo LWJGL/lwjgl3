@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal
+package openal
 
 import org.lwjgl.generator.*
 import java.io.*
@@ -19,10 +19,10 @@ fun NativeClass.capName(core: String) =
 
 private val NativeClass.isCore: Boolean get() = templateName.startsWith("ALC")
 
-private val ALC_CAP_CLASS = "ALCCapabilities"
+private const val ALC_CAP_CLASS = "ALCCapabilities"
 
 val ALCBinding = Generator.register(object : APIBinding(
-    OPENAL_PACKAGE,
+    Module.OPENAL,
     ALC_CAP_CLASS,
     APICapabilities.JAVA_CAPABILITIES,
     callingConvention = CallingConvention.DEFAULT
@@ -68,7 +68,7 @@ val ALCBinding = Generator.register(object : APIBinding(
         val addresses = classesWithFunctions
             .map { it.functions }
             .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
 
         println("\tpublic final long")
         println(addresses.map(Func::name).joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
@@ -80,13 +80,13 @@ val ALCBinding = Generator.register(object : APIBinding(
 
         println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
 
-        println(addresses.map { "${it.name} = provider.getFunctionAddress(${if (it.nativeClass.isCore) "" else "device, "}${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t"))
+        println(addresses.joinToString("\n\t\t", prefix = "\t\t") { "${it.name} = provider.getFunctionAddress(${if (it.nativeClass.isCore) "" else "device, "}${it.functionAddress});" })
 
         for (extension in classes) {
             val capName = extension.capName("ALC")
             print("\n\t\t$capName = ext.contains(\"$capName\")")
             if (extension.hasNativeFunctions && extension.prefix == "ALC")
-                print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+                print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this))")
             print(";")
         }
         print("""
@@ -109,4 +109,4 @@ val ALCBinding = Generator.register(object : APIBinding(
 // DSL Extensions
 
 fun String.nativeClassALC(templateName: String, prefix: String = "ALC", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-    nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, binding = ALCBinding, init = init)
+    nativeClass(Module.OPENAL, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, binding = ALCBinding, init = init)

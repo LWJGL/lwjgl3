@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.ovr.templates
+package ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.*
+import ovr.*
 
-val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVR = "OVR".nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     __pragma(warning(disable : 4710))

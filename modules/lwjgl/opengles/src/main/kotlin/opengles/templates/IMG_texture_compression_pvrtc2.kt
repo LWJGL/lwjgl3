@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val IMG_texture_compression_pvrtc2 = "IMGTextureCompressionPVRTC2".nativeClassGLES("IMG_texture_compression_pvrtc2", postfix = IMG) {
     documentation =

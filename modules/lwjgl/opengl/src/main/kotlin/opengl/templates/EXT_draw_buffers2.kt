@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import opengl.*
 
 val EXT_draw_buffers2 = "EXTDrawBuffers2".nativeClassGL("EXT_draw_buffers2", postfix = EXT) {
     documentation =

@@ -2,14 +2,14 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.jemalloc.templates
+package jemalloc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.jemalloc.*
+import jemalloc.*
 
-val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", binding = simpleBinding(
-    "jemalloc",
-    """Configuration.JEMALLOC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("jemalloc"))""",
+val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", binding = simpleBinding(
+    Module.JEMALLOC,
+    libraryExpression = """Configuration.JEMALLOC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("jemalloc"))""",
     bundledWithLWJGL = true
 )) {
     documentation =

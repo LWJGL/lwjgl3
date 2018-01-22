@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openvr
+package openvr
 
 import org.lwjgl.generator.*
-import org.lwjgl.openvr.templates.*
+import openvr.templates.*
 import java.io.*
 
 private val NativeClass.capabilitiesClass get() = "I$className"
@@ -29,7 +29,7 @@ private fun PrintWriter.generateCapabilitiesClass(nativeClass: NativeClass) {
     print("\n$t}")
 }
 
-val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(OPENVR_PACKAGE, "OpenVR", APICapabilities.JAVA_CAPABILITIES) {
+val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(Module.OPENVR, "OpenVR", APICapabilities.JAVA_CAPABILITIES) {
 
     override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
         writer.println("$t${t}long $FUNCTION_ADDRESS = OpenVR.${function.nativeClass.capabilitiesField}.${function.simpleName};")

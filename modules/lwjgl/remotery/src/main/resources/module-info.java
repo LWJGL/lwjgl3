@@ -4,7 +4,6 @@
  */
 module org.lwjgl.remotery {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.remotery.natives;
 
     exports org.lwjgl.util.remotery;
 }

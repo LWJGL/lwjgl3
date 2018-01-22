@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.assimp.templates
+package assimp.templates
 
-import org.lwjgl.assimp.*
+import assimp.*
 import org.lwjgl.generator.*
 
-val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", prefixConstant = "ai", binding = ASSIMP_BINDING) {
+val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant = "ai", binding = ASSIMP_BINDING) {
     documentation =
         """
         Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library.

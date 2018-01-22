@@ -2,16 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.zstd
+package zstd
 
 import org.lwjgl.generator.*
 
-val ZSTD_PACKAGE = "org.lwjgl.util.zstd"
-val ZSTD_LIBRARY = "LibZstd.initialize();"
+const val ZSTD_LIBRARY = "LibZstd.initialize();"
 
 fun config() {
     packageInfo(
-        ZSTD_PACKAGE,
+        Module.ZSTD,
         """
         Contains bindings to ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd), a fast lossless compression algorithm, targeting real-time
         compression scenarios at zlib-level and better compression ratios.
@@ -22,7 +21,7 @@ fun config() {
         """
     )
 
-    Generator.registerLibraryInit(ZSTD_PACKAGE, "LibZstd", "zstd")
+    Generator.registerLibraryInit(Module.ZSTD, "LibZstd", "zstd")
 }
 
 val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
@@ -34,13 +33,13 @@ val ZSTD_CDict_p = "ZSTD_CDict".p
 val ZSTD_DDict_p = "ZSTD_DDict".p
 val ZSTD_CStream_p = "ZSTD_CStream".p
 
-val ZSTD_inBuffer_p = struct(ZSTD_PACKAGE, "ZSTDInBuffer", nativeName = "ZSTD_inBuffer") {
+val ZSTD_inBuffer_p = struct(Module.ZSTD, "ZSTDInBuffer", nativeName = "ZSTD_inBuffer") {
     const..void_p.member("src", "start of input buffer")
     AutoSize("src")..size_t.member("size", "size of input buffer")
     size_t.member("pos", "position where reading stopped. Will be updated. Necessarily {@code 0 <= pos <= size}")
 }.p
 
-val ZSTD_outBuffer_p = struct(ZSTD_PACKAGE, "ZSTDOutBuffer", nativeName = "ZSTD_outBuffer") {
+val ZSTD_outBuffer_p = struct(Module.ZSTD, "ZSTDOutBuffer", nativeName = "ZSTD_outBuffer") {
     void_p.member("dst", "start of output buffer")
     AutoSize("dst")..size_t.member("size", "size of output buffer")
     size_t.member("pos", "position where writing stopped. Will be updated. Necessarily {@code 0 <= pos <= size}")
@@ -62,7 +61,7 @@ val ZSTD_CCtx_params_p = "ZSTD_CCtx_params".p
 val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
 
 val ZSTD_allocFunction = "ZSTD_allocFunction".callback(
-    ZSTD_PACKAGE, void_p, "ZSTDAllocFunction",
+    Module.ZSTD, void_p, "ZSTDAllocFunction",
     "",
 
     opaque_p.IN("opaque", ""),
@@ -70,20 +69,20 @@ val ZSTD_allocFunction = "ZSTD_allocFunction".callback(
 )
 
 val ZSTD_freeFunction = "ZSTD_freeFunction".callback(
-    ZSTD_PACKAGE, opaque_p, "ZSTDFreeFunction",
+    Module.ZSTD, opaque_p, "ZSTDFreeFunction",
     "",
 
     opaque_p.IN("opaque", ""),
     void_p.IN("address", "")
 )
 
-val ZSTD_customMem = struct(ZSTD_PACKAGE, "ZSTDCustomMem", nativeName = "ZSTD_customMem") {
+val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_customMem") {
     ZSTD_allocFunction.member("customAlloc", "")
     ZSTD_freeFunction.member("customFree", "")
     opaque_p.member("opaque", "")
 }
 
-val ZSTD_frameHeader_p = struct(ZSTD_PACKAGE, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
+val ZSTD_frameHeader_p = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
     unsigned_long_long.member("frameContentSize", "if #CONTENTSIZE_UNKNOWN, it means this field is not available. 0 means \"empty\"")
     unsigned_long_long.member("windowSize", "can be very large, up to &le; {@code frameContentSize}")
     unsigned.member("blockSizeMax", "")

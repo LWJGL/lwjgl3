@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.windows.templates
+package core.windows.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.windows.*
+import core.windows.*
 
-val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
+val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows") {
     nativeImport(
         "WindowsLWJGL.h"
     )

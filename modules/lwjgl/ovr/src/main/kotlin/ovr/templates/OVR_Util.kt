@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.ovr.templates
+package ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.*
+import ovr.*
 
-val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr", prefixConstant = "ovr", library = OVR_LIBRARY) {
+val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixConstant = "ovr", library = OVR_LIBRARY) {
     includeOVRCAPI()
 
     documentation = "Native bindings to the libOVR utility functions."

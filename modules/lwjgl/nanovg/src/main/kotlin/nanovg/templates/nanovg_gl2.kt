@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.nanovg.templates
+package nanovg.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.nanovg.*
-import org.lwjgl.opengl.*
+import nanovg.*
+import opengl.*
 
-val nanovg_gl2 = "NanoVGGL2".dependsOn(Binding.OPENGL)?.nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG", library = NANOVG_LIBRARY) {
+val nanovg_gl2 = "NanoVGGL2".dependsOn(Module.OPENGL)?.nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     __pragma(warning(disable : 4710))

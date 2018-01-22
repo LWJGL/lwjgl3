@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.tootle
+package tootle
 
 import org.lwjgl.generator.*
 
-val TOOTLE_PACKAGE = "org.lwjgl.util.tootle"
-
 fun config() {
     packageInfo(
-        TOOTLE_PACKAGE,
+        Module.TOOTLE,
         """
         Contains bindings to ${url("https://github.com/GPUOpen-Tools/amd-tootle", "AMD Tootle")}.
 

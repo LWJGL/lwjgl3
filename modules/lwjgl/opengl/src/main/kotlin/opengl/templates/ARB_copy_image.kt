@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package opengl.templates
 
-import org.lwjgl.opengl.*
+import opengl.*
 
 val ARB_copy_image = "ARBCopyImage".nativeClassGL("ARB_copy_image") {
     documentation =

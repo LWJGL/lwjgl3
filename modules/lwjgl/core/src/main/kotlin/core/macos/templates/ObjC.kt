@@ -2,12 +2,16 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.macosx.templates
+package core.macos.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.macosx.*
+import core.macos.*
 
-val objc_runtime = "ObjCRuntime".nativeClass(MACOSX_PACKAGE, binding = simpleBinding("objc")) {
+val objc_runtime = "ObjCRuntime".nativeClass(
+    Module.CORE_MACOS,
+    nativeSubPath = "macos",
+    binding = simpleBinding(Module.CORE_MACOS, "objc")
+) {
     nativeImport("<objc/objc-runtime.h>")
 
     documentation =

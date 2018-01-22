@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.nfd.templates
+package nfd.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.nfd.*
+import nfd.*
 
-val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE, prefix = "NFD_", prefixMethod = "NFD_", library = NFD_LIBRARY) {
+val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_", prefixMethod = "NFD_", library = NFD_LIBRARY) {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     #define _CRT_SECURE_NO_WARNINGS
@@ -24,9 +24,9 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 
         <h3>Usage</h3>
         ${ul(
-            "<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/util/nfd/HelloNFD.java\\#L97\">Single file open dialog</a>",
-            "<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/util/nfd/HelloNFD.java\\#L119\">Multiple file open dialog</a>",
-            "<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/util/nfd/HelloNFD.java\\#L140\">Save dialog</a>"
+            "<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/samples/src/test/java/org/lwjgl/demo/util/nfd/HelloNFD.java\\#L97\">Single file open dialog</a>",
+            "<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/samples/src/test/java/org/lwjgl/demo/util/nfd/HelloNFD.java\\#L119\">Multiple file open dialog</a>",
+            "<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/samples/src/test/java/org/lwjgl/demo/util/nfd/HelloNFD.java\\#L140\">Save dialog</a>"
         )}
 
         <h3>File Filter Syntax</h3>

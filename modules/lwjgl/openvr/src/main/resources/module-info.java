@@ -4,7 +4,6 @@
  */
 module org.lwjgl.openvr {
     requires transitive org.lwjgl;
-    requires static org.lwjgl.openvr.natives;
 
     exports org.lwjgl.openvr;
 }

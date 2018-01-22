@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.lz4.templates
+package lz4.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.lz4.*
+import lz4.*
 
-val LZ4 = "LZ4".nativeClass(LZ4_PACKAGE, prefix = "LZ4", prefixMethod = "LZ4_", library = LZ4_LIBRARY) {
+val LZ4 = "LZ4".nativeClass(Module.LZ4, prefix = "LZ4", prefixMethod = "LZ4_", library = LZ4_LIBRARY) {
     nativeDirective(
         """DISABLE_WARNINGS()
 #include "lz4.h"

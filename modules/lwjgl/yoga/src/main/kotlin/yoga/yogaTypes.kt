@@ -2,15 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.yoga
+package yoga
 
 import org.lwjgl.generator.*
 
-val YOGA_PACKAGE = "org.lwjgl.util.yoga"
-
 fun config() {
     packageInfo(
-        YOGA_PACKAGE,
+        Module.YOGA,
         """
         Contains bindings to ${url("https://facebook.github.io/yoga/", "Yoga")}.
 
@@ -66,19 +64,19 @@ val YGPrintOptions = "YGPrintOptions".enumType
 val YGUnit = "YGUnit".enumType
 val YGWrap = "YGWrap".enumType
 
-val YGSize = struct(YOGA_PACKAGE, "YGSize") {
+val YGSize = struct(Module.YOGA, "YGSize") {
     float.member("width", "")
     float.member("height", "")
 }
 
-val YGValue = struct(YOGA_PACKAGE, "YGValue") {
+val YGValue = struct(Module.YOGA, "YGValue") {
     float.member("value", "")
     YGUnit.member("unit", "")
 }
 
 // TODO: Returns struct by value
 val YGMeasureFunc = "YGMeasureFunc".callback(
-    YOGA_PACKAGE, uint64_t/*YGSize*/, "YGMeasureFunc",
+    Module.YOGA, uint64_t/*YGSize*/, "YGMeasureFunc",
     "Use {@link YGMeasureFunc\\#toLong toLong} to create the return value.",
 
     YGNodeRef.IN("node", ""),
@@ -96,7 +94,7 @@ val YGMeasureFunc = "YGMeasureFunc".callback(
 }
 
 val YGBaselineFunc = "YGBaselineFunc".callback(
-    YOGA_PACKAGE, float, "YGBaselineFunc",
+    Module.YOGA, float, "YGBaselineFunc",
     "",
 
     YGNodeRef.IN("node", ""),
@@ -105,21 +103,21 @@ val YGBaselineFunc = "YGBaselineFunc".callback(
 )
 
 val YGDirtiedFunc = "YGDirtiedFunc".callback(
-    YOGA_PACKAGE, void, "YGDirtiedFunc",
+    Module.YOGA, void, "YGDirtiedFunc",
     "",
 
     YGNodeRef.IN("node", "")
 )
 
 val YGPrintFunc = "YGPrintFunc".callback(
-    YOGA_PACKAGE, void, "YGPrintFunc",
+    Module.YOGA, void, "YGPrintFunc",
     "",
 
     YGNodeRef.IN("node", "")
 )
 
 val YGLogger = "YGLogger".callback(
-    YOGA_PACKAGE, int, "YGLogger",
+    Module.YOGA, int, "YGLogger",
     "",
 
     const..YGConfigRef.IN("config", ""),
@@ -130,7 +128,7 @@ val YGLogger = "YGLogger".callback(
 )
 
 val YGNodeClonedFunc = "YGNodeClonedFunc".callback(
-    YOGA_PACKAGE, void, "YGNodeClonedFunc",
+    Module.YOGA, void, "YGNodeClonedFunc",
     "",
 
     YGNodeRef.IN("oldNode", ""),
@@ -141,7 +139,7 @@ val YGNodeClonedFunc = "YGNodeClonedFunc".callback(
 
 // Internal API, exposed for efficiency.
 
-val YGCachedMeasurement = struct(YOGA_PACKAGE, "YGCachedMeasurement", mutable = false) {
+val YGCachedMeasurement = struct(Module.YOGA, "YGCachedMeasurement", mutable = false) {
     float.member("availableWidth", "")
     float.member("availableHeight", "")
     YGMeasureMode.member("widthMeasureMode", "")
@@ -152,7 +150,7 @@ val YGCachedMeasurement = struct(YOGA_PACKAGE, "YGCachedMeasurement", mutable = 
 }
 
 val YG_MAX_CACHED_RESULT_COUNT = 16
-val YGLayout = struct(YOGA_PACKAGE, "YGLayout", mutable = false) {
+val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     float.array("positions", "", size = 4)
     float.array("dimensions", "", size = 2)
     float.array("margin", "", size = 6)
@@ -175,7 +173,7 @@ val YGLayout = struct(YOGA_PACKAGE, "YGLayout", mutable = false) {
 }
 
 val YGEdgeCount = 9
-val YGStyle = struct(YOGA_PACKAGE, "YGStyle", mutable = false) {
+val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGDirection.member("direction", "")
     YGFlexDirection.member("flexDirection", "")
     YGJustify.member("justifyContent", "")
@@ -203,8 +201,8 @@ val YGStyle = struct(YOGA_PACKAGE, "YGStyle", mutable = false) {
 }
 
 val YGNodeListRef = "YGNodeListRef".opaque_p
-val YGNode_p = struct(YOGA_PACKAGE, "YGNode").p
-val YGNode = struct(YOGA_PACKAGE, "YGNode") {
+val YGNode_p = struct(Module.YOGA, "YGNode").p
+val YGNode = struct(Module.YOGA, "YGNode") {
     nullable..opaque_p.member("context", "")
     nullable..YGPrintFunc.member("print", "")
     bool.member("hasNewLayout", "")

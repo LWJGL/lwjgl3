@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openvr.templates
+package openvr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openvr.*
+import openvr.*
 
 val VRExtendedDisplay = "VRExtendedDisplay".nativeClass(
-    packageName = OPENVR_PACKAGE,
+    Module.OPENVR,
     prefixMethod = "VRExtendedDisplay_",
     library = OPENVR_LIBRARY,
     binding = OPENVR_FNTABLE_BINDING

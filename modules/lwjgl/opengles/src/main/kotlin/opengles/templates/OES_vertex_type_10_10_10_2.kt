@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val OES_vertex_type_10_10_10_2 = "OESVertexType1010102".nativeClassGLES("OES_vertex_type_10_10_10_2", postfix = OES) {
     documentation =

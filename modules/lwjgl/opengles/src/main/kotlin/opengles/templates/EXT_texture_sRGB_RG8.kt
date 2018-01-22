@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengles.templates
+package opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengles.*
+import opengles.*
 
 val EXT_texture_sRGB_RG8 = "EXTTextureSRGBRG8".nativeClassGLES("EXT_texture_sRGB_RG8", postfix = EXT) {
     documentation =

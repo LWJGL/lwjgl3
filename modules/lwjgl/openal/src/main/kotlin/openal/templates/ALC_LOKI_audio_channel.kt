@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.openal.templates
+package openal.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.openal.*
+import openal.*
 
 val ALC_LOKI_audio_channel = "LOKIAudioChannel".nativeClassALC("LOKI_audio_channel") {
     documentation = "Native bindings to the $extensionName extension."

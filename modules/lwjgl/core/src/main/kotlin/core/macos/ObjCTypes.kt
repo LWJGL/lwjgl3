@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.macosx
+package core.macos
 
 import org.lwjgl.generator.*
 
@@ -28,7 +28,7 @@ val objc_property_t = "objc_property_t".opaque_p
 val objc_property_t_p = objc_property_t.p
 
 // Defines a property attribute
-val objc_property_attribute_t_p = struct(MACOSX_PACKAGE, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
+val objc_property_attribute_t_p = struct(Module.CORE_MACOS, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
     documentation = "Defines a property attribute."
 
     charUTF8_p.member("name", "the name of the attribute")
@@ -36,7 +36,7 @@ val objc_property_attribute_t_p = struct(MACOSX_PACKAGE, "ObjCPropertyAttribute"
 }.p
 
 // Defines a method
-val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {
+val objc_method_description = struct(Module.CORE_MACOS, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {
     documentation = "Defines a method."
 
     SEL.member("name", "the name of the method at runtime")
@@ -45,7 +45,7 @@ val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", na
 val objc_method_description_p = objc_method_description.p
 
 val EnumerationMutationHandler = "EnumerationMutationHandler".callback(
-    MACOSX_PACKAGE, void, "EnumerationMutationHandler",
+    Module.CORE_MACOS, void, "EnumerationMutationHandler",
     "Will be called when an object is mutated during a foreach iteration.",
     id.IN("id", "the object that was mutated")
 ) {

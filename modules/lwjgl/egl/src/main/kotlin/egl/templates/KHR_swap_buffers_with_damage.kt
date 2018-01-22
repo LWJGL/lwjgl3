@@ -2,9 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.egl.templates
+package egl.templates
 
-import org.lwjgl.egl.*
+import egl.*
 import org.lwjgl.generator.*
 
 val KHR_swap_buffers_with_damage = "KHRSwapBuffersWithDamage".nativeClassEGL("KHR_swap_buffers_with_damage", postfix = KHR) {

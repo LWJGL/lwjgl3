@@ -30,7 +30,7 @@ public class HelloZstd {
             if (args.length == 0) {
                 System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.util.zstd.HelloZstd -Dargs=<path>' to test a different file.");
 
-                filePath = Files.list(Paths.get("libs"))
+                filePath = Files.list(Paths.get("bin/libs"))
                     .filter(path -> Files.isRegularFile(path) && !path.toString().endsWith(".zip"))
                     .sorted((a, b) -> {
                         try {

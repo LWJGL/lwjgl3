@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.util.par.templates
+package par.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.util.par.*
+import par.*
 
-val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "par_shapes_", library = "LibPar.initialize();") {
+val par_shapes = "ParShapes".nativeClass(Module.PAR, prefix = "par_shapes_", library = "LibPar.initialize();") {
     nativeDirective(
         """#ifdef LWJGL_WINDOWS
     #define _CRT_SECURE_NO_WARNINGS
@@ -197,7 +197,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "create_lsystem",
         """
         Creates trees or vegetation by executing a recursive turtle graphics program. The program is a list of command-argument pairs. See the
-        ${url("https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/util/par/ParTest.java\\#L263", "unit test")} for an example.
+        ${url("https://github.com/LWJGL/lwjgl3/blob/master/modules/lwjgl/par/src/test/java/org/lwjgl/util/par/ParTest.java\\#L263", "unit test")} for an example.
         Texture coordinates and normals are not generated.
         """,
 
