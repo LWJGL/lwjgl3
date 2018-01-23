@@ -92,6 +92,7 @@ EXPORTS
 </header>
                 <!-- For each source file -->
                 <source/>
+                <fileset dir="." includes="${src.generated}/*.c" if:true="@{simple}"/>
                 <filterchain>
                     <!-- For each line with a JNICALL -->
                     <linecontainsregexp>
