@@ -165,7 +165,7 @@ ENABLE_WARNINGS()""")
     size_t(
         "compressBound",
         """
-        Provides {@code dstCapacity} given a {@code srcSize} to guarantee operation success in worst case situations.
+        Provides minimum {@code dstCapacity} for a given {@code srcSize} to guarantee operation success in worst case situations.
 
         Result is always the same for a {@code srcSize} and {@code prefsPtr}, so it can be trusted to size reusable buffers.
 
@@ -175,7 +175,7 @@ ENABLE_WARNINGS()""")
         size_t.IN("srcSize", ""),
         nullable..const..LZ4F_preferences_t_p.IN(
             "prefsPtr",
-            "optional: you can provide #NULL as argument, preferences will be set to cover worst case scenario"
+            "optional: when #NULL is provided, preferences will be set to cover worst case scenario"
         )
     )
 
@@ -313,17 +313,18 @@ ENABLE_WARNINGS()""")
     size_t(
         "decompress",
         """
-        Call this function repetitively to regenerate compressed data from {@code srcBuffer}. The function will attempt to decode up to {@code *srcSizePtr}
-        bytes from {@code srcBuffer}, into {@code dstBuffer} of capacity {@code *dstSizePtr}.
+        Call this function repetitively to regenerate compressed data from {@code srcBuffer}. The function will read up to {@code *srcSizePtr}
+        bytes from {@code srcBuffer}, and decompress data into {@code dstBuffer}, of capacity {@code *dstSizePtr}.
+
+        The number of bytes consumed from {@code srcBuffer} will be written into {@code *srcSizePtr} (necessarily &le; original value). The number of bytes
+        decompressed into {@code dstBuffer} will be written into {@code *dstSizePtr} (necessarily &le; original value).
 
         The number of bytes regenerated into {@code dstBuffer} is provided within {@code *dstSizePtr} (necessarily &le; original value).
 
-        The number of bytes consumed from {@code srcBuffer} is provided within {@code *srcSizePtr} (necessarily &le; original value). Number of bytes consumed
-        can be &lt; number of bytes provided. It typically happens when {@code dstBuffer} is not large enough to contain all decoded data. Unconsumed source
-        data must be presented again in subsequent invocations.
+        The function does not necessarily read all input bytes, so always check value in {@code *srcSizePtr}. Unconsumed source data must be presented again in
+        subsequent invocations.
 
-        {@code dstBuffer} content is expected to be flushed between each invocation, as its content will be overwritten. {@code dstBuffer} itself can be
-        changed at will between each consecutive function invocation.
+        {@code dstBuffer} can freely change between each consecutive function invocation. {@code dstBuffer} content will be overwritten.
 
         After a frame is fully decoded, {@code dctx} can be used again to decompress another frame.
 
@@ -342,10 +343,13 @@ ENABLE_WARNINGS()""")
         a hint of how many {@code srcSize} bytes {@code LZ4F_decompress()} expects for next call.
 
         Schematically, it's the size of the current (or remaining) compressed block + header of next block. Respecting the hint provides some small speed
-        benefit, because it skips intermediate buffers. This is just a hint though, it's always possible to provide any {@code srcSize}. When a frame is fully
-        decoded, return will be 0 (no more data expected).
+        benefit, because it skips intermediate buffers. This is just a hint though, it's always possible to provide any {@code srcSize}.
 
-        If decompression failed, return is an error code, which can be tested using #isError().
+        When a frame is fully decoded, return will be 0 (no more data expected). When provided with more bytes than necessary to decode a frame,
+        {@code LZ4F_decompress()} will stop reading exactly at end of current frame, and return 0.
+
+        If decompression failed, return is an error code, which can be tested using #isError(). After a decompression error, the {@code dctx} context is not
+        resumable. Use #resetDecompressionContext() to return to clean state.
         """
     )
 
@@ -354,9 +358,11 @@ ENABLE_WARNINGS()""")
         """
         In case of an error, the context is left in "undefined" state. In which case, it's necessary to reset it, before re-using it.
 
-        This method can also be used to abruptly stop an unfinished decompression, and start a new one using the same context.
+        This method can also be used to abruptly stop an unfinished decompression, and start a new one using the same context resources.
         """,
 
-        LZ4F_dctx_p.IN("dctx", "")
+        LZ4F_dctx_p.IN("dctx", ""),
+
+        since = "1.8.0"
     )
 }
