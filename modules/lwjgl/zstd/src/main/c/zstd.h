@@ -568,15 +568,17 @@ ZSTDLIB_API ZSTD_CStream* ZSTD_initStaticCStream(void* workspace, size_t workspa
 ZSTDLIB_API ZSTD_DCtx*    ZSTD_initStaticDCtx(void* workspace, size_t workspaceSize);
 ZSTDLIB_API ZSTD_DStream* ZSTD_initStaticDStream(void* workspace, size_t workspaceSize);    /**< same as ZSTD_initStaticDCtx() */
 
-ZSTDLIB_API ZSTD_CDict* ZSTD_initStaticCDict(void* workspace, size_t workspaceSize,
-                                             const void* dict, size_t dictSize,
-                                             ZSTD_dictLoadMethod_e dictLoadMethod,
-                                             ZSTD_dictMode_e dictMode,
-                                             ZSTD_compressionParameters cParams);
+ZSTDLIB_API const ZSTD_CDict* ZSTD_initStaticCDict(
+                                        void* workspace, size_t workspaceSize,
+                                        const void* dict, size_t dictSize,
+                                        ZSTD_dictLoadMethod_e dictLoadMethod,
+                                        ZSTD_dictMode_e dictMode,
+                                        ZSTD_compressionParameters cParams);
 
-ZSTDLIB_API ZSTD_DDict* ZSTD_initStaticDDict(void* workspace, size_t workspaceSize,
-                                             const void* dict, size_t dictSize,
-                                             ZSTD_dictLoadMethod_e dictLoadMethod);
+ZSTDLIB_API const ZSTD_DDict* ZSTD_initStaticDDict(
+                                        void* workspace, size_t workspaceSize,
+                                        const void* dict, size_t dictSize,
+                                        ZSTD_dictLoadMethod_e dictLoadMethod);
 
 /*! Custom memory allocation :
  *  These prototypes make it possible to pass your own allocation/free functions.
@@ -711,9 +713,25 @@ ZSTDLIB_API size_t ZSTD_initCStream_usingCDict_advanced(ZSTD_CStream* zcs, const
  *  If pledgedSrcSize is not known at reset time, use macro ZSTD_CONTENTSIZE_UNKNOWN.
  *  If pledgedSrcSize > 0, its value must be correct, as it will be written in header, and controlled at the end.
  *  For the time being, pledgedSrcSize==0 is interpreted as "srcSize unknown" for compatibility with older programs,
- *  but it may change to mean "empty" in some future version, so prefer using macro ZSTD_CONTENTSIZE_UNKNOWN.
+ *  but it will change to mean "empty" in future version, so use macro ZSTD_CONTENTSIZE_UNKNOWN instead.
  * @return : 0, or an error code (which can be tested using ZSTD_isError()) */
 ZSTDLIB_API size_t ZSTD_resetCStream(ZSTD_CStream* zcs, unsigned long long pledgedSrcSize);
+
+
+typedef struct {
+    unsigned long long ingested;
+    unsigned long long consumed;
+    unsigned long long produced;
+} ZSTD_frameProgression;
+
+/* ZSTD_getFrameProgression():
+ * tells how much data has been ingested (read from input)
+ * consumed (input actually compressed) and produced (output) for current frame.
+ * Therefore, (ingested - consumed) is amount of input data buffered internally, not yet compressed.
+ * Can report progression inside worker threads (multi-threading and non-blocking mode).
+ */
+ZSTD_frameProgression ZSTD_getFrameProgression(const ZSTD_CCtx* cctx);
+
 
 
 /*=====   Advanced Streaming decompression functions  =====*/
@@ -972,10 +990,20 @@ typedef enum {
     ZSTD_p_dictIDFlag,       /* When applicable, dictionary's ID is written into frame header (default:1) */
 
     /* multi-threading parameters */
+    /* These parameters are only useful if multi-threading is enabled (ZSTD_MULTITHREAD).
+     * They return an error otherwise. */
     ZSTD_p_nbThreads=400,    /* Select how many threads a compression job can spawn (default:1)
                               * More threads improve speed, but also increase memory usage.
                               * Can only receive a value > 1 if ZSTD_MULTITHREAD is enabled.
                               * Special: value 0 means "do not change nbThreads" */
+    ZSTD_p_nonBlockingMode,  /* Single thread mode is by default "blocking" :
+                              * it finishes its job as much as possible, and only then gives back control to caller.
+                              * In contrast, multi-thread is by default "non-blocking" :
+                              * it takes some input, flush some output if available, and immediately gives back control to caller.
+                              * Compression work is performed in parallel, within worker threads.
+                              * (note : a strong exception to this rule is when first job is called with ZSTD_e_end : it becomes blocking)
+                              * Setting this parameter to 1 will enforce non-blocking mode even when only 1 thread is selected.
+                              * It allows the caller to do other tasks while the worker thread compresses in parallel. */
     ZSTD_p_jobSize,          /* Size of a compression job. This value is only enforced in streaming (non-blocking) mode.
                               * Each compression job is completed in parallel, so indirectly controls the nb of active threads.
                               * 0 means default, which is dynamically determined based on compression parameters.

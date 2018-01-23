@@ -251,6 +251,17 @@ ENABLE_WARNINGS()""")
             Special: value 0 means "do not change {@code nbThreads}"
             """,
             "400"),
+        "p_nonBlockingMode".enum(
+            """
+            Single thread mode is by default "blocking": it finishes its job as much as possible, and only then gives back control to caller.
+
+            In contrast, multi-thread is by default "non-blocking": it takes some input, flush some output if available, and immediately gives back control to
+            caller. Compression work is performed in parallel, within worker threads. (note : a strong exception to this rule is when first job is called with
+            #e_end : it becomes blocking)
+
+            Setting this parameter to 1 will enforce non-blocking mode even when only 1 thread is selected. It allows the caller to do other tasks while the
+            worker thread compresses in parallel.
+            """),
         "p_jobSize".enum(
             """
             Size of a compression job.
@@ -611,7 +622,7 @@ ENABLE_WARNINGS()""")
         ZSTD_customMem.IN("customMem", "")
     )
 
-    ZSTD_DDict_p(
+    const..ZSTD_DDict_p(
         "initStaticDDict",
         """
         Generate a digested dictionary in provided memory area.
@@ -712,6 +723,18 @@ ENABLE_WARNINGS()""")
             "pledgedSrcSize",
             "can be 0, indicating unknown size. If it is non-zero, it must be accurate. For 0 size frames, use {@code compressBegin_advanced}"
         )
+    )
+
+    ZSTD_frameProgression(
+        "getFrameProgression",
+        """
+        Tells how much data has been {@code ingested} (read from input) {@code consumed} (input actually compressed) and {@code produced} (output) for current
+        frame. Therefore, {@code (ingested - consumed)} is amount of input data buffered internally, not yet compressed.
+
+        Can report progression inside worker threads (multi-threading and non-blocking mode).
+        """,
+
+        const..ZSTD_CCtx_p.IN("cctx", "")
     )
 
     size_t(

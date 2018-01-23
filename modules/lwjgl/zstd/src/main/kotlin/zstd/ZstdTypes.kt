@@ -92,6 +92,12 @@ val ZSTD_frameHeader_p = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZS
     unsigned.member("checksumFlag", "")
 }.p
 
+val ZSTD_frameProgression = struct(Module.ZSTD, "ZSTDFrameProgression", nativeName = "ZSTD_frameProgression", mutable = false) {
+    unsigned_long_long.member("ingested", "")
+    unsigned_long_long.member("consumed", "")
+    unsigned_long_long.member("produced", "")
+}
+
 // zstd_errors.h
 
 val ZSTD_ErrorCode = "ZSTD_ErrorCode".enumType

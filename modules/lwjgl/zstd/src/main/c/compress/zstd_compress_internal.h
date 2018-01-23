@@ -51,7 +51,6 @@ typedef struct {
     FSE_CTable offcodeCTable[FSE_CTABLE_SIZE_U32(OffFSELog, MaxOff)];
     FSE_CTable matchlengthCTable[FSE_CTABLE_SIZE_U32(MLFSELog, MaxML)];
     FSE_CTable litlengthCTable[FSE_CTABLE_SIZE_U32(LLFSELog, MaxLL)];
-    U32 workspace[HUF_WORKSPACE_SIZE_U32];
     HUF_repeat hufCTable_repeatMode;
     FSE_repeat offcode_repeatMode;
     FSE_repeat matchlength_repeatMode;
@@ -94,6 +93,33 @@ typedef struct {
 } optState_t;
 
 typedef struct {
+  ZSTD_entropyCTables_t entropy;
+  U32 rep[ZSTD_REP_NUM];
+} ZSTD_compressedBlockState_t;
+
+typedef struct {
+    BYTE const* nextSrc;    /* next block here to continue on current prefix */
+    BYTE const* base;       /* All regular indexes relative to this position */
+    BYTE const* dictBase;   /* extDict indexes relative to this position */
+    U32 dictLimit;          /* below that point, need extDict */
+    U32 lowLimit;           /* below that point, no more data */
+    U32 nextToUpdate;       /* index from which to continue table update */
+    U32 nextToUpdate3;      /* index from which to continue table update */
+    U32 hashLog3;           /* dispatch table : larger == faster, more memory */
+    U32 loadedDictEnd;      /* index of end of dictionary */
+    U32* hashTable;
+    U32* hashTable3;
+    U32* chainTable;
+    optState_t opt;         /* optimal parser state */
+} ZSTD_matchState_t;
+
+typedef struct {
+    ZSTD_compressedBlockState_t* prevCBlock;
+    ZSTD_compressedBlockState_t* nextCBlock;
+    ZSTD_matchState_t matchState;
+} ZSTD_blockState_t;
+
+typedef struct {
     U32 offset;
     U32 checksum;
 } ldmEntry_t;
@@ -124,6 +150,7 @@ struct ZSTD_CCtx_params_s {
 
     /* Multithreading: used to pass parameters to mtctx */
     U32 nbThreads;
+    int nonBlockingMode;      /* will trigger ZSTDMT even with nbThreads==1 */
     unsigned jobSize;
     unsigned overlapSizeLog;
 
@@ -136,15 +163,6 @@ struct ZSTD_CCtx_params_s {
 };  /* typedef'd to ZSTD_CCtx_params within "zstd.h" */
 
 struct ZSTD_CCtx_s {
-    const BYTE* nextSrc;    /* next block here to continue on current prefix */
-    const BYTE* base;       /* All regular indexes relative to this position */
-    const BYTE* dictBase;   /* extDict indexes relative to this position */
-    U32   dictLimit;        /* below that point, need extDict */
-    U32   lowLimit;         /* below that point, no more data */
-    U32   nextToUpdate;     /* index from which to continue dictionary update */
-    U32   nextToUpdate3;    /* index from which to continue dictionary update */
-    U32   hashLog3;         /* dispatch table : larger == faster, more memory */
-    U32   loadedDictEnd;    /* index of end of dictionary */
     ZSTD_compressionStage_e stage;
     U32   dictID;
     ZSTD_CCtx_params requestedParams;
@@ -152,19 +170,17 @@ struct ZSTD_CCtx_s {
     void* workSpace;
     size_t workSpaceSize;
     size_t blockSize;
-    U64 pledgedSrcSizePlusOne;  /* this way, 0 (default) == unknown */
-    U64 consumedSrcSize;
+    unsigned long long pledgedSrcSizePlusOne;  /* this way, 0 (default) == unknown */
+    unsigned long long consumedSrcSize;
+    unsigned long long producedCSize;
     XXH64_state_t xxhState;
     ZSTD_customMem customMem;
     size_t staticSize;
 
     seqStore_t seqStore;    /* sequences storage ptrs */
-    optState_t optState;
     ldmState_t ldmState;    /* long distance matching state */
-    U32* hashTable;
-    U32* hashTable3;
-    U32* chainTable;
-    ZSTD_entropyCTables_t* entropy;
+    ZSTD_blockState_t blockState;
+    U32* entropyWorkspace;  /* entropy workspace of HUF_WORKSPACE_SIZE bytes */
 
     /* streaming */
     char*  inBuff;
@@ -189,6 +205,12 @@ struct ZSTD_CCtx_s {
     ZSTDMT_CCtx* mtctx;
 #endif
 };
+
+
+typedef size_t (*ZSTD_blockCompressor) (
+        ZSTD_matchState_t* bs, seqStore_t* seqStore, U32 rep[ZSTD_REP_NUM],
+        ZSTD_compressionParameters const* cParams, void const* src, size_t srcSize);
+ZSTD_blockCompressor ZSTD_selectBlockCompressor(ZSTD_strategy strat, int extDict);
 
 
 MEM_STATIC U32 ZSTD_LLcode(U32 litLength)
