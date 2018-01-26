@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OTHER.iml" filepath="$PROJECT_DIR$/.idea/modules/OTHER.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/assimp.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/assimp-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/assimp-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/bgfx.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/bgfx.iml" group="MODULES" />
