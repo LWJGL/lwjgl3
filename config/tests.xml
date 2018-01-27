@@ -4,17 +4,37 @@
   ~ License terms: https://www.lwjgl.org/license
   -->
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="LWJGL Core Tests">
-    <test name="LWJGL 3.0">
+<suite name="LWJGL cross-platform tests">
+    <test name="core">
         <packages>
             <package name="org.lwjgl"/>
-            <package name="org.lwjgl.opencl"/>
             <package name="org.lwjgl.system"/>
             <package name="org.lwjgl.system.dyncall"/>
             <package name="org.lwjgl.system.libc"/>
-            <package name="org.lwjgl.system.rpmalloc"/>
+        </packages>
+    </test>
+    <test name="opencl">
+        <packages>
+            <package name="org.lwjgl.opencl"/>
+        </packages>
+    </test>
+    <test name="par">
+        <packages>
             <package name="org.lwjgl.util.par"/>
+        </packages>
+    </test>
+    <test name="rpmalloc">
+        <packages>
+            <package name="org.lwjgl.system.rpmalloc"/>
+        </packages>
+    </test>
+    <test name="sse">
+        <packages>
             <package name="org.lwjgl.util.simd"/>
+        </packages>
+    </test>
+    <test name="yoga">
+        <packages>
             <package name="org.lwjgl.util.yoga"/>
         </packages>
     </test>

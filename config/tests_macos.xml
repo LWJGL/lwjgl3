@@ -4,7 +4,7 @@
   ~ License terms: https://www.lwjgl.org/license
   -->
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="LWJGL Platform Tests">
+<suite name="LWJGL macOS tests">
     <test name="macOS">
         <packages>
             <package name="org.lwjgl.system.macosx"/>
