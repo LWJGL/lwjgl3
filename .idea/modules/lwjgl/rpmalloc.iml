@@ -6,10 +6,12 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../modules/lwjgl/rpmalloc">
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/rpmalloc/src/generated/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/rpmalloc/src/test/java" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" />
     <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+    <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
   </component>
 </module>

@@ -144,7 +144,7 @@
     <target name="compile-native-platform">
         <echo message="${sdkroot}" taskname="SDK Root"/>
 
-        <parallel threadsPerProcessor="2" failonany="true">
+        <parallel threadsPerProcessor="2">
 
         <!-- CORE -->
         <build module="core">

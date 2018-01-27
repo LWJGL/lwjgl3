@@ -89,6 +89,64 @@ fun config() {
     })
 }
 
+val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "rpmalloc_config_t") {
+    documentation =
+        """
+        This struct enables configuration of a memory mapper providing map/unmap of memory pages. Defaults to {@code VirtualAlloc}/{@code mmap} if none
+        provided. This allows rpmalloc to be used in contexts where memory is provided by internal means.
+
+        Page size may be set explicitly in initialization. This allows the allocator to be used as a sub-allocator where the page granularity should be lower
+        to reduce risk of wasting unused memory ranges.
+
+        If rpmalloc is built with {@code ENABLE_GUARDS}, {@code memory_overwrite} may be set to detect writes before or after allocated memory blocks. This is
+        not enabled in the default LWJGL build.
+        """
+
+    nullable..callback(
+        Module.RPMALLOC, opaque_p, "RPMemoryMapCallback",
+        """
+        Map memory pages for the given number of bytes.
+
+        The returned address MUST be 2 byte aligned, and should ideally be 64KiB aligned. If memory returned is not 64KiB aligned rpmalloc will call unmap and
+        then another map request with size padded by 64KiB in order to align it internally.
+        """,
+
+        size_t.IN("size", "the number of bytes to map")
+    ) {
+        documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+    }.member("memory_map", "the memory map callback function")
+    nullable..callback(
+        Module.RPMALLOC, void, "RPMemoryUnmapCallback",
+        """
+        Unmap the memory pages starting at address and spanning the given number of bytes.
+
+        Address will always be an address returned by an earlier call to {@code memory_map} function.
+        """,
+
+        opaque_p.IN("address", "the address to unmap"),
+        size_t.IN("size", "the size of the mapped pages, in bytes")
+    ) {
+        documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+    }.member("memory_unmap", "the memory unmap callback function")
+	size_t.member(
+        "page_size",
+        """
+        the size of memory pages.
+
+        All allocation requests will be made in multiples of this page size. If set to 0, rpmalloc will use system calls to determine the page size. The page
+        size MUST be a power of two in {@code [512,16384]} range ({@code 2^9} to {@code 2^14}).
+        """
+    )
+    nullable..callback(
+        Module.RPMALLOC, void, "RPMemoryOverwriteCallback",
+        "Debug callback if memory guards are enabled. Called if a memory overwrite is detected before or after the allocated memory block.",
+
+        opaque_p.IN("address", "the allocated block around which memory overwrite was detected")
+    ) {
+        documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+    }.member("memory_overwrite", "the memory overwrite callback function")
+}
+
 val rpmalloc_global_statistics_t_p = struct(
     Module.RPMALLOC,
     "RPmallocGlobalStatistics",

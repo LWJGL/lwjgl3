@@ -52,18 +52,29 @@ ENABLE_WARNINGS()""")
         )
     }
 
-    void(
+    intb(
         "malloc_initialize",
+        "Calls #malloc_initialize_config() with the default configuration."
+    )
+
+    intb(
+        "malloc_initialize_config",
         """
-        Call at process start to initialize the allocator.
+        Call at process start to initialize the allocator and setup global data.
 
         This function also calls #malloc_thread_initialize().
-        """
+        """,
+
+        nullable..const..rpmalloc_config_t.p.IN("config", "an optional ##RPMallocConfig instance")
     )
 
     void(
         "malloc_finalize",
-        "Call at process exit to finalize the allocator."
+        """
+        Call at process exit to finalize the allocator.
+
+        This function also calls #malloc_thread_finalize().
+        """
     )
 
     void(
@@ -81,7 +92,7 @@ ENABLE_WARNINGS()""")
         ""
     )
 
-    int(
+    intb(
         "malloc_is_thread_initialized",
         ""
     )

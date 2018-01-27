@@ -135,7 +135,7 @@
             <fileset dir="." includes="${module.lwjgl}/core/src/main/c/${platform}/wrap_memcpy.c"/>
         </compile>
 
-        <parallel threadsPerProcessor="2" failonany="true">
+        <parallel threadsPerProcessor="2">
 
         <!-- CORE -->
         <build module="core">

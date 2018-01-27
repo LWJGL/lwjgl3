@@ -135,7 +135,7 @@ EXPORTS
     <target name="compile-native-platform">
         <mkdir dir="${bin.native}/build"/>
 
-        <parallel threadsPerProcessor="1" failonany="true">
+        <parallel threadsPerProcessor="1">
 
         <!-- CORE -->
         <build module="core">
