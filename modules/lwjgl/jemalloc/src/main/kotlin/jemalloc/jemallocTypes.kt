@@ -103,7 +103,7 @@ fun config() {
     })
 }
 
-val je_malloc_message_cb = "je_malloc_message_cb".callback(
+val write_cb = callback(
     Module.JEMALLOC, void, "MallocMessageCallback",
     "Will be called by the #malloc_usable_size() method.",
 

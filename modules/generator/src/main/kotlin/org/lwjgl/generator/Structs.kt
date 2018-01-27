@@ -7,7 +7,6 @@ package org.lwjgl.generator
 import java.io.*
 
 private const val STRUCT = "struct"
-private const val ANONYMOUS = "*" // very easy to introduce bugs, unless this is an invalid character in Java identifiers
 
 private val KEYWORDS = setOf(
     // Java keywords
@@ -416,32 +415,43 @@ $indent}"""
     private fun Struct.printStructLayout(indentation: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
-${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {
-            if (it.isNestedStructDefinition)
-                "${(it.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (it.name === ANONYMOUS) "" else " ${it.name}"};"
+${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {member ->
+            if (member.isNestedStructDefinition)
+                "${(member.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (member.name === ANONYMOUS) "" else " ${member.name}"};"
             else {
-                val nativeType = it.nativeType.let {
-                    (
-                        if (it is PointerType && !it.includesPointer)
-                            "${it.name}${if (!it.name.endsWith('*')) " " else ""}*"
-                        else
-                            it.name
-                    ).let { nativeName ->
-                        var elementType = it
+                val anonymous = member.name === ANONYMOUS || (member.nativeType is CallbackType && member.nativeType.name.contains("(*)"))
+                member.nativeType
+                    .let {
+                        when {
+                            it is CallbackType && anonymous -> it.function.nativeType(member.name)
+                            it is PointerType && !it.includesPointer -> "${it.name}${if (!it.name.endsWith('*')) " " else ""}*"
+                            else -> it.name
+                        }
+                    }
+                    .let {
+                        var elementType = member.nativeType
                         while (true) {
                             if (elementType !is PointerType || elementType.elementType == null)
                                 break
 
                             elementType = elementType.elementType!!
                         }
-
-                        if (elementType is StructType || elementType is CallbackType)
-                            nativeName.replace(elementType.name, "{@link ${elementType.javaMethodType} ${elementType.name}}")
-                        else
-                            nativeName
+                        when {
+                            elementType is CallbackType && anonymous                 -> it.replace(
+                                "(*${member.name})",
+                                "(*{@link ${elementType.javaMethodType} ${member.name}})"
+                            )
+                            elementType is StructType || elementType is CallbackType -> it.replace(
+                                elementType.name,
+                                "{@link ${elementType.javaMethodType} ${elementType.name}}"
+                            )
+                            else                                                     -> it
+                        }
                     }
-                }
-                "${if (it has ConstMember) "const " else ""}$nativeType${if (it.name === ANONYMOUS) "" else " ${it.name}"}${if (it is StructMemberArray) "[${it.size}]" else ""};"
+                    .let {
+                        "${if (member has ConstMember) "const " else ""}$it${if (anonymous) "" else " ${member.name}"}${if (member is StructMemberArray) "[${member.size}]" else ""};"
+                    }
+
             }
         }}
 $indentation}"""
@@ -1960,3 +1970,22 @@ fun union(
     }
     return struct.nativeType
 }
+
+// Hack that allows use of function modifiers that alias with struct modifiers, inside struct definitions
+object GSCOPE
+
+fun <T> global(block: GSCOPE.() -> T) = GSCOPE.block()
+
+val GSCOPE.const get() = org.lwjgl.generator.const
+val GSCOPE.nullable get() = org.lwjgl.generator.nullable
+fun GSCOPE.AutoSize(div: Int, reference: String, vararg dependent: String) = org.lwjgl.generator.AutoSize(div, reference, *dependent)
+fun GSCOPE.AutoSize(reference: String, vararg dependent: String, factor: AutoSizeFactor? = null) =
+    org.lwjgl.generator.AutoSize(reference, *dependent, factor = factor)
+fun GSCOPE.AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
+    org.lwjgl.generator.AutoSizeDiv(expression, reference, *dependent)
+fun GSCOPE.AutoSizeMul(expression: String, reference: String, vararg dependent: String) =
+    org.lwjgl.generator.AutoSizeMul(expression, reference, *dependent)
+fun GSCOPE.AutoSizeShr(expression: String, reference: String, vararg dependent: String) =
+    org.lwjgl.generator.AutoSizeShr(expression, reference, *dependent)
+fun GSCOPE.AutoSizeShl(expression: String, reference: String, vararg dependent: String) =
+    org.lwjgl.generator.AutoSizeShl(expression, reference, *dependent)

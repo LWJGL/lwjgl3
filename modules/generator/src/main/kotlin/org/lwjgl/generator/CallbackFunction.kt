@@ -9,7 +9,7 @@ import java.io.*
 class CallbackFunction(
     module: Module,
     className: String,
-    val nativeType: String,
+    nativeType: String,
     val returns: NativeType,
     vararg val signature: Parameter
 ) : GeneratorTarget(module, className) {
@@ -21,6 +21,26 @@ class CallbackFunction(
     fun useSystemCallConvention() {
         stdcall = true
     }
+
+    internal fun nativeType(name: String, separator: String = ", ", prefix: String = "", postfix: String = "") =
+        "${returns.name}${if (returns is PointerType && !returns.includesPointer) "*" else ""} (*$name) (${signature.asSequence()
+            .joinToString(separator, prefix = prefix, postfix = postfix) { param ->
+                param.toNativeType(null).let {
+                    if (it.endsWith('*')) {
+                        "$it${param.name}"
+                    } else {
+                        "$it ${param.name}"
+                    }
+                }
+            }
+        })"
+
+    internal val nativeType = if (nativeType === ANONYMOUS)
+        "${returns.name}${if (returns is PointerType && !returns.includesPointer) "*" else ""} (*) (${
+        signature.asSequence().joinToString(", ") { it.toNativeType(null) }
+        })"
+    else
+        nativeType
 
     private val NativeType.dyncall
         get() = when (this) {
@@ -50,6 +70,35 @@ class CallbackFunction(
         else
             (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
 
+    private fun PrintWriter.generateDocumentation(isClass: Boolean) {
+        val documentation = if (module === Module.VULKAN)
+            super.documentation
+        else {
+            val type =
+                """
+                <h3>Type</h3>
+
+                ${codeBlock(nativeType("", ",\n$t", "\n$t", "\n"))}
+                """
+
+            super.documentation.let {
+                if (it == null)
+                    type
+                else
+                    "$it\n\n$type"
+            }
+        }
+        if (documentation != null) {
+            println(processDocumentation(documentation.let {
+                if (isClass) {
+                    it.replace("Instances of this interface", "Instances of this class")
+                } else {
+                    it
+                }
+            }).toJavaDoc(indentation = "", see = see, since = since))
+        }
+    }
+
     override fun PrintWriter.generateJava() {
         print(HEADER)
         println("package $packageName;\n")
@@ -63,11 +112,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 """)
         preamble.printJava(this)
 
-        val documentation = super.documentation
-        if (documentation != null)
-            println(processDocumentation(documentation
-                .replace("Instances of this interface", "Instances of this class"))
-                .toJavaDoc(indentation = "", see = see, since = since))
+        generateDocumentation(true)
         print("""${access.modifier}abstract class $className extends Callback implements ${className}I {
 
     /**
@@ -140,11 +185,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
 
 """)
-        val documentation = super.documentation
-        if (documentation != null)
-            print(processDocumentation(documentation).toJavaDoc(indentation = "", see = see, since = since))
-        print("""
-@FunctionalInterface
+        generateDocumentation(false)
+        print("""@FunctionalInterface
 @NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jniSignature} {
 
@@ -190,6 +232,19 @@ private class CallbackInterface(
     }
 }
 
+// anonymous callback type
+fun callback(
+    module: Module,
+    returns: NativeType,
+    className: String,
+    functionDoc: String,
+    vararg signature: Parameter,
+    returnDoc: String = "",
+    see: Array<String>? = null,
+    since: String = "",
+    init: (CallbackFunction.() -> Unit)? = null
+) = ANONYMOUS.callback(module, returns, className, functionDoc, *signature, returnDoc = returnDoc, see = see, since = since, init = init)
+
 fun String.callback(
     module: Module,
     returns: NativeType,
@@ -207,5 +262,5 @@ fun String.callback(
     callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
     Generator.register(callback)
     Generator.register(CallbackInterface(callback))
-    return CallbackType(callback, this)
+    return CallbackType(callback)
 }

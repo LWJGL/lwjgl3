@@ -268,7 +268,7 @@ fun config() {
 }
 
 // callback functions
-val cl_context_callback = "cl_context_callback".callback(
+val cl_context_callback = callback(
     Module.OPENCL, void, "CLContextCallback",
     "Will be called when a debug message is generated.",
     NullTerminated..const..cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
@@ -283,7 +283,7 @@ val cl_context_callback = "cl_context_callback".callback(
     useSystemCallConvention()
 }
 
-val cl_program_callback = "cl_program_callback".callback(
+val cl_program_callback = callback(
     Module.OPENCL, void, "CLProgramCallback",
     "Will be called when the program is built, compiled or linked.",
     cl_program.IN("program", "the program that was built, compiled or linked"),
@@ -296,7 +296,7 @@ val cl_program_callback = "cl_program_callback".callback(
     useSystemCallConvention()
 }
 
-val cl_native_kernel = "cl_native_kernel".callback(
+val cl_native_kernel = callback(
     Module.OPENCL, void, "CLNativeKernel",
     "Will be called by the OpenCL using #EnqueueNativeKernel().",
     void_p.IN("args", "a pointer to the arguments list")
@@ -305,7 +305,7 @@ val cl_native_kernel = "cl_native_kernel".callback(
     useSystemCallConvention()
 }
 
-val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".callback(
+val cl_mem_object_destructor_callback = callback(
     Module.OPENCL, void, "CLMemObjectDestructorCallback",
     "Will be called when a memory object is deleted.",
     cl_mem.IN("memobj", "the memory object that was deleted"),
@@ -315,7 +315,7 @@ val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".call
     useSystemCallConvention()
 }
 
-val cl_event_callback = "cl_event_callback".callback(
+val cl_event_callback = callback(
     Module.OPENCL, void, "CLEventCallback",
     """
     Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
@@ -336,7 +336,7 @@ val cl_event_callback = "cl_event_callback".callback(
     useSystemCallConvention()
 }
 
-val cl_svmfree_callback = "cl_svmfree_callback".callback(
+val cl_svmfree_callback = callback(
     Module.OPENCL, void, "CLSVMFreeCallback",
     "Will be called to free shared virtual memory pointers.",
     cl_command_queue.IN("queue", "a valid host command-queue"),
@@ -348,7 +348,7 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
     useSystemCallConvention()
 }
 
-val cl_program_release_callback = "cl_program_release_callback".callback(
+val cl_program_release_callback = callback(
     Module.OPENCL, void, "CLProgramReleaseCallback",
     "Will be called after destructors (if any) for program scope global variables (if any) are called and before the program is released.",
 
@@ -391,7 +391,7 @@ val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 
 // EXT
 
-val cl_report_live_objects_altera_callback = "cl_report_live_objects_altera".callback(
+val cl_report_live_objects_altera_callback = callback(
     Module.OPENCL, void, "CLReportLiveObjectsAlteraCallback",
     "Reports a live OpenCL API object.",
     void_p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),

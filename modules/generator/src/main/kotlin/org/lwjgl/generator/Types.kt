@@ -202,9 +202,8 @@ open class ObjectType(
 
 // Callbacks
 class CallbackType(
-    val signature: CallbackFunction,
-    name: String = signature.className
-) : ObjectType(signature.className, name) {
+    val function: CallbackFunction
+) : ObjectType(function.className, function.nativeType) {
     override val javaMethodType
         get() = "${super.javaMethodType}I"
 }

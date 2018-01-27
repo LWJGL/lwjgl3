@@ -65,14 +65,14 @@ val Remotery_p = "Remotery".p
 val rmtError = "rmtError".enumType
 
 // Callback function pointer types
-val rmtMallocPtr = "rmtMalloc".callback(
+val rmtMallocPtr = "rmtMallocPtr".callback(
     Module.REMOTERY, opaque_p, "RMTMalloc", "",
 
     opaque_p.IN("mm_context", ""),
     rmtU32.IN("size", "")
 )
 
-val rmtReallocPtr = "rmtRealloc".callback(
+val rmtReallocPtr = "rmtReallocPtr".callback(
     Module.REMOTERY, opaque_p, "RMTRealloc", "",
 
     opaque_p.IN("mm_context", ""),

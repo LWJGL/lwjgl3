@@ -307,191 +307,185 @@ val bgfx_caps_t_p = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", 
 
 // Callback interface
 
-val bgfx_callback_interface_t_p = struct(Module.BGFX, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t").p
-
 val bgfx_fatal_t = "bgfx_fatal_t".enumType
-val fatal = "fatal".callback(
-    Module.BGFX, void, "BGFXFatalCallback",
-    "This callback is called on unrecoverable errors.",
 
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    bgfx_fatal_t.IN("_code", "the error code"),
-    charASCII_p.IN("_str", "the error message")
-) {
-    documentation =
-        """
-    If fatal code is not #FATAL_DEBUG_CHECK this callback is called on unrecoverable error. It's not safe to continue, inform user and terminate application
-    from this call.
-
-    Not thread safe and it can be called from any thread.
-    """
-}
-
-val trace_vargs = "trace_vargs".callback(
-    Module.BGFX, void, "BGFXTraceVarArgsCallback",
-    "Will be called when a debug message is produced.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    charASCII_p.IN("_filePath", "file path where debug message was generated"),
-    uint16_t.IN("_line", "line where debug message was generated"),
-    NullTerminated..charUTF8_p.IN("_format", "{@code printf} style format"),
-    va_list.IN("_argList", "variable arguments list initialized with {@code va_start}")
-) {
-    documentation =
-        """
-    Prints a debug message.
-
-    Not thread safe and it can be called from any thread.
-    """
-}
-
-val profiler_begin = "profiler_begin".callback(
-    Module.BGFX, void, "BGFXProfilerBegin",
-    """
-    Will be called when a profiler region begins.
-
-    Not thread safe and it can be called from any thread.
-    """,
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    const..charASCII_p.IN("_name", "region name, contains dynamic string"),
-    uint32_t.IN("_abgr", "color of profiler region"),
-    const..charASCII_p.IN("_filePath", "file path where {@code profilerBegin} was called"),
-    uint16_t.IN("_line", "line where {@code profilerBegin} was called")
-) {
-    documentation = "Profiler region begin."
-}
-
-val profiler_begin_literal = "profiler_begin_literal".callback(
-    Module.BGFX, void, "BGFXProfilerBeginLiteral",
-    """
-    Will be called when a profiler region with string literal begins.
-
-    Not thread safe and it can be called from any thread.
-    """,
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    const..charASCII_p.IN("_name", "region name, contains string literal"),
-    uint32_t.IN("_abgr", "color of profiler region"),
-    const..charASCII_p.IN("_filePath", "file path where {@code profilerBeginLiteral} was called"),
-    uint16_t.IN("_line", "line where {@code profilerBeginLiteral} was called")
-) {
-    documentation = "Profiler region begin with string literal name."
-}
-
-val profiler_end = "profiler_end".callback(
-    Module.BGFX, void, "BGFXProfilerEnd",
-    """
-    Will be called when a profiler region ends.
-
-    Not thread safe and it can be called from any thread.
-    """,
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface")
-) {
-    documentation = "Profiler region end."
-}
-
-val cache_read_size = "cache_read_size".callback(
-    Module.BGFX, uint32_t, "BGFXCacheReadSizeCallback",
-    "Will be called to determine size of cached item.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    uint64_t.IN("_id", "cache id"),
-
-    returnDoc = "number of bytes to read"
-) {
-    documentation = "Returns the size of a cached item. Returns 0 if no cached item was found."
-}
-
-val cache_read = "cache_read".callback(
-    Module.BGFX, bool, "BGFXCacheReadCallback",
-    "Will be called to read a cached item.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    uint64_t.IN("_id", "cache id"),
-    void_p.IN("_data", "buffer where to read data"),
-    AutoSize("_data")..uint32_t.IN("_size", "size of data to read"),
-
-    returnDoc = "true if data is read"
-) {
-    documentation = "Reads cached item."
-}
-
-val cache_write = "cache_write".callback(
-    Module.BGFX, void, "BGFXCacheWriteCallback",
-    "Will be called to writes a cached item.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    uint64_t.IN("_id", "cache id"),
-    const..void_p.IN("_data", "data to write"),
-    AutoSize("_data")..uint32_t.IN("_size", "size of data to write")
-) {
-    documentation = "Writes cached item."
-}
-
-val screen_shot = "screen_shot".callback(
-    Module.BGFX, void, "BGFXScreenShotCallback",
-    "",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    charASCII_p.IN("_filePath", "file path"),
-    uint32_t.IN("_width", "image width"),
-    uint32_t.IN("_height", "image height"),
-    uint32_t.IN("_pitch", "number of bytes to skip between the start of each horizontal line of the image"),
-    const..void_p.IN("_data", "image data"),
-    uint32_t.IN("_size", "image size"),
-    bool.IN("_yflip", "if true, image origin is bottom left")
-) {
-    documentation = "Screenshot captured. Screenshot format is always 4-byte BGRA."
-}
-
-val capture_begin = "capture_begin".callback(
-    Module.BGFX, void, "BGFXCaptureBeginCallback",
-    "Will be called when video capture begins.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    uint32_t.IN("_width", "image width"),
-    uint32_t.IN("_height", "image height"),
-    uint32_t.IN("_pitch", "number of bytes to skip to next line"),
-    bgfx_texture_format_t.IN("_format", "texture format"),
-    bool.IN("_yflip", "if true image origin is bottom left")
-) {
-    documentation = "Called when video capture begins."
-}
-
-val capture_end = "capture_end".callback(
-    Module.BGFX, void, "BGFXCaptureEndCallback",
-    "Will be called when video capture ends.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface")
-) {
-    documentation = "Called when video capture ends."
-}
-
-val capture_frame = "capture_frame".callback(
-    Module.BGFX, void, "BGFXCaptureFrameCallback",
-    "Will be called when a frame is captured.",
-
-    bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-    const..void_p.IN("_data", "image data"),
-    AutoSize("_data")..uint32_t.IN("_size", "image size")
-) {
-    documentation = "Captured frame."
-}
-
+val bgfx_callback_interface_t_p = struct(Module.BGFX, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t").p
 val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t") {
     documentation = "Callback virtual table."
 
-    fatal.member("fatal", "the fatal error callback")
-    trace_vargs.member("trace_vargs", "the debug message callback")
-    cache_read_size.member("cache_read_size", "the cache read size callback")
-    cache_read.member("cache_read", "the cache read callback")
-    cache_write.member("cache_write", "the cache write callback")
-    screen_shot.member("screen_shot", "the screenshot callback")
-    capture_begin.member("capture_begin", "the capture begin callback")
-    capture_end.member("capture_end", "the capture end callback")
-    capture_frame.member("capture_frame", "the capture framecallback")
+    callback(
+        Module.BGFX, void, "BGFXFatalCallback",
+        "This callback is called on unrecoverable errors.",
+
+        bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+        bgfx_fatal_t.IN("_code", "the error code"),
+        charASCII_p.IN("_str", "the error message")
+    ) {
+        documentation =
+            """
+            If fatal code is not #FATAL_DEBUG_CHECK this callback is called on unrecoverable error. It's not safe to continue, inform user and terminate
+            application from this call.
+
+            Not thread safe and it can be called from any thread.
+            """
+    }.member("fatal", "the fatal error callback")
+    global {
+        callback(
+            Module.BGFX, void, "BGFXTraceVarArgsCallback",
+            "Will be called when a debug message is produced.",
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            const..charASCII_p.IN("_filePath", "file path where debug message was generated"),
+            uint16_t.IN("_line", "line where debug message was generated"),
+            NullTerminated..const..charUTF8_p.IN("_format", "{@code printf} style format"),
+            va_list.IN("_argList", "variable arguments list initialized with {@code va_start}")
+        ) {
+            documentation =
+                """
+            Prints a debug message.
+
+            Not thread safe and it can be called from any thread.
+            """
+        }
+    }.member("trace_vargs", "the debug message callback")
+    global {
+        callback(
+            Module.BGFX, void, "BGFXProfilerBegin",
+            """
+            Will be called when a profiler region begins.
+
+            Not thread safe and it can be called from any thread.
+            """,
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            const..charASCII_p.IN("_name", "region name, contains dynamic string"),
+            uint32_t.IN("_abgr", "color of profiler region"),
+            const..charASCII_p.IN("_filePath", "file path where {@code profiler_begin} was called"),
+            uint16_t.IN("_line", "line where {@code profiler_begin} was called")
+        ) {
+            documentation = "Profiler region begin."
+        }
+    }.member("profiler_begin", "the profiler begin callback")
+    global {
+        callback(
+            Module.BGFX, void, "BGFXProfilerBeginLiteral",
+            """
+            Will be called when a profiler region with string literal begins.
+
+            Not thread safe and it can be called from any thread.
+            """,
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            const..charASCII_p.IN("_name", "region name, contains string literal"),
+            uint32_t.IN("_abgr", "color of profiler region"),
+            const..charASCII_p.IN("_filePath", "file path where {@code profiler_begin_literal} was called"),
+            uint16_t.IN("_line", "line where {@code profiler_begin_literal} was called")
+        ) {
+            documentation = "Profiler region begin with string literal name."
+        }
+    }.member("profiler_begin_literal", "the profiler begin literal callback")
+    callback(
+        Module.BGFX, void, "BGFXProfilerEnd",
+        """
+        Will be called when a profiler region ends.
+
+        Not thread safe and it can be called from any thread.
+        """,
+
+        bgfx_callback_interface_t_p.IN("_this", "the callback interface")
+    ) {
+        documentation = "Profiler region end."
+    }.member("profiler_end", "the profiler end callback")
+    callback(
+        Module.BGFX, uint32_t, "BGFXCacheReadSizeCallback",
+        "Will be called to determine size of cached item.",
+
+        bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+        uint64_t.IN("_id", "cache id"),
+
+        returnDoc = "number of bytes to read"
+    ) {
+        documentation = "Returns the size of a cached item. Returns 0 if no cached item was found."
+    }.member("cache_read_size", "the cache read size callback")
+    global {
+        callback(
+            Module.BGFX, bool, "BGFXCacheReadCallback",
+            "Will be called to read a cached item.",
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            uint64_t.IN("_id", "cache id"),
+            void_p.IN("_data", "buffer where to read data"),
+            AutoSize("_data")..uint32_t.IN("_size", "size of data to read"),
+
+            returnDoc = "true if data is read"
+        ) {
+            documentation = "Reads cached item."
+        }
+
+    }.member("cache_read", "the cache read callback")
+    global {
+        callback(
+            Module.BGFX, void, "BGFXCacheWriteCallback",
+            "Will be called to writes a cached item.",
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            uint64_t.IN("_id", "cache id"),
+            const..void_p.IN("_data", "data to write"),
+            AutoSize("_data")..uint32_t.IN("_size", "size of data to write")
+        ) {
+            documentation = "Writes cached item."
+        }
+    }.member("cache_write", "the cache write callback")
+    global {
+        callback(
+            Module.BGFX, void, "BGFXScreenShotCallback",
+            "",
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            const..charASCII_p.IN("_filePath", "file path"),
+            uint32_t.IN("_width", "image width"),
+            uint32_t.IN("_height", "image height"),
+            uint32_t.IN("_pitch", "number of bytes to skip between the start of each horizontal line of the image"),
+            const..void_p.IN("_data", "image data"),
+            uint32_t.IN("_size", "image size"),
+            bool.IN("_yflip", "if true, image origin is bottom left")
+        ) {
+            documentation = "Screenshot captured. Screenshot format is always 4-byte BGRA."
+        }
+    }.member("screen_shot", "the screenshot callback")
+    callback(
+        Module.BGFX, void, "BGFXCaptureBeginCallback",
+        "Will be called when video capture begins.",
+
+        bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+        uint32_t.IN("_width", "image width"),
+        uint32_t.IN("_height", "image height"),
+        uint32_t.IN("_pitch", "number of bytes to skip to next line"),
+        bgfx_texture_format_t.IN("_format", "texture format"),
+        bool.IN("_yflip", "if true image origin is bottom left")
+    ) {
+        documentation = "Called when video capture begins."
+    }.member("capture_begin", "the capture begin callback")
+    callback(
+        Module.BGFX, void, "BGFXCaptureEndCallback",
+        "Will be called when video capture ends.",
+
+        bgfx_callback_interface_t_p.IN("_this", "the callback interface")
+    ) {
+        documentation = "Called when video capture ends."
+    }.member("capture_end", "the capture end callback")
+    global {
+        callback(
+            Module.BGFX, void, "BGFXCaptureFrameCallback",
+            "Will be called when a frame is captured.",
+
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            const..void_p.IN("_data", "image data"),
+            AutoSize("_data")..uint32_t.IN("_size", "image size")
+        ) {
+            documentation = "Captured frame."
+        }
+    }.member("capture_frame", "the capture framecallback")
 }
 
 val bgfx_callback_interface_t = struct(Module.BGFX, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t") {
@@ -511,24 +505,24 @@ val bgfx_callback_interface_t = struct(Module.BGFX, "BGFXCallbackInterface", nat
 
 val bgfx_allocator_interface_t_p = struct(Module.BGFX, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t").p
 
-val realloc = "realloc".callback(
-    Module.BGFX, opaque_p, "BGFXReallocCallback",
-    "Will be called when an allocation is requested.",
-
-    bgfx_allocator_interface_t_p.IN("_this", "the allocator interface"),
-    nullable..opaque_p.IN("_ptr", "the previously allocated memory or #NULL"),
-    size_t.IN("_size", "the number of bytes to allocate"),
-    size_t.IN("_align", "the allocation alignment, in bytes"),
-    charASCII_p.IN("_file", "file path where allocation was generated"),
-    uint32_t.IN("_line", "line where allocation was generated")
-) {
-    documentation = "Allocates memory."
-}
-
 val bgfx_allocator_vtbl_t = struct(Module.BGFX, "BGFXAllocatorVtbl", nativeName = "bgfx_allocator_vtbl_t") {
     documentation = "Allocator virtual table"
 
-    realloc.member("realloc", "the reallocation callback")
+    global {
+        callback(
+            Module.BGFX, opaque_p, "BGFXReallocCallback",
+            "Will be called when an allocation is requested.",
+
+            bgfx_allocator_interface_t_p.IN("_this", "the allocator interface"),
+            nullable..opaque_p.IN("_ptr", "the previously allocated memory or #NULL"),
+            size_t.IN("_size", "the number of bytes to allocate"),
+            size_t.IN("_align", "the allocation alignment, in bytes"),
+            charASCII_p.IN("_file", "file path where allocation was generated"),
+            uint32_t.IN("_line", "line where allocation was generated")
+        ) {
+            documentation = "Allocates memory."
+        }
+    }.member("realloc", "the reallocation callback")
 }
 
 val bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t") {

@@ -371,7 +371,7 @@ for (i = 0; i < nbins; i++) {
         prevent some statistics from being completely up to date, since extra locking would be required to merge counters that track thread cache operations.
         """,
 
-        nullable..je_malloc_message_cb.IN("write_cb", "the print callback, or #NULL to use {@code malloc_message()}"),
+        nullable..write_cb.IN("write_cb", "the print callback, or #NULL to use {@code malloc_message()}"),
         nullable..opaque_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
         nullable..const..charASCII_p.IN("opts", "an options string")
     )

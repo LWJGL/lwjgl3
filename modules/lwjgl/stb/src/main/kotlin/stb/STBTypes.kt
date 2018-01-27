@@ -43,7 +43,7 @@ ENABLE_WARNINGS()""")
 val stbi_uc_p = typedef(unsigned_char, "stbi_uc").p
 val stbi_us_p = typedef(unsigned_short, "stbi_us").p
 
-val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
+val stbi_io_callbacks_read = callback(
     Module.STB, int, "STBIReadCallback",
     "The {@code stbi_io_callbacks.read} callback.",
     void_p.IN("user", "a pointer to user data"),
@@ -70,7 +70,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
     """
 }
 
-val stbi_io_callbacks_skip = "stbi_io_callbacks.skip".callback(
+val stbi_io_callbacks_skip = callback(
     Module.STB, void, "STBISkipCallback",
     "The {@code stbi_io_callbacks.skip} callback.",
     void_p.IN("user", "a pointer to user data"),
@@ -79,7 +79,7 @@ val stbi_io_callbacks_skip = "stbi_io_callbacks.skip".callback(
     documentation = "Instances of this interface may be set to the {@code skip} field of the ##STBIIOCallbacks struct."
 }
 
-val stbi_io_callbacks_eof = "stbi_io_callbacks.eof".callback(
+val stbi_io_callbacks_eof = callback(
     Module.STB, int, "STBIEOFCallback",
     "The {@code stbi_io_callbacks.eof} callback.",
     void_p.IN("user", "a pointer to user data"),

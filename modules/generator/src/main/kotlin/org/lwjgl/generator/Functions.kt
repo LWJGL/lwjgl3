@@ -28,6 +28,7 @@ import java.io.*
 internal const val ADDRESS = "address()"
 
 const val RESULT = "__result"
+internal const val ANONYMOUS = "*" // invalid character in Java identifiers
 internal const val POINTER_POSTFIX = "Address"
 internal const val MAP_OLD = "old_buffer"
 internal const val MAP_LENGTH = "length"

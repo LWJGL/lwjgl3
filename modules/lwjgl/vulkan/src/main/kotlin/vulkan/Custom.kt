@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import vulkan.templates.*
 
 fun templateCustomization() {
-    PFN_vkDebugReportCallbackEXT.signature.apply {
+    PFN_vkDebugReportCallbackEXT.function.apply {
         additionalCode = """
     /**
      * Converts the specified {@link VkDebugReportCallbackEXT} argument to a String.
