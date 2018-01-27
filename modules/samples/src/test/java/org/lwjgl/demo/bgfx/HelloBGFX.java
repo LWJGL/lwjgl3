@@ -28,12 +28,8 @@ public final class HelloBGFX {
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static void main(String[] args) {
-        int renderer = BGFX_RENDERER_TYPE_COUNT;
-        int pciId    = BGFX_PCI_ID_NONE;
-        int width    = 1280;
-        int height   = 720;
-        int debug    = BGFX_DEBUG_TEXT;
-        int reset    = BGFX_RESET_VSYNC;
+        int width  = 1280;
+        int height = 720;
 
         if (!glfwInit()) {
             throw new RuntimeException("Error initializing GLFW");
@@ -78,16 +74,16 @@ public final class HelloBGFX {
             bgfx_set_platform_data(platformData);
         }
 
-        if (!bgfx_init(renderer, pciId, 0, null, null)) {
+        if (!bgfx_init(BGFX_RENDERER_TYPE_COUNT, BGFX_PCI_ID_NONE, 0, null, null)) {
             throw new RuntimeException("Error initializing bgfx renderer");
         }
 
         System.out.println("bgfx renderer: " + bgfx_get_renderer_name(bgfx_get_renderer_type()));
 
-        bgfx_reset(width, height, reset);
+        bgfx_reset(width, height, BGFX_RESET_VSYNC);
 
         // Enable debug text.
-        bgfx_set_debug(debug);
+        bgfx_set_debug(BGFX_DEBUG_TEXT);
 
         bgfx_set_view_clear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x303030ff, 1.0f, 0);
 

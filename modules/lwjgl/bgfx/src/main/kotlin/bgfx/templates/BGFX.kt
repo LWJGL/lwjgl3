@@ -179,24 +179,23 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STENCIL_MASK".."0xffffffff"
     )
 
-
-    val ClearFlags = ShortConstant(
+    val ClearFlags = IntConstant(
         "Clear",
 
-        "CLEAR_NONE"..0x0000.s,
-        "CLEAR_COLOR"..0x0001.s,
-        "CLEAR_DEPTH"..0x0002.s,
-        "CLEAR_STENCIL"..0x0004.s,
-        "CLEAR_DISCARD_COLOR_0"..0x0008.s,
-        "CLEAR_DISCARD_COLOR_1"..0x0010.s,
-        "CLEAR_DISCARD_COLOR_2"..0x0020.s,
-        "CLEAR_DISCARD_COLOR_3"..0x0040.s,
-        "CLEAR_DISCARD_COLOR_4"..0x0080.s,
-        "CLEAR_DISCARD_COLOR_5"..0x0100.s,
-        "CLEAR_DISCARD_COLOR_6"..0x0200.s,
-        "CLEAR_DISCARD_COLOR_7"..0x0400.s,
-        "CLEAR_DISCARD_DEPTH"..0x0800.s,
-        "CLEAR_DISCARD_STENCIL"..0x1000.s,
+        "CLEAR_NONE"..0x0000,
+        "CLEAR_COLOR"..0x0001,
+        "CLEAR_DEPTH"..0x0002,
+        "CLEAR_STENCIL"..0x0004,
+        "CLEAR_DISCARD_COLOR_0"..0x0008,
+        "CLEAR_DISCARD_COLOR_1"..0x0010,
+        "CLEAR_DISCARD_COLOR_2"..0x0020,
+        "CLEAR_DISCARD_COLOR_3"..0x0040,
+        "CLEAR_DISCARD_COLOR_4"..0x0080,
+        "CLEAR_DISCARD_COLOR_5"..0x0100,
+        "CLEAR_DISCARD_COLOR_6"..0x0200,
+        "CLEAR_DISCARD_COLOR_7"..0x0400,
+        "CLEAR_DISCARD_DEPTH"..0x0800,
+        "CLEAR_DISCARD_STENCIL"..0x1000,
 
         "CLEAR_DISCARD_COLOR_MASK".."""(0
         | BGFX_CLEAR_DISCARD_COLOR_0
@@ -233,15 +232,15 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "DEBUG_PROFILER".enum("Enable profiler.", 0x00000010)
     ).javaDocLinks
 
-    val BufferFlags = ShortConstant(
+    val BufferFlags = IntConstant(
         "Buffer creation flags",
 
-        "BUFFER_NONE"..0x0000.s,
-        "BUFFER_COMPUTE_READ"..0x0100.s,
-        "BUFFER_COMPUTE_WRITE"..0x0200.s,
-        "BUFFER_DRAW_INDIRECT"..0x0400.s,
-        "BUFFER_ALLOW_RESIZE"..0x0800.s,
-        "BUFFER_INDEX32"..0x1000.s,
+        "BUFFER_NONE"..0x0000,
+        "BUFFER_COMPUTE_READ"..0x0100,
+        "BUFFER_COMPUTE_WRITE"..0x0200,
+        "BUFFER_DRAW_INDIRECT"..0x0400,
+        "BUFFER_ALLOW_RESIZE"..0x0800,
+        "BUFFER_INDEX32"..0x1000,
 
         "BUFFER_COMPUTE_READ_WRITE".."""(0
         | BGFX_BUFFER_COMPUTE_READ
@@ -938,7 +937,7 @@ RGBA16S
             "select rendering backend. When set to #RENDERER_TYPE_COUNT, a default rendering backend will be selected appropriate to the platform.",
             RendererType
         ),
-        MapToInt..uint16_t.IN("_vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device."),
+        uint16_t.IN("_vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device."),
         MapToInt..uint16_t.IN("_deviceId", "device id. If set to 0 it will select first device, or device with matching id."),
         nullable..bgfx_callback_interface_t_p.IN("_callback", "provide application specific callback interface"),
         nullable..bgfx_allocator_interface_t_p.IN(
@@ -1533,7 +1532,7 @@ RGBA16S
 
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
         MapToInt..uint16_t.IN("_layer", "layers in texture array"),
-        MapToInt..uint8_t.IN("_side", "cubemap side", CubeMapSides),
+        uint8_t.IN("_side", "cubemap side", CubeMapSides),
         MapToInt..uint8_t.IN("_mip", "mip level"),
         MapToInt..uint16_t.IN("_x", "x offset in texture"),
         MapToInt..uint16_t.IN("_y", "y offset in texture"),
