@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."59"
+        "API_VERSION".."60"
     )
 
     ShortConstant(
@@ -1075,7 +1075,10 @@ RGBA16S
 
         MapToInt..uint8_t.IN(
             "_attr",
-            "color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette."
+            """
+            color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
+            escape codes).
+            """
         ),
         bool.IN("_small", "")
     )
@@ -1088,7 +1091,10 @@ RGBA16S
         MapToInt..uint16_t.IN("_y", "y coordinate"),
         MapToInt..uint8_t.IN(
             "_attr",
-            "color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette."
+            """
+            color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
+            escape codes).
+            """
         ),
         const..charASCII_p.IN("_format", "`printf` style format")
     )
@@ -2182,7 +2188,6 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "Sets compute image from texture.",
 
         MapToInt..uint8_t.IN("_stage", "texture unit"),
-        bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
         MapToInt..uint8_t.IN("_mip", "mip level"),
         bgfx_access_t.IN("_access", "texture access", Access),
@@ -2599,7 +2604,6 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "texture unit"),
-        bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
         MapToInt..uint8_t.IN("_mip", "mip level"),
         bgfx_access_t.IN("_access", "texture access", Access),
