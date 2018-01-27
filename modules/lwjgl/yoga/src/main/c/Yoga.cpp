@@ -255,7 +255,7 @@ void YGNodeFree(const YGNodeRef node) {
   }
 
   node->clearChildren();
-  free(node);
+  delete node;
   gNodeInstanceCount--;
 }
 
