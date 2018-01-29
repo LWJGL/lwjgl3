@@ -5,5 +5,7 @@
 module org.lwjgl.opengles {
     requires transitive org.lwjgl;
 
+    requires static org.lwjgl.egl;
+
     exports org.lwjgl.opengles;
 }

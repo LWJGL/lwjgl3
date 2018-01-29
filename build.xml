@@ -1011,7 +1011,7 @@
         </sequential>
     </macrodef>
 
-    <target name="-multi-release-9">
+    <target name="-multi-release-9" depends="-compile-generator">
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9"/>
         <lwjgl.javac9
             destdir="${bin.lwjgl}/core/META-INF/versions/9"
