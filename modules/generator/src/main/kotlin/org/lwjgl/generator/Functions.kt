@@ -190,6 +190,9 @@ class Func(
     private val returnsJniFunctionType
         get() = this.returns.let { if (it.isStructValue) "void" else it.nativeType.jniFunctionType }
 
+    internal val returnsNull
+        get() = !(has(Nonnull) || has(Address))
+
     private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it.has<AutoSize>() && it.get<AutoSize>().hasReference(reference.name) }
 
     internal fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
@@ -644,7 +647,7 @@ class Func(
 
         printUnsafeJavadoc(constantMacro, nativeOnly)
 
-        if (returns.nativeType is JObjectType && !has(Nonnull)) {
+        if (returns.nativeType is JObjectType && returnsNull) {
             println("$t@Nullable")
         }
 
@@ -681,7 +684,7 @@ class Func(
         println()
 
         printUnsafeJavadoc(constantMacro)
-        if (returns.nativeType is JObjectType && !has(Nonnull)) {
+        if (returns.nativeType is JObjectType && returnsNull) {
             println("$t@Nullable")
         }
         print("$t${if (constantMacro) "private " else accessModifier}static $returnsNativeMethodType n$name(")
@@ -790,7 +793,7 @@ class Func(
 
         // Method signature
 
-        if (returns.nativeType.isReference && !has(Nonnull)) {
+        if (returns.nativeType.isReference && returnsNull) {
             println("$t@Nullable")
         }
 
@@ -867,7 +870,10 @@ class Func(
                     print(t)
                 print("$t$t")
                 if (returns.nativeType.dereference is StructType) {
-                    println("return ${returns.nativeType.javaMethodType}.createSafe($RESULT${parameters.asSequence().singleOrNull { it.has<AutoSizeResultParam>() }.let { if (it != null) ", ${it.name}.get(0)" else "" }});")
+                    println("return ${returns.nativeType.javaMethodType}.create${if (returnsNull) "Safe" else ""}($RESULT${parameters.asSequence()
+                        .singleOrNull { it.has<AutoSizeResultParam>() }
+                        .let { if (it != null) ", ${it.name}.get(0)" else "" }
+                    });")
                 } else {
                     val isNullTerminated = returns.nativeType is CharSequenceType
                     val bufferType = if (isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA)
@@ -876,10 +882,11 @@ class Func(
                         returns.nativeType.mapping.javaMethodName
 
                     print("return mem$bufferType")
-                    print(if (isNullTerminated)
-                        "NT${(returns.nativeType as CharSequenceType).charMapping.bytes}"
-                    else
-                        "Safe")
+                    if (isNullTerminated)
+                        print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                    else if (returnsNull)
+                        print("Safe")
+
                     print("($RESULT")
                     if (has<MapPointer>())
                         get<MapPointer>().sizeExpression.let { expression ->
@@ -1390,7 +1397,7 @@ class Func(
 
         // Method signature
 
-        if (returns.nativeType.isReference && !has(Nonnull)) {
+        if (returns.nativeType.isReference && returnsNull) {
             println("$t@Nullable")
         }
 
@@ -1529,7 +1536,10 @@ class Func(
                     print(t)
                 print("$t$t")
                 if (returns.nativeType.dereference is StructType) {
-                    println("return ${returns.nativeType.javaMethodType}.createSafe($RESULT${parameters.asSequence().singleOrNull { it.has<AutoSizeResultParam>() }.let { if (it != null) ", ${it.name}.get(${it.name}.position()" else "" }});")
+                    println("return ${returns.nativeType.javaMethodType}.create${if (returnsNull) "Safe" else ""}($RESULT${parameters.asSequence()
+                        .singleOrNull { it.has<AutoSizeResultParam>() }
+                        .let { if (it != null) ", ${it.name}.get(${it.name}.position()" else "" }
+                    });")
                 } else {
                     val isNullTerminated = returns.nativeType is CharSequenceType
                     val bufferType = if (isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA)
@@ -1539,10 +1549,10 @@ class Func(
 
                     val builder = StringBuilder()
                     builder.append("mem$bufferType")
-                    builder.append(if (isNullTerminated)
-                        "NT${(returns.nativeType as CharSequenceType).charMapping.bytes}"
-                    else
-                        "Safe")
+                    if (isNullTerminated)
+                        builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                    else if (returnsNull)
+                        builder.append("Safe")
                     builder.append("($RESULT")
                     if (has<MapPointer>())
                         builder.append(", ${get<MapPointer>().sizeExpression}")

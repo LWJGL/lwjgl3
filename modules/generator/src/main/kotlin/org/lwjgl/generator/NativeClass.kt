@@ -411,7 +411,7 @@ class NativeClass(
         if (hasFunctions || binding is SimpleBinding) {
             // TODO: This is horrible. Refactor so that we build imports after code generation.
             if (functions.any {
-                (it.returns.nativeType.isReference && !it.has(Nonnull)) || it.parameters.any {
+                (it.returns.nativeType.isReference && it.returnsNull) || it.parameters.any {
                     it.nativeType.isReference && it.has(nullable)
                 } || it.has<MapPointer>()
             }) {

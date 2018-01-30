@@ -175,7 +175,7 @@ class Construct(
     }
 }
 
-/** Returns the address of the return value, instead of the return value itself. */
+/** Returns the address of the return value, instead of the return value itself. Implies Nonnull. */
 object Address : FunctionModifier {
     override val isSpecial = false
 }
