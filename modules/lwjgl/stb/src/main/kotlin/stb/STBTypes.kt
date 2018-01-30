@@ -134,6 +134,24 @@ val stbi_write_func = "stbi_write_func *".callback(
     """
 }
 
+val stbi_zlib_compress = callback(
+    Module.STB, unsigned_char_p, "STBIZlibCompress",
+    """
+    Compresses a block of data using Zlib compression.
+
+    The returned data will be freed with MemoryUtil#memFree() so it must be heap allocated with MemoryUtil#memAlloc().
+    """,
+
+    unsigned_char_p.IN("data", "the data to compress"),
+    AutoSize("data")..int.IN("data_len", "the data length, in bytes"),
+    AutoSizeResult..Check(1)..int_p.OUT("out_len", "returns the compressed data length, in bytes"),
+    int.IN("quality", "the compression quality to use"),
+
+    returnDoc = "the compressed data"
+) {
+    documentation = "Instances of this interface may be set to STBImageWrite#stbi_zlib_compress()."
+}
+
 // stb_rect_pack.h
 
 val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supported if STBRP_LARGE_RECTS is defined

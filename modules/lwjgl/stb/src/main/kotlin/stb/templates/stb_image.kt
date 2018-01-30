@@ -49,10 +49,8 @@ val stb_image = "STBImage".nativeClass(Module.STB, prefix = "STBI_", library = S
 
         Limitations:
         ${ul(
-            "no 16-bit-per-channel PNG",
             "no 12-bit-per-channel JPEG",
             "no JPEGs with arithmetic coding",
-            "no 1-bit BMP",
             "GIF always returns *channels_in_file=4"
         )}
 
@@ -144,7 +142,7 @@ N=\#channels_in_file     components
         int.IN("desired_channels", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
     )
 
-    stbi_uc_p(
+    val load_from_memory = stbi_uc_p(
         "load_from_memory",
         "In-memory version of #load().",
 
@@ -156,7 +154,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    stbi_uc_p(
+    val load_from_callbacks = stbi_uc_p(
         "load_from_callbacks",
         """
         Callback version of #load().
@@ -176,11 +174,25 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
+    stbi_uc_p(
+        "load_gif_from_memory",
+        "gif version of #load_from_memory().",
+
+        load_from_memory["buffer"],
+        load_from_memory["len"],
+        Check(1)..int_p.p.OUT("delays", "output the delays of each layer in the image"),
+        load["x"],
+        load["y"],
+        Check(1)..AutoSizeResult..int_p.OUT("z", "outputs the number of layers in the image"),
+        load["channels_in_file"],
+        load["desired_channels"]
+    )
+
     stbi_us_p(
         "load_16",
         "16-bits-per-channel version of #load().",
 
-        const..charASCII_p.IN("filename", "the file name"),
+        load["filename"],
         load["x"],
         load["y"],
         load["channels_in_file"],
@@ -191,8 +203,8 @@ N=\#channels_in_file     components
         "load_16_from_memory",
         "In-memory version of #load_16().",
 
-        const..stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
-        AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+        load_from_memory["buffer"],
+        load_from_memory["len"],
         load["x"],
         load["y"],
         load["channels_in_file"],
@@ -203,8 +215,8 @@ N=\#channels_in_file     components
         "load_16_from_callbacks",
         "Callback version of #load_16().",
 
-        const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-        nullable..opaque_p.IN("user", "a pointer to user data"),
+        load_from_callbacks["clbk"],
+        load_from_callbacks["user"],
         load["x"],
         load["y"],
         load["channels_in_file"],
@@ -215,7 +227,7 @@ N=\#channels_in_file     components
         "loadf",
         "Floating-point version of #load().",
 
-        const..charASCII_p.IN("filename", "the file name"),
+        load["filename"],
         load["x"],
         load["y"],
         load["channels_in_file"],
@@ -226,8 +238,8 @@ N=\#channels_in_file     components
         "loadf_from_memory",
         "Floating-point version of #load_from_memory().",
 
-        const..stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
-        AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+        load_from_memory["buffer"],
+        load_from_memory["len"],
         load["x"],
         load["y"],
         load["channels_in_file"],
@@ -238,8 +250,8 @@ N=\#channels_in_file     components
         "loadf_from_callbacks",
         "Floating-point version of #load_from_callbacks().",
 
-        const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-        nullable..opaque_p.IN("user", "a pointer to user data"),
+        load_from_callbacks["clbk"],
+        load_from_callbacks["user"],
         load["x"],
         load["y"],
         load["channels_in_file"],
@@ -278,7 +290,7 @@ N=\#channels_in_file     components
         "is_hdr",
         "Checks if the specified file contains an HDR image.",
 
-        const..charASCII_p.IN("filename", "the file name"),
+        load["filename"],
 
         returnDoc = "1 if the image is HDR, 0 otherwise"
     )
@@ -287,16 +299,16 @@ N=\#channels_in_file     components
         "is_hdr_from_memory",
         "In-memory version of #is_hdr().",
 
-        const..stbi_uc_p.IN("buffer", "the buffer from which to read the image data"),
-        AutoSize("buffer")..int.IN("len", "the buffer length, in bytes")
+        load_from_memory["buffer"],
+        load_from_memory["len"]
     )
 
     intb(
         "is_hdr_from_callbacks",
         "Callback version of #is_hdr().",
 
-        const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-        nullable..opaque_p.IN("user", "a pointer to user data")
+        load_from_callbacks["clbk"],
+        load_from_callbacks["user"]
     )
 
     const..charASCII_p(
@@ -315,7 +327,7 @@ N=\#channels_in_file     components
         "info",
         "Returns image dimensions &amp; components without fully decoding the image.",
 
-        const..charASCII_p.IN("filename", "the file name"),
+        load["filename"],
         Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
         Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
         Check(1)..int_p.OUT("comp", "outputs number of components in image"),
@@ -327,8 +339,8 @@ N=\#channels_in_file     components
         "info_from_memory",
         "In-memory version of #info().",
 
-        const..stbi_uc_p.IN("buffer", "the buffer from which to read the image data"),
-        AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+        load_from_memory["buffer"],
+        load_from_memory["len"],
         Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
         Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
         Check(1)..int_p.OUT("comp", "outputs number of components in image")
@@ -338,11 +350,34 @@ N=\#channels_in_file     components
         "info_from_callbacks",
         "Callback version of #info().",
 
-        const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-        nullable..opaque_p.IN("user", "a pointer to user data"),
+        load_from_callbacks["clbk"],
+        load_from_callbacks["user"],
         Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
         Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
         Check(1)..int_p.OUT("comp", "outputs number of components in image")
+    )
+
+    intb(
+        "is_16_bit",
+        "Returns {@code true} if the file contains a 16-bit image.",
+
+        load["filename"]
+    )
+
+    intb(
+        "is_16_bit_from_memory",
+        "In-memory version of #is_16_bit().",
+
+        load_from_memory["buffer"],
+        load_from_memory["len"]
+    )
+
+    intb(
+        "is_16_bit_from_callbacks",
+        "Callback version of #is_16_bit().",
+
+        load_from_callbacks["clbk"],
+        load_from_callbacks["user"]
     )
 
     void(

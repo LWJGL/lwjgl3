@@ -33,32 +33,32 @@ val stb_truetype = "STBTruetype".nativeClass(Module.STB, prefix = "STBTT", prefi
         <h3>ADDITIONAL DOCUMENTATION</h3>
         Some important concepts to understand to use this library:
 
-        <b>Codepoint</b>
+        <h4>Codepoint</h4>
 
         Characters are defined by unicode codepoints, e.g. 65 is uppercase A, 231 is lowercase c with a cedilla, 0x7e30 is the hiragana for "ma".
 
-        <b>Glyph</b>
+        <h4>Glyph</h4>
 
         A visual character shape (every codepoint is rendered as some glyph)
 
-        <b>Glyph index</b>
+        <h4>Glyph index</h4>
 
         A font-specific integer ID representing a glyph
 
-        <b>Baseline</b>
+        <h4>Baseline</h4>
 
         Glyph shapes are defined relative to a baseline, which is the bottom of uppercase characters. Characters extend both above and below the baseline.
 
-        <b>Current Point</b>
+        <h4>Current Point</h4>
 
         As you draw text to the screen, you keep track of a "current point" which is the origin of each character. The current point's vertical position is the
         baseline. Even "baked fonts" use this model.
 
-        <b>Vertical Font Metrics</b>
+        <h4>Vertical Font Metrics</h4>
 
         The vertical qualities of the font, used to vertically position and space the characters. See docs for #GetFontVMetrics().
 
-        <b>Font Size in Pixels or Points</b>
+        <h4>Font Size in Pixels or Points</h4>
 
         The preferred interface for specifying font sizes in stb_truetype is to specify how tall the font's vertical extent should be in pixels. If that sounds
         good enough, skip the next paragraph.
@@ -69,6 +69,35 @@ val stb_truetype = "STBTruetype".nativeClass(Module.STB, prefix = "STBTT", prefi
         measurements have nothing to do with inches, and thus effectively defining a point to be 1.333 pixels. Additionally, the TrueType font data provides an
         explicit scale factor to scale a given font's glyphs to points, but the author has observed that this scale factor is often wrong for non-commercial
         fonts, thus making fonts scaled in points according to the TrueType spec incoherently sized in practice.
+
+        <h3>DETAILED USAGE</h3>
+
+        <h4>Scale:</h4>
+
+        Select how high you want the font to be, in points or pixels. Call #()ScaleForPixelHeight or #ScaleForMappingEmToPixels() to compute a scale factor
+        {@code SF} that will be used by all other functions.
+
+        <h4>Baseline:</h4>
+
+        You need to select a y-coordinate that is the baseline of where your text will appear. Call #GetFontBoundingBox() to get the baseline-relative bounding
+        box for all characters. {@code SF*-y0} will be the distance in pixels that the worst-case character could extend above the baseline, so if you want the
+        top edge of characters to appear at the top of the screen where {@code y=0}, then you would set the baseline to {@code SF*-y0}.
+
+        <h4>Current point:</h4>
+
+        Set the current point where the first character will appear. The first character could extend left of the current point; this is font dependent. You
+        can either choose a current point that is the leftmost point and hope, or add some padding, or check the bounding box or left-side-bearing of the first
+        character to be displayed and set the current point based on that.
+
+        <h4>Displaying a character:</h4>
+
+        Compute the bounding box of the character. It will contain signed values relative to {@code <current_point, baseline>}. I.e. if it returns
+        {@code x0,y0,x1,y1}, then the character should be displayed in the rectangle from {@code <current_point+SF*x0, baseline+SF*y0>} to
+        {@code <current_point+SF*x1,baseline+SF*y1)}.
+
+        <h4>Advancing for the next character:</h4>
+
+        Call #GetGlyphHMetrics(), and compute {@code current_point += SF * advance}.
 
         <h3>ADVANCED USAGE</h3>
 

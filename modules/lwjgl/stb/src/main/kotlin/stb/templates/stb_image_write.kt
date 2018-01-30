@@ -21,6 +21,9 @@ val stb_image_write = "STBImageWrite".nativeClass(Module.STB, prefix = "STBI", p
 #define STBIW_ASSERT(x)
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_STATIC
+#ifdef LWJGL_WINDOWS
+    #define STBI_MSC_SECURE_CRT
+#endif
 #include "stb_image_write.h"""")
 
     documentation =
@@ -31,27 +34,37 @@ val stb_image_write = "STBImageWrite".nativeClass(Module.STB, prefix = "STBI", p
 
         This header file is a library for writing images to C stdio.
 
-        The PNG output is not optimal; it is 20-50% larger than the file written by a decent optimizing implementation. This library is designed for source
-        code compactness and simplicitly, not optimal image file size or run-time performance.
+        The PNG output is not optimal; it is 20-50% larger than the file written by a decent optimizing implementation; though providing a custom zlib compress
+        function (see #zlib_compress()) can mitigate that. This library is designed for source code compactness and simplicity, not optimal image
+        file size or run-time performance.
 
         <h3>USAGE</h3>
 
-        There are four functions, one for each image file format:
+        There are five functions, one for each image file format:
         ${codeBlock("""
 int stbi_write_png(char const *filename, int w, int h, int comp, const void *data, int stride_in_bytes);
 int stbi_write_bmp(char const *filename, int w, int h, int comp, const void *data);
 int stbi_write_tga(char const *filename, int w, int h, int comp, const void *data);
-int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *data);""")}
-        There are also four equivalent functions that use an arbitrary write function. You are expected to open/close your file-equivalent before and after
+int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *data);
+int stbi_write_jpg(char const *filename, int w, int h, int comp, const float *data, int quality);
+
+void stbi_flip_vertically_on_write(int flag); // flag is non-zero to flip data vertically""")}
+        There are also five equivalent functions that use an arbitrary write function. You are expected to open/close your file-equivalent before and after
         calling these:
         ${codeBlock("""
 int stbi_write_png_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const void  *data, int stride_in_bytes);
 int stbi_write_bmp_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const void  *data);
 int stbi_write_tga_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const void  *data);
-int stbi_write_hdr_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const float *data);""")}
+int stbi_write_hdr_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const float *data);
+int stbi_write_jpg_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int quality);""")}
         where the callback is:
         ${codeBlock("""
 void stbi_write_func(void *context, void *data, int size);""")}
+        You can configure it with these global variables:
+        ${codeBlock("""
+int stbi_write_tga_with_rle;             // defaults to true; set to 0 to disable RLE
+int stbi_write_png_compression_level;    // defaults to 8; set to higher for more compression
+int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force a filter mode""")}
         The functions create an image file defined by the parameters. The image is a rectangle of pixels stored from left-to-right, top-to-bottom. Each pixel
         contains {@code comp} channels of data stored interleaved with 8-bits per channel, in the following order: 1=Y, 2=YA, 3=RGB, 4=RGBA. (Y is monochrome
         color.) The rectangle is {@code w} pixels wide and {@code h} pixels tall. The {@code *data} pointer points to the first byte of the top-left-most
@@ -68,6 +81,8 @@ void stbi_write_func(void *context, void *data, int size);""")}
         PNG supports writing rectangles of data even when the bytes storing rows of data are not consecutive in memory (e.g. sub-rectangles of a larger image),
         by supplying the stride between the beginning of adjacent rows. The other formats do not. (Thus you cannot write a native-format BMP through the BMP
         writer, both because it is in BGR order and because it may have padding at the end of the line.)
+
+        PNG allows you to set the deflate compression level by setting the global variable #write_png_compression_level() (it defaults to 8).
         """,
 
         const..charASCII_p.IN("filename", "the image file path"),
@@ -78,6 +93,25 @@ void stbi_write_func(void *context, void *data, int size);""")}
         int.IN("stride_in_bytes", "the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels"),
 
         returnDoc = "1 on success, 0 on failure"
+    )
+
+    macro..Address..int_p(
+        "write_png_compression_level",
+        "Returns the address of the global variable {@code stbi_write_png_compression_level}."
+    )
+
+    macro..Address..int_p(
+        "write_force_png_filter",
+        "Returns the address of the global variable {@code stbi_write_force_png_filter}."
+    )
+
+    macro..Address..stbi_zlib_compress.p(
+        "zlib_compress",
+        """
+        Returns the address of the global variable {@code stbi_zlib_compress}.
+
+        The address of an ##STBIZlibCompress instance may be set to this variable, in order to override the Zlib compression implementation.
+        """
     )
 
     intb(
@@ -229,5 +263,12 @@ void stbi_write_func(void *context, void *data, int size);""")}
 
         returnDoc = "1 on success, 0 on failure"
 
+    )
+
+    void(
+        "flip_vertically_on_write",
+        "Configures if the written image should flipped vertically.",
+
+        intb.IN("flip_boolean", "true to flip data vertically")
     )
 }
