@@ -1207,6 +1207,21 @@ nk_style_pop_vec2(ctx);""")}
             nk_flags.IN("flags", "")
         )
         intb(
+            "group_begin_titled",
+            "",
+
+            ctx,
+            const..charUTF8_p.IN("name", "must be an unique identifier for this group"),
+            const..charUTF8_p.IN("title", "group header title"),
+            nk_flags.IN(
+                "flags",
+                "window flags defined in the nk_panel_flags section with a number of different group behaviors",
+                WindowFlags, LinkMode.BITFIELD
+            ),
+
+            returnDoc = "{@code true} if visible and fillable with widgets or {@code false} otherwise"
+        )
+        intb(
             "group_scrolled_offset_begin",
             "",
 
@@ -1246,57 +1261,57 @@ nk_style_pop_vec2(ctx);""")}
             nk_list_view_p.OUT("view", "")
         )
 
-        intb(
+        val tree_push_hashed = intb(
             "tree_push_hashed",
-            "",
+            "Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.",
 
             ctx,
-            nk_tree_type.IN("type", "", TreeTypes),
-            const..charUTF8_p.IN("title", ""),
-            nk_collapse_states.IN("initial_state", "", CollapseStates),
-            const..char_p.IN("hash", ""),
-            AutoSize("hash")..nk_int.IN("len", ""),
-            nk_int.IN("seed", "")
+            nk_tree_type.IN(
+                "type",
+                "value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node",
+                TreeTypes
+            ),
+            const..charUTF8_p.IN("title", "label printed in the tree header"),
+            nk_collapse_states.IN("initial_state", "initial tree state value out of {@code nk_collapse_states}", CollapseStates),
+            const..char_p.IN("hash", "memory block or string to generate the ID from"),
+            AutoSize("hash")..nk_int.IN("len", "size of passed memory block or string in {@code hash}"),
+            nk_int.IN("seed", "seeding value if this function is called in a loop or default to 0")
         )
-
         intb(
             "tree_image_push_hashed",
-            "",
+            "Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.",
 
             ctx,
-            nk_tree_type.IN("type", "", TreeTypes),
-            nk_image.IN("img", ""),
-            const..charUTF8_p.IN("title", ""),
-            nk_collapse_states.IN("initial_state", "", CollapseStates),
-            const..charUTF8_p.IN("hash", ""),
-            AutoSize("hash")..nk_int.IN("len", ""),
-            nk_int.IN("seed", "")
+            tree_push_hashed["type"],
+            nk_image.IN("img", "image to display inside the header on the left of the label"),
+            tree_push_hashed["title"],
+            tree_push_hashed["initial_state"],
+            tree_push_hashed["hash"],
+            tree_push_hashed["len"],
+            tree_push_hashed["seed"]
         )
-
-        void("tree_pop", "", ctx)
+        void("tree_pop", "Ends a collapsable UI section", ctx)
 
         intb(
             "tree_state_push",
-            "",
+            "Start a collapsable UI section with external state management.",
 
             ctx,
-            nk_tree_type.IN("type", ""),
-            const..charUTF8_p.IN("title", ""),
-            Check(1)..nk_collapse_states.p.INOUT("state", "")
+            tree_push_hashed["type"],
+            tree_push_hashed["title"],
+            Check(1)..nk_collapse_states.p.INOUT("state", "persistent state to update")
         )
-
         intb(
             "tree_state_image_push",
-            "",
+            "Start a collapsable UI section with image and label header and external state management.",
 
             ctx,
-            nk_tree_type.IN("type", ""),
-            nk_image.IN("image", ""),
-            const..charUTF8_p.IN("title", ""),
+            tree_push_hashed["type"],
+            nk_image.IN("image", "image to display inside the header on the left of the label"),
+            tree_push_hashed["title"],
             Check(1)..nk_collapse_states.p.INOUT("state", "")
         )
-
-        void("tree_state_pop", "", ctx)
+        void("tree_state_pop", "Ends a collapsable UI section.", ctx)
 
         void(
             "text",
