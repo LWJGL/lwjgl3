@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014 - 2017, Syoyo Fujita
+Copyright (c) 2014 - 2018, Syoyo Fujita
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -115,6 +115,7 @@ extern "C" {
 #define TINYEXR_ERROR_CANT_OPEN_FILE (-6)
 #define TINYEXR_ERROR_UNSUPPORTED_FORMAT (-7)
 #define TINYEXR_ERROR_INVALID_HEADER (-8)
+#define TINYEXR_ERROR_UNSUPPORTED_FEATURE (-9)
 
 // @note { OpenEXR file format: http://www.openexr.com/openexrfilelayout.pdf }
 
@@ -432,6 +433,7 @@ extern int LoadEXRFromMemory(float **out_rgba, int *width, int *height,
 
 #include <string>
 #include <vector>
+#include <limits>
 
 #if __cplusplus > 199711L
 // C++11
@@ -486,11 +488,20 @@ namespace miniz {
 #pragma clang diagnostic ignored "-Wc++11-extensions"
 #pragma clang diagnostic ignored "-Wconversion"
 #pragma clang diagnostic ignored "-Wunused-function"
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#pragma clang diagnostic ignored "-Wundef"
+
 #if __has_warning("-Wcomma")
 #pragma clang diagnostic ignored "-Wcomma"
 #endif
 #if __has_warning("-Wmacro-redefined")
 #pragma clang diagnostic ignored "-Wmacro-redefined"
+#endif
+#if __has_warning("-Wcast-qual")
+#pragma clang diagnostic ignored "-Wcast-qual"
+#endif
+#if __has_warning("-Wzero-as-null-pointer-constant")
+#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
 #endif
 #endif
 
@@ -7081,6 +7092,15 @@ static FP16 float_to_half_full(FP32 f) {
 // #define IMF_B44_COMPRESSION 6
 // #define IMF_B44A_COMPRESSION  7
 
+#ifdef __clang__
+#pragma clang diagnostic push
+
+#if __has_warning("-Wzero-as-null-pointer-constant")
+#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
+#endif
+
+#endif
+
 static const char *ReadString(std::string *s, const char *ptr, size_t len) {
   // Read untile NULL(\0).
   const char *p = ptr;
@@ -7098,6 +7118,7 @@ static const char *ReadString(std::string *s, const char *ptr, size_t len) {
 
   return q + 1;  // skip '\0'
 }
+
 
 static bool ReadAttribute(std::string *name, std::string *type,
                           std::vector<unsigned char> *data, size_t *marker_size,
@@ -7232,9 +7253,14 @@ static bool ReadChannelInfo(std::vector<ChannelInfo> &channels,
       break;
     }
     ChannelInfo info;
+
+    tinyexr_int64 data_len = static_cast<tinyexr_int64>(data.size()) - (p - reinterpret_cast<const char *>(data.data()));
+    if (data_len < 0) {
+      return false;
+    }
+
     p = ReadString(
-        &info.name, p,
-        data.size() - (p - reinterpret_cast<const char *>(data.data())));
+        &info.name, p, size_t(data_len));
     if ((p == NULL) && (info.name.empty())) {
       // Buffer overrun. Issue #51.
       return false;
@@ -7697,6 +7723,12 @@ static void DecompressRle(unsigned char *dst,
 #pragma clang diagnostic ignored "-Wsign-conversion"
 #pragma clang diagnostic ignored "-Wc++11-extensions"
 #pragma clang diagnostic ignored "-Wconversion"
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+
+#if __has_warning("-Wcast-qual")
+#pragma clang diagnostic ignored "-Wcast-qual"
+#endif
+
 #endif
 
 //
@@ -10211,9 +10243,7 @@ static int ParseEXRHeader(HeaderInfo *info, bool *empty_header,
       has_channels = true;
 
     } else if (attr_name.compare("dataWindow") == 0) {
-      if (data.size() < 16) {
-        // Corrupsed file(Issue #50).
-      } else {
+      if (data.size() >= 16) {
         memcpy(&info->data_window[0], &data.at(0), sizeof(int));
         memcpy(&info->data_window[1], &data.at(4), sizeof(int));
         memcpy(&info->data_window[2], &data.at(8), sizeof(int));
@@ -10225,45 +10255,57 @@ static int ParseEXRHeader(HeaderInfo *info, bool *empty_header,
         has_data_window = true;
       }
     } else if (attr_name.compare("displayWindow") == 0) {
-      memcpy(&info->display_window[0], &data.at(0), sizeof(int));
-      memcpy(&info->display_window[1], &data.at(4), sizeof(int));
-      memcpy(&info->display_window[2], &data.at(8), sizeof(int));
-      memcpy(&info->display_window[3], &data.at(12), sizeof(int));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->display_window[0]));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->display_window[1]));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->display_window[2]));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->display_window[3]));
+      if (data.size() >= 16) {
+        memcpy(&info->display_window[0], &data.at(0), sizeof(int));
+        memcpy(&info->display_window[1], &data.at(4), sizeof(int));
+        memcpy(&info->display_window[2], &data.at(8), sizeof(int));
+        memcpy(&info->display_window[3], &data.at(12), sizeof(int));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->display_window[0]));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->display_window[1]));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->display_window[2]));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->display_window[3]));
 
-      has_display_window = true;
+        has_display_window = true;
+      }
     } else if (attr_name.compare("lineOrder") == 0) {
-      info->line_order = static_cast<int>(data[0]);
-      has_line_order = true;
+      if (data.size() >= 1) {
+        info->line_order = static_cast<int>(data[0]);
+        has_line_order = true;
+      }
     } else if (attr_name.compare("pixelAspectRatio") == 0) {
-      memcpy(&info->pixel_aspect_ratio, &data.at(0), sizeof(float));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->pixel_aspect_ratio));
-      has_pixel_aspect_ratio = true;
+      if (data.size() >= sizeof(float)) {
+        memcpy(&info->pixel_aspect_ratio, &data.at(0), sizeof(float));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->pixel_aspect_ratio));
+        has_pixel_aspect_ratio = true;
+      }
     } else if (attr_name.compare("screenWindowCenter") == 0) {
-      memcpy(&info->screen_window_center[0], &data.at(0), sizeof(float));
-      memcpy(&info->screen_window_center[1], &data.at(4), sizeof(float));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->screen_window_center[0]));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->screen_window_center[1]));
-      has_screen_window_center = true;
+      if (data.size() >= 8) {
+        memcpy(&info->screen_window_center[0], &data.at(0), sizeof(float));
+        memcpy(&info->screen_window_center[1], &data.at(4), sizeof(float));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->screen_window_center[0]));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->screen_window_center[1]));
+        has_screen_window_center = true;
+      }
     } else if (attr_name.compare("screenWindowWidth") == 0) {
-      memcpy(&info->screen_window_width, &data.at(0), sizeof(float));
-      tinyexr::swap4(
-          reinterpret_cast<unsigned int *>(&info->screen_window_width));
+      if (data.size() >= sizeof(float)) {
+        memcpy(&info->screen_window_width, &data.at(0), sizeof(float));
+        tinyexr::swap4(
+            reinterpret_cast<unsigned int *>(&info->screen_window_width));
 
-      has_screen_window_width = true;
+        has_screen_window_width = true;
+      }
     } else if (attr_name.compare("chunkCount") == 0) {
-      memcpy(&info->chunk_count, &data.at(0), sizeof(int));
-      tinyexr::swap4(reinterpret_cast<unsigned int *>(&info->chunk_count));
+      if (data.size() >= sizeof(int)) {
+        memcpy(&info->chunk_count, &data.at(0), sizeof(int));
+        tinyexr::swap4(reinterpret_cast<unsigned int *>(&info->chunk_count));
+      }
     } else {
       // Custom attribute(up to TINYEXR_MAX_ATTRIBUTES)
       if (info->attributes.size() < TINYEXR_MAX_ATTRIBUTES) {
@@ -10436,7 +10478,7 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
                                 &channel_offset, num_channels,
                                 exr_header->channels);
 
-  bool invalid_data = false;
+  bool invalid_data = false; // TODO(LTE): Use atomic lock for MT safety.
 
   if (exr_header->tiled) {
     size_t num_tiles = offsets.size();  // = # of blocks
@@ -10469,8 +10511,12 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
       tinyexr::swap4(reinterpret_cast<unsigned int *>(&tile_coordinates[3]));
 
       // @todo{ LoD }
-      assert(tile_coordinates[2] == 0);
-      assert(tile_coordinates[3] == 0);
+      if (tile_coordinates[2] != 0) {
+        return TINYEXR_ERROR_UNSUPPORTED_FEATURE;
+      }
+      if (tile_coordinates[3] != 0) {
+        return TINYEXR_ERROR_UNSUPPORTED_FEATURE;
+      }
 
       int data_len;
       memcpy(&data_len, data_ptr + 16,
@@ -10518,56 +10564,58 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
       size_t y_idx = static_cast<size_t>(y);
 
       if (offsets[y_idx] + sizeof(int) * 2 > size) {
-        return TINYEXR_ERROR_INVALID_DATA;
-      }
-
-      // 4 byte: scan line
-      // 4 byte: data size
-      // ~     : pixel data(uncompressed or compressed)
-      size_t data_size = size - (offsets[y_idx] + sizeof(int) * 2);
-      const unsigned char *data_ptr =
-          reinterpret_cast<const unsigned char *>(head + offsets[y_idx]);
-
-      int line_no;
-      memcpy(&line_no, data_ptr, sizeof(int));
-      int data_len;
-      memcpy(&data_len, data_ptr + 4, sizeof(int));
-      tinyexr::swap4(reinterpret_cast<unsigned int *>(&line_no));
-      tinyexr::swap4(reinterpret_cast<unsigned int *>(&data_len));
-
-      if (size_t(data_len) > data_size) {
-        return TINYEXR_ERROR_INVALID_DATA;
-      }
-
-      int end_line_no = (std::min)(line_no + num_scanline_blocks,
-                                   (exr_header->data_window[3] + 1));
-
-      int num_lines = end_line_no - line_no;
-      //assert(num_lines > 0);
-
-      if (num_lines <= 0) {
         invalid_data = true;
       } else {
 
-        // Move to data addr: 8 = 4 + 4;
-        data_ptr += 8;
+        // 4 byte: scan line
+        // 4 byte: data size
+        // ~     : pixel data(uncompressed or compressed)
+        size_t data_size = size - (offsets[y_idx] + sizeof(int) * 2);
+        const unsigned char *data_ptr =
+            reinterpret_cast<const unsigned char *>(head + offsets[y_idx]);
 
-        // Adjust line_no with data_window.bmin.y
-        line_no -= exr_header->data_window[1];
+        int line_no;
+        memcpy(&line_no, data_ptr, sizeof(int));
+        int data_len;
+        memcpy(&data_len, data_ptr + 4, sizeof(int));
+        tinyexr::swap4(reinterpret_cast<unsigned int *>(&line_no));
+        tinyexr::swap4(reinterpret_cast<unsigned int *>(&data_len));
 
-        if (line_no < 0) {
+        if (size_t(data_len) > data_size) {
           invalid_data = true;
         } else {
-          if (!tinyexr::DecodePixelData(
-              exr_image->images, exr_header->requested_pixel_types, data_ptr,
-              static_cast<size_t>(data_len), exr_header->compression_type,
-              exr_header->line_order, data_width, data_height, data_width, y,
-              line_no, num_lines, static_cast<size_t>(pixel_data_size),
-              static_cast<size_t>(exr_header->num_custom_attributes),
-              exr_header->custom_attributes,
-              static_cast<size_t>(exr_header->num_channels), exr_header->channels,
-              channel_offset_list)) {
+
+          int end_line_no = (std::min)(line_no + num_scanline_blocks,
+                                       (exr_header->data_window[3] + 1));
+
+          int num_lines = end_line_no - line_no;
+          //assert(num_lines > 0);
+
+          if (num_lines <= 0) {
             invalid_data = true;
+          } else {
+
+            // Move to data addr: 8 = 4 + 4;
+            data_ptr += 8;
+
+            // Adjust line_no with data_window.bmin.y
+            line_no -= exr_header->data_window[1];
+
+            if (line_no < 0) {
+              invalid_data = true;
+            } else {
+              if (!tinyexr::DecodePixelData(
+                  exr_image->images, exr_header->requested_pixel_types, data_ptr,
+                  static_cast<size_t>(data_len), exr_header->compression_type,
+                  exr_header->line_order, data_width, data_height, data_width, y,
+                  line_no, num_lines, static_cast<size_t>(pixel_data_size),
+                  static_cast<size_t>(exr_header->num_custom_attributes),
+                  exr_header->custom_attributes,
+                  static_cast<size_t>(exr_header->num_channels), exr_header->channels,
+                  channel_offset_list)) {
+                invalid_data = true;
+              }
+            }
           }
         }
       }
@@ -10650,8 +10698,23 @@ static int DecodeEXRImage(EXRImage *exr_image, const EXRHeader *exr_header,
     num_scanline_blocks = 16;
   }
 
-  int data_width = exr_header->data_window[2] - exr_header->data_window[0] + 1;
-  int data_height = exr_header->data_window[3] - exr_header->data_window[1] + 1;
+  int data_width = exr_header->data_window[2] - exr_header->data_window[0];
+  if (data_width >= std::numeric_limits<int>::max()) {
+    // Issue 63
+    if (err) {
+      (*err) = "Invalid data window value.";
+    }
+    return TINYEXR_ERROR_INVALID_DATA;
+  }
+  data_width++;
+
+  int data_height = exr_header->data_window[3] - exr_header->data_window[1];
+  if (data_height >= std::numeric_limits<int>::max()) {
+    if (err) {
+      (*err) = "Invalid data height value.";
+    }
+    return TINYEXR_ERROR_INVALID_DATA;
+  }
 
   if ((data_width < 0) || (data_height < 0)) {
     if (err) {
@@ -12656,6 +12719,12 @@ int SaveEXR(const float *data, int width, int height, int components,
 
   return ret;
 }
+
+#ifdef __clang__
+// zero-as-null-ppinter-constant
+#pragma clang diagnostic pop 
+#endif
+
 
 #endif  // TINYEXR_IMPLEMENTATION_DEIFNED
 #endif  // TINYEXR_IMPLEMENTATION

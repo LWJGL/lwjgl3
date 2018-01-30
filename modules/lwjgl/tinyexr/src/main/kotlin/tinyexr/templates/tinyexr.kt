@@ -31,7 +31,8 @@ ENABLE_WARNINGS()""")
         "ERROR_INVALID_PARAMETER".."-5",
         "ERROR_CANT_OPEN_FILE".."-6",
         "ERROR_UNSUPPORTED_FORMAT".."-7",
-        "ERROR_INVALID_HEADER".."-8"
+        "ERROR_INVALID_HEADER".."-8",
+        "ERROR_UNSUPPORTED_FEATURE".."-9"
     )
 
     IntConstant(
