@@ -215,16 +215,18 @@ class Func(
                 javaMethodType
         ).let {
             if (annotate) {
-                "${nativeType.annotate(it, has(const))} $name"
-            } else {
-                "$it $name"
-            }
-        }.let {
-            if (annotate && nativeType.isReference && has(nullable)) {
-                "@Nullable $it"
+                nativeType.annotate(it, has(const)).let {
+                    if (nativeType.isReference && has(nullable)) {
+                        "@Nullable $it"
+                    } else {
+                        it
+                    }
+                }
             } else {
                 it
             }
+        }.let {
+            "$it $name"
         }
 
     private fun Parameter.asNativeMethodParam(nativeOnly: Boolean) =
@@ -1351,8 +1353,10 @@ class Func(
                ).let {
             if (!annotate || it == null)
                 it
-            else
-                nativeType.annotate(it, hasConst)
+            else {
+                val space = it.lastIndexOf(' ')
+                "${nativeType.annotate(it.substring(0, space), hasConst)} ${it.substring(space + 1)}"
+            }
         }
     }
 
