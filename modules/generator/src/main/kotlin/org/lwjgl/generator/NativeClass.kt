@@ -67,20 +67,20 @@ abstract class APIBinding(
 
     open fun getFunctionOrdinal(function: Func): Int = 0
 
-    /** Can be overriden to generate binding-specific alternative methods. */
+    /** Can be overridden to generate binding-specific alternative methods. */
     open fun generateAlternativeMethods(
         writer: PrintWriter,
         function: Func,
         transforms: MutableMap<QualifiedType, Transform>
     ) = Unit
 
-    /** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
+    /** Can be overridden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
     open fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String) = false
 
-    /** Can be overriden to implement a custom condition for checking the function address. */
+    /** Can be overridden to implement a custom condition for checking the function address. */
     open fun shouldCheckFunctionAddress(function: Func) = apiCapabilities.ordinal > 1
 
-    /** Can be overriden to add custom parameter checks. */
+    /** Can be overridden to add custom parameter checks. */
     open fun addParameterChecks(
         checks: MutableList<String>,
         mode: GenerationMode,

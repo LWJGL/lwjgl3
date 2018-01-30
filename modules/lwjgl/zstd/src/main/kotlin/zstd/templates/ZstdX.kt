@@ -777,7 +777,7 @@ ENABLE_WARNINGS()""")
 
             In order to mean "unknown content size", pass constant #CONTENTSIZE_UNKNOWN. #CONTENTSIZE_UNKNOWN is default value for any new compression job.
             """,
-            "If all data is provided and consumed in a single round, this value is overriden by {@code srcSize} instead."
+            "If all data is provided and consumed in a single round, this value is overridden by {@code srcSize} instead."
         )}
         """,
 

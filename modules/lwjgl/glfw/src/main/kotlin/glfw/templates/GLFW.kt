@@ -1365,7 +1365,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             } in the Mac Developer Library.
             """,
             """
-            <b>macOS</b>: When activating frame autosaving with #COCOA_FRAME_NAME, the specified window size and position may be overriden by previously saved
+            <b>macOS</b>: When activating frame autosaving with #COCOA_FRAME_NAME, the specified window size and position may be overridden by previously saved
             values.
             """,
             "<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",

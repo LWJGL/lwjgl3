@@ -69,7 +69,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <!--
         The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
-        that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
+        that runs ANT is used, but this can be overridden for cross-compiling to another architecture.
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
     <condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
@@ -78,7 +78,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <!--
         Offline build flag. This is useful when working offline, or when custom binary dependencies
-        are used (so they are not overriden). Set to one of true/on/yes to enable.
+        are used (so they are not overridden). Set to one of true/on/yes to enable.
     -->
     <condition property="build.offline" value="${env.LWJGL_BUILD_OFFLINE}" else="false">
         <isset property="env.LWJGL_BUILD_OFFLINE"/>

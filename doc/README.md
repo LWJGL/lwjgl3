@@ -108,9 +108,9 @@ The ANT build can be configured with the following environment variables:
    - *release/{build.version}*
        a specific previously released build.
 * `LWJGL_BUILD_ARCH` (optional)
-    The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
+    The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM that runs ANT is used, but this can be overridden for cross-compiling to another architecture.
 * `LWJGL_BUILD_OFFLINE` (optional)
-    Offline build flag. This is useful when working offline, or when custom binary dependencies are used (so they are not overriden). Set to one of true/on/yes to enable.
+    Offline build flag. This is useful when working offline, or when custom binary dependencies are used (so they are not overridden). Set to one of true/on/yes to enable.
 * `LWJGL_BUILD_OUTPUT` (optional)
     Overrides the default output directory. By default, the directories /bin, /generated and /release will be created in the same directory as the main build script. These 3 directories will contain thousands of tiny files, so you may want to override their location due to performance characteristics of the storage hardware.
 Note that when this property is set, the directories /bin, /generated and /release will be symlinks to the corresponding directories in LWJGL_BUILD_OUTPUT. The ant scripts and IDE projects always work with paths relative to the project root.
