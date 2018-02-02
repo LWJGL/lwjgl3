@@ -6,7 +6,6 @@ package nanovg.templates
 
 import org.lwjgl.generator.*
 import nanovg.*
-import opengl.*
 
 val nanovg_gl2 = "NanoVGGL2".dependsOn(Module.OPENGL)?.nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
     nativeDirective(
