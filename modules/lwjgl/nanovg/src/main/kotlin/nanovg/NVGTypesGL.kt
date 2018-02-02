@@ -5,7 +5,8 @@
 package nanovg
 
 import org.lwjgl.generator.*
-import opengl.*
+
+val GLuint = IntegerType("GLuint", PrimitiveMapping.INT, unsigned = true)
 
 val NVGLUframebuffer_p = struct(Module.NANOVG, "NVGLUFramebuffer", nativeName = "NVGLUframebuffer", mutable = false) {
     documentation = "A framebuffer object."
