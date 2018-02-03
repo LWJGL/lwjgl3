@@ -329,6 +329,13 @@ div {
         node
     )
 
+    bool(
+        "NodeLayoutGetDidUseLegacyFlag",
+        "",
+
+        node
+    )
+
     void(
         "NodePrint",
         "",

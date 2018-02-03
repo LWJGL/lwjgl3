@@ -170,6 +170,8 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     float.array("measuredDimensions", "", size = 2)
 
     YGCachedMeasurement.member("cachedLayout", "")
+    bool.member("didUseLegacyFlag", "")
+    bool.member("doesLegacyStretchFlagAffectsLayout", "")
 }
 
 val YGEdgeCount = 9
