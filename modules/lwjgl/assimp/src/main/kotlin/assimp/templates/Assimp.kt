@@ -2512,6 +2512,9 @@ aiAttachLogStream(&c);""")}
                 """
             )}
 
+            This step also removes very small triangles with a surface area smaller than 10^-6. If you rely on having these small triangles, or notice holes in
+            your model, set the property #AI_CONFIG_PP_FD_CHECKAREA to {@code false}.
+
             ${note("""
             Degenerate polygons are not necessarily evil and that's why they're not removed by default. There are several file formats which don't support
             lines or points, and some exporters bypass the format specification and write them as degenerate triangles instead.""")}

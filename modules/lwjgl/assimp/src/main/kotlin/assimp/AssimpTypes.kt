@@ -894,6 +894,15 @@ val aiScene_p = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") 
         (if existing) is the default camera view into the scene.
         """
     )
+    nullable..aiMetadata_p.member(
+        "mMetaData",
+        """
+        The global metadata assigned to the scene itself.
+
+        This data contains global metadata which belongs to the scene like unit-conversions, versions, vendors or other model-specific data. This can be used
+        to store format-specific metadata as well.
+        """
+    )
 
     char_p.member("mPrivate", "Internal use only, do not touch!").public = false
 }.p
