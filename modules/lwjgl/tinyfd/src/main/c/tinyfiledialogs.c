@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.c v3.2.7 [Jan 02, 2018] zlib licence
+ /         \ tinyfiledialogs.c v3.2.9 [Feb 1, 2018] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -18,9 +18,9 @@ A big thank you for contributions, bug corrections & thorough testing to:
 - Don Heyse http://ldglite.sf.net for bug corrections & thorough testing!
 - Paul Rouget
 		
-Please 1) Let me know If you are using it on exotic hardware / OS / compiler
-       2) If yo have a sourceforge account, leave a 1-word review on Sourceforge.
-          It helps the ranking on google.
+Please 1) let me know If you are using it on exotic hardware / OS / compiler
+       2) if you have a sourceforge account, leave a 1-word review on Sourceforge.
+	   3) upvote my stackoverflow answer https://stackoverflow.com/a/47651444
 
 tiny file dialogs (cross-platform C C++)
 InputBox PasswordBox MessageBox ColorPicker
@@ -28,7 +28,7 @@ OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
 SSH supported via automatic switch to console mode or X11 forwarding
 
-One C file (add it to your C or C++ project) with 8 functions:
+a C file + a header (add them to your C or C++ project) with 8 functions:
 - beep
 - notify popup
 - message & question
@@ -110,6 +110,7 @@ misrepresented as being the original software.
   #endif /*TINYFD_NOSELECTFOLDERWIN*/
  #endif
  #include <conio.h>
+ #include <commdlg.h>
  /*#include <io.h>*/
  #define SLASH "\\"
  int tinyfd_winUtf8 = 0 ; /* on windows string char can be 0:MBCS or 1:UTF-8 */
@@ -126,7 +127,7 @@ misrepresented as being the original software.
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char tinyfd_version [8] = "3.2.7";
+char tinyfd_version [8] = "3.2.9";
 
 int tinyfd_verbose = 0 ; /* print on unix the command line calls */
 
@@ -186,7 +187,7 @@ static char gMessageUnix[] = "\
 \ntiny file dialogs on UNIX needs:\
 \n   applescript\
 \nor kdialog\
-\nor zenity (or matedialog or shellementary or qarma)\
+\nor zenity (or matedialog or qarma)\
 \nor python (2 or 3) + tkinter + python-dbus (optional)\
 \nor dialog (opens a console if needed)\
 \nor xterm + bash (opens a console for basic input)\
@@ -330,7 +331,7 @@ static void replaceSubStr( char const * const aSource ,
 	char const * pOccurence ;
 	char const * p ;
 	char const * lNewSubStr = "" ;
-	int lOldSubLen = strlen( aOldSubStr ) ;
+	size_t lOldSubLen = strlen( aOldSubStr ) ;
 	
 	if ( ! aSource )
 	{
@@ -793,7 +794,7 @@ static char const * ensureFilesExist(char * const aDestination,
 	char * lDestination = aDestination;
 	char const * p;
 	char const * p2;
-	int lLen;
+	size_t lLen;
 
 	if (!aSourcePathsAndNames)
 	{
@@ -985,9 +986,9 @@ int tinyfd_notifyPopupW(
 	wchar_t const * const aIconType) /* L"info" L"warning" L"error" */
 {
 	wchar_t * lDialogString;
-	int lTitleLen;
-	int lMessageLen;
-	int lDialogStringLen;
+	size_t lTitleLen;
+	size_t lMessageLen;
+	size_t lDialogStringLen;
 
 	if (aTitle&&!wcscmp(aTitle, L"tinyfd_query")){ strcpy(tinyfd_response, "windows_wchar"); return 1; }
 
@@ -1088,9 +1089,9 @@ wchar_t const * tinyfd_inputBoxW(
 	FILE * lIn;
 	FILE * lFile;
 	int lResult;
-	int lTitleLen;
-	int lMessageLen;
-	int lDialogStringLen;
+	size_t lTitleLen;
+	size_t lMessageLen;
+	size_t lDialogStringLen;
 
 	if (aTitle&&!wcscmp(aTitle, L"tinyfd_query")){ strcpy(tinyfd_response, "windows_wchar"); return (wchar_t const *)1; }
 
@@ -3718,7 +3719,7 @@ static int shellementaryPresent( )
 	static int lShellementaryPresent = -1 ;
 	if ( lShellementaryPresent < 0 )
 	{
-		lShellementaryPresent = detectPresence("shellementary") ;
+		lShellementaryPresent = 0 ; /*detectPresence("shellementary"); shellementary is not ready yet */
 	}
 	return lShellementaryPresent && graphicMode( ) ;
 }
@@ -3752,6 +3753,10 @@ static int zenity3Present()
 				if ( atoi(lBuff) >= 3 )
 				{
 					lZenity3Present = 3 ;
+					if ( atoi(strtok(lBuff,".")+2 ) >= 10 )
+					{
+						lZenity3Present = 4 ;
+					}
 				}
 				else if ( ( atoi(lBuff) == 2 ) && ( atoi(strtok(lBuff,".")+2 ) >= 32 ) )
 				{
@@ -4013,8 +4018,8 @@ int tinyfd_messageBox(
 	char lChar ;
 	struct termios infoOri;
 	struct termios info;
-	int lTitleLen ;
-	int lMessageLen ;
+	size_t lTitleLen ;
+	size_t lMessageLen ;
 
 	lBuff[0]='\0';
 
@@ -4176,7 +4181,7 @@ int tinyfd_messageBox(
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return 1;}
 			strcpy( lDialogString , "szAnswer=$(zenity" ) ;
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat(lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}
@@ -4924,8 +4929,8 @@ int tinyfd_notifyPopup(
 	char * lDialogString = NULL ;
     char * lpDialogString ;
 	FILE * lIn ;
-	int lTitleLen ;
-	int lMessageLen ;
+	size_t lTitleLen ;
+	size_t lMessageLen ;
 
 	if ( getenv("SSH_TTY") )
 	{
@@ -4987,9 +4992,10 @@ int tinyfd_notifyPopup(
 		}
 		strcat( lDialogString , " \" 5" ) ;
 	}
-	else if ( (zenity3Present()>=3) || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
+	else if ( (zenity3Present()>=4) || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
 	{
 		/* zenity 2.32 has the notification but with a bug: it doesnt return from it */
+		/* zenity 3.8 show the notification as an alert ok cancel box */
 		if ( zenity3Present()>=3 )
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return 1;}
@@ -5130,8 +5136,8 @@ char const * tinyfd_inputBox(
 	struct termios oldt ;
 	struct termios newt ;
 	char * lEOF;
-	int lTitleLen ;
-	int lMessageLen ;
+	size_t lTitleLen ;
+	size_t lMessageLen ;
 
 	lBuff[0]='\0';
 
@@ -5221,7 +5227,7 @@ char const * tinyfd_inputBox(
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
 			strcpy( lDialogString , "szAnswer=$(zenity" ) ;
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}
@@ -5765,7 +5771,7 @@ char const * tinyfd_saveFileDialog(
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
 			strcpy( lDialogString , "zenity" ) ;
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}
@@ -6202,7 +6208,7 @@ char const * tinyfd_openFileDialog(
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
 			strcpy( lDialogString , "zenity" ) ;
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}
@@ -6594,7 +6600,7 @@ char const * tinyfd_selectFolderDialog(
 		{
 	 		if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
 			strcpy( lDialogString , "zenity" ) ;
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}
@@ -6891,7 +6897,7 @@ to set mycolor to choose color default color {");
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity3");return (char const *)1;}
 			strcpy( lDialogString , "zenity" );
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}
@@ -7097,7 +7103,7 @@ char const * tinyfd_arrayDialog(
 		{
 			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
 			strcpy( lDialogString , "zenity" ) ;
-			if ( (zenity3Present() >= 3) && !getenv("SSH_TTY") )
+			if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
 			{
 				strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 			}

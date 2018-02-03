@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v3.2.7 [Jan 02, 2018] zlib licence
+ /         \ tinyfiledialogs.h v3.2.9 [Feb 1, 2018] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -16,9 +16,9 @@
 
 A big thank you to Don Heyse http://ldglite.sf.net for bug corrections & thorough testing!
 
-Please 1) Let me know If you are using it on exotic hardware / OS / compiler
-       2) If yo have a sourceforge account, leave a 1-word review on Sourceforge.
-          It helps the ranking on google.
+Please 1) let me know If you are using it on exotic hardware / OS / compiler
+       2) if you have a sourceforge account, leave a 1-word review on Sourceforge.
+	   3) upvote my stackoverflow answer https://stackoverflow.com/a/47651444
 
 tiny file dialogs (cross-platform C C++)
 InputBox PasswordBox MessageBox ColorPicker
@@ -26,7 +26,7 @@ OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
 SSH supported via automatic switch to console mode or X11 forwarding
 
-One C file (add it to your C or C++ project) with 8 functions:
+a C file + a header (add them to your C or C++ project) with 8 functions:
 - beep
 - notify popup
 - message & question
