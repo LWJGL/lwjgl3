@@ -129,10 +129,13 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         enabled, this function returns VK10#VK_ERROR_EXTENSION_NOT_PRESENT and generates a #API_UNAVAILABLE error. Call #GetRequiredInstanceExtensions() to
         check what instance extensions are required.
 
+        The window surface cannot be shared with another API so the window must have been created with the client api hint set to #NO_API otherwise it
+        generates a #INVALID_VALUE error and returns KHRSurface#VK_ERROR_NATIVE_WINDOW_IN_USE_KHR.
+
         The window surface must be destroyed before the specified Vulkan instance. It is the responsibility of the caller to destroy the window surface. GLFW
         does not destroy it for you. Call KHRSurface#vkDestroySurfaceKHR() to destroy the surface.
 
-        Possible errors include #NOT_INITIALIZED, #API_UNAVAILABLE and #PLATFORM_ERROR.
+        Possible errors include #NOT_INITIALIZED, #API_UNAVAILABLE, #PLATFORM_ERROR and #INVALID_VALUE.
 
         If an error occurs before the creation call is made, GLFW returns the Vulkan error code most appropriate for the error. Appropriate use of
         #VulkanSupported() and #GetRequiredInstanceExtensions() should eliminate almost all occurrences of these errors.

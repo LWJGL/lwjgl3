@@ -1485,8 +1485,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
                 "Bundle Programming Guide")} in the Mac Developer Library.
             """,
             """
-            <b>Wayland</b>: The {@code wl_shell} protocol does not support window icons, the window will inherit the one defined in the application's desktop
-            file, so this function emits #PLATFORM_ERROR.
+            <b>Wayland</b>: There is no existing protocol to change an icon, the window will thus inherit the one defined in the application's desktop file.
+            This function always emits #PLATFORM_ERROR.
             """
         )}
         """,
@@ -1760,7 +1760,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            "<b>Wayland</b>: There is no concept of iconification in {@code wl_shell}, this function will always emit #PLATFORM_ERROR."
+            """
+            <b>Wayland</b>: There is no concept of iconification in {@code wl_shell}, this function will emit #PLATFORM_ERROR when using this deprecated
+            protocol.
+            """
         )}
         """,
 
@@ -2113,7 +2116,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            "<b>Wayland</b>: The {@code wl_shell} protocol has no concept of iconification, this callback will never be called."
+            """
+            <b>Wayland</b>: The {@code wl_shell} protocol has no concept of iconification, this callback will never be called when using this deprecated
+            protocol.
+            """
         )}
         """,
 
