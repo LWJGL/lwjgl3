@@ -1224,14 +1224,14 @@ RGBA16S
 
     uint32_t(
         "get_avail_transient_index_buffer",
-        "Returns number of available indices.",
+        "Returns number of requested or maximum available indices.",
 
         uint32_t.IN("_num", "number of required indices")
     )
 
     uint32_t(
         "get_avail_transient_vertex_buffer",
-        "Returns number of available vertices.",
+        "Returns number of requested or maximum available vertices.",
 
         uint32_t.IN("_num", "number of required vertices"),
         const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration")
@@ -1239,7 +1239,7 @@ RGBA16S
 
     uint32_t(
         "get_avail_instance_data_buffer",
-        "Returns number of available instance buffer slots.",
+        "Returns number of requested or maximum available instance buffer slots.",
 
         uint32_t.IN("_num", "number of required instances"),
         MapToInt..uint16_t.IN("_stride", "stride per instance")
