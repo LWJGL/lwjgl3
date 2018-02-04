@@ -124,10 +124,10 @@
 
     <target name="clean" description="Cleans all directories controlled by this script">
         <delete includeemptydirs="true">
-            <dirset dir="bin">
-                <include name="*"/>
-                <exclude name="libs"/>
-            </dirset>
+            <fileset dir="bin">
+                <include name="**/*"/>
+                <exclude name="libs/**"/>
+            </fileset>
         </delete>
 
         <forEachModule>
