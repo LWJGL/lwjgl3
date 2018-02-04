@@ -326,7 +326,7 @@ ENABLE_WARNINGS()""")
     val endDirectives = EnumConstant(
         "{@code ZSTD_EndDirective}",
 
-        "e_continue".enum("collect more data, encoder transparently decides when to output result, for optimal conditions"),
+        "e_continue".enum("collect more data, encoder decides when to output compressed result, for optimal conditions"),
         "e_flush".enum("flush any data provided so far - frame will continue, future data can still reference previous data for better compression"),
         "e_end".enum("flush any remaining data and close current frame. Any additional data starts a new frame")
     ).javaDocLinks
@@ -934,9 +934,9 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        provides the minimum amount of data remaining to be flushed from internal buffers or an error code, which can be tested using #isError(). If
-        {@code @return != 0}, flush is not fully completed, there is still some data left within internal buffers. This is useful to determine if a #e_flush or
-        #e_end directive is completed.
+        provides a minimum amount of data remaining to be flushed from internal buffers or an error code, which can be tested using #isError(). If
+        {@code @return != 0}, flush is not fully completed, there is still some data left within internal buffers. This is useful for #e_flush, since in this
+        case more flushes are necessary to empty all buffers. For #e_end, {@code @return == 0} when internal buffers are fully flushed and frame is completed.
         """
     )
 
