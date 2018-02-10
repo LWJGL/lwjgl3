@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="modules/core/src/generated/java"/>
-	<classpathentry kind="src" path="modules/core/src/main/java" />
-	<classpathentry excluding="org/lwjgl/demo/ovr/" kind="src" path="modules/core/src/test/java"/>
-	<classpathentry kind="src" path="modules/core/src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="lwjgl3/libs"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="libs/testng.jar"/>
+	<classpathentry kind="src" path="modules/generator/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/core/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/core/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/core/src/test/java"/>
+	<classpathentry kind="lib" path="bin/libs/java/jcommander.jar"/>
+	<classpathentry kind="lib" path="bin/libs/java/joml.jar"/>
+	<classpathentry kind="lib" path="bin/libs/java/jsr305.jar"/>
+	<classpathentry kind="lib" path="bin/libs/java/testng.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin/eclipse"/>
 </classpath>
