@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="modules/lwjgl/core/src/generated/java"/>
-	<classpathentry kind="src" path="modules/samples/src/test/java"/>
 	<classpathentry kind="src" path="modules/lwjgl/core/src/test/java"/>
 	<classpathentry kind="src" path="modules/generator/src/main/java"/>
 	<classpathentry kind="src" path="modules/lwjgl/core/src/main/java"/>
