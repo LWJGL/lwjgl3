@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="modules/generator/src/main/java"/>
 	<classpathentry kind="src" path="modules/lwjgl/core/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/core/src/main/java"/>
+	<classpathentry kind="src" path="modules/samples/src/test/java"/>
 	<classpathentry kind="src" path="modules/lwjgl/core/src/test/java"/>
+	<classpathentry kind="src" path="modules/generator/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/core/src/main/java"/>
 	<classpathentry kind="lib" path="bin/libs/java/jcommander.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/joml.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/jsr305.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/testng.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/jdk1.8.0_121_64/lib/tools.jar"/>
+	<classpathentry kind="lib" path="bin/libs"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin/eclipse"/>
 </classpath>
