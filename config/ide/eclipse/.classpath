@@ -1,15 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="modules/lwjgl/core/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/core/src/test/java"/>
+	<classpathentry kind="src" path="modules/samples/src/test/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/vulkan/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/tinyfd/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/nanovg/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/openal/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opengles/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/xxhash/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/glfw/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/sse/src/test/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/jawt/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/lmdb/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/tootle/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/yoga/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/lz4/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/assimp/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opengl/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/sse/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opencl/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/par/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/odbc/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/nanovg/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opengles/src/generated/java"/>
 	<classpathentry kind="src" path="modules/generator/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/egl/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/zstd/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/nuklear/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/rpmalloc/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/nfd/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/openvr/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/rpmalloc/src/test/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/tinyexr/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/jemalloc/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/vulkan/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opencl/src/test/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/glfw/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/bgfx/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/yoga/src/test/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/stb/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/par/src/test/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/remotery/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opengl/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/opencl/src/generated/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/egl/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/openal/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/core/src/generated/java"/>
 	<classpathentry kind="src" path="modules/lwjgl/core/src/main/java"/>
+	<classpathentry kind="src" path="modules/lwjgl/core/src/test/java"/>
+	<classpathentry kind="lib" path="bin/libs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="bin/libs/java/jcommander.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/joml.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/jsr305.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/testng.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/jvm/jdk1.8.0_121_64/lib/tools.jar"/>
-	<classpathentry kind="lib" path="bin/libs"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/assimp"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/bgfx"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/core"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/egl"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/glfw"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/jawt"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/jemalloc"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/lmdb"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/lz4"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/nanovg"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/nfd"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/nuklear"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/odbc"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/openal"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/opencl"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/opengl"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/opengles"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/openvr"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/ovr"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/par"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/remotery"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/rpmalloc"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/sse"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/stb"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/tinyexr"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/tinyfd"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/tootle"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/vulkan"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/xxhash"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/yoga"/>
+	<classpathentry kind="lib" path="bin/classes/lwjgl/zstd"/>
 	<classpathentry kind="output" path="bin/eclipse"/>
 </classpath>
