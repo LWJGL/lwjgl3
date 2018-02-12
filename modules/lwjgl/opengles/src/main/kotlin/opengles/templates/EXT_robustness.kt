@@ -92,7 +92,7 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void_p.OUT("data", "")
+        )..void.p.OUT("data", "")
     )
 
     void(
@@ -102,7 +102,7 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("params")..GLsizei.IN("bufSize", ""),
-        ReturnParam..GLfloat_p.OUT("params", "")
+        ReturnParam..GLfloat.p.OUT("params", "")
     )
 
     void(
@@ -112,6 +112,6 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("params")..GLsizei.IN("bufSize", ""),
-        ReturnParam..GLint_p.OUT("params", "")
+        ReturnParam..GLint.p.OUT("params", "")
     )
 }

@@ -116,8 +116,8 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
     uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
     size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional: value."),
     int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
-    const..char_p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
-    const..char_p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
+    char.const.p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
+    char.const.p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
     opaque_p.IN("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created.")
 ) {
     documentation =
@@ -226,7 +226,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSwapchainCreateFlagsKHR.member("flags", "a bitmask of {@code VkSwapchainCreateFlagBitsKHR} indicating parameters of the swapchain creation.")
     VkSurfaceKHR.member("surface", "the surface onto which the swapchain will present images. If the creation succeeds, the swapchain becomes associated with {@code surface}.")
     uint32_t.member("minImageCount", "the minimum number of presentable images that the application needs. The implementation will either create the swapchain with at least that many images, or it will fail to create the swapchain.")
@@ -241,7 +241,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
     VkImageUsageFlags.member("imageUsage", "a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the (acquired) swapchain images.")
     VkSharingMode.member("imageSharingMode", "the sharing mode used for the image(s) of the swapchain.")
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member("queueFamilyIndexCount", "the number of queue families having access to the image(s) of the swapchain when {@code imageSharingMode} is #SHARING_MODE_CONCURRENT.")
-    const..uint32_t_p.member("pQueueFamilyIndices", "an array of queue family indices having access to the images(s) of the swapchain when {@code imageSharingMode} is #SHARING_MODE_CONCURRENT.")
+    uint32_t.const.p.member("pQueueFamilyIndices", "an array of queue family indices having access to the images(s) of the swapchain when {@code imageSharingMode} is #SHARING_MODE_CONCURRENT.")
     VkSurfaceTransformFlagBitsKHR.member("preTransform", "a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform, relative to the presentation engine&#8217;s natural orientation, applied to the image content prior to presentation. If it does not match the {@code currentTransform} value returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR(), the presentation engine will transform the image content as part of the presentation operation.")
     VkCompositeAlphaFlagBitsKHR.member("compositeAlpha", "a {@code VkCompositeAlphaFlagBitsKHR} value indicating the alpha compositing mode to use when this surface is composited together with other surfaces on certain window systems.")
     VkPresentModeKHR.member("presentMode", "the presentation mode the swapchain will use. A swapchain&#8217;s present mode determines how incoming present requests will be processed and queued internally.")
@@ -299,12 +299,12 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
-    const..VkSemaphore.p.member("pWaitSemaphores", "if not {@code NULL}, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
+    VkSemaphore.const.p.member("pWaitSemaphores", "if not {@code NULL}, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
     AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
-    const..VkSwapchainKHR.p.member("pSwapchains", "an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once.")
-    const..uint32_t_p.member("pImageIndices", "an array of indices into the array of each swapchain&#8217;s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array.")
+    VkSwapchainKHR.const.p.member("pSwapchains", "an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once.")
+    uint32_t.const.p.member("pImageIndices", "an array of indices into the array of each swapchain&#8217;s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array.")
     nullable..VkResult.p.member("pResults", "an array of {@code VkResult} typed elements with {@code swapchainCount} entries. Applications that do not need per-swapchain results <b>can</b> use {@code NULL} for {@code pResults}. If non-{@code NULL}, each entry in {@code pResults} will be set to the {@code VkResult} for presenting the swapchain corresponding to the same index in {@code pSwapchains}.")
 }
 
@@ -315,7 +315,7 @@ val VkDisplayPropertiesKHR = struct(Module.VULKAN, "VkDisplayPropertiesKHR", mut
         """
 
     VkDisplayKHR.member("display", "a handle that is used to refer to the display described here. This handle will be valid for the lifetime of the Vulkan instance.")
-    const..charUTF8_p.member("displayName", "a pointer to a NULL-terminated string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid.")
+    charUTF8.const.p.member("displayName", "a pointer to a NULL-terminated string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid.")
     VkExtent2D.member("physicalDimensions", "describes the physical width and height of the visible portion of the display, in millimeters.")
     VkExtent2D.member("physicalResolution", """describes the physical, native, or preferred resolution of the display.
 
@@ -382,7 +382,7 @@ val VkDisplayModeCreateInfoKHR = struct(Module.VULKAN, "VkDisplayModeCreateInfoK
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplayModeCreateFlagsKHR.member("flags", "reserved for future use, and <b>must</b> be zero.")
     VkDisplayModeParametersKHR.member("parameters", "a ##VkDisplayModeParametersKHR structure describing the display parameters to use in creating the new mode. If the parameters are not compatible with the specified display, the implementation <b>must</b> return #ERROR_INITIALIZATION_FAILED.")
 }
@@ -460,7 +460,7 @@ val VkDisplaySurfaceCreateInfoKHR = struct(Module.VULKAN, "VkDisplaySurfaceCreat
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplaySurfaceCreateFlagsKHR.member("flags", "reserved for future use, and <b>must</b> be zero.")
     VkDisplayModeKHR.member("displayMode", "a {@code VkDisplayModeKHR} handle specifying the mode to use when displaying this surface.")
     uint32_t.member("planeIndex", "the plane on which this surface appears.")
@@ -496,7 +496,7 @@ val VkDisplayPresentInfoKHR = struct(Module.VULKAN, "VkDisplayPresentInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkRect2D.member("srcRect", "a rectangular region of pixels to present. It <b>must</b> be a subset of the image being presented. If ##VkDisplayPresentInfoKHR is not specified, this region will be assumed to be the entire presentable image.")
     VkRect2D.member("dstRect", "a rectangular region within the visible region of the swapchain&#8217;s display mode. If ##VkDisplayPresentInfoKHR is not specified, this region will be assumed to be the entire visible region of the visible region of the swapchain&#8217;s mode. If the specified rectangle is a subset of the display mode&#8217;s visible region, content from display planes below the swapchain&#8217;s plane will be visible outside the rectangle. If there are no planes below the swapchain&#8217;s, the area outside the specified rectangle will be black. If portions of the specified rectangle are outside of the display&#8217;s visible region, pixels mapping only to those portions of the rectangle will be discarded.")
     VkBool32.member("persistent", "If this is #TRUE, the display engine will enable buffered mode on displays that support it. This allows the display engine to stop sending content to the display until a new image is presented. The display will instead maintain a copy of the last presented image. This allows less power to be used, but <b>may</b> increase presentation latency. If ##VkDisplayPresentInfoKHR is not specified, persistent mode will not be used.")
@@ -526,7 +526,7 @@ val VkXlibSurfaceCreateInfoKHR = struct(Module.VULKAN, "VkXlibSurfaceCreateInfoK
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkXlibSurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
     Display.p.member("dpy", "a pointer to an Xlib {@code Display} connection to the X server.")
     Window.member("window", "an Xlib {@code Window} to associate the surface with.")
@@ -556,7 +556,7 @@ val VkWin32SurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWin32SurfaceCreateInf
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkWin32SurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
     HINSTANCE.member("hinstance", "{@code hinstance} and {@code hwnd} are the Win32 {@code HINSTANCE} and {@code HWND} for the window to associate the surface with.")
     HWND.member("hwnd", "see {@code hinstance}")
@@ -591,7 +591,7 @@ val VkDebugReportCallbackCreateInfoEXT = struct(Module.VULKAN, "VkDebugReportCal
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDebugReportFlagsEXT.member("flags", "a bitmask of {@code VkDebugReportFlagBitsEXT} specifying which event(s) will cause this callback to be called.")
     PFN_vkDebugReportCallbackEXT.member("pfnCallback", "the application callback function to call.")
     nullable..opaque_p.member("pUserData", "user data to be passed to the callback.")
@@ -612,7 +612,7 @@ val VkPipelineRasterizationStateRasterizationOrderAMD = struct(Module.VULKAN, "V
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkRasterizationOrderAMD.member("rasterizationOrder", "a {@code VkRasterizationOrderAMD} value specifying the primitive rasterization order to use.")
 }
 
@@ -644,10 +644,10 @@ val VkDebugMarkerObjectNameInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectN
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDebugReportObjectTypeEXT.member("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of the object to be named.")
     uint64_t.member("object", "the object to be named.")
-    const..charUTF8_p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code object}.")
+    charUTF8.const.p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code object}.")
 }
 
 val VkDebugMarkerObjectTagInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectTagInfoEXT") {
@@ -679,12 +679,12 @@ val VkDebugMarkerObjectTagInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectTa
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDebugReportObjectTypeEXT.member("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of the object to be named.")
     uint64_t.member("object", "the object to be tagged.")
     uint64_t.member("tagName", "a numerical identifier of the tag.")
     AutoSize("pTag")..size_t.member("tagSize", "the number of bytes of data to attach to the object.")
-    const..void_p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object.")
+    void.const.p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object.")
 }
 
 val VkDebugMarkerMarkerInfoEXT = struct(Module.VULKAN, "VkDebugMarkerMarkerInfoEXT") {
@@ -704,8 +704,8 @@ val VkDebugMarkerMarkerInfoEXT = struct(Module.VULKAN, "VkDebugMarkerMarkerInfoE
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    const..charUTF8_p.member("pMarkerName", "a pointer to a null-terminated UTF-8 string that contains the name of the marker.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    charUTF8.const.p.member("pMarkerName", "a pointer to a null-terminated UTF-8 string that contains the name of the marker.")
     float.array("color", "an optional: RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.", size = 4)
 }
 
@@ -731,7 +731,7 @@ val VkDedicatedAllocationImageCreateInfoNV = struct(Module.VULKAN, "VkDedicatedA
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("dedicatedAllocation", "indicates whether the image will have a dedicated allocation bound to it.")
 }
 
@@ -747,7 +747,7 @@ val VkDedicatedAllocationBufferCreateInfoNV = struct(Module.VULKAN, "VkDedicated
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("dedicatedAllocation", "indicates whether the buffer will have a dedicated allocation bound to it.")
 }
 
@@ -777,7 +777,7 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(Module.VULKAN, "VkDedicat
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImage.member("image", "#NULL_HANDLE or a handle of an image which this memory will be bound to.")
     VkBuffer.member("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
 }
@@ -870,13 +870,13 @@ val VkRenderPassMultiviewCreateInfoKHX = struct(Module.VULKAN, "VkRenderPassMult
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pViewMasks", optional = true)..uint32_t.member("subpassCount", "zero or is the number of subpasses in the render pass.")
-    const..uint32_t_p.member("pViewMasks", "points to an array of {@code subpassCount} number of view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.")
+    uint32_t.const.p.member("pViewMasks", "points to an array of {@code subpassCount} number of view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.")
     AutoSize("pViewOffsets", optional = true)..uint32_t.member("dependencyCount", "zero or the number of dependencies in the render pass.")
-    const..int32_t_p.member("pViewOffsets", "points to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency&#8217;s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on.")
+    int32_t.const.p.member("pViewOffsets", "points to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency&#8217;s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on.")
     AutoSize("pCorrelationMasks", optional = true)..uint32_t.member("correlationMaskCount", "zero or a number of correlation masks.")
-    const..uint32_t_p.member("pCorrelationMasks", "an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.")
+    uint32_t.const.p.member("pCorrelationMasks", "an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.")
 }
 
 val VkPhysicalDeviceMultiviewFeaturesKHX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewFeaturesKHX") {
@@ -952,7 +952,7 @@ val VkExternalMemoryImageCreateInfoNV = struct(Module.VULKAN, "VkExternalMemoryI
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagsNV.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types.")
 }
 
@@ -970,7 +970,7 @@ val VkExportMemoryAllocateInfoNV = struct(Module.VULKAN, "VkExportMemoryAllocate
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagsNV.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more memory handle types that <b>may</b> be exported. Multiple handle types <b>may</b> be requested for the same allocation as long as they are compatible, as reported by #GetPhysicalDeviceExternalImageFormatPropertiesNV().")
 }
 
@@ -998,7 +998,7 @@ val VkImportMemoryWin32HandleInfoNV = struct(Module.VULKAN, "VkImportMemoryWin32
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagsNV.member("handleType", "0 or a {@code VkExternalMemoryHandleTypeFlagBitsNV} value specifying the type of memory handle in {@code handle}.")
     HANDLE.member("handle", "a Windows {@code HANDLE} referring to the memory.")
 }
@@ -1025,8 +1025,8 @@ val VkExportMemoryWin32HandleInfoNV = struct(Module.VULKAN, "VkExportMemoryWin32
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..SECURITY_ATTRIBUTES.const.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
 }
 
@@ -1048,14 +1048,14 @@ val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(Module.VULKAN, "VkWin32KeyedM
         """
 
     VkStructureType.member("sType", "")
-    nullable..const..opaque_p.member("pNext", "")
+    nullable..opaque_const_p.member("pNext", "")
     AutoSize("pAcquireSyncs", "pAcquireKeys", "pAcquireTimeoutMilliseconds", optional = true)..uint32_t.member("acquireCount", "the number of entries in the {@code pAcquireSyncs}, {@code pAcquireKeys}, and {@code pAcquireTimeoutMilliseconds} arrays.")
-    const..VkDeviceMemory.p.member("pAcquireSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
-    const..uint64_t_p.member("pAcquireKeys", "a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}.")
-    const..uint32_t_p.member("pAcquireTimeoutMilliseconds", "an array of timeout values, in millisecond units, for each acquire specified in {@code pAcquireKeys}.")
+    VkDeviceMemory.const.p.member("pAcquireSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
+    uint64_t.const.p.member("pAcquireKeys", "a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}.")
+    uint32_t.const.p.member("pAcquireTimeoutMilliseconds", "an array of timeout values, in millisecond units, for each acquire specified in {@code pAcquireKeys}.")
     AutoSize("pReleaseSyncs", "pReleaseKeys", optional = true)..uint32_t.member("releaseCount", "the number of entries in the {@code pReleaseSyncs} and {@code pReleaseKeys} arrays.")
-    const..VkDeviceMemory.p.member("pReleaseSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
-    const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
+    VkDeviceMemory.const.p.member("pReleaseSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
+    uint64_t.const.p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
 val VkPhysicalDeviceFeatures2KHR = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2KHR") {
@@ -1179,7 +1179,7 @@ val VkPhysicalDeviceImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDevic
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2KHR is used to provide additional image parameters to #GetPhysicalDeviceImageFormatProperties2KHR().")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2KHR is used to provide additional image parameters to #GetPhysicalDeviceImageFormatProperties2KHR().")
     VkFormat.member("format", "a {@code VkFormat} value indicating the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
     VkImageType.member("type", "a {@code VkImageType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
     VkImageTiling.member("tiling", "a {@code VkImageTiling} value indicating the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
@@ -1274,7 +1274,7 @@ val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysica
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFormat.member("format", "the image format.")
     VkImageType.member("type", "the dimensionality of image.")
     VkSampleCountFlagBits.member("samples", "the number of samples per texel as defined in {@code VkSampleCountFlagBits}.")
@@ -1310,7 +1310,7 @@ val VkMemoryAllocateFlagsInfoKHX = struct(Module.VULKAN, "VkMemoryAllocateFlagsI
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkMemoryAllocateFlagsKHX.member("flags", "a bitmask of {@code VkMemoryAllocateFlagBitsKHX} controlling the allocation.")
     uint32_t.member("deviceMask", "a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set in {@code flags}.")
 }
@@ -1346,10 +1346,10 @@ val VkDeviceGroupRenderPassBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGroupRe
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.member("deviceMask", "the device mask for the render pass instance.")
     AutoSize("pDeviceRenderAreas", optional = true)..uint32_t.member("deviceRenderAreaCount", "the number of elements in the {@code pDeviceRenderAreas} array.")
-    const..VkRect2D.p.buffer("pDeviceRenderAreas", "an array of structures of type ##VkRect2D defining the render area for each physical device.")
+    VkRect2D.const.p.buffer("pDeviceRenderAreas", "an array of structures of type ##VkRect2D defining the render area for each physical device.")
 }
 
 val VkDeviceGroupCommandBufferBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGroupCommandBufferBeginInfoKHX") {
@@ -1375,7 +1375,7 @@ val VkDeviceGroupCommandBufferBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGrou
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.member("deviceMask", "the initial value of the command buffer&#8217;s device mask.")
 }
 
@@ -1406,13 +1406,13 @@ val VkDeviceGroupSubmitInfoKHX = struct(Module.VULKAN, "VkDeviceGroupSubmitInfoK
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pWaitSemaphoreDeviceIndices", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of elements in the {@code pWaitSemaphoreDeviceIndices} array.")
-    const..uint32_t_p.member("pWaitSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore wait operation in the corresponding element of ##VkSubmitInfo{@code ::pWaitSemaphores}.")
+    uint32_t.const.p.member("pWaitSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore wait operation in the corresponding element of ##VkSubmitInfo{@code ::pWaitSemaphores}.")
     AutoSize("pCommandBufferDeviceMasks", optional = true)..uint32_t.member("commandBufferCount", "the number of elements in the {@code pCommandBufferDeviceMasks} array.")
-    const..uint32_t_p.member("pCommandBufferDeviceMasks", "an array of device masks indicating which physical devices execute the command buffer in the corresponding element of ##VkSubmitInfo{@code ::pCommandBuffers}. A physical device executes the command buffer if the corresponding bit is set in the mask.")
+    uint32_t.const.p.member("pCommandBufferDeviceMasks", "an array of device masks indicating which physical devices execute the command buffer in the corresponding element of ##VkSubmitInfo{@code ::pCommandBuffers}. A physical device executes the command buffer if the corresponding bit is set in the mask.")
     AutoSize("pSignalSemaphoreDeviceIndices", optional = true)..uint32_t.member("signalSemaphoreCount", "the number of elements in the {@code pSignalSemaphoreDeviceIndices} array.")
-    const..uint32_t_p.member("pSignalSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore signal operation in the corresponding element of ##VkSubmitInfo{@code ::pSignalSemaphores}.")
+    uint32_t.const.p.member("pSignalSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore signal operation in the corresponding element of ##VkSubmitInfo{@code ::pSignalSemaphores}.")
 }
 
 val VkDeviceGroupBindSparseInfoKHX = struct(Module.VULKAN, "VkDeviceGroupBindSparseInfoKHX") {
@@ -1438,7 +1438,7 @@ val VkDeviceGroupBindSparseInfoKHX = struct(Module.VULKAN, "VkDeviceGroupBindSpa
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.member("resourceDeviceIndex", "a device index indicating which instance of the resource is bound.")
     uint32_t.member("memoryDeviceIndex", "a device index indicating which instance of the memory the resource instance is bound to.")
 }
@@ -1479,9 +1479,9 @@ val VkBindBufferMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindBufferMe
         """
 
     VkStructureType.member("sType", "")
-    nullable..const..opaque_p.member("pNext", "")
+    nullable..opaque_const_p.member("pNext", "")
     AutoSize("pDeviceIndices", optional = true)..uint32_t.member("deviceIndexCount", "")
-    const..uint32_t_p.member("pDeviceIndices", "")
+    uint32_t.const.p.member("pDeviceIndices", "")
 }
 
 val VkBindImageMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindImageMemoryDeviceGroupInfoKHX") {
@@ -1535,11 +1535,11 @@ val VkBindImageMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindImageMemo
         """
 
     VkStructureType.member("sType", "")
-    nullable..const..opaque_p.member("pNext", "")
+    nullable..opaque_const_p.member("pNext", "")
     AutoSize("pDeviceIndices", optional = true)..uint32_t.member("deviceIndexCount", "")
-    const..uint32_t_p.member("pDeviceIndices", "")
+    uint32_t.const.p.member("pDeviceIndices", "")
     AutoSize("pSFRRects", optional = true)..uint32_t.member("SFRRectCount", "")
-    const..VkRect2D.p.buffer("pSFRRects", "")
+    VkRect2D.const.p.buffer("pSFRRects", "")
 }
 
 val VkDeviceGroupPresentCapabilitiesKHX = struct(Module.VULKAN, "VkDeviceGroupPresentCapabilitiesKHX", mutable = false) {
@@ -1566,7 +1566,7 @@ val VkDeviceGroupPresentCapabilitiesKHX = struct(Module.VULKAN, "VkDeviceGroupPr
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.array("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.", size = "VK_MAX_DEVICE_GROUP_SIZE_KHX")
     VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHX} indicating which device group presentation modes are supported.")
 }
@@ -1589,7 +1589,7 @@ val VkImageSwapchainCreateInfoKHX = struct(Module.VULKAN, "VkImageSwapchainCreat
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a handle of a swapchain that the image will be bound to.")
 }
 
@@ -1621,7 +1621,7 @@ val VkBindImageMemorySwapchainInfoKHX = struct(Module.VULKAN, "VkBindImageMemory
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a swapchain handle.")
     uint32_t.member("imageIndex", "an image index within {@code swapchain}.")
 }
@@ -1671,7 +1671,7 @@ val VkAcquireNextImageInfoKHX = struct(Module.VULKAN, "VkAcquireNextImageInfoKHX
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSwapchainKHR.member("swapchain", "a non-retired swapchain from which an image is acquired.")
     uint64_t.member("timeout", "indicates how long the function waits, in nanoseconds, if no image is available.")
     VkSemaphore.member("semaphore", "#NULL_HANDLE or a semaphore to signal.")
@@ -1715,9 +1715,9 @@ val VkDeviceGroupPresentInfoKHX = struct(Module.VULKAN, "VkDeviceGroupPresentInf
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pDeviceMasks", optional = true)..uint32_t.member("swapchainCount", "zero or the number of elements in {@code pDeviceMasks}.")
-    const..uint32_t_p.member("pDeviceMasks", "an array of device masks, one for each element of ##VkPresentInfoKHR::pSwapchains.")
+    uint32_t.const.p.member("pDeviceMasks", "an array of device masks, one for each element of ##VkPresentInfoKHR::pSwapchains.")
     VkDeviceGroupPresentModeFlagBitsKHX.member("mode", "the device group present mode that will be used for this present.")
 }
 
@@ -1738,7 +1738,7 @@ val VkDeviceGroupSwapchainCreateInfoKHX = struct(Module.VULKAN, "VkDeviceGroupSw
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitfield of modes that the swapchain <b>can</b> be used with.")
 }
 
@@ -1757,7 +1757,7 @@ val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pDisabledValidationChecks")..uint32_t.member("disabledValidationCheckCount", "the number of checks to disable.")
     VkValidationCheckEXT.p.member("pDisabledValidationChecks", "a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled.")
 }
@@ -1801,9 +1801,9 @@ val VkDeviceGroupDeviceCreateInfoKHX = struct(Module.VULKAN, "VkDeviceGroupDevic
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pPhysicalDevices", optional = true)..uint32_t.member("physicalDeviceCount", "the number of elements in the {@code pPhysicalDevices} array.")
-    const..VkPhysicalDevice.p.member("pPhysicalDevices", "an array of physical device handles belonging to the same device group.")
+    VkPhysicalDevice.const.p.member("pPhysicalDevices", "an array of physical device handles belonging to the same device group.")
 }
 
 val VkExternalMemoryPropertiesKHR = struct(Module.VULKAN, "VkExternalMemoryPropertiesKHR", mutable = false) {
@@ -1841,7 +1841,7 @@ val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(Module.VULKAN, "VkPhysic
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHR} value specifying the memory handle type that will be used with the memory associated with the image.")
 }
 
@@ -1885,7 +1885,7 @@ val VkPhysicalDeviceExternalBufferInfoKHR = struct(Module.VULKAN, "VkPhysicalDev
         """
 
     VkStructureType.member("sType", "the type of this structure")
-    nullable..const..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
     VkBufferCreateFlags.member("flags", "a bitmask of {@code VkBufferCreateFlagBits} describing additional parameters of the buffer, corresponding to ##VkBufferCreateInfo{@code ::flags}.")
     VkBufferUsageFlags.member("usage", "a bitmask of {@code VkBufferUsageFlagBits} describing the intended usage of the buffer, corresponding to ##VkBufferCreateInfo{@code ::usage}.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHR} value specifying the memory handle type that will be used with the memory associated with the buffer.")
@@ -1970,7 +1970,7 @@ val VkExternalMemoryImageCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemory
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more external memory handle types.")
 }
 
@@ -1988,7 +1988,7 @@ val VkExternalMemoryBufferCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemor
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more external memory handle types.")
 }
 
@@ -2011,7 +2011,7 @@ val VkExportMemoryAllocateInfoKHR = struct(Module.VULKAN, "VkExportMemoryAllocat
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more memory handle types the application <b>can</b> export from the resulting allocation. The application <b>can</b> request multiple handle types for the same allocation.")
 }
 
@@ -2048,7 +2048,7 @@ val VkImportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportMemoryWin3
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code handle} or {@code name}.")
     HANDLE.member("handle", "the external handle to import, or {@code NULL}.")
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.")
@@ -2096,8 +2096,8 @@ val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin3
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..SECURITY_ATTRIBUTES.const.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.")
 }
@@ -2141,7 +2141,7 @@ val VkMemoryGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkMemoryGetWin32Handl
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceMemory.member("memory", "the memory object from which the handle will be exported.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
@@ -2174,7 +2174,7 @@ val VkImportMemoryFdInfoKHR = struct(Module.VULKAN, "VkImportMemoryFdInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the handle type of {@code fd}.")
     int.member("fd", "the external handle to import.")
 }
@@ -2221,7 +2221,7 @@ val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceMemory.member("memory", "the memory object from which the handle will be exported.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
@@ -2249,14 +2249,14 @@ val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(Module.VULKAN, "VkWin32Keyed
         """
 
     VkStructureType.member("sType", "")
-    nullable..const..opaque_p.member("pNext", "")
+    nullable..opaque_const_p.member("pNext", "")
     AutoSize("pAcquireSyncs", "pAcquireKeys", "pAcquireTimeouts", optional = true)..uint32_t.member("acquireCount", "the number of entries in the {@code pAcquireSyncs}, {@code pAcquireKeys}, and {@code pAcquireTimeoutMilliseconds} arrays.")
-    const..VkDeviceMemory.p.member("pAcquireSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
-    const..uint64_t_p.member("pAcquireKeys", "a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}.")
-    const..uint32_t_p.member("pAcquireTimeouts", "")
+    VkDeviceMemory.const.p.member("pAcquireSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
+    uint64_t.const.p.member("pAcquireKeys", "a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}.")
+    uint32_t.const.p.member("pAcquireTimeouts", "")
     AutoSize("pReleaseSyncs", "pReleaseKeys", optional = true)..uint32_t.member("releaseCount", "the number of entries in the {@code pReleaseSyncs} and {@code pReleaseKeys} arrays.")
-    const..VkDeviceMemory.p.member("pReleaseSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
-    const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
+    VkDeviceMemory.const.p.member("pReleaseSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
+    uint64_t.const.p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
 val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalSemaphoreInfoKHR") {
@@ -2276,7 +2276,7 @@ val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(Module.VULKAN, "VkPhysical
         """
 
     VkStructureType.member("sType", "the type of this structure")
-    nullable..const..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value specifying the external semaphore handle type for which capabilities will be returned.")
 }
 
@@ -2324,7 +2324,7 @@ val VkExportSemaphoreCreateInfoKHR = struct(Module.VULKAN, "VkExportSemaphoreCre
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalSemaphoreHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} specifying one or more semaphore handle types the application <b>can</b> export from the resulting semaphore. The application <b>can</b> request multiple handle types for the same semaphore.")
 }
 
@@ -2377,7 +2377,7 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemapho
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore into which the payload will be imported.")
     VkSemaphoreImportFlagsKHR.member("flags", "a bitmask of {@code VkSemaphoreImportFlagBitsKHR} specifying additional parameters for the semaphore payload import operation.")
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code handle}.")
@@ -2427,8 +2427,8 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemapho
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..SECURITY_ATTRIBUTES.const.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created semaphore.")
 }
@@ -2456,11 +2456,11 @@ val VkD3D12FenceSubmitInfoKHR = struct(Module.VULKAN, "VkD3D12FenceSubmitInfoKHR
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pWaitSemaphoreValues", optional = true)..uint32_t.member("waitSemaphoreValuesCount", "the number of semaphore wait values specified in {@code pWaitSemaphoreValues}.")
-    nullable..const..uint64_t_p.member("pWaitSemaphoreValues", "an array of length {@code waitSemaphoreValuesCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pWaitSemaphores} to wait for.")
+    nullable..uint64_t.const.p.member("pWaitSemaphoreValues", "an array of length {@code waitSemaphoreValuesCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pWaitSemaphores} to wait for.")
     AutoSize("pSignalSemaphoreValues", optional = true)..uint32_t.member("signalSemaphoreValuesCount", "the number of semaphore signal values specified in {@code pSignalSemaphoreValues}.")
-    nullable..const..uint64_t_p.member("pSignalSemaphoreValues", "an array of length {@code signalSemaphoreValuesCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pSignalSemaphores} to set when signaled.")
+    nullable..uint64_t.const.p.member("pSignalSemaphoreValues", "an array of length {@code signalSemaphoreValuesCount} containing values for the corresponding semaphores in ##VkSubmitInfo{@code ::pSignalSemaphores} to set when signaled.")
 }
 
 val VkSemaphoreGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetWin32HandleInfoKHR") {
@@ -2494,7 +2494,7 @@ val VkSemaphoreGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetWin3
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore from which state will be exported.")
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
@@ -2541,7 +2541,7 @@ val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoK
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore into which the payload will be imported.")
     VkSemaphoreImportFlagsKHR.member("flags", "a bitmask of {@code VkSemaphoreImportFlagBitsKHR} specifying additional parameters for the semaphore payload import operation.")
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code fd}.")
@@ -2578,7 +2578,7 @@ val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore from which state will be exported.")
     VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
@@ -2646,7 +2646,7 @@ val VkPresentRegionKHR = struct(Module.VULKAN, "VkPresentRegionKHR") {
         """
 
     AutoSize("pRectangles", optional = true)..uint32_t.member("rectangleCount", "the number of rectangles in {@code pRectangles}, or zero if the entire image has changed and should be presented.")
-    nullable..const..VkRectLayerKHR.p.buffer("pRectangles", "either {@code NULL} or a pointer to an array of ##VkRectLayerKHR structures. The ##VkRectLayerKHR structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.")
+    nullable..VkRectLayerKHR.const.p.buffer("pRectangles", "either {@code NULL} or a pointer to an array of ##VkRectLayerKHR structures. The ##VkRectLayerKHR structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.")
 }
 
 val VkPresentRegionsKHR = struct(Module.VULKAN, "VkPresentRegionsKHR") {
@@ -2671,9 +2671,9 @@ val VkPresentRegionsKHR = struct(Module.VULKAN, "VkPresentRegionsKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pRegions", optional = true)..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
-    nullable..const..VkPresentRegionKHR.p.buffer("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
+    nullable..VkPresentRegionKHR.const.p.buffer("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
 }
 
 val VkDescriptorUpdateTemplateEntryKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntryKHR") {
@@ -2744,7 +2744,7 @@ val VkDescriptorUpdateTemplateCreateInfoKHR = struct(Module.VULKAN, "VkDescripto
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDescriptorUpdateTemplateCreateFlagsKHR.member("flags", "reserved for future use.")
     AutoSize("pDescriptorUpdateEntries")..uint32_t.member("descriptorUpdateEntryCount", "the number of elements in the {@code pDescriptorUpdateEntries} array.")
-    const..VkDescriptorUpdateTemplateEntryKHR.p.buffer("pDescriptorUpdateEntries", "a pointer to an array of ##VkDescriptorUpdateTemplateEntryKHR structures describing the descriptors to be updated by the descriptor update template.")
+    VkDescriptorUpdateTemplateEntryKHR.const.p.buffer("pDescriptorUpdateEntries", "a pointer to an array of ##VkDescriptorUpdateTemplateEntryKHR structures describing the descriptors to be updated by the descriptor update template.")
     VkDescriptorUpdateTemplateTypeKHR.member("templateType", "Specifies the type of the descriptor update template. If set to #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR it <b>can</b> only be used to update descriptor sets with a fixed {@code descriptorSetLayout}. If set to #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR it <b>can</b> only be used to push descriptor sets using the provided {@code pipelineBindPoint}, {@code pipelineLayout}, and {@code set} number.")
     VkDescriptorSetLayout.member("descriptorSetLayout", "the descriptor set layout the parameter update template will be used with. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with this layout. {@code descriptorSetLayout} is the descriptor set layout used to build the descriptor update template. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with a layout that matches (is the same as, or defined identically to) this layout. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR.")
     VkPipelineBindPoint.member("pipelineBindPoint", "a {@code VkPipelineBindPoint} indicating whether the descriptors will be used by graphics pipelines or compute pipelines. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR")
@@ -2768,7 +2768,7 @@ val VkDeviceGeneratedCommandsFeaturesNVX = struct(Module.VULKAN, "VkDeviceGenera
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("computeBindingPointSupport", "indicates whether the {@code VkObjectTableNVX} supports entries with #OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX bit set and {@code VkIndirectCommandsLayoutNVX} supports #PIPELINE_BIND_POINT_COMPUTE.")
 }
 
@@ -2788,7 +2788,7 @@ val VkDeviceGeneratedCommandsLimitsNVX = struct(Module.VULKAN, "VkDeviceGenerate
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t.member("maxIndirectCommandsLayoutTokenCount", "the maximum number of tokens in {@code VkIndirectCommandsLayoutNVX}.")
     uint32_t.member("maxObjectEntryCounts", "the maximum number of entries per resource type in {@code VkObjectTableNVX}.")
     uint32_t.member("minSequenceCountBufferOffsetAlignment", "the minimum alignment for memory addresses optionally used in #CmdProcessCommandsNVX().")
@@ -2900,11 +2900,11 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(Module.VULKAN, "VkIndirectCom
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineBindPoint.member("pipelineBindPoint", "the {@code VkPipelineBindPoint} that this layout targets.")
     VkIndirectCommandsLayoutUsageFlagsNVX.member("flags", "a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsNVX} specifying usage hints of this layout.")
     AutoSize("pTokens")..uint32_t.member("tokenCount", "the length of the individual command sequnce.")
-    const..VkIndirectCommandsLayoutTokenNVX.p.buffer("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
+    VkIndirectCommandsLayoutTokenNVX.const.p.buffer("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
 }
 
 val VkCmdProcessCommandsInfoNVX = struct(Module.VULKAN, "VkCmdProcessCommandsInfoNVX") {
@@ -2952,11 +2952,11 @@ val VkCmdProcessCommandsInfoNVX = struct(Module.VULKAN, "VkCmdProcessCommandsInf
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkObjectTableNVX.member("objectTable", "the {@code VkObjectTableNVX} to be used for the generation process. Only registered objects at the time #CmdReserveSpaceForCommandsNVX() is called, will be taken into account for the reservation.")
     VkIndirectCommandsLayoutNVX.member("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutNVX} that provides the command sequence to generate.")
     AutoSize("pIndirectCommandsTokens")..uint32_t.member("indirectCommandsTokenCount", "defines the number of input tokens used.")
-    const..VkIndirectCommandsTokenNVX.p.buffer("pIndirectCommandsTokens", "provides an array of ##VkIndirectCommandsTokenNVX that reference the input data for each token command.")
+    VkIndirectCommandsTokenNVX.const.p.buffer("pIndirectCommandsTokens", "provides an array of ##VkIndirectCommandsTokenNVX that reference the input data for each token command.")
     uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved. If {@code sequencesCountBuffer} is #NULL_HANDLE, this is also the actual number of sequences generated.")
     nullable..VkCommandBuffer.member("targetCommandBuffer", "<b>can</b> be the secondary {@code VkCommandBuffer} in which the commands should be recorded. If {@code targetCommandBuffer} is {@code NULL} an implicit reservation as well as execution takes place on the processing {@code VkCommandBuffer}.")
     VkBuffer.member("sequencesCountBuffer", "<b>can</b> be {@code VkBuffer} from which the actual amount of sequences is sourced from as ftext:uint32_t value.")
@@ -2989,7 +2989,7 @@ val VkCmdReserveSpaceForCommandsInfoNVX = struct(Module.VULKAN, "VkCmdReserveSpa
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkObjectTableNVX.member("objectTable", "the {@code VkObjectTableNVX} to be used for the generation process. Only registered objects at the time #CmdReserveSpaceForCommandsNVX() is called, will be taken into account for the reservation.")
     VkIndirectCommandsLayoutNVX.member("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutNVX} that <b>must</b> also be used at generation time.")
     uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved.")
@@ -3026,11 +3026,11 @@ val VkObjectTableCreateInfoNVX = struct(Module.VULKAN, "VkObjectTableCreateInfoN
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pObjectEntryTypes", "pObjectEntryCounts", "pObjectEntryUsageFlags")..uint32_t.member("objectCount", "the number of entry configurations that the object table supports.")
-    const..VkObjectEntryTypeNVX.p.member("pObjectEntryTypes", "an array of {@code VkObjectEntryTypeNVX} values providing the entry type of a given configuration.")
-    const..uint32_t_p.member("pObjectEntryCounts", "an array of counts of how many objects can be registered in the table.")
-    const..VkObjectEntryUsageFlagsNVX.p.member("pObjectEntryUsageFlags", "an array of bitmasks of {@code VkObjectEntryUsageFlagBitsNVX} specifying the binding usage of the entry.")
+    VkObjectEntryTypeNVX.const.p.member("pObjectEntryTypes", "an array of {@code VkObjectEntryTypeNVX} values providing the entry type of a given configuration.")
+    uint32_t.const.p.member("pObjectEntryCounts", "an array of counts of how many objects can be registered in the table.")
+    VkObjectEntryUsageFlagsNVX.const.p.member("pObjectEntryUsageFlags", "an array of bitmasks of {@code VkObjectEntryUsageFlagBitsNVX} specifying the binding usage of the entry.")
     uint32_t.member("maxUniformBuffersPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC used by any single registered {@code VkDescriptorSet} in this table.")
     uint32_t.member("maxStorageBuffersPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC used by any single registered {@code VkDescriptorSet} in this table.")
     uint32_t.member("maxStorageImagesPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_STORAGE_IMAGE or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER used by any single registered {@code VkDescriptorSet} in this table.")
@@ -3217,10 +3217,10 @@ val VkPipelineViewportWScalingStateCreateInfoNV = struct(Module.VULKAN, "VkPipel
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("viewportWScalingEnable", "controls whether viewport <b>W</b> scaling is enabled.")
     AutoSize("pViewportWScalings")..uint32_t.member("viewportCount", "the number of viewports used by <b>W</b> scaling, and <b>must</b> match the number of viewports in the pipeline if viewport <b>W</b> scaling is enabled.")
-    const..VkViewportWScalingNV.p.buffer("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures, which define the <b>W</b> scaling parameters for the corresponding viewport. If the viewport <b>W</b> scaling state is dynamic, this member is ignored.")
+    VkViewportWScalingNV.const.p.buffer("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures, which define the <b>W</b> scaling parameters for the corresponding viewport. If the viewport <b>W</b> scaling state is dynamic, this member is ignored.")
 }
 
 val VkSurfaceCapabilities2EXT = struct(Module.VULKAN, "VkSurfaceCapabilities2EXT", mutable = false) {
@@ -3275,7 +3275,7 @@ val VkDisplayPowerInfoEXT = struct(Module.VULKAN, "VkDisplayPowerInfoEXT") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplayPowerStateEXT.member("powerState", "a {@code VkDisplayPowerStateEXT} value specifying the new power state of the display.")
 }
 
@@ -3296,7 +3296,7 @@ val VkDeviceEventInfoEXT = struct(Module.VULKAN, "VkDeviceEventInfoEXT") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceEventTypeEXT.member("deviceEvent", "")
 }
 
@@ -3317,7 +3317,7 @@ val VkDisplayEventInfoEXT = struct(Module.VULKAN, "VkDisplayEventInfoEXT") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDisplayEventTypeEXT.member("displayEvent", "a {@code VkDisplayEventTypeEXT} specifying when the fence will be signaled.")
 }
 
@@ -3340,7 +3340,7 @@ val VkSwapchainCounterCreateInfoEXT = struct(Module.VULKAN, "VkSwapchainCounterC
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSurfaceCounterFlagsEXT.member("surfaceCounters", "a bitmask of {@code VkSurfaceCounterFlagBitsEXT} specifying surface counters to enable for the swapchain.")
 }
 
@@ -3406,9 +3406,9 @@ val VkPresentTimesInfoGOOGLE = struct(Module.VULKAN, "VkPresentTimesInfoGOOGLE")
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pTimes", optional = true)..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
-    nullable..const..VkPresentTimeGOOGLE.p.buffer("pTimes", "{@code NULL} or a pointer to an array of ##VkPresentTimeGOOGLE elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pTimes} contains the earliest time to present the image corresponding to the entry in the ##VkPresentInfoKHR{@code ::pImageIndices} array.")
+    nullable..VkPresentTimeGOOGLE.const.p.buffer("pTimes", "{@code NULL} or a pointer to an array of ##VkPresentTimeGOOGLE elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pTimes} contains the earliest time to present the image corresponding to the entry in the ##VkPresentInfoKHR{@code ::pImageIndices} array.")
 }
 
 val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", mutable = false) {
@@ -3476,10 +3476,10 @@ val VkPipelineViewportSwizzleStateCreateInfoNV = struct(Module.VULKAN, "VkPipeli
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineViewportSwizzleStateCreateFlagsNV.member("flags", "reserved for future use.")
     AutoSize("pViewportSwizzles", optional = true)..uint32_t.member("viewportCount", "the number of viewport swizzles used by the pipeline.")
-    nullable..const..VkViewportSwizzleNV.p.buffer("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures, defining the viewport swizzles.")
+    nullable..VkViewportSwizzleNV.const.p.buffer("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures, defining the viewport swizzles.")
 }
 
 val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDiscardRectanglePropertiesEXT") {
@@ -3524,11 +3524,11 @@ val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(Module.VULKAN, "VkPipe
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineDiscardRectangleStateCreateFlagsEXT.member("flags", "reserved for future use.")
     VkDiscardRectangleModeEXT.member("discardRectangleMode", "the mode used to determine whether fragments that lie within the discard rectangle are discarded or not.")
     AutoSize("pDiscardRectangles", optional = true)..uint32_t.member("discardRectangleCount", "the number of discard rectangles used by the pipeline.")
-    nullable..const..VkRect2D.p.buffer("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures, defining the discard rectangles. If the discard rectangle state is dynamic, this member is ignored.")
+    nullable..VkRect2D.const.p.buffer("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures, defining the discard rectangles. If the discard rectangle state is dynamic, this member is ignored.")
 }
 
 val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceConservativeRasterizationPropertiesEXT") {
@@ -3578,7 +3578,7 @@ val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(Module.VULKAN
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineRasterizationConservativeStateCreateFlagsEXT.member("flags", "reserved for future use.")
     VkConservativeRasterizationModeEXT.member("conservativeRasterizationMode", "the conservative rasterization mode to use.")
     float.member("extraPrimitiveOverestimationSize", "the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in ##VkPhysicalDeviceConservativeRasterizationPropertiesEXT{@code ::primitiveOverestimationSize}.")
@@ -3609,7 +3609,7 @@ val VkHdrMetadataEXT = struct(Module.VULKAN, "VkHdrMetadataEXT") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkXYColorEXT.member("displayPrimaryRed", "the mastering display&#8217;s red primary in chromaticity coordinates")
     VkXYColorEXT.member("displayPrimaryGreen", "the mastering display&#8217;s green primary in chromaticity coordinates")
     VkXYColorEXT.member("displayPrimaryBlue", "the mastering display&#8217;s blue primary in chromaticity coordinates")
@@ -3658,7 +3658,7 @@ val VkPhysicalDeviceExternalFenceInfoKHR = struct(Module.VULKAN, "VkPhysicalDevi
         """
 
     VkStructureType.member("sType", "the type of this structure")
-    nullable..const..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalFenceHandleTypeFlagBitsKHR} value indicating an external fence handle type for which capabilities will be returned.")
 }
 
@@ -3706,7 +3706,7 @@ val VkExportFenceCreateInfoKHR = struct(Module.VULKAN, "VkExportFenceCreateInfoK
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalFenceHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBitsKHR} specifying one or more fence handle types the application <b>can</b> export from the resulting fence. The application <b>can</b> request multiple handle types for the same fence.")
 }
 
@@ -3758,7 +3758,7 @@ val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32H
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence into which the state will be imported.")
     VkFenceImportFlagsKHR.member("flags", "a bitmask of {@code VkFenceImportFlagBitsKHR} specifying additional parameters for the fence payload import operation.")
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code handle}.")
@@ -3800,8 +3800,8 @@ val VkExportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportFenceWin32H
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..SECURITY_ATTRIBUTES.const.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
     DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string to associate with the underlying synchronization primitive referenced by NT handles exported from the created fence.")
 }
@@ -3836,7 +3836,7 @@ val VkFenceGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkFenceGetWin32HandleI
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence from which state will be exported.")
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
@@ -3889,7 +3889,7 @@ val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence into which the payload will be imported.")
     VkFenceImportFlagsKHR.member("flags", "a bitmask of {@code VkFenceImportFlagBitsKHR} specifying additional parameters for the fence payload import operation.")
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code fd}.")
@@ -3925,7 +3925,7 @@ val VkFenceGetFdInfoKHR = struct(Module.VULKAN, "VkFenceGetFdInfoKHR") {
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence from which state will be exported.")
     VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
 }
@@ -3995,9 +3995,9 @@ val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(Module.VULKAN, "VkRe
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pAspectReferences")..uint32_t.member("aspectReferenceCount", "the number of elements in the pAspectReferences array.")
-    const..VkInputAttachmentAspectReferenceKHR.p.buffer("pAspectReferences", "points to an array of {@code aspectReferenceCount} number of ##VkInputAttachmentAspectReferenceKHR structures describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.")
+    VkInputAttachmentAspectReferenceKHR.const.p.buffer("pAspectReferences", "points to an array of {@code aspectReferenceCount} number of ##VkInputAttachmentAspectReferenceKHR structures describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.")
 }
 
 val VkImageViewUsageCreateInfoKHR = struct(Module.VULKAN, "VkImageViewUsageCreateInfoKHR") {
@@ -4023,7 +4023,7 @@ val VkImageViewUsageCreateInfoKHR = struct(Module.VULKAN, "VkImageViewUsageCreat
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImageUsageFlags.member("usage", "a bitmask describing the allowed usages of the image view. See {@code VkImageUsageFlagBits} for a description of the supported bits.")
 }
 
@@ -4044,7 +4044,7 @@ val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(Module.VULKAN,
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkTessellationDomainOriginKHR.member("domainOrigin", "controls the origin of the tessellation domain space, and is of type {@code VkTessellationDomainOriginKHR}.")
 }
 
@@ -4068,7 +4068,7 @@ val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSur
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSurfaceKHR.member("surface", "the surface that will be associated with the swapchain.")
 }
 
@@ -4160,9 +4160,9 @@ val VkIOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkIOSSurfaceCreateInfoMVK
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkIOSSurfaceCreateFlagsMVK.member("flags", "reserved for future use.")
-    const..opaque_p.member("pView", "a reference to a {@code UIView} object which will display this surface. This {@code UIView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
+    opaque_const_p.member("pView", "a reference to a {@code UIView} object which will display this surface. This {@code UIView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
 }
 
 val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInfoMVK") {
@@ -4187,9 +4187,9 @@ val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInf
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkMacOSSurfaceCreateFlagsMVK.member("flags", "reserved for future use.")
-    const..opaque_p.member("pView", "a reference to a {@code NSView} object which will display this surface. This {@code NSView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
+    opaque_const_p.member("pView", "a reference to a {@code NSView} object which will display this surface. This {@code NSView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
 }
 
 val VkMemoryDedicatedRequirementsKHR = struct(Module.VULKAN, "VkMemoryDedicatedRequirementsKHR", mutable = false) {
@@ -4258,7 +4258,7 @@ val VkMemoryDedicatedAllocateInfoKHR = struct(Module.VULKAN, "VkMemoryDedicatedA
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImage.member("image", "#NULL_HANDLE or a handle of an image which this memory will be bound to.")
     VkBuffer.member("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
 }
@@ -4280,7 +4280,7 @@ val VkSamplerReductionModeCreateInfoEXT = struct(Module.VULKAN, "VkSamplerReduct
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSamplerReductionModeEXT.member("reductionMode", "an enum of type {@code VkSamplerReductionModeEXT} that controls how texture filtering combines texel values.")
 }
 
@@ -4374,11 +4374,11 @@ val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT")
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSampleCountFlagBits.member("sampleLocationsPerPixel", "a {@code VkSampleCountFlagBits} specifying the number of sample locations per pixel.")
     VkExtent2D.member("sampleLocationGridSize", "the size of the sample location grid to select custom sample locations for.")
     AutoSize("pSampleLocations")..uint32_t.member("sampleLocationsCount", "the number of sample locations in {@code pSampleLocations}.")
-    const..VkSampleLocationEXT.p.buffer("pSampleLocations", "an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures.")
+    VkSampleLocationEXT.const.p.buffer("pSampleLocations", "an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures.")
 }
 
 val VkAttachmentSampleLocationsEXT = struct(Module.VULKAN, "VkAttachmentSampleLocationsEXT") {
@@ -4451,11 +4451,11 @@ val VkRenderPassSampleLocationsBeginInfoEXT = struct(Module.VULKAN, "VkRenderPas
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pAttachmentInitialSampleLocations", optional = true)..uint32_t.member("attachmentInitialSampleLocationsCount", "the number of elements in the {@code pAttachmentInitialSampleLocations} array.")
-    const..VkAttachmentSampleLocationsEXT.p.buffer("pAttachmentInitialSampleLocations", "an array of {@code attachmentInitialSampleLocationsCount} ##VkAttachmentSampleLocationsEXT structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.")
+    VkAttachmentSampleLocationsEXT.const.p.buffer("pAttachmentInitialSampleLocations", "an array of {@code attachmentInitialSampleLocationsCount} ##VkAttachmentSampleLocationsEXT structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.")
     AutoSize("pPostSubpassSampleLocations", optional = true)..uint32_t.member("postSubpassSampleLocationsCount", "the number of elements in the {@code pPostSubpassSampleLocations} array.")
-    const..VkSubpassSampleLocationsEXT.p.buffer("pPostSubpassSampleLocations", "an array of {@code postSubpassSampleLocationsCount} ##VkSubpassSampleLocationsEXT structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is #TRUE, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}.")
+    VkSubpassSampleLocationsEXT.const.p.buffer("pPostSubpassSampleLocations", "an array of {@code postSubpassSampleLocationsCount} ##VkSubpassSampleLocationsEXT structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is #TRUE, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}.")
 }
 
 val VkPipelineSampleLocationsStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineSampleLocationsStateCreateInfoEXT") {
@@ -4475,7 +4475,7 @@ val VkPipelineSampleLocationsStateCreateInfoEXT = struct(Module.VULKAN, "VkPipel
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("sampleLocationsEnable", "controls whether custom sample locations are used. If {@code sampleLocationsEnable} is #FALSE, the default sample locations are used and the values specified in {@code sampleLocationsInfo} are ignored.")
     VkSampleLocationsInfoEXT.member("sampleLocationsInfo", "the sample locations to use during rasterization if {@code sampleLocationsEnable} is #TRUE and the graphics pipeline isn&#8217;t created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT.")
 }
@@ -4543,7 +4543,7 @@ val VkBufferMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkBufferMemoryRe
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBuffer.member("buffer", "the buffer to query.")
 }
 
@@ -4571,13 +4571,13 @@ val VkImageMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageMemoryRequ
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImage.member("image", "the image to query.")
 }
 
 val VkImageSparseMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageSparseMemoryRequirementsInfo2KHR") {
     VkStructureType.member("sType", "")
-    nullable..const..opaque_p.member("pNext", "")
+    nullable..opaque_const_p.member("pNext", "")
     VkImage.member("image", "")
 }
 
@@ -4609,9 +4609,9 @@ val VkSparseImageMemoryRequirements2KHR = struct(Module.VULKAN, "VkSparseImageMe
 
 val VkImageFormatListCreateInfoKHR = struct(Module.VULKAN, "VkImageFormatListCreateInfoKHR") {
     VkStructureType.member("sType", "")
-    nullable..const..opaque_p.member("pNext", "")
+    nullable..opaque_const_p.member("pNext", "")
     AutoSize("pViewFormats", optional = true)..uint32_t.member("viewFormatCount", "")
-    const..VkFormat.p.member("pViewFormats", "")
+    VkFormat.const.p.member("pViewFormats", "")
 }
 
 val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT") {
@@ -4680,7 +4680,7 @@ val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(Module.VULKAN, "VkPi
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("srcPremultiplied", "specifies whether the source color of the blend operation is treated as premultiplied.")
     VkBool32.member("dstPremultiplied", "specifies whether the destination color of the blend operation is treated as premultiplied.")
     VkBlendOverlapEXT.member("blendOverlap", "a {@code VkBlendOverlapEXT} value specifying how the source and destination sample&#8217;s coverage is correlated.")
@@ -4714,7 +4714,7 @@ val VkPipelineCoverageToColorStateCreateInfoNV = struct(Module.VULKAN, "VkPipeli
         """
 
     VkStructureType.member("sType", "the type of this structure")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure")
     VkPipelineCoverageToColorStateCreateFlagsNV.member("flags", "reserved for future use.")
     VkBool32.member("coverageToColorEnable", "controls whether the fragment coverage value replaces a fragment color output.")
     uint32_t.member("coverageToColorLocation", "controls which fragment shader color output value is replaced.")
@@ -4764,12 +4764,12 @@ val VkPipelineCoverageModulationStateCreateInfoNV = struct(Module.VULKAN, "VkPip
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineCoverageModulationStateCreateFlagsNV.member("flags", "reserved for future use.")
     VkCoverageModulationModeNV.member("coverageModulationMode", "controls which color components are modulated and is of type {@code VkCoverageModulationModeNV}.")
     VkBool32.member("coverageModulationTableEnable", "controls whether the modulation factor is looked up from a table in {@code pCoverageModulationTable}.")
     AutoSize("pCoverageModulationTable", optional = true)..uint32_t.member("coverageModulationTableCount", "the number of elements in {@code pCoverageModulationTable}.")
-    nullable..const..float_p.member("pCoverageModulationTable", "a table of modulation factors containing a value for each number of covered samples.")
+    nullable..float.const.p.member("pCoverageModulationTable", "a table of modulation factors containing a value for each number of covered samples.")
 }
 
 val VkSamplerYcbcrConversionCreateInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionCreateInfoKHR") {
@@ -4824,7 +4824,7 @@ val VkSamplerYcbcrConversionCreateInfoKHR = struct(Module.VULKAN, "VkSamplerYcbc
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFormat.member("format", "the format of the image from which color information will be retrieved.")
     VkSamplerYcbcrModelConversionKHR.member("ycbcrModel", "describes the color matrix for conversion between color models.")
     VkSamplerYcbcrRangeKHR.member("ycbcrRange", "describes whether the encoded values have headroom and foot room, or whether the encoding uses the full numerical range.")
@@ -4848,7 +4848,7 @@ val VkSamplerYcbcrConversionInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConve
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSamplerYcbcrConversionKHR.member("conversion", "a {@code VkSamplerYcbcrConversionKHR} handle created with #CreateSamplerYcbcrConversionKHR().")
 }
 
@@ -4871,7 +4871,7 @@ val VkBindImagePlaneMemoryInfoKHR = struct(Module.VULKAN, "VkBindImagePlaneMemor
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImageAspectFlagBits.member("planeAspect", "the aspect of the disjoint image plane to bind.")
 }
 
@@ -4893,7 +4893,7 @@ val VkImagePlaneMemoryRequirementsInfoKHR = struct(Module.VULKAN, "VkImagePlaneM
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImageAspectFlagBits.member("planeAspect", "the aspect corresponding to the image plane to query.")
 }
 
@@ -4964,7 +4964,7 @@ val VkBindBufferMemoryInfoKHR = struct(Module.VULKAN, "VkBindBufferMemoryInfoKHR
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBuffer.member("buffer", "the buffer to be attached to memory.")
     VkDeviceMemory.member("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
     VkDeviceSize.member("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.")
@@ -5012,7 +5012,7 @@ val VkBindImageMemoryInfoKHR = struct(Module.VULKAN, "VkBindImageMemoryInfoKHR")
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImage.member("image", "the image to be attached to memory.")
     VkDeviceMemory.member("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
     VkDeviceSize.member("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.")
@@ -5042,10 +5042,10 @@ val VkValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkValidationCacheCre
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkValidationCacheCreateFlagsEXT.member("flags", "reserved for future use.")
     AutoSize("pInitialData", optional = true)..size_t.member("initialDataSize", "the number of bytes in {@code pInitialData}. If {@code initialDataSize} is zero, the validation cache will initially be empty.")
-    const..void_p.member("pInitialData", "a pointer to previously retrieved validation cache data. If the validation cache data is incompatible (as defined below) with the device, the validation cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored.")
+    void.const.p.member("pInitialData", "a pointer to previously retrieved validation cache data. If the validation cache data is incompatible (as defined below) with the device, the validation cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored.")
 }
 
 val VkShaderModuleValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkShaderModuleValidationCacheCreateInfoEXT") {
@@ -5062,7 +5062,7 @@ val VkShaderModuleValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkShader
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkValidationCacheEXT.member("validationCache", "the validation cache object from which the results of prior validation attempts will be written, and to which new validation results for this VkShaderModule will be written (if not already present).")
 }
 
@@ -5083,7 +5083,7 @@ val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(Module.VULKAN, "VkDeviceQu
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkQueueGlobalPriorityEXT.member("globalPriority", "the system-wide priority associated to this queue as specified by {@code VkQueueGlobalPriorityEXT}")
 }
 
@@ -5119,7 +5119,7 @@ val VkImportMemoryHostPointerInfoEXT = struct(Module.VULKAN, "VkImportMemoryHost
         """
 
     VkStructureType.member("sType", "the type of this structure.")
-    nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the handle type.")
     nullable..opaque_p.member("pHostPointer", "the host pointer to import from.")
 }

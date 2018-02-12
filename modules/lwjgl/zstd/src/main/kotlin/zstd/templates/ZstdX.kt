@@ -335,7 +335,7 @@ ENABLE_WARNINGS()""")
         "findFrameCompressedSize",
         "",
 
-        const..void_p.IN("src", "should point to the start of a ZSTD encoded frame or skippable frame"),
+        void.const.p.IN("src", "should point to the start of a ZSTD encoded frame or skippable frame"),
         AutoSize("src")..size_t.IN("srcSize", "must be &ge; first frame size"),
 
         returnDoc =
@@ -367,7 +367,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        const..void_p.IN("src", "should point the start of a series of ZSTD encoded and/or skippable frames"),
+        void.const.p.IN("src", "should point the start of a series of ZSTD encoded and/or skippable frames"),
         AutoSize("src")..size_t.IN(
             "srcSize",
             "must be the <i>exact</i> size of this series (i.e. there should be a frame boundary exactly at {@code srcSize} bytes after {@code src})"
@@ -384,7 +384,7 @@ ENABLE_WARNINGS()""")
         "frameHeaderSize",
         "",
 
-        const..void_p.IN("src", "should point to the start of a ZSTD frame"),
+        void.const.p.IN("src", "should point to the start of a ZSTD frame"),
         AutoSize("src")..size_t.IN("srcSize", "must be &ge; #FRAMEHEADERSIZE_PREFIX"),
 
         returnDoc = "size of the Frame Header"
@@ -394,42 +394,42 @@ ENABLE_WARNINGS()""")
         "sizeof_CCtx",
         "",
 
-        const..ZSTD_CCtx_p.IN("cctx", "")
+        ZSTD_CCtx.const.p.IN("cctx", "")
     )
 
     size_t(
         "sizeof_DCtx",
         "",
 
-        const..ZSTD_DCtx_p.IN("dctx", "")
+        ZSTD_DCtx.const.p.IN("dctx", "")
     )
 
     size_t(
         "sizeof_CStream",
         "",
 
-        const..ZSTD_CStream_p.IN("zcs", "")
+        ZSTD_CStream.const.p.IN("zcs", "")
     )
 
     size_t(
         "sizeof_DStream",
         "",
 
-        const..ZSTD_DStream_p.IN("zds", "")
+        ZSTD_DStream.const.p.IN("zds", "")
     )
 
     size_t(
         "sizeof_CDict",
         "",
 
-        const..ZSTD_CDict_p.IN("cdict", "")
+        ZSTD_CDict.const.p.IN("cdict", "")
     )
 
     size_t(
         "sizeof_DDict",
         "",
 
-        const..ZSTD_DDict_p.IN("ddict", "")
+        ZSTD_DDict.const.p.IN("ddict", "")
     )
 
     size_t(
@@ -455,7 +455,7 @@ ENABLE_WARNINGS()""")
         {@code ZSTD_p_nbThreads} is &gt; 1.
         """,
 
-        const..ZSTD_CCtx_params_p.IN("params", "")
+        ZSTD_CCtx_params.const.p.IN("params", "")
     )
 
     size_t(
@@ -484,7 +484,7 @@ ENABLE_WARNINGS()""")
         {@code ZSTD_p_nbThreads} is set to a value &gt; 1.
         """,
 
-        const..ZSTD_CCtx_params_p.IN("params", "")
+        ZSTD_CCtx_params.const.p.IN("params", "")
     )
 
     size_t(
@@ -503,7 +503,7 @@ ENABLE_WARNINGS()""")
         "estimateDStreamSize_fromFrame",
         "See #estimateDStreamSize().",
 
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", "")
     )
 
@@ -532,14 +532,14 @@ ENABLE_WARNINGS()""")
         "Use this constant to defer to stdlib's functions."
     )
 
-    ZSTD_CCtx_p(
+    ZSTD_CCtx.p(
         "createCCtx_advanced",
         "Create a ZSTD compression context using external alloc and free functions.",
 
         ZSTD_customMem.IN("customMem", "")
     )
 
-    ZSTD_CCtx_p(
+    ZSTD_CCtx.p(
         "initStaticCCtx",
         """
         Initialize a fixed-size zstd compression context workspace.
@@ -557,7 +557,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        void_p.IN("workspace", "the memory area to emplace the context into. Provided pointer must 8-bytes aligned. It must outlive context usage."),
+        void.p.IN("workspace", "the memory area to emplace the context into. Provided pointer must 8-bytes aligned. It must outlive context usage."),
         AutoSize("workspace")..size_t.IN(
             "workspaceSize",
             "use #estimateCCtxSize() or #estimateCStreamSize() to determine how large workspace must be to support scenario"
@@ -579,18 +579,18 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        const..void_p.IN("buffer", ""),
+        void.const.p.IN("buffer", ""),
         AutoSize("buffer")..size_t.IN("size", "")
     )
 
-    ZSTD_DCtx_p(
+    ZSTD_DCtx.p(
         "createDCtx_advanced",
         "Create a ZSTD decompression context using external alloc and free functions.",
 
         ZSTD_customMem.IN("customMem", "")
     )
 
-    ZSTD_DCtx_p(
+    ZSTD_DCtx.p(
         "initStaticDCtx",
         """
         Notes:
@@ -603,7 +603,7 @@ ENABLE_WARNINGS()""")
         Limitation: currently not compatible with internal {@code DDict} creation, such as {@code ZSTD_initDStream_usingDict()}.
         """,
 
-        void_p.IN("workspace", "The memory area to emplace the context into. Provided pointer must 8-bytes aligned. It must outlive context usage."),
+        void.p.IN("workspace", "The memory area to emplace the context into. Provided pointer must 8-bytes aligned. It must outlive context usage."),
         AutoSize("workspace")..size_t.IN(
             "workspaceSize",
             "use #estimateDCtxSize() or #estimateDStreamSize() to determine how large workspace must be to support scenario"
@@ -612,17 +612,17 @@ ENABLE_WARNINGS()""")
         returnDoc = "pointer to {@code ZSTD_DCtx*} (same address as workspace, but different type), or #NULL if error (typically size too small)"
     )
 
-    ZSTD_DDict_p(
+    ZSTD_DDict.p(
         "createDDict_advanced",
         "Create a {@code ZSTD_DDict} using external alloc and free, optionally by reference.",
 
-        const..void_p.IN("dict", ""),
+        void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
         ZSTD_customMem.IN("customMem", "")
     )
 
-    const..ZSTD_DDict_p(
+    ZSTD_DDict.const.p(
         "initStaticDDict",
         """
         Generate a digested dictionary in provided memory area.
@@ -630,9 +630,9 @@ ENABLE_WARNINGS()""")
         Note: there is no corresponding "free" function. Since workspace was allocated externally, it must be freed externally.
         """,
 
-        void_p.IN("workspace", "The memory area to emplace the dictionary into. Provided pointer must 8-bytes aligned. It must outlive dictionary usage."),
+        void.p.IN("workspace", "The memory area to emplace the dictionary into. Provided pointer must 8-bytes aligned. It must outlive dictionary usage."),
         AutoSize("workspace")..size_t.IN("workspaceSize", "use #estimateDDictSize() to determine how large workspace must be"),
-        const..void_p.IN("dict", ""),
+        void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods)
     )
@@ -641,7 +641,7 @@ ENABLE_WARNINGS()""")
         "getDictID_fromDict",
         "Provides the dictID stored within dictionary.",
 
-        const..void_p.IN("dict", ""),
+        void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
 
         returnDoc = "if 0, the dictionary is not conformant with Zstandard specification. It can still be loaded, but as a content-only dictionary."
@@ -651,7 +651,7 @@ ENABLE_WARNINGS()""")
         "getDictID_fromDDict",
         "Provides the {@code dictID} of the dictionary loaded into {@code ddict}.",
 
-        const..ZSTD_DDict_p.IN("ddict", ""),
+        ZSTD_DDict.const.p.IN("ddict", ""),
 
         returnDoc =
         """
@@ -664,7 +664,7 @@ ENABLE_WARNINGS()""")
         "getDictID_fromFrame",
         "Provides the {@code dictID} required to decompressed the frame stored within {@code src}.",
 
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", ""),
 
         returnDoc =
@@ -683,33 +683,33 @@ ENABLE_WARNINGS()""")
         """
     )
 
-    ZSTD_CStream_p(
+    ZSTD_CStream.p(
         "createCStream_advanced",
         "",
 
         ZSTD_customMem.IN("customMem", "")
     )
 
-    ZSTD_CStream_p(
+    ZSTD_CStream.p(
         "initStaticCStream",
         "",
 
-        void_p.IN("workspace", ""),
+        void.p.IN("workspace", ""),
         AutoSize("workspace")..size_t.IN("workspaceSize", "")
     )
 
-    ZSTD_DStream_p(
+    ZSTD_DStream.p(
         "createDStream_advanced",
         "",
 
         ZSTD_customMem.IN("customMem", "")
     )
 
-    ZSTD_DStream_p(
+    ZSTD_DStream.p(
         "initStaticDStream",
         "",
 
-        void_p.IN("workspace", ""),
+        void.p.IN("workspace", ""),
         AutoSize("workspace")..size_t.IN("workspaceSize", "")
     )
 
@@ -717,8 +717,8 @@ ENABLE_WARNINGS()""")
         "copyCCtx",
         "",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        const..ZSTD_CCtx_p.IN("preparedCCtx", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        ZSTD_CCtx.const.p.IN("preparedCCtx", ""),
         unsigned_long_long.IN(
             "pledgedSrcSize",
             "can be 0, indicating unknown size. If it is non-zero, it must be accurate. For 0 size frames, use {@code compressBegin_advanced}"
@@ -734,15 +734,15 @@ ENABLE_WARNINGS()""")
         Can report progression inside worker threads (multi-threading and non-blocking mode).
         """,
 
-        const..ZSTD_CCtx_p.IN("cctx", "")
+        ZSTD_CCtx.const.p.IN("cctx", "")
     )
 
     size_t(
         "getFrameHeader",
         "Doesn't consume input.",
 
-        ZSTD_frameHeader_p.OUT("zfhPtr", ""),
-        const..void_p.IN("src", ""),
+        ZSTD_frameHeader.p.OUT("zfhPtr", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", "")
     )
 
@@ -750,15 +750,15 @@ ENABLE_WARNINGS()""")
         "copyDCtx",
         "",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        const..ZSTD_DCtx_p.IN("preparedDCtx", "")
+        ZSTD_DCtx.p.IN("dctx", ""),
+        ZSTD_DCtx.const.p.IN("preparedDCtx", "")
     )
 
     size_t(
         "CCtx_setParameter",
         "Sets one compression parameter, selected by enum {@code ZSTD_cParameter}.",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
         ZSTD_cParameter.IN("param", "", cParameters),
         unsigned_int.IN("value", ""),
 
@@ -781,7 +781,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
         unsigned_long_long.IN("pledgedSrcSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -809,8 +809,8 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        nullable..const..void_p.IN("dict", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -820,8 +820,8 @@ ENABLE_WARNINGS()""")
         "CCtx_loadDictionary_byReference",
         "See #CCtx_loadDictionary().",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        nullable..const..void_p.IN("dict", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", "")
     )
 
@@ -829,8 +829,8 @@ ENABLE_WARNINGS()""")
         "CCtx_loadDictionary_advanced",
         "See #CCtx_loadDictionary().",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        nullable..const..void_p.IN("dict", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
         ZSTD_dictMode_e.IN("dictMode", "", dictModes)
@@ -854,8 +854,8 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        nullable..const..ZSTD_CDict_p.IN("cdict", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        nullable..ZSTD_CDict.const.p.IN("cdict", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
     )
@@ -882,8 +882,8 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        nullable..const..void_p.IN("prefix", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        nullable..void.const.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -893,8 +893,8 @@ ENABLE_WARNINGS()""")
         "CCtx_refPrefix_advanced",
         "See #CCtx_refPrefix().",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        nullable..const..void_p.IN("prefix", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        nullable..void.const.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
         ZSTD_dictMode_e.IN("dictMode", "", dictModes)
     )
@@ -927,9 +927,9 @@ ENABLE_WARNINGS()""")
         )}
          """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        ZSTD_outBuffer_p.IN("output", ""),
-        ZSTD_inBuffer_p.IN("input", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        ZSTD_outBuffer.p.IN("output", ""),
+        ZSTD_inBuffer.p.IN("input", ""),
         ZSTD_EndDirective.IN("endOp", "", endDirectives),
 
         returnDoc =
@@ -949,24 +949,24 @@ ENABLE_WARNINGS()""")
         any) is dropped. All parameters are back to default values. It's possible to modify compression parameters after a reset.
         """,
 
-        ZSTD_CCtx_p.IN("cctx", "")
+        ZSTD_CCtx.p.IN("cctx", "")
     )
 
     size_t(
         "compress_generic_simpleArgs",
         "Same as #compress_generic(), but using only integral types as arguments.",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        void_p.OUT("dst", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        Check(1)..size_t_p.INOUT("dstPos", ""),
-        const..void_p.IN("src", ""),
+        Check(1)..size_t.p.INOUT("dstPos", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", ""),
-        Check(1)..size_t_p.INOUT("srcPos", ""),
+        Check(1)..size_t.p.INOUT("srcPos", ""),
         ZSTD_EndDirective.IN("endOp", "", endDirectives)
     )
 
-    ZSTD_CCtx_params_p(
+    ZSTD_CCtx_params.p(
         "createCCtxParams",
         "Creates a {@code ZSTD_CCtx_params} structure."
     )
@@ -975,14 +975,14 @@ ENABLE_WARNINGS()""")
         "resetCCtxParams",
         "Reset params to default, with the default compression level.",
 
-        ZSTD_CCtx_params_p.IN("params", "")
+        ZSTD_CCtx_params.p.IN("params", "")
     )
 
     size_t(
         "initCCtxParams",
         "Initializes the compression parameters of {@code cctxParams} according to compression level. All other parameters are reset to their default values.",
 
-        ZSTD_CCtx_params_p.IN("cctxParams", ""),
+        ZSTD_CCtx_params.p.IN("cctxParams", ""),
         int.IN("compressionLevel", "")
     )
 
@@ -990,7 +990,7 @@ ENABLE_WARNINGS()""")
         "freeCCtxParams",
         "Frees memory allocated by #createCCtxParams().",
 
-        ZSTD_CCtx_params_p.IN("params", "")
+        ZSTD_CCtx_params.p.IN("params", "")
     )
 
     size_t(
@@ -1002,7 +1002,7 @@ ENABLE_WARNINGS()""")
         #CCtx_setParametersUsingCCtxParams().
         """,
 
-        ZSTD_CCtx_params_p.IN("params", ""),
+        ZSTD_CCtx_params.p.IN("params", ""),
         ZSTD_cParameter.IN("param", "", cParameters),
         unsigned_int.IN("value", ""),
 
@@ -1018,8 +1018,8 @@ ENABLE_WARNINGS()""")
         {@code nbThreads} &gt; 1.
         """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        const..ZSTD_CCtx_params_p.IN("params", "")
+        ZSTD_CCtx.p.IN("cctx", ""),
+        ZSTD_CCtx_params.const.p.IN("params", "")
     )
 
     /*size_t(
@@ -1041,7 +1041,7 @@ ENABLE_WARNINGS()""")
         """,
 
         ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void_p.IN("dict", ""),
+        nullable..const..void.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -1052,7 +1052,7 @@ ENABLE_WARNINGS()""")
         "See #DCtx_loadDictionary().",
 
         ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void_p.IN("dict", ""),
+        nullable..const..void.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", "")
     )
 
@@ -1061,7 +1061,7 @@ ENABLE_WARNINGS()""")
         "See #DCtx_loadDictionary().",
 
         ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void_p.IN("dict", ""),
+        nullable..const..void.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
         ZSTD_dictMode_e.IN("dictMode", "", dictModes)
@@ -1106,7 +1106,7 @@ ENABLE_WARNINGS()""")
         """,
 
         ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void_p.IN("prefix", ""),
+        nullable..const..void.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -1117,7 +1117,7 @@ ENABLE_WARNINGS()""")
         "See #DCtx_refPrefix().",
 
         ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void_p.IN("prefix", ""),
+        nullable..const..void.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
         ZSTD_dictMode_e.IN("dictMode", "", dictModes)
     )*/
@@ -1132,7 +1132,7 @@ ENABLE_WARNINGS()""")
         {@code (1 << ZSTD_WINDOWLOG_MAX)}
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
         size_t.IN("maxWindowSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -1142,7 +1142,7 @@ ENABLE_WARNINGS()""")
         "DCtx_setFormat",
         "",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
         ZSTD_format_e.IN("format", "", formats)
     )
 
@@ -1154,9 +1154,9 @@ ENABLE_WARNINGS()""")
         Decompression parameters cannot be changed once decompression is started.
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        ZSTD_outBuffer_p.IN("output", ""),
-        ZSTD_inBuffer_p.IN("input", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        ZSTD_outBuffer.p.IN("output", ""),
+        ZSTD_inBuffer.p.IN("input", ""),
 
         returnDoc =
         """
@@ -1169,13 +1169,13 @@ ENABLE_WARNINGS()""")
         "decompress_generic_simpleArgs",
         "Same as #decompress_generic(), but using only integral types as arguments.",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        void_p.OUT("dst", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        Check(1)..size_t_p.INOUT("dstPos", ""),
-        const..void_p.IN("src", ""),
+        Check(1)..size_t.p.INOUT("dstPos", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", ""),
-        Check(1)..size_t_p.INOUT("srcPos", "")
+        Check(1)..size_t.p.INOUT("srcPos", "")
     )
 
     void(
@@ -1187,7 +1187,7 @@ ENABLE_WARNINGS()""")
         Dictionary (if any) is dropped. Parameters can be modified again after a reset.
         """,
 
-        ZSTD_DCtx_p.IN("dctx", "")
+        ZSTD_DCtx.p.IN("dctx", "")
     )
 
     /* ============================ */
@@ -1205,17 +1205,17 @@ ENABLE_WARNINGS()""")
         "getBlockSize",
         "",
 
-        const..ZSTD_CCtx_p.IN("cctx", "")
+        ZSTD_CCtx.const.p.IN("cctx", "")
     )
 
     size_t(
         "compressBlock",
         "",
 
-        ZSTD_CCtx_p.IN("cctx", ""),
-        void_p.OUT("dst", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", "")
     )
 
@@ -1223,10 +1223,10 @@ ENABLE_WARNINGS()""")
         "decompressBlock",
         "",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        void_p.OUT("dst", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", "")
     )
 
@@ -1234,8 +1234,8 @@ ENABLE_WARNINGS()""")
         "insertBlock",
         "Insert uncompressed block into {@code dctx} history. Useful for multi-blocks decompression.",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        const..void_p.IN("blockStart", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        void.const.p.IN("blockStart", ""),
         AutoSize("blockStart")..size_t.IN("blockSize", "")
     )
 }

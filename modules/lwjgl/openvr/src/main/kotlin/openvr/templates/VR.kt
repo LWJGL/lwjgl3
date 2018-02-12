@@ -1303,7 +1303,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         always return #NULL if #InitInternal() has not been called successfully.
         """,
 
-        const..charASCII_p.IN("pchInterfaceVersion", "the interface name and version"),
+        charASCII.const.p.IN("pchInterfaceVersion", "the interface name and version"),
         Check(1)..EVRInitError.p.OUT("peError", "a buffer in which to store the error code")
     )
 
@@ -1313,7 +1313,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
     )
 
     // TODO: deprecated?
-    charASCII_p(
+    charASCII.p(
         "RuntimePath",
         "Returns where the OpenVR runtime is installed."
     )
@@ -1323,7 +1323,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "IsInterfaceVersionValid",
         "Returns whether the interface of the specified version exists.",
 
-        const..charASCII_p.IN("pchInterfaceVersion", "the interface name and version")
+        charASCII.const.p.IN("pchInterfaceVersion", "the interface name and version")
     )
 
     // TODO: deprecated?
@@ -1332,14 +1332,14 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "Returns a token that represents whether the VR interface handles need to be reloaded."
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetVRInitErrorAsSymbol",
         "Returns the {@code EVRInitError} enum value as a string. It can be called any time, regardless of whether the VR system is started up.",
 
         EVRInitError.IN("error", "the error code")
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetVRInitErrorAsEnglishDescription",
         """
         Returns an english string for an {@code EVRInitError}.

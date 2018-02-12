@@ -29,7 +29,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
             ${registryLinkTo("EXT", "packed_float")} and ${registryLinkTo("EXT", "texture_shared_exponent")}
             """,
             registryLinkTo("EXT", "framebuffer_object"),
-            "${registryLinkTo("NV", "half_float")} and ${registryLinkTo("ARB", "half_float_pixel")}",
+            "${registryLinkTo("NV", "half_float")} and ${registryLinkTo("ARB", "half_FLOAT_pixel")}",
             "${registryLinkTo("EXT", "framebuffer_multisample")} and ${registryLinkTo("EXT", "framebuffer_blit")}",
             registryLinkTo("EXT", "texture_integer"),
             registryLinkTo("EXT", "texture_array"),
@@ -72,7 +72,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "MAX_VARYING_COMPONENTS".."GL20.GL_MAX_VARYING_FLOATS"
     )
 
-    const..GLubyteString(
+    GLubyteUTF8.const.p(
         "GetStringi",
         "Queries indexed string state.",
 
@@ -86,7 +86,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("buffer", "the buffer to clear", "#COLOR #STENCIL"),
         GLint.IN("drawbuffer", "the draw buffer to clear"),
-        Check(1)..GLint_p.IN(
+        Check(1)..GLint.p.IN(
             "value",
             """
             for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For stencil buffers, a pointer to a
@@ -101,7 +101,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("buffer", "the buffer to clear", "#COLOR"),
         GLint.IN("drawbuffer", "the draw buffer to clear"),
-        Check(4)..GLint_p.IN("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
+        Check(4)..GLint.p.IN("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
     )
 
     void(
@@ -110,7 +110,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("buffer", "the buffer to clear", "#COLOR #DEPTH"),
         GLint.IN("drawbuffer", "the draw buffer to clear"),
-        Check(1)..GLfloat_p.IN(
+        Check(1)..GLfloat.p.IN(
             "value",
             """
             for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For depth buffers, a pointer to a
@@ -189,21 +189,21 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     void("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
     void("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-    void("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLint_p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLint.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLuint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLuint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLuint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLuint_p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLuint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLuint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLuint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLuint.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
 
     OffHeapOnly..void(
         "VertexAttribIPointer",
@@ -224,7 +224,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
             """),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-        )..Unsafe..ARRAY_BUFFER..const..void_p.IN(
+        )..Unsafe..ARRAY_BUFFER..void.const.p.IN(
             "pointer",
             """
             the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -239,7 +239,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLuint.IN("index", vertexAttribIndex),
         GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "#CURRENT_VERTEX_ATTRIB"),
-        Check(4)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
+        Check(4)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
     )
 
     void(
@@ -248,7 +248,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLuint.IN("index", vertexAttribIndex),
         GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "#CURRENT_VERTEX_ATTRIB"),
-        Check(4)..ReturnParam..GLuint_p.OUT("params", "returns the requested data")
+        Check(4)..ReturnParam..GLuint.p.OUT("params", "returns the requested data")
     )
 
     // Uniform functions javadoc
@@ -302,7 +302,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLint.IN("location", uniformLocation),
         AutoSize("value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -311,7 +311,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLint.IN("location", uniformLocation),
         AutoSize(2, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -320,7 +320,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLint.IN("location", uniformLocation),
         AutoSize(3, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -329,7 +329,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLint.IN("location", uniformLocation),
         AutoSize(4, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -338,7 +338,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLuint_p.OUT("params", "the value of the specified uniform variable")
+        Check(1)..ReturnParam..GLuint.p.OUT("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -347,7 +347,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLuint.IN("program", "the name of the program containing varying out variable whose binding to modify"),
         GLuint.IN("colorNumber", "the color number to bind the user-defined varying out variable to"),
-        const..GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
+        GLcharASCII.const.p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
     )
 
     GLint(
@@ -355,7 +355,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Queries the bindings of color numbers to user-defined varying out variables.",
 
         GLuint.IN("program", "the name of the program containing varying out variable whose binding to query"),
-        const..GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose binding to query")
+        GLcharASCII.const.p.IN("name", "the name of the user-defined varying out variable whose binding to query")
     )
 
     // NV_conditional_render
@@ -403,7 +403,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "BUFFER_MAP_OFFSET"..0x9121
     )
 
-    MapPointer("length")..void_p(
+    MapPointer("length")..void.p(
         "MapBufferRange",
         """
         Maps a section of a buffer object's data store.
@@ -747,7 +747,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Deletes renderbuffer objects.",
 
         AutoSize("renderbuffers")..GLsizei.IN("n", "the number of renderbuffer objects to be deleted"),
-        SingleValue("renderbuffer")..const..GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
+        SingleValue("renderbuffer")..GLuint.const.p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
     )
 
     void(
@@ -755,7 +755,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Generates renderbuffer object names.",
 
         AutoSize("renderbuffers")..GLsizei.IN("n", "the number of renderbuffer object names to generate"),
-        ReturnParam..GLuint_p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
+        ReturnParam..GLuint.p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
     )
 
     void(
@@ -789,7 +789,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the target of the query operation", "#RENDERBUFFER"),
         GLenum.IN("pname", "the parameter whose value to retrieve from the renderbuffer bound to {@code target}", RenderbufferParameters),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "an array to receive the value of the queried parameter")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "an array to receive the value of the queried parameter")
     )
 
     GLboolean(
@@ -812,7 +812,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Deletes framebuffer objects.",
 
         AutoSize("framebuffers")..GLsizei.IN("n", "the number of framebuffer objects to be deleted"),
-        SingleValue("framebuffer")..const..GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
+        SingleValue("framebuffer")..GLuint.const.p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
     )
 
     void(
@@ -820,7 +820,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Generates framebuffer object names.",
 
         AutoSize("framebuffers")..GLsizei.IN("n", "the number of framebuffer object names to generate"),
-        ReturnParam..GLuint_p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
+        ReturnParam..GLuint.p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
     )
 
     GLenum(
@@ -892,7 +892,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         GLenum.IN("target", "the target of the query operation", FramebufferTargets),
         GLenum.IN("attachment", "the attachment within {@code target}", FramebufferAttachments),
         GLenum.IN("pname", "the parameter of {@code attachment} to query", FramebufferParameters),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "an array to receive the value of the queried parameter")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "an array to receive the value of the queried parameter")
     )
 
     void(
@@ -981,7 +981,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the texture target"),
         GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-        Check(1)..SingleValue("param")..const..GLint_p.IN("params", "the value of {@code pname}")
+        Check(1)..SingleValue("param")..GLint.const.p.IN("params", "the value of {@code pname}")
     )
 
     void(
@@ -990,7 +990,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the texture target"),
         GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-        Check(1)..SingleValue("param")..const..GLuint_p.IN("params", "the value of {@code pname}")
+        Check(1)..SingleValue("param")..GLuint.const.p.IN("params", "the value of {@code pname}")
     )
 
     void(
@@ -999,7 +999,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the texture target"),
         GLenum.IN("pname", "the symbolic name of a texture parameter"),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "returns the texture parameter value")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "returns the texture parameter value")
     )
 
     void(
@@ -1008,7 +1008,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the texture target"),
         GLenum.IN("pname", "the symbolic name of a texture parameter"),
-        Check(1)..ReturnParam..GLuint_p.OUT("params", "returns the texture parameter value")
+        Check(1)..ReturnParam..GLuint.p.OUT("params", "returns the texture parameter value")
     )
 
     // EXT_texture_array
@@ -1062,7 +1062,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the indexed state to query"),
         GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLboolean.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -1071,7 +1071,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLenum.IN("target", "the indexed state to query"),
         GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -1261,7 +1261,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         GLuint.IN("program", "the target program object"),
         AutoSize("varyings")..GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-        PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p.p.IN(
+        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.p.IN(
             "varyings",
             "an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
         ),
@@ -1275,10 +1275,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         GLuint.IN("program", "the target program object"),
         GLuint.IN("index", "the index of the varying variable whose information to retrieve"),
         AutoSize("name")..GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code name}"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
-        Check(1)..GLsizei_p.OUT("size", "a variable that will receive the size of the varying"),
-        Check(1)..GLenum_p.OUT("type", "a variable that will receive the type of the varying"),
-        Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)")..GLcharASCII_p.OUT(
+        Check(1)..nullable..GLsizei.p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
+        Check(1)..GLsizei.p.OUT("size", "a variable that will receive the size of the varying"),
+        Check(1)..GLenum.p.OUT("type", "a variable that will receive the type of the varying"),
+        Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)")..GLcharASCII.p.OUT(
             "name",
             "a buffer into which will be written the name of the varying"
         )
@@ -1304,7 +1304,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Deletes vertex array objects.",
 
         AutoSize("arrays")..GLsizei.IN("n", "the number of vertex array objects to be deleted"),
-        SingleValue("array")..const..GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
+        SingleValue("array")..GLuint.const.p.IN("arrays", "an array containing the n names of the objects to be deleted")
     )
 
     void(
@@ -1312,7 +1312,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "Generates vertex array object names.",
 
         AutoSize("arrays")..GLsizei.IN("n", "the number of vertex array object names to generate"),
-        ReturnParam..GLuint_p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
+        ReturnParam..GLuint.p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
     )
 
     GLboolean(

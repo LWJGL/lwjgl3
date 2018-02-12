@@ -75,7 +75,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
             args[1],
             autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
-            const..GLint64_p.IN("value", valueDoc)
+            GLint64.p.IN("value", valueDoc)
         )
 
         // ProgramUniform{1,2,3,4}i64ARB
@@ -93,7 +93,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
             args[0],
             args[1],
             autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
-            const..GLint64_p.IN("value", valueDoc)
+            GLint64.p.IN("value", valueDoc)
         )
     }
 
@@ -120,7 +120,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
             args[1],
             autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
-            const..GLuint64_p.IN("value", valueDoc)
+            GLuint64.const.p.IN("value", valueDoc)
         )
 
         // ProgramUniform{1,2,3,4}ui64ARB
@@ -138,7 +138,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
             args[0],
             args[1],
             autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
-            const..GLuint64_p.IN("value", valueDoc)
+            GLuint64.const.p.IN("value", valueDoc)
         )
     }
 
@@ -148,7 +148,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
-        ReturnParam..Check(1)..GLint64_p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..Check(1)..GLint64.p.OUT("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -157,7 +157,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
-        ReturnParam..Check(1)..GLuint64_p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..Check(1)..GLuint64.p.OUT("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -167,7 +167,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
         AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
-        ReturnParam..GLint64_p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..GLint64.p.OUT("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -177,6 +177,6 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
         AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
-        ReturnParam..GLuint64_p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..GLuint64.p.OUT("params", "the value of the specified uniform variable")
     )
 }

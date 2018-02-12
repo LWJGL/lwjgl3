@@ -38,6 +38,6 @@ val KHR_cl_event2 = "KHRCLEvent2".nativeClassEGL("KHR_cl_event2", postfix = KHR)
 
         EGLDisplay.IN("dpy", ""),
         EGLenum.IN("type", ""),
-        noneTerminated..const..EGLAttribKHR_p.IN("attrib_list", "")
+        noneTerminated..EGLAttribKHR.const.p.IN("attrib_list", "")
     )
 }

@@ -7,42 +7,36 @@ package core.macos
 import org.lwjgl.generator.*
 
 // An opaque type that represents a method in a class definition.
-val Class = "Class".opaque_p
-val Class_p = Class.p
+val Class = "Class".handle
 // An opaque type that represents an instance variable.
-val Ivar = "Ivar".opaque_p
-val Ivar_p = Ivar.p
+val Ivar = "Ivar".handle
 // An opaque type that represents a method in a class definition.
-val Method = "Method".opaque_p
-val Method_p = Method.p
+val Method = "Method".handle
 // An opaque type that represents a method selector.
-val SEL = "SEL".opaque_p
+val SEL = "SEL".handle
 // A pointer to the function of a method implementation.
-val IMP = "IMP".opaque_p
+val IMP = "IMP".handle
 
-val Protocol_p = "Protocol".p
-val Protocol_pp = Protocol_p.p
+val Protocol = "Protocol".opaque
 
 // An opaque type that represents an Objective-C declared property.
-val objc_property_t = "objc_property_t".opaque_p
-val objc_property_t_p = objc_property_t.p
+val objc_property_t = "objc_property_t".handle
 
 // Defines a property attribute
-val objc_property_attribute_t_p = struct(Module.CORE_MACOS, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
+val objc_property_attribute_t = struct(Module.CORE_MACOS, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
     documentation = "Defines a property attribute."
 
-    charUTF8_p.member("name", "the name of the attribute")
-    charUTF8_p.member("value", "the value of the attribute (usually empty)")
-}.p
+    charUTF8.p.member("name", "the name of the attribute")
+    charUTF8.p.member("value", "the value of the attribute (usually empty)")
+}
 
 // Defines a method
 val objc_method_description = struct(Module.CORE_MACOS, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {
     documentation = "Defines a method."
 
     SEL.member("name", "the name of the method at runtime")
-    charUTF8_p.member("types", "the types of the method arguments")
+    charUTF8.p.member("types", "the types of the method arguments")
 }
-val objc_method_description_p = objc_method_description.p
 
 val EnumerationMutationHandler = "EnumerationMutationHandler".callback(
     Module.CORE_MACOS, void, "EnumerationMutationHandler",

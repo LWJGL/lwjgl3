@@ -65,7 +65,7 @@ val EGL12 = "EGL12".nativeClassEGL("EGL12", postfix = "") {
         EGLenum.IN("buftype", ""),
         EGLClientBuffer.IN("buffer", ""),
         EGLConfig.IN("config", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(

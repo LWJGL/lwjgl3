@@ -74,7 +74,7 @@ val NV_explicit_multisample = "NVExplicitMultisample".nativeClassGL("NV_explicit
 
         GLenum.IN("pname", ""),
         GLuint.IN("index", ""),
-        Check(2)..GLfloat_p.OUT("val", "")
+        Check(2)..GLfloat.p.OUT("val", "")
     )
 
     void(

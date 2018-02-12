@@ -150,6 +150,6 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         VkPipelineLayout.IN("layout", "a {@code VkPipelineLayout} object used to program the bindings."),
         uint32_t.IN("set", "the set number of the descriptor set in the pipeline layout that will be updated."),
         AutoSize("pDescriptorWrites")..uint32_t.IN("descriptorWriteCount", "the number of elements in the {@code pDescriptorWrites} array."),
-        const..VkWriteDescriptorSet.p.IN("pDescriptorWrites", "a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptors to be updated.")
+        VkWriteDescriptorSet.const.p.IN("pDescriptorWrites", "a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptors to be updated.")
     )
 }

@@ -114,7 +114,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
         GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("pixels", "the texel data")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "the texel data")
     )
 
     void(
@@ -136,7 +136,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
         GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "the pixel data")
     )
 
     void(
@@ -295,7 +295,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored")
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored")
     )
 
 }

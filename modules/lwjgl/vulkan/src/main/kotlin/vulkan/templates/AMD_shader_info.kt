@@ -190,7 +190,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
         VkPipeline.IN("pipeline", "the target of the query."),
         VkShaderStageFlagBits.IN("shaderStage", "identifies the particular shader within the pipeline about which information is being queried."),
         VkShaderInfoTypeAMD.IN("infoType", "describes what kind of information is being queried."),
-        AutoSize("pInfo")..Check(1)..size_t_p.INOUT("pInfoSize", "a pointer to a value related to the amount of data the query returns, as described below."),
-        nullable..void_p.OUT("pInfo", "either NULL or a pointer to a buffer.")
+        AutoSize("pInfo")..Check(1)..size_t.p.INOUT("pInfoSize", "a pointer to a value related to the amount of data the query returns, as described below."),
+        nullable..void.p.OUT("pInfo", "either NULL or a pointer to a buffer.")
     )
 }

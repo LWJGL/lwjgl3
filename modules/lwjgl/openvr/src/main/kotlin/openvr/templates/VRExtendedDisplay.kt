@@ -21,10 +21,10 @@ val VRExtendedDisplay = "VRExtendedDisplay".nativeClass(
         "GetWindowBounds",
         "Size and position that the window needs to be on the VR display.",
 
-        Check(1)..int32_t_p.OUT("pnX", ""),
-        Check(1)..int32_t_p.OUT("pnY", ""),
-        Check(1)..uint32_t_p.OUT("pnWidth", ""),
-        Check(1)..uint32_t_p.OUT("pnHeight", "")
+        Check(1)..int32_t.p.OUT("pnX", ""),
+        Check(1)..int32_t.p.OUT("pnY", ""),
+        Check(1)..uint32_t.p.OUT("pnWidth", ""),
+        Check(1)..uint32_t.p.OUT("pnHeight", "")
     )
 
     void(
@@ -32,10 +32,10 @@ val VRExtendedDisplay = "VRExtendedDisplay".nativeClass(
         "Gets the viewport in the frame buffer to draw the output of the distortion into.",
 
         EVREye.IN("eEye", ""),
-        Check(1)..uint32_t_p.OUT("pnX", ""),
-        Check(1)..uint32_t_p.OUT("pnY", ""),
-        Check(1)..uint32_t_p.OUT("pnWidth", ""),
-        Check(1)..uint32_t_p.OUT("pnHeight", "")
+        Check(1)..uint32_t.p.OUT("pnX", ""),
+        Check(1)..uint32_t.p.OUT("pnY", ""),
+        Check(1)..uint32_t.p.OUT("pnWidth", ""),
+        Check(1)..uint32_t.p.OUT("pnHeight", "")
     )
 
     void(
@@ -47,7 +47,7 @@ val VRExtendedDisplay = "VRExtendedDisplay".nativeClass(
         chain in DX10 and DX11. If an error occurs both indices will be set to -1.
         """,
 
-        Check(1)..int32_t_p.OUT("pnAdapterIndex", ""),
-        Check(1)..int32_t_p.OUT("pnAdapterOutputIndex", "")
+        Check(1)..int32_t.p.OUT("pnAdapterIndex", ""),
+        Check(1)..int32_t.p.OUT("pnAdapterOutputIndex", "")
     )
 }

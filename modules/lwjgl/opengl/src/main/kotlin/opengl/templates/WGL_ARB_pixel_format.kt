@@ -96,8 +96,8 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         int.IN("pixelFormat", "an index that specifies the pixel format"),
         int.IN("layerPlane", "the plane being queried"),
         AutoSize("attributes", "values")..UINT.IN("n", "the number of attributes being queried"),
-        SingleValue("attribute")..const..int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
-        int_p.OUT("values", "a buffer into which the results of the query will be placed")
+        SingleValue("attribute")..int.const.p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
+        int.p.OUT("values", "a buffer into which the results of the query will be placed")
     )
 
     BOOL(
@@ -108,8 +108,8 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         int.IN("pixelFormat", "an index that specifies the pixel format"),
         int.IN("layerPlane", "the plane being queried"),
         AutoSize("attributes", "values")..UINT.IN("n", "the number of attributes being queried"),
-        SingleValue("attribute")..const..int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
-        FLOAT_p.OUT("values", "a buffer into which the results of the query will be placed")
+        SingleValue("attribute")..int.const.p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
+        FLOAT.p.OUT("values", "a buffer into which the results of the query will be placed")
     )
 
     BOOL(
@@ -121,17 +121,17 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         """,
 
         HDC.IN("hdc", "the device context on which the pixel format is supported"),
-        NullTerminated..nullable..const..int_p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
-        NullTerminated..nullable..const..FLOAT_p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
+        NullTerminated..nullable..int.const.p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
+        NullTerminated..nullable..FLOAT.const.p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
         AutoSize("formats")..UINT.IN("maxFormats", "the number of attributes being queried"),
-        int_p.IN(
+        int.p.IN(
             "formats",
             """
             an array of returned indices of the matching pixel formats. The best pixel formats (i.e. closest match and best format for the hardware) are at the
             head of the list.
             """
         ),
-        Check(1)..UINT_p.OUT("numFormats", "returns the number of matching formats")
+        Check(1)..UINT.p.OUT("numFormats", "returns the number of matching formats")
     )
 
 }

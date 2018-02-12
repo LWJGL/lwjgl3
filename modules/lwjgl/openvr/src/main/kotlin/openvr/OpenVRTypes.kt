@@ -94,10 +94,10 @@ val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
 val glInt_t = typedef(int32_t, "glInt_t")
 val glUInt_t = typedef(uint32_t, "glUInt_t")
 
-val VkInstance_T_p = "VkInstance_T".p
-val VkPhysicalDevice_T_p = "VkPhysicalDevice_T".p
-val VkDevice_T_p = "VkDevice_T".p
-val VkQueue_T_p = "VkQueue_T".p
+val VkInstance_T = "VkInstance_T"
+val VkPhysicalDevice_T = "VkPhysicalDevice_T"
+val VkDevice_T = "VkDevice_T"
+val VkQueue_T = "VkQueue_T"
 
 val HmdMatrix34_t = struct(Module.OPENVR, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
     float.array("m", "", size = 3 x 4)
@@ -453,10 +453,10 @@ val VRVulkanTextureData_t = struct(Module.OPENVR, "VRVulkanTextureData", nativeN
     documentation = "Data required for passing Vulkan textures to #Submit(). Be sure to call #ShutdownInternal() before destroying these resources."
 
     uint64_t.member("m_nImage", "VkImage")
-    VkDevice_T_p.member("m_pDevice", "")
-    VkPhysicalDevice_T_p.member("m_pPhysicalDevice", "")
-    VkInstance_T_p.member("m_pInstance", "")
-    VkQueue_T_p.member("m_pQueue", "")
+    VkDevice_T.p.member("m_pDevice", "")
+    VkPhysicalDevice_T.p.member("m_pPhysicalDevice", "")
+    VkInstance_T.p.member("m_pInstance", "")
+    VkQueue_T.p.member("m_pQueue", "")
     uint32_t.member("m_nQueueFamilyIndex", "")
     uint32_t.member("m_nWidth", "")
     uint32_t.member("m_nHeight", "")
@@ -484,8 +484,8 @@ val Compositor_OverlaySettings = struct(Module.OPENVR, "CompositorOverlaySetting
 }
 
 val AppOverrideKeys_t = struct(Module.OPENVR, "AppOverrideKeys", nativeName = "AppOverrideKeys_t") {
-    charASCII_p.member("pchKey", "")
-    char_p.member("pchValue", "")
+    charASCII.p.member("pchKey", "")
+    char.p.member("pchValue", "")
 }
 
 val Compositor_FrameTiming = struct(Module.OPENVR, "CompositorFrameTiming", nativeName = "Compositor_FrameTiming", mutable = false) {
@@ -564,7 +564,7 @@ val Compositor_CumulativeStats = struct(Module.OPENVR, "CompositorCumulativeStat
 val NotificationBitmap_t = struct(Module.OPENVR, "NotificationBitmap", nativeName = "NotificationBitmap_t") {
     documentation = "Used for passing graphic data."
 
-    void_p.member("m_pImageData", "")
+    void.p.member("m_pImageData", "")
     int32_t.member("m_nWidth", "")
     int32_t.member("m_nHeight", "")
     int32_t.member("m_nBytesPerPixel", "")
@@ -579,9 +579,9 @@ val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName
 }
 
 val RenderModel_t = struct(Module.OPENVR, "RenderModel", nativeName = "RenderModel_t", mutable = false) {
-    const..RenderModel_Vertex_t.p.buffer("rVertexData", "Vertex data for the mesh")
+    RenderModel_Vertex_t.const.p.buffer("rVertexData", "Vertex data for the mesh")
     AutoSize("rVertexData")..uint32_t.member("unVertexCount", "Number of vertices in the vertex data")
-    const..uint16_t.p.member("IndexData", "Indices into the vertex data for each triangle")
+    uint16_t.const.p.member("IndexData", "Indices into the vertex data for each triangle")
     AutoSizeMul("3", "IndexData")..uint32_t.member("unTriangleCount", "Number of triangles in the mesh. Index count is 3 * TriangleCount.")
     TextureID_t.member(
         "diffuseTextureId",
@@ -593,7 +593,7 @@ val RenderModel_TextureMap_t = struct(Module.OPENVR, "RenderModelTextureMap", na
     documentation = "A texture map for use on a render model."
     uint16_t.member("unWidth", "")
     uint16_t.member("unHeight", "width and height of the texture map in pixels")
-    const..uint8_t.p.member(
+    uint8_t.const.p.member(
         "rubTextureMapData",
         "Map texture data. All textures are RGBA with 8 bits per channel per pixel. Data size is width * height * 4ub"
     )

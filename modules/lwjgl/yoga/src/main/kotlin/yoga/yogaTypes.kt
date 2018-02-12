@@ -44,8 +44,8 @@ float h = layout.dimensions(YGDimensionHeight);""")}
     )
 }
 
-val YGNodeRef = "YGNodeRef".opaque_p
-val YGConfigRef = "YGConfigRef".opaque_p
+val YGNodeRef = "YGNodeRef".handle
+val YGConfigRef = "YGConfigRef".handle
 
 val YGAlign = "YGAlign".enumType
 val YGDimension = "YGDimension".enumType
@@ -120,10 +120,10 @@ val YGLogger = "YGLogger".callback(
     Module.YOGA, int, "YGLogger",
     "",
 
-    const..YGConfigRef.IN("config", ""),
-    const..YGNodeRef.IN("node", ""),
+    YGConfigRef.const.IN("config", ""),
+    YGNodeRef.const.IN("node", ""),
     YGLogLevel.IN("level", ""),
-    const..charUTF8_p.IN("format", ""),
+    charUTF8.const.p.IN("format", ""),
     va_list.IN("args", "")
 )
 
@@ -202,8 +202,8 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     float.member("aspectRatio", "")
 }
 
-val YGNodeListRef = "YGNodeListRef".opaque_p
-val YGNode_p = struct(Module.YOGA, "YGNode").p
+private val YGNodeListRef = "YGNodeListRef".handle
+private val YGNode_p = struct(Module.YOGA, "YGNode").p
 val YGNode = struct(Module.YOGA, "YGNode") {
     nullable..opaque_p.member("context", "")
     nullable..YGPrintFunc.member("print", "")

@@ -42,7 +42,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "Returns the integer values of the specified listener parameter.",
 
         ALenum.IN("param", "the parameter to query"),
-        Check(1)..ALint_p.OUT("values", "the parameter values")
+        Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
     ALvoid(
@@ -61,7 +61,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "Pointer version.",
 
         ALenum.IN("listener", "the parameter to modify"),
-        Check(1)..const..ALint_p.IN("value", "the parameter values")
+        Check(1)..ALint.const.p.IN("value", "the parameter values")
     )
 
     ALvoid(
@@ -70,7 +70,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint.IN("source", "the source to modify"),
         ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..const..ALint_p.IN("value", "the parameter values")
+        Check(1)..ALint.const.p.IN("value", "the parameter values")
     )
 
     ALvoid(
@@ -99,7 +99,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint.IN("buffer", "the buffer to modify"),
         ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..const..ALfloat_p.IN("value", "the parameter values")
+        Check(1)..ALfloat.const.p.IN("value", "the parameter values")
     )
 
     ALvoid(
@@ -128,7 +128,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint.IN("buffer", "the buffer to modify"),
         ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..const..ALint_p.IN("value", "the parameter values")
+        Check(1)..ALint.const.p.IN("value", "the parameter values")
     )
 
     ALvoid(
@@ -137,7 +137,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint.IN("buffer", "the buffer to query"),
         ALenum.IN("param", "the parameter to query"),
-        Check(1)..ALint_p.OUT("values", "the parameter values")
+        Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
     ALvoid(
@@ -146,7 +146,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint.IN("buffer", "the buffer to query"),
         ALenum.IN("param", "the parameter to query"),
-        Check(1)..ALfloat_p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 
     ALvoid(

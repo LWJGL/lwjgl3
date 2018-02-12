@@ -49,7 +49,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         """,
 
         AutoSize("ids")..UINT.IN("maxCount", "the max number of IDs that can be returned"),
-        nullable..UINT_p.IN("ids", "the array of returned IDs")
+        nullable..UINT.p.IN("ids", "the array of returned IDs")
     )
 
     int(
@@ -74,7 +74,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         AutoSizeShr("GLChecks.typeToByteShift(dataType)", "data")..UINT.IN("size", "the size of the {@code data} buffer"),
         MultiType(
             PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..void_p.IN("data", "the buffer which will be filled with the requested information")
+        )..void.p.IN("data", "the buffer which will be filled with the requested information")
     )
 
     UINT(
@@ -107,7 +107,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
         UINT.IN("id", "a valid GPU id"),
         nullable..HGLRC.IN("shareContext", "must either be #NULL or that of an associated context created with the same GPU ID as {@code id}"),
-        NullTerminated..nullable..const..int_p.IN("attribList", "a 0-terminated list of attributes for the context")
+        NullTerminated..nullable..int.const.p.IN("attribList", "a 0-terminated list of attributes for the context")
     )
 
     BOOL(

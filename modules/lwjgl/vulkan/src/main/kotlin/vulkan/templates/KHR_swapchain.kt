@@ -158,8 +158,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkDevice.IN("device", "the device to create the swapchain for."),
-        const..VkSwapchainCreateInfoKHR.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        VkSwapchainCreateInfoKHR.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain."),
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSwapchainKHR.p.OUT("pSwapchain", "a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.")
     )
 
@@ -208,7 +208,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice.IN("device", "the {@code VkDevice} associated with {@code swapchain}."),
         VkSwapchainKHR.IN("swapchain", "the swapchain to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
     )
 
     VkResult(
@@ -256,7 +256,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice.IN("device", "the device associated with {@code swapchain}."),
         VkSwapchainKHR.IN("swapchain", "the swapchain to query."),
-        AutoSize("pSwapchainImages")..Check(1)..uint32_t_p.INOUT("pSwapchainImageCount", "a pointer to an integer related to the number of presentable images available or queried, as described below."),
+        AutoSize("pSwapchainImages")..Check(1)..uint32_t.p.INOUT("pSwapchainImageCount", "a pointer to an integer related to the number of presentable images available or queried, as described below."),
         nullable..VkImage.p.OUT("pSwapchainImages", "either {@code NULL} or a pointer to an array of {@code VkImage} handles.")
     )
 
@@ -331,7 +331,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         uint64_t.IN("timeout", "indicates how long the function waits, in nanoseconds, if no image is available."),
         VkSemaphore.IN("semaphore", "#NULL_HANDLE or a semaphore to signal."),
         VkFence.IN("fence", "#NULL_HANDLE or a fence to signal."),
-        Check(1)..uint32_t_p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
+        Check(1)..uint32_t.p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
     )
 
     VkResult(
@@ -407,6 +407,6 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkQueue.IN("queue", "a queue that is capable of presentation to the target surface&#8217;s platform on the same device as the image&#8217;s swapchain."),
-        const..VkPresentInfoKHR.p.IN("pPresentInfo", "a pointer to an instance of the ##VkPresentInfoKHR structure specifying the parameters of the presentation.")
+        VkPresentInfoKHR.const.p.IN("pPresentInfo", "a pointer to an instance of the ##VkPresentInfoKHR structure specifying the parameters of the presentation.")
     )
 }

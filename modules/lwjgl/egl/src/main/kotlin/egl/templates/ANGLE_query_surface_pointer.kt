@@ -22,6 +22,6 @@ val ANGLE_query_surface_pointer = "ANGLEQuerySurfacePointer".nativeClassEGL("ANG
         EGLDisplay.IN("dpy", ""),
         EGLSurface.IN("surface", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..void_pp.OUT("value", "")
+        Check(1)..void.p.p.OUT("value", "")
     )
 }

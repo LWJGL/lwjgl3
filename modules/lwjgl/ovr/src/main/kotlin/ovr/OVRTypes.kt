@@ -27,12 +27,9 @@ const val OVR_LIBRARY = "LibOVR.initialize();"
 val long_long = IntegerType("long long", PrimitiveMapping.LONG)
 
 val ovrBool = IntegerType("ovrBool", PrimitiveMapping.BOOLEAN)
-val ovrBool_p = ovrBool.p
-
 val ovrResult = IntegerType("ovrResult", PrimitiveMapping.INT)
 
-val ovrSession = "ovrSession".opaque_p
-val ovrSession_p = ovrSession.p
+val ovrSession = "ovrSession".handle
 
 val ovrHmdType = "ovrHmdType".enumType
 val ovrEyeType = "ovrEyeType".enumType
@@ -46,7 +43,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
     "The logging callback.",
     uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
     int.IN("level", "one of the {@code ovrLogLevel} constants"),
-    NullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string")
+    NullTerminated..charUTF8.const.p.IN("message", "a UTF8-encoded null-terminated string")
 ) {
     documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
     additionalCode = """
@@ -65,7 +62,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
     """
 }
 
-val ovrErrorInfo_p = struct(Module.OVR, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
+val ovrErrorInfo = struct(Module.OVR, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
     documentation = "Provides information about the last error."
 
     ovrResult.member("Result", "the result from the last API call that generated an error {@code ovrResult}")
@@ -74,9 +71,9 @@ val ovrErrorInfo_p = struct(Module.OVR, "OVRErrorInfo", nativeName = "ovrErrorIn
         "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions",
         size = 512
     )
-}.p
+}
 
-val ovrSessionStatus_p = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
+val ovrSessionStatus = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
     documentation = "Specifies status information for the current session."
 
     ovrBool.member("IsVisible", "True if the process has VR focus and thus is visible in the HMD.")
@@ -102,9 +99,9 @@ val ovrSessionStatus_p = struct(Module.OVR, "OVRSessionStatus", nativeName = "ov
         near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
         """
     )
-}.p
+}
 
-val ovrInitParams_p = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitParams") {
+val ovrInitParams = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitParams") {
     documentation = "Parameters for #Initialize()."
 
     uint32_t.member("Flags", "flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults.")
@@ -135,7 +132,7 @@ val ovrInitParams_p = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitP
         "relative number of milliseconds to wait for a connection to the server before failing. Use 0 for the default timeout."
     )
     padding(4, condition = "Pointer.BITS64")
-}.p
+}
 
 val ovrColorf = struct(Module.OVR, "OVRColorf", nativeName = "ovrColorf") {
     documentation = "An RGBA color with normalized float components."
@@ -190,7 +187,6 @@ val ovrVector3f = struct(Module.OVR, "OVRVector3f", nativeName = "ovrVector3f") 
     float.member("y", "the vector y component")
     float.member("z", "the vector z component")
 }
-val ovrVector3f_p = ovrVector3f.p
 
 val ovrMatrix4f = struct(Module.OVR, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
     documentation = "A 4x4 matrix with float components."
@@ -204,7 +200,6 @@ val ovrPosef = struct(Module.OVR, "OVRPosef", nativeName = "ovrPosef") {
     ovrQuatf.member("Orientation", "the pose orientation")
     ovrVector3f.member("Position", "the pose position")
 }
-val ovrPosef_p = ovrPosef.p
 
 val ovrPoseStatef = struct(Module.OVR, "OVRPoseStatef", nativeName = "ovrPoseStatef", mutable = false) {
     documentation =
@@ -369,7 +364,7 @@ val ovrTimewarpProjectionDesc = struct(Module.OVR, "OVRTimewarpProjectionDesc", 
     float.member("Projection32", "projection matrix element [3][2]")
 }
 
-val ovrViewScaleDesc_p = struct(Module.OVR, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
+val ovrViewScaleDesc = struct(Module.OVR, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation =
         """
@@ -388,12 +383,12 @@ val ovrViewScaleDesc_p = struct(Module.OVR, "OVRViewScaleDesc", nativeName = "ov
 
     ovrPosef.array("HmdToEyePose", "transform of each eye from the HMD center, in meters", size = "ovrEye_Count")
     float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
-}.p
+}
 
 val ovrTextureType = "ovrTextureType".enumType
 val ovrTextureFormat = "ovrTextureFormat".enumType
 
-val ovrTextureSwapChainDesc_p = struct(Module.OVR, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
+val ovrTextureSwapChainDesc = struct(Module.OVR, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
     documentation = "Description used to create a texture swap chain."
 
     ovrTextureType.member("Type", "Must not be {@code ovrTexture_Window}").links("Texture_\\w+")
@@ -406,22 +401,19 @@ val ovrTextureSwapChainDesc_p = struct(Module.OVR, "OVRTextureSwapChainDesc", na
     ovrBool.member("StaticImage", "not buffered in a chain. For images that don't change")
     unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
     unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.").links("TextureBind_\\w+", LinkMode.BITFIELD)
-}.p
+}
 
-val ovrMirrorTextureDesc_p = struct(Module.OVR, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
+val ovrMirrorTextureDesc = struct(Module.OVR, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
     documentation = "Description used to create a mirror texture."
 
     ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
     int.member("Width", "")
     int.member("Height", "")
     unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
-}.p
+}
 
-val ovrTextureSwapChain = "ovrTextureSwapChain".opaque_p
-val ovrTextureSwapChain_p = ovrTextureSwapChain.p
-
-val ovrMirrorTexture = "ovrMirrorTexture".opaque_p
-val ovrMirrorTexture_p = ovrMirrorTexture.p
+val ovrTextureSwapChain = "ovrTextureSwapChain".handle
+val ovrMirrorTexture = "ovrMirrorTexture".handle
 
 val ovrTouchHapticsDesc = struct(Module.OVR, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
     documentation = "Describes the Touch Haptics engine."
@@ -441,33 +433,33 @@ val ovrTouchHapticsDesc = struct(Module.OVR, "OVRTouchHapticsDesc", nativeName =
 
 val ovrHapticsBufferSubmitMode = "ovrHapticsBufferSubmitMode".enumType
 
-val ovrHapticsBuffer_p = struct(Module.OVR, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
+val ovrHapticsBuffer = struct(Module.OVR, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
     documentation = "Haptics buffer descriptor, contains amplitude samples used for Touch vibration."
 
-    void_p.member("Samples", "samples stored in opaque format")
+    void.p.member("Samples", "samples stored in opaque format")
     int.member("SamplesCount", "number of samples (up to #OVR_HAPTICS_BUFFER_SAMPLES_MAX)")
     ovrHapticsBufferSubmitMode.member("SubmitMode", "how samples are submitted to the hardware").links("HapticsBufferSubmit_\\w+")
-}.p
+}
 
-val ovrHapticsPlaybackState_p = struct(Module.OVR, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
+val ovrHapticsPlaybackState = struct(Module.OVR, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
     documentation = "State of the Haptics playback for Touch vibration."
 
     int.member("RemainingQueueSpace", "Remaining space available to queue more samples")
     int.member("SamplesQueued", "Number of samples currently queued")
-}.p
+}
 
 val ovrControllerType = "ovrControllerType".enumType
 
 val ovrTrackedDeviceType = "ovrTrackedDeviceType".enumType
 val ovrBoundaryType = "ovrBoundaryType".enumType
 
-val ovrBoundaryLookAndFeel_p = struct(Module.OVR, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
+val ovrBoundaryLookAndFeel = struct(Module.OVR, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
     documentation = "Boundary system look and feel."
 
     ovrColorf.member("Color", "Boundary color (alpha channel is ignored)")
-}.p
+}
 
-val ovrBoundaryTestResult_p = struct(Module.OVR, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
+val ovrBoundaryTestResult = struct(Module.OVR, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
     documentation = "Provides boundary test information."
 
     ovrBool.member(
@@ -477,9 +469,9 @@ val ovrBoundaryTestResult_p = struct(Module.OVR, "OVRBoundaryTestResult", native
     float.member("ClosestDistance", "Distance to the closest play area or outer boundary surface")
     ovrVector3f.member("ClosestPoint", "Closest point on the boundary surface")
     ovrVector3f.member("ClosestPointNormal", "Unit surface normal of the closest boundary surface")
-}.p
+}
 
-val ovrInputState_p = struct(Module.OVR, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
+val ovrInputState = struct(Module.OVR, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
     javaImport("static org.lwjgl.ovr.OVR.ovrHand_Count")
     documentation =
         """
@@ -540,7 +532,7 @@ val ovrInputState_p = struct(Module.OVR, "OVRInputState", nativeName = "ovrInput
         "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in range -1.0f to 1.0f. No deadzone or filter.",
         size = "ovrHand_Count"
     )
-}.p
+}
 
 val ovrCameraIntrinsics = struct(Module.OVR, "OVRCameraIntrinsics", nativeName = "ovrCameraIntrinsics") {
     double.member("LastChangedTime", "time in seconds from last change to the parameters")
@@ -579,11 +571,11 @@ val ovrCameraExtrinsics = struct(Module.OVR, "OVRCameraExtrinsics", nativeName =
 }
 
 val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
-val ovrExternalCamera_p = struct(Module.OVR, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
+val ovrExternalCamera = struct(Module.OVR, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
     charASCII.array("Name", "camera identifier: vid + pid + serial number etc.", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
     ovrCameraIntrinsics.member("Intrinsics", "")
     ovrCameraExtrinsics.member("Extrinsics", "")
-}.p
+}
 
 val ovrLayerHeader = struct(Module.OVR, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
     documentation =
@@ -1059,7 +1051,7 @@ val ovrPerfStatsPerCompositorFrame = struct(Module.OVR, "OVRPerfStatsPerComposit
     int.member("AswFailedFrameCount", "Accumulates the number of frames that the compositor tried to present when ASW is active but failed")
 }
 
-val ovrPerfStats_p = struct(Module.OVR, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
+val ovrPerfStats = struct(Module.OVR, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
     javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
 
     documentation = "This is a complete descriptor of the performance stats provided by the SDK."
@@ -1118,7 +1110,7 @@ val ovrPerfStats_p = struct(Module.OVR, "OVRPerfStats", nativeName = "ovrPerfSta
         expect this value to point to the other VR app that has grabbed focus (i.e. became visible).
         """
     )
-}.p
+}
 
 // OVR_CAPI_Util.h
 
@@ -1148,7 +1140,7 @@ val ovrDetectResult = struct(Module.OVR, "OVRDetectResult", nativeName = "ovrDet
     padding(6)
 }
 
-val ovrAudioChannelData_p = struct(Module.OVR, "OVRAudioChannelData", nativeName = "ovrAudioChannelData", mutable = false) {
+val ovrAudioChannelData = struct(Module.OVR, "OVRAudioChannelData", nativeName = "ovrAudioChannelData", mutable = false) {
     documentation =
         """
         Store audio PCM data (as 32b float samples) for an audio channel.
@@ -1156,17 +1148,17 @@ val ovrAudioChannelData_p = struct(Module.OVR, "OVRAudioChannelData", nativeName
         Note: needs to be released with #_ReleaseAudioChannelData() to avoid memory leak.
         """
 
-    const..float_p.member("Samples", "samples stored as floats {@code [-1.0f, 1.0f]}")
+    float.const.p.member("Samples", "samples stored as floats {@code [-1.0f, 1.0f]}")
     AutoSize("Samples")..int.member("SamplesCount", "number of samples")
     int.member("Frequency", "frequency (e.g. 44100)")
-}.p
+}
 
-val ovrHapticsClip_p = struct(Module.OVR, "OVRHapticsClip", nativeName = "ovrHapticsClip", mutable = false) {
+val ovrHapticsClip = struct(Module.OVR, "OVRHapticsClip", nativeName = "ovrHapticsClip", mutable = false) {
     documentation = "Store a full Haptics clip, which can be used as data source for multiple ##OVRHapticsBuffer."
 
-    const..void_p.member("Samples", "samples stored in opaque format")
+    void.const.p.member("Samples", "samples stored in opaque format")
     int.member("SamplesCount", "number of samples")
-}.p
+}
 
 fun config() {
     packageInfo(

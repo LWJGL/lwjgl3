@@ -25,7 +25,7 @@ fun GeneratorTargetNative.includeNanoVGAPI(directives: String) = nativeDirective
 $directives
 ENABLE_WARNINGS()""")
 
-val NVGcontext_p = "NVGcontext".p
+val NVGcontext = "NVGcontext".opaque
 
 val NVGcolor = struct(Module.NANOVG, "NVGColor", nativeName = "NVGcolor") {
     documentation = "A NanoVG color."
@@ -53,24 +53,24 @@ val NVGpaint = struct(Module.NANOVG, "NVGPaint", nativeName = "NVGpaint") {
     int.member("image", "the image handle")
 }
 
-val charptr = "char".p // address, not data
+val charptr = "char".opaque // address, not data
 
-val NVGglyphPosition_p = struct(Module.NANOVG, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
+val NVGglyphPosition = struct(Module.NANOVG, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
     documentation = "A glyph position."
 
-    charptr.member("str", "position of the glyph in the input string")
+    charptr.p.member("str", "position of the glyph in the input string")
     float.member("x", "the x-coordinate of the logical glyph position")
     float.member("minx", "the left bound of the glyph shape")
     float.member("maxx", "the right bound of the glyph shape")
-}.p
+}
 
-val NVGtextRow_p = struct(Module.NANOVG, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
+val NVGtextRow = struct(Module.NANOVG, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
     documentation = "A text row."
 
-    charptr.member("start", "pointer to the input text where the row starts")
-    charptr.member("end", "pointer to the input text where the row ends (one past the last character")
-    charptr.member("next", "pointer to the beginning of the next row")
+    charptr.p.member("start", "pointer to the input text where the row starts")
+    charptr.p.member("end", "pointer to the input text where the row ends (one past the last character")
+    charptr.p.member("next", "pointer to the beginning of the next row")
     float.member("width", "logical width of the row")
     float.member("minx", "actual left bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
     float.member("maxx", "actual right bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
-}.p
+}

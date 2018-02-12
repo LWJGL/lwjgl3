@@ -461,11 +461,11 @@ val X11 = "X11".nativeClass(
         "GCLastBit".."22"
     )
 
-    val DISPLAY = Display_p.IN("display", "the connection to the X server")
+    val DISPLAY = Display.p.IN("display", "the connection to the X server")
     val WINDOW = Window.IN("w", "the window")
     //val DRAWABLE = Drawable.IN("d", "the drawable")
 
-    Display_p(
+    Display.p(
         "XOpenDisplay",
         """
         Returns a Display structure that serves as the connection to the X server and that contains all the information about that X server. {@code XOpenDisplay}
@@ -476,7 +476,7 @@ val X11 = "X11".nativeClass(
         mechanisms simultaneously. A particular Xlib implementation can support many more of these transport mechanisms.
         """,
 
-        nullable..const..charASCII_p.IN(
+        nullable..charASCII.const.p.IN(
             "display_name",
             """
             the hardware display name, which determines the display and communications domain to be used. On a POSIX-conformant system, if the
@@ -522,7 +522,7 @@ val X11 = "X11".nativeClass(
 
         DISPLAY,
         WINDOW,
-        Visual_p.IN("visual", "a visual type supported on the screen. If the visual type is not one supported by the screen, a {@code BadMatch} error results."),
+        Visual.p.IN("visual", "a visual type supported on the screen. If the visual type is not one supported by the screen, a {@code BadMatch} error results."),
         int.IN("alloc", "the colormap entries to be allocated. You can pass AllocNone or AllocAll.")
     )
 
@@ -563,7 +563,7 @@ val X11 = "X11".nativeClass(
         unsigned_int.IN("border_width", "the border width"),
         int.IN("depth", "the window's depth. A depth of #CopyFromParent means the depth is taken from the parent."),
         unsigned_int.IN("windowClass", "the created window's class", "#InputOutput #InputOnly #CopyFromParent"),
-        Visual_p.IN("visual", "the visual type. A visual of #CopyFromParent means the visual type is taken from the parent."),
+        Visual.p.IN("visual", "the visual type. A visual of #CopyFromParent means the visual type is taken from the parent."),
         unsigned_long.IN(
             "valuemask",
             """
@@ -571,7 +571,7 @@ val X11 = "X11".nativeClass(
             {@code valuemask} is zero, the attributes are ignored and are not referenced.
             """
         ),
-        XSetWindowAttributes_p.IN("attributes", "the structure from which the values (as specified by the value mask) are to be taken")
+        XSetWindowAttributes.p.IN("attributes", "the structure from which the values (as specified by the value mask) are to be taken")
     )
 
     int(
@@ -593,6 +593,6 @@ val X11 = "X11".nativeClass(
         "XFree",
         "Free in-memory data that was created by an Xlib function.",
 
-        MultiType(PointerMapping.DATA_POINTER)..Unsafe..void_p.IN("data", "the data that is to be freed")
+        MultiType(PointerMapping.DATA_POINTER)..Unsafe..void.p.IN("data", "the data that is to be freed")
     )
 }

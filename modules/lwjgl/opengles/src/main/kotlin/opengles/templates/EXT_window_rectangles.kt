@@ -85,6 +85,6 @@ y_i <= yw < y_i+h_i""")}
 
         GLenum.IN("mode", "the rectangle mode", Modes),
         AutoSize(4, "box")..GLsizei.IN("count", "the number of active window rectangles. Must be between zero and the value of #MAX_WINDOW_RECTANGLES_EXT."),
-        nullable..const..GLint_p.IN("box", "an array of {@code 4*count} window rectangle coordinates")
+        nullable..GLint.const.p.IN("box", "an array of {@code 4*count} window rectangle coordinates")
     )
 }

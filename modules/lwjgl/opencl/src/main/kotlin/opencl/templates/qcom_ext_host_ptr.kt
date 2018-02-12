@@ -58,12 +58,12 @@ val qcom_ext_host_ptr = "QCOMEXTHostPtr".nativeClassCL("qcom_ext_host_ptr", QCOM
         cl_device_id.IN("device", "a valid device"),
         size_t.IN("image_width", "width of the image in image elements (pixels)"),
         size_t.IN("image_height", "height of the image in image elements (pixels)"),
-        const..cl_image_format_p.IN("image_format", "format of the image"),
+        cl_image_format.const.p.IN("image_format", "format of the image"),
         cl_image_pitch_info_qcom.IN("param_name", "the parameter to query", "#IMAGE_ROW_PITCH #IMAGE_SLICE_PITCH $image_pitch_infos"),
         PARAM_VALUE_SIZE,
         MultiType(
             PointerMapping.DATA_INT
-        )..nullable..void_p.OUT("param_value", param_value),
+        )..nullable..void.p.OUT("param_value", param_value),
         PARAM_VALUE_SIZE_RET
     )
 }

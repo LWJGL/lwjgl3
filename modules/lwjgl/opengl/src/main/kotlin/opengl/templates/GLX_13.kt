@@ -74,23 +74,23 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "PBUFFER_WIDTH"..0x8041
     )
 
-    GLXFBConfig_p(
+    GLXFBConfig.p(
         "GetFBConfigs",
         "Returns the list of all GLXFBConfigs that are available on the specified screen.",
 
         DISPLAY,
         int.IN("screen", "the screen number"),
-        AutoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
+        AutoSizeResult..int.p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
     )
 
-    GLXFBConfig_p(
+    GLXFBConfig.p(
         "ChooseFBConfig",
         "Returns a list of GLXFBConfigs that match a list of attributes.",
 
         DISPLAY,
         int.IN("screen", "the screen number"),
-        nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
-        AutoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
+        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
+        AutoSizeResult..int.p.OUT("nelements", "returns the number of GLXFBConfigs matched")
     )
 
     int(
@@ -100,10 +100,10 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         DISPLAY,
         GLXFBConfig.IN("config", "the GLXFBConfig being queried"),
         int.IN("attribute", "the attribute to query"),
-        Check(1)..int_p.OUT("value", "the attribute value")
+        Check(1)..int.p.OUT("value", "the attribute value")
     )
 
-    XVisualInfo_p(
+    XVisualInfo.p(
         "GetVisualFromFBConfig",
         "Retrieves the associated visual of a GLXFBConfig.",
 
@@ -118,7 +118,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         DISPLAY,
         GLXFBConfig.IN("config", "the GLXFBConfig"),
         Window.IN("win", "the X Window"),
-        nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}")
     )
 
     GLXPixmap(
@@ -128,7 +128,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         DISPLAY,
         GLXFBConfig.IN("config", "the GLXFBConfig"),
         Pixmap.IN("pixmap", "the X Pixmap"),
-        nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}")
     )
 
     void(
@@ -145,7 +145,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
 
         DISPLAY,
         GLXFBConfig.IN("config", "the GLXFBConfig"),
-        nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}")
     )
 
     void(
@@ -163,7 +163,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         DISPLAY,
         GLXDrawable.IN("draw", "the GLXDrawable being queried"),
         int.IN("attribute", "the attribute to query"),
-        ReturnParam..Check(1)..unsigned_int_p.OUT("value", "returns the attribute value")
+        ReturnParam..Check(1)..unsigned_int.p.OUT("value", "returns the attribute value")
     )
 
     GLXContext(
@@ -198,7 +198,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         DISPLAY,
         GLXContext.IN("ctx", "the GLXContext being queried"),
         int.IN("attribute", "the attribute to query"),
-        Check(1)..int_p.OUT("value", "returns the attribute value")
+        Check(1)..int.p.OUT("value", "returns the attribute value")
     )
 
     void(
@@ -216,7 +216,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
 
         DISPLAY,
         GLXDrawable.IN("draw", "the GLXDrawable"),
-        Check(1)..unsigned_long_p.IN("event_mask", "returns the selection mask")
+        Check(1)..unsigned_long.p.IN("event_mask", "returns the selection mask")
     )
 
 }

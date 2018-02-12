@@ -32,7 +32,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         since = "version 3.2"
     )
 
-    const..charASCII_pp(
+    charASCII.const.p.p(
         "GetRequiredInstanceExtensions",
         """
         Returns an array of names of Vulkan instance extensions required by GLFW for creating Vulkan surfaces for GLFW windows. If successful, the list will
@@ -55,7 +55,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         Possible errors include #NOT_INITIALIZED and #API_UNAVAILABLE.
         """,
 
-        AutoSizeResult..uint32_t_p.OUT(
+        AutoSizeResult..uint32_t.p.OUT(
             "count",
             "where to store the number of extensions in the returned array. This is set to zero if an error occurred."
         ),
@@ -89,7 +89,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         """,
 
         nullable..VkInstance.IN("instance", "the Vulkan instance to query, or #NULL to retrieve functions related to instance creation"),
-        const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
+        charASCII.const.p.IN("procname", "the ASCII encoded name of the function"),
 
         returnDoc = "the address of the function, or #NULL if an error occurred",
         since = "version 3.2"
@@ -144,8 +144,8 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         """,
 
         VkInstance.IN("instance", "the Vulkan instance to create the surface in"),
-        GLFWwindow_p.IN("window", "the window to create the surface for"),
-        nullable..const..VkAllocationCallbacks.p.IN("allocator", "the allocator to use, or #NULL to use the default allocator."),
+        GLFWwindow.p.IN("window", "the window to create the surface for"),
+        nullable..VkAllocationCallbacks.const.p.IN("allocator", "the allocator to use, or #NULL to use the default allocator."),
         Check(1)..VkSurfaceKHR.p.OUT("surface", "where to store the handle of the surface. This is set to VK10#VK_NULL_HANDLE if an error occurred."),
 
         returnDoc = "VK10#VK_SUCCESS if successful, or a Vulkan error code if an error occurred",

@@ -18,11 +18,10 @@ val Font = typedef(XID, "Font")
 val Pixmap = typedef(XID, "Pixmap")
 val Window = typedef(XID, "Window")
 
-const val Display = "Display"
-val Display_p = Display.p // Display is a struct, but should be treated as an opaque type by apps
-val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
+val Display = "Display".opaque // Display is a struct, but should be treated as an opaque type by apps
+val DISPLAY = Display.p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
 
-val Visual_p = struct(Module.CORE_LINUX, "Visual") {
+val Visual = struct(Module.CORE_LINUX, "Visual") {
     documentation = "Visual structure; contains information about colormapping possible."
 
     nullable..opaque_p.member("ext_data", "")
@@ -33,12 +32,12 @@ val Visual_p = struct(Module.CORE_LINUX, "Visual") {
     unsigned_long.member("blue_mask", "")
     int.member("bits_per_rgb", "")
     int.member("map_entries", "")
-}.p
+}
 
-val XVisualInfo_p = struct(Module.CORE_LINUX, "XVisualInfo") {
+val XVisualInfo = struct(Module.CORE_LINUX, "XVisualInfo") {
     documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
 
-    Visual_p.member("visual", "")
+    Visual.p.member("visual", "")
     VisualID.member("visualid", "")
     int.member("screen", "")
     int.member("depth", "")
@@ -48,9 +47,9 @@ val XVisualInfo_p = struct(Module.CORE_LINUX, "XVisualInfo") {
     unsigned_long.member("blue_mask", "")
     int.member("colormap_size", "")
     int.member("bits_per_rgb", "")
-}.p
+}
 
-val XSetWindowAttributes_p = struct(Module.CORE_LINUX, "XSetWindowAttributes") {
+val XSetWindowAttributes = struct(Module.CORE_LINUX, "XSetWindowAttributes") {
     documentation = "Data structure for setting window attributes."
 
     Pixmap.member("background_pixmap", "")
@@ -68,7 +67,7 @@ val XSetWindowAttributes_p = struct(Module.CORE_LINUX, "XSetWindowAttributes") {
     Bool.member("override_redirect", "")
     Colormap.member("colormap", "")
     Cursor.member("cursor", "")
-}.p
+}
 
 // --------------- Xrandr.h ---------------
 

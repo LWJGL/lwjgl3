@@ -85,7 +85,7 @@ val CL22 = "CL22".nativeClassCL("CL22") {
             PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..const..void_p.IN(
+        )..void.const.p.IN(
             "spec_value",
             """
             a pointer to the memory location that contains the value of the specialization constant. The data pointed to by {@code spec_value} are copied and

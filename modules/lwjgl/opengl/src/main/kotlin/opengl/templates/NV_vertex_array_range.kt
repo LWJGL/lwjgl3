@@ -47,7 +47,7 @@ val NV_vertex_array_range = "NVVertexArrayRange".nativeClassGL("NV_vertex_array_
         "",
 
         AutoSize("pointer")..GLsizei.IN("length", ""),
-        void_p.IN("pointer", "")
+        void.p.IN("pointer", "")
     )
 
     void(

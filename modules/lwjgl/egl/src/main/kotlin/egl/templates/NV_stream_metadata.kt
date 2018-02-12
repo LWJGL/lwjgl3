@@ -60,7 +60,7 @@ val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata",
 
         EGLDisplay.IN("dpy", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
     EGLBoolean(
@@ -72,7 +72,7 @@ val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata",
         EGLint.IN("n", ""),
         EGLint.IN("offset", ""),
         AutoSize("data")..EGLint.IN("size", ""),
-        const..void_p.IN("data", "")
+        void.const.p.IN("data", "")
     )
 
     EGLBoolean(
@@ -85,6 +85,6 @@ val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata",
         EGLint.IN("n", ""),
         EGLint.IN("offset", ""),
         AutoSize("data")..EGLint.IN("size", ""),
-        void_p.OUT("data", "")
+        void.p.OUT("data", "")
     )
 }

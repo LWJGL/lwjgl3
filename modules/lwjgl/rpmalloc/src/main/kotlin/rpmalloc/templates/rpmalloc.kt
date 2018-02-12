@@ -65,7 +65,7 @@ ENABLE_WARNINGS()""")
         This function also calls #malloc_thread_initialize().
         """,
 
-        nullable..const..rpmalloc_config_t.p.IN("config", "an optional ##RPMallocConfig instance")
+        nullable..rpmalloc_config_t.const.p.IN("config", "an optional ##RPMallocConfig instance")
     )
 
     void(
@@ -101,17 +101,17 @@ ENABLE_WARNINGS()""")
         "malloc_thread_statistics",
         "",
 
-        rpmalloc_thread_statistics_t_p.OUT("stats", "")
+        rpmalloc_thread_statistics_t.p.OUT("stats", "")
     )
 
     void(
         "malloc_global_statistics",
         "",
 
-        rpmalloc_global_statistics_t_p.OUT("stats", "")
+        rpmalloc_global_statistics_t.p.OUT("stats", "")
     )
 
-    void_p(
+    void.p(
         "malloc",
         "",
 
@@ -122,10 +122,10 @@ ENABLE_WARNINGS()""")
         "free",
         "",
 
-        MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "")
+        MultiTypeAll..Unsafe..nullable..void.p.IN("ptr", "")
     )
 
-    void_p(
+    void.p(
         "calloc",
         "",
 
@@ -133,26 +133,26 @@ ENABLE_WARNINGS()""")
         AutoSizeResult..size_t.IN("size", "")
     )
 
-    void_p(
+    void.p(
         "realloc",
         "",
 
-        Unsafe..nullable..void_p.IN("ptr", ""),
+        Unsafe..nullable..void.p.IN("ptr", ""),
         AutoSizeResult..size_t.IN("size", "")
     )
 
-    void_p(
+    void.p(
         "aligned_realloc",
         "",
 
-        nullable..void_p.IN("ptr", ""),
+        nullable..void.p.IN("ptr", ""),
         size_t.IN("alignment", ""),
         AutoSizeResult..size_t.IN("size", ""),
         AutoSize("ptr")..size_t.IN("oldsize", ""),
         unsigned_int.IN("flags", "")
     )
 
-    void_p(
+    void.p(
         "aligned_alloc",
         "",
 
@@ -160,7 +160,7 @@ ENABLE_WARNINGS()""")
         AutoSizeResult..size_t.IN("size", "")
     )
 
-    void_p(
+    void.p(
         "memalign",
         "",
 
@@ -172,7 +172,7 @@ ENABLE_WARNINGS()""")
         "posix_memalign",
         "",
 
-        Check(1)..void_pp.OUT("memptr", ""),
+        Check(1)..void.p.p.OUT("memptr", ""),
         size_t.IN("alignment", ""),
         size_t.IN("size", "")
     )
@@ -181,6 +181,6 @@ ENABLE_WARNINGS()""")
         "malloc_usable_size",
         "",
 
-        MultiTypeAll..Unsafe..void_p.IN("ptr", "")
+        MultiTypeAll..Unsafe..void.p.IN("ptr", "")
     )
 }

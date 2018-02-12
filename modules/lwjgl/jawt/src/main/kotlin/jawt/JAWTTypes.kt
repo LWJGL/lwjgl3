@@ -17,9 +17,8 @@ val JAWT_Rectangle = struct(Module.JAWT, "JAWTRectangle", nativeName = "JAWT_Rec
     jint.member("width", "the rectangle width")
     jint.member("height", "the rectangle height")
 }
-val JAWT_Rectangle_p = JAWT_Rectangle.p
 
-val JAWT_DrawingSurface_p = struct(Module.JAWT, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
+val JAWT_DrawingSurface = struct(Module.JAWT, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
     documentation =
         """
         Structure for containing the underlying drawing information of a component.
@@ -41,9 +40,9 @@ val JAWT_DrawingSurface_p = struct(Module.JAWT, "JAWTDrawingSurface", nativeName
     opaque_p.member("GetDrawingSurfaceInfo", "")
     opaque_p.member("FreeDrawingSurfaceInfo", "")
     opaque_p.member("Unlock", "")
-}.p
+}
 
-val JAWT_DrawingSurfaceInfo_p = struct(Module.JAWT, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
+val JAWT_DrawingSurfaceInfo = struct(Module.JAWT, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
     opaque_p.member(
         "platformInfo",
         """
@@ -52,13 +51,13 @@ val JAWT_DrawingSurfaceInfo_p = struct(Module.JAWT, "JAWTDrawingSurfaceInfo", na
         protocol.
         """
     )
-    JAWT_DrawingSurface_p.member("ds", "Cached pointer to the underlying drawing surface.")
+    JAWT_DrawingSurface.p.member("ds", "Cached pointer to the underlying drawing surface.")
     JAWT_Rectangle.member("bounds", "Bounding rectangle of the drawing surface.")
     AutoSize("clip")..jint.member("clipSize", "Number of rectangles in the clip.")
-    JAWT_Rectangle_p.buffer("clip", "Clip rectangle array.")
-}.p
+    JAWT_Rectangle.p.buffer("clip", "Clip rectangle array.")
+}
 
-val JAWT_p = struct(Module.JAWT, "JAWT") {
+val JAWT = struct(Module.JAWT, "JAWT") {
     documentation = "Structure for containing native AWT functions."
 
     jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()")
@@ -70,7 +69,7 @@ val JAWT_p = struct(Module.JAWT, "JAWT") {
     nullable..opaque_p.member("CreateEmbeddedFrame", "")
     nullable..opaque_p.member("SetBounds", "")
     nullable..opaque_p.member("SynthesizeWindowActivation", "")
-}.p
+}
 
 val Component = java.awt.Component::class.jobject
 val Frame = java.awt.Frame::class.jobject
@@ -85,7 +84,7 @@ fun config() {
         documentation = "X11-specific declarations for AWT native interface."
 
         Drawable.member("drawable", "the drawable")
-        Display_p.member("display", "the connection to the X server")
+        Display.p.member("display", "the connection to the X server")
         VisualID.member("visualID", "the VisualID")
         Colormap.member("colormapID", "the colormap")
         int.member("depth", "the depth")
@@ -99,7 +98,7 @@ fun config() {
         union {
             HWND.member("hwnd", "the native window handle")
             HBITMAP.member("hbitmap", "the DDB handle")
-            void_p.member("pbits", "the DIB handle")
+            void.p.member("pbits", "the DIB handle")
         }
         HDC.member(
             "hdc",

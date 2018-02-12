@@ -78,7 +78,7 @@ val EXT_memory_object_win32 = "EXTMemoryObjectWin32".nativeClassGLES("EXT_memory
         GLuint.IN("memory", ""),
         GLuint64.IN("size", ""),
         GLenum.IN("handleType", ""),
-        const..opaque_p.IN("name", "")
+        opaque_const_p.IN("name", "")
     )
 }
 
@@ -149,6 +149,6 @@ val EXT_semaphore_win32 = "EXTSemaphoreWin32".nativeClassGLES("EXT_semaphore_win
 
         GLuint.IN("semaphore", ""),
         GLenum.IN("handleType", ""),
-        const..opaque_p.IN("name", "")
+        opaque_const_p.IN("name", "")
     )
 }

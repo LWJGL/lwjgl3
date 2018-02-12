@@ -91,7 +91,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..const..void_p.IN(
+        )..void.const.p.IN(
             "data",
             """
             the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is #NULL, the data store of the
@@ -199,7 +199,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
         GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..nullable..const..void_p.IN(
+        )..Unsafe..nullable..void.const.p.IN(
             "data",
             """
             an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is #NULL,
@@ -228,7 +228,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
         GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..nullable..const..void_p.IN(
+        )..Unsafe..nullable..void.const.p.IN(
             "data",
             """
             an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is #NULL,
@@ -270,7 +270,7 @@ for ( i = 0; i < count; i++ ) {
         GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
         GLuint.IN("first", "the first binding"),
         AutoSize("buffers")..GLsizei.IN("count", "the number of bindings"),
-        nullable..const..GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
+        nullable..GLuint.const.p.IN("buffers", "an array of zeros or names of existing buffers objects")
     )
 
     void(
@@ -300,9 +300,9 @@ for ( i = 0; i < count; i++ ) {
         GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
         GLuint.IN("first", "the first binding"),
         AutoSize("buffers", "offsets", "sizes")..GLsizei.IN("count", "the number of bindings"),
-        nullable..const..GLuint_p.IN("buffers", "an array of names of existing buffers objects"),
-        nullable..const..GLintptr_p.IN("offsets", "an array of offsets"),
-        nullable..const..GLsizeiptr_p.IN("sizes", "an array of sizes")
+        nullable..GLuint.const.p.IN("buffers", "an array of names of existing buffers objects"),
+        nullable..GLintptr.const.p.IN("offsets", "an array of offsets"),
+        nullable..GLsizeiptr.const.p.IN("sizes", "an array of sizes")
     )
 
     void(
@@ -345,7 +345,7 @@ for ( i = 0; i < count; i++ ) {
 
         GLuint.IN("first", "the first texture objects"),
         AutoSize("textures")..GLsizei.IN("count", "the number of texture objects"),
-        nullable..const..GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
+        nullable..GLuint.const.p.IN("textures", "an array of zeros or names of existing texture objects")
     )
 
     void(
@@ -372,7 +372,7 @@ for ( i = 0; i < count; i++ ) {
 
         GLuint.IN("first", "the first sampler object"),
         AutoSize("samplers")..GLsizei.IN("count", "the number of sampler objects"),
-        nullable..const..GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
+        nullable..GLuint.const.p.IN("samplers", "an array of zeros or names of existing sampler objects")
     )
 
     void(
@@ -410,7 +410,7 @@ for ( i = 0; i < count; i++ ) {
 
         GLuint.IN("first", "the first image unit"),
         AutoSize("textures")..GLsizei.IN("count", "the number of image units"),
-        nullable..const..GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
+        nullable..GLuint.const.p.IN("textures", "an array of zeros or names of existing texture objects")
     )
 
     void(
@@ -442,9 +442,9 @@ for ( i = 0; i < count; i++ ) {
 
         GLuint.IN("first", "the first vertex buffer binding point"),
         AutoSize("buffers", "offsets", "strides")..GLsizei.IN("count", "the number of vertex buffer binding points"),
-        nullable..const..GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects"),
-        nullable..const..GLintptr_p.IN("offsets", "an array of offses"),
-        nullable..const..GLsizei_p.IN("strides", "an array of stride values")
+        nullable..GLuint.const.p.IN("buffers", "an array of zeros or names of existing buffers objects"),
+        nullable..GLintptr.const.p.IN("offsets", "an array of offses"),
+        nullable..GLsizei.const.p.IN("strides", "an array of stride values")
     )
 
     // ARB_query_buffer_object

@@ -51,6 +51,6 @@ val NV_internalformat_sample_query = "NVInternalformatSampleQuery".nativeClassGL
         GLsizei.IN("samples", ""),
         GLenum.IN("pname", ""),
         AutoSize("params")..GLsizei.IN("bufSize", ""),
-        GLint_p.OUT("params", "")
+        GLint.p.OUT("params", "")
     )
 }

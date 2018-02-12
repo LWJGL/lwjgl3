@@ -19,8 +19,7 @@ val SaveLastError = Code(nativeAfterCall = "${t}saveLastError();")
 
 val VOID = "VOID".void
 
-val HANDLE = "HANDLE".opaque_p
-val HANDLE_p = HANDLE.p
+val HANDLE = "HANDLE".handle
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.BOOLEAN4)
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
@@ -36,9 +35,7 @@ val LDOUBLE = PrimitiveType("LDOUBLE", PrimitiveMapping.DOUBLE)
 
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 
-val UINT_p = UINT.p
-val FLOAT_p = FLOAT.p
-val PULONG = ULONG.p("PULONG")
+val PULONG = typedef(ULONG.p, "PULONG")
 
 val UINT_PTR = IntegerType("UINT_PTR", PrimitiveMapping.POINTER, unsigned = true)
 val LONG_PTR = IntegerType("LONG_PTR", PrimitiveMapping.POINTER)
@@ -49,15 +46,16 @@ val WPARAM = typedef(UINT_PTR, "WPARAM")
 val LPARAM = typedef(LONG_PTR, "LPARAM")
 
 val CHAR = CharType("CHAR", CharMapping.ASCII)
+val WCHAR = CharType("CHAR", CharMapping.UTF16)
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
-val LPCSTR = CharSequenceType("LPCSTR", includesPointer = true)
-val LPCWSTR = CharSequenceType("LPCWSTR", includesPointer = true, charMapping = CharMapping.UTF16)
-val LPCTSTR = CharSequenceType("LPCTSTR", includesPointer = true, charMapping = CharMapping.UTF16)
+val LPCSTR = typedef(CHAR.const.p, "LPCSTR")
+val LPCWSTR = typedef(WCHAR.const.p, "LPCWSTR")
+val LPCTSTR = typedef(TCHAR.const.p, "LPCTSTR")
 
-val FARPROC = "FARPROC".opaque_p
-val PROC = "PROC".opaque_p
-val LPVOID = "LPVOID".opaque_p
+val FARPROC = "FARPROC".handle
+val PROC = "PROC".handle
+val LPVOID = "LPVOID".handle
 
 val HINSTANCE = typedef(HANDLE, "HINSTANCE")
 val HMODULE = typedef(HANDLE, "HMODULE")
@@ -100,7 +98,7 @@ val POINT = struct(Module.CORE_WINDOWS, "POINT") {
     LONG.member("x", "the x-coordinate of the point")
     LONG.member("y", "the y-coordinate of the point")
 }
-val LPPOINT = POINT.p("LPPOINT")
+val LPPOINT = typedef(POINT.p, "LPPOINT")
 
 val RECT = struct(Module.CORE_WINDOWS, "RECT") {
     documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
@@ -110,8 +108,7 @@ val RECT = struct(Module.CORE_WINDOWS, "RECT") {
     LONG.member("right", "the x-coordinate of the lower-right corner of the rectangle")
     LONG.member("bottom", "the y-coordinate of the lower-right corner of the rectangle")
 }
-val RECT_p = RECT.p
-val LPRECT = RECT.p("LPRECT")
+val LPRECT = typedef(RECT.p, "LPRECT")
 
 val MSG = struct(Module.CORE_WINDOWS, "MSG") {
     documentation = "Contains message information from a thread's message queue."
@@ -126,8 +123,7 @@ val MSG = struct(Module.CORE_WINDOWS, "MSG") {
     DWORD.member("time", "the time at which the message was posted")
     POINT.member("pt", "the cursor position, in screen coordinates, when the message was posted.")
 }
-val LPMSG = MSG.p("LPMSG")
-val MSG_p = MSG.p
+val LPMSG = typedef(MSG.p, "LPMSG")
 
 val PIXELFORMATDESCRIPTOR = struct(Module.CORE_WINDOWS, "PIXELFORMATDESCRIPTOR") {
     documentation = "Describes the pixel format of a drawing surface."
@@ -177,8 +173,7 @@ val PIXELFORMATDESCRIPTOR = struct(Module.CORE_WINDOWS, "PIXELFORMATDESCRIPTOR")
     )
     DWORD.member("dwDamageMask", "Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.")
 }
-val LPPIXELFORMATDESCRIPTOR = PIXELFORMATDESCRIPTOR.p("LPPIXELFORMATDESCRIPTOR")
-val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
+val LPPIXELFORMATDESCRIPTOR = typedef(PIXELFORMATDESCRIPTOR.p, "LPPIXELFORMATDESCRIPTOR")
 
 val WNDPROC = "WNDPROC".callback(
     Module.CORE_WINDOWS, LRESULT, "WindowProc",
@@ -193,7 +188,7 @@ val WNDPROC = "WNDPROC".callback(
     useSystemCallConvention()
 }
 
-val WNDCLASSEX_p = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {
+val WNDCLASSEX = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {
     documentation = "Contains the window class attributes that are registered by the #RegisterClassEx() function."
 
     UINT.member("cbSize", "the size, in bytes, of this structure")
@@ -235,9 +230,9 @@ val WNDCLASSEX_p = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {
         {@code hIcon} member for an icon of the appropriate size to use as the small icon.
         """
     )
-}.p
+}
 
-val WINDOWPLACEMENT_p = struct(Module.CORE_WINDOWS, "WINDOWPLACEMENT") {
+val WINDOWPLACEMENT = struct(Module.CORE_WINDOWS, "WINDOWPLACEMENT") {
     documentation = "Contains information about the placement of a window on the screen."
 
     UINT.member(
@@ -256,7 +251,7 @@ val WINDOWPLACEMENT_p = struct(Module.CORE_WINDOWS, "WINDOWPLACEMENT") {
     POINT.member("ptMinPosition", "the coordinates of the window's upper-left corner when the window is minimized")
     POINT.member("ptMaxPosition", "the coordinates of the window's upper-left corner when the window is maximized")
     RECT.member("rcNormalPosition", "the window's coordinates when the window is in the restored position")
-}.p
+}
 
 val TOUCHINPUT = struct(Module.CORE_WINDOWS, "TOUCHINPUT", mutable = false) {
     documentation = "Encapsulates data for touch input."
@@ -313,7 +308,7 @@ val TOUCHINPUT = struct(Module.CORE_WINDOWS, "TOUCHINPUT", mutable = false) {
         """
     )
 }
-val PTOUCHINPUT = TOUCHINPUT.p("PTOUCHINPUT")
+val PTOUCHINPUT = typedef(TOUCHINPUT.p, "PTOUCHINPUT")
 
 val MONITORINFOEX = struct(Module.CORE_WINDOWS, "MONITORINFOEX", mutable = false) {
     documentation = "Contains information about a display monitor."
@@ -346,7 +341,7 @@ val MONITORINFOEX = struct(Module.CORE_WINDOWS, "MONITORINFOEX", mutable = false
     DWORD.member("dwFlags", "the attributes of the display monitor. May be:<br>#MONITORINFOF_PRIMARY")
     TCHAR.array("szDevice", "a string that specifies the device name of the monitor being used", 32)
 }
-val LPMONITORINFOEX = MONITORINFOEX.p("LPMONITORINFOEX")
+val LPMONITORINFOEX = typedef(MONITORINFOEX.p, "LPMONITORINFOEX")
 
 val POINTL = struct(Module.CORE_WINDOWS, "POINTL") {
     documentation = "Contains the coordinates of a point."
@@ -355,7 +350,7 @@ val POINTL = struct(Module.CORE_WINDOWS, "POINTL") {
     LONG.member("y", "the vertical (y) coordinate of the point.")
 }
 
-val DEVMODE_p = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
+val DEVMODE = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
     documentation = "Contains information about the initialization and environment of a printer or a display device."
 
     TCHAR.array(
@@ -479,7 +474,7 @@ val DEVMODE_p = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
 
     DWORD.member("dmPanningWidth", "this member must be zero")
     DWORD.member("dmPanningHeight", "this member must be zero")
-}.p
+}
 
 val DISPLAY_DEVICE = struct(Module.CORE_WINDOWS, "DISPLAY_DEVICE", mutable = false) {
     documentation =
@@ -505,7 +500,7 @@ val DISPLAY_DEVICE = struct(Module.CORE_WINDOWS, "DISPLAY_DEVICE", mutable = fal
     TCHAR.array("DeviceID", "not used", size = 128)
     TCHAR.array("DeviceKey", "reserved", size = 128)
 }
-val PDISPLAY_DEVICE = DISPLAY_DEVICE.p("PDISPLAY_DEVICE")
+val PDISPLAY_DEVICE = typedef(DISPLAY_DEVICE.p, "PDISPLAY_DEVICE")
 
 val SECURITY_ATTRIBUTES = struct(Module.CORE_WINDOWS, "SECURITY_ATTRIBUTES") {
     documentation =

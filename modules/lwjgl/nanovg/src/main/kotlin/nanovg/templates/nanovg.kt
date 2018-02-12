@@ -208,7 +208,7 @@ nvgFill(vg);""")}
         "IMAGE_NEAREST".enum("Image interpolation is Nearest instead Linear.", "1<<5")
     ).javaDocLinks
 
-    val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")
+    val ctx = NVGcontext.p.IN("ctx", "the NanoVG context")
 
     void(
         "BeginFrame",
@@ -563,14 +563,14 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        Check(6)..float_p.OUT("xform", "the destination buffer")
+        Check(6)..float.p.OUT("xform", "the destination buffer")
     )
 
     val TransformIdentity = void(
         "TransformIdentity",
         "Sets the transform to identity matrix.",
 
-        Check(6)..float_p.OUT("dst", "the destination buffer")
+        Check(6)..float.p.OUT("dst", "the destination buffer")
     )
 
     void(
@@ -620,7 +620,7 @@ nvgFill(vg);""")}
         "Sets the transform to the result of multiplication of two transforms, of {@code A = A*B}.",
 
         TransformIdentity["dst"],
-        Check(6)..const..float_p.IN("src", "the {@code B} transformation matrix")
+        Check(6)..float.const.p.IN("src", "the {@code B} transformation matrix")
     )
 
     void(
@@ -628,7 +628,7 @@ nvgFill(vg);""")}
         "Sets the transform to the result of multiplication of two transforms, of {@code A = B*A}.",
 
         TransformIdentity["dst"],
-        Check(6)..const..float_p.IN("src", "the {@code B} transformation matrix")
+        Check(6)..float.const.p.IN("src", "the {@code B} transformation matrix")
     )
 
     intb(
@@ -636,7 +636,7 @@ nvgFill(vg);""")}
         "Sets the destination to inverse of specified transform.",
 
         TransformIdentity["dst"],
-        Check(6)..const..float_p.IN("src", "the transformation matrix to inverse"),
+        Check(6)..float.const.p.IN("src", "the transformation matrix to inverse"),
 
         returnDoc = "1 if the inverse could be calculated, else 0"
     )
@@ -645,9 +645,9 @@ nvgFill(vg);""")}
         "TransformPoint",
         "Transform a point by given transform.",
 
-        Check(1)..float_p.OUT("dstx", "returns the transformed X axis coordinate"),
-        Check(1)..float_p.OUT("dsty", "returns the transformed Y axis coordinate"),
-        Check(6)..const..float_p.IN("xform", "the transformation matrix"),
+        Check(1)..float.p.OUT("dstx", "returns the transformed X axis coordinate"),
+        Check(1)..float.p.OUT("dsty", "returns the transformed Y axis coordinate"),
+        Check(6)..float.const.p.IN("xform", "the transformation matrix"),
         float.IN("srcx", "the point X axis coordinate"),
         float.IN("srcy", "the point Y axis coordinate")
     )
@@ -675,7 +675,7 @@ nvgFill(vg);""")}
         "Creates image by loading it from the disk from specified file name.",
 
         ctx,
-        const..charASCII_p.IN("filename", "the image file name"),
+        charASCII.const.p.IN("filename", "the image file name"),
         imageFlags,
 
         returnDoc = "a handle to the image"
@@ -687,7 +687,7 @@ nvgFill(vg);""")}
 
         ctx,
         imageFlags,
-        unsigned_char_p.IN("data", "the image data"),
+        unsigned_char.p.IN("data", "the image data"),
         AutoSize("data")..int.IN("ndata", "the image data size, in bytes"),
 
         returnDoc = "a handle to the image"
@@ -701,7 +701,7 @@ nvgFill(vg);""")}
         int.IN("w", "the image width"),
         int.IN("h", "the image height"),
         imageFlags,
-        Check("w * h * 4")..const..unsigned_char_p.IN("data", "the image data"),
+        Check("w * h * 4")..unsigned_char.const.p.IN("data", "the image data"),
 
         returnDoc = "a handle to the image"
     )
@@ -712,7 +712,7 @@ nvgFill(vg);""")}
 
         ctx,
         int.IN("image", "the image handle"),
-        Unsafe..const..unsigned_char_p.IN("data", "the image data")
+        Unsafe..unsigned_char.const.p.IN("data", "the image data")
     )
 
     void(
@@ -721,8 +721,8 @@ nvgFill(vg);""")}
 
         ctx,
         int.IN("image", "the image handle"),
-        Check(1)..int_p.OUT("w", "returns the image width"),
-        Check(1)..int_p.OUT("h", "returns the image height")
+        Check(1)..int.p.OUT("w", "returns the image width"),
+        Check(1)..int.p.OUT("h", "returns the image height")
     )
 
     void(
@@ -1019,8 +1019,8 @@ nvgFill(vg);""")}
         "Creates font by loading it from the disk from specified file name.",
 
         ctx,
-        const..charASCII_p.IN("name", "the font name"),
-        const..charASCII_p.IN("filename", "the font file name"),
+        charASCII.const.p.IN("name", "the font name"),
+        charASCII.const.p.IN("filename", "the font file name"),
 
         returnDoc = "a handle to the font"
     )
@@ -1034,8 +1034,8 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        const..charASCII_p.IN("name", "the font name"),
-        unsigned_char_p.IN("data", "the font data"),
+        charASCII.const.p.IN("name", "the font name"),
+        unsigned_char.p.IN("data", "the font data"),
         AutoSize("data")..int.IN("ndata", "the font data size, in bytes"),
         int.IN("freeData", "1 if the font data should be freed automatically, 0 otherwise"),
 
@@ -1047,7 +1047,7 @@ nvgFill(vg);""")}
         "Finds a loaded font of specified name, and returns handle to it, or -1 if the font is not found.",
 
         ctx,
-        const..charASCII_p.IN("name", "the font name")
+        charASCII.const.p.IN("name", "the font name")
     )
 
     int(
@@ -1064,8 +1064,8 @@ nvgFill(vg);""")}
         "Adds fallback font by name.",
 
         ctx,
-        const..charASCII_p.IN("baseFont", ""),
-        const..charASCII_p.IN("fallbackFont", "")
+        charASCII.const.p.IN("baseFont", ""),
+        charASCII.const.p.IN("fallbackFont", "")
     )
 
     void(
@@ -1121,7 +1121,7 @@ nvgFill(vg);""")}
         "Sets the font face based on specified name of current text style.",
 
         ctx,
-        const..charASCII_p.IN("font", "the font name")
+        charASCII.const.p.IN("font", "the font name")
     )
 
     float(
@@ -1131,8 +1131,8 @@ nvgFill(vg);""")}
         ctx,
         float.IN("x", "the text X axis coordinate"),
         float.IN("y", "the text Y axis coordinate"),
-        const..charUTF8_p.IN("string", "the text string to draw"),
-        AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to draw, or #NULL")
+        charUTF8.const.p.IN("string", "the text string to draw"),
+        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to draw, or #NULL")
     )
 
     void(
@@ -1149,8 +1149,8 @@ nvgFill(vg);""")}
         float.IN("x", "the text box X axis coordinate"),
         float.IN("y", "the text box Y axis coordinate"),
         float.IN("breakRowWidth", "the maximum row width"),
-        const..charUTF8_p.IN("string", "the text string to draw"),
-        AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to draw, or #NULL")
+        charUTF8.const.p.IN("string", "the text string to draw"),
+        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to draw, or #NULL")
     )
 
     float(
@@ -1167,9 +1167,9 @@ nvgFill(vg);""")}
         ctx,
         float.IN("x", "the text X axis coordinate"),
         float.IN("y", "the text Y axis coordinate"),
-        const..charUTF8_p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        nullable..Check(4)..float_p.OUT("bounds", "returns the bounding box of the text"),
+        charUTF8.const.p.IN("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        nullable..Check(4)..float.p.OUT("bounds", "returns the bounding box of the text"),
 
         returnDoc = "the horizontal advance of the measured text (i.e. where the next character should drawn)"
     )
@@ -1189,9 +1189,9 @@ nvgFill(vg);""")}
         float.IN("x", "the text box X axis coordinate"),
         float.IN("y", "the text box Y axis coordinate"),
         float.IN("breakRowWidth", "the maximum row width"),
-        const..charUTF8_p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        nullable..Check(4)..float_p.OUT("bounds", "returns the bounding box of the text box")
+        charUTF8.const.p.IN("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        nullable..Check(4)..float.p.OUT("bounds", "returns the bounding box of the text box")
     )
 
     int(
@@ -1205,9 +1205,9 @@ nvgFill(vg);""")}
         ctx,
         float.IN("x", "the text X axis coordinate"),
         float.IN("y", "the text Y axis coordinate"),
-        const..charUTF8_p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        NVGglyphPosition_p.OUT("positions", "returns the glyph x positions"),
+        charUTF8.const.p.IN("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        NVGglyphPosition.p.OUT("positions", "returns the glyph x positions"),
         AutoSize("positions")..int.IN("maxPositions", "the maximum number of glyph positions to return")
     )
 
@@ -1220,9 +1220,9 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        nullable..Check(1)..float_p.OUT("ascender", "the line ascend"),
-        nullable..Check(1)..float_p.OUT("descender", "the line descend"),
-        nullable..Check(1)..float_p.OUT("lineh", "the line height")
+        nullable..Check(1)..float.p.OUT("ascender", "the line ascend"),
+        nullable..Check(1)..float.p.OUT("descender", "the line descend"),
+        nullable..Check(1)..float.p.OUT("lineh", "the line height")
     )
 
     int(
@@ -1235,10 +1235,10 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        const..charUTF8_p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        charUTF8.const.p.IN("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
         float.IN("breakRowWidth", "the maximum row width"),
-        NVGtextRow_p.OUT("rows", "returns the text rows"),
+        NVGtextRow.p.OUT("rows", "returns the text rows"),
         AutoSize("rows")..int.IN("maxRows", "the maximum number of text rows to return")
     )
 }

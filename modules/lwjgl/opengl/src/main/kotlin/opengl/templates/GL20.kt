@@ -168,11 +168,11 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("shader", "the shader object whose source code is to be replaced"),
         AutoSize("strings", "length")..GLsizei.IN("count", "the number of elements in the string and length arrays"),
-        PointerArray(GLcharUTF8_p, "string", "length")..const..GLcharUTF8_p.p.IN(
+        PointerArray(GLcharUTF8.p, "string", "length")..GLcharUTF8.const.p.p.IN(
             "strings",
             "an array of pointers to strings containing the source code to be loaded into the shader"
         ),
-        nullable..const..GLint_p.IN("length", "an array of string lengths")
+        nullable..GLint.const.p.IN("length", "an array of string lengths")
     )
 
     void(
@@ -293,7 +293,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize("value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -302,7 +302,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize(2, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -311,7 +311,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize(3, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -320,7 +320,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize(4, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -329,7 +329,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize("value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -338,7 +338,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize(2, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -347,7 +347,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize(3, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -356,7 +356,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         uniformLocation,
         AutoSize(4, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        const..GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -366,7 +366,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         uniformLocation,
         AutoSize(2 x 2, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
         GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -376,7 +376,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         uniformLocation,
         AutoSize(3 x 3, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
         GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -386,7 +386,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         uniformLocation,
         AutoSize(4 x 4, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
         GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        const..GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
+        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
     )
 
     void(
@@ -395,7 +395,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("shader", "the shader object to be queried"),
         GLenum.IN("pname", "the object parameter", "#SHADER_TYPE #DELETE_STATUS #COMPILE_STATUS #INFO_LOG_LENGTH #SHADER_SOURCE_LENGTH"),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "the requested object parameter")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested object parameter")
     )
 
     void(
@@ -414,7 +414,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
             #ACTIVE_ATOMIC_COUNTER_BUFFERS  #COMPUTE_WORK_GROUP_SIZE
             """
         ),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "the requested object parameter")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested object parameter")
     )
 
     void(
@@ -423,12 +423,12 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("shader", "the shader object whose information log is to be queried"),
         AutoSize("infoLog")..GLsizei.IN("maxLength", "the size of the character buffer for storing the returned information log"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
+        Check(1)..nullable..GLsizei.p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
         Return(
             "length",
             "glGetShaderi(shader, GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
+        )..GLcharUTF8.p.OUT("infoLog", "an array of characters that is used to return the information log")
     )
 
     void(
@@ -437,12 +437,12 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("program", "the program object whose information log is to be queried"),
         AutoSize("infoLog")..GLsizei.IN("maxLength", "the size of the character buffer for storing the returned information log"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
+        Check(1)..nullable..GLsizei.p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
         Return(
             "length",
             "glGetProgrami(program, GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
+        )..GLcharUTF8.p.OUT("infoLog", "an array of characters that is used to return the information log")
     )
 
     void(
@@ -451,8 +451,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("program", "the program object to be queried"),
         AutoSize("shaders")..GLsizei.IN("maxCount", "the size of the array for storing the returned object names"),
-        Check(1)..nullable..GLsizei_p.IN("count", "the number of names actually returned in {@code shaders}"),
-        GLuint_p.OUT("shaders", "an array that is used to return the names of attached shader objects")
+        Check(1)..nullable..GLsizei.p.IN("count", "the number of names actually returned in {@code shaders}"),
+        GLuint.p.OUT("shaders", "an array that is used to return the names of attached shader objects")
     )
 
     GLint(
@@ -460,7 +460,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "Returns the location of a uniform variable.",
 
         GLuint.IN("program", "the program object to be queried"),
-        const..GLcharASCII_p.IN("name", "a null terminated string containing the name of the uniform variable whose location is to be queried")
+        GLcharASCII.const.p.IN("name", "a null terminated string containing the name of the uniform variable whose location is to be queried")
     )
 
     void(
@@ -470,13 +470,13 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         GLuint.IN("program", "the program object to be queried"),
         GLuint.IN("index", "the index of the uniform variable to be queried"),
         AutoSize("name")..GLsizei.IN("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
-        Check(1)..nullable..GLsizei_p.IN("length", "the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than NULL is passed"),
-        Check(1)..GLint_p.OUT("size", "the size of the uniform variable"),
-        Check(1)..GLenum_p.OUT("type", "the data type of the uniform variable"),
+        Check(1)..nullable..GLsizei.p.IN("length", "the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than NULL is passed"),
+        Check(1)..GLint.p.OUT("size", "the size of the uniform variable"),
+        Check(1)..GLenum.p.OUT("type", "the data type of the uniform variable"),
         Return(
             "length",
             "glGetProgrami(program, GL_ACTIVE_UNIFORM_MAX_LENGTH)"
-        )..GLcharASCII_p.OUT("name", "a null terminated string containing the name of the uniform variable")
+        )..GLcharASCII.p.OUT("name", "a null terminated string containing the name of the uniform variable")
     )
 
     void(
@@ -485,7 +485,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLfloat_p.OUT("params", "the value of the specified uniform variable")
+        Check(1)..ReturnParam..GLfloat.p.OUT("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -494,7 +494,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("program", "the program object to be queried"),
         GLint.IN("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "the value of the specified uniform variable")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -503,12 +503,12 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("shader", "the shader object to be queried"),
         AutoSize("source")..GLsizei.IN("maxLength", "the size of the character buffer for storing the returned source code string"),
-        Check(1)..nullable..GLsizei_p.IN("length", "the length of the string returned in source (excluding the null terminator)"),
+        Check(1)..nullable..GLsizei.p.IN("length", "the length of the string returned in source (excluding the null terminator)"),
         Return(
             "length",
             "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8_p.OUT("source", "an array of characters that is used to return the source code string")
+        )..GLcharUTF8.p.OUT("source", "an array of characters that is used to return the source code string")
     )
 
     // ARB_vertex_shader
@@ -617,33 +617,33 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     void("VertexAttrib4d", "Double version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY), GLdouble.IN("v2", vertexAttribZ), GLdouble.IN("v3", vertexAttribW))
     void("VertexAttrib4Nub", "Normalized unsigned byte version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLubyte.IN("x", vertexAttribX), GLubyte.IN("y", vertexAttribY), GLubyte.IN("z", vertexAttribZ), GLubyte.IN("w", vertexAttribW))
 
-    void("VertexAttrib1fv", "Pointer version of #VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLfloat_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib1sv", "Pointer version of #VertexAttrib1s().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLshort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib1dv", "Pointer version of #VertexAttrib1d().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLdouble_p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib1fv", "Pointer version of #VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLfloat.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib1sv", "Pointer version of #VertexAttrib1s().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib1dv", "Pointer version of #VertexAttrib1d().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLdouble.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttrib2fv", "Pointer version of #VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLfloat_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib2sv", "Pointer version of #VertexAttrib2s().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLshort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib2dv", "Pointer version of #VertexAttrib2d().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLdouble_p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib2fv", "Pointer version of #VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLfloat.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib2sv", "Pointer version of #VertexAttrib2s().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib2dv", "Pointer version of #VertexAttrib2d().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLdouble.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttrib3fv", "Pointer version of #VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLfloat_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib3sv", "Pointer version of #VertexAttrib3s().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLshort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib3dv", "Pointer version of #VertexAttrib3d().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLdouble_p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib3fv", "Pointer version of #VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLfloat.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib3sv", "Pointer version of #VertexAttrib3s().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib3dv", "Pointer version of #VertexAttrib3d().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLdouble.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttrib4fv", "Pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLfloat_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4sv", "Pointer version of #VertexAttrib4s().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4dv", "Pointer version of #VertexAttrib4d().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLdouble_p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4fv", "Pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLfloat.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4sv", "Pointer version of #VertexAttrib4s().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4dv", "Pointer version of #VertexAttrib4d().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLdouble.const.p.IN("v", vertexAttribBuffer))
 
-    void("VertexAttrib4iv", "Integer pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4bv", "Byte pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4ubv", "Pointer version of #VertexAttrib4Nub().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLubyte_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4usv", "Unsigned short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLushort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4uiv", "Unsigned int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLuint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4Nbv", "Normalized byte pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4Nsv", "Normalized short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4Niv", "Normalized int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLint_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4Nubv", "Normalized unsigned byte pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLubyte_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4Nusv", "Normalized unsigned short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLushort_p.IN("v", vertexAttribBuffer))
-    void("VertexAttrib4Nuiv", "Normalized unsigned int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLuint_p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4iv", "Integer pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4bv", "Byte pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4ubv", "Pointer version of #VertexAttrib4Nub().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLubyte.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4usv", "Unsigned short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLushort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4uiv", "Unsigned int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLuint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4Nbv", "Normalized byte pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4Nsv", "Normalized short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4Niv", "Normalized int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4Nubv", "Normalized unsigned byte pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLubyte.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4Nusv", "Normalized unsigned short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLushort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttrib4Nuiv", "Normalized unsigned int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLuint.const.p.IN("v", vertexAttribBuffer))
 
     OffHeapOnly..void(
         "VertexAttribPointer",
@@ -669,7 +669,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         ),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..const..void_p.IN(
+        )..Unsafe..ARRAY_BUFFER..void.const.p.IN(
             "pointer",
             """
             the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -698,7 +698,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("program", "the program object in which the association is to be made"),
         GLuint.IN("index", "the index of the generic vertex attribute to be bound"),
-        const..GLcharASCII_p.IN("name", "a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound")
+        GLcharASCII.const.p.IN("name", "a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound")
     )
 
     void(
@@ -708,19 +708,19 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         GLuint.IN("program", "the program object to be queried"),
         GLuint.IN("index", "the index of the attribute variable to be queried"),
         AutoSize("name")..GLsizei.IN("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
-        Check(1)..nullable..GLsizei_p.OUT(
+        Check(1)..nullable..GLsizei.p.OUT(
             "length",
             """
             the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
             #NULL is passed
             """
         ),
-        Check(1)..GLint_p.OUT("size", "the size of the attribute variable"),
-        Check(1)..GLenum_p.OUT("type", "the data type of the attribute variable"),
+        Check(1)..GLint.p.OUT("size", "the size of the attribute variable"),
+        Check(1)..GLenum.p.OUT("type", "the data type of the attribute variable"),
         Return(
             "length",
             "glGetProgrami(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH)"
-        )..GLcharASCII_p.OUT("name", "a null terminated string containing the name of the attribute variable")
+        )..GLcharASCII.p.OUT("name", "a null terminated string containing the name of the attribute variable")
     )
 
     GLint(
@@ -728,7 +728,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "Returns the location of an attribute variable.",
 
         GLuint.IN("program", "the program object to be queried"),
-        const..GLcharASCII_p.IN("name", "a null terminated string containing the name of the attribute variable whose location is to be queried")
+        GLcharASCII.const.p.IN("name", "a null terminated string containing the name of the attribute variable whose location is to be queried")
     )
 
     void(
@@ -741,7 +741,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
             "the symbolic name of the vertex attribute parameter to be queried",
             "#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES #VERTEX_ATTRIB_ARRAY_INTEGER #VERTEX_ATTRIB_ARRAY_DIVISOR"
         ),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
     )
 
     void(
@@ -750,7 +750,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
         GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..GLfloat_p.OUT("params", "returns the requested data")
+        Check(4)..GLfloat.p.OUT("params", "returns the requested data")
     )
 
     void(
@@ -759,7 +759,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
         GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..GLdouble_p.OUT("params", "returns the requested data")
+        Check(4)..GLdouble.p.OUT("params", "returns the requested data")
     )
 
 
@@ -769,7 +769,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
         GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
         GLenum.IN("pname", "the symbolic name of the generic vertex attribute parameter to be returned", "#VERTEX_ATTRIB_ARRAY_POINTER"),
-        Check(1)..ReturnParam..void_pp.OUT("pointer", "the pointer value")
+        Check(1)..ReturnParam..void.p.p.OUT("pointer", "the pointer value")
     )
 
     // ARB_fragment_shader
@@ -821,7 +821,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "Specifies a list of color buffers to be drawn into.",
 
         AutoSize("bufs")..GLsizei.IN("n", "the number of buffers in {@code bufs}"),
-        SingleValue("buf")..const..GLenum_p.IN(
+        SingleValue("buf")..GLenum.const.p.IN(
             "bufs",
             "an array of symbolic constants specifying the buffers into which fragment colors or data values will be written",
             """

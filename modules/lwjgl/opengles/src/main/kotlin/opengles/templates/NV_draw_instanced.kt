@@ -49,7 +49,7 @@ val NV_draw_instanced = "NVDrawInstanced".nativeClassGLES("NV_draw_instanced", p
             "type",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLsizei.IN("primcount", "")
     )
 }

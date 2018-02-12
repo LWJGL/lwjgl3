@@ -61,7 +61,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
         GLenum.IN("target", "the framebuffer whose programmable sample locations are modified"),
         GLuint.IN("start", "the index of the first sample location to modify"),
         AutoSize(2, "v")..GLsizei.IN("count", "the number of sample locations to modify"),
-        const..GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
+        GLfloat.const.p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
     )
 
     void(
@@ -71,7 +71,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
         GLuint.IN("framebuffer", "the framebuffer whose programmable sample locations are modified"),
         GLuint.IN("start", "the index of the first sample location to modify"),
         AutoSize(2, "v")..GLsizei.IN("count", "the number of sample locations to modify"),
-        const..GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
+        GLfloat.const.p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
     )
 
     void(

@@ -35,7 +35,7 @@ val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = M
         "",
 
         EGLDisplay.IN("dpy", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -44,8 +44,8 @@ val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = M
 
         EGLDisplay.IN("dpy", ""),
         EGLImageKHR.IN("image", ""),
-        nullable..Check(1)..EGLint_p.OUT("name", ""),
-        nullable..Check(1)..EGLint_p.OUT("handle", ""),
-        nullable..Check(1)..EGLint_p.OUT("stride", "")
+        nullable..Check(1)..EGLint.p.OUT("name", ""),
+        nullable..Check(1)..EGLint.p.OUT("handle", ""),
+        nullable..Check(1)..EGLint.p.OUT("stride", "")
     )
 }

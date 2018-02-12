@@ -60,6 +60,6 @@ val EXT_shader_pixel_local_storage2 = "EXTShaderPixelLocalStorage2".nativeClassG
 
         GLsizei.IN("offset", ""),
         AutoSize("values")..GLsizei.IN("n", ""),
-        const..GLuint_p.IN("values", "")
+        GLuint.const.p.IN("values", "")
     )
 }

@@ -52,7 +52,7 @@ ENABLE_WARNINGS()""")*/
         size_t.IN("functionResult", "")
     )
 
-    Nonnull..const..charASCII_p(
+    Nonnull..charASCII.const.p(
         "getErrorString",
         "",
 

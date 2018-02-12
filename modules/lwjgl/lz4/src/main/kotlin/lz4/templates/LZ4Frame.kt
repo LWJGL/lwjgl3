@@ -82,7 +82,7 @@ ENABLE_WARNINGS()""")
         LZ4F_errorCode_t.IN("code", "")
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "getErrorName",
         "Return error code string; useful for debugging.",
 
@@ -108,7 +108,7 @@ ENABLE_WARNINGS()""")
         """,
 
         size_t.IN("srcSize", ""),
-        nullable..const..LZ4F_preferences_t_p.IN("preferencesPtr", "")
+        nullable..LZ4F_preferences_t.const.p.IN("preferencesPtr", "")
     )
 
     size_t(
@@ -119,11 +119,11 @@ ENABLE_WARNINGS()""")
         The {@code LZ4F_preferences_t} structure is optional: you can provide #NULL as argument. All preferences will be set to default.
         """,
 
-        void_p.OUT("dstBuffer", ""),
+        void.p.OUT("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t.IN("dstCapacity", "MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}"),
-        const..void_p.IN("srcBuffer", ""),
+        void.const.p.IN("srcBuffer", ""),
         AutoSize("srcBuffer")..size_t.IN("srcSize", ""),
-        nullable..const..LZ4F_preferences_t_p.IN("preferencesPtr", ""),
+        nullable..LZ4F_preferences_t.const.p.IN("preferencesPtr", ""),
 
         returnDoc = "number of bytes written into {@code dstBuffer} or an error code if it fails (can be tested using #isError())"
     )
@@ -142,7 +142,7 @@ ENABLE_WARNINGS()""")
         The function will provide a pointer to a fully allocated {@code LZ4F_cctx} object. Object can release its memory using #freeCompressionContext();
         """,
 
-        Check(1)..LZ4F_cctx_p.p.OUT("cctxPtr", ""),
+        Check(1)..LZ4F_cctx.p.p.OUT("cctxPtr", ""),
         unsigned.IN("version", "MUST be #VERSION. It is intended to track potential version mismatch, notably when using DLL.", "#VERSION"),
 
         returnDoc = "if {@code != zero}, there was an error during context creation."
@@ -152,17 +152,17 @@ ENABLE_WARNINGS()""")
         "freeCompressionContext",
         "",
 
-        LZ4F_cctx_p.IN("cctx", "")
+        LZ4F_cctx.p.IN("cctx", "")
     )
 
     size_t(
         "compressBegin",
         "Will write the frame header into {@code dstBuffer}.",
 
-        LZ4F_cctx_p.IN("cctx", ""),
-        void_p.OUT("dstBuffer", ""),
+        LZ4F_cctx.p.IN("cctx", ""),
+        void.p.OUT("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t.IN("dstCapacity", "must be &ge; #HEADER_SIZE_MAX bytes"),
-        nullable..const..LZ4F_preferences_t_p.IN("prefsPtr", "optional: you can provide #NULL as argument, all preferences will then be set to default"),
+        nullable..LZ4F_preferences_t.const.p.IN("prefsPtr", "optional: you can provide #NULL as argument, all preferences will then be set to default"),
 
         returnDoc = "number of bytes written into {@code dstBuffer} for the header or an error code (which can be tested using #isError())"
     )
@@ -179,7 +179,7 @@ ENABLE_WARNINGS()""")
         """,
 
         size_t.IN("srcSize", ""),
-        nullable..const..LZ4F_preferences_t_p.IN(
+        nullable..LZ4F_preferences_t.const.p.IN(
             "prefsPtr",
             "optional: when #NULL is provided, preferences will be set to cover worst case scenario"
         )
@@ -196,12 +196,12 @@ ENABLE_WARNINGS()""")
         {@code LZ4F_compressUpdate()} doesn't guarantee error recovery. When an error occurs, compression context must be freed or resized.
         """,
 
-        LZ4F_cctx_p.IN("cctx", ""),
-        void_p.OUT("dstBuffer", ""),
+        LZ4F_cctx.p.IN("cctx", ""),
+        void.p.OUT("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t.IN("dstCapacity", ""),
-        const..void_p.IN("srcBuffer", ""),
+        void.const.p.IN("srcBuffer", ""),
         AutoSize("srcBuffer")..size_t.IN("srcSize", ""),
-        nullable..const..LZ4F_compressOptions_t_p.IN("cOptPtr", "optional: #NULL can be provided, in which case all options are set to default"),
+        nullable..LZ4F_compressOptions_t.const.p.IN("cOptPtr", "optional: #NULL can be provided, in which case all options are set to default"),
 
         returnDoc =
         """
@@ -217,10 +217,10 @@ ENABLE_WARNINGS()""")
         immediately compress any data buffered within {@code cctx}.
         """,
 
-        LZ4F_cctx_p.IN("cctx", ""),
-        void_p.OUT("dstBuffer", ""),
+        LZ4F_cctx.p.IN("cctx", ""),
+        void.p.OUT("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t.IN("dstCapacity", "must be large enough to ensure the operation will be successful"),
-        nullable..const..LZ4F_compressOptions_t_p.IN("cOptPtr", "optional: it's possible to provide #NULL, all options will be set to default"),
+        nullable..LZ4F_compressOptions_t.const.p.IN("cOptPtr", "optional: it's possible to provide #NULL, all options will be set to default"),
 
         returnDoc =
         """
@@ -236,10 +236,10 @@ ENABLE_WARNINGS()""")
         the frame, with an {@code endMark} and a {@code checksum}.
         """,
 
-        LZ4F_cctx_p.IN("cctx", ""),
-        void_p.OUT("dstBuffer", ""),
+        LZ4F_cctx.p.IN("cctx", ""),
+        void.p.OUT("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t.IN("dstCapacity", ""),
-        nullable..const..LZ4F_compressOptions_t_p.IN("cOptPtr", "optional: #NULL can be provided, in which case all options will be set to default"),
+        nullable..LZ4F_compressOptions_t.const.p.IN("cOptPtr", "optional: #NULL can be provided, in which case all options will be set to default"),
 
         returnDoc =
         """
@@ -259,7 +259,7 @@ ENABLE_WARNINGS()""")
         #freeDecompressionContext().
         """,
 
-        Check(1)..LZ4F_dctx_p.p.OUT("dctxPtr", ""),
+        Check(1)..LZ4F_dctx.p.p.OUT("dctxPtr", ""),
         unsigned.IN("version", "", "#VERSION"),
 
         returnDoc = "an errorCode, which can be tested using #isError()"
@@ -271,7 +271,7 @@ ENABLE_WARNINGS()""")
         Frees an {@code LZ4F_dctx} object.
         """,
 
-        LZ4F_dctx_p.IN("dctx", ""),
+        LZ4F_dctx.p.IN("dctx", ""),
 
         returnDoc =
         """
@@ -308,10 +308,10 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        LZ4F_dctx_p.IN("dctx", ""),
+        LZ4F_dctx.p.IN("dctx", ""),
         LZ4F_frameInfo_t.p.OUT("frameInfoPtr", ""),
-        const..void_p.IN("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t_p.INOUT("srcSizePtr", ""),
+        void.const.p.IN("srcBuffer", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
 
         returnDoc = "an hint about how many srcSize bytes LZ4F_decompress() expects for next call, or an error code which can be tested using LZ4F_isError()"
     )
@@ -337,12 +337,12 @@ ENABLE_WARNINGS()""")
         After a decompression error, use #resetDecompressionContext() before re-using {@code dctx}, to return to clean state.
         """,
 
-        LZ4F_dctx_p.IN("dctx", ""),
-        void_p.OUT("dstBuffer", ""),
-        AutoSize("dstBuffer")..Check(1)..size_t_p.INOUT("dstSizePtr", ""),
-        const..void_p.IN("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t_p.INOUT("srcSizePtr", ""),
-        const..LZ4F_decompressOptions_t_p.IN("dOptPtr", ""),
+        LZ4F_dctx.p.IN("dctx", ""),
+        void.p.OUT("dstBuffer", ""),
+        AutoSize("dstBuffer")..Check(1)..size_t.p.INOUT("dstSizePtr", ""),
+        void.const.p.IN("srcBuffer", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
+        LZ4F_decompressOptions_t.const.p.IN("dOptPtr", ""),
 
         returnDoc =
         """
@@ -367,7 +367,7 @@ ENABLE_WARNINGS()""")
         This method can also be used to abruptly stop an unfinished decompression, and start a new one using the same context resources.
         """,
 
-        LZ4F_dctx_p.IN("dctx", ""),
+        LZ4F_dctx.p.IN("dctx", ""),
 
         since = "1.8.0"
     )

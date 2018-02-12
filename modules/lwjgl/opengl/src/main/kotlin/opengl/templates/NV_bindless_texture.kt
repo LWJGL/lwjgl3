@@ -214,7 +214,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 
         location,
         AutoSize("values")..GLsizei.IN("count", "the number of handles to load"),
-        const..GLuint64_p.IN("values", "a buffer from which to load the handles")
+        GLuint64.const.p.IN("values", "a buffer from which to load the handles")
     )
 
     void(

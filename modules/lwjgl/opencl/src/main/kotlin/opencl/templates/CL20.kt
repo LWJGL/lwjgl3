@@ -164,7 +164,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             device type as device type specified when context is created using #CreateContextFromType().
             """
         ),
-        nullable..NullTerminated..const..cl_command_queue_properties_p.IN(
+        nullable..NullTerminated..cl_command_queue_properties.const.p.IN(
             "properties",
             """
             a list of properties for the command-queue and their corresponding values. Each property name is immediately followed by the corresponding desired
@@ -204,7 +204,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         ),
         cl_uint.IN("pipe_packet_size", "the size in bytes of a pipe packet"),
         cl_uint.IN("pipe_max_packets", "the pipe capacity by specifying the maximum number of packets the pipe can hold"),
-        nullable..NullTerminated..const..cl_pipe_properties_p.IN(
+        nullable..NullTerminated..cl_pipe_properties.const.p.IN(
             "properties",
             """
             a list of properties for the pipe and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -239,7 +239,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         cl_mem.IN("pipe", "the pipe object being queried"),
         cl_pipe_info.IN("param_name", "the information to query"),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT)..nullable..void_p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT)..nullable..void.p.IN("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -257,7 +257,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         """
     )
 
-    void_p(
+    void.p(
         "SVMAlloc",
         """
         Allocates a shared virtual memory buffer (referred to as a SVM buffer) that can be shared by the host and all devices in an OpenCL context that support
@@ -335,7 +335,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         """,
 
         cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
-        Unsafe..void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a #NULL pointer is passed in {@code svm_pointer}, no action occurs.")
+        Unsafe..void.p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a #NULL pointer is passed in {@code svm_pointer}, no action occurs.")
     )
 
     cl_int(
@@ -344,7 +344,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
         cl_command_queue.IN("command_queue", "a valid host command-queue"),
         AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
-        void_pp.IN(
+        void.p.p.IN(
             "svm_pointers",
             """
             the shared virtual memory pointers to be freed. Each pointer in {@code svm_pointers} that was allocated using #SVMAlloc() must have been allocated
@@ -406,8 +406,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             {@code dst_ptr} points to can be used by the application.
             """
         ),
-        void_p.IN("dst_ptr", "the pointer to a memory region where data is copied to"),
-        const..void_p.IN("src_ptr", "the pointer to a memory region where data is copied from"),
+        void.p.IN("dst_ptr", "the pointer to a memory region where data is copied to"),
+        void.const.p.IN("src_ptr", "the pointer to a memory region where data is copied from"),
         AutoSize("src_ptr", "dst_ptr")..size_t.IN("size", "the size in bytes of data being copied"),
         NEWL,
         EWL,
@@ -435,14 +435,14 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "Enqueues a command to fill a region in memory with a pattern of a given pattern size.",
 
         cl_command_queue.IN("command_queue", "the host command-queue in which the fill command will be queued"),
-        void_p.IN(
+        void.p.IN(
             "svm_ptr",
             """
             a pointer to a memory region that will be filled with pattern. It must be aligned to {@code pattern_size} bytes. If {@code svm_ptr} is allocated
             using #SVMAlloc() then it must be allocated from the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
             """
         ),
-        const..void_p.IN(
+        void.const.p.IN(
             "pattern",
             """
             a pointer to the data pattern of size {@code pattern_size} in bytes. {@code pattern} will be used to fill a region in buffer starting at
@@ -501,7 +501,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             """
         ),
         cl_map_flags.IN("map_flags", "a bit-field"),
-        void_p.IN(
+        void.p.IN(
             "svm_ptr",
             """
             a pointer to a memory region and {@code size} in bytes that will be updated by the host. If {@code svm_ptr} is allocated using #SVMAlloc() then it
@@ -537,7 +537,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         """,
 
         cl_command_queue.IN("command_queue", "a valid host command-queue"),
-        Unsafe..void_p.IN(
+        Unsafe..void.p.IN(
             "svm_ptr",
             """
             a pointer that was specified in a previous call to #EnqueueSVMMap(). If {@code svm_ptr} is allocated using #SVMAlloc() then it must be allocated from
@@ -574,7 +574,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             {@code n} is the total number of arguments declared by a kernel.
             """
         ),
-        Unsafe..const..void_p.IN(
+        Unsafe..void.const.p.IN(
             "arg_value",
             """
             the SVM pointer that should be used as the argument value for argument specified by {@code arg_index}. The SVM pointer specified is the value used
@@ -636,7 +636,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         cl_kernel.IN("kernel", "the kernel object being queried"),
         cl_kernel_exec_info.IN("param_name", "the information to be passed to {@code kernel}", cl_kernel_exec_infos),
         AutoSize("param_value")..size_t.IN("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
-        MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)..const..void_p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
+        MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)..void.const.p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
 
         returnDoc =
         """
@@ -659,7 +659,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "Creates a sampler object.",
 
         cl_context.IN("context", "a valid OpenCL context"),
-        nullable..NullTerminated..const..cl_sampler_properties_p.IN(
+        nullable..NullTerminated..cl_sampler_properties.const.p.IN(
             "sampler_properties",
             """
             a list of sampler property names and their corresponding values. Each sampler property name is immediately followed by the corresponding desired

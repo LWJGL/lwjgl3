@@ -71,7 +71,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         )}
         """,
 
-        nullable..const..charASCII_p.IN("path", "path to the image to open"),
+        nullable..charASCII.const.p.IN("path", "path to the image to open"),
         int.IN(
             "mode",
             """
@@ -100,7 +100,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         )
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "dlerror",
         """
         Provides diagnostic information corresponding to problems with calls to #dlopen(), #dlsym(), and #dlclose() in the same thread.
@@ -143,7 +143,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
             closed with a call to #dlclose(). These are the possible special-handle values: #RTLD_DEFAULT, and #RTLD_NEXT.
             """
         ),
-        const..charASCII_p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
+        charASCII.const.p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
     )
 
     int(

@@ -153,8 +153,8 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         """,
 
         VkDevice.IN("device", "the logical device that creates the descriptor update template."),
-        const..VkDescriptorUpdateTemplateCreateInfoKHR.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorUpdateTemplateCreateInfoKHR structure specifying the set of descriptors to update with a single call to #CmdPushDescriptorSetWithTemplateKHR() or #UpdateDescriptorSetWithTemplateKHR()."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDescriptorUpdateTemplateCreateInfoKHR.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorUpdateTemplateCreateInfoKHR structure specifying the set of descriptors to update with a single call to #CmdPushDescriptorSetWithTemplateKHR() or #UpdateDescriptorSetWithTemplateKHR()."),
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDescriptorUpdateTemplateKHR.p.OUT("pDescriptorUpdateTemplate", "points to a {@code VkDescriptorUpdateTemplateKHR} handle in which the resulting descriptor update template object is returned.")
     )
 
@@ -197,7 +197,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         VkDevice.IN("device", "the logical device that has been used to create the descriptor update template"),
         VkDescriptorUpdateTemplateKHR.IN("descriptorUpdateTemplate", "the descriptor update template to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
@@ -313,7 +313,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         VkDevice.IN("device", "the logical device that updates the descriptor sets."),
         VkDescriptorSet.IN("descriptorSet", "the descriptor set to update"),
         VkDescriptorUpdateTemplateKHR.IN("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplateKHR} which specifies the update mapping between {@code pData} and the descriptor set to update."),
-        const..opaque_p.IN("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
+        opaque_const_p.IN("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
     )
 
     void(
@@ -418,6 +418,6 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         VkDescriptorUpdateTemplateKHR.IN("descriptorUpdateTemplate", "A descriptor update template which defines how to interpret the descriptor information in pData."),
         VkPipelineLayout.IN("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle."),
         uint32_t.IN("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle."),
-        const..opaque_p.IN("pData", "Points to memory which contains the descriptors for the templated update.")
+        opaque_const_p.IN("pData", "Points to memory which contains the descriptors for the templated update.")
     )
 }

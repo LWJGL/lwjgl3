@@ -107,8 +107,8 @@ val write_cb = callback(
     Module.JEMALLOC, void, "MallocMessageCallback",
     "Will be called by the #malloc_usable_size() method.",
 
-    void_p.IN("cbopaque", "the opaque pointer passed to #malloc_usable_size()"),
-    NullTerminated..const..charASCII_p.IN("s", "the message")
+    void.p.IN("cbopaque", "the opaque pointer passed to #malloc_usable_size()"),
+    NullTerminated..charASCII.const.p.IN("s", "the message")
 ) {
     documentation = "Instances of this interface may be passed to the #malloc_usable_size() method."
     additionalCode = """
@@ -127,10 +127,10 @@ val write_cb = callback(
     """
 }
 
-val extent_hooks_t_p = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t").p
+private val extent_hooks_t_p = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t").p
 
 val extent_alloc_t = "extent_alloc_t".callback(
-    Module.JEMALLOC, void_p, "ExtentAlloc",
+    Module.JEMALLOC, void.p, "ExtentAlloc",
     """
     Extent allocation hook.
 
@@ -146,11 +146,11 @@ val extent_alloc_t = "extent_alloc_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    nullable..void_p.IN("new_addr", ""),
+    nullable..void.p.IN("new_addr", ""),
     size_t.IN("size", ""),
     size_t.IN("alignment", ""),
-    Check(1)..bool_p.INOUT("zero", ""),
-    Check(1)..bool_p.INOUT("commit", ""),
+    Check(1)..bool.p.INOUT("zero", ""),
+    Check(1)..bool.p.INOUT("commit", ""),
     unsigned_int.IN("arena_ind", "")
 ) {
     documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
@@ -168,7 +168,7 @@ val extent_dalloc_t = "extent_dalloc_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr", ""),
+    void.p.IN("addr", ""),
     AutoSize("addr")..size_t.IN("size", ""),
     bool.IN("committed", ""),
     unsigned_int.IN("arena_ind", "")
@@ -187,7 +187,7 @@ val extent_destroy_t = "extent_destroy_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr", ""),
+    void.p.IN("addr", ""),
     AutoSize("addr")..size_t.IN("size", ""),
     bool.IN("committed", ""),
     unsigned_int.IN("arena_ind", "")
@@ -208,7 +208,7 @@ val extent_commit_t = "extent_commit_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr", ""),
+    void.p.IN("addr", ""),
     AutoSize("addr")..size_t.IN("size", ""),
     size_t.IN("offset", ""),
     size_t.IN("length", ""),
@@ -229,7 +229,7 @@ val extent_decommit_t = "extent_decommit_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr", ""),
+    void.p.IN("addr", ""),
     AutoSize("addr")..size_t.IN("size", ""),
     size_t.IN("offset", ""),
     size_t.IN("length", ""),
@@ -251,7 +251,7 @@ val extent_purge_t = "extent_purge_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr", ""),
+    void.p.IN("addr", ""),
     AutoSize("addr")..size_t.IN("size", ""),
     size_t.IN("offset", ""),
     size_t.IN("length", ""),
@@ -272,7 +272,7 @@ val extent_split_t = "extent_split_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr", ""),
+    void.p.IN("addr", ""),
     AutoSize("addr")..size_t.IN("size", ""),
     size_t.IN("size_a", ""),
     size_t.IN("size_b", ""),
@@ -294,9 +294,9 @@ val extent_merge_t = "extent_merge_t".callback(
     """,
 
     extent_hooks_t_p.IN("extent_hooks", ""),
-    void_p.IN("addr_a", ""),
+    void.p.IN("addr_a", ""),
     AutoSize("addr_a")..size_t.IN("size_a", ""),
-    void_p.IN("addr_b", ""),
+    void.p.IN("addr_b", ""),
     AutoSize("addr_b")..size_t.IN("size_b", ""),
     bool.IN("committed", ""),
     unsigned_int.IN("arena_ind", "")
@@ -324,4 +324,4 @@ val extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent
     nullable..extent_purge_t.member("purge_forced", "the extent forced purge hook")
     nullable..extent_split_t.member("split", "the extent split hook")
     nullable..extent_merge_t.member("merge", "the extent merge hook")
-}.p
+}

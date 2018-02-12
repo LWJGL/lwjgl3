@@ -160,7 +160,7 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
         """,
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the fence capabilities."),
-        const..VkPhysicalDeviceExternalFenceInfoKHR.p.IN("pExternalFenceInfo", "points to an instance of the ##VkPhysicalDeviceExternalFenceInfoKHR structure, describing the parameters that would be consumed by #CreateFence()."),
+        VkPhysicalDeviceExternalFenceInfoKHR.const.p.IN("pExternalFenceInfo", "points to an instance of the ##VkPhysicalDeviceExternalFenceInfoKHR structure, describing the parameters that would be consumed by #CreateFence()."),
         VkExternalFencePropertiesKHR.p.OUT("pExternalFenceProperties", "points to an instance of the ##VkExternalFencePropertiesKHR structure in which capabilities are returned.")
     )
 }

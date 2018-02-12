@@ -821,13 +821,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        nullable..Check(1)..int_p.OUT("major", "where to store the major version number, or #NULL"),
-        nullable..Check(1)..int_p.OUT("minor", "where to store the minor version number, or #NULL"),
-        nullable..Check(1)..int_p.OUT("rev", "where to store the revision number, or #NULL"),
+        nullable..Check(1)..int.p.OUT("major", "where to store the major version number, or #NULL"),
+        nullable..Check(1)..int.p.OUT("minor", "where to store the minor version number, or #NULL"),
+        nullable..Check(1)..int.p.OUT("rev", "where to store the revision number, or #NULL"),
         since = "version 1.0"
     )
 
-    Nonnull..const..charASCII_p(
+    Nonnull..charASCII.const.p(
         "GetVersionString",
         """
         Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
@@ -865,7 +865,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        Check("1")..nullable..const..charUTF8_pp.OUT("description", "where to store the error description pointer, or #NULL"),
+        Check("1")..nullable..charUTF8.const.p.p.OUT("description", "where to store the error description pointer, or #NULL"),
 
         returnDoc = "the last error code for the calling thread, or #NO_ERROR (zero)",
         since = "version 3.3"
@@ -898,7 +898,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.0"
     )
 
-    GLFWmonitor_p.p(
+    GLFWmonitor.p.p(
         "GetMonitors",
         """
         Returns an array of handles for all currently connected monitors. The primary monitor is always first in the returned array. If no monitors were found,
@@ -910,13 +910,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        AutoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
+        AutoSizeResult..int.p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
         returnDoc = "an array of monitor handlers, or #NULL if no monitors were found or if an error occurred",
         since = "version 3.0"
     )
 
-    GLFWmonitor_p(
+    GLFWmonitor.p(
         "GetPrimaryMonitor",
         """
         Returns the primary monitor. This is usually the monitor where elements like the task bar or global menu bar are located.
@@ -940,9 +940,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
-        nullable..Check(1)..int_p.OUT("xpos", "where to store the monitor x-coordinate, or #NULL"),
-        nullable..Check(1)..int_p.OUT("ypos", "where to store the monitor y-coordinate, or #NULL"),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
+        nullable..Check(1)..int.p.OUT("xpos", "where to store the monitor x-coordinate, or #NULL"),
+        nullable..Check(1)..int.p.OUT("ypos", "where to store the monitor y-coordinate, or #NULL"),
         since = "version 3.0"
     )
 
@@ -965,9 +965,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
-        nullable..Check(1)..int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or #NULL"),
-        nullable..Check(1)..int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or #NULL"),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
+        nullable..Check(1)..int.p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or #NULL"),
+        nullable..Check(1)..int.p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or #NULL"),
         since = "version 3.0"
     )
 
@@ -986,14 +986,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
-        nullable..Check(1)..float_p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
-        nullable..Check(1)..float_p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
+        nullable..Check(1)..float.p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
+        nullable..Check(1)..float.p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
 
         since = "version 3.3"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetMonitorName",
         """
         Returns a human-readable name, encoded as UTF-8, of the specified monitor. The name typically reflects the make and model of the monitor and is not
@@ -1005,7 +1005,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
 
         returnDoc = "the UTF-8 encoded name of the monitor, or #NULL if an error occurred",
         since = "version 3.0"
@@ -1024,7 +1024,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor whose pointer to set"),
+        GLFWmonitor.p.IN("monitor", "the monitor whose pointer to set"),
         opaque_p.IN("pointer", "the new value"),
 
         since = "version 3.3"
@@ -1042,7 +1042,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor whose pointer to return"),
+        GLFWmonitor.p.IN("monitor", "the monitor whose pointer to return"),
 
         since = "version 3.3"
     )
@@ -1062,7 +1062,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.0"
     )
 
-    const..GLFWvidmode_p(
+    GLFWvidmode.const.p(
         "GetVideoModes",
         """
         Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the
@@ -1074,14 +1074,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
-        AutoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
+        AutoSizeResult..int.p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
         returnDoc = "an array of video modes, or #NULL if an error occurred",
         since = "version 1.0"
     )
 
-    const..GLFWvidmode_p(
+    GLFWvidmode.const.p(
         "GetVideoMode",
         """
         Returns the current video mode of the specified monitor. If you have created a full screen window for that monitor, the return value will depend on
@@ -1093,7 +1093,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
 
         returnDoc = "the current mode of the monitor, or #NULL if an error occurred",
         since = "version 3.0"
@@ -1117,12 +1117,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor whose gamma ramp to set"),
+        GLFWmonitor.p.IN("monitor", "the monitor whose gamma ramp to set"),
         float.IN("gamma", "the desired exponent"),
         since = "version 3.0"
     )
 
-    const..GLFWgammaramp_p(
+    GLFWgammaramp.const.p(
         "GetGammaRamp",
         """
         Returns the current gamma ramp of the specified monitor.
@@ -1140,7 +1140,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor to query"),
+        GLFWmonitor.p.IN("monitor", "the monitor to query"),
 
         returnDoc = "the current gamma ramp, or #NULL if an error occurred",
         since = "version 3.0"
@@ -1166,8 +1166,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        GLFWmonitor_p.IN("monitor", "the monitor whose gamma ramp to set"),
-        const..GLFWgammaramp_p.IN("ramp", "the gamma ramp to use"),
+        GLFWmonitor.p.IN("monitor", "the monitor whose gamma ramp to set"),
+        GLFWgammaramp.const.p.IN("ramp", "the gamma ramp to use"),
         since = "version 3.0"
     )
 
@@ -1288,14 +1288,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         int.IN("hint", "the window hint to set", "#COCOA_FRAME_NAME #X11_CLASS_NAME #X11_INSTANCE_NAME"),
-        const..charUTF8_p.IN("value", "the new value of the window hint. The specified string is copied before this function returns."),
+        charUTF8.const.p.IN("value", "the new value of the window hint. The specified string is copied before this function returns."),
 
         since = "version 3.3"
     )
 
     Code(
         javaInit = statement("$t${t}EventLoop.OffScreen.check();")
-    )..GLFWwindow_p(
+    )..GLFWwindow.p(
         "CreateWindow",
         """
         Creates a window and its associated OpenGL or OpenGL ES context. Most of the options controlling how the window and its context should be created are
@@ -1389,9 +1389,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         int.IN("width", "the desired width, in screen coordinates, of the window"),
         int.IN("height", "the desired height, in screen coordinates, of the window"),
-        const..charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
-        nullable..GLFWmonitor_p.IN("monitor", "the monitor to use for fullscreen mode, or #NULL for windowed mode"),
-        nullable..GLFWwindow_p.IN("share", " the window whose context to share resources with, or #NULL to not share resources"),
+        charUTF8.const.p.IN("title", "initial, UTF-8 encoded window title"),
+        nullable..GLFWmonitor.p.IN("monitor", "the monitor to use for fullscreen mode, or #NULL for windowed mode"),
+        nullable..GLFWwindow.p.IN("share", " the window whose context to share resources with, or #NULL to not share resources"),
 
         returnDoc = "the handle of the created window, or #NULL if an error occurred",
         since = "version 1.0"
@@ -1411,7 +1411,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        nullable..GLFWwindow_p.IN("window", "the window to destroy"),
+        nullable..GLFWwindow.p.IN("window", "the window to destroy"),
         since = "version 1.0"
     )
 
@@ -1423,7 +1423,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may be called from any thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
+        GLFWwindow.p.IN("window", "the window to query"),
 
         returnDoc = "the value of the close flag",
         since = "version 3.0"
@@ -1438,7 +1438,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose flag to change"),
+        GLFWwindow.p.IN("window", "the window whose flag to change"),
         intb.IN("value", "the new value"),
 
         since = "version 3.0"
@@ -1454,8 +1454,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         <b>macOS</b>: The window title will not be updated until the next time you process events.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose title to change"),
-        const..charUTF8_p.IN("title", "the UTF-8 encoded window title"),
+        GLFWwindow.p.IN("window", "the window whose title to change"),
+        charUTF8.const.p.IN("title", "the UTF-8 encoded window title"),
 
         since = "version 1.0"
     )
@@ -1491,9 +1491,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window whose icon to set"),
+        GLFWwindow.p.IN("window", "the window whose icon to set"),
         AutoSize("images")..int.IN("count", "the number of images in the specified array, or zero to revert to the default window icon"),
-        nullable..const..GLFWimage_p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
+        nullable..GLFWimage.const.p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
 
         since = "version 3.2"
     )
@@ -1512,9 +1512,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
-        nullable..Check(1)..int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or #NULL"),
-        nullable..Check(1)..int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or #NULL"),
+        GLFWwindow.p.IN("window", "the window to query"),
+        nullable..Check(1)..int.p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or #NULL"),
+        nullable..Check(1)..int.p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or #NULL"),
 
         since = "version 3.0"
     )
@@ -1537,7 +1537,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
+        GLFWwindow.p.IN("window", "the window to query"),
         int.IN("xpos", "the x-coordinate of the upper-left corner of the client area"),
         int.IN("ypos", "the y-coordinate of the upper-left corner of the client area"),
 
@@ -1555,9 +1555,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose size to retrieve"),
-        nullable..Check(1)..int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or #NULL"),
-        nullable..Check(1)..int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or #NULL"),
+        GLFWwindow.p.IN("window", "the window whose size to retrieve"),
+        nullable..Check(1)..int.p.OUT("width", "where to store the width, in screen coordinates, of the client area, or #NULL"),
+        nullable..Check(1)..int.p.OUT("height", "where to store the height, in screen coordinates, of the client area, or #NULL"),
 
         since = "version 1.0"
     )
@@ -1579,7 +1579,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to set limits for"),
+        GLFWwindow.p.IN("window", "the window to set limits for"),
         int.IN("minwidth", "the minimum width, in screen coordinates, of the client area, or #DONT_CARE"),
         int.IN("minheight", "the minimum height, in screen coordinates, of the client area, or #DONT_CARE"),
         int.IN("maxwidth", "the maximum width, in screen coordinates, of the client area, or #DONT_CARE"),
@@ -1608,7 +1608,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to set limits for"),
+        GLFWwindow.p.IN("window", "the window to set limits for"),
         int.IN("numer", "the numerator of the desired aspect ratio, or #DONT_CARE"),
         int.IN("denom", "the denominator of the desired aspect ratio, or #DONT_CARE"),
 
@@ -1634,7 +1634,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to resize"),
+        GLFWwindow.p.IN("window", "the window to resize"),
         int.IN("width", "the desired width, in screen coordinates, of the window client area"),
         int.IN("height", "the desired height, in screen coordinates, of the window client area"),
 
@@ -1652,9 +1652,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose framebuffer to query"),
-        nullable..Check(1)..int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or #NULL"),
-        nullable..Check(1)..int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or #NULL"),
+        GLFWwindow.p.IN("window", "the window whose framebuffer to query"),
+        nullable..Check(1)..int.p.OUT("width", "where to store the width, in pixels, of the framebuffer, or #NULL"),
+        nullable..Check(1)..int.p.OUT("height", "where to store the height, in pixels, of the framebuffer, or #NULL"),
 
         since = "version 3.0"
     )
@@ -1678,11 +1678,11 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window whose frame size to query"),
-        Check(1)..nullable..int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or #NULL"),
-        Check(1)..nullable..int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or #NULL"),
-        Check(1)..nullable..int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or #NULL"),
-        Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or #NULL"),
+        GLFWwindow.p.IN("window", "the window whose frame size to query"),
+        Check(1)..nullable..int.p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or #NULL"),
 
         since = "version 3.1"
     )
@@ -1700,9 +1700,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         be on.
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
-        nullable..Check(1)..float_p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
-        nullable..Check(1)..float_p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+        GLFWwindow.p.IN("window", "the window to query"),
+        nullable..Check(1)..float.p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
+        nullable..Check(1)..float.p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
 
         since = "version 3.3"
     )
@@ -1722,7 +1722,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
+        GLFWwindow.p.IN("window", "the window to query"),
 
         returnDoc = "the opacity value of the specified window",
         since = "version 3.3"
@@ -1744,7 +1744,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to set the opacity for"),
+        GLFWwindow.p.IN("window", "the window to set the opacity for"),
         float.IN("opacity", "the desired opacity of the specified window"),
 
         since = "version 3.3"
@@ -1767,7 +1767,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to iconify"),
+        GLFWwindow.p.IN("window", "the window to iconify"),
 
         since = "version 2.1"
     )
@@ -1782,7 +1782,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to restore"),
+        GLFWwindow.p.IN("window", "the window to restore"),
 
         since = "version 2.1"
     )
@@ -1797,7 +1797,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to maximize"),
+        GLFWwindow.p.IN("window", "the window to maximize"),
 
         since = "version 3.2"
     )
@@ -1812,7 +1812,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to make visible"),
+        GLFWwindow.p.IN("window", "the window to make visible"),
 
         since = "version 3.0"
     )
@@ -1825,7 +1825,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to hide"),
+        GLFWwindow.p.IN("window", "the window to hide"),
 
         since = "version 3.0"
     )
@@ -1849,7 +1849,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window to give input focus"),
+        GLFWwindow.p.IN("window", "the window to give input focus"),
 
         since = "version 3.2"
     )
@@ -1870,12 +1870,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        GLFWwindow_p.IN("window", "the window to request attention to"),
+        GLFWwindow.p.IN("window", "the window to request attention to"),
 
         since = "version 3.3"
     )
 
-    GLFWmonitor_p(
+    GLFWmonitor.p(
         "GetWindowMonitor",
         """
         Returns the handle of the monitor that the specified window is in full screen on.
@@ -1883,7 +1883,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
+        GLFWwindow.p.IN("window", "the window to query"),
 
         returnDoc = "the monitor, or #NULL if the window is in windowed mode or an error occurred",
         since = "version 3.0"
@@ -1915,8 +1915,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window whose monitor, size or video mode to set"),
-        nullable..GLFWmonitor_p.IN("monitor", "the desired monitor, or #NULL to set windowed mode"),
+        GLFWwindow.p.IN("window", "the window whose monitor, size or video mode to set"),
+        nullable..GLFWmonitor.p.IN("monitor", "the desired monitor, or #NULL to set windowed mode"),
         int.IN("xpos", "the desired x-coordinate of the upper-left corner of the client area"),
         int.IN("ypos", "the desired y-coordinate of the upper-left corner of the client area"),
         int.IN("width", "the desired with, in screen coordinates, of the client area or video mode"),
@@ -1939,7 +1939,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         function should not fail as long as it is passed valid arguments and the library has been initialized.
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
+        GLFWwindow.p.IN("window", "the window to query"),
         int.IN(
             "attrib",
             "the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return",
@@ -1958,7 +1958,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to set the attribute for"),
+        GLFWwindow.p.IN("window", "the window to set the attribute for"),
         int.IN(
             "attrib",
             """
@@ -1985,7 +1985,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose pointer to set"),
+        GLFWwindow.p.IN("window", "the window whose pointer to set"),
         nullable..opaque_p.IN("pointer", "the new value"),
 
         since = "version 3.0"
@@ -1999,7 +1999,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose pointer to return"),
+        GLFWwindow.p.IN("window", "the window whose pointer to return"),
 
         since = "version 3.0"
     )
@@ -2010,7 +2010,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ${url("http://www.glfw.org/docs/latest/intro.html\\#intro_init", "initialized")}
         """
 
-    val CALLBACK_WINDOW = GLFWwindow_p.IN("window", "the window whose callback to set")
+    val CALLBACK_WINDOW = GLFWwindow.p.IN("window", "the window whose callback to set")
 
     GLFWwindowposfun(
         "SetWindowPosCallback",
@@ -2294,7 +2294,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to query"),
+        GLFWwindow.p.IN("window", "the window to query"),
         int.IN("mode", "the input mode whose value to return", InputModes),
 
         returnDoc = "the input mode value",
@@ -2332,14 +2332,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose input mode to set"),
+        GLFWwindow.p.IN("window", "the window whose input mode to set"),
         int.IN("mode", "the input mode to set", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS"),
         int.IN("value", "the new value of the specified input mode"),
 
         since = "GFLW 3.0"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetKeyName",
         """
         Returns the layout-specific name of the specified printable key.
@@ -2434,7 +2434,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        GLFWwindow_p.IN("window", "the desired window"),
+        GLFWwindow.p.IN("window", "the desired window"),
         int.IN("key", "the desired keyboard key"),
 
         returnDoc = "one of #PRESS or #RELEASE",
@@ -2453,7 +2453,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the desired window"),
+        GLFWwindow.p.IN("window", "the desired window"),
         int.IN("button", "the desired mouse button"),
 
         returnDoc = "one of #PRESS or #RELEASE",
@@ -2476,9 +2476,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the desired window"),
-        nullable..Check(1)..double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or #NULL"),
-        nullable..Check(1)..double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or #NULL."),
+        GLFWwindow.p.IN("window", "the desired window"),
+        nullable..Check(1)..double.p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or #NULL"),
+        nullable..Check(1)..double.p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or #NULL."),
 
         since = "version 1.0"
     )
@@ -2501,7 +2501,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the desired window"),
+        GLFWwindow.p.IN("window", "the desired window"),
         double.IN("xpos", "the desired x-coordinate, relative to the left edge of the client area"),
         double.IN("ypos", "the desired y-coordinate, relative to the top edge of the client area"),
 
@@ -2526,7 +2526,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        const..GLFWimage_p.IN("image", "the desired cursor image"),
+        GLFWimage.const.p.IN("image", "the desired cursor image"),
         int.IN("xhot", "the desired x-coordinate, in pixels, of the cursor hotspot"),
         int.IN("yhot", "the desired y-coordinate, in pixels, of the cursor hotspot"),
 
@@ -2578,7 +2578,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window to set the system cursor for"),
+        GLFWwindow.p.IN("window", "the window to set the system cursor for"),
         nullable..GLFWcursor.IN("cursor", "the cursor to set, or #NULL to switch back to the default arrow cursor"),
 
         since = "version 3.1"
@@ -2604,7 +2604,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWkeyfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2626,7 +2626,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWcharfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2649,7 +2649,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Deprecared: scheduled for removal in version 4.0.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWcharmodsfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2668,7 +2668,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWmousebuttonfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2684,7 +2684,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWcursorposfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2699,7 +2699,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWcursorenterfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2716,7 +2716,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWscrollfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2738,7 +2738,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         )}
         """,
 
-        GLFWwindow_p.IN("window", "the window whose callback to set"),
+        GLFWwindow.p.IN("window", "the window whose callback to set"),
         nullable..GLFWdropfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
         returnDoc = "the previously set callback, or #NULL if no callback was set",
@@ -2759,7 +2759,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.0"
     )
 
-    const..float_p(
+    float.const.p(
         "GetJoystickAxes",
         """
         Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
@@ -2774,7 +2774,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         int.IN("jid", "the joystick to query"),
-        AutoSizeResult..int_p.OUT(
+        AutoSizeResult..int.p.OUT(
             "count",
             "where to store the number of axis values in the returned array. This is set to zero if the joystick is not present or an error occurred."
         ),
@@ -2783,7 +2783,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 2.2"
     )
 
-    const..unsigned_char_p(
+    unsigned_char.const.p(
         "GetJoystickButtons",
         """
         Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
@@ -2802,7 +2802,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         int.IN("jid", "the joystick to query"),
-        AutoSizeResult..int_p.OUT(
+        AutoSizeResult..int.p.OUT(
             "count",
             "where to store the number of button states in the returned array. This is set to zero if the joystick is not present or an error occurred."
         ),
@@ -2811,7 +2811,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 2.2"
     )
 
-    const..unsigned_char_p(
+    unsigned_char.const.p(
         "GetJoystickHats",
         """
         Returns the state of all hats of the specified joystick.
@@ -2850,7 +2850,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """,
 
         int.IN("jid", "the joystick to query"),
-        AutoSizeResult..int_p.OUT(
+        AutoSizeResult..int.p.OUT(
             "count",
             "where to store the number of hat states in the returned array. This is set to zero if the joystick is not present or an error occurred."
         ),
@@ -2859,7 +2859,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         since = "version 3.3"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetJoystickName",
         """
         Returns the name, encoded as UTF-8, of the specified joystick.
@@ -2879,7 +2879,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         since = "version 3.0"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetJoystickGUID",
         """
         Returns the SDL compatible GUID, as a UTF-8 encoded hexadecimal string, of the specified joystick.
@@ -2995,13 +2995,13 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function must only be called from the main thread.
         """,
 
-        const..charASCII_p.IN("string", "the string containing the gamepad mappings"),
+        charASCII.const.p.IN("string", "the string containing the gamepad mappings"),
 
         returnDoc = "{@code true}, or {@code false} if an error occurred",
         since = "version 3.3"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetGamepadName",
         """
         Returns the human-readable name of the gamepad from the gamepad mapping assigned to the specified joystick.
@@ -3036,7 +3036,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """,
 
         int.IN("jid", "the joystick to query"),
-        GLFWgamepadstate_p.OUT("state", "the gamepad input state of the joystick"),
+        GLFWgamepadstate.p.OUT("state", "the gamepad input state of the joystick"),
 
         returnDoc = "{@code true} if successful, or {@code false} if no joystick is connected, it has no gamepad mapping or an error occurred",
         since = "version 3.3"
@@ -3056,13 +3056,13 @@ if (hats[2] & GLFW_HAT_RIGHT)
         )}
         """,
 
-        nullable..GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
-        const..charUTF8_p.IN("string", "a UTF-8 encoded string"),
+        nullable..GLFWwindow.p.IN("window", "deprecated, any valid window or #NULL."),
+        charUTF8.const.p.IN("string", "a UTF-8 encoded string"),
 
         since = "version 3.0"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetClipboardString",
         """
         Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string. If the clipboard is empty or if its contents
@@ -3079,7 +3079,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ))}
         """,
 
-        nullable..GLFWwindow_p.IN("window", "deprecated, any valid window or #NULL."),
+        nullable..GLFWwindow.p.IN("window", "deprecated, any valid window or #NULL."),
 
         returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or #NULL if an error occurred",
         since = "version 3.0"
@@ -3165,12 +3165,12 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function may be called from any thread.
         """,
 
-        nullable..GLFWwindow_p.IN("window", "the window whose context to make current, or #NULL to detach the current context"),
+        nullable..GLFWwindow.p.IN("window", "the window whose context to make current, or #NULL to detach the current context"),
 
         since = "version 3.0"
     )
 
-    GLFWwindow_p(
+    GLFWwindow.p(
         "GetCurrentContext",
         """
         Returns the window whose OpenGL or OpenGL ES context is current on the calling thread.
@@ -3197,7 +3197,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function may be called from any thread.
         """,
 
-        GLFWwindow_p.IN("window", "the window whose buffers to swap"),
+        GLFWwindow.p.IN("window", "the window whose buffers to swap"),
 
         since = "version 1.0"
     )
@@ -3254,7 +3254,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         This function may be called from any thread.
         """,
 
-        const..charASCII_p.IN("extension", "the ASCII encoded name of the extension"),
+        charASCII.const.p.IN("extension", "the ASCII encoded name of the extension"),
 
         returnDoc = "#TRUE if the extension is available, or #FALSE otherwise",
 
@@ -3285,7 +3285,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ))}
         """,
 
-        const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
+        charASCII.const.p.IN("procname", "the ASCII encoded name of the function"),
 
         returnDoc = "the address of the function, or #NULL if an error occurred",
         since = "version 1.0"

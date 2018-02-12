@@ -94,7 +94,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         GLXFBConfig.IN("config", "the {@code GLXFBConfig}"),
         unsigned_int.IN("width", "the pbuffer width"),
         unsigned_int.IN("height", "the pbuffer height"),
-        nullable..NullTerminated..int_p.IN("attrib_list", "an optional null-terminated list of attributes")
+        nullable..NullTerminated..int.p.IN("attrib_list", "an optional null-terminated list of attributes")
     )
 
     void(
@@ -112,7 +112,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         DISPLAY,
         GLXPbuffer.IN("pbuf", "the pbuffer being queried"),
         int.IN("attribute", "the attribute to query"),
-        Check(1)..unsigned_int_p.OUT("value", "returns the attribute value")
+        Check(1)..unsigned_int.p.OUT("value", "returns the attribute value")
     )
 
     void(
@@ -130,7 +130,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 
         DISPLAY,
         GLXDrawable.IN("drawable", "the GLXDrawable"),
-        Check(1)..unsigned_long_p.OUT("mask", "returns the selection mask")
+        Check(1)..unsigned_long.p.OUT("mask", "returns the selection mask")
     )
 
 }

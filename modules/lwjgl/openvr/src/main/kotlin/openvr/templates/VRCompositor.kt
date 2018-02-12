@@ -98,8 +98,8 @@ typedef struct HmdColor_t
         """,
 
         EVREye.IN("eEye", "", "EVREye_\\w+"),
-        const..Texture_t.p.IN("pTexture", ""),
-        nullable..const..VRTextureBounds_t.p.IN("pBounds", ""),
+        Texture_t.const.p.IN("pTexture", ""),
+        nullable..VRTextureBounds_t.const.p.IN("pBounds", ""),
         EVRSubmitFlags.IN("nSubmitFlags", "", "EVRSubmitFlags_\\w+"),
 
         returnDoc =
@@ -323,7 +323,7 @@ typedef struct HmdColor_t
 
         EVREye.IN("eEye", ""),
         opaque_p.IN("pD3D11DeviceOrResource", ""),
-        Check(1)..void_pp.OUT("ppD3D11ShaderResourceView", "")
+        Check(1)..void.p.p.OUT("ppD3D11ShaderResourceView", "")
     )
 
     void(
@@ -371,7 +371,7 @@ typedef struct HmdColor_t
         separated list of-required instance extensions to enable in {@code VkCreateInstance}.
         """,
 
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
         AutoSize("pchValue")..uint32_t.IN("unBufferSize", "")
     )
 
@@ -382,8 +382,8 @@ typedef struct HmdColor_t
         separated list of required device extensions to enable in {@code VkCreateDevice}.
         """,
 
-        VkPhysicalDevice_T_p.IN("pPhysicalDevice", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchValue", ""),
+        VkPhysicalDevice_T.p.IN("pPhysicalDevice", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
         AutoSize("pchValue")..uint32_t.IN("unBufferSize", "")
     )
 

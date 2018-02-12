@@ -12,15 +12,18 @@ interface QualifiedType {
 }
 
 internal val QualifiedType.hasUnsafe
-    get() = (nativeType is PointerType && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is CallbackType)) || nativeType is StructType
+    get() = (nativeType is PointerType<*> && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is CallbackType)) || nativeType is StructType
 
 internal val QualifiedType.isBufferPointer
-    get() = nativeType.let { it is PointerType && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType }
+    get() = nativeType.let { it is PointerType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType }
 
 internal val QualifiedType.javaMethodType
     get() = nativeType.javaMethodType
 
-class ReturnValue(override val nativeType: NativeType) : QualifiedType {
+class ReturnValue private constructor(override val nativeType: NativeType) : QualifiedType {
+
+    constructor(nativeType: VoidType) : this(nativeType as NativeType)
+    constructor(nativeType: DataType) : this(nativeType as NativeType)
 
     override fun hashCode() = RESULT.hashCode()
 
@@ -29,7 +32,7 @@ class ReturnValue(override val nativeType: NativeType) : QualifiedType {
     // --- [ Helper functions & properties ] ---
 
     internal val isSpecial
-        get() = (hasUnsafe && nativeType !is ArrayType) || nativeType.mapping === PrimitiveMapping.BOOLEAN4
+        get() = (hasUnsafe && nativeType !is ArrayType<*>) || nativeType.mapping === PrimitiveMapping.BOOLEAN4
 
     internal val isVoid
         get() = nativeType.mapping === TypeMapping.VOID
@@ -37,24 +40,14 @@ class ReturnValue(override val nativeType: NativeType) : QualifiedType {
     internal val isStructValue
         get() = nativeType is StructType
 
-    internal fun toNativeType(hasConst: Boolean, binding: APIBinding?) =
+    internal fun toNativeType(binding: APIBinding?) =
         if (binding == null || isStructValue) {
-            nativeType.name.let {
-                if (nativeType is PointerType && !nativeType.includesPointer) {
-                    if (!it.endsWith('*')) "$it *" else "$it*"
-                } else
-                    it
-            }
+            nativeType.name
         } else {
-            if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType)
+            if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
                 "intptr_t"
             else
                 nativeType.jniFunctionType
-        }.let {
-            if (hasConst && binding == null) // const intptr is pointless and raises a warning on GCC/Clang
-                "const $it"
-            else
-                it
         }
 
 }
@@ -99,7 +92,7 @@ class Parameter(
     // --- [ Helper functions & properties ] ----
 
     internal val isSpecial
-        get() = (hasUnsafe && nativeType !is ArrayType) || when (nativeType.mapping) {
+        get() = (hasUnsafe && nativeType !is ArrayType<*>) || when (nativeType.mapping) {
             PointerMapping.OPAQUE_POINTER -> (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV
             PrimitiveMapping.BOOLEAN4     -> true
             else                          -> false
@@ -109,26 +102,21 @@ class Parameter(
     internal val isAutoSizeResultOut
         get() = paramType === OUT && has<AutoSizeResultParam>()
 
-    internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.mapping.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
+    internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
 
     internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false) =
         if (binding == null || this === JNI_ENV || nativeType is StructType) {
             nativeType.name.let {
-                if ((nativeType is PointerType && !nativeType.includesPointer) || (pointerMode && nativeType is StructType)) {
+                if (pointerMode && nativeType is StructType) {
                     if (!it.endsWith('*')) "$it *" else "$it*"
                 } else
                     it
             }
         } else {
-            if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType)
+            if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
                 "intptr_t"
             else
                 nativeType.jniFunctionType
-        }.let {
-            if (has(const))
-                "const $it"
-            else
-                it
         }
 
     override fun validate(modifier: ParameterModifier) = modifier.validate(this)

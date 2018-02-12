@@ -135,7 +135,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         opaque_p.IN("globalRef", "a global reference")
     )
 
-    fun ArrayElementsRoutines(name: String, elementType: PrimitiveType, arrayType: NativeType) {
+    fun ArrayElementsRoutines(name: String, elementType: PrimitiveType, arrayType: JObjectType) {
         elementType.p(
             "Get${name}ArrayElements",
             """
@@ -180,14 +180,14 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
 
     ArrayElementsRoutines("Boolean", jboolean, jbooleanArray)
     ArrayElementsRoutines("Byte", jbyte, jbyteArray)
-    ArrayElementsRoutines("Char", jchar, jcharArray)
+    ArrayElementsRoutines("Char", IntegerType("jchar", PrimitiveMapping.SHORT, unsigned = true), jcharArray)
     ArrayElementsRoutines("Short", jshort, jshortArray)
     ArrayElementsRoutines("Int", jint, jintArray)
     ArrayElementsRoutines("Long", jlong, jlongArray)
     ArrayElementsRoutines("Float", jfloat, jfloatArray)
     ArrayElementsRoutines("Double", jdouble, jdoubleArray)
 
-    fun ArrayRegionRoutines(name: String, elementType: PrimitiveType, arrayType: NativeType) {
+    fun ArrayRegionRoutines(name: String, elementType: PrimitiveType, arrayType: JObjectType) {
         OffHeapOnly..void(
             "Get${name}ArrayRegion",
             "Copies a region of a primitive array into a buffer.",
@@ -207,13 +207,13 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
             arrayType.IN("array", "a Java array"),
             jsize.IN("start", "the starting index"),
             AutoSize("buf")..jsize.IN("len", "the number of elements to be copied"),
-            const..elementType.p.IN("buf", "the source buffer")
+            elementType.const.p.IN("buf", "the source buffer")
         )
     }
 
     ArrayRegionRoutines("Boolean", jboolean, jbooleanArray)
     ArrayRegionRoutines("Byte", jbyte, jbyteArray)
-    ArrayRegionRoutines("Char", jchar, jcharArray)
+    ArrayRegionRoutines("Char", IntegerType("jchar", PrimitiveMapping.SHORT, unsigned = true), jcharArray)
     ArrayRegionRoutines("Short", jshort, jshortArray)
     ArrayRegionRoutines("Int", jint, jintArray)
     ArrayRegionRoutines("Long", jlong, jlongArray)
@@ -230,7 +230,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
 
         JNI_ENV,
         jclass.IN("targetClass", ""),
-        const..JNINativeMethod_p.IN("methods", "the native methods in the class"),
+        JNINativeMethod.const.p.IN("methods", "the native methods in the class"),
         AutoSize("methods")..jint.IN("nMethods", "the number of native methods in the class"),
 
         returnDoc = "“0” on success; returns a negative value on failure"

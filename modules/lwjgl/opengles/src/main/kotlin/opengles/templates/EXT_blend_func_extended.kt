@@ -60,7 +60,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         GLuint.IN("program", ""),
         GLuint.IN("colorNumber", ""),
         GLuint.IN("index", ""),
-        const..GLcharASCII_p.IN("name", "")
+        GLcharASCII.const.p.IN("name", "")
     )
 
     GLint(
@@ -68,7 +68,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         "",
 
         GLuint.IN("program", ""),
-        const..GLcharASCII_p.IN("name", "")
+        GLcharASCII.const.p.IN("name", "")
     )
 
     void(
@@ -77,7 +77,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 
         GLuint.IN("program", ""),
         GLuint.IN("colorNumber", ""),
-        const..GLcharASCII_p.IN("name", "")
+        GLcharASCII.const.p.IN("name", "")
     )
 
     GLint(
@@ -86,6 +86,6 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 
         GLuint.IN("program", ""),
         GLenum.IN("programInterface", ""),
-        const..GLcharASCII_p.IN("name", "")
+        GLcharASCII.const.p.IN("name", "")
     )
 }

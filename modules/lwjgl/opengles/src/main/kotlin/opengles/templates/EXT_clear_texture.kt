@@ -40,7 +40,7 @@ val EXT_clear_texture = "EXTClearTexture".nativeClassGLES("EXT_clear_texture", p
         GLenum.IN("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..const..void_p.IN("data", "")
+        )..Unsafe..nullable..void.const.p.IN("data", "")
     )
 
     void(
@@ -59,6 +59,6 @@ val EXT_clear_texture = "EXTClearTexture".nativeClassGLES("EXT_clear_texture", p
         GLenum.IN("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..const..void_p.IN("data", "")
+        )..Unsafe..nullable..void.const.p.IN("data", "")
     )
 }

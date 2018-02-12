@@ -184,7 +184,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
 
         VkDevice.IN("device", "the device associated with {@code swapchain}."),
         VkSwapchainKHR.IN("swapchain", "the swapchain to obtain presentation timing information duration for."),
-        AutoSize("pPresentationTimings")..Check(1)..uint32_t_p.INOUT("pPresentationTimingCount", "a pointer to an integer related to the number of ##VkPastPresentationTimingGOOGLE structures to query, as described below."),
+        AutoSize("pPresentationTimings")..Check(1)..uint32_t.p.INOUT("pPresentationTimingCount", "a pointer to an integer related to the number of ##VkPastPresentationTimingGOOGLE structures to query, as described below."),
         nullable..VkPastPresentationTimingGOOGLE.p.OUT("pPresentationTimings", "either {@code NULL} or a pointer to an an array of ##VkPastPresentationTimingGOOGLE structures.")
     )
 }

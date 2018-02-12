@@ -25,7 +25,7 @@ val AL_EXT_static_buffer = "EXTStaticBuffer".nativeClassAL("EXT_static_buffer") 
         ALenum.IN("format", "the data format"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..ALvoid_p.IN("data", "the sample data"),
+        )..ALvoid.p.IN("data", "the sample data"),
         AutoSize("data")..ALsizei.IN("len", "the data buffer size, in bytes"),
         ALsizei.IN("freq", "the data frequency")
     )

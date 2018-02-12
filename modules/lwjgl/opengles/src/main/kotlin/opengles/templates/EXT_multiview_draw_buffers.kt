@@ -63,8 +63,8 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
         "",
 
         AutoSize("location", "indices")..GLint.IN("n", ""),
-        const..GLenum_p.IN("location", ""),
-        const..GLint_p.IN("indices", "")
+        GLenum.const.p.IN("location", ""),
+        GLint.const.p.IN("indices", "")
     )
 
     void(
@@ -73,6 +73,6 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
 
         GLenum.IN("target", ""),
         GLuint.IN("index", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("data", "")
+        ReturnParam..Check(1)..GLint.p.OUT("data", "")
     )
 }

@@ -132,7 +132,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -141,7 +141,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -150,7 +150,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -159,7 +159,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -206,7 +206,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -215,7 +215,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.p.IN("value", "")
     )
 
     void(
@@ -224,7 +224,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -233,7 +233,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 
     void(
@@ -242,7 +242,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
-        Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
+        Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
     )
 
     void(
@@ -251,7 +251,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
-        Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
+        Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
     )
 
     val DSA = DependsOn("GL_EXT_direct_state_access")
@@ -305,7 +305,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -315,7 +315,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -325,7 +325,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -335,7 +335,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLint64EXT_p.IN("value", "")
+        GLint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -387,7 +387,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -397,7 +397,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -407,7 +407,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 
     DSA..void(
@@ -417,6 +417,6 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLuint64EXT_p.IN("value", "")
+        GLuint64EXT.const.p.IN("value", "")
     )
 }

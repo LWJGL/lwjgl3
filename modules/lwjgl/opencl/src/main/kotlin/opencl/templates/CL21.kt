@@ -96,14 +96,14 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         """,
 
         cl_device_id.IN("device", "a device returned by #GetDeviceIDs()"),
-        Check(1)..cl_ulong_p.OUT(
+        Check(1)..cl_ulong.p.OUT(
             "device_timestamp",
             """
             will be updated with the value of the device timer in nanoseconds. The resolution of the timer is the same as the device profiling timer returned
             by #GetDeviceInfo() and the #DEVICE_PROFILING_TIMER_RESOLUTION query.
             """
         ),
-        Check(1)..cl_ulong_p.OUT(
+        Check(1)..cl_ulong.p.OUT(
             "host_timestamp",
             """
             will be updated with the value of the host timer in nanoseconds at the closest possible point in time to that at which {@code device_timestamp} was
@@ -134,7 +134,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         """,
 
         cl_device_id.IN("device", "a device returned by #GetDeviceIDs()"),
-        Check(1)..cl_ulong_p.OUT(
+        Check(1)..cl_ulong.p.OUT(
             "host_timestamp",
             """
             will be updated with the value of the current timer in nanoseconds. The resolution of the timer may be queried via #GetPlatformInfo() and the
@@ -159,7 +159,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         "Creates a program object for a context, and loads the IL pointed to by {@code il} and with length in bytes {@code length} into the program object.",
 
         cl_context.IN("context", "a valid OpenCL context"),
-        const..void_p.IN("il", "a pointer to a {@code length}-byte block of memory containing SPIR-V or an implementation-defined intermediate language"),
+        void.const.p.IN("il", "a pointer to a {@code length}-byte block of memory containing SPIR-V or an implementation-defined intermediate language"),
         AutoSize("il")..size_t.IN("length", "the number of bytes in {@code il}"),
         ERROR_RET,
 
@@ -231,12 +231,12 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         ),
         cl_kernel_sub_group_info.IN("param_name", "the information to query", "$GetKernelSubGroupInfoA $GetKernelSubGroupInfoB"),
         AutoSize("input_value")..size_t.IN("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
-        nullable..const..void_p.IN(
+        nullable..void.const.p.IN(
             "input_value",
             "a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL, it is ignored."
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.IN("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -284,11 +284,11 @@ val CL21 = "CL21".nativeClassCL("CL21") {
             #NULL.
             """
         ),
-        const..void_pp.IN(
+        void.const.p.p.IN(
             "svm_pointers",
             "a pointer to an array of pointers. Each pointer in this array must be within an allocation produced by a call to #SVMAlloc()."
         ),
-        nullable..const..size_t_p.IN(
+        nullable..size_t.const.p.IN(
             "sizes",
             """
             an array of sizes. The pair {@code svm_pointers[i]} and {@code sizes[i]} together define the starting address and number of bytes in a range to be

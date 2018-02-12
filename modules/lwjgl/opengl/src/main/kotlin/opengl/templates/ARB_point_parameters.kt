@@ -51,7 +51,7 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
         "Pointer version of #PointParameterfARB().",
 
         GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION_ARB"),
-        Check(3)..const..GLfloat_p.IN("params", "the parameter value")
+        Check(3)..GLfloat.const.p.IN("params", "the parameter value")
     )
 
 }

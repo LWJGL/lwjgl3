@@ -33,26 +33,11 @@ val GLuint64 = IntegerType("GLuint64", PrimitiveMapping.LONG, unsigned = true)
 val GLfloat = PrimitiveType("GLfloat", PrimitiveMapping.FLOAT)
 val GLdouble = PrimitiveType("GLdouble", PrimitiveMapping.DOUBLE)
 
-val GLboolean_p = GLboolean.p
-val GLbyte_p = GLbyte.p
-val GLubyte_p = GLubyte.p
-val GLshort_p = GLshort.p
-val GLushort_p = GLushort.p
-val GLint_p = GLint.p
-val GLuint_p = GLuint.p
-val GLint64_p = GLint64.p
-val GLuint64_p = GLuint64.p
-val GLfloat_p = GLfloat.p
-val GLdouble_p = GLdouble.p
-
 // custom numeric
 
 val GLsizei = IntegerType("GLsizei", PrimitiveMapping.INT)
 val GLenum = IntegerType("GLenum", PrimitiveMapping.INT, unsigned = true)
 val GLbitfield = IntegerType("GLbitfield", PrimitiveMapping.INT, unsigned = true)
-
-val GLsizei_p = GLsizei.p
-val GLenum_p = GLenum.p
 
 val GLintptr = IntegerType("GLintptr", PrimitiveMapping.POINTER)
 val GLsizeiptr = IntegerType("GLsizeiptr", PrimitiveMapping.POINTER, unsigned = true)
@@ -60,14 +45,11 @@ val GLsizeiptr = IntegerType("GLsizeiptr", PrimitiveMapping.POINTER, unsigned = 
 val GLintptrARB = IntegerType("GLintptrARB", PrimitiveMapping.POINTER)
 val GLsizeiptrARB = IntegerType("GLsizeiptrARB", PrimitiveMapping.POINTER, unsigned = true)
 
-val GLintptr_p = GLintptr.p
-val GLsizeiptr_p = GLsizeiptr.p
-
 // strings
 
-val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
-val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
-val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
+val GLcharASCII = CharType("GLchar", CharMapping.ASCII)
+val GLcharUTF8 = CharType("GLchar", CharMapping.UTF8)
+val GLubyteUTF8 = CharType("GLubyte", CharMapping.UTF8)
 
 // AMD_debug_output
 val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
@@ -77,8 +59,8 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
     GLenum.IN("category", "the message category"),
     GLenum.IN("severity", "the message severity"),
     AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-    void_p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackAMD()")
+    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+    void.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackAMD()")
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageCallbackAMD() method."
     useSystemCallConvention()
@@ -97,7 +79,6 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
         return memUTF8(memByteBuffer(message, length));
     }
     """
-
 }
 // ARB_debug_output
 val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
@@ -108,8 +89,8 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
     GLuint.IN("id", "the message ID"),
     GLenum.IN("severity", "the message severity"),
     AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-    const..void_p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackARB()")
+    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+    void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackARB()")
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageCallbackARB() method."
     useSystemCallConvention()
@@ -130,14 +111,12 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
     """
 }
 // ARB_shader_objects
-val GLcharARB_p = CharSequenceType(name = "GLcharARB", charMapping = CharMapping.UTF8)
-val GLcharARB_pp = GLcharARB_p.p
+val GLcharARB = CharType("GLcharARB", CharMapping.UTF8)
 val GLhandleARB = IntegerType("GLhandleARB", PrimitiveMapping.INT, unsigned = true)
-val GLhandleARB_p = GLhandleARB.p
 // ARB_sync
-val GLsync = "GLsync".opaque_p
+val GLsync = "GLsync".handle
 // EXT_external_buffer
-val GLeglClientBufferEXT = "GLeglClientBufferEXT".opaque_p
+val GLeglClientBufferEXT = "GLeglClientBufferEXT".handle
 // KHR_debug
 val GLDEBUGPROC = "GLDEBUGPROC".callback(
     Module.OPENGL, void, "GLDebugMessageCallback",
@@ -147,8 +126,8 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
     GLuint.IN("id", "the message ID"),
     GLenum.IN("severity", "the message severity"),
     AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-    const..void_p.IN("userParam",
+    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+    void.const.p.IN("userParam",
         "the user-specified value that was passed when calling GL43#glDebugMessageCallback() or KHRDebug#glDebugMessageCallback()"
     )
 ) {
@@ -171,38 +150,35 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
     """
 }
 // NV_draw_vulkan_image
-val VULKANPROCNV = "VULKANPROCNV".opaque_p
+val VULKANPROCNV = "VULKANPROCNV".handle
 // NV_gpu_shader5
 val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)
-val GLint64EXT_p = GLint64EXT.p
 val GLuint64EXT = IntegerType("GLuint64EXT", PrimitiveMapping.LONG, unsigned = true)
-val GLuint64EXT_p = GLuint64EXT.p
 // NV_half_float
 val GLhalfNV = IntegerType("GLhalfNV", PrimitiveMapping.SHORT)
-val GLhalfNV_p = GLhalfNV.p
 
 // AutoType tokens
 enum class BufferType(
-    type: PointerType,
+    type: PointerType<*>,
     override val className: String = "GL11"
 ) : AutoTypeToken {
 
-    GL_UNSIGNED_BYTE(GLubyte_p),
-    GL_UNSIGNED_SHORT(GLushort_p),
-    GL_UNSIGNED_INT(GLuint_p),
+    GL_UNSIGNED_BYTE(GLubyte.p),
+    GL_UNSIGNED_SHORT(GLushort.p),
+    GL_UNSIGNED_INT(GLuint.p),
 
-    GL_BYTE(GLbyte_p),
-    GL_SHORT(GLshort_p),
-    GL_INT(GLint_p),
+    GL_BYTE(GLbyte.p),
+    GL_SHORT(GLshort.p),
+    GL_INT(GLint.p),
 
-    GL_HALF_FLOAT(GLushort_p, className = "GL30"),
-    GL_FLOAT(GLfloat_p),
-    GL_DOUBLE(GLdouble_p),
+    GL_HALF_FLOAT(GLushort.p, className = "GL30"),
+    GL_FLOAT(GLfloat.p),
+    GL_DOUBLE(GLdouble.p),
 
-    GL_2_BYTES(GLubyte_p),
-    GL_3_BYTES(GLubyte_p),
-    GL_4_BYTES(GLubyte_p);
+    GL_2_BYTES(GLubyte.p),
+    GL_3_BYTES(GLubyte.p),
+    GL_4_BYTES(GLubyte.p);
 
-    override val mapping = type.mapping as PointerMapping
+    override val mapping = type.mapping
 
 }

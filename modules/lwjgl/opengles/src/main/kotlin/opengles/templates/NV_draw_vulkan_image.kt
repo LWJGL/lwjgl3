@@ -49,7 +49,7 @@ val NV_draw_vulkan_image = "NVDrawVulkanImage".nativeClassGLES("NV_draw_vulkan_i
         "GetVkProcAddrNV",
         "Queries the Vulkan function entry points from within an OpenGL context.",
 
-        const..GLcharASCII_p.IN("name", "name of the Vulkan function")
+        GLcharASCII.const.p.IN("name", "name of the Vulkan function")
     )
 
     void(

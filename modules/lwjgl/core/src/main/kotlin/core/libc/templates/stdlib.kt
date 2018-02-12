@@ -29,7 +29,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
 
     documentation = "Native bindings to stdlib.h."
 
-    void_p(
+    void.p(
         "malloc",
         """
         Allocates {@code size} bytes and returns a pointer to the allocated memory. The memory is not initialized. If {@code size} is 0, then malloc() returns
@@ -39,7 +39,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
     )
 
-    void_p(
+    void.p(
         "calloc",
         """
         Allocates memory for an array of {@code nmemb} elements of {@code size} bytes each and returns a pointer to the allocated memory. The memory is set to
@@ -51,7 +51,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         AutoSizeResult..size_t.IN("size", "the number of bytes to allocate per element")
     )
 
-    void_p(
+    void.p(
         "realloc",
         """
         Changes the size of the memory block pointed to by {@code ptr} to {@code size} bytes  The contents will be unchanged in the range from the start of the
@@ -61,7 +61,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         to #malloc(), #calloc() or #realloc(). If the area pointed to was moved, a {@code free(ptr)} is done.
         """,
 
-        Unsafe..nullable..void_p.IN("ptr", "the memory block to reallocate"),
+        Unsafe..nullable..void.p.IN("ptr", "the memory block to reallocate"),
         AutoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
     )
 
@@ -72,12 +72,12 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is #NULL, no operation is performed.
         """,
 
-        MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the memory space to free")
+        MultiTypeAll..Unsafe..nullable..void.p.IN("ptr", "the memory space to free")
     )
 
     Code(
         nativeCall = "${t}return (jlong)(intptr_t)__aligned_alloc((size_t)alignment, (size_t)size);"
-    )..void_p(
+    )..void.p(
         "aligned_alloc",
         """
         Allocates {@code size} bytes of uninitialized storage whose alignment is specified by {@code alignment}. The size parameter must be an integral multiple
@@ -94,6 +94,6 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         "aligned_free",
         "Frees a block of memory that was allocated with #aligned_alloc(). If ptr is #NULL, no operation is performed.",
 
-        Unsafe..MultiTypeAll..nullable..void_p.IN("ptr", "the aligned block of memory to free")
+        Unsafe..MultiTypeAll..nullable..void.p.IN("ptr", "the aligned block of memory to free")
     )
 }

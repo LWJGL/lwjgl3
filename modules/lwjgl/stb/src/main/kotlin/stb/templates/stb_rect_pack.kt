@@ -49,8 +49,8 @@ val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", pref
         array, but the option is available.
         """,
 
-        stbrp_context_p.IN("context", "an ##STBRPContext struct"),
-        stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
+        stbrp_context.p.IN("context", "an ##STBRPContext struct"),
+        stbrp_rect.p.INOUT("rects", "an array of ##STBRPRect structs"),
         AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}"),
 
         returnDoc = "1 if all of the rectangles were successfully packed and 0 otherwise"
@@ -78,10 +78,10 @@ val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", pref
         If you do \#2, then the non-quantized algorithm will be used, but the algorithm may run out of temporary storage and be unable to pack some rectangles.
         """,
 
-        stbrp_context_p.IN("context", "an ##STBRPContext struct"),
+        stbrp_context.p.IN("context", "an ##STBRPContext struct"),
         int.IN("width", "the rectangle width"),
         int.IN("height", "the rectangle height"),
-        stbrp_node_p.IN("nodes", "an array of ##STBRPNode structs"),
+        stbrp_node.p.IN("nodes", "an array of ##STBRPNode structs"),
         AutoSize("nodes")..int.IN("num_nodes", "the number of structs in {@code nodes}")
     )
 
@@ -92,7 +92,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", pref
         #init_target(). If you call init again, this will be reset to the default (false).
         """,
 
-        stbrp_context_p.IN("context", "an ##STBRPContext struct"),
+        stbrp_context.p.IN("context", "an ##STBRPContext struct"),
         intb.IN("allow_out_of_mem", "1 to allow running out of temporary storage")
     )
 
@@ -103,7 +103,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", pref
         you call init again, this will be reset to the default.
         """,
 
-        stbrp_context_p.IN("context", "an ##STBRPContext struct"),
+        stbrp_context.p.IN("context", "an ##STBRPContext struct"),
         int.IN("heuristic", "the packing heuristic")
     )
 }

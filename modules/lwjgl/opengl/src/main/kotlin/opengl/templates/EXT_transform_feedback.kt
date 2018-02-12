@@ -144,7 +144,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
         GLuint.IN("program", ""),
         AutoSize("varyings")..GLsizei.IN("count", ""),
-        PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p.const.p.IN("varyings", ""),
+        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.const.p.IN("varyings", ""),
         GLenum.IN("bufferMode", "")
     )
 
@@ -155,12 +155,12 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
         GLuint.IN("program", ""),
         GLuint.IN("index", ""),
         AutoSize("name")..GLsizei.IN("bufSize", ""),
-        Check(1)..nullable..GLsizei_p.OUT("length", ""),
-        Check(1)..GLsizei_p.OUT("size", ""),
-        Check(1)..GLenum_p.OUT("type", ""),
+        Check(1)..nullable..GLsizei.p.OUT("length", ""),
+        Check(1)..GLsizei.p.OUT("size", ""),
+        Check(1)..GLenum.p.OUT("type", ""),
         Return("length", """GL.getCapabilities().OpenGL20
             ? GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)
-            : ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII_p.OUT("name", "")
+            : ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII.p.OUT("name", "")
     )
 
     void(
@@ -169,7 +169,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
         GLenum.IN("param", ""),
         GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLint_p.OUT("values", "")
+        Check(1)..ReturnParam..GLint.p.OUT("values", "")
     )
 
     void(
@@ -178,6 +178,6 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
         GLenum.IN("param", ""),
         GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLboolean_p.OUT("values", "")
+        Check(1)..ReturnParam..GLboolean.p.OUT("values", "")
     )
 }

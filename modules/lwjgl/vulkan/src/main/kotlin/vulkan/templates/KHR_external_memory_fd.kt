@@ -114,8 +114,8 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         """,
 
         VkDevice.IN("device", "the logical device that created the device memory being exported."),
-        const..VkMemoryGetFdInfoKHR.p.IN("pGetFdInfo", "a pointer to an instance of the ##VkMemoryGetFdInfoKHR structure containing parameters of the export operation."),
-        Check(1)..int_p.OUT("pFd", "will return a file descriptor representing the underlying resources of the device memory object.")
+        VkMemoryGetFdInfoKHR.const.p.IN("pGetFdInfo", "a pointer to an instance of the ##VkMemoryGetFdInfoKHR structure containing parameters of the export operation."),
+        Check(1)..int.p.OUT("pFd", "will return a file descriptor representing the underlying resources of the device memory object.")
     )
 
     VkResult(

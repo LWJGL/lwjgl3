@@ -117,7 +117,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         """,
 
         VkDevice.IN("device", "the logical device that created the device memory being exported."),
-        const..VkMemoryGetWin32HandleInfoKHR.p.IN("pGetWin32HandleInfo", "a pointer to an instance of the ##VkMemoryGetWin32HandleInfoKHR structure containing parameters of the export operation."),
+        VkMemoryGetWin32HandleInfoKHR.const.p.IN("pGetWin32HandleInfo", "a pointer to an instance of the ##VkMemoryGetWin32HandleInfoKHR structure containing parameters of the export operation."),
         Check(1)..HANDLE.p.OUT("pHandle", "will return the Windows handle representing the underlying resources of the device memory object.")
     )
 

@@ -69,7 +69,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
             """
         ),
         AutoSize("descriptor")..size_t.IN("descriptor_size", "a value which specifies of the size, in bytes, of the immediately following descriptor structure"),
-        const..void_p.IN(
+        void.const.p.IN(
             "descriptor",
             """
             a pointer to a structure that defines the parameter set of the accelerator object. This parameter set describes the configurable state of the
@@ -143,7 +143,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
         cl_accelerator_intel.IN("accelerator", "the accelerator object being queried"),
         cl_accelerator_info_intel.IN("param_name", "the information to query", AcceleratorInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =

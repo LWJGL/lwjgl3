@@ -36,7 +36,7 @@ internal open class AutoSizeTransform(
 ) : FunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String): String {
-        var expression = if (bufferParam.nativeType is ArrayType) {
+        var expression = if (bufferParam.nativeType is ArrayType<*>) {
             if (bufferParam has nullable)
                 "lengthSafe(${bufferParam.name})"
             else
@@ -52,14 +52,14 @@ internal open class AutoSizeTransform(
 
         val factor = param.get<AutoSize>().factor
         if (applyFactor && factor != null) {
-            if (param.nativeType.mapping == PrimitiveMapping.POINTER || param.nativeType is PointerType) {
+            if (param.nativeType.isPointer) {
                 expression = "Integer.toUnsignedLong($expression)"
                 relaxedCast = true
             }
             expression = factor.scale(expression)
         }
 
-        if (param.nativeType is PointerType)
+        if (param.nativeType is PointerType<*>)
             expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}) + $expression"
         else if ((param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
             expression = "(${param.nativeType.javaMethodType})${if (expression.contains(' ')) "($expression)" else expression}"
@@ -81,7 +81,7 @@ private class AutoSizeBytesTransform(
             "remainingSafe(${bufferParam.name})"
         else
             "${bufferParam.name}.remaining()"
-        if (param.nativeType.mapping == PrimitiveMapping.POINTER || param.nativeType is PointerType) {
+        if (param.nativeType.isPointer) {
             expression = "Integer.toUnsignedLong($expression)"
         }
         val factor = param.get<AutoSize>().factor
@@ -130,7 +130,7 @@ internal open class AutoSizeCharSequenceTransform(private val bufferParam: Param
                 expression = it.scale(expression)
         }
 
-        if (param.nativeType is PointerType)
+        if (param.nativeType is PointerType<*>)
             expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}Encoded) + $expression"
         else if ((param.nativeType.mapping as PrimitiveMapping).bytes < 4)
             expression = "(${param.nativeType.javaMethodType})($expression)"
@@ -194,21 +194,21 @@ internal class StringReturnTransform(private val nullable: Boolean) : FunctionTr
 }
 
 internal class PrimitiveValueReturnTransform(
-    private val bufferType: PointerType,
+    private val bufferType: PointerType<*>,
     val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
-    override fun transformDeclaration(param: ReturnValue, original: String): String = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
+    override fun transformDeclaration(param: ReturnValue, original: String): String = if (bufferType.elementType is PointerType<*> && bufferType.elementType.elementType is StructType)
         bufferType.elementType.javaMethodType
     else
-        (bufferType.mapping as PointerMapping).primitive // Replace void with the buffer value type
-    override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
+        bufferType.mapping.primitive // Replace void with the buffer value type
+    override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType<*> && bufferType.elementType.elementType is StructType)
         "$t${t}return ${bufferType.elementType.javaMethodType}.createSafe($paramName.get(0));"
     else if (bufferType.mapping === PointerMapping.DATA_BOOLEAN)
         "$t${t}return $paramName.get(0) != 0;"
     else
         "$t${t}return $paramName.get(0);" // Replace with value from the stack
 
-    override fun setupStack(func: Func, qtype: ReturnValue, writer: PrintWriter) = (bufferType.mapping as PointerMapping).let {
+    override fun setupStack(func: Func, qtype: ReturnValue, writer: PrintWriter) = bufferType.mapping.let {
         writer.println("$t$t$t${it.box}Buffer $paramName = stack.calloc${it.mallocType}(1);")
     }
 }
@@ -312,14 +312,14 @@ internal class BufferAutoSizeReturnTransform(
     private val lengthExpression: String,
     val encoding: String? = null
 ) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
-    override fun transformDeclaration(param: ReturnValue, original: String): String = (outParam.nativeType as PointerType).elementType!!.let {
+    override fun transformDeclaration(param: ReturnValue, original: String): String = (outParam.nativeType as PointerType<*>).elementType.let {
         if (it.dereference is StructType)
             "${it.javaMethodType}.Buffer"
         else
             it.javaMethodType
     }
 
-    override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
+    override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType<*>).elementType.let {
         "$t${t}return ${if (it.dereference is StructType)
             "${it.javaMethodType}.createSafe"
         else
@@ -331,7 +331,7 @@ internal class BufferAutoSizeReturnTransform(
 internal class BufferReturnTransform(
     private val outParam: Parameter,
     private val lengthParam: String,
-    val charMapping: CharMapping? = null,
+    private val charMapping: CharMapping? = null,
     val includesNT: Boolean = false
 ) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
 

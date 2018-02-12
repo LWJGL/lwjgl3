@@ -6,8 +6,6 @@ package core.linux
 
 import org.lwjgl.generator.*
 
-const val LINUX_PACKAGE = "org.lwjgl.system.linux"
-
 fun config() {
     packageInfo(
         Module.CORE_LINUX,
@@ -17,4 +15,3 @@ fun config() {
 
 val long = IntegerType("long", PrimitiveMapping.POINTER)
 val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.POINTER, unsigned = true)
-val unsigned_long_p = unsigned_long.p

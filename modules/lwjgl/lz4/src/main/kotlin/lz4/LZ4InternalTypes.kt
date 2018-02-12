@@ -12,15 +12,15 @@ val LZ4_stream_t_internal = struct(Module.LZ4, "LZ4StreamInternal", nativeName =
     uint32_t.array("hashTable", "", size = "LZ4_HASH_SIZE_U32")
     uint32_t.member("currentOffset", "")
     uint32_t.member("initCheck", "")
-    const..uint8_t.p.member("dictionary", "")
+    uint8_t.const.p.member("dictionary", "")
     uint8_t.p.member("bufferStart", "obsolete, used for {@code slideInputBuffer}")
     uint32_t.member("dictSize", "")
 }
 
 val LZ4_streamDecode_t_internal = struct(Module.LZ4, "LZ4StreamDecodeInternal", nativeName = "LZ4_streamDecode_t_internal", mutable = false) {
-    const..uint8_t.p.member("externalDict", "")
+    uint8_t.const.p.member("externalDict", "")
     size_t.member("extDictSize", "")
-    const..uint8_t.p.member("prefixEnd", "")
+    uint8_t.const.p.member("prefixEnd", "")
     size_t.member("prefixSize", "")
 }
 
@@ -43,9 +43,9 @@ val LZ4HC_CCtx_internal = struct(Module.LZ4, "LZ4HCCCtxInternal", nativeName = "
 
     uint32_t.array("hashTable", "", size = "LZ4HC_HASHTABLESIZE")
     uint16_t.array("chainTable", "", size = "LZ4HC_MAXD")
-    const..uint8_t.p.member("end", "next block here to continue on current prefix")
-    const..uint8_t.p.member("base", "All index relative to this position")
-    const..uint8_t.p.member("dictBase", "alternate base for {@code extDict}")
+    uint8_t.const.p.member("end", "next block here to continue on current prefix")
+    uint8_t.const.p.member("base", "All index relative to this position")
+    uint8_t.const.p.member("dictBase", "alternate base for {@code extDict}")
     uint8_t.p.member("inputBuffer", "deprecated")
     uint32_t.member("dictLimit", "below that point, need {@code extDict}")
     uint32_t.member("lowLimit", "below that point, no more {@code dict}")

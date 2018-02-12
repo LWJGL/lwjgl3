@@ -106,7 +106,7 @@ stbi_is_hdr(char *filename);""")}
         "rgb_alpha".enum
     )
 
-    val load = stbi_uc_p(
+    val load = stbi_uc.p(
         "load",
         """
         Loads an image from the specified file.
@@ -132,21 +132,21 @@ N=\#channels_in_file     components
         Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.
         """,
 
-        const..charASCII_p.IN("filename", "the file name"),
-        Check(1)..AutoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..AutoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int_p.OUT(
+        charASCII.const.p.IN("filename", "the file name"),
+        Check(1)..AutoSizeResult..int.p.OUT("x", "outputs the image width in pixels"),
+        Check(1)..AutoSizeResult..int.p.OUT("y", "outputs the image height in pixels"),
+        Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int.p.OUT(
             "channels_in_file",
             "outputs number of components in image"
         ),
         int.IN("desired_channels", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
     )
 
-    val load_from_memory = stbi_uc_p(
+    val load_from_memory = stbi_uc.p(
         "load_from_memory",
         "In-memory version of #load().",
 
-        const..stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
+        stbi_uc.const.p.IN("buffer", "the buffer from which to load the image data"),
         AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
         load["x"],
         load["y"],
@@ -154,7 +154,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    val load_from_callbacks = stbi_uc_p(
+    val load_from_callbacks = stbi_uc.p(
         "load_from_callbacks",
         """
         Callback version of #load().
@@ -166,7 +166,7 @@ N=\#channels_in_file     components
         end).
         """,
 
-        const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
+        stbi_io_callbacks.const.p.IN("clbk", "an ##STBIIOCallbacks struct"),
         nullable..opaque_p.IN("user", "a pointer to user data"),
         load["x"],
         load["y"],
@@ -174,21 +174,21 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    stbi_uc_p(
+    stbi_uc.p(
         "load_gif_from_memory",
         "gif version of #load_from_memory().",
 
         load_from_memory["buffer"],
         load_from_memory["len"],
-        Check(1)..int_p.p.OUT("delays", "output the delays of each layer in the image"),
+        Check(1)..int.p.p.OUT("delays", "output the delays of each layer in the image"),
         load["x"],
         load["y"],
-        Check(1)..AutoSizeResult..int_p.OUT("z", "outputs the number of layers in the image"),
+        Check(1)..AutoSizeResult..int.p.OUT("z", "outputs the number of layers in the image"),
         load["channels_in_file"],
         load["desired_channels"]
     )
 
-    stbi_us_p(
+    stbi_us.p(
         "load_16",
         "16-bits-per-channel version of #load().",
 
@@ -199,7 +199,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    stbi_us_p(
+    stbi_us.p(
         "load_16_from_memory",
         "In-memory version of #load_16().",
 
@@ -211,7 +211,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    stbi_us_p(
+    stbi_us.p(
         "load_16_from_callbacks",
         "Callback version of #load_16().",
 
@@ -223,7 +223,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    float_p(
+    float.p(
         "loadf",
         "Floating-point version of #load().",
 
@@ -234,7 +234,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    float_p(
+    float.p(
         "loadf_from_memory",
         "Floating-point version of #load_from_memory().",
 
@@ -246,7 +246,7 @@ N=\#channels_in_file     components
         load["desired_channels"]
     )
 
-    float_p(
+    float.p(
         "loadf_from_callbacks",
         "Floating-point version of #load_from_callbacks().",
 
@@ -311,7 +311,7 @@ N=\#channels_in_file     components
         load_from_callbacks["user"]
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "failure_reason",
         "Returns a brief reason for failure."
     )
@@ -320,7 +320,7 @@ N=\#channels_in_file     components
         "image_free",
         "Frees a loaded image",
 
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT)..Unsafe..void_p.IN("retval_from_stbi_load", "an stb image")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT)..Unsafe..void.p.IN("retval_from_stbi_load", "an stb image")
     )
 
     intb(
@@ -328,9 +328,9 @@ N=\#channels_in_file     components
         "Returns image dimensions &amp; components without fully decoding the image.",
 
         load["filename"],
-        Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..int_p.OUT("comp", "outputs number of components in image"),
+        Check(1)..int.p.OUT("x", "outputs the image width in pixels"),
+        Check(1)..int.p.OUT("y", "outputs the image height in pixels"),
+        Check(1)..int.p.OUT("comp", "outputs number of components in image"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -341,9 +341,9 @@ N=\#channels_in_file     components
 
         load_from_memory["buffer"],
         load_from_memory["len"],
-        Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..int_p.OUT("comp", "outputs number of components in image")
+        Check(1)..int.p.OUT("x", "outputs the image width in pixels"),
+        Check(1)..int.p.OUT("y", "outputs the image height in pixels"),
+        Check(1)..int.p.OUT("comp", "outputs number of components in image")
     )
 
     intb(
@@ -352,9 +352,9 @@ N=\#channels_in_file     components
 
         load_from_callbacks["clbk"],
         load_from_callbacks["user"],
-        Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..int_p.OUT("comp", "outputs number of components in image")
+        Check(1)..int.p.OUT("x", "outputs the image width in pixels"),
+        Check(1)..int.p.OUT("y", "outputs the image height in pixels"),
+        Check(1)..int.p.OUT("comp", "outputs number of components in image")
     )
 
     intb(
@@ -404,62 +404,62 @@ N=\#channels_in_file     components
         intb.IN("flag_true_if_should_flip", "the flip vertically on load flag")
     )
 
-    char_p(
+    char.p(
         "zlib_decode_malloc_guesssize",
         "ZLIB client - used by PNG, available for other purposes",
 
-        const..char_p.IN("buffer", ""),
+        char.const.p.IN("buffer", ""),
         AutoSize("buffer")..int.IN("len", ""),
         int.IN("initial_size", ""),
-        AutoSizeResult..int_p.OUT("outlen", "")
+        AutoSizeResult..int.p.OUT("outlen", "")
     )
 
-    char_p(
+    char.p(
         "zlib_decode_malloc_guesssize_headerflag",
         "ZLIB client - used by PNG, available for other purposes",
 
-        const..char_p.IN("buffer", ""),
+        char.const.p.IN("buffer", ""),
         AutoSize("buffer")..int.IN("len", ""),
         int.IN("initial_size", ""),
-        AutoSizeResult..int_p.OUT("outlen", ""),
+        AutoSizeResult..int.p.OUT("outlen", ""),
         intb.IN("parse_header", "")
     )
 
-    char_p(
+    char.p(
         "zlib_decode_malloc",
         "ZLIB client - used by PNG, available for other purposes",
 
-        const..char_p.IN("buffer", ""),
+        char.const.p.IN("buffer", ""),
         AutoSize("buffer")..int.IN("len", ""),
-        AutoSizeResult..int_p.OUT("outlen", "")
+        AutoSizeResult..int.p.OUT("outlen", "")
     )
 
     int(
         "zlib_decode_buffer",
         "ZLIB client - used by PNG, available for other purposes",
 
-        char_p.OUT("obuffer", ""),
+        char.p.OUT("obuffer", ""),
         AutoSize("obuffer")..int.IN("olen", ""),
-        const..char_p.IN("ibuffer", ""),
+        char.const.p.IN("ibuffer", ""),
         AutoSize("ibuffer")..int.IN("ilen", "")
     )
 
-    char_p(
+    char.p(
         "zlib_decode_noheader_malloc",
         "ZLIB client - used by PNG, available for other purposes",
 
-        const..char_p.IN("buffer", ""),
+        char.const.p.IN("buffer", ""),
         AutoSize("buffer")..int.IN("len", ""),
-        AutoSizeResult..int_p.OUT("outlen", "")
+        AutoSizeResult..int.p.OUT("outlen", "")
     )
 
     int(
         "zlib_decode_noheader_buffer",
         "ZLIB client - used by PNG, available for other purposes",
 
-        char_p.OUT("obuffer", ""),
+        char.p.OUT("obuffer", ""),
         AutoSize("obuffer")..int.IN("olen", ""),
-        const..char_p.IN("ibuffer", ""),
+        char.const.p.IN("ibuffer", ""),
         AutoSize("ibuffer")..int.IN("ilen", "")
     )
 }

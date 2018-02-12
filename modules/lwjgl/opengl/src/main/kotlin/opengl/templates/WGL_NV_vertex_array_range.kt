@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val WGL_NV_vertex_array_range = "WGLNVVertexArrayRange".nativeClassWGL("WGL_NV_vertex_array_range", postfix = NV) {
-    void_p(
+    void.p(
         "AllocateMemoryNV",
         "",
 
@@ -22,6 +22,6 @@ val WGL_NV_vertex_array_range = "WGLNVVertexArrayRange".nativeClassWGL("WGL_NV_v
         "FreeMemoryNV",
         "",
 
-        Unsafe..void_p.IN("pointer", "")
+        Unsafe..void.p.IN("pointer", "")
     )
 }

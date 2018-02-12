@@ -757,8 +757,8 @@ nk_style_pop_vec2(ctx);""")}
         "WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 16.NK_FLAG)
     ).javaDocLinks
 
-    val ctx = nk_context_p.IN("ctx", "the nuklear context")
-    val cctx = const..nk_context_p.IN("ctx", "the nuklear context");
+    val ctx = nk_context.p.IN("ctx", "the nuklear context")
+    val cctx = nk_context.const.p.IN("ctx", "the nuklear context");
 
     {
         intb(
@@ -774,9 +774,9 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            void_p.IN("memory", "must point to a previously allocated memory block"),
+            void.p.IN("memory", "must point to a previously allocated memory block"),
             AutoSize("memory")..nk_size.IN("size", "must contain the total size of {@code memory}"),
-            nullable..const..nk_user_font_p.IN("font", "must point to a previously initialized font handle")
+            nullable..nk_user_font.const.p.IN("font", "must point to a previously initialized font handle")
         )
 
         intb(
@@ -789,8 +789,8 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            nk_allocator_p.IN("allocator", "must point to a previously allocated memory allocator"),
-            nullable..const..nk_user_font_p.IN("font", "must point to a previously initialized font handle")
+            nk_allocator.p.IN("allocator", "must point to a previously allocated memory allocator"),
+            nullable..nk_user_font.const.p.IN("font", "must point to a previously initialized font handle")
         )
 
         intb(
@@ -800,7 +800,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             nk_buffer_p.IN("cmds", "must point to a previously initialized memory buffer either fixed or dynamic to store draw commands into"),
             nk_buffer_p.IN("pool", "must point to a previously initialized memory buffer either fixed or dynamic to store windows, panels and tables"),
-            nullable..const..nk_user_font_p.IN("font", "must point to a previously initialized font handle")
+            nullable..nk_user_font.const.p.IN("font", "must point to a previously initialized font handle")
         )
 
         void(
@@ -839,7 +839,7 @@ nk_style_pop_vec2(ctx);""")}
             "Starts a new window; needs to be called every frame for every window (unless hidden) or otherwise the window gets removed.",
 
             ctx,
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_rect.IN("bounds", ""),
             nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
         )
@@ -849,8 +849,8 @@ nk_style_pop_vec2(ctx);""")}
             "Extended window start with separated title and identifier to allow multiple windows with same name but not title.",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("name", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_rect.IN("bounds", ""),
             nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
         )
@@ -862,12 +862,12 @@ nk_style_pop_vec2(ctx);""")}
             ctx
         )
 
-        nk_window_p(
+        nk_window.p(
             "window_find",
             "Finds and returns the window with give name.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            charUTF8.const.p.IN("name", "")
         )
 
         nk_rect("window_get_bounds", "Returns a rectangle with screen position and size of the currently processed window.", cctx)
@@ -877,14 +877,14 @@ nk_style_pop_vec2(ctx);""")}
         float("window_get_width", "Returns the width of the currently processed window.", cctx)
         float("window_get_height", "Returns the height of the currently processed window.", cctx)
 
-        nk_panel_p("window_get_panel", "Returns the underlying panel which contains all processing state of the current window.", ctx)
+        nk_panel.p("window_get_panel", "Returns the underlying panel which contains all processing state of the current window.", ctx)
 
         nk_rect("window_get_content_region", "Returns the position and size of the currently visible and non-clipped space inside the currently processed window.", ctx)
         nk_vec2("window_get_content_region_min", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
         nk_vec2("window_get_content_region_max", "Returns the upper rectangle position of the currently visible and non-clipped space inside the currently processed window.", ctx)
         nk_vec2("window_get_content_region_size", "Returns the size of the currently visible and non-clipped space inside the currently processed window.", ctx)
 
-        nk_command_buffer_p("window_get_canvas", "Returns the draw command buffer. Can be used to draw custom widgets.", ctx)
+        nk_command_buffer.p("window_get_canvas", "Returns the draw command buffer. Can be used to draw custom widgets.", ctx)
 
         intb("window_has_focus", "Returns if the currently processed window is currently active.", cctx)
 
@@ -893,7 +893,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns if the window with given name is currently minimized/collapsed.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            charUTF8.const.p.IN("name", "")
         )
 
         intb(
@@ -901,7 +901,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns if the currently processed window was closed.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            charUTF8.const.p.IN("name", "")
         )
 
         intb(
@@ -909,7 +909,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns if the currently processed window was hidden.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            charUTF8.const.p.IN("name", "")
         )
 
         intb(
@@ -917,7 +917,7 @@ nk_style_pop_vec2(ctx);""")}
             "Same as #window_has_focus() for some reason.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            charUTF8.const.p.IN("name", "")
         )
 
         intb("window_is_hovered", "Returns if the currently processed window is currently being hovered by mouse.", ctx)
@@ -931,7 +931,7 @@ nk_style_pop_vec2(ctx);""")}
             "Updates position and size of the specified window.",
 
             ctx,
-            const..charUTF8_p.IN("name", "name of the window to modify both position and size"),
+            charUTF8.const.p.IN("name", "name of the window to modify both position and size"),
             nk_rect.IN("bounds", "points to a {@code nk_rect} struct with the new position and size of the specified window")
         )
 
@@ -940,7 +940,7 @@ nk_style_pop_vec2(ctx);""")}
             "Updates position of the currently process window.",
 
             ctx,
-            const..charUTF8_p.IN("name", "name of the window to modify position of"),
+            charUTF8.const.p.IN("name", "name of the window to modify position of"),
             nk_vec2.IN("position", "points to a {@code nk_vec2} struct with the new position of currently active window")
         )
 
@@ -949,7 +949,7 @@ nk_style_pop_vec2(ctx);""")}
             "Updates the size of the specified window.",
 
             ctx,
-            const..charUTF8_p.IN("name", "name of the window to modify size of"),
+            charUTF8.const.p.IN("name", "name of the window to modify size of"),
             nk_vec2.IN("size", "points to a {@code nk_vec2} struct with the new size of currently active window")
         )
 
@@ -958,7 +958,7 @@ nk_style_pop_vec2(ctx);""")}
             "Sets the specified window as active window.",
 
             ctx,
-            const..charUTF8_p.IN("name", "name of the window to be set active")
+            charUTF8.const.p.IN("name", "name of the window to be set active")
         )
 
         void(
@@ -966,7 +966,7 @@ nk_style_pop_vec2(ctx);""")}
             "Closes the window with given window name which deletes the window at the end of the frame.",
 
             ctx,
-            const..charUTF8_p.IN("name", "")
+            charUTF8.const.p.IN("name", "")
         )
 
         void(
@@ -974,7 +974,7 @@ nk_style_pop_vec2(ctx);""")}
             "Collapses the window with given window name.",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             nk_collapse_states.IN("c", "", CollapseStates)
         )
 
@@ -983,7 +983,7 @@ nk_style_pop_vec2(ctx);""")}
             "Collapses the window with given window name if the given condition was met.",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             nk_collapse_states.IN("c", "", CollapseStates),
             intb.IN("cond", "")
         )
@@ -993,7 +993,7 @@ nk_style_pop_vec2(ctx);""")}
             "Hides a visible or reshows a hidden window.",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             nk_show_states.IN("s", "", ShowStates)
         )
 
@@ -1002,7 +1002,7 @@ nk_style_pop_vec2(ctx);""")}
             "Hides/shows a window depending on condition.",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             nk_show_states.IN("s", "", ShowStates),
             intb.IN("cond", "")
         )
@@ -1098,7 +1098,7 @@ nk_style_pop_vec2(ctx);""")}
             nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
             float.IN("height", "holds height of each widget in row or zero for auto layouting"),
             AutoSize("ratio")..nk_int.IN("cols", "number of widgets inside row"),
-            const..float_p.IN("ratio", "")
+            float.const.p.IN("ratio", "")
         )
 
         void(
@@ -1203,7 +1203,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("flags", "")
         )
         intb(
@@ -1211,8 +1211,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", "must be an unique identifier for this group"),
-            const..charUTF8_p.IN("title", "group header title"),
+            charUTF8.const.p.IN("name", "must be an unique identifier for this group"),
+            charUTF8.const.p.IN("title", "group header title"),
             nk_flags.IN(
                 "flags",
                 "window flags defined in the nk_panel_flags section with a number of different group behaviors",
@@ -1226,9 +1226,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check(1)..nk_uint_p.IN("x_offset", ""),
-            Check(1)..nk_uint_p.IN("y_offset", ""),
-            const..charUTF8_p.IN("title", ""),
+            Check(1)..nk_uint.p.IN("x_offset", ""),
+            Check(1)..nk_uint.p.IN("y_offset", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("flags", "")
         )
         intb(
@@ -1236,8 +1236,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_scroll_p.IN("scroll", ""),
-            const..charUTF8_p.IN("title", ""),
+            nk_scroll.p.IN("scroll", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("flags", "")
         )
         void("group_scrolled_end", "", ctx)
@@ -1248,8 +1248,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_list_view_p.OUT("view", ""),
-            const..charUTF8_p.IN("title", ""),
+            nk_list_view.p.OUT("view", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("flags", ""),
             int.IN("row_height", ""),
             int.IN("row_count", "")
@@ -1258,7 +1258,7 @@ nk_style_pop_vec2(ctx);""")}
             "list_view_end",
             "",
 
-            nk_list_view_p.OUT("view", "")
+            nk_list_view.p.OUT("view", "")
         )
 
         val tree_push_hashed = intb(
@@ -1271,9 +1271,9 @@ nk_style_pop_vec2(ctx);""")}
                 "value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node",
                 TreeTypes
             ),
-            const..charUTF8_p.IN("title", "label printed in the tree header"),
+            charUTF8.const.p.IN("title", "label printed in the tree header"),
             nk_collapse_states.IN("initial_state", "initial tree state value out of {@code nk_collapse_states}", CollapseStates),
-            const..char_p.IN("hash", "memory block or string to generate the ID from"),
+            char.const.p.IN("hash", "memory block or string to generate the ID from"),
             AutoSize("hash")..nk_int.IN("len", "size of passed memory block or string in {@code hash}"),
             nk_int.IN("seed", "seeding value if this function is called in a loop or default to 0")
         )
@@ -1318,7 +1318,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..nk_int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -1328,7 +1328,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..nk_int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments),
             nk_color.IN("color", "")
@@ -1339,7 +1339,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..nk_int.IN("len", "")
         )
 
@@ -1348,7 +1348,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..nk_int.IN("len", ""),
             nk_color.IN("color", "")
         )
@@ -1358,7 +1358,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_flags.IN("align", "", TextAlignments)
         )
 
@@ -1367,7 +1367,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_color.IN("color", "")
         )
@@ -1377,7 +1377,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", "")
+            charUTF8.const.p.IN("str", "")
         )
 
         void(
@@ -1385,7 +1385,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_color.IN("color", "")
         )
 
@@ -1425,7 +1425,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             AutoSize("title")..nk_int.IN("len", "")
         )
 
@@ -1434,7 +1434,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("title", "")
+            charUTF8.const.p.IN("title", "")
         )
 
         intb(
@@ -1467,7 +1467,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("text_alignment", "", TextAlignments)
         )
 
@@ -1477,7 +1477,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..nk_int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -1488,7 +1488,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("text_alignment", "", TextAlignments)
         )
 
@@ -1498,7 +1498,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..nk_int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -1508,8 +1508,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
-            const..charUTF8_p.IN("title", ""),
+            nk_style_button.const.p.IN("style", ""),
+            charUTF8.const.p.IN("title", ""),
             int.IN("len", "")
         )
 
@@ -1518,8 +1518,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
-            const..charUTF8_p.IN("title", "")
+            nk_style_button.const.p.IN("style", ""),
+            charUTF8.const.p.IN("title", "")
         )
 
         intb(
@@ -1527,7 +1527,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
+            nk_style_button.const.p.IN("style", ""),
             nk_symbol_type.IN("symbol", "")
         )
 
@@ -1536,7 +1536,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
+            nk_style_button.const.p.IN("style", ""),
             nk_image.IN("img", "")
         )
 
@@ -1545,9 +1545,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
+            nk_style_button.const.p.IN("style", ""),
             nk_symbol_type.IN("symbol", ""),
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             int.IN("len", ""),
             nk_flags.IN("alignment", "")
         )
@@ -1557,9 +1557,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
+            nk_style_button.const.p.IN("style", ""),
             nk_symbol_type.IN("symbol", ""),
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("text_alignment", "")
         )
 
@@ -1568,9 +1568,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
+            nk_style_button.const.p.IN("style", ""),
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("text_alignment", "")
         )
 
@@ -1579,9 +1579,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_style_button_p.IN("style", ""),
+            nk_style_button.const.p.IN("style", ""),
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             int.IN("len", ""),
             nk_flags.IN("alignment", "")
         )
@@ -1591,7 +1591,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             intb.IN("active", "")
         )
 
@@ -1600,7 +1600,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             intb.IN("active", "")
         )
@@ -1610,7 +1610,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             unsigned_int.IN("flags", ""),
             unsigned_int.IN("value", "")
         )
@@ -1620,7 +1620,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             unsigned_int.IN("flags", ""),
             unsigned_int.IN("value", "")
@@ -1631,8 +1631,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
-            Check(1)..int_p.INOUT("active", "")
+            charUTF8.const.p.IN("str", ""),
+            Check(1)..int.p.INOUT("active", "")
         )
 
         intb(
@@ -1640,9 +1640,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
-            Check(1)..int_p.INOUT("active", "")
+            Check(1)..int.p.INOUT("active", "")
         )
 
         intb(
@@ -1650,8 +1650,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
-            Check(1)..unsigned_int_p.INOUT("flags", ""),
+            charUTF8.const.p.IN("str", ""),
+            Check(1)..unsigned_int.p.INOUT("flags", ""),
             unsigned_int.IN("value", "")
         )
 
@@ -1660,9 +1660,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
-            Check(1)..unsigned_int_p.INOUT("flags", ""),
+            Check(1)..unsigned_int.p.INOUT("flags", ""),
             unsigned_int.IN("value", "")
         )
 
@@ -1671,8 +1671,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
-            Check(1)..int_p.INOUT("active", "")
+            charUTF8.const.p.IN("str", ""),
+            Check(1)..int.p.INOUT("active", "")
         )
 
         intb(
@@ -1680,9 +1680,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
-            Check(1)..int_p.INOUT("active", "")
+            Check(1)..int.p.INOUT("active", "")
         )
 
         intb(
@@ -1690,7 +1690,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             intb.IN("active", "")
         )
 
@@ -1699,7 +1699,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             intb.IN("active", "")
         )
@@ -1709,9 +1709,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_flags.IN("align", "", TextAlignments),
-            Check(1)..int_p.INOUT("value", "")
+            Check(1)..int.p.INOUT("value", "")
         )
 
         intb(
@@ -1719,10 +1719,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
-            Check(1)..int_p.INOUT("value", "")
+            Check(1)..int.p.INOUT("value", "")
         )
 
         intb(
@@ -1731,9 +1731,9 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_flags.IN("align", "", TextAlignments),
-            Check(1)..int_p.INOUT("value", "")
+            Check(1)..int.p.INOUT("value", "")
         )
 
         intb(
@@ -1742,10 +1742,10 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
-            Check(1)..int_p.INOUT("value", "")
+            Check(1)..int.p.INOUT("value", "")
         )
 
         intb(
@@ -1753,7 +1753,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_flags.IN("align", "", TextAlignments),
             intb.IN("value", "")
         )
@@ -1763,7 +1763,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
             intb.IN("value", "")
@@ -1775,7 +1775,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             nk_flags.IN("align", "", TextAlignments),
             intb.IN("value", "")
         )
@@ -1786,7 +1786,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("str", ""),
+            charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
             intb.IN("value", "")
@@ -1820,7 +1820,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             float.IN("min", ""),
-            Check(1)..float_p.OUT("val", ""),
+            Check(1)..float.p.OUT("val", ""),
             float.IN("max", ""),
             float.IN("step", "")
         )
@@ -1831,7 +1831,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             int.IN("min", ""),
-            Check(1)..int_p.OUT("val", ""),
+            Check(1)..int.p.OUT("val", ""),
             int.IN("max", ""),
             int.IN("step", "")
         )
@@ -1879,9 +1879,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             int.IN("min", ""),
-            Check(1)..int_p.INOUT("val", ""),
+            Check(1)..int.p.INOUT("val", ""),
             int.IN("max", ""),
             int.IN("step", ""),
             float.IN("inc_per_pixel", "")
@@ -1892,9 +1892,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             float.IN("min", ""),
-            Check(1)..float_p.INOUT("val", ""),
+            Check(1)..float.p.INOUT("val", ""),
             float.IN("max", ""),
             float.IN("step", ""),
             float.IN("inc_per_pixel", "")
@@ -1905,9 +1905,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             double.IN("min", ""),
-            Check(1)..double_p.INOUT("val", ""),
+            Check(1)..double.p.INOUT("val", ""),
             double.IN("max", ""),
             double.IN("step", ""),
             float.IN("inc_per_pixel", "")
@@ -1918,7 +1918,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             int.IN("min", ""),
             int.IN("val", ""),
             int.IN("max", ""),
@@ -1931,7 +1931,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             float.IN("min", ""),
             float.IN("val", ""),
             float.IN("max", ""),
@@ -1944,7 +1944,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("name", ""),
+            charUTF8.const.p.IN("name", ""),
             double.IN("min", ""),
             double.IN("val", ""),
             double.IN("max", ""),
@@ -1973,8 +1973,8 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_flags.IN("flags", "", EditFlags),
-            charUTF8_p.IN("memory", ""),
-            Check(1)..int_p.OUT("len", ""),
+            charUTF8.p.IN("memory", ""),
+            Check(1)..int.p.OUT("len", ""),
             int.IN("max", ""),
             nullable..nk_plugin_filter.IN("filter", "")
         )
@@ -1985,7 +1985,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_flags.IN("flags", "", EditFlags),
-            nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.p.IN("edit", ""),
             nullable..nk_plugin_filter.IN("filter", "")
         )
 
@@ -1995,7 +1995,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_flags.IN("flags", "", EditFlags),
-            charUTF8_p.IN("buffer", ""),
+            charUTF8.p.IN("buffer", ""),
             int.IN("max", ""),
             nullable..nk_plugin_filter.IN("filter", "")
         )
@@ -2075,7 +2075,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_chart_type.IN("type", "", ChartTypes),
-            Check("offset + count")..const..float_p.IN("values", ""),
+            Check("offset + count")..float.const.p.IN("values", ""),
             int.IN("count", ""),
             int.IN("offset", "")
         )
@@ -2098,7 +2098,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_popup_type.IN("type", "", PopupTypes),
-            const..charUTF8_p.IN("title", ""),
+            charUTF8.const.p.IN("title", ""),
             nk_flags.IN("flags", "", PanelFlags),
             nk_rect.IN("rect", "")
         )
@@ -2111,7 +2111,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_pp.IN("items", ""),
+            charUTF8.const.p.p.IN("items", ""),
             AutoSize("items")..int.IN("count", ""),
             intb.IN("selected", ""),
             int.IN("item_height", ""),
@@ -2123,7 +2123,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("items_separated_by_separator", ""),
+            charUTF8.const.p.IN("items_separated_by_separator", ""),
             int.IN("separator", ""),
             intb.IN("selected", ""),
             int.IN("count", ""),
@@ -2136,7 +2136,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("items_separated_by_zeros", ""),
+            charUTF8.const.p.IN("items_separated_by_zeros", ""),
             intb.IN("selected", ""),
             int.IN("count", ""),
             int.IN("item_height", ""),
@@ -2161,9 +2161,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_pp.IN("items", ""),
+            charUTF8.const.p.p.IN("items", ""),
             AutoSize("items")..int.IN("count", ""),
-            Check(1)..int_p.INOUT("selected", ""),
+            Check(1)..int.p.INOUT("selected", ""),
             int.IN("item_height", ""),
             nk_vec2.IN("size", "")
         )
@@ -2173,8 +2173,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("items_separated_by_zeros", ""),
-            Check(1)..int_p.INOUT("selected", ""),
+            charUTF8.const.p.IN("items_separated_by_zeros", ""),
+            Check(1)..int.p.INOUT("selected", ""),
             int.IN("count", ""),
             int.IN("item_height", ""),
             nk_vec2.IN("size", "")
@@ -2185,9 +2185,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("items_separated_by_separator", ""),
+            charUTF8.const.p.IN("items_separated_by_separator", ""),
             int.IN("separator", ""),
-            Check(1)..int_p.INOUT("selected", ""),
+            Check(1)..int.p.INOUT("selected", ""),
             int.IN("count", ""),
             int.IN("item_height", ""),
             nk_vec2.IN("size", "")
@@ -2200,7 +2200,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             nk_item_getter.IN("item_getter", ""),
             opaque_p.IN("userdata", ""),
-            Check(1)..int_p.INOUT("selected", ""),
+            Check(1)..int.p.INOUT("selected", ""),
             int.IN("count", ""),
             int.IN("item_height", ""),
             nk_vec2.IN("size", "")
@@ -2211,7 +2211,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("selected", ""),
+            charUTF8.const.p.IN("selected", ""),
             AutoSize("selected")..int.IN("len", ""),
             nk_vec2.IN("size", "")
         )
@@ -2221,7 +2221,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("selected", ""),
+            charUTF8.const.p.IN("selected", ""),
             nk_vec2.IN("size", "")
         )
 
@@ -2248,7 +2248,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("selected", ""),
+            charUTF8.const.p.IN("selected", ""),
             nk_symbol_type.IN("symbol", "", SymbolTypes),
             nk_vec2.IN("size", "")
         )
@@ -2258,7 +2258,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("selected", ""),
+            charUTF8.const.p.IN("selected", ""),
             AutoSize("selected")..int.IN("len", ""),
             nk_symbol_type.IN("symbol", "", SymbolTypes),
             nk_vec2.IN("size", "")
@@ -2278,7 +2278,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("selected", ""),
+            charUTF8.const.p.IN("selected", ""),
             nk_image.IN("img", ""),
             nk_vec2.IN("size", "")
         )
@@ -2288,7 +2288,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("selected", ""),
+            charUTF8.const.p.IN("selected", ""),
             AutoSize("selected")..int.IN("len", ""),
             nk_image.IN("img", ""),
             nk_vec2.IN("size", "")
@@ -2299,7 +2299,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2308,7 +2308,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2319,7 +2319,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2329,7 +2329,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2340,7 +2340,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2350,7 +2350,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2373,7 +2373,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments)
         )
@@ -2383,7 +2383,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("align", "", TextAlignments)
         )
 
@@ -2393,7 +2393,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2403,7 +2403,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2414,7 +2414,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2424,7 +2424,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2437,7 +2437,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", "")
+            charUTF8.const.p.IN("text", "")
         )
 
         intb(
@@ -2458,7 +2458,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_vec2.IN("size", "")
@@ -2469,7 +2469,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_vec2.IN("size", "")
         )
@@ -2479,7 +2479,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_image.IN("img", ""),
             nk_vec2.IN("size", "")
         )
@@ -2489,7 +2489,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_image.IN("img", ""),
@@ -2501,7 +2501,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_image.IN("img", ""),
             nk_vec2.IN("size", "")
@@ -2512,7 +2512,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_symbol_type.IN("symbol", "", SymbolTypes),
             nk_vec2.IN("size", "")
         )
@@ -2522,7 +2522,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_symbol_type.IN("symbol", "", SymbolTypes),
@@ -2534,7 +2534,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("align", "", TextAlignments),
             nk_symbol_type.IN("symbol", "", SymbolTypes),
             nk_vec2.IN("size", "")
@@ -2545,7 +2545,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments)
         )
@@ -2555,7 +2555,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2565,7 +2565,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2575,7 +2575,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2586,7 +2586,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
@@ -2597,7 +2597,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_symbol_type.IN("symbol", "", SymbolTypes),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             nk_flags.IN("alignment", "", TextAlignments)
         )
 
@@ -2614,7 +2614,7 @@ nk_style_pop_vec2(ctx);""")}
             nk_buffer_p.IN("cmds", ""),
             nk_buffer_p.IN("vertices", ""),
             nk_buffer_p.IN("elements", ""),
-            const..nk_convert_config.p.IN("config", "")
+            nk_convert_config.const.p.IN("config", "")
         )
 
         void(
@@ -2702,7 +2702,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check("NK_COLOR_COUNT")..const..nk_color.p.IN("table", "")
+            Check("NK_COLOR_COUNT")..nk_color.const.p.IN("table", "")
         )
 
         void(
@@ -2711,7 +2711,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_style_cursor.IN("style", "", StyleCursor),
-            nk_cursor_p.IN("cursor", "")
+            nk_cursor.p.IN("cursor", "")
         )
 
         void(
@@ -2719,10 +2719,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check("NK_CURSOR_COUNT")..nk_cursor_p.IN("cursors", "")
+            Check("NK_CURSOR_COUNT")..nk_cursor.p.IN("cursors", "")
         )
 
-        const..charUTF8_p(
+        charUTF8.const.p(
             "style_get_color_by_name",
             "",
 
@@ -2734,7 +2734,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_user_font_p.IN("font", "")
+            nk_user_font.const.p.IN("font", "")
         )
 
         int(
@@ -2753,7 +2753,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            const..nk_user_font_p.IN("font", "")
+            nk_user_font.const.p.IN("font", "")
         )
 
         int(
@@ -2761,7 +2761,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check(1)..float_p.IN("address", ""),
+            Check(1)..float.p.IN("address", ""),
             float.IN("value", "")
         )
 
@@ -2874,14 +2874,14 @@ nk_style_pop_vec2(ctx);""")}
             "rgb_iv",
             "",
 
-            Check(3)..const..int_p.IN("rgb", "")
+            Check(3)..int.const.p.IN("rgb", "")
         )
 
         nk_color(
             "rgb_bv",
             "",
 
-            Check(3)..const..nk_byte_p.IN("rgb", "")
+            Check(3)..nk_byte.const.p.IN("rgb", "")
         )
 
         nk_color(
@@ -2897,7 +2897,7 @@ nk_style_pop_vec2(ctx);""")}
             "rgb_fv",
             "",
 
-            Check(3)..const..float_p.IN("rgb", "")
+            Check(3)..float.const.p.IN("rgb", "")
         )
 
         nk_color(
@@ -2911,7 +2911,7 @@ nk_style_pop_vec2(ctx);""")}
             "rgb_hex",
             "",
 
-            Check(6)..const..charASCII_p.IN("rgb", "")
+            Check(6)..charASCII.const.p.IN("rgb", "")
         )
 
         nk_color(
@@ -2935,14 +2935,14 @@ nk_style_pop_vec2(ctx);""")}
             "rgba_iv",
             "",
 
-            Check(4)..const..int_p.IN("rgba", "")
+            Check(4)..int.const.p.IN("rgba", "")
         )
 
         nk_color(
             "rgba_bv",
             "",
 
-            Check(4)..const..nk_byte_p.IN("rgba", "")
+            Check(4)..nk_byte.const.p.IN("rgba", "")
         )
 
         nk_color(
@@ -2959,7 +2959,7 @@ nk_style_pop_vec2(ctx);""")}
             "rgba_fv",
             "",
 
-            Check(4)..const..float_p.IN("rgba", "")
+            Check(4)..float.const.p.IN("rgba", "")
         )
 
         nk_color(
@@ -2973,7 +2973,7 @@ nk_style_pop_vec2(ctx);""")}
             "rgba_hex",
             "",
 
-            Check(8)..const..charASCII_p.IN("rgba", "")
+            Check(8)..charASCII.const.p.IN("rgba", "")
         )
 
         nk_colorf(
@@ -2990,17 +2990,17 @@ nk_style_pop_vec2(ctx);""")}
             "hsva_colorfv",
             "",
 
-            Check(4)..float_p.IN("c", "")
+            Check(4)..float.p.IN("c", "")
         )
 
         void(
             "colorf_hsva_f",
             "",
 
-            Check(1)..float_p.OUT("out_h", ""),
-            Check(1)..float_p.OUT("out_s", ""),
-            Check(1)..float_p.OUT("out_v", ""),
-            Check(1)..float_p.OUT("out_a", ""),
+            Check(1)..float.p.OUT("out_h", ""),
+            Check(1)..float.p.OUT("out_s", ""),
+            Check(1)..float.p.OUT("out_v", ""),
+            Check(1)..float.p.OUT("out_a", ""),
             nk_colorf.IN("in", "")
         )
 
@@ -3008,7 +3008,7 @@ nk_style_pop_vec2(ctx);""")}
             "colorf_hsva_fv",
             "",
 
-            Check(4)..float_p.OUT("hsva", ""),
+            Check(4)..float.p.OUT("hsva", ""),
             nk_colorf.IN("in", "")
         )
 
@@ -3025,14 +3025,14 @@ nk_style_pop_vec2(ctx);""")}
             "hsv_iv",
             "",
 
-            Check(3)..const..int_p.IN("hsv", "")
+            Check(3)..int.const.p.IN("hsv", "")
         )
 
         nk_color(
             "hsv_bv",
             "",
 
-            Check(3)..const..nk_byte_p.IN("hsv", "")
+            Check(3)..nk_byte.const.p.IN("hsv", "")
         )
 
         nk_color(
@@ -3048,7 +3048,7 @@ nk_style_pop_vec2(ctx);""")}
             "hsv_fv",
             "",
 
-            Check(3)..const..float_p.IN("hsv", "")
+            Check(3)..float.const.p.IN("hsv", "")
         )
 
         nk_color(
@@ -3065,14 +3065,14 @@ nk_style_pop_vec2(ctx);""")}
             "hsva_iv",
             "",
 
-            Check(4)..const..int_p.IN("hsva", "")
+            Check(4)..int.const.p.IN("hsva", "")
         )
 
         nk_color(
             "hsva_bv",
             "",
 
-            Check(4)..const..nk_byte_p.IN("hsva", "")
+            Check(4)..nk_byte.const.p.IN("hsva", "")
         )
 
         nk_color(
@@ -3089,17 +3089,17 @@ nk_style_pop_vec2(ctx);""")}
             "hsva_fv",
             "",
 
-            Check(4)..const..float_p.IN("hsva", "")
+            Check(4)..float.const.p.IN("hsva", "")
         )
 
         void(
             "color_f",
             "",
 
-            Check(1)..float_p.OUT("r", ""),
-            Check(1)..float_p.OUT("g", ""),
-            Check(1)..float_p.OUT("b", ""),
-            Check(1)..float_p.OUT("a", ""),
+            Check(1)..float.p.OUT("r", ""),
+            Check(1)..float.p.OUT("g", ""),
+            Check(1)..float.p.OUT("b", ""),
+            Check(1)..float.p.OUT("a", ""),
             nk_color.IN("color", "")
         )
 
@@ -3107,7 +3107,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_fv",
             "",
 
-            Check(4)..float_p.OUT("rgba_out", ""),
+            Check(4)..float.p.OUT("rgba_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3122,10 +3122,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_d",
             "",
 
-            Check(1)..double_p.OUT("r", ""),
-            Check(1)..double_p.OUT("g", ""),
-            Check(1)..double_p.OUT("b", ""),
-            Check(1)..double_p.OUT("a", ""),
+            Check(1)..double.p.OUT("r", ""),
+            Check(1)..double.p.OUT("g", ""),
+            Check(1)..double.p.OUT("b", ""),
+            Check(1)..double.p.OUT("a", ""),
             nk_color.IN("color", "")
         )
 
@@ -3133,7 +3133,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_dv",
             "",
 
-            Check(4)..double_p.OUT("rgba_out", ""),
+            Check(4)..double.p.OUT("rgba_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3148,7 +3148,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hex_rgba",
             "",
 
-            Check(8)..char_p.OUT("output", ""),
+            Check(8)..char.p.OUT("output", ""),
             nk_color.IN("color", "")
         )
 
@@ -3156,7 +3156,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hex_rgb",
             "",
 
-            Check(6)..char_p.OUT("output", ""),
+            Check(6)..char.p.OUT("output", ""),
             nk_color.IN("color", "")
         )
 
@@ -3164,9 +3164,9 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_i",
             "",
 
-            Check(1)..int_p.OUT("out_h", ""),
-            Check(1)..int_p.OUT("out_s", ""),
-            Check(1)..int_p.OUT("out_v", ""),
+            Check(1)..int.p.OUT("out_h", ""),
+            Check(1)..int.p.OUT("out_s", ""),
+            Check(1)..int.p.OUT("out_v", ""),
             nk_color.IN("color", "")
         )
 
@@ -3174,9 +3174,9 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_b",
             "",
 
-            Check(1)..nk_byte_p.OUT("out_h", ""),
-            Check(1)..nk_byte_p.OUT("out_s", ""),
-            Check(1)..nk_byte_p.OUT("out_v", ""),
+            Check(1)..nk_byte.p.OUT("out_h", ""),
+            Check(1)..nk_byte.p.OUT("out_s", ""),
+            Check(1)..nk_byte.p.OUT("out_v", ""),
             nk_color.IN("color", "")
         )
 
@@ -3184,7 +3184,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_iv",
             "",
 
-            Check(3)..int_p.OUT("hsv_out", ""),
+            Check(3)..int.p.OUT("hsv_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3192,7 +3192,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_bv",
             "",
 
-            Check(3)..nk_byte_p.OUT("hsv_out", ""),
+            Check(3)..nk_byte.p.OUT("hsv_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3200,9 +3200,9 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_f",
             "",
 
-            Check(1)..float_p.OUT("out_h", ""),
-            Check(1)..float_p.OUT("out_s", ""),
-            Check(1)..float_p.OUT("out_v", ""),
+            Check(1)..float.p.OUT("out_h", ""),
+            Check(1)..float.p.OUT("out_s", ""),
+            Check(1)..float.p.OUT("out_v", ""),
             nk_color.IN("color", "")
         )
 
@@ -3210,7 +3210,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_fv",
             "",
 
-            Check(3)..float_p.OUT("hsv_out", ""),
+            Check(3)..float.p.OUT("hsv_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3218,10 +3218,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_i",
             "",
 
-            Check(1)..int_p.OUT("h", ""),
-            Check(1)..int_p.OUT("s", ""),
-            Check(1)..int_p.OUT("v", ""),
-            Check(1)..int_p.OUT("a", ""),
+            Check(1)..int.p.OUT("h", ""),
+            Check(1)..int.p.OUT("s", ""),
+            Check(1)..int.p.OUT("v", ""),
+            Check(1)..int.p.OUT("a", ""),
             nk_color.IN("color", "")
         )
 
@@ -3229,10 +3229,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_b",
             "",
 
-            Check(1)..nk_byte_p.OUT("h", ""),
-            Check(1)..nk_byte_p.OUT("s", ""),
-            Check(1)..nk_byte_p.OUT("v", ""),
-            Check(1)..nk_byte_p.OUT("a", ""),
+            Check(1)..nk_byte.p.OUT("h", ""),
+            Check(1)..nk_byte.p.OUT("s", ""),
+            Check(1)..nk_byte.p.OUT("v", ""),
+            Check(1)..nk_byte.p.OUT("a", ""),
             nk_color.IN("color", "")
         )
 
@@ -3240,7 +3240,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_iv",
             "",
 
-            Check(4)..int_p.OUT("hsva_out", ""),
+            Check(4)..int.p.OUT("hsva_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3248,7 +3248,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_bv",
             "",
 
-            Check(4)..nk_byte_p.OUT("hsva_out", ""),
+            Check(4)..nk_byte.p.OUT("hsva_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3256,10 +3256,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_f",
             "",
 
-            Check(1)..float_p.OUT("out_h", ""),
-            Check(1)..float_p.OUT("out_s", ""),
-            Check(1)..float_p.OUT("out_v", ""),
-            Check(1)..float_p.OUT("out_a", ""),
+            Check(1)..float.p.OUT("out_h", ""),
+            Check(1)..float.p.OUT("out_s", ""),
+            Check(1)..float.p.OUT("out_v", ""),
+            Check(1)..float.p.OUT("out_a", ""),
             nk_color.IN("color", "")
         )
 
@@ -3267,7 +3267,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_fv",
             "",
 
-            Check(4)..float_p.OUT("hsva_out", ""),
+            Check(4)..float.p.OUT("hsva_out", ""),
             nk_color.IN("color", "")
         )
 
@@ -3310,7 +3310,7 @@ nk_style_pop_vec2(ctx);""")}
             "image_is_subimage",
             "",
 
-            const..nk_image.p.IN("img", "")
+            nk_image.const.p.IN("img", "")
         )
 
         nk_image(
@@ -3347,7 +3347,7 @@ nk_style_pop_vec2(ctx);""")}
             "murmur_hash",
             "",
 
-            const..void_p.IN("key", ""),
+            void.const.p.IN("key", ""),
             AutoSize("key")..int.IN("len", ""),
             nk_hash.IN("seed", "")
         )
@@ -3383,14 +3383,14 @@ nk_style_pop_vec2(ctx);""")}
             "vec2v",
             "",
 
-            Check(2)..const..float_p.IN("xy", "")
+            Check(2)..float.const.p.IN("xy", "")
         )
 
         nk_vec2(
             "vec2iv",
             "",
 
-            Check(2)..const..int_p.IN("xy", "")
+            Check(2)..int.const.p.IN("xy", "")
         )
 
         nk_rect(
@@ -3430,14 +3430,14 @@ nk_style_pop_vec2(ctx);""")}
             "rectv",
             "",
 
-            Check(4)..const..float_p.IN("xywh", "")
+            Check(4)..float.const.p.IN("xywh", "")
         )
 
         nk_rect(
             "rectiv",
             "",
 
-            Check(4)..const..int_p.IN("xywh", "")
+            Check(4)..int.const.p.IN("xywh", "")
         )
 
         nk_vec2(
@@ -3460,23 +3460,23 @@ nk_style_pop_vec2(ctx);""")}
             "strlen",
             "",
 
-            const..charUTF8_p.IN("str", "")
+            charUTF8.const.p.IN("str", "")
         )
 
         int(
             "stricmp",
             "",
 
-            const..charUTF8_p.IN("s1", ""),
-            const..charUTF8_p.IN("s2", "")
+            charUTF8.const.p.IN("s1", ""),
+            charUTF8.const.p.IN("s2", "")
         )
 
         int(
             "stricmpn",
             "",
 
-            const..charUTF8_p.IN("s1", ""),
-            const..charUTF8_p.IN("s2", ""),
+            charUTF8.const.p.IN("s1", ""),
+            charUTF8.const.p.IN("s2", ""),
             int.IN("n", "")
         )
 
@@ -3484,24 +3484,24 @@ nk_style_pop_vec2(ctx);""")}
             "strtoi",
             "",
 
-            const..charUTF8_p.IN("str", ""),
-            Check(1)..const..charUTF8_pp.OUT("endptr", "")
+            charUTF8.const.p.IN("str", ""),
+            Check(1)..charUTF8.const.p.p.OUT("endptr", "")
         )
 
         float(
             "strtof",
             "",
 
-            const..charUTF8_p.IN("str", ""),
-            Check(1)..const..charUTF8_pp.OUT("endptr", "")
+            charUTF8.const.p.IN("str", ""),
+            Check(1)..charUTF8.const.p.p.OUT("endptr", "")
         )
 
         double(
             "strtod",
             "",
 
-            const..charUTF8_p.IN("str", ""),
-            Check(1)..const..charUTF8_pp.OUT("endptr", "")
+            charUTF8.const.p.IN("str", ""),
+            Check(1)..charUTF8.const.p.p.OUT("endptr", "")
         )
 
         intb(
@@ -3516,8 +3516,8 @@ nk_style_pop_vec2(ctx);""")}
             )}
             """,
 
-            const..charUTF8_p.IN("str", ""),
-            const..charUTF8_p.IN("regexp", "")
+            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p.IN("regexp", "")
         )
 
         intb(
@@ -3528,27 +3528,27 @@ nk_style_pop_vec2(ctx);""")}
 
             """,
 
-            const..charUTF8_p.IN("str", ""),
-            const..charUTF8_p.IN("pattern", ""),
-            Check(1)..int_p.OUT("out_score", "")
+            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p.IN("pattern", ""),
+            Check(1)..int.p.OUT("out_score", "")
         )
 
         int(
             "strmatch_fuzzy_text",
             "",
 
-            const..charUTF8_p.IN("txt", ""),
+            charUTF8.const.p.IN("txt", ""),
             AutoSize("txt")..int.IN("txt_len", ""),
-            const..charUTF8_p.IN("pattern", ""),
-            Check(1)..int_p.OUT("out_score", "")
+            charUTF8.const.p.IN("pattern", ""),
+            Check(1)..int.p.OUT("out_score", "")
         )
 
         int(
             "utf_decode",
             "",
 
-            const..char_p.IN("c", ""),
-            Check(1)..nk_rune_p.OUT("u", ""),
+            char.const.p.IN("c", ""),
+            Check(1)..nk_rune.p.OUT("u", ""),
             AutoSize("c")..int.IN("clen", "")
         )
 
@@ -3557,7 +3557,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_rune.IN("u", ""),
-            char_p.IN("c", ""),
+            char.p.IN("c", ""),
             AutoSize("c")..int.IN("clen", "")
         )
 
@@ -3565,19 +3565,19 @@ nk_style_pop_vec2(ctx);""")}
             "utf_len",
             "",
 
-            const..char_p.IN("str", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("byte_len", "")
         )
 
-        const..char_p(
+        char.const.p(
             "utf_at",
             "",
 
-            const..char_p.IN("buffer", ""),
+            char.const.p.IN("buffer", ""),
             AutoSize("buffer")..int.IN("length", ""),
             int.IN("index", ""),
-            Check(1)..nk_rune_p.OUT("unicode", ""),
-            AutoSizeResult..int_p.OUT("len", "")
+            Check(1)..nk_rune.p.OUT("unicode", ""),
+            AutoSizeResult..int.p.OUT("len", "")
         )
 
         void(
@@ -3585,7 +3585,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_buffer_p.IN("buffer", ""),
-            const..nk_allocator_p.IN("allocator", ""),
+            nk_allocator.const.p.IN("allocator", ""),
             nk_size.IN("size", "")
         )
 
@@ -3594,7 +3594,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_buffer_p.IN("buffer", ""),
-            void_p.IN("memory", ""),
+            void.p.IN("memory", ""),
             AutoSize("memory")..nk_size.IN("size", "")
         )
 
@@ -3612,7 +3612,7 @@ nk_style_pop_vec2(ctx);""")}
 
             nk_buffer_p.IN("buffer", ""),
             nk_buffer_allocation_type.IN("type", "", BufferAllocationTypes),
-            const..void_p.IN("memory", ""),
+            void.const.p.IN("memory", ""),
             AutoSize("memory")..nk_size.IN("size", ""),
             nk_size.IN("align", "")
         )
@@ -3654,11 +3654,11 @@ nk_style_pop_vec2(ctx);""")}
             nk_buffer_p.IN("buffer", "")
         )
 
-        const..opaque_p(
+        opaque_const_p(
             "buffer_memory_const",
             "",
 
-            const..nk_buffer_p.IN("buffer", "")
+            nk_buffer.const.p.IN("buffer", "")
         )
 
         nk_size(
@@ -3672,8 +3672,8 @@ nk_style_pop_vec2(ctx);""")}
             "str_init",
             "",
 
-            nk_str_p.IN("str", ""),
-            const..nk_allocator_p.IN("allocator", ""),
+            nk_str.p.IN("str", ""),
+            nk_allocator.const.p.IN("allocator", ""),
             nk_size.IN("size", "")
         )
 
@@ -3681,8 +3681,8 @@ nk_style_pop_vec2(ctx);""")}
             "str_init_fixed",
             "",
 
-            nk_str_p.IN("str", ""),
-            void_p.IN("memory", ""),
+            nk_str.p.IN("str", ""),
+            void.p.IN("memory", ""),
             AutoSize("memory")..nk_size.IN("size", "")
         )
 
@@ -3690,22 +3690,22 @@ nk_style_pop_vec2(ctx);""")}
             "str_clear",
             "",
 
-            nk_str_p.IN("str", "")
+            nk_str.p.IN("str", "")
         )
 
         void(
             "str_free",
             "",
 
-            nk_str_p.IN("str", "")
+            nk_str.p.IN("str", "")
         )
 
         int(
             "str_append_text_char",
             "",
 
-            nk_str_p.IN("s", ""),
-            const..char_p.IN("str", ""),
+            nk_str.p.IN("s", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", "")
         )
 
@@ -3713,16 +3713,16 @@ nk_style_pop_vec2(ctx);""")}
             "str_append_str_char",
             "",
 
-            nk_str_p.IN("s", ""),
-            NullTerminated..const..char_p.IN("str", "")
+            nk_str.p.IN("s", ""),
+            NullTerminated..char.const.p.IN("str", "")
         )
 
         int(
             "str_append_text_utf8",
             "",
 
-            nk_str_p.IN("s", ""),
-            const..char_p.IN("str", ""),
+            nk_str.p.IN("s", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", "")
         )
 
@@ -3730,16 +3730,16 @@ nk_style_pop_vec2(ctx);""")}
             "str_append_str_utf8",
             "",
 
-            nk_str_p.IN("s", ""),
-            NullTerminated..const..char_p.IN("str", "")
+            nk_str.p.IN("s", ""),
+            NullTerminated..char.const.p.IN("str", "")
         )
 
         int(
             "str_append_text_runes",
             "",
 
-            nk_str_p.IN("s", ""),
-            const..nk_rune_p.IN("runes", ""),
+            nk_str.p.IN("s", ""),
+            nk_rune.const.p.IN("runes", ""),
             AutoSize("runes")..int.IN("len", "")
         )
 
@@ -3747,17 +3747,17 @@ nk_style_pop_vec2(ctx);""")}
             "str_append_str_runes",
             "",
 
-            nk_str_p.IN("s", ""),
-            NullTerminated..const..nk_rune_p.IN("runes", "")
+            nk_str.p.IN("s", ""),
+            NullTerminated..nk_rune.const.p.IN("runes", "")
         )
 
         int(
             "str_insert_at_char",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            const..char_p.IN("str", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", "")
         )
 
@@ -3765,9 +3765,9 @@ nk_style_pop_vec2(ctx);""")}
             "str_insert_at_rune",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            const..char_p.IN("str", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", "")
         )
 
@@ -3775,9 +3775,9 @@ nk_style_pop_vec2(ctx);""")}
             "str_insert_text_char",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            const..char_p.IN("str", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", "")
         )
 
@@ -3785,18 +3785,18 @@ nk_style_pop_vec2(ctx);""")}
             "str_insert_str_char",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            NullTerminated..const..char_p.IN("str", "")
+            NullTerminated..char.const.p.IN("str", "")
         )
 
         int(
             "str_insert_text_utf8",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            const..char_p.IN("str", ""),
+            char.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", "")
         )
 
@@ -3804,18 +3804,18 @@ nk_style_pop_vec2(ctx);""")}
             "str_insert_str_utf8",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            NullTerminated..const..char_p.IN("str", "")
+            NullTerminated..char.const.p.IN("str", "")
         )
 
         int(
             "str_insert_text_runes",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            const..nk_rune_p.IN("runes", ""),
+            nk_rune.const.p.IN("runes", ""),
             AutoSize("runes")..int.IN("len", "")
         )
 
@@ -3823,16 +3823,16 @@ nk_style_pop_vec2(ctx);""")}
             "str_insert_str_runes",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            NullTerminated..const..nk_rune_p.IN("runes", "")
+            NullTerminated..nk_rune.const.p.IN("runes", "")
         )
 
         void(
             "str_remove_chars",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("len", "")
         )
 
@@ -3840,7 +3840,7 @@ nk_style_pop_vec2(ctx);""")}
             "str_remove_runes",
             "",
 
-            nk_str_p.IN("str", ""),
+            nk_str.p.IN("str", ""),
             int.IN("len", "")
         )
 
@@ -3848,7 +3848,7 @@ nk_style_pop_vec2(ctx);""")}
             "str_delete_chars",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
             int.IN("len", "")
         )
@@ -3857,88 +3857,88 @@ nk_style_pop_vec2(ctx);""")}
             "str_delete_runes",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
             int.IN("len", "")
         )
 
-        charUTF8_p(
+        charUTF8.p(
             "str_at_char",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", "")
         )
 
-        char_p(
+        char.p(
             "str_at_rune",
             "",
 
-            nk_str_p.IN("s", ""),
+            nk_str.p.IN("s", ""),
             int.IN("pos", ""),
-            Check(1)..nk_rune_p.OUT("unicode", ""),
-            AutoSizeResult..int_p.OUT("len", "")
+            Check(1)..nk_rune.p.OUT("unicode", ""),
+            AutoSizeResult..int.p.OUT("len", "")
         )
 
         nk_rune(
             "str_rune_at",
             "",
 
-            const..nk_str_p.IN("s", ""),
+            nk_str.const.p.IN("s", ""),
             int.IN("pos", "")
         )
 
-        const..charUTF8_p(
+        charUTF8.const.p(
             "str_at_char_const",
             "",
 
-            const..nk_str_p.IN("s", ""),
+            nk_str.const.p.IN("s", ""),
             int.IN("pos", "")
         )
 
-        const..char_p(
+        char.const.p(
             "str_at_const",
             "",
 
-            const..nk_str_p.IN("s", ""),
+            nk_str.const.p.IN("s", ""),
             int.IN("pos", ""),
-            Check(1)..nk_rune_p.OUT("unicode", ""),
-            AutoSizeResult..int_p.OUT("len", "")
+            Check(1)..nk_rune.p.OUT("unicode", ""),
+            AutoSizeResult..int.p.OUT("len", "")
         )
 
-        charUTF8_p(
+        charUTF8.p(
             "str_get",
             "",
 
-            nk_str_p.IN("s", "")
+            nk_str.p.IN("s", "")
         )
 
-        const..charUTF8_p(
+        charUTF8.const.p(
             "str_get_const",
             "",
 
-            const..nk_str_p.IN("s", "")
+            nk_str.const.p.IN("s", "")
         )
 
         int(
             "str_len",
             "",
 
-            nk_str_p.IN("s", "")
+            nk_str.p.IN("s", "")
         )
 
         int(
             "str_len_char",
             "",
 
-            nk_str_p.IN("s", "")
+            nk_str.p.IN("s", "")
         )
 
         intb(
             "filter_default",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3946,7 +3946,7 @@ nk_style_pop_vec2(ctx);""")}
             "filter_ascii",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3954,7 +3954,7 @@ nk_style_pop_vec2(ctx);""")}
             "filter_float",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3962,7 +3962,7 @@ nk_style_pop_vec2(ctx);""")}
             "filter_decimal",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3970,7 +3970,7 @@ nk_style_pop_vec2(ctx);""")}
             "filter_hex",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3978,7 +3978,7 @@ nk_style_pop_vec2(ctx);""")}
             "filter_oct",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3986,7 +3986,7 @@ nk_style_pop_vec2(ctx);""")}
             "filter_binary",
             "",
 
-            const..nk_text_edit_p.IN("edit", ""),
+            nk_text_edit.const.p.IN("edit", ""),
             nk_rune.IN("unicode", "")
         )
 
@@ -3994,8 +3994,8 @@ nk_style_pop_vec2(ctx);""")}
             "textedit_init",
             "",
 
-            nk_text_edit_p.IN("box", ""),
-            nk_allocator_p.IN("allocator", ""),
+            nk_text_edit.p.IN("box", ""),
+            nk_allocator.p.IN("allocator", ""),
             nk_size.IN("size", "")
         )
 
@@ -4003,8 +4003,8 @@ nk_style_pop_vec2(ctx);""")}
             "textedit_init_fixed",
             "",
 
-            nk_text_edit_p.IN("box", ""),
-            void_p.IN("memory", ""),
+            nk_text_edit.p.IN("box", ""),
+            void.p.IN("memory", ""),
             AutoSize("memory")..nk_size.IN("size", "")
         )
 
@@ -4012,15 +4012,15 @@ nk_style_pop_vec2(ctx);""")}
             "textedit_free",
             "",
 
-            nk_text_edit_p.IN("box", "")
+            nk_text_edit.p.IN("box", "")
         )
 
         void(
             "textedit_text",
             "",
 
-            nk_text_edit_p.IN("box", ""),
-            const..charUTF8_p.IN("text", ""),
+            nk_text_edit.p.IN("box", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("total_len", "")
         )
 
@@ -4028,7 +4028,7 @@ nk_style_pop_vec2(ctx);""")}
             "textedit_delete",
             "",
 
-            nk_text_edit_p.IN("box", ""),
+            nk_text_edit.p.IN("box", ""),
             int.IN("where", ""),
             int.IN("len", "")
         )
@@ -4037,29 +4037,29 @@ nk_style_pop_vec2(ctx);""")}
             "textedit_delete_selection",
             "",
 
-            nk_text_edit_p.IN("box", "")
+            nk_text_edit.p.IN("box", "")
         )
 
         void(
             "textedit_select_all",
             "",
 
-            nk_text_edit_p.IN("box", "")
+            nk_text_edit.p.IN("box", "")
         )
 
         intb(
             "textedit_cut",
             "",
 
-            nk_text_edit_p.IN("box", "")
+            nk_text_edit.p.IN("box", "")
         )
 
         intb(
             "textedit_paste",
             "",
 
-            nk_text_edit_p.IN("box", ""),
-            const..charUTF8_p.IN("ctext", ""),
+            nk_text_edit.p.IN("box", ""),
+            charUTF8.const.p.IN("ctext", ""),
             AutoSize("ctext")..int.IN("len", "")
         )
 
@@ -4067,14 +4067,14 @@ nk_style_pop_vec2(ctx);""")}
             "textedit_undo",
             "",
 
-            nk_text_edit_p.IN("box", "")
+            nk_text_edit.p.IN("box", "")
         )
 
         void(
             "textedit_redo",
             "",
 
-            nk_text_edit_p.IN("box", "")
+            nk_text_edit.p.IN("box", "")
         )
     }();
 
@@ -4083,7 +4083,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_line",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             float.IN("x0", ""),
             float.IN("y0", ""),
             float.IN("x1", ""),
@@ -4096,7 +4096,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_curve",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             float.IN("ax", ""),
             float.IN("ay", ""),
             float.IN("ctrl0x", ""),
@@ -4113,7 +4113,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_rect",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
             float.IN("rounding", ""),
             float.IN("line_thickness", ""),
@@ -4124,7 +4124,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_circle",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
             float.IN("line_thickness", ""),
             nk_color.IN("color", "")
@@ -4134,7 +4134,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_arc",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             float.IN("cx", ""),
             float.IN("cy", ""),
             float.IN("radius", ""),
@@ -4148,7 +4148,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_triangle",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             float.IN("x0", ""),
             float.IN("y0", ""),
             float.IN("x1", ""),
@@ -4163,8 +4163,8 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_polyline",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
-            float_p.IN("points", ""),
+            nk_command_buffer.p.IN("b", ""),
+            float.p.IN("points", ""),
             AutoSize("points")..int.IN("point_count", ""),
             float.IN("line_thickness", ""),
             nk_color.IN("col", "")
@@ -4174,8 +4174,8 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_polygon",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
-            float_p.IN("points", ""),
+            nk_command_buffer.p.IN("b", ""),
+            float.p.IN("points", ""),
             AutoSize("points")..int.IN("point_count", ""),
             float.IN("line_thickness", ""),
             nk_color.IN("color", "")
@@ -4185,7 +4185,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_rect",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
             float.IN("rounding", ""),
             nk_color.IN("color", "")
@@ -4195,7 +4195,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_rect_multi_color",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
             nk_color.IN("left", ""),
             nk_color.IN("top", ""),
@@ -4207,7 +4207,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_circle",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
             nk_color.IN("color", "")
         )
@@ -4216,7 +4216,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_arc",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             float.IN("cx", ""),
             float.IN("cy", ""),
             float.IN("radius", ""),
@@ -4229,7 +4229,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_triangle",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             float.IN("x0", ""),
             float.IN("y0", ""),
             float.IN("x1", ""),
@@ -4243,8 +4243,8 @@ nk_style_pop_vec2(ctx);""")}
             "fill_polygon",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
-            float_p.IN("points", ""),
+            nk_command_buffer.p.IN("b", ""),
+            float.p.IN("points", ""),
             AutoSize("points")..int.IN("point_count", ""),
             nk_color.IN("color", "")
         )
@@ -4253,9 +4253,9 @@ nk_style_pop_vec2(ctx);""")}
             "draw_image",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
-            const..nk_image.p.IN("img", ""),
+            nk_image.const.p.IN("img", ""),
             nk_color.IN("color", "")
         )
 
@@ -4263,11 +4263,11 @@ nk_style_pop_vec2(ctx);""")}
             "draw_text",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
-            const..charUTF8_p.IN("string", ""),
+            charUTF8.const.p.IN("string", ""),
             AutoSize("string")..int.IN("length", ""),
-            const..nk_user_font_p.IN("font", ""),
+            nk_user_font.const.p.IN("font", ""),
             nk_color.IN("bg", ""),
             nk_color.IN("fg", "")
         )
@@ -4276,7 +4276,7 @@ nk_style_pop_vec2(ctx);""")}
             "push_scissor",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", "")
         )
 
@@ -4284,21 +4284,21 @@ nk_style_pop_vec2(ctx);""")}
             "push_custom",
             "",
 
-            nk_command_buffer_p.IN("b", ""),
+            nk_command_buffer.p.IN("b", ""),
             nk_rect.IN("rect", ""),
             nk_command_custom_callback.IN("callback", ""),
             nk_handle.IN("usr", "")
         )
 
-        const..nk_command.p(
+        nk_command.const.p(
             "_next",
             "Increments the draw command iterator to the next command inside the context draw command list.",
 
             ctx,
-            const..nk_command.p.IN("cmd", "")
+            nk_command.const.p.IN("cmd", "")
         )
 
-        const..nk_command.p(
+        nk_command.const.p(
             "_begin",
             "Returns the first draw command in the context draw command list to be drawn.",
 
@@ -4309,7 +4309,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_has_mouse_click",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons)
         )
 
@@ -4317,7 +4317,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_has_mouse_click_in_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons),
             nk_rect.IN("rect", "")
         )
@@ -4326,7 +4326,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_has_mouse_click_down_in_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons),
             nk_rect.IN("rect", ""),
             int.IN("down", "")
@@ -4336,7 +4336,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_click_in_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons),
             nk_rect.IN("rect", "")
         )
@@ -4345,7 +4345,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_click_down_in_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons),
             nk_rect.IN("b", ""),
             int.IN("down", "")
@@ -4355,7 +4355,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_any_mouse_click_in_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_rect.IN("rect", "")
         )
 
@@ -4363,7 +4363,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_prev_hovering_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_rect.IN("rect", "")
         )
 
@@ -4371,7 +4371,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_hovering_rect",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_rect.IN("rect", "")
         )
 
@@ -4379,7 +4379,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_mouse_clicked",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons),
             nk_rect.IN("rect", "")
         )
@@ -4388,7 +4388,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_down",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons)
         )
 
@@ -4396,7 +4396,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_pressed",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons)
         )
 
@@ -4404,7 +4404,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_mouse_released",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_buttons.IN("id", "", Buttons)
         )
 
@@ -4412,7 +4412,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_key_pressed",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_keys.IN("key", "", Keys)
         )
 
@@ -4420,7 +4420,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_key_released",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_keys.IN("key", "", Keys)
         )
 
@@ -4428,7 +4428,7 @@ nk_style_pop_vec2(ctx);""")}
             "input_is_key_down",
             "",
 
-            const..nk_input_p.IN("i", ""),
+            nk_input.const.p.IN("i", ""),
             nk_keys.IN("key", "", Keys)
         )
     }();
@@ -4438,15 +4438,15 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_init",
             "",
 
-            nk_draw_list_p.IN("list", "")
+            nk_draw_list.p.IN("list", "")
         )
 
         void(
             "draw_list_setup",
             "",
 
-            nk_draw_list_p.IN("canvas", ""),
-            const..nk_convert_config.p.IN("config", ""),
+            nk_draw_list.p.IN("canvas", ""),
+            nk_convert_config.const.p.IN("config", ""),
             nk_buffer_p.IN("cmds", ""),
             nk_buffer_p.IN("vertices", ""),
             nk_buffer_p.IN("elements", ""),
@@ -4458,48 +4458,48 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_clear",
             "",
 
-            nk_draw_list_p.IN("list", "")
+            nk_draw_list.p.IN("list", "")
         )
 
-        const..nk_draw_command_p(
+        nk_draw_command.const.p(
             "_draw_list_begin",
             "",
 
-            const..nk_draw_list_p.IN("list", ""),
-            const..nk_buffer_p.IN("buffer", "")
+            nk_draw_list.const.p.IN("list", ""),
+            nk_buffer.const.p.IN("buffer", "")
         )
 
-        const..nk_draw_command_p(
+        nk_draw_command.const.p(
             "_draw_list_next",
             "",
 
-            const..nk_draw_command_p.IN("cmd", ""),
-            const..nk_buffer_p.IN("buffer", ""),
-            const..nk_draw_list_p.IN("list", "")
+            nk_draw_command.const.p.IN("cmd", ""),
+            nk_buffer.const.p.IN("buffer", ""),
+            nk_draw_list.const.p.IN("list", "")
         )
 
-        const..nk_draw_command_p(
+        nk_draw_command.const.p(
             "_draw_begin",
             "Returns the first vertex command in the context vertex draw list to be executed.",
 
             cctx,
-            const..nk_buffer_p.IN("buffer", "")
+            nk_buffer.const.p.IN("buffer", "")
         )
 
-        const..nk_draw_command_p(
+        nk_draw_command.const.p(
             "_draw_end",
             "Returns the end of the vertex draw list.",
 
             cctx,
-            const..nk_buffer_p.IN("buffer", "")
+            nk_buffer.const.p.IN("buffer", "")
         )
 
-        const..nk_draw_command_p(
+        nk_draw_command.const.p(
             "_draw_next",
             "Increments the vertex command iterator to the next command inside the context vertex command list.",
 
-            const..nk_draw_command_p.IN("cmd", ""),
-            const..nk_buffer_p.IN("buffer", ""),
+            nk_draw_command.const.p.IN("cmd", ""),
+            nk_buffer.const.p.IN("buffer", ""),
             cctx
         )
 
@@ -4507,14 +4507,14 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_clear",
             "",
 
-            nk_draw_list_p.IN("list", "")
+            nk_draw_list.p.IN("list", "")
         )
 
         void(
             "draw_list_path_line_to",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("pos", "")
         )
 
@@ -4522,7 +4522,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_arc_to_fast",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("center", ""),
             float.IN("radius", ""),
             int.IN("a_min", ""),
@@ -4533,7 +4533,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_arc_to",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("center", ""),
             float.IN("radius", ""),
             float.IN("a_min", ""),
@@ -4545,7 +4545,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_rect_to",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("a", ""),
             nk_vec2.IN("b", ""),
             float.IN("rounding", "")
@@ -4555,7 +4555,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_curve_to",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("p2", ""),
             nk_vec2.IN("p3", ""),
             nk_vec2.IN("p4", ""),
@@ -4566,7 +4566,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_fill",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_color.IN("color", "")
         )
 
@@ -4574,7 +4574,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_stroke",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_color.IN("color", ""),
             nk_draw_list_stroke.IN("closed", "", DrawListStrokes),
             float.IN("thickness", "")
@@ -4584,7 +4584,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_stroke_line",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("a", ""),
             nk_vec2.IN("b", ""),
             nk_color.IN("color", ""),
@@ -4595,7 +4595,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_stroke_rect",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_rect.IN("rect", ""),
             nk_color.IN("color", ""),
             float.IN("rounding", ""),
@@ -4606,7 +4606,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_stroke_triangle",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("a", ""),
             nk_vec2.IN("b", ""),
             nk_vec2.IN("c", ""),
@@ -4618,7 +4618,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_stroke_circle",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("center", ""),
             float.IN("radius", ""),
             nk_color.IN("color", ""),
@@ -4630,7 +4630,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_stroke_curve",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("p0", ""),
             nk_vec2.IN("cp0", ""),
             nk_vec2.IN("cp1", ""),
@@ -4644,8 +4644,8 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_stroke_poly_line",
             "",
 
-            nk_draw_list_p.IN("list", ""),
-            const..nk_vec2.p.IN("pnts", ""),
+            nk_draw_list.p.IN("list", ""),
+            nk_vec2.const.p.IN("pnts", ""),
             unsigned_int.IN("cnt", ""),
             nk_color.IN("color", ""),
             nk_draw_list_stroke.IN("closed", "", DrawListStrokes),
@@ -4657,7 +4657,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_fill_rect",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_rect.IN("rect", ""),
             nk_color.IN("color", ""),
             float.IN("rounding", "")
@@ -4667,7 +4667,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_fill_rect_multi_color",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_rect.IN("rect", ""),
             nk_color.IN("left", ""),
             nk_color.IN("top", ""),
@@ -4679,7 +4679,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_fill_triangle",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("a", ""),
             nk_vec2.IN("b", ""),
             nk_vec2.IN("c", ""),
@@ -4690,7 +4690,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_fill_circle",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_vec2.IN("center", ""),
             float.IN("radius", ""),
             nk_color.IN("col", ""),
@@ -4701,8 +4701,8 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_fill_poly_convex",
             "",
 
-            nk_draw_list_p.IN("list", ""),
-            const..nk_vec2.p.IN("points", ""),
+            nk_draw_list.p.IN("list", ""),
+            nk_vec2.const.p.IN("points", ""),
             AutoSize("points")..unsigned_int.IN("count", ""),
             nk_color.IN("color", ""),
             nk_anti_aliasing.IN("aliasing", "", Antialiasing)
@@ -4712,7 +4712,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_add_image",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_image.IN("texture", ""),
             nk_rect.IN("rect", ""),
             nk_color.IN("color", "")
@@ -4722,10 +4722,10 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_add_text",
             "",
 
-            nk_draw_list_p.IN("list", ""),
-            const..nk_user_font_p.IN("font", ""),
+            nk_draw_list.p.IN("list", ""),
+            nk_user_font.const.p.IN("font", ""),
             nk_rect.IN("rect", ""),
-            const..charUTF8_p.IN("text", ""),
+            charUTF8.const.p.IN("text", ""),
             AutoSize("text")..int.IN("len", ""),
             float.IN("font_height", ""),
             nk_color.IN("color", "")
@@ -4735,7 +4735,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_push_userdata",
             "",
 
-            nk_draw_list_p.IN("list", ""),
+            nk_draw_list.p.IN("list", ""),
             nk_handle.IN("userdata", "")
         )
 

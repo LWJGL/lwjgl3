@@ -6,13 +6,13 @@ package core.macos
 
 import org.lwjgl.generator.*
 
-val CFTypeRef = "CFTypeRef".opaque_p
-val CFAllocatorRef = "CFAllocatorRef".opaque_p
+val CFTypeRef = "CFTypeRef".handle
+val CFAllocatorRef = "CFAllocatorRef".handle
 
 val CFStringEncoding = typedef(UInt32, "CFStringEncoding")
-val CFStringRef = "CFStringRef".opaque_p
+val CFStringRef = "CFStringRef".handle
 
-val CFBundleRef = "CFBundleRef".opaque_p
+val CFBundleRef = "CFBundleRef".handle
 
 val CFURLPathStyle = typedef(CFIndex, "CFURLPathStyle")
-val CFURLRef = "CFURLRef".opaque_p
+val CFURLRef = "CFURLRef".handle

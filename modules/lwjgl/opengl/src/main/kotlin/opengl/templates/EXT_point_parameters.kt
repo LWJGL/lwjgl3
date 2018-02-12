@@ -72,6 +72,6 @@ alpha(Pe) = Alpha * factor(Pe)""")}
         "",
 
         GLenum.IN("pname", ""),
-        Check(1)..const..GLfloat_p.IN("params", "")
+        Check(1)..GLfloat.const.p.IN("params", "")
     )
 }

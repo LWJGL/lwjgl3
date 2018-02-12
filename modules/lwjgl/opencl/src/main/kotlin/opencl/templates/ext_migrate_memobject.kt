@@ -45,7 +45,7 @@ val ext_migrate_memobject = "EXTMigrateMemobject".nativeClassCL("ext_migrate_mem
 
         cl_command_queue.IN("command_queue", "a valid command queue"),
         AutoSize("mem_objects")..cl_uint.IN("num_mem_objects", "the number of memory objects specified in the {@code mem_objects} argument"),
-        const..cl_mem_p.IN("mem_objects", "the memory objects to migrate to the OpenCL device associated with {@code command_queue}"),
+        cl_mem.const.p.IN("mem_objects", "the memory objects to migrate to the OpenCL device associated with {@code command_queue}"),
         cl_mem_migration_flags_ext.IN("flags", "a bitfield that is used to specify migration options", "0 #MIGRATE_MEM_OBJECT_HOST_EXT"),
         NEWL,
         EWL,

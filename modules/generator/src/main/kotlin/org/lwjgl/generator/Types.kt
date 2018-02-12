@@ -9,92 +9,81 @@ import java.nio.*
 import kotlin.reflect.*
 
 /*
-- NativeType
-    - JObjectType
-    - ValueType
-        - VoidType
-        - PrimitiveType
-            - IntegerType
-            - CharType
-        - StructType (mapped to struct class)
-    - PointerType (mapped to raw pointer or buffer)
-        - ArrayType (mapped to java array)
-        - CharSequenceType (mapped to String/CharSequence)
-        - ObjectType (mapped to a Java class)
-            - CallbackType (mapped to callback interface)
-            - C++ classes (if we add support in the future)
+Type hierarchy:
+---------------
+- NativeType (interface: root)
+- BaseType (abstract: root)
+    * VoidType
+    * OpaqueType (cannot be used directly, must be wrapped in PointerType)
+    - DataType (interface: types that can be used as parameters or struct members)
+        - ValueType (interface: passed by-value)
+            * PrimitiveType
+                * IntegerType
+                * CharType
+            * StructType (mapped to struct class)
+        - ReferenceType (interface: passed by-reference)
+            * JObjectType (only type passed as Java object to JNI)
+            * PointerType (mapped to raw pointer or buffer)
+                * ArrayType (mapped to java array)
+                * CharSequenceType (mapped to String/CharSequence)
+                * ObjectType (mapped to a Java class)
+                    * CallbackType (mapped to callback interface)
+                    * C++ classes (if we add support in the future)
 */
-
-open class NativeType internal constructor(
+interface NativeType {
     /** The type used in the native API. */
-    val name: String,
+    val name: String
     /** The type we map the native type to. */
     val mapping: TypeMapping
-) {
 
-    // Lets get rid a level of indirection
+    val p : PointerType<out NativeType>
+    val const : NativeType
+}
+// These interfaces simplify some implementation details and the DSL
+interface DataType : NativeType
+    interface ValueType : DataType
+    interface ReferenceType : DataType
 
-    /** The JNI function argument type. */
-    internal val jniFunctionType
-        get() = mapping.jniFunctionType
-
-    /** The native method argument type. */
-    internal val nativeMethodType
-        get() = mapping.nativeMethodName
-
-    /** The Java method argument type. */
+/** Base implementation of all concrete types */
+abstract class BaseType internal constructor(
+    override val name: String,
+    override val mapping: TypeMapping
+): NativeType {
     internal open val javaMethodType
-        get() = if (this.mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodName
-
-    internal fun annotation(type: String, hasConst: Boolean, arraySize: String? = null): String? {
-        val nativeType = this.name.let {
-            if (this is PointerType && !this.includesPointer) {
-                if (!it.endsWith('*')) "$it *" else "$it*"
-            } else
-                it
-        }.let {
-            if (hasConst)
-                "const $it"
-            else
-                it
-        }
-
-        return if (type == nativeType)
-            null
-        else
-            "@NativeType(\"$nativeType${if (arraySize == null) "" else "[$arraySize]"}\")"
-    }
-
-    internal fun annotate(type: String, hasConst: Boolean, arraySize: String? = null) = annotation(type, hasConst, arraySize).let {
-        if (it == null)
-            type
-        else
-            "$it $type"
-    }
+        get() = if (mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodName
 
     override fun toString() =
         "${this::class.java.simpleName}: $name | $jniFunctionType | $nativeMethodType | $javaMethodType"
 }
 
-// Java instance passed as jobject to native code
-class JObjectType(name: String, type: KClass<*>) : NativeType(name, TypeMapping(name, type, type))
-val KClass<*>.jobject: NativeType get() = JObjectType("jobject", this)
-
-abstract class ValueType internal constructor(name: String, mapping: TypeMapping) : NativeType(name, mapping)
-
-class VoidType constructor(name: String) : ValueType(name, TypeMapping.VOID)
+class VoidType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
+    override val p by lazy { PointerType(name, PointerMapping.DATA_BYTE, elementType = this) }
+    override val const by lazy { VoidType(this.name.const) }
+}
 val String.void: VoidType get() = VoidType(this)
 
 // Specialization for primitives.
-open class PrimitiveType(name: String, mapping: PrimitiveMapping) : ValueType(name, mapping)
+open class PrimitiveType(name: String, mapping: PrimitiveMapping) : BaseType(name, mapping), ValueType {
+    override val mapping: PrimitiveMapping get() = super.mapping as PrimitiveMapping
+    override val p: PointerType<out PrimitiveType> by lazy { PointerType(this.name, this.mapping.toPointer, elementType = this) }
+    override val const by lazy { PrimitiveType(this.name.const, this.mapping) }
+}
 
 // Specialization for integers.
-open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping)
-
+open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping) {
+    override val p by lazy { PointerType(this.name, this.mapping.toPointer, elementType = this) }
+    override val const by lazy { IntegerType(this.name.const, this.mapping, unsigned) }
+}
 val String.enumType get() = IntegerType(this, PrimitiveMapping.INT)
 
 // Specialization for string characters.
-class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping)
+class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping) {
+    override val mapping: CharMapping get() = super.mapping as CharMapping
+
+    /** Converts CharType to CharSequenceType. */
+    override val p by lazy { CharSequenceType(this.name, PointerMapping.DATA_BYTE, elementType = this) }
+    override val const by lazy { CharType(this.name.const, this.mapping) }
+}
 
 // Structs
 class StructType internal constructor(
@@ -102,90 +91,98 @@ class StructType internal constructor(
     val definition: Struct,
     /** The type used in the native API. */
     name: String = definition.nativeName
-) : ValueType(name, PrimitiveMapping.POINTER) {
+) : BaseType(name, PrimitiveMapping.POINTER), ValueType {
     override val javaMethodType
         get() = definition.className
+    override val p by lazy { PointerType(this.name, PointerMapping.DATA_POINTER, elementType = this) }
+    override val const by lazy { StructType(definition, this.name.const) }
 }
 
-internal val NativeType.dereference get() = (if (this is PointerType && this.elementType != null) this.elementType else this)
-internal val NativeType.hasStructValidation
-    get() = dereference.let { it is StructType && it.definition.validations.any() }
+// Java instance passed as jobject to native code
+class JObjectType(name: String, type: KClass<*>) : BaseType(name, TypeMapping(name, type, type)), ReferenceType {
+    override val p: PointerType<JObjectType> get() { throw UnsupportedOperationException() }
+    override val const: NativeType get() { throw UnsupportedOperationException() }
+}
+val KClass<*>.jobject: JObjectType get() = JObjectType("jobject", this)
 
 // Pointers
-open class PointerType(
+open class PointerType<T : NativeType> internal constructor(
     /** The type used in the native API. */
     name: String,
     /** The type we map the native type to. */
-    mapping: PointerMapping = PointerMapping.OPAQUE_POINTER,
+    mapping: PointerMapping,
     /** If true, the nativeType typedef includes a pointer. */
-    val includesPointer: Boolean = false,
-    /** Optional element type. See the secondary constructors below. */
-    val elementType: NativeType? = null
-) : NativeType(name, mapping) {
-    override val javaMethodType
+    includesPointer: Boolean = false,
+    /** Optional element type. */
+    val elementType: T
+) : BaseType(
+    when {
+        includesPointer    -> name
+        name.endsWith('*') -> "$name*"
+        else               -> "$name *"
+    },
+    mapping
+), ReferenceType {
+    override val mapping: PointerMapping get() = super.mapping as PointerMapping
+    override val javaMethodType: String
         get() = if (elementType is StructType)
             elementType.definition.className
         else
             super.javaMethodType
-}
 
-private fun PointerType.pointerTo(): String {
-    val builder = StringBuilder(name)
-    if (!includesPointer) {
-        if (!name.endsWith('*'))
-            builder.append(' ')
-        builder.append('*')
-    }
-
-    return builder.toString()
+    /** Returns `<element type> **` */
+    override val p by lazy { PointerType(this.name, PointerMapping.DATA_POINTER, elementType = this) }
+    /** Returns `<element type> * const` */
+    override val const by lazy { PointerType(this.name.const, this.mapping, true, elementType) }
 }
+internal val NativeType.dereference get() = (if (this is PointerType<*>) this.elementType else this)
+internal val NativeType.hasStructValidation
+    get() = dereference.let { it is StructType && it.definition.validations.any() }
 
-/** Pointer to value */
-val ValueType.p get() = PointerType(this.name, (this.mapping as PrimitiveMapping).toPointer, elementType = this)
-fun ValueType.p(name: String) = PointerType(
-    name,
-    (this.mapping as PrimitiveMapping).toPointer,
-    elementType = this,
-    includesPointer = true
-)
-/** Pointer to pointer */
-val PointerType.p get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
-/** Const pointer */
-val PointerType.const get() = when {
-    this.includesPointer    -> throw IllegalArgumentException("The const keyword cannot be applied to opaque pointer types.")
-    this.name.endsWith("*") -> PointerType("${this.name} const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = false)
-    else                    -> PointerType("${this.name} * const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = true)
+// Opaque types
+class OpaqueType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
+    override val p by lazy { PointerType(this.name, PointerMapping.OPAQUE_POINTER, includesPointer = false, elementType = this) }
+    override val const by lazy { OpaqueType(this.name.const) }
 }
-/** Simple pointer shortcut */
-val String.p get() = PointerType(this, includesPointer = false)
-/** Opaque pointer shortcut */
-val String.opaque_p get() = PointerType(this, includesPointer = true)
+val String.opaque get() = OpaqueType(this)
+val String.p get() = this.opaque.p
+val String.handle get() = typedef(this.opaque.p, this)
 
 // Strings
-class CharSequenceType(
+class CharSequenceType internal constructor(
     /** The type used in the native API. */
     name: String,
     /** The type we map the native type to. */
-    mapping: PointerMapping = PointerMapping.DATA_BYTE,
+    mapping: PointerMapping,
     /** If true, the native typedef includes a pointer. */
     includesPointer: Boolean = false,
-    /** The CharSequence charset. */
-    val charMapping: CharMapping = CharMapping.ASCII
-) : PointerType(name, mapping, includesPointer)
-
-/** Converts CharType to CharSequenceType. */
-val CharType.p get() = CharSequenceType(this.name, mapping = PointerMapping.DATA_BYTE, charMapping = (this.mapping as CharMapping))
+    /** The element type. */
+    elementType: CharType
+) : PointerType<CharType>(name, mapping, includesPointer, elementType) {
+    val charMapping get() = elementType.mapping
+    override val const by lazy { CharSequenceType(this.name.const, this.mapping, true, elementType) }
+}
 
 // Arrays (automatically used for array overloads)
-class ArrayType constructor(
-    type: PointerType,
-    mapping: PointerMapping = type.mapping as PointerMapping
-) : PointerType(
+class ArrayType<T : NativeType>(
+    type: PointerType<T>,
+    mapping: PointerMapping = type.mapping
+) : PointerType<T>(
     type.name,
     mapping,
-    type.includesPointer,
+    true,
     type.elementType
-)
+) {
+    internal val jniSignatureArray get() = when (this.mapping.primitive) {
+        "byte"   -> "_3B"
+        "double" -> "_3D"
+        "float"  -> "_3F"
+        "int"    -> "_3I"
+        "long"   -> "_3J"
+        "short"  -> "_3S"
+        else     -> throw IllegalStateException()
+    }
+}
 
 // Objects (org.lwjgl.system.Pointer subclasses)
 open class ObjectType(
@@ -195,24 +192,27 @@ open class ObjectType(
     name: String = className,
     /** If true, the native typedef includes a pointer. */
     includesPointer: Boolean = true
-) : PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer) {
+) : PointerType<OpaqueType>(name, PointerMapping.OPAQUE_POINTER, includesPointer, elementType = name.opaque) {
     override val javaMethodType
         get() = className
+    override val const by lazy { ObjectType(className, name.const) }
 }
 
 // Callbacks
-class CallbackType(
-    val function: CallbackFunction
-) : ObjectType(function.className, function.nativeType) {
+class CallbackType internal constructor(
+    val function: CallbackFunction,
+    name: String = function.nativeType
+) : ObjectType(function.className, name) {
     override val javaMethodType
         get() = "${super.javaMethodType}I"
+    override val const by lazy { CallbackType(function, name.const) }
 }
 
 // typedefs
-fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
-fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
-fun typedef(typedef: PointerType, name: String) = PointerType(name, typedef.mapping as PointerMapping, true, typedef.elementType)
-fun typedef(typedef: CharSequenceType, name: String) = CharSequenceType(name, typedef.mapping as PointerMapping, true, typedef.charMapping)
+fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping)
+fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping, typedef.unsigned)
+fun <T: NativeType> typedef(typedef: PointerType<T>, name: String) = PointerType(name, typedef.mapping, true, typedef.elementType)
+fun typedef(typedef: CharSequenceType, name: String) = CharSequenceType(name, typedef.mapping, true, typedef.elementType)
 
 // --- [ TYPE MAPPINGS ] ---
 
@@ -222,7 +222,7 @@ open class TypeMapping(
     /** The native method argument type. */
     val nativeMethodType: Class<*>,
     /** The Java method argument type. */
-    val javaMethodType: Class<*>
+    protected val javaMethodType: Class<*>
 ) {
 
     constructor(
@@ -247,36 +247,6 @@ open class TypeMapping(
 
     internal val nativeMethodName get() = nativeMethodType.javaName
     internal val javaMethodName get() = javaMethodType.javaName
-
-    internal val jniSignatureStrict get() = when (this.nativeMethodType) {
-        Boolean::class.java -> "Z"
-        Byte::class.java    -> "B"
-        Char::class.java    -> "C"
-        Double::class.java  -> "D"
-        Float::class.java   -> "F"
-        Int::class.java     -> "I"
-        Long::class.java    -> "J"
-        Short::class.java   -> "S"
-        Void.TYPE           -> "V"
-        else                -> "L${this.nativeMethodType.name};"
-    }
-
-    internal val jniSignature get() = if (this.nativeMethodType === Long::class.java && this !== PrimitiveMapping.LONG) "P" else jniSignatureStrict
-
-    internal val jniSignatureJava get() = if (this.nativeMethodType === Long::class.java)
-        if (this === PrimitiveMapping.LONG) "J" else "P"
-    else
-        ""
-
-    internal val jniSignatureArray get() = when ((this as PointerMapping).primitive) {
-        "byte"   -> "_3B"
-        "double" -> "_3D"
-        "float"  -> "_3F"
-        "int"    -> "_3I"
-        "long"   -> "_3J"
-        "short"  -> "_3S"
-        else     -> throw IllegalStateException()
-    }
 
 }
 
@@ -323,18 +293,16 @@ class CharMapping(
 
 open class PointerMapping private constructor(
     javaMethodType: KClass<*>,
-    val byteShift: String? = null
+    val byteShift: String,
+    internal val supportsArrayOverload: Boolean = false
 ) : TypeMapping("jlong", Long::class, javaMethodType) {
 
-    companion object {
-        val OPAQUE_POINTER = PointerMapping(Long::class)
+    private constructor(javaMethodType: KClass<*>, byteShift: Int) : this(javaMethodType, Integer.toString(byteShift), byteShift != 0)
 
-        /** Useful for void * params that will be AutoTyped. */
-        val DATA = PointerMapping(ByteBuffer::class)
+    companion object {
+        internal val OPAQUE_POINTER = PointerMapping(Long::class, "POINTER_SHIFT")
 
         val DATA_POINTER = PointerMapping(PointerBuffer::class, "POINTER_SHIFT")
-
-        fun PointerMapping(javaMethodType: KClass<*>, byteShift: Int) = PointerMapping(javaMethodType, Integer.toString(byteShift))
 
         val DATA_BOOLEAN = PointerMapping(ByteBuffer::class, 0)
         val DATA_BYTE = PointerMapping(ByteBuffer::class, 0)
@@ -345,7 +313,7 @@ open class PointerMapping private constructor(
         val DATA_DOUBLE = PointerMapping(DoubleBuffer::class, 3)
     }
 
-    internal val isMultiByte = byteShift != null && byteShift != "0"
+    internal val isMultiByte get() = this !== PointerMapping.OPAQUE_POINTER && byteShift != "0"
 
     internal val box = super.javaMethodName.substringBefore("Buffer")
     internal val primitive get() = when (this) {
@@ -361,20 +329,78 @@ open class PointerMapping private constructor(
 
 }
 
-val NativeType.castAddressToPointer
-    get() = (this is PointerType && this !is ArrayType) || this is StructType
+// Generator utilities
+
+private val String.const get() =
+    if (endsWith(" const"))
+        throw IllegalStateException("The const modifier cannot be applied multiple times consecutively")
+    else
+        "$this const"
+
+/** The JNI function argument type. */
+internal val NativeType.jniFunctionType
+    get() = mapping.jniFunctionType
+
+/** The native method argument type. */
+internal val NativeType.nativeMethodType
+    get() = mapping.nativeMethodName
+
+/** The Java method argument type. */
+internal val NativeType.javaMethodType
+    get() = (this as BaseType).javaMethodType // weird because overridden by subtypes, but internal visibility is required
+
+internal val NativeType.jniSignatureStrict
+    get() = when (mapping.nativeMethodType) {
+        Boolean::class.java -> "Z"
+        Byte::class.java    -> "B"
+        Char::class.java    -> "C"
+        Double::class.java  -> "D"
+        Float::class.java   -> "F"
+        Int::class.java     -> "I"
+        Long::class.java    -> "J"
+        Short::class.java   -> "S"
+        Void.TYPE           -> "V"
+        else                -> "L${this.mapping.nativeMethodType.name};"
+    }
+internal val NativeType.jniSignature
+    get() = if (mapping.nativeMethodType === Long::class.java && mapping !== PrimitiveMapping.LONG) "P" else jniSignatureStrict
+internal val NativeType.jniSignatureJava
+    get() = if (mapping.nativeMethodType === Long::class.java)
+        if (mapping === PrimitiveMapping.LONG) "J" else "P"
+    else
+        ""
+
+internal fun NativeType.annotation(type: String, arraySize: String? = null): String? {
+    return if (type == name)
+        null
+    else
+        "@NativeType(\"$name${if (arraySize == null) "" else "[$arraySize]"}\")"
+}
+internal fun NativeType.annotate(type: String, arraySize: String? = null) = annotation(type, arraySize).let {
+    if (it == null)
+        type
+    else
+        "$it $type"
+}
+
+internal val NativeType.castAddressToPointer
+    get() = (this is PointerType<*> && this !is ArrayType<*>) || this is StructType
 
 val NativeType.isPointer
-    get() = this is PointerType || this.mapping === PrimitiveMapping.POINTER
+    get() = this is PointerType<*> || this.mapping === PrimitiveMapping.POINTER
 
-val NativeType.isPointerData
-    get() = this is PointerType && this.mapping !== PointerMapping.OPAQUE_POINTER
+val NativeType.isPointerHandle
+    get() = this is PointerType<*> && this.mapping === PointerMapping.OPAQUE_POINTER
 
-val NativeType.isReference
-    get() = this !is ValueType && (this.mapping !== PointerMapping.OPAQUE_POINTER || this is ObjectType)
+internal val NativeType.isPointerData
+    get() = this is PointerType<*> && this.mapping !== PointerMapping.OPAQUE_POINTER
 
-val TypeMapping.isPointerSize
-    get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER
+internal val NativeType.isReference
+    get() = this is ReferenceType && (this.mapping !== PointerMapping.OPAQUE_POINTER || this is ObjectType)
 
-internal val TypeMapping.isArray
-    get() = this is PointerMapping && this.isMultiByte && this !== PointerMapping.DATA_POINTER
+internal val NativeType.isPointerSize
+    get() = this.mapping === PointerMapping.DATA_INT || this.mapping === PointerMapping.DATA_POINTER
+
+internal val NativeType.isArray
+    get() = this is PointerType<*> && this.mapping.supportsArrayOverload
+

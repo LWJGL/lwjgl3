@@ -43,8 +43,8 @@ val WGL_NV_swap_group = "WGLNVSwapGroup".nativeClassWGL("WGL_NV_swap_group", pos
         "",
 
         HDC.IN("hDC", ""),
-        Check(1)..GLuint_p.OUT("group", ""),
-        Check(1)..GLuint_p.OUT("barrier", "")
+        Check(1)..GLuint.p.OUT("group", ""),
+        Check(1)..GLuint.p.OUT("barrier", "")
     )
 
     BOOL(
@@ -52,8 +52,8 @@ val WGL_NV_swap_group = "WGLNVSwapGroup".nativeClassWGL("WGL_NV_swap_group", pos
         "",
 
         HDC.IN("hDC", ""),
-        Check(1)..GLuint_p.OUT("maxGroups", ""),
-        Check(1)..GLuint_p.OUT("maxBarriers", "")
+        Check(1)..GLuint.p.OUT("maxGroups", ""),
+        Check(1)..GLuint.p.OUT("maxBarriers", "")
     )
 
     BOOL(
@@ -61,7 +61,7 @@ val WGL_NV_swap_group = "WGLNVSwapGroup".nativeClassWGL("WGL_NV_swap_group", pos
         "",
 
         HDC.IN("hDC", ""),
-        Check(1)..GLuint_p.OUT("count", "")
+        Check(1)..GLuint.p.OUT("count", "")
     )
 
     BOOL(

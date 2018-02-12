@@ -84,7 +84,7 @@ ENABLE_WARNINGS()
         "Returns the AWT native structure.",
 
         JNI_ENV,
-        JAWT_p.IN("awt", "the target {@code JAWT} struct"),
+        JAWT.p.IN("awt", "the target {@code JAWT} struct"),
 
         returnDoc = "{@code JNI_FALSE} if an error occurs"
     )
@@ -96,7 +96,7 @@ ENABLE_WARNINGS()
         "Locks the surface of the target component for native rendering. When finished drawing, the surface must be unlocked with #DrawingSurface_Unlock().",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface_p.IN("ds", "the surface to lock"),
+        JAWT_DrawingSurface.p.IN("ds", "the surface to lock"),
 
         returnDoc =
         """
@@ -110,7 +110,7 @@ ENABLE_WARNINGS()
         """
     )
 
-    JAWT_DrawingSurfaceInfo_p(
+    JAWT_DrawingSurfaceInfo.p(
         "DrawingSurface_GetDrawingSurfaceInfo",
         """
         Returns the drawing surface info.
@@ -122,7 +122,7 @@ ENABLE_WARNINGS()
         """,
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface_p.IN("ds", "the {@link JAWTDrawingSurface} to free"),
+        JAWT_DrawingSurface.p.IN("ds", "the {@link JAWTDrawingSurface} to free"),
 
         returnDoc = "#NULL if an error has occurred."
     )
@@ -132,7 +132,7 @@ ENABLE_WARNINGS()
         "Frees the drawing surface info.",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurfaceInfo_p.IN("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
+        JAWT_DrawingSurfaceInfo.p.IN("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
     )
 
     void(
@@ -140,12 +140,12 @@ ENABLE_WARNINGS()
         "Unlocks the drawing surface of the target component for native rendering.",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface_p.IN("ds", "the surface to unlock")
+        JAWT_DrawingSurface.p.IN("ds", "the surface to unlock")
     )
 
     // JAWT struct functions
 
-    JAWT_DrawingSurface_p(
+    JAWT_DrawingSurface.p(
         "GetDrawingSurface",
         """
         Returns a drawing surface from a target {@code jobject}. This value may be cached.
@@ -168,7 +168,7 @@ ENABLE_WARNINGS()
         "Frees the drawing surface allocated in #GetDrawingSurface().",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface_p.IN("ds", "the {@link JAWTDrawingSurface} to free")
+        JAWT_DrawingSurface.p.IN("ds", "the {@link JAWTDrawingSurface} to free")
     )
 
     void(

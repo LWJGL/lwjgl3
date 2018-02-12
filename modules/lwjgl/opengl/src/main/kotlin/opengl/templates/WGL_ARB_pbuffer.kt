@@ -47,7 +47,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
         int.IN("pixelFormat", "a non-generic pixel format descriptor index"),
         int.IN("width", "the pixel width of the rectangular pbuffer"),
         int.IN("height", "the pixel height of the rectangular pbuffer"),
-        NullTerminated..nullable..const..int_p.IN(
+        NullTerminated..nullable..int.const.p.IN(
             "attribList",
             "a 0-terminated list of attributes {type, value} pairs containing integer attribute values"
         )
@@ -86,7 +86,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
         HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
         int.IN("attribute", "the attribute to query", "#PBUFFER_WIDTH_ARB #PBUFFER_HEIGHT_ARB #PBUFFER_LOST_ARB"),
-        Check(1)..int_p.IN("value", "the attribute value")
+        Check(1)..int.p.IN("value", "the attribute value")
     )
 
     IntConstant(

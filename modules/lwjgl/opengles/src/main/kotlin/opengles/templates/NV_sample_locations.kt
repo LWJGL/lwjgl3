@@ -61,7 +61,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGLES("NV_sample_locatio
         GLenum.IN("target", ""),
         GLuint.IN("start", ""),
         AutoSize("v")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("v", "")
+        GLfloat.const.p.IN("v", "")
     )
 
     void(
@@ -71,7 +71,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGLES("NV_sample_locatio
         GLuint.IN("framebuffer", ""),
         GLuint.IN("start", ""),
         AutoSize("v")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("v", "")
+        GLfloat.const.p.IN("v", "")
     )
 
     void(

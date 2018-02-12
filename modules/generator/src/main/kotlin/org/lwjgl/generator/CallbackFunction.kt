@@ -6,7 +6,7 @@ package org.lwjgl.generator
 
 import java.io.*
 
-class CallbackFunction(
+class CallbackFunction internal constructor(
     module: Module,
     className: String,
     nativeType: String,
@@ -23,7 +23,7 @@ class CallbackFunction(
     }
 
     internal fun nativeType(name: String, separator: String = ", ", prefix: String = "", postfix: String = "") =
-        "${returns.name}${if (returns is PointerType && !returns.includesPointer) "*" else ""} (*$name) (${signature.asSequence()
+        "${returns.name} (*$name) (${signature.asSequence()
             .joinToString(separator, prefix = prefix, postfix = postfix) { param ->
                 param.toNativeType(null).let {
                     if (it.endsWith('*')) {
@@ -36,7 +36,7 @@ class CallbackFunction(
         })"
 
     internal val nativeType = if (nativeType === ANONYMOUS)
-        "${returns.name}${if (returns is PointerType && !returns.includesPointer) "*" else ""} (*) (${
+        "${returns.name} (*) (${
         signature.asSequence().joinToString(", ") { it.toNativeType(null) }
         })"
     else
@@ -44,7 +44,7 @@ class CallbackFunction(
 
     private val NativeType.dyncall
         get() = when (this) {
-            is PointerType   -> 'p'
+            is PointerType<*>   -> 'p'
             is PrimitiveType -> when (mapping) {
                 PrimitiveMapping.BOOLEAN -> 'B'
                 PrimitiveMapping.BYTE    -> 'c'
@@ -61,14 +61,12 @@ class CallbackFunction(
         }
 
     private val NativeType.argType
-        get() = if (this is PointerType || mapping === PrimitiveMapping.POINTER)
-            "Pointer"
-        else if (mapping === PrimitiveMapping.BOOLEAN)
-            "Bool"
-        else if (mapping === PrimitiveMapping.LONG)
-            "LongLong"
-        else
-            (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
+        get() = when {
+            this.isPointer                       -> "Pointer"
+            mapping === PrimitiveMapping.BOOLEAN -> "Bool"
+            mapping === PrimitiveMapping.LONG    -> "LongLong"
+            else                                 -> (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
+        }
 
     private fun PrintWriter.generateDocumentation(isClass: Boolean) {
         val documentation = if (module === Module.VULKAN)
@@ -188,7 +186,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
         generateDocumentation(false)
         print("""@FunctionalInterface
 @NativeType("$nativeType")
-${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jniSignature} {
+${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignature} {
 
     String SIGNATURE = ${"\"(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
             if (stdcall) "Callback.__stdcall($it)" else it
@@ -215,8 +213,8 @@ ${signature.asSequence().map {
             print(doc)
         }
         print("""
-    ${returns.annotate(returns.nativeMethodType, false)} invoke(${signature.asSequence().joinToString(", ") {
-            "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType, it.has(const))} ${it.name}"
+    ${returns.annotate(returns.nativeMethodType)} invoke(${signature.asSequence().joinToString(", ") {
+            "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType)} ${it.name}"
         }});
 
 }""")

@@ -129,7 +129,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         "Deletes named buffer objects.",
 
         AutoSize("buffers")..GLsizei.IN("n", "the number of buffer objects to be deleted"),
-        SingleValue("buffer")..const..GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
+        SingleValue("buffer")..GLuint.const.p.IN("buffers", "an array of buffer objects to be deleted")
     )
 
     void(
@@ -137,7 +137,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         "Generates buffer object names.",
 
         AutoSize("buffers")..GLsizei.IN("n", "the number of buffer object names to be generated"),
-        ReturnParam..GLuint_p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
+        ReturnParam..GLuint.p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
     )
 
     GLboolean(
@@ -176,7 +176,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..const..void_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
+        )..void.const.p.IN("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
         GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
     )
 
@@ -192,7 +192,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..const..void_p.IN("data", "a pointer to the new data that will be copied into the data store")
+        )..void.const.p.IN("data", "a pointer to the new data that will be copied into the data store")
     )
 
     void(
@@ -207,10 +207,10 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void_p.IN("data", "a pointer to the location where buffer object data is returned")
+        )..void.p.IN("data", "a pointer to the location where buffer object data is returned")
     )
 
-    MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)")..void_p(
+    MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)")..void.p(
         "MapBufferARB",
         """
         Maps a buffer object's data store.
@@ -251,7 +251,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 
         GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
         GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "the requested parameter")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested parameter")
     )
 
     void(
@@ -260,6 +260,6 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 
         GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
         GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER_ARB"),
-        Check(1)..ReturnParam..void_pp.OUT("params", "the pointer value specified by {@code pname}")
+        Check(1)..ReturnParam..void.p.p.OUT("params", "the pointer value specified by {@code pname}")
     )
 }

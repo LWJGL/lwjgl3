@@ -46,7 +46,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         "FORMAT_TYPE_SOFT"..0x1991
     )
 
-    ALCdevice_p(
+    ALCdevice.p(
         "LoopbackOpenDeviceSOFT",
         """
         Loopback devices provide a way for applications to "read back" rendered audio without it being sent to an actual audio device. It allows applications to
@@ -62,7 +62,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         error.
         """,
 
-        nullable..const..ALCcharUTF8_p.IN(
+        nullable..ALCcharUTF8.const.p.IN(
             "deviceName",
             """
             which device or device driver to use for subsequent rendering. This may be #NULL for an implementation-defined default, otherwise it must be a
@@ -80,7 +80,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         To check if a particular rendering format is available, use this function.
         """,
 
-        ALCdevice_p.IN("device", "the loopback device to query"),
+        ALCdevice.p.IN("device", "the loopback device to query"),
         ALCsizei.IN("frequency", "the sample rate of the rendered audio"),
         ALCenum.IN("channels", "the channel configuration used for rendering", Channels),
         ALCenum.IN("type", "sample type of the written audio", Types)
@@ -93,10 +93,10 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         render samples, use this function.
         """,
 
-        ALCdevice_p.IN("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
+        ALCdevice.p.IN("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
         Unsafe..MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..ALCvoid_p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
+        )..ALCvoid.p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
         ALCsizei.IN("samples", "the number of sample frames to render")
     )
 }

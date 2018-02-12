@@ -32,8 +32,8 @@ val VRChaperone = "VRChaperone".nativeClass(
         "GetPlayAreaSize",
         "Returns the width and depth of the Play Area (formerly named Soft Bounds) in X and Z. Tracking space center(0, 0, 0) is the center of the Play Area.",
 
-        Check(1)..float_p.OUT("pSizeX", ""),
-        Check(1)..float_p.OUT("pSizeZ", "")
+        Check(1)..float.p.OUT("pSizeX", ""),
+        Check(1)..float.p.OUT("pSizeZ", "")
     )
 
     bool(

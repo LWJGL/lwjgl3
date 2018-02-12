@@ -31,7 +31,7 @@ val DynCallback = "DynCallback".nativeClass(Module.CORE_DYNCALL, prefix = "DCB")
         "SIGCHAR_CC_THISCALL_MS"..'+'
     )
 
-    DCCallback_p(
+    DCCallback.p(
         "NewCallback",
         """
         Creates and initializes a new {@code Callback} object.
@@ -39,8 +39,8 @@ val DynCallback = "DynCallback".nativeClass(Module.CORE_DYNCALL, prefix = "DCB")
         Use #FreeCallback() to destroy the {@code Callback} object.
         """,
 
-        const..charASCII_p.IN("signature", "the function signature of the function to mimic"),
-        DCCallbackHandler_p.IN("funcptr", "a pointer to a callback handler"),
+        charASCII.const.p.IN("signature", "the function signature of the function to mimic"),
+        DCCallbackHandler.p.IN("funcptr", "a pointer to a callback handler"),
         opaque_p.IN("userdata", "a pointer to custom data that might be useful in the handler")
     )
 
@@ -48,9 +48,9 @@ val DynCallback = "DynCallback".nativeClass(Module.CORE_DYNCALL, prefix = "DCB")
         "InitCallback",
         "(Re)initializes a callback object.",
 
-        DCCallback_p.IN("pcb", "the callback object"),
-        const..charASCII_p.IN("signature", "the function signature of the function to mimic"),
-        DCCallbackHandler_p.IN("handler", "a pointer to a callback handler"),
+        DCCallback.p.IN("pcb", "the callback object"),
+        charASCII.const.p.IN("signature", "the function signature of the function to mimic"),
+        DCCallbackHandler.p.IN("handler", "a pointer to a callback handler"),
         opaque_p.IN("userdata", "a pointer to custom data that might be useful in the handler")
     )
 
@@ -58,17 +58,17 @@ val DynCallback = "DynCallback".nativeClass(Module.CORE_DYNCALL, prefix = "DCB")
         "FreeCallback",
         "Destroys and frees the callback object.",
 
-        DCCallback_p.IN("pcb", "the callback object")
+        DCCallback.p.IN("pcb", "the callback object")
     )
 
     opaque_p(
         "GetUserData",
         "Returns a pointer to the {@code userdata} passed to the callback object on creation or initialization.",
 
-        DCCallback_p.IN("pcb", "the callback object")
+        DCCallback.p.IN("pcb", "the callback object")
     )
 
-    val args = DCArgs_p.IN("args", "the function arguments")
+    val args = DCArgs.p.IN("args", "the function arguments")
 
     DCbool("ArgBool", "Returns the next {@code bool} argument.", args)
     DCchar("ArgChar", "Returns the next {@code char} argument.", args)

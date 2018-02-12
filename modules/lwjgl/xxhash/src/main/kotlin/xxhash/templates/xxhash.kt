@@ -53,7 +53,7 @@ ENABLE_WARNINGS()""")
         "32",
         "Calculates the 32-bits hash of sequence {@code length} bytes stored at memory address {@code input}.",
 
-        const..void_p.IN(
+        void.const.p.IN(
             "input",
             "the bytes to hash. The memory between {@code input} &amp; {@code input+length} must be valid (allocated and read-accessible)."
         ),
@@ -61,7 +61,7 @@ ENABLE_WARNINGS()""")
         unsigned_int.IN("seed", "the seed that can be used to alter the result predictably")
     )
 
-    XXH32_state_t_p(
+    XXH32_state_t.p(
         "32_createState",
         """
         Creates memory for {@code XXH32_state_t}. The state must then be initialized using #32_reset() before first use.
@@ -74,22 +74,22 @@ ENABLE_WARNINGS()""")
         "32_freeState",
         "Frees the specified {@code XXH32_state_t}.",
 
-        XXH32_state_t_p.IN("statePtr", "the state to free")
+        XXH32_state_t.p.IN("statePtr", "the state to free")
     )
 
     void(
         "32_copyState",
         "",
 
-        XXH32_state_t_p.OUT("dst_state", ""),
-        const..XXH32_state_t_p.IN("src_state", "")
+        XXH32_state_t.p.OUT("dst_state", ""),
+        XXH32_state_t.const.p.IN("src_state", "")
     )
 
     XXH_errorcode(
         "32_reset",
         "Resets the specified {@code XXH32_state_t}.",
 
-        XXH32_state_t_p.IN("statePtr", "the {@code XXH32_state_t} to reset"),
+        XXH32_state_t.p.IN("statePtr", "the {@code XXH32_state_t} to reset"),
         unsigned_int.IN("seed", "the seed that can be used to alter the hashing result predictably")
     )
 
@@ -114,7 +114,7 @@ ENABLE_WARNINGS()""")
         When done, free XXH state space.
         """,
 
-        XXH32_state_t_p.IN("statePtr", "the {@code XXH32_state_t} to use"),
+        XXH32_state_t.p.IN("statePtr", "the {@code XXH32_state_t} to use"),
         XXH32["input"],
         XXH32["length"]
     )
@@ -123,7 +123,7 @@ ENABLE_WARNINGS()""")
         "32_digest",
         "Returns the final 32-bits hash of the specified {@code XXH32_state_t}.",
 
-        const..XXH32_state_t_p.IN("statePtr", "the {@code XXH32_state_t} to use")
+        XXH32_state_t.const.p.IN("statePtr", "the {@code XXH32_state_t} to use")
     )
 
     void(
@@ -135,7 +135,7 @@ ENABLE_WARNINGS()""")
         result into and from its canonical format. This way, hash values can be written into a file / memory, remaining comparable across different systems.
         """,
 
-        XXH32_canonical_t_p.OUT("dst", "the destination canonical representation"),
+        XXH32_canonical_t.p.OUT("dst", "the destination canonical representation"),
         XXH32_hash_t.IN("hash", "the source hash")
     )
 
@@ -143,7 +143,7 @@ ENABLE_WARNINGS()""")
         "32_hashFromCanonical",
         "Transforms the specified canonical representation to a primitive value.",
 
-        const..XXH32_canonical_t_p.IN("src", "the source canonical representation")
+        XXH32_canonical_t.const.p.IN("src", "the source canonical representation")
     )
 
     // 64-bits hash
@@ -161,7 +161,7 @@ ENABLE_WARNINGS()""")
         unsigned_long_long.IN("seed", "the seed that can be used to alter the result predictably")
     )
 
-    XXH64_state_t_p(
+    XXH64_state_t.p(
         "64_createState",
         "64-bit version of #32_createState()."
     )
@@ -170,22 +170,22 @@ ENABLE_WARNINGS()""")
         "64_freeState",
         "64-bit version of #32_freeState().",
 
-        XXH64_state_t_p.IN("statePtr", "the state to free")
+        XXH64_state_t.p.IN("statePtr", "the state to free")
     )
 
     void(
         "64_copyState",
         "",
 
-        XXH64_state_t_p.OUT("dst_state", ""),
-        const..XXH64_state_t_p.IN("src_state", "")
+        XXH64_state_t.p.OUT("dst_state", ""),
+        XXH64_state_t.const.p.IN("src_state", "")
     )
 
     XXH_errorcode(
         "64_reset",
         "64-bit version of #32_reset().",
 
-        XXH64_state_t_p.IN("statePtr", "the {@code XXH64_state_t} to reset"),
+        XXH64_state_t.p.IN("statePtr", "the {@code XXH64_state_t} to reset"),
         unsigned_long_long.IN("seed", "the seed that can be used to alter the hashing result predictably")
     )
 
@@ -193,7 +193,7 @@ ENABLE_WARNINGS()""")
         "64_update",
         "64-bit version of #32_update().",
 
-        XXH64_state_t_p.IN("statePtr", "the {@code XXH64_state_t} to use"),
+        XXH64_state_t.p.IN("statePtr", "the {@code XXH64_state_t} to use"),
         XXH32["input"],
         XXH32["length"]
     )
@@ -202,14 +202,14 @@ ENABLE_WARNINGS()""")
         "64_digest",
         "64-bit version of #32_digest().",
 
-        const..XXH64_state_t_p.IN("statePtr", "the {@code XXH64_state_t} to use")
+        XXH64_state_t.const.p.IN("statePtr", "the {@code XXH64_state_t} to use")
     )
 
     void(
         "64_canonicalFromHash",
         "64-bit version of #32_canonicalFromHash().",
 
-        XXH64_canonical_t_p.OUT("dst", "the destination canonical representation"),
+        XXH64_canonical_t.p.OUT("dst", "the destination canonical representation"),
         XXH64_hash_t.IN("hash", "the source hash")
     )
 
@@ -217,6 +217,6 @@ ENABLE_WARNINGS()""")
         "64_hashFromCanonical",
         "64-bit version of #32_hashFromCanonical().",
 
-        const..XXH64_canonical_t_p.IN("src", "the source canonical representation")
+        XXH64_canonical_t.const.p.IN("src", "the source canonical representation")
     )
 }

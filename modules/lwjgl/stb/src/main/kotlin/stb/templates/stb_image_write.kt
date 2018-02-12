@@ -85,22 +85,22 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         PNG allows you to set the deflate compression level by setting the global variable #write_png_compression_level() (it defaults to 8).
         """,
 
-        const..charASCII_p.IN("filename", "the image file path"),
+        charASCII.const.p.IN("filename", "the image file path"),
         int.IN("w", "the image width, in pixels"),
         int.IN("h", "the image height, in pixels"),
         int.IN("comp", "the number of channels in each pixel"),
-        Check("(stride_in_bytes != 0 ? stride_in_bytes : w * comp) * h")..const..void_p.IN("data", "the image data"),
+        Check("(stride_in_bytes != 0 ? stride_in_bytes : w * comp) * h")..void.const.p.IN("data", "the image data"),
         int.IN("stride_in_bytes", "the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels"),
 
         returnDoc = "1 on success, 0 on failure"
     )
 
-    macro..Address..int_p(
+    macro..Address..int.p(
         "write_png_compression_level",
         "Returns the address of the global variable {@code stbi_write_png_compression_level}."
     )
 
-    macro..Address..int_p(
+    macro..Address..int.p(
         "write_force_png_filter",
         "Returns the address of the global variable {@code stbi_write_force_png_filter}."
     )
@@ -126,7 +126,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
+        Check("w * h * comp")..void.const.p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -144,12 +144,12 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
+        Check("w * h * comp")..void.const.p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
 
-    macro..Address..int_p(
+    macro..Address..int.p(
         "write_tga_with_rle",
         "Returns the address of the global variable {@code stbi_write_tga_with_rle}."
     )
@@ -167,7 +167,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..float_p.IN("data", "the image data"),
+        Check("w * h * comp")..float.const.p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -185,7 +185,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..float_p.IN("data", "the image data"),
+        Check("w * h * comp")..float.const.p.IN("data", "the image data"),
         int.IN("quality", "the compression quality"),
 
         returnDoc = "1 on success, 0 on failure"
@@ -216,7 +216,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
+        Check("w * h * comp")..void.const.p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -230,7 +230,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
+        Check("w * h * comp")..void.const.p.IN("data", "the image data"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -258,11 +258,10 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..const..void_p.IN("data", "the image data"),
+        Check("w * h * comp")..void.const.p.IN("data", "the image data"),
         write_jpg["quality"],
 
         returnDoc = "1 on success, 0 on failure"
-
     )
 
     void(

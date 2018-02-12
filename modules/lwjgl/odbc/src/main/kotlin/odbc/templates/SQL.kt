@@ -2438,7 +2438,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             {@code HandleType} is #HANDLE_DBC, this must be an environment handle, and if it is #HANDLE_STMT or #HANDLE_DESC, it must be a connection handle.
             """
         ),
-        Check(1)..SQLHANDLE_p.OUT("OutputHandle", "pointer to a buffer in which to return the handle to the newly allocated data structure"),
+        Check(1)..SQLHANDLE.p.OUT("OutputHandle", "pointer to a buffer in which to return the handle to the newly allocated data structure"),
 
         returnDoc =
         """
@@ -2460,14 +2460,14 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHDBC.IN("ConnectionHandle", "the connection handle"),
-        SQLCHARUTF16_p.IN(
+        SQLCHARUTF16.p.IN(
             "ServerName",
             "the data source name. The data might be located on the same computer as the program, or on another computer somewhere on a network"
         ),
         AutoSize("ServerName")..SQLSMALLINT.IN("NameLength1", "the length of {@code *ServerName} in characters"),
-        SQLCHARUTF16_p.IN("UserName", "the user identifier"),
+        SQLCHARUTF16.p.IN("UserName", "the user identifier"),
         AutoSize("UserName")..SQLSMALLINT.IN("NameLength2", "the length of {@code *UserName} in characters"),
-        SQLCHARUTF16_p.IN("Authentication", "the authentication string (typically the password)"),
+        SQLCHARUTF16.p.IN("Authentication", "the authentication string (typically the password)"),
         AutoSize("Authentication")..SQLSMALLINT.IN("NameLength3", "the length of {@code *Authentication} in characters"),
 
         returnDoc = "#SUCCESS, #SUCCESS_WITH_INFO, #ERROR, #INVALID_HANDLE, or #STILL_EXECUTING"
@@ -2500,7 +2500,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             #FETCH_NEXT return only system DSNs.
             """
         ),
-        nullable..SQLCHARUTF16_p.OUT(
+        nullable..SQLCHARUTF16.p.OUT(
             "ServerName",
             """
             pointer to a buffer in which to return the data source name
@@ -2513,7 +2513,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             "BufferLength1",
             "length of the {@code *ServerName} buffer, in characters; this does not need to be longer than #MAX_DSN_LENGTH plus the null-termination character."
         ),
-        Check(1)..SQLSMALLINT_p.OUT(
+        Check(1)..SQLSMALLINT.p.OUT(
             "NameLength1Ptr",
             """
             pointer to a buffer in which to return the total number of characters (excluding the null-termination character) available to return in
@@ -2521,7 +2521,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             {@code *ServerName} is truncated to {@code BufferLength1} minus the length of a null-termination character.
             """
         ),
-        nullable..SQLCHARUTF16_p.OUT(
+        nullable..SQLCHARUTF16.p.OUT(
             "Description",
             """
             pointer to a buffer in which to return the description of the driver associated with the data source. For example, dBASE or SQL Server.
@@ -2531,7 +2531,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             """
         ),
         AutoSize("Description")..SQLSMALLINT.IN("BufferLength2", "length in characters of the {@code *Description} buffer."),
-        Check(1)..SQLSMALLINT_p.OUT(
+        Check(1)..SQLSMALLINT.p.OUT(
             "NameLength2Ptr",
             """
             pointer to a buffer in which to return the total number of characters (excluding the null-termination character) available to return in
@@ -2557,7 +2557,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_POINTER
         )..nullable..SQLPOINTER.INOUT("InfoValuePtr", ""),
         AutoSize("InfoValuePtr")..SQLSMALLINT.IN("BufferLength", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("StringLengthPtr", "")
+        Check(1)..nullable..SQLSMALLINT.p.OUT("StringLengthPtr", "")
     )
 
     SQLRETURN(
@@ -2572,7 +2572,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHDBC.IN("ConnectionHandle", "the connection handle"),
         SQLUSMALLINT.IN("FunctionId", "identifies the ODBC function of interest", "$FunctionIDs #API_ODBC3_ALL_FUNCTIONS"),
-        Check(1)..SQLUSMALLINT_p.OUT("SupportedPtr", "")
+        Check(1)..SQLUSMALLINT.p.OUT("SupportedPtr", "")
     )
 
     SQLRETURN(
@@ -2656,7 +2656,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLINTEGER.IN("Attribute", "attribute to retrieve", ConnectionAttributes),
         nullable..SQLPOINTER.OUT("ValuePtr", ""),
         AutoSize("ValuePtr")..SQLINTEGER.IN("BufferLength", ""),
-        Check(1)..SQLINTEGER_p.OUT("StringLengthPtr", "")
+        Check(1)..SQLINTEGER.p.OUT("StringLengthPtr", "")
     )
 
     SQLRETURN(
@@ -2699,7 +2699,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLINTEGER.IN("Attribute", "", EnvironmentAttributes),
         nullable..SQLPOINTER.OUT("ValuePtr", ""),
         AutoSize("ValuePtr")..SQLINTEGER.IN("BufferLength", ""),
-        Check(1)..SQLINTEGER_p.OUT("StringLengthPtr", "")
+        Check(1)..SQLINTEGER.p.OUT("StringLengthPtr", "")
     )
 
     SQLRETURN(
@@ -2728,7 +2728,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLINTEGER.IN("Attribute", "", StatementAttributes),
         nullable..SQLPOINTER.OUT("ValuePtr", ""),
         AutoSize("ValuePtr")..SQLINTEGER.IN("BufferLength", ""),
-        Check(1)..nullable..SQLINTEGER_p.OUT("StringLengthPtr", "")
+        Check(1)..nullable..SQLINTEGER.p.OUT("StringLengthPtr", "")
     )
 
     // ---
@@ -2748,7 +2748,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLSMALLINT.IN("FieldIdentifier", ""),
         nullable..SQLPOINTER.OUT("ValuePtr", ""),
         AutoSize("ValuePtr")..SQLINTEGER.IN("BufferLength", ""),
-        nullable..Check(1)..SQLINTEGER_p.OUT("StringLengthPtr", "")
+        nullable..Check(1)..SQLINTEGER.p.OUT("StringLengthPtr", "")
     )
 
     NativeName("SQLGetDescRecW")..SQLRETURN(
@@ -2762,15 +2762,15 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHDESC.IN("DescriptorHandle", ""),
         SQLSMALLINT.IN("RecNumber", ""),
-        nullable..SQLCHARUTF16_p.OUT("Name", ""),
+        nullable..SQLCHARUTF16.p.OUT("Name", ""),
         AutoSize("Name")..SQLSMALLINT.IN("BufferLength", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("StringLengthPtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("TypePtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("SubTypePtr", ""),
-        Check(1)..nullable..SQLLEN_p.OUT("LengthPtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("PrecisionPtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("ScalePtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("NullablePtr", "")
+        Check(1)..nullable..SQLSMALLINT.p.OUT("StringLengthPtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("TypePtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("SubTypePtr", ""),
+        Check(1)..nullable..SQLLEN.p.OUT("LengthPtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("PrecisionPtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("ScalePtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("NullablePtr", "")
     )
 
     SQLRETURN(
@@ -2804,8 +2804,8 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLSMALLINT.IN("Precision", ""),
         SQLSMALLINT.IN("Scale", ""),
         Check(1)..nullable..SQLPOINTER.INOUT("DataPtr", ""),
-        Check(1)..nullable..SQLLEN_p.INOUT("StringLengthPtr", ""),
-        Check(1)..nullable..SQLLEN_p.INOUT("IndicatorPtr", "")
+        Check(1)..nullable..SQLLEN.p.INOUT("StringLengthPtr", ""),
+        Check(1)..nullable..SQLLEN.p.INOUT("IndicatorPtr", "")
     )
 
     SQLRETURN(
@@ -2833,7 +2833,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        SQLCHARUTF16_p.IN("StatementText", ""),
+        SQLCHARUTF16.p.IN("StatementText", ""),
         AutoSize("StatementText")..SQLINTEGER.IN("TextLength", "")
     )
 
@@ -2846,9 +2846,9 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        nullable..SQLCHARUTF16_p.OUT("CursorName", ""),
+        nullable..SQLCHARUTF16.p.OUT("CursorName", ""),
         AutoSize("CursorName")..SQLSMALLINT.IN("BufferLength", ""),
-        Check(1)..SQLSMALLINT_p.OUT("NameLengthPtr", "")
+        Check(1)..SQLSMALLINT.p.OUT("NameLengthPtr", "")
     )
 
     NativeName("SQLSetCursorNameW")..SQLRETURN(
@@ -2861,7 +2861,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        SQLCHARUTF16_p.OUT("CursorName", ""),
+        SQLCHARUTF16.p.OUT("CursorName", ""),
         AutoSize("CursorName")..SQLSMALLINT.IN("NameLength", "")
     )
 
@@ -2890,7 +2890,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", "statement handle"),
-        SQLCHARUTF16_p.IN("StatementText", "SQL statement to be executed"),
+        SQLCHARUTF16.p.IN("StatementText", "SQL statement to be executed"),
         AutoSize("StatementText")..SQLINTEGER.IN("TextLength", "length of {@code StatementText} in characters")
     )
 
@@ -2904,7 +2904,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        Check(1)..SQLPOINTER_p.OUT("ValuePtrPtr", "")
+        Check(1)..SQLPOINTER.p.OUT("ValuePtrPtr", "")
     )
 
     SQLRETURN(
@@ -2936,7 +2936,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        Check(1)..SQLLEN_p.OUT("RowCountPtr", "")
+        Check(1)..SQLLEN.p.OUT("RowCountPtr", "")
     )
 
     SQLRETURN(
@@ -2948,7 +2948,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        Check(1)..SQLSMALLINT_p.OUT("ColumnCountPtr", "")
+        Check(1)..SQLSMALLINT.p.OUT("ColumnCountPtr", "")
     )
 
     NativeName("SQLDescribeColW")..SQLRETURN(
@@ -2962,13 +2962,13 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHSTMT.IN("StatementHandle", ""),
         SQLUSMALLINT.IN("ColumnNumber", ""),
-        nullable..SQLCHARUTF16_p.OUT("ColumnName", ""),
+        nullable..SQLCHARUTF16.p.OUT("ColumnName", ""),
         AutoSize("ColumnName")..SQLSMALLINT.IN("BufferLength", ""),
-        Check(1)..SQLSMALLINT_p.OUT("NameLengthPtr", ""),
-        Check(1)..SQLSMALLINT_p.OUT("DataTypePtr", ""),
-        Check(1)..SQLULEN_p.OUT("ColumnSizePtr", ""),
-        Check(1)..SQLSMALLINT_p.OUT("DecimalDigitsPtr", ""),
-        Check(1)..SQLSMALLINT_p.OUT("NullablePtr", "")
+        Check(1)..SQLSMALLINT.p.OUT("NameLengthPtr", ""),
+        Check(1)..SQLSMALLINT.p.OUT("DataTypePtr", ""),
+        Check(1)..SQLULEN.p.OUT("ColumnSizePtr", ""),
+        Check(1)..SQLSMALLINT.p.OUT("DecimalDigitsPtr", ""),
+        Check(1)..SQLSMALLINT.p.OUT("NullablePtr", "")
     )
 
     SQLRETURN(
@@ -2985,8 +2985,8 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLUSMALLINT.IN("FieldIdentifier", ""),
         nullable..SQLPOINTER.IN("CharacterAttributePtr", ""),
         AutoSize("CharacterAttributePtr")..SQLSMALLINT.IN("BufferLength", ""),
-        Check(1)..SQLSMALLINT_p.OUT("StringLengthPtr", ""),
-        Check(1)..SQLLEN_p.OUT("NumericAttributePtr", "")
+        Check(1)..SQLSMALLINT.p.OUT("StringLengthPtr", ""),
+        Check(1)..SQLLEN.p.OUT("NumericAttributePtr", "")
     )
 
     SQLRETURN(
@@ -3008,7 +3008,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             PointerMapping.DATA_DOUBLE
         )..nullable..SQLPOINTER.INOUT("TargetValuePtr", ""),
         AutoSize("TargetValuePtr")..SQLLEN.IN("BufferLength", ""),
-        Check(1)..nullable..SQLLEN_p.INOUT("StrLen_or_Ind", "")
+        Check(1)..nullable..SQLLEN.p.INOUT("StrLen_or_Ind", "")
     )
 
     SQLRETURN(
@@ -3050,7 +3050,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLSMALLINT.IN("TargetType", ""),
         SQLPOINTER.IN("TargetValuePtr", ""),
         AutoSize("TargetValuePtr")..SQLLEN.IN("BufferLength", ""),
-        Check(1)..SQLLEN_p.OUT("StrLen_or_IndPtr", "")
+        Check(1)..SQLLEN.p.OUT("StrLen_or_IndPtr", "")
     )
 
     SQLRETURN(
@@ -3120,7 +3120,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             )}
             """
         ),
-        Check(1)..SQLSMALLINT_p.IN(
+        Check(1)..SQLSMALLINT.p.IN(
             "StringLengthPtr",
             """
             Pointer to a buffer in which to return the total number of bytes (excluding the number of bytes required for the null-termination character)
@@ -3143,11 +3143,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLSMALLINT.IN("HandleType", ""),
         SQLHANDLE.IN("Handle", ""),
         SQLSMALLINT.IN("RecNumber", ""),
-        Check(6)..SQLCHARUTF16_p.OUT("SQLState", ""),
-        Check(1)..SQLINTEGER_p.OUT("NativeErrorPtr", ""),
-        nullable..SQLCHARUTF16_p.OUT("MessageText", ""),
+        Check(6)..SQLCHARUTF16.p.OUT("SQLState", ""),
+        Check(1)..SQLINTEGER.p.OUT("NativeErrorPtr", ""),
+        nullable..SQLCHARUTF16.p.OUT("MessageText", ""),
         AutoSize("MessageText")..SQLSMALLINT.IN("BufferLength", ""),
-        Check(1)..SQLSMALLINT_p.OUT("TextLengthPtr", "")
+        Check(1)..SQLSMALLINT.p.OUT("TextLengthPtr", "")
     )
 
     // ---
@@ -3279,7 +3279,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             SQLCompleteAsync returns #INVALID_HANDLE.
             """
         ),
-        Check(1)..RETCODE_p.OUT(
+        Check(1)..RETCODE.p.OUT(
             "AsyncRetCodePtr",
             """
             pointer to a buffer that will contain the return code of the asynchronous API. If {@code AsyncRetCodePtr} is #NULL, SQLCompleteAsync returns
@@ -3295,13 +3295,13 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("StatementHandle", ""),
-        nullable..SQLCHARUTF16_p.OUT("CatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("CatalogName", ""),
         AutoSize("CatalogName")..SQLSMALLINT.IN("NameLength1", ""),
-        nullable..SQLCHARUTF16_p.OUT("SchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("SchemaName", ""),
         AutoSize("SchemaName")..SQLSMALLINT.IN("NameLength2", ""),
-        nullable..SQLCHARUTF16_p.OUT("TableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("TableName", ""),
         AutoSize("TableName")..SQLSMALLINT.IN("NameLength3", ""),
-        nullable..SQLCHARUTF16_p.OUT("ColumnName", ""),
+        nullable..SQLCHARUTF16.p.OUT("ColumnName", ""),
         AutoSize("ColumnName")..SQLSMALLINT.IN("NameLength4", "")
     )
 
@@ -3311,11 +3311,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHSTMT.IN("StatementHandle", ""),
         SQLUSMALLINT.IN("IdentifierType", ""),
-        nullable..SQLCHARUTF16_p.OUT("CatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("CatalogName", ""),
         AutoSize("CatalogName")..SQLSMALLINT.IN("NameLength1", ""),
-        nullable..SQLCHARUTF16_p.OUT("SchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("SchemaName", ""),
         AutoSize("SchemaName")..SQLSMALLINT.IN("NameLength2", ""),
-        nullable..SQLCHARUTF16_p.OUT("TableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("TableName", ""),
         AutoSize("TableName")..SQLSMALLINT.IN("NameLength3", ""),
         SQLUSMALLINT.IN("Scope", ""),
         SQLUSMALLINT.IN("Nullable", "")
@@ -3326,11 +3326,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("StatementHandle", ""),
-        nullable..SQLCHARUTF16_p.OUT("CatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("CatalogName", ""),
         AutoSize("CatalogName")..SQLSMALLINT.IN("NameLength1", ""),
-        nullable..SQLCHARUTF16_p.OUT("SchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("SchemaName", ""),
         AutoSize("SchemaName")..SQLSMALLINT.IN("NameLength2", ""),
-        nullable..SQLCHARUTF16_p.OUT("TableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("TableName", ""),
         AutoSize("TableName")..SQLSMALLINT.IN("NameLength3", ""),
         SQLUSMALLINT.IN("Unique", ""),
         SQLUSMALLINT.IN("Reserved", "")
@@ -3341,13 +3341,13 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("StatementHandle", ""),
-        nullable..SQLCHARUTF16_p.OUT("CatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("CatalogName", ""),
         AutoSize("CatalogName")..SQLSMALLINT.IN("NameLength1", ""),
-        nullable..SQLCHARUTF16_p.OUT("SchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("SchemaName", ""),
         AutoSize("SchemaName")..SQLSMALLINT.IN("NameLength2", ""),
-        nullable..SQLCHARUTF16_p.OUT("TableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("TableName", ""),
         AutoSize("TableName")..SQLSMALLINT.IN("NameLength3", ""),
-        nullable..SQLCHARUTF16_p.OUT("TableType", ""),
+        nullable..SQLCHARUTF16.p.OUT("TableType", ""),
         AutoSize("TableType")..SQLSMALLINT.IN("NameLength4", "")
     )
 
@@ -3439,9 +3439,9 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             applicable or SQLDriverConnect will not present any dialog boxes.
             """
         ),
-        SQLCHARUTF16_p.IN("InConnectionString", "a full connection string, a partial connection string, or an empty string."),
+        SQLCHARUTF16.p.IN("InConnectionString", "a full connection string, a partial connection string, or an empty string."),
         AutoSize("InConnectionString")..SQLSMALLINT.IN("StringLength1", "the length of {@code *InConnectionString}, in characters"),
-        nullable..SQLCHARUTF16_p.OUT(
+        nullable..SQLCHARUTF16.p.OUT(
             "OutConnectionString",
             """
             pointer to a buffer for the completed connection string. Upon successful connection to the target data source, this buffer contains the completed
@@ -3451,7 +3451,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             """
         ),
         AutoSize("OutConnectionString")..SQLSMALLINT.IN("BufferLength", "length of the {@code *OutConnectionString} buffer, in characters."),
-        Check(1)..nullable..SQLSMALLINT_p.OUT(
+        Check(1)..nullable..SQLSMALLINT.p.OUT(
             "StringLength2Ptr",
             """
             pointer to a buffer in which to return the total number of characters (excluding the null-termination character) available to return in
@@ -3480,9 +3480,9 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHDBC.IN("ConnectionHandle", "the connection handle"),
-        SQLCHARUTF16_p.IN("InConnectionString", "browse request connection string"),
+        SQLCHARUTF16.p.IN("InConnectionString", "browse request connection string"),
         AutoSize("InConnectionString")..SQLSMALLINT.IN("StringLength1", "the length of {@code *InConnectionString}, in characters"),
-        nullable..SQLCHARUTF16_p.OUT(
+        nullable..SQLCHARUTF16.p.OUT(
             "OutConnectionString",
             """
             pointer to a character buffer in which to return the browse result connection string. If {@code OutConnectionString} is #NULL,
@@ -3491,7 +3491,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
             """
         ),
         AutoSize("OutConnectionString")..SQLSMALLINT.IN("BufferLength", "length of the {@code *OutConnectionString} buffer, in characters."),
-        Check(1)..nullable..SQLSMALLINT_p.OUT(
+        Check(1)..nullable..SQLSMALLINT.p.OUT(
             "StringLength2Ptr",
             """
             pointer to a buffer in which to return the total number of characters (excluding the null-termination character) available to return in
@@ -3520,13 +3520,13 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("hstmt", ""),
-        nullable..SQLCHARUTF16_p.OUT("szCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szCatalogName", ""),
         AutoSize("szCatalogName")..SQLSMALLINT.IN("cchCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szSchemaName", ""),
         AutoSize("szSchemaName")..SQLSMALLINT.IN("cchSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szTableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szTableName", ""),
         AutoSize("szTableName")..SQLSMALLINT.IN("cchTableName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szColumnName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szColumnName", ""),
         AutoSize("szColumnName")..SQLSMALLINT.IN("cchColumnName", "")
     )
 
@@ -3540,10 +3540,10 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHSTMT.IN("StatementHandle", ""),
         SQLUSMALLINT.IN("ParameterNumber", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("DataTypePtr", ""),
-        Check(1)..nullable..SQLULEN_p.OUT("ParameterSizePtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("DecimalDigitsPtr", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("NullablePtr", "")
+        Check(1)..nullable..SQLSMALLINT.p.OUT("DataTypePtr", ""),
+        Check(1)..nullable..SQLULEN.p.OUT("ParameterSizePtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("DecimalDigitsPtr", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("NullablePtr", "")
     )
 
     SQLRETURN(
@@ -3553,8 +3553,8 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLHSTMT.IN("hstmt", ""),
         SQLUSMALLINT.IN("fFetchType", ""),
         SQLLEN.IN("irow", ""),
-        Check(1)..nullable..SQLULEN_p.OUT("pcrow", ""),
-        Check(1)..nullable..SQLUSMALLINT_p.OUT("rgfRowStatus", "")
+        Check(1)..nullable..SQLULEN.p.OUT("pcrow", ""),
+        Check(1)..nullable..SQLUSMALLINT.p.OUT("rgfRowStatus", "")
     )
 
     NativeName("SQLForeignKeysW")..SQLRETURN(
@@ -3562,17 +3562,17 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("hstmt", ""),
-        nullable..SQLCHARUTF16_p.OUT("szPkCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szPkCatalogName", ""),
         AutoSize("szPkCatalogName")..SQLSMALLINT.IN("cchPkCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szPkSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szPkSchemaName", ""),
         AutoSize("szPkSchemaName")..SQLSMALLINT.IN("cchPkSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szPkTableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szPkTableName", ""),
         AutoSize("szPkTableName")..SQLSMALLINT.IN("cchPkTableName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szFkCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szFkCatalogName", ""),
         AutoSize("szFkCatalogName")..SQLSMALLINT.IN("cchFkCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szFkSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szFkSchemaName", ""),
         AutoSize("szFkSchemaName")..SQLSMALLINT.IN("cchFkSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szFkTableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szFkTableName", ""),
         AutoSize("szFkTableName")..SQLSMALLINT.IN("cchFkTableName", "")
     )
 
@@ -3597,11 +3597,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHDBC.IN("ConnectionHandle", "the connection handle"),
-        SQLCHARUTF16_p.IN("InStatementText", ""),
+        SQLCHARUTF16.p.IN("InStatementText", ""),
         AutoSize("InStatementText")..SQLINTEGER.IN("TextLength1", ""),
-        nullable..SQLCHARUTF16_p.OUT("OutStatementText", ""),
+        nullable..SQLCHARUTF16.p.OUT("OutStatementText", ""),
         AutoSize("OutStatementText")..SQLINTEGER.IN("BufferLength", ""),
-        Check(1)..SQLINTEGER_p.OUT("TextLength2Ptr", "")
+        Check(1)..SQLINTEGER.p.OUT("TextLength2Ptr", "")
     )
 
     SQLRETURN(
@@ -3613,7 +3613,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         """,
 
         SQLHSTMT.IN("StatementHandle", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("ParameterCountPtr", "")
+        Check(1)..nullable..SQLSMALLINT.p.OUT("ParameterCountPtr", "")
     )
 
     SQLRETURN(
@@ -3622,7 +3622,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHSTMT.IN("hstmt", ""),
         SQLULEN.IN("crow", ""),
-        Check(1)..SQLULEN_p.OUT("pirow", "")
+        Check(1)..SQLULEN.p.OUT("pirow", "")
     )
 
     NativeName("SQLPrimaryKeysW")..SQLRETURN(
@@ -3630,11 +3630,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("hstmt", ""),
-        nullable..SQLCHARUTF16_p.OUT("szCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szCatalogName", ""),
         AutoSize("szCatalogName")..SQLSMALLINT.IN("cchCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szSchemaName", ""),
         AutoSize("szSchemaName")..SQLSMALLINT.IN("cchSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szTableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szTableName", ""),
         AutoSize("szTableName")..SQLSMALLINT.IN("cchTableName", "")
     )
 
@@ -3643,13 +3643,13 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("hstmt", ""),
-        nullable..SQLCHARUTF16_p.OUT("szCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szCatalogName", ""),
         AutoSize("szCatalogName")..SQLSMALLINT.IN("cchCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szSchemaName", ""),
         AutoSize("szSchemaName")..SQLSMALLINT.IN("cchSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szProcName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szProcName", ""),
         AutoSize("szProcName")..SQLSMALLINT.IN("cchProcName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szColumnName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szColumnName", ""),
         AutoSize("szColumnName")..SQLSMALLINT.IN("cchColumnName", "")
     )
 
@@ -3658,11 +3658,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("hstmt", ""),
-        nullable..SQLCHARUTF16_p.OUT("szCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szCatalogName", ""),
         AutoSize("szCatalogName")..SQLSMALLINT.IN("cchCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szSchemaName", ""),
         AutoSize("szSchemaName")..SQLSMALLINT.IN("cchSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szProcName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szProcName", ""),
         AutoSize("szProcName")..SQLSMALLINT.IN("cchProcName", "")
     )
 
@@ -3685,11 +3685,11 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         "",
 
         SQLHSTMT.IN("hstmt", ""),
-        nullable..SQLCHARUTF16_p.OUT("szCatalogName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szCatalogName", ""),
         AutoSize("szCatalogName")..SQLSMALLINT.IN("cchCatalogName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szSchemaName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szSchemaName", ""),
         AutoSize("szSchemaName")..SQLSMALLINT.IN("cchSchemaName", ""),
-        nullable..SQLCHARUTF16_p.OUT("szTableName", ""),
+        nullable..SQLCHARUTF16.p.OUT("szTableName", ""),
         AutoSize("szTableName")..SQLSMALLINT.IN("cchTableName", "")
     )
 
@@ -3702,12 +3702,12 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLHENV.IN("EnvironmentHandle", ""),
         SQLUSMALLINT.IN("Direction", ""),
-        nullable..SQLCHARUTF16_p.OUT("DriverDescription", ""),
+        nullable..SQLCHARUTF16.p.OUT("DriverDescription", ""),
         AutoSize("DriverDescription")..SQLSMALLINT.IN("BufferLength1", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("DescriptionLengthPtr", ""),
-        nullable..SQLCHARUTF16_p.OUT("DriverAttributes", ""),
+        Check(1)..nullable..SQLSMALLINT.p.OUT("DescriptionLengthPtr", ""),
+        nullable..SQLCHARUTF16.p.OUT("DriverAttributes", ""),
         AutoSize("DriverAttributes")..SQLSMALLINT.IN("BufferLength2", ""),
-        Check(1)..nullable..SQLSMALLINT_p.OUT("AttributesLengthPtr", "")
+        Check(1)..nullable..SQLSMALLINT.p.OUT("AttributesLengthPtr", "")
     )
 
     SQLRETURN(
@@ -3728,7 +3728,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         SQLSMALLINT.IN("DecimalDigits", ""),
         nullable..SQLPOINTER.IN("ParameterValuePtr", ""),
         AutoSize("ParameterValuePtr")..SQLLEN.IN("BufferLength", ""),
-        Check(1)..nullable..SQLLEN_p.IN("StrLen_or_IndPtr", "")
+        Check(1)..nullable..SQLLEN.p.IN("StrLen_or_IndPtr", "")
     )
 
     SQLRETURN(
@@ -3737,7 +3737,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
 
         SQLSMALLINT.IN("fHandleType", ""),
         SQLHANDLE.IN("hInput", ""),
-        Check(1)..SQLHANDLE_p.OUT("phOutput", "")
+        Check(1)..SQLHANDLE.p.OUT("phOutput", "")
     )
 
     /*RETCODE(

@@ -331,7 +331,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the primary command buffer in which the generation process takes space."),
-        const..VkCmdProcessCommandsInfoNVX.p.IN("pProcessCommandsInfo", "a pointer to an instance of the ##VkCmdProcessCommandsInfoNVX structure containing parameters affecting the processing of commands.")
+        VkCmdProcessCommandsInfoNVX.const.p.IN("pProcessCommandsInfo", "a pointer to an instance of the ##VkCmdProcessCommandsInfoNVX structure containing parameters affecting the processing of commands.")
     )
 
     void(
@@ -380,7 +380,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the secondary command buffer in which the space for device-generated commands is reserved."),
-        const..VkCmdReserveSpaceForCommandsInfoNVX.p.IN("pReserveSpaceInfo", "")
+        VkCmdReserveSpaceForCommandsInfoNVX.const.p.IN("pReserveSpaceInfo", "")
     )
 
     VkResult(
@@ -425,8 +425,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkDevice.IN("device", "the logical device that creates the object table."),
-        const..VkIndirectCommandsLayoutCreateInfoNVX.p.IN("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkIndirectCommandsLayoutCreateInfoNVX.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkIndirectCommandsLayoutNVX.p.OUT("pIndirectCommandsLayout", "points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
     )
 
@@ -465,7 +465,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
         VkDevice.IN("device", "the logical device that destroys the layout."),
         VkIndirectCommandsLayoutNVX.IN("indirectCommandsLayout", "the table to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     VkResult(
@@ -510,8 +510,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkDevice.IN("device", "the logical device that creates the object table."),
-        const..VkObjectTableCreateInfoNVX.p.IN("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkObjectTableCreateInfoNVX.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkObjectTableNVX.p.OUT("pObjectTable", "points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
     )
 
@@ -555,7 +555,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
         VkDevice.IN("device", "the logical device that destroys the table."),
         VkObjectTableNVX.IN("objectTable", "the table to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     VkResult(
@@ -617,8 +617,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkDevice.IN("device", "the logical device that creates the object table."),
         VkObjectTableNVX.IN("objectTable", "the table for which the resources are registered."),
         AutoSize("ppObjectTableEntries", "pObjectIndices")..uint32_t.IN("objectCount", "the number of resources to register."),
-        const..VkObjectTableEntryNVX.p.const.p.IN("ppObjectTableEntries", "provides an array for detailed binding informations, each array element is a pointer to a struct of type ##VkObjectTablePipelineEntryNVX, ##VkObjectTableDescriptorSetEntryNVX, ##VkObjectTableVertexBufferEntryNVX, ##VkObjectTableIndexBufferEntryNVX or ##VkObjectTablePushConstantEntryNVX (see below for details)."),
-        const..uint32_t_p.IN("pObjectIndices", "are the indices at which each resource is registered.")
+        VkObjectTableEntryNVX.const.p.const.p.IN("ppObjectTableEntries", "provides an array for detailed binding informations, each array element is a pointer to a struct of type ##VkObjectTablePipelineEntryNVX, ##VkObjectTableDescriptorSetEntryNVX, ##VkObjectTableVertexBufferEntryNVX, ##VkObjectTableIndexBufferEntryNVX or ##VkObjectTablePushConstantEntryNVX (see below for details)."),
+        uint32_t.const.p.IN("pObjectIndices", "are the indices at which each resource is registered.")
     )
 
     VkResult(
@@ -677,8 +677,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkDevice.IN("device", "the logical device that creates the object table."),
         VkObjectTableNVX.IN("objectTable", "the table from which the resources are unregistered."),
         AutoSize("pObjectEntryTypes", "pObjectIndices")..uint32_t.IN("objectCount", "the number of resources being removed from the object table."),
-        const..VkObjectEntryTypeNVX.p.IN("pObjectEntryTypes", ""),
-        const..uint32_t_p.IN("pObjectIndices", "provides the array of object indices to be removed.")
+        VkObjectEntryTypeNVX.const.p.IN("pObjectEntryTypes", ""),
+        uint32_t.const.p.IN("pObjectIndices", "provides the array of object indices to be removed.")
     )
 
     void(

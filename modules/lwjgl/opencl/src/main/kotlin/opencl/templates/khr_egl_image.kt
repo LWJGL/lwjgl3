@@ -37,7 +37,7 @@ val khr_egl_image = "KHREGLImage".dependsOn(Module.EGL)?.nativeClassCL("khr_egl_
         CLeglDisplayKHR.IN("display", "an {@code EGLDisplay}"),
         CLeglImageKHR.IN("image", "an {@code EGLImageKHR}"),
         cl_mem_flags.IN("flags", "a bit-field that is used to specify usage information about the memory object being created"),
-        nullable..NullTerminated..const..cl_egl_image_properties_khr_p.IN("properties", "a list of property names and their corresponding values"),
+        nullable..NullTerminated..cl_egl_image_properties_khr.const.p.IN("properties", "a list of property names and their corresponding values"),
         ERROR_RET
     )
 
@@ -50,7 +50,7 @@ val khr_egl_image = "KHREGLImage".dependsOn(Module.EGL)?.nativeClassCL("khr_egl_
 
         cl_command_queue.IN("command_queue", "a valid command-queue"),
         AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}"),
-        const..cl_mem_p.IN(
+        cl_mem.const.p.IN(
             "mem_objects",
             "a pointer to a list of OpenCL memory objects that were created from EGL resources, within the context associated with {@code command_queue}"
         ),
@@ -68,7 +68,7 @@ val khr_egl_image = "KHREGLImage".dependsOn(Module.EGL)?.nativeClassCL("khr_egl_
 
         cl_command_queue.IN("command_queue", "a valid command-queue"),
         AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-        SingleValue("mem_object")..const..cl_mem_p.IN(
+        SingleValue("mem_object")..cl_mem.const.p.IN(
             "mem_objects",
             "a pointer to a list of OpenCL memory objects that were created from EGL resources, within the context associated with {@code command_queue}"
         ),

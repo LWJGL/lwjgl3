@@ -78,17 +78,17 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         DISPLAY,
         GLXFBConfigSGIX.IN("config", "the {@code GLXFBConfigSGIX} being queried"),
         int.IN("attribute", "the attribute to query"),
-        Check(1)..int_p.OUT("value", "returns the attribute value")
+        Check(1)..int.p.OUT("value", "returns the attribute value")
     )
 
-    GLXFBConfigSGIX_p(
+    GLXFBConfigSGIX.p(
         "ChooseFBConfigSGIX",
         "Gets {@code GLXFBConfigSGIX}s that match a list of attributes or to get the list of GLXFBConfigSGIXs that are available on the specified screen.",
 
         DISPLAY,
         int.IN("screen", "the screen number"),
-        NullTerminated..nullable..const..int_p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
-        AutoSizeResult..int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
+        NullTerminated..nullable..int.const.p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
+        AutoSizeResult..int.p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
     )
 
     GLXPixmap(
@@ -111,7 +111,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         Bool.IN("direct", "direct rendering request")
     )
 
-    XVisualInfo_p(
+    XVisualInfo.p(
         "GetVisualFromFBConfigSGIX",
         "Retrieves the associated visual of a {@code GLXFBConfigSGIX}.",
 
@@ -124,7 +124,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Retrieves the {@code GLXFBConfigSGIX} associated with a visual.",
 
         DISPLAY,
-        XVisualInfo_p.IN("vis", "the visual")
+        XVisualInfo.p.IN("vis", "the visual")
     )
 
 }

@@ -42,6 +42,6 @@ val KHR_display_reference = "KHRDisplayReference".nativeClassEGL("KHR_display_re
 
         EGLDisplay.IN("dpy", ""),
         EGLint.IN("name", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.p.OUT("value", "")
     )
 }

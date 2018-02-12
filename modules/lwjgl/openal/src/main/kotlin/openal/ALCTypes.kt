@@ -9,15 +9,12 @@ import org.lwjgl.generator.*
 // void
 
 val ALCvoid = "ALCvoid".void
-val ALCvoid_p = PointerType("ALCvoid", PointerMapping.DATA)
 
 // numeric
 
 val ALCboolean = IntegerType("ALCboolean", PrimitiveMapping.BOOLEAN)
 val ALCint = IntegerType("ALCint", PrimitiveMapping.INT)
 val ALCuint = IntegerType("ALCuint", PrimitiveMapping.INT, unsigned = true)
-
-val ALCint_p = ALCint.p
 
 // custom numeric
 
@@ -26,12 +23,10 @@ val ALCenum = IntegerType("ALCenum", PrimitiveMapping.INT)
 
 // strings
 
-val ALCcharASCII_p = CharSequenceType(name = "ALCchar", charMapping = CharMapping.ASCII)
-val ALCcharUTF8_p = CharSequenceType(name = "ALCchar", charMapping = CharMapping.UTF8)
+val ALCcharASCII = CharType("ALCchar", CharMapping.ASCII)
+val ALCcharUTF8 = CharType("ALCchar", CharMapping.UTF8)
 
 // misc
 
-val ALCdevice_p = "ALCdevice".p
-val ALCcontext_p = "ALCcontext".p
-
-val ALCopaque_p = PointerType("void", PointerMapping.OPAQUE_POINTER) // see alcGetProcAddress
+val ALCdevice = "ALCdevice".opaque
+val ALCcontext = "ALCcontext".opaque

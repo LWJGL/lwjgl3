@@ -28,8 +28,8 @@ val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
         defined by {@code vlist}.
         """,
 
-        const..charASCII_p.IN("buffer", "pointer to a null-terminated character string to read from"),
-        const..charASCII_p.IN("format", "pointer to a null-terminated character string specifying how to read the input"),
+        charASCII.const.p.IN("buffer", "pointer to a null-terminated character string to read from"),
+        charASCII.const.p.IN("format", "pointer to a null-terminated character string specifying how to read the input"),
         va_list.IN("vlist", "variable argument list containing the receiving arguments"),
 
         returnDoc =
@@ -46,9 +46,9 @@ val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
         buffer.
         """,
 
-        nullable..char_p.OUT("buffer", "pointer to a character string to write to"),
+        nullable..char.p.OUT("buffer", "pointer to a character string to write to"),
         AutoSize("buffer")..size_t.IN("buf_size", "up to {@code buf_size - 1} characters may be written, plus the null terminator"),
-        const..charASCII_p.IN("format", "pointer to a null-terminated character string specifying how to interpret the data"),
+        charASCII.const.p.IN("format", "pointer to a null-terminated character string specifying how to interpret the data"),
         va_list.IN("vlist", "variable argument list containing the data to print"),
 
         returnDoc =

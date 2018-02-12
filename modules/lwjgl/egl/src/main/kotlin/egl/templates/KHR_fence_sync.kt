@@ -46,7 +46,7 @@ val KHR_fence_sync = "KHRFenceSync".nativeClassEGL("KHR_fence_sync", postfix = K
 
         EGLDisplay.IN("dpy", ""),
         EGLenum.IN("type", ""),
-        noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -74,6 +74,6 @@ val KHR_fence_sync = "KHRFenceSync".nativeClassEGL("KHR_fence_sync", postfix = K
         EGLDisplay.IN("dpy", ""),
         EGLSyncKHR.IN("sync", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 }

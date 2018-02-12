@@ -170,6 +170,6 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 
         GLenum.IN("value", ""),
         GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLuint64EXT_p.OUT("result", "")
+        Check(1)..ReturnParam..GLuint64EXT.p.OUT("result", "")
     )
 }

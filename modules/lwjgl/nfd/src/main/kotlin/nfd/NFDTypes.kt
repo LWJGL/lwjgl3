@@ -21,14 +21,12 @@ fun config() {
 }
 
 val nfdchar_t = CharType("nfdchar_t", CharMapping.UTF8)
-val nfdchar_t_p = nfdchar_t.p
-val nfdchar_t_pp = nfdchar_t_p.p
 
-val nfdpathset_t_p = struct(Module.NFD, "NFDPathSet", nativeName = "nfdpathset_t", mutable = false) {
+val nfdpathset_t = struct(Module.NFD, "NFDPathSet", nativeName = "nfdpathset_t", mutable = false) {
     nativeImport("nfd.h")
     documentation = "An opaque data structure to be used with #OpenDialogMultiple()."
     static(NFD_LIBRARY)
-}.p
+}
 
 val nfdresult_t = "nfdresult_t".enumType
 

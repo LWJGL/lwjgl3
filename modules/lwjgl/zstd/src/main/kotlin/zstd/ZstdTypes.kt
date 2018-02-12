@@ -27,25 +27,25 @@ fun config() {
 val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
 val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
 
-val ZSTD_CCtx_p = "ZSTD_CCtx".p
-val ZSTD_DCtx_p = "ZSTD_DCtx".p
-val ZSTD_CDict_p = "ZSTD_CDict".p
-val ZSTD_DDict_p = "ZSTD_DDict".p
-val ZSTD_CStream_p = "ZSTD_CStream".p
+val ZSTD_CCtx = "ZSTD_CCtx".opaque
+val ZSTD_DCtx = "ZSTD_DCtx".opaque
+val ZSTD_CDict = "ZSTD_CDict".opaque
+val ZSTD_DDict = "ZSTD_DDict".opaque
+val ZSTD_CStream = "ZSTD_CStream".opaque
 
-val ZSTD_inBuffer_p = struct(Module.ZSTD, "ZSTDInBuffer", nativeName = "ZSTD_inBuffer") {
-    const..void_p.member("src", "start of input buffer")
+val ZSTD_inBuffer = struct(Module.ZSTD, "ZSTDInBuffer", nativeName = "ZSTD_inBuffer") {
+    void.const.p.member("src", "start of input buffer")
     AutoSize("src")..size_t.member("size", "size of input buffer")
     size_t.member("pos", "position where reading stopped. Will be updated. Necessarily {@code 0 <= pos <= size}")
-}.p
+}
 
-val ZSTD_outBuffer_p = struct(Module.ZSTD, "ZSTDOutBuffer", nativeName = "ZSTD_outBuffer") {
-    void_p.member("dst", "start of output buffer")
+val ZSTD_outBuffer = struct(Module.ZSTD, "ZSTDOutBuffer", nativeName = "ZSTD_outBuffer") {
+    void.p.member("dst", "start of output buffer")
     AutoSize("dst")..size_t.member("size", "size of output buffer")
     size_t.member("pos", "position where writing stopped. Will be updated. Necessarily {@code 0 <= pos <= size}")
-}.p
+}
 
-val ZSTD_DStream_p = "ZSTD_DStream".p
+val ZSTD_DStream = "ZSTD_DStream".opaque
 
 // Experimental API
 
@@ -56,12 +56,12 @@ val ZSTD_dictMode_e = "ZSTD_dictMode_e".enumType
 val ZSTD_EndDirective = "ZSTD_EndDirective".enumType
 val ZSTD_frameType_e = "ZSTD_frameType_e".enumType
 
-val ZSTD_CCtx_params_p = "ZSTD_CCtx_params".p
+val ZSTD_CCtx_params = "ZSTD_CCtx_params".opaque
 
 val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
 
 val ZSTD_allocFunction = "ZSTD_allocFunction".callback(
-    Module.ZSTD, void_p, "ZSTDAllocFunction",
+    Module.ZSTD, void.p, "ZSTDAllocFunction",
     "",
 
     opaque_p.IN("opaque", ""),
@@ -73,7 +73,7 @@ val ZSTD_freeFunction = "ZSTD_freeFunction".callback(
     "",
 
     opaque_p.IN("opaque", ""),
-    void_p.IN("address", "")
+    void.p.IN("address", "")
 )
 
 val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_customMem") {
@@ -82,7 +82,7 @@ val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_cus
     opaque_p.member("opaque", "")
 }
 
-val ZSTD_frameHeader_p = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
+val ZSTD_frameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
     unsigned_long_long.member("frameContentSize", "if #CONTENTSIZE_UNKNOWN, it means this field is not available. 0 means \"empty\"")
     unsigned_long_long.member("windowSize", "can be very large, up to &le; {@code frameContentSize}")
     unsigned.member("blockSizeMax", "")
@@ -90,7 +90,7 @@ val ZSTD_frameHeader_p = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZS
     unsigned.member("headerSize", "")
     unsigned.member("dictID", "")
     unsigned.member("checksumFlag", "")
-}.p
+}
 
 val ZSTD_frameProgression = struct(Module.ZSTD, "ZSTDFrameProgression", nativeName = "ZSTD_frameProgression", mutable = false) {
     unsigned_long_long.member("ingested", "")

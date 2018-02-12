@@ -1169,7 +1169,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         """
     )
 
-    aiExportFormatDesc_p(
+    aiExportFormatDesc.p(
         "GetExportFormatDescription",
         """
         Returns a description of the nth export file format. Use #GetExportFormatCount() to learn how many export formats are supported. The description must
@@ -1185,7 +1185,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "ReleaseExportFormatDescription",
         "Release a description of the nth export file format. Must be returned by #GetExportFormatDescription().",
 
-        const..aiExportFormatDesc_p.IN("desc", "Pointer to the description")
+        aiExportFormatDesc.const.p.IN("desc", "Pointer to the description")
     )
 
     void(
@@ -1197,15 +1197,15 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         const, a modifiable copy is needed.
         """,
 
-        const..aiScene_p.IN("pIn", "Valid scene to be copied"),
-        ReturnParam..Check(1)..aiScene_pp.OUT("pOut", "Receives a modifyable copy of the scene. Use #FreeScene() to delete it again.")
+        aiScene.const.p.IN("pIn", "Valid scene to be copied"),
+        ReturnParam..Check(1)..aiScene.p.p.OUT("pOut", "Receives a modifyable copy of the scene. Use #FreeScene() to delete it again.")
     )
 
     void(
         "FreeScene",
         "Frees a scene copy created using #CopyScene()",
 
-        const..aiScene_p.IN("pIn", "Scene to be freed")
+        aiScene.const.p.IN("pIn", "Scene to be freed")
     )
 
     val ExportScene = aiReturn(
@@ -1216,7 +1216,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         ${note("Use #CopyScene() to get a modifiable copy of a previously imported scene.")}
         """,
 
-        const..aiScene_p.IN(
+        aiScene.const.p.IN(
             "pScene",
             """
             The scene to export. Stays in possession of the caller, is not changed by the function. The scene is expected to conform to Assimp's Importer
@@ -1225,14 +1225,14 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
             have a look at the last parameter.
             """
         ),
-        const..charUTF8_p.IN(
+        charUTF8.const.p.IN(
             "pFormatId",
             """
             ID string to specify to which format you want to export to. Use #GetExportFormatCount() / #GetExportFormatDescription() to learn which export
             formats are available.
             """
         ),
-        const..charUTF8_p.IN("pFileName", "Output file to write"),
+        charUTF8.const.p.IN("pFileName", "Output file to write"),
         unsigned_int.IN(
             "pPreProcessing",
             """
@@ -1267,7 +1267,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         ExportScene["pScene"],
         ExportScene["pFormatId"],
         ExportScene["pFileName"],
-        nullable..const..aiFileIO_p.IN(
+        nullable..aiFileIO.const.p.IN(
             "pIO",
             """
             custom IO implementation to be used. Use this if you use your own storage methods. If none is supplied, a default implementation using standard
@@ -1279,7 +1279,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         returnDoc = "a status code indicating the result of the export"
     )
 
-    aiExportDataBlob_p(
+    aiExportDataBlob.p(
         "ExportSceneToBlob",
         """
         Exports the given scene to a chosen file format. Returns the exported data as a binary blob which you can write into a file or something. When you're
@@ -1297,7 +1297,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "ReleaseExportBlob",
         "Releases the memory associated with the given exported data. Use this function to free a data blob returned by #ExportSceneToBlob().",
 
-        const..aiExportDataBlob_p.IN("pData", "the data blob returned by #ExportSceneToBlob()")
+        aiExportDataBlob.const.p.IN("pData", "the data blob returned by #ExportSceneToBlob()")
     )
 
     // cimport.h
@@ -1309,7 +1309,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "AI_FALSE".enum("false", 0)
     ).noPrefix()
 
-    val ImportFile = aiScene_p(
+    val ImportFile = aiScene.p(
         "ImportFile",
         """
         Reads the given file and returns its content.
@@ -1319,7 +1319,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         this file. If the import fails, #NULL is returned instead. Call #GetErrorString() to retrieve a human-readable error text.
         """,
 
-        const..charUTF8_p.IN("pFile", "Path and filename of the file to be imported"),
+        charUTF8.const.p.IN("pFile", "Path and filename of the file to be imported"),
         unsigned_int.IN(
             "pFlags",
             """
@@ -1332,7 +1332,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         returnDoc = "Pointer to the imported data or #NULL if the import failed."
     )
 
-    val ImportFileEx = aiScene_p(
+    val ImportFileEx = aiScene.p(
         "ImportFileEx",
         """
         Reads the given file using user-defined I/O functions and returns its content.
@@ -1344,7 +1344,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         ImportFile["pFile"],
         ImportFile["pFlags"],
-        nullable..aiFileIO_p.IN(
+        nullable..aiFileIO.p.IN(
             "pFS",
             "Will be used to open the model file itself and any other files the loader needs to open. Pass #NULL to use the default implementation."
         ),
@@ -1352,19 +1352,19 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         returnDoc = "Pointer to the imported data or #NULL if the import failed."
     )
 
-    aiScene_p(
+    aiScene.p(
         "ImportFileExWithProperties",
         "Same as #ImportFileEx(), but adds an extra parameter containing importer settings.",
 
         ImportFile["pFile"],
         ImportFile["pFlags"],
         ImportFileEx["pFS"],
-        const..aiPropertyStore_p.IN("pProps", "##AIPropertyStore instance containing import settings."),
+        aiPropertyStore.const.p.IN("pProps", "##AIPropertyStore instance containing import settings."),
 
         returnDoc = "Pointer to the imported data or #NULL if the import failed."
     )
 
-    val ImportFileFromMemory = aiScene_p(
+    val ImportFileFromMemory = aiScene.p(
         "ImportFileFromMemory",
         """
         Reads the given file from a given memory buffer.
@@ -1380,10 +1380,10 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         """)}
         """,
 
-        const..char_p.IN("pBuffer", "Pointer to the file data"),
+        char.const.p.IN("pBuffer", "Pointer to the file data"),
         AutoSize("pBuffer")..unsigned_int.IN("pLength", "Length of pBuffer, in bytes"),
         ImportFile["pFlags"],
-        nullable..const..charUTF8_p.IN(
+        nullable..charUTF8.const.p.IN(
             "pHint",
             """
             An additional hint to the library. If this is a non empty string, the library looks for a loader to support the file extension specified by
@@ -1395,7 +1395,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         returnDoc = "A pointer to the imported data, #NULL if the import failed."
     )
 
-    aiScene_p(
+    aiScene.p(
         "ImportFileFromMemoryWithProperties",
         "Same as #ImportFileFromMemory(), but adds an extra parameter containing importer settings.",
 
@@ -1403,12 +1403,12 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         ImportFileFromMemory["pLength"],
         ImportFileFromMemory["pFlags"],
         ImportFileFromMemory["pHint"],
-        const..aiPropertyStore_p.IN("pProps", "##AIPropertyStore instance containing import settings."),
+        aiPropertyStore.const.p.IN("pProps", "##AIPropertyStore instance containing import settings."),
 
         returnDoc = "A pointer to the imported data, #NULL if the import failed."
     )
 
-    aiScene_p(
+    aiScene.p(
         "ApplyPostProcessing",
         """
         Apply post-processing to an already-imported scene.
@@ -1417,7 +1417,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         imported scene first to fine-tune your post-processing setup.
         """,
 
-        const..aiScene_p.IN("pScene", "Scene to work on."),
+        aiScene.const.p.IN("pScene", "Scene to work on."),
         unsigned_int.IN("pFlags", "Provide a bitwise combination of the {@code aiPostProcessSteps} flags.", "Process(Preset)?_\\w+", LinkMode.BITFIELD),
 
         returnDoc =
@@ -1446,7 +1446,7 @@ aiAttachLogStream(&c);""")}
         """,
 
         aiDefaultLogStream.IN("pStreams", "One of the {@code aiDefaultLogStream} enumerated values.", "DefaultLogStream_\\w+"),
-        nullable..const..charUTF8_p.IN("file", "Solely for the #DefaultLogStream_FILE flag: specifies the file to write to. Pass #NULL for all other flags."),
+        nullable..charUTF8.const.p.IN("file", "Solely for the #DefaultLogStream_FILE flag: specifies the file to write to. Pass #NULL for all other flags."),
 
         returnDoc = "The log stream. callback is set to #NULL if something went wrong."
     )*/
@@ -1464,7 +1464,7 @@ aiAttachLogStream(&c);""")}
         """)}
         """,
 
-        const..aiLogStream_p.IN("stream", "Describes the new log stream.")
+        aiLogStream.const.p.IN("stream", "Describes the new log stream.")
     )
 
     void(
@@ -1485,7 +1485,7 @@ aiAttachLogStream(&c);""")}
         This is the counterpart of #AttachLogStream(). If you attached a stream, don't forget to detach it again.
         """,
 
-        aiLogStream_p.IN("stream", "The log stream to be detached."),
+        aiLogStream.p.IN("stream", "The log stream to be detached."),
 
         returnDoc = "#Return_SUCCESS if the log stream has been detached successfully."
     )
@@ -1506,10 +1506,10 @@ aiAttachLogStream(&c);""")}
         Call this function after you're done with the imported data.
         """,
 
-        nullable..const..aiScene_p.IN("pScene", "The imported data to release. #NULL is a valid value.")
+        nullable..aiScene.const.p.IN("pScene", "The imported data to release. #NULL is a valid value.")
     )
 
-    charUTF8_p(
+    charUTF8.p(
         "GetErrorString",
         "Returns the error text of the last failed import process.",
 
@@ -1524,7 +1524,7 @@ aiAttachLogStream(&c);""")}
         "IsExtensionSupported",
         "Returns whether a given file extension is supported by ASSIMP.",
 
-        const..charUTF8_p.IN(
+        charUTF8.const.p.IN(
             "szExtension",
             "Extension for which the function queries support for. Must include a leading dot '.'. Example: \".3ds\", \".md3\""
         ),
@@ -1540,7 +1540,7 @@ aiAttachLogStream(&c);""")}
         If a file extension is contained in the list this does, of course, not mean that ASSIMP is able to load all files with this extension.
         """,
 
-        aiString_p.OUT(
+        aiString.p.OUT(
             "szOut",
             "String to receive the extension list. Format of the list: \"*.3ds;*.obj;*.dae\". #NULL is not a valid parameter."
         )
@@ -1550,11 +1550,11 @@ aiAttachLogStream(&c);""")}
         "GetMemoryRequirements",
         "Get the approximated storage required by an imported asset.",
 
-        const..aiScene_p.IN("pIn", "Input asset."),
-        aiMemoryInfo_p.OUT("in", "Data structure to be filled.")
+        aiScene.const.p.IN("pIn", "Input asset."),
+        aiMemoryInfo.p.OUT("in", "Data structure to be filled.")
     )
 
-    aiPropertyStore_p(
+    aiPropertyStore.p(
         "CreatePropertyStore",
         "Create an empty property store. Property stores are used to collect import settings.",
 
@@ -1565,7 +1565,7 @@ aiAttachLogStream(&c);""")}
         "ReleasePropertyStore",
         "Delete a property store.",
 
-        aiPropertyStore_p.IN("p", "Property store to be deleted.")
+        aiPropertyStore.p.IN("p", "Property store to be deleted.")
     )
 
     val SetImportPropertyInteger = void(
@@ -1577,8 +1577,8 @@ aiAttachLogStream(&c);""")}
         possible to specify them per import.
         """,
 
-        aiPropertyStore_p.IN("store", "Store to modify. Use #CreatePropertyStore() to obtain a store."),
-        const..charASCII_p.IN("szName", "Name of the configuration property to be set.", "AI_CONFIG_\\w+"),
+        aiPropertyStore.p.IN("store", "Store to modify. Use #CreatePropertyStore() to obtain a store."),
+        charASCII.const.p.IN("szName", "Name of the configuration property to be set.", "AI_CONFIG_\\w+"),
         int.IN("value", "New value for the property")
     )
 
@@ -1607,7 +1607,7 @@ aiAttachLogStream(&c);""")}
 
         SetImportPropertyInteger["store"],
         SetImportPropertyInteger["szName"],
-        const..aiString_p.IN("value", "New value for the property")
+        aiString.const.p.IN("value", "New value for the property")
     )
 
     void(
@@ -1621,85 +1621,85 @@ aiAttachLogStream(&c);""")}
 
         SetImportPropertyInteger["store"],
         SetImportPropertyInteger["szName"],
-        const..aiMatrix4x4_p.IN("value", "New value for the property")
+        aiMatrix4x4.const.p.IN("value", "New value for the property")
     )
 
     void(
         "CreateQuaternionFromMatrix",
         "Construct a quaternion from a 3x3 rotation matrix.",
 
-        aiQuaternion_p.OUT("quat", "Receives the output quaternion."),
-        const..aiMatrix3x3_p.IN("mat", "Matrix to 'quaternionize'.")
+        aiQuaternion.p.OUT("quat", "Receives the output quaternion."),
+        aiMatrix3x3.const.p.IN("mat", "Matrix to 'quaternionize'.")
     )
 
     void(
         "DecomposeMatrix",
         "Decompose a transformation matrix into its rotational, translational and scaling components.",
 
-        const..aiMatrix4x4_p.IN("mat", "Matrix to decompose"),
-        aiVector3D_p.OUT("scaling", "Receives the scaling component"),
-        aiQuaternion_p.OUT("rotation", "Receives the rotational component"),
-        aiVector3D_p.OUT("position", "Receives the translational component.")
+        aiMatrix4x4.const.p.IN("mat", "Matrix to decompose"),
+        aiVector3D.p.OUT("scaling", "Receives the scaling component"),
+        aiQuaternion.p.OUT("rotation", "Receives the rotational component"),
+        aiVector3D.p.OUT("position", "Receives the translational component.")
     )
 
     void(
         "TransposeMatrix4",
         "Transpose a 4x4 matrix.",
 
-        aiMatrix4x4_p.INOUT("mat", "Pointer to the matrix to be transposed")
+        aiMatrix4x4.p.INOUT("mat", "Pointer to the matrix to be transposed")
     )
 
     void(
         "TransposeMatrix3",
         "Transpose a 3x3 matrix.",
 
-        aiMatrix3x3_p.INOUT("mat", "Pointer to the matrix to be transposed")
+        aiMatrix3x3.p.INOUT("mat", "Pointer to the matrix to be transposed")
     )
 
     void(
         "TransformVecByMatrix3",
         "Transform a vector by a 3x3 matrix",
 
-        aiVector3D_p.INOUT("vec", "Vector to be transformed."),
-        const..aiMatrix3x3_p.IN("mat", "Matrix to transform the vector with.")
+        aiVector3D.p.INOUT("vec", "Vector to be transformed."),
+        aiMatrix3x3.const.p.IN("mat", "Matrix to transform the vector with.")
     )
 
     void(
         "TransformVecByMatrix4",
         "Transform a vector by a 4x4 matrix",
 
-        aiVector3D_p.INOUT("vec", "Vector to be transformed."),
-        const..aiMatrix4x4_p.IN("mat", "Matrix to transform the vector with.")
+        aiVector3D.p.INOUT("vec", "Vector to be transformed."),
+        aiMatrix4x4.const.p.IN("mat", "Matrix to transform the vector with.")
     )
 
     void(
         "MultiplyMatrix4",
         "Multiply two 4x4 matrices.",
 
-        aiMatrix4x4_p.INOUT("dst", "First factor, receives result."),
-        const..aiMatrix4x4_p.IN("src", "Matrix to be multiplied with 'dst'.")
+        aiMatrix4x4.p.INOUT("dst", "First factor, receives result."),
+        aiMatrix4x4.const.p.IN("src", "Matrix to be multiplied with 'dst'.")
     )
 
     void(
         "MultiplyMatrix3",
         "Multiply two 3x3 matrices.",
 
-        aiMatrix3x3_p.INOUT("dst", "First factor, receives result."),
-        const..aiMatrix3x3_p.IN("src", "Matrix to be multiplied with 'dst'.")
+        aiMatrix3x3.p.INOUT("dst", "First factor, receives result."),
+        aiMatrix3x3.const.p.IN("src", "Matrix to be multiplied with 'dst'.")
     )
 
     void(
         "IdentityMatrix3",
         "Get a 3x3 identity matrix.",
 
-        aiMatrix3x3_p.OUT("mat", "Matrix to receive its personal identity")
+        aiMatrix3x3.p.OUT("mat", "Matrix to receive its personal identity")
     )
 
     void(
         "IdentityMatrix4",
         "Get a 4x4 identity matrix.",
 
-        aiMatrix4x4_p.OUT("mat", "Matrix to receive its personal identity")
+        aiMatrix4x4.p.OUT("mat", "Matrix to receive its personal identity")
     )
 
     size_t(
@@ -1710,7 +1710,7 @@ aiAttachLogStream(&c);""")}
         """
     )
 
-    aiImporterDesc_p(
+    aiImporterDesc.p(
         "GetImportFormatDescription",
         "Returns a description of the nth import file format. Use #GetImportFormatCount() to learn how many import formats are supported.",
 
@@ -1743,7 +1743,7 @@ aiAttachLogStream(&c);""")}
         )
     )
 
-    aiImporterDesc_p(
+    aiImporterDesc.p(
         "GetImporterDesc",
         """
         Returns the Importer description for a given extension.
@@ -1751,7 +1751,7 @@ aiAttachLogStream(&c);""")}
         Will return a #NULL-pointer if no assigned importer desc. was found for the given extension.
         """,
 
-        const..charASCII_p.IN("extension", "The extension to look for"),
+        charASCII.const.p.IN("extension", "The extension to look for"),
 
         returnDoc = "A pointer showing to the ImporterDesc, ##AIImporterDesc."
     )
@@ -2066,11 +2066,11 @@ aiAttachLogStream(&c);""")}
         "GetMaterialProperty",
         "Retrieve a material property with a specific key from the material.",
 
-        aiMaterial_p.IN("pMat", "Pointer to the input material. May not be #NULL"),
-        charASCII_p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
+        aiMaterial.p.IN("pMat", "Pointer to the input material. May not be #NULL"),
+        charASCII.p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
         unsigned_int.IN("type", "Specifies the type of the texture to be retrieved", TextureTypes),
         unsigned_int.IN("index", "Index of the texture to be retrieved."),
-        Check(1)..aiMaterialProperty_pp.OUT(
+        Check(1)..aiMaterialProperty.p.p.OUT(
             "mPropOut",
             "Pointer to receive a pointer to a valid ##AIMaterialProperty structure or #NULL if the key has not been found."
         ),
@@ -2098,8 +2098,8 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        float_p.OUT("pOut", "Pointer to a buffer to receive the result."),
-        AutoSize("pOut")..Check(1)..nullable..unsigned_int_p.INOUT(
+        float.p.OUT("pOut", "Pointer to a buffer to receive the result."),
+        AutoSize("pOut")..Check(1)..nullable..unsigned_int.p.INOUT(
             "pMax",
             "Specifies the size of the given buffer, in float's. Receives the number of values (not bytes!) read."
         ),
@@ -2115,8 +2115,8 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        int_p.OUT("pOut", "Pointer to a buffer to receive the result."),
-        AutoSize("pOut")..Check(1)..nullable..unsigned_int_p.INOUT(
+        int.p.OUT("pOut", "Pointer to a buffer to receive the result."),
+        AutoSize("pOut")..Check(1)..nullable..unsigned_int.p.INOUT(
             "pMax",
             "Specifies the size of the given buffer, in int's. Receives the number of values (not bytes!) read."
         ),
@@ -2132,7 +2132,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        aiColor4D_p.OUT("pOut", "Pointer to a color to receive the result."),
+        aiColor4D.p.OUT("pOut", "Pointer to a color to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output struct remains unmodified."
     )
@@ -2145,7 +2145,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        aiUVTransform_p.OUT("pOut", "Pointer to a ##AIUVTransform to receive the result."),
+        aiUVTransform.p.OUT("pOut", "Pointer to a ##AIUVTransform to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output struct remains unmodified."
     )
@@ -2158,7 +2158,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        aiString_p.OUT("pOut", "Pointer to a string to receive the result."),
+        aiString.p.OUT("pOut", "Pointer to a string to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output struct remains unmodified."
     )
@@ -2187,24 +2187,24 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pMat"],
         aiTextureType.IN("type", "Specifies the texture stack to read from (e.g. diffuse, specular, height map ...).", TextureTypes),
         unsigned_int.IN("index", "Index of the texture. The function fails if the requested index is not available for this texture type."),
-        aiString_p.OUT("path", "Receives the output path. This parameter must be non-null."),
-        Check(1)..nullable..aiTextureMapping_p.IN("mapping", "The texture mapping mode to be used. Pass #NULL if you're not interested in this information."),
-        Check(1)..nullable..unsigned_int_p.OUT("uvindex", "For UV-mapped textures: receives the index of the UV source channel. Unmodified otherwise."),
-        Check(1)..nullable..float_p.OUT("blend", "Receives the blend factor for the texture. Pass #NULL if you're not interested in this information."),
-        Check(1)..nullable..aiTextureOp_p.OUT(
+        aiString.p.OUT("path", "Receives the output path. This parameter must be non-null."),
+        Check(1)..nullable..aiTextureMapping.p.IN("mapping", "The texture mapping mode to be used. Pass #NULL if you're not interested in this information."),
+        Check(1)..nullable..unsigned_int.p.OUT("uvindex", "For UV-mapped textures: receives the index of the UV source channel. Unmodified otherwise."),
+        Check(1)..nullable..float.p.OUT("blend", "Receives the blend factor for the texture. Pass #NULL if you're not interested in this information."),
+        Check(1)..nullable..aiTextureOp.p.OUT(
             "op",
             """
             Receives the texture blend operation to be perform between this texture and the previous texture. Pass #NULL if you're not interested in this
             information.
             """),
-        Check(1)..nullable..aiTextureMapMode_p.OUT(
+        Check(1)..nullable..aiTextureMapMode.p.OUT(
             "mapmode",
             """
             Receives the mapping modes to be used for the texture. Pass #NULL if you're not interested in this information. Otherwise, pass a pointer to an
             array of two {@code aiTextureMapMode}'s (one for each axis, UV order).
             """
         ),
-        Check(1)..nullable..unsigned_int_p.OUT("flags", "Receives the texture flags."),
+        Check(1)..nullable..unsigned_int.p.OUT("flags", "Receives the texture flags."),
 
         returnDoc = "#Return_SUCCESS on success, otherwise something else. Have fun."
     )
@@ -2898,7 +2898,7 @@ x1""")}
         "ASSIMP_CFLAGS_SINGLETHREADED"..0x10
     ).noPrefix()
 
-    Nonnull..const..charASCII_p(
+    Nonnull..charASCII.const.p(
         "GetLegalString",
         "Returns a string with legal copyright and licensing information about Assimp. The string may include multiple lines.",
 
@@ -2926,7 +2926,7 @@ x1""")}
         returnDoc = "SVN Repository revision number of the Assimp runtime the application was linked/built against."
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetBranchName",
         "Returns the branch name of the Assimp runtime.",
 

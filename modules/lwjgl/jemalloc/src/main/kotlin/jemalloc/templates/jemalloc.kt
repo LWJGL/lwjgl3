@@ -151,7 +151,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
 
     // Standard API
 
-    void_p(
+    void.p(
         "malloc",
         """
         Allocates {@code size} bytes of uninitialized memory. The allocated space is suitably aligned (after possible pointer coercion) for storage of any type
@@ -161,7 +161,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
     )
 
-    void_p(
+    void.p(
         "calloc",
         """
         Allocates space for {@code num} objects, each {@code size} bytes in length. The result is identical to calling #malloc() with an argument of
@@ -179,12 +179,12 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         the value pointed to by {@code memptr}. The requested alignment must be a power of 2 at least as large as {@code sizeof(void *)}.
         """,
 
-        Check(1)..void_pp.OUT("memptr", "returns the allocated memory"),
+        Check(1)..void.p.p.OUT("memptr", "returns the allocated memory"),
         size_t.IN("alignment", "the allocation alignment, in bytes"),
         size_t.IN("size", "the number of bytes to allocate")
     )
 
-    void_p(
+    void.p(
         "aligned_alloc",
         """
         Allocates {@code size} bytes of memory such that the allocation's base address is an even multiple of {@code alignment}. The requested alignment must
@@ -195,7 +195,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
     )
 
-    void_p(
+    void.p(
         "realloc",
         """
         Changes the size of the previously allocated memory referenced by {@code ptr} to {@code size} bytes. The contents of the memory are unchanged up to the
@@ -205,7 +205,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         specified size.
         """,
 
-        Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or #NULL"),
+        Unsafe..nullable..void.p.IN("ptr", "the previously allocated memory or #NULL"),
         AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
     )
 
@@ -213,14 +213,14 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         "free",
         "Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is #NULL, no action occurs.",
 
-        MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the allocated memory to free")
+        MultiTypeAll..Unsafe..nullable..void.p.IN("ptr", "the allocated memory to free")
     )
 
     // Non-standard API
 
     val flags = int.IN("flags", "a bitfield of zero or more of the {@code MALLOCX} macros")
 
-    void_p(
+    void.p(
         "mallocx",
         """
         Allocates at least {@code size} bytes of memory, and returns a pointer to the base address of the allocation. Behavior is undefined if {@code size} is
@@ -231,7 +231,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         flags
     )
 
-    void_p(
+    void.p(
         "rallocx",
         """
         Resizes the allocation at {@code ptr} to be at least {@code size} bytes, and returns a pointer to the base address of the resulting allocation, which
@@ -239,7 +239,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         alignment constraints.
         """,
 
-        Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or #NULL"),
+        Unsafe..nullable..void.p.IN("ptr", "the previously allocated memory or #NULL"),
         AutoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
         flags
     )
@@ -252,7 +252,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         result in failure to resize. Behavior is undefined if {@code size} is 0, or if {@code (size + extra > SIZE_T_MAX)}.
         """,
 
-        Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or #NULL"),
+        Unsafe..nullable..void.p.IN("ptr", "the previously allocated memory or #NULL"),
         size_t.IN("size", "the number of bytes to allocate"),
         size_t.IN("extra", "the number of extra bytes to allocate"),
         flags
@@ -262,7 +262,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         "sallocx",
         "Returns the real size of the allocation at {@code ptr}.",
 
-        Unsafe..const..void_p.IN("ptr", "the allocated memory to query"),
+        Unsafe..void.const.p.IN("ptr", "the allocated memory to query"),
         flags
     )
 
@@ -270,7 +270,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         "dallocx",
         "Causes the memory referenced by {@code ptr} to be made available for future allocations.",
 
-        Unsafe..MultiTypeAll..void_p.IN("ptr", "the allocated memory to deallocate"),
+        Unsafe..MultiTypeAll..void.p.IN("ptr", "the allocated memory to deallocate"),
         flags
     )
 
@@ -278,12 +278,12 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         "sdallocx",
         "Sized version of #dallocx(). The primary optimization over {@code dallocx()} is the removal of a metadata read, which often suffers an L1 cache miss.",
 
-        MultiTypeAll..void_p.IN("ptr", "the allocated memory to deallocate"),
+        MultiTypeAll..void.p.IN("ptr", "the allocated memory to deallocate"),
         AutoSize("ptr")..size_t.IN("size", "the number of bytes in {@code ptr}"),
         flags
     )
 
-    void_p(
+    void.p(
         "nallocx",
         """
         Allocates no memory, but it performs the same size computation as the #mallocx() function, and returns the real size of the allocation that would
@@ -306,10 +306,10 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         via {@code newlen}; otherwise pass #NULL and {@code 0}.
         """,
 
-        const..charASCII_p.IN("name", "the namespace location"),
-        Unsafe..nullable..void_p.OUT("oldp", "returns a value"),
-        Check(1)..nullable..size_t_p.OUT("oldlenp", "returns the value length"),
-        nullable..void_p.IN("newp", "the new value"),
+        charASCII.const.p.IN("name", "the namespace location"),
+        Unsafe..nullable..void.p.OUT("oldp", "returns a value"),
+        Check(1)..nullable..size_t.p.OUT("oldlenp", "returns the value length"),
+        nullable..void.p.IN("newp", "the new value"),
         AutoSize("newp")..size_t.IN("newlen", "the new value length")
     )
 
@@ -342,20 +342,20 @@ for (i = 0; i < nbins; i++) {
 }""")}
         """,
 
-        const..charASCII_p.IN("name", "the namespace location"),
-        size_t_p.IN("mibp", "an array of integers"),
-        AutoSize("mibp")..Check(1)..size_t_p.INOUT("miblenp", "the number of components in {@code mibp}")
+        charASCII.const.p.IN("name", "the namespace location"),
+        size_t.p.IN("mibp", "an array of integers"),
+        AutoSize("mibp")..Check(1)..size_t.p.INOUT("miblenp", "the number of components in {@code mibp}")
     )
 
     int(
         "mallctlbymib",
         "Similar to #mallctl(), but uses MIBs instead of names. See #mallctlnametomib() for details.",
 
-        const..size_t_p.IN("mib", "a MIB"),
+        size_t.const.p.IN("mib", "a MIB"),
         AutoSize("mib")..size_t.IN("miblen", "the number of elements in {@code mib}"),
-        Unsafe..nullable..void_p.OUT("oldp", "returns a value"),
-        Check(1)..nullable..size_t_p.OUT("oldlenp", "returns the value length"),
-        nullable..void_p.IN("newp", "the new value"),
+        Unsafe..nullable..void.p.OUT("oldp", "returns a value"),
+        Check(1)..nullable..size_t.p.OUT("oldlenp", "returns the value length"),
+        nullable..void.p.IN("newp", "the new value"),
         AutoSize("newp")..size_t.IN("newlen", "the new value length")
     )
 
@@ -373,7 +373,7 @@ for (i = 0; i < nbins; i++) {
 
         nullable..write_cb.IN("write_cb", "the print callback, or #NULL to use {@code malloc_message()}"),
         nullable..opaque_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
-        nullable..const..charASCII_p.IN("opts", "an options string")
+        nullable..charASCII.const.p.IN("opts", "an options string")
     )
 
     size_t(
@@ -385,6 +385,6 @@ for (i = 0; i < nbins; i++) {
         such behavior is entirely implementation-dependent.
         """,
 
-        Unsafe..const..void_p.IN("ptr", "the allocated memory to query")
+        Unsafe..void.const.p.IN("ptr", "the allocated memory to query")
     )
 }

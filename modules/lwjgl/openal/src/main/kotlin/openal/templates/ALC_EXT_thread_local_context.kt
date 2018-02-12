@@ -23,10 +23,10 @@ val ALC_EXT_thread_local_context = "EXTThreadLocalContext".nativeClassALC("EXT_t
         #NULL results in no thread-specific context being current in the calling thread, which is useful when shutting OpenAL down.
         """,
 
-        nullable..ALCcontext_p.IN("context", "the context to make current")
+        nullable..ALCcontext.p.IN("context", "the context to make current")
     )
 
-    ALCcontext_p(
+    ALCcontext.p(
         "GetThreadContext",
         "Retrieves a handle to the thread-specific context of the calling thread. This function will return #NULL if no thread-specific context is set."
     )

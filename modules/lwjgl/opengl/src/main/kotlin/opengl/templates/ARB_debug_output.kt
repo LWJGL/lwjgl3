@@ -170,7 +170,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
         GLenum.IN("type", "the message type", Types),
         GLenum.IN("severity", "the message severity level", Severities),
         AutoSize("ids")..GLsizei.IN("count", "the number of message IDs in {@code ids}"),
-        SingleValue("id")..nullable..const..GLuint_p.IN("ids", "the message IDs to enable or disable"),
+        SingleValue("id")..nullable..GLuint.const.p.IN("ids", "the message IDs to enable or disable"),
         GLboolean.IN("enabled", "whether to enable or disable the references subset of messages")
     )
 
@@ -192,7 +192,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
             "length",
             "the number of characters in {@code buf}. If negative, it is implied that {@code buf} contains a null terminated string."
         ),
-        const..GLcharUTF8_p.IN("buf", "the string representation of the message")
+        GLcharUTF8.const.p.IN("buf", "the string representation of the message")
     )
 
     void(
@@ -234,7 +234,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
         """,
 
         nullable..GLDEBUGPROCARB.IN("callback", "a callback function that will be called when a debug message is generated"),
-        nullable..const..opaque_p.IN(
+        nullable..opaque_const_p.IN(
             "userParam",
             "a user supplied pointer that will be passed on each invocation of {@code callback}"
         )
@@ -266,11 +266,11 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 
         GLuint.IN("count", "the number of debug messages to retrieve from the log"),
         AutoSize("messageLog")..GLsizei.IN("bufSize", "the maximum number of characters that can be written in the {@code messageLog} array"),
-        Check("count")..nullable..GLenum_p.IN("sources", "a buffer in which to place the returned message sources"),
-        Check("count")..nullable..GLenum_p.IN("types", "a buffer in which to place the returned message typesd"),
-        Check("count")..nullable..GLuint_p.IN("ids", "a buffer in which to place the returned message IDs"),
-        Check("count")..nullable..GLenum_p.IN("severities", "a buffer in which to place the returned message severity levels"),
-        Check("count")..nullable..GLsizei_p.IN("lengths", "a buffer in which to place the returned message lengths"),
-        nullable..GLcharUTF8_p.OUT("messageLog", "a buffer in which to place the returned messages")
+        Check("count")..nullable..GLenum.p.IN("sources", "a buffer in which to place the returned message sources"),
+        Check("count")..nullable..GLenum.p.IN("types", "a buffer in which to place the returned message typesd"),
+        Check("count")..nullable..GLuint.p.IN("ids", "a buffer in which to place the returned message IDs"),
+        Check("count")..nullable..GLenum.p.IN("severities", "a buffer in which to place the returned message severity levels"),
+        Check("count")..nullable..GLsizei.p.IN("lengths", "a buffer in which to place the returned message lengths"),
+        nullable..GLcharUTF8.p.OUT("messageLog", "a buffer in which to place the returned messages")
     )
 }

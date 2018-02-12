@@ -216,17 +216,17 @@ div {
         "NodeNewWithConfig",
         "",
 
-        const..YGConfigRef.IN("config", "")
+        YGConfigRef.const.IN("config", "")
     )
 
     YGNodeRef(
         "NodeClone",
         "",
 
-        const..YGNodeRef.IN("node", "")
+        YGNodeRef.const.IN("node", "")
     )
 
-    val node = const..YGNodeRef.IN("node", "")
+    val node = YGNodeRef.const.IN("node", "")
 
     void(
         "NodeFree",
@@ -259,7 +259,7 @@ div {
         "",
 
         node,
-        const..YGNodeRef.IN("child", ""),
+        YGNodeRef.const.IN("child", ""),
         uint32_t.IN("index", "")
     )
 
@@ -268,14 +268,14 @@ div {
         "",
 
         node,
-        const..YGNodeRef.IN("child", "")
+        YGNodeRef.const.IN("child", "")
     )
 
     void(
         "NodeRemoveAllChildren",
         "",
 
-        const..YGNodeRef.IN("node", "")
+        YGNodeRef.const.IN("node", "")
     )
 
     YGNodeRef(
@@ -367,18 +367,18 @@ div {
         float.IN("lastComputedHeight", ""),
         float.IN("marginRow", ""),
         float.IN("marginColumn", ""),
-        const..YGConfigRef.IN("config", "")
+        YGConfigRef.const.IN("config", "")
     )
 
     void(
         "NodeCopyStyle",
         "",
 
-        const..YGNodeRef.IN("dstNode", ""),
-        const..YGNodeRef.IN("srcNode", "")
+        YGNodeRef.const.IN("dstNode", ""),
+        YGNodeRef.const.IN("srcNode", "")
     )
 
-    fun YG_NODE_PROPERTY(type: NativeType, name: String, paramName: String) {
+    fun YG_NODE_PROPERTY(type: DataType, name: String, paramName: String) {
         void(
             "NodeSet$name",
             "",
@@ -395,7 +395,7 @@ div {
         )
     }
 
-    fun YG_NODE_STYLE_PROPERTY(type: NativeType, name: String, paramName: String, documentation: String = "") {
+    fun YG_NODE_STYLE_PROPERTY(type: DataType, name: String, paramName: String, documentation: String = "") {
         void(
             "NodeStyleSet$name",
             documentation,
@@ -412,7 +412,7 @@ div {
         )
     }
 
-    fun YG_NODE_STYLE_PROPERTY_UNIT(type: NativeType, name: String, paramName: String, documentation: String = "") {
+    fun YG_NODE_STYLE_PROPERTY_UNIT(type: DataType, name: String, paramName: String, documentation: String = "") {
         void(
             "NodeStyleSet$name",
             documentation,
@@ -437,7 +437,7 @@ div {
         )
     }
 
-    fun YG_NODE_STYLE_PROPERTY_UNIT_AUTO(type: NativeType, name: String, paramName: String, documentation: String = "") {
+    fun YG_NODE_STYLE_PROPERTY_UNIT_AUTO(type: DataType, name: String, paramName: String, documentation: String = "") {
         YG_NODE_STYLE_PROPERTY_UNIT(type, name, paramName, documentation)
         void(
             "NodeStyleSet${name}Auto",
@@ -447,7 +447,7 @@ div {
         )
     }
 
-    fun YG_NODE_STYLE_EDGE_PROPERTY(type: NativeType, name: String, paramName: String) {
+    fun YG_NODE_STYLE_EDGE_PROPERTY(type: DataType, name: String, paramName: String) {
         void(
             "NodeStyleSet$name",
             "",
@@ -466,7 +466,7 @@ div {
         )
     }
 
-    fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT(type: NativeType, name: String, paramName: String) {
+    fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT(type: DataType, name: String, paramName: String) {
         void(
             "NodeStyleSet$name",
             "",
@@ -504,7 +504,7 @@ div {
         )
     }
 
-    fun YG_NODE_LAYOUT_PROPERTY(type: NativeType, name: String) {
+    fun YG_NODE_LAYOUT_PROPERTY(type: DataType, name: String) {
         type(
             "NodeLayoutGet$name",
             "",
@@ -513,7 +513,7 @@ div {
         )
     }
 
-    fun YG_NODE_LAYOUT_EDGE_PROPERTY(type: NativeType, name: String) {
+    fun YG_NODE_LAYOUT_EDGE_PROPERTY(type: DataType, name: String) {
         type(
             "NodeLayoutGet$name",
             """
@@ -598,7 +598,7 @@ div {
         "ConfigSetLogger",
         "",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         YGLogger.IN("logger", "")
     )
 
@@ -606,18 +606,18 @@ div {
         "Log",
         "",
 
-        const..YGNodeRef.IN("node", ""),
+        YGNodeRef.const.IN("node", ""),
         YGLogLevel.IN("level", "", "LogLevel\\w+"),
-        const..charUTF8_p.IN("message", "")
+        charUTF8.const.p.IN("message", "")
     )
 
     void(
         "LogWithConfig",
         "",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         YGLogLevel.IN("level", ""),
-        const..charUTF8_p.IN("message", "")
+        charUTF8.const.p.IN("message", "")
     )
 
     void(
@@ -625,25 +625,25 @@ div {
         "",
 
         bool.IN("condition", ""),
-        const..charUTF8_p.IN("message", "")
+        charUTF8.const.p.IN("message", "")
     )
 
     void(
         "AssertWithNode",
         "",
 
-        const..YGNodeRef.IN("node", ""),
+        YGNodeRef.const.IN("node", ""),
         bool.IN("condition", ""),
-        const..charUTF8_p.IN("message", "")
+        charUTF8.const.p.IN("message", "")
     )
 
     void(
         "AssertWithConfig",
         "",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         bool.IN("condition", ""),
-        const..charUTF8_p.IN("message", "")
+        charUTF8.const.p.IN("message", "")
     )
 
     YGConfigRef(
@@ -653,15 +653,15 @@ div {
 
     void("ConfigFree",
         "",
-        const..YGConfigRef.IN("config", "")
+        YGConfigRef.const.IN("config", "")
     )
 
     void(
         "ConfigCopy",
         "",
 
-        const..YGConfigRef.IN("dest", ""),
-        const..YGConfigRef.IN("src", "")
+        YGConfigRef.const.IN("dest", ""),
+        YGConfigRef.const.IN("src", "")
     )
 
     int32_t(
@@ -673,7 +673,7 @@ div {
         "ConfigSetPointScaleFactor",
         "Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         float.IN("pixelsInPoint", "")
     )
 
@@ -685,7 +685,7 @@ div {
         this behaviour.
         """,
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         bool.IN("useLegacyStretchBehaviour", "")
     )
 
@@ -693,7 +693,7 @@ div {
         "ConfigSetExperimentalFeatureEnabled",
         "",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+"),
         bool.IN("enabled", "")
     )
@@ -702,7 +702,7 @@ div {
         "ConfigIsExperimentalFeatureEnabled",
         "",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+")
     )
 
@@ -710,7 +710,7 @@ div {
         "ConfigSetUseWebDefaults",
         "Using the web defaults is the prefered configuration for new projects. Usage of non web defaults should be considered as legacy.",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         bool.IN("enabled", "")
     )
 
@@ -718,15 +718,15 @@ div {
         "ConfigGetUseWebDefaults",
         "",
 
-        const..YGConfigRef.IN("config", "")
+        YGConfigRef.const.IN("config", "")
     )
 
     void(
         "ConfigSetNodeClonedFunc",
         "",
 
-        const..YGConfigRef.IN("config", ""),
-        const..YGNodeClonedFunc.IN("callback", "")
+        YGConfigRef.const.IN("config", ""),
+        YGNodeClonedFunc.IN("callback", "") // const function pointer in Yoga sources
     )
 
     YGConfigRef(
@@ -738,7 +738,7 @@ div {
         "ConfigSetContext",
         "",
 
-        const..YGConfigRef.IN("config", ""),
+        YGConfigRef.const.IN("config", ""),
         opaque_p.IN("context", "")
     )
 
@@ -746,7 +746,7 @@ div {
         "ConfigGetContext",
         "",
 
-        const..YGConfigRef.IN("config", "")
+        YGConfigRef.const.IN("config", "")
     )
 
     float(
@@ -763,7 +763,7 @@ div {
 
     fun YG_TYPE_TO_STRING(type: IntegerType) {
         val name = type.name.substring(2)
-        Nonnull..const..charASCII_p(
+        Nonnull..charASCII.const.p(
             "${name}ToString",
             "",
 

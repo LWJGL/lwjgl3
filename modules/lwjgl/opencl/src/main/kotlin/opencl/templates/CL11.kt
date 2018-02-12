@@ -132,7 +132,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             "the type of buffer object to be created",
             BufferCreateType
         ),
-        Unsafe..const..void_p.IN(
+        Unsafe..void.const.p.IN(
             "buffer_create_info",
             """
             details about the buffer object to be created.
@@ -204,21 +204,21 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         """
     )
 
-    val BufferRectBufferOffset = Check(3)..const..size_t_p.IN(
+    val BufferRectBufferOffset = Check(3)..size_t.const.p.IN(
         "buffer_offset",
         """
         the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
         should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
         """
     )
-    val BufferRectHostOffset = Check(3)..const..size_t_p.IN(
+    val BufferRectHostOffset = Check(3)..size_t.const.p.IN(
         "host_offset",
         """
         the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
         should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
         """
     )
-    val BufferRectRegion = Check(3)..const..size_t_p.IN(
+    val BufferRectRegion = Check(3)..size_t.const.p.IN(
         "region",
         """
         the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
@@ -300,7 +300,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         BufferRectHostSlicePitch,
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+        )..Unsafe..void.p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
         NEWL,
         EWL,
         EVENT,
@@ -380,7 +380,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..Unsafe..const..void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+        )..Unsafe..void.const.p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
         NEWL,
         EWL,
         EVENT,
@@ -435,21 +435,21 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         ),
         cl_mem.IN("src_buffer", "the source buffer"),
         cl_mem.IN("dst_buffer", "the destination buffer"),
-        Check(3)..size_t_p.IN(
+        Check(3)..size_t.p.IN(
             "src_origin",
             """
             the {@code (x, y, z)} offset in the memory region associated with {@code src_buffer}. For a 2D rectangle region, the z value given by {@code src_origin[2]}
             should be 0. The offset in bytes is computed as {@code src_origin[2] * src_slice_pitch + src_origin[1] * src_row_pitch + src_origin[0]}.
             """
         ),
-        Check(3)..size_t_p.IN(
+        Check(3)..size_t.p.IN(
             "dst_origin",
             """
             the {@code (x, y, z)} offset in the memory region associated with {@code dst_buffer}. For a 2D rectangle region, the z value given by {@code dst_origin[2]}
             should be 0. The offset in bytes is computed as {@code dst_origin[2] * dst_slice_pitch + dst_origin[1] * dst_row_pitch + dst_origin[0]}.
             """
         ),
-        Check(3)..size_t_p.IN(
+        Check(3)..size_t.p.IN(
             "region",
             """
             the ({@code width} in bytes, {@code height} in rows, {@code depth} in slices) of the 2D or 3D rectangle being copied. For a 2D rectangle, the depth

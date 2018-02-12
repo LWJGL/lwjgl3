@@ -17,7 +17,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         """
         """
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetCameraErrorNameFromEnum",
         "Returns a string for an error.",
 
@@ -29,7 +29,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "For convenience, same as tracked property request #ETrackedDeviceProperty_Prop_HasCamera_Bool.",
 
         TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
-        Check(1)..bool_p.OUT("pHasCamera", "")
+        Check(1)..bool.p.OUT("pHasCamera", "")
     )
 
     EVRTrackedCameraError(
@@ -38,9 +38,9 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
         EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        Check(1)..uint32_t_p.OUT("pnWidth", ""),
-        Check(1)..uint32_t_p.OUT("pnHeight", ""),
-        Check(1)..uint32_t_p.OUT("pnFrameBufferSize", "")
+        Check(1)..uint32_t.p.OUT("pnWidth", ""),
+        Check(1)..uint32_t.p.OUT("pnHeight", ""),
+        Check(1)..uint32_t.p.OUT("pnFrameBufferSize", "")
     )
 
     EVRTrackedCameraError(
@@ -95,7 +95,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedCameraHandle_t.IN("hTrackedCamera", ""),
         EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        void_p.OUT("pFrameBuffer", ""),
+        void.p.OUT("pFrameBuffer", ""),
         AutoSize("pFrameBuffer")..uint32_t.IN("nFrameBufferSize", ""),
         CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
         Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t.IN("nFrameHeaderSize", "")
@@ -108,8 +108,8 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
         EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         VRTextureBounds_t.p.OUT("pTextureBounds", ""),
-        Check(1)..uint32_t_p.OUT("pnWidth", ""),
-        Check(1)..uint32_t_p.OUT("pnHeight", "")
+        Check(1)..uint32_t.p.OUT("pnWidth", ""),
+        Check(1)..uint32_t.p.OUT("pnHeight", "")
     )
 
     EVRTrackedCameraError(
@@ -129,7 +129,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         TrackedCameraHandle_t.IN("hTrackedCamera", ""),
         EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         opaque_p.IN("pD3D11DeviceOrResource", ""),
-        Check(1)..void_pp.OUT("ppD3D11ShaderResourceView", ""),
+        Check(1)..void.p.p.OUT("ppD3D11ShaderResourceView", ""),
         CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
         Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t.IN("nFrameHeaderSize", "")
     )

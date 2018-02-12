@@ -115,23 +115,18 @@ fun config() {
     )
 }
 
-val MDB_env_p = "MDB_env".p
-val MDB_env_pp = MDB_env_p.p
+val MDB_env = "MDB_env".opaque
 
 val mdb_mode_t = typedef(int, "mdb_mode_t") // TODO: mode_t on Linux
 val mdb_filehandle_t = typedef(opaque_p, "mdb_filehandle_t") // TODO: int on Linux
-//val mdb_filehandle_t_p = mdb_filehandle_t.p
 
 val mdb_size_t = typedef(size_t, "mdb_size_t")
-val mdb_size_t_p = mdb_size_t.p
 
 val MDB_dbi = typedef(unsigned_int, "MDB_dbi")
-val MDB_dbi_p = MDB_dbi.p
 
-val MDB_txn_p = "MDB_txn".p
-val MDB_txn_pp = MDB_txn_p.p
+val MDB_txn = "MDB_txn".opaque
 
-val MDB_val_p = struct(Module.LMDB, "MDBVal", nativeName = "MDB_val") {
+val MDB_val = struct(Module.LMDB, "MDBVal", nativeName = "MDB_val") {
     documentation =
         """
         Generic structure used for passing keys and data in and out of the database.
@@ -144,15 +139,14 @@ val MDB_val_p = struct(Module.LMDB, "MDBVal", nativeName = "MDB_val") {
         """
 
     AutoSize("mv_data", optional = true)..size_t.member("mv_size", "Size of the data item.")
-    nullable..void_p.member("mv_data", "Address of the data item.")
-}.p
+    nullable..void.p.member("mv_data", "Address of the data item.")
+}
 
-val MDB_cursor_p = "MDB_cursor".p
-val MDB_cursor_pp = MDB_cursor_p.p
+val MDB_cursor = "MDB_cursor".opaque
 
 val MDB_cursor_op = "MDB_cursor_op".enumType
 
-val MDB_stat_p = struct(Module.LMDB, "MDBStat", nativeName = "MDB_stat", mutable = false) {
+val MDB_stat = struct(Module.LMDB, "MDBStat", nativeName = "MDB_stat", mutable = false) {
     documentation = "Statistics for a database in the environment."
 
     unsigned_int.member("ms_psize", "Size of a database page. This is currently the same for all databases.")
@@ -161,9 +155,9 @@ val MDB_stat_p = struct(Module.LMDB, "MDBStat", nativeName = "MDB_stat", mutable
     mdb_size_t.member("ms_leaf_pages", "Number of leaf pages.")
     mdb_size_t.member("ms_overflow_pages", "Number of overflow pages.")
     mdb_size_t.member("ms_entries", "Number of data items.")
-}.p
+}
 
-val MDB_envinfo_p = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
+val MDB_envinfo = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
     documentation = "Information about the environment."
 
     opaque_p.member("me_mapaddr", "Address of map, if fixed.")
@@ -172,14 +166,14 @@ val MDB_envinfo_p = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo"
     mdb_size_t.member("me_last_txnid", "ID of the last committed transaction.")
     unsigned_int.member("me_maxreaders", "Max reader slots in the environment.")
     unsigned_int.member("me_numreaders", "Max reader slots used in the environment.")
-}.p
+}
 
 val MDB_cmp_func = "MDB_cmp_func *".callback(
     Module.LMDB, int, "MDBCmpFunc",
     "A callback function used to compare two keys in a database.",
 
-    const..MDB_val_p.IN("a", "the first item to compare"),
-    const..MDB_val_p.IN("b", "the second item to compare"),
+    MDB_val.const.p.IN("a", "the first item to compare"),
+    MDB_val.const.p.IN("b", "the second item to compare"),
 
     returnDoc = "&lt; 0 if a &lt; b, 0 if a == b, &gt; 0 if a &gt; b"
 )
@@ -188,7 +182,7 @@ val MDB_rel_func = "MDB_rel_func *".callback(
     Module.LMDB, void, "MDBRelFunc",
     "A callback function used to relocate a position-dependent data item in a fixed-address database.",
 
-    MDB_val_p.IN("item", "the item that is to be relocated"),
+    MDB_val.p.IN("item", "the item that is to be relocated"),
     opaque_p.IN("oldptr", "the previous address"),
     opaque_p.IN("newptr", "the new address to relocate to"),
     opaque_p.IN("relctx", "an application-provided context, set by #set_relctx()")
@@ -207,7 +201,7 @@ val MDB_msg_func = "MDB_msg_func *".callback(
     Module.LMDB, int, "MDBMsgFunc",
     "A callback function used to print a message from the library.",
 
-    const..charASCII_p.IN("msg", "the string to be printed"),
+    charASCII.const.p.IN("msg", "the string to be printed"),
     opaque_p.IN("ctx", "an arbitrary context pointer for the callback"),
     returnDoc = "&lt; 0 on failure, &ge; 0 on success"
 ) {
