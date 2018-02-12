@@ -48,7 +48,7 @@ ENABLE_WARNINGS()""")
         size_t.IN("functionResult", "")
     )
 
-    LZ4F_CDict_p(
+    LZ4F_CDict.p(
         "createCDict",
         """
         When compressing multiple messages / blocks with the same dictionary, it's recommended to load it just once. {@code LZ4_createCDict()} will create a
@@ -59,7 +59,7 @@ ENABLE_WARNINGS()""")
         {@code dictBuffer} can be released after {@code LZ4_CDict} creation, since its content is copied within {@code CDict}.
         """,
 
-        const..void_p.IN("dictBuffer", ""),
+        void.const.p.IN("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t.IN("dictSize", "")
     )
 
@@ -67,7 +67,7 @@ ENABLE_WARNINGS()""")
         "freeCDict",
         "",
 
-        LZ4F_CDict_p.IN("CDict", "")
+        LZ4F_CDict.p.IN("CDict", "")
     )
 
     size_t(
@@ -81,12 +81,12 @@ ENABLE_WARNINGS()""")
         an {@code errorCode}).
         """,
 
-        void_p.OUT("dst", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", ""),
-        nullable..const..LZ4F_CDict_p.IN("cdict", ""),
-        const..LZ4F_preferences_t_p.IN(
+        nullable..LZ4F_CDict.const.p.IN("cdict", ""),
+        LZ4F_preferences_t.const.p.IN(
             "preferencesPtr",
             "optional: you may provide #NULL as argument, but it's not recommended, as it's the only way to provide {@code dictID} in the frame header"
         ),
@@ -102,11 +102,11 @@ ENABLE_WARNINGS()""")
         {@code dstCapacity} must be &ge; #HEADER_SIZE_MAX bytes.
         """,
 
-        LZ4F_cctx_p.IN("cctx", ""),
-        void_p.OUT("dstBuffer", ""),
+        LZ4F_cctx.p.IN("cctx", ""),
+        void.p.OUT("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t.IN("dstCapacity", ""),
-        const..LZ4F_CDict_p.IN("cdict", ""),
-        const..LZ4F_preferences_t_p.IN(
+        LZ4F_CDict.const.p.IN("cdict", ""),
+        LZ4F_preferences_t.const.p.IN(
             "prefsPtr",
             "optional: you may provide #NULL as argument, however, it's the only way to provide {@code dictID} in the frame header"
         ),
@@ -122,13 +122,13 @@ ENABLE_WARNINGS()""")
         Dictionary is used "in place", without any preprocessing. It must remain accessible throughout the entire frame decoding.
         """,
 
-        LZ4F_dctx_p.IN("dctxPtr", ""),
-        void_p.OUT("dstBuffer", ""),
-        AutoSize("dstBuffer")..Check(1)..size_t_p.INOUT("dstSizePtr", ""),
-        const..void_p.IN("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t_p.INOUT("srcSizePtr", ""),
-        const..void_p.IN("dict", ""),
+        LZ4F_dctx.p.IN("dctxPtr", ""),
+        void.p.OUT("dstBuffer", ""),
+        AutoSize("dstBuffer")..Check(1)..size_t.p.INOUT("dstSizePtr", ""),
+        void.const.p.IN("srcBuffer", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
+        void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
-        const..LZ4F_decompressOptions_t_p.IN("decompressOptionsPtr", "")
+        LZ4F_decompressOptions_t.const.p.IN("decompressOptionsPtr", "")
     )
 }

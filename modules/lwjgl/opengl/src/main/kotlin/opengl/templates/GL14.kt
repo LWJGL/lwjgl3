@@ -184,14 +184,14 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         "FogCoordfv",
         "Pointer version of #FogCoordf().",
 
-        Check(1)..const..GLfloat_p.IN("coord", "the fog coordinate value")
+        Check(1)..GLfloat.const.p.IN("coord", "the fog coordinate value")
     )
 
     DeprecatedGL..void(
         "FogCoorddv",
         "Pointer version of #FogCoordd().",
 
-        Check(1)..const..GLdouble_p.IN("coord", "the fog coordinate value")
+        Check(1)..GLdouble.const.p.IN("coord", "the fog coordinate value")
     )
 
     OffHeapOnly..DeprecatedGL..void(
@@ -206,7 +206,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the fog coordinate array data")
+        )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the fog coordinate array data")
     )
 
     // EXT_multi_draw_arrays
@@ -216,8 +216,8 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         "Renders multiple sets of primitives from array data.",
 
         GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        const..GLint_p.IN("first", "an array of starting indices in the enabled arrays"),
-        const..GLsizei_p.IN("count", "an array of the number of indices to be rendered"),
+        GLint.const.p.IN("first", "an array of starting indices in the enabled arrays"),
+        GLsizei.const.p.IN("count", "an array of the number of indices to be rendered"),
         AutoSize("first", "count")..GLsizei.IN("primcount", "the size of {@code first} and {@code count}")
     )
 
@@ -230,9 +230,9 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         """,
 
         GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        GLsizei_p.IN("count", "an array of the elements counts"),
+        GLsizei.p.IN("count", "an array of the elements counts"),
         GLenum.IN("type", "the type of the values in indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        const..void_pp.IN("indices", "a pointer to the location where the indices are stored"),
+        void.const.p.p.IN("indices", "a pointer to the location where the indices are stored"),
         AutoSize("count", "indices")..GLsizei.IN("primcount", "the size of the {@code count} array")
     )
 
@@ -268,7 +268,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         "Pointer version of #PointParameterf().",
 
         GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION"),
-        Check(3)..const..GLfloat_p.IN("params", "the parameter value")
+        Check(3)..GLfloat.const.p.IN("params", "the parameter value")
     )
 
     void(
@@ -276,7 +276,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         "Pointer version of #PointParameteri().",
 
         GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION"),
-        Check(3)..const..GLint_p.IN("params", "the parameter value")
+        Check(3)..GLint.const.p.IN("params", "the parameter value")
     )
 
     // EXT_secondary_color
@@ -333,14 +333,14 @@ val GL14 = "GL14".nativeClassGL("GL14") {
     DeprecatedGL..void("SecondaryColor3us", "Unsigned short version of #SecondaryColor3b()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
     DeprecatedGL..void("SecondaryColor3ui", "Unsigned int version of #SecondaryColor3b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-    DeprecatedGL..void("SecondaryColor3bv", "Byte pointer version of #SecondaryColor3b().", Check(3)..const..GLbyte_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3sv", "Pointer version of #SecondaryColor3s().", Check(3)..const..GLshort_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3iv", "Pointer version of #SecondaryColor3i().", Check(3)..const..GLint_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3fv", "Pointer version of #SecondaryColor3f().", Check(3)..const..GLfloat_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3dv", "Pointer version of #SecondaryColor3d().", Check(3)..const..GLdouble_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3ubv", "Pointer version of #SecondaryColor3ub().", Check(3)..const..GLubyte_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3usv", "Pointer version of #SecondaryColor3us().", Check(3)..const..GLushort_p.IN("v", colorBuffer))
-    DeprecatedGL..void("SecondaryColor3uiv", "Pointer version of #SecondaryColor3ui().", Check(3)..const..GLuint_p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3bv", "Byte pointer version of #SecondaryColor3b().", Check(3)..GLbyte.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3sv", "Pointer version of #SecondaryColor3s().", Check(3)..GLshort.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3iv", "Pointer version of #SecondaryColor3i().", Check(3)..GLint.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3fv", "Pointer version of #SecondaryColor3f().", Check(3)..GLfloat.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3dv", "Pointer version of #SecondaryColor3d().", Check(3)..GLdouble.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3ubv", "Pointer version of #SecondaryColor3ub().", Check(3)..GLubyte.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3usv", "Pointer version of #SecondaryColor3us().", Check(3)..GLushort.const.p.IN("v", colorBuffer))
+    DeprecatedGL..void("SecondaryColor3uiv", "Pointer version of #SecondaryColor3ui().", Check(3)..GLuint.const.p.IN("v", colorBuffer))
 
     OffHeapOnly..DeprecatedGL..void(
         "SecondaryColorPointer",
@@ -358,7 +358,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
         GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the secondary color array data")
+        )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the secondary color array data")
     )
 
     // EXT_blend_func_separate
@@ -439,10 +439,10 @@ val GL14 = "GL14".nativeClassGL("GL14") {
     DeprecatedGL..void("WindowPos2f", "Float version of #WindowPos2i().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"))
     DeprecatedGL..void("WindowPos2d", "Double version of #WindowPos2i().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"))
 
-    DeprecatedGL..void("WindowPos2iv", "Pointer version of #WindowPos2i().", Check(2)..const..GLint_p.IN("p", "the position value"))
-    DeprecatedGL..void("WindowPos2sv", "Pointer version of #WindowPos2s().", Check(2)..const..GLshort_p.IN("p", "the position value"))
-    DeprecatedGL..void("WindowPos2fv", "Pointer version of #WindowPos2f().", Check(2)..const..GLfloat_p.IN("p", "the position value"))
-    DeprecatedGL..void("WindowPos2dv", "Pointer version of #WindowPos2d().", Check(2)..const..GLdouble_p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos2iv", "Pointer version of #WindowPos2i().", Check(2)..GLint.const.p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos2sv", "Pointer version of #WindowPos2s().", Check(2)..GLshort.const.p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos2fv", "Pointer version of #WindowPos2f().", Check(2)..GLfloat.const.p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos2dv", "Pointer version of #WindowPos2d().", Check(2)..GLdouble.const.p.IN("p", "the position value"))
 
     DeprecatedGL..void(
         "WindowPos3i",
@@ -457,9 +457,9 @@ val GL14 = "GL14".nativeClassGL("GL14") {
     DeprecatedGL..void("WindowPos3f", "Float version of #WindowPos3i().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"), GLfloat.IN("z", "the z value"))
     DeprecatedGL..void("WindowPos3d", "Double version of #WindowPos3i().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"), GLdouble.IN("z", "the z value"))
 
-    DeprecatedGL..void("WindowPos3iv", "Pointer version of #WindowPos3i().", Check(3)..const..GLint_p.IN("p", "the position value"))
-    DeprecatedGL..void("WindowPos3sv", "Pointer version of #WindowPos3s().", Check(3)..const..GLshort_p.IN("p", "the position value"))
-    DeprecatedGL..void("WindowPos3fv", "Pointer version of #WindowPos3f().", Check(3)..const..GLfloat_p.IN("p", "the position value"))
-    DeprecatedGL..void("WindowPos3dv", "Pointer version of #WindowPos3d().", Check(3)..const..GLdouble_p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos3iv", "Pointer version of #WindowPos3i().", Check(3)..GLint.const.p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos3sv", "Pointer version of #WindowPos3s().", Check(3)..GLshort.const.p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos3fv", "Pointer version of #WindowPos3f().", Check(3)..GLfloat.const.p.IN("p", "the position value"))
+    DeprecatedGL..void("WindowPos3dv", "Pointer version of #WindowPos3d().", Check(3)..GLdouble.const.p.IN("p", "the position value"))
 
 }

@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 class BufferObject(val binding: String) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (!param.nativeType.isPointer || param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
+        if (!param.nativeType.isPointer || param.nativeType.isPointerHandle)
             throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 
         when (this) {

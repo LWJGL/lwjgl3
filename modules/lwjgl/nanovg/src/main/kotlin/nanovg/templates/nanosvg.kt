@@ -89,8 +89,8 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         "ParseFromFile",
         "Parses SVG file from a file, returns SVG image as paths.",
 
-        const..charASCII_p.IN("filename", ""),
-        const..charASCII_p.IN("units", ""),
+        charASCII.const.p.IN("filename", ""),
+        charASCII.const.p.IN("units", ""),
         float.IN("dpi", "")
     )
 
@@ -102,8 +102,8 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         Important note: changes the string.
         """,
 
-        charASCII_p.IN("input", ""),
-        const..charASCII_p.IN("units", ""),
+        charASCII.p.IN("input", ""),
+        charASCII.const.p.IN("units", ""),
         float.IN("dpi", "")
     )
 
@@ -116,7 +116,7 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
 
     // nanosvgrast.h
 
-    NSVGrasterizer_p(
+    NSVGrasterizer.p(
         "CreateRasterizer",
         "Allocates rasterizer context."
     )
@@ -125,12 +125,12 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         "Rasterize",
         "Rasterizes SVG image, returns RGBA image (non-premultiplied alpha).",
 
-        NSVGrasterizer_p.IN("r", "pointer to rasterizer context"),
+        NSVGrasterizer.p.IN("r", "pointer to rasterizer context"),
         NSVGimage.p.IN("image", "pointer to image to rasterize"),
         float.IN("tx", "image x offset (applied after scaling)"),
         float.IN("ty", "image y offset (applied after scaling)"),
         float.IN("scale", "image scale"),
-        Check("h * stride")..unsigned_char_p.OUT("dst", "pointer to destination image data, 4 bytes per pixel (RGBA)"),
+        Check("h * stride")..unsigned_char.p.OUT("dst", "pointer to destination image data, 4 bytes per pixel (RGBA)"),
         int.IN("w", "width of the image to render"),
         int.IN("h", "height of the image to render"),
         int.IN("stride", "number of bytes per scaleline in the destination buffer")
@@ -140,6 +140,6 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         "DeleteRasterizer",
         "Deletes rasterizer context.",
 
-        NSVGrasterizer_p.IN("rasterizer", "the rasterizer context to delete")
+        NSVGrasterizer.p.IN("rasterizer", "the rasterizer context to delete")
     )
 }

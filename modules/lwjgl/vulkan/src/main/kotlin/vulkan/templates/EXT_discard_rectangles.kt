@@ -150,6 +150,6 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
         uint32_t.IN("firstDiscardRectangle", "the index of the first discard rectangle whose state is updated by the command."),
         AutoSize("pDiscardRectangles")..uint32_t.IN("discardRectangleCount", "the number of discard rectangles whose state are updated by the command."),
-        const..VkRect2D.p.IN("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures specifying discard rectangles.")
+        VkRect2D.const.p.IN("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures specifying discard rectangles.")
     )
 }

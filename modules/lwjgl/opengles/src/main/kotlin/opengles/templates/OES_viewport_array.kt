@@ -43,7 +43,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
 
         GLuint.IN("first", ""),
         AutoSize(4, "v")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("v", "")
+        GLfloat.const.p.IN("v", "")
     )
 
     void(
@@ -62,7 +62,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
         "",
 
         GLuint.IN("index", ""),
-        Check(4)..const..GLfloat_p.IN("v", "")
+        Check(4)..GLfloat.const.p.IN("v", "")
     )
 
     void(
@@ -71,7 +71,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
 
         GLuint.IN("first", ""),
         AutoSize(4, "v")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("v", "")
+        GLint.const.p.IN("v", "")
     )
 
     void(
@@ -90,7 +90,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
         "",
 
         GLuint.IN("index", ""),
-        Check(4)..const..GLint_p.IN("v", "")
+        Check(4)..GLint.const.p.IN("v", "")
     )
 
     void(
@@ -99,7 +99,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
 
         GLuint.IN("first", ""),
         AutoSize(2, "v")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("v", "")
+        GLfloat.const.p.IN("v", "")
     )
 
     void(
@@ -117,7 +117,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
 
         GLenum.IN("target", ""),
         GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLfloat_p.OUT("data", "")
+        Check(1)..ReturnParam..GLfloat.p.OUT("data", "")
     )
 
     IgnoreMissing..void(

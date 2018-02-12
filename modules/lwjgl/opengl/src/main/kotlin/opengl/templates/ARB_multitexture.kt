@@ -102,10 +102,10 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
     void("MultiTexCoord1iARB", "Integer version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS))
     void("MultiTexCoord1dARB", "Double version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS))
 
-    void("MultiTexCoord1fvARB", "Pointer version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), Check(1)..const..GLfloat_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord1svARB", "Pointer version of #MultiTexCoord1sARB().", GLenum.IN("texture", texCoordTex), Check(1)..const..GLshort_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord1ivARB", "Pointer version of #MultiTexCoord1iARB().", GLenum.IN("texture", texCoordTex), Check(1)..const..GLint_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord1dvARB", "Pointer version of #MultiTexCoord1dARB().", GLenum.IN("texture", texCoordTex), Check(1)..const..GLdouble_p.IN("v", texCoordBuffer))
+    void("MultiTexCoord1fvARB", "Pointer version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLfloat.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord1svARB", "Pointer version of #MultiTexCoord1sARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLshort.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord1ivARB", "Pointer version of #MultiTexCoord1iARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLint.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord1dvARB", "Pointer version of #MultiTexCoord1dARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLdouble.const.p.IN("v", texCoordBuffer))
 
     void(
         "MultiTexCoord2fARB",
@@ -120,10 +120,10 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
     void("MultiTexCoord2iARB", "Integer version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))
     void("MultiTexCoord2dARB", "Double version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))
 
-    void("MultiTexCoord2fvARB", "Pointer version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), Check(2)..const..GLfloat_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord2svARB", "Pointer version of #MultiTexCoord2sARB().", GLenum.IN("texture", texCoordTex), Check(2)..const..GLshort_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord2ivARB", "Pointer version of #MultiTexCoord2iARB().", GLenum.IN("texture", texCoordTex), Check(2)..const..GLint_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord2dvARB", "Pointer version of #MultiTexCoord2dARB().", GLenum.IN("texture", texCoordTex), Check(2)..const..GLdouble_p.IN("v", texCoordBuffer))
+    void("MultiTexCoord2fvARB", "Pointer version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLfloat.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord2svARB", "Pointer version of #MultiTexCoord2sARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLshort.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord2ivARB", "Pointer version of #MultiTexCoord2iARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLint.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord2dvARB", "Pointer version of #MultiTexCoord2dARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLdouble.const.p.IN("v", texCoordBuffer))
 
     void(
         "MultiTexCoord3fARB",
@@ -139,10 +139,10 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
     void("MultiTexCoord3iARB", "Integer version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))
     void("MultiTexCoord3dARB", "Double version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))
 
-    void("MultiTexCoord3fvARB", "Pointer version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), Check(3)..const..GLfloat_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord3svARB", "Pointer version of #MultiTexCoord3sARB().", GLenum.IN("texture", texCoordTex), Check(3)..const..GLshort_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord3ivARB", "Pointer version of #MultiTexCoord3iARB().", GLenum.IN("texture", texCoordTex), Check(3)..const..GLint_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord3dvARB", "Pointer version of #MultiTexCoord3dARB().", GLenum.IN("texture", texCoordTex), Check(3)..const..GLdouble_p.IN("v", texCoordBuffer))
+    void("MultiTexCoord3fvARB", "Pointer version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLfloat.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord3svARB", "Pointer version of #MultiTexCoord3sARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLshort.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord3ivARB", "Pointer version of #MultiTexCoord3iARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLint.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord3dvARB", "Pointer version of #MultiTexCoord3dARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLdouble.const.p.IN("v", texCoordBuffer))
 
     void(
         "MultiTexCoord4fARB",
@@ -159,8 +159,8 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
     void("MultiTexCoord4iARB", "Integer version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))
     void("MultiTexCoord4dARB", "Double version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))
 
-    void("MultiTexCoord4fvARB", "Pointer version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), Check(4)..const..GLfloat_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord4svARB", "Pointer version of #MultiTexCoord4sARB().", GLenum.IN("texture", texCoordTex), Check(4)..const..GLshort_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord4ivARB", "Pointer version of #MultiTexCoord4iARB().", GLenum.IN("texture", texCoordTex), Check(4)..const..GLint_p.IN("v", texCoordBuffer))
-    void("MultiTexCoord4dvARB", "Pointer version of #MultiTexCoord4dARB().", GLenum.IN("texture", texCoordTex), Check(4)..const..GLdouble_p.IN("v", texCoordBuffer))
+    void("MultiTexCoord4fvARB", "Pointer version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLfloat.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord4svARB", "Pointer version of #MultiTexCoord4sARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLshort.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord4ivARB", "Pointer version of #MultiTexCoord4iARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLint.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord4dvARB", "Pointer version of #MultiTexCoord4dARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLdouble.const.p.IN("v", texCoordBuffer))
 }

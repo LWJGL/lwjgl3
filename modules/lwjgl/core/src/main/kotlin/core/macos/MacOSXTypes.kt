@@ -6,8 +6,6 @@ package core.macos
 
 import org.lwjgl.generator.*
 
-const val MACOS_PACKAGE = "org.lwjgl.system.macosx"
-
 fun config() {
     packageInfo(
         Module.CORE_MACOS,
@@ -15,13 +13,12 @@ fun config() {
     )
 }
 
-val id = "id".opaque_p // Opaque object pointer
-val id_p = id.p
+val id = "id".handle // Opaque object pointer
 
 val Boolean = IntegerType("Boolean", PrimitiveMapping.BOOLEAN, unsigned = true)
 val BOOL = IntegerType("BOOL", PrimitiveMapping.BOOLEAN)
 
-val uint8_tASCII_p = CharSequenceType("uint8_t")
+val uint8_tASCII = CharType("uint8_t", CharMapping.ASCII)
 
 val UInt8 = IntegerType("UInt8", PrimitiveMapping.BYTE, unsigned = true)
 val SInt8 = IntegerType("SInt8", PrimitiveMapping.BYTE)

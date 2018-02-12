@@ -67,7 +67,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "",
 
         AutoSize("ids")..GLsizei.IN("n", ""),
-        ReturnParam..GLuint_p.OUT("ids", "")
+        ReturnParam..GLuint.p.OUT("ids", "")
     )
 
     void(
@@ -75,7 +75,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "",
 
         AutoSize("ids")..GLsizei.IN("n", ""),
-        SingleValue("id")..const..GLuint_p.IN("ids", "")
+        SingleValue("id")..GLuint.const.p.IN("ids", "")
     )
 
     GLboolean(
@@ -114,7 +114,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
         GLenum.IN("target", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
     IgnoreMissing..void(
@@ -123,7 +123,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
         GLuint.IN("id", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
     void(
@@ -132,7 +132,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
         GLuint.IN("id", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLuint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 
     void(
@@ -141,7 +141,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
         GLuint.IN("id", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint64_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint64.p.OUT("params", "")
     )
 
     void(
@@ -150,6 +150,6 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
         GLuint.IN("id", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLuint64_p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint64.p.OUT("params", "")
     )
 }

@@ -75,9 +75,9 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
         needed.
         """,
 
-        nullable..const..nfdchar_t_p.IN("filterList", "an optional filter list"),
-        nullable..const..nfdchar_t_p.IN("defaultPath", "an optional default path"),
-        Check(1)..nfdchar_t_pp.OUT("outPath", "returns the selected file path")
+        nullable..nfdchar_t.const.p.IN("filterList", "an optional filter list"),
+        nullable..nfdchar_t.const.p.IN("defaultPath", "an optional default path"),
+        Check(1)..nfdchar_t.p.p.OUT("outPath", "returns the selected file path")
     )
 
     nfdresult_t(
@@ -91,7 +91,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
 
         OpenDialog["filterList"],
         OpenDialog["defaultPath"],
-        nfdpathset_t_p.OUT("outPaths", "a path set that will be filled with the selected files")
+        nfdpathset_t.p.OUT("outPaths", "a path set that will be filled with the selected files")
     )
 
     nfdresult_t(
@@ -121,7 +121,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
         OpenDialog["outPath"]
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetError",
         "Returns the last error."
     )
@@ -130,14 +130,14 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
         "PathSet_GetCount",
         "Returns the number of entries stored in {@code pathSet}.",
 
-        const..nfdpathset_t_p.IN("pathSet", "the path set to query")
+        nfdpathset_t.const.p.IN("pathSet", "the path set to query")
     )
 
-    nfdchar_t_p(
+    nfdchar_t.p(
         "PathSet_GetPath",
         "Returns the UTF-8 path at offset {@code index}.",
 
-        const..nfdpathset_t_p.IN("pathSet", "the path set to query"),
+        nfdpathset_t.const.p.IN("pathSet", "the path set to query"),
         size_t.IN("index", "the path offset")
     )
 
@@ -145,13 +145,13 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
         "PathSet_Free",
         "Frees the contents of the specified path set.",
 
-        nfdpathset_t_p.IN("pathSet", "the path set")
+        nfdpathset_t.p.IN("pathSet", "the path set")
     )
 
     NativeName("NFDi_Free")..void(
         "Free",
         "Frees memory allocated by NativeFileDialog.",
 
-        Check(1)..void_p.IN("outPath", "the string to free")
+        Check(1)..void.p.IN("outPath", "the string to free")
     )
 }

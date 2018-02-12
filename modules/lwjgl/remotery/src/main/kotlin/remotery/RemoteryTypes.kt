@@ -57,10 +57,10 @@ val rmtS32 = typedef(int32_t, "rmtS32")
 val rmtS64 = typedef(int64_t, "rmtS64")
 
 // Const, null-terminated string pointer
-val rmtPStr = typedef(charASCII_p, "rmtPStr")
+val rmtPStr = typedef(charASCII.p, "rmtPStr")
 
 // Handle to the main remotery instance
-val Remotery_p = "Remotery".p
+const val Remotery = "Remotery"
 
 val rmtError = "rmtError".enumType
 
@@ -76,7 +76,7 @@ val rmtReallocPtr = "rmtReallocPtr".callback(
     Module.REMOTERY, opaque_p, "RMTRealloc", "",
 
     opaque_p.IN("mm_context", ""),
-    void_p.IN("ptr", ""),
+    void.p.IN("ptr", ""),
     rmtU32.IN("size", "")
 )
 
@@ -84,13 +84,13 @@ val rmtFreePtr = "rmtFreePtr".callback(
     Module.REMOTERY, opaque_p, "RMTFree", "",
 
     opaque_p.IN("mm_context", ""),
-    void_p.IN("ptr", "")
+    void.p.IN("ptr", "")
 )
 
 val rmtInputHandlerPtr = "rmtInputHandlerPtr".callback(
     Module.REMOTERY, opaque_p, "RMTInputHandler", "",
 
-    const..charASCII_p.IN("text", ""),
+    charASCII.const.p.IN("text", ""),
     opaque_p.IN("context", "")
 )
 
@@ -128,4 +128,4 @@ val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettin
     rmtPStr.member("logFilename", "")
 }
 
-val id = "id".opaque_p
+val id = "id".handle

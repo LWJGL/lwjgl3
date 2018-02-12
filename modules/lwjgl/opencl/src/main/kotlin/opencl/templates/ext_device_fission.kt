@@ -117,9 +117,9 @@ val ext_device_fission = "EXTDeviceFission".nativeClassCL("ext_device_fission", 
         "",
 
         cl_device_id.IN("in_device", ""),
-        NullTerminated..const..cl_device_partition_property_ext_p.IN("properties", ""),
+        NullTerminated..cl_device_partition_property_ext.const.p.IN("properties", ""),
         AutoSize("out_devices")..cl_uint.IN("num_entries", ""),
-        nullable..cl_device_id_p.OUT("out_devices", ""),
-        Check(1)..nullable..cl_uint_p.OUT("num_devices", "")
+        nullable..cl_device_id.p.OUT("out_devices", ""),
+        Check(1)..nullable..cl_uint.p.OUT("num_devices", "")
     )
 }

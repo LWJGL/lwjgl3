@@ -71,6 +71,6 @@ glActiveProgramEXT(program);""")}
         "",
 
         GLenum.IN("type", ""),
-        const..GLcharUTF8_p.IN("string", "")
+        GLcharUTF8.const.p.IN("string", "")
     )
 }

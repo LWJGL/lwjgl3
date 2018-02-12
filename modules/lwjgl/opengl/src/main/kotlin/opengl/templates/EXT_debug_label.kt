@@ -40,7 +40,7 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix =
         GLenum.IN("type", ""),
         GLuint.IN("object", ""),
         AutoSize("label")..GLsizei.IN("length", ""),
-        const..GLcharUTF8_p.IN("label", "")
+        GLcharUTF8.const.p.IN("label", "")
     )
 
     void(
@@ -50,7 +50,7 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix =
         GLenum.IN("type", ""),
         GLuint.IN("object", ""),
         AutoSize("label")..GLsizei.IN("bufSize", ""),
-        Check(1)..GLsizei_p.OUT("length", ""),
-        Return("length")..GLcharUTF8_p.OUT("label", "")
+        Check(1)..GLsizei.p.OUT("length", ""),
+        Return("length")..GLcharUTF8.p.OUT("label", "")
     )
 }

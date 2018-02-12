@@ -52,11 +52,11 @@ val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMeth
         """,
 
         ovrGraphicsLuid.IN("luid", "specifies the {@code luid} for the relevant GPU, which is returned from #Create()."),
-        charASCII_p.OUT(
+        charASCII.p.OUT(
             "extensionNames",
             "a character buffer which will receive a list of extension name strings, separated by a single space char between each extension"
         ),
-        AutoSize("extensionNames")..Check(1)..uint32_t_p.INOUT(
+        AutoSize("extensionNames")..Check(1)..uint32_t.p.INOUT(
             "inoutExtensionNamesSize",
             """
             indicates on input the capacity of {@code extensionNames} in chars. On output it returns the number of characters written to
@@ -159,8 +159,8 @@ val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMeth
 
         session,
         VkDevice.IN("device", "the application's {@code VkDevice} to create resources with"),
-        const..ovrTextureSwapChainDesc_p.IN("desc", "specifies requested texture properties. See notes for more info about texture format."),
-        Check(1)..ovrTextureSwapChain_p.OUT(
+        ovrTextureSwapChainDesc.const.p.IN("desc", "specifies requested texture properties. See notes for more info about texture format."),
+        Check(1)..ovrTextureSwapChain.p.OUT(
             "out_TextureSwapChain",
             """
             returns the created {@code ovrTextureSwapChain}, which will be valid upon a successful return value, else it will be #NULL. This texture chain must
@@ -212,8 +212,8 @@ val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMeth
 
         session,
         VkDevice.IN("device", "the {@code VkDevice} to create resources with"),
-        const..ovrMirrorTextureDesc_p.IN("desc", "specifies requested texture properties. See notes for more info about texture format."),
-        Check(1)..ovrMirrorTexture_p.OUT(
+        ovrMirrorTextureDesc.const.p.IN("desc", "specifies requested texture properties. See notes for more info about texture format."),
+        Check(1)..ovrMirrorTexture.p.OUT(
             "out_MirrorTexture",
             """
             returns the created {@code ovrMirrorTexture}, which will be valid upon a successful return value, else it will be #NULL. This texture must be

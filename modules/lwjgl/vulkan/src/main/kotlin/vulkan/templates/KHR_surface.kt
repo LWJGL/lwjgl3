@@ -288,7 +288,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         VkInstance.IN("instance", "the instance used to create the surface."),
         VkSurfaceKHR.IN("surface", "the surface to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
     )
 
     VkResult(
@@ -436,7 +436,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device that will be associated with the swapchain to be created, as described for #CreateSwapchainKHR()."),
         VkSurfaceKHR.IN("surface", "the surface that will be associated with the swapchain."),
-        AutoSize("pSurfaceFormats")..Check(1)..uint32_t_p.INOUT("pSurfaceFormatCount", "a pointer to an integer related to the number of format pairs available or queried, as described below."),
+        AutoSize("pSurfaceFormats")..Check(1)..uint32_t.p.INOUT("pSurfaceFormatCount", "a pointer to an integer related to the number of format pairs available or queried, as described below."),
         nullable..VkSurfaceFormatKHR.p.OUT("pSurfaceFormats", "either {@code NULL} or a pointer to an array of ##VkSurfaceFormatKHR structures.")
     )
 
@@ -486,7 +486,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device that will be associated with the swapchain to be created, as described for #CreateSwapchainKHR()."),
         VkSurfaceKHR.IN("surface", "the surface that will be associated with the swapchain."),
-        AutoSize("pPresentModes")..Check(1)..uint32_t_p.INOUT("pPresentModeCount", "a pointer to an integer related to the number of presentation modes available or queried, as described below."),
+        AutoSize("pPresentModes")..Check(1)..uint32_t.p.INOUT("pPresentModeCount", "a pointer to an integer related to the number of presentation modes available or queried, as described below."),
         nullable..VkPresentModeKHR.p.OUT("pPresentModes", "either {@code NULL} or a pointer to an array of {@code VkPresentModeKHR} values, indicating the supported presentation modes.")
     )
 }

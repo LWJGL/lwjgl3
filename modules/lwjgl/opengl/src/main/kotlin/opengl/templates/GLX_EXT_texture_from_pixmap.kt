@@ -97,7 +97,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
         DISPLAY,
         GLXDrawable.IN("drawable", "the drawable"),
         int.IN("buffer", "the buffer"),
-        nullable..NullTerminated..const..int_p.IN("attrib_list", "an optional null-terminated list of attributes")
+        nullable..NullTerminated..int.const.p.IN("attrib_list", "an optional null-terminated list of attributes")
     )
 
     void(

@@ -17,32 +17,32 @@ fun config() {
     )
 }
 
-val EXRVersion_p = struct(Module.TINYEXR, "EXRVersion") {
+val EXRVersion = struct(Module.TINYEXR, "EXRVersion") {
     int.member("version", "this must be 2")
     intb.member("tiled", "tile format image")
     intb.member("long_name", "long name attribute")
     intb.member("non_image", "deep image(EXR 2.0)")
     intb.member("multipart", "multi-part(EXR 2.0)")
-}.p
+}
 
 val EXRAttribute = struct(Module.TINYEXR, "EXRAttribute") {
     charASCII.array("name", "", size = 256)
     charASCII.array("type", "", size = 256)
-    unsigned_char_p.member("value", "")
+    unsigned_char.p.member("value", "")
     AutoSize("value", optional = true)..int.member("size", "")
     padding(4)
 }
 
-val EXRChannelInfo_p = struct(Module.TINYEXR, "EXRChannelInfo") {
+val EXRChannelInfo = struct(Module.TINYEXR, "EXRChannelInfo") {
     charASCII.array("name", "", size = 256)
     int.member("pixel_type", "")
     int.member("x_sampling", "")
     int.member("y_sampling", "")
     unsigned_char.member("p_linear", "")
     padding(3)
-}.p
+}
 
-val EXRTile_p = struct(Module.TINYEXR, "EXRTile") {
+val EXRTile = struct(Module.TINYEXR, "EXRTile") {
     int.member("offset_x", "")
     int.member("offset_y", "")
     int.member("level_x", "")
@@ -51,10 +51,10 @@ val EXRTile_p = struct(Module.TINYEXR, "EXRTile") {
     int.member("width", "actual width in a tile")
     int.member("height", "actual height in a tile")
 
-    unsigned_char_p.p.member("images", "image[channels][pixels]")
-}.p
+    unsigned_char.p.p.member("images", "image[channels][pixels]")
+}
 
-val EXRHeader_p = struct(Module.TINYEXR, "EXRHeader") {
+val EXRHeader = struct(Module.TINYEXR, "EXRHeader") {
     javaImport("static org.lwjgl.util.tinyexr.TinyEXR.*")
 
     float.member("pixel_aspect_ratio", "")
@@ -85,48 +85,48 @@ val EXRHeader_p = struct(Module.TINYEXR, "EXRHeader") {
         size = "TINYEXR_MAX_ATTRIBUTES"
     )
 
-    EXRChannelInfo_p.buffer("channels", "")
+    EXRChannelInfo.p.buffer("channels", "")
 
-    int_p.member(
+    int.p.member(
         "pixel_types",
         "loaded pixel type (TINYEXR_PIXELTYPE_*) of {@code images} for each channel. This is overwritten with {@code requested_pixel_types} when loading."
     )
     AutoSize("channels", "pixel_types", "requested_pixel_types")..int.member("num_channels", "")
 
     int.member("compression_type", "compression type (TINYEXR_COMPRESSIONTYPE_*)")
-    int_p.member(
+    int.p.member(
         "requested_pixel_types",
         "filled initially by {@code ParseEXRHeaderFrom(Memory|File)}, then users can edit it (only valid for HALF pixel type channel)"
     )
-}.p
+}
 
 /*val EXRMultiPartHeader = struct(Binding.TINYEXR, "EXRMultiPartHeader") {
     AutoSize("headers")..int.member("num_headers", "")
     EXRHeader_p.member("headers", "")
 }*/
 
-val EXRImage_p = struct(Module.TINYEXR, "EXRImage") {
-    EXRTile_p.buffer("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. #NULL if scanline format.")
-    nullable..unsigned_char_p.p.member("images", "{@code image[channels][pixels]}. #NULL if tiled format.")
+val EXRImage = struct(Module.TINYEXR, "EXRImage") {
+    EXRTile.p.buffer("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. #NULL if scanline format.")
+    nullable..unsigned_char.p.p.member("images", "{@code image[channels][pixels]}. #NULL if tiled format.")
     int.member("width", "")
     int.member("height", "")
     AutoSize("images")..int.member("num_channels", "")
 
     // Properties for tile format.
     AutoSize("tiles", optional = true)..int.member("num_tiles", "")
-}.p
+}
 
 /*val EXRMultiPartImage = struct(Binding.TINYEXR, "EXRMultiPartImage") {
     AutoSize("images")..int.member("num_images", "")
     EXRImage_p.member("images", "")
 }*/
 
-val DeepImage_p = struct(Module.TINYEXR, "DeepImage") {
-    const..charUTF8_pp.member("channel_names", "")
-    float_pp.p.member("image", "image[channels][scanlines][samples]")
-    int_p.p.member("offset_table", "offset_table[scanline][offsets]")
+val DeepImage = struct(Module.TINYEXR, "DeepImage") {
+    charUTF8.const.p.p.member("channel_names", "")
+    float.p.p.p.member("image", "image[channels][scanlines][samples]")
+    int.p.p.member("offset_table", "offset_table[scanline][offsets]")
     AutoSize("channel_names", "image")..int.member("num_channels", "")
     int.member("width", "")
     int.member("height", "")
     padding(4)
-}.p
+}

@@ -75,9 +75,9 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 
     val size = AutoSize("indices")..GLint.IN("size", "the number of index values to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
 
-    void("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint_p.IN("indices", "the matrix index values"))
-    void("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte_p.IN("indices", "the matrix index values"))
-    void("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort_p.IN("indices", "the matrix index values"))
+    void("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint.p.IN("indices", "the matrix index values"))
+    void("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte.p.IN("indices", "the matrix index values"))
+    void("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort.p.IN("indices", "the matrix index values"))
 
     void(
         "MatrixIndexPointerARB",
@@ -90,7 +90,7 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
         GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..ARRAY_BUFFER..void_p.IN("pointer", "the matrix index data")
+        Unsafe..ARRAY_BUFFER..void.p.IN("pointer", "the matrix index data")
     )
 
 }

@@ -35,7 +35,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
             This function may be called from any thread. Access is not synchronized.
             """,
 
-        GLFWwindow_p.IN("window", "a GLFW window"),
+        GLFWwindow.p.IN("window", "a GLFW window"),
 
         returnDoc = "the {@code EGLContext} of the specified window, or EGL10#EGL_NO_CONTEXT if an error occurred",
         since = "version 3.0"
@@ -49,7 +49,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
             This function may be called from any thread. Access is not synchronized.
             """,
 
-        GLFWwindow_p.IN("window", ""),
+        GLFWwindow.p.IN("window", ""),
 
         returnDoc = "the {@code EGLSurface} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred",
         since = "version 3.0"

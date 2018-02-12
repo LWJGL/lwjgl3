@@ -85,10 +85,10 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay.IN("dpy", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", ""),
-        nullable..EGLConfig_p.OUT("configs", ""),
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", ""),
+        nullable..EGLConfig.p.OUT("configs", ""),
         AutoSize("configs")..EGLint.IN("config_size", ""),
-        Check(1)..EGLint_p.OUT("num_config", "")
+        Check(1)..EGLint.p.OUT("num_config", "")
     )
 
     EGLBoolean(
@@ -107,7 +107,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         nullable..EGLContext.IN("share_context", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -116,7 +116,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
 
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -126,7 +126,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         EGLNativePixmapType.IN("pixmap", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -136,7 +136,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         EGLNativeWindowType.IN("win", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -162,7 +162,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 
     EGLBoolean(
@@ -170,9 +170,9 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay.IN("dpy", ""),
-        nullable..EGLConfig_p.OUT("configs", ""),
+        nullable..EGLConfig.p.OUT("configs", ""),
         AutoSize("configs")..EGLint.IN("config_size", ""),
-        Check(1)..EGLint_p.OUT("num_config", "")
+        Check(1)..EGLint.p.OUT("num_config", "")
     )
 
     EGLDisplay(
@@ -203,7 +203,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "GetProcAddress",
         "",
 
-        const..charASCII_p.IN("procname", "")
+        charASCII.const.p.IN("procname", "")
     )
 
     EGLBoolean(
@@ -211,8 +211,8 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay.IN("dpy", ""),
-        Check(1)..EGLint_p.OUT("major", ""),
-        Check(1)..EGLint_p.OUT("minor", "")
+        Check(1)..EGLint.p.OUT("major", ""),
+        Check(1)..EGLint.p.OUT("minor", "")
     )
 
     EGLBoolean(
@@ -232,10 +232,10 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLContext.IN("ctx", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 
-    charASCII_p(
+    charASCII.p(
         "QueryString",
         "",
 
@@ -250,7 +250,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLSurface.IN("surface", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 
     EGLBoolean(

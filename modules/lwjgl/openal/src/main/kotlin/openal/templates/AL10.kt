@@ -216,7 +216,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
         "Pointer version of #GetBoolean().",
 
         ALenum.IN("paramName", "the parameter to query"),
-        Check(1)..ALboolean_p.OUT("dest", "a buffer that will receive the parameter values")
+        Check(1)..ALboolean.p.OUT("dest", "a buffer that will receive the parameter values")
     )
 
     ALvoid(
@@ -224,7 +224,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
         "Pointer version of #GetInteger().",
 
         ALenum.IN("paramName", "the parameter to query"),
-        Check(1)..ALint_p.IN("dest", "a buffer that will receive the parameter values")
+        Check(1)..ALint.p.IN("dest", "a buffer that will receive the parameter values")
     )
 
     ALvoid(
@@ -232,7 +232,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
         "Pointer version of #GetFloat().",
 
         ALenum.IN("paramName", "the parameter to query"),
-        Check(1)..ALfloat_p.IN("dest", "a buffer that will receive the parameter values")
+        Check(1)..ALfloat.p.IN("dest", "a buffer that will receive the parameter values")
     )
 
     ALvoid(
@@ -240,10 +240,10 @@ val AL10 = "AL10".nativeClassAL("AL10") {
         "Pointer version of #GetDouble().",
 
         ALenum.IN("paramName", "the parameter to query"),
-        Check(1)..ALdouble_p.IN("dest", "a buffer that will receive the parameter values")
+        Check(1)..ALdouble.p.IN("dest", "a buffer that will receive the parameter values")
     )
 
-    const..ALcharUTF8_p(
+    ALcharUTF8.const.p(
         "GetString",
         "Returns the string value of the specified parameter",
 
@@ -364,7 +364,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Pointer version of #Listenerf().",
 
         ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..const..ALfloat_p.IN("values", "the parameter values")
+        Check(1)..ALfloat.const.p.IN("values", "the parameter values")
     )
 
     ALvoid(
@@ -372,7 +372,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Returns the float value of a listener parameter.",
 
         ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-        Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
     )
 
     ALvoid(
@@ -380,7 +380,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Returns the integer value of a listener parameter.",
 
         ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-        Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
     )
 
     ALvoid(
@@ -388,9 +388,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Returns the 3 dimensional values of a listener parameter.",
 
         ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-        Check(1)..ALfloat_p.OUT("value1", "the first parameter value"),
-        Check(1)..ALfloat_p.OUT("value2", "the second parameter value"),
-        Check(1)..ALfloat_p.OUT("value3", "the third parameter value")
+        Check(1)..ALfloat.p.OUT("value1", "the first parameter value"),
+        Check(1)..ALfloat.p.OUT("value2", "the second parameter value"),
+        Check(1)..ALfloat.p.OUT("value3", "the third parameter value")
     )
 
     ALvoid(
@@ -398,7 +398,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Returns float values of a listener parameter.",
 
         ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-        Check(1)..ALfloat_p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 
     ALvoid(
@@ -406,7 +406,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Requests a number of source names.",
 
         AutoSize("srcNames")..ALsizei.IN("n", "the number of source names to generated"),
-        ReturnParam..ALuint_p.OUT("srcNames", "the buffer that will receive the source names")
+        ReturnParam..ALuint.p.OUT("srcNames", "the buffer that will receive the source names")
     )
 
     ALvoid(
@@ -414,7 +414,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Requests the deletion of a number of sources.",
 
         AutoSize("sources")..ALsizei.IN("n", "the number of sources to delete"),
-        SingleValue("source")..ALuint_p.IN("sources", "the sources to delete")
+        SingleValue("source")..ALuint.p.IN("sources", "the sources to delete")
     )
 
     ALboolean(
@@ -450,7 +450,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("source", "the source to modify"),
         ALenum.IN("param", "the parameter to modify"),
-        Check(1)..const..ALfloat_p.IN("values", "the parameter values")
+        Check(1)..ALfloat.const.p.IN("values", "the parameter values")
     )
 
     ALvoid(
@@ -468,7 +468,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("source", "the source to query"),
         ALenum.IN("param", "the parameter to query", SourceAttributes),
-        Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
     )
 
     ALvoid(
@@ -477,9 +477,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("source", "the source to query"),
         ALenum.IN("param", "the parameter to query", SourceAttributes),
-        Check(1)..ALfloat_p.OUT("v1", "the first parameter value"),
-        Check(1)..ALfloat_p.OUT("v2", "the second parameter value"),
-        Check(1)..ALfloat_p.OUT("v3", "the third parameter value")
+        Check(1)..ALfloat.p.OUT("v1", "the first parameter value"),
+        Check(1)..ALfloat.p.OUT("v2", "the second parameter value"),
+        Check(1)..ALfloat.p.OUT("v3", "the third parameter value")
     )
 
     ALvoid(
@@ -488,7 +488,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("source", "the source to query"),
         ALenum.IN("param", "the parameter to query", SourceAttributes),
-        Check(1)..ALfloat_p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 
     ALvoid(
@@ -497,7 +497,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("source", "the source to query"),
         ALenum.IN("param", "the parameter to query", SourceAttributes),
-        Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
     )
 
     ALvoid(
@@ -506,7 +506,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("source", "the source to query"),
         ALenum.IN("param", "the parameter to query", SourceAttributes),
-        Check(1)..ALint_p.OUT("values", "the parameter values")
+        Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
     ALvoid(
@@ -521,7 +521,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("sourceName", "the target source"),
         AutoSize("bufferNames")..ALsizei.IN("numBuffers", "the number of buffers to queue"),
-        SingleValue("bufferName")..ALuint_p.IN("bufferNames", "the buffer names")
+        SingleValue("bufferName")..ALuint.p.IN("bufferNames", "the buffer names")
     )
 
     ALvoid(
@@ -537,7 +537,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("sourceName", "the target source"),
         AutoSize("bufferNames")..ALsizei.IN("numEntries", "the number of buffers to unqueue"),
-        ReturnParam..ALuint_p.OUT("bufferNames", "the buffer names")
+        ReturnParam..ALuint.p.OUT("bufferNames", "the buffer names")
     )
 
     ALvoid(
@@ -600,7 +600,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Pointer version of #SourcePlay().",
 
         AutoSize("sources")..ALsizei.IN("n", "the number of sources to play"),
-        const..ALuint_p.IN("sources", "the sources to play")
+        ALuint.const.p.IN("sources", "the sources to play")
     )
 
     ALvoid(
@@ -608,7 +608,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Pointer version of #SourcePause().",
 
         AutoSize("sources")..ALsizei.IN("n", "the number of sources to pause"),
-        const..ALuint_p.IN("sources", "the sources to pause")
+        ALuint.const.p.IN("sources", "the sources to pause")
     )
 
     ALvoid(
@@ -616,7 +616,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Pointer version of #SourceStop().",
 
         AutoSize("sources")..ALsizei.IN("n", "the number of sources to stop"),
-        const..ALuint_p.IN("sources", "the sources to stop")
+        ALuint.const.p.IN("sources", "the sources to stop")
     )
 
     ALvoid(
@@ -624,7 +624,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Pointer version of #SourceRewind().",
 
         AutoSize("sources")..ALsizei.IN("n", "the number of sources to rewind"),
-        const..ALuint_p.IN("sources", "the sources to rewind")
+        ALuint.const.p.IN("sources", "the sources to rewind")
     )
 
     ALvoid(
@@ -632,7 +632,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Requests a number of buffer names.",
 
         AutoSize("bufferNames")..ALsizei.IN("n", "the number of buffer names to generate"),
-        ReturnParam..ALuint_p.OUT("bufferNames", "the buffer that will receive the buffer names")
+        ReturnParam..ALuint.p.OUT("bufferNames", "the buffer that will receive the buffer names")
     )
 
     ALvoid(
@@ -640,7 +640,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "Requests the deletion of a number of buffers.",
 
         AutoSize("bufferNames")..ALsizei.IN("n", "the number of buffers to delete"),
-        SingleValue("bufferName")..const..ALuint_p.IN("bufferNames", "the buffers to delete")
+        SingleValue("bufferName")..ALuint.const.p.IN("bufferNames", "the buffers to delete")
     )
 
     ALboolean(
@@ -656,7 +656,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("bufferName", "the buffer to query"),
         ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-        Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
     )
 
     ALvoid(
@@ -665,7 +665,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
         ALuint.IN("bufferName", "the buffer to query"),
         ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-        Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
     )
 
     ALvoid(
@@ -691,7 +691,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         ALenum.IN("format", "the data format", BufferFormats),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..const..ALvoid_p.IN("data", "the sample data"),
+        )..ALvoid.const.p.IN("data", "the sample data"),
         AutoSize("data")..ALsizei.IN("size", "the data buffer size, in bytes"),
         ALsizei.IN("frequency", "the data frequency")
     )
@@ -700,10 +700,10 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         "GetEnumValue",
         "Returns the enumeration value of the specified enum.",
 
-        const..ALcharASCII_p.IN("enumName", "the enum name")
+        ALcharASCII.const.p.IN("enumName", "the enum name")
     )
 
-    ALopaque_p(
+    opaque_p(
         "GetProcAddress",
         """
         Retrieves extension entry points.
@@ -715,7 +715,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         OpenAL DLL's as sound drivers.
         """,
 
-        const..ALcharASCII_p.IN("funcName", "the function name")
+        ALcharASCII.const.p.IN("funcName", "the function name")
     )
 
     ALCboolean(
@@ -727,7 +727,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
         upper-case internally (and will express extension names in upper-case).
         """,
 
-        const..ALcharASCII_p.IN("extName", "the extension name")
+        ALcharASCII.const.p.IN("extName", "the extension name")
     )
 
 }

@@ -128,7 +128,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         returnDoc = "the previous value of object's class, or Nil if {@code obj} is #nil"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "object_getClassName",
         "Returns the class name of a given object.",
 
@@ -186,8 +186,8 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Changes the value of an instance variable of a class instance.",
 
         id.IN("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to modify"),
-        const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify"),
-        Unsafe..void_p.IN("value", "the new value for the instance variable"),
+        charUTF8.const.p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify"),
+        Unsafe..void.p.IN("value", "the new value for the instance variable"),
 
         returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
     )
@@ -197,8 +197,8 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Obtains the value of an instance variable of a class instance.",
 
         id.IN("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to obtain"),
-        const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to obtain"),
-        Check(1)..void_pp.OUT("outValue", "on return, contains a pointer to the value of the instance variable"),
+        charUTF8.const.p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to obtain"),
+        Check(1)..void.p.p.OUT("outValue", "on return, contains a pointer to the value of the instance variable"),
 
         returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
     )
@@ -214,7 +214,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         checks a second time to see whether the class is registered. objc_lookUpClass does not call the class handler callback.
         """,
 
-        const..charUTF8_p.IN("name", "the name of the class to look up"),
+        charUTF8.const.p.IN("name", "the name of the class to look up"),
 
         returnDoc = "the Class object for the named class, or #nil if the class is not registered with the Objective-C runtime"
     )
@@ -229,7 +229,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         whether it’s valid or not.
         """,
 
-        const..charUTF8_p.IN("name", "the name of the class to look up"),
+        charUTF8.const.p.IN("name", "the name of the class to look up"),
 
         returnDoc = "the Class object for the metaclass of the named class, or #nil if the class is not registered with the Objective-C runtime"
     )
@@ -243,7 +243,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         a second time to see whether the class is registered. This function does not call the class handler callback.
         """,
 
-        const..charUTF8_p.IN("name", "the name of the class to look up"),
+        charUTF8.const.p.IN("name", "the name of the class to look up"),
 
         returnDoc = "the Class object for the named class, or #nil if the class is not registered with the Objective-C runtime"
     )
@@ -258,7 +258,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.
         """,
 
-        const..charUTF8_p.IN("name", "the name of the class to look up"),
+        charUTF8.const.p.IN("name", "the name of the class to look up"),
 
         returnDoc = "the Class object for the named class"
     )
@@ -277,7 +277,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         classes without detecting that the method is implemented first.
         """,
 
-        nullable..Class_p.OUT(
+        nullable..Class.p.OUT(
             "buffer",
             """
             an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
@@ -296,11 +296,11 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         returnDoc = "an integer value indicating the total number of registered classes"
     )
 
-    Class_p(
+    Class.p(
         "objc_copyClassList",
         "Creates and returns a list of pointers to all registered class definitions.",
 
-        AutoSizeResult..unsigned_int_p.OUT(
+        AutoSizeResult..unsigned_int.p.OUT(
             "outCount",
             "an integer pointer used to store the number of classes returned by this function in the list. This parameter may be #nil"
         ),
@@ -310,7 +310,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
     // Working with Classes
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "class_getName",
         "Returns the name of a class.",
 
@@ -388,7 +388,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Returns the Ivar for a specified instance variable of a given class.",
 
         Class.IN("cls", "the class whose instance variable you wish to obtain"),
-        const..charUTF8_p.IN("name", "the name of the instance variable definition to obtain"),
+        charUTF8.const.p.IN("name", "the name of the instance variable definition to obtain"),
 
         returnDoc = "a pointer to an Ivar data structure containing information about the instance variable specified by name"
     )
@@ -398,17 +398,17 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Returns the Ivar for a specified class variable of a given class.",
 
         Class.IN("cls", "the class definition whose class variable you wish to obtain"),
-        const..charUTF8_p.IN("name", "the name of the class variable definition to obtain"),
+        charUTF8.const.p.IN("name", "the name of the class variable definition to obtain"),
 
         returnDoc = "a pointer to an Ivar data structure containing information about the class variable specified by name"
     )
 
-    Ivar_p(
+    Ivar.p(
         "class_copyIvarList",
         "Describes the instance variables declared by a class.",
 
         nullable..Class.IN("cls", "the class to inspect"),
-        AutoSizeResult..unsigned_int_p.OUT(
+        AutoSizeResult..unsigned_int.p.OUT(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -492,12 +492,12 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         returnDoc = "#YES if instances of the class respond to the selector, otherwise #NO"
     )
 
-    Method_p(
+    Method.p(
         "class_copyMethodList",
         "Describes the instance methods implemented by a class.",
 
         nullable..Class.IN("cls", "the class you want to inspect"),
-        AutoSizeResult..unsigned_int_p.OUT(
+        AutoSizeResult..unsigned_int.p.OUT(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -520,17 +520,17 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         """,
 
         Class.IN("cls", "the class you want to inspect"),
-        Protocol_p.IN("protocol", "a protocol"),
+        Protocol.p.IN("protocol", "a protocol"),
 
         returnDoc = "#YES if {@code cls} conforms to {@code protocol}, otherwise #NO"
     )
 
-    Protocol_pp(
+    Protocol.p.p(
         "class_copyProtocolList",
         "Describes the protocols adopted by a class.",
 
         nullable..Class.IN("cls", "the class you want to inspect"),
-        AutoSizeResult..unsigned_int_p.OUT(
+        AutoSizeResult..unsigned_int.p.OUT(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -549,7 +549,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Returns a property with a given name of a given class.",
 
         nullable..Class.IN("cls", "the class you want to inspect"),
-        const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify."),
+        charUTF8.const.p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify."),
 
         returnDoc =
         """
@@ -558,12 +558,12 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         """
     )
 
-    objc_property_t_p(
+    objc_property_t.p(
         "class_copyPropertyList",
         "Describes the properties declared by a class.",
 
         nullable..Class.IN("cls", "the class you want to inspect"),
-        AutoSizeResult..unsigned_int_p.OUT(
+        AutoSizeResult..unsigned_int.p.OUT(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -577,7 +577,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         """
     )
 
-    const..uint8_tASCII_p(
+    uint8_tASCII.const.p(
         "class_getIvarLayout",
         "Returns a description of the Ivar layout for a given class.",
 
@@ -586,7 +586,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         returnDoc = "a description of the Ivar layout for {@code cls}"
     )
 
-    const..uint8_tASCII_p(
+    uint8_tASCII.const.p(
         "class_getWeakIvarLayout",
         "Returns a description of the layout of weak Ivars for a given class.",
 
@@ -622,7 +622,7 @@ void myMethodIMP(id self, SEL _cmd)
             "imp",
             "a function which is the implementation of the new method. The function must take at least two arguments &ndash; {@code self} and {@code _cmd}."
         ),
-        const..charUTF8_p.IN(
+        charUTF8.const.p.IN(
             "types",
             """
             an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
@@ -660,7 +660,7 @@ void myMethodIMP(id self, SEL _cmd)
             "imp",
             "the new implementation for the method identified by {@code name} for the class identified by {@code cls}"
         ),
-        const..charUTF8_p.IN(
+        charUTF8.const.p.IN(
             "types",
             """
             an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
@@ -687,10 +687,10 @@ void myMethodIMP(id self, SEL _cmd)
         """,
 
         Class.IN("cls", ""),
-        const..charUTF8_p.IN("name", ""),
+        charUTF8.const.p.IN("name", ""),
         size_t.IN("size", ""),
         uint8_t.IN("alignment", ""),
-        const..charUTF8_p.IN("types", ""),
+        charUTF8.const.p.IN("types", ""),
 
         returnDoc =
         "#YES if the instance variable was added successfully, otherwise #NO (for example, the class already contains an instance variable with that name)"
@@ -701,7 +701,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Adds a protocol to a class.",
 
         Class.IN("cls", "the class to modify"),
-        Protocol_p.IN("protocol", "the protocol to add to {@code cls}"),
+        Protocol.p.IN("protocol", "the protocol to add to {@code cls}"),
 
         returnDoc = "#YES if the protocol was added successfully, otherwise #NO (for example, the class already conforms to that protocol)"
     )
@@ -711,8 +711,8 @@ void myMethodIMP(id self, SEL _cmd)
         "Adds a property to a class.",
 
         Class.IN("cls", "the class to modify"),
-        const..charUTF8_p.IN("name", "the name of the property"),
-        (const..objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
+        charUTF8.const.p.IN("name", "the name of the property"),
+        objc_property_attribute_t.const.p.IN("attributes", "an array of property attributes"),
         AutoSize("attributes")..unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}"),
 
         returnDoc = "#YES if the property was added successfully; otherwise #NO (for example, this function returns #NO if the class already has that property)"
@@ -723,8 +723,8 @@ void myMethodIMP(id self, SEL _cmd)
         "Replaces a property of a class.",
 
         Class.IN("cls", "the class to modify"),
-        const..charUTF8_p.IN("name", "the name of the property"),
-        (const..objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
+        charUTF8.const.p.IN("name", "the name of the property"),
+        objc_property_attribute_t.const.p.IN("attributes", "an array of property attributes"),
         AutoSize("attributes")..unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}")
     )
 
@@ -733,7 +733,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Sets the Ivar layout for a given class.",
 
         Class.IN("cls", "the class to modify"),
-        const..uint8_tASCII_p.IN("layout", "the layout of the Ivars for {@code cls}")
+        uint8_tASCII.const.p.IN("layout", "the layout of the Ivars for {@code cls}")
     )
 
     void(
@@ -741,7 +741,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Sets the layout for weak Ivars for a given class.",
 
         Class.IN("cls", "the class to modify"),
-        const..uint8_tASCII_p.IN("layout", "the layout of the weak Ivars for {@code cls}")
+        uint8_tASCII.const.p.IN("layout", "the layout of the weak Ivars for {@code cls}")
     )
 
     // Instantiating Classes
@@ -767,7 +767,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Creates an instance of a class at the specified location.",
 
         nullable..Class.IN("cls", "the class that you want to allocate an instance of"),
-        Check("class_getInstanceSize(cls)", debug = true)..nullable..void_p.IN(
+        Check("class_getInstanceSize(cls)", debug = true)..nullable..void.p.IN(
             "bytes",
             """
             the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least {@code class_getInstanceSize(cls)}
@@ -811,7 +811,7 @@ void myMethodIMP(id self, SEL _cmd)
         """,
 
         nullable..Class.IN("superclass", "the class to use as the new class's superclass, or Nil to create a new root class"),
-        const..charUTF8_p.IN("name", "the string to use as the new class's name. The string will be copied."),
+        charUTF8.const.p.IN("name", "the string to use as the new class's name. The string will be copied."),
         size_t.IN("extraBytes", "the number of bytes to allocate for indexed ivars at the end of the class and metaclass objects. This should usually be 0."),
 
         returnDoc = "the new class, or Nil if the class could not be created (for example, the desired name is already in use)"
@@ -859,7 +859,7 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a function pointer of type IMP"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "method_getTypeEncoding",
         "Returns a string describing a method's parameter and return types.",
 
@@ -877,7 +877,7 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "an integer containing the number of arguments accepted by the given method"
     )
 
-    charUTF8_p(
+    charUTF8.p(
         "method_copyReturnType",
         "Returns a string describing a method's return type.",
 
@@ -886,7 +886,7 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a C string describing the return type. You must free the string with free()."
     )
 
-    charUTF8_p(
+    charUTF8.p(
         "method_copyArgumentType",
         "Returns a string describing a single parameter type of a method.",
 
@@ -909,7 +909,7 @@ void myMethodIMP(id self, SEL _cmd)
         """,
 
         Method.IN("m", "the method to inspect"),
-        ReturnParam..charUTF8_p.OUT("dst", "the reference string to store the description"),
+        ReturnParam..charUTF8.p.OUT("dst", "the reference string to store the description"),
         AutoSize("dst")..size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
     )
 
@@ -924,7 +924,7 @@ void myMethodIMP(id self, SEL _cmd)
 
         Method.IN("m", "the method you want to inquire about"),
         unsigned_int.IN("index", "the index of the parameter you want to inquire about"),
-        ReturnParam..charUTF8_p.OUT("dst", "the reference string to store the description"),
+        ReturnParam..charUTF8.p.OUT("dst", "the reference string to store the description"),
         AutoSize("dst")..size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
     )
 
@@ -948,7 +948,7 @@ void myMethodIMP(id self, SEL _cmd)
 
     // Working with Instance Variables
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "ivar_getName",
         "Returns the name of an instance variable.",
 
@@ -957,7 +957,7 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a C string containing the instance variable's name"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "ivar_getTypeEncoding",
         "Returns the type string of an instance variable.",
 
@@ -982,7 +982,7 @@ void myMethodIMP(id self, SEL _cmd)
 
     // Working with Properties
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "property_getName",
         "Returns the name of a property.",
 
@@ -991,7 +991,7 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a C string containing the property's name"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "property_getAttributes",
         "Returns the attribute string of a property.",
 
@@ -1000,22 +1000,22 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a C string containing the property's attributes"
     )
 
-    (objc_property_attribute_t_p)(
+    objc_property_attribute_t.p(
         "property_copyAttributeList",
         "Returns an array of property attributes for a given property.",
 
         objc_property_t.IN("property", "the property whose attributes you want to copy"),
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "the number of attributes returned in the array"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "the number of attributes returned in the array"),
 
         returnDoc = "an array of property attributes. You must free the array with free()."
     )
 
-    charUTF8_p(
+    charUTF8.p(
         "property_copyAttributeValue",
         "Returns the value of a property attribute given the attribute name.",
 
         objc_property_t.IN("property", "the property whose value you are interested in"),
-        const..charUTF8_p.IN("attributeName", "a C string representing the name of the attribute"),
+        charUTF8.const.p.IN("attributeName", "a C string representing the name of the attribute"),
 
         returnDoc =
         """
@@ -1026,7 +1026,7 @@ void myMethodIMP(id self, SEL _cmd)
 
     // Working with Protocols
 
-    Protocol_p(
+    Protocol.p(
         "objc_getProtocol",
         """
         Returns a specified protocol.
@@ -1034,16 +1034,16 @@ void myMethodIMP(id self, SEL _cmd)
         This function acquires the runtime lock.
         """,
 
-        const..charUTF8_p.IN("name", "the name of a protocol"),
+        charUTF8.const.p.IN("name", "the name of a protocol"),
 
         returnDoc = "the protocol named {@code name}{, or #NULL if no protocol named name could be found"
     )
 
-    Protocol_pp(
+    Protocol.p.p(
         "objc_copyProtocolList",
         "Returns an array of all the protocols known to the runtime.",
 
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
 
         returnDoc =
         """
@@ -1066,8 +1066,8 @@ void myMethodIMP(id self, SEL _cmd)
         All the protocols listed between angle brackets are considered part of the {@code ProtocolName} protocol.
         """,
 
-        Protocol_p.IN("proto", "a protocol"),
-        Protocol_p.IN("other", "a protocol"),
+        Protocol.p.IN("proto", "a protocol"),
+        Protocol.p.IN("other", "a protocol"),
 
         returnDoc = "#YES if {@code proto} conforms to {@code other}, otherwise #NO"
     )
@@ -1076,17 +1076,17 @@ void myMethodIMP(id self, SEL _cmd)
         "protocol_isEqual",
         "Returns a Boolean value that indicates whether two protocols are equal.",
 
-        Protocol_p.IN("proto", "a protocol"),
-        Protocol_p.IN("other", "a protocol"),
+        Protocol.p.IN("proto", "a protocol"),
+        Protocol.p.IN("other", "a protocol"),
 
         returnDoc = "#YES if proto is the same as other, otherwise #NO"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "protocol_getName",
         "Returns a the name of a protocol.",
 
-        Protocol_p.IN("p", "a protocol"),
+        Protocol.p.IN("p", "a protocol"),
 
         returnDoc = "the name of the protocol {@code p} as a C string"
     )
@@ -1095,7 +1095,7 @@ void myMethodIMP(id self, SEL _cmd)
         "protocol_getMethodDescription",
         "Returns a method description structure for a specified method of a given protocol.",
 
-        Protocol_p.IN("p", "a protocol"),
+        Protocol.p.IN("p", "a protocol"),
         SEL.IN("aSel", "a selector"),
         BOOL.IN("isRequiredMethod", "a Boolean value that indicates whether {@code aSel} is a required method"),
         BOOL.IN("isInstanceMethod", "a Boolean value that indicates whether {@code aSel} is a instance method"),
@@ -1109,7 +1109,7 @@ void myMethodIMP(id self, SEL _cmd)
         """
     )
 
-    objc_method_description_p(
+    objc_method_description.p(
         "protocol_copyMethodDescriptionList",
         """
         Returns an array of method descriptions of methods meeting a given specification for a given protocol.
@@ -1117,10 +1117,10 @@ void myMethodIMP(id self, SEL _cmd)
         Methods in other protocols adopted by this protocol are not included.
         """,
 
-        Protocol_p.IN("p", "a protocol"),
+        Protocol.p.IN("p", "a protocol"),
         BOOL.IN("isRequiredMethod", "a Boolean value that indicates whether returned methods should be required methods (pass #YES to specify required methods)"),
         BOOL.IN("isInstanceMethod", "a Boolean value that indicates whether returned methods should be instance methods (pass #YES to specify instance methods)"),
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
 
         returnDoc =
         """
@@ -1135,8 +1135,8 @@ void myMethodIMP(id self, SEL _cmd)
         "protocol_getProperty",
         "Returns the specified property of a given protocol.",
 
-        Protocol_p.IN("proto", "a protocol"),
-        const..charUTF8_p.IN("name", "the name of a property"),
+        Protocol.p.IN("proto", "a protocol"),
+        charUTF8.const.p.IN("name", "the name of a property"),
         BOOL.IN("isRequiredProperty", "a Boolean value that indicates whether {@code name} is a required property"),
         BOOL.IN("isInstanceProperty", "a Boolean value that indicates whether {@code name} is a instance property"),
 
@@ -1147,12 +1147,12 @@ void myMethodIMP(id self, SEL _cmd)
         """
     )
 
-    objc_property_t_p(
+    objc_property_t.p(
         "protocol_copyPropertyList",
         "Returns an array of the properties declared by a protocol.",
 
-        Protocol_p.IN("proto", "a protocol"),
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+        Protocol.p.IN("proto", "a protocol"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
 
         returnDoc =
         """
@@ -1163,12 +1163,12 @@ void myMethodIMP(id self, SEL _cmd)
         """
     )
 
-    Protocol_pp(
+    Protocol.p.p(
         "protocol_copyProtocolList",
         "eturns an array of the protocols adopted by a protocol.",
 
-        Protocol_p.IN("proto", "a protocol"),
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+        Protocol.p.IN("proto", "a protocol"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
 
         returnDoc =
         """
@@ -1179,7 +1179,7 @@ void myMethodIMP(id self, SEL _cmd)
         """
     )
 
-    Protocol_p(
+    Protocol.p(
         "objc_allocateProtocol",
         """
         Creates a new protocol instance.
@@ -1189,7 +1189,7 @@ void myMethodIMP(id self, SEL _cmd)
         There is no dispose method associated with this function.
         """,
 
-        const..charUTF8_p.IN("name", "the name of the protocol you want to create"),
+        charUTF8.const.p.IN("name", "the name of the protocol you want to create"),
 
         returnDoc = "a new protocol instance or #nil if a protocol with the same name as {@code name} already exists"
     )
@@ -1203,7 +1203,7 @@ void myMethodIMP(id self, SEL _cmd)
         protocol is successfully registered, it is immutable and ready to use.
         """,
 
-        Protocol_p.IN("proto", "the protocol you want to register with the Objective-C runtime")
+        Protocol.p.IN("proto", "the protocol you want to register with the Objective-C runtime")
     )
 
     void(
@@ -1215,9 +1215,9 @@ void myMethodIMP(id self, SEL _cmd)
         register it with the Objective-C runtime (via the #objc_registerProtocol() function).
         """,
 
-        Protocol_p.IN("proto", "the protocol you want to add a method to"),
+        Protocol.p.IN("proto", "the protocol you want to add a method to"),
         SEL.IN("name", "the name of the method you want to add"),
-        const..charUTF8_p.IN("types", "a C string representing the signature of the method you want to add"),
+        charUTF8.const.p.IN("types", "a C string representing the signature of the method you want to add"),
         BOOL.IN(
             "isRequiredMethod",
             """
@@ -1240,8 +1240,8 @@ void myMethodIMP(id self, SEL _cmd)
         protocol you want to add ({@code addition}) must be registered already.
         """,
 
-        Protocol_p.IN("proto", "the protocol you want to add the registered protocol to"),
-        Protocol_p.IN("addition", "the registered protocol you want to add to {@code proto}")
+        Protocol.p.IN("proto", "the protocol you want to add the registered protocol to"),
+        Protocol.p.IN("addition", "the registered protocol you want to add to {@code proto}")
     )
 
     void(
@@ -1253,9 +1253,9 @@ void myMethodIMP(id self, SEL _cmd)
         #objc_registerProtocol() function).
         """,
 
-        Protocol_p.IN("proto", "the protocol you want to add a property to"),
-        const..charUTF8_p.IN("name", "the name of the property you want to add."),
-        (const..objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
+        Protocol.p.IN("proto", "the protocol you want to add a property to"),
+        charUTF8.const.p.IN("name", "the name of the property you want to add."),
+        objc_property_attribute_t.const.p.IN("attributes", "an array of property attributes"),
         AutoSize("attributes")..unsigned_int.IN("attributeCount", "the number of properties in {@code attributes}"),
         BOOL.IN(
             "isRequiredProperty",
@@ -1275,16 +1275,16 @@ void myMethodIMP(id self, SEL _cmd)
 
     // Working with Libraries
 
-    const..charUTF8_pp(
+    charUTF8.const.p.p(
         "objc_copyImageNames",
         "Returns the names of all the loaded Objective-C frameworks and dynamic libraries.",
 
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "the number of names in the returned array"),
 
         returnDoc = "an array of C strings representing the names of all the loaded Objective-C frameworks and dynamic libraries"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "class_getImageName",
         "Returns the name of the dynamic library a class originated from.",
 
@@ -1293,19 +1293,19 @@ void myMethodIMP(id self, SEL _cmd)
         returnDoc = "a C string representing the name of the library containing the {@code cls} class."
     )
 
-    const..charUTF8_pp(
+    charUTF8.const.p.p(
         "objc_copyClassNamesForImage",
         "Returns the names of all the classes within a specified library or framework.",
 
-        const..charUTF8_p.IN("image", "the library or framework you are inquiring about"),
-        AutoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
+        charUTF8.const.p.IN("image", "the library or framework you are inquiring about"),
+        AutoSizeResult..unsigned_int.p.OUT("outCount", "the number of names in the returned array"),
 
         returnDoc = "an array of C strings representing all of the class names within the specified library or framework"
     )
 
     // Working with Selectors
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "sel_getName",
         "Returns the name of the method specified by a given selector.",
 
@@ -1322,7 +1322,7 @@ void myMethodIMP(id self, SEL _cmd)
         The implementation of this method is identical to the implementation of #sel_registerName().
         """,
 
-        const..charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
+        charUTF8.const.p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
 
         returnDoc = "a pointer of type SEL specifying the selector for the named method"
     )
@@ -1336,7 +1336,7 @@ void myMethodIMP(id self, SEL _cmd)
         definition. If the method name has already been registered, this function simply returns the selector.
         """,
 
-        const..charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
+        charUTF8.const.p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
 
         returnDoc = "a pointer of type SEL specifying the selector for the named method"
     )
@@ -1423,7 +1423,7 @@ void myMethodIMP(id self, SEL _cmd)
         alive long enough for the caller to use it. This function is typically used anywhere a {@code __weak} variable is used in an expression.
         """,
 
-        Check(1)..nullable..id_p.IN("location", "the address of the weak pointer"),
+        Check(1)..nullable..id.p.IN("location", "the address of the weak pointer"),
 
         returnDoc = "the object pointed to by location, or #nil if location is #nil"
     )
@@ -1436,7 +1436,7 @@ void myMethodIMP(id self, SEL _cmd)
         This function is typically used anywhere a {@code __weak} variable is the target of an assignment.
         """,
 
-        Check(1)..id_p.IN("location", "the address of the weak pointer"),
+        Check(1)..id.p.IN("location", "the address of the weak pointer"),
         id.IN("obj", "the new object you want the weak pointer to now point to"),
 
         returnDoc = "the value stored in location (that is, {@code obj})"
@@ -1459,7 +1459,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Sets an associated value for a given object using a given key and association policy.",
 
         id.IN("object", "the source object for the association"),
-        const..opaque_p.IN("key", "the key for the association"),
+        opaque_const_p.IN("key", "the key for the association"),
         id.IN("value", "the value to associate with the key {@code key} for {@code object}. Pass #nil to clear an existing association."),
         objc_AssociationPolicy.IN("policy", "the policy for the association", AssociationPolicies)
     )
@@ -1469,7 +1469,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Returns the value associated with a given object for a given key.",
 
         id.IN("object", "the source object for the association"),
-        const..opaque_p.IN("key", "the key for the association"),
+        opaque_const_p.IN("key", "the key for the association"),
 
         returnDoc = "the value associated with the key {@code key} for {@code object}."
     )

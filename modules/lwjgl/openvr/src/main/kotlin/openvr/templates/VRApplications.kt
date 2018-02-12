@@ -23,7 +23,7 @@ val VRApplications = "VRApplications".nativeClass(
         Temporary manifests are not automatically loaded.
         """,
 
-        const..charASCII_p.IN("pchApplicationManifestFullPath", ""),
+        charASCII.const.p.IN("pchApplicationManifestFullPath", ""),
         bool.IN("bTemporary", "")
     )
 
@@ -31,14 +31,14 @@ val VRApplications = "VRApplications".nativeClass(
         "RemoveApplicationManifest",
         "Removes an application manifest from the list to load when building the list of installed applications.",
 
-        const..charASCII_p.IN("pchApplicationManifestFullPath", "")
+        charASCII.const.p.IN("pchApplicationManifestFullPath", "")
     )
 
     bool(
         "IsApplicationInstalled",
         "Returns true if an application is installed.",
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
     uint32_t(
@@ -54,7 +54,7 @@ val VRApplications = "VRApplications".nativeClass(
         """,
 
         uint32_t.IN("unApplicationIndex", ""),
-        nullable..char_p.OUT("pchAppKeyBuffer", ""),
+        nullable..char.p.OUT("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t.IN("unAppKeyBufferLen", "")
     )
 
@@ -65,7 +65,7 @@ val VRApplications = "VRApplications".nativeClass(
         """,
 
         uint32_t.IN("unProcessId", ""),
-        nullable..char_p.OUT("pchAppKeyBuffer", ""),
+        nullable..char.p.OUT("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t.IN("unAppKeyBufferLen", "")
     )
 
@@ -77,7 +77,7 @@ val VRApplications = "VRApplications".nativeClass(
         This call is not valid for dashboard overlay applications.
         """,
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
     EVRApplicationError(
@@ -87,9 +87,9 @@ val VRApplications = "VRApplications".nativeClass(
         sections from the manifest file via ##AppOverrideKeys.
         """,
 
-        const..charASCII_p.IN("pchTemplateAppKey", ""),
-        const..charASCII_p.IN("pchNewAppKey", ""),
-        const..AppOverrideKeys_t.p.IN("pKeys", ""),
+        charASCII.const.p.IN("pchTemplateAppKey", ""),
+        charASCII.const.p.IN("pchNewAppKey", ""),
+        AppOverrideKeys_t.const.p.IN("pKeys", ""),
         AutoSize("pKeys")..uint32_t.IN("unKeys", "")
     )
 
@@ -100,22 +100,22 @@ val VRApplications = "VRApplications".nativeClass(
         being launched.
         """,
 
-        const..charASCII_p.IN("pchMimeType", ""),
-        const..charASCII_p.IN("pchArgs", "")
+        charASCII.const.p.IN("pchMimeType", ""),
+        charASCII.const.p.IN("pchArgs", "")
     )
 
     EVRApplicationError(
         "LaunchDashboardOverlay",
         "Launches the dashboard overlay application if it is not already running. This call is only valid for dashboard overlay applications.",
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
     bool(
         "CancelApplicationLaunch",
         "Cancel a pending launch for an application.",
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
     EVRApplicationError(
@@ -127,17 +127,17 @@ val VRApplications = "VRApplications".nativeClass(
         """,
 
         uint32_t.IN("unProcessId", ""),
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
     uint32_t(
         "GetApplicationProcessId",
         "Returns the process ID for an application. Return 0 if the application was not found or is not running.",
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetApplicationsErrorNameFromEnum",
         "Returns a string for an applications error.",
 
@@ -148,9 +148,9 @@ val VRApplications = "VRApplications".nativeClass(
         "GetApplicationPropertyString",
         "Returns a value for an application property. The required buffer size to fit this value will be returned.",
 
-        const..charASCII_p.IN("pchAppKey", ""),
+        charASCII.const.p.IN("pchAppKey", ""),
         EVRApplicationProperty.IN("eProperty", "", "EVRApplicationProperty_\\w+_String"),
-        Return(RESULT, "VR.k_unMaxPropertyStringSize", includesNT = true)..nullable..charASCII_p.OUT("pchPropertyValueBuffer", ""),
+        Return(RESULT, "VR.k_unMaxPropertyStringSize", includesNT = true)..nullable..charASCII.p.OUT("pchPropertyValueBuffer", ""),
         AutoSize("pchPropertyValueBuffer")..uint32_t.IN("unPropertyValueBufferLen", ""),
         Check(1)..EVRApplicationError.p.OUT("peError", "")
     )
@@ -159,7 +159,7 @@ val VRApplications = "VRApplications".nativeClass(
         "GetApplicationPropertyBool",
         "Returns a bool value for an application property. Returns false in all error cases.",
 
-        const..charASCII_p.IN("pchAppKey", ""),
+        charASCII.const.p.IN("pchAppKey", ""),
         EVRApplicationProperty.IN("eProperty", "", "EVRApplicationProperty_\\w+_Bool"),
         Check(1)..EVRApplicationError.p.OUT("peError", "")
     )
@@ -168,7 +168,7 @@ val VRApplications = "VRApplications".nativeClass(
         "GetApplicationPropertyUint64",
         "Returns a uint64 value for an application property. Returns 0 in all error cases.",
 
-        const..charASCII_p.IN("pchAppKey", ""),
+        charASCII.const.p.IN("pchAppKey", ""),
         EVRApplicationProperty.IN("eProperty", "", "EVRApplicationProperty_\\w+_Uint64"),
         Check(1)..EVRApplicationError.p.OUT("peError", "")
     )
@@ -180,7 +180,7 @@ val VRApplications = "VRApplications".nativeClass(
         #EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool.
         """,
 
-        const..charASCII_p.IN("pchAppKey", ""),
+        charASCII.const.p.IN("pchAppKey", ""),
         bool.IN("bAutoLaunch", "")
     )
 
@@ -191,23 +191,23 @@ val VRApplications = "VRApplications".nativeClass(
         #EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool.
         """,
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
     EVRApplicationError(
         "SetDefaultApplicationForMimeType",
         "Adds this mime-type to the list of supported mime types for this application.",
 
-        const..charASCII_p.IN("pchAppKey", ""),
-        const..charASCII_p.IN("pchMimeType", "")
+        charASCII.const.p.IN("pchAppKey", ""),
+        charASCII.const.p.IN("pchMimeType", "")
     )
 
     bool(
         "GetDefaultApplicationForMimeType",
         "Return the app key that will open this mime type.",
 
-        const..charASCII_p.IN("pchMimeType", ""),
-        nullable..char_p.OUT("pchAppKeyBuffer", ""),
+        charASCII.const.p.IN("pchMimeType", ""),
+        nullable..char.p.OUT("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t.IN("unAppKeyBufferLen", "")
     )
 
@@ -215,8 +215,8 @@ val VRApplications = "VRApplications".nativeClass(
         "GetApplicationSupportedMimeTypes",
         "Get the list of supported mime types for this application, comma-delimited.",
 
-        const..charASCII_p.IN("pchAppKey", ""),
-        nullable..char_p.OUT("pchMimeTypesBuffer", ""),
+        charASCII.const.p.IN("pchAppKey", ""),
+        nullable..char.p.OUT("pchMimeTypesBuffer", ""),
         AutoSize("pchMimeTypesBuffer")..uint32_t.IN("unMimeTypesBuffer", "")
     )
 
@@ -224,8 +224,8 @@ val VRApplications = "VRApplications".nativeClass(
         "GetApplicationsThatSupportMimeType",
         "Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string.",
 
-        const..charASCII_p.IN("pchMimeType", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchAppKeysThatSupportBuffer", ""),
+        charASCII.const.p.IN("pchMimeType", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchAppKeysThatSupportBuffer", ""),
         AutoSize("pchAppKeysThatSupportBuffer")..uint32_t.IN("unAppKeysThatSupportBuffer", "")
     )
 
@@ -234,7 +234,7 @@ val VRApplications = "VRApplications".nativeClass(
         "Get the args list from an app launch that had the process already running, you call this when you get a #EVREventType_VREvent_ApplicationMimeTypeLoad.",
 
         uint32_t.IN("unHandle", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchArgs", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchArgs", ""),
         AutoSize("pchArgs")..uint32_t.IN("unArgs", "")
     )
 
@@ -242,7 +242,7 @@ val VRApplications = "VRApplications".nativeClass(
         "GetStartingApplication",
         "Returns the app key for the application that is starting up.",
 
-        char_p.OUT("pchAppKeyBuffer", ""),
+        char.p.OUT("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t.IN("unAppKeyBufferLen", "")
     )
 
@@ -269,10 +269,10 @@ val VRApplications = "VRApplications".nativeClass(
         )}
         """,
 
-        const..charASCII_p.IN("pchAppKey", "")
+        charASCII.const.p.IN("pchAppKey", "")
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetApplicationsTransitionStateNameFromEnum",
         "Returns a string for an application transition state.",
 
@@ -292,9 +292,9 @@ val VRApplications = "VRApplications".nativeClass(
         binary path will be the working directory.
         """,
 
-        const..charASCII_p.IN("pchBinaryPath", ""),
-        const..charASCII_p.IN("pchArguments", ""),
-        const..charASCII_p.IN("pchWorkingDirectory", "")
+        charASCII.const.p.IN("pchBinaryPath", ""),
+        charASCII.const.p.IN("pchArguments", ""),
+        charASCII.const.p.IN("pchWorkingDirectory", "")
     )
 
     uint32_t(

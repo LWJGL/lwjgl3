@@ -61,7 +61,7 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..const..void_p.IN("data", ""),
+        )..void.const.p.IN("data", ""),
         GLbitfield.IN("flags", "")
     )
 
@@ -75,7 +75,7 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..const..void_p.IN("data", ""),
+        )..void.const.p.IN("data", ""),
         GLbitfield.IN("flags", "")
     )
 }

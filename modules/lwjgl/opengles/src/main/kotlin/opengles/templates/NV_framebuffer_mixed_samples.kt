@@ -82,7 +82,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("
         "",
 
         AutoSize("v")..GLsizei.IN("n", ""),
-        const..GLfloat_p.IN("v", "")
+        GLfloat.const.p.IN("v", "")
     )
 
     void(
@@ -90,7 +90,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("
         "",
 
         AutoSize("v")..GLsizei.IN("bufsize", ""),
-        GLfloat_p.OUT("v", "")
+        GLfloat.p.OUT("v", "")
     )
 
     void(

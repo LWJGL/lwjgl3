@@ -217,7 +217,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
         GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
         AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
-        SingleValue("id")..const..GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+        SingleValue("id")..GLuint.const.p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
         GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
     )
 
@@ -241,7 +241,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
         GLenum.IN("severity", "the severity of the debug messages to insert"),
         AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-        const..GLcharUTF8_p.IN("message", "a character array containing the message to insert")
+        GLcharUTF8.const.p.IN("message", "a character array containing the message to insert")
     )
 
     void(
@@ -276,7 +276,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         """,
 
         nullable..GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-        nullable..const..opaque_p.IN(
+        nullable..opaque_const_p.IN(
             "userParam",
             "a user supplied pointer that will be passed on each invocation of {@code callback}"
         )
@@ -311,12 +311,12 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLuint.IN("count", "the number of debug messages to retrieve from the log"),
         AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
-        Check("count")..nullable..GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
-        Check("count")..nullable..GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
-        Check("count")..nullable..GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
-        Check("count")..nullable..GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
-        Check("count")..nullable..GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
-        nullable..GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
+        Check("count")..nullable..GLenum.p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
+        Check("count")..nullable..GLenum.p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
+        Check("count")..nullable..GLuint.p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
+        Check("count")..nullable..GLenum.p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
+        Check("count")..nullable..GLsizei.p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
+        nullable..GLcharUTF8.p.OUT("messageLog", "an array of characters that will receive the messages")
     )
 
     void(
@@ -324,7 +324,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "",
 
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..void_pp.OUT("params", "")
+        ReturnParam..Check(1)..void.p.p.OUT("params", "")
     )
 
     void(
@@ -346,7 +346,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
         GLuint.IN("id", "the identifier of the message"),
         AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-        const..GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
+        GLcharUTF8.const.p.IN("message", "a string containing the message to be sent to the debug output stream")
     )
 
     void(
@@ -374,7 +374,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         ),
         GLuint.IN("name", "the name of the object to label"),
         AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
     )
 
     void(
@@ -388,8 +388,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         ),
         GLuint.IN("name", "the name of the object whose label to retrieve"),
         AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
-        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+        Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the length of the object label"),
+        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
 
     void(
@@ -398,7 +398,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         opaque_p.IN("ptr", "a pointer identifying a sync object"),
         AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
     )
 
     void(
@@ -407,8 +407,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         opaque_p.IN("ptr", "the name of the sync object whose label to retrieve"),
         AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
-        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+        Check(1)..nullable..GLsizei.p.OUT("length", "a variable to receive the length of the object label"),
+        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
 
     // OES_draw_buffers_indexed
@@ -494,7 +494,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum.IN("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLint.IN("basevertex", "")
     )
 
@@ -507,7 +507,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLuint.IN("end", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLint.IN("basevertex", "")
     )
 
@@ -518,7 +518,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLenum.IN("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLsizei.IN("instancecount", ""),
         GLint.IN("basevertex", "")
     )
@@ -744,7 +744,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+        )..void.p.OUT("pixels", "a buffer in which to place the returned pixel data")
     )
 
     void(
@@ -754,7 +754,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLuint.IN("program", "the program object"),
         GLint.IN("location", "the uniform location"),
         AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -764,7 +764,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLuint.IN("program", "the program object"),
         GLint.IN("location", "the uniform location"),
         AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -774,7 +774,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         GLuint.IN("program", "the program object"),
         GLint.IN("location", "the uniform location"),
         AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
     )
 
     // OES_sample_shading
@@ -942,7 +942,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLenum.IN("target", ""),
         GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..const..GLint_p.IN("params", "")
+        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "")
     )
 
     void(
@@ -951,7 +951,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLenum.IN("target", ""),
         GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..const..GLuint_p.IN("params", "")
+        SingleValue("param")..Check(1)..GLuint.const.p.IN("params", "")
     )
 
     void(
@@ -960,7 +960,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLenum.IN("target", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
     void(
@@ -969,7 +969,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLenum.IN("target", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLuint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 
     void(
@@ -978,7 +978,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLuint.IN("sampler", ""),
         GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..const..GLint_p.IN("params", "")
+        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "")
     )
 
     void(
@@ -987,7 +987,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLuint.IN("sampler", ""),
         GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..const..GLuint_p.IN("params", "")
+        SingleValue("param")..Check(1)..GLuint.const.p.IN("params", "")
     )
 
     void(
@@ -996,7 +996,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLuint.IN("sampler", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
     void(
@@ -1005,7 +1005,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
         GLuint.IN("sampler", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLuint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 
     // OES_texture_buffer

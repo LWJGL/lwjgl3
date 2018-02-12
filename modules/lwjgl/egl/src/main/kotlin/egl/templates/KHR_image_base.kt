@@ -39,7 +39,7 @@ val KHR_image_base = "KHRImageBase".nativeClassEGL("KHR_image_base", postfix = K
         EGLContext.IN("ctx", ""),
         EGLenum.IN("target", ""),
         EGLClientBuffer.IN("buffer", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(

@@ -136,7 +136,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
         "",
 
         AutoSize("attribs")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("attribs", ""),
+        GLint.const.p.IN("attribs", ""),
         GLenum.IN("bufferMode", "")
     )
 
@@ -176,7 +176,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 
         GLuint.IN("program", ""),
         AutoSize("locations")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("locations", ""),
+        GLint.const.p.IN("locations", ""),
         GLenum.IN("bufferMode", "")
     )
 
@@ -185,7 +185,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
         "",
 
         GLuint.IN("program", ""),
-        const..GLcharASCII_p.IN("name", "")
+        GLcharASCII.const.p.IN("name", "")
     )
 
     GLint(
@@ -193,7 +193,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
         "",
 
         GLuint.IN("program", ""),
-        const..GLcharASCII_p.IN("name", "")
+        GLcharASCII.const.p.IN("name", "")
     )
 
     void(
@@ -203,10 +203,10 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
         GLuint.IN("program", ""),
         GLuint.IN("index", ""),
         AutoSize("name")..GLsizei.IN("bufSize", ""),
-        nullable..Check(1)..GLsizei_p.OUT("length", ""),
-        Check(1)..GLsizei_p.OUT("size", ""),
-        Check(1)..GLenum_p.OUT("type", ""),
-        GLcharASCII_p.OUT("name", "")
+        nullable..Check(1)..GLsizei.p.OUT("length", ""),
+        Check(1)..GLsizei.p.OUT("size", ""),
+        Check(1)..GLenum.p.OUT("type", ""),
+        GLcharASCII.p.OUT("name", "")
     )
 
     void(
@@ -215,7 +215,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 
         GLuint.IN("program", ""),
         GLuint.IN("index", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("location", "")
+        ReturnParam..Check(1)..GLint.p.OUT("location", "")
     )
 
     void(
@@ -223,9 +223,9 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
         "",
 
         AutoSize("attribs")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("attribs", ""),
+        GLint.const.p.IN("attribs", ""),
         AutoSize("bufstreams")..GLsizei.IN("nbuffers", ""),
-        const..GLint_p.IN("bufstreams", ""),
+        GLint.const.p.IN("bufstreams", ""),
         GLenum.IN("bufferMode", "")
     )
 }

@@ -28,7 +28,7 @@ val NSVGpaint = struct(Module.NANOVG, "NSVGPaint", nativeName = "NSVGpaint", mut
     }
 }
 
-val NSVGpath_p = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false).p
+private val NSVGpath_p = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false).p
 val NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false) {
     float.p.member("pts", "cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...}")
     AutoSize("pts")..int.member("npts", "total number of bezier points")
@@ -37,7 +37,7 @@ val NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutabl
     NSVGpath_p.member("next", "pointer to next path, or #NULL if last element")
 }
 
-val NSVGshape_p = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false).p
+private val NSVGshape_p = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false).p
 val NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false) {
     char.array("id", "optional 'id' attr of the shape or its group", size = 64)
     NSVGpaint.member("fill", "fill paint")
@@ -63,4 +63,4 @@ val NSVGimage = struct(Module.NANOVG, "NSVGImage", nativeName = "NSVGimage", mut
     NSVGshape_p.member("shapes", "lLinked list of shapes in the image")
 }
 
-val NSVGrasterizer_p = "NSVGrasterizer".p
+val NSVGrasterizer = "NSVGrasterizer".opaque

@@ -494,7 +494,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device."),
         VkSurfaceKHR.IN("surface", "the surface."),
-        AutoSize("pRects")..Check(1)..uint32_t_p.INOUT("pRectCount", "a pointer to an integer related to the number of rectangles available or queried, as described below."),
+        AutoSize("pRects")..Check(1)..uint32_t.p.INOUT("pRectCount", "a pointer to an integer related to the number of rectangles available or queried, as described below."),
         nullable..VkRect2D.p.OUT("pRects", "either {@code NULL} or a pointer to an array of ##VkRect2D structures.")
     )
 
@@ -544,7 +544,7 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
         """,
 
         VkDevice.IN("device", "the device associated with {@code swapchain}."),
-        const..VkAcquireNextImageInfoKHX.p.IN("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHX containing parameters of the acquire."),
-        Check(1)..uint32_t_p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
+        VkAcquireNextImageInfoKHX.const.p.IN("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHX containing parameters of the acquire."),
+        Check(1)..uint32_t.p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
     )
 }

@@ -309,8 +309,8 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
         """,
 
         VkDevice.IN("device", "the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        const..VkSamplerYcbcrConversionCreateInfoKHR.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSamplerYcbcrConversionCreateInfoKHR specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkSamplerYcbcrConversionCreateInfoKHR.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSamplerYcbcrConversionCreateInfoKHR specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkSamplerYcbcrConversionKHR.p.OUT("pYcbcrConversion", "points to a {@code VkSamplerYcbcrConversionKHR} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.")
     )
 
@@ -347,6 +347,6 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
         VkDevice.IN("device", "the logical device that destroys the Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
         VkSamplerYcbcrConversionKHR.IN("ycbcrConversion", "the conversion to destroy."),
-        nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 }

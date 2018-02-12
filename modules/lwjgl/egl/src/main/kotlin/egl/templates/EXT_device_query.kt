@@ -39,10 +39,10 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
 
         EGLDeviceEXT.IN("device", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
-    charASCII_p(
+    charASCII.p(
         "QueryDeviceStringEXT",
         "",
 
@@ -56,6 +56,6 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
 
         EGLDisplay.IN("dpy", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.p.OUT("value", "")
     )
 }

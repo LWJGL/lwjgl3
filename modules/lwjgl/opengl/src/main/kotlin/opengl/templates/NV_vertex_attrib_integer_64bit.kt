@@ -71,7 +71,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(1)..const..GLint64EXT_p.IN("v", "")
+        Check(1)..GLint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -79,7 +79,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(2)..const..GLint64EXT_p.IN("v", "")
+        Check(2)..GLint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -87,7 +87,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(3)..const..GLint64EXT_p.IN("v", "")
+        Check(3)..GLint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -95,7 +95,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(4)..const..GLint64EXT_p.IN("v", "")
+        Check(4)..GLint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -141,7 +141,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(1)..const..GLuint64EXT_p.IN("v", "")
+        Check(1)..GLuint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -149,7 +149,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(2)..const..GLuint64EXT_p.IN("v", "")
+        Check(2)..GLuint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -157,7 +157,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(3)..const..GLuint64EXT_p.IN("v", "")
+        Check(3)..GLuint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -165,7 +165,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "",
 
         GLuint.IN("index", ""),
-        Check(4)..const..GLuint64EXT_p.IN("v", "")
+        Check(4)..GLuint64EXT.const.p.IN("v", "")
     )
 
     void(
@@ -174,7 +174,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
 
         GLuint.IN("index", ""),
         GLenum.IN("pname", ""),
-        Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
+        Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
     )
 
     void(
@@ -183,7 +183,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
 
         GLuint.IN("index", ""),
         GLenum.IN("pname", ""),
-        Check(1)..ReturnParam..GLuint64EXT_p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
     )
 
     DependsOn("GL_NV_vertex_buffer_unified_memory")..void(

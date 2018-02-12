@@ -131,7 +131,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
 
         VkDevice.IN("device", "the logical device that will be importing {@code pHostPointer}."),
         VkExternalMemoryHandleTypeFlagBitsKHR.IN("handleType", "the type of the handle {@code pHostPointer}."),
-        const..opaque_p.IN("pHostPointer", "the host pointer to import from."),
+        opaque_const_p.IN("pHostPointer", "the host pointer to import from."),
         VkMemoryHostPointerPropertiesEXT.p.OUT("pMemoryHostPointerProperties", "")
     )
 }

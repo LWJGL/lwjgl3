@@ -62,7 +62,7 @@ val apple_gl_sharing = "APPLEGLSharing".dependsOn(Module.OPENGL, Module.OPENGLES
             "#CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE #CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE"
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.IN("param_value", param_value),
         PARAM_VALUE_SIZE_RET
     )
 

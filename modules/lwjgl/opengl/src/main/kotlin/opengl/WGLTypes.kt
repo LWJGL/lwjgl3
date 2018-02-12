@@ -7,11 +7,11 @@ package opengl
 import org.lwjgl.generator.*
 import core.windows.*
 
-val HPBUFFERARB = "HPBUFFERARB".opaque_p
+val HPBUFFERARB = "HPBUFFERARB".handle
 
 // WGL_NV_gpu_affinity
-val HGPUNV = "HGPUNV".opaque_p
-val HGPUNV_p = HGPUNV.p
+val HGPUNV = "HGPUNV".handle
+
 val GPU_DEVICE = struct(Module.OPENGL, "GPU_DEVICE", nativeSubPath = "wgl", mutable = false) {
     documentation =
         "Receives information about the display device specified by the {@code deviceIndex} parameter of the #EnumGpuDevicesNV() function."
@@ -48,4 +48,4 @@ val GPU_DEVICE = struct(Module.OPENGL, "GPU_DEVICE", nativeSubPath = "wgl", muta
         """
     )
 }
-val PGPU_DEVICE = GPU_DEVICE.p("PGPU_DEVICE")
+val PGPU_DEVICE = typedef(GPU_DEVICE.p, "PGPU_DEVICE")

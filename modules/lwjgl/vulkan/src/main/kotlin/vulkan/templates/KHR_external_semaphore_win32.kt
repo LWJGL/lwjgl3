@@ -117,7 +117,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         """,
 
         VkDevice.IN("device", "the logical device that created the semaphore."),
-        const..VkImportSemaphoreWin32HandleInfoKHR.p.IN("pImportSemaphoreWin32HandleInfo", "points to a ##VkImportSemaphoreWin32HandleInfoKHR structure specifying the semaphore and import parameters.")
+        VkImportSemaphoreWin32HandleInfoKHR.const.p.IN("pImportSemaphoreWin32HandleInfo", "points to a ##VkImportSemaphoreWin32HandleInfoKHR structure specifying the semaphore and import parameters.")
     )
 
     VkResult(
@@ -165,7 +165,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         """,
 
         VkDevice.IN("device", "the logical device that created the semaphore being exported."),
-        const..VkSemaphoreGetWin32HandleInfoKHR.p.IN("pGetWin32HandleInfo", "a pointer to an instance of the ##VkSemaphoreGetWin32HandleInfoKHR structure containing parameters of the export operation."),
+        VkSemaphoreGetWin32HandleInfoKHR.const.p.IN("pGetWin32HandleInfo", "a pointer to an instance of the ##VkSemaphoreGetWin32HandleInfoKHR structure containing parameters of the export operation."),
         Check(1)..HANDLE.p.OUT("pHandle", "will return the Windows handle representing the semaphore state.")
     )
 }

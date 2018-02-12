@@ -27,7 +27,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         the render model it should call #FreeRenderModel() to free the memory associated with the model.
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchRenderModelName", ""),
         Check(1)..RenderModel_t.p.p.OUT("ppRenderModel", "")
     )
 
@@ -59,7 +59,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
 
         TextureID_t.IN("textureId", ""),
         opaque_p.IN("pD3D11Device", ""),
-        Check(1)..void_pp.OUT("ppD3D11Texture2D", "")
+        Check(1)..void.p.p.OUT("ppD3D11Texture2D", "")
     )
 
     EVRRenderModelError(
@@ -86,7 +86,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         """,
 
         uint32_t.IN("unRenderModelIndex", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchRenderModelName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchRenderModelName", ""),
         AutoSize("pchRenderModelName")..uint32_t.IN("unRenderModelNameLen", "")
     )
 
@@ -103,7 +103,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         Components are useful when client application wish to draw, label, or otherwise interact with components of tracked objects.
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", "")
+        charASCII.const.p.IN("pchRenderModelName", "")
     )
 
     uint32_t(
@@ -114,9 +114,9 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         name.
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchRenderModelName", ""),
         uint32_t.IN("unComponentIndex", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchComponentName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchComponentName", ""),
         AutoSize("pchComponentName")..uint32_t.IN("unComponentNameLen", "")
     )
 
@@ -131,8 +131,8 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         ${note("A single component may be associated with multiple buttons. Ex: A trackpad which also provides \"D-pad\" functionality")}
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
-        const..charASCII_p.IN("pchComponentName", "")
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchComponentName", "")
     )
 
     uint32_t(
@@ -142,9 +142,9 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         name is out of range, this function will return 0. Otherwise, it will return the size of the buffer required for the name.
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
-        const..charASCII_p.IN("pchComponentName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchComponentRenderModelName", ""),
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchComponentName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchComponentRenderModelName", ""),
         AutoSize("pchComponentRenderModelName")..uint32_t.IN("unComponentRenderModelNameLen", "")
     )
 
@@ -162,10 +162,10 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         ${note("For dynamic objects, visibility may be dynamic. (I.e., true/false will be returned based on controller state and controller mode state )")}
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
-        const..charASCII_p.IN("pchComponentName", ""),
-        const..VRControllerState_t.p.IN("pControllerState", ""),
-        const..RenderModel_ControllerMode_State_t.p.IN("pState", ""),
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchComponentName", ""),
+        VRControllerState_t.const.p.IN("pControllerState", ""),
+        RenderModel_ControllerMode_State_t.const.p.IN("pState", ""),
         RenderModel_ComponentState_t.p.OUT("pComponentState", "")
     )
 
@@ -173,16 +173,16 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         "RenderModelHasComponent",
         "Returns true if the render model has a component with the specified name.",
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
-        const..charASCII_p.IN("pchComponentName", "")
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchComponentName", "")
     )
 
     uint32_t(
         "GetRenderModelThumbnailURL",
         "Returns the URL of the thumbnail image for this rendermodel.",
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchThumbnailURL", ""),
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchThumbnailURL", ""),
         AutoSize("pchThumbnailURL")..uint32_t.IN("unThumbnailURLLen", ""),
         Check(1)..EVRRenderModelError.p.OUT("peError", "")
     )
@@ -194,13 +194,13 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         replaced the path value will still be a valid path to load the model. Pass this to LoadRenderModel_Async, etc. to load the model.
         """,
 
-        const..charASCII_p.IN("pchRenderModelName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchOriginalPath", ""),
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchOriginalPath", ""),
         AutoSize("pchOriginalPath")..uint32_t.IN("unOriginalPathLen", ""),
         Check(1)..EVRRenderModelError.p.OUT("peError", "")
     )
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetRenderModelErrorNameFromEnum",
         "Returns a string for a render model error.",
 

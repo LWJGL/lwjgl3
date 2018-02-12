@@ -60,7 +60,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
         src["mode"],
         Check("maxdrawcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "an array of structures containing the draw parameters"),
+        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "an array of structures containing the draw parameters"),
         GLintptr.IN("drawcount", "the offset into the parameter buffer object"),
         GLsizei.IN("maxdrawcount", "the maximum number of draws"),
         src["stride"]
@@ -81,7 +81,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
         src["type"],
         Check("maxdrawcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "a structure containing an array of draw parameters"),
+        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "a structure containing an array of draw parameters"),
         GLintptr.IN("drawcount", "the offset into the parameter buffer object"),
         GLsizei.IN("maxdrawcount", "the maximum number of draws"),
         src["stride"]
@@ -182,7 +182,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
             passed
             """
         ),
-        const..GLcharUTF8_p.IN(
+        GLcharUTF8.const.p.IN(
             "pEntryPoint",
             "a pointer to a null-terminated UTF-8 string specifying the name of the entry point in the SPIR-V module to use for this shader"
         ),
@@ -190,7 +190,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
             "numSpecializationConstants",
             "the number of specialization constants whose values to set in this call"
         ),
-        const..GLuint_p.IN(
+        GLuint.const.p.IN(
             "pConstantIndex",
             """
             is a pointer to an array of {@code numSpecializationConstants} unsigned integers, each holding the index of a specialization constant in the SPIR-V
@@ -199,7 +199,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
             Specialization constants not referenced by {@code pConstantIndex} retain their default values as specified in the SPIR-V module.
             """
         ),
-        const..GLuint_p.IN(
+        GLuint.const.p.IN(
             "pConstantValue",
             """
             an entry in {@code pConstantValue} is used to set the value of the specialization constant indexed by the corresponding entry in

@@ -49,10 +49,10 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         Must be called before #init().
         """,
 
-        const..bgfx_platform_data_t_p.IN("_data", "the platform data to set")
+        bgfx_platform_data_t.const.p.IN("_data", "the platform data to set")
     )
 
-    const..bgfx_internal_data_t_p(
+    bgfx_internal_data_t.const.p(
         "get_internal_data",
         "Gets internal data for interop."
     )

@@ -33,7 +33,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
         "CAPTURE_SAMPLES"..0x312
     )
 
-    ALCdevice_p(
+    ALCdevice.p(
         "CaptureOpenDevice",
         """
         Allows the application to connect to a capture device.
@@ -42,7 +42,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
         will provide an implementation specific default.
         """,
 
-        nullable..const..ALCcharUTF8_p.IN("deviceName", "the device or device configuration"),
+        nullable..ALCcharUTF8.const.p.IN("deviceName", "the device or device configuration"),
         ALCuint.IN("frequency", "the audio frequency"),
         ALCenum.IN("format", "the audio format"),
         ALCsizei.IN("samples", "the number of sample frames to buffer in the AL")
@@ -52,7 +52,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
         "CaptureCloseDevice",
         "Allows the application to disconnect from a capture device.",
 
-        ALCdevice_p.IN("device", "the capture device to close")
+        ALCdevice.p.IN("device", "the capture device to close")
     )
 
     ALCvoid(
@@ -65,7 +65,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
         number of sample frames currently available.
         """,
 
-        ALCdevice_p.IN("device", "the capture device")
+        ALCdevice.p.IN("device", "the capture device")
     )
 
     ALCvoid(
@@ -77,7 +77,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
         zero. The application does not need to stop the capture device to read from it.
         """,
 
-        ALCdevice_p.IN("device", "the capture device")
+        ALCdevice.p.IN("device", "the capture device")
     )
 
     ALCvoid(
@@ -88,10 +88,10 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
         The implementation may defer conversion and resampling until this point. Requesting more sample frames than are currently available is an error.
         """,
 
-        ALCdevice_p.IN("device", "the capture device"),
+        ALCdevice.p.IN("device", "the capture device"),
         Unsafe..MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..ALCvoid_p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
+        )..ALCvoid.p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
         ALCsizei.IN("samples", "the number of sample frames to obtain")
     )
 

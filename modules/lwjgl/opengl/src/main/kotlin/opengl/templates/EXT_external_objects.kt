@@ -90,7 +90,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGL("EXT_memory_object", pos
         "",
 
         GLenum.IN("pname", ""),
-        Unsafe..GLubyte_p.OUT("data", "")
+        Unsafe..GLubyte.p.OUT("data", "")
     )
 
     void(
@@ -99,7 +99,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGL("EXT_memory_object", pos
 
         GLenum.IN("target", ""),
         GLuint.IN("index", ""),
-        Unsafe..GLubyte_p.OUT("data", "")
+        Unsafe..GLubyte.p.OUT("data", "")
     )
 
     void(
@@ -107,7 +107,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGL("EXT_memory_object", pos
         "",
 
         AutoSize("memoryObjects")..GLsizei.IN("n", ""),
-        SingleValue("memoryObject")..const..GLuint_p.IN("memoryObjects", "")
+        SingleValue("memoryObject")..GLuint.const.p.IN("memoryObjects", "")
     )
 
     GLboolean(
@@ -122,7 +122,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGL("EXT_memory_object", pos
         "",
 
         AutoSize("memoryObjects")..GLsizei.IN("n", ""),
-        ReturnParam..GLuint_p.OUT("memoryObjects", "")
+        ReturnParam..GLuint.p.OUT("memoryObjects", "")
     )
 
     void(
@@ -131,7 +131,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGL("EXT_memory_object", pos
 
         GLuint.IN("memoryObject", ""),
         GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..const..GLint_p.IN("params", "")
+        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "")
     )
 
     void(
@@ -140,7 +140,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGL("EXT_memory_object", pos
 
         GLuint.IN("memoryObject", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
     void(
@@ -361,7 +361,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
         "",
 
         GLenum.IN("pname", ""),
-        Unsafe..GLubyte_p.OUT("data", "")
+        Unsafe..GLubyte.p.OUT("data", "")
     )
 
     void(
@@ -370,7 +370,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
 
         GLenum.IN("target", ""),
         GLuint.IN("index", ""),
-        Unsafe..GLubyte_p.OUT("data", "")
+        Unsafe..GLubyte.p.OUT("data", "")
     )
 
     void(
@@ -378,7 +378,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
         "",
 
         AutoSize("semaphores")..GLsizei.IN("n", ""),
-        ReturnParam..GLuint_p.OUT("semaphores", "")
+        ReturnParam..GLuint.p.OUT("semaphores", "")
     )
 
     void(
@@ -386,7 +386,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
         "",
 
         AutoSize("semaphores")..GLsizei.IN("n", ""),
-        SingleValue("semaphore")..const..GLuint_p.IN("semaphores", "")
+        SingleValue("semaphore")..GLuint.const.p.IN("semaphores", "")
     )
 
     GLboolean(
@@ -402,7 +402,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
 
         GLuint.IN("semaphore", ""),
         GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..const..GLuint64_p.IN("params", "")
+        SingleValue("param")..Check(1)..GLuint64.const.p.IN("params", "")
     )
 
     void(
@@ -411,7 +411,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
 
         GLuint.IN("semaphore", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLuint64_p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint64.p.OUT("params", "")
     )
 
     void(
@@ -420,10 +420,10 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
 
         GLuint.IN("semaphore", ""),
         AutoSize("buffers")..GLuint.IN("numBufferBarriers", ""),
-        const..GLuint_p.IN("buffers", ""),
+        GLuint.const.p.IN("buffers", ""),
         AutoSize("textures", "srcLayouts")..GLuint.IN("numTextureBarriers", ""),
-        const..GLuint_p.IN("textures", ""),
-        const..GLenum_p.IN("srcLayouts", "")
+        GLuint.const.p.IN("textures", ""),
+        GLenum.const.p.IN("srcLayouts", "")
     )
 
     void(
@@ -432,9 +432,9 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
 
         GLuint.IN("semaphore", ""),
         AutoSize("buffers")..GLuint.IN("numBufferBarriers", ""),
-        const..GLuint_p.IN("buffers", ""),
+        GLuint.const.p.IN("buffers", ""),
         AutoSize("textures", "dstLayouts")..GLuint.IN("numTextureBarriers", ""),
-        const..GLuint_p.IN("textures", ""),
-        const..GLenum_p.IN("dstLayouts", "")
+        GLuint.const.p.IN("textures", ""),
+        GLenum.const.p.IN("dstLayouts", "")
     )
 }

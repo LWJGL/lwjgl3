@@ -98,7 +98,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         "",
 
         GLuint.IN("index", ""),
-        Check(1)..const..GLdouble_p.IN("v", "")
+        Check(1)..GLdouble.const.p.IN("v", "")
     )
 
     void(
@@ -106,7 +106,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         "",
 
         GLuint.IN("index", ""),
-        Check(2)..const..GLdouble_p.IN("v", "")
+        Check(2)..GLdouble.const.p.IN("v", "")
     )
 
     void(
@@ -114,7 +114,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         "",
 
         GLuint.IN("index", ""),
-        Check(3)..const..GLdouble_p.IN("v", "")
+        Check(3)..GLdouble.const.p.IN("v", "")
     )
 
     void(
@@ -122,7 +122,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         "",
 
         GLuint.IN("index", ""),
-        Check(4)..const..GLdouble_p.IN("v", "")
+        Check(4)..GLdouble.const.p.IN("v", "")
     )
 
     void(
@@ -133,7 +133,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         GLint.IN("size", ""),
         AutoType("pointer", BufferType.GL_DOUBLE)..GLenum.IN("type", ""),
         GLsizei.IN("stride", ""),
-        Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "")
+        Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "")
     )
 
     void(
@@ -142,7 +142,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 
         GLuint.IN("index", ""),
         GLenum.IN("pname", ""),
-        Check(4)..GLdouble_p.OUT("params", "")
+        Check(4)..GLdouble.p.OUT("params", "")
     )
 
     DependsOn("GL_EXT_direct_state_access")..void(

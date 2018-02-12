@@ -19,7 +19,7 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(Module.GLFW, nativeSubPath =
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
 
         returnDoc = "The {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.",
         since = "version 3.1"
@@ -33,7 +33,7 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(Module.GLFW, nativeSubPath =
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "the GLFW window"),
+        GLFWwindow.p.IN("window", "the GLFW window"),
         returnDoc = "The {@code NSWindow} of the specified window, or nil if an error occurred.",
         since = "version 3.0"
     )

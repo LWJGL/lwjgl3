@@ -27,7 +27,7 @@ val EXT_gpu_program_parameters = "EXTGPUProgramParameters".nativeClassGL("EXT_gp
         GLenum.IN("target", ""),
         GLuint.IN("index", ""),
         AutoSize(4, "params")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("params", "")
+        GLfloat.const.p.IN("params", "")
     )
 
     void(
@@ -37,6 +37,6 @@ val EXT_gpu_program_parameters = "EXTGPUProgramParameters".nativeClassGL("EXT_gp
         GLenum.IN("target", ""),
         GLuint.IN("index", ""),
         AutoSize(4, "params")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("params", "")
+        GLfloat.const.p.IN("params", "")
     )
 }

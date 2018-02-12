@@ -51,7 +51,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         """,
 
         UINT.IN("gpuIndex", "an index value that specifies a GPU"),
-        Check(1)..HGPUNV_p.OUT("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
+        Check(1)..HGPUNV.p.OUT("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
     )
 
     BOOL(
@@ -74,7 +74,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         If successful, the function returns an affinity-DC handle. If it fails, #NULL will be returned.
         """,
 
-        NullTerminated..const..HGPUNV_p.IN("gpuList", "a #NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
+        NullTerminated..HGPUNV.const.p.IN("gpuList", "a #NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
     )
 
     BOOL(
@@ -89,7 +89,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 
         HDC.IN("affinityDC", "a handle of the affinity-DC to query"),
         UINT.IN("gpuIndex", "an index value of the GPU handle in the affinity mask of {@code affinityDC} to query"),
-        Check(1)..HGPUNV_p.OUT("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
+        Check(1)..HGPUNV.p.OUT("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
     )
 
     BOOL(

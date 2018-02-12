@@ -118,14 +118,14 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         "Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
 
         ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
-        Check(2)..const..ovrPosef_p.IN(
+        Check(2)..ovrPosef.const.p.IN(
             "HmdToEyePose",
             """
             can be ##OVREyeRenderDesc{@code .HmdToEyePose} returned from #GetRenderDesc(). For monoscopic rendering, use a position vector that is average of
             the two position vectors for each eye   .
             """
         ),
-        Check(2)..ovrPosef_p.OUT(
+        Check(2)..ovrPosef.p.OUT(
             "outEyePoses",
             """
             if {@code outEyePoses} are used for rendering, they should be passed to #SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
@@ -153,15 +153,15 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
             "SensorSampleTimestamp", that will override the value stored here.
             """
         ),
-        Check(2)..const..ovrPosef_p.IN(
+        Check(2)..ovrPosef.const.p.IN(
             "HmdToEyePose",
             """
             can be ##OVREyeRenderDesc{@code .HmdToEyePose} returned from #GetRenderDesc(). For monoscopic rendering, use a position vector that is the
             average of the two position vectors for each eye.
             """
         ),
-        Check(2)..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
-        Check(1)..nullable..double_p.OUT("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
+        Check(2)..ovrPosef.p.OUT("outEyePoses", "the predicted eye poses"),
+        Check(1)..nullable..double.p.OUT("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
     )
 
     void(
@@ -174,8 +174,8 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         right-handed to left-handed since the flip operation is the same for both cases.
         """,
 
-        const..ovrPosef_p.IN("inPose", "a pose that is right-handed"),
-        ovrPosef_p.OUT("outPose", "the pose that is requested to be left-handed (can be the same pointer to {@code inPose})")
+        ovrPosef.const.p.IN("inPose", "a pose that is right-handed"),
+        ovrPosef.p.OUT("outPose", "the pose that is requested to be left-handed (can be the same pointer to {@code inPose})")
     )
 
     ovrResult(
@@ -189,8 +189,8 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         Supported formats: PCM 8b, 16b, 32b and IEEE float (little-endian only).
         """,
 
-        ovrAudioChannelData_p.OUT("outAudioChannel", "output audio channel data"),
-        const..void_p.IN("inputData", "a binary buffer representing a valid Wav file data"),
+        ovrAudioChannelData.p.OUT("outAudioChannel", "output audio channel data"),
+        void.const.p.IN("inputData", "a binary buffer representing a valid Wav file data"),
         AutoSize("inputData")..int.IN("dataSizeInBytes", "size of the buffer in bytes"),
         int.IN("stereoChannelToUse", "audio channel index to extract (0 for mono)")
     )
@@ -199,8 +199,8 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         "_GenHapticsFromAudioData",
         "Generates playable Touch Haptics data from an audio channel.",
 
-        ovrHapticsClip_p.OUT("outHapticsClip", "generated Haptics clip"),
-        const..ovrAudioChannelData_p.IN("audioChannel", "input audio channel data"),
+        ovrHapticsClip.p.OUT("outHapticsClip", "generated Haptics clip"),
+        ovrAudioChannelData.const.p.IN("audioChannel", "input audio channel data"),
         ovrHapticsGenMode.IN("genMode", "mode used to convert and audio channel data to Haptics data", "#HapticsGenMode_PointSample")
     )
 
@@ -208,13 +208,13 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         "_ReleaseAudioChannelData",
         "Releases memory allocated for ovrAudioChannelData. Must be called to avoid memory leak.",
 
-        ovrAudioChannelData_p.IN("audioChannel", "pointer to an audio channel")
+        ovrAudioChannelData.p.IN("audioChannel", "pointer to an audio channel")
     )
 
     void(
         "_ReleaseHapticsClip",
         "Releases memory allocated for ovrHapticsClip. Must be called to avoid memory leak.",
 
-        ovrHapticsClip_p.IN("hapticsClip", "pointer to a haptics clip")
+        ovrHapticsClip.p.IN("hapticsClip", "pointer to a haptics clip")
     )
 }

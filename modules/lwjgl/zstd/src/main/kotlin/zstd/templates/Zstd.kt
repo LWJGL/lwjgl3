@@ -87,7 +87,7 @@ ENABLE_WARNINGS()""")
     StringConstant("Version string.", "VERSION_STRING".."""ZSTD_VERSION_MAJOR + "." + ZSTD_VERSION_MINOR + "." + ZSTD_VERSION_RELEASE""")
 
     unsigned("versionNumber", "Returns the version number.")
-    Nonnull..const..charASCII_p("versionString", "Returns the version string.")
+    Nonnull..charASCII.const.p("versionString", "Returns the version string.")
 
     LongConstant(
         "Content size.",
@@ -114,9 +114,9 @@ ENABLE_WARNINGS()""")
         Hint: compression runs faster if {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}
         """,
 
-        void_p.OUT("dst", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", ""),
         int.IN("compressionLevel", ""),
 
@@ -127,7 +127,7 @@ ENABLE_WARNINGS()""")
         "decompress",
         "",
 
-        void_p.OUT("dst", ""),
+        void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN(
             "dstCapacity",
             """
@@ -135,7 +135,7 @@ ENABLE_WARNINGS()""")
             decompress data.
             """
         ),
-        const..void_p.IN("src", ""),
+        void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("compressedSize", "must be the <b>exact</b> size of some number of compressed and/or skippable frames"),
 
         returnDoc =
@@ -168,7 +168,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        const..void_p.IN("src", "should point to the start of a ZSTD encoded frame"),
+        void.const.p.IN("src", "should point to the start of a ZSTD encoded frame"),
         AutoSize("src")..size_t.IN("srcSize", "must be at least as large as the frame header. Hint: any size &ge; #FRAMEHEADERSIZE_MAX is large enough."),
 
         returnDoc =
@@ -207,7 +207,7 @@ ENABLE_WARNINGS()""")
         size_t.IN("code", "")
     )
 
-    Nonnull..const..charASCII_p(
+    Nonnull..charASCII.const.p(
         "getErrorName",
         "Provides readable string from an error code.",
 
@@ -223,7 +223,7 @@ ENABLE_WARNINGS()""")
     *  Explicit context
     ***************************************/
 
-    ZSTD_CCtx_p(
+    ZSTD_CCtx.p(
         "createCCtx",
         """
         Creates a compression context.
@@ -237,14 +237,14 @@ ENABLE_WARNINGS()""")
         "freeCCtx",
         "Frees memory allocated by #createCCtx().",
 
-        ZSTD_CCtx_p.IN("cctx", "")
+        ZSTD_CCtx.p.IN("cctx", "")
     )
 
     size_t(
         "compressCCtx",
         "Same as #compress(), requires an allocated {@code ZSTD_CCtx} (see #createCCtx()).",
 
-        ZSTD_CCtx_p.IN("ctx", ""),
+        ZSTD_CCtx.p.IN("ctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
@@ -252,7 +252,7 @@ ENABLE_WARNINGS()""")
         int.IN("compressionLevel", "")
     )
 
-    ZSTD_DCtx_p(
+    ZSTD_DCtx.p(
         "createDCtx",
         """
         Creates a decompression context.
@@ -266,14 +266,14 @@ ENABLE_WARNINGS()""")
         "freeDCtx",
         "Frees memory allocated by #createDCtx().",
 
-        ZSTD_DCtx_p.IN("dctx", "")
+        ZSTD_DCtx.p.IN("dctx", "")
     )
 
     size_t(
         "decompressDCtx",
         "Same as #decompress(), requires an allocated {@code ZSTD_DCtx} (see #createDCtx()).",
 
-        ZSTD_DCtx_p.IN("ctx", ""),
+        ZSTD_DCtx.p.IN("ctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
@@ -294,12 +294,12 @@ ENABLE_WARNINGS()""")
         When {@code dict == NULL || dictSize < 8} no dictionary is used.
         """,
 
-        ZSTD_CCtx_p.IN("ctx", ""),
+        ZSTD_CCtx.p.IN("ctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        nullable..const..void_p.IN("dict", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         int.IN("compressionLevel", "")
     )
@@ -314,12 +314,12 @@ ENABLE_WARNINGS()""")
         When {@code dict == NULL || dictSize < 8} no dictionary is used.
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        nullable..const..void_p.IN("dict", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", "")
     )
 
@@ -327,7 +327,7 @@ ENABLE_WARNINGS()""")
      *  Bulk processing dictionary API
      *********************************/
 
-    ZSTD_CDict_p(
+    ZSTD_CDict.p(
         "createCDict",
         """
         When compressing multiple messages / blocks with the same dictionary, it's recommended to load it just once.
@@ -338,7 +338,7 @@ ENABLE_WARNINGS()""")
         {@code dictBuffer} can be released after {@code ZSTD_CDict} creation, since its content is copied within CDict.
         """,
 
-        const..void_p.IN("dictBuffer", ""),
+        void.const.p.IN("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t.IN("dictSize", ""),
         int.IN("compressionLevel", "")
     )
@@ -347,7 +347,7 @@ ENABLE_WARNINGS()""")
         "freeCDict",
         "Frees memory allocated by #createCDict().",
 
-        ZSTD_CDict_p.IN("CDict", "")
+        ZSTD_CDict.p.IN("CDict", "")
     )
 
     size_t(
@@ -359,15 +359,15 @@ ENABLE_WARNINGS()""")
         dictionary creation. Frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})
         """,
 
-        ZSTD_CCtx_p.IN("cctx", ""),
+        ZSTD_CCtx.p.IN("cctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        const..ZSTD_CDict_p.IN("cdict", "")
+        ZSTD_CDict.const.p.IN("cdict", "")
     )
 
-    ZSTD_DDict_p(
+    ZSTD_DDict.p(
         "createDDict",
         """
         Creates a digested dictionary, ready to start decompression operation without startup delay.
@@ -375,7 +375,7 @@ ENABLE_WARNINGS()""")
         {@code dictBuffer} can be released after {@code DDict} creation, as its content is copied inside {@code DDict}.
         """,
 
-        const..void_p.IN("dictBuffer", ""),
+        void.const.p.IN("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t.IN("dictSize", "")
     )
 
@@ -383,7 +383,7 @@ ENABLE_WARNINGS()""")
         "freeDDict",
         "Frees memory allocated with #createDDict().",
 
-        ZSTD_DDict_p.IN("ddict", "")
+        ZSTD_DDict.p.IN("ddict", "")
     )
 
     size_t(
@@ -394,19 +394,19 @@ ENABLE_WARNINGS()""")
         Faster startup than #decompress_usingDict(), recommended when same dictionary is used multiple times.
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        const..ZSTD_DDict_p.IN("ddict", "")
+        ZSTD_DDict.const.p.IN("ddict", "")
     )
 
     /****************************
     *  Streaming
     ****************************/
 
-    ZSTD_CStream_p(
+    ZSTD_CStream.p(
         "createCStream",
         ""
     )
@@ -415,14 +415,14 @@ ENABLE_WARNINGS()""")
         "freeCStream",
         "Frees memory allocated by #createCStream().",
 
-        ZSTD_CStream_p.IN("zcs", "")
+        ZSTD_CStream.p.IN("zcs", "")
     )
 
     size_t(
         "initCStream",
         "",
 
-        ZSTD_CStream_p.IN("zcs", ""),
+        ZSTD_CStream.p.IN("zcs", ""),
         int.IN("compressionLevel", "")
     )
 
@@ -430,9 +430,9 @@ ENABLE_WARNINGS()""")
         "compressStream",
         "",
 
-        ZSTD_CStream_p.IN("zcs", ""),
-        ZSTD_outBuffer_p.IN("output", ""),
-        ZSTD_inBuffer_p.IN("input", ""),
+        ZSTD_CStream.p.IN("zcs", ""),
+        ZSTD_outBuffer.p.IN("output", ""),
+        ZSTD_inBuffer.p.IN("input", ""),
 
         returnDoc =
         """
@@ -450,8 +450,8 @@ ENABLE_WARNINGS()""")
         "flushStream",
         "",
 
-        ZSTD_CStream_p.IN("zcs", ""),
-        ZSTD_outBuffer_p.IN("output", ""),
+        ZSTD_CStream.p.IN("zcs", ""),
+        ZSTD_outBuffer.p.IN("output", ""),
 
         returnDoc = "{@code nb} of bytes still present within internal buffer (0 if it's empty) or an error code, which can be tested using #isError()"
     )
@@ -460,8 +460,8 @@ ENABLE_WARNINGS()""")
         "endStream",
         "",
 
-        ZSTD_CStream_p.IN("zcs", ""),
-        ZSTD_outBuffer_p.IN("output", ""),
+        ZSTD_CStream.p.IN("zcs", ""),
+        ZSTD_outBuffer.p.IN("output", ""),
 
         returnDoc =
         """
@@ -480,7 +480,7 @@ ENABLE_WARNINGS()""")
         "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances."
     )
 
-    ZSTD_DStream_p(
+    ZSTD_DStream.p(
         "createDStream",
         ""
     )
@@ -489,14 +489,14 @@ ENABLE_WARNINGS()""")
         "freeDStream",
         "Frees memory allocated by #createDStream().",
 
-        ZSTD_DStream_p.IN("zds", "")
+        ZSTD_DStream.p.IN("zds", "")
     )
 
     size_t(
         "initDStream",
         "",
 
-        ZSTD_DStream_p.IN("zds", ""),
+        ZSTD_DStream.p.IN("zds", ""),
 
         returnDoc = "recommended first input size"
     )
@@ -505,9 +505,9 @@ ENABLE_WARNINGS()""")
         "decompressStream",
         "",
 
-        ZSTD_DStream_p.IN("zds", ""),
-        ZSTD_outBuffer_p.IN("output", ""),
-        ZSTD_inBuffer_p.IN("input", ""),
+        ZSTD_DStream.p.IN("zds", ""),
+        ZSTD_outBuffer.p.IN("output", ""),
+        ZSTD_inBuffer.p.IN("input", ""),
 
         returnDoc =
         """

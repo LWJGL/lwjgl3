@@ -85,7 +85,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
         sortedSignaturesArray.forEach {
             print("${t}public static native ${it.returnType.nativeMethodType} ${it.signature}(long $FUNCTION_ADDRESS")
             if (it.arguments.isNotEmpty())
-                print(it.arguments.asSequence().mapIndexed { i, param -> if (param is ArrayType) "@Nullable ${(param.mapping as PointerMapping).primitive}[] param$i" else "${param.nativeMethodType} param$i" }.joinToString(", ", prefix = ", "))
+                print(it.arguments.asSequence().mapIndexed { i, param -> if (param is ArrayType<*>) "@Nullable ${param.mapping.primitive}[] param$i" else "${param.nativeMethodType} param$i" }.joinToString(", ", prefix = ", "))
             println(");")
         }
         println("\n}")
@@ -93,8 +93,8 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
 
     private val NativeType.nativeType get() = if (this.isPointer) "intptr_t" else this.jniFunctionType
 
-    private val NativeType.jniFunctionTypeArray get() = if (this is ArrayType) "j${(this.mapping as PointerMapping).primitive}Array" else this.jniFunctionType
-    private fun NativeType.jniFunctionTypeArrayCritical(index: Int) = if (this is ArrayType) "jint length$index, j${(this.mapping as PointerMapping).primitive}*" else this.jniFunctionType
+    private val NativeType.jniFunctionTypeArray get() = if (this is ArrayType<*>) "j${this.mapping.primitive}Array" else this.jniFunctionType
+    private fun NativeType.jniFunctionTypeArrayCritical(index: Int) = if (this is ArrayType<*>) "jint length$index, j${this.mapping.primitive}*" else this.jniFunctionType
 
     override fun PrintWriter.generateNative() {
         nativeDirective("""
@@ -145,26 +145,26 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
                 }) {
     UNUSED_PARAMS($JNIENV, clazz)
     ${it.arguments.asSequence()
-                    .mapIndexedNotNull { i, param -> if (param !is ArrayType) null else "void *paramArray$i = param$i == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param$i, 0);" }
+                    .mapIndexedNotNull { i, param -> if (param !is ArrayType<*>) null else "void *paramArray$i = param$i == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param$i, 0);" }
                     .joinToString("\n$t")}
-    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType) "(intptr_t)paramArray$i" else "param$i" }.joinToString(", ")});
+    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)paramArray$i" else "param$i" }.joinToString(", ")});
     ${it.arguments.asSequence()
                     .withIndex()
                     .sortedByDescending { it.index }
-                    .mapNotNull { if (it.value !is ArrayType) null else "if (param${it.index} != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${it.index}, paramArray${it.index}, 0); }" }
+                    .mapNotNull { if (it.value !is ArrayType<*>) null else "if (param${it.index} != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${it.index}, paramArray${it.index}, 0); }" }
                     .joinToString("\n$t")}${if (it.returnType.mapping === TypeMapping.VOID) "" else """
     return __result;"""}
 }""")
             val workaroundJDK8167409 = 6 <= it.arguments.count() && it.arguments.any {
-                (it is PointerType && it !is ArrayType) || it.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+                (it is PointerType<*> && it !is ArrayType<*>) || it.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
             }
             if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
             println(
                 """JNIEXPORT ${it.returnType.jniFunctionType} JNICALL JavaCritical_org_lwjgl_system_JNI_${it.signatureArray}(jlong __functionAddress${
                 if (it.arguments.isEmpty()) "" else it.arguments.asSequence().mapIndexed { i, param -> "${param.jniFunctionTypeArrayCritical(i)} param$i" }.joinToString(", ", prefix = ", ")
                 }) {
-    ${it.arguments.asSequence().mapIndexedNotNull { i, param -> if (param !is ArrayType) null else "UNUSED_PARAM(length$i)" }.joinToString("\n$t")}
-    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "return "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType) "(intptr_t)param$i" else "param$i" }.joinToString(", ")});
+    ${it.arguments.asSequence().mapIndexedNotNull { i, param -> if (param !is ArrayType<*>) null else "UNUSED_PARAM(length$i)" }.joinToString("\n$t")}
+    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "return "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)param$i" else "param$i" }.joinToString(", ")});
 }""")
             if (workaroundJDK8167409) println("#endif")
         }
@@ -172,8 +172,6 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
         println("\nEXTERN_C_EXIT")
     }
 }
-
-private val NativeType.jniSignature get() = this.mapping.jniSignature
 
 private open class Signature constructor(
     val callingConvention: CallingConvention,
@@ -183,9 +181,9 @@ private open class Signature constructor(
 
     val key = "${callingConvention.method}${arguments.asSequence().map { it.jniSignature }.joinToString("")}${returnType.jniSignature}"
 
-    private val paramSignatureStrict = arguments.asSequence().map { it.mapping.jniSignatureStrict }.joinToString("")
+    private val paramSignatureStrict = arguments.asSequence().map { it.jniSignatureStrict }.joinToString("")
 
-    val signature = "${callingConvention.method}${arguments.asSequence().map { it.mapping.jniSignatureJava }.joinToString("")}${returnType.jniSignature}"
+    val signature = "${callingConvention.method}${arguments.asSequence().map { it.jniSignatureJava }.joinToString("")}${returnType.jniSignature}"
     val signatureNative = "${signature}__J$paramSignatureStrict"
 
     constructor(function: Func) : this(
@@ -221,7 +219,7 @@ private class SignatureArray constructor(
     arguments: List<NativeType>
 ) : Signature(callingConvention, returnType, arguments) {
 
-    private val paramSignatureStrict = arguments.asSequence().map { if (it is ArrayType) it.mapping.jniSignatureArray else it.mapping.jniSignatureStrict }.joinToString("")
+    private val paramSignatureStrict = arguments.asSequence().map { if (it is ArrayType<*>) it.jniSignatureArray else it.jniSignatureStrict }.joinToString("")
 
     val signatureArray = "${signature}__J$paramSignatureStrict"
 

@@ -11,7 +11,7 @@ import core.windows.*
 val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath = "windows", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     documentation = "Native bindings to the GLFW library's Win32 native access functions."
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetWin32Adapter",
         """
         Returns the adapter device name of the specified monitor.
@@ -19,12 +19,12 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
         returnDoc = "The UTF-8 encoded adapter device name (for example `\\\\.\\DISPLAY1`) of the specified monitor, or #NULL if an error occurred.",
         since = "version 3.1"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetWin32Monitor",
         """
         Returns the display device name of the specified monitor.
@@ -32,7 +32,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
         returnDoc = "The UTF-8 encoded display device name (for example `\\\\.\\DISPLAY1\\Monitor0`) of the specified monitor, or #NULL if an error occurred.",
         since = "version 3.1"
     )
@@ -45,7 +45,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "the GLFW window"),
+        GLFWwindow.p.IN("window", "the GLFW window"),
         returnDoc = "The {@code HWND} of the specified window, or #NULL if an error occurred.",
         since = "version 3.0"
     )

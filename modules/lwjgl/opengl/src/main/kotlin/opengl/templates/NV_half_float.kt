@@ -44,7 +44,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Vertex2hvNV",
         "",
 
-        Check(2)..const..GLhalfNV_p.IN("v", "")
+        Check(2)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -60,7 +60,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Vertex3hvNV",
         "",
 
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -77,7 +77,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Vertex4hvNV",
         "",
 
-        Check(4)..const..GLhalfNV_p.IN("v", "")
+        Check(4)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -93,7 +93,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Normal3hvNV",
         "",
 
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -109,7 +109,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Color3hvNV",
         "",
 
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -126,7 +126,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Color4hvNV",
         "",
 
-        Check(4)..const..GLhalfNV_p.IN("v", "")
+        Check(4)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -140,7 +140,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "TexCoord1hvNV",
         "",
 
-        Check(1)..const..GLhalfNV_p.IN("v", "")
+        Check(1)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -155,7 +155,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "TexCoord2hvNV",
         "",
 
-        Check(2)..const..GLhalfNV_p.IN("v", "")
+        Check(2)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -171,7 +171,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "TexCoord3hvNV",
         "",
 
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -188,7 +188,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "TexCoord4hvNV",
         "",
 
-        Check(4)..const..GLhalfNV_p.IN("v", "")
+        Check(4)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -204,7 +204,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLenum.IN("target", ""),
-        Check(1)..const..GLhalfNV_p.IN("v", "")
+        Check(1)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -221,7 +221,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLenum.IN("target", ""),
-        Check(2)..const..GLhalfNV_p.IN("v", "")
+        Check(2)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -239,7 +239,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLenum.IN("target", ""),
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     void(
@@ -258,7 +258,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLenum.IN("target", ""),
-        Check(4)..const..GLhalfNV_p.IN("v", "")
+        Check(4)..GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_EXT_fog_coord")..void(
@@ -272,7 +272,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "FogCoordhvNV",
         "",
 
-        Check(1)..const..GLhalfNV_p.IN("fog", "")
+        Check(1)..GLhalfNV.const.p.IN("fog", "")
     )
 
     DependsOn("GL_EXT_secondary_color")..void(
@@ -288,7 +288,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "SecondaryColor3hvNV",
         "",
 
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_EXT_vertex_weighting")..void(
@@ -302,7 +302,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "VertexWeighthvNV",
         "",
 
-        Check(1)..const..GLhalfNV_p.IN("weight", "")
+        Check(1)..GLhalfNV.const.p.IN("weight", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -318,7 +318,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLuint.IN("index", ""),
-        Check(1)..const..GLhalfNV_p.IN("v", "")
+        Check(1)..GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -335,7 +335,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLuint.IN("index", ""),
-        Check(2)..const..GLhalfNV_p.IN("v", "")
+        Check(2)..GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -353,7 +353,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLuint.IN("index", ""),
-        Check(3)..const..GLhalfNV_p.IN("v", "")
+        Check(3)..GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -372,7 +372,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "",
 
         GLuint.IN("index", ""),
-        Check(4)..const..GLhalfNV_p.IN("v", "")
+        Check(4)..GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -381,7 +381,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
 
         GLuint.IN("index", ""),
         AutoSize("v")..GLsizei.IN("n", ""),
-        const..GLhalfNV_p.IN("v", "")
+        GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -390,7 +390,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
 
         GLuint.IN("index", ""),
         AutoSize(2, "v")..GLsizei.IN("n", ""),
-        const..GLhalfNV_p.IN("v", "")
+        GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -399,7 +399,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
 
         GLuint.IN("index", ""),
         AutoSize(3, "v")..GLsizei.IN("n", ""),
-        const..GLhalfNV_p.IN("v", "")
+        GLhalfNV.const.p.IN("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
@@ -408,6 +408,6 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
 
         GLuint.IN("index", ""),
         AutoSize(4, "v")..GLsizei.IN("n", ""),
-        const..GLhalfNV_p.IN("v", "")
+        GLhalfNV.const.p.IN("v", "")
     )
 }

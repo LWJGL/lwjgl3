@@ -104,7 +104,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
             than zero.
             """
         ),
-        nullable..cl_device_id_p.OUT(
+        nullable..cl_device_id.p.OUT(
             "devices",
             """
             returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
@@ -112,7 +112,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
             {@code num_entries} and the number of OpenCL devices corresponding to {@code media_adapter}.
             """
         ),
-        Check(1)..nullable..cl_uint_p.OUT(
+        Check(1)..nullable..cl_uint.p.OUT(
             "num_devices",
             "returns the number of OpenCL devices available that correspond to {@code media_adapter}. If {@code num_devices} is #NULL, this argument is ignored."
         )
@@ -124,7 +124,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
         cl_context.IN("context", "a valid OpenCL context created from a VA API display"),
         cl_mem_flags.IN("flags", "a bit-field that is used to specify usage information", "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"),
-        Check(1)..VASurfaceID_p.IN("surface", "a pointer to the VA API surface to share"),
+        Check(1)..VASurfaceID.p.IN("surface", "a pointer to the VA API surface to share"),
         cl_uint.IN("plane", "the plane of {@code surface} to share, for planar formats. For non-planar formats, {@code plane} must be 0."),
         ERROR_RET
     )
@@ -149,7 +149,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
         cl_command_queue.IN("command_queue", "a valid command-queue"),
         AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}."),
-        const..cl_mem_p.IN("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
+        cl_mem.const.p.IN("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
         NEWL,
         EWL,
         EVENT
@@ -175,7 +175,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
         cl_command_queue.IN("command_queue", "a valid OpenCL context created from a VA API display"),
         AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-        const..cl_mem_p.IN("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
+        cl_mem.const.p.IN("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
         NEWL,
         EWL,
         EVENT

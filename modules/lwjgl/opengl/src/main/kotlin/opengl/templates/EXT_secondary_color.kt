@@ -67,14 +67,14 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
     void("SecondaryColor3usEXT", "Unsigned short version of #SecondaryColor3bEXT()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
     void("SecondaryColor3uiEXT", "Unsigned int version of #SecondaryColor3bEXT()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-    void("SecondaryColor3bvEXT", "Pointer version of #SecondaryColor3bEXT().", Check(3)..const..GLbyte_p.IN("v", colorBuffer))
-    void("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", Check(3)..const..GLshort_p.IN("v", colorBuffer))
-    void("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", Check(3)..const..GLint_p.IN("v", colorBuffer))
-    void("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", Check(3)..const..GLfloat_p.IN("v", colorBuffer))
-    void("SecondaryColor3dvEXT", "Pointer version of #SecondaryColor3dEXT().", Check(3)..const..GLdouble_p.IN("v", colorBuffer))
-    void("SecondaryColor3ubvEXT", "Pointer version of #SecondaryColor3ubEXT().", Check(3)..const..GLubyte_p.IN("v", colorBuffer))
-    void("SecondaryColor3usvEXT", "Pointer version of #SecondaryColor3usEXT().", Check(3)..const..GLushort_p.IN("v", colorBuffer))
-    void("SecondaryColor3uivEXT", "Pointer version of #SecondaryColor3uiEXT().", Check(3)..const..GLuint_p.IN("v", colorBuffer))
+    void("SecondaryColor3bvEXT", "Pointer version of #SecondaryColor3bEXT().", Check(3)..GLbyte.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", Check(3)..GLshort.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", Check(3)..GLint.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", Check(3)..GLfloat.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3dvEXT", "Pointer version of #SecondaryColor3dEXT().", Check(3)..GLdouble.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3ubvEXT", "Pointer version of #SecondaryColor3ubEXT().", Check(3)..GLubyte.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3usvEXT", "Pointer version of #SecondaryColor3usEXT().", Check(3)..GLushort.const.p.IN("v", colorBuffer))
+    void("SecondaryColor3uivEXT", "Pointer version of #SecondaryColor3uiEXT().", Check(3)..GLuint.const.p.IN("v", colorBuffer))
 
     void(
         "SecondaryColorPointerEXT",
@@ -89,6 +89,6 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
         GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the secondary color array data")
+        )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the secondary color array data")
     )
 }

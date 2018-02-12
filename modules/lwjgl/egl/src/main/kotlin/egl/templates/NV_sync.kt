@@ -53,7 +53,7 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 
         EGLDisplay.IN("dpy", ""),
         EGLenum.IN("condition", ""),
-        noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -93,6 +93,6 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 
         EGLSyncNV.IN("sync", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 }

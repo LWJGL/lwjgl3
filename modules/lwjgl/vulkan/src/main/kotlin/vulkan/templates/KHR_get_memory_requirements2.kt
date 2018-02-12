@@ -99,7 +99,7 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         """,
 
         VkDevice.IN("device", "the logical device that owns the image."),
-        const..VkImageMemoryRequirementsInfo2KHR.p.IN("pInfo", "a pointer to an instance of the ##VkImageMemoryRequirementsInfo2KHR structure containing parameters required for the memory requirements query."),
+        VkImageMemoryRequirementsInfo2KHR.const.p.IN("pInfo", "a pointer to an instance of the ##VkImageMemoryRequirementsInfo2KHR structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2KHR.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements2KHR structure in which the memory requirements of the image object are returned.")
     )
 
@@ -129,7 +129,7 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         """,
 
         VkDevice.IN("device", "the logical device that owns the buffer."),
-        const..VkBufferMemoryRequirementsInfo2KHR.p.IN("pInfo", "a pointer to an instance of the ##VkBufferMemoryRequirementsInfo2KHR structure containing parameters required for the memory requirements query."),
+        VkBufferMemoryRequirementsInfo2KHR.const.p.IN("pInfo", "a pointer to an instance of the ##VkBufferMemoryRequirementsInfo2KHR structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2KHR.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements2KHR structure in which the memory requirements of the buffer object are returned.")
     )
 
@@ -138,8 +138,8 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         "",
 
         VkDevice.IN("device", ""),
-        const..VkImageSparseMemoryRequirementsInfo2KHR.p.IN("pInfo", ""),
-        AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t_p.INOUT("pSparseMemoryRequirementCount", ""),
+        VkImageSparseMemoryRequirementsInfo2KHR.const.p.IN("pInfo", ""),
+        AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p.INOUT("pSparseMemoryRequirementCount", ""),
         nullable..VkSparseImageMemoryRequirements2KHR.p.OUT("pSparseMemoryRequirements", "")
     )
 }

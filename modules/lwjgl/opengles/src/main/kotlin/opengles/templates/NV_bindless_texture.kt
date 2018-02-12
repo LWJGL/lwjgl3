@@ -107,7 +107,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGLES("NV_bindless_textu
 
         GLint.IN("location", ""),
         AutoSize("values")..GLsizei.IN("count", ""),
-        const..GLuint64_p.IN("values", "")
+        GLuint64.const.p.IN("values", "")
     )
 
     void(
@@ -126,7 +126,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGLES("NV_bindless_textu
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("values")..GLsizei.IN("count", ""),
-        const..GLuint64_p.IN("values", "")
+        GLuint64.const.p.IN("values", "")
     )
 
     GLboolean(

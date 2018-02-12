@@ -49,7 +49,7 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
 
         EGLDisplay.IN("dpy", ""),
         EGLenum.IN("type", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -86,6 +86,6 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
         EGLDisplay.IN("dpy", ""),
         EGLSyncKHR.IN("sync", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 }

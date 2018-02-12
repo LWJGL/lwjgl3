@@ -72,7 +72,7 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
         "",
 
         EGLDEBUGPROCKHR.IN("callback", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -80,7 +80,7 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
         "",
 
         EGLint.IN("attribute", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
     EGLint(

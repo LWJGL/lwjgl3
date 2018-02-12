@@ -72,7 +72,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
         "",
 
         EGLDisplay.IN("dpy", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -100,7 +100,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
         EGLDisplay.IN("dpy", ""),
         EGLStreamKHR.IN("stream", ""),
         EGLenum.IN("attribute", ""),
-        Check(1)..EGLint_p.OUT("value", "")
+        Check(1)..EGLint.p.OUT("value", "")
     )
 
     EGLBoolean(
@@ -110,7 +110,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
         EGLDisplay.IN("dpy", ""),
         EGLStreamKHR.IN("stream", ""),
         EGLenum.IN("attribute", ""),
-        Check(1)..EGLuint64KHR_p.OUT("value", "")
+        Check(1)..EGLuint64KHR.p.OUT("value", "")
     )
 }
 
@@ -122,7 +122,7 @@ val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", po
         "",
 
         EGLDisplay.IN("dpy", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -142,7 +142,7 @@ val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", po
         EGLDisplay.IN("dpy", ""),
         EGLStreamKHR.IN("stream", ""),
         EGLenum.IN("attribute", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
     EGLBoolean(
@@ -151,7 +151,7 @@ val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", po
 
         EGLDisplay.IN("dpy", ""),
         EGLStreamKHR.IN("stream", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -160,6 +160,6 @@ val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", po
 
         EGLDisplay.IN("dpy", ""),
         EGLStreamKHR.IN("stream", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 }

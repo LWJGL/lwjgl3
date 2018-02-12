@@ -157,7 +157,7 @@ val KHX_device_group_creation = "KHXDeviceGroupCreation".nativeClassVK("KHX_devi
         """,
 
         VkInstance.IN("instance", "a handle to a Vulkan instance previously created with #CreateInstance()."),
-        AutoSize("pPhysicalDeviceGroupProperties")..Check(1)..uint32_t_p.INOUT("pPhysicalDeviceGroupCount", "a pointer to an integer related to the number of device groups available or queried, as described below."),
+        AutoSize("pPhysicalDeviceGroupProperties")..Check(1)..uint32_t.p.INOUT("pPhysicalDeviceGroupCount", "a pointer to an integer related to the number of device groups available or queried, as described below."),
         nullable..VkPhysicalDeviceGroupPropertiesKHX.p.OUT("pPhysicalDeviceGroupProperties", "either {@code NULL} or a pointer to an array of ##VkPhysicalDeviceGroupPropertiesKHX structures.")
     )
 }

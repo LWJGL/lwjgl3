@@ -95,7 +95,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
         GLenum.IN("type", ""),
         AutoSize("strings")..GLsizei.IN("count", ""),
-        PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_p.p.IN("strings", "")
+        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.p.IN("strings", "")
     )
 
     void(
@@ -103,7 +103,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         "",
 
         AutoSize("pipelines")..GLsizei.IN("n", ""),
-        SingleValue("pipeline")..const..GLuint_p.IN("pipelines", "")
+        SingleValue("pipeline")..GLuint.const.p.IN("pipelines", "")
     )
 
     void(
@@ -111,7 +111,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         "",
 
         AutoSize("pipelines")..GLsizei.IN("n", ""),
-        ReturnParam..GLuint_p.OUT("pipelines", "")
+        ReturnParam..GLuint.p.OUT("pipelines", "")
     )
 
     void(
@@ -120,12 +120,12 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
         GLuint.IN("pipeline", ""),
         AutoSize("infoLog")..GLsizei.IN("bufSize", ""),
-        Check(1)..nullable..GLsizei_p.OUT("length", ""),
+        Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Return(
             "length",
             "glGetProgramPipelineiEXT(pipeline, GLES20.GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8_p.OUT("infoLog", "")
+        )..GLcharUTF8.p.OUT("infoLog", "")
     )
 
     void(
@@ -134,7 +134,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
         GLuint.IN("pipeline", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
     GLboolean(
@@ -169,7 +169,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -188,7 +188,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("value", "")
+        GLint.const.p.IN("value", "")
     )
 
     void(
@@ -208,7 +208,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -228,7 +228,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("value", "")
+        GLint.const.p.IN("value", "")
     )
 
     void(
@@ -249,7 +249,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -270,7 +270,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("value", "")
+        GLint.const.p.IN("value", "")
     )
 
     void(
@@ -292,7 +292,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -314,7 +314,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLint_p.IN("value", "")
+        GLint.const.p.IN("value", "")
     )
 
     void(
@@ -325,7 +325,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(2 x 2, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -336,7 +336,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(3 x 3, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -347,7 +347,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(4 x 4, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -415,7 +415,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize("value")..GLsizei.IN("count", ""),
-        const..GLuint_p.IN("value", "")
+        GLuint.const.p.IN("value", "")
     )
 
     void(
@@ -425,7 +425,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(2, "value")..GLsizei.IN("count", ""),
-        const..GLuint_p.IN("value", "")
+        GLuint.const.p.IN("value", "")
     )
 
     void(
@@ -435,7 +435,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(3, "value")..GLsizei.IN("count", ""),
-        const..GLuint_p.IN("value", "")
+        GLuint.const.p.IN("value", "")
     )
 
     void(
@@ -445,7 +445,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLuint.IN("program", ""),
         GLint.IN("location", ""),
         AutoSize(4, "value")..GLsizei.IN("count", ""),
-        const..GLuint_p.IN("value", "")
+        GLuint.const.p.IN("value", "")
     )
 
     void(
@@ -456,7 +456,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(2 x 3, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -467,7 +467,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(3 x 2, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -478,7 +478,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(2 x 4, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -489,7 +489,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(4 x 2, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -500,7 +500,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(3 x 4, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -511,6 +511,6 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         GLint.IN("location", ""),
         AutoSize(4 x 3, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 }

@@ -35,7 +35,7 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         GLint.IN("location", ""),
         AutoSize(2 x 3, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -45,7 +45,7 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         GLint.IN("location", ""),
         AutoSize(3 x 2, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -55,7 +55,7 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         GLint.IN("location", ""),
         AutoSize(2 x 4, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -65,7 +65,7 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         GLint.IN("location", ""),
         AutoSize(4 x 2, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -75,7 +75,7 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         GLint.IN("location", ""),
         AutoSize(3 x 4, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 
     void(
@@ -85,6 +85,6 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         GLint.IN("location", ""),
         AutoSize(4 x 3, "value")..GLsizei.IN("count", ""),
         GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
+        GLfloat.const.p.IN("value", "")
     )
 }

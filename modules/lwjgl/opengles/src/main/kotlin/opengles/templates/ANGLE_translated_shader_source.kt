@@ -33,7 +33,7 @@ val ANGLE_translated_shader_source = "ANGLETranslatedShaderSource".nativeClassGL
 
         GLuint.IN("shader", ""),
         AutoSize("source")..GLsizei.IN("bufsize", ""),
-        nullable..Check(1)..GLsizei_p.OUT("length", ""),
-        Return("length", "GLES20.glGetShaderi(shader, GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE)", heapAllocate = true)..GLcharUTF8_p.OUT("source", "")
+        nullable..Check(1)..GLsizei.p.OUT("length", ""),
+        Return("length", "GLES20.glGetShaderi(shader, GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE)", heapAllocate = true)..GLcharUTF8.p.OUT("source", "")
     )
 }

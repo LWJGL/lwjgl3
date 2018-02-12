@@ -25,8 +25,8 @@ fun config() {
     Generator.registerLibraryInit(Module.LZ4, "LibLZ4", "lz4")
 }
 
-val LZ4_stream_t_p = "LZ4_stream_t".p
-val LZ4_streamDecode_t_p = "LZ4_streamDecode_t".p
+val LZ4_stream_t = "LZ4_stream_t".opaque
+val LZ4_streamDecode_t = "LZ4_streamDecode_t".opaque
 
 // lz4frame.h
 
@@ -42,8 +42,8 @@ val LZ4F_blockChecksum_t = "LZ4F_blockChecksum_t".enumType
 
 val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
 
-val LZ4F_cctx_p = "LZ4F_cctx".p
-val LZ4F_dctx_p = "LZ4F_dctx".p
+val LZ4F_cctx = "LZ4F_cctx".opaque
+val LZ4F_dctx = "LZ4F_dctx".opaque
 
 /*! LZ4F_frameInfo_t :
  *  makes it possible to set or read frame parameters.
@@ -68,7 +68,7 @@ val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_fr
  *  makes it possible to supply detailed compression parameters to the stream interface.
  *  It's not required to set all fields, as long as the structure was initially memset() to zero.
  *  All reserved fields must be set to zero. */
-val LZ4F_preferences_t_p = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
+val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
     LZ4F_frameInfo_t.member("frameInfo", "")
     int.member(
         "compressionLevel",
@@ -76,17 +76,17 @@ val LZ4F_preferences_t_p = struct(Module.LZ4, "LZ4FPreferences", nativeName = "L
     )
     unsigned.member("autoFlush", "{@code 1 == always flush}, to reduce usage of internal buffers")
     unsigned.array("reserved", "must be zero for forward compatibility", size = 4)
-}.p
+}
 
-val LZ4F_compressOptions_t_p = struct(Module.LZ4, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
+val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
     unsigned.member(
         "stableSrc",
         "{@code 1 == src} content will remain present on future calls to {@code LZ4F_compress()}; skip copying {@code src} content within {@code tmp} buffer"
     )
     unsigned.array("reserved", "", size = 3)
-}.p
+}
 
-val LZ4F_decompressOptions_t_p = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
+val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
     unsigned.member(
         "stableDst",
         """
@@ -95,14 +95,14 @@ val LZ4F_decompressOptions_t_p = struct(Module.LZ4, "LZ4FDecompressOptions", nat
         """
     )
     unsigned.array("reserved", "must be set to zero for forward compatibility", size = 3)
-}.p
+}
 
 // lz4frame_static.h
 
 val LZ4F_errorCodes = "LZ4F_errorCodes".enumType
 
-val LZ4F_CDict_p = "LZ4F_CDict".p
+val LZ4F_CDict = "LZ4F_CDict".opaque
 
 // lz4hc.h
 
-val LZ4_streamHC_t_p = "LZ4_streamHC_t".p
+val LZ4_streamHC_t = "LZ4_streamHC_t".opaque

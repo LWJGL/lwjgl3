@@ -27,7 +27,6 @@ fun config() {
 // void
 
 val ALvoid = "ALvoid".void
-val ALvoid_p = PointerType("ALvoid", PointerMapping.DATA)
 
 // numeric
 
@@ -37,14 +36,7 @@ val ALuint = IntegerType("ALuint", PrimitiveMapping.INT, unsigned = true)
 val ALfloat = PrimitiveType("ALfloat", PrimitiveMapping.FLOAT)
 val ALdouble = PrimitiveType("ALdouble", PrimitiveMapping.DOUBLE)
 
-val ALboolean_p = ALboolean.p
-val ALint_p = ALint.p
-val ALuint_p = ALuint.p
-val ALfloat_p = ALfloat.p
-val ALdouble_p = ALdouble.p
-
 val ALint64SOFT = IntegerType("ALint64SOFT", PrimitiveMapping.LONG)
-val ALint64SOFT_p = ALint64SOFT.p
 
 // custom numeric
 
@@ -53,7 +45,5 @@ val ALenum = IntegerType("ALenum", PrimitiveMapping.INT)
 
 // strings
 
-val ALcharASCII_p = CharSequenceType(name = "ALchar", charMapping = CharMapping.ASCII)
-val ALcharUTF8_p = CharSequenceType(name = "ALchar", charMapping = CharMapping.UTF8)
-
-val ALopaque_p = "void".p // see alGetProcAddress
+val ALcharASCII = CharType("ALchar", CharMapping.ASCII)
+val ALcharUTF8 = CharType("ALchar", CharMapping.UTF8)

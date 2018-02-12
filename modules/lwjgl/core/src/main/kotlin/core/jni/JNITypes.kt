@@ -35,11 +35,11 @@ val jdoubleArray = JObjectType("jdoubleArray", DoubleArray::class)
 val jsize = typedef(jint, "jsize")
 
 val jclass = JObjectType("jclass", Class::class)
-val jmethodID = "jmethodID".opaque_p
-val jfieldID = "jfieldID".opaque_p
+val jmethodID = "jmethodID".handle
+val jfieldID = "jfieldID".handle
 
 val jobject = Any::class.jobject
-val jobject_p = "jobject".opaque_p
+val jobject_p = "jobject".handle
 
 val jobjectRefType = "jobjectRefType".enumType
 
@@ -50,12 +50,12 @@ val java_lang_reflect_Field = java.lang.reflect.Field::class.jobject
 val java_nio_Buffer = java.nio.Buffer::class.jobject
 val java_nio_ByteBuffer = java.nio.ByteBuffer::class.jobject
 
-val JavaVM = "JavaVM".opaque_p
+val JavaVM = "JavaVM".handle
 
-val JNINativeMethod_p = struct(Module.CORE_JNI, "JNINativeMethod") {
+val JNINativeMethod = struct(Module.CORE_JNI, "JNINativeMethod") {
     documentation = ""
 
-    charUTF8_p.member("name", "")
-    charUTF8_p.member("signature", "")
+    charUTF8.p.member("name", "")
+    charUTF8.p.member("signature", "")
     opaque_p.member("fnPtr", "")
-}.p
+}

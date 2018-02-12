@@ -35,7 +35,7 @@ val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OE
         "BUFFER_MAP_POINTER_OES"..0x88BD
     )
 
-    MapPointer("GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE)")..void_p(
+    MapPointer("GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE)")..void.p(
         "MapBufferOES",
         "",
 
@@ -56,6 +56,6 @@ val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OE
 
         GLenum.IN("target", ""),
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..void_pp.OUT("params", "")
+        ReturnParam..Check(1)..void.p.p.OUT("params", "")
     )
 }

@@ -29,8 +29,8 @@ fun config() {
     )
 }
 
-val DCCallVM_p = "DCCallVM".p
-val DCstruct_p = "DCstruct".p
+val DCCallVM = "DCCallVM".opaque
+val DCstruct = "DCstruct".opaque
 
 val DCvoid = "DCvoid".void
 
@@ -48,17 +48,17 @@ val DCulonglong = IntegerType("DCulonglong", PrimitiveMapping.LONG, unsigned = t
 val DCfloat = typedef(float, "DCfloat")
 val DCdouble = typedef(double, "DCdouble")
 val DCpointer = typedef(opaque_p, "DCpointer")
-val DCstring = typedef(IntegerType("const char", PrimitiveMapping.BYTE).p, "DCstring")
+val DCstring = typedef(char.const.p, "DCstring")
 
 val DCsize = typedef(size_t, "DCsize")
 
 // dyncall_callback.h
 
-val DCCallback_p = "DCCallback".p
-val DCCallbackHandler_p = "DCCallbackHandler".p
-val DCArgs_p = "DCArgs".p
+val DCCallback = "DCCallback".opaque
+val DCCallbackHandler = "DCCallbackHandler".opaque
+val DCArgs = "DCArgs".opaque
 
 // dynload.h
 
-val DLLib_p = "DLLib".p
-val DLSyms_p = "DLSyms".p
+val DLLib = "DLLib".opaque
+val DLSyms = "DLSyms".opaque

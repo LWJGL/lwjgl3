@@ -37,35 +37,28 @@ val SQLWCHAR = typedef(unsigned_short, "SQLWCHAR")
 
 val SQLTCHAR = typedef(SQLWCHAR, "SQLTCHAR")
 
-val SQLCHARASCII_p = CharSequenceType(name = "SQLCHAR", charMapping = CharMapping.ASCII)
-val SQLCHARUTF16_p = CharSequenceType(name = "SQLWCHAR", charMapping = CharMapping.UTF16)
+val SQLCHARASCII = CharType("SQLCHAR", CharMapping.ASCII)
+val SQLCHARUTF16 = CharType("SQLWCHAR", CharMapping.UTF16)
 
 val SQLSMALLINT = typedef(short, "SQLSMALLINT")
-val SQLSMALLINT_p = SQLSMALLINT.p
 val SQLUSMALLINT = typedef(unsigned_short, "SQLUSMALLINT")
-val SQLUSMALLINT_p = SQLUSMALLINT.p
 
 val long = IntegerType("long", PrimitiveMapping.INT)
 val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.INT, unsigned = true)
 
 val SQLINTEGER = typedef(long, "SQLINTEGER")
-val SQLINTEGER_p = SQLINTEGER.p
 val SQLUINTEGER = typedef(unsigned_long, "SQLUINTEGER")
 
 val SQLRETURN = typedef(SQLSMALLINT, "SQLRETURN")
 
-val SQLPOINTER = typedef(void_p, "SQLPOINTER")
-val SQLPOINTER_p = SQLPOINTER.p
+val SQLPOINTER = typedef(PrimitiveType("void", PrimitiveMapping.BYTE).p, "SQLPOINTER")
 
 val SQLLEN = IntegerType("SQLLEN", PrimitiveMapping.POINTER)
-val SQLLEN_p = SQLLEN.p
 val SQLULEN = IntegerType("SQLULEN", PrimitiveMapping.POINTER, unsigned = true)
-val SQLULEN_p = SQLULEN.p
 
 val SQLSETPOSIROW = IntegerType("SQLSETPOSIROW", PrimitiveMapping.LONG, unsigned = true)
 
-val SQLHANDLE = PointerType("SQLHANDLE", includesPointer = true)
-val SQLHANDLE_p = SQLHANDLE.p
+val SQLHANDLE = "SQLHANDLE".handle
 
 val SQLHENV = typedef(SQLHANDLE, "SQLHENV")
 val SQLHDBC = typedef(SQLHANDLE, "SQLHDBC")
@@ -74,7 +67,6 @@ val SQLHDESC = typedef(SQLHANDLE, "SQLHDESC")
 val SQLHWND = typedef(HWND, "SQLHWND")
 
 val RETCODE = IntegerType("RETCODE", PrimitiveMapping.SHORT)
-val RETCODE_p = RETCODE.p
 
 // sqltypes.h structs
 

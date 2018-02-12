@@ -289,7 +289,7 @@ val CGL = "CGL".nativeClass(
         "ChoosePixelFormat",
         "Creates a pixel format object that satisfies the constraints of the specified buffer and renderer attributes.",
 
-        NullTerminated..const..CGLPixelFormatAttribute_p.IN(
+        NullTerminated..CGLPixelFormatAttribute.const.p.IN(
             "attribs",
             """
             a 0 terminated array that contains a list of buffer and renderer attributes. Attributes can be Boolean or integer. If an attribute is integer, you
@@ -298,7 +298,7 @@ val CGL = "CGL".nativeClass(
             """,
             PixelFormatAttribs
         ),
-        nullable..Check(1)..CGLPixelFormatObj_p.OUT(
+        nullable..Check(1)..CGLPixelFormatObj.p.OUT(
             "pix",
             """
             the memory address of a pixel format object. On return, points to a new pixel format object that contains pixel format information and a list of
@@ -306,7 +306,7 @@ val CGL = "CGL".nativeClass(
             pix is set to #NULL.
             """
         ),
-        Check(1)..GLint_p.OUT(
+        Check(1)..GLint.p.OUT(
             "npix",
             "on return, points to the number of virtual screens referenced by pix. If pix is #NULL, the value of {@code npix} is set to 0."
         )
@@ -329,7 +329,7 @@ val CGL = "CGL".nativeClass(
             "the virtual screen number whose attribute value you want to retrieve. This value must be between 0 and the number of virtual screens minus one."
         ),
         CGLPixelFormatAttribute.IN("attrib", "the attribute whose value you want to obtain", PixelFormatAttribs),
-        Check(1)..GLint_p.OUT("value", "on return, points to the value of the attribute")
+        Check(1)..GLint.p.OUT("value", "on return, points to the value of the attribute")
     )
 
     void(
@@ -381,7 +381,7 @@ val CGL = "CGL".nativeClass(
             information for all renderers in the system you must call CGLQueryRendererInfo once for each display bit.
             """
         ),
-        Check(1)..CGLRendererInfoObj_p.OUT(
+        Check(1)..CGLRendererInfoObj.p.OUT(
             "rend",
             """
             the memory address of a renderer information object. On return, points to a renderer information object that describes all renderers that are able
@@ -389,7 +389,7 @@ val CGL = "CGL".nativeClass(
             {@code rend} is set to #NULL. You must call #DestroyRendererInfo() when you no longer need this object.
             """
         ),
-        Check(1)..GLint_p.OUT(
+        Check(1)..GLint.p.OUT(
             "nrend",
             """
             on return, points to the number of renderers described in the renderer information object. If {@code display_mask} does not specify any displays,
@@ -426,7 +426,7 @@ val CGL = "CGL".nativeClass(
             """
         ),
         CGLRendererProperty.IN("prop", "the renderer property whose value you want to obtain", RendererProperties),
-        Check(1)..GLint_p.OUT("value", "on return, points to the value of the requested property")
+        Check(1)..GLint.p.OUT("value", "on return, points to the value of the requested property")
     )
 
     // Context functions
@@ -444,7 +444,7 @@ val CGL = "CGL".nativeClass(
             Pass #NULL to indicate that no sharing is to take place.
             """
         ),
-        Check(1)..CGLContextObj_p.OUT(
+        Check(1)..CGLContextObj.p.OUT(
             "ctx",
             """
             the memory address of a context object. On return, points to a new context object with the buffers and attributes specified by the {@code pix}
@@ -576,7 +576,7 @@ val CGL = "CGL".nativeClass(
             maximum number of mipmap levels that can be represented with the given width and height.
             """
         ),
-        Check(1)..CGLPBufferObj_p.OUT("pbuffer", "on return, points to a new pixel buffer object")
+        Check(1)..CGLPBufferObj.p.OUT("pbuffer", "on return, points to a new pixel buffer object")
     )
 
     CGLError(
@@ -605,11 +605,11 @@ val CGL = "CGL".nativeClass(
         """,
 
         CGLPBufferObj.IN("obj", "a pointer to the pixel buffer object"),
-        Check(1)..GLsizei_p.OUT("width", "on return, points to the width, in pixels, of the pixel buffer"),
-        Check(1)..GLsizei_p.OUT("height", "on return, points to the height, in pixels, of the pixel buffer"),
-        Check(1)..GLenum_p.OUT("target", "on return, points to a constant that specifies the pixel buffer texture target"),
-        Check(1)..GLenum_p.OUT("internalFormat", "on return, points to a constant that specifies the internal color format of the pixel buffer"),
-        Check(1)..GLint_p.OUT("mipmap", "on return, points to the mipmap level of the pixel buffer or 0 if it doesn't use mipmaps")
+        Check(1)..GLsizei.p.OUT("width", "on return, points to the width, in pixels, of the pixel buffer"),
+        Check(1)..GLsizei.p.OUT("height", "on return, points to the height, in pixels, of the pixel buffer"),
+        Check(1)..GLenum.p.OUT("target", "on return, points to a constant that specifies the pixel buffer texture target"),
+        Check(1)..GLenum.p.OUT("internalFormat", "on return, points to a constant that specifies the internal color format of the pixel buffer"),
+        Check(1)..GLint.p.OUT("mipmap", "on return, points to the mipmap level of the pixel buffer or 0 if it doesn't use mipmaps")
     )
 
     CGLError(
@@ -720,7 +720,7 @@ val CGL = "CGL".nativeClass(
         GLsizei.IN("width", "the width, in pixels, of the offscreen buffer"),
         GLsizei.IN("height", "the height, in pixels, of the offscreen buffer"),
         GLint.IN("rowbytes", "the number of bytes per row of the offscreen buffer, which must be greater than or equal to width times bytes per pixel"),
-        Check("rowbytes * height")..void_p.IN(
+        Check("rowbytes * height")..void.p.IN(
             "baseaddr",
             "a pointer to a block of memory to use as the offscreen buffer. The size of the memory must be at least {@code rowbytes*height} bytes."
         )
@@ -735,21 +735,21 @@ val CGL = "CGL".nativeClass(
         """,
 
         CGLContextObj.IN("ctx", "a rendering context"),
-        Check(1)..GLsizei_p.OUT(
+        Check(1)..GLsizei.p.OUT(
             "width",
             """
             on return, points to the width, in pixels, of the offscreen buffer. If the rendering context is not attached to an offscreen drawable object, the
             value of width is set to 0.
             """
         ),
-        Check(1)..GLsizei_p.OUT(
+        Check(1)..GLsizei.p.OUT(
             "height",
             """
             on return, points to the height, in pixels, of the offscreen buffer. If the rendering context is not attached to an offscreen drawable object, the
             value of height is set to 0.
             """
         ),
-        Check(1)..GLint_p.OUT(
+        Check(1)..GLint.p.OUT(
             "rowbytes",
             """
             on return, points to the number of bytes per row of the offscreen buffer. If the context is not attached to an offscreen drawable object, the value
@@ -868,16 +868,16 @@ val CGL = "CGL".nativeClass(
         """,
 
         CGLContextObj.IN("ctx", "a rendering context"),
-        Check(1)..CGLPBufferObj_p.OUT("pbuffer", "on return, points to the pixel buffer object attached to the rendering context"),
-        Check(1)..GLenum_p.OUT(
+        Check(1)..CGLPBufferObj.p.OUT("pbuffer", "on return, points to the pixel buffer object attached to the rendering context"),
+        Check(1)..GLenum.p.OUT(
             "face",
             """
             on return, points to the cube map face that is set if the pixel buffer texture target type is #TEXTURE_CUBE_MAP; otherwise 0 for all other
             texture target types.
             """
         ),
-        Check(1)..GLint_p.OUT("level", "on return, points to the current mipmap level for drawing"),
-        Check(1)..GLint_p.OUT("screen", "on return, points to the current virtual screen number, as set by the last valid call to #SetPBuffer()")
+        Check(1)..GLint.p.OUT("level", "on return, points to the current mipmap level for drawing"),
+        Check(1)..GLint.p.OUT("screen", "on return, points to the current virtual screen number, as set by the last valid call to #SetPBuffer()")
     )
 
     CGLError(
@@ -929,7 +929,7 @@ val CGL = "CGL".nativeClass(
 
         CGLContextObj.IN("ctx", "a rendering context"),
         CGLContextEnable.IN("pname", "the option to query", ContextOptions),
-        Check(1)..GLint_p.OUT("enable", "on return, enable is set to true if the option is enabled")
+        Check(1)..GLint.p.OUT("enable", "on return, enable is set to true if the option is enabled")
     )
 
     CGLError(
@@ -938,7 +938,7 @@ val CGL = "CGL".nativeClass(
 
         CGLContextObj.IN("ctx", "a rendering context"),
         CGLContextParameter.IN("pname", "the parameter whose value you want to set", ContextParameters),
-        SingleValue("param")..Check(1)..const..GLint_p.IN("params", "a pointer to the value to set the parameter to")
+        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "a pointer to the value to set the parameter to")
     )
 
     CGLError(
@@ -947,7 +947,7 @@ val CGL = "CGL".nativeClass(
 
         CGLContextObj.IN("ctx", "a rendering context"),
         CGLContextParameter.IN("pname", "the parameter whose value you want to retrieve", ContextParameters),
-        Check(1)..GLint_p.OUT("params", "on return, points to the value of the parameter")
+        Check(1)..GLint.p.OUT("params", "on return, points to the value of the parameter")
     )
 
     // Virtual screen functions
@@ -984,7 +984,7 @@ val CGL = "CGL".nativeClass(
         """,
 
         CGLContextObj.IN("ctx", "a rendering context"),
-        Check(1)..GLint_p.OUT(
+        Check(1)..GLint.p.OUT(
             "screen",
             """
             on return, points to the virtual screen associated with the context. The value is always 0 on a single-display system and –1 if the function fails
@@ -1007,7 +1007,7 @@ val CGL = "CGL".nativeClass(
         "Sets the value of a global option.",
 
         CGLGlobalOption.IN("pname", "the name of the option whose value you want to set", GlobalOptions),
-        SingleValue("param")..Check(1)..const..GLint_p.IN("params", "the value to set the option to")
+        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "the value to set the option to")
     )
 
     CGLError(
@@ -1015,7 +1015,7 @@ val CGL = "CGL".nativeClass(
         "Retrieves the value of a global option.",
 
         CGLGlobalOption.IN("pname", "the name of the option whose value you want to get", GlobalOptions),
-        Check(1)..GLint_p.OUT("params", "on return, a pointer to the value of the option")
+        Check(1)..GLint.p.OUT("params", "on return, a pointer to the value of the option")
     )
 
     /*CGLError(
@@ -1031,7 +1031,7 @@ val CGL = "CGL".nativeClass(
         "",
 
         CGLGlobalOption.IN("pname", ""),
-        GLint_p.IN("param", "")
+        GLint.p.IN("param", "")
     )*/
 
     // Locking functions
@@ -1067,13 +1067,13 @@ val CGL = "CGL".nativeClass(
         "GetVersion",
         "Gets the major and minor version numbers of the CGL library.",
 
-        Check(1)..GLint_p.OUT("majorvers", "on return, points to the major version number of the CGL library"),
-        Check(1)..GLint_p.OUT("minorvers", "on return, points to the minor version number of the CGL library")
+        Check(1)..GLint.p.OUT("majorvers", "on return, points to the major version number of the CGL library"),
+        Check(1)..GLint.p.OUT("minorvers", "on return, points to the minor version number of the CGL library")
     )
 
     // Convert an error code to a string
 
-    const..charASCII_p(
+    charASCII.const.p(
         "ErrorString",
         "Returns a string that describes the specified result code.",
 

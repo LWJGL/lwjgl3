@@ -43,7 +43,7 @@ private val GLESBinding = register(object : APIBinding(
             .filter { it.hasNativeFunctions }
             .map { it.functions }
             .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
     }
 
     private val functionOrdinals: Map<String, Int> by lazy {
@@ -59,7 +59,7 @@ private val GLESBinding = register(object : APIBinding(
     override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!
 
     override fun generateAlternativeMethods(writer: PrintWriter, function: Func, transforms: MutableMap<QualifiedType, Transform>) {
-        val boParams = function.getParams { it.has<BufferObject>() && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
+        val boParams = function.getParams { it.has<BufferObject>() && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType<*> }
         if (boParams.any()) {
             boParams.forEach { transforms[it] = BufferOffsetTransform }
             function.generateAlternativeMethod(writer, function.name, transforms)

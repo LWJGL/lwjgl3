@@ -63,7 +63,7 @@ val EXT_draw_elements_base_vertex = "EXTDrawElementsBaseVertex".nativeClassGLES(
         GLenum.IN("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLint.IN("basevertex", "")
     )
 
@@ -76,7 +76,7 @@ val EXT_draw_elements_base_vertex = "EXTDrawElementsBaseVertex".nativeClassGLES(
         GLuint.IN("end", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLint.IN("basevertex", "")
     )
 
@@ -87,7 +87,7 @@ val EXT_draw_elements_base_vertex = "EXTDrawElementsBaseVertex".nativeClassGLES(
         GLenum.IN("mode", ""),
         AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
         AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
         GLsizei.IN("instancecount", ""),
         GLint.IN("basevertex", "")
     )
@@ -97,10 +97,10 @@ val EXT_draw_elements_base_vertex = "EXTDrawElementsBaseVertex".nativeClassGLES(
         "",
 
         GLenum.IN("mode", ""),
-        const..GLsizei_p.IN("count", ""),
+        GLsizei.const.p.IN("count", ""),
         GLenum.IN("type", ""),
-        const..void_p.const.p.IN("indices", ""),
+        void.const.p.const.p.IN("indices", ""),
         AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", ""),
-        const..GLint_p.IN("basevertex", "")
+        GLint.const.p.IN("basevertex", "")
     )
 }

@@ -30,9 +30,9 @@ val VRNotifications = "VRNotifications".nativeClass(
         VROverlayHandle_t.IN("ulOverlayHandle", ""),
         uint64_t.IN("ulUserValue", ""),
         EVRNotificationType.IN("type", "", "EVRNotificationType_\\w+"),
-        const..charASCII_p.IN("pchText", ""),
+        charASCII.const.p.IN("pchText", ""),
         EVRNotificationStyle.IN("style", "", "EVRNotificationStyle_\\w+"),
-        nullable..const..NotificationBitmap_t.p.IN("pImage", ""),
+        nullable..NotificationBitmap_t.const.p.IN("pImage", ""),
         Check(1)..VRNotificationId.p.OUT("pNotificationId", "")
     )
 

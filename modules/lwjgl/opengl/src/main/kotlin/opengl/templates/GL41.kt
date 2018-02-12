@@ -73,9 +73,9 @@ val GL41 = "GL41".nativeClassGL("GL41") {
         "Loads pre-compiled shader binaries.",
 
         AutoSize("shaders")..GLsizei.IN("count", "the number of shader object handles contained in {@code shaders}"),
-        const..GLuint_p.IN("shaders", "an array of shader handles into which to load pre-compiled shader binaries"),
+        GLuint.const.p.IN("shaders", "an array of shader handles into which to load pre-compiled shader binaries"),
         GLenum.IN("binaryformat", "the format of the shader binaries contained in {@code binary}"),
-        const..void_p.IN("binary", "an array of bytes containing pre-compiled binary shader code"),
+        void.const.p.IN("binary", "an array of bytes containing pre-compiled binary shader code"),
         AutoSize("binary")..GLsizei.IN("length", "the length of the array whose address is given in binary")
     )
 
@@ -85,8 +85,8 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
         GLenum.IN("shadertype", "the type of shader whose precision to query", "#VERTEX_SHADER #FRAGMENT_SHADER"),
         GLenum.IN("precisiontype", "the numeric format whose precision and range to query"),
-        Check(2)..GLint_p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
-        Check(1)..ReturnParam..GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
+        Check(2)..GLint.p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
+        Check(1)..ReturnParam..GLint.p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
     )
 
     void(
@@ -131,9 +131,9 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
         GLuint.IN("program", "the name of a program object whose binary representation to retrieve"),
         AutoSize("binary")..GLsizei.IN("bufSize", "the size of the buffer whose address is given by {@code binary}"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
-        Check(1)..GLenum_p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
-        void_p.OUT(
+        Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
+        Check(1)..GLenum.p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
+        void.p.OUT(
             "binary",
             "an array into which the GL will return {@code program}'s binary representation"
         )
@@ -145,7 +145,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
         GLuint.IN("program", "the name of a program object into which to load a program binary"),
         GLenum.IN("binaryFormat", "the format of the binary data in binary"),
-        const..void_p.IN("binary", "an array containing the binary to be loaded into {@code program}"),
+        void.const.p.IN("binary", "an array containing the binary to be loaded into {@code program}"),
         AutoSize("binary")..GLsizei.IN("length", "the number of bytes contained in {@code binary}")
     )
 
@@ -240,7 +240,7 @@ if (shader) {
 
         GLenum.IN("type", "the type of shader to create"),
         AutoSize("strings")..GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
-        PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_p.p.IN(
+        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.p.IN(
             "strings",
             "an array of pointers to source code strings from which to create the program object"
         )
@@ -258,7 +258,7 @@ if (shader) {
         "Deletes program pipeline objects.",
 
         AutoSize("pipelines")..GLsizei.IN("n", "the number of program pipeline objects to delete"),
-        SingleValue("pipeline")..const..GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
+        SingleValue("pipeline")..GLuint.const.p.IN("pipelines", "an array of names of program pipeline objects to delete")
     )
 
     void(
@@ -266,7 +266,7 @@ if (shader) {
         "Reserves program pipeline object names.",
 
         AutoSize("pipelines")..GLsizei.IN("n", "the number of program pipeline object names to reserve"),
-        ReturnParam..GLuint_p.OUT("pipelines", "an array of into which the reserved names will be written")
+        ReturnParam..GLuint.p.OUT("pipelines", "an array of into which the reserved names will be written")
     )
 
     GLboolean(
@@ -286,7 +286,7 @@ if (shader) {
             "the name of the parameter to retrieve",
             "#ACTIVE_PROGRAM #INFO_LOG_LENGTH $SHADER_TYPES"
         ),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
     )
 
     // ProgramUniform JavaDoc
@@ -479,7 +479,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize("value")..GLsizei.IN("count", uniArrayCount),
-        const..GLint_p.IN("value", uniArrayValue)
+        GLint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -489,7 +489,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(2, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLint_p.IN("value", uniArrayValue)
+        GLint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -499,7 +499,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLint_p.IN("value", uniArrayValue)
+        GLint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -509,7 +509,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(4, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLint_p.IN("value", uniArrayValue)
+        GLint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -519,7 +519,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize("value")..GLsizei.IN("count", uniArrayCount),
-        const..GLuint_p.IN("value", uniArrayValue)
+        GLuint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -529,7 +529,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(2, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLuint_p.IN("value", uniArrayValue)
+        GLuint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -539,7 +539,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLuint_p.IN("value", uniArrayValue)
+        GLuint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -549,7 +549,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(4, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLuint_p.IN("value", uniArrayValue)
+        GLuint.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -559,7 +559,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize("value")..GLsizei.IN("count", uniArrayCount),
-        const..GLfloat_p.IN("value", uniArrayValue)
+        GLfloat.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -569,7 +569,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(2, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLfloat_p.IN("value", uniArrayValue)
+        GLfloat.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -579,7 +579,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLfloat_p.IN("value", uniArrayValue)
+        GLfloat.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -589,7 +589,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(4, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLfloat_p.IN("value", uniArrayValue)
+        GLfloat.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -599,7 +599,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize("value")..GLsizei.IN("count", uniArrayCount),
-        const..GLdouble_p.IN("value", uniArrayValue)
+        GLdouble.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -609,7 +609,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(2, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLdouble_p.IN("value", uniArrayValue)
+        GLdouble.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -619,7 +619,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLdouble_p.IN("value", uniArrayValue)
+        GLdouble.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -629,7 +629,7 @@ if (shader) {
         GLuint.IN("program", uniProgram),
         GLint.IN("location", uniLocation),
         AutoSize(4, "value")..GLsizei.IN("count", uniArrayCount),
-        const..GLdouble_p.IN("value", uniArrayValue)
+        GLdouble.const.p.IN("value", uniArrayValue)
     )
 
     void(
@@ -640,7 +640,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(2 x 2, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -651,7 +651,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(3 x 3, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -662,7 +662,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(4 x 4, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -673,7 +673,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(2 x 2, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -684,7 +684,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(3 x 3, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -695,7 +695,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(4 x 4, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -706,7 +706,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(2 x 3, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -717,7 +717,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(3 x 2, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -728,7 +728,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(2 x 4, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -739,7 +739,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(4 x 2, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -750,7 +750,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(3 x 4, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -761,7 +761,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(4 x 3, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLfloat_p.IN("value", uniMatrixValue)
+        GLfloat.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -772,7 +772,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(2 x 3, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -783,7 +783,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(3 x 2, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -794,7 +794,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(2 x 4, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -805,7 +805,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(4 x 2, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -816,7 +816,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(3 x 4, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -827,7 +827,7 @@ if (shader) {
         GLint.IN("location", uniLocation),
         AutoSize(4 x 3, "value")..GLsizei.IN("count", uniMatrixCount),
         GLboolean.IN("transpose", uniMatrixTranspose),
-        const..GLdouble_p.IN("value", uniMatrixValue)
+        GLdouble.const.p.IN("value", uniMatrixValue)
     )
 
     void(
@@ -843,12 +843,12 @@ if (shader) {
 
         GLuint.IN("pipeline", "the name of a program pipeline object from which to retrieve the info log"),
         AutoSize("infoLog")..GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code infoLog}"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
+        Check(1)..nullable..GLsizei.p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
         Return(
             "length",
             "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8_p.OUT("infoLog", "an array of characters into which will be written the info log for {@code pipeline}")
+        )..GLcharUTF8.p.OUT("infoLog", "an array of characters into which will be written the info log for {@code pipeline}")
     )
 
     // ARB_vertex_attrib_64bit
@@ -899,10 +899,10 @@ if (shader) {
         GLdouble.IN("w", attribW)
     )
 
-    void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1)..const..GLdouble_p.IN("v", attribBuffer))
-    void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2)..const..GLdouble_p.IN("v", attribBuffer))
-    void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3)..const..GLdouble_p.IN("v", attribBuffer))
-    void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4)..const..GLdouble_p.IN("v", attribBuffer))
+    void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1)..GLdouble.const.p.IN("v", attribBuffer))
+    void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2)..GLdouble.const.p.IN("v", attribBuffer))
+    void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3)..GLdouble.const.p.IN("v", attribBuffer))
+    void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4)..GLdouble.const.p.IN("v", attribBuffer))
 
     OffHeapOnly..void(
         "VertexAttribLPointer",
@@ -918,7 +918,7 @@ if (shader) {
             the array. The initial value is 0.
             """
         ),
-        Unsafe..ARRAY_BUFFER..const..void_p.IN(
+        Unsafe..ARRAY_BUFFER..void.const.p.IN(
             "pointer",
             """
             the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -933,7 +933,7 @@ if (shader) {
 
         GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
         GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(1)..GLdouble_p.IN("params", "the requested data")
+        Check(1)..GLdouble.p.IN("params", "the requested data")
     )
 
     // ARB_viewport_array
@@ -960,7 +960,7 @@ if (shader) {
 
         GLuint.IN("first", "the first viewport to set"),
         AutoSize(4, "v")..GLsizei.IN("count", "the number of viewports to set"),
-        const..GLfloat_p.IN("v", "an array containing the viewport parameters")
+        GLfloat.const.p.IN("v", "an array containing the viewport parameters")
     )
 
     void(
@@ -979,7 +979,7 @@ if (shader) {
         "Pointer version of #ViewportIndexedf().",
 
         GLuint.IN("index", "the viewport to set"),
-        Check(4)..const..GLfloat_p.IN("v", "the viewport parameters")
+        Check(4)..GLfloat.const.p.IN("v", "the viewport parameters")
     )
 
     void(
@@ -988,7 +988,7 @@ if (shader) {
 
         GLuint.IN("first", "the index of the first viewport whose scissor box to modify"),
         AutoSize(4, "v")..GLsizei.IN("count", "the number of scissor boxes to modify"),
-        const..GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
+        GLint.const.p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
     )
 
     void(
@@ -1007,7 +1007,7 @@ if (shader) {
         "Pointer version of #ScissorIndexed().",
 
         GLuint.IN("index", "the index of the viewport whose scissor box to modify"),
-        Check(4)..const..GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
+        Check(4)..GLint.const.p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
     )
 
     void(
@@ -1016,7 +1016,7 @@ if (shader) {
 
         GLuint.IN("first", "the index of the first viewport whose depth range to update"),
         AutoSize(2, "v")..GLsizei.IN("count", "the number of viewports whose depth range to update"),
-        const..GLdouble_p.IN("v", "n array containing the near and far values for the depth range of each modified viewport")
+        GLdouble.const.p.IN("v", "n array containing the near and far values for the depth range of each modified viewport")
     )
 
     void(
@@ -1034,7 +1034,7 @@ if (shader) {
 
         GLenum.IN("target", "the indexed state to query"),
         GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -1043,6 +1043,6 @@ if (shader) {
 
         GLenum.IN("target", "the indexed state to query"),
         GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLdouble.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
 }

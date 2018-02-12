@@ -31,6 +31,6 @@ val KHR_stream_producer_eglsurface = "KHRStreamProducerEGLSurface".nativeClassEG
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         EGLStreamKHR.IN("stream", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 }

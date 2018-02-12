@@ -147,7 +147,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
     }.member("memory_overwrite", "the memory overwrite callback function")
 }
 
-val rpmalloc_global_statistics_t_p = struct(
+val rpmalloc_global_statistics_t = struct(
     Module.RPMALLOC,
     "RPmallocGlobalStatistics",
     nativeName = "rpmalloc_global_statistics_t",
@@ -158,9 +158,9 @@ val rpmalloc_global_statistics_t_p = struct(
     size_t.member("cached_large", "Curren amount of memory in global caches for large sizes (>=64KiB)")
     size_t.member("mapped_total", "Total amount of memory mapped (only if {@code ENABLE_STATISTICS=1})")
     size_t.member("unmapped_total", "Total amount of memory unmapped (only if {@code ENABLE_STATISTICS=1})")
-}.p
+}
 
-val rpmalloc_thread_statistics_t_p = struct(
+val rpmalloc_thread_statistics_t = struct(
     Module.RPMALLOC,
     "RPmallocThreadStatistics",
     nativeName = "rpmalloc_thread_statistics_t",
@@ -174,4 +174,4 @@ val rpmalloc_thread_statistics_t_p = struct(
     size_t.member("deferred", "Current number of bytes in pending deferred deallocations")
     size_t.member("thread_to_global", "Total number of bytes transitioned from thread cache to global cache")
     size_t.member("global_to_thread", "Total number of bytes transitioned from global cache to thread cache")
-}.p
+}

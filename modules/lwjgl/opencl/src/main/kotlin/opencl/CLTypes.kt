@@ -20,38 +20,17 @@ val cl_half = PrimitiveType("cl_half", PrimitiveMapping.SHORT)
 val cl_float = PrimitiveType("cl_float", PrimitiveMapping.FLOAT)
 val cl_double = PrimitiveType("cl_double", PrimitiveMapping.DOUBLE)
 
-val cl_uchar_p = cl_uchar.p
-val cl_int_p = cl_int.p
-val cl_uint_p = cl_uint.p
-val cl_long_p = cl_long.p
-val cl_ulong_p = cl_ulong.p
-val cl_half_p = cl_half.p
-val cl_float_p = cl_float.p
-val cl_double_p = cl_double.p
-
-val cl_uchar_pp = cl_uchar_p.p
-
 // objects
 
-val cl_platform_id = "cl_platform_id".opaque_p
-val cl_device_id = "cl_device_id".opaque_p
-val cl_context = "cl_context".opaque_p
-val cl_command_queue = "cl_command_queue".opaque_p
-val cl_mem = "cl_mem".opaque_p
-val cl_program = "cl_program".opaque_p
-val cl_kernel = "cl_kernel".opaque_p
-val cl_event = "cl_event".opaque_p
-val cl_sampler = "cl_sampler".opaque_p
-
-val cl_platform_id_p = cl_platform_id.p
-val cl_device_id_p = cl_device_id.p
-val cl_context_p = cl_context.p
-val cl_command_queue_p = cl_command_queue.p
-val cl_mem_p = cl_mem.p
-val cl_program_p = cl_program.p
-val cl_kernel_p = cl_kernel.p
-val cl_event_p = cl_event.p
-val cl_sampler_p = cl_sampler.p
+val cl_platform_id = "cl_platform_id".handle
+val cl_device_id = "cl_device_id".handle
+val cl_context = "cl_context".handle
+val cl_command_queue = "cl_command_queue".handle
+val cl_mem = "cl_mem".handle
+val cl_program = "cl_program".handle
+val cl_kernel = "cl_kernel".handle
+val cl_event = "cl_event".handle
+val cl_sampler = "cl_sampler".handle
 
 // typedefs
 
@@ -65,7 +44,7 @@ val cl_device_mem_cache_type = typedef(cl_uint, "cl_device_mem_cache_type")
 val cl_device_local_mem_type = typedef(cl_uint, "cl_device_local_mem_type")
 val cl_device_exec_capabilities = typedef(cl_bitfield, "cl_device_exec_capabilities")
 val cl_command_queue_properties = typedef(cl_bitfield, "cl_command_queue_properties")
-val cl_device_partition_property = PointerType("cl_device_partition_property", PointerMapping.DATA_POINTER)
+val cl_device_partition_property = typedef(intptr_t, "cl_device_partition_property")
 val cl_device_affinity_domain = typedef(cl_bitfield, "cl_device_affinity_domain")
 
 val cl_context_properties = PrimitiveType("cl_context_properties", PrimitiveMapping.POINTER)
@@ -98,32 +77,21 @@ val cl_event_info = typedef(cl_uint, "cl_event_info")
 val cl_command_type = typedef(cl_uint, "cl_command_type")
 val cl_profiling_info = typedef(cl_uint, "cl_profiling_info")
 
-val cl_context_properties_p = cl_context_properties.p
-
 // OpenCL 2.0
-val cl_command_queue_properties_p = cl_command_queue_properties.p
-
 val cl_sampler_properties = typedef(cl_uint, "cl_sampler_properties")
-val cl_sampler_properties_p = cl_sampler_properties.p
-
 val cl_pipe_properties = typedef(cl_uint, "cl_pipe_properties")
-val cl_pipe_properties_p = cl_pipe_properties.p
 val cl_pipe_info = typedef(cl_uint, "cl_pipe_info")
-
 val cl_kernel_exec_info = typedef(cl_uint, "cl_kernel_exec_info")
 val cl_svm_mem_flags = typedef(cl_bitfield, "cl_svm_mem_flags")
 
 // strings
 
-val cl_charASCII_p = CharSequenceType(name = "cl_char", charMapping = CharMapping.ASCII)
-val cl_charASCII_pp = cl_charASCII_p.p
-
-val cl_charUTF8_p = CharSequenceType(name = "cl_char", charMapping = CharMapping.UTF8)
-val cl_charUTF8_pp = cl_charUTF8_p.p
+val cl_charASCII = CharType("cl_char", CharMapping.ASCII)
+val cl_charUTF8 = CharType("cl_char", CharMapping.UTF8)
 
 // structs
 
-val cl_image_format_p = struct(Module.OPENCL, "CLImageFormat", nativeName = "cl_image_format") {
+val cl_image_format = struct(Module.OPENCL, "CLImageFormat", nativeName = "cl_image_format") {
     documentation = "The image format descriptor struct."
 
     cl_channel_order.member(
@@ -137,9 +105,9 @@ val cl_image_format_p = struct(Module.OPENCL, "CLImageFormat", nativeName = "cl_
         {@code image_channel_order} must be a power of two.
         """
     )
-}.p
+}
 
-val cl_image_desc_p = struct(Module.OPENCL, "CLImageDesc", nativeName = "cl_image_desc") {
+val cl_image_desc = struct(Module.OPENCL, "CLImageDesc", nativeName = "cl_image_desc") {
     documentation = "Describes the type and dimensions of the image or image array."
 
     cl_mem_object_type.member("image_type", "describes the image type")
@@ -200,9 +168,9 @@ val cl_image_desc_p = struct(Module.OPENCL, "CLImageDesc", nativeName = "cl_imag
         element in bytes must be &le; size of buffer object data store.
         """
     )
-}.p
+}
 
-val cl_bus_address_amd_p = struct(Module.OPENCL, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
+val cl_bus_address_amd = struct(Module.OPENCL, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
     documentation = "Bus address information used in #EnqueueMakeBuffersResidentAMD()."
 
     cl_long.member(
@@ -213,7 +181,7 @@ val cl_bus_address_amd_p = struct(Module.OPENCL, "CLBusAddressAMD", nativeName =
         "signalbusaddress",
         "contains the page aligned physical starting address of preallocated signaling surface"
     )
-}.p
+}
 
 fun config() {
     packageInfo(
@@ -271,13 +239,13 @@ fun config() {
 val cl_context_callback = callback(
     Module.OPENCL, void, "CLContextCallback",
     "Will be called when a debug message is generated.",
-    NullTerminated..const..cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
-    const..void_p.IN(
+    NullTerminated..cl_charUTF8.const.p.IN("errinfo", "a pointer to the message string representation"),
+    void.const.p.IN(
         "private_info",
         "a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
     ),
     AutoSize("private_info")..size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
-    void_p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
+    void.p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
 ) {
     documentation = "Instances of this interface may be passed to the #CreateContext() and #CreateContextFromType() methods."
     useSystemCallConvention()
@@ -287,7 +255,7 @@ val cl_program_callback = callback(
     Module.OPENCL, void, "CLProgramCallback",
     "Will be called when the program is built, compiled or linked.",
     cl_program.IN("program", "the program that was built, compiled or linked"),
-    void_p.IN(
+    void.p.IN(
         "user_data",
         "the user-specified value that was passed when calling #BuildProgram(), #CompileProgram() or #LinkProgram()"
     )
@@ -299,7 +267,7 @@ val cl_program_callback = callback(
 val cl_native_kernel = callback(
     Module.OPENCL, void, "CLNativeKernel",
     "Will be called by the OpenCL using #EnqueueNativeKernel().",
-    void_p.IN("args", "a pointer to the arguments list")
+    void.p.IN("args", "a pointer to the arguments list")
 ) {
     documentation = "Instances of this interface may be passed to the #EnqueueNativeKernel() method."
     useSystemCallConvention()
@@ -309,7 +277,7 @@ val cl_mem_object_destructor_callback = callback(
     Module.OPENCL, void, "CLMemObjectDestructorCallback",
     "Will be called when a memory object is deleted.",
     cl_mem.IN("memobj", "the memory object that was deleted"),
-    void_p.IN("user_data", "the user-specified value that was passed when calling #SetMemObjectDestructorCallback()")
+    void.p.IN("user_data", "the user-specified value that was passed when calling #SetMemObjectDestructorCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #SetMemObjectDestructorCallback() method."
     useSystemCallConvention()
@@ -330,7 +298,7 @@ val cl_event_callback = callback(
         {@code event_command_exec_status} instead.
         """
     ),
-    void_p.IN("user_data", "the user-specified value that was passed when calling #SetEventCallback()")
+    void.p.IN("user_data", "the user-specified value that was passed when calling #SetEventCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #SetEventCallback() method."
     useSystemCallConvention()
@@ -341,8 +309,8 @@ val cl_svmfree_callback = callback(
     "Will be called to free shared virtual memory pointers.",
     cl_command_queue.IN("queue", "a valid host command-queue"),
     AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
-    void_pp.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
-    void_p.IN("user_data", "the user-specified value that was passed when calling #EnqueueSVMFree()")
+    void.p.p.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
+    void.p.IN("user_data", "the user-specified value that was passed when calling #EnqueueSVMFree()")
 ) {
     documentation = "Instances of this interface may be passed to the #EnqueueSVMFree() method."
     useSystemCallConvention()
@@ -359,7 +327,7 @@ val cl_program_release_callback = callback(
         {@code program} is only provided for reference purposes.
         """
     ),
-    void_p.IN("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
+    void.p.IN("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #SetProgramReleaseCallback() method."
     useSystemCallConvention()
@@ -369,34 +337,29 @@ val cl_program_release_callback = callback(
 
 val cl_gl_context_info = IntegerType("cl_gl_context_info", PrimitiveMapping.INT)
 val cl_gl_platform_info = IntegerType("cl_gl_platform_info", PrimitiveMapping.INT)
-
 val cl_gl_object_type = IntegerType("cl_gl_object_type", PrimitiveMapping.INT)
-val cl_gl_object_type_p = cl_gl_object_type.p
-
 val cl_gl_texture_info = IntegerType("cl_gl_texture_info", PrimitiveMapping.INT)
 
 // EGL interop
 
-val CLeglImageKHR = "CLeglImageKHR".opaque_p
-val CLeglDisplayKHR = "CLeglDisplayKHR".opaque_p
-val CLeglSyncKHR = "CLeglSyncKHR".opaque_p
+val CLeglImageKHR = "CLeglImageKHR".handle
+val CLeglDisplayKHR = "CLeglDisplayKHR".handle
+val CLeglSyncKHR = "CLeglSyncKHR".handle
 
 val cl_egl_image_properties_khr = typedef(intptr_t, "cl_egl_image_properties_khr")
-val cl_egl_image_properties_khr_p = cl_egl_image_properties_khr.p
 
 // APPLE
 
 val cl_queue_properties_APPLE = typedef(intptr_t, "cl_queue_properties_APPLE")
-val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 
 // EXT
 
 val cl_report_live_objects_altera_callback = callback(
     Module.OPENCL, void, "CLReportLiveObjectsAlteraCallback",
     "Reports a live OpenCL API object.",
-    void_p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),
-    void_p.IN("obj_ptr", "a pointer to the live object"),
-    const..charASCII_p.IN(
+    void.p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),
+    void.p.IN("obj_ptr", "a pointer to the live object"),
+    charASCII.const.p.IN(
         "type_name",
         "a C string corresponding to the OpenCL API object type. For example, a leaked {@code cl_mem} object will have \"cl_mem\" as its type string."
     ),
@@ -407,7 +370,6 @@ val cl_report_live_objects_altera_callback = callback(
 }
 
 val cl_device_partition_property_ext = typedef(cl_bitfield, "cl_device_partition_property_ext")
-val cl_device_partition_property_ext_p = cl_device_partition_property_ext.p
 val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ext")
 
 val cl_image_pitch_info_qcom = typedef(cl_uint, "cl_image_pitch_info_qcom")
@@ -420,11 +382,10 @@ val cl_mem_ext_host_ptr = struct(Module.OPENCL, "CLMemEXTHostPtr", nativeName = 
 
 // INTEL
 
-val cl_accelerator_intel = "cl_accelerator_intel".opaque_p
+val cl_accelerator_intel = "cl_accelerator_intel".handle
 val cl_accelerator_type_intel = typedef(cl_uint, "cl_accelerator_type_intel")
 val cl_accelerator_info_intel = typedef(cl_uint, "cl_accelerator_info_intel")
 
 val cl_va_api_device_source_intel = typedef(cl_uint, "cl_va_api_device_source_intel")
 val cl_va_api_device_set_intel = typedef(cl_uint, "cl_va_api_device_set_intel")
 val VASurfaceID = typedef(unsigned_int, "VASurfaceID")
-val VASurfaceID_p = VASurfaceID.p

@@ -27,13 +27,11 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
         "ACCESS_WRITE_DISCARD_NV"..0x0002
     ).javaDocLinks
 
-    val void_p = "void".p
-
     BOOL(
         "DXSetResourceShareHandleNV",
         "",
 
-        void_p.IN("dxObject", "a pointer to the DirectX resource that will be shared"),
+        opaque_p.IN("dxObject", "a pointer to the DirectX resource that will be shared"),
         HANDLE.IN("shareHandle", "the share handle that the OS generated for the resource")
     )
 
@@ -41,7 +39,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
         "DXOpenDeviceNV",
         "Prepares a DirectX device for interoperability and returns a handle to a GL/DirectX interop device.",
 
-        void_p.IN("dxDevice", "a pointer to a supported Direct3D device object")
+        opaque_p.IN("dxDevice", "a pointer to a supported Direct3D device object")
     )
 
     BOOL(
@@ -56,7 +54,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
         "Prepares a DirectX object for use by the GL and returns a handle to a GL/DirectX interop object.",
 
         HANDLE.IN("device", "a GL/DirectX interop device handle, as returned by #DXOpenDeviceNV()"),
-        void_p.IN("dxResource", "a pointer to a DirectX resource to be registered with the GL"),
+        opaque_p.IN("dxResource", "a pointer to a DirectX resource to be registered with the GL"),
         GLuint.IN(
             "name",
             "the GL object name to be assigned to the DirectX resource in the namespace of the objects identified by {@code type} in the current GL context"
@@ -97,7 +95,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 
         HANDLE.IN("device", "the GL/DirectX interop device handle"),
         AutoSize("objects")..GLint.IN("count", "the number of objects to lock"),
-        HANDLE_p.IN("objects", "an array of {@code count} interop objects")
+        HANDLE.p.IN("objects", "an array of {@code count} interop objects")
     )
 
     BOOL(
@@ -106,6 +104,6 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 
         HANDLE.IN("device", "the GL/DirectX interop device handle"),
         AutoSize("objects")..GLint.IN("count", "the number of objects to unlock"),
-        HANDLE_p.IN("objects", "an array of {@code count} interop objects")
+        HANDLE.p.IN("objects", "an array of {@code count} interop objects")
     )
 }

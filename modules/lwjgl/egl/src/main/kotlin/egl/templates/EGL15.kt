@@ -70,7 +70,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
         EGLDisplay.IN("dpy", ""),
         EGLenum.IN("type", ""),
-        noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -98,7 +98,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLSync.IN("sync", ""),
         EGLint.IN("attribute", ""),
-        Check(1)..EGLAttrib_p.OUT("value", "")
+        Check(1)..EGLAttrib.const.p.OUT("value", "")
     )
 
     EGLImage(
@@ -109,7 +109,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         EGLContext.IN("ctx", ""),
         EGLenum.IN("target", ""),
         EGLClientBuffer.IN("buffer", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(
@@ -126,7 +126,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
         EGLenum.IN("platform", ""),
         opaque_p.IN("native_display", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -136,7 +136,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         opaque_p.IN("native_window", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -146,7 +146,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         opaque_p.IN("native_pixmap", ""),
-        nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
     )
 
     EGLBoolean(

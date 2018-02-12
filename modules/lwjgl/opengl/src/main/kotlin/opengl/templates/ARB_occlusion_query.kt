@@ -82,7 +82,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
         "Generates query object names.",
 
         AutoSize("ids")..GLsizei.IN("n", "the number of query object names to be generated"),
-        ReturnParam..GLuint_p.OUT("ids", "a buffer in which the generated query object names are stored")
+        ReturnParam..GLuint.p.OUT("ids", "a buffer in which the generated query object names are stored")
     )
 
     void(
@@ -90,7 +90,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
         "Deletes named query objects.",
 
         AutoSize("ids")..GLsizei.IN("n", "the number of query objects to be deleted"),
-        SingleValue("id")..const..GLuint_p.IN("ids", "an array of query objects to be deleted")
+        SingleValue("id")..GLuint.const.p.IN("ids", "an array of query objects to be deleted")
     )
 
     GLboolean(
@@ -121,7 +121,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLenum.IN("target", "the query object target", QUERY_TARGETS),
         GLenum.IN("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
     )
 
     void(
@@ -130,7 +130,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLuint.IN("id", "the name of a query object"),
         GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
     )
 
     void(
@@ -139,7 +139,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLuint.IN("id", "the name of a query object"),
         GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLuint_p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLuint.p.OUT("params", "the requested data")
     )
 
 }

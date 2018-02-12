@@ -4,17 +4,6 @@
  */
 package org.lwjgl.generator
 
-object ConstMember : StructMemberModifier {
-    override val isSpecial = false
-    override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType)
-            throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
-    }
-}
-
-@Suppress("unused")
-val Struct.const get() = ConstMember
-
 /*
     required AutoSize + non-null reference: ref must not be null and size must not be 0.
     optional AutoSize + non-null reference: ref may be null, if size is 0.
@@ -117,7 +106,7 @@ class AutoSizeIndirect(
 object NullableMember : StructMemberModifier {
     override val isSpecial = true
     override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType && member !is StructMemberBuffer)
+        if (member.nativeType !is PointerType<*> && member !is StructMemberBuffer)
             throw IllegalArgumentException("The nullable modifier can only be applied on pointer members.")
     }
 }

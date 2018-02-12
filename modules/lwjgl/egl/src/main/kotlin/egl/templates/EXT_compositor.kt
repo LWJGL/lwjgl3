@@ -48,7 +48,7 @@ val EXT_compositor = "EXTCompositor".nativeClassEGL("EXT_compositor", postfix = 
         "CompositorSetContextListEXT",
         "",
 
-        const..EGLint_p.IN("external_ref_ids", ""),
+        EGLint.const.p.IN("external_ref_ids", ""),
         AutoSize("external_ref_ids")..EGLint.IN("num_entries", "")
     )
 
@@ -57,7 +57,7 @@ val EXT_compositor = "EXTCompositor".nativeClassEGL("EXT_compositor", postfix = 
         "",
 
         EGLint.IN("external_ref_id", ""),
-        const..EGLint_p.IN("context_attributes", ""),
+        EGLint.const.p.IN("context_attributes", ""),
         AutoSize("context_attributes")..EGLint.IN("num_entries", "")
     )
 
@@ -66,7 +66,7 @@ val EXT_compositor = "EXTCompositor".nativeClassEGL("EXT_compositor", postfix = 
         "",
 
         EGLint.IN("external_ref_id", ""),
-        const..EGLint_p.IN("external_win_ids", ""),
+        EGLint.const.p.IN("external_win_ids", ""),
         AutoSize("external_win_ids")..EGLint.IN("num_entries", "")
     )
 
@@ -75,7 +75,7 @@ val EXT_compositor = "EXTCompositor".nativeClassEGL("EXT_compositor", postfix = 
         "",
 
         EGLint.IN("external_win_id", ""),
-        const..EGLint_p.IN("window_attributes", ""),
+        EGLint.const.p.IN("window_attributes", ""),
         AutoSize("window_attributes")..EGLint.IN("num_entries", "")
     )
 

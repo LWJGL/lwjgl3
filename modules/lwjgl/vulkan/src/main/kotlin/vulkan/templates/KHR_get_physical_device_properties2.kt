@@ -264,7 +264,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         """,
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities."),
-        const..VkPhysicalDeviceImageFormatInfo2KHR.p.IN("pImageFormatInfo", "points to an instance of the ##VkPhysicalDeviceImageFormatInfo2KHR structure, describing the parameters that would be consumed by #CreateImage()."),
+        VkPhysicalDeviceImageFormatInfo2KHR.const.p.IN("pImageFormatInfo", "points to an instance of the ##VkPhysicalDeviceImageFormatInfo2KHR structure, describing the parameters that would be consumed by #CreateImage()."),
         VkImageFormatProperties2KHR.p.OUT("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties2KHR structure in which capabilities are returned.")
     )
 
@@ -297,7 +297,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         """,
 
         VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried."),
-        AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t_p.INOUT("pQueueFamilyPropertyCount", "a pointer to an integer related to the number of queue families available or queried, as described in #GetPhysicalDeviceQueueFamilyProperties()."),
+        AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t.p.INOUT("pQueueFamilyPropertyCount", "a pointer to an integer related to the number of queue families available or queried, as described in #GetPhysicalDeviceQueueFamilyProperties()."),
         nullable..VkQueueFamilyProperties2KHR.p.OUT("pQueueFamilyProperties", "either {@code NULL} or a pointer to an array of ##VkQueueFamilyProperties2KHR structures.")
     )
 
@@ -362,8 +362,8 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         """,
 
         VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the sparse image capabilities."),
-        const..VkPhysicalDeviceSparseImageFormatInfo2KHR.p.IN("pFormatInfo", "a pointer to a structure of type ##VkPhysicalDeviceSparseImageFormatInfo2KHR containing input parameters to the command."),
-        AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
+        VkPhysicalDeviceSparseImageFormatInfo2KHR.const.p.IN("pFormatInfo", "a pointer to a structure of type ##VkPhysicalDeviceSparseImageFormatInfo2KHR containing input parameters to the command."),
+        AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
         nullable..VkSparseImageFormatProperties2KHR.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties2KHR structures.")
     )
 }

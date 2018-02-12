@@ -68,8 +68,8 @@ typedef struct HiddenAreaMesh_t
         "GetRecommendedRenderTargetSize",
         "Returns the suggested size for the intermediate render target that the distortion pulls from.",
 
-        Check(1)..uint32_t_p.OUT("pnWidth", "recommended width for the offscreen render target"),
-        Check(1)..uint32_t_p.OUT("pnHeight", "recommended height for the offscreen render target")
+        Check(1)..uint32_t.p.OUT("pnWidth", "recommended width for the offscreen render target"),
+        Check(1)..uint32_t.p.OUT("pnHeight", "recommended height for the offscreen render target")
     )
 
     HmdMatrix44_t(
@@ -86,10 +86,10 @@ typedef struct HiddenAreaMesh_t
         "Returns the components necessary to build your own projection matrix in case your application is doing something fancy like infinite Z.",
 
         EVREye.IN("eEye", "determines which eye the function should return the projection for", "EVREye_\\w+"),
-        Check(1)..float_p.OUT("pfLeft", "coordinate for the left clipping plane"),
-        Check(1)..float_p.OUT("pfRight", "coordinate for the right clipping plane"),
-        Check(1)..float_p.OUT("pfTop", "coordinate for the top clipping plane"),
-        Check(1)..float_p.OUT("pfBottom", "coordinate for the bottom clipping plane")
+        Check(1)..float.p.OUT("pfLeft", "coordinate for the left clipping plane"),
+        Check(1)..float.p.OUT("pfRight", "coordinate for the right clipping plane"),
+        Check(1)..float.p.OUT("pfTop", "coordinate for the top clipping plane"),
+        Check(1)..float.p.OUT("pfBottom", "coordinate for the bottom clipping plane")
     )
 
     bool(
@@ -125,11 +125,11 @@ typedef struct HiddenAreaMesh_t
         application-reported time if that is not available.
         """,
 
-        Check(1)..float_p.OUT(
+        Check(1)..float.p.OUT(
             "pfSecondsSinceLastVsync",
             "fractional number of seconds since the last vsync event. This will never exceed the length of a single frame."
         ),
-        Check(1)..uint64_t_p.OUT("pulFrameCounter", "the number of frames since vrserver.exe started"),
+        Check(1)..uint64_t.p.OUT("pulFrameCounter", "the number of frames since vrserver.exe started"),
 
         returnDoc = "if no vsync times are available the function will return zero for vsync time and frame counter and return false from the method"
     )
@@ -155,7 +155,7 @@ typedef struct HiddenAreaMesh_t
         the index will be set to -1.
         """,
 
-        Check(1)..int32_t_p.OUT("pnAdapterIndex", "the index of the adapter to use for this display")
+        Check(1)..int32_t.p.OUT("pnAdapterIndex", "the index of the adapter to use for this display")
     )
 
     void(
@@ -184,9 +184,9 @@ typedef struct HiddenAreaMesh_t
         Pre 10.13 for #ETextureType_TextureType_OpenGL returns 0, as there is no dependable way to correlate the HMDs {@code MTLDevice} with a GL Renderer.
         """,
 
-        Check(1)..uint64_t_p.OUT("pnDevice", ""),
+        Check(1)..uint64_t.p.OUT("pnDevice", ""),
         ETextureType.IN("textureType", "", "ETextureType_\\w+"),
-        VkInstance_T_p.IN("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
+        VkInstance_T.p.IN("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
     )
 
     bool(
@@ -293,8 +293,8 @@ typedef struct HiddenAreaMesh_t
         """,
 
         TrackedDevicePose_t.p.OUT("pOutputPose", ""),
-        const..TrackedDevicePose_t.p.IN("pTrackedDevicePose", ""),
-        const..HmdMatrix34_t.p.IN("pTransform", "")
+        TrackedDevicePose_t.const.p.IN("pTrackedDevicePose", ""),
+        HmdMatrix34_t.const.p.IN("pTransform", "")
     )
 
     TrackedDeviceIndex_t(
@@ -392,7 +392,7 @@ typedef struct HiddenAreaMesh_t
         GetTrackedDeviceProperty["unDeviceIndex"],
         GetTrackedDeviceProperty["prop"],
         PropertyTypeTag_t.IN("propType", ""),
-        nullable..void_p.OUT("pBuffer", ""),
+        nullable..void.p.OUT("pBuffer", ""),
         AutoSize("pBuffer")..uint32_t.IN("unBufferSize", ""),
         GetTrackedDeviceProperty["pError"]
     )
@@ -407,7 +407,7 @@ typedef struct HiddenAreaMesh_t
 
         GetTrackedDeviceProperty["unDeviceIndex"],
         GetTrackedDeviceProperty["prop"],
-        Return(RESULT, "VR.k_unMaxPropertyStringSize", includesNT = true)..nullable..charASCII_p.OUT(
+        Return(RESULT, "VR.k_unMaxPropertyStringSize", includesNT = true)..nullable..charASCII.p.OUT(
             "pchValue",
             "the buffer to store string properties in. {@code unBufferSize} should be the size of this buffer."
         ),
@@ -415,7 +415,7 @@ typedef struct HiddenAreaMesh_t
         GetTrackedDeviceProperty["pError"]
     )
 
-    charASCII_p(
+    charASCII.p(
         "GetPropErrorNameFromEnum",
         "Returns a string that corresponds with the specified property error. The string will be the name of the error enum value for all valid error codes.",
 
@@ -444,7 +444,7 @@ typedef struct HiddenAreaMesh_t
         TrackedDevicePose_t.p.OUT("pTrackedDevicePose", "a pose struct to fill with the returned event's pose. Must not be #NULL.")
     )
 
-    charASCII_p(
+    charASCII.p(
         "GetEventTypeNameFromEnum",
         "Returns the name of an {@code EVREvent} enum value.",
 
@@ -504,14 +504,14 @@ typedef struct HiddenAreaMesh_t
         unsigned_short.IN("usDurationMicroSec", "the duration of the desired haptic pulse in microseconds")
     )
 
-    charASCII_p(
+    charASCII.p(
         "GetButtonIdNameFromEnum",
         "Returns the name of an {@code EVRButtonId} enum value.",
 
         EVRButtonId.IN("eButtonId", "the button ID to return the name of", "EVRButtonId_\\w+")
     )
 
-    charASCII_p(
+    charASCII.p(
         "GetControllerAxisTypeNameFromEnum",
         "Returns the name of an {@code EVRControllerAxisType} enum value.",
 
@@ -558,8 +558,8 @@ typedef struct HiddenAreaMesh_t
         """,
 
         TrackedDeviceIndex_t.IN("unDeviceIndex", ""),
-        const..charASCII_p.IN("pchRequest", ""),
-        Return(RESULT, "VR.k_unMaxDriverDebugResponseSize", includesNT = true)..nullable..charASCII_p.OUT("pchResponseBuffer", ""),
+        charASCII.const.p.IN("pchRequest", ""),
+        Return(RESULT, "VR.k_unMaxDriverDebugResponseSize", includesNT = true)..nullable..charASCII.p.OUT("pchResponseBuffer", ""),
         AutoSize("pchResponseBuffer")..uint32_t.IN("unResponseBufferSize", ""),
 
         returnDoc = "the size of the response including its terminating null"

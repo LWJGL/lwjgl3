@@ -6,8 +6,6 @@ package opengles
 
 import org.lwjgl.generator.*
 
-const val GLES_PACKAGE = "org.lwjgl.opengles"
-
 fun config() {
     packageInfo(
         Module.OPENGLES,
@@ -36,40 +34,23 @@ val GLint64 = IntegerType("GLint64", PrimitiveMapping.LONG)
 val GLuint64 = IntegerType("GLuint64", PrimitiveMapping.LONG, unsigned = true)
 val GLfloat = PrimitiveType("GLfloat", PrimitiveMapping.FLOAT)
 
-val GLboolean_p = GLboolean.p
-val GLbyte_p = GLbyte.p
-val GLubyte_p = GLubyte.p
-val GLshort_p = GLshort.p
-val GLushort_p = GLushort.p
-val GLint_p = GLint.p
-val GLuint_p = GLuint.p
-val GLint64_p = GLint64.p
-val GLuint64_p = GLuint64.p
-val GLfloat_p = GLfloat.p
-
 // custom numeric
 
 val GLsizei = IntegerType("GLsizei", PrimitiveMapping.INT)
 val GLenum = IntegerType("GLenum", PrimitiveMapping.INT, unsigned = true)
 val GLbitfield = IntegerType("GLbitfield", PrimitiveMapping.INT, unsigned = true)
 
-val GLsizei_p = GLsizei.p
-val GLenum_p = GLenum.p
-
 val GLintptr = IntegerType("GLintptr", PrimitiveMapping.POINTER)
 val GLsizeiptr = IntegerType("GLsizeiptr", PrimitiveMapping.POINTER, unsigned = true)
 
-val GLintptr_p = GLintptr.p
-val GLsizeiptr_p = GLsizeiptr.p
-
 // strings
 
-val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
-val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
-val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
+val GLcharASCII = CharType("GLchar", CharMapping.ASCII)
+val GLcharUTF8 = CharType("GLchar", CharMapping.UTF8)
+val GLubyteUTF8 = CharType("GLubyte", CharMapping.UTF8)
 
 // GLES 3.0
-val GLsync = "GLsync".opaque_p
+val GLsync = "GLsync".handle
 
 // GLES 3.2
 val GLDEBUGPROC = "GLDEBUGPROC".callback(
@@ -80,8 +61,8 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
     GLuint.IN("id", "the message ID"),
     GLenum.IN("severity", "the message severity"),
     AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-    const..void_p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()")
+    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+    void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageCallback() method."
     useSystemCallConvention()
@@ -103,7 +84,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 }
 
 // EXT_external_buffer
-val GLeglClientBufferEXT = "GLeglClientBufferEXT".opaque_p
+val GLeglClientBufferEXT = "GLeglClientBufferEXT".handle
 // KHR_debug
 val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
     Module.OPENGLES, void, "GLDebugMessageKHRCallback",
@@ -113,8 +94,8 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
     GLuint.IN("id", "the message ID"),
     GLenum.IN("severity", "the message severity"),
     AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-    const..void_p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()")
+    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+    void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()")
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageCallbackKHR() method."
     useSystemCallConvention()
@@ -135,26 +116,26 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
     """
 }
 // OES_EGL_image
-val GLeglImageOES = "GLeglImageOES".opaque_p
+val GLeglImageOES = "GLeglImageOES".handle
 // NV_draw_vulkan_image
-val VULKANPROCNV = "VULKANPROCNV".opaque_p
+val VULKANPROCNV = "VULKANPROCNV".handle
 
 // AutoType tokens
 enum class BufferType(
-    type: PointerType,
+    type: PointerType<*>,
     override val className: String = "GLES20"
 ) : AutoTypeToken {
 
-    GL_UNSIGNED_BYTE(GLubyte_p),
-    GL_UNSIGNED_SHORT(GLushort_p),
-    GL_UNSIGNED_INT(GLuint_p),
+    GL_UNSIGNED_BYTE(GLubyte.p),
+    GL_UNSIGNED_SHORT(GLushort.p),
+    GL_UNSIGNED_INT(GLuint.p),
 
-    GL_BYTE(GLbyte_p),
-    GL_SHORT(GLshort_p),
-    GL_INT(GLint_p),
+    GL_BYTE(GLbyte.p),
+    GL_SHORT(GLshort.p),
+    GL_INT(GLint.p),
 
-    GL_FLOAT(GLfloat_p);
+    GL_FLOAT(GLfloat.p);
 
-    override val mapping = type.mapping as PointerMapping
+    override val mapping = type.mapping
 
 }

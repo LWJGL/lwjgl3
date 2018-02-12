@@ -132,8 +132,9 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
         "GetInteger64vAPPLE",
         "",
 
+
         GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint64_p.OUT("params", "")
+        ReturnParam..Check(1)..GLint64.p.OUT("params", "")
     )
 
     void(
@@ -143,7 +144,7 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
         GLsync.IN("sync", ""),
         GLenum.IN("pname", ""),
         AutoSize("values")..GLsizei.IN("bufSize", ""),
-        nullable..Check(1)..GLsizei_p.OUT("length", ""),
-        ReturnParam..GLint_p.OUT("values", "")
+        nullable..Check(1)..GLsizei.p.OUT("length", ""),
+        ReturnParam..GLint.p.OUT("values", "")
     )
 }

@@ -20,7 +20,7 @@ val locale = "LibCLocale".nativeClass(Module.CORE_LIBC) {
     macro..int("LC_NUMERIC", "Selects the numeric formatting category of the C locale.")
     macro..int("LC_TIME", "Selects the time formatting category of the C locale.")
 
-    charASCII_p(
+    charASCII.p(
         "setlocale",
         """
         Gets and sets the current C locale.
@@ -31,7 +31,7 @@ val locale = "LibCLocale".nativeClass(Module.CORE_LIBC) {
         """,
 
         int.IN("category", "the locale category identifier, may by null", "#LC_ALL #LC_COLLATE #LC_CTYPE #LC_MONETARY #LC_NUMERIC #LC_TIME"),
-        const..charASCII_p.IN("locale", "system-specific locale identifier. Can be \"\" for the user-preferred locale or \"C\" for the minimal locale."),
+        charASCII.const.p.IN("locale", "system-specific locale identifier. Can be \"\" for the user-preferred locale or \"C\" for the minimal locale."),
 
         returnDoc =
         """

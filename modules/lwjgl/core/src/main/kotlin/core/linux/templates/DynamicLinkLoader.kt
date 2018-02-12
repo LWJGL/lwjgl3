@@ -55,11 +55,11 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         {@code filename} is #NULL, then the returned handle is for the main program.
         """,
 
-        nullable..const..charASCII_p.IN("filename", "the name of the dynamic library to open, or #NULL"),
+        nullable..charASCII.const.p.IN("filename", "the name of the dynamic library to open, or #NULL"),
         int.IN("mode", "a bitfield", Modes, LinkMode.BITFIELD)
     )
 
-    charASCII_p(
+    charASCII.p(
         "dlerror",
         """
         Returns a human readable string describing the most recent error that occurred from #dlopen(), #dlsym() or #dlclose() since
@@ -76,7 +76,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         """,
 
         opaque_p.IN("handle", "the dynamic library handle"),
-        const..charASCII_p.IN("name", "the symbol name")
+        charASCII.const.p.IN("name", "the symbol name")
     )
 
     int(

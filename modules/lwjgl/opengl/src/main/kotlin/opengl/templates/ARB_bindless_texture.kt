@@ -202,7 +202,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 
         location,
         AutoSize("values")..GLsizei.IN("count", "the number of handles to load"),
-        const..GLuint64_p.IN("values", "a buffer from which to load the handles")
+        GLuint64.const.p.IN("values", "a buffer from which to load the handles")
     )
 
     void(
@@ -251,7 +251,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         "Pointer version of #VertexAttribL1ui64ARB().",
 
         GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
-        Check(1)..const..GLuint64_p.IN("v", "the vertex attribute buffer")
+        Check(1)..GLuint64.const.p.IN("v", "the vertex attribute buffer")
     )
 
     void(
@@ -260,6 +260,6 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 
         GLuint.IN("index", "the generic vertex attribute index"),
         GLenum.IN("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLuint64_p.OUT("params", "a buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLuint64.p.OUT("params", "a buffer in which to place the returned data")
     )
 }

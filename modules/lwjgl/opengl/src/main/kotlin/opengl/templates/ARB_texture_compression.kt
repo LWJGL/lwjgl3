@@ -81,7 +81,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLsizei.IN("depth", "the depth of the texture image"),
         Expression("0")..GLint.IN("border", "must be 0"),
         AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
+        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -95,7 +95,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLsizei.IN("height", "the height of the texture image"),
         Expression("0")..GLint.IN("border", "must be 0"),
         AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
+        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -108,7 +108,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLsizei.IN("width", "the width of the texture image"),
         Expression("0")..GLint.IN("border", "must be 0"),
         AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
+        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -125,7 +125,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLsizei.IN("depth", "the depth of the texture subimage"),
         GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
         AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
+        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -140,7 +140,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLsizei.IN("height", "the height of the texture subimage"),
         GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
         AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
+        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -153,7 +153,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLsizei.IN("width", "the width of the texture subimage"),
         GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
         AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
+        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
     )
 
     void(
@@ -164,7 +164,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
         Check(
             expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB)", debug = true
-        )..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "a buffer in which to return the compressed texture image")
+        )..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to return the compressed texture image")
     )
 
 }

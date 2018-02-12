@@ -148,7 +148,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         GLuint.IN("program", "the name of a program object for which the command #LinkProgram() has been issued in the past"),
         GLuint.IN("bufferIndex", "the index of an active atomic counter buffer"),
         GLenum.IN("pname", "the parameter to query", AtomicCounterBufferParameters),
-        Check(1)..ReturnParam..GLint_p.OUT("params", "a buffer in which to place the returned value")
+        Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
     )
 
     // ARB_texture_storage
@@ -237,7 +237,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
         GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
         GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
     )
@@ -253,7 +253,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
         GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
         GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays"),
         GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
@@ -401,7 +401,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         GLenum.IN("internalformat", "the internal format about which to retrieve information"),
         GLenum.IN("pname", "the type of information to query"),
         AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
-        ReturnParam..GLint_p.OUT("params", "a variable into which to write the retrieved information")
+        ReturnParam..GLint.p.OUT("params", "a variable into which to write the retrieved information")
     )
 
     // ARB_map_buffer_alignment

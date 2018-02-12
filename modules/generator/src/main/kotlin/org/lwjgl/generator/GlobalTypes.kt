@@ -5,9 +5,8 @@
 package org.lwjgl.generator
 
 val void = "void".void
-val opaque_p = "void".p
-val void_p = PointerType("void", PointerMapping.DATA)
-val void_pp = void_p.p
+val opaque_p = "void".opaque.p
+val opaque_const_p = "void".opaque.const.p
 
 val bool = PrimitiveType("bool", PrimitiveMapping.BOOLEAN)
 val char = IntegerType("char", PrimitiveMapping.BYTE)
@@ -34,36 +33,11 @@ val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.POINTER, unsigned = tr
 
 val va_list = "va_list".p
 
-val bool_p = bool.p
-val char_p = char.p
-val short_p = short.p
-val short_pp = short_p.p
-val int_p = int.p
-val float_p = float.p
-val float_pp = float_p.p
-val double_p = double.p
-val size_t_p = size_t.p
-
-val int32_t_p = int32_t.p
-val uint32_t_p = uint32_t.p
-val uint64_t_p = uint64_t.p
-
-val char_pp = char_p.p
-
 val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
 val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
 val unsigned_int = IntegerType("unsigned int", PrimitiveMapping.INT, unsigned = true)
 
-val unsigned_char_p = unsigned_char.p
-val unsigned_short_p = unsigned_short.p
-val unsigned_int_p = unsigned_int.p
-
 // strings
 
-val charASCII = CharType("char", CharMapping.ASCII) // for struct members
-val charASCII_p = charASCII.p
-val charASCII_pp = charASCII_p.p
-
-val charUTF8 = CharType("char", CharMapping.UTF8) // for struct members
-val charUTF8_p = charUTF8.p
-val charUTF8_pp = charUTF8_p.p
+val charASCII = CharType("char", CharMapping.ASCII)
+val charUTF8 = CharType("char", CharMapping.UTF8)

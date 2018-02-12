@@ -137,7 +137,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        const..VkSampleLocationsInfoEXT.p.IN("pSampleLocationsInfo", "the sample locations state to set.")
+        VkSampleLocationsInfoEXT.const.p.IN("pSampleLocationsInfo", "the sample locations state to set.")
     )
 
     void(

@@ -176,9 +176,10 @@ abstract class GeneratorTarget(
         return this
     }
 
-    fun NativeType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.IN, javadoc, links, linkMode)
-    fun PointerType.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
-    fun PointerType.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.INOUT, javadoc, links, linkMode)
+    fun DataType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.IN, javadoc, links, linkMode)
+    fun PointerType<*>.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
+    fun <T : DataType> PointerType<T>.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
+        createParameter(name, ParameterType.INOUT, javadoc, links, linkMode)
 
     private fun NativeType.createParameter(
         name: String,

@@ -11,7 +11,7 @@ import core.linux.*
 val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "linux", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     documentation = "Native bindings to the GLFW library's X11 native access functions."
 
-    Display_p(
+    Display.p(
         "GetX11Display",
         """
         Returns the {@code Display} used by GLFW.
@@ -30,7 +30,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
         returnDoc = "The {@code RRCrtc} of the specified monitor, or {@code None} if an error occurred.",
         since = "version 3.1"
     )
@@ -43,7 +43,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor_p.IN("monitor", "the GLFW monitor"),
+        GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
         returnDoc = "The {@code RROutput} of the specified monitor, or {@code None} if an error occurred.",
         since = "version 3.1"
     )
@@ -56,7 +56,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "a GLFW window"),
+        GLFWwindow.p.IN("window", "a GLFW window"),
         returnDoc = " The {@code Window} of the specified window, or {@code None} if an error occurred.",
         since = "version 3.0"
     )
@@ -69,12 +69,12 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         This function must only be called from the main thread.
         """,
 
-        const..charUTF8_p.IN("string", "a UTF-8 encoded string. The specified string is copied before this function returns."),
+        charUTF8.const.p.IN("string", "a UTF-8 encoded string. The specified string is copied before this function returns."),
 
         since = "version 3.3"
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetX11SelectionString",
         """
         Returns the contents of the current primary selection as a string.

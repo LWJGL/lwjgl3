@@ -34,8 +34,8 @@ val VRScreenshots = "VRScreenshots".nativeClass(
 
         Check(1)..ScreenshotHandle_t.p.OUT("pOutScreenshotHandle", ""),
         EVRScreenshotType.IN("type", "", "EVRScreenshotType_\\w+"),
-        const..charASCII_p.IN("pchPreviewFilename", ""),
-        const..charASCII_p.IN("pchVRFilename", "")
+        charASCII.const.p.IN("pchPreviewFilename", ""),
+        charASCII.const.p.IN("pchVRFilename", "")
     )
 
     EVRScreenshotError(
@@ -47,7 +47,7 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         Once hooked your application will receive a #EVREventType_VREvent_RequestScreenshot event when the user presses the buttons to take a screenshot.
         """,
 
-        const..EVRScreenshotType.p.IN("pSupportedTypes", ""),
+        EVRScreenshotType.const.p.IN("pSupportedTypes", ""),
         AutoSize("pSupportedTypes")..int.IN("numTypes", "")
     )
 
@@ -65,7 +65,7 @@ val VRScreenshots = "VRScreenshots".nativeClass(
 
         ScreenshotHandle_t.IN("screenshotHandle", ""),
         EVRScreenshotPropertyFilenames.IN("filenameType", "", "EVRScreenshotPropertyFilenames_\\w+"),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchFilename", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchFilename", ""),
         AutoSize("pchFilename")..uint32_t.IN("cchFilename", ""),
         Check(1)..EVRScreenshotError.p.OUT("pError", ""),
 
@@ -93,8 +93,8 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         """,
 
         Check(1)..ScreenshotHandle_t.p.OUT("pOutScreenshotHandle", ""),
-        const..charASCII_p.IN("pchPreviewFilename", ""),
-        const..charASCII_p.IN("pchVRFilename", "")
+        charASCII.const.p.IN("pchPreviewFilename", ""),
+        charASCII.const.p.IN("pchVRFilename", "")
     )
 
     EVRScreenshotError(
@@ -114,7 +114,7 @@ val VRScreenshots = "VRScreenshots".nativeClass(
 
         ScreenshotHandle_t.IN("screenshotHandle", ""),
         EVRScreenshotType.IN("type", "", "EVRScreenshotType_\\w+"),
-        const..charASCII_p.IN("pchSourcePreviewFilename", ""),
-        const..charASCII_p.IN("pchSourceVRFilename", "")
+        charASCII.const.p.IN("pchSourcePreviewFilename", ""),
+        charASCII.const.p.IN("pchSourceVRFilename", "")
     )
 }

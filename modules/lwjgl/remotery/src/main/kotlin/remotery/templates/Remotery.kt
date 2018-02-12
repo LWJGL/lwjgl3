@@ -7,7 +7,8 @@ package remotery.templates
 import org.lwjgl.generator.*
 import remotery.*
 
-val Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_", library = REMOTERY_LIBRARY) {
+// Prefixed with an underscore to avoid a nameclash with the Remotery type
+val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_", library = REMOTERY_LIBRARY) {
     remoteryIncludes("c")
 
     documentation =
@@ -107,24 +108,24 @@ val Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_", library 
         "CreateGlobalInstance",
         "",
 
-        Check(1)..Remotery_p.p.OUT("remotery", "")
+        Check(1)..Remotery.p.p.OUT("remotery", "")
     )
 
     void(
         "DestroyGlobalInstance",
         "",
 
-        Remotery_p.IN("remotery", "")
+        Remotery.p.IN("remotery", "")
     )
 
     void(
         "SetGlobalInstance",
         "",
 
-        Remotery_p.IN("remotery", "")
+        Remotery.p.IN("remotery", "")
     )
 
-    Remotery_p(
+    Remotery.p(
         "GetGlobalInstance",
         ""
     )

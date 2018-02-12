@@ -35,7 +35,7 @@ val OES_vertex_array_object = "OESVertexArrayObject".nativeClassGLES("OES_vertex
         "",
 
         AutoSize("arrays")..GLsizei.IN("n", ""),
-        SingleValue("array")..const..GLuint_p.IN("arrays", "")
+        SingleValue("array")..GLuint.const.p.IN("arrays", "")
     )
 
     void(
@@ -43,7 +43,7 @@ val OES_vertex_array_object = "OESVertexArrayObject".nativeClassGLES("OES_vertex
         "",
 
         AutoSize("arrays")..GLsizei.IN("n", ""),
-        ReturnParam..Check(1)..GLuint_p.OUT("arrays", "")
+        ReturnParam..Check(1)..GLuint.p.OUT("arrays", "")
     )
 
     GLboolean(

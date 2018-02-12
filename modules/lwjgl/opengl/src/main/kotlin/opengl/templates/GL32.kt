@@ -55,7 +55,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
         GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
         GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint64_p.OUT("params", "the requested parameter")
+        Check(1)..ReturnParam..GLint64.p.OUT("params", "the requested parameter")
     )
 
     // ARB_draw_elements_base_vertex
@@ -71,7 +71,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
         GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
     )
 
@@ -88,7 +88,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
         GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
     )
 
@@ -103,7 +103,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
+        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
         GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
         GLint.IN("basevertex", "a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays")
     )
@@ -117,11 +117,11 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         """,
 
         GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        const..GLsizei_p.IN("count", "an array of the elements counts"),
+        GLsizei.const.p.IN("count", "an array of the elements counts"),
         GLenum.IN("type", "the type of the values in {@code indices}", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        const..void_pp.IN("indices", "a pointer to the location where the indices are stored"),
+        void.const.p.p.IN("indices", "a pointer to the location where the indices are stored"),
         AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", "the size of the {@code count} array"),
-        GLint_p.IN("basevertex", "a pointer to the location where the base vertices are stored")
+        GLint.p.IN("basevertex", "a pointer to the location where the base vertices are stored")
     )
 
     // ARB_provoking_vertex
@@ -289,7 +289,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
         GLenum.IN("pname", "the sample parameter name", "#SAMPLE_POSITION"),
         GLuint.IN("index", "the index of the sample whose position to query"),
-        Check(1)..ReturnParam..GLfloat_p.OUT("val", "an array to receive the position of the sample")
+        Check(1)..ReturnParam..GLfloat.p.OUT("val", "an array to receive the position of the sample")
     )
 
     void(
@@ -503,7 +503,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         "Returns the 64bit integer value or values of a selected parameter.",
 
         GLenum.IN("pname", "the parameter value to be returned"),
-        Check(1)..ReturnParam..GLint64_p.OUT("params", "the value or values of the specified parameter")
+        Check(1)..ReturnParam..GLint64.p.OUT("params", "the value or values of the specified parameter")
     )
 
     void(
@@ -512,7 +512,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
         GLenum.IN("pname", "the indexed state to query"),
         GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLint64_p.OUT("params", "the value or values of the specified parameter")
+        Check(1)..ReturnParam..GLint64.p.OUT("params", "the value or values of the specified parameter")
     )
 
     void(
@@ -522,8 +522,8 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         GLsync.IN("sync", "the sync object whose properties to query"),
         GLenum.IN("pname", "the parameter whose value to retrieve from the sync object specified in {@code sync}", SyncProperties),
         AutoSize("values")..GLsizei.IN("bufSize", "the size of the buffer whose address is given in {@code values}"),
-        Check(1)..nullable..GLsizei_p.OUT("length", "the address of an variable to receive the number of integers placed in {@code values}"),
-        ReturnParam..GLint_p.OUT("values", "the address of an array to receive the values of the queried parameter")
+        Check(1)..nullable..GLsizei.p.OUT("length", "the address of an variable to receive the number of integers placed in {@code values}"),
+        ReturnParam..GLint.p.OUT("values", "the address of an array to receive the values of the queried parameter")
     )
 
 }

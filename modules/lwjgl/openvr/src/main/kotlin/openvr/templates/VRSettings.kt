@@ -17,7 +17,7 @@ val VRSettings = "VRSettings".nativeClass(
         """
         """
 
-    const..charASCII_p(
+    charASCII.const.p(
         "GetSettingsErrorNameFromEnum",
         "",
 
@@ -36,8 +36,8 @@ val VRSettings = "VRSettings".nativeClass(
         "SetBool",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         bool.IN("bValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
@@ -46,8 +46,8 @@ val VRSettings = "VRSettings".nativeClass(
         "SetInt32",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         int32_t.IN("nValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
@@ -56,8 +56,8 @@ val VRSettings = "VRSettings".nativeClass(
         "SetFloat",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         float.IN("flValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
@@ -66,9 +66,9 @@ val VRSettings = "VRSettings".nativeClass(
         "SetString",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
-        const..charASCII_p.IN("pchValue", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -76,8 +76,8 @@ val VRSettings = "VRSettings".nativeClass(
         "GetBool",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -85,8 +85,8 @@ val VRSettings = "VRSettings".nativeClass(
         "GetInt32",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -94,8 +94,8 @@ val VRSettings = "VRSettings".nativeClass(
         "GetFloat",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -103,9 +103,9 @@ val VRSettings = "VRSettings".nativeClass(
         "GetString",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
-        char_p.OUT("pchValue", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
+        char.p.OUT("pchValue", ""),
         AutoSize("pchValue")..uint32_t.IN("unValueLen", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
@@ -114,7 +114,7 @@ val VRSettings = "VRSettings".nativeClass(
         "RemoveSection",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSection", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -122,8 +122,8 @@ val VRSettings = "VRSettings".nativeClass(
         "RemoveKeyInSection",
         "",
 
-        const..charASCII_p.IN("pchSection", ""),
-        const..charASCII_p.IN("pchSettingsKey", ""),
+        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p.IN("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 }

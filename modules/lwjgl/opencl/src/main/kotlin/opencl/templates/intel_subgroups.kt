@@ -68,12 +68,12 @@ val intel_subgroups = "INTELSubgroups".nativeClassCL("intel_subgroups", INTEL) {
             "input_value_size",
             "specifies the size in bytes of memory pointed to by {@code input_value}. This size must be equal to the size of the input type."
         ),
-        const..void_p.IN(
+        void.const.p.IN(
             "input_value",
             "a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL it is ignored."
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
         PARAM_VALUE_SIZE_RET
     )
 }

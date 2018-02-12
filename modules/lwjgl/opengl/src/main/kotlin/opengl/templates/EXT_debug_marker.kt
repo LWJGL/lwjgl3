@@ -26,7 +26,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfi
         "",
 
         AutoSize("marker")..GLsizei.IN("length", ""),
-        const..GLcharUTF8_p.IN("marker", "")
+        GLcharUTF8.const.p.IN("marker", "")
     )
 
     void(
@@ -34,7 +34,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfi
         "",
 
         AutoSize("marker")..GLsizei.IN("length", ""),
-        const..GLcharUTF8_p.IN("marker", "")
+        GLcharUTF8.const.p.IN("marker", "")
     )
 
     void(

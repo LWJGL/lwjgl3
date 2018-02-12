@@ -112,7 +112,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         GLenum.IN("category", "the message category", Categories),
         GLenum.IN("severity", "the message severity", Severities),
         AutoSize("ids")..GLsizei.IN("count", "the number of values in the {@code ids} array"),
-        SingleValue("id")..nullable..const..GLuint_p.IN("ids", "an array of message ids"),
+        SingleValue("id")..nullable..GLuint.const.p.IN("ids", "an array of message ids"),
         GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
     )
 
@@ -134,7 +134,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         GLenum.IN("severity", "the message severity", Severities),
         GLuint.IN("id", "the message id"),
         AutoSize("buf")..GLsizei.IN("length", "the number of character in the message"),
-        const..GLcharUTF8_p.IN("buf", "the message characters")
+        GLcharUTF8.const.p.IN("buf", "the message characters")
     )
 
     void(
@@ -193,10 +193,10 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
         GLuint.IN("count", "the number of debug messages to retrieve from the log"),
         AutoSize("messageLog")..GLsizei.IN("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
-        Check("count")..nullable..GLenum_p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
-        Check("count")..nullable..GLuint_p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
-        Check("count")..nullable..GLuint_p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
-        Check("count")..nullable..GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
-        nullable..GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
+        Check("count")..nullable..GLenum.p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
+        Check("count")..nullable..GLuint.p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
+        Check("count")..nullable..GLuint.p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
+        Check("count")..nullable..GLsizei.p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
+        nullable..GLcharUTF8.p.OUT("messageLog", "an array of characters that will receive the messages")
     )
 }

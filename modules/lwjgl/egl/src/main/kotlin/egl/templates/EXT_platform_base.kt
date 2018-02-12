@@ -43,7 +43,7 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
 
         EGLenum.IN("platform", ""),
         opaque_p.IN("native_display", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -53,7 +53,7 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         opaque_p.IN("native_window", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 
     EGLSurface(
@@ -63,6 +63,6 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
         EGLDisplay.IN("dpy", ""),
         EGLConfig.IN("config", ""),
         opaque_p.IN("native_pixmap", ""),
-        nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
+        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
     )
 }

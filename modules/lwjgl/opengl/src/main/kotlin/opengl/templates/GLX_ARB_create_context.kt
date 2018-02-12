@@ -73,7 +73,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
             Use #IsDirect() to determine whether or not a request for a direct rendering context succeeded.
             """
         ),
-        nullable..NullTerminated..const..int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@code None}")
+        nullable..NullTerminated..int.const.p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@code None}")
     )
 
 }

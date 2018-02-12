@@ -40,6 +40,6 @@ val GREMEDY_string_marker = "GREMEDYStringMarker".nativeClassGL("GREMEDY_string_
             is assumed to be null-terminated.
             """
         ),
-        const..GLcharUTF8_p.IN("string", "a pointer to the array of bytes representing the marker being inserted, which need not be null-terminated")
+        GLcharUTF8.const.p.IN("string", "a pointer to the array of bytes representing the marker being inserted, which need not be null-terminated")
     )
 }

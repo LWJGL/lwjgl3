@@ -36,7 +36,7 @@ val AL_SOFT_source_resampler = "SOFTSourceResampler".nativeClassAL("SOFT_source_
         "RESAMPLER_NAME_SOFT"..0x1213
     )
 
-    const..ALcharUTF8_p(
+    ALcharUTF8.const.p(
         "GetStringiSOFT",
         "",
 

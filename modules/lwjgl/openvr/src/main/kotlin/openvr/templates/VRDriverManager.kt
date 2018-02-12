@@ -27,7 +27,7 @@ val VRDriverManager = "VRDriverManager".nativeClass(
         "",
 
         DriverId_t.IN("nDriver", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII_p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
         AutoSize("pchValue")..uint32_t.IN("unBufferSize", ""),
 
         returnDoc = "the length of the number of bytes necessary to hold this string including the trailing null"

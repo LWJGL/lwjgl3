@@ -928,7 +928,7 @@ val User32 = "User32".nativeClass(
         "RegisterClassEx",
         "Registers a window class for subsequent use in calls to the #CreateWindowEx() function.",
 
-        const..WNDCLASSEX_p.IN(
+        WNDCLASSEX.const.p.IN(
             "lpwcx",
             "a ##WNDCLASSEX structure. You must fill the structure with the appropriate class attributes before passing it to the function."
         )
@@ -1130,7 +1130,7 @@ val User32 = "User32".nativeClass(
         time the thread calls the #GetMessage() or #PeekMessage() function.
         """,
 
-        const..MSG_p.IN(
+        MSG.const.p.IN(
             "lpMsg",
             """
             an ##MSG structure that contains message information retrieved from the calling thread's message queue by using the #GetMessage() or #PeekMessage()
@@ -1151,7 +1151,7 @@ val User32 = "User32".nativeClass(
         "DispatchMessage",
         "Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the #GetMessage() function.",
 
-        const..MSG_p.IN("lpmsg", "a pointer to a structure that contains the message.")
+        MSG.const.p.IN("lpmsg", "a pointer to a structure that contains the message.")
     )
 
     NativeName("PostMessageW")..SaveLastError..BOOL(
@@ -1268,7 +1268,7 @@ val User32 = "User32".nativeClass(
         "Retrieves the show state and the restored, minimized, and maximized positions of the specified window.",
 
         HWND.IN("hWnd", "a handle to the window"),
-        WINDOWPLACEMENT_p.INOUT(
+        WINDOWPLACEMENT.p.INOUT(
             "lpwndpl",
             """
             a pointer to the ##WINDOWPLACEMENT structure that receives the show state and position information.
@@ -1284,7 +1284,7 @@ val User32 = "User32".nativeClass(
         "Sets the show state and the restored, minimized, and maximized positions of the specified window.",
 
         HWND.IN("hWnd", "a handle to the window"),
-        const..WINDOWPLACEMENT_p.IN(
+        WINDOWPLACEMENT.const.p.IN(
             "lpwndpl",
             """
             a pointer to the ##WINDOWPLACEMENT structure that specifies the new show state and window positions.
@@ -1904,7 +1904,7 @@ val User32 = "User32".nativeClass(
             EnumDisplaySettingsMode,
             LinkMode.SINGLE_CNT
         ),
-        DEVMODE_p.OUT(
+        DEVMODE.p.OUT(
             "lpDevMode",
             """
             a pointer to a ##DEVMODE structure into which the function stores information about the specified graphics mode. Before calling
@@ -1932,7 +1932,7 @@ val User32 = "User32".nativeClass(
             calling {@code EnumDisplayDevices} and checking for the #DISPLAY_DEVICE_PRIMARY_DEVICE flag.
             """
         ),
-        nullable..DEVMODE_p.IN(
+        nullable..DEVMODE.p.IN(
             "lpDevMode",
             """
             a pointer to a ##DEVMODE structure that describes the new graphics mode. If {@code lpDevMode} is #NULL, all the values currently in the registry
@@ -1980,7 +1980,7 @@ val User32 = "User32".nativeClass(
         outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
         """,
 
-        const..nullable..RECT_p.IN(
+        nullable..RECT.const.p.IN(
             "rect",
             """
             a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this

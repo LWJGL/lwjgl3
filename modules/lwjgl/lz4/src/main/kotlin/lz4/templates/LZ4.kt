@@ -43,7 +43,7 @@ ENABLE_WARNINGS()""")
     StringConstant("Version string.", "VERSION_STRING".."""LZ4_VERSION_MAJOR + "." + LZ4_VERSION_MINOR + "." + LZ4_VERSION_RELEASE""")
 
     int("versionNumber", "Returns the version number.")
-    Nonnull..const..charASCII_p("versionString", "Returns the version string.")
+    Nonnull..charASCII.const.p("versionString", "Returns the version string.")
 
     IntConstant(
         "Maximum input size.",
@@ -84,8 +84,8 @@ ENABLE_WARNINGS()""")
         This function never writes outside {@code dst} buffer, nor read outside {@code src} buffer.
         """,
 
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", "supported max value is #MAX_INPUT_SIZE"),
         AutoSize("dst")..int.IN("dstCapacity", "full or partial size of buffer {@code dst} (which must be already allocated)"),
 
@@ -103,8 +103,8 @@ ENABLE_WARNINGS()""")
         input buffer.
         """,
 
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("compressedSize", "is the exact complete size of the compressed block"),
         AutoSize("dst")..int.IN("dstCapacity", "is the size of destination buffer, which must be already allocated"),
 
@@ -144,8 +144,8 @@ ENABLE_WARNINGS()""")
         replaced by {@code ACCELERATION_DEFAULT} (see {@code lz4.c}), which is 1.
         """,
 
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", ""),
         AutoSize("dst")..int.IN("dstCapacity", ""),
         int.IN("acceleration", "")
@@ -165,9 +165,9 @@ ENABLE_WARNINGS()""")
         it as {@code void* state} to compression function.
         """,
 
-        Unsafe..void_p.OUT("state", ""),
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        Unsafe..void.p.OUT("state", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", ""),
         AutoSize("dst")..int.IN("dstCapacity", ""),
         int.IN("acceleration", "")
@@ -183,9 +183,9 @@ ENABLE_WARNINGS()""")
         much data as possible from {@code src}.
         """,
 
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
-        AutoSize("src")..Check(1)..int_p.INOUT(
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
+        AutoSize("src")..Check(1)..int.p.INOUT(
             "srcSizePtr",
             "will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; old value."
         ),
@@ -202,8 +202,8 @@ ENABLE_WARNINGS()""")
         comes from a trusted source).
         """,
 
-        Unsafe..const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        Unsafe..char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("dst")..int.IN("originalSize", "is the original uncompressed size"),
 
         returnDoc =
@@ -225,8 +225,8 @@ ENABLE_WARNINGS()""")
         This function never writes outside of output buffer, and never reads outside of input buffer. It is therefore protected against malicious data packets.
         """,
 
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("compressedSize", ""),
         int.IN("targetOutputSize", ""),
         AutoSize("dst")..int.IN("dstCapacity", ""),
@@ -240,7 +240,7 @@ ENABLE_WARNINGS()""")
         """
     )
 
-    LZ4_stream_t_p(
+    LZ4_stream_t.p(
         "createStream",
         "Allocates and initializes an {@code LZ4_stream_t} structure."
     )
@@ -249,14 +249,14 @@ ENABLE_WARNINGS()""")
         "freeStream",
         "Releases memory of an {@code LZ4_stream_t} structure.",
 
-        LZ4_stream_t_p.IN("streamPtr", "")
+        LZ4_stream_t.p.IN("streamPtr", "")
     )
 
     void(
         "resetStream",
         "An {@code LZ4_stream_t} structure can be allocated once and re-used multiple times. Use this function to start compressing a new stream.",
 
-        LZ4_stream_t_p.IN("streamPtr", "")
+        LZ4_stream_t.p.IN("streamPtr", "")
     )
 
     int(
@@ -267,8 +267,8 @@ ENABLE_WARNINGS()""")
         Any previous data will be forgotten, only {@code dictionary} will remain in memory. Loading a size of 0 is allowed, and is the same as reset.
         """,
 
-        LZ4_stream_t_p.IN("streamPtr", ""),
-        nullable..const..char_p.IN("dictionary", ""),
+        LZ4_stream_t.p.IN("streamPtr", ""),
+        nullable..char.const.p.IN("dictionary", ""),
         AutoSize("dictionary")..int.IN("dictSize", "")
     )
 
@@ -290,9 +290,9 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        LZ4_stream_t_p.IN("streamPtr", ""),
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        LZ4_stream_t.p.IN("streamPtr", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", ""),
         AutoSize("dst")..int.IN("dstCapacity", ""),
         int.IN("acceleration", ""),
@@ -313,14 +313,14 @@ ENABLE_WARNINGS()""")
         Note: it's not necessary to call #loadDict() after #saveDict(), dictionary is immediately usable.
         """,
 
-        LZ4_stream_t_p.IN("streamPtr", ""),
-        char_p.OUT("safeBuffer", ""),
+        LZ4_stream_t.p.IN("streamPtr", ""),
+        char.p.OUT("safeBuffer", ""),
         AutoSize("safeBuffer")..int.IN("dictSize", ""),
 
         returnDoc = "saved dictionary size in bytes (necessarily &le; {@code dictSize}), or 0 if error"
     )
 
-    LZ4_streamDecode_t_p(
+    LZ4_streamDecode_t.p(
         "createStreamDecode",
         """
         Creates a streaming decompression tracking structure.
@@ -333,7 +333,7 @@ ENABLE_WARNINGS()""")
         "freeStreamDecode",
         "Frees a streaming decompression tracking structure.",
 
-        LZ4_streamDecode_t_p.IN("LZ4_stream", "")
+        LZ4_streamDecode_t.p.IN("LZ4_stream", "")
     )
 
     intb(
@@ -345,8 +345,8 @@ ENABLE_WARNINGS()""")
         A dictionary can optionnally be set. Use #NULL or size 0 for a simple reset order.
         """,
 
-        LZ4_streamDecode_t_p.IN("LZ4_streamDecode", ""),
-        const..char_p.IN("dictionary", ""),
+        LZ4_streamDecode_t.p.IN("LZ4_streamDecode", ""),
+        char.const.p.IN("dictionary", ""),
         AutoSize("dictionary")..int.IN("dictSize", ""),
 
         returnDoc = "1 if OK, 0 if error"
@@ -384,9 +384,9 @@ ENABLE_WARNINGS()""")
         #setStreamDecode() before decompressing next block.
         """,
 
-        LZ4_streamDecode_t_p.IN("LZ4_streamDecode", ""),
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        LZ4_streamDecode_t.p.IN("LZ4_streamDecode", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", ""),
         AutoSize("dst")..int.IN("dstCapacity", "")
     )
@@ -395,9 +395,9 @@ ENABLE_WARNINGS()""")
         "decompress_fast_continue",
         "See #decompress_safe_continue().",
 
-        LZ4_streamDecode_t_p.IN("LZ4_streamDecode", ""),
-        Unsafe..const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        LZ4_streamDecode_t.p.IN("LZ4_streamDecode", ""),
+        Unsafe..char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("dst")..int.IN("originalSize", "")
     )
 
@@ -408,11 +408,11 @@ ENABLE_WARNINGS()""")
         and don't need an {@code LZ4_streamDecode_t} structure.
         """,
 
-        const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("src")..int.IN("srcSize", ""),
         AutoSize("dst")..int.IN("dstCapacity", ""),
-        const..char_p.IN("dictStart", ""),
+        char.const.p.IN("dictStart", ""),
         AutoSize("dictStart")..int.IN("dictSize", "")
     )
 
@@ -420,10 +420,10 @@ ENABLE_WARNINGS()""")
         "decompress_fast_usingDict",
         "See {@code decompress_safe_usingDict}.",
 
-        Unsafe..const..char_p.IN("src", ""),
-        char_p.OUT("dst", ""),
+        Unsafe..char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
         AutoSize("dst")..int.IN("originalSize", ""),
-        const..char_p.IN("dictStart", ""),
+        char.const.p.IN("dictStart", ""),
         AutoSize("dictStart")..int.IN("dictSize", "")
     )
 }

@@ -78,6 +78,6 @@ val EXT_draw_buffers = "EXTDrawBuffers".nativeClassGLES("EXT_draw_buffers", post
         "",
 
         AutoSize("bufs")..GLsizei.IN("n", ""),
-        SingleValue("buf")..const..GLenum_p.IN("bufs", "")
+        SingleValue("buf")..GLenum.const.p.IN("bufs", "")
     )
 }

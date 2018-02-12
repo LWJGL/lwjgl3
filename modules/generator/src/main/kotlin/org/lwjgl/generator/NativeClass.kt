@@ -260,7 +260,7 @@ class NativeClass(
                         parameters = *func.parameters.asSequence().map {
                             if (it.isArrayParameter(autoSizeResultOutParams))
                                 Parameter(
-                                    ArrayType(it.nativeType as PointerType),
+                                    ArrayType(it.nativeType as PointerType<*>),
                                     it.name,
                                     it.paramType,
                                     it.documentation
@@ -298,14 +298,14 @@ class NativeClass(
                             parameters = *func.parameters.asSequence().map {
                                 if (it.isArrayParameter(autoSizeResultOutParams))
                                     Parameter(
-                                        ArrayType(it.nativeType as PointerType),
+                                        ArrayType(it.nativeType as PointerType<*>),
                                         it.name,
                                         it.paramType,
                                         it.documentation
                                     ).copyModifiers(it).removeArrayModifiers()
                                 else if (it.has<MultiType>())
                                     Parameter(
-                                        ArrayType(it.nativeType as PointerType, autoType),
+                                        ArrayType(it.nativeType as PointerType<*>, autoType),
                                         it.name,
                                         it.paramType,
                                         it.documentation
@@ -345,7 +345,7 @@ class NativeClass(
                             val autoSize = it.get<AutoSize>()
                             it.replaceModifier(if (autoSize.factor == null)
                                 AutoSizeShl(
-                                    autoType.byteShift!!,
+                                    autoType.byteShift,
                                     autoSize.reference,
                                     *autoSize.dependent
                                 )
@@ -353,7 +353,7 @@ class NativeClass(
                                 AutoSize(
                                     autoSize.reference,
                                     *autoSize.dependent,
-                                    factor = getAutoSizeFactor(autoSize.factor, autoType.byteShift!!.toInt())
+                                    factor = getAutoSizeFactor(autoSize.factor, autoType.byteShift.toInt())
                                 )
                             )
                         }
@@ -429,7 +429,7 @@ class NativeClass(
                     println("import java.nio.*;\n")
 
                 val needsPointerBuffer: NativeType.() -> Boolean = {
-                    this is PointerType && this.elementType.let { it != null && (it is PointerType || (it.mapping == PrimitiveMapping.POINTER && it !is StructType)) }
+                    this is PointerType<*> && this.elementType.let { it is PointerType<*> || (it.mapping == PrimitiveMapping.POINTER && it !is StructType) }
                 }
                 if (functions.any {
                     it.returns.nativeType.needsPointerBuffer() || it.hasParam {
@@ -441,7 +441,7 @@ class NativeClass(
 
             val hasMemoryStack = hasBuffers && functions.any { func ->
                 func.hasParam {
-                    it.nativeType is PointerType &&
+                    it.nativeType is PointerType<*> &&
                     (
                         it.has<Return>() ||
                         it.has<SingleValue>() ||
@@ -460,7 +460,7 @@ class NativeClass(
                 println("import static org.lwjgl.system.APIUtil.*;")
             if (hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
                 func.hasParam { param ->
-                    param.nativeType is PointerType && func.getReferenceParam<AutoSize>(param.name).let {
+                    param.nativeType is PointerType<*> && func.getReferenceParam<AutoSize>(param.name).let {
                         if (it == null)
                             !param.has<Nullable>() && param.nativeType.elementType !is StructType
                         else
@@ -475,7 +475,7 @@ class NativeClass(
                 println("import static org.lwjgl.system.MemoryStack.*;")
             if (hasBuffers && functions.any {
                 it.returns.isBufferPointer || it.hasParam { param ->
-                    param.nativeType.let { it is PointerType && it.mapping !== PointerMapping.OPAQUE_POINTER && (it.elementType !is StructType || param.has<Nullable>()) }
+                    param.nativeType.let { it is PointerType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && (it.elementType !is StructType || param.has<Nullable>()) }
                 }
             }) {
                 println("import static org.lwjgl.system.MemoryUtil.*;")
@@ -545,7 +545,7 @@ class NativeClass(
         }
 
         genFunctions.forEach { func ->
-            if (!func.hasParam { it.nativeType is ArrayType })
+            if (!func.hasParam { it.nativeType is ArrayType<*> })
                 println("\n$t// --- [ ${func.name} ] ---")
             try {
                 func.generateMethods(this)
@@ -647,20 +647,47 @@ class NativeClass(
     fun String.enum(documentation: String, expression: String) =
         Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
-    operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", see: Array<String>? = null, since: String = "", noPrefix: Boolean = false) =
-        ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, see = see, since = since, noPrefix = noPrefix)
+    operator fun VoidType.invoke(
+        name: String,
+        documentation: String,
+        vararg parameters: Parameter,
+        returnDoc: String = "",
+        see: Array<String>? = null,
+        since: String = "",
+        noPrefix: Boolean = false
+    ) =
+        createFunction(ReturnValue(this), name, documentation, returnDoc, see, since, noPrefix, *parameters)
 
-    operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", see: Array<String>? = null, since: String = "", noPrefix: Boolean = false): Func {
+    operator fun DataType.invoke(
+        name: String,
+        documentation: String,
+        vararg parameters: Parameter,
+        returnDoc: String = "",
+        see: Array<String>? = null,
+        since: String = "",
+        noPrefix: Boolean = false
+    ) = createFunction(ReturnValue(this), name, documentation, returnDoc, see, since, noPrefix, *parameters)
+
+    private fun createFunction(
+        returns: ReturnValue,
+        name: String,
+        documentation: String,
+        returnDoc: String,
+        see: Array<String>?,
+        since: String,
+        noPrefix: Boolean,
+        vararg parameters: Parameter
+    ): Func {
         val overload = name.indexOf('@').let { if (it == -1) name else name.substring(0, it) }
         val func = Func(
-            returns = this,
+            returns = returns,
             simpleName = overload,
             name = if (noPrefix) overload else "$prefixMethod$overload",
             documentation = { parameterFilter ->
                 this@NativeClass.toJavaDoc(
                     processDocumentation(documentation),
                     parameters.asSequence().filter { it !== JNI_ENV && parameterFilter(it) },
-                    this.nativeType,
+                    returns.nativeType,
                     returnDoc,
                     see,
                     since

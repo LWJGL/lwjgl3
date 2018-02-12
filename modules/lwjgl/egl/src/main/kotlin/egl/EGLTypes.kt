@@ -17,51 +17,42 @@ val khronos_stime_nanoseconds_t = typedef(khronos_int64_t, "khronos_utime_nanose
 
 // EGL 1.0
 val EGLBoolean = PrimitiveType("EGLBoolean", PrimitiveMapping.BOOLEAN4)
-val EGLBoolean_p = EGLBoolean.p
 val EGLint = IntegerType("EGLint", PrimitiveMapping.INT)
-val EGLint_p = EGLint.p
 
-val EGLDisplay = "EGLDisplay".opaque_p
-val EGLNativeDisplayType = "EGLNativeDisplayType".opaque_p
-val EGLNativePixmapType = "EGLNativePixmapType".opaque_p
-val EGLNativeWindowType = "EGLNativeWindowType".opaque_p
-val EGLConfig = "EGLConfig".opaque_p
-val EGLSurface = "EGLSurface".opaque_p
-val EGLContext = "EGLContext".opaque_p
+val EGLDisplay = "EGLDisplay".handle
+val EGLNativeDisplayType = "EGLNativeDisplayType".handle
+val EGLNativePixmapType = "EGLNativePixmapType".handle
+val EGLNativeWindowType = "EGLNativeWindowType".handle
+val EGLConfig = "EGLConfig".handle
+val EGLSurface = "EGLSurface".handle
+val EGLContext = "EGLContext".handle
 
-val EGLNativeDisplayType_p = EGLNativeDisplayType.p
-val EGLNativePixmapType_p = EGLNativePixmapType.p
-val EGLNativeWindowType_p = EGLNativeWindowType.p
-val EGLConfig_p = EGLConfig.p
-
-val __eglMustCastToProperFunctionPointerType = "__eglMustCastToProperFunctionPointerType".opaque_p
+val __eglMustCastToProperFunctionPointerType = "__eglMustCastToProperFunctionPointerType".handle
 
 // EGL 1.2
 val EGLenum = typedef(unsigned_int, "EGLenum")
-val EGLClientBuffer = "EGLClientBuffer".opaque_p
+val EGLClientBuffer = "EGLClientBuffer".handle
 
 // EGL 1.5
-val EGLSync = "EGLSync".opaque_p
+val EGLSync = "EGLSync".handle
 val EGLAttrib = typedef(intptr_t, "EGLAttrib")
-val EGLAttrib_p = EGLAttrib.p
 val EGLTime = typedef(khronos_utime_nanoseconds_t, "EGLTime")
-val EGLImage = "EGLImage".opaque_p
+val EGLImage = "EGLImage".handle
 
 // ANDROID_presentation_time
 val EGLnsecsANDROID = typedef(khronos_stime_nanoseconds_t, "EGLnsecsANDROID")
 
 // KHR_cl_event2
 val EGLAttribKHR = typedef(intptr_t, "EGLAttribKHR")
-val EGLAttribKHR_p = EGLAttribKHR.p
 
 // KHR_debug
-val EGLObjectKHR = "EGLObjectKHR".opaque_p
-val EGLLabelKHR = "EGLLabelKHR".opaque_p
+val EGLObjectKHR = "EGLObjectKHR".handle
+val EGLLabelKHR = "EGLLabelKHR".handle
 val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
     Module.EGL, void, "EGLDebugMessageKHRCallback",
     "Will be called when a debug message is generated.",
     EGLenum.IN("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
-    const..charASCII_p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
+    charASCII.const.p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
     EGLint.IN("messageType", "will contain one of the debug message types"),
     EGLLabelKHR.IN(
         "threadLabel",
@@ -79,7 +70,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
         the command before the primary object was validated, therefore its label can not be included in the callback.
         """
     ),
-    nullable..const..charUTF8_p.IN(
+    nullable..charUTF8.const.p.IN(
         "message",
         """
         will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
@@ -120,17 +111,15 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 }
 
 // KHR_fence_sync
-val EGLSyncKHR = "EGLSyncKHR".opaque_p
+val EGLSyncKHR = "EGLSyncKHR".handle
 val EGLTimeKHR = typedef(khronos_utime_nanoseconds_t, "EGLTimeKHR")
-val EGLTimeKHR_p = EGLTimeKHR.p
 
 // KHR_image
-val EGLImageKHR = "EGLImageKHR".opaque_p
+val EGLImageKHR = "EGLImageKHR".handle
 
 // KHR_stream
-val EGLStreamKHR = "EGLStreamKHR".opaque_p
+val EGLStreamKHR = "EGLStreamKHR".handle
 val EGLuint64KHR = typedef(khronos_uint64_t, "EGLuint64KHR")
-val EGLuint64KHR_p = EGLuint64KHR.p
 
 // KHR_stream_cross_process_fd
 val EGLNativeFileDescriptorKHR = typedef(int, "EGLNativeFileDescriptorKHR")
@@ -139,42 +128,39 @@ val EGLNativeFileDescriptorKHR = typedef(int, "EGLNativeFileDescriptorKHR")
 val EGLsizeiANDROID = typedef(khronos_ssize_t, "EGLsizeiANDROID")
 val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
     Module.EGL, void, "EGLSetBlobFuncANDROID", "",
-    const..void_p.IN("key", ""),
+    void.const.p.IN("key", ""),
     AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
-    const..void_p.IN("value", ""),
+    void.const.p.IN("value", ""),
     AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
     documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
 }
 val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
     Module.EGL, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
-    const..void_p.IN("key", ""),
+    void.const.p.IN("key", ""),
     AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
-    void_p.IN("value", ""),
+    void.p.IN("value", ""),
     AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
     documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
 }
 
 // EXT_device_base
-val EGLDeviceEXT = "EGLDeviceEXT".opaque_p
-val EGLDeviceEXT_p = EGLDeviceEXT.p
+val EGLDeviceEXT = "EGLDeviceEXT".handle
 
 // EXT_output_base
-val EGLOutputLayerEXT = "EGLOutputLayerEXT".opaque_p
-val EGLOutputLayerEXT_p = EGLOutputLayerEXT.p
-val EGLOutputPortEXT = "EGLOutputPortEXT".opaque_p
-val EGLOutputPortEXT_p = EGLOutputPortEXT.p
+val EGLOutputLayerEXT = "EGLOutputLayerEXT".handle
+val EGLOutputPortEXT = "EGLOutputPortEXT".handle
 
 // HI_clientpixmap
-val EGLClientPixmapHI_p = struct(Module.EGL, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
+val EGLClientPixmapHI = struct(Module.EGL, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
     documentation =
         """
         Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function #CreatePixmapSurfaceHI() to
         create the {@code PixmapSurface}.
         """
 
-    void_p.member(
+    void.p.member(
         "pData",
         """
         pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
@@ -190,10 +176,10 @@ val EGLClientPixmapHI_p = struct(Module.EGL, "EGLClientPixmapHI", nativeName = "
         """
     )
     EGLint.member("iStride", "stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.")
-}.p
+}
 
 // NV_sync
-val EGLSyncNV = "EGLSyncNV".opaque_p
+val EGLSyncNV = "EGLSyncNV".handle
 val EGLTimeNV = typedef(khronos_utime_nanoseconds_t, "EGLTimeNV")
 
 // NV_system_time

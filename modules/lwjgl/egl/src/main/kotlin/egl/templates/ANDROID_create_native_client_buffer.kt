@@ -48,7 +48,7 @@ val ANDROID_create_native_client_buffer = "ANDROIDCreateNativeClientBuffer".nati
         earlier than when all of its associated {@code EGLImages} are destroyed by #DestroyImageKHR().
         """,
 
-        nullable..noneTerminated..const..EGLint_p.IN(
+        nullable..noneTerminated..EGLint.const.p.IN(
             "attrib_list",
             """
             a list of attribute-value pairs which is used to specify the dimensions, format, and usage of the underlying buffer structure. If it is non-#NULL,

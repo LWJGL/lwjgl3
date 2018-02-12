@@ -470,7 +470,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        nullable..const..ovrInitParams_p.IN(
+        nullable..ovrInitParams.const.p.IN(
             "params",
             """
             specifies custom initialization options. May be #NULL to indicate default options when using the CAPI shim. If you are directly calling the
@@ -518,10 +518,10 @@ ENABLE_WARNINGS()""")
         the interim.
         """,
 
-        ovrErrorInfo_p.OUT("errorInfo", "The last ##OVRErrorInfo for the current thread")
+        ovrErrorInfo.p.OUT("errorInfo", "The last ##OVRErrorInfo for the current thread")
     )
 
-    Nonnull..const..charUTF8_p(
+    Nonnull..charUTF8.const.p(
         "GetVersionString",
         """
         Returns the version string representing the LibOVRRT version.
@@ -546,7 +546,7 @@ ENABLE_WARNINGS()""")
         """,
 
         int.IN("level", "an {@code ovrLogLevel} constant", LogLevels),
-        const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
+        charUTF8.const.p.IN("message", "a UTF8-encoded null-terminated string"),
 
         returnDoc = "the {@code strlen} of the message or a negative value if the message is too large"
     )
@@ -578,7 +578,7 @@ ovr_IdentifyClient(
     "EngineEditor: true");""")}
         """,
 
-        const..charUTF8_p.IN(
+        charUTF8.const.p.IN(
             "identity",
             "specifies one or more newline-delimited lines of optional info"
         )
@@ -639,7 +639,7 @@ ovr_IdentifyClient(
         in an error return value if the previous session has not been destroyed.
         """,
 
-        Check(1)..ovrSession_p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
+        Check(1)..ovrSession.p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
         ovrGraphicsLuid.p.OUT(
             "pLuid",
             """
@@ -664,7 +664,7 @@ ovr_IdentifyClient(
         "Returns status information for the application.",
 
         session,
-        ovrSessionStatus_p.OUT("sessionStatus", "an ##OVRSessionStatus that is filled in")
+        ovrSessionStatus.p.OUT("sessionStatus", "an ##OVRSessionStatus that is filled in")
     )
 
     ovrResult(
@@ -673,7 +673,7 @@ ovr_IdentifyClient(
 
         session,
         ovrExtensions.IN("extension", "extension to query"),
-        Check(1)..ovrBool_p.OUT("outExtensionSupported", "set to extension support status. #True if supported."),
+        Check(1)..ovrBool.p.OUT("outExtensionSupported", "set to extension support status. #True if supported."),
 
         returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure use #GetLastErrorInfo() to get more information."
     )
@@ -842,7 +842,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrControllerType.IN("controllerType", "which controllers the input will be returned for"),
-        ovrInputState_p.OUT("inputState", "the input state that will be filled in"),
+        ovrInputState.p.OUT("inputState", "the input state that will be filled in"),
 
         returnDoc = "#Success if the new state was successfully obtained"
     )
@@ -899,7 +899,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrControllerType.IN("controllerType", "the controller where the Haptics buffer will be played"),
-        const..ovrHapticsBuffer_p.IN("buffer", "the Haptics buffer containing amplitude samples to be played"),
+        ovrHapticsBuffer.const.p.IN("buffer", "the Haptics buffer containing amplitude samples to be played"),
 
         returnDoc =
         """
@@ -917,7 +917,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrControllerType.IN("controllerType", "the controller where the Haptics buffer will be played"),
-        ovrHapticsPlaybackState_p.OUT("outState", "the state of the haptics engine"),
+        ovrHapticsPlaybackState.p.OUT("outState", "the state of the haptics engine"),
 
         returnDoc =
         """
@@ -940,7 +940,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         session,
         ovrTrackedDeviceType.IN("deviceBitmask", "bitmask of one or more tracked devices to test", TrackedDeviceTypes, LinkMode.BITFIELD),
         ovrBoundaryType.IN("boundaryType", "the boundary type", BoundaryTypes),
-        ovrBoundaryTestResult_p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
+        ovrBoundaryTestResult.p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
 
         returnDoc =
         """
@@ -958,9 +958,9 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         "Tests collision/proximity of a 3D point against the Boundary System.",
 
         session,
-        const..ovrVector3f_p.IN("point", "the 3D point to test"),
+        ovrVector3f.const.p.IN("point", "the 3D point to test"),
         ovrBoundaryType.IN("singleBoundaryType", "the boundary type", BoundaryTypes),
-        ovrBoundaryTestResult_p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
+        ovrBoundaryTestResult.p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
 
         returnDoc =
         """
@@ -977,7 +977,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         "Sets the look and feel of the Boundary System.",
 
         session,
-        const..ovrBoundaryLookAndFeel_p.IN("lookAndFeel", "the look and feel parameters"),
+        ovrBoundaryLookAndFeel.const.p.IN("lookAndFeel", "the look and feel parameters"),
 
         returnDoc = "#Success upon success"
     )
@@ -997,11 +997,11 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         TestBoundary["boundaryType"],
-        nullable..ovrVector3f_p.OUT(
+        nullable..ovrVector3f.p.OUT(
             "outFloorPoints",
             "an array of 3D points (in clockwise order) defining the boundary at floor height (can be #NULL to retrieve only the number of points)"
         ),
-        Check(1)..nullable..int_p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
+        Check(1)..nullable..int.p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
 
         returnDoc =
         """
@@ -1019,7 +1019,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         TestBoundary["boundaryType"],
-        ovrVector3f_p.OUT("outDimensions", "dimensions of the axis aligned bounding box that encloses the area in meters (width, height and length)"),
+        ovrVector3f.p.OUT("outDimensions", "dimensions of the axis aligned bounding box that encloses the area in meters (width, height and length)"),
 
         returnDoc =
         """
@@ -1041,7 +1041,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         """,
 
         session,
-        Check(1)..ovrBool_p.OUT("outIsVisible", "#True, if the boundary is visible"),
+        Check(1)..ovrBool.p.OUT("outIsVisible", "#True, if the boundary is visible"),
 
         returnDoc =
         """
@@ -1131,7 +1131,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} for which the length should be retrieved"),
-        Check(1)..int_p.OUT("out_Length", "returns the number of buffers in the specified chain")
+        Check(1)..int.p.OUT("out_Length", "returns the number of buffers in the specified chain")
     )
 
     ovrResult(
@@ -1140,7 +1140,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} for which the index should be retrieved"),
-        Check(1)..int_p.OUT("out_Index", "returns the current (free) index in specified chain")
+        Check(1)..int.p.OUT("out_Index", "returns the current (free) index in specified chain")
     )
 
     ovrResult(
@@ -1149,7 +1149,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} for which the description should be retrieved"),
-        ovrTextureSwapChainDesc_p.OUT("out_Desc", "returns the description of the specified chain")
+        ovrTextureSwapChainDesc.p.OUT("out_Desc", "returns the description of the specified chain")
     )
 
     ovrResult(
@@ -1310,13 +1310,13 @@ ovrResult result = ovr_EndFrame(session, frameIndex, nullptr, layers, 2);""")}
 
         session,
         long_long.IN("frameIndex", "specifies the targeted application frame index. It must match what was passed to #BeginFrame()."),
-        nullable..const..ovrViewScaleDesc_p.IN(
+        nullable..ovrViewScaleDesc.const.p.IN(
             "viewScaleDesc",
             """
             provides additional information needed only if {@code layerPtrList} contains an #LayerType_Quad. If #NULL, a default version is used based on the
             current configuration and a 1.0 world scale.
             """),
-        const..ovrLayerHeader.p.const.p.IN(
+        ovrLayerHeader.const.p.const.p.IN(
             "layerPtrList",
             """
             specifies a list of ovrLayer pointers, which can include #NULL entries to indicate that any previously shown layer at that index is to not be
@@ -1387,14 +1387,14 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 
         session,
         long_long.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #SubmitFrame() was called"),
-        nullable..const..ovrViewScaleDesc_p.IN(
+        nullable..ovrViewScaleDesc.const.p.IN(
             "viewScaleDesc",
             """
             provides additional information needed only if {@code layerPtrList} contains an #LayerType_Quad. If #NULL, a default version is used based on the
             current configuration and a 1.0 world scale.
             """
         ),
-        const..ovrLayerHeader.p.const.p.IN(
+        ovrLayerHeader.const.p.const.p.IN(
             "layerPtrList",
             """
             a list of {@code ovrLayer} pointers, which can include #NULL entries to indicate that any previously shown layer at that index is to not be
@@ -1459,7 +1459,7 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
         """,
 
         session,
-        ovrPerfStats_p.OUT("outStats", "contains the performance stats for the application and SDK compositor"),
+        ovrPerfStats.p.OUT("outStats", "contains the performance stats for the application and SDK compositor"),
 
         returnDoc = "an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success"
     )
@@ -1575,10 +1575,10 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "Returns the number of camera properties of all cameras.",
 
         session,
-        nullable..ovrExternalCamera_p.OUT(
+        nullable..ovrExternalCamera.p.OUT(
             "cameras",
             "pointer to the array. If #NULL and the provided array capacity is sufficient, will return {@code ovrError_NullArrayPointer}."),
-        AutoSize("cameras")..Check(1)..unsigned_int_p.INOUT(
+        AutoSize("cameras")..Check(1)..unsigned_int.p.INOUT(
             "inoutCameraCount",
             """
             supplies the array capacity, will return the actual \# of cameras defined. If {@code inoutCameraCount} is too small, will return
@@ -1598,9 +1598,9 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         """,
 
         session,
-        const..charASCII_p.IN("name", "specifies which camera to set the intrinsics or extrinsics for"),
-        nullable..const..ovrCameraIntrinsics.p.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
-        nullable..const..ovrCameraExtrinsics.p.IN("extrinsics", "contains the extrinsic parameters to set, can be null")
+        charASCII.const.p.IN("name", "specifies which camera to set the intrinsics or extrinsics for"),
+        nullable..ovrCameraIntrinsics.const.p.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
+        nullable..ovrCameraExtrinsics.const.p.IN("extrinsics", "contains the extrinsic parameters to set, can be null")
     )
 
     // ----------------
@@ -1611,7 +1611,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "Reads a boolean property.",
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
         ovrBool.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
         returnDoc = "the property interpreted as a boolean value. Returns {@code defaultVal} if the property doesn't exist."
@@ -1626,7 +1626,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         """,
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
         ovrBool.IN("value", "the value to write"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
@@ -1637,7 +1637,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "Reads an integer property.",
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
         int.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
         returnDoc = "the property interpreted as an integer value. Returns {@code defaultVal} if the property doesn't exist."
@@ -1652,7 +1652,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         """,
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
         int.IN("value", "the value to write"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
@@ -1663,7 +1663,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "Reads a float property.",
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
         float.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
         returnDoc = "the property interpreted as a float value. Returns {@code defaultVal} if the property doesn't exist."
@@ -1678,7 +1678,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         """,
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
         float.IN("value", "the value to write"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
@@ -1689,8 +1689,8 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "Reads a float array property.",
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-        float_p.OUT("values", "an array of float to write to"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        float.p.OUT("values", "an array of float to write to"),
         AutoSize("values")..unsigned_int.IN("valuesCapacity", "the maximum number of elements to write to the values array"),
 
         returnDoc = "the number of elements read, or 0 if property doesn't exist or is empty"
@@ -1701,14 +1701,14 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "Writes or creates a float array property.",
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-        float_p.OUT("values", "an array of float to write from"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        float.p.OUT("values", "an array of float to write from"),
         AutoSize("values")..unsigned_int.IN("valuesSize", "the number of elements to write"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
     )
 
-    const..charUTF8_p(
+    charUTF8.const.p(
         "GetString",
         """
         Reads a string property.
@@ -1717,8 +1717,8 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         """,
 
         session,
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-        nullable..const..charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        nullable..charUTF8.const.p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
         returnDoc =
         """
@@ -1736,8 +1736,8 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         """,
 
         ovrSession.IN("hmddesc", "an {@code ovrSession} previously returned by #Create()"),
-        const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-        const..charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
+        charASCII.const.p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+        charASCII.const.p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
     )

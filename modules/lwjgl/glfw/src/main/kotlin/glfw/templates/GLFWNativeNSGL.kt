@@ -19,7 +19,7 @@ val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(Module.GLFW, nativeSubPath = "
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow_p.IN("window", "the GLFW window"),
+        GLFWwindow.p.IN("window", "the GLFW window"),
         returnDoc = "The {@code NSOpenGLContext} of the specified window, or nil if an error occurred.",
         since = "version 3.0"
     )

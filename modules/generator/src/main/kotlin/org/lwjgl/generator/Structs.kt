@@ -34,7 +34,7 @@ private val KEYWORDS = setOf(
 )
 
 open class StructMember(
-    val nativeType: NativeType,
+    val nativeType: DataType,
     val name: String,
     val documentation: String
 ) : ModifierTarget<StructMemberModifier>() {
@@ -76,13 +76,13 @@ open class StructMember(
 }
 
 internal class StructMemberBuffer(
-    nativeType: PointerType,
+    nativeType: PointerType<*>,
     name: String,
     documentation: String
 ) : StructMember(nativeType, name, documentation)
 
 private open class StructMemberArray(
-    nativeType: NativeType,
+    nativeType: DataType,
     name: String,
     documentation: String,
     /** Number of elements in the array. */
@@ -92,7 +92,7 @@ private open class StructMemberArray(
 ) : StructMember(nativeType, name, documentation) {
 
     val primitiveMapping get() = this.nativeType.let {
-        if (it is PointerType) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
+        if (it is PointerType<*>) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
     }
 
 }
@@ -214,21 +214,18 @@ class Struct(
     }
 
     // Plain field
-    fun NativeType.member(name: String, documentation: String) = add(StructMember(this, name, documentation))
+    fun DataType.member(name: String, documentation: String) = add(StructMember(this, name, documentation))
 
     // Points to an array of structs, not a single struct
-    fun PointerType.buffer(name: String, documentation: String): StructMember {
-        if (this.elementType !is StructType)
-            throw IllegalArgumentException("Only pointer-to-struct types can be used as buffer struct members")
-
+    fun PointerType<StructType>.buffer(name: String, documentation: String): StructMember {
         return add(StructMemberBuffer(this, name, documentation))
     }
 
     // Array field
-    fun NativeType.array(name: String, documentation: String, size: Int, validSize: Int = size)
+    fun DataType.array(name: String, documentation: String, size: Int, validSize: Int = size)
         = array(name, documentation, size.toString(), validSize.toString())
 
-    fun NativeType.array(name: String, documentation: String, size: String, validSize: String = size)
+    fun DataType.array(name: String, documentation: String, size: String, validSize: String = size)
         = add(StructMemberArray(this, name, documentation, size, validSize))
 
     // CharSequence special-case
@@ -289,7 +286,7 @@ class Struct(
                     """${
                     if (hasPointer) "" else "${indent}long ${m.name} = $STRUCT + $className.${m.offsetField};\n"
                     }${indent}for (int i = 0; i < ${getReferenceMember<AutoSizeMember>(m.name)?.name ?: m.size}; i++) {${
-                    if (m is PointerType) {
+                    if (m is PointerType<*>) {
                         if (m.validSize == m.size)
                             "\n$indent   check(memGetAddress(${m.name}));"
                         else
@@ -355,7 +352,7 @@ $indent}"""
                     else
                         "$t$t${m.nativeType.javaMethodType}.validate($STRUCT + $className.${m.offsetField});"
                 )
-            } else if (m.nativeType is PointerType && getReferenceMember<AutoSizeMember>(m.name)?.get<AutoSizeMember>().let { it == null || !it.optional }) {
+            } else if (m.nativeType is PointerType<*> && getReferenceMember<AutoSizeMember>(m.name)?.get<AutoSizeMember>().let { it == null || !it.optional }) {
                 if (m.nativeType.hasStructValidation) {
                     validations.add(
                         if (m.has(nullable)) {
@@ -424,17 +421,17 @@ ${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {memb
                     .let {
                         when {
                             it is CallbackType && anonymous -> it.function.nativeType(member.name)
-                            it is PointerType && !it.includesPointer -> "${it.name}${if (!it.name.endsWith('*')) " " else ""}*"
                             else -> it.name
                         }
                     }
                     .let {
-                        var elementType = member.nativeType
+                        var elementType: NativeType = member.nativeType
                         while (true) {
-                            if (elementType !is PointerType || elementType.elementType == null)
+                            if (elementType !is PointerType<*> || elementType.elementType is OpaqueType) {
                                 break
+                            }
 
-                            elementType = elementType.elementType!!
+                            elementType = elementType.elementType
                         }
                         when {
                             elementType is CallbackType && anonymous                 -> it.replace(
@@ -449,7 +446,7 @@ ${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {memb
                         }
                     }
                     .let {
-                        "${if (member has ConstMember) "const " else ""}$it${if (anonymous) "" else " ${member.name}"}${if (member is StructMemberArray) "[${member.size}]" else ""};"
+                        "$it${if (anonymous) "" else " ${member.name}"}${if (member is StructMemberArray) "[${member.size}]" else ""};"
                     }
 
             }
@@ -482,7 +479,7 @@ $indentation}"""
     private fun validate(mallocable: Boolean) {
         if (mallocable) {
             members.forEach {
-                if (it.nativeType is PointerType && it.nativeType.elementType is StructType)
+                if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType)
                     it.nativeType.elementType.definition.hasUsageInput()
             }
         }
@@ -496,13 +493,13 @@ $indentation}"""
                     it.error("Reference does not exist: AutoSize($reference)")
                 else {
                     if (bufferParam !is StructMemberArray) {
-                        if (bufferParam.nativeType !is PointerType)
+                        if (bufferParam.nativeType !is PointerType<*>)
                             it.error("Reference must be a pointer type: AutoSize($reference)")
 
                         if (!bufferParam.nativeType.isPointerData)
                             it.error("Reference must not be a opaque pointer: AutoSize($reference)")
 
-                        if ((bufferParam.nativeType as PointerType).elementType is StructType && bufferParam !is StructMemberBuffer)
+                        if ((bufferParam.nativeType as PointerType<*>).elementType is StructType && bufferParam !is StructMemberBuffer)
                             it.error("Reference must be a struct buffer: AutoSize($reference)")
                     } else if (autoSize.optional || autoSize.atLeastOne)
                         it.error("Optional cannot be used with array references: AutoSize($reference)")
@@ -530,7 +527,7 @@ $indentation}"""
         println("import java.nio.*;\n")
 
         if (mallocable || members.any { m -> m.nativeType.let {
-            (it.mapping === PointerMapping.DATA_POINTER && it is PointerType && (it.elementType !is StructType || m is StructMemberArray)) ||
+            (it.mapping === PointerMapping.DATA_POINTER && it is PointerType<*> && (it.elementType !is StructType || m is StructMemberArray)) ||
             (it.mapping === PrimitiveMapping.POINTER && m is StructMemberArray && it !is StructType)
         } })
             println("import org.lwjgl.*;")
@@ -543,7 +540,7 @@ $indentation}"""
                 (
                     it is StructMemberArray ||
                     it.nativeType is CharSequenceType ||
-                    (it.nativeType is PointerType && !it.has(NullableMember))
+                    (it.nativeType is PointerType<*> && !it.has(NullableMember))
                 )
             ) ||
             it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
@@ -1065,7 +1062,7 @@ ${validations.joinToString("\n")}
                     size = "${it.nativeType.javaMethodType}.SIZEOF"
                     alignment = "${it.nativeType.javaMethodType}.ALIGNOF"
                 } else {
-                    size = if (it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER)
+                    size = if (it.nativeType.isPointer)
                         "POINTER_SIZE"
                     else
                         (it.nativeType.mapping as PrimitiveMapping).bytes.toString()
@@ -1171,7 +1168,7 @@ ${validations.joinToString("\n")}
                             "${it.nativeType.javaMethodType}.Buffer $param"
                         else
                             "${it.primitiveMapping.toPointer.javaMethodName} $param"
-                    } else if (it.nativeType is PointerType && it.nativeType.elementType is StructType) {
+                    } else if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType) {
                         val structType = it.nativeType.javaMethodType
                         if (it is StructMemberBuffer)
                             "$structType.Buffer $param"
@@ -1221,7 +1218,7 @@ ${validations.joinToString("\n")}
             if (!type.unsigned)
                 it
             else {
-                val mapping = type.mapping as PrimitiveMapping
+                val mapping = type.mapping
                 when (mapping.bytes) {
                     1    -> "Byte.toUnsignedInt($it)"
                     2    -> "Short.toUnsignedInt($it)"
@@ -1326,7 +1323,7 @@ ${validations.joinToString("\n")}
                 if (it is StructMemberArray) {
                     if (it.nativeType.dereference is StructType) {
                         val structType = it.nativeType.javaMethodType
-                        if (it.nativeType is PointerType) {
+                        if (it.nativeType is PointerType<*>) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, PointerBuffer value) {")
@@ -1430,7 +1427,7 @@ ${validations.joinToString("\n")}
         }
     }
 
-    private fun StructMember.annotate(type: String, arraySize: String? = null) = nativeType.annotate(type, has(const), arraySize).let {
+    private fun StructMember.annotate(type: String, arraySize: String? = null) = nativeType.annotate(type, arraySize).let {
         if (arraySize == null)
             nullable(it, false)
         else
@@ -1503,7 +1500,7 @@ ${validations.joinToString("\n")}
                 if (it is StructMemberArray) {
                     if (it.nativeType.dereference is StructType) {
                         val structType = it.nativeType.javaMethodType
-                        if (it.nativeType is PointerType) {
+                        if (it.nativeType is PointerType<*>) {
                             println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $member} field. */")
                             if (overrides) println("$indent@Override")
                             println("${indent}public $returnType $setter(${it.annotate("PointerBuffer", it.size)} value) { $n$setter($ADDRESS, value); return this; }")
@@ -1598,7 +1595,7 @@ ${validations.joinToString("\n")}
                     if (it.nativeType.dereference is StructType) {
                         val nestedStruct = it.nativeType.javaMethodType
                         val size = getReferenceMember<AutoSizeMember>(it.name)?.autoSize ?: it.size
-                        if (it.nativeType is PointerType) {
+                        if (it.nativeType is PointerType<*>) {
                             val autoSizeIndirect = getReferenceMember<AutoSizeIndirect>(it.name)
 
                             if (it.public)
@@ -1695,7 +1692,7 @@ ${validations.joinToString("\n")}
         if (arraySize == null && member.nativeType.isReference && member.isNullable) {
             println("$indent@Nullable")
         }
-        member.nativeType.annotation(type, member.has(const), arraySize).let {
+        member.nativeType.annotation(type, arraySize).let {
             if (it != null)
                 println("$indent$it")
         }
@@ -1749,7 +1746,7 @@ ${validations.joinToString("\n")}
                 if (it is StructMemberArray) {
                     if (it.nativeType.dereference is StructType) {
                         val structType = it.nativeType.javaMethodType
-                        if (it.nativeType is PointerType) {
+                        if (it.nativeType is PointerType<*>) {
                             println("$indent/** Returns a {@link PointerBuffer} view of the {@code $member} field. */")
                             generateGetterAnnotations(indent, overrides, it, "PointerBuffer", it.size)
                             println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
@@ -1866,11 +1863,6 @@ JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass
             println("${t}typedef struct $nativeName {")
             for (m in members) {
                 print("$t$t${m.nativeType.name}")
-                if (m.nativeType is PointerType && !m.nativeType.includesPointer) {
-                    if (!m.nativeType.name.endsWith('*'))
-                        print(' ')
-                    print('*')
-                }
                 println(" ${m.name};")
             }
             println("$t} $nativeName;\n")
@@ -1912,15 +1904,6 @@ EXTERN_C_EXIT""")
 
 }
 
-private val NativeType?.toStruct: Struct? get() = if (this == null)
-    null
-else if (this is StructType)
-    this.definition
-else if (this is PointerType && this.elementType != null)
-    this.elementType.toStruct
-else
-    throw IllegalStateException("Invalid struct parent type specified.")
-
 fun struct(
     module: Module,
     className: String,
@@ -1928,11 +1911,11 @@ fun struct(
     nativeName: String = className,
     virtual: Boolean = false,
     mutable: Boolean = true,
-    extends: NativeType? = null,
+    extends: StructType? = null,
     nativeLayout: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, extends.toStruct, nativeLayout)
+    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, extends?.definition, nativeLayout)
     if (init != null) {
         struct.init()
         Generator.register(struct)
@@ -1947,11 +1930,11 @@ fun union(
     nativeName: String = className,
     virtual: Boolean = false,
     mutable: Boolean = true,
-    extends: NativeType? = null,
+    extends: StructType? = null,
     nativeLayout: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, extends.toStruct, nativeLayout)
+    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, extends?.definition, nativeLayout)
     if (init != null) {
         struct.init()
         Generator.register(struct)
@@ -1964,7 +1947,6 @@ object GSCOPE
 
 fun <T> global(block: GSCOPE.() -> T) = GSCOPE.block()
 
-val GSCOPE.const get() = org.lwjgl.generator.const
 val GSCOPE.nullable get() = org.lwjgl.generator.nullable
 fun GSCOPE.AutoSize(div: Int, reference: String, vararg dependent: String) = org.lwjgl.generator.AutoSize(div, reference, *dependent)
 fun GSCOPE.AutoSize(reference: String, vararg dependent: String, factor: AutoSizeFactor? = null) =

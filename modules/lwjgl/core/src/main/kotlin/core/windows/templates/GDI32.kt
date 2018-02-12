@@ -151,7 +151,7 @@ val gdi32 = "GDI32".nativeClass(
         "Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
         HDC.IN("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
-        const..PIXELFORMATDESCRIPTOR_p.IN("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
+        PIXELFORMATDESCRIPTOR.const.p.IN("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
     )
 
     SaveLastError..int(
@@ -194,7 +194,7 @@ val gdi32 = "GDI32".nativeClass(
 
         HDC.IN("hdc", "the device context whose pixel format the function attempts to set"),
         int.IN("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
-        nullable..const..PIXELFORMATDESCRIPTOR_p.IN(
+        nullable..PIXELFORMATDESCRIPTOR.const.p.IN(
             "pixelFormatDescriptor",
             """
             a ##PIXELFORMATDESCRIPTOR structure that contains the logical pixel format specification. The system's metafile component uses this structure

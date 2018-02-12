@@ -105,7 +105,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "SIGCHAR_ENDARG"..')' /* also works for end struct */
     )
 
-    DCCallVM_p(
+    DCCallVM.p(
         "NewCallVM",
         """
         Creates a new {@code CallVM} object.
@@ -116,7 +116,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         DCsize.IN("size", "the max size of the internal stack that will be allocated and used to bind arguments to")
     )
 
-    val vm = DCCallVM_p.IN("vm", "a {@code CallVM} instance")
+    val vm = DCCallVM.p.IN("vm", "a {@code CallVM} instance")
 
     void(
         "Free",
@@ -166,7 +166,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "Binds a struct argument.",
 
         vm,
-        DCstruct_p.IN("s", ""),
+        DCstruct.p.IN("s", ""),
         DCpointer.IN("value", "the argument value")
     )
 
@@ -197,7 +197,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
 
         vm,
         funcptr,
-        DCstruct_p.IN("s", ""),
+        DCstruct.p.IN("s", ""),
         DCpointer.IN("returnValue", "")
     )
 
@@ -208,7 +208,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         vm
     )
 
-    DCstruct_p(
+    DCstruct.p(
         "NewStruct",
         "Creates a new struct type.",
 
@@ -220,7 +220,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "StructField",
         "Adds a field to the specified struct.",
 
-        DCstruct_p.IN("s", "the struct"),
+        DCstruct.p.IN("s", "the struct"),
         DCint.IN("type", "the field type"),
         DCint.IN("alignment", "a custom field alignment, or 0 to calculate automatically"),
         DCsize.IN("arrayLength", "1 or a higher value if the field is an array")
@@ -230,7 +230,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "SubStruct",
         "Adds a nested struct to the specified struct",
 
-        DCstruct_p.IN("s", "the struct"),
+        DCstruct.p.IN("s", "the struct"),
         DCsize.IN("fieldCount", "the number of fields in the nested struct"),
         DCint.IN("alignment", "a custom nested struct alignment, or 0 to calculate automatically"),
         DCsize.IN("arrayLength", "1 or a higher value if the nested struct is an array")
@@ -240,34 +240,34 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "CloseStruct",
         "Completes the struct definition.",
 
-        DCstruct_p.IN("s", "the struct to close")
+        DCstruct.p.IN("s", "the struct to close")
     )
 
     DCsize(
         "StructSize",
         "Returns the size, in bytes, of the specified struct.",
 
-        DCstruct_p.IN("s", "the struct")
+        DCstruct.p.IN("s", "the struct")
     )
 
     DCsize(
         "StructAlignment",
         "Returns the alignment, in bytes, of the specified struct.",
 
-        DCstruct_p.IN("s", "the struct")
+        DCstruct.p.IN("s", "the struct")
     )
 
     void(
         "FreeStruct",
         "Frees the specified struct object.",
 
-        DCstruct_p.IN("s", "the struct to free")
+        DCstruct.p.IN("s", "the struct to free")
     )
 
-    DCstruct_p(
+    DCstruct.p(
         "DefineStruct",
         "Creates a new struct type using a signature string.",
 
-        const..charASCII_p.IN("signature", "the struct signature")
+        charASCII.const.p.IN("signature", "the struct signature")
     )
 }

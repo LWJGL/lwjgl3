@@ -87,44 +87,44 @@ ENABLE_WARNINGS()""")
         "InitEXRHeader",
         "Initialize ##EXRHeader struct.",
 
-        EXRHeader_p.OUT("exr_header", "")
+        EXRHeader.p.OUT("exr_header", "")
     )
 
     void(
         "InitEXRImage",
         "Initialize ##EXRImage struct.",
 
-        EXRImage_p.OUT("exr_image", "")
+        EXRImage.p.OUT("exr_image", "")
     )
 
     int(
         "FreeEXRHeader",
         "Free's internal data of ##EXRHeader struct",
 
-        EXRHeader_p.OUT("exr_header", "")
+        EXRHeader.p.OUT("exr_header", "")
     )
 
     int(
         "FreeEXRImage",
         "Free's internal data of ##EXRImage struct",
 
-        EXRImage_p.IN("exr_image", "")
+        EXRImage.p.IN("exr_image", "")
     )
 
     int(
         "ParseEXRVersionFromFile",
         "Parse EXR version header of a file.",
 
-        EXRVersion_p.OUT("version", ""),
-        const..charASCII_p.IN("filename", "")
+        EXRVersion.p.OUT("version", ""),
+        charASCII.const.p.IN("filename", "")
     )
 
     int(
         "ParseEXRVersionFromMemory",
         "Parse EXR version header from memory-mapped EXR data.",
 
-        EXRVersion_p.OUT("version", ""),
-        const..unsigned_char_p.IN("memory", ""),
+        EXRVersion.p.OUT("version", ""),
+        unsigned_char.const.p.IN("memory", ""),
         AutoSize("memory")..size_t.IN("size", "")
     )
 
@@ -132,44 +132,44 @@ ENABLE_WARNINGS()""")
         "ParseEXRHeaderFromFile",
         "Parse single-part OpenEXR header from a file and initialize ##EXRHeader.",
 
-        EXRHeader_p.OUT("header", ""),
-        const..EXRVersion_p.IN("version", ""),
-        const..charASCII_p.IN("filename", ""),
-        Check(1)..const..charASCII_pp.IN("err", "")
+        EXRHeader.p.OUT("header", ""),
+        EXRVersion.const.p.IN("version", ""),
+        charASCII.const.p.IN("filename", ""),
+        Check(1)..charASCII.const.p.p.IN("err", "")
     )
 
     int(
         "ParseEXRHeaderFromMemory",
         "Parse single-part OpenEXR header from a memory and initialize ##EXRHeader.",
 
-        EXRHeader_p.OUT("header", ""),
-        const..EXRVersion_p.IN("version", ""),
-        const..unsigned_char_p.IN("memory", ""),
+        EXRHeader.p.OUT("header", ""),
+        EXRVersion.const.p.IN("version", ""),
+        unsigned_char.const.p.IN("memory", ""),
         AutoSize("memory")..size_t.IN("size", ""),
-        Check(1)..const..charASCII_pp.IN("err", "")
+        Check(1)..charASCII.const.p.p.IN("err", "")
     )
 
     int(
         "ParseEXRMultipartHeaderFromFile",
         "Parse multi-part OpenEXR headers from a file and initialize ##EXRHeader* array.",
 
-        Check(1)..EXRHeader_p.p.p.OUT("headers", ""),
-        Check(1)..int_p.OUT("num_headers", ""),
-        const..EXRVersion_p.IN("version", ""),
-        const..charASCII_p.IN("filename", ""),
-        Check(1)..const..charASCII_pp.IN("err", "")
+        Check(1)..EXRHeader.p.p.p.OUT("headers", ""),
+        Check(1)..int.p.OUT("num_headers", ""),
+        EXRVersion.const.p.IN("version", ""),
+        charASCII.const.p.IN("filename", ""),
+        Check(1)..charASCII.const.p.p.IN("err", "")
     )
 
     int(
         "ParseEXRMultipartHeaderFromMemory",
         "Parse multi-part OpenEXR headers from a memory and initialize ##EXRHeader* array.",
 
-        Check(1)..EXRHeader_p.p.p.OUT("headers", ""),
-        Check(1)..int_p.OUT("num_headers", ""),
-        const..EXRVersion_p.IN("version", ""),
-        const..unsigned_char_p.IN("memory", ""),
+        Check(1)..EXRHeader.p.p.p.OUT("headers", ""),
+        Check(1)..int.p.OUT("num_headers", ""),
+        EXRVersion.const.p.IN("version", ""),
+        unsigned_char.const.p.IN("memory", ""),
         AutoSize("memory")..size_t.IN("size", ""),
-        Check(1)..const..charASCII_pp.IN("err", "")
+        Check(1)..charASCII.const.p.p.IN("err", "")
     )
 
     int(
@@ -182,10 +182,10 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage().
         """,
 
-        EXRImage_p.OUT("image", ""),
-        const..EXRHeader_p.IN("header", ""),
-        const..charASCII_p.IN("filename", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        EXRImage.p.OUT("image", ""),
+        EXRHeader.const.p.IN("header", ""),
+        charASCII.const.p.IN("filename", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
     )
@@ -200,11 +200,11 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage().
         """,
 
-        EXRImage_p.OUT("image", ""),
-        const..EXRHeader_p.IN("header", ""),
-        const..unsigned_char_p.IN("memory", ""),
+        EXRImage.p.OUT("image", ""),
+        EXRHeader.const.p.IN("header", ""),
+        unsigned_char.const.p.IN("memory", ""),
         AutoSize("memory")..size_t.IN("size", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
     )
@@ -219,11 +219,11 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage().
         """,
 
-        EXRImage_p.OUT("images", ""),
-        const..EXRHeader_p.p.IN("headers", ""),
+        EXRImage.p.OUT("images", ""),
+        EXRHeader.const.p.p.IN("headers", ""),
         AutoSize("images", "headers")..unsigned_int.IN("num_parts", ""),
-        const..charASCII_p.IN("filename", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        charASCII.const.p.IN("filename", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
     )
@@ -238,12 +238,12 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage().
         """,
 
-        EXRImage_p.OUT("images", ""),
-        const..EXRHeader_p.p.IN("headers", ""),
+        EXRImage.p.OUT("images", ""),
+        EXRHeader.const.p.p.IN("headers", ""),
         AutoSize("images", "headers")..unsigned_int.IN("num_parts", ""),
-        const..unsigned_char_p.IN("memory", ""),
+        unsigned_char.const.p.IN("memory", ""),
         AutoSize("memory")..size_t.IN("size", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
     )
@@ -252,10 +252,10 @@ ENABLE_WARNINGS()""")
         "SaveEXRImageToFile",
         "Saves multi-channel, single-frame OpenEXR image to a file.",
 
-        const..EXRImage_p.IN("image", ""),
-        const..EXRHeader_p.IN("exr_header", ""),
-        const..charASCII_p.IN("filename", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        EXRImage.const.p.IN("image", ""),
+        EXRHeader.const.p.IN("exr_header", ""),
+        charASCII.const.p.IN("filename", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
     )
@@ -268,10 +268,10 @@ ENABLE_WARNINGS()""")
         Image is compressed using {@code EXRImage.compression} value.
         """,
 
-        const..EXRImage_p.IN("image", ""),
-        const..EXRHeader_p.IN("exr_header", ""),
-        Check(1)..unsigned_char_p.p.OUT("memory", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        EXRImage.const.p.IN("image", ""),
+        EXRHeader.const.p.IN("exr_header", ""),
+        Check(1)..unsigned_char.p.p.OUT("memory", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "the number of bytes if success or negative value and may set error string in {@code err} when there's an error"
     )
@@ -284,9 +284,9 @@ ENABLE_WARNINGS()""")
         Application must free memory of variables in {@code DeepImage(image, offset_table)}.
         """,
 
-        DeepImage_p.OUT("out_image", ""),
-        const..charASCII_p.IN("filename", ""),
-        Check(1)..const..charASCII_pp.IN("err", ""),
+        DeepImage.p.OUT("out_image", ""),
+        charASCII.const.p.IN("filename", ""),
+        Check(1)..charASCII.const.p.p.IN("err", ""),
 
         returnDoc = "negative value and may set error string in {@code err} when there's an error"
     )
