@@ -1,52 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="modules/samples/src/test/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/vulkan/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/tinyfd/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/nanovg/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/openal/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opengles/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/xxhash/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/glfw/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/sse/src/test/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/jawt/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/lmdb/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/tootle/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/yoga/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/lz4/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/assimp/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opengl/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/sse/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opencl/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/par/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/odbc/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/nanovg/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opengles/src/generated/java"/>
-	<classpathentry kind="src" path="modules/generator/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/egl/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/zstd/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/nuklear/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/rpmalloc/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/nfd/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/openvr/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/rpmalloc/src/test/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/tinyexr/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/jemalloc/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/vulkan/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opencl/src/test/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/glfw/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/bgfx/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/yoga/src/test/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/stb/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/par/src/test/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/remotery/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opengl/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/opencl/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/egl/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/openal/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/core/src/generated/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/core/src/main/java"/>
-	<classpathentry kind="src" path="modules/lwjgl/core/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/samples" path="modules/samples/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/tinyexr" path="modules/lwjgl/tinyexr/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/zstd" path="modules/lwjgl/zstd/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/tootle" path="modules/lwjgl/tootle/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/yoga" path="modules/lwjgl/yoga/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/sse" path="modules/lwjgl/sse/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/xxhash" path="modules/lwjgl/xxhash/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/stb" path="modules/lwjgl/stb/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/vulkan" path="modules/lwjgl/vulkan/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/rpmalloc" path="modules/lwjgl/rpmalloc/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/remotery" path="modules/lwjgl/remotery/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/par" path="modules/lwjgl/par/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/ovr" path="modules/lwjgl/ovr/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/openvr" path="modules/lwjgl/openvr/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/opengles" path="modules/lwjgl/opengles/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/opengl" path="modules/lwjgl/opengl/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/opencl" path="modules/lwjgl/opencl/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/openal" path="modules/lwjgl/openal/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/odbc" path="modules/lwjgl/odbc/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/nuklear" path="modules/lwjgl/nuklear/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/nfd" path="modules/lwjgl/nfd/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/nanovg" path="modules/lwjgl/nanovg/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/lz4" path="modules/lwjgl/lz4/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/lmdb" path="modules/lwjgl/lmdb/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/jemalloc" path="modules/lwjgl/jemalloc/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/jawt" path="modules/lwjgl/jawt/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/glfw" path="modules/lwjgl/glfw/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/egl" path="modules/lwjgl/egl/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/core" path="modules/lwjgl/core/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/bgfx" path="modules/lwjgl/bgfx/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/assimp" path="modules/lwjgl/assimp/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/generator/src/main/kotlin"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/vulkan" path="modules/lwjgl/vulkan/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/tinyfd/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/nanovg" path="modules/lwjgl/nanovg/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/openal/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/opengles" path="modules/lwjgl/opengles/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/xxhash/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/glfw" path="modules/lwjgl/glfw/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/test" path="modules/lwjgl/sse/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/jawt/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/lmdb/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/tootle/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/yoga/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/lz4/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/assimp/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/opengl" path="modules/lwjgl/opengl/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/sse/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/opencl" path="modules/lwjgl/opencl/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/par/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/odbc/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/nanovg/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/opengles/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/generator/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/egl/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/zstd/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/nuklear/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/rpmalloc/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/nfd/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/openvr/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/test" path="modules/lwjgl/rpmalloc/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/tinyexr/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/jemalloc/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/vulkan/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/test" path="modules/lwjgl/opencl/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/glfw/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/bgfx/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/test" path="modules/lwjgl/yoga/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/stb/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/test" path="modules/lwjgl/par/src/test/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/remotery/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/opengl/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/opencl/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/egl" path="modules/lwjgl/egl/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/openal" path="modules/lwjgl/openal/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/generator" path="modules/lwjgl/core/src/generated/java"/>
+	<classpathentry kind="src" output="bin/classes/lwjgl/core" path="modules/lwjgl/core/src/main/java"/>
+	<classpathentry kind="src" output="bin/classes/test" path="modules/lwjgl/core/src/test/java"/>
 	<classpathentry kind="lib" path="bin/libs"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="bin/libs/java/jcommander.jar"/>
@@ -54,36 +85,5 @@
 	<classpathentry kind="lib" path="bin/libs/java/jsr305.jar"/>
 	<classpathentry kind="lib" path="bin/libs/java/testng.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/jvm/jdk1.8.0_121_64/lib/tools.jar"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/assimp"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/bgfx"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/core"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/egl"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/glfw"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/jawt"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/jemalloc"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/lmdb"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/lz4"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/nanovg"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/nfd"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/nuklear"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/odbc"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/openal"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/opencl"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/opengl"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/opengles"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/openvr"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/ovr"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/par"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/remotery"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/rpmalloc"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/sse"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/stb"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/tinyexr"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/tinyfd"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/tootle"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/vulkan"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/xxhash"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/yoga"/>
-	<classpathentry kind="lib" path="bin/classes/lwjgl/zstd"/>
 	<classpathentry kind="output" path="bin/eclipse"/>
 </classpath>
