@@ -169,7 +169,7 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
     Module.GLFW, void, "GLFWMonitorCallback",
     "Will be called when a monitor is connected to or disconnected from the system.",
     GLFWmonitor_p.IN("monitor", "the monitor that was connected or disconnected"),
-    int.IN("event", "one of #CONNECTED or #DISCONNECTED")
+    int.IN("event", "one of #CONNECTED or #DISCONNECTED. Remaining values reserved for future use.")
 ) {
     documentation = "Instances of this interface may be passed to the #SetMonitorCallback() method."
     since = "version 3.0"
@@ -187,7 +187,7 @@ val GLFWjoystickfun = "GLFWjoystickfun".callback(
     Module.GLFW, void, "GLFWJoystickCallback",
     "Will be called when a joystick is connected to or disconnected from the system.",
     int.IN("jid", "the joystick that was connected or disconnected"),
-    int.IN("event", "one of #CONNECTED or #DISCONNECTED")
+    int.IN("event", "one of #CONNECTED or #DISCONNECTED. Remaining values reserved for future use.")
 ) {
     documentation = "Instances of this interface may be passed to the #SetJoystickCallback() method."
     since = "version 3.2"
