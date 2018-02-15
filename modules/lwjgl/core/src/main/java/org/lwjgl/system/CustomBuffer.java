@@ -84,18 +84,18 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
     /**
      * Sets this buffer's position. If the mark is defined and larger than the new position then it is discarded.
      *
-     * @param newPosition the new position value; must be non-negative and no larger than the current limit
+     * @param position the new position value; must be non-negative and no larger than the current limit
      *
      * @return This buffer
      *
      * @throws IllegalArgumentException If the preconditions on <tt>newPosition</tt> do not hold
      */
-    public SELF position(int newPosition) {
-        if ((newPosition > limit) || (newPosition < 0)) {
+    public SELF position(int position) {
+        if (position < 0 || limit < position) {
             throw new IllegalArgumentException();
         }
-        position = newPosition;
-        if (mark > position) {
+        this.position = position;
+        if (position < mark) {
             mark = -1;
         }
         return self();
@@ -114,21 +114,21 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * Sets this buffer's limit. If the position is larger than the new limit then it is set to the new limit. If the mark is defined and larger than the new
      * limit then it is discarded.
      *
-     * @param newLimit the new limit value; must be non-negative and no larger than this buffer's capacity
+     * @param limit the new limit value; must be non-negative and no larger than this buffer's capacity
      *
      * @return This buffer
      *
      * @throws IllegalArgumentException If the preconditions on <tt>newLimit</tt> do not hold
      */
-    public SELF limit(int newLimit) {
-        if ((newLimit > capacity) || (newLimit < 0)) {
+    public SELF limit(int limit) {
+        if (limit < 0 || capacity < limit) {
             throw new IllegalArgumentException();
         }
-        limit = newLimit;
-        if (position > limit) {
+        this.limit = limit;
+        if (limit < position) {
             position = limit;
         }
-        if (mark > limit) {
+        if (limit < mark) {
             mark = -1;
         }
         return self();
@@ -327,7 +327,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
             throw new IllegalArgumentException();
         }
         int n = src.remaining();
-        if (n > remaining()) {
+        if (remaining() < n) {
             throw new BufferOverflowException();
         }
 
@@ -378,14 +378,14 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
     protected abstract SELF newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity);
 
     protected long nextGetIndex() {
-        if (position >= limit) {
+        if (limit <= position) {
             throw new BufferUnderflowException();
         }
         return position++;
     }
 
     protected long nextPutIndex() {
-        if (position >= limit) {
+        if (limit <= position) {
             throw new BufferOverflowException();
         }
         return position++;
