@@ -2035,6 +2035,32 @@ aiAttachLogStream(&c);""")}
         "_AI_MATKEY_UVTRANSFORM_BASE".."\$tex.uvtrafo",
         "_AI_MATKEY_TEXFLAGS_BASE".."\$tex.flags"
     ).noPrefix()
+    
+    StringConstant(
+        "PBR Material keys",
+        
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR".."\$mat.gltf.pbrMetallicRoughness.baseColorFactor",
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR".."\$mat.gltf.pbrMetallicRoughness.metallicFactor",
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.roughnessFactor",
+        "AI_MATKEY_GLTF_ALPHAMODE".."\$mat.gltf.alphaMode",
+        "AI_MATKEY_GLTF_ALPHACUTOFF".."\$mat.gltf.alphaCutoff",
+        "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS".."\$mat.gltf.pbrSpecularGlossiness",
+        "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.glossinessFactor",
+
+        "_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE".."\$tex.file.texCoord",
+        "_AI_MATKEY_GLTF_MAPPINGNAME_BASE".."\$tex.mappingname",
+        "_AI_MATKEY_GLTF_MAPPINGID_BASE".."\$tex.mappingid",
+        "_AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE".."\$tex.mappingfiltermag",
+        "_AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE".."\$tex.mappingfiltermin",
+        "_AI_MATKEY_GLTF_SCALE_BASE".."\$tex.scale",
+        "_AI_MATKEY_GLTF_STRENGTH_BASE".."\$tex.strength"
+    )
+
+    IntConstant(
+        "",
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE".."aiTextureType_DIFFUSE",
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
+    ).noPrefix()
 
     val GetMaterialProperty = aiReturn(
         "GetMaterialProperty",
@@ -2246,12 +2272,12 @@ aiAttachLogStream(&c);""")}
     EnumConstant(
         "Enum used to distinguish data types.",
 
-        "AI_BOOL".enum("", 0),
-        "AI_INT".enum("", 1),
-        "AI_UINT64".enum("", 2),
-        "AI_FLOAT".enum("", 3),
-        "AI_AISTRING".enum("", 4),
-        "AI_AIVECTOR3D".enum("", 5)
+        "AI_BOOL".enum("", "0"),
+        "AI_INT".enum,
+        "AI_UINT64".enum,
+        "AI_FLOAT".enum,
+        "AI_AISTRING".enum,
+        "AI_AIVECTOR3D".enum
     ).noPrefix()
 
     // postprocess.h
