@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."60"
+        "API_VERSION".."63"
     )
 
     ShortConstant(
@@ -26,9 +26,13 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     val StateFlags = LongConstant(
         "State",
 
-        "STATE_RGB_WRITE"..0x0000000000000001L,
-        "STATE_ALPHA_WRITE"..0x0000000000000002L,
-        "STATE_DEPTH_WRITE"..0x0000000000000004L,
+        "STATE_WRITE_R"..0x0000000000000001L,
+        "STATE_WRITE_G"..0x0000000000000002L,
+        "STATE_WRITE_B"..0x0000000000000004L,
+        "STATE_WRITE_A"..0x0000000000000008L,
+        "STATE_WRITE_Z"..0x0000004000000000L,
+        "STATE_WRITE_RGB".."BGFX_STATE_WRITE_R | BGFX_STATE_WRITE_G | BGFX_STATE_WRITE_B",
+        "STATE_WRITE_MASK".."BGFX_STATE_WRITE_RGB | BGFX_STATE_WRITE_A | BGFX_STATE_WRITE_Z",
 
         "STATE_DEPTH_TEST_LESS"..0x0000000000000010L,
         "STATE_DEPTH_TEST_LEQUAL"..0x0000000000000020L,
@@ -77,10 +81,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STATE_NONE"..0x0000000000000000L,
 
         "STATE_DEFAULT".."""(0L
-        | BGFX_STATE_RGB_WRITE
-        | BGFX_STATE_ALPHA_WRITE
+        | BGFX_STATE_WRITE_RGB
+        | BGFX_STATE_WRITE_A
+        | BGFX_STATE_WRITE_Z
         | BGFX_STATE_DEPTH_TEST_LESS
-        | BGFX_STATE_DEPTH_WRITE
         | BGFX_STATE_CULL_CW
         | BGFX_STATE_MSAA)
         """
@@ -1521,7 +1525,7 @@ RGBA16S
            +----------+
            |-z       2|
            | ^  +y    |
-           | |        |
+           | |        |    Unfolded cube:
            | +---->+x |
 +----------+----------+----------+----------+
 |+y       1|+y       4|+y       0|+y       5|
@@ -2053,11 +2057,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_transient_index_buffer",
-        """
-        Sets index buffer for draw primitive.
-
-        ${note("{@code _tib} pointer after this call is invalid.")}
-        """,
+        "Sets index buffer for draw primitive.",
 
         const..bgfx_transient_index_buffer_t_p.IN("_tib", "transient index buffer"),
         uint32_t.IN("_firstIndex", "first index to render"),
@@ -2086,11 +2086,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_transient_vertex_buffer",
-        """
-        Sets vertex buffer for draw primitive.
-
-        ${note("{@code _tvb} pointer after this call is invalid.")}
-        """,
+        "Sets vertex buffer for draw primitive.",
 
         MapToInt..uint8_t.IN("_stream", "vertex stream"),
         const..bgfx_transient_vertex_buffer_t_p.IN("_tvb", "transient vertex buffer"),
@@ -2100,13 +2096,10 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "set_instance_data_buffer",
-        """
-        Sets instance data buffer for draw primitive.
-
-        ${note("{@code _idb} pointer after this call is invalid.")}
-        """,
+        "Sets instance data buffer for draw primitive.",
 
         const..bgfx_instance_data_buffer_t_p.IN("_idb", "transient instance data buffer"),
+        uint32_t.IN("_start", "first instance data"),
         uint32_t.IN("_num", "number of data instances")
     )
 
@@ -2456,11 +2449,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "encoder_set_transient_index_buffer",
-        """
-        Sets index buffer for draw primitive.
-
-        ${note("{@code _tib} pointer after this call is invalid.")}
-        """,
+        "Sets index buffer for draw primitive.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
         const..bgfx_transient_index_buffer_t_p.IN("_tib", "transient index buffer"),
@@ -2492,11 +2481,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "encoder_set_transient_vertex_buffer",
-        """
-        Sets vertex buffer for draw primitive.
-
-        ${note("{@code _tvb} pointer after this call is invalid.")}
-        """,
+        "Sets vertex buffer for draw primitive.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stream", "vertex stream"),
@@ -2507,14 +2492,11 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
     void(
         "encoder_set_instance_data_buffer",
-        """
-        Sets instance data buffer for draw primitive.
-
-        ${note("{@code _idb} pointer after this call is invalid.")}
-        """,
+        "Sets instance data buffer for draw primitive.",
 
         bgfx_encoder_p.IN("_encoder", "the encoder"),
         const..bgfx_instance_data_buffer_t_p.IN("_idb", "transient instance data buffer"),
+        uint32_t.IN("_start", "first instance data"),
         uint32_t.IN("_num", "number of data instances")
     )
 

@@ -267,6 +267,7 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t.member("maxDrawCalls", "maximum number of draw calls")
     uint32_t.member("maxBlits", "maximum number of blit calls")
     uint32_t.member("maxTextureSize", "maximum texture size")
+    uint32_t.member("maxTextureLayers", "maximum texture layers")
     uint32_t.member("maxViews", "maximum number of views")
     uint32_t.member("maxFrameBuffers", "maximum number of frame buffer handles")
     uint32_t.member("maxFBAttachments", "maximum number of frame buffer attachments")

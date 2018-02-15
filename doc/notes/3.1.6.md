@@ -6,7 +6,7 @@ This build includes the following changes:
 
 #### Bindings
 
-- bgfx: Updated to API version 59 (up from 55)
+- bgfx: Updated to API version 60 (up from 55)
 - glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
     * Support for lock key modifiers (`GLFW_LOCK_KEY_MODS` input mode, `GLFW_MOD_CAPS_LOCK`, `GLFW_MOD_NUM_LOCK`)
     * Support for string window hints (`glfwWindowHintString`, `GLFW_COCOA_FRAME_NAME`, `GLFW_X11_CLASS_NAME`, `GLFW_X11_INSTANCE_NAME`)
