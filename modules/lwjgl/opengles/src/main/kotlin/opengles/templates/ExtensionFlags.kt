@@ -132,6 +132,19 @@ val EXT_EGL_image_array = EXT_FLAG.nativeClassGLES("EXT_EGL_image_array", postfi
         """
 }
 
+val EXT_EGL_image_external_wrap_modes = EXT_FLAG.nativeClassGLES("EXT_EGL_image_external_wrap_modes", postfix = EXT) {
+    documentation =
+        """
+        This extension builds on ${OES_EGL_image_external.link}, which only allows a external images to use a single clamping wrap mode: #CLAMP_TO_EDGE. This
+        extension relaxes that restriction, allowing wrap modes #REPEAT and #MIRRORED_REPEAT. If ${OES_texture_border_clamp.link} is supported, then
+        #CLAMP_TO_BORDER is also allowed.
+
+        This extension similarly adds to the capabilities of {@code OES_EGL_image_external_essl3}, allowing the same additional wrap modes.
+
+        Since external images can be non-RGB, this extension clarifies how border color values are specified for non-RGB external images.
+        """
+}
+
 val EXT_float_blend = EXT_FLAG.nativeClassGLES("EXT_float_blend", postfix = EXT) {
     documentation =
         """
