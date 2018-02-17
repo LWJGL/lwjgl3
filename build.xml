@@ -50,11 +50,11 @@
         <local name="lwjgl3-generated.exists"/>
 
         <available file="${module.lwjgl}/.git" property="lwjgl3-generated.exists"/>
-        <fail if="lwjgl3-generated-exists" message="The lwjgl3-generated repository is already initialized." />
+        <fail if="lwjgl3-generated.exists" message="The lwjgl3-generated repository is already initialized." />
         <available file="../lwjgl3-generated" type="dir" property="lwjgl3-generated.exists"/>
 
         <!-- Initialize repository -->
-        <exec dir="${module.lwjgl}" executable="git" failonerror="true">
+        <exec dir="${module.lwjgl}" executable="git" failonerror="true" taskname="git">
             <arg value="init"/>
             <arg value="--separate-git-dir=../../../lwjgl3-generated"/>
         </exec>
@@ -70,7 +70,7 @@
 **/test/**</concat>
 
         <!-- Setup remote & fetch -->
-        <exec dir="${module.lwjgl}" executable="git" failonerror="true">
+        <exec dir="${module.lwjgl}" executable="git" failonerror="true" taskname="git" unless:set="lwjgl3-generated.exists">
             <arg value="remote"/>
             <arg value="add"/>
             <arg line="-t master"/>
@@ -81,7 +81,7 @@
         </exec>
 
         <!-- Checkout master -->
-        <exec dir="${module.lwjgl}" executable="git" failonerror="true">
+        <exec dir="${module.lwjgl}" executable="git" failonerror="true" taskname="git" unless:set="lwjgl3-generated.exists">
             <arg value="checkout"/>
             <arg line="master"/>
         </exec>
