@@ -391,6 +391,19 @@
             <compilerarg value="-XDignore.symbol.file=true"/>
         </lwjgl.javac>
 
+        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9" if:set="jdk9"/>
+        <delete file="${bin.lwjgl}/core/META-INF/versions/9/module-info.class" quiet="true" if:set="jdk9"/>
+        <lwjgl.javac9
+            destdir="${bin.lwjgl}/core/META-INF/versions/9"
+            classpath="${bin.lwjgl}/core"
+
+            srcdir="${module.lwjgl}/core/src/main/java9"
+            includes="**"
+
+            taskname="javac: Core - Java 9"
+            if:set="jdk9"
+        />
+
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
             <compileBinding binding="bgfx"/>
@@ -650,6 +663,7 @@
     <target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
         <testng outputDir="${bin.test.html}" taskname="Tests">
             <classpath>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
@@ -683,6 +697,7 @@
 
         <java classname="${class}" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
             <classpath>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.samples}"/>
                 <pathelement path="${test.resources}"/>
@@ -1011,28 +1026,6 @@
         </sequential>
     </macrodef>
 
-    <target name="-multi-release-9" depends="-compile-generator">
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9"/>
-        <lwjgl.javac9
-            destdir="${bin.lwjgl}/core/META-INF/versions/9"
-
-            srcdir="${module.lwjgl}/core/src/main/java9"
-            includes="**"
-
-            taskname="javac: Core - Java 9"
-        />
-
-        <java
-            classpath="bin/classes/generator"
-            classname="org.lwjgl.generator.util.ModuleInfoGen"
-            failonerror="true"
-            taskname="module-info-gen"
-        >
-            <arg value="${module.list}"/>
-            <arg value="${module.list.java-only}"/>
-        </java>
-    </target>
-
     <target name="-check-release-jdk">
         <fail message="The JAVA8_HOME environment variable is not set." if:set="jdk9">
             <condition>
@@ -1071,7 +1064,17 @@
         <echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} ${revision}</echo>
         <echo file="${release}/build.txt" unless:set="build.revision">LWJGL ${build.version}</echo>
 
-        <antcall target="-multi-release-9" if:set="jdk9"/>
+        <!-- Generate module-info classes -->
+        <java
+            classpath="bin/classes/generator"
+            classname="org.lwjgl.generator.util.ModuleInfoGen"
+            failonerror="true"
+            taskname="module-info-gen"
+            if:set="jdk9"
+        >
+            <arg value="${module.list}"/>
+            <arg value="${module.list.java-only}"/>
+        </java>
 
         <parallel threadcount="4" failonany="true">
 
