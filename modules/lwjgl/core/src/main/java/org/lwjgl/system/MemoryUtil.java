@@ -1307,22 +1307,34 @@ public final class MemoryUtil {
         ACCESSOR.memCopy(src, dst, bytes);
     }
 
-    public static boolean memGetBoolean(long ptr)           { return ACCESSOR.memGetByte(ptr) != 0; }
-    public static byte memGetByte(long ptr)                 { return ACCESSOR.memGetByte(ptr); }
-    public static short memGetShort(long ptr)               { return ACCESSOR.memGetShort(ptr); }
-    public static int memGetInt(long ptr)                   { return ACCESSOR.memGetInt(ptr); }
-    public static long memGetLong(long ptr)                 { return ACCESSOR.memGetLong(ptr);}
-    public static float memGetFloat(long ptr)               { return ACCESSOR.memGetFloat(ptr);}
-    public static double memGetDouble(long ptr)             { return ACCESSOR.memGetDouble(ptr);}
-    public static long memGetAddress(long ptr)              { return ACCESSOR.memGetAddress(ptr);}
+    public static boolean memGetBoolean(long ptr) { return ACCESSOR.memGetByte(ptr) != 0; }
+    public static byte memGetByte(long ptr)       { return ACCESSOR.memGetByte(ptr); }
+    public static short memGetShort(long ptr)     { return ACCESSOR.memGetShort(ptr); }
+    public static int memGetInt(long ptr)         { return ACCESSOR.memGetInt(ptr); }
+    public static long memGetLong(long ptr)       { return ACCESSOR.memGetLong(ptr); }
+    public static float memGetFloat(long ptr)     { return ACCESSOR.memGetFloat(ptr); }
+    public static double memGetDouble(long ptr)   { return ACCESSOR.memGetDouble(ptr); }
+    public static long memGetAddress(long ptr) {
+        if (BITS64) {
+            return memGetLong(ptr);
+        } else {
+            return Integer.toUnsignedLong(memGetInt(ptr));
+        }
+    }
 
-    public static void memPutByte(long ptr, byte value)     { ACCESSOR.memPutByte(ptr, value);}
-    public static void memPutShort(long ptr, short value)   { ACCESSOR.memPutShort(ptr, value);}
-    public static void memPutInt(long ptr, int value)       { ACCESSOR.memPutInt(ptr, value);}
-    public static void memPutLong(long ptr, long value)     { ACCESSOR.memPutLong(ptr, value);}
-    public static void memPutFloat(long ptr, float value)   { ACCESSOR.memPutFloat(ptr, value);}
-    public static void memPutDouble(long ptr, double value) { ACCESSOR.memPutDouble(ptr, value);}
-    public static void memPutAddress(long ptr, long value)  { ACCESSOR.memPutAddress(ptr, value);}
+    public static void memPutByte(long ptr, byte value)     { ACCESSOR.memPutByte(ptr, value); }
+    public static void memPutShort(long ptr, short value)   { ACCESSOR.memPutShort(ptr, value); }
+    public static void memPutInt(long ptr, int value)       { ACCESSOR.memPutInt(ptr, value); }
+    public static void memPutLong(long ptr, long value)     { ACCESSOR.memPutLong(ptr, value); }
+    public static void memPutFloat(long ptr, float value)   { ACCESSOR.memPutFloat(ptr, value); }
+    public static void memPutDouble(long ptr, double value) { ACCESSOR.memPutDouble(ptr, value); }
+    public static void memPutAddress(long ptr, long value) {
+        if (BITS64) {
+            memPutLong(ptr, value);
+        } else {
+            memPutInt(ptr, (int)value);
+        }
+    }
 
     /*  -------------------------------------
         -------------------------------------
