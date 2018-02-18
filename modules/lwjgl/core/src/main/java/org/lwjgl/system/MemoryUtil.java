@@ -1165,7 +1165,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static <T extends CustomBuffer<T>> void memSet(T ptr, int value) { memSet(memAddress(ptr), value, (long)ptr.remaining() * ptr.sizeof()); }
+    public static <T extends CustomBuffer<T>> void memSet(T ptr, int value) { memSet(memAddress(ptr), value, Integer.toUnsignedLong(ptr.remaining()) * ptr.sizeof()); }
 
     /**
      * Sets all bytes in a specified block of memory to a copy of another block.
@@ -1268,7 +1268,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(src, dst.remaining());
         }
-        memCopy(memAddress(src), memAddress(dst), (long)src.remaining() * src.sizeof());
+        memCopy(memAddress(src), memAddress(dst), Integer.toUnsignedLong(src.remaining()) * src.sizeof());
     }
 
     /*  -------------------------------------

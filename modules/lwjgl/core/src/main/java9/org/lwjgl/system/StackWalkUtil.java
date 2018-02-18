@@ -6,9 +6,7 @@ package org.lwjgl.system;
 
 import java.util.*;
 
-// Multi-release version: Java 9
-
-/** Stack-walking utilities. */
+/** Java 9 version of {@code {@link StackWalkUtil}}. */
 final class StackWalkUtil {
 
     private StackWalkUtil() {

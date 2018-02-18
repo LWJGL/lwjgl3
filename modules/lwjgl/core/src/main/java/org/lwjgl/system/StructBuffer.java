@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of struct custom buffers. */
@@ -79,7 +80,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
      */
     public T get(int index) {
-        return nget(checkIndex(index));
+        return nget(check(index, limit));
     }
 
     private T nget(long index) {
@@ -96,7 +97,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
      */
     public SELF get(int index, T value) {
-        memCopy(address + checkIndex(index) * sizeof(), value.address(), sizeof());
+        memCopy(address + check(index, limit) * sizeof(), value.address(), sizeof());
         return self();
     }
 
@@ -114,7 +115,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public SELF put(int index, T value) {
-        memCopy(value.address(), address + checkIndex(index) * sizeof(), sizeof());
+        memCopy(value.address(), address + check(index, limit) * sizeof(), sizeof());
         return self();
     }
 

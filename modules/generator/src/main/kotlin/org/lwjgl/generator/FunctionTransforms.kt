@@ -47,9 +47,17 @@ internal open class AutoSizeTransform(
             else
                 "${bufferParam.name}.remaining()"
         }
+
+        var relaxedCast = relaxedCast
+
         val factor = param.get<AutoSize>().factor
-        if (applyFactor && factor != null)
+        if (applyFactor && factor != null) {
+            if (param.nativeType.mapping == PrimitiveMapping.POINTER || param.nativeType is PointerType) {
+                expression = "Integer.toUnsignedLong($expression)"
+                relaxedCast = true
+            }
             expression = factor.scale(expression)
+        }
 
         if (param.nativeType is PointerType)
             expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}) + $expression"
@@ -73,6 +81,9 @@ private class AutoSizeBytesTransform(
             "remainingSafe(${bufferParam.name})"
         else
             "${bufferParam.name}.remaining()"
+        if (param.nativeType.mapping == PrimitiveMapping.POINTER || param.nativeType is PointerType) {
+            expression = "Integer.toUnsignedLong($expression)"
+        }
         val factor = param.get<AutoSize>().factor
         if (factor == null)
             expression = "$expression << $byteShift"

@@ -9,6 +9,7 @@ import org.lwjgl.*;
 import javax.annotation.*;
 import java.nio.*;
 
+import static org.lwjgl.system.CheckIntrinsics.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -419,10 +420,14 @@ public final class Checks {
         checkBufferGT(buf.remaining(), size);
     }
 
-    public static void check(int index, int size) {
-        if (index < 0 || size <= index) {
-            throwIOBE(index, size);
-        }
+    public static long check(int index, int length) {
+        // Convert to long to support addressing up to 2^31-1 elements, regardless of sizeof(element).
+        // The unsigned conversion helps the JIT produce code that is as fast as if int was returned.
+        return Integer.toUnsignedLong(
+            CHECKS
+                ? checkIndex(index, length)
+                : index
+        );
     }
 
     // Separate calls to help inline check.
@@ -433,10 +438,6 @@ public final class Checks {
 
     private static void throwIAEGT(int bufferSize, int maximumSize) {
         throw new IllegalArgumentException("Number of remaining buffer elements is " + bufferSize + ", must be at most " + maximumSize);
-    }
-
-    private static void throwIOBE(int index, int size) {
-        throw new IndexOutOfBoundsException("Index is " + index + ", must be between 0 and  " + (size - 1));
     }
 
 }

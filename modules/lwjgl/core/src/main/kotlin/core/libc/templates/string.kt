@@ -21,7 +21,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
 
     opaque_p(
         "memset",
-        "Fills memory with a constant byte.",
+        "Fills a memory area with a constant byte.",
 
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -30,9 +30,9 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void_p.IN("dest", "pointer to destination"),
-        int.IN("c", "character to set"),
-        AutoSize("dest")..size_t.IN("count", "number of characters"),
+        )..void_p.IN("dest", "pointer to the memory area to fill"),
+        int.IN("c", "byte to set"),
+        AutoSize("dest")..size_t.IN("count", "number of bytes to fill"),
 
         returnDoc = "the value of {@code dest}"
     )
@@ -48,12 +48,12 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
      */
     @NativeType("void *")
     public static <T extends CustomBuffer<T>> long memset(@NativeType("void *") T dest, @NativeType("int") int c) {
-        return nmemset(memAddress(dest), c, (long)dest.remaining() * dest.sizeof());
+        return nmemset(memAddress(dest), c, Integer.toUnsignedLong(dest.remaining()) * dest.sizeof());
     }""")
 
     opaque_p(
         "memcpy",
-        "Copies characters between buffers.",
+        "Copies bytes between memory areas that must not overlap.",
 
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -62,7 +62,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void_p.IN("dest", "new buffer"),
+        )..void_p.IN("dest", "pointer to the destination memory area"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -70,18 +70,18 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..const..void_p.IN("src", "buffer to copy from"),
-        AutoSize("dest", "src")..size_t.IN("count", "number of characters to copy"),
+        )..const..void_p.IN("src", "pointer to the source memory area"),
+        AutoSize("src", "dest")..size_t.IN("count", "the number of bytes to be copied"),
 
         returnDoc = "the value of {@code dest}"
     )
 
     customMethod("""
     /**
-     * Copies characters between buffers.
+     * Copies bytes between memory areas that must not overlap.
      *
-     * @param dest new buffer
-     * @param src  buffer to copy from
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
      *
      * @return the value of {@code dest}
      */

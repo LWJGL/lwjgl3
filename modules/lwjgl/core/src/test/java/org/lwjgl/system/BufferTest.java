@@ -17,6 +17,33 @@ import static org.testng.Assert.*;
 @Test
 public class BufferTest {
 
+    public void testCustomBufferIOOBE() {
+        ByteBuffer    pb = memAlloc(16);
+        PointerBuffer pp = memAllocPointer(16);
+
+        expectThrows(IndexOutOfBoundsException.class, () -> pb.get(-1));
+        expectThrows(IndexOutOfBoundsException.class, () -> pp.get(-1));
+        pb.get(0);
+        pp.get(0);
+        pb.get(15);
+        pp.get(15);
+        expectThrows(IndexOutOfBoundsException.class, () -> pb.get(16));
+        expectThrows(IndexOutOfBoundsException.class, () -> pp.get(16));
+
+        pb.limit(10);
+        pp.limit(10);
+        pb.get(9);
+        pp.get(9);
+        expectThrows(IndexOutOfBoundsException.class, () -> pb.get(10));
+        expectThrows(IndexOutOfBoundsException.class, () -> pp.get(10));
+
+        pb.position(10);
+        pp.position(10);
+
+        memFree(pp);
+        memFree(pb);
+    }
+
     public void testLargeBufferNIO() {
         // ByteBuffer.allocateDirect supports up to Integer.MAX_VALUE bytes
         expectThrows(IllegalArgumentException.class, () -> BufferUtils.createShortBuffer(0x3FFFFFFF + 1));
@@ -33,6 +60,35 @@ public class BufferTest {
         } catch (OutOfMemoryError e) {
             throw new SkipException("Large buffer allocation failed."); // 32-bit JVM
         }
+    }
+
+    public void testPointerBuffer() {
+        PointerBuffer buffer = memCallocPointer(8);
+        long[] array = new long[buffer.capacity()];
+
+        for (int i = 0; i < buffer.capacity(); i++) {
+            buffer.put(i);
+        }
+        buffer.flip();
+        buffer.get(array);
+        assertEquals(buffer.remaining(), 0);
+        buffer.flip();
+        for (int i = 0; i < array.length; i++) {
+            assertEquals(array[i], buffer.get());
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = array.length - i;
+        }
+        buffer.flip();
+        buffer.put(array);
+        assertEquals(buffer.remaining(), 0);
+        buffer.flip();
+        for (int i = 0; i < array.length; i++) {
+            assertEquals(buffer.get(), array[i]);
+        }
+
+        memFree(buffer);
     }
 
     private static long fillBuffer(JNINativeMethod.Buffer buffer) {

@@ -1339,9 +1339,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(int, $structTypeIndexed) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, int index, ${it.nullable(structTypeIndexed, isArray = false)} value) {")
-                            if (Module.CHECKS)
-                                println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
-                            println("$t${t}memPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue});")
+                            println("$t${t}memPutAddress($STRUCT + $field + check(index, ${it.size}) * POINTER_SIZE, ${it.addressValue});")
                             println("$t}")
                         } else {
                             if (it.public)
@@ -1355,9 +1353,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
                             println("${t}public static void n$setter(long $STRUCT, int index, $structType value) {")
-                            if (Module.CHECKS)
-                                println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
-                            println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF);")
+                            println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field + check(index, ${it.size}) * $structType.SIZEOF, $structType.SIZEOF);")
                             println("$t}")
                         }
                     } else if (it is StructMemberCharArray) {
@@ -1395,9 +1391,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        if (Module.CHECKS)
-                            println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
-                        println("$t${t}memPut${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement, value);")
+                        println("$t${t}memPut${getBufferMethod(it, javaType)}($STRUCT + $field + check(index, ${it.size}) * $bytesPerElement, value);")
                         println("$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
@@ -1613,9 +1607,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public", isArray = false)} static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
-                            if (Module.CHECKS)
-                                println("$t${t}if (CHECKS) { check(index, $size); }")
-                            println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + index * POINTER_SIZE)${autoSizeIndirect.let {
+                            println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $size) * POINTER_SIZE)${autoSizeIndirect.let {
                                 if (it == null) "" else ", n${it.name}($STRUCT)"
                             }});")
                             println("$t}")
@@ -1626,9 +1618,7 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public")} static $nestedStruct n$getter(long $STRUCT, int index) {")
-                            if (Module.CHECKS)
-                                println("$t${t}if (CHECKS) { check(index, $size); }")
-                            println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + index * $nestedStruct.SIZEOF);")
+                            println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + check(index, $size) * $nestedStruct.SIZEOF);")
                             println("$t}")
                         }
                     } else if (it is StructMemberCharArray) {
@@ -1656,9 +1646,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                         println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
-                        if (Module.CHECKS)
-                            println("$t${t}if (CHECKS) { check(index, ${it.size}); }")
-                        print("$t${t}return memGet${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement)")
+                        print("$t${t}return memGet${getBufferMethod(it, javaType)}($STRUCT + $field + check(index, ${it.size}) * $bytesPerElement)")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println(";\n$t}")

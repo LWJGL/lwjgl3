@@ -7,9 +7,11 @@ package org.lwjgl.system;
 import javax.annotation.*;
 import java.util.*;
 
-// Multi-release version: Java 8
-
-/** Stack-walking utilities. */
+/**
+ * Stack-walking utilities.
+ *
+ * <p>On Java 9 these methods are implemented using {@code java.lang.StackWalker}, which has much lower overhead.</p>
+ */
 final class StackWalkUtil {
 
     private StackWalkUtil() {

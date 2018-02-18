@@ -290,7 +290,7 @@ public class MemoryStack implements AutoCloseable {
 
         pointer = newPointer;
 
-        return this.address + newPointer;
+        return this.address + Integer.toUnsignedLong(newPointer);
     }
 
     /**

@@ -9,6 +9,8 @@ import org.lwjgl.system.*;
 import javax.annotation.*;
 import java.nio.*;
 
+import static org.lwjgl.system.CheckIntrinsics.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
@@ -86,7 +88,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @param source the source ByteBuffer
      */
     public static long get(ByteBuffer source) {
-        if (source.limit() < source.position() + POINTER_SIZE) {
+        if (source.remaining() < POINTER_SIZE) {
             throw new BufferUnderflowException();
         }
 
@@ -121,7 +123,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @param p      the pointer value to be written
      */
     public static void put(ByteBuffer target, long p) {
-        if (target.limit() < target.position() + POINTER_SIZE) {
+        if (target.remaining() < POINTER_SIZE) {
             throw new BufferOverflowException();
         }
 
@@ -142,7 +144,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
      */
     public long get(int index) {
-        return memGetAddress(address + (checkIndex(index) << POINTER_SHIFT));
+        return memGetAddress(address + (check(index, limit) << POINTER_SHIFT));
     }
 
     /**
@@ -152,10 +154,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @param index  the index at which the pointer will be read
      */
     public static long get(ByteBuffer source, int index) {
-        if (index < 0 || source.limit() < index + POINTER_SIZE) {
-            throw new IndexOutOfBoundsException();
-        }
-
+        checkFromIndexSize(index, POINTER_SIZE, source.limit());
         return memGetAddress(memAddress0(source) + index);
     }
 
@@ -173,7 +172,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public PointerBuffer put(int index, long p) {
-        memPutAddress(address + (checkIndex(index) << POINTER_SHIFT), p);
+        memPutAddress(address + (check(index, limit) << POINTER_SHIFT), p);
         return this;
     }
 
@@ -185,10 +184,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @param p      the pointer value to be written
      */
     public static void put(ByteBuffer target, int index, long p) {
-        if (index < 0 || target.limit() < index + POINTER_SIZE) {
-            throw new IndexOutOfBoundsException();
-        }
-
+        checkFromIndexSize(index, POINTER_SIZE, target.limit());
         memPutAddress(memAddress0(target) + index, p);
     }
 
@@ -405,17 +401,24 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws IndexOutOfBoundsException         If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
      */
     public PointerBuffer get(long[] dst, int offset, int length) {
-        checkBounds(offset, length, dst.length);
-        if (remaining() < length) {
-            throw new BufferUnderflowException();
-        }
-
-        int end = offset + length;
-        for (int i = offset; i < end; i++) {
-            dst[i] = get();
+        if (BITS64) {
+            memLongBuffer(address(), remaining()).get(dst, offset, length);
+            position(position() + length);
+        } else {
+            get32(dst, offset, length);
         }
 
         return this;
+    }
+
+    private void get32(long[] dst, int offset, int length) {
+        checkFromIndexSize(offset, length, dst.length);
+        if (remaining() < length) {
+            throw new BufferUnderflowException();
+        }
+        for (int i = offset, end = offset + length; i < end; i++) {
+            dst[i] = get();
+        }
     }
 
     /**
@@ -465,7 +468,18 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public PointerBuffer put(long[] src, int offset, int length) {
-        checkBounds(offset, length, src.length);
+        if (BITS64) {
+            memLongBuffer(address(), remaining()).put(src, offset, length);
+            position(position() + length);
+        } else {
+            put32(src, offset, length);
+        }
+
+        return this;
+    }
+
+    private void put32(long[] src, int offset, int length) {
+        checkFromIndexSize(offset, length, src.length);
         if (remaining() < length) {
             throw new BufferOverflowException();
         }
@@ -473,8 +487,6 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
         for (int i = offset; i < end; i++) {
             put(src[i]);
         }
-
-        return this;
     }
 
     /**
@@ -560,12 +572,6 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
             return +1;
         }
         return this.remaining() - that.remaining();
-    }
-
-    private static void checkBounds(int off, int len, int size) {
-        if ((off | len | (off + len) | (size - (off + len))) < 0) {
-            throw new IndexOutOfBoundsException();
-        }
     }
 
 }

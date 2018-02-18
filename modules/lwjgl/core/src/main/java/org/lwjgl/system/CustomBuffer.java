@@ -51,7 +51,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     /** Returns the memory address at the specified buffer position. */
     public long address(int position) {
-        return address + (long)position * sizeof();
+        return address + Integer.toUnsignedLong(position) * sizeof();
     }
 
     /**
@@ -269,15 +269,15 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * @return the sliced buffer
      */
     public SELF slice(int offset, int capacity) {
-        if (offset < 0 || limit < position + offset) {
+        if (offset < 0 || remaining() < offset) {
             throw new IllegalArgumentException();
         }
 
-        if (capacity < 0 || this.capacity < position + offset + capacity) {
+        if (capacity < 0 || this.capacity - position - offset < capacity) {
             throw new IllegalArgumentException();
         }
 
-        return newBufferInstance(address() + (long)offset * sizeof(), container, -1, 0, capacity, capacity);
+        return newBufferInstance(address() + Integer.toUnsignedLong(offset) * sizeof(), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
             throw new BufferOverflowException();
         }
 
-        memCopy(src.address(), this.address(), (long)n * sizeof());
+        memCopy(src.address(), this.address(), Integer.toUnsignedLong(n) * sizeof());
         position += n;
 
         return self();
@@ -354,7 +354,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public SELF compact() {
-        memCopy(address(), address, (long)remaining() * sizeof());
+        memCopy(address(), address, Integer.toUnsignedLong(remaining()) * sizeof());
         position(remaining());
         limit(capacity());
         mark = -1;
@@ -377,25 +377,18 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     protected abstract SELF newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity);
 
-    protected long nextGetIndex() {
-        if (limit <= position) {
-            throw new BufferUnderflowException();
+    protected final long nextGetIndex() {
+        if (position < limit) {
+            return Integer.toUnsignedLong(position++);
         }
-        return position++;
+        throw new BufferUnderflowException();
     }
 
-    protected long nextPutIndex() {
-        if (limit <= position) {
-            throw new BufferOverflowException();
+    protected final long nextPutIndex() {
+        if (position < limit) {
+            return Integer.toUnsignedLong(position++);
         }
-        return position++;
-    }
-
-    protected long checkIndex(int index) {
-        if (index < 0 || limit < index) {
-            throw new IndexOutOfBoundsException();
-        }
-        return index;
+        throw new BufferOverflowException();
     }
 
 }

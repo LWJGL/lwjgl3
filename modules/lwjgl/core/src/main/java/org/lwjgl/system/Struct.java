@@ -66,7 +66,7 @@ public abstract class Struct extends Pointer.Default {
     // ---------------- Implementation utilities ----------------
 
     private void checkMemberOffset(int memberOffset) {
-        if (memberOffset < 0 || memberOffset + POINTER_SIZE > sizeof()) {
+        if (memberOffset < 0 || sizeof() - memberOffset < POINTER_SIZE) {
             throw new IllegalArgumentException("Invalid member offset.");
         }
     }
