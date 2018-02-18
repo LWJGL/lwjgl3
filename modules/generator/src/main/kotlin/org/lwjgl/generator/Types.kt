@@ -177,7 +177,7 @@ class CharSequenceType(
 val CharType.p get() = CharSequenceType(this.name, mapping = PointerMapping.DATA_BYTE, charMapping = (this.mapping as CharMapping))
 
 // Arrays (automatically used for array overloads)
-class ArrayType internal constructor(
+class ArrayType constructor(
     type: PointerType,
     mapping: PointerMapping = type.mapping as PointerMapping
 ) : PointerType(

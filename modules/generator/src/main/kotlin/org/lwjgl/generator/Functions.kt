@@ -622,7 +622,7 @@ class Func(
         if (verbose) {
             if (nativeClass.binding?.printCustomJavadoc(this, this@Func, javadoc) != true)
                 println(javadoc)
-        } else if (hasParam { it.nativeType is ArrayType }) {
+        } else if (hasParam { it.nativeType is ArrayType } && !has<OffHeapOnly>()) {
             println(nativeClass.processDocumentation("Array version of: ${nativeClass.className}#n$name()").toJavaDoc())
         } else {
             getNativeParams().filter {

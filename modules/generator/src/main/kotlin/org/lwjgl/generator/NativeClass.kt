@@ -651,10 +651,11 @@ class NativeClass(
         ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, see = see, since = since, noPrefix = noPrefix)
 
     operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", see: Array<String>? = null, since: String = "", noPrefix: Boolean = false): Func {
+        val overload = name.indexOf('@').let { if (it == -1) name else name.substring(0, it) }
         val func = Func(
             returns = this,
-            simpleName = name,
-            name = if (noPrefix) name else "$prefixMethod$name",
+            simpleName = overload,
+            name = if (noPrefix) overload else "$prefixMethod$overload",
             documentation = { parameterFilter ->
                 this@NativeClass.toJavaDoc(
                     processDocumentation(documentation),
@@ -669,7 +670,9 @@ class NativeClass(
             parameters = *parameters
         )
 
-        _functions[name] = func
+        if ((_functions.put(name, func)) != null) {
+            throw IllegalArgumentException("The $name function is already defined in ${this@NativeClass.className}.")
+        }
         return func
     }
 

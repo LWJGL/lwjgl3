@@ -449,17 +449,6 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
     )
 
     void(
-        "ProgramUniformMatrix4fvEXT",
-        "",
-
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        const..GLfloat_p.IN("value", "")
-    )
-
-    void(
         "ProgramUniformMatrix2x3fvEXT",
         "",
 
