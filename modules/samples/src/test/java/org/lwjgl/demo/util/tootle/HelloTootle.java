@@ -948,7 +948,7 @@ public final class HelloTootle {
                         null,
                         propertyStore
                     );
-                    nNFDi_Free(pp.get(0));
+                    nNFD_Free(pp.get(0));
 
                     if (scene != null) {
                         try {

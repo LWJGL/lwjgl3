@@ -169,7 +169,7 @@ public final class HelloNFD {
             case NFD_OKAY:
                 System.out.println("Success!");
                 System.out.println(path.getStringUTF8(0));
-                nNFDi_Free(path.get(0));
+                nNFD_Free(path.get(0));
                 break;
             case NFD_CANCEL:
                 System.out.println("User pressed cancel.");

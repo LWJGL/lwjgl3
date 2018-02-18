@@ -663,7 +663,7 @@ class Func(
 
         print("$t${if (constantMacro) "private " else accessModifier}static native $retType ")
         if (!nativeOnly) print('n')
-        print(nativeName)
+        print(name)
         print("(")
 
         val nativeParams = getNativeParams()
@@ -753,7 +753,7 @@ class Func(
         if (!returns.isVoid && !returns.isStructValue)
             print("return ")
         print(if (hasCustomJNI)
-            "n$nativeName("
+            "n$name("
         else
             "${binding.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
         )
@@ -997,7 +997,7 @@ class Func(
         } else {
             print(
                 if (hasCustomJNI)
-                    "n$nativeName("
+                    "n$name("
                 else macroExpression ?:
                      "${nativeClass.binding!!.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
             )
@@ -1670,7 +1670,7 @@ class Func(
         print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if (critical) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
         if (!isNativeOnly)
             print('n')
-        print(nativeName.asJNIName)
+        print(name.asJNIName)
         if (hasArrays || hasArrayOverloads)
             print(getNativeParams(withExplicitFunctionAddress = false).map {
                 if (it.nativeType is ArrayType)
