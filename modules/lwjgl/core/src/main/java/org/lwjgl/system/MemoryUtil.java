@@ -1375,7 +1375,7 @@ public final class MemoryUtil {
      *
      * @param text the text to encode
      *
-     * @return the encoded text
+     * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
      */
     public static ByteBuffer memASCII(CharSequence text) {
         return memASCII(text, true);
@@ -1393,7 +1393,7 @@ public final class MemoryUtil {
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
-     * @return the encoded text
+     * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
      */
     public static ByteBuffer memASCII(CharSequence text, boolean nullTerminated) {
         ByteBuffer target = memAlloc(memLengthASCII(text, nullTerminated));
@@ -1453,7 +1453,7 @@ public final class MemoryUtil {
      *
      * @param text the text to encode
      *
-     * @return the encoded text
+     * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
      */
     public static ByteBuffer memUTF8(CharSequence text) {
         return memUTF8(text, true);
@@ -1471,7 +1471,7 @@ public final class MemoryUtil {
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
-     * @return the encoded text
+     * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
      */
     public static ByteBuffer memUTF8(CharSequence text, boolean nullTerminated) {
         ByteBuffer target = memAlloc(memLengthUTF8(text, nullTerminated));
@@ -1533,7 +1533,7 @@ public final class MemoryUtil {
      *
      * @param text the text to encode
      *
-     * @return the encoded text
+     * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
      */
     public static ByteBuffer memUTF16(CharSequence text) {
         return memUTF16(text, true);
@@ -1551,7 +1551,7 @@ public final class MemoryUtil {
      * @param text           the text to encode
      * @param nullTerminated if true, the text will be terminated with a '\0'.
      *
-     * @return the encoded text
+     * @return the encoded text. The returned buffer must be deallocated manually with {@link #memFree}.
      */
     public static ByteBuffer memUTF16(CharSequence text, boolean nullTerminated) {
         ByteBuffer target = memAlloc(memLengthUTF16(text, nullTerminated));
