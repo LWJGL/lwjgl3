@@ -1379,8 +1379,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             #X11_CLASS_NAME and #X11_INSTANCE_NAME window hints to override this.
             """,
             """
-            <b>Wayland</b>: The window frame is currently unimplemented, as if #DECORATED) was always set to #FALSE. A compositor can still emit close, resize
-            or maximize events, using for example a keybind mechanism.
+            <b>Wayland</b>: The window frame is currently very simple, only allowing window resize or move. A compositor can still emit close, maximize or
+            fullscreen events, using for example a keybind mechanism. Additionally, the {@code wp_viewporter} protocol is required for this feature, otherwise
+            the window will not be decorated.
             """,
             "<b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.",
             "<b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor."
@@ -1671,11 +1672,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
-        Notes:
-        ${ul(
-            "This function must only be called from the main thread.",
-            "<b>Wayland</b>: The window frame is currently unimplemented, as if #DECORATED was always set to #FALSE, so the returned values will always be zero."
-        )}
+        This function must only be called from the main thread.
         """,
 
         GLFWwindow.p.IN("window", "the window whose frame size to query"),
