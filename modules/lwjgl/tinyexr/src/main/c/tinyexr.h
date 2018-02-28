@@ -10484,13 +10484,13 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
     size_t num_tiles = offsets.size();  // = # of blocks
 
     exr_image->tiles = static_cast<EXRTile *>(
-        malloc(sizeof(EXRTile) * static_cast<size_t>(num_tiles)));
+        calloc(sizeof(EXRTile), static_cast<size_t>(num_tiles)));
 
     for (size_t tile_idx = 0; tile_idx < num_tiles; tile_idx++) {
       // Allocate memory for each tile.
       exr_image->tiles[tile_idx].images = tinyexr::AllocateImage(
           num_channels, exr_header->channels, exr_header->requested_pixel_types,
-          data_width, data_height);
+		  exr_header->tile_size_x, exr_header->tile_size_y);
 
       // 16 byte: tile coordinates
       // 4 byte : data size
@@ -10869,6 +10869,10 @@ int LoadEXR(float **out_rgba, int *width, int *height, const char *filename,
   if ((idxA == 0) && (idxR == -1) && (idxG == -1) && (idxB == -1)) {
     // Alpha channel only.
 
+    if( exr_header.tiled )
+	{
+		//todo.implement this
+	}
     (*out_rgba) = reinterpret_cast<float *>(
         malloc(4 * sizeof(float) * static_cast<size_t>(exr_image.width) *
                static_cast<size_t>(exr_image.height)));
@@ -10910,6 +10914,35 @@ int LoadEXR(float **out_rgba, int *width, int *height, const char *filename,
     (*out_rgba) = reinterpret_cast<float *>(
         malloc(4 * sizeof(float) * static_cast<size_t>(exr_image.width) *
                static_cast<size_t>(exr_image.height)));
+	if( exr_header.tiled )
+	{
+		for(int it=0; it<exr_image.num_tiles; it++)
+		{
+			for(int j=0; j<exr_header.tile_size_y; j++)
+			for(int i=0; i<exr_header.tile_size_x; i++)
+			{
+				const int ii = exr_image.tiles[it].offset_x*exr_header.tile_size_x + i;
+				const int jj = exr_image.tiles[it].offset_y*exr_header.tile_size_y + j;
+				const int idx = ii + jj*exr_image.width;
+				const int srcIdx = i + j*exr_header.tile_size_x;
+				unsigned char **src = exr_image.tiles[it].images;
+				(*out_rgba)[4 * idx + 0] =
+					reinterpret_cast<float **>(src)[idxR][srcIdx];
+				(*out_rgba)[4 * idx + 1] =
+					reinterpret_cast<float **>(src)[idxG][srcIdx];
+				(*out_rgba)[4 * idx + 2] =
+					reinterpret_cast<float **>(src)[idxB][srcIdx];
+				if (idxA != -1) {
+					(*out_rgba)[4 * idx + 3] =
+						reinterpret_cast<float **>(src)[idxA][srcIdx];
+				} else {
+					(*out_rgba)[4 * idx + 3] = 1.0;
+				}
+			}
+		}
+	}
+	else
+	{
     for (int i = 0; i < exr_image.width * exr_image.height; i++) {
       (*out_rgba)[4 * i + 0] =
           reinterpret_cast<float **>(exr_image.images)[idxR][i];
@@ -10924,6 +10957,7 @@ int LoadEXR(float **out_rgba, int *width, int *height, const char *filename,
         (*out_rgba)[4 * i + 3] = 1.0;
       }
     }
+	}
   }
 
   (*width) = exr_image.width;
