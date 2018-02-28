@@ -174,6 +174,11 @@ fun main(args: Array<String>) {
                 submit { generateRegistered("callback", Generator.callbacks) }
                 submit { generateRegistered("custom class", Generator.customClasses) }
 
+                Generator.callbacks.forEach {
+                    if (it.module.enabled)
+                        JNI.register(it)
+                }
+
                 submit { generateSimple(JNI) }
 
                 latch.await()

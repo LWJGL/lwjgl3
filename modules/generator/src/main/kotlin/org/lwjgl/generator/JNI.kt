@@ -29,6 +29,8 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
     internal fun register(function: Func) = signatures.put(Signature(function), Unit)
     internal fun registerArray(function: Func) = signaturesArray.put(SignatureArray(function), Unit)
 
+    internal fun register(function: CallbackFunction) = signatures.put(Signature(function), Unit)
+
     init {
         documentation =
             """
@@ -191,6 +193,14 @@ private open class Signature constructor(
         function.returns.nativeType,
         function.parameters.asSequence()
             .filter { it !== EXPLICIT_FUNCTION_ADDRESS }
+            .map { it.nativeType }
+            .toList()
+    )
+
+    constructor(function: CallbackFunction) : this(
+        function.module.callingConvention,
+        function.returns,
+        function.signature.asSequence()
             .map { it.nativeType }
             .toList()
     )
