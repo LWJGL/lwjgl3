@@ -68,6 +68,11 @@ ENABLE_WARNINGS()""")
         nullable..rpmalloc_config_t.const.p.IN("config", "an optional ##RPMallocConfig instance")
     )
 
+    Nonnull..rpmalloc_config_t.const.p(
+        "malloc_config",
+        ""
+    )
+
     void(
         "malloc_finalize",
         """

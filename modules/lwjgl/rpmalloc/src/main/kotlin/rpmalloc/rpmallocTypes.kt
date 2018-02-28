@@ -89,6 +89,23 @@ fun config() {
     })
 }
 
+val memory_map_fn = callback(
+    Module.RPMALLOC, opaque_p, "RPMemoryMapCallback",
+    """
+    Map memory pages for the given number of bytes.
+
+    The returned address MUST be aligned to the rpmalloc span size, which will always be a power of two. Optionally the function can store an alignment
+    offset in the offset variable in case it performs alignment and the returned pointer is offset from the actual start of the memory region due to this
+    alignment. The alignment offset will be passed to the memory unmap function. The alignment offset MUST NOT be larger than 65535 (storable in an
+    {@code uint16_t}), if it is you must use natural alignment to shift it into 16 bits.
+    """,
+
+    size_t.IN("size", "the number of bytes to map"),
+    Check(1)..size_t.p.OUT("offset", "the alignment offset")
+) {
+    documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+}
+
 val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "rpmalloc_config_t") {
     documentation =
         """
@@ -102,29 +119,21 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         not enabled in the default LWJGL build.
         """
 
-    nullable..callback(
-        Module.RPMALLOC, opaque_p, "RPMemoryMapCallback",
-        """
-        Map memory pages for the given number of bytes.
-
-        The returned address MUST be 2 byte aligned, and should ideally be 64KiB aligned. If memory returned is not 64KiB aligned rpmalloc will call unmap and
-        then another map request with size padded by 64KiB in order to align it internally.
-        """,
-
-        size_t.IN("size", "the number of bytes to map")
-    ) {
-        documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
-    }.member("memory_map", "the memory map callback function")
+    nullable..memory_map_fn.member("memory_map", "the memory map callback function")
     nullable..callback(
         Module.RPMALLOC, void, "RPMemoryUnmapCallback",
         """
         Unmap the memory pages starting at address and spanning the given number of bytes.
 
-        Address will always be an address returned by an earlier call to {@code memory_map} function.
+        If release is set to 1, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range should be
+        released. If release is set to 0, the unmap is a partial decommit of a subset of the mapped memory range.
         """,
 
+        //void* address, size_t size, size_t offset, int release
         opaque_p.IN("address", "the address to unmap"),
-        size_t.IN("size", "the size of the mapped pages, in bytes")
+        size_t.IN("size", "the size of the mapped pages, in bytes"),
+        size_t.IN("offset", "the alignment offset"),
+        intb.IN("release", "the release flag")
     ) {
         documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
     }.member("memory_unmap", "the memory unmap callback function")
@@ -133,8 +142,25 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         """
         the size of memory pages.
 
-        All allocation requests will be made in multiples of this page size. If set to 0, rpmalloc will use system calls to determine the page size. The page
-        size MUST be a power of two in {@code [512,16384]} range ({@code 2^9} to {@code 2^14}).
+        The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
+        memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.
+        """
+    )
+    size_t.member(
+        "span_size",
+        """
+        size of a span of memory pages.
+
+        MUST be a multiple of page size, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).
+        """
+    )
+    size_t.member(
+        "span_map_count",
+        """
+        number of spans to map at each request to map new virtual memory blocks.
+
+        This can be used to minimize the system call overhead at the cost of virtual memory address space. The extra mapped pages will not be written until
+        actually used, so physical committed memory should not be affected in the default implementation.
         """
     )
     nullable..callback(
@@ -155,7 +181,6 @@ val rpmalloc_global_statistics_t = struct(
 ) {
     size_t.member("mapped", "Current amount of virtual memory mapped (only if {@code ENABLE_STATISTICS=1})")
     size_t.member("cached", "Current amount of memory in global caches for small and medium sizes (<64KiB)")
-    size_t.member("cached_large", "Curren amount of memory in global caches for large sizes (>=64KiB)")
     size_t.member("mapped_total", "Total amount of memory mapped (only if {@code ENABLE_STATISTICS=1})")
     size_t.member("unmapped_total", "Total amount of memory unmapped (only if {@code ENABLE_STATISTICS=1})")
 }
@@ -166,8 +191,6 @@ val rpmalloc_thread_statistics_t = struct(
     nativeName = "rpmalloc_thread_statistics_t",
     mutable = false
 ) {
-    size_t.member("requested", "Amount of memory currently requested in allocations (only if {@code ENABLE_STATISTICS=1})")
-    size_t.member("allocated", "Amount of memory actually allocated in memory blocks (only if {@code ENABLE_STATISTICS=1})")
     size_t.member("active", "Current number of bytes available for allocation from active spans")
     size_t.member("sizecache", "Current number of bytes available in thread size class caches")
     size_t.member("spancache", "Current number of bytes available in thread span caches")

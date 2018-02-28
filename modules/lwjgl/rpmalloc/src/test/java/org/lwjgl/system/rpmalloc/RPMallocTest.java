@@ -12,9 +12,9 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
 
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libc.LibCStdlib.*;
 import static org.lwjgl.system.rpmalloc.RPmalloc.*;
 import static org.testng.Assert.*;
 
@@ -63,20 +63,31 @@ public class RPMallocTest {
 
     public void testInitConfig() {
         try (MemoryStack stack = stackPush()) {
-            AtomicInteger allocations = new AtomicInteger();
+            AtomicInteger memoryMappings = new AtomicInteger();
 
-            RPMallocConfig config = RPMallocConfig.callocStack(stack)
-                .memory_map(size -> {
-                    long m = naligned_alloc(64 * 1024, size);
-                    if (m != NULL) {
-                        allocations.incrementAndGet();
-                    }
+            rpmalloc_initialize();
+
+            // get default configuration
+            RPMallocConfig config = RPMallocConfig.mallocStack(stack);
+            config.set(rpmalloc_config());
+
+            rpmalloc_finalize();
+
+            // get OS memory mapping functions (the custom callbacks below delegate to these)
+            long memoryMapCB   = memGetAddress(config.address() + RPMallocConfig.MEMORY_MAP);
+            long memoryUnmapCB = memGetAddress(config.address() + RPMallocConfig.MEMORY_UNMAP);
+
+            config
+                .memory_map((size, offset) -> {
+                    long m = invokePPP(memoryMapCB, size, offset);
+                    assertNotEquals(m, NULL);
+                    memoryMappings.incrementAndGet();
                     return m;
                 })
-                .memory_unmap((address, size) -> {
-                    naligned_free(address);
-                    if (address != NULL) {
-                        allocations.decrementAndGet();
+                .memory_unmap((address, size, offset, release) -> {
+                    invokePPPV(memoryUnmapCB, address, size, offset, release ? 1 : 0);
+                    if (release) {
+                        memoryMappings.decrementAndGet();
                     }
                 });
 
@@ -84,11 +95,12 @@ public class RPMallocTest {
                 rpmalloc_initialize_config(config);
 
                 ByteBuffer b = rpmalloc(8);
-                assertNotEquals(allocations.get(), 0);
+                assertNotNull(b);
+                assertNotEquals(memoryMappings.get(), 0);
                 rpfree(b);
 
                 rpmalloc_finalize();
-                assertEquals(allocations.get(), 0);
+                assertEquals(memoryMappings.get(), 0);
             } finally {
                 Objects.requireNonNull(config.memory_unmap()).free();
                 Objects.requireNonNull(config.memory_map()).free();
