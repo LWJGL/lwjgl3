@@ -143,11 +143,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 
         The callback returns a {@code VkBool32}, which is interpreted in a layer-specified manner. The application <b>should</b> always return #FALSE. The #TRUE value is reserved for use in layer development.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE.</li>
-            <li>If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
-        </ul>
+        {@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE. If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.
 
         <h5>See Also</h5>
         ##VkDebugReportCallbackCreateInfoEXT
@@ -275,6 +271,13 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
     documentation =
         """
         Structure describing parameters of a queue presentation.
+
+        <h5>Description</h5>
+        Before an application <b>can</b> present an image, the image's layout <b>must</b> be transitioned to the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout, or for a shared presentable image the #IMAGE_LAYOUT_SHARED_PRESENT_KHR layout.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When transitioning the image to #IMAGE_LAYOUT_SHARED_PRESENT_KHR or #IMAGE_LAYOUT_PRESENT_SRC_KHR, there is no need to delay subsequent processing, or perform any visibility operations (as #QueuePresentKHR() performs automatic visibility operations). To achieve this, the {@code dstAccessMask} member of the ##VkImageMemoryBarrier <b>should</b> be set to 0, and the {@code dstStageMask} parameter <b>should</b> be set to #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1647,6 +1650,7 @@ val VkAcquireNextImageInfoKHX = struct(Module.VULKAN, "VkAcquireNextImageInfoKHX
             <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE</li>
             <li>{@code deviceMask} <b>must</b> be a valid device mask</li>
             <li>{@code deviceMask} <b>must</b> not be zero</li>
+            <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4245,6 +4249,7 @@ val VkMemoryDedicatedAllocateInfoKHR = struct(Module.VULKAN, "VkMemoryDedicatedA
             <li>If {@code buffer} is not #NULL_HANDLE, {@code buffer} <b>must</b> have been created without #BUFFER_CREATE_SPARSE_BINDING_BIT set in ##VkBufferCreateInfo{@code ::flags}</li>
             <li>If {@code image} is not #NULL_HANDLE and ##VkMemoryAllocateInfo defines a memory import operation, the memory being imported <b>must</b> also be a dedicated image allocation and {@code image} must be identical to the image associated with the imported memory.</li>
             <li>If {@code buffer} is not #NULL_HANDLE and ##VkMemoryAllocateInfo defines a memory import operation, the memory being imported <b>must</b> also be a dedicated buffer allocation and {@code buffer} must be identical to the buffer associated with the imported memory.</li>
+            <li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> not have been created with #IMAGE_CREATE_DISJOINT_BIT_KHR set in ##VkImageCreateInfo{@code ::flags}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4608,10 +4613,32 @@ val VkSparseImageMemoryRequirements2KHR = struct(Module.VULKAN, "VkSparseImageMe
 }
 
 val VkImageFormatListCreateInfoKHR = struct(Module.VULKAN, "VkImageFormatListCreateInfoKHR") {
-    VkStructureType.member("sType", "")
-    nullable..opaque_const_p.member("pNext", "")
-    AutoSize("pViewFormats", optional = true)..uint32_t.member("viewFormatCount", "")
-    VkFormat.const.p.member("pViewFormats", "")
+    documentation =
+        """
+        Specify that an image <b>can</b> be used with a particular set of formats.
+
+        <h5>Description</h5>
+        If {@code viewFormatCount} is zero, {@code pViewFormats} is ignored and the image is created as if the ##VkImageFormatListCreateInfoKHR structure were not included in the {@code pNext} list of ##VkImageCreateInfo.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code viewFormatCount} is not 0, all of the formats in the {@code pViewFormats} array <b>must</b> be compatible with the format specified in the {@code format} field of ##VkImageCreateInfo, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-views-compatibility">compatibility table</a>.</li>
+            <li>If ##VkImageCreateInfo{@code ::flags} does not contain #IMAGE_CREATE_MUTABLE_FORMAT_BIT, {@code viewFormatCount} <b>must</b> be 0 or 1.</li>
+            <li>If {@code viewFormatCount} is not 0, ##VkImageCreateInfo{@code ::format} <b>must</b> be in {@code pViewFormats}.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>If {@code viewFormatCount} is not 0, {@code pViewFormats} <b>must</b> be a valid pointer to an array of {@code viewFormatCount} valid {@code VkFormat} values</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pViewFormats", optional = true)..uint32_t.member("viewFormatCount", "the number of entries in the {@code pViewFormats} array.")
+    VkFormat.const.p.member("pViewFormats", "an array which lists of all formats which <b>can</b> be used when creating views of this image.")
 }
 
 val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT") {
@@ -5131,7 +5158,20 @@ val VkMemoryHostPointerPropertiesEXT = struct(Module.VULKAN, "VkMemoryHostPointe
 }
 
 val VkPhysicalDeviceExternalMemoryHostPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceExternalMemoryHostPropertiesEXT") {
+    documentation =
+        """
+        Structure describing external memory host pointer limits that can be supported by an implementation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        If the ##VkPhysicalDeviceExternalMemoryHostPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        """
+
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkDeviceSize.member("minImportedHostPointerAlignment", "")
+    VkDeviceSize.member("minImportedHostPointerAlignment", "the minimum required: alignment, in bytes, for the base address and size of host pointers that <b>can</b> be imported to a Vulkan memory object.")
 }

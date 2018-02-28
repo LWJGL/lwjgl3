@@ -512,6 +512,11 @@ val KHX_device_group = "KHXDeviceGroup".nativeClassVK("KHX_device_group", type =
 ￿    const VkAcquireNextImageInfoKHX*            pAcquireInfo,
 ￿    uint32_t*                                   pImageIndex);</pre></code>
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the number of currently acquired images is greater than the difference between the number of images in the {@code swapchain} member of {@code pAcquireInfo} and the value of ##VkSurfaceCapabilitiesKHR{@code ::minImageCount} as returned by a call to #GetPhysicalDeviceSurfaceCapabilities2KHR() with the {@code surface} used to create {@code swapchain}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>

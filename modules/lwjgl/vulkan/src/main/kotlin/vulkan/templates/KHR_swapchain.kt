@@ -284,6 +284,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> not have any uncompleted signal or wait operations pending</li>
             <li>If {@code fence} is not #NULL_HANDLE it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
             <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE</li>
+            <li>If the number of currently acquired images is greater than the difference between the number of images in {@code swapchain} and the value of ##VkSurfaceCapabilitiesKHR{@code ::minImageCount} as returned by a call to #GetPhysicalDeviceSurfaceCapabilities2KHR() with the {@code surface} used to create {@code swapchain}, {@code timeout} <b>must</b> not be {@code UINT64_MAX}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -346,6 +347,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 ￿VkResult vkQueuePresentKHR(
 ￿    VkQueue                                     queue,
 ￿    const VkPresentInfoKHR*                     pPresentInfo);</pre></code>
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        There is no requirement for an application to present images in the same order that they were acquired - applications can arbitrarily present any image that is currently acquired.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
