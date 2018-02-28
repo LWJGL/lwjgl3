@@ -40,4 +40,20 @@ public final class MathUtil {
         return 1 << (32 - Integer.numberOfLeadingZeros(value - 1));
     }
 
+    public static boolean mathHasZeroByte(int value) {
+        return ((value - 0x01010101) & ~value & 0x80808080) != 0;
+    }
+
+    public static boolean mathHasZeroByte(long value) {
+        return ((value - 0x0101010101010101L) & ~value & 0x8080808080808080L) != 0L;
+    }
+
+    public static boolean mathHasZeroShort(int value) {
+        return (value & 0xFFFF) == 0 || (value >>> 16) == 0;
+    }
+
+    public static boolean mathHasZeroShort(long value) {
+        return ((value - 0x0001000100010001L) & ~value & 0x8000800080008000L) != 0L;
+    }
+
 }

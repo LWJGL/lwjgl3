@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import java.nio.*;
 
 import static java.lang.Character.*;
+import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -29,7 +30,7 @@ class MemoryTextUtil {
     int strlen64NT1(long address, int maxLength) {
         int i = 0;
 
-        ByteBuffer buffer = memByteBuffer(address, maxLength);
+        ByteBuffer buffer = memByteBuffer(address, Integer.MAX_VALUE);
 
         if (8 <= maxLength) {
             int misalignment = (int)address & 7;
@@ -43,13 +44,12 @@ class MemoryTextUtil {
             }
 
             // Aligned longs for performance
-            do {
-                long v = buffer.getLong(i);
-                if (((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0) {
+            while (i <= maxLength - 8) {
+                if (mathHasZeroByte(buffer.getLong(i))) {
                     break;
                 }
                 i += 8;
-            } while (i <= maxLength - 8);
+            }
         }
 
         // Tail
@@ -70,7 +70,7 @@ class MemoryTextUtil {
     int strlen64NT2(long address, int maxLength) {
         int i = 0;
 
-        ByteBuffer buffer = memByteBuffer(address, maxLength);
+        ByteBuffer buffer = memByteBuffer(address, Integer.MAX_VALUE);
 
         if (8 <= maxLength) {
             int misalignment = (int)address & 7;
@@ -84,13 +84,12 @@ class MemoryTextUtil {
             }
 
             // Aligned longs for performance
-            do {
-                long v = buffer.getLong(i);
-                if (((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0) {
+            while (i <= maxLength - 8) {
+                if (mathHasZeroShort(buffer.getLong(i))) {
                     break;
                 }
                 i += 8;
-            } while (i <= maxLength - 8);
+            }
         }
 
         // Tail
@@ -111,7 +110,7 @@ class MemoryTextUtil {
     int strlen32NT1(long address, int maxLength) {
         int i = 0;
 
-        ByteBuffer buffer = memByteBuffer(address, maxLength);
+        ByteBuffer buffer = memByteBuffer(address, Integer.MAX_VALUE);
 
         if (4 <= maxLength) {
             int misalignment = (int)address & 3;
@@ -125,13 +124,12 @@ class MemoryTextUtil {
             }
 
             // Aligned ints for performance
-            do {
-                int v = buffer.getInt(i);
-                if (((v - 0x01010101) & ~v & 0x80808080) != 0) {
+            while (i <= maxLength - 4) {
+                if (mathHasZeroByte(buffer.getInt(i))) {
                     break;
                 }
                 i += 4;
-            } while (i <= maxLength - 4);
+            }
         }
 
         // Tail
@@ -152,7 +150,7 @@ class MemoryTextUtil {
     int strlen32NT2(long address, int maxLength) {
         int i = 0;
 
-        ByteBuffer buffer = memByteBuffer(address, maxLength);
+        ByteBuffer buffer = memByteBuffer(address, Integer.MAX_VALUE);
 
         if (4 <= maxLength) {
             int misalignment = (int)address & 3;
@@ -166,13 +164,12 @@ class MemoryTextUtil {
             }
 
             // Aligned ints for performance
-            do {
-                int v = buffer.getInt(i);
-                if (((v - 0x00010001) & ~v & 0x80008000) != 0) {
+            while (i <= maxLength - 4) {
+                if (mathHasZeroShort(buffer.getInt(i))) {
                     break;
                 }
                 i += 4;
-            } while (i <= maxLength - 4);
+            }
         }
 
         // Tail
@@ -189,17 +186,16 @@ class MemoryTextUtil {
 
     /** @see MemoryUtil#memASCII(CharSequence, boolean, ByteBuffer, int) */
     int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-        int p = offset;
-
-        for (int i = 0; i < text.length(); i++, p++) {
-            target.put(p, (byte)text.charAt(i));
+        int len = text.length();
+        for (int i = 0; i < len; i++) {
+            target.put(offset + i, (byte)text.charAt(i));
         }
 
         if (nullTerminated) {
-            target.put(p++, (byte)0);
+            target.put(offset + len, (byte)0);
         }
 
-        return p - offset;
+        return len + (nullTerminated ? 1 : 0);
     }
 
     /** @see MemoryUtil#memASCII(ByteBuffer, int, int) */
@@ -408,17 +404,16 @@ class MemoryTextUtil {
 
     /** @see MemoryUtil#memUTF16(CharSequence, boolean, ByteBuffer, int) */
     int encodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-        int p = offset;
-        for (int i = 0; i < text.length(); i++, p += 2) {
-            target.putChar(p, text.charAt(i));
+        int len = text.length();
+        for (int i = 0; i < len; i++) {
+            target.putChar(offset + 2 * i, text.charAt(i));
         }
 
         if (nullTerminated) {
-            target.putChar(p, '\0');
-            p += 2;
+            target.putChar(offset + 2 * len, '\0');
         }
 
-        return p - offset;
+        return 2 * (len + (nullTerminated ? 1 : 0));
     }
 
     /** @see MemoryUtil#memUTF16(ByteBuffer, int, int) */

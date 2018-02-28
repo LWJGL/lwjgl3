@@ -9,6 +9,7 @@ import java.util.*;
 
 import static java.lang.Character.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryAccessJNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
@@ -418,13 +419,12 @@ final class MemoryAccess {
                     }
 
                     // Aligned longs for performance
-                    do {
-                        long v = UNSAFE.getLong(null, address + i);
-                        if (((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0) {
+                    while (i <= maxLength - 8) {
+                        if (mathHasZeroByte(UNSAFE.getLong(null, address + i))) {
                             break;
                         }
                         i += 8;
-                    } while (i <= maxLength - 8);
+                    }
                 }
 
                 // Tail
@@ -453,13 +453,12 @@ final class MemoryAccess {
                     }
 
                     // Aligned longs for performance
-                    do {
-                        long v = UNSAFE.getLong(null, address + i);
-                        if (((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0) {
+                    while (i <= maxLength - 8) {
+                        if (mathHasZeroShort(UNSAFE.getLong(null, address + i))) {
                             break;
                         }
                         i += 8;
-                    } while (i <= maxLength - 8);
+                    }
                 }
 
                 // Tail
@@ -488,13 +487,12 @@ final class MemoryAccess {
                     }
 
                     // Aligned ints for performance
-                    do {
-                        int v = UNSAFE.getInt(null, address + i);
-                        if (((v - 0x01010101) & ~v & 0x80808080) != 0) {
+                    while (i <= maxLength - 4) {
+                        if (mathHasZeroByte(UNSAFE.getInt(null, address + i))) {
                             break;
                         }
                         i += 4;
-                    } while (i <= maxLength - 4);
+                    }
                 }
 
                 // Tail
@@ -523,13 +521,12 @@ final class MemoryAccess {
                     }
 
                     // Aligned longs for performance
-                    do {
-                        int v = UNSAFE.getInt(null, address + i);
-                        if (((v - 0x00010001) & ~v & 0x80008000) != 0) {
+                    while (i <= maxLength - 4) {
+                        if (mathHasZeroShort(UNSAFE.getInt(null, address + i))) {
                             break;
                         }
                         i += 4;
-                    } while (i <= maxLength - 4);
+                    }
                 }
 
                 // Tail
@@ -614,18 +611,16 @@ final class MemoryAccess {
             }
 
             private static int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
-                int p = 0, len = text.length();
-
-                for (int i = 0; i < len; i++, p += 2) {
-                    UNSAFE.putShort(target + p, (short)text.charAt(i));
+                int len = text.length();
+                for (int i = 0; i < len; i++) {
+                    UNSAFE.putShort(target + 2 * i, (short)text.charAt(i));
                 }
 
                 if (nullTerminated) {
-                    UNSAFE.putShort(target + p, (short)0);
-                    p += 2;
+                    UNSAFE.putShort(target + 2 * len, (short)0);
                 }
 
-                return p;
+                return 2 * (len + (nullTerminated ? 1 : 0));
             }
         }
 
