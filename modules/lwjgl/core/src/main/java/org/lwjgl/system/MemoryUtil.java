@@ -1798,7 +1798,7 @@ public final class MemoryUtil {
      * @return the decoded {@link String}
      */
     public static String memASCII(ByteBuffer buffer, int length) {
-        return MemoryTextUtil.decodeASCII(buffer, length, buffer.position());
+        return MemoryTextDecoding.decodeASCII(buffer, length, buffer.position());
     }
 
     /**
@@ -1814,7 +1814,7 @@ public final class MemoryUtil {
      */
     public static String memASCII(ByteBuffer buffer, int length, int offset) {
         Objects.requireNonNull(buffer);
-        return MemoryTextUtil.decodeASCII(buffer, length, offset);
+        return MemoryTextDecoding.decodeASCII(buffer, length, offset);
     }
 
     /**
@@ -1865,7 +1865,7 @@ public final class MemoryUtil {
      * @return the decoded {@link String}
      */
     public static String memUTF8(ByteBuffer buffer, int length) {
-        return MemoryTextUtil.decodeUTF8(buffer, length, buffer.position());
+        return MemoryTextDecoding.decodeUTF8(buffer, length, buffer.position());
     }
 
     /**
@@ -1881,7 +1881,7 @@ public final class MemoryUtil {
      */
     public static String memUTF8(ByteBuffer buffer, int length, int offset) {
         Objects.requireNonNull(buffer);
-        return MemoryTextUtil.decodeUTF8(buffer, length, offset);
+        return MemoryTextDecoding.decodeUTF8(buffer, length, offset);
     }
 
     /**
@@ -1931,7 +1931,7 @@ public final class MemoryUtil {
      * @return the decoded {@link String}
      */
     public static String memUTF16(ByteBuffer buffer, int length) {
-        return MemoryTextUtil.decodeUTF16(buffer, length, buffer.position());
+        return MemoryTextDecoding.decodeUTF16(buffer, length, buffer.position());
     }
 
     /**
@@ -1947,7 +1947,7 @@ public final class MemoryUtil {
      */
     public static String memUTF16(ByteBuffer buffer, int length, int offset) {
         Objects.requireNonNull(buffer);
-        return MemoryTextUtil.decodeUTF16(buffer, length, offset);
+        return MemoryTextDecoding.decodeUTF16(buffer, length, offset);
     }
 
 }
