@@ -31,7 +31,7 @@ val ptrdiff_t = IntegerType("ptrdiff_t", PrimitiveMapping.POINTER)
 val intptr_t = IntegerType("intptr_t", PrimitiveMapping.POINTER)
 val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.POINTER, unsigned = true)
 
-val va_list = "va_list".p
+val va_list = "va_list".handle
 
 val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
 val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)

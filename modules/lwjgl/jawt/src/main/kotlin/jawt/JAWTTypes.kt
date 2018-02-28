@@ -26,7 +26,7 @@ val JAWT_DrawingSurface = struct(Module.JAWT, "JAWTDrawingSurface", nativeName =
         All operations on a JAWT_DrawingSurface MUST be performed from the same thread as the call to {@code GetDrawingSurface}.
         """
 
-    "JNIEnv".p.member(
+    "JNIEnv".opaque.p.member(
         "env",
         """
         Cached reference to the Java environment of the calling thread.

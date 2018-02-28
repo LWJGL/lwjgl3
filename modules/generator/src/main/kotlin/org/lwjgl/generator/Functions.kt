@@ -39,7 +39,7 @@ internal const val JNIENV = "__env"
 /** Special parameter that generates an explicit function address parameter. */
 val EXPLICIT_FUNCTION_ADDRESS = opaque_p.IN(FUNCTION_ADDRESS, "the function address")
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
-val JNI_ENV = "JNIEnv".p.IN(JNIENV, "the JNI environment struct")
+val JNI_ENV = "JNIEnv".opaque.p.IN(JNIENV, "the JNI environment struct")
 
 private val TRY_FINALLY_ALIGN = "^(\\s+)".toRegex(RegexOption.MULTILINE)
 
@@ -1697,9 +1697,10 @@ class Func(
                 val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
                 print("$t$pointerType")
                 if (!pointerType.endsWith('*')) print(' ')
-                val castExpression = if (it.nativeType === va_list)
+                val castExpression = if (it.nativeType === va_list) {
+                    print("*")
                     "VA_LIST_CAST"
-                else
+                } else
                     "($pointerType)"
                 println("${it.name} = $castExpression${if (nativeClass.binding == null) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
             }

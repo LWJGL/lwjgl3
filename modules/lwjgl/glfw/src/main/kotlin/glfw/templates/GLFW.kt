@@ -2505,7 +2505,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 1.0"
     )
 
-    GLFWcursor(
+    GLFWcursor.p(
         "CreateCursor",
         """
         Creates a new custom cursor image that can be set for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
@@ -2531,7 +2531,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.1"
     )
 
-    GLFWcursor(
+    GLFWcursor.p(
         "CreateStandardCursor",
         """
         Returns a cursor with a standard shape, that can be set for a window with #SetCursor().
@@ -2559,7 +2559,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        GLFWcursor.IN("cursor", "the cursor object to destroy"),
+        GLFWcursor.p.IN("cursor", "the cursor object to destroy"),
 
         since = "version 3.1"
     )
@@ -2576,7 +2576,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p.IN("window", "the window to set the system cursor for"),
-        nullable..GLFWcursor.IN("cursor", "the cursor to set, or #NULL to switch back to the default arrow cursor"),
+        nullable..GLFWcursor.p.IN("cursor", "the cursor to set, or #NULL to switch back to the default arrow cursor"),
 
         since = "version 3.1"
     )

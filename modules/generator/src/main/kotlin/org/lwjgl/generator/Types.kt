@@ -145,7 +145,6 @@ class OpaqueType internal constructor(name: String) : BaseType(name, TypeMapping
     override val const by lazy { OpaqueType(this.name.const) }
 }
 val String.opaque get() = OpaqueType(this)
-val String.p get() = this.opaque.p
 val String.handle get() = typedef(this.opaque.p, this)
 
 // Strings

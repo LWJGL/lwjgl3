@@ -288,7 +288,7 @@ val stbtt__bitmap = struct(Module.STB, "STBTTBitmap", nativeName = "stbtt__bitma
 
 // stb_vorbis.c
 
-const val stb_vorbis = "stb_vorbis"
+val stb_vorbis = "stb_vorbis".opaque
 
 val stb_vorbis_alloc = struct(Module.STB, "STBVorbisAlloc", nativeName = "stb_vorbis_alloc") {
     documentation = "A buffer to use for allocations by ##STBVorbis"

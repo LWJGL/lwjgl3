@@ -60,7 +60,7 @@ val rmtS64 = typedef(int64_t, "rmtS64")
 val rmtPStr = typedef(charASCII.p, "rmtPStr")
 
 // Handle to the main remotery instance
-const val Remotery = "Remotery"
+val Remotery = "Remotery".opaque
 
 val rmtError = "rmtError".enumType
 

@@ -41,4 +41,4 @@ val CFOptionFlags = IntegerType("CFOptionFlags", PrimitiveMapping.LONG, unsigned
 val CFHashCode = IntegerType("CFHashCode", PrimitiveMapping.LONG, unsigned = true)
 val CFIndex = IntegerType("CFIndex", PrimitiveMapping.LONG)
 
-val pid_t = "pid_t".p
+val pid_t = "pid_t".handle

@@ -95,10 +95,10 @@ val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
 val glInt_t = typedef(int32_t, "glInt_t")
 val glUInt_t = typedef(uint32_t, "glUInt_t")
 
-val VkInstance_T = "VkInstance_T"
-val VkPhysicalDevice_T = "VkPhysicalDevice_T"
-val VkDevice_T = "VkDevice_T"
-val VkQueue_T = "VkQueue_T"
+val VkInstance_T = "VkInstance_T".opaque
+val VkPhysicalDevice_T = "VkPhysicalDevice_T".opaque
+val VkDevice_T = "VkDevice_T".opaque
+val VkQueue_T = "VkQueue_T".opaque
 
 val HmdMatrix34_t = struct(Module.OPENVR, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
     float.array("m", "", size = 3 x 4)

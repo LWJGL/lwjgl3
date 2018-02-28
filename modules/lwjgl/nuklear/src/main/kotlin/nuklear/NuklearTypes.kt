@@ -1216,7 +1216,7 @@ val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_windo
     nk_edit_state.member("edit", "")
     unsigned_int.member("scrolled", "")
 
-    "nk_table".p.member("tables", "") // TODO: private API?
+    "struct nk_table".opaque.p.member("tables", "") // TODO: private API?
     unsigned_int.member("table_count", "")
 
     /* window list hooks */
@@ -1231,8 +1231,8 @@ val nk_pool = struct(Module.NUKLEAR, "NkPool", nativeName = "struct nk_pool", mu
     nk_allocator.member("alloc", "")
     nk_allocation_type.member("type", "")
     unsigned_int.member("page_count", "")
-    "nk_page".p.member("pages", "")
-    "nk_page_element".p.member("freelist", "")
+    "struct nk_page".opaque.p.member("pages", "")
+    "struct nk_page_element".opaque.p.member("freelist", "")
     unsigned.member("capacity", "")
     nk_size.member("size", "")
     nk_size.member("cap", "")
@@ -1303,7 +1303,7 @@ val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_con
     (nullable..nk_window_p.member("end", "")).public = false
     (nullable..nk_window_p.member("active", "")).public = false
     (nullable..nk_window_p.member("current", "")).public = false
-    (nullable.."nk_page_element".p.member("freelist", "")).public = false
+    (nullable.."struct nk_page_element".opaque.p.member("freelist", "")).public = false
     unsigned_int.member("count", "").public = false
     unsigned_int.member("seq", "").public = false
 }

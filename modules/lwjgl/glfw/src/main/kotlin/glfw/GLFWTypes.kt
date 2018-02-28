@@ -54,7 +54,7 @@ val GLFWgammaramp = struct(Module.GLFW, "GLFWGammaRamp", nativeName = "GLFWgamma
     AutoSize("red", "green", "blue")..unsigned_int.member("size", "the number of elements in each array")
 }
 
-val GLFWcursor = "GLFWcursor".p
+val GLFWcursor = "GLFWcursor".opaque
 
 val GLFWimage = struct(Module.GLFW, "GLFWImage", nativeName = "GLFWimage") {
     documentation =
@@ -543,7 +543,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 }
 
 // OpenGL
-val GLFWglproc = "GLFWglproc".p
+val GLFWglproc = "GLFWglproc".handle
 
 // Vulkan
-val GLFWvkproc = "GLFWvkproc".p
+val GLFWvkproc = "GLFWvkproc".handle
