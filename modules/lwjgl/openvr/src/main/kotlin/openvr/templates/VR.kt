@@ -50,6 +50,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "OpenVR constants.",
 
         "k_ulInvalidPropertyContainer".."0L",
+        "k_ulInvalidDriverHandle".."0L",
         "k_ulOverlayHandleInvalid".."0L"
     )
 
@@ -130,6 +131,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_SteamVR_AllowDisplayLockedMode_Bool".."allowDisplayLockedMode",
         "k_pch_SteamVR_HaveStartedTutorialForNativeChaperoneDriver_Bool".."haveStartedTutorialForNativeChaperoneDriver",
         "k_pch_SteamVR_ForceWindows32bitVRMonitor".."forceWindows32BitVRMonitor",
+        "k_pch_SteamVR_DebugInput".."debugInput",
         "k_pch_Lighthouse_Section".."driver_lighthouse",
         "k_pch_Lighthouse_DisableIMU_Bool".."disableimu",
         "k_pch_Lighthouse_DisableIMUExceptHMD_Bool".."disableimuexcepthmd",
@@ -138,6 +140,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Lighthouse_PrimaryBasestation_Int32".."primarybasestation",
         "k_pch_Lighthouse_DBHistory_Bool".."dbhistory",
         "k_pch_Lighthouse_EnableBluetooth_Bool".."enableBluetooth",
+        "k_pch_Lighthouse_PowerManagedBaseStations_String".."PowerManagedBaseStations",
         "k_pch_Null_Section".."driver_null",
         "k_pch_Null_SerialNumber_String".."serialNumber",
         "k_pch_Null_ModelNumber_String".."modelNumber",
@@ -209,8 +212,11 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Dashboard_Section".."dashboard",
         "k_pch_Dashboard_EnableDashboard_Bool".."enableDashboard",
         "k_pch_Dashboard_ArcadeMode_Bool".."arcadeMode",
+        "k_pch_Dashboard_EnableWebUI".."webUI",
         "k_pch_modelskin_Section".."modelskins",
         "k_pch_Driver_Enable_Bool".."enable",
+        "k_pch_WebInterface_Section".."WebInterface",
+        "k_pch_WebInterface_WebPort_String".."WebPort",
         "IVRScreenshots_Version".."IVRScreenshots_001",
         "IVRResources_Version".."IVRResources_001",
         "IVRDriverManager_Version".."IVRDriverManager_001"
@@ -232,7 +238,13 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETextureType_TextureType_OpenGL".enum("Handle is an OpenGL texture name or an OpenGL render buffer name, depending on submit flags."),
         "ETextureType_TextureType_Vulkan".enum("Handle is a pointer to a {@code VRVulkanTextureData_t} structure."),
         "ETextureType_TextureType_IOSurface".enum("Handle is a macOS cross-process-sharable {@code IOSurfaceRef}."),
-        "ETextureType_TextureType_DirectX12".enum("Handle is a pointer to a {@code D3D12TextureData_t} structure.")
+        "ETextureType_TextureType_DirectX12".enum("Handle is a pointer to a {@code D3D12TextureData_t} structure."),
+        "ETextureType_TextureType_DXGISharedHandle".enum(
+            """
+            Handle is a {@code HANDLE DXGI} share handle, only supported for Overlay render targets. This texture is used directly by our renderer, so only
+            perform atomic (copyresource or resolve) on it.
+            """
+        )
     )
 
     EnumConstant(
@@ -274,7 +286,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
 
         "ETrackedControllerRole_TrackedControllerRole_Invalid".enum("Invalid value for controller type.", "0"),
         "ETrackedControllerRole_TrackedControllerRole_LeftHand".enum("Tracked device associated with the left hand."),
-        "ETrackedControllerRole_TrackedControllerRole_RightHand".enum("Tracked device associated with the right hand.")
+        "ETrackedControllerRole_TrackedControllerRole_RightHand".enum("Tracked device associated with the right hand."),
+        "ETrackedControllerRole_TrackedControllerRole_OptOut".enum("Tracked device is opting out of left/right hand selection.")
     )
 
     EnumConstant(
@@ -337,6 +350,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_InputProfilePath_String".enum(
             "input profile to use for this device in the input system. Will default to tracking system name if this isn't provided."
         ),
+        "ETrackedDeviceProperty_Prop_NeverTracked_Bool".enum("used for devices that will never have a valid pose by design."),
         "ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool".enum("", "2000"),
         "ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float".enum,
         "ETrackedDeviceProperty_Prop_DisplayFrequency_Float".enum,
@@ -391,9 +405,13 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_NamedIconPathTrackingReferenceDeviceOff_String".enum,
         "ETrackedDeviceProperty_Prop_DoNotApplyPrediction_Bool".enum("placeholder icon for sensor/base if not yet detected/loaded"),
         "ETrackedDeviceProperty_Prop_CameraToHeadTransforms_Matrix34_Array".enum,
+        "ETrackedDeviceProperty_Prop_DistortionMeshResolution_Int32".enum("custom resolution of compositor calls to #ComputeDistortion()"),
         "ETrackedDeviceProperty_Prop_DriverIsDrawingControllers_Bool".enum("", "2057"),
         "ETrackedDeviceProperty_Prop_DriverRequestsApplicationPause_Bool".enum,
         "ETrackedDeviceProperty_Prop_DriverRequestsReducedRendering_Bool".enum,
+        "ETrackedDeviceProperty_Prop_MinimumIpdStepMeters_Float".enum,
+	    "ETrackedDeviceProperty_Prop_AudioBridgeFirmwareVersion_Uint64".enum,
+	    "ETrackedDeviceProperty_Prop_ImageBridgeFirmwareVersion_Uint64".enum,
         "ETrackedDeviceProperty_Prop_AttachedDeviceId_String".enum("", "3000"),
         "ETrackedDeviceProperty_Prop_SupportedButtons_Uint64".enum,
         "ETrackedDeviceProperty_Prop_Axis0Type_Int32".enum,
@@ -548,6 +566,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_SceneFocusChanged".enum("data is process - New app got access to draw the scene"),
         "EVREventType_VREvent_InputFocusChanged".enum("data is process"),
         "EVREventType_VREvent_SceneApplicationSecondaryRenderingStarted".enum("data is process"),
+        "EVREventType_VREvent_SceneApplicationUsingWrongGraphicsAdapter".enum("data is process"),
         "EVREventType_VREvent_HideRenderModels".enum("Sent to the scene application to request hiding render models temporarily", "410"),
         "EVREventType_VREvent_ShowRenderModels".enum("Sent to the scene application to request restoring render model visibility"),
         "EVREventType_VREvent_ConsoleOpened".enum("", "420"),
@@ -568,17 +587,18 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
             "Send to an overlay when it previously had focus and IVROverlay::SetFocusOverlay is called on something else"
         ),
         "EVREventType_VREvent_OverlaySharedTextureChanged".enum,
-        "EVREventType_VREvent_DashboardGuideButtonDown".enum,
-        "EVREventType_VREvent_DashboardGuideButtonUp".enum,
-        "EVREventType_VREvent_ScreenshotTriggered".enum("Screenshot button combo was pressed, Dashboard should request a screenshot"),
+        "EVREventType_VREvent_ScreenshotTriggered".enum("Screenshot button combo was pressed, Dashboard should request a screenshot", "516"),
         "EVREventType_VREvent_ImageFailed".enum("Sent to overlays when a SetOverlayRaw or SetOverlayfromFail fails to load"),
         "EVREventType_VREvent_DashboardOverlayCreated".enum(""),
-        "EVREventType_VREvent_RequestScreenshot".enum("Sent by vrclient application to compositor to take a screenshot", "520"),
+        "EVREventType_VREvent_SwitchGamepadFocus".enum,
+        "EVREventType_VREvent_RequestScreenshot".enum("Sent by vrclient application to compositor to take a screenshot"),
         "EVREventType_VREvent_ScreenshotTaken".enum("Sent by compositor to the application that the screenshot has been taken"),
         "EVREventType_VREvent_ScreenshotFailed".enum("Sent by compositor to the application that the screenshot failed to be taken"),
         "EVREventType_VREvent_SubmitScreenshotToDashboard".enum("Sent by compositor to the dashboard that a completed screenshot was submitted"),
         "EVREventType_VREvent_ScreenshotProgressToDashboard".enum("Sent by compositor to the dashboard that a completed screenshot was submitted"),
         "EVREventType_VREvent_PrimaryDashboardDeviceChanged".enum,
+        "EVREventType_VREvent_RoomViewShown".enum("Sent by compositor whenever room-view is enabled"),
+        "EVREventType_VREvent_RoomViewHidden".enum("Sent by compositor whenever room-view is disabled"),
         "EVREventType_VREvent_Notification_Shown".enum("", "600"),
         "EVREventType_VREvent_Notification_Hidden".enum,
         "EVREventType_VREvent_Notification_BeginInteraction".enum,
@@ -861,6 +881,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
 	    "EVRInitError_VRInitError_Init_FirmwareUpdateBusy".enum,
 	    "EVRInitError_VRInitError_Init_FirmwareRecoveryBusy".enum,
         "EVRInitError_VRInitError_Init_USBServiceBusy".enum,
+        "EVRInitError_VRInitError_Init_VRWebHelperStartupFailed".enum,
         "EVRInitError_VRInitError_Driver_Failed".enum("", "200"),
         "EVRInitError_VRInitError_Driver_Unknown".enum,
         "EVRInitError_VRInitError_Driver_HmdUnknown".enum,
