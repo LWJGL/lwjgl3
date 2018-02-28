@@ -266,16 +266,26 @@ val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
         A single bone of a mesh.
 
         A bone has a name by which it can be found in the frame hierarchy and by which it can be addressed by animations. In addition it has a number of
-        influences on vertices.
+        influences on vertices, and a matrix relating the mesh position to the position of the bone at the time of binding.
         """
 
-    aiString.member("mName", "The name of the bone.")
+    aiString.member("mName", "the name of the bone.")
     AutoSize("mWeights")..unsigned_int.member(
         "mNumWeights",
-        "The number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS."
+        "the number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS."
     )
-    aiVertexWeight.p.buffer("mWeights", "The vertices affected by this bone")
-    aiMatrix4x4.member("mOffsetMatrix", "Matrix that transforms from mesh space to bone space in bind pose")
+    aiVertexWeight.p.buffer("mWeights", "the influence weights of this bone, by vertex index")
+    aiMatrix4x4.member(
+        "mOffsetMatrix",
+        """
+        matrix that transforms from bone space to mesh space in bind pose.
+
+        This matrix describes the position of the mesh in the local space of this bone when the skeleton was bound. Thus it can be used directly to determine a
+        desired vertex position, given the world-space transform of the bone when animated, and the position of the vertex in mesh space.
+
+        It is sometimes called an inverse-bind matrix, or inverse bind pose matrix.
+        """
+    )
 }
 
 val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnimMesh") {
