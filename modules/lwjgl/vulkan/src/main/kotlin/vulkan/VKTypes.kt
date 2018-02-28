@@ -203,7 +203,6 @@ val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
-    useSystemCallConvention()
 }
 
 val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
@@ -247,7 +246,6 @@ val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
-    useSystemCallConvention()
 }
 
 val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
@@ -275,7 +273,6 @@ val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
-    useSystemCallConvention()
 }
 
 val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification".callback(
@@ -307,7 +304,6 @@ val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
-    useSystemCallConvention()
 }
 
 val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
@@ -338,7 +334,6 @@ val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
-    useSystemCallConvention()
 }
 
 // Struct types

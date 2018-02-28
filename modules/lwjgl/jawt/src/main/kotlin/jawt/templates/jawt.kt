@@ -10,8 +10,7 @@ import core.jni.*
 
 val jawt = "JAWTFunctions".nativeClass(Module.JAWT, prefix = "JAWT_", prefixMethod = "JAWT_", binding = simpleBinding(
     Module.JAWT,
-    libraryExpression = """Configuration.JAWT_LIBRARY_NAME, "jawt", apiFindLibrary(System.getProperty("java.home"), "jawt")""",
-    callingConvention = CallingConvention.STDCALL
+    libraryExpression = """Configuration.JAWT_LIBRARY_NAME, "jawt", apiFindLibrary(System.getProperty("java.home"), "jawt")"""
 )) {
     nativeDirective(
         """DISABLE_WARNINGS()

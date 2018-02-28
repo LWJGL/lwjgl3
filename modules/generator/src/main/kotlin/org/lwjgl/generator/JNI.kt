@@ -187,7 +187,7 @@ private open class Signature constructor(
     val signatureNative = "${signature}__J$paramSignatureStrict"
 
     constructor(function: Func) : this(
-        function.nativeClass.binding!!.callingConvention,
+        function.nativeClass.callingConvention,
         function.returns.nativeType,
         function.parameters.asSequence()
             .filter { it !== EXPLICIT_FUNCTION_ADDRESS }
@@ -224,7 +224,7 @@ private class SignatureArray constructor(
     val signatureArray = "${signature}__J$paramSignatureStrict"
 
     constructor(function: Func) : this(
-        function.nativeClass.binding!!.callingConvention,
+        function.nativeClass.callingConvention,
         function.returns.nativeType,
         function.parameters.asSequence()
             .filter { it !== EXPLICIT_FUNCTION_ADDRESS }

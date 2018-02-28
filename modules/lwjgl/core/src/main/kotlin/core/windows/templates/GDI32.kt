@@ -7,11 +7,7 @@ package core.windows.templates
 import org.lwjgl.generator.*
 import core.windows.*
 
-val gdi32 = "GDI32".nativeClass(
-    Module.CORE_WINDOWS,
-    nativeSubPath = "windows",
-    binding = simpleBinding(Module.CORE_WINDOWS, "gdi32", callingConvention = CallingConvention.STDCALL)
-) {
+val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", binding = simpleBinding(Module.CORE_WINDOWS, "gdi32")) {
     nativeDirective("#define APIENTRY __stdcall")
 
     documentation = "Native bindings to wingdi.h and gdi32.dll."

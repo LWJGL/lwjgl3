@@ -755,7 +755,7 @@ class Func(
         print(if (hasCustomJNI)
             "n$name("
         else
-            "${binding.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
+            "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
         )
         if (!hasExplicitFunctionAddress) {
             print(FUNCTION_ADDRESS)
@@ -999,7 +999,7 @@ class Func(
                 if (hasCustomJNI)
                     "n$name("
                 else macroExpression ?:
-                     "${nativeClass.binding!!.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
+                     "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
             )
             if (hasFunctionAddressParam && !hasExplicitFunctionAddress && !has<Macro>()) {
                 print(FUNCTION_ADDRESS)
@@ -1622,7 +1622,7 @@ class Func(
     internal fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
     private fun PrintWriter.generateFunctionDefinitionImpl() {
         print("typedef ${returns.toNativeType(nativeClass.binding)} (")
-        if (nativeClass.binding?.callingConvention !== CallingConvention.DEFAULT)
+        if (nativeClass.callingConvention !== CallingConvention.DEFAULT)
             print("APIENTRY ")
         print("*${nativeName}PROC) (")
         val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)

@@ -17,11 +17,6 @@ class CallbackFunction internal constructor(
     internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
 
-    private var stdcall = false
-    fun useSystemCallConvention() {
-        stdcall = true
-    }
-
     internal fun nativeType(name: String, separator: String = ", ", prefix: String = "", postfix: String = "") =
         "${returns.name} (*$name) (${signature.asSequence()
             .joinToString(separator, prefix = prefix, postfix = postfix) { param ->
@@ -189,7 +184,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 ${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignature} {
 
     String SIGNATURE = ${"\"(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
-            if (stdcall) "Callback.__stdcall($it)" else it
+            if (module.callingConvention === CallingConvention.STDCALL) "Callback.__stdcall($it)" else it
         }};
 
     @Override

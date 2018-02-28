@@ -185,7 +185,6 @@ val WNDPROC = "WNDPROC".callback(
     LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter.")
 ) {
     documentation = "An application-defined function that processes messages sent to a window."
-    useSystemCallConvention()
 }
 
 val WNDCLASSEX = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {

@@ -24,8 +24,7 @@ private const val ALC_CAP_CLASS = "ALCCapabilities"
 val ALCBinding = Generator.register(object : APIBinding(
     Module.OPENAL,
     ALC_CAP_CLASS,
-    APICapabilities.JAVA_CAPABILITIES,
-    callingConvention = CallingConvention.DEFAULT
+    APICapabilities.JAVA_CAPABILITIES
 ) {
 
     override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "ALC10"

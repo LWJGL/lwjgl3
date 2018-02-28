@@ -148,7 +148,6 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
         <h5>See Also</h5>
         ##VkDebugReportCallbackCreateInfoEXT
         """
-    useSystemCallConvention()
 }
 
 // Struct types

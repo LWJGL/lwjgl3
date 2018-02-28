@@ -63,7 +63,6 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
     void.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackAMD()")
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageCallbackAMD() method."
-    useSystemCallConvention()
     additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageAMDCallback} arguments to a String.
@@ -93,7 +92,6 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
     void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackARB()")
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageCallbackARB() method."
-    useSystemCallConvention()
     additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageARBCallback} arguments to a String.
@@ -132,7 +130,6 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
     )
 ) {
     documentation = "Instances of this interface may be passed to the GL43#glDebugMessageCallback() and KHRDebug#glDebugMessageCallback() methods."
-    useSystemCallConvention()
     additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageCallback} arguments to a String.

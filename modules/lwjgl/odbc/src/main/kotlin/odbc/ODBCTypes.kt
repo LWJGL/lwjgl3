@@ -7,11 +7,7 @@ package odbc
 import org.lwjgl.generator.*
 import core.windows.*
 
-val ODBC_BINDING = simpleBinding(
-    Module.ODBC,
-    libraryExpression = "Configuration.ODBC_LIBRARY_NAME, \"odbc32\", \"odbc\"",
-    callingConvention = CallingConvention.STDCALL
-)
+val ODBC_BINDING = simpleBinding(Module.ODBC, libraryExpression = "Configuration.ODBC_LIBRARY_NAME, \"odbc32\", \"odbc\"")
 val ODBC_BINDING_DELEGATE = ODBC_BINDING.delegate("SQL.getLibrary()")
 
 fun config() {

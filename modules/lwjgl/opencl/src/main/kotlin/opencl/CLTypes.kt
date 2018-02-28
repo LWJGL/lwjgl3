@@ -248,7 +248,6 @@ val cl_context_callback = callback(
     void.p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
 ) {
     documentation = "Instances of this interface may be passed to the #CreateContext() and #CreateContextFromType() methods."
-    useSystemCallConvention()
 }
 
 val cl_program_callback = callback(
@@ -261,7 +260,6 @@ val cl_program_callback = callback(
     )
 ) {
     documentation = "Instances of this interface may be passed to the #BuildProgram(), #CompileProgram() and #LinkProgram() methods."
-    useSystemCallConvention()
 }
 
 val cl_native_kernel = callback(
@@ -270,7 +268,6 @@ val cl_native_kernel = callback(
     void.p.IN("args", "a pointer to the arguments list")
 ) {
     documentation = "Instances of this interface may be passed to the #EnqueueNativeKernel() method."
-    useSystemCallConvention()
 }
 
 val cl_mem_object_destructor_callback = callback(
@@ -280,7 +277,6 @@ val cl_mem_object_destructor_callback = callback(
     void.p.IN("user_data", "the user-specified value that was passed when calling #SetMemObjectDestructorCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #SetMemObjectDestructorCallback() method."
-    useSystemCallConvention()
 }
 
 val cl_event_callback = callback(
@@ -301,7 +297,6 @@ val cl_event_callback = callback(
     void.p.IN("user_data", "the user-specified value that was passed when calling #SetEventCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #SetEventCallback() method."
-    useSystemCallConvention()
 }
 
 val cl_svmfree_callback = callback(
@@ -313,7 +308,6 @@ val cl_svmfree_callback = callback(
     void.p.IN("user_data", "the user-specified value that was passed when calling #EnqueueSVMFree()")
 ) {
     documentation = "Instances of this interface may be passed to the #EnqueueSVMFree() method."
-    useSystemCallConvention()
 }
 
 val cl_program_release_callback = callback(
@@ -330,7 +324,6 @@ val cl_program_release_callback = callback(
     void.p.IN("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
 ) {
     documentation = "Instances of this interface may be passed to the #SetProgramReleaseCallback() method."
-    useSystemCallConvention()
 }
 
 // OpenGL interop
@@ -366,7 +359,6 @@ val cl_report_live_objects_altera_callback = callback(
     cl_uint.IN("refcount", "an instantaneous reference count for the object. Consider it to be immediately stale.")
 ) {
     documentation = "Instances of this interface may be passed to the #ReportLiveObjectsAltera() method."
-    useSystemCallConvention()
 }
 
 val cl_device_partition_property_ext = typedef(cl_bitfield, "cl_device_partition_property_ext")

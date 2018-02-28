@@ -80,7 +80,6 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
     )
 ) {
     documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
-    useSystemCallConvention()
     additionalCode = """
     /**
      * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
