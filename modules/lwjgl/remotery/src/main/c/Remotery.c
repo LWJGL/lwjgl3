@@ -3215,60 +3215,83 @@ static void WriteSize(rmtU32 size, rmtU8* dest, rmtU32 dest_size, rmtU32 dest_of
 }
 
 
+// For send buffers to preallocate
+#define WEBSOCKET_MAX_FRAME_HEADER_SIZE 10
+
+
+static void WebSocket_PrepareBuffer(Buffer* buffer)
+{
+    char empty_frame_header[WEBSOCKET_MAX_FRAME_HEADER_SIZE];
+
+    assert(buffer != NULL);
+ 
+    // Reset to start
+    buffer->bytes_used = 0;
+ 
+    // Allocate enough space for a maximum-sized frame header
+    Buffer_Write(buffer, empty_frame_header, sizeof(empty_frame_header));
+}
+
+
+static rmtU32 WebSocket_FrameHeaderSize(rmtU32 length)
+{
+    if (length <= 125)
+        return 2;
+    if (length <= 65535)
+        return 4;
+    return 10;
+}
+
+
+static void WebSocket_WriteFrameHeader(WebSocket* web_socket, rmtU8* dest, rmtU32 length)
+{
+    rmtU8 final_fragment = 0x1 << 7;
+    rmtU8 frame_type = (rmtU8)web_socket->mode;
+
+    dest[0] = final_fragment | frame_type;
+ 
+     // Construct the frame header, correctly applying the narrowest size
+     if (length <= 125)
+     {
+        dest[1] = (rmtU8)length;
+     }
+     else if (length <= 65535)
+     {
+        dest[1] = 126;
+        WriteSize(length, dest + 2, 2, 0);
+     }
+     else
+     {
+        dest[1] = 127;
+        WriteSize(length, dest + 2, 8, 4);
+     }
+}
+
+
 static rmtError WebSocket_Send(WebSocket* web_socket, const void* data, rmtU32 length, rmtU32 timeout_ms)
 {
     rmtError error;
     SocketStatus status;
-    rmtU8 final_fragment, frame_type, frame_header[10];
-    rmtU32 frame_header_size;
+    rmtU32 payload_length, frame_header_size, delta;
 
     assert(web_socket != NULL);
+    assert(data != NULL);
 
     // Can't send if there are socket errors
     status = WebSocket_PollStatus(web_socket);
     if (status.error_state != RMT_ERROR_NONE)
         return status.error_state;
 
-    final_fragment = 0x1 << 7;
-    frame_type = (rmtU8)web_socket->mode;
-    frame_header[0] = final_fragment | frame_type;
+    // Assume space for max frame header has been allocated in the incoming data
+    payload_length = length - WEBSOCKET_MAX_FRAME_HEADER_SIZE;
+    frame_header_size = WebSocket_FrameHeaderSize(payload_length);
+    delta = WEBSOCKET_MAX_FRAME_HEADER_SIZE - frame_header_size;
+    data = (void*)((rmtU8*)data + delta);
+    length -= delta;
+    WebSocket_WriteFrameHeader(web_socket, (rmtU8*)data, payload_length);
 
-    // Construct the frame header, correctly applying the narrowest size
-    frame_header_size = 0;
-    if (length <= 125)
-    {
-        frame_header_size = 2;
-        frame_header[1] = (rmtU8)length;
-    }
-    else if (length <= 65535)
-    {
-        frame_header_size = 2 + 2;
-        frame_header[1] = 126;
-        WriteSize(length, frame_header + 2, 2, 0);
-    }
-    else
-    {
-        frame_header_size = 2 + 8;
-        frame_header[1] = 127;
-        WriteSize(length, frame_header + 2, 8, 4);
-    }
-
-    // Send frame header
-    assert(data != NULL);
-    error = TCPSocket_Send(web_socket->tcp_socket, frame_header, frame_header_size, timeout_ms);
-    if (error != RMT_ERROR_NONE)
-        return error;
-
-    // Send frame data separately so that we don't have to allocate memory or memcpy it into
-    // the same buffer as the header.
-    // If this step times out then the frame data will be discarded and the browser will receive
-    // an invalid frame without its data, forcing a disconnect error.
-    // Before things get that far, flag this as a send fail and let the server schedule a graceful
-    // disconnect.
+    // Send frame header and data together
     error = TCPSocket_Send(web_socket->tcp_socket, data, length, timeout_ms);
-    if (error == RMT_ERROR_SOCKET_SEND_TIMEOUT)
-        error = RMT_ERROR_SOCKET_SEND_FAIL;
-
     return error;
 }
 
@@ -3614,6 +3637,9 @@ typedef struct
     rmtU16 port;
     rmtBool limit_connections_to_localhost;
 
+    // A dynamically-sized buffer used for binary-encoding messages and sending to the client
+    Buffer* bin_buf;
+
     // Handler for receiving messages from the client
     Server_ReceiveHandler receive_handler;
     void* receive_handler_context;
@@ -3634,14 +3660,22 @@ static rmtError Server_CreateListenSocket(Server* server, rmtU16 port, rmtBool l
 
 static rmtError Server_Constructor(Server* server, rmtU16 port, rmtBool limit_connections_to_localhost)
 {
+    rmtError error;
+
     assert(server != NULL);
     server->listen_socket = NULL;
     server->client_socket = NULL;
     server->last_ping_time = 0;
     server->port = port;
     server->limit_connections_to_localhost = limit_connections_to_localhost;
+    server->bin_buf = NULL;
     server->receive_handler = NULL;
     server->receive_handler_context = NULL;
+
+    // Create the binary serialisation buffer
+    New_1(Buffer, server->bin_buf, 4096);
+    if (error != RMT_ERROR_NONE)
+        return error;
 
     // Create the listening WebSocket
     return Server_CreateListenSocket(server, port, limit_connections_to_localhost);
@@ -3653,6 +3687,7 @@ static void Server_Destructor(Server* server)
     assert(server != NULL);
     Delete(WebSocket, server->client_socket);
     Delete(WebSocket, server->listen_socket);
+    Delete(Buffer, server->bin_buf);
 }
 
 
@@ -3797,8 +3832,10 @@ static void Server_Update(Server* server)
     cur_time = msTimer_Get();
     if (cur_time - server->last_ping_time > 1000)
     {
-        rmtPStr ping_message = "PING";
-        Server_Send(server, ping_message, (rmtU32)strlen(ping_message), 4);
+        Buffer* bin_buf = server->bin_buf;
+        WebSocket_PrepareBuffer(bin_buf);
+        Buffer_WriteStringZ(bin_buf, "PING");
+        Server_Send(server, bin_buf->data, bin_buf->bytes_used, 10);
         server->last_ping_time = cur_time;
     }
 }
@@ -4384,9 +4421,6 @@ struct Remotery
     // Queue between clients and main remotery thread
     rmtMessageQueue* mq_to_rmt_thread;
 
-    // A dynamically-sized buffer used for binary-encoding the sample tree and sending to the client
-    Buffer* bin_buf;
-
     // The main server thread
     rmtThread* thread;
 
@@ -4477,9 +4511,16 @@ static void GetSampleDigest(Sample* sample, rmtU32* digest_hash, rmtU32* nb_samp
 
 static rmtError Remotery_SendLogTextMessage(Remotery* rmt, Message* message)
 {
+    Buffer* bin_buf;
+
     assert(rmt != NULL);
     assert(message != NULL);
-    return Server_Send(rmt->server, message->payload, message->payload_size, 20);
+    
+    bin_buf = rmt->server->bin_buf;
+    WebSocket_PrepareBuffer(bin_buf);
+    Buffer_Write(bin_buf, message->payload, message->payload_size);
+
+    return Server_Send(rmt->server, bin_buf->data, bin_buf->bytes_used, 20);
 }
 
 
@@ -4497,9 +4538,6 @@ static rmtError bin_SampleTree(Buffer* buffer, Msg_SampleTree* msg)
     root_sample = msg->root_sample;
     assert(root_sample != NULL);
 
-    // Reset the buffer position to the start
-    buffer->bytes_used = 0;
-
     // Add any sample types as a thread name post-fix to ensure they get their own viewer
     thread_name[0] = 0;
     strncat_s(thread_name, sizeof(thread_name), msg->thread_name, strnlen_s(msg->thread_name, 64));
@@ -4513,9 +4551,7 @@ static rmtError bin_SampleTree(Buffer* buffer, Msg_SampleTree* msg)
         strncat_s(thread_name, sizeof(thread_name), " (Metal)", 8);
 
     // Get digest hash of samples so that viewer can efficiently rebuild its tables
-    rmt_BeginCPUSample(GetSampleDigest, RMTSF_Aggregate);
     GetSampleDigest(root_sample, &digest_hash, &nb_samples);
-    rmt_EndCPUSample();
 
     // Write global message header
     BIN_ERROR_CHECK(Buffer_Write(buffer, (void*)"SMPL    ", 8));
@@ -4547,6 +4583,7 @@ static rmtError Remotery_SendSampleTreeMessage(Remotery* rmt, Message* message)
     Msg_SampleTree* sample_tree;
     rmtError error = RMT_ERROR_NONE;
     Sample* sample;
+    Buffer* bin_buf;
 
     assert(rmt != NULL);
     assert(message != NULL);
@@ -4577,15 +4614,19 @@ static rmtError Remotery_SendSampleTreeMessage(Remotery* rmt, Message* message)
     }
     #endif
 
+    // Reset the buffer for sending a websocket message
+    bin_buf = rmt->server->bin_buf;
+    WebSocket_PrepareBuffer(bin_buf);
+
     // Serialise the sample tree and send to the viewer with a reasonably long timeout as the size
     // of the sample data may be large
     rmt_BeginCPUSample(bin_SampleTree, RMTSF_Aggregate);
-    error = bin_SampleTree(rmt->bin_buf, sample_tree);
+    error = bin_SampleTree(bin_buf, sample_tree);
     rmt_EndCPUSample();
     if (error == RMT_ERROR_NONE)
     {
         rmt_BeginCPUSample(Server_Send, RMTSF_Aggregate);
-        error = Server_Send(rmt->server, rmt->bin_buf->data, rmt->bin_buf->bytes_used, 50000);
+        error = Server_Send(rmt->server, bin_buf->data, bin_buf->bytes_used, 50000);
         rmt_EndCPUSample();
     }
 
@@ -4755,19 +4796,19 @@ static rmtError Remotery_ReceiveMessage(void* context, char* message_data, rmtU3
                 rmtPStr name = StringTable_Find(ts->names, name_hash);
                 if (name != NULL)
                 {
+                    rmtU32 name_length;
+
                     // Construct a response message containing the matching name
-                    rmtU8 response[256];
-                    rmtU32 name_length = (rmtU32)strnlen_s(name, 256 - 12);
-                    response[0] = 'S';
-                    response[1] = 'S';
-                    response[2] = 'M';
-                    response[3] = 'P';
-                    U32ToByteArray(response + 4, name_hash);
-                    U32ToByteArray(response + 8, name_length);
-                    memcpy(response + 12, name, name_length);
+                    Buffer* bin_buf = rmt->server->bin_buf;
+                    WebSocket_PrepareBuffer(bin_buf);
+                    Buffer_Write(bin_buf, "SSMP", 4);
+                    Buffer_WriteU32(bin_buf, name_hash);
+                    name_length = (rmtU32)strnlen_s(name, 256 - 12);
+                    Buffer_WriteU32(bin_buf, name_length);
+                    Buffer_Write(bin_buf, (void*)name, name_length);
 
                     // Send back immediately as we're on the server thread
-                    return Server_Send(rmt->server, response, 12 + name_length, 10);
+                    return Server_Send(rmt->server, bin_buf->data, bin_buf->bytes_used, 10);
                 }
             }
 
@@ -4792,7 +4833,6 @@ static rmtError Remotery_Constructor(Remotery* rmt)
     rmt->thread_sampler_tls_handle = TLS_INVALID_HANDLE;
     rmt->first_thread_sampler = NULL;
     rmt->mq_to_rmt_thread = NULL;
-    rmt->bin_buf = NULL;
     rmt->thread = NULL;
 
     #if RMT_USE_CUDA
@@ -4835,11 +4875,6 @@ static rmtError Remotery_Constructor(Remotery* rmt)
 
     // Create the main message thread with only one page
     New_1(rmtMessageQueue, rmt->mq_to_rmt_thread, g_Settings.messageQueueSizeInBytes);
-    if (error != RMT_ERROR_NONE)
-        return error;
-
-    // Create the binary serialisation buffer
-    New_1(Buffer, rmt->bin_buf, 4096);
     if (error != RMT_ERROR_NONE)
         return error;
 
@@ -4901,7 +4936,6 @@ static void Remotery_Destructor(Remotery* rmt)
         Delete(Metal, rmt->metal);
     #endif
 
-    Delete(Buffer, rmt->bin_buf);
     Delete(rmtMessageQueue, rmt->mq_to_rmt_thread);
 
     Remotery_DestroyThreadSamplers(rmt);
