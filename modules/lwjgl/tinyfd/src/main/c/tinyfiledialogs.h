@@ -1,24 +1,21 @@
 /*_________
- /         \ tinyfiledialogs.h v3.2.9 [Feb 1, 2018] zlib licence
+ /         \ tinyfiledialogs.h v3.3.2 [Feb 26, 2018] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
-      \|
-		git://git.code.sf.net/p/tinyfiledialogs/code
+      \|     git clone http://git.code.sf.net/p/tinyfiledialogs/code tinyfd
 		 ____________________________________________
 		|                                            |
 		|   email: tinyfiledialogs at ysengrin.com   |
 		|____________________________________________|
-     ________________________________________________________________________
-    |                                                                        |
-    | the windows only wchar_t UTF-16 prototypes are at the end of this file |
-    |________________________________________________________________________|
-
-A big thank you to Don Heyse http://ldglite.sf.net for bug corrections & thorough testing!
+         ________________________________________________________________________
+        |                                                                        |
+        | the windows only wchar_t UTF-16 prototypes are at the end of this file |
+        |________________________________________________________________________|
 
 Please 1) let me know If you are using it on exotic hardware / OS / compiler
-       2) if you have a sourceforge account, leave a 1-word review on Sourceforge.
-	   3) upvote my stackoverflow answer https://stackoverflow.com/a/47651444
+       2) leave a one word review on Sourceforge.
+	   3) upvote my stackoverflow answer/advert https://stackoverflow.com/a/47651444
 
 tiny file dialogs (cross-platform C C++)
 InputBox PasswordBox MessageBox ColorPicker
@@ -60,12 +57,13 @@ Unix (command line calls) ASCII UTF-8
 The same executable can run across desktops & distributions
 
 C89 & C++98 compliant: tested with C & C++ compilers
-on VisualStudio MinGW Mac Linux Bsd Solaris Minix Raspbian
+VisualStudio MinGW-gcc GCC Clang TinyCC OpenWatcom-v2 BorlandC SunCC Zapcc
+on Windows Mac Linux Bsd Solaris Minix Raspbian
 using Gnome Kde Enlightenment Mate Cinnamon Unity Lxde Lxqt Xfce
 WindowMaker IceWm Cde Jds OpenBox Awesome Jwm Xdm
 
-bindings for LUA and C# dll, Haskell
-included in LWJGL(java), Rust, Allegrobasic
+Bindings for LUA and C# dll, Haskell
+Included in LWJGL(java), Rust, Allegrobasic
 
 - License -
 
@@ -104,8 +102,8 @@ and the corresponding closing bracket near the end of this file:
 extern "C" {
 #endif
 
-extern char tinyfd_version[8]; /* contains tinyfd current version number */
-
+extern char const tinyfd_version[8]; /* contains tinyfd current version number */
+extern char const tinyfd_needs[]; /* info about requirements */
 extern int tinyfd_verbose; /* 0 (default) or 1 : on unix, prints the command line calls */
 
 #ifdef _WIN32
@@ -135,7 +133,7 @@ for graphic mode:
   python2-tkinter python3-tkinter python-dbus perl-dbus
   gxmessage gmessage xmessage xdialog gdialog
 for console mode:
-  dialog whiptail basicinput */
+  dialog whiptail basicinput no_solution */
 
 void tinyfd_beep(void);
 

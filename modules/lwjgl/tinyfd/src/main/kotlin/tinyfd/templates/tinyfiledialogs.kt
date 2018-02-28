@@ -32,7 +32,12 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
 
     macro..charASCII.p(
         "version",
-        "The library version."
+        "Contains tinyfd current version number."
+    )
+
+    macro..charASCII.p(
+        "needs",
+        "Contains info about requirements."
     )
 
     private..macro..Address..int.p(

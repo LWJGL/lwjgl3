@@ -111,6 +111,9 @@ public final class HelloTinyFD {
 
         tinyfd_messageBox("tinyfd_query", "", "ok", "info", true);
         System.out.println("tiny file dialogs " + tinyfd_version + " (" + tinyfd_response() + ")");
+        System.out.println();
+        System.out.println(tinyfd_needs);
+        System.out.println();
         System.out.println("Press 1 to launch a message dialog.");
         System.out.println("Press 2 to launch an input box fialog.");
         System.out.println("Press 3 to launch a file open dialog.");
