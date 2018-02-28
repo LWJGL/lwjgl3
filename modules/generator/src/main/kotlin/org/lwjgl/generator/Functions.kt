@@ -191,7 +191,7 @@ class Func(
         get() = this.returns.let { if (it.isStructValue) "void" else it.nativeType.jniFunctionType }
 
     internal val returnsNull
-        get() = !(has(Nonnull) || has(Address))
+        get() = !(has(Nonnull) || has(Address) || (has<Macro>() && !get<Macro>().function))
 
     private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it.has<AutoSize>() && it.get<AutoSize>().hasReference(reference.name) }
 
@@ -1036,7 +1036,7 @@ class Func(
         nativeClass.binding?.generateAlternativeMethods(this, this@Func, transforms)
 
         if (returns.nativeType is CharSequenceType)
-            transforms[returns] = StringReturnTransform(!has<Nonnull>())
+            transforms[returns] = StringReturnTransform(returnsNull)
         else if (has<MapPointer>()) {
             val mapPointer = get<MapPointer>()
 
