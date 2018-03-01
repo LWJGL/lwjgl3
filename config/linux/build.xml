@@ -13,6 +13,10 @@
         <equals arg1="${build.arch}" arg2="x64"/>
     </condition>
 
+    <condition property="gcc.suffix" value="-${gcc.version}" else="">
+        <isset property="gcc.version"/>
+    </condition>
+
     <property name="module.lwjgl.rel" value="../../../../${module.lwjgl}"/>
 
     <macrodef name="compile">
@@ -27,7 +31,7 @@
             <local name="cpp"/>
             <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
             <local name="gcc"/>
-            <condition property="gcc" value="gcc" else="g++"><equals arg1="@{lang}" arg2="c"/></condition>
+            <condition property="gcc" value="gcc${gcc.suffix}" else="g++${gcc.suffix}"><equals arg1="@{lang}" arg2="c"/></condition>
 
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
@@ -95,8 +99,8 @@
             <property name="version.script" location="config/${platform}/version.script"/>
 
             <local name="gcc"/>
-            <condition property="gcc" value="@{linker}"><not><equals arg1="@{linker}" arg2="gcc"/></not></condition>
-            <condition property="gcc" value="gcc" else="g++"><equals arg1="@{lang}" arg2="c"/></condition>
+            <condition property="gcc" value="@{linker}${gcc.suffix}"><not><equals arg1="@{linker}" arg2="gcc"/></not></condition>
+            <condition property="gcc" value="gcc${gcc.suffix}" else="g++${gcc.suffix}"><equals arg1="@{lang}" arg2="c"/></condition>
 
             <echo message="Linking ${name}" taskname="${gcc}" unless:set="lib-uptodate"/>
             <beforeLink/>
