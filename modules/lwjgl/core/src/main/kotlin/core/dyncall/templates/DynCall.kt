@@ -221,7 +221,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "Adds a field to the specified struct.",
 
         DCstruct.p.IN("s", "the struct"),
-        DCint.IN("type", "the field type"),
+        DCint.IN("type", "the field type", "SIGCHAR_(?!CC_)\\w+"),
         DCint.IN("alignment", "a custom field alignment, or 0 to calculate automatically"),
         DCsize.IN("arrayLength", "1 or a higher value if the field is an array")
     )

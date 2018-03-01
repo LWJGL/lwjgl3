@@ -36,17 +36,21 @@ extern "C" {
 #define DL_API
 #endif
 
-/* --- public api ---------------------------------------------------------- */
 
 /* shared library loading and explicit symbol resolving */
+/* dlLoadLibrary will search for specified lib (e.g. as leaf name, only), */
+/* to the platforms dynamic linking style */
 
 typedef struct DLLib_ DLLib;
 
-DL_API DLLib* dlLoadLibrary(const char* libpath);
-DL_API void   dlFreeLibrary(DLLib* pLib);
-DL_API void*  dlFindSymbol(DLLib* pLib, const char* pSymbolName);
+DL_API DLLib* dlLoadLibrary   (const char* libPath);
+DL_API void   dlFreeLibrary   (DLLib* pLib);
+DL_API void*  dlFindSymbol    (DLLib* pLib, const char* pSymbolName);
+DL_API int    dlGetLibraryPath(DLLib* pLib, char* sOut, int bufSize);
+
 
 /* symbol table enumeration - only for symbol lookup, not resolve */
+/* note that dlSymsInit does not search library paths */
 
 typedef struct DLSyms_ DLSyms;
 

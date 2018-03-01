@@ -277,7 +277,7 @@ val MultiTypeAll = MultiType(
 
 /** Marks a pointer parameter to become the return value of an alternative method. */
 class Return(
-    /** The parameter that returns the actual buffer size */
+    /** The parameter that returns the actual buffer size. Use {@code RESULT} if it's the function return value. */
     val lengthParam: String,
     /** An expression that defines the maximum length value. If defined, an additional alternative method will be generated. */
     val maxLengthExpression: String? = null,

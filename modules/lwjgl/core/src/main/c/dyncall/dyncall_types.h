@@ -45,24 +45,23 @@
 extern "C" {
 #endif 
 
-typedef void            DCvoid;
-typedef DC_BOOL         DCbool;
-typedef char            DCchar;
-typedef unsigned char   DCuchar;
-typedef short           DCshort;
-typedef unsigned short  DCushort;
-typedef int             DCint;
-typedef unsigned int    DCuint;
-typedef long            DClong;
-typedef unsigned long   DCulong;
-typedef DC_LONG_LONG    DClonglong;
+typedef void                  DCvoid;
+typedef DC_BOOL               DCbool;
+typedef char                  DCchar;
+typedef unsigned char         DCuchar;
+typedef short                 DCshort;
+typedef unsigned short        DCushort;
+typedef int                   DCint;
+typedef unsigned int          DCuint;
+typedef long                  DClong;
+typedef unsigned long         DCulong;
+typedef DC_LONG_LONG          DClonglong;
 typedef unsigned DC_LONG_LONG DCulonglong;
-typedef float           DCfloat;
-typedef double          DCdouble;
-typedef DC_POINTER      DCpointer;
-typedef const char*     DCstring;
-
-typedef size_t          DCsize;
+typedef float                 DCfloat;
+typedef double                DCdouble;
+typedef DC_POINTER            DCpointer;
+typedef const char*           DCstring;
+typedef size_t                DCsize;
 
 #define DC_TRUE   1
 #define DC_FALSE  0

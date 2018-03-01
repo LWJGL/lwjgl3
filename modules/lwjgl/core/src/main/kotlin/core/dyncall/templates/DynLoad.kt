@@ -44,6 +44,22 @@ val DynLoad = "DynLoad".nativeClass(Module.CORE_DYNCALL, prefix = "DL") {
         charASCII.const.p.IN("pSymbolName", "the symbol name")
     )
 
+    int(
+        "GetLibraryPath",
+        """
+        Gets a copy of the path to the library loaded with handle {@code pLib}.
+
+        The parameter {@code sOut} is a pointer to a buffer of size {@code bufSize} (in bytes), to hold the output string. The return value is the size of the
+        buffer (in bytes) needed to hold the null-terminated string, or 0 if it can't be looked up. If {@code bufSize >= return value > 1}, a null-terminated
+        string with the path to the library should be in {@code sOut}. If it returns 0, the library name wasn't able to be found. Please note that this might
+        happen in some rare cases, so make sure to always check.
+        """,
+
+        DLLib.p.IN("pLib", "the dynamic library"),
+        Return(RESULT, includesNT = true)..charASCII.p.OUT("sOut", "pointer to a buffer where the library path will be stored"),
+        AutoSize("sOut")..int.IN("bufSize", "the size of {@code sOut}, in bytes")
+    )
+
     DLSyms.p(
         "SymsInit",
         "Creates a new {@code DLSyms} object.",
