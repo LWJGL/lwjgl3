@@ -4,18 +4,30 @@
  */
 package org.lwjgl.system;
 
+import javax.annotation.*;
+
+import static org.lwjgl.system.dyncall.DynLoad.*;
+
 /** A {@link FunctionProvider} implementation that opens a platform-specific shared library and returns functions pointers from it. */
 public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer {
 
     /** Returns the library name. */
     String getName();
 
+    /**
+     * Returns the library path, if available.
+     *
+     * @return the library path, or {@code null} if the path is not available.
+     */
+    @Nullable
+    String getPath();
+
     abstract class Default extends Pointer.Default implements SharedLibrary {
 
         private final String name;
 
-        protected Default(long address, String name) {
-            super(address);
+        protected Default(String name, long handle) {
+            super(handle);
             this.name = name;
         }
 
@@ -24,6 +36,11 @@ public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer
             return name;
         }
 
+        @Nullable
+        @Override public String getPath() {
+            String path = dlGetLibraryPath(address(), 256);
+            return path.isEmpty() ? null : path;
+        }
     }
 
     abstract class Delegate implements SharedLibrary {
@@ -37,7 +54,11 @@ public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer
         @Override
         public String getName() {
             return library.getName();
+        }
 
+        @Nullable
+        @Override public String getPath() {
+            return library.getPath();
         }
 
         @Override

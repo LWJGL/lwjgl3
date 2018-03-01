@@ -298,7 +298,10 @@ public final class Library {
         SharedLibrary lib;
         try {
             lib = apiCreateLibrary(libName);
-            apiLog("\tLoaded from system paths");
+            String path = lib.getPath();
+            apiLog(path == null
+                ? "\tLoaded from system paths"
+                : "\tLoaded from system paths: " + path);
         } catch (UnsatisfiedLinkError e) {
             lib = null;
             apiLog(String.format("\t%s not found in system paths", libName));

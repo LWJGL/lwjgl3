@@ -11,8 +11,8 @@ import static org.lwjgl.system.APIUtil.*;
 /** Implements a {@link SharedLibrary} on the macOS. */
 public abstract class MacOSXLibrary extends SharedLibrary.Default {
 
-    protected MacOSXLibrary(long address, String name) {
-        super(address, name);
+    protected MacOSXLibrary(String name, long handle) {
+        super(name, handle);
     }
 
     public static MacOSXLibrary getWithIdentifier(String bundleID) {
@@ -25,7 +25,7 @@ public abstract class MacOSXLibrary extends SharedLibrary.Default {
     public static MacOSXLibrary create(String name) {
         return name.endsWith(".framework")
             ? MacOSXLibraryBundle.create(name)
-            : new MacOSXLibraryDL(name);
+            : MacOSXLibraryDL.create(name);
     }
 
 }
