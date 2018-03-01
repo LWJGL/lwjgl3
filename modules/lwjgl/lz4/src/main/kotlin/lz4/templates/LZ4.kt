@@ -36,7 +36,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."8",
-        "VERSION_RELEASE".."1"
+        "VERSION_RELEASE".."2"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -78,16 +78,16 @@ ENABLE_WARNINGS()""")
 
         Compression is guaranteed to succeed if {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}. It also runs faster, so it's a recommended setting.
 
-        If the function cannot compress {@code src} into a limited {@code dst} budget, compression stops <i>immediately</i>, and the function result is
+        If the function cannot compress {@code src} into a more limited {@code dst} budget, compression stops <i>immediately</i>, and the function result is
         zero. As a consequence, {@code dst} content is not valid.
 
-        This function never writes outside {@code dst} buffer, nor read outside {@code src} buffer.
+        This function is protected against buffer overflow scenarios (never writes outside {@code dst} buffer, nor read outside {@code src} buffer).
         """,
 
         char.const.p.IN("src", ""),
         char.p.OUT("dst", ""),
-        AutoSize("src")..int.IN("srcSize", "supported max value is #MAX_INPUT_SIZE"),
-        AutoSize("dst")..int.IN("dstCapacity", "full or partial size of buffer {@code dst} (which must be already allocated)"),
+        AutoSize("src")..int.IN("srcSize", "max supported value is #MAX_INPUT_SIZE"),
+        AutoSize("dst")..int.IN("dstCapacity", "size of buffer {@code dst} (which must be already allocated)"),
 
         returnDoc = "the number of bytes written into buffer {@code dest} (necessarily &le; {@code maxOutputSize}) or 0 if compression fails"
     )
@@ -99,8 +99,7 @@ ENABLE_WARNINGS()""")
 
         If the source stream is detected malformed, the function will stop decoding and return a negative result.
 
-        This function is protected against buffer overflow exploits, including malicious data packets. It never writes outside output buffer, nor reads outside
-        input buffer.
+        This function is protected against malicious data packets.
         """,
 
         char.const.p.IN("src", ""),
@@ -126,22 +125,22 @@ ENABLE_WARNINGS()""")
         This function is primarily useful for memory allocation purposes (destination buffer size). Macro #COMPRESSBOUND() is also provided for
         compilation-time evaluation (stack memory allocation for example).
 
-        Note that #compress_default() compress faster when dest buffer size is &ge; #compressBound(){@code (srcSize)}
+        Note that #compress_default() compresses faster when {@code dstCapacity} is &ge; #compressBound(){@code (srcSize)}
         """,
 
         int.IN("inputSize", "max supported value is #MAX_INPUT_SIZE"),
 
-        returnDoc = "maximum output size in a \"worst case\" scenario or 0, if input size is too large (&gt; #MAX_INPUT_SIZE)"
+        returnDoc = "maximum output size in a \"worst case\" scenario or 0, if input size is incorrect (too large or negative)"
     )
 
     int(
         "compress_fast",
         """
-        Same as #compress_default(), but allows to select an "acceleration" factor.
+        Same as #compress_default(), but allows selection of "acceleration" factor.
 
         The larger the acceleration value, the faster the algorithm, but also the lesser the compression. It's a trade-off. It can be fine tuned, with each
         successive value providing roughly +~3% to speed. An acceleration value of "1" is the same as regular #compress_default(). Values &le; 0 will be
-        replaced by {@code ACCELERATION_DEFAULT} (see {@code lz4.c}), which is 1.
+        replaced by {@code ACCELERATION_DEFAULT} (currently == 1, see lz4.c).
         """,
 
         char.const.p.IN("src", ""),
@@ -197,19 +196,22 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_fast",
         """
-        This function respects memory boundaries for properly formed compressed data. It is a bit faster than #decompress_safe(). However, it does not
-        provide any protection against intentionally modified data stream (malicious input). Use this function in trusted environment only (data to decode
-        comes from a trusted source).
+        This function is a bit faster than #decompress_safe(), but doesn't provide any security guarantee.
+
+        This function respects memory boundaries for <i>properly formed</i> compressed data. However, it does not provide any protection against malicious
+        input. It also doesn't know {@code src} size, and implies it's &ge; compressed size. Use this function in trusted environment <b>only</b>.
         """,
 
         Unsafe..char.const.p.IN("src", ""),
         char.p.OUT("dst", ""),
-        AutoSize("dst")..int.IN("originalSize", "is the original uncompressed size"),
+        AutoSize("dst")..int.IN(
+            "originalSize",
+            "is the uncompressed size to regenerate. Destination buffer must be already allocated, and its size must be &ge; {@code originalSize} bytes."),
 
         returnDoc =
         """
-        the number of bytes read from the source buffer (in other words, the compressed size). If the source stream is detected malformed, the function will
-        stop decoding and return a negative result. Destination buffer must be already allocated. Its size must be &ge; {@code originalSize} bytes.
+        the number of bytes read from the source buffer (== the compressed size). If the source stream is detected malformed, the function stops decoding and
+        return a negative result. Destination buffer must be already allocated. Its size must be &ge; {@code originalSize} bytes.
         """
     )
 
@@ -220,7 +222,7 @@ ENABLE_WARNINGS()""")
         {@code dstCapacity}.
 
         The function will decompress a minimum of {@code targetOutputSize} bytes, and stop after that. However, it's not accurate, and may write more than
-        {@code targetOutputSize} (but &le; {@code dstCapacity}).
+        {@code targetOutputSize} (but always &le; {@code dstCapacity}).
 
         This function never writes outside of output buffer, and never reads outside of input buffer. It is therefore protected against malicious data packets.
         """,
@@ -235,8 +237,8 @@ ENABLE_WARNINGS()""")
         """
         the number of bytes decoded in the destination buffer (necessarily &le; {@code dstCapacity})
 
-        Note: this number can be &lt; {@code targetOutputSize} should the compressed block to decode be smaller. Always control how many bytes were decoded. If
-        the source stream is detected malformed, the function will stop decoding and return a negative result.
+        Note: this number can also be &lt; {@code targetOutputSize}, if compressed block contains less data. Therefore, always control how many bytes were
+        decoded. If source stream is detected malformed, function returns a negative result. This function is protected against malicious data packets.
         """
     )
 
@@ -275,17 +277,20 @@ ENABLE_WARNINGS()""")
     int(
         "compress_fast_continue",
         """
-        Compress content into {@code src} using data from previously compressed blocks, improving compression ratio.
+        Compress {@code src} content using data from previously compressed blocks, for better compression ratio.
 
         {@code dst} buffer must be already allocated. If {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}, compression is guaranteed to succeed, and
         runs faster.
 
-        Important: The previous 64KB of compressed data is assumed to remain preset and unmodified in memory! If less than 64KB has been compressed all the
+        Important: The previous 64KB of compressed data is assumed to remain present and unmodified in memory! If less than 64KB has been compressed all the
         data must be present.
 
         Special:
         ${ol(
-            "If input buffer is a double-buffer, it can have any size, including &lt; 64 KB.",
+            """
+            When input is a double-buffer, they can have any size, including &lt; 64 KB. Make sure that buffers are separated by at least one byte. This way,
+            each block only depends on previous block.
+            """,
             "If input buffer is a ring-buffer, it can have any size, including &lt; 64 KB."
         )}
         """,
@@ -299,25 +304,25 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        size of compressed block or 0 if there is an error (typically, compressed data cannot fit into {@code dst}). After an error, the stream status is
-        invalid, it can only be reset or freed.
+        size of compressed block or 0 if there is an error (typically, cannot fit into {@code dst}). After an error, the stream status is invalid, it can only
+        be reset or freed.
         """
     )
 
     int(
         "saveDict",
         """
-        If previously compressed data block is not guaranteed to remain available at its current memory location, save it into a safer place
-        ({@code char* safeBuffer}).
+        If last 64KB data cannot be guaranteed to remain available at its current memory location, save it into a safer place ({@code char* safeBuffer}).
 
-        Note: it's not necessary to call #loadDict() after #saveDict(), dictionary is immediately usable.
+        This is schematically equivalent to a {@code memcpy()} followed by #loadDict(), but is much faster, because {@code LZ4_saveDict()} doesn't need to
+        rebuild tables.
         """,
 
         LZ4_stream_t.p.IN("streamPtr", ""),
         char.p.OUT("safeBuffer", ""),
-        AutoSize("safeBuffer")..int.IN("dictSize", ""),
+        AutoSize("safeBuffer")..int.IN("maxDictSize", ""),
 
-        returnDoc = "saved dictionary size in bytes (necessarily &le; {@code dictSize}), or 0 if error"
+        returnDoc = "saved dictionary size in bytes (necessarily &le; {@code maxDictSize}), or 0 if error"
     )
 
     LZ4_streamDecode_t.p(
@@ -342,7 +347,7 @@ ENABLE_WARNINGS()""")
         An {@code LZ4_streamDecode_t} structure can be allocated once and re-used multiple times. Use this function to start decompression of a new stream of
         blocks.
 
-        A dictionary can optionnally be set. Use #NULL or size 0 for a simple reset order.
+        A dictionary can optionnally be set. Use #NULL or size 0 for a reset order.
         """,
 
         LZ4_streamDecode_t.p.IN("LZ4_streamDecode", ""),

@@ -71,7 +71,7 @@
 #ifndef LZ4_FORCE_MEMORY_ACCESS   /* can be defined externally */
 #  if defined(__GNUC__) && ( defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6K__) || defined(__ARM_ARCH_6Z__) || defined(__ARM_ARCH_6ZK__) || defined(__ARM_ARCH_6T2__) )
 #    define LZ4_FORCE_MEMORY_ACCESS 2
-#  elif defined(__INTEL_COMPILER) || defined(__GNUC__)
+#  elif (defined(__INTEL_COMPILER) && !defined(_WIN32)) || defined(__GNUC__)
 #    define LZ4_FORCE_MEMORY_ACCESS 1
 #  endif
 #endif
@@ -270,11 +270,6 @@ static void LZ4_writeLE16(void* memPtr, U16 value)
     }
 }
 
-static void LZ4_copy8(void* dst, const void* src)
-{
-    memcpy(dst,src,8);
-}
-
 /* customized variant of memcpy, which can overwrite up to 8 bytes beyond dstEnd */
 LZ4_FORCE_O2_INLINE_GCC_PPC64LE
 void LZ4_wildCopy(void* dstPtr, const void* srcPtr, void* dstEnd)
@@ -283,7 +278,7 @@ void LZ4_wildCopy(void* dstPtr, const void* srcPtr, void* dstEnd)
     const BYTE* s = (const BYTE*)srcPtr;
     BYTE* const e = (BYTE*)dstEnd;
 
-    do { LZ4_copy8(d,s); d+=8; s+=8; } while (d<e);
+    do { memcpy(d,s,8); d+=8; s+=8; } while (d<e);
 }
 
 
@@ -550,7 +545,7 @@ LZ4_FORCE_INLINE int LZ4_compress_generic(
     const ptrdiff_t dictDelta = dictEnd - (const BYTE*)source;
     const BYTE* anchor = (const BYTE*) source;
     const BYTE* const iend = ip + inputSize;
-    const BYTE* const mflimit = iend - MFLIMIT;
+    const BYTE* const mflimitPlusOne = iend - MFLIMIT + 1;
     const BYTE* const matchlimit = iend - LASTLITERALS;
 
     BYTE* op = (BYTE*) dest;
@@ -599,7 +594,8 @@ LZ4_FORCE_INLINE int LZ4_compress_generic(
                 forwardIp += step;
                 step = (searchMatchNb++ >> LZ4_skipTrigger);
 
-                if (unlikely(forwardIp > mflimit)) goto _last_literals;
+                if (unlikely(forwardIp > mflimitPlusOne)) goto _last_literals;
+                assert(ip < mflimitPlusOne);
 
                 match = LZ4_getPositionOnHash(h, cctx->hashTable, tableType, base);
                 if (dict==usingExtDict) {
@@ -685,7 +681,7 @@ _next_match:
         anchor = ip;
 
         /* Test end of chunk */
-        if (ip > mflimit) break;
+        if (ip >= mflimitPlusOne) break;
 
         /* Fill table */
         LZ4_putPosition(ip-2, cctx->hashTable, tableType, base);
@@ -1220,10 +1216,13 @@ LZ4_FORCE_INLINE int LZ4_decompress_generic(
             size_t const ll = token >> ML_BITS;
             size_t const off = LZ4_readLE16(ip+ll);
             const BYTE* const matchPtr = op + ll - off;  /* pointer underflow risk ? */
-            if ((off >= 18) /* do not deal with overlapping matches */ & (matchPtr >= lowPrefix)) {
+            if ((off >= 8) /* do not deal with overlapping matches */ & (matchPtr >= lowPrefix)) {
                 size_t const ml = (token & ML_MASK) + MINMATCH;
                 memcpy(op, ip, 16); op += ll; ip += ll + 2 /*offset*/;
-                memcpy(op, matchPtr, 18); op += ml;
+                memcpy(op + 0, matchPtr + 0, 8);
+                memcpy(op + 8, matchPtr + 8, 8);
+                memcpy(op +16, matchPtr +16, 2);
+                op += ml;
                 continue;
             }
         }
@@ -1313,7 +1312,7 @@ LZ4_FORCE_INLINE int LZ4_decompress_generic(
             match += inc32table[offset];
             memcpy(op+4, match, 4);
             match -= dec64table[offset];
-        } else { LZ4_copy8(op, match); match+=8; }
+        } else { memcpy(op, match, 8); match+=8; }
         op += 8;
 
         if (unlikely(cpy>oend-12)) {
@@ -1326,7 +1325,7 @@ LZ4_FORCE_INLINE int LZ4_decompress_generic(
             }
             while (op<cpy) *op++ = *match++;
         } else {
-            LZ4_copy8(op, match);
+            memcpy(op, match, 8);
             if (length>16) LZ4_wildCopy(op+8, match+8, cpy);
         }
         op = cpy;   /* correction */
