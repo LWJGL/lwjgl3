@@ -31,10 +31,9 @@ public class CLTest {
     private void createCL() {
         try {
             CL.getFunctionProvider();
+            CL.destroy();
         } catch (Throwable t) {
             throw new SkipException("Skipped because OpenCL initialization failed [" + t.getMessage() + "]");
-        } finally {
-            CL.destroy();
         }
     }
 
