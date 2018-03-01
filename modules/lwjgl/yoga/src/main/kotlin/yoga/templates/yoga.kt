@@ -322,6 +322,18 @@ div {
         node
     )
 
+    void(
+        "NodeMarkDirtyAndPropogateToDescendants",
+        """
+        Marks the current node and all its descendants as dirty.
+
+        This function is added to test yoga benchmarks. It is not expected to be used in production as calling #NodeCalculateLayout() will cause the
+        recalculation of each and every node.
+        """,
+
+        node
+    )
+
     bool(
         "NodeIsDirty",
         "",

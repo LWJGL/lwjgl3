@@ -1,10 +1,8 @@
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 #include "YGNode.h"
@@ -57,6 +55,10 @@ YGNodeRef YGNode::getParent() const {
 
 YGVector YGNode::getChildren() const {
   return children_;
+}
+
+uint32_t YGNode::getChildrenCount() const {
+  return static_cast<uint32_t>(children_.size());
 }
 
 YGNodeRef YGNode::getChild(uint32_t index) const {
@@ -161,6 +163,12 @@ float YGNode::getTrailingMargin(
   return YGResolveValueMargin(
       *YGComputedEdgeValue(style_.margin, trailing[axis], &YGValueZero),
       widthSize);
+}
+
+float YGNode::getMarginForAxis(
+    const YGFlexDirection axis,
+    const float widthSize) {
+  return getLeadingMargin(axis, widthSize) + getTrailingMargin(axis, widthSize);
 }
 
 // Setters
@@ -374,8 +382,8 @@ YGNode::YGNode()
       measure_(nullptr),
       baseline_(nullptr),
       dirtied_(nullptr),
-      style_(gYGNodeStyleDefaults),
-      layout_(gYGNodeLayoutDefaults),
+      style_(YGStyle()),
+      layout_(YGLayout()),
       lineIndex_(0),
       parent_(nullptr),
       children_(YGVector()),
@@ -672,6 +680,12 @@ float YGNode::getLeadingPaddingAndBorder(
     const YGFlexDirection axis,
     const float widthSize) {
   return getLeadingPadding(axis, widthSize) + getLeadingBorder(axis);
+}
+
+float YGNode::getTrailingPaddingAndBorder(
+    const YGFlexDirection axis,
+    const float widthSize) {
+  return getTrailingPadding(axis, widthSize) + getTrailingBorder(axis);
 }
 
 bool YGNode::didUseLegacyFlag() {

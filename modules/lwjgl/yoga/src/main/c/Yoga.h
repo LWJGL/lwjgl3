@@ -1,10 +1,8 @@
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 #pragma once
@@ -98,6 +96,10 @@ WIN_EXPORT void YGNodeCalculateLayout(const YGNodeRef node,
 // depends on information not known to YG they must perform this dirty
 // marking manually.
 WIN_EXPORT void YGNodeMarkDirty(const YGNodeRef node);
+
+// This function marks the current node and all its descendants as dirty. This function is added to test yoga benchmarks.
+// This function is not expected to be used in production as calling `YGCalculateLayout` will cause the recalculation of each and every node.
+WIN_EXPORT void YGNodeMarkDirtyAndPropogateToDescendants(const YGNodeRef node);
 
 WIN_EXPORT void YGNodePrint(const YGNodeRef node, const YGPrintOptions options);
 
