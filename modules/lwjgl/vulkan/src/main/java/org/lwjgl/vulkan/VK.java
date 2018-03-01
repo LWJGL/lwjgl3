@@ -54,7 +54,19 @@ public final class VK {
                 VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
                 break;
             case MACOSX:
-                VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME); // Vulkan-over-Metal emulation, e.g. MoltenVK
+                String override = Configuration.VULKAN_LIBRARY_NAME.get();
+                if (override != null) {
+                    // use the override without a fallback
+                    VK = Library.loadNative(VK.class, override);
+                } else {
+                    try {
+                        // no override, try to use the bundled implementation (if available)
+                        VK = Library.loadNative(VK.class, "MoltenVK", true);
+                    } catch (Throwable ignored) {
+                        // fallback to the Vulkan loader
+                        VK = Library.loadNative(VK.class, "libvulkan.1.dylib");
+                    }
+                }
                 break;
             default:
                 throw new IllegalStateException();

@@ -1222,7 +1222,12 @@
         <release-module package="org.lwjgl.util.tootle" name="tootle" native-library="lwjgl_tootle" title="tootle" if:true="${binding.tootle}"/>
 
         <!-- Vulkan -->
-        <release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" license="khronos" if:true="${binding.vulkan}"/>
+        <release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" license="khronos" if:true="${binding.vulkan}">
+            <natives>
+                <get-release url="macosx/x64/libMoltenVK.dylib"/>
+                <get-release url="macosx/x64/libMoltenVK.dylib.git"/>
+            </natives>
+        </release-module>
 
         <!-- xxHash -->
         <release-module package="org.lwjgl.util.xxhash" name="xxhash" native-library="lwjgl_xxhash" title="xxHash" if:true="${binding.xxhash}"/>
