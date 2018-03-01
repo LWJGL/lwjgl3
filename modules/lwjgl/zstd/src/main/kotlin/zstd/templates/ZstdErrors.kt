@@ -38,6 +38,7 @@ ENABLE_WARNINGS()""")*/
         "error_stage_wrong".."60",
         "error_init_missing".."62",
         "error_memory_allocation".."64",
+        "error_workSpace_tooSmall".."66",
         "error_dstSize_tooSmall".."70",
         "error_srcSize_wrong".."72",
         /* following error codes are not stable and may be removed or changed in a future version */

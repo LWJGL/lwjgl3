@@ -83,7 +83,9 @@ ENABLE_WARNINGS()""")
         "WINDOWLOG_MIN".."10",
         "HASHLOG_MAX".."(ZSTD_WINDOWLOG_MAX < 30) ? ZSTD_WINDOWLOG_MAX : 30",
         "HASHLOG_MIN".."6",
-        "CHAINLOG_MAX".."(ZSTD_WINDOWLOG_MAX < 29) ? ZSTD_WINDOWLOG_MAX+1 : 30",
+        "CHAINLOG_MAX_32".."29",
+        "CHAINLOG_MAX_64".."30",
+        "CHAINLOG_MAX".."(Pointer.BITS32 ? ZSTD_CHAINLOG_MAX_32 : ZSTD_CHAINLOG_MAX_64)",
         "CHAINLOG_MIN".."ZSTD_HASHLOG_MIN",
         "HASHLOG3_MAX".."17",
         "SEARCHLOG_MAX".."(ZSTD_WINDOWLOG_MAX-1)",
@@ -242,13 +244,18 @@ ENABLE_WARNINGS()""")
         "p_dictIDFlag".enum("When applicable, dictionary's ID is written into frame header (default:1)."),
 
         /* multi-threading parameters */
-        "p_nbThreads".enum(
+        "p_nbWorkers".enum(
             """
-            Select how many threads a compression job can spawn (default:1).
+            Select how many threads will be spawned to compress in parallel.
 
-            More threads improve speed, but also increase memory usage. Can only receive a value &gt; 1 if {@code ZSTD_MULTITHREAD} is enabled.
+            When {@code nbWorkers} &ge; 1, triggers asynchronous mode: #compress_generic() consumes some input, flush some output if possible, and immediately
+            gives back control to caller, while compression work is performed in parallel, within worker threads. (note: a strong exception to this rule is
+            when first invocation sets #e_end : it becomes a blocking call).
 
-            Special: value 0 means "do not change {@code nbThreads}"
+            More workers improve speed, but also increase memory usage.
+
+            Default value is 0, aka "single-threaded mode": no worker is spawned, compression is performed inside Caller's thread, all invocations are
+            blocking.
             """,
             "400"),
         "p_nonBlockingMode".enum(
@@ -300,26 +307,29 @@ ENABLE_WARNINGS()""")
             Size of the table for long distance matching, as a power of 2.
 
             Larger values increase memory usage and compression ratio, but decrease compression speed. Must be clamped between #HASHLOG_MIN and #HASHLOG_MAX
-            (default: {@code windowlog} - 7).
+            (default: {@code windowlog} - 7). Special: value 0 means "do not change {@code ldmHashLog}".
             """),
         "p_ldmMinMatch".enum(
             """
             Minimum size of searched matches for long distance matcher.
 
-            Larger/too small values usually decrease compression ratio. Must be clamped between #LDM_MINMATCH_MIN and #LDM_MINMATCH_MAX (default: 64).
+            Larger/too small values usually decrease compression ratio. Must be clamped between #LDM_MINMATCH_MIN and #LDM_MINMATCH_MAX (default: 64). Special:
+            value 0 means "do not change {@code ldmMinMatch}"
             """),
         "p_ldmBucketSizeLog".enum(
             """
             Log size of each bucket in the LDM hash table for collision resolution.
 
             Larger values usually improve collision resolution but may decrease compression speed. The maximum value is #LDM_BUCKETSIZELOG_MAX (default: 3).
+            Note: 0 is a valid value.
             """),
         "p_ldmHashEveryLog".enum(
             """
             Frequency of inserting/looking up entries in the LDM hash table.
 
             The default is {@code MAX(0, (windowLog - ldmHashLog))} to optimize hash table usage. Larger values improve compression speed. Deviating far from
-            the default value will likely result in a decrease in compression ratio. Must be clamped between 0 and #WINDOWLOG_MAX - #HASHLOG_MIN.
+            the default value will likely result in a decrease in compression ratio. Must be clamped between 0 and #WINDOWLOG_MAX - #HASHLOG_MIN. Note: 0 is a
+            valid value.
             """)
     ).javaDocLinks
 
@@ -452,7 +462,7 @@ ENABLE_WARNINGS()""")
         See #estimateCCtxSize().
 
         Can be used in tandem with #CCtxParam_setParameter(). Only single-threaded compression is supported. This function will return an error code if
-        {@code ZSTD_p_nbThreads} is &gt; 1.
+        {@code ZSTD_p_nbWorkers} is &ge; 1.
         """,
 
         ZSTD_CCtx_params.const.p.IN("params", "")
@@ -481,7 +491,7 @@ ENABLE_WARNINGS()""")
         See #estimateCStreamSize().
 
         Can be used in tandem with #CCtxParam_setParameter(). Only single-threaded compression is supported. This function will return an error code if
-        {@code ZSTD_p_nbThreads} is set to a value &gt; 1.
+        {@code ZSTD_p_nbWorkers} is &ge; 1.
         """,
 
         ZSTD_CCtx_params.const.p.IN("params", "")
@@ -756,13 +766,19 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "CCtx_setParameter",
-        "Sets one compression parameter, selected by enum {@code ZSTD_cParameter}.",
+        """
+        Sets one compression parameter, selected by enum {@code ZSTD_cParameter}.
+
+        Setting a parameter is generally only possible during frame initialization (before starting compression), except for a few exceptions which can be
+        updated during compression: {@code compressionLevel}, {@code hashLog}, {@code chainLog}, {@code searchLog}, {@code minMatch}, {@code targetLength} and
+        {@code strategy}.
+        """,
 
         ZSTD_CCtx.p.IN("cctx", ""),
         ZSTD_cParameter.IN("param", "", cParameters),
         unsigned_int.IN("value", ""),
 
-        returnDoc = "informational value (typically, the one being set, possibly corrected), 0, or an error code (which can be tested with #isError())"
+        returnDoc = "informational value (typically, value being set clamped correctly), 0, or an error code (which can be tested with #isError())"
     )
 
     size_t(
@@ -973,7 +989,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "resetCCtxParams",
-        "Reset params to default, with the default compression level.",
+        "Reset params to default values.",
 
         ZSTD_CCtx_params.p.IN("params", "")
     )
@@ -1014,8 +1030,9 @@ ENABLE_WARNINGS()""")
         """
         Apply a set of {@code ZSTD_CCtx_params} to the compression context.
 
-        This must be done before the dictionary is loaded. The {@code pledgedSrcSize} is treated as unknown. Multithreading parameters are applied only if
-        {@code nbThreads} &gt; 1.
+        This can be done even after compression is started, if {@code nbWorkers==0}, this will have no impact until a new compression is started. If
+        {@code nbWorkers>=1}, new parameters will be picked up at next job, with a few restrictions ({@code windowLog}, {@code pledgedSrcSize},
+        {@code nbWorkers}, {@code jobSize}, and {@code overlapLog} are not updated).
         """,
 
         ZSTD_CCtx.p.IN("cctx", ""),

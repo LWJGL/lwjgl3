@@ -200,7 +200,7 @@ public class HelloZstd {
         try (MemoryStack stack = stackPush()) {
             checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_compressionLevel, cLevel));
             //checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_compressionStrategy, ZSTD_dfast));
-            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_nbThreads, Math.min(Runtime.getRuntime().availableProcessors(), 8)));
+            checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_nbWorkers, Math.min(Runtime.getRuntime().availableProcessors(), 8)));
             checkZSTD(ZSTD_CCtx_setParameter(cctx, ZSTD_p_windowLog, 14)); // the default window is tuned for large files
 
             PointerBuffer dstPos = stack.callocPointer(1);
