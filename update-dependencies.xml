@@ -14,8 +14,8 @@
     <property name="testng" value="6.13.1"/>
     <property name="jcommander" value="1.72"/>
     <property name="joml" value="1.9.7"/>
-    <property name="kotlinc-version" value="1.2.20"/>
-    <property name="kotlinc-build" value="1.2.20-release-81"/>
+    <property name="kotlinc-version" value="1.2.30"/>
+    <property name="kotlinc-build" value="1.2.30-release-78"/>
     <!-- *********************************** -->
 
     <target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
