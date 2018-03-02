@@ -25,7 +25,7 @@ public abstract class MacOSXLibrary extends SharedLibrary.Default {
     public static MacOSXLibrary create(String name) {
         return name.endsWith(".framework")
             ? MacOSXLibraryBundle.create(name)
-            : MacOSXLibraryDL.create(name);
+            : new MacOSXLibraryDL(name);
     }
 
 }
