@@ -145,7 +145,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
 
     // Error & stats output
 
-    Address..opaque_p.p(
+    Address..write_cb.p(
         "malloc_message",
         "Returns the {@code je_malloc_message} variable."
     )

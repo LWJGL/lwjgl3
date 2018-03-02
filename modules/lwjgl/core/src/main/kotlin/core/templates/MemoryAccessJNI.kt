@@ -75,27 +75,27 @@ ${primitives
 // -----------""")
 
     arrayOf(
-        "malloc",
-        "calloc",
-        "realloc",
-        "free"
-    ).forEach {
-        macro..Address..opaque_p(
-            it,
-            "Returns the address of the stdlib {@code $it} function."
+        "malloc" to "void * (*) (size_t)",
+        "calloc" to "void * (*) (size_t, size_t)",
+        "realloc" to "void * (*) (void *, size_t)",
+        "free" to "void (*) (void *)"
+    ).forEach { (name, signature) ->
+        macro..Address..signature.handle(
+            name,
+            "Returns the address of the stdlib {@code $name} function."
         )
     }
 
     Code(
         nativeCall = "${t}return (jlong)(intptr_t)&__aligned_alloc;"
-    )..macro..Address..opaque_p(
+    )..macro..Address.."void * (*) (size_t, size_t)".handle(
         "aligned_alloc",
         "Returns the address of the stdlib {@code aligned_alloc} function."
     )
 
     Code(
         nativeCall = "${t}return (jlong)(intptr_t)&__aligned_free;"
-    )..macro..Address..opaque_p(
+    )..macro..Address.."void (*) (void *)".handle(
         "aligned_free",
         "Returns the address of the stdlib {@code aligned_free} function."
     )
