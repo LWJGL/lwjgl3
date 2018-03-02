@@ -43,7 +43,7 @@ final class FieldSummaryPostProcess {
         boolean       altColor = false;
         while (m.find()) {
             if (lastMatch == null) {
-                out.append(html.substring(0, m.start()));
+                out.append(html, 0, m.start());
 
                 matches.add(lastMatch = new Match(m));
                 continue;

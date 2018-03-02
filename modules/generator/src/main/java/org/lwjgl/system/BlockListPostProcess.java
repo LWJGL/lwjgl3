@@ -42,7 +42,7 @@ final class BlockListPostProcess {
         StringBuilder out = new StringBuilder(html.length());
         while (m.find()) {
             if (lastMatch == null) {
-                out.append(html.substring(0, m.start()));
+                out.append(html, 0, m.start());
 
                 matches.add(lastMatch = new Match(m));
                 continue;
@@ -58,7 +58,7 @@ final class BlockListPostProcess {
             flush(out, matches);
 
             if (lastMatch.end != match.start) {
-                out.append(html.substring(lastMatch.end, match.start));
+                out.append(html, lastMatch.end, match.start);
             }
 
             matches.clear();

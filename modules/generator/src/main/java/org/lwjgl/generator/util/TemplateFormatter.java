@@ -28,7 +28,7 @@ public class TemplateFormatter {
     private TemplateFormatter() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         JFrame frame = new JFrame("Template Formatter");
@@ -89,8 +89,8 @@ public class TemplateFormatter {
         try {
             ClassLoader cl = getClass().getClassLoader();
             frame.setIconImages(Arrays.asList(new Image[] {
-                ImageIO.read(cl.getResource("lwjgl16.png")),
-                ImageIO.read(cl.getResource("lwjgl32.png"))
+                ImageIO.read(Objects.requireNonNull(cl.getResource("lwjgl16.png"))),
+                ImageIO.read(Objects.requireNonNull(cl.getResource("lwjgl32.png")))
             }));
         } catch (IOException e) {
             e.printStackTrace();
@@ -453,12 +453,12 @@ public class TemplateFormatter {
                 if (paramCount == -1) {
                     // Return type + function name
                     builder.append("    ");
-                    // const
-                    if (paramMatcher.group(1) != null || paramMatcher.group(4) != null) {
-                        builder.append("const..");
-                    }
                     // type
                     formatType(paramMatcher, builder, prefixTypes ? prefix : "");
+                    // const
+                    if (paramMatcher.group(1) != null || paramMatcher.group(4) != null) {
+                        builder.append(".const");
+                    }
                     // pointer
                     if (paramMatcher.group(5) != null) {
                         writerPointer(builder, paramMatcher);
@@ -481,13 +481,12 @@ public class TemplateFormatter {
                     }
 
                     builder.append("        ");
-                    // const
-                    if (paramMatcher.group(1) != null || paramMatcher.group(4) != null) // const
-                    {
-                        builder.append("const..");
-                    }
                     // type
                     formatType(paramMatcher, builder, prefixTypes ? prefix : "");
+                    // const
+                    if (paramMatcher.group(1) != null || paramMatcher.group(4) != null) {
+                        builder.append(".const");
+                    }
                     // pointer
                     if (paramMatcher.group(5) != null) {
                         writerPointer(builder, paramMatcher);
@@ -511,9 +510,8 @@ public class TemplateFormatter {
     }
 
     private static void writerPointer(StringBuilder builder, Matcher paramMatcher) {
-        builder.append('_');
         for (int i = 0; i < paramMatcher.group(5).length(); i++) {
-            builder.append('p');
+            builder.append(".p");
         }
     }
 
