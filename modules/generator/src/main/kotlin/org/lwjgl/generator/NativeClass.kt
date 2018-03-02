@@ -518,8 +518,6 @@ class NativeClass internal constructor(
                 if (binding !is SimpleBinding && functions.any(Func::hasCustomJNI))
                     libraryInit()
 
-                printCustomMethods(static = true)
-
                 if (binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress }) {
                     println("""
     ${if (hasFunctions && access === Access.PUBLIC) "protected" else "private"} $className() {
@@ -527,6 +525,7 @@ class NativeClass internal constructor(
     }""")
                     binding.generateFunctionSetup(this, this@NativeClass)
                 }
+                printCustomMethods(static = true)
             } else {
                 libraryInit()
 
@@ -702,13 +701,15 @@ class NativeClass internal constructor(
     }
 
     fun customMethod(method: String) {
-        customMethods.add(method)
+        customMethods.add(method.trim())
     }
 
     private fun PrintWriter.printCustomMethods(static: Boolean) {
-        customMethods.filter { it.startsWith("static {") == static }.forEach {
-            println("\n$t${it.trim()}")
-        }
+        customMethods
+            .filter { it.startsWith("static {") == static }
+            .forEach {
+                println("\n$t$it")
+            }
     }
 
     operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")

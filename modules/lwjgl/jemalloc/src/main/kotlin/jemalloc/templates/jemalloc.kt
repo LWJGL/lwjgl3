@@ -100,8 +100,9 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         if (Platform.get() == Platform.WINDOWS) {
             nje_free(nje_malloc(8));
         }
-    }
+    }""")
 
+    customMethod("""
     /**
      * Align the memory allocation to start at an address that is a multiple of {@code (1 << la)}. This macro does not validate that {@code la} is within the
      * valid range.
@@ -372,7 +373,7 @@ for (i = 0; i < nbins; i++) {
         """,
 
         nullable..write_cb.IN("write_cb", "the print callback, or #NULL to use {@code malloc_message()}"),
-        nullable..opaque_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
+        nullable..opaque_p.IN("cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
         nullable..charASCII.const.p.IN("opts", "an options string")
     )
 
