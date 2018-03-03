@@ -182,6 +182,8 @@ class Struct(
         static = expression
     }
 
+    private val customMethods = ArrayList<String>()
+
     private val members = ArrayList<StructMember>()
 
     private val visibleMembers
@@ -254,6 +256,18 @@ class Struct(
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false)
         struct.init()
         return StructType(struct).member(name, documentation)
+    }
+
+    fun customMethod(method: String) {
+        customMethods.add(method.trim())
+    }
+
+    private fun PrintWriter.printCustomMethods(static: Boolean) {
+        customMethods
+            .filter { it.startsWith("static {") == static }
+            .forEach {
+                println("\n$t$it")
+            }
     }
 
     /** The nested struct's members are embedded in the parent struct. */
@@ -618,7 +632,7 @@ $indentation}"""
                 generateOffsetInit(members)
             }
 
-            print("$t}")
+            println("$t}")
         } else {
             print("""
     static {""")
@@ -626,7 +640,7 @@ $indentation}"""
                 print("""
         $static
 """)
-            print("""
+            println("""
         try (MemoryStack stack = stackPush()) {
             IntBuffer offsets = stack.mallocInt(1);
             SIZEOF = offsets(memAddress(offsets));
@@ -636,12 +650,12 @@ $indentation}"""
         }
 
         if (nativeLayout)
-            print("""
-
+            println("""
     private static native int offsets(long buffer);""")
 
-        print("""
+        printCustomMethods(static = true)
 
+        print("""
     $className(long address, @Nullable ByteBuffer container) {
         super(address, container);
     }
@@ -852,21 +866,21 @@ $indentation}"""
 
         print("""
     // -----------------------------------
-
 """)
 
         members = visibleMembers
         if (members.any()) {
-            generateStaticGetters(members)
             println()
+            generateStaticGetters(members)
 
             if (hasMutableMembers(visibleMembers)) {
-                generateStaticSetters(mutableMembers(visibleMembers))
                 println()
+                generateStaticSetters(mutableMembers(visibleMembers))
 
                 if (Module.CHECKS && validations.any()) {
                     println(
-                        """    /**
+                        """
+    /**
      * Validates pointer members that should not be {@code NULL}.
      *
      * @param $STRUCT the struct to validate
@@ -885,13 +899,14 @@ ${validations.joinToString("\n")}
         for (int i = 0; i < count; i++) {
             validate(array + i * SIZEOF);
         }
-    }
-""")
+    }""")
                 }
             }
         }
 
-        println("$t// -----------------------------------")
+        printCustomMethods(static = false)
+
+        println("\n$t// -----------------------------------")
 
         print("""
     /** An array of {@link $className} structs. */
