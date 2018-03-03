@@ -1780,6 +1780,11 @@ remove them if not needed.
 #include <mutex> // for std::mutex
 #include <atomic> // for std::atomic
 
+#ifndef VMA_NULL
+   // Value used as null pointer. Define it to e.g.: nullptr, NULL, 0, (void*)0.
+   #define VMA_NULL   nullptr
+#endif
+
 #if !defined(_WIN32) && !defined(__APPLE__)
     #include <malloc.h> // for aligned_alloc()
 #endif
@@ -1818,11 +1823,6 @@ void *aligned_alloc(size_t alignment, size_t size)
    #else
        #define VMA_HEAVY_ASSERT(expr)
    #endif
-#endif
-
-#ifndef VMA_NULL
-   // Value used as null pointer. Define it to e.g.: nullptr, NULL, 0, (void*)0.
-   #define VMA_NULL   nullptr
 #endif
 
 #ifndef VMA_ALIGN_OF
