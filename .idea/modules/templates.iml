@@ -35,6 +35,7 @@
     <orderEntry type="module" module-name="tinyexr-templates" />
     <orderEntry type="module" module-name="tinyfd-templates" />
     <orderEntry type="module" module-name="tootle-templates" />
+    <orderEntry type="module" module-name="vma-templates" />
     <orderEntry type="module" module-name="vulkan-templates" />
     <orderEntry type="module" module-name="xxhash-templates" />
     <orderEntry type="module" module-name="yoga-templates" />

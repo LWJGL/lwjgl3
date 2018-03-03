@@ -332,6 +332,17 @@ EXPORTS
             </linkargs>
         </build>
 
+        <!-- Vulkan Memory Allocator -->
+        <build module="vma" flags="/W4" if:true="${binding.vma}">
+            <compileargs>
+                <arg value="/I${src.main}"/>
+                <arg value="/I${module.lwjgl}\vulkan\src\main\c"/>
+            </compileargs>
+            <source>
+                <fileset dir="." includes="${src.generated}/*.cpp"/>
+            </source>
+        </build>
+
         <!-- xxHash -->
         <build_simple module="xxhash"/>
 

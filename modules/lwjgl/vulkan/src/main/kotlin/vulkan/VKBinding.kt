@@ -161,13 +161,13 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
                     .filter { it.type === INSTANCE && !it.has<Macro>() }
                     .map { "${it.name} = isSupported(provider, ${it.functionAddress}, ${if (isInstanceExtension) "supported" else "true"});" }.joinToString("\n$t$t$t", prefix = "$t$t$t"))
                 if (isInstanceExtension) {
-                    println("\n$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${
+                    print("\n$t$t$t$capName = supported && VK.checkExtension(\"$capName\", ${
                     if (capName == it.className) "$packageName.${it.className}" else it.className
                     }.isAvailable(this${
                     if (it.functions.any { it.has<DependsOn>() }) ", ext" else ""
                     }));")
                 }
-                print("$t$t}")
+                print("\n$t$t}")
             } else {
                 print("\n$t$t$capName = ext.contains(\"$capName\");")
             }

@@ -61,6 +61,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/tinyfd-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/tinyfd-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/tootle.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/tootle.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/tootle-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/tootle-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/vma.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/vma.iml" group="MODULES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/vma-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/vma-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/vulkan.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/vulkan.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/vulkan-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/vulkan-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/xxhash.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/xxhash.iml" group="MODULES" />

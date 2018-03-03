@@ -313,6 +313,15 @@
             </source>
         </build>
 
+        <!-- Vulkan Memory Allocator -->
+        <build module="vma" lang="c++" flags="-Werror -Wfatal-errors" if:true="${binding.vma}">
+            <source>
+                <arg value="-I${src.main.rel}"/>
+                <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
+                <fileset dir="." includes="${src.generated}/*.cpp"/>
+            </source>
+        </build>
+
         <!-- xxHash -->
         <build_simple module="xxhash"/>
 

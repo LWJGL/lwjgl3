@@ -72,6 +72,7 @@ enum class Module(
     TINYEXR("binding.tinyexr", "org.lwjgl.util.tinyexr", arrayOverloads = false),
     TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
     TOOTLE("binding.tootle", "org.lwjgl.util.tootle", arrayOverloads = false),
+    VMA("binding.vma", "org.lwjgl.util.vma", arrayOverloads = false),
     VULKAN("binding.vulkan", "org.lwjgl.vulkan", CallingConvention.STDCALL),
     XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
     YOGA("binding.yoga", "org.lwjgl.util.yoga", arrayOverloads = false),

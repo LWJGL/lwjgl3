@@ -195,6 +195,11 @@ enum Artifacts {
         "A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.",
         Platforms.ALL
     ),
+    VMA(
+        "lwjgl-vma", "LWJGL - Vulkan Memory Allocator bindings",
+        "An easy to integrate Vulkan memory allocation library.",
+        Platforms.ALL
+    ),
     VULKAN(
         "lwjgl-vulkan", "LWJGL - Vulkan bindings",
         "A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.",

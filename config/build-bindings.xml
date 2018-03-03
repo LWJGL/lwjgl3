@@ -39,6 +39,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.tinyexr" value="true"/>
     <property name="binding.tinyfd" value="true"/>
     <property name="binding.tootle" value="true"/>
+    <property name="binding.vma" value="true"/>
     <property name="binding.vulkan" value="true"/>
     <property name="binding.xxhash" value="true"/>
     <property name="binding.yoga" value="true"/>

@@ -40,6 +40,7 @@
     <orderEntry type="module" module-name="tinyexr" scope="TEST" />
     <orderEntry type="module" module-name="tinyfd" scope="TEST" />
     <orderEntry type="module" module-name="tootle" scope="TEST" />
+    <orderEntry type="module" module-name="vma" scope="TEST" />
     <orderEntry type="module" module-name="vulkan" scope="TEST" />
     <orderEntry type="module" module-name="xxhash" scope="TEST" />
     <orderEntry type="module" module-name="yoga" scope="TEST" />

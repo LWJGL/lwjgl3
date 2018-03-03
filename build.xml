@@ -447,6 +447,9 @@
             <compileBinding binding="ovr">
                 <pathelement path="${bin.lwjgl}/vulkan"/>
             </compileBinding>
+            <compileBinding binding="vma">
+                <pathelement path="${bin.lwjgl}/vulkan"/>
+            </compileBinding>
         </parallel>
     </target>
 
@@ -1220,6 +1223,9 @@
 
         <!-- AMD Tootle -->
         <release-module package="org.lwjgl.util.tootle" name="tootle" native-library="lwjgl_tootle" title="tootle" if:true="${binding.tootle}"/>
+
+        <!-- Vulkan Memory Allocator -->
+        <release-module package="org.lwjgl.util.vma" name="vma" native-library="lwjgl_vma" title="vma" if:true="${binding.vma}"/>
 
         <!-- Vulkan -->
         <release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" license="khronos" if:true="${binding.vulkan}">
