@@ -204,7 +204,8 @@ ENABLE_WARNINGS()""")
         "OVR_FORMAT_R8G8B8A8_UNORM".enum,
         "OVR_FORMAT_R8G8B8A8_UNORM_SRGB".enum,
         "OVR_FORMAT_B8G8R8A8_UNORM".enum,
-        "OVR_FORMAT_B8G8R8A8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
+        "OVR_FORMAT_B8G8R8_UNORM".enum("", "27"),
+        "OVR_FORMAT_B8G8R8A8_UNORM_SRGB".enum("Not supported for OpenGL applications.", "7"),
         "OVR_FORMAT_B8G8R8X8_UNORM".enum("Not supported for OpenGL applications."),
         "OVR_FORMAT_B8G8R8X8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
         "OVR_FORMAT_R16G16B16A16_FLOAT".enum,
@@ -418,7 +419,8 @@ ENABLE_WARNINGS()""")
         "CameraStatus_Connected".enum("Bit set when the camera is connected to the system.", 0x1),
         "CameraStatus_Calibrating".enum("Bit set when the camera is undergoing calibration.", 0x2),
         "CameraStatus_CalibrationFailed".enum("Bit set when the camera has tried & failed calibration.", 0x4),
-        "CameraStatus_Calibrated".enum("Bit set when the camera has tried & passed calibration.", 0x8)
+        "CameraStatus_Calibrated".enum("Bit set when the camera has tried & passed calibration.", 0x8),
+        "CameraStatus_Capturing".enum("Bit set when the camera is capturing.", 0x10)
     )
 
     val BoundaryTypes = EnumConstant(
@@ -450,6 +452,13 @@ ENABLE_WARNINGS()""")
         "Maximum number of samples in ##OVRHapticsBuffer.",
 
         "OVR_HAPTICS_BUFFER_SAMPLES_MAX".."256"
+    ).noPrefix()
+
+    IntConstant(
+        "External camera constants",
+
+        "OVR_MAX_EXTERNAL_CAMERA_COUNT".."16",
+        "OVR_EXTERNAL_CAMERA_NAME_SIZE".."32"
     ).noPrefix()
 
     ovrResult(
@@ -808,7 +817,12 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
     ovrResult(
         "GetDevicePoses",
-        "Returns an array of poses, where each pose matches a device type provided by the {@code deviceTypes} array parameter.",
+        """
+        Returns an array of poses, where each pose matches a device type provided by the {@code deviceTypes} array parameter.
+
+        If any pose cannot be retrieved, it will return a reason for the missing pose and the device pose will be zeroed out with a pose quaternion
+        {@code [x=0, y=0, z=0, w=1]}.
+        """,
 
         session,
         ovrTrackedDeviceType.p.IN("deviceTypes", "array of device types to query for their poses"),
@@ -1064,6 +1078,51 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         ),
 
         returnDoc = "#Success upon success"
+    )
+
+    // ----------------
+    // Mixed reality capture support
+
+    ovrResult(
+        "GetExternalCameras",
+        "Returns the number of camera properties of all cameras",
+
+        session,
+        nullable..ovrExternalCamera.p.OUT(
+            "cameras",
+            "pointer to the array. If null and the provided array capacity is sufficient, will return {@code ovrError_NullArrayPointer}."
+        ),
+        AutoSize("cameras")..Check(1)..unsigned_int.p.INOUT(
+            "inoutCameraCount",
+            """
+            supply the array capacity, will return the actual \\# of cameras defined. If {@code *inoutCameraCount} is too small, will return
+            #Error_InsufficientArraySize.
+            """
+        ),
+
+        returnDoc = "the list of external cameras the system knows about. Returns #Error_NoExternalCameraInfo if there is not any external camera information."
+    )
+
+    ovrResult(
+        "SetExternalCameraProperties",
+        """
+        Sets the camera intrinsics and/or extrinsics stored for the {@code cameraName} camera.
+
+        Names must be &lt; 32 characters and null-terminated.
+        """,
+
+        session,
+        charASCII.const.p.IN(
+            "name",
+            """
+            specifies which camera to set the intrinsics or extrinsics for. The name must be at most #OVR_EXTERNAL_CAMERA_NAME_SIZE - 1 characters. Otherwise,
+            #Error_ExternalCameraNameWrongSize is returned.
+            """
+        ),
+        ovrCameraIntrinsics.const.p.const.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
+        ovrCameraExtrinsics.const.p.const.IN("extrinsics", "ontains the extrinsic parameters to set, can be null"),
+
+        returnDoc = "#Success or an {@code ovrError} code"
     )
 
     // ----------------
@@ -1565,42 +1624,6 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
         "DebugHudStereo_Quad".enum("Renders Quad in world for Stereo Debugging"),
         "DebugHudStereo_QuadWithCrosshair".enum("Renders Quad+crosshair in world for Stereo Debugging"),
         "DebugHudStereo_CrosshairAtInfinity".enum("Renders screen-space crosshair at infinity for Stereo Debugging")
-    )
-
-    // ----------------
-    // Mixed reality capture support
-
-    ovrResult(
-        "GetExternalCameras",
-        "Returns the number of camera properties of all cameras.",
-
-        session,
-        nullable..ovrExternalCamera.p.OUT(
-            "cameras",
-            "pointer to the array. If #NULL and the provided array capacity is sufficient, will return {@code ovrError_NullArrayPointer}."),
-        AutoSize("cameras")..Check(1)..unsigned_int.p.INOUT(
-            "inoutCameraCount",
-            """
-            supplies the array capacity, will return the actual \# of cameras defined. If {@code inoutCameraCount} is too small, will return
-            #Error_InsufficientArraySize.
-            """
-        ),
-
-        returnDoc = "the ids of external cameras the system knows about. Returns #Error_NoExternalCameraInfo if there is not any external camera information."
-    )
-
-    ovrResult(
-        "SetExternalCameraProperties",
-        """
-        Sets the camera intrinsics and/or extrinsics stored for the {@code name} camera.
-
-        Names must be &lt; 32 characters and null-terminated.
-        """,
-
-        session,
-        charASCII.const.p.IN("name", "specifies which camera to set the intrinsics or extrinsics for"),
-        nullable..ovrCameraIntrinsics.const.p.IN("intrinsics", "contains the intrinsic parameters to set, can be null"),
-        nullable..ovrCameraExtrinsics.const.p.IN("extrinsics", "contains the extrinsic parameters to set, can be null")
     )
 
     // ----------------

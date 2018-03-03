@@ -46,6 +46,21 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_"
         "Error_InsufficientArraySize".enum("Increase size of output array", "-1016"),
         "Error_NoExternalCameraInfo".enum("There is not any external camera information stored by ovrServer.", "-1017"),
         "Error_LostTracking".enum("Tracking is lost when #GetDevicePoses() is called.", "-1018"),
+        "Error_ExternalCameraInitializedFailed".enum("There was a problem initializing the external camera for capture", "-1019"),
+        "Error_ExternalCameraCaptureFailed".enum("There was a problem capturing external camera frames", "-1020"),
+        "Error_ExternalCameraNameListsBufferSize".enum(
+            "The external camera friendly name list and the external camera name list are not the fixed size(#OVR_MAX_EXTERNAL_CAMERA_COUNT).",
+            "-1021"
+        ),
+        "Error_ExternalCameraNameListsMistmatch".enum(
+            "The external camera friendly name list is not the same size as the external camera name list.",
+            "-1022"
+        ),
+        "Error_ExternalCameraNotCalibrated".enum(
+            "The external camera property has not been sent to OVRServer when the user tries to open the camera.",
+            "-1023"
+        ),
+        "Error_ExternalCameraNameWrongSize".enum("The external camera name is larger than #OVR_EXTERNAL_CAMERA_NAME_SIZE-1", "-1024"),
 
         /* Audio error range, reserved for Audio errors. */
         "Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),
@@ -78,6 +93,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_"
         "Error_LibSymbols".enum("LibOVRRT symbol resolution failure.", "-3023"),
         "Error_RemoteSession".enum("Failed to connect to the service because remote connections to the service are not allowed.", "-3024"),
         "Error_InitializeVulkan".enum("Vulkan initialization error.", "-3025"),
+        "Error_BlacklistedGfxDriver".enum("The graphics driver is black-listed.", "-3026"),
 
         /* Synchronization errors */
         "Error_Incomplete".enum("Requested async work not yet complete.", "-5000"),
@@ -93,6 +109,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_"
         "Error_ApplicationInvisible".enum("Application declared itself as an invisible type and is not allowed to submit frames.", "-6006"),
         "Error_Disallowed".enum("The given request is disallowed under the current conditions.", "-6007"),
         "Error_DisplayPluggedIncorrectly".enum("Display portion of HMD is plugged into an incompatible port (ex: IGP)", "-6008"),
+        "Error_DisplayLimitReached".enum("Returned in the event a virtual display system reaches a display limit", "-6009"),
 
         /* Fatal errors */
         "Error_RuntimeException".enum("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000"),

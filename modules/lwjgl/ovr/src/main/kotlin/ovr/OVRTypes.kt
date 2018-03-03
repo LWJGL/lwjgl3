@@ -99,6 +99,7 @@ val ovrSessionStatus = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrS
         near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
         """
     )
+    ovrBool.member("DepthRequested", "True if runtime is requesting that the application provide depth buffers with projection layers.")
 }
 
 val ovrInitParams = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitParams") {
@@ -397,7 +398,7 @@ val ovrTextureSwapChainDesc = struct(Module.OVR, "OVRTextureSwapChainDesc", nati
     int.member("Width", "")
     int.member("Height", "")
     int.member("MipLevels", "")
-    int.member("SampleCount", "only supported with depth textures")
+    int.member("SampleCount", "")
     ovrBool.member("StaticImage", "not buffered in a chain. For images that don't change")
     unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
     unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.").links("TextureBind_\\w+", LinkMode.BITFIELD)
@@ -694,6 +695,10 @@ val ovrTextureLayoutOctilinear = struct(Module.OVR, "OVRTextureLayoutOctilinear"
     documentation = 
         """
         Multiresolution descriptor for Octilinear.
+
+        Usage of this layer must be successfully enabled via #EnableExtension() before it can be used.
+
+        Size of W quadrants:
         ${codeBlock("""
 SizeLeft + SizeRight <= Viewport.Size.w
 SizeUp   + sizeDown  <= Viewport.Size.h

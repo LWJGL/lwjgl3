@@ -117,13 +117,13 @@ val OVRVk = "OVRVk".dependsOn(Module.VULKAN)?.nativeClass(Module.OVR, prefixMeth
     )
 
     ovrResult(
-        "SetSynchonizationQueueVk",
+        "SetSynchronizationQueueVk",
         """
         Selects {@code VkQueue} to block on till rendering is complete.
 
         ${note(
             """
-            The queue may be changed at any time but only the value at the time #SubmitFrame() is called will be used. {@code ovr_SetSynchonizationQueueVk}
+            The queue may be changed at any time but only the value at the time #SubmitFrame() is called will be used. {@code ovr_SetSynchronizationQueueVk}
             must be called with a valid {@code VkQueue} created on the same {@code VkDevice} the texture sets were created on prior to the first call to
             #SubmitFrame(). An internally created {@code VkFence} object will be signalled by the completion of operations on queue and waited on to
             synchronize the VR compositor.
