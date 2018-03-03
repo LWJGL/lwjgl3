@@ -225,14 +225,15 @@ class Generator(private val moduleRoot: String) {
             return customClass
         }
 
-        fun registerLibraryInit(module: Module, className: String, libraryName: String, setupAllocator: Boolean = false) {
+        fun registerLibraryInit(module: Module, className: String, libraryName: String, setupAllocator: Boolean = false, cpp: Boolean = false) {
             if (!module.enabled)
                 return
 
             Generator.register(object : GeneratorTargetNative(module, className) {
                 init {
-                    access = Access.INTERNAL
-                    documentation = "Initializes the $libraryName shared library."
+                    this.access = Access.INTERNAL
+                    this.cpp = cpp
+                    this.documentation = "Initializes the $libraryName shared library."
                     javaImport("org.lwjgl.system.*")
                     if (setupAllocator)
                         javaImport("static org.lwjgl.system.MemoryUtil.*")

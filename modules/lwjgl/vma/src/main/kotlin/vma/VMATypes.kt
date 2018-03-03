@@ -77,6 +77,8 @@ fun config() {
         )}
         """
     )
+
+    Generator.registerLibraryInit(Module.VMA, "LibVma", "vma", setupAllocator = true, cpp = true)
 }
 
 val VmaAllocator = "VmaAllocator".handle
