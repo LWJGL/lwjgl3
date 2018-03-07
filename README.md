@@ -1,7 +1,12 @@
-[![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors) [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.lwjgl/lwjgl/badge.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.lwjgl%22%20)
+[![API Javadoc](https://img.shields.io/badge/API-docs-blue.svg?style=flat-square)](https://javadoc.lwjgl.org/)
+[![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
+[![Slack Status](https://slack.lwjgl.org/badge.svg)](https://slack.lwjgl.org/)
+
+[![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers)
+[![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors)
 ![Size](https://reposs.herokuapp.com/?path=lwjgl/lwjgl3)
 [![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
-[![Slack Status](https://slack.lwjgl.org/badge.svg)](https://slack.lwjgl.org/)
 
 ## LWJGL - Lightweight Java Game Library 3
 
