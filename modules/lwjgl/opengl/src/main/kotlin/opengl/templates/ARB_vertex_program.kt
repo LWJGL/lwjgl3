@@ -178,119 +178,56 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         "MATRIX31_ARB"..0x88DF
     )
 
-    val VA_INDEX = GLuint.IN("index", "the vertex attribute index")
-    val VA_X = "the {@code x} attribute component"
-    val VA_Y = "the {@code y} attribute component"
-    val VA_Z = "the {@code z} attribute component"
-    val VA_W = "the {@code w} attribute component"
+    ARB_vertex_shader reuse "VertexAttrib1sARB"
+    ARB_vertex_shader reuse "VertexAttrib1fARB"
+    ARB_vertex_shader reuse "VertexAttrib1dARB"
 
-    void("VertexAttrib1sARB", "Short version of #VertexAttrib1fARB()", VA_INDEX, GLshort.IN("x", VA_X))
-    void(
-        "VertexAttrib1fARB",
-        "Specifies the {@code x} component of the current vertex attribute numbered {@code index}. Components {@code y} and {@code z} are set to 0 and {@code w} to 1.",
-        VA_INDEX, GLfloat.IN("x", VA_X)
-    )
-    void("VertexAttrib1dARB", "Double version of #VertexAttrib1fARB()", VA_INDEX, GLdouble.IN("x", VA_X))
+    ARB_vertex_shader reuse "VertexAttrib2sARB"
+    ARB_vertex_shader reuse "VertexAttrib2fARB"
+    ARB_vertex_shader reuse "VertexAttrib2dARB"
 
-    void("VertexAttrib2sARB", "Short version of #VertexAttrib2fARB()", VA_INDEX, GLshort.IN("x", VA_X), GLshort.IN("y", VA_Y))
-    void(
-        "VertexAttrib2fARB",
-        "Specifies the {@code x} and {@code y} components of the current vertex attribute numbered {@code index}. Component {@code z} is set to 0 and {@code w} to 1.",
+    ARB_vertex_shader reuse "VertexAttrib3sARB"
+    ARB_vertex_shader reuse "VertexAttrib3fARB"
+    ARB_vertex_shader reuse "VertexAttrib3dARB"
 
-        VA_INDEX,
-        GLfloat.IN("x", VA_X),
-        GLfloat.IN("y", VA_Y)
-    )
-    void("VertexAttrib2dARB", "Double version of #VertexAttrib2fARB()", VA_INDEX, GLdouble.IN("x", VA_X), GLdouble.IN("y", VA_Y))
+    ARB_vertex_shader reuse "VertexAttrib4sARB"
+    ARB_vertex_shader reuse "VertexAttrib4fARB"
+    ARB_vertex_shader reuse "VertexAttrib4dARB"
+    ARB_vertex_shader reuse "VertexAttrib4NubARB"
 
-    void("VertexAttrib3sARB", "Short version of #VertexAttrib3fARB()", VA_INDEX, GLshort.IN("x", VA_X), GLshort.IN("y", VA_Y), GLshort.IN("z", VA_Z))
-    void(
-        "VertexAttrib3fARB",
-        "Specifies the {@code x}, {@code y} and {@code z} components of the current vertex attribute numbered {@code index}. Component {@code w} is set to 1.",
+    ARB_vertex_shader reuse "VertexAttrib1svARB"
+    ARB_vertex_shader reuse "VertexAttrib1fvARB"
+    ARB_vertex_shader reuse "VertexAttrib1dvARB"
 
-        VA_INDEX,
-        GLfloat.IN("x", VA_X),
-        GLfloat.IN("y", VA_Y),
-        GLfloat.IN("z", VA_Z)
-    )
-    void("VertexAttrib3dARB", "Double version of #VertexAttrib3fARB()", VA_INDEX, GLdouble.IN("x", VA_X), GLdouble.IN("y", VA_Y), GLdouble.IN("z", VA_Z))
+    ARB_vertex_shader reuse "VertexAttrib2svARB"
+    ARB_vertex_shader reuse "VertexAttrib2fvARB"
+    ARB_vertex_shader reuse "VertexAttrib2dvARB"
 
-    void("VertexAttrib4sARB", "Short version of #VertexAttrib4fARB()", VA_INDEX, GLshort.IN("x", VA_X), GLshort.IN("y", VA_Y), GLshort.IN("z", VA_Z), GLshort.IN("w", VA_W))
-    void(
-        "VertexAttrib4fARB",
-        "Specifies the current vertex attribute numbered {@code index}.",
+    ARB_vertex_shader reuse "VertexAttrib3svARB"
+    ARB_vertex_shader reuse "VertexAttrib3fvARB"
+    ARB_vertex_shader reuse "VertexAttrib3dvARB"
 
-        VA_INDEX,
-        GLfloat.IN("x", VA_X),
-        GLfloat.IN("y", VA_Y),
-        GLfloat.IN("z", VA_Z),
-        GLfloat.IN("w", VA_W)
-    )
-    void("VertexAttrib4dARB", "Double version of #VertexAttrib4fARB()", VA_INDEX, GLdouble.IN("x", VA_X), GLdouble.IN("y", VA_Y), GLdouble.IN("z", VA_Z), GLdouble.IN("w", VA_W))
-    void("VertexAttrib4NubARB", "Fixed-point unsigned byte version of #VertexAttrib4fARB()", VA_INDEX, GLubyte.IN("x", VA_X), GLubyte.IN("y", VA_Y), GLubyte.IN("z", VA_Z), GLubyte.IN("w", VA_W))
+    ARB_vertex_shader reuse "VertexAttrib4fvARB"
+    ARB_vertex_shader reuse "VertexAttrib4bvARB"
+    ARB_vertex_shader reuse "VertexAttrib4svARB"
+    ARB_vertex_shader reuse "VertexAttrib4ivARB"
+    ARB_vertex_shader reuse "VertexAttrib4ubvARB"
+    ARB_vertex_shader reuse "VertexAttrib4usvARB"
+    ARB_vertex_shader reuse "VertexAttrib4uivARB"
+    ARB_vertex_shader reuse "VertexAttrib4dvARB"
 
-    val VA_V = "a buffer from which to read the attribute value"
+    ARB_vertex_shader reuse "VertexAttrib4NbvARB"
+    ARB_vertex_shader reuse "VertexAttrib4NsvARB"
+    ARB_vertex_shader reuse "VertexAttrib4NivARB"
 
-    void("VertexAttrib1svARB", "Pointer version of #VertexAttrib1sARB()", VA_INDEX, Check(1)..GLshort.const.p.IN("v", VA_V))
-    void("VertexAttrib1fvARB", "Pointer version of #VertexAttrib1fARB()", VA_INDEX, Check(1)..GLfloat.const.p.IN("v", VA_V))
-    void("VertexAttrib1dvARB", "Pointer version of #VertexAttrib1dARB()", VA_INDEX, Check(1)..GLdouble.const.p.IN("v", VA_V))
+    ARB_vertex_shader reuse "VertexAttrib4NubvARB"
+    ARB_vertex_shader reuse "VertexAttrib4NusvARB"
+    ARB_vertex_shader reuse "VertexAttrib4NuivARB"
 
-    void("VertexAttrib2svARB", "Pointer version of #VertexAttrib2sARB()", VA_INDEX, Check(2)..GLshort.const.p.IN("v", VA_V))
-    void("VertexAttrib2fvARB", "Pointer version of #VertexAttrib2fARB()", VA_INDEX, Check(2)..GLfloat.const.p.IN("v", VA_V))
-    void("VertexAttrib2dvARB", "Pointer version of #VertexAttrib2dARB()", VA_INDEX, Check(2)..GLdouble.const.p.IN("v", VA_V))
+    ARB_vertex_shader reuse "VertexAttribPointerARB"
 
-    void("VertexAttrib3svARB", "Pointer version of #VertexAttrib3sARB()", VA_INDEX, Check(3)..GLshort.const.p.IN("v", VA_V))
-    void("VertexAttrib3fvARB", "Pointer version of #VertexAttrib3fARB()", VA_INDEX, Check(3)..GLfloat.const.p.IN("v", VA_V))
-    void("VertexAttrib3dvARB", "Pointer version of #VertexAttrib3dARB()", VA_INDEX, Check(3)..GLdouble.const.p.IN("v", VA_V))
-
-    void("VertexAttrib4fvARB", "Pointer version of #VertexAttrib4fARB()", VA_INDEX, Check(4)..GLfloat.const.p.IN("v", VA_V))
-    void("VertexAttrib4bvARB", "Byte version of #VertexAttrib4fvARB()", VA_INDEX, Check(4)..GLbyte.const.p.IN("v", VA_V))
-    void("VertexAttrib4svARB", "Pointer version of #VertexAttrib4sARB()", VA_INDEX, Check(4)..GLshort.const.p.IN("v", VA_V))
-    void("VertexAttrib4ivARB", "Integer version of #VertexAttrib4fvARB()", VA_INDEX, Check(4)..GLint.const.p.IN("v", VA_V))
-    void("VertexAttrib4ubvARB", "Unsigned byte version of #VertexAttrib4fvARB()", VA_INDEX, Check(4)..GLubyte.const.p.IN("v", VA_V))
-    void("VertexAttrib4usvARB", "Unsigned short version of #VertexAttrib4fvARB()", VA_INDEX, Check(4)..GLushort.const.p.IN("v", VA_V))
-    void("VertexAttrib4uivARB", "Unsigned integer version of #VertexAttrib4fvARB()", VA_INDEX, Check(4)..GLuint.const.p.IN("v", VA_V))
-    void("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB()", VA_INDEX, Check(4)..GLdouble.const.p.IN("v", VA_V))
-
-    void("VertexAttrib4NbvARB", "Fixed-point version of #VertexAttrib4bvARB()", VA_INDEX, Check(4)..GLbyte.const.p.IN("v", VA_V))
-    void("VertexAttrib4NsvARB", "Fixed-point version of #VertexAttrib4svARB()", VA_INDEX, Check(4)..GLshort.const.p.IN("v", VA_V))
-    void("VertexAttrib4NivARB", "Fixed-point version of #VertexAttrib4ivARB()", VA_INDEX, Check(4)..GLint.const.p.IN("v", VA_V))
-
-    void("VertexAttrib4NubvARB", "Fixed-point unsigned version of #VertexAttrib4bvARB()", VA_INDEX, Check(4)..GLubyte.const.p.IN("v", VA_V))
-    void("VertexAttrib4NusvARB", "Fixed-point unsigned version of #VertexAttrib4svARB()", VA_INDEX, Check(4)..GLushort.const.p.IN("v", VA_V))
-    void("VertexAttrib4NuivARB", "Fixed-point unsigned version of #VertexAttrib4ivARB()", VA_INDEX, Check(4)..GLuint.const.p.IN("v", VA_V))
-
-    void(
-        "VertexAttribPointerARB",
-        "Specifies the location and organization of a vertex attribute array.",
-
-        VA_INDEX,
-        GLint.IN("size", "the vertex attribute number of components", "1 2 3 4"),
-        GLenum.IN(
-            "type",
-            "the data type of the values stored in the array",
-            "#BYTE #SHORT #INT #UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT #HALF_FLOAT #HALF_FLOAT_NV #FLOAT #DOUBLE"
-        ),
-        GLboolean.IN("normalized", "if #TRUE, fixed-point types are normalized when converted to floating-point"),
-        GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the vertex attribute array data")
-    )
-
-    void(
-        "EnableVertexAttribArrayARB",
-        "Enables an individual generic vertex attribute array.",
-
-        VA_INDEX
-    )
-
-    void(
-        "DisableVertexAttribArrayARB",
-        "Disables an individual generic vertex attribute array.",
-
-        VA_INDEX
-    )
+    ARB_vertex_shader reuse "EnableVertexAttribArrayARB"
+    ARB_vertex_shader reuse "DisableVertexAttribArrayARB"
 
     val TARGET = GLenum.IN("target", "the program target", "#VERTEX_PROGRAM_ARB #FRAGMENT_PROGRAM_ARB")
 
@@ -459,51 +396,10 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         Check("glGetProgramiARB(target, GL_PROGRAM_LENGTH_ARB)", debug = true)..void.p.OUT("string", "an array in which to place the program string")
     )
 
-    void(
-        "GetVertexAttribfvARB",
-        """
-        Obtains the vertex attribute state named by {@code pname} for the vertex attribute numbered {@code index} and places the information in the array
-        {@code params}.
-        """,
-
-        VA_INDEX,
-        GLenum.IN("pname", "the parameter to query", "#CURRENT_VERTEX_ATTRIB_ARB"),
-        Check(4)..GLfloat.p.OUT("params", "an array in which to place the parameter value")
-    )
-
-    void(
-        "GetVertexAttribdvARB",
-        "Double version of #GetVertexAttribfvARB().",
-
-        VA_INDEX,
-        GLenum.IN("pname", "the parameter to query", "#CURRENT_VERTEX_ATTRIB_ARB"),
-        Check(4)..GLdouble.p.OUT("params", "an array in which to place the parameter value")
-    )
-
-    void(
-        "GetVertexAttribivARB",
-        "Integer version of #GetVertexAttribfvARB().",
-
-        VA_INDEX,
-        GLenum.IN(
-            "pname",
-            "the parameter to query",
-            """
-            #VERTEX_ATTRIB_ARRAY_ENABLED_ARB #VERTEX_ATTRIB_ARRAY_SIZE_ARB #VERTEX_ATTRIB_ARRAY_STRIDE_ARB #VERTEX_ATTRIB_ARRAY_TYPE_ARB
-            #VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB #CURRENT_VERTEX_ATTRIB_ARB
-            """
-        ),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "an array in which to place the parameter value")
-    )
-
-    void(
-        "GetVertexAttribPointervARB",
-        "Obtains the pointer named {@code pname} for vertex attribute numbered {@code index} and places the information in the array {@code pointer}.",
-
-        VA_INDEX,
-        GLenum.IN("pname", "the parameter to query", "#VERTEX_ATTRIB_ARRAY_POINTER_ARB"),
-        ReturnParam..Check(1)..void.p.p.OUT("pointer", "an array in which to place the vertex attribute array pointer")
-    )
+    ARB_vertex_shader reuse "GetVertexAttribfvARB"
+    ARB_vertex_shader reuse "GetVertexAttribdvARB"
+    ARB_vertex_shader reuse "GetVertexAttribivARB"
+    ARB_vertex_shader reuse "GetVertexAttribPointervARB"
 
     GLboolean(
         "IsProgramARB",

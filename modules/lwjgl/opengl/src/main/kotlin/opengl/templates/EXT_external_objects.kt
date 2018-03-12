@@ -356,22 +356,8 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGL("EXT_semaphore", postfix = EXT)
         "LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_EXT"..0x9531
     )
 
-    void(
-        "GetUnsignedBytevEXT",
-        "",
-
-        GLenum.IN("pname", ""),
-        Unsafe..GLubyte.p.OUT("data", "")
-    )
-
-    void(
-        "GetUnsignedBytei_vEXT",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        Unsafe..GLubyte.p.OUT("data", "")
-    )
+    EXT_memory_object reuse "GetUnsignedBytevEXT"
+    EXT_memory_object reuse "GetUnsignedBytei_vEXT"
 
     void(
         "GenSemaphoresEXT",

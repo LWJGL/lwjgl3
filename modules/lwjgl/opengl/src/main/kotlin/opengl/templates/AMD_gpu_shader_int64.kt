@@ -84,7 +84,7 @@ val AMD_gpu_shader_int64 = "AMDGPUShaderInt64".nativeClassGL("AMD_gpu_shader_int
     NV_gpu_shader5 reuse "Uniform4ui64vNV"
 
     NV_gpu_shader5 reuse "GetUniformi64vNV"
-    NV_gpu_shader5 reuse "GetUniformui64vNV"
+    NV_shader_buffer_load reuse "GetUniformui64vNV"
 
     NV_gpu_shader5 reuse "ProgramUniform1i64NV"
     NV_gpu_shader5 reuse "ProgramUniform2i64NV"

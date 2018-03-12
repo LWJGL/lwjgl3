@@ -85,23 +85,9 @@ private val CLBinding = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("public class $CAPABILITIES_CLASS {\n")
 
-        val classes = super.getClasses { o1, o2 ->
-            // Core functionality first, extensions after
-            val isCL1 = o1.templateName.startsWith("CL")
-            val isCL2 = o2.templateName.startsWith("CL")
+        val classes = super.getClasses("CL")
 
-            if (isCL1 xor isCL2)
-                (if (isCL1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }
-
-        val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-        val addresses = classesWithFunctions
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+        val addresses = classes.getFunctionPointers()
 
         println("${t}public final long")
         println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))

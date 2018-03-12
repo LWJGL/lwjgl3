@@ -62,43 +62,13 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "GPU_DISJOINT_EXT"..0x8FBB
     )
 
-    void(
-        "GenQueriesEXT",
-        "",
-
-        AutoSize("ids")..GLsizei.IN("n", ""),
-        ReturnParam..GLuint.p.OUT("ids", "")
-    )
-
-    void(
-        "DeleteQueriesEXT",
-        "",
-
-        AutoSize("ids")..GLsizei.IN("n", ""),
-        SingleValue("id")..GLuint.const.p.IN("ids", "")
-    )
-
-    GLboolean(
-        "IsQueryEXT",
-        "",
-
-        GLuint.IN("id", "")
-    )
-
-    void(
-        "BeginQueryEXT",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("id", "")
-    )
-
-    void(
-        "EndQueryEXT",
-        "",
-
-        GLenum.IN("target", "")
-    )
+    EXT_occlusion_query_boolean reuse "GenQueriesEXT"
+    EXT_occlusion_query_boolean reuse "DeleteQueriesEXT"
+    EXT_occlusion_query_boolean reuse "IsQueryEXT"
+    EXT_occlusion_query_boolean reuse "BeginQueryEXT"
+    EXT_occlusion_query_boolean reuse "EndQueryEXT"
+    EXT_occlusion_query_boolean reuse "GetQueryivEXT"
+    EXT_occlusion_query_boolean reuse "GetQueryObjectuivEXT"
 
     void(
         "QueryCounterEXT",
@@ -108,14 +78,6 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         GLenum.IN("target", "")
     )
 
-    void(
-        "GetQueryivEXT",
-        "",
-
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
-    )
 
     IgnoreMissing..void(
         "GetQueryObjectivEXT",
@@ -124,15 +86,6 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         GLuint.IN("id", ""),
         GLenum.IN("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
-    )
-
-    void(
-        "GetQueryObjectuivEXT",
-        "",
-
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
-        ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 
     void(

@@ -41,13 +41,26 @@ abstract class APIBinding(
 
     private val _classes: MutableList<NativeClass> = ArrayList()
 
-    protected fun getClasses(
-        comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName.compareTo(o2.templateName, ignoreCase = true) }
-    ): List<NativeClass> {
+    protected fun getClasses(corePrefix: String): List<NativeClass> {
         val classes = ArrayList(_classes)
-        classes.sortWith(Comparator { o1, o2 -> comparator(o1, o2) })
+        classes.sortWith(Comparator { o1, o2 ->
+            // Core functionality first, extensions after
+            val isCore1 = o1.templateName.startsWith(corePrefix)
+            val isCore2 = o2.templateName.startsWith(corePrefix)
+
+            if (isCore1 xor isCore2)
+                (if (isCore1) -1 else 1)
+            else
+                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
+        })
         return classes
     }
+
+    protected fun List<NativeClass>.getFunctionPointers() = this.asSequence()
+        .filter { it.hasNativeFunctions }
+        .flatMap { it.functions.asSequence() }
+        .filter { !it.has<Reuse>() }
+        .toList()
 
     fun addClass(clazz: NativeClass) {
         _classes.add(clazz)

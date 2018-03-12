@@ -120,27 +120,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
         Check(1)..ReturnParam..GLfloat.p.OUT("data", "")
     )
 
-    IgnoreMissing..void(
-        "EnableiOES",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
-    )
-
-    IgnoreMissing..void(
-        "DisableiOES",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
-    )
-
-    IgnoreMissing..GLboolean(
-        "IsEnablediOES",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
-    )
+    OES_draw_buffers_indexed reuse "EnableiOES"
+    OES_draw_buffers_indexed reuse "DisableiOES"
+    OES_draw_buffers_indexed reuse "IsEnablediOES"
 }

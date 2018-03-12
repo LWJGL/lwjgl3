@@ -65,23 +65,9 @@ private val EGLBinding = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("public class $CAPABILITIES_CLASS {\n")
 
-        val classes = super.getClasses { o1, o2 ->
-            // Core functionality first, extensions after
-            val isEGL1 = o1.templateName.startsWith("EGL")
-            val isEGL2 = o2.templateName.startsWith("EGL")
+        val classes = super.getClasses("EGL")
 
-            if (isEGL1 xor isEGL2)
-                (if (isEGL1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }
-
-        val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-        val addresses = classesWithFunctions
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
+        val addresses = classes.getFunctionPointers()
 
         println("${t}public final long")
         println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))

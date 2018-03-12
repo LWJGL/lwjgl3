@@ -39,17 +39,12 @@ val GLXBinding = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("public final class $CAPABILITIES_CLASS {\n")
 
-        val classes = getClasses()
+        val classes = getClasses("GLX")
 
-        val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-        val functions = classesWithFunctions
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
+        val addresses = classes.getFunctionPointers()
 
         println("${t}public final long")
-        println(functions.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n")
+        println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n")
         )
 
         classes.forEach {
@@ -60,9 +55,9 @@ val GLXBinding = Generator.register(object : APIBinding(
         println("\n$t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
 
         println(
-            functions.map {
+            addresses.joinToString(prefix = "$t$t", separator = "\n$t$t") {
                 "${it.name} = provider.getFunctionAddress(${it.functionAddress});"
-            }.joinToString(prefix = "$t$t", separator = "\n$t$t")
+            }
         )
 
         for (extension in classes) {

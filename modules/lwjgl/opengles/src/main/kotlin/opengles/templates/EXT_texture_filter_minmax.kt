@@ -41,12 +41,4 @@ val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGLES("EXT_te
 
         "WEIGHTED_AVERAGE_EXT"..0x9367
     )
-
-    void(
-        "RasterSamplesEXT",
-        "",
-
-        GLuint.IN("samples", ""),
-        GLboolean.IN("fixedsamplelocations", "")
-    )
 }

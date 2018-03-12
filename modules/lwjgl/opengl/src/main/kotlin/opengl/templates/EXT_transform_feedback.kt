@@ -163,21 +163,6 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
             : ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII.p.OUT("name", "")
     )
 
-    void(
-        "GetIntegerIndexedvEXT",
-        "",
-
-        GLenum.IN("param", ""),
-        GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLint.p.OUT("values", "")
-    )
-
-    void(
-        "GetBooleanIndexedvEXT",
-        "",
-
-        GLenum.IN("param", ""),
-        GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLboolean.p.OUT("values", "")
-    )
+    EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT"
+    EXT_draw_buffers2 reuse "GetBooleanIndexedvEXT"
 }

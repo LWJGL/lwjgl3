@@ -14,7 +14,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
         Extensions promoted to core in this release:
         ${ul(
-
             registryLinkTo("ARB", "clip_control"),
             registryLinkTo("ARB", "cull_distance"),
             registryLinkTo("ARB", "ES3_1_compatibility"),

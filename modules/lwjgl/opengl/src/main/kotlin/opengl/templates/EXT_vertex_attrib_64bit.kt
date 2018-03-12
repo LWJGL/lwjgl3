@@ -145,16 +145,5 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         Check(4)..GLdouble.p.OUT("params", "")
     )
 
-    DependsOn("GL_EXT_direct_state_access")..void(
-        "VertexArrayVertexAttribLOffsetEXT",
-        "",
-
-        GLuint.IN("vaobj", ""),
-        GLuint.IN("buffer", ""),
-        GLuint.IN("index", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", ""),
-        GLintptr.IN("offset", "")
-    )
+    ARB_vertex_attrib_64bit reuse "VertexArrayVertexAttribLOffsetEXT"
 }

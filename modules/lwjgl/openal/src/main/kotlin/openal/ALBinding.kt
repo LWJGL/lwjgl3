@@ -42,22 +42,9 @@ private val ALBinding = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("public final class $CAPABILITIES_CLASS {\n")
 
-        val classes = super.getClasses { o1, o2 ->
-            val isAL1 = o1.templateName.startsWith("AL")
-            val isAL2 = o2.templateName.startsWith("AL")
+        val classes = super.getClasses("AL")
 
-            if (isAL1 xor isAL2)
-                (if (isAL1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }
-
-        val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-        val addresses = classesWithFunctions
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
+        val addresses = classes.getFunctionPointers()
 
         println("${t}public final long")
         println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))

@@ -19,26 +19,17 @@ val EXT_memory_object_fd = "EXTMemoryObjectFD".nativeClassGL("EXT_memory_object_
         """
 
     IntConstant(
-        "Accepted by the {@code handleType} parameter of ImportMemoryFdEXT() or ImportSemaphoreFdEXT().",
+        "Accepted by the {@code handleType} parameter of #ImportMemoryFdEXT()",
 
         "HANDLE_TYPE_OPAQUE_FD_EXT"..0x9586
     )
 
-    DependsOn("GL_EXT_memory_object_fd")..void(
+    void(
         "ImportMemoryFdEXT",
         "",
 
         GLuint.IN("memory", ""),
         GLuint64.IN("size", ""),
-        GLenum.IN("handleType", ""),
-        GLint.IN("fd", "")
-    )
-
-    DependsOn("GL_EXT_semaphore_fd")..void(
-        "ImportSemaphoreFdEXT",
-        "",
-
-        GLuint.IN("semaphore", ""),
         GLenum.IN("handleType", ""),
         GLint.IN("fd", "")
     )
@@ -56,7 +47,7 @@ val EXT_semaphore_fd = "EXTSemaphoreFD".nativeClassGL("EXT_semaphore_fd", postfi
         """
 
     IntConstant(
-        "Accepted by the {@code handleType} parameter of ImportMemoryFdEXT() or ImportSemaphoreFdEXT().",
+        "Accepted by the {@code handleType} parameter of #ImportSemaphoreFdEXT().",
 
         "HANDLE_TYPE_OPAQUE_FD_EXT"..0x9586
     )

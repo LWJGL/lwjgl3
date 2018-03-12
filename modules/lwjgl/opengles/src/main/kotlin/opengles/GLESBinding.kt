@@ -25,28 +25,11 @@ private val GLESBinding = register(object : APIBinding(
     APICapabilities.JNI_CAPABILITIES
 ) {
 
-    private val classes: List<NativeClass> by lazy {
-        super.getClasses { o1, o2 ->
-            // Core functionality first, extensions after
-            val isGLES1 = o1.templateName.startsWith("GLES")
-            val isGLES2 = o2.templateName.startsWith("GLES")
+    private val classes by lazy { super.getClasses("GLES") }
 
-            if (isGLES1 xor isGLES2)
-                (if (isGLES1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }
-    }
+    private val functions by lazy { classes.getFunctionPointers() }
 
-    private val functions: SortedSet<Func> by lazy {
-        classes
-            .filter { it.hasNativeFunctions }
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
-    }
-
-    private val functionOrdinals: Map<String, Int> by lazy {
+    private val functionOrdinals by lazy {
         val ordinals = HashMap<String, Int>(512)
         var i = 0
         functions.asSequence()

@@ -18,7 +18,7 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         Additionally, it provides the VertexAttribLFormatNV entry point to specify bindless vertex attribute arrays with 64-bit integer or floating-point
         components in conjunction with the NV_vertex_buffer_unified_memory extension.
 
-        Requires ${GL30.core}, GLSL 1.30, ${NV_gpu_shader5.link} or equivalent functionality and ${EXT_vertex_attrib_64bit.link}.
+        Requires ${GL30.core}, GLSL 1.30, ${NV_gpu_shader5.link} or equivalent functionality and {@link EXTVertexAttrib64bit EXT_vertex_attrib_64bit}.
         """
 
     IntConstant(

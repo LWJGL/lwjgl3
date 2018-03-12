@@ -30,35 +30,29 @@ val GLBinding = Generator.register(object : APIBinding(
     APICapabilities.JNI_CAPABILITIES
 ) {
 
-    private val classes: List<NativeClass> by lazy {
-        super.getClasses { o1, o2 ->
-            // Core functionality first, extensions after
-            val isGL1 = o1.templateName.startsWith("GL")
-            val isGL2 = o2.templateName.startsWith("GL")
+    private val classes by lazy { super.getClasses("GL") }
 
-            if (isGL1 xor isGL2)
-                (if (isGL1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }
-    }
-
-    private val functions: java.util.SortedSet<Func> by lazy {
+    private val functions by lazy {
         classes
+            .asSequence()
             .filter { it.hasNativeFunctions }
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
+            .flatMap {
+                if (it.templateName.startsWith("GL")) {
+                    it.functions.asSequence().sortedBy {
+                        if (it.has<DeprecatedGL>()) 1 else 0
+                    }
+                } else {
+                    it.functions.asSequence()
+                }
+            }
+            .filter { !it.has<Reuse>() }
+            .toList()
     }
 
-    private val functionOrdinals: Map<String, Int> by lazy {
-        val ordinals = HashMap<String, Int>(1024)
-        var i = 0
+    private val functionOrdinals by lazy {
         functions.asSequence()
-            .forEach {
-                ordinals[it.name] = i++
-            }
-        ordinals
+            .mapIndexed { index, func -> func.name to index }
+            .toMap()
     }
 
     override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!

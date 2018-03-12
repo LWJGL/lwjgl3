@@ -108,16 +108,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("public class $CAPS_INSTANCE {")
 
-        val classes = super.getClasses { o1, o2 ->
-            // Core functionality first, extensions after
-            val isVK1 = o1.templateName.startsWith("VK")
-            val isVK2 = o2.templateName.startsWith("VK")
-
-            if (isVK1 xor isVK2)
-                (if (isVK1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }.filter {
+        val classes = super.getClasses("VK").filter {
             EXTENSION_TYPES[it.templateName] ?: "instance" == "instance" || it.functions.any { it.type === INSTANCE }
         }
 

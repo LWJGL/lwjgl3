@@ -51,23 +51,11 @@ val ALCBinding = Generator.register(object : APIBinding(
         generateJavaPreamble()
         println("public final class $ALC_CAP_CLASS {\n")
 
-        val classes = super.getClasses { o1, o2 ->
-            // Core functionality first, extensions after
-            val isALC1 = o1.isCore
-            val isALC2 = o2.isCore
+        val classes = super.getClasses("ALC")
 
-            if (isALC1 xor isALC2)
-                (if (isALC1) -1 else 1)
-            else
-                o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-        }
-
-        val classesWithFunctions = classes.filter { it.hasNativeFunctions && it.prefix == "ALC" }
-
-        val addresses = classesWithFunctions
-            .map { it.functions }
-            .flatten()
-            .toSortedSet(Comparator { o1, o2 -> o1.name.compareTo(o2.name) })
+        val addresses = classes
+            .filter { it.hasNativeFunctions && it.prefix == "ALC" }
+            .getFunctionPointers()
 
         println("\tpublic final long")
         println(addresses.map(Func::name).joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))

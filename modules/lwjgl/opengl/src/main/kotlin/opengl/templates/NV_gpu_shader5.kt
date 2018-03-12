@@ -245,14 +245,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
     )
 
-    void(
-        "GetUniformui64vNV",
-        "",
-
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
-    )
+    NV_shader_buffer_load reuse "GetUniformui64vNV"
 
     val DSA = DependsOn("GL_EXT_direct_state_access")
 

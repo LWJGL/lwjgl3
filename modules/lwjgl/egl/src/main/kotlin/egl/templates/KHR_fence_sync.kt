@@ -40,40 +40,8 @@ val KHR_fence_sync = "KHRFenceSync".nativeClassEGL("KHR_fence_sync", postfix = K
         "SYNC_FENCE_KHR"..0x30F9
     )
 
-    EGLSyncKHR(
-        "CreateSyncKHR",
-        "",
-
-        EGLDisplay.IN("dpy", ""),
-        EGLenum.IN("type", ""),
-        noneTerminated..EGLint.const.p.IN("attrib_list", "")
-    )
-
-    EGLBoolean(
-        "DestroySyncKHR",
-        "",
-
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", "")
-    )
-
-    EGLint(
-        "ClientWaitSyncKHR",
-        "",
-
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", ""),
-        EGLint.IN("flags", ""),
-        EGLTimeKHR.IN("timeout", "")
-    )
-
-    EGLBoolean(
-        "GetSyncAttribKHR",
-        "",
-
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", ""),
-        EGLint.IN("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
-    )
+    KHR_reusable_sync reuse "CreateSyncKHR"
+    KHR_reusable_sync reuse "DestroySyncKHR"
+    KHR_reusable_sync reuse "ClientWaitSyncKHR"
+    KHR_reusable_sync reuse "GetSyncAttribKHR"
 }

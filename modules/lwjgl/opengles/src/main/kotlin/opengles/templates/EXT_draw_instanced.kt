@@ -17,24 +17,6 @@ val EXT_draw_instanced = "EXTDrawInstanced".nativeClassGLES("EXT_draw_instanced"
         the vertex program to compute per-instance values, typically an object's transform.
         """
 
-    void(
-        "DrawArraysInstancedEXT",
-        "",
-
-        GLenum.IN("mode", ""),
-        GLint.IN("start", ""),
-        GLsizei.IN("count", ""),
-        GLsizei.IN("primcount", "")
-    )
-
-    void(
-        "DrawElementsInstancedEXT",
-        "",
-
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("primcount", "")
-    )
+    EXT_instanced_arrays reuse "DrawArraysInstancedEXT"
+    EXT_instanced_arrays reuse "DrawElementsInstancedEXT"
 }

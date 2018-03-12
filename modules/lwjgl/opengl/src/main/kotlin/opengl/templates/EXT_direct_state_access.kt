@@ -1183,47 +1183,12 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     commands and queries for multitexture
      */
 
-    DependsOn("OpenGL13")..void(
-        "EnableIndexedEXT",
-        "",
+    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "EnableIndexedEXT")
+    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "DisableIndexedEXT")
+    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "IsEnabledIndexedEXT")
 
-        GLenum.IN("cap", ""),
-        GLuint.IN("index", "")
-    )
-
-    DependsOn("OpenGL13")..void(
-        "DisableIndexedEXT",
-        "",
-
-        GLenum.IN("cap", ""),
-        GLuint.IN("index", "")
-    )
-
-    DependsOn("OpenGL13")..GLboolean(
-        "IsEnabledIndexedEXT",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
-    )
-
-    DependsOn("OpenGL13")..void(
-        "GetIntegerIndexedvEXT",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "")
-    )
-
-    DependsOn("OpenGL13")..void(
-        "GetBooleanIndexedvEXT",
-        "",
-
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        Check(1)..ReturnParam..GLboolean.p.OUT("params", "")
-    )
+    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT")
+    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "GetBooleanIndexedvEXT")
 
     /*
     ARB_vertex_program: New program commands and queries add "Named"
