@@ -75,67 +75,91 @@ val YGValue = struct(Module.YOGA, "YGValue") {
 }
 
 // TODO: Returns struct by value
-val YGMeasureFunc = "YGMeasureFunc".callback(
-    Module.YOGA, uint64_t/*YGSize*/, "YGMeasureFunc",
-    "Use {@link YGMeasureFunc\\#toLong toLong} to create the return value.",
+val YGMeasureFunc = Module.YOGA.callback {
+    uint64_t/*YGSize*/(
+        "YGMeasureFunc",
+        "Use {@link YGMeasureFunc\\#toLong toLong} to create the return value.",
 
-    YGNodeRef.IN("node", ""),
-    float.IN("width", ""),
-    YGMeasureMode.IN("widthMode", ""),
-    float.IN("height", ""),
-    YGMeasureMode.IN("heightMode", "")
-) {
-    javaImport("static java.lang.Float.*")
-    additionalCode = """
+        YGNodeRef.IN("node", ""),
+        float.IN("width", ""),
+        YGMeasureMode.IN("widthMode", ""),
+        float.IN("height", ""),
+        YGMeasureMode.IN("heightMode", ""),
+
+        nativeType = "YGMeasureFunc"
+    ) {
+        javaImport("static java.lang.Float.*")
+        additionalCode = """
     public static long toLong(YGSize size) {
         return floatToRawIntBits(size.width()) | ((long)floatToRawIntBits(size.height()) << 32);
     }
     """
+    }
 }
 
-val YGBaselineFunc = "YGBaselineFunc".callback(
-    Module.YOGA, float, "YGBaselineFunc",
-    "",
+val YGBaselineFunc = Module.YOGA.callback {
+    float(
+        "YGBaselineFunc",
+        "",
 
-    YGNodeRef.IN("node", ""),
-    float.IN("width", ""),
-    float.IN("height", "")
-)
+        YGNodeRef.IN("node", ""),
+        float.IN("width", ""),
+        float.IN("height", ""),
 
-val YGDirtiedFunc = "YGDirtiedFunc".callback(
-    Module.YOGA, void, "YGDirtiedFunc",
-    "",
+        nativeType = "YGBaselineFunc"
+    )
+}
 
-    YGNodeRef.IN("node", "")
-)
+val YGDirtiedFunc = Module.YOGA.callback {
+    void(
+        "YGDirtiedFunc",
+        "",
 
-val YGPrintFunc = "YGPrintFunc".callback(
-    Module.YOGA, void, "YGPrintFunc",
-    "",
+        YGNodeRef.IN("node", ""),
 
-    YGNodeRef.IN("node", "")
-)
+        nativeType = "YGDirtiedFunc"
+    )
+}
 
-val YGLogger = "YGLogger".callback(
-    Module.YOGA, int, "YGLogger",
-    "",
+val YGPrintFunc = Module.YOGA.callback {
+    void(
+        "YGPrintFunc",
+        "",
 
-    YGConfigRef.const.IN("config", ""),
-    YGNodeRef.const.IN("node", ""),
-    YGLogLevel.IN("level", ""),
-    charUTF8.const.p.IN("format", ""),
-    va_list.IN("args", "")
-)
+        YGNodeRef.IN("node", ""),
 
-val YGNodeClonedFunc = "YGNodeClonedFunc".callback(
-    Module.YOGA, void, "YGNodeClonedFunc",
-    "",
+        nativeType = "YGPrintFunc"
+    )
+}
 
-    YGNodeRef.IN("oldNode", ""),
-    YGNodeRef.IN("newNode", ""),
-    YGNodeRef.IN("parent", ""),
-    int.IN("childIndex", "")
-)
+val YGLogger = Module.YOGA.callback {
+    int(
+        "YGLogger",
+        "",
+
+        YGConfigRef.const.IN("config", ""),
+        YGNodeRef.const.IN("node", ""),
+        YGLogLevel.IN("level", ""),
+        charUTF8.const.p.IN("format", ""),
+        va_list.IN("args", ""),
+
+        nativeType = "YGLogger"
+    )
+}
+
+val YGNodeClonedFunc = Module.YOGA.callback {
+    void(
+        "YGNodeClonedFunc",
+        "",
+
+        YGNodeRef.IN("oldNode", ""),
+        YGNodeRef.IN("newNode", ""),
+        YGNodeRef.IN("parent", ""),
+        int.IN("childIndex", ""),
+
+        nativeType = "YGNodeClonedFunc"
+    )
+}
 
 // Internal API, exposed for efficiency.
 

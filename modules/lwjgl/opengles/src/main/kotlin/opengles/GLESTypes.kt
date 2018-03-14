@@ -53,19 +53,23 @@ val GLubyteUTF8 = CharType("GLubyte", CharMapping.UTF8)
 val GLsync = "GLsync".handle
 
 // GLES 3.2
-val GLDEBUGPROC = "GLDEBUGPROC".callback(
-    Module.OPENGLES, void, "GLDebugMessageCallback",
-    "Will be called when a debug message is generated.",
-    GLenum.IN("source", "the message source"),
-    GLenum.IN("type", "the message type"),
-    GLuint.IN("id", "the message ID"),
-    GLenum.IN("severity", "the message severity"),
-    AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-    void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()")
-) {
-    documentation = "Instances of this interface may be passed to the #DebugMessageCallback() method."
-    additionalCode = """
+val GLDEBUGPROC = Module.OPENGLES.callback {
+    void(
+        "GLDebugMessageCallback",
+        "Will be called when a debug message is generated.",
+
+        GLenum.IN("source", "the message source"),
+        GLenum.IN("type", "the message type"),
+        GLuint.IN("id", "the message ID"),
+        GLenum.IN("severity", "the message severity"),
+        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+        void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()"),
+
+        nativeType = "GLDEBUGPROC"
+    ) {
+        documentation = "Instances of this interface may be passed to the #DebugMessageCallback() method."
+        additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageCallback} arguments to a String.
      *
@@ -80,24 +84,29 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
         return memUTF8(memByteBuffer(message, length));
     }
     """
+    }
 }
 
 // EXT_external_buffer
 val GLeglClientBufferEXT = "GLeglClientBufferEXT".handle
 // KHR_debug
-val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
-    Module.OPENGLES, void, "GLDebugMessageKHRCallback",
-    "Will be called when a debug message is generated.",
-    GLenum.IN("source", "the message source"),
-    GLenum.IN("type", "the message type"),
-    GLuint.IN("id", "the message ID"),
-    GLenum.IN("severity", "the message severity"),
-    AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-    GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-    void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()")
-) {
-    documentation = "Instances of this interface may be passed to the #DebugMessageCallbackKHR() method."
-    additionalCode = """
+val GLDEBUGPROCKHR = Module.OPENGLES.callback {
+    void(
+        "GLDebugMessageKHRCallback",
+        "Will be called when a debug message is generated.",
+
+        GLenum.IN("source", "the message source"),
+        GLenum.IN("type", "the message type"),
+        GLuint.IN("id", "the message ID"),
+        GLenum.IN("severity", "the message severity"),
+        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
+        void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()"),
+
+        nativeType = "GLDEBUGPROCKHR"
+    ) {
+        documentation = "Instances of this interface may be passed to the #DebugMessageCallbackKHR() method."
+        additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageKHRCallback} arguments to a String.
      *
@@ -112,6 +121,7 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
         return memUTF8(memByteBuffer(message, length));
     }
     """
+    }
 }
 // OES_EGL_image
 val GLeglImageOES = "GLeglImageOES".handle

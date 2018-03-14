@@ -7,7 +7,8 @@ package core.macos.templates
 import org.lwjgl.generator.*
 import core.macos.*
 
-val ALLOCATOR = nullable..CFAllocatorRef.IN(
+val ALLOCATOR = nullable..Parameter(
+    CFAllocatorRef,
     "allocator",
     "the allocator to use to allocate memory for the new object. Pass #NULL or {@code kCFAllocatorDefault} to use the current default allocator."
 )

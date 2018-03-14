@@ -89,23 +89,6 @@ fun config() {
     })
 }
 
-val memory_map_fn = callback(
-    Module.RPMALLOC, opaque_p, "RPMemoryMapCallback",
-    """
-    Map memory pages for the given number of bytes.
-
-    The returned address MUST be aligned to the rpmalloc span size, which will always be a power of two. Optionally the function can store an alignment
-    offset in the offset variable in case it performs alignment and the returned pointer is offset from the actual start of the memory region due to this
-    alignment. The alignment offset will be passed to the memory unmap function. The alignment offset MUST NOT be larger than 65535 (storable in an
-    {@code uint16_t}), if it is you must use natural alignment to shift it into 16 bits.
-    """,
-
-    size_t.IN("size", "the number of bytes to map"),
-    Check(1)..size_t.p.OUT("offset", "the alignment offset")
-) {
-    documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
-}
-
 val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "rpmalloc_config_t") {
     documentation =
         """
@@ -119,23 +102,42 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         not enabled in the default LWJGL build.
         """
 
-    nullable..memory_map_fn.member("memory_map", "the memory map callback function")
-    nullable..callback(
-        Module.RPMALLOC, void, "RPMemoryUnmapCallback",
-        """
-        Unmap the memory pages starting at address and spanning the given number of bytes.
+    nullable..Module.RPMALLOC.callback {
+        opaque_p(
+            "RPMemoryMapCallback",
+            """
+            Map memory pages for the given number of bytes.
 
-        If release is set to 1, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range should be
-        released. If release is set to 0, the unmap is a partial decommit of a subset of the mapped memory range.
-        """,
+            The returned address MUST be aligned to the rpmalloc span size, which will always be a power of two. Optionally the function can store an alignment
+            offset in the offset variable in case it performs alignment and the returned pointer is offset from the actual start of the memory region due to this
+            alignment. The alignment offset will be passed to the memory unmap function. The alignment offset MUST NOT be larger than 65535 (storable in an
+            {@code uint16_t}), if it is you must use natural alignment to shift it into 16 bits.
+            """,
 
-        //void* address, size_t size, size_t offset, int release
-        opaque_p.IN("address", "the address to unmap"),
-        size_t.IN("size", "the size of the mapped pages, in bytes"),
-        size_t.IN("offset", "the alignment offset"),
-        intb.IN("release", "the release flag")
-    ) {
-        documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+            size_t.IN("size", "the number of bytes to map"),
+            Check(1)..size_t.p.OUT("offset", "the alignment offset")
+        ) {
+            documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+        }
+    }.member("memory_map", "the memory map callback function")
+    nullable..Module.RPMALLOC.callback {
+        void(
+            "RPMemoryUnmapCallback",
+            """
+            Unmap the memory pages starting at address and spanning the given number of bytes.
+
+            If release is set to 1, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range should be
+            released. If release is set to 0, the unmap is a partial decommit of a subset of the mapped memory range.
+            """,
+
+            //void* address, size_t size, size_t offset, int release
+            opaque_p.IN("address", "the address to unmap"),
+            size_t.IN("size", "the size of the mapped pages, in bytes"),
+            size_t.IN("offset", "the alignment offset"),
+            intb.IN("release", "the release flag")
+        ) {
+            documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+        }
     }.member("memory_unmap", "the memory unmap callback function")
 	size_t.member(
         "page_size",
@@ -163,13 +165,15 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         actually used, so physical committed memory should not be affected in the default implementation.
         """
     )
-    nullable..callback(
-        Module.RPMALLOC, void, "RPMemoryOverwriteCallback",
-        "Debug callback if memory guards are enabled. Called if a memory overwrite is detected before or after the allocated memory block.",
+    nullable..Module.RPMALLOC.callback {
+        void(
+            "RPMemoryOverwriteCallback",
+            "Debug callback if memory guards are enabled. Called if a memory overwrite is detected before or after the allocated memory block.",
 
-        opaque_p.IN("address", "the allocated block around which memory overwrite was detected")
-    ) {
-        documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+            opaque_p.IN("address", "the allocated block around which memory overwrite was detected")
+        ) {
+            documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+        }
     }.member("memory_overwrite", "the memory overwrite callback function")
 }
 

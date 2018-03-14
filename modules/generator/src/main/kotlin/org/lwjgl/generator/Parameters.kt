@@ -65,13 +65,14 @@ class Parameter(
     val documentation: (() -> String)?
 ) : ModifierTarget<ParameterModifier>(), QualifiedType {
 
+    constructor(nativeType: NativeType, name: String, javadoc: String) : this(nativeType, name, IN, javadoc)
     constructor(
         nativeType: NativeType,
         name: String,
         paramType: ParameterType,
         javadoc: String,
-        links: String,
-        linkMode: LinkMode
+        links: String = "",
+        linkMode: LinkMode = LinkMode.SINGLE
     ) : this(nativeType, name, paramType, if (javadoc.isNotEmpty() || links.isNotEmpty()) {
         val documentation: (() -> String)? = { if (links.isEmpty()) javadoc else linkMode.appendLinks(javadoc, links) }
         documentation

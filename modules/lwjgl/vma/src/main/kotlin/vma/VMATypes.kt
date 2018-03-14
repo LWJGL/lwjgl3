@@ -90,28 +90,36 @@ val VmaAllocationCreateFlags = "VmaAllocationCreateFlags".enumType
 val VmaMemoryUsage = "VmaMemoryUsage".enumType
 val VmaPoolCreateFlags = "VmaPoolCreateFlags".enumType
 
-val PFN_vmaAllocateDeviceMemoryFunction = "PFN_vmaAllocateDeviceMemoryFunction".callback(
-    Module.VMA, void, "VmaAllocateDeviceMemoryFunction",
-    "Called after successful {@code vkAllocateMemory}.",
+val PFN_vmaAllocateDeviceMemoryFunction = Module.VMA.callback {
+    void(
+        "VmaAllocateDeviceMemoryFunction",
+        "Called after successful {@code vkAllocateMemory}.",
 
-    VmaAllocator.IN("allocator", ""),
-    uint32_t.IN("memoryType", ""),
-    VkDeviceMemory.IN("memory", ""),
-    VkDeviceSize.IN("size", "")
-) {
-    documentation = "Instances of this interface may be set to the ##VmaDeviceMemoryCallbacks struct."
+        VmaAllocator.IN("allocator", ""),
+        uint32_t.IN("memoryType", ""),
+        VkDeviceMemory.IN("memory", ""),
+        VkDeviceSize.IN("size", ""),
+
+        nativeType = "PFN_vmaAllocateDeviceMemoryFunction"
+    ) {
+        documentation = "Instances of this interface may be set to the ##VmaDeviceMemoryCallbacks struct."
+    }
 }
 
-val PFN_vmaFreeDeviceMemoryFunction = "PFN_vmaFreeDeviceMemoryFunction".callback(
-    Module.VMA, void, "VmaFreeDeviceMemoryFunction",
-    "Called before {@code vkFreeMemory}.",
+val PFN_vmaFreeDeviceMemoryFunction = Module.VMA.callback {
+    void(
+        "VmaFreeDeviceMemoryFunction",
+        "Called before {@code vkFreeMemory}.",
 
-    VmaAllocator.IN("allocator", ""),
-    uint32_t.IN("memoryType", ""),
-    VkDeviceMemory.IN("memory", ""),
-    VkDeviceSize.IN("size", "")
-) {
-    documentation = "Instances of this interface may be set to the ##VmaDeviceMemoryCallbacks struct."
+        VmaAllocator.IN("allocator", ""),
+        uint32_t.IN("memoryType", ""),
+        VkDeviceMemory.IN("memory", ""),
+        VkDeviceSize.IN("size", ""),
+
+        nativeType = "PFN_vmaFreeDeviceMemoryFunction"
+    ) {
+        documentation = "Instances of this interface may be set to the ##VmaDeviceMemoryCallbacks struct."
+    }
 }
 
 val VmaDeviceMemoryCallbacks = struct(Module.VMA, "VmaDeviceMemoryCallbacks") {

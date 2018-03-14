@@ -103,15 +103,16 @@ fun config() {
     })
 }
 
-val write_cb = callback(
-    Module.JEMALLOC, void, "MallocMessageCallback",
-    "Will be called by the #malloc_usable_size() method.",
+val write_cb = Module.JEMALLOC.callback {
+    void(
+        "MallocMessageCallback",
+        "Will be called by the #malloc_usable_size() method.",
 
-    void.p.IN("cbopaque", "the opaque pointer passed to #malloc_usable_size()"),
-    NullTerminated..charASCII.const.p.IN("s", "the message")
-) {
-    documentation = "Instances of this interface may be passed to the #malloc_usable_size() method."
-    additionalCode = """
+        void.p.IN("cbopaque", "the opaque pointer passed to #malloc_usable_size()"),
+        NullTerminated..charASCII.const.p.IN("s", "the message")
+    ) {
+        documentation = "Instances of this interface may be passed to the #malloc_usable_size() method."
+        additionalCode = """
     /**
      * Converts the specified {@link MallocMessageCallback} arguments to a String.
      *
@@ -125,183 +126,215 @@ val write_cb = callback(
         return memASCII(s);
     }
     """
+    }
 }
 
 private val extent_hooks_t_p = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t").p
 
-val extent_alloc_t = "extent_alloc_t".callback(
-    Module.JEMALLOC, void.p, "ExtentAlloc",
-    """
-    Extent allocation hook.
+val extent_alloc_t = Module.JEMALLOC.callback {
+    void.p(
+        "ExtentAlloc",
+        """
+        Extent allocation hook.
 
-    An extent allocation function conforms to the {@code extent_alloc_t} type and upon success returns a pointer to {@code size} bytes of mapped memory on
-    behalf of arena {@code arena_ind} such that the extent's base address is a multiple of {@code alignment}, as well as setting {@code *zero} to indicate
-    whether the extent is zeroed and {@code *commit} to indicate whether the extent is committed. Upon error the function returns #NULL and leaves
-    {@code *zero} and {@code *commit} unmodified. The {@code size} parameter is always a multiple of the page size. The {@code alignment} parameter is always a
-    power of two at least as large as the page size. Zeroing is mandatory if {@code *zero} is true upon function entry. Committing is mandatory if
-    {@code *commit} is true upon function entry. If {@code new_addr} is not #NULL, the returned pointer must be {@code new_addr} on success or #NULL on error.
-    Committed memory may be committed in absolute terms as on a system that does not overcommit, or in implicit terms as on a system that overcommits and
-    satisfies physical memory needs on demand via soft page faults. Note that replacing the default extent allocation function makes the arena's
-    {@code arena.i.dss} setting irrelevant.
-    """,
+        An extent allocation function conforms to the {@code extent_alloc_t} type and upon success returns a pointer to {@code size} bytes of mapped memory on
+        behalf of arena {@code arena_ind} such that the extent's base address is a multiple of {@code alignment}, as well as setting {@code *zero} to indicate
+        whether the extent is zeroed and {@code *commit} to indicate whether the extent is committed. Upon error the function returns #NULL and leaves
+        {@code *zero} and {@code *commit} unmodified. The {@code size} parameter is always a multiple of the page size. The {@code alignment} parameter is always a
+        power of two at least as large as the page size. Zeroing is mandatory if {@code *zero} is true upon function entry. Committing is mandatory if
+        {@code *commit} is true upon function entry. If {@code new_addr} is not #NULL, the returned pointer must be {@code new_addr} on success or #NULL on error.
+        Committed memory may be committed in absolute terms as on a system that does not overcommit, or in implicit terms as on a system that overcommits and
+        satisfies physical memory needs on demand via soft page faults. Note that replacing the default extent allocation function makes the arena's
+        {@code arena.i.dss} setting irrelevant.
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    nullable..void.p.IN("new_addr", ""),
-    size_t.IN("size", ""),
-    size_t.IN("alignment", ""),
-    Check(1)..bool.p.INOUT("zero", ""),
-    Check(1)..bool.p.INOUT("commit", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        nullable..void.p.IN("new_addr", ""),
+        size_t.IN("size", ""),
+        size_t.IN("alignment", ""),
+        Check(1)..bool.p.INOUT("zero", ""),
+        Check(1)..bool.p.INOUT("commit", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_alloc_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
-val extent_dalloc_t = "extent_dalloc_t".callback(
-    Module.JEMALLOC, bool, "ExtentDalloc",
-    """
-    Extent deallocation hook.
+val extent_dalloc_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentDalloc",
+        """
+        Extent deallocation hook.
 
-    An extent deallocation function conforms to the {@code extent_dalloc_t} type and deallocates an extent at given {@code addr} and {@code size} with
-    {@code committed}/decommited memory as indicated, on behalf of arena {@code arena_ind}, returning false upon success. If the function returns true, this
-    indicates opt-out from deallocation; the virtual memory mapping associated with the extent remains mapped, in the same commit state, and available for
-    future use, in which case it will be automatically retained for later reuse.
-    """,
+        An extent deallocation function conforms to the {@code extent_dalloc_t} type and deallocates an extent at given {@code addr} and {@code size} with
+        {@code committed}/decommited memory as indicated, on behalf of arena {@code arena_ind}, returning false upon success. If the function returns true, this
+        indicates opt-out from deallocation; the virtual memory mapping associated with the extent remains mapped, in the same commit state, and available for
+        future use, in which case it will be automatically retained for later reuse.
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr", ""),
-    AutoSize("addr")..size_t.IN("size", ""),
-    bool.IN("committed", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr", ""),
+        AutoSize("addr")..size_t.IN("size", ""),
+        bool.IN("committed", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_dalloc_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
-val extent_destroy_t = "extent_destroy_t".callback(
-    Module.JEMALLOC, bool, "ExtentDestroy",
-    """
-    Extent destruction hook.
+val extent_destroy_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentDestroy",
+        """
+        Extent destruction hook.
 
-    An extent destruction function conforms to the {@code extent_destroy_t} type and unconditionally destroys an extent at given {@code addr} and {@code size}
-    with {@code committed}/decommited memory as indicated, on behalf of arena {@code arena_ind}. This function may be called to destroy retained extents during
-    arena destruction (see {@code arena.i.destroy}).
-    """,
+        An extent destruction function conforms to the {@code extent_destroy_t} type and unconditionally destroys an extent at given {@code addr} and {@code size}
+        with {@code committed}/decommited memory as indicated, on behalf of arena {@code arena_ind}. This function may be called to destroy retained extents during
+        arena destruction (see {@code arena.i.destroy}).
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr", ""),
-    AutoSize("addr")..size_t.IN("size", ""),
-    bool.IN("committed", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr", ""),
+        AutoSize("addr")..size_t.IN("size", ""),
+        bool.IN("committed", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_destroy_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
-val extent_commit_t = "extent_commit_t".callback(
-    Module.JEMALLOC, bool, "ExtentCommit",
-    """
-    Extent commit hook.
+val extent_commit_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentCommit",
+        """
+        Extent commit hook.
 
-    An extent commit function conforms to the {@code extent_commit_t} type and commits zeroed physical memory to back pages within an extent at given
-    {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}, returning false upon success.
-    Committed memory may be committed in absolute terms as on a system that does not overcommit, or in implicit terms as on a system that overcommits and
-    satisfies physical memory needs on demand via soft page faults. If the function returns true, this indicates insufficient physical memory to satisfy the
-    request.
-    """,
+        An extent commit function conforms to the {@code extent_commit_t} type and commits zeroed physical memory to back pages within an extent at given
+        {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}, returning false upon success.
+        Committed memory may be committed in absolute terms as on a system that does not overcommit, or in implicit terms as on a system that overcommits and
+        satisfies physical memory needs on demand via soft page faults. If the function returns true, this indicates insufficient physical memory to satisfy the
+        request.
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr", ""),
-    AutoSize("addr")..size_t.IN("size", ""),
-    size_t.IN("offset", ""),
-    size_t.IN("length", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr", ""),
+        AutoSize("addr")..size_t.IN("size", ""),
+        size_t.IN("offset", ""),
+        size_t.IN("length", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_commit_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
-val extent_decommit_t = "extent_decommit_t".callback(
-    Module.JEMALLOC, bool, "ExtentDecommit",
-    """
-    Extent decommit hook.
+val extent_decommit_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentDecommit",
+        """
+        Extent decommit hook.
 
-    An extent decommit function conforms to the {@code extent_decommit_t} type and decommits any physical memory that is backing pages within an extent at
-    given {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}, returning false upon
-    success, in which case the pages will be committed via the extent commit function before being reused.  If the function returns true, this indicates
-    opt-out from decommit; the memory remains committed and available for future use, in which case it will be automatically retained for later reuse.
-    """,
+        An extent decommit function conforms to the {@code extent_decommit_t} type and decommits any physical memory that is backing pages within an extent at
+        given {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}, returning false upon
+        success, in which case the pages will be committed via the extent commit function before being reused.  If the function returns true, this indicates
+        opt-out from decommit; the memory remains committed and available for future use, in which case it will be automatically retained for later reuse.
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr", ""),
-    AutoSize("addr")..size_t.IN("size", ""),
-    size_t.IN("offset", ""),
-    size_t.IN("length", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr", ""),
+        AutoSize("addr")..size_t.IN("size", ""),
+        size_t.IN("offset", ""),
+        size_t.IN("length", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_decommit_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
+}
+val extent_purge_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentPurge",
+        """
+        Extent purge hook.
+
+        An extent purge function conforms to the {@code extent_purge_t} type and discards physical pages within the virtual memory mapping associated with an
+        extent at given {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}. A lazy extent
+        purge function (e.g. implemented via {@code madvise(..., MADV_FREE)}) can delay purging indefinitely and leave the pages within the purged virtual memory
+        range in an indeterminite state, whereas a forced extent purge function immediately purges, and the pages within the virtual memory range will be
+        zero-filled the next time they are accessed. If the function returns true, this indicates failure to purge.
+        """,
+
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr", ""),
+        AutoSize("addr")..size_t.IN("size", ""),
+        size_t.IN("offset", ""),
+        size_t.IN("length", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_purge_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
-val extent_purge_t = "extent_purge_t".callback(
-    Module.JEMALLOC, bool, "ExtentPurge",
-    """
-    Extent purge hook.
+val extent_split_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentSplit",
+        """
+        Extent split hook.
 
-    An extent purge function conforms to the {@code extent_purge_t} type and discards physical pages within the virtual memory mapping associated with an
-    extent at given {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}. A lazy extent
-    purge function (e.g. implemented via {@code madvise(..., MADV_FREE)}) can delay purging indefinitely and leave the pages within the purged virtual memory
-    range in an indeterminite state, whereas a forced extent purge function immediately purges, and the pages within the virtual memory range will be
-    zero-filled the next time they are accessed. If the function returns true, this indicates failure to purge.
-    """,
+        An extent split function conforms to the {@code extent_split_t} type and optionally splits an extent at given {@code addr} and {@code size} into two
+        adjacent extents, the first of {@code size_a} bytes, and the second of {@code size_b} bytes, operating on {@code committed}/decommitted memory as
+        indicated, on behalf of arena {@code arena_ind}, returning false upon success. If the function returns true, this indicates that the extent remains unsplit
+        and therefore should continue to be operated on as a whole.
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr", ""),
-    AutoSize("addr")..size_t.IN("size", ""),
-    size_t.IN("offset", ""),
-    size_t.IN("length", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr", ""),
+        AutoSize("addr")..size_t.IN("size", ""),
+        size_t.IN("size_a", ""),
+        size_t.IN("size_b", ""),
+        bool.IN("committed", ""),
+        unsigned_int.IN("arena_ind", ""),
+
+        nativeType = "extent_split_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
-val extent_split_t = "extent_split_t".callback(
-    Module.JEMALLOC, bool, "ExtentSplit",
-    """
-    Extent split hook.
+val extent_merge_t = Module.JEMALLOC.callback {
+    bool(
+        "ExtentMerge",
+        """
+        Extent merge hook.
 
-    An extent split function conforms to the {@code extent_split_t} type and optionally splits an extent at given {@code addr} and {@code size} into two
-    adjacent extents, the first of {@code size_a} bytes, and the second of {@code size_b} bytes, operating on {@code committed}/decommitted memory as
-    indicated, on behalf of arena {@code arena_ind}, returning false upon success. If the function returns true, this indicates that the extent remains unsplit
-    and therefore should continue to be operated on as a whole.
-    """,
+        An extent merge function conforms to the {@code extent_merge_t} type and optionally merges adjacent extents, at given {@code addr_a} and {@code size_a}
+        with given {@code addr_b} and {@code size_b} into one contiguous extent, operating on {@code committed}/decommitted memory as indicated, on behalf of arena
+        {@code arena_ind}, returning false upon success. If the function returns true, this indicates that the extents remain distinct mappings and therefore
+        should continue to be operated on independently.
+        """,
 
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr", ""),
-    AutoSize("addr")..size_t.IN("size", ""),
-    size_t.IN("size_a", ""),
-    size_t.IN("size_b", ""),
-    bool.IN("committed", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
-}
+        extent_hooks_t_p.IN("extent_hooks", ""),
+        void.p.IN("addr_a", ""),
+        AutoSize("addr_a")..size_t.IN("size_a", ""),
+        void.p.IN("addr_b", ""),
+        AutoSize("addr_b")..size_t.IN("size_b", ""),
+        bool.IN("committed", ""),
+        unsigned_int.IN("arena_ind", ""),
 
-val extent_merge_t = "extent_merge_t".callback(
-    Module.JEMALLOC, bool, "ExtentMerge",
-    """
-    Extent merge hook.
-
-    An extent merge function conforms to the {@code extent_merge_t} type and optionally merges adjacent extents, at given {@code addr_a} and {@code size_a}
-    with given {@code addr_b} and {@code size_b} into one contiguous extent, operating on {@code committed}/decommitted memory as indicated, on behalf of arena
-    {@code arena_ind}, returning false upon success. If the function returns true, this indicates that the extents remain distinct mappings and therefore
-    should continue to be operated on independently.
-    """,
-
-    extent_hooks_t_p.IN("extent_hooks", ""),
-    void.p.IN("addr_a", ""),
-    AutoSize("addr_a")..size_t.IN("size_a", ""),
-    void.p.IN("addr_b", ""),
-    AutoSize("addr_b")..size_t.IN("size_b", ""),
-    bool.IN("committed", ""),
-    unsigned_int.IN("arena_ind", "")
-) {
-    documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+        nativeType = "extent_merge_t"
+    ) {
+        documentation = "Instances of this interface may be set to the ##ExtentHooks struct."
+    }
 }
 
 val extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t") {

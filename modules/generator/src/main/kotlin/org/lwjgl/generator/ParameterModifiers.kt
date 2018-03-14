@@ -56,27 +56,6 @@ class AutoSizeFactor(
         "$operand $operatorInv $expression"
 }
 
-/** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
-fun AutoSize(div: Int, reference: String, vararg dependent: String) =
-    when {
-        div < 1                    -> throw IllegalArgumentException()
-        div == 1                   -> AutoSize(reference, *dependent)
-        Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent)
-        else                       -> AutoSizeDiv(div.toString(), reference, dependent = *dependent)
-    }
-
-fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
-    AutoSize(reference, *dependent, factor = AutoSizeFactor.div(expression))
-
-fun AutoSizeMul(expression: String, reference: String, vararg dependent: String) =
-    AutoSize(reference, *dependent, factor = AutoSizeFactor.mul(expression))
-
-fun AutoSizeShr(expression: String, reference: String, vararg dependent: String) =
-    AutoSize(reference, *dependent, factor = AutoSizeFactor.shr(expression))
-
-fun AutoSizeShl(expression: String, reference: String, vararg dependent: String) =
-    AutoSize(reference, *dependent, factor = AutoSizeFactor.shl(expression))
-
 class AutoSize(
     override val reference: String,
     vararg val dependent: String,

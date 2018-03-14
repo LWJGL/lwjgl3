@@ -217,43 +217,10 @@ ${signature.asSequence().map {
 
 }
 
-private class CallbackInterface(
+internal class CallbackInterface(
     val callback: CallbackFunction
 ) : GeneratorTarget(callback.module, "${callback.className}I") {
     override fun PrintWriter.generateJava() = callback.run {
         this@generateJava.generateInterface()
     }
-}
-
-// anonymous callback type
-fun callback(
-    module: Module,
-    returns: NativeType,
-    className: String,
-    functionDoc: String,
-    vararg signature: Parameter,
-    returnDoc: String = "",
-    see: Array<String>? = null,
-    since: String = "",
-    init: (CallbackFunction.() -> Unit)? = null
-) = ANONYMOUS.callback(module, returns, className, functionDoc, *signature, returnDoc = returnDoc, see = see, since = since, init = init)
-
-fun String.callback(
-    module: Module,
-    returns: NativeType,
-    className: String,
-    functionDoc: String,
-    vararg signature: Parameter,
-    returnDoc: String = "",
-    see: Array<String>? = null,
-    since: String = "",
-    init: (CallbackFunction.() -> Unit)? = null
-): CallbackType {
-    val callback = CallbackFunction(module, className, this, returns, *signature)
-    if (init != null)
-        callback.init()
-    callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
-    Generator.register(callback)
-    Generator.register(CallbackInterface(callback))
-    return CallbackType(callback)
 }

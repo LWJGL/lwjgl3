@@ -1917,6 +1917,31 @@ EXTERN_C_EXIT""")
         return index
     }
 
+    fun AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+        AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+
+    fun AutoSize(div: Int, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+        when {
+            div < 1                    -> throw IllegalArgumentException()
+            div == 1                   -> AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+            Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+            else                       -> AutoSizeDiv(div.toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+        }
+
+    fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+        AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.div(expression), optional = optional, atLeastOne = atLeastOne)
+
+    fun AutoSizeMul(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+        AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.mul(expression), optional = optional, atLeastOne = atLeastOne)
+
+    fun AutoSizeShr(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+        AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shr(expression), optional = optional, atLeastOne = atLeastOne)
+
+    fun AutoSizeShl(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+        AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shl(expression), optional = optional, atLeastOne = atLeastOne)
+
+    /** Marks a pointer member as nullable. */
+    val nullable get() = NullableMember
 }
 
 fun struct(
@@ -1956,21 +1981,3 @@ fun union(
     }
     return struct.nativeType
 }
-
-// Hack that allows use of function modifiers that alias with struct modifiers, inside struct definitions
-object GSCOPE
-
-fun <T> global(block: GSCOPE.() -> T) = GSCOPE.block()
-
-val GSCOPE.nullable get() = org.lwjgl.generator.nullable
-fun GSCOPE.AutoSize(div: Int, reference: String, vararg dependent: String) = org.lwjgl.generator.AutoSize(div, reference, *dependent)
-fun GSCOPE.AutoSize(reference: String, vararg dependent: String, factor: AutoSizeFactor? = null) =
-    org.lwjgl.generator.AutoSize(reference, *dependent, factor = factor)
-fun GSCOPE.AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
-    org.lwjgl.generator.AutoSizeDiv(expression, reference, *dependent)
-fun GSCOPE.AutoSizeMul(expression: String, reference: String, vararg dependent: String) =
-    org.lwjgl.generator.AutoSizeMul(expression, reference, *dependent)
-fun GSCOPE.AutoSizeShr(expression: String, reference: String, vararg dependent: String) =
-    org.lwjgl.generator.AutoSizeShr(expression, reference, *dependent)
-fun GSCOPE.AutoSizeShl(expression: String, reference: String, vararg dependent: String) =
-    org.lwjgl.generator.AutoSizeShl(expression, reference, *dependent)

@@ -953,67 +953,95 @@ val aiImporterDesc = struct(Module.ASSIMP, "AIImporterDesc", nativeName = "struc
 private val aiFile_p = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile").p
 private val aiFileIO_p = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO").p
 
-val aiFileWriteProc = "aiFileWriteProc".callback(
-    Module.ASSIMP, size_t, "AIFileWriteProc",
-    "File write procedure.",
+val aiFileWriteProc = Module.ASSIMP.callback {
+    size_t(
+        "AIFileWriteProc",
+        "File write procedure.",
 
-    aiFile_p.IN("pFile", "File pointer to write to"),
-    char.const.p.IN("pBuffer", "The buffer to be written"),
-    size_t.IN("memB", "Size of the individual element to be written"),
-    size_t.IN("count", "Number of elements to be written")
-)
+        aiFile_p.IN("pFile", "File pointer to write to"),
+        char.const.p.IN("pBuffer", "The buffer to be written"),
+        size_t.IN("memB", "Size of the individual element to be written"),
+        size_t.IN("count", "Number of elements to be written"),
 
-val aiFileReadProc = "aiFileReadProc".callback(
-    Module.ASSIMP, size_t, "AIFileReadProc",
-    "File read procedure",
+        nativeType = "aiFileWriteProc"
+    )
+}
 
-    aiFile_p.IN("pFile", "File pointer to read from"),
-    char.p.IN("pBuffer", "The buffer to read the values"),
-    size_t.IN("size", "Size in bytes of each element to be read"),
-    size_t.IN("count", "Number of elements to be read")
-)
+val aiFileReadProc = Module.ASSIMP.callback {
+    size_t(
+        "AIFileReadProc",
+        "File read procedure",
 
-val aiFileTellProc = "aiFileTellProc".callback(
-    Module.ASSIMP, size_t, "AIFileTellProc",
-    "File tell procedure.",
+        aiFile_p.IN("pFile", "File pointer to read from"),
+        char.p.IN("pBuffer", "The buffer to read the values"),
+        size_t.IN("size", "Size in bytes of each element to be read"),
+        size_t.IN("count", "Number of elements to be read"),
 
-    aiFile_p.IN("pFile", "File pointer to find ftell() on")
-)
+        nativeType = "aiFileReadProc"
+    )
+}
 
-val aiFileFlushProc = "aiFileFlushProc".callback(
-    Module.ASSIMP, void, "AIFileFlushProc",
-    "File flush procedure.",
+val aiFileTellProc = Module.ASSIMP.callback {
+    size_t(
+        "AIFileTellProc",
+        "File tell procedure.",
 
-    aiFile_p.IN("pFile", "File pointer to flush")
-)
+        aiFile_p.IN("pFile", "File pointer to find ftell() on"),
+
+        nativeType = "aiFileTellProc"
+    )
+}
+
+val aiFileFlushProc = Module.ASSIMP.callback {
+    void(
+        "AIFileFlushProc",
+        "File flush procedure.",
+
+        aiFile_p.IN("pFile", "File pointer to flush"),
+
+        nativeType = "aiFileFlushProc"
+    )
+}
 
 val aiOrigin = "aiOrigin".enumType
 
-val aiFileSeek = "aiFileSeek".callback(
-    Module.ASSIMP, aiReturn, "AIFileSeek",
-    "File seek procedure",
+val aiFileSeek = Module.ASSIMP.callback {
+    aiReturn(
+        "AIFileSeek",
+        "File seek procedure",
 
-    aiFile_p.IN("pFile", "File pointer to seek to"),
-    size_t.IN("offset", "Number of bytes to shift from origin"),
-    aiOrigin.IN("origin", "Position used as reference for the offset.")
-)
+        aiFile_p.IN("pFile", "File pointer to seek to"),
+        size_t.IN("offset", "Number of bytes to shift from origin"),
+        aiOrigin.IN("origin", "Position used as reference for the offset."),
 
-val aiFileOpenProc = "aiFileOpenProc".callback(
-    Module.ASSIMP, aiFile_p, "AIFileOpenProc",
-    "File open procedure",
+        nativeType = "aiFileSeek"
+    )
+}
 
-    aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
-    charUTF8.const.p.IN("fileName", "The name of the file to be opened"),
-    charUTF8.const.p.IN("openMode", "The mode in which to open the file")
-)
+val aiFileOpenProc = Module.ASSIMP.callback {
+    aiFile_p(
+        "AIFileOpenProc",
+        "File open procedure",
 
-val aiFileCloseProc = "aiFileCloseProc".callback(
-    Module.ASSIMP, void, "AIFileCloseProc",
-    "File close procedure",
+        aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
+        charUTF8.const.p.IN("fileName", "The name of the file to be opened"),
+        charUTF8.const.p.IN("openMode", "The mode in which to open the file"),
 
-    aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
-    aiFile_p.IN("pFile", "File pointer to close")
-)
+        nativeType = "aiFileOpenProc"
+    )
+}
+
+val aiFileCloseProc = Module.ASSIMP.callback {
+    void(
+        "AIFileCloseProc",
+        "File close procedure",
+
+        aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
+        aiFile_p.IN("pFile", "File pointer to close"),
+
+        nativeType = "aiFileCloseProc"
+    )
+}
 
 val aiUserData = typedef(opaque_p, "aiUserData")
 
@@ -1046,13 +1074,17 @@ val aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile") {
     aiUserData.member("UserData", "User-defined, opaque data")
 }
 
-val aiLogStreamCallback = "aiLogStreamCallback".callback(
-    Module.ASSIMP, void, "AILogStreamCallback",
-    "Callback to be called for log stream messages",
+val aiLogStreamCallback = Module.ASSIMP.callback {
+    void(
+        "AILogStreamCallback",
+        "Callback to be called for log stream messages",
 
-    charUTF8.const.p.IN("message", "The message to be logged"),
-    opaque_p.IN("user", "The user data from the log stream")
-)
+        charUTF8.const.p.IN("message", "The message to be logged"),
+        opaque_p.IN("user", "The user data from the log stream"),
+
+        nativeType = "aiLogStreamCallback"
+    )
+}
 
 val aiLogStream = struct(Module.ASSIMP, "AILogStream", nativeName = "struct aiLogStream") {
     documentation = "Represents a log stream. A log stream receives all log messages and streams them somewhere"

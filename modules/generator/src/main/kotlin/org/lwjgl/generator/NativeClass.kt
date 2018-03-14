@@ -657,6 +657,91 @@ class NativeClass internal constructor(
     fun String.enum(documentation: String, expression: String) =
         Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
+    fun DataType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.IN, javadoc, links, linkMode)
+    fun PointerType<*>.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
+    fun <T : DataType> PointerType<T>.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
+        createParameter(name, ParameterType.INOUT, javadoc, links, linkMode)
+
+    private fun NativeType.createParameter(
+        name: String,
+        paramType: ParameterType,
+        javadoc: String,
+        links: String,
+        linkMode: LinkMode = LinkMode.SINGLE
+    ) = if (links.isEmpty() || !links.contains('+'))
+        Parameter(this, name, paramType, javadoc, links, linkMode)
+    else
+        Parameter(this, name, paramType) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
+
+    operator fun VoidType.invoke(
+        className: String,
+        functionDoc: String,
+        vararg signature: Parameter,
+        nativeType: String = ANONYMOUS,
+        returnDoc: String = "",
+        see: Array<String>? = null,
+        since: String = "",
+        init: (CallbackFunction.() -> Unit)? = null
+    ) = createCallback(this, nativeType, className, functionDoc, returnDoc, see, since, init, *signature)
+
+    operator fun DataType.invoke(
+        className: String,
+        functionDoc: String,
+        vararg signature: Parameter,
+        nativeType: String = ANONYMOUS,
+        returnDoc: String = "",
+        see: Array<String>? = null,
+        since: String = "",
+        init: (CallbackFunction.() -> Unit)? = null
+    ) = createCallback(this, nativeType, className, functionDoc, returnDoc, see, since, init, *signature)
+
+    private fun createCallback(
+        returns: NativeType,
+        nativeType: String,
+        className: String,
+        functionDoc: String,
+        returnDoc: String,
+        see: Array<String>?,
+        since: String,
+        init: (CallbackFunction.() -> Unit)?,
+        vararg signature: Parameter
+    ): CallbackType {
+        val callback = CallbackFunction(this@NativeClass.module, className, nativeType, returns, *signature)
+        if (init != null)
+            callback.init()
+        callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
+        Generator.register(callback)
+        Generator.register(CallbackInterface(callback))
+        return CallbackType(callback)
+    }
+
+    fun AutoSize(reference: String, vararg dependent: String, factor: AutoSizeFactor? = null) =
+        org.lwjgl.generator.AutoSize(reference, *dependent, factor = factor)
+
+    /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
+    fun AutoSize(div: Int, reference: String, vararg dependent: String) =
+        when {
+            div < 1                    -> throw IllegalArgumentException()
+            div == 1                   -> AutoSize(reference, *dependent)
+            Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent)
+            else                       -> AutoSizeDiv(div.toString(), reference, dependent = *dependent)
+        }
+
+    fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
+        AutoSize(reference, *dependent, factor = AutoSizeFactor.div(expression))
+
+    fun AutoSizeMul(expression: String, reference: String, vararg dependent: String) =
+        AutoSize(reference, *dependent, factor = AutoSizeFactor.mul(expression))
+
+    fun AutoSizeShr(expression: String, reference: String, vararg dependent: String) =
+        AutoSize(reference, *dependent, factor = AutoSizeFactor.shr(expression))
+
+    fun AutoSizeShl(expression: String, reference: String, vararg dependent: String) =
+        AutoSize(reference, *dependent, factor = AutoSizeFactor.shl(expression))
+
+    /** Marks a pointer parameter as nullable. */
+    val nullable get() = org.lwjgl.generator.nullable
+
     operator fun VoidType.invoke(
         name: String,
         documentation: String,

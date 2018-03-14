@@ -37,9 +37,9 @@ const val FUNCTION_ADDRESS = "__functionAddress"
 internal const val JNIENV = "__env"
 
 /** Special parameter that generates an explicit function address parameter. */
-val EXPLICIT_FUNCTION_ADDRESS = opaque_p.IN(FUNCTION_ADDRESS, "the function address")
+val EXPLICIT_FUNCTION_ADDRESS = Parameter(opaque_p, FUNCTION_ADDRESS, "the function address")
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
-val JNI_ENV = "JNIEnv".opaque.p.IN(JNIENV, "the JNI environment struct")
+val JNI_ENV = Parameter("JNIEnv".opaque.p, JNIENV, "the JNI environment struct")
 
 private val TRY_FINALLY_ALIGN = "^(\\s+)".toRegex(RegexOption.MULTILINE)
 
@@ -47,12 +47,6 @@ enum class GenerationMode {
     NORMAL,
     ALTERNATIVE
 }
-
-// DSL extensions
-
-fun DataType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, IN, javadoc, links, linkMode)
-fun PointerType<*>.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, OUT, javadoc, links, linkMode)
-fun <T : DataType> PointerType<T>.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, INOUT, javadoc, links, linkMode)
 
 // --- [ Native class functions ] ---
 
@@ -319,7 +313,7 @@ class Func(
                         }
 
                         if (bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16)
-                            it.replaceModifier(AutoSize(2, autoSize.reference, *autoSize.dependent))
+                            it.replaceModifier(nativeClass.AutoSize(2, autoSize.reference, *autoSize.dependent))
                     }
                 }
             }

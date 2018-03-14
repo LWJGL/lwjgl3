@@ -43,17 +43,21 @@ ENABLE_WARNINGS()""")
 val stbi_uc = typedef(unsigned_char, "stbi_uc")
 val stbi_us = typedef(unsigned_short, "stbi_us")
 
-val stbi_io_callbacks_read = callback(
-    Module.STB, int, "STBIReadCallback",
-    "The {@code stbi_io_callbacks.read} callback.",
-    void.p.IN("user", "a pointer to user data"),
-    char.p.IN("data", "the data buffer to fill"),
-    AutoSize("data")..int.IN("size", "the number of bytes to read"),
-    returnDoc = "the number of bytes actually read"
-) {
-    documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
-    javaImport("java.nio.*")
-    additionalCode = """
+val stbi_io_callbacks = struct(Module.STB, "STBIIOCallbacks", nativeName = "stbi_io_callbacks") {
+    documentation = "Image IO callbacks, used by #load_from_callbacks()."
+
+    Module.STB.callback {
+        int(
+            "STBIReadCallback",
+            "The {@code stbi_io_callbacks.read} callback.",
+            void.p.IN("user", "a pointer to user data"),
+            char.p.IN("data", "the data buffer to fill"),
+            AutoSize("data")..int.IN("size", "the number of bytes to read"),
+            returnDoc = "the number of bytes actually read"
+        ) {
+            documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
+            javaImport("java.nio.*")
+            additionalCode = """
     /**
      * Converts the specified {@link STBIReadCallback} arguments to a ByteBuffer.
      *
@@ -68,32 +72,30 @@ val stbi_io_callbacks_read = callback(
         return memByteBuffer(data, size);
     }
     """
-}
+        }
+    }.member("read", "fill {@code data} with {@code size} bytes. Return number of bytes actually read.")
+    Module.STB.callback {
+        void(
+            "STBISkipCallback",
+            "The {@code stbi_io_callbacks.skip} callback.",
 
-val stbi_io_callbacks_skip = callback(
-    Module.STB, void, "STBISkipCallback",
-    "The {@code stbi_io_callbacks.skip} callback.",
-    void.p.IN("user", "a pointer to user data"),
-    int.IN("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative")
-) {
-    documentation = "Instances of this interface may be set to the {@code skip} field of the ##STBIIOCallbacks struct."
-}
+            void.p.IN("user", "a pointer to user data"),
+            int.IN("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative")
+        ) {
+            documentation = "Instances of this interface may be set to the {@code skip} field of the ##STBIIOCallbacks struct."
+        }
+    }.member("skip", "skip the next {@code n} bytes, or {@code unget} the last -n bytes if negative")
+    Module.STB.callback {
+        int(
+            "STBIEOFCallback",
+            "The {@code stbi_io_callbacks.eof} callback.",
 
-val stbi_io_callbacks_eof = callback(
-    Module.STB, int, "STBIEOFCallback",
-    "The {@code stbi_io_callbacks.eof} callback.",
-    void.p.IN("user", "a pointer to user data"),
-    returnDoc = "nonzero if we are at the end of file/data"
-) {
-    documentation = "Instances of this interface may be set to the {@code eof} field of the ##STBIIOCallbacks struct."
-}
-
-val stbi_io_callbacks = struct(Module.STB, "STBIIOCallbacks", nativeName = "stbi_io_callbacks") {
-    documentation = "Image IO callbacks, used by #load_from_callbacks()."
-
-    stbi_io_callbacks_read.member("read", "fill {@code data} with {@code size} bytes. Return number of bytes actually read.")
-    stbi_io_callbacks_skip.member("skip", "skip the next {@code n} bytes, or {@code unget} the last -n bytes if negative")
-    stbi_io_callbacks_eof.member("eof", "returns nonzero if we are at end of file/data")
+            void.p.IN("user", "a pointer to user data"),
+            returnDoc = "nonzero if we are at the end of file/data"
+        ) {
+            documentation = "Instances of this interface may be set to the {@code eof} field of the ##STBIIOCallbacks struct."
+        }
+    }.member("eof", "returns nonzero if we are at end of file/data")
 }
 
 // stb_image_resize.h
@@ -107,16 +109,20 @@ val stbir_datatype = "stbir_datatype".enumType
 
 // stb_image_write.h
 
-val stbi_write_func = "stbi_write_func *".callback(
-    Module.STB, void, "STBIWriteCallback",
-    "The {@code stbi_write_func} callback.",
-    void.p.IN("context", "the context passed to the write function"),
-    void.p.IN("data", "the data to write"),
-    AutoSize("data")..int.IN("size", "the number of bytes in {@code data}")
-) {
-    documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
-    javaImport("java.nio.*")
-    additionalCode = """
+val stbi_write_func = Module.STB.callback {
+    void(
+        "STBIWriteCallback",
+        "The {@code stbi_write_func} callback.",
+
+        void.p.IN("context", "the context passed to the write function"),
+        void.p.IN("data", "the data to write"),
+        AutoSize("data")..int.IN("size", "the number of bytes in {@code data}"),
+
+        nativeType = "stbi_write_func *"
+    ) {
+        documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
+        javaImport("java.nio.*")
+        additionalCode = """
     /**
      * Converts the specified {@link STBIWriteCallback} arguments to a ByteBuffer.
      *
@@ -131,24 +137,26 @@ val stbi_write_func = "stbi_write_func *".callback(
         return memByteBuffer(data, size);
     }
     """
+    }
 }
+val stbi_zlib_compress = Module.STB.callback {
+    unsigned_char.p(
+        "STBIZlibCompress",
+        """
+        Compresses a block of data using Zlib compression.
 
-val stbi_zlib_compress = callback(
-    Module.STB, unsigned_char.p, "STBIZlibCompress",
-    """
-    Compresses a block of data using Zlib compression.
+        The returned data will be freed with MemoryUtil#memFree() so it must be heap allocated with MemoryUtil#memAlloc().
+        """,
 
-    The returned data will be freed with MemoryUtil#memFree() so it must be heap allocated with MemoryUtil#memAlloc().
-    """,
+        unsigned_char.p.IN("data", "the data to compress"),
+        AutoSize("data")..int.IN("data_len", "the data length, in bytes"),
+        AutoSizeResult..Check(1)..int.p.OUT("out_len", "returns the compressed data length, in bytes"),
+        int.IN("quality", "the compression quality to use"),
 
-    unsigned_char.p.IN("data", "the data to compress"),
-    AutoSize("data")..int.IN("data_len", "the data length, in bytes"),
-    AutoSizeResult..Check(1)..int.p.OUT("out_len", "returns the compressed data length, in bytes"),
-    int.IN("quality", "the compression quality to use"),
-
-    returnDoc = "the compressed data"
-) {
-    documentation = "Instances of this interface may be set to STBImageWrite#stbi_zlib_compress()."
+        returnDoc = "the compressed data"
+    ) {
+        documentation = "Instances of this interface may be set to STBImageWrite#stbi_zlib_compress()."
+    }
 }
 
 // stb_rect_pack.h

@@ -164,16 +164,19 @@ val VkCommandBufferResetFlags = typedef(VkFlags, "VkCommandBufferResetFlags")
 val VkStencilFaceFlags = typedef(VkFlags, "VkStencilFaceFlags")
 
 // Function pointer types
-val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
-    Module.VULKAN, void.p, "VkAllocationFunction",
-    "Application-defined memory allocation function.",
+val PFN_vkAllocationFunction = Module.VULKAN.callback {
+    void.p(
+        "VkAllocationFunction",
+        "Application-defined memory allocation function.",
 
-    opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-    size_t.IN("size", "the size in bytes of the requested allocation."),
-    size_t.IN("alignment", "the requested alignment of the allocation in bytes and <b>must</b> be a power of two."),
-    VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
-) {
-    documentation =
+        opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+        size_t.IN("size", "the size in bytes of the requested allocation."),
+        size_t.IN("alignment", "the requested alignment of the allocation in bytes and <b>must</b> be a power of two."),
+        VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>."),
+
+        nativeType = "PFN_vkAllocationFunction"
+    ) {
+        documentation =
         """
         Application-defined memory allocation function.
 
@@ -203,19 +206,23 @@ val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
+    }
 }
 
-val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
-    Module.VULKAN, void.p, "VkReallocationFunction",
-    "Application-defined memory reallocation function.",
+val PFN_vkReallocationFunction = Module.VULKAN.callback {
+    void.p(
+        "VkReallocationFunction",
+        "Application-defined memory reallocation function.",
 
-    opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-    opaque_p.IN("pOriginal", "<b>must</b> be either {@code NULL} or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of the same allocator."),
-    size_t.IN("size", "the size in bytes of the requested allocation."),
-    size_t.IN("alignment", "the requested alignment of the allocation in bytes and <b>must</b> be a power of two."),
-    VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
-) {
-    documentation =
+        opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+        opaque_p.IN("pOriginal", "<b>must</b> be either {@code NULL} or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of the same allocator."),
+        size_t.IN("size", "the size in bytes of the requested allocation."),
+        size_t.IN("alignment", "the requested alignment of the allocation in bytes and <b>must</b> be a power of two."),
+        VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>."),
+
+        nativeType = "PFN_vkReallocationFunction"
+    ) {
+        documentation =
         """
         Application-defined memory reallocation function.
 
@@ -246,16 +253,20 @@ val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
+    }
 }
 
-val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
-    Module.VULKAN, void, "VkFreeFunction",
-    "Application-defined memory free function.",
+val PFN_vkFreeFunction = Module.VULKAN.callback {
+    void(
+        "VkFreeFunction",
+        "Application-defined memory free function.",
 
-    opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-    opaque_p.IN("pMemory", "the allocation to be freed.")
-) {
-    documentation =
+        opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+        opaque_p.IN("pMemory", "the allocation to be freed."),
+
+        nativeType = "PFN_vkFreeFunction"
+    ) {
+        documentation =
         """
         Application-defined memory free function.
 
@@ -273,18 +284,22 @@ val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
+    }
 }
 
-val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification".callback(
-    Module.VULKAN, void, "VkInternalAllocationNotification",
-    "Application-defined memory allocation notification function.",
+val PFN_vkInternalAllocationNotification = Module.VULKAN.callback {
+    void(
+        "VkInternalAllocationNotification",
+        "Application-defined memory allocation notification function.",
 
-    opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-    size_t.IN("size", "the requested size of an allocation."),
-    VkInternalAllocationType.IN("allocationType", "a {@code VkInternalAllocationType} value specifying the requested type of an allocation."),
-    VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
-) {
-    documentation =
+        opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+        size_t.IN("size", "the requested size of an allocation."),
+        VkInternalAllocationType.IN("allocationType", "a {@code VkInternalAllocationType} value specifying the requested type of an allocation."),
+        VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>."),
+
+        nativeType = "PFN_vkInternalAllocationNotification"
+    ) {
+        documentation =
         """
         Application-defined memory allocation notification function.
 
@@ -304,18 +319,22 @@ val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
+    }
 }
 
-val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
-    Module.VULKAN, void, "VkInternalFreeNotification",
-    "Application-defined memory free notification function.",
+val PFN_vkInternalFreeNotification = Module.VULKAN.callback {
+    void(
+        "VkInternalFreeNotification",
+        "Application-defined memory free notification function.",
 
-    opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-    size_t.IN("size", "the requested size of an allocation."),
-    VkInternalAllocationType.IN("allocationType", "a {@code VkInternalAllocationType} value specifying the requested type of an allocation."),
-    VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
-) {
-    documentation =
+        opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+        size_t.IN("size", "the requested size of an allocation."),
+        VkInternalAllocationType.IN("allocationType", "a {@code VkInternalAllocationType} value specifying the requested type of an allocation."),
+        VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-host-allocation-scope\">here</a>."),
+
+        nativeType = "PFN_vkInternalFreeNotification"
+    ) {
+        documentation =
         """
         Application-defined memory free notification function.
 
@@ -334,6 +353,7 @@ val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """
+    }
 }
 
 // Struct types

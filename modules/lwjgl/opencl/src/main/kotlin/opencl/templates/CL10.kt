@@ -78,9 +78,10 @@ val param_value = "a pointer to memory where the appropriate result being querie
 
 // Arguments
 
-val NEWL = AutoSize("event_wait_list")..cl_uint.IN("num_events_in_wait_list", "the number of events in {@code event_wait_list}")
+val NEWL = AutoSize("event_wait_list")..Parameter(cl_uint, "num_events_in_wait_list", "the number of events in {@code event_wait_list}")
 
-val EWL = nullable..cl_event.const.p.IN(
+val EWL = nullable..Parameter(
+    cl_event.const.p,
     "event_wait_list",
     """
     a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is #NULL, then this particular command
@@ -89,8 +90,10 @@ val EWL = nullable..cl_event.const.p.IN(
     """
 )
 
-val EVENT = Check(1)..nullable..cl_event.p.OUT(
+val EVENT = Check(1)..nullable..Parameter(
+    cl_event.p,
     "event",
+    ParameterType.OUT,
     """
     Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
     {@code event} can be #NULL in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
@@ -99,18 +102,23 @@ val EVENT = Check(1)..nullable..cl_event.p.OUT(
     """
 )
 
-val ERROR_RET = Check(1)..nullable..cl_int.p.OUT(
+val ERROR_RET = Check(1)..nullable..Parameter(
+    cl_int.p,
     "errcode_ret",
+    ParameterType.OUT,
     "will return an appropriate error code. If $errcode_ret is #NULL, no error code is returned."
 )
 
-val PARAM_VALUE_SIZE = AutoSize("param_value")..size_t.IN(
+val PARAM_VALUE_SIZE = AutoSize("param_value")..Parameter(
+    size_t,
     "param_value_size",
     "the size in bytes of memory pointed to by {@code param_value}. This size must be &#x2265; size of return type. If {@code param_value} is #NULL, it is ignored."
 )
 
-val PARAM_VALUE_SIZE_RET = Check(1)..nullable..size_t.p.OUT(
+val PARAM_VALUE_SIZE_RET = Check(1)..nullable..Parameter(
+    size_t.p,
     "param_value_size_ret",
+    ParameterType.OUT,
     "the actual size in bytes of data being queried by {@code param_value}. If #NULL, it is ignored."
 )
 

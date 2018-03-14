@@ -236,94 +236,110 @@ fun config() {
 }
 
 // callback functions
-val cl_context_callback = callback(
-    Module.OPENCL, void, "CLContextCallback",
-    "Will be called when a debug message is generated.",
-    NullTerminated..cl_charUTF8.const.p.IN("errinfo", "a pointer to the message string representation"),
-    void.const.p.IN(
-        "private_info",
-        "a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
-    ),
-    AutoSize("private_info")..size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
-    void.p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
-) {
-    documentation = "Instances of this interface may be passed to the #CreateContext() and #CreateContextFromType() methods."
+val cl_context_callback = Module.OPENCL.callback {
+    void(
+        "CLContextCallback",
+        "Will be called when a debug message is generated.",
+
+        NullTerminated..cl_charUTF8.const.p.IN("errinfo", "a pointer to the message string representation"),
+        void.const.p.IN(
+            "private_info",
+            "a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
+        ),
+        AutoSize("private_info")..size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
+        void.p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
+    ) {
+        documentation = "Instances of this interface may be passed to the #CreateContext() and #CreateContextFromType() methods."
+    }
 }
 
-val cl_program_callback = callback(
-    Module.OPENCL, void, "CLProgramCallback",
-    "Will be called when the program is built, compiled or linked.",
-    cl_program.IN("program", "the program that was built, compiled or linked"),
-    void.p.IN(
-        "user_data",
-        "the user-specified value that was passed when calling #BuildProgram(), #CompileProgram() or #LinkProgram()"
-    )
-) {
-    documentation = "Instances of this interface may be passed to the #BuildProgram(), #CompileProgram() and #LinkProgram() methods."
+val cl_program_callback = Module.OPENCL.callback {
+    void(
+        "CLProgramCallback",
+        "Will be called when the program is built, compiled or linked.",
+
+        cl_program.IN("program", "the program that was built, compiled or linked"),
+        void.p.IN(
+            "user_data",
+            "the user-specified value that was passed when calling #BuildProgram(), #CompileProgram() or #LinkProgram()"
+        )
+    ) {
+        documentation = "Instances of this interface may be passed to the #BuildProgram(), #CompileProgram() and #LinkProgram() methods."
+    }
 }
 
-val cl_native_kernel = callback(
-    Module.OPENCL, void, "CLNativeKernel",
-    "Will be called by the OpenCL using #EnqueueNativeKernel().",
-    void.p.IN("args", "a pointer to the arguments list")
-) {
-    documentation = "Instances of this interface may be passed to the #EnqueueNativeKernel() method."
+val cl_native_kernel = Module.OPENCL.callback {
+    void(
+        "CLNativeKernel",
+        "Will be called by the OpenCL using #EnqueueNativeKernel().",
+        void.p.IN("args", "a pointer to the arguments list")
+    ) {
+        documentation = "Instances of this interface may be passed to the #EnqueueNativeKernel() method."
+    }
 }
 
-val cl_mem_object_destructor_callback = callback(
-    Module.OPENCL, void, "CLMemObjectDestructorCallback",
-    "Will be called when a memory object is deleted.",
-    cl_mem.IN("memobj", "the memory object that was deleted"),
-    void.p.IN("user_data", "the user-specified value that was passed when calling #SetMemObjectDestructorCallback()")
-) {
-    documentation = "Instances of this interface may be passed to the #SetMemObjectDestructorCallback() method."
+val cl_mem_object_destructor_callback = Module.OPENCL.callback {
+    void(
+       "CLMemObjectDestructorCallback",
+        "Will be called when a memory object is deleted.",
+        cl_mem.IN("memobj", "the memory object that was deleted"),
+        void.p.IN("user_data", "the user-specified value that was passed when calling #SetMemObjectDestructorCallback()")
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetMemObjectDestructorCallback() method."
+    }
 }
 
-val cl_event_callback = callback(
-    Module.OPENCL, void, "CLEventCallback",
-    """
-    Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
-    {@code command_exec_status}.
-    """,
-    cl_event.IN("event", "the event"),
-    cl_int.IN(
-        "event_command_exec_status",
+val cl_event_callback = Module.OPENCL.callback {
+    void(
+        "CLEventCallback",
         """
-        represents the execution status of command for which this callback function is invoked. If the callback is called as the result of the command
-        associated with event being abnormally terminated, an appropriate error code for the error that caused the termination will be passed to
-        {@code event_command_exec_status} instead.
-        """
-    ),
-    void.p.IN("user_data", "the user-specified value that was passed when calling #SetEventCallback()")
-) {
-    documentation = "Instances of this interface may be passed to the #SetEventCallback() method."
+        Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
+        {@code command_exec_status}.
+        """,
+        cl_event.IN("event", "the event"),
+        cl_int.IN(
+            "event_command_exec_status",
+            """
+            represents the execution status of command for which this callback function is invoked. If the callback is called as the result of the command
+            associated with event being abnormally terminated, an appropriate error code for the error that caused the termination will be passed to
+            {@code event_command_exec_status} instead.
+            """
+        ),
+        void.p.IN("user_data", "the user-specified value that was passed when calling #SetEventCallback()")
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetEventCallback() method."
+    }
 }
 
-val cl_svmfree_callback = callback(
-    Module.OPENCL, void, "CLSVMFreeCallback",
-    "Will be called to free shared virtual memory pointers.",
-    cl_command_queue.IN("queue", "a valid host command-queue"),
-    AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
-    void.p.p.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
-    void.p.IN("user_data", "the user-specified value that was passed when calling #EnqueueSVMFree()")
-) {
-    documentation = "Instances of this interface may be passed to the #EnqueueSVMFree() method."
+val cl_svmfree_callback = Module.OPENCL.callback {
+    void(
+        "CLSVMFreeCallback",
+        "Will be called to free shared virtual memory pointers.",
+        cl_command_queue.IN("queue", "a valid host command-queue"),
+        AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
+        void.p.p.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
+        void.p.IN("user_data", "the user-specified value that was passed when calling #EnqueueSVMFree()")
+    ) {
+        documentation = "Instances of this interface may be passed to the #EnqueueSVMFree() method."
+    }
 }
 
-val cl_program_release_callback = callback(
-    Module.OPENCL, void, "CLProgramReleaseCallback",
-    "Will be called after destructors (if any) for program scope global variables (if any) are called and before the program is released.",
+val cl_program_release_callback = Module.OPENCL.callback {
+    void(
+        "CLProgramReleaseCallback",
+        "Will be called after destructors (if any) for program scope global variables (if any) are called and before the program is released.",
 
-    cl_program.IN(
-        "program",
-        """
-        the program object whose destructors are being called. When the user callback is called by the implementation, this program object is no longer valid.
-        {@code program} is only provided for reference purposes.
-        """
-    ),
-    void.p.IN("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
-) {
-    documentation = "Instances of this interface may be passed to the #SetProgramReleaseCallback() method."
+        cl_program.IN(
+            "program",
+            """
+            the program object whose destructors are being called. When the user callback is called by the implementation, this program object is no longer valid.
+            {@code program} is only provided for reference purposes.
+            """
+        ),
+        void.p.IN("user_data", "the user-specified value that was passed when calling #SetProgramReleaseCallback()")
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetProgramReleaseCallback() method."
+    }
 }
 
 // OpenGL interop
@@ -347,18 +363,20 @@ val cl_queue_properties_APPLE = typedef(intptr_t, "cl_queue_properties_APPLE")
 
 // EXT
 
-val cl_report_live_objects_altera_callback = callback(
-    Module.OPENCL, void, "CLReportLiveObjectsAlteraCallback",
-    "Reports a live OpenCL API object.",
-    void.p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),
-    void.p.IN("obj_ptr", "a pointer to the live object"),
-    charASCII.const.p.IN(
-        "type_name",
-        "a C string corresponding to the OpenCL API object type. For example, a leaked {@code cl_mem} object will have \"cl_mem\" as its type string."
-    ),
-    cl_uint.IN("refcount", "an instantaneous reference count for the object. Consider it to be immediately stale.")
-) {
-    documentation = "Instances of this interface may be passed to the #ReportLiveObjectsAltera() method."
+val cl_report_live_objects_altera_callback = Module.OPENCL.callback {
+    void(
+        "CLReportLiveObjectsAlteraCallback",
+        "Reports a live OpenCL API object.",
+        void.p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),
+        void.p.IN("obj_ptr", "a pointer to the live object"),
+        charASCII.const.p.IN(
+            "type_name",
+            "a C string corresponding to the OpenCL API object type. For example, a leaked {@code cl_mem} object will have \"cl_mem\" as its type string."
+        ),
+        cl_uint.IN("refcount", "an instantaneous reference count for the object. Consider it to be immediately stale.")
+    ) {
+        documentation = "Instances of this interface may be passed to the #ReportLiveObjectsAltera() method."
+    }
 }
 
 val cl_device_partition_property_ext = typedef(cl_bitfield, "cl_device_partition_property_ext")

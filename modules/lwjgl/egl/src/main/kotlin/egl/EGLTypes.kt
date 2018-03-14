@@ -48,39 +48,44 @@ val EGLAttribKHR = typedef(intptr_t, "EGLAttribKHR")
 // KHR_debug
 val EGLObjectKHR = "EGLObjectKHR".handle
 val EGLLabelKHR = "EGLLabelKHR".handle
-val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
-    Module.EGL, void, "EGLDebugMessageKHRCallback",
-    "Will be called when a debug message is generated.",
-    EGLenum.IN("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
-    charASCII.const.p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
-    EGLint.IN("messageType", "will contain one of the debug message types"),
-    EGLLabelKHR.IN(
-        "threadLabel",
+val EGLDEBUGPROCKHR = Module.EGL.callback {
+    void(
+        "EGLDebugMessageKHRCallback",
+        "Will be called when a debug message is generated.",
+
+        EGLenum.IN("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
+        charASCII.const.p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
+        EGLint.IN("messageType", "will contain one of the debug message types"),
+        EGLLabelKHR.IN(
+            "threadLabel",
+            """
+            will contain the label attached to the current thread. The {@code threadLabel} will be #NULL if not set by the application. If the message is from an
+            internal thread, the label will be #NULL.
+            """
+        ),
+        EGLLabelKHR.IN(
+            "objectLabel",
+            """
+            will contain the label attached to the primary object of the message; Labels will be #NULL if not set by the application. The primary object should
+            be the object the function operates on, see table 13.2 which provides the recommended mapping between functions and their primary object. This
+            {@code objectLabel} may be #NULL even though the application labeled the object. This is because it is possible an error was raised while executing
+            the command before the primary object was validated, therefore its label can not be included in the callback.
+            """
+        ),
+        nullable..charUTF8.const.p.IN(
+            "message",
+            """
+            will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
+            condition that generated the message. The format of a message is implementation-defined, although it should represent a concise description of the
+            event that caused the message to be generated. Message strings can be #NULL and should not be assumed otherwise.
+            """
+        ),
+
+        nativeType = "EGLDEBUGPROCKHR"
+    ) {
+        documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
+        additionalCode =
         """
-        will contain the label attached to the current thread. The {@code threadLabel} will be #NULL if not set by the application. If the message is from an
-        internal thread, the label will be #NULL.
-        """
-    ),
-    EGLLabelKHR.IN(
-        "objectLabel",
-        """
-        will contain the label attached to the primary object of the message; Labels will be #NULL if not set by the application. The primary object should
-        be the object the function operates on, see table 13.2 which provides the recommended mapping between functions and their primary object. This
-        {@code objectLabel} may be #NULL even though the application labeled the object. This is because it is possible an error was raised while executing
-        the command before the primary object was validated, therefore its label can not be included in the callback.
-        """
-    ),
-    nullable..charUTF8.const.p.IN(
-        "message",
-        """
-        will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
-        condition that generated the message. The format of a message is implementation-defined, although it should represent a concise description of the
-        event that caused the message to be generated. Message strings can be #NULL and should not be assumed otherwise.
-        """
-    )
-) {
-    documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
-    additionalCode = """
     /**
      * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
      *
@@ -107,6 +112,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
         return memUTF8(message);
     }
     """
+    }
 }
 
 // KHR_fence_sync
@@ -125,23 +131,33 @@ val EGLNativeFileDescriptorKHR = typedef(int, "EGLNativeFileDescriptorKHR")
 
 // ANDROID_blob_cache
 val EGLsizeiANDROID = typedef(khronos_ssize_t, "EGLsizeiANDROID")
-val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
-    Module.EGL, void, "EGLSetBlobFuncANDROID", "",
-    void.const.p.IN("key", ""),
-    AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
-    void.const.p.IN("value", ""),
-    AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
-) {
-    documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
+val EGLSetBlobFuncANDROID = Module.EGL.callback {
+    void(
+        "EGLSetBlobFuncANDROID", "",
+
+        void.const.p.IN("key", ""),
+        AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
+        void.const.p.IN("value", ""),
+        AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
+
+        nativeType = "EGLSetBlobFuncANDROID"
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
+    }
 }
-val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
-    Module.EGL, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
-    void.const.p.IN("key", ""),
-    AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
-    void.p.IN("value", ""),
-    AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
-) {
-    documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
+val EGLGetBlobFuncANDROID = Module.EGL.callback {
+    EGLsizeiANDROID(
+        "EGLGetBlobFuncANDROID", "",
+
+        void.const.p.IN("key", ""),
+        AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
+        void.p.IN("value", ""),
+        AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
+
+        nativeType = "EGLGetBlobFuncANDROID"
+    ) {
+        documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
+    }
 }
 
 // EXT_device_base

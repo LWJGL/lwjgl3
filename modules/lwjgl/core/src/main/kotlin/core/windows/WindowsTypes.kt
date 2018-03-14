@@ -175,16 +175,20 @@ val PIXELFORMATDESCRIPTOR = struct(Module.CORE_WINDOWS, "PIXELFORMATDESCRIPTOR")
 }
 val LPPIXELFORMATDESCRIPTOR = typedef(PIXELFORMATDESCRIPTOR.p, "LPPIXELFORMATDESCRIPTOR")
 
-val WNDPROC = "WNDPROC".callback(
-    Module.CORE_WINDOWS, LRESULT, "WindowProc",
-    "Will be called for each message sent to the window.",
+val WNDPROC = Module.CORE_WINDOWS.callback {
+    LRESULT(
+        "WindowProc",
+        "Will be called for each message sent to the window.",
 
-    HWND.IN("hwnd", "a handle to the window procedure that received the message"),
-    UINT.IN("uMsg", "the message"),
-    WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
-    LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter.")
-) {
-    documentation = "An application-defined function that processes messages sent to a window."
+        HWND.IN("hwnd", "a handle to the window procedure that received the message"),
+        UINT.IN("uMsg", "the message"),
+        WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+        LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+
+        nativeType = "WNDPROC"
+    ) {
+        documentation = "An application-defined function that processes messages sent to a window."
+    }
 }
 
 val WNDCLASSEX = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {

@@ -65,34 +65,50 @@ val Remotery = "Remotery".opaque
 val rmtError = "rmtError".enumType
 
 // Callback function pointer types
-val rmtMallocPtr = "rmtMallocPtr".callback(
-    Module.REMOTERY, opaque_p, "RMTMalloc", "",
+val rmtMallocPtr = Module.REMOTERY.callback {
+    opaque_p(
+        "RMTMalloc", "",
 
-    opaque_p.IN("mm_context", ""),
-    rmtU32.IN("size", "")
-)
+        opaque_p.IN("mm_context", ""),
+        rmtU32.IN("size", ""),
 
-val rmtReallocPtr = "rmtReallocPtr".callback(
-    Module.REMOTERY, opaque_p, "RMTRealloc", "",
+        nativeType = "rmtMallocPtr"
+    )
+}
 
-    opaque_p.IN("mm_context", ""),
-    void.p.IN("ptr", ""),
-    rmtU32.IN("size", "")
-)
+val rmtReallocPtr = Module.REMOTERY.callback {
+    opaque_p(
+        "RMTRealloc", "",
 
-val rmtFreePtr = "rmtFreePtr".callback(
-    Module.REMOTERY, opaque_p, "RMTFree", "",
+        opaque_p.IN("mm_context", ""),
+        void.p.IN("ptr", ""),
+        rmtU32.IN("size", ""),
 
-    opaque_p.IN("mm_context", ""),
-    void.p.IN("ptr", "")
-)
+        nativeType = "rmtReallocPtr"
+    )
+}
 
-val rmtInputHandlerPtr = "rmtInputHandlerPtr".callback(
-    Module.REMOTERY, opaque_p, "RMTInputHandler", "",
+val rmtFreePtr = Module.REMOTERY.callback {
+    opaque_p(
+        "RMTFree", "",
 
-    charASCII.const.p.IN("text", ""),
-    opaque_p.IN("context", "")
-)
+        opaque_p.IN("mm_context", ""),
+        void.p.IN("ptr", ""),
+
+        nativeType = "rmtFreePtr"
+    )
+}
+
+val rmtInputHandlerPtr = Module.REMOTERY.callback {
+    opaque_p(
+        "RMTInputHandler", "",
+
+        charASCII.const.p.IN("text", ""),
+        opaque_p.IN("context", ""),
+
+        nativeType = "rmtInputHandlerPtr"
+    )
+}
 
 val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettings") {
     documentation = "Structure to fill in to modify Remotery default settings."

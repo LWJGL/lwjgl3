@@ -19,7 +19,7 @@ val Pixmap = typedef(XID, "Pixmap")
 val Window = typedef(XID, "Window")
 
 val Display = "Display".opaque // Display is a struct, but should be treated as an opaque type by apps
-val DISPLAY = Display.p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
+val DISPLAY = Parameter(Display.p, "display", "the connection to the X server") // This is here so that GLX extensions can use it
 
 val Visual = struct(Module.CORE_LINUX, "Visual") {
     documentation = "Visual structure; contains information about colormapping possible."

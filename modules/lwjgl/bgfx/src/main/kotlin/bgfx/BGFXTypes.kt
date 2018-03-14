@@ -70,16 +70,19 @@ val bgfx_uniform_handle_t = BGFX_HANDLE_T("uniform")
 val bgfx_vertex_buffer_handle_t = BGFX_HANDLE_T("vertex_buffer")
 val bgfx_vertex_decl_handle_t = BGFX_HANDLE_T("vertex_decl")
 
-val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
-    Module.BGFX, void, "BGFXReleaseFunctionCallback",
-    "Memory release callback.",
+val bgfx_release_fn_t = Module.BGFX.callback {
+    void(
+        "BGFXReleaseFunctionCallback",
+        "Memory release callback.",
 
-    opaque_p.IN("_ptr", "pointer to allocated data"),
-    nullable..void.p.IN("_userData", "user defined data if needed")
-) {
-    documentation = "Instances of this interface may be passed to the #make_ref_release() method."
+        opaque_p.IN("_ptr", "pointer to allocated data"),
+        nullable..void.p.IN("_userData", "user defined data if needed"),
+
+        nativeType = "bgfx_release_fn_t"
+    ) {
+        documentation = "Instances of this interface may be passed to the #make_ref_release() method."
+    }
 }
-
 val bgfx_memory_t = struct(Module.BGFX, "BGFXMemory", nativeName = "bgfx_memory_t") {
     documentation = "Memory obtained by calling #alloc(), #copy(), or #make_ref()."
 
@@ -314,25 +317,27 @@ private val bgfx_callback_interface_t_p = struct(Module.BGFX, "BGFXCallbackInter
 val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t") {
     documentation = "Callback virtual table."
 
-    callback(
-        Module.BGFX, void, "BGFXFatalCallback",
-        "This callback is called on unrecoverable errors.",
+    Module.BGFX.callback {
+        void(
+            "BGFXFatalCallback",
+            "This callback is called on unrecoverable errors.",
 
-        bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-        bgfx_fatal_t.IN("_code", "the error code"),
-        charASCII.p.IN("_str", "the error message")
-    ) {
-        documentation =
-            """
-            If fatal code is not #FATAL_DEBUG_CHECK this callback is called on unrecoverable error. It's not safe to continue, inform user and terminate
-            application from this call.
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            bgfx_fatal_t.IN("_code", "the error code"),
+            charASCII.p.IN("_str", "the error message")
+        ) {
+            documentation =
+                """
+                If fatal code is not #FATAL_DEBUG_CHECK this callback is called on unrecoverable error. It's not safe to continue, inform user and terminate
+                application from this call.
 
-            Not thread safe and it can be called from any thread.
-            """
+                Not thread safe and it can be called from any thread.
+                """
+        }
     }.member("fatal", "the fatal error callback")
-    global {
-        callback(
-            Module.BGFX, void, "BGFXTraceVarArgsCallback",
+    Module.BGFX.callback {
+        void(
+            "BGFXTraceVarArgsCallback",
             "Will be called when a debug message is produced.",
 
             bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -349,9 +354,9 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             """
         }
     }.member("trace_vargs", "the debug message callback")
-    global {
-        callback(
-            Module.BGFX, void, "BGFXProfilerBegin",
+    Module.BGFX.callback {
+        void(
+            "BGFXProfilerBegin",
             """
             Will be called when a profiler region begins.
 
@@ -367,9 +372,9 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             documentation = "Profiler region begin."
         }
     }.member("profiler_begin", "the profiler begin callback")
-    global {
-        callback(
-            Module.BGFX, void, "BGFXProfilerBeginLiteral",
+    Module.BGFX.callback {
+        void(
+            "BGFXProfilerBeginLiteral",
             """
             Will be called when a profiler region with string literal begins.
 
@@ -385,32 +390,36 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             documentation = "Profiler region begin with string literal name."
         }
     }.member("profiler_begin_literal", "the profiler begin literal callback")
-    callback(
-        Module.BGFX, void, "BGFXProfilerEnd",
-        """
-        Will be called when a profiler region ends.
+    Module.BGFX.callback {
+        void(
+            "BGFXProfilerEnd",
+            """
+            Will be called when a profiler region ends.
 
-        Not thread safe and it can be called from any thread.
-        """,
+            Not thread safe and it can be called from any thread.
+            """,
 
-        bgfx_callback_interface_t_p.IN("_this", "the callback interface")
-    ) {
-        documentation = "Profiler region end."
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface")
+        ) {
+            documentation = "Profiler region end."
+        }
     }.member("profiler_end", "the profiler end callback")
-    callback(
-        Module.BGFX, uint32_t, "BGFXCacheReadSizeCallback",
-        "Will be called to determine size of cached item.",
+    Module.BGFX.callback {
+        uint32_t(
+            "BGFXCacheReadSizeCallback",
+            "Will be called to determine size of cached item.",
 
-        bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-        uint64_t.IN("_id", "cache id"),
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            uint64_t.IN("_id", "cache id"),
 
-        returnDoc = "number of bytes to read"
-    ) {
-        documentation = "Returns the size of a cached item. Returns 0 if no cached item was found."
+            returnDoc = "number of bytes to read"
+        ) {
+            documentation = "Returns the size of a cached item. Returns 0 if no cached item was found."
+        }
     }.member("cache_read_size", "the cache read size callback")
-    global {
-        callback(
-            Module.BGFX, bool, "BGFXCacheReadCallback",
+    Module.BGFX.callback {
+        bool(
+            "BGFXCacheReadCallback",
             "Will be called to read a cached item.",
 
             bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -422,11 +431,10 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
         ) {
             documentation = "Reads cached item."
         }
-
     }.member("cache_read", "the cache read callback")
-    global {
-        callback(
-            Module.BGFX, void, "BGFXCacheWriteCallback",
+    Module.BGFX.callback {
+        void(
+            "BGFXCacheWriteCallback",
             "Will be called to writes a cached item.",
 
             bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -437,9 +445,9 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             documentation = "Writes cached item."
         }
     }.member("cache_write", "the cache write callback")
-    global {
-        callback(
-            Module.BGFX, void, "BGFXScreenShotCallback",
+    Module.BGFX.callback {
+        void(
+            "BGFXScreenShotCallback",
             "",
 
             bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -454,30 +462,34 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             documentation = "Screenshot captured. Screenshot format is always 4-byte BGRA."
         }
     }.member("screen_shot", "the screenshot callback")
-    callback(
-        Module.BGFX, void, "BGFXCaptureBeginCallback",
-        "Will be called when video capture begins.",
+    Module.BGFX.callback {
+        void(
+            "BGFXCaptureBeginCallback",
+            "Will be called when video capture begins.",
 
-        bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
-        uint32_t.IN("_width", "image width"),
-        uint32_t.IN("_height", "image height"),
-        uint32_t.IN("_pitch", "number of bytes to skip to next line"),
-        bgfx_texture_format_t.IN("_format", "texture format"),
-        bool.IN("_yflip", "if true image origin is bottom left")
-    ) {
-        documentation = "Called when video capture begins."
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
+            uint32_t.IN("_width", "image width"),
+            uint32_t.IN("_height", "image height"),
+            uint32_t.IN("_pitch", "number of bytes to skip to next line"),
+            bgfx_texture_format_t.IN("_format", "texture format"),
+            bool.IN("_yflip", "if true image origin is bottom left")
+        ) {
+            documentation = "Called when video capture begins."
+        }
     }.member("capture_begin", "the capture begin callback")
-    callback(
-        Module.BGFX, void, "BGFXCaptureEndCallback",
-        "Will be called when video capture ends.",
+    Module.BGFX.callback {
+        void(
+            "BGFXCaptureEndCallback",
+            "Will be called when video capture ends.",
 
-        bgfx_callback_interface_t_p.IN("_this", "the callback interface")
-    ) {
-        documentation = "Called when video capture ends."
+            bgfx_callback_interface_t_p.IN("_this", "the callback interface")
+        ) {
+            documentation = "Called when video capture ends."
+        }
     }.member("capture_end", "the capture end callback")
-    global {
-        callback(
-            Module.BGFX, void, "BGFXCaptureFrameCallback",
+    Module.BGFX.callback {
+        void(
+            "BGFXCaptureFrameCallback",
             "Will be called when a frame is captured.",
 
             bgfx_callback_interface_t_p.IN("_this", "the callback interface"),
@@ -508,9 +520,9 @@ private val bgfx_allocator_interface_t_p = struct(Module.BGFX, "BGFXAllocatorInt
 val bgfx_allocator_vtbl_t = struct(Module.BGFX, "BGFXAllocatorVtbl", nativeName = "bgfx_allocator_vtbl_t") {
     documentation = "Allocator virtual table"
 
-    global {
-        callback(
-            Module.BGFX, opaque_p, "BGFXReallocCallback",
+    Module.BGFX.callback {
+        opaque_p(
+            "BGFXReallocCallback",
             "Will be called when an allocation is requested.",
 
             bgfx_allocator_interface_t_p.IN("_this", "the allocator interface"),
@@ -551,5 +563,5 @@ val bgfx_internal_data_t = struct(Module.BGFX, "BGFXInternalData", nativeName = 
     documentation = "Internal data."
 
     bgfx_caps_t.p.member("caps", "renderer capabilities")
-    opaque_p.IN("context", "GL context, or D3D device")
+    opaque_p.member("context", "GL context, or D3D device")
 }

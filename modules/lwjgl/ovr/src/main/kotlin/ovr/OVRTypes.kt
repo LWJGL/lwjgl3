@@ -38,28 +38,33 @@ val ovrExtensions = "ovrExtensions".enumType
 
 val ovrProcessId = typedef(int32_t, "ovrProcessId")
 
-val ovrLogCallback = "ovrLogCallback".callback(
-    Module.OVR, void, "OVRLogCallback",
-    "The logging callback.",
-    uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
-    int.IN("level", "one of the {@code ovrLogLevel} constants"),
-    NullTerminated..charUTF8.const.p.IN("message", "a UTF8-encoded null-terminated string")
-) {
-    documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
-    additionalCode = """
-    /**
-     * Converts the specified {@link OVRLogCallback} argument to a String.
-     *
-     * <p>This method may only be used inside a OVRLogCallback invocation.</p>
-     *
-     * @param message the OVRLogCallback {@code message} argument
-     *
-     * @return the message as a String
-     */
-    public static String getMessage(long message) {
-        return memUTF8(message);
+val ovrLogCallback = Module.OVR.callback {
+    void(
+        "OVRLogCallback",
+        "The logging callback.",
+
+        uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
+        int.IN("level", "one of the {@code ovrLogLevel} constants"),
+        NullTerminated..charUTF8.const.p.IN("message", "a UTF8-encoded null-terminated string"),
+
+        nativeType = "ovrLogCallback"
+    ) {
+        documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
+        additionalCode = """
+        /**
+         * Converts the specified {@link OVRLogCallback} argument to a String.
+         *
+         * <p>This method may only be used inside a OVRLogCallback invocation.</p>
+         *
+         * @param message the OVRLogCallback {@code message} argument
+         *
+         * @return the message as a String
+         */
+        public static String getMessage(long message) {
+            return memUTF8(message);
+        }
+        """
     }
-    """
 }
 
 val ovrErrorInfo = struct(Module.OVR, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {

@@ -60,21 +60,29 @@ val ZSTD_CCtx_params = "ZSTD_CCtx_params".opaque
 
 val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
 
-val ZSTD_allocFunction = "ZSTD_allocFunction".callback(
-    Module.ZSTD, void.p, "ZSTDAllocFunction",
-    "",
+val ZSTD_allocFunction = Module.ZSTD.callback {
+    void.p(
+        "ZSTDAllocFunction",
+        "",
 
-    opaque_p.IN("opaque", ""),
-    size_t.IN("size", "")
-)
+        opaque_p.IN("opaque", ""),
+        size_t.IN("size", ""),
 
-val ZSTD_freeFunction = "ZSTD_freeFunction".callback(
-    Module.ZSTD, opaque_p, "ZSTDFreeFunction",
-    "",
+        nativeType = "ZSTD_allocFunction"
+    )
+}
 
-    opaque_p.IN("opaque", ""),
-    void.p.IN("address", "")
-)
+val ZSTD_freeFunction = Module.ZSTD.callback {
+    opaque_p(
+        "ZSTDFreeFunction",
+        "",
+
+        opaque_p.IN("opaque", ""),
+        void.p.IN("address", ""),
+
+        nativeType = "ZSTD_freeFunction"
+    )
+}
 
 val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_customMem") {
     ZSTD_allocFunction.member("customAlloc", "")

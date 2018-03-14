@@ -50,34 +50,6 @@ class AutoSizeMember(
     }
 }
 
-@Suppress("unused")
-fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
-
-fun Struct.AutoSize(div: Int, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    when {
-        div < 1                    -> throw IllegalArgumentException()
-        div == 1                   -> AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
-        Integer.bitCount(div) == 1 -> AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
-        else                       -> AutoSizeDiv(div.toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
-    }
-
-@Suppress("unused")
-fun Struct.AutoSizeDiv(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.div(expression), optional = optional, atLeastOne = atLeastOne)
-
-@Suppress("unused")
-fun Struct.AutoSizeMul(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.mul(expression), optional = optional, atLeastOne = atLeastOne)
-
-@Suppress("unused")
-fun Struct.AutoSizeShr(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shr(expression), optional = optional, atLeastOne = atLeastOne)
-
-@Suppress("unused")
-fun Struct.AutoSizeShl(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-    AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shl(expression), optional = optional, atLeastOne = atLeastOne)
-
 class AutoSizeIndirect(
     override val reference: String,
     vararg val dependent: String
@@ -110,7 +82,3 @@ object NullableMember : StructMemberModifier {
             throw IllegalArgumentException("The nullable modifier can only be applied on pointer members.")
     }
 }
-
-/** Marks a pointer member as nullable. */
-@Suppress("unused")
-val Struct.nullable get() = NullableMember

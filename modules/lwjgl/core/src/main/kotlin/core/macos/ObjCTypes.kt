@@ -38,12 +38,17 @@ val objc_method_description = struct(Module.CORE_MACOS, "ObjCMethodDescription",
     charUTF8.p.member("types", "the types of the method arguments")
 }
 
-val EnumerationMutationHandler = "EnumerationMutationHandler".callback(
-    Module.CORE_MACOS, void, "EnumerationMutationHandler",
-    "Will be called when an object is mutated during a foreach iteration.",
-    id.IN("id", "the object that was mutated")
-) {
-    documentation = "A mutation handler."
+val EnumerationMutationHandler = Module.CORE_MACOS.callback {
+    void(
+        "EnumerationMutationHandler",
+        "Will be called when an object is mutated during a foreach iteration.",
+
+        id.IN("id", "the object that was mutated"),
+
+        nativeType = "EnumerationMutationHandler"
+    ) {
+        documentation = "A mutation handler."
+    }
 }
 
 val objc_AssociationPolicy = typedef(uintptr_t, "objc_AssociationPolicy")

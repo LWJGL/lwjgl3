@@ -41,7 +41,7 @@ val nk_handle = union(Module.NUKLEAR, "NkHandle", nativeName = "nk_handle") {
 // Struct values are currently not supported in callbacks
 val nk_handle_in_callback = "nk_handle".handle
 
-val NK_UTF_SIZE = 4
+const val NK_UTF_SIZE = 4
 val nk_glyph = char.p
 
 val nk_anti_aliasing = "enum nk_anti_aliasing".enumType
@@ -117,22 +117,30 @@ val nk_scroll = struct(Module.NUKLEAR, "NkScroll", nativeName = "struct nk_scrol
     nk_uint.member("y", "")
 }
 
-val nk_plugin_alloc = "nk_plugin_alloc".callback(
-    Module.NUKLEAR, void.p, "NkPluginAlloc",
-    "",
+val nk_plugin_alloc = Module.NUKLEAR.callback {
+    void.p(
+        "NkPluginAlloc",
+        "",
 
-    nk_handle_in_callback.IN("handle", ""),
-    opaque_p.IN("old", ""),
-    nk_size.IN("size", "")
-)
+        nk_handle_in_callback.IN("handle", ""),
+        opaque_p.IN("old", ""),
+        nk_size.IN("size", ""),
 
-val nk_plugin_free = "nk_plugin_free".callback(
-    Module.NUKLEAR, void, "NkPluginFree",
-    "",
+        nativeType = "nk_plugin_alloc"
+    )
+}
 
-    nk_handle_in_callback.IN("handle", ""),
-    opaque_p.IN("old", "")
-)
+val nk_plugin_free = Module.NUKLEAR.callback {
+    void(
+        "NkPluginFree",
+        "",
+
+        nk_handle_in_callback.IN("handle", ""),
+        opaque_p.IN("old", ""),
+
+        nativeType = "nk_plugin_free"
+    )
+}
 
 val nk_allocator = struct(Module.NUKLEAR, "NkAllocator", nativeName = "struct nk_allocator") {
     nk_handle.member("userdata", "")
@@ -228,35 +236,47 @@ val nk_str = struct(Module.NUKLEAR, "NkStr", nativeName = "struct nk_str", mutab
 private val nk_text_edit_p = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit").p
 private val nk_text_edit_const_p = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit").const.p
 
-val nk_plugin_filter = "nk_plugin_filter".callback(
-    Module.NUKLEAR, int, "NkPluginFilter",
-    "",
+val nk_plugin_filter = Module.NUKLEAR.callback {
+    int(
+        "NkPluginFilter",
+        "",
 
-    nk_text_edit_const_p.IN("edit", ""),
-    nk_rune.IN("unicode", "")
-) {
-    documentation = "Instances of this interface may be set to the ##NkTextEdit struct."
+        nk_text_edit_const_p.IN("edit", ""),
+        nk_rune.IN("unicode", ""),
+
+        nativeType = "nk_plugin_filter"
+    ) {
+        documentation = "Instances of this interface may be set to the ##NkTextEdit struct."
+    }
 }
 
-val nk_plugin_paste = "nk_plugin_paste".callback(
-    Module.NUKLEAR, void, "NkPluginPaste",
-    "",
+val nk_plugin_paste = Module.NUKLEAR.callback {
+    void(
+        "NkPluginPaste",
+        "",
 
-    nk_handle_in_callback.IN("handle", ""),
-    nk_text_edit_p.IN("edit", "")
-) {
-    documentation = "Instances of this interface may be set to the ##NkClipboard struct."
+        nk_handle_in_callback.IN("handle", ""),
+        nk_text_edit_p.IN("edit", ""),
+
+        nativeType = "nk_plugin_paste"
+    ) {
+        documentation = "Instances of this interface may be set to the ##NkClipboard struct."
+    }
 }
 
-val nk_plugin_copy = "nk_plugin_copy".callback(
-    Module.NUKLEAR, void, "NkPluginCopy",
-    "",
+val nk_plugin_copy = Module.NUKLEAR.callback {
+    void(
+        "NkPluginCopy",
+        "",
 
-    nk_handle_in_callback.IN("handle", ""),
-    charUTF8.const.p.IN("text", ""),
-    int.IN("len", "")
-) {
-    documentation = "Instances of this interface may be set to the ##NkClipboard struct."
+        nk_handle_in_callback.IN("handle", ""),
+        charUTF8.const.p.IN("text", ""),
+        int.IN("len", ""),
+
+        nativeType = "nk_plugin_copy"
+    ) {
+        documentation = "Instances of this interface may be set to the ##NkClipboard struct."
+    }
 }
 
 val nk_clipboard = struct(Module.NUKLEAR, "NkClipboard", nativeName = "struct nk_clipboard") {
@@ -274,8 +294,8 @@ val nk_text_undo_record = struct(Module.NUKLEAR, "NkTextUndoRecord", nativeName 
     short.member("char_storage", "")
 }
 
-val NK_TEXTEDIT_UNDOSTATECOUNT = 99
-val NK_TEXTEDIT_UNDOCHARCOUNT = 999
+const val NK_TEXTEDIT_UNDOSTATECOUNT = 99
+const val NK_TEXTEDIT_UNDOCHARCOUNT = 999
 val nk_text_undo_state = struct(Module.NUKLEAR, "NkTextUndoState", nativeName = "struct nk_text_undo_state", mutable = false) {
     access = Access.INTERNAL
 
@@ -319,29 +339,37 @@ val nk_user_font_glyph = struct(Module.NUKLEAR, "NkUserFontGlyph", nativeName = 
     float.member("xadvance", "offset to the next glyph")
 }
 
-val nk_text_width_f = "nk_text_width_f".callback(
-    Module.NUKLEAR, float, "NkTextWidthCallback",
-    "",
+val nk_text_width_f = Module.NUKLEAR.callback {
+    float(
+        "NkTextWidthCallback",
+        "",
 
-    nk_handle_in_callback.IN("handle", ""),
-    float.IN("h", ""),
-    charUTF8.const.p.IN("text", ""),
-    int.IN("len", "")
-) {
-    documentation = "Instances of this interface may be set to the ##NkUserFont struct."
+        nk_handle_in_callback.IN("handle", ""),
+        float.IN("h", ""),
+        charUTF8.const.p.IN("text", ""),
+        int.IN("len", ""),
+
+        nativeType = "nk_text_width_f"
+    ) {
+        documentation = "Instances of this interface may be set to the ##NkUserFont struct."
+    }
 }
 
-val nk_query_font_glyph_f = "nk_query_font_glyph_f".callback(
-    Module.NUKLEAR, void, "NkQueryFontGlyphCallback",
-    "",
+val nk_query_font_glyph_f = Module.NUKLEAR.callback {
+    void(
+        "NkQueryFontGlyphCallback",
+        "",
 
-    nk_handle_in_callback.IN("handle", ""),
-    float.IN("font_height", ""),
-    nk_user_font_glyph.p.IN("glyph", ""),
-    nk_rune.IN("codepoint", ""),
-    nk_rune.IN("next_codepoint", "")
-) {
-    documentation = "Instances of this interface may be set to the ##NkUserFont struct."
+        nk_handle_in_callback.IN("handle", ""),
+        float.IN("font_height", ""),
+        nk_user_font_glyph.p.IN("glyph", ""),
+        nk_rune.IN("codepoint", ""),
+        nk_rune.IN("next_codepoint", ""),
+
+        nativeType = "nk_query_font_glyph_f"
+    ) {
+        documentation = "Instances of this interface may be set to the ##NkUserFont struct."
+    }
 }
 
 val nk_user_font = struct(Module.NUKLEAR, "NkUserFont", nativeName = "struct nk_user_font") {
@@ -519,17 +547,21 @@ val nk_command_text = struct(Binding.NUKLEAR, "NkCommandText", nativeName = "str
     char.array("string", "", size = 1)
 }*/
 
-val nk_command_custom_callback = "nk_command_custom_callback".callback(
-    Module.NUKLEAR, void.p, "NkCommandCustomCallback",
-    "",
+val nk_command_custom_callback = Module.NUKLEAR.callback {
+    void.p(
+        "NkCommandCustomCallback",
+        "",
 
-    opaque_p.IN("canvas", ""),
-    short.IN("x", ""),
-    short.IN("y", ""),
-    unsigned_short.IN("w", ""),
-    unsigned_short.IN("h", ""),
-    nk_handle_in_callback.IN("callback_data", "")
-)
+        opaque_p.IN("canvas", ""),
+        short.IN("x", ""),
+        short.IN("y", ""),
+        unsigned_short.IN("w", ""),
+        unsigned_short.IN("h", ""),
+        nk_handle_in_callback.IN("callback_data", ""),
+
+        nativeType = "nk_command_custom_callback"
+    )
+}
 
 /*val nk_command_custom = struct(Binding.NUKLEAR, "NkCommandCustom", nativeName = "struct nk_command_custom") {
     nk_command.member("header", "")
@@ -642,24 +674,32 @@ val nk_style_text = struct(Module.NUKLEAR, "NkStyleText", nativeName = "struct n
     nk_vec2.member("padding", "")
 }
 
-val nk_draw_begin = "nk_draw_begin".callback(
-    Module.NUKLEAR, float, "NkDrawBeginCallback",
-    "",
+val nk_draw_begin = Module.NUKLEAR.callback {
+    float(
+        "NkDrawBeginCallback",
+        "",
 
-    nk_command_buffer.p.IN("buffer", ""),
-    nk_handle_in_callback.IN("userdata", "")
-) {
-    documentation = "Instances of this interface may be set to the {@code nk_style_*} structs."
+        nk_command_buffer.p.IN("buffer", ""),
+        nk_handle_in_callback.IN("userdata", ""),
+
+        nativeType = "nk_draw_begin"
+    ) {
+        documentation = "Instances of this interface may be set to the {@code nk_style_*} structs."
+    }
 }
 
-val nk_draw_end = "nk_draw_end".callback(
-    Module.NUKLEAR, float, "NkDrawEndCallback",
-    "",
+val nk_draw_end = Module.NUKLEAR.callback {
+    float(
+        "NkDrawEndCallback",
+        "",
 
-    nk_command_buffer.p.IN("buffer", ""),
-    nk_handle_in_callback.IN("userdata", "")
-) {
-    documentation = "Instances of this interface may be set to the {@code nk_style_*} structs."
+        nk_command_buffer.p.IN("buffer", ""),
+        nk_handle_in_callback.IN("userdata", ""),
+
+        nativeType = "nk_draw_end"
+    ) {
+        documentation = "Instances of this interface may be set to the {@code nk_style_*} structs."
+    }
 }
 
 val nk_style_button = struct(Module.NUKLEAR, "NkStyleButton", nativeName = "struct nk_style_button") {
@@ -1087,7 +1127,7 @@ val nk_chart_slot = struct(Module.NUKLEAR, "NkChartSlot", nativeName = "struct n
     int.member("index", "")
 }
 
-val NK_CHART_MAX_SLOT = 4
+const val NK_CHART_MAX_SLOT = 4
 val nk_chart = struct(Module.NUKLEAR, "NkChart", nativeName = "struct nk_chart", mutable = false) {
     int.member("slot", "")
     float.member("x", "")
@@ -1097,7 +1137,7 @@ val nk_chart = struct(Module.NUKLEAR, "NkChart", nativeName = "struct nk_chart",
     nk_chart_slot.array("slots", "", size = NK_CHART_MAX_SLOT)
 }
 
-val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
+const val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
 val nk_row_layout = struct(Module.NUKLEAR, "NkRowLayout", nativeName = "struct nk_row_layout", mutable = false) {
     nk_panel_row_layout_type.member("type", "").links("LAYOUT_\\w+")
     int.member("index", "")
@@ -1198,7 +1238,7 @@ val nk_property_state = struct(Module.NUKLEAR, "NkPropertyState", nativeName = "
     int.member("state", "")
 }
 
-val NK_WINDOW_MAX_NAME = 64
+const val NK_WINDOW_MAX_NAME = 64
 val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window", mutable = false) {
     unsigned_int.member("seq", "")
     nk_hash.member("name", "")
@@ -1308,23 +1348,31 @@ val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_con
     unsigned_int.member("seq", "").public = false
 }
 
-val nk_value_getter = "nk_value_getter".callback(
-    Module.NUKLEAR, float, "NkValueGetter",
-    "",
+val nk_value_getter = Module.NUKLEAR.callback {
+    float(
+        "NkValueGetter",
+        "",
 
-    opaque_p.IN("userdata", ""),
-    int.IN("index", "")
-) {
-    documentation = "Instances of this interface may be passed to the #plot_function() function."
+        opaque_p.IN("userdata", ""),
+        int.IN("index", ""),
+
+        nativeType = "nk_value_getter"
+    ) {
+        documentation = "Instances of this interface may be passed to the #plot_function() function."
+    }
 }
 
-val nk_item_getter = "nk_item_getter".callback(
-    Module.NUKLEAR, float, "NkItemGetter",
-    "",
+val nk_item_getter = Module.NUKLEAR.callback {
+    float(
+        "NkItemGetter",
+        "",
 
-    opaque_p.IN("userdata", ""),
-    int.IN("selected", ""),
-    charUTF8.const.p.p.IN("item", "")
-) {
-    documentation = "Instances of this interface may be passed to the #combo_callback() and #combobox_callback() functions."
+        opaque_p.IN("userdata", ""),
+        int.IN("selected", ""),
+        charUTF8.const.p.p.IN("item", ""),
+
+        nativeType = "nk_item_getter"
+    ) {
+        documentation = "Instances of this interface may be passed to the #combo_callback() and #combobox_callback() functions."
+    }
 }

@@ -168,42 +168,52 @@ val MDB_envinfo = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo", 
     unsigned_int.member("me_numreaders", "Max reader slots used in the environment.")
 }
 
-val MDB_cmp_func = "MDB_cmp_func *".callback(
-    Module.LMDB, int, "MDBCmpFunc",
-    "A callback function used to compare two keys in a database.",
+val MDB_cmp_func = Module.LMDB.callback {
+    int(
+        "MDBCmpFunc",
+        "A callback function used to compare two keys in a database.",
 
-    MDB_val.const.p.IN("a", "the first item to compare"),
-    MDB_val.const.p.IN("b", "the second item to compare"),
+        MDB_val.const.p.IN("a", "the first item to compare"),
+        MDB_val.const.p.IN("b", "the second item to compare"),
 
-    returnDoc = "&lt; 0 if a &lt; b, 0 if a == b, &gt; 0 if a &gt; b"
-)
+        nativeType = "MDB_cmp_func *",
+        returnDoc = "&lt; 0 if a &lt; b, 0 if a == b, &gt; 0 if a &gt; b"
+    )
+}
+val MDB_rel_func = Module.LMDB.callback {
+    void(
+        "MDBRelFunc",
+        "A callback function used to relocate a position-dependent data item in a fixed-address database.",
 
-val MDB_rel_func = "MDB_rel_func *".callback(
-    Module.LMDB, void, "MDBRelFunc",
-    "A callback function used to relocate a position-dependent data item in a fixed-address database.",
+        MDB_val.p.IN("item", "the item that is to be relocated"),
+        opaque_p.IN("oldptr", "the previous address"),
+        opaque_p.IN("newptr", "the new address to relocate to"),
+        opaque_p.IN("relctx", "an application-provided context, set by #set_relctx()"),
 
-    MDB_val.p.IN("item", "the item that is to be relocated"),
-    opaque_p.IN("oldptr", "the previous address"),
-    opaque_p.IN("newptr", "the new address to relocate to"),
-    opaque_p.IN("relctx", "an application-provided context, set by #set_relctx()")
-) {
-    documentation =
-        """
-        A callback function used to relocate a position-dependent data item in a fixed-address database.
+        nativeType = "MDB_rel_func *"
+    ) {
+        documentation =
+            """
+            A callback function used to relocate a position-dependent data item in a fixed-address database.
 
-        The {@code newptr} gives the item's desired address in the memory map, and {@code oldptr} gives its previous address. The item's actual data resides at
-        the address in {@code item}. This callback is expected to walk through the fields of the record in {@code item} and modify any values based at the
-        {@code oldptr} address to be relative to the {@code newptr} address.
-        """
+            The {@code newptr} gives the item's desired address in the memory map, and {@code oldptr} gives its previous address. The item's actual data resides at
+            the address in {@code item}. This callback is expected to walk through the fields of the record in {@code item} and modify any values based at the
+            {@code oldptr} address to be relative to the {@code newptr} address.
+            """
+    }
 }
 
-val MDB_msg_func = "MDB_msg_func *".callback(
-    Module.LMDB, int, "MDBMsgFunc",
-    "A callback function used to print a message from the library.",
+val MDB_msg_func = Module.LMDB.callback {
+    int(
+        "MDBMsgFunc",
+        "A callback function used to print a message from the library.",
 
-    charASCII.const.p.IN("msg", "the string to be printed"),
-    opaque_p.IN("ctx", "an arbitrary context pointer for the callback"),
-    returnDoc = "&lt; 0 on failure, &ge; 0 on success"
-) {
-    documentation = "A callback function used to print a message from the library."
+        charASCII.const.p.IN("msg", "the string to be printed"),
+        opaque_p.IN("ctx", "an arbitrary context pointer for the callback"),
+
+        nativeType = "MDB_msg_func *",
+        returnDoc = "&lt; 0 on failure, &ge; 0 on success"
+    ) {
+        documentation = "A callback function used to print a message from the library."
+    }
 }

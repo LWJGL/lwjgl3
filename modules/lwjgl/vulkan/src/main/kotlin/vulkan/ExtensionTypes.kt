@@ -107,20 +107,23 @@ val VkPipelineCoverageModulationStateCreateFlagsNV = typedef(VkFlags, "VkPipelin
 val VkValidationCacheCreateFlagsEXT = typedef(VkFlags, "VkValidationCacheCreateFlagsEXT")
 
 // Function pointer types
-val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
-    Module.VULKAN, VkBool32, "VkDebugReportCallbackEXT",
-    "Application-defined debug report callback function.",
+val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
+    VkBool32(
+        "VkDebugReportCallbackEXT",
+        "Application-defined debug report callback function.",
 
-    VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
-    VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered."),
-    uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
-    size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional: value."),
-    int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
-    char.const.p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
-    char.const.p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
-    opaque_p.IN("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created.")
-) {
-    documentation =
+        VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
+        VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered."),
+        uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
+        size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional: value."),
+        int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
+        char.const.p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
+        char.const.p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
+        opaque_p.IN("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created."),
+
+        nativeType = "PFN_vkDebugReportCallbackEXT"
+    ) {
+        documentation =
         """
         Application-defined debug report callback function.
 
@@ -148,6 +151,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
         <h5>See Also</h5>
         ##VkDebugReportCallbackCreateInfoEXT
         """
+    }
 }
 
 // Struct types
