@@ -76,7 +76,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return the pointer at the buffer's current position
      *
-     * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public long get() {
         return memGetAddress(address + (nextGetIndex() << POINTER_SHIFT));
@@ -108,8 +108,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws java.nio.BufferOverflowException If this buffer's current position is not smaller than its limit
-     * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(long p) {
         memPutAddress(address + (nextPutIndex() << POINTER_SHIFT), p);
@@ -135,11 +134,11 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     }
 
     /**
-     * Absolute <i>get</i> method. Reads the pointer at the specified index.
+     * Absolute <i>get</i> method. Reads the pointer at the specified {@code index}.
      *
      * @param index the index from which the pointer will be read
      *
-     * @return the pointer at the specified index
+     * @return the pointer at the specified {@code index}
      *
      * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
      */
@@ -161,15 +160,14 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     /**
      * Absolute <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
      *
-     * <p>Writes the specified pointer into this buffer at the specified index.</p>
+     * <p>Writes the specified pointer into this buffer at the specified {@code index}.</p>
      *
      * @param index the index at which the pointer will be written
      * @param p     the pointer value to be written
      *
      * @return This buffer
      *
-     * @throws IndexOutOfBoundsException        If <tt>index</tt> is negative or not smaller than the buffer's limit
-     * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
+     * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
      */
     public PointerBuffer put(int index, long p) {
         memPutAddress(address + (check(index, limit) << POINTER_SHIFT), p);
@@ -196,7 +194,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
         return this;
     }
 
-    /** Puts the pointer value of the specified {@link Pointer} at the specified index. */
+    /** Puts the pointer value of the specified {@link Pointer} at the specified {@code index}. */
     public PointerBuffer put(int index, Pointer pointer) {
         put(index, pointer.address());
         return this;
@@ -204,154 +202,260 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
 
     // -- Buffer address operations --
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
     public PointerBuffer put(ByteBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
     public PointerBuffer put(ShortBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
     public PointerBuffer put(IntBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
     public PointerBuffer put(LongBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
     public PointerBuffer put(FloatBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
     public PointerBuffer put(DoubleBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the current position and then increments the position. */
-    public PointerBuffer putAddressOf(PointerBuffer buffer) {
+    /**
+     * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
+     *
+     * @param buffer the pointer to be written
+     *
+     * @return this buffer
+     *
+     * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
+     */
+    public PointerBuffer putAddressOf(CustomBuffer buffer) {
         put(memAddress(buffer));
         return this;
     }
 
     // ---
 
-    /** Puts the address of the specified buffer at the specified index. */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, ByteBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the specified index. */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, ShortBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the specified index. */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, IntBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the specified index. */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, LongBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the specified index. */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, FloatBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the specified index. */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, DoubleBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /** Puts the address of the specified buffer at the specified index. */
-    public PointerBuffer putAddressOf(int index, PointerBuffer buffer) {
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
+    public PointerBuffer putAddressOf(int index, CustomBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
     // ---
 
-    /** Returns a ByteBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link ByteBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public ByteBuffer getByteBuffer(int size) { return memByteBuffer(get(), size); }
 
-    /** Returns a ShortBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link ShortBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public ShortBuffer getShortBuffer(int size) { return memShortBuffer(get(), size); }
 
-    /** Returns a IntBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link IntBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public IntBuffer getIntBuffer(int size) { return memIntBuffer(get(), size); }
 
-    /** Returns a LongBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link LongBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public LongBuffer getLongBuffer(int size) { return memLongBuffer(get(), size); }
 
-    /** Returns a FloatBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link FloatBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public FloatBuffer getFloatBuffer(int size) { return memFloatBuffer(get(), size); }
 
-    /** Returns a DoubleBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link DoubleBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public DoubleBuffer getDoubleBuffer(int size) { return memDoubleBuffer(get(), size); }
 
-    /** Returns a PointerBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link PointerBuffer} instance that
+     * starts at the pointer address and has capacity equal to the specified {@code size}.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public PointerBuffer getPointerBuffer(int size) { return memPointerBuffer(get(), size); }
 
-    /** Decodes the ASCII string that starts at the address found at the current position. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is evaluated as a null-terminated ASCII string, which
+     * is decoded and returned as a {@link String} instance.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public String getStringASCII() { return memASCII(get()); }
 
-    /** Decodes the UTF-8 string that starts at the address found at the current position. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is evaluated as a null-terminated UTF-8 string, which
+     * is decoded and returned as a {@link String} instance.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public String getStringUTF8() { return memUTF8(get()); }
 
-    /** Decodes the UTF-16 string that starts at the address found at the current position. */
+    /**
+     * Reads the pointer at this buffer's current position, and then increments the position. The pointer is evaluated as a null-terminated UTF-16 string,
+     * which is decoded and returned as a {@link String} instance.
+     *
+     * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
+     */
     public String getStringUTF16() { return memUTF16(get()); }
 
     // ---
 
-    /** Returns a ByteBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link ByteBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public ByteBuffer getByteBuffer(int index, int size) { return memByteBuffer(get(index), size); }
 
-    /** Returns a ShortBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link ShortBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public ShortBuffer getShortBuffer(int index, int size) { return memShortBuffer(get(index), size); }
 
-    /** Returns a IntBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link IntBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public IntBuffer getIntBuffer(int index, int size) { return memIntBuffer(get(index), size); }
 
-    /** Returns a LongBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link LongBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public LongBuffer getLongBuffer(int index, int size) { return memLongBuffer(get(index), size); }
 
-    /** Returns a FloatBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link FloatBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public FloatBuffer getFloatBuffer(int index, int size) { return memFloatBuffer(get(index), size); }
 
-    /** Returns a DoubleBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link DoubleBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public DoubleBuffer getDoubleBuffer(int index, int size) { return memDoubleBuffer(get(index), size); }
 
-    /** Returns a PointerBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
+    /** Returns a {@link PointerBuffer} instance that starts at the address found at the specified {@code index} and has capacity equal to the specified size. */
     public PointerBuffer getPointerBuffer(int index, int size) { return memPointerBuffer(get(index), size); }
 
-    /** Decodes the ASCII string that starts at the address found at the specified index. */
+    /** Decodes the ASCII string that starts at the address found at the specified {@code index}. */
     public String getStringASCII(int index) { return memASCII(get(index)); }
 
-    /** Decodes the UTF-8 string that starts at the address found at the specified index. */
+    /** Decodes the UTF-8 string that starts at the address found at the specified {@code index}. */
     public String getStringUTF8(int index) { return memUTF8(get(index)); }
 
-    /** Decodes the UTF-16 string that starts at the address found at the specified index. */
+    /** Decodes the UTF-16 string that starts at the address found at the specified {@code index}. */
     public String getStringUTF16(int index) { return memUTF16(get(index)); }
 
     // -- Bulk get operations --
@@ -367,7 +471,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
+     * @throws BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
      */
     public PointerBuffer get(long[] dst) {
         return get(dst, 0, dst.length);
@@ -378,7 +482,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * <p>This method transfers pointers from this buffer into the specified destination array. If there are fewer pointers remaining in the buffer than are
      * required to satisfy the request, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
-     * {@link java.nio.BufferUnderflowException} is thrown.
+     * {@link BufferUnderflowException} is thrown.
      *
      * <p>Otherwise, this method copies <tt>length</tt> pointers from this buffer into the specified array, starting at the current position of this buffer and
      * at the specified offset in the array. The position of this buffer is then incremented by <tt>length</tt>.
@@ -397,8 +501,8 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
-     * @throws IndexOutOfBoundsException         If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
+     * @throws BufferUnderflowException  If there are fewer than <tt>length</tt> pointers remaining in this buffer
+     * @throws IndexOutOfBoundsException If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
      */
     public PointerBuffer get(long[] dst, int offset, int length) {
         if (BITS64) {
@@ -432,8 +536,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
-     * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
+     * @throws BufferOverflowException If there is insufficient space in this buffer
      */
     public PointerBuffer put(long[] src) {
         return put(src, 0, src.length);
@@ -444,7 +547,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * <p>This method transfers pointers into this buffer from the specified source array. If there are more pointers to be copied from the array than remain
      * in this buffer, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
-     * {@link java.nio.BufferOverflowException} is thrown.
+     * {@link BufferOverflowException} is thrown.
      *
      * <p>Otherwise, this method copies <tt>length</tt> pointers from the specified array into this buffer, starting at the specified offset in the array and
      * at the current position of this buffer. The position of this buffer is then incremented by <tt>length</tt>.</p>
@@ -463,9 +566,8 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
-     * @throws IndexOutOfBoundsException        If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
-     * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
+     * @throws BufferOverflowException   If there is insufficient space in this buffer
+     * @throws IndexOutOfBoundsException If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
      */
     public PointerBuffer put(long[] src, int offset, int length) {
         if (BITS64) {
