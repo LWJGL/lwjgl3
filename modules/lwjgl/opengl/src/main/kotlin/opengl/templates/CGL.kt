@@ -264,7 +264,7 @@ val CGL = "CGL".nativeClass(
         A context is current on a per-thread basis. Multiple threads must serialize calls into the same context.
         """,
 
-        CGLContextObj.IN(
+        nullable..CGLContextObj.IN(
             "context",
             "the rendering context to set as the current rendering context. Pass #NULL to release the current rendering context without assigning a new one."
         )
@@ -298,7 +298,7 @@ val CGL = "CGL".nativeClass(
             """,
             PixelFormatAttribs
         ),
-        nullable..Check(1)..CGLPixelFormatObj.p.OUT(
+        Check(1)..CGLPixelFormatObj.p.OUT(
             "pix",
             """
             the memory address of a pixel format object. On return, points to a new pixel format object that contains pixel format information and a list of
@@ -436,7 +436,7 @@ val CGL = "CGL".nativeClass(
         "Creates a CGL rendering context.",
 
         CGLPixelFormatObj.IN("pix", "a pixel format object created by calling the function #ChoosePixelFormat()"),
-        CGLContextObj.IN(
+        nullable..CGLContextObj.IN(
             "share",
             """
             the rendering context with which to share the OpenGL object state — including texture objects, programs and shader display lists, vertex array
