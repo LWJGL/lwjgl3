@@ -2477,7 +2477,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
     // Obtaining information about a driver and data source
     // ---
 
-    NativeName("SQLDataSourcesW")..SQLRETURN(
+    IgnoreMissing..NativeName("SQLDataSourcesW")..SQLRETURN(
         "DataSources",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldatasources-function">MSDN Reference</a>
@@ -2575,7 +2575,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Check(1)..SQLUSMALLINT.p.OUT("SupportedPtr", "")
     )
 
-    SQLRETURN(
+    NativeName("SQLGetTypeInfoW")..SQLRETURN(
         "GetTypeInfo",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgettypeinfo-function">MSDN Reference</a>
@@ -2598,7 +2598,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
     // Setting and retrieving driver attributes
     // ---
 
-    SQLRETURN(
+    NativeName("SQLSetConnectAttrW")..SQLRETURN(
         "SetConnectAttr",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetconnectattr-function">MSDN Reference</a>
@@ -2644,7 +2644,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         returnDoc = "#SUCCESS, #SUCCESS_WITH_INFO, #ERROR, #INVALID_HANDLE, or #STILL_EXECUTING"
     )
 
-    SQLRETURN(
+    NativeName("SQLGetConnectAttrW")..SQLRETURN(
         "GetConnectAttr",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetconnectattr-function">MSDN Reference</a>
@@ -2702,7 +2702,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Check(1)..SQLINTEGER.p.OUT("StringLengthPtr", "")
     )
 
-    SQLRETURN(
+    NativeName("SQLSetStmtAttrW")..SQLRETURN(
         "SetStmtAttr",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetstmtattr-function">MSDN Reference</a>
@@ -2716,7 +2716,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         AutoSize("Value")..SQLINTEGER.IN("StringLength", "")
     )
 
-    SQLRETURN(
+    NativeName("SQLGetStmtAttrW")..SQLRETURN(
         "GetStmtAttr",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetstmtattr-function">MSDN Reference</a>
@@ -2735,7 +2735,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
     // Setting and retrieving descriptor fields
     // ---
 
-    SQLRETURN(
+    NativeName("SQLGetDescFieldW")..SQLRETURN(
         "GetDescField",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdescfield-function">MSDN Reference</a>
@@ -2773,7 +2773,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Check(1)..nullable..SQLSMALLINT.p.OUT("NullablePtr", "")
     )
 
-    SQLRETURN(
+    NativeName("SQLSetDescFieldW")..SQLRETURN(
         "SetDescField",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlsetdescfield-function">MSDN Reference</a>
@@ -2971,7 +2971,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Check(1)..SQLSMALLINT.p.OUT("NullablePtr", "")
     )
 
-    SQLRETURN(
+    NativeName("SQLColAttributeW")..SQLRETURN(
         "ColAttribute",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcolattribute-function">MSDN Reference</a>
@@ -3053,7 +3053,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Check(1)..SQLLEN.p.OUT("StrLen_or_IndPtr", "")
     )
 
-    SQLRETURN(
+    NativeName("SQLGetDiagFieldW")..SQLRETURN(
         "GetDiagField",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdiagfield-function">MSDN Reference</a>
@@ -3351,7 +3351,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         AutoSize("TableType")..SQLSMALLINT.IN("NameLength4", "")
     )
 
-    SQLRETURN(
+    IgnoreMissing..SQLRETURN(
         "Transact",
         "",
 
@@ -3693,7 +3693,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         AutoSize("szTableName")..SQLSMALLINT.IN("cchTableName", "")
     )
 
-    NativeName("SQLDriversW")..SQLRETURN(
+    IgnoreMissing..NativeName("SQLDriversW")..SQLRETURN(
         "Drivers",
         """
         <a href="https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldrivers-function">MSDN Reference</a>
@@ -3731,7 +3731,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Check(1)..nullable..SQLLEN.p.IN("StrLen_or_IndPtr", "")
     )
 
-    SQLRETURN(
+    IgnoreMissing..SQLRETURN(
         "AllocHandleStd",
         "",
 
