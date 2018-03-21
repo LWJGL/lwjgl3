@@ -295,7 +295,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
-    public PointerBuffer putAddressOf(CustomBuffer buffer) {
+    public PointerBuffer putAddressOf(CustomBuffer<?> buffer) {
         put(memAddress(buffer));
         return this;
     }
@@ -339,7 +339,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     }
 
     /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
-    public PointerBuffer putAddressOf(int index, CustomBuffer buffer) {
+    public PointerBuffer putAddressOf(int index, CustomBuffer<?> buffer) {
         put(index, memAddress(buffer));
         return this;
     }
