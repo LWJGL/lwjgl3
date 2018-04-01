@@ -34,6 +34,7 @@ public final class Callbacks {
             GLFW.Functions.SetWindowIconifyCallback,
             GLFW.Functions.SetWindowMaximizeCallback,
             GLFW.Functions.SetFramebufferSizeCallback,
+            GLFW.Functions.SetWindowContentScaleCallback,
             GLFW.Functions.SetKeyCallback,
             GLFW.Functions.SetCharCallback,
             GLFW.Functions.SetCharModsCallback,
