@@ -1,7 +1,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.lwjgl/lwjgl/badge.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.lwjgl%22%20)
 [![API Javadoc](https://img.shields.io/badge/API-docs-blue.svg?style=flat-square)](https://javadoc.lwjgl.org/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
-[![Slack Status](https://slack.lwjgl.org/badge.svg)](https://slack.lwjgl.org/)
+[![Slack Status](https://slackin-bfxneqmzsp.now.sh/badge.svg)](http://slack.lwjgl.org/)
 
 [![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors)
@@ -34,7 +34,7 @@ Useful links:
 Contact:
 
 - [Forum](http://forum.lwjgl.org)
-- [Slack](https://slack.lwjgl.org/)
+- [Slack](https://lwjgl.slack.com/) (invitations [here](http://slack.lwjgl.org/))
 - [Twitter](https://twitter.com/LWJGL)
 
 If you'd like to contribute, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc)
