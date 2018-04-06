@@ -1054,7 +1054,7 @@ val aiFileIO = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO")
 
     aiFileOpenProc.member("OpenProc", "Function used to open a new file")
     aiFileCloseProc.member("CloseProc", "Function used to close an existing file")
-    aiUserData.member("UserData", "User-defined, opaque data")
+    nullable..aiUserData.member("UserData", "User-defined, opaque data")
 }
 
 val aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile") {
@@ -1071,7 +1071,7 @@ val aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile") {
     aiFileTellProc.member("FileSizeProc", "Callback to retrieve the size of the file, in bytes")
     aiFileSeek.member("SeekProc", "Callback to set the current position of the file cursor (fseek())")
     aiFileFlushProc.member("FlushProc", "Callback to flush the file contents")
-    aiUserData.member("UserData", "User-defined, opaque data")
+    nullable..aiUserData.member("UserData", "User-defined, opaque data")
 }
 
 val aiLogStreamCallback = Module.ASSIMP.callback {
