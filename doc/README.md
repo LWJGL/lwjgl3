@@ -6,7 +6,7 @@ The LWJGL core.
 * `modules/lwjgl/core/src/main/c`
 * `modules/lwjgl/core/src/main/java`
 * `modules/lwjgl/core/src/main/java9` (multi-release)
-* `modules/lwjgl/core/src/main/kotlin` (native binding templates)
+* `modules/lwjgl/core/src/templates/kotlin` (native binding templates)
 * `modules/lwjgl/core/src/generated/c`
 * `modules/lwjgl/core/src/generated/java`
 * `modules/lwjgl/core/src/test`
@@ -19,7 +19,7 @@ Test dependencies: TestNG, JCommander
 A module per LWJGL binding.
 * `modules/lwjgl/<binding>/src/main/c` (optional)
 * `modules/lwjgl/<binding>/src/main/java` (optional)
-* `modules/lwjgl/<binding>/src/main/kotlin`
+* `modules/lwjgl/<binding>/src/templates/kotlin`
 * `modules/lwjgl/<binding>/src/generated/c` (optional)
 * `modules/lwjgl/<binding>/src/generated/java`
 * `modules/lwjgl/<binding>/src/test` (optional)
@@ -78,8 +78,8 @@ LWJGL uses Ant for the build process, which goes like so:
 LWJGL uses the **Generator** to automatically generate native code bindings. The Generator uses template files as input. Both the Generator itself and the template files are written in Kotlin, which is a new JVM-based language, more info [here](http://kotlinlang.org/). The Generator defines a handy DSL that the templates use to define the native code structure.
 
 * Generator source: `modules/generator/src/main/kotlin/org/lwjgl/generator`
-* Template configuration: `modules/lwjgl/<module>/src/main/kotlin/<module>`
-* Template source: `modules/lwjgl/<module>/src/main/kotlin/<module>/templates`
+* Template configuration: `modules/lwjgl/<module>/src/templates/kotlin/<module>`
+* Template source: `modules/lwjgl/<module>/src/templates/kotlin/<module>/templates`
 
 The Generator is very aggressive with skipping work during the generation process. It does that by comparing timestamps of the input template source and the output Java source files. The output file timestamp is also compared against the timestamp of the latest change in the Generator source. Even when all attemps to skip generation fail, the generation happens in-memory and the output file contents are compared against the new content. Only when something has changed is the file overwritten.
 

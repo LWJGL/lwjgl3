@@ -127,7 +127,7 @@ This script is included in /config/build-definitions.xml.
 
             var src = "modules/lwjgl/" + it + "/src";
 
-            templates.push(src + "/main/kotlin");
+            templates.push(src + "/templates/kotlin");
             sources.push(src + "/generated/java");
             if (java.nio.file.Files.isDirectory(java.nio.file.Paths.get(src + "/main/java"))) {
                 sources.push(src + "/main/java");

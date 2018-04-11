@@ -4,8 +4,8 @@
     <output url="file://$MODULE_DIR$/../../../bin/classes/templates" />
     <output-test url="file://$MODULE_DIR$/../../../bin/classes/templates" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/nuklear/src/main/kotlin">
-      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/nuklear/src/main/kotlin" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/nuklear/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/nuklear/src/templates/kotlin" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
