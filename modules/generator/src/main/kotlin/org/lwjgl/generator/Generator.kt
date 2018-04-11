@@ -334,7 +334,7 @@ class Generator(private val moduleRoot: String) {
 
     internal fun generateModule(module: Module) {
         val packageKotlin = module.packageKotlin
-        val pathKotlin = "$moduleRoot/${module.java}/src/main/kotlin/${packageKotlin.replace('.', '/')}"
+        val pathKotlin = "$moduleRoot/${module.java}/src/templates/kotlin/${packageKotlin.replace('.', '/')}"
 
         val moduleLastModified = Paths.get(pathKotlin).lastModified(maxDepth = 1)
         moduleLastModifiedMap[module] = moduleLastModified
@@ -433,7 +433,7 @@ class Generator(private val moduleRoot: String) {
     internal fun generateSimple(target: GeneratorTarget) {
         val modulePath = "$moduleRoot/${target.module.java}"
         val packageKotlin = target.module.packageKotlin
-        val pathKotlin = "$modulePath/src/main/kotlin/${packageKotlin.replace('.', '/')}"
+        val pathKotlin = "$modulePath/src/templates/kotlin/${packageKotlin.replace('.', '/')}"
 
         val outputJava = Paths.get("$modulePath/src/generated/java/${target.packageName.replace('.', '/')}/${target.className}.java")
 

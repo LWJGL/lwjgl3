@@ -248,7 +248,7 @@
         </condition>
 
         <local name="core.kotlin.path"/>
-        <property name="core.kotlin.path" value="${module.lwjgl}/core/src/main/kotlin/core"/>
+        <property name="core.kotlin.path" value="${module.lwjgl}/core/src/templates/kotlin/core"/>
 
         <echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates" unless:set="templates-uptodate"/>
         <mkdir dir="${bin.templates}"/>
