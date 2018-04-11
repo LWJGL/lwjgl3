@@ -170,6 +170,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:set="binding.tinyexr"><local name="module"/><property name="module" value="tinyexr"/><body/></sequential>
                 <sequential if:set="binding.tinyfd"><local name="module"/><property name="module" value="tinyfd"/><body/></sequential>
                 <sequential if:set="binding.tootle"><local name="module"/><property name="module" value="tootle"/><body/></sequential>
+                <sequential if:set="binding.vma"><local name="module"/><property name="module" value="vma"/><body/></sequential>
                 <sequential if:set="binding.vulkan"><local name="module"/><property name="module" value="vulkan"/><body/></sequential>
                 <sequential if:set="binding.xxhash"><local name="module"/><property name="module" value="xxhash"/><body/></sequential>
                 <sequential if:set="binding.yoga"><local name="module"/><property name="module" value="yoga"/><body/></sequential>
