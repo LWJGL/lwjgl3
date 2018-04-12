@@ -213,7 +213,7 @@ val aiMetadata = struct(Module.ASSIMP, "AIMetaData", nativeName = "struct aiMeta
     )
 }
 
-private val aiNode_p = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode").p
+private val _aiNode = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode")
 val aiNode = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode") {
     documentation =
         """
@@ -225,9 +225,9 @@ val aiNode = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode") {
 
     aiString.member("mName", "The name of the node.")
     aiMatrix4x4.member("mTransformation", "The transformation relative to the node's parent.")
-    nullable..aiNode_p.member("mParent", "Parent node. #NULL if this node is the root node.")
+    nullable.._aiNode.p.member("mParent", "Parent node. #NULL if this node is the root node.")
     AutoSize("mChildren", optional = true)..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
-    aiNode_p.p.member("mChildren", "The child nodes of this node. #NULL if {@code mNumChildren} is 0.")
+    _aiNode.p.p.member("mChildren", "The child nodes of this node. #NULL if {@code mNumChildren} is 0.")
     AutoSize("mMeshes", optional = true)..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
     unsigned_int.p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
     nullable..aiMetadata.p.member("mMetadata", "Metadata associated with this node or #NULL if there is no metadata.")
@@ -844,7 +844,7 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
         the AI_SCENE_FLAGS_INCOMPLETE bit set.
         """
     ).links("AI_SCENE_FLAGS_\\w+", LinkMode.BITFIELD)
-    nullable..aiNode_p.member(
+    nullable..aiNode.p.member(
         "mRootNode",
         """
         The root node of the hierarchy. There will always be at least the root node if the import was successful (and no special flags have been set). Presence
@@ -950,15 +950,15 @@ val aiImporterDesc = struct(Module.ASSIMP, "AIImporterDesc", nativeName = "struc
     )
 }
 
-private val aiFile_p = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile").p
-private val aiFileIO_p = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO").p
+private val _aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile")
+private val _aiFileIO = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO")
 
 val aiFileWriteProc = Module.ASSIMP.callback {
     size_t(
         "AIFileWriteProc",
         "File write procedure.",
 
-        aiFile_p.IN("pFile", "File pointer to write to"),
+        _aiFile.p.IN("pFile", "File pointer to write to"),
         char.const.p.IN("pBuffer", "The buffer to be written"),
         size_t.IN("memB", "Size of the individual element to be written"),
         size_t.IN("count", "Number of elements to be written"),
@@ -972,7 +972,7 @@ val aiFileReadProc = Module.ASSIMP.callback {
         "AIFileReadProc",
         "File read procedure",
 
-        aiFile_p.IN("pFile", "File pointer to read from"),
+        _aiFile.p.IN("pFile", "File pointer to read from"),
         char.p.IN("pBuffer", "The buffer to read the values"),
         size_t.IN("size", "Size in bytes of each element to be read"),
         size_t.IN("count", "Number of elements to be read"),
@@ -986,7 +986,7 @@ val aiFileTellProc = Module.ASSIMP.callback {
         "AIFileTellProc",
         "File tell procedure.",
 
-        aiFile_p.IN("pFile", "File pointer to find ftell() on"),
+        _aiFile.p.IN("pFile", "File pointer to find ftell() on"),
 
         nativeType = "aiFileTellProc"
     )
@@ -997,7 +997,7 @@ val aiFileFlushProc = Module.ASSIMP.callback {
         "AIFileFlushProc",
         "File flush procedure.",
 
-        aiFile_p.IN("pFile", "File pointer to flush"),
+        _aiFile.p.IN("pFile", "File pointer to flush"),
 
         nativeType = "aiFileFlushProc"
     )
@@ -1010,7 +1010,7 @@ val aiFileSeek = Module.ASSIMP.callback {
         "AIFileSeek",
         "File seek procedure",
 
-        aiFile_p.IN("pFile", "File pointer to seek to"),
+        _aiFile.p.IN("pFile", "File pointer to seek to"),
         size_t.IN("offset", "Number of bytes to shift from origin"),
         aiOrigin.IN("origin", "Position used as reference for the offset."),
 
@@ -1019,11 +1019,11 @@ val aiFileSeek = Module.ASSIMP.callback {
 }
 
 val aiFileOpenProc = Module.ASSIMP.callback {
-    aiFile_p(
+    _aiFile.p(
         "AIFileOpenProc",
         "File open procedure",
 
-        aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
+        _aiFileIO.p.IN("pFileIO", "FileIO system pointer"),
         charUTF8.const.p.IN("fileName", "The name of the file to be opened"),
         charUTF8.const.p.IN("openMode", "The mode in which to open the file"),
 
@@ -1036,8 +1036,8 @@ val aiFileCloseProc = Module.ASSIMP.callback {
         "AIFileCloseProc",
         "File close procedure",
 
-        aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
-        aiFile_p.IN("pFile", "File pointer to close"),
+        _aiFileIO.p.IN("pFileIO", "FileIO system pointer"),
+        _aiFile.p.IN("pFile", "File pointer to close"),
 
         nativeType = "aiFileCloseProc"
     )
@@ -1122,7 +1122,7 @@ val aiExportFormatDesc = struct(Module.ASSIMP, "AIExportFormatDesc", nativeName 
     charUTF8.const.p.member("fileExtension", "Recommended file extension for the exported file in lower case.")
 }
 
-private val aiExportDataBlob_p = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "struct aiExportDataBlob").p
+private val _aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "struct aiExportDataBlob")
 val aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "struct aiExportDataBlob") {
     documentation = """
         Describes a blob of exported scene data. Use #ExportSceneToBlob() to create a blob containing an exported scene. The memory referred by this structure
@@ -1146,5 +1146,5 @@ val aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "s
         """
     )
 
-    nullable..aiExportDataBlob_p.member("next", "Pointer to the next blob in the chain or NULL if there is none.")
+    nullable.._aiExportDataBlob.p.member("next", "Pointer to the next blob in the chain or NULL if there is none.")
 }

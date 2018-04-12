@@ -233,15 +233,13 @@ val nk_str = struct(Module.NUKLEAR, "NkStr", nativeName = "struct nk_str", mutab
 
 // TEXT EDITOR
 
-private val nk_text_edit_p = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit").p
-private val nk_text_edit_const_p = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit").const.p
-
+private val _nk_text_edit = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit")
 val nk_plugin_filter = Module.NUKLEAR.callback {
     int(
         "NkPluginFilter",
         "",
 
-        nk_text_edit_const_p.IN("edit", ""),
+        _nk_text_edit.const.p.IN("edit", ""),
         nk_rune.IN("unicode", ""),
 
         nativeType = "nk_plugin_filter"
@@ -256,7 +254,7 @@ val nk_plugin_paste = Module.NUKLEAR.callback {
         "",
 
         nk_handle_in_callback.IN("handle", ""),
-        nk_text_edit_p.IN("edit", ""),
+        _nk_text_edit.p.IN("edit", ""),
 
         nativeType = "nk_plugin_paste"
     ) {
@@ -1170,7 +1168,7 @@ val nk_menu_state = struct(Module.NUKLEAR, "NkMenuState", nativeName = "struct n
     nk_scroll.member("offset", "")
 }
 
-private val nk_panel_p = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel").p
+private val _nk_panel = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel")
 val nk_panel = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel", mutable = false) {
     nk_panel_type.member("type", "").links("PANEL_\\w+")
     nk_flags.member("flags", "")
@@ -1189,14 +1187,14 @@ val nk_panel = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel",
     nk_row_layout.member("row", "")
     nk_chart.member("chart", "")
     nk_command_buffer.p.member("buffer", "")
-    nk_panel_p.member("parent", "")
+    _nk_panel.p.member("parent", "")
 }
 
 // WINDOW
 
-private val nk_window_p = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window").p
+private val _nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window")
 val nk_popup_state = struct(Module.NUKLEAR, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
-    nk_window_p.member("win", "")
+    _nk_window.p.member("win", "")
     nk_panel_type.member("type", "").links("PANEL_\\w+")
     nk_popup_buffer.member("buf", "")
     nk_hash.member("name", "")
@@ -1260,9 +1258,9 @@ val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_windo
     unsigned_int.member("table_count", "")
 
     /* window list hooks */
-    nk_window_p.member("next", "")
-    nk_window_p.member("prev", "")
-    nk_window_p.member("parent", "")
+    _nk_window.p.member("next", "")
+    _nk_window.p.member("prev", "")
+    _nk_window.p.member("parent", "")
 }
 
 val nk_pool = struct(Module.NUKLEAR, "NkPool", nativeName = "struct nk_pool", mutable = false) {
@@ -1339,10 +1337,10 @@ val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_con
     int.member("build", "").public = false
     intb.member("use_pool", "").public = false
     nk_pool.member("pool", "").public = false
-    (nullable..nk_window_p.member("begin", "")).public = false
-    (nullable..nk_window_p.member("end", "")).public = false
-    (nullable..nk_window_p.member("active", "")).public = false
-    (nullable..nk_window_p.member("current", "")).public = false
+    (nullable..nk_window.p.member("begin", "")).public = false
+    (nullable..nk_window.p.member("end", "")).public = false
+    (nullable..nk_window.p.member("active", "")).public = false
+    (nullable..nk_window.p.member("current", "")).public = false
     (nullable.."struct nk_page_element".opaque.p.member("freelist", "")).public = false
     unsigned_int.member("count", "").public = false
     unsigned_int.member("seq", "").public = false

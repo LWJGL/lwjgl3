@@ -28,16 +28,16 @@ val NSVGpaint = struct(Module.NANOVG, "NSVGPaint", nativeName = "NSVGpaint", mut
     }
 }
 
-private val NSVGpath_p = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false).p
+private val _NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false)
 val NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false) {
     float.p.member("pts", "cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...}")
     AutoSize("pts")..int.member("npts", "total number of bezier points")
     char.member("closed", "flag indicating if shapes should be treated as closed")
     float.array("bounds", "tight bounding box of the shape {@code [minx,miny,maxx,maxy]}", size = 4)
-    NSVGpath_p.member("next", "pointer to next path, or #NULL if last element")
+    _NSVGpath.p.member("next", "pointer to next path, or #NULL if last element")
 }
 
-private val NSVGshape_p = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false).p
+private val _NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false)
 val NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mutable = false) {
     char.array("id", "optional 'id' attr of the shape or its group", size = 64)
     NSVGpaint.member("fill", "fill paint")
@@ -53,14 +53,14 @@ val NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mut
     char.member("fillRule", "fill rule, see NSVGfillRule")
     unsigned_char.member("flags", "logical or of NSVG_FLAGS_* flags")
     float.array("bounds", "tight bounding box of the shape {@code [minx,miny,maxx,maxy]}", size = 4)
-    NSVGpath_p.member("paths", "linked list of paths in the image")
-    NSVGshape_p.member("next", "pointer to next shape, or #NULL if last element")
+    NSVGpath.p.member("paths", "linked list of paths in the image")
+    _NSVGshape.p.member("next", "pointer to next shape, or #NULL if last element")
 }
 
 val NSVGimage = struct(Module.NANOVG, "NSVGImage", nativeName = "NSVGimage", mutable = false) {
     float.member("width", "Width of the image.")
     float.member("height", "Height of the image.")
-    NSVGshape_p.member("shapes", "lLinked list of shapes in the image")
+    NSVGshape.p.member("shapes", "lLinked list of shapes in the image")
 }
 
 val NSVGrasterizer = "NSVGrasterizer".opaque

@@ -227,7 +227,7 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
 }
 
 private val YGNodeListRef = "YGNodeListRef".handle
-private val YGNode_p = struct(Module.YOGA, "YGNode").p
+private val _YGNode = struct(Module.YOGA, "YGNode")
 val YGNode = struct(Module.YOGA, "YGNode") {
     nullable..opaque_p.member("context", "")
     nullable..YGPrintFunc.member("print", "")
@@ -243,7 +243,7 @@ val YGNode = struct(Module.YOGA, "YGNode") {
 
     nullable..YGNodeRef.member("parent", "")
     nullable..YGNodeListRef.member("children", "")
-    nullable..YGNode_p.member("nextChild", "")
+    nullable.._YGNode.p.member("nextChild", "")
 
     nullable..YGConfigRef.member("config", "")
     bool.member("isDirty", "")

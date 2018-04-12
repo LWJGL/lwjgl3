@@ -174,13 +174,13 @@ val stbrp_rect = struct(Module.STB, "STBRPRect", nativeName = "stbrp_rect") {
     intb.member("was_packed", "non-zero if valid packing")
 }
 
-private val stbrp_node_p = struct(Module.STB, "STBRPNode", nativeName = "stbrp_node").p
+private val _stbrp_node = struct(Module.STB, "STBRPNode", nativeName = "stbrp_node")
 val stbrp_node = struct(Module.STB, "STBRPNode", nativeName = "stbrp_node", mutable = false) {
     documentation = "The opaque {@code stbrp_node} struct."
 
     stbrp_coord.member("x", "")
     stbrp_coord.member("y", "")
-    nullable..stbrp_node_p.member("next", "")
+    nullable.._stbrp_node.p.member("next", "")
 }
 
 val stbrp_context = struct(Module.STB, "STBRPContext", nativeName = "stbrp_context", mutable = false) {
@@ -192,8 +192,8 @@ val stbrp_context = struct(Module.STB, "STBRPContext", nativeName = "stbrp_conte
     int.member("init_mode", "")
     int.member("heuristic", "")
     int.member("num_nodes", "")
-    nullable..stbrp_node_p.member("active_head", "")
-    nullable..stbrp_node_p.member("free_head", "")
+    nullable..stbrp_node.p.member("active_head", "")
+    nullable..stbrp_node.p.member("free_head", "")
     stbrp_node.array("extra", "we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}", size = 2)
 }
 
@@ -236,7 +236,7 @@ val stbtt_pack_context = struct(Module.STB, "STBTTPackContext", nativeName = "st
     unsigned_int.member("h_oversample", "")
     unsigned_int.member("v_oversample", "")
     unsigned_char.p.member("pixels", "")
-    stbrp_node_p.buffer("nodes", "")
+    stbrp_node.p.buffer("nodes", "")
 }
 
 val stbtt_packedchar = struct(Module.STB, "STBTTPackedchar", nativeName = "stbtt_packedchar") {

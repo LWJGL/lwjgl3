@@ -129,7 +129,7 @@ val write_cb = Module.JEMALLOC.callback {
     }
 }
 
-private val extent_hooks_t_p = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t").p
+private val _extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t")
 
 val extent_alloc_t = Module.JEMALLOC.callback {
     void.p(
@@ -148,7 +148,7 @@ val extent_alloc_t = Module.JEMALLOC.callback {
         {@code arena.i.dss} setting irrelevant.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         nullable..void.p.IN("new_addr", ""),
         size_t.IN("size", ""),
         size_t.IN("alignment", ""),
@@ -174,7 +174,7 @@ val extent_dalloc_t = Module.JEMALLOC.callback {
         future use, in which case it will be automatically retained for later reuse.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr", ""),
         AutoSize("addr")..size_t.IN("size", ""),
         bool.IN("committed", ""),
@@ -197,7 +197,7 @@ val extent_destroy_t = Module.JEMALLOC.callback {
         arena destruction (see {@code arena.i.destroy}).
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr", ""),
         AutoSize("addr")..size_t.IN("size", ""),
         bool.IN("committed", ""),
@@ -222,7 +222,7 @@ val extent_commit_t = Module.JEMALLOC.callback {
         request.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr", ""),
         AutoSize("addr")..size_t.IN("size", ""),
         size_t.IN("offset", ""),
@@ -247,7 +247,7 @@ val extent_decommit_t = Module.JEMALLOC.callback {
         opt-out from decommit; the memory remains committed and available for future use, in which case it will be automatically retained for later reuse.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr", ""),
         AutoSize("addr")..size_t.IN("size", ""),
         size_t.IN("offset", ""),
@@ -272,7 +272,7 @@ val extent_purge_t = Module.JEMALLOC.callback {
         zero-filled the next time they are accessed. If the function returns true, this indicates failure to purge.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr", ""),
         AutoSize("addr")..size_t.IN("size", ""),
         size_t.IN("offset", ""),
@@ -297,7 +297,7 @@ val extent_split_t = Module.JEMALLOC.callback {
         and therefore should continue to be operated on as a whole.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr", ""),
         AutoSize("addr")..size_t.IN("size", ""),
         size_t.IN("size_a", ""),
@@ -323,7 +323,7 @@ val extent_merge_t = Module.JEMALLOC.callback {
         should continue to be operated on independently.
         """,
 
-        extent_hooks_t_p.IN("extent_hooks", ""),
+        _extent_hooks_t.p.IN("extent_hooks", ""),
         void.p.IN("addr_a", ""),
         AutoSize("addr_a")..size_t.IN("size_a", ""),
         void.p.IN("addr_b", ""),
