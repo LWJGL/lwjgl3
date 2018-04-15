@@ -706,7 +706,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         command-queues, memory, program and kernel objects and for executing kernels on one or more devices specified in the context.
         """,
 
-        NullTerminated..cl_context_properties.const.p.IN(
+        nullable..NullTerminated..cl_context_properties.const.p.IN(
             "properties",
             """
             a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -760,7 +760,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         "CreateContextFromType",
         "Creates a context using devices of the specified type. See #CreateContext() for details.",
 
-        NullTerminated..cl_context_properties.const.p.IN(
+        nullable..NullTerminated..cl_context_properties.const.p.IN(
             "properties",
             """
             a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
