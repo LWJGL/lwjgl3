@@ -1209,28 +1209,24 @@ ${validations.joinToString("\n")}
                 if (more)
                     println(",")
 
-                print("$t$t")
-
-                val param = it.field(parentMember)
                 print(
-                    if (it is StructMemberArray) {
-                        if (it is StructMemberCharArray) {
-                            when (mode) {
-                                MultiSetterMode.NORMAL,
-                                MultiSetterMode.ALTER -> "ByteBuffer $param"
-                            }
-                        } else if (it.nativeType is StructType)
-                            "${it.nativeType.javaMethodType}.Buffer $param"
-                        else
-                            "${it.primitiveMapping.toPointer.javaMethodName} $param"
-                    } else if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType) {
-                        val structType = it.nativeType.javaMethodType
-                        if (it is StructMemberBuffer)
-                            "$structType.Buffer $param"
-                        else
-                            "$structType $param"
-                    } else
-                        "${it.nativeType.javaMethodType} $param"
+                    "$t$t${it.nullable(
+                        (if (it is StructMemberArray) {
+                            if (it is StructMemberCharArray) {
+                                "ByteBuffer"
+                            } else if (it.nativeType is StructType)
+                                "${it.nativeType.javaMethodType}.Buffer"
+                            else
+                                it.primitiveMapping.toPointer.javaMethodName
+                        } else if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType) {
+                            val structType = it.nativeType.javaMethodType
+                            if (it is StructMemberBuffer)
+                                "$structType.Buffer"
+                            else
+                                structType
+                        } else
+                            it.nativeType.javaMethodType)
+                    )} ${it.field(parentMember)}"
                 )
             }
         }
