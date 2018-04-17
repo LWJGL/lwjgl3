@@ -288,6 +288,10 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <dt>On success, this command returns</dt>
             <dd><ul>
                 <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
                 <li>#ERROR_DEVICE_LOST</li>
                 <li>#ERROR_OUT_OF_DATE_KHR</li>
             </ul></dd>

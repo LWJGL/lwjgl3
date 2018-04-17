@@ -129,7 +129,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         <code><pre>
 ￿VkResult vkGetMemoryFdPropertiesKHR(
 ￿    VkDevice                                    device,
-￿    VkExternalMemoryHandleTypeFlagBitsKHR       handleType,
+￿    VkExternalMemoryHandleTypeFlagBits          handleType,
 ￿    int                                         fd,
 ￿    VkMemoryFdPropertiesKHR*                    pMemoryFdProperties);</pre></code>
 
@@ -142,7 +142,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
             <li>{@code pMemoryFdProperties} <b>must</b> be a valid pointer to a ##VkMemoryFdPropertiesKHR structure</li>
         </ul>
 
@@ -155,7 +155,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE</li>
             </ul></dd>
         </dl>
 
@@ -164,7 +164,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         """,
 
         VkDevice.IN("device", "the logical device that will be importing {@code fd}."),
-        VkExternalMemoryHandleTypeFlagBitsKHR.IN("handleType", "the type of the handle {@code fd}."),
+        VkExternalMemoryHandleTypeFlagBits.IN("handleType", "the type of the handle {@code fd}."),
         int.IN("fd", "the handle which will be imported."),
         VkMemoryFdPropertiesKHR.p.OUT("pMemoryFdProperties", "will return properties of the handle {@code fd}.")
     )

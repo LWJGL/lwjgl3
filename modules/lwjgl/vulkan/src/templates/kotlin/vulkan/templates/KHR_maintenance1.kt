@@ -26,6 +26,9 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
             <li>Add a new command #TrimCommandPoolKHR() which gives the implementation an opportunity to release any unused command pool memory back to the system.</li>
         </ul>
 
+        <h5>Promotion to Vulkan 1.1</h5>
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_maintenance1}</dd>
@@ -37,7 +40,7 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
             <dd>70</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -50,7 +53,12 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-10-26</dd>
+            <dd>2018-03-13</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.1 Core</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -75,7 +83,7 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
     IntConstant(
         "The extension specification version.",
 
-        "KHR_MAINTENANCE1_SPEC_VERSION".."1"
+        "KHR_MAINTENANCE1_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -105,51 +113,10 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
 
     void(
         "TrimCommandPoolKHR",
-        """
-        Trim a command pool.
-
-        <h5>C Specification</h5>
-        To trim a command pool, call:
-
-        <code><pre>
-￿void vkTrimCommandPoolKHR(
-￿    VkDevice                                    device,
-￿    VkCommandPool                               commandPool,
-￿    VkCommandPoolTrimFlagsKHR                   flags);</pre></code>
-
-        <h5>Description</h5>
-        Trimming a command pool recycles unused memory from the command pool back to the system. Command buffers allocated from the pool are not affected by the command.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        This command provides applications with some control over the internal memory allocations used by command pools.
-
-        Unused memory normally arises from command buffers that have been recorded and later reset, such that they are no longer using the memory. On reset, a command buffer can return memory to its command pool, but the only way to release memory from a command pool to the system requires calling #ResetCommandPool(), which cannot be executed while any command buffers from that pool are still in use. Subsequent recording operations into command buffers will re-use this memory but since total memory requirements fluctuate over time, unused memory can accumulate.
-
-        In this situation, trimming a command pool <b>may</b> be useful to return unused memory back to the system, returning the total outstanding memory allocated by the pool back to a more "{@code average}" value.
-
-        Implementations utilize many internal allocation strategies that make it impossible to guarantee that all unused memory is released back to the system. For instance, an implementation of a command pool <b>may</b> involve allocating memory in bulk from the system and sub-allocating from that memory. In such an implementation any live command buffer that holds a reference to a bulk allocation would prevent that allocation from being freed, even if only a small proportion of the bulk allocation is in use.
-
-        In most cases trimming will result in a reduction in allocated but unused memory, but it does not guarantee the "{@code ideal}" behaviour.
-
-        Trimming <b>may</b> be an expensive operation, and <b>should</b> not be called frequently. Trimming <b>should</b> be treated as a way to relieve memory pressure after application-known points when there exists enough unused memory that the cost of trimming is "{@code worth}" it.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code commandPool} <b>must</b> be a valid {@code VkCommandPool} handle</li>
-            <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code commandPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandPool} <b>must</b> be externally synchronized</li>
-        </ul>
-        """,
+        "See #TrimCommandPool().",
 
         VkDevice.IN("device", "the logical device that owns the command pool."),
         VkCommandPool.IN("commandPool", "the command pool to trim."),
-        VkCommandPoolTrimFlagsKHR.IN("flags", "reserved for future use.")
+        VkCommandPoolTrimFlags.IN("flags", "reserved for future use.")
     )
 }

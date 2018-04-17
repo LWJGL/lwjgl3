@@ -43,6 +43,11 @@ fun templateCustomization() {
             "API_VERSION_1_0".."VK_MAKE_VERSION(1, 0, 0)"
         )
 
+        IntConstant(
+            "The Vulkan registry version used to generate the LWJGL bindings.",
+            "HEADER_VERSION".."73"
+        )
+
         LongConstant(
             """
             The reserved handle {@code VK_NULL_HANDLE} <b>can</b> be passed in place of valid object handles when explicitly called out in the specification. Any
@@ -95,6 +100,36 @@ fun templateCustomization() {
             noPrefix = true
         )
 
+        IntConstant(
+            "API Constants",
+
+            "MAX_PHYSICAL_DEVICE_NAME_SIZE".."256",
+            "UUID_SIZE".."16",
+            "MAX_EXTENSION_NAME_SIZE".."256",
+            "MAX_DESCRIPTION_SIZE".."256",
+            "MAX_MEMORY_TYPES".."32",
+            "MAX_MEMORY_HEAPS".."16",
+            "REMAINING_MIP_LEVELS".."(~0)",
+            "REMAINING_ARRAY_LAYERS".."(~0)",
+            "ATTACHMENT_UNUSED".."(~0)",
+            "TRUE".."1",
+            "FALSE".."0",
+            "QUEUE_FAMILY_IGNORED".."(~0)",
+            "SUBPASS_EXTERNAL".."(~0)"
+        )
+
+        FloatConstant(
+            "API Constants",
+
+            "LOD_CLAMP_NONE".."1000.0f"
+        )
+
+        LongConstant(
+            "API Constants",
+
+            "WHOLE_SIZE".."(~0L)"
+        )
+
         MultiType(
             PointerMapping.DATA_INT,
             PointerMapping.DATA_LONG
@@ -130,15 +165,74 @@ fun templateCustomization() {
         SingleValue("pCommandBuffer")..this["FreeCommandBuffers"].getParam("pCommandBuffers")
     }
 
-    VkDeviceGroupPresentCapabilitiesKHX.definition.apply {
-        javaImport("static org.lwjgl.vulkan.KHXDeviceGroupCreation.*")
+    VK11.apply {
+        documentation =
+            """
+            The core Vulkan 1.1 functionality.
+
+            Vulkan Version 1.1 <em>promoted</em> a number of key extensions into the core API:
+
+            ${ul(
+                KHR_16bit_storage.link,
+                KHR_bind_memory2.link,
+                KHR_dedicated_allocation.link,
+                KHR_descriptor_update_template.link,
+                KHR_device_group.link,
+                KHR_device_group_creation.link,
+                KHR_external_memory.link,
+                KHR_external_memory_capabilities.link,
+                KHR_external_semaphore.link,
+                KHR_external_semaphore_capabilities.link,
+                KHR_external_fence.link,
+                KHR_external_fence_capabilities.link,
+                KHR_get_memory_requirements2.link,
+                KHR_get_physical_device_properties2.link,
+                KHR_maintenance1.link,
+                KHR_maintenance2.link,
+                KHR_maintenance3.link,
+                KHR_multiview.link,
+                KHR_relaxed_block_layout.link,
+                KHR_sampler_ycbcr_conversion.link,
+                KHR_shader_draw_parameters.link,
+                KHR_storage_buffer_storage_class.link,
+                KHR_variable_pointers.link
+            )}
+
+            The only changes to the functionality added by these extensions were to {@code VK_KHR_shader_draw_parameters}, which had a
+            <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-features-shaderDrawParameters">feature bit</a>
+            added to determine support in the core API, and
+            <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html\#features-features-variablePointersStorageBuffer">{@code variablePointersStorageBuffer}</a>
+            from {@code VK_KHR_variable_pointers} was made optional.
+
+            Additionally, Vulkan 1.1 added support for {@link VkPhysicalDeviceSubgroupProperties subgroup operations},
+            {@link VkPhysicalDeviceProtectedMemoryFeatures protected memory}, and a new command to {@link VK11\#vkEnumerateInstanceVersion enumerate the
+            instance version}.
+            """
+
+        IntConstant(
+            "The API version number for Vulkan 1.1.",
+            "API_VERSION_1_1".."VK10.VK_MAKE_VERSION(1, 1, 0)"
+        )
+
+        IntConstant(
+            "API Constants",
+
+            "LUID_SIZE".."8",
+            "QUEUE_FAMILY_EXTERNAL".."(~0-1)",
+            "MAX_DEVICE_GROUP_SIZE".."32"
+        )
     }
 
-    VkPhysicalDeviceGroupPropertiesKHX.definition.apply {
-        javaImport("static org.lwjgl.vulkan.KHXDeviceGroupCreation.*")
+    VkDeviceGroupPresentCapabilitiesKHR.definition.apply {
+        javaImport("static org.lwjgl.vulkan.VK11.*")
     }
 
-    VkPhysicalDeviceIDPropertiesKHR.definition.apply {
+    VkPhysicalDeviceGroupProperties.definition.apply {
+        javaImport("static org.lwjgl.vulkan.VK11.*")
+    }
+
+    VkPhysicalDeviceIDProperties.definition.apply {
         javaImport("static org.lwjgl.vulkan.VK10.*")
+        javaImport("static org.lwjgl.vulkan.VK11.*")
     }
 }

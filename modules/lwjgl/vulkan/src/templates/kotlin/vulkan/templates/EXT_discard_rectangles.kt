@@ -15,7 +15,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
         From zero to an implementation-dependent limit (specified by {@code maxDiscardRectangles}) number of discard rectangles can be operational at once. When one or more discard rectangles are active, rasterized fragments can either survive if the fragment is within any of the operational discard rectangles (#DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT mode) or be rejected if the fragment is within any of the operational discard rectangles (#DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT mode).
 
-        These discard rectangles operate orthogonally to the existing scissor test functionality. If the {@link KHXDeviceGroup VK_KHX_device_group} extension is enabled the discard rectangles can be different for each physical device in the device group by specifying the device mask and setting discard rectangle dynamic state.
+        These discard rectangles operate orthogonally to the existing scissor test functionality. The discard rectangles can be different for each physical device in a device group by specifying the device mask and setting discard rectangle dynamic state.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -43,6 +43,12 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-12-22</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Interacts with VK_KHR_device_group</li>
+                <li>Interacts with Vulkan 1.1</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -115,7 +121,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled</li>
+            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled</li>
             <li>The sum of {@code firstDiscardRectangle} and {@code discardRectangleCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceDiscardRectanglePropertiesEXT{@code ::maxDiscardRectangles}</li>
             <li>The {@code x} and {@code y} member of {@code offset} in each ##VkRect2D element of {@code pDiscardRectangles} <b>must</b> be greater than or equal to 0</li>
             <li>Evaluation of <code>(offset.x + extent.width)</code> in each ##VkRect2D element of {@code pDiscardRectangles} <b>must</b> not cause a signed integer addition overflow</li>

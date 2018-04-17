@@ -178,7 +178,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled</li>
+            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled</li>
             <li>{@code firstViewport} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
             <li>The sum of {@code firstViewport} and {@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
         </ul>

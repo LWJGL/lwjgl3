@@ -41,7 +41,7 @@ abstract class APIBinding(
 
     private val _classes: MutableList<NativeClass> = ArrayList()
 
-    protected fun getClasses(corePrefix: String): List<NativeClass> {
+    fun getClasses(corePrefix: String): List<NativeClass> {
         val classes = ArrayList(_classes)
         classes.sortWith(Comparator { o1, o2 ->
             // Core functionality first, extensions after

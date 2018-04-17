@@ -132,7 +132,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         <code><pre>
 ￿VkResult vkGetMemoryWin32HandlePropertiesKHR(
 ￿    VkDevice                                    device,
-￿    VkExternalMemoryHandleTypeFlagBitsKHR       handleType,
+￿    VkExternalMemoryHandleTypeFlagBits          handleType,
 ￿    HANDLE                                      handle,
 ￿    VkMemoryWin32HandlePropertiesKHR*           pMemoryWin32HandleProperties);</pre></code>
 
@@ -145,7 +145,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
             <li>{@code pMemoryWin32HandleProperties} <b>must</b> be a valid pointer to a ##VkMemoryWin32HandlePropertiesKHR structure</li>
         </ul>
 
@@ -158,7 +158,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE</li>
             </ul></dd>
         </dl>
 
@@ -167,7 +167,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         """,
 
         VkDevice.IN("device", "the logical device that will be importing {@code handle}."),
-        VkExternalMemoryHandleTypeFlagBitsKHR.IN("handleType", "the type of the handle {@code handle}."),
+        VkExternalMemoryHandleTypeFlagBits.IN("handleType", "the type of the handle {@code handle}."),
         HANDLE.IN("handle", "the handle which will be imported."),
         VkMemoryWin32HandlePropertiesKHR.p.OUT("pMemoryWin32HandleProperties", "will return properties of {@code handle}.")
     )

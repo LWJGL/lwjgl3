@@ -109,7 +109,7 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
             <dt>On failure, this command returns</dt>
             <dd><ul>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE</li>
             </ul></dd>
         </dl>
 

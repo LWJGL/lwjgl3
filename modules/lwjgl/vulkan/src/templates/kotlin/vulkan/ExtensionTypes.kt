@@ -19,6 +19,7 @@ val VkDebugReportCallbackEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDebugReportC
 val VkDescriptorUpdateTemplateKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDescriptorUpdateTemplateKHR")
 val VkObjectTableNVX = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkObjectTableNVX")
 val VkIndirectCommandsLayoutNVX = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectCommandsLayoutNVX")
+val VkDebugUtilsMessengerEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDebugUtilsMessengerEXT")
 val VkSamplerYcbcrConversionKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSamplerYcbcrConversionKHR")
 val VkValidationCacheEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkValidationCacheEXT")
 
@@ -27,22 +28,14 @@ val VkSurfaceTransformFlagBitsKHR = "VkSurfaceTransformFlagBitsKHR".enumType
 val VkColorSpaceKHR = "VkColorSpaceKHR".enumType
 val VkPresentModeKHR = "VkPresentModeKHR".enumType
 val VkCompositeAlphaFlagBitsKHR = "VkCompositeAlphaFlagBitsKHR".enumType
+val VkDeviceGroupPresentModeFlagBitsKHR = "VkDeviceGroupPresentModeFlagBitsKHR".enumType
 val VkDisplayPlaneAlphaFlagBitsKHR = "VkDisplayPlaneAlphaFlagBitsKHR".enumType
 val VkDebugReportObjectTypeEXT = "VkDebugReportObjectTypeEXT".enumType
 val VkRasterizationOrderAMD = "VkRasterizationOrderAMD".enumType
 val VkShaderInfoTypeAMD = "VkShaderInfoTypeAMD".enumType
 val VkExternalMemoryHandleTypeFlagBitsNV = "VkExternalMemoryHandleTypeFlagBitsNV".enumType
 val VkExternalMemoryFeatureFlagBitsNV = "VkExternalMemoryFeatureFlagBitsNV".enumType
-val VkPeerMemoryFeatureFlagBitsKHX = "VkPeerMemoryFeatureFlagBitsKHX".enumType
-val VkMemoryAllocateFlagBitsKHX = "VkMemoryAllocateFlagBitsKHX".enumType
-val VkDeviceGroupPresentModeFlagBitsKHX = "VkDeviceGroupPresentModeFlagBitsKHX".enumType
 val VkValidationCheckEXT = "VkValidationCheckEXT".enumType
-val VkExternalMemoryHandleTypeFlagBitsKHR = "VkExternalMemoryHandleTypeFlagBitsKHR".enumType
-val VkExternalMemoryFeatureFlagBitsKHR = "VkExternalMemoryFeatureFlagBitsKHR".enumType
-val VkExternalSemaphoreHandleTypeFlagBitsKHR = "VkExternalSemaphoreHandleTypeFlagBitsKHR".enumType
-val VkExternalSemaphoreFeatureFlagBitsKHR = "VkExternalSemaphoreFeatureFlagBitsKHR".enumType
-val VkSemaphoreImportFlagBitsKHR = "VkSemaphoreImportFlagBitsKHR".enumType
-val VkDescriptorUpdateTemplateTypeKHR = "VkDescriptorUpdateTemplateTypeKHR".enumType
 val VkIndirectCommandsLayoutUsageFlagBitsNVX = "VkIndirectCommandsLayoutUsageFlagBitsNVX".enumType
 val VkIndirectCommandsTokenTypeNVX = "VkIndirectCommandsTokenTypeNVX".enumType
 val VkObjectEntryUsageFlagBitsNVX = "VkObjectEntryUsageFlagBitsNVX".enumType
@@ -54,18 +47,10 @@ val VkDisplayEventTypeEXT = "VkDisplayEventTypeEXT".enumType
 val VkViewportCoordinateSwizzleNV = "VkViewportCoordinateSwizzleNV".enumType
 val VkDiscardRectangleModeEXT = "VkDiscardRectangleModeEXT".enumType
 val VkConservativeRasterizationModeEXT = "VkConservativeRasterizationModeEXT".enumType
-val VkExternalFenceHandleTypeFlagBitsKHR = "VkExternalFenceHandleTypeFlagBitsKHR".enumType
-val VkExternalFenceFeatureFlagBitsKHR = "VkExternalFenceFeatureFlagBitsKHR".enumType
-val VkFenceImportFlagBitsKHR = "VkFenceImportFlagBitsKHR".enumType
-val VkPointClippingBehaviorKHR = "VkPointClippingBehaviorKHR".enumType
-val VkTessellationDomainOriginKHR = "VkTessellationDomainOriginKHR".enumType
+val VkDebugUtilsMessageSeverityFlagBitsEXT = "VkDebugUtilsMessageSeverityFlagBitsEXT".enumType
 val VkSamplerReductionModeEXT = "VkSamplerReductionModeEXT".enumType
 val VkBlendOverlapEXT = "VkBlendOverlapEXT".enumType
 val VkCoverageModulationModeNV = "VkCoverageModulationModeNV".enumType
-val VkSamplerYcbcrModelConversionKHR = "VkSamplerYcbcrModelConversionKHR".enumType
-val VkSamplerYcbcrRangeKHR = "VkSamplerYcbcrRangeKHR".enumType
-val VkChromaLocationKHR = "VkChromaLocationKHR".enumType
-val VkImageAspectFlagBits = "VkImageAspectFlagBits".enumType
 val VkValidationCacheHeaderVersionEXT = "VkValidationCacheHeaderVersionEXT".enumType
 val VkQueueGlobalPriorityEXT = "VkQueueGlobalPriorityEXT".enumType
 
@@ -73,17 +58,18 @@ val VkQueueGlobalPriorityEXT = "VkQueueGlobalPriorityEXT".enumType
 val VkSurfaceTransformFlagsKHR = typedef(VkFlags, "VkSurfaceTransformFlagsKHR")
 val VkCompositeAlphaFlagsKHR = typedef(VkFlags, "VkCompositeAlphaFlagsKHR")
 val VkSwapchainCreateFlagsKHR = typedef(VkFlags, "VkSwapchainCreateFlagsKHR")
+val VkDeviceGroupPresentModeFlagsKHR = typedef(VkFlags, "VkDeviceGroupPresentModeFlagsKHR")
 val VkDisplayPlaneAlphaFlagsKHR = typedef(VkFlags, "VkDisplayPlaneAlphaFlagsKHR")
 val VkDisplayModeCreateFlagsKHR = typedef(VkFlags, "VkDisplayModeCreateFlagsKHR")
 val VkDisplaySurfaceCreateFlagsKHR = typedef(VkFlags, "VkDisplaySurfaceCreateFlagsKHR")
 val VkXlibSurfaceCreateFlagsKHR = typedef(VkFlags, "VkXlibSurfaceCreateFlagsKHR")
+val VkWaylandSurfaceCreateFlagsKHR = typedef(VkFlags, "VkWaylandSurfaceCreateFlagsKHR")
 val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKHR")
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
 val VkExternalMemoryFeatureFlagsNV = typedef(VkFlags, "VkExternalMemoryFeatureFlagsNV")
-val VkPeerMemoryFeatureFlagsKHX = typedef(VkFlags, "VkPeerMemoryFeatureFlagsKHX")
-val VkMemoryAllocateFlagsKHX = typedef(VkFlags, "VkMemoryAllocateFlagsKHX")
-val VkDeviceGroupPresentModeFlagsKHX = typedef(VkFlags, "VkDeviceGroupPresentModeFlagsKHX")
+val VkPeerMemoryFeatureFlagsKHR = typedef(VkFlags, "VkPeerMemoryFeatureFlagsKHR")
+val VkMemoryAllocateFlagsKHR = typedef(VkFlags, "VkMemoryAllocateFlagsKHR")
 val VkCommandPoolTrimFlagsKHR = typedef(VkFlags, "VkCommandPoolTrimFlagsKHR")
 val VkExternalMemoryHandleTypeFlagsKHR = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsKHR")
 val VkExternalMemoryFeatureFlagsKHR = typedef(VkFlags, "VkExternalMemoryFeatureFlagsKHR")
@@ -100,11 +86,15 @@ val VkPipelineRasterizationConservativeStateCreateFlagsEXT = typedef(VkFlags, "V
 val VkExternalFenceHandleTypeFlagsKHR = typedef(VkFlags, "VkExternalFenceHandleTypeFlagsKHR")
 val VkExternalFenceFeatureFlagsKHR = typedef(VkFlags, "VkExternalFenceFeatureFlagsKHR")
 val VkFenceImportFlagsKHR = typedef(VkFlags, "VkFenceImportFlagsKHR")
-val VkIOSSurfaceCreateFlagsMVK = typedef(VkFlags, "VkIOSSurfaceCreateFlagsMVK")
 val VkMacOSSurfaceCreateFlagsMVK = typedef(VkFlags, "VkMacOSSurfaceCreateFlagsMVK")
+val VkDebugUtilsMessengerCallbackDataFlagsEXT = typedef(VkFlags, "VkDebugUtilsMessengerCallbackDataFlagsEXT")
+val VkDebugUtilsMessengerCreateFlagsEXT = typedef(VkFlags, "VkDebugUtilsMessengerCreateFlagsEXT")
+val VkDebugUtilsMessageSeverityFlagsEXT = typedef(VkFlags, "VkDebugUtilsMessageSeverityFlagsEXT")
+val VkDebugUtilsMessageTypeFlagsEXT = typedef(VkFlags, "VkDebugUtilsMessageTypeFlagsEXT")
 val VkPipelineCoverageToColorStateCreateFlagsNV = typedef(VkFlags, "VkPipelineCoverageToColorStateCreateFlagsNV")
 val VkPipelineCoverageModulationStateCreateFlagsNV = typedef(VkFlags, "VkPipelineCoverageModulationStateCreateFlagsNV")
 val VkValidationCacheCreateFlagsEXT = typedef(VkFlags, "VkValidationCacheCreateFlagsEXT")
+val VkDescriptorBindingFlagsEXT = typedef(VkFlags, "VkDescriptorBindingFlagsEXT")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
@@ -112,10 +102,10 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
         "VkDebugReportCallbackEXT",
         "Application-defined debug report callback function.",
 
-        VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
+        VkDebugReportFlagsEXT.IN("flags", "specifies the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
         VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered."),
         uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
-        size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional: value."),
+        size_t.IN("location", "a component (layer, driver, loader) defined value that specifies the <em>location</em> of the trigger. This is an optional: value."),
         int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
         char.const.p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
         char.const.p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
@@ -150,6 +140,44 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
 
         <h5>See Also</h5>
         ##VkDebugReportCallbackCreateInfoEXT
+        """
+    }
+}
+
+val _VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMessengerCallbackDataEXT")
+val PFN_vkDebugUtilsMessengerCallbackEXT = Module.VULKAN.callback {
+    VkBool32(
+        "VkDebugUtilsMessengerCallbackEXT",
+        "Application-defined debug messenger callback function.",
+
+        VkDebugUtilsMessageSeverityFlagBitsEXT.IN("messageSeverity", "specifies the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} that triggered this callback."),
+        VkDebugUtilsMessageTypeFlagsEXT.IN("messageType", ""),
+        _VkDebugUtilsMessengerCallbackDataEXT.const.p.IN("pCallbackData", "contains all the callback related data in the ##VkDebugUtilsMessengerCallbackDataEXT structure."),
+        opaque_p.IN("pUserData", "the user data provided when the {@code VkDebugUtilsMessengerEXT} was created."),
+
+        nativeType = "PFN_vkDebugUtilsMessengerCallbackEXT"
+    ) {
+        documentation =
+        """
+        Application-defined debug messenger callback function.
+
+        <h5>C Specification</h5>
+        The prototype for the ##VkDebugUtilsMessengerCreateInfoEXT{@code ::pfnUserCallback} function implemented by the application is:
+
+        <code><pre>
+￿typedef VkBool32 (VKAPI_PTR *PFN_vkDebugUtilsMessengerCallbackEXT)(
+￿    VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
+￿    VkDebugUtilsMessageTypeFlagsEXT                  messageType,
+￿    const VkDebugUtilsMessengerCallbackDataEXT*      pCallbackData,
+￿    void*                                            pUserData);</pre></code>
+
+        <h5>Description</h5>
+        The callback <b>must</b> not call #DestroyDebugUtilsMessengerEXT().
+
+        The callback returns a {@code VkBool32}, which is interpreted in a layer-specified manner. The application <b>should</b> always return #FALSE. The #TRUE value is reserved for use in layer development.
+
+        <h5>See Also</h5>
+        ##VkDebugUtilsMessengerCreateInfoEXT
         """
     }
 }
@@ -203,7 +231,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupSwapchainCreateInfoKHX or ##VkSwapchainCounterCreateInfoEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupSwapchainCreateInfoKHR or ##VkSwapchainCounterCreateInfoEXT</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkSwapchainCreateFlagBitsKHR} values</li>
             <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
@@ -244,7 +272,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
     VkSurfaceTransformFlagBitsKHR.member("preTransform", "a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform, relative to the presentation engine&#8217;s natural orientation, applied to the image content prior to presentation. If it does not match the {@code currentTransform} value returned by #GetPhysicalDeviceSurfaceCapabilitiesKHR(), the presentation engine will transform the image content as part of the presentation operation.")
     VkCompositeAlphaFlagBitsKHR.member("compositeAlpha", "a {@code VkCompositeAlphaFlagBitsKHR} value indicating the alpha compositing mode to use when this surface is composited together with other surfaces on certain window systems.")
     VkPresentModeKHR.member("presentMode", "the presentation mode the swapchain will use. A swapchain&#8217;s present mode determines how incoming present requests will be processed and queued internally.")
-    VkBool32.member("clipped", """indicates whether the Vulkan implementation is allowed to discard rendering operations that affect regions of the surface that are not visible.
+    VkBool32.member("clipped", """specifies whether the Vulkan implementation is allowed to discard rendering operations that affect regions of the surface that are not visible.
 
         <ul>
             <li>If set to #TRUE, the presentable images associated with the swapchain <b>may</b> not own all of their pixels. Pixels in the presentable images that correspond to regions of the target surface obscured by another window on the desktop, or subject to some other clipping mechanism will have undefined content when read back. Pixel shaders <b>may</b> not execute for these pixels, and thus any side effects they would have had will not occur. #TRUE value does not guarantee any clipping will occur, but allows more optimal presentation methods to be used on some platforms.</li>
@@ -290,7 +318,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PRESENT_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupPresentInfoKHX, ##VkDisplayPresentInfoKHR, ##VkPresentRegionsKHR, or ##VkPresentTimesInfoGOOGLE</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupPresentInfoKHR, ##VkDisplayPresentInfoKHR, ##VkPresentRegionsKHR, or ##VkPresentTimesInfoGOOGLE</li>
             <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
             <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
             <li>{@code pSwapchains} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
@@ -312,6 +340,207 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
     VkSwapchainKHR.const.p.member("pSwapchains", "an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once.")
     uint32_t.const.p.member("pImageIndices", "an array of indices into the array of each swapchain&#8217;s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array.")
     nullable..VkResult.p.member("pResults", "an array of {@code VkResult} typed elements with {@code swapchainCount} entries. Applications that do not need per-swapchain results <b>can</b> use {@code NULL} for {@code pResults}. If non-{@code NULL}, each entry in {@code pResults} will be set to the {@code VkResult} for presenting the swapchain corresponding to the same index in {@code pSwapchains}.")
+}
+
+val VkImageSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkImageSwapchainCreateInfoKHR") {
+    documentation =
+        """
+        Specify that an image will be bound to swapchain memory.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code swapchain} is not #NULL_HANDLE, the fields of ##VkImageCreateInfo <b>must</b> match the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR</li>
+            <li>If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a handle of a swapchain that the image will be bound to.")
+}
+
+val VkBindImageMemorySwapchainInfoKHR = struct(Module.VULKAN, "VkBindImageMemorySwapchainInfoKHR") {
+    documentation =
+        """
+        Structure specifying swapchain image memory to bind to.
+
+        <h5>Description</h5>
+        If {@code swapchain} is not {@code NULL}, the {@code swapchain} and {@code imageIndex} are used to determine the memory that the image is bound to, instead of {@code memory} and {@code memoryOffset}.
+
+        Memory <b>can</b> be bound to a swapchain and use the {@code pDeviceIndices} or {@code pSplitInstanceBindRegions} members of ##VkBindImageMemoryDeviceGroupInfo.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code imageIndex} <b>must</b> be less than the number of images in {@code swapchain}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR</li>
+            <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a swapchain handle.")
+    uint32_t.member("imageIndex", "an image index within {@code swapchain}.")
+}
+
+val VkAcquireNextImageInfoKHR = struct(Module.VULKAN, "VkAcquireNextImageInfoKHR") {
+    documentation =
+        """
+        Structure specifying parameters of the acquire.
+
+        <h5>Description</h5>
+        If #AcquireNextImageKHR() is used, the device mask is considered to include all physical devices in the logical device.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        #AcquireNextImage2KHR() signals at most one semaphore, even if the application requests waiting for multiple physical devices to be ready via the {@code deviceMask}. However, only a single physical device <b>can</b> wait on that semaphore, since the semaphore becomes unsignaled when the wait succeeds. For other physical devices to wait for the image to be ready, it is necessary for the application to submit semaphore signal operation(s) to that first physical device to signal additional semaphore(s) after the wait succeeds, which the other physical device(s) <b>can</b> wait upon.
+        </div>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code swapchain} <b>must</b> not be in the retired state</li>
+            <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> be unsignaled</li>
+            <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> not have any uncompleted signal or wait operations pending</li>
+            <li>If {@code fence} is not #NULL_HANDLE it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+            <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE</li>
+            <li>{@code deviceMask} <b>must</b> be a valid device mask</li>
+            <li>{@code deviceMask} <b>must</b> not be zero</li>
+            <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+            <li>If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
+            <li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+            <li>Each of {@code fence}, {@code semaphore}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
+            <li>Host access to {@code semaphore} <b>must</b> be externally synchronized</li>
+            <li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #AcquireNextImage2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkSwapchainKHR.member("swapchain", "a non-retired swapchain from which an image is acquired.")
+    uint64_t.member("timeout", "specifies how long the function waits, in nanoseconds, if no image is available.")
+    VkSemaphore.member("semaphore", "#NULL_HANDLE or a semaphore to signal.")
+    VkFence.member("fence", "#NULL_HANDLE or a fence to signal.")
+    uint32_t.member("deviceMask", "a mask of physical devices for which the swapchain image will be ready to use when the semaphore or fence is signaled.")
+}
+
+val VkDeviceGroupPresentCapabilitiesKHR = struct(Module.VULKAN, "VkDeviceGroupPresentCapabilitiesKHR", mutable = false) {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    documentation =
+        """
+        Present capabilities from other physical devices.
+
+        <h5>Description</h5>
+        {@code modes} always has #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR set.
+
+        The present mode flags are also used when presenting an image, in ##VkDeviceGroupPresentInfoKHR{@code ::mode}.
+
+        If a device group only includes a single physical device, then {@code modes} <b>must</b> equal #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetDeviceGroupPresentCapabilitiesKHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint32_t.array("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.", size = "VK_MAX_DEVICE_GROUP_SIZE")
+    VkDeviceGroupPresentModeFlagsKHR.member("modes", "a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHR} indicating which device group presentation modes are supported.")
+}
+
+val VkDeviceGroupPresentInfoKHR = struct(Module.VULKAN, "VkDeviceGroupPresentInfoKHR") {
+    documentation =
+        """
+        Mode and mask controlling which physical devices' images are presented.
+
+        <h5>Description</h5>
+        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR, then each element of {@code pDeviceMasks} selects which instance of the swapchain image is presented. Each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and the corresponding physical device <b>must</b> have a presentation engine as reported by ##VkDeviceGroupPresentCapabilitiesKHR.
+
+        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR, then each element of {@code pDeviceMasks} selects which instance of the swapchain image is presented. Each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and some physical device in the logical device <b>must</b> include that bit in its ##VkDeviceGroupPresentCapabilitiesKHR{@code ::presentMask}.
+
+        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR, then each element of {@code pDeviceMasks} selects which instances of the swapchain image are component-wise summed and the sum of those images is presented. If the sum in any component is outside the representable range, the value of that component is undefined. Each element of {@code pDeviceMasks} <b>must</b> have a value for which all set bits are set in one of the elements of ##VkDeviceGroupPresentCapabilitiesKHR{@code ::presentMask}.
+
+        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR, then each element of {@code pDeviceMasks} selects which instance(s) of the swapchain images are presented. For each bit set in each element of {@code pDeviceMasks}, the corresponding physical device <b>must</b> have a presentation engine as reported by ##VkDeviceGroupPresentCapabilitiesKHR.
+
+        If ##VkDeviceGroupPresentInfoKHR is not provided or {@code swapchainCount} is zero then the masks are considered to be 1. If ##VkDeviceGroupPresentInfoKHR is not provided, {@code mode} is considered to be #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code swapchainCount} <b>must</b> equal 0 or ##VkPresentInfoKHR{@code ::swapchainCount}</li>
+            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR, then each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and the corresponding element of ##VkDeviceGroupPresentCapabilitiesKHR{@code ::presentMask} <b>must</b> be non-zero</li>
+            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR, then each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and some physical device in the logical device <b>must</b> include that bit in its ##VkDeviceGroupPresentCapabilitiesKHR{@code ::presentMask}.</li>
+            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR, then each element of {@code pDeviceMasks} <b>must</b> have a value for which all set bits are set in one of the elements of ##VkDeviceGroupPresentCapabilitiesKHR{@code ::presentMask}</li>
+            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR, then for each bit set in each element of {@code pDeviceMasks}, the corresponding element of ##VkDeviceGroupPresentCapabilitiesKHR{@code ::presentMask} <b>must</b> be non-zero</li>
+            <li>The value of each element of {@code pDeviceMasks} <b>must</b> be equal to the device mask passed in ##VkAcquireNextImageInfoKHR{@code ::deviceMask} when the image index was last acquired</li>
+            <li>{@code mode} <b>must</b> have exactly one bit set, and that bit <b>must</b> have been included in ##VkDeviceGroupSwapchainCreateInfoKHR{@code ::modes}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR</li>
+            <li>If {@code swapchainCount} is not 0, {@code pDeviceMasks} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
+            <li>{@code mode} <b>must</b> be a valid {@code VkDeviceGroupPresentModeFlagBitsKHR} value</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pDeviceMasks", optional = true)..uint32_t.member("swapchainCount", "zero or the number of elements in {@code pDeviceMasks}.")
+    uint32_t.const.p.member("pDeviceMasks", "an array of device masks, one for each element of ##VkPresentInfoKHR::pSwapchains.")
+    VkDeviceGroupPresentModeFlagBitsKHR.member("mode", "the device group present mode that will be used for this present.")
+}
+
+val VkDeviceGroupSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkDeviceGroupSwapchainCreateInfoKHR") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created swapchain object.
+
+        <h5>Description</h5>
+        If this structure is not present, {@code modes} is considered to be #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR</li>
+            <li>{@code modes} <b>must</b> be a valid combination of {@code VkDeviceGroupPresentModeFlagBitsKHR} values</li>
+            <li>{@code modes} <b>must</b> not be 0</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkDeviceGroupPresentModeFlagsKHR.member("modes", "a bitfield of modes that the swapchain <b>can</b> be used with.")
 }
 
 val VkDisplayPropertiesKHR = struct(Module.VULKAN, "VkDisplayPropertiesKHR", mutable = false) {
@@ -399,13 +628,13 @@ val VkDisplayPlaneCapabilitiesKHR = struct(Module.VULKAN, "VkDisplayPlaneCapabil
         Structure describing capabilities of a mode and plane combination.
 
         <h5>Description</h5>
-        The minimum and maximum position and extent fields describe the hardware limits, if any, as they apply to the specified display mode and plane. Vendors <b>may</b> support displaying a subset of a swapchain's presentable images on the specified display plane. This is expressed by returning {@code minSrcPosition}, {@code maxSrcPosition}, {@code minSrcExtent}, and {@code maxSrcExtent} values that indicate a range of possible positions and sizes <b>may</b> be used to specify the region within the presentable images that source pixels will be read from when creating a swapchain on the specified display mode and plane.
+        The minimum and maximum position and extent fields describe the implementation limits, if any, as they apply to the specified display mode and plane. Vendors <b>may</b> support displaying a subset of a swapchain's presentable images on the specified display plane. This is expressed by returning {@code minSrcPosition}, {@code maxSrcPosition}, {@code minSrcExtent}, and {@code maxSrcExtent} values that indicate a range of possible positions and sizes <b>may</b> be used to specify the region within the presentable images that source pixels will be read from when creating a swapchain on the specified display mode and plane.
 
         Vendors <b>may</b> also support mapping the presentable images`' content to a subset or superset of the visible region in the specified display mode. This is expressed by returning {@code minDstPosition}, {@code maxDstPosition}, {@code minDstExtent} and {@code maxDstExtent} values that indicate a range of possible positions and sizes <b>may</b> be used to describe the region within the display mode that the source pixels will be mapped to.
 
         Other vendors <b>may</b> support only a 1-1 mapping between pixels in the presentable images and the display mode. This <b>may</b> be indicated by returning <code>(0,0)</code> for {@code minSrcPosition}, {@code maxSrcPosition}, {@code minDstPosition}, and {@code maxDstPosition}, and (display mode width, display mode height) for {@code minSrcExtent}, {@code maxSrcExtent}, {@code minDstExtent}, and {@code maxDstExtent}.
 
-        These values indicate the limits of the hardware's individual fields. Not all combinations of values within the offset and extent ranges returned in ##VkDisplayPlaneCapabilitiesKHR are guaranteed to be supported. Vendors <b>may</b> still fail presentation requests that specify unsupported combinations.
+        These values indicate the limits of the implementation's individual fields. Not all combinations of values within the offset and extent ranges returned in ##VkDisplayPlaneCapabilitiesKHR are guaranteed to be supported. Vendors <b>may</b> still fail presentation requests that specify unsupported combinations.
 
         <h5>See Also</h5>
         ##VkExtent2D, ##VkOffset2D, #GetDisplayPlaneCapabilitiesKHR()
@@ -538,6 +767,36 @@ val VkXlibSurfaceCreateInfoKHR = struct(Module.VULKAN, "VkXlibSurfaceCreateInfoK
     Window.member("window", "an Xlib {@code Window} to associate the surface with.")
 }
 
+val VkWaylandSurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWaylandSurfaceCreateInfoKHR") {
+    javaImport("org.lwjgl.system.linux.*")
+    documentation =
+        """
+        Structure specifying parameters of a newly created Wayland surface object.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code display} <b>must</b> point to a valid Wayland {@code wl_display}.</li>
+            <li>{@code surface} <b>must</b> point to a valid Wayland {@code wl_surface}.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateWaylandSurfaceKHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkWaylandSurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
+    wl_display.p.member("display", "{@code display} and {@code surface} are pointers to the Wayland {@code wl_display} and {@code wl_surface} to associate the surface with.")
+    wl_surface.p.member("surface", "see {@code display}")
+}
+
 val VkWin32SurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWin32SurfaceCreateInfoKHR") {
     javaImport("org.lwjgl.system.windows.*")
     documentation =
@@ -588,7 +847,6 @@ val VkDebugReportCallbackCreateInfoEXT = struct(Module.VULKAN, "VkDebugReportCal
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkDebugReportFlagBitsEXT} values</li>
         </ul>
 
@@ -738,7 +996,7 @@ val VkDedicatedAllocationImageCreateInfoNV = struct(Module.VULKAN, "VkDedicatedA
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBool32.member("dedicatedAllocation", "indicates whether the image will have a dedicated allocation bound to it.")
+    VkBool32.member("dedicatedAllocation", "specifies whether the image will have a dedicated allocation bound to it.")
 }
 
 val VkDedicatedAllocationBufferCreateInfoNV = struct(Module.VULKAN, "VkDedicatedAllocationBufferCreateInfoNV") {
@@ -754,7 +1012,7 @@ val VkDedicatedAllocationBufferCreateInfoNV = struct(Module.VULKAN, "VkDedicated
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBool32.member("dedicatedAllocation", "indicates whether the buffer will have a dedicated allocation bound to it.")
+    VkBool32.member("dedicatedAllocation", "specifies whether the buffer will have a dedicated allocation bound to it.")
 }
 
 val VkDedicatedAllocationMemoryAllocateInfoNV = struct(Module.VULKAN, "VkDedicatedAllocationMemoryAllocateInfoNV") {
@@ -835,101 +1093,36 @@ val VkShaderStatisticsInfoAMD = struct(Module.VULKAN, "VkShaderStatisticsInfoAMD
     uint32_t.array("computeWorkGroupSize", "the local workgroup size of this shader in { X, Y, Z } dimensions.", size = 3)
 }
 
-val VkRenderPassMultiviewCreateInfoKHX = struct(Module.VULKAN, "VkRenderPassMultiviewCreateInfoKHX") {
-    documentation =
-        """
-        Structure containing multiview info for all subpasses.
+val VkRenderPassMultiviewCreateInfoKHR = struct(Module.VULKAN, "VkRenderPassMultiviewCreateInfoKHR", alias = VkRenderPassMultiviewCreateInfo) {
+    documentation = "See ##VkRenderPassMultiviewCreateInfo."
 
-        <h5>Description</h5>
-        When a subpass uses a non-zero view mask, <em>multiview</em> functionality is considered to be enabled. Multiview is all-or-nothing for a render pass - that is, either all subpasses <b>must</b> have a non-zero view mask (though some subpasses <b>may</b> have only one view) or all <b>must</b> be zero. Multiview causes all drawing and clear commands in the subpass to behave as if they were broadcast to each view, where a view is represented by one layer of the framebuffer attachments. All draws and clears are broadcast to each <em>view index</em> whose bit is set in the view mask. The view index is provided in the {@code ViewIndex} shader input variable, and color, depth/stencil, and input attachments all read/write the layer of the framebuffer corresponding to the view index.
-
-        If the view mask is zero for all subpasses, multiview is considered to be disabled and all drawing commands execute normally, without this additional broadcasting.
-
-        Some implementations <b>may</b> not support multiview in conjunction with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-multiview-gs">geometry shaders</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-multiview-tess">tessellation shaders</a>.
-
-        When multiview is enabled, the #DEPENDENCY_VIEW_LOCAL_BIT_KHX bit in a dependency <b>can</b> be used to express a view-local dependency, meaning that each view in the destination subpass depends on a single view in the source subpass. Unlike pipeline barriers, a subpass dependency <b>can</b> potentially have a different view mask in the source subpass and the destination subpass. If the dependency is view-local, then each view (<code>dstView</code>) in the destination subpass depends on the view <code>dstView + pViewOffsets[dependency]</code> in the source subpass. If there is not such a view in the source subpass, then this dependency does not affect that view in the destination subpass. If the dependency is not view-local, then all views in the destination subpass depend on all views in the source subpass, and the view offset is ignored. A non-zero view offset is not allowed in a self-dependency.
-
-        The elements of {@code pCorrelationMasks} are a set of masks of views indicating that views in the same mask <b>may</b> exhibit spatial coherency between the views, making it more efficient to render them concurrently. Correlation masks <b>must</b> not have a functional effect on the results of the multiview rendering.
-
-        When multiview is enabled, at the beginning of each subpass all non-render pass state is undefined. In particular, each time #CmdBeginRenderPass() or #CmdNextSubpass() is called the graphics pipeline <b>must</b> be bound, any relevant descriptor sets or vertex/index buffers <b>must</b> be bound, and any relevant dynamic state or push constants <b>must</b> be set before they are used.
-
-        A multiview subpass <b>can</b> declare that its shaders will write per-view attributes for all views in a single invocation, by setting the #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX bit in the subpass description. The only supported per-view attributes are position and viewport mask, and per-view position and viewport masks are written to output array variables decorated with {@code PositionPerViewNV} and {@code ViewportMaskPerViewNV}, respectively. If {@link NVViewportArray2 VK_NV_viewport_array2} is not supported and enabled, {@code ViewportMaskPerViewNV} <b>must</b> not be used. Values written to elements of {@code PositionPerViewNV} and {@code ViewportMaskPerViewNV} <b>must</b> not depend on the {@code ViewIndex}. The shader <b>must</b> also write to an output variable decorated with {@code Position}, and the value written to {@code Position} <b>must</b> equal the value written to {@code PositionPerViewNV}[{@code ViewIndex}]. Similarly, if {@code ViewportMaskPerViewNV} is written to then the shader <b>must</b> also write to an output variable decorated with {@code ViewportMaskNV}, and the value written to {@code ViewportMaskNV} <b>must</b> equal the value written to {@code ViewportMaskPerViewNV}[{@code ViewIndex}]. Implementations will either use values taken from {@code Position} and {@code ViewportMaskNV} and invoke the shader once for each view, or will use values taken from {@code PositionPerViewNV} and {@code ViewportMaskPerViewNV} and invoke the shader fewer times. The values written to {@code Position} and {@code ViewportMaskNV} <b>must</b> not depend on the values written to {@code PositionPerViewNV} and {@code ViewportMaskPerViewNV}, or vice versa (to allow compilers to eliminate the unused outputs). All attributes that do not have *PerViewNV counterparts <b>must</b> not depend on {@code ViewIndex}.
-
-        Per-view attributes are all-or-nothing for a subpass. That is, all pipelines compiled against a subpass that includes the #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX bit <b>must</b> write per-view attributes to the *PerViewNV[] shader outputs, in addition to the non-per-view (e.g. {@code Position}) outputs. Pipelines compiled against a subpass that does not include this bit <b>must</b> not include the *PerViewNV[] outputs in their interfaces.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code subpassCount} is not zero, {@code subpassCount} <b>must</b> be equal to the {@code subpassCount} in the ##VkRenderPassCreateInfo structure at the start of the chain</li>
-            <li>If {@code dependencyCount} is not zero, {@code dependencyCount} <b>must</b> be equal to the {@code dependencyCount} in the ##VkRenderPassCreateInfo structure at the start of the chain</li>
-            <li>Each view index <b>must</b> not be set in more than one element of {@code pCorrelationMasks}</li>
-            <li>If an element of {@code pViewOffsets} is non-zero, the corresponding ##VkSubpassDependency structure <b>must</b> have different values of {@code srcSubpass} and {@code dstSubpass}.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code subpassCount} is not 0, {@code pViewMasks} <b>must</b> be a valid pointer to an array of {@code subpassCount} {@code uint32_t} values</li>
-            <li>If {@code dependencyCount} is not 0, {@code pViewOffsets} <b>must</b> be a valid pointer to an array of {@code dependencyCount} {@code int32_t} values</li>
-            <li>If {@code correlationMaskCount} is not 0, {@code pCorrelationMasks} <b>must</b> be a valid pointer to an array of {@code correlationMaskCount} {@code uint32_t} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    AutoSize("pViewMasks", optional = true)..uint32_t.member("subpassCount", "zero or is the number of subpasses in the render pass.")
-    uint32_t.const.p.member("pViewMasks", "points to an array of {@code subpassCount} number of view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.")
-    AutoSize("pViewOffsets", optional = true)..uint32_t.member("dependencyCount", "zero or the number of dependencies in the render pass.")
-    int32_t.const.p.member("pViewOffsets", "points to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency&#8217;s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on.")
-    AutoSize("pCorrelationMasks", optional = true)..uint32_t.member("correlationMaskCount", "zero or a number of correlation masks.")
-    uint32_t.const.p.member("pCorrelationMasks", "an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    AutoSize("pViewMasks", optional = true)..uint32_t.member("subpassCount", "")
+    uint32_t.const.p.member("pViewMasks", "")
+    AutoSize("pViewOffsets", optional = true)..uint32_t.member("dependencyCount", "")
+    int32_t.const.p.member("pViewOffsets", "")
+    AutoSize("pCorrelationMasks", optional = true)..uint32_t.member("correlationMaskCount", "")
+    uint32_t.const.p.member("pCorrelationMasks", "")
 }
 
-val VkPhysicalDeviceMultiviewFeaturesKHX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewFeaturesKHX") {
-    documentation =
-        """
-        Structure describing multiview features that can be supported by an implementation.
-
-        <h5>Description</h5>
-        If the ##VkPhysicalDeviceMultiviewFeaturesKHX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceMultiviewFeaturesKHX <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code multiviewGeometryShader} is enabled then {@code multiview} <b>must</b> also be enabled.</li>
-            <li>If {@code multiviewTessellationShader} is enabled then {@code multiview} <b>must</b> also be enabled.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHX</li>
-        </ul>
-        """
+val VkPhysicalDeviceMultiviewFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewFeaturesKHR", alias = VkPhysicalDeviceMultiviewFeatures) {
+    documentation = "See ##VkPhysicalDeviceMultiviewFeatures."
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("multiview", "indicates whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero.")
-    VkBool32.member("multiviewGeometryShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#geometry\">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.")
-    VkBool32.member("multiviewTessellationShader", "indicates whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#tessellation\">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.")
+    VkBool32.member("multiview", "")
+    VkBool32.member("multiviewGeometryShader", "")
+    VkBool32.member("multiviewTessellationShader", "")
 }
 
-val VkPhysicalDeviceMultiviewPropertiesKHX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPropertiesKHX", mutable = false) {
-    documentation =
-        """
-        Structure describing multiview limits that can be supported by an implementation.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        If the ##VkPhysicalDeviceMultiviewPropertiesKHX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
-        """
+val VkPhysicalDeviceMultiviewPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPropertiesKHR", mutable = false, alias = VkPhysicalDeviceMultiviewProperties) {
+    documentation = "See ##VkPhysicalDeviceMultiviewProperties."
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    uint32_t.member("maxMultiviewViewCount", "one greater than the maximum view index that <b>can</b> be used in a subpass.")
-    uint32_t.member("maxMultiviewInstanceIndex", "the maximum valid value of instance index allowed to be generated by a drawing command recorded within a subpass of a multiview render pass instance.")
+    uint32_t.member("maxMultiviewViewCount", "")
+    uint32_t.member("maxMultiviewInstanceIndex", "")
 }
 
 val VkExternalImageFormatPropertiesNV = struct(Module.VULKAN, "VkExternalImageFormatPropertiesNV", mutable = false) {
@@ -952,7 +1145,6 @@ val VkExternalMemoryImageCreateInfoNV = struct(Module.VULKAN, "VkExternalMemoryI
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
         </ul>
         """
@@ -970,7 +1162,6 @@ val VkExportMemoryAllocateInfoNV = struct(Module.VULKAN, "VkExportMemoryAllocate
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
         </ul>
         """
@@ -998,7 +1189,6 @@ val VkImportMemoryWin32HandleInfoNV = struct(Module.VULKAN, "VkImportMemoryWin32
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code handleType} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
         </ul>
         """
@@ -1025,7 +1215,6 @@ val VkExportMemoryWin32HandleInfoNV = struct(Module.VULKAN, "VkExportMemoryWin32
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code pAttributes} is not {@code NULL}, {@code pAttributes} <b>must</b> be a valid pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
         </ul>
         """
@@ -1064,425 +1253,137 @@ val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(Module.VULKAN, "VkWin32KeyedM
     uint64_t.const.p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
-val VkPhysicalDeviceFeatures2KHR = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2KHR") {
-    documentation =
-        """
-        Structure describing the fine-grained features that can be supported by an implementation.
+val VkPhysicalDeviceFeatures2KHR = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2KHR", alias = VkPhysicalDeviceFeatures2) {
+    documentation = "See ##VkPhysicalDeviceFeatures2."
 
-        <h5>Description</h5>
-        The {@code pNext} chain of this structure is used to extend the structure with features defined by extensions. This structure <b>can</b> be used in #GetPhysicalDeviceFeatures2KHR() or <b>can</b> be in the {@code pNext} chain of a ##VkDeviceCreateInfo structure, in which case it controls which features are enabled in the device in lieu of {@code pEnabledFeatures}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPhysicalDevice16BitStorageFeaturesKHR, ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT, ##VkPhysicalDeviceMultiviewFeaturesKHX, ##VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR, or ##VkPhysicalDeviceVariablePointerFeaturesKHR</li>
-            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkPhysicalDeviceFeatures, #GetPhysicalDeviceFeatures2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkPhysicalDeviceFeatures.member("features", "a structure of type ##VkPhysicalDeviceFeatures describing the fine-grained features of the Vulkan 1.0 API.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkPhysicalDeviceFeatures.member("features", "")
 }
 
-val VkPhysicalDeviceProperties2KHR = struct(Module.VULKAN, "VkPhysicalDeviceProperties2KHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying physical device properties.
+val VkPhysicalDeviceProperties2KHR = struct(Module.VULKAN, "VkPhysicalDeviceProperties2KHR", mutable = false, alias = VkPhysicalDeviceProperties2) {
+    documentation = "See ##VkPhysicalDeviceProperties2."
 
-        <h5>Description</h5>
-        The {@code pNext} chain of this structure is used to extend the structure with properties defined by extensions.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT, ##VkPhysicalDeviceConservativeRasterizationPropertiesEXT, ##VkPhysicalDeviceDiscardRectanglePropertiesEXT, ##VkPhysicalDeviceExternalMemoryHostPropertiesEXT, ##VkPhysicalDeviceIDPropertiesKHR, ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, ##VkPhysicalDeviceMultiviewPropertiesKHX, ##VkPhysicalDevicePointClippingPropertiesKHR, ##VkPhysicalDevicePushDescriptorPropertiesKHR, ##VkPhysicalDeviceSampleLocationsPropertiesEXT, or ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</li>
-            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkPhysicalDeviceProperties, #GetPhysicalDeviceProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkPhysicalDeviceProperties.member("properties", "a structure of type ##VkPhysicalDeviceProperties describing the properties of the physical device. This structure is written with the same values as if it were written by #GetPhysicalDeviceProperties().")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkPhysicalDeviceProperties.member("properties", "")
 }
 
-val VkFormatProperties2KHR = struct(Module.VULKAN, "VkFormatProperties2KHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying image format properties.
+val VkFormatProperties2KHR = struct(Module.VULKAN, "VkFormatProperties2KHR", mutable = false, alias = VkFormatProperties2) {
+    documentation = "See ##VkFormatProperties2."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkFormatProperties, #GetPhysicalDeviceFormatProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkFormatProperties.member("formatProperties", "a structure of type ##VkFormatProperties describing features supported by the requested format.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkFormatProperties.member("formatProperties", "")
 }
 
-val VkImageFormatProperties2KHR = struct(Module.VULKAN, "VkImageFormatProperties2KHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying a image format properties.
+val VkImageFormatProperties2KHR = struct(Module.VULKAN, "VkImageFormatProperties2KHR", mutable = false, alias = VkImageFormatProperties2) {
+    documentation = "See ##VkImageFormatProperties2."
 
-        <h5>Description</h5>
-        If the combination of parameters to #GetPhysicalDeviceImageFormatProperties2KHR() is not supported by the implementation for use in #CreateImage(), then all members of {@code imageFormatProperties} will be filled with zero.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Filling {@code imageFormatProperties} with zero for unsupported formats is an exception to the usual rule that output structures have undefined contents on error. This exception was unintentional, but is preserved for backwards compatibility. This exeption only applies to {@code imageFormatProperties}, not {@code sType}, {@code pNext}, or any structures chained from {@code pNext}.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkExternalImageFormatPropertiesKHR, ##VkSamplerYcbcrConversionImageFormatPropertiesKHR, or ##VkTextureLODGatherFormatPropertiesAMD</li>
-            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkImageFormatProperties, #GetPhysicalDeviceImageFormatProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkImageFormatProperties2KHR is used to allow the specification of additional capabilities to be returned from #GetPhysicalDeviceImageFormatProperties2KHR().")
-    VkImageFormatProperties.member("imageFormatProperties", "an instance of a ##VkImageFormatProperties structure in which capabilities are returned.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkImageFormatProperties.member("imageFormatProperties", "")
 }
 
-val VkPhysicalDeviceImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceImageFormatInfo2KHR") {
-    documentation =
-        """
-        Structure specifying image creation parameters.
+val VkPhysicalDeviceImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceImageFormatInfo2KHR", alias = VkPhysicalDeviceImageFormatInfo2) {
+    documentation = "See ##VkPhysicalDeviceImageFormatInfo2."
 
-        <h5>Description</h5>
-        The members of ##VkPhysicalDeviceImageFormatInfo2KHR correspond to the arguments to #GetPhysicalDeviceImageFormatProperties(), with {@code sType} and {@code pNext} added for extensibility.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPhysicalDeviceExternalImageFormatInfoKHR</li>
-            <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
-            <li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
-            <li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
-            <li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
-            <li>{@code usage} <b>must</b> not be 0</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkImageCreateFlagBits} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceImageFormatProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2KHR is used to provide additional image parameters to #GetPhysicalDeviceImageFormatProperties2KHR().")
-    VkFormat.member("format", "a {@code VkFormat} value indicating the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
-    VkImageType.member("type", "a {@code VkImageType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
-    VkImageTiling.member("tiling", "a {@code VkImageTiling} value indicating the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
-    VkImageUsageFlags.member("usage", "a bitmask of {@code VkImageUsageFlagBits} indicating the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}.")
-    VkImageCreateFlags.member("flags", "a bitmask of {@code VkImageCreateFlagBits} indicating additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkFormat.member("format", "")
+    VkImageType.member("type", "")
+    VkImageTiling.member("tiling", "")
+    VkImageUsageFlags.member("usage", "")
+    VkImageCreateFlags.member("flags", "")
 }
 
-val VkQueueFamilyProperties2KHR = struct(Module.VULKAN, "VkQueueFamilyProperties2KHR", mutable = false) {
-    documentation =
-        """
-        Structure providing information about a queue family.
+val VkQueueFamilyProperties2KHR = struct(Module.VULKAN, "VkQueueFamilyProperties2KHR", mutable = false, alias = VkQueueFamilyProperties2) {
+    documentation = "See ##VkQueueFamilyProperties2."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkQueueFamilyProperties, #GetPhysicalDeviceQueueFamilyProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkQueueFamilyProperties.member("queueFamilyProperties", "a structure of type ##VkQueueFamilyProperties which is populated with the same values as in #GetPhysicalDeviceQueueFamilyProperties().")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkQueueFamilyProperties.member("queueFamilyProperties", "")
 }
 
-val VkPhysicalDeviceMemoryProperties2KHR = struct(Module.VULKAN, "VkPhysicalDeviceMemoryProperties2KHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying physical device memory properties.
+val VkPhysicalDeviceMemoryProperties2KHR = struct(Module.VULKAN, "VkPhysicalDeviceMemoryProperties2KHR", mutable = false, alias = VkPhysicalDeviceMemoryProperties2) {
+    documentation = "See ##VkPhysicalDeviceMemoryProperties2."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkPhysicalDeviceMemoryProperties, #GetPhysicalDeviceMemoryProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkPhysicalDeviceMemoryProperties.member("memoryProperties", "a structure of type ##VkPhysicalDeviceMemoryProperties which is populated with the same values as in #GetPhysicalDeviceMemoryProperties().")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkPhysicalDeviceMemoryProperties.member("memoryProperties", "")
 }
 
-val VkSparseImageFormatProperties2KHR = struct(Module.VULKAN, "VkSparseImageFormatProperties2KHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying sparse image format properties.
+val VkSparseImageFormatProperties2KHR = struct(Module.VULKAN, "VkSparseImageFormatProperties2KHR", mutable = false, alias = VkSparseImageFormatProperties2) {
+    documentation = "See ##VkSparseImageFormatProperties2."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkSparseImageFormatProperties, #GetPhysicalDeviceSparseImageFormatProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSparseImageFormatProperties.member("properties", "a structure of type ##VkSparseImageFormatProperties which is populated with the same values as in #GetPhysicalDeviceSparseImageFormatProperties().")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkSparseImageFormatProperties.member("properties", "")
 }
 
-val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSparseImageFormatInfo2KHR") {
-    documentation =
-        """
-        Structure specifying sparse image format inputs.
+val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSparseImageFormatInfo2KHR", alias = VkPhysicalDeviceSparseImageFormatInfo2) {
+    documentation = "See ##VkPhysicalDeviceSparseImageFormatInfo2."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code samples} <b>must</b> be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, and {@code usage} equal to those in this command and {@code flags} equal to the value that is set in ##VkImageCreateInfo{@code ::flags} when the image is created</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
-            <li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
-            <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
-            <li>{@code usage} <b>must</b> not be 0</li>
-            <li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceSparseImageFormatProperties2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkFormat.member("format", "the image format.")
-    VkImageType.member("type", "the dimensionality of image.")
-    VkSampleCountFlagBits.member("samples", "the number of samples per texel as defined in {@code VkSampleCountFlagBits}.")
-    VkImageUsageFlags.member("usage", "a bitmask describing the intended usage of the image.")
-    VkImageTiling.member("tiling", "the tiling arrangement of the data elements in memory.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkFormat.member("format", "")
+    VkImageType.member("type", "")
+    VkSampleCountFlagBits.member("samples", "")
+    VkImageUsageFlags.member("usage", "")
+    VkImageTiling.member("tiling", "")
 }
 
-val VkMemoryAllocateFlagsInfoKHX = struct(Module.VULKAN, "VkMemoryAllocateFlagsInfoKHX") {
-    documentation =
-        """
-        Structure controlling how many instances of memory will be allocated.
+val VkMemoryAllocateFlagsInfoKHR = struct(Module.VULKAN, "VkMemoryAllocateFlagsInfoKHR", alias = VkMemoryAllocateFlagsInfo) {
+    documentation = "See ##VkMemoryAllocateFlagsInfo."
 
-        <h5>Description</h5>
-        If #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is not set, the number of instances allocated depends on whether #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX is set in the memory heap. If #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX is set, then memory is allocated for every physical device in the logical device (as if {@code deviceMask} has bits set for all device indices). If #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX is not set, then a single instance of memory is allocated (as if {@code deviceMask} is set to one).
-
-        On some implementations, allocations from a multi-instance heap <b>may</b> consume memory on all physical devices even if the {@code deviceMask} excludes some devices. If ##VkPhysicalDeviceGroupPropertiesKHX{@code ::subsetAllocation} is #TRUE, then memory is only consumed for the devices in the device mask.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        In practice, most allocations on a multi-instance heap will be allocated across all physical devices. Unicast allocation support is an optional optimization for a minority of allocations.
-        </div>
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set, {@code deviceMask} <b>must</b> be a valid device mask.</li>
-            <li>If #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set, {@code deviceMask} <b>must</b> not be zero</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHX</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryAllocateFlagBitsKHX} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkMemoryAllocateFlagsKHX.member("flags", "a bitmask of {@code VkMemoryAllocateFlagBitsKHX} controlling the allocation.")
-    uint32_t.member("deviceMask", "a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if #MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX is set in {@code flags}.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkMemoryAllocateFlags.member("flags", "")
+    uint32_t.member("deviceMask", "")
 }
 
-val VkDeviceGroupRenderPassBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGroupRenderPassBeginInfoKHX") {
-    documentation =
-        """
-        Set the initial device mask and render areas for a render pass instance.
+val VkDeviceGroupRenderPassBeginInfoKHR = struct(Module.VULKAN, "VkDeviceGroupRenderPassBeginInfoKHR", alias = VkDeviceGroupRenderPassBeginInfo) {
+    documentation = "See ##VkDeviceGroupRenderPassBeginInfo."
 
-        <h5>Description</h5>
-        The {@code deviceMask} serves several purposes. It is an upper bound on the set of physical devices that <b>can</b> be used during the render pass instance, and the initial device mask when the render pass instance begins. Render pass attachment load, store, and resolve operations only apply to physical devices included in the device mask. Subpass dependencies only apply to the physical devices in the device mask.
-
-        If {@code deviceRenderAreaCount} is not zero, then the elements of {@code pDeviceRenderAreas} override the value of ##VkRenderPassBeginInfo{@code ::renderArea}, and provide a render area specific to each physical device. These render areas serve the same purpose as ##VkRenderPassBeginInfo{@code ::renderArea}, including controlling the region of attachments that are cleared by #ATTACHMENT_LOAD_OP_CLEAR and that are resolved into resolve attachments.
-
-        If this structure is not present, the render pass instance's device mask is the value of ##VkDeviceGroupCommandBufferBeginInfoKHX{@code ::deviceMask}. If this structure is not present or if {@code deviceRenderAreaCount} is zero, ##VkRenderPassBeginInfo{@code ::renderArea} is used for all physical devices.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
-            <li>{@code deviceMask} <b>must</b> not be zero</li>
-            <li>{@code deviceMask} <b>must</b> be a subset of the command buffer&#8217;s initial device mask</li>
-            <li>{@code deviceRenderAreaCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHX</li>
-            <li>If {@code deviceRenderAreaCount} is not 0, {@code pDeviceRenderAreas} <b>must</b> be a valid pointer to an array of {@code deviceRenderAreaCount} ##VkRect2D structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkRect2D
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint32_t.member("deviceMask", "the device mask for the render pass instance.")
-    AutoSize("pDeviceRenderAreas", optional = true)..uint32_t.member("deviceRenderAreaCount", "the number of elements in the {@code pDeviceRenderAreas} array.")
-    VkRect2D.const.p.buffer("pDeviceRenderAreas", "an array of structures of type ##VkRect2D defining the render area for each physical device.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    uint32_t.member("deviceMask", "")
+    AutoSize("pDeviceRenderAreas", optional = true)..uint32_t.member("deviceRenderAreaCount", "")
+    VkRect2D.const.p.buffer("pDeviceRenderAreas", "")
 }
 
-val VkDeviceGroupCommandBufferBeginInfoKHX = struct(Module.VULKAN, "VkDeviceGroupCommandBufferBeginInfoKHX") {
-    documentation =
-        """
-        Set the initial device mask for a command buffer.
+val VkDeviceGroupCommandBufferBeginInfoKHR = struct(Module.VULKAN, "VkDeviceGroupCommandBufferBeginInfoKHR", alias = VkDeviceGroupCommandBufferBeginInfo) {
+    documentation = "See ##VkDeviceGroupCommandBufferBeginInfo."
 
-        <h5>Description</h5>
-        The initial device mask also acts as an upper bound on the set of devices that <b>can</b> ever be in the device mask in the command buffer.
-
-        If this structure is not present, the initial value of a command buffer's device mask is set to include all physical devices in the logical device when the command buffer begins recording.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
-            <li>{@code deviceMask} <b>must</b> not be zero</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHX</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint32_t.member("deviceMask", "the initial value of the command buffer&#8217;s device mask.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    uint32_t.member("deviceMask", "")
 }
 
-val VkDeviceGroupSubmitInfoKHX = struct(Module.VULKAN, "VkDeviceGroupSubmitInfoKHX") {
-    documentation =
-        """
-        Structure indicating which physical devices execute semaphore operations and command buffers.
+val VkDeviceGroupSubmitInfoKHR = struct(Module.VULKAN, "VkDeviceGroupSubmitInfoKHR", alias = VkDeviceGroupSubmitInfo) {
+    documentation = "See ##VkDeviceGroupSubmitInfo."
 
-        <h5>Description</h5>
-        If this structure is not present, semaphore operations and command buffers execute on device index zero.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code waitSemaphoreCount} <b>must</b> equal ##VkSubmitInfo{@code ::waitSemaphoreCount}</li>
-            <li>{@code commandBufferCount} <b>must</b> equal ##VkSubmitInfo{@code ::commandBufferCount}</li>
-            <li>{@code signalSemaphoreCount} <b>must</b> equal ##VkSubmitInfo{@code ::signalSemaphoreCount}</li>
-            <li>All elements of {@code pWaitSemaphoreDeviceIndices} and {@code pSignalSemaphoreDeviceIndices} <b>must</b> be valid device indices</li>
-            <li>All elements of {@code pCommandBufferDeviceMasks} <b>must</b> be valid device masks</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHX</li>
-            <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphoreDeviceIndices} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} {@code uint32_t} values</li>
-            <li>If {@code commandBufferCount} is not 0, {@code pCommandBufferDeviceMasks} <b>must</b> be a valid pointer to an array of {@code commandBufferCount} {@code uint32_t} values</li>
-            <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphoreDeviceIndices} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreCount} {@code uint32_t} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    AutoSize("pWaitSemaphoreDeviceIndices", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of elements in the {@code pWaitSemaphoreDeviceIndices} array.")
-    uint32_t.const.p.member("pWaitSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore wait operation in the corresponding element of ##VkSubmitInfo{@code ::pWaitSemaphores}.")
-    AutoSize("pCommandBufferDeviceMasks", optional = true)..uint32_t.member("commandBufferCount", "the number of elements in the {@code pCommandBufferDeviceMasks} array.")
-    uint32_t.const.p.member("pCommandBufferDeviceMasks", "an array of device masks indicating which physical devices execute the command buffer in the corresponding element of ##VkSubmitInfo{@code ::pCommandBuffers}. A physical device executes the command buffer if the corresponding bit is set in the mask.")
-    AutoSize("pSignalSemaphoreDeviceIndices", optional = true)..uint32_t.member("signalSemaphoreCount", "the number of elements in the {@code pSignalSemaphoreDeviceIndices} array.")
-    uint32_t.const.p.member("pSignalSemaphoreDeviceIndices", "an array of device indices indicating which physical device executes the semaphore signal operation in the corresponding element of ##VkSubmitInfo{@code ::pSignalSemaphores}.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    AutoSize("pWaitSemaphoreDeviceIndices", optional = true)..uint32_t.member("waitSemaphoreCount", "")
+    uint32_t.const.p.member("pWaitSemaphoreDeviceIndices", "")
+    AutoSize("pCommandBufferDeviceMasks", optional = true)..uint32_t.member("commandBufferCount", "")
+    uint32_t.const.p.member("pCommandBufferDeviceMasks", "")
+    AutoSize("pSignalSemaphoreDeviceIndices", optional = true)..uint32_t.member("signalSemaphoreCount", "")
+    uint32_t.const.p.member("pSignalSemaphoreDeviceIndices", "")
 }
 
-val VkDeviceGroupBindSparseInfoKHX = struct(Module.VULKAN, "VkDeviceGroupBindSparseInfoKHX") {
-    documentation =
-        """
-        Structure indicating which instances are bound.
+val VkDeviceGroupBindSparseInfoKHR = struct(Module.VULKAN, "VkDeviceGroupBindSparseInfoKHR", alias = VkDeviceGroupBindSparseInfo) {
+    documentation = "See ##VkDeviceGroupBindSparseInfo."
 
-        <h5>Description</h5>
-        These device indices apply to all buffer and image memory binds included in the batch that points to this structure. The semaphore waits and signals for the batch are executed only by the physical device specified by the {@code resourceDeviceIndex}.
-
-        If this structure is not present, {@code resourceDeviceIndex} and {@code memoryDeviceIndex} are assumed to be zero.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code resourceDeviceIndex} and {@code memoryDeviceIndex} <b>must</b> both be valid device indices.</li>
-            <li>Each memory allocation bound in this batch <b>must</b> have allocated an instance for {@code memoryDeviceIndex}.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHX</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint32_t.member("resourceDeviceIndex", "a device index indicating which instance of the resource is bound.")
-    uint32_t.member("memoryDeviceIndex", "a device index indicating which instance of the memory the resource instance is bound to.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    uint32_t.member("resourceDeviceIndex", "")
+    uint32_t.member("memoryDeviceIndex", "")
 }
 
-val VkBindBufferMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindBufferMemoryDeviceGroupInfoKHX") {
-    documentation =
-        """
-        Structure specifying device within a group to bind to.
-
-        <h5>Description</h5>
-        The ##VkBindBufferMemoryDeviceGroupInfoKHX structure is defined as:
-
-        <ul>
-            <li>{@code sType} is the type of this structure.</li>
-            <li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
-            <li>{@code deviceIndexCount} is the number of elements in {@code pDeviceIndices}.</li>
-            <li>{@code pDeviceIndices} is a pointer to an array of device indices.</li>
-        </ul>
-
-        If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> the buffer is attached to the instance of {@code memory} on the physical device with device index <code>pDeviceIndices[i]</code>.
-
-        If {@code deviceIndexCount} is zero and {@code memory} comes from a memory heap with the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains consecutive indices from zero to the number of physical devices in the logical device, minus one. In other words, by default each physical device attaches to its own instance of {@code memory}.
-
-        If {@code deviceIndexCount} is zero and {@code memory} comes from a memory heap without the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains an array of zeros. In other words, by default each physical device attaches to instance zero.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code deviceIndexCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
-            <li>All elements of {@code pDeviceIndices} <b>must</b> be valid device indices</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code deviceIndexCount} is not 0, {@code pDeviceIndices} <b>must</b> be a valid pointer to an array of {@code deviceIndexCount} {@code uint32_t} values</li>
-        </ul>
-        """
+val VkBindBufferMemoryDeviceGroupInfoKHR = struct(Module.VULKAN, "VkBindBufferMemoryDeviceGroupInfoKHR", alias = VkBindBufferMemoryDeviceGroupInfo) {
+    documentation = "See ##VkBindBufferMemoryDeviceGroupInfo."
 
     VkStructureType.member("sType", "")
     nullable..opaque_const_p.member("pNext", "")
@@ -1490,263 +1391,15 @@ val VkBindBufferMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindBufferMe
     uint32_t.const.p.member("pDeviceIndices", "")
 }
 
-val VkBindImageMemoryDeviceGroupInfoKHX = struct(Module.VULKAN, "VkBindImageMemoryDeviceGroupInfoKHX") {
-    documentation =
-        """
-        Structure specifying device within a group to bind to.
-
-        <h5>Description</h5>
-        The ##VkBindImageMemoryDeviceGroupInfoKHX structure is defined as:
-
-        <ul>
-            <li>{@code sType} is the type of this structure.</li>
-            <li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
-            <li>{@code deviceIndexCount} is the number of elements in {@code pDeviceIndices}.</li>
-            <li>{@code pDeviceIndices} is a pointer to an array of device indices.</li>
-            <li>{@code SFRRectCount} is the number of elements in {@code pSFRRects}.</li>
-            <li>{@code pSFRRects} is a pointer to an array of rectangles describing which regions of the image are attached to each instance of memory.</li>
-        </ul>
-
-        If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> {@code image} is attached to the instance of the memory on the physical device with device index <code>pDeviceIndices[i]</code>.
-
-        Let <code>N</code> be the number of physical devices in the logical device. If {@code SFRRectCount} is greater than zero, then {@code pSFRRects} is an array of <code>N<sup>2</sup></code> rectangles, where the image region specified by the rectangle at element <code>i*N+j</code> in resource instance <code>i</code> is bound to the memory instance <code>j</code>. The blocks of the memory that are bound to each sparse image block region use an offset in memory, relative to {@code memoryOffset}, computed as if the whole image were being bound to a contiguous range of memory. In other words, horizontally adjacent image blocks use consecutive blocks of memory, vertically adjacent image blocks are separated by the number of bytes per block multiplied by the width in blocks of {@code image}, and the block at <code>(0,0)</code> corresponds to memory starting at {@code memoryOffset}.
-
-        If {@code SFRRectCount} and {@code deviceIndexCount} are zero and the memory comes from a memory heap with the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains consecutive indices from zero to the number of physical devices in the logical device, minus one. In other words, by default each physical device attaches to its own instance of the memory.
-
-        If {@code SFRRectCount} and {@code deviceIndexCount} are zero and the memory comes from a memory heap without the #MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX bit set, then it is as if {@code pDeviceIndices} contains an array of zeros. In other words, by default each physical device attaches to instance zero.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>At least one of {@code deviceIndexCount} and {@code SFRRectCount} <b>must</b> be zero.</li>
-            <li>{@code deviceIndexCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
-            <li>All elements of {@code pDeviceIndices} <b>must</b> be valid device indices.</li>
-            <li>{@code SFRRectCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device squared</li>
-            <li>Elements of {@code pSFRRects} that correspond to the same instance of an image <b>must</b> not overlap.</li>
-            <li>The {@code offset.x} member of any element of {@code pSFRRects} <b>must</b> be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
-            <li>The {@code offset.y} member of any element of {@code pSFRRects} <b>must</b> be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
-            <li>The {@code extent.width} member of any element of {@code pSFRRects} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
-            <li>The {@code extent.height} member of any element of {@code pSFRRects} <b>must</b> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else {@code extent.height} {@code offset.y} <b>must</b> equal the width of the image subresource</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code deviceIndexCount} is not 0, {@code pDeviceIndices} <b>must</b> be a valid pointer to an array of {@code deviceIndexCount} {@code uint32_t} values</li>
-            <li>If {@code SFRRectCount} is not 0, {@code pSFRRects} <b>must</b> be a valid pointer to an array of {@code SFRRectCount} ##VkRect2D structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkRect2D
-        """
+val VkBindImageMemoryDeviceGroupInfoKHR = struct(Module.VULKAN, "VkBindImageMemoryDeviceGroupInfoKHR", alias = VkBindImageMemoryDeviceGroupInfo) {
+    documentation = "See ##VkBindImageMemoryDeviceGroupInfo."
 
     VkStructureType.member("sType", "")
     nullable..opaque_const_p.member("pNext", "")
     AutoSize("pDeviceIndices", optional = true)..uint32_t.member("deviceIndexCount", "")
     uint32_t.const.p.member("pDeviceIndices", "")
-    AutoSize("pSFRRects", optional = true)..uint32_t.member("SFRRectCount", "")
-    VkRect2D.const.p.buffer("pSFRRects", "")
-}
-
-val VkDeviceGroupPresentCapabilitiesKHX = struct(Module.VULKAN, "VkDeviceGroupPresentCapabilitiesKHX", mutable = false) {
-    javaImport("static org.lwjgl.vulkan.VK10.*")
-    documentation =
-        """
-        Present capabilities from other physical devices.
-
-        <h5>Description</h5>
-        {@code modes} always has #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX set.
-
-        The present mode flags are also used when presenting an image, in ##VkDeviceGroupPresentInfoKHX{@code ::mode}.
-
-        If a device group only includes a single physical device, then {@code modes} <b>must</b> equal #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetDeviceGroupPresentCapabilitiesKHX()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint32_t.array("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.", size = "VK_MAX_DEVICE_GROUP_SIZE_KHX")
-    VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHX} indicating which device group presentation modes are supported.")
-}
-
-val VkImageSwapchainCreateInfoKHX = struct(Module.VULKAN, "VkImageSwapchainCreateInfoKHX") {
-    documentation =
-        """
-        Specify that an image will be bound to swapchain memory.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code swapchain} is not #NULL_HANDLE, the fields of ##VkImageCreateInfo <b>must</b> match the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHX</li>
-            <li>If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a handle of a swapchain that the image will be bound to.")
-}
-
-val VkBindImageMemorySwapchainInfoKHX = struct(Module.VULKAN, "VkBindImageMemorySwapchainInfoKHX") {
-    documentation =
-        """
-        Structure specifying swapchain image memory to bind to.
-
-        <h5>Description</h5>
-        If {@code swapchain} is not {@code NULL}, the {@code swapchain} and {@code imageIndex} are used to determine the memory that the image is bound to, instead of {@code memory} and {@code memoryOffset}.
-
-        Memory <b>can</b> be bound to a swapchain and use the {@code pDeviceIndices} or {@code pSFRRects} members of ##VkBindImageMemoryDeviceGroupInfoKHX.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code imageIndex} <b>must</b> be less than the number of images in {@code swapchain}</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHX</li>
-            <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSwapchainKHR.member("swapchain", "#NULL_HANDLE or a swapchain handle.")
-    uint32_t.member("imageIndex", "an image index within {@code swapchain}.")
-}
-
-val VkAcquireNextImageInfoKHX = struct(Module.VULKAN, "VkAcquireNextImageInfoKHX") {
-    documentation =
-        """
-        Structure specifying parameters of the acquire.
-
-        <h5>Description</h5>
-        If #AcquireNextImageKHR() is used, the device mask is considered to include all physical devices in the logical device.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        #AcquireNextImage2KHX() signals at most one semaphore, even if the application requests waiting for multiple physical devices to be ready via the {@code deviceMask}. However, only a single physical device <b>can</b> wait on that semaphore, since the semaphore becomes unsignaled when the wait succeeds. For other physical devices to wait for the image to be ready, it is necessary for the application to submit semaphore signal operation(s) to that first physical device to signal additional semaphore(s) after the wait succeeds, which the other physical device(s) <b>can</b> wait upon.
-        </div>
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code swapchain} <b>must</b> not be in the retired state</li>
-            <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> be unsignaled</li>
-            <li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> not have any uncompleted signal or wait operations pending</li>
-            <li>If {@code fence} is not #NULL_HANDLE it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
-            <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE</li>
-            <li>{@code deviceMask} <b>must</b> be a valid device mask</li>
-            <li>{@code deviceMask} <b>must</b> not be zero</li>
-            <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to #NULL_HANDLE.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-            <li>If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
-            <li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-            <li>Each of {@code fence}, {@code semaphore}, and {@code swapchain} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
-            <li>Host access to {@code semaphore} <b>must</b> be externally synchronized</li>
-            <li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #AcquireNextImage2KHX()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSwapchainKHR.member("swapchain", "a non-retired swapchain from which an image is acquired.")
-    uint64_t.member("timeout", "indicates how long the function waits, in nanoseconds, if no image is available.")
-    VkSemaphore.member("semaphore", "#NULL_HANDLE or a semaphore to signal.")
-    VkFence.member("fence", "#NULL_HANDLE or a fence to signal.")
-    uint32_t.member("deviceMask", "a mask of physical devices for which the swapchain image will be ready to use when the semaphore or fence is signaled.")
-}
-
-val VkDeviceGroupPresentInfoKHX = struct(Module.VULKAN, "VkDeviceGroupPresentInfoKHX") {
-    documentation =
-        """
-        Mode and mask controlling which physical devices' images are presented.
-
-        <h5>Description</h5>
-        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX, then each element of {@code pDeviceMasks} selects which instance of the swapchain image is presented. Each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and the corresponding physical device <b>must</b> have a presentation engine as reported by ##VkDeviceGroupPresentCapabilitiesKHX.
-
-        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX, then each element of {@code pDeviceMasks} selects which instance of the swapchain image is presented. Each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and some physical device in the logical device <b>must</b> include that bit in its ##VkDeviceGroupPresentCapabilitiesKHX{@code ::presentMask}.
-
-        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX, then each element of {@code pDeviceMasks} selects which instances of the swapchain image are component-wise summed and the sum of those images is presented. If the sum in any component is outside the representable range, the value of that component is undefined. Each element of {@code pDeviceMasks} <b>must</b> have a value for which all set bits are set in one of the elements of ##VkDeviceGroupPresentCapabilitiesKHX{@code ::presentMask}.
-
-        If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX, then each element of {@code pDeviceMasks} selects which instance(s) of the swapchain images are presented. For each bit set in each element of {@code pDeviceMasks}, the corresponding physical device <b>must</b> have a presentation engine as reported by ##VkDeviceGroupPresentCapabilitiesKHX.
-
-        If ##VkDeviceGroupPresentInfoKHX is not provided or {@code swapchainCount} is zero then the masks are considered to be 1. If ##VkDeviceGroupPresentInfoKHX is not provided, {@code mode} is considered to be #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code swapchainCount} <b>must</b> equal 0 or ##VkPresentInfoKHR{@code ::swapchainCount}</li>
-            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX, then each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and the corresponding element of ##VkDeviceGroupPresentCapabilitiesKHX{@code ::presentMask} <b>must</b> be non-zero</li>
-            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX, then each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and some physical device in the logical device <b>must</b> include that bit in its ##VkDeviceGroupPresentCapabilitiesKHX{@code ::presentMask}.</li>
-            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX, then each element of {@code pDeviceMasks} <b>must</b> have a value for which all set bits are set in one of the elements of ##VkDeviceGroupPresentCapabilitiesKHX{@code ::presentMask}</li>
-            <li>If {@code mode} is #DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX, then for each bit set in each element of {@code pDeviceMasks}, the corresponding element of ##VkDeviceGroupPresentCapabilitiesKHX{@code ::presentMask} <b>must</b> be non-zero</li>
-            <li>The value of each element of {@code pDeviceMasks} <b>must</b> be equal to the device mask passed in ##VkAcquireNextImageInfoKHX{@code ::deviceMask} when the image index was last acquired</li>
-            <li>{@code mode} <b>must</b> have exactly one bit set, and that bit <b>must</b> have been included in ##VkDeviceGroupSwapchainCreateInfoKHX{@code ::modes}</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHX</li>
-            <li>If {@code swapchainCount} is not 0, {@code pDeviceMasks} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
-            <li>{@code mode} <b>must</b> be a valid {@code VkDeviceGroupPresentModeFlagBitsKHX} value</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    AutoSize("pDeviceMasks", optional = true)..uint32_t.member("swapchainCount", "zero or the number of elements in {@code pDeviceMasks}.")
-    uint32_t.const.p.member("pDeviceMasks", "an array of device masks, one for each element of ##VkPresentInfoKHR::pSwapchains.")
-    VkDeviceGroupPresentModeFlagBitsKHX.member("mode", "the device group present mode that will be used for this present.")
-}
-
-val VkDeviceGroupSwapchainCreateInfoKHX = struct(Module.VULKAN, "VkDeviceGroupSwapchainCreateInfoKHX") {
-    documentation =
-        """
-        Structure specifying parameters of a newly created swapchain object.
-
-        <h5>Description</h5>
-        If this structure is not present, {@code modes} is considered to be #DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHX</li>
-            <li>{@code modes} <b>must</b> be a valid combination of {@code VkDeviceGroupPresentModeFlagBitsKHX} values</li>
-            <li>{@code modes} <b>must</b> not be 0</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDeviceGroupPresentModeFlagsKHX.member("modes", "a bitfield of modes that the swapchain <b>can</b> be used with.")
+    AutoSize("pSplitInstanceBindRegions", optional = true)..uint32_t.member("splitInstanceBindRegionCount", "")
+    VkRect2D.const.p.buffer("pSplitInstanceBindRegions", "")
 }
 
 val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
@@ -1757,7 +1410,6 @@ val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VALIDATION_FLAGS_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code pDisabledValidationChecks} <b>must</b> be a valid pointer to an array of {@code disabledValidationCheckCount} {@code VkValidationCheckEXT} values</li>
             <li>{@code disabledValidationCheckCount} <b>must</b> be greater than 0</li>
         </ul>
@@ -1769,257 +1421,102 @@ val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
     VkValidationCheckEXT.p.member("pDisabledValidationChecks", "a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled.")
 }
 
-val VkPhysicalDeviceGroupPropertiesKHX = struct(Module.VULKAN, "VkPhysicalDeviceGroupPropertiesKHX", mutable = false) {
+val VkPhysicalDeviceGroupPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceGroupPropertiesKHR", mutable = false, alias = VkPhysicalDeviceGroupProperties) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
-    documentation =
-        """
-        Structure specifying physical device group properties.
-        """
+    documentation = "See ##VkPhysicalDeviceGroupProperties."
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint32_t.member("physicalDeviceCount", "the number of physical devices in the group.")
-    VkPhysicalDevice.array("physicalDevices", "an array of physical device handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid.", size = "VK_MAX_DEVICE_GROUP_SIZE_KHX")
-    VkBool32.member("subsetAllocation", "indicates whether logical devices created from the group support allocating device memory on a subset of devices, via the {@code deviceMask} member of the ##VkMemoryAllocateFlagsInfoKHX. If this is #FALSE, then all device memory allocations are made across all physical devices in the group. If {@code physicalDeviceCount} is 1, then {@code subsetAllocation} <b>must</b> be #FALSE.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("physicalDeviceCount", "")
+    VkPhysicalDevice.array("physicalDevices", "", size = "VK_MAX_DEVICE_GROUP_SIZE")
+    VkBool32.member("subsetAllocation", "")
 }
 
-val VkDeviceGroupDeviceCreateInfoKHX = struct(Module.VULKAN, "VkDeviceGroupDeviceCreateInfoKHX") {
-    documentation =
-        """
-        Create a logical device from multiple physical devices.
+val VkDeviceGroupDeviceCreateInfoKHR = struct(Module.VULKAN, "VkDeviceGroupDeviceCreateInfoKHR", alias = VkDeviceGroupDeviceCreateInfo) {
+    documentation = "See ##VkDeviceGroupDeviceCreateInfo."
 
-        <h5>Description</h5>
-        The elements of the {@code pPhysicalDevices} array are an ordered list of the physical devices that the logical device represents. These <b>must</b> be a subset of a single device group, and need not be in the same order as they were enumerated. The order of the physical devices in the {@code pPhysicalDevices} array determines the <em>device index</em> of each physical device, with element <code>i</code> being assigned a device index of <code>i</code>. Certain commands and structures refer to one or more physical devices by using device indices or <em>device masks</em> formed using device indices.
-
-        A logical device created without using ##VkDeviceGroupDeviceCreateInfoKHX, or with {@code physicalDeviceCount} equal to zero, is equivalent to a {@code physicalDeviceCount} of one and {@code pPhysicalDevices} pointing to the {@code physicalDevice} parameter to #CreateDevice(). In particular, the device index of that physical device is zero.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>Each element of {@code pPhysicalDevices} <b>must</b> be unique</li>
-            <li>All elements of {@code pPhysicalDevices} <b>must</b> be in the same device group as enumerated by #EnumeratePhysicalDeviceGroupsKHX()</li>
-            <li>If {@code physicalDeviceCount} is not 0, the {@code physicalDevice} parameter of #CreateDevice() <b>must</b> be an element of {@code pPhysicalDevices}.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHX</li>
-            <li>If {@code physicalDeviceCount} is not 0, {@code pPhysicalDevices} <b>must</b> be a valid pointer to an array of {@code physicalDeviceCount} valid {@code VkPhysicalDevice} handles</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    AutoSize("pPhysicalDevices", optional = true)..uint32_t.member("physicalDeviceCount", "the number of elements in the {@code pPhysicalDevices} array.")
-    VkPhysicalDevice.const.p.member("pPhysicalDevices", "an array of physical device handles belonging to the same device group.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    AutoSize("pPhysicalDevices", optional = true)..uint32_t.member("physicalDeviceCount", "")
+    VkPhysicalDevice.const.p.member("pPhysicalDevices", "")
 }
 
-val VkExternalMemoryPropertiesKHR = struct(Module.VULKAN, "VkExternalMemoryPropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying external memory handle type capabilities.
+val VkExternalMemoryPropertiesKHR = struct(Module.VULKAN, "VkExternalMemoryPropertiesKHR", mutable = false, alias = VkExternalMemoryProperties) {
+    documentation = "See ##VkExternalMemoryProperties."
 
-        <h5>Description</h5>
-        {@code compatibleHandleTypes} <b>must</b> include at least {@code handleType}. Inclusion of a handle type in {@code compatibleHandleTypes} does not imply the values returned in ##VkImageFormatProperties2KHR will be the same when ##VkPhysicalDeviceExternalImageFormatInfoKHR{@code ::handleType} is set to that type. The application is responsible for querying the capabilities of all handle types intended for concurrent use in a single image and intersecting them to obtain the compatible set of capabilities.
-
-        <h5>See Also</h5>
-        ##VkExternalBufferPropertiesKHR, ##VkExternalImageFormatPropertiesKHR
-        """
-
-    VkExternalMemoryFeatureFlagsKHR.member("externalMemoryFeatures", "a bitmask of {@code VkExternalMemoryFeatureFlagBitsKHR} specifying the features of {@code handleType}.")
-    VkExternalMemoryHandleTypeFlagsKHR.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying which types of imported handle {@code handleType} <b>can</b> be exported from.")
-    VkExternalMemoryHandleTypeFlagsKHR.member("compatibleHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating an image compatible with external memory.")
+    VkExternalMemoryFeatureFlags.member("externalMemoryFeatures", "")
+    VkExternalMemoryHandleTypeFlags.member("exportFromImportedHandleTypes", "")
+    VkExternalMemoryHandleTypeFlags.member("compatibleHandleTypes", "")
 }
 
-val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalImageFormatInfoKHR") {
-    documentation =
-        """
-        Structure specifying external image creation parameters.
+val VkPhysicalDeviceExternalImageFormatInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalImageFormatInfoKHR", alias = VkPhysicalDeviceExternalImageFormatInfo) {
+    documentation = "See ##VkPhysicalDeviceExternalImageFormatInfo."
 
-        <h5>Description</h5>
-        If {@code handleType} is 0, #GetPhysicalDeviceImageFormatProperties2KHR() will behave as if ##VkPhysicalDeviceExternalImageFormatInfoKHR was not present, and ##VkExternalImageFormatPropertiesKHR will be ignored.
-
-        If {@code handleType} is not compatible with the parameters specified in ##VkPhysicalDeviceImageFormatInfo2KHR and its {@code pNext} chain, then #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR</li>
-            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHR} value specifying the memory handle type that will be used with the memory associated with the image.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "")
 }
 
-val VkExternalImageFormatPropertiesKHR = struct(Module.VULKAN, "VkExternalImageFormatPropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying supported external handle properties.
+val VkExternalImageFormatPropertiesKHR = struct(Module.VULKAN, "VkExternalImageFormatPropertiesKHR", mutable = false, alias = VkExternalImageFormatProperties) {
+    documentation = "See ##VkExternalImageFormatProperties."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkExternalMemoryPropertiesKHR
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryPropertiesKHR.member("externalMemoryProperties", "an instance of the ##VkExternalMemoryPropertiesKHR structure specifying various capabilities of the external handle type when used with the specified image creation parameters.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkExternalMemoryProperties.member("externalMemoryProperties", "")
 }
 
-val VkPhysicalDeviceExternalBufferInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalBufferInfoKHR") {
-    documentation =
-        """
-        Structure specifying buffer creation parameters.
+val VkPhysicalDeviceExternalBufferInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalBufferInfoKHR", alias = VkPhysicalDeviceExternalBufferInfo) {
+    documentation = "See ##VkPhysicalDeviceExternalBufferInfo."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkBufferCreateFlagBits} values</li>
-            <li>{@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
-            <li>{@code usage} <b>must</b> not be 0</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceExternalBufferPropertiesKHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure")
-    nullable..opaque_const_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
-    VkBufferCreateFlags.member("flags", "a bitmask of {@code VkBufferCreateFlagBits} describing additional parameters of the buffer, corresponding to ##VkBufferCreateInfo{@code ::flags}.")
-    VkBufferUsageFlags.member("usage", "a bitmask of {@code VkBufferUsageFlagBits} describing the intended usage of the buffer, corresponding to ##VkBufferCreateInfo{@code ::usage}.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalMemoryHandleTypeFlagBitsKHR} value specifying the memory handle type that will be used with the memory associated with the buffer.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkBufferCreateFlags.member("flags", "")
+    VkBufferUsageFlags.member("usage", "")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "")
 }
 
-val VkExternalBufferPropertiesKHR = struct(Module.VULKAN, "VkExternalBufferPropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying supported external handle capabilities.
+val VkExternalBufferPropertiesKHR = struct(Module.VULKAN, "VkExternalBufferPropertiesKHR", mutable = false, alias = VkExternalBufferProperties) {
+    documentation = "See ##VkExternalBufferProperties."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkExternalMemoryPropertiesKHR, #GetPhysicalDeviceExternalBufferPropertiesKHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure")
-    nullable..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
-    VkExternalMemoryPropertiesKHR.member("externalMemoryProperties", "an instance of the ##VkExternalMemoryPropertiesKHR structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkExternalMemoryProperties.member("externalMemoryProperties", "")
 }
 
-val VkPhysicalDeviceIDPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIDPropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying IDs related to the physical device.
+val VkPhysicalDeviceIDPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIDPropertiesKHR", mutable = false, alias = VkPhysicalDeviceIDProperties) {
+    documentation = "See ##VkPhysicalDeviceIDProperties."
 
-        <h5>Description</h5>
-        {@code deviceUUID} <b>must</b> be immutable for a given device across instances, processes, driver APIs, driver versions, and system reboots.
-
-        Applications <b>can</b> compare the {@code driverUUID} value across instance and process boundaries, and <b>can</b> make similar queries in external APIs to determine whether they are capable of sharing memory objects and resources using them with the device.
-
-        {@code deviceUUID} and/or {@code driverUUID} <b>must</b> be used to determine whether a particular external object can be shared between driver components, where such a restriction exists as defined in the compatibility table for the particular object type:
-
-        <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-semaphore-handle-types-compatibility">External semaphore handle types compatibility</a></li>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
-        </ul>
-
-        If {@code deviceLUIDValid} is #FALSE, the contents of {@code deviceLUID} and {@code deviceNodeMask} are undefined. If {@code deviceLUIDValid} is #TRUE and Vulkan is running on the Windows operating system, the contents of {@code deviceLUID} <b>can</b> be cast to an {@code LUID} object and <b>must</b> be equal to the locally unique identifier of a {@code IDXGIAdapter1} object that corresponds to {@code physicalDevice}. If {@code deviceLUIDValid} is #TRUE, {@code deviceNodeMask} <b>must</b> contain exactly one bit. If Vulkan is running on an operating system that supports the Direct3D 12 API and {@code physicalDevice} corresponds to an individual device in a linked device adapter, {@code deviceNodeMask} identifies the Direct3D 12 node corresponding to {@code physicalDevice}. Otherwise, {@code deviceNodeMask} <b>must</b> be 1.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Although they have identical descriptions, ##VkPhysicalDeviceIDPropertiesKHR{@code ::deviceUUID} may differ from ##VkPhysicalDeviceProperties2KHR{@code ::pipelineCacheUUID}. The former is intended to identify and correlate devices across API and driver boundaries, while the latter is used to identify a compatible device and driver combination to use when serializing and de-serializing pipeline state.
-        </div>
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        While ##VkPhysicalDeviceIDPropertiesKHR{@code ::deviceUUID} is specified to remain consistent across driver versions and system reboots, it is not intended to be usable as a serializable persistent identifier for a device. It may change when a device is physically added to, removed from, or moved to a different connector in a system while that system is powered down. Further, there is no reasonable way to verify with conformance testing that a given device retains the same UUID in a given system across all driver versions supported in that system. While implementations should make every effort to report consistent device UUIDs across driver versions, applications should avoid relying on the persistence of this value for uses other than identifying compatible devices for external object sharing purposes.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint8_t.array("deviceUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the device.", size = "VK_UUID_SIZE")
-    uint8_t.array("driverUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the driver build in use by the device.", size = "VK_UUID_SIZE")
-    uint8_t.array("deviceLUID", "an array of size #LUID_SIZE_KHR, containing 8-bit values that represent a locally unique identifier for the device.", size = "VK_LUID_SIZE_KHR")
-    uint32_t.member("deviceNodeMask", "a bitfield identifying the node within a linked device adapter corresponding to the device.")
-    VkBool32.member("deviceLUIDValid", "a boolean value that will be #TRUE if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and #FALSE if they do not.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint8_t.array("deviceUUID", "", size = "VK_UUID_SIZE")
+    uint8_t.array("driverUUID", "", size = "VK_UUID_SIZE")
+    uint8_t.array("deviceLUID", "", size = "VK_LUID_SIZE")
+    uint32_t.member("deviceNodeMask", "")
+    VkBool32.member("deviceLUIDValid", "")
 }
 
-val VkExternalMemoryImageCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemoryImageCreateInfoKHR") {
-    documentation =
-        """
-        Specify that an image may be backed by external memory.
+val VkExternalMemoryImageCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemoryImageCreateInfoKHR", alias = VkExternalMemoryImageCreateInfo) {
+    documentation = "See ##VkExternalMemoryImageCreateInfo."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsKHR} values</li>
-            <li>{@code handleTypes} <b>must</b> not be 0</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more external memory handle types.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalMemoryHandleTypeFlags.member("handleTypes", "")
 }
 
-val VkExternalMemoryBufferCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemoryBufferCreateInfoKHR") {
-    documentation =
-        """
-        Specify that a buffer may be backed by external memory.
+val VkExternalMemoryBufferCreateInfoKHR = struct(Module.VULKAN, "VkExternalMemoryBufferCreateInfoKHR", alias = VkExternalMemoryBufferCreateInfo) {
+    documentation = "See ##VkExternalMemoryBufferCreateInfo."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsKHR} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more external memory handle types.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalMemoryHandleTypeFlags.member("handleTypes", "")
 }
 
-val VkExportMemoryAllocateInfoKHR = struct(Module.VULKAN, "VkExportMemoryAllocateInfoKHR") {
-    documentation =
-        """
-        Specify exportable handle types for a device memory object.
+val VkExportMemoryAllocateInfoKHR = struct(Module.VULKAN, "VkExportMemoryAllocateInfoKHR", alias = VkExportMemoryAllocateInfo) {
+    documentation = "See ##VkExportMemoryAllocateInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The bits in {@code handleTypes} <b>must</b> be supported and compatible, as reported by ##VkExternalImageFormatPropertiesKHR or ##VkExternalBufferPropertiesKHR.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsKHR} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsKHR} specifying one or more memory handle types the application <b>can</b> export from the resulting allocation. The application <b>can</b> request multiple handle types for the same allocation.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalMemoryHandleTypeFlags.member("handleTypes", "")
 }
 
 val VkImportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportMemoryWin32HandleInfoKHR") {
@@ -2035,10 +1532,10 @@ val VkImportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportMemoryWin3
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by ##VkExternalImageFormatPropertiesKHR or ##VkExternalBufferPropertiesKHR.</li>
+            <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by ##VkExternalImageFormatProperties or ##VkExternalBufferProperties.</li>
             <li>The memory from which {@code handle} was exported, or the memory named by {@code name} <b>must</b> have been created on the same underlying physical device as {@code device}.</li>
             <li>If {@code handleType} is not 0, it <b>must</b> be defined as an NT handle or a global share handle.</li>
-            <li>If {@code handleType} is not #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR, or #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR, {@code name} <b>must</b> be {@code NULL}.</li>
+            <li>If {@code handleType} is not #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT, or #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT, {@code name} <b>must</b> be {@code NULL}.</li>
             <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid memory resource of the type specified by {@code handleType}.</li>
             <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>if {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
@@ -2049,14 +1546,13 @@ val VkImportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportMemoryWin3
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
         </ul>
         """
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code handle} or {@code name}.")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "specifies the type of {@code handle} or {@code name}.")
     HANDLE.member("handle", "the external handle to import, or {@code NULL}.")
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string naming the underlying memory resource to import, or {@code NULL}.")
 }
@@ -2074,7 +1570,7 @@ val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin3
 
         for handles of the following types:
 
-        #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR
+        #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT
 
         And
 
@@ -2082,7 +1578,7 @@ val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin3
 
         for handles of the following types:
 
-        #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR
+        #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT
 
         <dl>
             <dt>1</dt>
@@ -2091,13 +1587,12 @@ val VkExportMemoryWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportMemoryWin3
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkExportMemoryAllocateInfoKHR{@code ::handleTypes} does not include #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR, or #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR, VkExportMemoryWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkMemoryAllocateInfo.</li>
+            <li>If ##VkExportMemoryAllocateInfo{@code ::handleTypes} does not include #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT, #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT, or #EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT, VkExportMemoryWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkMemoryAllocateInfo.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code pAttributes} is not {@code NULL}, {@code pAttributes} <b>must</b> be a valid pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
         </ul>
         """
@@ -2126,11 +1621,11 @@ val VkMemoryGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkMemoryGetWin32Handl
         Structure describing a Win32 handle semaphore export operation.
 
         <h5>Description</h5>
-        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHR} for a description of the properties of the defined external memory handle types.
+        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBits} for a description of the properties of the defined external memory handle types.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportMemoryAllocateInfoKHR{@code ::handleTypes} when {@code memory} was created.</li>
+            <li>{@code handleType} <b>must</b> have been included in ##VkExportMemoryAllocateInfo{@code ::handleTypes} when {@code memory} was created.</li>
             <li>If {@code handleType} is defined as an NT handle, #GetMemoryWin32HandleKHR() <b>must</b> be called no more than once for each valid unique combination of {@code memory} and {@code handleType}.</li>
             <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
         </ul>
@@ -2140,7 +1635,7 @@ val VkMemoryGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkMemoryGetWin32Handl
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2150,7 +1645,7 @@ val VkMemoryGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkMemoryGetWin32Handl
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceMemory.member("memory", "the memory object from which the handle will be exported.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "the type of handle requested.")
 }
 
 val VkImportMemoryFdInfoKHR = struct(Module.VULKAN, "VkImportMemoryFdInfoKHR") {
@@ -2165,7 +1660,8 @@ val VkImportMemoryFdInfoKHR = struct(Module.VULKAN, "VkImportMemoryFdInfoKHR") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by ##VkExternalImageFormatPropertiesKHR or ##VkExternalBufferPropertiesKHR.</li>
+            <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by ##VkExternalImageFormatProperties or ##VkExternalBufferProperties.</li>
+            <li>The memory from which {@code fd} was exported <b>must</b> have been created on the same underlying physical device as {@code device}.</li>
             <li>If {@code handleType} is not 0, it <b>must</b> be defined as a POSIX file descriptor handle.</li>
             <li>If {@code handleType} is not 0, {@code fd} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>The memory represented by {@code fd} <b>must</b> have been created from a physical device and driver that is compatible with {@code device} and {@code handleType}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-memory-handle-types-compatibility">External memory handle types compatibility</a>.</li>
@@ -2175,14 +1671,13 @@ val VkImportMemoryFdInfoKHR = struct(Module.VULKAN, "VkImportMemoryFdInfoKHR") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
         </ul>
         """
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the handle type of {@code fd}.")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "specifies the handle type of {@code fd}.")
     int.member("fd", "the external handle to import.")
 }
 
@@ -2203,7 +1698,7 @@ val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
         Structure describing a POSIX FD semaphore export operation.
 
         <h5>Description</h5>
-        The properties of the file descriptor exported depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBitsKHR} for a description of the properties of the defined external memory handle types.
+        The properties of the file descriptor exported depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBits} for a description of the properties of the defined external memory handle types.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The size of the exported file <b>may</b> be larger than the size requested by ##VkMemoryAllocateInfo::allocationSize. If {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT, then the application <b>can</b> query the file's actual size with link:man:lseek(2)[lseek(2)].
@@ -2211,7 +1706,7 @@ val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportMemoryAllocateInfoKHR{@code ::handleTypes} when {@code memory} was created.</li>
+            <li>{@code handleType} <b>must</b> have been included in ##VkExportMemoryAllocateInfo{@code ::handleTypes} when {@code memory} was created.</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
         </ul>
 
@@ -2220,7 +1715,7 @@ val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2230,7 +1725,7 @@ val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDeviceMemory.member("memory", "the memory object from which the handle will be exported.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "the type of handle requested.")
 }
 
 val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(Module.VULKAN, "VkWin32KeyedMutexAcquireReleaseInfoKHR") {
@@ -2240,7 +1735,7 @@ val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(Module.VULKAN, "VkWin32Keyed
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Each member of {@code pAcquireSyncs} and {@code pReleaseSyncs} <b>must</b> be a device memory object imported by setting ##VkImportMemoryWin32HandleInfoKHR{@code ::handleType} to #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR or #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR.</li>
+            <li>Each member of {@code pAcquireSyncs} and {@code pReleaseSyncs} <b>must</b> be a device memory object imported by setting ##VkImportMemoryWin32HandleInfoKHR{@code ::handleType} to #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT or #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -2266,73 +1761,30 @@ val VkWin32KeyedMutexAcquireReleaseInfoKHR = struct(Module.VULKAN, "VkWin32Keyed
     uint64_t.const.p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
-val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalSemaphoreInfoKHR") {
-    documentation =
-        """
-        Structure specifying semaphore creation parameters.
+val VkPhysicalDeviceExternalSemaphoreInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalSemaphoreInfoKHR", alias = VkPhysicalDeviceExternalSemaphoreInfo) {
+    documentation = "See ##VkPhysicalDeviceExternalSemaphoreInfo."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceExternalSemaphorePropertiesKHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure")
-    nullable..opaque_const_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
-    VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value specifying the external semaphore handle type for which capabilities will be returned.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalSemaphoreHandleTypeFlagBits.member("handleType", "")
 }
 
-val VkExternalSemaphorePropertiesKHR = struct(Module.VULKAN, "VkExternalSemaphorePropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure describing supported external semaphore handle features.
-
-        <h5>Description</h5>
-        If {@code handleType} is not supported by the implementation, then ##VkExternalSemaphorePropertiesKHR{@code ::externalSemaphoreFeatures} will be set to zero.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceExternalSemaphorePropertiesKHR()
-        """
+val VkExternalSemaphorePropertiesKHR = struct(Module.VULKAN, "VkExternalSemaphorePropertiesKHR", mutable = false, alias = VkExternalSemaphoreProperties) {
+    documentation = "See ##VkExternalSemaphoreProperties."
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkExternalSemaphoreHandleTypeFlagsKHR.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} specifying which types of imported handle {@code handleType} <b>can</b> be exported from.")
-    VkExternalSemaphoreHandleTypeFlagsKHR.member("compatibleHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a semaphore.")
-    VkExternalSemaphoreFeatureFlagsKHR.member("externalSemaphoreFeatures", "a bitmask of {@code VkExternalSemaphoreFeatureFlagBitsKHR} describing the features of {@code handleType}.")
+    VkExternalSemaphoreHandleTypeFlags.member("exportFromImportedHandleTypes", "")
+    VkExternalSemaphoreHandleTypeFlags.member("compatibleHandleTypes", "")
+    VkExternalSemaphoreFeatureFlags.member("externalSemaphoreFeatures", "")
 }
 
-val VkExportSemaphoreCreateInfoKHR = struct(Module.VULKAN, "VkExportSemaphoreCreateInfoKHR") {
-    documentation =
-        """
-        Structure specifying handle types that can be exported from a semaphore.
+val VkExportSemaphoreCreateInfoKHR = struct(Module.VULKAN, "VkExportSemaphoreCreateInfoKHR", alias = VkExportSemaphoreCreateInfo) {
+    documentation = "See ##VkExportSemaphoreCreateInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The bits in {@code handleTypes} <b>must</b> be supported and compatible, as reported by ##VkExternalSemaphorePropertiesKHR.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalSemaphoreHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} specifying one or more semaphore handle types the application <b>can</b> export from the resulting semaphore. The application <b>can</b> request multiple handle types for the same semaphore.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalSemaphoreHandleTypeFlags.member("handleTypes", "")
 }
 
 val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreWin32HandleInfoKHR") {
@@ -2348,16 +1800,16 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemapho
         <table class="lwjgl">
             <thead><tr><th>Handle Type</th><th>Transference</th><th>Permanence Supported</th></tr></thead>
             <tbody>
-                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
-                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
-                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
             </tbody>
         </table>
 
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphore-handletypes-win32">Handle Types Supported by VkImportSemaphoreWin32HandleInfoKHR</a> table.</li>
-            <li>If {@code handleType} is not #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, {@code name} <b>must</b> be {@code NULL}.</li>
+            <li>If {@code handleType} is not #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT, {@code name} <b>must</b> be {@code NULL}.</li>
             <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid synchronization primitive of the type specified by {@code handleType}.</li>
             <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
@@ -2370,8 +1822,8 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemapho
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkSemaphoreImportFlagBitsKHR} values</li>
-            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkSemaphoreImportFlagBits} values</li>
+            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -2386,8 +1838,8 @@ val VkImportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportSemapho
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore into which the payload will be imported.")
-    VkSemaphoreImportFlagsKHR.member("flags", "a bitmask of {@code VkSemaphoreImportFlagBitsKHR} specifying additional parameters for the semaphore payload import operation.")
-    VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code handle}.")
+    VkSemaphoreImportFlags.member("flags", "a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation.")
+    VkExternalSemaphoreHandleTypeFlagBits.member("handleType", "specifies the type of {@code handle}.")
     HANDLE.member("handle", "the external handle to import, or {@code NULL}.")
     LPCWSTR.member("name", "a NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
 }
@@ -2405,7 +1857,7 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemapho
 
         for handles of the following types:
 
-        #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR
+        #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT
 
         And
 
@@ -2413,7 +1865,7 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemapho
 
         for handles of the following types:
 
-        #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR
+        #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT
 
         <dl>
             <dt>1</dt>
@@ -2422,13 +1874,12 @@ val VkExportSemaphoreWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportSemapho
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} does not include #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR, ##VkExportSemaphoreWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkSemaphoreCreateInfo.</li>
+            <li>If ##VkExportSemaphoreCreateInfo{@code ::handleTypes} does not include #EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT or #EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT, ##VkExportSemaphoreWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkSemaphoreCreateInfo.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code pAttributes} is not {@code NULL}, {@code pAttributes} <b>must</b> be a valid pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
         </ul>
         """
@@ -2476,13 +1927,13 @@ val VkSemaphoreGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetWin3
         Structure describing a Win32 handle semaphore export operation.
 
         <h5>Description</h5>
-        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} for a description of the properties of the defined external semaphore handle types.
+        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalSemaphoreHandleTypeFlagBits} for a description of the properties of the defined external semaphore handle types.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} when the {@code semaphore}&#8217;s current payload was created.</li>
+            <li>{@code handleType} <b>must</b> have been included in ##VkExportSemaphoreCreateInfo{@code ::handleTypes} when the {@code semaphore}&#8217;s current payload was created.</li>
             <li>If {@code handleType} is defined as an NT handle, #GetSemaphoreWin32HandleKHR() <b>must</b> be called no more than once for each valid unique combination of {@code semaphore} and {@code handleType}.</li>
-            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphorePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphoreProperties{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
@@ -2493,7 +1944,7 @@ val VkSemaphoreGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetWin3
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2503,7 +1954,7 @@ val VkSemaphoreGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetWin3
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore from which state will be exported.")
-    VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
+    VkExternalSemaphoreHandleTypeFlagBits.member("handleType", "the type of handle requested.")
 }
 
 val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoKHR") {
@@ -2518,8 +1969,8 @@ val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoK
         <table class="lwjgl">
             <thead><tr><th>Handle Type</th><th>Transference</th><th>Permanence Supported</th></tr></thead>
             <tbody>
-                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
-                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR</td><td>Copy</td><td>Temporary</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT</td><td>Copy</td><td>Temporary</td></tr>
             </tbody>
         </table>
 
@@ -2534,8 +1985,8 @@ val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoK
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkSemaphoreImportFlagBitsKHR} values</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkSemaphoreImportFlagBits} values</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -2550,8 +2001,8 @@ val VkImportSemaphoreFdInfoKHR = struct(Module.VULKAN, "VkImportSemaphoreFdInfoK
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore into which the payload will be imported.")
-    VkSemaphoreImportFlagsKHR.member("flags", "a bitmask of {@code VkSemaphoreImportFlagBitsKHR} specifying additional parameters for the semaphore payload import operation.")
-    VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code fd}.")
+    VkSemaphoreImportFlags.member("flags", "a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation.")
+    VkExternalSemaphoreHandleTypeFlagBits.member("handleType", "specifies the type of {@code fd}.")
     int.member("fd", "the external handle to import.")
 }
 
@@ -2561,12 +2012,12 @@ val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
         Structure describing a POSIX FD semaphore export operation.
 
         <h5>Description</h5>
-        The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} for a description of the properties of the defined external semaphore handle types.
+        The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalSemaphoreHandleTypeFlagBits} for a description of the properties of the defined external semaphore handle types.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportSemaphoreCreateInfoKHR{@code ::handleTypes} when {@code semaphore}&#8217;s current payload was created.</li>
-            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphorePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>{@code handleType} <b>must</b> have been included in ##VkExportSemaphoreCreateInfo{@code ::handleTypes} when {@code semaphore}&#8217;s current payload was created.</li>
+            <li>{@code semaphore} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalSemaphoreProperties{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, as defined below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, there <b>must</b> be no queue waiting on {@code semaphore}.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code semaphore} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
@@ -2577,7 +2028,7 @@ val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2587,7 +2038,7 @@ val VkSemaphoreGetFdInfoKHR = struct(Module.VULKAN, "VkSemaphoreGetFdInfoKHR") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSemaphore.member("semaphore", "the semaphore from which state will be exported.")
-    VkExternalSemaphoreHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
+    VkExternalSemaphoreHandleTypeFlagBits.member("handleType", "the type of handle requested.")
 }
 
 val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevicePushDescriptorPropertiesKHR") {
@@ -2598,7 +2049,6 @@ val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(Module.VULKAN, "VkPhysi
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
         """
 
@@ -2607,7 +2057,9 @@ val VkPhysicalDevicePushDescriptorPropertiesKHR = struct(Module.VULKAN, "VkPhysi
     uint32_t.member("maxPushDescriptors", "the maximum number of descriptors that <b>can</b> be used in a descriptor set created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR set.")
 }
 
-val VkPhysicalDevice16BitStorageFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevice16BitStorageFeaturesKHR") {
+val VkPhysicalDevice16BitStorageFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevice16BitStorageFeaturesKHR", alias = VkPhysicalDevice16BitStorageFeatures) {
+    documentation = "See ##VkPhysicalDevice16BitStorageFeatures."
+
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkBool32.member("storageBuffer16BitAccess", "")
@@ -2683,80 +2135,30 @@ val VkPresentRegionsKHR = struct(Module.VULKAN, "VkPresentRegionsKHR") {
     nullable..VkPresentRegionKHR.const.p.buffer("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
 }
 
-val VkDescriptorUpdateTemplateEntryKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntryKHR") {
-    documentation =
-        """
-        Describes a single descriptor update of the descriptor update template.
+val VkDescriptorUpdateTemplateEntryKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntryKHR", alias = VkDescriptorUpdateTemplateEntry) {
+    documentation = "See ##VkDescriptorUpdateTemplateEntry."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code dstBinding} <b>must</b> be a valid binding in the descriptor set layout implicitly specified when using a descriptor update template to update descriptors.</li>
-            <li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-updates-consecutive">the “consecutive binding updates” section</a></li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code descriptorType} <b>must</b> be a valid {@code VkDescriptorType} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDescriptorUpdateTemplateCreateInfoKHR
-        """
-
-    uint32_t.member("dstBinding", "the descriptor binding to update when using this descriptor update template.")
-    uint32_t.member("dstArrayElement", "the starting element in the array belonging to {@code dstBinding}.")
-    uint32_t.member("descriptorCount", "the number of descriptors to update. If {@code descriptorCount} is greater than the number of remaining array elements in the destination binding, those affect consecutive bindings in a manner similar to ##VkWriteDescriptorSet above.")
-    VkDescriptorType.member("descriptorType", "a {@code VkDescriptorType} specifying the type of the descriptor.")
-    size_t.member("offset", "the offset in bytes of the first binding in the raw data structure.")
-    size_t.member("stride", """the stride in bytes between two consecutive array elements of the descriptor update informations in the raw data structure. The actual pointer ptr for each array element j of update entry i is computed using the following formula:
-
-        <code><pre>
-￿    const char *ptr = (const char *)pData + pDescriptorUpdateEntries[i].offset + j * pDescriptorUpdateEntries[i].stride</pre></code>
-
-        The stride is useful in case the bindings are stored in structs along with other data.""")
+    uint32_t.member("dstBinding", "")
+    uint32_t.member("dstArrayElement", "")
+    uint32_t.member("descriptorCount", "")
+    VkDescriptorType.member("descriptorType", "")
+    size_t.member("offset", "")
+    size_t.member("stride", "")
 }
 
-val VkDescriptorUpdateTemplateCreateInfoKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateCreateInfoKHR") {
-    documentation =
-        """
-        Structure specifying parameters of a newly created descriptor update template.
+val VkDescriptorUpdateTemplateCreateInfoKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateCreateInfoKHR", alias = VkDescriptorUpdateTemplateCreateInfo) {
+    documentation = "See ##VkDescriptorUpdateTemplateCreateInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code templateType} is #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR, {@code descriptorSetLayout} <b>must</b> be a valid {@code VkDescriptorSetLayout} handle</li>
-            <li>If {@code templateType} is #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR, {@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
-            <li>If {@code templateType} is #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
-            <li>If {@code templateType} is #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR, {@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pDescriptorUpdateEntries} <b>must</b> be a valid pointer to an array of {@code descriptorUpdateEntryCount} valid ##VkDescriptorUpdateTemplateEntryKHR structures</li>
-            <li>{@code templateType} <b>must</b> be a valid {@code VkDescriptorUpdateTemplateTypeKHR} value</li>
-            <li>If {@code descriptorSetLayout} is not #NULL_HANDLE, {@code descriptorSetLayout} <b>must</b> be a valid {@code VkDescriptorSetLayout} handle</li>
-            <li>If {@code pipelineBindPoint} is not 0, {@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
-            <li>If {@code pipelineLayout} is not #NULL_HANDLE, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
-            <li>{@code descriptorUpdateEntryCount} <b>must</b> be greater than 0</li>
-            <li>Both of {@code descriptorSetLayout}, and {@code pipelineLayout} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDescriptorUpdateTemplateEntryKHR, #CreateDescriptorUpdateTemplateKHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDescriptorUpdateTemplateCreateFlagsKHR.member("flags", "reserved for future use.")
-    AutoSize("pDescriptorUpdateEntries")..uint32_t.member("descriptorUpdateEntryCount", "the number of elements in the {@code pDescriptorUpdateEntries} array.")
-    VkDescriptorUpdateTemplateEntryKHR.const.p.buffer("pDescriptorUpdateEntries", "a pointer to an array of ##VkDescriptorUpdateTemplateEntryKHR structures describing the descriptors to be updated by the descriptor update template.")
-    VkDescriptorUpdateTemplateTypeKHR.member("templateType", "Specifies the type of the descriptor update template. If set to #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR it <b>can</b> only be used to update descriptor sets with a fixed {@code descriptorSetLayout}. If set to #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR it <b>can</b> only be used to push descriptor sets using the provided {@code pipelineBindPoint}, {@code pipelineLayout}, and {@code set} number.")
-    VkDescriptorSetLayout.member("descriptorSetLayout", "the descriptor set layout the parameter update template will be used with. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with this layout. {@code descriptorSetLayout} is the descriptor set layout used to build the descriptor update template. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with a layout that matches (is the same as, or defined identically to) this layout. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR.")
-    VkPipelineBindPoint.member("pipelineBindPoint", "a {@code VkPipelineBindPoint} indicating whether the descriptors will be used by graphics pipelines or compute pipelines. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR")
-    VkPipelineLayout.member("pipelineLayout", "a {@code VkPipelineLayout} object used to program the bindings. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR")
-    uint32_t.member("set", "the set number of the descriptor set in the pipeline layout that will be updated. This parameter is ignored if {@code templateType} is not #DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkDescriptorUpdateTemplateCreateFlags.member("flags", "")
+    AutoSize("pDescriptorUpdateEntries")..uint32_t.member("descriptorUpdateEntryCount", "")
+    VkDescriptorUpdateTemplateEntry.const.p.buffer("pDescriptorUpdateEntries", "")
+    VkDescriptorUpdateTemplateType.member("templateType", "")
+    VkDescriptorSetLayout.member("descriptorSetLayout", "")
+    VkPipelineBindPoint.member("pipelineBindPoint", "")
+    VkPipelineLayout.member("pipelineLayout", "")
+    uint32_t.member("set", "")
 }
 
 val VkDeviceGeneratedCommandsFeaturesNVX = struct(Module.VULKAN, "VkDeviceGeneratedCommandsFeaturesNVX") {
@@ -2776,7 +2178,7 @@ val VkDeviceGeneratedCommandsFeaturesNVX = struct(Module.VULKAN, "VkDeviceGenera
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBool32.member("computeBindingPointSupport", "indicates whether the {@code VkObjectTableNVX} supports entries with #OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX bit set and {@code VkIndirectCommandsLayoutNVX} supports #PIPELINE_BIND_POINT_COMPUTE.")
+    VkBool32.member("computeBindingPointSupport", "specifies whether the {@code VkObjectTableNVX} supports entries with #OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX bit set and {@code VkIndirectCommandsLayoutNVX} supports #PIPELINE_BIND_POINT_COMPUTE.")
 }
 
 val VkDeviceGeneratedCommandsLimitsNVX = struct(Module.VULKAN, "VkDeviceGeneratedCommandsLimitsNVX") {
@@ -3341,7 +2743,6 @@ val VkSwapchainCounterCreateInfoEXT = struct(Module.VULKAN, "VkSwapchainCounterC
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code surfaceCounters} <b>must</b> be a valid combination of {@code VkSurfaceCounterFlagBitsEXT} values</li>
         </ul>
         """
@@ -3388,7 +2789,7 @@ val VkPresentTimeGOOGLE = struct(Module.VULKAN, "VkPresentTimeGOOGLE") {
         """
 
     uint32_t.member("presentID", "an application-provided identification value, that <b>can</b> be used with the results of #GetPastPresentationTimingGOOGLE(), in order to uniquely identify this present. In order to be useful to the application, it <b>should</b> be unique within some period of time that is meaningful to the application.")
-    uint64_t.member("desiredPresentTime", "indicates that the image given <b>should</b> not be displayed to the user any earlier than this time. {@code desiredPresentTime} is a time in nanoseconds, relative to a monotonically-increasing clock (e.g. {@code CLOCK_MONOTONIC} (see clock_gettime(2)) on Android and Linux). A value of zero indicates that the presentation engine <b>may</b> display the image at any time. This is useful when the application desires to provide {@code presentID}, but doesn&#8217;t need a specific {@code desiredPresentTime}.")
+    uint64_t.member("desiredPresentTime", "specifies that the image given <b>should</b> not be displayed to the user any earlier than this time. {@code desiredPresentTime} is a time in nanoseconds, relative to a monotonically-increasing clock (e.g. {@code CLOCK_MONOTONIC} (see clock_gettime(2)) on Android and Linux). A value of zero specifies that the presentation engine <b>may</b> display the image at any time. This is useful when the application desires to provide {@code presentID}, but doesn&#8217;t need a specific {@code desiredPresentTime}.")
 }
 
 val VkPresentTimesInfoGOOGLE = struct(Module.VULKAN, "VkPresentTimesInfoGOOGLE") {
@@ -3426,10 +2827,9 @@ val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(Module.VULK
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        If the ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")
@@ -3473,7 +2873,6 @@ val VkPipelineViewportSwizzleStateCreateInfoNV = struct(Module.VULKAN, "VkPipeli
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code viewportCount} <b>must</b> be greater than 0</li>
         </ul>
@@ -3497,10 +2896,9 @@ val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(Module.VULKAN, "VkPhy
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        If the ##VkPhysicalDeviceDiscardRectanglePropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceDiscardRectanglePropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")
@@ -3521,7 +2919,6 @@ val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(Module.VULKAN, "VkPipe
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code discardRectangleMode} <b>must</b> be a valid {@code VkDiscardRectangleModeEXT} value</li>
         </ul>
@@ -3546,7 +2943,6 @@ val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(Module.VULKA
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
         If the ##VkPhysicalDeviceConservativeRasterizationPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits and properties.
@@ -3561,7 +2957,7 @@ val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(Module.VULKA
     VkBool32.member("conservativePointAndLineRasterization", "true if the implementation supports conservative rasterization of point and line primitives as well as triangle primitives. Otherwise the implementation only supports triangle primitives.")
     VkBool32.member("degenerateTrianglesRasterized", "false if the implementation culls primitives generated from triangles that become zero area after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateTrianglesRasterized} is true if these primitives are not culled and the provoking vertex attributes and depth value are used for the fragments. The primitive area calculation is done on the primitive generated from the clipped triangle if applicable. Zero area primitives are backfacing and the application <b>can</b> enable backface culling if desired.")
     VkBool32.member("degenerateLinesRasterized", "false if the implementation culls lines that become zero length after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateLinesRasterized} is true if zero length lines are not culled and the provoking vertex attributes and depth value are used for the fragments.")
-    VkBool32.member("fullyCoveredFragmentShaderInputVariable", "true if the implementation supports the SPIR-V builtin fragment shader input variable FullyCoveredEXT which indicates that conservative rasterization is enabled and the fragment pixel square is fully covered by the generating primitive.")
+    VkBool32.member("fullyCoveredFragmentShaderInputVariable", "true if the implementation supports the SPIR-V builtin fragment shader input variable FullyCoveredEXT which specifies that conservative rasterization is enabled and the fragment pixel square is fully covered by the generating primitive.")
     VkBool32.member("conservativeRasterizationPostDepthCoverage", "true if the implementation supports conservative rasterization with the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#shaders-fragment-earlytest-postdepthcoverage\">{@code PostDepthCoverage}</a> execution mode enabled. When supported the {@code SampleMask} built-in input variable will reflect the coverage after the early per-fragment depth and stencil tests are applied even when conservative rasterization is enabled. Otherwise <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#shaders-fragment-earlytest-postdepthcoverage\">{@code PostDepthCoverage}</a> execution mode <b>must</b> not be used when conservative rasterization is enabled.")
 }
 
@@ -3578,7 +2974,6 @@ val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(Module.VULKAN
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code conservativeRasterizationMode} <b>must</b> be a valid {@code VkConservativeRasterizationModeEXT} value</li>
         </ul>
@@ -3607,7 +3002,7 @@ val VkHdrMetadataEXT = struct(Module.VULKAN, "VkHdrMetadataEXT") {
         structure to specify Hdr metadata.
 
         <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>note</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The validity and use of this data is outside the scope of Vulkan and thus no +Valid Usage+ is given.
         </div>
 
@@ -3643,78 +3038,30 @@ val VkSharedPresentSurfaceCapabilitiesKHR = struct(Module.VULKAN, "VkSharedPrese
     VkImageUsageFlags.member("sharedPresentSupportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the shared presentable image from a swapchain created with {@code VkPresentModeKHR} set to #PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR or #PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
 
-val VkPhysicalDeviceExternalFenceInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalFenceInfoKHR") {
-    documentation =
-        """
-        Structure specifying fence creation parameters.
+val VkPhysicalDeviceExternalFenceInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceExternalFenceInfoKHR", alias = VkPhysicalDeviceExternalFenceInfo) {
+    documentation = "See ##VkPhysicalDeviceExternalFenceInfo."
 
-        <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Handles of type #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR generated by the implementation may represent either Linux Sync Files or Android Fences at the implementation's discretion. Applications <b>should</b> only use operations defined for both types of file descriptors, unless they know via means external to Vulkan the type of the file descriptor, or are prepared to deal with the system-defined operation failures resulting from using the wrong type.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBitsKHR} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceExternalFencePropertiesKHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure")
-    nullable..opaque_const_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
-    VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "a {@code VkExternalFenceHandleTypeFlagBitsKHR} value indicating an external fence handle type for which capabilities will be returned.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalFenceHandleTypeFlagBits.member("handleType", "")
 }
 
-val VkExternalFencePropertiesKHR = struct(Module.VULKAN, "VkExternalFencePropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure describing supported external fence handle features.
-
-        <h5>Description</h5>
-        If {@code handleType} is not supported by the implementation, then ##VkExternalFencePropertiesKHR{@code ::externalFenceFeatures} will be set to zero.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPhysicalDeviceExternalFencePropertiesKHR()
-        """
+val VkExternalFencePropertiesKHR = struct(Module.VULKAN, "VkExternalFencePropertiesKHR", mutable = false, alias = VkExternalFenceProperties) {
+    documentation = "See ##VkExternalFenceProperties."
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkExternalFenceHandleTypeFlagsKHR.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBitsKHR} indicating which types of imported handle {@code handleType} <b>can</b> be exported from.")
-    VkExternalFenceHandleTypeFlagsKHR.member("compatibleHandleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBitsKHR} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a fence.")
-    VkExternalFenceFeatureFlagsKHR.member("externalFenceFeatures", "a bitmask of {@code VkExternalFenceFeatureFlagBitsKHR} indicating the features of {@code handleType}.")
+    VkExternalFenceHandleTypeFlags.member("exportFromImportedHandleTypes", "")
+    VkExternalFenceHandleTypeFlags.member("compatibleHandleTypes", "")
+    VkExternalFenceFeatureFlags.member("externalFenceFeatures", "")
 }
 
-val VkExportFenceCreateInfoKHR = struct(Module.VULKAN, "VkExportFenceCreateInfoKHR") {
-    documentation =
-        """
-        Structure specifying handle types that can be exported from a fence.
+val VkExportFenceCreateInfoKHR = struct(Module.VULKAN, "VkExportFenceCreateInfoKHR", alias = VkExportFenceCreateInfo) {
+    documentation = "See ##VkExportFenceCreateInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The bits in {@code handleTypes} must be supported and compatible, as reported by ##VkExternalFencePropertiesKHR.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalFenceHandleTypeFlagBitsKHR} values</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalFenceHandleTypeFlagsKHR.member("handleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBitsKHR} specifying one or more fence handle types the application <b>can</b> export from the resulting fence. The application <b>can</b> request multiple handle types for the same fence.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkExternalFenceHandleTypeFlags.member("handleTypes", "")
 }
 
 val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32HandleInfoKHR") {
@@ -3730,15 +3077,15 @@ val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32H
         <table class="lwjgl">
             <thead><tr><th>Handle Type</th><th>Transference</th><th>Permanence Supported</th></tr></thead>
             <tbody>
-                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
-                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
             </tbody>
         </table>
 
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fence-handletypes-win32">Handle Types Supported by VkImportFenceWin32HandleInfoKHR</a> table.</li>
-            <li>If {@code handleType} is not #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, {@code name} <b>must</b> be {@code NULL}.</li>
+            <li>If {@code handleType} is not #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, {@code name} <b>must</b> be {@code NULL}.</li>
             <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid synchronization primitive of the type specified by {@code handleType}.</li>
             <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
             <li>If {@code handle} is not {@code NULL}, {@code name} must be {@code NULL}.</li>
@@ -3751,8 +3098,8 @@ val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32H
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkFenceImportFlagBitsKHR} values</li>
-            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBitsKHR} value</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkFenceImportFlagBits} values</li>
+            <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -3767,8 +3114,8 @@ val VkImportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkImportFenceWin32H
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence into which the state will be imported.")
-    VkFenceImportFlagsKHR.member("flags", "a bitmask of {@code VkFenceImportFlagBitsKHR} specifying additional parameters for the fence payload import operation.")
-    VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code handle}.")
+    VkFenceImportFlags.member("flags", "a bitmask of {@code VkFenceImportFlagBits} specifying additional parameters for the fence payload import operation.")
+    VkExternalFenceHandleTypeFlagBits.member("handleType", "specifies the type of {@code handle}.")
     HANDLE.member("handle", "the external handle to import, or {@code NULL}.")
     LPCWSTR.member("name", "the NULL-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}.")
 }
@@ -3786,7 +3133,7 @@ val VkExportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportFenceWin32H
 
         for handles of the following types:
 
-        #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR
+        #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT
 
         <dl>
             <dt>1</dt>
@@ -3795,13 +3142,12 @@ val VkExportFenceWin32HandleInfoKHR = struct(Module.VULKAN, "VkExportFenceWin32H
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If ##VkExportFenceCreateInfoKHR{@code ::handleTypes} does not include #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR, VkExportFenceWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkFenceCreateInfo.</li>
+            <li>If ##VkExportFenceCreateInfo{@code ::handleTypes} does not include #EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT, VkExportFenceWin32HandleInfoKHR <b>must</b> not be in the {@code pNext} chain of ##VkFenceCreateInfo.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code pAttributes} is not {@code NULL}, {@code pAttributes} <b>must</b> be a valid pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
         </ul>
         """
@@ -3819,13 +3165,13 @@ val VkFenceGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkFenceGetWin32HandleI
         Structure describing a Win32 handle fence export operation.
 
         <h5>Description</h5>
-        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalFenceHandleTypeFlagBitsKHR} for a description of the properties of the defined external fence handle types.
+        The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalFenceHandleTypeFlagBits} for a description of the properties of the defined external fence handle types.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportFenceCreateInfoKHR{@code ::handleTypes} when the {@code fence}&#8217;s current payload was created.</li>
+            <li>{@code handleType} <b>must</b> have been included in ##VkExportFenceCreateInfo{@code ::handleTypes} when the {@code fence}&#8217;s current payload was created.</li>
             <li>If {@code handleType} is defined as an NT handle, #GetFenceWin32HandleKHR() <b>must</b> be called no more than once for each valid unique combination of {@code fence} and {@code handleType}.</li>
-            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFencePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFenceProperties{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
             <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle.</li>
         </ul>
@@ -3835,7 +3181,7 @@ val VkFenceGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkFenceGetWin32HandleI
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3845,7 +3191,7 @@ val VkFenceGetWin32HandleInfoKHR = struct(Module.VULKAN, "VkFenceGetWin32HandleI
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence from which state will be exported.")
-    VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
+    VkExternalFenceHandleTypeFlagBits.member("handleType", "the type of handle requested.")
 }
 
 val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
@@ -3860,8 +3206,8 @@ val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
         <table class="lwjgl">
             <thead><tr><th>Handle Type</th><th>Transference</th><th>Permanence Supported</th></tr></thead>
             <tbody>
-                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR</td><td>Reference</td><td>Temporary,Permanent</td></tr>
-                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR</td><td>Copy</td><td>Temporary</td></tr>
+                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT</td><td>Reference</td><td>Temporary,Permanent</td></tr>
+                <tr><td>#EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT</td><td>Copy</td><td>Temporary</td></tr>
             </tbody>
         </table>
 
@@ -3871,10 +3217,10 @@ val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
             <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">external fence handle types compatibility</a>.</li>
         </ul>
 
-        If {@code handleType} is #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR, the special value {@code -1} for {@code fd} is treated like a valid sync file descriptor referring to an object that has already signaled. The import operation will succeed and the {@code VkFence} will have a temporarily imported payload as if a valid file descriptor had been provided.
+        If {@code handleType} is #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT, the special value {@code -1} for {@code fd} is treated like a valid sync file descriptor referring to an object that has already signaled. The import operation will succeed and the {@code VkFence} will have a temporarily imported payload as if a valid file descriptor had been provided.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        This special behavior for importing an invalid sync file descriptor allows easier interoperability with other system software which uses the convention that an invalid sync file descriptor represents work that has already completed and doesn't need to be waited for. It is consistent with the option for implementations to return a {@code -1} file descriptor when exporting a #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR from a {@code VkFence} which is signaled.
+        This special behavior for importing an invalid sync file descriptor allows easier interoperability with other system APIs which use the convention that an invalid sync file descriptor represents work that has already completed and doesn't need to be waited for. It is consistent with the option for implementations to return a {@code -1} file descriptor when exporting a #EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT from a {@code VkFence} which is signaled.
         </div>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3882,8 +3228,8 @@ val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkFenceImportFlagBitsKHR} values</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBitsKHR} value</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkFenceImportFlagBits} values</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -3898,8 +3244,8 @@ val VkImportFenceFdInfoKHR = struct(Module.VULKAN, "VkImportFenceFdInfoKHR") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence into which the payload will be imported.")
-    VkFenceImportFlagsKHR.member("flags", "a bitmask of {@code VkFenceImportFlagBitsKHR} specifying additional parameters for the fence payload import operation.")
-    VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "specifies the type of {@code fd}.")
+    VkFenceImportFlags.member("flags", "a bitmask of {@code VkFenceImportFlagBits} specifying additional parameters for the fence payload import operation.")
+    VkExternalFenceHandleTypeFlagBits.member("handleType", "specifies the type of {@code fd}.")
     int.member("fd", "the external handle to import.")
 }
 
@@ -3909,13 +3255,13 @@ val VkFenceGetFdInfoKHR = struct(Module.VULKAN, "VkFenceGetFdInfoKHR") {
         Structure describing a POSIX FD fence export operation.
 
         <h5>Description</h5>
-        The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalFenceHandleTypeFlagBitsKHR} for a description of the properties of the defined external fence handle types.
+        The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalFenceHandleTypeFlagBits} for a description of the properties of the defined external fence handle types.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handleType} <b>must</b> have been included in ##VkExportFenceCreateInfoKHR{@code ::handleTypes} when {@code fence}&#8217;s current payload was created.</li>
+            <li>{@code handleType} <b>must</b> have been included in ##VkExportFenceCreateInfo{@code ::handleTypes} when {@code fence}&#8217;s current payload was created.</li>
             <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-signaling">fence signal operation</a> pending execution.</li>
-            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFencePropertiesKHR{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
+            <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload&#8217;s handle type was included in ##VkExternalFenceProperties{@code ::exportFromImportedHandleTypes} for {@code handleType}.</li>
             <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
         </ul>
 
@@ -3924,7 +3270,7 @@ val VkFenceGetFdInfoKHR = struct(Module.VULKAN, "VkFenceGetFdInfoKHR") {
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBits} value</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3934,125 +3280,48 @@ val VkFenceGetFdInfoKHR = struct(Module.VULKAN, "VkFenceGetFdInfoKHR") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkFence.member("fence", "the fence from which state will be exported.")
-    VkExternalFenceHandleTypeFlagBitsKHR.member("handleType", "the type of handle requested.")
+    VkExternalFenceHandleTypeFlagBits.member("handleType", "the type of handle requested.")
 }
 
-val VkPhysicalDevicePointClippingPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevicePointClippingPropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure describing the point clipping behavior supported by an implementation.
+val VkPhysicalDevicePointClippingPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevicePointClippingPropertiesKHR", mutable = false, alias = VkPhysicalDevicePointClippingProperties) {
+    documentation = "See ##VkPhysicalDevicePointClippingProperties."
 
-        <h5>Description</h5>
-        If the ##VkPhysicalDevicePointClippingPropertiesKHR structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkPointClippingBehaviorKHR.member("pointClippingBehavior", "the point clipping behavior supported by the implementation, and is of type {@code VkPointClippingBehaviorKHR}.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkPointClippingBehavior.member("pointClippingBehavior", "")
 }
 
-val VkInputAttachmentAspectReferenceKHR = struct(Module.VULKAN, "VkInputAttachmentAspectReferenceKHR") {
-    documentation =
-        """
-        Structure specifying a subpass/input attachment pair and an aspect mask that <b>can</b> be read.
+val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(Module.VULKAN, "VkRenderPassInputAttachmentAspectCreateInfoKHR", alias = VkRenderPassInputAttachmentAspectCreateInfo) {
+    documentation = "See ##VkRenderPassInputAttachmentAspectCreateInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>There <b>must</b> be an input attachment at {@code pCreateInfo}{@code ::pSubpasses}[{@code subpass}].{@code pInputAttachments}[{@code inputAttachment}].</li>
-            <li>The specified input attachment <b>must</b> have more than one aspect mask.</li>
-            <li>{@code aspectMask} <b>must</b> be a subset of the aspect masks in the specified input attachment.</li>
-        </ul>
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    AutoSize("pAspectReferences")..uint32_t.member("aspectReferenceCount", "")
+    VkInputAttachmentAspectReference.const.p.buffer("pAspectReferences", "")
+}
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code aspectMask} <b>must</b> be a valid combination of {@code VkImageAspectFlagBits} values</li>
-            <li>{@code aspectMask} <b>must</b> not be 0</li>
-        </ul>
+val VkInputAttachmentAspectReferenceKHR = struct(Module.VULKAN, "VkInputAttachmentAspectReferenceKHR", alias = VkInputAttachmentAspectReference) {
+    documentation = "See ##VkInputAttachmentAspectReference."
 
-        <h5>See Also</h5>
-        ##VkRenderPassInputAttachmentAspectCreateInfoKHR
-        """
-
-    uint32_t.member("subpass", "an index into the {@code pSubpasses} array of the parent ##VkRenderPassCreateInfo structure.")
+    uint32_t.member("subpass", "")
     uint32_t.member("inputAttachmentIndex", "")
-    VkImageAspectFlags.member("aspectMask", "a mask of which aspect(s) <b>can</b> be accessed within the specified subpass.")
+    VkImageAspectFlags.member("aspectMask", "")
 }
 
-val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(Module.VULKAN, "VkRenderPassInputAttachmentAspectCreateInfoKHR") {
-    documentation =
-        """
-        Structure specifying, for a given subpass/input attachment pair, which aspect <b>can</b> be read.
+val VkImageViewUsageCreateInfoKHR = struct(Module.VULKAN, "VkImageViewUsageCreateInfoKHR", alias = VkImageViewUsageCreateInfo) {
+    documentation = "See ##VkImageViewUsageCreateInfo."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code pAspectReferences} <b>must</b> be a valid pointer to an array of {@code aspectReferenceCount} valid ##VkInputAttachmentAspectReferenceKHR structures</li>
-            <li>{@code aspectReferenceCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkInputAttachmentAspectReferenceKHR
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    AutoSize("pAspectReferences")..uint32_t.member("aspectReferenceCount", "the number of elements in the pAspectReferences array.")
-    VkInputAttachmentAspectReferenceKHR.const.p.buffer("pAspectReferences", "points to an array of {@code aspectReferenceCount} number of ##VkInputAttachmentAspectReferenceKHR structures describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkImageUsageFlags.member("usage", "")
 }
 
-val VkImageViewUsageCreateInfoKHR = struct(Module.VULKAN, "VkImageViewUsageCreateInfoKHR") {
-    documentation =
-        """
-        Specify the intended usage of an image view.
+val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineTessellationDomainOriginStateCreateInfoKHR", alias = VkPipelineTessellationDomainOriginStateCreateInfo) {
+    documentation = "See ##VkPipelineTessellationDomainOriginStateCreateInfo."
 
-        <h5>Description</h5>
-        When this structure is chained to ##VkImageViewCreateInfo the {@code usage} field overrides the implicit {@code usage} parameter inherited from image creation time and its value is used instead for the purposes of determining the valid usage conditions of ##VkImageViewCreateInfo.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code usage} <b>must</b> not include any set bits that were not set in the {@code usage} member of the ##VkImageCreateInfo structure used to create the image this image view is created from.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
-            <li>{@code usage} <b>must</b> not be 0</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkImageUsageFlags.member("usage", "a bitmask describing the allowed usages of the image view. See {@code VkImageUsageFlagBits} for a description of the supported bits.")
-}
-
-val VkPipelineTessellationDomainOriginStateCreateInfoKHR = struct(Module.VULKAN, "VkPipelineTessellationDomainOriginStateCreateInfoKHR") {
-    documentation =
-        """
-        Structure specifying the orientation of the tessellation domain.
-
-        <h5>Description</h5>
-        If the ##VkPipelineTessellationDomainOriginStateCreateInfoKHR structure is included in the {@code pNext} chain of ##VkPipelineTessellationStateCreateInfo, it controls the origin of the tessellation domain. If this structure is not present, it is as if {@code domainOrigin} were #TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code domainOrigin} <b>must</b> be a valid {@code VkTessellationDomainOriginKHR} value</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkTessellationDomainOriginKHR.member("domainOrigin", "controls the origin of the tessellation domain space, and is of type {@code VkTessellationDomainOriginKHR}.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkTessellationDomainOrigin.member("domainOrigin", "")
 }
 
 val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSurfaceInfo2KHR") {
@@ -4119,57 +3388,13 @@ val VkSurfaceFormat2KHR = struct(Module.VULKAN, "VkSurfaceFormat2KHR", mutable =
     VkSurfaceFormatKHR.member("surfaceFormat", "an instance of ##VkSurfaceFormatKHR describing a format-color space pair that is compatible with the specified surface.")
 }
 
-val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointerFeaturesKHR") {
-    documentation =
-        """
-        Structure describing variable pointers features that can be supported by an implementation.
-
-        <h5>Description</h5>
-        If the ##VkPhysicalDeviceVariablePointerFeaturesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceVariablePointerFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code variablePointers} is enabled then {@code variablePointersStorageBuffer} <b>must</b> also be enabled.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-        """
+val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointerFeaturesKHR", alias = VkPhysicalDeviceVariablePointerFeatures) {
+    documentation = "See ##VkPhysicalDeviceVariablePointerFeatures."
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("variablePointersStorageBuffer", "indicates whether the implementation supports the SPIR-V VariablePointersStorageBuffer capability. When this feature is not enabled, shader modules <b>must</b> not declare the SPV_KHR_variable_pointers extension or the VariablePointersStorageBuffer capability.")
-    VkBool32.member("variablePointers", "indicates whether the implementation supports the SPIR-V VariablePointers capability. When this feature is not enabled, shader modules <b>must</b> not declare the VariablePointers capability.")
-}
-
-val VkIOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkIOSSurfaceCreateInfoMVK") {
-    documentation =
-        """
-        Structure specifying parameters of a newly created iOS surface object.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code pView} <b>must</b> be a valid {@code UIView} and <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code flags} <b>must</b> be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateIOSSurfaceMVK()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkIOSSurfaceCreateFlagsMVK.member("flags", "reserved for future use.")
-    opaque_const_p.member("pView", "a reference to a {@code UIView} object which will display this surface. This {@code UIView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
+    VkBool32.member("variablePointersStorageBuffer", "")
+    VkBool32.member("variablePointers", "")
 }
 
 val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInfoMVK") {
@@ -4199,76 +3424,219 @@ val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInf
     opaque_const_p.member("pView", "a reference to a {@code NSView} object which will display this surface. This {@code NSView} <b>must</b> be backed by a {@code CALayer} instance of type {@code CAMetalLayer}.")
 }
 
-val VkMemoryDedicatedRequirementsKHR = struct(Module.VULKAN, "VkMemoryDedicatedRequirementsKHR", mutable = false) {
-    documentation =
-        """
-        Structure describing dedicated allocation requirements of buffer and image resources.
+val VkMemoryDedicatedRequirementsKHR = struct(Module.VULKAN, "VkMemoryDedicatedRequirementsKHR", mutable = false, alias = VkMemoryDedicatedRequirements) {
+    documentation = "See ##VkMemoryDedicatedRequirements."
 
-        <h5>Description</h5>
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetBufferMemoryRequirements2KHR() call, {@code requiresDedicatedAllocation} <b>may</b> be #TRUE under one of the following conditions:
-
-        <ul>
-            <li>The {@code pNext} chain of ##VkBufferCreateInfo for the call to #CreateBuffer() used to create the buffer being queried contained an instance of ##VkExternalMemoryBufferCreateInfoKHR, and any of the handle types specified in ##VkExternalMemoryBufferCreateInfoKHR{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceExternalBufferPropertiesKHR() in ##VkExternalBufferPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code requiresDedicatedAllocation} field will be set to #TRUE.</li>
-        </ul>
-
-        In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to #FALSE by the implementation whenever a ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed to a call to #GetBufferMemoryRequirements2KHR().
-
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetBufferMemoryRequirements2KHR() call and #BUFFER_CREATE_SPARSE_BINDING_BIT was set in ##VkBufferCreateInfo{@code ::flags} when {@code buffer} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to #FALSE.
-
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetImageMemoryRequirements2KHR() call, {@code requiresDedicatedAllocation} <b>may</b> be #TRUE under one of the following conditions:
-
-        <ul>
-            <li>The {@code pNext} chain of ##VkImageCreateInfo for the call to #CreateImage() used to create the image being queried contained an instance of ##VkExternalMemoryImageCreateInfoKHR, and any of the handle types specified in ##VkExternalMemoryImageCreateInfoKHR{@code ::handleTypes} requires dedicated allocation, as reported by #GetPhysicalDeviceImageFormatProperties2KHR() in ##VkExternalImageFormatPropertiesKHR{@code ::externalMemoryProperties}{@code ::externalMemoryFeatures}, the {@code requiresDedicatedAllocation} field will be set to #TRUE.</li>
-        </ul>
-
-        In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to #FALSE by the implementation whenever a ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed to a call to #GetImageMemoryRequirements2KHR().
-
-        If the ##VkMemoryDedicatedRequirementsKHR structure is included in the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter of a #GetImageMemoryRequirements2KHR() call and #IMAGE_CREATE_SPARSE_BINDING_BIT was set in ##VkImageCreateInfo{@code ::flags} when {@code image} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to #FALSE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBool32.member("prefersDedicatedAllocation", "indicates that the implementation would prefer a dedicated allocation for this resource. The application is still free to suballocate the resource but it <b>may</b> get better performance if a dedicated allocation is used.")
-    VkBool32.member("requiresDedicatedAllocation", "indicates that a dedicated allocation is required for this resource.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkBool32.member("prefersDedicatedAllocation", "")
+    VkBool32.member("requiresDedicatedAllocation", "")
 }
 
-val VkMemoryDedicatedAllocateInfoKHR = struct(Module.VULKAN, "VkMemoryDedicatedAllocateInfoKHR") {
+val VkMemoryDedicatedAllocateInfoKHR = struct(Module.VULKAN, "VkMemoryDedicatedAllocateInfoKHR", alias = VkMemoryDedicatedAllocateInfo) {
+    documentation = "See ##VkMemoryDedicatedAllocateInfo."
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkImage.member("image", "")
+    VkBuffer.member("buffer", "")
+}
+
+val VkDebugUtilsObjectNameInfoEXT = struct(Module.VULKAN, "VkDebugUtilsObjectNameInfoEXT") {
     documentation =
         """
-        Specify a dedicated memory allocation resource.
+        Specify parameters of a name to give to an object.
+
+        <h5>Description</h5>
+        Applications <b>may</b> change the name associated with an object simply by calling #SetDebugUtilsObjectNameEXT() again with a new string. If {@code pObjectName} is an empty string, then any previously set name is removed.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>At least one of {@code image} and {@code buffer} <b>must</b> be #NULL_HANDLE</li>
-            <li>If {@code image} is not #NULL_HANDLE, ##VkMemoryAllocateInfo{@code ::allocationSize} <b>must</b> equal the ##VkMemoryRequirements{@code ::size} of the image</li>
-            <li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> have been created without #IMAGE_CREATE_SPARSE_BINDING_BIT set in ##VkImageCreateInfo{@code ::flags}</li>
-            <li>If {@code buffer} is not #NULL_HANDLE, ##VkMemoryAllocateInfo{@code ::allocationSize} <b>must</b> equal the ##VkMemoryRequirements{@code ::size} of the buffer</li>
-            <li>If {@code buffer} is not #NULL_HANDLE, {@code buffer} <b>must</b> have been created without #BUFFER_CREATE_SPARSE_BINDING_BIT set in ##VkBufferCreateInfo{@code ::flags}</li>
-            <li>If {@code image} is not #NULL_HANDLE and ##VkMemoryAllocateInfo defines a memory import operation, the memory being imported <b>must</b> also be a dedicated image allocation and {@code image} must be identical to the image associated with the imported memory.</li>
-            <li>If {@code buffer} is not #NULL_HANDLE and ##VkMemoryAllocateInfo defines a memory import operation, the memory being imported <b>must</b> also be a dedicated buffer allocation and {@code buffer} must be identical to the buffer associated with the imported memory.</li>
-            <li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> not have been created with #IMAGE_CREATE_DISJOINT_BIT_KHR set in ##VkImageCreateInfo{@code ::flags}</li>
+            <li>{@code objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
+            <li>{@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
+            <li>{@code objectHandle} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debugging-object-types">the “{@code VkObjectType} and Vulkan Handle Relationship” table</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> be a valid {@code VkImage} handle</li>
-            <li>If {@code buffer} is not #NULL_HANDLE, {@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-            <li>Both of {@code buffer}, and {@code image} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+            <li>{@code objectType} <b>must</b> be a valid {@code VkObjectType} value</li>
+            <li>If {@code pObjectName} is not {@code NULL}, {@code pObjectName} <b>must</b> be a null-terminated UTF-8 string</li>
         </ul>
+
+        <h5>See Also</h5>
+        ##VkDebugUtilsMessengerCallbackDataEXT, #SetDebugUtilsObjectNameEXT()
         """
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkImage.member("image", "#NULL_HANDLE or a handle of an image which this memory will be bound to.")
-    VkBuffer.member("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
+    VkObjectType.member("objectType", "a {@code VkObjectType} specifying the type of the object to be named.")
+    uint64_t.member("objectHandle", "the object to be named.")
+    nullable..charUTF8.const.p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}.")
+}
+
+val VkDebugUtilsObjectTagInfoEXT = struct(Module.VULKAN, "VkDebugUtilsObjectTagInfoEXT") {
+    documentation =
+        """
+        Specify parameters of a tag to attach to an object.
+
+        <h5>Description</h5>
+        The {@code tagName} parameter gives a name or identifier to the type of data being tagged. This can be used by debugging layers to easily filter for only data that can be used by that implementation.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
+            <li>{@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
+            <li>{@code objectHandle} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debugging-object-types">the “{@code VkObjectType} and Vulkan Handle Relationship” table</a>.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code objectType} <b>must</b> be a valid {@code VkObjectType} value</li>
+            <li>{@code pTag} <b>must</b> be a valid pointer to an array of {@code tagSize} bytes</li>
+            <li>{@code tagSize} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #SetDebugUtilsObjectTagEXT()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkObjectType.member("objectType", "a {@code VkObjectType} specifying the type of the object to be named.")
+    uint64_t.member("objectHandle", "the object to be tagged.")
+    uint64_t.member("tagName", "a numerical identifier of the tag.")
+    AutoSize("pTag")..size_t.member("tagSize", "the number of bytes of data to attach to the object.")
+    void.const.p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object.")
+}
+
+val VkDebugUtilsLabelEXT = struct(Module.VULKAN, "VkDebugUtilsLabelEXT") {
+    documentation =
+        """
+        Specify parameters of a label region.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pLabelName} <b>must</b> be a null-terminated UTF-8 string</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDebugUtilsMessengerCallbackDataEXT, #CmdBeginDebugUtilsLabelEXT(), #CmdInsertDebugUtilsLabelEXT(), #QueueBeginDebugUtilsLabelEXT(), #QueueInsertDebugUtilsLabelEXT()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    charUTF8.const.p.member("pLabelName", "a pointer to a null-terminated UTF-8 string that contains the name of the label.")
+    float.array("color", "an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.", size = 4)
+}
+
+val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMessengerCallbackDataEXT") {
+    documentation =
+        """
+        Structure specifying parameters returned to the callback.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This structure should only be considered valid during the lifetime of the triggered callback.
+        </div>
+
+        Since adding queue and command buffer labels behaves like pushing and popping onto a stack, the order of both {@code pQueueLabels} and {@code pCmdBufLabels} is based on the order the labels were defined. The result is that the first label in either {@code pQueueLabels} or {@code pCmdBufLabels} will be the first defined (and therefore the oldest) while the last label in each list will be the most recent.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        {@code pQueueLabels} will only be non-NULL if one of the objects in {@code pObjects} can be related directly to a defined {@code VkQueue} which has had one or more labels associated with it.
+
+        Likewise, {@code pCmdBufLabels} will only be non-NULL if one of the objects in {@code pObjects} can be related directly to a defined {@code VkCommandBuffer} which has had one or more labels associated with it. Additionally, while command buffer labels allow for beginning and ending across different command buffers, the debug messaging framework <b>cannot</b> guarantee that labels in {@code pCmdBufLables} will contain those defined outside of the associated command buffer. This is partially due to the fact that the association of one command buffer with another may not have been defined at the time the debug message is triggered.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+            <li>If {@code pMessageIdName} is not {@code NULL}, {@code pMessageIdName} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>{@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>{@code objectCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDebugUtilsLabelEXT, ##VkDebugUtilsObjectNameInfoEXT, #SubmitDebugUtilsMessageEXT()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkDebugUtilsMessengerCallbackDataFlagsEXT.member("flags", "0 and reserved for future use.")
+    nullable..charUTF8.const.p.member("pMessageIdName", "a null-terminated string that identifies the the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated.")
+    int32_t.member("messageIdNumber", "the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered.")
+    charUTF8.const.p.member("pMessage", "a null-terminated string detailing the trigger conditions.")
+    AutoSize("pQueueLabels", optional = true)..uint32_t.member("queueLabelCount", "a count of items contained in the {@code pQueueLabels} array.")
+    nullable..VkDebugUtilsLabelEXT.p.buffer("pQueueLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-queue-labels\">Queue Labels</a> for more information.")
+    AutoSize("pCmdBufLabels", optional = true)..uint32_t.member("cmdBufLabelCount", "a count of items contained in the {@code pCmdBufLabels} array.")
+    nullable..VkDebugUtilsLabelEXT.p.buffer("pCmdBufLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-command-buffer-labels\">Command Buffer Labels</a> for more information.")
+    AutoSize("pObjects")..uint32_t.member("objectCount", "a count of items contained in the {@code pObjects} array.")
+    VkDebugUtilsObjectNameInfoEXT.p.buffer("pObjects", "a pointer to an array of ##VkDebugUtilsObjectNameInfoEXT objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.")
+}
+
+val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMessengerCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created debug messenger.
+
+        <h5>Description</h5>
+        For each {@code VkDebugUtilsMessengerEXT} that is created the ##VkDebugUtilsMessengerCreateInfoEXT{@code ::messageSeverity} and ##VkDebugUtilsMessengerCreateInfoEXT{@code ::messageTypes} determine when that ##VkDebugUtilsMessengerCreateInfoEXT{@code ::pfnUserCallback} is called. The process to determine if the user's pfnUserCallback is triggered when an event occurs is as follows:
+
+        <ul>
+            <li>
+                The implementation will perform a bitwise AND of the event&#8217;s {@code VkDebugUtilsMessageSeverityFlagBitsEXT} with the {@code messageSeverity} provided during creation of the {@code VkDebugUtilsMessengerEXT} object.
+                <ul>
+                    <li>If the value is 0, the message is skipped.</li>
+                </ul>
+            </li>
+            <li>
+                The implementation will perform bitwise AND of the event&#8217;s {@code VkDebugUtilsMessageTypeFlagBitsEXT} with the {@code messageType} provided during the creation of the {@code VkDebugUtilsMessengerEXT} object.
+                <ul>
+                    <li>If the value is 0, the message is skipped.</li>
+                </ul>
+            </li>
+            <li>The callback will trigger a debug message for the current event</li>
+        </ul>
+
+        The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in a different way, log to a system error log, etc.).
+
+        An application <b>can</b> receive multiple callbacks if multiple {@code VkDebugUtilsMessengerEXT} objects are created. A callback will always be executed in the same thread as the originating Vulkan call.
+
+        A callback <b>can</b> be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pfnUserCallback} <b>must</b> be a valid ##VkDebugUtilsMessengerCallbackEXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+            <li>{@code messageSeverity} <b>must</b> be a valid combination of {@code VkDebugUtilsMessageSeverityFlagBitsEXT} values</li>
+            <li>{@code messageSeverity} <b>must</b> not be 0</li>
+            <li>{@code messageType} <b>must</b> be a valid combination of {@code VkDebugUtilsMessageTypeFlagBitsEXT} values</li>
+            <li>{@code messageType} <b>must</b> not be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDebugUtilsMessengerCallbackEXT, #CreateDebugUtilsMessengerEXT()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkDebugUtilsMessengerCreateFlagsEXT.member("flags", "0 and reserved for future use.")
+    VkDebugUtilsMessageSeverityFlagsEXT.member("messageSeverity", "a bitmask of {@code VkDebugUtilsMessageSeverityFlagBitsEXT} specifying which severity of event(s) will cause this callback to be called.")
+    VkDebugUtilsMessageTypeFlagsEXT.member("messageType", "")
+    PFN_vkDebugUtilsMessengerCallbackEXT.member("pfnUserCallback", "the application callback function to call.")
+    nullable..opaque_p.member("pUserData", "user data to be passed to the callback.")
 }
 
 val VkSamplerReductionModeCreateInfoEXT = struct(Module.VULKAN, "VkSamplerReductionModeCreateInfoEXT") {
@@ -4282,7 +3650,6 @@ val VkSamplerReductionModeCreateInfoEXT = struct(Module.VULKAN, "VkSamplerReduct
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code reductionMode} <b>must</b> be a valid {@code VkSamplerReductionModeEXT} value</li>
         </ul>
         """
@@ -4298,7 +3665,7 @@ val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(Module.VULKAN, "Vk
         Structure describing sampler filter minmax limits that can be supported by an implementation.
 
         <h5>Description</h5>
-        If the ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
 
         If {@code filterMinmaxSingleComponentFormats} is #TRUE, the following formats <b>must</b> support the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT feature with #IMAGE_TILING_OPTIMAL, if they support #FORMAT_FEATURE_SAMPLED_IMAGE_BIT.
 
@@ -4317,14 +3684,13 @@ val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(Module.VULKAN, "Vk
             <li>#FORMAT_D32_SFLOAT_S8_UINT</li>
         </ul>
 
-        If the format is a depth/stencil format, this bit only indicates that the depth aspect (not the stencil aspect) of an image of this format supports min/max filtering, and that min/max filtering of the depth aspect is supported when depth compare is disabled in the sampler.
+        If the format is a depth/stencil format, this bit only specifies that the depth aspect (not the stencil aspect) of an image of this format supports min/max filtering, and that min/max filtering of the depth aspect is supported when depth compare is disabled in the sampler.
 
         If {@code filterMinmaxImageComponentMapping} is #FALSE the component mapping of the image view used with min/max filtering <b>must</b> have been created with the {@code r} component set to #COMPONENT_SWIZZLE_IDENTITY. Only the {@code r} component of the sampled image value is defined and the other component values are undefined. If {@code filterMinmaxImageComponentMapping} is #TRUE this restriction does not apply and image component mapping works as normal.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
         """
 
@@ -4342,7 +3708,7 @@ val VkSampleLocationEXT = struct(Module.VULKAN, "VkSampleLocationEXT") {
         <h5>Description</h5>
         The domain space of the sample location coordinates has an upper-left origin within the pixel in framebuffer space.
 
-        The values specified in a ##VkSampleLocationEXT structure are always clamped to the implementation-dependent sample location coordinate range <code>[sampleLocationCoordinateRange[0],sampleLocationCoordinateRange[1]]</code> that <b>can</b> be queried by chaining the ##VkPhysicalDeviceSampleLocationsPropertiesEXT structure to the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR.
+        The values specified in a ##VkSampleLocationEXT structure are always clamped to the implementation-dependent sample location coordinate range <code>[sampleLocationCoordinateRange[0],sampleLocationCoordinateRange[1]]</code> that <b>can</b> be queried by chaining the ##VkPhysicalDeviceSampleLocationsPropertiesEXT structure to the {@code pNext} chain of ##VkPhysicalDeviceProperties2.
 
         <h5>See Also</h5>
         ##VkSampleLocationsInfoEXT
@@ -4371,7 +3737,6 @@ val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT")
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
             <li>{@code pSampleLocations} <b>must</b> be a valid pointer to an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures</li>
             <li>{@code sampleLocationsCount} <b>must</b> be greater than 0</li>
@@ -4449,7 +3814,6 @@ val VkRenderPassSampleLocationsBeginInfoEXT = struct(Module.VULKAN, "VkRenderPas
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code attachmentInitialSampleLocationsCount} is not 0, {@code pAttachmentInitialSampleLocations} <b>must</b> be a valid pointer to an array of {@code attachmentInitialSampleLocationsCount} valid ##VkAttachmentSampleLocationsEXT structures</li>
             <li>If {@code postSubpassSampleLocationsCount} is not 0, {@code pPostSubpassSampleLocations} <b>must</b> be a valid pointer to an array of {@code postSubpassSampleLocationsCount} valid ##VkSubpassSampleLocationsEXT structures</li>
         </ul>
@@ -4474,7 +3838,6 @@ val VkPipelineSampleLocationsStateCreateInfoEXT = struct(Module.VULKAN, "VkPipel
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code sampleLocationsInfo} <b>must</b> be a valid ##VkSampleLocationsInfoEXT structure</li>
         </ul>
 
@@ -4496,10 +3859,9 @@ val VkPhysicalDeviceSampleLocationsPropertiesEXT = struct(Module.VULKAN, "VkPhys
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
-        If the ##VkPhysicalDeviceSampleLocationsPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceSampleLocationsPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
 
         <h5>See Also</h5>
         ##VkExtent2D
@@ -4511,7 +3873,7 @@ val VkPhysicalDeviceSampleLocationsPropertiesEXT = struct(Module.VULKAN, "VkPhys
     VkExtent2D.member("maxSampleLocationGridSize", "the maximum size of the pixel grid in which sample locations <b>can</b> vary that is supported for all sample counts in {@code sampleLocationSampleCounts}.")
     float.array("sampleLocationCoordinateRange", "the range of supported sample location coordinates.", size = 2)
     uint32_t.member("sampleLocationSubPixelBits", "the number of bits of subpixel precision for sample locations.")
-    VkBool32.member("variableSampleLocations", "indicates whether the sample locations used by all pipelines that will be bound to a command buffer during a subpass <b>must</b> match. If set to #TRUE, the implementation supports variable sample locations in a subpass. If set to #FALSE, then the sample locations <b>must</b> stay constant in any given subpass.")
+    VkBool32.member("variableSampleLocations", "specifies whether the sample locations used by all pipelines that will be bound to a command buffer during a subpass <b>must</b> match. If set to #TRUE, the implementation supports variable sample locations in a subpass. If set to #FALSE, then the sample locations <b>must</b> stay constant in each subpass.")
 }
 
 val VkMultisamplePropertiesEXT = struct(Module.VULKAN, "VkMultisamplePropertiesEXT", mutable = false) {
@@ -4534,82 +3896,41 @@ val VkMultisamplePropertiesEXT = struct(Module.VULKAN, "VkMultisamplePropertiesE
     VkExtent2D.member("maxSampleLocationGridSize", "the maximum size of the pixel grid in which sample locations <b>can</b> vary.")
 }
 
-val VkBufferMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkBufferMemoryRequirementsInfo2KHR") {
-    documentation =
-        """
-        (None).
+val VkBufferMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkBufferMemoryRequirementsInfo2KHR", alias = VkBufferMemoryRequirementsInfo2) {
+    documentation = "See ##VkBufferMemoryRequirementsInfo2."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetBufferMemoryRequirements2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBuffer.member("buffer", "the buffer to query.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkBuffer.member("buffer", "")
 }
 
-val VkImageMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageMemoryRequirementsInfo2KHR") {
-    documentation =
-        """
-        (None).
+val VkImageMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageMemoryRequirementsInfo2KHR", alias = VkImageMemoryRequirementsInfo2) {
+    documentation = "See ##VkImageMemoryRequirementsInfo2."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code image} was created with a <em>multi-planar</em> format and the #IMAGE_CREATE_DISJOINT_BIT_KHR flag, there <b>must</b> be a ##VkImagePlaneMemoryRequirementsInfoKHR in the {@code pNext} chain of the ##VkImageMemoryRequirementsInfo2KHR structure</li>
-            <li>If {@code image} was not created with the #IMAGE_CREATE_DISJOINT_BIT_KHR flag, there <b>must</b> not be a ##VkImagePlaneMemoryRequirementsInfoKHR in the {@code pNext} chain of the ##VkImageMemoryRequirementsInfo2KHR structure</li>
-            <li>If {@code image} was created with a single-plane format, there <b>must</b> not be a ##VkImagePlaneMemoryRequirementsInfoKHR in the {@code pNext} chain of the ##VkImageMemoryRequirementsInfo2KHR structure</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkImagePlaneMemoryRequirementsInfoKHR</li>
-            <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetImageMemoryRequirements2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkImage.member("image", "the image to query.")
-}
-
-val VkImageSparseMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageSparseMemoryRequirementsInfo2KHR") {
     VkStructureType.member("sType", "")
     nullable..opaque_const_p.member("pNext", "")
     VkImage.member("image", "")
 }
 
-val VkMemoryRequirements2KHR = struct(Module.VULKAN, "VkMemoryRequirements2KHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying memory requirements.
+val VkImageSparseMemoryRequirementsInfo2KHR = struct(Module.VULKAN, "VkImageSparseMemoryRequirementsInfo2KHR", alias = VkImageSparseMemoryRequirementsInfo2) {
+    documentation = "See ##VkImageSparseMemoryRequirementsInfo2."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkMemoryDedicatedRequirementsKHR</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkMemoryRequirements, #GetBufferMemoryRequirements2KHR(), #GetImageMemoryRequirements2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkMemoryRequirements.member("memoryRequirements", "a structure of type ##VkMemoryRequirements describing the memory requirements of the resource.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkImage.member("image", "")
 }
 
-val VkSparseImageMemoryRequirements2KHR = struct(Module.VULKAN, "VkSparseImageMemoryRequirements2KHR", mutable = false) {
+val VkMemoryRequirements2KHR = struct(Module.VULKAN, "VkMemoryRequirements2KHR", mutable = false, alias = VkMemoryRequirements2) {
+    documentation = "See ##VkMemoryRequirements2."
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkMemoryRequirements.member("memoryRequirements", "")
+}
+
+val VkSparseImageMemoryRequirements2KHR = struct(Module.VULKAN, "VkSparseImageMemoryRequirements2KHR", mutable = false, alias = VkSparseImageMemoryRequirements2) {
+    documentation = "See ##VkSparseImageMemoryRequirements2."
+
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkSparseImageMemoryRequirements.member("memoryRequirements", "")
@@ -4633,7 +3954,6 @@ val VkImageFormatListCreateInfoKHR = struct(Module.VULKAN, "VkImageFormatListCre
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code viewFormatCount} is not 0, {@code pViewFormats} <b>must</b> be a valid pointer to an array of {@code viewFormatCount} valid {@code VkFormat} values</li>
         </ul>
         """
@@ -4650,7 +3970,7 @@ val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(Module.VULKAN, "V
         Structure describing advanced blending features that can be supported by an implementation.
 
         <h5>Description</h5>
-        If the ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT <b>can</b> also be used in {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
+        If the ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT <b>can</b> also be used in {@code pNext} chain of ##VkDeviceCreateInfo to enable the features.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4660,7 +3980,7 @@ val VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT = struct(Module.VULKAN, "V
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("advancedBlendCoherentOperations", "indicates whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, #ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT is treated the same as #ACCESS_COLOR_ATTACHMENT_READ_BIT, and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
+    VkBool32.member("advancedBlendCoherentOperations", "specifies whether blending using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operations</a> is guaranteed to execute atomically and in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-primitive-order\">primitive order</a>. If this is #TRUE, #ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT is treated the same as #ACCESS_COLOR_ATTACHMENT_READ_BIT, and advanced blending needs no additional synchronization over basic blending. If this is #FALSE, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.")
 }
 
 val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", mutable = false) {
@@ -4673,17 +3993,17 @@ val VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = struct(Module.VULKAN, 
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT</li>
         </ul>
 
-        If the ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+        If the ##VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
         """
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     uint32_t.member("advancedBlendMaxColorAttachments", "one greater than the highest color attachment index that <b>can</b> be used in a subpass, for a pipeline that uses an <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blend-advanced\">advanced blend operation</a>.")
-    VkBool32.member("advancedBlendIndependentBlend", "indicates whether advanced blend operations <b>can</b> vary per-attachment.")
-    VkBool32.member("advancedBlendNonPremultipliedSrcColor", "indicates whether the source color <b>can</b> be treated as non-premultiplied. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::srcPremultiplied} <b>must</b> be #TRUE.")
-    VkBool32.member("advancedBlendNonPremultipliedDstColor", "indicates whether the destination color <b>can</b> be treated as non-premultiplied. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::dstPremultiplied} <b>must</b> be #TRUE.")
-    VkBool32.member("advancedBlendCorrelatedOverlap", "indicates whether the overlap mode <b>can</b> be treated as correlated. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::blendOverlap} <b>must</b> be #BLEND_OVERLAP_UNCORRELATED_EXT.")
-    VkBool32.member("advancedBlendAllOperations", "indicates whether all advanced blend operation enums are supported. See the valid usage of ##VkPipelineColorBlendAttachmentState.")
+    VkBool32.member("advancedBlendIndependentBlend", "specifies whether advanced blend operations <b>can</b> vary per-attachment.")
+    VkBool32.member("advancedBlendNonPremultipliedSrcColor", "specifies whether the source color <b>can</b> be treated as non-premultiplied. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::srcPremultiplied} <b>must</b> be #TRUE.")
+    VkBool32.member("advancedBlendNonPremultipliedDstColor", "specifies whether the destination color <b>can</b> be treated as non-premultiplied. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::dstPremultiplied} <b>must</b> be #TRUE.")
+    VkBool32.member("advancedBlendCorrelatedOverlap", "specifies whether the overlap mode <b>can</b> be treated as correlated. If this is #FALSE, then ##VkPipelineColorBlendAdvancedStateCreateInfoEXT{@code ::blendOverlap} <b>must</b> be #BLEND_OVERLAP_UNCORRELATED_EXT.")
+    VkBool32.member("advancedBlendAllOperations", "specifies whether all advanced blend operation enums are supported. See the valid usage of ##VkPipelineColorBlendAttachmentState.")
 }
 
 val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineColorBlendAdvancedStateCreateInfoEXT") {
@@ -4704,7 +4024,6 @@ val VkPipelineColorBlendAdvancedStateCreateInfoEXT = struct(Module.VULKAN, "VkPi
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code blendOverlap} <b>must</b> be a valid {@code VkBlendOverlapEXT} value</li>
         </ul>
         """
@@ -4738,7 +4057,6 @@ val VkPipelineCoverageToColorStateCreateInfoNV = struct(Module.VULKAN, "VkPipeli
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
         </ul>
         """
@@ -4786,7 +4104,6 @@ val VkPipelineCoverageModulationStateCreateInfoNV = struct(Module.VULKAN, "VkPip
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code coverageModulationMode} <b>must</b> be a valid {@code VkCoverageModulationModeNV} value</li>
             <li>{@code coverageModulationTableCount} <b>must</b> be greater than 0</li>
@@ -4802,250 +4119,79 @@ val VkPipelineCoverageModulationStateCreateInfoNV = struct(Module.VULKAN, "VkPip
     nullable..float.const.p.member("pCoverageModulationTable", "a table of modulation factors containing a value for each number of covered samples.")
 }
 
-val VkSamplerYcbcrConversionCreateInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionCreateInfoKHR") {
-    documentation =
-        """
-        Structure specifying the parameters of the newly created conversion.
+val VkSamplerYcbcrConversionCreateInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionCreateInfoKHR", alias = VkSamplerYcbcrConversionCreateInfo) {
+    documentation = "See ##VkSamplerYcbcrConversionCreateInfo."
 
-        <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Setting {@code forceExplicitReconstruction} to #TRUE <b>may</b> have a performance penalty on implementations where explicit reconstruction is not the default mode of operation.
-        </div>
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
-            <li>{@code format} <b>must</b> support #FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR or #FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR</li>
-            <li>If the format does not support #FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be #CHROMA_LOCATION_COSITED_EVEN_KHR</li>
-            <li>If the format does not support #FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be #CHROMA_LOCATION_MIDPOINT_KHR</li>
-            <li>{@code format} <b>must</b> represent unsigned normalized values (i.e. the format must be a {@code UNORM} format)</li>
-            <li>
-                If the format has a {@code _422} or {@code _420} suffix:
-                <ul>
-                    <li>{@code components.g} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
-                    <li>{@code components.a} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY, #COMPONENT_SWIZZLE_ONE, or #COMPONENT_SWIZZLE_ZERO</li>
-                    <li>{@code components.r} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY or #COMPONENT_SWIZZLE_B</li>
-                    <li>{@code components.b} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY or #COMPONENT_SWIZZLE_R</li>
-                    <li>If either {@code components.r} or {@code components.b} is #COMPONENT_SWIZZLE_IDENTITY, both values <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
-                </ul>
-            </li>
-            <li>If {@code ycbcrModel} is not #SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR, then {@code components.r}, {@code components.g}, and {@code components.b} <b>must</b> correspond to channels of the {@code format}; that is, {@code components.r}, {@code components.g}, and {@code components.b} <b>must</b> not be #COMPONENT_SWIZZLE_ZERO or #COMPONENT_SWIZZLE_ONE, and <b>must</b> not correspond to a channel which contains zero or one as a consequence of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-conversion-to-rgba">conversion to RGBA</a></li>
-            <li>If the format does not support #FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR, {@code forceExplicitReconstruction} <b>must</b> be FALSE</li>
-            <li>If the format does not support #FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR, {@code chromaFilter} <b>must</b> be #FILTER_NEAREST</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
-            <li>{@code ycbcrModel} <b>must</b> be a valid {@code VkSamplerYcbcrModelConversionKHR} value</li>
-            <li>{@code ycbcrRange} <b>must</b> be a valid {@code VkSamplerYcbcrRangeKHR} value</li>
-            <li>{@code components} <b>must</b> be a valid ##VkComponentMapping structure</li>
-            <li>{@code xChromaOffset} <b>must</b> be a valid {@code VkChromaLocationKHR} value</li>
-            <li>{@code yChromaOffset} <b>must</b> be a valid {@code VkChromaLocationKHR} value</li>
-            <li>{@code chromaFilter} <b>must</b> be a valid {@code VkFilter} value</li>
-        </ul>
-
-        If {@code chromaFilter} is #FILTER_NEAREST, chroma samples are reconstructed to luma channel resolution using nearest-neighbour sampling. Otherwise, chroma samples are reconstructed using interpolation. More details can be found in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures">Image Operations</a> chapter.
-
-        <h5>See Also</h5>
-        ##VkComponentMapping, #CreateSamplerYcbcrConversionKHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkFormat.member("format", "the format of the image from which color information will be retrieved.")
-    VkSamplerYcbcrModelConversionKHR.member("ycbcrModel", "describes the color matrix for conversion between color models.")
-    VkSamplerYcbcrRangeKHR.member("ycbcrRange", "describes whether the encoded values have headroom and foot room, or whether the encoding uses the full numerical range.")
-    VkComponentMapping.member("components", "applies a <em>swizzle</em> based on {@code VkComponentSwizzle} enums prior to range expansion and color model conversion.")
-    VkChromaLocationKHR.member("xChromaOffset", "describes the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#textures-chroma-reconstruction\">sample location</a> associated with downsampled chroma channels in the x dimension. {@code xChromaOffset} has no effect for formats in which chroma channels are the same resolution as the luma channel.")
-    VkChromaLocationKHR.member("yChromaOffset", "describes the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#textures-chroma-reconstruction\">sample location</a> associated with downsampled chroma channels in the y dimension. {@code yChromaOffset} has no effect for formats in which the chroma channels are not downsampled vertically.")
-    VkFilter.member("chromaFilter", "the filter for chroma reconstruction.")
-    VkBool32.member("forceExplicitReconstruction", "<b>can</b> be used to ensure that reconstruction is done explicitly, if supported.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkFormat.member("format", "")
+    VkSamplerYcbcrModelConversion.member("ycbcrModel", "")
+    VkSamplerYcbcrRange.member("ycbcrRange", "")
+    VkComponentMapping.member("components", "")
+    VkChromaLocation.member("xChromaOffset", "")
+    VkChromaLocation.member("yChromaOffset", "")
+    VkFilter.member("chromaFilter", "")
+    VkBool32.member("forceExplicitReconstruction", "")
 }
 
-val VkSamplerYcbcrConversionInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionInfoKHR") {
-    documentation =
-        """
-        Structure specifying Y'CbCr conversion to a sampler or image view.
+val VkSamplerYcbcrConversionInfoKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionInfoKHR", alias = VkSamplerYcbcrConversionInfo) {
+    documentation = "See ##VkSamplerYcbcrConversionInfo."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR</li>
-            <li>{@code conversion} <b>must</b> be a valid {@code VkSamplerYcbcrConversionKHR} handle</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkSamplerYcbcrConversionKHR.member("conversion", "a {@code VkSamplerYcbcrConversionKHR} handle created with #CreateSamplerYcbcrConversionKHR().")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkSamplerYcbcrConversion.member("conversion", "")
 }
 
-val VkBindImagePlaneMemoryInfoKHR = struct(Module.VULKAN, "VkBindImagePlaneMemoryInfoKHR") {
-    documentation =
-        """
-        Structure specifying how to bind an image plane to memory.
+val VkBindImagePlaneMemoryInfoKHR = struct(Module.VULKAN, "VkBindImagePlaneMemoryInfoKHR", alias = VkBindImagePlaneMemoryInfo) {
+    documentation = "See ##VkBindImagePlaneMemoryInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code planeAspect} <b>must</b> be a single valid plane aspect for the image format (that is, {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR or #IMAGE_ASPECT_PLANE_1_BIT_KHR for “{@code _2PLANE}” formats and {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR, or #IMAGE_ASPECT_PLANE_2_BIT_KHR for “{@code _3PLANE}” formats)</li>
-            <li>A single call to #BindImageMemory2KHR() <b>must</b> bind all or none of the planes of an image (i.e. bindings to all planes of an image <b>must</b> be made in a single #BindImageMemory2KHR() call), as separate bindings</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR</li>
-            <li>{@code planeAspect} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkImageAspectFlagBits.member("planeAspect", "the aspect of the disjoint image plane to bind.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkImageAspectFlagBits.member("planeAspect", "")
 }
 
-val VkImagePlaneMemoryRequirementsInfoKHR = struct(Module.VULKAN, "VkImagePlaneMemoryRequirementsInfoKHR") {
-    documentation =
-        """
-        Structure specifying image plane for memory requirements.
+val VkImagePlaneMemoryRequirementsInfoKHR = struct(Module.VULKAN, "VkImagePlaneMemoryRequirementsInfoKHR", alias = VkImagePlaneMemoryRequirementsInfo) {
+    documentation = "See ##VkImagePlaneMemoryRequirementsInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code planeAspect} <b>must</b> be an aspect that exists in the format; that is, for a two-plane image {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR or #IMAGE_ASPECT_PLANE_1_BIT_KHR, and for a three-plane image {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT_KHR, #IMAGE_ASPECT_PLANE_1_BIT_KHR or #IMAGE_ASPECT_PLANE_2_BIT_KHR</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR</li>
-            <li>{@code planeAspect} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkImageAspectFlagBits.member("planeAspect", "the aspect corresponding to the image plane to query.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkImageAspectFlagBits.member("planeAspect", "")
 }
 
-val VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR") {
-    documentation =
-        """
-        Structure describing Y'CbCr conversion features that can be supported by an implementation.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR</li>
-        </ul>
-        """
+val VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", alias = VkPhysicalDeviceSamplerYcbcrConversionFeatures) {
+    documentation = "See ##VkPhysicalDeviceSamplerYcbcrConversionFeatures."
 
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
-    VkBool32.member("samplerYcbcrConversion", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is #FALSE, sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.")
+    VkBool32.member("samplerYcbcrConversion", "")
 }
 
-val VkSamplerYcbcrConversionImageFormatPropertiesKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionImageFormatPropertiesKHR", mutable = false) {
-    documentation =
-        """
-        Structure specifying combined image sampler descriptor count for multi-planar images.
+val VkSamplerYcbcrConversionImageFormatPropertiesKHR = struct(Module.VULKAN, "VkSamplerYcbcrConversionImageFormatPropertiesKHR", mutable = false, alias = VkSamplerYcbcrConversionImageFormatProperties) {
+    documentation = "See ##VkSamplerYcbcrConversionImageFormatProperties."
 
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR</li>
-        </ul>
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    uint32_t.member("combinedImageSamplerDescriptorCount", "the number of combined image sampler descriptors that the implementation uses to access the format.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("combinedImageSamplerDescriptorCount", "")
 }
 
-val VkBindBufferMemoryInfoKHR = struct(Module.VULKAN, "VkBindBufferMemoryInfoKHR") {
-    documentation =
-        """
-        Structure specifying how to bind a buffer to memory.
+val VkBindBufferMemoryInfoKHR = struct(Module.VULKAN, "VkBindBufferMemoryInfoKHR", alias = VkBindBufferMemoryInfo) {
+    documentation = "See ##VkBindBufferMemoryInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code buffer} <b>must</b> not already be backed by a memory object</li>
-            <li>{@code buffer} <b>must</b> not have been created with any sparse memory binding flags</li>
-            <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
-            <li>If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code memoryOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}</li>
-            <li>If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_BUFFER_BIT, {@code memoryOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
-            <li>If {@code buffer} was created with the #BUFFER_USAGE_STORAGE_BUFFER_BIT, {@code memoryOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
-            <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer}</li>
-            <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer}</li>
-            <li>The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
-            <li>If {@code buffer} requires a dedicated allocation(as reported by #GetBufferMemoryRequirements2KHR() in ##VkMemoryDedicatedRequirementsKHR::requiresDedicatedAllocation for {@code image}), {@code memory} <b>must</b> have been created with ##VkMemoryDedicatedAllocateInfoKHR{@code ::buffer} equal to {@code buffer} and {@code memoryOffset} <b>must</b> be zero</li>
-            <li>If {@code buffer} was created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} <b>must</b> have been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::buffer} equal to {@code buffer} and {@code memoryOffset} <b>must</b> be zero</li>
-            <li>If the {@code pNext} chain includes ##VkBindBufferMemoryDeviceGroupInfoKHX, all instances of {@code memory} specified by ##VkBindBufferMemoryDeviceGroupInfoKHX{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkBindBufferMemoryDeviceGroupInfoKHX</li>
-            <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
-            <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
-            <li>Both of {@code buffer}, and {@code memory} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #BindBufferMemory2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBuffer.member("buffer", "the buffer to be attached to memory.")
-    VkDeviceMemory.member("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
-    VkDeviceSize.member("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkBuffer.member("buffer", "")
+    VkDeviceMemory.member("memory", "")
+    VkDeviceSize.member("memoryOffset", "")
 }
 
-val VkBindImageMemoryInfoKHR = struct(Module.VULKAN, "VkBindImageMemoryInfoKHR") {
-    documentation =
-        """
-        Structure specifying how to bind an image to memory.
+val VkBindImageMemoryInfoKHR = struct(Module.VULKAN, "VkBindImageMemoryInfoKHR", alias = VkBindImageMemoryInfo) {
+    documentation = "See ##VkBindImageMemoryInfo."
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code image} <b>must</b> not already be backed by a memory object</li>
-            <li>{@code image} <b>must</b> not have been created with any sparse memory binding flags</li>
-            <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
-            <li>If the {@code pNext} chain does not include an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, {@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements2KHR() with {@code image}</li>
-            <li>If the {@code pNext} chain does not include an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, {@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements2KHR() with {@code image}</li>
-            <li>If the {@code pNext} chain does not include an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, the difference of the size of {@code memory} and {@code memoryOffset} <b>must</b> be greater than or equal to the {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements2KHR() with the same {@code image}</li>
-            <li>If the {@code pNext} chain includes an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, {@code image} <b>must</b> have been created with the #IMAGE_CREATE_DISJOINT_BIT_KHR bit set.</li>
-            <li>If the {@code pNext} chain includes an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, {@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements2KHR() with {@code image} and the correct {@code planeAspect} for this plane in the ##VkImagePlaneMemoryRequirementsInfoKHR structure attached to the ##VkImageMemoryRequirementsInfo2KHR&#8217;s {@code pNext} chain</li>
-            <li>If the {@code pNext} chain includes an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, {@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements2KHR() with {@code image} and the correct {@code planeAspect} for this plane in the ##VkImagePlaneMemoryRequirementsInfoKHR structure attached to the ##VkImageMemoryRequirementsInfo2KHR&#8217;s {@code pNext} chain</li>
-            <li>If the {@code pNext} chain includes an instance of the ##VkBindImagePlaneMemoryInfoKHR structure, the difference of the size of {@code memory} and {@code memoryOffset} <b>must</b> be greater than or equal to the {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements2KHR() with the same {@code image} and the correct {@code planeAspect} for this plane in the ##VkImagePlaneMemoryRequirementsInfoKHR structure attached to the ##VkImageMemoryRequirementsInfo2KHR&#8217;s {@code pNext} chain</li>
-            <li>If {@code image} requires a dedicated allocation (as reported by #GetImageMemoryRequirements2KHR() in ##VkMemoryDedicatedRequirementsKHR::requiresDedicatedAllocation for {@code image}), {@code memory} <b>must</b> have been created with ##VkMemoryDedicatedAllocateInfoKHR{@code ::image} equal to {@code image} and {@code memoryOffset} <b>must</b> be zero</li>
-            <li>If {@code image} was created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} <b>must</b> have been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::image} equal to {@code image} and {@code memoryOffset} <b>must</b> be zero</li>
-            <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, all instances of {@code memory} specified by ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
-            <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, and ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::SFRRectCount} is not zero, then {@code image} <b>must</b> have been created with the #IMAGE_CREATE_BIND_SFR_BIT_KHX bit set</li>
-            <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, all elements of ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pSFRRects} <b>must</b> be valid rectangles contained within the dimensions of {@code image}</li>
-            <li>If the {@code pNext} chain includes ##VkBindImageMemoryDeviceGroupInfoKHX, the union of the areas of all elements of ##VkBindImageMemoryDeviceGroupInfoKHX{@code ::pSFRRects} that correspond to the same instance of {@code image} <b>must</b> cover the entire image.</li>
-            <li>If {@code image} was created with a valid swapchain handle in ##VkImageSwapchainCreateInfoKHX{@code ::swapchain}, then the {@code pNext} chain <b>must</b> include a valid instance of ##VkBindImageMemorySwapchainInfoKHX</li>
-            <li>If the {@code pNext} chain includes an instance of ##VkBindImageMemorySwapchainInfoKHX, {@code memory} <b>must</b> be #NULL_HANDLE</li>
-            <li>If the {@code pNext} chain does not include an instance of ##VkBindImageMemorySwapchainInfoKHX, {@code memory} <b>must</b> be a valid dname:VkDeviceMemory handle</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkBindImageMemoryDeviceGroupInfoKHX, ##VkBindImageMemorySwapchainInfoKHX, or ##VkBindImagePlaneMemoryInfoKHR</li>
-            <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
-            <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
-            <li>Both of {@code image}, and {@code memory} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #BindImageMemory2KHR()
-        """
-
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkImage.member("image", "the image to be attached to memory.")
-    VkDeviceMemory.member("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
-    VkDeviceSize.member("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.")
+    VkStructureType.member("sType", "")
+    nullable..opaque_const_p.member("pNext", "")
+    VkImage.member("image", "")
+    VkDeviceMemory.member("memory", "")
+    VkDeviceSize.member("memoryOffset", "")
 }
 
 val VkValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkValidationCacheCreateInfoEXT") {
@@ -5086,7 +4232,6 @@ val VkShaderModuleValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkShader
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code validationCache} <b>must</b> be a valid {@code VkValidationCacheEXT} handle</li>
         </ul>
         """
@@ -5094,6 +4239,188 @@ val VkShaderModuleValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkShader
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkValidationCacheEXT.member("validationCache", "the validation cache object from which the results of prior validation attempts will be written, and to which new validation results for this VkShaderModule will be written (if not already present).")
+}
+
+val VkDescriptorSetLayoutBindingFlagsCreateInfoEXT = struct(Module.VULKAN, "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying creation flags for descriptor set layout bindings.
+
+        <h5>Description</h5>
+        If {@code bindingCount} is zero or if this structure is not in the {@code pNext} chain, the {@code VkDescriptorBindingFlagsEXT} for each descriptor set layout binding is considered to be zero. Otherwise, the descriptor set layout binding at ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings}[i] uses the flags in {@code pBindingFlags}[i].
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code bindingCount} is not zero, {@code bindingCount} <b>must</b> equal ##VkDescriptorSetLayoutCreateInfo{@code ::bindingCount}</li>
+            <li>If ##VkDescriptorSetLayoutCreateInfo{@code ::flags} includes #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR, then all elements of {@code pBindingFlags} <b>must</b> not include #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT, #DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT, or #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT</li>
+            <li>If an element of {@code pBindingFlags} includes #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT, then all other elements of ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} <b>must</b> have a smaller value of {@code binding}</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingUniformBufferUpdateAfterBind} is not enabled, all bindings with descriptor type #DESCRIPTOR_TYPE_UNIFORM_BUFFER <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingSampledImageUpdateAfterBind} is not enabled, all bindings with descriptor type #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, or #DESCRIPTOR_TYPE_SAMPLED_IMAGE <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingStorageImageUpdateAfterBind} is not enabled, all bindings with descriptor type #DESCRIPTOR_TYPE_STORAGE_IMAGE <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingStorageBufferUpdateAfterBind} is not enabled, all bindings with descriptor type #DESCRIPTOR_TYPE_STORAGE_BUFFER <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingUniformTexelBufferUpdateAfterBind} is not enabled, all bindings with descriptor type #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingStorageTexelBufferUpdateAfterBind} is not enabled, all bindings with descriptor type #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>All bindings with descriptor type #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC <b>must</b> not use #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingUpdateUnusedWhilePending} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include #DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingPartiallyBound} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include #DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT</li>
+            <li>If ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingVariableDescriptorCount} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT</li>
+            <li>If an element of {@code pBindingFlags} includes #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT, that element&#8217;s {@code descriptorType} <b>must</b> not be #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT</li>
+            <li>If {@code bindingCount} is not 0, {@code pBindingFlags} <b>must</b> be a valid pointer to an array of {@code bindingCount} valid combinations of {@code VkDescriptorBindingFlagBitsEXT} values</li>
+            <li>Each element of {@code pBindingFlags} <b>must</b> not be 0</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pBindingFlags", optional = true)..uint32_t.member("bindingCount", "zero or the number of elements in {@code pBindingFlags}.")
+    VkDescriptorBindingFlagsEXT.const.p.member("pBindingFlags", "a pointer to an array of {@code VkDescriptorBindingFlagsEXT} bitfields, one for each descriptor set layout binding.")
+}
+
+val VkPhysicalDeviceDescriptorIndexingFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDescriptorIndexingFeaturesEXT") {
+    documentation =
+        """
+        Structure describing descriptor indexing features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkBool32.member("shaderInputAttachmentArrayDynamicIndexing", "indicates whether arrays of input attachments <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_INPUT_ATTACHMENT <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayDynamicIndexingEXT} capability.")
+    VkBool32.member("shaderUniformTexelBufferArrayDynamicIndexing", "indicates whether arrays of uniform texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayDynamicIndexingEXT} capability.")
+    VkBool32.member("shaderStorageTexelBufferArrayDynamicIndexing", "indicates whether arrays of storage texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageTexelBufferArrayDynamicIndexingEXT} capability.")
+    VkBool32.member("shaderUniformBufferArrayNonUniformIndexing", "indicates whether arrays of uniform buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformBufferArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("shaderSampledImageArrayNonUniformIndexing", "indicates whether arrays of samplers or sampled images <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, or #DESCRIPTOR_TYPE_SAMPLED_IMAGE <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SampledImageArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("shaderStorageBufferArrayNonUniformIndexing", "indicates whether arrays of storage buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageBufferArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("shaderStorageImageArrayNonUniformIndexing", "indicates whether arrays of storage images <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_IMAGE <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("shaderInputAttachmentArrayNonUniformIndexing", "indicates whether arrays of input attachments <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_INPUT_ATTACHMENT <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("shaderUniformTexelBufferArrayNonUniformIndexing", "indicates whether arrays of uniform texel buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("shaderStorageTexelBufferArrayNonUniformIndexing", "indicates whether arrays of storage texel buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageTexelBufferArrayNonUniformIndexingEXT} capability.")
+    VkBool32.member("descriptorBindingUniformBufferUpdateAfterBind", "indicates whether the implementation supports updating uniform buffer descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_UNIFORM_BUFFER.")
+    VkBool32.member("descriptorBindingSampledImageUpdateAfterBind", "indicates whether the implementation supports updating sampled image descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, or #DESCRIPTOR_TYPE_SAMPLED_IMAGE.")
+    VkBool32.member("descriptorBindingStorageImageUpdateAfterBind", "indicates whether the implementation supports updating storage image descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_STORAGE_IMAGE.")
+    VkBool32.member("descriptorBindingStorageBufferUpdateAfterBind", "indicates whether the implementation supports updating storage buffer descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_STORAGE_BUFFER.")
+    VkBool32.member("descriptorBindingUniformTexelBufferUpdateAfterBind", "indicates whether the implementation supports updating uniform texel buffer descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER.")
+    VkBool32.member("descriptorBindingStorageTexelBufferUpdateAfterBind", "indicates whether the implementation supports updating storage texel buffer descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER.")
+    VkBool32.member("descriptorBindingUpdateUnusedWhilePending", "indicates whether the implementation supports updating descriptors while the set is in use. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT <b>must</b> not be used.")
+    VkBool32.member("descriptorBindingPartiallyBound", "indicates whether the implementation supports statically using a descriptor set binding in which some descriptors are not valid. If this feature is not enabled, #DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT <b>must</b> not be used.")
+    VkBool32.member("descriptorBindingVariableDescriptorCount", "indicates whether the implementation supports descriptor sets with a variable-sized last binding. If this feature is not enabled, #DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT <b>must</b> not be used.")
+    VkBool32.member("runtimeDescriptorArray", "indicates whether the implementation supports the SPIR-V RuntimeDescriptorArrayEXT capability. If this feature is not enabled, descriptors <b>must</b> not be declared in runtime arrays.")
+}
+
+val VkPhysicalDeviceDescriptorIndexingPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDescriptorIndexingPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure describing descriptor indexing properties that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("maxUpdateAfterBindDescriptorsInAllPools", "the maximum number of descriptors (summed over all descriptor types) that <b>can</b> be created across all pools that are created with the #DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT bit set. Pool creation <b>may</b> fail when this limit is exceeded, or when the space this limit represents can&#8217;t satisfy a pool creation due to fragmentation.")
+    VkBool32.member("shaderUniformBufferArrayNonUniformIndexingNative", "a boolean value indicating whether uniform buffer descriptors natively support nonuniform indexing. If this is #FALSE, then a single dynamic instance of an instruction that nonuniformly indexes an array of uniform buffers <b>may</b> execute multiple times in order to access all the descriptors.")
+    VkBool32.member("shaderSampledImageArrayNonUniformIndexingNative", "a boolean value indicating whether sampler and image descriptors natively support nonuniform indexing. If this is #FALSE, then a single dynamic instance of an instruction that nonuniformly indexes an array of samplers or images <b>may</b> execute multiple times in order to access all the descriptors.")
+    VkBool32.member("shaderStorageBufferArrayNonUniformIndexingNative", "a boolean value indicating whether storage buffer descriptors natively support nonuniform indexing. If this is #FALSE, then a single dynamic instance of an instruction that nonuniformly indexes an array of storage buffers <b>may</b> execute multiple times in order to access all the descriptors.")
+    VkBool32.member("shaderStorageImageArrayNonUniformIndexingNative", "a boolean value indicating whether storage image descriptors natively support nonuniform indexing. If this is #FALSE, then a single dynamic instance of an instruction that nonuniformly indexes an array of storage images <b>may</b> execute multiple times in order to access all the descriptors.")
+    VkBool32.member("shaderInputAttachmentArrayNonUniformIndexingNative", "a boolean value indicating whether input attachment descriptors natively support nonuniform indexing. If this is #FALSE, then a single dynamic instance of an instruction that nonuniformly indexes an array of input attachments <b>may</b> execute multiple times in order to access all the descriptors.")
+    VkBool32.member("robustBufferAccessUpdateAfterBind", "a boolean value indicating whether <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#features-features-robustBufferAccess\">{@code robustBufferAccess}</a> <b>can</b> be enabled in a device simultaneously with {@code descriptorBindingUniformBufferUpdateAfterBind}, {@code descriptorBindingStorageBufferUpdateAfterBind}, {@code descriptorBindingUniformTexelBufferUpdateAfterBind}, and/or {@code descriptorBindingStorageTexelBufferUpdateAfterBind}. If this is #FALSE, then either {@code robustBufferAccess} <b>must</b> be disabled or all of these update-after-bind features <b>must</b> be disabled.")
+    VkBool32.member("quadDivergentImplicitLod", "a boolean value indicating whether implicit level of detail calculations for image operations have well-defined results when the image and/or sampler objects used for the instruction are not uniform within a quad. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#textures-derivative-image-operations\">Derivative Image Operations</a>.")
+    uint32_t.member("maxPerStageDescriptorUpdateAfterBindSamplers", "similar to {@code maxPerStageDescriptorSamplers} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxPerStageDescriptorUpdateAfterBindUniformBuffers", "similar to {@code maxPerStageDescriptorUniformBuffers} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxPerStageDescriptorUpdateAfterBindStorageBuffers", "similar to {@code maxPerStageDescriptorStorageBuffers} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxPerStageDescriptorUpdateAfterBindSampledImages", "similar to {@code maxPerStageDescriptorSampledImages} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxPerStageDescriptorUpdateAfterBindStorageImages", "similar to {@code maxPerStageDescriptorStorageImages} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxPerStageDescriptorUpdateAfterBindInputAttachments", "similar to {@code maxPerStageDescriptorInputAttachments} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxPerStageUpdateAfterBindResources", "similar to {@code maxPerStageResources} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindSamplers", "similar to {@code maxDescriptorSetSamplers} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindUniformBuffers", "similar to {@code maxDescriptorSetUniformBuffers} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindUniformBuffersDynamic", "similar to {@code maxDescriptorSetUniformBuffersDynamic} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindStorageBuffers", "similar to {@code maxDescriptorSetStorageBuffers} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindStorageBuffersDynamic", "similar to {@code maxDescriptorSetStorageBuffersDynamic} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindSampledImages", "similar to {@code maxDescriptorSetSampledImages} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindStorageImages", "similar to {@code maxDescriptorSetStorageImages} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+    uint32_t.member("maxDescriptorSetUpdateAfterBindInputAttachments", "similar to {@code maxDescriptorSetInputAttachments} but counts descriptors from descriptor sets created with or without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set.")
+}
+
+val VkDescriptorSetVariableDescriptorCountAllocateInfoEXT = struct(Module.VULKAN, "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT") {
+    documentation =
+        """
+        Structure specifying additional allocation parameters for descriptor sets.
+
+        <h5>Description</h5>
+        If {@code descriptorSetCount} is zero or this structure is not included in the {@code pNext} chain, then the variable lengths are considered to be zero. Otherwise, {@code pDescriptorCounts}[i] is the number of descriptors in the variable count descriptor binding in the corresponding descriptor set layout. If ##VkDescriptorSetAllocateInfo{@code ::pSetLayouts}[i] does not include a variable count descriptor binding, then {@code pDescriptorCounts}[i] is ignored.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code descriptorSetCount} is not zero, {@code descriptorSetCount} <b>must</b> equal ##VkDescriptorSetAllocateInfo{@code ::descriptorSetCount}</li>
+            <li>If sVkDescriptorSetAllocateInfo{@code ::pSetLayouts}[i] has a variable descriptor count binding, then {@code pDescriptorCounts}[i] <b>must</b> be less than or equal to the descriptor count specified for that binding when the descriptor set layout was created.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT</li>
+            <li>If {@code descriptorSetCount} is not 0, {@code pDescriptorCounts} <b>must</b> be a valid pointer to an array of {@code descriptorSetCount} {@code uint32_t} values</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pDescriptorCounts", optional = true)..uint32_t.member("descriptorSetCount", "zero or the number of elements in {@code pDescriptorCounts}.")
+    uint32_t.const.p.member("pDescriptorCounts", "an array of descriptor counts, with each member specifying the number of descriptors in a variable descriptor count binding in the corresponding descriptor set being allocated.")
+}
+
+val VkDescriptorSetVariableDescriptorCountLayoutSupportEXT = struct(Module.VULKAN, "VkDescriptorSetVariableDescriptorCountLayoutSupportEXT", mutable = false) {
+    documentation =
+        """
+        Structure returning information about whether a descriptor set layout can be supported.
+
+        <h5>Description</h5>
+        If the create info includes a variable-sized descriptor, then {@code supported} is determined assuming the requested size of the variable-sized descriptor, and {@code maxVariableDescriptorCount} is set to the maximum size of that descriptor that <b>can</b> be successfully created (which is greater than or equal to the requested size passed in). If the create info does not include a variable-sized descriptor or if the ##VkPhysicalDeviceDescriptorIndexingFeaturesEXT{@code ::descriptorBindingVariableDescriptorCount} feature is not enabled, then {@code maxVariableDescriptorCount} is set to zero. For the purposes of this command, a variable-sized descriptor binding with a {@code descriptorCount} of zero is treated as if the {@code descriptorCount} is one, and thus the binding is not ignored and the maximum descriptor count will be returned. If the layout is not supported, then the value written to {@code maxVariableDescriptorCount} is undefined.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint32_t.member("maxVariableDescriptorCount", "indicates the maximum number of descriptors supported in the highest numbered binding of the layout, if that binding is variable-sized.")
+}
+
+val VkPhysicalDeviceMaintenance3PropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance3PropertiesKHR", mutable = false, alias = VkPhysicalDeviceMaintenance3Properties) {
+    documentation = "See ##VkPhysicalDeviceMaintenance3Properties."
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("maxPerSetDescriptors", "")
+    VkDeviceSize.member("maxMemoryAllocationSize", "")
+}
+
+val VkDescriptorSetLayoutSupportKHR = struct(Module.VULKAN, "VkDescriptorSetLayoutSupportKHR", mutable = false, alias = VkDescriptorSetLayoutSupport) {
+    documentation = "See ##VkDescriptorSetLayoutSupport."
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkBool32.member("supported", "")
 }
 
 val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(Module.VULKAN, "VkDeviceQueueGlobalPriorityCreateInfoEXT") {
@@ -5107,7 +4434,6 @@ val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(Module.VULKAN, "VkDeviceQu
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code globalPriority} <b>must</b> be a valid {@code VkQueueGlobalPriorityEXT} value</li>
         </ul>
         """
@@ -5143,14 +4469,13 @@ val VkImportMemoryHostPointerInfoEXT = struct(Module.VULKAN, "VkImportMemoryHost
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
         </ul>
         """
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkExternalMemoryHandleTypeFlagBitsKHR.member("handleType", "specifies the handle type.")
+    VkExternalMemoryHandleTypeFlagBits.member("handleType", "specifies the handle type.")
     nullable..opaque_p.member("pHostPointer", "the host pointer to import from.")
 }
 
@@ -5168,7 +4493,6 @@ val VkPhysicalDeviceExternalMemoryHostPropertiesEXT = struct(Module.VULKAN, "VkP
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
 
         If the ##VkPhysicalDeviceExternalMemoryHostPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits.
@@ -5177,4 +4501,96 @@ val VkPhysicalDeviceExternalMemoryHostPropertiesEXT = struct(Module.VULKAN, "VkP
     VkStructureType.member("sType", "")
     nullable..opaque_p.member("pNext", "")
     VkDeviceSize.member("minImportedHostPointerAlignment", "the minimum required: alignment, in bytes, for the base address and size of host pointers that <b>can</b> be imported to a Vulkan memory object.")
+}
+
+val VkPhysicalDeviceShaderCorePropertiesAMD = struct(Module.VULKAN, "VkPhysicalDeviceShaderCorePropertiesAMD", mutable = false) {
+    documentation =
+        """
+        Structure describing shader core properties that can be supported by an implementation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD</li>
+        </ul>
+
+        If the ##VkPhysicalDeviceShaderCorePropertiesAMD structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
+        """
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("shaderEngineCount", "an unsigned integer value indicating the number of shader engines found inside the shader core of the physical device.")
+    uint32_t.member("shaderArraysPerEngineCount", "an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth buffers). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays.")
+    uint32_t.member("computeUnitsPerShaderArray", "an unsigned integer value indicating the number of compute units within a shader array. A compute unit houses a set of SIMDs along with a sequencer module and a local data store.")
+    uint32_t.member("simdPerComputeUnit", "an unsigned integer value indicating the number of SIMDs inside a compute unit. Each SIMD processes a single instruction at a time.")
+    uint32_t.member("wavefrontsPerSimd", "")
+    uint32_t.member("wavefrontSize", "an unsigned integer value indicating the number of channels (or threads) in a wavefront.")
+    uint32_t.member("sgprsPerSimd", "an unsigned integer value indicating the number of physical Scalar General Purpose Registers (SGPRs) per SIMD.")
+    uint32_t.member("minSgprAllocation", "an unsigned integer value indicating the minimum number of SGPRs allocated for a wave.")
+    uint32_t.member("maxSgprAllocation", "an unsigned integer value indicating the maximum number of SGPRs allocated for a wave.")
+    uint32_t.member("sgprAllocationGranularity", "an unsigned integer value indicating the granularity of SGPR allocation for a wave.")
+    uint32_t.member("vgprsPerSimd", "an unsigned integer value indicating the number of physical Vector General Purpose Registers (VGPRs) per SIMD.")
+    uint32_t.member("minVgprAllocation", "an unsigned integer value indicating the minimum number of VGPRs allocated for a wave.")
+    uint32_t.member("maxVgprAllocation", "an unsigned integer value indicating the maximum number of VGPRs allocated for a wave.")
+    uint32_t.member("vgprAllocationGranularity", "an unsigned integer value indicating the granularity of VGPR allocation for a wave.")
+}
+
+val VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT") {
+    documentation =
+        """
+        Structure describing max value of vertex attribute divisor that can be supported by an implementation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    uint32_t.member("maxVertexAttribDivisor", "the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled.")
+}
+
+val VkVertexInputBindingDivisorDescriptionEXT = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescriptionEXT") {
+    documentation =
+        """
+        Structure specifying a divisor used in instanced rendering.
+
+        <h5>Description</h5>
+        If this structure is not used to define a divisor value for an attribute then the divisor has a logical default value of 1.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code binding} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
+            <li>{@code divisor} <b>must</b> be a value between 0 and ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}, inclusive.</li>
+            <li>##VkVertexInputBindingDescription{@code ::inputRate} <b>must</b> be of type #VERTEX_INPUT_RATE_INSTANCE for this {@code binding}.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPipelineVertexInputDivisorStateCreateInfoEXT
+        """
+
+    uint32_t.member("binding", "the binding number for which the divisor is specified.")
+    uint32_t.member("divisor", "the the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will applied to N successive instances before moving on to the next vertex attribute. If a value of 0 is used for the divisor, then the first vertex attribute will be applied to all instances. The maximum value of divisor is implementation dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}.")
+}
+
+val VkPipelineVertexInputDivisorStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying vertex attributes assignment during instanced rendering.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT</li>
+            <li>{@code pVertexBindingDivisors} <b>must</b> be a valid pointer to an array of {@code vertexBindingDivisorCount} ##VkVertexInputBindingDivisorDescriptionEXT structures</li>
+            <li>{@code vertexBindingDivisorCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkVertexInputBindingDivisorDescriptionEXT
+        """
+
+    VkStructureType.member("sType", "the type of this structure")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure")
+    AutoSize("pVertexBindingDivisors")..uint32_t.member("vertexBindingDivisorCount", "the number of elements in the {@code pVertexBindingDivisors} array.")
+    VkVertexInputBindingDivisorDescriptionEXT.const.p.buffer("pVertexBindingDivisors", "a pointer to an array of ##VkVertexInputBindingDivisorDescriptionEXT structures, which specifies the divisor value for each binding.")
 }

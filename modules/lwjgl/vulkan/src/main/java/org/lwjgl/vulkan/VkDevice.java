@@ -14,23 +14,62 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Wraps a Vulkan device dispatchable handle. */
 public class VkDevice extends DispatchableHandleDevice {
 
+    private final VkPhysicalDevice physicalDevice;
+
     /**
      * Creates a {@link VkDevice} instance for the specified native handle.
+     *
+     * <p>The Vulkan version supported by the {@code VkDevice} will be determined by querying the {@link VkPhysicalDeviceProperties} of the specified physical
+     * device.</p>
      *
      * @param handle         the native {@code VkDevice} handle
      * @param physicalDevice the physical device used to create the {@code VkDevice}
      * @param ci             the {@link VkDeviceCreateInfo} structure used to create the {@code VkDevice}
      */
     public VkDevice(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
-        super(handle, getDeviceCapabilities(handle, physicalDevice, ci));
+        this(handle, physicalDevice, ci, 0);
     }
 
-    private static VKCapabilitiesDevice getDeviceCapabilities(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
-        VKCapabilitiesInstance capsInstance = physicalDevice.getCapabilities();
+    /**
+     * Creates a {@link VkDevice} instance for the specified native handle.
+     *
+     * <p>If {@code apiVersion} is 0, the Vulkan version supported by the {@code VkDevice} will be determined by querying the {@link VkPhysicalDeviceProperties}
+     * of the specified physical device. Otherwise, the specified {@code apiVersion} will be used.</p>
+     *
+     * @param handle         the native {@code VkDevice} handle
+     * @param physicalDevice the physical device used to create the {@code VkDevice}
+     * @param ci             the {@link VkDeviceCreateInfo} structure used to create the {@code VkDevice}
+     * @param apiVersion     if not 0, overrides the API version supported by the device.
+     */
+    public VkDevice(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci, int apiVersion) {
+        super(handle, getDeviceCapabilities(handle, physicalDevice, ci, apiVersion));
+        this.physicalDevice = physicalDevice;
+    }
 
-        long vkGetDeviceProcAddr;
+    /** Returns the physical device used to create this {@code VkDevice}. */
+    public VkPhysicalDevice getPhysicalDevice() {
+        return physicalDevice;
+    }
+
+    private static VKCapabilitiesDevice getDeviceCapabilities(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci, int apiVersion) {
+        long GetDeviceProcAddr;
         try (MemoryStack stack = stackPush()) {
-            vkGetDeviceProcAddr = callPPP(
+            if (apiVersion == 0) {
+                long GetPhysicalDeviceProperties = callPPP(
+                    VK.getGlobalCommands().vkGetInstanceProcAddr,
+                    physicalDevice.getInstance().address(),
+                    memAddress(stack.ASCII("vkGetPhysicalDeviceProperties"))
+                );
+
+                VkPhysicalDeviceProperties props = VkPhysicalDeviceProperties.callocStack(stack);
+                callPPV(GetPhysicalDeviceProperties, physicalDevice.address(), props.address());
+                apiVersion = props.apiVersion();
+                if (apiVersion == 0) { // vkGetPhysicalDeviceProperties failed?
+                    apiVersion = physicalDevice.getInstance().getCapabilities().apiVersion;
+                }
+            }
+
+            GetDeviceProcAddr = callPPP(
                 VK.getGlobalCommands().vkGetInstanceProcAddr,
                 physicalDevice.getInstance().address(),
                 memAddress(stack.ASCII("vkGetDeviceProcAddr"))
@@ -38,12 +77,12 @@ public class VkDevice extends DispatchableHandleDevice {
         }
 
         return new VKCapabilitiesDevice(functionName -> {
-            long address = callPPP(vkGetDeviceProcAddr, handle, memAddress(functionName));
+            long address = callPPP(GetDeviceProcAddr, handle, memAddress(functionName));
             if (address == NULL && Checks.DEBUG_FUNCTIONS) {
                 apiLog("Failed to locate address for VK device function " + memASCII(functionName));
             }
             return address;
-        }, capsInstance, VK.getEnabledExtensionSet(capsInstance.apiVersion, ci.ppEnabledExtensionNames()));
+        }, physicalDevice.getCapabilities(), VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
     }
 
 }

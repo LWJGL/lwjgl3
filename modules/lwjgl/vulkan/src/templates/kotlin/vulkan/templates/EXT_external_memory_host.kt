@@ -76,7 +76,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
     )
 
     EnumConstant(
-        "Extends {@code VkExternalMemoryHandleTypeFlagBitsKHR}.",
+        "Extends {@code VkExternalMemoryHandleTypeFlagBits}.",
 
         "EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT".enum(0x00000080),
         "EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT".enum(0x00000100)
@@ -93,7 +93,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
         <code><pre>
 ￿VkResult vkGetMemoryHostPointerPropertiesEXT(
 ￿    VkDevice                                    device,
-￿    VkExternalMemoryHandleTypeFlagBitsKHR       handleType,
+￿    VkExternalMemoryHandleTypeFlagBits          handleType,
 ￿    const void*                                 pHostPointer,
 ￿    VkMemoryHostPointerPropertiesEXT*           pMemoryHostPointerProperties);</pre></code>
 
@@ -108,7 +108,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBitsKHR} value</li>
+            <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
             <li>{@code pMemoryHostPointerProperties} <b>must</b> be a valid pointer to a ##VkMemoryHostPointerPropertiesEXT structure</li>
         </ul>
 
@@ -121,7 +121,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE</li>
             </ul></dd>
         </dl>
 
@@ -130,7 +130,7 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
         """,
 
         VkDevice.IN("device", "the logical device that will be importing {@code pHostPointer}."),
-        VkExternalMemoryHandleTypeFlagBitsKHR.IN("handleType", "the type of the handle {@code pHostPointer}."),
+        VkExternalMemoryHandleTypeFlagBits.IN("handleType", "the type of the handle {@code pHostPointer}."),
         opaque_const_p.IN("pHostPointer", "the host pointer to import from."),
         VkMemoryHostPointerPropertiesEXT.p.OUT("pMemoryHostPointerProperties", "")
     )

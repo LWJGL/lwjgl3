@@ -108,7 +108,7 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
             <dt>On failure, this command returns</dt>
             <dd><ul>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_INVALID_EXTERNAL_HANDLE_KHR</li>
+                <li>#ERROR_INVALID_EXTERNAL_HANDLE</li>
             </ul></dd>
         </dl>
 

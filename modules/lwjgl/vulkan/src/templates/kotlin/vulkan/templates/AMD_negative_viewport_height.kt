@@ -13,6 +13,13 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
         """
         This extension allows an application to specify a negative viewport height. The result is that the viewport transformation will flip along the y-axis.
 
+        <ul>
+            <li>Allow negative height to be specified in the slink::VkViewport{@code ::height} field to perform y-inversion of the clip-space to framebuffer-space transform. This allows apps to avoid having to use gl_Position.y = -gl_Position.y in shaders also targeting other APIs.</li>
+        </ul>
+
+        <h5>Deprecation by VK_KHR_maintenance1 and Vulkan 1.1</h5>
+        Functionality in this extension is included in VK_KHR_maintenance1 and Vulkan 1.1. Due to some slight behavioral differences, this extension <b>must</b> not be enabled alongside VK_KHR_maintenance1, or in an instance created with version 1.1 or later requested in ##VkApplicationInfo{@code ::apiVersion}.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_negative_viewport_height}</dd>
@@ -47,6 +54,12 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
                 <li>Matthaeus G. Chajdas, AMD</li>
                 <li>Graham Sellers, AMD</li>
                 <li>Baldur Karlsson</li>
+            </ul></dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Deprecated by VK_KHR_maintenance1</li>
+                <li>Deprecated by Vulkan 1.1</li>
             </ul></dd>
         </dl>
         """

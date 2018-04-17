@@ -367,16 +367,19 @@ public final class HelloVulkan {
 
                     requiredLayers = demo_check_layers(
                         stack, availableLayers,
-                        "VK_LAYER_LUNARG_standard_validation"
+                        "VK_LAYER_LUNARG_standard_validation"/*,
+                        "VK_LAYER_LUNARG_assistant_layer"*/
                     );
                     if (requiredLayers == null) // use alternative set of validation layers
                     {
                         requiredLayers = demo_check_layers(
                             stack, availableLayers,
-                            "VK_LAYER_GOOGLE_threading", "VK_LAYER_LUNARG_parameter_validation",
-                            "VK_LAYER_LUNARG_object_tracker", "VK_LAYER_LUNARG_image",
-                            "VK_LAYER_LUNARG_core_validation", "VK_LAYER_LUNARG_swapchain",
-                            "VK_LAYER_GOOGLE_unique_objects"
+                            "VK_LAYER_GOOGLE_threading",
+                            "VK_LAYER_LUNARG_parameter_validation",
+                            "VK_LAYER_LUNARG_object_tracker",
+                            "VK_LAYER_LUNARG_core_validation",
+                            "VK_LAYER_GOOGLE_unique_objects"/*,
+                            "VK_LAYER_LUNARG_assistant_layer"*/
                         );
                     }
                 }
@@ -420,7 +423,7 @@ public final class HelloVulkan {
                 .applicationVersion(0)
                 .pEngineName(APP_SHORT_NAME)
                 .engineVersion(0)
-                .apiVersion(VK_API_VERSION_1_0);
+                .apiVersion(VK.getInstanceVersionSupported());
 
             extension_names.flip();
             VkInstanceCreateInfo inst_info = VkInstanceCreateInfo.mallocStack(stack)

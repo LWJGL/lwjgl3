@@ -87,9 +87,9 @@ val EXT_sampler_filter_minmax = "EXTSamplerFilterMinmax".nativeClassVK("EXT_samp
 
         <h5>Description</h5>
         <ul>
-            <li>#SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT indicates that texel values are combined by computing a weighted average of values in the footprint, using weights as specified in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-unnormalized-to-integer">the image operations chapter</a>.</li>
-            <li>#SAMPLER_REDUCTION_MODE_MIN_EXT indicates that texel values are combined by taking the component-wise minimum of values in the footprint with non-zero weights.</li>
-            <li>#SAMPLER_REDUCTION_MODE_MAX_EXT indicates that texel values are combined by taking the component-wise maximum of values in the footprint with non-zero weights.</li>
+            <li>#SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT specifies that texel values are combined by computing a weighted average of values in the footprint, using weights as specified in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-unnormalized-to-integer">the image operations chapter</a>.</li>
+            <li>#SAMPLER_REDUCTION_MODE_MIN_EXT specifies that texel values are combined by taking the component-wise minimum of values in the footprint with non-zero weights.</li>
+            <li>#SAMPLER_REDUCTION_MODE_MAX_EXT specifies that texel values are combined by taking the component-wise maximum of values in the footprint with non-zero weights.</li>
         </ul>
 
         <h5>See Also</h5>

@@ -29,7 +29,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             <dd>2</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>68</dd>
+            <dd>70</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -43,10 +43,15 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2016-05-04</dd>
+            <dd>2017-10-06</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Interacts with Vulkan 1.1</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -72,7 +77,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
     IntConstant(
         "The extension specification version.",
 
-        "KHR_SWAPCHAIN_SPEC_VERSION".."68"
+        "KHR_SWAPCHAIN_SPEC_VERSION".."70"
     )
 
     StringConstant(
@@ -105,6 +110,46 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         "Extends {@code VkObjectType}.",
 
         "OBJECT_TYPE_SWAPCHAIN_KHR".."1000001000"
+    )
+
+    EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR".."1000001007",
+        "STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR".."1000001008",
+        "STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR".."1000001009",
+        "STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR".."1000001010",
+        "STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR".."1000001011",
+        "STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR".."1000001012"
+    )
+
+    EnumConstant(
+        "Extends {@code VkSwapchainCreateFlagBitsKHR}.",
+
+        "SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR".enum(0x00000001),
+        "SWAPCHAIN_CREATE_PROTECTED_BIT_KHR".enum(0x00000002)
+    )
+
+    EnumConstant(
+        """
+        VkDeviceGroupPresentModeFlagBitsKHR - Bitmask specifying supported device group present modes
+
+        <h5>Description</h5>
+        <ul>
+            <li>#DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR specifies that any physical device with a presentation engine <b>can</b> present its own swapchain images.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR specifies that any physical device with a presentation engine <b>can</b> present swapchain images from any physical device in its {@code presentMask}.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR specifies that any physical device with a presentation engine <b>can</b> present the sum of swapchain images from any physical devices in its {@code presentMask}.</li>
+            <li>#DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR specifies that multiple physical devices with a presentation engine <b>can</b> each present their own swapchain images.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDeviceGroupPresentInfoKHR, {@code VkDeviceGroupPresentModeFlagsKHR}
+        """,
+
+        "DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR".enum(0x00000001),
+        "DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR".enum(0x00000002),
+        "DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR".enum(0x00000004),
+        "DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR".enum(0x00000008)
     )
 
     VkResult(
@@ -329,7 +374,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice.IN("device", "the device associated with {@code swapchain}."),
         VkSwapchainKHR.IN("swapchain", "the non-retired swapchain from which an image is being acquired."),
-        uint64_t.IN("timeout", "indicates how long the function waits, in nanoseconds, if no image is available."),
+        uint64_t.IN("timeout", "specifies how long the function waits, in nanoseconds, if no image is available."),
         VkSemaphore.IN("semaphore", "#NULL_HANDLE or a semaphore to signal."),
         VkFence.IN("fence", "#NULL_HANDLE or a fence to signal."),
         Check(1)..uint32_t.p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
@@ -367,7 +412,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         If #QueuePresentKHR() fails to enqueue the corresponding set of queue operations, it <b>may</b> return #ERROR_OUT_OF_HOST_MEMORY or #ERROR_OUT_OF_DEVICE_MEMORY. If it does, the implementation <b>must</b> ensure that the state and contents of any resources or synchronization primitives referenced is unaffected by the call or its failure.
 
-        If #QueuePresentKHR() fails in such a way that the implementation <b>can</b> not make that guarantee, the implementation <b>must</b> return #ERROR_DEVICE_LOST.
+        If #QueuePresentKHR() fails in such a way that the implementation is unable to make that guarantee, the implementation <b>must</b> return #ERROR_DEVICE_LOST.
 
         However, if the presentation request is rejected by the presentation engine with an error #ERROR_OUT_OF_DATE_KHR or #ERROR_SURFACE_LOST_KHR, the set of queue operations are still considered to be enqueued and thus any semaphore to be waited on gets unsignaled when the corresponding queue operation is complete.
 
@@ -414,5 +459,219 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkQueue.IN("queue", "a queue that is capable of presentation to the target surface&#8217;s platform on the same device as the image&#8217;s swapchain."),
         VkPresentInfoKHR.const.p.IN("pPresentInfo", "a pointer to an instance of the ##VkPresentInfoKHR structure specifying the parameters of the presentation.")
+    )
+
+    DependsOn("Vulkan11")..VkResult(
+        "GetDeviceGroupPresentCapabilitiesKHR",
+        """
+        Query present capabilities from other physical devices.
+
+        <h5>C Specification</h5>
+        A logical device that represents multiple physical devices <b>may</b> support presenting from images on more than one physical device, or combining images from multiple physical devices.
+
+        To query these capabilities, call:
+
+        <code><pre>
+￿VkResult vkGetDeviceGroupPresentCapabilitiesKHR(
+￿    VkDevice                                    device,
+￿    VkDeviceGroupPresentCapabilitiesKHR*        pDeviceGroupPresentCapabilities);</pre></code>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pDeviceGroupPresentCapabilities} <b>must</b> be a valid pointer to a ##VkDeviceGroupPresentCapabilitiesKHR structure</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkDeviceGroupPresentCapabilitiesKHR
+        """,
+
+        VkDevice.IN("device", "the logical device."),
+        VkDeviceGroupPresentCapabilitiesKHR.p.OUT("pDeviceGroupPresentCapabilities", "a pointer to a structure of type ##VkDeviceGroupPresentCapabilitiesKHR that is filled with the logical device&#8217;s capabilities.")
+    )
+
+    DependsOn("Vulkan11")..VkResult(
+        "GetDeviceGroupSurfacePresentModesKHR",
+        """
+        Query present capabilities for a surface.
+
+        <h5>C Specification</h5>
+        Some surfaces <b>may</b> not be capable of using all the device group present modes.
+
+        To query the supported device group present modes for a particular surface, call:
+
+        <code><pre>
+￿VkResult vkGetDeviceGroupSurfacePresentModesKHR(
+￿    VkDevice                                    device,
+￿    VkSurfaceKHR                                surface,
+￿    VkDeviceGroupPresentModeFlagsKHR*           pModes);</pre></code>
+
+        <h5>Description</h5>
+        The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHR().
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>{@code pModes} <b>must</b> be a valid pointer to a {@code VkDeviceGroupPresentModeFlagsKHR} value</li>
+            <li>Both of {@code device}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code surface} <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_SURFACE_LOST_KHR</li>
+            </ul></dd>
+        </dl>
+        """,
+
+        VkDevice.IN("device", "the logical device."),
+        VkSurfaceKHR.IN("surface", "the surface."),
+        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p.INOUT("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.")
+    )
+
+    DependsOn("Vulkan11")..VkResult(
+        "GetPhysicalDevicePresentRectanglesKHR",
+        """
+        Query present rectangles for a surface on a physical device.
+
+        <h5>C Specification</h5>
+        When using #DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR, the application <b>may</b> need to know which regions of the surface are used when presenting locally on each physical device. Presentation of swapchain images to this surface need only have valid contents in the regions returned by this command.
+
+        To query a set of rectangles used in presentation on the physical device, call:
+
+        <code><pre>
+￿VkResult vkGetPhysicalDevicePresentRectanglesKHR(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkSurfaceKHR                                surface,
+￿    uint32_t*                                   pRectCount,
+￿    VkRect2D*                                   pRects);</pre></code>
+
+        <h5>Description</h5>
+        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written. If {@code pRectCount} is smaller than the number of rectangles used for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+
+        The values returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded.
+
+        The rectangles returned by this command <b>must</b> not overlap.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>{@code pRectCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+            <li>If the value referenced by {@code pRectCount} is not 0, and {@code pRects} is not {@code NULL}, {@code pRects} <b>must</b> be a valid pointer to an array of {@code pRectCount} ##VkRect2D structures</li>
+            <li>Both of {@code physicalDevice}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code surface} <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+                <li>#INCOMPLETE</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkRect2D
+        """,
+
+        VkPhysicalDevice.IN("physicalDevice", "the physical device."),
+        VkSurfaceKHR.IN("surface", "the surface."),
+        AutoSize("pRects")..Check(1)..uint32_t.p.INOUT("pRectCount", "a pointer to an integer related to the number of rectangles available or queried, as described below."),
+        nullable..VkRect2D.p.OUT("pRects", "either {@code NULL} or a pointer to an array of ##VkRect2D structures.")
+    )
+
+    DependsOn("Vulkan11")..VkResult(
+        "AcquireNextImage2KHR",
+        """
+        Retrieve the index of the next available presentable image.
+
+        <h5>C Specification</h5>
+        To acquire an available presentable image to use, and retrieve the index of that image, call:
+
+        <code><pre>
+￿VkResult vkAcquireNextImage2KHR(
+￿    VkDevice                                    device,
+￿    const VkAcquireNextImageInfoKHR*            pAcquireInfo,
+￿    uint32_t*                                   pImageIndex);</pre></code>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the number of currently acquired images is greater than the difference between the number of images in the {@code swapchain} member of {@code pAcquireInfo} and the value of ##VkSurfaceCapabilitiesKHR{@code ::minImageCount} as returned by a call to #GetPhysicalDeviceSurfaceCapabilities2KHR() with the {@code surface} used to create {@code swapchain}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pAcquireInfo} <b>must</b> be a valid pointer to a valid ##VkAcquireNextImageInfoKHR structure</li>
+            <li>{@code pImageIndex} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+                <li>#TIMEOUT</li>
+                <li>#NOT_READY</li>
+                <li>#SUBOPTIMAL_KHR</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_DEVICE_LOST</li>
+                <li>#ERROR_OUT_OF_DATE_KHR</li>
+                <li>#ERROR_SURFACE_LOST_KHR</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkAcquireNextImageInfoKHR
+        """,
+
+        VkDevice.IN("device", "the device associated with {@code swapchain}."),
+        VkAcquireNextImageInfoKHR.const.p.IN("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHR containing parameters of the acquire."),
+        Check(1)..uint32_t.p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
     )
 }

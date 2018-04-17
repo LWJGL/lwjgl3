@@ -7,6 +7,8 @@ package org.lwjgl.vulkan;
 /** Wraps a Vulkan command buffer handle. */
 public class VkCommandBuffer extends DispatchableHandleDevice {
 
+    private final VkDevice device;
+
     /**
      * Creates a {@code VkCommandBuffer} using the specified native handle and device.
      *
@@ -15,6 +17,12 @@ public class VkCommandBuffer extends DispatchableHandleDevice {
      */
     public VkCommandBuffer(long handle, VkDevice device) {
         super(handle, device.getCapabilities());
+        this.device = device;
+    }
+
+    /** Returns the device on which this {@code VkCommandBuffer} was created. */
+    public VkDevice getDevice() {
+        return device;
     }
 
 }

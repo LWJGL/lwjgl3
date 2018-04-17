@@ -11,7 +11,7 @@ import vulkan.*
 val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type = "device", postfix = IMG) {
     documentation =
         """
-        {@code VK_IMG_filter_cubic} adds an additional, high quality cubic filtering mode to Vulkan, using a Catmull-Rom bicubic filter. Performing this kind of filtering can be done in a shader by using 16 samples and a number of instructions, but this can be inefficient. The cubic filter mode exposes an optimized high quality texture sampling using fixed texture sampling hardware.
+        {@code VK_IMG_filter_cubic} adds an additional, high quality cubic filtering mode to Vulkan, using a Catmull-Rom bicubic filter. Performing this kind of filtering can be done in a shader by using 16 samples and a number of instructions, but this can be inefficient. The cubic filter mode exposes an optimized high quality texture sampling using fixed texture sampling functionality.
 
         <h5>Example</h5>
         Creating a sampler with the new filter for both magnification and minification

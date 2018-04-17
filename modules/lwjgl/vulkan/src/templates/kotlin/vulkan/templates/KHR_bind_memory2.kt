@@ -15,6 +15,9 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
         This extension also introduces #IMAGE_CREATE_ALIAS_BIT_KHR, which allows "{@code identical}" images that alias the same memory to interpret the contents consistently, even across image layout changes.
 
+        <h5>Promotion to Vulkan 1.1</h5>
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_bind_memory2}</dd>
@@ -39,10 +42,15 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-05-19</dd>
+            <dd>2017-09-05</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.1 Core</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -79,95 +87,19 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
     VkResult(
         "BindBufferMemory2KHR",
-        """
-        Bind device memory to buffer objects.
-
-        <h5>C Specification</h5>
-        To attach memory to buffer objects for one or more buffers at a time, call:
-
-        <code><pre>
-￿VkResult vkBindBufferMemory2KHR(
-￿    VkDevice                                    device,
-￿    uint32_t                                    bindInfoCount,
-￿    const VkBindBufferMemoryInfoKHR*            pBindInfos);</pre></code>
-
-        <h5>Description</h5>
-        On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pBindInfos} <b>must</b> be a valid pointer to an array of {@code bindInfoCount} valid ##VkBindBufferMemoryInfoKHR structures</li>
-            <li>{@code bindInfoCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkBindBufferMemoryInfoKHR
-        """,
+        "See #BindBufferMemory2().",
 
         VkDevice.IN("device", "the logical device that owns the buffers and memory."),
         AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        VkBindBufferMemoryInfoKHR.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindBufferMemoryInfoKHR, describing buffers and memory to bind.")
+        VkBindBufferMemoryInfo.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindBufferMemoryInfo, describing buffers and memory to bind.")
     )
 
     VkResult(
         "BindImageMemory2KHR",
-        """
-        Bind device memory to image objects.
-
-        <h5>C Specification</h5>
-        To attach memory to image objects for one or more images at a time, call:
-
-        <code><pre>
-￿VkResult vkBindImageMemory2KHR(
-￿    VkDevice                                    device,
-￿    uint32_t                                    bindInfoCount,
-￿    const VkBindImageMemoryInfoKHR*             pBindInfos);</pre></code>
-
-        <h5>Description</h5>
-        On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pBindInfos} <b>must</b> be a valid pointer to an array of {@code bindInfoCount} valid ##VkBindImageMemoryInfoKHR structures</li>
-            <li>{@code bindInfoCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
-                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##VkBindImageMemoryInfoKHR
-        """,
+        "See #BindImageMemory2().",
 
         VkDevice.IN("device", "the logical device that owns the images and memory."),
         AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        VkBindImageMemoryInfoKHR.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindImageMemoryInfoKHR, describing images and memory to bind.")
+        VkBindImageMemoryInfo.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindImageMemoryInfo, describing images and memory to bind.")
     )
 }

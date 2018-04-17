@@ -81,7 +81,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
     )
 
     EnumConstant(
-        "",
+        "Extends {@code VkSamplerAddressMode}.",
 
         "SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".."4"
     )

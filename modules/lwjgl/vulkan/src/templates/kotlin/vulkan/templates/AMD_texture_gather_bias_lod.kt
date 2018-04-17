@@ -32,14 +32,14 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 ￿
 ￿// ----------------------------------------------------------------------------------------
 ￿// How to detect if an image format can be used with the new function prototypes.
-￿VkPhysicalDeviceImageFormatInfo2KHR   formatInfo;
-￿VkImageFormatProperties2KHR           formatProps;
+￿VkPhysicalDeviceImageFormatInfo2   formatInfo;
+￿VkImageFormatProperties2           formatProps;
 ￿VkTextureLODGatherFormatPropertiesAMD textureLODGatherSupport;
 ￿
 ￿textureLODGatherSupport.sType = VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD;
 ￿textureLODGatherSupport.pNext = nullptr;
 ￿
-￿formatInfo.sType  = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR;
+￿formatInfo.sType  = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2;
 ￿formatInfo.pNext  = nullptr;
 ￿formatInfo.format = ...;
 ￿formatInfo.type   = ...;
@@ -47,10 +47,10 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 ￿formatInfo.usage  = ...;
 ￿formatInfo.flags  = ...;
 ￿
-￿formatProps.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
+￿formatProps.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
 ￿formatProps.pNext = &textureLODGatherSupport;
 ￿
-￿vkGetPhysicalDeviceImageFormatProperties2KHR(physical_device, &formatInfo, &formatProps);
+￿vkGetPhysicalDeviceImageFormatProperties2(physical_device, &formatInfo, &formatProps);
 ￿
 ￿if (textureLODGatherSupport.supportsTextureGatherLODBiasAMD == VK_TRUE)
 ￿{

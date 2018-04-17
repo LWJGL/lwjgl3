@@ -200,10 +200,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
         <h5>Description</h5>
         <ul>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX indicates that the processing of sequences <b>can</b> happen at an implementation-dependent order, which is not guaranteed to be coherent across multiple invocations.</li>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX indicates that there is likely a high difference between allocated number of sequences and actually used.</li>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX indicates that there are likely many draw or dispatch calls that are zero-sized (zero grid dimension, no primitives to render).</li>
-            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX indicates that the input data for the sequences is not implicitly indexed from 0..sequencesUsed but a user provided {@code VkBuffer} encoding the index is provided.</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX specifies that the processing of sequences <b>can</b> happen at an implementation-dependent order, which is not guaranteed to be coherent across multiple invocations.</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX specifies that there is likely a high difference between allocated number of sequences and actually used.</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX specifies that there are likely many draw or dispatch calls that are zero-sized (zero grid dimension, no primitives to render).</li>
+            <li>#INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX specifies that the input data for the sequences is not implicitly indexed from 0..sequencesUsed but a user provided {@code VkBuffer} encoding the index is provided.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -222,8 +222,8 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
         <h5>Description</h5>
         <ul>
-            <li>#OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
-            <li>#OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_COMPUTE</li>
+            <li>#OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX specifies that the resource is bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
+            <li>#OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX specifies that the resource is bound to #PIPELINE_BIND_POINT_COMPUTE</li>
         </ul>
 
         <h5>See Also</h5>
@@ -274,11 +274,11 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
         <h5>Description</h5>
         <ul>
-            <li>#OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX indicates a {@code VkDescriptorSet} resource entry that is registered via ##VkObjectTableDescriptorSetEntryNVX.</li>
-            <li>#OBJECT_ENTRY_TYPE_PIPELINE_NVX indicates a {@code VkPipeline} resource entry that is registered via ##VkObjectTablePipelineEntryNVX.</li>
-            <li>#OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableIndexBufferEntryNVX.</li>
-            <li>#OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableVertexBufferEntryNVX.</li>
-            <li>#OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX indicates the resource entry is registered via ##VkObjectTablePushConstantEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX specifies a {@code VkDescriptorSet} resource entry that is registered via ##VkObjectTableDescriptorSetEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_PIPELINE_NVX specifies a {@code VkPipeline} resource entry that is registered via ##VkObjectTablePipelineEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX specifies a {@code VkBuffer} resource entry that is registered via ##VkObjectTableIndexBufferEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX specifies a {@code VkBuffer} resource entry that is registered via ##VkObjectTableVertexBufferEntryNVX.</li>
+            <li>#OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX specifies the resource entry is registered via ##VkObjectTablePushConstantEntryNVX.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -424,10 +424,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         ##VkAllocationCallbacks, ##VkIndirectCommandsLayoutCreateInfoNVX
         """,
 
-        VkDevice.IN("device", "the logical device that creates the object table."),
-        VkIndirectCommandsLayoutCreateInfoNVX.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
+        VkDevice.IN("device", "the logical device that creates the indirect command layout."),
+        VkIndirectCommandsLayoutCreateInfoNVX.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkIndirectCommandsLayoutCreateInfoNVX structure containing parameters affecting creation of the indirect command layout."),
         nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkIndirectCommandsLayoutNVX.p.OUT("pIndirectCommandsLayout", "points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
+        Check(1)..VkIndirectCommandsLayoutNVX.p.OUT("pIndirectCommandsLayout", "points to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.")
     )
 
     void(

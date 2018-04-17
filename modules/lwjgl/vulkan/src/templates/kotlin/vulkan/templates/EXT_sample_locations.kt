@@ -96,7 +96,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         Set the dynamic sample locations state.
 
         <h5>C Specification</h5>
-        The custom sample locations used for rasterization when ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} is #TRUE are specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} property of the currently bound graphics pipeline, if the pipeline was not created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT enabled.
+        The custom sample locations used for rasterization when ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} is #TRUE are specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} property of the bound graphics pipeline, if the pipeline was not created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT enabled.
 
         Otherwise, the sample locations used for rasterization are set by calling #CmdSetSampleLocationsEXT():
 
@@ -107,8 +107,8 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT dynamic state enabled</li>
-            <li>The {@code sampleLocationsPerPixel} member of {@code pSampleLocationsInfo} <b>must</b> equal the {@code rasterizationSamples} member of the ##VkPipelineMultisampleStateCreateInfo structure the currently bound graphics pipeline has been created with</li>
+            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT dynamic state enabled</li>
+            <li>The {@code sampleLocationsPerPixel} member of {@code pSampleLocationsInfo} <b>must</b> equal the {@code rasterizationSamples} member of the ##VkPipelineMultisampleStateCreateInfo structure the bound graphics pipeline has been created with</li>
             <li>If ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE then the current render pass <b>must</b> have been begun by specifying a ##VkRenderPassSampleLocationsBeginInfoEXT structure whose {@code pPostSubpassSampleLocations} member contains an element with a {@code subpassIndex} matching the current subpass index and the {@code sampleLocationsInfo} member of that element <b>must</b> match the sample locations state pointed to by {@code pSampleLocationsInfo}</li>
         </ul>
 

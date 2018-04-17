@@ -11,9 +11,12 @@ import vulkan.*
 val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedicated_allocation", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension enables resources to be bound to a dedicated allocation, rather than suballocated. For any particular resource, applications <b>can</b> query whether a dedicated allocation is recommended, in which case using a dedicated allocation <b>may</b> improve the performance of access to that resource. Normal device memory allocations must support multiple resources per allocation, memory aliasing and sparse binding, which could interfere with some optimizations. Applications should query the implementation for when a dedicated allocation <b>may</b> be beneficial by adding ##VkMemoryDedicatedRequirementsKHR to the {@code pNext} chain of the ##VkMemoryRequirements2KHR structure passed as the {@code pMemoryRequirements} parameter to a call to #GetBufferMemoryRequirements2KHR() or #GetImageMemoryRequirements2KHR(). Certain external handle types and external images or buffers <b>may</b> also depend on dedicated allocations on implementations that associate image or buffer metadata with OS-level memory objects.
+        This extension enables resources to be bound to a dedicated allocation, rather than suballocated. For any particular resource, applications <b>can</b> query whether a dedicated allocation is recommended, in which case using a dedicated allocation <b>may</b> improve the performance of access to that resource. Normal device memory allocations must support multiple resources per allocation, memory aliasing and sparse binding, which could interfere with some optimizations. Applications should query the implementation for when a dedicated allocation <b>may</b> be beneficial by adding ##VkMemoryDedicatedRequirementsKHR to the {@code pNext} chain of the ##VkMemoryRequirements2 structure passed as the {@code pMemoryRequirements} parameter to a call to #GetBufferMemoryRequirements2() or #GetImageMemoryRequirements2(). Certain external handle types and external images or buffers <b>may</b> also depend on dedicated allocations on implementations that associate image or buffer metadata with OS-level memory objects.
 
         This extension adds a two small structures to memory requirements querying and memory allocation: a new structure that flags whether an image/buffer should have a dedicated allocation, and a structure indicating the image or buffer that an allocation will be bound to.
+
+        <h5>Promotion to Vulkan 1.1</h5>
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         <code><pre>
@@ -38,20 +41,20 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿        NULL,                               // pNext
 ￿    };
 ￿
-￿    VkMemoryRequirements2KHR memoryRequirements =
+￿    VkMemoryRequirements2 memoryRequirements =
 ￿    {
-￿        VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR,
+￿        VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2,
 ￿        &dedicatedRequirements,             // pNext
 ￿    };
 ￿
-￿    const VkImageMemoryRequirementsInfo2KHR imageRequirementsInfo =
+￿    const VkImageMemoryRequirementsInfo2 imageRequirementsInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR,
+￿        VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2,
 ￿        NULL,                               // pNext
 ￿        image
 ￿    };
 ￿
-￿    vkGetImageMemoryRequirements2KHR(
+￿    vkGetImageMemoryRequirements2(
 ￿        device,
 ￿        &imageRequirementsInfo,
 ￿        &memoryRequirements);
@@ -119,10 +122,15 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-08-07</dd>
+            <dd>2017-09-05</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.1 Core</li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

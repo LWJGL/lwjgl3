@@ -93,7 +93,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-04-27</dd>
+            <dd>2017-09-12</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -139,6 +139,13 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     )
 
     EnumConstant(
+        "Extends {@code VkDebugReportObjectTypeEXT}.",
+
+        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT".."1000011000",
+        "DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT".."1000011000"
+    )
+
+    EnumConstant(
         """
         VkDebugReportObjectTypeEXT - Specify the type of an object handle
 
@@ -180,7 +187,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT</td><td>{@code VkDisplayModeKHR}</td></tr>
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT</td><td>{@code VkObjectTableNVX}</td></tr>
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
-                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT</td><td>{@code VkDescriptorUpdateTemplateKHR}</td></tr>
+                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
             </tbody>
         </table>
 
@@ -382,7 +389,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         """,
 
         VkInstance.IN("instance", "the debug stream&#8217;s {@code VkInstance}."),
-        VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} classification of this event/message."),
+        VkDebugReportFlagsEXT.IN("flags", "specifies the {@code VkDebugReportFlagBitsEXT} classification of this event/message."),
         VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
         uint64_t.IN("object", "this is the object where the issue was detected. {@code object} <b>can</b> be #NULL_HANDLE if there is no object associated with the event."),
         size_t.IN("location", "an application defined value."),

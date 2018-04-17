@@ -19,7 +19,7 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 
         Geometry shaders provide the ability for applications to process each primitive sent through the graphics pipeline using a programmable shader. However, one common use case treats them largely as a "{@code passthrough}". In this use case, the bulk of the geometry shader code simply copies inputs from each vertex of the input primitive to corresponding outputs in the vertices of the output primitive. Such shaders might also compute values for additional built-in or user-defined per-primitive attributes (e.g., {@code Layer}) to be assigned to all the vertices of the output primitive.
 
-        This extension provides access to the {@code PassthroughNV} decoration under the {@code GeometryShaderPassthroughNV} capability. Adding this to a geometry shader input variable indicates that the values of this input are copied to the corresponding vertex of the output primitive.
+        This extension provides access to the {@code PassthroughNV} decoration under the {@code GeometryShaderPassthroughNV} capability. Adding this to a geometry shader input variable specifies that the values of this input are copied to the corresponding vertex of the output primitive.
 
         When using GLSL source-based shading languages, the {@code passthrough} layout qualifier from {@code GL_NV_geometry_shader_passthrough} maps to the {@code PassthroughNV} decoration. To use the {@code passthrough} layout, in GLSL the {@code GL_NV_geometry_shader_passthrough} extension must be enabled. Behaviour is described in the {@code GL_NV_geometry_shader_passthrough} extension specification.
 

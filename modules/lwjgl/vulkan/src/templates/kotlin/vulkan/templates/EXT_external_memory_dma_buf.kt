@@ -65,7 +65,7 @@ val EXT_external_memory_dma_buf = "EXTExternalMemoryDmaBuf".nativeClassVK("EXT_e
     )
 
     EnumConstant(
-        "Extends {@code VkExternalMemoryHandleTypeFlagBitsKHR}.",
+        "Extends {@code VkExternalMemoryHandleTypeFlagBits}.",
 
         "EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT".enum(0x00000200)
     )

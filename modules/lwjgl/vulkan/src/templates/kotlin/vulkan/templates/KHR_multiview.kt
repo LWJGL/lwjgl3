@@ -8,17 +8,20 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHX_multiview = "KHXMultiview".nativeClassVK("KHX_multiview", type = "device", postfix = KHX) {
+val KHR_multiview = "KHRMultiview".nativeClassVK("KHR_multiview", type = "device", postfix = KHR) {
     documentation =
         """
         This extension has the same goal as the OpenGL ES {@code GL_OVR_multiview} extension - it enables rendering to multiple "{@code views}" by recording a single set of commands to be executed with slightly different behavior for each view. It includes a concise way to declare a render pass with multiple views, and gives implementations freedom to render the views in the most efficient way possible.
+
+        <h5>Promotion to Vulkan 1.1</h5>
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
         None.
 
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>{@code VK_KHX_multiview}</dd>
+            <dd>{@code VK_KHR_multiview}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
@@ -46,6 +49,11 @@ val KHX_multiview = "KHXMultiview".nativeClassVK("KHX_multiview", type = "device
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.1 Core</li>
+            </ul></dd>
+
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
@@ -56,26 +64,26 @@ val KHX_multiview = "KHXMultiview".nativeClassVK("KHX_multiview", type = "device
     IntConstant(
         "The extension specification version.",
 
-        "KHX_MULTIVIEW_SPEC_VERSION".."1"
+        "KHR_MULTIVIEW_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "KHX_MULTIVIEW_EXTENSION_NAME".."VK_KHX_multiview"
+        "KHR_MULTIVIEW_EXTENSION_NAME".."VK_KHR_multiview"
     )
 
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX".."1000053000",
-        "STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHX".."1000053001",
-        "STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX".."1000053002"
+        "STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR".."1000053000",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR".."1000053001",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR".."1000053002"
     )
 
     EnumConstant(
         "Extends {@code VkDependencyFlagBits}.",
 
-        "DEPENDENCY_VIEW_LOCAL_BIT_KHX".enum(0x00000002)
+        "DEPENDENCY_VIEW_LOCAL_BIT_KHR".enum(0x00000002)
     )
 }
