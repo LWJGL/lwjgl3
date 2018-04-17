@@ -202,16 +202,16 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo") {
         "preferredLargeHeapBlockSize",
         """
         preferred size of a single {@code VkDeviceMemory} block to be allocated from large heaps &gt; 1 GiB. Set to 0 to use default, which is currently 256
-        MiB.
+        MiB. Optional.
         """
     )
     nullable..VkAllocationCallbacks.const.p.member(
         "pAllocationCallbacks",
-        "custom CPU memory allocation callbacks. Optional, can be null. When specified, will also be used for all CPU-side memory allocations."
+        "custom CPU memory allocation callbacks. Optional, can be null. When specified, will also be used for all CPU-side memory allocations. Optional."
     )
     nullable..VmaDeviceMemoryCallbacks.const.p.member(
         "pDeviceMemoryCallbacks",
-        "informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional, can be null."
+        "informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional."
     )
     uint32_t.member(
         "frameInUseCount",
@@ -363,7 +363,7 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         """
         maximum number of blocks that can be allocated in this pool.
 
-        Optional. Set to 0 to use {@code SIZE_MA}X, which means no limit.
+        Optional. Set to 0 to use {@code SIZE_MAX}, which means no limit.
 
         Set to same value as {@code minBlockCount} to have fixed amount of memory allocated throuout whole lifetime of this pool.
         """

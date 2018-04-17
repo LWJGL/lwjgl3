@@ -51,9 +51,9 @@ vmaCreateAllocator(&allocatorInfo, &allocator);"""
 
         When you want to create a buffer or image:
         ${ol(
-            "Fill `VkBufferCreateInfo` / `VkImageCreateInfo` structure.",
-            "Fill VmaAllocationCreateInfo structure.",
-            "Call vmaCreateBuffer() / vmaCreateImage() to get `VkBuffer`/`VkImage` with memory already allocated and bound to it."
+            "Fill {@code VkBufferCreateInfo} / {@code VkImageCreateInfo} structure.",
+            "Fill {@code VmaAllocationCreateInfo} structure.",
+            "Call #CreateBuffer() / #CreateImage() to get {@code VkBuffer}/{@code VkImage} with memory already allocated and bound to it."
         )}
 
         ${code(
@@ -91,7 +91,7 @@ vmaDestroyAllocator(allocator);"""
             """,
             """
             If you already have a buffer or an image created, you want to allocate memory for it and then you will bind it yourself, you can use function
-            #AllocateMemoryForBuffer(), #AllocateMemoryForImage().
+            #AllocateMemoryForBuffer(), #AllocateMemoryForImage(). For binding you should use functions: #BindBufferMemory(), #BindImageMemory().
             """,
             """
             If you want to create a buffer or an image, allocate memory for it and bind them together, all in one call, you can use function #CreateBuffer(),
@@ -280,6 +280,35 @@ if((memFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == 0)
         inspect {@code allocInfo.memoryType}, call #GetMemoryTypeProperties(), and look for {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} flag in properties of
         that memory type.
 
+        ${code("""
+VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+bufCreateInfo.size = sizeof(ConstantBuffer);
+bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+
+VmaAllocationCreateInfo allocCreateInfo = {};
+allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+
+VkBuffer buf;
+VmaAllocation alloc;
+VmaAllocationInfo allocInfo;
+vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
+
+VkMemoryPropertyFlags memFlags;
+vmaGetMemoryTypeProperties(allocator, allocInfo.memoryType, &memFlags);
+if((memFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) == 0)
+{
+    // Allocation ended up in mappable memory. You can map it and access it directly.
+    void* mappedData;
+    vmaMapMemory(allocator, alloc, &mappedData);
+    memcpy(mappedData, &constantBufferData, sizeof(constantBufferData));
+    vmaUnmapMemory(allocator, alloc);
+}
+else
+{
+    // Allocation ended up in non-mappable memory.
+    // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
+}""")}
+
         You can even use #ALLOCATION_CREATE_MAPPED_BIT flag while creating allocations that are not necessarily {@code HOST_VISIBLE} (e.g. using
         #MEMORY_USAGE_GPU_ONLY). If the allocation ends up in memory type that is {@code HOST_VISIBL}E, it will be persistently mapped and you can use it
         directly. If not, the flag is just ignored. Example:
@@ -307,7 +336,7 @@ if(allocInfo.pUserData != nullptr)
 else
 {
     // Allocation ended up in non-mappable memory.
-    // You need to create CPU-side copy in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
+    // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
 }""")}
 
         <h3>Custom memory pools</h3>
@@ -365,34 +394,35 @@ vmaDestroyPool(allocator, pool);""")}
 
         <h4>Choosing memory type index</h4>
 
-        When creating a pool, you must explicitly specify memory type index. To find the one suitable for your buffers or images, you can use code similar to
-        the following:
+        When creating a pool, you must explicitly specify memory type index. To find the one suitable for your buffers or images, you can use helper functions
+        #FindMemoryTypeIndexForBufferInfo(), #FindMemoryTypeIndexForImageInfo(). You need to provide structures with example parameters of buffers or images
+        that you are going to create in that pool.
 
         ${codeBlock("""
-VkBufferCreateInfo dummyBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-dummyBufCreateInfo.size = 1024; // Whatever.
-dummyBufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; // Change if needed.
-
-VkBuffer dummyBuf;
-vkCreateBuffer(device, &dummyBufCreateInfo, nullptr, &dummyBuf);
-
-VkMemoryRequirements memReq;
-vkGetBufferMemoryRequirements(device, dummyBuf, &memReq);
+VkBufferCreateInfo exampleBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+exampleBufCreateInfo.size = 1024; // Whatever.
+exampleBufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; // Change if needed.
 
 VmaAllocationCreateInfo allocCreateInfo = {};
 allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY; // Change if needed.
 
 uint32_t memTypeIndex;
-vmaFindMemoryTypeIndex(allocator, memReq.memoryTypeBits, &allocCreateInfo, &memTypeIndex);
-
-vkDestroyBuffer(device, dummyBuf, nullptr);
+vmaFindMemoryTypeIndexForBufferInfo(allocator, &exampleBufCreateInfo, &allocCreateInfo, &memTypeIndex);
 
 VmaPoolCreateInfo poolCreateInfo = {};
 poolCreateInfo.memoryTypeIndex = memTypeIndex;
 // ...""")}
 
-        Dummy buffer is needed to query driver for {@code memReq.memoryTypeBits}. Memory is never allocated for this buffer. You should fill structures
-        {@code dummyBufCreateInfo} and {@code allocCreateInfo} with the same parameters as you are going to use for buffers created in your pool.
+        When creating buffers/images allocated in that pool, provide following parameters:
+
+        ${ul(
+            """
+            {@code VkBufferCreateInfo}: Prefer to pass same parameters as above. Otherwise you risk creating resources in a memory type that is not suitable
+            for them, which may result in undefined behavior. Using different {@code VK_BUFFER_USAGE_} flags may work, but you shouldn't create images in a
+            pool intended for buffers or the other way around.
+            """,
+            "##VmaAllocationCreateInfo: You don't need to pass same parameters. Fill only {@code pool} member. Other members are ignored anyway."
+        )}
 
         <h3>Defragmentation</h3>
 
@@ -417,9 +447,10 @@ poolCreateInfo.memoryTypeIndex = memTypeIndex;
         you with that by supporting a concept of "lost allocations".
 
         To create an allocation that can become lost, include #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT flag in ##VmaAllocationCreateInfo{@code ::flags}. Before
-        using a buffer or image bound to such allocation in every new frame, you need to query it if it's not lost. To check it: call #GetAllocationInfo() and
-        see if ##VmaAllocationInfo{@code ::deviceMemory} is not {@code VK_NULL_HANDLE}. If the allocation is lost, you should not use it or buffer/image bound
-        to it. You mustn't forget to destroy this allocation and this buffer/image.
+        using a buffer or image bound to such allocation in every new frame, you need to query it if it's not lost. To check it, call #TouchAllocation(). If
+        the allocation is lost, you should not use it or buffer/image bound to it. You mustn't forget to destroy this allocation and this buffer/image.
+        #GetAllocationInfo() can also be used for checking status of the allocation. Allocation is lost when returned ##VmaAllocationInfo{@code ::deviceMemory}
+        == {@code VK_NULL_HANDLE}.
 
         To create an allocation that can make some other allocations lost to make room for it, use #ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT flag. You will
         usually use both flags #ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT and #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT at the same time.
@@ -428,20 +459,20 @@ poolCreateInfo.memoryTypeIndex = memTypeIndex;
         #ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT flag quite slow. A new, more optimal algorithm and data structure to speed this up is planned for the
         future.
 
-        <b>When interleaving creation of new allocations with usage of existing ones, how do you make sure that an allocation won't become lost while it's used
+        <b>Q: When interleaving creation of new allocations with usage of existing ones, how do you make sure that an allocation won't become lost while it's used
         in the current frame?</b>
 
-        It is ensured because #GetAllocationInfo() not only returns allocation parameters and checks whether it's not lost, but when it's not, it also
-        atomically marks it as used in the current frame, which makes it impossible to become lost in that frame. It uses lockless algorithm, so it works fast
-        and doesn't involve locking any internal mutex.
+        It is ensured because #TouchAllocation() / #GetAllocationInfo() not only returns allocation status/parameters and checks whether it's not lost, but
+        when it's not, it also atomically marks it as used in the current frame, which makes it impossible to become lost in that frame. It uses lockless
+        algorithm, so it works fast and doesn't involve locking any internal mutex.
 
-        <b>What if my allocation may still be in use by the GPU when it's rendering a previous frame while I already submit new frame on the CPU?</b>
+        <b>Q: What if my allocation may still be in use by the GPU when it's rendering a previous frame while I already submit new frame on the CPU?</b>
 
-        You can make sure that allocations "touched" by #GetAllocationInfo() will not become lost for a number of additional frames back from the current one
-        by specifying this number as ##VmaAllocatorCreateInfo{@code ::frameInUseCount} (for default memory pool) and
+        You can make sure that allocations "touched" by #TouchAllocation() / #GetAllocationInfo() will not become lost for a number of additional frames back
+        from the current one by specifying this number as ##VmaAllocatorCreateInfo{@code ::frameInUseCount} (for default memory pool) and
         ##VmaPoolCreateInfo{@code ::frameInUseCount} (for custom pool).
 
-        <b>How do you inform the library when new frame starts?</b>
+        <b>Q: How do you inform the library when new frame starts?</b>
 
         You need to call function #SetCurrentFrameIndex().
 
@@ -463,9 +494,7 @@ void MyBuffer::EnsureBuffer()
     if(m_Buf != VK_NULL_HANDLE)
     {
         // Check if its allocation is not lost + mark it as used in current frame.
-        VmaAllocationInfo allocInfo;
-        vmaGetAllocationInfo(allocator, m_Alloc, &allocInfo);
-        if(allocInfo.deviceMemory != VK_NULL_HANDLE)
+        if(vmaTouchAllocation(allocator, m_Alloc))
         {
             // It's all OK - safe to use m_Buf.
             return;
@@ -491,19 +520,40 @@ void MyBuffer::EnsureBuffer()
         When using lost allocations, you may see some Vulkan validation layer warnings about overlapping regions of memory bound to different kinds of buffers
         and images. This is still valid as long as you implement proper handling of lost allocations (like in the example above) and don't use them.
 
-        The library uses following algorithm for allocation, in order:
-        ${ol(
-            "Try to find free range of memory in existing blocks.",
-            "If failed, try to create a new block of {@code VkDeviceMemor}y, with preferred block size.",
-            "If failed, try to create such block with {@code size/2} and {@code size/4}.",
-            """
-            If failed and #ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT flag was specified, try to find space in existing blocks, possilby making some other
-            allocations lost.
-            """,
-            "If failed, try to allocate separate {@code VkDeviceMemory} for this allocation, just like when you use #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.",
-            "If failed, choose other memory type that meets the requirements specified in ##VmaAllocationCreateInfo and go to point 1.",
-            "If failed, return {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}."
-        )}
+        You can create an allocation that is already in lost state from the beginning using function #CreateLostAllocation(). It may be useful if you need a
+        "dummy" allocation that is not null.
+
+        You can call function #MakePoolAllocationsLost() to set all eligible allocations in a specified custom pool to lost state. Allocations that have been
+        "touched" in current frame or ##VmaPoolCreateInfo{@code ::frameInUseCount} frames back cannot become lost.
+
+        <h3>Statistics</h3>
+
+        This library contains functions that return information about its internal state, especially the amount of memory allocated from Vulkan. Please keep in
+        mind that these functions need to traverse all internal data structures to gather these information, so they may be quite time-consuming. Don't call
+        them too often.
+
+        <h4>Numeric statistics</h4>
+
+        You can query for overall statistics of the allocator using function #CalculateStats(). Information are returned using structure ##VmaStats. It
+        contains ##VmaStatInfo - number of allocated blocks, number of allocations (occupied ranges in these blocks), number of unused (free) ranges in these
+        blocks, number of bytes used and unused (but still allocated from Vulkan) and other information. They are summed across memory heaps, memory types and
+        total for whole allocator.
+
+        You can query for statistics of a custom pool using function #GetPoolStats(). Information are returned using structure ##VmaPoolStats.
+
+        You can query for information about specific allocation using function #GetAllocationInfo(). It fill structure ##VmaAllocationInfo.
+
+        <h3>JSON dump</h3>
+
+        You can dump internal state of the allocator to a string in JSON format using function #BuildStatsString(). The result is guaranteed to be correct
+        JSON. It uses ANSI encoding. Any strings provided by user are copied as-is and properly escaped for JSON, so if they use UTF-8, ISO-8859-2 or any other
+        encoding, this JSON string can be treated as using this encoding. It must be freed using function #FreeStatsString().
+
+        The format of this JSON string is not part of official documentation of the library, but it will not change in backward-incompatible way without
+        increasing library major version number and appropriate mention in changelog.
+
+        The JSON string contains all the data that can be obtained using #CalculateStats(). It can also contain detailed map of allocated memory blocks and
+        their regions - free and occupied by allocations. This allows e.g. to visualize the memory or assess fragmentation.
 
         <h3>Allocation names and user data</h3>
 
@@ -573,6 +623,107 @@ printf("Image name: %s\n", imageName);""")}
 
         That string is also printed in JSON report created by #BuildStatsString().
 
+        <h3>Recommended usage patterns</h3>
+
+        <h4>Simple patterns</h4>
+
+        <h5>Render targets</h5>
+
+        <b>When:</b> Any resources that you frequently write and read on GPU, e.g. images used as color attachments (aka "render targets"), depth-stencil
+        attachments, images/buffers used as storage image/buffer (aka "Unordered Access View (UAV)").
+
+        <b>What to do:</b> Create them in video memory that is fastest to access from GPU using #MEMORY_USAGE_GPU_ONLY.
+
+        Consider using {@code VK_KHR_dedicated_allocation} extension and/or manually creating them as dedicated allocations using
+        #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT, especially if they are large or if you plan to destroy and recreate them e.g. when display resolution changes.
+        Prefer to create such resources first and all other GPU resources (like textures and vertex buffers) later.
+
+        <h5>Immutable resources</h5>
+
+        <b>When:</b> Any resources that you fill on CPU only once (aka "immutable") or infrequently and then read frequently on GPU, e.g. textures, vertex and
+        index buffers, constant buffers that don't change often.
+
+        <b>What to do:</b> Create them in video memory that is fastest to access from GPU using #MEMORY_USAGE_GPU_ONLY.
+
+        To initialize content of such resource, create a CPU-side (aka "staging") copy of it in system memory - #MEMORY_USAGE_CPU_ONLY, map it, fill it, and
+        submit a transfer from it to the GPU resource. You can keep the staging copy if you need it for another upload transfer in the future. If you don't,
+        you can destroy it or reuse this buffer for uploading different resource after the transfer finishes.
+
+        Prefer to create just buffers in system memory rather than images, even for uploading textures. Use {@code vkCmdCopyBufferToImage()}. Dont use images
+        with {@code VK_IMAGE_TILING_LINEA}R.
+
+        <h5>Dynamic resources</h5>
+
+        <b>When:</b> Any resources that change frequently (aka "dynamic"), e.g. every frame or every draw call, written on CPU, read on GPU.
+
+        <b>What to do:</b> Create them using #MEMORY_USAGE_CPU_TO_GPU. You can map it and write to it directly on CPU, as well as read from it on GPU.
+
+        This is a more complex situation. Different solutions are possible, and the best one depends on specific GPU type, but you can use this simple approach
+        for the start. Prefer to write to such resource sequentially (e.g. using {@code memcpy}). Don't perform random access or any reads from it, as it may
+        be very slow.
+
+        <h5>Readback</h5>
+
+        <b>When:</b> Resources that contain data written by GPU that you want to read back on CPU, e.g. results of some computations.
+
+        <b>What to do:</b> Create them using #MEMORY_USAGE_GPU_TO_CPU. You can write to them directly on GPU, as well as map and read them on CPU.
+
+        <h4>Advanced patterns</h4>
+
+        <h5>Detecting integrated graphics</h5>
+
+        You can support integrated graphics (like Intel HD Graphics, AMD APU) better by detecting it in Vulkan. To do it, call
+        {@code vkGetPhysicalDeviceProperties()}, inspect {@code VkPhysicalDeviceProperties::deviceType} and look for
+        {@code VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU}. When you find it, you can assume that memory is unified and all memory types are equally fast to access
+        from GPU, regardless of {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT}.
+
+        You can then sum up sizes of all available memory heaps and treat them as useful for your GPU resources, instead of only {@code DEVICE_LOCAL} ones. You
+        can also prefer to create your resources in memory types that are {@code HOST_VISIBLE} to map them directly instead of submitting explicit transfer
+        (see below).
+
+        <h5>Direct access versus transfer</h5>
+
+        For resources that you frequently write on CPU and read on GPU, many solutions are possible:
+
+        ${ol(
+            """
+            Create one copy in video memory using #MEMORY_USAGE_GPU_ONLY, second copy in system memory using #MEMORY_USAGE_CPU_ONLY and submit explicit tranfer
+            each time.
+            """,
+            "Create just single copy using #MEMORY_USAGE_CPU_TO_GPU, map it and fill it on CPU, read it directly on GPU.",
+            "Create just single copy using #MEMORY_USAGE_CPU_ONLY, map it and fill it on CPU, read it directly on GPU."
+        )}
+
+        Which solution is the most efficient depends on your resource and especially on the GPU. It is best to measure it and then make the decision. Some
+        general recommendations:
+
+        ${ul(
+            "On integrated graphics use (2) or (3) to avoid unnecesary time and memory overhead related to using a second copy.",
+            """
+            For small resources (e.g. constant buffers) use (2). Discrete AMD cards have special 256 MiB pool of video memory that is directly mappable. Even
+            if the resource ends up in system memory, its data may be cached on GPU after first fetch over PCIe bus.
+            """,
+            """
+            For larger resources (e.g. textures), decide between (1) and (2). You may want to differentiate NVIDIA and AMD, e.g. by looking for memory type
+            that is both {@code DEVICE_LOCAL} and {@code HOST_VISIBLE}. When you find it, use (2), otherwise use (1).
+            """
+        )}
+
+        Similarly, for resources that you frequently write on GPU and read on CPU, multiple solutions are possible:
+
+        ${ol(
+            """
+            Create one copy in video memory using #MEMORY_USAGE_GPU_ONLY, second copy in system memory using #MEMORY_USAGE_GPU_TO_CPU and submit explicit
+            transfer each time.
+            """,
+            "Create just single copy using #MEMORY_USAGE_GPU_TO_CPU, write to it directly on GPU, map it and read it on CPU."
+        )}
+
+        You should take some measurements to decide which option is faster in case of your specific resource.
+
+        If you don't want to specialize your code for specific types of GPUs, you can still make an simple optimization for cases when your resource ends up in
+        mappable memory to use it directly in this case instead of creating CPU-side staging copy. For details see <em>Finding out if memory is mappable</em>.
+
         <h3>Configuration</h3>
 
         <h4>Custom host memory allocator</h4>
@@ -634,10 +785,15 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             """<a href="http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5">VK_KHR_dedicated_allocation unofficial manual</a>"""
         )}
 
-        <h3>Thread safety</h3>
+        <h3>General considerations</h3>
+
+        <h4>Thread safety</h4>
 
         ${ul(
-            "The library has no global state, so separate {@code VmaAllocator} objects can be used independently.",
+            """
+            The library has no global state, so separate {@code VmaAllocator} objects can be used independently. There should be no need to create multiple
+            such objects though - one per {@code VkDevice} is enough.
+            """,
             """
             By default, all calls to functions that take {@code VmaAllocator} as first parameter are safe to call from multiple threads simultaneously because
             they are synchronized internally when needed.
@@ -652,7 +808,22 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             """
         )}
 
-        <h3>About the library</h3>
+        <h4>Allocation algorithm</h4>
+        
+        The library uses following algorithm for allocation, in order:
+        
+        ${ol(
+            "Try to find free range of memory in existing blocks.",
+            "If failed, try to create a new block of {@code VkDeviceMemor}y, with preferred block size.",
+            "If failed, try to create such block with size/2, size/4, size/8.",
+            """
+            If failed and #ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT flag was specified, try to find space in existing blocks, possilby making some other
+            allocations lost.
+            """,
+            "If failed, try to allocate separate {@code VkDeviceMemory} for this allocation, just like when you use #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.",
+            "If failed, choose other memory type that meets the requirements specified in ##VmaAllocationCreateInfo and go to point 1.",
+            "If failed, return {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}."
+        )}
 
         <h4>Features not supported</h4>
 
@@ -962,6 +1133,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
     VkResult(
         "FindMemoryTypeIndex",
         """
+        Helps to find {@code memoryTypeIndex}, given {@code memoryTypeBits} and ##VmaAllocationCreateInfo.
+
         This algorithm tries to find a memory type that:
         ${ul(
             "Is allowed by {@code memoryTypeBits}.",
@@ -984,6 +1157,50 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         requested features for the specific type of resource you want to use it for. Please check parameters of your resource, like image layout
         ({@code OPTIMAL} versus LINEAR) or mip level count.
         """
+    )
+
+    VkResult(
+        "FindMemoryTypeIndexForBufferInfo",
+        """
+        Helps to find {@code memoryTypeIndex}, given {@code VkBufferCreateInfo} and ##VmaAllocationCreateInfo.
+
+        It can be useful e.g. to determine value to be used as ##VmaPoolCreateInfo{@code ::memoryTypeIndex}. It internally creates a temporary, dummy buffer
+        that never has memory bound. It is just a convenience function, equivalent to calling:
+
+        ${ul(
+            "{@code vkCreateBuffer}",
+            "{@code vkGetBufferMemoryRequirements}",
+            "#FindMemoryTypeIndex()",
+            "{@code vkDestroyBuffer}"
+        )}
+        """,
+
+        VmaAllocator.IN("allocator", ""),
+        VkBufferCreateInfo.const.p.IN("pBufferCreateInfo", ""),
+        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        Check(1)..uint32_t.p.OUT("pMemoryTypeIndex", "")
+    )
+
+    VkResult(
+        "FindMemoryTypeIndexForImageInfo",
+        """
+        Helps to find {@code memoryTypeIndex}, given {@code VkImageCreateInfo} and ##VmaAllocationCreateInfo.
+
+        It can be useful e.g. to determine value to be used as ##VmaPoolCreateInfo{@code ::memoryTypeIndex}. It internally creates a temporary, dummy image
+        that never has memory bound. It is just a convenience function, equivalent to calling:
+
+        ${ul(
+            "{@code vkCreateImage}",
+            "{@code vkGetImageMemoryRequirements}",
+            "#FindMemoryTypeIndex()",
+            "{@code vkDestroyImage}"
+        )}
+        """,
+
+        VmaAllocator.IN("allocator", ""),
+        VkImageCreateInfo.const.p.IN("pImageCreateInfo", ""),
+        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        Check(1)..uint32_t.p.OUT("pMemoryTypeIndex", "")
     )
 
     VkResult(
@@ -1086,11 +1303,47 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
     void(
         "GetAllocationInfo",
-        "Returns current information about specified allocation.",
+        """
+        Returns current information about specified allocation and atomically marks it as used in current frame.
+
+        Current parameters of given allocation are returned in {@code pAllocationInfo}.
+
+        This function also atomically "touches" allocation - marks it as used in current frame, just like #TouchAllocation(). If the allocation is in lost
+        state, {@code pAllocationInfo->deviceMemory == VK_NULL_HANDLE}.
+
+        Although this function uses atomics and doesn't lock any mutex, so it should be quite efficient, you can avoid calling it too often.
+
+        ${ul(
+            """
+            You can retrieve same ##VmaAllocationInfo structure while creating your resource, from function #CreateBuffer(), #CreateImage(). You can remember
+            it if you are sure parameters don't change (e.g. due to defragmentation or allocation becoming lost).
+            """,
+            "If you just want to check if allocation is not lost, #TouchAllocation() will work faster."
+        )}
+        """,
 
         VmaAllocator.IN("allocator", ""),
         VmaAllocation.IN("allocation", ""),
         VmaAllocationInfo.p.OUT("pAllocationInfo", "")
+    )
+
+    VkBool32(
+        "TouchAllocation",
+        """
+        Returns {@code VK_TRUE} if allocation is not lost and atomically marks it as used in current frame.
+
+        If the allocation has been created with #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT flag, this function returns {@code VK_TRUE} if it's not in lost state,
+        so it can still be used. It then also atomically "touches" the allocation - marks it as used in current frame, so that you can be sure it won't become
+        lost in current frame or next {@code frameInUseCount} frames.
+
+        If the allocation is in lost state, the function returns {@code VK_FALSE}. Memory of such allocation, as well as buffer or image bound to it, should
+        not be used. Lost allocation and the buffer/image still need to be destroyed.
+
+        If the allocation has been created without #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT flag, this function always returns {@code VK_TRUE}.
+        """,
+
+        VmaAllocator.IN("allocator", ""),
+        VmaAllocation.IN("allocation", "")
     )
 
     void(
@@ -1264,6 +1517,42 @@ for(size_t i = 0; i < allocations.size(); ++i)
         {@code VK_SUCCESS} if completed, {@code VK_INCOMPLETE} if succeeded but didn't make all possible optimizations because limits specified in
         {@code pDefragmentationInfo} have been reached, negative error code in case of error.
         """
+    )
+
+    VkResult(
+        "BindBufferMemory",
+        """
+        Binds buffer to allocation.
+
+        Binds specified buffer to region of memory represented by specified allocation. Gets {@code VkDeviceMemory} handle and offset from the allocation. If
+        you want to create a buffer, allocate memory for it and bind them together separately, you should use this function for binding instead of standard
+        {@code vkBindBufferMemory()}, because it ensures proper synchronization so that when a {@code VkDeviceMemory} object is used by multiple allocations,
+        calls to {@code vkBind*Memory()} or {@code vkMapMemory()} won't happen from multiple threads simultaneously (which is illegal in Vulkan).
+
+        It is recommended to use function #CreateBuffer() instead of this one.
+        """,
+
+        VmaAllocator.IN("allocator", ""),
+        VmaAllocation.IN("allocation", ""),
+        VkBuffer.IN("buffer", "")
+    )
+
+    VkResult(
+        "BindImageMemory",
+        """
+        Binds image to allocation.
+
+        Binds specified image to region of memory represented by specified allocation. Gets {@code VkDeviceMemory} handle and offset from the allocation. If
+        you want to create an image, allocate memory for it and bind them together separately, you should use this function for binding instead of standard
+        {@code vkBindImageMemory()}, because it ensures proper synchronization so that when a {@code VkDeviceMemory} object is used by multiple allocations,
+        calls to {@code vkBind*Memory()} or {@code vkMapMemory()} won't happen from multiple threads simultaneously (which is illegal in Vulkan).
+
+        It is recommended to use function vmaCreateImage() instead of this one.
+        """,
+
+        VmaAllocator.IN("allocator", ""),
+        VmaAllocation.IN("allocation", ""),
+        VkImage.IN("image", "")
     )
 
     VkResult(
