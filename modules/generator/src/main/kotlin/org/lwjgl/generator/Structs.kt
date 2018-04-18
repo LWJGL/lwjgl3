@@ -535,6 +535,12 @@ $indentation}"""
     }
 
     override fun PrintWriter.generateJava() {
+        if (alias != null) {
+            usageInput = usageInput or alias.usageInput
+            usageOutput = usageOutput or alias.usageOutput
+            usageResultPointer = usageResultPointer or alias.usageResultPointer
+        }
+
         val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
         validate(mallocable)
 
