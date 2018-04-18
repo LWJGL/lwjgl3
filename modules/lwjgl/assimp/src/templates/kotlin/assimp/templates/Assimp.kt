@@ -969,6 +969,19 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "AI_CONFIG_IMPORT_COLLADA_IGNORE_UP_DIRECTION".."IMPORT_COLLADA_IGNORE_UP_DIRECTION"
     ).noPrefix()
 
+    StringConstant(
+        """
+        Specifies whether the Collada loader should use Collada names as node names.
+
+        If this property is set to true, the Collada names will be used as the node name. The default is to use the id tag (resp. sid tag, if no id tag is
+        present) instead.
+
+        Property type: Bool. Default value: false.
+        """,
+
+        "AI_CONFIG_IMPORT_COLLADA_USE_COLLADA_NAMES".."IMPORT_COLLADA_USE_COLLADA_NAMES"
+    ).noPrefix()
+
     // ---------- All the Export defines ------------
 
     StringConstant(
@@ -2273,11 +2286,13 @@ aiAttachLogStream(&c);""")}
         "Enum used to distinguish data types.",
 
         "AI_BOOL".enum("", "0"),
-        "AI_INT".enum,
+        "AI_INT32".enum,
         "AI_UINT64".enum,
         "AI_FLOAT".enum,
+        "AI_DOUBLE".enum,
         "AI_AISTRING".enum,
-        "AI_AIVECTOR3D".enum
+        "AI_AIVECTOR3D".enum,
+        "AI_META_MAX".enum
     ).noPrefix()
 
     // postprocess.h
@@ -2700,9 +2715,11 @@ x1""")}
             """
             This step will perform a global scale of the model.
 
-            Some importers are providing a mechanism to define a scaling unit for the model. This post processing step can be used to do so.
+            Some importers are providing a mechanism to define a scaling unit for the model. This post processing step can be used to do so. You need to get
+            the global scaling from your importer settings like in FBX. Use the flag {@code AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY} from the global property table
+            to configure this.
 
-            Use #AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY to control this.
+            Use #AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY to setup the global scaing factor.
             """,
             0x8000000
         ),
