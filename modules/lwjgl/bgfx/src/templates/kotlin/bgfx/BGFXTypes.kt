@@ -49,7 +49,7 @@ val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
 val bgfx_view_id_t = typedef(uint16_t, "bgfx_view_id_t")
 
-val bgfx_encoder = "struct bgfx_encoder".opaque
+val bgfx_encoder_s = "struct bgfx_encoder_s".opaque
 
 /*
 #define BGFX_HANDLE_T(_name) \
@@ -170,6 +170,9 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     uint16_t.member("numUniforms", "number of used uniforms")
     uint16_t.member("numVertexBuffers", "number of used vertex buffers")
     uint16_t.member("numVertexDecls", "number of used vertex declarations")
+
+    int64_t.member("textureMemoryUsed", "")
+    int64_t.member("rtMemoryUsed", "")
 
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
     int64_t.member("gpuMemoryUsed", "amount of GPU memory used by the application")
@@ -542,6 +545,38 @@ val bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInterface", n
         "Custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."
 
     bgfx_allocator_vtbl_t.const.p.member("vtbl", "the allocator virtual table")
+}
+
+val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx_resolution_t") {
+    documentation = "Backbuffer resolution and reset parameters."
+
+    uint32_t.member("width", "backbuffer width")
+    uint32_t.member("height", "backbuffer height")
+    uint32_t.member("flags", "reset parameters")
+}
+
+val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t")  {
+    uint16_t.member("maxEncoders", "maximum number of encoder threads")
+}
+
+val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t") {
+    documentation = "Initialization parameters used by #init()."
+
+    bgfx_renderer_type_t.member(
+        "type",
+        "select rendering backend. When set to #RENDERER_TYPE_COUNT a default rendering backend will be selected appropriate to the platform."
+    ).links("RENDERER_TYPE_\\w+")
+    uint16_t.member("vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device.").links("PCI_ID_\\w+")
+    uint16_t.member("deviceId", "device id. If set to 0 it will select first device, or device with matching id.")
+
+    bgfx_resolution_t.member("resolution", "backbuffer resolution and reset parameters")
+    bgfx_init_limits_t.member("limits", "")
+
+    nullable..bgfx_callback_interface_t.p.member("callback", "provide application specific callback interface")
+    nullable..bgfx_allocator_interface_t.p.member(
+        "allocator",
+        "custom allocator. When a custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes	custom allocator is thread safe."
+    )
 }
 
 // Platform API

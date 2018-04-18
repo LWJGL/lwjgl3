@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."63"
+        "API_VERSION".."66"
     )
 
     ShortConstant(
@@ -932,24 +932,20 @@ RGBA16S
         bgfx_renderer_type_t.IN("_type", "the renderer type", RendererType)
     )
 
+    void(
+        "init_ctor",
+        "Updates the specified initialization parameters with default values.",
+
+        bgfx_init_t.p.OUT("_init", "initialization parameters")
+    )
+
     bool(
         "init",
         "Initializes bgfx library.",
 
-        bgfx_renderer_type_t.IN(
-            "_type",
-            "select rendering backend. When set to #RENDERER_TYPE_COUNT, a default rendering backend will be selected appropriate to the platform.",
-            RendererType
-        ),
-        uint16_t.IN("_vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device."),
-        MapToInt..uint16_t.IN("_deviceId", "device id. If set to 0 it will select first device, or device with matching id."),
-        nullable..bgfx_callback_interface_t.p.IN("_callback", "provide application specific callback interface"),
-        nullable..bgfx_allocator_interface_t.p.IN(
-            "_allocator",
-            "custom allocator. When custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes custom allocator is thread safe."
-        ),
+        bgfx_init_t.const.p.IN("_init", "initialization parameters"),
 
-        returnDoc = "`true` if initialization was successful"
+        returnDoc = "true if initialization was successful"
     )
 
     void(
@@ -970,7 +966,7 @@ RGBA16S
         uint32_t.IN("_flags", "reset flags", ResetFlags, LinkMode.BITFIELD)
     )
 
-    bgfx_encoder.p(
+    bgfx_encoder_s.p(
         "begin",
         "Begin submitting draw calls from thread.",
 
@@ -981,7 +977,7 @@ RGBA16S
         "end",
         "End submitting draw calls from thread.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder")
+        bgfx_encoder_s.p.IN("_encoder", "the encoder")
     )
 
     uint32_t(
@@ -2301,7 +2297,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_marker",
         "Sets debug marker.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         charASCII.const.p.IN("_marker", "debug marker")
     )
 
@@ -2326,7 +2322,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         )}
         """,
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         uint64_t.IN("_state", "state flags", StateFlags, LinkMode.BITFIELD),
         uint32_t.IN("_rgba", "blend factor used by #STATE_BLEND_FACTOR and #STATE_BLEND_INV_FACTOR blend modes")
     )
@@ -2335,7 +2331,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_condition",
         "Sets condition for rendering.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_occlusion_query_handle_t.IN("_handle", "occlusion query handle"),
         bool.IN("_visible", "render if occlusion query is visible")
     )
@@ -2344,7 +2340,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_stencil",
         "Sets stencil test state.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         uint32_t.IN("_fstencil", "front stencil state", StencilFlags, LinkMode.BITFIELD),
         uint32_t.IN(
             "_bstencil",
@@ -2357,7 +2353,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_scissor",
         "Sets scissor for draw primitive. To scissor for all primitives in view see #set_view_scissor().",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint16_t.IN("_x", "position x from the left side of the window"),
         MapToInt..uint16_t.IN("_y", "position y from the top side of the window"),
         MapToInt..uint16_t.IN("_width", "width of scissor region"),
@@ -2370,7 +2366,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_scissor_cached",
         "Sets scissor from cache for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint16_t.IN("_cache", "index in scissor cache. Pass {@code UINT16_MAX} to have primitive use view scissor instead.")
     )
 
@@ -2378,7 +2374,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_transform",
         "Sets model matrix for draw primitive. If it is not called, the model will be rendered with identity model matrix.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MultiType(
             PointerMapping.DATA_FLOAT
         )..void.const.p.IN("_mtx", "pointer to first matrix in array"),
@@ -2395,7 +2391,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         Pointer returned can be modifed until #frame() is called.
         """,
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_transform_t.p.IN("_transform", "pointer to ##BGFXTransform structure"),
         MapToInt..uint16_t.IN("_num", "number of matrices"),
 
@@ -2406,7 +2402,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_transform_cached",
         "Sets model matrix from matrix cache for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         uint32_t.IN("_cache", "index in matrix cache"),
         MapToInt..uint16_t.IN("_num", "number of matrices from cache")
     )
@@ -2415,7 +2411,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_uniform",
         "Sets shader uniform parameter for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_uniform_handle_t.IN("_handle", "uniform"),
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -2431,7 +2427,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_index_buffer",
         "Sets index buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_index_buffer_handle_t.IN("_handle", "index buffer"),
         uint32_t.IN("_firstIndex", "first index to render"),
         uint32_t.IN("_numIndices", "number of indices to render")
@@ -2441,7 +2437,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_dynamic_index_buffer",
         "Sets index buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer"),
         uint32_t.IN("_firstIndex", "first index to render"),
         uint32_t.IN("_numIndices", "number of indices to render")
@@ -2451,7 +2447,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_transient_index_buffer",
         "Sets index buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_transient_index_buffer_t.const.p.IN("_tib", "transient index buffer"),
         uint32_t.IN("_firstIndex", "first index to render"),
         uint32_t.IN("_numIndices", "number of indices to render")
@@ -2461,7 +2457,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stream", "vertex stream"),
         bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
@@ -2472,7 +2468,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_dynamic_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stream", "vertex stream"),
         bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
@@ -2483,7 +2479,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_transient_vertex_buffer",
         "Sets vertex buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stream", "vertex stream"),
         bgfx_transient_vertex_buffer_t.const.p.IN("_tvb", "transient vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
@@ -2494,7 +2490,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_instance_data_buffer",
         "Sets instance data buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_instance_data_buffer_t.const.p.IN("_idb", "transient instance data buffer"),
         uint32_t.IN("_start", "first instance data"),
         uint32_t.IN("_num", "number of data instances")
@@ -2504,7 +2500,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_instance_data_from_vertex_buffer",
         "Set instance data buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
         uint32_t.IN("_start", "first instance data"),
         uint32_t.IN("_num", "number of data instances")
@@ -2514,7 +2510,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_instance_data_from_dynamic_vertex_buffer",
         "Set instance data buffer for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
         uint32_t.IN("_start", "first instance data"),
         uint32_t.IN("_num", "number of data instances")
@@ -2524,7 +2520,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_texture",
         "Sets texture stage for draw primitive.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "texture unit"),
         bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
@@ -2539,7 +2535,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         These empty draw calls will sort before ordinary draw calls.
         """,
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id")
     )
 
@@ -2547,7 +2543,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_submit",
         "Submits primitive for rendering.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "program"),
         int32_t.IN("_depth", "depth for sorting"),
@@ -2558,7 +2554,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_submit_occlusion_query",
         "Submits primitive with occlusion query for rendering.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_program", "program"),
         bgfx_occlusion_query_handle_t.IN("_occlusionQuery", "occlusion query"),
@@ -2570,7 +2566,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_submit_indirect",
         "Submits primitive for rendering with index and instance data info from indirect buffer.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "program"),
         bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
@@ -2584,7 +2580,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_image",
         "Sets compute image from texture.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "texture unit"),
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
         MapToInt..uint8_t.IN("_mip", "mip level"),
@@ -2596,7 +2592,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_compute_index_buffer",
         "Sets compute index buffer.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "compute stage"),
         bgfx_index_buffer_handle_t.IN("_handle", "index buffer handle"),
         bgfx_access_t.IN("_access", "buffer access", Access)
@@ -2606,7 +2602,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_compute_vertex_buffer",
         "Sets compute vertex buffer.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "compute stage"),
         bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer handle"),
         bgfx_access_t.IN("_access", "buffer access", Access)
@@ -2616,7 +2612,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_compute_dynamic_index_buffer",
         "Sets compute dynamic index buffer.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "compute stage"),
         bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer handle"),
         bgfx_access_t.IN("_access", "buffer access", Access)
@@ -2626,7 +2622,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_compute_dynamic_vertex_buffer",
         "Sets compute dynamic vertex buffer.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "compute stage"),
         bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer handle"),
         bgfx_access_t.IN("_access", "buffer access", Access)
@@ -2636,7 +2632,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_set_compute_indirect_buffer",
         "Sets compute indirect buffer.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..uint8_t.IN("_stage", "compute stage"),
         bgfx_indirect_buffer_handle_t.IN("_handle", "indirect buffer handle"),
         bgfx_access_t.IN("_access", "buffer access", Access)
@@ -2646,7 +2642,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_dispatch",
         "Dispatches compute.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "compute program"),
         uint32_t.IN("_numX", "number of groups X"),
@@ -2659,7 +2655,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_dispatch_indirect",
         "Dispatches compute indirect.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "compute program"),
         bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
@@ -2672,7 +2668,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         "encoder_discard",
         "Discards all previously set state for draw or compute call.",
 
-        bgfx_encoder.p.IN("_encoder", "the encoder")
+        bgfx_encoder_s.p.IN("_encoder", "the encoder")
     )
 
     void(
@@ -2683,7 +2679,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         Destination texture must be created with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
         """,
 
-        bgfx_encoder.p.IN("_encoder", "the encoder"),
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_texture_handle_t.IN("_dst", "destination texture handle"),
         MapToInt..uint8_t.IN("_dstMip", "destination texture mip level"),
