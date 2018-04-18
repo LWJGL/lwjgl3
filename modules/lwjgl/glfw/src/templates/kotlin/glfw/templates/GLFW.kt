@@ -3028,7 +3028,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         The Guide button may not be available for input as it is often hooked by the system or the Steam client.
 
-        Not all devices have all the buttons or axes provided by ##GLFWGamepadState. Unavailable buttons and axes will always report #RELEASE and 1.0
+        Not all devices have all the buttons or axes provided by ##GLFWGamepadState. Unavailable buttons and axes will always report #RELEASE and 0.0
         respectively.
         """,
 
