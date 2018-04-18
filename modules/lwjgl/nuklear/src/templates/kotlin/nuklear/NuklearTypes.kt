@@ -177,10 +177,10 @@ val nk_list_view = struct(Module.NUKLEAR, "NkListView", nativeName = "struct nk_
     int.member("end", "")
     int.member("count", "")
 
-    int.member("total_height", "").public = false
-    struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context").p.member("ctx", "").public = false
-    nk_uint.p.member("scroll_pointer", "").public = false
-    nk_uint.member("scroll_value", "").public = false
+    int.member("total_height", "").private()
+    struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context").p.member("ctx", "").private()
+    nk_uint.p.member("scroll_pointer", "").private()
+    nk_uint.member("scroll_value", "").private()
 }
 
 // MEMORY BUFFER
@@ -1323,27 +1323,27 @@ val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_con
 /* private:
     should only be accessed if you
     know what you are doing */
-    nk_draw_list.member("draw_list", "").public = false
-    nk_handle.member("userdata", "").public = false
+    nk_draw_list.member("draw_list", "").private()
+    nk_handle.member("userdata", "").private()
 
     /* text editor objects are quite big because of an internal
      * undo/redo stack. Therefore does not make sense to have one for
      * each window for temporary use cases, so I only provide *one* instance
      * for all windows. This works because the content is cleared anyway */
-    nk_text_edit.member("text_edit", "").public = false
-    nk_command_buffer.member("overlay", "").public = false
+    nk_text_edit.member("text_edit", "").private()
+    nk_command_buffer.member("overlay", "").private()
 
     /* windows */
-    int.member("build", "").public = false
-    intb.member("use_pool", "").public = false
-    nk_pool.member("pool", "").public = false
-    (nullable..nk_window.p.member("begin", "")).public = false
-    (nullable..nk_window.p.member("end", "")).public = false
-    (nullable..nk_window.p.member("active", "")).public = false
-    (nullable..nk_window.p.member("current", "")).public = false
-    (nullable.."struct nk_page_element".opaque.p.member("freelist", "")).public = false
-    unsigned_int.member("count", "").public = false
-    unsigned_int.member("seq", "").public = false
+    int.member("build", "").private()
+    intb.member("use_pool", "").private()
+    nk_pool.member("pool", "").private()
+    (nullable..nk_window.p.member("begin", "")).private()
+    (nullable..nk_window.p.member("end", "")).private()
+    (nullable..nk_window.p.member("active", "")).private()
+    (nullable..nk_window.p.member("current", "")).private()
+    (nullable.."struct nk_page_element".opaque.p.member("freelist", "")).private()
+    unsigned_int.member("count", "").private()
+    unsigned_int.member("seq", "").private()
 }
 
 val nk_value_getter = Module.NUKLEAR.callback {

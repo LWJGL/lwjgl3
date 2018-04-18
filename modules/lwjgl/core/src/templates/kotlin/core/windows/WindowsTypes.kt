@@ -324,7 +324,7 @@ val MONITORINFOEX = struct(Module.CORE_WINDOWS, "MONITORINFOEX", mutable = false
         Set this member to MONITORINFOEX#SIZEOF before calling the #GetMonitorInfo() function. Doing so lets the function determine the type of structure you
         are passing to it.
         """
-    ).mutable = true
+    ).mutable()
     RECT.member(
         "rcMonitor",
         """
@@ -370,7 +370,7 @@ val DEVMODE = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
         the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
         system, use #DM_SPECVERSION.
         """
-    ).mutable = true
+    ).mutable()
     WORD.member("dmDriverVersion", "the driver version number assigned by the driver developer")
     WORD.member(
         "dmSize",
@@ -378,14 +378,14 @@ val DEVMODE = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
         specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's
         public members. Set this member to DEVMODE#SIZEOF to indicate the version of the {@code DEVMODE} structure being used.
         """
-    ).mutable = true
+    ).mutable()
     WORD.member(
         "dmDriverExtra",
         """
         contains the number of bytes of private driver-data that follow this structure. If a device driver does not use device-specific information, set this
         member to zero.
         """
-    ).mutable = true
+    ).mutable()
     DWORD.member(
         "dmFields",
         """
@@ -492,7 +492,7 @@ val DISPLAY_DEVICE = struct(Module.CORE_WINDOWS, "DISPLAY_DEVICE", mutable = fal
     DWORD.member(
         "cb",
         "size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling #EnumDisplayDevices()."
-    ).mutable = true
+    ).mutable()
     TCHAR.array("DeviceName", "an array of characters identifying the device name. This is either the adapter device or the monitor device.", size = 32)
     TCHAR.array(
         "DeviceString",

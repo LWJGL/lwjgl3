@@ -62,9 +62,18 @@ open class StructMember(
         "$parentMember.$name"
 
     /** hidden if false, contributes to layout only */
-    var public = true
+    internal var public = true
+    fun private(): StructMember {
+        public = false
+        return this
+    }
+
     /** mutable if true, even if the parent struct is not mutable */
-    var mutable = false
+    internal var mutable = false
+    fun mutable(): StructMember {
+        mutable = true
+        return this
+    }
 
     internal var links: String = ""
     internal var linkMode: LinkMode = LinkMode.SINGLE

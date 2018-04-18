@@ -4606,8 +4606,8 @@ val VkPhysicalDeviceSubgroupProperties = struct(Module.VULKAN, "VkPhysicalDevice
         If the ##VkPhysicalDeviceSubgroupProperties structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     uint32_t.member("subgroupSize", "the number of invocations in each subgroup. This will match any <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#interfaces-builtin-variables-sgs\">{@code SubgroupSize}</a> decorated variable used in any shader module created on this device. {@code subgroupSize} is at least 1 if any of the physical device&#8217;s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT.")
     VkShaderStageFlags.member("supportedStages", "a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that subgroup operations are supported in. {@code supportedStages} will have the #SHADER_STAGE_COMPUTE_BIT bit set if any of any of the physical device&#8217;s queues support #QUEUE_COMPUTE_BIT.")
     VkSubgroupFeatureFlags.member("supportedOperations", "a bitmask of {@code VkSubgroupFeatureFlagBits} specifying the sets of subgroup operations supported on this device. {@code supportedOperations} will have the #SUBGROUP_FEATURE_BASIC_BIT bit set if any of the physical device&#8217;s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT.")
@@ -4758,8 +4758,8 @@ val VkMemoryDedicatedRequirements = struct(Module.VULKAN, "VkMemoryDedicatedRequ
         </ul>
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkBool32.member("prefersDedicatedAllocation", "specifies that the implementation would prefer a dedicated allocation for this resource. The application is still free to suballocate the resource but it <b>may</b> get better performance if a dedicated allocation is used.")
     VkBool32.member("requiresDedicatedAllocation", "specifies that a dedicated allocation is required for this resource.")
 }
@@ -5063,8 +5063,8 @@ val VkPhysicalDeviceGroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceGro
         Structure specifying physical device group properties.
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     uint32_t.member("physicalDeviceCount", "the number of physical devices in the group.")
     VkPhysicalDevice.array("physicalDevices", "an array of physical device handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid.", size = "VK_MAX_DEVICE_GROUP_SIZE")
     VkBool32.member("subsetAllocation", "specifies whether logical devices created from the group support allocating device memory on a subset of devices, via the {@code deviceMask} member of the ##VkMemoryAllocateFlagsInfo. If this is #FALSE, then all device memory allocations are made across all physical devices in the group. If {@code physicalDeviceCount} is 1, then {@code subsetAllocation} <b>must</b> be #FALSE.")
@@ -5185,8 +5185,8 @@ val VkMemoryRequirements2 = struct(Module.VULKAN, "VkMemoryRequirements2", mutab
         ##VkMemoryRequirements, #GetBufferMemoryRequirements2(), #GetBufferMemoryRequirements2KHR(), #GetImageMemoryRequirements2(), #GetImageMemoryRequirements2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkMemoryRequirements.member("memoryRequirements", "a structure of type ##VkMemoryRequirements describing the memory requirements of the resource.")
 }
 
@@ -5205,8 +5205,8 @@ val VkSparseImageMemoryRequirements2 = struct(Module.VULKAN, "VkSparseImageMemor
         ##VkSparseImageMemoryRequirements, #GetImageSparseMemoryRequirements2(), #GetImageSparseMemoryRequirements2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkSparseImageMemoryRequirements.member("memoryRequirements", "a structure of type ##VkSparseImageMemoryRequirements describing the memory requirements of the sparse image.")
 }
 
@@ -5251,8 +5251,8 @@ val VkPhysicalDeviceProperties2 = struct(Module.VULKAN, "VkPhysicalDevicePropert
         ##VkPhysicalDeviceProperties, #GetPhysicalDeviceProperties2(), #GetPhysicalDeviceProperties2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkPhysicalDeviceProperties.member("properties", "a structure of type ##VkPhysicalDeviceProperties describing the properties of the physical device. This structure is written with the same values as if it were written by #GetPhysicalDeviceProperties().")
 }
 
@@ -5271,8 +5271,8 @@ val VkFormatProperties2 = struct(Module.VULKAN, "VkFormatProperties2", mutable =
         ##VkFormatProperties, #GetPhysicalDeviceFormatProperties2(), #GetPhysicalDeviceFormatProperties2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkFormatProperties.member("formatProperties", "a structure of type ##VkFormatProperties describing features supported by the requested format.")
 }
 
@@ -5299,8 +5299,8 @@ val VkImageFormatProperties2 = struct(Module.VULKAN, "VkImageFormatProperties2",
         ##VkImageFormatProperties, #GetPhysicalDeviceImageFormatProperties2(), #GetPhysicalDeviceImageFormatProperties2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkImageFormatProperties2 is used to allow the specification of additional capabilities to be returned from #GetPhysicalDeviceImageFormatProperties2().")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of ##VkImageFormatProperties2 is used to allow the specification of additional capabilities to be returned from #GetPhysicalDeviceImageFormatProperties2().").mutable()
     VkImageFormatProperties.member("imageFormatProperties", "an instance of a ##VkImageFormatProperties structure in which capabilities are returned.")
 }
 
@@ -5352,8 +5352,8 @@ val VkQueueFamilyProperties2 = struct(Module.VULKAN, "VkQueueFamilyProperties2",
         ##VkQueueFamilyProperties, #GetPhysicalDeviceQueueFamilyProperties2(), #GetPhysicalDeviceQueueFamilyProperties2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkQueueFamilyProperties.member("queueFamilyProperties", "a structure of type ##VkQueueFamilyProperties which is populated with the same values as in #GetPhysicalDeviceQueueFamilyProperties().")
 }
 
@@ -5372,8 +5372,8 @@ val VkPhysicalDeviceMemoryProperties2 = struct(Module.VULKAN, "VkPhysicalDeviceM
         ##VkPhysicalDeviceMemoryProperties, #GetPhysicalDeviceMemoryProperties2(), #GetPhysicalDeviceMemoryProperties2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkPhysicalDeviceMemoryProperties.member("memoryProperties", "a structure of type ##VkPhysicalDeviceMemoryProperties which is populated with the same values as in #GetPhysicalDeviceMemoryProperties().")
 }
 
@@ -5392,8 +5392,8 @@ val VkSparseImageFormatProperties2 = struct(Module.VULKAN, "VkSparseImageFormatP
         ##VkSparseImageFormatProperties, #GetPhysicalDeviceSparseImageFormatProperties2(), #GetPhysicalDeviceSparseImageFormatProperties2KHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkSparseImageFormatProperties.member("properties", "a structure of type ##VkSparseImageFormatProperties which is populated with the same values as in #GetPhysicalDeviceSparseImageFormatProperties().")
 }
 
@@ -5446,8 +5446,8 @@ val VkPhysicalDevicePointClippingProperties = struct(Module.VULKAN, "VkPhysicalD
         </ul>
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkPointClippingBehavior.member("pointClippingBehavior", "the point clipping behavior supported by the implementation, and is of type {@code VkPointClippingBehavior}.")
 }
 
@@ -5632,8 +5632,8 @@ val VkPhysicalDeviceMultiviewProperties = struct(Module.VULKAN, "VkPhysicalDevic
         If the ##VkPhysicalDeviceMultiviewProperties structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
         """
 
-    VkStructureType.member("sType", "")
-    nullable..opaque_p.member("pNext", "")
+    VkStructureType.member("sType", "").mutable()
+    nullable..opaque_p.member("pNext", "").mutable()
     uint32_t.member("maxMultiviewViewCount", "one greater than the maximum view index that <b>can</b> be used in a subpass.")
     uint32_t.member("maxMultiviewInstanceIndex", "the maximum valid value of instance index allowed to be generated by a drawing command recorded within a subpass of a multiview render pass instance.")
 }
@@ -5912,8 +5912,8 @@ val VkSamplerYcbcrConversionImageFormatProperties = struct(Module.VULKAN, "VkSam
         </ul>
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     uint32_t.member("combinedImageSamplerDescriptorCount", "the number of combined image sampler descriptors that the implementation uses to access the format.")
 }
 
@@ -6044,8 +6044,8 @@ val VkExternalImageFormatProperties = struct(Module.VULKAN, "VkExternalImageForm
         ##VkExternalMemoryProperties
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkExternalMemoryProperties.member("externalMemoryProperties", "an instance of the ##VkExternalMemoryProperties structure specifying various capabilities of the external handle type when used with the specified image creation parameters.")
 }
 
@@ -6090,8 +6090,8 @@ val VkExternalBufferProperties = struct(Module.VULKAN, "VkExternalBufferProperti
         ##VkExternalMemoryProperties, #GetPhysicalDeviceExternalBufferProperties(), #GetPhysicalDeviceExternalBufferPropertiesKHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure")
-    nullable..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure").mutable()
+    nullable..opaque_p.member("pNext", "NULL or a pointer to an extension-specific structure.").mutable()
     VkExternalMemoryProperties.member("externalMemoryProperties", "an instance of the ##VkExternalMemoryProperties structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.")
 }
 
@@ -6129,8 +6129,8 @@ val VkPhysicalDeviceIDProperties = struct(Module.VULKAN, "VkPhysicalDeviceIDProp
         </ul>
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     uint8_t.array("deviceUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the device.", size = "VK_UUID_SIZE")
     uint8_t.array("driverUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the driver build in use by the device.", size = "VK_UUID_SIZE")
     uint8_t.array("deviceLUID", "an array of size #LUID_SIZE, containing 8-bit values that represent a locally unique identifier for the device.", size = "VK_LUID_SIZE")
@@ -6239,8 +6239,8 @@ val VkExternalFenceProperties = struct(Module.VULKAN, "VkExternalFenceProperties
         #GetPhysicalDeviceExternalFenceProperties(), #GetPhysicalDeviceExternalFencePropertiesKHR()
         """
 
-    VkStructureType.member("sType", "")
-    nullable..opaque_p.member("pNext", "")
+    VkStructureType.member("sType", "").mutable()
+    nullable..opaque_p.member("pNext", "").mutable()
     VkExternalFenceHandleTypeFlags.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBits} indicating which types of imported handle {@code handleType} <b>can</b> be exported from.")
     VkExternalFenceHandleTypeFlags.member("compatibleHandleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBits} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a fence.")
     VkExternalFenceFeatureFlags.member("externalFenceFeatures", "a bitmask of {@code VkExternalFenceFeatureFlagBits} indicating the features of {@code handleType}.")
@@ -6329,8 +6329,8 @@ val VkExternalSemaphoreProperties = struct(Module.VULKAN, "VkExternalSemaphorePr
         #GetPhysicalDeviceExternalSemaphoreProperties(), #GetPhysicalDeviceExternalSemaphorePropertiesKHR()
         """
 
-    VkStructureType.member("sType", "")
-    nullable..opaque_p.member("pNext", "")
+    VkStructureType.member("sType", "").mutable()
+    nullable..opaque_p.member("pNext", "").mutable()
     VkExternalSemaphoreHandleTypeFlags.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying which types of imported handle {@code handleType} <b>can</b> be exported from.")
     VkExternalSemaphoreHandleTypeFlags.member("compatibleHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a semaphore.")
     VkExternalSemaphoreFeatureFlags.member("externalSemaphoreFeatures", "a bitmask of {@code VkExternalSemaphoreFeatureFlagBits} describing the features of {@code handleType}.")
@@ -6350,8 +6350,8 @@ val VkPhysicalDeviceMaintenance3Properties = struct(Module.VULKAN, "VkPhysicalDe
         </ul>
         """
 
-    VkStructureType.member("sType", "")
-    nullable..opaque_p.member("pNext", "")
+    VkStructureType.member("sType", "").mutable()
+    nullable..opaque_p.member("pNext", "").mutable()
     uint32_t.member("maxPerSetDescriptors", "a maximum number of descriptors (summed over all descriptor types) in a single descriptor set that is guaranteed to satisfy any implementation-dependent constraints on the size of a descriptor set itself. Applications <b>can</b> query whether a descriptor set that goes beyond this limit is supported using #GetDescriptorSetLayoutSupport().")
     VkDeviceSize.member("maxMemoryAllocationSize", "the maximum size of a memory allocation that <b>can</b> be created, even if there is more space available in the heap.")
 }
@@ -6374,8 +6374,8 @@ val VkDescriptorSetLayoutSupport = struct(Module.VULKAN, "VkDescriptorSetLayoutS
         #GetDescriptorSetLayoutSupport(), #GetDescriptorSetLayoutSupportKHR()
         """
 
-    VkStructureType.member("sType", "the type of this structure.")
-    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkBool32.member("supported", "specifies whether the descriptor set layout <b>can</b> be created.")
 }
 

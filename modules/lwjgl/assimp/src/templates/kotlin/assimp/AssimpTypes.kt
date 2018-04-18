@@ -909,7 +909,7 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
         """
     )
 
-    char.p.member("mPrivate", "Internal use only, do not touch!").public = false
+    char.p.member("mPrivate", "Internal use only, do not touch!").private()
 }
 
 val aiReturn = "aiReturn".enumType
