@@ -28,7 +28,7 @@ This build includes the following changes:
 - Vulkan: Updated to 1.0.68 (up from 1.0.65)
 - xxhash: Updated to 0.6.4 (up from 0.6.3)
 - Zstd: Updated to 1.3.4 (up from 1.3.2)
-- Yoga: Updated to 1.9.0 (up from 1.7.0)
+- Yoga: Updated to 1.7.1 (up from 1.7.0)
 
 #### Improvements
 

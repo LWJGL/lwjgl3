@@ -11,7 +11,9 @@ package org.lwjgl.util.yoga;
 import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
+import java.lang.ref.*;
 import java.util.*;
+import java.util.concurrent.atomic.*;
 
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.yoga.Yoga.*;
@@ -103,13 +105,13 @@ public class YogaNodeTest {
 
     @Test
     public void testMeasureFloatMax() {
-        YogaNode node = new YogaNode();
-
-        try (YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MAX_VALUE, Float.MAX_VALUE)) {
+        YogaNode node      = new YogaNode();
+        float    bigNumber = (float)10E5;
+        try (YGMeasureFunc measureFunc = getTestMeasureFunc(bigNumber, bigNumber)) {
             YGNodeSetMeasureFunc(node.node, measureFunc);
             node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
-            assertEquals(Float.MAX_VALUE, node.getLayoutWidth(), 0.01f);
-            assertEquals(Float.MAX_VALUE, node.getLayoutHeight(), 0.01f);
+            assertEquals(bigNumber, node.getLayoutWidth(), 0.01f);
+            assertEquals(bigNumber, node.getLayoutHeight(), 0.01f);
         }
     }
 
@@ -214,5 +216,153 @@ public class YogaNodeTest {
                 assertTrue(YogaConstants.isUndefined(node.getBorder(edge)));
             }
         }
+    }
+
+    @Test
+    public void testCloneNode() throws Exception {
+        YogaConfig config     = new YogaConfig();
+        YogaNode   root       = new YogaNode(config);
+        YogaNode   child      = new YogaNode(config);
+        YogaNode   grandChild = new YogaNode(config);
+        root.addChildAt(child, 0);
+        child.addChildAt(grandChild, 0);
+        child.setFlexDirection(YogaFlexDirection.ROW);
+
+        YogaNode clonedChild = child.clone();
+
+        assertNotSame(clonedChild, child);
+
+        assertEquals(YogaFlexDirection.ROW.value, child.getFlexDirection());
+        assertEquals(child.getFlexDirection(), clonedChild.getFlexDirection());
+
+        // Verify the cloning is shallow on the List of children
+        assertEquals(1, child.getChildCount());
+        assertEquals(child.getChildCount(), clonedChild.getChildCount());
+        assertEquals(child.getChildAt(0), clonedChild.getChildAt(0));
+
+        child.removeChildAt(0);
+        assertEquals(0, child.getChildCount());
+        assertEquals(1, clonedChild.getChildCount());
+    }
+
+    @Test
+    public void testCloneWithNewChildren() throws Exception {
+        YogaConfig config     = new YogaConfig();
+        YogaNode   root       = new YogaNode(config);
+        YogaNode   child      = new YogaNode(config);
+        YogaNode   grandChild = new YogaNode(config);
+        root.addChildAt(child, 0);
+        child.addChildAt(grandChild, 0);
+        child.setFlexDirection(YogaFlexDirection.ROW);
+
+        YogaNode clonedChild = child.cloneWithNewChildren();
+
+        assertNotSame(clonedChild, child);
+        assertEquals(YogaFlexDirection.ROW.value, clonedChild.getFlexDirection());
+        assertEquals(child.getFlexDirection(), clonedChild.getFlexDirection());
+        assertEquals(0, clonedChild.getChildCount());
+        assertEquals(1, child.getChildCount());
+    }
+
+    @Test
+    public void testAddSharedChildCloneWithNewChildren() throws Exception {
+        YogaConfig config     = new YogaConfig();
+        YogaNode   root       = new YogaNode(config);
+        YogaNode   child      = new YogaNode(config);
+        YogaNode   grandChild = new YogaNode(config);
+        root.addChildAt(child, 0);
+        child.addChildAt(grandChild, 0);
+        child.setFlexDirection(YogaFlexDirection.ROW);
+
+        YogaNode clonedChild = child.cloneWithNewChildren();
+
+        assertNotSame(clonedChild, child);
+        assertEquals(YogaFlexDirection.ROW.value, clonedChild.getFlexDirection());
+        assertEquals(child.getFlexDirection(), clonedChild.getFlexDirection());
+        assertEquals(0, clonedChild.getChildCount());
+        assertEquals(1, child.getChildCount());
+
+        clonedChild.addSharedChildAt(grandChild, 0);
+        assertEquals(1, clonedChild.getChildCount());
+        assertNull(grandChild.getOwner());
+    }
+
+    @Test
+    public void testCloneNodeListener() throws Exception {
+        AtomicBoolean onNodeClonedExecuted = new AtomicBoolean(false);
+        YogaConfig    config               = new YogaConfig();
+        config.setOnCloneNode((oldNode, owner, childIndex) -> {
+            onNodeClonedExecuted.set(true);
+            return YGNodeClone(oldNode);
+        });
+        YogaNode root = new YogaNode(config);
+        root.setWidth(100f);
+        root.setHeight(100f);
+        YogaNode child0 = new YogaNode(config);
+        root.addChildAt(child0, 0);
+        child0.setWidth(50f);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        // Force a clone to happen.
+        YogaNode root2 = root.clone();
+        root2.setWidth(200f);
+        root2.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+        assertTrue(onNodeClonedExecuted.get());
+        assertEquals(1, root2.getChildCount());
+        YogaNode clonedNode = root2.getChildAt(0);
+        assertNotSame(child0, clonedNode);
+        try (MemoryStack stack = stackPush()) {
+            YGValue v = YGValue.mallocStack(stack);
+
+            assertEquals(child0.getWidth(v).value(), clonedNode.getWidth(v).value());
+            assertEquals(50f, clonedNode.getWidth(v).value(), 0.01f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testOnNodeClonedLeak() throws Exception {
+        YogaConfig config = new YogaConfig();
+        config.setOnCloneNode((oldNode, owner, childIndex) -> YGNodeClone(oldNode));
+        config.setOnCloneNode(null);
+        WeakReference<Object> ref = new WeakReference<>(config);
+        // noinspection UnusedAssignment
+        config = null;
+        // try and free for the next 5 seconds, usually it works after the
+        // first GC attempt.
+        for (int i = 0; i < 50; i++) {
+            System.gc();
+            if (ref.get() == null) {
+                // free successfully
+                return;
+            }
+            Thread.sleep(100);
+        }
+        fail("YogaConfig leaked");
+    }
+
+    @Test
+    public void testFlagShouldDiffLayoutWithoutLegacyStretchBehaviour() throws Exception {
+        YogaConfig config = new YogaConfig();
+        config.setShouldDiffLayoutWithoutLegacyStretchBehaviour(true);
+        config.setUseLegacyStretchBehaviour(true);
+        YogaNode root = new YogaNode(config);
+        root.setWidth(500);
+        root.setHeight(500);
+        YogaNode root_child0 = new YogaNode(config);
+        root_child0.setAlignItems(YogaAlign.FLEX_START);
+        root.addChildAt(root_child0, 0);
+        YogaNode root_child0_child0 = new YogaNode(config);
+        root_child0_child0.setFlexGrow(1);
+        root_child0_child0.setFlexShrink(1);
+        root_child0.addChildAt(root_child0_child0, 0);
+        YogaNode root_child0_child0_child0 = new YogaNode(config);
+        root_child0_child0_child0.setFlexGrow(1);
+        root_child0_child0_child0.setFlexShrink(1);
+        root_child0_child0.addChildAt(root_child0_child0_child0, 0);
+        root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+        assertFalse(root.getDoesLegacyStretchFlagAffectsLayout());
     }
 }

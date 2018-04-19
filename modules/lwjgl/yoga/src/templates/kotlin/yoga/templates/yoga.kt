@@ -63,7 +63,7 @@ div {
     FloatConstant(
         "",
 
-        "Undefined".."Float.NaN"
+        "Undefined".."10e20f"
     )
 
     EnumConstant(
@@ -264,6 +264,19 @@ div {
     )
 
     void(
+        "NodeInsertSharedChild",
+        """
+        This function inserts the child {@code YGNodeRef} as a children of the node received by parameter and set the Owner of the child object to null. This
+        function is expected to be called when using Yoga in persistent mode in order to share a {@code YGNodeRef} object as a child of two different Yoga
+        trees. The child {@code YGNodeRef} is expected to be referenced from its original owner and from a clone of its original owner.
+        """,
+
+        node,
+        YGNodeRef.const.IN("child", ""),
+        uint32_t.IN("index", "")
+    )
+
+    void(
         "NodeRemoveChild",
         "",
 
@@ -287,7 +300,7 @@ div {
     )
 
     YGNodeRef(
-        "NodeGetParent",
+        "NodeGetOwner",
         "",
 
         node
@@ -301,13 +314,22 @@ div {
     )
 
     void(
+        "NodeSetChildren",
+        "",
+
+        YGNodeRef.const.IN("owner", ""),
+        YGNodeRef.const.p.IN("children", ""),
+        AutoSize("children")..uint32_t.IN("count", "")
+    )
+
+    void(
         "NodeCalculateLayout",
         "",
 
         node,
         float.IN("availableWidth", ""),
         float.IN("availableHeight", ""),
-        YGDirection.IN("parentDirection", "", "Direction\\w+")
+        YGDirection.IN("ownerDirection", "", "Direction\\w+")
     )
 
     void(
@@ -396,7 +418,13 @@ div {
             "",
 
             node,
-            type.IN(paramName, "")
+            type.IN(paramName, "").let {
+                if (type is CallbackType) {
+                    nullable..it
+                } else {
+                    it
+                }
+            }
         )
 
         type(
@@ -556,7 +584,6 @@ div {
     YG_NODE_STYLE_PROPERTY(YGWrap, "FlexWrap", "flexWrap")
     YG_NODE_STYLE_PROPERTY(YGOverflow, "Overflow", "overflow")
     YG_NODE_STYLE_PROPERTY(YGDisplay, "Display", "display")
-
     YG_NODE_STYLE_PROPERTY(float, "Flex", "flex")
     YG_NODE_STYLE_PROPERTY(float, "FlexGrow", "flexGrow")
     YG_NODE_STYLE_PROPERTY(float, "FlexShrink", "flexShrink")
@@ -601,6 +628,7 @@ div {
     YG_NODE_LAYOUT_PROPERTY(float, "Height")
     YG_NODE_LAYOUT_PROPERTY(YGDirection, "Direction")
     YG_NODE_LAYOUT_PROPERTY(bool, "HadOverflow")
+    YG_NODE_LAYOUT_PROPERTY(bool, "DidLegacyStretchFlagAffectLayout")
 
     YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Margin")
     YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Border")
@@ -611,7 +639,7 @@ div {
         "",
 
         YGConfigRef.const.IN("config", ""),
-        YGLogger.IN("logger", "")
+        nullable..YGLogger.IN("logger", "")
     )
 
     void(
@@ -690,6 +718,14 @@ div {
     )
 
     void(
+        "ConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour",
+        "",
+
+        YGConfigRef.const.IN("config", ""),
+        bool.IN("shouldDiffLayout", "")
+    )
+
+    void(
         "ConfigSetUseLegacyStretchBehaviour",
         """
         Yoga previously had an error where containers would take the maximum space possible instead of the minimum like they are supposed to. In practice this
@@ -734,11 +770,11 @@ div {
     )
 
     void(
-        "ConfigSetNodeClonedFunc",
+        "ConfigSetCloneNodeFunc",
         "",
 
         YGConfigRef.const.IN("config", ""),
-        YGNodeClonedFunc.IN("callback", "") // const function pointer in Yoga sources
+        nullable..YGCloneNodeFunc.IN("callback", "") // const function pointer in Yoga sources
     )
 
     YGConfigRef(

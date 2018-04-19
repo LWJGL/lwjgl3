@@ -4,6 +4,9 @@
  */
 package org.lwjgl.util.yoga;
 
+import javax.annotation.*;
+
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.yoga.Yoga.*;
 
 class YogaNode {
@@ -18,9 +21,67 @@ class YogaNode {
         node = YGNodeNewWithConfig(config.handle);
     }
 
+    private YogaNode(long node) {
+        this.node = node;
+    }
+
+    @Override
+    public YogaNode clone() {
+        return new YogaNode(YGNodeClone(this.node));
+    }
+
+    public YogaNode cloneWithNewChildren() {
+        YogaNode clone = new YogaNode(YGNodeClone(this.node));
+        YGNodeRemoveAllChildren(clone.node);
+        return clone;
+    }
+
     @Override
     protected void finalize() throws Throwable {
         YGNodeFree(node);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        YogaNode yogaNode = (YogaNode)o;
+        return node == yogaNode.node;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(node);
+    }
+
+    void addChildAt(YogaNode child, int index) {
+        YGNodeInsertChild(node, child.node, index);
+    }
+
+    public void addSharedChildAt(YogaNode child, int index) {
+        YGNodeInsertSharedChild(node, child.node, index);
+    }
+
+    public YogaNode getChildAt(int index) {
+        return new YogaNode(YGNodeGetChild(node, index));
+    }
+
+    public void removeChildAt(int index) {
+        YGNodeRemoveChild(node, YGNodeGetChild(node, index));
+    }
+
+    int getChildCount() {
+        return YGNodeGetChildCount(node);
+    }
+
+    @Nullable
+    public YogaNode getOwner() {
+        long owner = YGNodeGetOwner(node);
+        return owner == NULL ? null : new YogaNode(owner);
     }
 
     void setAlignContent(YogaAlign alignContent) {
@@ -127,10 +188,6 @@ class YogaNode {
         YGNodeStyleSetPositionPercent(node, edge.value, position);
     }
 
-    void addChildAt(YogaNode child, int index) {
-        YGNodeInsertChild(node, child.node, index);
-    }
-
     void setFlexDirection(YogaFlexDirection direction) {
         YGNodeStyleSetFlexDirection(node, direction.value);
     }
@@ -183,6 +240,14 @@ class YogaNode {
         return YGNodeLayoutGetHeight(node);
     }
 
+    YGValue getWidth(YGValue __result) {
+        return YGNodeStyleGetWidth(node, __result);
+    }
+
+    YGValue getHeight(YGValue __result) {
+        return YGNodeStyleGetHeight(node, __result);
+    }
+
     YGValue getMaxHeight(YGValue __result) {
         return YGNodeStyleGetMaxHeight(node, __result);
     }
@@ -221,6 +286,10 @@ class YogaNode {
 
     YGValue getPosition(YogaEdge edge, YGValue __result) {
         return YGNodeStyleGetPosition(node, edge.value, __result);
+    }
+
+    public boolean getDoesLegacyStretchFlagAffectsLayout() {
+        return YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(node);
     }
 
     static final class YogaConstants {

@@ -147,17 +147,16 @@ val YGLogger = Module.YOGA.callback {
     )
 }
 
-val YGNodeClonedFunc = Module.YOGA.callback {
-    void(
-        "YGNodeClonedFunc",
+val YGCloneNodeFunc = Module.YOGA.callback {
+    YGNodeRef(
+        "YGCloneNodeFunc",
         "",
 
         YGNodeRef.IN("oldNode", ""),
-        YGNodeRef.IN("newNode", ""),
-        YGNodeRef.IN("parent", ""),
+        YGNodeRef.IN("owner", ""),
         int.IN("childIndex", ""),
 
-        nativeType = "YGNodeClonedFunc"
+        nativeType = "YGCloneNodeFunc"
     )
 }
 
@@ -173,7 +172,12 @@ val YGCachedMeasurement = struct(Module.YOGA, "YGCachedMeasurement", mutable = f
     float.member("computedHeight", "")
 }
 
-val YG_MAX_CACHED_RESULT_COUNT = 16
+val YGFloatOptional = struct(Module.YOGA, "YGFloatOptional", mutable = false) {
+    float.member("value", "")
+    bool.member("isUndefined", "")
+}
+
+const val YG_MAX_CACHED_RESULT_COUNT = 16
 val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     float.array("positions", "", size = 4)
     float.array("dimensions", "", size = 2)
@@ -183,11 +187,11 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     YGDirection.member("direction", "")
 
     uint32_t.member("computedFlexBasisGeneration", "")
-    float.member("computedFlexBasis", "")
+    YGFloatOptional.member("computedFlexBasis", "")
     bool.member("hadOverflow", "")
 
     uint32_t.member("generationCount", "")
-    YGDirection.member("lastParentDirection", "")
+    YGDirection.member("lastOwnerDirection", "")
 
     uint32_t.member("nextCachedMeasurementsIndex", "")
     YGCachedMeasurement.array("cachedMeasurements", "", size = YG_MAX_CACHED_RESULT_COUNT)
@@ -210,9 +214,9 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGWrap.member("flexWrap", "")
     YGOverflow.member("overflow", "")
     YGDisplay.member("display", "")
-    float.member("flex", "")
-    float.member("flexGrow", "")
-    float.member("flexShrink", "")
+    YGFloatOptional.member("flex", "")
+    YGFloatOptional.member("flexGrow", "")
+    YGFloatOptional.member("flexShrink", "")
     YGValue.member("flexBasis", "")
     YGValue.array("margin", "", size = YGEdgeCount)
     YGValue.array("positions", "", size = YGEdgeCount)
@@ -223,7 +227,7 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGValue.array("maxDimensions", "", size = 2)
 
     // Yoga specific properties, not compatible with flexbox specification
-    float.member("aspectRatio", "")
+    YGFloatOptional.member("aspectRatio", "")
 }
 
 private val YGNodeListRef = "YGNodeListRef".handle
@@ -241,7 +245,7 @@ val YGNode = struct(Module.YOGA, "YGNode") {
     YGLayout.member("layout", "")
     uint32_t.member("lineIndex", "")
 
-    nullable..YGNodeRef.member("parent", "")
+    nullable..YGNodeRef.member("owner", "")
     nullable..YGNodeListRef.member("children", "")
     nullable.._YGNode.p.member("nextChild", "")
 
