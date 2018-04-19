@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014 - 2018, Syoyo Fujita
+Copyright (c) 2014 - 2018, Syoyo Fujita and many contributors.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -431,9 +431,9 @@ extern int LoadEXRFromMemory(float **out_rgba, int *width, int *height,
 #include <cstring>
 #include <sstream>
 
+#include <limits>
 #include <string>
 #include <vector>
-#include <limits>
 
 #if __cplusplus > 199711L
 // C++11
@@ -2908,9 +2908,8 @@ void *tinfl_decompress_mem_to_heap(const void *pSrc_buf, size_t src_buf_len,
     tinfl_status status = tinfl_decompress(
         &decomp, (const mz_uint8 *)pSrc_buf + src_buf_ofs, &src_buf_size,
         (mz_uint8 *)pBuf, pBuf ? (mz_uint8 *)pBuf + *pOut_len : NULL,
-        &dst_buf_size,
-        (flags & ~TINFL_FLAG_HAS_MORE_INPUT) |
-            TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF);
+        &dst_buf_size, (flags & ~TINFL_FLAG_HAS_MORE_INPUT) |
+                           TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF);
     if ((status < 0) || (status == TINFL_STATUS_NEEDS_MORE_INPUT)) {
       MZ_FREE(pBuf);
       *pOut_len = 0;
@@ -3557,10 +3556,9 @@ static int tdefl_flush_block(tdefl_compressor *d, int flush) {
   mz_uint saved_bit_buf, saved_bits_in;
   mz_uint8 *pSaved_output_buf;
   mz_bool comp_block_succeeded = MZ_FALSE;
-  int n,
-      use_raw_block =
-          ((d->m_flags & TDEFL_FORCE_ALL_RAW_BLOCKS) != 0) &&
-          (d->m_lookahead_pos - d->m_lz_code_buf_dict_pos) <= d->m_dict_size;
+  int n, use_raw_block =
+             ((d->m_flags & TDEFL_FORCE_ALL_RAW_BLOCKS) != 0) &&
+             (d->m_lookahead_pos - d->m_lz_code_buf_dict_pos) <= d->m_dict_size;
   mz_uint8 *pOutput_buf_start =
       ((d->m_pPut_buf_func == NULL) &&
        ((*d->m_pOut_buf_size - d->m_out_buf_ofs) >= TDEFL_OUT_BUF_SIZE))
@@ -3590,9 +3588,8 @@ static int tdefl_flush_block(tdefl_compressor *d, int flush) {
 
   if (!use_raw_block)
     comp_block_succeeded =
-        tdefl_compress_block(d,
-                             (d->m_flags & TDEFL_FORCE_ALL_STATIC_BLOCKS) ||
-                                 (d->m_total_lz_bytes < 48));
+        tdefl_compress_block(d, (d->m_flags & TDEFL_FORCE_ALL_STATIC_BLOCKS) ||
+                                    (d->m_total_lz_bytes < 48));
 
   // If the block gets expanded, forget the current contents of the output
   // buffer and send a raw block instead.
@@ -5237,10 +5234,9 @@ mz_bool mz_zip_reader_file_stat(mz_zip_archive *pZip, mz_uint file_index,
   n = MZ_READ_LE16(p + MZ_ZIP_CDH_COMMENT_LEN_OFS);
   n = MZ_MIN(n, MZ_ZIP_MAX_ARCHIVE_FILE_COMMENT_SIZE - 1);
   pStat->m_comment_size = n;
-  memcpy(pStat->m_comment,
-         p + MZ_ZIP_CENTRAL_DIR_HEADER_SIZE +
-             MZ_READ_LE16(p + MZ_ZIP_CDH_FILENAME_LEN_OFS) +
-             MZ_READ_LE16(p + MZ_ZIP_CDH_EXTRA_LEN_OFS),
+  memcpy(pStat->m_comment, p + MZ_ZIP_CENTRAL_DIR_HEADER_SIZE +
+                               MZ_READ_LE16(p + MZ_ZIP_CDH_FILENAME_LEN_OFS) +
+                               MZ_READ_LE16(p + MZ_ZIP_CDH_EXTRA_LEN_OFS),
          n);
   pStat->m_comment[n] = '\0';
 
@@ -7119,7 +7115,6 @@ static const char *ReadString(std::string *s, const char *ptr, size_t len) {
   return q + 1;  // skip '\0'
 }
 
-
 static bool ReadAttribute(std::string *name, std::string *type,
                           std::vector<unsigned char> *data, size_t *marker_size,
                           const char *marker, size_t size) {
@@ -7254,13 +7249,13 @@ static bool ReadChannelInfo(std::vector<ChannelInfo> &channels,
     }
     ChannelInfo info;
 
-    tinyexr_int64 data_len = static_cast<tinyexr_int64>(data.size()) - (p - reinterpret_cast<const char *>(data.data()));
+    tinyexr_int64 data_len = static_cast<tinyexr_int64>(data.size()) -
+                             (p - reinterpret_cast<const char *>(data.data()));
     if (data_len < 0) {
       return false;
     }
 
-    p = ReadString(
-        &info.name, p, size_t(data_len));
+    p = ReadString(&info.name, p, size_t(data_len));
     if ((p == NULL) && (info.name.empty())) {
       // Buffer overrun. Issue #51.
       return false;
@@ -9576,9 +9571,9 @@ static bool DecodePixelData(/* out */ unsigned char **out_images,
 
     unsigned long dstLen = static_cast<unsigned long>(outBuf.size());
     assert(dstLen > 0);
-    if (!tinyexr::DecompressZip(reinterpret_cast<unsigned char *>(&outBuf.at(0)),
-                           &dstLen, data_ptr,
-                           static_cast<unsigned long>(data_len))) {
+    if (!tinyexr::DecompressZip(
+            reinterpret_cast<unsigned char *>(&outBuf.at(0)), &dstLen, data_ptr,
+            static_cast<unsigned long>(data_len))) {
       return false;
     }
 
@@ -10478,7 +10473,7 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
                                 &channel_offset, num_channels,
                                 exr_header->channels);
 
-  bool invalid_data = false; // TODO(LTE): Use atomic lock for MT safety.
+  bool invalid_data = false;  // TODO(LTE): Use atomic lock for MT safety.
 
   if (exr_header->tiled) {
     size_t num_tiles = offsets.size();  // = # of blocks
@@ -10490,7 +10485,7 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
       // Allocate memory for each tile.
       exr_image->tiles[tile_idx].images = tinyexr::AllocateImage(
           num_channels, exr_header->channels, exr_header->requested_pixel_types,
-		  exr_header->tile_size_x, exr_header->tile_size_y);
+          exr_header->tile_size_x, exr_header->tile_size_y);
 
       // 16 byte: tile coordinates
       // 4 byte : data size
@@ -10566,7 +10561,6 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
       if (offsets[y_idx] + sizeof(int) * 2 > size) {
         invalid_data = true;
       } else {
-
         // 4 byte: scan line
         // 4 byte: data size
         // ~     : pixel data(uncompressed or compressed)
@@ -10584,17 +10578,15 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
         if (size_t(data_len) > data_size) {
           invalid_data = true;
         } else {
-
           int end_line_no = (std::min)(line_no + num_scanline_blocks,
                                        (exr_header->data_window[3] + 1));
 
           int num_lines = end_line_no - line_no;
-          //assert(num_lines > 0);
+          // assert(num_lines > 0);
 
           if (num_lines <= 0) {
             invalid_data = true;
           } else {
-
             // Move to data addr: 8 = 4 + 4;
             data_ptr += 8;
 
@@ -10605,14 +10597,15 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
               invalid_data = true;
             } else {
               if (!tinyexr::DecodePixelData(
-                  exr_image->images, exr_header->requested_pixel_types, data_ptr,
-                  static_cast<size_t>(data_len), exr_header->compression_type,
-                  exr_header->line_order, data_width, data_height, data_width, y,
-                  line_no, num_lines, static_cast<size_t>(pixel_data_size),
-                  static_cast<size_t>(exr_header->num_custom_attributes),
-                  exr_header->custom_attributes,
-                  static_cast<size_t>(exr_header->num_channels), exr_header->channels,
-                  channel_offset_list)) {
+                      exr_image->images, exr_header->requested_pixel_types,
+                      data_ptr, static_cast<size_t>(data_len),
+                      exr_header->compression_type, exr_header->line_order,
+                      data_width, data_height, data_width, y, line_no,
+                      num_lines, static_cast<size_t>(pixel_data_size),
+                      static_cast<size_t>(exr_header->num_custom_attributes),
+                      exr_header->custom_attributes,
+                      static_cast<size_t>(exr_header->num_channels),
+                      exr_header->channels, channel_offset_list)) {
                 invalid_data = true;
               }
             }
@@ -10715,6 +10708,7 @@ static int DecodeEXRImage(EXRImage *exr_image, const EXRHeader *exr_header,
     }
     return TINYEXR_ERROR_INVALID_DATA;
   }
+  data_height++;
 
   if ((data_width < 0) || (data_height < 0)) {
     if (err) {
@@ -10869,10 +10863,9 @@ int LoadEXR(float **out_rgba, int *width, int *height, const char *filename,
   if ((idxA == 0) && (idxR == -1) && (idxG == -1) && (idxB == -1)) {
     // Alpha channel only.
 
-    if( exr_header.tiled )
-	{
-		//todo.implement this
-	}
+    if (exr_header.tiled) {
+      // todo.implement this
+    }
     (*out_rgba) = reinterpret_cast<float *>(
         malloc(4 * sizeof(float) * static_cast<size_t>(exr_image.width) *
                static_cast<size_t>(exr_image.height)));
@@ -10914,50 +10907,55 @@ int LoadEXR(float **out_rgba, int *width, int *height, const char *filename,
     (*out_rgba) = reinterpret_cast<float *>(
         malloc(4 * sizeof(float) * static_cast<size_t>(exr_image.width) *
                static_cast<size_t>(exr_image.height)));
-	if( exr_header.tiled )
-	{
-		for(int it=0; it<exr_image.num_tiles; it++)
-		{
-			for(int j=0; j<exr_header.tile_size_y; j++)
-			for(int i=0; i<exr_header.tile_size_x; i++)
-			{
-				const int ii = exr_image.tiles[it].offset_x*exr_header.tile_size_x + i;
-				const int jj = exr_image.tiles[it].offset_y*exr_header.tile_size_y + j;
-				const int idx = ii + jj*exr_image.width;
-				const int srcIdx = i + j*exr_header.tile_size_x;
-				unsigned char **src = exr_image.tiles[it].images;
-				(*out_rgba)[4 * idx + 0] =
-					reinterpret_cast<float **>(src)[idxR][srcIdx];
-				(*out_rgba)[4 * idx + 1] =
-					reinterpret_cast<float **>(src)[idxG][srcIdx];
-				(*out_rgba)[4 * idx + 2] =
-					reinterpret_cast<float **>(src)[idxB][srcIdx];
-				if (idxA != -1) {
-					(*out_rgba)[4 * idx + 3] =
-						reinterpret_cast<float **>(src)[idxA][srcIdx];
-				} else {
-					(*out_rgba)[4 * idx + 3] = 1.0;
-				}
-			}
-		}
-	}
-	else
-	{
-    for (int i = 0; i < exr_image.width * exr_image.height; i++) {
-      (*out_rgba)[4 * i + 0] =
-          reinterpret_cast<float **>(exr_image.images)[idxR][i];
-      (*out_rgba)[4 * i + 1] =
-          reinterpret_cast<float **>(exr_image.images)[idxG][i];
-      (*out_rgba)[4 * i + 2] =
-          reinterpret_cast<float **>(exr_image.images)[idxB][i];
-      if (idxA != -1) {
-        (*out_rgba)[4 * i + 3] =
-            reinterpret_cast<float **>(exr_image.images)[idxA][i];
-      } else {
-        (*out_rgba)[4 * i + 3] = 1.0;
+    if (exr_header.tiled) {
+      for (int it = 0; it < exr_image.num_tiles; it++) {
+        for (int j = 0; j < exr_header.tile_size_y; j++)
+          for (int i = 0; i < exr_header.tile_size_x; i++) {
+            const int ii =
+                exr_image.tiles[it].offset_x * exr_header.tile_size_x + i;
+            const int jj =
+                exr_image.tiles[it].offset_y * exr_header.tile_size_y + j;
+            const int idx = ii + jj * exr_image.width;
+
+            // out of region check.
+            if (ii >= exr_image.width) {
+              continue;
+            }
+            if (jj >= exr_image.height) {
+              continue;
+            }
+            const int srcIdx = i + j * exr_header.tile_size_x;
+            unsigned char **src = exr_image.tiles[it].images;
+            (*out_rgba)[4 * idx + 0] =
+                reinterpret_cast<float **>(src)[idxR][srcIdx];
+            (*out_rgba)[4 * idx + 1] =
+                reinterpret_cast<float **>(src)[idxG][srcIdx];
+            (*out_rgba)[4 * idx + 2] =
+                reinterpret_cast<float **>(src)[idxB][srcIdx];
+            if (idxA != -1) {
+              (*out_rgba)[4 * idx + 3] =
+                  reinterpret_cast<float **>(src)[idxA][srcIdx];
+            } else {
+              (*out_rgba)[4 * idx + 3] = 1.0;
+            }
+          }
+      }
+    } else {
+      for (int i = 0; i < exr_image.width * exr_image.height; i++) {
+        (*out_rgba)[4 * i + 0] =
+            reinterpret_cast<float **>(exr_image.images)[idxR][i];
+        (*out_rgba)[4 * i + 1] =
+            reinterpret_cast<float **>(exr_image.images)[idxG][i];
+        (*out_rgba)[4 * i + 2] =
+            reinterpret_cast<float **>(exr_image.images)[idxB][i];
+        if (idxA != -1) {
+          (*out_rgba)[4 * i + 3] =
+              reinterpret_cast<float **>(exr_image.images)[idxA][i];
+        } else {
+          (*out_rgba)[4 * i + 3] = 1.0;
+        }
       }
     }
-	}
   }
 
   (*width) = exr_image.width;
@@ -12020,8 +12018,9 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
       unsigned long dstLen =
           static_cast<unsigned long>(pixelOffsetTable.size() * sizeof(int));
       if (!tinyexr::DecompressZip(
-          reinterpret_cast<unsigned char *>(&pixelOffsetTable.at(0)), &dstLen,
-          data_ptr + 28, static_cast<unsigned long>(packedOffsetTableSize))) {
+              reinterpret_cast<unsigned char *>(&pixelOffsetTable.at(0)),
+              &dstLen, data_ptr + 28,
+              static_cast<unsigned long>(packedOffsetTableSize))) {
         return false;
       }
 
@@ -12039,9 +12038,9 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
       unsigned long dstLen = static_cast<unsigned long>(unpackedSampleDataSize);
       if (dstLen) {
         if (!tinyexr::DecompressZip(
-            reinterpret_cast<unsigned char *>(&sample_data.at(0)), &dstLen,
-            data_ptr + 28 + packedOffsetTableSize,
-            static_cast<unsigned long>(packedSampleDataSize))) {
+                reinterpret_cast<unsigned char *>(&sample_data.at(0)), &dstLen,
+                data_ptr + 28 + packedOffsetTableSize,
+                static_cast<unsigned long>(packedSampleDataSize))) {
           return false;
         }
         assert(dstLen == static_cast<unsigned long>(unpackedSampleDataSize));
@@ -12209,6 +12208,7 @@ int FreeEXRImage(EXRImage *exr_image) {
         free(exr_image->tiles[tid].images);
       }
     }
+    free(exr_image->tiles);
   }
 
   return TINYEXR_SUCCESS;
@@ -12756,9 +12756,8 @@ int SaveEXR(const float *data, int width, int height, int components,
 
 #ifdef __clang__
 // zero-as-null-ppinter-constant
-#pragma clang diagnostic pop 
+#pragma clang diagnostic pop
 #endif
-
 
 #endif  // TINYEXR_IMPLEMENTATION_DEIFNED
 #endif  // TINYEXR_IMPLEMENTATION
