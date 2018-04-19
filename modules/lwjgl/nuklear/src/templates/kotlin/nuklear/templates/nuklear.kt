@@ -1313,6 +1313,35 @@ nk_style_pop_vec2(ctx);""")}
         )
         void("tree_state_pop", "Ends a collapsable UI section.", ctx)
 
+        intb(
+            "tree_element_push_hashed",
+            "",
+
+            ctx,
+            tree_push_hashed["type"],
+            tree_push_hashed["title"],
+            nk_collapse_states.IN("initial_state", ""),
+            Check(1)..intb.p.INOUT("selected", ""),
+            char.const.p.IN("hash", ""),
+            AutoSize("hash")..int.IN("len", ""),
+            int.IN("seed", "")
+        )
+        intb(
+            "tree_element_image_push_hashed",
+            "",
+
+            ctx,
+            tree_push_hashed["type"],
+            nk_image.IN("img", ""),
+            tree_push_hashed["title"],
+            nk_collapse_states.IN("initial_state", ""),
+            Check(1)..intb.p.INOUT("selected", ""),
+            char.const.p.IN("hash", ""),
+            AutoSize("hash")..int.IN("len", ""),
+            int.IN("seed", "")
+        )
+        void("tree_element_pop", "", ctx)
+
         void(
             "text",
             "",
@@ -1395,6 +1424,15 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", "")
+        )
+
+        void(
+            "image_color",
+            "",
+
+            ctx,
+            nk_image.IN("img", ""),
+            nk_color.IN("color", "")
         )
 
         void(
@@ -1749,6 +1787,29 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         intb(
+            "selectable_symbol_label",
+            "",
+
+            ctx,
+            nk_symbol_type.IN("symbol", "", SymbolTypes),
+            charUTF8.const.p.IN("str", ""),
+            nk_flags.IN("align", "", TextAlignments),
+            Check(1)..int.p.INOUT("value", "")
+        )
+
+        intb(
+            "selectable_symbol_text",
+            "",
+
+            ctx,
+            nk_symbol_type.IN("symbol", "", SymbolTypes),
+            charUTF8.const.p.IN("str", ""),
+            AutoSize("str")..int.IN("len", ""),
+            nk_flags.IN("align", "", TextAlignments),
+            Check(1)..int.p.INOUT("value", "")
+        )
+
+        intb(
             "select_label",
             "",
 
@@ -1786,6 +1847,29 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_image.IN("img", ""),
+            charUTF8.const.p.IN("str", ""),
+            AutoSize("str")..int.IN("len", ""),
+            nk_flags.IN("align", "", TextAlignments),
+            intb.IN("value", "")
+        )
+
+        intb(
+            "select_symbol_label",
+            "",
+
+            ctx,
+            nk_symbol_type.IN("symbol", "", SymbolTypes),
+            charUTF8.const.p.IN("str", ""),
+            nk_flags.IN("align", "", TextAlignments),
+            intb.IN("value", "")
+        )
+
+        intb(
+            "select_symbol_text",
+            "",
+
+            ctx,
+            nk_symbol_type.IN("symbol", "", SymbolTypes),
             charUTF8.const.p.IN("str", ""),
             AutoSize("str")..int.IN("len", ""),
             nk_flags.IN("align", "", TextAlignments),
@@ -4452,13 +4536,6 @@ nk_style_pop_vec2(ctx);""")}
             nk_buffer_p.IN("elements", ""),
             nk_anti_aliasing.IN("line_aa", ""),
             nk_anti_aliasing.IN("shape_aa", "")
-        )
-
-        void(
-            "draw_list_clear",
-            "",
-
-            nk_draw_list.p.IN("list", "")
         )
 
         nk_draw_command.const.p(
