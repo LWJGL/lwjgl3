@@ -85,6 +85,7 @@ val ScreenshotHandle_t = typedef(uint32_t, "ScreenshotHandle_t")
 val TextureID_t = typedef(int32_t, "TextureID_t")
 val TrackedCameraHandle_t = typedef(uint64_t, "TrackedCameraHandle_t")
 val TrackedDeviceIndex_t = typedef(uint32_t, "TrackedDeviceIndex_t")
+val WebConsoleHandle_t = typedef(uint64_t, "WebConsoleHandle_t")
 val DriverId_t = typedef(uint32_t, "DriverId_t")
 
 val VRComponentProperties = typedef(uint32_t, "VRComponentProperties")
@@ -224,6 +225,7 @@ val VREvent_Overlay_t = struct(Module.OPENVR, "VREventOverlay", nativeName = "VR
     documentation = "Used for a few events about overlays."
 
     uint64_t.member("overlayHandle", "").links("EVRState_\\w+")
+    uint64_t.member("devicePath", "")
 }
 
 val VREvent_Status_t = struct(Module.OPENVR, "VREventStatus", nativeName = "VREvent_Status_t", mutable = false) {
@@ -307,12 +309,16 @@ val VREvent_DualAnalog_t = struct(Module.OPENVR, "VREventDualAnalog", nativeName
 	EDualAnalogWhich.member("which", "")
 }
 
-val VREvent_HapticVibration_t = struct(Module.OPENVR, "VREvent_HapticVibration", nativeName = "VREvent_HapticVibration_t", mutable = false) {
+val VREvent_HapticVibration_t = struct(Module.OPENVR, "VREventHapticVibration", nativeName = "VREvent_HapticVibration_t", mutable = false) {
     uint64_t.member("containerHandle", "property container handle of the device with the haptic component")
 	uint64_t.member("componentHandle", "which haptic component needs to vibrate")
 	float.member("fDurationSeconds", "")
 	float.member("fFrequency", "")
 	float.member("fAmplitude", "")
+}
+
+val VREvent_WebConsole_t = struct(Module.OPENVR, "VREventWebConsole", nativeName = "VREvent_WebConsole_t", mutable = false) {
+    WebConsoleHandle_t.member("webConsoleHandle", "")
 }
 
 val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {

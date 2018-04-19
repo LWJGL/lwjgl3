@@ -127,11 +127,13 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_SteamVR_RetailDemo_Bool".."retailDemo",
         "k_pch_SteamVR_IpdOffset_Float".."ipdOffset",
         "k_pch_SteamVR_AllowSupersampleFiltering_Bool".."allowSupersampleFiltering",
+        "k_pch_SteamVR_SupersampleManualOverride_Bool".."supersampleManualOverride",
         "k_pch_SteamVR_EnableLinuxVulkanAsync_Bool".."enableLinuxVulkanAsync",
         "k_pch_SteamVR_AllowDisplayLockedMode_Bool".."allowDisplayLockedMode",
         "k_pch_SteamVR_HaveStartedTutorialForNativeChaperoneDriver_Bool".."haveStartedTutorialForNativeChaperoneDriver",
         "k_pch_SteamVR_ForceWindows32bitVRMonitor".."forceWindows32BitVRMonitor",
         "k_pch_SteamVR_DebugInput".."debugInput",
+        "k_pch_SteamVR_LegacyInputRebinding".."legacyInputRebinding",
         "k_pch_Lighthouse_Section".."driver_lighthouse",
         "k_pch_Lighthouse_DisableIMU_Bool".."disableimu",
         "k_pch_Lighthouse_DisableIMUExceptHMD_Bool".."disableimuexcepthmd",
@@ -195,6 +197,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Camera_BoundsColorGammaB_Int32".."cameraBoundsColorGammaB",
         "k_pch_Camera_BoundsColorGammaA_Int32".."cameraBoundsColorGammaA",
         "k_pch_Camera_BoundsStrength_Int32".."cameraBoundsStrength",
+        "k_pch_Camera_RoomViewMode_Int32".."cameraRoomViewMode",
         "k_pch_audio_Section".."audio",
         "k_pch_audio_OnPlaybackDevice_String".."onPlaybackDevice",
         "k_pch_audio_OnRecordDevice_String".."onRecordDevice",
@@ -213,6 +216,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Dashboard_EnableDashboard_Bool".."enableDashboard",
         "k_pch_Dashboard_ArcadeMode_Bool".."arcadeMode",
         "k_pch_Dashboard_EnableWebUI".."webUI",
+        "k_pch_Dashboard_EnableWebUIDevTools ".."webUIDevTools",
         "k_pch_modelskin_Section".."modelskins",
         "k_pch_Driver_Enable_Bool".."enable",
         "k_pch_WebInterface_Section".."WebInterface",
@@ -287,7 +291,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedControllerRole_TrackedControllerRole_Invalid".enum("Invalid value for controller type.", "0"),
         "ETrackedControllerRole_TrackedControllerRole_LeftHand".enum("Tracked device associated with the left hand."),
         "ETrackedControllerRole_TrackedControllerRole_RightHand".enum("Tracked device associated with the right hand."),
-        "ETrackedControllerRole_TrackedControllerRole_OptOut".enum("Tracked device is opting out of left/right hand selection.")
+        "ETrackedControllerRole_TrackedControllerRole_OptOut".enum("Tracked device is opting out of left/right hand selection."),
+        "ETrackedControllerRole_TrackedControllerRole_Max".enum
     )
 
     EnumConstant(
@@ -351,6 +356,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
             "input profile to use for this device in the input system. Will default to tracking system name if this isn't provided."
         ),
         "ETrackedDeviceProperty_Prop_NeverTracked_Bool".enum("used for devices that will never have a valid pose by design."),
+        "ETrackedDeviceProperty_Prop_NumCameras_Int32".enum,
+        "ETrackedDeviceProperty_Prop_CameraFrameLayout_Int32".enum,
         "ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool".enum("", "2000"),
         "ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float".enum,
         "ETrackedDeviceProperty_Prop_DisplayFrequency_Float".enum,
@@ -567,7 +574,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_InputFocusChanged".enum("data is process"),
         "EVREventType_VREvent_SceneApplicationSecondaryRenderingStarted".enum("data is process"),
         "EVREventType_VREvent_SceneApplicationUsingWrongGraphicsAdapter".enum("data is process"),
-        "EVREventType_VREvent_HideRenderModels".enum("Sent to the scene application to request hiding render models temporarily", "410"),
+        "EVREventType_VREvent_ActionBindingReloaded".enum,
+        "EVREventType_VREvent_HideRenderModels".enum("Sent to the scene application to request hiding render models temporarily"),
         "EVREventType_VREvent_ShowRenderModels".enum("Sent to the scene application to request restoring render model visibility"),
         "EVREventType_VREvent_ConsoleOpened".enum("", "420"),
         "EVREventType_VREvent_ConsoleClosed".enum,
@@ -970,6 +978,15 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
     )
 
     EnumConstant(
+        "EVRTrackedCameraFrameLayout",
+
+        "EVRTrackedCameraFrameLayout_Mono".enum("", "1"),
+        "EVRTrackedCameraFrameLayout_Stereo".enum(""),
+        "EVRTrackedCameraFrameLayout_VerticalLayout".enum("", "16"),
+        "EVRTrackedCameraFrameLayout_HorizontalLayout".enum("", "32")
+    )
+
+    EnumConstant(
         "EVRTrackedCameraFrameType",
 
         "EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted".enum("This is the camera video frame size in pixels, still distorted.", "0"),
@@ -980,6 +997,14 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
             "In pixels, maximum undistorted with invalid regions. Non zero alpha component identifies valid regions."
         ),
         "EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES".enum
+    )
+
+    EnumConstant(
+        "EVSync",
+
+        "EVSync_VSync_None".enum("", "0"),
+        "EVSync_VSync_WaitRender".enum,
+        "EVSync_VSync_NoWaitRender".enum
     )
 
     EnumConstant(
