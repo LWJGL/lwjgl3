@@ -114,6 +114,13 @@ val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettin
     documentation = "Structure to fill in to modify Remotery default settings."
 
     rmtU16.member("port", "which port to listen for incoming connections on")
+	rmtBool.member(
+        "reuse_open_port",
+        """
+        when this server exits it can leave the port open in {@code TIME_WAIT} state for a while. This forces subsequent server bind attempts to fail when
+        restarting. If you find restarts fail repeatedly with bind attempts, set this to true to forcibly reuse the open port.
+        """
+    )
     rmtBool.member(
         "limit_connections_to_localhost",
         """
