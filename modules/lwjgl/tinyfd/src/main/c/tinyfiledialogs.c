@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.c v3.3.2 [Feb 26, 2018] zlib licence
+ /         \ tinyfiledialogs.c v3.3.5 [Apr 18, 2018] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -13,9 +13,7 @@
         | the windows only wchar_t UTF-16 prototypes are in the header file |
         |___________________________________________________________________|
 
-Please 1) let me know If you are using it on exotic hardware / OS / compiler
-       2) leave a one word review on Sourceforge.
-       3) upvote my stackoverflow answer/advert https://stackoverflow.com/a/47651444
+Please upvote my stackoverflow answer https://stackoverflow.com/a/47651444
 
 tiny file dialogs (cross-platform C C++)
 InputBox PasswordBox MessageBox ColorPicker
@@ -23,7 +21,7 @@ OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
 SSH supported via automatic switch to console mode or X11 forwarding
 
-a C file + a header (add them to your C or C++ project) with 8 functions:
+one C file and a header (add them to your C or C++ project) with 8 functions:
 - beep
 - notify popup
 - message & question
@@ -33,8 +31,9 @@ a C file + a header (add them to your C or C++ project) with 8 functions:
 - select folder
 - color picker
 
-Complements OpenGL GLFW GLUT GLUI VTK SFML TGUI SDL Ogre Unity3d ION OpenCV
-CEGUI MathGL GLM CPW GLOW IMGUI MyGUI GLT NGL STB & GUI less programs
+Complements OpenGL Vulkan GLFW GLUT GLUI VTK SFML TGUI
+SDL Ogre Unity3d ION OpenCV CEGUI MathGL GLM CPW GLOW
+IMGUI MyGUI GLT NGL STB & GUI less programs
 
 NO INIT
 NO MAIN LOOP
@@ -57,9 +56,9 @@ Unix (command line calls) ASCII UTF-8
 The same executable can run across desktops & distributions
 
 C89 & C++98 compliant: tested with C & C++ compilers
-VisualStudio MinGW-gcc GCC Clang TinyCC OpenWatcom-v2 BorlandC SunCC Zapcc
+VisualStudio MinGW-gcc GCC Clang TinyCC OpenWatcom-v2 BorlandC SunCC ZapCC
 on Windows Mac Linux Bsd Solaris Minix Raspbian
-using Gnome Kde Enlightenment Mate Cinnamon Unity Lxde Lxqt Xfce
+using Gnome Kde Enlightenment Mate Cinnamon Budgie Unity Lxde Lxqt Xfce
 WindowMaker IceWm Cde Jds OpenBox Awesome Jwm Xdm
 
 Bindings for LUA and C# dll, Haskell
@@ -130,7 +129,7 @@ misrepresented as being the original software.
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char const tinyfd_version [8] = "3.3.2";
+char const tinyfd_version [8] = "3.3.5";
 
 int tinyfd_verbose = 0 ; /* on unix: prints the command line calls */
 
@@ -3231,23 +3230,41 @@ static int detectPresence( char const * const aExecutable )
 }
 
 
-static char const * getVersion( char const * const aExecutable ) /*version # must follow :*/
+static char const * getVersion( char const * const aExecutable ) /*version must be first numeral*/
 {
-        static char lBuff [MAX_PATH_OR_CMD] ;
-        char lTestedString [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
-        char * lTmp ;
-
+	static char lBuff [MAX_PATH_OR_CMD] ;
+	char lTestedString [MAX_PATH_OR_CMD] ;
+	FILE * lIn ;
+	char * lTmp ;
+		
     strcpy( lTestedString , aExecutable ) ;
     strcat( lTestedString , " --version" ) ;
 
     lIn = popen( lTestedString , "r" ) ;
         lTmp = fgets( lBuff , sizeof( lBuff ) , lIn ) ;
         pclose( lIn ) ;
-    if ( ! lTmp || !(lTmp = strchr( lBuff , ':' )) ) return 0 ;
-        lTmp ++ ;
-        /* printf("lTmp %s\n", lTmp); */
-        return lTmp ;
+	
+	lTmp += strcspn(lTmp,"0123456789");
+	/* printf("lTmp:%s\n", lTmp); */
+	return lTmp ;
+}
+
+
+static int * const getMajorMinorPatch( char const * const aExecutable )
+{
+	static int lArray [3] ;
+	char * lTmp ;
+
+	lTmp = (char *) getVersion(aExecutable);
+	lArray[0] = atoi( strtok(lTmp," ,.-") ) ;
+	/* printf("lArray0 %d\n", lArray[0]); */
+	lArray[1] = atoi( strtok(0," ,.-") ) ;
+	/* printf("lArray1 %d\n", lArray[1]); */
+	lArray[2] = atoi( strtok(0," ,.-") ) ;
+	/* printf("lArray2 %d\n", lArray[2]); */
+
+	if ( !lArray[0] && !lArray[1] && !lArray[2] ) return NULL;
+	return lArray ;
 }
 
 
@@ -3271,7 +3288,7 @@ static int tryCommand( char const * const aCommand )
 }
 
 
-static int isTerminalRunning()
+static int isTerminalRunning( )
 {
 	static int lIsTerminalRunning = -1 ;
 	if ( lIsTerminalRunning < 0 ) 
@@ -3355,6 +3372,7 @@ static char const * terminalName( )
 {
         static char lTerminalName[128] = "*" ;
         char lShellName[64] = "*" ;
+        int * lArray;
 
         if ( lTerminalName[0] == '*' )
         {
@@ -3415,6 +3433,12 @@ static char const * terminalName( )
                         strcat(lTerminalName , " -e " ) ;
                         strcat(lTerminalName , lShellName ) ;
                 }
+                else if ( strcpy(lTerminalName,"tilix") /*good*/
+                          && detectPresence(lTerminalName) )
+                {
+                        strcat(lTerminalName , " -e " ) ;
+                        strcat(lTerminalName , lShellName ) ;
+                }
                 else if ( strcpy(lTerminalName,"xfce4-terminal") /*good*/
                           && detectPresence(lTerminalName) )
                 {
@@ -3445,8 +3469,9 @@ static char const * terminalName( )
                         strcat(lTerminalName , " -e " ) ;
                         strcat(lTerminalName , lShellName ) ;
                 }
-                else if ( strcpy(lTerminalName,"gnome-terminal") /*bad (good if version < 3)*/
-                && detectPresence(lTerminalName) )
+                else if ( strcpy(lTerminalName,"gnome-terminal")
+                && detectPresence(lTerminalName) && (lArray = getMajorMinorPatch(lTerminalName))
+				&& ((lArray[0]<3) || (lArray[0]==3 && lArray[1]<=6)) )
                 {
                         strcat(lTerminalName , " --disable-factory -x " ) ;
                         strcat(lTerminalName , lShellName ) ;
@@ -3501,7 +3526,7 @@ static int whiptailPresent( )
 
 
 
-static int graphicMode()
+static int graphicMode( )
 {
         return !( tinyfd_forceConsole && (isTerminalRunning() || terminalName()) )
           && ( getenv("DISPLAY")
@@ -4267,7 +4292,7 @@ int tinyfd_messageBox(
                 }
                 if ( aMessage && strlen(aMessage) ) 
                 {
-                        strcat(lDialogString, " --text=\"") ;
+                        strcat(lDialogString, " --no-wrap --text=\"") ;
                         strcat(lDialogString, aMessage) ;
                         strcat(lDialogString, "\"") ;
                 }
@@ -4697,7 +4722,7 @@ tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes") ;
                         }
                 }
         }
-        else if (  isTerminalRunning( ) && terminalName() )
+        else if (  !isTerminalRunning() && terminalName() )
         {
                 if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return 0;}
                 strcpy( lDialogString , terminalName() ) ;

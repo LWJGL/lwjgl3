@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v3.3.2 [Feb 26, 2018] zlib licence
+ /         \ tinyfiledialogs.h v3.3.5 [Apr 18, 2018] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -13,9 +13,7 @@
         | the windows only wchar_t UTF-16 prototypes are at the end of this file |
         |________________________________________________________________________|
 
-Please 1) let me know If you are using it on exotic hardware / OS / compiler
-       2) leave a one word review on Sourceforge.
-	   3) upvote my stackoverflow answer/advert https://stackoverflow.com/a/47651444
+Please upvote my stackoverflow answer https://stackoverflow.com/a/47651444
 
 tiny file dialogs (cross-platform C C++)
 InputBox PasswordBox MessageBox ColorPicker
@@ -23,7 +21,7 @@ OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
 SSH supported via automatic switch to console mode or X11 forwarding
 
-a C file + a header (add them to your C or C++ project) with 8 functions:
+one C file and a header (add them to your C or C++ project) with 8 functions:
 - beep
 - notify popup
 - message & question
@@ -33,8 +31,9 @@ a C file + a header (add them to your C or C++ project) with 8 functions:
 - select folder
 - color picker
 
-Complements OpenGL GLFW GLUT GLUI VTK SFML TGUI SDL Ogre Unity3d ION OpenCV
-CEGUI MathGL GLM CPW GLOW IMGUI MyGUI GLT NGL STB & GUI less programs
+Complements OpenGL Vulkan GLFW GLUT GLUI VTK SFML TGUI
+SDL Ogre Unity3d ION OpenCV CEGUI MathGL GLM CPW GLOW
+IMGUI MyGUI GLT NGL STB & GUI less programs
 
 NO INIT
 NO MAIN LOOP
@@ -57,9 +56,9 @@ Unix (command line calls) ASCII UTF-8
 The same executable can run across desktops & distributions
 
 C89 & C++98 compliant: tested with C & C++ compilers
-VisualStudio MinGW-gcc GCC Clang TinyCC OpenWatcom-v2 BorlandC SunCC Zapcc
+VisualStudio MinGW-gcc GCC Clang TinyCC OpenWatcom-v2 BorlandC SunCC ZapCC
 on Windows Mac Linux Bsd Solaris Minix Raspbian
-using Gnome Kde Enlightenment Mate Cinnamon Unity Lxde Lxqt Xfce
+using Gnome Kde Enlightenment Mate Cinnamon Budgie Unity Lxde Lxqt Xfce
 WindowMaker IceWm Cde Jds OpenBox Awesome Jwm Xdm
 
 Bindings for LUA and C# dll, Haskell
