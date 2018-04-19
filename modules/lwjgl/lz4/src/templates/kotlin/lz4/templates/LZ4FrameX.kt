@@ -75,17 +75,16 @@ ENABLE_WARNINGS()""")
         """
         Compress an entire {@code srcBuffer} into a valid LZ4 frame using a digested Dictionary.
 
-        If {@code cdict==NULL}, compress without a dictionary.
-
-        {@code dstBuffer} MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}. If this condition is not respected, function will fail (return
-        an {@code errorCode}).
+        {@code dst} MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}. If this condition is not respected, function will fail (return an
+        {@code errorCode}).
         """,
 
+        LZ4F_cctx.p.IN("cctx", "must point to a context created by #createCompressionContext()."),
         void.p.OUT("dst", ""),
         AutoSize("dst")..size_t.IN("dstCapacity", ""),
         void.const.p.IN("src", ""),
         AutoSize("src")..size_t.IN("srcSize", ""),
-        nullable..LZ4F_CDict.const.p.IN("cdict", ""),
+        nullable..LZ4F_CDict.const.p.IN("cdict", "if #NULL, compress without a dictionary"),
         LZ4F_preferences_t.const.p.IN(
             "preferencesPtr",
             "optional: you may provide #NULL as argument, but it's not recommended, as it's the only way to provide {@code dictID} in the frame header"

@@ -46,7 +46,7 @@ val LZ4HC_CCtx_internal = struct(Module.LZ4, "LZ4HCCCtxInternal", nativeName = "
     uint8_t.const.p.member("end", "next block here to continue on current prefix")
     uint8_t.const.p.member("base", "All index relative to this position")
     uint8_t.const.p.member("dictBase", "alternate base for {@code extDict}")
-    uint8_t.p.member("inputBuffer", "deprecated")
+    void.p.member("inputBuffer", "deprecated")
     uint32_t.member("dictLimit", "below that point, need {@code extDict}")
     uint32_t.member("lowLimit", "below that point, no more {@code dict}")
     uint32_t.member("nextToUpdate", "index from which to continue dictionary update")

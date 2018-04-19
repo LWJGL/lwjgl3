@@ -10,6 +10,7 @@ import lz4.*
 val LZ4 = "LZ4".nativeClass(Module.LZ4, prefix = "LZ4", prefixMethod = "LZ4_", library = LZ4_LIBRARY) {
     nativeDirective(
         """DISABLE_WARNINGS()
+#define LZ4_STATIC_LINKING_ONLY
 #include "lz4.h"
 ENABLE_WARNINGS()""")
 
@@ -430,5 +431,72 @@ ENABLE_WARNINGS()""")
         AutoSize("dst")..int.IN("originalSize", ""),
         char.const.p.IN("dictStart", ""),
         AutoSize("dictStart")..int.IN("dictSize", "")
+    )
+
+    void(
+        "resetStream_fast",
+        """
+        When an {@code LZ4_stream_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
+        sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed b
+        #resetStream()).
+
+        {@code LZ4_streams} are guaranteed to be in a valid state when:
+        ${ul(
+            "returned from #createStream()",
+            "reset by #resetStream()",
+            "{@code memset(stream, 0, sizeof(LZ4_stream_t))}",
+            "the stream was in a valid state and was reset by #resetStream_fast()",
+            "the stream was in a valid state and was then used in any compression call that returned success",
+            """
+            the stream was in an indeterminate state and was used in a compression call that fully reset the state (#compress_fast_extState()) and that
+            returned success
+            """
+        )}
+        """,
+
+        LZ4_stream_t.p.OUT("streamPtr", "")
+    )
+
+    int(
+        "compress_fast_extState_fastReset",
+        """
+        A variant of #compress_fast_extState().
+
+        Using this variant avoids an expensive initialization step. It is only safe to call if the state buffer is known to be correctly initialized already
+        (see above comment on #resetStream_fast() for a definition of "correctly initialized"). From a high level, the difference is that this function
+        initializes the provided state with a call to #resetStream_fast() while #compress_fast_extState() starts with a call to #resetStream().
+        """,
+
+        Unsafe..void.p.OUT("state", ""),
+        char.const.p.IN("src", ""),
+        char.p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", ""),
+        int.IN("acceleration", "")
+    )
+
+    void(
+        "attach_dictionary",
+        """
+        This is an experimental API that allows for the efficient use of a static dictionary many times.
+
+        Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's {@code LZ4_stream_t}
+        into a working {@code LZ4_stream_t}, this function introduces a no-copy setup mechanism, in which the working stream references the dictionary stream
+        in-place.
+
+        Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by #loadDict() should be
+        expected to work.
+
+        Alternatively, the provided dictionary stream pointer may be #NULL, in which case any existing dictionary stream is unset.
+
+        If a dictionary is provided, it replaces any pre-existing stream history. The dictionary contents are the only history that can be referenced and
+        logically immediately precede the data compressed in the first subsequent compression call.
+
+        The dictionary will only remain attached to the working stream through the first compression call, at the end of which it is cleared. The dictionary
+        stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the first compression call on the stream.
+        """,
+
+        LZ4_stream_t.p.OUT("working_stream", ""),
+        nullable..LZ4_stream_t.const.p.IN("dictionary_stream", "")
     )
 }
