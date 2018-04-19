@@ -52,7 +52,7 @@ val ZSTD_DStream = "ZSTD_DStream".opaque
 val ZSTD_format_e = "ZSTD_format_e".enumType
 val ZSTD_cParameter = "ZSTD_cParameter".enumType
 val ZSTD_dictLoadMethod_e = "ZSTD_dictLoadMethod_e".enumType
-val ZSTD_dictMode_e = "ZSTD_dictMode_e".enumType
+val ZSTD_dictContentType_e = "ZSTD_dictContentType_e".enumType
 val ZSTD_EndDirective = "ZSTD_EndDirective".enumType
 val ZSTD_frameType_e = "ZSTD_frameType_e".enumType
 

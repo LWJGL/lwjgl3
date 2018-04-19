@@ -64,6 +64,9 @@
 #endif
 
 /* target attribute */
+#ifndef __has_attribute
+  #define __has_attribute(x) 0  /* Compatibility with non-clang compilers. */
+#endif
 #if defined(__GNUC__)
 #  define TARGET_ATTRIBUTE(target) __attribute__((__target__(target)))
 #else
@@ -71,10 +74,14 @@
 #endif
 
 /* Enable runtime BMI2 dispatch based on the CPU.
- * Enabled for clang/gcc on x86 when BMI2 isn't enabled by default.
+ * Enabled for clang & gcc >=4.8 on x86 when BMI2 isn't enabled by default.
  */
 #ifndef DYNAMIC_BMI2
-  #if defined(__GNUC__) && (defined(__x86_64__) || defined(_M_X86)) && !defined(__BMI2__)
+  #if (defined(__clang__) && __has_attribute(__target__)) \
+      || (defined(__GNUC__) \
+          && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8))) \
+      && (defined(__x86_64__) || defined(_M_X86)) \
+      && !defined(__BMI2__)
   #  define DYNAMIC_BMI2 1
   #else
   #  define DYNAMIC_BMI2 0

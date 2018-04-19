@@ -92,8 +92,7 @@ ENABLE_WARNINGS()""")
         "SEARCHLOG_MIN".."1",
         "SEARCHLENGTH_MAX".."7",
         "SEARCHLENGTH_MIN".."3",
-        "TARGETLENGTH_MIN".."4",
-        "TARGETLENGTH_MAX".."999",
+        "TARGETLENGTH_MIN".."1",
         "LDM_MINMATCH_MIN".."4",
         "LDM_MINMATCH_MAX".."4096",
         "LDM_BUCKETSIZELOG_MAX".."8",
@@ -122,12 +121,12 @@ ENABLE_WARNINGS()""")
         "dlm_byRef".enum("Reference dictionary content -- the dictionary buffer must outlive its users.")
     ).javaDocLinks
 
-    val dictModes = EnumConstant(
-        "{@code ZSTD_dictMode_e}",
+    val dictContentTypes = EnumConstant(
+        "{@code ZSTD_dictContentType_e}",
 
-        "dm_auto".enum("dictionary is \"full\" if it starts with #MAGIC_DICTIONARY, otherwise it is \"rawContent\""),
-        "dm_rawContent".enum("ensures dictionary is always loaded as rawContent, even if it starts with #MAGIC_DICTIONARY"),
-        "dm_fullDict".enum("refuses to load a dictionary if it does not respect Zstandard's specification")
+        "dct_auto".enum("dictionary is \"full\" when starting with #MAGIC_DICTIONARY, otherwise it is \"rawContent\""),
+        "dct_rawContent".enum("ensures dictionary is always loaded as rawContent, even if it starts with #MAGIC_DICTIONARY"),
+        "dct_fullDict".enum("refuses to load a dictionary if it does not respect Zstandard's specification")
     ).javaDocLinks
 
     EnumConstant(
@@ -162,6 +161,13 @@ ENABLE_WARNINGS()""")
 
             Default level is {@code ZSTD_CLEVEL_DEFAULT==3}.
             Special: value 0 means "do not change {@code cLevel}".
+
+            Notes:
+            ${ol(
+                "it's possible to pass a negative compression level by casting it to unsigned type.",
+                "setting a level sets all default values of other compression parameters.",
+                "setting compressionLevel automatically updates #p_compressLiterals."
+            )}
             """,
             "100"
         ),
@@ -171,28 +177,29 @@ ENABLE_WARNINGS()""")
 
             Must be clamped between #WINDOWLOG_MIN and #WINDOWLOG_MAX.
 
-            Special: value 0 means "do not change {@code windowLog}".
+            Special: value 0 means "use default {@code windowLog}".
 
-            Note: Using a window size greater than {@code ZSTD_MAXWINDOWSIZE_DEFAULT} (default: {@code 2^27}) requires setting the maximum window size at least
-            as large during decompression.
+            Note: Using a window size greater than {@code ZSTD_MAXWINDOWSIZE_DEFAULT} (default: {@code 2^27}) requires explicitly allowing such window size
+            during decompression stage.
             """),
         "p_hashLog".enum(
             """
-            Size of the probe table, as a power of 2.
+            Size of the initial probe table, as a power of 2.
 
             Resulting table size is {@code (1 << (hashLog+2))}. Must be clamped between #HASHLOG_MIN and #HASHLOG_MAX. Larger tables improve compression ratio
             of strategies &le; {@code dFast}, and improve speed of strategies &gt; {@code dFast}.
 
-            Special: value 0 means "do not change {@code hashLog}".
+            Special: value 0 means "use default {@code hashLog}".
             """),
         "p_chainLog".enum(
             """
-            Size of the full-search table, as a power of 2.
+            Size of the multi-probe search table, as a power of 2.
 
-            Resulting table size is {@code (1 << (chainLog+2))}. Larger tables result in better and slower compression. This parameter is useless when using
-            "fast" strategy.
+            Resulting table size is {@code (1 << (chainLog+2))}. Must be clamped between #CHAINLOG_MIN and #CHAINLOG_MAX. Larger tables result in better and
+            slower compression. This parameter is useless when using "fast" strategy. Note it's still useful when using "dfast" strategy, in which case it
+            defines a secondary probe table.
 
-            Special: value 0 means "do not change {@code chainLog}".
+            Special: value 0 means "use default {@code chainLog}".
             """),
         "p_searchLog".enum(
             """
@@ -200,7 +207,7 @@ ENABLE_WARNINGS()""")
 
             More attempts result in better and slower compression. This parameter is useless when using "fast" and "dFast" strategies.
 
-            Special: value 0 means "do not change {@code searchLog}".
+            Special: value 0 means "use default {@code searchLog}".
             """),
         "p_minMatch".enum(
             """
@@ -212,15 +219,25 @@ ENABLE_WARNINGS()""")
 
             Note that currently, for all strategies &gt; fast, effective maximum is 6.
 
-            Special: value 0 means "do not change {@code minMatchLength}".
+            Special: value 0 means "use default {@code minMatchLength}".
             """),
         "p_targetLength".enum(
             """
-            Only useful for strategies &ge; {@code btopt}.
+            Impact of this field depends on strategy.
 
-            Length of {@code Match} considered "good enough" to stop search. Larger values make compression stronger and slower.
+            For strategies {@code btopt} & {@code btultra}:
+            ${ul(
+                "Length of Match considered \"good enough\" to stop search.",
+                "Larger values make compression stronger, and slower."
+            )}
 
-            Special: value 0 means "do not change {@code targetLength}".
+            For strategy {@code fast}:
+            ${ul(
+                "Distance between match sampling.",
+                "Larger values make compression faster, and weaker."
+            )}
+
+            Special: value 0 means "use default {@code targetLength}".
             """),
         "p_compressionStrategy".enum(
             """
@@ -229,7 +246,53 @@ ENABLE_WARNINGS()""")
             Cast selected strategy as unsigned for #CCtx_setParameter() compatibility. The higher the value of selected strategy, the more complex it is,
             resulting in stronger and slower compression.
 
-            Special: value 0 means "do not change strategy".
+            Special: value 0 means "use default strategy".
+            """),
+        "p_enableLongDistanceMatching".enum(
+            """
+            Enable long distance matching.
+
+            This parameter is designed to improve compression ratio for large inputs, by finding large matches at long distance. It increases memory usage and
+            window size.
+
+            Note: enabling this parameter increases #p_windowLog to 128 MB except when expressly set to a different value.
+            """,
+            "160"
+        ),
+        "p_ldmHashLog".enum(
+            """
+            Size of the table for long distance matching, as a power of 2.
+
+            Larger values increase memory usage and compression ratio, but decrease compression speed. Must be clamped between #HASHLOG_MIN and #HASHLOG_MAX
+
+            Default: {@code windowlog - 7}.
+
+            Special: value 0 means "automatically determine {@code hashlog}".
+            """),
+        "p_ldmMinMatch".enum(
+            """
+            Minimum match size for long distance matcher.
+
+            Larger/too small values usually decrease compression ratio. Must be clamped between #LDM_MINMATCH_MIN and #LDM_MINMATCH_MAX.
+
+            Special: value 0 means "use default value" (default: 64).
+            """),
+        "p_ldmBucketSizeLog".enum(
+            """
+            Log size of each bucket in the LDM hash table for collision resolution.
+
+            Larger values improve collision resolution but decrease compression speed. The maximum value is #LDM_BUCKETSIZELOG_MAX .
+
+            Special: value 0 means "use default value" (default: 3).
+            """),
+        "p_ldmHashEveryLog".enum(
+            """
+            Frequency of inserting/looking up entries in the LDM hash table.
+
+            Must be clamped between 0 and (#WINDOWLOG_MAX - #HASHLOG_MIN). Default is {@code MAX(0, (windowLog - ldmHashLog))}, optimizing hash table usage.
+            Larger values improve compression speed. Deviating far from default value will likely result in a compression ratio decrease.
+
+            Special: value 0 means "automatically determine {@code hashEveryLog}".
             """),
 
         /* frame parameters */
@@ -273,9 +336,9 @@ ENABLE_WARNINGS()""")
             """
             Size of a compression job.
 
-            This value is only enforced in streaming (non-blocking) mode. Each compression job is completed in parallel, so indirectly controls the {@code nb}
+            This value is enforced only in non-blocking mode. Each compression job is completed in parallel, so this value indirectly controls the {@code nb}
             of active threads. 0 means default, which is dynamically determined based on compression parameters. Job size must be a minimum of
-            {@code overlapSize}, or 1 KB, whichever is largest. The minimum size is automatically and transparently enforced.
+            {@code overlapSize}, or 1 MB, whichever is largest. The minimum size is automatically and transparently enforced.
             """),
         "p_overlapSizeLog".enum(
             """
@@ -287,50 +350,19 @@ ENABLE_WARNINGS()""")
             )}
             """),
 
-        /* advanced parameters - may not remain available after API update */
-        "p_forceMaxWindow".enum("Force back-reference distances to remain &lt; windowSize, even when referencing into Dictionary content (default:0)", "1100"),
-        "p_enableLongDistanceMatching".enum(
+        /* experimental parameters - no stability guaranteed */
+        "p_compressLiterals".enum(
             """
-            Enable long distance matching.
+            Control huffman compression of literals (enabled) by default.
 
-            This parameter is designed to improve the compression ratio for large inputs with long distance matches. This increases the memory usage as well as
-            window size.
+            Disabling it improves speed and decreases compression ratio by a large amount.
 
-            Note: setting this parameter sets all the LDM parameters as well as #p_windowLog. It should be set after #p_compressionLevel and before
-            #p_windowLog and other LDM parameters. Setting the compression level after this parameter overrides the window log, though LDM will remain enabled
-            until explicitly disabled.
+            Note : this setting is automatically updated when changing compression level. Positive compression levels set {@code ZSTD_p_compressLiterals} to 1.
+            Negative compression levels set {@code ZSTD_p_compressLiterals} to 0.
             """,
-            "1200"
+            "1000"
         ),
-        "p_ldmHashLog".enum(
-            """
-            Size of the table for long distance matching, as a power of 2.
-
-            Larger values increase memory usage and compression ratio, but decrease compression speed. Must be clamped between #HASHLOG_MIN and #HASHLOG_MAX
-            (default: {@code windowlog} - 7). Special: value 0 means "do not change {@code ldmHashLog}".
-            """),
-        "p_ldmMinMatch".enum(
-            """
-            Minimum size of searched matches for long distance matcher.
-
-            Larger/too small values usually decrease compression ratio. Must be clamped between #LDM_MINMATCH_MIN and #LDM_MINMATCH_MAX (default: 64). Special:
-            value 0 means "do not change {@code ldmMinMatch}"
-            """),
-        "p_ldmBucketSizeLog".enum(
-            """
-            Log size of each bucket in the LDM hash table for collision resolution.
-
-            Larger values usually improve collision resolution but may decrease compression speed. The maximum value is #LDM_BUCKETSIZELOG_MAX (default: 3).
-            Note: 0 is a valid value.
-            """),
-        "p_ldmHashEveryLog".enum(
-            """
-            Frequency of inserting/looking up entries in the LDM hash table.
-
-            The default is {@code MAX(0, (windowLog - ldmHashLog))} to optimize hash table usage. Larger values improve compression speed. Deviating far from
-            the default value will likely result in a decrease in compression ratio. Must be clamped between 0 and #WINDOWLOG_MAX - #HASHLOG_MIN. Note: 0 is a
-            valid value.
-            """)
+        "p_forceMaxWindow".enum("Force back-reference distances to remain &lt; windowSize, even when referencing into Dictionary content (default:0)", "1100")
     ).javaDocLinks
 
     val endDirectives = EnumConstant(
@@ -397,7 +429,7 @@ ENABLE_WARNINGS()""")
         void.const.p.IN("src", "should point to the start of a ZSTD frame"),
         AutoSize("src")..size_t.IN("srcSize", "must be &ge; #FRAMEHEADERSIZE_PREFIX"),
 
-        returnDoc = "size of the Frame Header"
+        returnDoc = "size of the Frame Header or an error code (if {@code srcSize} is too small)"
     )
 
     size_t(
@@ -629,6 +661,7 @@ ENABLE_WARNINGS()""")
         void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
+        ZSTD_dictContentType_e.IN("dictContentType", "", dictContentTypes),
         ZSTD_customMem.IN("customMem", "")
     )
 
@@ -644,7 +677,8 @@ ENABLE_WARNINGS()""")
         AutoSize("workspace")..size_t.IN("workspaceSize", "use #estimateDDictSize() to determine how large workspace must be"),
         void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
-        ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods)
+        ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
+        ZSTD_dictContentType_e.IN("dictContentType", "", dictContentTypes)
     )
 
     unsigned_int(
@@ -749,11 +783,21 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "getFrameHeader",
-        "Doesn't consume input.",
+        """
+        Decode Frame Header, or requires larger {@code srcSize}.
+
+        Doesn't consume input.
+        """,
 
         ZSTD_frameHeader.p.OUT("zfhPtr", ""),
         void.const.p.IN("src", ""),
-        AutoSize("src")..size_t.IN("srcSize", "")
+        AutoSize("src")..size_t.IN("srcSize", ""),
+
+        returnDoc =
+        """
+        if 0, {@code zfhPtr} is correctly filled. If >0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
+        tested using #isError().
+        """
     )
 
     void(
@@ -769,16 +813,30 @@ ENABLE_WARNINGS()""")
         """
         Sets one compression parameter, selected by enum {@code ZSTD_cParameter}.
 
-        Setting a parameter is generally only possible during frame initialization (before starting compression), except for a few exceptions which can be
-        updated during compression: {@code compressionLevel}, {@code hashLog}, {@code chainLog}, {@code searchLog}, {@code minMatch}, {@code targetLength} and
-        {@code strategy}.
+        Setting a parameter is generally only possible during frame initialization (before starting compression). Exception: when using multi-threading mode
+        ({@code nbThreads} &ge; 1), following parameters can be updated <em>during</em> compression (within same frame): {@code compressionLevel},
+        {@code hashLog}, {@code chainLog}, {@code searchLog}, {@code minMatch}, {@code targetLength} and {@code strategy}. New parameters will be active on
+        next job, or after a {@code flush()}.
+
+        Note: when {@code value} type is not unsigned (int, or enum), cast it to unsigned for proper type checking.
         """,
 
         ZSTD_CCtx.p.IN("cctx", ""),
         ZSTD_cParameter.IN("param", "", cParameters),
         unsigned_int.IN("value", ""),
 
-        returnDoc = "informational value (typically, value being set clamped correctly), 0, or an error code (which can be tested with #isError())"
+        returnDoc = "informational value (typically, value being set, correctly clamped), 0, or an error code (which can be tested with #isError())"
+    )
+
+    size_t(
+        "CCtx_getParameter",
+        "Get the requested value of one compression parameter, selected by enum {@code ZSTD_cParameter}.",
+
+        ZSTD_CCtx.p.IN("cctx", ""),
+        ZSTD_cParameter.IN("param", "", cParameters),
+        Check(1)..unsigned.p.OUT("value", ""),
+
+        returnDoc = "0, or an error code (which can be tested with #isError())."
     )
 
     size_t(
@@ -806,22 +864,22 @@ ENABLE_WARNINGS()""")
     size_t(
         "CCtx_loadDictionary",
         """
-        Create an internal CDict from {@code dict} buffer. Decompression will have to use same buffer.
+        Create an internal CDict from {@code dict} buffer. Decompression will have to use same dictionary.
 
         Special: Adding a #NULL (or 0-size) dictionary invalidates any previous dictionary, meaning "return to no-dictionary mode".
 
         Notes:
         ${ol(
-            """
-            {@code dict} content will be copied internally. Use #CCtx_loadDictionary_byReference() to reference dictionary content instead. The dictionary
-            buffer must then outlive its users.
-            """,
+            "Dictionary will be used for all future compression jobs. To return to \"no-dictionary\" situation, load a #NULL dictionary.",
             """
             Loading a dictionary involves building tables, which are dependent on compression parameters. For this reason, compression parameters cannot be
-            changed anymore after loading a dictionary. It's also a CPU-heavy operation, with non-negligible impact on latency.
+            changed anymore after loading a dictionary. It's also a CPU consuming operation, with non-negligible impact on latency.
             """,
-            "Dictionary will be used for all future compression jobs. To return to \"no-dictionary\" situation, load a #NULL dictionary.",
-            "Use #CCtx_loadDictionary_advanced() to select how dictionary content will be interpreted."
+            """
+            {@code dict} content will be copied internally. Use #CCtx_loadDictionary_byReference() to reference dictionary content instead. In such a case,
+            dictionary buffer must outlive its users.
+            """,
+            "Use #CCtx_loadDictionary_advanced() to precisely select how dictionary content must be interpreted."
         )}
         """,
 
@@ -849,7 +907,7 @@ ENABLE_WARNINGS()""")
         nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
-        ZSTD_dictMode_e.IN("dictMode", "", dictModes)
+        ZSTD_dictContentType_e.IN("dictContentType", "", dictContentTypes)
     )
 
     size_t(
@@ -891,10 +949,10 @@ ENABLE_WARNINGS()""")
         ${ol(
             "Prefix buffer is referenced. It must outlive compression job.",
             """
-            Referencing a prefix involves building tables, which are dependent on compression parameters. It's a CPU-heavy operation, with non-negligible
+            Referencing a prefix involves building tables, which are dependent on compression parameters. It's a CPU consuming operation, with non-negligible
             impact on latency.
             """,
-            "By default, the prefix is treated as raw content (#dm_rawContent). Use #CCtx_refPrefix_advanced() to alter {@code dictMode}."
+            "By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use #CCtx_refPrefix_advanced() to alter {@code dictMode}."
         )}
         """,
 
@@ -912,7 +970,33 @@ ENABLE_WARNINGS()""")
         ZSTD_CCtx.p.IN("cctx", ""),
         nullable..void.const.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
-        ZSTD_dictMode_e.IN("dictMode", "", dictModes)
+        ZSTD_dictContentType_e.IN("dictContentType", "", dictContentTypes)
+    )
+
+    void(
+        "CCtx_reset",
+        """
+        Return a {@code CCtx} to clean state.
+
+        Useful after an error, or to interrupt an ongoing compression job and start a new one. Any internal data not yet flushed is cancelled. The parameters
+        and dictionary are kept unchanged, to reset them use #CCtx_resetParameters().
+        """,
+
+        ZSTD_CCtx.p.IN("cctx", "")
+    )
+
+    size_t(
+        "CCtx_resetParameters",
+        """
+        All parameters are back to default values (compression level is #CLEVEL_DEFAULT).
+
+        Dictionary (if any) is dropped. Resetting parameters is only possible during frame initialization (before starting compression). To reset the context
+        use #CCtx_reset().
+        """,
+
+        ZSTD_CCtx.p.IN("cctx", ""),
+
+        returnDoc = "0 or an error code (which can be checked with #isError())."
     )
 
     size_t(
@@ -956,18 +1040,6 @@ ENABLE_WARNINGS()""")
         """
     )
 
-    void(
-        "CCtx_reset",
-        """
-        Return a {@code CCtx} to clean state.
-
-        Useful after an error, or to interrupt an ongoing compression job and start a new one. Any internal data not yet flushed is cancelled. Dictionary (if
-        any) is dropped. All parameters are back to default values. It's possible to modify compression parameters after a reset.
-        """,
-
-        ZSTD_CCtx.p.IN("cctx", "")
-    )
-
     size_t(
         "compress_generic_simpleArgs",
         "Same as #compress_generic(), but using only integral types as arguments.",
@@ -988,25 +1060,25 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
-        "resetCCtxParams",
+        "freeCCtxParams",
+        "Frees memory allocated by #createCCtxParams().",
+
+        ZSTD_CCtx_params.p.IN("params", "")
+    )
+
+    size_t(
+        "CCtxParams_reset",
         "Reset params to default values.",
 
         ZSTD_CCtx_params.p.IN("params", "")
     )
 
     size_t(
-        "initCCtxParams",
+        "CCtxParams_init",
         "Initializes the compression parameters of {@code cctxParams} according to compression level. All other parameters are reset to their default values.",
 
         ZSTD_CCtx_params.p.IN("cctxParams", ""),
         int.IN("compressionLevel", "")
-    )
-
-    size_t(
-        "freeCCtxParams",
-        "Frees memory allocated by #createCCtxParams().",
-
-        ZSTD_CCtx_params.p.IN("params", "")
     )
 
     size_t(
@@ -1026,6 +1098,21 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
+        "CCtxParam_getParameter",
+        """
+        Similar to #CCtx_getParameter().
+
+        Get the requested value of one compression parameter, selected by enum {@code ZSTD_cParameter}.
+        """,
+
+        ZSTD_CCtx_params.p.IN("params", ""),
+        ZSTD_cParameter.IN("param", "", cParameters),
+        Check(1)..unsigned.p.OUT("value", ""),
+
+        returnDoc = "0, or an error code (which can be tested with #isError())."
+    )
+
+    size_t(
         "CCtx_setParametersUsingCCtxParams",
         """
         Apply a set of {@code ZSTD_CCtx_params} to the compression context.
@@ -1039,7 +1126,7 @@ ENABLE_WARNINGS()""")
         ZSTD_CCtx_params.const.p.IN("params", "")
     )
 
-    /*size_t(
+    size_t(
         "DCtx_loadDictionary",
         """
         Create an internal {@code DDict} from dict buffer, to be used to decompress next frames.
@@ -1057,8 +1144,8 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void.p.IN("dict", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -1068,8 +1155,8 @@ ENABLE_WARNINGS()""")
         "DCtx_loadDictionary_byReference",
         "See #DCtx_loadDictionary().",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void.p.IN("dict", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", "")
     )
 
@@ -1077,11 +1164,11 @@ ENABLE_WARNINGS()""")
         "DCtx_loadDictionary_advanced",
         "See #DCtx_loadDictionary().",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void.p.IN("dict", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        nullable..void.const.p.IN("dict", ""),
         AutoSize("dict")..size_t.IN("dictSize", ""),
         ZSTD_dictLoadMethod_e.IN("dictLoadMethod", "", dictLoadMethods),
-        ZSTD_dictMode_e.IN("dictMode", "", dictModes)
+        ZSTD_dictContentType_e.IN("dictContentType", "", dictContentTypes)
     )
 
     size_t(
@@ -1099,8 +1186,8 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        const..ZSTD_DDict_p.IN("ddict", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        ZSTD_DDict.const.p.IN("ddict", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
     )
@@ -1117,13 +1204,13 @@ ENABLE_WARNINGS()""")
         ${ol(
             "Adding any prefix (including #NULL) invalidates any previously set prefix or dictionary",
             "Prefix buffer is referenced. It must outlive compression job.",
-            "By default, the prefix is treated as raw content (#dm_rawContent). Use #CCtx_refPrefix_advanced() to alter {@code dictMode}.",
+            "By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use #CCtx_refPrefix_advanced() to alter {@code dictMode}.",
             "Referencing a raw content prefix has almost no cpu nor memory cost."
         )}
         """,
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void.p.IN("prefix", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        nullable..void.const.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())"
@@ -1133,11 +1220,11 @@ ENABLE_WARNINGS()""")
         "DCtx_refPrefix_advanced",
         "See #DCtx_refPrefix().",
 
-        ZSTD_DCtx_p.IN("dctx", ""),
-        nullable..const..void.p.IN("prefix", ""),
+        ZSTD_DCtx.p.IN("dctx", ""),
+        nullable..void.const.p.IN("prefix", ""),
         AutoSize("prefix")..size_t.IN("prefixSize", ""),
-        ZSTD_dictMode_e.IN("dictMode", "", dictModes)
-    )*/
+        ZSTD_dictContentType_e.IN("dictContentType", "", dictContentTypes)
+    )
 
     size_t(
         "DCtx_setMaxWindowSize",
@@ -1160,6 +1247,16 @@ ENABLE_WARNINGS()""")
         "",
 
         ZSTD_DCtx.p.IN("dctx", ""),
+        ZSTD_format_e.IN("format", "", formats)
+    )
+
+    size_t(
+        "getFrameHeader_advanced",
+        "Same as #getFrameHeader(), with added capability to select a format (like #f_zstd1_magicless).",
+
+        ZSTD_frameHeader.p.OUT("zfhPtr", ""),
+        void.const.p.IN("src", ""),
+        AutoSize("src")..size_t.IN("srcSize", ""),
         ZSTD_format_e.IN("format", "", formats)
     )
 

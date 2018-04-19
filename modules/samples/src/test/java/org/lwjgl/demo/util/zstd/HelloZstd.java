@@ -10,6 +10,7 @@ import org.lwjgl.system.*;
 import java.io.*;
 import java.nio.*;
 import java.nio.file.*;
+import java.util.stream.*;
 import java.util.zip.*;
 
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -18,10 +19,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.zstd.Zstd.*;
 import static org.lwjgl.util.zstd.ZstdX.*;
 
-public class HelloZstd {
+public final class HelloZstd {
 
     private static final int BENCH_WARMUP = 4;
     private static final int BENCH_ITERS  = 32;
+
+    private HelloZstd() {
+    }
 
     public static void main(String[] args) {
         ByteBuffer uncompressed;
@@ -30,21 +34,22 @@ public class HelloZstd {
             if (args.length == 0) {
                 System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.util.zstd.HelloZstd -Dargs=<path>' to test a different file.");
 
-                filePath = Files.list(Paths.get("bin/libs"))
-                    .filter(path -> Files.isRegularFile(path) && !path.toString().endsWith(".zip"))
-                    .sorted((a, b) -> {
-                        try {
-                            return Long.compare(
-                                Files.size(b), // DESC
-                                Files.size(a)
-                            );
-                        } catch (IOException e) {
-                            return a.compareTo(b);
-                        }
-                    })
-                    .findFirst()
-                    .map(Path::toString)
-                    .orElse("demo/FiraSans.ttf");
+                try (Stream<Path> files = Files.list(Paths.get("bin/libs"))) {
+                    filePath = files
+                        .filter(path -> Files.isRegularFile(path) && !path.toString().endsWith(".zip"))
+                        .max((a, b) -> {
+                            try {
+                                return Long.compare(
+                                    Files.size(a),
+                                    Files.size(b)
+                                );
+                            } catch (IOException e) {
+                                return a.compareTo(b);
+                            }
+                        })
+                        .map(Path::toString)
+                        .orElse("demo/FiraSans.ttf");
+                }
             } else {
                 filePath = args[0];
             }
