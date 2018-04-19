@@ -35,7 +35,7 @@ public final class XXHashDemo {
         int  hash32 = XXH32(buffer, SEED);
         long hash64 = XXH64(buffer, SEED);
 
-        if (hash32 != 0xC5C8C208 || hash64 == 0x656D889F290F0BCCL) {
+        if (hash32 != 0xC5C8C208 || hash64 != 0x656D889F290F0BCCL) {
             throw new IllegalStateException();
         }
 

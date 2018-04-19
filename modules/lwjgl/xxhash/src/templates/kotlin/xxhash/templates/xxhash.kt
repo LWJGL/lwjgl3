@@ -15,7 +15,7 @@ val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = 
 
     nativeDirective(
         """DISABLE_WARNINGS()
-#define XXH_PRIVATE_API
+#define XXH_INLINE_ALL
 #include "lwjgl_malloc.h"
 #include "xxhash.h"
 ENABLE_WARNINGS()""")
@@ -34,13 +34,9 @@ ENABLE_WARNINGS()""")
         "ERROR".enum
     )
 
-    val major = 0
-    val minor = 6
-    val patch = 4
-
-    IntConstant("The major version number.", "VERSION_MAJOR".."$major")
-    IntConstant("The minor version number.", "VERSION_MINOR".."$minor")
-    IntConstant("The release version number.", "VERSION_RELEASE".."$patch")
+    IntConstant("The major version number.", "VERSION_MAJOR".."0")
+    IntConstant("The minor version number.", "VERSION_MINOR".."6")
+    IntConstant("The release version number.", "VERSION_RELEASE".."5")
 
     IntConstant(
         "The version number",
