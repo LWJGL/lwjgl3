@@ -342,6 +342,9 @@ val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_D
     VREvent_EditingCameraSurface_t.member("cameraSurface", "")
     VREvent_MessageOverlay_t.member("messageOverlay", "")
     VREvent_Property_t.member("property", "")
+    VREvent_DualAnalog_t.member("dualAnalog", "")
+    VREvent_HapticVibration_t.member("hapticVibration", "")
+    VREvent_WebConsole_t.member("webConsole", "")
 }
 
 val VREvent_t = struct(Module.OPENVR, "VREvent", nativeName = "VREvent_t", mutable = false) {

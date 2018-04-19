@@ -357,7 +357,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         ),
         "ETrackedDeviceProperty_Prop_NeverTracked_Bool".enum("used for devices that will never have a valid pose by design."),
         "ETrackedDeviceProperty_Prop_NumCameras_Int32".enum,
-        "ETrackedDeviceProperty_Prop_CameraFrameLayout_Int32".enum,
+        "ETrackedDeviceProperty_Prop_CameraFrameLayout_Int32".enum("{@code EVRTrackedCameraFrameLayout} value"),
         "ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool".enum("", "2000"),
         "ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float".enum,
         "ETrackedDeviceProperty_Prop_DisplayFrequency_Float".enum,
@@ -574,7 +574,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_InputFocusChanged".enum("data is process"),
         "EVREventType_VREvent_SceneApplicationSecondaryRenderingStarted".enum("data is process"),
         "EVREventType_VREvent_SceneApplicationUsingWrongGraphicsAdapter".enum("data is process"),
-        "EVREventType_VREvent_ActionBindingReloaded".enum,
+        "EVREventType_VREvent_ActionBindingReloaded".enum("data is process - The App that action binds reloaded for"),
         "EVREventType_VREvent_HideRenderModels".enum("Sent to the scene application to request hiding render models temporarily"),
         "EVREventType_VREvent_ShowRenderModels".enum("Sent to the scene application to request restoring render model visibility"),
         "EVREventType_VREvent_ConsoleOpened".enum("", "420"),
@@ -982,8 +982,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
 
         "EVRTrackedCameraFrameLayout_Mono".enum("", "1"),
         "EVRTrackedCameraFrameLayout_Stereo".enum(""),
-        "EVRTrackedCameraFrameLayout_VerticalLayout".enum("", "16"),
-        "EVRTrackedCameraFrameLayout_HorizontalLayout".enum("", "32")
+        "EVRTrackedCameraFrameLayout_VerticalLayout".enum("Stereo frames are Top/Bottom (left/right)", "16"),
+        "EVRTrackedCameraFrameLayout_HorizontalLayout".enum("Stereo frames are Left/Right", "32")
     )
 
     EnumConstant(
@@ -1003,8 +1003,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVSync",
 
         "EVSync_VSync_None".enum("", "0"),
-        "EVSync_VSync_WaitRender".enum,
-        "EVSync_VSync_NoWaitRender".enum
+        "EVSync_VSync_WaitRender".enum("block following render work until vsync"),
+        "EVSync_VSync_NoWaitRender".enum("do not block following render work (allow to get started early)")
     )
 
     EnumConstant(
