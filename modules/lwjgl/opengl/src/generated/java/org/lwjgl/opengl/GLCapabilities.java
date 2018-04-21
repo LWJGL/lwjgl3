@@ -1708,6 +1708,8 @@ public final class GLCapabilities {
         glIsEnabledIndexedEXT,
         glDrawArraysInstancedEXT,
         glDrawElementsInstancedEXT,
+        glEGLImageTargetTexStorageEXT,
+        glEGLImageTargetTextureStorageEXT,
         glBufferStorageExternalEXT,
         glNamedBufferStorageExternalEXT,
         glBlitFramebufferEXT,
@@ -1825,6 +1827,7 @@ public final class GLCapabilities {
         glUseShaderProgramEXT,
         glActiveProgramEXT,
         glCreateShaderProgramEXT,
+        glFramebufferFetchBarrierEXT,
         glBindImageTextureEXT,
         glMemoryBarrierEXT,
         glStencilClearTagEXT,
@@ -3393,6 +3396,8 @@ public final class GLCapabilities {
     public final boolean GL_EXT_draw_buffers2;
     /** When true, {@link EXTDrawInstanced} is supported. */
     public final boolean GL_EXT_draw_instanced;
+    /** When true, {@link EXTEGLImageStorage} is supported. */
+    public final boolean GL_EXT_EGL_image_storage;
     /** When true, {@link EXTExternalBuffer} is supported. */
     public final boolean GL_EXT_external_buffer;
     /** When true, {@link EXTFramebufferBlit} is supported. */
@@ -3456,6 +3461,10 @@ public final class GLCapabilities {
     public final boolean GL_EXT_semaphore_win32;
     /** When true, {@link EXTSeparateShaderObjects} is supported. */
     public final boolean GL_EXT_separate_shader_objects;
+    /** When true, {@link EXTShaderFramebufferFetch} is supported. */
+    public final boolean GL_EXT_shader_framebuffer_fetch;
+    /** When true, {@link EXTShaderFramebufferFetchNonCoherent} is supported. */
+    public final boolean GL_EXT_shader_framebuffer_fetch_non_coherent;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_image_load_formatted.txt">EXT_shader_image_load_formatted</a> extension is supported.
      * 
@@ -3602,6 +3611,8 @@ public final class GLCapabilities {
     public final boolean GL_GREMEDY_frame_terminator;
     /** When true, {@link GREMEDYStringMarker} is supported. */
     public final boolean GL_GREMEDY_string_marker;
+    /** When true, {@link INTELBlackholeRender} is supported. */
+    public final boolean GL_INTEL_blackhole_render;
     /** When true, {@link INTELConservativeRasterization} is supported. */
     public final boolean GL_INTEL_conservative_rasterization;
     /**
@@ -5706,6 +5717,8 @@ public final class GLCapabilities {
         glIsEnabledIndexedEXT = provider.getFunctionAddress("glIsEnabledIndexedEXT");
         glDrawArraysInstancedEXT = provider.getFunctionAddress("glDrawArraysInstancedEXT");
         glDrawElementsInstancedEXT = provider.getFunctionAddress("glDrawElementsInstancedEXT");
+        glEGLImageTargetTexStorageEXT = provider.getFunctionAddress("glEGLImageTargetTexStorageEXT");
+        glEGLImageTargetTextureStorageEXT = provider.getFunctionAddress("glEGLImageTargetTextureStorageEXT");
         glBufferStorageExternalEXT = provider.getFunctionAddress("glBufferStorageExternalEXT");
         glNamedBufferStorageExternalEXT = provider.getFunctionAddress("glNamedBufferStorageExternalEXT");
         glBlitFramebufferEXT = provider.getFunctionAddress("glBlitFramebufferEXT");
@@ -5823,6 +5836,7 @@ public final class GLCapabilities {
         glUseShaderProgramEXT = provider.getFunctionAddress("glUseShaderProgramEXT");
         glActiveProgramEXT = provider.getFunctionAddress("glActiveProgramEXT");
         glCreateShaderProgramEXT = provider.getFunctionAddress("glCreateShaderProgramEXT");
+        glFramebufferFetchBarrierEXT = provider.getFunctionAddress("glFramebufferFetchBarrierEXT");
         glBindImageTextureEXT = provider.getFunctionAddress("glBindImageTextureEXT");
         glMemoryBarrierEXT = provider.getFunctionAddress("glMemoryBarrierEXT");
         glStencilClearTagEXT = provider.getFunctionAddress("glStencilClearTagEXT");
@@ -6434,6 +6448,7 @@ public final class GLCapabilities {
         GL_EXT_direct_state_access = ext.contains("GL_EXT_direct_state_access") && checkExtension("GL_EXT_direct_state_access", EXTDirectStateAccess.isAvailable(this, ext));
         GL_EXT_draw_buffers2 = ext.contains("GL_EXT_draw_buffers2") && checkExtension("GL_EXT_draw_buffers2", EXTDrawBuffers2.isAvailable(this));
         GL_EXT_draw_instanced = ext.contains("GL_EXT_draw_instanced") && checkExtension("GL_EXT_draw_instanced", EXTDrawInstanced.isAvailable(this));
+        GL_EXT_EGL_image_storage = ext.contains("GL_EXT_EGL_image_storage") && checkExtension("GL_EXT_EGL_image_storage", EXTEGLImageStorage.isAvailable(this, ext));
         GL_EXT_external_buffer = ext.contains("GL_EXT_external_buffer") && checkExtension("GL_EXT_external_buffer", EXTExternalBuffer.isAvailable(this, ext));
         GL_EXT_framebuffer_blit = ext.contains("GL_EXT_framebuffer_blit") && checkExtension("GL_EXT_framebuffer_blit", EXTFramebufferBlit.isAvailable(this));
         GL_EXT_framebuffer_multisample = ext.contains("GL_EXT_framebuffer_multisample") && checkExtension("GL_EXT_framebuffer_multisample", EXTFramebufferMultisample.isAvailable(this));
@@ -6459,6 +6474,8 @@ public final class GLCapabilities {
         GL_EXT_semaphore_fd = ext.contains("GL_EXT_semaphore_fd") && checkExtension("GL_EXT_semaphore_fd", EXTSemaphoreFD.isAvailable(this));
         GL_EXT_semaphore_win32 = ext.contains("GL_EXT_semaphore_win32") && checkExtension("GL_EXT_semaphore_win32", EXTSemaphoreWin32.isAvailable(this));
         GL_EXT_separate_shader_objects = ext.contains("GL_EXT_separate_shader_objects") && checkExtension("GL_EXT_separate_shader_objects", EXTSeparateShaderObjects.isAvailable(this));
+        GL_EXT_shader_framebuffer_fetch = ext.contains("GL_EXT_shader_framebuffer_fetch");
+        GL_EXT_shader_framebuffer_fetch_non_coherent = ext.contains("GL_EXT_shader_framebuffer_fetch_non_coherent") && checkExtension("GL_EXT_shader_framebuffer_fetch_non_coherent", EXTShaderFramebufferFetchNonCoherent.isAvailable(this));
         GL_EXT_shader_image_load_formatted = ext.contains("GL_EXT_shader_image_load_formatted");
         GL_EXT_shader_image_load_store = ext.contains("GL_EXT_shader_image_load_store") && checkExtension("GL_EXT_shader_image_load_store", EXTShaderImageLoadStore.isAvailable(this));
         GL_EXT_shader_integer_mix = ext.contains("GL_EXT_shader_integer_mix");
@@ -6491,6 +6508,7 @@ public final class GLCapabilities {
         GL_EXT_x11_sync_object = ext.contains("GL_EXT_x11_sync_object") && checkExtension("GL_EXT_x11_sync_object", EXTX11SyncObject.isAvailable(this));
         GL_GREMEDY_frame_terminator = ext.contains("GL_GREMEDY_frame_terminator") && checkExtension("GL_GREMEDY_frame_terminator", GREMEDYFrameTerminator.isAvailable(this));
         GL_GREMEDY_string_marker = ext.contains("GL_GREMEDY_string_marker") && checkExtension("GL_GREMEDY_string_marker", GREMEDYStringMarker.isAvailable(this));
+        GL_INTEL_blackhole_render = ext.contains("GL_INTEL_blackhole_render");
         GL_INTEL_conservative_rasterization = ext.contains("GL_INTEL_conservative_rasterization");
         GL_INTEL_fragment_shader_ordering = ext.contains("GL_INTEL_fragment_shader_ordering");
         GL_INTEL_framebuffer_CMAA = ext.contains("GL_INTEL_framebuffer_CMAA") && checkExtension("GL_INTEL_framebuffer_CMAA", INTELFramebufferCMAA.isAvailable(this));

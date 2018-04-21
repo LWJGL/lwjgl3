@@ -439,6 +439,8 @@ public final class GLESCapabilities {
         glMultiDrawElementsBaseVertexEXT,
         glDrawTransformFeedbackEXT,
         glDrawTransformFeedbackInstancedEXT,
+        glEGLImageTargetTexStorageEXT,
+        glEGLImageTargetTextureStorageEXT,
         glBufferStorageExternalEXT,
         glNamedBufferStorageExternalEXT,
         glFramebufferTextureEXT,
@@ -544,6 +546,7 @@ public final class GLESCapabilities {
         glProgramUniformMatrix4x2fvEXT,
         glProgramUniformMatrix3x4fvEXT,
         glProgramUniformMatrix4x3fvEXT,
+        glFramebufferFetchBarrierEXT,
         glFramebufferPixelLocalStorageSizeEXT,
         glGetFramebufferPixelLocalStorageSizeEXT,
         glClearPixelLocalStorageuiEXT,
@@ -1040,6 +1043,8 @@ public final class GLESCapabilities {
      * <p>Since external images can be non-RGB, this extension clarifies how border color values are specified for non-RGB external images.</p>
      */
     public final boolean GL_EXT_EGL_image_external_wrap_modes;
+    /** When true, {@link EXTEGLImageStorage} is supported. */
+    public final boolean GL_EXT_EGL_image_storage;
     /** When true, {@link EXTExternalBuffer} is supported. */
     public final boolean GL_EXT_external_buffer;
     /**
@@ -1162,6 +1167,8 @@ public final class GLESCapabilities {
     public final boolean GL_EXT_separate_shader_objects;
     /** When true, {@link EXTShaderFramebufferFetch} is supported. */
     public final boolean GL_EXT_shader_framebuffer_fetch;
+    /** When true, {@link EXTShaderFramebufferFetchNonCoherent} is supported. */
+    public final boolean GL_EXT_shader_framebuffer_fetch_non_coherent;
     /**
      * This extension provides new built-in functions to compute the composite of a set of boolean conditions across a group of shader invocations. These
      * composite results may be used to execute shaders more efficiently on a single-instruction multiple-data (SIMD) processor. The set of shader invocations
@@ -1365,6 +1372,8 @@ public final class GLESCapabilities {
     public final boolean GL_EXT_texture_filter_minmax;
     /** When true, {@link EXTTextureFormatBGRA8888} is supported. */
     public final boolean GL_EXT_texture_format_BGRA8888;
+    /** When true, {@link EXTTextureFormatSRGBOverride} is supported. */
+    public final boolean GL_EXT_texture_format_sRGB_override;
     /** When true, {@link EXTTextureMirrorClampToEdge} is supported. */
     public final boolean GL_EXT_texture_mirror_clamp_to_edge;
     /** When true, {@link EXTTextureNorm16} is supported. */
@@ -1411,6 +1420,8 @@ public final class GLESCapabilities {
     public final boolean GL_IMG_texture_compression_pvrtc2;
     /** When true, {@link IMGTextureFilterCubic} is supported. */
     public final boolean GL_IMG_texture_filter_cubic;
+    /** When true, {@link INTELBlackholeRender} is supported. */
+    public final boolean GL_INTEL_blackhole_render;
     /** When true, {@link INTELConservativeRasterization} is supported. */
     public final boolean GL_INTEL_conservative_rasterization;
     /** When true, {@link INTELFramebufferCMAA} is supported. */
@@ -2547,6 +2558,8 @@ public final class GLESCapabilities {
         glMultiDrawElementsBaseVertexEXT = provider.getFunctionAddress("glMultiDrawElementsBaseVertexEXT");
         glDrawTransformFeedbackEXT = provider.getFunctionAddress("glDrawTransformFeedbackEXT");
         glDrawTransformFeedbackInstancedEXT = provider.getFunctionAddress("glDrawTransformFeedbackInstancedEXT");
+        glEGLImageTargetTexStorageEXT = provider.getFunctionAddress("glEGLImageTargetTexStorageEXT");
+        glEGLImageTargetTextureStorageEXT = provider.getFunctionAddress("glEGLImageTargetTextureStorageEXT");
         glBufferStorageExternalEXT = provider.getFunctionAddress("glBufferStorageExternalEXT");
         glNamedBufferStorageExternalEXT = provider.getFunctionAddress("glNamedBufferStorageExternalEXT");
         glFramebufferTextureEXT = provider.getFunctionAddress("glFramebufferTextureEXT");
@@ -2652,6 +2665,7 @@ public final class GLESCapabilities {
         glProgramUniformMatrix4x2fvEXT = provider.getFunctionAddress("glProgramUniformMatrix4x2fvEXT");
         glProgramUniformMatrix3x4fvEXT = provider.getFunctionAddress("glProgramUniformMatrix3x4fvEXT");
         glProgramUniformMatrix4x3fvEXT = provider.getFunctionAddress("glProgramUniformMatrix4x3fvEXT");
+        glFramebufferFetchBarrierEXT = provider.getFunctionAddress("glFramebufferFetchBarrierEXT");
         glFramebufferPixelLocalStorageSizeEXT = provider.getFunctionAddress("glFramebufferPixelLocalStorageSizeEXT");
         glGetFramebufferPixelLocalStorageSizeEXT = provider.getFunctionAddress("glGetFramebufferPixelLocalStorageSizeEXT");
         glClearPixelLocalStorageuiEXT = provider.getFunctionAddress("glClearPixelLocalStorageuiEXT");
@@ -3019,6 +3033,7 @@ public final class GLESCapabilities {
         GL_EXT_draw_transform_feedback = ext.contains("GL_EXT_draw_transform_feedback") && checkExtension("GL_EXT_draw_transform_feedback", EXTDrawTransformFeedback.isAvailable(this));
         GL_EXT_EGL_image_array = ext.contains("GL_EXT_EGL_image_array");
         GL_EXT_EGL_image_external_wrap_modes = ext.contains("GL_EXT_EGL_image_external_wrap_modes");
+        GL_EXT_EGL_image_storage = ext.contains("GL_EXT_EGL_image_storage") && checkExtension("GL_EXT_EGL_image_storage", EXTEGLImageStorage.isAvailable(this, ext));
         GL_EXT_external_buffer = ext.contains("GL_EXT_external_buffer") && checkExtension("GL_EXT_external_buffer", EXTExternalBuffer.isAvailable(this, ext));
         GL_EXT_float_blend = ext.contains("GL_EXT_float_blend");
         GL_EXT_geometry_point_size = ext.contains("GL_EXT_geometry_point_size");
@@ -3050,6 +3065,7 @@ public final class GLESCapabilities {
         GL_EXT_semaphore_win32 = ext.contains("GL_EXT_semaphore_win32") && checkExtension("GL_EXT_semaphore_win32", EXTSemaphoreWin32.isAvailable(this));
         GL_EXT_separate_shader_objects = ext.contains("GL_EXT_separate_shader_objects") && checkExtension("GL_EXT_separate_shader_objects", EXTSeparateShaderObjects.isAvailable(this));
         GL_EXT_shader_framebuffer_fetch = ext.contains("GL_EXT_shader_framebuffer_fetch");
+        GL_EXT_shader_framebuffer_fetch_non_coherent = ext.contains("GL_EXT_shader_framebuffer_fetch_non_coherent") && checkExtension("GL_EXT_shader_framebuffer_fetch_non_coherent", EXTShaderFramebufferFetchNonCoherent.isAvailable(this));
         GL_EXT_shader_group_vote = ext.contains("GL_EXT_shader_group_vote");
         GL_EXT_shader_implicit_conversions = ext.contains("GL_EXT_shader_implicit_conversions");
         GL_EXT_shader_integer_mix = ext.contains("GL_EXT_shader_integer_mix");
@@ -3077,6 +3093,7 @@ public final class GLESCapabilities {
         GL_EXT_texture_filter_anisotropic = ext.contains("GL_EXT_texture_filter_anisotropic");
         GL_EXT_texture_filter_minmax = ext.contains("GL_EXT_texture_filter_minmax");
         GL_EXT_texture_format_BGRA8888 = ext.contains("GL_EXT_texture_format_BGRA8888");
+        GL_EXT_texture_format_sRGB_override = ext.contains("GL_EXT_texture_format_sRGB_override");
         GL_EXT_texture_mirror_clamp_to_edge = ext.contains("GL_EXT_texture_mirror_clamp_to_edge");
         GL_EXT_texture_norm16 = ext.contains("GL_EXT_texture_norm16");
         GL_EXT_texture_rg = ext.contains("GL_EXT_texture_rg");
@@ -3100,6 +3117,7 @@ public final class GLESCapabilities {
         GL_IMG_texture_compression_pvrtc = ext.contains("GL_IMG_texture_compression_pvrtc");
         GL_IMG_texture_compression_pvrtc2 = ext.contains("GL_IMG_texture_compression_pvrtc2");
         GL_IMG_texture_filter_cubic = ext.contains("GL_IMG_texture_filter_cubic");
+        GL_INTEL_blackhole_render = ext.contains("GL_INTEL_blackhole_render");
         GL_INTEL_conservative_rasterization = ext.contains("GL_INTEL_conservative_rasterization");
         GL_INTEL_framebuffer_CMAA = ext.contains("GL_INTEL_framebuffer_CMAA") && checkExtension("GL_INTEL_framebuffer_CMAA", INTELFramebufferCMAA.isAvailable(this));
         GL_INTEL_performance_query = ext.contains("GL_INTEL_performance_query") && checkExtension("GL_INTEL_performance_query", INTELPerformanceQuery.isAvailable(this));

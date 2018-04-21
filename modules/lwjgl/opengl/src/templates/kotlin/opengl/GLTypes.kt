@@ -123,6 +123,8 @@ val GLcharARB = CharType("GLcharARB", CharMapping.UTF8)
 val GLhandleARB = IntegerType("GLhandleARB", PrimitiveMapping.INT, unsigned = true)
 // ARB_sync
 val GLsync = "GLsync".handle
+// EXT_EGL_image_storage
+val GLeglImageOES = "GLeglImageOES".handle
 // EXT_external_buffer
 val GLeglClientBufferEXT = "GLeglClientBufferEXT".handle
 // KHR_debug
