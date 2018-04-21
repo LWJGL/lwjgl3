@@ -397,6 +397,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformShuffleRelative} capability.</li>
             <li>#SUBGROUP_FEATURE_CLUSTERED_BIT specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformClustered} capability.</li>
             <li>#SUBGROUP_FEATURE_QUAD_BIT specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformQuad} capability.</li>
+            <li>#SUBGROUP_FEATURE_PARTITIONED_BIT_NV specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformPartitionedNV} capability.</li>
         </ul>
 
         <h5>See Also</h5>

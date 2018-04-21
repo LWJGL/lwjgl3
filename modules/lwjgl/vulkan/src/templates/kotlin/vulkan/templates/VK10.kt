@@ -8775,7 +8775,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The buffer region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcBuffer}</li>
+            <li>{@code srcBuffer} <b>must</b> be large enough to contain all buffer locations that are accessed according to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#copies-buffers-images-addressing">Buffer and Image Addressing</a>, for each element of {@code pRegions}</li>
             <li>The image region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage} if the {@code dstImage}&#8217;s {@code VkFormat} is not a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, and <b>must</b> be a region that is contained within the plane being copied to if the {@code dstImage}&#8217;s {@code VkFormat} is a multi-planar format</li>
             <li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
             <li>{@code srcBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_SRC_BIT usage flag</li>
@@ -8857,7 +8857,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         <h5>Valid Usage</h5>
         <ul>
             <li>The image region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage} if the {@code srcImage}&#8217;s {@code VkFormat} is not a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, and <b>must</b> be a region that is contained within the plane being copied if the {@code srcImage}&#8217;s {@code VkFormat} is a multi-planar format</li>
-            <li>The buffer region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstBuffer}</li>
+            <li>{@code dstBuffer} <b>must</b> be large enough to contain all buffer locations that are accessed according to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#copies-buffers-images-addressing">Buffer and Image Addressing</a>, for each element of {@code pRegions}</li>
             <li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
             <li>{@code srcImage} <b>must</b> use a format that supports #FORMAT_FEATURE_TRANSFER_SRC_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linearly tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
             <li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
@@ -9221,6 +9221,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
             <li>If the {@code aspectMask} member of any element of {@code pAttachments} contains #IMAGE_ASPECT_COLOR_BIT, the {@code colorAttachment} member of that element <b>must</b> refer to a valid color attachment in the current subpass</li>
             <li>The rectangular region specified by each element of {@code pRects} <b>must</b> be contained within the render area of the current render pass instance</li>
             <li>The layers specified by each element of {@code pRects} <b>must</b> be contained within every attachment that {@code pAttachments} refers to</li>
+            <li>The {@code layerCount} member of each element of {@code pRects} <b>must</b> not be 0</li>
             <li>If the render pass instance this is recorded in uses multiview, then {@code baseArrayLayer} <b>must</b> be zero and {@code layerCount} <b>must</b> be one.</li>
         </ul>
 

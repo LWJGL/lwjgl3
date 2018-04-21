@@ -596,6 +596,7 @@ public class VK11 {
      * <li>{@link #VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformShuffleRelative} capability.</li>
      * <li>{@link #VK_SUBGROUP_FEATURE_CLUSTERED_BIT SUBGROUP_FEATURE_CLUSTERED_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformClustered} capability.</li>
      * <li>{@link #VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformQuad} capability.</li>
+     * <li>{@link NVShaderSubgroupPartitioned#VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV SUBGROUP_FEATURE_PARTITIONED_BIT_NV} specifies the device will accept SPIR-V shader modules that contain the {@code GroupNonUniformPartitionedNV} capability.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
