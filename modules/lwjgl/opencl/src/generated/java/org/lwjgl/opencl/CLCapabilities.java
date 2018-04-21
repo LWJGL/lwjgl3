@@ -861,6 +861,8 @@ public class CLCapabilities {
     public final boolean cl_nv_pragma_unroll;
     /** When true, {@link QCOMEXTHostPtr} is supported. */
     public final boolean cl_qcom_ext_host_ptr;
+    /** When true, {@link QCOMEXTHostPtrIOCoherent} is supported. */
+    public final boolean cl_qcom_ext_host_ptr_iocoherent;
 
     CLCapabilities(FunctionProvider provider, Set<String> ext) {
         this(ext,
@@ -1415,6 +1417,7 @@ public class CLCapabilities {
         cl_nv_device_attribute_query = ext.contains("cl_nv_device_attribute_query");
         cl_nv_pragma_unroll = ext.contains("cl_nv_pragma_unroll");
         cl_qcom_ext_host_ptr = ext.contains("cl_qcom_ext_host_ptr") && CL.checkExtension("cl_qcom_ext_host_ptr", QCOMEXTHostPtr.isAvailable(this));
+        cl_qcom_ext_host_ptr_iocoherent = ext.contains("cl_qcom_ext_host_ptr_iocoherent");
     }
 
 }
