@@ -33,60 +33,6 @@
         <taskdef resource="testngtasks" classpath="${lib}/java/testng.jar"/>
     </target>
 
-    <target name="init-generated" description="Initializes the lwjgl3-generated git repository. [Optional]">
-        <local name="input"/>
-        <input
-            message="This action will create a separated git repository at ../lwjgl3-generated/. The repository root will be under modules/lwjgl/. Continue?"
-            validargs="y,n"
-            defaultvalue="n"
-            addproperty="input"
-        />
-        <fail message="Cancelled.">
-            <condition>
-                <equals arg1="n" arg2="${input}"/>
-            </condition>
-        </fail>
-
-        <local name="lwjgl3-generated.exists"/>
-
-        <available file="${module.lwjgl}/.git" property="lwjgl3-generated.exists"/>
-        <fail if="lwjgl3-generated.exists" message="The lwjgl3-generated repository is already initialized." />
-        <available file="../lwjgl3-generated" type="dir" property="lwjgl3-generated.exists"/>
-
-        <!-- Initialize repository -->
-        <exec dir="${module.lwjgl}" executable="git" failonerror="true" taskname="git">
-            <arg value="init"/>
-            <arg value="--separate-git-dir=../../../lwjgl3-generated"/>
-        </exec>
-
-        <!-- Add clone-specific ignore rules -->
-        <concat
-            destfile="../lwjgl3-generated/info/exclude"
-            append="true" outputencoding="UTF-8" fixlastline="true" eol="lf"
-            unless:set="lwjgl3-generated.exists"
-        >touch.txt
-*_license.txt
-**/main/**
-**/test/**</concat>
-
-        <!-- Setup remote & fetch -->
-        <exec dir="${module.lwjgl}" executable="git" failonerror="true" taskname="git" unless:set="lwjgl3-generated.exists">
-            <arg value="remote"/>
-            <arg value="add"/>
-            <arg line="-t master"/>
-            <arg line="-m master"/>
-            <arg value="-f"/>
-            <arg value="origin"/>
-            <arg value="https://github.com/LWJGL/lwjgl3-generated.git"/>
-        </exec>
-
-        <!-- Checkout master -->
-        <exec dir="${module.lwjgl}" executable="git" failonerror="true" taskname="git" unless:set="lwjgl3-generated.exists">
-            <arg value="checkout"/>
-            <arg line="master"/>
-        </exec>
-    </target>
-
     <target name="init-wiki" description="Initializes the lwjgl3-wiki git repository in /wiki. [Optional]">
         <confirm-replace dir="wiki" msg="The wiki directory contents will be replaced with a fresh clone of the lwjgl3-wiki repository. Continue?"/>
 

@@ -1,0 +1,411 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.vulkan;
+
+import javax.annotation.*;
+
+import java.nio.*;
+
+import org.lwjgl.*;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
+
+/**
+ * Structure specifying the parameters used for device queue creation.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>The queue returned by {@link VK11#vkGetDeviceQueue2 GetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} instance. If no matching {@code flags} were specified at device creation time then {@code pQueue} will return {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
+ * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>{@code queueFamilyIndex} <b>must</b> be one of the queue family indices specified when {@code device} was created, via the {@link VkDeviceQueueCreateInfo} structure</li>
+ * <li>{@code queueIndex} <b>must</b> be less than the number of queues created for the specified queue family index and {@code VkDeviceQueueCreateFlags} member {@code flags} equal to this {@code flags} value when {@code device} was created, via the {@code queueCount} member of the {@link VkDeviceQueueCreateInfo} structure</li>
+ * </ul>
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2 STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDeviceQueueCreateFlagBits} values</li>
+ * <li>{@code flags} <b>must</b> not be 0</li>
+ * </ul>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VK11#vkGetDeviceQueue2 GetDeviceQueue2}</p>
+ * 
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} is used to provide additional image parameters to {@link VK11#vkGetDeviceQueue2 GetDeviceQueue2}.</li>
+ * <li>{@code flags} &ndash; a {@code VkDeviceQueueCreateFlags} value indicating the flags used to create the device queue.</li>
+ * <li>{@code queueFamilyIndex} &ndash; the index of the queue family to which the queue belongs.</li>
+ * <li>{@code queueIndex} &ndash; the index within this queue family of the queue to retrieve.</li>
+ * </ul>
+ * 
+ * <h3>Layout</h3>
+ * 
+ * <code><pre>
+ * struct VkDeviceQueueInfo2 {
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceQueueCreateFlags flags;
+ *     uint32_t queueFamilyIndex;
+ *     uint32_t queueIndex;
+ * }</pre></code>
+ */
+public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
+
+    /** The struct size in bytes. */
+    public static final int SIZEOF;
+
+    public static final int ALIGNOF;
+
+    /** The struct member offsets. */
+    public static final int
+        STYPE,
+        PNEXT,
+        FLAGS,
+        QUEUEFAMILYINDEX,
+        QUEUEINDEX;
+
+    static {
+        Layout layout = __struct(
+            __member(4),
+            __member(POINTER_SIZE),
+            __member(4),
+            __member(4),
+            __member(4)
+        );
+
+        SIZEOF = layout.getSize();
+        ALIGNOF = layout.getAlignment();
+
+        STYPE = layout.offsetof(0);
+        PNEXT = layout.offsetof(1);
+        FLAGS = layout.offsetof(2);
+        QUEUEFAMILYINDEX = layout.offsetof(3);
+        QUEUEINDEX = layout.offsetof(4);
+    }
+
+    VkDeviceQueueInfo2(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    /**
+     * Creates a {@link VkDeviceQueueInfo2} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * visible to the struct instance and vice versa.
+     *
+     * <p>The created instance holds a strong reference to the container object.</p>
+     */
+    public VkDeviceQueueInfo2(ByteBuffer container) {
+        this(memAddress(container), __checkContainer(container, SIZEOF));
+    }
+
+    @Override
+    public int sizeof() { return SIZEOF; }
+
+    /** Returns the value of the {@code sType} field. */
+    @NativeType("VkStructureType")
+    public int sType() { return nsType(address()); }
+    /** Returns the value of the {@code pNext} field. */
+    @NativeType("void const *")
+    public long pNext() { return npNext(address()); }
+    /** Returns the value of the {@code flags} field. */
+    @NativeType("VkDeviceQueueCreateFlags")
+    public int flags() { return nflags(address()); }
+    /** Returns the value of the {@code queueFamilyIndex} field. */
+    @NativeType("uint32_t")
+    public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
+    /** Returns the value of the {@code queueIndex} field. */
+    @NativeType("uint32_t")
+    public int queueIndex() { return nqueueIndex(address()); }
+
+    /** Sets the specified value to the {@code sType} field. */
+    public VkDeviceQueueInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the specified value to the {@code pNext} field. */
+    public VkDeviceQueueInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code flags} field. */
+    public VkDeviceQueueInfo2 flags(@NativeType("VkDeviceQueueCreateFlags") int value) { nflags(address(), value); return this; }
+    /** Sets the specified value to the {@code queueFamilyIndex} field. */
+    public VkDeviceQueueInfo2 queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
+    /** Sets the specified value to the {@code queueIndex} field. */
+    public VkDeviceQueueInfo2 queueIndex(@NativeType("uint32_t") int value) { nqueueIndex(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkDeviceQueueInfo2 set(
+        int sType,
+        long pNext,
+        int flags,
+        int queueFamilyIndex,
+        int queueIndex
+    ) {
+        sType(sType);
+        pNext(pNext);
+        flags(flags);
+        queueFamilyIndex(queueFamilyIndex);
+        queueIndex(queueIndex);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkDeviceQueueInfo2 set(VkDeviceQueueInfo2 src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@link VkDeviceQueueInfo2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkDeviceQueueInfo2 malloc() {
+        return create(nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@link VkDeviceQueueInfo2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkDeviceQueueInfo2 calloc() {
+        return create(nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@link VkDeviceQueueInfo2} instance allocated with {@link BufferUtils}. */
+    public static VkDeviceQueueInfo2 create() {
+        return new VkDeviceQueueInfo2(BufferUtils.createByteBuffer(SIZEOF));
+    }
+
+    /** Returns a new {@link VkDeviceQueueInfo2} instance for the specified memory address. */
+    public static VkDeviceQueueInfo2 create(long address) {
+        return new VkDeviceQueueInfo2(address, null);
+    }
+
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkDeviceQueueInfo2 createSafe(long address) {
+        return address == NULL ? null : create(address);
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer malloc(int capacity) {
+        return create(__malloc(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer calloc(int capacity) {
+        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer create(int capacity) {
+        return new Buffer(__create(capacity, SIZEOF));
+    }
+
+    /**
+     * Create a {@link VkDeviceQueueInfo2.Buffer} instance at the specified memory.
+     *
+     * @param address  the memory address
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer create(long address, int capacity) {
+        return new Buffer(address, capacity);
+    }
+
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkDeviceQueueInfo2.Buffer createSafe(long address, int capacity) {
+        return address == NULL ? null : create(address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@link VkDeviceQueueInfo2} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkDeviceQueueInfo2 mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@link VkDeviceQueueInfo2} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkDeviceQueueInfo2 callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkDeviceQueueInfo2 mallocStack(MemoryStack stack) {
+        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkDeviceQueueInfo2 callocStack(MemoryStack stack) {
+        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkDeviceQueueInfo2.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkDeviceQueueInfo2.Buffer callocStack(int capacity, MemoryStack stack) {
+        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
+    /** Unsafe version of {@link #sType}. */
+    public static int nsType(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.STYPE); }
+    /** Unsafe version of {@link #pNext}. */
+    public static long npNext(long struct) { return memGetAddress(struct + VkDeviceQueueInfo2.PNEXT); }
+    /** Unsafe version of {@link #flags}. */
+    public static int nflags(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.FLAGS); }
+    /** Unsafe version of {@link #queueFamilyIndex}. */
+    public static int nqueueFamilyIndex(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.QUEUEFAMILYINDEX); }
+    /** Unsafe version of {@link #queueIndex}. */
+    public static int nqueueIndex(long struct) { return memGetInt(struct + VkDeviceQueueInfo2.QUEUEINDEX); }
+
+    /** Unsafe version of {@link #sType(int) sType}. */
+    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.STYPE, value); }
+    /** Unsafe version of {@link #pNext(long) pNext}. */
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceQueueInfo2.PNEXT, value); }
+    /** Unsafe version of {@link #flags(int) flags}. */
+    public static void nflags(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.FLAGS, value); }
+    /** Unsafe version of {@link #queueFamilyIndex(int) queueFamilyIndex}. */
+    public static void nqueueFamilyIndex(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.QUEUEFAMILYINDEX, value); }
+    /** Unsafe version of {@link #queueIndex(int) queueIndex}. */
+    public static void nqueueIndex(long struct, int value) { memPutInt(struct + VkDeviceQueueInfo2.QUEUEINDEX, value); }
+
+    // -----------------------------------
+
+    /** An array of {@link VkDeviceQueueInfo2} structs. */
+    public static class Buffer extends StructBuffer<VkDeviceQueueInfo2, Buffer> implements NativeResource {
+
+        /**
+         * Creates a new {@link VkDeviceQueueInfo2.Buffer} instance backed by the specified container.
+         *
+         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
+         * by {@link VkDeviceQueueInfo2#SIZEOF}, and its mark will be undefined.
+         *
+         * <p>The created buffer instance holds a strong reference to the container object.</p>
+         */
+        public Buffer(ByteBuffer container) {
+            super(container, container.remaining() / SIZEOF);
+        }
+
+        public Buffer(long address, int cap) {
+            super(address, null, -1, 0, cap, cap);
+        }
+
+        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
+            super(address, container, mark, pos, lim, cap);
+        }
+
+        @Override
+        protected Buffer self() {
+            return this;
+        }
+
+        @Override
+        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
+            return new Buffer(address, container, mark, pos, lim, cap);
+        }
+
+        @Override
+        protected VkDeviceQueueInfo2 newInstance(long address) {
+            return new VkDeviceQueueInfo2(address, container);
+        }
+
+        @Override
+        public int sizeof() {
+            return SIZEOF;
+        }
+
+        /** Returns the value of the {@code sType} field. */
+        @NativeType("VkStructureType")
+        public int sType() { return VkDeviceQueueInfo2.nsType(address()); }
+        /** Returns the value of the {@code pNext} field. */
+        @NativeType("void const *")
+        public long pNext() { return VkDeviceQueueInfo2.npNext(address()); }
+        /** Returns the value of the {@code flags} field. */
+        @NativeType("VkDeviceQueueCreateFlags")
+        public int flags() { return VkDeviceQueueInfo2.nflags(address()); }
+        /** Returns the value of the {@code queueFamilyIndex} field. */
+        @NativeType("uint32_t")
+        public int queueFamilyIndex() { return VkDeviceQueueInfo2.nqueueFamilyIndex(address()); }
+        /** Returns the value of the {@code queueIndex} field. */
+        @NativeType("uint32_t")
+        public int queueIndex() { return VkDeviceQueueInfo2.nqueueIndex(address()); }
+
+        /** Sets the specified value to the {@code sType} field. */
+        public VkDeviceQueueInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceQueueInfo2.nsType(address(), value); return this; }
+        /** Sets the specified value to the {@code pNext} field. */
+        public VkDeviceQueueInfo2.Buffer pNext(@NativeType("void const *") long value) { VkDeviceQueueInfo2.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code flags} field. */
+        public VkDeviceQueueInfo2.Buffer flags(@NativeType("VkDeviceQueueCreateFlags") int value) { VkDeviceQueueInfo2.nflags(address(), value); return this; }
+        /** Sets the specified value to the {@code queueFamilyIndex} field. */
+        public VkDeviceQueueInfo2.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkDeviceQueueInfo2.nqueueFamilyIndex(address(), value); return this; }
+        /** Sets the specified value to the {@code queueIndex} field. */
+        public VkDeviceQueueInfo2.Buffer queueIndex(@NativeType("uint32_t") int value) { VkDeviceQueueInfo2.nqueueIndex(address(), value); return this; }
+
+    }
+
+}

@@ -1,0 +1,43 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.assimp;
+
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.dyncall.DynCallback.*;
+
+/**
+ * <h3>Type</h3>
+ * 
+ * <code><pre>
+ * void (*) (
+ *     struct aiFile *pFile
+ * )</pre></code>
+ */
+@FunctionalInterface
+@NativeType("aiFileFlushProc")
+public interface AIFileFlushProcI extends CallbackI.V {
+
+    String SIGNATURE = "(p)v";
+
+    @Override
+    default String getSignature() { return SIGNATURE; }
+
+    @Override
+    default void callback(long args) {
+        invoke(
+            dcbArgPointer(args)
+        );
+    }
+
+    /**
+     * File flush procedure.
+     *
+     * @param pFile File pointer to flush
+     */
+    void invoke(@NativeType("struct aiFile *") long pFile);
+
+}
