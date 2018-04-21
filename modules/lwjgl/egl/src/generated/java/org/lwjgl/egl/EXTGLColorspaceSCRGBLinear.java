@@ -8,9 +8,9 @@ package org.lwjgl.egl;
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_gl_colorspace_scrgb_linear.txt">EXT_gl_colorspace_scrgb_linear</a> extension.
  * 
- * <p>This extension provides a new color space option, scRGB, for applications to choose from when creating an {@code EGLSurface}. The scRGB color space
- * defines a linear display referred space. It has the same white point and color primaries as sRGB, and thus is backward-compatible with sRGB. Refer to
- * the IEC 61966-2-2:2003 standard for details on scRGB color space.</p>
+ * <p>This extension provides an extended sRGB (also called scRGB) color space option for applications to choose from when creating an {@code EGLSurface}.
+ * This extension defines the linear display referred scRGB color space. It has the same white point and color primaries as sRGB, and thus is
+ * backward-compatible with sRGB. Refer to the IEC 61966-2-2:2003 standard for details on scRGB color space.</p>
  * 
  * <p>This extension chooses to use floating-point formats for scRGB color space. For each color channel, the floating-point values of 0.0 and 1.0 still
  * correspond to sRGB chromaticities and luminance levels. However, scRGB space allows for color values beyond the range of [0.0, 1.0], and can thus

@@ -133,6 +133,7 @@ public class EGLCapabilities {
         eglQueryNativePixmapNV,
         eglPostSubBufferNV,
         eglStreamConsumerGLTextureExternalAttribsNV,
+        eglStreamFlush,
         eglQueryDisplayAttribNV,
         eglSetStreamMetadataNV,
         eglQueryStreamMetadataNV,
@@ -248,6 +249,8 @@ public class EGLCapabilities {
     public final boolean EGL_EXT_image_dma_buf_import;
     /** When true, {@link EXTImageDMABufImportModifiers} is supported. */
     public final boolean EGL_EXT_image_dma_buf_import_modifiers;
+    /** When true, {@link EXTImageGLColorspace} is supported. */
+    public final boolean EGL_EXT_image_gl_colorspace;
     /** When true, {@link EXTImageImplicitSyncControl} is supported. */
     public final boolean EGL_EXT_image_implicit_sync_control;
     /** When true, {@link EXTMultiviewWindow} is supported. */
@@ -486,6 +489,8 @@ public class EGLCapabilities {
     public final boolean EGL_NV_stream_fifo_next;
     /** When true, {@link NVStreamFIFOSynchronous} is supported. */
     public final boolean EGL_NV_stream_fifo_synchronous;
+    /** When true, {@link NVStreamFlush} is supported. */
+    public final boolean EGL_NV_stream_flush;
     /** When true, {@link NVStreamFrameLimits} is supported. */
     public final boolean EGL_NV_stream_frame_limits;
     /** When true, {@link NVStreamMetadata} is supported. */
@@ -634,6 +639,7 @@ public class EGLCapabilities {
             provider.getFunctionAddress("eglQueryNativePixmapNV"),
             provider.getFunctionAddress("eglPostSubBufferNV"),
             provider.getFunctionAddress("eglStreamConsumerGLTextureExternalAttribsNV"),
+            provider.getFunctionAddress("eglStreamFlush"),
             provider.getFunctionAddress("eglQueryDisplayAttribNV"),
             provider.getFunctionAddress("eglSetStreamMetadataNV"),
             provider.getFunctionAddress("eglQueryStreamMetadataNV"),
@@ -773,6 +779,7 @@ public class EGLCapabilities {
             caps.eglQueryNativePixmapNV,
             caps.eglPostSubBufferNV,
             caps.eglStreamConsumerGLTextureExternalAttribsNV,
+            caps.eglStreamFlush,
             caps.eglQueryDisplayAttribNV,
             caps.eglSetStreamMetadataNV,
             caps.eglQueryStreamMetadataNV,
@@ -911,19 +918,20 @@ public class EGLCapabilities {
         eglQueryNativePixmapNV = functions[118];
         eglPostSubBufferNV = functions[119];
         eglStreamConsumerGLTextureExternalAttribsNV = functions[120];
-        eglQueryDisplayAttribNV = functions[121];
-        eglSetStreamMetadataNV = functions[122];
-        eglQueryStreamMetadataNV = functions[123];
-        eglResetStreamNV = functions[124];
-        eglCreateStreamSyncNV = functions[125];
-        eglCreateFenceSyncNV = functions[126];
-        eglDestroySyncNV = functions[127];
-        eglFenceNV = functions[128];
-        eglClientWaitSyncNV = functions[129];
-        eglSignalSyncNV = functions[130];
-        eglGetSyncAttribNV = functions[131];
-        eglGetSystemTimeFrequencyNV = functions[132];
-        eglGetSystemTimeNV = functions[133];
+        eglStreamFlush = functions[121];
+        eglQueryDisplayAttribNV = functions[122];
+        eglSetStreamMetadataNV = functions[123];
+        eglQueryStreamMetadataNV = functions[124];
+        eglResetStreamNV = functions[125];
+        eglCreateStreamSyncNV = functions[126];
+        eglCreateFenceSyncNV = functions[127];
+        eglDestroySyncNV = functions[128];
+        eglFenceNV = functions[129];
+        eglClientWaitSyncNV = functions[130];
+        eglSignalSyncNV = functions[131];
+        eglGetSyncAttribNV = functions[132];
+        eglGetSystemTimeFrequencyNV = functions[133];
+        eglGetSystemTimeNV = functions[134];
 
         EGL10 = ext.contains("EGL10") && EGL.checkExtension("EGL10", org.lwjgl.egl.EGL10.isAvailable(this));
         EGL11 = ext.contains("EGL11") && EGL.checkExtension("EGL11", org.lwjgl.egl.EGL11.isAvailable(this));
@@ -963,6 +971,7 @@ public class EGLCapabilities {
         EGL_EXT_gl_colorspace_scrgb_linear = ext.contains("EGL_EXT_gl_colorspace_scrgb_linear");
         EGL_EXT_image_dma_buf_import = ext.contains("EGL_EXT_image_dma_buf_import");
         EGL_EXT_image_dma_buf_import_modifiers = ext.contains("EGL_EXT_image_dma_buf_import_modifiers") && EGL.checkExtension("EGL_EXT_image_dma_buf_import_modifiers", EXTImageDMABufImportModifiers.isAvailable(this));
+        EGL_EXT_image_gl_colorspace = ext.contains("EGL_EXT_image_gl_colorspace");
         EGL_EXT_image_implicit_sync_control = ext.contains("EGL_EXT_image_implicit_sync_control");
         EGL_EXT_multiview_window = ext.contains("EGL_EXT_multiview_window");
         EGL_EXT_output_base = ext.contains("EGL_EXT_output_base") && EGL.checkExtension("EGL_EXT_output_base", EXTOutputBase.isAvailable(this));
@@ -1046,6 +1055,7 @@ public class EGLCapabilities {
         EGL_NV_stream_cross_system = ext.contains("EGL_NV_stream_cross_system");
         EGL_NV_stream_fifo_next = ext.contains("EGL_NV_stream_fifo_next");
         EGL_NV_stream_fifo_synchronous = ext.contains("EGL_NV_stream_fifo_synchronous");
+        EGL_NV_stream_flush = ext.contains("EGL_NV_stream_flush") && EGL.checkExtension("EGL_NV_stream_flush", NVStreamFlush.isAvailable(this));
         EGL_NV_stream_frame_limits = ext.contains("EGL_NV_stream_frame_limits");
         EGL_NV_stream_metadata = ext.contains("EGL_NV_stream_metadata") && EGL.checkExtension("EGL_NV_stream_metadata", NVStreamMetadata.isAvailable(this));
         EGL_NV_stream_remote = ext.contains("EGL_NV_stream_remote");
