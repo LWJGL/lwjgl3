@@ -264,7 +264,11 @@ EXPORTS
         </build>
 
         <!-- rpmalloc -->
-        <build_simple module="rpmalloc"/>
+        <build module="rpmalloc" simple="true" if:true="${binding.rpmalloc}">
+            <linkargs>
+                <arg value="Advapi32.lib"/>
+            </linkargs>
+        </build>
 
         <!-- SSE -->
         <build_simple module="sse"/>

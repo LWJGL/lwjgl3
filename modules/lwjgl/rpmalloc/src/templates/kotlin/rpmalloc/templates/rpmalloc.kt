@@ -54,85 +54,77 @@ ENABLE_WARNINGS()""")
 
     intb(
         "malloc_initialize",
-        "Calls #malloc_initialize_config() with the default configuration."
+        "Initializes allocator with default configuration."
     )
 
     intb(
         "malloc_initialize_config",
-        """
-        Call at process start to initialize the allocator and setup global data.
-
-        This function also calls #malloc_thread_initialize().
-        """,
+        "Initializes allocator with given configuration.",
 
         nullable..rpmalloc_config_t.const.p.IN("config", "an optional ##RPMallocConfig instance")
     )
 
     Nonnull..rpmalloc_config_t.const.p(
         "malloc_config",
-        ""
+        "Gets allocator configuration."
     )
 
     void(
         "malloc_finalize",
-        """
-        Call at process exit to finalize the allocator.
-
-        This function also calls #malloc_thread_finalize().
-        """
+        "Finalizes allocator."
     )
 
     void(
         "malloc_thread_initialize",
-        "Call at each thread start to initialize the thread local data for the allocator."
+        "Initializes allocator for calling thread."
     )
 
     void(
         "malloc_thread_finalize",
-        "Call at each thread exit to finalize and release thread cache back to global cache."
+        "Finalizes allocator for calling thread."
     )
 
     void(
         "malloc_thread_collect",
-        ""
+        "Performs deferred deallocations pending for the calling thread heap."
     )
 
     intb(
         "malloc_is_thread_initialized",
-        ""
+        "Query if allocator is initialized for calling thread."
     )
 
     void(
         "malloc_thread_statistics",
-        "",
+        "Gets per-thread statistics.",
 
         rpmalloc_thread_statistics_t.p.OUT("stats", "")
     )
 
     void(
         "malloc_global_statistics",
-        "",
+        "Gets global statistics.",
 
         rpmalloc_global_statistics_t.p.OUT("stats", "")
     )
 
     void.p(
         "malloc",
-        "",
+        "Allocates a memory block of at least the given size.",
 
         AutoSizeResult..size_t.IN("size", "")
     )
 
     void(
         "free",
-        "",
+        "Frees the given memory block.",
 
         MultiTypeAll..Unsafe..nullable..void.p.IN("ptr", "")
     )
 
     void.p(
         "calloc",
-        "",
+        "Allocates a memory block of at least the given size and zero initializes it.",
 
         AutoSizeResult..size_t.IN("num", ""),
         AutoSizeResult..size_t.IN("size", "")
@@ -140,7 +132,7 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "realloc",
-        "",
+        "Reallocates the given block to at least the given size.",
 
         Unsafe..nullable..void.p.IN("ptr", ""),
         AutoSizeResult..size_t.IN("size", "")
@@ -148,7 +140,7 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "aligned_realloc",
-        "",
+        "Reallocates the given block to at least the given size and alignment, with optional control flags (see #MALLOC_NO_PRESERVE)",
 
         nullable..void.p.IN("ptr", ""),
         size_t.IN("alignment", ""),
@@ -159,7 +151,7 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "aligned_alloc",
-        "",
+        "Allocates a memory block of at least the given size and alignment.",
 
         size_t.IN("alignment", ""),
         AutoSizeResult..size_t.IN("size", "")
@@ -167,7 +159,7 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "memalign",
-        "",
+        "Allocates a memory block of at least the given size and alignment.",
 
         size_t.IN("alignment", ""),
         AutoSizeResult..size_t.IN("size", "")
@@ -175,7 +167,7 @@ ENABLE_WARNINGS()""")
 
     int(
         "posix_memalign",
-        "",
+        "Allocates a memory block of at least the given size and alignment.",
 
         Check(1)..void.p.p.OUT("memptr", ""),
         size_t.IN("alignment", ""),
@@ -184,7 +176,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "malloc_usable_size",
-        "",
+        "Queries the usable size of the given memory block (from given pointer to the end of block).",
 
         MultiTypeAll..Unsafe..void.p.IN("ptr", "")
     )

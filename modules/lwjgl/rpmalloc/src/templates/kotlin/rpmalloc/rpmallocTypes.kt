@@ -112,6 +112,9 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             offset in the offset variable in case it performs alignment and the returned pointer is offset from the actual start of the memory region due to this
             alignment. The alignment offset will be passed to the memory unmap function. The alignment offset MUST NOT be larger than 65535 (storable in an
             {@code uint16_t}), if it is you must use natural alignment to shift it into 16 bits.
+
+            If you set a {@code memory_map} function, you must also set a {@code memory_unmap} function or else the default implementation will be used for
+            both.
             """,
 
             size_t.IN("size", "the number of bytes to map"),
@@ -126,8 +129,12 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             """
             Unmap the memory pages starting at address and spanning the given number of bytes.
 
-            If release is set to 1, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range should be
-            released. If release is set to 0, the unmap is a partial decommit of a subset of the mapped memory range.
+            If release is set to non-zero, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range
+            should be released. The release argument holds the size of the entire span range. If {@code release} is set to 0, the unmap is a partial decommit
+            of a subset of the mapped memory range.
+
+            If you set a {@code memory_unmap} function, you must also set a {@code memory_map} function or else the default implementation will be used for
+            both.
             """,
 
             //void* address, size_t size, size_t offset, int release
@@ -151,9 +158,9 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
     size_t.member(
         "span_size",
         """
-        size of a span of memory pages.
+        size of a span of memory blocks.
 
-        MUST be a multiple of page size, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).
+        MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).
         """
     )
     size_t.member(
@@ -163,18 +170,11 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
 
         This can be used to minimize the system call overhead at the cost of virtual memory address space. The extra mapped pages will not be written until
         actually used, so physical committed memory should not be affected in the default implementation.
+
+        Will be aligned to a multiple of spans that match memory page size in case of huge pages.
         """
     )
-    nullable..Module.RPMALLOC.callback {
-        void(
-            "RPMemoryOverwriteCallback",
-            "Debug callback if memory guards are enabled. Called if a memory overwrite is detected before or after the allocated memory block.",
-
-            opaque_p.IN("address", "the allocated block around which memory overwrite was detected")
-        ) {
-            documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
-        }
-    }.member("memory_overwrite", "the memory overwrite callback function")
+	intb.member("enable_huge_pages", "enable use of large/huge pages")
 }
 
 val rpmalloc_global_statistics_t = struct(

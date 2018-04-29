@@ -36,15 +36,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
  * memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.</p></li>
  * <li>{@code span_size} &ndash; 
- * size of a span of memory pages.
+ * size of a span of memory blocks.
  * 
- * <p>MUST be a multiple of page size, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p></li>
+ * <p>MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p></li>
  * <li>{@code span_map_count} &ndash; 
  * number of spans to map at each request to map new virtual memory blocks.
  * 
  * <p>This can be used to minimize the system call overhead at the cost of virtual memory address space. The extra mapped pages will not be written until
- * actually used, so physical committed memory should not be affected in the default implementation.</p></li>
- * <li>{@code memory_overwrite} &ndash; the memory overwrite callback function</li>
+ * actually used, so physical committed memory should not be affected in the default implementation.</p>
+ * 
+ * <p>Will be aligned to a multiple of spans that match memory page size in case of huge pages.</p></li>
+ * <li>{@code enable_huge_pages} &ndash; enable use of large/huge pages</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -56,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t page_size;
  *     size_t span_size;
  *     size_t span_map_count;
- *     void (*{@link RPMemoryOverwriteCallbackI memory_overwrite}) (void *address);
+ *     int enable_huge_pages;
  * }</pre></code>
  */
 @NativeType("struct rpmalloc_config_t")
@@ -74,7 +76,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
         PAGE_SIZE,
         SPAN_SIZE,
         SPAN_MAP_COUNT,
-        MEMORY_OVERWRITE;
+        ENABLE_HUGE_PAGES;
 
     static {
         Layout layout = __struct(
@@ -83,7 +85,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -94,7 +96,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
         PAGE_SIZE = layout.offsetof(2);
         SPAN_SIZE = layout.offsetof(3);
         SPAN_MAP_COUNT = layout.offsetof(4);
-        MEMORY_OVERWRITE = layout.offsetof(5);
+        ENABLE_HUGE_PAGES = layout.offsetof(5);
     }
 
     RPMallocConfig(long address, @Nullable ByteBuffer container) {
@@ -131,10 +133,9 @@ public class RPMallocConfig extends Struct implements NativeResource {
     /** Returns the value of the {@code span_map_count} field. */
     @NativeType("size_t")
     public long span_map_count() { return nspan_map_count(address()); }
-    /** Returns the value of the {@code memory_overwrite} field. */
-    @Nullable
-    @NativeType("void (*) (void *)")
-    public RPMemoryOverwriteCallback memory_overwrite() { return nmemory_overwrite(address()); }
+    /** Returns the value of the {@code enable_huge_pages} field. */
+    @NativeType("int")
+    public boolean enable_huge_pages() { return nenable_huge_pages(address()) != 0; }
 
     /** Sets the specified value to the {@code memory_map} field. */
     public RPMallocConfig memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { nmemory_map(address(), value); return this; }
@@ -146,8 +147,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public RPMallocConfig span_size(@NativeType("size_t") long value) { nspan_size(address(), value); return this; }
     /** Sets the specified value to the {@code span_map_count} field. */
     public RPMallocConfig span_map_count(@NativeType("size_t") long value) { nspan_map_count(address(), value); return this; }
-    /** Sets the specified value to the {@code memory_overwrite} field. */
-    public RPMallocConfig memory_overwrite(@Nullable @NativeType("void (*) (void *)") RPMemoryOverwriteCallbackI value) { nmemory_overwrite(address(), value); return this; }
+    /** Sets the specified value to the {@code enable_huge_pages} field. */
+    public RPMallocConfig enable_huge_pages(@NativeType("int") boolean value) { nenable_huge_pages(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public RPMallocConfig set(
@@ -156,14 +157,14 @@ public class RPMallocConfig extends Struct implements NativeResource {
         long page_size,
         long span_size,
         long span_map_count,
-        RPMemoryOverwriteCallbackI memory_overwrite
+        boolean enable_huge_pages
     ) {
         memory_map(memory_map);
         memory_unmap(memory_unmap);
         page_size(page_size);
         span_size(span_size);
         span_map_count(span_map_count);
-        memory_overwrite(memory_overwrite);
+        enable_huge_pages(enable_huge_pages);
 
         return this;
     }
@@ -331,8 +332,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public static long nspan_size(long struct) { return memGetAddress(struct + RPMallocConfig.SPAN_SIZE); }
     /** Unsafe version of {@link #span_map_count}. */
     public static long nspan_map_count(long struct) { return memGetAddress(struct + RPMallocConfig.SPAN_MAP_COUNT); }
-    /** Unsafe version of {@link #memory_overwrite}. */
-    @Nullable public static RPMemoryOverwriteCallback nmemory_overwrite(long struct) { return RPMemoryOverwriteCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_OVERWRITE)); }
+    /** Unsafe version of {@link #enable_huge_pages}. */
+    public static int nenable_huge_pages(long struct) { return memGetInt(struct + RPMallocConfig.ENABLE_HUGE_PAGES); }
 
     /** Unsafe version of {@link #memory_map(RPMemoryMapCallbackI) memory_map}. */
     public static void nmemory_map(long struct, @Nullable RPMemoryMapCallbackI value) { memPutAddress(struct + RPMallocConfig.MEMORY_MAP, memAddressSafe(value)); }
@@ -344,8 +345,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public static void nspan_size(long struct, long value) { memPutAddress(struct + RPMallocConfig.SPAN_SIZE, value); }
     /** Unsafe version of {@link #span_map_count(long) span_map_count}. */
     public static void nspan_map_count(long struct, long value) { memPutAddress(struct + RPMallocConfig.SPAN_MAP_COUNT, value); }
-    /** Unsafe version of {@link #memory_overwrite(RPMemoryOverwriteCallbackI) memory_overwrite}. */
-    public static void nmemory_overwrite(long struct, @Nullable RPMemoryOverwriteCallbackI value) { memPutAddress(struct + RPMallocConfig.MEMORY_OVERWRITE, memAddressSafe(value)); }
+    /** Unsafe version of {@link #enable_huge_pages(boolean) enable_huge_pages}. */
+    public static void nenable_huge_pages(long struct, int value) { memPutInt(struct + RPMallocConfig.ENABLE_HUGE_PAGES, value); }
 
     // -----------------------------------
 
@@ -410,10 +411,9 @@ public class RPMallocConfig extends Struct implements NativeResource {
         /** Returns the value of the {@code span_map_count} field. */
         @NativeType("size_t")
         public long span_map_count() { return RPMallocConfig.nspan_map_count(address()); }
-        /** Returns the value of the {@code memory_overwrite} field. */
-        @Nullable
-        @NativeType("void (*) (void *)")
-        public RPMemoryOverwriteCallback memory_overwrite() { return RPMallocConfig.nmemory_overwrite(address()); }
+        /** Returns the value of the {@code enable_huge_pages} field. */
+        @NativeType("int")
+        public boolean enable_huge_pages() { return RPMallocConfig.nenable_huge_pages(address()) != 0; }
 
         /** Sets the specified value to the {@code memory_map} field. */
         public RPMallocConfig.Buffer memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { RPMallocConfig.nmemory_map(address(), value); return this; }
@@ -425,8 +425,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
         public RPMallocConfig.Buffer span_size(@NativeType("size_t") long value) { RPMallocConfig.nspan_size(address(), value); return this; }
         /** Sets the specified value to the {@code span_map_count} field. */
         public RPMallocConfig.Buffer span_map_count(@NativeType("size_t") long value) { RPMallocConfig.nspan_map_count(address(), value); return this; }
-        /** Sets the specified value to the {@code memory_overwrite} field. */
-        public RPMallocConfig.Buffer memory_overwrite(@Nullable @NativeType("void (*) (void *)") RPMemoryOverwriteCallbackI value) { RPMallocConfig.nmemory_overwrite(address(), value); return this; }
+        /** Sets the specified value to the {@code enable_huge_pages} field. */
+        public RPMallocConfig.Buffer enable_huge_pages(@NativeType("int") boolean value) { RPMallocConfig.nenable_huge_pages(address(), value ? 1 : 0); return this; }
 
     }
 

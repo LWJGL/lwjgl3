@@ -44,8 +44,12 @@ public interface RPMemoryUnmapCallbackI extends CallbackI.V {
     /**
      * Unmap the memory pages starting at address and spanning the given number of bytes.
      * 
-     * <p>If release is set to 1, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range should be
-     * released. If release is set to 0, the unmap is a partial decommit of a subset of the mapped memory range.</p>
+     * <p>If release is set to non-zero, the unmap is for an entire span range as returned by a previous call to {@code memory_map} and that the entire range
+     * should be released. The release argument holds the size of the entire span range. If {@code release} is set to 0, the unmap is a partial decommit
+     * of a subset of the mapped memory range.</p>
+     * 
+     * <p>If you set a {@code memory_unmap} function, you must also set a {@code memory_map} function or else the default implementation will be used for
+     * both.</p>
      *
      * @param address the address to unmap
      * @param size    the size of the mapped pages, in bytes
