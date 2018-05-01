@@ -2538,7 +2538,6 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         ${note(ul(
             "This function must only be called from the main thread.",
-            "The specified image data is copied before this function returns."
         ))}
         """,
 
