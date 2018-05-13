@@ -939,18 +939,16 @@ ENABLE_WARNINGS()""")
         """
         Reference a prefix (single-usage dictionary) for next compression job.
 
-        Decompression need same prefix to properly regenerate data. Prefix is <b>only used once</b>. Tables are discarded at end of compression job. Subsequent
-        compression jobs will be done without prefix (if none is explicitly referenced). If there is a need to use same prefix multiple times, consider
-        embedding it into a {@code ZSTD_CDict} instead.
+        Decompression need same prefix to properly regenerate data. Prefix is <b>only used once</b>. Tables are discarded at end of compression job. (#e_end)
 
         Special: Adding any prefix (including #NULL) invalidates any previous prefix or dictionary.
 
         Notes:
         ${ol(
-            "Prefix buffer is referenced. It must outlive compression job.",
+            "Prefix buffer is referenced. It <b>must</b> outlive compression job. Its content must remain unmodified up to end of compression (#e_end).",
             """
             Referencing a prefix involves building tables, which are dependent on compression parameters. It's a CPU consuming operation, with non-negligible
-            impact on latency.
+            impact on latency. If there is a need to use same prefix multiple times, consider #CCtx_loadDictionary() instead.
             """,
             "By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use #CCtx_refPrefix_advanced() to alter {@code dictMode}."
         )}
@@ -1197,15 +1195,17 @@ ENABLE_WARNINGS()""")
         """
         Reference a prefix (single-usage dictionary) for next compression job.
 
-        Prefix is <b>only used once</b>. It must be explicitly referenced before each frame. If there is a need to use same prefix multiple times, consider
-        embedding it into a {@code ZSTD_DDict} instead.
+        Prefix is <b>only used once</b>. Reference is discarded at end of frame. End of frame is reached when {@code ZSTD_DCtx_decompress_generic()} returns 0.
 
         Notes:
         ${ol(
             "Adding any prefix (including #NULL) invalidates any previously set prefix or dictionary",
-            "Prefix buffer is referenced. It must outlive compression job.",
+            """
+            Prefix buffer is referenced. It <b>must</b> outlive decompression job. Prefix buffer must remain unmodified up to the end of frame, reached when
+            {@code ZSTD_DCtx_decompress_generic()} returns 0.
+            """,
             "By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use #CCtx_refPrefix_advanced() to alter {@code dictMode}.",
-            "Referencing a raw content prefix has almost no cpu nor memory cost."
+            "Referencing a raw content prefix has almost no cpu nor memory cost. A fulldict prefix is more costly though."
         )}
         """,
 

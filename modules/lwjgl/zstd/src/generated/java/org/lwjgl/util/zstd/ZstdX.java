@@ -1252,18 +1252,16 @@ public class ZstdX {
     /**
      * Reference a prefix (single-usage dictionary) for next compression job.
      * 
-     * <p>Decompression need same prefix to properly regenerate data. Prefix is <b>only used once</b>. Tables are discarded at end of compression job. Subsequent
-     * compression jobs will be done without prefix (if none is explicitly referenced). If there is a need to use same prefix multiple times, consider
-     * embedding it into a {@code ZSTD_CDict} instead.</p>
+     * <p>Decompression need same prefix to properly regenerate data. Prefix is <b>only used once</b>. Tables are discarded at end of compression job. ({@link #ZSTD_e_end e_end})</p>
      * 
      * <p>Special: Adding any prefix (including {@code NULL}) invalidates any previous prefix or dictionary.</p>
      * 
      * <p>Notes:</p>
      * 
      * <ol>
-     * <li>Prefix buffer is referenced. It must outlive compression job.</li>
+     * <li>Prefix buffer is referenced. It <b>must</b> outlive compression job. Its content must remain unmodified up to end of compression ({@link #ZSTD_e_end e_end}).</li>
      * <li>Referencing a prefix involves building tables, which are dependent on compression parameters. It's a CPU consuming operation, with non-negligible
-     * impact on latency.</li>
+     * impact on latency. If there is a need to use same prefix multiple times, consider {@link #ZSTD_CCtx_loadDictionary CCtx_loadDictionary} instead.</li>
      * <li>By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use {@link #ZSTD_CCtx_refPrefix_advanced CCtx_refPrefix_advanced} to alter {@code dictMode}.</li>
      * </ol>
      *
@@ -1659,16 +1657,16 @@ public class ZstdX {
     /**
      * Reference a prefix (single-usage dictionary) for next compression job.
      * 
-     * <p>Prefix is <b>only used once</b>. It must be explicitly referenced before each frame. If there is a need to use same prefix multiple times, consider
-     * embedding it into a {@code ZSTD_DDict} instead.</p>
+     * <p>Prefix is <b>only used once</b>. Reference is discarded at end of frame. End of frame is reached when {@code ZSTD_DCtx_decompress_generic()} returns 0.</p>
      * 
      * <p>Notes:</p>
      * 
      * <ol>
      * <li>Adding any prefix (including {@code NULL}) invalidates any previously set prefix or dictionary</li>
-     * <li>Prefix buffer is referenced. It must outlive compression job.</li>
+     * <li>Prefix buffer is referenced. It <b>must</b> outlive decompression job. Prefix buffer must remain unmodified up to the end of frame, reached when
+     * {@code ZSTD_DCtx_decompress_generic()} returns 0.</li>
      * <li>By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use {@link #ZSTD_CCtx_refPrefix_advanced CCtx_refPrefix_advanced} to alter {@code dictMode}.</li>
-     * <li>Referencing a raw content prefix has almost no cpu nor memory cost.</li>
+     * <li>Referencing a raw content prefix has almost no cpu nor memory cost. A fulldict prefix is more costly though.</li>
      * </ol>
      *
      * @param dctx   

@@ -272,33 +272,38 @@ typedef struct ZSTD_outBuffer_s {
 *  since it will play nicer with system's memory, by re-using already allocated memory.
 *  Use one separate ZSTD_CStream per thread for parallel execution.
 *
-*  Start a new compression by initializing ZSTD_CStream.
+*  Start a new compression by initializing ZSTD_CStream context.
 *  Use ZSTD_initCStream() to start a new compression operation.
-*  Use ZSTD_initCStream_usingDict() or ZSTD_initCStream_usingCDict() for a compression which requires a dictionary (experimental section)
+*  Use variants ZSTD_initCStream_usingDict() or ZSTD_initCStream_usingCDict() for streaming with dictionary (experimental section)
 *
-*  Use ZSTD_compressStream() repetitively to consume input stream.
-*  The function will automatically update both `pos` fields.
-*  Note that it may not consume the entire input, in which case `pos < size`,
-*  and it's up to the caller to present again remaining data.
+*  Use ZSTD_compressStream() as many times as necessary to consume input stream.
+*  The function will automatically update both `pos` fields within `input` and `output`.
+*  Note that the function may not consume the entire input,
+*  for example, because the output buffer is already full,
+*  in which case `input.pos < input.size`.
+*  The caller must check if input has been entirely consumed.
+*  If not, the caller must make some room to receive more compressed data,
+*  typically by emptying output buffer, or allocating a new output buffer,
+*  and then present again remaining input data.
 *  @return : a size hint, preferred nb of bytes to use as input for next function call
 *            or an error code, which can be tested using ZSTD_isError().
 *            Note 1 : it's just a hint, to help latency a little, any other value will work fine.
 *            Note 2 : size hint is guaranteed to be <= ZSTD_CStreamInSize()
 *
-*  At any moment, it's possible to flush whatever data remains within internal buffer, using ZSTD_flushStream().
-*  `output->pos` will be updated.
-*  Note that some content might still be left within internal buffer if `output->size` is too small.
-*  @return : nb of bytes still present within internal buffer (0 if it's empty)
+*  At any moment, it's possible to flush whatever data might remain stuck within internal buffer,
+*  using ZSTD_flushStream(). `output->pos` will be updated.
+*  Note that, if `output->size` is too small, a single invocation of ZSTD_flushStream() might not be enough (return code > 0).
+*  In which case, make some room to receive more compressed data, and call again ZSTD_flushStream().
+*  @return : 0 if internal buffers are entirely flushed,
+*            >0 if some data still present within internal buffer (the value is minimal estimation of remaining size),
 *            or an error code, which can be tested using ZSTD_isError().
 *
 *  ZSTD_endStream() instructs to finish a frame.
 *  It will perform a flush and write frame epilogue.
 *  The epilogue is required for decoders to consider a frame completed.
-*  ZSTD_endStream() may not be able to flush full data if `output->size` is too small.
-*  In which case, call again ZSTD_endStream() to complete the flush.
+*  flush() operation is the same, and follows same rules as ZSTD_flushStream().
 *  @return : 0 if frame fully completed and fully flushed,
-             or >0 if some data is still present within internal buffer
-                  (value is minimum size estimation for remaining data to flush, but it could be more)
+*            >0 if some data still present within internal buffer (the value is minimal estimation of remaining size),
 *            or an error code, which can be tested using ZSTD_isError().
 *
 * *******************************************************************/
@@ -1124,18 +1129,21 @@ ZSTDLIB_API size_t ZSTD_CCtx_refCDict(ZSTD_CCtx* cctx, const ZSTD_CDict* cdict);
 /*! ZSTD_CCtx_refPrefix() :
  *  Reference a prefix (single-usage dictionary) for next compression job.
  *  Decompression need same prefix to properly regenerate data.
- *  Prefix is **only used once**. Tables are discarded at end of compression job.
- *  Subsequent compression jobs will be done without prefix (if none is explicitly referenced).
- *  If there is a need to use same prefix multiple times, consider embedding it into a ZSTD_CDict instead.
+ *  Prefix is **only used once**. Tables are discarded at end of compression job (ZSTD_e_end).
  * @result : 0, or an error code (which can be tested with ZSTD_isError()).
  *  Special: Adding any prefix (including NULL) invalidates any previous prefix or dictionary
- *  Note 1 : Prefix buffer is referenced. It must outlive compression job.
+ *  Note 1 : Prefix buffer is referenced. It **must** outlive compression job.
+ *           Its contain must remain unmodified up to end of compression (ZSTD_e_end).
  *  Note 2 : Referencing a prefix involves building tables, which are dependent on compression parameters.
  *           It's a CPU consuming operation, with non-negligible impact on latency.
+ *           If there is a need to use same prefix multiple times, consider loadDictionary instead.
  *  Note 3 : By default, the prefix is treated as raw content (ZSTD_dm_rawContent).
  *           Use ZSTD_CCtx_refPrefix_advanced() to alter dictMode. */
-ZSTDLIB_API size_t ZSTD_CCtx_refPrefix(ZSTD_CCtx* cctx, const void* prefix, size_t prefixSize);
-ZSTDLIB_API size_t ZSTD_CCtx_refPrefix_advanced(ZSTD_CCtx* cctx, const void* prefix, size_t prefixSize, ZSTD_dictContentType_e dictContentType);
+ZSTDLIB_API size_t ZSTD_CCtx_refPrefix(ZSTD_CCtx* cctx,
+                                       const void* prefix, size_t prefixSize);
+ZSTDLIB_API size_t ZSTD_CCtx_refPrefix_advanced(ZSTD_CCtx* cctx,
+                                       const void* prefix, size_t prefixSize,
+                                       ZSTD_dictContentType_e dictContentType);
 
 /*! ZSTD_CCtx_reset() :
  *  Return a CCtx to clean state.
@@ -1312,17 +1320,23 @@ ZSTDLIB_API size_t ZSTD_DCtx_refDDict(ZSTD_DCtx* dctx, const ZSTD_DDict* ddict);
 
 /*! ZSTD_DCtx_refPrefix() :
  *  Reference a prefix (single-usage dictionary) for next compression job.
- *  Prefix is **only used once**. It must be explicitly referenced before each frame.
- *  If there is a need to use same prefix multiple times, consider embedding it into a ZSTD_DDict instead.
+ *  Prefix is **only used once**. Reference is discarded at end of frame.
+ *  End of frame is reached when ZSTD_DCtx_decompress_generic() returns 0.
  * @result : 0, or an error code (which can be tested with ZSTD_isError()).
  *  Note 1 : Adding any prefix (including NULL) invalidates any previously set prefix or dictionary
- *  Note 2 : Prefix buffer is referenced. It must outlive compression job.
+ *  Note 2 : Prefix buffer is referenced. It **must** outlive decompression job.
+ *           Prefix buffer must remain unmodified up to the end of frame,
+ *           reached when ZSTD_DCtx_decompress_generic() returns 0.
  *  Note 3 : By default, the prefix is treated as raw content (ZSTD_dm_rawContent).
  *           Use ZSTD_CCtx_refPrefix_advanced() to alter dictMode.
  *  Note 4 : Referencing a raw content prefix has almost no cpu nor memory cost.
+ *           A fulldict prefix is more costly though.
  */
-ZSTDLIB_API size_t ZSTD_DCtx_refPrefix(ZSTD_DCtx* dctx, const void* prefix, size_t prefixSize);
-ZSTDLIB_API size_t ZSTD_DCtx_refPrefix_advanced(ZSTD_DCtx* dctx, const void* prefix, size_t prefixSize, ZSTD_dictContentType_e dictContentType);
+ZSTDLIB_API size_t ZSTD_DCtx_refPrefix(ZSTD_DCtx* dctx,
+                                    const void* prefix, size_t prefixSize);
+ZSTDLIB_API size_t ZSTD_DCtx_refPrefix_advanced(ZSTD_DCtx* dctx,
+                                    const void* prefix, size_t prefixSize,
+                                    ZSTD_dictContentType_e dictContentType);
 
 
 /*! ZSTD_DCtx_setMaxWindowSize() :

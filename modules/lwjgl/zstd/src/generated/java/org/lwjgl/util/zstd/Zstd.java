@@ -51,18 +51,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  * since it will play nicer with system's memory, by re-using already allocated memory. Use one separate {@code ZSTD_CStream} per thread for parallel
  * execution.</p>
  * 
- * <p>Start a new compression by initializing {@code ZSTD_CStream}. Use {@link #ZSTD_initCStream initCStream} to start a new compression operation. Use
- * {@code ZSTD_initCStream_usingDict()} or {@code ZSTD_initCStream_usingCDict()} for a compression which requires a dictionary (experimental section).</p>
+ * <p>Start a new compression by initializing {@code ZSTD_CStream} context. Use {@link #ZSTD_initCStream initCStream} to start a new compression operation.</p>
  * 
- * <p>Use {@link #ZSTD_compressStream compressStream} repetitively to consume input stream. The function will automatically update both {@code pos} fields. Note that it may not
- * consume the entire input, in which case {@code pos < size}, and it's up to the caller to present again remaining data.</p>
+ * <p>Use {@link #ZSTD_compressStream compressStream} as many times as necessary to consume input stream. The function will automatically update both {@code pos} fields within
+ * {@code input} and {@code output}. Note that the function may not consume the entire input, for example, because the output buffer is already full, in
+ * which case {@code input.pos < input.size}. The caller must check if input has been entirely consumed. If not, the caller must make some room to receive
+ * more compressed data, typically by emptying output buffer, or allocating a new output buffer, and then present again remaining input data.</p>
  * 
- * <p>At any moment, it's possible to flush whatever data remains within internal buffer, using {@link #ZSTD_flushStream flushStream}. {@code output->pos} will be updated. Note
- * that some content might still be left within internal buffer if {@code output->size} is too small.</p>
+ * <p>At any moment, it's possible to flush whatever data might remain stuck within internal buffer, using {@link #ZSTD_flushStream flushStream}. {@code output->pos} will be
+ * updated. Note that, if {@code output->size} is too small, a single invocation of {@code ZSTD_flushStream()} might not be enough (return code &gt; 0).
+ * In which case, make some room to receive more compressed data, and call again {@code ZSTD_flushStream()}.</p>
  * 
  * <p>{@link #ZSTD_endStream endStream} instructs to finish a frame. It will perform a flush and write frame epilogue. The epilogue is required for decoders to consider a frame
- * completed. {@link #ZSTD_endStream endStream} may not be able to flush full data if {output->size} is too small. In which case, call again {@link #ZSTD_endStream endStream} to complete the
- * flush.</p>
+ * completed. {@code flush()} operation is the same, and follows same rules as {@code ZSTD_flushStream()}.</p>
  * 
  * <h3>Streaming decompression - HowTo</h3>
  * 
