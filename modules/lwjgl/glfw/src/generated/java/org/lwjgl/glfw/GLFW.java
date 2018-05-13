@@ -3458,12 +3458,7 @@ public class GLFW {
     /**
      * Returns a cursor with a standard shape, that can be set for a window with {@link #glfwSetCursor SetCursor}.
      * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <ul>
-     * <li>This function must only be called from the main thread.</li>
-     * <li>The specified image data is copied before this function returns.</li>
-     * </ul></div>
+     * <p>This function must only be called from the main thread.</p>
      *
      * @param shape one of the standard shapes. One of:<br><table><tr><td>{@link #GLFW_ARROW_CURSOR ARROW_CURSOR}</td><td>{@link #GLFW_IBEAM_CURSOR IBEAM_CURSOR}</td><td>{@link #GLFW_CROSSHAIR_CURSOR CROSSHAIR_CURSOR}</td><td>{@link #GLFW_HAND_CURSOR HAND_CURSOR}</td><td>{@link #GLFW_HRESIZE_CURSOR HRESIZE_CURSOR}</td><td>{@link #GLFW_VRESIZE_CURSOR VRESIZE_CURSOR}</td></tr></table>
      *

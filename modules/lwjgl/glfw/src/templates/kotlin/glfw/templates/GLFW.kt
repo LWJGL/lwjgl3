@@ -2536,9 +2536,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Returns a cursor with a standard shape, that can be set for a window with #SetCursor().
 
-        ${note(ul(
-            "This function must only be called from the main thread.",
-        ))}
+        This function must only be called from the main thread.
         """,
 
         int.IN("shape", "one of the standard shapes", CursorShapes),
