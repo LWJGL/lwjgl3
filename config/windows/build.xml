@@ -18,7 +18,7 @@
         <sequential>
             <mkdir dir="@{dest}"/>
             <apply executable="cl" dest="@{dest}" skipemptyfilesets="true" failonerror="true" relative="@{relative}" parallel="true" taskname="Compiler">
-                <arg line="/c @{flags} /EHsc /Ox /GF /Gy /GL /GR- /GS- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
+                <arg line="/c @{flags} /wd5045 /EHsc /Ox /GF /Gy /GL /GR- /GS- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
 
                 <arg value="/Fo@{dest}\"/>
 
