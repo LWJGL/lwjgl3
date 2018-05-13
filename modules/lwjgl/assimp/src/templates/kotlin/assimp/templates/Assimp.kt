@@ -1464,6 +1464,86 @@ aiAttachLogStream(&c);""")}
         returnDoc = "The log stream. callback is set to #NULL if something went wrong."
     )*/
 
+    /*javaImport("static org.lwjgl.system.dyncall.DynCall.*")
+
+    customMethod("""
+    private static final long GetPredefinedLogStream = ASSIMP.getFunctionAddress("aiGetPredefinedLogStream");
+
+    /** Unsafe version of: {@link #aiGetPredefinedLogStream GetPredefinedLogStream} */
+    public static void naiGetPredefinedLogStream(int pStreams, long file, long __result) {
+        long s = dcNewStruct(2, 0);
+        dcStructField(s, DC_SIGCHAR_POINTER, 0, 1);
+        dcStructField(s, DC_SIGCHAR_POINTER, 0, 1);
+        dcCloseStruct(s);
+
+        long vm = dcNewCallVM(8192);
+        dcMode(vm, DC_CALL_C_DEFAULT);
+        {
+            dcReset(vm);
+            dcArgInt(vm, pStreams);
+            dcArgPointer(vm, file);
+            dcCallStruct(vm, GetPredefinedLogStream, s, __result);
+        }
+        dcFree(vm);
+        dcFreeStruct(s);
+    }
+
+    /**
+     * Get one of the predefine log streams. This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce
+     * Assimp's overall import performance.
+     *
+     * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
+     *
+     * <code><pre>
+     * struct aiLogStream c;
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
+     * aiAttachLogStream(&c);
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
+     * aiAttachLogStream(&c);</pre></code>
+     *
+     * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
+     * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
+     * @param __result The log stream. callback is set to {@code NULL} if something went wrong.
+     */
+    @NativeType("struct aiLogStream")
+    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") ByteBuffer file, AILogStream __result) {
+        if (CHECKS) {
+            checkNT1Safe(file);
+        }
+        naiGetPredefinedLogStream(pStreams, memAddressSafe(file), __result.address());
+        return __result;
+    }
+
+    /**
+     * Get one of the predefine log streams. This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce
+     * Assimp's overall import performance.
+     *
+     * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
+     *
+     * <code><pre>
+     * struct aiLogStream c;
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
+     * aiAttachLogStream(&c);
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
+     * aiAttachLogStream(&c);</pre></code>
+     *
+     * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
+     * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
+     * @param __result The log stream. callback is set to {@code NULL} if something went wrong.
+     */
+    @NativeType("struct aiLogStream")
+    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") CharSequence file, AILogStream __result) {
+        MemoryStack stack        = stackGet();
+        int         stackPointer = stack.getPointer();
+        try {
+            ByteBuffer fileEncoded = stack.UTF8Safe(file);
+            naiGetPredefinedLogStream(pStreams, memAddressSafe(fileEncoded), __result.address());
+            return __result;
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }""")*/
+
     void(
         "AttachLogStream",
         """
