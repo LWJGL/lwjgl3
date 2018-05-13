@@ -120,6 +120,8 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
     public int sampleLocationSampleCounts() { return nsampleLocationSampleCounts(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code maxSampleLocationGridSize} field. */
     public VkExtent2D maxSampleLocationGridSize() { return nmaxSampleLocationGridSize(address()); }
+    /** Passes the {@code maxSampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPhysicalDeviceSampleLocationsPropertiesEXT maxSampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxSampleLocationGridSize()); return this; }
     /** Returns a {@link FloatBuffer} view of the {@code sampleLocationCoordinateRange} field. */
     @NativeType("float[2]")
     public FloatBuffer sampleLocationCoordinateRange() { return nsampleLocationCoordinateRange(address()); }
@@ -272,6 +274,8 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
         public int sampleLocationSampleCounts() { return VkPhysicalDeviceSampleLocationsPropertiesEXT.nsampleLocationSampleCounts(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code maxSampleLocationGridSize} field. */
         public VkExtent2D maxSampleLocationGridSize() { return VkPhysicalDeviceSampleLocationsPropertiesEXT.nmaxSampleLocationGridSize(address()); }
+        /** Passes the {@code maxSampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer maxSampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxSampleLocationGridSize()); return this; }
         /** Returns a {@link FloatBuffer} view of the {@code sampleLocationCoordinateRange} field. */
         @NativeType("float[2]")
         public FloatBuffer sampleLocationCoordinateRange() { return VkPhysicalDeviceSampleLocationsPropertiesEXT.nsampleLocationCoordinateRange(address()); }

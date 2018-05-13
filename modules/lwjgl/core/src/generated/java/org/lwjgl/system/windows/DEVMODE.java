@@ -340,6 +340,8 @@ public class DEVMODE extends Struct implements NativeResource {
     public short dmPrintQuality() { return ndmPrintQuality(address()); }
     /** Returns a {@link POINTL} view of the {@code dmPosition} field. */
     public POINTL dmPosition() { return ndmPosition(address()); }
+    /** Passes the {@code dmPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public DEVMODE dmPosition(java.util.function.Consumer<POINTL> consumer) { consumer.accept(dmPosition()); return this; }
     /** Returns the value of the {@code dmDisplayOrientation} field. */
     @NativeType("DWORD")
     public int dmDisplayOrientation() { return ndmDisplayOrientation(address()); }
@@ -741,6 +743,8 @@ public class DEVMODE extends Struct implements NativeResource {
         public short dmPrintQuality() { return DEVMODE.ndmPrintQuality(address()); }
         /** Returns a {@link POINTL} view of the {@code dmPosition} field. */
         public POINTL dmPosition() { return DEVMODE.ndmPosition(address()); }
+        /** Passes the {@code dmPosition} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public DEVMODE.Buffer dmPosition(java.util.function.Consumer<POINTL> consumer) { consumer.accept(dmPosition()); return this; }
         /** Returns the value of the {@code dmDisplayOrientation} field. */
         @NativeType("DWORD")
         public int dmDisplayOrientation() { return DEVMODE.ndmDisplayOrientation(address()); }

@@ -248,6 +248,8 @@ public class AIMesh extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIMesh mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns the value of the {@code mNumAnimMeshes} field. */
     @NativeType("unsigned int")
     public int mNumAnimMeshes() { return nmNumAnimMeshes(address()); }
@@ -719,6 +721,8 @@ public class AIMesh extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIMesh.nmName(address()); }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIMesh.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns the value of the {@code mNumAnimMeshes} field. */
         @NativeType("unsigned int")
         public int mNumAnimMeshes() { return AIMesh.nmNumAnimMeshes(address()); }

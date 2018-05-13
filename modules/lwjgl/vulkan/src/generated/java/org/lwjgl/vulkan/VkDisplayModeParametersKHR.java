@@ -88,6 +88,8 @@ public class VkDisplayModeParametersKHR extends Struct implements NativeResource
 
     /** Returns a {@link VkExtent2D} view of the {@code visibleRegion} field. */
     public VkExtent2D visibleRegion() { return nvisibleRegion(address()); }
+    /** Passes the {@code visibleRegion} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkDisplayModeParametersKHR visibleRegion(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(visibleRegion()); return this; }
     /** Returns the value of the {@code refreshRate} field. */
     @NativeType("uint32_t")
     public int refreshRate() { return nrefreshRate(address()); }
@@ -319,6 +321,8 @@ public class VkDisplayModeParametersKHR extends Struct implements NativeResource
 
         /** Returns a {@link VkExtent2D} view of the {@code visibleRegion} field. */
         public VkExtent2D visibleRegion() { return VkDisplayModeParametersKHR.nvisibleRegion(address()); }
+        /** Passes the {@code visibleRegion} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkDisplayModeParametersKHR.Buffer visibleRegion(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(visibleRegion()); return this; }
         /** Returns the value of the {@code refreshRate} field. */
         @NativeType("uint32_t")
         public int refreshRate() { return VkDisplayModeParametersKHR.nrefreshRate(address()); }

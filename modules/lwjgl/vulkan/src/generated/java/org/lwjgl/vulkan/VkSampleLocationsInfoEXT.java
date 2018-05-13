@@ -133,6 +133,8 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     public int sampleLocationsPerPixel() { return nsampleLocationsPerPixel(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code sampleLocationGridSize} field. */
     public VkExtent2D sampleLocationGridSize() { return nsampleLocationGridSize(address()); }
+    /** Passes the {@code sampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkSampleLocationsInfoEXT sampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(sampleLocationGridSize()); return this; }
     /** Returns the value of the {@code sampleLocationsCount} field. */
     @NativeType("uint32_t")
     public int sampleLocationsCount() { return nsampleLocationsCount(address()); }
@@ -425,6 +427,8 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         public int sampleLocationsPerPixel() { return VkSampleLocationsInfoEXT.nsampleLocationsPerPixel(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code sampleLocationGridSize} field. */
         public VkExtent2D sampleLocationGridSize() { return VkSampleLocationsInfoEXT.nsampleLocationGridSize(address()); }
+        /** Passes the {@code sampleLocationGridSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkSampleLocationsInfoEXT.Buffer sampleLocationGridSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(sampleLocationGridSize()); return this; }
         /** Returns the value of the {@code sampleLocationsCount} field. */
         @NativeType("uint32_t")
         public int sampleLocationsCount() { return VkSampleLocationsInfoEXT.nsampleLocationsCount(address()); }

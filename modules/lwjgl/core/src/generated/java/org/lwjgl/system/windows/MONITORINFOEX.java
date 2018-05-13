@@ -105,8 +105,12 @@ public class MONITORINFOEX extends Struct implements NativeResource {
     public int cbSize() { return ncbSize(address()); }
     /** Returns a {@link RECT} view of the {@code rcMonitor} field. */
     public RECT rcMonitor() { return nrcMonitor(address()); }
+    /** Passes the {@code rcMonitor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public MONITORINFOEX rcMonitor(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcMonitor()); return this; }
     /** Returns a {@link RECT} view of the {@code rcWork} field. */
     public RECT rcWork() { return nrcWork(address()); }
+    /** Passes the {@code rcWork} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public MONITORINFOEX rcWork(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcWork()); return this; }
     /** Returns the value of the {@code dwFlags} field. */
     @NativeType("DWORD")
     public int dwFlags() { return ndwFlags(address()); }
@@ -340,8 +344,12 @@ public class MONITORINFOEX extends Struct implements NativeResource {
         public int cbSize() { return MONITORINFOEX.ncbSize(address()); }
         /** Returns a {@link RECT} view of the {@code rcMonitor} field. */
         public RECT rcMonitor() { return MONITORINFOEX.nrcMonitor(address()); }
+        /** Passes the {@code rcMonitor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public MONITORINFOEX.Buffer rcMonitor(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcMonitor()); return this; }
         /** Returns a {@link RECT} view of the {@code rcWork} field. */
         public RECT rcWork() { return MONITORINFOEX.nrcWork(address()); }
+        /** Passes the {@code rcWork} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public MONITORINFOEX.Buffer rcWork(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcWork()); return this; }
         /** Returns the value of the {@code dwFlags} field. */
         @NativeType("DWORD")
         public int dwFlags() { return MONITORINFOEX.ndwFlags(address()); }

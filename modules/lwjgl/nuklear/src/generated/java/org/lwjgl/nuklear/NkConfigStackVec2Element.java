@@ -71,6 +71,8 @@ class NkConfigStackVec2Element extends Struct {
     /** Returns a {@link NkVec2} view of the {@code old_value} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 old_value() { return nold_value(address()); }
+    /** Passes the {@code old_value} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkConfigStackVec2Element old_value(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(old_value()); return this; }
 
     // -----------------------------------
 
@@ -160,6 +162,8 @@ class NkConfigStackVec2Element extends Struct {
         /** Returns a {@link NkVec2} view of the {@code old_value} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 old_value() { return NkConfigStackVec2Element.nold_value(address()); }
+        /** Passes the {@code old_value} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkConfigStackVec2Element.Buffer old_value(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(old_value()); return this; }
 
     }
 

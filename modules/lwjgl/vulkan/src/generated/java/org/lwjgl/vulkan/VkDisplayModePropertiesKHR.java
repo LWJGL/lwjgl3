@@ -80,6 +80,8 @@ public class VkDisplayModePropertiesKHR extends Struct implements NativeResource
     public long displayMode() { return ndisplayMode(address()); }
     /** Returns a {@link VkDisplayModeParametersKHR} view of the {@code parameters} field. */
     public VkDisplayModeParametersKHR parameters() { return nparameters(address()); }
+    /** Passes the {@code parameters} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkDisplayModePropertiesKHR parameters(java.util.function.Consumer<VkDisplayModeParametersKHR> consumer) { consumer.accept(parameters()); return this; }
 
     // -----------------------------------
 
@@ -278,6 +280,8 @@ public class VkDisplayModePropertiesKHR extends Struct implements NativeResource
         public long displayMode() { return VkDisplayModePropertiesKHR.ndisplayMode(address()); }
         /** Returns a {@link VkDisplayModeParametersKHR} view of the {@code parameters} field. */
         public VkDisplayModeParametersKHR parameters() { return VkDisplayModePropertiesKHR.nparameters(address()); }
+        /** Passes the {@code parameters} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkDisplayModePropertiesKHR.Buffer parameters(java.util.function.Consumer<VkDisplayModeParametersKHR> consumer) { consumer.accept(parameters()); return this; }
 
     }
 

@@ -183,6 +183,8 @@ public class YGStyle extends Struct {
     public YGFloatOptional flexShrink() { return nflexShrink(address()); }
     /** Returns a {@link YGValue} view of the {@code flexBasis} field. */
     public YGValue flexBasis() { return nflexBasis(address()); }
+    /** Passes the {@code flexBasis} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public YGStyle flexBasis(java.util.function.Consumer<YGValue> consumer) { consumer.accept(flexBasis()); return this; }
     /** Returns a {@link YGValue}.Buffer view of the {@code margin} field. */
     @NativeType("YGValue[9]")
     public YGValue.Buffer margin() { return nmargin(address()); }
@@ -409,6 +411,8 @@ public class YGStyle extends Struct {
         public YGFloatOptional flexShrink() { return YGStyle.nflexShrink(address()); }
         /** Returns a {@link YGValue} view of the {@code flexBasis} field. */
         public YGValue flexBasis() { return YGStyle.nflexBasis(address()); }
+        /** Passes the {@code flexBasis} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public YGStyle.Buffer flexBasis(java.util.function.Consumer<YGValue> consumer) { consumer.accept(flexBasis()); return this; }
         /** Returns a {@link YGValue}.Buffer view of the {@code margin} field. */
         @NativeType("YGValue[9]")
         public YGValue.Buffer margin() { return YGStyle.nmargin(address()); }

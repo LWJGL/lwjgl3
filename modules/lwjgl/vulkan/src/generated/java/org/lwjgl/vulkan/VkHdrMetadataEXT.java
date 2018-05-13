@@ -134,12 +134,20 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryRed} field. */
     public VkXYColorEXT displayPrimaryRed() { return ndisplayPrimaryRed(address()); }
+    /** Passes the {@code displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkHdrMetadataEXT displayPrimaryRed(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryRed()); return this; }
     /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryGreen} field. */
     public VkXYColorEXT displayPrimaryGreen() { return ndisplayPrimaryGreen(address()); }
+    /** Passes the {@code displayPrimaryGreen} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkHdrMetadataEXT displayPrimaryGreen(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryGreen()); return this; }
     /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryBlue} field. */
     public VkXYColorEXT displayPrimaryBlue() { return ndisplayPrimaryBlue(address()); }
+    /** Passes the {@code displayPrimaryBlue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkHdrMetadataEXT displayPrimaryBlue(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryBlue()); return this; }
     /** Returns a {@link VkXYColorEXT} view of the {@code whitePoint} field. */
     public VkXYColorEXT whitePoint() { return nwhitePoint(address()); }
+    /** Passes the {@code whitePoint} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkHdrMetadataEXT whitePoint(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(whitePoint()); return this; }
     /** Returns the value of the {@code maxLuminance} field. */
     public float maxLuminance() { return nmaxLuminance(address()); }
     /** Returns the value of the {@code minLuminance} field. */
@@ -446,12 +454,20 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
         public long pNext() { return VkHdrMetadataEXT.npNext(address()); }
         /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryRed} field. */
         public VkXYColorEXT displayPrimaryRed() { return VkHdrMetadataEXT.ndisplayPrimaryRed(address()); }
+        /** Passes the {@code displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkHdrMetadataEXT.Buffer displayPrimaryRed(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryRed()); return this; }
         /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryGreen} field. */
         public VkXYColorEXT displayPrimaryGreen() { return VkHdrMetadataEXT.ndisplayPrimaryGreen(address()); }
+        /** Passes the {@code displayPrimaryGreen} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkHdrMetadataEXT.Buffer displayPrimaryGreen(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryGreen()); return this; }
         /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryBlue} field. */
         public VkXYColorEXT displayPrimaryBlue() { return VkHdrMetadataEXT.ndisplayPrimaryBlue(address()); }
+        /** Passes the {@code displayPrimaryBlue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkHdrMetadataEXT.Buffer displayPrimaryBlue(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryBlue()); return this; }
         /** Returns a {@link VkXYColorEXT} view of the {@code whitePoint} field. */
         public VkXYColorEXT whitePoint() { return VkHdrMetadataEXT.nwhitePoint(address()); }
+        /** Passes the {@code whitePoint} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkHdrMetadataEXT.Buffer whitePoint(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(whitePoint()); return this; }
         /** Returns the value of the {@code maxLuminance} field. */
         public float maxLuminance() { return VkHdrMetadataEXT.nmaxLuminance(address()); }
         /** Returns the value of the {@code minLuminance} field. */

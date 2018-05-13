@@ -172,8 +172,12 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
     public boolean stencilTestEnable() { return nstencilTestEnable(address()) != 0; }
     /** Returns a {@link VkStencilOpState} view of the {@code front} field. */
     public VkStencilOpState front() { return nfront(address()); }
+    /** Passes the {@code front} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPipelineDepthStencilStateCreateInfo front(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(front()); return this; }
     /** Returns a {@link VkStencilOpState} view of the {@code back} field. */
     public VkStencilOpState back() { return nback(address()); }
+    /** Passes the {@code back} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPipelineDepthStencilStateCreateInfo back(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(back()); return this; }
     /** Returns the value of the {@code minDepthBounds} field. */
     public float minDepthBounds() { return nminDepthBounds(address()); }
     /** Returns the value of the {@code maxDepthBounds} field. */
@@ -510,8 +514,12 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
         public boolean stencilTestEnable() { return VkPipelineDepthStencilStateCreateInfo.nstencilTestEnable(address()) != 0; }
         /** Returns a {@link VkStencilOpState} view of the {@code front} field. */
         public VkStencilOpState front() { return VkPipelineDepthStencilStateCreateInfo.nfront(address()); }
+        /** Passes the {@code front} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPipelineDepthStencilStateCreateInfo.Buffer front(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(front()); return this; }
         /** Returns a {@link VkStencilOpState} view of the {@code back} field. */
         public VkStencilOpState back() { return VkPipelineDepthStencilStateCreateInfo.nback(address()); }
+        /** Passes the {@code back} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPipelineDepthStencilStateCreateInfo.Buffer back(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(back()); return this; }
         /** Returns the value of the {@code minDepthBounds} field. */
         public float minDepthBounds() { return VkPipelineDepthStencilStateCreateInfo.nminDepthBounds(address()); }
         /** Returns the value of the {@code maxDepthBounds} field. */

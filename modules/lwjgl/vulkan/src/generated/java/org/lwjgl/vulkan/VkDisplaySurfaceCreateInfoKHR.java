@@ -175,6 +175,8 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResou
     public int alphaMode() { return nalphaMode(address()); }
     /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
     public VkExtent2D imageExtent() { return nimageExtent(address()); }
+    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkDisplaySurfaceCreateInfoKHR imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkDisplaySurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -493,6 +495,8 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResou
         public int alphaMode() { return VkDisplaySurfaceCreateInfoKHR.nalphaMode(address()); }
         /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
         public VkExtent2D imageExtent() { return VkDisplaySurfaceCreateInfoKHR.nimageExtent(address()); }
+        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkDisplaySurfaceCreateInfoKHR.Buffer imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplaySurfaceCreateInfoKHR.nsType(address(), value); return this; }

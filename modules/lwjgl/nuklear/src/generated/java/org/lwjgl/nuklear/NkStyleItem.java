@@ -80,6 +80,8 @@ public class NkStyleItem extends Struct implements NativeResource {
     /** Returns a {@link NkStyleItemData} view of the {@code data} field. */
     @NativeType("union nk_style_item_data")
     public NkStyleItemData data() { return ndata(address()); }
+    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleItem data(java.util.function.Consumer<NkStyleItemData> consumer) { consumer.accept(data()); return this; }
 
     /** Sets the specified value to the {@code type} field. */
     public NkStyleItem type(@NativeType("enum nk_style_item_type") int value) { ntype(address(), value); return this; }
@@ -312,6 +314,8 @@ public class NkStyleItem extends Struct implements NativeResource {
         /** Returns a {@link NkStyleItemData} view of the {@code data} field. */
         @NativeType("union nk_style_item_data")
         public NkStyleItemData data() { return NkStyleItem.ndata(address()); }
+        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleItem.Buffer data(java.util.function.Consumer<NkStyleItemData> consumer) { consumer.accept(data()); return this; }
 
         /** Sets the specified value to the {@code type} field. */
         public NkStyleItem.Buffer type(@NativeType("enum nk_style_item_type") int value) { NkStyleItem.ntype(address(), value); return this; }

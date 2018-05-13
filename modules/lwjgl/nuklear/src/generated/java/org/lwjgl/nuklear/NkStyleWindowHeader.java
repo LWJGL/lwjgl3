@@ -128,18 +128,28 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem normal() { return nnormal(address()); }
+    /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem hover() { return nhover(address()); }
+    /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code active} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem active() { return nactive(address()); }
+    /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code close_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton close_button() { return nclose_button(address()); }
+    /** Passes the {@code close_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader close_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(close_button()); return this; }
     /** Returns a {@link NkStyleButton} view of the {@code minimize_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton minimize_button() { return nminimize_button(address()); }
+    /** Passes the {@code minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(minimize_button()); return this; }
     /** Returns the value of the {@code close_symbol} field. */
     @NativeType("enum nk_symbol_type")
     public int close_symbol() { return nclose_symbol(address()); }
@@ -152,24 +162,36 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** Returns a {@link NkColor} view of the {@code label_normal} field. */
     @NativeType("struct nk_color")
     public NkColor label_normal() { return nlabel_normal(address()); }
+    /** Passes the {@code label_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader label_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_normal()); return this; }
     /** Returns a {@link NkColor} view of the {@code label_hover} field. */
     @NativeType("struct nk_color")
     public NkColor label_hover() { return nlabel_hover(address()); }
+    /** Passes the {@code label_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader label_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_hover()); return this; }
     /** Returns a {@link NkColor} view of the {@code label_active} field. */
     @NativeType("struct nk_color")
     public NkColor label_active() { return nlabel_active(address()); }
+    /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
     /** Returns the value of the {@code align} field. */
     @NativeType("enum nk_style_header_align")
     public int align() { return nalign(address()); }
     /** Returns a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
+    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
     /** Returns a {@link NkVec2} view of the {@code label_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 label_padding() { return nlabel_padding(address()); }
+    /** Passes the {@code label_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader label_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(label_padding()); return this; }
     /** Returns a {@link NkVec2} view of the {@code spacing} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 spacing() { return nspacing(address()); }
+    /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindowHeader spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
 
     /** Copies the specified {@link NkStyleItem} to the {@code normal} field. */
     public NkStyleWindowHeader normal(@NativeType("struct nk_style_item") NkStyleItem value) { nnormal(address(), value); return this; }
@@ -503,18 +525,28 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem normal() { return NkStyleWindowHeader.nnormal(address()); }
+        /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem hover() { return NkStyleWindowHeader.nhover(address()); }
+        /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code active} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem active() { return NkStyleWindowHeader.nactive(address()); }
+        /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code close_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton close_button() { return NkStyleWindowHeader.nclose_button(address()); }
+        /** Passes the {@code close_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer close_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(close_button()); return this; }
         /** Returns a {@link NkStyleButton} view of the {@code minimize_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton minimize_button() { return NkStyleWindowHeader.nminimize_button(address()); }
+        /** Passes the {@code minimize_button} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer minimize_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(minimize_button()); return this; }
         /** Returns the value of the {@code close_symbol} field. */
         @NativeType("enum nk_symbol_type")
         public int close_symbol() { return NkStyleWindowHeader.nclose_symbol(address()); }
@@ -527,24 +559,36 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
         /** Returns a {@link NkColor} view of the {@code label_normal} field. */
         @NativeType("struct nk_color")
         public NkColor label_normal() { return NkStyleWindowHeader.nlabel_normal(address()); }
+        /** Passes the {@code label_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer label_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_normal()); return this; }
         /** Returns a {@link NkColor} view of the {@code label_hover} field. */
         @NativeType("struct nk_color")
         public NkColor label_hover() { return NkStyleWindowHeader.nlabel_hover(address()); }
+        /** Passes the {@code label_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer label_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_hover()); return this; }
         /** Returns a {@link NkColor} view of the {@code label_active} field. */
         @NativeType("struct nk_color")
         public NkColor label_active() { return NkStyleWindowHeader.nlabel_active(address()); }
+        /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
         /** Returns the value of the {@code align} field. */
         @NativeType("enum nk_style_header_align")
         public int align() { return NkStyleWindowHeader.nalign(address()); }
         /** Returns a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleWindowHeader.npadding(address()); }
+        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
         /** Returns a {@link NkVec2} view of the {@code label_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 label_padding() { return NkStyleWindowHeader.nlabel_padding(address()); }
+        /** Passes the {@code label_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer label_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(label_padding()); return this; }
         /** Returns a {@link NkVec2} view of the {@code spacing} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 spacing() { return NkStyleWindowHeader.nspacing(address()); }
+        /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindowHeader.Buffer spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
 
         /** Copies the specified {@link NkStyleItem} to the {@code normal} field. */
         public NkStyleWindowHeader.Buffer normal(@NativeType("struct nk_style_item") NkStyleItem value) { NkStyleWindowHeader.nnormal(address(), value); return this; }

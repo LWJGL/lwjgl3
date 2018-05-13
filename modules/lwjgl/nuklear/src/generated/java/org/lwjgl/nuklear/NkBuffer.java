@@ -119,6 +119,8 @@ public class NkBuffer extends Struct implements NativeResource {
     /** Returns a {@link NkAllocator} view of the {@code pool} field. */
     @NativeType("struct nk_allocator")
     public NkAllocator pool() { return npool(address()); }
+    /** Passes the {@code pool} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkBuffer pool(java.util.function.Consumer<NkAllocator> consumer) { consumer.accept(pool()); return this; }
     /** Returns the value of the {@code type} field. */
     @NativeType("enum nk_allocation_type")
     public int type() { return ntype(address()); }
@@ -359,6 +361,8 @@ public class NkBuffer extends Struct implements NativeResource {
         /** Returns a {@link NkAllocator} view of the {@code pool} field. */
         @NativeType("struct nk_allocator")
         public NkAllocator pool() { return NkBuffer.npool(address()); }
+        /** Passes the {@code pool} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkBuffer.Buffer pool(java.util.function.Consumer<NkAllocator> consumer) { consumer.accept(pool()); return this; }
         /** Returns the value of the {@code type} field. */
         @NativeType("enum nk_allocation_type")
         public int type() { return NkBuffer.ntype(address()); }

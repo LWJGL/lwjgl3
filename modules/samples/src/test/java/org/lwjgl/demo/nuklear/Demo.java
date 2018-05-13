@@ -68,10 +68,11 @@ class Demo {
                     nk_layout_row_dynamic(ctx, 120, 1);
                     nk_color_picker(ctx, background, NK_RGBA);
                     nk_layout_row_dynamic(ctx, 25, 1);
-                    background.r(nk_propertyf(ctx, "#R:", 0, background.r(), 1.0f, 0.01f, 0.005f));
-                    background.g(nk_propertyf(ctx, "#G:", 0, background.g(), 1.0f, 0.01f, 0.005f));
-                    background.b(nk_propertyf(ctx, "#B:", 0, background.b(), 1.0f, 0.01f, 0.005f));
-                    background.a(nk_propertyf(ctx, "#A:", 0, background.a(), 1.0f, 0.01f, 0.005f));
+                    background
+                        .r(nk_propertyf(ctx, "#R:", 0, background.r(), 1.0f, 0.01f, 0.005f))
+                        .g(nk_propertyf(ctx, "#G:", 0, background.g(), 1.0f, 0.01f, 0.005f))
+                        .b(nk_propertyf(ctx, "#B:", 0, background.b(), 1.0f, 0.01f, 0.005f))
+                        .a(nk_propertyf(ctx, "#A:", 0, background.a(), 1.0f, 0.01f, 0.005f));
                     nk_combo_end(ctx);
                 }
             }

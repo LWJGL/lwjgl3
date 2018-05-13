@@ -115,6 +115,8 @@ public class VkDisplayModeCreateInfoKHR extends Struct implements NativeResource
     public int flags() { return nflags(address()); }
     /** Returns a {@link VkDisplayModeParametersKHR} view of the {@code parameters} field. */
     public VkDisplayModeParametersKHR parameters() { return nparameters(address()); }
+    /** Passes the {@code parameters} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkDisplayModeCreateInfoKHR parameters(java.util.function.Consumer<VkDisplayModeParametersKHR> consumer) { consumer.accept(parameters()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkDisplayModeCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -368,6 +370,8 @@ public class VkDisplayModeCreateInfoKHR extends Struct implements NativeResource
         public int flags() { return VkDisplayModeCreateInfoKHR.nflags(address()); }
         /** Returns a {@link VkDisplayModeParametersKHR} view of the {@code parameters} field. */
         public VkDisplayModeParametersKHR parameters() { return VkDisplayModeCreateInfoKHR.nparameters(address()); }
+        /** Passes the {@code parameters} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkDisplayModeCreateInfoKHR.Buffer parameters(java.util.function.Consumer<VkDisplayModeParametersKHR> consumer) { consumer.accept(parameters()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkDisplayModeCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayModeCreateInfoKHR.nsType(address(), value); return this; }

@@ -112,6 +112,8 @@ public class MSG extends Struct implements NativeResource {
     public int time() { return ntime(address()); }
     /** Returns a {@link POINT} view of the {@code pt} field. */
     public POINT pt() { return npt(address()); }
+    /** Passes the {@code pt} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public MSG pt(java.util.function.Consumer<POINT> consumer) { consumer.accept(pt()); return this; }
 
     /** Sets the specified value to the {@code hwnd} field. */
     public MSG hwnd(@NativeType("HWND") long value) { nhwnd(address(), value); return this; }
@@ -387,6 +389,8 @@ public class MSG extends Struct implements NativeResource {
         public int time() { return MSG.ntime(address()); }
         /** Returns a {@link POINT} view of the {@code pt} field. */
         public POINT pt() { return MSG.npt(address()); }
+        /** Passes the {@code pt} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public MSG.Buffer pt(java.util.function.Consumer<POINT> consumer) { consumer.accept(pt()); return this; }
 
         /** Sets the specified value to the {@code hwnd} field. */
         public MSG.Buffer hwnd(@NativeType("HWND") long value) { MSG.nhwnd(address(), value); return this; }

@@ -77,6 +77,8 @@ public class NkMouseButton extends Struct {
     /** Returns a {@link NkVec2} view of the {@code clicked_pos} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 clicked_pos() { return nclicked_pos(address()); }
+    /** Passes the {@code clicked_pos} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkMouseButton clicked_pos(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(clicked_pos()); return this; }
 
     // -----------------------------------
 
@@ -170,6 +172,8 @@ public class NkMouseButton extends Struct {
         /** Returns a {@link NkVec2} view of the {@code clicked_pos} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 clicked_pos() { return NkMouseButton.nclicked_pos(address()); }
+        /** Passes the {@code clicked_pos} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkMouseButton.Buffer clicked_pos(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(clicked_pos()); return this; }
 
     }
 

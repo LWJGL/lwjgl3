@@ -107,6 +107,8 @@ public class AIAnimation extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIAnimation mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns the value of the {@code mDuration} field. */
     public double mDuration() { return nmDuration(address()); }
     /** Returns the value of the {@code mTicksPerSecond} field. */
@@ -406,6 +408,8 @@ public class AIAnimation extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIAnimation.nmName(address()); }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIAnimation.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns the value of the {@code mDuration} field. */
         public double mDuration() { return AIAnimation.nmDuration(address()); }
         /** Returns the value of the {@code mTicksPerSecond} field. */

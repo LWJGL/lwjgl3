@@ -133,6 +133,8 @@ public class AITexture extends Struct {
     /** Returns a {@link AIString} view of the {@code mFilename} field. */
     @NativeType("struct aiString")
     public AIString mFilename() { return nmFilename(address()); }
+    /** Passes the {@code mFilename} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AITexture mFilename(java.util.function.Consumer<AIString> consumer) { consumer.accept(mFilename()); return this; }
 
     // -----------------------------------
 
@@ -246,6 +248,8 @@ public class AITexture extends Struct {
         /** Returns a {@link AIString} view of the {@code mFilename} field. */
         @NativeType("struct aiString")
         public AIString mFilename() { return AITexture.nmFilename(address()); }
+        /** Passes the {@code mFilename} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AITexture.Buffer mFilename(java.util.function.Consumer<AIString> consumer) { consumer.accept(mFilename()); return this; }
 
     }
 

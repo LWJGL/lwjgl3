@@ -97,12 +97,18 @@ public class TrackedDevicePose extends Struct implements NativeResource {
     /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mDeviceToAbsoluteTracking() { return nmDeviceToAbsoluteTracking(address()); }
+    /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public TrackedDevicePose mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
     /** Returns a {@link HmdVector3} view of the {@code vVelocity} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vVelocity() { return nvVelocity(address()); }
+    /** Passes the {@code vVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public TrackedDevicePose vVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vVelocity()); return this; }
     /** Returns a {@link HmdVector3} view of the {@code vAngularVelocity} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vAngularVelocity() { return nvAngularVelocity(address()); }
+    /** Passes the {@code vAngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public TrackedDevicePose vAngularVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vAngularVelocity()); return this; }
     /** Returns the value of the {@code eTrackingResult} field. */
     @NativeType("ETrackingResult")
     public int eTrackingResult() { return neTrackingResult(address()); }
@@ -373,12 +379,18 @@ public class TrackedDevicePose extends Struct implements NativeResource {
         /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mDeviceToAbsoluteTracking() { return TrackedDevicePose.nmDeviceToAbsoluteTracking(address()); }
+        /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public TrackedDevicePose.Buffer mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
         /** Returns a {@link HmdVector3} view of the {@code vVelocity} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vVelocity() { return TrackedDevicePose.nvVelocity(address()); }
+        /** Passes the {@code vVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public TrackedDevicePose.Buffer vVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vVelocity()); return this; }
         /** Returns a {@link HmdVector3} view of the {@code vAngularVelocity} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vAngularVelocity() { return TrackedDevicePose.nvAngularVelocity(address()); }
+        /** Passes the {@code vAngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public TrackedDevicePose.Buffer vAngularVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vAngularVelocity()); return this; }
         /** Returns the value of the {@code eTrackingResult} field. */
         @NativeType("ETrackingResult")
         public int eTrackingResult() { return TrackedDevicePose.neTrackingResult(address()); }

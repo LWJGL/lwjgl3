@@ -107,6 +107,8 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
     /** Returns a {@link ZDICTParams} view of the {@code zParams} field. */
     @NativeType("ZDICT_params_t")
     public ZDICTParams zParams() { return nzParams(address()); }
+    /** Passes the {@code zParams} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public ZDICTCoverParams zParams(java.util.function.Consumer<ZDICTParams> consumer) { consumer.accept(zParams()); return this; }
 
     /** Sets the specified value to the {@code k} field. */
     public ZDICTCoverParams k(@NativeType("unsigned") int value) { nk(address(), value); return this; }
@@ -372,6 +374,8 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
         /** Returns a {@link ZDICTParams} view of the {@code zParams} field. */
         @NativeType("ZDICT_params_t")
         public ZDICTParams zParams() { return ZDICTCoverParams.nzParams(address()); }
+        /** Passes the {@code zParams} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public ZDICTCoverParams.Buffer zParams(java.util.function.Consumer<ZDICTParams> consumer) { consumer.accept(zParams()); return this; }
 
         /** Sets the specified value to the {@code k} field. */
         public ZDICTCoverParams.Buffer k(@NativeType("unsigned") int value) { ZDICTCoverParams.nk(address(), value); return this; }

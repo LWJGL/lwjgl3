@@ -78,9 +78,13 @@ public class VRTextureDepthInfo extends Struct implements NativeResource {
     /** Returns a {@link HmdMatrix44} view of the {@code mProjection} field. */
     @NativeType("HmdMatrix44_t")
     public HmdMatrix44 mProjection() { return nmProjection(address()); }
+    /** Passes the {@code mProjection} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VRTextureDepthInfo mProjection(java.util.function.Consumer<HmdMatrix44> consumer) { consumer.accept(mProjection()); return this; }
     /** Returns a {@link HmdVector2} view of the {@code vRange} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vRange() { return nvRange(address()); }
+    /** Passes the {@code vRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VRTextureDepthInfo vRange(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vRange()); return this; }
 
     /** Sets the specified value to the {@code handle} field. */
     public VRTextureDepthInfo handle(@NativeType("void *") long value) { nhandle(address(), value); return this; }
@@ -342,9 +346,13 @@ public class VRTextureDepthInfo extends Struct implements NativeResource {
         /** Returns a {@link HmdMatrix44} view of the {@code mProjection} field. */
         @NativeType("HmdMatrix44_t")
         public HmdMatrix44 mProjection() { return VRTextureDepthInfo.nmProjection(address()); }
+        /** Passes the {@code mProjection} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VRTextureDepthInfo.Buffer mProjection(java.util.function.Consumer<HmdMatrix44> consumer) { consumer.accept(mProjection()); return this; }
         /** Returns a {@link HmdVector2} view of the {@code vRange} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vRange() { return VRTextureDepthInfo.nvRange(address()); }
+        /** Passes the {@code vRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VRTextureDepthInfo.Buffer vRange(java.util.function.Consumer<HmdVector2> consumer) { consumer.accept(vRange()); return this; }
 
         /** Sets the specified value to the {@code handle} field. */
         public VRTextureDepthInfo.Buffer handle(@NativeType("void *") long value) { VRTextureDepthInfo.nhandle(address(), value); return this; }

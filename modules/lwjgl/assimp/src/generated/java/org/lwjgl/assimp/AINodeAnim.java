@@ -135,6 +135,8 @@ public class AINodeAnim extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mNodeName} field. */
     @NativeType("struct aiString")
     public AIString mNodeName() { return nmNodeName(address()); }
+    /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AINodeAnim mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
     /** Returns the value of the {@code mNumPositionKeys} field. */
     @NativeType("unsigned int")
     public int mNumPositionKeys() { return nmNumPositionKeys(address()); }
@@ -464,6 +466,8 @@ public class AINodeAnim extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mNodeName} field. */
         @NativeType("struct aiString")
         public AIString mNodeName() { return AINodeAnim.nmNodeName(address()); }
+        /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AINodeAnim.Buffer mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
         /** Returns the value of the {@code mNumPositionKeys} field. */
         @NativeType("unsigned int")
         public int mNumPositionKeys() { return AINodeAnim.nmNumPositionKeys(address()); }

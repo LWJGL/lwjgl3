@@ -135,6 +135,8 @@ public class NkConvertConfig extends Struct implements NativeResource {
     /** Returns a {@link NkDrawNullTexture} view of the {@code null_texture} field. */
     @NativeType("struct nk_draw_null_texture")
     public NkDrawNullTexture null_texture() { return nnull_texture(address()); }
+    /** Passes the {@code null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkConvertConfig null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
     /**
      * Returns a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@code vertex_layout} field.
      *
@@ -479,6 +481,8 @@ public class NkConvertConfig extends Struct implements NativeResource {
         /** Returns a {@link NkDrawNullTexture} view of the {@code null_texture} field. */
         @NativeType("struct nk_draw_null_texture")
         public NkDrawNullTexture null_texture() { return NkConvertConfig.nnull_texture(address()); }
+        /** Passes the {@code null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkConvertConfig.Buffer null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
         /**
          * Returns a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@code vertex_layout} field.
          *

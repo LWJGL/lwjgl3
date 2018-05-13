@@ -101,6 +101,8 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     /** Returns a {@link TrackedDevicePose} view of the {@code standingTrackedDevicePose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose standingTrackedDevicePose() { return nstandingTrackedDevicePose(address()); }
+    /** Passes the {@code standingTrackedDevicePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public CameraVideoStreamFrameHeader standingTrackedDevicePose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(standingTrackedDevicePose()); return this; }
 
     // -----------------------------------
 
@@ -320,6 +322,8 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         /** Returns a {@link TrackedDevicePose} view of the {@code standingTrackedDevicePose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose standingTrackedDevicePose() { return CameraVideoStreamFrameHeader.nstandingTrackedDevicePose(address()); }
+        /** Passes the {@code standingTrackedDevicePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public CameraVideoStreamFrameHeader.Buffer standingTrackedDevicePose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(standingTrackedDevicePose()); return this; }
 
     }
 

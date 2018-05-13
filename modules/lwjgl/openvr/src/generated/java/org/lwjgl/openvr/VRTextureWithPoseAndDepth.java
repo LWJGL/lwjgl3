@@ -66,6 +66,8 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
     /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
     @NativeType("VRTextureDepthInfo_t")
     public VRTextureDepthInfo depth() { return ndepth(address()); }
+    /** Passes the {@code depth} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VRTextureWithPoseAndDepth depth(java.util.function.Consumer<VRTextureDepthInfo> consumer) { consumer.accept(depth()); return this; }
 
     /** Copies the specified {@link VRTextureDepthInfo} to the {@code depth} field. */
     public VRTextureWithPoseAndDepth depth(@NativeType("VRTextureDepthInfo_t") VRTextureDepthInfo value) { ndepth(address(), value); return this; }
@@ -299,6 +301,8 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
         /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
         @NativeType("VRTextureDepthInfo_t")
         public VRTextureDepthInfo depth() { return VRTextureWithPoseAndDepth.ndepth(address()); }
+        /** Passes the {@code depth} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VRTextureWithPoseAndDepth.Buffer depth(java.util.function.Consumer<VRTextureDepthInfo> consumer) { consumer.accept(depth()); return this; }
 
         /** Copies the specified {@link VRTextureDepthInfo} to the {@code depth} field. */
         public VRTextureWithPoseAndDepth.Buffer depth(@NativeType("VRTextureDepthInfo_t") VRTextureDepthInfo value) { VRTextureWithPoseAndDepth.ndepth(address(), value); return this; }

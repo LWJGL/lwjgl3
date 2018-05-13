@@ -106,6 +106,8 @@ public class AIExportDataBlob extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code name} field. */
     @NativeType("struct aiString")
     public AIString name() { return nname(address()); }
+    /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIExportDataBlob name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
     /** Returns a {@link AIExportDataBlob} view of the struct pointed to by the {@code next} field. */
     @Nullable
     @NativeType("struct aiExportDataBlob *")
@@ -378,6 +380,8 @@ public class AIExportDataBlob extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code name} field. */
         @NativeType("struct aiString")
         public AIString name() { return AIExportDataBlob.nname(address()); }
+        /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIExportDataBlob.Buffer name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
         /** Returns a {@link AIExportDataBlob} view of the struct pointed to by the {@code next} field. */
         @Nullable
         @NativeType("struct aiExportDataBlob *")

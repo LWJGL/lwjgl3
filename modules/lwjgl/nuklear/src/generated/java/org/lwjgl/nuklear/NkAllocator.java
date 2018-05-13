@@ -74,6 +74,8 @@ public class NkAllocator extends Struct implements NativeResource {
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
+    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkAllocator userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Returns the value of the {@code alloc} field. */
     @Nullable
     @NativeType("nk_plugin_alloc")
@@ -319,6 +321,8 @@ public class NkAllocator extends Struct implements NativeResource {
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkAllocator.nuserdata(address()); }
+        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkAllocator.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Returns the value of the {@code alloc} field. */
         @Nullable
         @NativeType("nk_plugin_alloc")

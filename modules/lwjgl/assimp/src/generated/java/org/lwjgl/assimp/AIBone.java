@@ -99,6 +99,8 @@ public class AIBone extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIBone mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns the value of the {@code mNumWeights} field. */
     @NativeType("unsigned int")
     public int mNumWeights() { return nmNumWeights(address()); }
@@ -108,6 +110,8 @@ public class AIBone extends Struct implements NativeResource {
     /** Returns a {@link AIMatrix4x4} view of the {@code mOffsetMatrix} field. */
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mOffsetMatrix() { return nmOffsetMatrix(address()); }
+    /** Passes the {@code mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIBone mOffsetMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mOffsetMatrix()); return this; }
 
     /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIBone mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
@@ -370,6 +374,8 @@ public class AIBone extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIBone.nmName(address()); }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIBone.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns the value of the {@code mNumWeights} field. */
         @NativeType("unsigned int")
         public int mNumWeights() { return AIBone.nmNumWeights(address()); }
@@ -379,6 +385,8 @@ public class AIBone extends Struct implements NativeResource {
         /** Returns a {@link AIMatrix4x4} view of the {@code mOffsetMatrix} field. */
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mOffsetMatrix() { return AIBone.nmOffsetMatrix(address()); }
+        /** Passes the {@code mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIBone.Buffer mOffsetMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mOffsetMatrix()); return this; }
 
         /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIBone.Buffer mName(@NativeType("struct aiString") AIString value) { AIBone.nmName(address(), value); return this; }

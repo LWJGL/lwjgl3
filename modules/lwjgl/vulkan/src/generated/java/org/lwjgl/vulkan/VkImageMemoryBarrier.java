@@ -211,6 +211,8 @@ public class VkImageMemoryBarrier extends Struct implements NativeResource {
     public long image() { return nimage(address()); }
     /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
     public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
+    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkImageMemoryBarrier subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkImageMemoryBarrier sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -530,6 +532,8 @@ public class VkImageMemoryBarrier extends Struct implements NativeResource {
         public long image() { return VkImageMemoryBarrier.nimage(address()); }
         /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
         public VkImageSubresourceRange subresourceRange() { return VkImageMemoryBarrier.nsubresourceRange(address()); }
+        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkImageMemoryBarrier.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkImageMemoryBarrier.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryBarrier.nsType(address(), value); return this; }

@@ -1790,6 +1790,10 @@ ${validations.joinToString("\n")}
                     println("$indent/** Returns a {@link $structType} view of the {@code $member} field. */")
                     generateGetterAnnotations(indent, it, structType)
                     println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
+                    if (nestedStruct.mutable) {
+                        println("$indent/** Passes the {@code $member} field to the specified {@link java.util.function.Consumer Consumer}. */")
+                        println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $getter(java.util.function.Consumer<$structType> consumer) { consumer.accept($getter()); return this; }")
+                    }
                 }
             } else {
                 // Getter

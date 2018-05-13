@@ -49,9 +49,9 @@ public class GLFWDemo {
     private static final NkDrawVertexLayoutElement.Buffer VERTEX_LAYOUT;
 
     static {
-        ALLOCATOR = NkAllocator.create();
-        ALLOCATOR.alloc((handle, old, size) -> nmemAllocChecked(size));
-        ALLOCATOR.mfree((handle, ptr) -> nmemFree(ptr));
+        ALLOCATOR = NkAllocator.create()
+            .alloc((handle, old, size) -> nmemAllocChecked(size))
+            .mfree((handle, ptr) -> nmemFree(ptr));
 
         VERTEX_LAYOUT = NkDrawVertexLayoutElement.create(4)
             .position(0).attribute(NK_VERTEX_POSITION).format(NK_FORMAT_FLOAT).offset(0)
@@ -241,7 +241,8 @@ public class GLFWDemo {
                     ufg.uv(1).set(q.s1(), q.t1());
                 }
             })
-            .texture().id(fontTexID);
+            .texture(it -> it
+                .id(fontTexID));
 
         nk_style_set_font(ctx, default_font);
 
@@ -480,7 +481,7 @@ public class GLFWDemo {
         });
 
         nk_init(ctx, ALLOCATOR, null);
-        ctx.clip()
+        ctx.clip(it -> it
             .copy((handle, text, len) -> {
                 if (len == 0) {
                     return;
@@ -499,7 +500,8 @@ public class GLFWDemo {
                 if (text != NULL) {
                     nnk_textedit_paste(edit, text, nnk_strlen(text));
                 }
-            });
+            }));
+
         setupContext();
         return ctx;
     }

@@ -134,42 +134,66 @@ public class NkStyleToggle extends Struct implements NativeResource {
     /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem normal() { return nnormal(address()); }
+    /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem hover() { return nhover(address()); }
+    /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code active} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem active() { return nactive(address()); }
+    /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
     /** Returns a {@link NkColor} view of the {@code border_color} field. */
     @NativeType("struct nk_color")
     public NkColor border_color() { return nborder_color(address()); }
+    /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code cursor_normal} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem cursor_normal() { return ncursor_normal(address()); }
+    /** Passes the {@code cursor_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle cursor_normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(cursor_normal()); return this; }
     /** Returns a {@link NkStyleItem} view of the {@code cursor_hover} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem cursor_hover() { return ncursor_hover(address()); }
+    /** Passes the {@code cursor_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle cursor_hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(cursor_hover()); return this; }
     /** Returns a {@link NkColor} view of the {@code text_normal} field. */
     @NativeType("struct nk_color")
     public NkColor text_normal() { return ntext_normal(address()); }
+    /** Passes the {@code text_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle text_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_normal()); return this; }
     /** Returns a {@link NkColor} view of the {@code text_hover} field. */
     @NativeType("struct nk_color")
     public NkColor text_hover() { return ntext_hover(address()); }
+    /** Passes the {@code text_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle text_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_hover()); return this; }
     /** Returns a {@link NkColor} view of the {@code text_active} field. */
     @NativeType("struct nk_color")
     public NkColor text_active() { return ntext_active(address()); }
+    /** Passes the {@code text_active} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle text_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_active()); return this; }
     /** Returns a {@link NkColor} view of the {@code text_background} field. */
     @NativeType("struct nk_color")
     public NkColor text_background() { return ntext_background(address()); }
+    /** Passes the {@code text_background} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle text_background(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_background()); return this; }
     /** Returns the value of the {@code text_alignment} field. */
     @NativeType("nk_flags")
     public int text_alignment() { return ntext_alignment(address()); }
     /** Returns a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
+    /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
     /** Returns a {@link NkVec2} view of the {@code touch_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 touch_padding() { return ntouch_padding(address()); }
+    /** Passes the {@code touch_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle touch_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(touch_padding()); return this; }
     /** Returns the value of the {@code spacing} field. */
     public float spacing() { return nspacing(address()); }
     /** Returns the value of the {@code border} field. */
@@ -177,6 +201,8 @@ public class NkStyleToggle extends Struct implements NativeResource {
     /** Returns a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
+    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleToggle userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
     /** Returns the value of the {@code draw_begin} field. */
     @Nullable
     @NativeType("nk_draw_begin")
@@ -542,42 +568,66 @@ public class NkStyleToggle extends Struct implements NativeResource {
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem normal() { return NkStyleToggle.nnormal(address()); }
+        /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(normal()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem hover() { return NkStyleToggle.nhover(address()); }
+        /** Passes the {@code hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(hover()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code active} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem active() { return NkStyleToggle.nactive(address()); }
+        /** Passes the {@code active} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer active(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(active()); return this; }
         /** Returns a {@link NkColor} view of the {@code border_color} field. */
         @NativeType("struct nk_color")
         public NkColor border_color() { return NkStyleToggle.nborder_color(address()); }
+        /** Passes the {@code border_color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer border_color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(border_color()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code cursor_normal} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem cursor_normal() { return NkStyleToggle.ncursor_normal(address()); }
+        /** Passes the {@code cursor_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer cursor_normal(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(cursor_normal()); return this; }
         /** Returns a {@link NkStyleItem} view of the {@code cursor_hover} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem cursor_hover() { return NkStyleToggle.ncursor_hover(address()); }
+        /** Passes the {@code cursor_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer cursor_hover(java.util.function.Consumer<NkStyleItem> consumer) { consumer.accept(cursor_hover()); return this; }
         /** Returns a {@link NkColor} view of the {@code text_normal} field. */
         @NativeType("struct nk_color")
         public NkColor text_normal() { return NkStyleToggle.ntext_normal(address()); }
+        /** Passes the {@code text_normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer text_normal(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_normal()); return this; }
         /** Returns a {@link NkColor} view of the {@code text_hover} field. */
         @NativeType("struct nk_color")
         public NkColor text_hover() { return NkStyleToggle.ntext_hover(address()); }
+        /** Passes the {@code text_hover} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer text_hover(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_hover()); return this; }
         /** Returns a {@link NkColor} view of the {@code text_active} field. */
         @NativeType("struct nk_color")
         public NkColor text_active() { return NkStyleToggle.ntext_active(address()); }
+        /** Passes the {@code text_active} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer text_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_active()); return this; }
         /** Returns a {@link NkColor} view of the {@code text_background} field. */
         @NativeType("struct nk_color")
         public NkColor text_background() { return NkStyleToggle.ntext_background(address()); }
+        /** Passes the {@code text_background} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer text_background(java.util.function.Consumer<NkColor> consumer) { consumer.accept(text_background()); return this; }
         /** Returns the value of the {@code text_alignment} field. */
         @NativeType("nk_flags")
         public int text_alignment() { return NkStyleToggle.ntext_alignment(address()); }
         /** Returns a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleToggle.npadding(address()); }
+        /** Passes the {@code padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(padding()); return this; }
         /** Returns a {@link NkVec2} view of the {@code touch_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 touch_padding() { return NkStyleToggle.ntouch_padding(address()); }
+        /** Passes the {@code touch_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer touch_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(touch_padding()); return this; }
         /** Returns the value of the {@code spacing} field. */
         public float spacing() { return NkStyleToggle.nspacing(address()); }
         /** Returns the value of the {@code border} field. */
@@ -585,6 +635,8 @@ public class NkStyleToggle extends Struct implements NativeResource {
         /** Returns a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkStyleToggle.nuserdata(address()); }
+        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleToggle.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
         /** Returns the value of the {@code draw_begin} field. */
         @Nullable
         @NativeType("nk_draw_begin")

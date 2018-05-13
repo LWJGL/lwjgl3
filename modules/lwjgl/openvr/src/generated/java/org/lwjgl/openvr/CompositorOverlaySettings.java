@@ -155,6 +155,8 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
     /** Returns a {@link HmdMatrix44} view of the {@code transform} field. */
     @NativeType("HmdMatrix44_t")
     public HmdMatrix44 transform() { return ntransform(address()); }
+    /** Passes the {@code transform} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public CompositorOverlaySettings transform(java.util.function.Consumer<HmdMatrix44> consumer) { consumer.accept(transform()); return this; }
 
     /** Sets the specified value to the {@code size} field. */
     public CompositorOverlaySettings size(@NativeType("uint32_t") int value) { nsize(address(), value); return this; }
@@ -509,6 +511,8 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
         /** Returns a {@link HmdMatrix44} view of the {@code transform} field. */
         @NativeType("HmdMatrix44_t")
         public HmdMatrix44 transform() { return CompositorOverlaySettings.ntransform(address()); }
+        /** Passes the {@code transform} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public CompositorOverlaySettings.Buffer transform(java.util.function.Consumer<HmdMatrix44> consumer) { consumer.accept(transform()); return this; }
 
         /** Sets the specified value to the {@code size} field. */
         public CompositorOverlaySettings.Buffer size(@NativeType("uint32_t") int value) { CompositorOverlaySettings.nsize(address(), value); return this; }

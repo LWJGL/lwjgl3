@@ -112,9 +112,13 @@ public class BGFXInit extends Struct implements NativeResource {
     /** Returns a {@link BGFXResolution} view of the {@code resolution} field. */
     @NativeType("bgfx_resolution_t")
     public BGFXResolution resolution() { return nresolution(address()); }
+    /** Passes the {@code resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BGFXInit resolution(java.util.function.Consumer<BGFXResolution> consumer) { consumer.accept(resolution()); return this; }
     /** Returns a {@link BGFXInitLimits} view of the {@code limits} field. */
     @NativeType("bgfx_init_limits_t")
     public BGFXInitLimits limits() { return nlimits(address()); }
+    /** Passes the {@code limits} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public BGFXInit limits(java.util.function.Consumer<BGFXInitLimits> consumer) { consumer.accept(limits()); return this; }
     /** Returns a {@link BGFXCallbackInterface} view of the struct pointed to by the {@code callback} field. */
     @Nullable
     @NativeType("bgfx_callback_interface_t *")
@@ -429,9 +433,13 @@ public class BGFXInit extends Struct implements NativeResource {
         /** Returns a {@link BGFXResolution} view of the {@code resolution} field. */
         @NativeType("bgfx_resolution_t")
         public BGFXResolution resolution() { return BGFXInit.nresolution(address()); }
+        /** Passes the {@code resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BGFXInit.Buffer resolution(java.util.function.Consumer<BGFXResolution> consumer) { consumer.accept(resolution()); return this; }
         /** Returns a {@link BGFXInitLimits} view of the {@code limits} field. */
         @NativeType("bgfx_init_limits_t")
         public BGFXInitLimits limits() { return BGFXInit.nlimits(address()); }
+        /** Passes the {@code limits} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public BGFXInit.Buffer limits(java.util.function.Consumer<BGFXInitLimits> consumer) { consumer.accept(limits()); return this; }
         /** Returns a {@link BGFXCallbackInterface} view of the struct pointed to by the {@code callback} field. */
         @Nullable
         @NativeType("bgfx_callback_interface_t *")

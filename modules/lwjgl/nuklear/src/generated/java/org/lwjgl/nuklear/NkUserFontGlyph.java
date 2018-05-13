@@ -99,6 +99,8 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
     /** Returns a {@link NkVec2} view of the {@code offset} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 offset() { return noffset(address()); }
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkUserFontGlyph offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
     /** Returns the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
     /** Returns the value of the {@code height} field. */
@@ -377,6 +379,8 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
         /** Returns a {@link NkVec2} view of the {@code offset} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 offset() { return NkUserFontGlyph.noffset(address()); }
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkUserFontGlyph.Buffer offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
         /** Returns the value of the {@code width} field. */
         public float width() { return NkUserFontGlyph.nwidth(address()); }
         /** Returns the value of the {@code height} field. */

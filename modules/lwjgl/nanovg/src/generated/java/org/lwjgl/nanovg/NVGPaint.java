@@ -119,9 +119,13 @@ public class NVGPaint extends Struct implements NativeResource {
     /** Returns a {@link NVGColor} view of the {@code innerColor} field. */
     @NativeType("NVGcolor")
     public NVGColor innerColor() { return ninnerColor(address()); }
+    /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NVGPaint innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
     /** Returns a {@link NVGColor} view of the {@code outerColor} field. */
     @NativeType("NVGcolor")
     public NVGColor outerColor() { return nouterColor(address()); }
+    /** Passes the {@code outerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NVGPaint outerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outerColor()); return this; }
     /** Returns the value of the {@code image} field. */
     public int image() { return nimage(address()); }
 
@@ -433,9 +437,13 @@ public class NVGPaint extends Struct implements NativeResource {
         /** Returns a {@link NVGColor} view of the {@code innerColor} field. */
         @NativeType("NVGcolor")
         public NVGColor innerColor() { return NVGPaint.ninnerColor(address()); }
+        /** Passes the {@code innerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NVGPaint.Buffer innerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(innerColor()); return this; }
         /** Returns a {@link NVGColor} view of the {@code outerColor} field. */
         @NativeType("NVGcolor")
         public NVGColor outerColor() { return NVGPaint.nouterColor(address()); }
+        /** Passes the {@code outerColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NVGPaint.Buffer outerColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(outerColor()); return this; }
         /** Returns the value of the {@code image} field. */
         public int image() { return NVGPaint.nimage(address()); }
 

@@ -102,6 +102,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
     public long pNext() { return npNext(address()); }
     /** Returns a {@link VkPhysicalDeviceFeatures} view of the {@code features} field. */
     public VkPhysicalDeviceFeatures features() { return nfeatures(address()); }
+    /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPhysicalDeviceFeatures2 features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceFeatures2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -344,6 +346,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
         public long pNext() { return VkPhysicalDeviceFeatures2.npNext(address()); }
         /** Returns a {@link VkPhysicalDeviceFeatures} view of the {@code features} field. */
         public VkPhysicalDeviceFeatures features() { return VkPhysicalDeviceFeatures2.nfeatures(address()); }
+        /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPhysicalDeviceFeatures2.Buffer features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceFeatures2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFeatures2.nsType(address(), value); return this; }

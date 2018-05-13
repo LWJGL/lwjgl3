@@ -119,6 +119,8 @@ public class GPU_DEVICE extends Struct implements NativeResource {
     public int Flags() { return nFlags(address()); }
     /** Returns a {@link RECT} view of the {@code rcVirtualScreen} field. */
     public RECT rcVirtualScreen() { return nrcVirtualScreen(address()); }
+    /** Passes the {@code rcVirtualScreen} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public GPU_DEVICE rcVirtualScreen(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcVirtualScreen()); return this; }
 
     // -----------------------------------
 
@@ -342,6 +344,8 @@ public class GPU_DEVICE extends Struct implements NativeResource {
         public int Flags() { return GPU_DEVICE.nFlags(address()); }
         /** Returns a {@link RECT} view of the {@code rcVirtualScreen} field. */
         public RECT rcVirtualScreen() { return GPU_DEVICE.nrcVirtualScreen(address()); }
+        /** Passes the {@code rcVirtualScreen} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public GPU_DEVICE.Buffer rcVirtualScreen(java.util.function.Consumer<RECT> consumer) { consumer.accept(rcVirtualScreen()); return this; }
 
     }
 

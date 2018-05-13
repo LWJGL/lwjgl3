@@ -113,9 +113,13 @@ public class AINode extends Struct implements NativeResource {
     /** Returns a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AINode mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns a {@link AIMatrix4x4} view of the {@code mTransformation} field. */
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mTransformation() { return nmTransformation(address()); }
+    /** Passes the {@code mTransformation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AINode mTransformation(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mTransformation()); return this; }
     /** Returns a {@link AINode} view of the struct pointed to by the {@code mParent} field. */
     @Nullable
     @NativeType("struct aiNode *")
@@ -437,9 +441,13 @@ public class AINode extends Struct implements NativeResource {
         /** Returns a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AINode.nmName(address()); }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AINode.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns a {@link AIMatrix4x4} view of the {@code mTransformation} field. */
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mTransformation() { return AINode.nmTransformation(address()); }
+        /** Passes the {@code mTransformation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AINode.Buffer mTransformation(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mTransformation()); return this; }
         /** Returns a {@link AINode} view of the struct pointed to by the {@code mParent} field. */
         @Nullable
         @NativeType("struct aiNode *")

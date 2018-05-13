@@ -132,6 +132,8 @@ public class NkPopupState extends Struct {
     /** Returns a {@link NkRect} view of the {@code header} field. */
     @NativeType("struct nk_rect")
     public NkRect header() { return nheader(address()); }
+    /** Passes the {@code header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkPopupState header(java.util.function.Consumer<NkRect> consumer) { consumer.accept(header()); return this; }
 
     // -----------------------------------
 
@@ -260,6 +262,8 @@ public class NkPopupState extends Struct {
         /** Returns a {@link NkRect} view of the {@code header} field. */
         @NativeType("struct nk_rect")
         public NkRect header() { return NkPopupState.nheader(address()); }
+        /** Passes the {@code header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkPopupState.Buffer header(java.util.function.Consumer<NkRect> consumer) { consumer.accept(header()); return this; }
 
     }
 

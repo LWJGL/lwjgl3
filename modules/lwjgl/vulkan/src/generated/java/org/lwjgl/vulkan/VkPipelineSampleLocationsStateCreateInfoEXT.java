@@ -107,6 +107,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
     public boolean sampleLocationsEnable() { return nsampleLocationsEnable(address()) != 0; }
     /** Returns a {@link VkSampleLocationsInfoEXT} view of the {@code sampleLocationsInfo} field. */
     public VkSampleLocationsInfoEXT sampleLocationsInfo() { return nsampleLocationsInfo(address()); }
+    /** Passes the {@code sampleLocationsInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public VkPipelineSampleLocationsStateCreateInfoEXT sampleLocationsInfo(java.util.function.Consumer<VkSampleLocationsInfoEXT> consumer) { consumer.accept(sampleLocationsInfo()); return this; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPipelineSampleLocationsStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -381,6 +383,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
         public boolean sampleLocationsEnable() { return VkPipelineSampleLocationsStateCreateInfoEXT.nsampleLocationsEnable(address()) != 0; }
         /** Returns a {@link VkSampleLocationsInfoEXT} view of the {@code sampleLocationsInfo} field. */
         public VkSampleLocationsInfoEXT sampleLocationsInfo() { return VkPipelineSampleLocationsStateCreateInfoEXT.nsampleLocationsInfo(address()); }
+        /** Passes the {@code sampleLocationsInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public VkPipelineSampleLocationsStateCreateInfoEXT.Buffer sampleLocationsInfo(java.util.function.Consumer<VkSampleLocationsInfoEXT> consumer) { consumer.accept(sampleLocationsInfo()); return this; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPipelineSampleLocationsStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineSampleLocationsStateCreateInfoEXT.nsType(address(), value); return this; }
