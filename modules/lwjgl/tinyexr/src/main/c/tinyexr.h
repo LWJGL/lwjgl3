@@ -11754,7 +11754,7 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
 #ifdef _MSC_VER
   FILE *fp = NULL;
   errno_t errcode = fopen_s(&fp, filename, "rb");
-  if ((!errcode) || (!fp)) {
+  if ((0 != errcode) || (!fp)) {
     if (err) {
       (*err) = "Cannot read file.";
     }
