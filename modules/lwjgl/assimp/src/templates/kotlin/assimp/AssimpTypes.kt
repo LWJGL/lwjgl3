@@ -357,8 +357,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     AutoSize("mFaces")..unsigned_int.member(
         "mNumFaces",
         """
-        The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the mFaces array. The maximum value for this member is
-        #AI_MAX_FACES.
+        The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the {@code mFaces} array. The maximum value for this
+        member is #AI_MAX_FACES.
         """
     )
     aiVector3D.p.buffer("mVertices", "Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.")
@@ -519,7 +519,7 @@ val aiMaterial = struct(Module.ASSIMP, "AIMaterial", nativeName = "struct aiMate
 
     aiMaterialProperty.p.p.member("mProperties", "List of all material properties loaded.")
     AutoSize("mProperties")..unsigned_int.member("mNumProperties", "Number of properties in the data base")
-    unsigned_int.member("mStorageAllocated", "Storage allocated")
+    unsigned_int.member("mNumAllocated", "Storage allocated")
 }
 
 val aiQuaternion = struct(Module.ASSIMP, "AIQuaternion", nativeName = "struct aiQuaternion") {

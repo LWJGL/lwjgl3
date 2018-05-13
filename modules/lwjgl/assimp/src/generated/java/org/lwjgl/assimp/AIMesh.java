@@ -33,8 +33,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mNumVertices} &ndash; 
  * The number of vertices in this mesh. This is also the size of all of the per-vertex data arrays. The maximum value for this member is {@link Assimp#AI_MAX_VERTICES}.</li>
  * <li>{@code mNumFaces} &ndash; 
- * The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the mFaces array. The maximum value for this member is
- * {@link Assimp#AI_MAX_FACES}.</li>
+ * The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the {@code mFaces} array. The maximum value for this
+ * member is {@link Assimp#AI_MAX_FACES}.</li>
  * <li>{@code mVertices} &ndash; Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.</li>
  * <li>{@code mNormals} &ndash; 
  * Vertex normals. The array contains normalized vectors, {@code NULL} if not present. The array is {@code mNumVertices} in size. Normals are undefined for point

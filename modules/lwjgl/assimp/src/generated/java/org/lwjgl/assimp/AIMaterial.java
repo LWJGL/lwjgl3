@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code mProperties} &ndash; List of all material properties loaded.</li>
  * <li>{@code mNumProperties} &ndash; Number of properties in the data base</li>
- * <li>{@code mStorageAllocated} &ndash; Storage allocated</li>
+ * <li>{@code mNumAllocated} &ndash; Storage allocated</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct aiMaterial {
  *     {@link AIMaterialProperty struct aiMaterialProperty} ** mProperties;
  *     unsigned int mNumProperties;
- *     unsigned int mStorageAllocated;
+ *     unsigned int mNumAllocated;
  * }</pre></code>
  */
 @NativeType("struct aiMaterial")
@@ -52,7 +52,7 @@ public class AIMaterial extends Struct implements NativeResource {
     public static final int
         MPROPERTIES,
         MNUMPROPERTIES,
-        MSTORAGEALLOCATED;
+        MNUMALLOCATED;
 
     static {
         Layout layout = __struct(
@@ -66,7 +66,7 @@ public class AIMaterial extends Struct implements NativeResource {
 
         MPROPERTIES = layout.offsetof(0);
         MNUMPROPERTIES = layout.offsetof(1);
-        MSTORAGEALLOCATED = layout.offsetof(2);
+        MNUMALLOCATED = layout.offsetof(2);
     }
 
     AIMaterial(long address, @Nullable ByteBuffer container) {
@@ -92,22 +92,22 @@ public class AIMaterial extends Struct implements NativeResource {
     /** Returns the value of the {@code mNumProperties} field. */
     @NativeType("unsigned int")
     public int mNumProperties() { return nmNumProperties(address()); }
-    /** Returns the value of the {@code mStorageAllocated} field. */
+    /** Returns the value of the {@code mNumAllocated} field. */
     @NativeType("unsigned int")
-    public int mStorageAllocated() { return nmStorageAllocated(address()); }
+    public int mNumAllocated() { return nmNumAllocated(address()); }
 
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mProperties} field. */
     public AIMaterial mProperties(@NativeType("struct aiMaterialProperty **") PointerBuffer value) { nmProperties(address(), value); return this; }
-    /** Sets the specified value to the {@code mStorageAllocated} field. */
-    public AIMaterial mStorageAllocated(@NativeType("unsigned int") int value) { nmStorageAllocated(address(), value); return this; }
+    /** Sets the specified value to the {@code mNumAllocated} field. */
+    public AIMaterial mNumAllocated(@NativeType("unsigned int") int value) { nmNumAllocated(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIMaterial set(
         PointerBuffer mProperties,
-        int mStorageAllocated
+        int mNumAllocated
     ) {
         mProperties(mProperties);
-        mStorageAllocated(mStorageAllocated);
+        mNumAllocated(mNumAllocated);
 
         return this;
     }
@@ -269,15 +269,15 @@ public class AIMaterial extends Struct implements NativeResource {
     public static PointerBuffer nmProperties(long struct) { return memPointerBuffer(memGetAddress(struct + AIMaterial.MPROPERTIES), nmNumProperties(struct)); }
     /** Unsafe version of {@link #mNumProperties}. */
     public static int nmNumProperties(long struct) { return memGetInt(struct + AIMaterial.MNUMPROPERTIES); }
-    /** Unsafe version of {@link #mStorageAllocated}. */
-    public static int nmStorageAllocated(long struct) { return memGetInt(struct + AIMaterial.MSTORAGEALLOCATED); }
+    /** Unsafe version of {@link #mNumAllocated}. */
+    public static int nmNumAllocated(long struct) { return memGetInt(struct + AIMaterial.MNUMALLOCATED); }
 
     /** Unsafe version of {@link #mProperties(PointerBuffer) mProperties}. */
     public static void nmProperties(long struct, PointerBuffer value) { memPutAddress(struct + AIMaterial.MPROPERTIES, memAddress(value)); nmNumProperties(struct, value.remaining()); }
     /** Sets the specified value to the {@code mNumProperties} field of the specified {@code struct}. */
     public static void nmNumProperties(long struct, int value) { memPutInt(struct + AIMaterial.MNUMPROPERTIES, value); }
-    /** Unsafe version of {@link #mStorageAllocated(int) mStorageAllocated}. */
-    public static void nmStorageAllocated(long struct, int value) { memPutInt(struct + AIMaterial.MSTORAGEALLOCATED, value); }
+    /** Unsafe version of {@link #mNumAllocated(int) mNumAllocated}. */
+    public static void nmNumAllocated(long struct, int value) { memPutInt(struct + AIMaterial.MNUMALLOCATED, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -352,14 +352,14 @@ public class AIMaterial extends Struct implements NativeResource {
         /** Returns the value of the {@code mNumProperties} field. */
         @NativeType("unsigned int")
         public int mNumProperties() { return AIMaterial.nmNumProperties(address()); }
-        /** Returns the value of the {@code mStorageAllocated} field. */
+        /** Returns the value of the {@code mNumAllocated} field. */
         @NativeType("unsigned int")
-        public int mStorageAllocated() { return AIMaterial.nmStorageAllocated(address()); }
+        public int mNumAllocated() { return AIMaterial.nmNumAllocated(address()); }
 
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mProperties} field. */
         public AIMaterial.Buffer mProperties(@NativeType("struct aiMaterialProperty **") PointerBuffer value) { AIMaterial.nmProperties(address(), value); return this; }
-        /** Sets the specified value to the {@code mStorageAllocated} field. */
-        public AIMaterial.Buffer mStorageAllocated(@NativeType("unsigned int") int value) { AIMaterial.nmStorageAllocated(address(), value); return this; }
+        /** Sets the specified value to the {@code mNumAllocated} field. */
+        public AIMaterial.Buffer mNumAllocated(@NativeType("unsigned int") int value) { AIMaterial.nmNumAllocated(address(), value); return this; }
 
     }
 
