@@ -139,6 +139,11 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1setStreamDecode(JNIEnv 
     return (jint)LZ4_setStreamDecode(LZ4_streamDecode, dictionary, dictSize);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_LZ4_1decoderRingBufferSize(JNIEnv *__env, jclass clazz, jint maxBlockSize) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)LZ4_decoderRingBufferSize(maxBlockSize);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1decompress_1safe_1continue(JNIEnv *__env, jclass clazz, jlong LZ4_streamDecodeAddress, jlong srcAddress, jlong dstAddress, jint srcSize, jint dstCapacity) {
     LZ4_streamDecode_t *LZ4_streamDecode = (LZ4_streamDecode_t *)(intptr_t)LZ4_streamDecodeAddress;
     char const *src = (char const *)(intptr_t)srcAddress;

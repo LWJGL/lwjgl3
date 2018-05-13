@@ -25,11 +25,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code blockSizeID} &ndash; {@code 0 == default}. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_max64KB max64KB}</td><td>{@link LZ4Frame#LZ4F_max256KB max256KB}</td><td>{@link LZ4Frame#LZ4F_max1MB max1MB}</td><td>{@link LZ4Frame#LZ4F_max4MB max4MB}</td></tr></table></li>
  * <li>{@code blockMode} &ndash; {@code 0 == default}. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_blockLinked blockLinked}</td><td>{@link LZ4Frame#LZ4F_blockIndependent blockIndependent}</td><td>{@link LZ4Frame#LZ4F_blockChecksumEnabled blockChecksumEnabled}</td></tr></table></li>
- * <li>{@code contentChecksumFlag} &ndash; if enabled, frame is terminated with a 32-bits checksum of decompressed data; {@code 0 == disabled} (default)</li>
+ * <li>{@code contentChecksumFlag} &ndash; 1: frame terminated with 32-bit checksum of decompressed data; 0: disabled (default)</li>
  * <li>{@code frameType} &ndash; read-only field. One of:<br><table><tr><td>{@link LZ4Frame#LZ4F_frame frame}</td><td>{@link LZ4Frame#LZ4F_skippableFrame skippableFrame}</td></tr></table></li>
  * <li>{@code contentSize} &ndash; size of uncompressed content ; {@code 0 == unknown}</li>
- * <li>{@code dictID} &ndash; dictionary ID, sent by the compressor to help decoder select the correct dictionary; {@code 0 == no dictID} provided</li>
- * <li>{@code blockChecksumFlag} &ndash; if enabled, each block is followed by a checksum of block's compressed data ; {@code 0 == disabled} (default)</li>
+ * <li>{@code dictID} &ndash; dictionary ID, sent by compressor to help decoder select correct dictionary; 0 == no {@code dictID} provided</li>
+ * <li>{@code blockChecksumFlag} &ndash; 1: each block followed by a checksum of block's compressed data; 0: disabled (default)</li>
  * </ul>
  * 
  * <h3>Layout</h3>

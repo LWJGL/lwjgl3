@@ -197,10 +197,13 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_fast",
         """
-        This function is a bit faster than #decompress_safe(), but doesn't provide any security guarantee.
+        This function is a bit faster than #decompress_safe(), but it may misbehave on malformed input because it doesn't perform full validation of compressed
+        data.
 
-        This function respects memory boundaries for <i>properly formed</i> compressed data. However, it does not provide any protection against malicious
-        input. It also doesn't know {@code src} size, and implies it's &ge; compressed size. Use this function in trusted environment <b>only</b>.
+        This function is only usable if the {@code originalSize} of uncompressed data is known in advance. The caller should also check that all the compressed
+        input has been consumed properly, i.e. that the return value matches the size of the buffer with compressed input. The function never writes past the
+        output buffer. However, since it doesn't know its {@code src} size, it may read past the intended input. Also, because match offsets are not validated
+        during decoding, reads from {@code src} may underflow. Use this function in trusted environment <b>only</b>.
         """,
 
         Unsafe..char.const.p.IN("src", ""),
@@ -329,15 +332,15 @@ ENABLE_WARNINGS()""")
     LZ4_streamDecode_t.p(
         "createStreamDecode",
         """
-        Creates a streaming decompression tracking structure.
+        Creates a streaming decompression tracking context.
 
-        A tracking structure can be re-used multiple times sequentially.
+        A tracking context can be re-used multiple times.
         """
     )
 
     int(
         "freeStreamDecode",
-        "Frees a streaming decompression tracking structure.",
+        "Frees a streaming decompression tracking context.",
 
         LZ4_streamDecode_t.p.IN("LZ4_stream", "")
     )
@@ -345,10 +348,11 @@ ENABLE_WARNINGS()""")
     intb(
         "setStreamDecode",
         """
-        An {@code LZ4_streamDecode_t} structure can be allocated once and re-used multiple times. Use this function to start decompression of a new stream of
+        An {@code LZ4_streamDecode_t} context can be allocated once and re-used multiple times. Use this function to start decompression of a new stream of
         blocks.
 
-        A dictionary can optionnally be set. Use #NULL or size 0 for a reset order.
+        A dictionary can optionnally be set. Use #NULL or size 0 for a reset order. Dictionary is presumed stable: it must remain accessible and unmodified
+        during next decompression.
         """,
 
         LZ4_streamDecode_t.p.IN("LZ4_streamDecode", ""),
@@ -359,35 +363,54 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "decoderRingBufferSize",
+        """
+        In a ring buffer scenario (optional), blocks are presumed decompressed next to each other up to the moment there is not enough remaining space for next
+        block ({@code remainingSize &lt; maxBlockSize}), at which stage it resumes from beginning of ring buffer. When setting such a ring buffer for streaming
+        decompression, provides the minimum size of this ring buffer to be compatible with any source respecting {@code maxBlockSize} condition.
+        """,
+
+        int.IN("maxBlockSize", ""),
+
+        returnDoc = "minimum ring buffer size, or 0 if there is an error (invalid {@code maxBlockSize})",
+        since = "version 1.8.2"
+    )
+
+    customMethod(
+        """
+    /** For static allocation; {@code mbs} presumed valid. */
+    public static int LZ4_DECODER_RING_BUFFER_SIZE(int mbs) {
+        return 65536 + 14 + mbs;
+    }""")
+
+    int(
         "decompress_safe_continue",
         """
         These decoding functions allow decompression of consecutive blocks in "streaming" mode.
 
         A block is an unsplittable entity, it must be presented entirely to a decompression function. Decompression functions only accept one block at a time.
         The last 64KB of previously decoded data <i>must</i> remain available and unmodified at the memory position where they were decoded. If less than 64KB
-        of data has been decoded all the data must be present.
+        of data has been decoded, all the data must be present.
 
-        Special: if application sets a ring buffer for decompression, it must respect one of the following conditions:
+        Special: if decompression side sets a ring buffer, it must respect one of the following conditions:
         ${ul(
             """
-            Exactly same size as encoding buffer, with same update rule (block boundaries at same positions) In which case, the decoding &amp; encoding ring
-            buffer can have any size, including very small ones ( &lt; 64 KB).
+            Decompression buffer size is <i>at least</i> #decoderRingBufferSize()({@code maxBlockSize}). {@code maxBlockSize} is the maximum size of any single
+            block. It can have any value &gt; 16 bytes. In which case, encoding and decoding buffers do not need to be synchronized. Actually, data can be
+            produced by any source compliant with LZ4 format specification, and respecting {@code maxBlockSize}.
             """,
             """
-            Larger than encoding buffer, by a minimum of {@code maxBlockSize} more bytes.
-
-            {@code maxBlockSize} is implementation dependent. It's the maximum size of any single block. In which case, encoding and decoding buffers do not
-            need to be synchronized, and encoding ring buffer can have any size, including small ones ( &lt; 64 KB).
+            Synchronized mode:  Decompression buffer size is <i>exactly</i> the same as compression buffer size, and follows exactly same update rule (block
+            boundaries at same positions), and decoding function is provided with exact decompressed size of each block (exception for last block of the
+            stream), <i>then</i> decoding & encoding ring buffer can have any size, including small ones ( &lt; 64 KB).
             """,
             """
-            <i>At least</i> {@code 64 KB + 8 bytes + maxBlockSize}.
-
-            In which case, encoding and decoding buffers do not need to be synchronized, and encoding ring buffer can have any size, including larger than
-            decoding buffer.
+            Decompression buffer is larger than encoding buffer, by a minimum of {@code maxBlockSize} more bytes. In which case, encoding and decoding buffers
+            do not need to be synchronized, and encoding ring buffer can have any size, including small ones ( &lt; 64 KB).
             """
         )}
-        Whenever these conditions are not possible, save the last 64KB of decoded data into a safe buffer, and indicate where it is saved using
-        #setStreamDecode() before decompressing next block.
+        Whenever these conditions are not possible, save the last 64KB of decoded data into a safe buffer where it can't be modified during decompression, then
+        indicate where this data is saved using #setStreamDecode(), before decompressing next block.
         """,
 
         LZ4_streamDecode_t.p.IN("LZ4_streamDecode", ""),
@@ -412,6 +435,8 @@ ENABLE_WARNINGS()""")
         """
         These decoding functions work the same as a combination of #setStreamDecode() followed by {@code LZ4_decompress_*_continue()}. They are stand-alone,
         and don't need an {@code LZ4_streamDecode_t} structure.
+
+        Dictionary is presumed stable: it must remain accessible and unmodified during next decompression.
         """,
 
         char.const.p.IN("src", ""),
@@ -436,6 +461,15 @@ ENABLE_WARNINGS()""")
     void(
         "resetStream_fast",
         """
+        Use this, like #resetStream(), to prepare a context for a new chain of calls to a streaming API (e.g., #compress_fast_continue()).
+
+        ${note("""
+        Using this in advance of a non- streaming-compression function is redundant, and potentially bad for performance, since they all perform their own
+        custom reset internally.
+        """)}
+
+        Differences from #resetStream():
+
         When an {@code LZ4_stream_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
         sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed b
         #resetStream()).
@@ -444,14 +478,16 @@ ENABLE_WARNINGS()""")
         ${ul(
             "returned from #createStream()",
             "reset by #resetStream()",
-            "{@code memset(stream, 0, sizeof(LZ4_stream_t))}",
+            "{@code memset(stream, 0, sizeof(LZ4_stream_t))}, though this is discouraged",
             "the stream was in a valid state and was reset by #resetStream_fast()",
             "the stream was in a valid state and was then used in any compression call that returned success",
             """
-            the stream was in an indeterminate state and was used in a compression call that fully reset the state (#compress_fast_extState()) and that
+            the stream was in an indeterminate state and was used in a compression call that fully reset the state (e.g., #compress_fast_extState()) and that
             returned success
             """
         )}
+        When a stream isn't known to be in a valid state, it is not safe to pass to any fastReset or streaming function. It must first be cleansed by the full
+        #resetStream().
         """,
 
         LZ4_stream_t.p.OUT("streamPtr", "")
@@ -464,7 +500,7 @@ ENABLE_WARNINGS()""")
 
         Using this variant avoids an expensive initialization step. It is only safe to call if the state buffer is known to be correctly initialized already
         (see above comment on #resetStream_fast() for a definition of "correctly initialized"). From a high level, the difference is that this function
-        initializes the provided state with a call to #resetStream_fast() while #compress_fast_extState() starts with a call to #resetStream().
+        initializes the provided state with a call to something like #resetStream_fast() while #compress_fast_extState() starts with a call to #resetStream().
         """,
 
         Unsafe..void.p.OUT("state", ""),

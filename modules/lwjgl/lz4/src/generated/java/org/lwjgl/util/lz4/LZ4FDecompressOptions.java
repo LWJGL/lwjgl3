@@ -20,9 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code stableDst} &ndash; 
- * pledge that at least {@code 64KB+64Bytes} of previously decompressed data remain unmodifed where it was decoded. This optimization skips storage
- * operations in {@code tmp} buffers</li>
+ * <li>{@code stableDst} &ndash; pledges that last 64KB decompressed data will remain available unmodified. This optimization skips storage operations in tmp buffers.</li>
  * <li>{@code reserved} &ndash; must be set to zero for forward compatibility</li>
  * </ul>
  * 

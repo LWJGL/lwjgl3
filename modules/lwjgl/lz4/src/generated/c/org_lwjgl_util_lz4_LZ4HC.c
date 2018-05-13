@@ -94,4 +94,31 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1setCompressionLevel(J
     LZ4_setCompressionLevel(LZ4_streamHCPtr, compressionLevel);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1favorDecompressionSpeed(JNIEnv *__env, jclass clazz, jlong LZ4_streamHCPtrAddress, jint favor) {
+    LZ4_streamHC_t *LZ4_streamHCPtr = (LZ4_streamHC_t *)(intptr_t)LZ4_streamHCPtrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    LZ4_favorDecompressionSpeed(LZ4_streamHCPtr, favor);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1resetStreamHC_1fast(JNIEnv *__env, jclass clazz, jlong LZ4_streamHCPtrAddress, jint compressionLevel) {
+    LZ4_streamHC_t *LZ4_streamHCPtr = (LZ4_streamHC_t *)(intptr_t)LZ4_streamHCPtrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    LZ4_resetStreamHC_fast(LZ4_streamHCPtr, compressionLevel);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1compress_1HC_1extStateHC_1fastReset(JNIEnv *__env, jclass clazz, jlong stateAddress, jlong srcAddress, jlong dstAddress, jint srcSize, jint dstCapacity, jint compressionLevel) {
+    void *state = (void *)(intptr_t)stateAddress;
+    char * const src = (char * const)(intptr_t)srcAddress;
+    char *dst = (char *)(intptr_t)dstAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)LZ4_compress_HC_extStateHC_fastReset(state, src, dst, srcSize, dstCapacity, compressionLevel);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_lz4_LZ4HC_nLZ4_1attach_1HC_1dictionary(JNIEnv *__env, jclass clazz, jlong working_streamAddress, jlong dictionary_streamAddress) {
+    LZ4_streamHC_t *working_stream = (LZ4_streamHC_t *)(intptr_t)working_streamAddress;
+    LZ4_streamHC_t * const dictionary_stream = (LZ4_streamHC_t * const)(intptr_t)dictionary_streamAddress;
+    UNUSED_PARAMS(__env, clazz)
+    LZ4_attach_HC_dictionary(working_stream, dictionary_stream);
+}
+
 EXTERN_C_EXIT

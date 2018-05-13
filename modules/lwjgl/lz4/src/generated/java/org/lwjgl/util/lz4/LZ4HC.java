@@ -255,4 +255,112 @@ public class LZ4HC {
         nLZ4_setCompressionLevel(LZ4_streamHCPtr, compressionLevel);
     }
 
+    // --- [ LZ4_favorDecompressionSpeed ] ---
+
+    /** Unsafe version of: {@link #LZ4_favorDecompressionSpeed favorDecompressionSpeed} */
+    public static native void nLZ4_favorDecompressionSpeed(long LZ4_streamHCPtr, int favor);
+
+    /**
+     * Parser will select decisions favoring decompression over compression ratio.
+     * 
+     * <p>Only works at highest compression settings (level &ge; {@link #LZ4HC_CLEVEL_OPT_MIN CLEVEL_OPT_MIN})</p>
+     *
+     * @param LZ4_streamHCPtr 
+     * @param favor           
+     *
+     * @since version 1.8.2 (experimental)
+     */
+    public static void LZ4_favorDecompressionSpeed(@NativeType("LZ4_streamHC_t *") long LZ4_streamHCPtr, @NativeType("int") boolean favor) {
+        if (CHECKS) {
+            check(LZ4_streamHCPtr);
+        }
+        nLZ4_favorDecompressionSpeed(LZ4_streamHCPtr, favor ? 1 : 0);
+    }
+
+    // --- [ LZ4_resetStreamHC_fast ] ---
+
+    /** Unsafe version of: {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} */
+    public static native void nLZ4_resetStreamHC_fast(long LZ4_streamHCPtr, int compressionLevel);
+
+    /**
+     * When an {@code LZ4_streamHC_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
+     * sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed by
+     * {@link #LZ4_resetStreamHC resetStreamHC}).
+     * 
+     * <p>{@code LZ4_streamHC}s are guaranteed to be in a valid state when:</p>
+     * 
+     * <ul>
+     * <li>returned from {@link #LZ4_createStreamHC createStreamHC}</li>
+     * <li>reset by {@link #LZ4_resetStreamHC resetStreamHC}</li>
+     * <li>{@code memset(stream, 0, sizeof(LZ4_streamHC_t))}</li>
+     * <li>the stream was in a valid state and was reset by {@link #LZ4_resetStreamHC_fast resetStreamHC_fast}</li>
+     * <li>the stream was in a valid state and was then used in any compression call that returned success</li>
+     * <li>the stream was in an indeterminate state and was used in a compression call that fully reset the state ({@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC}) and that
+     * returned success</li>
+     * </ul>
+     *
+     * @param LZ4_streamHCPtr  
+     * @param compressionLevel 
+     */
+    public static void LZ4_resetStreamHC_fast(@NativeType("LZ4_streamHC_t *") long LZ4_streamHCPtr, int compressionLevel) {
+        if (CHECKS) {
+            check(LZ4_streamHCPtr);
+        }
+        nLZ4_resetStreamHC_fast(LZ4_streamHCPtr, compressionLevel);
+    }
+
+    // --- [ LZ4_compress_HC_extStateHC_fastReset ] ---
+
+    /** Unsafe version of: {@link #LZ4_compress_HC_extStateHC_fastReset compress_HC_extStateHC_fastReset} */
+    public static native int nLZ4_compress_HC_extStateHC_fastReset(long state, long src, long dst, int srcSize, int dstCapacity, int compressionLevel);
+
+    /**
+     * A variant of {@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC}.
+     * 
+     * <p>Using this variant avoids an expensive initialization step. It is only safe to call if the state buffer is known to be correctly initialized already
+     * (see comment on {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} for a definition of "correctly initialized"). From a high level, the difference is that this function initializes
+     * the provided state with a call to {@link #LZ4_resetStreamHC_fast resetStreamHC_fast} while {@link #LZ4_compress_HC_extStateHC compress_HC_extStateHC} starts with a call to {@link #LZ4_resetStreamHC resetStreamHC}.</p>
+     *
+     * @param state            
+     * @param src              
+     * @param dst              
+     * @param compressionLevel 
+     */
+    public static int LZ4_compress_HC_extStateHC_fastReset(@NativeType("void *") ByteBuffer state, @NativeType("char * const") ByteBuffer src, @NativeType("char *") ByteBuffer dst, int compressionLevel) {
+        return nLZ4_compress_HC_extStateHC_fastReset(memAddress(state), memAddress(src), memAddress(dst), src.remaining(), dst.remaining(), compressionLevel);
+    }
+
+    // --- [ LZ4_attach_HC_dictionary ] ---
+
+    /** Unsafe version of: {@link #LZ4_attach_HC_dictionary attach_HC_dictionary} */
+    public static native void nLZ4_attach_HC_dictionary(long working_stream, long dictionary_stream);
+
+    /**
+     * This is an experimental API that allows for the efficient use of a static dictionary many times.
+     * 
+     * <p>Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's
+     * {@code LZ4_streamHC_t} into a working {@code LZ4_streamHC_t}, this function introduces a no-copy setup mechanism, in which the working stream
+     * references the dictionary stream in-place.</p>
+     * 
+     * <p>Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by {@link #LZ4_loadDictHC loadDictHC} should be
+     * expected to work.</p>
+     * 
+     * <p>Alternatively, the provided dictionary stream pointer may be {@code NULL}, in which case any existing dictionary stream is unset.</p>
+     * 
+     * <p>A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).</p>
+     * 
+     * <p>The dictionary will remain attached to the working stream only for the current stream session. Calls to {@code LZ4_resetStreamHC(_fast)} will remove
+     * the dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged
+     * through the lifetime of the stream session.</p>
+     *
+     * @param working_stream    
+     * @param dictionary_stream 
+     */
+    public static void LZ4_attach_HC_dictionary(@NativeType("LZ4_streamHC_t *") long working_stream, @NativeType("LZ4_streamHC_t * const") long dictionary_stream) {
+        if (CHECKS) {
+            check(working_stream);
+        }
+        nLZ4_attach_HC_dictionary(working_stream, dictionary_stream);
+    }
+
 }

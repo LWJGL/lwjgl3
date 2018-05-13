@@ -23,7 +23,6 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  * <li>{@code end} &ndash; next block here to continue on current prefix</li>
  * <li>{@code base} &ndash; All index relative to this position</li>
  * <li>{@code dictBase} &ndash; alternate base for {@code extDict}</li>
- * <li>{@code inputBuffer} &ndash; deprecated</li>
  * <li>{@code dictLimit} &ndash; below that point, need {@code extDict}</li>
  * <li>{@code lowLimit} &ndash; below that point, no more {@code dict}</li>
  * <li>{@code nextToUpdate} &ndash; index from which to continue dictionary update</li>
@@ -38,11 +37,12 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  *     uint8_t const * end;
  *     uint8_t const * base;
  *     uint8_t const * dictBase;
- *     void * inputBuffer;
  *     uint32_t dictLimit;
  *     uint32_t lowLimit;
  *     uint32_t nextToUpdate;
- *     int compressionLevel;
+ *     short compressionLevel;
+ *     short favorDecSpeed;
+ *     {@link LZ4HCCCtxInternal LZ4HC_CCtx_internal} * const dictCtx;
  * }</pre></code>
  */
 @NativeType("struct LZ4HC_CCtx_internal")
@@ -60,11 +60,12 @@ public class LZ4HCCCtxInternal extends Struct {
         END,
         BASE,
         DICTBASE,
-        INPUTBUFFER,
         DICTLIMIT,
         LOWLIMIT,
         NEXTTOUPDATE,
-        COMPRESSIONLEVEL;
+        COMPRESSIONLEVEL,
+        FAVORDECSPEED,
+        DICTCTX;
 
     static {
         Layout layout = __struct(
@@ -73,11 +74,12 @@ public class LZ4HCCCtxInternal extends Struct {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
             __member(4),
             __member(4),
             __member(4),
-            __member(4)
+            __member(2),
+            __member(2),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -88,11 +90,12 @@ public class LZ4HCCCtxInternal extends Struct {
         END = layout.offsetof(2);
         BASE = layout.offsetof(3);
         DICTBASE = layout.offsetof(4);
-        INPUTBUFFER = layout.offsetof(5);
-        DICTLIMIT = layout.offsetof(6);
-        LOWLIMIT = layout.offsetof(7);
-        NEXTTOUPDATE = layout.offsetof(8);
-        COMPRESSIONLEVEL = layout.offsetof(9);
+        DICTLIMIT = layout.offsetof(5);
+        LOWLIMIT = layout.offsetof(6);
+        NEXTTOUPDATE = layout.offsetof(7);
+        COMPRESSIONLEVEL = layout.offsetof(8);
+        FAVORDECSPEED = layout.offsetof(9);
+        DICTCTX = layout.offsetof(10);
     }
 
     LZ4HCCCtxInternal(long address, @Nullable ByteBuffer container) {
@@ -145,13 +148,6 @@ public class LZ4HCCCtxInternal extends Struct {
      */
     @NativeType("uint8_t const *")
     public ByteBuffer dictBase(int capacity) { return ndictBase(address(), capacity); }
-    /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code inputBuffer} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
-    @NativeType("void *")
-    public ByteBuffer inputBuffer(int capacity) { return ninputBuffer(address(), capacity); }
     /** Returns the value of the {@code dictLimit} field. */
     @NativeType("uint32_t")
     public int dictLimit() { return ndictLimit(address()); }
@@ -162,7 +158,12 @@ public class LZ4HCCCtxInternal extends Struct {
     @NativeType("uint32_t")
     public int nextToUpdate() { return nnextToUpdate(address()); }
     /** Returns the value of the {@code compressionLevel} field. */
-    public int compressionLevel() { return ncompressionLevel(address()); }
+    public short compressionLevel() { return ncompressionLevel(address()); }
+    /** Returns the value of the {@code favorDecSpeed} field. */
+    public short favorDecSpeed() { return nfavorDecSpeed(address()); }
+    /** Returns a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
+    @NativeType("LZ4HC_CCtx_internal * const")
+    public LZ4HCCCtxInternal dictCtx() { return ndictCtx(address()); }
 
     // -----------------------------------
 
@@ -213,8 +214,6 @@ public class LZ4HCCCtxInternal extends Struct {
     public static ByteBuffer nbase(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.BASE), capacity); }
     /** Unsafe version of {@link #dictBase(int) dictBase}. */
     public static ByteBuffer ndictBase(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.DICTBASE), capacity); }
-    /** Unsafe version of {@link #inputBuffer(int) inputBuffer}. */
-    public static ByteBuffer ninputBuffer(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.INPUTBUFFER), capacity); }
     /** Unsafe version of {@link #dictLimit}. */
     public static int ndictLimit(long struct) { return memGetInt(struct + LZ4HCCCtxInternal.DICTLIMIT); }
     /** Unsafe version of {@link #lowLimit}. */
@@ -222,7 +221,11 @@ public class LZ4HCCCtxInternal extends Struct {
     /** Unsafe version of {@link #nextToUpdate}. */
     public static int nnextToUpdate(long struct) { return memGetInt(struct + LZ4HCCCtxInternal.NEXTTOUPDATE); }
     /** Unsafe version of {@link #compressionLevel}. */
-    public static int ncompressionLevel(long struct) { return memGetInt(struct + LZ4HCCCtxInternal.COMPRESSIONLEVEL); }
+    public static short ncompressionLevel(long struct) { return memGetShort(struct + LZ4HCCCtxInternal.COMPRESSIONLEVEL); }
+    /** Unsafe version of {@link #favorDecSpeed}. */
+    public static short nfavorDecSpeed(long struct) { return memGetShort(struct + LZ4HCCCtxInternal.FAVORDECSPEED); }
+    /** Unsafe version of {@link #dictCtx}. */
+    public static LZ4HCCCtxInternal ndictCtx(long struct) { return LZ4HCCCtxInternal.create(memGetAddress(struct + LZ4HCCCtxInternal.DICTCTX)); }
 
     // -----------------------------------
 
@@ -303,13 +306,6 @@ public class LZ4HCCCtxInternal extends Struct {
          */
         @NativeType("uint8_t const *")
         public ByteBuffer dictBase(int capacity) { return LZ4HCCCtxInternal.ndictBase(address(), capacity); }
-        /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code inputBuffer} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
-        @NativeType("void *")
-        public ByteBuffer inputBuffer(int capacity) { return LZ4HCCCtxInternal.ninputBuffer(address(), capacity); }
         /** Returns the value of the {@code dictLimit} field. */
         @NativeType("uint32_t")
         public int dictLimit() { return LZ4HCCCtxInternal.ndictLimit(address()); }
@@ -320,7 +316,12 @@ public class LZ4HCCCtxInternal extends Struct {
         @NativeType("uint32_t")
         public int nextToUpdate() { return LZ4HCCCtxInternal.nnextToUpdate(address()); }
         /** Returns the value of the {@code compressionLevel} field. */
-        public int compressionLevel() { return LZ4HCCCtxInternal.ncompressionLevel(address()); }
+        public short compressionLevel() { return LZ4HCCCtxInternal.ncompressionLevel(address()); }
+        /** Returns the value of the {@code favorDecSpeed} field. */
+        public short favorDecSpeed() { return LZ4HCCCtxInternal.nfavorDecSpeed(address()); }
+        /** Returns a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
+        @NativeType("LZ4HC_CCtx_internal * const")
+        public LZ4HCCCtxInternal dictCtx() { return LZ4HCCCtxInternal.ndictCtx(address()); }
 
     }
 

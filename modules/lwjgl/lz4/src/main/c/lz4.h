@@ -206,15 +206,17 @@ LZ4LIB_API int LZ4_compress_destSize (const char* src, char* dst, int* srcSizePt
 /*!
 LZ4_decompress_fast() : **unsafe!**
 This function is a bit faster than LZ4_decompress_safe(),
-but doesn't provide any security guarantee.
+but it may misbehave on malformed input because it doesn't perform full validation of compressed data.
     originalSize : is the uncompressed size to regenerate
                    Destination buffer must be already allocated, and its size must be >= 'originalSize' bytes.
     return : number of bytes read from source buffer (== compressed size).
              If the source stream is detected malformed, the function stops decoding and return a negative result.
-    note : This function respects memory boundaries for *properly formed* compressed data.
-           However, it does not provide any protection against malicious input.
-           It also doesn't know 'src' size, and implies it's >= compressed size.
-           Use this function in trusted environment **only**.
+    note : This function is only usable if the originalSize of uncompressed data is known in advance.
+           The caller should also check that all the compressed input has been consumed properly,
+           i.e. that the return value matches the size of the buffer with compressed input.
+           The function never writes past the output buffer.  However, since it doesn't know its 'src' size,
+           it may read past the intended input.  Also, because match offsets are not validated during decoding,
+           reads from 'src' may underflow.  Use this function in trusted environment **only**.
 */
 LZ4LIB_API int LZ4_decompress_fast (const char* src, char* dst, int originalSize);
 
@@ -291,41 +293,62 @@ LZ4LIB_API int LZ4_saveDict (LZ4_stream_t* streamPtr, char* safeBuffer, int maxD
 *  Streaming Decompression Functions
 *  Bufferless synchronous API
 ************************************************/
-typedef union LZ4_streamDecode_u LZ4_streamDecode_t;   /* incomplete type (defined later) */
+typedef union LZ4_streamDecode_u LZ4_streamDecode_t;   /* tracking context */
 
 /*! LZ4_createStreamDecode() and LZ4_freeStreamDecode() :
- *  creation / destruction of streaming decompression tracking structure.
- *  A tracking structure can be re-used multiple times sequentially. */
+ *  creation / destruction of streaming decompression tracking context.
+ *  A tracking context can be re-used multiple times.
+ */
 LZ4LIB_API LZ4_streamDecode_t* LZ4_createStreamDecode(void);
 LZ4LIB_API int                 LZ4_freeStreamDecode (LZ4_streamDecode_t* LZ4_stream);
 
 /*! LZ4_setStreamDecode() :
- *  An LZ4_streamDecode_t structure can be allocated once and re-used multiple times.
+ *  An LZ4_streamDecode_t context can be allocated once and re-used multiple times.
  *  Use this function to start decompression of a new stream of blocks.
  *  A dictionary can optionnally be set. Use NULL or size 0 for a reset order.
+ *  Dictionary is presumed stable : it must remain accessible and unmodified during next decompression.
  * @return : 1 if OK, 0 if error
  */
 LZ4LIB_API int LZ4_setStreamDecode (LZ4_streamDecode_t* LZ4_streamDecode, const char* dictionary, int dictSize);
 
+/*! LZ4_decoderRingBufferSize() : v1.8.2
+ *  Note : in a ring buffer scenario (optional),
+ *  blocks are presumed decompressed next to each other
+ *  up to the moment there is not enough remaining space for next block (remainingSize < maxBlockSize),
+ *  at which stage it resumes from beginning of ring buffer.
+ *  When setting such a ring buffer for streaming decompression,
+ *  provides the minimum size of this ring buffer
+ *  to be compatible with any source respecting maxBlockSize condition.
+ * @return : minimum ring buffer size,
+ *           or 0 if there is an error (invalid maxBlockSize).
+ */
+LZ4LIB_API int LZ4_decoderRingBufferSize(int maxBlockSize);
+#define LZ4_DECODER_RING_BUFFER_SIZE(mbs) (65536 + 14 + (mbs))  /* for static allocation; mbs presumed valid */
+
 /*! LZ4_decompress_*_continue() :
  *  These decoding functions allow decompression of consecutive blocks in "streaming" mode.
  *  A block is an unsplittable entity, it must be presented entirely to a decompression function.
- *  Decompression functions only accept one block at a time.
+ *  Decompression functions only accepts one block at a time.
  *  The last 64KB of previously decoded data *must* remain available and unmodified at the memory position where they were decoded.
- *  If less than 64KB of data has been decoded all the data must be present.
+ *  If less than 64KB of data has been decoded, all the data must be present.
  *
- *  Special : if application sets a ring buffer for decompression, it must respect one of the following conditions :
- *  - Exactly same size as encoding buffer, with same update rule (block boundaries at same positions)
- *    In which case, the decoding & encoding ring buffer can have any size, including very small ones ( < 64 KB).
- *  - Larger than encoding buffer, by a minimum of maxBlockSize more bytes.
- *    maxBlockSize is implementation dependent. It's the maximum size of any single block.
+ *  Special : if decompression side sets a ring buffer, it must respect one of the following conditions :
+ *  - Decompression buffer size is _at least_ LZ4_decoderRingBufferSize(maxBlockSize).
+ *    maxBlockSize is the maximum size of any single block. It can have any value > 16 bytes.
+ *    In which case, encoding and decoding buffers do not need to be synchronized.
+ *    Actually, data can be produced by any source compliant with LZ4 format specification, and respecting maxBlockSize.
+ *  - Synchronized mode :
+ *    Decompression buffer size is _exactly_ the same as compression buffer size,
+ *    and follows exactly same update rule (block boundaries at same positions),
+ *    and decoding function is provided with exact decompressed size of each block (exception for last block of the stream),
+ *    _then_ decoding & encoding ring buffer can have any size, including small ones ( < 64 KB).
+ *  - Decompression buffer is larger than encoding buffer, by a minimum of maxBlockSize more bytes.
  *    In which case, encoding and decoding buffers do not need to be synchronized,
  *    and encoding ring buffer can have any size, including small ones ( < 64 KB).
- *  - _At least_ 64 KB + 8 bytes + maxBlockSize.
- *    In which case, encoding and decoding buffers do not need to be synchronized,
- *    and encoding ring buffer can have any size, including larger than decoding buffer.
- *  Whenever these conditions are not possible, save the last 64KB of decoded data into a safe buffer,
- *  and indicate where it is saved using LZ4_setStreamDecode() before decompressing next block.
+ *
+ *  Whenever these conditions are not possible,
+ *  save the last 64KB of decoded data into a safe buffer where it can't be modified during decompression,
+ *  then indicate where this data is saved using LZ4_setStreamDecode(), before decompressing next block.
 */
 LZ4LIB_API int LZ4_decompress_safe_continue (LZ4_streamDecode_t* LZ4_streamDecode, const char* src, char* dst, int srcSize, int dstCapacity);
 LZ4LIB_API int LZ4_decompress_fast_continue (LZ4_streamDecode_t* LZ4_streamDecode, const char* src, char* dst, int originalSize);
@@ -335,6 +358,7 @@ LZ4LIB_API int LZ4_decompress_fast_continue (LZ4_streamDecode_t* LZ4_streamDecod
  *  These decoding functions work the same as
  *  a combination of LZ4_setStreamDecode() followed by LZ4_decompress_*_continue()
  *  They are stand-alone, and don't need an LZ4_streamDecode_t structure.
+ *  Dictionary is presumed stable : it must remain accessible and unmodified during next decompression.
  */
 LZ4LIB_API int LZ4_decompress_safe_usingDict (const char* src, char* dst, int srcSize, int dstCapcity, const char* dictStart, int dictSize);
 LZ4LIB_API int LZ4_decompress_fast_usingDict (const char* src, char* dst, int originalSize, const char* dictStart, int dictSize);
@@ -356,6 +380,15 @@ LZ4LIB_API int LZ4_decompress_fast_usingDict (const char* src, char* dst, int or
 #ifdef LZ4_STATIC_LINKING_ONLY
 
 /*! LZ4_resetStream_fast() :
+ *  Use this, like LZ4_resetStream(), to prepare a context for a new chain of
+ *  calls to a streaming API (e.g., LZ4_compress_fast_continue()).
+ *
+ *  Note:
+ *  Using this in advance of a non- streaming-compression function is redundant,
+ *  and potentially bad for performance, since they all perform their own custom
+ *  reset internally.
+ *
+ *  Differences from LZ4_resetStream():
  *  When an LZ4_stream_t is known to be in a internally coherent state,
  *  it can often be prepared for a new compression with almost no work, only
  *  sometimes falling back to the full, expensive reset that is always required
@@ -365,13 +398,17 @@ LZ4LIB_API int LZ4_decompress_fast_usingDict (const char* src, char* dst, int or
  *  LZ4_streams are guaranteed to be in a valid state when:
  *  - returned from LZ4_createStream()
  *  - reset by LZ4_resetStream()
- *  - memset(stream, 0, sizeof(LZ4_stream_t))
+ *  - memset(stream, 0, sizeof(LZ4_stream_t)), though this is discouraged
  *  - the stream was in a valid state and was reset by LZ4_resetStream_fast()
  *  - the stream was in a valid state and was then used in any compression call
  *    that returned success
  *  - the stream was in an indeterminate state and was used in a compression
- *    call that fully reset the state (LZ4_compress_fast_extState()) and that
- *    returned success
+ *    call that fully reset the state (e.g., LZ4_compress_fast_extState()) and
+ *    that returned success
+ *
+ *  When a stream isn't known to be in a valid state, it is not safe to pass to
+ *  any fastReset or streaming function. It must first be cleansed by the full
+ *  LZ4_resetStream().
  */
 LZ4LIB_API void LZ4_resetStream_fast (LZ4_stream_t* streamPtr);
 
@@ -382,8 +419,9 @@ LZ4LIB_API void LZ4_resetStream_fast (LZ4_stream_t* streamPtr);
  *  to call if the state buffer is known to be correctly initialized already
  *  (see above comment on LZ4_resetStream_fast() for a definition of "correctly
  *  initialized"). From a high level, the difference is that this function
- *  initializes the provided state with a call to LZ4_resetStream_fast() while
- *  LZ4_compress_fast_extState() starts with a call to LZ4_resetStream().
+ *  initializes the provided state with a call to something like
+ *  LZ4_resetStream_fast() while LZ4_compress_fast_extState() starts with a
+ *  call to LZ4_resetStream().
  */
 LZ4LIB_API int LZ4_compress_fast_extState_fastReset (void* state, const char* src, char* dst, int srcSize, int dstCapacity, int acceleration);
 

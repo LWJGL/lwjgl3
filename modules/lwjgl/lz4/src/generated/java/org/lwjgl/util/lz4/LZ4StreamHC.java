@@ -21,12 +21,12 @@ import static org.lwjgl.util.lz4.LZ4HC.LZ4_STREAMHCSIZE_SIZET;
  * <h3>Layout</h3>
  * 
  * <code><pre>
- * union LZ4_streamHC_u {
+ * union LZ4_streamHC_t {
  *     size_t table[LZ4_STREAMHCSIZE_SIZET];
- *     {@link LZ4HCCCtxInternal LZ4HC_CCtx_internal} internal_donotuse;
+ *     {@link LZ4HCCCtxInternal struct LZ4HC_CCtx_internal} internal_donotuse;
  * }</pre></code>
  */
-@NativeType("union LZ4_streamHC_u")
+@NativeType("union LZ4_streamHC_t")
 public class LZ4StreamHC extends Struct {
 
     /** The struct size in bytes. */
@@ -76,7 +76,7 @@ public class LZ4StreamHC extends Struct {
     @NativeType("size_t")
     public long table(int index) { return ntable(address(), index); }
     /** Returns a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
-    @NativeType("LZ4HC_CCtx_internal")
+    @NativeType("struct LZ4HC_CCtx_internal")
     public LZ4HCCCtxInternal internal_donotuse() { return ninternal_donotuse(address()); }
 
     // -----------------------------------
@@ -172,7 +172,7 @@ public class LZ4StreamHC extends Struct {
         @NativeType("size_t")
         public long table(int index) { return LZ4StreamHC.ntable(address(), index); }
         /** Returns a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
-        @NativeType("LZ4HC_CCtx_internal")
+        @NativeType("struct LZ4HC_CCtx_internal")
         public LZ4HCCCtxInternal internal_donotuse() { return LZ4StreamHC.ninternal_donotuse(address()); }
 
     }

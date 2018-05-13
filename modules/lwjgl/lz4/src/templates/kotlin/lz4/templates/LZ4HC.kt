@@ -181,4 +181,86 @@ ENABLE_WARNINGS()""")
         LZ4_streamHC_t.p.IN("LZ4_streamHCPtr", ""),
         int.IN("compressionLevel", "")
     )
+
+    void(
+        "favorDecompressionSpeed",
+        """
+        Parser will select decisions favoring decompression over compression ratio.
+
+        Only works at highest compression settings (level &ge; #CLEVEL_OPT_MIN)
+        """,
+
+        LZ4_streamHC_t.p.IN("LZ4_streamHCPtr", ""),
+        intb.IN("favor", ""),
+
+        since = "version 1.8.2 (experimental)"
+    )
+
+    void(
+        "resetStreamHC_fast",
+        """
+        When an {@code LZ4_streamHC_t} is known to be in a internally coherent state, it can often be prepared for a new compression with almost no work, only
+        sometimes falling back to the full, expensive reset that is always required when the stream is in an indeterminate state (i.e., the reset performed by
+        #resetStreamHC()).
+
+        {@code LZ4_streamHC}s are guaranteed to be in a valid state when:
+        ${ul(
+            "returned from #createStreamHC()",
+            "reset by #resetStreamHC()",
+            "{@code memset(stream, 0, sizeof(LZ4_streamHC_t))}",
+            "the stream was in a valid state and was reset by #resetStreamHC_fast()",
+            "the stream was in a valid state and was then used in any compression call that returned success",
+            """
+            the stream was in an indeterminate state and was used in a compression call that fully reset the state (#compress_HC_extStateHC()) and that
+            returned success
+            """
+        )}
+        """,
+
+        LZ4_streamHC_t.p.IN("LZ4_streamHCPtr", ""),
+        int.IN("compressionLevel", "")
+    )
+
+    int(
+        "compress_HC_extStateHC_fastReset",
+        """
+        A variant of #compress_HC_extStateHC().
+
+        Using this variant avoids an expensive initialization step. It is only safe to call if the state buffer is known to be correctly initialized already
+        (see comment on #resetStreamHC_fast() for a definition of "correctly initialized"). From a high level, the difference is that this function initializes
+        the provided state with a call to #resetStreamHC_fast() while #compress_HC_extStateHC() starts with a call to #resetStreamHC().
+        """,
+
+        Unsafe..void.p.OUT("state", ""),
+        char.p.const.IN("src", ""),
+        char.p.OUT("dst", ""),
+        AutoSize("src")..int.IN("srcSize", ""),
+        AutoSize("dst")..int.IN("dstCapacity", ""),
+        int.IN("compressionLevel", "")
+    )
+
+    void(
+        "attach_HC_dictionary",
+        """
+        This is an experimental API that allows for the efficient use of a static dictionary many times.
+
+        Rather than re-loading the dictionary buffer into a working context before each compression, or copying a pre-loaded dictionary's
+        {@code LZ4_streamHC_t} into a working {@code LZ4_streamHC_t}, this function introduces a no-copy setup mechanism, in which the working stream
+        references the dictionary stream in-place.
+
+        Several assumptions are made about the state of the dictionary stream. Currently, only streams which have been prepared by #loadDictHC() should be
+        expected to work.
+
+        Alternatively, the provided dictionary stream pointer may be #NULL, in which case any existing dictionary stream is unset.
+
+        A dictionary should only be attached to a stream without any history (i.e., a stream that has just been reset).
+
+        The dictionary will remain attached to the working stream only for the current stream session. Calls to {@code LZ4_resetStreamHC(_fast)} will remove
+        the dictionary context association from the working stream. The dictionary stream (and source buffer) must remain in-place / accessible / unchanged
+        through the lifetime of the stream session.
+        """,
+
+        LZ4_streamHC_t.p.IN("working_stream", ""),
+        nullable..LZ4_streamHC_t.p.const.IN("dictionary_stream", "")
+    )
 }

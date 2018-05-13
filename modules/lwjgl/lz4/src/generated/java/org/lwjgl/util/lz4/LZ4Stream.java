@@ -20,12 +20,12 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_STREAMSIZE_U64;
  * <h3>Layout</h3>
  * 
  * <code><pre>
- * union LZ4_stream_u {
+ * union LZ4_stream_t {
  *     unsigned long long table[LZ4_STREAMSIZE_U64];
- *     {@link LZ4StreamInternal LZ4_stream_t_internal} internal_donotuse;
+ *     {@link LZ4StreamInternal struct LZ4_stream_t_internal} internal_donotuse;
  * }</pre></code>
  */
-@NativeType("union LZ4_stream_u")
+@NativeType("union LZ4_stream_t")
 public class LZ4Stream extends Struct {
 
     /** The struct size in bytes. */
@@ -75,7 +75,7 @@ public class LZ4Stream extends Struct {
     @NativeType("unsigned long long")
     public long table(int index) { return ntable(address(), index); }
     /** Returns a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
-    @NativeType("LZ4_stream_t_internal")
+    @NativeType("struct LZ4_stream_t_internal")
     public LZ4StreamInternal internal_donotuse() { return ninternal_donotuse(address()); }
 
     // -----------------------------------
@@ -171,7 +171,7 @@ public class LZ4Stream extends Struct {
         @NativeType("unsigned long long")
         public long table(int index) { return LZ4Stream.ntable(address(), index); }
         /** Returns a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
-        @NativeType("LZ4_stream_t_internal")
+        @NativeType("struct LZ4_stream_t_internal")
         public LZ4StreamInternal internal_donotuse() { return LZ4Stream.ninternal_donotuse(address()); }
 
     }

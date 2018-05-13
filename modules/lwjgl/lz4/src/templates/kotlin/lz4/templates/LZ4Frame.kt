@@ -10,6 +10,7 @@ import lz4.*
 val LZ4Frame = "LZ4Frame".nativeClass(Module.LZ4, prefix = "LZ4F", prefixMethod = "LZ4F_", library = LZ4_LIBRARY) {
     nativeDirective(
         """DISABLE_WARNINGS()
+#define LZ4F_STATIC_LINKING_ONLY
 #include "lz4frame.h"
 ENABLE_WARNINGS()""")
 
@@ -77,14 +78,14 @@ ENABLE_WARNINGS()""")
 
     unsignedb(
         "isError",
-        "Tells if a {@code LZ4F_errorCode_t} function result is an error code",
+        "Tells when a function result is an error code.",
 
         LZ4F_errorCode_t.IN("code", "")
     )
 
     charASCII.const.p(
         "getErrorName",
-        "Return error code string; useful for debugging.",
+        "Return error code string; for debugging.",
 
         LZ4F_errorCode_t.IN("code", "")
     )
@@ -193,7 +194,7 @@ ENABLE_WARNINGS()""")
         """
         {@code LZ4F_compressUpdate()} can be called repetitively to compress as much data as necessary.
 
-        An important rule is that {@code dstCapacity} MUST be large enough to ensure operation success even in worst case situations. This value is provided by
+        Important rule: {@code dstCapacity} MUST be large enough to ensure operation success even in worst case situations. This value is provided by
         #compressBound(). If this condition is not respected, {@code LZ4F_compress()} will fail (result is an {@code errorCode}).
 
         {@code LZ4F_compressUpdate()} doesn't guarantee error recovery. When an error occurs, compression context must be freed or resized.
@@ -227,8 +228,8 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        number of bytes written into {@code dstBuffer} (it can be zero, which means there was no data stored within {@code cctx}) or an error code if it fails
-        (which can be tested using #isError())
+        nb of bytes written into {@code dstBuffer} (can be zero, when there is no data stored within {@code cctx}) or an error code if it fails (which can be
+        tested using #isError())
         """
     )
 
@@ -246,8 +247,7 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        number of bytes written into {@code dstBuffer} (necessarily &ge; 4 ({@code endMark}), or 8 if optional frame checksum is enabled) or an error code if
-        it fails (which can be tested using #isError()).
+        nb of bytes written into {@code dstBuffer}, necessarily &ge; 4 ({@code endMark}), or an error code if it fails (which can be tested using #isError()).
 
         A successful call to #compressEnd() makes {@code cctx} available again for another compression task.
         """
@@ -280,8 +280,8 @@ ENABLE_WARNINGS()""")
         """
         an errorCode, which can be tested using #isError().
 
-        The result of {@code LZ4F_freeDecompressionContext()} is indicative of the current state of {@code decompressionContext} when being released. That is,
-        it should be {@code == 0} if decompression has been completed fully and correctly.
+        Result of {@code LZ4F_freeDecompressionContext()} indicates current state of {@code decompressionContext} when being released. That is, it should be
+        {@code == 0} if decompression has been completed fully and correctly.
         """
     )
 
@@ -325,10 +325,10 @@ ENABLE_WARNINGS()""")
         Call this function repetitively to regenerate compressed data from {@code srcBuffer}. The function will read up to {@code *srcSizePtr}
         bytes from {@code srcBuffer}, and decompress data into {@code dstBuffer}, of capacity {@code *dstSizePtr}.
 
-        The number of bytes consumed from {@code srcBuffer} will be written into {@code *srcSizePtr} (necessarily &le; original value). The number of bytes
+        The nb of bytes consumed from {@code srcBuffer} will be written into {@code *srcSizePtr} (necessarily &le; original value). The number of bytes
         decompressed into {@code dstBuffer} will be written into {@code *dstSizePtr} (necessarily &le; original value).
 
-        The number of bytes regenerated into {@code dstBuffer} is provided within {@code *dstSizePtr} (necessarily &le; original value).
+        The nb of bytes regenerated into {@code dstBuffer} is provided within {@code *dstSizePtr} (necessarily &le; original value).
 
         The function does not necessarily read all input bytes, so always check value in {@code *srcSizePtr}. Unconsumed source data must be presented again in
         subsequent invocations.
@@ -373,5 +373,123 @@ ENABLE_WARNINGS()""")
         LZ4F_dctx.p.IN("dctx", ""),
 
         since = "1.8.0"
+    )
+
+    // -----------------------------------------------------
+
+    EnumConstant(
+        "Error code.",
+
+        "OK_NoError".enum,
+        "ERROR_GENERIC".enum,
+        "ERROR_maxBlockSize_invalid".enum,
+        "ERROR_blockMode_invalid".enum,
+        "ERROR_contentChecksumFlag_invalid".enum,
+        "ERROR_compressionLevel_invalid".enum,
+        "ERROR_headerVersion_wrong".enum,
+        "ERROR_blockChecksum_invalid".enum,
+        "ERROR_reservedFlag_set".enum,
+        "ERROR_allocation_failed".enum,
+        "ERROR_srcSize_tooLarge".enum,
+        "ERROR_dstMaxSize_tooSmall".enum,
+        "ERROR_frameHeader_incomplete".enum,
+        "ERROR_frameType_unknown".enum,
+        "ERROR_frameSize_wrong".enum,
+        "ERROR_srcPtr_wrong".enum,
+        "ERROR_decompressionFailed".enum,
+        "ERROR_headerChecksum_invalid".enum,
+        "ERROR_contentChecksum_invalid".enum,
+        "ERROR_frameDecoding_alreadyStarted".enum,
+        "ERROR_maxCode".enum
+    )
+
+    LZ4F_errorCodes(
+        "getErrorCode",
+        "",
+
+        size_t.IN("functionResult", "")
+    )
+
+    LZ4F_CDict.p(
+        "createCDict",
+        """
+        When compressing multiple messages / blocks with the same dictionary, it's recommended to load it just once. {@code LZ4_createCDict()} will create a
+        digested dictionary, ready to start future compression operations without startup delay.
+
+        {@code LZ4_CDict} can be created once and shared by multiple threads concurrently, since its usage is read-only.
+
+        {@code dictBuffer} can be released after {@code LZ4_CDict} creation, since its content is copied within {@code CDict}.
+        """,
+
+        void.const.p.IN("dictBuffer", ""),
+        AutoSize("dictBuffer")..size_t.IN("dictSize", "")
+    )
+
+    void(
+        "freeCDict",
+        "",
+
+        LZ4F_CDict.p.IN("CDict", "")
+    )
+
+    size_t(
+        "compressFrame_usingCDict",
+        """
+        Compress an entire {@code srcBuffer} into a valid LZ4 frame using a digested Dictionary.
+
+        {@code dst} MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}. If this condition is not respected, function will fail (return an
+        {@code errorCode}).
+        """,
+
+        LZ4F_cctx.p.IN("cctx", "must point to a context created by #createCompressionContext()."),
+        void.p.OUT("dst", ""),
+        AutoSize("dst")..size_t.IN("dstCapacity", ""),
+        void.const.p.IN("src", ""),
+        AutoSize("src")..size_t.IN("srcSize", ""),
+        nullable..LZ4F_CDict.const.p.IN("cdict", "if #NULL, compress without a dictionary"),
+        LZ4F_preferences_t.const.p.IN(
+            "preferencesPtr",
+            "optional: you may provide #NULL as argument, but it's not recommended, as it's the only way to provide {@code dictID} in the frame header"
+        ),
+
+        returnDoc = "number of bytes written into {@code dstBuffer} or an error code if it fails (can be tested using #isError())"
+    )
+
+    size_t(
+        "compressBegin_usingCDict",
+        """
+        Inits streaming dictionary compression, and writes the frame header into {@code dstBuffer}.
+
+        {@code dstCapacity} must be &ge; #HEADER_SIZE_MAX bytes.
+        """,
+
+        LZ4F_cctx.p.IN("cctx", ""),
+        void.p.OUT("dstBuffer", ""),
+        AutoSize("dstBuffer")..size_t.IN("dstCapacity", ""),
+        LZ4F_CDict.const.p.IN("cdict", ""),
+        LZ4F_preferences_t.const.p.IN(
+            "prefsPtr",
+            "optional: you may provide #NULL as argument, however, it's the only way to provide {@code dictID} in the frame header"
+        ),
+
+        returnDoc = "number of bytes written into {@code dstBuffer} for the header, or an error code (which can be tested using #isError())"
+    )
+
+    size_t(
+        "decompress_usingDict",
+        """
+        Same as #decompress(), using a predefined dictionary.
+
+        Dictionary is used "in place", without any preprocessing. It must remain accessible throughout the entire frame decoding.
+        """,
+
+        LZ4F_dctx.p.IN("dctxPtr", ""),
+        void.p.OUT("dstBuffer", ""),
+        AutoSize("dstBuffer")..Check(1)..size_t.p.INOUT("dstSizePtr", ""),
+        void.const.p.IN("srcBuffer", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
+        void.const.p.IN("dict", ""),
+        AutoSize("dict")..size_t.IN("dictSize", ""),
+        LZ4F_decompressOptions_t.const.p.IN("decompressOptionsPtr", "")
     )
 }

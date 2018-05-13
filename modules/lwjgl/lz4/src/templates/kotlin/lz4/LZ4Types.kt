@@ -57,11 +57,11 @@ val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_fr
         """
     LZ4F_blockSizeID_t.member("blockSizeID", "{@code 0 == default}").links("max\\d+\\w+")
     LZ4F_blockMode_t.member("blockMode", "{@code 0 == default}").links("block\\w+")
-    LZ4F_contentChecksum_t.member("contentChecksumFlag", "if enabled, frame is terminated with a 32-bits checksum of decompressed data; {@code 0 == disabled} (default)")
+    LZ4F_contentChecksum_t.member("contentChecksumFlag", "1: frame terminated with 32-bit checksum of decompressed data; 0: disabled (default) ")
     LZ4F_frameType_t.member("frameType", "read-only field").links("#frame #skippableFrame")
     unsigned_long_long.member("contentSize", "size of uncompressed content ; {@code 0 == unknown}")
-    unsigned.member("dictID", "dictionary ID, sent by the compressor to help decoder select the correct dictionary; {@code 0 == no dictID} provided")
-    LZ4F_blockChecksum_t.member("blockChecksumFlag", "if enabled, each block is followed by a checksum of block's compressed data ; {@code 0 == disabled} (default)")
+    unsigned.member("dictID", "dictionary ID, sent by compressor to help decoder select correct dictionary; 0 == no {@code dictID} provided")
+    LZ4F_blockChecksum_t.member("blockChecksumFlag", "1: each block followed by a checksum of block's compressed data; 0: disabled (default)")
 }
 
 /*! LZ4F_preferences_t :
@@ -72,10 +72,11 @@ val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4
     LZ4F_frameInfo_t.member("frameInfo", "")
     int.member(
         "compressionLevel",
-        "{@code 0 == default} (fast mode); values above #CLEVEL_MAX count as #CLEVEL_MAX; values below 0 trigger \"fast acceleration\", proportional to value"
+        "0: default (fast mode); values &gt; #CLEVEL_MAX count as #CLEVEL_MAX; values &gt; 0 trigger \"fast acceleration\""
     )
-    unsigned.member("autoFlush", "{@code 1 == always flush}, to reduce usage of internal buffers")
-    unsigned.array("reserved", "must be zero for forward compatibility", size = 4)
+    unsigned.member("autoFlush", "1: always flush, to reduce usage of internal buffers")
+    unsigned.member("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
+    unsigned.array("reserved", "must be zero for forward compatibility", size = 3)
 }
 
 val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
@@ -89,10 +90,7 @@ val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeNam
 val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
     unsigned.member(
         "stableDst",
-        """
-        pledge that at least {@code 64KB+64Bytes} of previously decompressed data remain unmodifed where it was decoded. This optimization skips storage
-        operations in {@code tmp} buffers
-        """
+        "pledges that last 64KB decompressed data will remain available unmodified. This optimization skips storage operations in tmp buffers."
     )
     unsigned.array("reserved", "must be set to zero for forward compatibility", size = 3)
 }

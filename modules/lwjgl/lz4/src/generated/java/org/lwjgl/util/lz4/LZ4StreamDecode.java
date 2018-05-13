@@ -20,12 +20,12 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_STREAMDECODESIZE_U64;
  * <h3>Layout</h3>
  * 
  * <code><pre>
- * union LZ4_streamDecode_u {
+ * union LZ4_streamDecode_t {
  *     unsigned long long table[LZ4_STREAMDECODESIZE_U64];
  *     {@link LZ4StreamDecodeInternal LZ4_streamDecode_t_internal} internal_donotuse;
  * }</pre></code>
  */
-@NativeType("union LZ4_streamDecode_u")
+@NativeType("union LZ4_streamDecode_t")
 public class LZ4StreamDecode extends Struct {
 
     /** The struct size in bytes. */
