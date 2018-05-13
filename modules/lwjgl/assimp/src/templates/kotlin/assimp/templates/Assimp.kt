@@ -996,6 +996,14 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Property type: Bool. Default value: false.
+        """,
+
+        "AI_CONFIG_EXPORT_POINT_CLOUDS".."EXPORT_POINT_CLOUDS"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Specifies a global key factor for scale.
 
         Property type: float. Default value: 1.0f
@@ -2799,7 +2807,7 @@ x1""")}
             the global scaling from your importer settings like in FBX. Use the flag {@code AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY} from the global property table
             to configure this.
 
-            Use #AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY to setup the global scaing factor.
+            Use #AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY to setup the global scaling factor.
             """,
             0x8000000
         ),
