@@ -5170,6 +5170,7 @@ NK_API struct nk_style_item nk_style_item_hide(void);
 #endif
 
 enum nk_panel_type {
+    NK_PANEL_NONE       = 0,
     NK_PANEL_WINDOW     = NK_FLAG(0),
     NK_PANEL_GROUP      = NK_FLAG(1),
     NK_PANEL_POPUP      = NK_FLAG(2),
@@ -16902,9 +16903,8 @@ nk_contextual_begin(struct nk_context *ctx, nk_flags flags, struct nk_vec2 size,
     struct nk_window *popup;
     struct nk_rect body;
 
-    NK_STORAGE const struct nk_rect null_rect = {0,0,0,0};
+    NK_STORAGE const struct nk_rect null_rect = {-1,-1,0,0};
     int is_clicked = 0;
-    int is_active = 0;
     int is_open = 0;
     int ret = 0;
 
@@ -16913,11 +16913,11 @@ nk_contextual_begin(struct nk_context *ctx, nk_flags flags, struct nk_vec2 size,
     NK_ASSERT(ctx->current->layout);
     if (!ctx || !ctx->current || !ctx->current->layout)
         return 0;
-    if (ctx->current != ctx->active)
-        return 0;
 
     win = ctx->current;
     ++win->popup.con_count;
+    if (ctx->current != ctx->active)
+        return 0;
 
     /* check if currently active contextual is active */
     popup = win->popup.win;
@@ -16925,7 +16925,9 @@ nk_contextual_begin(struct nk_context *ctx, nk_flags flags, struct nk_vec2 size,
     is_clicked = nk_input_mouse_clicked(&ctx->input, NK_BUTTON_RIGHT, trigger_bounds);
     if (win->popup.active_con && win->popup.con_count != win->popup.active_con)
         return 0;
-    if ((is_clicked && is_open && !is_active) || (!is_open && !is_active && !is_clicked))
+    if (!is_open && win->popup.active_con)
+        win->popup.active_con = 0;
+    if ((!is_open && !is_clicked))
         return 0;
 
     /* calculate contextual position on click */
@@ -16946,6 +16948,7 @@ nk_contextual_begin(struct nk_context *ctx, nk_flags flags, struct nk_vec2 size,
     if (ret) win->popup.type = NK_PANEL_CONTEXTUAL;
     else {
         win->popup.active_con = 0;
+        win->popup.type = NK_PANEL_NONE;
         if (win->popup.win)
             win->popup.win->flags = 0;
     }
@@ -18729,7 +18732,8 @@ nk_list_view_begin(struct nk_context *ctx, struct nk_list_view *view,
 
     view->total_height = row_height * NK_MAX(row_count,1);
     view->begin = (int)NK_MAX(((float)view->scroll_value / (float)row_height), 0.0f);
-    view->count = (int)NK_MAX(nk_iceilf((layout->clip.h)/(float)row_height), 0);
+    view->count = (int)NK_MAX(nk_iceilf((layout->clip.h)/(float)row_height),0);
+    view->count = NK_MIN(view->count, row_count - view->begin);
     view->end = view->begin + view->count;
     view->ctx = ctx;
     return result;
@@ -21256,7 +21260,7 @@ nk_draw_scrollbar(struct nk_command_buffer *out, nk_flags state,
     }
 
     /* draw cursor */
-    if (background->type == NK_STYLE_ITEM_COLOR) {
+    if (cursor->type == NK_STYLE_ITEM_COLOR) {
         nk_fill_rect(out, *scroll, style->rounding_cursor, cursor->data.color);
         nk_stroke_rect(out, *scroll, style->rounding_cursor, style->border_cursor, style->cursor_border_color);
     } else nk_draw_image(out, *scroll, &cursor->data.image, nk_white);

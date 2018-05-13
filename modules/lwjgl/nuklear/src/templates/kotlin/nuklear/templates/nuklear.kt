@@ -713,6 +713,7 @@ nk_style_pop_vec2(ctx);""")}
     EnumConstant(
         "nk_panel_type",
 
+        "PANEL_NONE".enum("", "0"),
         "PANEL_WINDOW".enum("", 0.NK_FLAG),
         "PANEL_GROUP".enum("", 1.NK_FLAG),
         "PANEL_POPUP".enum("", 2.NK_FLAG),

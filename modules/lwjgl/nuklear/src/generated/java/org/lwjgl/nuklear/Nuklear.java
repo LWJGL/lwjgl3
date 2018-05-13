@@ -1125,6 +1125,7 @@ public class Nuklear {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #NK_PANEL_NONE PANEL_NONE}</li>
      * <li>{@link #NK_PANEL_WINDOW PANEL_WINDOW}</li>
      * <li>{@link #NK_PANEL_GROUP PANEL_GROUP}</li>
      * <li>{@link #NK_PANEL_POPUP PANEL_POPUP}</li>
@@ -1135,6 +1136,7 @@ public class Nuklear {
      * </ul>
      */
     public static final int
+        NK_PANEL_NONE       = 0,
         NK_PANEL_WINDOW     = 1 << 0,
         NK_PANEL_GROUP      = 1 << 1,
         NK_PANEL_POPUP      = 1 << 2,
