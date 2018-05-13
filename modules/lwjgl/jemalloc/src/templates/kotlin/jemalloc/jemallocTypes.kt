@@ -20,10 +20,12 @@ fun config() {
         The jemalloc shared library that comes with LWJGL is configured with:
         ${ul(
             "--with-jemalloc-prefix=je_",
-            "--enable-lazy-lock (Linux & macOS)",
+            "--enable-lazy-lock (Linux)",
             "--disable-stats",
             "--disable-fill",
-            "--disable-zone-allocator (MacOS)"
+            "--disable-cxx",
+            "--disable-initial-exec-tls (Linux &amp; macOS)",
+            "--disable-zone-allocator (macOS)"
         )}
 
         The shared library may be replaced with a custom build that has more features enabled.

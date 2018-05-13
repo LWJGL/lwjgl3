@@ -15,10 +15,12 @@
  * 
  * <ul>
  * <li>--with-jemalloc-prefix=je_</li>
- * <li>--enable-lazy-lock (Linux & macOS)</li>
+ * <li>--enable-lazy-lock (Linux)</li>
  * <li>--disable-stats</li>
  * <li>--disable-fill</li>
- * <li>--disable-zone-allocator (MacOS)</li>
+ * <li>--disable-cxx</li>
+ * <li>--disable-initial-exec-tls (Linux &amp; macOS)</li>
+ * <li>--disable-zone-allocator (macOS)</li>
  * </ul>
  * 
  * <p>The shared library may be replaced with a custom build that has more features enabled.</p>

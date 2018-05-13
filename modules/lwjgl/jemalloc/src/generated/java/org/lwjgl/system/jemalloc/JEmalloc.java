@@ -36,16 +36,16 @@ public class JEmalloc {
     public static final int JEMALLOC_VERSION_MAJOR = 5;
 
     /** The minor version. */
-    public static final int JEMALLOC_VERSION_MINOR = 0;
+    public static final int JEMALLOC_VERSION_MINOR = 1;
 
     /** The bugfix version. */
-    public static final int JEMALLOC_VERSION_BUGFIX = 1;
+    public static final int JEMALLOC_VERSION_BUGFIX = 0;
 
     /** The revision number. */
-    public static final int JEMALLOC_VERSION_NREV = 3;
+    public static final int JEMALLOC_VERSION_NREV = 0;
 
     /** The globally unique identifier (git commit hash). */
-    public static final String JEMALLOC_VERSION_GID = "3f5049340e66c6929c3270f7359617f62e053b11";
+    public static final String JEMALLOC_VERSION_GID = "61efbda7098de6fe64c362d309824864308c36d4";
 
     /** The version string. */
     public static final String JEMALLOC_VERSION = JEMALLOC_VERSION_MAJOR + "." + JEMALLOC_VERSION_MINOR + "." + JEMALLOC_VERSION_BUGFIX + "-" + JEMALLOC_VERSION_NREV + "-g" + JEMALLOC_VERSION_GID;
