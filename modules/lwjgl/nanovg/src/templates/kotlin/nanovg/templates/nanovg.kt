@@ -222,8 +222,8 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        int.IN("windowWidth", "the window width"),
-        int.IN("windowHeight", "the window height"),
+        float.IN("windowWidth", "the window width"),
+        float.IN("windowHeight", "the window height"),
         float.IN("devicePixelRatio", "the device pixel ratio")
     )
 

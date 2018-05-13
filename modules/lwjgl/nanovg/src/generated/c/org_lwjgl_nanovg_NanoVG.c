@@ -29,7 +29,7 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgBeginFrame(JNIEnv *__env, jclass clazz, jlong ctxAddress, jint windowWidth, jint windowHeight, jfloat devicePixelRatio) {
+JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoVG_nnvgBeginFrame(JNIEnv *__env, jclass clazz, jlong ctxAddress, jfloat windowWidth, jfloat windowHeight, jfloat devicePixelRatio) {
     NVGcontext *ctx = (NVGcontext *)(intptr_t)ctxAddress;
     UNUSED_PARAMS(__env, clazz)
     nvgBeginFrame(ctx, windowWidth, windowHeight, devicePixelRatio);

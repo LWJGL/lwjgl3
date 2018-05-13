@@ -279,7 +279,7 @@ public class NanoVG {
     // --- [ nvgBeginFrame ] ---
 
     /** Unsafe version of: {@link #nvgBeginFrame BeginFrame} */
-    public static native void nnvgBeginFrame(long ctx, int windowWidth, int windowHeight, float devicePixelRatio);
+    public static native void nnvgBeginFrame(long ctx, float windowWidth, float windowHeight, float devicePixelRatio);
 
     /**
      * Begins drawing a new frame.
@@ -294,7 +294,7 @@ public class NanoVG {
      * @param windowHeight     the window height
      * @param devicePixelRatio the device pixel ratio
      */
-    public static void nvgBeginFrame(@NativeType("NVGcontext *") long ctx, int windowWidth, int windowHeight, float devicePixelRatio) {
+    public static void nvgBeginFrame(@NativeType("NVGcontext *") long ctx, float windowWidth, float windowHeight, float devicePixelRatio) {
         if (CHECKS) {
             check(ctx);
         }
