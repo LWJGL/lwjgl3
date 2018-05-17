@@ -173,6 +173,8 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
 
     int64_t.member("textureMemoryUsed", "")
     int64_t.member("rtMemoryUsed", "")
+    int32_t.member("transientVbUsed", "")
+    int32_t.member("transientIbUsed", "")
 
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
     int64_t.member("gpuMemoryUsed", "amount of GPU memory used by the application")
@@ -552,7 +554,7 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
 
     uint32_t.member("width", "backbuffer width")
     uint32_t.member("height", "backbuffer height")
-    uint32_t.member("flags", "reset parameters")
+    uint32_t.member("reset", "reset parameters")
 }
 
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {

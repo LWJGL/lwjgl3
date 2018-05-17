@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code width} &ndash; backbuffer width</li>
  * <li>{@code height} &ndash; backbuffer height</li>
- * <li>{@code flags} &ndash; reset parameters</li>
+ * <li>{@code reset} &ndash; reset parameters</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct bgfx_resolution_t {
  *     uint32_t width;
  *     uint32_t height;
- *     uint32_t flags;
+ *     uint32_t reset;
  * }</pre></code>
  */
 @NativeType("struct bgfx_resolution_t")
@@ -47,7 +47,7 @@ public class BGFXResolution extends Struct implements NativeResource {
     public static final int
         WIDTH,
         HEIGHT,
-        FLAGS;
+        RESET;
 
     static {
         Layout layout = __struct(
@@ -61,7 +61,7 @@ public class BGFXResolution extends Struct implements NativeResource {
 
         WIDTH = layout.offsetof(0);
         HEIGHT = layout.offsetof(1);
-        FLAGS = layout.offsetof(2);
+        RESET = layout.offsetof(2);
     }
 
     BGFXResolution(long address, @Nullable ByteBuffer container) {
@@ -87,26 +87,26 @@ public class BGFXResolution extends Struct implements NativeResource {
     /** Returns the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** Returns the value of the {@code reset} field. */
     @NativeType("uint32_t")
-    public int flags() { return nflags(address()); }
+    public int reset() { return nreset(address()); }
 
     /** Sets the specified value to the {@code width} field. */
     public BGFXResolution width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
     /** Sets the specified value to the {@code height} field. */
     public BGFXResolution height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
-    public BGFXResolution flags(@NativeType("uint32_t") int value) { nflags(address(), value); return this; }
+    /** Sets the specified value to the {@code reset} field. */
+    public BGFXResolution reset(@NativeType("uint32_t") int value) { nreset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public BGFXResolution set(
         int width,
         int height,
-        int flags
+        int reset
     ) {
         width(width);
         height(height);
-        flags(flags);
+        reset(reset);
 
         return this;
     }
@@ -187,14 +187,14 @@ public class BGFXResolution extends Struct implements NativeResource {
     public static int nwidth(long struct) { return memGetInt(struct + BGFXResolution.WIDTH); }
     /** Unsafe version of {@link #height}. */
     public static int nheight(long struct) { return memGetInt(struct + BGFXResolution.HEIGHT); }
-    /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + BGFXResolution.FLAGS); }
+    /** Unsafe version of {@link #reset}. */
+    public static int nreset(long struct) { return memGetInt(struct + BGFXResolution.RESET); }
 
     /** Unsafe version of {@link #width(int) width}. */
     public static void nwidth(long struct, int value) { memPutInt(struct + BGFXResolution.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
     public static void nheight(long struct, int value) { memPutInt(struct + BGFXResolution.HEIGHT, value); }
-    /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + BGFXResolution.FLAGS, value); }
+    /** Unsafe version of {@link #reset(int) reset}. */
+    public static void nreset(long struct, int value) { memPutInt(struct + BGFXResolution.RESET, value); }
 
 }

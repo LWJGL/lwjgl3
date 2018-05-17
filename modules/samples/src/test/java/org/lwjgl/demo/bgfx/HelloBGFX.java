@@ -75,10 +75,11 @@ public final class HelloBGFX {
 
             BGFXInit init = BGFXInit.mallocStack(stack);
             bgfx_init_ctor(init);
-            init.resolution()
-                .width(width)
-                .height(height)
-                .flags(BGFX_RESET_VSYNC);
+            init
+                .resolution(it -> it
+                    .width(width)
+                    .height(height)
+                    .reset(BGFX_RESET_VSYNC));
 
             if (!bgfx_init(init)) {
                 throw new RuntimeException("Error initializing bgfx renderer");
