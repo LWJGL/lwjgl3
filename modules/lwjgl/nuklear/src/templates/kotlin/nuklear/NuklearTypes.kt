@@ -1295,7 +1295,7 @@ fun NK_CONFIGURATION_STACK(address: PointerType<*>, old_value: DataType, javaNam
     }
 }
 
-val nk_configuration_stacks = struct(Module.NUKLEAR, "NkConfigurationStacks", nativeName = "struct nk_configuration_stacks", mutable = false) {
+val nk_configuration_stacks = struct(Module.NUKLEAR, "NkConfigurationStacks", nativeName = "struct nk_configuration_stacks", mutable = false, skipBuffer = true) {
     access = Access.INTERNAL
 
     NK_CONFIGURATION_STACK(nk_style_item.p, nk_style_item, "StyleItem", "style_item", size = 16).member("style_items", "")
@@ -1307,7 +1307,7 @@ val nk_configuration_stacks = struct(Module.NUKLEAR, "NkConfigurationStacks", na
     NK_CONFIGURATION_STACK(nk_button_behavior.p, nk_button_behavior, "ButtonBehavior", "button_behavior", size = 8).member("button_behaviors", "")
 }
 
-val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context", mutable = false) {
+val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context", mutable = false, skipBuffer = true) {
     documentation = ""
 
 /* public: can be accessed freely */

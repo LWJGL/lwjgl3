@@ -23,7 +23,10 @@ private val KEYWORDS = setOf(
     // NativeResource
     "free",
     // Struct
-    "create", "callocStack", "calloc", "isNull", "malloc", "mallocStack", "sizeof",
+    "create", "callocStack", "calloc", "isNull", "malloc", "mallocStack", "sizeof"
+)
+
+private val BUFFER_KEYWORDS = setOf(
     // Iterable
     "iterator", "forEach", "spliterator",
     // CustomBuffer
@@ -50,16 +53,6 @@ open class StructMember(
         else
             "${parentField}_$offsetField"
     }
-
-    internal fun field(parentMember: String) = if (parentMember.isEmpty())
-        if (KEYWORDS.contains(name)) "$name\$" else name
-    else
-        "${parentMember}_$name"
-
-    internal fun fieldName(parentMember: String) = if (parentMember.isEmpty())
-        name
-    else
-        "$parentMember.$name"
 
     /** hidden if false, contributes to layout only */
     internal var public = true
@@ -143,7 +136,9 @@ class Struct(
     /** if specified, this struct aliases it. */
     private val alias: Struct?,
     /** when true, the struct layout will be built using native code. */
-    private val nativeLayout: Boolean
+    private val nativeLayout: Boolean,
+    /** when true, a nested StructBuffer subclass will be generated as well. */
+    private val generateBuffer: Boolean
 ) : GeneratorTargetNative(module, className, nativeSubPath) {
 
     companion object {
@@ -252,7 +247,7 @@ class Struct(
 
     /** Nested member struct definition. */
     fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false)
+        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false, false)
         struct.init()
         return StructType(struct).member(name, documentation)
     }
@@ -262,7 +257,7 @@ class Struct(
 
     /** Nested member union definition. */
     fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false)
+        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false, false)
         struct.init()
         return StructType(struct).member(name, documentation)
     }
@@ -293,6 +288,16 @@ class Struct(
     private val containsUnion: Boolean get() = union || members.any {
         it.isNestedStruct && (it.nativeType as StructType).let { it.name === ANONYMOUS && it.definition.containsUnion }
     }
+
+    private fun StructMember.field(parentMember: String) = if (parentMember.isEmpty())
+        if (KEYWORDS.contains(name) || (generateBuffer && BUFFER_KEYWORDS.contains(name))) "$name\$" else name
+    else
+        "${parentMember}_$name"
+
+    private fun StructMember.fieldName(parentMember: String) = if (parentMember.isEmpty())
+        name
+    else
+        "$parentMember.$name"
 
     internal val validations: Sequence<String> by lazy(LazyThreadSafetyMode.NONE) {
         if (union)
@@ -788,8 +793,9 @@ $indentation}"""
         return address == NULL ? null : create(address);
     }
 """)
-        if (mallocable) {
-            print("""
+        if (generateBuffer) {
+            if (mallocable) {
+                print("""
     /**
      * Returns a new {@link $className.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -817,9 +823,9 @@ $indentation}"""
         return new Buffer(__create($BUFFER_CAPACITY_PARAM, SIZEOF));
     }
 """)
-        }
+            }
 
-        print("""
+            print("""
     /**
      * Create a {@link $className.Buffer} instance at the specified memory.
      *
@@ -836,6 +842,7 @@ $indentation}"""
         return address == NULL ? null : create(address, $BUFFER_CAPACITY_PARAM);
     }
 """)
+        }
 
         if (mallocable) {
             print("""
@@ -868,7 +875,9 @@ $indentation}"""
     public static $className callocStack(MemoryStack stack) {
         return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
-
+""")
+            if (generateBuffer) {
+                print("""
     /**
      * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack}.
      *
@@ -907,6 +916,7 @@ $indentation}"""
         return create(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 """)
+            }
         }
 
         if (alias == null) {
@@ -945,8 +955,7 @@ ${validations.joinToString("\n")}
         for (int i = 0; i < count; i++) {
             validate(array + i * SIZEOF);
         }
-    }"""
-                        )
+    }""")
                     }
                 }
             }
@@ -954,19 +963,20 @@ ${validations.joinToString("\n")}
 
         printCustomMethods(static = false)
 
-        println("\n$t// -----------------------------------")
+        if (generateBuffer) {
+            println("\n$t// -----------------------------------")
 
-        print("""
+            print("""
     /** An array of {@link $className} structs. */
     public static class Buffer extends """)
 
-        print(if (alias == null)
-            "StructBuffer<$className, Buffer>${if (mallocable) " implements NativeResource" else ""}"
-        else
-            "${alias.className}.Buffer"
-        )
+            print(if (alias == null)
+                "StructBuffer<$className, Buffer>${if (mallocable) " implements NativeResource" else ""}"
+            else
+                "${alias.className}.Buffer"
+            )
 
-        print(""" {
+            print(""" {
 
         /**
          * Creates a new {@link $className.Buffer} instance backed by the specified container.
@@ -978,18 +988,18 @@ ${validations.joinToString("\n")}
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */""")
 
-        print(if (alias == null)
+            print(if (alias == null)
             """
         public Buffer(ByteBuffer container) {
             super(container, container.remaining() / SIZEOF);
         }"""
-        else
+            else
             """
         public Buffer(ByteBuffer container) {
             super(container);
         }""")
 
-        print("""
+            print("""
 
         public Buffer(long address, int cap) {
             super(address, null, -1, 0, cap, cap);
@@ -1015,30 +1025,32 @@ ${validations.joinToString("\n")}
         }
 """)
 
-        if (alias == null) {
-            print("""
+            if (alias == null) {
+                print("""
         @Override
         public int sizeof() {
             return SIZEOF;
         }
 """)
-        }
-        members = publicMembers
-        if (members.any()) {
-            if (alias == null) {
-                println()
-                generateGetters(AccessMode.FLYWEIGHT, members)
+            }
+            members = publicMembers
+            if (members.any()) {
+                if (alias == null) {
+                    println()
+                    generateGetters(AccessMode.FLYWEIGHT, members)
+                }
+
+                if (hasMutableMembers()) {
+                    println()
+                    generateSetters(AccessMode.FLYWEIGHT, settableMembers)
+                }
             }
 
-            if (hasMutableMembers()) {
-                println()
-                generateSetters(AccessMode.FLYWEIGHT, settableMembers)
-            }
-        }
-
-        print("""
+            print("""
     }
-
+""")
+        }
+        print("""
 }""")
     }
 
@@ -2006,9 +2018,10 @@ fun struct(
     mutable: Boolean = true,
     alias: StructType? = null,
     nativeLayout: Boolean = false,
+    skipBuffer: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, alias?.definition, nativeLayout)
+    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, alias?.definition, nativeLayout, !skipBuffer)
     if (init != null) {
         struct.init()
         Generator.register(struct)
@@ -2025,9 +2038,10 @@ fun union(
     mutable: Boolean = true,
     alias: StructType? = null,
     nativeLayout: Boolean = false,
+    skipBuffer: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, alias?.definition, nativeLayout)
+    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, alias?.definition, nativeLayout, !skipBuffer)
     if (init != null) {
         struct.init()
         Generator.register(struct)

@@ -202,7 +202,7 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     bool.member("doesLegacyStretchFlagAffectsLayout", "")
 }
 
-val YGEdgeCount = 9
+const val YGEdgeCount = 9
 val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGDirection.member("direction", "")
     YGFlexDirection.member("flexDirection", "")

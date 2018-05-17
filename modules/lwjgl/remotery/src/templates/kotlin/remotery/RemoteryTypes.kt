@@ -110,7 +110,7 @@ val rmtInputHandlerPtr = Module.REMOTERY.callback {
     )
 }
 
-val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettings") {
+val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettings", skipBuffer = true) {
     documentation = "Structure to fill in to modify Remotery default settings."
 
     rmtU16.member("port", "which port to listen for incoming connections on")

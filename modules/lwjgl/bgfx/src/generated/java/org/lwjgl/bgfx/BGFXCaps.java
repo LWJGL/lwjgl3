@@ -167,22 +167,6 @@ public class BGFXCaps extends Struct {
         return address == NULL ? null : create(address);
     }
 
-    /**
-     * Create a {@link BGFXCaps.Buffer} instance at the specified memory.
-     *
-     * @param address  the memory address
-     * @param capacity the buffer capacity
-     */
-    public static BGFXCaps.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
-    }
-
-    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXCaps.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
-    }
-
     // -----------------------------------
 
     /** Unsafe version of {@link #rendererType}. */
@@ -212,91 +196,6 @@ public class BGFXCaps extends Struct {
     /** Unsafe version of {@link #formats(int) formats}. */
     public static short nformats(long struct, int index) {
         return memGetShort(struct + BGFXCaps.FORMATS + check(index, BGFX_TEXTURE_FORMAT_COUNT) * 2);
-    }
-
-    // -----------------------------------
-
-    /** An array of {@link BGFXCaps} structs. */
-    public static class Buffer extends StructBuffer<BGFXCaps, Buffer> {
-
-        /**
-         * Creates a new {@link BGFXCaps.Buffer} instance backed by the specified container.
-         *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
-         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link BGFXCaps#SIZEOF}, and its mark will be undefined.
-         *
-         * <p>The created buffer instance holds a strong reference to the container object.</p>
-         */
-        public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
-        }
-
-        public Buffer(long address, int cap) {
-            super(address, null, -1, 0, cap, cap);
-        }
-
-        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            super(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Buffer self() {
-            return this;
-        }
-
-        @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXCaps newInstance(long address) {
-            return new BGFXCaps(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-
-        /** Returns the value of the {@code rendererType} field. */
-        @NativeType("bgfx_renderer_type_t")
-        public int rendererType() { return BGFXCaps.nrendererType(address()); }
-        /** Returns the value of the {@code supported} field. */
-        @NativeType("uint64_t")
-        public long supported() { return BGFXCaps.nsupported(address()); }
-        /** Returns the value of the {@code vendorId} field. */
-        @NativeType("uint16_t")
-        public short vendorId() { return BGFXCaps.nvendorId(address()); }
-        /** Returns the value of the {@code deviceId} field. */
-        @NativeType("uint16_t")
-        public short deviceId() { return BGFXCaps.ndeviceId(address()); }
-        /** Returns the value of the {@code homogeneousDepth} field. */
-        @NativeType("bool")
-        public boolean homogeneousDepth() { return BGFXCaps.nhomogeneousDepth(address()); }
-        /** Returns the value of the {@code originBottomLeft} field. */
-        @NativeType("bool")
-        public boolean originBottomLeft() { return BGFXCaps.noriginBottomLeft(address()); }
-        /** Returns the value of the {@code numGPUs} field. */
-        @NativeType("uint8_t")
-        public byte numGPUs() { return BGFXCaps.nnumGPUs(address()); }
-        /** Returns a {@link BGFXCapsGPU}.Buffer view of the {@code gpu} field. */
-        @NativeType("bgfx_caps_gpu_t[4]")
-        public BGFXCapsGPU.Buffer gpu() { return BGFXCaps.ngpu(address()); }
-        /** Returns a {@link BGFXCapsGPU} view of the struct at the specified index of the {@code gpu} field. */
-        @NativeType("bgfx_caps_gpu_t")
-        public BGFXCapsGPU gpu(int index) { return BGFXCaps.ngpu(address(), index); }
-        /** Returns a {@link BGFXCapsLimits} view of the {@code limits} field. */
-        @NativeType("bgfx_caps_limits_t")
-        public BGFXCapsLimits limits() { return BGFXCaps.nlimits(address()); }
-        /** Returns a {@link ShortBuffer} view of the {@code formats} field. */
-        @NativeType("uint16_t[BGFX_TEXTURE_FORMAT_COUNT]")
-        public ShortBuffer formats() { return BGFXCaps.nformats(address()); }
-        /** Returns the value at the specified index of the {@code formats} field. */
-        @NativeType("uint16_t")
-        public short formats(int index) { return BGFXCaps.nformats(address(), index); }
-
     }
 
 }

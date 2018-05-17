@@ -339,7 +339,7 @@ val extent_merge_t = Module.JEMALLOC.callback {
     }
 }
 
-val extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t") {
+val extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent_hooks_t", skipBuffer = true) {
     documentation =
         """
         The {@code extent_hooks_t} structure comprises function pointers which are described individually below. jemalloc uses these functions to manage extent

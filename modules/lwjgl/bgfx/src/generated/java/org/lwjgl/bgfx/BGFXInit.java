@@ -204,49 +204,6 @@ public class BGFXInit extends Struct implements NativeResource {
         return address == NULL ? null : create(address);
     }
 
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
-    }
-
-    /**
-     * Create a {@link BGFXInit.Buffer} instance at the specified memory.
-     *
-     * @param address  the memory address
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
-    }
-
-    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXInit.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link BGFXInit} instance allocated on the thread-local {@link MemoryStack}. */
@@ -275,44 +232,6 @@ public class BGFXInit extends Struct implements NativeResource {
      */
     public static BGFXInit callocStack(MemoryStack stack) {
         return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link BGFXInit.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static BGFXInit.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -373,97 +292,6 @@ public class BGFXInit extends Struct implements NativeResource {
         for (int i = 0; i < count; i++) {
             validate(array + i * SIZEOF);
         }
-    }
-
-    // -----------------------------------
-
-    /** An array of {@link BGFXInit} structs. */
-    public static class Buffer extends StructBuffer<BGFXInit, Buffer> implements NativeResource {
-
-        /**
-         * Creates a new {@link BGFXInit.Buffer} instance backed by the specified container.
-         *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
-         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link BGFXInit#SIZEOF}, and its mark will be undefined.
-         *
-         * <p>The created buffer instance holds a strong reference to the container object.</p>
-         */
-        public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
-        }
-
-        public Buffer(long address, int cap) {
-            super(address, null, -1, 0, cap, cap);
-        }
-
-        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            super(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Buffer self() {
-            return this;
-        }
-
-        @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXInit newInstance(long address) {
-            return new BGFXInit(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-
-        /** Returns the value of the {@code type} field. */
-        @NativeType("bgfx_renderer_type_t")
-        public int type() { return BGFXInit.ntype(address()); }
-        /** Returns the value of the {@code vendorId} field. */
-        @NativeType("uint16_t")
-        public short vendorId() { return BGFXInit.nvendorId(address()); }
-        /** Returns the value of the {@code deviceId} field. */
-        @NativeType("uint16_t")
-        public short deviceId() { return BGFXInit.ndeviceId(address()); }
-        /** Returns a {@link BGFXResolution} view of the {@code resolution} field. */
-        @NativeType("bgfx_resolution_t")
-        public BGFXResolution resolution() { return BGFXInit.nresolution(address()); }
-        /** Passes the {@code resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BGFXInit.Buffer resolution(java.util.function.Consumer<BGFXResolution> consumer) { consumer.accept(resolution()); return this; }
-        /** Returns a {@link BGFXInitLimits} view of the {@code limits} field. */
-        @NativeType("bgfx_init_limits_t")
-        public BGFXInitLimits limits() { return BGFXInit.nlimits(address()); }
-        /** Passes the {@code limits} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public BGFXInit.Buffer limits(java.util.function.Consumer<BGFXInitLimits> consumer) { consumer.accept(limits()); return this; }
-        /** Returns a {@link BGFXCallbackInterface} view of the struct pointed to by the {@code callback} field. */
-        @Nullable
-        @NativeType("bgfx_callback_interface_t *")
-        public BGFXCallbackInterface callback() { return BGFXInit.ncallback(address()); }
-        /** Returns a {@link BGFXAllocatorInterface} view of the struct pointed to by the {@code allocator} field. */
-        @Nullable
-        @NativeType("bgfx_allocator_interface_t *")
-        public BGFXAllocatorInterface allocator() { return BGFXInit.nallocator(address()); }
-
-        /** Sets the specified value to the {@code type} field. */
-        public BGFXInit.Buffer type(@NativeType("bgfx_renderer_type_t") int value) { BGFXInit.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code vendorId} field. */
-        public BGFXInit.Buffer vendorId(@NativeType("uint16_t") short value) { BGFXInit.nvendorId(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceId} field. */
-        public BGFXInit.Buffer deviceId(@NativeType("uint16_t") short value) { BGFXInit.ndeviceId(address(), value); return this; }
-        /** Copies the specified {@link BGFXResolution} to the {@code resolution} field. */
-        public BGFXInit.Buffer resolution(@NativeType("bgfx_resolution_t") BGFXResolution value) { BGFXInit.nresolution(address(), value); return this; }
-        /** Copies the specified {@link BGFXInitLimits} to the {@code limits} field. */
-        public BGFXInit.Buffer limits(@NativeType("bgfx_init_limits_t") BGFXInitLimits value) { BGFXInit.nlimits(address(), value); return this; }
-        /** Sets the address of the specified {@link BGFXCallbackInterface} to the {@code callback} field. */
-        public BGFXInit.Buffer callback(@Nullable @NativeType("bgfx_callback_interface_t *") BGFXCallbackInterface value) { BGFXInit.ncallback(address(), value); return this; }
-        /** Sets the address of the specified {@link BGFXAllocatorInterface} to the {@code allocator} field. */
-        public BGFXInit.Buffer allocator(@Nullable @NativeType("bgfx_allocator_interface_t *") BGFXAllocatorInterface value) { BGFXInit.nallocator(address(), value); return this; }
-
     }
 
 }

@@ -262,49 +262,6 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         return address == NULL ? null : create(address);
     }
 
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
-    }
-
-    /**
-     * Create a {@link VmaAllocatorCreateInfo.Buffer} instance at the specified memory.
-     *
-     * @param address  the memory address
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
-    }
-
-    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static VmaAllocatorCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link VmaAllocatorCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
@@ -333,44 +290,6 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
      */
     public static VmaAllocatorCreateInfo callocStack(MemoryStack stack) {
         return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -440,108 +359,6 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         for (int i = 0; i < count; i++) {
             validate(array + i * SIZEOF);
         }
-    }
-
-    // -----------------------------------
-
-    /** An array of {@link VmaAllocatorCreateInfo} structs. */
-    public static class Buffer extends StructBuffer<VmaAllocatorCreateInfo, Buffer> implements NativeResource {
-
-        /**
-         * Creates a new {@link VmaAllocatorCreateInfo.Buffer} instance backed by the specified container.
-         *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
-         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VmaAllocatorCreateInfo#SIZEOF}, and its mark will be undefined.
-         *
-         * <p>The created buffer instance holds a strong reference to the container object.</p>
-         */
-        public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
-        }
-
-        public Buffer(long address, int cap) {
-            super(address, null, -1, 0, cap, cap);
-        }
-
-        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            super(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Buffer self() {
-            return this;
-        }
-
-        @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VmaAllocatorCreateInfo newInstance(long address) {
-            return new VmaAllocatorCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-
-        /** Returns the value of the {@code flags} field. */
-        @NativeType("VmaAllocatorCreateFlags")
-        public int flags() { return VmaAllocatorCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code physicalDevice} field. */
-        @NativeType("VkPhysicalDevice")
-        public long physicalDevice() { return VmaAllocatorCreateInfo.nphysicalDevice(address()); }
-        /** Returns the value of the {@code device} field. */
-        @NativeType("VkDevice")
-        public long device() { return VmaAllocatorCreateInfo.ndevice(address()); }
-        /** Returns the value of the {@code preferredLargeHeapBlockSize} field. */
-        @NativeType("VkDeviceSize")
-        public long preferredLargeHeapBlockSize() { return VmaAllocatorCreateInfo.npreferredLargeHeapBlockSize(address()); }
-        /** Returns a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code pAllocationCallbacks} field. */
-        @Nullable
-        @NativeType("VkAllocationCallbacks const *")
-        public VkAllocationCallbacks pAllocationCallbacks() { return VmaAllocatorCreateInfo.npAllocationCallbacks(address()); }
-        /** Returns a {@link VmaDeviceMemoryCallbacks} view of the struct pointed to by the {@code pDeviceMemoryCallbacks} field. */
-        @Nullable
-        @NativeType("VmaDeviceMemoryCallbacks const *")
-        public VmaDeviceMemoryCallbacks pDeviceMemoryCallbacks() { return VmaAllocatorCreateInfo.npDeviceMemoryCallbacks(address()); }
-        /** Returns the value of the {@code frameInUseCount} field. */
-        @NativeType("uint32_t")
-        public int frameInUseCount() { return VmaAllocatorCreateInfo.nframeInUseCount(address()); }
-        /**
-         * Returns a {@link LongBuffer} view of the data pointed to by the {@code pHeapSizeLimit} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
-        @Nullable
-        @NativeType("VkDeviceSize const *")
-        public LongBuffer pHeapSizeLimit(int capacity) { return VmaAllocatorCreateInfo.npHeapSizeLimit(address(), capacity); }
-        /** Returns a {@link VmaVulkanFunctions} view of the struct pointed to by the {@code pVulkanFunctions} field. */
-        @NativeType("VmaVulkanFunctions const *")
-        public VmaVulkanFunctions pVulkanFunctions() { return VmaAllocatorCreateInfo.npVulkanFunctions(address()); }
-
-        /** Sets the specified value to the {@code flags} field. */
-        public VmaAllocatorCreateInfo.Buffer flags(@NativeType("VmaAllocatorCreateFlags") int value) { VmaAllocatorCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code physicalDevice} field. */
-        public VmaAllocatorCreateInfo.Buffer physicalDevice(VkPhysicalDevice value) { VmaAllocatorCreateInfo.nphysicalDevice(address(), value); return this; }
-        /** Sets the specified value to the {@code device} field. */
-        public VmaAllocatorCreateInfo.Buffer device(VkDevice value) { VmaAllocatorCreateInfo.ndevice(address(), value); return this; }
-        /** Sets the specified value to the {@code preferredLargeHeapBlockSize} field. */
-        public VmaAllocatorCreateInfo.Buffer preferredLargeHeapBlockSize(@NativeType("VkDeviceSize") long value) { VmaAllocatorCreateInfo.npreferredLargeHeapBlockSize(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@code pAllocationCallbacks} field. */
-        public VmaAllocatorCreateInfo.Buffer pAllocationCallbacks(@Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks value) { VmaAllocatorCreateInfo.npAllocationCallbacks(address(), value); return this; }
-        /** Sets the address of the specified {@link VmaDeviceMemoryCallbacks} to the {@code pDeviceMemoryCallbacks} field. */
-        public VmaAllocatorCreateInfo.Buffer pDeviceMemoryCallbacks(@Nullable @NativeType("VmaDeviceMemoryCallbacks const *") VmaDeviceMemoryCallbacks value) { VmaAllocatorCreateInfo.npDeviceMemoryCallbacks(address(), value); return this; }
-        /** Sets the specified value to the {@code frameInUseCount} field. */
-        public VmaAllocatorCreateInfo.Buffer frameInUseCount(@NativeType("uint32_t") int value) { VmaAllocatorCreateInfo.nframeInUseCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@code pHeapSizeLimit} field. */
-        public VmaAllocatorCreateInfo.Buffer pHeapSizeLimit(@Nullable @NativeType("VkDeviceSize const *") LongBuffer value) { VmaAllocatorCreateInfo.npHeapSizeLimit(address(), value); return this; }
-        /** Sets the address of the specified {@link VmaVulkanFunctions} to the {@code pVulkanFunctions} field. */
-        public VmaAllocatorCreateInfo.Buffer pVulkanFunctions(@NativeType("VmaVulkanFunctions const *") VmaVulkanFunctions value) { VmaAllocatorCreateInfo.npVulkanFunctions(address(), value); return this; }
-
     }
 
 }

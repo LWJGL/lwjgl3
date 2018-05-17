@@ -187,49 +187,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
         return address == NULL ? null : create(address);
     }
 
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
-    }
-
-    /**
-     * Create a {@link BGFXPlatformData.Buffer} instance at the specified memory.
-     *
-     * @param address  the memory address
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
-    }
-
-    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static BGFXPlatformData.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link BGFXPlatformData} instance allocated on the thread-local {@link MemoryStack}. */
@@ -260,44 +217,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
         return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link BGFXPlatformData.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static BGFXPlatformData.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
     // -----------------------------------
 
     /** Unsafe version of {@link #ndt}. */
@@ -325,85 +244,5 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     public static void nbackBufferDS(long struct, long value) { memPutAddress(struct + BGFXPlatformData.BACKBUFFERDS, value); }
     /** Unsafe version of {@link #session(long) session}. */
     public static void nsession(long struct, long value) { memPutAddress(struct + BGFXPlatformData.SESSION, value); }
-
-    // -----------------------------------
-
-    /** An array of {@link BGFXPlatformData} structs. */
-    public static class Buffer extends StructBuffer<BGFXPlatformData, Buffer> implements NativeResource {
-
-        /**
-         * Creates a new {@link BGFXPlatformData.Buffer} instance backed by the specified container.
-         *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
-         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link BGFXPlatformData#SIZEOF}, and its mark will be undefined.
-         *
-         * <p>The created buffer instance holds a strong reference to the container object.</p>
-         */
-        public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
-        }
-
-        public Buffer(long address, int cap) {
-            super(address, null, -1, 0, cap, cap);
-        }
-
-        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            super(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Buffer self() {
-            return this;
-        }
-
-        @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXPlatformData newInstance(long address) {
-            return new BGFXPlatformData(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-
-        /** Returns the value of the {@code ndt} field. */
-        @NativeType("void *")
-        public long ndt() { return BGFXPlatformData.nndt(address()); }
-        /** Returns the value of the {@code nwh} field. */
-        @NativeType("void *")
-        public long nwh() { return BGFXPlatformData.nnwh(address()); }
-        /** Returns the value of the {@code context} field. */
-        @NativeType("void *")
-        public long context() { return BGFXPlatformData.ncontext(address()); }
-        /** Returns the value of the {@code backBuffer} field. */
-        @NativeType("void *")
-        public long backBuffer() { return BGFXPlatformData.nbackBuffer(address()); }
-        /** Returns the value of the {@code backBufferDS} field. */
-        @NativeType("void *")
-        public long backBufferDS() { return BGFXPlatformData.nbackBufferDS(address()); }
-        /** Returns the value of the {@code session} field. */
-        @NativeType("void *")
-        public long session() { return BGFXPlatformData.nsession(address()); }
-
-        /** Sets the specified value to the {@code ndt} field. */
-        public BGFXPlatformData.Buffer ndt(@NativeType("void *") long value) { BGFXPlatformData.nndt(address(), value); return this; }
-        /** Sets the specified value to the {@code nwh} field. */
-        public BGFXPlatformData.Buffer nwh(@NativeType("void *") long value) { BGFXPlatformData.nnwh(address(), value); return this; }
-        /** Sets the specified value to the {@code context} field. */
-        public BGFXPlatformData.Buffer context(@NativeType("void *") long value) { BGFXPlatformData.ncontext(address(), value); return this; }
-        /** Sets the specified value to the {@code backBuffer} field. */
-        public BGFXPlatformData.Buffer backBuffer(@NativeType("void *") long value) { BGFXPlatformData.nbackBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code backBufferDS} field. */
-        public BGFXPlatformData.Buffer backBufferDS(@NativeType("void *") long value) { BGFXPlatformData.nbackBufferDS(address(), value); return this; }
-        /** Sets the specified value to the {@code session} field. */
-        public BGFXPlatformData.Buffer session(@NativeType("void *") long value) { BGFXPlatformData.nsession(address(), value); return this; }
-
-    }
 
 }

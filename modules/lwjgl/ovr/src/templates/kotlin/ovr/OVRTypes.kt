@@ -107,7 +107,7 @@ val ovrSessionStatus = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrS
     ovrBool.member("DepthRequested", "True if runtime is requesting that the application provide depth buffers with projection layers.")
 }
 
-val ovrInitParams = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitParams") {
+val ovrInitParams = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitParams", skipBuffer = true) {
     documentation = "Parameters for #Initialize()."
 
     uint32_t.member("Flags", "flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults.")
@@ -251,7 +251,7 @@ val ovrGraphicsLuid = struct(Module.OVR, "OVRGraphicsLuid", nativeName = "ovrGra
     char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
 }
 
-val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
+val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false, skipBuffer = true) {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation = "A complete descriptor of the HMD."
 
@@ -576,7 +576,7 @@ val ovrCameraExtrinsics = struct(Module.OVR, "OVRCameraExtrinsics", nativeName =
     )
 }
 
-val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
+const val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
 val ovrExternalCamera = struct(Module.OVR, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
     charASCII.array("Name", "camera identifier: vid + pid + serial number etc.", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
     ovrCameraIntrinsics.member("Intrinsics", "")

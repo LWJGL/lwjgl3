@@ -135,7 +135,7 @@ val VmaDeviceMemoryCallbacks = struct(Module.VMA, "VmaDeviceMemoryCallbacks") {
     nullable..PFN_vmaFreeDeviceMemoryFunction.member("pfnFree", "")
 }
 
-val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions") {
+val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = true) {
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """
@@ -191,7 +191,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions") {
     }""")
 }
 
-val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo") {
+val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBuffer = true) {
     javaImport("org.lwjgl.vulkan.*")
     documentation = "Description of an Allocator to be created."
 

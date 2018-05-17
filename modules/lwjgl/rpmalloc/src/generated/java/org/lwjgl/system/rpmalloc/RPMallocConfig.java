@@ -209,49 +209,6 @@ public class RPMallocConfig extends Struct implements NativeResource {
         return address == NULL ? null : create(address);
     }
 
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
-    }
-
-    /**
-     * Create a {@link RPMallocConfig.Buffer} instance at the specified memory.
-     *
-     * @param address  the memory address
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
-    }
-
-    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static RPMallocConfig.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link RPMallocConfig} instance allocated on the thread-local {@link MemoryStack}. */
@@ -282,44 +239,6 @@ public class RPMallocConfig extends Struct implements NativeResource {
         return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link RPMallocConfig.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static RPMallocConfig.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
     // -----------------------------------
 
     /** Unsafe version of {@link #memory_map}. */
@@ -347,87 +266,5 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public static void nspan_map_count(long struct, long value) { memPutAddress(struct + RPMallocConfig.SPAN_MAP_COUNT, value); }
     /** Unsafe version of {@link #enable_huge_pages(boolean) enable_huge_pages}. */
     public static void nenable_huge_pages(long struct, int value) { memPutInt(struct + RPMallocConfig.ENABLE_HUGE_PAGES, value); }
-
-    // -----------------------------------
-
-    /** An array of {@link RPMallocConfig} structs. */
-    public static class Buffer extends StructBuffer<RPMallocConfig, Buffer> implements NativeResource {
-
-        /**
-         * Creates a new {@link RPMallocConfig.Buffer} instance backed by the specified container.
-         *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
-         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link RPMallocConfig#SIZEOF}, and its mark will be undefined.
-         *
-         * <p>The created buffer instance holds a strong reference to the container object.</p>
-         */
-        public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
-        }
-
-        public Buffer(long address, int cap) {
-            super(address, null, -1, 0, cap, cap);
-        }
-
-        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            super(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Buffer self() {
-            return this;
-        }
-
-        @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected RPMallocConfig newInstance(long address) {
-            return new RPMallocConfig(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-
-        /** Returns the value of the {@code memory_map} field. */
-        @Nullable
-        @NativeType("void * (*) (size_t, size_t *)")
-        public RPMemoryMapCallback memory_map() { return RPMallocConfig.nmemory_map(address()); }
-        /** Returns the value of the {@code memory_unmap} field. */
-        @Nullable
-        @NativeType("void (*) (void *, size_t, size_t, int)")
-        public RPMemoryUnmapCallback memory_unmap() { return RPMallocConfig.nmemory_unmap(address()); }
-        /** Returns the value of the {@code page_size} field. */
-        @NativeType("size_t")
-        public long page_size() { return RPMallocConfig.npage_size(address()); }
-        /** Returns the value of the {@code span_size} field. */
-        @NativeType("size_t")
-        public long span_size() { return RPMallocConfig.nspan_size(address()); }
-        /** Returns the value of the {@code span_map_count} field. */
-        @NativeType("size_t")
-        public long span_map_count() { return RPMallocConfig.nspan_map_count(address()); }
-        /** Returns the value of the {@code enable_huge_pages} field. */
-        @NativeType("int")
-        public boolean enable_huge_pages() { return RPMallocConfig.nenable_huge_pages(address()) != 0; }
-
-        /** Sets the specified value to the {@code memory_map} field. */
-        public RPMallocConfig.Buffer memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { RPMallocConfig.nmemory_map(address(), value); return this; }
-        /** Sets the specified value to the {@code memory_unmap} field. */
-        public RPMallocConfig.Buffer memory_unmap(@Nullable @NativeType("void (*) (void *, size_t, size_t, int)") RPMemoryUnmapCallbackI value) { RPMallocConfig.nmemory_unmap(address(), value); return this; }
-        /** Sets the specified value to the {@code page_size} field. */
-        public RPMallocConfig.Buffer page_size(@NativeType("size_t") long value) { RPMallocConfig.npage_size(address(), value); return this; }
-        /** Sets the specified value to the {@code span_size} field. */
-        public RPMallocConfig.Buffer span_size(@NativeType("size_t") long value) { RPMallocConfig.nspan_size(address(), value); return this; }
-        /** Sets the specified value to the {@code span_map_count} field. */
-        public RPMallocConfig.Buffer span_map_count(@NativeType("size_t") long value) { RPMallocConfig.nspan_map_count(address(), value); return this; }
-        /** Sets the specified value to the {@code enable_huge_pages} field. */
-        public RPMallocConfig.Buffer enable_huge_pages(@NativeType("int") boolean value) { RPMallocConfig.nenable_huge_pages(address(), value ? 1 : 0); return this; }
-
-    }
 
 }
