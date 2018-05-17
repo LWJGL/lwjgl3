@@ -91,7 +91,9 @@ public class ARBDrawElementsBaseVertex {
      * @param count the number of elements to be rendered
      * @param type  the type of the values in {@code indices}. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      */
-    public static native void nglDrawElementsBaseVertex(int mode, int count, int type, long indices, int basevertex);
+    public static void nglDrawElementsBaseVertex(int mode, int count, int type, long indices, int basevertex) {
+        GL32.nglDrawElementsBaseVertex(mode, count, type, indices, basevertex);
+    }
 
     /**
      * Renders primitives from array data with a per-element offset.
@@ -159,7 +161,9 @@ public class ARBDrawElementsBaseVertex {
      * @param count the number of elements to be rendered
      * @param type  the type of the values in {@code indices}. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      */
-    public static native void nglDrawRangeElementsBaseVertex(int mode, int start, int end, int count, int type, long indices, int basevertex);
+    public static void nglDrawRangeElementsBaseVertex(int mode, int start, int end, int count, int type, long indices, int basevertex) {
+        GL32.nglDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
+    }
 
     /**
      * Renders primitives from array data with a per-element offset.
@@ -237,7 +241,9 @@ public class ARBDrawElementsBaseVertex {
      * @param count the number of elements to be rendered
      * @param type  the type of the values in {@code indices}. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      */
-    public static native void nglDrawElementsInstancedBaseVertex(int mode, int count, int type, long indices, int primcount, int basevertex);
+    public static void nglDrawElementsInstancedBaseVertex(int mode, int count, int type, long indices, int primcount, int basevertex) {
+        GL32.nglDrawElementsInstancedBaseVertex(mode, count, type, indices, primcount, basevertex);
+    }
 
     /**
      * Renders multiple instances of a set of primitives from array data with a per-element offset.
@@ -309,7 +315,9 @@ public class ARBDrawElementsBaseVertex {
      *
      * @param primcount the size of the {@code count} array
      */
-    public static native void nglMultiDrawElementsBaseVertex(int mode, long count, int type, long indices, int primcount, long basevertex);
+    public static void nglMultiDrawElementsBaseVertex(int mode, long count, int type, long indices, int primcount, long basevertex) {
+        GL32.nglMultiDrawElementsBaseVertex(mode, count, type, indices, primcount, basevertex);
+    }
 
     /**
      * Renders multiple sets of primitives by specifying indices of array data elements and an offset to apply to each index.

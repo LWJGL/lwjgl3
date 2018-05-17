@@ -11,7 +11,7 @@ typedef void (APIENTRY *glFramebufferFetchBarrierQCOMPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMShaderFramebufferFetchNoncoherent_glFramebufferFetchBarrierQCOM(JNIEnv *__env, jclass clazz) {
-    glFramebufferFetchBarrierQCOMPROC glFramebufferFetchBarrierQCOM = (glFramebufferFetchBarrierQCOMPROC)tlsGetFunction(831);
+    glFramebufferFetchBarrierQCOMPROC glFramebufferFetchBarrierQCOM = (glFramebufferFetchBarrierQCOMPROC)tlsGetFunction(834);
     UNUSED_PARAM(clazz)
     glFramebufferFetchBarrierQCOM();
 }

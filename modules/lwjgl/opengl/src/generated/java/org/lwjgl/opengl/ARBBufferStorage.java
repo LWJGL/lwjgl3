@@ -66,7 +66,9 @@ public class ARBBufferStorage {
      *
      * @param size the size of the data store in basic machine units
      */
-    public static native void nglBufferStorage(int target, long size, long data, int flags);
+    public static void nglBufferStorage(int target, long size, long data, int flags) {
+        GL44.nglBufferStorage(target, size, data, flags);
+    }
 
     /**
      * Creates the data store of a buffer object.

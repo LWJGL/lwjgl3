@@ -138,16 +138,22 @@ public class OESViewportArray {
 
     // --- [ glEnableiOES ] ---
 
-    public static native void glEnableiOES(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static void glEnableiOES(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        OESDrawBuffersIndexed.glEnableiOES(target, index);
+    }
 
     // --- [ glDisableiOES ] ---
 
-    public static native void glDisableiOES(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static void glDisableiOES(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        OESDrawBuffersIndexed.glDisableiOES(target, index);
+    }
 
     // --- [ glIsEnablediOES ] ---
 
     @NativeType("GLboolean")
-    public static native boolean glIsEnablediOES(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static boolean glIsEnablediOES(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        return OESDrawBuffersIndexed.glIsEnablediOES(target, index);
+    }
 
     /** Array version of: {@link #glViewportArrayvOES ViewportArrayvOES} */
     public static void glViewportArrayvOES(@NativeType("GLuint") int first, @NativeType("GLfloat const *") float[] v) {

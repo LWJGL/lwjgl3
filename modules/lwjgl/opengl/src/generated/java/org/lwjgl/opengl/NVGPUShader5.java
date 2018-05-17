@@ -243,7 +243,9 @@ public class NVGPUShader5 {
 
     // --- [ glGetUniformui64vNV ] ---
 
-    public static native void nglGetUniformui64vNV(int program, int location, long params);
+    public static void nglGetUniformui64vNV(int program, int location, long params) {
+        NVShaderBufferLoad.nglGetUniformui64vNV(program, location, params);
+    }
 
     public static void glGetUniformui64vNV(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64EXT *") LongBuffer params) {
         if (CHECKS) {

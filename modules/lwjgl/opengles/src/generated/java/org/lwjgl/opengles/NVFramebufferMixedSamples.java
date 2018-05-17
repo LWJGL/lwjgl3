@@ -81,7 +81,9 @@ public class NVFramebufferMixedSamples {
 
     // --- [ glRasterSamplesEXT ] ---
 
-    public static native void glRasterSamplesEXT(@NativeType("GLuint") int samples, @NativeType("GLboolean") boolean fixedsamplelocations);
+    public static void glRasterSamplesEXT(@NativeType("GLuint") int samples, @NativeType("GLboolean") boolean fixedsamplelocations) {
+        EXTRasterMultisample.glRasterSamplesEXT(samples, fixedsamplelocations);
+    }
 
     // --- [ glCoverageModulationTableNV ] ---
 

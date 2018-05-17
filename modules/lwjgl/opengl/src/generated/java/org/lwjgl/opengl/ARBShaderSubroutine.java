@@ -61,7 +61,9 @@ public class ARBShaderSubroutine {
     // --- [ glGetSubroutineUniformLocation ] ---
 
     /** Unsafe version of: {@link #glGetSubroutineUniformLocation GetSubroutineUniformLocation} */
-    public static native int nglGetSubroutineUniformLocation(int program, int shadertype, long name);
+    public static int nglGetSubroutineUniformLocation(int program, int shadertype, long name) {
+        return GL40.nglGetSubroutineUniformLocation(program, shadertype, name);
+    }
 
     /**
      * Retrieves the location of a subroutine uniform of a given shader stage within a program.
@@ -99,7 +101,9 @@ public class ARBShaderSubroutine {
     // --- [ glGetSubroutineIndex ] ---
 
     /** Unsafe version of: {@link #glGetSubroutineIndex GetSubroutineIndex} */
-    public static native int nglGetSubroutineIndex(int program, int shadertype, long name);
+    public static int nglGetSubroutineIndex(int program, int shadertype, long name) {
+        return GL40.nglGetSubroutineIndex(program, shadertype, name);
+    }
 
     /**
      * Retrieves the index of a subroutine function of a given shader stage within a program.
@@ -137,7 +141,9 @@ public class ARBShaderSubroutine {
     // --- [ glGetActiveSubroutineUniformiv ] ---
 
     /** Unsafe version of: {@link #glGetActiveSubroutineUniformiv GetActiveSubroutineUniformiv} */
-    public static native void nglGetActiveSubroutineUniformiv(int program, int shadertype, int index, int pname, long values);
+    public static void nglGetActiveSubroutineUniformiv(int program, int shadertype, int index, int pname, long values) {
+        GL40.nglGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
+    }
 
     /**
      * Queries a property of an active shader subroutine uniform.
@@ -182,7 +188,9 @@ public class ARBShaderSubroutine {
      *
      * @param bufsize the size of the buffer whose address is given in {@code name}
      */
-    public static native void nglGetActiveSubroutineUniformName(int program, int shadertype, int index, int bufsize, long length, long name);
+    public static void nglGetActiveSubroutineUniformName(int program, int shadertype, int index, int bufsize, long length, long name) {
+        GL40.nglGetActiveSubroutineUniformName(program, shadertype, index, bufsize, length, name);
+    }
 
     /**
      * Queries the name of an active shader subroutine uniform.
@@ -240,7 +248,9 @@ public class ARBShaderSubroutine {
      *
      * @param bufsize the size of the buffer whose address is given in {@code name}
      */
-    public static native void nglGetActiveSubroutineName(int program, int shadertype, int index, int bufsize, long length, long name);
+    public static void nglGetActiveSubroutineName(int program, int shadertype, int index, int bufsize, long length, long name) {
+        GL40.nglGetActiveSubroutineName(program, shadertype, index, bufsize, length, name);
+    }
 
     /**
      * Queries the name of an active shader subroutine.
@@ -298,7 +308,9 @@ public class ARBShaderSubroutine {
      *
      * @param count the number of uniform indices stored in {@code indices}
      */
-    public static native void nglUniformSubroutinesuiv(int shadertype, int count, long indices);
+    public static void nglUniformSubroutinesuiv(int shadertype, int count, long indices) {
+        GL40.nglUniformSubroutinesuiv(shadertype, count, indices);
+    }
 
     /**
      * Loads active subroutine uniforms.
@@ -328,7 +340,9 @@ public class ARBShaderSubroutine {
     // --- [ glGetUniformSubroutineuiv ] ---
 
     /** Unsafe version of: {@link #glGetUniformSubroutineuiv GetUniformSubroutineuiv} */
-    public static native void nglGetUniformSubroutineuiv(int shadertype, int location, long params);
+    public static void nglGetUniformSubroutineuiv(int shadertype, int location, long params) {
+        GL40.nglGetUniformSubroutineuiv(shadertype, location, params);
+    }
 
     /**
      * Retrieves the value of a subroutine uniform of a given shader stage of the current program.
@@ -365,7 +379,9 @@ public class ARBShaderSubroutine {
     // --- [ glGetProgramStageiv ] ---
 
     /** Unsafe version of: {@link #glGetProgramStageiv GetProgramStageiv} */
-    public static native void nglGetProgramStageiv(int program, int shadertype, int pname, long values);
+    public static void nglGetProgramStageiv(int program, int shadertype, int pname, long values) {
+        GL40.nglGetProgramStageiv(program, shadertype, pname, values);
+    }
 
     /**
      * Retrieves properties of a program object corresponding to a specified shader stage.

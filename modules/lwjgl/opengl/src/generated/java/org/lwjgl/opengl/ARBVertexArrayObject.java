@@ -50,7 +50,9 @@ public class ARBVertexArrayObject {
      *
      * @param array the name of the vertex array to bind
      */
-    public static native void glBindVertexArray(@NativeType("GLuint") int array);
+    public static void glBindVertexArray(@NativeType("GLuint") int array) {
+        GL30.glBindVertexArray(array);
+    }
 
     // --- [ glDeleteVertexArrays ] ---
 
@@ -59,7 +61,9 @@ public class ARBVertexArrayObject {
      *
      * @param n the number of vertex array objects to be deleted
      */
-    public static native void nglDeleteVertexArrays(int n, long arrays);
+    public static void nglDeleteVertexArrays(int n, long arrays) {
+        GL30.nglDeleteVertexArrays(n, arrays);
+    }
 
     /**
      * Deletes vertex array objects.
@@ -88,7 +92,9 @@ public class ARBVertexArrayObject {
      *
      * @param n the number of vertex array object names to generate
      */
-    public static native void nglGenVertexArrays(int n, long arrays);
+    public static void nglGenVertexArrays(int n, long arrays) {
+        GL30.nglGenVertexArrays(n, arrays);
+    }
 
     /**
      * Generates vertex array object names.
@@ -120,7 +126,9 @@ public class ARBVertexArrayObject {
      * @param array a value that may be the name of a vertex array object
      */
     @NativeType("GLboolean")
-    public static native boolean glIsVertexArray(@NativeType("GLuint") int array);
+    public static boolean glIsVertexArray(@NativeType("GLuint") int array) {
+        return GL30.glIsVertexArray(array);
+    }
 
     /** Array version of: {@link #glDeleteVertexArrays DeleteVertexArrays} */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int[] arrays) {

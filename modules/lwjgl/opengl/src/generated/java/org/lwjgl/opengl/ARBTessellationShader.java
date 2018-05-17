@@ -132,12 +132,16 @@ public class ARBTessellationShader {
      * @param pname the name of the parameter to set. Must be:<br><table><tr><td>{@link GL40#GL_PATCH_VERTICES PATCH_VERTICES}</td></tr></table>
      * @param value the new value for the parameter given by {@code pname}
      */
-    public static native void glPatchParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int value);
+    public static void glPatchParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int value) {
+        GL40.glPatchParameteri(pname, value);
+    }
 
     // --- [ glPatchParameterfv ] ---
 
     /** Unsafe version of: {@link #glPatchParameterfv PatchParameterfv} */
-    public static native void nglPatchParameterfv(int pname, long values);
+    public static void nglPatchParameterfv(int pname, long values) {
+        GL40.nglPatchParameterfv(pname, values);
+    }
 
     /**
      * Specifies an array of float values for the specified parameter for patch primitives.

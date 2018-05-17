@@ -11,7 +11,7 @@ typedef void (APIENTRY *glImportMemoryFdEXTPROC) (jint, jlong, jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObjectFD_glImportMemoryFdEXT(JNIEnv *__env, jclass clazz, jint memory, jlong size, jint handleType, jint fd) {
-    glImportMemoryFdEXTPROC glImportMemoryFdEXT = (glImportMemoryFdEXTPROC)tlsGetFunction(448);
+    glImportMemoryFdEXTPROC glImportMemoryFdEXT = (glImportMemoryFdEXTPROC)tlsGetFunction(450);
     UNUSED_PARAM(clazz)
     glImportMemoryFdEXT(memory, size, handleType, fd);
 }

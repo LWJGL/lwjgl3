@@ -141,15 +141,16 @@ class Func(
         (!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has<Macro>() || get<Macro>().expression == null)
     }
 
-    private val isNativeOnly
-        get() = (nativeClass.binding == null || nativeClass.binding.apiCapabilities === APICapabilities.JNI_CAPABILITIES) &&
-                !(
-                    modifiers.any { it.value.isSpecial }
+    private val isNativeOnly: Boolean by lazy(LazyThreadSafetyMode.NONE) {
+        (nativeClass.binding == null || nativeClass.binding.apiCapabilities === APICapabilities.JNI_CAPABILITIES) &&
+            !(
+                modifiers.any { it.value.isSpecial }
                     || this.returns.isSpecial
                     || hasParam { it.isSpecial }
                     || has<NativeName>()
                     || (has<Macro>() && get<Macro>().expression != null)
-                 )
+                )
+    }
 
     private val hasUnsafeMethod by lazy(LazyThreadSafetyMode.NONE) {
         hasFunctionAddressParam
@@ -574,14 +575,15 @@ class Func(
 
     /** This is where we start generating java code. */
     internal fun generateMethods(writer: PrintWriter) {
+        val hasReuse = has<Reuse>()
         val nativeOnly = isNativeOnly
 
         val constantMacro = has<Macro>() && get<Macro>().constant
 
-        if (hasCustomJNI)
-            writer.generateNativeMethod(constantMacro, nativeOnly)
+        if (hasCustomJNI && !(hasReuse && nativeOnly))
+            writer.generateNativeMethod(constantMacro, nativeOnly, hasReuse)
 
-        if (!nativeOnly) {
+        if (!nativeOnly || hasReuse) {
             if (hasUnsafeMethod)
                 writer.generateUnsafeMethod(constantMacro)
 
@@ -638,7 +640,7 @@ class Func(
         }
     }
 
-    private fun PrintWriter.generateNativeMethod(constantMacro: Boolean, nativeOnly: Boolean) {
+    private fun PrintWriter.generateNativeMethod(constantMacro: Boolean, nativeOnly: Boolean, hasReuse: Boolean) {
         println()
 
         printUnsafeJavadoc(constantMacro, nativeOnly)
@@ -655,7 +657,7 @@ class Func(
                 println("$t$retTypeAnnotation")
         }
 
-        print("$t${if (constantMacro) "private " else accessModifier}static native $retType ")
+        print("$t${if (constantMacro) "private " else accessModifier}static${if (hasReuse) "" else " native"} $retType ")
         if (!nativeOnly) print('n')
         print(name)
         print("(")
@@ -673,7 +675,22 @@ class Func(
             print("long $RESULT")
         }
 
-        println(");")
+        if (hasReuse) {
+            print(") {\n$t$t")
+            if (!returns.isVoid && !returns.isStructValue)
+                print("return ")
+            print("${get<Reuse>().source.className}.n$name(")
+            if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
+                print(FUNCTION_ADDRESS)
+                if (nativeParams.any()) print(", ")
+            }
+            printList(nativeParams) {
+                it.name
+            }
+            println(");\n$t}")
+        } else {
+            println(");")
+        }
     }
 
     private fun PrintWriter.generateUnsafeMethod(constantMacro: Boolean) {
@@ -989,12 +1006,19 @@ class Func(
         if (hasUnsafeMethod) {
             print("n$name(")
         } else {
-            print(
-                if (hasCustomJNI)
-                    "n$name("
-                else macroExpression ?:
-                     "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
-            )
+            if (hasCustomJNI) {
+                if (!isNativeOnly) {
+                    print('n')
+                } else if (has<Reuse>()) {
+                    print("${get<Reuse>().source.className}.")
+                }
+                print("$name(")
+            } else {
+                print(macroExpression ?: "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false)
+                    .map { it.nativeType.jniSignatureJava }
+                    .joinToString("")
+                }${returns.nativeType.jniSignature}(")
+            }
             if (hasFunctionAddressParam && !hasExplicitFunctionAddress && !has<Macro>()) {
                 print(FUNCTION_ADDRESS)
                 if (hasNativeParams) print(", ")

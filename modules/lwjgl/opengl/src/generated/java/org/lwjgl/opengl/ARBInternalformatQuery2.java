@@ -194,7 +194,9 @@ public class ARBInternalformatQuery2 {
      *
      * @param bufSize the maximum number of values that may be written to params by the function
      */
-    public static native void nglGetInternalformati64v(int target, int internalformat, int pname, int bufSize, long params);
+    public static void nglGetInternalformati64v(int target, int internalformat, int pname, int bufSize, long params) {
+        GL43.nglGetInternalformati64v(target, internalformat, pname, bufSize, params);
+    }
 
     /**
      * Retrieves information about implementation-dependent support for internal formats.

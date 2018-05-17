@@ -95,12 +95,16 @@ public class ARBComputeShader {
      * @param num_groups_y the number of work groups to be launched in the Y dimension
      * @param num_groups_z the number of work groups to be launched in the Z dimension
      */
-    public static native void glDispatchCompute(@NativeType("GLuint") int num_groups_x, @NativeType("GLuint") int num_groups_y, @NativeType("GLuint") int num_groups_z);
+    public static void glDispatchCompute(@NativeType("GLuint") int num_groups_x, @NativeType("GLuint") int num_groups_y, @NativeType("GLuint") int num_groups_z) {
+        GL43.glDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
+    }
 
     // --- [ glDispatchComputeIndirect ] ---
 
     /** Unsafe version of: {@link #glDispatchComputeIndirect DispatchComputeIndirect} */
-    public static native void nglDispatchComputeIndirect(long indirect);
+    public static void nglDispatchComputeIndirect(long indirect) {
+        GL43.nglDispatchComputeIndirect(indirect);
+    }
 
     /**
      * Launches one or more compute work groups using parameters stored in a buffer.

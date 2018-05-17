@@ -104,7 +104,9 @@ public class ARBTextureMultisample {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      */
-    public static native void glTexImage2DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations);
+    public static void glTexImage2DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations) {
+        GL32.glTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
+    }
 
     // --- [ glTexImage3DMultisample ] ---
 
@@ -121,12 +123,16 @@ public class ARBTextureMultisample {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      */
-    public static native void glTexImage3DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations);
+    public static void glTexImage3DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations) {
+        GL32.glTexImage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
+    }
 
     // --- [ glGetMultisamplefv ] ---
 
     /** Unsafe version of: {@link #glGetMultisamplefv GetMultisamplefv} */
-    public static native void nglGetMultisamplefv(int pname, int index, long val);
+    public static void nglGetMultisamplefv(int pname, int index, long val) {
+        GL32.nglGetMultisamplefv(pname, index, val);
+    }
 
     /**
      * Retrieves the location of a sample.
@@ -168,7 +174,9 @@ public class ARBTextureMultisample {
      * @param index which 32-bit sub-word of the sample mask to update
      * @param mask  the new value of the mask sub-word
      */
-    public static native void glSampleMaski(@NativeType("GLuint") int index, @NativeType("GLbitfield") int mask);
+    public static void glSampleMaski(@NativeType("GLuint") int index, @NativeType("GLbitfield") int mask) {
+        GL32.glSampleMaski(index, mask);
+    }
 
     /** Array version of: {@link #glGetMultisamplefv GetMultisamplefv} */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] val) {

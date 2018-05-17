@@ -58,7 +58,9 @@ public class ARBSamplerObjects {
      *
      * @param count the number of sampler object names to generate
      */
-    public static native void nglGenSamplers(int count, long samplers);
+    public static void nglGenSamplers(int count, long samplers) {
+        GL33.nglGenSamplers(count, samplers);
+    }
 
     /**
      * Generates sampler object names.
@@ -89,7 +91,9 @@ public class ARBSamplerObjects {
      *
      * @param count the number of sampler objects to be deleted
      */
-    public static native void nglDeleteSamplers(int count, long samplers);
+    public static void nglDeleteSamplers(int count, long samplers) {
+        GL33.nglDeleteSamplers(count, samplers);
+    }
 
     /**
      * Deletes named sampler objects.
@@ -119,7 +123,9 @@ public class ARBSamplerObjects {
      * @param sampler a value that may be the name of a sampler object
      */
     @NativeType("GLboolean")
-    public static native boolean glIsSampler(@NativeType("GLuint") int sampler);
+    public static boolean glIsSampler(@NativeType("GLuint") int sampler) {
+        return GL33.glIsSampler(sampler);
+    }
 
     // --- [ glBindSampler ] ---
 
@@ -129,7 +135,9 @@ public class ARBSamplerObjects {
      * @param unit    the index of the texture unit to which the sampler is bound
      * @param sampler the name of a sampler
      */
-    public static native void glBindSampler(@NativeType("GLuint") int unit, @NativeType("GLuint") int sampler);
+    public static void glBindSampler(@NativeType("GLuint") int unit, @NativeType("GLuint") int sampler) {
+        GL33.glBindSampler(unit, sampler);
+    }
 
     // --- [ glSamplerParameteri ] ---
 
@@ -140,7 +148,9 @@ public class ARBSamplerObjects {
      * @param pname   the symbolic name of a single-valued sampler parameter. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td></tr><tr><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr></table>
      * @param param   the value of {@code pname}
      */
-    public static native void glSamplerParameteri(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint") int param);
+    public static void glSamplerParameteri(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint") int param) {
+        GL33.glSamplerParameteri(sampler, pname, param);
+    }
 
     // --- [ glSamplerParameterf ] ---
 
@@ -151,12 +161,16 @@ public class ARBSamplerObjects {
      * @param pname   the symbolic name of a single-valued sampler parameter
      * @param param   the value of {@code pname}
      */
-    public static native void glSamplerParameterf(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLfloat") float param);
+    public static void glSamplerParameterf(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLfloat") float param) {
+        GL33.glSamplerParameterf(sampler, pname, param);
+    }
 
     // --- [ glSamplerParameteriv ] ---
 
     /** Unsafe version of: {@link #glSamplerParameteriv SamplerParameteriv} */
-    public static native void nglSamplerParameteriv(int sampler, int pname, long params);
+    public static void nglSamplerParameteriv(int sampler, int pname, long params) {
+        GL33.nglSamplerParameteriv(sampler, pname, params);
+    }
 
     /**
      * Pointer version of {@link #glSamplerParameteri SamplerParameteri}.
@@ -175,7 +189,9 @@ public class ARBSamplerObjects {
     // --- [ glSamplerParameterfv ] ---
 
     /** Unsafe version of: {@link #glSamplerParameterfv SamplerParameterfv} */
-    public static native void nglSamplerParameterfv(int sampler, int pname, long params);
+    public static void nglSamplerParameterfv(int sampler, int pname, long params) {
+        GL33.nglSamplerParameterfv(sampler, pname, params);
+    }
 
     /**
      * Float version of {@link #glSamplerParameteriv SamplerParameteriv}.
@@ -194,7 +210,9 @@ public class ARBSamplerObjects {
     // --- [ glSamplerParameterIiv ] ---
 
     /** Unsafe version of: {@link #glSamplerParameterIiv SamplerParameterIiv} */
-    public static native void nglSamplerParameterIiv(int sampler, int pname, long params);
+    public static void nglSamplerParameterIiv(int sampler, int pname, long params) {
+        GL33.nglSamplerParameterIiv(sampler, pname, params);
+    }
 
     /**
      * Pure integer version of {@link #glSamplerParameteriv SamplerParameteriv}.
@@ -213,7 +231,9 @@ public class ARBSamplerObjects {
     // --- [ glSamplerParameterIuiv ] ---
 
     /** Unsafe version of: {@link #glSamplerParameterIuiv SamplerParameterIuiv} */
-    public static native void nglSamplerParameterIuiv(int sampler, int pname, long params);
+    public static void nglSamplerParameterIuiv(int sampler, int pname, long params) {
+        GL33.nglSamplerParameterIuiv(sampler, pname, params);
+    }
 
     /**
      * Unsigned pure integer version of {@link #glSamplerParameteriv SamplerParameteriv}.
@@ -232,7 +252,9 @@ public class ARBSamplerObjects {
     // --- [ glGetSamplerParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetSamplerParameteriv GetSamplerParameteriv} */
-    public static native void nglGetSamplerParameteriv(int sampler, int pname, long params);
+    public static void nglGetSamplerParameteriv(int sampler, int pname, long params) {
+        GL33.nglGetSamplerParameteriv(sampler, pname, params);
+    }
 
     /**
      * Return the integer value(s) of a sampler parameter.
@@ -269,7 +291,9 @@ public class ARBSamplerObjects {
     // --- [ glGetSamplerParameterfv ] ---
 
     /** Unsafe version of: {@link #glGetSamplerParameterfv GetSamplerParameterfv} */
-    public static native void nglGetSamplerParameterfv(int sampler, int pname, long params);
+    public static void nglGetSamplerParameterfv(int sampler, int pname, long params) {
+        GL33.nglGetSamplerParameterfv(sampler, pname, params);
+    }
 
     /**
      * Float version of {@link #glGetSamplerParameteriv GetSamplerParameteriv}.
@@ -306,7 +330,9 @@ public class ARBSamplerObjects {
     // --- [ glGetSamplerParameterIiv ] ---
 
     /** Unsafe version of: {@link #glGetSamplerParameterIiv GetSamplerParameterIiv} */
-    public static native void nglGetSamplerParameterIiv(int sampler, int pname, long params);
+    public static void nglGetSamplerParameterIiv(int sampler, int pname, long params) {
+        GL33.nglGetSamplerParameterIiv(sampler, pname, params);
+    }
 
     /**
      * Pure integer version of {@link #glGetSamplerParameteriv GetSamplerParameteriv}.
@@ -343,7 +369,9 @@ public class ARBSamplerObjects {
     // --- [ glGetSamplerParameterIuiv ] ---
 
     /** Unsafe version of: {@link #glGetSamplerParameterIuiv GetSamplerParameterIuiv} */
-    public static native void nglGetSamplerParameterIuiv(int sampler, int pname, long params);
+    public static void nglGetSamplerParameterIuiv(int sampler, int pname, long params) {
+        GL33.nglGetSamplerParameterIuiv(sampler, pname, params);
+    }
 
     /**
      * Unsigned pure integer version of {@link #glGetSamplerParameteriv GetSamplerParameteriv}.

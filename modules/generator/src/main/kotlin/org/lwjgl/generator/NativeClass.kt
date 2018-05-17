@@ -406,7 +406,7 @@ class NativeClass internal constructor(
             }
         }
 
-        this.functions.asSequence().filter { !it.has(Reuse) }.forEach {
+        this.functions.asSequence().filter { !it.has<Reuse>() }.forEach {
             if (it has macro)
                 registerLink(it.simpleName, "$className#${it.name}", tokens, duplicateTokens)
             else
@@ -569,7 +569,7 @@ class NativeClass internal constructor(
         print("\n}")
     }
 
-    override val skipNative get() = functions.none(Func::hasCustomJNI)
+    override val skipNative get() = functions.none { it.hasCustomJNI && !it.has<Reuse>() }
 
     override fun PrintWriter.generateNative() {
         print(HEADER)
@@ -578,14 +578,14 @@ class NativeClass internal constructor(
         if (binding != null) {
             // Generate typedefs for casting the function pointers
             println()
-            functions.asSequence().filter(Func::hasCustomJNI).forEach {
+            functions.asSequence().filter { it.hasCustomJNI && !it.has<Reuse>() }.forEach {
                 it.generateFunctionDefinition(this)
             }
         }
 
         println("\nEXTERN_C_ENTER")
 
-        genFunctions.asSequence().filter(Func::hasCustomJNI).forEach {
+        genFunctions.asSequence().filter { it.hasCustomJNI && !it.has<Reuse>() }.forEach {
             println()
             it.generateFunction(this)
         }
@@ -815,7 +815,7 @@ class NativeClass internal constructor(
     infix fun NativeClass.reuse(functionName: String): Func {
         val reference = this[functionName]
 
-        val func = Reuse..Func(
+        val func = Reuse(this)..Func(
             returns = reference.returns,
             simpleName = reference.simpleName,
             name = reference.name,

@@ -95,7 +95,9 @@ public class EXTGeometryShader4 {
 
     // --- [ glFramebufferTextureLayerEXT ] ---
 
-    public static native void glFramebufferTextureLayerEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer);
+    public static void glFramebufferTextureLayerEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer) {
+        EXTTextureArray.glFramebufferTextureLayerEXT(target, attachment, texture, level, layer);
+    }
 
     // --- [ glFramebufferTextureFaceEXT ] ---
 

@@ -57,7 +57,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type  type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param value the packed value
      */
-    public static native void glVertexP2ui(@NativeType("GLenum") int type, @NativeType("GLuint") int value);
+    public static void glVertexP2ui(@NativeType("GLenum") int type, @NativeType("GLuint") int value) {
+        GL33.glVertexP2ui(type, value);
+    }
 
     // --- [ glVertexP3ui ] ---
 
@@ -67,7 +69,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type  type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param value the packed value
      */
-    public static native void glVertexP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int value);
+    public static void glVertexP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int value) {
+        GL33.glVertexP3ui(type, value);
+    }
 
     // --- [ glVertexP4ui ] ---
 
@@ -77,12 +81,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type  type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param value the packed value
      */
-    public static native void glVertexP4ui(@NativeType("GLenum") int type, @NativeType("GLuint") int value);
+    public static void glVertexP4ui(@NativeType("GLenum") int type, @NativeType("GLuint") int value) {
+        GL33.glVertexP4ui(type, value);
+    }
 
     // --- [ glVertexP2uiv ] ---
 
     /** Unsafe version of: {@link #glVertexP2uiv VertexP2uiv} */
-    public static native void nglVertexP2uiv(int type, long value);
+    public static void nglVertexP2uiv(int type, long value) {
+        GL33.nglVertexP2uiv(type, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexP2ui VertexP2ui}.
@@ -100,7 +108,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glVertexP3uiv ] ---
 
     /** Unsafe version of: {@link #glVertexP3uiv VertexP3uiv} */
-    public static native void nglVertexP3uiv(int type, long value);
+    public static void nglVertexP3uiv(int type, long value) {
+        GL33.nglVertexP3uiv(type, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexP3ui VertexP3ui}.
@@ -118,7 +128,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glVertexP4uiv ] ---
 
     /** Unsafe version of: {@link #glVertexP4uiv VertexP4uiv} */
-    public static native void nglVertexP4uiv(int type, long value);
+    public static void nglVertexP4uiv(int type, long value) {
+        GL33.nglVertexP4uiv(type, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexP4ui VertexP4ui}.
@@ -141,7 +153,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type   type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param coords the packed value
      */
-    public static native void glTexCoordP1ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glTexCoordP1ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glTexCoordP1ui(type, coords);
+    }
 
     // --- [ glTexCoordP2ui ] ---
 
@@ -151,7 +165,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type   type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param coords the packed value
      */
-    public static native void glTexCoordP2ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glTexCoordP2ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glTexCoordP2ui(type, coords);
+    }
 
     // --- [ glTexCoordP3ui ] ---
 
@@ -161,7 +177,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type   type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param coords the packed value
      */
-    public static native void glTexCoordP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glTexCoordP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glTexCoordP3ui(type, coords);
+    }
 
     // --- [ glTexCoordP4ui ] ---
 
@@ -171,12 +189,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type   type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param coords the packed value
      */
-    public static native void glTexCoordP4ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glTexCoordP4ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glTexCoordP4ui(type, coords);
+    }
 
     // --- [ glTexCoordP1uiv ] ---
 
     /** Unsafe version of: {@link #glTexCoordP1uiv TexCoordP1uiv} */
-    public static native void nglTexCoordP1uiv(int type, long coords);
+    public static void nglTexCoordP1uiv(int type, long coords) {
+        GL33.nglTexCoordP1uiv(type, coords);
+    }
 
     /**
      * Pointer version of {@link #glTexCoordP1ui TexCoordP1ui}.
@@ -194,7 +216,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glTexCoordP2uiv ] ---
 
     /** Unsafe version of: {@link #glTexCoordP2uiv TexCoordP2uiv} */
-    public static native void nglTexCoordP2uiv(int type, long coords);
+    public static void nglTexCoordP2uiv(int type, long coords) {
+        GL33.nglTexCoordP2uiv(type, coords);
+    }
 
     /**
      * Pointer version of {@link #glTexCoordP2ui TexCoordP2ui}.
@@ -212,7 +236,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glTexCoordP3uiv ] ---
 
     /** Unsafe version of: {@link #glTexCoordP3uiv TexCoordP3uiv} */
-    public static native void nglTexCoordP3uiv(int type, long coords);
+    public static void nglTexCoordP3uiv(int type, long coords) {
+        GL33.nglTexCoordP3uiv(type, coords);
+    }
 
     /**
      * Pointer version of {@link #glTexCoordP3ui TexCoordP3ui}.
@@ -230,7 +256,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glTexCoordP4uiv ] ---
 
     /** Unsafe version of: {@link #glTexCoordP4uiv TexCoordP4uiv} */
-    public static native void nglTexCoordP4uiv(int type, long coords);
+    public static void nglTexCoordP4uiv(int type, long coords) {
+        GL33.nglTexCoordP4uiv(type, coords);
+    }
 
     /**
      * Pointer version of {@link #glTexCoordP4ui TexCoordP4ui}.
@@ -254,7 +282,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type    type of packing used on the data. One of:<br><table><tr><td>type</td><td>of</td><td>packing</td><td>used</td><td>on</td><td>the</td><td>data</td></tr></table>
      * @param coords  the packed value
      */
-    public static native void glMultiTexCoordP1ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glMultiTexCoordP1ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glMultiTexCoordP1ui(texture, type, coords);
+    }
 
     // --- [ glMultiTexCoordP2ui ] ---
 
@@ -265,7 +295,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type    type of packing used on the data. One of:<br><table><tr><td>type</td><td>of</td><td>packing</td><td>used</td><td>on</td><td>the</td><td>data</td></tr></table>
      * @param coords  the packed value
      */
-    public static native void glMultiTexCoordP2ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glMultiTexCoordP2ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glMultiTexCoordP2ui(texture, type, coords);
+    }
 
     // --- [ glMultiTexCoordP3ui ] ---
 
@@ -276,7 +308,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type    type of packing used on the data. One of:<br><table><tr><td>type</td><td>of</td><td>packing</td><td>used</td><td>on</td><td>the</td><td>data</td></tr></table>
      * @param coords  the packed value
      */
-    public static native void glMultiTexCoordP3ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glMultiTexCoordP3ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glMultiTexCoordP3ui(texture, type, coords);
+    }
 
     // --- [ glMultiTexCoordP4ui ] ---
 
@@ -287,12 +321,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type    type of packing used on the data. One of:<br><table><tr><td>type</td><td>of</td><td>packing</td><td>used</td><td>on</td><td>the</td><td>data</td></tr></table>
      * @param coords  the packed value
      */
-    public static native void glMultiTexCoordP4ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glMultiTexCoordP4ui(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glMultiTexCoordP4ui(texture, type, coords);
+    }
 
     // --- [ glMultiTexCoordP1uiv ] ---
 
     /** Unsafe version of: {@link #glMultiTexCoordP1uiv MultiTexCoordP1uiv} */
-    public static native void nglMultiTexCoordP1uiv(int texture, int type, long coords);
+    public static void nglMultiTexCoordP1uiv(int texture, int type, long coords) {
+        GL33.nglMultiTexCoordP1uiv(texture, type, coords);
+    }
 
     /**
      * Pointer version of {@link #glMultiTexCoordP1ui MultiTexCoordP1ui}.
@@ -311,7 +349,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glMultiTexCoordP2uiv ] ---
 
     /** Unsafe version of: {@link #glMultiTexCoordP2uiv MultiTexCoordP2uiv} */
-    public static native void nglMultiTexCoordP2uiv(int texture, int type, long coords);
+    public static void nglMultiTexCoordP2uiv(int texture, int type, long coords) {
+        GL33.nglMultiTexCoordP2uiv(texture, type, coords);
+    }
 
     /**
      * Pointer version of {@link #glMultiTexCoordP2ui MultiTexCoordP2ui}.
@@ -330,7 +370,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glMultiTexCoordP3uiv ] ---
 
     /** Unsafe version of: {@link #glMultiTexCoordP3uiv MultiTexCoordP3uiv} */
-    public static native void nglMultiTexCoordP3uiv(int texture, int type, long coords);
+    public static void nglMultiTexCoordP3uiv(int texture, int type, long coords) {
+        GL33.nglMultiTexCoordP3uiv(texture, type, coords);
+    }
 
     /**
      * Pointer version of {@link #glMultiTexCoordP3ui MultiTexCoordP3ui}.
@@ -349,7 +391,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glMultiTexCoordP4uiv ] ---
 
     /** Unsafe version of: {@link #glMultiTexCoordP4uiv MultiTexCoordP4uiv} */
-    public static native void nglMultiTexCoordP4uiv(int texture, int type, long coords);
+    public static void nglMultiTexCoordP4uiv(int texture, int type, long coords) {
+        GL33.nglMultiTexCoordP4uiv(texture, type, coords);
+    }
 
     /**
      * Pointer version of {@link #glMultiTexCoordP4ui MultiTexCoordP4ui}.
@@ -373,12 +417,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type   type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param coords the packed value
      */
-    public static native void glNormalP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords);
+    public static void glNormalP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int coords) {
+        GL33.glNormalP3ui(type, coords);
+    }
 
     // --- [ glNormalP3uiv ] ---
 
     /** Unsafe version of: {@link #glNormalP3uiv NormalP3uiv} */
-    public static native void nglNormalP3uiv(int type, long coords);
+    public static void nglNormalP3uiv(int type, long coords) {
+        GL33.nglNormalP3uiv(type, coords);
+    }
 
     /**
      * Pointer version {@link #glNormalP3ui NormalP3ui}.
@@ -401,7 +449,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type  type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param color the packed value
      */
-    public static native void glColorP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int color);
+    public static void glColorP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int color) {
+        GL33.glColorP3ui(type, color);
+    }
 
     // --- [ glColorP4ui ] ---
 
@@ -411,12 +461,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type  type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param color the packed value
      */
-    public static native void glColorP4ui(@NativeType("GLenum") int type, @NativeType("GLuint") int color);
+    public static void glColorP4ui(@NativeType("GLenum") int type, @NativeType("GLuint") int color) {
+        GL33.glColorP4ui(type, color);
+    }
 
     // --- [ glColorP3uiv ] ---
 
     /** Unsafe version of: {@link #glColorP3uiv ColorP3uiv} */
-    public static native void nglColorP3uiv(int type, long color);
+    public static void nglColorP3uiv(int type, long color) {
+        GL33.nglColorP3uiv(type, color);
+    }
 
     /**
      * Pointer version of {@link #glColorP3ui ColorP3ui}.
@@ -434,7 +488,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glColorP4uiv ] ---
 
     /** Unsafe version of: {@link #glColorP4uiv ColorP4uiv} */
-    public static native void nglColorP4uiv(int type, long color);
+    public static void nglColorP4uiv(int type, long color) {
+        GL33.nglColorP4uiv(type, color);
+    }
 
     /**
      * Pointer version of {@link #glColorP4ui ColorP4ui}.
@@ -457,12 +513,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param type  type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param color the packed value
      */
-    public static native void glSecondaryColorP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int color);
+    public static void glSecondaryColorP3ui(@NativeType("GLenum") int type, @NativeType("GLuint") int color) {
+        GL33.glSecondaryColorP3ui(type, color);
+    }
 
     // --- [ glSecondaryColorP3uiv ] ---
 
     /** Unsafe version of: {@link #glSecondaryColorP3uiv SecondaryColorP3uiv} */
-    public static native void nglSecondaryColorP3uiv(int type, long color);
+    public static void nglSecondaryColorP3uiv(int type, long color) {
+        GL33.nglSecondaryColorP3uiv(type, color);
+    }
 
     /**
      * Pointer version of {@link #glSecondaryColorP3ui SecondaryColorP3ui}.
@@ -487,7 +547,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
-    public static native void glVertexAttribP1ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
+    public static void glVertexAttribP1ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
+        GL33.glVertexAttribP1ui(index, type, normalized, value);
+    }
 
     // --- [ glVertexAttribP2ui ] ---
 
@@ -499,7 +561,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
-    public static native void glVertexAttribP2ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
+    public static void glVertexAttribP2ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
+        GL33.glVertexAttribP2ui(index, type, normalized, value);
+    }
 
     // --- [ glVertexAttribP3ui ] ---
 
@@ -511,7 +575,9 @@ public class ARBVertexType2_10_10_10_REV {
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
-    public static native void glVertexAttribP3ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
+    public static void glVertexAttribP3ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
+        GL33.glVertexAttribP3ui(index, type, normalized, value);
+    }
 
     // --- [ glVertexAttribP4ui ] ---
 
@@ -523,12 +589,16 @@ public class ARBVertexType2_10_10_10_REV {
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
-    public static native void glVertexAttribP4ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
+    public static void glVertexAttribP4ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
+        GL33.glVertexAttribP4ui(index, type, normalized, value);
+    }
 
     // --- [ glVertexAttribP1uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP1uiv VertexAttribP1uiv} */
-    public static native void nglVertexAttribP1uiv(int index, int type, boolean normalized, long value);
+    public static void nglVertexAttribP1uiv(int index, int type, boolean normalized, long value) {
+        GL33.nglVertexAttribP1uiv(index, type, normalized, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribP1ui VertexAttribP1ui}.
@@ -548,7 +618,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glVertexAttribP2uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP2uiv VertexAttribP2uiv} */
-    public static native void nglVertexAttribP2uiv(int index, int type, boolean normalized, long value);
+    public static void nglVertexAttribP2uiv(int index, int type, boolean normalized, long value) {
+        GL33.nglVertexAttribP2uiv(index, type, normalized, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribP2ui VertexAttribP2ui}.
@@ -568,7 +640,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glVertexAttribP3uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP3uiv VertexAttribP3uiv} */
-    public static native void nglVertexAttribP3uiv(int index, int type, boolean normalized, long value);
+    public static void nglVertexAttribP3uiv(int index, int type, boolean normalized, long value) {
+        GL33.nglVertexAttribP3uiv(index, type, normalized, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribP3ui VertexAttribP3ui}.
@@ -588,7 +662,9 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glVertexAttribP4uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP4uiv VertexAttribP4uiv} */
-    public static native void nglVertexAttribP4uiv(int index, int type, boolean normalized, long value);
+    public static void nglVertexAttribP4uiv(int index, int type, boolean normalized, long value) {
+        GL33.nglVertexAttribP4uiv(index, type, normalized, value);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribP4ui VertexAttribP4ui}.

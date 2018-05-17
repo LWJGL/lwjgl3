@@ -11,7 +11,7 @@ typedef void (APIENTRY *glActiveStencilFaceEXTPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTStencilTwoSide_glActiveStencilFaceEXT(JNIEnv *__env, jclass clazz, jint face) {
-    glActiveStencilFaceEXTPROC glActiveStencilFaceEXT = (glActiveStencilFaceEXTPROC)tlsGetFunction(1814);
+    glActiveStencilFaceEXTPROC glActiveStencilFaceEXT = (glActiveStencilFaceEXTPROC)tlsGetFunction(1815);
     UNUSED_PARAM(clazz)
     glActiveStencilFaceEXT(face);
 }

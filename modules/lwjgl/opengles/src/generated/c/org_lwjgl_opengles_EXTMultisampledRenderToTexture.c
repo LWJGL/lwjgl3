@@ -12,13 +12,13 @@ typedef void (APIENTRY *glFramebufferTexture2DMultisampleEXTPROC) (jint, jint, j
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultisampledRenderToTexture_glRenderbufferStorageMultisampleEXT(JNIEnv *__env, jclass clazz, jint target, jint samples, jint internalformat, jint width, jint height) {
-    glRenderbufferStorageMultisampleEXTPROC glRenderbufferStorageMultisampleEXT = (glRenderbufferStorageMultisampleEXTPROC)tlsGetFunction(455);
+    glRenderbufferStorageMultisampleEXTPROC glRenderbufferStorageMultisampleEXT = (glRenderbufferStorageMultisampleEXTPROC)tlsGetFunction(457);
     UNUSED_PARAM(clazz)
     glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultisampledRenderToTexture_glFramebufferTexture2DMultisampleEXT(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint textarget, jint texture, jint level, jint samples) {
-    glFramebufferTexture2DMultisampleEXTPROC glFramebufferTexture2DMultisampleEXT = (glFramebufferTexture2DMultisampleEXTPROC)tlsGetFunction(456);
+    glFramebufferTexture2DMultisampleEXTPROC glFramebufferTexture2DMultisampleEXT = (glFramebufferTexture2DMultisampleEXTPROC)tlsGetFunction(458);
     UNUSED_PARAM(clazz)
     glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level, samples);
 }

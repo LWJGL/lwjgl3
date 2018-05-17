@@ -101,7 +101,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of transform feedback object names to create
      */
-    public static native void nglCreateTransformFeedbacks(int n, long ids);
+    public static void nglCreateTransformFeedbacks(int n, long ids) {
+        GL45.nglCreateTransformFeedbacks(n, ids);
+    }
 
     /**
      * Returns {@code n} previously unused transform feedback object names in {@code ids}, each representing a new state vector.
@@ -134,7 +136,9 @@ public class ARBDirectStateAccess {
      * @param index  the transform feedback stream index
      * @param buffer the name of an existing buffer object
      */
-    public static native void glTransformFeedbackBufferBase(@NativeType("GLuint") int xfb, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer);
+    public static void glTransformFeedbackBufferBase(@NativeType("GLuint") int xfb, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer) {
+        GL45.glTransformFeedbackBufferBase(xfb, index, buffer);
+    }
 
     // --- [ glTransformFeedbackBufferRange ] ---
 
@@ -147,12 +151,16 @@ public class ARBDirectStateAccess {
      * @param offset the starting offset in basic machine units into the buffer object
      * @param size   the amount of data in machine units
      */
-    public static native void glTransformFeedbackBufferRange(@NativeType("GLuint") int xfb, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size);
+    public static void glTransformFeedbackBufferRange(@NativeType("GLuint") int xfb, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size) {
+        GL45.glTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
+    }
 
     // --- [ glGetTransformFeedbackiv ] ---
 
     /** Unsafe version of: {@link #glGetTransformFeedbackiv GetTransformFeedbackiv} */
-    public static native void nglGetTransformFeedbackiv(int xfb, int pname, long param);
+    public static void nglGetTransformFeedbackiv(int xfb, int pname, long param) {
+        GL45.nglGetTransformFeedbackiv(xfb, pname, param);
+    }
 
     /**
      * Returns information about a transform feedback object.
@@ -189,7 +197,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTransformFeedbacki_v ] ---
 
     /** Unsafe version of: {@link #glGetTransformFeedbacki_v GetTransformFeedbacki_v} */
-    public static native void nglGetTransformFeedbacki_v(int xfb, int pname, int index, long param);
+    public static void nglGetTransformFeedbacki_v(int xfb, int pname, int index, long param) {
+        GL45.nglGetTransformFeedbacki_v(xfb, pname, index, param);
+    }
 
     /**
      * Returns information about a transform feedback object.
@@ -228,7 +238,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTransformFeedbacki64_v ] ---
 
     /** Unsafe version of: {@link #glGetTransformFeedbacki64_v GetTransformFeedbacki64_v} */
-    public static native void nglGetTransformFeedbacki64_v(int xfb, int pname, int index, long param);
+    public static void nglGetTransformFeedbacki64_v(int xfb, int pname, int index, long param) {
+        GL45.nglGetTransformFeedbacki64_v(xfb, pname, index, param);
+    }
 
     /**
      * Returns information about a transform feedback object.
@@ -271,7 +283,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of buffer names to create
      */
-    public static native void nglCreateBuffers(int n, long buffers);
+    public static void nglCreateBuffers(int n, long buffers) {
+        GL45.nglCreateBuffers(n, buffers);
+    }
 
     /**
      * Returns {@code n} previously unused buffer names in {@code buffers}, each representing a new buffer object initialized as if it had been bound to an
@@ -306,7 +320,9 @@ public class ARBDirectStateAccess {
      *
      * @param size the size of the data store in basic machine units
      */
-    public static native void nglNamedBufferStorage(int buffer, long size, long data, int flags);
+    public static void nglNamedBufferStorage(int buffer, long size, long data, int flags) {
+        GL45.nglNamedBufferStorage(buffer, size, data, flags);
+    }
 
     /**
      * DSA version of {@link GL44#glBufferStorage BufferStorage}.
@@ -596,7 +612,9 @@ public class ARBDirectStateAccess {
      *
      * @param size the size in bytes of the buffer object's new data store
      */
-    public static native void nglNamedBufferData(int buffer, long size, long data, int usage);
+    public static void nglNamedBufferData(int buffer, long size, long data, int usage) {
+        GL45.nglNamedBufferData(buffer, size, data, usage);
+    }
 
     /**
      * DSA version of {@link GL15#glBufferData BufferData}.
@@ -682,7 +700,9 @@ public class ARBDirectStateAccess {
      *
      * @param size the size in bytes of the data store region being replaced
      */
-    public static native void nglNamedBufferSubData(int buffer, long offset, long size, long data);
+    public static void nglNamedBufferSubData(int buffer, long offset, long size, long data) {
+        GL45.nglNamedBufferSubData(buffer, offset, size, data);
+    }
 
     /**
      * DSA version of {@link GL15#glBufferSubData BufferSubData}.
@@ -761,12 +781,16 @@ public class ARBDirectStateAccess {
      * @param writeOffset the destination buffer object offset, in bytes
      * @param size        the number of bytes to copy
      */
-    public static native void glCopyNamedBufferSubData(@NativeType("GLuint") int readBuffer, @NativeType("GLuint") int writeBuffer, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size);
+    public static void glCopyNamedBufferSubData(@NativeType("GLuint") int readBuffer, @NativeType("GLuint") int writeBuffer, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size) {
+        GL45.glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size);
+    }
 
     // --- [ glClearNamedBufferData ] ---
 
     /** Unsafe version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
-    public static native void nglClearNamedBufferData(int buffer, int internalformat, int format, int type, long data);
+    public static void nglClearNamedBufferData(int buffer, int internalformat, int format, int type, long data) {
+        GL45.nglClearNamedBufferData(buffer, internalformat, format, type, data);
+    }
 
     /**
      * DSA version of {@link GL43#glClearBufferData ClearBufferData}.
@@ -831,7 +855,9 @@ public class ARBDirectStateAccess {
     // --- [ glClearNamedBufferSubData ] ---
 
     /** Unsafe version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
-    public static native void nglClearNamedBufferSubData(int buffer, int internalformat, long offset, long size, int format, int type, long data);
+    public static void nglClearNamedBufferSubData(int buffer, int internalformat, long offset, long size, int format, int type, long data) {
+        GL45.nglClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
+    }
 
     /**
      * DSA version of {@link GL43#glClearBufferSubData ClearBufferSubData}.
@@ -904,7 +930,9 @@ public class ARBDirectStateAccess {
     // --- [ glMapNamedBuffer ] ---
 
     /** Unsafe version of: {@link #glMapNamedBuffer MapNamedBuffer} */
-    public static native long nglMapNamedBuffer(int buffer, int access);
+    public static long nglMapNamedBuffer(int buffer, int access) {
+        return GL45.nglMapNamedBuffer(buffer, access);
+    }
 
     /**
      * DSA version of {@link GL15#glMapBuffer MapBuffer}.
@@ -949,7 +977,9 @@ public class ARBDirectStateAccess {
     // --- [ glMapNamedBufferRange ] ---
 
     /** Unsafe version of: {@link #glMapNamedBufferRange MapNamedBufferRange} */
-    public static native long nglMapNamedBufferRange(int buffer, long offset, long length, int access);
+    public static long nglMapNamedBufferRange(int buffer, long offset, long length, int access) {
+        return GL45.nglMapNamedBufferRange(buffer, offset, length, access);
+    }
 
     /**
      * DSA version of {@link GL30#glMapBufferRange MapBufferRange}.
@@ -989,7 +1019,9 @@ public class ARBDirectStateAccess {
      * @param buffer the buffer object name
      */
     @NativeType("GLboolean")
-    public static native boolean glUnmapNamedBuffer(@NativeType("GLuint") int buffer);
+    public static boolean glUnmapNamedBuffer(@NativeType("GLuint") int buffer) {
+        return GL45.glUnmapNamedBuffer(buffer);
+    }
 
     // --- [ glFlushMappedNamedBufferRange ] ---
 
@@ -1000,12 +1032,16 @@ public class ARBDirectStateAccess {
      * @param offset the start of the buffer subrange, in basic machine units
      * @param length the length of the buffer subrange, in basic machine units
      */
-    public static native void glFlushMappedNamedBufferRange(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length);
+    public static void glFlushMappedNamedBufferRange(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length) {
+        GL45.glFlushMappedNamedBufferRange(buffer, offset, length);
+    }
 
     // --- [ glGetNamedBufferParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv} */
-    public static native void nglGetNamedBufferParameteriv(int buffer, int pname, long params);
+    public static void nglGetNamedBufferParameteriv(int buffer, int pname, long params) {
+        GL45.nglGetNamedBufferParameteriv(buffer, pname, params);
+    }
 
     /**
      * DSA version of {@link GL15#glGetBufferParameteriv GetBufferParameteriv}.
@@ -1042,7 +1078,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetNamedBufferParameteri64v ] ---
 
     /** Unsafe version of: {@link #glGetNamedBufferParameteri64v GetNamedBufferParameteri64v} */
-    public static native void nglGetNamedBufferParameteri64v(int buffer, int pname, long params);
+    public static void nglGetNamedBufferParameteri64v(int buffer, int pname, long params) {
+        GL45.nglGetNamedBufferParameteri64v(buffer, pname, params);
+    }
 
     /**
      * DSA version of {@link GL32#glGetBufferParameteri64v GetBufferParameteri64v}.
@@ -1079,7 +1117,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetNamedBufferPointerv ] ---
 
     /** Unsafe version of: {@link #glGetNamedBufferPointerv GetNamedBufferPointerv} */
-    public static native void nglGetNamedBufferPointerv(int buffer, int pname, long params);
+    public static void nglGetNamedBufferPointerv(int buffer, int pname, long params) {
+        GL45.nglGetNamedBufferPointerv(buffer, pname, params);
+    }
 
     /**
      * DSA version of {@link GL15#glGetBufferPointerv GetBufferPointerv}.
@@ -1120,7 +1160,9 @@ public class ARBDirectStateAccess {
      *
      * @param size the size in bytes of the data store region being returned
      */
-    public static native void nglGetNamedBufferSubData(int buffer, long offset, long size, long data);
+    public static void nglGetNamedBufferSubData(int buffer, long offset, long size, long data) {
+        GL45.nglGetNamedBufferSubData(buffer, offset, size, data);
+    }
 
     /**
      * DSA version of {@link GL15#glGetBufferSubData GetBufferSubData}.
@@ -1195,7 +1237,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of framebuffer names to create
      */
-    public static native void nglCreateFramebuffers(int n, long framebuffers);
+    public static void nglCreateFramebuffers(int n, long framebuffers) {
+        GL45.nglCreateFramebuffers(n, framebuffers);
+    }
 
     /**
      * Returns {@code n} previously unused framebuffer names in {@code framebuffers}, each representing a new framebuffer object.
@@ -1229,7 +1273,9 @@ public class ARBDirectStateAccess {
      * @param renderbuffertarget the renderbuffer target. Must be:<br><table><tr><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
      * @param renderbuffer       the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach
      */
-    public static native void glNamedFramebufferRenderbuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int renderbuffertarget, @NativeType("GLuint") int renderbuffer);
+    public static void glNamedFramebufferRenderbuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int renderbuffertarget, @NativeType("GLuint") int renderbuffer) {
+        GL45.glNamedFramebufferRenderbuffer(framebuffer, attachment, renderbuffertarget, renderbuffer);
+    }
 
     // --- [ glNamedFramebufferParameteri ] ---
 
@@ -1240,7 +1286,9 @@ public class ARBDirectStateAccess {
      * @param pname       a token indicating the parameter to be modified. One of:<br><table><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * @param param       the new value for the parameter named {@code pname}
      */
-    public static native void glNamedFramebufferParameteri(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint") int param);
+    public static void glNamedFramebufferParameteri(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint") int param) {
+        GL45.glNamedFramebufferParameteri(framebuffer, pname, param);
+    }
 
     // --- [ glNamedFramebufferTexture ] ---
 
@@ -1252,7 +1300,9 @@ public class ARBDirectStateAccess {
      * @param texture     the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level       the mipmap level of {@code texture} to attach
      */
-    public static native void glNamedFramebufferTexture(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level);
+    public static void glNamedFramebufferTexture(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level) {
+        GL45.glNamedFramebufferTexture(framebuffer, attachment, texture, level);
+    }
 
     // --- [ glNamedFramebufferTextureLayer ] ---
 
@@ -1265,7 +1315,9 @@ public class ARBDirectStateAccess {
      * @param level       the mipmap level of {@code texture} to attach
      * @param layer       the layer of {@code texture} to attach.
      */
-    public static native void glNamedFramebufferTextureLayer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer);
+    public static void glNamedFramebufferTextureLayer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer) {
+        GL45.glNamedFramebufferTextureLayer(framebuffer, attachment, texture, level, layer);
+    }
 
     // --- [ glNamedFramebufferDrawBuffer ] ---
 
@@ -1275,7 +1327,9 @@ public class ARBDirectStateAccess {
      * @param framebuffer the framebuffer name
      * @param buf         the color buffer to draw to. One of:<br><table><tr><td>{@link GL11#GL_NONE NONE}</td><td>{@link GL11#GL_FRONT_LEFT FRONT_LEFT}</td><td>{@link GL11#GL_FRONT_RIGHT FRONT_RIGHT}</td><td>{@link GL11#GL_BACK_LEFT BACK_LEFT}</td><td>{@link GL11#GL_BACK_RIGHT BACK_RIGHT}</td><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_LEFT LEFT}</td></tr><tr><td>{@link GL11#GL_RIGHT RIGHT}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td><td>{@link GL11#GL_AUX0 AUX0}</td><td>{@link GL11#GL_AUX1 AUX1}</td><td>{@link GL11#GL_AUX2 AUX2}</td><td>{@link GL11#GL_AUX3 AUX3}</td><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>GL30.GL_COLOR_ATTACHMENT[1-15]</td></tr></table>
      */
-    public static native void glNamedFramebufferDrawBuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buf);
+    public static void glNamedFramebufferDrawBuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buf) {
+        GL45.glNamedFramebufferDrawBuffer(framebuffer, buf);
+    }
 
     // --- [ glNamedFramebufferDrawBuffers ] ---
 
@@ -1284,7 +1338,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of buffers in {@code bufs}
      */
-    public static native void nglNamedFramebufferDrawBuffers(int framebuffer, int n, long bufs);
+    public static void nglNamedFramebufferDrawBuffers(int framebuffer, int n, long bufs) {
+        GL45.nglNamedFramebufferDrawBuffers(framebuffer, n, bufs);
+    }
 
     /**
      * DSA version of {@link GL20#glDrawBuffers DrawBuffers}.
@@ -1319,7 +1375,9 @@ public class ARBDirectStateAccess {
      * @param framebuffer the framebuffer name
      * @param src         the color buffer to read from. One of:<br><table><tr><td>{@link GL11#GL_NONE NONE}</td><td>{@link GL11#GL_FRONT_LEFT FRONT_LEFT}</td><td>{@link GL11#GL_FRONT_RIGHT FRONT_RIGHT}</td><td>{@link GL11#GL_BACK_LEFT BACK_LEFT}</td><td>{@link GL11#GL_BACK_RIGHT BACK_RIGHT}</td><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_LEFT LEFT}</td></tr><tr><td>{@link GL11#GL_RIGHT RIGHT}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td><td>{@link GL11#GL_AUX0 AUX0}</td><td>{@link GL11#GL_AUX1 AUX1}</td><td>{@link GL11#GL_AUX2 AUX2}</td><td>{@link GL11#GL_AUX3 AUX3}</td><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>GL30.GL_COLOR_ATTACHMENT[1-15]</td></tr></table>
      */
-    public static native void glNamedFramebufferReadBuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int src);
+    public static void glNamedFramebufferReadBuffer(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int src) {
+        GL45.glNamedFramebufferReadBuffer(framebuffer, src);
+    }
 
     // --- [ glInvalidateNamedFramebufferData ] ---
 
@@ -1328,7 +1386,9 @@ public class ARBDirectStateAccess {
      *
      * @param numAttachments the number of entries in the {@code attachments} array
      */
-    public static native void nglInvalidateNamedFramebufferData(int framebuffer, int numAttachments, long attachments);
+    public static void nglInvalidateNamedFramebufferData(int framebuffer, int numAttachments, long attachments) {
+        GL45.nglInvalidateNamedFramebufferData(framebuffer, numAttachments, attachments);
+    }
 
     /**
      * DSA version of {@link GL43#glInvalidateFramebuffer InvalidateFramebuffer}.
@@ -1362,7 +1422,9 @@ public class ARBDirectStateAccess {
      *
      * @param numAttachments the number of entries in the {@code attachments} array
      */
-    public static native void nglInvalidateNamedFramebufferSubData(int framebuffer, int numAttachments, long attachments, int x, int y, int width, int height);
+    public static void nglInvalidateNamedFramebufferSubData(int framebuffer, int numAttachments, long attachments, int x, int y, int width, int height) {
+        GL45.nglInvalidateNamedFramebufferSubData(framebuffer, numAttachments, attachments, x, y, width, height);
+    }
 
     /**
      * DSA version of {@link GL43#glInvalidateSubFramebuffer InvalidateSubFramebuffer}.
@@ -1400,7 +1462,9 @@ public class ARBDirectStateAccess {
     // --- [ glClearNamedFramebufferiv ] ---
 
     /** Unsafe version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv} */
-    public static native void nglClearNamedFramebufferiv(int framebuffer, int buffer, int drawbuffer, long value);
+    public static void nglClearNamedFramebufferiv(int framebuffer, int buffer, int drawbuffer, long value) {
+        GL45.nglClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
+    }
 
     /**
      * DSA version of {@link GL30#glClearBufferiv ClearBufferiv}.
@@ -1421,7 +1485,9 @@ public class ARBDirectStateAccess {
     // --- [ glClearNamedFramebufferuiv ] ---
 
     /** Unsafe version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv} */
-    public static native void nglClearNamedFramebufferuiv(int framebuffer, int buffer, int drawbuffer, long value);
+    public static void nglClearNamedFramebufferuiv(int framebuffer, int buffer, int drawbuffer, long value) {
+        GL45.nglClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
+    }
 
     /**
      * DSA version of {@link GL30#glClearBufferuiv ClearBufferuiv}.
@@ -1441,7 +1507,9 @@ public class ARBDirectStateAccess {
     // --- [ glClearNamedFramebufferfv ] ---
 
     /** Unsafe version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv} */
-    public static native void nglClearNamedFramebufferfv(int framebuffer, int buffer, int drawbuffer, long value);
+    public static void nglClearNamedFramebufferfv(int framebuffer, int buffer, int drawbuffer, long value) {
+        GL45.nglClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
+    }
 
     /**
      * DSA version of {@link GL30#glClearBufferfv ClearBufferfv}.
@@ -1470,7 +1538,9 @@ public class ARBDirectStateAccess {
      * @param depth       the depth value to clear the buffer to
      * @param stencil     the stencil value to clear the buffer to
      */
-    public static native void glClearNamedFramebufferfi(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat") float depth, @NativeType("GLint") int stencil);
+    public static void glClearNamedFramebufferfi(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat") float depth, @NativeType("GLint") int stencil) {
+        GL45.glClearNamedFramebufferfi(framebuffer, buffer, drawbuffer, depth, stencil);
+    }
 
     // --- [ glBlitNamedFramebuffer ] ---
 
@@ -1490,7 +1560,9 @@ public class ARBDirectStateAccess {
      * @param mask            the bitwise OR of the flags indicating which buffers are to be copied. One of:<br><table><tr><td>{@link GL11#GL_COLOR_BUFFER_BIT COLOR_BUFFER_BIT}</td><td>{@link GL11#GL_DEPTH_BUFFER_BIT DEPTH_BUFFER_BIT}</td><td>{@link GL11#GL_STENCIL_BUFFER_BIT STENCIL_BUFFER_BIT}</td></tr></table>
      * @param filter          the interpolation to be applied if the image is stretched. One of:<br><table><tr><td>{@link GL11#GL_NEAREST NEAREST}</td><td>{@link GL11#GL_LINEAR LINEAR}</td></tr></table>
      */
-    public static native void glBlitNamedFramebuffer(@NativeType("GLuint") int readFramebuffer, @NativeType("GLuint") int drawFramebuffer, @NativeType("GLint") int srcX0, @NativeType("GLint") int srcY0, @NativeType("GLint") int srcX1, @NativeType("GLint") int srcY1, @NativeType("GLint") int dstX0, @NativeType("GLint") int dstY0, @NativeType("GLint") int dstX1, @NativeType("GLint") int dstY1, @NativeType("GLbitfield") int mask, @NativeType("GLenum") int filter);
+    public static void glBlitNamedFramebuffer(@NativeType("GLuint") int readFramebuffer, @NativeType("GLuint") int drawFramebuffer, @NativeType("GLint") int srcX0, @NativeType("GLint") int srcY0, @NativeType("GLint") int srcX1, @NativeType("GLint") int srcY1, @NativeType("GLint") int dstX0, @NativeType("GLint") int dstY0, @NativeType("GLint") int dstX1, @NativeType("GLint") int dstY1, @NativeType("GLbitfield") int mask, @NativeType("GLenum") int filter) {
+        GL45.glBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    }
 
     // --- [ glCheckNamedFramebufferStatus ] ---
 
@@ -1501,12 +1573,16 @@ public class ARBDirectStateAccess {
      * @param target      the target of the framebuffer completeness check. One of:<br><table><tr><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
      */
     @NativeType("GLenum")
-    public static native int glCheckNamedFramebufferStatus(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int target);
+    public static int glCheckNamedFramebufferStatus(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int target) {
+        return GL45.glCheckNamedFramebufferStatus(framebuffer, target);
+    }
 
     // --- [ glGetNamedFramebufferParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetNamedFramebufferParameteriv GetNamedFramebufferParameteriv} */
-    public static native void nglGetNamedFramebufferParameteriv(int framebuffer, int pname, long params);
+    public static void nglGetNamedFramebufferParameteriv(int framebuffer, int pname, long params) {
+        GL45.nglGetNamedFramebufferParameteriv(framebuffer, pname, params);
+    }
 
     /**
      * DSA version of {@link GL43#glGetFramebufferParameteriv GetFramebufferParameteriv}.
@@ -1543,7 +1619,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetNamedFramebufferAttachmentParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetNamedFramebufferAttachmentParameteriv GetNamedFramebufferAttachmentParameteriv} */
-    public static native void nglGetNamedFramebufferAttachmentParameteriv(int framebuffer, int attachment, int pname, long params);
+    public static void nglGetNamedFramebufferAttachmentParameteriv(int framebuffer, int attachment, int pname, long params) {
+        GL45.nglGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
+    }
 
     /**
      * DSA version of {@link GL30#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}.
@@ -1586,7 +1664,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of renderbuffer names to create
      */
-    public static native void nglCreateRenderbuffers(int n, long renderbuffers);
+    public static void nglCreateRenderbuffers(int n, long renderbuffers) {
+        GL45.nglCreateRenderbuffers(n, renderbuffers);
+    }
 
     /**
      * Returns {@code n} previously unused renderbuffer names in {@code renderbuffers}, each representing a new renderbuffer object.
@@ -1620,7 +1700,9 @@ public class ARBDirectStateAccess {
      * @param width          the width of the renderbuffer, in pixels
      * @param height         the height of the renderbuffer, in pixels
      */
-    public static native void glNamedRenderbufferStorage(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glNamedRenderbufferStorage(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL45.glNamedRenderbufferStorage(renderbuffer, internalformat, width, height);
+    }
 
     // --- [ glNamedRenderbufferStorageMultisample ] ---
 
@@ -1633,12 +1715,16 @@ public class ARBDirectStateAccess {
      * @param width          the width of the renderbuffer, in pixels
      * @param height         the height of the renderbuffer, in pixels
      */
-    public static native void glNamedRenderbufferStorageMultisample(@NativeType("GLuint") int renderbuffer, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glNamedRenderbufferStorageMultisample(@NativeType("GLuint") int renderbuffer, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL45.glNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height);
+    }
 
     // --- [ glGetNamedRenderbufferParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetNamedRenderbufferParameteriv GetNamedRenderbufferParameteriv} */
-    public static native void nglGetNamedRenderbufferParameteriv(int renderbuffer, int pname, long params);
+    public static void nglGetNamedRenderbufferParameteriv(int renderbuffer, int pname, long params) {
+        GL45.nglGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
+    }
 
     /**
      * DSA version of {@link GL30#glGetRenderbufferParameteriv GetRenderbufferParameteriv}.
@@ -1679,7 +1765,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of texture names to create
      */
-    public static native void nglCreateTextures(int target, int n, long textures);
+    public static void nglCreateTextures(int target, int n, long textures) {
+        GL45.nglCreateTextures(target, n, textures);
+    }
 
     /**
      * Returns {@code n} previously unused texture names in {@code textures}, each representing a new texture object.
@@ -1717,7 +1805,9 @@ public class ARBDirectStateAccess {
      * @param internalformat the sized internal format of the data in the store belonging to {@code buffer}
      * @param buffer         the name of the buffer object whose storage to attach to the active buffer texture
      */
-    public static native void glTextureBuffer(@NativeType("GLuint") int texture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer);
+    public static void glTextureBuffer(@NativeType("GLuint") int texture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer) {
+        GL45.glTextureBuffer(texture, internalformat, buffer);
+    }
 
     // --- [ glTextureBufferRange ] ---
 
@@ -1730,7 +1820,9 @@ public class ARBDirectStateAccess {
      * @param offset         the offset of the start of the range of the buffer's data store to attach
      * @param size           the size of the range of the buffer's data store to attach
      */
-    public static native void glTextureBufferRange(@NativeType("GLuint") int texture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size);
+    public static void glTextureBufferRange(@NativeType("GLuint") int texture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size) {
+        GL45.glTextureBufferRange(texture, internalformat, buffer, offset, size);
+    }
 
     // --- [ glTextureStorage1D ] ---
 
@@ -1742,7 +1834,9 @@ public class ARBDirectStateAccess {
      * @param internalformat the sized internal format to be used to store texture image data
      * @param width          the width of the texture, in texels
      */
-    public static native void glTextureStorage1D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width);
+    public static void glTextureStorage1D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width) {
+        GL45.glTextureStorage1D(texture, levels, internalformat, width);
+    }
 
     // --- [ glTextureStorage2D ] ---
 
@@ -1755,7 +1849,9 @@ public class ARBDirectStateAccess {
      * @param width          the width of the texture, in texels
      * @param height         the height of the texture, in texels
      */
-    public static native void glTextureStorage2D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glTextureStorage2D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL45.glTextureStorage2D(texture, levels, internalformat, width, height);
+    }
 
     // --- [ glTextureStorage3D ] ---
 
@@ -1769,7 +1865,9 @@ public class ARBDirectStateAccess {
      * @param height         the height of the texture, in texels
      * @param depth          the depth of the texture, in texels
      */
-    public static native void glTextureStorage3D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
+    public static void glTextureStorage3D(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth) {
+        GL45.glTextureStorage3D(texture, levels, internalformat, width, height, depth);
+    }
 
     // --- [ glTextureStorage2DMultisample ] ---
 
@@ -1784,7 +1882,9 @@ public class ARBDirectStateAccess {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      */
-    public static native void glTextureStorage2DMultisample(@NativeType("GLuint") int texture, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations);
+    public static void glTextureStorage2DMultisample(@NativeType("GLuint") int texture, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations) {
+        GL45.glTextureStorage2DMultisample(texture, samples, internalformat, width, height, fixedsamplelocations);
+    }
 
     // --- [ glTextureStorage3DMultisample ] ---
 
@@ -1800,12 +1900,16 @@ public class ARBDirectStateAccess {
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
      */
-    public static native void glTextureStorage3DMultisample(@NativeType("GLuint") int texture, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations);
+    public static void glTextureStorage3DMultisample(@NativeType("GLuint") int texture, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations) {
+        GL45.glTextureStorage3DMultisample(texture, samples, internalformat, width, height, depth, fixedsamplelocations);
+    }
 
     // --- [ glTextureSubImage1D ] ---
 
     /** Unsafe version of: {@link #glTextureSubImage1D TextureSubImage1D} */
-    public static native void nglTextureSubImage1D(int texture, int level, int xoffset, int width, int format, int type, long pixels);
+    public static void nglTextureSubImage1D(int texture, int level, int xoffset, int width, int format, int type, long pixels) {
+        GL45.nglTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
+    }
 
     /**
      * DSA version of {@link GL11#glTexSubImage1D TexSubImage1D}.
@@ -1900,7 +2004,9 @@ public class ARBDirectStateAccess {
     // --- [ glTextureSubImage2D ] ---
 
     /** Unsafe version of: {@link #glTextureSubImage2D TextureSubImage2D} */
-    public static native void nglTextureSubImage2D(int texture, int level, int xoffset, int yoffset, int width, int height, int format, int type, long pixels);
+    public static void nglTextureSubImage2D(int texture, int level, int xoffset, int yoffset, int width, int height, int format, int type, long pixels) {
+        GL45.nglTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
+    }
 
     /**
      * DSA version of {@link GL11#glTexSubImage2D TexSubImage2D}.
@@ -2007,7 +2113,9 @@ public class ARBDirectStateAccess {
     // --- [ glTextureSubImage3D ] ---
 
     /** Unsafe version of: {@link #glTextureSubImage3D TextureSubImage3D} */
-    public static native void nglTextureSubImage3D(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long pixels);
+    public static void nglTextureSubImage3D(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long pixels) {
+        GL45.nglTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    }
 
     /**
      * DSA version of {@link GL12#glTexSubImage3D TexSubImage3D}.
@@ -2130,7 +2238,9 @@ public class ARBDirectStateAccess {
      *
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      */
-    public static native void nglCompressedTextureSubImage1D(int texture, int level, int xoffset, int width, int format, int imageSize, long data);
+    public static void nglCompressedTextureSubImage1D(int texture, int level, int xoffset, int width, int format, int imageSize, long data) {
+        GL45.nglCompressedTextureSubImage1D(texture, level, xoffset, width, format, imageSize, data);
+    }
 
     /**
      * DSA version of {@link GL13#glCompressedTexSubImage1D CompressedTexSubImage1D}.
@@ -2168,7 +2278,9 @@ public class ARBDirectStateAccess {
      *
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      */
-    public static native void nglCompressedTextureSubImage2D(int texture, int level, int xoffset, int yoffset, int width, int height, int format, int imageSize, long data);
+    public static void nglCompressedTextureSubImage2D(int texture, int level, int xoffset, int yoffset, int width, int height, int format, int imageSize, long data) {
+        GL45.nglCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, imageSize, data);
+    }
 
     /**
      * DSA version of {@link GL13#glCompressedTexSubImage2D CompressedTexSubImage2D}.
@@ -2210,7 +2322,9 @@ public class ARBDirectStateAccess {
      *
      * @param imageSize the number of unsigned bytes of image data starting at the address specified by {@code data}
      */
-    public static native void nglCompressedTextureSubImage3D(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int imageSize, long data);
+    public static void nglCompressedTextureSubImage3D(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int imageSize, long data) {
+        GL45.nglCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+    }
 
     /**
      * DSA version of {@link GL13#glCompressedTexSubImage3D CompressedTexSubImage3D}.
@@ -2261,7 +2375,9 @@ public class ARBDirectStateAccess {
      * @param y       the lower framebuffer pixel coordinate
      * @param width   the texture subregion width
      */
-    public static native void glCopyTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width);
+    public static void glCopyTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width) {
+        GL45.glCopyTextureSubImage1D(texture, level, xoffset, x, y, width);
+    }
 
     // --- [ glCopyTextureSubImage2D ] ---
 
@@ -2277,7 +2393,9 @@ public class ARBDirectStateAccess {
      * @param width   the texture subregion width
      * @param height  the texture subregion height
      */
-    public static native void glCopyTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glCopyTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL45.glCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height);
+    }
 
     // --- [ glCopyTextureSubImage3D ] ---
 
@@ -2294,7 +2412,9 @@ public class ARBDirectStateAccess {
      * @param width   the texture subregion width
      * @param height  the texture subregion height
      */
-    public static native void glCopyTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glCopyTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL45.glCopyTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, x, y, width, height);
+    }
 
     // --- [ glTextureParameterf ] ---
 
@@ -2305,12 +2425,16 @@ public class ARBDirectStateAccess {
      * @param pname   the parameter to set
      * @param param   the parameter value
      */
-    public static native void glTextureParameterf(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat") float param);
+    public static void glTextureParameterf(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat") float param) {
+        GL45.glTextureParameterf(texture, pname, param);
+    }
 
     // --- [ glTextureParameterfv ] ---
 
     /** Unsafe version of: {@link #glTextureParameterfv TextureParameterfv} */
-    public static native void nglTextureParameterfv(int texture, int pname, long params);
+    public static void nglTextureParameterfv(int texture, int pname, long params) {
+        GL45.nglTextureParameterfv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL11#glTexParameterfv TexParameterfv}.
@@ -2335,12 +2459,16 @@ public class ARBDirectStateAccess {
      * @param pname   the parameter to set. One of:<br><table><tr><td>{@link GL12#GL_TEXTURE_BASE_LEVEL TEXTURE_BASE_LEVEL}</td><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr><tr><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td><td>{@link GL12#GL_TEXTURE_MAX_LEVEL TEXTURE_MAX_LEVEL}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td></tr><tr><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL11#GL_TEXTURE_PRIORITY TEXTURE_PRIORITY}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_R TEXTURE_SWIZZLE_R}</td></tr><tr><td>{@link GL33#GL_TEXTURE_SWIZZLE_G TEXTURE_SWIZZLE_G}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_B TEXTURE_SWIZZLE_B}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_A TEXTURE_SWIZZLE_A}</td><td>{@link GL33#GL_TEXTURE_SWIZZLE_RGBA TEXTURE_SWIZZLE_RGBA}</td></tr><tr><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL14#GL_DEPTH_TEXTURE_MODE DEPTH_TEXTURE_MODE}</td></tr><tr><td>{@link GL14#GL_GENERATE_MIPMAP GENERATE_MIPMAP}</td></tr></table>
      * @param param   the parameter value
      */
-    public static native void glTextureParameteri(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint") int param);
+    public static void glTextureParameteri(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint") int param) {
+        GL45.glTextureParameteri(texture, pname, param);
+    }
 
     // --- [ glTextureParameterIiv ] ---
 
     /** Unsafe version of: {@link #glTextureParameterIiv TextureParameterIiv} */
-    public static native void nglTextureParameterIiv(int texture, int pname, long params);
+    public static void nglTextureParameterIiv(int texture, int pname, long params) {
+        GL45.nglTextureParameterIiv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL30#glTexParameterIiv TexParameterIiv}.
@@ -2375,7 +2503,9 @@ public class ARBDirectStateAccess {
     // --- [ glTextureParameterIuiv ] ---
 
     /** Unsafe version of: {@link #glTextureParameterIuiv TextureParameterIuiv} */
-    public static native void nglTextureParameterIuiv(int texture, int pname, long params);
+    public static void nglTextureParameterIuiv(int texture, int pname, long params) {
+        GL45.nglTextureParameterIuiv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL30#glTexParameterIuiv TexParameterIuiv}.
@@ -2410,7 +2540,9 @@ public class ARBDirectStateAccess {
     // --- [ glTextureParameteriv ] ---
 
     /** Unsafe version of: {@link #glTextureParameteriv TextureParameteriv} */
-    public static native void nglTextureParameteriv(int texture, int pname, long params);
+    public static void nglTextureParameteriv(int texture, int pname, long params) {
+        GL45.nglTextureParameteriv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL11#glTexParameteriv TexParameteriv}.
@@ -2433,7 +2565,9 @@ public class ARBDirectStateAccess {
      *
      * @param texture the texture name
      */
-    public static native void glGenerateTextureMipmap(@NativeType("GLuint") int texture);
+    public static void glGenerateTextureMipmap(@NativeType("GLuint") int texture) {
+        GL45.glGenerateTextureMipmap(texture);
+    }
 
     // --- [ glBindTextureUnit ] ---
 
@@ -2447,7 +2581,9 @@ public class ARBDirectStateAccess {
      * @param unit    the texture unit number
      * @param texture the texture name
      */
-    public static native void glBindTextureUnit(@NativeType("GLuint") int unit, @NativeType("GLuint") int texture);
+    public static void glBindTextureUnit(@NativeType("GLuint") int unit, @NativeType("GLuint") int texture) {
+        GL45.glBindTextureUnit(unit, texture);
+    }
 
     // --- [ glGetTextureImage ] ---
 
@@ -2456,7 +2592,9 @@ public class ARBDirectStateAccess {
      *
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      */
-    public static native void nglGetTextureImage(int texture, int level, int format, int type, int bufSize, long pixels);
+    public static void nglGetTextureImage(int texture, int level, int format, int type, int bufSize, long pixels) {
+        GL45.nglGetTextureImage(texture, level, format, type, bufSize, pixels);
+    }
 
     /**
      * DSA version of {@link GL11#glGetTexImage GetTexImage}.
@@ -2544,7 +2682,9 @@ public class ARBDirectStateAccess {
      *
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      */
-    public static native void nglGetCompressedTextureImage(int texture, int level, int bufSize, long pixels);
+    public static void nglGetCompressedTextureImage(int texture, int level, int bufSize, long pixels) {
+        GL45.nglGetCompressedTextureImage(texture, level, bufSize, pixels);
+    }
 
     /**
      * DSA version of {@link GL13#glGetCompressedTexImage GetCompressedTexImage}.
@@ -2577,7 +2717,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTextureLevelParameterfv ] ---
 
     /** Unsafe version of: {@link #glGetTextureLevelParameterfv GetTextureLevelParameterfv} */
-    public static native void nglGetTextureLevelParameterfv(int texture, int level, int pname, long params);
+    public static void nglGetTextureLevelParameterfv(int texture, int level, int pname, long params) {
+        GL45.nglGetTextureLevelParameterfv(texture, level, pname, params);
+    }
 
     /**
      * DSA version of {@link GL11#glGetTexLevelParameterfv GetTexLevelParameterfv}.
@@ -2616,7 +2758,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTextureLevelParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetTextureLevelParameteriv GetTextureLevelParameteriv} */
-    public static native void nglGetTextureLevelParameteriv(int texture, int level, int pname, long params);
+    public static void nglGetTextureLevelParameteriv(int texture, int level, int pname, long params) {
+        GL45.nglGetTextureLevelParameteriv(texture, level, pname, params);
+    }
 
     /**
      * DSA version of {@link GL11#glGetTexLevelParameteriv GetTexLevelParameteriv}.
@@ -2655,7 +2799,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTextureParameterfv ] ---
 
     /** Unsafe version of: {@link #glGetTextureParameterfv GetTextureParameterfv} */
-    public static native void nglGetTextureParameterfv(int texture, int pname, long params);
+    public static void nglGetTextureParameterfv(int texture, int pname, long params) {
+        GL45.nglGetTextureParameterfv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL11#glGetTexParameterfv GetTexParameterfv}.
@@ -2692,7 +2838,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTextureParameterIiv ] ---
 
     /** Unsafe version of: {@link #glGetTextureParameterIiv GetTextureParameterIiv} */
-    public static native void nglGetTextureParameterIiv(int texture, int pname, long params);
+    public static void nglGetTextureParameterIiv(int texture, int pname, long params) {
+        GL45.nglGetTextureParameterIiv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL30#glGetTexParameterIiv GetTexParameterIiv}.
@@ -2729,7 +2877,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTextureParameterIuiv ] ---
 
     /** Unsafe version of: {@link #glGetTextureParameterIuiv GetTextureParameterIuiv} */
-    public static native void nglGetTextureParameterIuiv(int texture, int pname, long params);
+    public static void nglGetTextureParameterIuiv(int texture, int pname, long params) {
+        GL45.nglGetTextureParameterIuiv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL30#glGetTexParameterIuiv GetTexParameterIuiv}.
@@ -2766,7 +2916,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetTextureParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetTextureParameteriv GetTextureParameteriv} */
-    public static native void nglGetTextureParameteriv(int texture, int pname, long params);
+    public static void nglGetTextureParameteriv(int texture, int pname, long params) {
+        GL45.nglGetTextureParameteriv(texture, pname, params);
+    }
 
     /**
      * DSA version of {@link GL11#glGetTexParameteriv GetTexParameteriv}.
@@ -2807,7 +2959,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of vertex array object names to create
      */
-    public static native void nglCreateVertexArrays(int n, long arrays);
+    public static void nglCreateVertexArrays(int n, long arrays) {
+        GL45.nglCreateVertexArrays(n, arrays);
+    }
 
     /**
      * Returns {@code n} previously unused vertex array object names in {@code arrays}.
@@ -2839,7 +2993,9 @@ public class ARBDirectStateAccess {
      * @param vaobj the vertex array object name
      * @param index the index of the generic vertex attribute to be disabled
      */
-    public static native void glDisableVertexArrayAttrib(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index);
+    public static void glDisableVertexArrayAttrib(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index) {
+        GL45.glDisableVertexArrayAttrib(vaobj, index);
+    }
 
     // --- [ glEnableVertexArrayAttrib ] ---
 
@@ -2849,7 +3005,9 @@ public class ARBDirectStateAccess {
      * @param vaobj the vertex array object name
      * @param index the index of the generic vertex attribute to be enabled
      */
-    public static native void glEnableVertexArrayAttrib(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index);
+    public static void glEnableVertexArrayAttrib(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index) {
+        GL45.glEnableVertexArrayAttrib(vaobj, index);
+    }
 
     // --- [ glVertexArrayElementBuffer ] ---
 
@@ -2859,7 +3017,9 @@ public class ARBDirectStateAccess {
      * @param vaobj  the vertex array object name
      * @param buffer the buffer object name. If {@code buffer} is zero, any existing element array buffer binding to {@code vaobj} is removed.
      */
-    public static native void glVertexArrayElementBuffer(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int buffer);
+    public static void glVertexArrayElementBuffer(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int buffer) {
+        GL45.glVertexArrayElementBuffer(vaobj, buffer);
+    }
 
     // --- [ glVertexArrayVertexBuffer ] ---
 
@@ -2872,7 +3032,9 @@ public class ARBDirectStateAccess {
      * @param offset       the offset of the first element of the buffer
      * @param stride       the distance between elements within the buffer
      */
-    public static native void glVertexArrayVertexBuffer(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int bindingindex, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizei") int stride);
+    public static void glVertexArrayVertexBuffer(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int bindingindex, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizei") int stride) {
+        GL45.glVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride);
+    }
 
     // --- [ glVertexArrayVertexBuffers ] ---
 
@@ -2881,7 +3043,9 @@ public class ARBDirectStateAccess {
      *
      * @param count the number of vertex buffer binding points
      */
-    public static native void nglVertexArrayVertexBuffers(int vaobj, int first, int count, long buffers, long offsets, long strides);
+    public static void nglVertexArrayVertexBuffers(int vaobj, int first, int count, long buffers, long offsets, long strides) {
+        GL45.nglVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides);
+    }
 
     /**
      * DSA version of {@link GL44#glBindVertexBuffers BindVertexBuffers}.
@@ -2913,7 +3077,9 @@ public class ARBDirectStateAccess {
      *                       directly converted to floating point.
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      */
-    public static native void glVertexArrayAttribFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int relativeoffset);
+    public static void glVertexArrayAttribFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int relativeoffset) {
+        GL45.glVertexArrayAttribFormat(vaobj, attribindex, size, type, normalized, relativeoffset);
+    }
 
     // --- [ glVertexArrayAttribIFormat ] ---
 
@@ -2926,7 +3092,9 @@ public class ARBDirectStateAccess {
      * @param type           the type of the data stored in the array
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      */
-    public static native void glVertexArrayAttribIFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset);
+    public static void glVertexArrayAttribIFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset) {
+        GL45.glVertexArrayAttribIFormat(vaobj, attribindex, size, type, relativeoffset);
+    }
 
     // --- [ glVertexArrayAttribLFormat ] ---
 
@@ -2939,7 +3107,9 @@ public class ARBDirectStateAccess {
      * @param type           the type of the data stored in the array
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      */
-    public static native void glVertexArrayAttribLFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset);
+    public static void glVertexArrayAttribLFormat(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset) {
+        GL45.glVertexArrayAttribLFormat(vaobj, attribindex, size, type, relativeoffset);
+    }
 
     // --- [ glVertexArrayAttribBinding ] ---
 
@@ -2950,7 +3120,9 @@ public class ARBDirectStateAccess {
      * @param attribindex  the index of the attribute to associate with a vertex buffer binding
      * @param bindingindex the index of the vertex buffer binding with which to associate the generic vertex attribute
      */
-    public static native void glVertexArrayAttribBinding(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLuint") int bindingindex);
+    public static void glVertexArrayAttribBinding(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int attribindex, @NativeType("GLuint") int bindingindex) {
+        GL45.glVertexArrayAttribBinding(vaobj, attribindex, bindingindex);
+    }
 
     // --- [ glVertexArrayBindingDivisor ] ---
 
@@ -2961,12 +3133,16 @@ public class ARBDirectStateAccess {
      * @param bindingindex the index of the generic vertex attribute
      * @param divisor      the number of instances that will pass between updates of the generic attribute at slot {@code index}
      */
-    public static native void glVertexArrayBindingDivisor(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int bindingindex, @NativeType("GLuint") int divisor);
+    public static void glVertexArrayBindingDivisor(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int bindingindex, @NativeType("GLuint") int divisor) {
+        GL45.glVertexArrayBindingDivisor(vaobj, bindingindex, divisor);
+    }
 
     // --- [ glGetVertexArrayiv ] ---
 
     /** Unsafe version of: {@link #glGetVertexArrayiv GetVertexArrayiv} */
-    public static native void nglGetVertexArrayiv(int vaobj, int pname, long param);
+    public static void nglGetVertexArrayiv(int vaobj, int pname, long param) {
+        GL45.nglGetVertexArrayiv(vaobj, pname, param);
+    }
 
     /**
      * Queries parameters of a vertex array object.
@@ -3003,7 +3179,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetVertexArrayIndexediv ] ---
 
     /** Unsafe version of: {@link #glGetVertexArrayIndexediv GetVertexArrayIndexediv} */
-    public static native void nglGetVertexArrayIndexediv(int vaobj, int index, int pname, long param);
+    public static void nglGetVertexArrayIndexediv(int vaobj, int index, int pname, long param) {
+        GL45.nglGetVertexArrayIndexediv(vaobj, index, pname, param);
+    }
 
     /**
      * Queries parameters of an attribute of a vertex array object.
@@ -3042,7 +3220,9 @@ public class ARBDirectStateAccess {
     // --- [ glGetVertexArrayIndexed64iv ] ---
 
     /** Unsafe version of: {@link #glGetVertexArrayIndexed64iv GetVertexArrayIndexed64iv} */
-    public static native void nglGetVertexArrayIndexed64iv(int vaobj, int index, int pname, long param);
+    public static void nglGetVertexArrayIndexed64iv(int vaobj, int index, int pname, long param) {
+        GL45.nglGetVertexArrayIndexed64iv(vaobj, index, pname, param);
+    }
 
     /**
      * Queries parameters of an attribute of a vertex array object.
@@ -3085,7 +3265,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of sampler object names to create
      */
-    public static native void nglCreateSamplers(int n, long samplers);
+    public static void nglCreateSamplers(int n, long samplers) {
+        GL45.nglCreateSamplers(n, samplers);
+    }
 
     /**
      * Returns {@code n} previously unused sampler names in {@code samplers}, each representing a new sampler object.
@@ -3116,7 +3298,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of program pipeline names to create
      */
-    public static native void nglCreateProgramPipelines(int n, long pipelines);
+    public static void nglCreateProgramPipelines(int n, long pipelines) {
+        GL45.nglCreateProgramPipelines(n, pipelines);
+    }
 
     /**
      * Returns {@code n} previously unused program pipeline names in {@code pipelines}, each representing a new program pipeline object.
@@ -3147,7 +3331,9 @@ public class ARBDirectStateAccess {
      *
      * @param n the number of query object names to create
      */
-    public static native void nglCreateQueries(int target, int n, long ids);
+    public static void nglCreateQueries(int target, int n, long ids) {
+        GL45.nglCreateQueries(target, n, ids);
+    }
 
     /**
      * Returns {@code n} previously unused query object names in {@code ids}, each representing a new query object with the specified {@code target}.
@@ -3186,7 +3372,9 @@ public class ARBDirectStateAccess {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      */
-    public static native void glGetQueryBufferObjecti64v(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset);
+    public static void glGetQueryBufferObjecti64v(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
+        GL45.glGetQueryBufferObjecti64v(id, buffer, pname, offset);
+    }
 
     // --- [ glGetQueryBufferObjectiv ] ---
 
@@ -3198,7 +3386,9 @@ public class ARBDirectStateAccess {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      */
-    public static native void glGetQueryBufferObjectiv(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset);
+    public static void glGetQueryBufferObjectiv(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
+        GL45.glGetQueryBufferObjectiv(id, buffer, pname, offset);
+    }
 
     // --- [ glGetQueryBufferObjectui64v ] ---
 
@@ -3210,7 +3400,9 @@ public class ARBDirectStateAccess {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      */
-    public static native void glGetQueryBufferObjectui64v(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset);
+    public static void glGetQueryBufferObjectui64v(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
+        GL45.glGetQueryBufferObjectui64v(id, buffer, pname, offset);
+    }
 
     // --- [ glGetQueryBufferObjectuiv ] ---
 
@@ -3222,7 +3414,9 @@ public class ARBDirectStateAccess {
      * @param pname  the state to query
      * @param offset the offset into {@code buffer} at which the queried value is written
      */
-    public static native void glGetQueryBufferObjectuiv(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset);
+    public static void glGetQueryBufferObjectuiv(@NativeType("GLuint") int id, @NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLintptr") long offset) {
+        GL45.glGetQueryBufferObjectuiv(id, buffer, pname, offset);
+    }
 
     /** Array version of: {@link #glCreateTransformFeedbacks CreateTransformFeedbacks} */
     public static void glCreateTransformFeedbacks(@NativeType("GLuint *") int[] ids) {
@@ -3396,6 +3590,60 @@ public class ARBDirectStateAccess {
             check(__functionAddress);
         }
         callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 3, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
+    public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
+    public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
+    public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
+    public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
+    public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
+    public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
     }
 
     /** Array version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv} */

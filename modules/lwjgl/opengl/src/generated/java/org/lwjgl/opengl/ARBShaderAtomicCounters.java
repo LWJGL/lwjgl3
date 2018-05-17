@@ -111,7 +111,9 @@ public class ARBShaderAtomicCounters {
     // --- [ glGetActiveAtomicCounterBufferiv ] ---
 
     /** Unsafe version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv} */
-    public static native void nglGetActiveAtomicCounterBufferiv(int program, int bufferIndex, int pname, long params);
+    public static void nglGetActiveAtomicCounterBufferiv(int program, int bufferIndex, int pname, long params) {
+        GL42.nglGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
+    }
 
     /**
      * Obtains information about the set of active atomic counter buffers for a program.

@@ -189,7 +189,9 @@ public class EXTTransformFeedback {
 
     // --- [ glGetIntegerIndexedvEXT ] ---
 
-    public static native void nglGetIntegerIndexedvEXT(int target, int index, long data);
+    public static void nglGetIntegerIndexedvEXT(int target, int index, long data) {
+        EXTDrawBuffers2.nglGetIntegerIndexedvEXT(target, index, data);
+    }
 
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer data) {
         if (CHECKS) {
@@ -212,7 +214,9 @@ public class EXTTransformFeedback {
 
     // --- [ glGetBooleanIndexedvEXT ] ---
 
-    public static native void nglGetBooleanIndexedvEXT(int target, int index, long data);
+    public static void nglGetBooleanIndexedvEXT(int target, int index, long data) {
+        EXTDrawBuffers2.nglGetBooleanIndexedvEXT(target, index, data);
+    }
 
     public static void glGetBooleanIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLboolean *") ByteBuffer data) {
         if (CHECKS) {

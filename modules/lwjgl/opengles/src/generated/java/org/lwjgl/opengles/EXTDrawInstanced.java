@@ -34,11 +34,15 @@ public class EXTDrawInstanced {
 
     // --- [ glDrawArraysInstancedEXT ] ---
 
-    public static native void glDrawArraysInstancedEXT(@NativeType("GLenum") int mode, @NativeType("GLint") int start, @NativeType("GLsizei") int count, @NativeType("GLsizei") int primcount);
+    public static void glDrawArraysInstancedEXT(@NativeType("GLenum") int mode, @NativeType("GLint") int start, @NativeType("GLsizei") int count, @NativeType("GLsizei") int primcount) {
+        EXTInstancedArrays.glDrawArraysInstancedEXT(mode, start, count, primcount);
+    }
 
     // --- [ glDrawElementsInstancedEXT ] ---
 
-    public static native void nglDrawElementsInstancedEXT(int mode, int count, int type, long indices, int primcount);
+    public static void nglDrawElementsInstancedEXT(int mode, int count, int type, long indices, int primcount) {
+        EXTInstancedArrays.nglDrawElementsInstancedEXT(mode, count, type, indices, primcount);
+    }
 
     public static void glDrawElementsInstancedEXT(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount) {
         nglDrawElementsInstancedEXT(mode, count, type, indices, primcount);

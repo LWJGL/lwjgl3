@@ -89,6 +89,8 @@ public class ARBShaderStorageBufferObject {
      * @param storageBlockIndex   the index storage block within the program
      * @param storageBlockBinding the index storage block binding to associate with the specified storage block
      */
-    public static native void glShaderStorageBlockBinding(@NativeType("GLuint") int program, @NativeType("GLuint") int storageBlockIndex, @NativeType("GLuint") int storageBlockBinding);
+    public static void glShaderStorageBlockBinding(@NativeType("GLuint") int program, @NativeType("GLuint") int storageBlockIndex, @NativeType("GLuint") int storageBlockBinding) {
+        GL43.glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
+    }
 
 }

@@ -43,7 +43,9 @@ public class ARBMultiDrawIndirect {
     // --- [ glMultiDrawArraysIndirect ] ---
 
     /** Unsafe version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect} */
-    public static native void nglMultiDrawArraysIndirect(int mode, long indirect, int primcount, int stride);
+    public static void nglMultiDrawArraysIndirect(int mode, long indirect, int primcount, int stride) {
+        GL43.nglMultiDrawArraysIndirect(mode, indirect, primcount, stride);
+    }
 
     /**
      * Renders multiple sets of primitives from array data, taking parameters from memory.
@@ -156,7 +158,9 @@ public class ARBMultiDrawIndirect {
     // --- [ glMultiDrawElementsIndirect ] ---
 
     /** Unsafe version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect} */
-    public static native void nglMultiDrawElementsIndirect(int mode, int type, long indirect, int primcount, int stride);
+    public static void nglMultiDrawElementsIndirect(int mode, int type, long indirect, int primcount, int stride) {
+        GL43.nglMultiDrawElementsIndirect(mode, type, indirect, primcount, stride);
+    }
 
     /**
      * Renders multiple indexed primitives from array data, taking parameters from memory.

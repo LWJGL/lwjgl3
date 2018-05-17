@@ -86,12 +86,16 @@ public class ARBFramebufferNoAttachments {
      * @param pname  a token indicating the parameter to be modified. One of:<br><table><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link GL43#GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * @param param  the new value for the parameter named {@code pname}
      */
-    public static native void glFramebufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint") int param);
+    public static void glFramebufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint") int param) {
+        GL43.glFramebufferParameteri(target, pname, param);
+    }
 
     // --- [ glGetFramebufferParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv} */
-    public static native void nglGetFramebufferParameteriv(int target, int pname, long params);
+    public static void nglGetFramebufferParameteriv(int target, int pname, long params) {
+        GL43.nglGetFramebufferParameteriv(target, pname, params);
+    }
 
     /**
      * Retrieves a named parameter from a framebuffer.

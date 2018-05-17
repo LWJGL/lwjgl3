@@ -120,7 +120,9 @@ public class ARBSeparateShaderObjects {
      * @param stages   a set of program stages to bind to the program pipeline object
      * @param program  the program object containing the shader executables to use in {@code pipeline}
      */
-    public static native void glUseProgramStages(@NativeType("GLuint") int pipeline, @NativeType("GLbitfield") int stages, @NativeType("GLuint") int program);
+    public static void glUseProgramStages(@NativeType("GLuint") int pipeline, @NativeType("GLbitfield") int stages, @NativeType("GLuint") int program) {
+        GL41.glUseProgramStages(pipeline, stages, program);
+    }
 
     // --- [ glActiveShaderProgram ] ---
 
@@ -130,7 +132,9 @@ public class ARBSeparateShaderObjects {
      * @param pipeline the program pipeline object to set the active program object for
      * @param program  the program object to set as the active program pipeline object {@code pipeline}
      */
-    public static native void glActiveShaderProgram(@NativeType("GLuint") int pipeline, @NativeType("GLuint") int program);
+    public static void glActiveShaderProgram(@NativeType("GLuint") int pipeline, @NativeType("GLuint") int program) {
+        GL41.glActiveShaderProgram(pipeline, program);
+    }
 
     // --- [ glCreateShaderProgramv ] ---
 
@@ -139,7 +143,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of source code strings in the array {@code strings}
      */
-    public static native int nglCreateShaderProgramv(int type, int count, long strings);
+    public static int nglCreateShaderProgramv(int type, int count, long strings) {
+        return GL41.nglCreateShaderProgramv(type, count, strings);
+    }
 
     /**
      * Creates a stand-alone program from an array of null-terminated source code strings.
@@ -277,7 +283,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param pipeline the name of the pipeline object to bind to the context
      */
-    public static native void glBindProgramPipeline(@NativeType("GLuint") int pipeline);
+    public static void glBindProgramPipeline(@NativeType("GLuint") int pipeline) {
+        GL41.glBindProgramPipeline(pipeline);
+    }
 
     // --- [ glDeleteProgramPipelines ] ---
 
@@ -286,7 +294,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param n the number of program pipeline objects to delete
      */
-    public static native void nglDeleteProgramPipelines(int n, long pipelines);
+    public static void nglDeleteProgramPipelines(int n, long pipelines) {
+        GL41.nglDeleteProgramPipelines(n, pipelines);
+    }
 
     /**
      * Deletes program pipeline objects.
@@ -315,7 +325,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param n the number of program pipeline object names to reserve
      */
-    public static native void nglGenProgramPipelines(int n, long pipelines);
+    public static void nglGenProgramPipelines(int n, long pipelines) {
+        GL41.nglGenProgramPipelines(n, pipelines);
+    }
 
     /**
      * Reserves program pipeline object names.
@@ -347,7 +359,9 @@ public class ARBSeparateShaderObjects {
      * @param pipeline a value that may be the name of a program pipeline object
      */
     @NativeType("GLboolean")
-    public static native boolean glIsProgramPipeline(@NativeType("GLuint") int pipeline);
+    public static boolean glIsProgramPipeline(@NativeType("GLuint") int pipeline) {
+        return GL41.glIsProgramPipeline(pipeline);
+    }
 
     // --- [ glProgramParameteri ] ---
 
@@ -358,12 +372,16 @@ public class ARBSeparateShaderObjects {
      * @param pname   the name of the parameter to modify. One of:<br><table><tr><td>{@link GL41#GL_PROGRAM_BINARY_RETRIEVABLE_HINT PROGRAM_BINARY_RETRIEVABLE_HINT}</td><td>{@link GL41#GL_PROGRAM_SEPARABLE PROGRAM_SEPARABLE}</td></tr></table>
      * @param value   the new value of the parameter specified by {@code pname} for {@code program}
      */
-    public static native void glProgramParameteri(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint") int value);
+    public static void glProgramParameteri(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint") int value) {
+        GL41.glProgramParameteri(program, pname, value);
+    }
 
     // --- [ glGetProgramPipelineiv ] ---
 
     /** Unsafe version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv} */
-    public static native void nglGetProgramPipelineiv(int pipeline, int pname, long params);
+    public static void nglGetProgramPipelineiv(int pipeline, int pname, long params) {
+        GL41.nglGetProgramPipelineiv(pipeline, pname, params);
+    }
 
     /**
      * Retrieves properties of a program pipeline object.
@@ -406,7 +424,9 @@ public class ARBSeparateShaderObjects {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      */
-    public static native void glProgramUniform1i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x);
+    public static void glProgramUniform1i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x) {
+        GL41.glProgramUniform1i(program, location, x);
+    }
 
     // --- [ glProgramUniform2i ] ---
 
@@ -418,7 +438,9 @@ public class ARBSeparateShaderObjects {
      * @param x        the uniform x value
      * @param y        the uniform y value
      */
-    public static native void glProgramUniform2i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y);
+    public static void glProgramUniform2i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y) {
+        GL41.glProgramUniform2i(program, location, x, y);
+    }
 
     // --- [ glProgramUniform3i ] ---
 
@@ -431,7 +453,9 @@ public class ARBSeparateShaderObjects {
      * @param y        the uniform y value
      * @param z        the uniform z value
      */
-    public static native void glProgramUniform3i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z);
+    public static void glProgramUniform3i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z) {
+        GL41.glProgramUniform3i(program, location, x, y, z);
+    }
 
     // --- [ glProgramUniform4i ] ---
 
@@ -445,7 +469,9 @@ public class ARBSeparateShaderObjects {
      * @param z        the uniform z value
      * @param w        the uniform w value
      */
-    public static native void glProgramUniform4i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w);
+    public static void glProgramUniform4i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w) {
+        GL41.glProgramUniform4i(program, location, x, y, z, w);
+    }
 
     // --- [ glProgramUniform1ui ] ---
 
@@ -456,7 +482,9 @@ public class ARBSeparateShaderObjects {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      */
-    public static native void glProgramUniform1ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x);
+    public static void glProgramUniform1ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x) {
+        GL41.glProgramUniform1ui(program, location, x);
+    }
 
     // --- [ glProgramUniform2ui ] ---
 
@@ -468,7 +496,9 @@ public class ARBSeparateShaderObjects {
      * @param x        the uniform x value
      * @param y        the uniform y value
      */
-    public static native void glProgramUniform2ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y);
+    public static void glProgramUniform2ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y) {
+        GL41.glProgramUniform2ui(program, location, x, y);
+    }
 
     // --- [ glProgramUniform3ui ] ---
 
@@ -481,7 +511,9 @@ public class ARBSeparateShaderObjects {
      * @param y        the uniform y value
      * @param z        the uniform z value
      */
-    public static native void glProgramUniform3ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y, @NativeType("GLuint") int z);
+    public static void glProgramUniform3ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y, @NativeType("GLuint") int z) {
+        GL41.glProgramUniform3ui(program, location, x, y, z);
+    }
 
     // --- [ glProgramUniform4ui ] ---
 
@@ -495,7 +527,9 @@ public class ARBSeparateShaderObjects {
      * @param z        the uniform z value
      * @param w        the uniform w value
      */
-    public static native void glProgramUniform4ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y, @NativeType("GLuint") int z, @NativeType("GLuint") int w);
+    public static void glProgramUniform4ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y, @NativeType("GLuint") int z, @NativeType("GLuint") int w) {
+        GL41.glProgramUniform4ui(program, location, x, y, z, w);
+    }
 
     // --- [ glProgramUniform1f ] ---
 
@@ -506,7 +540,9 @@ public class ARBSeparateShaderObjects {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      */
-    public static native void glProgramUniform1f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x);
+    public static void glProgramUniform1f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x) {
+        GL41.glProgramUniform1f(program, location, x);
+    }
 
     // --- [ glProgramUniform2f ] ---
 
@@ -518,7 +554,9 @@ public class ARBSeparateShaderObjects {
      * @param x        the uniform x value
      * @param y        the uniform y value
      */
-    public static native void glProgramUniform2f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y);
+    public static void glProgramUniform2f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y) {
+        GL41.glProgramUniform2f(program, location, x, y);
+    }
 
     // --- [ glProgramUniform3f ] ---
 
@@ -531,7 +569,9 @@ public class ARBSeparateShaderObjects {
      * @param y        the uniform y value
      * @param z        the uniform z value
      */
-    public static native void glProgramUniform3f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z);
+    public static void glProgramUniform3f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z) {
+        GL41.glProgramUniform3f(program, location, x, y, z);
+    }
 
     // --- [ glProgramUniform4f ] ---
 
@@ -545,7 +585,9 @@ public class ARBSeparateShaderObjects {
      * @param z        the uniform z value
      * @param w        the uniform w value
      */
-    public static native void glProgramUniform4f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z, @NativeType("GLfloat") float w);
+    public static void glProgramUniform4f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z, @NativeType("GLfloat") float w) {
+        GL41.glProgramUniform4f(program, location, x, y, z, w);
+    }
 
     // --- [ glProgramUniform1d ] ---
 
@@ -556,7 +598,9 @@ public class ARBSeparateShaderObjects {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      */
-    public static native void glProgramUniform1d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x);
+    public static void glProgramUniform1d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x) {
+        GL41.glProgramUniform1d(program, location, x);
+    }
 
     // --- [ glProgramUniform2d ] ---
 
@@ -568,7 +612,9 @@ public class ARBSeparateShaderObjects {
      * @param x        the uniform x value
      * @param y        the uniform y value
      */
-    public static native void glProgramUniform2d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y);
+    public static void glProgramUniform2d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y) {
+        GL41.glProgramUniform2d(program, location, x, y);
+    }
 
     // --- [ glProgramUniform3d ] ---
 
@@ -581,7 +627,9 @@ public class ARBSeparateShaderObjects {
      * @param y        the uniform y value
      * @param z        the uniform z value
      */
-    public static native void glProgramUniform3d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z);
+    public static void glProgramUniform3d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z) {
+        GL41.glProgramUniform3d(program, location, x, y, z);
+    }
 
     // --- [ glProgramUniform4d ] ---
 
@@ -595,7 +643,9 @@ public class ARBSeparateShaderObjects {
      * @param z        the uniform z value
      * @param w        the uniform w value
      */
-    public static native void glProgramUniform4d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w);
+    public static void glProgramUniform4d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w) {
+        GL41.glProgramUniform4d(program, location, x, y, z, w);
+    }
 
     // --- [ glProgramUniform1iv ] ---
 
@@ -604,7 +654,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform1iv(int program, int location, int count, long value);
+    public static void nglProgramUniform1iv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform1iv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.
@@ -624,7 +676,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform2iv(int program, int location, int count, long value);
+    public static void nglProgramUniform2iv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform2iv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single ivec2 uniform variable or an ivec2 uniform variable array for a specified program object.
@@ -644,7 +698,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform3iv(int program, int location, int count, long value);
+    public static void nglProgramUniform3iv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform3iv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single ivec3 uniform variable or an ivec3 uniform variable array for a specified program object.
@@ -664,7 +720,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform4iv(int program, int location, int count, long value);
+    public static void nglProgramUniform4iv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform4iv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single ivec4 uniform variable or an ivec4 uniform variable array for a specified program object.
@@ -684,7 +742,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform1uiv(int program, int location, int count, long value);
+    public static void nglProgramUniform1uiv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform1uiv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single uint uniform variable or a uint uniform variable array for a specified program object.
@@ -704,7 +764,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform2uiv(int program, int location, int count, long value);
+    public static void nglProgramUniform2uiv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform2uiv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for a specified program object.
@@ -724,7 +786,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform3uiv(int program, int location, int count, long value);
+    public static void nglProgramUniform3uiv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform3uiv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for a specified program object.
@@ -744,7 +808,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform4uiv(int program, int location, int count, long value);
+    public static void nglProgramUniform4uiv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform4uiv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for a specified program object.
@@ -764,7 +830,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform1fv(int program, int location, int count, long value);
+    public static void nglProgramUniform1fv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform1fv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.
@@ -784,7 +852,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform2fv(int program, int location, int count, long value);
+    public static void nglProgramUniform2fv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform2fv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single vec2 uniform variable or a vec2 uniform variable array for a specified program object.
@@ -804,7 +874,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform3fv(int program, int location, int count, long value);
+    public static void nglProgramUniform3fv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform3fv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single vec3 uniform variable or a vec3 uniform variable array for a specified program object.
@@ -824,7 +896,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform4fv(int program, int location, int count, long value);
+    public static void nglProgramUniform4fv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform4fv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single vec4 uniform variable or a vec4 uniform variable array for a specified program object.
@@ -844,7 +918,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform1dv(int program, int location, int count, long value);
+    public static void nglProgramUniform1dv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform1dv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single double uniform variable or a double uniform variable array for a specified program object.
@@ -864,7 +940,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform2dv(int program, int location, int count, long value);
+    public static void nglProgramUniform2dv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform2dv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for a specified program object.
@@ -884,7 +962,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform3dv(int program, int location, int count, long value);
+    public static void nglProgramUniform3dv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform3dv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for a specified program object.
@@ -904,7 +984,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglProgramUniform4dv(int program, int location, int count, long value);
+    public static void nglProgramUniform4dv(int program, int location, int count, long value) {
+        GL41.nglProgramUniform4dv(program, location, count, value);
+    }
 
     /**
      * Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for a specified program object.
@@ -924,7 +1006,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix2fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix2fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix2fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat2 uniform variable or a mat2 uniform variable array for the current program object.
@@ -945,7 +1029,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix3fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix3fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix3fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat3 uniform variable or a mat3 uniform variable array for the current program object.
@@ -966,7 +1052,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix4fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix4fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix4fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat4 uniform variable or a mat4 uniform variable array for the current program object.
@@ -987,7 +1075,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix2dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix2dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix2dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.
@@ -1008,7 +1098,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix3dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix3dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix3dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.
@@ -1029,7 +1121,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix4dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix4dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix4dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.
@@ -1050,7 +1144,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix2x3fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix2x3fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix2x3fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.
@@ -1071,7 +1167,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix3x2fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix3x2fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix3x2fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.
@@ -1092,7 +1190,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix2x4fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix2x4fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix2x4fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.
@@ -1113,7 +1213,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix4x2fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix4x2fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix4x2fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.
@@ -1134,7 +1236,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix3x4fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix3x4fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix3x4fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.
@@ -1155,7 +1259,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix4x3fv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix4x3fv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix4x3fv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.
@@ -1176,7 +1282,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix2x3dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix2x3dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix2x3dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.
@@ -1197,7 +1305,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix3x2dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix3x2dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix3x2dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.
@@ -1218,7 +1328,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix2x4dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix2x4dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix2x4dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.
@@ -1239,7 +1351,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix4x2dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix4x2dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix4x2dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.
@@ -1260,7 +1374,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix3x4dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix3x4dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix3x4dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.
@@ -1281,7 +1397,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglProgramUniformMatrix4x3dv(int program, int location, int count, boolean transpose, long value);
+    public static void nglProgramUniformMatrix4x3dv(int program, int location, int count, boolean transpose, long value) {
+        GL41.nglProgramUniformMatrix4x3dv(program, location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.
@@ -1302,7 +1420,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param pipeline the name of a program pipeline object to validate
      */
-    public static native void glValidateProgramPipeline(@NativeType("GLuint") int pipeline);
+    public static void glValidateProgramPipeline(@NativeType("GLuint") int pipeline) {
+        GL41.glValidateProgramPipeline(pipeline);
+    }
 
     // --- [ glGetProgramPipelineInfoLog ] ---
 
@@ -1311,7 +1431,9 @@ public class ARBSeparateShaderObjects {
      *
      * @param bufSize the maximum number of characters, including the null terminator, that may be written into {@code infoLog}
      */
-    public static native void nglGetProgramPipelineInfoLog(int pipeline, int bufSize, long length, long infoLog);
+    public static void nglGetProgramPipelineInfoLog(int pipeline, int bufSize, long length, long infoLog) {
+        GL41.nglGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog);
+    }
 
     /**
      * Retrieves the info log string from a program pipeline object.

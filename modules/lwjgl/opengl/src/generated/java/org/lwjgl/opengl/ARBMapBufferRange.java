@@ -59,7 +59,9 @@ public class ARBMapBufferRange {
     // --- [ glMapBufferRange ] ---
 
     /** Unsafe version of: {@link #glMapBufferRange MapBufferRange} */
-    public static native long nglMapBufferRange(int target, long offset, long length, int access);
+    public static long nglMapBufferRange(int target, long offset, long length, int access) {
+        return GL30.nglMapBufferRange(target, offset, length, access);
+    }
 
     /**
      * Maps a section of a buffer object's data store.
@@ -114,6 +116,8 @@ public class ARBMapBufferRange {
      * @param offset the start of the buffer subrange, in basic machine units
      * @param length the length of the buffer subrange, in basic machine units
      */
-    public static native void glFlushMappedBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length);
+    public static void glFlushMappedBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length) {
+        GL30.glFlushMappedBufferRange(target, offset, length);
+    }
 
 }

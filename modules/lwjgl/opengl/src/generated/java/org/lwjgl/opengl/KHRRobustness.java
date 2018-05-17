@@ -123,7 +123,9 @@ public class KHRRobustness {
      * </ul>
      */
     @NativeType("GLenum")
-    public static native int glGetGraphicsResetStatus();
+    public static int glGetGraphicsResetStatus() {
+        return GL45.glGetGraphicsResetStatus();
+    }
 
     // --- [ glReadnPixels ] ---
 
@@ -132,7 +134,9 @@ public class KHRRobustness {
      *
      * @param bufSize the maximum number of bytes to write into {@code data}
      */
-    public static native void nglReadnPixels(int x, int y, int width, int height, int format, int type, int bufSize, long pixels);
+    public static void nglReadnPixels(int x, int y, int width, int height, int format, int type, int bufSize, long pixels) {
+        GL45.nglReadnPixels(x, y, width, height, format, type, bufSize, pixels);
+    }
 
     /**
      * Behaves identically to {@link GL11#glReadPixels ReadPixels} except that it does not write more than {@code bufSize} bytes into {@code data}
@@ -217,7 +221,9 @@ public class KHRRobustness {
      *
      * @param bufSize the maximum number of bytes to write to {@code params}
      */
-    public static native void nglGetnUniformfv(int program, int location, int bufSize, long params);
+    public static void nglGetnUniformfv(int program, int location, int bufSize, long params) {
+        GL45.nglGetnUniformfv(program, location, bufSize, params);
+    }
 
     /**
      * Returns the value or values of a uniform of the default uniform block.
@@ -255,7 +261,9 @@ public class KHRRobustness {
      *
      * @param bufSize the maximum number of bytes to write to {@code params}
      */
-    public static native void nglGetnUniformiv(int program, int location, int bufSize, long params);
+    public static void nglGetnUniformiv(int program, int location, int bufSize, long params) {
+        GL45.nglGetnUniformiv(program, location, bufSize, params);
+    }
 
     /**
      * Integer version of {@link #glGetnUniformfv GetnUniformfv}.
@@ -293,7 +301,9 @@ public class KHRRobustness {
      *
      * @param bufSize the maximum number of bytes to write to {@code params}
      */
-    public static native void nglGetnUniformuiv(int program, int location, int bufSize, long params);
+    public static void nglGetnUniformuiv(int program, int location, int bufSize, long params) {
+        GL45.nglGetnUniformuiv(program, location, bufSize, params);
+    }
 
     /**
      * Unsigned version of {@link #glGetnUniformiv GetnUniformiv}.

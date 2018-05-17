@@ -91,12 +91,16 @@ public class ARBSync {
      *                  be zero.
      */
     @NativeType("GLsync")
-    public static native long glFenceSync(@NativeType("GLenum") int condition, @NativeType("GLbitfield") int flags);
+    public static long glFenceSync(@NativeType("GLenum") int condition, @NativeType("GLbitfield") int flags) {
+        return GL32.glFenceSync(condition, flags);
+    }
 
     // --- [ glIsSync ] ---
 
     /** Unsafe version of: {@link #glIsSync IsSync} */
-    public static native boolean nglIsSync(long sync);
+    public static boolean nglIsSync(long sync) {
+        return GL32.nglIsSync(sync);
+    }
 
     /**
      * Determines if a name corresponds to a sync object.
@@ -114,7 +118,9 @@ public class ARBSync {
     // --- [ glDeleteSync ] ---
 
     /** Unsafe version of: {@link #glDeleteSync DeleteSync} */
-    public static native void nglDeleteSync(long sync);
+    public static void nglDeleteSync(long sync) {
+        GL32.nglDeleteSync(sync);
+    }
 
     /**
      * Deletes a sync object.
@@ -131,7 +137,9 @@ public class ARBSync {
     // --- [ glClientWaitSync ] ---
 
     /** Unsafe version of: {@link #glClientWaitSync ClientWaitSync} */
-    public static native int nglClientWaitSync(long sync, int flags, long timeout);
+    public static int nglClientWaitSync(long sync, int flags, long timeout) {
+        return GL32.nglClientWaitSync(sync, flags, timeout);
+    }
 
     /**
      * Causes the client to block and wait for a sync object to become signaled. If {@code sync} is signaled when {@code glClientWaitSync} is called,
@@ -161,7 +169,9 @@ public class ARBSync {
     // --- [ glWaitSync ] ---
 
     /** Unsafe version of: {@link #glWaitSync WaitSync} */
-    public static native void nglWaitSync(long sync, int flags, long timeout);
+    public static void nglWaitSync(long sync, int flags, long timeout) {
+        GL32.nglWaitSync(sync, flags, timeout);
+    }
 
     /**
      * Causes the GL server to block and wait for a sync object to become signaled.
@@ -186,7 +196,9 @@ public class ARBSync {
     // --- [ glGetInteger64v ] ---
 
     /** Unsafe version of: {@link #glGetInteger64v GetInteger64v} */
-    public static native void nglGetInteger64v(int pname, long params);
+    public static void nglGetInteger64v(int pname, long params) {
+        GL32.nglGetInteger64v(pname, params);
+    }
 
     /**
      * Returns the 64bit integer value or values of a selected parameter.
@@ -225,7 +237,9 @@ public class ARBSync {
      *
      * @param bufSize the size of the buffer whose address is given in {@code values}
      */
-    public static native void nglGetSynciv(long sync, int pname, int bufSize, long length, long values);
+    public static void nglGetSynciv(long sync, int pname, int bufSize, long length, long values) {
+        GL32.nglGetSynciv(sync, pname, bufSize, length, values);
+    }
 
     /**
      * Queries the properties of a sync object.

@@ -11,7 +11,7 @@ typedef void (APIENTRY *glViewportSwizzleNVPROC) (jint, jint, jint, jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportSwizzle_glViewportSwizzleNV(JNIEnv *__env, jclass clazz, jint index, jint swizzlex, jint swizzley, jint swizzlez, jint swizzlew) {
-    glViewportSwizzleNVPROC glViewportSwizzleNV = (glViewportSwizzleNVPROC)tlsGetFunction(754);
+    glViewportSwizzleNVPROC glViewportSwizzleNV = (glViewportSwizzleNVPROC)tlsGetFunction(757);
     UNUSED_PARAM(clazz)
     glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew);
 }

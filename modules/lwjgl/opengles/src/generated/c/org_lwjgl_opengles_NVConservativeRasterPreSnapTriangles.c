@@ -11,7 +11,7 @@ typedef void (APIENTRY *glConservativeRasterParameteriNVPROC) (jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVConservativeRasterPreSnapTriangles_glConservativeRasterParameteriNV(JNIEnv *__env, jclass clazz, jint pname, jint param) {
-    glConservativeRasterParameteriNVPROC glConservativeRasterParameteriNV = (glConservativeRasterParameteriNVPROC)tlsGetFunction(606);
+    glConservativeRasterParameteriNVPROC glConservativeRasterParameteriNV = (glConservativeRasterParameteriNVPROC)tlsGetFunction(609);
     UNUSED_PARAM(clazz)
     glConservativeRasterParameteriNV(pname, param);
 }

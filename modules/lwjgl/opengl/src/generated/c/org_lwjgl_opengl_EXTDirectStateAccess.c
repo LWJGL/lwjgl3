@@ -90,11 +90,6 @@ typedef void (APIENTRY *glGetPointerIndexedvEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glGetFloati_vEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glGetDoublei_vEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glGetPointeri_vEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glEnableIndexedEXTPROC) (jint, jint);
-typedef void (APIENTRY *glDisableIndexedEXTPROC) (jint, jint);
-typedef jboolean (APIENTRY *glIsEnabledIndexedEXTPROC) (jint, jint);
-typedef void (APIENTRY *glGetIntegerIndexedvEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetBooleanIndexedvEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glNamedProgramStringEXTPROC) (jint, jint, jint, jint, intptr_t);
 typedef void (APIENTRY *glNamedProgramLocalParameter4dEXTPROC) (jint, jint, jint, jdouble, jdouble, jdouble, jdouble);
 typedef void (APIENTRY *glNamedProgramLocalParameter4dvEXTPROC) (jint, jint, jint, intptr_t);
@@ -775,38 +770,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_nglGetPointeri
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetPointeri_vEXT(pname, index, params);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glEnableIndexedEXT(JNIEnv *__env, jclass clazz, jint target, jint index) {
-    glEnableIndexedEXTPROC glEnableIndexedEXT = (glEnableIndexedEXTPROC)tlsGetFunction(1687);
-    UNUSED_PARAM(clazz)
-    glEnableIndexedEXT(target, index);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glDisableIndexedEXT(JNIEnv *__env, jclass clazz, jint target, jint index) {
-    glDisableIndexedEXTPROC glDisableIndexedEXT = (glDisableIndexedEXTPROC)tlsGetFunction(1688);
-    UNUSED_PARAM(clazz)
-    glDisableIndexedEXT(target, index);
-}
-
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glIsEnabledIndexedEXT(JNIEnv *__env, jclass clazz, jint target, jint index) {
-    glIsEnabledIndexedEXTPROC glIsEnabledIndexedEXT = (glIsEnabledIndexedEXTPROC)tlsGetFunction(1689);
-    UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnabledIndexedEXT(target, index);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_nglGetIntegerIndexedvEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
-    glGetIntegerIndexedvEXTPROC glGetIntegerIndexedvEXT = (glGetIntegerIndexedvEXTPROC)tlsGetFunction(1686);
-    intptr_t data = (intptr_t)dataAddress;
-    UNUSED_PARAM(clazz)
-    glGetIntegerIndexedvEXT(target, index, data);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_nglGetBooleanIndexedvEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
-    glGetBooleanIndexedvEXTPROC glGetBooleanIndexedvEXT = (glGetBooleanIndexedvEXTPROC)tlsGetFunction(1685);
-    intptr_t data = (intptr_t)dataAddress;
-    UNUSED_PARAM(clazz)
-    glGetBooleanIndexedvEXT(target, index, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_nglNamedProgramStringEXT(JNIEnv *__env, jclass clazz, jint program, jint target, jint format, jint len, jlong stringAddress) {

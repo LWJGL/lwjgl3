@@ -11,7 +11,7 @@ typedef void (APIENTRY *glRenderbufferStorageMultisampleNVPROC) (jint, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFramebufferMultisample_glRenderbufferStorageMultisampleNV(JNIEnv *__env, jclass clazz, jint target, jint samples, jint internalformat, jint width, jint height) {
-    glRenderbufferStorageMultisampleNVPROC glRenderbufferStorageMultisampleNV = (glRenderbufferStorageMultisampleNVPROC)tlsGetFunction(630);
+    glRenderbufferStorageMultisampleNVPROC glRenderbufferStorageMultisampleNV = (glRenderbufferStorageMultisampleNVPROC)tlsGetFunction(633);
     UNUSED_PARAM(clazz)
     glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height);
 }

@@ -209,8 +209,9 @@ fun String.nativeClassGLES(
     library = "GLES.initialize();",
     init = {
         init()
-        if (functions.any())
+        if (!skipNative) {
             nativeImport("opengles.h")
+        }
     }
 )
 

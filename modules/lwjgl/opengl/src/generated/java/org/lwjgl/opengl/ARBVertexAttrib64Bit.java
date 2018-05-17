@@ -80,7 +80,9 @@ public class ARBVertexAttrib64Bit {
      * @param index the index of the generic vertex attribute to be modified
      * @param x     the vertex attribute x component
      */
-    public static native void glVertexAttribL1d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x);
+    public static void glVertexAttribL1d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x) {
+        GL41.glVertexAttribL1d(index, x);
+    }
 
     // --- [ glVertexAttribL2d ] ---
 
@@ -91,7 +93,9 @@ public class ARBVertexAttrib64Bit {
      * @param x     the vertex attribute x component
      * @param y     the vertex attribute y component
      */
-    public static native void glVertexAttribL2d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y);
+    public static void glVertexAttribL2d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y) {
+        GL41.glVertexAttribL2d(index, x, y);
+    }
 
     // --- [ glVertexAttribL3d ] ---
 
@@ -103,7 +107,9 @@ public class ARBVertexAttrib64Bit {
      * @param y     the vertex attribute y component
      * @param z     the vertex attribute z component
      */
-    public static native void glVertexAttribL3d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z);
+    public static void glVertexAttribL3d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z) {
+        GL41.glVertexAttribL3d(index, x, y, z);
+    }
 
     // --- [ glVertexAttribL4d ] ---
 
@@ -116,12 +122,16 @@ public class ARBVertexAttrib64Bit {
      * @param z     the vertex attribute z component
      * @param w     the vertex attribute w component
      */
-    public static native void glVertexAttribL4d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w);
+    public static void glVertexAttribL4d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w) {
+        GL41.glVertexAttribL4d(index, x, y, z, w);
+    }
 
     // --- [ glVertexAttribL1dv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribL1dv VertexAttribL1dv} */
-    public static native void nglVertexAttribL1dv(int index, long v);
+    public static void nglVertexAttribL1dv(int index, long v) {
+        GL41.nglVertexAttribL1dv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribL1d VertexAttribL1d}.
@@ -139,7 +149,9 @@ public class ARBVertexAttrib64Bit {
     // --- [ glVertexAttribL2dv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribL2dv VertexAttribL2dv} */
-    public static native void nglVertexAttribL2dv(int index, long v);
+    public static void nglVertexAttribL2dv(int index, long v) {
+        GL41.nglVertexAttribL2dv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribL2d VertexAttribL2d}.
@@ -157,7 +169,9 @@ public class ARBVertexAttrib64Bit {
     // --- [ glVertexAttribL3dv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribL3dv VertexAttribL3dv} */
-    public static native void nglVertexAttribL3dv(int index, long v);
+    public static void nglVertexAttribL3dv(int index, long v) {
+        GL41.nglVertexAttribL3dv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribL3d VertexAttribL3d}.
@@ -175,7 +189,9 @@ public class ARBVertexAttrib64Bit {
     // --- [ glVertexAttribL4dv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribL4dv VertexAttribL4dv} */
-    public static native void nglVertexAttribL4dv(int index, long v);
+    public static void nglVertexAttribL4dv(int index, long v) {
+        GL41.nglVertexAttribL4dv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribL4d VertexAttribL4d}.
@@ -197,7 +213,9 @@ public class ARBVertexAttrib64Bit {
      *
      * @param type the data type of each component in the array. Must be:<br><table><tr><td>{@link GL11#GL_DOUBLE DOUBLE}</td></tr></table>
      */
-    public static native void nglVertexAttribLPointer(int index, int size, int type, int stride, long pointer);
+    public static void nglVertexAttribLPointer(int index, int size, int type, int stride, long pointer) {
+        GL41.nglVertexAttribLPointer(index, size, type, stride, pointer);
+    }
 
     /**
      * Specifies the location and organization of a 64-bit vertex attribute array.
@@ -246,7 +264,9 @@ public class ARBVertexAttrib64Bit {
     // --- [ glGetVertexAttribLdv ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv} */
-    public static native void nglGetVertexAttribLdv(int index, int pname, long params);
+    public static void nglGetVertexAttribLdv(int index, int pname, long params) {
+        GL41.nglGetVertexAttribLdv(index, pname, params);
+    }
 
     /**
      * Double version of {@link GL20#glGetVertexAttribiv GetVertexAttribiv}.

@@ -180,7 +180,9 @@ public class KHRDebug {
      *
      * @param count the length of the array {@code ids}
      */
-    public static native void nglDebugMessageControl(int source, int type, int severity, int count, long ids, boolean enabled);
+    public static void nglDebugMessageControl(int source, int type, int severity, int count, long ids, boolean enabled) {
+        GL43.nglDebugMessageControl(source, type, severity, count, ids, enabled);
+    }
 
     /**
      * Controls the volume of debug output in the active debug group, by disabling specific or groups of messages.
@@ -266,7 +268,9 @@ public class KHRDebug {
      *
      * @param length the length of the string contained in the character array whose address is given by {@code message}
      */
-    public static native void nglDebugMessageInsert(int source, int type, int id, int severity, int length, long message);
+    public static void nglDebugMessageInsert(int source, int type, int id, int severity, int length, long message) {
+        GL43.nglDebugMessageInsert(source, type, id, severity, length, message);
+    }
 
     /**
      * This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
@@ -321,7 +325,9 @@ public class KHRDebug {
     // --- [ glDebugMessageCallback ] ---
 
     /** Unsafe version of: {@link #glDebugMessageCallback DebugMessageCallback} */
-    public static native void nglDebugMessageCallback(long callback, long userParam);
+    public static void nglDebugMessageCallback(long callback, long userParam) {
+        GL43.nglDebugMessageCallback(callback, userParam);
+    }
 
     /**
      * Specifies a callback to receive debugging messages from the GL.
@@ -365,7 +371,9 @@ public class KHRDebug {
      *
      * @param bufsize the size of the buffer whose address is given by {@code messageLog}
      */
-    public static native int nglGetDebugMessageLog(int count, int bufsize, long sources, long types, long ids, long severities, long lengths, long messageLog);
+    public static int nglGetDebugMessageLog(int count, int bufsize, long sources, long types, long ids, long severities, long lengths, long messageLog) {
+        return GL43.nglGetDebugMessageLog(count, bufsize, sources, types, ids, severities, lengths, messageLog);
+    }
 
     /**
      * Retrieves messages from the debug message log.
@@ -419,7 +427,9 @@ public class KHRDebug {
      *
      * @param length the length of the message to be sent to the debug output stream
      */
-    public static native void nglPushDebugGroup(int source, int id, int length, long message);
+    public static void nglPushDebugGroup(int source, int id, int length, long message) {
+        GL43.nglPushDebugGroup(source, id, length, message);
+    }
 
     /**
      * Pushes a debug group described by the string {@code message} into the command stream. The value of {@code id} specifies the ID of messages generated.
@@ -478,7 +488,9 @@ public class KHRDebug {
      * <p>Attempting to pop the default debug group off the stack generates a {@link GL11#GL_STACK_UNDERFLOW STACK_UNDERFLOW} error; pushing a debug group onto a stack containing
      * {@link GL43#GL_MAX_DEBUG_GROUP_STACK_DEPTH MAX_DEBUG_GROUP_STACK_DEPTH} minus one elements will generate a {@link GL11#GL_STACK_OVERFLOW STACK_OVERFLOW} error.</p>
      */
-    public static native void glPopDebugGroup();
+    public static void glPopDebugGroup() {
+        GL43.glPopDebugGroup();
+    }
 
     // --- [ glObjectLabel ] ---
 
@@ -487,7 +499,9 @@ public class KHRDebug {
      *
      * @param length the length of the label to be used for the object
      */
-    public static native void nglObjectLabel(int identifier, int name, int length, long label);
+    public static void nglObjectLabel(int identifier, int name, int length, long label) {
+        GL43.nglObjectLabel(identifier, name, length, label);
+    }
 
     /**
      * Labels a named object identified within a namespace.
@@ -524,7 +538,9 @@ public class KHRDebug {
      *
      * @param bufSize the length of the buffer whose address is in {@code label}
      */
-    public static native void nglGetObjectLabel(int identifier, int name, int bufSize, long length, long label);
+    public static void nglGetObjectLabel(int identifier, int name, int bufSize, long length, long label) {
+        GL43.nglGetObjectLabel(identifier, name, bufSize, length, label);
+    }
 
     /**
      * Retrieves the label of a named object identified within a namespace.
@@ -579,7 +595,9 @@ public class KHRDebug {
      *
      * @param length the length of the label to be used for the object
      */
-    public static native void nglObjectPtrLabel(long ptr, int length, long label);
+    public static void nglObjectPtrLabel(long ptr, int length, long label) {
+        GL43.nglObjectPtrLabel(ptr, length, label);
+    }
 
     /**
      * Labels a sync object identified by a pointer.
@@ -620,7 +638,9 @@ public class KHRDebug {
      *
      * @param bufSize the length of the buffer whose address is in {@code label}
      */
-    public static native void nglGetObjectPtrLabel(long ptr, int bufSize, long length, long label);
+    public static void nglGetObjectPtrLabel(long ptr, int bufSize, long length, long label) {
+        GL43.nglGetObjectPtrLabel(ptr, bufSize, length, label);
+    }
 
     /**
      * Retrieves the label of a sync object identified by a pointer.

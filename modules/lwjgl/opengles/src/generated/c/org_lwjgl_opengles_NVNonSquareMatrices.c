@@ -16,42 +16,42 @@ typedef void (APIENTRY *glUniformMatrix4x3fvNVPROC) (jint, jint, jboolean, intpt
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVNonSquareMatrices_nglUniformMatrix2x3fvNV__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
-    glUniformMatrix2x3fvNVPROC glUniformMatrix2x3fvNV = (glUniformMatrix2x3fvNVPROC)tlsGetFunction(667);
+    glUniformMatrix2x3fvNVPROC glUniformMatrix2x3fvNV = (glUniformMatrix2x3fvNVPROC)tlsGetFunction(670);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix2x3fvNV(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVNonSquareMatrices_nglUniformMatrix3x2fvNV__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
-    glUniformMatrix3x2fvNVPROC glUniformMatrix3x2fvNV = (glUniformMatrix3x2fvNVPROC)tlsGetFunction(668);
+    glUniformMatrix3x2fvNVPROC glUniformMatrix3x2fvNV = (glUniformMatrix3x2fvNVPROC)tlsGetFunction(671);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix3x2fvNV(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVNonSquareMatrices_nglUniformMatrix2x4fvNV__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
-    glUniformMatrix2x4fvNVPROC glUniformMatrix2x4fvNV = (glUniformMatrix2x4fvNVPROC)tlsGetFunction(669);
+    glUniformMatrix2x4fvNVPROC glUniformMatrix2x4fvNV = (glUniformMatrix2x4fvNVPROC)tlsGetFunction(672);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix2x4fvNV(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVNonSquareMatrices_nglUniformMatrix4x2fvNV__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
-    glUniformMatrix4x2fvNVPROC glUniformMatrix4x2fvNV = (glUniformMatrix4x2fvNVPROC)tlsGetFunction(670);
+    glUniformMatrix4x2fvNVPROC glUniformMatrix4x2fvNV = (glUniformMatrix4x2fvNVPROC)tlsGetFunction(673);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix4x2fvNV(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVNonSquareMatrices_nglUniformMatrix3x4fvNV__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
-    glUniformMatrix3x4fvNVPROC glUniformMatrix3x4fvNV = (glUniformMatrix3x4fvNVPROC)tlsGetFunction(671);
+    glUniformMatrix3x4fvNVPROC glUniformMatrix3x4fvNV = (glUniformMatrix3x4fvNVPROC)tlsGetFunction(674);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix3x4fvNV(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVNonSquareMatrices_nglUniformMatrix4x3fvNV__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
-    glUniformMatrix4x3fvNVPROC glUniformMatrix4x3fvNV = (glUniformMatrix4x3fvNVPROC)tlsGetFunction(672);
+    glUniformMatrix4x3fvNVPROC glUniformMatrix4x3fvNV = (glUniformMatrix4x3fvNVPROC)tlsGetFunction(675);
     intptr_t value = (intptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix4x3fvNV(location, count, transpose, value);

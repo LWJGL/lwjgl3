@@ -11,7 +11,7 @@ typedef void (APIENTRY *glAlphaToCoverageDitherControlNVPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVAlphaToCoverageDitherControl_glAlphaToCoverageDitherControlNV(JNIEnv *__env, jclass clazz, jint mode) {
-    glAlphaToCoverageDitherControlNVPROC glAlphaToCoverageDitherControlNV = (glAlphaToCoverageDitherControlNVPROC)tlsGetFunction(1864);
+    glAlphaToCoverageDitherControlNVPROC glAlphaToCoverageDitherControlNV = (glAlphaToCoverageDitherControlNVPROC)tlsGetFunction(1865);
     UNUSED_PARAM(clazz)
     glAlphaToCoverageDitherControlNV(mode);
 }

@@ -1447,20 +1447,28 @@ public class EXTDirectStateAccess {
 
     // --- [ glEnableIndexedEXT ] ---
 
-    public static native void glEnableIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static void glEnableIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        EXTDrawBuffers2.glEnableIndexedEXT(target, index);
+    }
 
     // --- [ glDisableIndexedEXT ] ---
 
-    public static native void glDisableIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static void glDisableIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        EXTDrawBuffers2.glDisableIndexedEXT(target, index);
+    }
 
     // --- [ glIsEnabledIndexedEXT ] ---
 
     @NativeType("GLboolean")
-    public static native boolean glIsEnabledIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static boolean glIsEnabledIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        return EXTDrawBuffers2.glIsEnabledIndexedEXT(target, index);
+    }
 
     // --- [ glGetIntegerIndexedvEXT ] ---
 
-    public static native void nglGetIntegerIndexedvEXT(int target, int index, long data);
+    public static void nglGetIntegerIndexedvEXT(int target, int index, long data) {
+        EXTDrawBuffers2.nglGetIntegerIndexedvEXT(target, index, data);
+    }
 
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer data) {
         if (CHECKS) {
@@ -1483,7 +1491,9 @@ public class EXTDirectStateAccess {
 
     // --- [ glGetBooleanIndexedvEXT ] ---
 
-    public static native void nglGetBooleanIndexedvEXT(int target, int index, long data);
+    public static void nglGetBooleanIndexedvEXT(int target, int index, long data) {
+        EXTDrawBuffers2.nglGetBooleanIndexedvEXT(target, index, data);
+    }
 
     public static void glGetBooleanIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLboolean *") ByteBuffer data) {
         if (CHECKS) {

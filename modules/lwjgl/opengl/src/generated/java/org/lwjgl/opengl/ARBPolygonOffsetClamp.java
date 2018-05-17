@@ -53,6 +53,8 @@ public class ARBPolygonOffsetClamp {
      * @param units  scales an implementation-dependent constant that relates to the usable resolution of the depth buffer
      * @param clamp  the minimum or maximum polygon offset value
      */
-    public static native void glPolygonOffsetClamp(@NativeType("GLfloat") float factor, @NativeType("GLfloat") float units, @NativeType("GLfloat") float clamp);
+    public static void glPolygonOffsetClamp(@NativeType("GLfloat") float factor, @NativeType("GLfloat") float units, @NativeType("GLfloat") float clamp) {
+        GL46.glPolygonOffsetClamp(factor, units, clamp);
+    }
 
 }

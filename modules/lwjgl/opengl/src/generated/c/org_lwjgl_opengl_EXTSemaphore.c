@@ -6,8 +6,6 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glGetUnsignedBytevEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetUnsignedBytei_vEXTPROC) (jint, jint, intptr_t);
 typedef void (APIENTRY *glGenSemaphoresEXTPROC) (jint, intptr_t);
 typedef void (APIENTRY *glDeleteSemaphoresEXTPROC) (jint, intptr_t);
 typedef jboolean (APIENTRY *glIsSemaphoreEXTPROC) (jint);
@@ -17,20 +15,6 @@ typedef void (APIENTRY *glWaitSemaphoreEXTPROC) (jint, jint, intptr_t, jint, int
 typedef void (APIENTRY *glSignalSemaphoreEXTPROC) (jint, jint, intptr_t, jint, intptr_t, intptr_t);
 
 EXTERN_C_ENTER
-
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTSemaphore_nglGetUnsignedBytevEXT(JNIEnv *__env, jclass clazz, jint pname, jlong dataAddress) {
-    glGetUnsignedBytevEXTPROC glGetUnsignedBytevEXT = (glGetUnsignedBytevEXTPROC)tlsGetFunction(1754);
-    intptr_t data = (intptr_t)dataAddress;
-    UNUSED_PARAM(clazz)
-    glGetUnsignedBytevEXT(pname, data);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTSemaphore_nglGetUnsignedBytei_1vEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
-    glGetUnsignedBytei_vEXTPROC glGetUnsignedBytei_vEXT = (glGetUnsignedBytei_vEXTPROC)tlsGetFunction(1755);
-    intptr_t data = (intptr_t)dataAddress;
-    UNUSED_PARAM(clazz)
-    glGetUnsignedBytei_vEXT(target, index, data);
-}
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTSemaphore_nglGenSemaphoresEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong semaphoresAddress) {
     glGenSemaphoresEXTPROC glGenSemaphoresEXT = (glGenSemaphoresEXTPROC)tlsGetFunction(1798);

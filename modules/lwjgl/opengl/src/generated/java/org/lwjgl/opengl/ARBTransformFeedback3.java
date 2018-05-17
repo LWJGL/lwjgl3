@@ -76,7 +76,9 @@ public class ARBTransformFeedback3 {
      * @param id     the name of a transform feedback object from which to retrieve a primitive count
      * @param stream the index of the transform feedback stream from which to retrieve a primitive count
      */
-    public static native void glDrawTransformFeedbackStream(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream);
+    public static void glDrawTransformFeedbackStream(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream) {
+        GL40.glDrawTransformFeedbackStream(mode, id, stream);
+    }
 
     // --- [ glBeginQueryIndexed ] ---
 
@@ -87,7 +89,9 @@ public class ARBTransformFeedback3 {
      * @param index  the index of the query target upon which to begin the query
      * @param id     the name of a query object
      */
-    public static native void glBeginQueryIndexed(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int id);
+    public static void glBeginQueryIndexed(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int id) {
+        GL40.glBeginQueryIndexed(target, index, id);
+    }
 
     // --- [ glEndQueryIndexed ] ---
 
@@ -97,12 +101,16 @@ public class ARBTransformFeedback3 {
      * @param target the target type of query object to be concluded. One of:<br><table><tr><td>{@link GL15#GL_SAMPLES_PASSED SAMPLES_PASSED}</td><td>{@link GL30#GL_PRIMITIVES_GENERATED PRIMITIVES_GENERATED}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN}</td><td>{@link GL33#GL_TIME_ELAPSED TIME_ELAPSED}</td></tr><tr><td>{@link GL33#GL_TIMESTAMP TIMESTAMP}</td><td>{@link GL33#GL_ANY_SAMPLES_PASSED ANY_SAMPLES_PASSED}</td><td>{@link GL43#GL_ANY_SAMPLES_PASSED_CONSERVATIVE ANY_SAMPLES_PASSED_CONSERVATIVE}</td></tr></table>
      * @param index  the index of the query target upon which to end the query
      */
-    public static native void glEndQueryIndexed(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static void glEndQueryIndexed(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        GL40.glEndQueryIndexed(target, index);
+    }
 
     // --- [ glGetQueryIndexediv ] ---
 
     /** Unsafe version of: {@link #glGetQueryIndexediv GetQueryIndexediv} */
-    public static native void nglGetQueryIndexediv(int target, int index, int pname, long params);
+    public static void nglGetQueryIndexediv(int target, int index, int pname, long params) {
+        GL40.nglGetQueryIndexediv(target, index, pname, params);
+    }
 
     /**
      * Returns parameters of an indexed query object target.

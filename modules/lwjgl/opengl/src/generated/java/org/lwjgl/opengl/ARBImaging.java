@@ -1125,7 +1125,9 @@ public class ARBImaging {
      * @param blue  the blue color component
      * @param alpha the alpha color component
      */
-    public static native void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha);
+    public static void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha) {
+        GL14.glBlendColor(red, green, blue, alpha);
+    }
 
     // --- [ glBlendEquation ] ---
 
@@ -1134,7 +1136,9 @@ public class ARBImaging {
      *
      * @param mode the blend equation. One of:<br><table><tr><td>{@link GL14#GL_FUNC_ADD FUNC_ADD}</td><td>{@link GL14#GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link GL14#GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link GL14#GL_MIN MIN}</td><td>{@link GL14#GL_MAX MAX}</td></tr></table>
      */
-    public static native void glBlendEquation(@NativeType("GLenum") int mode);
+    public static void glBlendEquation(@NativeType("GLenum") int mode) {
+        GL14.glBlendEquation(mode);
+    }
 
     /** Array version of: {@link #glColorTable ColorTable} */
     public static void glColorTable(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] table) {

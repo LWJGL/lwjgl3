@@ -11,7 +11,7 @@ typedef void (APIENTRY *glTextureBarrierNVPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVTextureBarrier_glTextureBarrierNV(JNIEnv *__env, jclass clazz) {
-    glTextureBarrierNVPROC glTextureBarrierNV = (glTextureBarrierNVPROC)tlsGetFunction(741);
+    glTextureBarrierNVPROC glTextureBarrierNV = (glTextureBarrierNVPROC)tlsGetFunction(744);
     UNUSED_PARAM(clazz)
     glTextureBarrierNV();
 }

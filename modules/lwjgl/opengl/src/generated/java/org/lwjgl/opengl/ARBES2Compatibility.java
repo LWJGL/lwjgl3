@@ -65,7 +65,9 @@ public class ARBES2Compatibility {
     // --- [ glReleaseShaderCompiler ] ---
 
     /** Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler. */
-    public static native void glReleaseShaderCompiler();
+    public static void glReleaseShaderCompiler() {
+        GL41.glReleaseShaderCompiler();
+    }
 
     // --- [ glShaderBinary ] ---
 
@@ -75,7 +77,9 @@ public class ARBES2Compatibility {
      * @param count  the number of shader object handles contained in {@code shaders}
      * @param length the length of the array whose address is given in binary
      */
-    public static native void nglShaderBinary(int count, long shaders, int binaryformat, long binary, int length);
+    public static void nglShaderBinary(int count, long shaders, int binaryformat, long binary, int length) {
+        GL41.nglShaderBinary(count, shaders, binaryformat, binary, length);
+    }
 
     /**
      * Loads pre-compiled shader binaries.
@@ -91,7 +95,9 @@ public class ARBES2Compatibility {
     // --- [ glGetShaderPrecisionFormat ] ---
 
     /** Unsafe version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat} */
-    public static native void nglGetShaderPrecisionFormat(int shadertype, int precisiontype, long range, long precision);
+    public static void nglGetShaderPrecisionFormat(int shadertype, int precisiontype, long range, long precision) {
+        GL41.nglGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
+    }
 
     /**
      * Retrieves the range and precision for numeric formats supported by the shader compiler.
@@ -139,7 +145,9 @@ public class ARBES2Compatibility {
      * @param zNear the mapping of the near clipping plane to window coordinates. The initial value is 0.0f.
      * @param zFar  the mapping of the far clipping plane to window coordinates. The initial value is 1.0f.
      */
-    public static native void glDepthRangef(@NativeType("GLfloat") float zNear, @NativeType("GLfloat") float zFar);
+    public static void glDepthRangef(@NativeType("GLfloat") float zNear, @NativeType("GLfloat") float zFar) {
+        GL41.glDepthRangef(zNear, zFar);
+    }
 
     // --- [ glClearDepthf ] ---
 
@@ -148,7 +156,9 @@ public class ARBES2Compatibility {
      *
      * @param depth the depth value used when the depth buffer is cleared. The initial value is 1.0f.
      */
-    public static native void glClearDepthf(@NativeType("GLfloat") float depth);
+    public static void glClearDepthf(@NativeType("GLfloat") float depth) {
+        GL41.glClearDepthf(depth);
+    }
 
     /** Array version of: {@link #glShaderBinary ShaderBinary} */
     public static void glShaderBinary(@NativeType("GLuint const *") int[] shaders, @NativeType("GLenum") int binaryformat, @NativeType("void const *") ByteBuffer binary) {

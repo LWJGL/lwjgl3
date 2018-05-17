@@ -21,21 +21,21 @@ typedef void (APIENTRY *glGetObjectPtrLabelKHRPROC) (intptr_t, jint, intptr_t, i
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageControlKHR__IIIIJZ(JNIEnv *__env, jclass clazz, jint source, jint type, jint severity, jint count, jlong idsAddress, jboolean enabled) {
-    glDebugMessageControlKHRPROC glDebugMessageControlKHR = (glDebugMessageControlKHRPROC)tlsGetFunction(569);
+    glDebugMessageControlKHRPROC glDebugMessageControlKHR = (glDebugMessageControlKHRPROC)tlsGetFunction(572);
     intptr_t ids = (intptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glDebugMessageControlKHR(source, type, severity, count, ids, enabled);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageInsertKHR(JNIEnv *__env, jclass clazz, jint source, jint type, jint id, jint severity, jint length, jlong messageAddress) {
-    glDebugMessageInsertKHRPROC glDebugMessageInsertKHR = (glDebugMessageInsertKHRPROC)tlsGetFunction(570);
+    glDebugMessageInsertKHRPROC glDebugMessageInsertKHR = (glDebugMessageInsertKHRPROC)tlsGetFunction(573);
     intptr_t message = (intptr_t)messageAddress;
     UNUSED_PARAM(clazz)
     glDebugMessageInsertKHR(source, type, id, severity, length, message);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageCallbackKHR(JNIEnv *__env, jclass clazz, jlong callbackAddress, jlong userParamAddress) {
-    glDebugMessageCallbackKHRPROC glDebugMessageCallbackKHR = (glDebugMessageCallbackKHRPROC)tlsGetFunction(571);
+    glDebugMessageCallbackKHRPROC glDebugMessageCallbackKHR = (glDebugMessageCallbackKHRPROC)tlsGetFunction(574);
     intptr_t callback = (intptr_t)callbackAddress;
     intptr_t userParam = (intptr_t)userParamAddress;
     UNUSED_PARAM(clazz)
@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageCallbackK
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetDebugMessageLogKHR__IIJJJJJJ(JNIEnv *__env, jclass clazz, jint count, jint bufsize, jlong sourcesAddress, jlong typesAddress, jlong idsAddress, jlong severitiesAddress, jlong lengthsAddress, jlong messageLogAddress) {
-    glGetDebugMessageLogKHRPROC glGetDebugMessageLogKHR = (glGetDebugMessageLogKHRPROC)tlsGetFunction(572);
+    glGetDebugMessageLogKHRPROC glGetDebugMessageLogKHR = (glGetDebugMessageLogKHRPROC)tlsGetFunction(575);
     intptr_t sources = (intptr_t)sourcesAddress;
     intptr_t types = (intptr_t)typesAddress;
     intptr_t ids = (intptr_t)idsAddress;
@@ -55,34 +55,34 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetDebugMessageLogKHR
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetPointervKHR(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
-    glGetPointervKHRPROC glGetPointervKHR = (glGetPointervKHRPROC)tlsGetFunction(573);
+    glGetPointervKHRPROC glGetPointervKHR = (glGetPointervKHRPROC)tlsGetFunction(576);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetPointervKHR(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglPushDebugGroupKHR(JNIEnv *__env, jclass clazz, jint source, jint id, jint length, jlong messageAddress) {
-    glPushDebugGroupKHRPROC glPushDebugGroupKHR = (glPushDebugGroupKHRPROC)tlsGetFunction(574);
+    glPushDebugGroupKHRPROC glPushDebugGroupKHR = (glPushDebugGroupKHRPROC)tlsGetFunction(577);
     intptr_t message = (intptr_t)messageAddress;
     UNUSED_PARAM(clazz)
     glPushDebugGroupKHR(source, id, length, message);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_glPopDebugGroupKHR(JNIEnv *__env, jclass clazz) {
-    glPopDebugGroupKHRPROC glPopDebugGroupKHR = (glPopDebugGroupKHRPROC)tlsGetFunction(575);
+    glPopDebugGroupKHRPROC glPopDebugGroupKHR = (glPopDebugGroupKHRPROC)tlsGetFunction(578);
     UNUSED_PARAM(clazz)
     glPopDebugGroupKHR();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglObjectLabelKHR(JNIEnv *__env, jclass clazz, jint identifier, jint name, jint length, jlong labelAddress) {
-    glObjectLabelKHRPROC glObjectLabelKHR = (glObjectLabelKHRPROC)tlsGetFunction(576);
+    glObjectLabelKHRPROC glObjectLabelKHR = (glObjectLabelKHRPROC)tlsGetFunction(579);
     intptr_t label = (intptr_t)labelAddress;
     UNUSED_PARAM(clazz)
     glObjectLabelKHR(identifier, name, length, label);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetObjectLabelKHR__IIIJJ(JNIEnv *__env, jclass clazz, jint identifier, jint name, jint bufSize, jlong lengthAddress, jlong labelAddress) {
-    glGetObjectLabelKHRPROC glGetObjectLabelKHR = (glGetObjectLabelKHRPROC)tlsGetFunction(577);
+    glGetObjectLabelKHRPROC glGetObjectLabelKHR = (glGetObjectLabelKHRPROC)tlsGetFunction(580);
     intptr_t length = (intptr_t)lengthAddress;
     intptr_t label = (intptr_t)labelAddress;
     UNUSED_PARAM(clazz)
@@ -90,7 +90,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetObjectLabelKHR__II
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglObjectPtrLabelKHR(JNIEnv *__env, jclass clazz, jlong ptrAddress, jint length, jlong labelAddress) {
-    glObjectPtrLabelKHRPROC glObjectPtrLabelKHR = (glObjectPtrLabelKHRPROC)tlsGetFunction(578);
+    glObjectPtrLabelKHRPROC glObjectPtrLabelKHR = (glObjectPtrLabelKHRPROC)tlsGetFunction(581);
     intptr_t ptr = (intptr_t)ptrAddress;
     intptr_t label = (intptr_t)labelAddress;
     UNUSED_PARAM(clazz)
@@ -98,7 +98,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglObjectPtrLabelKHR(JNI
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetObjectPtrLabelKHR__JIJJ(JNIEnv *__env, jclass clazz, jlong ptrAddress, jint bufSize, jlong lengthAddress, jlong labelAddress) {
-    glGetObjectPtrLabelKHRPROC glGetObjectPtrLabelKHR = (glGetObjectPtrLabelKHRPROC)tlsGetFunction(579);
+    glGetObjectPtrLabelKHRPROC glGetObjectPtrLabelKHR = (glGetObjectPtrLabelKHRPROC)tlsGetFunction(582);
     intptr_t ptr = (intptr_t)ptrAddress;
     intptr_t length = (intptr_t)lengthAddress;
     intptr_t label = (intptr_t)labelAddress;

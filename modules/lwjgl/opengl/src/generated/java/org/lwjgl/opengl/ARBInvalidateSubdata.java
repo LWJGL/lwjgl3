@@ -76,7 +76,9 @@ public class ARBInvalidateSubdata {
      * @param height  the height of the region to be invalidated
      * @param depth   the depth of the region to be invalidated
      */
-    public static native void glInvalidateTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
+    public static void glInvalidateTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth) {
+        GL43.glInvalidateTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth);
+    }
 
     // --- [ glInvalidateTexImage ] ---
 
@@ -86,7 +88,9 @@ public class ARBInvalidateSubdata {
      * @param texture the name of a texture object to invalidate
      * @param level   the level of detail of the texture object to invalidate
      */
-    public static native void glInvalidateTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level);
+    public static void glInvalidateTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level) {
+        GL43.glInvalidateTexImage(texture, level);
+    }
 
     // --- [ glInvalidateBufferSubData ] ---
 
@@ -97,7 +101,9 @@ public class ARBInvalidateSubdata {
      * @param offset the offset within the buffer's data store of the start of the range to be invalidated
      * @param length the length of the range within the buffer's data store to be invalidated
      */
-    public static native void glInvalidateBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length);
+    public static void glInvalidateBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length) {
+        GL43.glInvalidateBufferSubData(buffer, offset, length);
+    }
 
     // --- [ glInvalidateBufferData ] ---
 
@@ -106,7 +112,9 @@ public class ARBInvalidateSubdata {
      *
      * @param buffer the name of a buffer object whose data store to invalidate
      */
-    public static native void glInvalidateBufferData(@NativeType("GLuint") int buffer);
+    public static void glInvalidateBufferData(@NativeType("GLuint") int buffer) {
+        GL43.glInvalidateBufferData(buffer);
+    }
 
     // --- [ glInvalidateFramebuffer ] ---
 
@@ -115,7 +123,9 @@ public class ARBInvalidateSubdata {
      *
      * @param numAttachments the number of entries in the {@code attachments} array
      */
-    public static native void nglInvalidateFramebuffer(int target, int numAttachments, long attachments);
+    public static void nglInvalidateFramebuffer(int target, int numAttachments, long attachments) {
+        GL43.nglInvalidateFramebuffer(target, numAttachments, attachments);
+    }
 
     /**
      * Invalidate the content some or all of a framebuffer object's attachments.
@@ -149,7 +159,9 @@ public class ARBInvalidateSubdata {
      *
      * @param numAttachments the number of entries in the {@code attachments} array
      */
-    public static native void nglInvalidateSubFramebuffer(int target, int numAttachments, long attachments, int x, int y, int width, int height);
+    public static void nglInvalidateSubFramebuffer(int target, int numAttachments, long attachments, int x, int y, int width, int height) {
+        GL43.nglInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height);
+    }
 
     /**
      * Invalidates the content of a region of some or all of a framebuffer object's attachments.

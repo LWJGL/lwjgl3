@@ -64,7 +64,9 @@ public class ARBGetProgramBinary {
      *
      * @param bufSize the size of the buffer whose address is given by {@code binary}
      */
-    public static native void nglGetProgramBinary(int program, int bufSize, long length, long binaryFormat, long binary);
+    public static void nglGetProgramBinary(int program, int bufSize, long length, long binaryFormat, long binary) {
+        GL41.nglGetProgramBinary(program, bufSize, length, binaryFormat, binary);
+    }
 
     /**
      * Returns a binary representation of a program object's compiled and linked executable source.
@@ -89,7 +91,9 @@ public class ARBGetProgramBinary {
      *
      * @param length the number of bytes contained in {@code binary}
      */
-    public static native void nglProgramBinary(int program, int binaryFormat, long binary, int length);
+    public static void nglProgramBinary(int program, int binaryFormat, long binary, int length) {
+        GL41.nglProgramBinary(program, binaryFormat, binary, length);
+    }
 
     /**
      * Loads a program object with a program binary.
@@ -111,7 +115,9 @@ public class ARBGetProgramBinary {
      * @param pname   the name of the parameter to modify. One of:<br><table><tr><td>{@link GL41#GL_PROGRAM_BINARY_RETRIEVABLE_HINT PROGRAM_BINARY_RETRIEVABLE_HINT}</td><td>{@link GL41#GL_PROGRAM_SEPARABLE PROGRAM_SEPARABLE}</td></tr></table>
      * @param value   the new value of the parameter specified by {@code pname} for {@code program}
      */
-    public static native void glProgramParameteri(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint") int value);
+    public static void glProgramParameteri(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint") int value) {
+        GL41.glProgramParameteri(program, pname, value);
+    }
 
     /** Array version of: {@link #glGetProgramBinary GetProgramBinary} */
     public static void glGetProgramBinary(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLenum *") int[] binaryFormat, @NativeType("void *") ByteBuffer binary) {

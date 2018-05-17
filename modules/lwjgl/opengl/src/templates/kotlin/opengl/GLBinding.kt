@@ -261,8 +261,9 @@ fun String.nativeClassGL(
     library = "GL.initialize();",
     init = {
         init()
-        if (functions.any())
+        if (!skipNative) {
             nativeImport("opengl.h")
+        }
     }
 )
 

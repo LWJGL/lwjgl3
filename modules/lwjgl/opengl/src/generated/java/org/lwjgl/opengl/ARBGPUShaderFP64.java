@@ -92,7 +92,9 @@ public class ARBGPUShaderFP64 {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      */
-    public static native void glUniform1d(@NativeType("GLint") int location, @NativeType("GLdouble") double x);
+    public static void glUniform1d(@NativeType("GLint") int location, @NativeType("GLdouble") double x) {
+        GL40.glUniform1d(location, x);
+    }
 
     // --- [ glUniform2d ] ---
 
@@ -103,7 +105,9 @@ public class ARBGPUShaderFP64 {
      * @param x        the uniform x value
      * @param y        the uniform y value
      */
-    public static native void glUniform2d(@NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y);
+    public static void glUniform2d(@NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y) {
+        GL40.glUniform2d(location, x, y);
+    }
 
     // --- [ glUniform3d ] ---
 
@@ -115,7 +119,9 @@ public class ARBGPUShaderFP64 {
      * @param y        the uniform y value
      * @param z        the uniform z value
      */
-    public static native void glUniform3d(@NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z);
+    public static void glUniform3d(@NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z) {
+        GL40.glUniform3d(location, x, y, z);
+    }
 
     // --- [ glUniform4d ] ---
 
@@ -128,7 +134,9 @@ public class ARBGPUShaderFP64 {
      * @param z        the uniform z value
      * @param w        the uniform w value
      */
-    public static native void glUniform4d(@NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w);
+    public static void glUniform4d(@NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w) {
+        GL40.glUniform4d(location, x, y, z, w);
+    }
 
     // --- [ glUniform1dv ] ---
 
@@ -137,7 +145,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform1dv(int location, int count, long value);
+    public static void nglUniform1dv(int location, int count, long value) {
+        GL40.nglUniform1dv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single double uniform variable or a double uniform variable array for the current program object.
@@ -156,7 +166,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform2dv(int location, int count, long value);
+    public static void nglUniform2dv(int location, int count, long value) {
+        GL40.nglUniform2dv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for the current program object.
@@ -175,7 +187,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform3dv(int location, int count, long value);
+    public static void nglUniform3dv(int location, int count, long value) {
+        GL40.nglUniform3dv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for the current program object.
@@ -194,7 +208,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform4dv(int location, int count, long value);
+    public static void nglUniform4dv(int location, int count, long value) {
+        GL40.nglUniform4dv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for the current program object.
@@ -213,7 +229,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix2dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix2dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix2dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.
@@ -233,7 +251,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix3dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix3dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix3dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.
@@ -253,7 +273,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix4dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix4dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix4dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.
@@ -273,7 +295,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix2x3dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix2x3dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix2x3dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.
@@ -293,7 +317,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix2x4dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix2x4dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix2x4dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.
@@ -313,7 +339,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix3x2dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix3x2dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix3x2dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.
@@ -333,7 +361,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix3x4dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix3x4dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix3x4dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.
@@ -353,7 +383,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix4x2dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix4x2dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix4x2dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.
@@ -373,7 +405,9 @@ public class ARBGPUShaderFP64 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix4x3dv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix4x3dv(int location, int count, boolean transpose, long value) {
+        GL40.nglUniformMatrix4x3dv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.
@@ -389,7 +423,9 @@ public class ARBGPUShaderFP64 {
     // --- [ glGetUniformdv ] ---
 
     /** Unsafe version of: {@link #glGetUniformdv GetUniformdv} */
-    public static native void nglGetUniformdv(int program, int location, long params);
+    public static void nglGetUniformdv(int program, int location, long params) {
+        GL40.nglGetUniformdv(program, location, params);
+    }
 
     /**
      * Returns the double value(s) of a uniform variable.

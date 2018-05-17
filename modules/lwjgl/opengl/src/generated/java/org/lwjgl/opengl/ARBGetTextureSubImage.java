@@ -41,7 +41,9 @@ public class ARBGetTextureSubImage {
      *
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      */
-    public static native void nglGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, int bufSize, long pixels);
+    public static void nglGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, int bufSize, long pixels) {
+        GL45.nglGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels);
+    }
 
     /**
      * Obtains sub-regions of a texture image from a texture object.
@@ -165,7 +167,9 @@ public class ARBGetTextureSubImage {
      *
      * @param bufSize the size of the buffer to receive the retrieved pixel data
      */
-    public static native void nglGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int bufSize, long pixels);
+    public static void nglGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int bufSize, long pixels) {
+        GL45.nglGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels);
+    }
 
     /**
      * Obtains a sub-region of a compressed texture image.

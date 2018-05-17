@@ -56,7 +56,9 @@ public class ARBDrawIndirect {
     // --- [ glDrawArraysIndirect ] ---
 
     /** Unsafe version of: {@link #glDrawArraysIndirect DrawArraysIndirect} */
-    public static native void nglDrawArraysIndirect(int mode, long indirect);
+    public static void nglDrawArraysIndirect(int mode, long indirect) {
+        GL40.nglDrawArraysIndirect(mode, indirect);
+    }
 
     /**
      * Renders primitives from array data, taking parameters from memory.
@@ -145,7 +147,9 @@ public class ARBDrawIndirect {
     // --- [ glDrawElementsIndirect ] ---
 
     /** Unsafe version of: {@link #glDrawElementsIndirect DrawElementsIndirect} */
-    public static native void nglDrawElementsIndirect(int mode, int type, long indirect);
+    public static void nglDrawElementsIndirect(int mode, int type, long indirect) {
+        GL40.nglDrawElementsIndirect(mode, type, indirect);
+    }
 
     /**
      * Renders indexed primitives from array data, taking parameters from memory.

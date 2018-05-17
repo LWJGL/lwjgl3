@@ -44,7 +44,9 @@ public class ARBTransformFeedbackInstanced {
      * @param id        the name of a transform feedback object from which to retrieve a primitive count
      * @param primcount the number of instances of the geometry to render
      */
-    public static native void glDrawTransformFeedbackInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLsizei") int primcount);
+    public static void glDrawTransformFeedbackInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLsizei") int primcount) {
+        GL42.glDrawTransformFeedbackInstanced(mode, id, primcount);
+    }
 
     // --- [ glDrawTransformFeedbackStreamInstanced ] ---
 
@@ -56,6 +58,8 @@ public class ARBTransformFeedbackInstanced {
      * @param stream    the index of the transform feedback stream from which to retrieve a primitive count
      * @param primcount the number of instances of the geometry to render
      */
-    public static native void glDrawTransformFeedbackStreamInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream, @NativeType("GLsizei") int primcount);
+    public static void glDrawTransformFeedbackStreamInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream, @NativeType("GLsizei") int primcount) {
+        GL42.glDrawTransformFeedbackStreamInstanced(mode, id, stream, primcount);
+    }
 
 }

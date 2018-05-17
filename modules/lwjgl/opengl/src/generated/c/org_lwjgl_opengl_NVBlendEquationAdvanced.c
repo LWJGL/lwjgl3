@@ -12,13 +12,13 @@ typedef void (APIENTRY *glBlendBarrierNVPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBlendEquationAdvanced_glBlendParameteriNV(JNIEnv *__env, jclass clazz, jint pname, jint value) {
-    glBlendParameteriNVPROC glBlendParameteriNV = (glBlendParameteriNVPROC)tlsGetFunction(1882);
+    glBlendParameteriNVPROC glBlendParameteriNV = (glBlendParameteriNVPROC)tlsGetFunction(1883);
     UNUSED_PARAM(clazz)
     glBlendParameteriNV(pname, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBlendEquationAdvanced_glBlendBarrierNV(JNIEnv *__env, jclass clazz) {
-    glBlendBarrierNVPROC glBlendBarrierNV = (glBlendBarrierNVPROC)tlsGetFunction(1883);
+    glBlendBarrierNVPROC glBlendBarrierNV = (glBlendBarrierNVPROC)tlsGetFunction(1884);
     UNUSED_PARAM(clazz)
     glBlendBarrierNV();
 }

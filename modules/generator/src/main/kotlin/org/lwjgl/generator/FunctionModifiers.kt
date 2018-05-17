@@ -140,7 +140,7 @@ class NativeName(val nativeName: String) : FunctionModifier {
 }
 
 /** Marks reused functions. */
-object Reuse : FunctionModifier {
+class Reuse(val source: NativeClass) : FunctionModifier {
     override val isSpecial = false
 }
 

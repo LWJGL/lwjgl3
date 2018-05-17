@@ -93,7 +93,9 @@ public class NVFramebufferMixedSamples {
      * @param samples              the number of samples to be used for rasterization
      * @param fixedsamplelocations if {@link GL11#GL_TRUE TRUE}, identical sample locations will be used for all pixels
      */
-    public static native void glRasterSamplesEXT(@NativeType("GLuint") int samples, @NativeType("GLboolean") boolean fixedsamplelocations);
+    public static void glRasterSamplesEXT(@NativeType("GLuint") int samples, @NativeType("GLboolean") boolean fixedsamplelocations) {
+        EXTRasterMultisample.glRasterSamplesEXT(samples, fixedsamplelocations);
+    }
 
     // --- [ glCoverageModulationTableNV ] ---
 

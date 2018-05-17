@@ -117,7 +117,9 @@ public class ARBProgramInterfaceQuery {
     // --- [ glGetProgramInterfaceiv ] ---
 
     /** Unsafe version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
-    public static native void nglGetProgramInterfaceiv(int program, int programInterface, int pname, long params);
+    public static void nglGetProgramInterfaceiv(int program, int programInterface, int pname, long params) {
+        GL43.nglGetProgramInterfaceiv(program, programInterface, pname, params);
+    }
 
     /**
      * Queries a property of an interface in a program.
@@ -156,7 +158,9 @@ public class ARBProgramInterfaceQuery {
     // --- [ glGetProgramResourceIndex ] ---
 
     /** Unsafe version of: {@link #glGetProgramResourceIndex GetProgramResourceIndex} */
-    public static native int nglGetProgramResourceIndex(int program, int programInterface, long name);
+    public static int nglGetProgramResourceIndex(int program, int programInterface, long name) {
+        return GL43.nglGetProgramResourceIndex(program, programInterface, name);
+    }
 
     /**
      * Queries the index of a named resource within a program.
@@ -198,7 +202,9 @@ public class ARBProgramInterfaceQuery {
      *
      * @param bufSize the size of the character array whose address is given by {@code name}
      */
-    public static native void nglGetProgramResourceName(int program, int programInterface, int index, int bufSize, long length, long name);
+    public static void nglGetProgramResourceName(int program, int programInterface, int index, int bufSize, long length, long name) {
+        GL43.nglGetProgramResourceName(program, programInterface, index, bufSize, length, name);
+    }
 
     /**
      * Queries the name of an indexed resource within a program.
@@ -257,7 +263,9 @@ public class ARBProgramInterfaceQuery {
      * @param propCount the number of properties in {@code props}
      * @param bufSize   the size of the integer array whose address is given by {@code params}
      */
-    public static native void nglGetProgramResourceiv(int program, int programInterface, int index, int propCount, long props, int bufSize, long length, long params);
+    public static void nglGetProgramResourceiv(int program, int programInterface, int index, int propCount, long props, int bufSize, long length, long params) {
+        GL43.nglGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params);
+    }
 
     /**
      * Retrieves values for multiple properties of a single active resource within a program object.
@@ -279,7 +287,9 @@ public class ARBProgramInterfaceQuery {
     // --- [ glGetProgramResourceLocation ] ---
 
     /** Unsafe version of: {@link #glGetProgramResourceLocation GetProgramResourceLocation} */
-    public static native int nglGetProgramResourceLocation(int program, int programInterface, long name);
+    public static int nglGetProgramResourceLocation(int program, int programInterface, long name) {
+        return GL43.nglGetProgramResourceLocation(program, programInterface, name);
+    }
 
     /**
      * Queries the location of a named resource within a program.
@@ -317,7 +327,9 @@ public class ARBProgramInterfaceQuery {
     // --- [ glGetProgramResourceLocationIndex ] ---
 
     /** Unsafe version of: {@link #glGetProgramResourceLocationIndex GetProgramResourceLocationIndex} */
-    public static native int nglGetProgramResourceLocationIndex(int program, int programInterface, long name);
+    public static int nglGetProgramResourceLocationIndex(int program, int programInterface, long name) {
+        return GL43.nglGetProgramResourceLocationIndex(program, programInterface, name);
+    }
 
     /**
      * Queries the fragment color index of a named variable within a program.

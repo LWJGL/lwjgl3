@@ -194,7 +194,9 @@ public class ARBVertexProgram {
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      */
-    public static native void glVertexAttrib1sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0);
+    public static void glVertexAttrib1sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0) {
+        ARBVertexShader.glVertexAttrib1sARB(index, v0);
+    }
 
     // --- [ glVertexAttrib1fARB ] ---
 
@@ -204,7 +206,9 @@ public class ARBVertexProgram {
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      */
-    public static native void glVertexAttrib1fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0);
+    public static void glVertexAttrib1fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0) {
+        ARBVertexShader.glVertexAttrib1fARB(index, v0);
+    }
 
     // --- [ glVertexAttrib1dARB ] ---
 
@@ -214,7 +218,9 @@ public class ARBVertexProgram {
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      */
-    public static native void glVertexAttrib1dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0);
+    public static void glVertexAttrib1dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0) {
+        ARBVertexShader.glVertexAttrib1dARB(index, v0);
+    }
 
     // --- [ glVertexAttrib2sARB ] ---
 
@@ -225,7 +231,9 @@ public class ARBVertexProgram {
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
      */
-    public static native void glVertexAttrib2sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1);
+    public static void glVertexAttrib2sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1) {
+        ARBVertexShader.glVertexAttrib2sARB(index, v0, v1);
+    }
 
     // --- [ glVertexAttrib2fARB ] ---
 
@@ -236,7 +244,9 @@ public class ARBVertexProgram {
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
      */
-    public static native void glVertexAttrib2fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1);
+    public static void glVertexAttrib2fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1) {
+        ARBVertexShader.glVertexAttrib2fARB(index, v0, v1);
+    }
 
     // --- [ glVertexAttrib2dARB ] ---
 
@@ -247,7 +257,9 @@ public class ARBVertexProgram {
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
      */
-    public static native void glVertexAttrib2dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1);
+    public static void glVertexAttrib2dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1) {
+        ARBVertexShader.glVertexAttrib2dARB(index, v0, v1);
+    }
 
     // --- [ glVertexAttrib3sARB ] ---
 
@@ -259,7 +271,9 @@ public class ARBVertexProgram {
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
      */
-    public static native void glVertexAttrib3sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2);
+    public static void glVertexAttrib3sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2) {
+        ARBVertexShader.glVertexAttrib3sARB(index, v0, v1, v2);
+    }
 
     // --- [ glVertexAttrib3fARB ] ---
 
@@ -271,7 +285,9 @@ public class ARBVertexProgram {
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
      */
-    public static native void glVertexAttrib3fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2);
+    public static void glVertexAttrib3fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2) {
+        ARBVertexShader.glVertexAttrib3fARB(index, v0, v1, v2);
+    }
 
     // --- [ glVertexAttrib3dARB ] ---
 
@@ -283,7 +299,9 @@ public class ARBVertexProgram {
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
      */
-    public static native void glVertexAttrib3dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2);
+    public static void glVertexAttrib3dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2) {
+        ARBVertexShader.glVertexAttrib3dARB(index, v0, v1, v2);
+    }
 
     // --- [ glVertexAttrib4sARB ] ---
 
@@ -296,7 +314,9 @@ public class ARBVertexProgram {
      * @param v2    the vertex attribute z component
      * @param v3    the vertex attribute w component
      */
-    public static native void glVertexAttrib4sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2, @NativeType("GLshort") short v3);
+    public static void glVertexAttrib4sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2, @NativeType("GLshort") short v3) {
+        ARBVertexShader.glVertexAttrib4sARB(index, v0, v1, v2, v3);
+    }
 
     // --- [ glVertexAttrib4fARB ] ---
 
@@ -309,7 +329,9 @@ public class ARBVertexProgram {
      * @param v2    the vertex attribute z component
      * @param v3    the vertex attribute w component
      */
-    public static native void glVertexAttrib4fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2, @NativeType("GLfloat") float v3);
+    public static void glVertexAttrib4fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2, @NativeType("GLfloat") float v3) {
+        ARBVertexShader.glVertexAttrib4fARB(index, v0, v1, v2, v3);
+    }
 
     // --- [ glVertexAttrib4dARB ] ---
 
@@ -322,7 +344,9 @@ public class ARBVertexProgram {
      * @param v2    the vertex attribute z component
      * @param v3    the vertex attribute w component
      */
-    public static native void glVertexAttrib4dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2, @NativeType("GLdouble") double v3);
+    public static void glVertexAttrib4dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2, @NativeType("GLdouble") double v3) {
+        ARBVertexShader.glVertexAttrib4dARB(index, v0, v1, v2, v3);
+    }
 
     // --- [ glVertexAttrib4NubARB ] ---
 
@@ -335,12 +359,16 @@ public class ARBVertexProgram {
      * @param z     the vertex attribute z component
      * @param w     the vertex attribute w component
      */
-    public static native void glVertexAttrib4NubARB(@NativeType("GLuint") int index, @NativeType("GLubyte") byte x, @NativeType("GLubyte") byte y, @NativeType("GLubyte") byte z, @NativeType("GLubyte") byte w);
+    public static void glVertexAttrib4NubARB(@NativeType("GLuint") int index, @NativeType("GLubyte") byte x, @NativeType("GLubyte") byte y, @NativeType("GLubyte") byte z, @NativeType("GLubyte") byte w) {
+        ARBVertexShader.glVertexAttrib4NubARB(index, x, y, z, w);
+    }
 
     // --- [ glVertexAttrib1svARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB} */
-    public static native void nglVertexAttrib1svARB(int index, long v);
+    public static void nglVertexAttrib1svARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib1svARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib1sARB VertexAttrib1sARB}.
@@ -358,7 +386,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib1fvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB} */
-    public static native void nglVertexAttrib1fvARB(int index, long v);
+    public static void nglVertexAttrib1fvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib1fvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib1fARB VertexAttrib1fARB}.
@@ -376,7 +406,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib1dvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB} */
-    public static native void nglVertexAttrib1dvARB(int index, long v);
+    public static void nglVertexAttrib1dvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib1dvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib1dARB VertexAttrib1dARB}.
@@ -394,7 +426,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib2svARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB} */
-    public static native void nglVertexAttrib2svARB(int index, long v);
+    public static void nglVertexAttrib2svARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib2svARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib2sARB VertexAttrib2sARB}.
@@ -412,7 +446,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib2fvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB} */
-    public static native void nglVertexAttrib2fvARB(int index, long v);
+    public static void nglVertexAttrib2fvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib2fvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib2fARB VertexAttrib2fARB}.
@@ -430,7 +466,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib2dvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB} */
-    public static native void nglVertexAttrib2dvARB(int index, long v);
+    public static void nglVertexAttrib2dvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib2dvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib2dARB VertexAttrib2dARB}.
@@ -448,7 +486,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib3svARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB} */
-    public static native void nglVertexAttrib3svARB(int index, long v);
+    public static void nglVertexAttrib3svARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib3svARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib3sARB VertexAttrib3sARB}.
@@ -466,7 +506,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib3fvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB} */
-    public static native void nglVertexAttrib3fvARB(int index, long v);
+    public static void nglVertexAttrib3fvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib3fvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib3fARB VertexAttrib3fARB}.
@@ -484,7 +526,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib3dvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB} */
-    public static native void nglVertexAttrib3dvARB(int index, long v);
+    public static void nglVertexAttrib3dvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib3dvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib3dARB VertexAttrib3dARB}.
@@ -502,7 +546,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4fvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB} */
-    public static native void nglVertexAttrib4fvARB(int index, long v);
+    public static void nglVertexAttrib4fvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4fvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -520,7 +566,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4bvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4bvARB VertexAttrib4bvARB} */
-    public static native void nglVertexAttrib4bvARB(int index, long v);
+    public static void nglVertexAttrib4bvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4bvARB(index, v);
+    }
 
     /**
      * Byte pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -538,7 +586,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4svARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB} */
-    public static native void nglVertexAttrib4svARB(int index, long v);
+    public static void nglVertexAttrib4svARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4svARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib4sARB VertexAttrib4sARB}.
@@ -556,7 +606,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4ivARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB} */
-    public static native void nglVertexAttrib4ivARB(int index, long v);
+    public static void nglVertexAttrib4ivARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4ivARB(index, v);
+    }
 
     /**
      * Integer pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -574,7 +626,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4ubvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4ubvARB VertexAttrib4ubvARB} */
-    public static native void nglVertexAttrib4ubvARB(int index, long v);
+    public static void nglVertexAttrib4ubvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4ubvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib4NubARB VertexAttrib4NubARB}.
@@ -592,7 +646,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4usvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB} */
-    public static native void nglVertexAttrib4usvARB(int index, long v);
+    public static void nglVertexAttrib4usvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4usvARB(index, v);
+    }
 
     /**
      * Unsigned short pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -610,7 +666,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4uivARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB} */
-    public static native void nglVertexAttrib4uivARB(int index, long v);
+    public static void nglVertexAttrib4uivARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4uivARB(index, v);
+    }
 
     /**
      * Unsigned int pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -628,7 +686,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4dvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB} */
-    public static native void nglVertexAttrib4dvARB(int index, long v);
+    public static void nglVertexAttrib4dvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4dvARB(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttrib4dARB VertexAttrib4dARB}.
@@ -646,7 +706,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4NbvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4NbvARB VertexAttrib4NbvARB} */
-    public static native void nglVertexAttrib4NbvARB(int index, long v);
+    public static void nglVertexAttrib4NbvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4NbvARB(index, v);
+    }
 
     /**
      * Normalized byte pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -664,7 +726,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4NsvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB} */
-    public static native void nglVertexAttrib4NsvARB(int index, long v);
+    public static void nglVertexAttrib4NsvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4NsvARB(index, v);
+    }
 
     /**
      * Normalized short pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -682,7 +746,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4NivARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB} */
-    public static native void nglVertexAttrib4NivARB(int index, long v);
+    public static void nglVertexAttrib4NivARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4NivARB(index, v);
+    }
 
     /**
      * Normalized int pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -700,7 +766,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4NubvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4NubvARB VertexAttrib4NubvARB} */
-    public static native void nglVertexAttrib4NubvARB(int index, long v);
+    public static void nglVertexAttrib4NubvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4NubvARB(index, v);
+    }
 
     /**
      * Normalized unsigned byte pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -718,7 +786,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4NusvARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB} */
-    public static native void nglVertexAttrib4NusvARB(int index, long v);
+    public static void nglVertexAttrib4NusvARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4NusvARB(index, v);
+    }
 
     /**
      * Normalized unsigned short pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -736,7 +806,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttrib4NuivARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB} */
-    public static native void nglVertexAttrib4NuivARB(int index, long v);
+    public static void nglVertexAttrib4NuivARB(int index, long v) {
+        ARBVertexShader.nglVertexAttrib4NuivARB(index, v);
+    }
 
     /**
      * Normalized unsigned int pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
@@ -754,7 +826,9 @@ public class ARBVertexProgram {
     // --- [ glVertexAttribPointerARB ] ---
 
     /** Unsafe version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
-    public static native void nglVertexAttribPointerARB(int index, int size, int type, boolean normalized, int stride, long pointer);
+    public static void nglVertexAttribPointerARB(int index, int size, int type, boolean normalized, int stride, long pointer) {
+        ARBVertexShader.nglVertexAttribPointerARB(index, size, type, normalized, stride, pointer);
+    }
 
     /**
      * Specifies the location and organization of a vertex attribute array.
@@ -843,7 +917,9 @@ public class ARBVertexProgram {
      *
      * @param index the index of the generic vertex attribute to be enabled
      */
-    public static native void glEnableVertexAttribArrayARB(@NativeType("GLuint") int index);
+    public static void glEnableVertexAttribArrayARB(@NativeType("GLuint") int index) {
+        ARBVertexShader.glEnableVertexAttribArrayARB(index);
+    }
 
     // --- [ glDisableVertexAttribArrayARB ] ---
 
@@ -852,7 +928,9 @@ public class ARBVertexProgram {
      *
      * @param index the index of the generic vertex attribute to be disabled
      */
-    public static native void glDisableVertexAttribArrayARB(@NativeType("GLuint") int index);
+    public static void glDisableVertexAttribArrayARB(@NativeType("GLuint") int index) {
+        ARBVertexShader.glDisableVertexAttribArrayARB(index);
+    }
 
     // --- [ glProgramStringARB ] ---
 
@@ -1226,7 +1304,9 @@ public class ARBVertexProgram {
     // --- [ glGetVertexAttribfvARB ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB} */
-    public static native void nglGetVertexAttribfvARB(int index, int pname, long params);
+    public static void nglGetVertexAttribfvARB(int index, int pname, long params) {
+        ARBVertexShader.nglGetVertexAttribfvARB(index, pname, params);
+    }
 
     /**
      * Float version of {@link #glGetVertexAttribivARB GetVertexAttribivARB}.
@@ -1245,7 +1325,9 @@ public class ARBVertexProgram {
     // --- [ glGetVertexAttribdvARB ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB} */
-    public static native void nglGetVertexAttribdvARB(int index, int pname, long params);
+    public static void nglGetVertexAttribdvARB(int index, int pname, long params) {
+        ARBVertexShader.nglGetVertexAttribdvARB(index, pname, params);
+    }
 
     /**
      * Double version of {@link #glGetVertexAttribivARB GetVertexAttribivARB}.
@@ -1264,7 +1346,9 @@ public class ARBVertexProgram {
     // --- [ glGetVertexAttribivARB ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB} */
-    public static native void nglGetVertexAttribivARB(int index, int pname, long params);
+    public static void nglGetVertexAttribivARB(int index, int pname, long params) {
+        ARBVertexShader.nglGetVertexAttribivARB(index, pname, params);
+    }
 
     /**
      * Returns the integer value of a generic vertex attribute parameter.
@@ -1301,7 +1385,9 @@ public class ARBVertexProgram {
     // --- [ glGetVertexAttribPointervARB ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribPointervARB GetVertexAttribPointervARB} */
-    public static native void nglGetVertexAttribPointervARB(int index, int pname, long pointer);
+    public static void nglGetVertexAttribPointervARB(int index, int pname, long pointer) {
+        ARBVertexShader.nglGetVertexAttribPointervARB(index, pname, pointer);
+    }
 
     /**
      * Returns the address of the specified generic vertex attribute pointer.

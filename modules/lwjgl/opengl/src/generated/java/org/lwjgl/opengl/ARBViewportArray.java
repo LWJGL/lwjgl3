@@ -65,7 +65,9 @@ public class ARBViewportArray {
      *
      * @param count the number of viewports to set
      */
-    public static native void nglViewportArrayv(int first, int count, long v);
+    public static void nglViewportArrayv(int first, int count, long v) {
+        GL41.nglViewportArrayv(first, count, v);
+    }
 
     /**
      * Sets multiple viewports.
@@ -88,12 +90,16 @@ public class ARBViewportArray {
      * @param w     the viewport width
      * @param h     the viewport height
      */
-    public static native void glViewportIndexedf(@NativeType("GLuint") int index, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float w, @NativeType("GLfloat") float h);
+    public static void glViewportIndexedf(@NativeType("GLuint") int index, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float w, @NativeType("GLfloat") float h) {
+        GL41.glViewportIndexedf(index, x, y, w, h);
+    }
 
     // --- [ glViewportIndexedfv ] ---
 
     /** Unsafe version of: {@link #glViewportIndexedfv ViewportIndexedfv} */
-    public static native void nglViewportIndexedfv(int index, long v);
+    public static void nglViewportIndexedfv(int index, long v) {
+        GL41.nglViewportIndexedfv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glViewportIndexedf ViewportIndexedf}.
@@ -115,7 +121,9 @@ public class ARBViewportArray {
      *
      * @param count the number of scissor boxes to modify
      */
-    public static native void nglScissorArrayv(int first, int count, long v);
+    public static void nglScissorArrayv(int first, int count, long v) {
+        GL41.nglScissorArrayv(first, count, v);
+    }
 
     /**
      * Defines the scissor box for multiple viewports.
@@ -138,12 +146,16 @@ public class ARBViewportArray {
      * @param width  the scissor box width
      * @param height the scissor box height
      */
-    public static native void glScissorIndexed(@NativeType("GLuint") int index, @NativeType("GLint") int left, @NativeType("GLint") int bottom, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glScissorIndexed(@NativeType("GLuint") int index, @NativeType("GLint") int left, @NativeType("GLint") int bottom, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL41.glScissorIndexed(index, left, bottom, width, height);
+    }
 
     // --- [ glScissorIndexedv ] ---
 
     /** Unsafe version of: {@link #glScissorIndexedv ScissorIndexedv} */
-    public static native void nglScissorIndexedv(int index, long v);
+    public static void nglScissorIndexedv(int index, long v) {
+        GL41.nglScissorIndexedv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glScissorIndexed ScissorIndexed}.
@@ -165,7 +177,9 @@ public class ARBViewportArray {
      *
      * @param count the number of viewports whose depth range to update
      */
-    public static native void nglDepthRangeArrayv(int first, int count, long v);
+    public static void nglDepthRangeArrayv(int first, int count, long v) {
+        GL41.nglDepthRangeArrayv(first, count, v);
+    }
 
     /**
      * Specifies mapping of depth values from normalized device coordinates to window coordinates for a specified set of viewports.
@@ -186,12 +200,16 @@ public class ARBViewportArray {
      * @param zNear the mapping of the near clipping plane to window coordinates. The initial value is 0.
      * @param zFar  the mapping of the far clipping plane to window coordinates. The initial value is 1.
      */
-    public static native void glDepthRangeIndexed(@NativeType("GLuint") int index, @NativeType("GLdouble") double zNear, @NativeType("GLdouble") double zFar);
+    public static void glDepthRangeIndexed(@NativeType("GLuint") int index, @NativeType("GLdouble") double zNear, @NativeType("GLdouble") double zFar) {
+        GL41.glDepthRangeIndexed(index, zNear, zFar);
+    }
 
     // --- [ glGetFloati_v ] ---
 
     /** Unsafe version of: {@link #glGetFloati_v GetFloati_v} */
-    public static native void nglGetFloati_v(int target, int index, long data);
+    public static void nglGetFloati_v(int target, int index, long data) {
+        GL41.nglGetFloati_v(target, index, data);
+    }
 
     /**
      * Queries the float value of an indexed state variable.
@@ -228,7 +246,9 @@ public class ARBViewportArray {
     // --- [ glGetDoublei_v ] ---
 
     /** Unsafe version of: {@link #glGetDoublei_v GetDoublei_v} */
-    public static native void nglGetDoublei_v(int target, int index, long data);
+    public static void nglGetDoublei_v(int target, int index, long data) {
+        GL41.nglGetDoublei_v(target, index, data);
+    }
 
     /**
      * Queries the double value of an indexed state variable.

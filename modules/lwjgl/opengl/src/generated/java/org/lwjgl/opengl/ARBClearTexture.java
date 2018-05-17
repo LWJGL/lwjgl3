@@ -55,7 +55,9 @@ public class ARBClearTexture {
     // --- [ glClearTexSubImage ] ---
 
     /** Unsafe version of: {@link #glClearTexSubImage ClearTexSubImage} */
-    public static native void nglClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long data);
+    public static void nglClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long data) {
+        GL44.nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
 
     /**
      * Fills all or part of a texture image with a constant value.
@@ -220,7 +222,9 @@ public class ARBClearTexture {
     // --- [ glClearTexImage ] ---
 
     /** Unsafe version of: {@link #glClearTexImage ClearTexImage} */
-    public static native void nglClearTexImage(int texture, int level, int format, int type, long data);
+    public static void nglClearTexImage(int texture, int level, int format, int type, long data) {
+        GL44.nglClearTexImage(texture, level, format, type, data);
+    }
 
     /**
      * Is equivalent to calling {@link #glClearTexSubImage ClearTexSubImage} with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
@@ -305,6 +309,78 @@ public class ARBClearTexture {
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
+    }
+
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearTexSubImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearTexSubImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearTexSubImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
+    public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
+        long __functionAddress = GL.getICD().glClearTexSubImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearTexImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearTexImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearTexImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
+    public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
+        long __functionAddress = GL.getICD().glClearTexImage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
     }
 
 }

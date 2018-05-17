@@ -78,7 +78,9 @@ public class EXTSemaphore {
 
     // --- [ glGetUnsignedBytevEXT ] ---
 
-    public static native void nglGetUnsignedBytevEXT(int pname, long data);
+    public static void nglGetUnsignedBytevEXT(int pname, long data) {
+        EXTMemoryObject.nglGetUnsignedBytevEXT(pname, data);
+    }
 
     public static void glGetUnsignedBytevEXT(@NativeType("GLenum") int pname, @NativeType("GLubyte *") ByteBuffer data) {
         nglGetUnsignedBytevEXT(pname, memAddress(data));
@@ -86,7 +88,9 @@ public class EXTSemaphore {
 
     // --- [ glGetUnsignedBytei_vEXT ] ---
 
-    public static native void nglGetUnsignedBytei_vEXT(int target, int index, long data);
+    public static void nglGetUnsignedBytei_vEXT(int target, int index, long data) {
+        EXTMemoryObject.nglGetUnsignedBytei_vEXT(target, index, data);
+    }
 
     public static void glGetUnsignedBytei_vEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLubyte *") ByteBuffer data) {
         nglGetUnsignedBytei_vEXT(target, index, memAddress(data));

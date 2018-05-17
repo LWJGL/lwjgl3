@@ -62,12 +62,16 @@ public class ARBTimerQuery {
      * @param id     the name of a query object into which to record the GL time
      * @param target the counter to query. Must be:<br><table><tr><td>{@link GL33#GL_TIMESTAMP TIMESTAMP}</td></tr></table>
      */
-    public static native void glQueryCounter(@NativeType("GLuint") int id, @NativeType("GLenum") int target);
+    public static void glQueryCounter(@NativeType("GLuint") int id, @NativeType("GLenum") int target) {
+        GL33.glQueryCounter(id, target);
+    }
 
     // --- [ glGetQueryObjecti64v ] ---
 
     /** Unsafe version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v} */
-    public static native void nglGetQueryObjecti64v(int id, int pname, long params);
+    public static void nglGetQueryObjecti64v(int id, int pname, long params) {
+        GL33.nglGetQueryObjecti64v(id, pname, params);
+    }
 
     /**
      * Returns the 64bit integer value of query object parameter.
@@ -104,7 +108,9 @@ public class ARBTimerQuery {
     // --- [ glGetQueryObjectui64v ] ---
 
     /** Unsafe version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v} */
-    public static native void nglGetQueryObjectui64v(int id, int pname, long params);
+    public static void nglGetQueryObjectui64v(int id, int pname, long params) {
+        GL33.nglGetQueryObjectui64v(id, pname, params);
+    }
 
     /**
      * Unsigned version of {@link #glGetQueryObjecti64v GetQueryObjecti64v}.

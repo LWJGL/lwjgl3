@@ -56,7 +56,9 @@ public class ARBMultiBind {
      *
      * @param count the number of bindings
      */
-    public static native void nglBindBuffersBase(int target, int first, int count, long buffers);
+    public static void nglBindBuffersBase(int target, int first, int count, long buffers) {
+        GL44.nglBindBuffersBase(target, first, count, buffers);
+    }
 
     /**
      * Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
@@ -89,7 +91,9 @@ public class ARBMultiBind {
      *
      * @param count the number of bindings
      */
-    public static native void nglBindBuffersRange(int target, int first, int count, long buffers, long offsets, long sizes);
+    public static void nglBindBuffersRange(int target, int first, int count, long buffers, long offsets, long sizes) {
+        GL44.nglBindBuffersRange(target, first, count, buffers, offsets, sizes);
+    }
 
     /**
      * Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
@@ -134,7 +138,9 @@ public class ARBMultiBind {
      *
      * @param count the number of texture objects
      */
-    public static native void nglBindTextures(int first, int count, long textures);
+    public static void nglBindTextures(int first, int count, long textures) {
+        GL44.nglBindTextures(first, count, textures);
+    }
 
     /**
      * Binds {@code count} existing texture objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not
@@ -186,7 +192,9 @@ public class ARBMultiBind {
      *
      * @param count the number of sampler objects
      */
-    public static native void nglBindSamplers(int first, int count, long samplers);
+    public static void nglBindSamplers(int first, int count, long samplers) {
+        GL44.nglBindSamplers(first, count, samplers);
+    }
 
     /**
      * Binds {@code count} existing sampler objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code samplers} is not
@@ -222,7 +230,9 @@ public class ARBMultiBind {
      *
      * @param count the number of image units
      */
-    public static native void nglBindImageTextures(int first, int count, long textures);
+    public static void nglBindImageTextures(int first, int count, long textures) {
+        GL44.nglBindImageTextures(first, count, textures);
+    }
 
     /**
      * Binds {@code count} existing texture objects to image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not {@code NULL}, it
@@ -269,7 +279,9 @@ public class ARBMultiBind {
      *
      * @param count the number of vertex buffer binding points
      */
-    public static native void nglBindVertexBuffers(int first, int count, long buffers, long offsets, long strides);
+    public static void nglBindVertexBuffers(int first, int count, long buffers, long offsets, long strides) {
+        GL44.nglBindVertexBuffers(first, count, buffers, offsets, strides);
+    }
 
     /**
      * Binds {@code count} existing buffer objects to vertex buffer binding points numbered {@code first} through {@code first+count-1}. If {@code buffers} is
