@@ -48,16 +48,24 @@ public class VR {
         k_unInputValuePropertyTag        = 33,
         k_unWildcardPropertyTag          = 34,
         k_unHapticVibrationPropertyTag   = 35,
+        k_unSkeletonPropertyTag          = 36,
         k_unOpenVRInternalReserved_Start = 1000,
         k_unOpenVRInternalReserved_End   = 10000,
         k_unScreenshotHandleInvalid      = 0,
-        k_unNotificationTextMaxSize      = 256;
+        k_unNotificationTextMaxSize      = 256,
+        k_unMaxActionNameLength          = 64,
+        k_unMaxActionSetNameLength       = 64,
+        k_unMaxActionOriginCount         = 16;
 
     /** OpenVR constants. */
     public static final long
         k_ulInvalidPropertyContainer = 0L,
         k_ulInvalidDriverHandle      = 0L,
-        k_ulOverlayHandleInvalid     = 0L;
+        k_ulOverlayHandleInvalid     = 0L,
+        k_ulInvalidActionHandle      = 0L,
+        k_ulInvalidActionSetHandle   = 0L,
+        k_ulInvalidInputValueHandle  = 0L,
+        k_ulInvalidIOBufferHandle    = 0L;
 
     /** No string property will ever be longer than this length. */
     public static final int k_unMaxPropertyStringSize = 32768;
@@ -153,6 +161,7 @@ public class VR {
         k_pch_SteamVR_ForceWindows32bitVRMonitor                       = "forceWindows32BitVRMonitor",
         k_pch_SteamVR_DebugInput                                       = "debugInput",
         k_pch_SteamVR_LegacyInputRebinding                             = "legacyInputRebinding",
+        k_pch_SteamVR_DebugInputBinding                                = "debugInputBinding",
         k_pch_Lighthouse_Section                                       = "driver_lighthouse",
         k_pch_Lighthouse_DisableIMU_Bool                               = "disableimu",
         k_pch_Lighthouse_DisableIMUExceptHMD_Bool                      = "disableimuexcepthmd",
@@ -240,9 +249,16 @@ public class VR {
         k_pch_Driver_Enable_Bool                                       = "enable",
         k_pch_WebInterface_Section                                     = "WebInterface",
         k_pch_WebInterface_WebPort_String                              = "WebPort",
+        k_pch_TrackingOverride_Section                                 = "TrackingOverrides",
+        k_pch_App_BindingAutosaveURLSuffix_String                      = "AutosaveURL",
+        k_pch_App_BindingCurrentURLSuffix_String                       = "CurrentURL",
+        k_pch_App_NeedToUpdateAutosaveSuffix_Bool                      = "NeedToUpdateAutosave",
+        k_pch_App_ActionManifestURL_String                             = "ActionManifestURL",
         IVRScreenshots_Version                                         = "IVRScreenshots_001",
         IVRResources_Version                                           = "IVRResources_001",
-        IVRDriverManager_Version                                       = "IVRDriverManager_001";
+        IVRDriverManager_Version                                       = "IVRDriverManager_001",
+        IVRInput_Version                                               = "IVRInput_003",
+        IVRIOBuffer_Version                                            = "IVRIOBuffer_001";
 
     /**
      * EVREye
@@ -490,6 +506,11 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_MinimumIpdStepMeters_Float ETrackedDeviceProperty_Prop_MinimumIpdStepMeters_Float}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_AudioBridgeFirmwareVersion_Uint64 ETrackedDeviceProperty_Prop_AudioBridgeFirmwareVersion_Uint64}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ImageBridgeFirmwareVersion_Uint64 ETrackedDeviceProperty_Prop_ImageBridgeFirmwareVersion_Uint64}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ImuToHeadTransform_Matrix34 ETrackedDeviceProperty_Prop_ImuToHeadTransform_Matrix34}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryGyroBias_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryGyroBias_Vector3}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_AttachedDeviceId_String ETrackedDeviceProperty_Prop_AttachedDeviceId_String}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_SupportedButtons_Uint64 ETrackedDeviceProperty_Prop_SupportedButtons_Uint64}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_Axis0Type_Int32 ETrackedDeviceProperty_Prop_Axis0Type_Int32}</li>
@@ -635,6 +656,11 @@ public class VR {
         ETrackedDeviceProperty_Prop_MinimumIpdStepMeters_Float                     = 2060,
         ETrackedDeviceProperty_Prop_AudioBridgeFirmwareVersion_Uint64              = 2061,
         ETrackedDeviceProperty_Prop_ImageBridgeFirmwareVersion_Uint64              = 2062,
+        ETrackedDeviceProperty_Prop_ImuToHeadTransform_Matrix34                    = 2063,
+        ETrackedDeviceProperty_Prop_ImuFactoryGyroBias_Vector3                     = 2064,
+        ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3                    = 2065,
+        ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3            = 2066,
+        ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3           = 2067,
         ETrackedDeviceProperty_Prop_AttachedDeviceId_String                        = 3000,
         ETrackedDeviceProperty_Prop_SupportedButtons_Uint64                        = 3001,
         ETrackedDeviceProperty_Prop_Axis0Type_Int32                                = 3002,
@@ -916,6 +942,8 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_MessageOverlay_Closed EVREventType_VREvent_MessageOverlay_Closed}</li>
      * <li>{@link #EVREventType_VREvent_MessageOverlayCloseRequested EVREventType_VREvent_MessageOverlayCloseRequested}</li>
      * <li>{@link #EVREventType_VREvent_Input_HapticVibration EVREventType_VREvent_Input_HapticVibration}</li>
+     * <li>{@link #EVREventType_VREvent_Input_BindingLoadFailed EVREventType_VREvent_Input_BindingLoadFailed} - data is process</li>
+     * <li>{@link #EVREventType_VREvent_Input_BindingLoadSuccessful EVREventType_VREvent_Input_BindingLoadSuccessful} - data is process</li>
      * <li>{@link #EVREventType_VREvent_VendorSpecific_Reserved_Start EVREventType_VREvent_VendorSpecific_Reserved_Start}</li>
      * <li>{@link #EVREventType_VREvent_VendorSpecific_Reserved_End EVREventType_VREvent_VendorSpecific_Reserved_End}</li>
      * </ul>
@@ -1058,6 +1086,8 @@ public class VR {
         EVREventType_VREvent_MessageOverlay_Closed                     = 1650,
         EVREventType_VREvent_MessageOverlayCloseRequested              = 1651,
         EVREventType_VREvent_Input_HapticVibration                     = 1700,
+        EVREventType_VREvent_Input_BindingLoadFailed                   = 1701,
+        EVREventType_VREvent_Input_BindingLoadSuccessful               = 1702,
         EVREventType_VREvent_VendorSpecific_Reserved_Start             = 10000,
         EVREventType_VREvent_VendorSpecific_Reserved_End               = 19999;
 
@@ -1173,19 +1203,31 @@ public class VR {
      * <li>{@link #EVRInputError_VRInputError_IPCError EVRInputError_VRInputError_IPCError}</li>
      * <li>{@link #EVRInputError_VRInputError_NoActiveActionSet EVRInputError_VRInputError_NoActiveActionSet}</li>
      * <li>{@link #EVRInputError_VRInputError_InvalidDevice EVRInputError_VRInputError_InvalidDevice}</li>
+     * <li>{@link #EVRInputError_VRInputError_InvalidSkeleton EVRInputError_VRInputError_InvalidSkeleton}</li>
+     * <li>{@link #EVRInputError_VRInputError_InvalidBoneCount EVRInputError_VRInputError_InvalidBoneCount}</li>
+     * <li>{@link #EVRInputError_VRInputError_InvalidCompressedData EVRInputError_VRInputError_InvalidCompressedData}</li>
+     * <li>{@link #EVRInputError_VRInputError_NoData EVRInputError_VRInputError_NoData}</li>
+     * <li>{@link #EVRInputError_VRInputError_BufferTooSmall EVRInputError_VRInputError_BufferTooSmall}</li>
+     * <li>{@link #EVRInputError_VRInputError_MismatchedActionManifest EVRInputError_VRInputError_MismatchedActionManifest}</li>
      * </ul>
      */
     public static final int
-        EVRInputError_VRInputError_None               = 0,
-        EVRInputError_VRInputError_NameNotFound       = 1,
-        EVRInputError_VRInputError_WrongType          = 2,
-        EVRInputError_VRInputError_InvalidHandle      = 3,
-        EVRInputError_VRInputError_InvalidParam       = 4,
-        EVRInputError_VRInputError_NoSteam            = 5,
-        EVRInputError_VRInputError_MaxCapacityReached = 6,
-        EVRInputError_VRInputError_IPCError           = 7,
-        EVRInputError_VRInputError_NoActiveActionSet  = 8,
-        EVRInputError_VRInputError_InvalidDevice      = 9;
+        EVRInputError_VRInputError_None                     = 0,
+        EVRInputError_VRInputError_NameNotFound             = 1,
+        EVRInputError_VRInputError_WrongType                = 2,
+        EVRInputError_VRInputError_InvalidHandle            = 3,
+        EVRInputError_VRInputError_InvalidParam             = 4,
+        EVRInputError_VRInputError_NoSteam                  = 5,
+        EVRInputError_VRInputError_MaxCapacityReached       = 6,
+        EVRInputError_VRInputError_IPCError                 = 7,
+        EVRInputError_VRInputError_NoActiveActionSet        = 8,
+        EVRInputError_VRInputError_InvalidDevice            = 9,
+        EVRInputError_VRInputError_InvalidSkeleton          = 10,
+        EVRInputError_VRInputError_InvalidBoneCount         = 11,
+        EVRInputError_VRInputError_InvalidCompressedData    = 12,
+        EVRInputError_VRInputError_NoData                   = 13,
+        EVRInputError_VRInputError_BufferTooSmall           = 14,
+        EVRInputError_VRInputError_MismatchedActionManifest = 15;
 
     /**
      * EHiddenAreaMeshType
@@ -1702,6 +1744,28 @@ public class VR {
         EVSync_VSync_None         = 0,
         EVSync_VSync_WaitRender   = 1,
         EVSync_VSync_NoWaitRender = 2;
+
+    /**
+     * {@code Imu_OffScaleFlags}: raw IMU data provided by {@code IVRIOBuffer} from paths to tracked devices with IMUs.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #Imu_OffScaleFlags_OffScale_AccelX Imu_OffScaleFlags_OffScale_AccelX}</li>
+     * <li>{@link #Imu_OffScaleFlags_OffScale_AccelY Imu_OffScaleFlags_OffScale_AccelY}</li>
+     * <li>{@link #Imu_OffScaleFlags_OffScale_AccelZ Imu_OffScaleFlags_OffScale_AccelZ}</li>
+     * <li>{@link #Imu_OffScaleFlags_OffScale_GyroX Imu_OffScaleFlags_OffScale_GyroX}</li>
+     * <li>{@link #Imu_OffScaleFlags_OffScale_GyroY Imu_OffScaleFlags_OffScale_GyroY}</li>
+     * <li>{@link #Imu_OffScaleFlags_OffScale_GyroZ Imu_OffScaleFlags_OffScale_GyroZ}</li>
+     * </ul>
+     */
+    public static final int
+        Imu_OffScaleFlags_OffScale_AccelX = 1,
+        Imu_OffScaleFlags_OffScale_AccelY = 2,
+        Imu_OffScaleFlags_OffScale_AccelZ = 4,
+        Imu_OffScaleFlags_OffScale_GyroX  = 8,
+        Imu_OffScaleFlags_OffScale_GyroY  = 16,
+        Imu_OffScaleFlags_OffScale_GyroZ  = 32;
 
     /**
      * {@code EVRApplicationError}: Used for all errors reported by the {@link VRApplications} interface.
@@ -2231,6 +2295,76 @@ public class VR {
         EVRScreenshotError_VRScreenshotError_NotFound                    = 101,
         EVRScreenshotError_VRScreenshotError_BufferTooSmall              = 102,
         EVRScreenshotError_VRScreenshotError_ScreenshotAlreadyInProgress = 108;
+
+    /**
+     * {@code EVRSkeletalTransformSpace}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action}</li>
+     * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent}</li>
+     * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive}</li>
+     * </ul>
+     */
+    public static final int
+        EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action   = 0,
+        EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent   = 1,
+        EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive = 2;
+
+    /**
+     * {@code EVRInputFilterCancelType}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EVRInputFilterCancelType_VRInputFilterCancel_Timers EVRInputFilterCancelType_VRInputFilterCancel_Timers}</li>
+     * <li>{@link #EVRInputFilterCancelType_VRInputFilterCancel_Momentum EVRInputFilterCancelType_VRInputFilterCancel_Momentum}</li>
+     * </ul>
+     */
+    public static final int
+        EVRInputFilterCancelType_VRInputFilterCancel_Timers   = 0,
+        EVRInputFilterCancelType_VRInputFilterCancel_Momentum = 1;
+
+    /**
+     * {@code EIOBufferError}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EIOBufferError_IOBuffer_Success EIOBufferError_IOBuffer_Success}</li>
+     * <li>{@link #EIOBufferError_IOBuffer_OperationFailed EIOBufferError_IOBuffer_OperationFailed}</li>
+     * <li>{@link #EIOBufferError_IOBuffer_InvalidHandle EIOBufferError_IOBuffer_InvalidHandle}</li>
+     * <li>{@link #EIOBufferError_IOBuffer_InvalidArgument EIOBufferError_IOBuffer_InvalidArgument}</li>
+     * <li>{@link #EIOBufferError_IOBuffer_PathExists EIOBufferError_IOBuffer_PathExists}</li>
+     * <li>{@link #EIOBufferError_IOBuffer_PathDoesNotExist EIOBufferError_IOBuffer_PathDoesNotExist}</li>
+     * <li>{@link #EIOBufferError_IOBuffer_Permission EIOBufferError_IOBuffer_Permission}</li>
+     * </ul>
+     */
+    public static final int
+        EIOBufferError_IOBuffer_Success          = 0,
+        EIOBufferError_IOBuffer_OperationFailed  = 100,
+        EIOBufferError_IOBuffer_InvalidHandle    = 101,
+        EIOBufferError_IOBuffer_InvalidArgument  = 102,
+        EIOBufferError_IOBuffer_PathExists       = 103,
+        EIOBufferError_IOBuffer_PathDoesNotExist = 104,
+        EIOBufferError_IOBuffer_Permission       = 105;
+
+    /**
+     * {@code EIOBufferMode}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EIOBufferMode_IOBufferMode_Read EIOBufferMode_IOBufferMode_Read}</li>
+     * <li>{@link #EIOBufferMode_IOBufferMode_Write EIOBufferMode_IOBufferMode_Write}</li>
+     * <li>{@link #EIOBufferMode_IOBufferMode_Create EIOBufferMode_IOBufferMode_Create}</li>
+     * </ul>
+     */
+    public static final int
+        EIOBufferMode_IOBufferMode_Read   = 1,
+        EIOBufferMode_IOBufferMode_Write  = 2,
+        EIOBufferMode_IOBufferMode_Create = 512;
 
     protected VR() {
         throw new UnsupportedOperationException();

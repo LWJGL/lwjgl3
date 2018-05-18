@@ -294,8 +294,12 @@ public final class JNI {
     public static native int callPI(long __functionAddress, long param0, float param1);
     public static native int callJI(long __functionAddress, long param0, float param1, float param2);
     public static native int callJI(long __functionAddress, long param0, float param1, float param2, float param3);
+    public static native int callJI(long __functionAddress, long param0, float param1, float param2, float param3, float param4);
     public static native int callJI(long __functionAddress, long param0, int param1);
     public static native int callPI(long __functionAddress, long param0, int param1);
+    public static native int callJPI(long __functionAddress, long param0, int param1, float param2, long param3, int param4);
+    public static native int callJPPI(long __functionAddress, long param0, int param1, float param2, long param3, int param4, long param5);
+    public static native int callJPPI(long __functionAddress, long param0, int param1, float param2, long param3, int param4, long param5, int param6);
     public static native int callPI(long __functionAddress, long param0, int param1, int param2);
     public static native int callPI(long __functionAddress, long param0, int param1, int param2, int param3, int param4);
     public static native int callPI(long __functionAddress, long param0, int param1, int param2, int param3, int param4, int param5, int param6);
@@ -305,6 +309,7 @@ public final class JNI {
     public static native int callPPI(long __functionAddress, long param0, int param1, int param2, int param3, long param4);
     public static native int callPPPI(long __functionAddress, long param0, int param1, int param2, int param3, long param4, long param5);
     public static native int callPPI(long __functionAddress, long param0, int param1, int param2, long param3);
+    public static native int callPJI(long __functionAddress, long param0, int param1, int param2, long param3);
     public static native int callJPPJI(long __functionAddress, long param0, int param1, int param2, long param3, int param4, long param5, boolean param6, long param7);
     public static native int callPPPPI(long __functionAddress, long param0, int param1, int param2, long param3, long param4, long param5);
     public static native int callPPI(long __functionAddress, long param0, int param1, long param2);
@@ -322,6 +327,7 @@ public final class JNI {
     public static native int callPPJI(long __functionAddress, long param0, int param1, long param2, long param3);
     public static native int callJPPI(long __functionAddress, long param0, int param1, long param2, long param3);
     public static native int callPPPI(long __functionAddress, long param0, int param1, long param2, long param3);
+    public static native int callPPPI(long __functionAddress, long param0, int param1, long param2, long param3, int param4);
     public static native int callJPPI(long __functionAddress, long param0, int param1, long param2, long param3, int param4);
     public static native int callPPJPPI(long __functionAddress, long param0, int param1, long param2, long param3, int param4, long param5, long param6);
     public static native int callPPPPPPPI(long __functionAddress, long param0, int param1, long param2, long param3, int param4, long param5, long param6, long param7, long param8);
@@ -334,10 +340,12 @@ public final class JNI {
     public static native int callJI(long __functionAddress, long param0, int param1, boolean param2);
     public static native int callPJI(long __functionAddress, long param0, long param1);
     public static native int callJPI(long __functionAddress, long param0, long param1);
+    public static native int callJJI(long __functionAddress, long param0, long param1);
     public static native int callPPI(long __functionAddress, long param0, long param1);
     public static native int callPPI(long __functionAddress, long param0, long param1, float param2);
     public static native int callPJI(long __functionAddress, long param0, long param1, int param2);
     public static native int callPPI(long __functionAddress, long param0, long param1, int param2);
+    public static native int callJPI(long __functionAddress, long param0, long param1, int param2);
     public static native int callJPI(long __functionAddress, long param0, long param1, int param2, int param3);
     public static native int callPPI(long __functionAddress, long param0, long param1, int param2, int param3);
     public static native int callPPI(long __functionAddress, long param0, long param1, int param2, int param3, int param4);
@@ -368,6 +376,7 @@ public final class JNI {
     public static native int callPPJI(long __functionAddress, long param0, long param1, long param2);
     public static native int callPPPI(long __functionAddress, long param0, long param1, long param2);
     public static native int callJJPI(long __functionAddress, long param0, long param1, long param2);
+    public static native int callJJPI(long __functionAddress, long param0, long param1, long param2, int param3);
     public static native int callJPPI(long __functionAddress, long param0, long param1, long param2, int param3);
     public static native int callPPPI(long __functionAddress, long param0, long param1, long param2, int param3);
     public static native int callPPPPI(long __functionAddress, long param0, long param1, long param2, int param3, long param4);
@@ -393,6 +402,7 @@ public final class JNI {
     public static native long callJ(long __functionAddress, int param0, int param1);
     public static native long callPJ(long __functionAddress, int param0, int param1, long param2);
     public static native long callJ(long __functionAddress, int param0, int param1, boolean param2, int param3, int param4);
+    public static native long callJJ(long __functionAddress, long param0);
     public static native long callPJ(long __functionAddress, long param0);
     public static native long callPPJ(long __functionAddress, long param0, int param1, long param2);
     public static native long callPPJ(long __functionAddress, long param0, long param1);

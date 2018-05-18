@@ -35,6 +35,8 @@ val EVRRenderModelError = "EVRRenderModelError".enumType
 val EVRScreenshotError = "EVRScreenshotError".enumType
 val EVRSettingsError = "EVRSettingsError".enumType
 val EVRTrackedCameraError = "EVRTrackedCameraError".enumType
+val EVRInputError = "EVRInputError".enumType
+val EIOBufferError = "EIOBufferError".enumType
 
 val EVRApplicationProperty = "EVRApplicationProperty".enumType
 val EVRApplicationTransitionState = "EVRApplicationTransitionState".enumType
@@ -51,6 +53,7 @@ val EVRScreenshotPropertyFilenames = "EVRScreenshotPropertyFilenames".enumType
 val EVRScreenshotType = "EVRScreenshotType".enumType
 val EVRSubmitFlags = "EVRSubmitFlags".enumType
 val EVRTrackedCameraFrameType = "EVRTrackedCameraFrameType".enumType
+val EVRSkeletalTransformSpace = "EVRSkeletalTransformSpace".enumType
 
 val ChaperoneCalibrationState = "ChaperoneCalibrationState".enumType
 
@@ -69,6 +72,7 @@ val ETrackedDeviceProperty = "ETrackedDeviceProperty".enumType
 val ETrackedPropertyError = "ETrackedPropertyError".enumType
 val ETrackingResult = "ETrackingResult".enumType
 val ETrackingUniverseOrigin = "ETrackingUniverseOrigin".enumType
+val EIOBufferMode = "EIOBufferMode".enumType
 
 val VRMessageOverlayResponse = "VRMessageOverlayResponse".enumType
 val VROverlayFlags = "VROverlayFlags".enumType
@@ -78,9 +82,6 @@ val VROverlayTransformType = "VROverlayTransformType".enumType
 val PropertyContainerHandle_t = typedef(uint64_t, "PropertyContainerHandle_t")
 val PropertyTypeTag_t = typedef(uint32_t, "PropertyTypeTag_t")
 val DriverHandle_t = typedef(PropertyContainerHandle_t, "DriverHandle_t")
-val VRActionHandle_t = typedef(uint64_t, "VRActionHandle_t")
-val VRActionSetHandle_t = typedef(uint64_t, "VRActionSetHandle_t")
-val VRInputValueHandle_t = typedef(uint64_t, "VRInputValueHandle")
 val ScreenshotHandle_t = typedef(uint32_t, "ScreenshotHandle_t")
 val TextureID_t = typedef(int32_t, "TextureID_t")
 val TrackedCameraHandle_t = typedef(uint64_t, "TrackedCameraHandle_t")
@@ -91,6 +92,10 @@ val DriverId_t = typedef(uint32_t, "DriverId_t")
 val VRComponentProperties = typedef(uint32_t, "VRComponentProperties")
 val VRNotificationId = typedef(uint32_t, "VRNotificationId")
 val VROverlayHandle_t = typedef(uint64_t, "VROverlayHandle_t")
+val VRActionHandle_t = typedef(uint64_t, "VRActionHandle_t")
+val VRActionSetHandle_t = typedef(uint64_t, "VRActionSetHandle_t")
+val VRInputValueHandle_t = typedef(uint64_t, "VRInputValueHandle_t")
+val IOBufferHandle_t = typedef(uint64_t, "IOBufferHandle_t")
 
 val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
 val glInt_t = typedef(int32_t, "glInt_t")
@@ -130,6 +135,13 @@ val HmdQuaternion_t = struct(Module.OPENVR, "HmdQuaternion", nativeName = "HmdQu
     double.member("x", "")
     double.member("y", "")
     double.member("z", "")
+}
+
+val HmdQuaternionf_t = struct(Module.OPENVR, "HmdQuaternionf", nativeName = "HmdQuaternionf_t") {
+    float.member("w", "")
+    float.member("x", "")
+    float.member("y", "")
+    float.member("z", "")
 }
 
 val HmdColor_t = struct(Module.OPENVR, "HmdColor", nativeName = "HmdColor_t") {
@@ -321,6 +333,12 @@ val VREvent_WebConsole_t = struct(Module.OPENVR, "VREventWebConsole", nativeName
     WebConsoleHandle_t.member("webConsoleHandle", "")
 }
 
+val VREvent_InputBindingLoad_t = struct(Module.OPENVR, "VREventInputBindingLoad", nativeName = "VREvent_InputBindingLoad_t", mutable = false) {
+    PropertyContainerHandle_t.member("ulAppContainer", "")
+	uint64_t.member("pathMessage", "")
+	uint64_t.member("pathUrl", "")
+}
+
 val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
     VREvent_Reserved_t.member("reserved", "")
     VREvent_Controller_t.member("controller", "")
@@ -345,6 +363,7 @@ val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_D
     VREvent_DualAnalog_t.member("dualAnalog", "")
     VREvent_HapticVibration_t.member("hapticVibration", "")
     VREvent_WebConsole_t.member("webConsole", "")
+    VREvent_InputBindingLoad_t.member("inputBinding", "")
 }
 
 val VREvent_t = struct(Module.OPENVR, "VREvent", nativeName = "VREvent_t", mutable = false) {
@@ -385,7 +404,7 @@ val VROverlayIntersectionMaskPrimitive_Data_t = union(Module.OPENVR, "VROverlayI
 
 val VROverlayIntersectionMaskPrimitive_t = struct(Module.OPENVR, "VROverlayIntersectionMaskPrimitive", nativeName = "VROverlayIntersectionMaskPrimitive_t") {
     EVROverlayIntersectionMaskPrimitiveType.member("m_nPrimitiveType", "")
-    VROverlayIntersectionMaskPrimitive_Data_t.member("m_Primitive", "");
+    VROverlayIntersectionMaskPrimitive_Data_t.member("m_Primitive", "")
 }
 
 val HiddenAreaMesh_t = struct(Module.OPENVR, "HiddenAreaMesh", nativeName = "HiddenAreaMesh_t", mutable = false) {
@@ -495,6 +514,13 @@ val Compositor_OverlaySettings = struct(Module.OPENVR, "CompositorOverlaySetting
     HmdMatrix44_t.member("transform", "")
 }
 
+val VRBoneTransform_t = struct(Module.OPENVR, "VRBoneTransform_", nativeName = "VRBoneTransform_t", mutable = false) {
+    documentation = "Holds the transform for a single bone."
+
+    HmdVector4_t.member("position", "")
+	HmdQuaternionf_t.member("orientation", "")
+}
+
 val AppOverrideKeys_t = struct(Module.OPENVR, "AppOverrideKeys", nativeName = "AppOverrideKeys_t") {
     charASCII.p.member("pchKey", "")
     char.p.member("pchValue", "")
@@ -582,6 +608,57 @@ val NotificationBitmap_t = struct(Module.OPENVR, "NotificationBitmap", nativeNam
     int32_t.member("m_nBytesPerPixel", "")
 }
 
+val InputAnalogActionData_t = struct(Module.OPENVR, "InputAnalogActionData", nativeName = "InputAnalogActionData_t", mutable = false) {
+    bool.member("bActive", "whether or not this action is currently available to be bound in the active action set")
+	VRInputValueHandle_t.member("activeOrigin", "the origin that caused this action's current state")
+	float.member("x", "the current state of this action; will be delta updates for mouse actions")
+	float.member("y", "the current state of this action; will be delta updates for mouse actions")
+	float.member("z", "the current state of this action; will be delta updates for mouse actions")
+	float.member("deltaX", "teltas since the previous call to #UpdateActionState()")
+	float.member("deltaY", "teltas since the previous call to #UpdateActionState()")
+	float.member("deltaZ", "teltas since the previous call to #UpdateActionState()")
+	float.member("fUpdateTime", "time relative to now when this event happened. Will be negative to indicate a past time")
+}
+
+val InputDigitalActionData_t = struct(Module.OPENVR, "InputDigitalActionData", nativeName = "InputDigitalActionData_t", mutable = false) {
+    bool.member("bActive", "whether or not this action is currently available to be bound in the active action set")
+	VRInputValueHandle_t.member("activeOrigin", "the origin that caused this action's current state")
+	bool.member("bState", "the current state of this action; will be true if currently pressed")
+	bool.member("bChanged", "this is true if the state has changed since the last frame")
+	float.member("fUpdateTime", "time relative to now when this event happened. Will be negative to indicate a past time.")
+}
+
+val InputPoseActionData_t = struct(Module.OPENVR, "InputPoseActionData", nativeName = "InputPoseActionData_t", mutable = false) {
+    bool.member("bActive", "whether or not this action is currently available to be bound in the active action set")
+	VRInputValueHandle_t.member("activeOrigin", "the origin that caused this action's current state")
+	TrackedDevicePose_t.member("pose", "the current state of this action")
+}
+
+val InputSkeletonActionData_t = struct(Module.OPENVR, "InputSkeletonActionData", nativeName = "InputSkeletonActionData_t", mutable = false) {
+    bool.member("bActive", "whether or not this action is currently available to be bound in the active action set")
+	VRInputValueHandle_t.member("activeOrigin", "the origin that caused this action's current state")
+}
+
+val InputOriginInfo_t = struct(Module.OPENVR, "InputOriginInfo", nativeName = "InputOriginInfo_t", mutable = false) {
+    VRInputValueHandle_t.member("devicePath", "")
+	TrackedDeviceIndex_t.member("trackedDeviceIndex", "")
+    charUTF8.array("rchRenderModelComponentName", "", size = 128)
+}
+
+val VRActiveActionSet_t = struct(Module.OPENVR, "VRActiveActionSet", nativeName = "VRActiveActionSet_t") {
+    VRActionSetHandle_t.member("ulActionSet", "this is the handle of the action set to activate for this frame")
+	VRInputValueHandle_t.member(
+        "ulRestrictedToDevice",
+        "this is the handle of a device path that this action set should be active for. To activate for all devices, set this to #k_ulInvalidInputValueHandle.")
+	VRActionSetHandle_t.member(
+        "ulSecondaryActionSet",
+        """
+        the action set to activate for all devices other than {@code ulRestrictedDevice}. If {@code ulRestrictedToDevice} is set to
+        #k_ulInvalidInputValueHandle, this parameter is ignored.
+        """
+    )
+}
+
 val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName = "RenderModel_Vertex_t", mutable = false) {
     documentation = "A single vertex in a render model."
 
@@ -643,6 +720,13 @@ val DriverDirectMode_FrameTiming = struct(Module.OPENVR, "DriverDirectModeFrameT
 	uint32_t.member("m_nNumMisPresented", "number of times frame was presented on a vsync other than it was originally predicted to")
 	uint32_t.member("m_nNumDroppedFrames", "number of additional times previous frame was scanned out (i.e. compositor missed vsync)")
 	uint32_t.member("m_nReprojectionFlags", "")
+}
+
+val ImuSample_t = struct(Module.OPENVR, "ImuSample", nativeName = "ImuSample_t", mutable = false) {
+    double.member("fSampleTime", "")
+	HmdVector3d_t.member("vAccel", "")
+	HmdVector3d_t.member("vGyro", "")
+	uint32_t.member("unOffScaleFlags", "")
 }
 
 val VROverlayIntersectionParams_t = struct(Module.OPENVR, "VROverlayIntersectionParams", nativeName = "VROverlayIntersectionParams_t") {

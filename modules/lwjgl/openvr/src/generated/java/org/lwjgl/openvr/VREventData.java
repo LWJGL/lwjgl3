@@ -41,6 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link VREventDualAnalog VREvent_DualAnalog_t} dualAnalog;
  *     {@link VREventHapticVibration VREvent_HapticVibration_t} hapticVibration;
  *     {@link VREventWebConsole VREvent_WebConsole_t} webConsole;
+ *     {@link VREventInputBindingLoad VREvent_InputBindingLoad_t} inputBinding;
  * }</pre></code>
  */
 @NativeType("union VREvent_Data_t")
@@ -75,7 +76,8 @@ public class VREventData extends Struct {
         PROPERTY,
         DUALANALOG,
         HAPTICVIBRATION,
-        WEBCONSOLE;
+        WEBCONSOLE,
+        INPUTBINDING;
 
     static {
         Layout layout = __union(
@@ -101,7 +103,8 @@ public class VREventData extends Struct {
             __member(VREventProperty.SIZEOF, VREventProperty.ALIGNOF),
             __member(VREventDualAnalog.SIZEOF, VREventDualAnalog.ALIGNOF),
             __member(VREventHapticVibration.SIZEOF, VREventHapticVibration.ALIGNOF),
-            __member(VREventWebConsole.SIZEOF, VREventWebConsole.ALIGNOF)
+            __member(VREventWebConsole.SIZEOF, VREventWebConsole.ALIGNOF),
+            __member(VREventInputBindingLoad.SIZEOF, VREventInputBindingLoad.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
@@ -130,6 +133,7 @@ public class VREventData extends Struct {
         DUALANALOG = layout.offsetof(20);
         HAPTICVIBRATION = layout.offsetof(21);
         WEBCONSOLE = layout.offsetof(22);
+        INPUTBINDING = layout.offsetof(23);
     }
 
     VREventData(long address, @Nullable ByteBuffer container) {
@@ -218,6 +222,9 @@ public class VREventData extends Struct {
     /** Returns a {@link VREventWebConsole} view of the {@code webConsole} field. */
     @NativeType("VREvent_WebConsole_t")
     public VREventWebConsole webConsole() { return nwebConsole(address()); }
+    /** Returns a {@link VREventInputBindingLoad} view of the {@code inputBinding} field. */
+    @NativeType("VREvent_InputBindingLoad_t")
+    public VREventInputBindingLoad inputBinding() { return ninputBinding(address()); }
 
     // -----------------------------------
 
@@ -296,6 +303,8 @@ public class VREventData extends Struct {
     public static VREventHapticVibration nhapticVibration(long struct) { return VREventHapticVibration.create(struct + VREventData.HAPTICVIBRATION); }
     /** Unsafe version of {@link #webConsole}. */
     public static VREventWebConsole nwebConsole(long struct) { return VREventWebConsole.create(struct + VREventData.WEBCONSOLE); }
+    /** Unsafe version of {@link #inputBinding}. */
+    public static VREventInputBindingLoad ninputBinding(long struct) { return VREventInputBindingLoad.create(struct + VREventData.INPUTBINDING); }
 
     // -----------------------------------
 
@@ -412,6 +421,9 @@ public class VREventData extends Struct {
         /** Returns a {@link VREventWebConsole} view of the {@code webConsole} field. */
         @NativeType("VREvent_WebConsole_t")
         public VREventWebConsole webConsole() { return VREventData.nwebConsole(address()); }
+        /** Returns a {@link VREventInputBindingLoad} view of the {@code inputBinding} field. */
+        @NativeType("VREvent_InputBindingLoad_t")
+        public VREventInputBindingLoad inputBinding() { return VREventData.ninputBinding(address()); }
 
     }
 

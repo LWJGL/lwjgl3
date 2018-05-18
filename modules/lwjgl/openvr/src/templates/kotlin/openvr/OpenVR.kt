@@ -70,7 +70,9 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
             VRResources,
             VRScreenshots,
             VRSettings,
-            VRTrackedCamera
+            VRTrackedCamera,
+            VRInput,
+            VRIOBuffer
         )
 
         println(interfaces.joinToString("\n$t", prefix = t) { "@Nullable public static ${it.capabilitiesClass} ${it.capabilitiesField};" })

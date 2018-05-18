@@ -33,6 +33,8 @@ public final class OpenVR {
     @Nullable public static IVRScreenshots VRScreenshots;
     @Nullable public static IVRSettings VRSettings;
     @Nullable public static IVRTrackedCamera VRTrackedCamera;
+    @Nullable public static IVRInput VRInput;
+    @Nullable public static IVRIOBuffer VRIOBuffer;
 
     private static int token;
 
@@ -65,6 +67,8 @@ public final class OpenVR {
         VRScreenshots = getGenericInterface(IVRScreenshots_Version, IVRScreenshots::new);
         VRSettings = getGenericInterface(IVRSettings_Version, IVRSettings::new);
         VRTrackedCamera = getGenericInterface(IVRTrackedCamera_Version, IVRTrackedCamera::new);
+        VRInput = getGenericInterface(IVRInput_Version, IVRInput::new);
+        VRIOBuffer = getGenericInterface(IVRIOBuffer_Version, IVRIOBuffer::new);
     }
 
     @Nullable
@@ -105,6 +109,8 @@ public final class OpenVR {
         VRScreenshots = null;
         VRSettings = null;
         VRTrackedCamera = null;
+        VRInput = null;
+        VRIOBuffer = null;
     }
 
     public static final class IVRSystem {
@@ -823,6 +829,70 @@ public final class OpenVR {
             GetVideoStreamTextureD3D11 = table.get(9);
             GetVideoStreamTextureGL = table.get(10);
             ReleaseVideoStreamTextureGL = table.get(11);
+        }
+
+    }
+
+    public static final class IVRInput {
+
+        public final long
+            SetActionManifestPath,
+            GetActionSetHandle,
+            GetActionHandle,
+            GetInputSourceHandle,
+            UpdateActionState,
+            GetDigitalActionData,
+            GetAnalogActionData,
+            GetPoseActionData,
+            GetSkeletalActionData,
+            GetSkeletalActionDataCompressed,
+            UncompressSkeletalActionData,
+            TriggerHapticVibrationAction,
+            GetActionOrigins,
+            GetOriginLocalizedName,
+            GetOriginTrackedDeviceInfo,
+            ShowActionOrigins,
+            ShowBindingsForActionSet;
+
+        public IVRInput(long tableAddress) {
+            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 17);
+            SetActionManifestPath = table.get(0);
+            GetActionSetHandle = table.get(1);
+            GetActionHandle = table.get(2);
+            GetInputSourceHandle = table.get(3);
+            UpdateActionState = table.get(4);
+            GetDigitalActionData = table.get(5);
+            GetAnalogActionData = table.get(6);
+            GetPoseActionData = table.get(7);
+            GetSkeletalActionData = table.get(8);
+            GetSkeletalActionDataCompressed = table.get(9);
+            UncompressSkeletalActionData = table.get(10);
+            TriggerHapticVibrationAction = table.get(11);
+            GetActionOrigins = table.get(12);
+            GetOriginLocalizedName = table.get(13);
+            GetOriginTrackedDeviceInfo = table.get(14);
+            ShowActionOrigins = table.get(15);
+            ShowBindingsForActionSet = table.get(16);
+        }
+
+    }
+
+    public static final class IVRIOBuffer {
+
+        public final long
+            Open,
+            Close,
+            Read,
+            Write,
+            PropertyContainer;
+
+        public IVRIOBuffer(long tableAddress) {
+            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 5);
+            Open = table.get(0);
+            Close = table.get(1);
+            Read = table.get(2);
+            Write = table.get(3);
+            PropertyContainer = table.get(4);
         }
 
     }

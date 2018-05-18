@@ -40,10 +40,14 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_unInputValuePropertyTag".."33",
         "k_unWildcardPropertyTag".."34",
         "k_unHapticVibrationPropertyTag".."35",
+        "k_unSkeletonPropertyTag".."36",
         "k_unOpenVRInternalReserved_Start".."1000",
         "k_unOpenVRInternalReserved_End".."10000",
         "k_unScreenshotHandleInvalid".."0",
-        "k_unNotificationTextMaxSize".."256"
+        "k_unNotificationTextMaxSize".."256",
+        "k_unMaxActionNameLength".."64",
+        "k_unMaxActionSetNameLength".."64",
+        "k_unMaxActionOriginCount".."16"
     )
 
     LongConstant(
@@ -51,7 +55,11 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
 
         "k_ulInvalidPropertyContainer".."0L",
         "k_ulInvalidDriverHandle".."0L",
-        "k_ulOverlayHandleInvalid".."0L"
+        "k_ulOverlayHandleInvalid".."0L",
+        "k_ulInvalidActionHandle".."0L",
+        "k_ulInvalidActionSetHandle".."0L",
+        "k_ulInvalidInputValueHandle".."0L",
+        "k_ulInvalidIOBufferHandle".."0L"
     )
 
     IntConstant("No string property will ever be longer than this length.", "k_unMaxPropertyStringSize".."32768")
@@ -134,6 +142,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_SteamVR_ForceWindows32bitVRMonitor".."forceWindows32BitVRMonitor",
         "k_pch_SteamVR_DebugInput".."debugInput",
         "k_pch_SteamVR_LegacyInputRebinding".."legacyInputRebinding",
+        "k_pch_SteamVR_DebugInputBinding".."debugInputBinding",
         "k_pch_Lighthouse_Section".."driver_lighthouse",
         "k_pch_Lighthouse_DisableIMU_Bool".."disableimu",
         "k_pch_Lighthouse_DisableIMUExceptHMD_Bool".."disableimuexcepthmd",
@@ -221,9 +230,16 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "k_pch_Driver_Enable_Bool".."enable",
         "k_pch_WebInterface_Section".."WebInterface",
         "k_pch_WebInterface_WebPort_String".."WebPort",
+        "k_pch_TrackingOverride_Section".."TrackingOverrides",
+        "k_pch_App_BindingAutosaveURLSuffix_String".."AutosaveURL",
+        "k_pch_App_BindingCurrentURLSuffix_String".."CurrentURL",
+        "k_pch_App_NeedToUpdateAutosaveSuffix_Bool".."NeedToUpdateAutosave",
+        "k_pch_App_ActionManifestURL_String".."ActionManifestURL",
         "IVRScreenshots_Version".."IVRScreenshots_001",
         "IVRResources_Version".."IVRResources_001",
-        "IVRDriverManager_Version".."IVRDriverManager_001"
+        "IVRDriverManager_Version".."IVRDriverManager_001",
+        "IVRInput_Version".."IVRInput_003",
+        "IVRIOBuffer_Version".."IVRIOBuffer_001"
     )
 
     // OpenVR Enums
@@ -419,6 +435,11 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "ETrackedDeviceProperty_Prop_MinimumIpdStepMeters_Float".enum,
 	    "ETrackedDeviceProperty_Prop_AudioBridgeFirmwareVersion_Uint64".enum,
 	    "ETrackedDeviceProperty_Prop_ImageBridgeFirmwareVersion_Uint64".enum,
+        "ETrackedDeviceProperty_Prop_ImuToHeadTransform_Matrix34".enum,
+        "ETrackedDeviceProperty_Prop_ImuFactoryGyroBias_Vector3".enum,
+        "ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3".enum,
+        "ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3".enum,
+        "ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3".enum,
         "ETrackedDeviceProperty_Prop_AttachedDeviceId_String".enum("", "3000"),
         "ETrackedDeviceProperty_Prop_SupportedButtons_Uint64".enum,
         "ETrackedDeviceProperty_Prop_Axis0Type_Int32".enum,
@@ -669,6 +690,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVREventType_VREvent_MessageOverlay_Closed".enum("", "1650"),
         "EVREventType_VREvent_MessageOverlayCloseRequested".enum,
         "EVREventType_VREvent_Input_HapticVibration".enum("", "1700"),
+        "EVREventType_VREvent_Input_BindingLoadFailed".enum("data is process"),
+        "EVREventType_VREvent_Input_BindingLoadSuccessful".enum("data is process"),
         "EVREventType_VREvent_VendorSpecific_Reserved_Start".enum("", "10000"),
         "EVREventType_VREvent_VendorSpecific_Reserved_End".enum("", "19999")
     )
@@ -733,7 +756,13 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRInputError_VRInputError_MaxCapacityReached".enum,
         "EVRInputError_VRInputError_IPCError".enum,
         "EVRInputError_VRInputError_NoActiveActionSet".enum,
-        "EVRInputError_VRInputError_InvalidDevice".enum
+        "EVRInputError_VRInputError_InvalidDevice".enum,
+        "EVRInputError_VRInputError_InvalidSkeleton".enum,
+        "EVRInputError_VRInputError_InvalidBoneCount".enum,
+        "EVRInputError_VRInputError_InvalidCompressedData".enum,
+        "EVRInputError_VRInputError_NoData".enum,
+        "EVRInputError_VRInputError_BufferTooSmall".enum,
+        "EVRInputError_VRInputError_MismatchedActionManifest".enum
     )
 
     EnumConstant(
@@ -1005,6 +1034,17 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVSync_VSync_None".enum("", "0"),
         "EVSync_VSync_WaitRender".enum("block following render work until vsync"),
         "EVSync_VSync_NoWaitRender".enum("do not block following render work (allow to get started early)")
+    )
+
+    EnumConstant(
+        "{@code Imu_OffScaleFlags}: raw IMU data provided by {@code IVRIOBuffer} from paths to tracked devices with IMUs.",
+
+        "Imu_OffScaleFlags_OffScale_AccelX".enum("", "1"),
+        "Imu_OffScaleFlags_OffScale_AccelY".enum("", "2"),
+        "Imu_OffScaleFlags_OffScale_AccelZ".enum("", "4"),
+        "Imu_OffScaleFlags_OffScale_GyroX".enum("", "8"),
+        "Imu_OffScaleFlags_OffScale_GyroY".enum("", "16"),
+        "Imu_OffScaleFlags_OffScale_GyroZ".enum("", "32")
     )
 
     EnumConstant(
@@ -1311,6 +1351,41 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EVRScreenshotError_VRScreenshotError_NotFound".enum,
         "EVRScreenshotError_VRScreenshotError_BufferTooSmall".enum,
         "EVRScreenshotError_VRScreenshotError_ScreenshotAlreadyInProgress".enum("", "108")
+    )
+
+    EnumConstant(
+        "{@code EVRSkeletalTransformSpace}",
+
+        "EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action".enum("", "0"),
+        "EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent".enum,
+        "EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive".enum
+    )
+
+    EnumConstant(
+        "{@code EVRInputFilterCancelType}",
+
+        "EVRInputFilterCancelType_VRInputFilterCancel_Timers".enum("", "0"),
+        "EVRInputFilterCancelType_VRInputFilterCancel_Momentum".enum
+    )
+
+    EnumConstant(
+        "{@code EIOBufferError}",
+
+        "EIOBufferError_IOBuffer_Success".enum("", "0"),
+        "EIOBufferError_IOBuffer_OperationFailed".enum("", "100"),
+        "EIOBufferError_IOBuffer_InvalidHandle".enum,
+        "EIOBufferError_IOBuffer_InvalidArgument".enum,
+        "EIOBufferError_IOBuffer_PathExists".enum,
+        "EIOBufferError_IOBuffer_PathDoesNotExist".enum,
+        "EIOBufferError_IOBuffer_Permission".enum
+    )
+
+    EnumConstant(
+        "{@code EIOBufferMode}",
+
+        "EIOBufferMode_IOBufferMode_Read".enum("", "1"),
+        "EIOBufferMode_IOBufferMode_Write".enum,
+        "EIOBufferMode_IOBufferMode_Create".enum("", "512")
     )
 
     uint32_t(
