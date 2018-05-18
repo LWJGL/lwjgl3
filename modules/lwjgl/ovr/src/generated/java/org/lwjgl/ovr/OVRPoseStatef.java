@@ -104,18 +104,28 @@ public class OVRPoseStatef extends Struct implements NativeResource {
     /** Returns a {@link OVRPosef} view of the {@code ThePose} field. */
     @NativeType("ovrPosef")
     public OVRPosef ThePose() { return nThePose(address()); }
+    /** Passes the {@code ThePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRPoseStatef ThePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(ThePose()); return this; }
     /** Returns a {@link OVRVector3f} view of the {@code AngularVelocity} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f AngularVelocity() { return nAngularVelocity(address()); }
+    /** Passes the {@code AngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRPoseStatef AngularVelocity(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(AngularVelocity()); return this; }
     /** Returns a {@link OVRVector3f} view of the {@code LinearVelocity} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f LinearVelocity() { return nLinearVelocity(address()); }
+    /** Passes the {@code LinearVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRPoseStatef LinearVelocity(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(LinearVelocity()); return this; }
     /** Returns a {@link OVRVector3f} view of the {@code AngularAcceleration} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f AngularAcceleration() { return nAngularAcceleration(address()); }
+    /** Passes the {@code AngularAcceleration} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRPoseStatef AngularAcceleration(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(AngularAcceleration()); return this; }
     /** Returns a {@link OVRVector3f} view of the {@code LinearAcceleration} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f LinearAcceleration() { return nLinearAcceleration(address()); }
+    /** Passes the {@code LinearAcceleration} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRPoseStatef LinearAcceleration(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(LinearAcceleration()); return this; }
     /** Returns the value of the {@code TimeInSeconds} field. */
     public double TimeInSeconds() { return nTimeInSeconds(address()); }
 
@@ -322,18 +332,28 @@ public class OVRPoseStatef extends Struct implements NativeResource {
         /** Returns a {@link OVRPosef} view of the {@code ThePose} field. */
         @NativeType("ovrPosef")
         public OVRPosef ThePose() { return OVRPoseStatef.nThePose(address()); }
+        /** Passes the {@code ThePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRPoseStatef.Buffer ThePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(ThePose()); return this; }
         /** Returns a {@link OVRVector3f} view of the {@code AngularVelocity} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f AngularVelocity() { return OVRPoseStatef.nAngularVelocity(address()); }
+        /** Passes the {@code AngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRPoseStatef.Buffer AngularVelocity(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(AngularVelocity()); return this; }
         /** Returns a {@link OVRVector3f} view of the {@code LinearVelocity} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f LinearVelocity() { return OVRPoseStatef.nLinearVelocity(address()); }
+        /** Passes the {@code LinearVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRPoseStatef.Buffer LinearVelocity(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(LinearVelocity()); return this; }
         /** Returns a {@link OVRVector3f} view of the {@code AngularAcceleration} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f AngularAcceleration() { return OVRPoseStatef.nAngularAcceleration(address()); }
+        /** Passes the {@code AngularAcceleration} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRPoseStatef.Buffer AngularAcceleration(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(AngularAcceleration()); return this; }
         /** Returns a {@link OVRVector3f} view of the {@code LinearAcceleration} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f LinearAcceleration() { return OVRPoseStatef.nLinearAcceleration(address()); }
+        /** Passes the {@code LinearAcceleration} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRPoseStatef.Buffer LinearAcceleration(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(LinearAcceleration()); return this; }
         /** Returns the value of the {@code TimeInSeconds} field. */
         public double TimeInSeconds() { return OVRPoseStatef.nTimeInSeconds(address()); }
 

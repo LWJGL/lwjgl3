@@ -79,9 +79,13 @@ public class OVRRecti extends Struct implements NativeResource {
     /** Returns a {@link OVRVector2i} view of the {@code Pos} field. */
     @NativeType("ovrVector2i")
     public OVRVector2i Pos() { return nPos(address()); }
+    /** Passes the {@code Pos} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRRecti Pos(java.util.function.Consumer<OVRVector2i> consumer) { consumer.accept(Pos()); return this; }
     /** Returns a {@link OVRSizei} view of the {@code Size} field. */
     @NativeType("ovrSizei")
     public OVRSizei Size() { return nSize(address()); }
+    /** Passes the {@code Size} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRRecti Size(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(Size()); return this; }
 
     /** Copies the specified {@link OVRVector2i} to the {@code Pos} field. */
     public OVRRecti Pos(@NativeType("ovrVector2i") OVRVector2i value) { nPos(address(), value); return this; }
@@ -311,9 +315,13 @@ public class OVRRecti extends Struct implements NativeResource {
         /** Returns a {@link OVRVector2i} view of the {@code Pos} field. */
         @NativeType("ovrVector2i")
         public OVRVector2i Pos() { return OVRRecti.nPos(address()); }
+        /** Passes the {@code Pos} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRRecti.Buffer Pos(java.util.function.Consumer<OVRVector2i> consumer) { consumer.accept(Pos()); return this; }
         /** Returns a {@link OVRSizei} view of the {@code Size} field. */
         @NativeType("ovrSizei")
         public OVRSizei Size() { return OVRRecti.nSize(address()); }
+        /** Passes the {@code Size} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRRecti.Buffer Size(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(Size()); return this; }
 
         /** Copies the specified {@link OVRVector2i} to the {@code Pos} field. */
         public OVRRecti.Buffer Pos(@NativeType("ovrVector2i") OVRVector2i value) { OVRRecti.nPos(address(), value); return this; }

@@ -94,9 +94,13 @@ public class OVRBoundaryTestResult extends Struct implements NativeResource {
     /** Returns a {@link OVRVector3f} view of the {@code ClosestPoint} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f ClosestPoint() { return nClosestPoint(address()); }
+    /** Passes the {@code ClosestPoint} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRBoundaryTestResult ClosestPoint(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(ClosestPoint()); return this; }
     /** Returns a {@link OVRVector3f} view of the {@code ClosestPointNormal} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f ClosestPointNormal() { return nClosestPointNormal(address()); }
+    /** Passes the {@code ClosestPointNormal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRBoundaryTestResult ClosestPointNormal(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(ClosestPointNormal()); return this; }
 
     // -----------------------------------
 
@@ -302,9 +306,13 @@ public class OVRBoundaryTestResult extends Struct implements NativeResource {
         /** Returns a {@link OVRVector3f} view of the {@code ClosestPoint} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f ClosestPoint() { return OVRBoundaryTestResult.nClosestPoint(address()); }
+        /** Passes the {@code ClosestPoint} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRBoundaryTestResult.Buffer ClosestPoint(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(ClosestPoint()); return this; }
         /** Returns a {@link OVRVector3f} view of the {@code ClosestPointNormal} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f ClosestPointNormal() { return OVRBoundaryTestResult.nClosestPointNormal(address()); }
+        /** Passes the {@code ClosestPointNormal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRBoundaryTestResult.Buffer ClosestPointNormal(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(ClosestPointNormal()); return this; }
 
     }
 

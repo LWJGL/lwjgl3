@@ -74,6 +74,8 @@ public class OVRBoundaryLookAndFeel extends Struct implements NativeResource {
     /** Returns a {@link OVRColorf} view of the {@code Color} field. */
     @NativeType("ovrColorf")
     public OVRColorf Color() { return nColor(address()); }
+    /** Passes the {@code Color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRBoundaryLookAndFeel Color(java.util.function.Consumer<OVRColorf> consumer) { consumer.accept(Color()); return this; }
 
     /** Copies the specified {@link OVRColorf} to the {@code Color} field. */
     public OVRBoundaryLookAndFeel Color(@NativeType("ovrColorf") OVRColorf value) { nColor(address(), value); return this; }
@@ -286,6 +288,8 @@ public class OVRBoundaryLookAndFeel extends Struct implements NativeResource {
         /** Returns a {@link OVRColorf} view of the {@code Color} field. */
         @NativeType("ovrColorf")
         public OVRColorf Color() { return OVRBoundaryLookAndFeel.nColor(address()); }
+        /** Passes the {@code Color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRBoundaryLookAndFeel.Buffer Color(java.util.function.Consumer<OVRColorf> consumer) { consumer.accept(Color()); return this; }
 
         /** Copies the specified {@link OVRColorf} to the {@code Color} field. */
         public OVRBoundaryLookAndFeel.Buffer Color(@NativeType("ovrColorf") OVRColorf value) { OVRBoundaryLookAndFeel.nColor(address(), value); return this; }

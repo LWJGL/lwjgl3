@@ -86,9 +86,13 @@ public class OVRExternalCamera extends Struct implements NativeResource {
     /** Returns a {@link OVRCameraIntrinsics} view of the {@code Intrinsics} field. */
     @NativeType("ovrCameraIntrinsics")
     public OVRCameraIntrinsics Intrinsics() { return nIntrinsics(address()); }
+    /** Passes the {@code Intrinsics} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRExternalCamera Intrinsics(java.util.function.Consumer<OVRCameraIntrinsics> consumer) { consumer.accept(Intrinsics()); return this; }
     /** Returns a {@link OVRCameraExtrinsics} view of the {@code Extrinsics} field. */
     @NativeType("ovrCameraExtrinsics")
     public OVRCameraExtrinsics Extrinsics() { return nExtrinsics(address()); }
+    /** Passes the {@code Extrinsics} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRExternalCamera Extrinsics(java.util.function.Consumer<OVRCameraExtrinsics> consumer) { consumer.accept(Extrinsics()); return this; }
 
     // -----------------------------------
 
@@ -295,9 +299,13 @@ public class OVRExternalCamera extends Struct implements NativeResource {
         /** Returns a {@link OVRCameraIntrinsics} view of the {@code Intrinsics} field. */
         @NativeType("ovrCameraIntrinsics")
         public OVRCameraIntrinsics Intrinsics() { return OVRExternalCamera.nIntrinsics(address()); }
+        /** Passes the {@code Intrinsics} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRExternalCamera.Buffer Intrinsics(java.util.function.Consumer<OVRCameraIntrinsics> consumer) { consumer.accept(Intrinsics()); return this; }
         /** Returns a {@link OVRCameraExtrinsics} view of the {@code Extrinsics} field. */
         @NativeType("ovrCameraExtrinsics")
         public OVRCameraExtrinsics Extrinsics() { return OVRExternalCamera.nExtrinsics(address()); }
+        /** Passes the {@code Extrinsics} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRExternalCamera.Buffer Extrinsics(java.util.function.Consumer<OVRCameraExtrinsics> consumer) { consumer.accept(Extrinsics()); return this; }
 
     }
 

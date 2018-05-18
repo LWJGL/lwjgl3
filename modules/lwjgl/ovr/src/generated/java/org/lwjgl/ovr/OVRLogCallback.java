@@ -59,17 +59,17 @@ public abstract class OVRLogCallback extends Callback implements OVRLogCallbackI
     }
 
     /**
-     * Converts the specified {@link OVRLogCallback} argument to a String.
-     *
-     * <p>This method may only be used inside a OVRLogCallback invocation.</p>
-     *
-     * @param message the OVRLogCallback {@code message} argument
-     *
-     * @return the message as a String
-     */
-    public static String getMessage(long message) {
-        return memUTF8(message);
-    }
+         * Converts the specified {@link OVRLogCallback} argument to a String.
+         *
+         * <p>This method may only be used inside a OVRLogCallback invocation.</p>
+         *
+         * @param message the OVRLogCallback {@code message} argument
+         *
+         * @return the message as a String
+         */
+        public static String getMessage(long message) {
+            return memUTF8(message);
+        }
 
     private static final class Container extends OVRLogCallback {
 

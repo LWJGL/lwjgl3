@@ -98,15 +98,23 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
     /** Returns a {@link OVRFovPort} view of the {@code Fov} field. */
     @NativeType("ovrFovPort")
     public OVRFovPort Fov() { return nFov(address()); }
+    /** Passes the {@code Fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVREyeRenderDesc Fov(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(Fov()); return this; }
     /** Returns a {@link OVRRecti} view of the {@code DistortedViewport} field. */
     @NativeType("ovrRecti")
     public OVRRecti DistortedViewport() { return nDistortedViewport(address()); }
+    /** Passes the {@code DistortedViewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVREyeRenderDesc DistortedViewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(DistortedViewport()); return this; }
     /** Returns a {@link OVRVector2f} view of the {@code PixelsPerTanAngleAtCenter} field. */
     @NativeType("ovrVector2f")
     public OVRVector2f PixelsPerTanAngleAtCenter() { return nPixelsPerTanAngleAtCenter(address()); }
+    /** Passes the {@code PixelsPerTanAngleAtCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVREyeRenderDesc PixelsPerTanAngleAtCenter(java.util.function.Consumer<OVRVector2f> consumer) { consumer.accept(PixelsPerTanAngleAtCenter()); return this; }
     /** Returns a {@link OVRPosef} view of the {@code HmdToEyePose} field. */
     @NativeType("ovrPosef")
     public OVRPosef HmdToEyePose() { return nHmdToEyePose(address()); }
+    /** Passes the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVREyeRenderDesc HmdToEyePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(HmdToEyePose()); return this; }
 
     // -----------------------------------
 
@@ -312,15 +320,23 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
         /** Returns a {@link OVRFovPort} view of the {@code Fov} field. */
         @NativeType("ovrFovPort")
         public OVRFovPort Fov() { return OVREyeRenderDesc.nFov(address()); }
+        /** Passes the {@code Fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVREyeRenderDesc.Buffer Fov(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(Fov()); return this; }
         /** Returns a {@link OVRRecti} view of the {@code DistortedViewport} field. */
         @NativeType("ovrRecti")
         public OVRRecti DistortedViewport() { return OVREyeRenderDesc.nDistortedViewport(address()); }
+        /** Passes the {@code DistortedViewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVREyeRenderDesc.Buffer DistortedViewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(DistortedViewport()); return this; }
         /** Returns a {@link OVRVector2f} view of the {@code PixelsPerTanAngleAtCenter} field. */
         @NativeType("ovrVector2f")
         public OVRVector2f PixelsPerTanAngleAtCenter() { return OVREyeRenderDesc.nPixelsPerTanAngleAtCenter(address()); }
+        /** Passes the {@code PixelsPerTanAngleAtCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVREyeRenderDesc.Buffer PixelsPerTanAngleAtCenter(java.util.function.Consumer<OVRVector2f> consumer) { consumer.accept(PixelsPerTanAngleAtCenter()); return this; }
         /** Returns a {@link OVRPosef} view of the {@code HmdToEyePose} field. */
         @NativeType("ovrPosef")
         public OVRPosef HmdToEyePose() { return OVREyeRenderDesc.nHmdToEyePose(address()); }
+        /** Passes the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVREyeRenderDesc.Buffer HmdToEyePose(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(HmdToEyePose()); return this; }
 
     }
 

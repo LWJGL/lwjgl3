@@ -48,7 +48,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * specifies the timestamp when the source {@link OVRPosef} (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by calling
  * {@link OVR#ovr_GetTimeInSeconds GetTimeInSeconds} around the instant the application calls {@link OVR#ovr_GetTrackingState GetTrackingState}. The main purpose for this is to accurately track app tracking
  * latency.</li>
- * <li>{@code DepthTexture} &ndash; depth texture for positional timewarp. Must map 1:1 to the {@code ColorTexture}.</li>
+ * <li>{@code DepthTexture} &ndash; depth texture for depth composition with overlays. Must map 1:1 to the {@code ColorTexture}.</li>
  * <li>{@code ProjectionDesc} &ndash; specifies how to convert {@code DepthTexture} information into meters</li>
  * </ul>
  * 
@@ -130,6 +130,8 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
     /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
+    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRLayerEyeFovDepth Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
     /** Returns a {@link PointerBuffer} view of the {@code ColorTexture} field. */
     @NativeType("ovrTextureSwapChain[ovrEye_Count]")
     public PointerBuffer ColorTexture() { return nColorTexture(address()); }
@@ -529,6 +531,8 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerEyeFovDepth.nHeader(address()); }
+        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRLayerEyeFovDepth.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
         /** Returns a {@link PointerBuffer} view of the {@code ColorTexture} field. */
         @NativeType("ovrTextureSwapChain[ovrEye_Count]")
         public PointerBuffer ColorTexture() { return OVRLayerEyeFovDepth.nColorTexture(address()); }

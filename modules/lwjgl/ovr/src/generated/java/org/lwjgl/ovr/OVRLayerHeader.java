@@ -34,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct ovrLayerHeader {
  *     ovrLayerType Type;
  *     unsigned int Flags;
+ *     char[128];
  * }</pre></code>
  */
 @NativeType("struct ovrLayerHeader")
@@ -52,7 +53,8 @@ public class OVRLayerHeader extends Struct implements NativeResource {
     static {
         Layout layout = __struct(
             __member(4),
-            __member(4)
+            __member(4),
+            __padding(128, true)
         );
 
         SIZEOF = layout.getSize();

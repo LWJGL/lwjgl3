@@ -209,6 +209,8 @@ public class OVRHmdDesc extends Struct implements NativeResource {
     /** Returns a {@link OVRSizei} view of the {@code Resolution} field. */
     @NativeType("ovrSizei")
     public OVRSizei Resolution() { return nResolution(address()); }
+    /** Passes the {@code Resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRHmdDesc Resolution(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(Resolution()); return this; }
     /** Returns the value of the {@code DisplayRefreshRate} field. */
     public float DisplayRefreshRate() { return nDisplayRefreshRate(address()); }
 
@@ -240,49 +242,6 @@ public class OVRHmdDesc extends Struct implements NativeResource {
         return address == NULL ? null : create(address);
     }
 
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
-    }
-
-    /**
-     * Create a {@link OVRHmdDesc.Buffer} instance at the specified memory.
-     *
-     * @param address  the memory address
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
-    }
-
-    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
-    @Nullable
-    public static OVRHmdDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link OVRHmdDesc} instance allocated on the thread-local {@link MemoryStack}. */
@@ -311,44 +270,6 @@ public class OVRHmdDesc extends Struct implements NativeResource {
      */
     public static OVRHmdDesc callocStack(MemoryStack stack) {
         return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link OVRHmdDesc.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static OVRHmdDesc.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -399,112 +320,5 @@ public class OVRHmdDesc extends Struct implements NativeResource {
     public static OVRSizei nResolution(long struct) { return OVRSizei.create(struct + OVRHmdDesc.RESOLUTION); }
     /** Unsafe version of {@link #DisplayRefreshRate}. */
     public static float nDisplayRefreshRate(long struct) { return memGetFloat(struct + OVRHmdDesc.DISPLAYREFRESHRATE); }
-
-    // -----------------------------------
-
-    /** An array of {@link OVRHmdDesc} structs. */
-    public static class Buffer extends StructBuffer<OVRHmdDesc, Buffer> implements NativeResource {
-
-        /**
-         * Creates a new {@link OVRHmdDesc.Buffer} instance backed by the specified container.
-         *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
-         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link OVRHmdDesc#SIZEOF}, and its mark will be undefined.
-         *
-         * <p>The created buffer instance holds a strong reference to the container object.</p>
-         */
-        public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
-        }
-
-        public Buffer(long address, int cap) {
-            super(address, null, -1, 0, cap, cap);
-        }
-
-        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            super(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Buffer self() {
-            return this;
-        }
-
-        @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRHmdDesc newInstance(long address) {
-            return new OVRHmdDesc(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-
-        /** Returns the value of the {@code Type} field. */
-        @NativeType("ovrHmdType")
-        public int Type() { return OVRHmdDesc.nType(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code ProductName} field. */
-        @NativeType("char[64]")
-        public ByteBuffer ProductName() { return OVRHmdDesc.nProductName(address()); }
-        /** Decodes the null-terminated string stored in the {@code ProductName} field. */
-        @NativeType("char[64]")
-        public String ProductNameString() { return OVRHmdDesc.nProductNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code Manufacturer} field. */
-        @NativeType("char[64]")
-        public ByteBuffer Manufacturer() { return OVRHmdDesc.nManufacturer(address()); }
-        /** Decodes the null-terminated string stored in the {@code Manufacturer} field. */
-        @NativeType("char[64]")
-        public String ManufacturerString() { return OVRHmdDesc.nManufacturerString(address()); }
-        /** Returns the value of the {@code VendorId} field. */
-        public short VendorId() { return OVRHmdDesc.nVendorId(address()); }
-        /** Returns the value of the {@code ProductId} field. */
-        public short ProductId() { return OVRHmdDesc.nProductId(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code SerialNumber} field. */
-        @NativeType("char[24]")
-        public ByteBuffer SerialNumber() { return OVRHmdDesc.nSerialNumber(address()); }
-        /** Decodes the null-terminated string stored in the {@code SerialNumber} field. */
-        @NativeType("char[24]")
-        public String SerialNumberString() { return OVRHmdDesc.nSerialNumberString(address()); }
-        /** Returns the value of the {@code FirmwareMajor} field. */
-        public short FirmwareMajor() { return OVRHmdDesc.nFirmwareMajor(address()); }
-        /** Returns the value of the {@code FirmwareMinor} field. */
-        public short FirmwareMinor() { return OVRHmdDesc.nFirmwareMinor(address()); }
-        /** Returns the value of the {@code AvailableHmdCaps} field. */
-        @NativeType("unsigned int")
-        public int AvailableHmdCaps() { return OVRHmdDesc.nAvailableHmdCaps(address()); }
-        /** Returns the value of the {@code DefaultHmdCaps} field. */
-        @NativeType("unsigned int")
-        public int DefaultHmdCaps() { return OVRHmdDesc.nDefaultHmdCaps(address()); }
-        /** Returns the value of the {@code AvailableTrackingCaps} field. */
-        @NativeType("unsigned int")
-        public int AvailableTrackingCaps() { return OVRHmdDesc.nAvailableTrackingCaps(address()); }
-        /** Returns the value of the {@code DefaultTrackingCaps} field. */
-        @NativeType("unsigned int")
-        public int DefaultTrackingCaps() { return OVRHmdDesc.nDefaultTrackingCaps(address()); }
-        /** Returns a {@link OVRFovPort}.Buffer view of the {@code DefaultEyeFov} field. */
-        @NativeType("ovrFovPort[ovrEye_Count]")
-        public OVRFovPort.Buffer DefaultEyeFov() { return OVRHmdDesc.nDefaultEyeFov(address()); }
-        /** Returns a {@link OVRFovPort} view of the struct at the specified index of the {@code DefaultEyeFov} field. */
-        @NativeType("ovrFovPort")
-        public OVRFovPort DefaultEyeFov(int index) { return OVRHmdDesc.nDefaultEyeFov(address(), index); }
-        /** Returns a {@link OVRFovPort}.Buffer view of the {@code MaxEyeFov} field. */
-        @NativeType("ovrFovPort[ovrEye_Count]")
-        public OVRFovPort.Buffer MaxEyeFov() { return OVRHmdDesc.nMaxEyeFov(address()); }
-        /** Returns a {@link OVRFovPort} view of the struct at the specified index of the {@code MaxEyeFov} field. */
-        @NativeType("ovrFovPort")
-        public OVRFovPort MaxEyeFov(int index) { return OVRHmdDesc.nMaxEyeFov(address(), index); }
-        /** Returns a {@link OVRSizei} view of the {@code Resolution} field. */
-        @NativeType("ovrSizei")
-        public OVRSizei Resolution() { return OVRHmdDesc.nResolution(address()); }
-        /** Returns the value of the {@code DisplayRefreshRate} field. */
-        public float DisplayRefreshRate() { return OVRHmdDesc.nDisplayRefreshRate(address()); }
-
-    }
 
 }

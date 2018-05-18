@@ -594,6 +594,8 @@ val ovrLayerHeader = struct(Module.OVR, "OVRLayerHeader", nativeName = "ovrLayer
 
     ovrLayerType.member("Type", "described by {@code ovrLayerType}").links("LayerType_\\w+")
     unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
+
+    padding(128)
 }
 
 val ovrLayerEyeFov = struct(Module.OVR, "OVRLayerEyeFov", nativeName = "ovrLayerEyeFov") {
@@ -689,7 +691,7 @@ val ovrLayerEyeFovDepth = struct(Module.OVR, "OVRLayerEyeFovDepth", nativeName =
     )
     ovrTextureSwapChain.array(
         "DepthTexture",
-        "depth texture for positional timewarp. Must map 1:1 to the {@code ColorTexture}.",
+        "depth texture for depth composition with overlays. Must map 1:1 to the {@code ColorTexture}.",
         size = "ovrEye_Count",
         validSize = "1"
     )
@@ -823,6 +825,71 @@ val ovrLayerEyeFovMultires = struct(Module.OVR, "OVRLayerEyeFovMultires", native
 
     ovrTextureLayout.member("TextureLayout", "specifies layout type of textures")
     ovrTextureLayoutDesc_Union.member("TextureLayoutDesc", "specifies texture layout parameters")
+}
+
+val ovrLayerEyeMatrix = struct(Module.OVR, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
+    javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
+    documentation =
+        """
+        Describes a layer that specifies a monoscopic or stereoscopic view.
+
+        This uses a direct 3x4 matrix to map from view space to the UV coordinates. It is essentially the same thing as ##OVRLayerEyeFov but using a much
+        lower level. This is mainly to provide compatibility with specific apps. Unless the application really requires this flexibility, it is usually
+        better to use {@code ovrLayerEyeFov}.
+
+        Three options exist with respect to mono/stereo texture usage:
+        ${ul(
+            """
+            {@code ColorTexture[0]} and {@code ColorTexture[1]} contain the left and right stereo renderings, respectively. {@code Viewport[0]} and
+            {@code Viewport[1]} refer to {@code ColorTexture[0]} and {@code ColorTexture[1]}, respectively.
+            """,
+            """
+            {@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is #NULL, and {@code Viewport[0]} and
+            {@code Viewport[1]} refer to sub-rects with {@code ColorTexture[0]}.
+            """,
+            "{@code ColorTexture[0]} contains a single monoscopic rendering, and {@code Viewport[0]} and {@code Viewport[1]} both refer to that rendering."
+        )}
+        """
+
+    ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeMatrix")
+    ovrTextureSwapChain.array(
+        "ColorTexture",
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
+        size = "ovrEye_Count",
+        validSize = "1"
+    )
+    ovrRecti.array(
+        "Viewport",
+        "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
+        size = "ovrEye_Count"
+    )
+    ovrPosef.array(
+        "RenderPose",
+        """
+        specifies the position and orientation of each eye view, with the position specified in meters. {@code RenderPose} will typically be the value
+        returned from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+        """,
+        size = "ovrEye_Count"
+    )
+    ovrMatrix4f.array(
+        "Matrix",
+        """
+        specifies the mapping from a view-space vector to a UV coordinate on the textures given above.
+        ${codeBlock("""
+P = (x,y,z,1)*Matrix
+TexU  = P.x/P.z
+TexV  = P.y/P.z""")}
+        """,
+        size = "ovrEye_Count"
+    )
+    double.member(
+        "SensorSampleTime",
+        """
+        specifies the timestamp when the source {@code ovrPosef} (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by
+        calling #GetTimeInSeconds() around the instant the application calls #GetTrackingState() The main purpose for this is to accurately track app
+        tracking latency.
+        """
+    )
 }
 
 val ovrLayerQuad = struct(Module.OVR, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
@@ -1182,77 +1249,13 @@ fun config() {
 
     Generator.registerLibraryInit(Module.OVR, "LibOVR", "ovr")
 
-    struct(Module.OVR, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
-        javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
-        documentation =
-            """
-            Describes a layer that specifies a monoscopic or stereoscopic view.
-
-            This uses a direct 3x4 matrix to map from view space to the UV coordinates. It is essentially the same thing as ##OVRLayerEyeFov but using a much
-            lower level. This is mainly to provide compatibility with specific apps. Unless the application really requires this flexibility, it is usually
-            better to use {@code ovrLayerEyeFov}.
-
-            Three options exist with respect to mono/stereo texture usage:
-            ${ul(
-                """
-                {@code ColorTexture[0]} and {@code ColorTexture[1]} contain the left and right stereo renderings, respectively. {@code Viewport[0]} and
-                {@code Viewport[1]} refer to {@code ColorTexture[0]} and {@code ColorTexture[1]}, respectively.
-                """,
-                """
-                {@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is #NULL, and {@code Viewport[0]} and
-                {@code Viewport[1]} refer to sub-rects with {@code ColorTexture[0]}.
-                """,
-                "{@code ColorTexture[0]} contains a single monoscopic rendering, and {@code Viewport[0]} and {@code Viewport[1]} both refer to that rendering."
-            )}
-            """
-
-        ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeMatrix")
-        ovrTextureSwapChain.array(
-            "ColorTexture",
-            "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
-            size = "ovrEye_Count",
-            validSize = "1"
-        )
-        ovrRecti.array(
-            "Viewport",
-            "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-            size = "ovrEye_Count"
-        )
-        ovrPosef.array(
-            "RenderPose",
-            """
-            specifies the position and orientation of each eye view, with the position specified in meters. {@code RenderPose} will typically be the value
-            returned from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-            """,
-            size = "ovrEye_Count"
-        )
-        ovrMatrix4f.array(
-            "Matrix",
-            """
-            specifies the mapping from a view-space vector to a UV coordinate on the textures given above.
-            ${codeBlock("""
-P = (x,y,z,1)*Matrix
-TexU  = P.x/P.z
-TexV  = P.y/P.z""")}
-            """,
-            size = "ovrEye_Count"
-        )
-        double.member(
-            "SensorSampleTime",
-            """
-            specifies the timestamp when the source {@code ovrPosef} (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by
-            calling #GetTimeInSeconds() around the instant the application calls #GetTrackingState() The main purpose for this is to accurately track app
-            tracking latency.
-            """
-        )
-    }
-
     union(Module.OVR, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
         documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."
 
         ovrLayerHeader.member("Header", "the layer header")
         ovrLayerEyeFov.member("EyeFov", "")
         ovrLayerEyeFovDepth.member("EyeFovDepth", "")
+        ovrLayerEyeMatrix.member("EyeMatrix", "")
         ovrLayerEyeFovMultires.member("Multires", "")
         ovrLayerCylinder.member("Cylinder", "")
         ovrLayerCube.member("Cube", "")

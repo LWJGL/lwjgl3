@@ -109,6 +109,8 @@ public class OVRCameraIntrinsics extends Struct implements NativeResource {
     /** Returns a {@link OVRFovPort} view of the {@code FOVPort} field. */
     @NativeType("ovrFovPort")
     public OVRFovPort FOVPort() { return nFOVPort(address()); }
+    /** Passes the {@code FOVPort} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRCameraIntrinsics FOVPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FOVPort()); return this; }
     /** Returns the value of the {@code VirtualNearPlaneDistanceMeters} field. */
     public float VirtualNearPlaneDistanceMeters() { return nVirtualNearPlaneDistanceMeters(address()); }
     /** Returns the value of the {@code VirtualFarPlaneDistanceMeters} field. */
@@ -116,9 +118,13 @@ public class OVRCameraIntrinsics extends Struct implements NativeResource {
     /** Returns a {@link OVRSizei} view of the {@code ImageSensorPixelResolution} field. */
     @NativeType("ovrSizei")
     public OVRSizei ImageSensorPixelResolution() { return nImageSensorPixelResolution(address()); }
+    /** Passes the {@code ImageSensorPixelResolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRCameraIntrinsics ImageSensorPixelResolution(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(ImageSensorPixelResolution()); return this; }
     /** Returns a {@link OVRMatrix4f} view of the {@code LensDistortionMatrix} field. */
     @NativeType("ovrMatrix4f")
     public OVRMatrix4f LensDistortionMatrix() { return nLensDistortionMatrix(address()); }
+    /** Passes the {@code LensDistortionMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public OVRCameraIntrinsics LensDistortionMatrix(java.util.function.Consumer<OVRMatrix4f> consumer) { consumer.accept(LensDistortionMatrix()); return this; }
     /** Returns the value of the {@code ExposurePeriodSeconds} field. */
     public double ExposurePeriodSeconds() { return nExposurePeriodSeconds(address()); }
     /** Returns the value of the {@code ExposureDurationSeconds} field. */
@@ -402,6 +408,8 @@ public class OVRCameraIntrinsics extends Struct implements NativeResource {
         /** Returns a {@link OVRFovPort} view of the {@code FOVPort} field. */
         @NativeType("ovrFovPort")
         public OVRFovPort FOVPort() { return OVRCameraIntrinsics.nFOVPort(address()); }
+        /** Passes the {@code FOVPort} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRCameraIntrinsics.Buffer FOVPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FOVPort()); return this; }
         /** Returns the value of the {@code VirtualNearPlaneDistanceMeters} field. */
         public float VirtualNearPlaneDistanceMeters() { return OVRCameraIntrinsics.nVirtualNearPlaneDistanceMeters(address()); }
         /** Returns the value of the {@code VirtualFarPlaneDistanceMeters} field. */
@@ -409,9 +417,13 @@ public class OVRCameraIntrinsics extends Struct implements NativeResource {
         /** Returns a {@link OVRSizei} view of the {@code ImageSensorPixelResolution} field. */
         @NativeType("ovrSizei")
         public OVRSizei ImageSensorPixelResolution() { return OVRCameraIntrinsics.nImageSensorPixelResolution(address()); }
+        /** Passes the {@code ImageSensorPixelResolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRCameraIntrinsics.Buffer ImageSensorPixelResolution(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(ImageSensorPixelResolution()); return this; }
         /** Returns a {@link OVRMatrix4f} view of the {@code LensDistortionMatrix} field. */
         @NativeType("ovrMatrix4f")
         public OVRMatrix4f LensDistortionMatrix() { return OVRCameraIntrinsics.nLensDistortionMatrix(address()); }
+        /** Passes the {@code LensDistortionMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public OVRCameraIntrinsics.Buffer LensDistortionMatrix(java.util.function.Consumer<OVRMatrix4f> consumer) { consumer.accept(LensDistortionMatrix()); return this; }
         /** Returns the value of the {@code ExposurePeriodSeconds} field. */
         public double ExposurePeriodSeconds() { return OVRCameraIntrinsics.nExposurePeriodSeconds(address()); }
         /** Returns the value of the {@code ExposureDurationSeconds} field. */
