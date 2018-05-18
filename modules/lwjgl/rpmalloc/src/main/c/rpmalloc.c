@@ -144,7 +144,7 @@ static FORCEINLINE int32_t atomic_incr32(atomic32_t* val) { return (int32_t)_Int
 static FORCEINLINE int32_t atomic_add32(atomic32_t* val, int32_t add) { return (int32_t)_InterlockedExchangeAdd(val, add) + add; }
 static FORCEINLINE void*   atomic_load_ptr(atomicptr_t* src) { return (void*)*src; }
 static FORCEINLINE void    atomic_store_ptr(atomicptr_t* dst, void* val) { *dst = val; }
-#ifdef ARCH_64BIT
+#if ARCH_64BIT
 static FORCEINLINE int     atomic_cas_ptr(atomicptr_t* dst, void* val, void* ref) { return (_InterlockedCompareExchange64((volatile long long*)dst, (long long)val, (long long)ref) == (long long)ref) ? 1 : 0; }
 #else
 static FORCEINLINE int     atomic_cas_ptr(atomicptr_t* dst, void* val, void* ref) { return (_InterlockedCompareExchange((volatile long*)dst, (long)val, (long)ref) == (long)ref) ? 1 : 0; }
