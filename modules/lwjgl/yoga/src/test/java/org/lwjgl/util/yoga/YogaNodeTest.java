@@ -293,7 +293,7 @@ public class YogaNodeTest {
         YogaConfig    config               = new YogaConfig();
         config.setOnCloneNode((oldNode, owner, childIndex) -> {
             onNodeClonedExecuted.set(true);
-            return YGNodeClone(oldNode);
+            return YogaNode.create(oldNode).clone(owner).node;
         });
         YogaNode root = new YogaNode(config);
         root.setWidth(100f);
@@ -317,8 +317,6 @@ public class YogaNodeTest {
 
             assertEquals(child0.getWidth(v).value(), clonedNode.getWidth(v).value());
             assertEquals(50f, clonedNode.getWidth(v).value(), 0.01f);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

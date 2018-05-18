@@ -14,6 +14,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
+
 /**
  * Renderer statistics data.
  * 

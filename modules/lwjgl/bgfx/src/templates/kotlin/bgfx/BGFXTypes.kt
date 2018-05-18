@@ -136,6 +136,7 @@ val bgfx_encoder_stats_t = struct(Module.BGFX, "BGFXEncoderStats", nativeName = 
 }
 
 val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
+    javaImport("static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT")
     documentation =
         """
         Renderer statistics data.

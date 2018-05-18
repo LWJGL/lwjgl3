@@ -284,11 +284,11 @@ artifacts {
     the above example is going to look like this in Gradle:
     -------------------------------------------
     compile 'org.lwjgl:lwjgl:$lwjglVersion' // NOTE: this is optional, all binding artifacts have a dependency on lwjgl
-        runtime 'org.lwjgl:lwjgl:$lwjglVersion:natives-$lwjglArch'
+        compile 'org.lwjgl:lwjgl:$lwjglVersion:natives-$lwjglArch'
     compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion'
-        runtime 'org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-$lwjglArch'
+        compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-$lwjglArch'
     compile 'org.lwjgl:lwjgl-stb:$lwjglVersion'
-        runtime 'org.lwjgl:lwjgl-stb:$lwjglVersion:natives-$lwjglArch'
+        compile 'org.lwjgl:lwjgl-stb:$lwjglVersion:natives-$lwjglArch'
     -------------------------------------------
     and a whole lot more verbose in Maven. Hopefully, the automation
     is going to alleviate the pain.
