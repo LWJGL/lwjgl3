@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 67;
+    public static final int BGFX_API_VERSION = 68;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -795,6 +795,28 @@ public class BGFX {
         BGFX_OCCLUSION_QUERY_RESULT_VISIBLE   = 1,
         BGFX_OCCLUSION_QUERY_RESULT_NORESULT  = 2,
         BGFX_OCCLUSION_QUERY_RESULT_COUNT     = 3;
+
+    /**
+     * {@code bgfx_topology}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #BGFX_TOPOLOGY_TRI_LIST TOPOLOGY_TRI_LIST}</li>
+     * <li>{@link #BGFX_TOPOLOGY_TRI_STRIP TOPOLOGY_TRI_STRIP}</li>
+     * <li>{@link #BGFX_TOPOLOGY_LINE_LIST TOPOLOGY_LINE_LIST}</li>
+     * <li>{@link #BGFX_TOPOLOGY_LINE_STRIP TOPOLOGY_LINE_STRIP}</li>
+     * <li>{@link #BGFX_TOPOLOGY_POINT_LIST TOPOLOGY_POINT_LIST}</li>
+     * <li>{@link #BGFX_TOPOLOGY_COUNT TOPOLOGY_COUNT}</li>
+     * </ul>
+     */
+    public static final int
+        BGFX_TOPOLOGY_TRI_LIST   = 0,
+        BGFX_TOPOLOGY_TRI_STRIP  = 1,
+        BGFX_TOPOLOGY_LINE_LIST  = 2,
+        BGFX_TOPOLOGY_LINE_STRIP = 3,
+        BGFX_TOPOLOGY_POINT_LIST = 4,
+        BGFX_TOPOLOGY_COUNT      = 5;
 
     /**
      * Topology conversion function ({@code bgfx_topology_convert_t}).

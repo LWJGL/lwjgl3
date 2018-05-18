@@ -176,6 +176,8 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     int32_t.member("transientVbUsed", "")
     int32_t.member("transientIbUsed", "")
 
+    uint32_t.array("numPrims", "", size = "BGFX_TOPOLOGY_COUNT")
+
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
     int64_t.member("gpuMemoryUsed", "amount of GPU memory used by the application")
 
