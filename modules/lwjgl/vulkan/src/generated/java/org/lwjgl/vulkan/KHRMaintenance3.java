@@ -40,7 +40,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz @jbolz</li>
+ * <li>Jeff Bolz @jeffbolznv</li>
  * </ul></dd>
  * <dt><b>Status</b></dt>
  * <dd>Draft</dd>

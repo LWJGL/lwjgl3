@@ -94,7 +94,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jaakko Konttinen @jaakko</li>
+ * <li>Jaakko Konttinen @jaakkoamd</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-09</dd>

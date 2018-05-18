@@ -34,7 +34,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall @jessehall</li>
+                <li>Jesse Hall @critsec</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

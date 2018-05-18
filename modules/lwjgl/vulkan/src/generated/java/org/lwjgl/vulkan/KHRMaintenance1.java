@@ -45,7 +45,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell @pdaniell</li>
+ * <li>Piers Daniell @pdaniell-nv</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-03-13</dd>

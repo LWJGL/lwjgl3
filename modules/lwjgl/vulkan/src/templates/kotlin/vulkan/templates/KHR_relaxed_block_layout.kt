@@ -38,7 +38,7 @@ val KHR_relaxed_block_layout = "KHRRelaxedBlockLayout".nativeClassVK("KHR_relaxe
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>John Kessenich @johnk</li>
+                <li>John Kessenich @johnkslang</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -165,7 +165,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Carsten Rohde</li>
+                <li>Carsten Rohde @crohde</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

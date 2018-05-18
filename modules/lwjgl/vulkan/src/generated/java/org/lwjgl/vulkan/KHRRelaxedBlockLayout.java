@@ -29,7 +29,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>John Kessenich @johnk</li>
+ * <li>John Kessenich @johnkslang</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-03-26</dd>

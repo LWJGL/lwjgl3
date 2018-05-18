@@ -37,7 +37,7 @@ val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "devi
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>mailto:dominik.witczak@amd.com[dominik.witczak@amd.com]</li>
+                <li>Dominik Witczak @dominikwitczakamd</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

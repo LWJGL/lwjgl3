@@ -121,7 +121,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>mailto:baldurk@baldurk.org[baldurk@baldurk.org]</li>
+ * <li>Baldur Karlsson @baldurk</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-01-31</dd>

@@ -37,7 +37,7 @@ val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Dominik Witczak @dominikwitczak_amd</li>
+                <li>Dominik Witczak @dominikwitczakamd</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

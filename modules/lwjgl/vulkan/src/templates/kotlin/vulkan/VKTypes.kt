@@ -1797,7 +1797,6 @@ val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by either #GetPhysicalDeviceQueueFamilyProperties() or #GetPhysicalDeviceQueueFamilyProperties2() for the {@code physicalDevice} that was used to create {@code device}</li>
-            <li>{@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
             <li>{@code extent}{@code ::width} <b>must</b> be greater than 0.</li>
             <li>{@code extent}{@code ::height} <b>must</b> be greater than 0.</li>
             <li>{@code extent}{@code ::depth} <b>must</b> be greater than 0.</li>
@@ -2071,6 +2070,7 @@ val VkImageViewCreateInfo = struct(Module.VULKAN, "VkImageViewCreateInfo") {
             <li>If a ##VkImageFormatListCreateInfoKHR structure was included in the {@code pNext} chain of the ##VkImageCreateInfo struct used when creating {@code image} and the {@code viewFormatCount} field of ##VkImageFormatListCreateInfoKHR is not zero then {@code format} <b>must</b> be one of the formats in ##VkImageFormatListCreateInfoKHR{@code ::pViewFormats}.</li>
             <li>If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, if the {@code format} of the {@code image} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, and if {@code subresourceRange.aspectMask} is one of #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT, then {@code format} <b>must</b> be compatible with the {@code VkFormat} for the plane of the {@code image} {@code format} indicated by {@code subresourceRange.aspectMask}, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-compatible-planes">the “Compatible formats of planes of multi-planar formats” section</a></li>
             <li>If {@code image} was not created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, or if the {@code format} of the {@code image} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format and if {@code subresourceRange.aspectMask} is #IMAGE_ASPECT_COLOR_BIT, {@code format} <b>must</b> be identical to the {@code format} used to create {@code image}</li>
+            <li>If the {@code pNext} chain contains an instance of ##VkSamplerYcbcrConversionInfo with a {@code conversion} value other than #NULL_HANDLE, all members of {@code components} <b>must</b> have the value #COMPONENT_SWIZZLE_IDENTITY.</li>
             <li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>{@code subresourceRange} and {@code viewType} <b>must</b> be compatible with the image, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-views-compatibility">compatibility table</a></li>
         </ul>
@@ -3008,7 +3008,7 @@ val VkPipelineLayoutCreateInfo = struct(Module.VULKAN, "VkPipelineLayoutCreateIn
             <li>The total number of descriptors with a {@code descriptorType} of #DESCRIPTOR_TYPE_STORAGE_IMAGE, and #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxPerStageDescriptorUpdateAfterBindStorageImages}</li>
             <li>The total number of descriptors with a {@code descriptorType} of #DESCRIPTOR_TYPE_INPUT_ATTACHMENT accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxPerStageDescriptorUpdateAfterBindInputAttachments}</li>
             <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_SAMPLER and #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetSamplers}</li>
-            <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_UNIFORM_BUFFER accessible across all shader stagess and and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetUniformBuffers}</li>
+            <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_UNIFORM_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetUniformBuffers}</li>
             <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetUniformBuffersDynamic}</li>
             <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_STORAGE_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetStorageBuffers}</li>
             <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetStorageBuffersDynamic}</li>
@@ -3016,7 +3016,7 @@ val VkPipelineLayoutCreateInfo = struct(Module.VULKAN, "VkPipelineLayoutCreateIn
             <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_STORAGE_IMAGE, and #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetStorageImages}</li>
             <li>The total number of descriptors in descriptor set layouts created without the #DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT bit set with a {@code descriptorType} of #DESCRIPTOR_TYPE_INPUT_ATTACHMENT accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDescriptorSetInputAttachments}</li>
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_SAMPLER and #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxDescriptorSetUpdateAfterBindSamplers}</li>
-            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_UNIFORM_BUFFER accessible across all shader stagess and and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxDescriptorSetUpdateAfterBindUniformBuffers}</li>
+            <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_UNIFORM_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxDescriptorSetUpdateAfterBindUniformBuffers}</li>
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxDescriptorSetUpdateAfterBindUniformBuffersDynamic}</li>
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_BUFFER accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxDescriptorSetUpdateAfterBindStorageBuffers}</li>
             <li>The total number of descriptors of the type #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to ##VkPhysicalDeviceDescriptorIndexingPropertiesEXT{@code ::maxDescriptorSetUpdateAfterBindStorageBuffersDynamic}</li>
@@ -3338,19 +3338,7 @@ val VkDescriptorImageInfo = struct(Module.VULKAN, "VkDescriptorImageInfo") {
         <ul>
             <li>{@code imageView} <b>must</b> not be 2D or 2D array image view created from a 3D image</li>
             <li>{@code imageLayout} <b>must</b> match the actual {@code VkImageLayout} of each subresource accessible from {@code imageView} at the time this descriptor is accessed</li>
-            <li>
-                If {@code sampler} is used and enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>:
-                <ul>
-                    <li>The {@code format} of the {@code imageView} <b>must</b> be the same as the {@code VkFormat} of the image</li>
-                    <li>The {@code aspectMask} of the {@code imageView} <b>must</b> be #IMAGE_ASPECT_COLOR_BIT</li>
-                    <li>The {@code components.a} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
-                    <li>The {@code components.r} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
-                    <li>The {@code components.g} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
-                    <li>The {@code components.b} of the {@code imageView} <b>must</b> be #COMPONENT_SWIZZLE_IDENTITY</li>
-                    <li>The {@code pNext} chain of the {@code imageView} <b>must</b> contain a ##VkSamplerYcbcrConversionInfo which has a {@code conversion} which is an <em>identically defined object</em> to the {@code conversion} of the ##VkSamplerYcbcrConversionInfo which is in the {@code pNext} chain of the {@code sampler}</li>
-                </ul>
-            </li>
-            <li>If {@code sampler} is used and does not enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> and the {@code VkFormat} of the image is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, the image <b>must</b> have been created with #IMAGE_CREATE_MUTABLE_FORMAT_BIT, and the {@code aspectMask} of the {@code imageView} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or (for three-plane formats only) #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If {@code sampler} is used and the {@code VkFormat} of the image is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, the image <b>must</b> have been created with #IMAGE_CREATE_MUTABLE_FORMAT_BIT, and the {@code aspectMask} of the {@code imageView} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or (for three-plane formats only) #IMAGE_ASPECT_PLANE_2_BIT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3424,6 +3412,9 @@ val VkWriteDescriptorSet = struct(Module.VULKAN, "VkWriteDescriptorSet") {
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, {@code pBufferInfo} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid ##VkDescriptorBufferInfo structures</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was not allocated with a layout that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkSampler} object</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} and {@code imageLayout} members of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkImageView} and {@code VkImageLayout}, respectively</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE, then the {@code imageView} member of each {@code pImageInfo} element <b>must</b> have been created without a ##VkSamplerYcbcrConversionInfo structure in its {@code pNext} chain</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and if any element of {@code pImageInfo} has a {@code imageView} member that was created with a ##VkSamplerYcbcrConversionInfo structure in its {@code pNext} chain, then {@code dstSet} <b>must</b> have been allocated with a layout that included immutable samplers for {@code dstBinding}</li>
+            <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was allocated with a layout that included immutable samplers for {@code dstBinding}, then the {@code imageView} member of each element of {@code pImageInfo} which corresponds to a immutable sampler that enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> <b>must</b> have been created with a ##VkSamplerYcbcrConversionInfo structure in its {@code pNext} chain with an <em>identically defined</em> ##VkSamplerYcbcrConversionInfo to the corresponding immutable sampler</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_IMAGE, for each descriptor that will be accessed via load or store operations the {@code imageLayout} member for corresponding elements of {@code pImageInfo} <b>must</b> be #IMAGE_LAYOUT_GENERAL</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code offset} member of each element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
             <li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code offset} member of each element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
@@ -3795,6 +3786,7 @@ val VkRenderPassCreateInfo = struct(Module.VULKAN, "VkRenderPassCreateInfo") {
             <li>For any member of {@code pAttachments} with a {@code stencilLoadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL}.</li>
             <li>If the {@code pNext} chain includes an instance of ##VkRenderPassInputAttachmentAspectCreateInfo, the {@code subpass} member of each element of its {@code pAspectReferences} member <b>must</b> be less than {@code subpassCount}</li>
             <li>If the {@code pNext} chain includes an instance of ##VkRenderPassInputAttachmentAspectCreateInfo, the {@code inputAttachmentIndex} member of each element of its {@code pAspectReferences} member <b>must</b> be less than the value of {@code inputAttachmentCount} in the member of {@code pSubpasses} identified by its {@code subpass} member</li>
+            <li>If the {@code pNext} chain includes an instance of ##VkRenderPassInputAttachmentAspectCreateInfo, the {@code aspectMask} member of any element of {@code pAspectReferences} <b>must</b> only include aspects that are present in images of the {@code format} of the input attachment specified by the {@code subpass} and {@code inputAttachment} of the same element of {@code pAspectReferences}</li>
             <li>If the {@code pNext} chain includes an instance of ##VkRenderPassMultiviewCreateInfo, and its {@code subpassCount} member is not zero, that member <b>must</b> be equal to the value of {@code subpassCount}</li>
             <li>If the {@code pNext} chain includes an instance of ##VkRenderPassMultiviewCreateInfo, if its {@code dependencyCount} member is not zero, it <b>must</b> be equal to {@code dependencyCount}</li>
             <li>If the {@code pNext} chain includes an instance of ##VkRenderPassMultiviewCreateInfo, for each non-zero element of {@code pViewOffsets}, the {@code srcSubpass} and {@code dstSubpass} members of {@code pDependencies} at the same index <b>must</b> not be equal</li>
@@ -3833,11 +3825,6 @@ val VkCommandPoolCreateInfo = struct(Module.VULKAN, "VkCommandPoolCreateInfo") {
     documentation =
         """
         Structure specifying parameters of a newly created command pool.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code queueFamilyIndex} <b>must</b> be the index of a queue family available in the calling command&#8217;s {@code device} parameter</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4591,6 +4578,18 @@ val VkDrawIndirectCommand = struct(Module.VULKAN, "VkDrawIndirectCommand") {
     uint32_t.member("instanceCount", "the number of instances to draw.")
     uint32_t.member("firstVertex", "the index of the first vertex to draw.")
     uint32_t.member("firstInstance", "the instance ID of the first instance to draw.")
+}
+
+val _VkBaseOutStructure = struct(Module.VULKAN, "VkBaseOutStructure")
+val VkBaseOutStructure = struct(Module.VULKAN, "VkBaseOutStructure") {
+    VkStructureType.member("sType", "")
+    nullable.._VkBaseOutStructure.p.member("pNext", "")
+}
+
+val _VkBaseInStructure = struct(Module.VULKAN, "VkBaseInStructure")
+val VkBaseInStructure = struct(Module.VULKAN, "VkBaseInStructure") {
+    VkStructureType.member("sType", "")
+    nullable.._VkBaseInStructure.p.member("pNext", "")
 }
 
 val VkPhysicalDeviceSubgroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupProperties", mutable = false) {
@@ -5458,9 +5457,7 @@ val VkInputAttachmentAspectReference = struct(Module.VULKAN, "VkInputAttachmentA
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>There <b>must</b> be an input attachment at {@code pCreateInfo}{@code ::pSubpasses}[{@code subpass}].{@code pInputAttachments}[{@code inputAttachmentIndex}].</li>
-            <li>The specified input attachment <b>must</b> have more than one aspect mask.</li>
-            <li>{@code aspectMask} <b>must</b> be a subset of the aspect masks in the specified input attachment.</li>
+            <li>{@code aspectMask} <b>must</b> not include #IMAGE_ASPECT_METADATA_BIT</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

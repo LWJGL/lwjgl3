@@ -44,7 +44,7 @@ val KHR_maintenance3 = "KHRMaintenance3".nativeClassVK("KHR_maintenance3", type 
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jbolz</li>
+                <li>Jeff Bolz @jeffbolznv</li>
             </ul></dd>
 
             <dt><b>Status</b></dt>

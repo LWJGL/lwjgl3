@@ -89,7 +89,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Courtney Goeltzenleuchter @courtney</li>
+                <li>Courtney Goeltzenleuchter @courtney-g</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

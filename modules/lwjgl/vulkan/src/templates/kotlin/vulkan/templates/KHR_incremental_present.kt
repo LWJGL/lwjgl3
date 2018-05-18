@@ -39,7 +39,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Ian Elliott mailto:ianelliott@google.com[ianelliott@google.com]</li>
+                <li>Ian Elliott @ianelliottus</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

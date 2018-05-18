@@ -34,7 +34,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tobias Hector @tobias</li>
+ * <li>Tobias Hector @tobski</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>

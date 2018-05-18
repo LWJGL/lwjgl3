@@ -120,7 +120,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Eric Werness @ewerness</li>
+                <li>Eric Werness @ewerness-nv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

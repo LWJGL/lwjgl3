@@ -91,7 +91,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jaakko Konttinen @jaakko</li>
+                <li>Jaakko Konttinen @jaakkoamd</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -55,7 +55,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobias</li>
+                <li>Tobias Hector @tobski</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

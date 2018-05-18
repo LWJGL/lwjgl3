@@ -71,7 +71,7 @@ val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Aaron Hagan @ahagan</li>
+                <li>Aaron Hagan @AaronHaganAMD</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

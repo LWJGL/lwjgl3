@@ -33,7 +33,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Alexander Galazin @debater</li>
+ * <li>Alexander Galazin @alegal-arm</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>

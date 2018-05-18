@@ -66,7 +66,7 @@ val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_devi
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jbolz</li>
+                <li>Jeff Bolz @jeffbolznv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

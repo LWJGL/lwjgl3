@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>mailto:dominik.witczak@amd.com[dominik.witczak@amd.com]</li>
+ * <li>Dominik Witczak @dominikwitczakamd</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-05-30</dd>

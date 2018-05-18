@@ -37,7 +37,7 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>mailto:quentin.lin@amd.com[quentin.lin@amd.com]</li>
+                <li>Qun Lin, AMD @linqun</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

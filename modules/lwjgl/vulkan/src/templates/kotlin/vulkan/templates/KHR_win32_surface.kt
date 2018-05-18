@@ -35,7 +35,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall @jessehall,Ian Elliott mailto:ianelliott@google.com[ianelliott@google.com]</li>
+                <li>Jesse Hall @critsec,Ian Elliott @ianelliottus</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

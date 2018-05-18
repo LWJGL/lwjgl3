@@ -40,7 +40,7 @@ val KHR_variable_pointers = "KHRVariablePointers".nativeClassVK("KHR_variable_po
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall @jessehall</li>
+                <li>Jesse Hall @critsec</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

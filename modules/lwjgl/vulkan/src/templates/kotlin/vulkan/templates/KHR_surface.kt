@@ -40,7 +40,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo,Ian Elliott mailto:ianelliott@google.com[ianelliott@google.com]</li>
+                <li>James Jones @cubanismo,Ian Elliott @ianelliottus</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

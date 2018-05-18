@@ -156,7 +156,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Carsten Rohde</li>
+ * <li>Carsten Rohde @crohde</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-19</dd>

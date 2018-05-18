@@ -38,7 +38,7 @@ val KHR_16bit_storage = "KHR16bitStorage".nativeClassVK("KHR_16bit_storage", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jan-Harald Fredriksen @janharald</li>
+                <li>Jan-Harald Fredriksen @janharaldfredriksen-arm</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

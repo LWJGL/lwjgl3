@@ -34,7 +34,7 @@ val KHR_win32_keyed_mutex = "KHRWin32KeyedMutex".nativeClassVK("KHR_win32_keyed_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Carsten Rohde</li>
+                <li>Carsten Rohde @crohde</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

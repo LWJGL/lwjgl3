@@ -37,7 +37,7 @@ val AMD_gpu_shader_half_float = "AMDGPUShaderHalfFloat".nativeClassVK("AMD_gpu_s
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Dominik Witczak @dominikwitczak_amd</li>
+                <li>Dominik Witczak @dominikwitczakamd</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

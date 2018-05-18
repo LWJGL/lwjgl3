@@ -40,7 +40,7 @@ val EXT_conservative_rasterization = "EXTConservativeRasterization".nativeClassV
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell @pdaniell</li>
+                <li>Piers Daniell @pdaniell-nv</li>
             </ul></dd>
 
             <dt><b>Last Modified Data</b></dt>

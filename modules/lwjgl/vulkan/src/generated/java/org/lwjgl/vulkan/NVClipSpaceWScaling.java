@@ -116,7 +116,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Eric Werness @ewerness</li>
+ * <li>Eric Werness @ewerness-nv</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-02-15</dd>

@@ -36,7 +36,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz @jbolz</li>
+ * <li>Jeff Bolz @jeffbolznv</li>
  * </ul></dd>
  * <dt><b>Status</b></dt>
  * <dd>Complete</dd>

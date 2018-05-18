@@ -32,7 +32,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Courtney Goeltzenleuchter @courtneygo</li>
+                <li>Courtney Goeltzenleuchter @courtney-g</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

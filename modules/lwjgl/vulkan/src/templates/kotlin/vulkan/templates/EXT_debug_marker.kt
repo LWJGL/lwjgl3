@@ -125,7 +125,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>mailto:baldurk@baldurk.org[baldurk@baldurk.org]</li>
+                <li>Baldur Karlsson @baldurk</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

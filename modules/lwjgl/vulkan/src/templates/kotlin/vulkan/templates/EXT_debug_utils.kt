@@ -233,7 +233,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Mark Young @MarkY_LunarG</li>
+                <li>Mark Young @marky-lunarg</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

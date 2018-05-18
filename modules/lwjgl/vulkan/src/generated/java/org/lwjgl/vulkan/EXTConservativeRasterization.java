@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell @pdaniell</li>
+ * <li>Piers Daniell @pdaniell-nv</li>
  * </ul></dd>
  * <dt><b>Last Modified Data</b></dt>
  * <dd>2017-08-28</dd>

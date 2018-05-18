@@ -85,7 +85,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jbolz</li>
+                <li>Jeff Bolz @jeffbolznv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -38,7 +38,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobias</li>
+                <li>Tobias Hector @tobski</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

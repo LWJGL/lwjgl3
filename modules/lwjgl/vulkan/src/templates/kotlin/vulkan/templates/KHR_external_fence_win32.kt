@@ -35,7 +35,7 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall @jessehall</li>
+                <li>Jesse Hall @critsec</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

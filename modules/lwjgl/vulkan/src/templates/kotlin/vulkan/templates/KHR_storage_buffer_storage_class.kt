@@ -42,7 +42,7 @@ val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClas
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Alexander Galazin @debater</li>
+                <li>Alexander Galazin @alegal-arm</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

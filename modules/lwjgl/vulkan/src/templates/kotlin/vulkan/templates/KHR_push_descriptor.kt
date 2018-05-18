@@ -37,7 +37,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jbolz</li>
+                <li>Jeff Bolz @jeffbolznv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

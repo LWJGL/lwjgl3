@@ -52,7 +52,7 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobias</li>
+                <li>Tobias Hector @tobski</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones @cubanismo,Ian Elliott mailto:ianelliott@google.com[ianelliott@google.com]</li>
+ * <li>James Jones @cubanismo,Ian Elliott @ianelliottus</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-06</dd>

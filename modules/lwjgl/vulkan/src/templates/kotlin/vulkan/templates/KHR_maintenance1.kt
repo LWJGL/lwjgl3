@@ -49,7 +49,7 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell @pdaniell</li>
+                <li>Piers Daniell @pdaniell-nv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

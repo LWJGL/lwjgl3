@@ -18,12 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created command pool.
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code queueFamilyIndex} <b>must</b> be the index of a queue family available in the calling command&#8217;s {@code device} parameter</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

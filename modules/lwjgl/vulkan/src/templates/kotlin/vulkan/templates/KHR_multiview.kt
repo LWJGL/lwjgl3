@@ -40,7 +40,7 @@ val KHR_multiview = "KHRMultiview".nativeClassVK("KHR_multiview", type = "device
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jbolz</li>
+                <li>Jeff Bolz @jeffbolznv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -62,7 +62,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Aaron Hagan @ahagan</li>
+ * <li>Aaron Hagan @AaronHaganAMD</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-08-16</dd>

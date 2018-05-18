@@ -29,7 +29,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jan-Harald Fredriksen @janharald</li>
+ * <li>Jan-Harald Fredriksen @janharaldfredriksen-arm</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>

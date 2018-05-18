@@ -21,9 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>There <b>must</b> be an input attachment at {@code pCreateInfo}{@code ::pSubpasses}[{@code subpass}].{@code pInputAttachments}[{@code inputAttachmentIndex}].</li>
- * <li>The specified input attachment <b>must</b> have more than one aspect mask.</li>
- * <li>{@code aspectMask} <b>must</b> be a subset of the aspect masks in the specified input attachment.</li>
+ * <li>{@code aspectMask} <b>must</b> not include {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>mailto:quentin.lin@amd.com[quentin.lin@amd.com]</li>
+ * <li>Qun Lin, AMD @linqun</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-05-10</dd>

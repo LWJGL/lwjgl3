@@ -38,7 +38,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell @pdaniell</li>
+                <li>Piers Daniell @pdaniell-nv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -22,7 +22,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Courtney Goeltzenleuchter @courtneygo</li>
+ * <li>Courtney Goeltzenleuchter @courtney-g</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-03-15</dd>

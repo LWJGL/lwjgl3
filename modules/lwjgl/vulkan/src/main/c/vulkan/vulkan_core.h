@@ -43,7 +43,7 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 73
+#define VK_HEADER_VERSION 75
 
 
 #define VK_NULL_HANDLE 0
@@ -2714,6 +2714,16 @@ typedef struct VkDrawIndirectCommand {
     uint32_t    firstVertex;
     uint32_t    firstInstance;
 } VkDrawIndirectCommand;
+
+typedef struct VkBaseOutStructure {
+    VkStructureType               sType;
+    struct VkBaseOutStructure*    pNext;
+} VkBaseOutStructure;
+
+typedef struct VkBaseInStructure {
+    VkStructureType                    sType;
+    const struct VkBaseInStructure*    pNext;
+} VkBaseInStructure;
 
 
 typedef VkResult (VKAPI_PTR *PFN_vkCreateInstance)(const VkInstanceCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkInstance* pInstance);

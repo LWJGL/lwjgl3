@@ -39,7 +39,7 @@ val EXT_sampler_filter_minmax = "EXTSamplerFilterMinmax".nativeClassVK("EXT_samp
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jbolz</li>
+                <li>Jeff Bolz @jeffbolznv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -35,7 +35,7 @@ val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassVK("NV_viewport_swizzle
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell @pdaniell</li>
+                <li>Piers Daniell @pdaniell-nv</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

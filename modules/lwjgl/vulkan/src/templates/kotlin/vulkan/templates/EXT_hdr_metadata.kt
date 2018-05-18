@@ -36,7 +36,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Courtney Goeltzenleuchter @courtneygo</li>
+                <li>Courtney Goeltzenleuchter @courtney-g</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

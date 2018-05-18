@@ -54,7 +54,7 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos @aqnuep</li>
+                <li>Daniel Rakos @drakos-amd</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
