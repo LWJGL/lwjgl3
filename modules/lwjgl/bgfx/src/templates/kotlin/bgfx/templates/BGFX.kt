@@ -710,11 +710,11 @@ RGBA16S
     EnumConstant(
         "{@code bgfx_topology}",
 
-        "TOPOLOGY_TRI_LIST".enum,
-        "TOPOLOGY_TRI_STRIP".enum,
-        "TOPOLOGY_LINE_LIST".enum,
-        "TOPOLOGY_LINE_STRIP".enum,
-        "TOPOLOGY_POINT_LIST".enum,
+        "TOPOLOGY_TRI_LIST".enum("Triangle list"),
+        "TOPOLOGY_TRI_STRIP".enum("Triangle strip"),
+        "TOPOLOGY_LINE_LIST".enum("Line list"),
+        "TOPOLOGY_LINE_STRIP".enum("Line strip"),
+        "TOPOLOGY_POINT_LIST".enum("Point list"),
 
         "TOPOLOGY_COUNT".enum
     )

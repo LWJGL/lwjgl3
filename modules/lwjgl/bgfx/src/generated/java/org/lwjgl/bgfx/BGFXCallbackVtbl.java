@@ -40,6 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <code><pre>
  * struct bgfx_callback_vtbl_t {
+ *     char[POINTER_SIZE];
  *     void (*{@link BGFXFatalCallbackI fatal}) (bgfx_callback_interface_t *_this, bgfx_fatal_t _code, char *_str);
  *     void (*{@link BGFXTraceVarArgsCallbackI trace_vargs}) (bgfx_callback_interface_t *_this, char const *_filePath, uint16_t _line, char const *_format, va_list _argList);
  *     void (*{@link BGFXProfilerBeginI profiler_begin}) (bgfx_callback_interface_t *_this, char const *_name, uint32_t _abgr, char const *_filePath, uint16_t _line);
@@ -79,6 +80,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
+            __padding(POINTER_SIZE, true),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -96,18 +98,18 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        FATAL = layout.offsetof(0);
-        TRACE_VARGS = layout.offsetof(1);
-        PROFILER_BEGIN = layout.offsetof(2);
-        PROFILER_BEGIN_LITERAL = layout.offsetof(3);
-        PROFILER_END = layout.offsetof(4);
-        CACHE_READ_SIZE = layout.offsetof(5);
-        CACHE_READ = layout.offsetof(6);
-        CACHE_WRITE = layout.offsetof(7);
-        SCREEN_SHOT = layout.offsetof(8);
-        CAPTURE_BEGIN = layout.offsetof(9);
-        CAPTURE_END = layout.offsetof(10);
-        CAPTURE_FRAME = layout.offsetof(11);
+        FATAL = layout.offsetof(1);
+        TRACE_VARGS = layout.offsetof(2);
+        PROFILER_BEGIN = layout.offsetof(3);
+        PROFILER_BEGIN_LITERAL = layout.offsetof(4);
+        PROFILER_END = layout.offsetof(5);
+        CACHE_READ_SIZE = layout.offsetof(6);
+        CACHE_READ = layout.offsetof(7);
+        CACHE_WRITE = layout.offsetof(8);
+        SCREEN_SHOT = layout.offsetof(9);
+        CAPTURE_BEGIN = layout.offsetof(10);
+        CAPTURE_END = layout.offsetof(11);
+        CAPTURE_FRAME = layout.offsetof(12);
     }
 
     BGFXCallbackVtbl(long address, @Nullable ByteBuffer container) {

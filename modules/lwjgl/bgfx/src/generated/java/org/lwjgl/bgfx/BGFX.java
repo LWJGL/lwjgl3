@@ -802,11 +802,11 @@ public class BGFX {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #BGFX_TOPOLOGY_TRI_LIST TOPOLOGY_TRI_LIST}</li>
-     * <li>{@link #BGFX_TOPOLOGY_TRI_STRIP TOPOLOGY_TRI_STRIP}</li>
-     * <li>{@link #BGFX_TOPOLOGY_LINE_LIST TOPOLOGY_LINE_LIST}</li>
-     * <li>{@link #BGFX_TOPOLOGY_LINE_STRIP TOPOLOGY_LINE_STRIP}</li>
-     * <li>{@link #BGFX_TOPOLOGY_POINT_LIST TOPOLOGY_POINT_LIST}</li>
+     * <li>{@link #BGFX_TOPOLOGY_TRI_LIST TOPOLOGY_TRI_LIST} - Triangle list</li>
+     * <li>{@link #BGFX_TOPOLOGY_TRI_STRIP TOPOLOGY_TRI_STRIP} - Triangle strip</li>
+     * <li>{@link #BGFX_TOPOLOGY_LINE_LIST TOPOLOGY_LINE_LIST} - Line list</li>
+     * <li>{@link #BGFX_TOPOLOGY_LINE_STRIP TOPOLOGY_LINE_STRIP} - Line strip</li>
+     * <li>{@link #BGFX_TOPOLOGY_POINT_LIST TOPOLOGY_POINT_LIST} - Point list</li>
      * <li>{@link #BGFX_TOPOLOGY_COUNT TOPOLOGY_COUNT}</li>
      * </ul>
      */

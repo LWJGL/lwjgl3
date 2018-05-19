@@ -47,6 +47,11 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  * <li>{@code numUniforms} &ndash; number of used uniforms</li>
  * <li>{@code numVertexBuffers} &ndash; number of used vertex buffers</li>
  * <li>{@code numVertexDecls} &ndash; number of used vertex declarations</li>
+ * <li>{@code textureMemoryUsed} &ndash; estimate of texture memory used</li>
+ * <li>{@code rtMemoryUsed} &ndash; estimate of render target memory used</li>
+ * <li>{@code transientVbUsed} &ndash; amount of transient vertex buffer used</li>
+ * <li>{@code transientIbUsed} &ndash; amount of transient index buffer used</li>
+ * <li>{@code numPrims} &ndash; number of primitives rendered</li>
  * <li>{@code gpuMemoryMax} &ndash; maximum available GPU memory for application</li>
  * <li>{@code gpuMemoryUsed} &ndash; amount of GPU memory used by the application</li>
  * <li>{@code width} &ndash; backbuffer width in pixels</li>

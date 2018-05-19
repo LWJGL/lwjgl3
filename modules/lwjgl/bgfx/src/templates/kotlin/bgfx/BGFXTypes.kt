@@ -172,12 +172,12 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     uint16_t.member("numVertexBuffers", "number of used vertex buffers")
     uint16_t.member("numVertexDecls", "number of used vertex declarations")
 
-    int64_t.member("textureMemoryUsed", "")
-    int64_t.member("rtMemoryUsed", "")
-    int32_t.member("transientVbUsed", "")
-    int32_t.member("transientIbUsed", "")
+    int64_t.member("textureMemoryUsed", "estimate of texture memory used")
+    int64_t.member("rtMemoryUsed", "estimate of render target memory used")
+    int32_t.member("transientVbUsed", "amount of transient vertex buffer used")
+    int32_t.member("transientIbUsed", "amount of transient index buffer used")
 
-    uint32_t.array("numPrims", "", size = "BGFX_TOPOLOGY_COUNT")
+    uint32_t.array("numPrims", "number of primitives rendered", size = "BGFX_TOPOLOGY_COUNT")
 
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
     int64_t.member("gpuMemoryUsed", "amount of GPU memory used by the application")
@@ -295,6 +295,8 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t.member("maxUniforms", "maximum number of uniform handles")
     uint32_t.member("maxOcclusionQueries", "maximum number of occlusion query handles")
     uint32_t.member("maxEncoders", "maximum number of encoder threads")
+    uint32_t.member("transientVbSize", "amount of transient vertex buffer used")
+    uint32_t.member("transientIbSize", "amount of transient index buffer used")
 }
 
 val bgfx_caps_t = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false, skipBuffer = true) {
@@ -325,6 +327,7 @@ private val _bgfx_callback_interface_t = struct(Module.BGFX, "BGFXCallbackInterf
 val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t", skipBuffer = true) {
     documentation = "Callback virtual table."
 
+    padding("POINTER_SIZE")
     Module.BGFX.callback {
         void(
             "BGFXFatalCallback",
@@ -528,6 +531,7 @@ private val _bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInte
 val bgfx_allocator_vtbl_t = struct(Module.BGFX, "BGFXAllocatorVtbl", nativeName = "bgfx_allocator_vtbl_t") {
     documentation = "Allocator virtual table"
 
+    padding("POINTER_SIZE")
     Module.BGFX.callback {
         opaque_p(
             "BGFXReallocCallback",
@@ -562,6 +566,8 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
 
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {
     uint16_t.member("maxEncoders", "maximum number of encoder threads")
+    uint32_t.member("transientVbSize", "amount of transient vertex buffer used")
+    uint32_t.member("transientIbSize", "amount of transient index buffer used")
 }
 
 val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", skipBuffer = true) {
