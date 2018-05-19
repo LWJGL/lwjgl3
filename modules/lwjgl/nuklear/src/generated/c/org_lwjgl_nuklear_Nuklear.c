@@ -3,15 +3,8 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-#ifdef LWJGL_LINUX
-    #pragma GCC diagnostic ignored "-Wunused-function"
-    #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-#endif
 #include "common_tools.h"
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4738))
-#endif
 #define NK_PRIVATE
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO

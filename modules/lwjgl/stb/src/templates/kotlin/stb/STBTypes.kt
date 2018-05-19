@@ -32,9 +32,6 @@ fun config() {
 
 fun GeneratorTargetNative.includeSTBAPI(directives: String) = nativeDirective(
     """DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4701 4702 4738))
-#endif
 $directives
 ENABLE_WARNINGS()""")
 

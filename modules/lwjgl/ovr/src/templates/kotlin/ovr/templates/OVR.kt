@@ -9,15 +9,7 @@ import ovr.*
 
 val OVR = "OVR".nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
     nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710))
-#endif""", beforeIncludes = true)
-
-    nativeDirective(
         """DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4738))
-#endif
 #include "OVR_CAPIShim.c"
 ENABLE_WARNINGS()""")
 

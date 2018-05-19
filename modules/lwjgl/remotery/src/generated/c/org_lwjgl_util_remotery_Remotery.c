@@ -9,10 +9,6 @@ DISABLE_WARNINGS()
 #define RMT_ASSUME_LITTLE_ENDIAN 1
 #ifdef LWJGL_LINUX
     #define RMT_USE_POSIX_THREADNAMES 1
-    #pragma GCC diagnostic ignored "-Wunused-parameter"
-    #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-    #pragma GCC diagnostic ignored "-Wunused-function"
-    #pragma GCC diagnostic ignored "-Wpedantic"
 #elif LWJGL_MACOS
     #define RMT_USE_METAL 1
 #endif

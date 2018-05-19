@@ -7,15 +7,7 @@ package core.libc.templates
 import org.lwjgl.generator.*
 
 val string = "LibCString".nativeClass(Module.CORE_LIBC) {
-    /*nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    #define _CRT_SECURE_NO_WARNINGS
-    __pragma(warning(disable : 4710))
-#endif""", beforeIncludes = true)*/
-
-    nativeImport(
-        "<string.h>"
-    )
+    nativeImport("<string.h>")
 
     documentation = "Native bindings to string.h."
 

@@ -9,53 +9,53 @@ import opencl.*
 
 // -- [ Reusable definitions ] --
 
-val SUCCESS = "#SUCCESS"
-val TRUE = "#TRUE"
-val FALSE = "#FALSE"
+const val SUCCESS = "#SUCCESS"
+const val TRUE = "#TRUE"
+const val FALSE = "#FALSE"
 
 // Error codes
 
-val INVALID_VALUE = "#INVALID_VALUE"
-val INVALID_DEVICE_TYPE = "#INVALID_DEVICE_TYPE"
-val INVALID_PLATFORM = "#INVALID_PLATFORM"
-val INVALID_DEVICE = "#INVALID_DEVICE"
-val INVALID_CONTEXT = "#INVALID_CONTEXT"
-val INVALID_QUEUE_PROPERTIES = "#INVALID_QUEUE_PROPERTIES"
-val INVALID_COMMAND_QUEUE = "#INVALID_COMMAND_QUEUE"
-val INVALID_HOST_PTR = "#INVALID_HOST_PTR"
-val INVALID_MEM_OBJECT = "#INVALID_MEM_OBJECT"
-val INVALID_IMAGE_FORMAT_DESCRIPTOR = "#INVALID_IMAGE_FORMAT_DESCRIPTOR"
-val INVALID_IMAGE_SIZE = "#INVALID_IMAGE_SIZE"
-val INVALID_SAMPLER = "#INVALID_SAMPLER"
-val INVALID_BINARY = "#INVALID_BINARY"
-val INVALID_BUILD_OPTIONS = "#INVALID_BUILD_OPTIONS"
-val INVALID_PROGRAM = "#INVALID_PROGRAM"
-val INVALID_PROGRAM_EXECUTABLE = "#INVALID_PROGRAM_EXECUTABLE"
-val INVALID_KERNEL_NAME = "#INVALID_KERNEL_NAME"
-val INVALID_KERNEL_DEFINITION = "#INVALID_KERNEL_DEFINITION"
-val INVALID_KERNEL = "#INVALID_KERNEL"
-val INVALID_ARG_INDEX = "#INVALID_ARG_INDEX"
-val INVALID_ARG_VALUE = "#INVALID_ARG_VALUE"
-val INVALID_ARG_SIZE = "#INVALID_ARG_SIZE"
-val INVALID_KERNEL_ARGS = "#INVALID_KERNEL_ARGS"
-val INVALID_WORK_DIMENSION = "#INVALID_WORK_DIMENSION"
-val INVALID_WORK_GROUP_SIZE = "#INVALID_WORK_GROUP_SIZE"
-val INVALID_WORK_ITEM_SIZE = "#INVALID_WORK_ITEM_SIZE"
-val INVALID_GLOBAL_OFFSET = "#INVALID_GLOBAL_OFFSET"
-val INVALID_EVENT_WAIT_LIST = "#INVALID_EVENT_WAIT_LIST"
-val INVALID_EVENT = "#INVALID_EVENT"
-val INVALID_OPERATION = "#INVALID_OPERATION"
-val INVALID_BUFFER_SIZE = "#INVALID_BUFFER_SIZE"
-val INVALID_GLOBAL_WORK_SIZE = "#INVALID_GLOBAL_WORK_SIZE"
+const val INVALID_VALUE = "#INVALID_VALUE"
+const val INVALID_DEVICE_TYPE = "#INVALID_DEVICE_TYPE"
+const val INVALID_PLATFORM = "#INVALID_PLATFORM"
+const val INVALID_DEVICE = "#INVALID_DEVICE"
+const val INVALID_CONTEXT = "#INVALID_CONTEXT"
+const val INVALID_QUEUE_PROPERTIES = "#INVALID_QUEUE_PROPERTIES"
+const val INVALID_COMMAND_QUEUE = "#INVALID_COMMAND_QUEUE"
+const val INVALID_HOST_PTR = "#INVALID_HOST_PTR"
+const val INVALID_MEM_OBJECT = "#INVALID_MEM_OBJECT"
+const val INVALID_IMAGE_FORMAT_DESCRIPTOR = "#INVALID_IMAGE_FORMAT_DESCRIPTOR"
+const val INVALID_IMAGE_SIZE = "#INVALID_IMAGE_SIZE"
+const val INVALID_SAMPLER = "#INVALID_SAMPLER"
+const val INVALID_BINARY = "#INVALID_BINARY"
+const val INVALID_BUILD_OPTIONS = "#INVALID_BUILD_OPTIONS"
+const val INVALID_PROGRAM = "#INVALID_PROGRAM"
+const val INVALID_PROGRAM_EXECUTABLE = "#INVALID_PROGRAM_EXECUTABLE"
+const val INVALID_KERNEL_NAME = "#INVALID_KERNEL_NAME"
+const val INVALID_KERNEL_DEFINITION = "#INVALID_KERNEL_DEFINITION"
+const val INVALID_KERNEL = "#INVALID_KERNEL"
+const val INVALID_ARG_INDEX = "#INVALID_ARG_INDEX"
+const val INVALID_ARG_VALUE = "#INVALID_ARG_VALUE"
+const val INVALID_ARG_SIZE = "#INVALID_ARG_SIZE"
+const val INVALID_KERNEL_ARGS = "#INVALID_KERNEL_ARGS"
+const val INVALID_WORK_DIMENSION = "#INVALID_WORK_DIMENSION"
+const val INVALID_WORK_GROUP_SIZE = "#INVALID_WORK_GROUP_SIZE"
+const val INVALID_WORK_ITEM_SIZE = "#INVALID_WORK_ITEM_SIZE"
+const val INVALID_GLOBAL_OFFSET = "#INVALID_GLOBAL_OFFSET"
+const val INVALID_EVENT_WAIT_LIST = "#INVALID_EVENT_WAIT_LIST"
+const val INVALID_EVENT = "#INVALID_EVENT"
+const val INVALID_OPERATION = "#INVALID_OPERATION"
+const val INVALID_BUFFER_SIZE = "#INVALID_BUFFER_SIZE"
+const val INVALID_GLOBAL_WORK_SIZE = "#INVALID_GLOBAL_WORK_SIZE"
 
 // Errors
 
-val OORE = "#OUT_OF_RESOURCES if there is a failure to allocate resources required by the OpenCL implementation on the device."
-val OOHME = "#OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by the OpenCL implementation on the host."
+const val OORE = "#OUT_OF_RESOURCES if there is a failure to allocate resources required by the OpenCL implementation on the device."
+const val OOHME = "#OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by the OpenCL implementation on the host."
 
-val ICQE = "$INVALID_COMMAND_QUEUE if {@code command_queue} is not a valid command-queue."
-val ICE = "$INVALID_CONTEXT if {@code context} is not a valid context."
-val IEWLE =
+const val ICQE = "$INVALID_COMMAND_QUEUE if {@code command_queue} is not a valid command-queue."
+const val ICE = "$INVALID_CONTEXT if {@code context} is not a valid context."
+const val IEWLE =
     """
     $INVALID_EVENT_WAIT_LIST if {@code event_wait_list} is #NULL and {@code num_events_in_wait_list} &gt; 0, or {@code event_wait_list} is not
     #NULL and {@code num_events_in_wait_list} is 0, or if event objects in {@code event_wait_list} are not valid events.
@@ -73,8 +73,8 @@ fun ESEFEIWLE(operation: String) =
     {@code event_wait_list} is a negative integer value.
     """
 
-val errcode_ret = "{@code errcode_ret}"
-val param_value = "a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is #NULL, it is ignored."
+const val errcode_ret = "{@code errcode_ret}"
+const val param_value = "a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is #NULL, it is ignored."
 
 // Arguments
 

@@ -7,7 +7,7 @@ package opencl.templates
 import org.lwjgl.generator.*
 import opencl.*
 
-val INVALID_PROPERTY = "#INVALID_PROPERTY"
+const val INVALID_PROPERTY = "#INVALID_PROPERTY"
 
 val CL11 = "CL11".nativeClassCL("CL11") {
     documentation = "The core OpenCL 1.1 functionality."

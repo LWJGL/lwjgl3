@@ -9,11 +9,6 @@ import xxhash.*
 
 val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
     nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710))
-#endif""", beforeIncludes = true)
-
-    nativeDirective(
         """DISABLE_WARNINGS()
 #define XXH_INLINE_ALL
 #include "lwjgl_malloc.h"

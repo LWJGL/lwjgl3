@@ -79,7 +79,7 @@
         <attribute name="module"/>
         <attribute name="linker" default="clang"/>
         <attribute name="lang" default="c"/>
-        <attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+        <attribute name="flags" default="-Werror -Wfatal-errors"/>
         <attribute name="simple" default="false"/>
         <element name="beforeCompile" optional="true"/>
         <element name="source" optional="true"/>
@@ -176,7 +176,7 @@
         <!-- LMDB -->
         <build module="lmdb" simple="true" if:true="${binding.lmdb}">
             <beforeCompile>
-                <compile flags="-Wno-format-extra-args">
+                <compile>
                     <arg value="-I${src.main.rel}"/>
                     <fileset dir="." includes="${src.main}/*.c"/>
                 </compile>
@@ -296,7 +296,7 @@
         </build>
 
         <!-- Vulkan Memory Allocator -->
-        <build module="vma" lang="c++" flags="-Werror -Wfatal-errors" if:true="${binding.vma}">
+        <build module="vma" lang="c++" if:true="${binding.vma}">
             <source>
                 <arg value="-I${src.main.rel}"/>
                 <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>

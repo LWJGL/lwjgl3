@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 import nanovg.*
 
 val nanovg_gles2 = "NanoVGGLES2".dependsOn(Module.OPENGLES)?.nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
-    nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710))
-#endif""", beforeIncludes = true)
-
     includeNanoVGAPI("""#define NANOVG_GLES2_IMPLEMENTATION
 #include "nanovg.h"
 #include "nanovg_gl.h"

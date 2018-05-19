@@ -3,10 +3,6 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-#ifdef LWJGL_WINDOWS
-    #define _CRT_SECURE_NO_WARNINGS
-    __pragma(warning(disable : 4710))
-#endif
 #include "common_tools.h"
 #include "lwjgl_malloc.h"
 #define PAR_MALLOC(T, N) ((T*) org_lwjgl_malloc(N * sizeof(T)))
@@ -14,12 +10,6 @@
 #define PAR_REALLOC(T, BUF, N) ((T*) org_lwjgl_realloc(BUF, sizeof(T) * N))
 #define PAR_FREE(BUF) org_lwjgl_free(BUF)
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4738))
-#elif LWJGL_LINUX
-    #pragma GCC diagnostic ignored "-Wunused-parameter"
-    #pragma GCC diagnostic ignored "-Wsign-compare"
-#endif
 #define PAR_SHAPES_IMPLEMENTATION
 #define PAR_SHAPES_T uint32_t
 #include "par_shapes.h"

@@ -5,9 +5,6 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4701 4702 4738))
-#endif
 #define STB_PERLIN_IMPLEMENTATION
 #include "stb_perlin.h"
 ENABLE_WARNINGS()

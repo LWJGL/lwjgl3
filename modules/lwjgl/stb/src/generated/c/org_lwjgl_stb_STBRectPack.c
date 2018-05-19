@@ -5,9 +5,6 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4701 4702 4738))
-#endif
 #define STBRP_ASSERT
 #define STB_RECT_PACK_IMPLEMENTATION
 #include "stb_rect_pack.h"

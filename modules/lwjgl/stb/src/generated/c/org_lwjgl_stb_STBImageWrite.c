@@ -3,14 +3,8 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4710))
-#endif
 #include "common_tools.h"
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4701 4702 4738))
-#endif
 #include "lwjgl_malloc.h"
 #define STBIW_MALLOC(sz)    org_lwjgl_malloc(sz)
 #define STBIW_REALLOC(p,sz) org_lwjgl_realloc(p,sz)

@@ -6,9 +6,6 @@
 #include "common_tools.h"
 #include <stddef.h>
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4701 4702 4738))
-#endif
 #include "stb_truetype.h"
 ENABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS

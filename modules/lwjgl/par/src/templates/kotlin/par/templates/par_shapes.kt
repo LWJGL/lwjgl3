@@ -9,26 +9,12 @@ import par.*
 
 val par_shapes = "ParShapes".nativeClass(Module.PAR, prefix = "par_shapes_", library = "LibPar.initialize();") {
     nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    #define _CRT_SECURE_NO_WARNINGS
-    __pragma(warning(disable : 4710))
-#endif""",
-        beforeIncludes = true
-    )
-
-    nativeDirective(
         """#include "lwjgl_malloc.h"
 #define PAR_MALLOC(T, N) ((T*) org_lwjgl_malloc(N * sizeof(T)))
 #define PAR_CALLOC(T, N) ((T*) org_lwjgl_calloc(N, sizeof(T)))
 #define PAR_REALLOC(T, BUF, N) ((T*) org_lwjgl_realloc(BUF, sizeof(T) * N))
 #define PAR_FREE(BUF) org_lwjgl_free(BUF)
 DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4738))
-#elif LWJGL_LINUX
-    #pragma GCC diagnostic ignored "-Wunused-parameter"
-    #pragma GCC diagnostic ignored "-Wsign-compare"
-#endif
 #define PAR_SHAPES_IMPLEMENTATION
 #define PAR_SHAPES_T uint32_t
 #include "par_shapes.h"

@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 import opencl.*
 import opengl.*
 
-val INVALID_GL_OBJECT = "#INVALID_GL_OBJECT"
-val INVALID_MIP_LEVEL = "#INVALID_MIP_LEVEL"
+const val INVALID_GL_OBJECT = "#INVALID_GL_OBJECT"
+const val INVALID_MIP_LEVEL = "#INVALID_MIP_LEVEL"
 
 val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("CL10GL") {
     documentation =

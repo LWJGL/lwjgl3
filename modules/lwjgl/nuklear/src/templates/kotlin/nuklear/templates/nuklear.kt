@@ -8,16 +8,8 @@ import org.lwjgl.generator.*
 import nuklear.*
 
 val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod = "nk_", library = "lwjgl_nuklear") {
-    nativeDirective("""#ifdef LWJGL_LINUX
-    #pragma GCC diagnostic ignored "-Wunused-function"
-    #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-#endif""", beforeIncludes = true)
-
     nativeDirective(
         """DISABLE_WARNINGS()
-#ifdef LWJGL_WINDOWS
-    __pragma(warning(disable : 4738))
-#endif
 #define NK_PRIVATE
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO

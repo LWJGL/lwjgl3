@@ -8,12 +8,6 @@ import org.lwjgl.generator.*
 import nanovg.*
 
 val nanovg = "NanoVG".nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
-    nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    #define _CRT_SECURE_NO_WARNINGS
-    __pragma(warning(disable : 4710 4738))
-#endif""", beforeIncludes = true)
-
     includeNanoVGAPI("""#include <stdlib.h>
 #include <string.h>
 #include "lwjgl_malloc.h"

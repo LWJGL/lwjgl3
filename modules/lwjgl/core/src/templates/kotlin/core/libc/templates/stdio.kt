@@ -7,15 +7,7 @@ package core.libc.templates
 import org.lwjgl.generator.*
 
 val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
-    nativeDirective(
-        """#ifdef LWJGL_WINDOWS
-    #define _CRT_SECURE_NO_WARNINGS
-    __pragma(warning(disable : 4710))
-#endif""", beforeIncludes = true)
-
-    nativeImport(
-        "<stdio.h>"
-    )
+    nativeImport("<stdio.h>")
 
     documentation = "Native bindings to stdio.h."
 
