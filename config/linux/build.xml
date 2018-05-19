@@ -22,6 +22,8 @@
     <macrodef name="compile">
         <attribute name="dest" default="${dest}"/>
         <attribute name="lang" default="c"/>
+        <attribute name="gcc.exec" default="gcc${gcc.suffix}"/>
+        <attribute name="gpp.exec" default="g++${gcc.suffix}"/>
         <attribute name="lto" default="-flto"/>
         <attribute name="flags" default=""/>
         <attribute name="simple" default="false"/>
@@ -31,7 +33,7 @@
             <local name="cpp"/>
             <condition property="cpp"><not><equals arg1="@{lang}" arg2="c"/></not></condition>
             <local name="gcc"/>
-            <condition property="gcc" value="gcc${gcc.suffix}" else="g++${gcc.suffix}"><equals arg1="@{lang}" arg2="c"/></condition>
+            <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}"><equals arg1="@{lang}" arg2="c"/></condition>
 
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
@@ -61,6 +63,8 @@
         <attribute name="module"/>
         <attribute name="linker" default="gcc"/>
         <attribute name="lang" default="c"/>
+        <attribute name="gcc.exec" default="gcc${gcc.suffix}"/>
+        <attribute name="gpp.exec" default="g++${gcc.suffix}"/>
         <attribute name="flags" default="-Werror -Wfatal-errors"/>
         <attribute name="simple" default="false"/>
         <element name="beforeCompile" optional="true"/>
@@ -84,7 +88,7 @@
             <property name="dest" value="${bin.native}/@{module}"/>
 
             <beforeCompile/>
-            <compile lang="@{lang}" flags="@{flags}" simple="@{simple}">
+            <compile lang="@{lang}" gcc.exec="@{gcc.exec}" gpp.exec="@{gpp.exec}" flags="@{flags}" simple="@{simple}">
                 <source/>
             </compile>
 
@@ -99,8 +103,12 @@
             <property name="version.script" location="config/${platform}/version.script"/>
 
             <local name="gcc"/>
-            <condition property="gcc" value="@{linker}${gcc.suffix}"><not><equals arg1="@{linker}" arg2="gcc"/></not></condition>
-            <condition property="gcc" value="gcc${gcc.suffix}" else="g++${gcc.suffix}"><equals arg1="@{lang}" arg2="c"/></condition>
+            <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}">
+                <and>
+                    <equals arg1="@{lang}" arg2="c"/>
+                    <equals arg1="@{linker}" arg2="gcc"/>
+                </and>
+            </condition>
 
             <echo message="Linking ${name}" taskname="${gcc}" unless:set="lib-uptodate"/>
             <beforeLink/>
@@ -129,8 +137,10 @@
 
     <macrodef name="build_simple">
         <attribute name="module"/>
+        <attribute name="gcc.exec" default="gcc${gcc.suffix}"/>
+        <attribute name="gpp.exec" default="g++${gcc.suffix}"/>
         <sequential>
-            <build module="@{module}" simple="true" if:true="${binding.@{module}}"/>
+            <build module="@{module}" gcc.exec="@{gcc.exec}" gpp.exec="@{gpp.exec}" simple="true" if:true="${binding.@{module}}"/>
         </sequential>
     </macrodef>
 
