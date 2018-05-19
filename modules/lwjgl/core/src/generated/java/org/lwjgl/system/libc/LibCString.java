@@ -213,6 +213,129 @@ public class LibCString {
         return nmemcpy(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 3);
     }
 
+    // --- [ memmove ] ---
+
+    /**
+     * Unsafe version of: {@link #memmove}
+     *
+     * @param count the number of bytes to be copied
+     */
+    public static native long nmemmove(long dest, long src, long count);
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     * 
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") ByteBuffer dest, @NativeType("void const *") ByteBuffer src) {
+        if (CHECKS) {
+            check(dest, src.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), src.remaining());
+    }
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     * 
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") ShortBuffer dest, @NativeType("void const *") ShortBuffer src) {
+        if (CHECKS) {
+            check(dest, src.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 1);
+    }
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     * 
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") IntBuffer dest, @NativeType("void const *") IntBuffer src) {
+        if (CHECKS) {
+            check(dest, src.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 2);
+    }
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     * 
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") LongBuffer dest, @NativeType("void const *") LongBuffer src) {
+        if (CHECKS) {
+            check(dest, src.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 3);
+    }
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     * 
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") FloatBuffer dest, @NativeType("void const *") FloatBuffer src) {
+        if (CHECKS) {
+            check(dest, src.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 2);
+    }
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     * 
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") DoubleBuffer dest, @NativeType("void const *") DoubleBuffer src) {
+        if (CHECKS) {
+            check(dest, src.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 3);
+    }
+
     /** Array version of: {@link #nmemset} */
     public static native long nmemset(byte[] dest, int c, long count);
 
@@ -339,6 +462,78 @@ public class LibCString {
         return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 3);
     }
 
+    /** Array version of: {@link #nmemmove} */
+    public static native long nmemmove(byte[] dest, byte[] src, long count);
+
+    /** Array version of: {@link #memmove} */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") byte[] dest, @NativeType("void const *") byte[] src) {
+        if (CHECKS) {
+            check(dest, src.length);
+        }
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 0);
+    }
+
+    /** Array version of: {@link #nmemmove} */
+    public static native long nmemmove(short[] dest, short[] src, long count);
+
+    /** Array version of: {@link #memmove} */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") short[] dest, @NativeType("void const *") short[] src) {
+        if (CHECKS) {
+            check(dest, src.length);
+        }
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 1);
+    }
+
+    /** Array version of: {@link #nmemmove} */
+    public static native long nmemmove(int[] dest, int[] src, long count);
+
+    /** Array version of: {@link #memmove} */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") int[] dest, @NativeType("void const *") int[] src) {
+        if (CHECKS) {
+            check(dest, src.length);
+        }
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 2);
+    }
+
+    /** Array version of: {@link #nmemmove} */
+    public static native long nmemmove(long[] dest, long[] src, long count);
+
+    /** Array version of: {@link #memmove} */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") long[] dest, @NativeType("void const *") long[] src) {
+        if (CHECKS) {
+            check(dest, src.length);
+        }
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 3);
+    }
+
+    /** Array version of: {@link #nmemmove} */
+    public static native long nmemmove(float[] dest, float[] src, long count);
+
+    /** Array version of: {@link #memmove} */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") float[] dest, @NativeType("void const *") float[] src) {
+        if (CHECKS) {
+            check(dest, src.length);
+        }
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 2);
+    }
+
+    /** Array version of: {@link #nmemmove} */
+    public static native long nmemmove(double[] dest, double[] src, long count);
+
+    /** Array version of: {@link #memmove} */
+    @NativeType("void *")
+    public static long memmove(@NativeType("void *") double[] dest, @NativeType("void const *") double[] src) {
+        if (CHECKS) {
+            check(dest, src.length);
+        }
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 3);
+    }
+
     /**
      * Fills memory with a constant byte.
      *
@@ -366,6 +561,25 @@ public class LibCString {
             check(src, dest.remaining());
         }
         return nmemcpy(memAddress(dest), memAddress(src), (long)src.remaining() * src.sizeof());
+    }
+
+    /**
+     * Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
+     *
+     * <p>The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
+     * {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.</p>
+     *
+     * @param dest pointer to the destination memory area
+     * @param src  pointer to the source memory area
+     *
+     * @return the value of {@code dest}
+     */
+    @NativeType("void *")
+    public static <T extends CustomBuffer<T>> long memmove(@NativeType("void *") T dest, @NativeType("void const *") T src) {
+        if (CHECKS) {
+            check(src, dest.remaining());
+        }
+        return nmemmove(memAddress(dest), memAddress(src), (long)src.remaining() * src.sizeof());
     }
 
 }
