@@ -16,7 +16,7 @@ final class LibVma {
         String libName = Platform.mapLibraryNameBundled("lwjgl_vma");
         Library.loadSystem(System::load, System::loadLibrary, LibVma.class, libName);
 
-        MemoryAllocator allocator = getAllocator();
+        MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(
             allocator.getMalloc(),
             allocator.getCalloc(),

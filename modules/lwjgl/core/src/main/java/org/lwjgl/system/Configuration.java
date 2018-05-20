@@ -193,6 +193,17 @@ public class Configuration<T> {
     public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
 
     /**
+     * Set to false to disable tracking of internal memory allocations, in native shared libraries that have been set up to use the LWJGL memory allocator.
+     *
+     * <p>If this option is not set, it defaults to true.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.util.DebugAllocator.internal</b><br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR_INTERNAL = new Configuration<>("org.lwjgl.util.DebugAllocator.internal", StateInit.BOOLEAN);
+
+    /**
      * Set to true to enable LWJGL's debug mode for the {@link MemoryStack}. When using the stack, each frame should be popped in the same method that pushed
      * it. If this symmetry is broken, this mode will report it immediately.
      *

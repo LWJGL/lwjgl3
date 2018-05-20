@@ -16,7 +16,7 @@ final class LibNanoVG {
         String libName = Platform.mapLibraryNameBundled("lwjgl_nanovg");
         Library.loadSystem(System::load, System::loadLibrary, LibNanoVG.class, libName);
 
-        MemoryAllocator allocator = getAllocator();
+        MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(
             allocator.getMalloc(),
             allocator.getCalloc(),

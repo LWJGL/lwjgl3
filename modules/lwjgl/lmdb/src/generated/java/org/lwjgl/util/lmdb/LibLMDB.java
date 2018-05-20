@@ -16,7 +16,7 @@ final class LibLMDB {
         String libName = Platform.mapLibraryNameBundled("lwjgl_lmdb");
         Library.loadSystem(System::load, System::loadLibrary, LibLMDB.class, libName);
 
-        MemoryAllocator allocator = getAllocator();
+        MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(
             allocator.getMalloc(),
             allocator.getCalloc(),

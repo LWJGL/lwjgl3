@@ -255,7 +255,7 @@ class Generator(private val moduleRoot: String) {
         String libName = Platform.mapLibraryNameBundled("lwjgl_$libraryName");
         Library.loadSystem(System::load, System::loadLibrary, $className.class, libName);${if (setupAllocator) """
 
-        MemoryAllocator allocator = getAllocator();
+        MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         setupMalloc(
             allocator.getMalloc(),
             allocator.getCalloc(),

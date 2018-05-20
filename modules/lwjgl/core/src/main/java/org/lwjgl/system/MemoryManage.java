@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.StackWalkUtil.*;
+import static org.lwjgl.system.dyncall.DynCallback.*;
 import static org.lwjgl.system.libc.LibCStdlib.*;
 
 /** Provides {@link MemoryAllocator} implementations for {@link MemoryUtil} to use. */
@@ -78,10 +79,76 @@ final class MemoryManage {
 
         private final MemoryAllocator allocator;
 
+        private final long[] callbacks;
+
         DebugAllocator(MemoryAllocator allocator) {
             this.allocator = allocator;
 
+            this.callbacks = new long[] {
+                new CallbackI.P() {
+                    @Override public String getSignature() {
+                        return "(p)p";
+                    }
+                    @Override public long callback(long args) {
+                        long size = dcbArgPointer(args);
+                        return malloc(size);
+                    }
+                }.address(),
+                new CallbackI.P() {
+                    @Override public String getSignature() {
+                        return "(pp)p";
+                    }
+                    @Override public long callback(long args) {
+                        long num  = dcbArgPointer(args);
+                        long size = dcbArgPointer(args);
+                        return calloc(num, size);
+                    }
+                }.address(),
+                new CallbackI.P() {
+                    @Override public String getSignature() {
+                        return "(pp)p";
+                    }
+                    @Override public long callback(long args) {
+                        long ptr  = dcbArgPointer(args);
+                        long size = dcbArgPointer(args);
+                        return realloc(ptr, size);
+                    }
+                }.address(),
+                new CallbackI.V() {
+                    @Override public String getSignature() {
+                        return "(p)v";
+                    }
+                    @Override public void callback(long args) {
+                        long ptr = dcbArgPointer(args);
+                        free(ptr);
+                    }
+                }.address(),
+                new CallbackI.P() {
+                    @Override public String getSignature() {
+                        return "(pp)p";
+                    }
+                    @Override public long callback(long args) {
+                        long alignment = dcbArgPointer(args);
+                        long size      = dcbArgPointer(args);
+                        return aligned_alloc(alignment, size);
+                    }
+                }.address(),
+                new CallbackI.V() {
+                    @Override public String getSignature() {
+                        return "(p)v";
+                    }
+                    @Override public void callback(long args) {
+                        long ptr = dcbArgPointer(args);
+                        aligned_free(ptr);
+                    }
+                }.address()
+            };
+
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                for (long callback : callbacks) {
+                    Callback.free(callback);
+                }
+
                 if (ALLOCATIONS.isEmpty()) {
                     return;
                 }
@@ -104,12 +171,12 @@ final class MemoryManage {
             }));
         }
 
-        @Override public long getMalloc()       { return allocator.getMalloc(); }
-        @Override public long getCalloc()       { return allocator.getCalloc(); }
-        @Override public long getRealloc()      { return allocator.getRealloc(); }
-        @Override public long getFree()         { return allocator.getFree(); }
-        @Override public long getAlignedAlloc() { return allocator.getAlignedAlloc(); }
-        @Override public long getAlignedFree()  { return allocator.getAlignedFree(); }
+        @Override public long getMalloc()       { return callbacks[0]; }
+        @Override public long getCalloc()       { return callbacks[1]; }
+        @Override public long getRealloc()      { return callbacks[2]; }
+        @Override public long getFree()         { return callbacks[3]; }
+        @Override public long getAlignedAlloc() { return callbacks[4]; }
+        @Override public long getAlignedFree()  { return callbacks[5]; }
 
         @Override public long malloc(long size) {
             return track(allocator.malloc(size), size);
