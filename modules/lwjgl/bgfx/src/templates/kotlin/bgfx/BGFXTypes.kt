@@ -327,7 +327,6 @@ private val _bgfx_callback_interface_t = struct(Module.BGFX, "BGFXCallbackInterf
 val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t", skipBuffer = true) {
     documentation = "Callback virtual table."
 
-    padding("POINTER_SIZE")
     Module.BGFX.callback {
         void(
             "BGFXFatalCallback",
@@ -531,7 +530,6 @@ private val _bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInte
 val bgfx_allocator_vtbl_t = struct(Module.BGFX, "BGFXAllocatorVtbl", nativeName = "bgfx_allocator_vtbl_t") {
     documentation = "Allocator virtual table"
 
-    padding("POINTER_SIZE")
     Module.BGFX.callback {
         opaque_p(
             "BGFXReallocCallback",

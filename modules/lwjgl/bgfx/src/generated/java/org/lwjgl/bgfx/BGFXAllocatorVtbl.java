@@ -29,7 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <code><pre>
  * struct bgfx_allocator_vtbl_t {
- *     char[POINTER_SIZE];
  *     void * (*{@link BGFXReallocCallbackI realloc}) (bgfx_allocator_interface_t *_this, void *_ptr, size_t _size, size_t _align, char *_file, uint32_t _line);
  * }</pre></code>
  */
@@ -47,14 +46,13 @@ public class BGFXAllocatorVtbl extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __padding(POINTER_SIZE, true),
             __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        REALLOC = layout.offsetof(1);
+        REALLOC = layout.offsetof(0);
     }
 
     BGFXAllocatorVtbl(long address, @Nullable ByteBuffer container) {
