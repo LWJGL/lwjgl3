@@ -32,14 +32,6 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-#include "lwjgl_malloc.h"
-#define LMDB_MALLOC(sz)           org_lwjgl_malloc(sz)
-#define LMDB_CALLOC(n,sz)         org_lwjgl_calloc(n,sz)
-#define LMDB_REALLOC(p,sz)        org_lwjgl_realloc(p,sz)
-#define LMDB_FREE(p)              org_lwjgl_free(p)
-#define LMDB_ALIGNED_ALLOC(al,sz) org_lwjgl_aligned_alloc(al,sz)
-#define LMDB_ALIGNED_FREE(p)      org_lwjgl_aligned_free(p)
-
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
@@ -144,6 +136,14 @@ extern int cacheflush(char *addr, int nbytes, int cache);
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+#include "lwjgl_malloc.h"
+#define LMDB_MALLOC(sz)           org_lwjgl_malloc(sz)
+#define LMDB_CALLOC(n,sz)         org_lwjgl_calloc(n,sz)
+#define LMDB_REALLOC(p,sz)        org_lwjgl_realloc(p,sz)
+#define LMDB_FREE(p)              org_lwjgl_free(p)
+#define LMDB_ALIGNED_ALLOC(al,sz) org_lwjgl_aligned_alloc(al,sz)
+#define LMDB_ALIGNED_FREE(p)      org_lwjgl_aligned_free(p)
 
 #ifdef _MSC_VER
 #include <io.h>
