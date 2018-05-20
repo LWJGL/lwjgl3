@@ -8,10 +8,7 @@ import org.lwjgl.generator.*
 import nanovg.*
 
 val nanovg = "NanoVG".nativeClass(Module.NANOVG, prefix = "NVG", library = NANOVG_LIBRARY) {
-    includeNanoVGAPI("""#include <stdlib.h>
-#include <string.h>
-#include "lwjgl_malloc.h"
-#define STBI_MALLOC(sz)    org_lwjgl_malloc(sz)
+    includeNanoVGAPI("""#define STBI_MALLOC(sz)    org_lwjgl_malloc(sz)
 #define STBI_REALLOC(p,sz) org_lwjgl_realloc(p,sz)
 #define STBI_FREE(p)       org_lwjgl_free(p)
 #define STBI_FAILURE_USERMSG

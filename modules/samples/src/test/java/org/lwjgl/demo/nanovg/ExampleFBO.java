@@ -246,6 +246,8 @@ public final class ExampleFBO extends Demo {
 
         nvgluDeleteFramebuffer(vg, fb);
 
+        freeDemoData();
+
         nvgDelete(vg);
 
         System.out.format("Average Frame Time: %.2f ms\n", getGraphAverage(fps) * 1000.0f);

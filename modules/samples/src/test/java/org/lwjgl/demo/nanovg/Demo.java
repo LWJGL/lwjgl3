@@ -965,6 +965,10 @@ class Demo {
             nvgDeleteImage(vg, data.images[i]);
         }
 
+        freeDemoData();
+    }
+
+    static void freeDemoData() {
         memFree(hoverText);
         memFree(paragraph);
 
@@ -1363,10 +1367,10 @@ class Demo {
     private static final int GPU_QUERY_COUNT = 5;
 
     static class PerfGraph {
-        int style;
+        int        style;
         ByteBuffer name   = BufferUtils.createByteBuffer(32);
         float[]    values = new float[GRAPH_HISTORY_COUNT];
-        int head;
+        int        head;
     }
 
     static class GPUtimer {

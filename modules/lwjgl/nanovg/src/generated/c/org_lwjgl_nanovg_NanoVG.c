@@ -4,10 +4,11 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
-DISABLE_WARNINGS()
-#include <stdlib.h>
-#include <string.h>
 #include "lwjgl_malloc.h"
+#define NVG_MALLOC(sz)     org_lwjgl_malloc(sz)
+#define NVG_REALLOC(p,sz)  org_lwjgl_realloc(p,sz)
+#define NVG_FREE(p)        org_lwjgl_free(p)
+DISABLE_WARNINGS()
 #define STBI_MALLOC(sz)    org_lwjgl_malloc(sz)
 #define STBI_REALLOC(p,sz) org_lwjgl_realloc(p,sz)
 #define STBI_FREE(p)       org_lwjgl_free(p)

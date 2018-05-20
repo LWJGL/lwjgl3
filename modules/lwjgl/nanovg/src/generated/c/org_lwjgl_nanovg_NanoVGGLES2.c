@@ -4,6 +4,10 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+#include "lwjgl_malloc.h"
+#define NVG_MALLOC(sz)     org_lwjgl_malloc(sz)
+#define NVG_REALLOC(p,sz)  org_lwjgl_realloc(p,sz)
+#define NVG_FREE(p)        org_lwjgl_free(p)
 DISABLE_WARNINGS()
 #define NANOVG_GLES2_IMPLEMENTATION
 #include "nanovg.h"
