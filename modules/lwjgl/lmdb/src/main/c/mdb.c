@@ -32,6 +32,14 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
+#include "lwjgl_malloc.h"
+#define LMDB_MALLOC(sz)           org_lwjgl_malloc(sz)
+#define LMDB_CALLOC(n,sz)         org_lwjgl_calloc(n,sz)
+#define LMDB_REALLOC(p,sz)        org_lwjgl_realloc(p,sz)
+#define LMDB_FREE(p)              org_lwjgl_free(p)
+#define LMDB_ALIGNED_ALLOC(al,sz) org_lwjgl_aligned_alloc(al,sz)
+#define LMDB_ALIGNED_FREE(p)      org_lwjgl_aligned_free(p)
+
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
@@ -2016,7 +2024,7 @@ mdb_page_malloc(MDB_txn *txn, unsigned num)
 		sz *= num;
 		off = sz - psize;
 	}
-	if ((ret = malloc(sz)) != NULL) {
+	if ((ret = LMDB_MALLOC(sz)) != NULL) {
 		VGMEMP_ALLOC(env, ret, sz);
 		if (!(env->me_flags & MDB_NOMEMINIT)) {
 			memset((char *)ret + off, 0, psize);
@@ -2048,7 +2056,7 @@ mdb_dpage_free(MDB_env *env, MDB_page *dp)
 	} else {
 		/* large pages just get freed directly */
 		VGMEMP_FREE(env, dp);
-		free(dp);
+		LMDB_FREE(dp);
 	}
 }
 
@@ -2901,7 +2909,7 @@ mdb_cursor_shadow(MDB_txn *src, MDB_txn *dst)
 			if (mc->mc_xcursor)
 				size += sizeof(MDB_xcursor);
 			for (; mc; mc = bk->mc_next) {
-				bk = malloc(size);
+				bk = LMDB_MALLOC(size);
 				if (!bk)
 					return ENOMEM;
 				*bk = *mc;
@@ -2959,7 +2967,7 @@ mdb_cursors_close(MDB_txn *txn, unsigned merge)
 				mc = bk;
 			}
 			/* Only malloced cursors are permanently tracked. */
-			free(mc);
+			LMDB_FREE(mc);
 		}
 		cursors[i] = NULL;
 	}
@@ -3207,15 +3215,15 @@ mdb_txn_begin(MDB_env *env, MDB_txn *parent, unsigned int flags, MDB_txn **ret)
 		txn = env->me_txn0;
 		goto renew;
 	}
-	if ((txn = calloc(1, size)) == NULL) {
+	if ((txn = LMDB_CALLOC(1, size)) == NULL) {
 		DPRINTF(("calloc: %s", strerror(errno)));
 		return ENOMEM;
 	}
 #ifdef MDB_VL32
 	if (!parent) {
-		txn->mt_rpages = malloc(MDB_TRPAGE_SIZE * sizeof(MDB_ID3));
+		txn->mt_rpages = LMDB_MALLOC(MDB_TRPAGE_SIZE * sizeof(MDB_ID3));
 		if (!txn->mt_rpages) {
-			free(txn);
+			LMDB_FREE(txn);
 			return ENOMEM;
 		}
 		txn->mt_rpages[0].mid = 0;
@@ -3232,12 +3240,12 @@ mdb_txn_begin(MDB_env *env, MDB_txn *parent, unsigned int flags, MDB_txn **ret)
 		unsigned int i;
 		txn->mt_cursors = (MDB_cursor **)(txn->mt_dbs + env->me_maxdbs);
 		txn->mt_dbiseqs = parent->mt_dbiseqs;
-		txn->mt_u.dirty_list = malloc(sizeof(MDB_ID2)*MDB_IDL_UM_SIZE);
+		txn->mt_u.dirty_list = LMDB_MALLOC(sizeof(MDB_ID2)*MDB_IDL_UM_SIZE);
 		if (!txn->mt_u.dirty_list ||
 			!(txn->mt_free_pgs = mdb_midl_alloc(MDB_IDL_UM_MAX)))
 		{
-			free(txn->mt_u.dirty_list);
-			free(txn);
+			LMDB_FREE(txn->mt_u.dirty_list);
+			LMDB_FREE(txn);
 			return ENOMEM;
 		}
 		txn->mt_txnid = parent->mt_txnid;
@@ -3279,9 +3287,9 @@ renew:
 	if (rc) {
 		if (txn != env->me_txn0) {
 #ifdef MDB_VL32
-			free(txn->mt_rpages);
+			LMDB_FREE(txn->mt_rpages);
 #endif
-			free(txn);
+			LMDB_FREE(txn);
 		}
 	} else {
 		txn->mt_flags |= flags;	/* could not change txn=me_txn0 earlier */
@@ -3328,7 +3336,7 @@ mdb_dbis_update(MDB_txn *txn, int keep)
 					env->me_dbxs[i].md_name.mv_size = 0;
 					env->me_dbflags[i] = 0;
 					env->me_dbiseqs[i]++;
-					free(ptr);
+					LMDB_FREE(ptr);
 				}
 			}
 		}
@@ -3402,7 +3410,7 @@ mdb_txn_end(MDB_txn *txn, unsigned mode)
 			env->me_pgstate = ((MDB_ntxn *)txn)->mnt_pgstate;
 			mdb_midl_free(txn->mt_free_pgs);
 			mdb_midl_free(txn->mt_spill_pgs);
-			free(txn->mt_u.dirty_list);
+			LMDB_FREE(txn->mt_u.dirty_list);
 		}
 
 		mdb_midl_free(pghead);
@@ -3429,11 +3437,11 @@ mdb_txn_end(MDB_txn *txn, unsigned mode)
 		pthread_mutex_unlock(&env->me_rpmutex);
 		tl[0].mid = 0;
 		if (mode & MDB_END_FREE)
-			free(tl);
+			LMDB_FREE(tl);
 	}
 #endif
 	if (mode & MDB_END_FREE)
-		free(txn);
+		LMDB_FREE(txn);
 }
 
 void
@@ -3911,7 +3919,7 @@ mdb_txn_commit(MDB_txn *txn)
 				pn >>= 1;
 				y = mdb_mid2l_search(dst, pn);
 				if (y <= dst[0].mid && dst[y].mid == pn) {
-					free(dst[y].mptr);
+					LMDB_FREE(dst[y].mptr);
 					while (y < dst[0].mid) {
 						dst[y] = dst[y+1];
 						y++;
@@ -3946,11 +3954,11 @@ mdb_txn_commit(MDB_txn *txn)
 			while (yp < dst[x].mid)
 				dst[i--] = dst[x--];
 			if (yp == dst[x].mid)
-				free(dst[x--].mptr);
+				LMDB_FREE(dst[x--].mptr);
 		}
 		mdb_tassert(txn, i == x);
 		dst[0].mid = len;
-		free(txn->mt_u.dirty_list);
+		LMDB_FREE(txn->mt_u.dirty_list);
 		parent->mt_dirty_room = txn->mt_dirty_room;
 		if (txn->mt_spill_pgs) {
 			if (parent->mt_spill_pgs) {
@@ -3973,7 +3981,7 @@ mdb_txn_commit(MDB_txn *txn)
 
 		parent->mt_child = NULL;
 		mdb_midl_free(((MDB_ntxn *)txn)->mnt_pgstate.mf_pghead);
-		free(txn);
+		LMDB_FREE(txn);
 		return rc;
 	}
 
@@ -4155,7 +4163,7 @@ mdb_env_init_meta(MDB_env *env, MDB_meta *meta)
 
 	psize = env->me_psize;
 
-	p = calloc(NUM_METAS, psize);
+	p = LMDB_CALLOC(NUM_METAS, psize);
 	if (!p)
 		return ENOMEM;
 	p->mp_pgno = 0;
@@ -4174,7 +4182,7 @@ mdb_env_init_meta(MDB_env *env, MDB_meta *meta)
 		rc = MDB_SUCCESS;
 	else
 		rc = ENOSPC;
-	free(p);
+	LMDB_FREE(p);
 	return rc;
 }
 
@@ -4324,7 +4332,7 @@ mdb_env_create(MDB_env **env)
 {
 	MDB_env *e;
 
-	e = calloc(1, sizeof(MDB_env));
+	e = LMDB_CALLOC(1, sizeof(MDB_env));
 	if (!e)
 		return ENOMEM;
 
@@ -4589,7 +4597,7 @@ mdb_fname_init(const char *path, unsigned envflags, MDB_name *fname)
 	fname->mn_len = strlen(path);
 	if (no_suffix)
 		fname->mn_val = (char *) path;
-	else if ((fname->mn_val = malloc(fname->mn_len + MDB_SUFFLEN+1)) != NULL) {
+	else if ((fname->mn_val = LMDB_MALLOC(fname->mn_len + MDB_SUFFLEN+1)) != NULL) {
 		fname->mn_alloced = 1;
 		strcpy(fname->mn_val, path);
 	}
@@ -4601,7 +4609,7 @@ mdb_fname_init(const char *path, unsigned envflags, MDB_name *fname)
 
 /** Destroy \b fname from #mdb_fname_init() */
 #define mdb_fname_destroy(fname) \
-	do { if ((fname).mn_alloced) free((fname).mn_val); } while (0)
+	do { if ((fname).mn_alloced) LMDB_FREE((fname).mn_val); } while (0)
 
 #ifdef O_CLOEXEC /* POSIX.1-2008: Set FD_CLOEXEC atomically at open() */
 # define MDB_CLOEXEC		O_CLOEXEC
@@ -5462,7 +5470,7 @@ mdb_env_open(MDB_env *env, const char *path, unsigned int flags, mdb_mode_t mode
 		flags &= ~MDB_WRITEMAP;
 	} else {
 		if (!((env->me_free_pgs = mdb_midl_alloc(MDB_IDL_UM_MAX)) &&
-			  (env->me_dirty_list = calloc(MDB_IDL_UM_SIZE, sizeof(MDB_ID2)))))
+			  (env->me_dirty_list = LMDB_CALLOC(MDB_IDL_UM_SIZE, sizeof(MDB_ID2)))))
 			rc = ENOMEM;
 	}
 
@@ -5472,7 +5480,7 @@ mdb_env_open(MDB_env *env, const char *path, unsigned int flags, mdb_mode_t mode
 
 #ifdef MDB_VL32
 	{
-		env->me_rpages = malloc(MDB_ERPAGE_SIZE * sizeof(MDB_ID3));
+		env->me_rpages = LMDB_MALLOC(MDB_ERPAGE_SIZE * sizeof(MDB_ID3));
 		if (!env->me_rpages) {
 			rc = ENOMEM;
 			goto leave;
@@ -5483,9 +5491,9 @@ mdb_env_open(MDB_env *env, const char *path, unsigned int flags, mdb_mode_t mode
 #endif
 
 	env->me_path = strdup(path);
-	env->me_dbxs = calloc(env->me_maxdbs, sizeof(MDB_dbx));
-	env->me_dbflags = calloc(env->me_maxdbs, sizeof(uint16_t));
-	env->me_dbiseqs = calloc(env->me_maxdbs, sizeof(unsigned int));
+	env->me_dbxs = LMDB_CALLOC(env->me_maxdbs, sizeof(MDB_dbx));
+	env->me_dbflags = LMDB_CALLOC(env->me_maxdbs, sizeof(uint16_t));
+	env->me_dbiseqs = LMDB_CALLOC(env->me_maxdbs, sizeof(unsigned int));
 	if (!(env->me_dbxs && env->me_path && env->me_dbflags && env->me_dbiseqs)) {
 		rc = ENOMEM;
 		goto leave;
@@ -5530,8 +5538,8 @@ mdb_env_open(MDB_env *env, const char *path, unsigned int flags, mdb_mode_t mode
 			MDB_txn *txn;
 			int tsize = sizeof(MDB_txn), size = tsize + env->me_maxdbs *
 				(sizeof(MDB_db)+sizeof(MDB_cursor *)+sizeof(unsigned int)+1);
-			if ((env->me_pbuf = calloc(1, env->me_psize)) &&
-				(txn = calloc(1, size)))
+			if ((env->me_pbuf = LMDB_CALLOC(1, env->me_psize)) &&
+				(txn = LMDB_CALLOC(1, size)))
 			{
 				txn->mt_dbs = (MDB_db *)((char *)txn + tsize);
 				txn->mt_cursors = (MDB_cursor **)(txn->mt_dbs + env->me_maxdbs);
@@ -5539,9 +5547,9 @@ mdb_env_open(MDB_env *env, const char *path, unsigned int flags, mdb_mode_t mode
 				txn->mt_dbflags = (unsigned char *)(txn->mt_dbiseqs + env->me_maxdbs);
 				txn->mt_env = env;
 #ifdef MDB_VL32
-				txn->mt_rpages = malloc(MDB_TRPAGE_SIZE * sizeof(MDB_ID3));
+				txn->mt_rpages = LMDB_MALLOC(MDB_TRPAGE_SIZE * sizeof(MDB_ID3));
 				if (!txn->mt_rpages) {
-					free(txn);
+					LMDB_FREE(txn);
 					rc = ENOMEM;
 					goto leave;
 				}
@@ -5577,27 +5585,27 @@ mdb_env_close0(MDB_env *env, int excl)
 	/* Doing this here since me_dbxs may not exist during mdb_env_close */
 	if (env->me_dbxs) {
 		for (i = env->me_maxdbs; --i >= CORE_DBS; )
-			free(env->me_dbxs[i].md_name.mv_data);
-		free(env->me_dbxs);
+			LMDB_FREE(env->me_dbxs[i].md_name.mv_data);
+		LMDB_FREE(env->me_dbxs);
 	}
 
-	free(env->me_pbuf);
-	free(env->me_dbiseqs);
-	free(env->me_dbflags);
+	LMDB_FREE(env->me_pbuf);
+	LMDB_FREE(env->me_dbiseqs);
+	LMDB_FREE(env->me_dbflags);
 	free(env->me_path);
-	free(env->me_dirty_list);
+	LMDB_FREE(env->me_dirty_list);
 #ifdef MDB_VL32
 	if (env->me_txn0 && env->me_txn0->mt_rpages)
-		free(env->me_txn0->mt_rpages);
+		LMDB_FREE(env->me_txn0->mt_rpages);
 	if (env->me_rpages) {
 		MDB_ID3L el = env->me_rpages;
 		unsigned int x;
 		for (x=1; x<=el[0].mid; x++)
 			munmap(el[x].mptr, el[x].mcnt * env->me_psize);
-		free(el);
+		LMDB_FREE(el);
 	}
 #endif
-	free(env->me_txn0);
+	LMDB_FREE(env->me_txn0);
 	mdb_midl_free(env->me_free_pgs);
 
 	if (env->me_flags & MDB_ENV_TXKEY) {
@@ -5707,11 +5715,11 @@ mdb_env_close(MDB_env *env)
 	while ((dp = env->me_dpages) != NULL) {
 		VGMEMP_DEFINED(&dp->mp_next, sizeof(dp->mp_next));
 		env->me_dpages = dp->mp_next;
-		free(dp);
+		LMDB_FREE(dp);
 	}
 
 	mdb_env_close0(env, 0);
-	free(env);
+	LMDB_FREE(env);
 }
 
 /** Compare two items pointing at aligned #mdb_size_t's */
@@ -8532,7 +8540,7 @@ mdb_cursor_open(MDB_txn *txn, MDB_dbi dbi, MDB_cursor **ret)
 	if (txn->mt_dbs[dbi].md_flags & MDB_DUPSORT)
 		size += sizeof(MDB_xcursor);
 
-	if ((mc = malloc(size)) != NULL) {
+	if ((mc = LMDB_MALLOC(size)) != NULL) {
 		mdb_cursor_init(mc, txn, dbi, (MDB_xcursor *)(mc + 1));
 		if (txn->mt_cursors) {
 			mc->mc_next = txn->mt_cursors[dbi];
@@ -8620,7 +8628,7 @@ mdb_cursor_close(MDB_cursor *mc)
 			if (*prev == mc)
 				*prev = mc->mc_next;
 		}
-		free(mc);
+		LMDB_FREE(mc);
 	}
 }
 
@@ -10076,7 +10084,7 @@ mdb_env_cwalk(mdb_copy *my, pgno_t *pg, int flags)
 		return rc;
 
 	/* Make cursor pages writable */
-	buf = ptr = malloc(my->mc_env->me_psize * mc.mc_snum);
+	buf = ptr = LMDB_MALLOC(my->mc_env->me_psize * mc.mc_snum);
 	if (buf == NULL)
 		return ENOMEM;
 
@@ -10202,7 +10210,7 @@ again:
 		}
 	}
 done:
-	free(buf);
+	LMDB_FREE(buf);
 	return rc;
 }
 
@@ -10224,7 +10232,7 @@ mdb_env_copyfd1(MDB_env *env, HANDLE fd)
 		rc = ErrCode();
 		goto done;
 	}
-	my.mc_wbuf[0] = _aligned_malloc(MDB_WBUF*2, env->me_os_psize);
+	my.mc_wbuf[0] = LMDB_ALIGNED_ALLOC(env->me_os_psize, MDB_WBUF*2);
 	if (my.mc_wbuf[0] == NULL) {
 		/* _aligned_malloc() sets errno, but we use Windows error codes */
 		rc = ERROR_NOT_ENOUGH_MEMORY;
@@ -10235,13 +10243,13 @@ mdb_env_copyfd1(MDB_env *env, HANDLE fd)
 		return rc;
 	if ((rc = pthread_cond_init(&my.mc_cond, NULL)) != 0)
 		goto done2;
-#ifdef HAVE_MEMALIGN
-	my.mc_wbuf[0] = memalign(env->me_os_psize, MDB_WBUF*2);
+//#ifdef HAVE_MEMALIGN
+	my.mc_wbuf[0] = LMDB_ALIGNED_ALLOC(env->me_os_psize, MDB_WBUF*2);
 	if (my.mc_wbuf[0] == NULL) {
-		rc = errno;
+		rc = ENOMEM;
 		goto done;
 	}
-#else
+/*#else
 	{
 		void *p;
 		if ((rc = posix_memalign(&p, env->me_os_psize, MDB_WBUF*2)) != 0)
@@ -10249,6 +10257,7 @@ mdb_env_copyfd1(MDB_env *env, HANDLE fd)
 		my.mc_wbuf[0] = p;
 	}
 #endif
+*/
 #endif
 	memset(my.mc_wbuf[0], 0, MDB_WBUF*2);
 	my.mc_wbuf[1] = my.mc_wbuf[0] + MDB_WBUF;
@@ -10325,11 +10334,11 @@ finish:
 
 done:
 #ifdef _WIN32
-	if (my.mc_wbuf[0]) _aligned_free(my.mc_wbuf[0]);
+	if (my.mc_wbuf[0]) LMDB_ALIGNED_FREE(my.mc_wbuf[0]);
 	if (my.mc_cond)  CloseHandle(my.mc_cond);
 	if (my.mc_mutex) CloseHandle(my.mc_mutex);
 #else
-	free(my.mc_wbuf[0]);
+	LMDB_ALIGNED_FREE(my.mc_wbuf[0]);
 	pthread_cond_destroy(&my.mc_cond);
 done2:
 	pthread_mutex_destroy(&my.mc_mutex);
@@ -10769,7 +10778,7 @@ void mdb_dbi_close(MDB_env *env, MDB_dbi dbi)
 		env->me_dbxs[dbi].md_name.mv_size = 0;
 		env->me_dbflags[dbi] = 0;
 		env->me_dbiseqs[dbi]++;
-		free(ptr);
+		LMDB_FREE(ptr);
 	}
 }
 
@@ -11080,7 +11089,7 @@ mdb_reader_check0(MDB_env *env, int rlocked, int *dead)
 	int rc = MDB_SUCCESS, count = 0;
 
 	rdrs = env->me_txns->mti_numreaders;
-	pids = malloc((rdrs+1) * sizeof(MDB_PID_T));
+	pids = LMDB_MALLOC((rdrs+1) * sizeof(MDB_PID_T));
 	if (!pids)
 		return ENOMEM;
 	pids[0] = 0;
@@ -11116,7 +11125,7 @@ mdb_reader_check0(MDB_env *env, int rlocked, int *dead)
 			}
 		}
 	}
-	free(pids);
+	LMDB_FREE(pids);
 	if (dead)
 		*dead = count;
 	return rc;
@@ -11184,11 +11193,11 @@ utf8_to_utf16(const char *src, MDB_name *dst, int xtra)
 		need = MultiByteToWideChar(CP_UTF8, 0, src, -1, result, need);
 		if (!need) {
 			rc = ErrCode();
-			free(result);
+			LMDB_FREE(result);
 			return rc;
 		}
 		if (!result) {
-			result = malloc(sizeof(wchar_t) * (need + xtra));
+			result = LMDB_MALLOC(sizeof(wchar_t) * (need + xtra));
 			if (!result)
 				return ENOMEM;
 			continue;

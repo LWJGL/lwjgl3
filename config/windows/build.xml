@@ -172,7 +172,7 @@ EXPORTS
                 <condition property="VL32">
                     <equals arg1="${build.arch}" arg2="x86"/>
                 </condition>
-                <compile>
+                <compile flags="/W0">
                     <arg value="/I${src.main}"/>
                     <arg value="/DMDB_VL32=1" if:set="VL32"/>
                     <fileset dir="." includes="${src.main}/*.c"/>
