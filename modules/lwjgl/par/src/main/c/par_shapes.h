@@ -297,7 +297,9 @@ static float par_shapes__sqrdist3(float const* a, float const* b)
 
 static void par_shapes__compute_welded_normals(par_shapes_mesh* m)
 {
-    m->normals = PAR_MALLOC(float, m->npoints * 3);
+    if (!m->normals) {
+        m->normals = PAR_MALLOC(float, m->npoints * 3);
+    }
     PAR_SHAPES_T* weldmap = PAR_MALLOC(PAR_SHAPES_T, m->npoints);
     par_shapes_mesh* welded = par_shapes_weld(m, 0.000001, weldmap); // LWJGL: smaller epsilon
     par_shapes_compute_normals(welded);
@@ -1331,6 +1333,7 @@ par_shapes_mesh* par_shapes_create_lsystem(char const* text, int slices,
             }
         }
     }
+    par_shapes_free_mesh(tube);
     PAR_FREE(stack);
     PAR_FREE(program);
     PAR_FREE(rules);
