@@ -175,7 +175,7 @@ final class MemoryManage {
 
                 Allocation allocation = ALLOCATIONS.put(address, new Allocation(stackWalkGetTrace(), size));
                 if (allocation != null) {
-                    throw new IllegalStateException("The memory address specified is already being tracked");
+                    throw new IllegalStateException("The memory address specified is already being tracked: 0x" + Long.toHexString(address).toUpperCase());
                 }
             }
 
@@ -189,7 +189,7 @@ final class MemoryManage {
 
             Allocation allocation = ALLOCATIONS.remove(address);
             if (allocation == null) {
-                throw new IllegalStateException("The memory address specified is not being tracked");
+                throw new IllegalStateException("The memory address specified is not being tracked: 0x" + Long.toHexString(address).toUpperCase());
             }
 
             return allocation.size;
@@ -241,8 +241,9 @@ final class MemoryManage {
         }
 
         static void report(MemoryAllocationReport report) {
-            for (Allocation allocation : ALLOCATIONS.values()) {
-                report.invoke(allocation.size, allocation.threadId, THREADS.get(allocation.threadId), allocation.getElements());
+            for (Entry<Long, Allocation> entry : ALLOCATIONS.entrySet()) {
+                Allocation allocation = entry.getValue();
+                report.invoke(entry.getKey(), allocation.size, allocation.threadId, THREADS.get(allocation.threadId), allocation.getElements());
             }
         }
 
@@ -265,14 +266,14 @@ final class MemoryManage {
                             aggregate(allocation.threadId, allocation.size, mapThread);
                         }
                         for (Entry<Long, AtomicLong> entry : mapThread.entrySet()) {
-                            report.invoke(entry.getValue().get(), entry.getKey(), THREADS.get(entry.getKey()), (StackTraceElement[])null);
+                            report.invoke(NULL, entry.getValue().get(), entry.getKey(), THREADS.get(entry.getKey()), (StackTraceElement[])null);
                         }
                     } else {
                         long total = 0L;
                         for (Allocation allocation : ALLOCATIONS.values()) {
                             total += allocation.size;
                         }
-                        report.invoke(total, NULL, null, (StackTraceElement[])null);
+                        report.invoke(NULL, total, NULL, null, (StackTraceElement[])null);
                     }
                     break;
                 case GROUP_BY_METHOD:
@@ -289,7 +290,7 @@ final class MemoryManage {
                             Map<StackTraceElement, AtomicLong> mapmapMethod = tms.getValue();
 
                             for (Entry<StackTraceElement, AtomicLong> ms : mapmapMethod.entrySet()) {
-                                report.invoke(ms.getValue().get(), threadId, THREADS.get(threadId), ms.getKey());
+                                report.invoke(NULL, ms.getValue().get(), threadId, THREADS.get(threadId), ms.getKey());
                             }
                         }
                     } else {
@@ -298,7 +299,7 @@ final class MemoryManage {
                             aggregate(allocation.getElements()[0], allocation.size, mapMethod);
                         }
                         for (Entry<StackTraceElement, AtomicLong> ms : mapMethod.entrySet()) {
-                            report.invoke(ms.getValue().get(), NULL, null, ms.getKey());
+                            report.invoke(NULL, ms.getValue().get(), NULL, null, ms.getKey());
                         }
                     }
                     break;
@@ -316,7 +317,7 @@ final class MemoryManage {
                             Map<Allocation, AtomicLong> mapStackTrace = tss.getValue();
 
                             for (Entry<Allocation, AtomicLong> ss : mapStackTrace.entrySet()) {
-                                report.invoke(ss.getValue().get(), threadId, THREADS.get(threadId), ss.getKey().getElements());
+                                report.invoke(NULL, ss.getValue().get(), threadId, THREADS.get(threadId), ss.getKey().getElements());
                             }
                         }
                     } else {
@@ -325,7 +326,7 @@ final class MemoryManage {
                             aggregate(allocation, allocation.size, mapStackTrace);
                         }
                         for (Entry<Allocation, AtomicLong> ss : mapStackTrace.entrySet()) {
-                            report.invoke(ss.getValue().get(), NULL, null, ss.getKey().getElements());
+                            report.invoke(NULL, ss.getValue().get(), NULL, null, ss.getKey().getElements());
                         }
                     }
                     break;

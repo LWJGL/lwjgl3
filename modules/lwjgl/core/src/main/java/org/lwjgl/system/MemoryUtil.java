@@ -550,12 +550,13 @@ public final class MemoryUtil {
         /**
          * Reports allocated memory.
          *
+         * @param address    the address of the memory allocated. May be {@link #NULL}.
          * @param memory     the amount of memory allocated, in bytes
          * @param threadId   id of the thread that allocated the memory. May be {@link #NULL}.
          * @param threadName name of the thread that allocated the memory. May be {@code null}.
          * @param stacktrace the allocation stacktrace. May be {@code null}.
          */
-        void invoke(long memory, long threadId, @Nullable String threadName, @Nullable StackTraceElement... stacktrace);
+        void invoke(long address, long memory, long threadId, @Nullable String threadName, @Nullable StackTraceElement... stacktrace);
 
         /** Specifies how to aggregate the reported allocations. */
         enum Aggregate {
