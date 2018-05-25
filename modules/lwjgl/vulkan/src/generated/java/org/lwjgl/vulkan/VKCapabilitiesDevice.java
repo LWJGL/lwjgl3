@@ -246,6 +246,11 @@ public class VKCapabilitiesDevice {
     public final long
         vkCreateSharedSwapchainsKHR;
 
+    // KHR_draw_indirect_count
+    public final long
+        vkCmdDrawIndirectCountKHR,
+        vkCmdDrawIndexedIndirectCountKHR;
+
     // KHR_external_fence_fd
     public final long
         vkImportFenceFdKHR,
@@ -429,6 +434,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_device_group;
     /** When true, {@link KHRDisplaySwapchain} is supported. */
     public final boolean VK_KHR_display_swapchain;
+    /** When true, {@link KHRDrawIndirectCount} is supported. */
+    public final boolean VK_KHR_draw_indirect_count;
     /** When true, {@link KHRExternalFence} is supported. */
     public final boolean VK_KHR_external_fence;
     /** When true, {@link KHRExternalFenceFd} is supported. */
@@ -517,7 +524,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(217);
+        Map<String, Long> caps = new HashMap<>(219);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -568,6 +575,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_descriptor_update_template = KHRDescriptorUpdateTemplate.checkCapsDevice(provider, caps, ext);
         VK_KHR_device_group = KHRDeviceGroup.checkCapsDevice(provider, caps, ext);
         VK_KHR_display_swapchain = KHRDisplaySwapchain.checkCapsDevice(provider, caps, ext);
+        VK_KHR_draw_indirect_count = KHRDrawIndirectCount.checkCapsDevice(provider, caps, ext);
         VK_KHR_external_fence = ext.contains("VK_KHR_external_fence");
         VK_KHR_external_fence_fd = KHRExternalFenceFd.checkCapsDevice(provider, caps, ext);
         VK_KHR_external_fence_win32 = KHRExternalFenceWin32.checkCapsDevice(provider, caps, ext);
@@ -792,6 +800,8 @@ public class VKCapabilitiesDevice {
         vkGetDeviceGroupSurfacePresentModesKHR = VK.get(caps, "vkGetDeviceGroupSurfacePresentModesKHR");
         vkAcquireNextImage2KHR = VK.get(caps, "vkAcquireNextImage2KHR");
         vkCreateSharedSwapchainsKHR = VK.get(caps, "vkCreateSharedSwapchainsKHR");
+        vkCmdDrawIndirectCountKHR = VK.get(caps, "vkCmdDrawIndirectCountKHR");
+        vkCmdDrawIndexedIndirectCountKHR = VK.get(caps, "vkCmdDrawIndexedIndirectCountKHR");
         vkImportFenceFdKHR = VK.get(caps, "vkImportFenceFdKHR");
         vkGetFenceFdKHR = VK.get(caps, "vkGetFenceFdKHR");
         vkImportFenceWin32HandleKHR = VK.get(caps, "vkImportFenceWin32HandleKHR");

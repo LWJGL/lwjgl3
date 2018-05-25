@@ -100,6 +100,13 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceExternalSemaphorePropertiesKHR;
 
+    // KHR_get_display_properties2
+    public final long
+        vkGetPhysicalDeviceDisplayProperties2KHR,
+        vkGetPhysicalDeviceDisplayPlaneProperties2KHR,
+        vkGetDisplayModeProperties2KHR,
+        vkGetDisplayPlaneCapabilities2KHR;
+
     // KHR_get_physical_device_properties2
     public final long
         vkGetPhysicalDeviceFeatures2KHR,
@@ -181,6 +188,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_KHR_external_memory_capabilities;
     /** When true, {@link KHRExternalSemaphoreCapabilities} is supported. */
     public final boolean VK_KHR_external_semaphore_capabilities;
+    /** When true, {@link KHRGetDisplayProperties2} is supported. */
+    public final boolean VK_KHR_get_display_properties2;
     /** When true, {@link KHRGetPhysicalDeviceProperties2} is supported. */
     public final boolean VK_KHR_get_physical_device_properties2;
     /** When true, {@link KHRGetSurfaceCapabilities2} is supported. */
@@ -201,7 +210,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(69);
+        Map<String, Long> caps = new HashMap<>(73);
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
@@ -219,6 +228,7 @@ public class VKCapabilitiesInstance {
         VK_KHR_external_fence_capabilities = KHRExternalFenceCapabilities.checkCapsInstance(provider, caps, ext);
         VK_KHR_external_memory_capabilities = KHRExternalMemoryCapabilities.checkCapsInstance(provider, caps, ext);
         VK_KHR_external_semaphore_capabilities = KHRExternalSemaphoreCapabilities.checkCapsInstance(provider, caps, ext);
+        VK_KHR_get_display_properties2 = KHRGetDisplayProperties2.checkCapsInstance(provider, caps, ext);
         VK_KHR_get_physical_device_properties2 = KHRGetPhysicalDeviceProperties2.checkCapsInstance(provider, caps, ext);
         VK_KHR_get_surface_capabilities2 = KHRGetSurfaceCapabilities2.checkCapsInstance(provider, caps, ext);
         VK_KHR_surface = KHRSurface.checkCapsInstance(provider, caps, ext);
@@ -276,6 +286,10 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceExternalFencePropertiesKHR = VK.get(caps, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
         vkGetPhysicalDeviceExternalBufferPropertiesKHR = VK.get(caps, "vkGetPhysicalDeviceExternalBufferPropertiesKHR");
         vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = VK.get(caps, "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR");
+        vkGetPhysicalDeviceDisplayProperties2KHR = VK.get(caps, "vkGetPhysicalDeviceDisplayProperties2KHR");
+        vkGetPhysicalDeviceDisplayPlaneProperties2KHR = VK.get(caps, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR");
+        vkGetDisplayModeProperties2KHR = VK.get(caps, "vkGetDisplayModeProperties2KHR");
+        vkGetDisplayPlaneCapabilities2KHR = VK.get(caps, "vkGetDisplayPlaneCapabilities2KHR");
         vkGetPhysicalDeviceFeatures2KHR = VK.get(caps, "vkGetPhysicalDeviceFeatures2KHR");
         vkGetPhysicalDeviceProperties2KHR = VK.get(caps, "vkGetPhysicalDeviceProperties2KHR");
         vkGetPhysicalDeviceFormatProperties2KHR = VK.get(caps, "vkGetPhysicalDeviceFormatProperties2KHR");

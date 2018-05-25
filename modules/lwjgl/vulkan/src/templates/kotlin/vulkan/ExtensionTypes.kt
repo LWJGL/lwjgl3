@@ -637,7 +637,7 @@ val VkDisplayPlaneCapabilitiesKHR = struct(Module.VULKAN, "VkDisplayPlaneCapabil
         These values indicate the limits of the implementation's individual fields. Not all combinations of values within the offset and extent ranges returned in ##VkDisplayPlaneCapabilitiesKHR are guaranteed to be supported. Vendors <b>may</b> still fail presentation requests that specify unsupported combinations.
 
         <h5>See Also</h5>
-        ##VkExtent2D, ##VkOffset2D, #GetDisplayPlaneCapabilitiesKHR()
+        ##VkDisplayPlaneCapabilities2KHR, ##VkExtent2D, ##VkOffset2D, #GetDisplayPlaneCapabilitiesKHR()
         """
 
     VkDisplayPlaneAlphaFlagsKHR.member("supportedAlpha", "a bitmask of {@code VkDisplayPlaneAlphaFlagBitsKHR} describing the supported alpha blending modes.")
@@ -3395,6 +3395,124 @@ val VkPhysicalDeviceVariablePointerFeaturesKHR = struct(Module.VULKAN, "VkPhysic
     nullable..opaque_p.member("pNext", "")
     VkBool32.member("variablePointersStorageBuffer", "")
     VkBool32.member("variablePointers", "")
+}
+
+val VkDisplayProperties2KHR = struct(Module.VULKAN, "VkDisplayProperties2KHR", mutable = false) {
+    documentation =
+        """
+        Structure describing an available display device.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDisplayPropertiesKHR, #GetPhysicalDeviceDisplayProperties2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkDisplayPropertiesKHR.member("displayProperties", "an instance of the ##VkDisplayPropertiesKHR structure.")
+}
+
+val VkDisplayPlaneProperties2KHR = struct(Module.VULKAN, "VkDisplayPlaneProperties2KHR", mutable = false) {
+    documentation =
+        """
+        Structure describing an available display plane.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDisplayPlanePropertiesKHR, #GetPhysicalDeviceDisplayPlaneProperties2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkDisplayPlanePropertiesKHR.member("displayPlaneProperties", "an instance of the ##VkDisplayPlanePropertiesKHR structure.")
+}
+
+val VkDisplayModeProperties2KHR = struct(Module.VULKAN, "VkDisplayModeProperties2KHR", mutable = false) {
+    documentation =
+        """
+        Structure describing an available display mode.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDisplayModePropertiesKHR, #GetDisplayModeProperties2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkDisplayModePropertiesKHR.member("displayModeProperties", "an instance of the ##VkDisplayModePropertiesKHR structure.")
+}
+
+val VkDisplayPlaneInfo2KHR = struct(Module.VULKAN, "VkDisplayPlaneInfo2KHR") {
+    documentation =
+        """
+        Structure defining the intended configuration of a display plane.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This parameter also implicitly specifies a display.
+        </div>
+
+        <ul>
+            <li>{@code planeIndex} is the plane which the application intends to use with the display.</li>
+        </ul>
+
+        The members of ##VkDisplayPlaneInfo2KHR correspond to the arguments to #GetDisplayPlaneCapabilitiesKHR(), with {@code sType} and {@code pNext} added for extensibility.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code mode} <b>must</b> be a valid {@code VkDisplayModeKHR} handle</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code mode} <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetDisplayPlaneCapabilities2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkDisplayModeKHR.member("mode", "the display mode the application intends to program when using the specified plane.")
+    uint32_t.member("planeIndex", "")
+}
+
+val VkDisplayPlaneCapabilities2KHR = struct(Module.VULKAN, "VkDisplayPlaneCapabilities2KHR", mutable = false) {
+    documentation =
+        """
+        Structure describing the capabilities of a mode and plane combination.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDisplayPlaneCapabilitiesKHR, #GetDisplayPlaneCapabilities2KHR()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkDisplayPlaneCapabilitiesKHR.member("capabilities", "an instance of the ##VkDisplayPlaneCapabilitiesKHR structure.")
 }
 
 val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInfoMVK") {
