@@ -46,7 +46,8 @@ ENABLE_WARNINGS()""")
     IntConstant(
         "",
 
-        "MAX_ATTRIBUTES".."128"
+        "MAX_HEADER_ATTRIBUTES".."1024",
+        "MAX_CUSTOM_ATTRIBUTES".."128"
     )
 
     IntConstant(

@@ -42,7 +42,9 @@ public class TinyEXR {
         TINYEXR_PIXELTYPE_HALF  = 1,
         TINYEXR_PIXELTYPE_FLOAT = 2;
 
-    public static final int TINYEXR_MAX_ATTRIBUTES = 128;
+    public static final int
+        TINYEXR_MAX_HEADER_ATTRIBUTES = 1024,
+        TINYEXR_MAX_CUSTOM_ATTRIBUTES = 128;
 
     /** Compression types. */
     public static final int
