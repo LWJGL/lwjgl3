@@ -181,7 +181,7 @@ public class GL32 {
     public static final int GL_SYNC_FLUSH_COMMANDS_BIT = 0x1;
 
     /** Accepted in the {@code timeout} parameter of WaitSync. */
-    public static final long GL_TIMEOUT_IGNORED = 0xFFFFFFFFFFFFFFFFl;
+    public static final long GL_TIMEOUT_IGNORED = 0xFFFFFFFFFFFFFFFFL;
 
     /** Returned by ClientWaitSync. */
     public static final int
