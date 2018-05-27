@@ -3,6 +3,9 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
+#ifdef LWJGL_WINDOWS
+    #define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "common_tools.h"
 #include <stdio.h>
 

@@ -6,14 +6,10 @@
     __pragma(warning(disable : 4710))
 #endif
 #include "common_tools.h"
-DISABLE_WARNINGS()
-#include <jvmti.h>
-ENABLE_WARNINGS()
 #include <stdlib.h>
 #include <errno.h>
 
 JavaVM *jvm;
-jvmtiEnv *jvmti;
 
 inline JNIEnv *getThreadEnv(void) {
     JNIEnv *env;
@@ -189,11 +185,6 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 
     jvm = vm;
 
-    if ((*jvm)->GetEnv(jvm, (void **)&jvmti, JVMTI_VERSION_1_2) != JNI_OK) {
-        fprintf(stderr, "[LWJGL] Failed to retrieve the JVMTI interface pointer.");
-        fflush(stderr);
-    }
-
     envTLSInit();
     return JNI_VERSION_1_8;
 }
@@ -201,8 +192,6 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
     UNUSED_PARAMS(vm, reserved);
     envTLSDestroy();
-
-    (*jvmti)->DisposeEnvironment(jvmti);
 }
 
 EXTERN_C_EXIT

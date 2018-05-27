@@ -39,7 +39,8 @@ public class JNINativeInterface {
         JNI_VERSION_1_4 = 0x10004,
         JNI_VERSION_1_6 = 0x10006,
         JNI_VERSION_1_8 = 0x10008,
-        JNI_VERSION_9   = 0x90000;
+        JNI_VERSION_9   = 0x90000,
+        JNI_VERSION_10  = 0xA0000;
 
     /**
      * {@code jobjectRefType}: Return values from {@link #GetObjectRefType}.

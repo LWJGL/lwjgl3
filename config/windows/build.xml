@@ -138,7 +138,7 @@ EXPORTS
         <parallel threadsPerProcessor="1">
 
         <!-- CORE -->
-        <build module="core">
+        <build module="core" flags="/Wall /WX /wd4710 /wd4711">
             <compileargs>
                 <arg value="/I${src.main}\dyncall"/>
             </compileargs>

@@ -235,7 +235,7 @@ public final class AL {
         public void set(@Nullable ALCapabilities caps) {
             if (tempCaps == null) {
                 tempCaps = caps;
-            } else if (caps != null && caps != tempCaps && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
+            } else if (caps != null && caps != tempCaps && ThreadLocalUtil.areCapabilitiesDifferent(tempCaps.addresses, caps.addresses)) {
                 apiLog("[WARNING] Incompatible context detected. Falling back to thread/process lookup for AL contexts.");
                 icd = AL::getCapabilities; // fall back to thread/process lookup
             }

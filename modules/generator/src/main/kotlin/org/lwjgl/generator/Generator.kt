@@ -79,11 +79,11 @@ enum class Module(
     ZSTD("binding.zstd", "org.lwjgl.util.zstd", arrayOverloads = false);
 
     companion object {
-        internal val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
+        internal val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false")!!.toBoolean()
     }
 
     val enabled
-        get() = key.startsWith("core") || System.getProperty(key, "false").toBoolean()
+        get() = key.startsWith("core") || System.getProperty(key, "false")!!.toBoolean()
 
     internal val java
         get() = name.let {

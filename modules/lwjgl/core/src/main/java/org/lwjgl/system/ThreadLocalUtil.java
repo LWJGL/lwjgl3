@@ -6,13 +6,14 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 
+import javax.annotation.*;
 import java.lang.reflect.*;
 import java.util.*;
-import java.util.stream.*;
 
-import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.jni.JNINativeInterface.*;
 
 /** This class supports bindings with thread-local contexts. [INTERNAL USE ONLY] */
 public final class ThreadLocalUtil {
@@ -30,7 +31,7 @@ public final class ThreadLocalUtil {
 
     The above is applicable to methods with Critical Natives (i.e. array overloads). All other methods use the following technique:
 
-    2) The function pointers of a capabilities instance is stored in an off-heap array, which is then stored in one of the reserved members of the
+    2) The function pointers of a capabilities instance are stored in an off-heap array, which is then stored in one of the reserved members of the
     jniNativeInterface struct. This struct is then injected to the Hotspot native thread that corresponds to the Java thread in which the capabilities instance
     was made current. When a JNI method is invoked in that thread, it passes its JNIEnv copy to the JNI function, which can then retrieve the correct function
     pointer.
@@ -60,16 +61,17 @@ public final class ThreadLocalUtil {
     pointer to the struct.
 
     Note that all threads point to the same jniNativeInterface struct. Also note that even though reserved0-3 is public API, the size of the struct is not
-    known. New Java versions often add new function pointers at the end of the struct. Luckily, JVMTI's GetJNIFunctionTable function can be used to return a
-    valid copy.
+    known. New Java versions may add new function pointers at the end of the struct. JVMTI's GetJNIFunctionTable function could be used to return a valid copy,
+    but JVMTI is an optional JVM feature and may not be available (e.g. with AOT compilation). The workaround is to call JNI's GetVersion and assume the struct
+    has as many function pointers as were available in the corresponding JNI version.
 
     - On startup, a pointer to the global jniNativeInterface is stored.
     - On setCapabilities:
-        * If necessary, a jniNativeInterface copy is created with JVMTI and injected to the current thread (JavaThread::_jni_environment points to the copy).
+        * If necessary, a jniNativeInterface copy is created and injected to the current thread (JavaThread::_jni_environment points to the copy).
         * A pointer to the capabilities function pointer array is set to jniNativeInterface::reserved3.
     - On setCapabilities(null):
         * JavaThread::_jni_environment is reset to the global jniNativeInterface.
-        * The jniNativeInterface copy is deallocated with JVMTI.
+        * The jniNativeInterface copy is freed.
 
     The above has the following advantages:
 
@@ -94,6 +96,47 @@ public final class ThreadLocalUtil {
     /** A function to delegate to when an unsupported function is called. */
     private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
 
+    private static final long SIZE_OF_JNI_NATIVE_INTERFACE;
+
+    static {
+        int JNI_VERSION = GetVersion();
+
+        int reservedCount;
+        switch (JNI_VERSION) {
+            case JNI_VERSION_1_1:
+                reservedCount = 12;
+                break;
+            default:
+                reservedCount = 4;
+        }
+
+        int jniCallCount;
+        switch (JNI_VERSION) {
+            case JNI_VERSION_1_1:
+                jniCallCount = 208;
+                break;
+            case JNI_VERSION_1_2:
+                jniCallCount = 225;
+                break;
+            case JNI_VERSION_1_4:
+                jniCallCount = 228;
+                break;
+            case JNI_VERSION_1_6:
+            case JNI_VERSION_1_8:
+                jniCallCount = 229;
+                break;
+            case JNI_VERSION_9:
+            case JNI_VERSION_10:
+                jniCallCount = 230;
+                break;
+            default:
+                jniCallCount = 230;
+                DEBUG_STREAM
+                    .println("[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
+        }
+        SIZE_OF_JNI_NATIVE_INTERFACE = (reservedCount + jniCallCount) * POINTER_SIZE;
+    }
+
     private ThreadLocalUtil() {
     }
 
@@ -101,15 +144,10 @@ public final class ThreadLocalUtil {
 
     private static native void setThreadJNIEnv(long JNIEnv);
 
-    private static native long jvmtiGetJNIFunctionTable();
-
-    private static native void jvmtiDeallocate(long mem);
-
     private static native long getFunctionMissingAbort();
 
     public static void setEnv(long capabilities, int index) {
-        if (CHECKS && (index < 0 || 3 < index)) // reserved0-3
-        {
+        if (index < 0 || 3 < index) { // reserved0-3
             throw new IndexOutOfBoundsException();
         }
 
@@ -119,27 +157,56 @@ public final class ThreadLocalUtil {
         if (capabilities == NULL) {
             if (env != JNI_NATIVE_INTERFACE) {
                 setThreadJNIEnv(JNI_NATIVE_INTERFACE);
-                jvmtiDeallocate(env);
+                nmemFree(env);
             }
         } else {
             if (env == JNI_NATIVE_INTERFACE) {
-                setThreadJNIEnv(env = jvmtiGetJNIFunctionTable());
+                long newEnv = nmemAlloc(SIZE_OF_JNI_NATIVE_INTERFACE);
+                memCopy(env, newEnv, SIZE_OF_JNI_NATIVE_INTERFACE);
+                setThreadJNIEnv(env = newEnv);
             }
 
             memPutAddress(env + index * POINTER_SIZE, capabilities);
         }
     }
 
-    public static PointerBuffer getAddressesFromCapabilities(Object caps) {
-        List<Field> functions = Stream.of(caps.getClass().getFields())
-            .filter(f -> f.getType() == long.class)
-            .collect(Collectors.toList());
+    private static List<Field> getFieldsFromCapabilities(Class<?> capabilitiesClass) {
+        List<Field> fields = new ArrayList<>();
+        for (Field field : capabilitiesClass.getFields()) {
+            if (field.getType() == long.class) {
+                fields.add(field);
+            }
+        }
+        return fields;
+    }
 
-        PointerBuffer addresses = BufferUtils.createPointerBuffer(functions.size());
+    // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
+    public static void setFunctionMissingAddresses(@Nullable Class<?> capabilitiesClass, int index) {
+        if (capabilitiesClass == null) {
+            long missingCaps = memGetAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE);
+            if (missingCaps != NULL) {
+                getAllocator().free(missingCaps);
+                memPutAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE, NULL);
+            }
+        } else {
+            int functionCount = getFieldsFromCapabilities(capabilitiesClass).size();
+
+            long missingCaps = getAllocator().malloc(functionCount * POINTER_SIZE);
+            for (int i = 0; i < functionCount; i++) {
+                memPutAddress(missingCaps + i * POINTER_SIZE, FUNCTION_MISSING_ABORT);
+            }
+
+            memPutAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE, missingCaps);
+        }
+    }
+
+    public static PointerBuffer getAddressesFromCapabilities(Object caps) {
+        List<Field>   fields    = getFieldsFromCapabilities(caps.getClass());
+        PointerBuffer addresses = BufferUtils.createPointerBuffer(fields.size());
 
         try {
-            for (int i = 0; i < functions.size(); i++) {
-                long a = functions.get(i).getLong(caps);
+            for (int i = 0; i < fields.size(); i++) {
+                long a = fields.get(i).getLong(caps);
                 addresses.put(i, a != NULL ? a : FUNCTION_MISSING_ABORT);
             }
         } catch (IllegalAccessException e) {
@@ -149,13 +216,13 @@ public final class ThreadLocalUtil {
         return addresses;
     }
 
-    public static boolean compareCapabilities(PointerBuffer ref, PointerBuffer caps) {
+    public static boolean areCapabilitiesDifferent(PointerBuffer ref, PointerBuffer caps) {
         for (int i = 0; i < ref.remaining(); i++) {
             if (ref.get(i) != caps.get(i) && caps.get(i) != NULL) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 }

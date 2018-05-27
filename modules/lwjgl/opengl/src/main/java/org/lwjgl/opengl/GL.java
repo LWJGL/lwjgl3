@@ -207,6 +207,7 @@ public final class GL {
         }
 
         GL.functionProvider = functionProvider;
+        ThreadLocalUtil.setFunctionMissingAddresses(GLCapabilities.class, 3);
     }
 
     /** Unloads the OpenGL native library. */
@@ -214,6 +215,8 @@ public final class GL {
         if (functionProvider == null) {
             return;
         }
+
+        ThreadLocalUtil.setFunctionMissingAddresses(null, 3);
 
         capabilitiesWGL = null;
         capabilitiesGLX = null;
@@ -696,7 +699,7 @@ public final class GL {
         public void set(@Nullable GLCapabilities caps) {
             if (tempCaps == null) {
                 tempCaps = caps;
-            } else if (caps != null && caps != tempCaps && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
+            } else if (caps != null && caps != tempCaps && ThreadLocalUtil.areCapabilitiesDifferent(tempCaps.addresses, caps.addresses)) {
                 apiLog("[WARNING] Incompatible context detected. Falling back to thread-local lookup for GL contexts.");
                 icd = GL::getCapabilities; // fall back to thread/process lookup
             }
