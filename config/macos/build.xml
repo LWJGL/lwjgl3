@@ -147,7 +147,7 @@
         <parallel threadsPerProcessor="2">
 
         <!-- CORE -->
-        <build module="core">
+        <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
             <source>
                 <arg value="-I${src.main.rel}/dyncall"/>
                 <fileset dir=".">
