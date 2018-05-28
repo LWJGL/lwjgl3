@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_multisample.txt">ARB_texture_multisample</a> extension.
@@ -142,10 +139,7 @@ public class ARBTextureMultisample {
      * @param val   an array to receive the position of the sample
      */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") FloatBuffer val) {
-        if (CHECKS) {
-            check(val, 1);
-        }
-        nglGetMultisamplefv(pname, index, memAddress(val));
+        GL32.glGetMultisamplefv(pname, index, val);
     }
 
     /**
@@ -156,14 +150,7 @@ public class ARBTextureMultisample {
      */
     @NativeType("void")
     public static float glGetMultisamplef(@NativeType("GLenum") int pname, @NativeType("GLuint") int index) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            FloatBuffer val = stack.callocFloat(1);
-            nglGetMultisamplefv(pname, index, memAddress(val));
-            return val.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL32.glGetMultisamplef(pname, index);
     }
 
     // --- [ glSampleMaski ] ---
@@ -180,12 +167,7 @@ public class ARBTextureMultisample {
 
     /** Array version of: {@link #glGetMultisamplefv GetMultisamplefv} */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] val) {
-        long __functionAddress = GL.getICD().glGetMultisamplefv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(val, 1);
-        }
-        callPV(__functionAddress, pname, index, val);
+        GL32.glGetMultisamplefv(pname, index, val);
     }
 
 }

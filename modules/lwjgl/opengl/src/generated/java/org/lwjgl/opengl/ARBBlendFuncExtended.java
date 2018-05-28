@@ -10,8 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_blend_func_extended.txt">ARB_blend_func_extended</a> extension.
@@ -69,10 +67,7 @@ public class ARBBlendFuncExtended {
      * @param name        the name of the user-defined varying out variable whose binding to modify
      */
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        nglBindFragDataLocationIndexed(program, colorNumber, index, memAddress(name));
+        GL33.glBindFragDataLocationIndexed(program, colorNumber, index, name);
     }
 
     /**
@@ -84,13 +79,7 @@ public class ARBBlendFuncExtended {
      * @param name        the name of the user-defined varying out variable whose binding to modify
      */
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindFragDataLocationIndexed(program, colorNumber, index, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL33.glBindFragDataLocationIndexed(program, colorNumber, index, name);
     }
 
     // --- [ glGetFragDataIndex ] ---
@@ -108,10 +97,7 @@ public class ARBBlendFuncExtended {
      */
     @NativeType("GLint")
     public static int glGetFragDataIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetFragDataIndex(program, memAddress(name));
+        return GL33.glGetFragDataIndex(program, name);
     }
 
     /**
@@ -122,13 +108,7 @@ public class ARBBlendFuncExtended {
      */
     @NativeType("GLint")
     public static int glGetFragDataIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetFragDataIndex(program, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL33.glGetFragDataIndex(program, name);
     }
 
 }

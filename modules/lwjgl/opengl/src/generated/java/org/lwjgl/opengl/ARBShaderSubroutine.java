@@ -12,9 +12,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_subroutine.txt">ARB_shader_subroutine</a> extension.
@@ -74,10 +71,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("GLint")
     public static int glGetSubroutineUniformLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetSubroutineUniformLocation(program, shadertype, memAddress(name));
+        return GL40.glGetSubroutineUniformLocation(program, shadertype, name);
     }
 
     /**
@@ -89,13 +83,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("GLint")
     public static int glGetSubroutineUniformLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetSubroutineUniformLocation(program, shadertype, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetSubroutineUniformLocation(program, shadertype, name);
     }
 
     // --- [ glGetSubroutineIndex ] ---
@@ -114,10 +102,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("GLuint")
     public static int glGetSubroutineIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetSubroutineIndex(program, shadertype, memAddress(name));
+        return GL40.glGetSubroutineIndex(program, shadertype, name);
     }
 
     /**
@@ -129,13 +114,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("GLuint")
     public static int glGetSubroutineIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetSubroutineIndex(program, shadertype, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetSubroutineIndex(program, shadertype, name);
     }
 
     // --- [ glGetActiveSubroutineUniformiv ] ---
@@ -155,10 +134,7 @@ public class ARBShaderSubroutine {
      * @param values     the address of a buffer into which the queried value or values will be placed
      */
     public static void glGetActiveSubroutineUniformiv(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer values) {
-        if (CHECKS) {
-            check(values, 1);
-        }
-        nglGetActiveSubroutineUniformiv(program, shadertype, index, pname, memAddress(values));
+        GL40.glGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
     }
 
     /**
@@ -171,14 +147,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("void")
     public static int glGetActiveSubroutineUniformi(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer values = stack.callocInt(1);
-            nglGetActiveSubroutineUniformiv(program, shadertype, index, pname, memAddress(values));
-            return values.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetActiveSubroutineUniformi(program, shadertype, index, pname);
     }
 
     // --- [ glGetActiveSubroutineUniformName ] ---
@@ -202,10 +171,7 @@ public class ARBShaderSubroutine {
      * @param name       the address of a buffer that will receive the name of the specified shader subroutine uniform
      */
     public static void glGetActiveSubroutineUniformName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
-        if (CHECKS) {
-            checkSafe(length, 1);
-        }
-        nglGetActiveSubroutineUniformName(program, shadertype, index, name.remaining(), memAddressSafe(length), memAddress(name));
+        GL40.glGetActiveSubroutineUniformName(program, shadertype, index, length, name);
     }
 
     /**
@@ -218,15 +184,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("void")
     public static String glGetActiveSubroutineUniformName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @NativeType("GLsizei") int bufsize) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer length = stack.ints(0);
-            ByteBuffer name = stack.malloc(bufsize);
-            nglGetActiveSubroutineUniformName(program, shadertype, index, bufsize, memAddress(length), memAddress(name));
-            return memASCII(name, length.get(0));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetActiveSubroutineUniformName(program, shadertype, index, bufsize);
     }
 
     /**
@@ -262,10 +220,7 @@ public class ARBShaderSubroutine {
      * @param name       an array into which the name of the shader subroutine uniform will be written
      */
     public static void glGetActiveSubroutineName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
-        if (CHECKS) {
-            checkSafe(length, 1);
-        }
-        nglGetActiveSubroutineName(program, shadertype, index, name.remaining(), memAddressSafe(length), memAddress(name));
+        GL40.glGetActiveSubroutineName(program, shadertype, index, length, name);
     }
 
     /**
@@ -278,15 +233,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("void")
     public static String glGetActiveSubroutineName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @NativeType("GLsizei") int bufsize) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer length = stack.ints(0);
-            ByteBuffer name = stack.malloc(bufsize);
-            nglGetActiveSubroutineName(program, shadertype, index, bufsize, memAddress(length), memAddress(name));
-            return memASCII(name, length.get(0));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetActiveSubroutineName(program, shadertype, index, bufsize);
     }
 
     /**
@@ -319,7 +266,7 @@ public class ARBShaderSubroutine {
      * @param indices    an array holding the indices to load into the shader subroutine variables
      */
     public static void glUniformSubroutinesuiv(@NativeType("GLenum") int shadertype, @NativeType("GLuint const *") IntBuffer indices) {
-        nglUniformSubroutinesuiv(shadertype, indices.remaining(), memAddress(indices));
+        GL40.glUniformSubroutinesuiv(shadertype, indices);
     }
 
     /**
@@ -328,13 +275,7 @@ public class ARBShaderSubroutine {
      * @param shadertype the shader stage to update. One of:<br><table><tr><td>{@link GL20#GL_VERTEX_SHADER VERTEX_SHADER}</td><td>{@link GL20#GL_FRAGMENT_SHADER FRAGMENT_SHADER}</td><td>{@link GL32#GL_GEOMETRY_SHADER GEOMETRY_SHADER}</td><td>{@link GL40#GL_TESS_CONTROL_SHADER TESS_CONTROL_SHADER}</td></tr><tr><td>{@link GL40#GL_TESS_EVALUATION_SHADER TESS_EVALUATION_SHADER}</td></tr></table>
      */
     public static void glUniformSubroutinesui(@NativeType("GLenum") int shadertype, @NativeType("GLuint const *") int index) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer indices = stack.ints(index);
-            nglUniformSubroutinesuiv(shadertype, 1, memAddress(indices));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL40.glUniformSubroutinesui(shadertype, index);
     }
 
     // --- [ glGetUniformSubroutineuiv ] ---
@@ -352,10 +293,7 @@ public class ARBShaderSubroutine {
      * @param params     a variable to receive the value or values of the subroutine uniform
      */
     public static void glGetUniformSubroutineuiv(@NativeType("GLenum") int shadertype, @NativeType("GLint") int location, @NativeType("GLuint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetUniformSubroutineuiv(shadertype, location, memAddress(params));
+        GL40.glGetUniformSubroutineuiv(shadertype, location, params);
     }
 
     /**
@@ -366,14 +304,7 @@ public class ARBShaderSubroutine {
      */
     @NativeType("void")
     public static int glGetUniformSubroutineui(@NativeType("GLenum") int shadertype, @NativeType("GLint") int location) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetUniformSubroutineuiv(shadertype, location, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetUniformSubroutineui(shadertype, location);
     }
 
     // --- [ glGetProgramStageiv ] ---
@@ -392,10 +323,7 @@ public class ARBShaderSubroutine {
      * @param values     a variable into which the queried value or values will be placed
      */
     public static void glGetProgramStageiv(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer values) {
-        if (CHECKS) {
-            check(values, 1);
-        }
-        nglGetProgramStageiv(program, shadertype, pname, memAddress(values));
+        GL40.glGetProgramStageiv(program, shadertype, pname, values);
     }
 
     /**
@@ -407,73 +335,37 @@ public class ARBShaderSubroutine {
      */
     @NativeType("void")
     public static int glGetProgramStagei(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer values = stack.callocInt(1);
-            nglGetProgramStageiv(program, shadertype, pname, memAddress(values));
-            return values.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetProgramStagei(program, shadertype, pname);
     }
 
     /** Array version of: {@link #glGetActiveSubroutineUniformiv GetActiveSubroutineUniformiv} */
     public static void glGetActiveSubroutineUniformiv(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] values) {
-        long __functionAddress = GL.getICD().glGetActiveSubroutineUniformiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(values, 1);
-        }
-        callPV(__functionAddress, program, shadertype, index, pname, values);
+        GL40.glGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
     }
 
     /** Array version of: {@link #glGetActiveSubroutineUniformName GetActiveSubroutineUniformName} */
     public static void glGetActiveSubroutineUniformName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
-        long __functionAddress = GL.getICD().glGetActiveSubroutineUniformName;
-        if (CHECKS) {
-            check(__functionAddress);
-            checkSafe(length, 1);
-        }
-        callPPV(__functionAddress, program, shadertype, index, name.remaining(), length, memAddress(name));
+        GL40.glGetActiveSubroutineUniformName(program, shadertype, index, length, name);
     }
 
     /** Array version of: {@link #glGetActiveSubroutineName GetActiveSubroutineName} */
     public static void glGetActiveSubroutineName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
-        long __functionAddress = GL.getICD().glGetActiveSubroutineName;
-        if (CHECKS) {
-            check(__functionAddress);
-            checkSafe(length, 1);
-        }
-        callPPV(__functionAddress, program, shadertype, index, name.remaining(), length, memAddress(name));
+        GL40.glGetActiveSubroutineName(program, shadertype, index, length, name);
     }
 
     /** Array version of: {@link #glUniformSubroutinesuiv UniformSubroutinesuiv} */
     public static void glUniformSubroutinesuiv(@NativeType("GLenum") int shadertype, @NativeType("GLuint const *") int[] indices) {
-        long __functionAddress = GL.getICD().glUniformSubroutinesuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, shadertype, indices.length, indices);
+        GL40.glUniformSubroutinesuiv(shadertype, indices);
     }
 
     /** Array version of: {@link #glGetUniformSubroutineuiv GetUniformSubroutineuiv} */
     public static void glGetUniformSubroutineuiv(@NativeType("GLenum") int shadertype, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetUniformSubroutineuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, shadertype, location, params);
+        GL40.glGetUniformSubroutineuiv(shadertype, location, params);
     }
 
     /** Array version of: {@link #glGetProgramStageiv GetProgramStageiv} */
     public static void glGetProgramStageiv(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] values) {
-        long __functionAddress = GL.getICD().glGetProgramStageiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(values, 1);
-        }
-        callPV(__functionAddress, program, shadertype, pname, values);
+        GL40.glGetProgramStageiv(program, shadertype, pname, values);
     }
 
 }

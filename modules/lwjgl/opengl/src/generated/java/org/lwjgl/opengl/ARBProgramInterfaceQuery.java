@@ -12,9 +12,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_program_interface_query.txt">ARB_program_interface_query</a> extension.
@@ -130,10 +127,7 @@ public class ARBProgramInterfaceQuery {
      * @param params           a variable to retrieve the value of {@code pname} for the program interface
      */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetProgramInterfaceiv(program, programInterface, pname, memAddress(params));
+        GL43.glGetProgramInterfaceiv(program, programInterface, pname, params);
     }
 
     /**
@@ -145,14 +139,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("void")
     public static int glGetProgramInterfacei(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetProgramInterfaceiv(program, programInterface, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetProgramInterfacei(program, programInterface, pname);
     }
 
     // --- [ glGetProgramResourceIndex ] ---
@@ -171,10 +158,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("GLuint")
     public static int glGetProgramResourceIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetProgramResourceIndex(program, programInterface, memAddress(name));
+        return GL43.glGetProgramResourceIndex(program, programInterface, name);
     }
 
     /**
@@ -186,13 +170,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("GLuint")
     public static int glGetProgramResourceIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nglGetProgramResourceIndex(program, programInterface, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetProgramResourceIndex(program, programInterface, name);
     }
 
     // --- [ glGetProgramResourceName ] ---
@@ -216,10 +194,7 @@ public class ARBProgramInterfaceQuery {
      * @param name             a character array into which will be written the name of the resource
      */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
-        if (CHECKS) {
-            checkSafe(length, 1);
-        }
-        nglGetProgramResourceName(program, programInterface, index, name.remaining(), memAddressSafe(length), memAddress(name));
+        GL43.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
     /**
@@ -232,15 +207,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("void")
     public static String glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei") int bufSize) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer length = stack.ints(0);
-            ByteBuffer name = stack.malloc(bufSize);
-            nglGetProgramResourceName(program, programInterface, index, bufSize, memAddress(length), memAddress(name));
-            return memASCII(name, length.get(0));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetProgramResourceName(program, programInterface, index, bufSize);
     }
 
     /**
@@ -278,10 +245,7 @@ public class ARBProgramInterfaceQuery {
      * @param params           an array that will receive the property values
      */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            checkSafe(length, 1);
-        }
-        nglGetProgramResourceiv(program, programInterface, index, props.remaining(), memAddress(props), params.remaining(), memAddressSafe(length), memAddress(params));
+        GL43.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 
     // --- [ glGetProgramResourceLocation ] ---
@@ -300,10 +264,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("GLint")
     public static int glGetProgramResourceLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetProgramResourceLocation(program, programInterface, memAddress(name));
+        return GL43.glGetProgramResourceLocation(program, programInterface, name);
     }
 
     /**
@@ -315,13 +276,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("GLint")
     public static int glGetProgramResourceLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetProgramResourceLocation(program, programInterface, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetProgramResourceLocation(program, programInterface, name);
     }
 
     // --- [ glGetProgramResourceLocationIndex ] ---
@@ -340,10 +295,7 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("GLint")
     public static int glGetProgramResourceLocationIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetProgramResourceLocationIndex(program, programInterface, memAddress(name));
+        return GL43.glGetProgramResourceLocationIndex(program, programInterface, name);
     }
 
     /**
@@ -355,43 +307,22 @@ public class ARBProgramInterfaceQuery {
      */
     @NativeType("GLint")
     public static int glGetProgramResourceLocationIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetProgramResourceLocationIndex(program, programInterface, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetProgramResourceLocationIndex(program, programInterface, name);
     }
 
     /** Array version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetProgramInterfaceiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, program, programInterface, pname, params);
+        GL43.glGetProgramInterfaceiv(program, programInterface, pname, params);
     }
 
     /** Array version of: {@link #glGetProgramResourceName GetProgramResourceName} */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
-        long __functionAddress = GL.getICD().glGetProgramResourceName;
-        if (CHECKS) {
-            check(__functionAddress);
-            checkSafe(length, 1);
-        }
-        callPPV(__functionAddress, program, programInterface, index, name.remaining(), length, memAddress(name));
+        GL43.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
     /** Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv} */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetProgramResourceiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            checkSafe(length, 1);
-        }
-        callPPPV(__functionAddress, program, programInterface, index, props.length, props, params.length, length, params);
+        GL43.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 
 }

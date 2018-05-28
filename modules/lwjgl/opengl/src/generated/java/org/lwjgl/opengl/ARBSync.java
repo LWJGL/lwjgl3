@@ -12,9 +12,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sync.txt">ARB_sync</a> extension.
@@ -109,10 +106,7 @@ public class ARBSync {
      */
     @NativeType("GLboolean")
     public static boolean glIsSync(@NativeType("GLsync") long sync) {
-        if (CHECKS) {
-            check(sync);
-        }
-        return nglIsSync(sync);
+        return GL32.glIsSync(sync);
     }
 
     // --- [ glDeleteSync ] ---
@@ -128,10 +122,7 @@ public class ARBSync {
      * @param sync the sync object to be deleted
      */
     public static void glDeleteSync(@NativeType("GLsync") long sync) {
-        if (CHECKS) {
-            check(sync);
-        }
-        nglDeleteSync(sync);
+        GL32.glDeleteSync(sync);
     }
 
     // --- [ glClientWaitSync ] ---
@@ -160,10 +151,7 @@ public class ARBSync {
      */
     @NativeType("GLenum")
     public static int glClientWaitSync(@NativeType("GLsync") long sync, @NativeType("GLbitfield") int flags, @NativeType("GLuint64") long timeout) {
-        if (CHECKS) {
-            check(sync);
-        }
-        return nglClientWaitSync(sync, flags, timeout);
+        return GL32.glClientWaitSync(sync, flags, timeout);
     }
 
     // --- [ glWaitSync ] ---
@@ -187,10 +175,7 @@ public class ARBSync {
      * @param timeout the timeout that the server should wait before continuing. Must be:<br><table><tr><td>{@link GL32#GL_TIMEOUT_IGNORED TIMEOUT_IGNORED}</td></tr></table>
      */
     public static void glWaitSync(@NativeType("GLsync") long sync, @NativeType("GLbitfield") int flags, @NativeType("GLuint64") long timeout) {
-        if (CHECKS) {
-            check(sync);
-        }
-        nglWaitSync(sync, flags, timeout);
+        GL32.glWaitSync(sync, flags, timeout);
     }
 
     // --- [ glGetInteger64v ] ---
@@ -207,10 +192,7 @@ public class ARBSync {
      * @param params the value or values of the specified parameter
      */
     public static void glGetInteger64v(@NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetInteger64v(pname, memAddress(params));
+        GL32.glGetInteger64v(pname, params);
     }
 
     /**
@@ -220,14 +202,7 @@ public class ARBSync {
      */
     @NativeType("void")
     public static long glGetInteger64(@NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            LongBuffer params = stack.callocLong(1);
-            nglGetInteger64v(pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL32.glGetInteger64(pname);
     }
 
     // --- [ glGetSynciv ] ---
@@ -250,11 +225,7 @@ public class ARBSync {
      * @param values the address of an array to receive the values of the queried parameter
      */
     public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer values) {
-        if (CHECKS) {
-            check(sync);
-            checkSafe(length, 1);
-        }
-        nglGetSynciv(sync, pname, values.remaining(), memAddressSafe(length), memAddress(values));
+        GL32.glGetSynciv(sync, pname, length, values);
     }
 
     /**
@@ -266,39 +237,17 @@ public class ARBSync {
      */
     @NativeType("void")
     public static int glGetSynci(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") IntBuffer length) {
-        if (CHECKS) {
-            check(sync);
-            checkSafe(length, 1);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer values = stack.callocInt(1);
-            nglGetSynciv(sync, pname, 1, memAddressSafe(length), memAddress(values));
-            return values.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL32.glGetSynci(sync, pname, length);
     }
 
     /** Array version of: {@link #glGetInteger64v GetInteger64v} */
     public static void glGetInteger64v(@NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
-        long __functionAddress = GL.getICD().glGetInteger64v;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, pname, params);
+        GL32.glGetInteger64v(pname, params);
     }
 
     /** Array version of: {@link #glGetSynciv GetSynciv} */
     public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] values) {
-        long __functionAddress = GL.getICD().glGetSynciv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(sync);
-            checkSafe(length, 1);
-        }
-        callPPPV(__functionAddress, sync, pname, values.length, length, values);
+        GL32.glGetSynciv(sync, pname, length, values);
     }
 
 }

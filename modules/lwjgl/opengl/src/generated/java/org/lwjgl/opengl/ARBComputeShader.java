@@ -128,7 +128,7 @@ public class ARBComputeShader {
      *                 stored.
      */
     public static void glDispatchComputeIndirect(@NativeType("GLintptr") long indirect) {
-        nglDispatchComputeIndirect(indirect);
+        GL43.glDispatchComputeIndirect(indirect);
     }
 
 }

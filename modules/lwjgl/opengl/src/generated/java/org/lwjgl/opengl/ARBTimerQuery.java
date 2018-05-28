@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_timer_query.txt">ARB_timer_query</a> extension.
@@ -81,10 +78,7 @@ public class ARBTimerQuery {
      * @param params the requested data
      */
     public static void glGetQueryObjecti64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetQueryObjecti64v(id, pname, memAddress(params));
+        GL33.glGetQueryObjecti64v(id, pname, params);
     }
 
     /**
@@ -95,14 +89,7 @@ public class ARBTimerQuery {
      */
     @NativeType("void")
     public static long glGetQueryObjecti64(@NativeType("GLuint") int id, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            LongBuffer params = stack.callocLong(1);
-            nglGetQueryObjecti64v(id, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL33.glGetQueryObjecti64(id, pname);
     }
 
     // --- [ glGetQueryObjectui64v ] ---
@@ -120,10 +107,7 @@ public class ARBTimerQuery {
      * @param params the requested data
      */
     public static void glGetQueryObjectui64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") LongBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetQueryObjectui64v(id, pname, memAddress(params));
+        GL33.glGetQueryObjectui64v(id, pname, params);
     }
 
     /**
@@ -134,34 +118,17 @@ public class ARBTimerQuery {
      */
     @NativeType("void")
     public static long glGetQueryObjectui64(@NativeType("GLuint") int id, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            LongBuffer params = stack.callocLong(1);
-            nglGetQueryObjectui64v(id, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL33.glGetQueryObjectui64(id, pname);
     }
 
     /** Array version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v} */
     public static void glGetQueryObjecti64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
-        long __functionAddress = GL.getICD().glGetQueryObjecti64v;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, id, pname, params);
+        GL33.glGetQueryObjecti64v(id, pname, params);
     }
 
     /** Array version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v} */
     public static void glGetQueryObjectui64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long[] params) {
-        long __functionAddress = GL.getICD().glGetQueryObjectui64v;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, id, pname, params);
+        GL33.glGetQueryObjectui64v(id, pname, params);
     }
 
 }

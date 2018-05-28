@@ -10,8 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_attrib_64bit.txt">ARB_vertex_attrib_64bit</a> extension.
@@ -140,10 +138,7 @@ public class ARBVertexAttrib64Bit {
      * @param v     the vertex attribute buffer
      */
     public static void glVertexAttribL1dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
-        if (CHECKS) {
-            check(v, 1);
-        }
-        nglVertexAttribL1dv(index, memAddress(v));
+        GL41.glVertexAttribL1dv(index, v);
     }
 
     // --- [ glVertexAttribL2dv ] ---
@@ -160,10 +155,7 @@ public class ARBVertexAttrib64Bit {
      * @param v     the vertex attribute buffer
      */
     public static void glVertexAttribL2dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
-        if (CHECKS) {
-            check(v, 2);
-        }
-        nglVertexAttribL2dv(index, memAddress(v));
+        GL41.glVertexAttribL2dv(index, v);
     }
 
     // --- [ glVertexAttribL3dv ] ---
@@ -180,10 +172,7 @@ public class ARBVertexAttrib64Bit {
      * @param v     the vertex attribute buffer
      */
     public static void glVertexAttribL3dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
-        if (CHECKS) {
-            check(v, 3);
-        }
-        nglVertexAttribL3dv(index, memAddress(v));
+        GL41.glVertexAttribL3dv(index, v);
     }
 
     // --- [ glVertexAttribL4dv ] ---
@@ -200,10 +189,7 @@ public class ARBVertexAttrib64Bit {
      * @param v     the vertex attribute buffer
      */
     public static void glVertexAttribL4dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribL4dv(index, memAddress(v));
+        GL41.glVertexAttribL4dv(index, v);
     }
 
     // --- [ glVertexAttribLPointer ] ---
@@ -229,7 +215,7 @@ public class ARBVertexAttrib64Bit {
      *                currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
      */
     public static void glVertexAttribLPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
-        nglVertexAttribLPointer(index, size, type, stride, memAddress(pointer));
+        GL41.glVertexAttribLPointer(index, size, type, stride, pointer);
     }
 
     /**
@@ -244,7 +230,7 @@ public class ARBVertexAttrib64Bit {
      *                currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
      */
     public static void glVertexAttribLPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
-        nglVertexAttribLPointer(index, size, type, stride, pointer);
+        GL41.glVertexAttribLPointer(index, size, type, stride, pointer);
     }
 
     /**
@@ -258,7 +244,7 @@ public class ARBVertexAttrib64Bit {
      *                currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
      */
     public static void glVertexAttribLPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLsizei") int stride, @NativeType("void const *") DoubleBuffer pointer) {
-        nglVertexAttribLPointer(index, size, GL11.GL_DOUBLE, stride, memAddress(pointer));
+        GL41.glVertexAttribLPointer(index, size, stride, pointer);
     }
 
     // --- [ glGetVertexAttribLdv ] ---
@@ -276,10 +262,7 @@ public class ARBVertexAttrib64Bit {
      * @param params the requested data
      */
     public static void glGetVertexAttribLdv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") DoubleBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetVertexAttribLdv(index, pname, memAddress(params));
+        GL41.glGetVertexAttribLdv(index, pname, params);
     }
 
     // --- [ glVertexArrayVertexAttribLOffsetEXT ] ---
@@ -300,52 +283,27 @@ public class ARBVertexAttrib64Bit {
 
     /** Array version of: {@link #glVertexAttribL1dv VertexAttribL1dv} */
     public static void glVertexAttribL1dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribL1dv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 1);
-        }
-        callPV(__functionAddress, index, v);
+        GL41.glVertexAttribL1dv(index, v);
     }
 
     /** Array version of: {@link #glVertexAttribL2dv VertexAttribL2dv} */
     public static void glVertexAttribL2dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribL2dv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 2);
-        }
-        callPV(__functionAddress, index, v);
+        GL41.glVertexAttribL2dv(index, v);
     }
 
     /** Array version of: {@link #glVertexAttribL3dv VertexAttribL3dv} */
     public static void glVertexAttribL3dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribL3dv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 3);
-        }
-        callPV(__functionAddress, index, v);
+        GL41.glVertexAttribL3dv(index, v);
     }
 
     /** Array version of: {@link #glVertexAttribL4dv VertexAttribL4dv} */
     public static void glVertexAttribL4dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribL4dv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 4);
-        }
-        callPV(__functionAddress, index, v);
+        GL41.glVertexAttribL4dv(index, v);
     }
 
     /** Array version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv} */
     public static void glGetVertexAttribLdv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
-        long __functionAddress = GL.getICD().glGetVertexAttribLdv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, index, pname, params);
+        GL41.glGetVertexAttribLdv(index, pname, params);
     }
 
 }

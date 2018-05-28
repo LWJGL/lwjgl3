@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_atomic_counters.txt">ARB_shader_atomic_counters</a> extension.
@@ -124,10 +121,7 @@ public class ARBShaderAtomicCounters {
      * @param params      a buffer in which to place the returned value
      */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, memAddress(params));
+        GL42.glGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
     }
 
     /**
@@ -139,24 +133,12 @@ public class ARBShaderAtomicCounters {
      */
     @NativeType("void")
     public static int glGetActiveAtomicCounterBufferi(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL42.glGetActiveAtomicCounterBufferi(program, bufferIndex, pname);
     }
 
     /** Array version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv} */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetActiveAtomicCounterBufferiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, program, bufferIndex, pname, params);
+        GL42.glGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
     }
 
 }

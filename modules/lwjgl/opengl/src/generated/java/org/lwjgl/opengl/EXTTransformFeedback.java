@@ -194,22 +194,12 @@ public class EXTTransformFeedback {
     }
 
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer data) {
-        if (CHECKS) {
-            check(data, 1);
-        }
-        nglGetIntegerIndexedvEXT(target, index, memAddress(data));
+        EXTDrawBuffers2.glGetIntegerIndexedvEXT(target, index, data);
     }
 
     @NativeType("void")
     public static int glGetIntegerIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer data = stack.callocInt(1);
-            nglGetIntegerIndexedvEXT(target, index, memAddress(data));
-            return data.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return EXTDrawBuffers2.glGetIntegerIndexedEXT(target, index);
     }
 
     // --- [ glGetBooleanIndexedvEXT ] ---
@@ -219,22 +209,12 @@ public class EXTTransformFeedback {
     }
 
     public static void glGetBooleanIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLboolean *") ByteBuffer data) {
-        if (CHECKS) {
-            check(data, 1);
-        }
-        nglGetBooleanIndexedvEXT(target, index, memAddress(data));
+        EXTDrawBuffers2.glGetBooleanIndexedvEXT(target, index, data);
     }
 
     @NativeType("void")
     public static boolean glGetBooleanIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer data = stack.calloc(1);
-            nglGetBooleanIndexedvEXT(target, index, memAddress(data));
-            return data.get(0) != 0;
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return EXTDrawBuffers2.glGetBooleanIndexedEXT(target, index);
     }
 
     /** Array version of: {@link #glGetTransformFeedbackVaryingEXT GetTransformFeedbackVaryingEXT} */
@@ -251,12 +231,7 @@ public class EXTTransformFeedback {
 
     /** Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT} */
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] data) {
-        long __functionAddress = GL.getICD().glGetIntegerIndexedvEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(data, 1);
-        }
-        callPV(__functionAddress, target, index, data);
+        EXTDrawBuffers2.glGetIntegerIndexedvEXT(target, index, data);
     }
 
 }

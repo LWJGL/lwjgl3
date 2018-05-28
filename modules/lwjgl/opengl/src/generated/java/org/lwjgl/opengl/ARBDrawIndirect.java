@@ -10,8 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_indirect.txt">ARB_draw_indirect</a> extension.
@@ -83,10 +81,7 @@ public class ARBDrawIndirect {
      * @param indirect a structure containing the draw parameters
      */
     public static void glDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indirect) {
-        if (CHECKS) {
-            check(indirect, 4 * 4);
-        }
-        nglDrawArraysIndirect(mode, memAddress(indirect));
+        GL40.glDrawArraysIndirect(mode, indirect);
     }
 
     /**
@@ -112,7 +107,7 @@ public class ARBDrawIndirect {
      * @param indirect a structure containing the draw parameters
      */
     public static void glDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") long indirect) {
-        nglDrawArraysIndirect(mode, indirect);
+        GL40.glDrawArraysIndirect(mode, indirect);
     }
 
     /**
@@ -138,10 +133,7 @@ public class ARBDrawIndirect {
      * @param indirect a structure containing the draw parameters
      */
     public static void glDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indirect) {
-        if (CHECKS) {
-            check(indirect, (4 * 4) >> 2);
-        }
-        nglDrawArraysIndirect(mode, memAddress(indirect));
+        GL40.glDrawArraysIndirect(mode, indirect);
     }
 
     // --- [ glDrawElementsIndirect ] ---
@@ -189,10 +181,7 @@ public class ARBDrawIndirect {
      * @param indirect the address of a structure containing the draw parameters
      */
     public static void glDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indirect) {
-        if (CHECKS) {
-            check(indirect, 5 * 4);
-        }
-        nglDrawElementsIndirect(mode, type, memAddress(indirect));
+        GL40.glDrawElementsIndirect(mode, type, indirect);
     }
 
     /**
@@ -233,7 +222,7 @@ public class ARBDrawIndirect {
      * @param indirect the address of a structure containing the draw parameters
      */
     public static void glDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") long indirect) {
-        nglDrawElementsIndirect(mode, type, indirect);
+        GL40.glDrawElementsIndirect(mode, type, indirect);
     }
 
     /**
@@ -274,30 +263,17 @@ public class ARBDrawIndirect {
      * @param indirect the address of a structure containing the draw parameters
      */
     public static void glDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer indirect) {
-        if (CHECKS) {
-            check(indirect, (5 * 4) >> 2);
-        }
-        nglDrawElementsIndirect(mode, type, memAddress(indirect));
+        GL40.glDrawElementsIndirect(mode, type, indirect);
     }
 
     /** Array version of: {@link #glDrawArraysIndirect DrawArraysIndirect} */
     public static void glDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect) {
-        long __functionAddress = GL.getICD().glDrawArraysIndirect;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(indirect, (4 * 4) >> 2);
-        }
-        callPV(__functionAddress, mode, indirect);
+        GL40.glDrawArraysIndirect(mode, indirect);
     }
 
     /** Array version of: {@link #glDrawElementsIndirect DrawElementsIndirect} */
     public static void glDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect) {
-        long __functionAddress = GL.getICD().glDrawElementsIndirect;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(indirect, (5 * 4) >> 2);
-        }
-        callPV(__functionAddress, mode, type, indirect);
+        GL40.glDrawElementsIndirect(mode, type, indirect);
     }
 
 }

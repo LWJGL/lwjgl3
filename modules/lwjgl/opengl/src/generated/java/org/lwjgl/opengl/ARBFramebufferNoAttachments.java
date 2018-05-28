@@ -105,10 +105,7 @@ public class ARBFramebufferNoAttachments {
      * @param params a variable to receive the value of the parameter named {@code pname}
      */
     public static void glGetFramebufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetFramebufferParameteriv(target, pname, memAddress(params));
+        GL43.glGetFramebufferParameteriv(target, pname, params);
     }
 
     /**
@@ -119,14 +116,7 @@ public class ARBFramebufferNoAttachments {
      */
     @NativeType("void")
     public static int glGetFramebufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetFramebufferParameteriv(target, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetFramebufferParameteri(target, pname);
     }
 
     // --- [ glNamedFramebufferParameteriEXT ] ---
@@ -179,12 +169,7 @@ public class ARBFramebufferNoAttachments {
 
     /** Array version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv} */
     public static void glGetFramebufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetFramebufferParameteriv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL43.glGetFramebufferParameteriv(target, pname, params);
     }
 
     /** Array version of: {@link #glGetNamedFramebufferParameterivEXT GetNamedFramebufferParameterivEXT} */

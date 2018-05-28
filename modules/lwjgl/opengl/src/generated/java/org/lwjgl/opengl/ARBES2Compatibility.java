@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES2_compatibility.txt">ARB_ES2_compatibility</a> extension.
@@ -89,7 +86,7 @@ public class ARBES2Compatibility {
      * @param binary       an array of bytes containing pre-compiled binary shader code
      */
     public static void glShaderBinary(@NativeType("GLuint const *") IntBuffer shaders, @NativeType("GLenum") int binaryformat, @NativeType("void const *") ByteBuffer binary) {
-        nglShaderBinary(shaders.remaining(), memAddress(shaders), binaryformat, memAddress(binary), binary.remaining());
+        GL41.glShaderBinary(shaders, binaryformat, binary);
     }
 
     // --- [ glGetShaderPrecisionFormat ] ---
@@ -108,11 +105,7 @@ public class ARBES2Compatibility {
      * @param precision     the address of an integer into which the numeric precision of the implementation is written
      */
     public static void glGetShaderPrecisionFormat(@NativeType("GLenum") int shadertype, @NativeType("GLenum") int precisiontype, @NativeType("GLint *") IntBuffer range, @NativeType("GLint *") IntBuffer precision) {
-        if (CHECKS) {
-            check(range, 2);
-            check(precision, 1);
-        }
-        nglGetShaderPrecisionFormat(shadertype, precisiontype, memAddress(range), memAddress(precision));
+        GL41.glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
     }
 
     /**
@@ -124,17 +117,7 @@ public class ARBES2Compatibility {
      */
     @NativeType("void")
     public static int glGetShaderPrecisionFormat(@NativeType("GLenum") int shadertype, @NativeType("GLenum") int precisiontype, @NativeType("GLint *") IntBuffer range) {
-        if (CHECKS) {
-            check(range, 2);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer precision = stack.callocInt(1);
-            nglGetShaderPrecisionFormat(shadertype, precisiontype, memAddress(range), memAddress(precision));
-            return precision.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL41.glGetShaderPrecisionFormat(shadertype, precisiontype, range);
     }
 
     // --- [ glDepthRangef ] ---
@@ -162,22 +145,12 @@ public class ARBES2Compatibility {
 
     /** Array version of: {@link #glShaderBinary ShaderBinary} */
     public static void glShaderBinary(@NativeType("GLuint const *") int[] shaders, @NativeType("GLenum") int binaryformat, @NativeType("void const *") ByteBuffer binary) {
-        long __functionAddress = GL.getICD().glShaderBinary;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(__functionAddress, shaders.length, shaders, binaryformat, memAddress(binary), binary.remaining());
+        GL41.glShaderBinary(shaders, binaryformat, binary);
     }
 
     /** Array version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat} */
     public static void glGetShaderPrecisionFormat(@NativeType("GLenum") int shadertype, @NativeType("GLenum") int precisiontype, @NativeType("GLint *") int[] range, @NativeType("GLint *") int[] precision) {
-        long __functionAddress = GL.getICD().glGetShaderPrecisionFormat;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(range, 2);
-            check(precision, 1);
-        }
-        callPPV(__functionAddress, shadertype, precisiontype, range, precision);
+        GL41.glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
     }
 
 }

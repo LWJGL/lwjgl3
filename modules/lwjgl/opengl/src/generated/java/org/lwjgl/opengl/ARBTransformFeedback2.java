@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback2.txt">ARB_transform_feedback2</a> extension.
@@ -87,18 +84,12 @@ public class ARBTransformFeedback2 {
      * @param ids an array of names of transform feedback objects to delete
      */
     public static void glDeleteTransformFeedbacks(@NativeType("GLuint const *") IntBuffer ids) {
-        nglDeleteTransformFeedbacks(ids.remaining(), memAddress(ids));
+        GL40.glDeleteTransformFeedbacks(ids);
     }
 
     /** Deletes transform feedback objects. */
     public static void glDeleteTransformFeedbacks(@NativeType("GLuint const *") int id) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer ids = stack.ints(id);
-            nglDeleteTransformFeedbacks(1, memAddress(ids));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL40.glDeleteTransformFeedbacks(id);
     }
 
     // --- [ glGenTransformFeedbacks ] ---
@@ -118,20 +109,13 @@ public class ARBTransformFeedback2 {
      * @param ids an array of into which the reserved names will be written
      */
     public static void glGenTransformFeedbacks(@NativeType("GLuint *") IntBuffer ids) {
-        nglGenTransformFeedbacks(ids.remaining(), memAddress(ids));
+        GL40.glGenTransformFeedbacks(ids);
     }
 
     /** Reserves transform feedback object names. */
     @NativeType("void")
     public static int glGenTransformFeedbacks() {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer ids = stack.callocInt(1);
-            nglGenTransformFeedbacks(1, memAddress(ids));
-            return ids.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGenTransformFeedbacks();
     }
 
     // --- [ glIsTransformFeedback ] ---
@@ -190,20 +174,12 @@ public class ARBTransformFeedback2 {
 
     /** Array version of: {@link #glDeleteTransformFeedbacks DeleteTransformFeedbacks} */
     public static void glDeleteTransformFeedbacks(@NativeType("GLuint const *") int[] ids) {
-        long __functionAddress = GL.getICD().glDeleteTransformFeedbacks;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, ids.length, ids);
+        GL40.glDeleteTransformFeedbacks(ids);
     }
 
     /** Array version of: {@link #glGenTransformFeedbacks GenTransformFeedbacks} */
     public static void glGenTransformFeedbacks(@NativeType("GLuint *") int[] ids) {
-        long __functionAddress = GL.getICD().glGenTransformFeedbacks;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, ids.length, ids);
+        GL40.glGenTransformFeedbacks(ids);
     }
 
 }

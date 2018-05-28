@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_framebuffer_object.txt">ARB_framebuffer_object</a> extension.
@@ -383,18 +380,12 @@ public class ARBFramebufferObject {
      * @param renderbuffers an array containing {@code n} renderbuffer objects to be deleted
      */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") IntBuffer renderbuffers) {
-        nglDeleteRenderbuffers(renderbuffers.remaining(), memAddress(renderbuffers));
+        GL30.glDeleteRenderbuffers(renderbuffers);
     }
 
     /** Deletes renderbuffer objects. */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int renderbuffer) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer renderbuffers = stack.ints(renderbuffer);
-            nglDeleteRenderbuffers(1, memAddress(renderbuffers));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30.glDeleteRenderbuffers(renderbuffer);
     }
 
     // --- [ glGenRenderbuffers ] ---
@@ -414,20 +405,13 @@ public class ARBFramebufferObject {
      * @param renderbuffers a buffer in which the generated renderbuffer object names are stored
      */
     public static void glGenRenderbuffers(@NativeType("GLuint *") IntBuffer renderbuffers) {
-        nglGenRenderbuffers(renderbuffers.remaining(), memAddress(renderbuffers));
+        GL30.glGenRenderbuffers(renderbuffers);
     }
 
     /** Generates renderbuffer object names. */
     @NativeType("void")
     public static int glGenRenderbuffers() {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer renderbuffers = stack.callocInt(1);
-            nglGenRenderbuffers(1, memAddress(renderbuffers));
-            return renderbuffers.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30.glGenRenderbuffers();
     }
 
     // --- [ glRenderbufferStorage ] ---
@@ -476,10 +460,7 @@ public class ARBFramebufferObject {
      * @param params an array to receive the value of the queried parameter
      */
     public static void glGetRenderbufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetRenderbufferParameteriv(target, pname, memAddress(params));
+        GL30.glGetRenderbufferParameteriv(target, pname, params);
     }
 
     /**
@@ -490,14 +471,7 @@ public class ARBFramebufferObject {
      */
     @NativeType("void")
     public static int glGetRenderbufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetRenderbufferParameteriv(target, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30.glGetRenderbufferParameteri(target, pname);
     }
 
     // --- [ glIsFramebuffer ] ---
@@ -541,18 +515,12 @@ public class ARBFramebufferObject {
      * @param framebuffers an array containing {@code n} framebuffer objects to be deleted
      */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") IntBuffer framebuffers) {
-        nglDeleteFramebuffers(framebuffers.remaining(), memAddress(framebuffers));
+        GL30.glDeleteFramebuffers(framebuffers);
     }
 
     /** Deletes framebuffer objects. */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int framebuffer) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer framebuffers = stack.ints(framebuffer);
-            nglDeleteFramebuffers(1, memAddress(framebuffers));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30.glDeleteFramebuffers(framebuffer);
     }
 
     // --- [ glGenFramebuffers ] ---
@@ -572,20 +540,13 @@ public class ARBFramebufferObject {
      * @param framebuffers a buffer in which the generated framebuffer object names are stored
      */
     public static void glGenFramebuffers(@NativeType("GLuint *") IntBuffer framebuffers) {
-        nglGenFramebuffers(framebuffers.remaining(), memAddress(framebuffers));
+        GL30.glGenFramebuffers(framebuffers);
     }
 
     /** Generates framebuffer object names. */
     @NativeType("void")
     public static int glGenFramebuffers() {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer framebuffers = stack.callocInt(1);
-            nglGenFramebuffers(1, memAddress(framebuffers));
-            return framebuffers.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30.glGenFramebuffers();
     }
 
     // --- [ glCheckFramebufferStatus ] ---
@@ -691,10 +652,7 @@ public class ARBFramebufferObject {
      * @param params     an array to receive the value of the queried parameter
      */
     public static void glGetFramebufferAttachmentParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetFramebufferAttachmentParameteriv(target, attachment, pname, memAddress(params));
+        GL30.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
     }
 
     /**
@@ -706,14 +664,7 @@ public class ARBFramebufferObject {
      */
     @NativeType("void")
     public static int glGetFramebufferAttachmentParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetFramebufferAttachmentParameteriv(target, attachment, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30.glGetFramebufferAttachmentParameteri(target, attachment, pname);
     }
 
     // --- [ glBlitFramebuffer ] ---
@@ -749,58 +700,32 @@ public class ARBFramebufferObject {
 
     /** Array version of: {@link #glDeleteRenderbuffers DeleteRenderbuffers} */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int[] renderbuffers) {
-        long __functionAddress = GL.getICD().glDeleteRenderbuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        GL30.glDeleteRenderbuffers(renderbuffers);
     }
 
     /** Array version of: {@link #glGenRenderbuffers GenRenderbuffers} */
     public static void glGenRenderbuffers(@NativeType("GLuint *") int[] renderbuffers) {
-        long __functionAddress = GL.getICD().glGenRenderbuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        GL30.glGenRenderbuffers(renderbuffers);
     }
 
     /** Array version of: {@link #glGetRenderbufferParameteriv GetRenderbufferParameteriv} */
     public static void glGetRenderbufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetRenderbufferParameteriv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL30.glGetRenderbufferParameteriv(target, pname, params);
     }
 
     /** Array version of: {@link #glDeleteFramebuffers DeleteFramebuffers} */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int[] framebuffers) {
-        long __functionAddress = GL.getICD().glDeleteFramebuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        GL30.glDeleteFramebuffers(framebuffers);
     }
 
     /** Array version of: {@link #glGenFramebuffers GenFramebuffers} */
     public static void glGenFramebuffers(@NativeType("GLuint *") int[] framebuffers) {
-        long __functionAddress = GL.getICD().glGenFramebuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        GL30.glGenFramebuffers(framebuffers);
     }
 
     /** Array version of: {@link #glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv} */
     public static void glGetFramebufferAttachmentParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetFramebufferAttachmentParameteriv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, attachment, pname, params);
+        GL30.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
     }
 
 }

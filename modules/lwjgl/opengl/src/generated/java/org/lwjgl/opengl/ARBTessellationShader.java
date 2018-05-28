@@ -10,8 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_tessellation_shader.txt">ARB_tessellation_shader</a> extension.
@@ -150,24 +148,12 @@ public class ARBTessellationShader {
      * @param values an array containing the new values for the parameter given by {@code pname}
      */
     public static void glPatchParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer values) {
-        if (CHECKS) {
-            if (DEBUG) {
-                check(values, GL11.glGetInteger(GL_PATCH_VERTICES));
-            }
-        }
-        nglPatchParameterfv(pname, memAddress(values));
+        GL40.glPatchParameterfv(pname, values);
     }
 
     /** Array version of: {@link #glPatchParameterfv PatchParameterfv} */
     public static void glPatchParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] values) {
-        long __functionAddress = GL.getICD().glPatchParameterfv;
-        if (CHECKS) {
-            check(__functionAddress);
-            if (DEBUG) {
-                check(values, GL11.glGetInteger(GL_PATCH_VERTICES));
-            }
-        }
-        callPV(__functionAddress, pname, values);
+        GL40.glPatchParameterfv(pname, values);
     }
 
 }

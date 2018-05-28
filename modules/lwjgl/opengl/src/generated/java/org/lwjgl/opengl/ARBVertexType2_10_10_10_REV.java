@@ -10,8 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_type_2_10_10_10_rev.txt">ARB_vertex_type_2_10_10_10_rev</a> extension.
@@ -99,10 +97,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value the packed value
      */
     public static void glVertexP2uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexP2uiv(type, memAddress(value));
+        GL33.glVertexP2uiv(type, value);
     }
 
     // --- [ glVertexP3uiv ] ---
@@ -119,10 +114,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value the packed value
      */
     public static void glVertexP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexP3uiv(type, memAddress(value));
+        GL33.glVertexP3uiv(type, value);
     }
 
     // --- [ glVertexP4uiv ] ---
@@ -139,10 +131,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value the packed value
      */
     public static void glVertexP4uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexP4uiv(type, memAddress(value));
+        GL33.glVertexP4uiv(type, value);
     }
 
     // --- [ glTexCoordP1ui ] ---
@@ -207,10 +196,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords the packed value
      */
     public static void glTexCoordP1uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglTexCoordP1uiv(type, memAddress(coords));
+        GL33.glTexCoordP1uiv(type, coords);
     }
 
     // --- [ glTexCoordP2uiv ] ---
@@ -227,10 +213,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords the packed value
      */
     public static void glTexCoordP2uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglTexCoordP2uiv(type, memAddress(coords));
+        GL33.glTexCoordP2uiv(type, coords);
     }
 
     // --- [ glTexCoordP3uiv ] ---
@@ -247,10 +230,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords the packed value
      */
     public static void glTexCoordP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglTexCoordP3uiv(type, memAddress(coords));
+        GL33.glTexCoordP3uiv(type, coords);
     }
 
     // --- [ glTexCoordP4uiv ] ---
@@ -267,10 +247,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords the packed value
      */
     public static void glTexCoordP4uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglTexCoordP4uiv(type, memAddress(coords));
+        GL33.glTexCoordP4uiv(type, coords);
     }
 
     // --- [ glMultiTexCoordP1ui ] ---
@@ -340,10 +317,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords  the packed value
      */
     public static void glMultiTexCoordP1uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglMultiTexCoordP1uiv(texture, type, memAddress(coords));
+        GL33.glMultiTexCoordP1uiv(texture, type, coords);
     }
 
     // --- [ glMultiTexCoordP2uiv ] ---
@@ -361,10 +335,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords  the packed value
      */
     public static void glMultiTexCoordP2uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglMultiTexCoordP2uiv(texture, type, memAddress(coords));
+        GL33.glMultiTexCoordP2uiv(texture, type, coords);
     }
 
     // --- [ glMultiTexCoordP3uiv ] ---
@@ -382,10 +353,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords  the packed value
      */
     public static void glMultiTexCoordP3uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglMultiTexCoordP3uiv(texture, type, memAddress(coords));
+        GL33.glMultiTexCoordP3uiv(texture, type, coords);
     }
 
     // --- [ glMultiTexCoordP4uiv ] ---
@@ -403,10 +371,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords  the packed value
      */
     public static void glMultiTexCoordP4uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglMultiTexCoordP4uiv(texture, type, memAddress(coords));
+        GL33.glMultiTexCoordP4uiv(texture, type, coords);
     }
 
     // --- [ glNormalP3ui ] ---
@@ -435,10 +400,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param coords the packed value
      */
     public static void glNormalP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer coords) {
-        if (CHECKS) {
-            check(coords, 1);
-        }
-        nglNormalP3uiv(type, memAddress(coords));
+        GL33.glNormalP3uiv(type, coords);
     }
 
     // --- [ glColorP3ui ] ---
@@ -479,10 +441,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param color the packed value
      */
     public static void glColorP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer color) {
-        if (CHECKS) {
-            check(color, 1);
-        }
-        nglColorP3uiv(type, memAddress(color));
+        GL33.glColorP3uiv(type, color);
     }
 
     // --- [ glColorP4uiv ] ---
@@ -499,10 +458,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param color the packed value
      */
     public static void glColorP4uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer color) {
-        if (CHECKS) {
-            check(color, 1);
-        }
-        nglColorP4uiv(type, memAddress(color));
+        GL33.glColorP4uiv(type, color);
     }
 
     // --- [ glSecondaryColorP3ui ] ---
@@ -531,10 +487,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param color the packed value
      */
     public static void glSecondaryColorP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") IntBuffer color) {
-        if (CHECKS) {
-            check(color, 1);
-        }
-        nglSecondaryColorP3uiv(type, memAddress(color));
+        GL33.glSecondaryColorP3uiv(type, color);
     }
 
     // --- [ glVertexAttribP1ui ] ---
@@ -609,10 +562,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value      the packed value
      */
     public static void glVertexAttribP1uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexAttribP1uiv(index, type, normalized, memAddress(value));
+        GL33.glVertexAttribP1uiv(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP2uiv ] ---
@@ -631,10 +581,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value      the packed value
      */
     public static void glVertexAttribP2uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexAttribP2uiv(index, type, normalized, memAddress(value));
+        GL33.glVertexAttribP2uiv(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP3uiv ] ---
@@ -653,10 +600,7 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value      the packed value
      */
     public static void glVertexAttribP3uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexAttribP3uiv(index, type, normalized, memAddress(value));
+        GL33.glVertexAttribP3uiv(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP4uiv ] ---
@@ -675,200 +619,102 @@ public class ARBVertexType2_10_10_10_REV {
      * @param value      the packed value
      */
     public static void glVertexAttribP4uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglVertexAttribP4uiv(index, type, normalized, memAddress(value));
+        GL33.glVertexAttribP4uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexP2uiv VertexP2uiv} */
     public static void glVertexP2uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexP2uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, type, value);
+        GL33.glVertexP2uiv(type, value);
     }
 
     /** Array version of: {@link #glVertexP3uiv VertexP3uiv} */
     public static void glVertexP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, type, value);
+        GL33.glVertexP3uiv(type, value);
     }
 
     /** Array version of: {@link #glVertexP4uiv VertexP4uiv} */
     public static void glVertexP4uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexP4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, type, value);
+        GL33.glVertexP4uiv(type, value);
     }
 
     /** Array version of: {@link #glTexCoordP1uiv TexCoordP1uiv} */
     public static void glTexCoordP1uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glTexCoordP1uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, type, coords);
+        GL33.glTexCoordP1uiv(type, coords);
     }
 
     /** Array version of: {@link #glTexCoordP2uiv TexCoordP2uiv} */
     public static void glTexCoordP2uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glTexCoordP2uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, type, coords);
+        GL33.glTexCoordP2uiv(type, coords);
     }
 
     /** Array version of: {@link #glTexCoordP3uiv TexCoordP3uiv} */
     public static void glTexCoordP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glTexCoordP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, type, coords);
+        GL33.glTexCoordP3uiv(type, coords);
     }
 
     /** Array version of: {@link #glTexCoordP4uiv TexCoordP4uiv} */
     public static void glTexCoordP4uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glTexCoordP4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, type, coords);
+        GL33.glTexCoordP4uiv(type, coords);
     }
 
     /** Array version of: {@link #glMultiTexCoordP1uiv MultiTexCoordP1uiv} */
     public static void glMultiTexCoordP1uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glMultiTexCoordP1uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, texture, type, coords);
+        GL33.glMultiTexCoordP1uiv(texture, type, coords);
     }
 
     /** Array version of: {@link #glMultiTexCoordP2uiv MultiTexCoordP2uiv} */
     public static void glMultiTexCoordP2uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glMultiTexCoordP2uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, texture, type, coords);
+        GL33.glMultiTexCoordP2uiv(texture, type, coords);
     }
 
     /** Array version of: {@link #glMultiTexCoordP3uiv MultiTexCoordP3uiv} */
     public static void glMultiTexCoordP3uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glMultiTexCoordP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, texture, type, coords);
+        GL33.glMultiTexCoordP3uiv(texture, type, coords);
     }
 
     /** Array version of: {@link #glMultiTexCoordP4uiv MultiTexCoordP4uiv} */
     public static void glMultiTexCoordP4uiv(@NativeType("GLenum") int texture, @NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glMultiTexCoordP4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, texture, type, coords);
+        GL33.glMultiTexCoordP4uiv(texture, type, coords);
     }
 
     /** Array version of: {@link #glNormalP3uiv NormalP3uiv} */
     public static void glNormalP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] coords) {
-        long __functionAddress = GL.getICD().glNormalP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(coords, 1);
-        }
-        callPV(__functionAddress, type, coords);
+        GL33.glNormalP3uiv(type, coords);
     }
 
     /** Array version of: {@link #glColorP3uiv ColorP3uiv} */
     public static void glColorP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] color) {
-        long __functionAddress = GL.getICD().glColorP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(color, 1);
-        }
-        callPV(__functionAddress, type, color);
+        GL33.glColorP3uiv(type, color);
     }
 
     /** Array version of: {@link #glColorP4uiv ColorP4uiv} */
     public static void glColorP4uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] color) {
-        long __functionAddress = GL.getICD().glColorP4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(color, 1);
-        }
-        callPV(__functionAddress, type, color);
+        GL33.glColorP4uiv(type, color);
     }
 
     /** Array version of: {@link #glSecondaryColorP3uiv SecondaryColorP3uiv} */
     public static void glSecondaryColorP3uiv(@NativeType("GLenum") int type, @NativeType("GLuint const *") int[] color) {
-        long __functionAddress = GL.getICD().glSecondaryColorP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(color, 1);
-        }
-        callPV(__functionAddress, type, color);
+        GL33.glSecondaryColorP3uiv(type, color);
     }
 
     /** Array version of: {@link #glVertexAttribP1uiv VertexAttribP1uiv} */
     public static void glVertexAttribP1uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexAttribP1uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, index, type, normalized, value);
+        GL33.glVertexAttribP1uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexAttribP2uiv VertexAttribP2uiv} */
     public static void glVertexAttribP2uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexAttribP2uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, index, type, normalized, value);
+        GL33.glVertexAttribP2uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexAttribP3uiv VertexAttribP3uiv} */
     public static void glVertexAttribP3uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexAttribP3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, index, type, normalized, value);
+        GL33.glVertexAttribP3uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexAttribP4uiv VertexAttribP4uiv} */
     public static void glVertexAttribP4uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glVertexAttribP4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, index, type, normalized, value);
+        GL33.glVertexAttribP4uiv(index, type, normalized, value);
     }
 
 }

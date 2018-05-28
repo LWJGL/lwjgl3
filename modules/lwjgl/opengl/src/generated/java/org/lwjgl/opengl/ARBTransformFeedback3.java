@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback3.txt">ARB_transform_feedback3</a> extension.
@@ -121,10 +118,7 @@ public class ARBTransformFeedback3 {
      * @param params the requested data
      */
     public static void glGetQueryIndexediv(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetQueryIndexediv(target, index, pname, memAddress(params));
+        GL40.glGetQueryIndexediv(target, index, pname, params);
     }
 
     /**
@@ -136,24 +130,12 @@ public class ARBTransformFeedback3 {
      */
     @NativeType("void")
     public static int glGetQueryIndexedi(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetQueryIndexediv(target, index, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL40.glGetQueryIndexedi(target, index, pname);
     }
 
     /** Array version of: {@link #glGetQueryIndexediv GetQueryIndexediv} */
     public static void glGetQueryIndexediv(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetQueryIndexediv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, index, pname, params);
+        GL40.glGetQueryIndexediv(target, index, pname, params);
     }
 
 }

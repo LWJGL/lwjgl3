@@ -585,10 +585,10 @@ class Func(
 
         if (!nativeOnly || hasReuse) {
             if (hasUnsafeMethod)
-                writer.generateUnsafeMethod(constantMacro)
+                writer.generateUnsafeMethod(constantMacro, hasReuse)
 
             if ((returns.nativeType !is CharSequenceType || has<Address>()) && parameters.none { it.has<AutoSize>() && it.paramType == IN })
-                writer.generateJavaMethod(constantMacro)
+                writer.generateJavaMethod(constantMacro, hasReuse)
 
             writer.generateAlternativeMethods()
         }
@@ -677,7 +677,7 @@ class Func(
 
         if (hasReuse) {
             print(") {\n$t$t")
-            if (!returns.isVoid && !returns.isStructValue)
+            if (retType != "void")
                 print("return ")
             print("${get<Reuse>().source.className}.n$name(")
             if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
@@ -693,7 +693,7 @@ class Func(
         }
     }
 
-    private fun PrintWriter.generateUnsafeMethod(constantMacro: Boolean) {
+    private fun PrintWriter.generateUnsafeMethod(constantMacro: Boolean, hasReuse: Boolean) {
         println()
 
         printUnsafeJavadoc(constantMacro)
@@ -713,6 +713,19 @@ class Func(
             print("long $RESULT")
         }
         println(") {")
+
+        if (hasReuse) {
+            print("$t$t")
+            if (returns.nativeMethodType != "void") {
+                print("return ")
+            }
+            print("${get<Reuse>().source.className}.n$name(")
+            printList(getNativeParams()) {
+                it.name
+            }
+            println(");\n$t}")
+            return
+        }
 
         val binding = nativeClass.binding!!
 
@@ -794,7 +807,7 @@ class Func(
             println(doc)
     }
 
-    private fun PrintWriter.generateJavaMethod(constantMacro: Boolean) {
+    private fun PrintWriter.generateJavaMethod(constantMacro: Boolean, hasReuse: Boolean) {
         println()
 
         // JavaDoc
@@ -831,6 +844,22 @@ class Func(
         }
 
         println(") {")
+
+        if (hasReuse) {
+            print("$t$t")
+            if (retType != "void") {
+                print("return ")
+            }
+            print("${get<Reuse>().source.className}.$name(")
+            printList(getNativeParams()) {
+                if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
+                    null
+                else
+                    it.name
+            }
+            println(");\n$t}")
+            return
+        }
 
         val code = if (has<Code>()) get() else Code.NO_CODE
 
@@ -1009,8 +1038,6 @@ class Func(
             if (hasCustomJNI) {
                 if (!isNativeOnly) {
                     print('n')
-                } else if (has<Reuse>()) {
-                    print("${get<Reuse>().source.className}.")
                 }
                 print("$name(")
             } else {
@@ -1398,7 +1425,7 @@ class Func(
         transforms: Map<QualifiedType, Transform>,
         description: String? = null,
         constantMacro: Boolean
-    ) {
+    ): String {
         // JavaDoc
         if (!constantMacro) {
             if (description != null) {
@@ -1461,6 +1488,8 @@ class Func(
             print("${returns.nativeType.javaMethodType} $RESULT")
         }
         println(") {")
+
+        return retType
     }
 
     private fun PrintWriter.generateAlternativeMethod(
@@ -1471,7 +1500,26 @@ class Func(
         println()
 
         val macro = has<Macro>()
-        generateAlternativeMethodSignature(name, transforms, description, macro && get<Macro>().constant)
+        val retType = generateAlternativeMethodSignature(name, transforms, description, macro && get<Macro>().constant)
+
+        if (has<Reuse>()) {
+            print("$t$t")
+            if (retType != "void") {
+                print("return ")
+            }
+            print("${get<Reuse>().source.className}.$name(")
+            printList(getNativeParams()) {
+                if ((it.isAutoSizeResultOut && hideAutoSizeResultParam))
+                    null
+                else {
+                    it.transformDeclarationOrElse(transforms, it.name, false).let {
+                        it?.substring(it.lastIndexOf(' ') + 1)
+                    }
+                }
+            }
+            println(");\n$t}")
+            return
+        }
 
         // Append CodeFunctionTransform statements to Code
 

@@ -11,9 +11,7 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_map_buffer_range.txt">ARB_map_buffer_range</a> extension.
@@ -81,8 +79,7 @@ public class ARBMapBufferRange {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
-        long __result = nglMapBufferRange(target, offset, length, access);
-        return memByteBufferSafe(__result, (int)length);
+        return GL30.glMapBufferRange(target, offset, length, access);
     }
 
     /**
@@ -103,8 +100,7 @@ public class ARBMapBufferRange {
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
-        long __result = nglMapBufferRange(target, offset, length, access);
-        return apiGetMappedBuffer(old_buffer, __result, (int)length);
+        return GL30.glMapBufferRange(target, offset, length, access);
     }
 
     // --- [ glFlushMappedBufferRange ] ---

@@ -114,7 +114,7 @@ abstract class SimpleBinding(
 
     protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass, javadoc: String) {
         val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has<Macro>() }
-        if (bindingFunctions.isEmpty())
+        if (bindingFunctions.none())
             return
 
         print(javadoc)
@@ -192,8 +192,8 @@ class NativeClass internal constructor(
     private val constantBlocks = ArrayList<ConstantBlock<*>>()
 
     private val _functions = LinkedHashMap<String, Func>()
-    val functions: Iterable<Func>
-        get() = _functions.values
+    val functions: Sequence<Func>
+        get() = _functions.values.asSequence()
 
     // same as above + array overloads
     private val genFunctions: MutableList<Func> by lazy(LazyThreadSafetyMode.NONE) {
@@ -411,7 +411,7 @@ class NativeClass internal constructor(
         print(HEADER)
         println("package $packageName;\n")
 
-        val hasFunctions = !_functions.isEmpty()
+        val hasFunctions = _functions.isNotEmpty()
         if (hasFunctions || binding is SimpleBinding) {
             // TODO: This is horrible. Refactor so that we build imports after code generation.
             if (functions.any {
@@ -442,6 +442,9 @@ class NativeClass internal constructor(
                 })
                     println("import org.lwjgl.*;\n")
             }
+
+            val functions = this@NativeClass.functions
+                .filter { !it.has<Reuse>() }
 
             val hasMemoryStack = hasBuffers && functions.any { func ->
                 func.hasParam {

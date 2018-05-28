@@ -122,7 +122,7 @@ val GLBinding = Generator.register(object : APIBinding(
         }
     }
 
-    private val Iterable<Func>.hasDeprecated: Boolean
+    private val Sequence<Func>.hasDeprecated: Boolean
         get() = this.any { it has DeprecatedGL }
 
     override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "GL11" || function has DeprecatedGL

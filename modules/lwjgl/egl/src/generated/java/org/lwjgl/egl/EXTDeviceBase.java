@@ -14,8 +14,6 @@ import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_base.txt">EXT_device_base</a> extension.
@@ -49,86 +47,52 @@ public class EXTDeviceBase {
     // --- [ eglQueryDeviceAttribEXT ] ---
 
     public static int neglQueryDeviceAttribEXT(long device, int attribute, long value) {
-        long __functionAddress = EGL.getCapabilities().eglQueryDeviceAttribEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(device);
-        }
-        return callPPI(__functionAddress, device, attribute, value);
+        return EXTDeviceQuery.neglQueryDeviceAttribEXT(device, attribute, value);
     }
 
     @NativeType("EGLBoolean")
     public static boolean eglQueryDeviceAttribEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int attribute, @NativeType("EGLAttrib *") PointerBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        return neglQueryDeviceAttribEXT(device, attribute, memAddress(value)) != 0;
+        return EXTDeviceQuery.eglQueryDeviceAttribEXT(device, attribute, value);
     }
 
     // --- [ eglQueryDeviceStringEXT ] ---
 
     public static long neglQueryDeviceStringEXT(long device, int name) {
-        long __functionAddress = EGL.getCapabilities().eglQueryDeviceStringEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(device);
-        }
-        return callPP(__functionAddress, device, name);
+        return EXTDeviceQuery.neglQueryDeviceStringEXT(device, name);
     }
 
     @Nullable
     @NativeType("char *")
     public static String eglQueryDeviceStringEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name) {
-        long __result = neglQueryDeviceStringEXT(device, name);
-        return memASCIISafe(__result);
+        return EXTDeviceQuery.eglQueryDeviceStringEXT(device, name);
     }
 
     // --- [ eglQueryDisplayAttribEXT ] ---
 
     public static int neglQueryDisplayAttribEXT(long dpy, int attribute, long value) {
-        long __functionAddress = EGL.getCapabilities().eglQueryDisplayAttribEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(dpy);
-        }
-        return callPPI(__functionAddress, dpy, attribute, value);
+        return EXTDeviceQuery.neglQueryDisplayAttribEXT(dpy, attribute, value);
     }
 
     @NativeType("EGLBoolean")
     public static boolean eglQueryDisplayAttribEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint") int attribute, @NativeType("EGLAttrib *") PointerBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        return neglQueryDisplayAttribEXT(dpy, attribute, memAddress(value)) != 0;
+        return EXTDeviceQuery.eglQueryDisplayAttribEXT(dpy, attribute, value);
     }
 
     // --- [ eglQueryDevicesEXT ] ---
 
     public static int neglQueryDevicesEXT(int max_devices, long devices, long num_devices) {
-        long __functionAddress = EGL.getCapabilities().eglQueryDevicesEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callPPI(__functionAddress, max_devices, devices, num_devices);
+        return EXTDeviceEnumeration.neglQueryDevicesEXT(max_devices, devices, num_devices);
     }
 
     @NativeType("EGLBoolean")
     public static boolean eglQueryDevicesEXT(@Nullable @NativeType("EGLDeviceEXT *") PointerBuffer devices, @NativeType("EGLint *") IntBuffer num_devices) {
-        if (CHECKS) {
-            check(num_devices, 1);
-        }
-        return neglQueryDevicesEXT(remainingSafe(devices), memAddressSafe(devices), memAddress(num_devices)) != 0;
+        return EXTDeviceEnumeration.eglQueryDevicesEXT(devices, num_devices);
     }
 
     /** Array version of: {@link #eglQueryDevicesEXT QueryDevicesEXT} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryDevicesEXT(@Nullable @NativeType("EGLDeviceEXT *") PointerBuffer devices, @NativeType("EGLint *") int[] num_devices) {
-        long __functionAddress = EGL.getCapabilities().eglQueryDevicesEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(num_devices, 1);
-        }
-        return callPPI(__functionAddress, remainingSafe(devices), memAddressSafe(devices), num_devices) != 0;
+        return EXTDeviceEnumeration.eglQueryDevicesEXT(devices, num_devices);
     }
 
 }

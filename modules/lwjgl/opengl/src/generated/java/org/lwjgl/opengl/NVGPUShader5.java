@@ -248,22 +248,12 @@ public class NVGPUShader5 {
     }
 
     public static void glGetUniformui64vNV(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64EXT *") LongBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetUniformui64vNV(program, location, memAddress(params));
+        NVShaderBufferLoad.glGetUniformui64vNV(program, location, params);
     }
 
     @NativeType("void")
     public static long glGetUniformui64NV(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            LongBuffer params = stack.callocLong(1);
-            nglGetUniformui64vNV(program, location, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return NVShaderBufferLoad.glGetUniformui64NV(program, location);
     }
 
     // --- [ glProgramUniform1i64NV ] ---
@@ -446,12 +436,7 @@ public class NVGPUShader5 {
 
     /** Array version of: {@link #glGetUniformui64vNV GetUniformui64vNV} */
     public static void glGetUniformui64vNV(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64EXT *") long[] params) {
-        long __functionAddress = GL.getICD().glGetUniformui64vNV;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, program, location, params);
+        NVShaderBufferLoad.glGetUniformui64vNV(program, location, params);
     }
 
     /** Array version of: {@link #glProgramUniform1i64vNV ProgramUniform1i64vNV} */

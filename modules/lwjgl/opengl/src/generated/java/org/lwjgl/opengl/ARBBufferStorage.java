@@ -120,7 +120,7 @@ public class ARBBufferStorage {
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("GLsizeiptr") long size, @NativeType("GLbitfield") int flags) {
-        nglBufferStorage(target, size, NULL, flags);
+        GL44.glBufferStorage(target, size, flags);
     }
 
     /**
@@ -174,7 +174,7 @@ public class ARBBufferStorage {
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") ByteBuffer data, @NativeType("GLbitfield") int flags) {
-        nglBufferStorage(target, data.remaining(), memAddress(data), flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /**
@@ -228,7 +228,7 @@ public class ARBBufferStorage {
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") ShortBuffer data, @NativeType("GLbitfield") int flags) {
-        nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 1, memAddress(data), flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /**
@@ -282,7 +282,7 @@ public class ARBBufferStorage {
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") IntBuffer data, @NativeType("GLbitfield") int flags) {
-        nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /**
@@ -336,7 +336,7 @@ public class ARBBufferStorage {
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") FloatBuffer data, @NativeType("GLbitfield") int flags) {
-        nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /**
@@ -390,7 +390,7 @@ public class ARBBufferStorage {
      *               <p>It is an error to specify {@link GL44#GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link GL44#GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") DoubleBuffer data, @NativeType("GLbitfield") int flags) {
-        nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 3, memAddress(data), flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     // --- [ glNamedBufferStorageEXT ] ---
@@ -691,38 +691,22 @@ public class ARBBufferStorage {
 
     /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GL.getICD().glBufferStorage;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 1, data, flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GL.getICD().glBufferStorage;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GL.getICD().glBufferStorage;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GL.getICD().glBufferStorage;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 3, data, flags);
+        GL44.glBufferStorage(target, data, flags);
     }
 
     /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */

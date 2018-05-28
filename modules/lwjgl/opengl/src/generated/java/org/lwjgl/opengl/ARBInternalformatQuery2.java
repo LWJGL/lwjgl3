@@ -10,9 +10,6 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_internalformat_query2.txt">ARB_internalformat_query2</a> extension.
@@ -207,7 +204,7 @@ public class ARBInternalformatQuery2 {
      * @param params         a variable into which to write the retrieved information
      */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
-        nglGetInternalformati64v(target, internalformat, pname, params.remaining(), memAddress(params));
+        GL43.glGetInternalformati64v(target, internalformat, pname, params);
     }
 
     /**
@@ -219,23 +216,12 @@ public class ARBInternalformatQuery2 {
      */
     @NativeType("void")
     public static long glGetInternalformati64(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            LongBuffer params = stack.callocLong(1);
-            nglGetInternalformati64v(target, internalformat, pname, 1, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL43.glGetInternalformati64(target, internalformat, pname);
     }
 
     /** Array version of: {@link #glGetInternalformati64v GetInternalformati64v} */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
-        long __functionAddress = GL.getICD().glGetInternalformati64v;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, target, internalformat, pname, params.length, params);
+        GL43.glGetInternalformati64v(target, internalformat, pname, params);
     }
 
 }
