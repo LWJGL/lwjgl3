@@ -377,4 +377,58 @@ public class ARBClearBufferObject {
         callPPPV(__functionAddress, target, internalformat, offset, size, format, type, data);
     }
 
+    /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
+    public static void glClearNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferDataEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
+    public static void glClearNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferDataEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
+    public static void glClearNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferDataEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
+    public static void glClearNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubDataEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
+    public static void glClearNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubDataEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
+    public static void glClearNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubDataEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
 }

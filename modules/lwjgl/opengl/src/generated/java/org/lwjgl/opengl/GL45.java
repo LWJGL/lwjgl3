@@ -5110,6 +5110,84 @@ public class GL45 {
     }
 
     /**
+     * <p><a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a></p>
+     * 
+     * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
+     */
+    public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /**
+     * <p><a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a></p>
+     * 
+     * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
+     */
+    public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /**
+     * <p><a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a></p>
+     * 
+     * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
+     */
+    public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, buffer, internalformat, format, type, data);
+    }
+
+    /**
+     * <p><a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a></p>
+     * 
+     * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
+     */
+    public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /**
+     * <p><a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a></p>
+     * 
+     * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
+     */
+    public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /**
+     * <p><a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a></p>
+     * 
+     * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
+     */
+    public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GL.getICD().glClearNamedBufferSubData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+    }
+
+    /**
      * <p><a target="_blank" href="http://docs.gl/gl4/glGetBufferParameter">Reference Page</a></p>
      * 
      * Array version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv}

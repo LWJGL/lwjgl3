@@ -89,4 +89,58 @@ public class EXTClearTexture {
         nglClearTexSubImageEXT(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
+    /** Array version of: {@link #glClearTexImageEXT ClearTexImageEXT} */
+    public static void glClearTexImageEXT(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GLES.getICD().glClearTexImageEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexImageEXT ClearTexImageEXT} */
+    public static void glClearTexImageEXT(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GLES.getICD().glClearTexImageEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexImageEXT ClearTexImageEXT} */
+    public static void glClearTexImageEXT(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GLES.getICD().glClearTexImageEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexSubImageEXT ClearTexSubImageEXT} */
+    public static void glClearTexSubImageEXT(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
+        long __functionAddress = GLES.getICD().glClearTexSubImageEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexSubImageEXT ClearTexSubImageEXT} */
+    public static void glClearTexSubImageEXT(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
+        long __functionAddress = GLES.getICD().glClearTexSubImageEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
+    /** Array version of: {@link #glClearTexSubImageEXT ClearTexSubImageEXT} */
+    public static void glClearTexSubImageEXT(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
+        long __functionAddress = GLES.getICD().glClearTexSubImageEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    }
+
 }

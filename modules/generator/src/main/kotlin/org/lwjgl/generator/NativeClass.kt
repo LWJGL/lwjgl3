@@ -270,12 +270,9 @@ class NativeClass internal constructor(
                         nativeClass = this@NativeClass,
                         parameters = *func.parameters.asSequence().map {
                             if (it.isArrayParameter(autoSizeResultOutParams))
-                                Parameter(
-                                    ArrayType(it.nativeType as PointerType<*>),
-                                    it.name,
-                                    it.paramType,
-                                    it.documentation
-                                ).copyModifiers(it).removeArrayModifiers()
+                                it
+                                    .copy(ArrayType(it.nativeType as PointerType<*>))
+                                    .removeArrayModifiers()
                             else
                                 func[it.name].removeArrayModifiers()
                         }.toList().toTypedArray()
@@ -308,24 +305,19 @@ class NativeClass internal constructor(
                             nativeClass = this@NativeClass,
                             parameters = *func.parameters.asSequence().map {
                                 if (it.isArrayParameter(autoSizeResultOutParams))
-                                    Parameter(
-                                        ArrayType(it.nativeType as PointerType<*>),
-                                        it.name,
-                                        it.paramType,
-                                        it.documentation
-                                    ).copyModifiers(it).removeArrayModifiers()
+                                    it
+                                        .copy(ArrayType(it.nativeType as PointerType<*>))
+                                        .removeArrayModifiers()
                                 else if (it.has<MultiType>())
-                                    Parameter(
-                                        ArrayType(it.nativeType as PointerType<*>, autoType),
-                                        it.name,
-                                        it.paramType,
-                                        it.documentation
-                                    ).copyModifiers(it).removeArrayModifiers().replaceModifier<Check> {
-                                        if (it === Unsafe)
-                                            it
-                                        else
-                                            Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")
-                                    }
+                                    it
+                                        .copy(ArrayType(it.nativeType as PointerType<*>, autoType))
+                                        .removeArrayModifiers()
+                                        .replaceModifier<Check> {
+                                            if (it === Unsafe)
+                                                it
+                                            else
+                                                Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")
+                                        }
                                 else
                                     func[it.name].removeArrayModifiers()
                             }.toList().toTypedArray()
@@ -348,24 +340,25 @@ class NativeClass internal constructor(
                                         AutoSizeFactor.shl("${-value}")
                                     else
                                         AutoSizeFactor.shr("$value")
-                                } catch(e: NumberFormatException) {
+                                } catch (e: NumberFormatException) {
                                     return null
                                 }
                             }
 
                             val autoSize = it.get<AutoSize>()
-                            it.replaceModifier(if (autoSize.factor == null)
-                                AutoSizeShl(
-                                    autoType.byteShift,
-                                    autoSize.reference,
-                                    *autoSize.dependent
-                                )
-                            else
-                                AutoSize(
-                                    autoSize.reference,
-                                    *autoSize.dependent,
-                                    factor = getAutoSizeFactor(autoSize.factor, autoType.byteShift.toInt())
-                                )
+                            it.replaceModifier(
+                                if (autoSize.factor == null)
+                                    AutoSizeShl(
+                                        autoType.byteShift,
+                                        autoSize.reference,
+                                        *autoSize.dependent
+                                    )
+                                else
+                                    AutoSize(
+                                        autoSize.reference,
+                                        *autoSize.dependent,
+                                        factor = getAutoSizeFactor(autoSize.factor, autoType.byteShift.toInt())
+                                    )
                             )
                         }
 
@@ -828,19 +821,11 @@ class NativeClass internal constructor(
         return func
     }
 
-    operator fun Func.get(paramName: String): Parameter {
-        val param = getParam(paramName)
-
-        return if (param === EXPLICIT_FUNCTION_ADDRESS || param === JNI_ENV)
-            param
-        else {
-            Parameter(
-                param.nativeType,
-                param.name,
-                param.paramType,
-                param.documentation
-            ).copyModifiers(param)
-        }
+    operator fun Func.get(paramName: String): Parameter = getParam(paramName).let {
+        if (it === EXPLICIT_FUNCTION_ADDRESS || it === JNI_ENV)
+            it
+        else
+            it.copy()
     }
 
     private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String) = documentation.replace(JDOC_LINK_PATTERN) { match ->
