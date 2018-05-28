@@ -322,7 +322,7 @@ public class VRInput {
      * @param pTransformArray          
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetSkeletalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSkeletalTransformSpace") int eBoneParent, float fPredictedSecondsFromNow, @NativeType("InputSkeletonActionData_t *") InputSkeletonActionData.Buffer pActionData, @NativeType("VRBoneTransform_t *") VRBoneTransform_.Buffer pTransformArray) {
+    public static int VRInput_GetSkeletalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSkeletalTransformSpace") int eBoneParent, float fPredictedSecondsFromNow, @NativeType("InputSkeletonActionData_t *") InputSkeletonActionData.Buffer pActionData, @NativeType("VRBoneTransform_t *") VRBoneTransform.Buffer pTransformArray) {
         return nVRInput_GetSkeletalActionData(action, eBoneParent, fPredictedSecondsFromNow, pActionData.address(), pActionData.remaining(), pTransformArray.address(), pTransformArray.remaining());
     }
 
@@ -374,7 +374,7 @@ public class VRInput {
      * @param pTransformArray    
      */
     @NativeType("EVRInputError")
-    public static int VRInput_UncompressSkeletalActionData(@NativeType("void *") ByteBuffer pvCompressedBuffer, @NativeType("EVRSkeletalTransformSpace *") IntBuffer peBoneParent, @NativeType("VRBoneTransform_t *") VRBoneTransform_.Buffer pTransformArray) {
+    public static int VRInput_UncompressSkeletalActionData(@NativeType("void *") ByteBuffer pvCompressedBuffer, @NativeType("EVRSkeletalTransformSpace *") IntBuffer peBoneParent, @NativeType("VRBoneTransform_t *") VRBoneTransform.Buffer pTransformArray) {
         if (CHECKS) {
             check(peBoneParent, 1);
         }

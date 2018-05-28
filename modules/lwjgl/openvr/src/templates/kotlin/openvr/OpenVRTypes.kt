@@ -514,7 +514,7 @@ val Compositor_OverlaySettings = struct(Module.OPENVR, "CompositorOverlaySetting
     HmdMatrix44_t.member("transform", "")
 }
 
-val VRBoneTransform_t = struct(Module.OPENVR, "VRBoneTransform_", nativeName = "VRBoneTransform_t", mutable = false) {
+val VRBoneTransform_t = struct(Module.OPENVR, "VRBoneTransform", nativeName = "VRBoneTransform_t", mutable = false) {
     documentation = "Holds the transform for a single bone."
 
     HmdVector4_t.member("position", "")
