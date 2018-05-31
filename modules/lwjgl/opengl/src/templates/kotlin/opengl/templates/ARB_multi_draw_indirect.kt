@@ -22,6 +22,6 @@ val ARB_multi_draw_indirect = "ARBMultiDrawIndirect".nativeClassGL("ARB_multi_dr
         Requires ${GL40.core} or ${ARB_draw_indirect.link}. ${GL43.promoted}
         """
 
-    GL43 reuse "MultiDrawArraysIndirect"
-    GL43 reuse "MultiDrawElementsIndirect"
+    GL43C reuse "MultiDrawArraysIndirect"
+    GL43C reuse "MultiDrawElementsIndirect"
 }

@@ -54,7 +54,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
         "SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB"..0x91A9
     )
 
-    val TexSubImage3D = GL12["TexSubImage3D"]
+    val TexSubImage3D = GL12C["TexSubImage3D"]
     val TexPageCommitmentARB = void(
         "TexPageCommitmentARB",
         """

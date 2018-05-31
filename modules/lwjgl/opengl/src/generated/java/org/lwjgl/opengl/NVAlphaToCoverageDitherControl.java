@@ -23,7 +23,7 @@ public class NVAlphaToCoverageDitherControl {
         GL_ALPHA_TO_COVERAGE_DITHER_ENABLE_NV  = 0x934E,
         GL_ALPHA_TO_COVERAGE_DITHER_DISABLE_NV = 0x934F;
 
-    /** Accepted by the {@code param} of {@link GL11#glGetIntegerv GetIntegerv}. */
+    /** Accepted by the {@code param} of {@link GL11C#glGetIntegerv GetIntegerv}. */
     public static final int GL_ALPHA_TO_COVERAGE_DITHER_MODE_NV = 0x92BF;
 
     static { GL.initialize(); }

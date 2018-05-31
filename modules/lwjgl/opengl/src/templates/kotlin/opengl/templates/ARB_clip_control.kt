@@ -39,5 +39,5 @@ val ARB_clip_control = "ARBClipControl".nativeClassGL("ARB_clip_control") {
         "CLIP_DEPTH_MODE"..0x935D
     )
 
-    GL45 reuse "ClipControl"
+    GL45C reuse "ClipControl"
 }

@@ -21,7 +21,7 @@ public class KHRParallelShaderCompile {
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SHADER_COMPILER_THREADS_KHR = 0x91B0;
 
-    /** Accepted as part of the {@code pname} parameter to {@link GL20#glGetShaderiv GetShaderiv} and accepted as part of the {@code pname} parameter to {@link GL20#glGetProgramiv GetProgramiv}. */
+    /** Accepted as part of the {@code pname} parameter to {@link GL20C#glGetShaderiv GetShaderiv} and accepted as part of the {@code pname} parameter to {@link GL20C#glGetProgramiv GetProgramiv}. */
     public static final int GL_COMPLETION_STATUS_KHR = 0x91B1;
 
     static { GL.initialize(); }
@@ -44,7 +44,7 @@ public class KHRParallelShaderCompile {
      * 
      * <p>An implementation may combine the maximum compiler thread request from multiple contexts in a share group in an implementation-specific way.</p>
      * 
-     * <p>An application can query the current {@code MaxShaderCompilerThreadsKHR} {@code count} by calling {@link GL11#glGetIntegerv GetIntegerv} with {@code pname} set to
+     * <p>An application can query the current {@code MaxShaderCompilerThreadsKHR} {@code count} by calling {@link GL11C#glGetIntegerv GetIntegerv} with {@code pname} set to
      * {@link #GL_MAX_SHADER_COMPILER_THREADS_KHR MAX_SHADER_COMPILER_THREADS_KHR}, which returns the value of the current state.</p>
      *
      * @param count the number of background threads. A {@code count} of zero specifies a request for no parallel compiling or linking and a {@code count} of

@@ -53,7 +53,7 @@ public class ARBTextureBufferRange {
      * @param size           the size of the range of the buffer's data store to attach
      */
     public static void glTexBufferRange(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size) {
-        GL43.glTexBufferRange(target, internalformat, buffer, offset, size);
+        GL43C.glTexBufferRange(target, internalformat, buffer, offset, size);
     }
 
     // --- [ glTextureBufferRangeEXT ] ---

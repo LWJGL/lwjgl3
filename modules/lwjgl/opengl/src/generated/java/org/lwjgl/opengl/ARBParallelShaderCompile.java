@@ -46,7 +46,7 @@ public class ARBParallelShaderCompile {
      * 
      * <p>An implementation may combine the maximum compiler thread request from multiple contexts in a share group in an implementation-specific way.</p>
      * 
-     * <p>An application can query the current MaxShaderCompilerThreads() {@code count} by calling {@link GL11#glGetIntegerv GetIntegerv} with {@code pname} set to
+     * <p>An application can query the current MaxShaderCompilerThreads() {@code count} by calling {@link GL11C#glGetIntegerv GetIntegerv} with {@code pname} set to
      * {@link #GL_MAX_SHADER_COMPILER_THREADS_ARB MAX_SHADER_COMPILER_THREADS_ARB}.</p>
      *
      * @param count the number of background threads. A {@code count} of zero specifies a request for no parallel compiling or linking and a {@code count} of

@@ -39,6 +39,6 @@ val ARB_map_buffer_range = "ARBMapBufferRange".nativeClassGL("ARB_map_buffer_ran
         "MAP_UNSYNCHRONIZED_BIT"..0x0020
     )
 
-    GL30 reuse "MapBufferRange"
-    GL30 reuse "FlushMappedBufferRange"
+    GL30C reuse "MapBufferRange"
+    GL30C reuse "FlushMappedBufferRange"
 }

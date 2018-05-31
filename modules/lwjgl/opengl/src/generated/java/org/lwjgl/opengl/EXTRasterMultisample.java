@@ -58,7 +58,7 @@ public class EXTRasterMultisample {
      * function of only the parameters to RasterSamplesEXT and not of any other state.
      * 
      * <p>If {@link #GL_RASTER_MULTISAMPLE_EXT RASTER_MULTISAMPLE_EXT} is enabled, then the sample pattern chosen by RasterSamplesEXT will be used instead of sampling at the center of the pixel.
-     * The sample locations can be queried with {@link GL32#glGetMultisamplefv GetMultisamplefv} with a {@code pname} of {@link GL32#GL_SAMPLE_POSITION SAMPLE_POSITION}, similar to normal multisample sample
+     * The sample locations can be queried with {@link GL32C#glGetMultisamplefv GetMultisamplefv} with a {@code pname} of {@link GL32#GL_SAMPLE_POSITION SAMPLE_POSITION}, similar to normal multisample sample
      * locations.</p>
      * 
      * <p>The value {@link #GL_MULTISAMPLE_RASTERIZATION_ALLOWED_EXT MULTISAMPLE_RASTERIZATION_ALLOWED_EXT} is {@link GL11#GL_TRUE TRUE} if {@link GL13#GL_SAMPLE_BUFFERS SAMPLE_BUFFERS} is one or if {@link #GL_RASTER_MULTISAMPLE_EXT RASTER_MULTISAMPLE_EXT} is enabled. The value

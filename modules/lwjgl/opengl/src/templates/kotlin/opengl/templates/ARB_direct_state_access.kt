@@ -22,7 +22,7 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
         through their names rather than by bind-to-edit does not disturb the bindings of the current context, which is useful for tools, middleware and other
         applications that are unaware of the outer state but it can also avoid cases of redundant state changes.
 
-        Requires ${GL20.core}. ${GL45.promoted}
+        Requires ${GL20.core}. ${GL45C.promoted}
         """
 
     IntConstant(
@@ -69,7 +69,7 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     checkExtensionPresent("44", "ARB_query_buffer_object")
 
     fun dsa(extension: String, func: String) {
-        DependsOn("$extension(ext)")..(GL45 reuse func)
+        DependsOn("$extension(ext)")..(GL45C reuse func)
     }
 
     dsa("ARB_transform_feedback2", "CreateTransformFeedbacks")
@@ -78,21 +78,21 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     dsa("ARB_transform_feedback2", "GetTransformFeedbackiv")
     dsa("ARB_transform_feedback2", "GetTransformFeedbacki_v")
     dsa("ARB_transform_feedback2", "GetTransformFeedbacki64_v")
-    GL45 reuse "CreateBuffers"
+    GL45C reuse "CreateBuffers"
     dsa("ARB_buffer_storage", "NamedBufferStorage")
-    GL45 reuse "NamedBufferData"
-    GL45 reuse "NamedBufferSubData"
+    GL45C reuse "NamedBufferData"
+    GL45C reuse "NamedBufferSubData"
     dsa("ARB_copy_buffer", "CopyNamedBufferSubData")
     dsa("ARB_clear_texture", "ClearNamedBufferData")
     dsa("ARB_clear_texture", "ClearNamedBufferSubData")
-    GL45 reuse "MapNamedBuffer"
+    GL45C reuse "MapNamedBuffer"
     dsa("ARB_map_buffer_range", "MapNamedBufferRange")
-    GL45 reuse "UnmapNamedBuffer"
+    GL45C reuse "UnmapNamedBuffer"
     dsa("ARB_map_buffer_range", "FlushMappedNamedBufferRange")
-    GL45 reuse "GetNamedBufferParameteriv"
-    GL45 reuse "GetNamedBufferParameteri64v"
-    GL45 reuse "GetNamedBufferPointerv"
-    GL45 reuse "GetNamedBufferSubData"
+    GL45C reuse "GetNamedBufferParameteriv"
+    GL45C reuse "GetNamedBufferParameteri64v"
+    GL45C reuse "GetNamedBufferPointerv"
+    GL45C reuse "GetNamedBufferSubData"
     dsa("ARB_framebuffer_object", "CreateFramebuffers")
     dsa("ARB_framebuffer_object", "NamedFramebufferRenderbuffer")
     dsa("ARB_framebuffer_no_attachments", "NamedFramebufferParameteri")
@@ -115,7 +115,7 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     dsa("ARB_framebuffer_object", "NamedRenderbufferStorage")
     dsa("ARB_framebuffer_object", "NamedRenderbufferStorageMultisample")
     dsa("ARB_framebuffer_object", "GetNamedRenderbufferParameteriv")
-    GL45 reuse "CreateTextures"
+    GL45C reuse "CreateTextures"
     dsa("ARB_texture_buffer_object", "TextureBuffer") // TODO: TextureBuffer depends on ARB_transform_feedback2? spec bug?
     dsa("ARB_texture_buffer_range", "TextureBufferRange")
     dsa("ARB_texture_storage", "TextureStorage1D")
@@ -123,31 +123,31 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     dsa("ARB_texture_storage", "TextureStorage3D")
     dsa("ARB_texture_storage_multisample", "TextureStorage2DMultisample")
     dsa("ARB_texture_storage_multisample", "TextureStorage3DMultisample")
-    GL45 reuse "TextureSubImage1D"
-    GL45 reuse "TextureSubImage2D"
-    GL45 reuse "TextureSubImage3D"
-    GL45 reuse "CompressedTextureSubImage1D"
-    GL45 reuse "CompressedTextureSubImage2D"
-    GL45 reuse "CompressedTextureSubImage3D"
-    GL45 reuse "CopyTextureSubImage1D"
-    GL45 reuse "CopyTextureSubImage2D"
-    GL45 reuse "CopyTextureSubImage3D"
-    GL45 reuse "TextureParameterf"
-    GL45 reuse "TextureParameterfv"
-    GL45 reuse "TextureParameteri"
-    GL45 reuse "TextureParameterIiv"
-    GL45 reuse "TextureParameterIuiv"
-    GL45 reuse "TextureParameteriv"
+    GL45C reuse "TextureSubImage1D"
+    GL45C reuse "TextureSubImage2D"
+    GL45C reuse "TextureSubImage3D"
+    GL45C reuse "CompressedTextureSubImage1D"
+    GL45C reuse "CompressedTextureSubImage2D"
+    GL45C reuse "CompressedTextureSubImage3D"
+    GL45C reuse "CopyTextureSubImage1D"
+    GL45C reuse "CopyTextureSubImage2D"
+    GL45C reuse "CopyTextureSubImage3D"
+    GL45C reuse "TextureParameterf"
+    GL45C reuse "TextureParameterfv"
+    GL45C reuse "TextureParameteri"
+    GL45C reuse "TextureParameterIiv"
+    GL45C reuse "TextureParameterIuiv"
+    GL45C reuse "TextureParameteriv"
     dsa("ARB_framebuffer_object", "GenerateTextureMipmap")
-    GL45 reuse "BindTextureUnit"
-    GL45 reuse "GetTextureImage"
-    GL45 reuse "GetCompressedTextureImage"
-    GL45 reuse "GetTextureLevelParameterfv"
-    GL45 reuse "GetTextureLevelParameteriv"
-    GL45 reuse "GetTextureParameterfv"
-    GL45 reuse "GetTextureParameterIiv"
-    GL45 reuse "GetTextureParameterIuiv"
-    GL45 reuse "GetTextureParameteriv"
+    GL45C reuse "BindTextureUnit"
+    GL45C reuse "GetTextureImage"
+    GL45C reuse "GetCompressedTextureImage"
+    GL45C reuse "GetTextureLevelParameterfv"
+    GL45C reuse "GetTextureLevelParameteriv"
+    GL45C reuse "GetTextureParameterfv"
+    GL45C reuse "GetTextureParameterIiv"
+    GL45C reuse "GetTextureParameterIuiv"
+    GL45C reuse "GetTextureParameteriv"
     dsa("ARB_vertex_array_object", "CreateVertexArrays")
     dsa("ARB_vertex_array_object", "DisableVertexArrayAttrib")
     dsa("ARB_vertex_array_object", "EnableVertexArrayAttrib")
@@ -164,7 +164,7 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
     dsa("ARB_vertex_array_object", "GetVertexArrayIndexed64iv")
     dsa("ARB_sampler_objects", "CreateSamplers")
     dsa("ARB_separate_shader_objects", "CreateProgramPipelines")
-    GL45 reuse "CreateQueries"
+    GL45C reuse "CreateQueries"
     dsa("ARB_query_buffer_object", "GetQueryBufferObjecti64v")
     dsa("ARB_query_buffer_object", "GetQueryBufferObjectiv")
     dsa("ARB_query_buffer_object", "GetQueryBufferObjectui64v")

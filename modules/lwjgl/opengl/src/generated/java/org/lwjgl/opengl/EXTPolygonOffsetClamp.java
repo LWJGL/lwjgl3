@@ -45,7 +45,7 @@ public class EXTPolygonOffsetClamp {
      * <p>{@code factor} scales the maximum depth slope of the polygon, and {@code units} scales an implementation-dependent constant that relates to the usable
      * resolution of the depth buffer. The resulting values are summed to produce the polygon offset value, which may then be clamped to a minimum or maximum
      * value specified by {@code clamp}. The values {@code factor}, {@code units}, and {@code clamp} may each be positive, negative, or zero. Calling the
-     * command {@link GL11#glPolygonOffset PolygonOffset} is equivalent to calling the command PolygonOffsetClampEXT with {@code clamp} equal to zero.</p>
+     * command {@link GL11C#glPolygonOffset PolygonOffset} is equivalent to calling the command PolygonOffsetClampEXT with {@code clamp} equal to zero.</p>
      *
      * @param factor scales the maximum depth slope of the polygon
      * @param units  scales an implementation-dependent constant that relates to the usable resolution of the depth buffer

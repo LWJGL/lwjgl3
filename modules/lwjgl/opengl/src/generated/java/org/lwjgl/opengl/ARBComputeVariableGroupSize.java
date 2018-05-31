@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
  * variable work group size. When using such compute shaders, the new command DispatchComputeGroupSizeARB should be used to specify both a work group size
  * and work group count.</p>
  * 
- * <p>In this extension, compute shaders with fixed group sizes must be dispatched by {@link GL43#glDispatchCompute DispatchCompute} and {@link GL43#glDispatchComputeIndirect DispatchComputeIndirect}. Compute
+ * <p>In this extension, compute shaders with fixed group sizes must be dispatched by {@link GL43C#glDispatchCompute DispatchCompute} and {@link GL43C#glDispatchComputeIndirect DispatchComputeIndirect}. Compute
  * shaders with variable group sizes must be dispatched via {@link #glDispatchComputeGroupSizeARB DispatchComputeGroupSizeARB}. No support is provided in this extension for indirect dispatch
  * of compute shaders with a variable group size.</p>
  * 

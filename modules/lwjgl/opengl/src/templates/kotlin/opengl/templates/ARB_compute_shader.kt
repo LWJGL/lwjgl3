@@ -98,6 +98,6 @@ val ARB_compute_shader = "ARBComputeShader".nativeClassGL("ARB_compute_shader") 
         "COMPUTE_SHADER_BIT"..0x00000020
     )
 
-    GL43 reuse "DispatchCompute"
-    GL43 reuse "DispatchComputeIndirect"
+    GL43C reuse "DispatchCompute"
+    GL43C reuse "DispatchComputeIndirect"
 }

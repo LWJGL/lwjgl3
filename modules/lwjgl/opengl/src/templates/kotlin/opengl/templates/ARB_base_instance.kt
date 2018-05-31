@@ -24,7 +24,7 @@ val ARB_base_instance = "ARBBaseInstance".nativeClassGL("ARB_base_instance") {
         Requires ${GL31.core} or ${ARB_draw_instanced.link}. ${GL42.promoted}
         """
 
-    GL42 reuse "DrawArraysInstancedBaseInstance"
-    GL42 reuse "DrawElementsInstancedBaseInstance"
-    GL42 reuse "DrawElementsInstancedBaseVertexBaseInstance"
+    GL42C reuse "DrawArraysInstancedBaseInstance"
+    GL42C reuse "DrawElementsInstancedBaseInstance"
+    GL42C reuse "DrawElementsInstancedBaseVertexBaseInstance"
 }

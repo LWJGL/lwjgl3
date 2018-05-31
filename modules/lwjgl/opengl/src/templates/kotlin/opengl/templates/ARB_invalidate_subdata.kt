@@ -41,12 +41,12 @@ val ARB_invalidate_subdata = "ARBInvalidateSubdata".nativeClassGL("ARB_invalidat
         Requires ${GL20.core}. ${GL43.promoted}
         """
 
-    GL43 reuse "InvalidateTexSubImage"
-    GL43 reuse "InvalidateTexImage"
+    GL43C reuse "InvalidateTexSubImage"
+    GL43C reuse "InvalidateTexImage"
 
-    GL43 reuse "InvalidateBufferSubData"
-    GL43 reuse "InvalidateBufferData"
+    GL43C reuse "InvalidateBufferSubData"
+    GL43C reuse "InvalidateBufferData"
 
-    GL43 reuse "InvalidateFramebuffer"
-    GL43 reuse "InvalidateSubFramebuffer"
+    GL43C reuse "InvalidateFramebuffer"
+    GL43C reuse "InvalidateSubFramebuffer"
 }

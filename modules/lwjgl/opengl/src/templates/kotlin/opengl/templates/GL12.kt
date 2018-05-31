@@ -6,12 +6,12 @@ package opengl.templates
 
 import org.lwjgl.generator.*
 import opengl.*
-import opengl.BufferType.*
 
 val GL12 = "GL12".nativeClassGL("GL12") {
+    extends = GL11
     documentation =
         """
-        The core OpenGL 1.2 functionality.
+        The OpenGL functionality up to version 1.2. Includes the deprecated symbols of the Compatibility Profile.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -99,63 +99,9 @@ val GL12 = "GL12".nativeClassGL("GL12") {
         "MAX_3D_TEXTURE_SIZE"..0x8073
     )
 
-    void(
-        "TexImage3D",
-        "Specifies a three-dimensional texture image.",
-
-        GLenum.IN("target", "the texture target", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("internalformat", "the texture internal format", TEXTURE_INTERNAL_FORMATS),
-        GLsizei.IN("width", "the texture width"),
-        GLsizei.IN("height", "the texture height"),
-        GLsizei.IN("depth", "the texture depth"),
-        GLint.IN("border", "the texture border width"),
-        GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "the texel data")
-    )
-
-    void(
-        "TexSubImage3D",
-        """
-        Respecifies a cubic subregion of an existing 3D texel array. No change is made to the internalformat, width, height, depth, or border parameters of
-        the specified texel array, nor is any change made to texel values outside the specified subregion.
-        """,
-
-        GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
-        GLint.IN("level", "the level-of-detail-number"),
-        GLint.IN("xoffset", "the x coordinate of the texel subregion"),
-        GLint.IN("yoffset", "the y coordinate of the texel subregion"),
-        GLint.IN("zoffset", "the z coordinate of the texel subregion"),
-        GLsizei.IN("width", "the subregion width"),
-        GLsizei.IN("height", "the subregion height"),
-        GLsizei.IN("depth", "the subregion depth"),
-        GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "the pixel data")
-    )
-
-    void(
-        "CopyTexSubImage3D",
-        """
-        Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
-        {@code height}, or {@code border} parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See
-        #CopyTexImage2D() for more details.
-        """,
-        GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("xoffset", "the x coordinate of the texture subregion to update"),
-        GLint.IN("yoffset", "the y coordinate of the texture subregion to update"),
-        GLint.IN("zoffset", "the z coordinate of the texture subregion to update"),
-        GLint.IN("x", "the left framebuffer pixel coordinate"),
-        GLint.IN("y", "the lower framebuffer pixel coordinate"),
-        GLsizei.IN("width", "the texture subregion width"),
-        GLsizei.IN("height", "the texture subregion height")
-    )
+    GL12C reuse "TexImage3D"
+    GL12C reuse "TexSubImage3D"
+    GL12C reuse "CopyTexSubImage3D"
 
     // EXT_bgra
 
@@ -248,54 +194,5 @@ val GL12 = "GL12".nativeClassGL("GL12") {
         "MAX_ELEMENTS_INDICES"..0x80E9
     )
 
-    void(
-        "DrawRangeElements",
-        """
-        A restricted form of #DrawElements(). mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
-        constraint that all values in the arrays count must lie between start and end, inclusive.
-
-        Implementations denote recommended maximum amounts of vertex and index data, which may be queried by calling glGet with argument
-        #MAX_ELEMENTS_VERTICES and #MAX_ELEMENTS_INDICES. If end - start + 1 is greater than the value of GL_MAX_ELEMENTS_VERTICES, or if
-        count is greater than the value of GL_MAX_ELEMENTS_INDICES, then the call may operate at reduced performance. There is no requirement that all vertices
-        in the range start end be referenced. However, the implementation may partially process unused vertices, reducing performance from what could be
-        achieved with an optimal index set.
-
-        When glDrawRangeElements is called, it uses count sequential elements from an enabled array, starting at start to construct a sequence of geometric
-        primitives. mode specifies what kind of primitives are constructed, and how the array elements construct these primitives. If more than one array is
-        enabled, each is used.
-
-        Vertex attributes that are modified by glDrawRangeElements have an unspecified value after glDrawRangeElements returns. Attributes that aren't modified
-        maintain their previous values.
-
-        <h5>Errors</h5>
-
-        It is an error for indices to lie outside the range start end, but implementations may not check for this situation. Such indices cause
-        implementation-dependent behavior.
-        ${ul(
-            "GL_INVALID_ENUM is generated if mode is not an accepted value.",
-            "GL_INVALID_VALUE is generated if count is negative.",
-            "GL_INVALID_VALUE is generated if end &lt; start.",
-            """
-            GL_INVALID_OPERATION is generated if a geometry shader is active and mode is incompatible with the input primitive type of the geometry shader in the
-            currently installed program object.
-            """,
-            """
-            GL_INVALID_OPERATION is generated if a non-zero buffer object name is bound to an enabled array or the element array and the buffer object's data
-            store is currently mapped.
-            """
-        )}
-        """,
-
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("start", "the minimum array index contained in {@code indices}"),
-        GLuint.IN("end", "the maximum array index contained in {@code indices}"),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
-            "type",
-            "the type of the values in {@code indices}",
-            "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
-        ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored")
-    )
-
+    GL12C reuse "DrawRangeElements"
 }

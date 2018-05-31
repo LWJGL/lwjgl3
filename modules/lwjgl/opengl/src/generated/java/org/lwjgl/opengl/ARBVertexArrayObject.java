@@ -48,7 +48,7 @@ public class ARBVertexArrayObject {
      * @param array the name of the vertex array to bind
      */
     public static void glBindVertexArray(@NativeType("GLuint") int array) {
-        GL30.glBindVertexArray(array);
+        GL30C.glBindVertexArray(array);
     }
 
     // --- [ glDeleteVertexArrays ] ---
@@ -59,7 +59,7 @@ public class ARBVertexArrayObject {
      * @param n the number of vertex array objects to be deleted
      */
     public static void nglDeleteVertexArrays(int n, long arrays) {
-        GL30.nglDeleteVertexArrays(n, arrays);
+        GL30C.nglDeleteVertexArrays(n, arrays);
     }
 
     /**
@@ -68,12 +68,12 @@ public class ARBVertexArrayObject {
      * @param arrays an array containing the n names of the objects to be deleted
      */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") IntBuffer arrays) {
-        GL30.glDeleteVertexArrays(arrays);
+        GL30C.glDeleteVertexArrays(arrays);
     }
 
     /** Deletes vertex array objects. */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int array) {
-        GL30.glDeleteVertexArrays(array);
+        GL30C.glDeleteVertexArrays(array);
     }
 
     // --- [ glGenVertexArrays ] ---
@@ -84,7 +84,7 @@ public class ARBVertexArrayObject {
      * @param n the number of vertex array object names to generate
      */
     public static void nglGenVertexArrays(int n, long arrays) {
-        GL30.nglGenVertexArrays(n, arrays);
+        GL30C.nglGenVertexArrays(n, arrays);
     }
 
     /**
@@ -93,13 +93,13 @@ public class ARBVertexArrayObject {
      * @param arrays a buffer in which the generated vertex array object names are stored
      */
     public static void glGenVertexArrays(@NativeType("GLuint *") IntBuffer arrays) {
-        GL30.glGenVertexArrays(arrays);
+        GL30C.glGenVertexArrays(arrays);
     }
 
     /** Generates vertex array object names. */
     @NativeType("void")
     public static int glGenVertexArrays() {
-        return GL30.glGenVertexArrays();
+        return GL30C.glGenVertexArrays();
     }
 
     // --- [ glIsVertexArray ] ---
@@ -111,17 +111,17 @@ public class ARBVertexArrayObject {
      */
     @NativeType("GLboolean")
     public static boolean glIsVertexArray(@NativeType("GLuint") int array) {
-        return GL30.glIsVertexArray(array);
+        return GL30C.glIsVertexArray(array);
     }
 
     /** Array version of: {@link #glDeleteVertexArrays DeleteVertexArrays} */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int[] arrays) {
-        GL30.glDeleteVertexArrays(arrays);
+        GL30C.glDeleteVertexArrays(arrays);
     }
 
     /** Array version of: {@link #glGenVertexArrays GenVertexArrays} */
     public static void glGenVertexArrays(@NativeType("GLuint *") int[] arrays) {
-        GL30.glGenVertexArrays(arrays);
+        GL30C.glGenVertexArrays(arrays);
     }
 
 }

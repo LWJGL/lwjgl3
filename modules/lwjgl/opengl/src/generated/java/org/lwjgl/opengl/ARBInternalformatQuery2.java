@@ -192,7 +192,7 @@ public class ARBInternalformatQuery2 {
      * @param bufSize the maximum number of values that may be written to params by the function
      */
     public static void nglGetInternalformati64v(int target, int internalformat, int pname, int bufSize, long params) {
-        GL43.nglGetInternalformati64v(target, internalformat, pname, bufSize, params);
+        GL43C.nglGetInternalformati64v(target, internalformat, pname, bufSize, params);
     }
 
     /**
@@ -204,7 +204,7 @@ public class ARBInternalformatQuery2 {
      * @param params         a variable into which to write the retrieved information
      */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
-        GL43.glGetInternalformati64v(target, internalformat, pname, params);
+        GL43C.glGetInternalformati64v(target, internalformat, pname, params);
     }
 
     /**
@@ -216,12 +216,12 @@ public class ARBInternalformatQuery2 {
      */
     @NativeType("void")
     public static long glGetInternalformati64(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname) {
-        return GL43.glGetInternalformati64(target, internalformat, pname);
+        return GL43C.glGetInternalformati64(target, internalformat, pname);
     }
 
     /** Array version of: {@link #glGetInternalformati64v GetInternalformati64v} */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
-        GL43.glGetInternalformati64v(target, internalformat, pname, params);
+        GL43C.glGetInternalformati64v(target, internalformat, pname, params);
     }
 
 }

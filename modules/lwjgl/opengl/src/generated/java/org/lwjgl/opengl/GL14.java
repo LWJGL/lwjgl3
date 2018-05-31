@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The core OpenGL 1.4 functionality.
+ * The OpenGL functionality up to version 1.4. Includes the deprecated symbols of the Compatibility Profile.
  * 
  * <p>Extensions promoted to core in this release:</p>
  * 
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_window_pos.txt">ARB_window_pos</a></li>
  * </ul>
  */
-public class GL14 {
+public class GL14 extends GL13 {
 
     /** Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv. */
     public static final int GL_GENERATE_MIPMAP = 0x8191;
@@ -194,18 +194,22 @@ public class GL14 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendColor">Reference Page</a>
      */
-    public static native void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha);
+    public static void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha) {
+        GL14C.glBlendColor(red, green, blue, alpha);
+    }
 
     // --- [ glBlendEquation ] ---
 
     /**
      * Controls the blend equations used for per-fragment blending.
      *
-     * @param mode the blend equation. One of:<br><table><tr><td>{@link #GL_FUNC_ADD FUNC_ADD}</td><td>{@link #GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link #GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link #GL_MIN MIN}</td><td>{@link #GL_MAX MAX}</td></tr></table>
+     * @param mode the blend equation. One of:<br><table><tr><td>{@link GL14C#GL_FUNC_ADD FUNC_ADD}</td><td>{@link GL14C#GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link GL14C#GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link GL14C#GL_MIN MIN}</td><td>{@link GL14C#GL_MAX MAX}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendEquation">Reference Page</a>
      */
-    public static native void glBlendEquation(@NativeType("GLenum") int mode);
+    public static void glBlendEquation(@NativeType("GLenum") int mode) {
+        GL14C.glBlendEquation(mode);
+    }
 
     // --- [ glFogCoordf ] ---
 
@@ -331,22 +335,21 @@ public class GL14 {
      *
      * @param primcount the size of {@code first} and {@code count}
      */
-    public static native void nglMultiDrawArrays(int mode, long first, long count, int primcount);
+    public static void nglMultiDrawArrays(int mode, long first, long count, int primcount) {
+        GL14C.nglMultiDrawArrays(mode, first, count, primcount);
+    }
 
     /**
      * Renders multiple sets of primitives from array data.
      *
-     * @param mode  the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
+     * @param mode  the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param first an array of starting indices in the enabled arrays
      * @param count an array of the number of indices to be rendered
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
      */
     public static void glMultiDrawArrays(@NativeType("GLenum") int mode, @NativeType("GLint const *") IntBuffer first, @NativeType("GLsizei const *") IntBuffer count) {
-        if (CHECKS) {
-            check(count, first.remaining());
-        }
-        nglMultiDrawArrays(mode, memAddress(first), memAddress(count), first.remaining());
+        GL14C.glMultiDrawArrays(mode, first, count);
     }
 
     // --- [ glMultiDrawElements ] ---
@@ -356,14 +359,16 @@ public class GL14 {
      *
      * @param primcount the size of the {@code count} array
      */
-    public static native void nglMultiDrawElements(int mode, long count, int type, long indices, int primcount);
+    public static void nglMultiDrawElements(int mode, long count, int type, long indices, int primcount) {
+        GL14C.nglMultiDrawElements(mode, count, type, indices, primcount);
+    }
 
     /**
      * Renders multiple sets of primitives by specifying indices of array data elements.
      * 
      * <p><b>LWJGL note</b>: Use {@link org.lwjgl.system.MemoryUtil#memAddress} to retrieve pointers to the index buffers.</p>
      *
-     * @param mode    the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
+     * @param mode    the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param count   an array of the elements counts
      * @param type    the type of the values in indices. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indices a pointer to the location where the indices are stored
@@ -371,10 +376,7 @@ public class GL14 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
      */
     public static void glMultiDrawElements(@NativeType("GLenum") int mode, @NativeType("GLsizei *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices) {
-        if (CHECKS) {
-            check(indices, count.remaining());
-        }
-        nglMultiDrawElements(mode, memAddress(count), type, memAddress(indices), count.remaining());
+        GL14C.glMultiDrawElements(mode, count, type, indices);
     }
 
     // --- [ glPointParameterf ] ---
@@ -382,63 +384,65 @@ public class GL14 {
     /**
      * Sets the float value of a pointer parameter.
      *
-     * @param pname the parameter to set. One of:<br><table><tr><td>{@link #GL_POINT_SIZE_MIN POINT_SIZE_MIN}</td><td>{@link #GL_POINT_SIZE_MAX POINT_SIZE_MAX}</td><td>{@link #GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
+     * @param pname the parameter to set. Must be:<br><table><tr><td>{@link GL14C#GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameterf">Reference Page</a>
      */
-    public static native void glPointParameterf(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param);
+    public static void glPointParameterf(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param) {
+        GL14C.glPointParameterf(pname, param);
+    }
 
     // --- [ glPointParameteri ] ---
 
     /**
      * Integer version of {@link #glPointParameterf PointParameterf}.
      *
-     * @param pname the parameter to set. One of:<br><table><tr><td>{@link #GL_POINT_SIZE_MIN POINT_SIZE_MIN}</td><td>{@link #GL_POINT_SIZE_MAX POINT_SIZE_MAX}</td><td>{@link #GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
+     * @param pname the parameter to set. Must be:<br><table><tr><td>{@link GL14C#GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameteri">Reference Page</a>
      */
-    public static native void glPointParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int param);
+    public static void glPointParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int param) {
+        GL14C.glPointParameteri(pname, param);
+    }
 
     // --- [ glPointParameterfv ] ---
 
     /** Unsafe version of: {@link #glPointParameterfv PointParameterfv} */
-    public static native void nglPointParameterfv(int pname, long params);
+    public static void nglPointParameterfv(int pname, long params) {
+        GL14C.nglPointParameterfv(pname, params);
+    }
 
     /**
      * Pointer version of {@link #glPointParameterf PointParameterf}.
      *
-     * @param pname  the parameter to set. Must be:<br><table><tr><td>{@link #GL_POINT_DISTANCE_ATTENUATION POINT_DISTANCE_ATTENUATION}</td></tr></table>
+     * @param pname  the parameter to set
      * @param params the parameter value
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer params) {
-        if (CHECKS) {
-            check(params, 3);
-        }
-        nglPointParameterfv(pname, memAddress(params));
+        GL14C.glPointParameterfv(pname, params);
     }
 
     // --- [ glPointParameteriv ] ---
 
     /** Unsafe version of: {@link #glPointParameteriv PointParameteriv} */
-    public static native void nglPointParameteriv(int pname, long params);
+    public static void nglPointParameteriv(int pname, long params) {
+        GL14C.nglPointParameteriv(pname, params);
+    }
 
     /**
      * Pointer version of {@link #glPointParameteri PointParameteri}.
      *
-     * @param pname  the parameter to set. Must be:<br><table><tr><td>{@link #GL_POINT_DISTANCE_ATTENUATION POINT_DISTANCE_ATTENUATION}</td></tr></table>
+     * @param pname  the parameter to set
      * @param params the parameter value
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteriv(@NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 3);
-        }
-        nglPointParameteriv(pname, memAddress(params));
+        GL14C.glPointParameteriv(pname, params);
     }
 
     // --- [ glSecondaryColor3b ] ---
@@ -784,7 +788,9 @@ public class GL14 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendFuncSeparate">Reference Page</a>
      */
-    public static native void glBlendFuncSeparate(@NativeType("GLenum") int sfactorRGB, @NativeType("GLenum") int dfactorRGB, @NativeType("GLenum") int sfactorAlpha, @NativeType("GLenum") int dfactorAlpha);
+    public static void glBlendFuncSeparate(@NativeType("GLenum") int sfactorRGB, @NativeType("GLenum") int dfactorRGB, @NativeType("GLenum") int sfactorAlpha, @NativeType("GLenum") int dfactorAlpha) {
+        GL14C.glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
+    }
 
     // --- [ glWindowPos2i ] ---
 
@@ -1072,12 +1078,7 @@ public class GL14 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
      */
     public static void glMultiDrawArrays(@NativeType("GLenum") int mode, @NativeType("GLint const *") int[] first, @NativeType("GLsizei const *") int[] count) {
-        long __functionAddress = GL.getICD().glMultiDrawArrays;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(count, first.length);
-        }
-        callPPV(__functionAddress, mode, first, count, first.length);
+        GL14C.glMultiDrawArrays(mode, first, count);
     }
 
     /**
@@ -1086,12 +1087,7 @@ public class GL14 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
      */
     public static void glMultiDrawElements(@NativeType("GLenum") int mode, @NativeType("GLsizei *") int[] count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices) {
-        long __functionAddress = GL.getICD().glMultiDrawElements;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(indices, count.length);
-        }
-        callPPV(__functionAddress, mode, count, type, memAddress(indices), count.length);
+        GL14C.glMultiDrawElements(mode, count, type, indices);
     }
 
     /**
@@ -1100,12 +1096,7 @@ public class GL14 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
-        long __functionAddress = GL.getICD().glPointParameterfv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 3);
-        }
-        callPV(__functionAddress, pname, params);
+        GL14C.glPointParameterfv(pname, params);
     }
 
     /**
@@ -1114,12 +1105,7 @@ public class GL14 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteriv(@NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
-        long __functionAddress = GL.getICD().glPointParameteriv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 3);
-        }
-        callPV(__functionAddress, pname, params);
+        GL14C.glPointParameteriv(pname, params);
     }
 
     /**

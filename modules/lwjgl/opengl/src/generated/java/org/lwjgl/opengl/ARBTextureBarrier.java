@@ -34,7 +34,7 @@ public class ARBTextureBarrier {
 
     /** Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed. */
     public static void glTextureBarrier() {
-        GL45.glTextureBarrier();
+        GL45C.glTextureBarrier();
     }
 
 }

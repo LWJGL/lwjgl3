@@ -52,16 +52,16 @@ public class ARBClipControl {
      * Controls the clipping volume behavior.
      * 
      * <p>These parameters update the clip control origin and depth mode respectively. The initial value of the clip control origin is {@link GL20#GL_LOWER_LEFT LOWER_LEFT} and the
-     * initial value of the depth mode is {@link GL45#GL_NEGATIVE_ONE_TO_ONE NEGATIVE_ONE_TO_ONE}.</p>
+     * initial value of the depth mode is {@link GL45C#GL_NEGATIVE_ONE_TO_ONE NEGATIVE_ONE_TO_ONE}.</p>
      * 
      * <p>The error {@link GL11#GL_INVALID_OPERATION INVALID_OPERATION} is generated if ClipControl is executed between the execution of {@link GL11#glBegin Begin} and the corresponding
      * execution of {@link GL11#glEnd End}.</p>
      *
      * @param origin the clip origin. One of:<br><table><tr><td>{@link GL20#GL_LOWER_LEFT LOWER_LEFT}</td><td>{@link GL20#GL_UPPER_LEFT UPPER_LEFT}</td></tr></table>
-     * @param depth  the clip depth mode. One of:<br><table><tr><td>{@link GL45#GL_NEGATIVE_ONE_TO_ONE NEGATIVE_ONE_TO_ONE}</td><td>{@link GL45#GL_ZERO_TO_ONE ZERO_TO_ONE}</td></tr></table>
+     * @param depth  the clip depth mode. One of:<br><table><tr><td>{@link GL45C#GL_NEGATIVE_ONE_TO_ONE NEGATIVE_ONE_TO_ONE}</td><td>{@link GL45C#GL_ZERO_TO_ONE ZERO_TO_ONE}</td></tr></table>
      */
     public static void glClipControl(@NativeType("GLenum") int origin, @NativeType("GLenum") int depth) {
-        GL45.glClipControl(origin, depth);
+        GL45C.glClipControl(origin, depth);
     }
 
 }

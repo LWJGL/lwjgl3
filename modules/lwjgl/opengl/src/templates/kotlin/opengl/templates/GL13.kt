@@ -8,9 +8,10 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val GL13 = "GL13".nativeClassGL("GL13") {
+    extends = GL12
     documentation =
         """
-        The core OpenGL 1.3 functionality.
+        The OpenGL functionality up to version 1.3. Includes the deprecated symbols of the Compatibility Profile.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -59,106 +60,13 @@ val GL13 = "GL13".nativeClassGL("GL13") {
         "COMPRESSED_TEXTURE_FORMATS"..0x86A3
     )
 
-    // KHR_texture_compression_astc_ldr formats are only accepted in CompressedTexImage* functions
-    val CompressTexImageFormats = "$SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS @##KHRTextureCompressionASTCLDR"
-
-    void(
-        "CompressedTexImage3D",
-        "Specifies a three-dimensional texture image in a compressed format.",
-
-        GLenum.IN("target", "the target texture", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
-        GLsizei.IN("width", "the width of the texture image"),
-        GLsizei.IN("height", "the height of the texture image"),
-        GLsizei.IN("depth", "the depth of the texture image"),
-        GLint.IN("border", "must be 0"),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "a pointer to the compressed image data")
-    )
-
-    void(
-        "CompressedTexImage2D",
-        "Specifies a two-dimensional texture image in a compressed format.",
-
-        GLenum.IN("target", "the target texture", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
-        GLsizei.IN("width", "the width of the texture image"),
-        GLsizei.IN("height", "the height of the texture image"),
-        GLint.IN("border", "must be 0"),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "a pointer to the compressed image data")
-    )
-
-    void(
-        "CompressedTexImage1D",
-        "Specifies a one-dimensional texture image in a compressed format.",
-
-        GLenum.IN("target", "the target texture", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
-        GLsizei.IN("width", "the width of the texture image"),
-        GLint.IN("border", "must be 0"),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "a pointer to the compressed image data")
-    )
-
-    void(
-        "CompressedTexSubImage3D",
-        "Respecifies only a cubic subregion of an existing 3D texel array, with incoming data stored in a specific compressed image format.",
-
-        GLenum.IN("target", "the target texture", TEXTURE_3D_TARGETS),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
-        GLint.IN("yoffset", "a texel offset in the y direction within the texture array"),
-        GLint.IN("zoffset", "a texel offset in the z direction within the texture array"),
-        GLsizei.IN("width", "the width of the texture subimage"),
-        GLsizei.IN("height", "the height of the texture subimage"),
-        GLsizei.IN("depth", "the depth of the texture subimage"),
-        GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
-    )
-
-    void(
-        "CompressedTexSubImage2D",
-        "Respecifies only a rectangular subregion of an existing 2D texel array, with incoming data stored in a specific compressed image format.",
-
-        GLenum.IN("target", "the target texture", TEXTURE_2D_TARGETS),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
-        GLint.IN("yoffset", "a texel offset in the y direction within the texture array"),
-        GLsizei.IN("width", "the width of the texture subimage"),
-        GLsizei.IN("height", "the height of the texture subimage"),
-        GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
-    )
-
-    void(
-        "CompressedTexSubImage1D",
-        "Respecifies only a subregion of an existing 1D texel array, with incoming data stored in a specific compressed image format.",
-
-        GLenum.IN("target", "the target texture", "#TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
-        GLsizei.IN("width", "the width of the texture subimage"),
-        GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
-    )
-
-    void(
-        "GetCompressedTexImage",
-        "Returns a compressed texture image.",
-
-        GLenum.IN("target", "the target texture", "#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        Check(
-            expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to return the compressed texture image")
-    )
+    GL13C reuse "CompressedTexImage3D"
+    GL13C reuse "CompressedTexImage2D"
+    GL13C reuse "CompressedTexImage1D"
+    GL13C reuse "CompressedTexSubImage3D"
+    GL13C reuse "CompressedTexSubImage2D"
+    GL13C reuse "CompressedTexSubImage1D"
+    GL13C reuse "GetCompressedTexImage"
 
     // ARB_texture_cube_map
 
@@ -241,28 +149,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
         "SAMPLE_COVERAGE_INVERT"..0x80AB
     )
 
-    void(
-        "SampleCoverage",
-        """
-        Specifies multisample coverage parameters.
-
-        Multisampling samples a pixel multiple times at various implementation-dependent subpixel locations to generate antialiasing effects. Multisampling
-        transparently antialiases points, lines, polygons, and images if it is enabled.
-
-        {@code value} is used in constructing a temporary mask used in determining which samples will be used in resolving the final fragment color. This mask
-        is bitwise-ANDed with the coverage mask generated from the multisampling computation. If the {@code invert} flag is set, the temporary mask is inverted
-        (all bits flipped) and then the bitwise-AND is computed.
-
-        If an implementation does not have any multisample buffers available, or multisampling is disabled, rasterization occurs with only a single sample
-        computing a pixel's final RGB color.
-
-        Provided an implementation supports multisample buffers, and multisampling is enabled, then a pixel's final color is generated by combining several
-        samples per pixel. Each sample contains color, depth, and stencil information, allowing those operations to be performed on each sample.
-        """,
-
-        GLfloat.IN("value", "a sample coverage value. The value is clamped to the range [0, 1]. The initial value is 1.0."),
-        GLboolean.IN("invert", "if the coverage masks should be inverted. The initial value is false.")
-    )
+    GL13C reuse "SampleCoverage"
 
     // ARB_multitexture
 
@@ -311,15 +198,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
         "MAX_TEXTURE_UNITS"..0x84E2
     )
 
-    void(
-        "ActiveTexture",
-        """
-        Selects which texture unit subsequent texture state calls will affect. The number of texture units an implementation supports is implementation
-        dependent.
-        """,
-
-        GLenum.IN("texture", "which texture unit to make active", "#TEXTURE0 GL_TEXTURE[1-31]")
-    )
+    GL13C reuse "ActiveTexture"
 
     DeprecatedGL..void(
         "ClientActiveTexture",
@@ -531,5 +410,4 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 
         Check(16)..GLdouble.const.p.IN("m", "the matrix data")
     )
-
 }

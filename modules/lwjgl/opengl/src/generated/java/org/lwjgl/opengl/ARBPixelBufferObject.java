@@ -22,25 +22,25 @@ package org.lwjgl.opengl;
  * 
  * <p>This extension does not add any new functionality to buffer objects themselves.  It simply adds two new targets to which buffer objects can be bound:
  * {@link #GL_PIXEL_PACK_BUFFER_ARB PIXEL_PACK_BUFFER_ARB} and {@link #GL_PIXEL_UNPACK_BUFFER_ARB PIXEL_UNPACK_BUFFER_ARB}. When a buffer object is bound to the {@link #GL_PIXEL_PACK_BUFFER_ARB PIXEL_PACK_BUFFER_ARB} target, commands such as
- * {@link GL11#glReadPixels ReadPixels} pack (write) their data into a buffer object. When a buffer object is bound to the {@link #GL_PIXEL_UNPACK_BUFFER_ARB PIXEL_UNPACK_BUFFER_ARB} target, commands such as
- * {@link GL11#glDrawPixels DrawPixels} and {@link GL11#glTexImage2D TexImage2D} unpack (read) their data from a buffer object.</p>
+ * {@link GL11C#glReadPixels ReadPixels} pack (write) their data into a buffer object. When a buffer object is bound to the {@link #GL_PIXEL_UNPACK_BUFFER_ARB PIXEL_UNPACK_BUFFER_ARB} target, commands such as
+ * {@link GL11#glDrawPixels DrawPixels} and {@link GL11C#glTexImage2D TexImage2D} unpack (read) their data from a buffer object.</p>
  * 
  * <p>There are a several approaches to improve graphics performance with PBOs. Some of the most interesting approaches are:</p>
  * 
  * <ul>
- * <li>Streaming texture updates: If the application uses {@link GL15#glMapBuffer MapBuffer}/{@link GL15#glUnmapBuffer UnmapBuffer} to write its data for glTexSubImage into a buffer object, at
+ * <li>Streaming texture updates: If the application uses {@link GL15C#glMapBuffer MapBuffer}/{@link GL15C#glUnmapBuffer UnmapBuffer} to write its data for glTexSubImage into a buffer object, at
  * least one of the data copies usually required to download a texture can be eliminated, significantly increasing texture download performance.</li>
  * <li>Streaming draw pixels: When {@link GL11#glDrawPixels DrawPixels} sources client memory, OpenGL says the client memory can be modified immediately after the
  * glDrawPixels command returns without disturbing the drawn image. This typically necessitates unpacking and copying the image prior to glDrawPixels
  * returning. However, when using glDrawPixels with a pixel pack buffer object, glDrawPixels may return prior to image unpacking because future
- * modification of the buffer data requires explicit commands ({@link GL15#glMapBuffer MapBuffer}, {@link GL15#glBufferData BufferData}, or {@link GL15#glBufferSubData BufferSubData}).</li>
- * <li>Asynchronous {@link GL11#glReadPixels ReadPixels}: If an application needs to read back a number of images and process them with the CPU, the existing GL interface
+ * modification of the buffer data requires explicit commands ({@link GL15C#glMapBuffer MapBuffer}, {@link GL15C#glBufferData BufferData}, or {@link GL15C#glBufferSubData BufferSubData}).</li>
+ * <li>Asynchronous {@link GL11C#glReadPixels ReadPixels}: If an application needs to read back a number of images and process them with the CPU, the existing GL interface
  * makes it nearly impossible to pipeline this operation. The driver will typically send the hardware a readback command when glReadPixels is called,
  * and then wait for all of the data to be available before returning control to the application. Then, the application can either process the data
  * immediately or call glReadPixels again; in neither case will the readback overlap with the processing. If the application issues several readbacks
  * into several buffer objects, however, and then maps each one to process its data, then the readbacks can proceed in parallel with the data processing.</li>
  * <li>Render to vertex array: The application can use a fragment program to render some image into one of its buffers, then read this image out into a
- * buffer object via {@link GL11#glReadPixels ReadPixels}. Then, it can use this buffer object as a source of vertex data.</li>
+ * buffer object via {@link GL11C#glReadPixels ReadPixels}. Then, it can use this buffer object as a source of vertex data.</li>
  * </ul>
  * 
  * <p>Requires {@link GL15 OpenGL 1.5} or {@link ARBVertexBufferObject ARB_vertex_buffer_object}. Promoted to core in {@link GL21 OpenGL 2.1}.</p>

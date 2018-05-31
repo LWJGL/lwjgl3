@@ -89,7 +89,7 @@ public class ARBVertexAttribBinding {
      * @param stride       the distance between elements within the buffer
      */
     public static void glBindVertexBuffer(@NativeType("GLuint") int bindingindex, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizei") int stride) {
-        GL43.glBindVertexBuffer(bindingindex, buffer, offset, stride);
+        GL43C.glBindVertexBuffer(bindingindex, buffer, offset, stride);
     }
 
     // --- [ glVertexAttribFormat ] ---
@@ -105,7 +105,7 @@ public class ARBVertexAttribBinding {
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      */
     public static void glVertexAttribFormat(@NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int relativeoffset) {
-        GL43.glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
+        GL43C.glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
     }
 
     // --- [ glVertexAttribIFormat ] ---
@@ -119,7 +119,7 @@ public class ARBVertexAttribBinding {
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      */
     public static void glVertexAttribIFormat(@NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset) {
-        GL43.glVertexAttribIFormat(attribindex, size, type, relativeoffset);
+        GL43C.glVertexAttribIFormat(attribindex, size, type, relativeoffset);
     }
 
     // --- [ glVertexAttribLFormat ] ---
@@ -133,7 +133,7 @@ public class ARBVertexAttribBinding {
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
      */
     public static void glVertexAttribLFormat(@NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset) {
-        GL43.glVertexAttribLFormat(attribindex, size, type, relativeoffset);
+        GL43C.glVertexAttribLFormat(attribindex, size, type, relativeoffset);
     }
 
     // --- [ glVertexAttribBinding ] ---
@@ -145,7 +145,7 @@ public class ARBVertexAttribBinding {
      * @param bindingindex the index of the vertex buffer binding with which to associate the generic vertex attribute
      */
     public static void glVertexAttribBinding(@NativeType("GLuint") int attribindex, @NativeType("GLuint") int bindingindex) {
-        GL43.glVertexAttribBinding(attribindex, bindingindex);
+        GL43C.glVertexAttribBinding(attribindex, bindingindex);
     }
 
     // --- [ glVertexBindingDivisor ] ---
@@ -157,7 +157,7 @@ public class ARBVertexAttribBinding {
      * @param divisor      the number of instances that will pass between updates of the generic attribute at slot {@code index}
      */
     public static void glVertexBindingDivisor(@NativeType("GLuint") int bindingindex, @NativeType("GLuint") int divisor) {
-        GL43.glVertexBindingDivisor(bindingindex, divisor);
+        GL43C.glVertexBindingDivisor(bindingindex, divisor);
     }
 
     // --- [ glVertexArrayBindVertexBufferEXT ] ---

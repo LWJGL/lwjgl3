@@ -33,7 +33,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class OVRMultiview {
 
-    /** Accepted by the {@code pname} parameter of {@link GL30#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}. */
+    /** Accepted by the {@code pname} parameter of {@link GL30C#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}. */
     public static final int
         GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR       = 0x9630,
         GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR = 0x9632;
@@ -41,7 +41,7 @@ public class OVRMultiview {
     /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_MAX_VIEWS_OVR = 0x9631;
 
-    /** Returned by {@link GL30#glCheckFramebufferStatus CheckFramebufferStatus}. */
+    /** Returned by {@link GL30C#glCheckFramebufferStatus CheckFramebufferStatus}. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR = 0x9633;
 
     static { GL.initialize(); }
@@ -59,10 +59,10 @@ public class OVRMultiview {
     // --- [ glFramebufferTextureMultiviewOVR ] ---
 
     /**
-     * Operates similarly to the {@link GL30#glFramebufferTextureLayer FramebufferTextureLayer} command, except that {@code baseViewIndex} and {@code numViews} select a range of texture array
+     * Operates similarly to the {@link GL30C#glFramebufferTextureLayer FramebufferTextureLayer} command, except that {@code baseViewIndex} and {@code numViews} select a range of texture array
      * elements that will be targeted when rendering. Such an attachment is considered <i>multiview</i> and rendering commands issued when such a framebuffer
      * object is bound are termed "multiview rendering". The maximum number of views which can be bound simultaneously is determined by the value of
-     * {@link #GL_MAX_VIEWS_OVR MAX_VIEWS_OVR}, which can be queried with the {@link GL11#glGetIntegerv GetIntegerv} command.
+     * {@link #GL_MAX_VIEWS_OVR MAX_VIEWS_OVR}, which can be queried with the {@link GL11C#glGetIntegerv GetIntegerv} command.
      * 
      * <p>The command</p>
      * 
@@ -87,13 +87,13 @@ public class OVRMultiview {
      * {@link GL30#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE} is not {@link GL11#GL_NONE NONE} or the framebuffer is incomplete.</p>
      * 
      * <p>If {@code texture} is non-zero and the command does not result in an error, the framebuffer attachment state corresponding to {@code attachment} is
-     * updated as in the {@link GL30#glFramebufferTextureLayer FramebufferTextureLayer} command, except that the values of {@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER} and
+     * updated as in the {@link GL30C#glFramebufferTextureLayer FramebufferTextureLayer} command, except that the values of {@link GL30#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER} and
      * {@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR} are is set to {@code baseViewIndex}, and the value of {@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR}
      * is set to {@code numViews}.</p>
      * 
      * <h5>Errors</h5>
      * 
-     * <p>In addition to the corresponding errors for {@link GL30#glFramebufferTextureLayer FramebufferTextureLayer} when called with the same parameters (other than {@code layer}):</p>
+     * <p>In addition to the corresponding errors for {@link GL30C#glFramebufferTextureLayer FramebufferTextureLayer} when called with the same parameters (other than {@code layer}):</p>
      * 
      * <p>An {@link GL11#GL_INVALID_VALUE INVALID_VALUE} error is generated if:</p>
      * 

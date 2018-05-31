@@ -8,57 +8,31 @@ import org.lwjgl.generator.*
 import opengl.*
 import opengl.BufferType.*
 
-val PRIMITIVE_TYPES =
-    """
-    #POINTS #LINE_STRIP #LINE_LOOP #LINES #POLYGON #TRIANGLE_STRIP #TRIANGLE_FAN #TRIANGLES
-    #QUAD_STRIP #QUADS #LINES_ADJACENCY #LINE_STRIP_ADJACENCY #TRIANGLES_ADJACENCY #TRIANGLE_STRIP_ADJACENCY
-    #PATCHES
-    """
+const val PRIMITIVE_TYPES = "$CORE_PRIMITIVE_TYPES #POLYGON #QUADS #QUAD_STRIP"
 
 // Table 8.26
-val CUBE_MAP_FACES =
+const val CUBE_MAP_FACES =
     """
     #TEXTURE_CUBE_MAP_POSITIVE_X #TEXTURE_CUBE_MAP_NEGATIVE_X
     #TEXTURE_CUBE_MAP_POSITIVE_Y #TEXTURE_CUBE_MAP_NEGATIVE_Y
     #TEXTURE_CUBE_MAP_POSITIVE_Z #TEXTURE_CUBE_MAP_NEGATIVE_Z
     """
 
-val TEXTURE_2D_TARGETS = "#TEXTURE_2D #TEXTURE_1D_ARRAY #TEXTURE_RECTANGLE #TEXTURE_CUBE_MAP"
-val TEXTURE_2D_FACE_TARGETS = "#TEXTURE_2D #TEXTURE_1D_ARRAY $CUBE_MAP_FACES"
-val PROXY_TEXTURE_2D_TARGETS = "#PROXY_TEXTURE_2D #PROXY_TEXTURE_1D_ARRAY #PROXY_TEXTURE_RECTANGLE #PROXY_TEXTURE_CUBE_MAP"
+const val TEXTURE_2D_TARGETS = "#TEXTURE_2D #TEXTURE_1D_ARRAY #TEXTURE_RECTANGLE #TEXTURE_CUBE_MAP"
+const val TEXTURE_2D_FACE_TARGETS = "#TEXTURE_2D #TEXTURE_1D_ARRAY $CUBE_MAP_FACES"
+const val PROXY_TEXTURE_2D_TARGETS = "#PROXY_TEXTURE_2D #PROXY_TEXTURE_1D_ARRAY #PROXY_TEXTURE_RECTANGLE #PROXY_TEXTURE_CUBE_MAP"
 
-val TEXTURE_3D_TARGETS = "#TEXTURE_3D #TEXTURE_2D_ARRAY #TEXTURE_CUBE_MAP_ARRAY"
-val PROXY_TEXTURE_3D_TARGETS = "#PROXY_TEXTURE_3D #PROXY_TEXTURE_2D_ARRAY #PROXY_TEXTURE_CUBE_MAP_ARRAY"
+const val TEXTURE_3D_TARGETS = "#TEXTURE_3D #TEXTURE_2D_ARRAY #TEXTURE_CUBE_MAP_ARRAY"
+const val PROXY_TEXTURE_3D_TARGETS = "#PROXY_TEXTURE_3D #PROXY_TEXTURE_2D_ARRAY #PROXY_TEXTURE_CUBE_MAP_ARRAY"
 
-// Table 8.7
-val CORE_PIXEL_DATA_TYPES =
-    """
-    #UNSIGNED_BYTE #BYTE #UNSIGNED_SHORT #SHORT #UNSIGNED_INT #INT #HALF_FLOAT #FLOAT
-    #UNSIGNED_BYTE_3_3_2 #UNSIGNED_BYTE_2_3_3_REV #UNSIGNED_SHORT_5_6_5 #UNSIGNED_SHORT_5_6_5_REV #UNSIGNED_SHORT_4_4_4_4
-    #UNSIGNED_SHORT_4_4_4_4_REV #UNSIGNED_SHORT_5_5_5_1 #UNSIGNED_SHORT_1_5_5_5_REV
-    #UNSIGNED_INT_8_8_8_8 #UNSIGNED_INT_8_8_8_8_REV #UNSIGNED_INT_10_10_10_2 #UNSIGNED_INT_2_10_10_10_REV #UNSIGNED_INT_24_8
-    #UNSIGNED_INT_10F_11F_11F_REV #UNSIGNED_INT_5_9_9_9_REV
-    #FLOAT_32_UNSIGNED_INT_24_8_REV
-    """
-
-val PIXEL_DATA_TYPES = "$CORE_PIXEL_DATA_TYPES #BITMAP"
-
-// Table 8.8
-val COLOR_PIXEL_DATA_FORMATS =
-    """
-    #RED #GREEN #BLUE #ALPHA #RG #RGB GL11#GL_RGBA #BGR #BGRA
-    #LUMINANCE #LUMINANCE_ALPHA
-    #RED_INTEGER #GREEN_INTEGER #BLUE_INTEGER #ALPHA_INTEGER #RG_INTEGER #RGB_INTEGER #RGBA_INTEGER
-    #BGR_INTEGER #BGRA_INTEGER
-    """
-
-val PIXEL_DATA_FORMATS = "#STENCIL_INDEX #DEPTH_COMPONENT #DEPTH_STENCIL $COLOR_PIXEL_DATA_FORMATS"
+const val PIXEL_DATA_TYPES = "$CORE_PIXEL_DATA_TYPES #BITMAP"
+const val PIXEL_DATA_FORMATS = "$CORE_PIXEL_DATA_FORMATS #LUMINANCE #LUMINANCE_ALPHA"
 
 // Table 8.22
-val GENERIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
+const val GENERIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
     "#COMPRESSED_RED #COMPRESSED_RG #COMPRESSED_RGB #COMPRESSED_RGBA #COMPRESSED_SRGB #COMPRESSED_SRGB_ALPHA"
 
-val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
+const val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
     """
     #COMPRESSED_RED_RGTC1 #COMPRESSED_SIGNED_RED_RGTC1 #COMPRESSED_RG_RGTC2 #COMPRESSED_SIGNED_RG_RGTC2
     #COMPRESSED_RGBA_BPTC_UNORM #COMPRESSED_SRGB_ALPHA_BPTC_UNORM #COMPRESSED_RGB_BPTC_SIGNED_FLOAT #COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
@@ -70,38 +44,19 @@ val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
     @##EXTTextureCompressionS3TC @##EXTTextureCompressionLATC @##ATITextureCompression3DC
     """
 
-// Tables 8.18, 8.19, 8.20, 8.21, 8.22
-val TEXTURE_INTERNAL_FORMATS =
-    """
-    #RED #RG #RGB GL11#GL_RGBA #DEPTH_COMPONENT #DEPTH_STENCIL
-    #R8 #R8_SNORM #R16 #R16_SNORM #RG8 #RG8_SNORM #RG16 #RG16_SNORM
-    #R3_G3_B2 #RGB4 #RGB5 #RGB565 #RGB8
-
-    #RGB8_SNORM #RGB10 #RGB12 #RGB16 #RGB16_SNORM #RGBA2 #RGBA4 #RGB5_A1 #RGBA8
-    #RGBA8_SNORM #RGB10_A2 #RGB10_A2UI #RGBA12 #RGBA16 #RGBA16_SNORM #SRGB8 #SRGB8_ALPHA8 #R16F
-    #RG16F #RGB16F #RGBA16F #R32F #RG32F #RGB32F #RGBA32F #R11F_G11F_B10F #RGB9_E5 #R8I
-    #R8UI #R16I #R16UI #R32I #R32UI #RG8I #RG8UI #RG16I #RG16UI #RG32I #RG32UI
-    #RGB8I #RGB8UI #RGB16I #RGB16UI #RGB32I #RGB32UI #RGBA8I #RGBA8UI #RGBA16I #RGBA16UI
-    #RGBA32I #RGBA32UI
-
-    #DEPTH_COMPONENT16 #DEPTH_COMPONENT24 #DEPTH_COMPONENT32 #DEPTH24_STENCIL8 #DEPTH_COMPONENT32F #DEPTH32F_STENCIL8
-
-    $GENERIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS $SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS
-    """
-
 // Error codes
-val INVALID_ENUM = "#INVALID_ENUM"
-val INVALID_VALUE = "#INVALID_VALUE"
-val INVALID_OPERATION = "#INVALID_OPERATION"
-val STACK_OVERFLOW = "#STACK_OVERFLOW"
-val STACK_UNDERFLOW = "#STACK_UNDERFLOW"
-val OUT_OF_MEMORY = "#OUT_OF_MEMORY"
-val INVALID_FRAMEBUFFER_OPERATION = "#INVALID_FRAMEBUFFER_OPERATION"
+const val INVALID_ENUM = "#INVALID_ENUM"
+const val INVALID_VALUE = "#INVALID_VALUE"
+const val INVALID_OPERATION = "#INVALID_OPERATION"
+const val STACK_OVERFLOW = "#STACK_OVERFLOW"
+const val STACK_UNDERFLOW = "#STACK_UNDERFLOW"
+const val OUT_OF_MEMORY = "#OUT_OF_MEMORY"
+const val INVALID_FRAMEBUFFER_OPERATION = "#INVALID_FRAMEBUFFER_OPERATION"
 
 val GL11 = "GL11".nativeClassGL("GL11") {
     documentation =
         """
-        The core OpenGL 1.1 functionality.
+        The OpenGL functionality up to version 1.1. Includes the deprecated symbols of the Compatibility Profile.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -887,29 +842,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         #PIXEL_MAP_R_TO_R #PIXEL_MAP_G_TO_G #PIXEL_MAP_B_TO_B #PIXEL_MAP_A_TO_A
         """
 
-    val TEXTURE_PARAMETERS =
-        """
-        #TEXTURE_BASE_LEVEL #TEXTURE_BORDER_COLOR #TEXTURE_COMPARE_MODE #TEXTURE_COMPARE_FUNC #TEXTURE_LOD_BIAS #TEXTURE_MAG_FILTER
-        #TEXTURE_MAX_LEVEL #TEXTURE_MAX_LOD #TEXTURE_MIN_FILTER #TEXTURE_MIN_LOD #TEXTURE_PRIORITY #TEXTURE_SWIZZLE_R
-        #TEXTURE_SWIZZLE_G #TEXTURE_SWIZZLE_B #TEXTURE_SWIZZLE_A #TEXTURE_SWIZZLE_RGBA #TEXTURE_WRAP_S #TEXTURE_WRAP_T
-        #TEXTURE_WRAP_R #DEPTH_TEXTURE_MODE #GENERATE_MIPMAP
-        """
-
-    // Table 17.2
-    val BLENDING_FUNCTIONS =
-        """
-        #ZERO #ONE #SRC_COLOR #ONE_MINUS_SRC_COLOR #DST_COLOR #ONE_MINUS_DST_COLOR #SRC_ALPHA #ONE_MINUS_SRC_ALPHA #DST_ALPHA
-        #ONE_MINUS_DST_ALPHA #CONSTANT_COLOR #ONE_MINUS_CONSTANT_COLOR #CONSTANT_ALPHA #ONE_MINUS_CONSTANT_ALPHA #SRC_ALPHA_SATURATE
-        #SRC1_COLOR #ONE_MINUS_SRC1_COLOR #SRC1_ALPHA #ONE_MINUS_SRC1_ALPHA
-        """
-
-    // Table 17.4 and 17.5
-    val FRAMEBUFFERS =
-        """
-        #NONE #FRONT_LEFT #FRONT_RIGHT #BACK_LEFT #BACK_RIGHT #FRONT #BACK #LEFT #RIGHT #FRONT_AND_BACK #AUX0
-        #AUX1 #AUX2 #AUX3 #COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
-        """
-
     // Table 21.1
     val MAP1_TARGETS =
         """
@@ -925,19 +857,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     // Functions
 
-    void(
-        "Enable",
-        "Enables the specified OpenGL state.",
-
-        GLenum.IN("target", "the OpenGL state to enable")
-    )
-
-    void(
-        "Disable",
-        "Disables the specified OpenGL state.",
-
-        GLenum.IN("target", "the OpenGL state to disable")
-    )
+    GL11C reuse "Enable"
+    GL11C reuse "Disable"
 
     DeprecatedGL..void(
         "Accum",
@@ -975,7 +896,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLboolean.p.OUT("residences", "returns the residences of each texture object")
     )
 
-    void(
+    DeprecatedGL..void(
         "ArrayElement",
         "Transfers the ith element of every enabled, non-instanced array, and the first element of every enabled, instanced array to the GL.",
 
@@ -989,23 +910,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLenum.IN("mode", "the primitive type being defined", PRIMITIVE_TYPES)
     )
 
-    void(
-        "BindTexture",
-        """
-        Binds the a texture to a texture target.
-
-        While a texture object is bound, GL operations on the target to which it is bound affect the bound object, and queries of the target to which it is
-        bound return state from the bound object. If texture mapping of the dimensionality of the target to which a texture object is bound is enabled, the
-        state of the bound texture object directs the texturing operation.
-        """,
-
-        GLenum.IN(
-            "target",
-            "the texture target",
-            "#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS #TEXTURE_BUFFER #TEXTURE_2D_MULTISAMPLE #TEXTURE_2D_MULTISAMPLE_ARRAY"
-        ),
-        GLuint.IN("texture", "the texture object to bind")
-    )
+    GL11C reuse "BindTexture"
 
     DeprecatedGL..void(
         "Bitmap",
@@ -1023,13 +928,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check("((w + 7) >> 3) * h")..PIXEL_UNPACK_BUFFER..nullable..GLubyte.const.p.IN("data", "the buffer containing the bitmap data.")
     )
 
-    void(
-        "BlendFunc",
-        "Specifies the weighting factors used by the blend equation, for both RGB and alpha functions and for all draw buffers.",
-
-        GLenum.IN("sfactor", "the source weighting factor", BLENDING_FUNCTIONS),
-        GLenum.IN("dfactor", "the destination weighting factor")
-    )
+    GL11C reuse "BlendFunc"
 
     DeprecatedGL..void(
         "CallList",
@@ -1051,19 +950,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         void.const.p.IN("lists", "an array of offsets. Each offset is added to the display list base to obtain the display list number.")
     )
 
-    void(
-        "Clear",
-        """
-        Sets portions of every pixel in a particular buffer to the same value. The value to which each buffer is cleared depends on the setting of the clear
-        value for that buffer.
-        """,
-
-        GLbitfield.IN(
-            "mask",
-            "Zero or the bitwise OR of one or more values indicating which buffers are to be cleared.",
-            "#ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT", LinkMode.BITFIELD
-        )
-    )
+    GL11C reuse "Clear"
 
     DeprecatedGL..void(
         "ClearAccum",
@@ -1075,25 +962,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLfloat.IN("alpha", "the value to which to clear the A values of the accumulation buffer")
     )
 
-    void(
-        "ClearColor",
-        "Sets the clear value for fixed-point and floating-point color buffers in RGBA mode. The specified components are stored as floating-point values.",
-
-        GLfloat.IN("red", "the value to which to clear the R channel of the color buffer"),
-        GLfloat.IN("green", "the value to which to clear the G channel of the color buffer"),
-        GLfloat.IN("blue", "the value to which to clear the B channel of the color buffer"),
-        GLfloat.IN("alpha", "the value to which to clear the A channel of the color buffer")
-    )
-
-    void(
-        "ClearDepth",
-        """
-        Sets the depth value used when clearing the depth buffer. When clearing a fixedpoint depth buffer, {@code depth} is clamped to the range [0,1] and
-        converted to fixed-point. No conversion is applied when clearing a floating-point depth buffer.
-        """,
-
-        GLdouble.IN("depth", "the value to which to clear the depth buffer")
-    )
+    GL11C reuse "ClearColor"
+    GL11C reuse "ClearDepth"
 
     DeprecatedGL..void(
         "ClearIndex",
@@ -1106,14 +976,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLfloat.IN("index", "the value to which to clear the color buffer in color index mode")
     )
 
-    void(
-        "ClearStencil",
-        "Sets the value to which to clear the stencil buffer. {@code s} is masked to the number of bitplanes in the stencil buffer.",
+    GL11C reuse "ClearStencil"
 
-        GLint.IN("s", "the value to which to clear the stencil buffer")
-    )
-
-    void(
+    DeprecatedGL..void(
         "ClipPlane",
         """
         Specifies a client-defined clip plane.
@@ -1186,15 +1051,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     DeprecatedGL..void("Color4usv", "Pointer version of #Color4us().", Check(4)..GLushort.const.p.IN("v", colorBuffer))
     DeprecatedGL..void("Color4uiv", "Pointer version of #Color4ui().", Check(4)..GLuint.const.p.IN("v", colorBuffer))
 
-    void(
-        "ColorMask",
-        "Masks the writing of R, G, B and A values to all draw buffers. In the initial state, all color values are enabled for writing for all draw buffers.",
-
-        GLboolean.IN("red", "whether R values are written or not"),
-        GLboolean.IN("green", "whether G values are written or not"),
-        GLboolean.IN("blue", "whether B values are written or not"),
-        GLboolean.IN("alpha", "whether A values are written or not")
-    )
+    GL11C reuse "ColorMask"
 
     DeprecatedGL..void(
         "ColorMaterial",
@@ -1224,7 +1081,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         )..Unsafe..void.const.p.IN("pointer", "the color array data")
     )
 
-    void(
+    DeprecatedGL..void(
         "CopyPixels",
         "Transfers a rectangle of pixel values from one region of the read framebuffer to another in the draw framebuffer",
 
@@ -1235,16 +1092,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLenum.IN("type", "Indicates the type of values to be transfered", "#COLOR #STENCIL #DEPTH #DEPTH_STENCIL")
     )
 
-    void(
-        "CullFace",
-        """
-        Specifies which polygon faces are culled if #CULL_FACE is enabled. Front-facing polygons are rasterized if either culling is disabled or the
-        CullFace mode is #BACK while back-facing polygons are rasterized only if either culling is disabled or the CullFace mode is
-        #FRONT. The initial setting of the CullFace mode is #BACK. Initially, culling is disabled.
-        """,
-
-        GLenum.IN("mode", "the CullFace mode", "#FRONT #BACK #FRONT_AND_BACK")
-    )
+    GL11C reuse "CullFace"
 
     DeprecatedGL..void(
         "DeleteLists",
@@ -1257,27 +1105,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLsizei.IN("range", "the number of display lists to be deleted")
     )
 
-    void(
-        "DepthFunc",
-        "Specifies the comparison that takes place during the depth buffer test (when #DEPTH_TEST is enabled).",
-
-        GLenum.IN("func", "the depth test comparison", "#NEVER #ALWAYS #LESS #LEQUAL #EQUAL #GREATER #GEQUAL #NOTEQUAL")
-    )
-
-    void(
-        "DepthMask",
-        "Masks the writing of depth values to the depth buffer. In the initial state, the depth buffer is enabled for writing.",
-
-        GLboolean.IN("flag", "whether depth values are written or not.")
-    )
-
-    void(
-        "DepthRange",
-        "Sets the depth range for all viewports to the same values.",
-
-        GLdouble.IN("zNear", "the near depth range"),
-        GLdouble.IN("zFar", "the far depth range")
-    )
+    GL11C reuse "DepthFunc"
+    GL11C reuse "DepthMask"
+    GL11C reuse "DepthRange"
 
     DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
         "DisableClientState",
@@ -1297,57 +1127,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         )
     )
 
-    void(
-        "DrawArrays",
-        """
-        Constructs a sequence of geometric primitives by successively transferring elements for {@code count} vertices. Elements {@code first} through
-        ${code("first + count &ndash; 1")} of each enabled non-instanced array are transferred to the GL.
-
-        If an array corresponding to an attribute required by a vertex shader is not enabled, then the corresponding element is taken from the current attribute
-        state. If an array is enabled, the corresponding current vertex attribute value is unaffected by the execution of this function.
-        """,
-
-        GLenum.IN("mode", "the kind of primitives being constructed"),
-        GLint.IN("first", "the first vertex to transfer to the GL"),
-        GLsizei.IN("count", "the number of vertices after {@code first} to transfer to the GL")
-    )
-
-    void(
-        "DrawBuffer",
-        """
-        Defines the color buffer to which fragment color zero is written.
-
-        Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., #DRAW_FRAMEBUFFER_BINDING is zero), or
-        a framebuffer object (i.e., #DRAW_FRAMEBUFFER_BINDING is non-zero). In the initial state, the GL is bound to the default framebuffer.
-        """,
-
-        GLenum.IN("buf", "the color buffer to draw to", FRAMEBUFFERS)
-    )
-
-    void(
-        "DrawElements",
-        """
-        Constructs a sequence of geometric primitives by successively transferring elements for {@code count} vertices to the GL.
-        The i<sup>th</sup> element transferred by {@code DrawElements} will be taken from element {@code indices[i]} (if no element array buffer is bound), or
-        from the element whose index is stored in the currently bound element array buffer at offset {@code indices + i}.
-        """,
-
-        GLenum.IN(
-            "mode",
-            "the kind of primitives being constructed",
-            """
-            #POINTS #LINE_STRIP #LINE_LOOP #LINES #POLYGON #TRIANGLE_STRIP #TRIANGLE_FAN #TRIANGLES #QUAD_STRIP #QUADS
-            #LINES_ADJACENCY #LINE_STRIP_ADJACENCY #TRIANGLES_ADJACENCY #TRIANGLE_STRIP_ADJACENCY #PATCHES
-            """
-        ),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of vertices to transfer to the GL"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
-            "type",
-            "indicates the type of index values in {@code indices}",
-            "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
-        ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "the index values")
-    )
+    GL11C reuse "DrawArrays"
+    GL11C reuse "DrawBuffer"
+    GL11C reuse "DrawElements"
 
     DeprecatedGL..void(
         "DrawPixels",
@@ -1513,18 +1295,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLfloat.p.OUT("buffer", "an array of floating-point values into which feedback information will be placed")
     )
 
-    void(
-        "Finish",
-        """
-        Forces all previously issued GL commands to complete. {@code Finish} does not return until all effects from such commands on GL client and server
-        state and the framebuffer are fully realized.
-        """
-    )
-
-    void(
-        "Flush",
-        "Causes all previously issued GL commands to complete in finite time (although such commands may still be executing when {@code Flush} returns)."
-    )
+    GL11C reuse "Finish"
+    GL11C reuse "Flush"
 
     DeprecatedGL..void(
         "Fogi",
@@ -1558,16 +1330,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(1)..GLfloat.const.p.IN("params", "the fog parameter buffer")
     )
 
-    void(
-        "FrontFace",
-        """
-        The first step of polygon rasterization is to determine if the polygon is back-facing or front-facing. This determination is made based on the sign of
-        the (clipped or unclipped) polygon's area computed in window coordinates. The interpretation of the sign of this value is controlled with this function.
-        In the initial state, the front face direction is set to #CCW.
-        """,
-
-        GLenum.IN("dir", "the front face direction", "#CCW #CW")
-    )
+    GL11C reuse "FrontFace"
 
     DeprecatedGL..GLuint(
         "GenLists",
@@ -1581,34 +1344,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLsizei.IN("s", "the number of display lists to create")
     )
 
-    void(
-        "GenTextures",
-        """
-        Returns n previously unused texture names in textures. These names are marked as used, for the purposes of GenTextures only, but they acquire texture
-        state and a dimensionality only when they are first bound, just as if they were unused.
-        """,
+    GL11C reuse "GenTextures"
+    GL11C reuse "DeleteTextures"
 
-        AutoSize("textures")..GLsizei.IN("n", "the number of textures to create"),
-        ReturnParam..GLuint.p.OUT("textures", "a scalar or buffer in which to place the returned texture names")
-    )
-
-    void(
-        "DeleteTextures",
-        """
-        Deletes texture objects. After a texture object is deleted, it has no contents or dimensionality, and its name is again unused. If a texture that is
-        currently bound to any of the target bindings of #BindTexture() is deleted, it is as though #BindTexture() had been executed with the
-        same target and texture zero. Additionally, special care must be taken when deleting a texture if any of the images of the texture are attached to a
-        framebuffer object.
-
-        Unused names in textures that have been marked as used for the purposes of #GenTextures() are marked as unused again. Unused names in textures are
-        silently ignored, as is the name zero.
-        """,
-
-        AutoSize("textures")..GLsizei.IN("n", "the number of texture names in the {@code textures} parameter"),
-        SingleValue("texture")..GLuint.const.p.IN("textures", "contains {@code n} names of texture objects to be deleted")
-    )
-
-    void(
+    DeprecatedGL..void(
         "GetClipPlane",
         """
         Returns four double-precision values in {@code equation}; these are the coefficients of the plane equation of plane in eye coordinates (these
@@ -1619,71 +1358,11 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(4)..GLdouble.p.OUT("equation", "a buffer in which to place the returned values")
     )
 
-    void(
-        "GetBooleanv",
-        """
-        Returns the current boolean value of the specified state variable.
-
-        <b>LWJGL note</b>: The state that corresponds to the state variable may be a single value or an array of values. In the case of an array of values,
-        LWJGL will <b>not</b> validate if {@code params} has enough space to store that array. Doing so would introduce significant overhead, as the
-        OpenGL state variables are too many. It is the user's responsibility to avoid JVM crashes by ensuring enough space for the returned values.
-        """,
-
-        GLenum.IN("pname", "the state variable"),
-        Check(1)..ReturnParam..GLboolean.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetFloatv",
-        """
-        Returns the current float value of the specified state variable.
-
-        <b>LWJGL note</b>: The state that corresponds to the state variable may be a single value or an array of values. In the case of an array of values,
-        LWJGL will <b>not</b> validate if {@code params} has enough space to store that array. Doing so would introduce significant overhead, as the
-        OpenGL state variables are too many. It is the user's responsibility to avoid JVM crashes by ensuring enough space for the returned values.
-        """,
-
-        GLenum.IN("pname", "the state variable"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetIntegerv",
-        """
-        Returns the current integer value of the specified state variable.
-
-        <b>LWJGL note</b>: The state that corresponds to the state variable may be a single value or an array of values. In the case of an array of values,
-        LWJGL will <b>not</b> validate if {@code params} has enough space to store that array. Doing so would introduce significant overhead, as the
-        OpenGL state variables are too many. It is the user's responsibility to avoid JVM crashes by ensuring enough space for the returned values.
-        """,
-
-        GLenum.IN("pname", "the state variable"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetDoublev",
-        """
-        Returns the current double value of the specified state variable.
-
-        <b>LWJGL note</b>: The state that corresponds to the state variable may be a single value or an array of values. In the case of an array of values,
-        LWJGL will <b>not</b> validate if {@code params} has enough space to store that array. Doing so would introduce significant overhead, as the
-        OpenGL state variables are too many. It is the user's responsibility to avoid JVM crashes by ensuring enough space for the returned values.
-        """,
-
-        GLenum.IN("pname", "the state variable"),
-        Check(1)..ReturnParam..GLdouble.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    GLenum(
-        "GetError",
-        """
-        Returns error information. Each detectable error is assigned a numeric code. When an error is detected, a flag is set and the code is recorded. Further
-        errors, if they occur, do not affect this recorded code. When {@code GetError} is called, the code is returned and the flag is cleared, so that a
-        further error will again record its code. If a call to {@code GetError} returns #NO_ERROR, then there has been no detectable error since
-        the last call to {@code GetError} (or since the GL was initialized).
-        """
-    )
+    GL11C reuse "GetBooleanv"
+    GL11C reuse "GetFloatv"
+    GL11C reuse "GetIntegerv"
+    GL11C reuse "GetDoublev"
+    GL11C reuse "GetError"
 
     DeprecatedGL..void(
         "GetLightiv",
@@ -1709,7 +1388,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLenum.IN("pname", "the light parameter to query"),
         Check(4)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
-
 
     DeprecatedGL..void(
         "GetMapiv",
@@ -1780,22 +1458,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(32)..PIXEL_PACK_BUFFER..GLuint.p.OUT("data", "a buffer in which to place the returned data")
     )
 
-    void(
-        "GetPointerv",
-        "Returns a pointer in the current GL context.",
-
-        GLenum.IN(
-            "pname",
-            "the pointer to return",
-            """
-            #FEEDBACK_BUFFER_POINTER #SELECTION_BUFFER_POINTER
-            #VERTEX_ARRAY_POINTER #NORMAL_ARRAY_POINTER #COLOR_ARRAY_POINTER #INDEX_ARRAY_POINTER #TEXTURE_COORD_ARRAY_POINTER #EDGE_FLAG_ARRAY_POINTER
-            #SECONDARY_COLOR_ARRAY_POINTER #FOG_COORD_ARRAY_POINTER
-            #DEBUG_CALLBACK_FUNCTION #DEBUG_CALLBACK_USER_PARAM
-            """
-        ),
-        Check(1)..ReturnParam..void.p.p.OUT("params", "a buffer in which to place the returned pointer")
-    )
+    GL11C reuse "GetPointerv"
 
     DeprecatedGL..void(
         "GetPolygonStipple",
@@ -1804,14 +1467,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(128)..PIXEL_PACK_BUFFER..void.p.OUT("pattern", "a buffer in which to place the returned data")
     )
 
-    GLubyteUTF8.const.p(
-        "GetString",
-        "Return strings describing properties of the current GL context.",
+    GL11C reuse "GetString"
 
-        GLenum.IN("name", "the property to query", "#RENDERER #VENDOR #EXTENSIONS #VERSION #SHADING_LANGUAGE_VERSION")
-    )
-
-    void(
+    DeprecatedGL..void(
         "GetTexEnviv",
         "Returns integer information about {@code pname} for {@code env} in {@code data}.",
 
@@ -1828,7 +1486,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(1)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
 
-    void(
+    DeprecatedGL..void(
         "GetTexEnvfv",
         "Float version of #GetTexEnviv().",
 
@@ -1864,116 +1522,12 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(4)..ReturnParam..GLdouble.p.OUT("data", "a scalar or buffer in which to place the returned data")
     )
 
-    void(
-        "GetTexImage",
-        "Obtains texture images.",
-
-        GLenum.IN(
-            "tex",
-            "the texture (or texture face) to be obtained",
-            "#TEXTURE_1D #TEXTURE_2D #TEXTURE_3D #TEXTURE_1D_ARRAY #TEXTURE_2D_ARRAY #TEXTURE_RECTANGLE $CUBE_MAP_FACES"
-        ),
-        GLint.IN("level", "the level-of-detail number"),
-        GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT,
-            PointerMapping.DATA_INT,
-            PointerMapping.DATA_FLOAT,
-            PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "the buffer in which to place the returned data")
-    )
-
-    void(
-        "GetTexLevelParameteriv",
-        "Places integer information about texture image parameter {@code pname} for level-of-detail {@code level} of the specified {@code target} into {@code params}.",
-
-        GLenum.IN(
-            "target",
-            "the texture image target",
-            """
-            $TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS
-            #TEXTURE_1D #TEXTURE_3D #TEXTURE_2D_ARRAY #TEXTURE_CUBE_MAP_ARRAY #TEXTURE_2D_MULTISAMPLE
-            #TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_1D #PROXY_TEXTURE_3D #PROXY_TEXTURE_2D_ARRAY #PROXY_TEXTURE_CUBE_MAP_ARRAY
-            #PROXY_TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY
-            """
-        ),
-        GLint.IN("level", "the level-of-detail number"),
-        GLenum.IN(
-            "pname",
-            "the parameter to query",
-            """
-            #TEXTURE_WIDTH #TEXTURE_HEIGHT #TEXTURE_DEPTH #TEXTURE_BORDER #TEXTURE_SAMPLES #TEXTURE_FIXED_SAMPLE_LOCATIONS
-            #TEXTURE_INTERNAL_FORMAT #TEXTURE_RED_SIZE #TEXTURE_GREEN_SIZE #TEXTURE_BLUE_SIZE #TEXTURE_ALPHA_SIZE
-            #TEXTURE_LUMINANCE_SIZE #TEXTURE_INTENSITY_SIZE #TEXTURE_DEPTH_SIZE #TEXTURE_STENCIL_SIZE #TEXTURE_SHARED_SIZE
-            #TEXTURE_RED_TYPE #TEXTURE_GREEN_TYPE #TEXTURE_BLUE_TYPE #TEXTURE_ALPHA_TYPE #TEXTURE_LUMINANCE_TYPE
-            #TEXTURE_INTENSITY_TYPE #TEXTURE_DEPTH_TYPE #TEXTURE_COMPRESSED #TEXTURE_COMPRESSED_IMAGE_SIZE
-            #TEXTURE_BUFFER_DATA_STORE_BINDING #TEXTURE_BUFFER_OFFSET #TEXTURE_BUFFER_SIZE
-            """
-        ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetTexLevelParameterfv",
-        "Float version of #GetTexLevelParameteriv().",
-
-        GLenum.IN("target", "the texture image target"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLenum.IN("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetTexParameteriv",
-        "Place integer information about texture parameter {@code pname} for the specified {@code target} into {@code params}.",
-
-        GLenum.IN(
-            "target",
-            "the texture target",
-            """
-            #TEXTURE_1D #TEXTURE_2D #TEXTURE_3D #TEXTURE_1D_ARRAY #TEXTURE_2D_ARRAY #TEXTURE_RECTANGLE #TEXTURE_CUBE_MAP
-            #TEXTURE_CUBE_MAP_ARRAY #TEXTURE_2D_MULTISAMPLE #TEXTURE_2D_MULTISAMPLE_ARRAY
-            """
-        ),
-        GLenum.IN(
-            "pname",
-            "the parameter to query",
-            """
-            $TEXTURE_PARAMETERS #IMAGE_FORMAT_COMPATIBILITY_TYPE #TEXTURE_IMMUTABLE_FORMAT #TEXTURE_IMMUTABLE_LEVELS #TEXTURE_VIEW_MIN_LEVEL
-            #TEXTURE_VIEW_NUM_LEVELS #TEXTURE_VIEW_MIN_LAYER #TEXTURE_VIEW_NUM_LAYERS #TEXTURE_RESIDENT
-            """
-        ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetTexParameterfv",
-        "Float version of #GetTexParameteriv().",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "Hint",
-        """
-        Certain aspects of GL behavior, when there is room for variation, may be controlled with this function. The initial value for all hints is
-        #DONT_CARE.
-        """,
-
-        GLenum.IN(
-            "target",
-            "the behavior to control",
-            // Table 21.3
-            """
-            #PERSPECTIVE_CORRECTION_HINT #POINT_SMOOTH_HINT #LINE_SMOOTH_HINT #POLYGON_SMOOTH_HINT #FOG_HINT #GENERATE_MIPMAP_HINT
-            #TEXTURE_COMPRESSION_HINT #FRAGMENT_SHADER_DERIVATIVE_HINT
-            """
-        ),
-        GLenum.IN("hint", "the behavior hint", "#FASTEST #NICEST #DONT_CARE")
-    )
+    GL11C reuse "GetTexImage"
+    GL11C reuse "GetTexLevelParameteriv"
+    GL11C reuse "GetTexLevelParameterfv"
+    GL11C reuse "GetTexParameteriv"
+    GL11C reuse "GetTexParameterfv"
+    GL11C reuse "Hint"
 
     val index = "the value to which the current color index should be set"
 
@@ -2025,7 +1579,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void("InitNames", "Clears the selection name stack.")
 
-    void(
+    DeprecatedGL..void(
         "InterleavedArrays",
         "Efficiently initializes the six vertex arrays and their enables to one of 14 configurations.",
 
@@ -2043,12 +1597,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the vertex array data")
     )
 
-    GLboolean(
-        "IsEnabled",
-        "Determines if {@code cap} is currently enabled (as with #Enable()) or disabled.",
-
-        GLenum.IN("cap", "the enable state to query")
-    )
+    GL11C reuse "IsEnabled"
 
     DeprecatedGL..GLboolean(
         "IsList",
@@ -2057,12 +1606,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLuint.IN("list", "the list index to query")
     )
 
-    GLboolean(
-        "IsTexture",
-        "Returns true if {@code texture} is the name of a texture object.",
-
-        GLuint.IN("texture", "the texture name to query")
-    )
+    GL11C reuse "IsTexture"
 
     DeprecatedGL..void(
         "LightModeli",
@@ -2160,12 +1704,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLushort.IN("pattern", "an unsigned short integer whose 16 bits define the stipple pattern")
     )
 
-    void(
-        "LineWidth",
-        "Sets the width of rasterized line segments. The default width is 1.0.",
-
-        GLfloat.IN("width", "the line width")
-    )
+    GL11C reuse "LineWidth"
 
     DeprecatedGL..void(
         "ListBase",
@@ -2223,19 +1762,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLuint.IN("name", "the name to load")
     )
 
-    void(
-        "LogicOp",
-        "Sets the logical framebuffer operation.",
-
-        GLenum.IN(
-            "op",
-            "the operation to set",
-            """
-            #CLEAR #AND #AND_REVERSE #COPY #AND_INVERTED #NOOP #XOR #OR #NOR #EQUIV #INVERT #OR_REVERSE #COPY_INVERTED
-            #OR_INVERTED #NAND #SET
-            """
-        )
-    )
+    GL11C reuse "LogicOp"
 
     DeprecatedGL..void(
         "Map1f",
@@ -2532,29 +2059,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         PIXEL_UNPACK_BUFFER..GLuint.const.p.IN("values", "the map values")
     )
 
-    void(
-        "PixelStorei",
-        "Sets the integer value of a pixel store parameter.",
-
-        GLenum.IN(
-            "pname",
-            "the pixel store parameter to set",
-            """
-            #UNPACK_SWAP_BYTES #UNPACK_LSB_FIRST #UNPACK_ROW_LENGTH #UNPACK_SKIP_ROWS #UNPACK_SKIP_PIXELS #UNPACK_ALIGNMENT
-            #UNPACK_IMAGE_HEIGHT #UNPACK_SKIP_IMAGES #UNPACK_COMPRESSED_BLOCK_WIDTH #UNPACK_COMPRESSED_BLOCK_HEIGHT
-            #UNPACK_COMPRESSED_BLOCK_DEPTH #UNPACK_COMPRESSED_BLOCK_SIZE
-            """
-        ),
-        GLint.IN("param", "the parameter value")
-    )
-
-    void(
-        "PixelStoref",
-        "Float version of #PixelStorei().",
-
-        GLenum.IN("pname", "the pixel store parameter to set"),
-        GLfloat.IN("param", "the parameter value")
-    )
+    GL11C reuse "PixelStorei"
+    GL11C reuse "PixelStoref"
 
     DeprecatedGL..void(
         "PixelTransferi",
@@ -2603,40 +2109,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLfloat.IN("yfactor", "the z<sub>y</sub> factor")
     )
 
-    void(
-        "PointSize",
-        "Controls the rasterization of points if no vertex, tessellation control, tessellation evaluation, or geometry shader is active. The default point size is 1.0.",
-
-        GLfloat.IN("size", "the request size of a point")
-    )
-
-    void(
-        "PolygonMode",
-        """
-        Controls the interpretation of polygons for rasterization.
-
-        #FILL is the default mode of polygon rasterization. Note that these modes affect only the final rasterization of polygons: in particular, a
-        polygon's vertices are lit, and the polygon is clipped and possibly culled before these modes are applied. Polygon antialiasing applies only to the
-        #FILL state of PolygonMode. For #POINT or #LINE, point antialiasing or line segment antialiasing, respectively, apply.
-        """,
-
-        GLenum.IN("face", "the face for which to set the rasterizing method", "#FRONT #BACK #FRONT_AND_BACK"),
-        GLenum.IN("mode", "the rasterization mode", "#POINT #LINE #FILL")
-    )
-
-    void(
-        "PolygonOffset",
-        """
-        The depth values of all fragments generated by the rasterization of a polygon may be offset by a single value that is computed for that polygon. This
-        function determines that value.
-
-        {@code factor} scales the maximum depth slope of the polygon, and {@code units} scales an implementation-dependent constant that relates to the usable
-        resolution of the depth buffer. The resulting values are summed to produce the polygon offset value.
-        """,
-
-        GLfloat.IN("factor", "the maximum depth slope factor"),
-        GLfloat.IN("units", "the constant scale")
-    )
+    GL11C reuse "PointSize"
+    GL11C reuse "PolygonMode"
+    GL11C reuse "PolygonOffset"
 
     DeprecatedGL..void(
         "PolygonStipple",
@@ -2802,40 +2277,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     DeprecatedGL..void("RasterPos4fv", "Pointer version of #RasterPos4f().", Check(4)..GLfloat.const.p.IN("coords", rasterBuffer))
     DeprecatedGL..void("RasterPos4dv", "Pointer version of #RasterPos4d().", Check(4)..GLdouble.const.p.IN("coords", rasterBuffer))
 
-    void(
-        "ReadBuffer",
-        """
-        Defines the color buffer from which values are obtained.
-
-        Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., #DRAW_FRAMEBUFFER_BINDING is zero), or
-        a framebuffer object (i.e., #DRAW_FRAMEBUFFER_BINDING is non-zero). In the initial state, the GL is bound to the default framebuffer.
-        """,
-
-        GLenum.IN("src", "the color buffer to read from", FRAMEBUFFERS)
-    )
-
-    void(
-        "ReadPixels",
-        """
-        ReadPixels obtains values from the selected read buffer from each pixel with lower left hand corner at {@code (x + i, y + j)} for {@code 0 <= i < width}
-        and {@code 0 <= j < height}; this pixel is said to be the i<sup>th</sup> pixel in the j<sup>th</sup> row. If any of these pixels lies outside of the
-        window allocated to the current GL context, or outside of the image attached to the currently bound read framebuffer object, then the values obtained
-        for those pixels are undefined. When #READ_FRAMEBUFFER_BINDING is zero, values are also undefined for individual pixels that are not owned by
-        the current context. Otherwise, {@code ReadPixels} obtains values from the selected buffer, regardless of how those values were placed there.
-        """,
-
-        GLint.IN("x", "the left pixel coordinate"),
-        GLint.IN("y", "the lower pixel coordinate"),
-        GLsizei.IN("width", "the number of pixels to read in the x-dimension"),
-        GLsizei.IN("height", "the number of pixels to read in the y-dimension"),
-        GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT,
-            PointerMapping.DATA_INT,
-            PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to place the returned pixel data")
-    )
+    GL11C reuse "ReadBuffer"
+    GL11C reuse "ReadPixels"
 
     // Rect functions javadoc
     val rectX1 = "the x coordinate of the first corner vertex"
@@ -2955,20 +2398,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLdouble.IN("z", "the z-axis scaling factor")
     )
 
-    void(
-        "Scissor",
-        """
-        Defines the scissor rectangle for all viewports. The scissor test is enabled or disabled for all viewports using #Enable() or #Disable()
-        with the symbolic constant #SCISSOR_TEST. When disabled, it is as if the scissor test always passes. When enabled, if
-        ${code("left &le; x<sub>w</sub> &lt; left + width")} and ${code("bottom &le; y<sub>w</sub> &lt; bottom + height")} for the scissor rectangle, then the scissor
-        test passes. Otherwise, the test fails and the fragment is discarded.
-        """,
-
-        GLint.IN("x", "the left scissor rectangle coordinate"),
-        GLint.IN("y", "the bottom scissor rectangle coordinate"),
-        GLsizei.IN("width", "the scissor rectangle width"),
-        GLsizei.IN("height", "the scissor rectangle height")
-    )
+    GL11C reuse "Scissor"
 
     DeprecatedGL..void(
         "SelectBuffer",
@@ -2991,52 +2421,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLenum.IN("mode", "the shade mode", "#SMOOTH #FLAT")
     )
 
-    void(
-        "StencilFunc",
-        """
-        Controls the stencil test.
-
-        {@code ref} is an integer reference value that is used in the unsigned stencil comparison. Stencil comparison operations and queries of {@code ref}
-        clamp its value to the range [0, 2<sup>s</sup> &ndash; 1], where s is the number of bits in the stencil buffer attached to the draw framebuffer. The s
-        least significant bits of {@code mask} are bitwise ANDed with both the reference and the stored stencil value, and the resulting masked values are those that
-        participate in the comparison controlled by {@code func}.
-        """,
-
-        GLenum.IN("func", "the stencil comparison function", COMPARISON_FUNCTIONS),
-        GLint.IN("ref", "the reference value"),
-        GLuint.IN("mask", "the stencil comparison mask")
-    )
-
-    void(
-        "StencilMask",
-        """
-        Masks the writing of particular bits into the stencil plans.
-
-        The least significant s bits of {@code mask}, where s is the number of bits in the stencil buffer, specify an integer mask. Where a 1 appears in this
-        mask, the corresponding bit in the stencil buffer is written; where a 0 appears, the bit is not written.
-        """,
-
-        GLuint.IN("mask", "the stencil mask")
-    )
-
-    void(
-        "StencilOp",
-        """
-        Indicates what happens to the stored stencil value if this or certain subsequent tests fail or pass.
-
-        The supported actions are #KEEP, #ZERO, #REPLACE, #INCR, #DECR, #INVERT,
-        #INCR_WRAP and #DECR_WRAP. These correspond to keeping the current value, setting to zero, replacing with the reference value,
-        incrementing with saturation, decrementing with saturation, bitwise inverting it, incrementing without saturation, and decrementing without saturation.
-
-        For purposes of increment and decrement, the stencil bits are considered as an unsigned integer. Incrementing or decrementing with saturation clamps
-        the stencil value at 0 and the maximum representable value. Incrementing or decrementing without saturation will wrap such that incrementing the maximum
-        representable value results in 0, and decrementing 0 results in the maximum representable value.
-        """,
-
-        GLenum.IN("sfail", "the action to take if the stencil test fails"),
-        GLenum.IN("dpfail", "the action to take if the depth buffer test fails"),
-        GLenum.IN("dppass", "the action to take if the depth buffer test passes")
-    )
+    GL11C reuse "StencilFunc"
+    GL11C reuse "StencilMask"
+    GL11C reuse "StencilOp"
 
     // TexCoord functions javadoc
     val texCoordS = "the s component of the current texture coordinates"
@@ -3131,7 +2518,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the texture coordinate array data")
     )
 
-    void(
+    DeprecatedGL..void(
         "TexEnvi",
         """
         Sets parameters of the texture environment that specifies how texture values are interpreted when texturing a fragment, or sets per-texture-unit
@@ -3159,7 +2546,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         )
     )
 
-    void(
+    DeprecatedGL..void(
         "TexEnviv",
         "Pointer version of #TexEnvi().",
 
@@ -3169,7 +2556,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
 
-    void(
+    DeprecatedGL..void(
         "TexEnvf",
         "Float version of #TexEnvi().",
 
@@ -3178,7 +2565,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         GLfloat.IN("param", "the parameter value")
     )
 
-    void(
+    DeprecatedGL..void(
         "TexEnvfv",
         "Pointer version of #TexEnvf().",
 
@@ -3251,198 +2638,18 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Check(4)..GLdouble.const.p.IN("params", "the parameter value")
     )
 
-    void(
-        "TexImage2D",
-        "Specifies a two-dimensional texture image.",
-
-        GLenum.IN("target", "the texture target", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("internalformat", "the texture internal format", TEXTURE_INTERNAL_FORMATS),
-        GLsizei.IN("width", "the texture width"),
-        GLsizei.IN("height", "the texture height"),
-        GLint.IN("border", "the texture border width"),
-        GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "the texel data")
-    )
-
-    void(
-        "TexImage1D",
-        "One-dimensional version of #TexImage2D()}.",
-
-        GLenum.IN("target", "the texture target", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("internalformat", "the texture internal format"),
-        GLsizei.IN("width", "the texture width"),
-        GLint.IN("border", "the texture border width"),
-        GLenum.IN("format", "the texel data format"),
-        GLenum.IN("type", "the texel data type"),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "the texel data")
-    )
-
-    void(
-        "CopyTexImage2D",
-        """
-        Defines a two-dimensional texel array in exactly the manner of #TexImage2D(), except that the image data are taken from the framebuffer rather
-        than from client memory.
-
-        {@code x}, {@code y}, {@code width}, and {@code height} correspond precisely to the corresponding arguments to #ReadPixels(); they specify the
-        image's width and height, and the lower left (x, y) coordinates of the framebuffer region to be copied.
-
-        The image is taken from the framebuffer exactly as if these arguments were passed to #CopyPixels() with argument type set to #COLOR,
-        #DEPTH, or #DEPTH_STENCIL, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
-        component and stencil index data are taken from the depth and stencil buffers, respectively.
-
-        Subsequent processing is identical to that described for #TexImage2D(), beginning with clamping of the R, G, B, A, or depth values, and masking
-        of the stencil index values from the resulting pixel groups. Parameters {@code level}, {@code internalformat}, and {@code border} are specified using
-        the same values, with the same meanings, as the corresponding arguments of #TexImage2D().
-
-        The constraints on width, height, and border are exactly those for the corresponding arguments of #TexImage2D().
-        """,
-
-        GLenum.IN("target", "the texture target", TEXTURE_2D_TARGETS),
-        GLint.IN("level", "the level-of-detail number"),
-        GLenum.IN("internalFormat", "the texture internal format. See #TexImage2D() for a list of supported formats."),
-        GLint.IN("x", "the left framebuffer pixel coordinate"),
-        GLint.IN("y", "the lower framebuffer pixel coordinate"),
-        GLsizei.IN("width", "the texture width"),
-        GLsizei.IN("height", "the texture height"),
-        GLint.IN("border", "the texture border width")
-    )
-
-    void(
-        "CopyTexImage1D",
-        """
-        Defines a one-dimensional texel array in exactly the manner of #TexImage1D(), except that the image data are taken from the framebuffer rather
-        than from client memory. For the purposes of decoding the texture image, {@code CopyTexImage1D} is equivalent to calling #CopyTexImage2D()
-        with corresponding arguments and height of 1, except that the height of the image is always 1, regardless of the value of border. level, internalformat,
-        and border are specified using the same values, with the same meanings, as the corresponding arguments of #TexImage1D(). The constraints on
-        width and border are exactly those of the corresponding arguments of #TexImage1D().
-        """,
-
-        GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLenum.IN("internalFormat", "the texture internal format. See #TexImage2D() for a list of supported formats."),
-        GLint.IN("x", "the left framebuffer pixel coordinate"),
-        GLint.IN("y", "the lower framebuffer pixel coordinate"),
-        GLsizei.IN("width", "the texture width"),
-        GLint.IN("border", "the texture border width")
-    )
-
-    void(
-        "CopyTexSubImage1D",
-        """
-        Respecifies a rectangular subregion of an existing texel array. No change is made to the {@code internalformat}, {@code width} or {@code border}
-        parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See #CopyTexImage1D() for more
-        details.
-        """,
-
-        GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("xoffset", "the left texel coordinate of the texture subregion to update"),
-        GLint.IN("x", "the left framebuffer pixel coordinate"),
-        GLint.IN("y", "the lower framebuffer pixel coordinate"),
-        GLsizei.IN("width", "the texture subregion width")
-    )
-
-    void(
-        "CopyTexSubImage2D",
-        """
-        Respecifies a rectangular subregion of an existing texel array. No change is made to the {@code internalformat}, {@code width}, {@code height},
-        or {@code border} parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See
-        #CopyTexImage2D() for more details.
-        """,
-        GLenum.IN("target", "the texture target", TEXTURE_2D_TARGETS),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("xoffset", "the left texel coordinate of the texture subregion to update"),
-        GLint.IN("yoffset", "the lower texel coordinate of the texture subregion to update"),
-        GLint.IN("x", "the left framebuffer pixel coordinate"),
-        GLint.IN("y", "the lower framebuffer pixel coordinate"),
-        GLsizei.IN("width", "the texture subregion width"),
-        GLsizei.IN("height", "the texture subregion height")
-    )
-
-    void(
-        "TexParameteri",
-        "Sets the integer value of a texture parameter, which controls how the texel array is treated when specified or changed, and when applied to a fragment.",
-
-        GLenum.IN(
-            "target",
-            "the texture target",
-            """
-            #TEXTURE_1D #TEXTURE_2D #TEXTURE_3D #TEXTURE_1D_ARRAY #TEXTURE_2D_ARRAY #TEXTURE_RECTANGLE #TEXTURE_CUBE_MAP
-            #TEXTURE_CUBE_MAP_ARRAY #TEXTURE_2D_MULTISAMPLE #TEXTURE_2D_MULTISAMPLE_ARRAY
-            """
-        ),
-        GLenum.IN("pname", "the parameter to set", TEXTURE_PARAMETERS),
-        GLint.IN("param", "the parameter value")
-    )
-
-    void(
-        "TexParameteriv",
-        "Pointer version of #TexParameteri().",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the parameter to set"),
-        Check(4)..GLint.const.p.IN("params", "the parameter value")
-    )
-
-    void(
-        "TexParameterf",
-        "Float version of #TexParameteri().",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the parameter to set"),
-        GLfloat.IN("param", "the parameter value")
-    )
-
-    void(
-        "TexParameterfv",
-        "Pointer version of #TexParameterf().",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the parameter to set"),
-        Check(4)..GLfloat.const.p.IN("params", "the parameter value")
-    )
-
-    void(
-        "TexSubImage1D",
-        "One-dimensional version of #TexSubImage2D().",
-
-        GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail-number"),
-        GLint.IN("xoffset", "the left coordinate of the texel subregion"),
-        GLsizei.IN("width", "the subregion width"),
-        GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "the pixel data")
-    )
-
-    void(
-        "TexSubImage2D",
-        """
-        Respecifies a rectangular subregion of an existing texel array. No change is made to the internalformat, width, height, depth, or border parameters of
-        the specified texel array, nor is any change made to texel values outside the specified subregion.
-        """,
-
-        GLenum.IN("target", "the texture target", TEXTURE_2D_TARGETS),
-        GLint.IN("level", "the level-of-detail-number"),
-        GLint.IN("xoffset", "the left coordinate of the texel subregion"),
-        GLint.IN("yoffset", "the bottom coordinate of the texel subregion"),
-        GLsizei.IN("width", "the subregion width"),
-        GLsizei.IN("height", "the subregion height"),
-        GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "the pixel data")
-    )
+    GL11C reuse "TexImage1D"
+    GL11C reuse "TexImage2D"
+    GL11C reuse "CopyTexImage1D"
+    GL11C reuse "CopyTexImage2D"
+    GL11C reuse "CopyTexSubImage1D"
+    GL11C reuse "CopyTexSubImage2D"
+    GL11C reuse "TexParameteri"
+    GL11C reuse "TexParameteriv"
+    GL11C reuse "TexParameterf"
+    GL11C reuse "TexParameterfv"
+    GL11C reuse "TexSubImage1D"
+    GL11C reuse "TexSubImage2D"
 
     DeprecatedGL..void(
         "Translatef",
@@ -3555,26 +2762,5 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "the vertex array data")
     )
 
-    void(
-        "Viewport",
-        """
-        Specifies the viewport transformation parameters for all viewports.
-
-        The location of the viewport's bottom-left corner, given by {@code (x, y)}, are clamped to be within the implementation-dependent viewport bounds range.
-        The viewport bounds range {@code [min, max]} tuple may be determined by calling #GetFloatv() with the symbolic
-        constant #VIEWPORT_BOUNDS_RANGE. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum
-        width and height may be found by calling #GetFloatv() with the symbolic constant #MAX_VIEWPORT_DIMS. The
-        maximum viewport dimensions must be greater than or equal to the larger of the visible dimensions of the display being rendered to (if a display
-        exists), and the largest renderbuffer image which can be successfully created and attached to a framebuffer object.
-
-        In the initial state, {@code w} and {@code h} for each viewport are set to the width and height, respectively, of the window into which the GL is to do
-        its rendering. If the default framebuffer is bound but no default framebuffer is associated with the GL context, then {@code w} and {@code h} are
-        initially set to zero.
-        """,
-
-        GLint.IN("x", "the left viewport coordinate"),
-        GLint.IN("y", "the bottom viewport coordinate"),
-        GLsizei.IN("w", "the viewport width"),
-        GLsizei.IN("h", "the viewport height")
-    )
+    GL11C reuse "Viewport"
 }

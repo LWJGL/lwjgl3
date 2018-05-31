@@ -21,6 +21,6 @@ val ARB_transform_feedback_instanced = "ARBTransformFeedbackInstanced".nativeCla
         Requires ${GL40.core} or ${ARB_transform_feedback2.link}. Requires ${GL31.core} or ${ARB_draw_instanced.link}. ${GL42.promoted}
         """
 
-    GL42 reuse "DrawTransformFeedbackInstanced"
-    GL42 reuse "DrawTransformFeedbackStreamInstanced"
+    GL42C reuse "DrawTransformFeedbackInstanced"
+    GL42C reuse "DrawTransformFeedbackStreamInstanced"
 }

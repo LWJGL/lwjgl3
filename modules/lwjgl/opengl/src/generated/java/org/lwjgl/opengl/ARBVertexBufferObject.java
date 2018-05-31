@@ -48,8 +48,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * GL that the application does not expect to update the contents of the buffer frequently or even at all, while the vertices might be retrieved from a
  * buffer object with the usage mode "STREAM_DRAW", indicating that the vertices will be updated on a regular basis.</p>
  * 
- * <p>In addition, a binding is defined by which applications can source index data (as used by {@link GL11#glDrawElements DrawElements}, {@link GL12#glDrawRangeElements DrawRangeElements}, and
- * {@link GL14#glMultiDrawElements MultiDrawElements}) from a buffer object. On some platforms, this enables very large models to be rendered with no more than a few small commands
+ * <p>In addition, a binding is defined by which applications can source index data (as used by {@link GL11C#glDrawElements DrawElements}, {@link GL12C#glDrawRangeElements DrawRangeElements}, and
+ * {@link GL14C#glMultiDrawElements MultiDrawElements}) from a buffer object. On some platforms, this enables very large models to be rendered with no more than a few small commands
  * to the graphics device.</p>
  * 
  * <p>It is expected that a future extension will allow sourcing pixel data from and writing pixel data to a buffer object.</p>

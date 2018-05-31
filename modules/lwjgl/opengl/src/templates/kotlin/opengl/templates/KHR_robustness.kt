@@ -81,9 +81,9 @@ val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
         "CONTEXT_LOST"..0x0507
     )
 
-    GL45 reuse "GetGraphicsResetStatus"
-    GL45 reuse "ReadnPixels"
-    GL45 reuse "GetnUniformfv"
-    GL45 reuse "GetnUniformiv"
-    GL45 reuse "GetnUniformuiv"
+    GL45C reuse "GetGraphicsResetStatus"
+    GL45C reuse "ReadnPixels"
+    GL45C reuse "GetnUniformfv"
+    GL45C reuse "GetnUniformiv"
+    GL45C reuse "GetnUniformuiv"
 }

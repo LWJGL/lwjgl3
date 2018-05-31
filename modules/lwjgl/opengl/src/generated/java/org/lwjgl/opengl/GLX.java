@@ -335,7 +335,7 @@ public class GLX {
      * Prevents X requests from executing until any outstanding OpenGL rendering is done.
      * 
      * <p>OpenGL calls made prior to {@code glXWaitGL} are guaranteed to be executed before X rendering calls made after {@code glXWaitGL}. While the same result
-     * can be achieved using {@link GL11#glFinish Finish}, {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
+     * can be achieved using {@link GL11C#glFinish Finish}, {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
      * where the client and server are on separate machines.</p>
      */
     public static void glXWaitGL() {

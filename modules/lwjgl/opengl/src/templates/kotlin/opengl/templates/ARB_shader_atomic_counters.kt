@@ -111,5 +111,5 @@ val ARB_shader_atomic_counters = "ARBShaderAtomicCounters".nativeClassGL("ARB_sh
         "UNSIGNED_INT_ATOMIC_COUNTER"..0x92DB
     )
 
-    GL42 reuse "GetActiveAtomicCounterBufferiv"
+    GL42C reuse "GetActiveAtomicCounterBufferiv"
 }

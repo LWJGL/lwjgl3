@@ -54,9 +54,9 @@ val ARB_ES2_compatibility = "ARBES2Compatibility".nativeClassGL("ARB_ES2_compati
         "RGB565"..0x8D62
     )
 
-    GL41 reuse "ReleaseShaderCompiler"
-    GL41 reuse "ShaderBinary"
-    GL41 reuse "GetShaderPrecisionFormat"
-    GL41 reuse "DepthRangef"
-    GL41 reuse "ClearDepthf"
+    GL41C reuse "ReleaseShaderCompiler"
+    GL41C reuse "ShaderBinary"
+    GL41C reuse "GetShaderPrecisionFormat"
+    GL41C reuse "DepthRangef"
+    GL41C reuse "ClearDepthf"
 }

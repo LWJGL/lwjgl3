@@ -56,8 +56,8 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
         "MAX_VERTEX_STREAMS"..0x8E71
     )
 
-    GL40 reuse "DrawTransformFeedbackStream"
-    GL40 reuse "BeginQueryIndexed"
-    GL40 reuse "EndQueryIndexed"
-    GL40 reuse "GetQueryIndexediv"
+    GL40C reuse "DrawTransformFeedbackStream"
+    GL40C reuse "BeginQueryIndexed"
+    GL40C reuse "EndQueryIndexed"
+    GL40C reuse "GetQueryIndexediv"
 }

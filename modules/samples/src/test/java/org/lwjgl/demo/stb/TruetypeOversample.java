@@ -18,7 +18,6 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.stb.STBTruetype.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -334,9 +333,9 @@ public final class TruetypeOversample {
 
                     srgb = !srgb;
                     if (srgb) {
-                        glEnable(GL_FRAMEBUFFER_SRGB);
+                        glEnable(GL30.GL_FRAMEBUFFER_SRGB);
                     } else {
-                        glDisable(GL_FRAMEBUFFER_SRGB);
+                        glDisable(GL30.GL_FRAMEBUFFER_SRGB);
                     }
                     break;
                 case GLFW_KEY_V:

@@ -128,6 +128,6 @@ val ARB_tessellation_shader = "ARBTessellationShader".nativeClassGL("ARB_tessell
         "TESS_CONTROL_SHADER"..0x8E88
     )
 
-    GL40 reuse "PatchParameteri"
-    GL40 reuse "PatchParameterfv"
+    GL40C reuse "PatchParameteri"
+    GL40C reuse "PatchParameterfv"
 }

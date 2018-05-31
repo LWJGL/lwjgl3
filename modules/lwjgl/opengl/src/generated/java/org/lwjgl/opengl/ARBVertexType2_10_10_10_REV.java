@@ -493,133 +493,133 @@ public class ARBVertexType2_10_10_10_REV {
     // --- [ glVertexAttribP1ui ] ---
 
     /**
-     * Packed component version of {@link GL20#glVertexAttrib1f VertexAttrib1f}.
+     * Packed component version of {@link GL20C#glVertexAttrib1f VertexAttrib1f}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP1ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
-        GL33.glVertexAttribP1ui(index, type, normalized, value);
+        GL33C.glVertexAttribP1ui(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP2ui ] ---
 
     /**
-     * Packed component version of {@link GL20#glVertexAttrib2f VertexAttrib2f}.
+     * Packed component version of {@link GL20C#glVertexAttrib2f VertexAttrib2f}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP2ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
-        GL33.glVertexAttribP2ui(index, type, normalized, value);
+        GL33C.glVertexAttribP2ui(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP3ui ] ---
 
     /**
-     * Packed component version of {@link GL20#glVertexAttrib3f VertexAttrib3f}.
+     * Packed component version of {@link GL20C#glVertexAttrib3f VertexAttrib3f}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP3ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
-        GL33.glVertexAttribP3ui(index, type, normalized, value);
+        GL33C.glVertexAttribP3ui(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP4ui ] ---
 
     /**
-     * Packed component version of {@link GL20#glVertexAttrib4f VertexAttrib4f}.
+     * Packed component version of {@link GL20C#glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP4ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value) {
-        GL33.glVertexAttribP4ui(index, type, normalized, value);
+        GL33C.glVertexAttribP4ui(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP1uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP1uiv VertexAttribP1uiv} */
     public static void nglVertexAttribP1uiv(int index, int type, boolean normalized, long value) {
-        GL33.nglVertexAttribP1uiv(index, type, normalized, value);
+        GL33C.nglVertexAttribP1uiv(index, type, normalized, value);
     }
 
     /**
      * Pointer version of {@link #glVertexAttribP1ui VertexAttribP1ui}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP1uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        GL33.glVertexAttribP1uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP1uiv(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP2uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP2uiv VertexAttribP2uiv} */
     public static void nglVertexAttribP2uiv(int index, int type, boolean normalized, long value) {
-        GL33.nglVertexAttribP2uiv(index, type, normalized, value);
+        GL33C.nglVertexAttribP2uiv(index, type, normalized, value);
     }
 
     /**
      * Pointer version of {@link #glVertexAttribP2ui VertexAttribP2ui}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP2uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        GL33.glVertexAttribP2uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP2uiv(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP3uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP3uiv VertexAttribP3uiv} */
     public static void nglVertexAttribP3uiv(int index, int type, boolean normalized, long value) {
-        GL33.nglVertexAttribP3uiv(index, type, normalized, value);
+        GL33C.nglVertexAttribP3uiv(index, type, normalized, value);
     }
 
     /**
      * Pointer version of {@link #glVertexAttribP3ui VertexAttribP3ui}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP3uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        GL33.glVertexAttribP3uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP3uiv(index, type, normalized, value);
     }
 
     // --- [ glVertexAttribP4uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribP4uiv VertexAttribP4uiv} */
     public static void nglVertexAttribP4uiv(int index, int type, boolean normalized, long value) {
-        GL33.nglVertexAttribP4uiv(index, type, normalized, value);
+        GL33C.nglVertexAttribP4uiv(index, type, normalized, value);
     }
 
     /**
      * Pointer version of {@link #glVertexAttribP4ui VertexAttribP4ui}.
      *
      * @param index      the index of the generic vertex attribute to be modified
-     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
+     * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link GL33C#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
      */
     public static void glVertexAttribP4uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
-        GL33.glVertexAttribP4uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP4uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexP2uiv VertexP2uiv} */
@@ -699,22 +699,22 @@ public class ARBVertexType2_10_10_10_REV {
 
     /** Array version of: {@link #glVertexAttribP1uiv VertexAttribP1uiv} */
     public static void glVertexAttribP1uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        GL33.glVertexAttribP1uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP1uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexAttribP2uiv VertexAttribP2uiv} */
     public static void glVertexAttribP2uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        GL33.glVertexAttribP2uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP2uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexAttribP3uiv VertexAttribP3uiv} */
     public static void glVertexAttribP3uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        GL33.glVertexAttribP3uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP3uiv(index, type, normalized, value);
     }
 
     /** Array version of: {@link #glVertexAttribP4uiv VertexAttribP4uiv} */
     public static void glVertexAttribP4uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") int[] value) {
-        GL33.glVertexAttribP4uiv(index, type, normalized, value);
+        GL33C.glVertexAttribP4uiv(index, type, normalized, value);
     }
 
 }

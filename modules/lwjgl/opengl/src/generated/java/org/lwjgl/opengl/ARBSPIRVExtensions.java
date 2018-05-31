@@ -28,10 +28,10 @@ package org.lwjgl.opengl;
  */
 public final class ARBSPIRVExtensions {
 
-    /** Accepted by the {@code name} parameter of {@link GL30#glGetStringi GetStringi}. */
+    /** Accepted by the {@code name} parameter of {@link GL30C#glGetStringi GetStringi}. */
     public static final int GL_SPIR_V_EXTENSIONS = 0x9553;
 
-    /** Accepted by the {@code pname} parameter of {@link GL11#glGetIntegerv GetIntegerv}. */
+    /** Accepted by the {@code pname} parameter of {@link GL11C#glGetIntegerv GetIntegerv}. */
     public static final int GL_NUM_SPIR_V_EXTENSIONS = 0x9554;
 
     private ARBSPIRVExtensions() {}

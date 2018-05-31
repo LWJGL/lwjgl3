@@ -626,7 +626,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         "BLEND_COLOR"..0x8005
     )
 
-    GL14 reuse "BlendColor"
+    GL14C reuse "BlendColor"
 
     // EXT_blend_minmax
 
@@ -653,5 +653,5 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         "FUNC_REVERSE_SUBTRACT"..0x800B
     )
 
-    GL14 reuse "BlendEquation"
+    GL14C reuse "BlendEquation"
 }

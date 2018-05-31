@@ -158,14 +158,14 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
         "INVALID_INDEX"..0xFFFFFFFF.i
     )
 
-    GL31 reuse "GetUniformIndices"
-    GL31 reuse "GetActiveUniformsiv"
-    GL31 reuse "GetActiveUniformName"
-    GL31 reuse "GetUniformBlockIndex"
-    GL31 reuse "GetActiveUniformBlockiv"
-    GL31 reuse "GetActiveUniformBlockName"
-    GL30 reuse "BindBufferRange"
-    GL30 reuse "BindBufferBase"
-    GL30 reuse "GetIntegeri_v"
-    GL31 reuse "UniformBlockBinding"
+    GL31C reuse "GetUniformIndices"
+    GL31C reuse "GetActiveUniformsiv"
+    GL31C reuse "GetActiveUniformName"
+    GL31C reuse "GetUniformBlockIndex"
+    GL31C reuse "GetActiveUniformBlockiv"
+    GL31C reuse "GetActiveUniformBlockName"
+    GL30C reuse "BindBufferRange"
+    GL30C reuse "BindBufferBase"
+    GL30C reuse "GetIntegeri_v"
+    GL31C reuse "UniformBlockBinding"
 }

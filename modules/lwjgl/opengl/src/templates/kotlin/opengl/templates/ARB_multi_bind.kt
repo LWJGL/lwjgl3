@@ -28,10 +28,10 @@ val ARB_multi_bind = "ARBMultiBind".nativeClassGL("ARB_multi_bind") {
         Requires ${GL30.core}. ${GL44.promoted}
         """
 
-    GL44 reuse "BindBuffersBase"
-    GL44 reuse "BindBuffersRange"
-    GL44 reuse "BindTextures"
-    GL44 reuse "BindSamplers"
-    GL44 reuse "BindImageTextures"
-    GL44 reuse "BindVertexBuffers"
+    GL44C reuse "BindBuffersBase"
+    GL44C reuse "BindBuffersRange"
+    GL44C reuse "BindTextures"
+    GL44C reuse "BindSamplers"
+    GL44C reuse "BindImageTextures"
+    GL44C reuse "BindVertexBuffers"
 }

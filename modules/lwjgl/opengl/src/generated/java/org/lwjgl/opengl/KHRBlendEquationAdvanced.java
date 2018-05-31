@@ -32,9 +32,9 @@ import static org.lwjgl.system.Checks.*;
  * transparency and blending operations commonly available in many dedicated imaging APIs.</p>
  * 
  * <p>This extension provides a number of new "advanced" blending equations. Unlike traditional blending operations using the {@link GL14#GL_FUNC_ADD FUNC_ADD} equation,
- * these blending equations do not use source and destination factors specified by {@link GL11#glBlendFunc BlendFunc}. Instead, each blend equation specifies a complete
+ * these blending equations do not use source and destination factors specified by {@link GL11C#glBlendFunc BlendFunc}. Instead, each blend equation specifies a complete
  * equation based on the source and destination colors. These new blend equations are used for both RGB and alpha components; they may not be used to
- * perform separate RGB and alpha blending (via functions like {@link GL20#glBlendEquationSeparate BlendEquationSeparate}).</p>
+ * perform separate RGB and alpha blending (via functions like {@link GL20C#glBlendEquationSeparate BlendEquationSeparate}).</p>
  * 
  * <p>These blending operations are performed using premultiplied source and destination colors, where RGB colors produced by the fragment shader and stored
  * in the framebuffer are considered to be multiplied by alpha (coverage). Many of these advanced blending equations are formulated where the result of
@@ -90,7 +90,7 @@ public class KHRBlendEquationAdvanced {
      * <p>When using advanced blending equations, applications should split their rendering into a collection of blending passes, none of which touch an
      * individual sample in the framebuffer more than once. The results of blending are undefined if the sample being blended has been touched previously in
      * the same pass. Any command that causes the value of a sample to be modified using the framebuffer is considered to touch the sample, including clears,
-     * blended or unblended primitives, and {@link GL30#glBlitFramebuffer BlitFramebuffer} copies.</p>
+     * blended or unblended primitives, and {@link GL30C#glBlitFramebuffer BlitFramebuffer} copies.</p>
      */
     public static native void glBlendBarrierKHR();
 

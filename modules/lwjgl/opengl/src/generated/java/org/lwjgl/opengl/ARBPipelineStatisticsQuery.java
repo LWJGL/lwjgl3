@@ -24,8 +24,8 @@ package org.lwjgl.opengl;
 public final class ARBPipelineStatisticsQuery {
 
     /**
-     * Accepted by the {@code target} parameter of {@link GL15#glBeginQuery BeginQuery}, {@link GL15#glEndQuery EndQuery}, {@link GL15#glGetQueryiv GetQueryiv},
-     * {@link GL40#glBeginQueryIndexed BeginQueryIndexed}, {@link GL40#glEndQueryIndexed EndQueryIndexed} and {@link GL40#glGetQueryIndexediv GetQueryIndexediv}.
+     * Accepted by the {@code target} parameter of {@link GL15C#glBeginQuery BeginQuery}, {@link GL15C#glEndQuery EndQuery}, {@link GL15C#glGetQueryiv GetQueryiv},
+     * {@link GL40C#glBeginQueryIndexed BeginQueryIndexed}, {@link GL40C#glEndQueryIndexed EndQueryIndexed} and {@link GL40C#glGetQueryIndexediv GetQueryIndexediv}.
      */
     public static final int
         GL_VERTICES_SUBMITTED_ARB                 = 0x82EE,

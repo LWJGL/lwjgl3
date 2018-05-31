@@ -37,7 +37,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.opengl.ARBTimerQuery.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.stb.STBImageWrite.*;
 import static org.lwjgl.system.MemoryStack.*;

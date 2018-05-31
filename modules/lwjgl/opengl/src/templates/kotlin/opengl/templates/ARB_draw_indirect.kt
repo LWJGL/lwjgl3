@@ -42,6 +42,6 @@ val ARB_draw_indirect = "ARBDrawIndirect".nativeClassGL("ARB_draw_indirect") {
         "DRAW_INDIRECT_BUFFER_BINDING"..0x8F43
     )
 
-    GL40 reuse "DrawArraysIndirect"
-    GL40 reuse "DrawElementsIndirect"
+    GL40C reuse "DrawArraysIndirect"
+    GL40C reuse "DrawElementsIndirect"
 }

@@ -61,10 +61,10 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
         "MAX_FRAMEBUFFER_SAMPLES"..0x9318
     )
 
-    GL43 reuse "FramebufferParameteri"
-    GL43 reuse "GetFramebufferParameteriv"
+    GL43C reuse "FramebufferParameteri"
+    GL43C reuse "GetFramebufferParameteriv"
 
-    var src = GL43["FramebufferParameteri"]
+    var src = GL43C["FramebufferParameteri"]
     DependsOn("GL_EXT_direct_state_access")..void(
         "NamedFramebufferParameteriEXT",
         "DSA version of #FramebufferParameteri().",
@@ -74,7 +74,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
         src["param"]
     )
 
-    src = GL43["GetFramebufferParameteriv"]
+    src = GL43C["GetFramebufferParameteriv"]
     DependsOn("GL_EXT_direct_state_access", postfix = "EXT")..void(
         "GetNamedFramebufferParameterivEXT",
         "DSA version of #GetFramebufferParameteriv().",

@@ -59,10 +59,10 @@ public class ARBProvokingVertex {
     /**
      * Specifies the vertex to be used as the source of data for flat shaded varyings.
      *
-     * @param mode the provoking vertex mode. One of:<br><table><tr><td>{@link GL32#GL_FIRST_VERTEX_CONVENTION FIRST_VERTEX_CONVENTION}</td><td>{@link GL32#GL_LAST_VERTEX_CONVENTION LAST_VERTEX_CONVENTION}</td></tr></table>
+     * @param mode the provoking vertex mode. One of:<br><table><tr><td>{@link GL32C#GL_FIRST_VERTEX_CONVENTION FIRST_VERTEX_CONVENTION}</td><td>{@link GL32C#GL_LAST_VERTEX_CONVENTION LAST_VERTEX_CONVENTION}</td></tr></table>
      */
     public static void glProvokingVertex(@NativeType("GLenum") int mode) {
-        GL32.glProvokingVertex(mode);
+        GL32C.glProvokingVertex(mode);
     }
 
 }

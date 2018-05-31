@@ -17,6 +17,10 @@ val NativeClass.capName: String
         "${prefixTemplate}_$templateName"
     }
 
+private val CORE_PATTERN = "GL\\d\\dC".toRegex()
+val NativeClass.isCore: Boolean
+    get() = CORE_PATTERN.matches(templateName)
+
 private const val CAPABILITIES_CLASS = "GLCapabilities"
 
 private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -36,15 +40,7 @@ val GLBinding = Generator.register(object : APIBinding(
         classes
             .asSequence()
             .filter { it.hasNativeFunctions }
-            .flatMap {
-                if (it.templateName.startsWith("GL")) {
-                    it.functions.asSequence().sortedBy {
-                        if (it.has<DeprecatedGL>()) 1 else 0
-                    }
-                } else {
-                    it.functions.asSequence()
-                }
-            }
+            .flatMap { it.functions.asSequence() }
             .filter { !it.has<Reuse>() }
             .toList()
     }
@@ -136,6 +132,10 @@ val GLBinding = Generator.register(object : APIBinding(
     private val EXTENSION_NAME = "[A-Za-z0-9_]+".toRegex()
 
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
+        if (nativeClass.isCore) {
+            return
+        }
+
         val hasDeprecated = nativeClass.functions.hasDeprecated
 
         print("\n${t}static boolean isAvailable($CAPABILITIES_CLASS caps")
@@ -185,10 +185,12 @@ val GLBinding = Generator.register(object : APIBinding(
             .map(Func::name)
             .joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))
 
-        classes.forEach {
-            println(it.getCapabilityJavadoc())
-            println("${t}public final boolean ${it.capName};")
-        }
+        classes.asSequence()
+            .filter { !it.isCore }
+            .forEach {
+                println(it.getCapabilityJavadoc())
+                println("${t}public final boolean ${it.capName};")
+            }
 
         println("""
     /** When true, deprecated functions are not available. */
@@ -209,6 +211,9 @@ val GLBinding = Generator.register(object : APIBinding(
         })
 
         for (extension in classes) {
+            if (extension.isCore) {
+                continue
+            }
             val capName = extension.capName
             if (extension.hasNativeFunctions) {
                 print("\n$t$t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$packageName.${extension.className}" else extension.className}.isAvailable(this")

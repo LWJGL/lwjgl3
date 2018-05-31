@@ -55,7 +55,7 @@ public class ARBMultiBind {
      * @param count the number of bindings
      */
     public static void nglBindBuffersBase(int target, int first, int count, long buffers) {
-        GL44.nglBindBuffersBase(target, first, count, buffers);
+        GL44C.nglBindBuffersBase(target, first, count, buffers);
     }
 
     /**
@@ -79,7 +79,7 @@ public class ARBMultiBind {
      * @param buffers an array of zeros or names of existing buffers objects
      */
     public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers) {
-        GL44.glBindBuffersBase(target, first, buffers);
+        GL44C.glBindBuffersBase(target, first, buffers);
     }
 
     // --- [ glBindBuffersRange ] ---
@@ -90,7 +90,7 @@ public class ARBMultiBind {
      * @param count the number of bindings
      */
     public static void nglBindBuffersRange(int target, int first, int count, long buffers, long offsets, long sizes) {
-        GL44.nglBindBuffersRange(target, first, count, buffers, offsets, sizes);
+        GL44C.nglBindBuffersRange(target, first, count, buffers, offsets, sizes);
     }
 
     /**
@@ -122,7 +122,7 @@ public class ARBMultiBind {
      * @param sizes   an array of sizes
      */
     public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
-        GL44.glBindBuffersRange(target, first, buffers, offsets, sizes);
+        GL44C.glBindBuffersRange(target, first, buffers, offsets, sizes);
     }
 
     // --- [ glBindTextures ] ---
@@ -133,7 +133,7 @@ public class ARBMultiBind {
      * @param count the number of texture objects
      */
     public static void nglBindTextures(int first, int count, long textures) {
-        GL44.nglBindTextures(first, count, textures);
+        GL44C.nglBindTextures(first, count, textures);
     }
 
     /**
@@ -176,7 +176,7 @@ public class ARBMultiBind {
      * @param textures an array of zeros or names of existing texture objects
      */
     public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
-        GL44.glBindTextures(first, textures);
+        GL44C.glBindTextures(first, textures);
     }
 
     // --- [ glBindSamplers ] ---
@@ -187,7 +187,7 @@ public class ARBMultiBind {
      * @param count the number of sampler objects
      */
     public static void nglBindSamplers(int first, int count, long samplers) {
-        GL44.nglBindSamplers(first, count, samplers);
+        GL44C.nglBindSamplers(first, count, samplers);
     }
 
     /**
@@ -214,7 +214,7 @@ public class ARBMultiBind {
      * @param samplers an array of zeros or names of existing sampler objects
      */
     public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer samplers) {
-        GL44.glBindSamplers(first, samplers);
+        GL44C.glBindSamplers(first, samplers);
     }
 
     // --- [ glBindImageTextures ] ---
@@ -225,7 +225,7 @@ public class ARBMultiBind {
      * @param count the number of image units
      */
     public static void nglBindImageTextures(int first, int count, long textures) {
-        GL44.nglBindImageTextures(first, count, textures);
+        GL44C.nglBindImageTextures(first, count, textures);
     }
 
     /**
@@ -263,7 +263,7 @@ public class ARBMultiBind {
      * @param textures an array of zeros or names of existing texture objects
      */
     public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
-        GL44.glBindImageTextures(first, textures);
+        GL44C.glBindImageTextures(first, textures);
     }
 
     // --- [ glBindVertexBuffers ] ---
@@ -274,7 +274,7 @@ public class ARBMultiBind {
      * @param count the number of vertex buffer binding points
      */
     public static void nglBindVertexBuffers(int first, int count, long buffers, long offsets, long strides) {
-        GL44.nglBindVertexBuffers(first, count, buffers, offsets, strides);
+        GL44C.nglBindVertexBuffers(first, count, buffers, offsets, strides);
     }
 
     /**
@@ -308,37 +308,37 @@ public class ARBMultiBind {
      * @param strides an array of stride values
      */
     public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") IntBuffer strides) {
-        GL44.glBindVertexBuffers(first, buffers, offsets, strides);
+        GL44C.glBindVertexBuffers(first, buffers, offsets, strides);
     }
 
     /** Array version of: {@link #glBindBuffersBase BindBuffersBase} */
     public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers) {
-        GL44.glBindBuffersBase(target, first, buffers);
+        GL44C.glBindBuffersBase(target, first, buffers);
     }
 
     /** Array version of: {@link #glBindBuffersRange BindBuffersRange} */
     public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
-        GL44.glBindBuffersRange(target, first, buffers, offsets, sizes);
+        GL44C.glBindBuffersRange(target, first, buffers, offsets, sizes);
     }
 
     /** Array version of: {@link #glBindTextures BindTextures} */
     public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
-        GL44.glBindTextures(first, textures);
+        GL44C.glBindTextures(first, textures);
     }
 
     /** Array version of: {@link #glBindSamplers BindSamplers} */
     public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] samplers) {
-        GL44.glBindSamplers(first, samplers);
+        GL44C.glBindSamplers(first, samplers);
     }
 
     /** Array version of: {@link #glBindImageTextures BindImageTextures} */
     public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
-        GL44.glBindImageTextures(first, textures);
+        GL44C.glBindImageTextures(first, textures);
     }
 
     /** Array version of: {@link #glBindVertexBuffers BindVertexBuffers} */
     public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") int[] strides) {
-        GL44.glBindVertexBuffers(first, buffers, offsets, strides);
+        GL44C.glBindVertexBuffers(first, buffers, offsets, strides);
     }
 
 }

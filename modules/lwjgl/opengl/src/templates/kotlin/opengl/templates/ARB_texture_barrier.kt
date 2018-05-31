@@ -16,5 +16,5 @@ val ARB_texture_barrier = "ARBTextureBarrier".nativeClassGL("ARB_texture_barrier
         ${GL45.promoted}
         """
 
-    GL45 reuse "TextureBarrier"
+    GL45C reuse "TextureBarrier"
 }

@@ -52,7 +52,7 @@ public class WGLARBMakeCurrentRead {
      * <ol>
      * <li>Any pixel data that are sourced based on the value of {@link GL11#GL_READ_BUFFER READ_BUFFER}. Note, that accumulation operations use the value of {@code READ_BUFFER}, but
      * are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate {@link GL11#GL_INVALID_OPERATION INVALID_OPERATION}.</li>
-     * <li>Any depth values that are retrieved by {@link GL11#glReadPixels ReadPixels}, {@link GL11#glCopyPixels CopyPixels}, or any OpenGL extension that sources depth images from the frame buffer in the
+     * <li>Any depth values that are retrieved by {@link GL11C#glReadPixels ReadPixels}, {@link GL11#glCopyPixels CopyPixels}, or any OpenGL extension that sources depth images from the frame buffer in the
      * manner of {@code ReadPixels} and {@code CopyPixels}.</li>
      * <li>Any stencil values that are retrieved by {@code ReadPixels}, {@code CopyPixels}, or any OpenGL extension that sources stencil images from the
      * framebuffer in the manner of {@code ReadPixels} and {@code CopyPixels}.</li>

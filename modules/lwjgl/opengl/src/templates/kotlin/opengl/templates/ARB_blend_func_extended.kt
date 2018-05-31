@@ -41,6 +41,6 @@ val ARB_blend_func_extended = "ARBBlendFuncExtended".nativeClassGL("ARB_blend_fu
         "MAX_DUAL_SOURCE_DRAW_BUFFERS"..0x88FC
     )
 
-    GL33 reuse "BindFragDataLocationIndexed"
-    GL33 reuse "GetFragDataIndex"
+    GL33C reuse "BindFragDataLocationIndexed"
+    GL33C reuse "GetFragDataIndex"
 }

@@ -69,30 +69,30 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         "DOUBLE_MAT4x3"..0x8F4E
     )
 
-    GL40 reuse "Uniform1d"
-    GL40 reuse "Uniform2d"
-    GL40 reuse "Uniform3d"
-    GL40 reuse "Uniform4d"
-    GL40 reuse "Uniform1dv"
-    GL40 reuse "Uniform2dv"
-    GL40 reuse "Uniform3dv"
-    GL40 reuse "Uniform4dv"
+    GL40C reuse "Uniform1d"
+    GL40C reuse "Uniform2d"
+    GL40C reuse "Uniform3d"
+    GL40C reuse "Uniform4d"
+    GL40C reuse "Uniform1dv"
+    GL40C reuse "Uniform2dv"
+    GL40C reuse "Uniform3dv"
+    GL40C reuse "Uniform4dv"
 
-    GL40 reuse "UniformMatrix2dv"
-    GL40 reuse "UniformMatrix3dv"
-    GL40 reuse "UniformMatrix4dv"
-    GL40 reuse "UniformMatrix2x3dv"
-    GL40 reuse "UniformMatrix2x4dv"
-    GL40 reuse "UniformMatrix3x2dv"
-    GL40 reuse "UniformMatrix3x4dv"
-    GL40 reuse "UniformMatrix4x2dv"
-    GL40 reuse "UniformMatrix4x3dv"
+    GL40C reuse "UniformMatrix2dv"
+    GL40C reuse "UniformMatrix3dv"
+    GL40C reuse "UniformMatrix4dv"
+    GL40C reuse "UniformMatrix2x3dv"
+    GL40C reuse "UniformMatrix2x4dv"
+    GL40C reuse "UniformMatrix3x2dv"
+    GL40C reuse "UniformMatrix3x4dv"
+    GL40C reuse "UniformMatrix4x2dv"
+    GL40C reuse "UniformMatrix4x3dv"
 
-    GL40 reuse "GetUniformdv"
+    GL40C reuse "GetUniformdv"
 
     val program = GLuint.IN("program", "the program object to update")
 
-    var src = GL40["Uniform1d"]
+    var src = GL40C["Uniform1d"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform1dEXT",
         "DSA version of #Uniform1d().",
@@ -102,7 +102,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["x"]
     )
 
-    src = GL40["Uniform2d"]
+    src = GL40C["Uniform2d"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform2dEXT",
         "DSA version of #Uniform2d().",
@@ -113,7 +113,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["y"]
     )
 
-    src = GL40["Uniform3d"]
+    src = GL40C["Uniform3d"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform3dEXT",
         "DSA version of #Uniform3d().",
@@ -125,7 +125,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["z"]
     )
 
-    src = GL40["Uniform4d"]
+    src = GL40C["Uniform4d"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform4dEXT",
         "DSA version of #Uniform4d().",
@@ -138,7 +138,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["w"]
     )
 
-    src = GL40["Uniform1dv"]
+    src = GL40C["Uniform1dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform1dvEXT",
         "DSA version of #Uniform1dv().",
@@ -149,7 +149,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["Uniform2dv"]
+    src = GL40C["Uniform2dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform2dvEXT",
         "DSA version of #Uniform2dv().",
@@ -160,7 +160,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["Uniform3dv"]
+    src = GL40C["Uniform3dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform3dvEXT",
         "DSA version of #Uniform3dv().",
@@ -171,7 +171,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["Uniform4dv"]
+    src = GL40C["Uniform4dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniform4dvEXT",
         "DSA version of #Uniform4dv().",
@@ -182,7 +182,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix2dv"]
+    src = GL40C["UniformMatrix2dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix2dvEXT",
         "DSA version of #UniformMatrix2dv().",
@@ -194,7 +194,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix3dv"]
+    src = GL40C["UniformMatrix3dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix3dvEXT",
         "DSA version of #UniformMatrix3dv().",
@@ -206,7 +206,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix4dv"]
+    src = GL40C["UniformMatrix4dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix4dvEXT",
         "DSA version of #UniformMatrix4dv().",
@@ -218,7 +218,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix2x3dv"]
+    src = GL40C["UniformMatrix2x3dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix2x3dvEXT",
         "DSA version of #UniformMatrix2x3dv().",
@@ -230,7 +230,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix2x4dv"]
+    src = GL40C["UniformMatrix2x4dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix2x4dvEXT",
         "DSA version of #UniformMatrix2x4dv().",
@@ -242,7 +242,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix3x2dv"]
+    src = GL40C["UniformMatrix3x2dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix3x2dvEXT",
         "DSA version of #UniformMatrix3x2dv().",
@@ -254,7 +254,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix3x4dv"]
+    src = GL40C["UniformMatrix3x4dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix3x4dvEXT",
         "DSA version of #UniformMatrix3x4dv().",
@@ -266,7 +266,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix4x2dv"]
+    src = GL40C["UniformMatrix4x2dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix4x2dvEXT",
         "DSA version of #UniformMatrix4x2dv().",
@@ -278,7 +278,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         src["value"]
     )
 
-    src = GL40["UniformMatrix4x3dv"]
+    src = GL40C["UniformMatrix4x3dv"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
         "ProgramUniformMatrix4x3dvEXT",
         "DSA version of #UniformMatrix4x3dv().",

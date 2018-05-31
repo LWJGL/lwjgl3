@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The raster brightness of a point is a function of the point area, point color, point transparency, and the response of the display's electron gun and
  * phosphor. The point area and the point transparency are derived from the point size, currently provided with the {@code size} parameter of
- * {@link GL11#glPointSize PointSize}.</p>
+ * {@link GL11C#glPointSize PointSize}.</p>
  * 
  * <p>The primary motivation is to allow the size of a point to be affected by distance attenuation. When distance attenuation has an effect, the final point
  * size decreases as the distance of the point from the eye increases.</p>

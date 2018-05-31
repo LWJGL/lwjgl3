@@ -6,12 +6,14 @@ package opengl.templates
 
 import org.lwjgl.generator.*
 import opengl.*
-import opengl.BufferType.*
 
 val GL42 = "GL42".nativeClassGL("GL42") {
+    extends = GL41
     documentation =
         """
-        The core OpenGL 4.2 functionality. OpenGL 4.2 implementations support revision 4.20 of the OpenGL Shading Language.
+        The OpenGL functionality up to version 4.2. Includes the deprecated symbols of the Compatibility Profile.
+
+        OpenGL 4.2 implementations support revision 4.20 of the OpenGL Shading Language.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -91,7 +93,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "ATOMIC_COUNTER_BUFFER_SIZE"..0x92C3
     )
 
-    val AtomicCounterBufferParameters = IntConstant(
+    IntConstant(
         "Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
         "ATOMIC_COUNTER_BUFFER_DATA_SIZE"..0x92C4,
@@ -102,7 +104,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER"..0x92C9,
         "ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER"..0x92CA,
         "ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER"..0x92CB
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
@@ -141,15 +143,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "UNSIGNED_INT_ATOMIC_COUNTER"..0x92DB
     )
 
-    void(
-        "GetActiveAtomicCounterBufferiv",
-        "Obtains information about the set of active atomic counter buffers for a program.",
-
-        GLuint.IN("program", "the name of a program object for which the command #LinkProgram() has been issued in the past"),
-        GLuint.IN("bufferIndex", "the index of an active atomic counter buffer"),
-        GLenum.IN("pname", "the parameter to query", AtomicCounterBufferParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
-    )
+    GL42C reuse "GetActiveAtomicCounterBufferiv"
 
     // ARB_texture_storage
 
@@ -159,105 +153,20 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "TEXTURE_IMMUTABLE_FORMAT"..0x912F
     )
 
-    void(
-        "TexStorage1D",
-        "Simultaneously specifies storage for all levels of a one-dimensional texture.",
-
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
-        GLsizei.IN("levels", "the number of texture levels"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels")
-    )
-
-    void(
-        "TexStorage2D",
-        "Simultaneously specifies storage for all levels of a two-dimensional or one-dimensional array texture.",
-
-        GLenum.IN("target", "the target of the operation", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
-        GLsizei.IN("levels", "the number of texture levels"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels"),
-        GLsizei.IN("height", "the height of the texture, in texels")
-    )
-
-    void(
-        "TexStorage3D",
-        "Simultaneously specifies storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture.",
-
-        GLenum.IN("target", "the target of the operation", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
-        GLsizei.IN("levels", "the number of texture levels"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels"),
-        GLsizei.IN("height", "the height of the texture, in texels"),
-        GLsizei.IN("depth", "the depth of the texture, in texels")
-    )
+    GL42C reuse "TexStorage1D"
+    GL42C reuse "TexStorage2D"
+    GL42C reuse "TexStorage3D"
 
     // ARB_transform_feedback_instanced
 
-    void(
-        "DrawTransformFeedbackInstanced",
-        "Renders multiple instances of primitives using a count derived from a transform feedback object.",
-
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("id", "the name of a transform feedback object from which to retrieve a primitive count"),
-        GLsizei.IN("primcount", "the number of instances of the geometry to render")
-    )
-
-    void(
-        "DrawTransformFeedbackStreamInstanced",
-        "Renders multiple instances of primitives using a count derived from a specifed stream of a transform feedback object.",
-
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("id", "the name of a transform feedback object from which to retrieve a primitive count"),
-        GLuint.IN("stream", "the index of the transform feedback stream from which to retrieve a primitive count"),
-        GLsizei.IN("primcount", "the number of instances of the geometry to render")
-    )
+    GL42C reuse "DrawTransformFeedbackInstanced"
+    GL42C reuse "DrawTransformFeedbackStreamInstanced"
 
     // ARB_base_instance
 
-    void(
-        "DrawArraysInstancedBaseInstance",
-        "Draws multiple instances of a range of elements with an offset applied to instanced attributes.",
-
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLint.IN("first", "the starting index in the enabled arrays"),
-        GLsizei.IN("count", "the number of indices to be rendered"),
-        GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
-        GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
-    )
-
-    void(
-        "DrawElementsInstancedBaseInstance",
-        "Draws multiple instances of a set of elements with an offset applied to instanced attributes",
-
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
-            "type",
-            "the type of the values in {@code indices}",
-            "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
-        ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
-        GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
-    )
-
-    void(
-        "DrawElementsInstancedBaseVertexBaseInstance",
-        "Renders multiple instances of a set of primitives from array data with a per-element offset.",
-
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
-            "type",
-            "the type of the values in {@code indices}",
-            "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
-        ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
-        GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays"),
-        GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
-    )
+    GL42C reuse "DrawArraysInstancedBaseInstance"
+    GL42C reuse "DrawElementsInstancedBaseInstance"
+    GL42C reuse "DrawElementsInstancedBaseVertexBaseInstance"
 
     // ARB_shader_image_load_store
 
@@ -286,7 +195,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "IMAGE_BINDING_FORMAT"..0x906E
     )
 
-    val MemoryBarriers = IntConstant(
+    IntConstant(
         "Accepted by the {@code barriers} parameter of MemoryBarrier.",
 
         "VERTEX_ATTRIB_ARRAY_BARRIER_BIT"..0x00000001,
@@ -302,7 +211,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "TRANSFORM_FEEDBACK_BARRIER_BIT"..0x00000800,
         "ATOMIC_COUNTER_BARRIER_BIT"..0x00001000,
         "ALL_BARRIER_BITS"..0xFFFFFFFF.i
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Returned by the {@code type} parameter of GetActiveUniform.",
@@ -358,25 +267,8 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "IMAGE_FORMAT_COMPATIBILITY_BY_CLASS"..0x90C9
     )
 
-    void(
-        "BindImageTexture",
-        "Binds a level of a texture to an image unit.",
-
-        GLuint.IN("unit", "the index of the image unit to which to bind the texture"),
-        GLuint.IN("texture", "the name of the texture to bind to the image unit"),
-        GLint.IN("level", "the level of the texture that is to be bound"),
-        GLboolean.IN("layered", "whether a layered texture binding is to be established"),
-        GLint.IN("layer", "if {@code layered} is false, specifies the layer of texture to be bound to the image unit. Ignored otherwise."),
-        GLenum.IN("access", "a token indicating the type of access that will be performed on the image"),
-        GLenum.IN("format", "the format that the elements of the image will be treated as for the purposes of formatted stores")
-    )
-
-    void(
-        "MemoryBarrier",
-        "Defines a barrier ordering memory transactions.",
-
-        GLbitfield.IN("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers + " #SHADER_STORAGE_BARRIER_BIT", LinkMode.BITFIELD)
-    )
+    GL42C reuse "BindImageTexture"
+    GL42C reuse "MemoryBarrier"
 
     // ARB_internal_format_query
 
@@ -386,23 +278,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "NUM_SAMPLE_COUNTS"..0x9380
     )
 
-    void(
-        "GetInternalformativ",
-        "Retrieves information about implementation-dependent support for internal formats.",
-
-        GLenum.IN(
-            "target",
-            "the usage of the internal format",
-            """
-            #TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS #RENDERBUFFER #TEXTURE_BUFFER #TEXTURE_2D_MULTISAMPLE
-            #TEXTURE_2D_MULTISAMPLE_ARRAY
-            """
-        ),
-        GLenum.IN("internalformat", "the internal format about which to retrieve information"),
-        GLenum.IN("pname", "the type of information to query"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
-        ReturnParam..GLint.p.OUT("params", "a variable into which to write the retrieved information")
-    )
+    GL42C reuse "GetInternalformativ"
 
     // ARB_map_buffer_alignment
 
@@ -411,5 +287,4 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
         "MIN_MAP_BUFFER_ALIGNMENT"..0x90BC
     )
-
 }

@@ -1126,7 +1126,7 @@ public class ARBImaging {
      * @param alpha the alpha color component
      */
     public static void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha) {
-        GL14.glBlendColor(red, green, blue, alpha);
+        GL14C.glBlendColor(red, green, blue, alpha);
     }
 
     // --- [ glBlendEquation ] ---
@@ -1134,10 +1134,10 @@ public class ARBImaging {
     /**
      * Controls the blend equations used for per-fragment blending.
      *
-     * @param mode the blend equation. One of:<br><table><tr><td>{@link GL14#GL_FUNC_ADD FUNC_ADD}</td><td>{@link GL14#GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link GL14#GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link GL14#GL_MIN MIN}</td><td>{@link GL14#GL_MAX MAX}</td></tr></table>
+     * @param mode the blend equation. One of:<br><table><tr><td>{@link GL14C#GL_FUNC_ADD FUNC_ADD}</td><td>{@link GL14C#GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link GL14C#GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link GL14C#GL_MIN MIN}</td><td>{@link GL14C#GL_MAX MAX}</td></tr></table>
      */
     public static void glBlendEquation(@NativeType("GLenum") int mode) {
-        GL14.glBlendEquation(mode);
+        GL14C.glBlendEquation(mode);
     }
 
     /** Array version of: {@link #glColorTable ColorTable} */

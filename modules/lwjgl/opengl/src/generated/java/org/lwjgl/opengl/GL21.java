@@ -10,11 +10,11 @@ import java.nio.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The core OpenGL 2.1 functionality. OpenGL 2.1 implementations must support at least revision 1.20 of the OpenGL Shading Language.
+ * The OpenGL functionality up to version 2.1. Includes the deprecated symbols of the Compatibility Profile.
+ * 
+ * <p>OpenGL 2.1 implementations must support at least revision 1.20 of the OpenGL Shading Language.</p>
  * 
  * <p>Extensions promoted to core in this release:</p>
  * 
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB.txt">EXT_texture_sRGB</a></li>
  * </ul>
  */
-public class GL21 {
+public class GL21 extends GL20 {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_CURRENT_RASTER_SECONDARY_COLOR = 0x845F;
@@ -85,7 +85,9 @@ public class GL21 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix2x3fv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix2x3fv(int location, int count, boolean transpose, long value) {
+        GL21C.nglUniformMatrix2x3fv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.
@@ -97,7 +99,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
-        nglUniformMatrix2x3fv(location, value.remaining() / 6, transpose, memAddress(value));
+        GL21C.glUniformMatrix2x3fv(location, transpose, value);
     }
 
     // --- [ glUniformMatrix3x2fv ] ---
@@ -107,7 +109,9 @@ public class GL21 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix3x2fv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix3x2fv(int location, int count, boolean transpose, long value) {
+        GL21C.nglUniformMatrix3x2fv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.
@@ -119,7 +123,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
-        nglUniformMatrix3x2fv(location, value.remaining() / 6, transpose, memAddress(value));
+        GL21C.glUniformMatrix3x2fv(location, transpose, value);
     }
 
     // --- [ glUniformMatrix2x4fv ] ---
@@ -129,7 +133,9 @@ public class GL21 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix2x4fv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix2x4fv(int location, int count, boolean transpose, long value) {
+        GL21C.nglUniformMatrix2x4fv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.
@@ -141,7 +147,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
-        nglUniformMatrix2x4fv(location, value.remaining() >> 3, transpose, memAddress(value));
+        GL21C.glUniformMatrix2x4fv(location, transpose, value);
     }
 
     // --- [ glUniformMatrix4x2fv ] ---
@@ -151,7 +157,9 @@ public class GL21 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix4x2fv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix4x2fv(int location, int count, boolean transpose, long value) {
+        GL21C.nglUniformMatrix4x2fv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.
@@ -163,7 +171,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
-        nglUniformMatrix4x2fv(location, value.remaining() >> 3, transpose, memAddress(value));
+        GL21C.glUniformMatrix4x2fv(location, transpose, value);
     }
 
     // --- [ glUniformMatrix3x4fv ] ---
@@ -173,7 +181,9 @@ public class GL21 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix3x4fv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix3x4fv(int location, int count, boolean transpose, long value) {
+        GL21C.nglUniformMatrix3x4fv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.
@@ -185,7 +195,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
-        nglUniformMatrix3x4fv(location, value.remaining() / 12, transpose, memAddress(value));
+        GL21C.glUniformMatrix3x4fv(location, transpose, value);
     }
 
     // --- [ glUniformMatrix4x3fv ] ---
@@ -195,7 +205,9 @@ public class GL21 {
      *
      * @param count the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices.
      */
-    public static native void nglUniformMatrix4x3fv(int location, int count, boolean transpose, long value);
+    public static void nglUniformMatrix4x3fv(int location, int count, boolean transpose, long value) {
+        GL21C.nglUniformMatrix4x3fv(location, count, transpose, value);
+    }
 
     /**
      * Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.
@@ -207,7 +219,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
-        nglUniformMatrix4x3fv(location, value.remaining() / 12, transpose, memAddress(value));
+        GL21C.glUniformMatrix4x3fv(location, transpose, value);
     }
 
     /**
@@ -216,11 +228,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
-        long __functionAddress = GL.getICD().glUniformMatrix2x3fv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length / 6, transpose, value);
+        GL21C.glUniformMatrix2x3fv(location, transpose, value);
     }
 
     /**
@@ -229,11 +237,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
-        long __functionAddress = GL.getICD().glUniformMatrix3x2fv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length / 6, transpose, value);
+        GL21C.glUniformMatrix3x2fv(location, transpose, value);
     }
 
     /**
@@ -242,11 +246,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
-        long __functionAddress = GL.getICD().glUniformMatrix2x4fv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length >> 3, transpose, value);
+        GL21C.glUniformMatrix2x4fv(location, transpose, value);
     }
 
     /**
@@ -255,11 +255,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
-        long __functionAddress = GL.getICD().glUniformMatrix4x2fv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length >> 3, transpose, value);
+        GL21C.glUniformMatrix4x2fv(location, transpose, value);
     }
 
     /**
@@ -268,11 +264,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
-        long __functionAddress = GL.getICD().glUniformMatrix3x4fv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length / 12, transpose, value);
+        GL21C.glUniformMatrix3x4fv(location, transpose, value);
     }
 
     /**
@@ -281,11 +273,7 @@ public class GL21 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
-        long __functionAddress = GL.getICD().glUniformMatrix4x3fv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length / 12, transpose, value);
+        GL21C.glUniformMatrix4x3fv(location, transpose, value);
     }
 
 }

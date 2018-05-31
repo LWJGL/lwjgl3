@@ -76,7 +76,7 @@ public class ARBSparseTexture {
      * by TexPageCommitmentARB and such levels may be partially populated. When the mipmap chain reaches a level that is not an integer multiple of the virtual
      * page size in any dimension, padding and memory layout considerations may make it impossible to treat that level and subsequent smaller ones as partially
      * populated. The set of levels that can be partially populated is implementation-dependent. The total number of levels that may be partially populated may
-     * be queried by calling {@link GL11#glGetTexParameteriv GetTexParameteriv} with the {@code pname} {@link #GL_NUM_SPARSE_LEVELS_ARB NUM_SPARSE_LEVELS_ARB}.</p>
+     * be queried by calling {@link GL11C#glGetTexParameteriv GetTexParameteriv} with the {@code pname} {@link #GL_NUM_SPARSE_LEVELS_ARB NUM_SPARSE_LEVELS_ARB}.</p>
      * 
      * <p>The collection of texture levels that may not be partially populated, if any, consists of levels {@link #GL_NUM_SPARSE_LEVELS_ARB NUM_SPARSE_LEVELS_ARB} and higher, and is referred to
      * as the mipmap 'tail'. The levels comprising the tail are made resident or non-resident as a unit. The tail is resident if and only if

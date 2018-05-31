@@ -8,9 +8,12 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val GL33 = "GL33".nativeClassGL("GL33") {
+    extends = GL32
     documentation =
         """
-        The core OpenGL 3.3 functionality. OpenGL 3.3 implementations support revision 3.30 of the OpenGL Shading Language.
+        The OpenGL functionality up to version 3.3. Includes the deprecated symbols of the Compatibility Profile.
+
+        OpenGL 3.3 implementations support revision 3.30 of the OpenGL Shading Language.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -46,23 +49,8 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "MAX_DUAL_SOURCE_DRAW_BUFFERS"..0x88FC
     )
 
-    void(
-        "BindFragDataLocationIndexed",
-        "Binds a user-defined varying out variable to a fragment shader color number and index.",
-
-        GLuint.IN("program", "the name of the program containing varying out variable whose binding to modify"),
-        GLuint.IN("colorNumber", "the color number to bind the user-defined varying out variable to"),
-        GLuint.IN("index", "the index of the color input to bind the user-defined varying out variable to"),
-        GLcharASCII.const.p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
-    )
-
-    GLint(
-        "GetFragDataIndex",
-        "Queries the bindings of color indices to user-defined varying out variables.",
-
-        GLuint.IN("program", "the name of the program containing varying out variable whose binding to query"),
-        GLcharASCII.const.p.IN("name", "the name of the user-defined varying out variable whose index to query")
-    )
+    GL33C reuse "BindFragDataLocationIndexed"
+    GL33C reuse "GetFragDataIndex"
 
     // ARB_occlusion_query2
 
@@ -80,132 +68,20 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "SAMPLER_BINDING"..0x8919
     )
 
-    void(
-        "GenSamplers",
-        "Generates sampler object names.",
-
-        AutoSize("samplers")..GLsizei.IN("count", "the number of sampler object names to generate"),
-        ReturnParam..GLuint.p.OUT("samplers", "a buffer in which the generated sampler object names are stored")
-    )
-
-    void(
-        "DeleteSamplers",
-        "Deletes named sampler objects.",
-
-        AutoSize("samplers")..GLsizei.IN("count", "the number of sampler objects to be deleted"),
-        SingleValue("sampler")..GLuint.const.p.IN("samplers", "an array of sampler objects to be deleted")
-    )
-
-    GLboolean(
-        "IsSampler",
-        "Determines if a name corresponds to a sampler object.",
-
-        GLuint.IN("sampler", "a value that may be the name of a sampler object")
-    )
-
-    void(
-        "BindSampler",
-        "Binds a named sampler to a texturing target.",
-
-        GLuint.IN("unit", "the index of the texture unit to which the sampler is bound"),
-        GLuint.IN("sampler", "the name of a sampler")
-    )
-
-    val SamplerParameters =
-        """
-        #TEXTURE_WRAP_S #TEXTURE_WRAP_T #TEXTURE_WRAP_R #TEXTURE_MIN_FILTER #TEXTURE_MAG_FILTER #TEXTURE_MIN_LOD
-        #TEXTURE_MAX_LOD #TEXTURE_LOD_BIAS #TEXTURE_COMPARE_MODE #TEXTURE_COMPARE_FUNC
-        """
-
-    void(
-        "SamplerParameteri",
-        "Set the integer value of a sampler parameter.",
-
-        GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-        GLenum.IN("pname", "the symbolic name of a single-valued sampler parameter", SamplerParameters),
-        GLint.IN("param", "the value of {@code pname}")
-    )
-
-    void(
-        "SamplerParameterf",
-        "Float version of #SamplerParameteri().",
-
-        GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-        GLenum.IN("pname", "the symbolic name of a single-valued sampler parameter"),
-        GLfloat.IN("param", "the value of {@code pname}")
-    )
-
-    void(
-        "SamplerParameteriv",
-        "Pointer version of #SamplerParameteri().",
-
-        GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter", "#TEXTURE_BORDER_COLOR $SamplerParameters"),
-        Check(1)..GLint.const.p.IN("params", "an array where the value or values of {@code pname} are stored")
-    )
-
-    void(
-        "SamplerParameterfv",
-        "Float version of #SamplerParameteriv().",
-
-        GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-        Check(1)..GLfloat.const.p.IN("params", "an array where the value or values of {@code pname} are stored")
-    )
-
-    void(
-        "SamplerParameterIiv",
-        "Pure integer version of #SamplerParameteriv().",
-
-        GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-        Check(1)..GLint.const.p.IN("params", "an array where the value or values of {@code pname} are stored")
-    )
-
-    void(
-        "SamplerParameterIuiv",
-        "Unsigned pure integer version of #SamplerParameteriv().",
-
-        GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-        Check(1)..GLuint.const.p.IN("params", "an array where the value or values of {@code pname} are stored")
-    )
-
-    void(
-        "GetSamplerParameteriv",
-        "Return the integer value(s) of a sampler parameter.",
-
-        GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter", "$SamplerParameters, #TEXTURE_BORDER_COLOR"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the sampler parameters")
-    )
-
-    void(
-        "GetSamplerParameterfv",
-        "Float version of #GetSamplerParameteriv().",
-
-        GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "the sampler parameters")
-    )
-
-    void(
-        "GetSamplerParameterIiv",
-        "Pure integer version of #GetSamplerParameteriv().",
-
-        GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the sampler parameters")
-    )
-
-    void(
-        "GetSamplerParameterIuiv",
-        "Unsigned pure integer version of #GetSamplerParameteriv().",
-
-        GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
-        GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "the sampler parameters")
-    )
+    GL33C reuse "GenSamplers"
+    GL33C reuse "DeleteSamplers"
+    GL33C reuse "IsSampler"
+    GL33C reuse "BindSampler"
+    GL33C reuse "SamplerParameteri"
+    GL33C reuse "SamplerParameterf"
+    GL33C reuse "SamplerParameteriv"
+    GL33C reuse "SamplerParameterfv"
+    GL33C reuse "SamplerParameterIiv"
+    GL33C reuse "SamplerParameterIuiv"
+    GL33C reuse "GetSamplerParameteriv"
+    GL33C reuse "GetSamplerParameterfv"
+    GL33C reuse "GetSamplerParameterIiv"
+    GL33C reuse "GetSamplerParameterIuiv"
 
     // ARB_texture_rgb10_a2ui
 
@@ -252,31 +128,9 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "TIMESTAMP"..0x8E28
     )
 
-    void(
-        "QueryCounter",
-        "Records the GL time into a query object after all previous commands have reached the GL server but have not yet necessarily executed.",
-
-        GLuint.IN("id", "the name of a query object into which to record the GL time"),
-        GLenum.IN("target", "the counter to query", "#TIMESTAMP")
-    )
-
-    void(
-        "GetQueryObjecti64v",
-        "Returns the 64bit integer value of query object parameter.",
-
-        GLuint.IN("id", "the name of a query object"),
-        GLenum.IN("pname", "the symbolic name of a query object parameter", "#QUERY_RESULT #QUERY_RESULT_AVAILABLE"),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "the requested data")
-    )
-
-    void(
-        "GetQueryObjectui64v",
-        "Unsigned version of #GetQueryObjecti64v().",
-
-        GLuint.IN("id", "the name of a query object"),
-        GLenum.IN("pname", "the symbolic name of a query object parameter"),
-        Check(1)..ReturnParam..GLuint64.p.OUT("params", "the requested data")
-    )
+    GL33C reuse "QueryCounter"
+    GL33C reuse "GetQueryObjecti64v"
+    GL33C reuse "GetQueryObjectui64v"
 
     // ARB_instanced_arrays
 
@@ -286,13 +140,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "VERTEX_ATTRIB_ARRAY_DIVISOR"..0x88FE
     )
 
-    void(
-        "VertexAttribDivisor",
-        "Modifies the rate at which generic vertex attributes advance during instanced rendering.",
-
-        GLuint.IN("index", "the index of the generic vertex attribute"),
-        GLuint.IN("divisor", "the number of instances that will pass between updates of the generic attribute at slot {@code index}")
-    )
+    GL33C reuse "VertexAttribDivisor"
 
     // ARB_vertex_type_2_10_10_10_rev
 
@@ -353,17 +201,13 @@ val GL33 = "GL33".nativeClassGL("GL33") {
     DeprecatedGL..void("SecondaryColorP3ui", "Packed component version of #SecondaryColor3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
     DeprecatedGL..void("SecondaryColorP3uiv", "Pointer version of #SecondaryColorP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("color", packedValue))
 
-    val vertexAttribIndex = "the index of the generic vertex attribute to be modified"
-    val vertexAttribNormalized = "whether values should be normalized or cast directly to floating-point"
+    GL33C reuse "VertexAttribP1ui"
+    GL33C reuse "VertexAttribP2ui"
+    GL33C reuse "VertexAttribP3ui"
+    GL33C reuse "VertexAttribP4ui"
 
-    void("VertexAttribP1ui", "Packed component version of #VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-    void("VertexAttribP2ui", "Packed component version of #VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-    void("VertexAttribP3ui", "Packed component version of #VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-    void("VertexAttribP4ui", "Packed component version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-
-    void("VertexAttribP1uiv", "Pointer version of #VertexAttribP1ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), Check(1)..GLuint.const.p.IN("value", packedValue))
-    void("VertexAttribP2uiv", "Pointer version of #VertexAttribP2ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), Check(1)..GLuint.const.p.IN("value", packedValue))
-    void("VertexAttribP3uiv", "Pointer version of #VertexAttribP3ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), Check(1)..GLuint.const.p.IN("value", packedValue))
-    void("VertexAttribP4uiv", "Pointer version of #VertexAttribP4ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), Check(1)..GLuint.const.p.IN("value", packedValue))
-
+    GL33C reuse "VertexAttribP1uiv"
+    GL33C reuse "VertexAttribP2uiv"
+    GL33C reuse "VertexAttribP3uiv"
+    GL33C reuse "VertexAttribP4uiv"
 }

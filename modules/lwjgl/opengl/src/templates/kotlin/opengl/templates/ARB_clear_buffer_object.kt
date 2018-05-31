@@ -23,8 +23,8 @@ val ARB_clear_buffer_object = "ARBClearBufferObject".nativeClassGL("ARB_clear_bu
         Requires ${GL15.core}. ${GL43.promoted}
         """
 
-    val ClearBufferData = GL43 reuse "ClearBufferData"
-    val ClearBufferSubData = GL43 reuse "ClearBufferSubData"
+    val ClearBufferData = GL43C reuse "ClearBufferData"
+    val ClearBufferSubData = GL43C reuse "ClearBufferSubData"
 
     DependsOn("GL_EXT_direct_state_access")..void(
         "ClearNamedBufferDataEXT",

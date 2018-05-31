@@ -44,13 +44,13 @@ val ARB_transform_feedback2 = "ARBTransformFeedback2".nativeClassGL("ARB_transfo
         "TRANSFORM_FEEDBACK_BINDING"..0x8E25
     )
 
-    GL40 reuse "BindTransformFeedback"
-    GL40 reuse "DeleteTransformFeedbacks"
-    GL40 reuse "GenTransformFeedbacks"
-    GL40 reuse "IsTransformFeedback"
+    GL40C reuse "BindTransformFeedback"
+    GL40C reuse "DeleteTransformFeedbacks"
+    GL40C reuse "GenTransformFeedbacks"
+    GL40C reuse "IsTransformFeedback"
 
-    GL40 reuse "PauseTransformFeedback"
-    GL40 reuse "ResumeTransformFeedback"
+    GL40C reuse "PauseTransformFeedback"
+    GL40C reuse "ResumeTransformFeedback"
 
-    GL40 reuse "DrawTransformFeedback"
+    GL40C reuse "DrawTransformFeedback"
 }

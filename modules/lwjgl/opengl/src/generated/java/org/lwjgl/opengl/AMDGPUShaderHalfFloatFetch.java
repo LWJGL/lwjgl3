@@ -15,7 +15,7 @@ package org.lwjgl.opengl;
  */
 public final class AMDGPUShaderHalfFloatFetch {
 
-    /** Returned by the {@code type} parameter of {@link GL20#glGetActiveUniform GetActiveUniform} and {@link GL43#glGetProgramResourceiv GetProgramResourceiv}. */
+    /** Returned by the {@code type} parameter of {@link GL20C#glGetActiveUniform GetActiveUniform} and {@link GL43C#glGetProgramResourceiv GetProgramResourceiv}. */
     public static final int
         GL_FLOAT16_SAMPLER_1D_AMD                    = 0x91CE,
         GL_FLOAT16_SAMPLER_2D_AMD                    = 0x91CF,

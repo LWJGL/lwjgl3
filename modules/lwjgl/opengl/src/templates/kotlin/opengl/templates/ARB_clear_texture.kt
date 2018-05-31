@@ -36,6 +36,6 @@ val ARB_clear_texture = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
         "CLEAR_TEXTURE"..0x9365
     )
 
-    GL44 reuse "ClearTexSubImage"
-    GL44 reuse "ClearTexImage"
+    GL44C reuse "ClearTexSubImage"
+    GL44C reuse "ClearTexImage"
 }

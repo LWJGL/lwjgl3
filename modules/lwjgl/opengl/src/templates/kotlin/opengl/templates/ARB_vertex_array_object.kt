@@ -28,8 +28,8 @@ val ARB_vertex_array_object = "ARBVertexArrayObject".nativeClassGL("ARB_vertex_a
         "VERTEX_ARRAY_BINDING"..0x85B5
     )
 
-    GL30 reuse "BindVertexArray"
-    GL30 reuse "DeleteVertexArrays"
-    GL30 reuse "GenVertexArrays"
-    GL30 reuse "IsVertexArray"
+    GL30C reuse "BindVertexArray"
+    GL30C reuse "DeleteVertexArrays"
+    GL30C reuse "GenVertexArrays"
+    GL30C reuse "IsVertexArray"
 }

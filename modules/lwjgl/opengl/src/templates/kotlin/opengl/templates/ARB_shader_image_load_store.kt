@@ -135,6 +135,6 @@ val ARB_shader_image_load_store = "ARBShaderImageLoadStore".nativeClassGL("ARB_s
         "IMAGE_FORMAT_COMPATIBILITY_BY_CLASS"..0x90C9
     )
 
-    GL42 reuse "BindImageTexture"
-    GL42 reuse "MemoryBarrier"
+    GL42C reuse "BindImageTexture"
+    GL42C reuse "MemoryBarrier"
 }

@@ -55,7 +55,7 @@ public class ARBBlendFuncExtended {
 
     /** Unsafe version of: {@link #glBindFragDataLocationIndexed BindFragDataLocationIndexed} */
     public static void nglBindFragDataLocationIndexed(int program, int colorNumber, int index, long name) {
-        GL33.nglBindFragDataLocationIndexed(program, colorNumber, index, name);
+        GL33C.nglBindFragDataLocationIndexed(program, colorNumber, index, name);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ARBBlendFuncExtended {
      * @param name        the name of the user-defined varying out variable whose binding to modify
      */
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") ByteBuffer name) {
-        GL33.glBindFragDataLocationIndexed(program, colorNumber, index, name);
+        GL33C.glBindFragDataLocationIndexed(program, colorNumber, index, name);
     }
 
     /**
@@ -79,14 +79,14 @@ public class ARBBlendFuncExtended {
      * @param name        the name of the user-defined varying out variable whose binding to modify
      */
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
-        GL33.glBindFragDataLocationIndexed(program, colorNumber, index, name);
+        GL33C.glBindFragDataLocationIndexed(program, colorNumber, index, name);
     }
 
     // --- [ glGetFragDataIndex ] ---
 
     /** Unsafe version of: {@link #glGetFragDataIndex GetFragDataIndex} */
     public static int nglGetFragDataIndex(int program, long name) {
-        return GL33.nglGetFragDataIndex(program, name);
+        return GL33C.nglGetFragDataIndex(program, name);
     }
 
     /**
@@ -97,7 +97,7 @@ public class ARBBlendFuncExtended {
      */
     @NativeType("GLint")
     public static int glGetFragDataIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") ByteBuffer name) {
-        return GL33.glGetFragDataIndex(program, name);
+        return GL33C.glGetFragDataIndex(program, name);
     }
 
     /**
@@ -108,7 +108,7 @@ public class ARBBlendFuncExtended {
      */
     @NativeType("GLint")
     public static int glGetFragDataIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
-        return GL33.glGetFragDataIndex(program, name);
+        return GL33C.glGetFragDataIndex(program, name);
     }
 
 }

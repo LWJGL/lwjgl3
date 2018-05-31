@@ -53,7 +53,7 @@ public class ARBES31Compatibility {
     // --- [ glMemoryBarrierByRegion ] ---
 
     /**
-     * Behaves like {@link GL42#glMemoryBarrier MemoryBarrier}, with two differences:
+     * Behaves like {@link GL42C#glMemoryBarrier MemoryBarrier}, with two differences:
      * 
      * <p>First, it narrows the region under consideration so that only reads/writes of prior fragment shaders that are invoked for a smaller region of the
      * framebuffer will be completed/reflected prior to subsequent reads/write of following fragment shaders. The size of the region is implementation
@@ -62,15 +62,15 @@ public class ARBES31Compatibility {
      * <p>Second, it only applies to memory transactions that may be read by or written by a fragment shader.</p>
      * 
      * <p>When barriers is {@link GL42#GL_ALL_BARRIER_BITS ALL_BARRIER_BITS}, shader memory accesses will be synchronized relative to all these barrier bits, but not to other
-     * barrier bits specific to {@link GL42#glMemoryBarrier MemoryBarrier}. This implies that reads/writes for scatter/gather-like algorithms may or may not be
+     * barrier bits specific to {@link GL42C#glMemoryBarrier MemoryBarrier}. This implies that reads/writes for scatter/gather-like algorithms may or may not be
      * completed/reflected after a MemoryBarrierByRegion command. However, for uses such as deferred shading, where a linked list of visible
      * surfaces with the head at a framebuffer address may be constructed, and the entirety of the list is only dependent on previous executions at that
-     * framebuffer address, MemoryBarrierByRegion may be significantly more efficient than {@link GL42#glMemoryBarrier MemoryBarrier}.</p>
+     * framebuffer address, MemoryBarrierByRegion may be significantly more efficient than {@link GL42C#glMemoryBarrier MemoryBarrier}.</p>
      *
      * @param barriers the barriers to insert. One or more of:<br><table><tr><td>{@link GL42#GL_ATOMIC_COUNTER_BARRIER_BIT ATOMIC_COUNTER_BARRIER_BIT}</td><td>{@link GL42#GL_FRAMEBUFFER_BARRIER_BIT FRAMEBUFFER_BARRIER_BIT}</td><td>{@link GL42#GL_SHADER_IMAGE_ACCESS_BARRIER_BIT SHADER_IMAGE_ACCESS_BARRIER_BIT}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BARRIER_BIT SHADER_STORAGE_BARRIER_BIT}</td><td>{@link GL42#GL_TEXTURE_FETCH_BARRIER_BIT TEXTURE_FETCH_BARRIER_BIT}</td><td>{@link GL42#GL_UNIFORM_BARRIER_BIT UNIFORM_BARRIER_BIT}</td></tr></table>
      */
     public static void glMemoryBarrierByRegion(@NativeType("GLbitfield") int barriers) {
-        GL45.glMemoryBarrierByRegion(barriers);
+        GL45C.glMemoryBarrierByRegion(barriers);
     }
 
 }

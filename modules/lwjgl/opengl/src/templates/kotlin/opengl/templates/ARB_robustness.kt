@@ -195,7 +195,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
         PIXEL_PACK_BUFFER..GLubyte.p.OUT("pattern", "a buffer in which to place the returned pattern")
     )
 
-    src = GL11["GetTexImage"]
+    src = GL11C["GetTexImage"]
     void(
         "GetnTexImageARB",
         "Robust version of ${src.javaDocLink}",
@@ -208,7 +208,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
         MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p.OUT("img", "a buffer in which to place the returned data")
     )
 
-    src = GL11["ReadPixels"]
+    src = GL11C["ReadPixels"]
     void(
         "ReadnPixelsARB",
         "Robust version of ${src.javaDocLink}",
@@ -288,7 +288,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
         PIXEL_PACK_BUFFER..void.p.OUT("values", "a buffer in which to place the returned data")
     )
 
-    src = GL13["GetCompressedTexImage"]
+    src = GL13C["GetCompressedTexImage"]
     DependsOn("OpenGL13")..void(
         "GetnCompressedTexImageARB",
         "Robust version of ${src.javaDocLink}",

@@ -127,33 +127,33 @@ public class ARBTessellationShader {
     /**
      * Specifies the integer value of the specified parameter for patch primitives.
      *
-     * @param pname the name of the parameter to set. Must be:<br><table><tr><td>{@link GL40#GL_PATCH_VERTICES PATCH_VERTICES}</td></tr></table>
+     * @param pname the name of the parameter to set. Must be:<br><table><tr><td>{@link GL40C#GL_PATCH_VERTICES PATCH_VERTICES}</td></tr></table>
      * @param value the new value for the parameter given by {@code pname}
      */
     public static void glPatchParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int value) {
-        GL40.glPatchParameteri(pname, value);
+        GL40C.glPatchParameteri(pname, value);
     }
 
     // --- [ glPatchParameterfv ] ---
 
     /** Unsafe version of: {@link #glPatchParameterfv PatchParameterfv} */
     public static void nglPatchParameterfv(int pname, long values) {
-        GL40.nglPatchParameterfv(pname, values);
+        GL40C.nglPatchParameterfv(pname, values);
     }
 
     /**
      * Specifies an array of float values for the specified parameter for patch primitives.
      *
-     * @param pname  the name of the parameter to set. One of:<br><table><tr><td>{@link GL40#GL_PATCH_DEFAULT_OUTER_LEVEL PATCH_DEFAULT_OUTER_LEVEL}</td><td>{@link GL40#GL_PATCH_DEFAULT_INNER_LEVEL PATCH_DEFAULT_INNER_LEVEL}</td></tr></table>
+     * @param pname  the name of the parameter to set. One of:<br><table><tr><td>{@link GL40C#GL_PATCH_DEFAULT_OUTER_LEVEL PATCH_DEFAULT_OUTER_LEVEL}</td><td>{@link GL40C#GL_PATCH_DEFAULT_INNER_LEVEL PATCH_DEFAULT_INNER_LEVEL}</td></tr></table>
      * @param values an array containing the new values for the parameter given by {@code pname}
      */
     public static void glPatchParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer values) {
-        GL40.glPatchParameterfv(pname, values);
+        GL40C.glPatchParameterfv(pname, values);
     }
 
     /** Array version of: {@link #glPatchParameterfv PatchParameterfv} */
     public static void glPatchParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] values) {
-        GL40.glPatchParameterfv(pname, values);
+        GL40C.glPatchParameterfv(pname, values);
     }
 
 }

@@ -26,7 +26,7 @@ import static org.lwjgl.system.Checks.*;
  * The same issue exists with the {@link ARBShaderImageLoadStore ARB_shader_image_load_store} extension provided in OpenGL 4.2, which can write to texture objects and buffers. In
  * both cases, the specification makes few guarantees related to the relative order of memory reads and writes performed by the shader invocations. For
  * ARB_shader_image_load_store, the OpenGL API and shading language do provide some control over memory transactions; those mechanisms also affect reads
- * and writes of shader storage buffers. In the OpenGL API, the {@link GL42#glMemoryBarrier MemoryBarrier} call can be used to ensure that certain memory operations related to
+ * and writes of shader storage buffers. In the OpenGL API, the {@link GL42C#glMemoryBarrier MemoryBarrier} call can be used to ensure that certain memory operations related to
  * commands issued prior the barrier complete before other operations related to commands issued after the barrier. Additionally, the shading language
  * provides the {@code memoryBarrier()} function to control the relative order of memory accesses within individual shader invocations and provides
  * various memory qualifiers controlling how the memory corresponding to individual variables is accessed.</p>
@@ -90,7 +90,7 @@ public class ARBShaderStorageBufferObject {
      * @param storageBlockBinding the index storage block binding to associate with the specified storage block
      */
     public static void glShaderStorageBlockBinding(@NativeType("GLuint") int program, @NativeType("GLuint") int storageBlockIndex, @NativeType("GLuint") int storageBlockBinding) {
-        GL43.glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
+        GL43C.glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
     }
 
 }

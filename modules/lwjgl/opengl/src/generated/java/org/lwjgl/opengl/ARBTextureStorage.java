@@ -57,7 +57,7 @@ public class ARBTextureStorage {
      * @param width          the width of the texture, in texels
      */
     public static void glTexStorage1D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width) {
-        GL42.glTexStorage1D(target, levels, internalformat, width);
+        GL42C.glTexStorage1D(target, levels, internalformat, width);
     }
 
     // --- [ glTexStorage2D ] ---
@@ -72,7 +72,7 @@ public class ARBTextureStorage {
      * @param height         the height of the texture, in texels
      */
     public static void glTexStorage2D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
-        GL42.glTexStorage2D(target, levels, internalformat, width, height);
+        GL42C.glTexStorage2D(target, levels, internalformat, width, height);
     }
 
     // --- [ glTexStorage3D ] ---
@@ -88,7 +88,7 @@ public class ARBTextureStorage {
      * @param depth          the depth of the texture, in texels
      */
     public static void glTexStorage3D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth) {
-        GL42.glTexStorage3D(target, levels, internalformat, width, height, depth);
+        GL42C.glTexStorage3D(target, levels, internalformat, width, height, depth);
     }
 
     // --- [ glTextureStorage1DEXT ] ---

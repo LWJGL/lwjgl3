@@ -46,7 +46,7 @@ public class ARBPolygonOffsetClamp {
      * resolution of the depth buffer. The resulting values are summed to produce the polygon offset value, which may then be clamped to a minimum or maximum
      * value specified by {@code clamp}.</p>
      * 
-     * <p>The values {@code factor}, {@code units}, and {@code clamp} may each be positive, negative, or zero. Calling the command {@link GL11#glPolygonOffset PolygonOffset} is equivalent
+     * <p>The values {@code factor}, {@code units}, and {@code clamp} may each be positive, negative, or zero. Calling the command {@link GL11C#glPolygonOffset PolygonOffset} is equivalent
      * to calling the command {@code PolygonOffsetClamp} with clamp equal to zero.</p>
      *
      * @param factor scales the maximum depth slope of the polygon
@@ -54,7 +54,7 @@ public class ARBPolygonOffsetClamp {
      * @param clamp  the minimum or maximum polygon offset value
      */
     public static void glPolygonOffsetClamp(@NativeType("GLfloat") float factor, @NativeType("GLfloat") float units, @NativeType("GLfloat") float clamp) {
-        GL46.glPolygonOffsetClamp(factor, units, clamp);
+        GL46C.glPolygonOffsetClamp(factor, units, clamp);
     }
 
 }

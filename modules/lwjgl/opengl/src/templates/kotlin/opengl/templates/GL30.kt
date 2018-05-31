@@ -7,17 +7,20 @@ package opengl.templates
 import org.lwjgl.generator.*
 import opengl.*
 
-val CONDITIONAL_RENDER_MODES =
+const val CONDITIONAL_RENDER_MODES =
     """
     #QUERY_WAIT #QUERY_NO_WAIT #QUERY_BY_REGION_WAIT #QUERY_BY_REGION_NO_WAIT
     #QUERY_WAIT_INVERTED #QUERY_NO_WAIT_INVERTED #QUERY_BY_REGION_WAIT_INVERTED #QUERY_BY_REGION_NO_WAIT_INVERTED
     """
 
 val GL30 = "GL30".nativeClassGL("GL30") {
+    extends = GL21
     documentation =
         """
-        The core OpenGL 3.0 functionality. OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language,
-        although versions 1.10 and 1.20 are deprecated in a forward-compatible context.
+        The OpenGL functionality up to version 3.0. Includes the deprecated symbols of the Compatibility Profile.
+
+        OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language, although versions 1.10 and 1.20 are
+        deprecated in a forward-compatible context.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -72,62 +75,11 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "MAX_VARYING_COMPONENTS".."GL20.GL_MAX_VARYING_FLOATS"
     )
 
-    GLubyteUTF8.const.p(
-        "GetStringi",
-        "Queries indexed string state.",
-
-        GLenum.IN("name", "the indexed state to query", "#EXTENSIONS #SHADING_LANGUAGE_VERSION"),
-        GLuint.IN("index", "the index of the particular element being queried")
-    )
-
-    void(
-        "ClearBufferiv",
-        "Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
-
-        GLenum.IN("buffer", "the buffer to clear", "#COLOR #STENCIL"),
-        GLint.IN("drawbuffer", "the draw buffer to clear"),
-        Check(1)..GLint.p.IN(
-            "value",
-            """
-            for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For stencil buffers, a pointer to a
-            single stencil value to clear the buffer to.
-            """
-        )
-    )
-
-    void(
-        "ClearBufferuiv",
-        "Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
-
-        GLenum.IN("buffer", "the buffer to clear", "#COLOR"),
-        GLint.IN("drawbuffer", "the draw buffer to clear"),
-        Check(4)..GLint.p.IN("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
-    )
-
-    void(
-        "ClearBufferfv",
-        "Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
-
-        GLenum.IN("buffer", "the buffer to clear", "#COLOR #DEPTH"),
-        GLint.IN("drawbuffer", "the draw buffer to clear"),
-        Check(1)..GLfloat.p.IN(
-            "value",
-            """
-            for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For depth buffers, a pointer to a
-            single depth value to clear the buffer to.
-            """
-        )
-    )
-
-    void(
-        "ClearBufferfi",
-        "Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
-
-        GLenum.IN("buffer", "the buffer to clear", "#DEPTH_STENCIL"),
-        GLint.IN("drawbuffer", "the draw buffer to clear"),
-        GLfloat.IN("depth", "the depth value to clear the buffer to"),
-        GLint.IN("stencil", "the stencil value to clear the buffer to")
-    )
+    GL30C reuse "GetStringi"
+    GL30C reuse "ClearBufferiv"
+    GL30C reuse "ClearBufferuiv"
+    GL30C reuse "ClearBufferfv"
+    GL30C reuse "ClearBufferfi"
 
     // EXT_gpu_shader4
 
@@ -171,192 +123,40 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "MAX_PROGRAM_TEXEL_OFFSET"..0x8905
     )
 
-    // Vertex attrib functions javadoc
-    val vertexAttribIndex = "the index of the pure integer generic vertex attribute to be modified"
-    val vertexAttribX = "the vertex attribute x component"
-    val vertexAttribY = "the vertex attribute y component"
-    val vertexAttribZ = "the vertex attribute z component"
-    val vertexAttribW = "the vertex attribute w component"
-    val vertexAttribBuffer = "the pure integer vertex attribute buffer"
-
-    void("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
-    void("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
-    void("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-    void("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
-
-    void("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
-    void("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
-    void("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-    void("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
-
-    void("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLint.const.p.IN("v", vertexAttribBuffer))
-
-    void("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLuint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLuint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLuint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLuint.const.p.IN("v", vertexAttribBuffer))
-
-    void("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
-
-    void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
-
-    OffHeapOnly..void(
-        "VertexAttribIPointer",
-        "Specifies the location and organization of a pure integer vertex attribute array.",
-
-        GLuint.IN("index", vertexAttribIndex),
-        GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
-        GLenum.IN(
-            "type",
-            "the data type of each component in the array",
-            "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT"
-        ),
-        GLsizei.IN(
-            "stride",
-            """
-            the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-            the array. The initial value is 0.
-            """),
-        MultiType(
-            PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-        )..Unsafe..ARRAY_BUFFER..void.const.p.IN(
-            "pointer",
-            """
-            the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-            currently bound to the #ARRAY_BUFFER target. The initial value is 0.
-            """
-        )
-    )
-
-    void(
-        "GetVertexAttribIiv",
-        "Returns the value of a pure integer generic vertex attribute parameter.",
-
-        GLuint.IN("index", vertexAttribIndex),
-        GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "#CURRENT_VERTEX_ATTRIB"),
-        Check(4)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
-    )
-
-    void(
-        "GetVertexAttribIuiv",
-        "Unsigned version of #GetVertexAttribIiv().",
-
-        GLuint.IN("index", vertexAttribIndex),
-        GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "#CURRENT_VERTEX_ATTRIB"),
-        Check(4)..ReturnParam..GLuint.p.OUT("params", "returns the requested data")
-    )
-
-    // Uniform functions javadoc
-    val uniformLocation = "the location of the uniform variable to be modified"
-    val uniformX = "the uniform x value"
-    val uniformY = "the uniform y value"
-    val uniformZ = "the uniform z value"
-    val uniformW = "the uniform w value"
-
-    void(
-        "Uniform1ui",
-        "Specifies the value of a uint uniform variable for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        GLuint.IN("v0", "the uniform value")
-    )
-
-    void(
-        "Uniform2ui",
-        "Specifies the value of a uvec2 uniform variable for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        GLuint.IN("v0", uniformX),
-        GLuint.IN("v1", uniformY)
-    )
-
-    void(
-        "Uniform3ui",
-        "Specifies the value of a uvec3 uniform variable for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        GLuint.IN("v0", uniformX),
-        GLuint.IN("v1", uniformY),
-        GLuint.IN("v2", uniformZ)
-    )
-
-    void(
-        "Uniform4ui",
-        "Specifies the value of a uvec4 uniform variable for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        GLuint.IN("v0", uniformX),
-        GLuint.IN("v1", uniformY),
-        GLuint.IN("v2", uniformZ),
-        GLuint.IN("v3", uniformW)
-    )
-
-    void(
-        "Uniform1uiv",
-        "Specifies the value of a single uint uniform variable or a uint uniform variable array for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        AutoSize("value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "Uniform2uiv",
-        "Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        AutoSize(2, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "Uniform3uiv",
-        "Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        AutoSize(3, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "Uniform4uiv",
-        "Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for the current program object.",
-
-        GLint.IN("location", uniformLocation),
-        AutoSize(4, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
-        GLuint.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "GetUniformuiv",
-        "Returns the uint value(s) of a uniform variable.",
-
-        GLuint.IN("program", "the program object to be queried"),
-        GLint.IN("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "the value of the specified uniform variable")
-    )
-
-    void(
-        "BindFragDataLocation",
-        "Binds a user-defined varying out variable to a fragment shader color number.",
-
-        GLuint.IN("program", "the name of the program containing varying out variable whose binding to modify"),
-        GLuint.IN("colorNumber", "the color number to bind the user-defined varying out variable to"),
-        GLcharASCII.const.p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
-    )
-
-    GLint(
-        "GetFragDataLocation",
-        "Queries the bindings of color numbers to user-defined varying out variables.",
-
-        GLuint.IN("program", "the name of the program containing varying out variable whose binding to query"),
-        GLcharASCII.const.p.IN("name", "the name of the user-defined varying out variable whose binding to query")
-    )
+    GL30C reuse "VertexAttribI1i"
+    GL30C reuse "VertexAttribI2i"
+    GL30C reuse "VertexAttribI3i"
+    GL30C reuse "VertexAttribI4i"
+    GL30C reuse "VertexAttribI1ui"
+    GL30C reuse "VertexAttribI2ui"
+    GL30C reuse "VertexAttribI3ui"
+    GL30C reuse "VertexAttribI4ui"
+    GL30C reuse "VertexAttribI1iv"
+    GL30C reuse "VertexAttribI2iv"
+    GL30C reuse "VertexAttribI3iv"
+    GL30C reuse "VertexAttribI4iv"
+    GL30C reuse "VertexAttribI1uiv"
+    GL30C reuse "VertexAttribI2uiv"
+    GL30C reuse "VertexAttribI3uiv"
+    GL30C reuse "VertexAttribI4uiv"
+    GL30C reuse "VertexAttribI4bv"
+    GL30C reuse "VertexAttribI4sv"
+    GL30C reuse "VertexAttribI4ubv"
+    GL30C reuse "VertexAttribI4usv"
+    GL30C reuse "VertexAttribIPointer"
+    GL30C reuse "GetVertexAttribIiv"
+    GL30C reuse "GetVertexAttribIuiv"
+    GL30C reuse "Uniform1ui"
+    GL30C reuse "Uniform2ui"
+    GL30C reuse "Uniform3ui"
+    GL30C reuse "Uniform4ui"
+    GL30C reuse "Uniform1uiv"
+    GL30C reuse "Uniform2uiv"
+    GL30C reuse "Uniform3uiv"
+    GL30C reuse "Uniform4uiv"
+    GL30C reuse "GetUniformuiv"
+    GL30C reuse "BindFragDataLocation"
+    GL30C reuse "GetFragDataLocation"
 
     // NV_conditional_render
 
@@ -369,22 +169,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "QUERY_BY_REGION_NO_WAIT"..0x8E16
     )
 
-    void(
-        "BeginConditionalRender",
-        "Starts conditional rendering.",
-
-        GLuint.IN("id", "the name of an occlusion query object whose results are used to determine if the rendering commands are discarded"),
-        GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", CONDITIONAL_RENDER_MODES)
-    )
-
-    void(
-        "EndConditionalRender",
-        "Ends conditional rendering."
-    )
+    GL30C reuse "BeginConditionalRender"
+    GL30C reuse "EndConditionalRender"
 
     // ARB_map_buffer_range
 
-    val MapBufferRangeBits = IntConstant(
+    IntConstant(
         "Accepted by the {@code access} parameter of MapBufferRange.",
 
         "MAP_READ_BIT"..0x0001,
@@ -393,7 +183,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "MAP_INVALIDATE_BUFFER_BIT"..0x0008,
         "MAP_FLUSH_EXPLICIT_BIT"..0x0010,
         "MAP_UNSYNCHRONIZED_BIT"..0x0020
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Accepted by the {@code pname} parameter of GetBufferParameteriv.",
@@ -403,42 +193,18 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "BUFFER_MAP_OFFSET"..0x9121
     )
 
-    MapPointer("length")..void.p(
-        "MapBufferRange",
-        """
-        Maps a section of a buffer object's data store.
-
-        <b>LWJGL note</b>: This method comes in 2 flavors:
-        ${ol(
-            "#MapBufferRange(int, long, long, int) - Always returns a new ByteBuffer instance.",
-            "#MapBufferRange(int, long, long, int, ByteBuffer) - The {@code old_buffer} parameter is reused if not null."
-        )}
-        """,
-
-        GLenum.IN("target", "a binding to which the target buffer is bound", BUFFER_OBJECT_TARGETS),
-        GLintptr.IN("offset", "the starting offset within the buffer of the range to be mapped"),
-        GLsizeiptr.IN("length", "the length of the range to be mapped"),
-        GLbitfield.IN("access", "a combination of access flags indicating the desired access to the range", MapBufferRangeBits, LinkMode.BITFIELD)
-    )
-
-    void(
-        "FlushMappedBufferRange",
-        "Indicates modifications to a range of a mapped buffer.",
-
-        GLenum.IN("target", "the target of the flush operation", BUFFER_OBJECT_TARGETS),
-        GLintptr.IN("offset", "the start of the buffer subrange, in basic machine units"),
-        GLsizeiptr.IN("length", "the length of the buffer subrange, in basic machine units")
-    )
+    GL30C reuse "MapBufferRange"
+    GL30C reuse "FlushMappedBufferRange"
 
     // ARB_color_buffer_float
 
-    val ClampTargets = IntConstant(
+    IntConstant(
         "Accepted by the {@code target} parameter of ClampColor and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
         "CLAMP_VERTEX_COLOR"..0x891A,
         "CLAMP_FRAGMENT_COLOR"..0x891B,
         "CLAMP_READ_COLOR"..0x891C
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Accepted by the {@code clamp} parameter of ClampColor.",
@@ -446,13 +212,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "FIXED_ONLY"..0x891D
     )
 
-    void(
-        "ClampColor",
-        "Controls color clamping.",
-
-        GLenum.IN("target", "target for color clamping", ClampTargets),
-        GLenum.IN("clamp", "whether to apply color clamping", "#TRUE #FALSE #FIXED_ONLY")
-    )
+    GL30C reuse "ClampColor"
 
     // ARB_depth_buffer_float
 
@@ -548,7 +308,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
     // ARB_framebuffer_object
 
-    val FramebufferTargets = IntConstant(
+    IntConstant(
         """
         Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and
         GetFramebufferAttachmentParameteriv.
@@ -557,7 +317,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "FRAMEBUFFER"..0x8D40,
         "READ_FRAMEBUFFER"..0x8CA8,
         "DRAW_FRAMEBUFFER"..0x8CA9
-    ).javaDocLinks
+    )
 
     IntConstant(
         """
@@ -577,7 +337,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "STENCIL_INDEX16"..0x8D49
     )
 
-    val RenderbufferParameters = IntConstant(
+    IntConstant(
         "Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
         "RENDERBUFFER_WIDTH"..0x8D42,
@@ -590,9 +350,9 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "RENDERBUFFER_DEPTH_SIZE"..0x8D54,
         "RENDERBUFFER_STENCIL_SIZE"..0x8D55,
         "RENDERBUFFER_SAMPLES"..0x8CAB
-    ).javaDocLinks
+    )
 
-    val FramebufferParameters = IntConstant(
+    IntConstant(
         "Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
         "FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE"..0x8CD0,
@@ -608,7 +368,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE"..0x8215,
         "FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE"..0x8216,
         "FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE"..0x8217
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
@@ -617,7 +377,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "INDEX"..0x8222
     )
 
-    val FramebufferAttachments = IntConstant(
+    IntConstant(
         "Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.",
 
         "COLOR_ATTACHMENT0"..0x8CE0,
@@ -655,7 +415,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "DEPTH_ATTACHMENT"..0x8D00,
         "STENCIL_ATTACHMENT"..0x8D20,
         "DEPTH_STENCIL_ATTACHMENT"..0x821A
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
@@ -727,204 +487,26 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "TEXTURE_STENCIL_SIZE"..0x88F1
     )
 
-    GLboolean(
-        "IsRenderbuffer",
-        "Determines if a name corresponds to a renderbuffer object.",
-
-        GLuint.IN("renderbuffer", "a value that may be the name of a renderbuffer object")
-    )
-
-    void(
-        "BindRenderbuffer",
-        "Binds a renderbuffer to a renderbuffer target.",
-
-        GLenum.IN("target", "the renderbuffer target of the binding operation", "#RENDERBUFFER"),
-        GLuint.IN("renderbuffer", "the name of the renderbuffer object to bind")
-    )
-
-    void(
-        "DeleteRenderbuffers",
-        "Deletes renderbuffer objects.",
-
-        AutoSize("renderbuffers")..GLsizei.IN("n", "the number of renderbuffer objects to be deleted"),
-        SingleValue("renderbuffer")..GLuint.const.p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
-    )
-
-    void(
-        "GenRenderbuffers",
-        "Generates renderbuffer object names.",
-
-        AutoSize("renderbuffers")..GLsizei.IN("n", "the number of renderbuffer object names to generate"),
-        ReturnParam..GLuint.p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
-    )
-
-    void(
-        "RenderbufferStorage",
-        "Establishes data storage, format and dimensions of a renderbuffer object's image.",
-
-        GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),
-        GLenum.IN("internalformat", "the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format."),
-        GLsizei.IN("width", "the width of the renderbuffer, in pixels"),
-        GLsizei.IN("height", "the height of the renderbuffer, in pixels")
-    )
-
-    void(
-        "RenderbufferStorageMultisample",
-        """
-        Establishes data storage, format, dimensions and sample count of a renderbuffer object's image.
-
-        #RenderbufferStorage() is equivalent to calling this method with the samples set to zero.
-        """,
-
-        GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),
-        GLsizei.IN("samples", "the number of samples to be used for the renderbuffer object's storage"),
-        GLenum.IN("internalformat", "the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format."),
-        GLsizei.IN("width", "the width of the renderbuffer, in pixels"),
-        GLsizei.IN("height", "the height of the renderbuffer, in pixels")
-    )
-
-    void(
-        "GetRenderbufferParameteriv",
-        "Retrieves information about a bound renderbuffer object.",
-
-        GLenum.IN("target", "the target of the query operation", "#RENDERBUFFER"),
-        GLenum.IN("pname", "the parameter whose value to retrieve from the renderbuffer bound to {@code target}", RenderbufferParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "an array to receive the value of the queried parameter")
-    )
-
-    GLboolean(
-        "IsFramebuffer",
-        "Determines if a name corresponds to a framebuffer object.",
-
-        GLuint.IN("framebuffer", "a value that may be the name of a framebuffer object")
-    )
-
-    void(
-        "BindFramebuffer",
-        "Binds a framebuffer to a framebuffer target.",
-
-        GLenum.IN("target", "the framebuffer target of the binding operation", FramebufferTargets),
-        GLuint.IN("framebuffer", "the name of the framebuffer object to bind")
-    )
-
-    void(
-        "DeleteFramebuffers",
-        "Deletes framebuffer objects.",
-
-        AutoSize("framebuffers")..GLsizei.IN("n", "the number of framebuffer objects to be deleted"),
-        SingleValue("framebuffer")..GLuint.const.p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
-    )
-
-    void(
-        "GenFramebuffers",
-        "Generates framebuffer object names.",
-
-        AutoSize("framebuffers")..GLsizei.IN("n", "the number of framebuffer object names to generate"),
-        ReturnParam..GLuint.p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
-    )
-
-    GLenum(
-        "CheckFramebufferStatus",
-        "Checks the completeness status of a framebuffer.",
-
-        GLenum.IN("target", "the target of the framebuffer completeness check", FramebufferTargets)
-    )
-
-    void(
-        "FramebufferTexture1D",
-        "Attaches a level of a 1D texture object as a logical buffer to the currently bound framebuffer object.",
-
-        GLenum.IN("target", "the framebuffer target", FramebufferTargets),
-        GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-        GLenum.IN("textarget", "the type of texture"),
-        GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
-        GLint.IN("level", "the mipmap level of {@code texture} to attach")
-    )
-
-    void(
-        "FramebufferTexture2D",
-        "Attaches a level of a 2D texture object as a logical buffer to the currently bound framebuffer object.",
-
-        GLenum.IN("target", "the framebuffer target", FramebufferTargets),
-        GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-        GLenum.IN("textarget", "the type of texture"),
-        GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
-        GLint.IN("level", "the mipmap level of {@code texture} to attach")
-    )
-
-    void(
-        "FramebufferTexture3D",
-        "Attaches a layer of a 3D texture object as a logical buffer to the currently bound framebuffer object.",
-
-        GLenum.IN("target", "the framebuffer target", FramebufferTargets),
-        GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-        GLenum.IN("textarget", "the type of texture"),
-        GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
-        GLint.IN("level", "the mipmap level of {@code texture} to attach"),
-        GLint.IN("layer", "the layer of a 2-dimensional image within the 3-dimensional texture.")
-    )
-
-    void(
-        "FramebufferTextureLayer",
-        "Attaches a single layer of a texture to a framebuffer",
-
-        GLenum.IN("target", "the framebuffer target", FramebufferTargets),
-        GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-        GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
-        GLint.IN("level", "the mipmap level of {@code texture} to attach"),
-        GLint.IN("layer", "the layer of {@code texture} to attach.")
-    )
-
-    void(
-        "FramebufferRenderbuffer",
-        "Attaches a renderbuffer as a logical buffer to the currently bound framebuffer object.",
-
-        GLenum.IN("target", "the framebuffer target", FramebufferTargets),
-        GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-        GLenum.IN("renderbuffertarget", "the renderbuffer target", "#RENDERBUFFER"),
-        GLuint.IN("renderbuffer", "the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach")
-    )
-
-    void(
-        "GetFramebufferAttachmentParameteriv",
-        "Retrievees information about attachments of a bound framebuffer object.",
-
-        GLenum.IN("target", "the target of the query operation", FramebufferTargets),
-        GLenum.IN("attachment", "the attachment within {@code target}", FramebufferAttachments),
-        GLenum.IN("pname", "the parameter of {@code attachment} to query", FramebufferParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "an array to receive the value of the queried parameter")
-    )
-
-    void(
-        "BlitFramebuffer",
-        "Copies a block of pixels from the read framebuffer to the draw framebuffer.",
-
-        GLint.IN("srcX0", "the lower-left coordinate of the source rectangle within the read buffer"),
-        GLint.IN("srcY0", "the upper-left coordinate of the source rectangle within the read buffer"),
-        GLint.IN("srcX1", "the lower-right coordinate of the source rectangle within the read buffer"),
-        GLint.IN("srcY1", "the upper-right coordinate of the source rectangle within the read buffer"),
-        GLint.IN("dstX0", "the lower-left coordinate of the destination rectangle within the write buffer"),
-        GLint.IN("dstY0", "the upper-left coordinate of the destination rectangle within the write buffer"),
-        GLint.IN("dstX1", "the lower-right coordinate of the destination rectangle within the write buffer"),
-        GLint.IN("dstY1", "the upper-right coordinate of the destination rectangle within the write buffer"),
-        GLbitfield.IN(
-            "mask",
-            "the bitwise OR of the flags indicating which buffers are to be copied",
-            "#COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT"
-        ),
-        GLenum.IN("filter", "the interpolation to be applied if the image is stretched", "#NEAREST #LINEAR")
-    )
-
-    void(
-        "GenerateMipmap",
-        "Generate mipmaps for a specified texture target.",
-
-        GLenum.IN(
-            "target",
-            "the target to which the texture whose mimaps to generate is bound",
-            "#TEXTURE_1D #TEXTURE_2D #TEXTURE_3D #TEXTURE_1D_ARRAY #TEXTURE_2D_ARRAY #TEXTURE_CUBE_MAP"
-        )
-    )
+    GL30C reuse "IsRenderbuffer"
+    GL30C reuse "BindRenderbuffer"
+    GL30C reuse "DeleteRenderbuffers"
+    GL30C reuse "GenRenderbuffers"
+    GL30C reuse "RenderbufferStorage"
+    GL30C reuse "RenderbufferStorageMultisample"
+    GL30C reuse "GetRenderbufferParameteriv"
+    GL30C reuse "IsFramebuffer"
+    GL30C reuse "BindFramebuffer"
+    GL30C reuse "DeleteFramebuffers"
+    GL30C reuse "GenFramebuffers"
+    GL30C reuse "CheckFramebufferStatus"
+    GL30C reuse "FramebufferTexture1D"
+    GL30C reuse "FramebufferTexture2D"
+    GL30C reuse "FramebufferTexture3D"
+    GL30C reuse "FramebufferTextureLayer"
+    GL30C reuse "FramebufferRenderbuffer"
+    GL30C reuse "GetFramebufferAttachmentParameteriv"
+    GL30C reuse "BlitFramebuffer"
+    GL30C reuse "GenerateMipmap"
 
     // ARB_half_float_pixel & ARB_half_float_vertex
 
@@ -975,41 +557,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "BGRA_INTEGER"..0x8D9B
     )
 
-    void(
-        "TexParameterIiv",
-        "Sets the integer value of a texture parameter.",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-        Check(1)..SingleValue("param")..GLint.const.p.IN("params", "the value of {@code pname}")
-    )
-
-    void(
-        "TexParameterIuiv",
-        "Sets the unsigned integer value of a texture parameter.",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-        Check(1)..SingleValue("param")..GLuint.const.p.IN("params", "the value of {@code pname}")
-    )
-
-    void(
-        "GetTexParameterIiv",
-        "Returns the integer value of a texture parameter.",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the symbolic name of a texture parameter"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "returns the texture parameter value")
-    )
-
-    void(
-        "GetTexParameterIuiv",
-        "Returns the unsigned integer value of a texture parameter.",
-
-        GLenum.IN("target", "the texture target"),
-        GLenum.IN("pname", "the symbolic name of a texture parameter"),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "returns the texture parameter value")
-    )
+    GL30C reuse "TexParameterIiv"
+    GL30C reuse "TexParameterIuiv"
+    GL30C reuse "GetTexParameterIiv"
+    GL30C reuse "GetTexParameterIuiv"
 
     // EXT_texture_array
 
@@ -1045,58 +596,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
     // EXT_draw_buffers2
 
-    void(
-        "ColorMaski",
-        "Enables and disables writing of frame buffer color components.",
-
-        GLuint.IN("buf", "the index of the draw buffer whose color mask to set"),
-        GLboolean.IN("r", "whether R values are written or not"),
-        GLboolean.IN("g", "whether G values are written or not"),
-        GLboolean.IN("b", "whether B values are written or not"),
-        GLboolean.IN("a", "whether A values are written or not")
-    )
-
-    void(
-        "GetBooleani_v",
-        "Queries the boolean value of an indexed state variable.",
-
-        GLenum.IN("target", "the indexed state to query"),
-        GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLboolean.p.OUT("data", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "GetIntegeri_v",
-        "Queries the integer value of an indexed state variable.",
-
-        GLenum.IN("target", "the indexed state to query"),
-        GLuint.IN("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
-    )
-
-    void(
-        "Enablei",
-        "Enables an indexed capability.",
-
-        GLenum.IN("cap", "the indexed capability to enable"),
-        GLuint.IN("index", "the index to enable")
-    )
-
-    void(
-        "Disablei",
-        "Disables an indexed capability.",
-
-        GLenum.IN("target", "the indexed capability to disable"),
-        GLuint.IN("index", "the index to disable")
-    )
-
-    GLboolean(
-        "IsEnabledi",
-        "Tests whether an indexed capability is enabled.",
-
-        GLenum.IN("target", "the indexed capability to query"),
-        GLuint.IN("index", "the index to query")
-    )
+    GL30C reuse "ColorMaski"
+    GL30C reuse "GetBooleani_v"
+    GL30C reuse "GetIntegeri_v"
+    GL30C reuse "Enablei"
+    GL30C reuse "Disablei"
+    GL30C reuse "IsEnabledi"
 
     // EXT_texture_compression_rgtc
 
@@ -1175,12 +680,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "TRANSFORM_FEEDBACK_BUFFER_BINDING"..0x8C8F
     )
 
-    val BufferModes = IntConstant(
+    IntConstant(
         "Accepted by the {@code bufferMode} parameter of TransformFeedbackVaryings.",
 
         "INTERLEAVED_ATTRIBS"..0x8C8C,
         "SEPARATE_ATTRIBS"..0x8C8D
-    ).javaDocLinks
+    )
 
     IntConstant(
         "Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
@@ -1214,75 +719,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH"..0x8C76
     )
 
-    void(
-        "BindBufferRange",
-        "Binds a range within a buffer object to an indexed buffer target.",
-
-        GLenum.IN(
-            "target",
-            "the target of the bind operation",
-            "#TRANSFORM_FEEDBACK_BUFFER #UNIFORM_BUFFER #ATOMIC_COUNTER_BUFFER #SHADER_STORAGE_BUFFER"
-        ),
-        GLuint.IN("index", "the index of the binding point within the array specified by {@code target}"),
-        GLuint.IN("buffer", "a buffer object to bind to the specified binding point"),
-        GLintptr.IN("offset", "the starting offset in basic machine units into the buffer object {@code buffer}"),
-        GLsizeiptr.IN("size", "the amount of data in machine units that can be read from the buffer object while used as an indexed target")
-    )
-
-    void(
-        "BindBufferBase",
-        "Binds a buffer object to an indexed buffer target.",
-
-        GLenum.IN(
-            "target",
-            "the target of the bind operation",
-            "#TRANSFORM_FEEDBACK_BUFFER #UNIFORM_BUFFER #ATOMIC_COUNTER_BUFFER #SHADER_STORAGE_BUFFER"
-        ),
-        GLuint.IN("index", "the index of the binding point within the array specified by {@code target}"),
-        GLuint.IN("buffer", "a buffer object to bind to the specified binding point")
-    )
-
-    void(
-        "BeginTransformFeedback",
-        "Starts transform feedback operation.",
-
-        GLenum.IN(
-            "primitiveMode",
-            "the output type of the primitives that will be recorded into the buffer objects that are bound for transform feedback",
-            "#POINTS #LINES #TRIANGLES"
-        )
-    )
-
-    void("EndTransformFeedback", "Ends transform feedback operation.")
-
-    void(
-        "TransformFeedbackVaryings",
-        "Specifies values to record in transform feedback buffers.",
-
-        GLuint.IN("program", "the target program object"),
-        AutoSize("varyings")..GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.p.IN(
-            "varyings",
-            "an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
-        ),
-        GLenum.IN("bufferMode", "the mode used to capture the varying variables when transform feedback is active", BufferModes)
-    )
-
-    void(
-        "GetTransformFeedbackVarying",
-        "Retrieves information about varying variables selected for transform feedback.",
-
-        GLuint.IN("program", "the target program object"),
-        GLuint.IN("index", "the index of the varying variable whose information to retrieve"),
-        AutoSize("name")..GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code name}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
-        Check(1)..GLsizei.p.OUT("size", "a variable that will receive the size of the varying"),
-        Check(1)..GLenum.p.OUT("type", "a variable that will receive the type of the varying"),
-        Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)")..GLcharASCII.p.OUT(
-            "name",
-            "a buffer into which will be written the name of the varying"
-        )
-    )
+    GL30C reuse "BindBufferRange"
+    GL30C reuse "BindBufferBase"
+    GL30C reuse "BeginTransformFeedback"
+    GL30C reuse "EndTransformFeedback"
+    GL30C reuse "TransformFeedbackVaryings"
+    GL30C reuse "GetTransformFeedbackVarying"
 
     // ARB_vertex_array_object
 
@@ -1292,35 +734,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "VERTEX_ARRAY_BINDING"..0x85B5
     )
 
-    void(
-        "BindVertexArray",
-        "Binds a vertex array object",
-
-        GLuint.IN("array", "the name of the vertex array to bind")
-    )
-
-    void(
-        "DeleteVertexArrays",
-        "Deletes vertex array objects.",
-
-        AutoSize("arrays")..GLsizei.IN("n", "the number of vertex array objects to be deleted"),
-        SingleValue("array")..GLuint.const.p.IN("arrays", "an array containing the n names of the objects to be deleted")
-    )
-
-    void(
-        "GenVertexArrays",
-        "Generates vertex array object names.",
-
-        AutoSize("arrays")..GLsizei.IN("n", "the number of vertex array object names to generate"),
-        ReturnParam..GLuint.p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
-    )
-
-    GLboolean(
-        "IsVertexArray",
-        "Determines if a name corresponds to a vertex array object.",
-
-        GLuint.IN("array", "a value that may be the name of a vertex array object")
-    )
+    GL30C reuse "BindVertexArray"
+    GL30C reuse "DeleteVertexArrays"
+    GL30C reuse "GenVertexArrays"
+    GL30C reuse "IsVertexArray"
 
     // ARB_framebuffer_sRGB
 
@@ -1332,5 +749,4 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
         "FRAMEBUFFER_SRGB"..0x8DB9
     )
-
 }

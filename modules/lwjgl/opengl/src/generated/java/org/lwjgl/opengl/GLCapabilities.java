@@ -16,88 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class GLCapabilities {
 
     public final long
-        glEnable,
-        glDisable,
-        glArrayElement,
-        glBindTexture,
-        glBlendFunc,
-        glClear,
-        glClearColor,
-        glClearDepth,
-        glClearStencil,
-        glClipPlane,
-        glColorMask,
-        glCopyPixels,
-        glCullFace,
-        glDepthFunc,
-        glDepthMask,
-        glDepthRange,
-        glDrawArrays,
-        glDrawBuffer,
-        glDrawElements,
-        glFinish,
-        glFlush,
-        glFrontFace,
-        glGenTextures,
-        glDeleteTextures,
-        glGetClipPlane,
-        glGetBooleanv,
-        glGetFloatv,
-        glGetIntegerv,
-        glGetDoublev,
-        glGetError,
-        glGetPointerv,
-        glGetString,
-        glGetTexEnviv,
-        glGetTexEnvfv,
-        glGetTexImage,
-        glGetTexLevelParameteriv,
-        glGetTexLevelParameterfv,
-        glGetTexParameteriv,
-        glGetTexParameterfv,
-        glHint,
-        glInterleavedArrays,
-        glIsEnabled,
-        glIsTexture,
-        glLineWidth,
-        glLogicOp,
-        glPixelStorei,
-        glPixelStoref,
-        glPointSize,
-        glPolygonMode,
-        glPolygonOffset,
-        glReadBuffer,
-        glReadPixels,
-        glScissor,
-        glStencilFunc,
-        glStencilMask,
-        glStencilOp,
-        glTexEnvi,
-        glTexEnviv,
-        glTexEnvf,
-        glTexEnvfv,
-        glTexImage2D,
-        glTexImage1D,
-        glCopyTexImage2D,
-        glCopyTexImage1D,
-        glCopyTexSubImage1D,
-        glCopyTexSubImage2D,
-        glTexParameteri,
-        glTexParameteriv,
-        glTexParameterf,
-        glTexParameterfv,
-        glTexSubImage1D,
-        glTexSubImage2D,
-        glViewport,
         glAccum,
         glAlphaFunc,
         glAreTexturesResident,
+        glArrayElement,
         glBegin,
         glBitmap,
         glCallList,
         glCallLists,
         glClearAccum,
         glClearIndex,
+        glClipPlane,
         glColor3b,
         glColor3s,
         glColor3i,
@@ -132,6 +61,7 @@ public final class GLCapabilities {
         glColor4uiv,
         glColorMaterial,
         glColorPointer,
+        glCopyPixels,
         glDeleteLists,
         glDisableClientState,
         glDrawPixels,
@@ -158,6 +88,7 @@ public final class GLCapabilities {
         glFogf,
         glFogfv,
         glGenLists,
+        glGetClipPlane,
         glGetLightiv,
         glGetLightfv,
         glGetMapiv,
@@ -169,6 +100,8 @@ public final class GLCapabilities {
         glGetPixelMapusv,
         glGetPixelMapuiv,
         glGetPolygonStipple,
+        glGetTexEnviv,
+        glGetTexEnvfv,
         glGetTexGeniv,
         glGetTexGenfv,
         glGetTexGendv,
@@ -185,6 +118,7 @@ public final class GLCapabilities {
         glIndexMask,
         glIndexPointer,
         glInitNames,
+        glInterleavedArrays,
         glIsList,
         glLightModeli,
         glLightModelf,
@@ -319,6 +253,10 @@ public final class GLCapabilities {
         glTexCoord4iv,
         glTexCoord4dv,
         glTexCoordPointer,
+        glTexEnvi,
+        glTexEnviv,
+        glTexEnvf,
+        glTexEnvfv,
         glTexGeni,
         glTexGeniv,
         glTexGenf,
@@ -352,19 +290,72 @@ public final class GLCapabilities {
         glVertex4iv,
         glVertex4dv,
         glVertexPointer,
+        glEnable,
+        glDisable,
+        glBindTexture,
+        glBlendFunc,
+        glClear,
+        glClearColor,
+        glClearDepth,
+        glClearStencil,
+        glColorMask,
+        glCullFace,
+        glDepthFunc,
+        glDepthMask,
+        glDepthRange,
+        glDrawArrays,
+        glDrawBuffer,
+        glDrawElements,
+        glFinish,
+        glFlush,
+        glFrontFace,
+        glGenTextures,
+        glDeleteTextures,
+        glGetBooleanv,
+        glGetFloatv,
+        glGetIntegerv,
+        glGetDoublev,
+        glGetError,
+        glGetPointerv,
+        glGetString,
+        glGetTexImage,
+        glGetTexLevelParameteriv,
+        glGetTexLevelParameterfv,
+        glGetTexParameteriv,
+        glGetTexParameterfv,
+        glHint,
+        glIsEnabled,
+        glIsTexture,
+        glLineWidth,
+        glLogicOp,
+        glPixelStorei,
+        glPixelStoref,
+        glPointSize,
+        glPolygonMode,
+        glPolygonOffset,
+        glReadBuffer,
+        glReadPixels,
+        glScissor,
+        glStencilFunc,
+        glStencilMask,
+        glStencilOp,
+        glTexImage1D,
+        glTexImage2D,
+        glCopyTexImage1D,
+        glCopyTexImage2D,
+        glCopyTexSubImage1D,
+        glCopyTexSubImage2D,
+        glTexParameteri,
+        glTexParameteriv,
+        glTexParameterf,
+        glTexParameterfv,
+        glTexSubImage1D,
+        glTexSubImage2D,
+        glViewport,
         glTexImage3D,
         glTexSubImage3D,
         glCopyTexSubImage3D,
         glDrawRangeElements,
-        glCompressedTexImage3D,
-        glCompressedTexImage2D,
-        glCompressedTexImage1D,
-        glCompressedTexSubImage3D,
-        glCompressedTexSubImage2D,
-        glCompressedTexSubImage1D,
-        glGetCompressedTexImage,
-        glSampleCoverage,
-        glActiveTexture,
         glClientActiveTexture,
         glMultiTexCoord1f,
         glMultiTexCoord1s,
@@ -402,15 +393,15 @@ public final class GLCapabilities {
         glLoadTransposeMatrixd,
         glMultTransposeMatrixf,
         glMultTransposeMatrixd,
-        glBlendColor,
-        glBlendEquation,
-        glMultiDrawArrays,
-        glMultiDrawElements,
-        glPointParameterf,
-        glPointParameteri,
-        glPointParameterfv,
-        glPointParameteriv,
-        glBlendFuncSeparate,
+        glCompressedTexImage3D,
+        glCompressedTexImage2D,
+        glCompressedTexImage1D,
+        glCompressedTexSubImage3D,
+        glCompressedTexSubImage2D,
+        glCompressedTexSubImage1D,
+        glGetCompressedTexImage,
+        glSampleCoverage,
+        glActiveTexture,
         glFogCoordf,
         glFogCoordd,
         glFogCoordfv,
@@ -449,6 +440,15 @@ public final class GLCapabilities {
         glWindowPos3sv,
         glWindowPos3fv,
         glWindowPos3dv,
+        glBlendColor,
+        glBlendEquation,
+        glMultiDrawArrays,
+        glMultiDrawElements,
+        glPointParameterf,
+        glPointParameteri,
+        glPointParameterfv,
+        glPointParameteriv,
+        glBlendFuncSeparate,
         glBindBuffer,
         glDeleteBuffers,
         glGenBuffers,
@@ -682,34 +682,6 @@ public final class GLCapabilities {
         glGetInteger64v,
         glGetInteger64i_v,
         glGetSynciv,
-        glBindFragDataLocationIndexed,
-        glGetFragDataIndex,
-        glGenSamplers,
-        glDeleteSamplers,
-        glIsSampler,
-        glBindSampler,
-        glSamplerParameteri,
-        glSamplerParameterf,
-        glSamplerParameteriv,
-        glSamplerParameterfv,
-        glSamplerParameterIiv,
-        glSamplerParameterIuiv,
-        glGetSamplerParameteriv,
-        glGetSamplerParameterfv,
-        glGetSamplerParameterIiv,
-        glGetSamplerParameterIuiv,
-        glQueryCounter,
-        glGetQueryObjecti64v,
-        glGetQueryObjectui64v,
-        glVertexAttribDivisor,
-        glVertexAttribP1ui,
-        glVertexAttribP2ui,
-        glVertexAttribP3ui,
-        glVertexAttribP4ui,
-        glVertexAttribP1uiv,
-        glVertexAttribP2uiv,
-        glVertexAttribP3uiv,
-        glVertexAttribP4uiv,
         glVertexP2ui,
         glVertexP3ui,
         glVertexP4ui,
@@ -740,6 +712,34 @@ public final class GLCapabilities {
         glColorP4uiv,
         glSecondaryColorP3ui,
         glSecondaryColorP3uiv,
+        glBindFragDataLocationIndexed,
+        glGetFragDataIndex,
+        glGenSamplers,
+        glDeleteSamplers,
+        glIsSampler,
+        glBindSampler,
+        glSamplerParameteri,
+        glSamplerParameterf,
+        glSamplerParameteriv,
+        glSamplerParameterfv,
+        glSamplerParameterIiv,
+        glSamplerParameterIuiv,
+        glGetSamplerParameteriv,
+        glGetSamplerParameterfv,
+        glGetSamplerParameterIiv,
+        glGetSamplerParameterIuiv,
+        glQueryCounter,
+        glGetQueryObjecti64v,
+        glGetQueryObjectui64v,
+        glVertexAttribDivisor,
+        glVertexAttribP1ui,
+        glVertexAttribP2ui,
+        glVertexAttribP3ui,
+        glVertexAttribP4ui,
+        glVertexAttribP1uiv,
+        glVertexAttribP2uiv,
+        glVertexAttribP3uiv,
+        glVertexAttribP4uiv,
         glBlendEquationi,
         glBlendEquationSeparatei,
         glBlendFunci,
@@ -938,6 +938,18 @@ public final class GLCapabilities {
         glBindSamplers,
         glBindImageTextures,
         glBindVertexBuffers,
+        glGetnMapdv,
+        glGetnMapfv,
+        glGetnMapiv,
+        glGetnPixelMapfv,
+        glGetnPixelMapuiv,
+        glGetnPixelMapusv,
+        glGetnPolygonStipple,
+        glGetnColorTable,
+        glGetnConvolutionFilter,
+        glGetnSeparableFilter,
+        glGetnHistogram,
+        glGetnMinmax,
         glClipControl,
         glCreateTransformFeedbacks,
         glTransformFeedbackBufferBase,
@@ -1041,20 +1053,8 @@ public final class GLCapabilities {
         glGetCompressedTextureSubImage,
         glTextureBarrier,
         glGetGraphicsResetStatus,
-        glGetnMapdv,
-        glGetnMapfv,
-        glGetnMapiv,
-        glGetnPixelMapfv,
-        glGetnPixelMapuiv,
-        glGetnPixelMapusv,
-        glGetnPolygonStipple,
         glGetnTexImage,
         glReadnPixels,
-        glGetnColorTable,
-        glGetnConvolutionFilter,
-        glGetnSeparableFilter,
-        glGetnHistogram,
-        glGetnMinmax,
         glGetnCompressedTexImage,
         glGetnUniformfv,
         glGetnUniformdv,
@@ -2883,7 +2883,7 @@ public final class GLCapabilities {
      * purpose.</p>
      * 
      * <p>Additionally, this extension adds a further built-in variable, {@code gl_DrawID} to the shading language. This variable contains the index of the draw
-     * currently being processed by a Multi* variant of a drawing command (such as {@link GL14#glMultiDrawElements MultiDrawElements} or {@link GL43#glMultiDrawArraysIndirect MultiDrawArraysIndirect}).</p>
+     * currently being processed by a Multi* variant of a drawing command (such as {@link GL14C#glMultiDrawElements MultiDrawElements} or {@link GL43C#glMultiDrawArraysIndirect MultiDrawArraysIndirect}).</p>
      * 
      * <p>Requires {@link GL31 OpenGL 3.1}. Promoted to core in {@link GL33 OpenGL 3.3}.</p>
      */
@@ -4025,88 +4025,17 @@ public final class GLCapabilities {
     GLCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {
         forwardCompatible = fc;
 
-        glEnable = provider.getFunctionAddress("glEnable");
-        glDisable = provider.getFunctionAddress("glDisable");
-        glArrayElement = provider.getFunctionAddress("glArrayElement");
-        glBindTexture = provider.getFunctionAddress("glBindTexture");
-        glBlendFunc = provider.getFunctionAddress("glBlendFunc");
-        glClear = provider.getFunctionAddress("glClear");
-        glClearColor = provider.getFunctionAddress("glClearColor");
-        glClearDepth = provider.getFunctionAddress("glClearDepth");
-        glClearStencil = provider.getFunctionAddress("glClearStencil");
-        glClipPlane = provider.getFunctionAddress("glClipPlane");
-        glColorMask = provider.getFunctionAddress("glColorMask");
-        glCopyPixels = provider.getFunctionAddress("glCopyPixels");
-        glCullFace = provider.getFunctionAddress("glCullFace");
-        glDepthFunc = provider.getFunctionAddress("glDepthFunc");
-        glDepthMask = provider.getFunctionAddress("glDepthMask");
-        glDepthRange = provider.getFunctionAddress("glDepthRange");
-        glDrawArrays = provider.getFunctionAddress("glDrawArrays");
-        glDrawBuffer = provider.getFunctionAddress("glDrawBuffer");
-        glDrawElements = provider.getFunctionAddress("glDrawElements");
-        glFinish = provider.getFunctionAddress("glFinish");
-        glFlush = provider.getFunctionAddress("glFlush");
-        glFrontFace = provider.getFunctionAddress("glFrontFace");
-        glGenTextures = provider.getFunctionAddress("glGenTextures");
-        glDeleteTextures = provider.getFunctionAddress("glDeleteTextures");
-        glGetClipPlane = provider.getFunctionAddress("glGetClipPlane");
-        glGetBooleanv = provider.getFunctionAddress("glGetBooleanv");
-        glGetFloatv = provider.getFunctionAddress("glGetFloatv");
-        glGetIntegerv = provider.getFunctionAddress("glGetIntegerv");
-        glGetDoublev = provider.getFunctionAddress("glGetDoublev");
-        glGetError = provider.getFunctionAddress("glGetError");
-        glGetPointerv = provider.getFunctionAddress("glGetPointerv");
-        glGetString = provider.getFunctionAddress("glGetString");
-        glGetTexEnviv = provider.getFunctionAddress("glGetTexEnviv");
-        glGetTexEnvfv = provider.getFunctionAddress("glGetTexEnvfv");
-        glGetTexImage = provider.getFunctionAddress("glGetTexImage");
-        glGetTexLevelParameteriv = provider.getFunctionAddress("glGetTexLevelParameteriv");
-        glGetTexLevelParameterfv = provider.getFunctionAddress("glGetTexLevelParameterfv");
-        glGetTexParameteriv = provider.getFunctionAddress("glGetTexParameteriv");
-        glGetTexParameterfv = provider.getFunctionAddress("glGetTexParameterfv");
-        glHint = provider.getFunctionAddress("glHint");
-        glInterleavedArrays = provider.getFunctionAddress("glInterleavedArrays");
-        glIsEnabled = provider.getFunctionAddress("glIsEnabled");
-        glIsTexture = provider.getFunctionAddress("glIsTexture");
-        glLineWidth = provider.getFunctionAddress("glLineWidth");
-        glLogicOp = provider.getFunctionAddress("glLogicOp");
-        glPixelStorei = provider.getFunctionAddress("glPixelStorei");
-        glPixelStoref = provider.getFunctionAddress("glPixelStoref");
-        glPointSize = provider.getFunctionAddress("glPointSize");
-        glPolygonMode = provider.getFunctionAddress("glPolygonMode");
-        glPolygonOffset = provider.getFunctionAddress("glPolygonOffset");
-        glReadBuffer = provider.getFunctionAddress("glReadBuffer");
-        glReadPixels = provider.getFunctionAddress("glReadPixels");
-        glScissor = provider.getFunctionAddress("glScissor");
-        glStencilFunc = provider.getFunctionAddress("glStencilFunc");
-        glStencilMask = provider.getFunctionAddress("glStencilMask");
-        glStencilOp = provider.getFunctionAddress("glStencilOp");
-        glTexEnvi = provider.getFunctionAddress("glTexEnvi");
-        glTexEnviv = provider.getFunctionAddress("glTexEnviv");
-        glTexEnvf = provider.getFunctionAddress("glTexEnvf");
-        glTexEnvfv = provider.getFunctionAddress("glTexEnvfv");
-        glTexImage2D = provider.getFunctionAddress("glTexImage2D");
-        glTexImage1D = provider.getFunctionAddress("glTexImage1D");
-        glCopyTexImage2D = provider.getFunctionAddress("glCopyTexImage2D");
-        glCopyTexImage1D = provider.getFunctionAddress("glCopyTexImage1D");
-        glCopyTexSubImage1D = provider.getFunctionAddress("glCopyTexSubImage1D");
-        glCopyTexSubImage2D = provider.getFunctionAddress("glCopyTexSubImage2D");
-        glTexParameteri = provider.getFunctionAddress("glTexParameteri");
-        glTexParameteriv = provider.getFunctionAddress("glTexParameteriv");
-        glTexParameterf = provider.getFunctionAddress("glTexParameterf");
-        glTexParameterfv = provider.getFunctionAddress("glTexParameterfv");
-        glTexSubImage1D = provider.getFunctionAddress("glTexSubImage1D");
-        glTexSubImage2D = provider.getFunctionAddress("glTexSubImage2D");
-        glViewport = provider.getFunctionAddress("glViewport");
         glAccum = getFunctionAddress(fc, provider, "glAccum");
         glAlphaFunc = getFunctionAddress(fc, provider, "glAlphaFunc");
         glAreTexturesResident = getFunctionAddress(fc, provider, "glAreTexturesResident");
+        glArrayElement = getFunctionAddress(fc, provider, "glArrayElement");
         glBegin = getFunctionAddress(fc, provider, "glBegin");
         glBitmap = getFunctionAddress(fc, provider, "glBitmap");
         glCallList = getFunctionAddress(fc, provider, "glCallList");
         glCallLists = getFunctionAddress(fc, provider, "glCallLists");
         glClearAccum = getFunctionAddress(fc, provider, "glClearAccum");
         glClearIndex = getFunctionAddress(fc, provider, "glClearIndex");
+        glClipPlane = getFunctionAddress(fc, provider, "glClipPlane");
         glColor3b = getFunctionAddress(fc, provider, "glColor3b");
         glColor3s = getFunctionAddress(fc, provider, "glColor3s");
         glColor3i = getFunctionAddress(fc, provider, "glColor3i");
@@ -4141,6 +4070,7 @@ public final class GLCapabilities {
         glColor4uiv = getFunctionAddress(fc, provider, "glColor4uiv");
         glColorMaterial = getFunctionAddress(fc, provider, "glColorMaterial");
         glColorPointer = getFunctionAddress(fc, provider, "glColorPointer");
+        glCopyPixels = getFunctionAddress(fc, provider, "glCopyPixels");
         glDeleteLists = getFunctionAddress(fc, provider, "glDeleteLists");
         glDisableClientState = provider.getFunctionAddress("glDisableClientState");
         glDrawPixels = getFunctionAddress(fc, provider, "glDrawPixels");
@@ -4167,6 +4097,7 @@ public final class GLCapabilities {
         glFogf = getFunctionAddress(fc, provider, "glFogf");
         glFogfv = getFunctionAddress(fc, provider, "glFogfv");
         glGenLists = getFunctionAddress(fc, provider, "glGenLists");
+        glGetClipPlane = getFunctionAddress(fc, provider, "glGetClipPlane");
         glGetLightiv = getFunctionAddress(fc, provider, "glGetLightiv");
         glGetLightfv = getFunctionAddress(fc, provider, "glGetLightfv");
         glGetMapiv = getFunctionAddress(fc, provider, "glGetMapiv");
@@ -4178,6 +4109,8 @@ public final class GLCapabilities {
         glGetPixelMapusv = getFunctionAddress(fc, provider, "glGetPixelMapusv");
         glGetPixelMapuiv = getFunctionAddress(fc, provider, "glGetPixelMapuiv");
         glGetPolygonStipple = getFunctionAddress(fc, provider, "glGetPolygonStipple");
+        glGetTexEnviv = getFunctionAddress(fc, provider, "glGetTexEnviv");
+        glGetTexEnvfv = getFunctionAddress(fc, provider, "glGetTexEnvfv");
         glGetTexGeniv = getFunctionAddress(fc, provider, "glGetTexGeniv");
         glGetTexGenfv = getFunctionAddress(fc, provider, "glGetTexGenfv");
         glGetTexGendv = getFunctionAddress(fc, provider, "glGetTexGendv");
@@ -4194,6 +4127,7 @@ public final class GLCapabilities {
         glIndexMask = getFunctionAddress(fc, provider, "glIndexMask");
         glIndexPointer = getFunctionAddress(fc, provider, "glIndexPointer");
         glInitNames = getFunctionAddress(fc, provider, "glInitNames");
+        glInterleavedArrays = getFunctionAddress(fc, provider, "glInterleavedArrays");
         glIsList = getFunctionAddress(fc, provider, "glIsList");
         glLightModeli = getFunctionAddress(fc, provider, "glLightModeli");
         glLightModelf = getFunctionAddress(fc, provider, "glLightModelf");
@@ -4328,6 +4262,10 @@ public final class GLCapabilities {
         glTexCoord4iv = getFunctionAddress(fc, provider, "glTexCoord4iv");
         glTexCoord4dv = getFunctionAddress(fc, provider, "glTexCoord4dv");
         glTexCoordPointer = getFunctionAddress(fc, provider, "glTexCoordPointer");
+        glTexEnvi = getFunctionAddress(fc, provider, "glTexEnvi");
+        glTexEnviv = getFunctionAddress(fc, provider, "glTexEnviv");
+        glTexEnvf = getFunctionAddress(fc, provider, "glTexEnvf");
+        glTexEnvfv = getFunctionAddress(fc, provider, "glTexEnvfv");
         glTexGeni = getFunctionAddress(fc, provider, "glTexGeni");
         glTexGeniv = getFunctionAddress(fc, provider, "glTexGeniv");
         glTexGenf = getFunctionAddress(fc, provider, "glTexGenf");
@@ -4361,19 +4299,72 @@ public final class GLCapabilities {
         glVertex4iv = getFunctionAddress(fc, provider, "glVertex4iv");
         glVertex4dv = getFunctionAddress(fc, provider, "glVertex4dv");
         glVertexPointer = getFunctionAddress(fc, provider, "glVertexPointer");
+        glEnable = provider.getFunctionAddress("glEnable");
+        glDisable = provider.getFunctionAddress("glDisable");
+        glBindTexture = provider.getFunctionAddress("glBindTexture");
+        glBlendFunc = provider.getFunctionAddress("glBlendFunc");
+        glClear = provider.getFunctionAddress("glClear");
+        glClearColor = provider.getFunctionAddress("glClearColor");
+        glClearDepth = provider.getFunctionAddress("glClearDepth");
+        glClearStencil = provider.getFunctionAddress("glClearStencil");
+        glColorMask = provider.getFunctionAddress("glColorMask");
+        glCullFace = provider.getFunctionAddress("glCullFace");
+        glDepthFunc = provider.getFunctionAddress("glDepthFunc");
+        glDepthMask = provider.getFunctionAddress("glDepthMask");
+        glDepthRange = provider.getFunctionAddress("glDepthRange");
+        glDrawArrays = provider.getFunctionAddress("glDrawArrays");
+        glDrawBuffer = provider.getFunctionAddress("glDrawBuffer");
+        glDrawElements = provider.getFunctionAddress("glDrawElements");
+        glFinish = provider.getFunctionAddress("glFinish");
+        glFlush = provider.getFunctionAddress("glFlush");
+        glFrontFace = provider.getFunctionAddress("glFrontFace");
+        glGenTextures = provider.getFunctionAddress("glGenTextures");
+        glDeleteTextures = provider.getFunctionAddress("glDeleteTextures");
+        glGetBooleanv = provider.getFunctionAddress("glGetBooleanv");
+        glGetFloatv = provider.getFunctionAddress("glGetFloatv");
+        glGetIntegerv = provider.getFunctionAddress("glGetIntegerv");
+        glGetDoublev = provider.getFunctionAddress("glGetDoublev");
+        glGetError = provider.getFunctionAddress("glGetError");
+        glGetPointerv = provider.getFunctionAddress("glGetPointerv");
+        glGetString = provider.getFunctionAddress("glGetString");
+        glGetTexImage = provider.getFunctionAddress("glGetTexImage");
+        glGetTexLevelParameteriv = provider.getFunctionAddress("glGetTexLevelParameteriv");
+        glGetTexLevelParameterfv = provider.getFunctionAddress("glGetTexLevelParameterfv");
+        glGetTexParameteriv = provider.getFunctionAddress("glGetTexParameteriv");
+        glGetTexParameterfv = provider.getFunctionAddress("glGetTexParameterfv");
+        glHint = provider.getFunctionAddress("glHint");
+        glIsEnabled = provider.getFunctionAddress("glIsEnabled");
+        glIsTexture = provider.getFunctionAddress("glIsTexture");
+        glLineWidth = provider.getFunctionAddress("glLineWidth");
+        glLogicOp = provider.getFunctionAddress("glLogicOp");
+        glPixelStorei = provider.getFunctionAddress("glPixelStorei");
+        glPixelStoref = provider.getFunctionAddress("glPixelStoref");
+        glPointSize = provider.getFunctionAddress("glPointSize");
+        glPolygonMode = provider.getFunctionAddress("glPolygonMode");
+        glPolygonOffset = provider.getFunctionAddress("glPolygonOffset");
+        glReadBuffer = provider.getFunctionAddress("glReadBuffer");
+        glReadPixels = provider.getFunctionAddress("glReadPixels");
+        glScissor = provider.getFunctionAddress("glScissor");
+        glStencilFunc = provider.getFunctionAddress("glStencilFunc");
+        glStencilMask = provider.getFunctionAddress("glStencilMask");
+        glStencilOp = provider.getFunctionAddress("glStencilOp");
+        glTexImage1D = provider.getFunctionAddress("glTexImage1D");
+        glTexImage2D = provider.getFunctionAddress("glTexImage2D");
+        glCopyTexImage1D = provider.getFunctionAddress("glCopyTexImage1D");
+        glCopyTexImage2D = provider.getFunctionAddress("glCopyTexImage2D");
+        glCopyTexSubImage1D = provider.getFunctionAddress("glCopyTexSubImage1D");
+        glCopyTexSubImage2D = provider.getFunctionAddress("glCopyTexSubImage2D");
+        glTexParameteri = provider.getFunctionAddress("glTexParameteri");
+        glTexParameteriv = provider.getFunctionAddress("glTexParameteriv");
+        glTexParameterf = provider.getFunctionAddress("glTexParameterf");
+        glTexParameterfv = provider.getFunctionAddress("glTexParameterfv");
+        glTexSubImage1D = provider.getFunctionAddress("glTexSubImage1D");
+        glTexSubImage2D = provider.getFunctionAddress("glTexSubImage2D");
+        glViewport = provider.getFunctionAddress("glViewport");
         glTexImage3D = provider.getFunctionAddress("glTexImage3D");
         glTexSubImage3D = provider.getFunctionAddress("glTexSubImage3D");
         glCopyTexSubImage3D = provider.getFunctionAddress("glCopyTexSubImage3D");
         glDrawRangeElements = provider.getFunctionAddress("glDrawRangeElements");
-        glCompressedTexImage3D = provider.getFunctionAddress("glCompressedTexImage3D");
-        glCompressedTexImage2D = provider.getFunctionAddress("glCompressedTexImage2D");
-        glCompressedTexImage1D = provider.getFunctionAddress("glCompressedTexImage1D");
-        glCompressedTexSubImage3D = provider.getFunctionAddress("glCompressedTexSubImage3D");
-        glCompressedTexSubImage2D = provider.getFunctionAddress("glCompressedTexSubImage2D");
-        glCompressedTexSubImage1D = provider.getFunctionAddress("glCompressedTexSubImage1D");
-        glGetCompressedTexImage = provider.getFunctionAddress("glGetCompressedTexImage");
-        glSampleCoverage = provider.getFunctionAddress("glSampleCoverage");
-        glActiveTexture = provider.getFunctionAddress("glActiveTexture");
         glClientActiveTexture = getFunctionAddress(fc, provider, "glClientActiveTexture");
         glMultiTexCoord1f = getFunctionAddress(fc, provider, "glMultiTexCoord1f");
         glMultiTexCoord1s = getFunctionAddress(fc, provider, "glMultiTexCoord1s");
@@ -4411,15 +4402,15 @@ public final class GLCapabilities {
         glLoadTransposeMatrixd = getFunctionAddress(fc, provider, "glLoadTransposeMatrixd");
         glMultTransposeMatrixf = getFunctionAddress(fc, provider, "glMultTransposeMatrixf");
         glMultTransposeMatrixd = getFunctionAddress(fc, provider, "glMultTransposeMatrixd");
-        glBlendColor = provider.getFunctionAddress("glBlendColor");
-        glBlendEquation = provider.getFunctionAddress("glBlendEquation");
-        glMultiDrawArrays = provider.getFunctionAddress("glMultiDrawArrays");
-        glMultiDrawElements = provider.getFunctionAddress("glMultiDrawElements");
-        glPointParameterf = provider.getFunctionAddress("glPointParameterf");
-        glPointParameteri = provider.getFunctionAddress("glPointParameteri");
-        glPointParameterfv = provider.getFunctionAddress("glPointParameterfv");
-        glPointParameteriv = provider.getFunctionAddress("glPointParameteriv");
-        glBlendFuncSeparate = provider.getFunctionAddress("glBlendFuncSeparate");
+        glCompressedTexImage3D = provider.getFunctionAddress("glCompressedTexImage3D");
+        glCompressedTexImage2D = provider.getFunctionAddress("glCompressedTexImage2D");
+        glCompressedTexImage1D = provider.getFunctionAddress("glCompressedTexImage1D");
+        glCompressedTexSubImage3D = provider.getFunctionAddress("glCompressedTexSubImage3D");
+        glCompressedTexSubImage2D = provider.getFunctionAddress("glCompressedTexSubImage2D");
+        glCompressedTexSubImage1D = provider.getFunctionAddress("glCompressedTexSubImage1D");
+        glGetCompressedTexImage = provider.getFunctionAddress("glGetCompressedTexImage");
+        glSampleCoverage = provider.getFunctionAddress("glSampleCoverage");
+        glActiveTexture = provider.getFunctionAddress("glActiveTexture");
         glFogCoordf = getFunctionAddress(fc, provider, "glFogCoordf");
         glFogCoordd = getFunctionAddress(fc, provider, "glFogCoordd");
         glFogCoordfv = getFunctionAddress(fc, provider, "glFogCoordfv");
@@ -4458,6 +4449,15 @@ public final class GLCapabilities {
         glWindowPos3sv = getFunctionAddress(fc, provider, "glWindowPos3sv");
         glWindowPos3fv = getFunctionAddress(fc, provider, "glWindowPos3fv");
         glWindowPos3dv = getFunctionAddress(fc, provider, "glWindowPos3dv");
+        glBlendColor = provider.getFunctionAddress("glBlendColor");
+        glBlendEquation = provider.getFunctionAddress("glBlendEquation");
+        glMultiDrawArrays = provider.getFunctionAddress("glMultiDrawArrays");
+        glMultiDrawElements = provider.getFunctionAddress("glMultiDrawElements");
+        glPointParameterf = provider.getFunctionAddress("glPointParameterf");
+        glPointParameteri = provider.getFunctionAddress("glPointParameteri");
+        glPointParameterfv = provider.getFunctionAddress("glPointParameterfv");
+        glPointParameteriv = provider.getFunctionAddress("glPointParameteriv");
+        glBlendFuncSeparate = provider.getFunctionAddress("glBlendFuncSeparate");
         glBindBuffer = provider.getFunctionAddress("glBindBuffer");
         glDeleteBuffers = provider.getFunctionAddress("glDeleteBuffers");
         glGenBuffers = provider.getFunctionAddress("glGenBuffers");
@@ -4691,34 +4691,6 @@ public final class GLCapabilities {
         glGetInteger64v = provider.getFunctionAddress("glGetInteger64v");
         glGetInteger64i_v = provider.getFunctionAddress("glGetInteger64i_v");
         glGetSynciv = provider.getFunctionAddress("glGetSynciv");
-        glBindFragDataLocationIndexed = provider.getFunctionAddress("glBindFragDataLocationIndexed");
-        glGetFragDataIndex = provider.getFunctionAddress("glGetFragDataIndex");
-        glGenSamplers = provider.getFunctionAddress("glGenSamplers");
-        glDeleteSamplers = provider.getFunctionAddress("glDeleteSamplers");
-        glIsSampler = provider.getFunctionAddress("glIsSampler");
-        glBindSampler = provider.getFunctionAddress("glBindSampler");
-        glSamplerParameteri = provider.getFunctionAddress("glSamplerParameteri");
-        glSamplerParameterf = provider.getFunctionAddress("glSamplerParameterf");
-        glSamplerParameteriv = provider.getFunctionAddress("glSamplerParameteriv");
-        glSamplerParameterfv = provider.getFunctionAddress("glSamplerParameterfv");
-        glSamplerParameterIiv = provider.getFunctionAddress("glSamplerParameterIiv");
-        glSamplerParameterIuiv = provider.getFunctionAddress("glSamplerParameterIuiv");
-        glGetSamplerParameteriv = provider.getFunctionAddress("glGetSamplerParameteriv");
-        glGetSamplerParameterfv = provider.getFunctionAddress("glGetSamplerParameterfv");
-        glGetSamplerParameterIiv = provider.getFunctionAddress("glGetSamplerParameterIiv");
-        glGetSamplerParameterIuiv = provider.getFunctionAddress("glGetSamplerParameterIuiv");
-        glQueryCounter = provider.getFunctionAddress("glQueryCounter");
-        glGetQueryObjecti64v = provider.getFunctionAddress("glGetQueryObjecti64v");
-        glGetQueryObjectui64v = provider.getFunctionAddress("glGetQueryObjectui64v");
-        glVertexAttribDivisor = provider.getFunctionAddress("glVertexAttribDivisor");
-        glVertexAttribP1ui = provider.getFunctionAddress("glVertexAttribP1ui");
-        glVertexAttribP2ui = provider.getFunctionAddress("glVertexAttribP2ui");
-        glVertexAttribP3ui = provider.getFunctionAddress("glVertexAttribP3ui");
-        glVertexAttribP4ui = provider.getFunctionAddress("glVertexAttribP4ui");
-        glVertexAttribP1uiv = provider.getFunctionAddress("glVertexAttribP1uiv");
-        glVertexAttribP2uiv = provider.getFunctionAddress("glVertexAttribP2uiv");
-        glVertexAttribP3uiv = provider.getFunctionAddress("glVertexAttribP3uiv");
-        glVertexAttribP4uiv = provider.getFunctionAddress("glVertexAttribP4uiv");
         glVertexP2ui = getFunctionAddress(fc, provider, "glVertexP2ui");
         glVertexP3ui = getFunctionAddress(fc, provider, "glVertexP3ui");
         glVertexP4ui = getFunctionAddress(fc, provider, "glVertexP4ui");
@@ -4749,6 +4721,34 @@ public final class GLCapabilities {
         glColorP4uiv = getFunctionAddress(fc, provider, "glColorP4uiv");
         glSecondaryColorP3ui = getFunctionAddress(fc, provider, "glSecondaryColorP3ui");
         glSecondaryColorP3uiv = getFunctionAddress(fc, provider, "glSecondaryColorP3uiv");
+        glBindFragDataLocationIndexed = provider.getFunctionAddress("glBindFragDataLocationIndexed");
+        glGetFragDataIndex = provider.getFunctionAddress("glGetFragDataIndex");
+        glGenSamplers = provider.getFunctionAddress("glGenSamplers");
+        glDeleteSamplers = provider.getFunctionAddress("glDeleteSamplers");
+        glIsSampler = provider.getFunctionAddress("glIsSampler");
+        glBindSampler = provider.getFunctionAddress("glBindSampler");
+        glSamplerParameteri = provider.getFunctionAddress("glSamplerParameteri");
+        glSamplerParameterf = provider.getFunctionAddress("glSamplerParameterf");
+        glSamplerParameteriv = provider.getFunctionAddress("glSamplerParameteriv");
+        glSamplerParameterfv = provider.getFunctionAddress("glSamplerParameterfv");
+        glSamplerParameterIiv = provider.getFunctionAddress("glSamplerParameterIiv");
+        glSamplerParameterIuiv = provider.getFunctionAddress("glSamplerParameterIuiv");
+        glGetSamplerParameteriv = provider.getFunctionAddress("glGetSamplerParameteriv");
+        glGetSamplerParameterfv = provider.getFunctionAddress("glGetSamplerParameterfv");
+        glGetSamplerParameterIiv = provider.getFunctionAddress("glGetSamplerParameterIiv");
+        glGetSamplerParameterIuiv = provider.getFunctionAddress("glGetSamplerParameterIuiv");
+        glQueryCounter = provider.getFunctionAddress("glQueryCounter");
+        glGetQueryObjecti64v = provider.getFunctionAddress("glGetQueryObjecti64v");
+        glGetQueryObjectui64v = provider.getFunctionAddress("glGetQueryObjectui64v");
+        glVertexAttribDivisor = provider.getFunctionAddress("glVertexAttribDivisor");
+        glVertexAttribP1ui = provider.getFunctionAddress("glVertexAttribP1ui");
+        glVertexAttribP2ui = provider.getFunctionAddress("glVertexAttribP2ui");
+        glVertexAttribP3ui = provider.getFunctionAddress("glVertexAttribP3ui");
+        glVertexAttribP4ui = provider.getFunctionAddress("glVertexAttribP4ui");
+        glVertexAttribP1uiv = provider.getFunctionAddress("glVertexAttribP1uiv");
+        glVertexAttribP2uiv = provider.getFunctionAddress("glVertexAttribP2uiv");
+        glVertexAttribP3uiv = provider.getFunctionAddress("glVertexAttribP3uiv");
+        glVertexAttribP4uiv = provider.getFunctionAddress("glVertexAttribP4uiv");
         glBlendEquationi = provider.getFunctionAddress("glBlendEquationi");
         glBlendEquationSeparatei = provider.getFunctionAddress("glBlendEquationSeparatei");
         glBlendFunci = provider.getFunctionAddress("glBlendFunci");
@@ -4947,6 +4947,18 @@ public final class GLCapabilities {
         glBindSamplers = provider.getFunctionAddress("glBindSamplers");
         glBindImageTextures = provider.getFunctionAddress("glBindImageTextures");
         glBindVertexBuffers = provider.getFunctionAddress("glBindVertexBuffers");
+        glGetnMapdv = provider.getFunctionAddress("glGetnMapdv");
+        glGetnMapfv = provider.getFunctionAddress("glGetnMapfv");
+        glGetnMapiv = provider.getFunctionAddress("glGetnMapiv");
+        glGetnPixelMapfv = provider.getFunctionAddress("glGetnPixelMapfv");
+        glGetnPixelMapuiv = provider.getFunctionAddress("glGetnPixelMapuiv");
+        glGetnPixelMapusv = provider.getFunctionAddress("glGetnPixelMapusv");
+        glGetnPolygonStipple = provider.getFunctionAddress("glGetnPolygonStipple");
+        glGetnColorTable = provider.getFunctionAddress("glGetnColorTable");
+        glGetnConvolutionFilter = provider.getFunctionAddress("glGetnConvolutionFilter");
+        glGetnSeparableFilter = provider.getFunctionAddress("glGetnSeparableFilter");
+        glGetnHistogram = provider.getFunctionAddress("glGetnHistogram");
+        glGetnMinmax = provider.getFunctionAddress("glGetnMinmax");
         glClipControl = provider.getFunctionAddress("glClipControl");
         glCreateTransformFeedbacks = provider.getFunctionAddress("glCreateTransformFeedbacks");
         glTransformFeedbackBufferBase = provider.getFunctionAddress("glTransformFeedbackBufferBase");
@@ -5050,20 +5062,8 @@ public final class GLCapabilities {
         glGetCompressedTextureSubImage = provider.getFunctionAddress("glGetCompressedTextureSubImage");
         glTextureBarrier = provider.getFunctionAddress("glTextureBarrier");
         glGetGraphicsResetStatus = provider.getFunctionAddress("glGetGraphicsResetStatus");
-        glGetnMapdv = provider.getFunctionAddress("glGetnMapdv");
-        glGetnMapfv = provider.getFunctionAddress("glGetnMapfv");
-        glGetnMapiv = provider.getFunctionAddress("glGetnMapiv");
-        glGetnPixelMapfv = provider.getFunctionAddress("glGetnPixelMapfv");
-        glGetnPixelMapuiv = provider.getFunctionAddress("glGetnPixelMapuiv");
-        glGetnPixelMapusv = provider.getFunctionAddress("glGetnPixelMapusv");
-        glGetnPolygonStipple = provider.getFunctionAddress("glGetnPolygonStipple");
         glGetnTexImage = provider.getFunctionAddress("glGetnTexImage");
         glReadnPixels = provider.getFunctionAddress("glReadnPixels");
-        glGetnColorTable = provider.getFunctionAddress("glGetnColorTable");
-        glGetnConvolutionFilter = provider.getFunctionAddress("glGetnConvolutionFilter");
-        glGetnSeparableFilter = provider.getFunctionAddress("glGetnSeparableFilter");
-        glGetnHistogram = provider.getFunctionAddress("glGetnHistogram");
-        glGetnMinmax = provider.getFunctionAddress("glGetnMinmax");
         glGetnCompressedTexImage = provider.getFunctionAddress("glGetnCompressedTexImage");
         glGetnUniformfv = provider.getFunctionAddress("glGetnUniformfv");
         glGetnUniformdv = provider.getFunctionAddress("glGetnUniformdv");

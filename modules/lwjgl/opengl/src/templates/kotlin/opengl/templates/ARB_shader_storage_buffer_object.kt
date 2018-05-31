@@ -83,5 +83,5 @@ val ARB_shader_storage_buffer_object = "ARBShaderStorageBufferObject".nativeClas
         "MAX_COMBINED_SHADER_OUTPUT_RESOURCES"..0x8F39
     )
 
-    GL43 reuse "ShaderStorageBlockBinding"
+    GL43C reuse "ShaderStorageBlockBinding"
 }

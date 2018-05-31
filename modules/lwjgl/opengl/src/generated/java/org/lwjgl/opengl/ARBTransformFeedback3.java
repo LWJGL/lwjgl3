@@ -69,12 +69,12 @@ public class ARBTransformFeedback3 {
     /**
      * Renders primitives using a count derived from a specifed stream of a transform feedback object.
      *
-     * @param mode   what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
+     * @param mode   what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td></tr><tr><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40C#GL_PATCHES PATCHES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_QUADS QUADS}</td></tr><tr><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td></tr></table>
      * @param id     the name of a transform feedback object from which to retrieve a primitive count
      * @param stream the index of the transform feedback stream from which to retrieve a primitive count
      */
     public static void glDrawTransformFeedbackStream(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream) {
-        GL40.glDrawTransformFeedbackStream(mode, id, stream);
+        GL40C.glDrawTransformFeedbackStream(mode, id, stream);
     }
 
     // --- [ glBeginQueryIndexed ] ---
@@ -87,7 +87,7 @@ public class ARBTransformFeedback3 {
      * @param id     the name of a query object
      */
     public static void glBeginQueryIndexed(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int id) {
-        GL40.glBeginQueryIndexed(target, index, id);
+        GL40C.glBeginQueryIndexed(target, index, id);
     }
 
     // --- [ glEndQueryIndexed ] ---
@@ -99,14 +99,14 @@ public class ARBTransformFeedback3 {
      * @param index  the index of the query target upon which to end the query
      */
     public static void glEndQueryIndexed(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
-        GL40.glEndQueryIndexed(target, index);
+        GL40C.glEndQueryIndexed(target, index);
     }
 
     // --- [ glGetQueryIndexediv ] ---
 
     /** Unsafe version of: {@link #glGetQueryIndexediv GetQueryIndexediv} */
     public static void nglGetQueryIndexediv(int target, int index, int pname, long params) {
-        GL40.nglGetQueryIndexediv(target, index, pname, params);
+        GL40C.nglGetQueryIndexediv(target, index, pname, params);
     }
 
     /**
@@ -118,7 +118,7 @@ public class ARBTransformFeedback3 {
      * @param params the requested data
      */
     public static void glGetQueryIndexediv(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        GL40.glGetQueryIndexediv(target, index, pname, params);
+        GL40C.glGetQueryIndexediv(target, index, pname, params);
     }
 
     /**
@@ -130,12 +130,12 @@ public class ARBTransformFeedback3 {
      */
     @NativeType("void")
     public static int glGetQueryIndexedi(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
-        return GL40.glGetQueryIndexedi(target, index, pname);
+        return GL40C.glGetQueryIndexedi(target, index, pname);
     }
 
     /** Array version of: {@link #glGetQueryIndexediv GetQueryIndexediv} */
     public static void glGetQueryIndexediv(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        GL40.glGetQueryIndexediv(target, index, pname, params);
+        GL40C.glGetQueryIndexediv(target, index, pname, params);
     }
 
 }

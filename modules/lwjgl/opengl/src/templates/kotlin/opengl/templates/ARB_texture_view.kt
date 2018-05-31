@@ -44,5 +44,5 @@ val ARB_texture_view = "ARBTextureView".nativeClassGL("ARB_texture_view") {
         "TEXTURE_IMMUTABLE_LEVELS"..0x82DF
     )
 
-    GL43 reuse "TextureView"
+    GL43C reuse "TextureView"
 }

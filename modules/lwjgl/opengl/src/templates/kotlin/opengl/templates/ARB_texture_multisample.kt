@@ -98,8 +98,8 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
         "UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910D
     )
 
-    GL32 reuse "TexImage2DMultisample"
-    GL32 reuse "TexImage3DMultisample"
-    GL32 reuse "GetMultisamplefv"
-    GL32 reuse "SampleMaski"
+    GL32C reuse "TexImage2DMultisample"
+    GL32C reuse "TexImage3DMultisample"
+    GL32C reuse "GetMultisamplefv"
+    GL32C reuse "SampleMaski"
 }

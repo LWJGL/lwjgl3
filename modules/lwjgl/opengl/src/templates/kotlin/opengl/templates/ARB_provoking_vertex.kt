@@ -45,5 +45,5 @@ val ARB_provoking_vertex = "ARBProvokingVertex".nativeClassGL("ARB_provoking_ver
         "QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION"..0x8E4C
     )
 
-    GL32 reuse "ProvokingVertex"
+    GL32C reuse "ProvokingVertex"
 }

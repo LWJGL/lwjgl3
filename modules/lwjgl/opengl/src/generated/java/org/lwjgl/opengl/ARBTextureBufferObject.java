@@ -17,7 +17,7 @@ import static org.lwjgl.system.Checks.*;
  * array of texels of the specified format.</p>
  * 
  * <p>The use of a buffer object to provide storage allows the texture data to be specified in a number of different ways: via buffer object loads
- * ({@link GL15#glBufferData BufferData}), direct CPU writes ({@link GL15#glMapBuffer MapBuffer}), framebuffer readbacks (EXT_pixel_buffer_object extension). A buffer object can also be loaded
+ * ({@link GL15C#glBufferData BufferData}), direct CPU writes ({@link GL15C#glMapBuffer MapBuffer}), framebuffer readbacks (EXT_pixel_buffer_object extension). A buffer object can also be loaded
  * by transform feedback (NV_transform_feedback extension), which captures selected transformed attributes of vertices processed by the GL. Several of
  * these mechanisms do not require an extra data copy, which would be required when using conventional TexImage-like entry points.</p>
  * 

@@ -13,15 +13,13 @@ import org.lwjgl.*;
 
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The core OpenGL 3.0 functionality. OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language,
- * although versions 1.10 and 1.20 are deprecated in a forward-compatible context.
+ * The OpenGL functionality up to version 3.0. Includes the deprecated symbols of the Compatibility Profile.
+ * 
+ * <p>OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language, although versions 1.10 and 1.20 are
+ * deprecated in a forward-compatible context.</p>
  * 
  * <p>Extensions promoted to core in this release:</p>
  * 
@@ -44,7 +42,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li><a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_sRGB.txt">EXT_framebuffer_sRGB</a></li>
  * </ul>
  */
-public class GL30 {
+public class GL30 extends GL21 {
 
     /** GetTarget */
     public static final int
@@ -508,7 +506,9 @@ public class GL30 {
     // --- [ glGetStringi ] ---
 
     /** Unsafe version of: {@link #glGetStringi GetStringi} */
-    public static native long nglGetStringi(int name, int index);
+    public static long nglGetStringi(int name, int index) {
+        return GL30C.nglGetStringi(name, index);
+    }
 
     /**
      * Queries indexed string state.
@@ -521,17 +521,18 @@ public class GL30 {
     @Nullable
     @NativeType("GLubyte const *")
     public static String glGetStringi(@NativeType("GLenum") int name, @NativeType("GLuint") int index) {
-        long __result = nglGetStringi(name, index);
-        return memUTF8Safe(__result);
+        return GL30C.glGetStringi(name, index);
     }
 
     // --- [ glClearBufferiv ] ---
 
     /** Unsafe version of: {@link #glClearBufferiv ClearBufferiv} */
-    public static native void nglClearBufferiv(int buffer, int drawbuffer, long value);
+    public static void nglClearBufferiv(int buffer, int drawbuffer, long value) {
+        GL30C.nglClearBufferiv(buffer, drawbuffer, value);
+    }
 
     /**
-     * Clears an individual buffer of the currently bound framebuffer object to the {@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
+     * Clears an individual buffer of the currently bound framebuffer object to the {@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
      *
      * @param buffer     the buffer to clear. One of:<br><table><tr><td>{@link GL11#GL_COLOR COLOR}</td><td>{@link GL11#GL_STENCIL STENCIL}</td></tr></table>
      * @param drawbuffer the draw buffer to clear
@@ -541,19 +542,18 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
     public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglClearBufferiv(buffer, drawbuffer, memAddress(value));
+        GL30C.glClearBufferiv(buffer, drawbuffer, value);
     }
 
     // --- [ glClearBufferuiv ] ---
 
     /** Unsafe version of: {@link #glClearBufferuiv ClearBufferuiv} */
-    public static native void nglClearBufferuiv(int buffer, int drawbuffer, long value);
+    public static void nglClearBufferuiv(int buffer, int drawbuffer, long value) {
+        GL30C.nglClearBufferuiv(buffer, drawbuffer, value);
+    }
 
     /**
-     * Clears an individual buffer of the currently bound framebuffer object to the {@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
+     * Clears an individual buffer of the currently bound framebuffer object to the {@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
      *
      * @param buffer     the buffer to clear. Must be:<br><table><tr><td>{@link GL11#GL_COLOR COLOR}</td></tr></table>
      * @param drawbuffer the draw buffer to clear
@@ -562,19 +562,18 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
     public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") IntBuffer value) {
-        if (CHECKS) {
-            check(value, 4);
-        }
-        nglClearBufferuiv(buffer, drawbuffer, memAddress(value));
+        GL30C.glClearBufferuiv(buffer, drawbuffer, value);
     }
 
     // --- [ glClearBufferfv ] ---
 
     /** Unsafe version of: {@link #glClearBufferfv ClearBufferfv} */
-    public static native void nglClearBufferfv(int buffer, int drawbuffer, long value);
+    public static void nglClearBufferfv(int buffer, int drawbuffer, long value) {
+        GL30C.nglClearBufferfv(buffer, drawbuffer, value);
+    }
 
     /**
-     * Clears an individual buffer of the currently bound framebuffer object to the {@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
+     * Clears an individual buffer of the currently bound framebuffer object to the {@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
      *
      * @param buffer     the buffer to clear. One of:<br><table><tr><td>{@link GL11#GL_COLOR COLOR}</td><td>{@link GL11#GL_DEPTH DEPTH}</td></tr></table>
      * @param drawbuffer the draw buffer to clear
@@ -584,25 +583,24 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
     public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") FloatBuffer value) {
-        if (CHECKS) {
-            check(value, 1);
-        }
-        nglClearBufferfv(buffer, drawbuffer, memAddress(value));
+        GL30C.glClearBufferfv(buffer, drawbuffer, value);
     }
 
     // --- [ glClearBufferfi ] ---
 
     /**
-     * Clears an individual buffer of the currently bound framebuffer object to the {@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
+     * Clears an individual buffer of the currently bound framebuffer object to the {@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER} binding.
      *
-     * @param buffer     the buffer to clear. Must be:<br><table><tr><td>{@link #GL_DEPTH_STENCIL DEPTH_STENCIL}</td></tr></table>
+     * @param buffer     the buffer to clear. Must be:<br><table><tr><td>{@link GL30C#GL_DEPTH_STENCIL DEPTH_STENCIL}</td></tr></table>
      * @param drawbuffer the draw buffer to clear
      * @param depth      the depth value to clear the buffer to
      * @param stencil    the stencil value to clear the buffer to
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferfi">Reference Page</a>
      */
-    public static native void glClearBufferfi(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat") float depth, @NativeType("GLint") int stencil);
+    public static void glClearBufferfi(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat") float depth, @NativeType("GLint") int stencil) {
+        GL30C.glClearBufferfi(buffer, drawbuffer, depth, stencil);
+    }
 
     // --- [ glVertexAttribI1i ] ---
 
@@ -614,7 +612,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI1i(@NativeType("GLuint") int index, @NativeType("GLint") int x);
+    public static void glVertexAttribI1i(@NativeType("GLuint") int index, @NativeType("GLint") int x) {
+        GL30C.glVertexAttribI1i(index, x);
+    }
 
     // --- [ glVertexAttribI2i ] ---
 
@@ -627,7 +627,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI2i(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y);
+    public static void glVertexAttribI2i(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y) {
+        GL30C.glVertexAttribI2i(index, x, y);
+    }
 
     // --- [ glVertexAttribI3i ] ---
 
@@ -641,7 +643,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI3i(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z);
+    public static void glVertexAttribI3i(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z) {
+        GL30C.glVertexAttribI3i(index, x, y, z);
+    }
 
     // --- [ glVertexAttribI4i ] ---
 
@@ -656,7 +660,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI4i(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w);
+    public static void glVertexAttribI4i(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w) {
+        GL30C.glVertexAttribI4i(index, x, y, z, w);
+    }
 
     // --- [ glVertexAttribI1ui ] ---
 
@@ -668,7 +674,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI1ui(@NativeType("GLuint") int index, @NativeType("GLuint") int x);
+    public static void glVertexAttribI1ui(@NativeType("GLuint") int index, @NativeType("GLuint") int x) {
+        GL30C.glVertexAttribI1ui(index, x);
+    }
 
     // --- [ glVertexAttribI2ui ] ---
 
@@ -681,7 +689,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI2ui(@NativeType("GLuint") int index, @NativeType("GLuint") int x, @NativeType("GLuint") int y);
+    public static void glVertexAttribI2ui(@NativeType("GLuint") int index, @NativeType("GLuint") int x, @NativeType("GLuint") int y) {
+        GL30C.glVertexAttribI2ui(index, x, y);
+    }
 
     // --- [ glVertexAttribI3ui ] ---
 
@@ -695,7 +705,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI3ui(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z);
+    public static void glVertexAttribI3ui(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z) {
+        GL30C.glVertexAttribI3ui(index, x, y, z);
+    }
 
     // --- [ glVertexAttribI4ui ] ---
 
@@ -710,12 +722,16 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
-    public static native void glVertexAttribI4ui(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w);
+    public static void glVertexAttribI4ui(@NativeType("GLuint") int index, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w) {
+        GL30C.glVertexAttribI4ui(index, x, y, z, w);
+    }
 
     // --- [ glVertexAttribI1iv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI1iv VertexAttribI1iv} */
-    public static native void nglVertexAttribI1iv(int index, long v);
+    public static void nglVertexAttribI1iv(int index, long v) {
+        GL30C.nglVertexAttribI1iv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI1i VertexAttribI1i}.
@@ -726,16 +742,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI1iv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 1);
-        }
-        nglVertexAttribI1iv(index, memAddress(v));
+        GL30C.glVertexAttribI1iv(index, v);
     }
 
     // --- [ glVertexAttribI2iv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI2iv VertexAttribI2iv} */
-    public static native void nglVertexAttribI2iv(int index, long v);
+    public static void nglVertexAttribI2iv(int index, long v) {
+        GL30C.nglVertexAttribI2iv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI2i VertexAttribI2i}.
@@ -746,16 +761,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI2iv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 2);
-        }
-        nglVertexAttribI2iv(index, memAddress(v));
+        GL30C.glVertexAttribI2iv(index, v);
     }
 
     // --- [ glVertexAttribI3iv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI3iv VertexAttribI3iv} */
-    public static native void nglVertexAttribI3iv(int index, long v);
+    public static void nglVertexAttribI3iv(int index, long v) {
+        GL30C.nglVertexAttribI3iv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI3i VertexAttribI3i}.
@@ -766,16 +780,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI3iv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 3);
-        }
-        nglVertexAttribI3iv(index, memAddress(v));
+        GL30C.glVertexAttribI3iv(index, v);
     }
 
     // --- [ glVertexAttribI4iv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI4iv VertexAttribI4iv} */
-    public static native void nglVertexAttribI4iv(int index, long v);
+    public static void nglVertexAttribI4iv(int index, long v) {
+        GL30C.nglVertexAttribI4iv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI4i VertexAttribI4i}.
@@ -786,16 +799,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4iv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribI4iv(index, memAddress(v));
+        GL30C.glVertexAttribI4iv(index, v);
     }
 
     // --- [ glVertexAttribI1uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI1uiv VertexAttribI1uiv} */
-    public static native void nglVertexAttribI1uiv(int index, long v);
+    public static void nglVertexAttribI1uiv(int index, long v) {
+        GL30C.nglVertexAttribI1uiv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI1ui VertexAttribI1ui}.
@@ -806,16 +818,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI1uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 1);
-        }
-        nglVertexAttribI1uiv(index, memAddress(v));
+        GL30C.glVertexAttribI1uiv(index, v);
     }
 
     // --- [ glVertexAttribI2uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI2uiv VertexAttribI2uiv} */
-    public static native void nglVertexAttribI2uiv(int index, long v);
+    public static void nglVertexAttribI2uiv(int index, long v) {
+        GL30C.nglVertexAttribI2uiv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI2ui VertexAttribI2ui}.
@@ -826,16 +837,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI2uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 2);
-        }
-        nglVertexAttribI2uiv(index, memAddress(v));
+        GL30C.glVertexAttribI2uiv(index, v);
     }
 
     // --- [ glVertexAttribI3uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI3uiv VertexAttribI3uiv} */
-    public static native void nglVertexAttribI3uiv(int index, long v);
+    public static void nglVertexAttribI3uiv(int index, long v) {
+        GL30C.nglVertexAttribI3uiv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI3ui VertexAttribI3ui}.
@@ -846,16 +856,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI3uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 3);
-        }
-        nglVertexAttribI3uiv(index, memAddress(v));
+        GL30C.glVertexAttribI3uiv(index, v);
     }
 
     // --- [ glVertexAttribI4uiv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI4uiv VertexAttribI4uiv} */
-    public static native void nglVertexAttribI4uiv(int index, long v);
+    public static void nglVertexAttribI4uiv(int index, long v) {
+        GL30C.nglVertexAttribI4uiv(index, v);
+    }
 
     /**
      * Pointer version of {@link #glVertexAttribI4ui VertexAttribI4ui}.
@@ -866,16 +875,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribI4uiv(index, memAddress(v));
+        GL30C.glVertexAttribI4uiv(index, v);
     }
 
     // --- [ glVertexAttribI4bv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI4bv VertexAttribI4bv} */
-    public static native void nglVertexAttribI4bv(int index, long v);
+    public static void nglVertexAttribI4bv(int index, long v) {
+        GL30C.nglVertexAttribI4bv(index, v);
+    }
 
     /**
      * Byte version of {@link #glVertexAttribI4iv VertexAttribI4iv}.
@@ -886,16 +894,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4bv(@NativeType("GLuint") int index, @NativeType("GLbyte const *") ByteBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribI4bv(index, memAddress(v));
+        GL30C.glVertexAttribI4bv(index, v);
     }
 
     // --- [ glVertexAttribI4sv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI4sv VertexAttribI4sv} */
-    public static native void nglVertexAttribI4sv(int index, long v);
+    public static void nglVertexAttribI4sv(int index, long v) {
+        GL30C.nglVertexAttribI4sv(index, v);
+    }
 
     /**
      * Short version of {@link #glVertexAttribI4iv VertexAttribI4iv}.
@@ -906,16 +913,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribI4sv(index, memAddress(v));
+        GL30C.glVertexAttribI4sv(index, v);
     }
 
     // --- [ glVertexAttribI4ubv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI4ubv VertexAttribI4ubv} */
-    public static native void nglVertexAttribI4ubv(int index, long v);
+    public static void nglVertexAttribI4ubv(int index, long v) {
+        GL30C.nglVertexAttribI4ubv(index, v);
+    }
 
     /**
      * Byte version of {@link #glVertexAttribI4uiv VertexAttribI4uiv}.
@@ -926,16 +932,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4ubv(@NativeType("GLuint") int index, @NativeType("GLbyte const *") ByteBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribI4ubv(index, memAddress(v));
+        GL30C.glVertexAttribI4ubv(index, v);
     }
 
     // --- [ glVertexAttribI4usv ] ---
 
     /** Unsafe version of: {@link #glVertexAttribI4usv VertexAttribI4usv} */
-    public static native void nglVertexAttribI4usv(int index, long v);
+    public static void nglVertexAttribI4usv(int index, long v) {
+        GL30C.nglVertexAttribI4usv(index, v);
+    }
 
     /**
      * Short version of {@link #glVertexAttribI4uiv VertexAttribI4uiv}.
@@ -946,16 +951,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4usv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
-        if (CHECKS) {
-            check(v, 4);
-        }
-        nglVertexAttribI4usv(index, memAddress(v));
+        GL30C.glVertexAttribI4usv(index, v);
     }
 
     // --- [ glVertexAttribIPointer ] ---
 
     /** Unsafe version of: {@link #glVertexAttribIPointer VertexAttribIPointer} */
-    public static native void nglVertexAttribIPointer(int index, int size, int type, int stride, long pointer);
+    public static void nglVertexAttribIPointer(int index, int size, int type, int stride, long pointer) {
+        GL30C.nglVertexAttribIPointer(index, size, type, stride, pointer);
+    }
 
     /**
      * Specifies the location and organization of a pure integer vertex attribute array.
@@ -971,7 +975,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribIPointer">Reference Page</a>
      */
     public static void glVertexAttribIPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
-        nglVertexAttribIPointer(index, size, type, stride, memAddress(pointer));
+        GL30C.glVertexAttribIPointer(index, size, type, stride, pointer);
     }
 
     /**
@@ -988,7 +992,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribIPointer">Reference Page</a>
      */
     public static void glVertexAttribIPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
-        nglVertexAttribIPointer(index, size, type, stride, pointer);
+        GL30C.glVertexAttribIPointer(index, size, type, stride, pointer);
     }
 
     /**
@@ -1005,7 +1009,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribIPointer">Reference Page</a>
      */
     public static void glVertexAttribIPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ShortBuffer pointer) {
-        nglVertexAttribIPointer(index, size, type, stride, memAddress(pointer));
+        GL30C.glVertexAttribIPointer(index, size, type, stride, pointer);
     }
 
     /**
@@ -1022,13 +1026,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribIPointer">Reference Page</a>
      */
     public static void glVertexAttribIPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") IntBuffer pointer) {
-        nglVertexAttribIPointer(index, size, type, stride, memAddress(pointer));
+        GL30C.glVertexAttribIPointer(index, size, type, stride, pointer);
     }
 
     // --- [ glGetVertexAttribIiv ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribIiv GetVertexAttribIiv} */
-    public static native void nglGetVertexAttribIiv(int index, int pname, long params);
+    public static void nglGetVertexAttribIiv(int index, int pname, long params) {
+        GL30C.nglGetVertexAttribIiv(index, pname, params);
+    }
 
     /**
      * Returns the value of a pure integer generic vertex attribute parameter.
@@ -1040,10 +1046,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribIiv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 4);
-        }
-        nglGetVertexAttribIiv(index, pname, memAddress(params));
+        GL30C.glGetVertexAttribIiv(index, pname, params);
     }
 
     /**
@@ -1056,20 +1059,15 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGetVertexAttribIi(@NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetVertexAttribIiv(index, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetVertexAttribIi(index, pname);
     }
 
     // --- [ glGetVertexAttribIuiv ] ---
 
     /** Unsafe version of: {@link #glGetVertexAttribIuiv GetVertexAttribIuiv} */
-    public static native void nglGetVertexAttribIuiv(int index, int pname, long params);
+    public static void nglGetVertexAttribIuiv(int index, int pname, long params) {
+        GL30C.nglGetVertexAttribIuiv(index, pname, params);
+    }
 
     /**
      * Unsigned version of {@link #glGetVertexAttribIiv GetVertexAttribIiv}.
@@ -1081,10 +1079,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribIuiv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 4);
-        }
-        nglGetVertexAttribIuiv(index, pname, memAddress(params));
+        GL30C.glGetVertexAttribIuiv(index, pname, params);
     }
 
     /**
@@ -1097,14 +1092,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGetVertexAttribIui(@NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetVertexAttribIuiv(index, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetVertexAttribIui(index, pname);
     }
 
     // --- [ glUniform1ui ] ---
@@ -1117,7 +1105,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
-    public static native void glUniform1ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0);
+    public static void glUniform1ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0) {
+        GL30C.glUniform1ui(location, v0);
+    }
 
     // --- [ glUniform2ui ] ---
 
@@ -1130,7 +1120,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
-    public static native void glUniform2ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0, @NativeType("GLuint") int v1);
+    public static void glUniform2ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0, @NativeType("GLuint") int v1) {
+        GL30C.glUniform2ui(location, v0, v1);
+    }
 
     // --- [ glUniform3ui ] ---
 
@@ -1144,7 +1136,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
-    public static native void glUniform3ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0, @NativeType("GLuint") int v1, @NativeType("GLuint") int v2);
+    public static void glUniform3ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0, @NativeType("GLuint") int v1, @NativeType("GLuint") int v2) {
+        GL30C.glUniform3ui(location, v0, v1, v2);
+    }
 
     // --- [ glUniform4ui ] ---
 
@@ -1159,7 +1153,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
-    public static native void glUniform4ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0, @NativeType("GLuint") int v1, @NativeType("GLuint") int v2, @NativeType("GLuint") int v3);
+    public static void glUniform4ui(@NativeType("GLint") int location, @NativeType("GLuint") int v0, @NativeType("GLuint") int v1, @NativeType("GLuint") int v2, @NativeType("GLuint") int v3) {
+        GL30C.glUniform4ui(location, v0, v1, v2, v3);
+    }
 
     // --- [ glUniform1uiv ] ---
 
@@ -1168,7 +1164,9 @@ public class GL30 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform1uiv(int location, int count, long value);
+    public static void nglUniform1uiv(int location, int count, long value) {
+        GL30C.nglUniform1uiv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single uint uniform variable or a uint uniform variable array for the current program object.
@@ -1179,7 +1177,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform1uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
-        nglUniform1uiv(location, value.remaining(), memAddress(value));
+        GL30C.glUniform1uiv(location, value);
     }
 
     // --- [ glUniform2uiv ] ---
@@ -1189,7 +1187,9 @@ public class GL30 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform2uiv(int location, int count, long value);
+    public static void nglUniform2uiv(int location, int count, long value) {
+        GL30C.nglUniform2uiv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for the current program object.
@@ -1200,7 +1200,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform2uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
-        nglUniform2uiv(location, value.remaining() >> 1, memAddress(value));
+        GL30C.glUniform2uiv(location, value);
     }
 
     // --- [ glUniform3uiv ] ---
@@ -1210,7 +1210,9 @@ public class GL30 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform3uiv(int location, int count, long value);
+    public static void nglUniform3uiv(int location, int count, long value) {
+        GL30C.nglUniform3uiv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for the current program object.
@@ -1221,7 +1223,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform3uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
-        nglUniform3uiv(location, value.remaining() / 3, memAddress(value));
+        GL30C.glUniform3uiv(location, value);
     }
 
     // --- [ glUniform4uiv ] ---
@@ -1231,7 +1233,9 @@ public class GL30 {
      *
      * @param count the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array.
      */
-    public static native void nglUniform4uiv(int location, int count, long value);
+    public static void nglUniform4uiv(int location, int count, long value) {
+        GL30C.nglUniform4uiv(location, count, value);
+    }
 
     /**
      * Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for the current program object.
@@ -1242,13 +1246,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform4uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
-        nglUniform4uiv(location, value.remaining() >> 2, memAddress(value));
+        GL30C.glUniform4uiv(location, value);
     }
 
     // --- [ glGetUniformuiv ] ---
 
     /** Unsafe version of: {@link #glGetUniformuiv GetUniformuiv} */
-    public static native void nglGetUniformuiv(int program, int location, long params);
+    public static void nglGetUniformuiv(int program, int location, long params) {
+        GL30C.nglGetUniformuiv(program, location, params);
+    }
 
     /**
      * Returns the uint value(s) of a uniform variable.
@@ -1260,10 +1266,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetUniformuiv(program, location, memAddress(params));
+        GL30C.glGetUniformuiv(program, location, params);
     }
 
     /**
@@ -1276,20 +1279,15 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGetUniformui(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetUniformuiv(program, location, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetUniformui(program, location);
     }
 
     // --- [ glBindFragDataLocation ] ---
 
     /** Unsafe version of: {@link #glBindFragDataLocation BindFragDataLocation} */
-    public static native void nglBindFragDataLocation(int program, int colorNumber, long name);
+    public static void nglBindFragDataLocation(int program, int colorNumber, long name) {
+        GL30C.nglBindFragDataLocation(program, colorNumber, name);
+    }
 
     /**
      * Binds a user-defined varying out variable to a fragment shader color number.
@@ -1301,10 +1299,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindFragDataLocation">Reference Page</a>
      */
     public static void glBindFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        nglBindFragDataLocation(program, colorNumber, memAddress(name));
+        GL30C.glBindFragDataLocation(program, colorNumber, name);
     }
 
     /**
@@ -1317,19 +1312,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindFragDataLocation">Reference Page</a>
      */
     public static void glBindFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindFragDataLocation(program, colorNumber, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glBindFragDataLocation(program, colorNumber, name);
     }
 
     // --- [ glGetFragDataLocation ] ---
 
     /** Unsafe version of: {@link #glGetFragDataLocation GetFragDataLocation} */
-    public static native int nglGetFragDataLocation(int program, long name);
+    public static int nglGetFragDataLocation(int program, long name) {
+        return GL30C.nglGetFragDataLocation(program, name);
+    }
 
     /**
      * Queries the bindings of color numbers to user-defined varying out variables.
@@ -1341,10 +1332,7 @@ public class GL30 {
      */
     @NativeType("GLint")
     public static int glGetFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") ByteBuffer name) {
-        if (CHECKS) {
-            checkNT1(name);
-        }
-        return nglGetFragDataLocation(program, memAddress(name));
+        return GL30C.glGetFragDataLocation(program, name);
     }
 
     /**
@@ -1357,13 +1345,7 @@ public class GL30 {
      */
     @NativeType("GLint")
     public static int glGetFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetFragDataLocation(program, memAddress(nameEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetFragDataLocation(program, name);
     }
 
     // --- [ glBeginConditionalRender ] ---
@@ -1372,11 +1354,13 @@ public class GL30 {
      * Starts conditional rendering.
      *
      * @param id   the name of an occlusion query object whose results are used to determine if the rendering commands are discarded
-     * @param mode how {@code glBeginConditionalRender} interprets the results of the occlusion query. One of:<br><table><tr><td>{@link #GL_QUERY_WAIT QUERY_WAIT}</td><td>{@link #GL_QUERY_NO_WAIT QUERY_NO_WAIT}</td><td>{@link #GL_QUERY_BY_REGION_WAIT QUERY_BY_REGION_WAIT}</td></tr><tr><td>{@link #GL_QUERY_BY_REGION_NO_WAIT QUERY_BY_REGION_NO_WAIT}</td><td>{@link GL45#GL_QUERY_WAIT_INVERTED QUERY_WAIT_INVERTED}</td><td>{@link GL45#GL_QUERY_NO_WAIT_INVERTED QUERY_NO_WAIT_INVERTED}</td></tr><tr><td>{@link GL45#GL_QUERY_BY_REGION_WAIT_INVERTED QUERY_BY_REGION_WAIT_INVERTED}</td><td>{@link GL45#GL_QUERY_BY_REGION_NO_WAIT_INVERTED QUERY_BY_REGION_NO_WAIT_INVERTED}</td></tr></table>
+     * @param mode how {@code glBeginConditionalRender} interprets the results of the occlusion query. One of:<br><table><tr><td>{@link GL30C#GL_QUERY_WAIT QUERY_WAIT}</td><td>{@link GL30C#GL_QUERY_NO_WAIT QUERY_NO_WAIT}</td><td>{@link GL30C#GL_QUERY_BY_REGION_WAIT QUERY_BY_REGION_WAIT}</td></tr><tr><td>{@link GL30C#GL_QUERY_BY_REGION_NO_WAIT QUERY_BY_REGION_NO_WAIT}</td><td>{@link GL45#GL_QUERY_WAIT_INVERTED QUERY_WAIT_INVERTED}</td><td>{@link GL45#GL_QUERY_NO_WAIT_INVERTED QUERY_NO_WAIT_INVERTED}</td></tr><tr><td>{@link GL45#GL_QUERY_BY_REGION_WAIT_INVERTED QUERY_BY_REGION_WAIT_INVERTED}</td><td>{@link GL45#GL_QUERY_BY_REGION_NO_WAIT_INVERTED QUERY_BY_REGION_NO_WAIT_INVERTED}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBeginConditionalRender">Reference Page</a>
      */
-    public static native void glBeginConditionalRender(@NativeType("GLuint") int id, @NativeType("GLenum") int mode);
+    public static void glBeginConditionalRender(@NativeType("GLuint") int id, @NativeType("GLenum") int mode) {
+        GL30C.glBeginConditionalRender(id, mode);
+    }
 
     // --- [ glEndConditionalRender ] ---
 
@@ -1385,35 +1369,15 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glEndConditionalRender">Reference Page</a>
      */
-    public static native void glEndConditionalRender();
+    public static void glEndConditionalRender() {
+        GL30C.glEndConditionalRender();
+    }
 
     // --- [ glMapBufferRange ] ---
 
     /** Unsafe version of: {@link #glMapBufferRange MapBufferRange} */
-    public static native long nglMapBufferRange(int target, long offset, long length, int access);
-
-    /**
-     * Maps a section of a buffer object's data store.
-     * 
-     * <p><b>LWJGL note</b>: This method comes in 2 flavors:</p>
-     * 
-     * <ol>
-     * <li>{@link #glMapBufferRange(int, long, long, int)} - Always returns a new ByteBuffer instance.</li>
-     * <li>{@link #glMapBufferRange(int, long, long, int, ByteBuffer)} - The {@code old_buffer} parameter is reused if not null.</li>
-     * </ol>
-     *
-     * @param target a binding to which the target buffer is bound. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
-     * @param offset the starting offset within the buffer of the range to be mapped
-     * @param length the length of the range to be mapped
-     * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link #GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link #GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link #GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link #GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link #GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link #GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
-     * 
-     * @see <a target="_blank" href="http://docs.gl/gl4/glMapBufferRange">Reference Page</a>
-     */
-    @Nullable
-    @NativeType("void *")
-    public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
-        long __result = nglMapBufferRange(target, offset, length, access);
-        return memByteBufferSafe(__result, (int)length);
+    public static long nglMapBufferRange(int target, long offset, long length, int access) {
+        return GL30C.nglMapBufferRange(target, offset, length, access);
     }
 
     /**
@@ -1426,18 +1390,40 @@ public class GL30 {
      * <li>{@link #glMapBufferRange(int, long, long, int, ByteBuffer)} - The {@code old_buffer} parameter is reused if not null.</li>
      * </ol>
      *
-     * @param target a binding to which the target buffer is bound. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
+     * @param target a binding to which the target buffer is bound. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link GL30C#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
      * @param offset the starting offset within the buffer of the range to be mapped
      * @param length the length of the range to be mapped
-     * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link #GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link #GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link #GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link #GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link #GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link #GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
+     * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link GL30C#GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link GL30C#GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link GL30C#GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link GL30C#GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMapBufferRange">Reference Page</a>
+     */
+    @Nullable
+    @NativeType("void *")
+    public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access) {
+        return GL30C.glMapBufferRange(target, offset, length, access);
+    }
+
+    /**
+     * Maps a section of a buffer object's data store.
+     * 
+     * <p><b>LWJGL note</b>: This method comes in 2 flavors:</p>
+     * 
+     * <ol>
+     * <li>{@link #glMapBufferRange(int, long, long, int)} - Always returns a new ByteBuffer instance.</li>
+     * <li>{@link #glMapBufferRange(int, long, long, int, ByteBuffer)} - The {@code old_buffer} parameter is reused if not null.</li>
+     * </ol>
+     *
+     * @param target a binding to which the target buffer is bound. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link GL30C#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
+     * @param offset the starting offset within the buffer of the range to be mapped
+     * @param length the length of the range to be mapped
+     * @param access a combination of access flags indicating the desired access to the range. One or more of:<br><table><tr><td>{@link GL30C#GL_MAP_READ_BIT MAP_READ_BIT}</td><td>{@link GL30C#GL_MAP_WRITE_BIT MAP_WRITE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_RANGE_BIT MAP_INVALIDATE_RANGE_BIT}</td><td>{@link GL30C#GL_MAP_INVALIDATE_BUFFER_BIT MAP_INVALIDATE_BUFFER_BIT}</td></tr><tr><td>{@link GL30C#GL_MAP_FLUSH_EXPLICIT_BIT MAP_FLUSH_EXPLICIT_BIT}</td><td>{@link GL30C#GL_MAP_UNSYNCHRONIZED_BIT MAP_UNSYNCHRONIZED_BIT}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMapBufferRange">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length, @NativeType("GLbitfield") int access, @Nullable ByteBuffer old_buffer) {
-        long __result = nglMapBufferRange(target, offset, length, access);
-        return apiGetMappedBuffer(old_buffer, __result, (int)length);
+        return GL30C.glMapBufferRange(target, offset, length, access);
     }
 
     // --- [ glFlushMappedBufferRange ] ---
@@ -1445,25 +1431,29 @@ public class GL30 {
     /**
      * Indicates modifications to a range of a mapped buffer.
      *
-     * @param target the target of the flush operation. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
+     * @param target the target of the flush operation. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link GL30C#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
      * @param offset the start of the buffer subrange, in basic machine units
      * @param length the length of the buffer subrange, in basic machine units
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFlushMappedBufferRange">Reference Page</a>
      */
-    public static native void glFlushMappedBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length);
+    public static void glFlushMappedBufferRange(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length) {
+        GL30C.glFlushMappedBufferRange(target, offset, length);
+    }
 
     // --- [ glClampColor ] ---
 
     /**
      * Controls color clamping.
      *
-     * @param target target for color clamping. One of:<br><table><tr><td>{@link #GL_CLAMP_VERTEX_COLOR CLAMP_VERTEX_COLOR}</td><td>{@link #GL_CLAMP_FRAGMENT_COLOR CLAMP_FRAGMENT_COLOR}</td><td>{@link #GL_CLAMP_READ_COLOR CLAMP_READ_COLOR}</td></tr></table>
-     * @param clamp  whether to apply color clamping. One of:<br><table><tr><td>{@link GL11#GL_TRUE TRUE}</td><td>{@link GL11#GL_FALSE FALSE}</td><td>{@link #GL_FIXED_ONLY FIXED_ONLY}</td></tr></table>
+     * @param target target for color clamping. Must be:<br><table><tr><td>{@link GL30C#GL_CLAMP_READ_COLOR CLAMP_READ_COLOR}</td></tr></table>
+     * @param clamp  whether to apply color clamping. One of:<br><table><tr><td>{@link GL11#GL_TRUE TRUE}</td><td>{@link GL11#GL_FALSE FALSE}</td><td>{@link GL30C#GL_FIXED_ONLY FIXED_ONLY}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClampColor">Reference Page</a>
      */
-    public static native void glClampColor(@NativeType("GLenum") int target, @NativeType("GLenum") int clamp);
+    public static void glClampColor(@NativeType("GLenum") int target, @NativeType("GLenum") int clamp) {
+        GL30C.glClampColor(target, clamp);
+    }
 
     // --- [ glIsRenderbuffer ] ---
 
@@ -1475,19 +1465,23 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glIsRenderbuffer">Reference Page</a>
      */
     @NativeType("GLboolean")
-    public static native boolean glIsRenderbuffer(@NativeType("GLuint") int renderbuffer);
+    public static boolean glIsRenderbuffer(@NativeType("GLuint") int renderbuffer) {
+        return GL30C.glIsRenderbuffer(renderbuffer);
+    }
 
     // --- [ glBindRenderbuffer ] ---
 
     /**
      * Binds a renderbuffer to a renderbuffer target.
      *
-     * @param target       the renderbuffer target of the binding operation. Must be:<br><table><tr><td>{@link #GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
+     * @param target       the renderbuffer target of the binding operation. Must be:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
      * @param renderbuffer the name of the renderbuffer object to bind
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindRenderbuffer">Reference Page</a>
      */
-    public static native void glBindRenderbuffer(@NativeType("GLenum") int target, @NativeType("GLuint") int renderbuffer);
+    public static void glBindRenderbuffer(@NativeType("GLenum") int target, @NativeType("GLuint") int renderbuffer) {
+        GL30C.glBindRenderbuffer(target, renderbuffer);
+    }
 
     // --- [ glDeleteRenderbuffers ] ---
 
@@ -1496,7 +1490,9 @@ public class GL30 {
      *
      * @param n the number of renderbuffer objects to be deleted
      */
-    public static native void nglDeleteRenderbuffers(int n, long renderbuffers);
+    public static void nglDeleteRenderbuffers(int n, long renderbuffers) {
+        GL30C.nglDeleteRenderbuffers(n, renderbuffers);
+    }
 
     /**
      * Deletes renderbuffer objects.
@@ -1506,7 +1502,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteRenderbuffers">Reference Page</a>
      */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") IntBuffer renderbuffers) {
-        nglDeleteRenderbuffers(renderbuffers.remaining(), memAddress(renderbuffers));
+        GL30C.glDeleteRenderbuffers(renderbuffers);
     }
 
     /**
@@ -1515,13 +1511,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteRenderbuffers">Reference Page</a>
      */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int renderbuffer) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer renderbuffers = stack.ints(renderbuffer);
-            nglDeleteRenderbuffers(1, memAddress(renderbuffers));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glDeleteRenderbuffers(renderbuffer);
     }
 
     // --- [ glGenRenderbuffers ] ---
@@ -1531,7 +1521,9 @@ public class GL30 {
      *
      * @param n the number of renderbuffer object names to generate
      */
-    public static native void nglGenRenderbuffers(int n, long renderbuffers);
+    public static void nglGenRenderbuffers(int n, long renderbuffers) {
+        GL30C.nglGenRenderbuffers(n, renderbuffers);
+    }
 
     /**
      * Generates renderbuffer object names.
@@ -1541,7 +1533,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenRenderbuffers">Reference Page</a>
      */
     public static void glGenRenderbuffers(@NativeType("GLuint *") IntBuffer renderbuffers) {
-        nglGenRenderbuffers(renderbuffers.remaining(), memAddress(renderbuffers));
+        GL30C.glGenRenderbuffers(renderbuffers);
     }
 
     /**
@@ -1551,14 +1543,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGenRenderbuffers() {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer renderbuffers = stack.callocInt(1);
-            nglGenRenderbuffers(1, memAddress(renderbuffers));
-            return renderbuffers.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGenRenderbuffers();
     }
 
     // --- [ glRenderbufferStorage ] ---
@@ -1566,14 +1551,16 @@ public class GL30 {
     /**
      * Establishes data storage, format and dimensions of a renderbuffer object's image.
      *
-     * @param target         the target of the allocation. Must be:<br><table><tr><td>{@link #GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
+     * @param target         the target of the allocation. Must be:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
      * @param internalformat the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format.
      * @param width          the width of the renderbuffer, in pixels
      * @param height         the height of the renderbuffer, in pixels
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glRenderbufferStorage">Reference Page</a>
      */
-    public static native void glRenderbufferStorage(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glRenderbufferStorage(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL30C.glRenderbufferStorage(target, internalformat, width, height);
+    }
 
     // --- [ glRenderbufferStorageMultisample ] ---
 
@@ -1582,7 +1569,7 @@ public class GL30 {
      * 
      * <p>{@link #glRenderbufferStorage RenderbufferStorage} is equivalent to calling this method with the samples set to zero.</p>
      *
-     * @param target         the target of the allocation. Must be:<br><table><tr><td>{@link #GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
+     * @param target         the target of the allocation. Must be:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
      * @param samples        the number of samples to be used for the renderbuffer object's storage
      * @param internalformat the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format.
      * @param width          the width of the renderbuffer, in pixels
@@ -1590,47 +1577,41 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glRenderbufferStorageMultisample">Reference Page</a>
      */
-    public static native void glRenderbufferStorageMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
+    public static void glRenderbufferStorageMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
+        GL30C.glRenderbufferStorageMultisample(target, samples, internalformat, width, height);
+    }
 
     // --- [ glGetRenderbufferParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetRenderbufferParameteriv GetRenderbufferParameteriv} */
-    public static native void nglGetRenderbufferParameteriv(int target, int pname, long params);
-
-    /**
-     * Retrieves information about a bound renderbuffer object.
-     *
-     * @param target the target of the query operation. Must be:<br><table><tr><td>{@link #GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
-     * @param pname  the parameter whose value to retrieve from the renderbuffer bound to {@code target}. One of:<br><table><tr><td>{@link #GL_RENDERBUFFER_WIDTH RENDERBUFFER_WIDTH}</td><td>{@link #GL_RENDERBUFFER_HEIGHT RENDERBUFFER_HEIGHT}</td><td>{@link #GL_RENDERBUFFER_INTERNAL_FORMAT RENDERBUFFER_INTERNAL_FORMAT}</td></tr><tr><td>{@link #GL_RENDERBUFFER_RED_SIZE RENDERBUFFER_RED_SIZE}</td><td>{@link #GL_RENDERBUFFER_GREEN_SIZE RENDERBUFFER_GREEN_SIZE}</td><td>{@link #GL_RENDERBUFFER_BLUE_SIZE RENDERBUFFER_BLUE_SIZE}</td></tr><tr><td>{@link #GL_RENDERBUFFER_ALPHA_SIZE RENDERBUFFER_ALPHA_SIZE}</td><td>{@link #GL_RENDERBUFFER_DEPTH_SIZE RENDERBUFFER_DEPTH_SIZE}</td><td>{@link #GL_RENDERBUFFER_STENCIL_SIZE RENDERBUFFER_STENCIL_SIZE}</td></tr><tr><td>{@link #GL_RENDERBUFFER_SAMPLES RENDERBUFFER_SAMPLES}</td></tr></table>
-     * @param params an array to receive the value of the queried parameter
-     * 
-     * @see <a target="_blank" href="http://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
-     */
-    public static void glGetRenderbufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetRenderbufferParameteriv(target, pname, memAddress(params));
+    public static void nglGetRenderbufferParameteriv(int target, int pname, long params) {
+        GL30C.nglGetRenderbufferParameteriv(target, pname, params);
     }
 
     /**
      * Retrieves information about a bound renderbuffer object.
      *
-     * @param target the target of the query operation. Must be:<br><table><tr><td>{@link #GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
-     * @param pname  the parameter whose value to retrieve from the renderbuffer bound to {@code target}. One of:<br><table><tr><td>{@link #GL_RENDERBUFFER_WIDTH RENDERBUFFER_WIDTH}</td><td>{@link #GL_RENDERBUFFER_HEIGHT RENDERBUFFER_HEIGHT}</td><td>{@link #GL_RENDERBUFFER_INTERNAL_FORMAT RENDERBUFFER_INTERNAL_FORMAT}</td></tr><tr><td>{@link #GL_RENDERBUFFER_RED_SIZE RENDERBUFFER_RED_SIZE}</td><td>{@link #GL_RENDERBUFFER_GREEN_SIZE RENDERBUFFER_GREEN_SIZE}</td><td>{@link #GL_RENDERBUFFER_BLUE_SIZE RENDERBUFFER_BLUE_SIZE}</td></tr><tr><td>{@link #GL_RENDERBUFFER_ALPHA_SIZE RENDERBUFFER_ALPHA_SIZE}</td><td>{@link #GL_RENDERBUFFER_DEPTH_SIZE RENDERBUFFER_DEPTH_SIZE}</td><td>{@link #GL_RENDERBUFFER_STENCIL_SIZE RENDERBUFFER_STENCIL_SIZE}</td></tr><tr><td>{@link #GL_RENDERBUFFER_SAMPLES RENDERBUFFER_SAMPLES}</td></tr></table>
+     * @param target the target of the query operation. Must be:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
+     * @param pname  the parameter whose value to retrieve from the renderbuffer bound to {@code target}. One of:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER_WIDTH RENDERBUFFER_WIDTH}</td><td>{@link GL30C#GL_RENDERBUFFER_HEIGHT RENDERBUFFER_HEIGHT}</td><td>{@link GL30C#GL_RENDERBUFFER_INTERNAL_FORMAT RENDERBUFFER_INTERNAL_FORMAT}</td></tr><tr><td>{@link GL30C#GL_RENDERBUFFER_RED_SIZE RENDERBUFFER_RED_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_GREEN_SIZE RENDERBUFFER_GREEN_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_BLUE_SIZE RENDERBUFFER_BLUE_SIZE}</td></tr><tr><td>{@link GL30C#GL_RENDERBUFFER_ALPHA_SIZE RENDERBUFFER_ALPHA_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_DEPTH_SIZE RENDERBUFFER_DEPTH_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_STENCIL_SIZE RENDERBUFFER_STENCIL_SIZE}</td></tr><tr><td>{@link GL30C#GL_RENDERBUFFER_SAMPLES RENDERBUFFER_SAMPLES}</td></tr></table>
+     * @param params an array to receive the value of the queried parameter
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
+     */
+    public static void glGetRenderbufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
+        GL30C.glGetRenderbufferParameteriv(target, pname, params);
+    }
+
+    /**
+     * Retrieves information about a bound renderbuffer object.
+     *
+     * @param target the target of the query operation. Must be:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
+     * @param pname  the parameter whose value to retrieve from the renderbuffer bound to {@code target}. One of:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER_WIDTH RENDERBUFFER_WIDTH}</td><td>{@link GL30C#GL_RENDERBUFFER_HEIGHT RENDERBUFFER_HEIGHT}</td><td>{@link GL30C#GL_RENDERBUFFER_INTERNAL_FORMAT RENDERBUFFER_INTERNAL_FORMAT}</td></tr><tr><td>{@link GL30C#GL_RENDERBUFFER_RED_SIZE RENDERBUFFER_RED_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_GREEN_SIZE RENDERBUFFER_GREEN_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_BLUE_SIZE RENDERBUFFER_BLUE_SIZE}</td></tr><tr><td>{@link GL30C#GL_RENDERBUFFER_ALPHA_SIZE RENDERBUFFER_ALPHA_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_DEPTH_SIZE RENDERBUFFER_DEPTH_SIZE}</td><td>{@link GL30C#GL_RENDERBUFFER_STENCIL_SIZE RENDERBUFFER_STENCIL_SIZE}</td></tr><tr><td>{@link GL30C#GL_RENDERBUFFER_SAMPLES RENDERBUFFER_SAMPLES}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetRenderbufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetRenderbufferParameteriv(target, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetRenderbufferParameteri(target, pname);
     }
 
     // --- [ glIsFramebuffer ] ---
@@ -1643,19 +1624,23 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glIsFramebuffer">Reference Page</a>
      */
     @NativeType("GLboolean")
-    public static native boolean glIsFramebuffer(@NativeType("GLuint") int framebuffer);
+    public static boolean glIsFramebuffer(@NativeType("GLuint") int framebuffer) {
+        return GL30C.glIsFramebuffer(framebuffer);
+    }
 
     // --- [ glBindFramebuffer ] ---
 
     /**
      * Binds a framebuffer to a framebuffer target.
      *
-     * @param target      the framebuffer target of the binding operation. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param target      the framebuffer target of the binding operation. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
      * @param framebuffer the name of the framebuffer object to bind
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindFramebuffer">Reference Page</a>
      */
-    public static native void glBindFramebuffer(@NativeType("GLenum") int target, @NativeType("GLuint") int framebuffer);
+    public static void glBindFramebuffer(@NativeType("GLenum") int target, @NativeType("GLuint") int framebuffer) {
+        GL30C.glBindFramebuffer(target, framebuffer);
+    }
 
     // --- [ glDeleteFramebuffers ] ---
 
@@ -1664,7 +1649,9 @@ public class GL30 {
      *
      * @param n the number of framebuffer objects to be deleted
      */
-    public static native void nglDeleteFramebuffers(int n, long framebuffers);
+    public static void nglDeleteFramebuffers(int n, long framebuffers) {
+        GL30C.nglDeleteFramebuffers(n, framebuffers);
+    }
 
     /**
      * Deletes framebuffer objects.
@@ -1674,7 +1661,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteFramebuffers">Reference Page</a>
      */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") IntBuffer framebuffers) {
-        nglDeleteFramebuffers(framebuffers.remaining(), memAddress(framebuffers));
+        GL30C.glDeleteFramebuffers(framebuffers);
     }
 
     /**
@@ -1683,13 +1670,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteFramebuffers">Reference Page</a>
      */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int framebuffer) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer framebuffers = stack.ints(framebuffer);
-            nglDeleteFramebuffers(1, memAddress(framebuffers));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glDeleteFramebuffers(framebuffer);
     }
 
     // --- [ glGenFramebuffers ] ---
@@ -1699,7 +1680,9 @@ public class GL30 {
      *
      * @param n the number of framebuffer object names to generate
      */
-    public static native void nglGenFramebuffers(int n, long framebuffers);
+    public static void nglGenFramebuffers(int n, long framebuffers) {
+        GL30C.nglGenFramebuffers(n, framebuffers);
+    }
 
     /**
      * Generates framebuffer object names.
@@ -1709,7 +1692,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenFramebuffers">Reference Page</a>
      */
     public static void glGenFramebuffers(@NativeType("GLuint *") IntBuffer framebuffers) {
-        nglGenFramebuffers(framebuffers.remaining(), memAddress(framebuffers));
+        GL30C.glGenFramebuffers(framebuffers);
     }
 
     /**
@@ -1719,14 +1702,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGenFramebuffers() {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer framebuffers = stack.callocInt(1);
-            nglGenFramebuffers(1, memAddress(framebuffers));
-            return framebuffers.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGenFramebuffers();
     }
 
     // --- [ glCheckFramebufferStatus ] ---
@@ -1734,50 +1710,56 @@ public class GL30 {
     /**
      * Checks the completeness status of a framebuffer.
      *
-     * @param target the target of the framebuffer completeness check. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param target the target of the framebuffer completeness check. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glCheckFramebufferStatus">Reference Page</a>
      */
     @NativeType("GLenum")
-    public static native int glCheckFramebufferStatus(@NativeType("GLenum") int target);
+    public static int glCheckFramebufferStatus(@NativeType("GLenum") int target) {
+        return GL30C.glCheckFramebufferStatus(target);
+    }
 
     // --- [ glFramebufferTexture1D ] ---
 
     /**
      * Attaches a level of a 1D texture object as a logical buffer to the currently bound framebuffer object.
      *
-     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
      * @param textarget  the type of texture
      * @param texture    the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level      the mipmap level of {@code texture} to attach
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFramebufferTexture1D">Reference Page</a>
      */
-    public static native void glFramebufferTexture1D(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int textarget, @NativeType("GLuint") int texture, @NativeType("GLint") int level);
+    public static void glFramebufferTexture1D(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int textarget, @NativeType("GLuint") int texture, @NativeType("GLint") int level) {
+        GL30C.glFramebufferTexture1D(target, attachment, textarget, texture, level);
+    }
 
     // --- [ glFramebufferTexture2D ] ---
 
     /**
      * Attaches a level of a 2D texture object as a logical buffer to the currently bound framebuffer object.
      *
-     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
      * @param textarget  the type of texture
      * @param texture    the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level      the mipmap level of {@code texture} to attach
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFramebufferTexture2D">Reference Page</a>
      */
-    public static native void glFramebufferTexture2D(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int textarget, @NativeType("GLuint") int texture, @NativeType("GLint") int level);
+    public static void glFramebufferTexture2D(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int textarget, @NativeType("GLuint") int texture, @NativeType("GLint") int level) {
+        GL30C.glFramebufferTexture2D(target, attachment, textarget, texture, level);
+    }
 
     // --- [ glFramebufferTexture3D ] ---
 
     /**
      * Attaches a layer of a 3D texture object as a logical buffer to the currently bound framebuffer object.
      *
-     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
      * @param textarget  the type of texture
      * @param texture    the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level      the mipmap level of {@code texture} to attach
@@ -1785,78 +1767,76 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFramebufferTexture3D">Reference Page</a>
      */
-    public static native void glFramebufferTexture3D(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int textarget, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer);
+    public static void glFramebufferTexture3D(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int textarget, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer) {
+        GL30C.glFramebufferTexture3D(target, attachment, textarget, texture, level, layer);
+    }
 
     // --- [ glFramebufferTextureLayer ] ---
 
     /**
      * Attaches a single layer of a texture to a framebuffer
      *
-     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param target     the framebuffer target. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment the attachment point of the framebuffer. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
      * @param texture    the texture object to attach to the framebuffer attachment point named by {@code attachment}
      * @param level      the mipmap level of {@code texture} to attach
      * @param layer      the layer of {@code texture} to attach.
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFramebufferTextureLayer">Reference Page</a>
      */
-    public static native void glFramebufferTextureLayer(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer);
+    public static void glFramebufferTextureLayer(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int layer) {
+        GL30C.glFramebufferTextureLayer(target, attachment, texture, level, layer);
+    }
 
     // --- [ glFramebufferRenderbuffer ] ---
 
     /**
      * Attaches a renderbuffer as a logical buffer to the currently bound framebuffer object.
      *
-     * @param target             the framebuffer target. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment         the attachment point of the framebuffer. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
-     * @param renderbuffertarget the renderbuffer target. Must be:<br><table><tr><td>{@link #GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
+     * @param target             the framebuffer target. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment         the attachment point of the framebuffer. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param renderbuffertarget the renderbuffer target. Must be:<br><table><tr><td>{@link GL30C#GL_RENDERBUFFER RENDERBUFFER}</td></tr></table>
      * @param renderbuffer       the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFramebufferRenderbuffer">Reference Page</a>
      */
-    public static native void glFramebufferRenderbuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int renderbuffertarget, @NativeType("GLuint") int renderbuffer);
+    public static void glFramebufferRenderbuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int renderbuffertarget, @NativeType("GLuint") int renderbuffer) {
+        GL30C.glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
+    }
 
     // --- [ glGetFramebufferAttachmentParameteriv ] ---
 
     /** Unsafe version of: {@link #glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv} */
-    public static native void nglGetFramebufferAttachmentParameteriv(int target, int attachment, int pname, long params);
-
-    /**
-     * Retrievees information about attachments of a bound framebuffer object.
-     *
-     * @param target     the target of the query operation. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment the attachment within {@code target}. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
-     * @param pname      the parameter of {@code attachment} to query. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME FRAMEBUFFER_ATTACHMENT_OBJECT_NAME}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE FRAMEBUFFER_ATTACHMENT_RED_SIZE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE FRAMEBUFFER_ATTACHMENT_GREEN_SIZE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE FRAMEBUFFER_ATTACHMENT_BLUE_SIZE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE}</td></tr></table>
-     * @param params     an array to receive the value of the queried parameter
-     * 
-     * @see <a target="_blank" href="http://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
-     */
-    public static void glGetFramebufferAttachmentParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetFramebufferAttachmentParameteriv(target, attachment, pname, memAddress(params));
+    public static void nglGetFramebufferAttachmentParameteriv(int target, int attachment, int pname, long params) {
+        GL30C.nglGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
     }
 
     /**
      * Retrievees information about attachments of a bound framebuffer object.
      *
-     * @param target     the target of the query operation. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link #GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link #GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
-     * @param attachment the attachment within {@code target}. One of:<br><table><tr><td>{@link #GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link #GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link #GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link #GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link #GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link #GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link #GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link #GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link #GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link #GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link #GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link #GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link #GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link #GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link #GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link #GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link #GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link #GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link #GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link #GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link #GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link #GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link #GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link #GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link #GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link #GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link #GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link #GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link #GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
-     * @param pname      the parameter of {@code attachment} to query. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME FRAMEBUFFER_ATTACHMENT_OBJECT_NAME}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE FRAMEBUFFER_ATTACHMENT_RED_SIZE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE FRAMEBUFFER_ATTACHMENT_GREEN_SIZE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE FRAMEBUFFER_ATTACHMENT_BLUE_SIZE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}</td><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE}</td></tr></table>
+     * @param target     the target of the query operation. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment the attachment within {@code target}. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param pname      the parameter of {@code attachment} to query. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME FRAMEBUFFER_ATTACHMENT_OBJECT_NAME}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE FRAMEBUFFER_ATTACHMENT_RED_SIZE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE FRAMEBUFFER_ATTACHMENT_GREEN_SIZE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE FRAMEBUFFER_ATTACHMENT_BLUE_SIZE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE}</td></tr></table>
+     * @param params     an array to receive the value of the queried parameter
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
+     */
+    public static void glGetFramebufferAttachmentParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
+        GL30C.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
+    }
+
+    /**
+     * Retrievees information about attachments of a bound framebuffer object.
+     *
+     * @param target     the target of the query operation. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30C#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30C#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td></tr></table>
+     * @param attachment the attachment within {@code target}. One of:<br><table><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT1 COLOR_ATTACHMENT1}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT2 COLOR_ATTACHMENT2}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT3 COLOR_ATTACHMENT3}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT4 COLOR_ATTACHMENT4}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT5 COLOR_ATTACHMENT5}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT6 COLOR_ATTACHMENT6}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT7 COLOR_ATTACHMENT7}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT8 COLOR_ATTACHMENT8}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT9 COLOR_ATTACHMENT9}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT10 COLOR_ATTACHMENT10}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT11 COLOR_ATTACHMENT11}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT12 COLOR_ATTACHMENT12}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT13 COLOR_ATTACHMENT13}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT14 COLOR_ATTACHMENT14}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT15 COLOR_ATTACHMENT15}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT16 COLOR_ATTACHMENT16}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT17 COLOR_ATTACHMENT17}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT18 COLOR_ATTACHMENT18}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT19 COLOR_ATTACHMENT19}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT20 COLOR_ATTACHMENT20}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT21 COLOR_ATTACHMENT21}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT22 COLOR_ATTACHMENT22}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT23 COLOR_ATTACHMENT23}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT24 COLOR_ATTACHMENT24}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT25 COLOR_ATTACHMENT25}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT26 COLOR_ATTACHMENT26}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT27 COLOR_ATTACHMENT27}</td></tr><tr><td>{@link GL30C#GL_COLOR_ATTACHMENT28 COLOR_ATTACHMENT28}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT29 COLOR_ATTACHMENT29}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT30 COLOR_ATTACHMENT30}</td><td>{@link GL30C#GL_COLOR_ATTACHMENT31 COLOR_ATTACHMENT31}</td></tr><tr><td>{@link GL30C#GL_DEPTH_ATTACHMENT DEPTH_ATTACHMENT}</td><td>{@link GL30C#GL_STENCIL_ATTACHMENT STENCIL_ATTACHMENT}</td><td>{@link GL30C#GL_DEPTH_STENCIL_ATTACHMENT DEPTH_STENCIL_ATTACHMENT}</td></tr></table>
+     * @param pname      the parameter of {@code attachment} to query. One of:<br><table><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME FRAMEBUFFER_ATTACHMENT_OBJECT_NAME}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE FRAMEBUFFER_ATTACHMENT_RED_SIZE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE FRAMEBUFFER_ATTACHMENT_GREEN_SIZE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE FRAMEBUFFER_ATTACHMENT_BLUE_SIZE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}</td><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE}</td></tr><tr><td>{@link GL30C#GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetFramebufferAttachmentParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetFramebufferAttachmentParameteriv(target, attachment, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetFramebufferAttachmentParameteri(target, attachment, pname);
     }
 
     // --- [ glBlitFramebuffer ] ---
@@ -1877,23 +1857,29 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlitFramebuffer">Reference Page</a>
      */
-    public static native void glBlitFramebuffer(@NativeType("GLint") int srcX0, @NativeType("GLint") int srcY0, @NativeType("GLint") int srcX1, @NativeType("GLint") int srcY1, @NativeType("GLint") int dstX0, @NativeType("GLint") int dstY0, @NativeType("GLint") int dstX1, @NativeType("GLint") int dstY1, @NativeType("GLbitfield") int mask, @NativeType("GLenum") int filter);
+    public static void glBlitFramebuffer(@NativeType("GLint") int srcX0, @NativeType("GLint") int srcY0, @NativeType("GLint") int srcX1, @NativeType("GLint") int srcY1, @NativeType("GLint") int dstX0, @NativeType("GLint") int dstY0, @NativeType("GLint") int dstX1, @NativeType("GLint") int dstY1, @NativeType("GLbitfield") int mask, @NativeType("GLenum") int filter) {
+        GL30C.glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    }
 
     // --- [ glGenerateMipmap ] ---
 
     /**
      * Generate mipmaps for a specified texture target.
      *
-     * @param target the target to which the texture whose mimaps to generate is bound. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link #GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link #GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr></table>
+     * @param target the target to which the texture whose mimaps to generate is bound. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30C#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL30C#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenerateMipmap">Reference Page</a>
      */
-    public static native void glGenerateMipmap(@NativeType("GLenum") int target);
+    public static void glGenerateMipmap(@NativeType("GLenum") int target) {
+        GL30C.glGenerateMipmap(target);
+    }
 
     // --- [ glTexParameterIiv ] ---
 
     /** Unsafe version of: {@link #glTexParameterIiv TexParameterIiv} */
-    public static native void nglTexParameterIiv(int target, int pname, long params);
+    public static void nglTexParameterIiv(int target, int pname, long params) {
+        GL30C.nglTexParameterIiv(target, pname, params);
+    }
 
     /**
      * Sets the integer value of a texture parameter.
@@ -1905,10 +1891,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexParameter">Reference Page</a>
      */
     public static void glTexParameterIiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglTexParameterIiv(target, pname, memAddress(params));
+        GL30C.glTexParameterIiv(target, pname, params);
     }
 
     /**
@@ -1920,19 +1903,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexParameter">Reference Page</a>
      */
     public static void glTexParameterIi(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int param) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.ints(param);
-            nglTexParameterIiv(target, pname, memAddress(params));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glTexParameterIi(target, pname, param);
     }
 
     // --- [ glTexParameterIuiv ] ---
 
     /** Unsafe version of: {@link #glTexParameterIuiv TexParameterIuiv} */
-    public static native void nglTexParameterIuiv(int target, int pname, long params);
+    public static void nglTexParameterIuiv(int target, int pname, long params) {
+        GL30C.nglTexParameterIuiv(target, pname, params);
+    }
 
     /**
      * Sets the unsigned integer value of a texture parameter.
@@ -1944,10 +1923,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexParameter">Reference Page</a>
      */
     public static void glTexParameterIuiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint const *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglTexParameterIuiv(target, pname, memAddress(params));
+        GL30C.glTexParameterIuiv(target, pname, params);
     }
 
     /**
@@ -1959,19 +1935,15 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexParameter">Reference Page</a>
      */
     public static void glTexParameterIui(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int param) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.ints(param);
-            nglTexParameterIuiv(target, pname, memAddress(params));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glTexParameterIui(target, pname, param);
     }
 
     // --- [ glGetTexParameterIiv ] ---
 
     /** Unsafe version of: {@link #glGetTexParameterIiv GetTexParameterIiv} */
-    public static native void nglGetTexParameterIiv(int target, int pname, long params);
+    public static void nglGetTexParameterIiv(int target, int pname, long params) {
+        GL30C.nglGetTexParameterIiv(target, pname, params);
+    }
 
     /**
      * Returns the integer value of a texture parameter.
@@ -1983,10 +1955,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetTexParameter">Reference Page</a>
      */
     public static void glGetTexParameterIiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetTexParameterIiv(target, pname, memAddress(params));
+        GL30C.glGetTexParameterIiv(target, pname, params);
     }
 
     /**
@@ -1999,20 +1968,15 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGetTexParameterIi(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetTexParameterIiv(target, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetTexParameterIi(target, pname);
     }
 
     // --- [ glGetTexParameterIuiv ] ---
 
     /** Unsafe version of: {@link #glGetTexParameterIuiv GetTexParameterIuiv} */
-    public static native void nglGetTexParameterIuiv(int target, int pname, long params);
+    public static void nglGetTexParameterIuiv(int target, int pname, long params) {
+        GL30C.nglGetTexParameterIuiv(target, pname, params);
+    }
 
     /**
      * Returns the unsigned integer value of a texture parameter.
@@ -2024,10 +1988,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetTexParameter">Reference Page</a>
      */
     public static void glGetTexParameterIuiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
-        if (CHECKS) {
-            check(params, 1);
-        }
-        nglGetTexParameterIuiv(target, pname, memAddress(params));
+        GL30C.glGetTexParameterIuiv(target, pname, params);
     }
 
     /**
@@ -2040,14 +2001,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGetTexParameterIui(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer params = stack.callocInt(1);
-            nglGetTexParameterIuiv(target, pname, memAddress(params));
-            return params.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetTexParameterIui(target, pname);
     }
 
     // --- [ glColorMaski ] ---
@@ -2063,12 +2017,16 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glColorMaski">Reference Page</a>
      */
-    public static native void glColorMaski(@NativeType("GLuint") int buf, @NativeType("GLboolean") boolean r, @NativeType("GLboolean") boolean g, @NativeType("GLboolean") boolean b, @NativeType("GLboolean") boolean a);
+    public static void glColorMaski(@NativeType("GLuint") int buf, @NativeType("GLboolean") boolean r, @NativeType("GLboolean") boolean g, @NativeType("GLboolean") boolean b, @NativeType("GLboolean") boolean a) {
+        GL30C.glColorMaski(buf, r, g, b, a);
+    }
 
     // --- [ glGetBooleani_v ] ---
 
     /** Unsafe version of: {@link #glGetBooleani_v GetBooleani_v} */
-    public static native void nglGetBooleani_v(int target, int index, long data);
+    public static void nglGetBooleani_v(int target, int index, long data) {
+        GL30C.nglGetBooleani_v(target, index, data);
+    }
 
     /**
      * Queries the boolean value of an indexed state variable.
@@ -2080,10 +2038,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetBooleani_v">Reference Page</a>
      */
     public static void glGetBooleani_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLboolean *") ByteBuffer data) {
-        if (CHECKS) {
-            check(data, 1);
-        }
-        nglGetBooleani_v(target, index, memAddress(data));
+        GL30C.glGetBooleani_v(target, index, data);
     }
 
     /**
@@ -2096,20 +2051,15 @@ public class GL30 {
      */
     @NativeType("void")
     public static boolean glGetBooleani(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer data = stack.calloc(1);
-            nglGetBooleani_v(target, index, memAddress(data));
-            return data.get(0) != 0;
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetBooleani(target, index);
     }
 
     // --- [ glGetIntegeri_v ] ---
 
     /** Unsafe version of: {@link #glGetIntegeri_v GetIntegeri_v} */
-    public static native void nglGetIntegeri_v(int target, int index, long data);
+    public static void nglGetIntegeri_v(int target, int index, long data) {
+        GL30C.nglGetIntegeri_v(target, index, data);
+    }
 
     /**
      * Queries the integer value of an indexed state variable.
@@ -2121,10 +2071,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetIntegeri_v">Reference Page</a>
      */
     public static void glGetIntegeri_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer data) {
-        if (CHECKS) {
-            check(data, 1);
-        }
-        nglGetIntegeri_v(target, index, memAddress(data));
+        GL30C.glGetIntegeri_v(target, index, data);
     }
 
     /**
@@ -2137,14 +2084,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGetIntegeri(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer data = stack.callocInt(1);
-            nglGetIntegeri_v(target, index, memAddress(data));
-            return data.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetIntegeri(target, index);
     }
 
     // --- [ glEnablei ] ---
@@ -2157,7 +2097,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glEnablei">Reference Page</a>
      */
-    public static native void glEnablei(@NativeType("GLenum") int cap, @NativeType("GLuint") int index);
+    public static void glEnablei(@NativeType("GLenum") int cap, @NativeType("GLuint") int index) {
+        GL30C.glEnablei(cap, index);
+    }
 
     // --- [ glDisablei ] ---
 
@@ -2169,7 +2111,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glDisablei">Reference Page</a>
      */
-    public static native void glDisablei(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static void glDisablei(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        GL30C.glDisablei(target, index);
+    }
 
     // --- [ glIsEnabledi ] ---
 
@@ -2182,14 +2126,16 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glIsEnabledi">Reference Page</a>
      */
     @NativeType("GLboolean")
-    public static native boolean glIsEnabledi(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
+    public static boolean glIsEnabledi(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
+        return GL30C.glIsEnabledi(target, index);
+    }
 
     // --- [ glBindBufferRange ] ---
 
     /**
      * Binds a range within a buffer object to an indexed buffer target.
      *
-     * @param target the target of the bind operation. One of:<br><table><tr><td>{@link #GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td></tr></table>
+     * @param target the target of the bind operation. One of:<br><table><tr><td>{@link GL30C#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td></tr></table>
      * @param index  the index of the binding point within the array specified by {@code target}
      * @param buffer a buffer object to bind to the specified binding point
      * @param offset the starting offset in basic machine units into the buffer object {@code buffer}
@@ -2197,20 +2143,24 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindBufferRange">Reference Page</a>
      */
-    public static native void glBindBufferRange(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size);
+    public static void glBindBufferRange(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size) {
+        GL30C.glBindBufferRange(target, index, buffer, offset, size);
+    }
 
     // --- [ glBindBufferBase ] ---
 
     /**
      * Binds a buffer object to an indexed buffer target.
      *
-     * @param target the target of the bind operation. One of:<br><table><tr><td>{@link #GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td></tr></table>
+     * @param target the target of the bind operation. One of:<br><table><tr><td>{@link GL30C#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td></tr></table>
      * @param index  the index of the binding point within the array specified by {@code target}
      * @param buffer a buffer object to bind to the specified binding point
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindBufferBase">Reference Page</a>
      */
-    public static native void glBindBufferBase(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer);
+    public static void glBindBufferBase(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint") int buffer) {
+        GL30C.glBindBufferBase(target, index, buffer);
+    }
 
     // --- [ glBeginTransformFeedback ] ---
 
@@ -2221,7 +2171,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBeginTransformFeedback">Reference Page</a>
      */
-    public static native void glBeginTransformFeedback(@NativeType("GLenum") int primitiveMode);
+    public static void glBeginTransformFeedback(@NativeType("GLenum") int primitiveMode) {
+        GL30C.glBeginTransformFeedback(primitiveMode);
+    }
 
     // --- [ glEndTransformFeedback ] ---
 
@@ -2230,7 +2182,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glEndTransformFeedback">Reference Page</a>
      */
-    public static native void glEndTransformFeedback();
+    public static void glEndTransformFeedback() {
+        GL30C.glEndTransformFeedback();
+    }
 
     // --- [ glTransformFeedbackVaryings ] ---
 
@@ -2239,19 +2193,21 @@ public class GL30 {
      *
      * @param count the number of varying variables used for transform feedback
      */
-    public static native void nglTransformFeedbackVaryings(int program, int count, long varyings, int bufferMode);
+    public static void nglTransformFeedbackVaryings(int program, int count, long varyings, int bufferMode) {
+        GL30C.nglTransformFeedbackVaryings(program, count, varyings, bufferMode);
+    }
 
     /**
      * Specifies values to record in transform feedback buffers.
      *
      * @param program    the target program object
      * @param varyings   an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback
-     * @param bufferMode the mode used to capture the varying variables when transform feedback is active. One of:<br><table><tr><td>{@link #GL_INTERLEAVED_ATTRIBS INTERLEAVED_ATTRIBS}</td><td>{@link #GL_SEPARATE_ATTRIBS SEPARATE_ATTRIBS}</td></tr></table>
+     * @param bufferMode the mode used to capture the varying variables when transform feedback is active. One of:<br><table><tr><td>{@link GL30C#GL_INTERLEAVED_ATTRIBS INTERLEAVED_ATTRIBS}</td><td>{@link GL30C#GL_SEPARATE_ATTRIBS SEPARATE_ATTRIBS}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTransformFeedbackVaryings">Reference Page</a>
      */
     public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer varyings, @NativeType("GLenum") int bufferMode) {
-        nglTransformFeedbackVaryings(program, varyings.remaining(), memAddress(varyings), bufferMode);
+        GL30C.glTransformFeedbackVaryings(program, varyings, bufferMode);
     }
 
     /**
@@ -2259,38 +2215,24 @@ public class GL30 {
      *
      * @param program    the target program object
      * @param varyings   an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback
-     * @param bufferMode the mode used to capture the varying variables when transform feedback is active. One of:<br><table><tr><td>{@link #GL_INTERLEAVED_ATTRIBS INTERLEAVED_ATTRIBS}</td><td>{@link #GL_SEPARATE_ATTRIBS SEPARATE_ATTRIBS}</td></tr></table>
+     * @param bufferMode the mode used to capture the varying variables when transform feedback is active. One of:<br><table><tr><td>{@link GL30C#GL_INTERLEAVED_ATTRIBS INTERLEAVED_ATTRIBS}</td><td>{@link GL30C#GL_SEPARATE_ATTRIBS SEPARATE_ATTRIBS}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTransformFeedbackVaryings">Reference Page</a>
      */
     public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence[] varyings, @NativeType("GLenum") int bufferMode) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long varyingsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, varyings);
-            nglTransformFeedbackVaryings(program, varyings.length, varyingsAddress, bufferMode);
-            org.lwjgl.system.APIUtil.apiArrayFree(varyingsAddress, varyings.length);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glTransformFeedbackVaryings(program, varyings, bufferMode);
     }
 
     /**
      * Specifies values to record in transform feedback buffers.
      *
      * @param program    the target program object
-     * @param bufferMode the mode used to capture the varying variables when transform feedback is active. One of:<br><table><tr><td>{@link #GL_INTERLEAVED_ATTRIBS INTERLEAVED_ATTRIBS}</td><td>{@link #GL_SEPARATE_ATTRIBS SEPARATE_ATTRIBS}</td></tr></table>
+     * @param bufferMode the mode used to capture the varying variables when transform feedback is active. One of:<br><table><tr><td>{@link GL30C#GL_INTERLEAVED_ATTRIBS INTERLEAVED_ATTRIBS}</td><td>{@link GL30C#GL_SEPARATE_ATTRIBS SEPARATE_ATTRIBS}</td></tr></table>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTransformFeedbackVaryings">Reference Page</a>
      */
     public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence varying, @NativeType("GLenum") int bufferMode) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long varyingsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, varying);
-            nglTransformFeedbackVaryings(program, 1, varyingsAddress, bufferMode);
-            org.lwjgl.system.APIUtil.apiArrayFree(varyingsAddress, 1);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glTransformFeedbackVaryings(program, varying, bufferMode);
     }
 
     // --- [ glGetTransformFeedbackVarying ] ---
@@ -2300,7 +2242,9 @@ public class GL30 {
      *
      * @param bufSize the maximum number of characters, including the null terminator, that may be written into {@code name}
      */
-    public static native void nglGetTransformFeedbackVarying(int program, int index, int bufSize, long length, long size, long type, long name);
+    public static void nglGetTransformFeedbackVarying(int program, int index, int bufSize, long length, long size, long type, long name) {
+        GL30C.nglGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
+    }
 
     /**
      * Retrieves information about varying variables selected for transform feedback.
@@ -2315,12 +2259,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetTransformFeedbackVarying">Reference Page</a>
      */
     public static void glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLsizei *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
-        if (CHECKS) {
-            checkSafe(length, 1);
-            check(size, 1);
-            check(type, 1);
-        }
-        nglGetTransformFeedbackVarying(program, index, name.remaining(), memAddressSafe(length), memAddress(size), memAddress(type), memAddress(name));
+        GL30C.glGetTransformFeedbackVarying(program, index, length, size, type, name);
     }
 
     /**
@@ -2336,19 +2275,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static String glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLsizei") int bufSize, @NativeType("GLsizei *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
-        if (CHECKS) {
-            check(size, 1);
-            check(type, 1);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer length = stack.ints(0);
-            ByteBuffer name = stack.malloc(bufSize);
-            nglGetTransformFeedbackVarying(program, index, bufSize, memAddress(length), memAddress(size), memAddress(type), memAddress(name));
-            return memASCII(name, length.get(0));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGetTransformFeedbackVarying(program, index, bufSize, size, type);
     }
 
     /**
@@ -2375,7 +2302,9 @@ public class GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindVertexArray">Reference Page</a>
      */
-    public static native void glBindVertexArray(@NativeType("GLuint") int array);
+    public static void glBindVertexArray(@NativeType("GLuint") int array) {
+        GL30C.glBindVertexArray(array);
+    }
 
     // --- [ glDeleteVertexArrays ] ---
 
@@ -2384,7 +2313,9 @@ public class GL30 {
      *
      * @param n the number of vertex array objects to be deleted
      */
-    public static native void nglDeleteVertexArrays(int n, long arrays);
+    public static void nglDeleteVertexArrays(int n, long arrays) {
+        GL30C.nglDeleteVertexArrays(n, arrays);
+    }
 
     /**
      * Deletes vertex array objects.
@@ -2394,7 +2325,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteVertexArrays">Reference Page</a>
      */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") IntBuffer arrays) {
-        nglDeleteVertexArrays(arrays.remaining(), memAddress(arrays));
+        GL30C.glDeleteVertexArrays(arrays);
     }
 
     /**
@@ -2403,13 +2334,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteVertexArrays">Reference Page</a>
      */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int array) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer arrays = stack.ints(array);
-            nglDeleteVertexArrays(1, memAddress(arrays));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        GL30C.glDeleteVertexArrays(array);
     }
 
     // --- [ glGenVertexArrays ] ---
@@ -2419,7 +2344,9 @@ public class GL30 {
      *
      * @param n the number of vertex array object names to generate
      */
-    public static native void nglGenVertexArrays(int n, long arrays);
+    public static void nglGenVertexArrays(int n, long arrays) {
+        GL30C.nglGenVertexArrays(n, arrays);
+    }
 
     /**
      * Generates vertex array object names.
@@ -2429,7 +2356,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenVertexArrays">Reference Page</a>
      */
     public static void glGenVertexArrays(@NativeType("GLuint *") IntBuffer arrays) {
-        nglGenVertexArrays(arrays.remaining(), memAddress(arrays));
+        GL30C.glGenVertexArrays(arrays);
     }
 
     /**
@@ -2439,14 +2366,7 @@ public class GL30 {
      */
     @NativeType("void")
     public static int glGenVertexArrays() {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer arrays = stack.callocInt(1);
-            nglGenVertexArrays(1, memAddress(arrays));
-            return arrays.get(0);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+        return GL30C.glGenVertexArrays();
     }
 
     // --- [ glIsVertexArray ] ---
@@ -2459,7 +2379,9 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glIsVertexArray">Reference Page</a>
      */
     @NativeType("GLboolean")
-    public static native boolean glIsVertexArray(@NativeType("GLuint") int array);
+    public static boolean glIsVertexArray(@NativeType("GLuint") int array) {
+        return GL30C.glIsVertexArray(array);
+    }
 
     /**
      * Array version of: {@link #glClearBufferiv ClearBufferiv}
@@ -2467,12 +2389,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
     public static void glClearBufferiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
-        long __functionAddress = GL.getICD().glClearBufferiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, buffer, drawbuffer, value);
+        GL30C.glClearBufferiv(buffer, drawbuffer, value);
     }
 
     /**
@@ -2481,12 +2398,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
     public static void glClearBufferuiv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
-        long __functionAddress = GL.getICD().glClearBufferuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 4);
-        }
-        callPV(__functionAddress, buffer, drawbuffer, value);
+        GL30C.glClearBufferuiv(buffer, drawbuffer, value);
     }
 
     /**
@@ -2495,12 +2407,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBuffer">Reference Page</a>
      */
     public static void glClearBufferfv(@NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
-        long __functionAddress = GL.getICD().glClearBufferfv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(value, 1);
-        }
-        callPV(__functionAddress, buffer, drawbuffer, value);
+        GL30C.glClearBufferfv(buffer, drawbuffer, value);
     }
 
     /**
@@ -2509,12 +2416,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI1iv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI1iv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 1);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI1iv(index, v);
     }
 
     /**
@@ -2523,12 +2425,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI2iv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI2iv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 2);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI2iv(index, v);
     }
 
     /**
@@ -2537,12 +2434,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI3iv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI3iv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 3);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI3iv(index, v);
     }
 
     /**
@@ -2551,12 +2443,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4iv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI4iv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 4);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI4iv(index, v);
     }
 
     /**
@@ -2565,12 +2452,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI1uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI1uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 1);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI1uiv(index, v);
     }
 
     /**
@@ -2579,12 +2461,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI2uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI2uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 2);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI2uiv(index, v);
     }
 
     /**
@@ -2593,12 +2470,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI3uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 3);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI3uiv(index, v);
     }
 
     /**
@@ -2607,12 +2479,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 4);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI4uiv(index, v);
     }
 
     /**
@@ -2621,12 +2488,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI4sv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 4);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI4sv(index, v);
     }
 
     /**
@@ -2635,12 +2497,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribI4usv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
-        long __functionAddress = GL.getICD().glVertexAttribI4usv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(v, 4);
-        }
-        callPV(__functionAddress, index, v);
+        GL30C.glVertexAttribI4usv(index, v);
     }
 
     /**
@@ -2649,12 +2506,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribIiv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetVertexAttribIiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 4);
-        }
-        callPV(__functionAddress, index, pname, params);
+        GL30C.glGetVertexAttribIiv(index, pname, params);
     }
 
     /**
@@ -2663,12 +2515,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribIuiv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetVertexAttribIuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 4);
-        }
-        callPV(__functionAddress, index, pname, params);
+        GL30C.glGetVertexAttribIuiv(index, pname, params);
     }
 
     /**
@@ -2677,11 +2524,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform1uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glUniform1uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length, value);
+        GL30C.glUniform1uiv(location, value);
     }
 
     /**
@@ -2690,11 +2533,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform2uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glUniform2uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length >> 1, value);
+        GL30C.glUniform2uiv(location, value);
     }
 
     /**
@@ -2703,11 +2542,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform3uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glUniform3uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length / 3, value);
+        GL30C.glUniform3uiv(location, value);
     }
 
     /**
@@ -2716,11 +2551,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform4uiv(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
-        long __functionAddress = GL.getICD().glUniform4uiv;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, location, value.length >> 2, value);
+        GL30C.glUniform4uiv(location, value);
     }
 
     /**
@@ -2729,12 +2560,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetUniformuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, program, location, params);
+        GL30C.glGetUniformuiv(program, location, params);
     }
 
     /**
@@ -2743,11 +2569,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteRenderbuffers">Reference Page</a>
      */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int[] renderbuffers) {
-        long __functionAddress = GL.getICD().glDeleteRenderbuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        GL30C.glDeleteRenderbuffers(renderbuffers);
     }
 
     /**
@@ -2756,11 +2578,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenRenderbuffers">Reference Page</a>
      */
     public static void glGenRenderbuffers(@NativeType("GLuint *") int[] renderbuffers) {
-        long __functionAddress = GL.getICD().glGenRenderbuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        GL30C.glGenRenderbuffers(renderbuffers);
     }
 
     /**
@@ -2769,12 +2587,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetRenderbufferParameter">Reference Page</a>
      */
     public static void glGetRenderbufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetRenderbufferParameteriv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL30C.glGetRenderbufferParameteriv(target, pname, params);
     }
 
     /**
@@ -2783,11 +2596,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteFramebuffers">Reference Page</a>
      */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int[] framebuffers) {
-        long __functionAddress = GL.getICD().glDeleteFramebuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        GL30C.glDeleteFramebuffers(framebuffers);
     }
 
     /**
@@ -2796,11 +2605,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenFramebuffers">Reference Page</a>
      */
     public static void glGenFramebuffers(@NativeType("GLuint *") int[] framebuffers) {
-        long __functionAddress = GL.getICD().glGenFramebuffers;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        GL30C.glGenFramebuffers(framebuffers);
     }
 
     /**
@@ -2809,12 +2614,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFramebufferAttachmentParameter">Reference Page</a>
      */
     public static void glGetFramebufferAttachmentParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetFramebufferAttachmentParameteriv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, attachment, pname, params);
+        GL30C.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
     }
 
     /**
@@ -2823,12 +2623,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexParameter">Reference Page</a>
      */
     public static void glTexParameterIiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
-        long __functionAddress = GL.getICD().glTexParameterIiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL30C.glTexParameterIiv(target, pname, params);
     }
 
     /**
@@ -2837,12 +2632,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexParameter">Reference Page</a>
      */
     public static void glTexParameterIuiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int[] params) {
-        long __functionAddress = GL.getICD().glTexParameterIuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL30C.glTexParameterIuiv(target, pname, params);
     }
 
     /**
@@ -2851,12 +2641,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetTexParameter">Reference Page</a>
      */
     public static void glGetTexParameterIiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetTexParameterIiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL30C.glGetTexParameterIiv(target, pname, params);
     }
 
     /**
@@ -2865,12 +2650,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetTexParameter">Reference Page</a>
      */
     public static void glGetTexParameterIuiv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
-        long __functionAddress = GL.getICD().glGetTexParameterIuiv;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(params, 1);
-        }
-        callPV(__functionAddress, target, pname, params);
+        GL30C.glGetTexParameterIuiv(target, pname, params);
     }
 
     /**
@@ -2879,12 +2659,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetIntegeri_v">Reference Page</a>
      */
     public static void glGetIntegeri_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] data) {
-        long __functionAddress = GL.getICD().glGetIntegeri_v;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(data, 1);
-        }
-        callPV(__functionAddress, target, index, data);
+        GL30C.glGetIntegeri_v(target, index, data);
     }
 
     /**
@@ -2893,14 +2668,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetTransformFeedbackVarying">Reference Page</a>
      */
     public static void glGetTransformFeedbackVarying(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLsizei *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
-        long __functionAddress = GL.getICD().glGetTransformFeedbackVarying;
-        if (CHECKS) {
-            check(__functionAddress);
-            checkSafe(length, 1);
-            check(size, 1);
-            check(type, 1);
-        }
-        callPPPPV(__functionAddress, program, index, name.remaining(), length, size, type, memAddress(name));
+        GL30C.glGetTransformFeedbackVarying(program, index, length, size, type, name);
     }
 
     /**
@@ -2909,11 +2677,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteVertexArrays">Reference Page</a>
      */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int[] arrays) {
-        long __functionAddress = GL.getICD().glDeleteVertexArrays;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, arrays.length, arrays);
+        GL30C.glDeleteVertexArrays(arrays);
     }
 
     /**
@@ -2922,11 +2686,7 @@ public class GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenVertexArrays">Reference Page</a>
      */
     public static void glGenVertexArrays(@NativeType("GLuint *") int[] arrays) {
-        long __functionAddress = GL.getICD().glGenVertexArrays;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, arrays.length, arrays);
+        GL30C.glGenVertexArrays(arrays);
     }
 
 }

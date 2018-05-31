@@ -49,7 +49,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
         "CLIENT_MAPPED_BUFFER_BARRIER_BIT"..0x00004000
     )
 
-    val BufferStorage = GL44 reuse "BufferStorage"
+    val BufferStorage = GL44C reuse "BufferStorage"
 
     DependsOn("GL_EXT_direct_state_access")..void(
         "NamedBufferStorageEXT",

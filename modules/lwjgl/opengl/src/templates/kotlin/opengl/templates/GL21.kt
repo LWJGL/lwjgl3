@@ -8,9 +8,12 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val GL21 = "GL21".nativeClassGL("GL21") {
+    extends = GL20
     documentation =
         """
-        The core OpenGL 2.1 functionality. OpenGL 2.1 implementations must support at least revision 1.20 of the OpenGL Shading Language.
+        The OpenGL functionality up to version 2.1. Includes the deprecated symbols of the Compatibility Profile.
+
+        OpenGL 2.1 implementations must support at least revision 1.20 of the OpenGL Shading Language.
 
         Extensions promoted to core in this release:
         ${ul(
@@ -36,65 +39,12 @@ val GL21 = "GL21".nativeClassGL("GL21") {
         "FLOAT_MAT4x3"..0x8B6A
     )
 
-    void(
-        "UniformMatrix2x3fv",
-        "Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
-
-        GLint.IN("location", "the location of the uniform variable to be modified"),
-        AutoSize(2 x 3, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
-        GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "UniformMatrix3x2fv",
-        "Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
-
-        GLint.IN("location", "the location of the uniform variable to be modified"),
-        AutoSize(3 x 2, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
-        GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "UniformMatrix2x4fv",
-        "Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
-
-        GLint.IN("location", "the location of the uniform variable to be modified"),
-        AutoSize(2 x 4, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
-        GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "UniformMatrix4x2fv",
-        "Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
-
-        GLint.IN("location", "the location of the uniform variable to be modified"),
-        AutoSize(4 x 2, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
-        GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "UniformMatrix3x4fv",
-        "Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
-
-        GLint.IN("location", "the location of the uniform variable to be modified"),
-        AutoSize(3 x 4, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
-        GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
-
-    void(
-        "UniformMatrix4x3fv",
-        "Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
-
-        GLint.IN("location", "the location of the uniform variable to be modified"),
-        AutoSize(4 x 3, "value")..GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
-        GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
-        GLfloat.const.p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
-    )
+    GL21C reuse "UniformMatrix2x3fv"
+    GL21C reuse "UniformMatrix3x2fv"
+    GL21C reuse "UniformMatrix2x4fv"
+    GL21C reuse "UniformMatrix4x2fv"
+    GL21C reuse "UniformMatrix3x4fv"
+    GL21C reuse "UniformMatrix4x3fv"
 
     // ARB_pixel_buffer_object
 
@@ -133,5 +83,4 @@ val GL21 = "GL21".nativeClassGL("GL21") {
         "COMPRESSED_SLUMINANCE"..0x8C4A,
         "COMPRESSED_SLUMINANCE_ALPHA"..0x8C4B
     )
-
 }
