@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to AL 1.1 functionality. */
-public class AL11 {
+public class AL11 extends AL10 {
 
     /** General tokens. */
     public static final int

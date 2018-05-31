@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * {@link VkPhysicalDeviceProtectedMemoryFeatures protected memory}, and a new command to {@link VK11#vkEnumerateInstanceVersion enumerate the
  * instance version}.</p>
  */
-public class VK11 {
+public class VK11 extends VK10 {
 
     /** Extends {@code VkStructureType}. */
     public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES = 1000094000;

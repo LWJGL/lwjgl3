@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The OpenCL 1.2 OpenGL interoperability functionality. */
-public class CL12GL {
+public class CL12GL extends CL10GL {
 
     /** cl_gl_object_type */
     public static final int

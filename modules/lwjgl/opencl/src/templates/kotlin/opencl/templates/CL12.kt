@@ -13,6 +13,7 @@ const val INVALID_LINKER_OPTIONS = "#INVALID_LINKER_OPTIONS"
 const val INVALID_DEVICE_PARTITION_COUNT = "#INVALID_DEVICE_PARTITION_COUNT"
 
 val CL12 = "CL12".nativeClassCL("CL12") {
+    extends = CL11
     documentation = "The core OpenCL 1.2 functionality."
 
     IntConstant(

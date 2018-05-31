@@ -9,6 +9,7 @@ import opengl.*
 import core.linux.*
 
 val GLX11 = "GLX11".nativeClassGLX("GLX11") {
+    extends = GLX
     documentation = "Native bindings to GLX 1.1."
 
     IntConstant(
@@ -43,5 +44,4 @@ val GLX11 = "GLX11".nativeClassGLX("GLX11") {
         int.IN("screen", "the screen number"),
         int.IN("name", "the string to query")
     )
-
 }

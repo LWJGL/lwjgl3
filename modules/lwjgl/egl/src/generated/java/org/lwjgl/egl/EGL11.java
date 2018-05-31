@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /** The core EGL 1.1 functionality. */
-public class EGL11 {
+public class EGL11 extends EGL10 {
 
     public static final int
         EGL_BACK_BUFFER          = 0x3084,

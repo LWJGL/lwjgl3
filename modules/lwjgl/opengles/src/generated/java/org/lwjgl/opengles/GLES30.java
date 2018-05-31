@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core OpenGL ES 3.0 functionality. */
-public class GLES30 {
+public class GLES30 extends GLES20 {
 
     public static final int
         GL_READ_BUFFER                                   = 0xC02,

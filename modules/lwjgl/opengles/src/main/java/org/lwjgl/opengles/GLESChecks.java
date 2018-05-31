@@ -4,7 +4,6 @@
  */
 package org.lwjgl.opengles;
 
-import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES30.*;
 import static org.lwjgl.opengles.NVGPUShader5.*;
 import static org.lwjgl.system.APIUtil.*;

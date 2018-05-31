@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to ALC 1.1 functionality. */
-public class ALC11 {
+public class ALC11 extends ALC10 {
 
     /** Context creation attributes. */
     public static final int

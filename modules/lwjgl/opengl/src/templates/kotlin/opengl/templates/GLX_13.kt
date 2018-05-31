@@ -9,6 +9,7 @@ import opengl.*
 import core.linux.*
 
 val GLX13 = "GLX13".nativeClassGLX("GLX13") {
+    extends = GLX12
     javaImport("org.lwjgl.system.linux.*")
 
     documentation = "Native bindings to GLX 1.3."
@@ -218,5 +219,4 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         GLXDrawable.IN("draw", "the GLXDrawable"),
         Check(1)..unsigned_long.p.IN("event_mask", "returns the selection mask")
     )
-
 }

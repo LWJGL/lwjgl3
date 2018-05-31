@@ -8,6 +8,7 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val CL22 = "CL22".nativeClassCL("CL22") {
+    extends = CL21
     documentation = "The core OpenCL 2.2 functionality."
 
     IntConstant(

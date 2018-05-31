@@ -8,6 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val GLX14 = "GLX14".nativeClassGLX("GLX14") {
+    extends = GLX13
     documentation = "Native bindings to GLX 1.4."
 
     IntConstant(

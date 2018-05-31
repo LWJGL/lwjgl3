@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core OpenCL 1.1 functionality. */
-public class CL11 {
+public class CL11 extends CL10 {
 
     /** Error Codes. */
     public static final int

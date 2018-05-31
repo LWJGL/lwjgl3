@@ -10,6 +10,7 @@ import opencl.*
 const val INVALID_PROPERTY = "#INVALID_PROPERTY"
 
 val CL11 = "CL11".nativeClassCL("CL11") {
+    extends = CL10
     documentation = "The core OpenCL 1.1 functionality."
 
     IntConstant(

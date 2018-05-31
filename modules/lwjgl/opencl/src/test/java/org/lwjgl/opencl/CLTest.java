@@ -13,7 +13,6 @@ import javax.annotation.*;
 import java.nio.*;
 import java.util.concurrent.*;
 
-import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.system.MemoryStack.*;

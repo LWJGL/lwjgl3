@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core OpenGL ES 3.1 functionality. */
-public class GLES31 {
+public class GLES31 extends GLES30 {
 
     public static final int
         GL_COMPUTE_SHADER                             = 0x91B9,

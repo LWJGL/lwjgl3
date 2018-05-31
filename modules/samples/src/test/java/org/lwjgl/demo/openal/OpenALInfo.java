@@ -10,7 +10,6 @@ import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.openal.AL10.*;
-import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC11.*;
 import static org.lwjgl.openal.EXTEfx.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;

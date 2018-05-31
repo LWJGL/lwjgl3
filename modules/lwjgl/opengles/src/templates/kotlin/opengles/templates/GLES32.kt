@@ -9,6 +9,7 @@ import opengles.*
 import opengles.BufferType.*
 
 val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
+    extends = GLES31
     documentation =
         "The core OpenGL ES 3.2 functionality."
 

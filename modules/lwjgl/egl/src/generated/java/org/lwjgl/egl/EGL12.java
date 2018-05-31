@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core EGL 1.2 functionality. */
-public class EGL12 {
+public class EGL12 extends EGL11 {
 
     public static final int
         EGL_ALPHA_FORMAT          = 0x3088,

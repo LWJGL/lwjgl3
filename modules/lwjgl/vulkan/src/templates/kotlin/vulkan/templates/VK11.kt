@@ -9,6 +9,7 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK_BINDING_INSTANCE) {
+    extends = VK10
     documentation =
         """
         The core Vulkan 1.1 functionality.

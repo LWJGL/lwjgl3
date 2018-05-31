@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to GLX 1.1. */
-public class GLX11 {
+public class GLX11 extends GLX {
 
     /** Names for attributes to {@link #glXGetClientString GetClientString}. */
     public static final int

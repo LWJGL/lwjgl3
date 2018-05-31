@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /** Native bindings to GLX 1.2. */
-public class GLX12 {
+public class GLX12 extends GLX11 {
 
     protected GLX12() {
         throw new UnsupportedOperationException();

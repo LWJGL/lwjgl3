@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core OpenCL 2.2 functionality. */
-public class CL22 {
+public class CL22 extends CL21 {
 
     /** OpenCL Version. */
     public static final int CL_VERSION_2_2 = 1;

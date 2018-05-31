@@ -9,6 +9,7 @@ import opencl.*
 import opengl.*
 
 val CL12GL = "CL12GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("CL12GL") {
+    extends = CL10GL
     documentation = "The OpenCL 1.2 OpenGL interoperability functionality."
 
     IntConstant(

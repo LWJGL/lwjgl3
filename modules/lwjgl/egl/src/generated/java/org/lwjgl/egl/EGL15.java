@@ -16,7 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core EGL 1.5 functionality. */
-public class EGL15 {
+public class EGL15 extends EGL14 {
 
     public static final int
         EGL_CONTEXT_MAJOR_VERSION                      = 0x3098,

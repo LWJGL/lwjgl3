@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
 /** The core OpenCL 2.1 functionality. */
-public class CL21 {
+public class CL21 extends CL20 {
 
     /** OpenCL Version. */
     public static final int CL_VERSION_2_1 = 1;

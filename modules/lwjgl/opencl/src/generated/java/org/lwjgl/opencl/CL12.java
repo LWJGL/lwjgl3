@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The core OpenCL 1.2 functionality. */
-public class CL12 {
+public class CL12 extends CL11 {
 
     /** Error Codes. */
     public static final int

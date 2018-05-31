@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to GLX 1.4. */
-public class GLX14 {
+public class GLX14 extends GLX13 {
 
     /** Added in GLX 1.4. */
     public static final int

@@ -8,6 +8,7 @@ import egl.*
 import org.lwjgl.generator.*
 
 val EGL12 = "EGL12".nativeClassEGL("EGL12", postfix = "") {
+    extends = EGL11
     documentation =
         "The core EGL 1.2 functionality."
 
