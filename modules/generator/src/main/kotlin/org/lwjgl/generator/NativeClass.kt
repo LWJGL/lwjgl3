@@ -189,6 +189,8 @@ class NativeClass internal constructor(
         private val JDOC_LINK_PATTERN = """(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""".toRegex()
     }
 
+    var extends: NativeClass? = null
+
     private val constantBlocks = ArrayList<ConstantBlock<*>>()
 
     private val _functions = LinkedHashMap<String, Func>()
@@ -501,7 +503,13 @@ class NativeClass internal constructor(
         val documentation = super.documentation
         if (!documentation.isNullOrBlank())
             println(processDocumentation(documentation!!).toJavaDoc(indentation = ""))
-        println("${access.modifier}${if (hasFunctions) "" else "final "}class $className {")
+        val isOpen = hasFunctions || extends != null
+        print("${access.modifier}${if (isOpen) "" else "final "}class $className")
+        extends.let {
+            if (it != null)
+                print(" extends ${it.className}")
+        }
+        println(" {")
 
         constantBlocks.forEach {
             it.generate(this)
@@ -529,7 +537,7 @@ class NativeClass internal constructor(
 
                 if (binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress }) {
                     println("""
-    ${if (hasFunctions && access === Access.PUBLIC) "protected" else "private"} $className() {
+    ${if (isOpen && access === Access.PUBLIC) "protected" else "private"} $className() {
         throw new UnsupportedOperationException();
     }""")
                     binding.generateFunctionSetup(this, this@NativeClass)
@@ -542,12 +550,12 @@ class NativeClass internal constructor(
 
                 // This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
                 println("""
-    ${if (hasFunctions && access === Access.PUBLIC) "protected" else "private"} $className() {
+    ${if (isOpen && access === Access.PUBLIC) "protected" else "private"} $className() {
         throw new UnsupportedOperationException();
     }""")
             }
         } else {
-            println("\n${t}private $className() {}")
+            println("\n$t${if (isOpen && access === Access.PUBLIC) "protected" else "private"} $className() {}")
         }
 
         genFunctions.forEach { func ->
