@@ -127,6 +127,7 @@ public final class Threads {
                 glClear(GL_COLOR_BUFFER_BIT);
                 glfwSwapBuffers(window);
             }
+            GL.setCapabilities(null);
         }
     }
 }

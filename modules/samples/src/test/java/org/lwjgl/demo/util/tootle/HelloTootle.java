@@ -424,6 +424,8 @@ public final class HelloTootle {
 
         glDeleteVertexArrays(vao);
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();

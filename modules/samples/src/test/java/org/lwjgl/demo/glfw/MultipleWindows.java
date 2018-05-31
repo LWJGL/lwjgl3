@@ -103,6 +103,7 @@ public final class MultipleWindows {
                 }
             }
         }
+        GL.setCapabilities(null);
     }
 
     private static class Window {

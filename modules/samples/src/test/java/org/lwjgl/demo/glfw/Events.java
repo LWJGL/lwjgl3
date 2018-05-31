@@ -316,6 +316,8 @@ public final class Events {
             glfwSwapBuffers(window);
         }
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         Objects.requireNonNull(glfwSetJoystickCallback(null)).free();
         Objects.requireNonNull(glfwSetMonitorCallback(null)).free();

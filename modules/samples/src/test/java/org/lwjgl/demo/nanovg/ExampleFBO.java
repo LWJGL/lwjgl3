@@ -254,6 +254,8 @@ public final class ExampleFBO extends Demo {
         System.out.format("          CPU Time: %.2f ms\n", getGraphAverage(cpuGraph) * 1000.0f);
         System.out.format("          GPU Time: %.2f ms\n", getGraphAverage(gpuGraph) * 1000.0f);
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();

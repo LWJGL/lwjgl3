@@ -148,6 +148,8 @@ public final class ExampleGL2 extends Demo {
 
         nvgDelete(vg);
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();

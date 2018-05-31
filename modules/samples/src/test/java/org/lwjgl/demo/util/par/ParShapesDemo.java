@@ -480,6 +480,8 @@ public final class ParShapesDemo {
         glDeleteBuffers(ibo);
         glDeleteBuffers(vbo);
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();

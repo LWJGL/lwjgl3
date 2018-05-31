@@ -344,6 +344,8 @@ public class SVGDemo {
     }
 
     private void destroy() {
+        GL.setCapabilities(null);
+
         if (debugProc != null) {
             debugProc.free();
         }

@@ -250,6 +250,8 @@ public final class Vorbis implements AutoCloseable {
 
     @Override
     public void close() {
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
 

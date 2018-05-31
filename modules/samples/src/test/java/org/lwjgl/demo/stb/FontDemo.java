@@ -279,6 +279,8 @@ abstract class FontDemo {
     protected abstract void loop();
 
     private void destroy() {
+        GL.setCapabilities(null);
+
         if (debugProc != null) {
             debugProc.free();
         }

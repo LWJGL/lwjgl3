@@ -559,6 +559,8 @@ public class Mandelbrot {
         if (debugProc != null) {
             debugProc.free();
         }
+
+        GL.setCapabilities(null);
     }
 
     private void display() {

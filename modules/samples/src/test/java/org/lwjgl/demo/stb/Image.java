@@ -327,6 +327,8 @@ public final class Image {
     }
 
     private void destroy() {
+        GL.setCapabilities(null);
+
         if (debugProc != null) {
             debugProc.free();
         }

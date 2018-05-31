@@ -260,6 +260,8 @@ public final class HolyGrail {
         }
 
         if (window != NULL) {
+            GL.setCapabilities(null);
+
             glfwFreeCallbacks(window);
             glfwDestroyWindow(window);
         }

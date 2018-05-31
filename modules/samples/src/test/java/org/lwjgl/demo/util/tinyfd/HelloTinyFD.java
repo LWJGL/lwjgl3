@@ -127,6 +127,8 @@ public final class HelloTinyFD {
             glfwSwapBuffers(window);
         }
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();

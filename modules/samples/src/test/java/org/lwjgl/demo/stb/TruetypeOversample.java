@@ -397,6 +397,8 @@ public final class TruetypeOversample {
     }
 
     private void destroy() {
+        GL.setCapabilities(null);
+
         chardata.free();
 
         if (debugProc != null) {

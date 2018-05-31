@@ -213,6 +213,8 @@ public class Gears extends AbstractGears {
     }
 
     private void destroy() {
+        GL.setCapabilities(null);
+
         if (debugProc != null) {
             debugProc.free();
         }

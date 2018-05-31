@@ -97,6 +97,8 @@ public final class HelloNFD {
             glfwSwapBuffers(window);
         }
 
+        GL.setCapabilities(null);
+
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();

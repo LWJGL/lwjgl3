@@ -643,6 +643,8 @@ public class GLFWDemo {
         glDeleteBuffers(vbo);
         glDeleteBuffers(ebo);
         nk_buffer_free(cmds);
+
+        GL.setCapabilities(null);
     }
 
     private void shutdown() {
