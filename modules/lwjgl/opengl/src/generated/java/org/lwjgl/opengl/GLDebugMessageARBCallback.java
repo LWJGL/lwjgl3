@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     GLenum source,
  *     GLenum type,
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     GLsizei length,
  *     GLchar const *message,
  *     void const *userParam
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class GLDebugMessageARBCallback extends Callback implements GLDebugMessageARBCallbackI {
 

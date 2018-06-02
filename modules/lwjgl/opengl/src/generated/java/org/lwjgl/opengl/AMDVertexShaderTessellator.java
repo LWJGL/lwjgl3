@@ -19,7 +19,7 @@ import static org.lwjgl.system.Checks.*;
  * 
  * <p>With vertex shading tessellation, additional vertex shader special values are available:</p>
  * 
- * <code><pre>
+ * <pre><code>
  *         ivec3 gl_VertexTriangleIndex; // indices of the three control
  *                                       // points for the vertex
  *         vec3 gl_BarycentricCoord;     // barycentric coordinates
@@ -57,7 +57,7 @@ import static org.lwjgl.system.Checks.*;
  * 
  *     Figure 2  A Tessellated Quad
  *     o = control point (and tessellated vertex)
- *     * = tessellated vertex</pre></code>
+ *     * = tessellated vertex</code></pre>
  * 
  * <p>When this extension is enabled, conventional built-in attributes and user defined attributes are uninitialized. The shader writer is responsible for
  * explicitly fetching all other vertex data either from textures, uniform buffers, or vertex buffers.</p>

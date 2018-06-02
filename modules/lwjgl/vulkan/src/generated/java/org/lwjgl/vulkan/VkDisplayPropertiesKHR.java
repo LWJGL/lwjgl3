@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDisplayPropertiesKHR {
  *     VkDisplayKHR display;
  *     char const * displayName;
@@ -51,13 +51,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSurfaceTransformFlagsKHR supportedTransforms;
  *     VkBool32 planeReorderPossible;
  *     VkBool32 persistentContent;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

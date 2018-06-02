@@ -19,12 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VRTextureDepthInfo_t {
  *     void * handle;
  *     {@link HmdMatrix44 HmdMatrix44_t} mProjection;
  *     {@link HmdVector2 HmdVector2_t} vRange;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VRTextureDepthInfo_t")
 public class VRTextureDepthInfo extends Struct implements NativeResource {
@@ -32,6 +32,7 @@ public class VRTextureDepthInfo extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

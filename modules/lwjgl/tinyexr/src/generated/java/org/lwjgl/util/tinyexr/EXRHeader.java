@@ -31,7 +31,7 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct EXRHeader {
  *     float pixel_aspect_ratio;
  *     int line_order;
@@ -56,13 +56,14 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  *     int num_channels;
  *     int compression_type;
  *     int * requested_pixel_types;
- * }</pre></code>
+ * }</code></pre>
  */
 public class EXRHeader extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

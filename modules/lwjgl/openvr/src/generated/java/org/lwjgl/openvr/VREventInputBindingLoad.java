@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VREvent_InputBindingLoad_t {
  *     PropertyContainerHandle_t ulAppContainer;
  *     uint64_t pathMessage;
  *     uint64_t pathUrl;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VREvent_InputBindingLoad_t")
 public class VREventInputBindingLoad extends Struct {
@@ -29,6 +29,7 @@ public class VREventInputBindingLoad extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

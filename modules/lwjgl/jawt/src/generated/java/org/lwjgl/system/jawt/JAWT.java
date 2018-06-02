@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct JAWT {
  *     jint version;
  *     void * GetDrawingSurface;
@@ -37,13 +37,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * CreateEmbeddedFrame;
  *     void * SetBounds;
  *     void * SynthesizeWindowActivation;
- * }</pre></code>
+ * }</code></pre>
  */
 public class JAWT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * bool (*) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
@@ -22,7 +22,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     size_t offset,
  *     size_t length,
  *     unsigned int arena_ind
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("extent_purge_t")
@@ -53,13 +53,6 @@ public interface ExtentPurgeI extends CallbackI.Z {
      * purge function (e.g. implemented via {@code madvise(..., MADV_FREE)}) can delay purging indefinitely and leave the pages within the purged virtual memory
      * range in an indeterminite state, whereas a forced extent purge function immediately purges, and the pages within the virtual memory range will be
      * zero-filled the next time they are accessed. If the function returns true, this indicates failure to purge.</p>
-     *
-     * @param extent_hooks 
-     * @param addr         
-     * @param size         
-     * @param offset       
-     * @param length       
-     * @param arena_ind    
      */
     @NativeType("bool") boolean invoke(@NativeType("extent_hooks_t *") long extent_hooks, @NativeType("void *") long addr, @NativeType("size_t") long size, @NativeType("size_t") long offset, @NativeType("size_t") long length, @NativeType("unsigned int") int arena_ind);
 

@@ -54,20 +54,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDescriptorSetLayoutCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDescriptorSetLayoutCreateFlags flags;
  *     uint32_t bindingCount;
  *     {@link VkDescriptorSetLayoutBinding VkDescriptorSetLayoutBinding const} * pBindings;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDescriptorSetLayoutCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

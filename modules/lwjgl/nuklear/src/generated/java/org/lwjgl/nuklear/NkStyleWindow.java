@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style_window {
  *     {@link NkStyleWindowHeader struct nk_style_window_header} header;
  *     {@link NkStyleItem struct nk_style_item} fixed_background;
@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} contextual_padding;
  *     {@link NkVec2 struct nk_vec2} menu_padding;
  *     {@link NkVec2 struct nk_vec2} tooltip_padding;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_window")
 public class NkStyleWindow extends Struct implements NativeResource {
@@ -58,6 +58,7 @@ public class NkStyleWindow extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

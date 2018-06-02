@@ -49,20 +49,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkCommandBufferAllocateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkCommandPool commandPool;
  *     VkCommandBufferLevel level;
  *     uint32_t commandBufferCount;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkCommandBufferAllocateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

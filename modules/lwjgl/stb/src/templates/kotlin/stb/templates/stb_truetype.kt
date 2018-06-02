@@ -242,7 +242,7 @@ int main(int arg, char **argv)
 
         You should really just solve this offline, keep your own tables of what font is what, and don't try to get it out of the .ttf file. That's because
         getting it out of the .ttf file is really hard, because the names in the file can appear in many possible encodings, in many possible languages, and
-        e.g. if you need a case-insensitive comparison, the details of that depend on the encoding & language in a complex way (actually underspecified in
+        e.g. if you need a case-insensitive comparison, the details of that depend on the encoding &amp; language in a complex way (actually underspecified in
         truetype, but also gigantic).
 
         But you can use the provided functions in two possible ways:
@@ -994,7 +994,7 @@ int main(int arg, char **argv)
         Computes a discretized SDF field for a single character, suitable for storing in a single-channel texture, sampling with bilinear filtering, and
         testing against larger than some threshhold to produce scalable fonts.
         
-        {@code pixel_dist_scale} & {@code onedge_value} are a scale & bias that allows you to make optimal use of the limited {@code 0..255} for your
+        {@code pixel_dist_scale} &amp; {@code onedge_value} are a scale &amp; bias that allows you to make optimal use of the limited {@code 0..255} for your
         application, trading off precision and special effects. SDF values outside the range {@code 0..255} are clamped to {@code 0..255}.
         
         Example:
@@ -1006,14 +1006,14 @@ pixel_dist_scale = 180/5.0 = 36.0""")}
 
         This will create an SDF bitmap in which the character is about 22 pixels high but the whole bitmap is about {@code 22+5+5=32} pixels high. To produce a
         filled shape, sample the SDF at each pixel and fill the pixel if the SDF value is greater than or equal to {@code 180/255}. (You'll actually want to
-        antialias, which is beyond the scope of this example.) Additionally, you can compute offset outlines (e.g. to stroke the character border inside &
+        antialias, which is beyond the scope of this example.) Additionally, you can compute offset outlines (e.g. to stroke the character border inside &amp;
         outside, or only outside). For example, to fill outside the character up to 3 SDF pixels, you would compare against {@code (180-36.0*3)/255 = 72/255}.
         The above choice of variables maps a range from 5 pixels outside the shape to 2 pixels inside the shape to {@code 0..255}; this is intended primarily
         for apply outside effects only (the interior range is needed to allow proper antialiasing of the font at <i>smaller</i> sizes).
 
         The function computes the SDF analytically at each SDF pixel, not by e.g. building a higher-res bitmap and approximating it. In theory the quality
-        should be as high as possible for an SDF of this size & representation, but unclear if this is true in practice (perhaps building a higher-res bitmap
-        and computing from that can allow drop-out prevention).
+        should be as high as possible for an SDF of this size &amp; representation, but unclear if this is true in practice (perhaps building a higher-res
+        bitmap and computing from that can allow drop-out prevention).
 
         The algorithm has not been optimized at all, so expect it to be slow if computing lots of characters or very large sizes.
         """,

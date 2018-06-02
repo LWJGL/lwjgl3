@@ -32,13 +32,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct cl_motion_estimation_desc_intel {
  *     cl_uint mb_block_type;
  *     cl_uint subpixel_mode;
  *     cl_uint sad_adjust_mode;
  *     cl_uint search_path_type;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct cl_motion_estimation_desc_intel")
 public class CLMotionEstimationDescINTEL extends Struct implements NativeResource {
@@ -46,6 +46,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -40,7 +40,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrLayerEyeFov {
  *     {@link OVRLayerHeader ovrLayerHeader} Header;
  *     ovrTextureSwapChain ColorTexture[ovrEye_Count];
@@ -48,7 +48,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  *     {@link OVRFovPort ovrFovPort} Fov[ovrEye_Count];
  *     {@link OVRPosef ovrPosef} RenderPose[ovrEye_Count];
  *     double SensorSampleTime;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrLayerEyeFov")
 public class OVRLayerEyeFov extends Struct implements NativeResource {
@@ -56,6 +56,7 @@ public class OVRLayerEyeFov extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

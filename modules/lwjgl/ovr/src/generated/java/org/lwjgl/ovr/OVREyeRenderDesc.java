@@ -31,14 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrEyeRenderDesc {
  *     ovrEyeType Eye;
  *     {@link OVRFovPort ovrFovPort} Fov;
  *     {@link OVRRecti ovrRecti} DistortedViewport;
  *     {@link OVRVector2f ovrVector2f} PixelsPerTanAngleAtCenter;
  *     {@link OVRPosef ovrPosef} HmdToEyePose;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrEyeRenderDesc")
 public class OVREyeRenderDesc extends Struct implements NativeResource {
@@ -46,6 +46,7 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

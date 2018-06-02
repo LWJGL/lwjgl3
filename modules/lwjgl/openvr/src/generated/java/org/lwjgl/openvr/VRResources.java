@@ -37,9 +37,6 @@ public class VRResources {
     /**
      * Loads the specified resource into the provided buffer if large enough.
      *
-     * @param pchResourceName 
-     * @param pchBuffer       
-     *
      * @return the size in bytes of the buffer required to hold the specified resource
      */
     @NativeType("uint32_t")
@@ -52,9 +49,6 @@ public class VRResources {
 
     /**
      * Loads the specified resource into the provided buffer if large enough.
-     *
-     * @param pchResourceName 
-     * @param pchBuffer       
      *
      * @return the size in bytes of the buffer required to hold the specified resource
      */
@@ -71,9 +65,6 @@ public class VRResources {
 
     /**
      * Loads the specified resource into the provided buffer if large enough.
-     *
-     * @param pchResourceName 
-     * @param unBufferLen     
      *
      * @return the size in bytes of the buffer required to hold the specified resource
      */
@@ -104,10 +95,6 @@ public class VRResources {
     /**
      * Provides the full path to the specified resource. Resource names can include named directories for drivers and other things, and this resolves all of
      * those and returns the actual physical path. {@code pchResourceTypeDirectory} is the subdirectory of resources to look in.
-     *
-     * @param pchResourceName          
-     * @param pchResourceTypeDirectory 
-     * @param pchPathBuffer            
      */
     @NativeType("uint32_t")
     public static int VRResources_GetResourceFullPath(@NativeType("char const *") ByteBuffer pchResourceName, @NativeType("char const *") ByteBuffer pchResourceTypeDirectory, @Nullable @NativeType("char *") ByteBuffer pchPathBuffer) {
@@ -121,10 +108,6 @@ public class VRResources {
     /**
      * Provides the full path to the specified resource. Resource names can include named directories for drivers and other things, and this resolves all of
      * those and returns the actual physical path. {@code pchResourceTypeDirectory} is the subdirectory of resources to look in.
-     *
-     * @param pchResourceName          
-     * @param pchResourceTypeDirectory 
-     * @param pchPathBuffer            
      */
     @NativeType("uint32_t")
     public static int VRResources_GetResourceFullPath(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char const *") CharSequence pchResourceTypeDirectory, @Nullable @NativeType("char *") ByteBuffer pchPathBuffer) {
@@ -141,10 +124,6 @@ public class VRResources {
     /**
      * Provides the full path to the specified resource. Resource names can include named directories for drivers and other things, and this resolves all of
      * those and returns the actual physical path. {@code pchResourceTypeDirectory} is the subdirectory of resources to look in.
-     *
-     * @param pchResourceName          
-     * @param pchResourceTypeDirectory 
-     * @param unBufferLen              
      */
     @NativeType("uint32_t")
     public static String VRResources_GetResourceFullPath(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char const *") CharSequence pchResourceTypeDirectory, @NativeType("uint32_t") int unBufferLen) {

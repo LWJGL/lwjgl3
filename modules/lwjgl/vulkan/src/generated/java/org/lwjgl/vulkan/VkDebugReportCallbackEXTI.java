@@ -16,7 +16,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <p>The prototype for the {@link VkDebugReportCallbackCreateInfoEXT}{@code ::pfnCallback} function implemented by the application is:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
  *     VkDebugReportFlagsEXT                       flags,
  *     VkDebugReportObjectTypeEXT                  objectType,
@@ -25,7 +25,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     int32_t                                     messageCode,
  *     const char*                                 pLayerPrefix,
  *     const char*                                 pMessage,
- *     void*                                       pUserData);</pre></code>
+ *     void*                                       pUserData);</code></pre>
  * 
  * <h5>Description</h5>
  * 

@@ -79,7 +79,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiMesh {
  *     unsigned int mPrimitiveTypes;
  *     unsigned int mNumVertices;
@@ -98,7 +98,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumAnimMeshes;
  *     {@link AIAnimMesh struct aiAnimMesh} ** mAnimMeshes;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiMesh")
 public class AIMesh extends Struct implements NativeResource {
@@ -106,6 +106,7 @@ public class AIMesh extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

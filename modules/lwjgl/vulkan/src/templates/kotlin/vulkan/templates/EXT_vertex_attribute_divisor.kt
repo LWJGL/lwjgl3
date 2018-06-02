@@ -16,7 +16,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
         <h5>Examples</h5>
         To create a vertex binding such that the first binding uses instanced rendering and the same attribute is used for every 4 draw instances, an application could use the following set of structures:
 
-        <code><pre>
+        <pre><code>
 ￿    const VkVertexInputBindingDivisorDescriptionEXT divisorDesc =
 ￿    {
 ￿        0,
@@ -28,7 +28,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
 ￿        VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT, // sType
 ￿        NULL,                                                             // pNext
 ￿        1,                                                                // vertexBindingDivisorCount
-￿        &divisorDesc                                                      // pVertexBindingDivisors
+￿        &amp;divisorDesc                                                      // pVertexBindingDivisors
 ￿    }
 ￿
 ￿    const VkVertexInputBindingDescription binding =
@@ -41,10 +41,10 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
 ￿    const VkPipelineVertexInputStateCreateInfo viInfo =
 ￿    {
 ￿        VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_CREATE_INFO,              // sType
-￿        &divisorInfo,                                                     // pNext
+￿        &amp;divisorInfo,                                                     // pNext
 ￿        ...
 ￿    };
-￿    //...</pre></code>
+￿    //...</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

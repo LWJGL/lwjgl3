@@ -101,11 +101,11 @@ public class KHRExternalMemoryWin32 {
      * 
      * <p>To export a Windows handle representing the underlying resources of a Vulkan device memory object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetMemoryWin32HandleKHR(
      *     VkDevice                                    device,
      *     const VkMemoryGetWin32HandleInfoKHR*        pGetWin32HandleInfo,
-     *     HANDLE*                                     pHandle);</pre></code>
+     *     HANDLE*                                     pHandle);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -168,12 +168,12 @@ public class KHRExternalMemoryWin32 {
      * 
      * <p>Windows memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetMemoryWin32HandlePropertiesKHR(
      *     VkDevice                                    device,
      *     VkExternalMemoryHandleTypeFlagBits          handleType,
      *     HANDLE                                      handle,
-     *     VkMemoryWin32HandlePropertiesKHR*           pMemoryWin32HandleProperties);</pre></code>
+     *     VkMemoryWin32HandlePropertiesKHR*           pMemoryWin32HandleProperties);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 

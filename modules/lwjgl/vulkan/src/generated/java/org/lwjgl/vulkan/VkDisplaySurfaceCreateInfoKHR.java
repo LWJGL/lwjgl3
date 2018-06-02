@@ -67,7 +67,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDisplaySurfaceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -79,13 +79,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float globalAlpha;
  *     VkDisplayPlaneAlphaFlagBitsKHR alphaMode;
  *     {@link VkExtent2D VkExtent2D} imageExtent;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

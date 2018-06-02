@@ -12,11 +12,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * int (*) (
  *     MDB_val const *a,
  *     MDB_val const *b
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("MDB_cmp_func *")

@@ -60,7 +60,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiScene {
  *     unsigned int mFlags;
  *     {@link AINode struct aiNode} * mRootNode;
@@ -78,7 +78,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AICamera struct aiCamera} ** mCameras;
  *     {@link AIMetaData struct aiMetadata} * mMetaData;
  *     char * mPrivate;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiScene")
 public class AIScene extends Struct implements NativeResource {
@@ -86,6 +86,7 @@ public class AIScene extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -41,13 +41,8 @@ public class VRNotifications {
      * use a line break ('\n') to split the text into two lines. The {@code pImage} argument may be {@code NULL}, in which case the specified overlay's icon will be
      * used instead.</p>
      *
-     * @param ulOverlayHandle 
-     * @param ulUserValue     
-     * @param type            one of:<br><table><tr><td>{@link VR#EVRNotificationType_Transient}</td><td>{@link VR#EVRNotificationType_Persistent}</td></tr><tr><td>{@link VR#EVRNotificationType_Transient_SystemWithUserValue}</td></tr></table>
-     * @param pchText         
-     * @param style           one of:<br><table><tr><td>{@link VR#EVRNotificationStyle_None}</td><td>{@link VR#EVRNotificationStyle_Application}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Disabled}</td><td>{@link VR#EVRNotificationStyle_Contact_Enabled}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Active}</td></tr></table>
-     * @param pImage          
-     * @param pNotificationId 
+     * @param type  one of:<br><table><tr><td>{@link VR#EVRNotificationType_Transient}</td><td>{@link VR#EVRNotificationType_Persistent}</td></tr><tr><td>{@link VR#EVRNotificationType_Transient_SystemWithUserValue}</td></tr></table>
+     * @param style one of:<br><table><tr><td>{@link VR#EVRNotificationStyle_None}</td><td>{@link VR#EVRNotificationStyle_Application}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Disabled}</td><td>{@link VR#EVRNotificationStyle_Contact_Enabled}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Active}</td></tr></table>
      */
     @NativeType("EVRNotificationError")
     public static int VRNotifications_CreateNotification(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("uint64_t") long ulUserValue, @NativeType("EVRNotificationType") int type, @NativeType("char const *") ByteBuffer pchText, @NativeType("EVRNotificationStyle") int style, @Nullable @NativeType("NotificationBitmap_t const *") NotificationBitmap pImage, @NativeType("VRNotificationId *") IntBuffer pNotificationId) {
@@ -65,13 +60,8 @@ public class VRNotifications {
      * use a line break ('\n') to split the text into two lines. The {@code pImage} argument may be {@code NULL}, in which case the specified overlay's icon will be
      * used instead.</p>
      *
-     * @param ulOverlayHandle 
-     * @param ulUserValue     
-     * @param type            one of:<br><table><tr><td>{@link VR#EVRNotificationType_Transient}</td><td>{@link VR#EVRNotificationType_Persistent}</td></tr><tr><td>{@link VR#EVRNotificationType_Transient_SystemWithUserValue}</td></tr></table>
-     * @param pchText         
-     * @param style           one of:<br><table><tr><td>{@link VR#EVRNotificationStyle_None}</td><td>{@link VR#EVRNotificationStyle_Application}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Disabled}</td><td>{@link VR#EVRNotificationStyle_Contact_Enabled}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Active}</td></tr></table>
-     * @param pImage          
-     * @param pNotificationId 
+     * @param type  one of:<br><table><tr><td>{@link VR#EVRNotificationType_Transient}</td><td>{@link VR#EVRNotificationType_Persistent}</td></tr><tr><td>{@link VR#EVRNotificationType_Transient_SystemWithUserValue}</td></tr></table>
+     * @param style one of:<br><table><tr><td>{@link VR#EVRNotificationStyle_None}</td><td>{@link VR#EVRNotificationStyle_Application}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Disabled}</td><td>{@link VR#EVRNotificationStyle_Contact_Enabled}</td></tr><tr><td>{@link VR#EVRNotificationStyle_Contact_Active}</td></tr></table>
      */
     @NativeType("EVRNotificationError")
     public static int VRNotifications_CreateNotification(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("uint64_t") long ulUserValue, @NativeType("EVRNotificationType") int type, @NativeType("char const *") CharSequence pchText, @NativeType("EVRNotificationStyle") int style, @Nullable @NativeType("NotificationBitmap_t const *") NotificationBitmap pImage, @NativeType("VRNotificationId *") IntBuffer pNotificationId) {
@@ -89,11 +79,7 @@ public class VRNotifications {
 
     // --- [ VRNotifications_RemoveNotification ] ---
 
-    /**
-     * Destroy a notification, hiding it first if it currently shown to the user.
-     *
-     * @param notificationId 
-     */
+    /** Destroy a notification, hiding it first if it currently shown to the user. */
     @NativeType("EVRNotificationError")
     public static int VRNotifications_RemoveNotification(@NativeType("VRNotificationId") int notificationId) {
         long __functionAddress = OpenVR.VRNotifications.RemoveNotification;

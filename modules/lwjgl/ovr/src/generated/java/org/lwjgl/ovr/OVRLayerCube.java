@@ -33,12 +33,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrLayerCube {
  *     {@link OVRLayerHeader ovrLayerHeader} Header;
  *     {@link OVRQuatf ovrQuatf} Orientation;
  *     ovrTextureSwapChain CubeMapTexture;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrLayerCube")
 public class OVRLayerCube extends Struct implements NativeResource {
@@ -46,6 +46,7 @@ public class OVRLayerCube extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

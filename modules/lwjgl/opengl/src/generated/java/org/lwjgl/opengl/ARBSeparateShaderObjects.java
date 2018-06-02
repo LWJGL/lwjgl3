@@ -149,7 +149,7 @@ public class ARBSeparateShaderObjects {
      * 
      * <p>{@code glCreateShaderProgram} is equivalent (assuming no errors are generated) to:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * const GLuint shader = glCreateShader(type);
      * if (shader) {
      *     glShaderSource(shader, count, strings, NULL);
@@ -157,7 +157,7 @@ public class ARBSeparateShaderObjects {
      *     const GLuint program = glCreateProgram();
      *     if (program) {
      *         GLint compiled = GL_FALSE;
-     *         glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+     *         glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
      *         glProgramParameteri(program, GL_PROGRAM_SEPARABLE, GL_TRUE);
      *         if (compiled) {
      *             glAttachShader(program, shader);
@@ -170,7 +170,7 @@ public class ARBSeparateShaderObjects {
      *     return program;
      * } else {
      *     return 0;
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>The program object created by glCreateShaderProgram has its GL_PROGRAM_SEPARABLE status set to GL_TRUE.</p>
      *
@@ -187,7 +187,7 @@ public class ARBSeparateShaderObjects {
      * 
      * <p>{@code glCreateShaderProgram} is equivalent (assuming no errors are generated) to:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * const GLuint shader = glCreateShader(type);
      * if (shader) {
      *     glShaderSource(shader, count, strings, NULL);
@@ -195,7 +195,7 @@ public class ARBSeparateShaderObjects {
      *     const GLuint program = glCreateProgram();
      *     if (program) {
      *         GLint compiled = GL_FALSE;
-     *         glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+     *         glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
      *         glProgramParameteri(program, GL_PROGRAM_SEPARABLE, GL_TRUE);
      *         if (compiled) {
      *             glAttachShader(program, shader);
@@ -208,7 +208,7 @@ public class ARBSeparateShaderObjects {
      *     return program;
      * } else {
      *     return 0;
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>The program object created by glCreateShaderProgram has its GL_PROGRAM_SEPARABLE status set to GL_TRUE.</p>
      *
@@ -225,7 +225,7 @@ public class ARBSeparateShaderObjects {
      * 
      * <p>{@code glCreateShaderProgram} is equivalent (assuming no errors are generated) to:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * const GLuint shader = glCreateShader(type);
      * if (shader) {
      *     glShaderSource(shader, count, strings, NULL);
@@ -233,7 +233,7 @@ public class ARBSeparateShaderObjects {
      *     const GLuint program = glCreateProgram();
      *     if (program) {
      *         GLint compiled = GL_FALSE;
-     *         glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+     *         glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
      *         glProgramParameteri(program, GL_PROGRAM_SEPARABLE, GL_TRUE);
      *         if (compiled) {
      *             glAttachShader(program, shader);
@@ -246,7 +246,7 @@ public class ARBSeparateShaderObjects {
      *     return program;
      * } else {
      *     return 0;
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>The program object created by glCreateShaderProgram has its GL_PROGRAM_SEPARABLE status set to GL_TRUE.</p>
      *

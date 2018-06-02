@@ -53,20 +53,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPipelineCoverageToColorStateCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkPipelineCoverageToColorStateCreateFlagsNV flags;
  *     VkBool32 coverageToColorEnable;
  *     uint32_t coverageToColorLocation;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

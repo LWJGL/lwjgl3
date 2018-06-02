@@ -67,8 +67,6 @@ public class CL21 {
     // --- [ clSetDefaultDeviceCommandQueue ] ---
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetDefaultDeviceCommandQueue.html">Reference Page</a></p>
-     * 
      * Replaces a default device command queue created with {@link CL20#clCreateCommandQueueWithProperties CreateCommandQueueWithProperties} and the {@link CL20#CL_QUEUE_ON_DEVICE_DEFAULT QUEUE_ON_DEVICE_DEFAULT} flag.
      *
      * @param context       a valid OpenCL context
@@ -84,6 +82,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetDefaultDeviceCommandQueue.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetDefaultDeviceCommandQueue(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_command_queue") long command_queue) {
@@ -110,8 +110,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">Reference Page</a></p>
-     * 
      * Returns a reasonably synchronized pair of timestamps from the device timer and the host timer as seen by device. Implementations may need to execute
      * this query with a high latency in order to provide reasonable synchronization of the timestamps. The host timestamp and device timestamp returned by
      * this function and {@link #clGetHostTimer GetHostTimer} each have an implementation defined timebase. The timestamps will always be in their respective timebases regardless
@@ -132,6 +130,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetDeviceAndHostTimer(@NativeType("cl_device_id") long device, @NativeType("cl_ulong *") LongBuffer device_timestamp, @NativeType("cl_ulong *") LongBuffer host_timestamp) {
@@ -155,8 +155,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">Reference Page</a></p>
-     * 
      * Returns the current value of the host clock as seen by device. This value is in the same timebase as the {@code host_timestamp} returned from
      * {@link #clGetDeviceAndHostTimer GetDeviceAndHostTimer}. The implementation will return with as low a latency as possible to allow a correlation with a subsequent application sampled
      * time. The host timestamp and device timestamp returned by this function and {@link #clGetDeviceAndHostTimer GetDeviceAndHostTimer} each have an implementation defined timebase. The
@@ -175,6 +173,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetHostTimer(@NativeType("cl_device_id") long device, @NativeType("cl_ulong *") LongBuffer host_timestamp) {
@@ -201,8 +201,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithIL.html">Reference Page</a></p>
-     * 
      * Creates a program object for a context, and loads the IL pointed to by {@code il} and with length in bytes {@code length} into the program object.
      *
      * @param context     a valid OpenCL context
@@ -220,6 +218,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithIL.html">Reference Page</a>
      */
     @NativeType("cl_program")
     public static long clCreateProgramWithIL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer il, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -242,8 +242,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCloneKernel.html">Reference Page</a></p>
-     * 
      * Makes a shallow copy of the kernel object, its arguments and any information passed to the kernel object using {@link CL20#clSetKernelExecInfo SetKernelExecInfo}. If the kernel
      * object was ready to be enqueued before copying it, the clone of the kernel object is ready to enqueue.
      * 
@@ -271,6 +269,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCloneKernel.html">Reference Page</a>
      */
     @NativeType("cl_kernel")
     public static long clCloneKernel(@NativeType("cl_kernel") long source_kernel, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -298,8 +298,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">Reference Page</a></p>
-     * 
      * Returns information about the kernel object.
      *
      * @param kernel               the kernel object being queried
@@ -315,7 +313,7 @@ public class CL21 {
      *         <ul>
      *         <li>{@link CL10#CL_INVALID_DEVICE INVALID_DEVICE} if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is {@code NULL} but there is more than
      *         one device associated with {@code kernel}.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt size of return type and
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt; size of return type and
      *         {@code param_value} is not {@code NULL}.</li>
      *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if {@code param_name} is {@code KERNEL_SUB_GROUP_SIZE_FOR_NDRANGE} and the size in bytes specified by {@code input_value_size} is not valid
      *         or if {@code input_value} is {@code NULL}.</li>
@@ -323,6 +321,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetKernelSubGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_sub_group_info") int param_name, @Nullable @NativeType("void const *") ByteBuffer input_value, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -333,8 +333,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">Reference Page</a></p>
-     * 
      * Returns information about the kernel object.
      *
      * @param kernel               the kernel object being queried
@@ -350,7 +348,7 @@ public class CL21 {
      *         <ul>
      *         <li>{@link CL10#CL_INVALID_DEVICE INVALID_DEVICE} if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is {@code NULL} but there is more than
      *         one device associated with {@code kernel}.</li>
-     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt size of return type and
+     *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt; size of return type and
      *         {@code param_value} is not {@code NULL}.</li>
      *         <li>{@link CL10#CL_INVALID_VALUE INVALID_VALUE} if {@code param_name} is {@code KERNEL_SUB_GROUP_SIZE_FOR_NDRANGE} and the size in bytes specified by {@code input_value_size} is not valid
      *         or if {@code input_value} is {@code NULL}.</li>
@@ -358,6 +356,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetKernelSubGroupInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_device_id") long device, @NativeType("cl_kernel_sub_group_info") int param_name, @Nullable @NativeType("void const *") ByteBuffer input_value, @Nullable @NativeType("void *") PointerBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -386,8 +386,6 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">Reference Page</a></p>
-     * 
      * Enqueues a command to indicate which device a set of ranges of SVM allocations should be associated with. Once the event returned by
      * {@code clEnqueueSVMMigrateMem} has become {@link CL10#CL_COMPLETE COMPLETE}, the ranges specified by svm pointers and sizes have been successfully migrated to the device
      * associated with command queue.
@@ -422,6 +420,8 @@ public class CL21 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueSVMMigrateMem(@NativeType("cl_command_queue") long command_queue, @NativeType("void const **") PointerBuffer svm_pointers, @Nullable @NativeType("size_t const *") PointerBuffer sizes, @NativeType("cl_mem_migration_flags") long flags, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -433,9 +433,9 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clGetDeviceAndHostTimer GetDeviceAndHostTimer}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetDeviceAndHostTimer(@NativeType("cl_device_id") long device, @NativeType("cl_ulong *") long[] device_timestamp, @NativeType("cl_ulong *") long[] host_timestamp) {
@@ -450,9 +450,9 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clGetHostTimer GetHostTimer}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetHostTimer(@NativeType("cl_device_id") long device, @NativeType("cl_ulong *") long[] host_timestamp) {
@@ -466,9 +466,9 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithIL.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateProgramWithIL CreateProgramWithIL}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateProgramWithIL.html">Reference Page</a>
      */
     @NativeType("cl_program")
     public static long clCreateProgramWithIL(@NativeType("cl_context") long context, @NativeType("void const *") ByteBuffer il, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -482,9 +482,9 @@ public class CL21 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCloneKernel.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCloneKernel CloneKernel}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCloneKernel.html">Reference Page</a>
      */
     @NativeType("cl_kernel")
     public static long clCloneKernel(@NativeType("cl_kernel") long source_kernel, @Nullable @NativeType("cl_int *") int[] errcode_ret) {

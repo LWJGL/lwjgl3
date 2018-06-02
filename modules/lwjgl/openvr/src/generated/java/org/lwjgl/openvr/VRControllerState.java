@@ -29,13 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VRControllerState_t {
  *     uint32_t unPacketNum;
  *     uint64_t ulButtonPressed;
  *     uint64_t ulButtonTouched;
  *     {@link VRControllerAxis VRControllerAxis_t} rAxis[5];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VRControllerState_t")
 public class VRControllerState extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class VRControllerState extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

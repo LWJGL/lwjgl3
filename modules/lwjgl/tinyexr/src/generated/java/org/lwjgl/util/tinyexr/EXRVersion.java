@@ -28,20 +28,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct EXRVersion {
  *     int version;
  *     int tiled;
  *     int long_name;
  *     int non_image;
  *     int multipart;
- * }</pre></code>
+ * }</code></pre>
  */
 public class EXRVersion extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

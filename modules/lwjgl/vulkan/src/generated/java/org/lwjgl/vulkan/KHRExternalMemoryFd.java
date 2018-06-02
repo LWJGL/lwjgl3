@@ -98,11 +98,11 @@ public class KHRExternalMemoryFd {
      * 
      * <p>To export a POSIX file descriptor representing the underlying resources of a Vulkan device memory object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetMemoryFdKHR(
      *     VkDevice                                    device,
      *     const VkMemoryGetFdInfoKHR*                 pGetFdInfo,
-     *     int*                                        pFd);</pre></code>
+     *     int*                                        pFd);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -164,12 +164,12 @@ public class KHRExternalMemoryFd {
      * 
      * <p>POSIX file descriptor memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetMemoryFdPropertiesKHR(
      *     VkDevice                                    device,
      *     VkExternalMemoryHandleTypeFlagBits          handleType,
      *     int                                         fd,
-     *     VkMemoryFdPropertiesKHR*                    pMemoryFdProperties);</pre></code>
+     *     VkMemoryFdPropertiesKHR*                    pMemoryFdProperties);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 

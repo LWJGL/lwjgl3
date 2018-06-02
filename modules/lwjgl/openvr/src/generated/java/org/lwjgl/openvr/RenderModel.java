@@ -28,14 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct RenderModel_t {
  *     {@link RenderModelVertex RenderModel_Vertex_t const} * rVertexData;
  *     uint32_t unVertexCount;
  *     uint16_t const * IndexData;
  *     uint32_t unTriangleCount;
  *     TextureID_t diffuseTextureId;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct RenderModel_t")
 public class RenderModel extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class RenderModel extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

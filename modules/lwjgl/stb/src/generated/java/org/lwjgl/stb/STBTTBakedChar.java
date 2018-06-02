@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct stbtt_bakedchar {
  *     unsigned short x0;
  *     unsigned short y0;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float xoff;
  *     float yoff;
  *     float xadvance;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct stbtt_bakedchar")
 public class STBTTBakedChar extends Struct implements NativeResource {
@@ -37,6 +37,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

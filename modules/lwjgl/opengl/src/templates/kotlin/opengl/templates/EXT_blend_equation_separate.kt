@@ -13,7 +13,7 @@ val EXT_blend_equation_separate = "EXTBlendEquationSeparate".nativeClassGL("EXT_
         Native bindings to the $registryLink extension.
 
         ${EXT_blend_func_separate.link} introduced separate RGB and alpha blend factors. ${EXT_blend_minmax.link} introduced a distinct blend equation for
-        combining source and destination blend terms. (${EXT_blend_subtract.link} & ${registryLinkTo("EXT", "blend_logic_op")} added other blend equation
+        combining source and destination blend terms. (${EXT_blend_subtract.link} &amp; ${registryLinkTo("EXT", "blend_logic_op")} added other blend equation
         modes.) OpenGL 1.4 integrated both functionalities into the core standard.
 
         While there are separate blend functions for the RGB and alpha blend factors, OpenGL 1.4 provides a single blend equation that applies to both RGB and

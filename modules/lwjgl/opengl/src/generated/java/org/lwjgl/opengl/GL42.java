@@ -226,14 +226,14 @@ public class GL42 {
     public static native void nglGetActiveAtomicCounterBufferiv(int program, int bufferIndex, int pname, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a></p>
-     * 
      * Obtains information about the set of active atomic counter buffers for a program.
      *
      * @param program     the name of a program object for which the command {@link GL20#glLinkProgram LinkProgram} has been issued in the past
      * @param bufferIndex the index of an active atomic counter buffer
      * @param pname       the parameter to query. One of:<br><table><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE ATOMIC_COUNTER_BUFFER_DATA_SIZE}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER}</td></tr></table>
      * @param params      a buffer in which to place the returned value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
      */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
@@ -243,13 +243,13 @@ public class GL42 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a></p>
-     * 
      * Obtains information about the set of active atomic counter buffers for a program.
      *
      * @param program     the name of a program object for which the command {@link GL20#glLinkProgram LinkProgram} has been issued in the past
      * @param bufferIndex the index of an active atomic counter buffer
      * @param pname       the parameter to query. One of:<br><table><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE ATOMIC_COUNTER_BUFFER_DATA_SIZE}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER}</td></tr><tr><td>{@link #GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetActiveAtomicCounterBufferi(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname) {
@@ -266,22 +266,20 @@ public class GL42 {
     // --- [ glTexStorage1D ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glTexStorage1D">Reference Page</a></p>
-     * 
      * Simultaneously specifies storage for all levels of a one-dimensional texture.
      *
      * @param target         the target of the operation. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_PROXY_TEXTURE_1D PROXY_TEXTURE_1D}</td></tr></table>
      * @param levels         the number of texture levels
      * @param internalformat the sized internal format to be used to store texture image data
      * @param width          the width of the texture, in texels
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glTexStorage1D">Reference Page</a>
      */
     public static native void glTexStorage1D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width);
 
     // --- [ glTexStorage2D ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glTexStorage2D">Reference Page</a></p>
-     * 
      * Simultaneously specifies storage for all levels of a two-dimensional or one-dimensional array texture.
      *
      * @param target         the target of the operation. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL11#GL_PROXY_TEXTURE_2D PROXY_TEXTURE_2D}</td><td>{@link GL30#GL_PROXY_TEXTURE_1D_ARRAY PROXY_TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_PROXY_TEXTURE_RECTANGLE PROXY_TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_PROXY_TEXTURE_CUBE_MAP PROXY_TEXTURE_CUBE_MAP}</td></tr></table>
@@ -289,14 +287,14 @@ public class GL42 {
      * @param internalformat the sized internal format to be used to store texture image data
      * @param width          the width of the texture, in texels
      * @param height         the height of the texture, in texels
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glTexStorage2D">Reference Page</a>
      */
     public static native void glTexStorage2D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
     // --- [ glTexStorage3D ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glTexStorage3D">Reference Page</a></p>
-     * 
      * Simultaneously specifies storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture.
      *
      * @param target         the target of the operation. One of:<br><table><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL12#GL_PROXY_TEXTURE_3D PROXY_TEXTURE_3D}</td></tr><tr><td>{@link GL30#GL_PROXY_TEXTURE_2D_ARRAY PROXY_TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_PROXY_TEXTURE_CUBE_MAP_ARRAY PROXY_TEXTURE_CUBE_MAP_ARRAY}</td></tr></table>
@@ -305,41 +303,41 @@ public class GL42 {
      * @param width          the width of the texture, in texels
      * @param height         the height of the texture, in texels
      * @param depth          the depth of the texture, in texels
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glTexStorage3D">Reference Page</a>
      */
     public static native void glTexStorage3D(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
 
     // --- [ glDrawTransformFeedbackInstanced ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawTransformFeedbackInstanced">Reference Page</a></p>
-     * 
      * Renders multiple instances of primitives using a count derived from a transform feedback object.
      *
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param id        the name of a transform feedback object from which to retrieve a primitive count
      * @param primcount the number of instances of the geometry to render
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawTransformFeedbackInstanced">Reference Page</a>
      */
     public static native void glDrawTransformFeedbackInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLsizei") int primcount);
 
     // --- [ glDrawTransformFeedbackStreamInstanced ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawTransformFeedbackStreamInstanced">Reference Page</a></p>
-     * 
      * Renders multiple instances of primitives using a count derived from a specifed stream of a transform feedback object.
      *
      * @param mode      what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param id        the name of a transform feedback object from which to retrieve a primitive count
      * @param stream    the index of the transform feedback stream from which to retrieve a primitive count
      * @param primcount the number of instances of the geometry to render
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawTransformFeedbackStreamInstanced">Reference Page</a>
      */
     public static native void glDrawTransformFeedbackStreamInstanced(@NativeType("GLenum") int mode, @NativeType("GLuint") int id, @NativeType("GLuint") int stream, @NativeType("GLsizei") int primcount);
 
     // --- [ glDrawArraysInstancedBaseInstance ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawArraysInstancedBaseInstance">Reference Page</a></p>
-     * 
      * Draws multiple instances of a range of elements with an offset applied to instanced attributes.
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -347,6 +345,8 @@ public class GL42 {
      * @param count        the number of indices to be rendered
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawArraysInstancedBaseInstance">Reference Page</a>
      */
     public static native void glDrawArraysInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLint") int first, @NativeType("GLsizei") int count, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance);
 
@@ -361,8 +361,6 @@ public class GL42 {
     public static native void nglDrawElementsInstancedBaseInstance(int mode, int count, int type, long indices, int primcount, int baseinstance);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a></p>
-     * 
      * Draws multiple instances of a set of elements with an offset applied to instanced attributes
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -371,14 +369,14 @@ public class GL42 {
      * @param indices      a pointer to the location where the indices are stored
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, count, type, indices, primcount, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a></p>
-     * 
      * Draws multiple instances of a set of elements with an offset applied to instanced attributes
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -386,48 +384,50 @@ public class GL42 {
      * @param indices      a pointer to the location where the indices are stored
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), primcount, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a></p>
-     * 
      * Draws multiple instances of a set of elements with an offset applied to instanced attributes
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param indices      a pointer to the location where the indices are stored
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), primcount, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a></p>
-     * 
      * Draws multiple instances of a set of elements with an offset applied to instanced attributes
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param indices      a pointer to the location where the indices are stored
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), primcount, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a></p>
-     * 
      * Draws multiple instances of a set of elements with an offset applied to instanced attributes
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param indices      a pointer to the location where the indices are stored
      * @param primcount    the number of instances of the specified range of indices to be rendered
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), primcount, baseinstance);
@@ -444,8 +444,6 @@ public class GL42 {
     public static native void nglDrawElementsInstancedBaseVertexBaseInstance(int mode, int count, int type, long indices, int primcount, int basevertex, int baseinstance);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a></p>
-     * 
      * Renders multiple instances of a set of primitives from array data with a per-element offset.
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -455,14 +453,14 @@ public class GL42 {
      * @param primcount    the number of instances of the indexed geometry that should be drawn
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, primcount, basevertex, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a></p>
-     * 
      * Renders multiple instances of a set of primitives from array data with a per-element offset.
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -471,14 +469,14 @@ public class GL42 {
      * @param primcount    the number of instances of the indexed geometry that should be drawn
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining() >> GLChecks.typeToByteShift(type), type, memAddress(indices), primcount, basevertex, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a></p>
-     * 
      * Renders multiple instances of a set of primitives from array data with a per-element offset.
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -486,14 +484,14 @@ public class GL42 {
      * @param primcount    the number of instances of the indexed geometry that should be drawn
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_BYTE, memAddress(indices), primcount, basevertex, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a></p>
-     * 
      * Renders multiple instances of a set of primitives from array data with a per-element offset.
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -501,14 +499,14 @@ public class GL42 {
      * @param primcount    the number of instances of the indexed geometry that should be drawn
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_SHORT, memAddress(indices), primcount, basevertex, baseinstance);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a></p>
-     * 
      * Renders multiple instances of a set of primitives from array data with a per-element offset.
      *
      * @param mode         what kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_POLYGON POLYGON}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL11#GL_QUAD_STRIP QUAD_STRIP}</td><td>{@link GL11#GL_QUADS QUADS}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td></tr><tr><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
@@ -516,6 +514,8 @@ public class GL42 {
      * @param primcount    the number of instances of the indexed geometry that should be drawn
      * @param basevertex   a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays
      * @param baseinstance the base instance for use in fetching instanced vertex attributes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstancedBaseVertexBaseInstance">Reference Page</a>
      */
     public static void glDrawElementsInstancedBaseVertexBaseInstance(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLsizei") int primcount, @NativeType("GLint") int basevertex, @NativeType("GLuint") int baseinstance) {
         nglDrawElementsInstancedBaseVertexBaseInstance(mode, indices.remaining(), GL11.GL_UNSIGNED_INT, memAddress(indices), primcount, basevertex, baseinstance);
@@ -524,8 +524,6 @@ public class GL42 {
     // --- [ glBindImageTexture ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindImageTexture">Reference Page</a></p>
-     * 
      * Binds a level of a texture to an image unit.
      *
      * @param unit    the index of the image unit to which to bind the texture
@@ -535,17 +533,19 @@ public class GL42 {
      * @param layer   if {@code layered} is false, specifies the layer of texture to be bound to the image unit. Ignored otherwise.
      * @param access  a token indicating the type of access that will be performed on the image
      * @param format  the format that the elements of the image will be treated as for the purposes of formatted stores
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindImageTexture">Reference Page</a>
      */
     public static native void glBindImageTexture(@NativeType("GLuint") int unit, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLboolean") boolean layered, @NativeType("GLint") int layer, @NativeType("GLenum") int access, @NativeType("GLenum") int format);
 
     // --- [ glMemoryBarrier ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMemoryBarrier">Reference Page</a></p>
-     * 
      * Defines a barrier ordering memory transactions.
      *
      * @param barriers the barriers to insert (bitwise combination). One or more of:<br><table><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT VERTEX_ATTRIB_ARRAY_BARRIER_BIT}</td><td>{@link #GL_ELEMENT_ARRAY_BARRIER_BIT ELEMENT_ARRAY_BARRIER_BIT}</td><td>{@link #GL_UNIFORM_BARRIER_BIT UNIFORM_BARRIER_BIT}</td></tr><tr><td>{@link #GL_TEXTURE_FETCH_BARRIER_BIT TEXTURE_FETCH_BARRIER_BIT}</td><td>{@link #GL_SHADER_IMAGE_ACCESS_BARRIER_BIT SHADER_IMAGE_ACCESS_BARRIER_BIT}</td><td>{@link #GL_COMMAND_BARRIER_BIT COMMAND_BARRIER_BIT}</td></tr><tr><td>{@link #GL_PIXEL_BUFFER_BARRIER_BIT PIXEL_BUFFER_BARRIER_BIT}</td><td>{@link #GL_TEXTURE_UPDATE_BARRIER_BIT TEXTURE_UPDATE_BARRIER_BIT}</td><td>{@link #GL_BUFFER_UPDATE_BARRIER_BIT BUFFER_UPDATE_BARRIER_BIT}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_BARRIER_BIT FRAMEBUFFER_BARRIER_BIT}</td><td>{@link #GL_TRANSFORM_FEEDBACK_BARRIER_BIT TRANSFORM_FEEDBACK_BARRIER_BIT}</td><td>{@link #GL_ATOMIC_COUNTER_BARRIER_BIT ATOMIC_COUNTER_BARRIER_BIT}</td></tr><tr><td>{@link #GL_ALL_BARRIER_BITS ALL_BARRIER_BITS}</td><td>{@link GL43#GL_SHADER_STORAGE_BARRIER_BIT SHADER_STORAGE_BARRIER_BIT}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMemoryBarrier">Reference Page</a>
      */
     public static native void glMemoryBarrier(@NativeType("GLbitfield") int barriers);
 
@@ -559,27 +559,27 @@ public class GL42 {
     public static native void nglGetInternalformativ(int target, int internalformat, int pname, int bufSize, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a></p>
-     * 
      * Retrieves information about implementation-dependent support for internal formats.
      *
      * @param target         the usage of the internal format. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
      * @param internalformat the internal format about which to retrieve information
      * @param pname          the type of information to query
      * @param params         a variable into which to write the retrieved information
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     public static void glGetInternalformativ(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         nglGetInternalformativ(target, internalformat, pname, params.remaining(), memAddress(params));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a></p>
-     * 
      * Retrieves information about implementation-dependent support for internal formats.
      *
      * @param target         the usage of the internal format. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
      * @param internalformat the internal format about which to retrieve information
      * @param pname          the type of information to query
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetInternalformati(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname) {
@@ -594,9 +594,9 @@ public class GL42 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAtomicCounterBuffer">Reference Page</a>
      */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetActiveAtomicCounterBufferiv;
@@ -608,9 +608,9 @@ public class GL42 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetInternalformativ GetInternalformativ}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     public static void glGetInternalformativ(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetInternalformativ;

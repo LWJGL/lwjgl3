@@ -12,14 +12,14 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * int (*) (
  *     YGConfigRef const config,
  *     YGNodeRef const node,
  *     YGLogLevel level,
  *     char const *format,
  *     va_list args
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("YGLogger")

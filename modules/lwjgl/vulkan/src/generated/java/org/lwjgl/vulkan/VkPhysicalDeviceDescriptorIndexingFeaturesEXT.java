@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceDescriptorIndexingFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -79,13 +79,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 descriptorBindingPartiallyBound;
  *     VkBool32 descriptorBindingVariableDescriptorCount;
  *     VkBool32 runtimeDescriptorArray;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceDescriptorIndexingFeaturesEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

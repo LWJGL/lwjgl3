@@ -31,14 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ZDICT_cover_params_t {
  *     unsigned k;
  *     unsigned d;
  *     unsigned steps;
  *     unsigned nbThreads;
  *     {@link ZDICTParams ZDICT_params_t} zParams;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ZDICT_cover_params_t")
 public class ZDICTCoverParams extends Struct implements NativeResource {
@@ -46,6 +46,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

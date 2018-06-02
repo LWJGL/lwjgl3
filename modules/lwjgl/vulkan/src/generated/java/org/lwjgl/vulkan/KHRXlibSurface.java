@@ -103,12 +103,12 @@ public class KHRXlibSurface {
      * 
      * <p>To create a {@code VkSurfaceKHR} object for an X11 window, using the Xlib client-side library, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateXlibSurfaceKHR(
      *     VkInstance                                  instance,
      *     const VkXlibSurfaceCreateInfoKHR*           pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSurfaceKHR*                               pSurface);</pre></code>
+     *     VkSurfaceKHR*                               pSurface);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -159,12 +159,12 @@ public class KHRXlibSurface {
      * 
      * <p>To determine whether a queue family of a physical device supports presentation to an X11 server, using the Xlib client-side library, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkBool32 vkGetPhysicalDeviceXlibPresentationSupportKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t                                    queueFamilyIndex,
      *     Display*                                    dpy,
-     *     VisualID                                    visualID);</pre></code>
+     *     VisualID                                    visualID);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -186,7 +186,6 @@ public class KHRXlibSurface {
      * @param physicalDevice   the physical device.
      * @param queueFamilyIndex the queue family index.
      * @param dpy              a pointer to an Xlib {@code Display} connection to the server.
-     * @param visualID         
      */
     @NativeType("VkBool32")
     public static boolean vkGetPhysicalDeviceXlibPresentationSupportKHR(VkPhysicalDevice physicalDevice, @NativeType("uint32_t") int queueFamilyIndex, @NativeType("Display *") long dpy, @NativeType("VisualID") long visualID) {

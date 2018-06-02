@@ -20,7 +20,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
         <h5>Examples</h5>
         This example extracts the register usage of a fragment shader within a particular graphics pipeline:
 
-        <code><pre>
+        <pre><code>
 ￿extern VkDevice device;
 ￿extern VkPipeline gfxPipeline;
 ￿
@@ -35,22 +35,22 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 ￿    gfxPipeline,
 ￿    VK_SHADER_STAGE_FRAGMENT_BIT,
 ￿    VK_SHADER_INFO_TYPE_STATISTICS_AMD,
-￿    &dataSize,
-￿    &statistics) == VK_SUCCESS)
+￿    &amp;dataSize,
+￿    &amp;statistics) == VK_SUCCESS)
 ￿{
 ￿    printf("VGPR usage: %d\n", statistics.resourceUsage.numUsedVgprs);
 ￿    printf("SGPR usage: %d\n", statistics.resourceUsage.numUsedSgprs);
-￿}</pre></code>
+￿}</code></pre>
 
         The following example continues the previous example by subsequently attempting to query and print shader disassembly about the fragment shader:
 
-        <code><pre>
+        <pre><code>
 ￿// Query disassembly size (if available)
 ￿if (pfnGetShaderInfoAMD(device,
 ￿    gfxPipeline,
 ￿    VK_SHADER_STAGE_FRAGMENT_BIT,
 ￿    VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
-￿    &dataSize,
+￿    &amp;dataSize,
 ￿    nullptr) == VK_SUCCESS)
 ￿{
 ￿    printf("Fragment shader disassembly:\n");
@@ -62,14 +62,14 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 ￿        gfxPipeline,
 ￿        VK_SHADER_STAGE_FRAGMENT_BIT,
 ￿        VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
-￿        &dataSize,
+￿        &amp;dataSize,
 ￿        disassembly) == VK_SUCCESS)
 ￿    {
 ￿        printf((char*)disassembly);
 ￿    }
 ￿
 ￿    free(disassembly);
-￿}</pre></code>
+￿}</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -135,14 +135,14 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
         <h5>C Specification</h5>
         Information about a particular shader that has been compiled as part of a pipeline object can be extracted by calling:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetShaderInfoAMD(
 ￿    VkDevice                                    device,
 ￿    VkPipeline                                  pipeline,
 ￿    VkShaderStageFlagBits                       shaderStage,
 ￿    VkShaderInfoTypeAMD                         infoType,
 ￿    size_t*                                     pInfoSize,
-￿    void*                                       pInfo);</pre></code>
+￿    void*                                       pInfo);</code></pre>
 
         <h5>Description</h5>
         If {@code pInfo} is {@code NULL}, then the maximum size of the information that <b>can</b> be retrieved about the shader, in bytes, is returned in {@code pInfoSize}. Otherwise, {@code pInfoSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pInfo}, and on return the variable is overwritten with the amount of data actually written to {@code pInfo}.

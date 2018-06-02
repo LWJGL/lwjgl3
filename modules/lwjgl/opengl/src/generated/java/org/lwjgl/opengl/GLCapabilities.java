@@ -2515,24 +2515,24 @@ public final class GLCapabilities {
      * 
      * <p>To select the coarse derivative, use:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * dFdxCoarse(p)
      * dFdyCoarse(p)
-     * fwidthCoarse(p)</pre></code>
+     * fwidthCoarse(p)</code></pre>
      * 
      * <p>To select the fine derivative, use:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * dFdxFine(p)
      * dFdyFine(p)
-     * fwidthFine(p)</pre></code>
+     * fwidthFine(p)</code></pre>
      * 
      * <p>To select which ever is "better" (based on performance, API hints, or other factors), use:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * dFdx(p)
      * dFdy(p)
-     * fwidth(p)</pre></code>
+     * fwidth(p)</code></pre>
      * 
      * <p>This last set is the set of previously existing built-ins for derivatives, and continues to work in a backward compatible way.</p>
      * 
@@ -2748,8 +2748,8 @@ public final class GLCapabilities {
      * <p>This extension allows the fragment shader to control whether values in {@code gl_SampleMaskIn[]} reflect the coverage after application of the early
      * depth and stencil tests. This feature can be enabled with the following layout qualifier in the fragment shader:</p>
      * 
-     * <code><pre>
-     *         layout(post_depth_coverage) in;</pre></code>
+     * <pre><code>
+     *         layout(post_depth_coverage) in;</code></pre>
      * 
      * <p>Use of this feature implicitly enables early fragment tests.</p>
      */
@@ -2900,12 +2900,12 @@ public final class GLCapabilities {
      * <p>Compute shaders operate on an explicitly specified group of threads (a local work group), but many implementations of OpenGL 4.3 will even group
      * non-compute shader invocations and execute them in a SIMD fashion. When executing code like</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * if (condition) {
      *     result = do_fast_path();
      * } else {
      *     result = do_general_path();
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>where {@code condition} diverges between invocations, a SIMD implementation might first call do_fast_path() for the invocations where {@code condition}
      * is true and leave the other invocations dormant. Once do_fast_path() returns, it might call do_general_path() for invocations where {@code condition} is
@@ -2914,12 +2914,12 @@ public final class GLCapabilities {
      * 
      * <p>This extension provides the ability to avoid divergent execution by evaluting a condition across an entire SIMD invocation group using code like:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * if (allInvocationsARB(condition)) {
      *     result = do_fast_path();
      * } else {
      *     result = do_general_path();
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>The built-in function allInvocationsARB() will return the same value for all invocations in the group, so the group will either execute do_fast_path()
      * or do_general_path(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation
@@ -2995,19 +2995,19 @@ public final class GLCapabilities {
      * 
      * <p>The existing isotropic vertex texture functions:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * texture1DLod,   texture1DProjLod,
      * texture2DLod,   texture2DProjLod,
      * texture3DLod,   texture3DProjLod,
      * textureCubeLod,
      * shadow1DLod,    shadow1DProjLod,
-     * shadow2DLod,    shadow2DProjLod</pre></code>
+     * shadow2DLod,    shadow2DProjLod</code></pre>
      * 
      * <p>are added to the built-in functions for fragment shaders.</p>
      * 
      * <p>New anisotropic texture functions, providing explicit derivatives:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * texture1DGradARB(
      *     sampler1D sampler,
      *     float P, float dPdx, float dPdy);
@@ -3064,7 +3064,7 @@ public final class GLCapabilities {
      *     vec3 P, vec2 dPdx, vec2 dPdy);
      * shadow2DRectProjGradARB(
      *     sampler2DRectShadow sampler,
-     *     vec4 P, vec2 dPdx, vec2 dPdy);</pre></code>
+     *     vec4 P, vec2 dPdx, vec2 dPdy);</code></pre>
      * 
      * <p>are added to the built-in functions for vertex shaders and fragment shaders.</p>
      * 
@@ -3438,13 +3438,13 @@ public final class GLCapabilities {
      * <p>This extension allows the fragment shader to control whether values in {@code gl_SampleMaskIn[]} reflect the coverage after application of the early
      * depth and stencil tests.  This feature can be enabled with the following layout qualifier in the fragment shader:</p>
      * 
-     * <code><pre>
-     * layout(post_depth_coverage) in;</pre></code>
+     * <pre><code>
+     * layout(post_depth_coverage) in;</code></pre>
      * 
      * <p>To use this feature, early fragment tests must also be enabled in the fragment shader via:</p>
      * 
-     * <code><pre>
-     * layout(early_fragment_tests) in;</pre></code>
+     * <pre><code>
+     * layout(early_fragment_tests) in;</code></pre>
      */
     public final boolean GL_EXT_post_depth_coverage;
     /** When true, {@link EXTProvokingVertex} is supported. */

@@ -451,7 +451,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
     opaque_p.member(
         "pUserData",
         """
-        custom general-purpose pointer that was passed as ##AllocationCreateInfo{@code ::pUserData} or set using #SetAllocationUserData().
+        custom general-purpose pointer that was passed as ##VmaAllocationCreateInfo{@code ::pUserData} or set using #SetAllocationUserData().
 
         It can change after call to #SetAllocationUserData() for this allocation.
         """

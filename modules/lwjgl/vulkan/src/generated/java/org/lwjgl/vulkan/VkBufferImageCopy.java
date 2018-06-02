@@ -88,7 +88,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkBufferImageCopy {
  *     VkDeviceSize bufferOffset;
  *     uint32_t bufferRowLength;
@@ -96,13 +96,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
  *     {@link VkOffset3D VkOffset3D} imageOffset;
  *     {@link VkExtent3D VkExtent3D} imageExtent;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkBufferImageCopy extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

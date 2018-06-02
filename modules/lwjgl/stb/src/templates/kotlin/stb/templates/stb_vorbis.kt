@@ -133,7 +133,7 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
     val open_pushdata = stb_vorbis.p(
         "open_pushdata",
         """
-        Creates a vorbis decoder by passing in the initial data block containing the ogg&vorbis headers (you don't need to do parse them, just provide the
+        Creates a vorbis decoder by passing in the initial data block containing the ogg&amp;vorbis headers (you don't need to do parse them, just provide the
         first N bytes of the file -- you're told if it's not enough, see below)
         """,
 

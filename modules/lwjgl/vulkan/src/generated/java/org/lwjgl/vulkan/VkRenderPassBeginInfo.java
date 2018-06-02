@@ -67,7 +67,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkRenderPassBeginInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -76,13 +76,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkRect2D VkRect2D} renderArea;
  *     uint32_t clearValueCount;
  *     {@link VkClearValue VkClearValue const} * pClearValues;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkRenderPassBeginInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

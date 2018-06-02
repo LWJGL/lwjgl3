@@ -122,8 +122,6 @@ public class GL44 {
     public static native void nglBufferStorage(int target, long size, long data, int flags);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Creates the data store of a buffer object.
      * 
      * <p>The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
@@ -171,14 +169,14 @@ public class GL44 {
      *               <p>If {@code flags} contains {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}, it must also contain at least one of {@link GL30#GL_MAP_READ_BIT MAP_READ_BIT} or {@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}.</p>
      *               
      *               <p>It is an error to specify {@link #GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("GLsizeiptr") long size, @NativeType("GLbitfield") int flags) {
         nglBufferStorage(target, size, NULL, flags);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Creates the data store of a buffer object.
      * 
      * <p>The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
@@ -227,14 +225,14 @@ public class GL44 {
      *               <p>If {@code flags} contains {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}, it must also contain at least one of {@link GL30#GL_MAP_READ_BIT MAP_READ_BIT} or {@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}.</p>
      *               
      *               <p>It is an error to specify {@link #GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") ByteBuffer data, @NativeType("GLbitfield") int flags) {
         nglBufferStorage(target, data.remaining(), memAddress(data), flags);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Creates the data store of a buffer object.
      * 
      * <p>The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
@@ -283,14 +281,14 @@ public class GL44 {
      *               <p>If {@code flags} contains {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}, it must also contain at least one of {@link GL30#GL_MAP_READ_BIT MAP_READ_BIT} or {@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}.</p>
      *               
      *               <p>It is an error to specify {@link #GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") ShortBuffer data, @NativeType("GLbitfield") int flags) {
         nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 1, memAddress(data), flags);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Creates the data store of a buffer object.
      * 
      * <p>The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
@@ -339,14 +337,14 @@ public class GL44 {
      *               <p>If {@code flags} contains {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}, it must also contain at least one of {@link GL30#GL_MAP_READ_BIT MAP_READ_BIT} or {@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}.</p>
      *               
      *               <p>It is an error to specify {@link #GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") IntBuffer data, @NativeType("GLbitfield") int flags) {
         nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Creates the data store of a buffer object.
      * 
      * <p>The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
@@ -395,14 +393,14 @@ public class GL44 {
      *               <p>If {@code flags} contains {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}, it must also contain at least one of {@link GL30#GL_MAP_READ_BIT MAP_READ_BIT} or {@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}.</p>
      *               
      *               <p>It is an error to specify {@link #GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") FloatBuffer data, @NativeType("GLbitfield") int flags) {
         nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Creates the data store of a buffer object.
      * 
      * <p>The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
@@ -451,6 +449,8 @@ public class GL44 {
      *               <p>If {@code flags} contains {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}, it must also contain at least one of {@link GL30#GL_MAP_READ_BIT MAP_READ_BIT} or {@link GL30#GL_MAP_WRITE_BIT MAP_WRITE_BIT}.</p>
      *               
      *               <p>It is an error to specify {@link #GL_MAP_COHERENT_BIT MAP_COHERENT_BIT} without also specifying {@link #GL_MAP_PERSISTENT_BIT MAP_PERSISTENT_BIT}.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") DoubleBuffer data, @NativeType("GLbitfield") int flags) {
         nglBufferStorage(target, Integer.toUnsignedLong(data.remaining()) << 3, memAddress(data), flags);
@@ -462,8 +462,6 @@ public class GL44 {
     public static native void nglClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long data);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Fills all or part of a texture image with a constant value.
      * 
      * <p>Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
@@ -490,14 +488,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Fills all or part of a texture image with a constant value.
      * 
      * <p>Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
@@ -524,14 +522,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Fills all or part of a texture image with a constant value.
      * 
      * <p>Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
@@ -558,14 +556,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Fills all or part of a texture image with a constant value.
      * 
      * <p>Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
@@ -592,14 +590,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Fills all or part of a texture image with a constant value.
      * 
      * <p>Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
@@ -626,6 +624,8 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
         nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, memAddressSafe(data));
@@ -637,8 +637,6 @@ public class GL44 {
     public static native void nglClearTexImage(int texture, int level, int format, int type, long data);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Is equivalent to calling {@link #glClearTexSubImage ClearTexSubImage} with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
      * {@code height}, and {@code depth} equal to the dimensions of the texture image plus {@code 2xb} (or zero and one for dimensions the texture doesn't
      * have).
@@ -650,14 +648,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Is equivalent to calling {@link #glClearTexSubImage ClearTexSubImage} with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
      * {@code height}, and {@code depth} equal to the dimensions of the texture image plus {@code 2xb} (or zero and one for dimensions the texture doesn't
      * have).
@@ -669,14 +667,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Is equivalent to calling {@link #glClearTexSubImage ClearTexSubImage} with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
      * {@code height}, and {@code depth} equal to the dimensions of the texture image plus {@code 2xb} (or zero and one for dimensions the texture doesn't
      * have).
@@ -688,14 +686,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Is equivalent to calling {@link #glClearTexSubImage ClearTexSubImage} with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
      * {@code height}, and {@code depth} equal to the dimensions of the texture image plus {@code 2xb} (or zero and one for dimensions the texture doesn't
      * have).
@@ -707,14 +705,14 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Is equivalent to calling {@link #glClearTexSubImage ClearTexSubImage} with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
      * {@code height}, and {@code depth} equal to the dimensions of the texture image plus {@code 2xb} (or zero and one for dimensions the texture doesn't
      * have).
@@ -726,6 +724,8 @@ public class GL44 {
      * @param type    the type of the source data. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_SHORT SHORT}</td></tr><tr><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_BYTE_3_3_2 UNSIGNED_BYTE_3_3_2}</td><td>{@link GL12#GL_UNSIGNED_BYTE_2_3_3_REV UNSIGNED_BYTE_2_3_3_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5 UNSIGNED_SHORT_5_6_5}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_6_5_REV UNSIGNED_SHORT_5_6_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4 UNSIGNED_SHORT_4_4_4_4}</td><td>{@link GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV UNSIGNED_SHORT_4_4_4_4_REV}</td><td>{@link GL12#GL_UNSIGNED_SHORT_5_5_5_1 UNSIGNED_SHORT_5_5_5_1}</td><td>{@link GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV UNSIGNED_SHORT_1_5_5_5_REV}</td></tr><tr><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8 UNSIGNED_INT_8_8_8_8}</td><td>{@link GL12#GL_UNSIGNED_INT_8_8_8_8_REV UNSIGNED_INT_8_8_8_8_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_10_10_10_2 UNSIGNED_INT_10_10_10_2}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr><tr><td>{@link GL30#GL_UNSIGNED_INT_24_8 UNSIGNED_INT_24_8}</td><td>{@link GL30#GL_UNSIGNED_INT_10F_11F_11F_REV UNSIGNED_INT_10F_11F_11F_REV}</td><td>{@link GL30#GL_UNSIGNED_INT_5_9_9_9_REV UNSIGNED_INT_5_9_9_9_REV}</td><td>{@link GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV FLOAT_32_UNSIGNED_INT_24_8_REV}</td></tr><tr><td>{@link GL11#GL_BITMAP BITMAP}</td></tr></table>
      * @param data    an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is {@code NULL},
      *                then the pointer is ignored and the sub-range of the texture image is filled with zeros.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") DoubleBuffer data) {
         nglClearTexImage(texture, level, format, type, memAddressSafe(data));
@@ -741,26 +741,26 @@ public class GL44 {
     public static native void nglBindBuffersBase(int target, int first, int count, long buffers);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindBuffersBase">Reference Page</a></p>
-     * 
      * Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
      * corresponding to {@code target}. If {@code buffers} is not {@code NULL}, it specifies an array of {@code count} values, each of which must be zero or the name
      * of an existing buffer object. It is equivalent to:
      * 
-     * <code><pre>
-     * for ( i = 0; i < count; i++ ) {
+     * <pre><code>
+     * for ( i = 0; i &lt; count; i++ ) {
      *     if ( buffers == NULL ) {
      *         glBindBufferBase(target, first + i, 0);
      *     } else {
      *         glBindBufferBase(target, first + i, buffers[i]);
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>except that the single general buffer binding corresponding to {@code target} is unmodified, and that buffers will not be created if they do not exist.</p>
      *
      * @param target  the buffer object target. One of:<br><table><tr><td>{@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER}</td><td>{@link GL15#GL_ELEMENT_ARRAY_BUFFER ELEMENT_ARRAY_BUFFER}</td><td>{@link GL21#GL_PIXEL_PACK_BUFFER PIXEL_PACK_BUFFER}</td><td>{@link GL21#GL_PIXEL_UNPACK_BUFFER PIXEL_UNPACK_BUFFER}</td></tr><tr><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER TRANSFORM_FEEDBACK_BUFFER}</td><td>{@link GL31#GL_UNIFORM_BUFFER UNIFORM_BUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td><td>{@link GL31#GL_COPY_READ_BUFFER COPY_READ_BUFFER}</td></tr><tr><td>{@link GL31#GL_COPY_WRITE_BUFFER COPY_WRITE_BUFFER}</td><td>{@link GL40#GL_DRAW_INDIRECT_BUFFER DRAW_INDIRECT_BUFFER}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td><td>{@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER}</td></tr><tr><td>{@link GL43#GL_SHADER_STORAGE_BUFFER SHADER_STORAGE_BUFFER}</td><td>{@link ARBIndirectParameters#GL_PARAMETER_BUFFER_ARB PARAMETER_BUFFER_ARB}</td></tr></table>
      * @param first   the first binding
      * @param buffers an array of zeros or names of existing buffers objects
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
      */
     public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers) {
         nglBindBuffersBase(target, first, remainingSafe(buffers), memAddressSafe(buffers));
@@ -776,22 +776,20 @@ public class GL44 {
     public static native void nglBindBuffersRange(int target, int first, int count, long buffers, long offsets, long sizes);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindBuffersRange">Reference Page</a></p>
-     * 
      * Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
      * corresponding to {@code target}. {@code offsets} and {@code sizes} specify arrays of {@code count} values indicating the range of each buffer to bind.
      * If {@code buffers} is {@code NULL}, all bindings from {@code first} through {@code first+count-1} are reset to their unbound (zero) state. In this
      * case, the offsets and sizes associated with the binding points are set to default values, ignoring {@code offsets} and {@code sizes}. It is equivalent
      * to:
      * 
-     * <code><pre>
-     * for ( i = 0; i < count; i++ ) {
+     * <pre><code>
+     * for ( i = 0; i &lt; count; i++ ) {
      *     if ( buffers == NULL ) {
      *         glBindBufferRange(target, first + i, 0, 0, 0);
      *     } else {
      *         glBindBufferRange(target, first + i, buffers[i], offsets[i], sizes[i]);
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>except that the single general buffer binding corresponding to {@code target} is unmodified, and that buffers will not be created if they do not exist.</p>
      * 
@@ -804,6 +802,8 @@ public class GL44 {
      * @param buffers an array of names of existing buffers objects
      * @param offsets an array of offsets
      * @param sizes   an array of sizes
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
      */
     public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
         if (CHECKS) {
@@ -823,8 +823,6 @@ public class GL44 {
     public static native void nglBindTextures(int first, int count, long textures);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindTextures">Reference Page</a></p>
-     * 
      * Binds {@code count} existing texture objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not
      * {@code NULL}, it specifies an array of {@code count} values, each of which must be zero or the name of an existing texture object. When an entry in
      * {@code textures} is the name of an existing texture object, that object is bound to corresponding texture unit for the target specified when the texture
@@ -834,8 +832,8 @@ public class GL44 {
      * 
      * <p>{@code BindTextures} is equivalent to:</p>
      * 
-     * <code><pre>
-     * for ( i = 0; i < count; i++ ) {
+     * <pre><code>
+     * for ( i = 0; i &lt; count; i++ ) {
      *     uint texture;
      *     if ( textures == NULL ) {
      *         texture = 0;
@@ -851,7 +849,7 @@ public class GL44 {
      *             BindTexture(target, 0);
      *         }
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>except that the active texture selector retains its original value upon completion of the command, and that textures will not be created if they do not
      * exist.</p>
@@ -862,6 +860,8 @@ public class GL44 {
      *
      * @param first    the first texture objects
      * @param textures an array of zeros or names of existing texture objects
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindTextures">Reference Page</a>
      */
     public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
         nglBindTextures(first, remainingSafe(textures), memAddressSafe(textures));
@@ -877,22 +877,20 @@ public class GL44 {
     public static native void nglBindSamplers(int first, int count, long samplers);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindSamplers">Reference Page</a></p>
-     * 
      * Binds {@code count} existing sampler objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code samplers} is not
      * {@code NULL}, it specifies an array of {@code count} values, each of which must be zero or the name of an existing sampler object. If {@code samplers} is {@code NULL},
      * each affected texture image unit from {@code first} through {@code first+count-1} will be reset to have no bound sampler object.
      * 
      * <p>{@code BindSamplers} is equivalent to:</p>
      * 
-     * <code><pre>
-     * for ( i = 0; i < count; i++ ) {
+     * <pre><code>
+     * for ( i = 0; i &lt; count; i++ ) {
      *     if ( samplers == NULL ) {
      *         glBindSampler(first + i, 0);
      *     } else {
      *         glBindSampler(first + i, samplers[i]);
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>The values specified in {@code samplers} will be checked separately for each texture image unit. When a value for a specific texture image unit is
      * invalid, the state for that texture image unit will be unchanged and an error will be generated. However, state for other texture image units will still
@@ -900,6 +898,8 @@ public class GL44 {
      *
      * @param first    the first sampler object
      * @param samplers an array of zeros or names of existing sampler objects
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindSamplers">Reference Page</a>
      */
     public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer samplers) {
         nglBindSamplers(first, remainingSafe(samplers), memAddressSafe(samplers));
@@ -915,8 +915,6 @@ public class GL44 {
     public static native void nglBindImageTextures(int first, int count, long textures);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindImageTextures">Reference Page</a></p>
-     * 
      * Binds {@code count} existing texture objects to image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not {@code NULL}, it
      * specifies an array of {@code count} values, each of which must be zero or the name of an existing texture object. If {@code textures} is {@code NULL}, each
      * affected image unit from {@code first} through {@code first+count-1} will be reset to have no bound texture object.
@@ -932,14 +930,14 @@ public class GL44 {
      * 
      * <p>{@code BindImageTextures} is equivalent to:</p>
      * 
-     * <code><pre>
-     * for ( i = 0; i < count; i++ ) {
+     * <pre><code>
+     * for ( i = 0; i &lt; count; i++ ) {
      *     if ( textures == NULL || textures[i] = 0 ) {
      *         glBindImageTexture(first + i, 0, 0, FALSE, 0, READ_ONLY, R8);
      *     } else {
      *         glBindImageTexture(first + i, textures[i], 0, TRUE, 0, READ_WRITE, lookupInternalFormat(textures[i]));
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>where {@code lookupInternalFormat} returns the internal format of the specified texture object.</p>
      * 
@@ -949,6 +947,8 @@ public class GL44 {
      *
      * @param first    the first image unit
      * @param textures an array of zeros or names of existing texture objects
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindImageTextures">Reference Page</a>
      */
     public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer textures) {
         nglBindImageTextures(first, remainingSafe(textures), memAddressSafe(textures));
@@ -964,8 +964,6 @@ public class GL44 {
     public static native void nglBindVertexBuffers(int first, int count, long buffers, long offsets, long strides);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindVertexBuffers">Reference Page</a></p>
-     * 
      * Binds {@code count} existing buffer objects to vertex buffer binding points numbered {@code first} through {@code first+count-1}. If {@code buffers} is
      * not {@code NULL}, it specifies an array of {@code count} values, each of which must be zero or the name of an existing buffer object. {@code offsets} and
      * {@code strides} specify arrays of {@code count} values indicating the offset of the first element and stride between elements in each buffer,
@@ -975,14 +973,14 @@ public class GL44 {
      * 
      * <p>{@code BindVertexBuffers} is equivalent to:</p>
      * 
-     * <code><pre>
-     * for ( i = 0; i < count; i++ ) {
+     * <pre><code>
+     * for ( i = 0; i &lt; count; i++ ) {
      *     if ( buffers == NULL ) {
      *         glBindVertexBuffer(first + i, 0, 0, 16);
      *     } else {
      *         glBindVertexBuffer(first + i, buffers[i], offsets[i], strides[i]);
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>except that buffers will not be created if they do not exist.</p>
      * 
@@ -994,6 +992,8 @@ public class GL44 {
      * @param buffers an array of zeros or names of existing buffers objects
      * @param offsets an array of offses
      * @param strides an array of stride values
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
      */
     public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") IntBuffer buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") IntBuffer strides) {
         if (CHECKS) {
@@ -1004,9 +1004,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBufferStorage BufferStorage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glBufferStorage;
@@ -1017,9 +1017,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBufferStorage BufferStorage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glBufferStorage;
@@ -1030,9 +1030,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBufferStorage BufferStorage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glBufferStorage;
@@ -1043,9 +1043,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBufferStorage BufferStorage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBufferStorage">Reference Page</a>
      */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glBufferStorage;
@@ -1056,9 +1056,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
@@ -1069,9 +1069,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
@@ -1082,9 +1082,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
@@ -1095,9 +1095,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexSubImage">Reference Page</a>
      */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
         long __functionAddress = GL.getICD().glClearTexSubImage;
@@ -1108,9 +1108,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexImage ClearTexImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
@@ -1121,9 +1121,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexImage ClearTexImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
@@ -1134,9 +1134,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexImage ClearTexImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
@@ -1147,9 +1147,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a></p>
-     * 
      * Array version of: {@link #glClearTexImage ClearTexImage}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glClearTexImage">Reference Page</a>
      */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
         long __functionAddress = GL.getICD().glClearTexImage;
@@ -1160,9 +1160,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindBuffersBase">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBindBuffersBase BindBuffersBase}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindBuffersBase">Reference Page</a>
      */
     public static void glBindBuffersBase(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers) {
         long __functionAddress = GL.getICD().glBindBuffersBase;
@@ -1173,9 +1173,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindBuffersRange">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBindBuffersRange BindBuffersRange}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindBuffersRange">Reference Page</a>
      */
     public static void glBindBuffersRange(@NativeType("GLenum") int target, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizeiptr const *") PointerBuffer sizes) {
         long __functionAddress = GL.getICD().glBindBuffersRange;
@@ -1188,9 +1188,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindTextures">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBindTextures BindTextures}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindTextures">Reference Page</a>
      */
     public static void glBindTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
         long __functionAddress = GL.getICD().glBindTextures;
@@ -1201,9 +1201,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindSamplers">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBindSamplers BindSamplers}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindSamplers">Reference Page</a>
      */
     public static void glBindSamplers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] samplers) {
         long __functionAddress = GL.getICD().glBindSamplers;
@@ -1214,9 +1214,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindImageTextures">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBindImageTextures BindImageTextures}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindImageTextures">Reference Page</a>
      */
     public static void glBindImageTextures(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] textures) {
         long __functionAddress = GL.getICD().glBindImageTextures;
@@ -1227,9 +1227,9 @@ public class GL44 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindVertexBuffers">Reference Page</a></p>
-     * 
      * Array version of: {@link #glBindVertexBuffers BindVertexBuffers}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindVertexBuffers">Reference Page</a>
      */
     public static void glBindVertexBuffers(@NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") int[] strides) {
         long __functionAddress = GL.getICD().glBindVertexBuffers;

@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiImporterDesc {
  *     char const * mName;
  *     char const * mAuthor;
@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mMaxMajor;
  *     unsigned int mMaxMinor;
  *     char const * mFileExtensions;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiImporterDesc")
 public class AIImporterDesc extends Struct implements NativeResource {
@@ -64,6 +64,7 @@ public class AIImporterDesc extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

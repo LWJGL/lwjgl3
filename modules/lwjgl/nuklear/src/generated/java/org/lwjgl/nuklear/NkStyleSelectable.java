@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style_selectable {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_selectable")
 public class NkStyleSelectable extends Struct implements NativeResource {
@@ -49,6 +49,7 @@ public class NkStyleSelectable extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * bool (*) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
@@ -22,7 +22,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     size_t offset,
  *     size_t length,
  *     unsigned int arena_ind
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("extent_decommit_t")
@@ -52,13 +52,6 @@ public interface ExtentDecommitI extends CallbackI.Z {
      * given {@code addr} and {@code size} at {@code offset} bytes, extending for {@code length} on behalf of arena {@code arena_ind}, returning false upon
      * success, in which case the pages will be committed via the extent commit function before being reused.  If the function returns true, this indicates
      * opt-out from decommit; the memory remains committed and available for future use, in which case it will be automatically retained for later reuse.</p>
-     *
-     * @param extent_hooks 
-     * @param addr         
-     * @param size         
-     * @param offset       
-     * @param length       
-     * @param arena_ind    
      */
     @NativeType("bool") boolean invoke(@NativeType("extent_hooks_t *") long extent_hooks, @NativeType("void *") long addr, @NativeType("size_t") long size, @NativeType("size_t") long offset, @NativeType("size_t") long length, @NativeType("unsigned int") int arena_ind);
 

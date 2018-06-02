@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VmaPoolCreateInfo {
  *     uint32_t memoryTypeIndex;
  *     VmaPoolCreateFlags flags;
@@ -57,13 +57,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t minBlockCount;
  *     size_t maxBlockCount;
  *     uint32_t frameInUseCount;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VmaPoolCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -15,7 +15,7 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
         Applications may wish to export memory to other Vulkan instances or other APIs, or import memory from other Vulkan instances or other APIs to enable Vulkan workloads to be split up across application module, process, or API boundaries. This extension enables win32 applications to export win32 handles from Vulkan memory objects such that the underlying resources can be referenced outside the Vulkan instance that created them, and import win32 handles created in the Direct3D API to Vulkan memory objects.
 
         <h5>Examples</h5>
-        <code><pre>
+        <pre><code>
 ￿    //
 ￿    // Create an exportable memory object and export an external
 ￿    // handle from it.
@@ -47,7 +47,7 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 ￿
 ￿    // Figure out how many memory types the device supports
 ￿    vkGetPhysicalDeviceMemoryProperties(physicalDevice,
-￿                                        &memoryProperties);
+￿                                        &amp;memoryProperties);
 ￿    numMemoryTypes = memoryProperties.memoryTypeCount;
 ￿
 ￿    // Check the external handle type capabilities for the chosen format
@@ -63,32 +63,32 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 ￿        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
 ￿        0,
 ￿        handleType,
-￿        &properties);
+￿        &amp;properties);
 ￿
 ￿    if ((result != VK_SUCCESS) ||
-￿        !(properties.externalMemoryFeatures &
+￿        !(properties.externalMemoryFeatures &amp;
 ￿          VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV)) {
 ￿        abort();
 ￿    }
 ￿
 ￿    // Set up the external memory image creation info
-￿    memset(&externalMemoryImageCreateInfo,
+￿    memset(&amp;externalMemoryImageCreateInfo,
 ￿           0, sizeof(externalMemoryImageCreateInfo));
 ￿    externalMemoryImageCreateInfo.sType =
 ￿        VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV;
 ￿    externalMemoryImageCreateInfo.handleTypes = handleType;
-￿    if (properties.externalMemoryFeatures &
+￿    if (properties.externalMemoryFeatures &amp;
 ￿        VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV) {
-￿        memset(&dedicatedImageCreateInfo, 0, sizeof(dedicatedImageCreateInfo));
+￿        memset(&amp;dedicatedImageCreateInfo, 0, sizeof(dedicatedImageCreateInfo));
 ￿        dedicatedImageCreateInfo.sType =
 ￿            VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV;
 ￿        dedicatedImageCreateInfo.dedicatedAllocation = VK_TRUE;
-￿        externalMemoryImageCreateInfo.pNext = &dedicatedImageCreateInfo;
+￿        externalMemoryImageCreateInfo.pNext = &amp;dedicatedImageCreateInfo;
 ￿    }
 ￿    // Set up the  core image creation info
-￿    memset(&imageCreateInfo, 0, sizeof(imageCreateInfo));
+￿    memset(&amp;imageCreateInfo, 0, sizeof(imageCreateInfo));
 ￿    imageCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-￿    imageCreateInfo.pNext = &externalMemoryImageCreateInfo;
+￿    imageCreateInfo.pNext = &amp;externalMemoryImageCreateInfo;
 ￿    imageCreateInfo.format = format;
 ￿    imageCreateInfo.extent.width = 64;
 ￿    imageCreateInfo.extent.height = 64;
@@ -102,51 +102,51 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 ￿    imageCreateInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 ￿    imageCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 ￿
-￿    vkCreateImage(device, &imageCreateInfo, NULL, &image);
+￿    vkCreateImage(device, &amp;imageCreateInfo, NULL, &amp;image);
 ￿
 ￿    vkGetImageMemoryRequirements(device,
 ￿                                 image,
-￿                                 &imageMemoryRequirements);
+￿                                 &amp;imageMemoryRequirements);
 ￿
 ￿    // For simplicity, just pick the first compatible memory type.
-￿    for (memoryType = 0; memoryType < numMemoryTypes; memoryType++) {
-￿        if ((1 << memoryType) & imageMemoryRequirements.memoryTypeBits) {
+￿    for (memoryType = 0; memoryType &lt; numMemoryTypes; memoryType++) {
+￿        if ((1 &lt;&lt; memoryType) &amp; imageMemoryRequirements.memoryTypeBits) {
 ￿            break;
 ￿        }
 ￿    }
 ￿
 ￿    // At least one memory type must be supported given the prior external
 ￿    // handle capability check.
-￿    assert(memoryType < numMemoryTypes);
+￿    assert(memoryType &lt; numMemoryTypes);
 ￿
 ￿    // Allocate the external memory object.
-￿    memset(&exportMemoryAllocateInfo, 0, sizeof(exportMemoryAllocateInfo));
+￿    memset(&amp;exportMemoryAllocateInfo, 0, sizeof(exportMemoryAllocateInfo));
 ￿    exportMemoryAllocateInfo.sType =
 ￿        VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV;
 ￿    exportMemoryAllocateInfo.handleTypes = handleType;
-￿    if (properties.externalMemoryFeatures &
+￿    if (properties.externalMemoryFeatures &amp;
 ￿        VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV) {
-￿        memset(&dedicatedAllocationInfo, 0, sizeof(dedicatedAllocationInfo));
+￿        memset(&amp;dedicatedAllocationInfo, 0, sizeof(dedicatedAllocationInfo));
 ￿        dedicatedAllocationInfo.sType =
 ￿            VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV;
 ￿        dedicatedAllocationInfo.image = image;
-￿        exportMemoryAllocateInfo.pNext = &dedicatedAllocationInfo;
+￿        exportMemoryAllocateInfo.pNext = &amp;dedicatedAllocationInfo;
 ￿    }
-￿    memset(&memoryAllocateInfo, 0, sizeof(memoryAllocateInfo));
+￿    memset(&amp;memoryAllocateInfo, 0, sizeof(memoryAllocateInfo));
 ￿    memoryAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-￿    memoryAllocateInfo.pNext = &exportMemoryAllocateInfo;
+￿    memoryAllocateInfo.pNext = &amp;exportMemoryAllocateInfo;
 ￿    memoryAllocateInfo.allocationSize = imageMemoryRequirements.size;
 ￿    memoryAllocateInfo.memoryTypeIndex = memoryType;
 ￿
-￿    vkAllocateMemory(device, &memoryAllocateInfo, NULL, &memory);
+￿    vkAllocateMemory(device, &amp;memoryAllocateInfo, NULL, &amp;memory);
 ￿
-￿    if (!(properties.externalMemoryFeatures &
+￿    if (!(properties.externalMemoryFeatures &amp;
 ￿          VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV)) {
 ￿        vkBindImageMemory(device, image, memory, 0);
 ￿    }
 ￿
 ￿    // Get the external memory opaque FD handle
-￿    vkGetMemoryWin32HandleNV(device, memory, &memoryHnd);</pre></code>
+￿    vkGetMemoryWin32HandleNV(device, memory, &amp;memoryHnd);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -213,12 +213,12 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
         <h5>C Specification</h5>
         To retrieve the handle corresponding to a device memory object created with ##VkExportMemoryAllocateInfoNV{@code ::handleTypes} set to include #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetMemoryWin32HandleNV(
 ￿    VkDevice                                    device,
 ￿    VkDeviceMemory                              memory,
 ￿    VkExternalMemoryHandleTypeFlagsNV           handleType,
-￿    HANDLE*                                     pHandle);</pre></code>
+￿    HANDLE*                                     pHandle);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

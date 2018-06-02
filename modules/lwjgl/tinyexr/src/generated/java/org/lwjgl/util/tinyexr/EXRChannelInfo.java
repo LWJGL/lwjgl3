@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct EXRChannelInfo {
  *     char name[256];
  *     int pixel_type;
@@ -27,13 +27,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int y_sampling;
  *     unsigned char p_linear;
  *     char[3];
- * }</pre></code>
+ * }</code></pre>
  */
 public class EXRChannelInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

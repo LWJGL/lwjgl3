@@ -25,11 +25,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style_item {
  *     enum nk_style_item_type type;
  *     {@link NkStyleItemData union nk_style_item_data} data;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_item")
 public class NkStyleItem extends Struct implements NativeResource {
@@ -37,6 +37,7 @@ public class NkStyleItem extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

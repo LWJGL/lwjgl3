@@ -76,13 +76,13 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
         <h5>C Specification</h5>
         To write a 32-bit marker value into a buffer as a pipelined operation, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdWriteBufferMarkerAMD(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineStageFlagBits                     pipelineStage,
 ￿    VkBuffer                                    dstBuffer,
 ￿    VkDeviceSize                                dstOffset,
-￿    uint32_t                                    marker);</pre></code>
+￿    uint32_t                                    marker);</code></pre>
 
         <h5>Description</h5>
         The command will write the 32-bit marker value into the buffer only after all preceding commands have finished executing up to at least the specified pipeline stage. This includes the completion of other preceding {@code vkCmdWriteBufferMarkerAMD} commands so long as their specified pipeline stages occur either at the same time or earlier than this command's specified {@code pipelineStage}.

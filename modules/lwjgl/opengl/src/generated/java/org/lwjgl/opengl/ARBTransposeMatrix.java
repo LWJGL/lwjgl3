@@ -57,7 +57,7 @@ public class ARBTransposeMatrix {
      * 
      * <p>The matrix is stored as 16 consecutive values, i.e. as:</p>
      * 
-     * <table class="lwjgl matrix">
+     * <table class=striped>
      * <tr><td>a1</td><td>a2</td><td>a3</td><td>a4</td></tr>
      * <tr><td>a5</td><td>a6</td><td>a7</td><td>a8</td></tr>
      * <tr><td>a9</td><td>a10</td><td>a11</td><td>a12</td></tr>

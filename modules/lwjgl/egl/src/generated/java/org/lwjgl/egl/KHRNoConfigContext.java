@@ -12,7 +12,7 @@ package org.lwjgl.egl;
  * done with respect to an {@code EGLConfig} specifying buffer formats, and constrains contexts to only work with surfaces created with a "compatible"
  * config.</p>
  * 
- * <p>This extension allows creation of GL & ES contexts without specifying an {@code EGLConfig}.</p>
+ * <p>This extension allows creation of GL &amp; ES contexts without specifying an {@code EGLConfig}.</p>
  * 
  * <p>Requires {@link EGL14 EGL 1.4}.</p>
  */

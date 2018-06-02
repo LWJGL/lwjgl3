@@ -251,7 +251,6 @@ public class DynLoad {
      * Returns the symbol name exported by the specified library at the specified index.
      *
      * @param pSyms a {@code DLSyms} object
-     * @param index 
      */
     @Nullable
     @NativeType("char const *")

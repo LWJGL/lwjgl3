@@ -12,13 +12,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * size_t (*) (
  *     struct aiFile *pFile,
  *     char *pBuffer,
  *     size_t size,
  *     size_t count
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("aiFileReadProc")

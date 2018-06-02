@@ -30,14 +30,7 @@ public class VRExtendedDisplay {
         callPPPPV(__functionAddress, pnX, pnY, pnWidth, pnHeight);
     }
 
-    /**
-     * Size and position that the window needs to be on the VR display.
-     *
-     * @param pnX      
-     * @param pnY      
-     * @param pnWidth  
-     * @param pnHeight 
-     */
+    /** Size and position that the window needs to be on the VR display. */
     public static void VRExtendedDisplay_GetWindowBounds(@NativeType("int32_t *") IntBuffer pnX, @NativeType("int32_t *") IntBuffer pnY, @NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight) {
         if (CHECKS) {
             check(pnX, 1);
@@ -59,15 +52,7 @@ public class VRExtendedDisplay {
         callPPPPV(__functionAddress, eEye, pnX, pnY, pnWidth, pnHeight);
     }
 
-    /**
-     * Gets the viewport in the frame buffer to draw the output of the distortion into.
-     *
-     * @param eEye     
-     * @param pnX      
-     * @param pnY      
-     * @param pnWidth  
-     * @param pnHeight 
-     */
+    /** Gets the viewport in the frame buffer to draw the output of the distortion into. */
     public static void VRExtendedDisplay_GetEyeOutputViewport(@NativeType("EVREye") int eEye, @NativeType("uint32_t *") IntBuffer pnX, @NativeType("uint32_t *") IntBuffer pnY, @NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight) {
         if (CHECKS) {
             check(pnX, 1);
@@ -94,9 +79,6 @@ public class VRExtendedDisplay {
      * 
      * <p>Returns the adapter index and output index that the user should pass into {@code EnumAdapters} and {@code EnumOutputs} to create the device and swap
      * chain in DX10 and DX11. If an error occurs both indices will be set to -1.</p>
-     *
-     * @param pnAdapterIndex       
-     * @param pnAdapterOutputIndex 
      */
     public static void VRExtendedDisplay_GetDXGIOutputInfo(@NativeType("int32_t *") IntBuffer pnAdapterIndex, @NativeType("int32_t *") IntBuffer pnAdapterOutputIndex) {
         if (CHECKS) {

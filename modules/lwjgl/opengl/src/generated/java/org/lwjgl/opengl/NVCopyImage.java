@@ -32,25 +32,7 @@ public class NVCopyImage {
 
     // --- [ glCopyImageSubDataNV ] ---
 
-    /**
-     * Copies a region of texel data between two image objects. An image object may be either a texture or a renderbuffer.
-     *
-     * @param srcName   
-     * @param srcTarget 
-     * @param srcLevel  
-     * @param srcX      
-     * @param srcY      
-     * @param srcZ      
-     * @param dstName   
-     * @param dstTarget 
-     * @param dstLevel  
-     * @param dstX      
-     * @param dstY      
-     * @param dstZ      
-     * @param width     
-     * @param height    
-     * @param depth     
-     */
+    /** Copies a region of texel data between two image objects. An image object may be either a texture or a renderbuffer. */
     public static native void glCopyImageSubDataNV(@NativeType("GLuint") int srcName, @NativeType("GLenum") int srcTarget, @NativeType("GLint") int srcLevel, @NativeType("GLint") int srcX, @NativeType("GLint") int srcY, @NativeType("GLint") int srcZ, @NativeType("GLuint") int dstName, @NativeType("GLenum") int dstTarget, @NativeType("GLint") int dstLevel, @NativeType("GLint") int dstX, @NativeType("GLint") int dstY, @NativeType("GLint") int dstZ, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
 
 }

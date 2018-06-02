@@ -193,18 +193,18 @@ public final class EXTBlendOperationAdvanced {
      * <table class="lwjgl">
      * <thead><tr><th>Overlap Mode</th><th>Weighting Equations</th></tr></thead>
      * <tbody>
-     * <tr><td>{@link #VK_BLEND_OVERLAP_UNCORRELATED_EXT BLEND_OVERLAP_UNCORRELATED_EXT}</td><td><code><pre>
-     * p<sub>0</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; A<sub>s</sub>A<sub>d</sub> \\
-     * p<sub>1</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; A<sub>s</sub>(1 &minus; A<sub>d</sub>) \\
-     * p<sub>2</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; A<sub>d</sub>(1 &minus; A<sub>s</sub>) \\</pre></code></td></tr>
-     * <tr><td>{@link #VK_BLEND_OVERLAP_CONJOINT_EXT BLEND_OVERLAP_CONJOINT_EXT}</td><td><code><pre>
-     * p<sub>0</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; min(A<sub>s</sub>, A<sub>d</sub>) \\
-     * p<sub>1</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; max(A<sub>s</sub> &minus; A<sub>d</sub>, 0) \\
-     * p<sub>2</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; max(A<sub>d</sub> &minus; A<sub>s</sub>, 0) \\</pre></code></td></tr>
-     * <tr><td>{@link #VK_BLEND_OVERLAP_DISJOINT_EXT BLEND_OVERLAP_DISJOINT_EXT}</td><td><code><pre>
-     * p<sub>0</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; max(A<sub>s</sub> + A<sub>d</sub> &minus; 1, 0) \\
-     * p<sub>1</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; min(A<sub>s</sub>, 1 &minus; A<sub>d</sub>) \\
-     * p<sub>2</sub>(A<sub>s</sub>, A<sub>d</sub>) &equals; min(A<sub>d</sub>, 1 &minus; A<sub>s</sub>) \\</pre></code></td></tr>
+     * <tr><td>{@link #VK_BLEND_OVERLAP_UNCORRELATED_EXT BLEND_OVERLAP_UNCORRELATED_EXT}</td><td><pre><code>
+     * p<sub>0</sub>(A<sub>s</sub>, A<sub>d</sub>) = A<sub>s</sub>A<sub>d</sub> \\
+     * p<sub>1</sub>(A<sub>s</sub>, A<sub>d</sub>) = A<sub>s</sub>(1 &minus; A<sub>d</sub>) \\
+     * p<sub>2</sub>(A<sub>s</sub>, A<sub>d</sub>) = A<sub>d</sub>(1 &minus; A<sub>s</sub>) \\</code></pre></td></tr>
+     * <tr><td>{@link #VK_BLEND_OVERLAP_CONJOINT_EXT BLEND_OVERLAP_CONJOINT_EXT}</td><td><pre><code>
+     * p<sub>0</sub>(A<sub>s</sub>, A<sub>d</sub>) = min(A<sub>s</sub>, A<sub>d</sub>) \\
+     * p<sub>1</sub>(A<sub>s</sub>, A<sub>d</sub>) = max(A<sub>s</sub> &minus; A<sub>d</sub>, 0) \\
+     * p<sub>2</sub>(A<sub>s</sub>, A<sub>d</sub>) = max(A<sub>d</sub> &minus; A<sub>s</sub>, 0) \\</code></pre></td></tr>
+     * <tr><td>{@link #VK_BLEND_OVERLAP_DISJOINT_EXT BLEND_OVERLAP_DISJOINT_EXT}</td><td><pre><code>
+     * p<sub>0</sub>(A<sub>s</sub>, A<sub>d</sub>) = max(A<sub>s</sub> + A<sub>d</sub> &minus; 1, 0) \\
+     * p<sub>1</sub>(A<sub>s</sub>, A<sub>d</sub>) = min(A<sub>s</sub>, 1 &minus; A<sub>d</sub>) \\
+     * p<sub>2</sub>(A<sub>s</sub>, A<sub>d</sub>) = min(A<sub>d</sub>, 1 &minus; A<sub>s</sub>) \\</code></pre></td></tr>
      * </tbody>
      * </table>
      * 

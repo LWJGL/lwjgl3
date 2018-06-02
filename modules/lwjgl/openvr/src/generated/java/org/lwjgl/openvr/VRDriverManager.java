@@ -44,23 +44,13 @@ public class VRDriverManager {
         return callPI(__functionAddress, nDriver, pchValue, unBufferSize);
     }
 
-    /**
-     * @param nDriver  
-     * @param pchValue 
-     *
-     * @return the length of the number of bytes necessary to hold this string including the trailing null
-     */
+    /** @return the length of the number of bytes necessary to hold this string including the trailing null */
     @NativeType("uint32_t")
     public static int VRDriverManager_GetDriverName(@NativeType("DriverId_t") int nDriver, @Nullable @NativeType("char *") ByteBuffer pchValue) {
         return nVRDriverManager_GetDriverName(nDriver, memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 
-    /**
-     * @param nDriver      
-     * @param unBufferSize 
-     *
-     * @return the length of the number of bytes necessary to hold this string including the trailing null
-     */
+    /** @return the length of the number of bytes necessary to hold this string including the trailing null */
     @NativeType("uint32_t")
     public static String VRDriverManager_GetDriverName(@NativeType("DriverId_t") int nDriver, @NativeType("uint32_t") int unBufferSize) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

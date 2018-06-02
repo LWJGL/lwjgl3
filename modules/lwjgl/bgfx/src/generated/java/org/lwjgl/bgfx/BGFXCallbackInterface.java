@@ -31,10 +31,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_callback_interface_t {
  *     {@link BGFXCallbackVtbl bgfx_callback_vtbl_t const} * vtbl;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_callback_interface_t")
 public class BGFXCallbackInterface extends Struct implements NativeResource {
@@ -42,6 +42,7 @@ public class BGFXCallbackInterface extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

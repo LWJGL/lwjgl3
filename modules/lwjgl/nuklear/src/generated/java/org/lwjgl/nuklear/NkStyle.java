@@ -21,7 +21,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style {
  *     {@link NkUserFont struct nk_user_font} * font;
  *     {@link NkCursor struct nk_cursor} * cursors[NK_CURSOR_COUNT];
@@ -45,7 +45,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT;
  *     {@link NkStyleTab struct nk_style_tab} tab;
  *     {@link NkStyleCombo struct nk_style_combo} combo;
  *     {@link NkStyleWindow struct nk_style_window} window;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style")
 public class NkStyle extends Struct implements NativeResource {
@@ -53,6 +53,7 @@ public class NkStyle extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

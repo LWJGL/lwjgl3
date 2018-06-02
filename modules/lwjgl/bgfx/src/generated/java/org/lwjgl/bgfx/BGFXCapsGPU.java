@@ -25,11 +25,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_caps_gpu_t {
  *     uint16_t vendorId;
  *     uint16_t deviceId;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_caps_gpu_t")
 public class BGFXCapsGPU extends Struct {
@@ -37,6 +37,7 @@ public class BGFXCapsGPU extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

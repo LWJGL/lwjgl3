@@ -100,10 +100,10 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         Otherwise, the sample locations used for rasterization are set by calling #CmdSetSampleLocationsEXT():
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdSetSampleLocationsEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);</pre></code>
+￿    const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -150,11 +150,11 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         To query additional sample count specific multisampling capabilities, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceMultisamplePropertiesEXT(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSampleCountFlagBits                       samples,
-￿    VkMultisamplePropertiesEXT*                 pMultisampleProperties);</pre></code>
+￿    VkMultisamplePropertiesEXT*                 pMultisampleProperties);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

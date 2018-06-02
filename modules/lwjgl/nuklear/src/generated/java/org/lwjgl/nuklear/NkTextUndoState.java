@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_text_undo_state {
  *     {@link NkTextUndoRecord struct nk_text_undo_record} undo_rec[99];
  *     nk_rune undo_char[999];
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     short redo_point;
  *     short undo_char_point;
  *     short redo_char_point;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_text_undo_state")
 class NkTextUndoState extends Struct {
@@ -33,6 +33,7 @@ class NkTextUndoState extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

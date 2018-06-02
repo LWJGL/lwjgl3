@@ -82,11 +82,11 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         <h5>C Specification</h5>
         To export a Windows handle representing the underlying resources of a Vulkan device memory object, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetMemoryWin32HandleKHR(
 ￿    VkDevice                                    device,
 ￿    const VkMemoryGetWin32HandleInfoKHR*        pGetWin32HandleInfo,
-￿    HANDLE*                                     pHandle);</pre></code>
+￿    HANDLE*                                     pHandle);</code></pre>
 
         <h5>Description</h5>
         For handle types defined as NT handles, the handles returned by #GetMemoryWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
@@ -129,12 +129,12 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         <h5>C Specification</h5>
         Windows memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetMemoryWin32HandlePropertiesKHR(
 ￿    VkDevice                                    device,
 ￿    VkExternalMemoryHandleTypeFlagBits          handleType,
 ￿    HANDLE                                      handle,
-￿    VkMemoryWin32HandlePropertiesKHR*           pMemoryWin32HandleProperties);</pre></code>
+￿    VkMemoryWin32HandlePropertiesKHR*           pMemoryWin32HandleProperties);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

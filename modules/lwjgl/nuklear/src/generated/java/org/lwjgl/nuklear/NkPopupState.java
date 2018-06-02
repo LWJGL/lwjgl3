@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_popup_state {
  *     {@link NkWindow struct nk_window} * win;
  *     enum nk_panel_type type;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned con_old;
  *     unsigned active_con;
  *     {@link NkRect struct nk_rect} header;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_popup_state")
 public class NkPopupState extends Struct {
@@ -42,6 +42,7 @@ public class NkPopupState extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

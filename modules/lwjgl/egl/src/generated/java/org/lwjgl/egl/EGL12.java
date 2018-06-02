@@ -130,9 +130,9 @@ public class EGL12 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferFromClientBuffer.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglCreatePbufferFromClientBuffer CreatePbufferFromClientBuffer}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferFromClientBuffer.xhtml">Reference Page</a>
      */
     @NativeType("EGLSurface")
     public static long eglCreatePbufferFromClientBuffer(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int buftype, @NativeType("EGLClientBuffer") long buffer, @NativeType("EGLConfig") long config, @Nullable @NativeType("EGLint const *") int[] attrib_list) {

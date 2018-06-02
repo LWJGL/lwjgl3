@@ -22,7 +22,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>Consider the following simple geometry shader in unextended GLSL:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * layout(triangles) in;
  * layout(triangle_strip) out;
  * layout(max_vertices=3) out;
@@ -39,20 +39,20 @@ package org.lwjgl.vulkan;
  * void main()
  * {
  *     int layer = compute_layer();
- *     for (int i = 0; i < 3; i++) {
+ *     for (int i = 0; i &lt; 3; i++) {
  *         gl_Position = gl_in[i].gl_Position;
  *         texcoord = v_in[i].texcoord;
  *         baseColor = v_in[i].baseColor;
  *         gl_Layer = layer;
  *         EmitVertex();
  *     }
- * }</pre></code>
+ * }</code></pre>
  * 
  * <p>In this shader, the inputs {@code gl_Position}, {@code Inputs.texcoord}, and {@code Inputs.baseColor} are simply copied from the input vertex to the corresponding output vertex. The only "{@code interesting}" work done by the geometry shader is computing and emitting a {@code gl_Layer} value for the primitive.</p>
  * 
  * <p>The following geometry shader, using this extension, is equivalent:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * #extension GL_NV_geometry_shader_passthrough : require
  * 
  * layout(triangles) in;
@@ -76,7 +76,7 @@ package org.lwjgl.vulkan;
  *     // The shader simply computes and writes gl_Layer.  We don't
  *     // loop over three vertices or call EmitVertex().
  *     gl_Layer = compute_layer();
- * }</pre></code>
+ * }</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

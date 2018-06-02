@@ -76,12 +76,12 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for a macOS {@code NSView}, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateMacOSSurfaceMVK(
 ￿    VkInstance                                  instance,
 ￿    const VkMacOSSurfaceCreateInfoMVK*          pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSurfaceKHR*                               pSurface);</pre></code>
+￿    VkSurfaceKHR*                               pSurface);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

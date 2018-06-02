@@ -98,11 +98,11 @@ public class GOOGLEDisplayTiming {
      * 
      * <p>To query the duration of a refresh cycle (RC) for the presentation engine's display, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetRefreshCycleDurationGOOGLE(
      *     VkDevice                                    device,
      *     VkSwapchainKHR                              swapchain,
-     *     VkRefreshCycleDurationGOOGLE*               pDisplayTimingProperties);</pre></code>
+     *     VkRefreshCycleDurationGOOGLE*               pDisplayTimingProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -170,12 +170,12 @@ public class GOOGLEDisplayTiming {
      * 
      * <p>To asynchronously query the presentation engine, for newly-available timing information about one or more previous presents to a given swapchain, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPastPresentationTimingGOOGLE(
      *     VkDevice                                    device,
      *     VkSwapchainKHR                              swapchain,
      *     uint32_t*                                   pPresentationTimingCount,
-     *     VkPastPresentationTimingGOOGLE*             pPresentationTimings);</pre></code>
+     *     VkPastPresentationTimingGOOGLE*             pPresentationTimings);</code></pre>
      * 
      * <h5>Description</h5>
      * 

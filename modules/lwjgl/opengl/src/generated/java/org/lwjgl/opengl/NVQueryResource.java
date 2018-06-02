@@ -60,11 +60,7 @@ public class NVQueryResource {
     /** Unsafe version of: {@link #glQueryResourceNV QueryResourceNV} */
     public static native int nglQueryResourceNV(int queryType, int pname, int bufSize, long buffer);
 
-    /**
-     * @param queryType must be:<br><table><tr><td>{@link #GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV}</td></tr></table>
-     * @param pname     
-     * @param buffer    
-     */
+    /** @param queryType must be:<br><table><tr><td>{@link #GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV}</td></tr></table> */
     @NativeType("GLint")
     public static int glQueryResourceNV(@NativeType("GLenum") int queryType, @NativeType("GLint") int pname, @NativeType("GLint *") IntBuffer buffer) {
         return nglQueryResourceNV(queryType, pname, buffer.remaining(), memAddress(buffer));

@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     GLenum source,
  *     GLenum type,
@@ -23,7 +23,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     GLsizei length,
  *     GLchar const *message,
  *     void const *userParam
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("GLDEBUGPROCARB")

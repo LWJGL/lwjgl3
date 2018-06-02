@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_clipboard {
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkPluginPasteI nk_plugin_paste} paste;
  *     {@link NkPluginCopyI nk_plugin_copy} copy;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_clipboard")
 public class NkClipboard extends Struct implements NativeResource {
@@ -31,6 +31,7 @@ public class NkClipboard extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

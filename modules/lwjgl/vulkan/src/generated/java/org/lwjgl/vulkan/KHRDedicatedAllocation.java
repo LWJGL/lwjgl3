@@ -16,7 +16,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Examples</h5>
  * 
- * <code><pre>
+ * <pre><code>
  *     // Create an image with a dedicated allocation based on the
  *     // implementation's preference
  * 
@@ -28,9 +28,9 @@ package org.lwjgl.vulkan;
  *     VkImage image;
  *     VkResult result = vkCreateImage(
  *         device,
- *         &imageCreateInfo,
+ *         &amp;imageCreateInfo,
  *         NULL,                               // pAllocator
- *         &image);
+ *         &amp;image);
  * 
  *     VkMemoryDedicatedRequirementsKHR dedicatedRequirements =
  *     {
@@ -41,7 +41,7 @@ package org.lwjgl.vulkan;
  *     VkMemoryRequirements2 memoryRequirements =
  *     {
  *         VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2,
- *         &dedicatedRequirements,             // pNext
+ *         &amp;dedicatedRequirements,             // pNext
  *     };
  * 
  *     const VkImageMemoryRequirementsInfo2 imageRequirementsInfo =
@@ -53,8 +53,8 @@ package org.lwjgl.vulkan;
  * 
  *     vkGetImageMemoryRequirements2(
  *         device,
- *         &imageRequirementsInfo,
- *         &memoryRequirements);
+ *         &amp;imageRequirementsInfo,
+ *         &amp;memoryRequirements);
  * 
  *     if (dedicatedRequirements.prefersDedicatedAllocation) {
  *         // Allocate memory with VkMemoryDedicatedAllocateInfoKHR::image
@@ -71,7 +71,7 @@ package org.lwjgl.vulkan;
  *         VkMemoryAllocateInfo memoryAllocateInfo =
  *         {
  *             VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,                 // sType
- *             &dedicatedInfo,                                         // pNext
+ *             &amp;dedicatedInfo,                                         // pNext
  *             memoryRequirements.size,                                // allocationSize
  *             FindMemoryTypeIndex(memoryRequirements.memoryTypeBits), // memoryTypeIndex
  *         };
@@ -79,9 +79,9 @@ package org.lwjgl.vulkan;
  *         VkDeviceMemory memory;
  *         vkAllocateMemory(
  *             device,
- *             &memoryAllocateInfo,
+ *             &amp;memoryAllocateInfo,
  *             NULL,                       // pAllocator
- *             &memory);
+ *             &amp;memory);
  * 
  *         // Bind the image to the memory
  * 
@@ -92,7 +92,7 @@ package org.lwjgl.vulkan;
  *             0);
  *     } else {
  *         // Take the normal memory sub-allocation path
- *     }</pre></code>
+ *     }</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

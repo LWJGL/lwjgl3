@@ -152,11 +152,11 @@ public class KHRDisplay {
      * 
      * <p>Various functions are provided for enumerating the available display devices present on a Vulkan physical device. To query information about the available displays, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceDisplayPropertiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pPropertyCount,
-     *     VkDisplayPropertiesKHR*                     pProperties);</pre></code>
+     *     VkDisplayPropertiesKHR*                     pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -224,11 +224,11 @@ public class KHRDisplay {
      * 
      * <p>Images are presented to individual planes on a display. Devices <b>must</b> support at least one plane on each display. Planes <b>can</b> be stacked and blended to composite multiple images on one display. Devices <b>may</b> support only a fixed stacking order and fixed mapping between planes and displays, or they <b>may</b> allow arbitrary application specified stacking orders and mappings between planes and displays. To query the properties of device display planes, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceDisplayPlanePropertiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pPropertyCount,
-     *     VkDisplayPlanePropertiesKHR*                pProperties);</pre></code>
+     *     VkDisplayPlanePropertiesKHR*                pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -296,12 +296,12 @@ public class KHRDisplay {
      * 
      * <p>To determine which displays a plane is usable with, call</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetDisplayPlaneSupportedDisplaysKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t                                    planeIndex,
      *     uint32_t*                                   pDisplayCount,
-     *     VkDisplayKHR*                               pDisplays);</pre></code>
+     *     VkDisplayKHR*                               pDisplays);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -372,12 +372,12 @@ public class KHRDisplay {
      * 
      * <p>Each display has one or more supported modes associated with it by default. These built-in modes are queried by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetDisplayModePropertiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkDisplayKHR                                display,
      *     uint32_t*                                   pPropertyCount,
-     *     VkDisplayModePropertiesKHR*                 pProperties);</pre></code>
+     *     VkDisplayModePropertiesKHR*                 pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -444,13 +444,13 @@ public class KHRDisplay {
      * 
      * <p>Additional modes <b>may</b> also be created by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDisplayModeKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkDisplayKHR                                display,
      *     const VkDisplayModeCreateInfoKHR*           pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDisplayModeKHR*                           pMode);</pre></code>
+     *     VkDisplayModeKHR*                           pMode);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -519,12 +519,12 @@ public class KHRDisplay {
      * 
      * <p>Applications that wish to present directly to a display <b>must</b> select which layer, or "{@code plane}" of the display they wish to target, and a mode to use with the display. Each display supports at least one plane. The capabilities of a given mode and plane combination are determined by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetDisplayPlaneCapabilitiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkDisplayModeKHR                            mode,
      *     uint32_t                                    planeIndex,
-     *     VkDisplayPlaneCapabilitiesKHR*              pCapabilities);</pre></code>
+     *     VkDisplayPlaneCapabilitiesKHR*              pCapabilities);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -587,12 +587,12 @@ public class KHRDisplay {
      * 
      * <p>A complete display configuration includes a mode, one or more display planes and any parameters describing their behavior, and parameters describing some aspects of the images associated with those planes. Display surfaces describe the configuration of a single plane within a complete display configuration. To create a {@code VkSurfaceKHR} structure for a display surface, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDisplayPlaneSurfaceKHR(
      *     VkInstance                                  instance,
      *     const VkDisplaySurfaceCreateInfoKHR*        pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSurfaceKHR*                               pSurface);</pre></code>
+     *     VkSurfaceKHR*                               pSurface);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

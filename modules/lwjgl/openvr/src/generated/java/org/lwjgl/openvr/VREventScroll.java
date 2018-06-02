@@ -24,12 +24,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VREvent_Scroll_t {
  *     float xdelta;
  *     float ydelta;
  *     uint32_t repeatCount;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VREvent_Scroll_t")
 public class VREventScroll extends Struct {
@@ -37,6 +37,7 @@ public class VREventScroll extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

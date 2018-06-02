@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrPoseStatef {
  *     {@link OVRPosef ovrPosef} ThePose;
  *     {@link OVRVector3f ovrVector3f} AngularVelocity;
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link OVRVector3f ovrVector3f} LinearAcceleration;
  *     char[4];
  *     double TimeInSeconds;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrPoseStatef")
 public class OVRPoseStatef extends Struct implements NativeResource {
@@ -51,6 +51,7 @@ public class OVRPoseStatef extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

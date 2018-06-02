@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceFeatures2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} features;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
 

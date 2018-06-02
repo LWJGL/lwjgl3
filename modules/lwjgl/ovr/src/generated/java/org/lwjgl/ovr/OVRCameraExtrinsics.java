@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrCameraExtrinsics {
  *     double LastChangedTimeSeconds;
  *     unsigned int CameraStatusFlags;
@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     double LastExposureTimeSeconds;
  *     double ExposureLatencySeconds;
  *     double AdditionalLatencySeconds;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrCameraExtrinsics")
 public class OVRCameraExtrinsics extends Struct implements NativeResource {
@@ -49,6 +49,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

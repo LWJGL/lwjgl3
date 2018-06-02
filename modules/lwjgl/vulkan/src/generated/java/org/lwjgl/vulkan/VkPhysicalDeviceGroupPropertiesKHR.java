@@ -23,14 +23,14 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceGroupPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t physicalDeviceCount;
  *     VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
  *     VkBool32 subsetAllocation;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceGroupPropertiesKHR extends VkPhysicalDeviceGroupProperties {
 

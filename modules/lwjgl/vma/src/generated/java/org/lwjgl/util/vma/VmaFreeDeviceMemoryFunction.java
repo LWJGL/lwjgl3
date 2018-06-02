@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     VmaAllocator allocator,
  *     uint32_t memoryType,
  *     VkDeviceMemory memory,
  *     VkDeviceSize size
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class VmaFreeDeviceMemoryFunction extends Callback implements VmaFreeDeviceMemoryFunctionI {
 

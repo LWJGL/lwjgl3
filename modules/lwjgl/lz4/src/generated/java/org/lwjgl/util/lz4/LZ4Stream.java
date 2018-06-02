@@ -19,11 +19,11 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_STREAMSIZE_U64;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union LZ4_stream_t {
  *     unsigned long long table[LZ4_STREAMSIZE_U64];
  *     {@link LZ4StreamInternal struct LZ4_stream_t_internal} internal_donotuse;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union LZ4_stream_t")
 public class LZ4Stream extends Struct {
@@ -31,6 +31,7 @@ public class LZ4Stream extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

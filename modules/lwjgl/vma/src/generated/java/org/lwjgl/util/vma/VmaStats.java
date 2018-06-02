@@ -21,18 +21,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VmaStats {
  *     {@link VmaStatInfo VmaStatInfo} memoryType[32];
  *     {@link VmaStatInfo VmaStatInfo} memoryHeap[16];
  *     {@link VmaStatInfo VmaStatInfo} total;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VmaStats extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -22,7 +22,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
         Secondly, the extension allows the application to query which formats can be used together with the new function prototypes introduced by the SPIR-V extension.
 
         <h5>Examples</h5>
-        <code><pre>
+        <pre><code>
 ￿struct VkTextureLODGatherFormatPropertiesAMD
 ￿{
 ￿    VkStructureType sType;
@@ -48,9 +48,9 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 ￿formatInfo.flags  = ...;
 ￿
 ￿formatProps.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
-￿formatProps.pNext = &textureLODGatherSupport;
+￿formatProps.pNext = &amp;textureLODGatherSupport;
 ￿
-￿vkGetPhysicalDeviceImageFormatProperties2(physical_device, &formatInfo, &formatProps);
+￿vkGetPhysicalDeviceImageFormatProperties2(physical_device, &amp;formatInfo, &amp;formatProps);
 ￿
 ￿if (textureLODGatherSupport.supportsTextureGatherLODBiasAMD == VK_TRUE)
 ￿{
@@ -61,7 +61,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 ￿{
 ￿    // physical device does not support SPV_AMD_texture_gather_bias_lod for the
 ￿    // specified format configuration.
-￿}</pre></code>
+￿}</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

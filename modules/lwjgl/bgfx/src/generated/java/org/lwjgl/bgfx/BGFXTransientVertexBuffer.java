@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_transient_vertex_buffer_t {
  *     uint8_t * data;
  *     uint32_t size;
@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t stride;
  *     bgfx_vertex_buffer_handle_t handle;
  *     bgfx_vertex_decl_handle_t decl;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_transient_vertex_buffer_t")
 public class BGFXTransientVertexBuffer extends Struct implements NativeResource {
@@ -48,6 +48,7 @@ public class BGFXTransientVertexBuffer extends Struct implements NativeResource 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

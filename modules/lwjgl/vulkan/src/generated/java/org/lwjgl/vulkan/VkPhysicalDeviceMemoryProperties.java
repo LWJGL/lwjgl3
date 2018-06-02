@@ -61,23 +61,23 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>This ordering requirement enables applications to use a simple search loop to select the desired memory type along the lines of:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * // Find a memory in `memoryTypeBitsRequirement` that includes all of `requiredProperties`
  * int32_t findProperties(const VkPhysicalDeviceMemoryProperties* pMemoryProperties,
  *                        uint32_t memoryTypeBitsRequirement,
  *                        VkMemoryPropertyFlags requiredProperties) {
- *     const uint32_t memoryCount = pMemoryProperties->memoryTypeCount;
- *     for (uint32_t memoryIndex = 0; memoryIndex < memoryCount; ++memoryIndex) {
- *         const uint32_t memoryTypeBits = (1 << memoryIndex);
- *         const bool isRequiredMemoryType = memoryTypeBitsRequirement & memoryTypeBits;
+ *     const uint32_t memoryCount = pMemoryProperties-&gt;memoryTypeCount;
+ *     for (uint32_t memoryIndex = 0; memoryIndex &lt; memoryCount; ++memoryIndex) {
+ *         const uint32_t memoryTypeBits = (1 &lt;&lt; memoryIndex);
+ *         const bool isRequiredMemoryType = memoryTypeBitsRequirement &amp; memoryTypeBits;
  * 
  *         const VkMemoryPropertyFlags properties =
- *             pMemoryProperties->memoryTypes[memoryIndex].propertyFlags;
+ *             pMemoryProperties-&gt;memoryTypes[memoryIndex].propertyFlags;
  *         const bool hasRequiredProperties =
- *             (properties & requiredProperties) == requiredProperties;
+ *             (properties &amp; requiredProperties) == requiredProperties;
  * 
- *         if (isRequiredMemoryType && hasRequiredProperties)
- *             return static_cast<int32_t>(memoryIndex);
+ *         if (isRequiredMemoryType &amp;&amp; hasRequiredProperties)
+ *             return static_cast&lt;int32_t&gt;(memoryIndex);
  *     }
  * 
  *     // failed to find memory type
@@ -91,12 +91,12 @@ import static org.lwjgl.vulkan.VK10.*;
  * // `requiredProperties` are the property flags that must be present
  * // `optimalProperties` are the property flags that are preferred by the application
  * VkMemoryRequirements memoryRequirements;
- * vkGetImageMemoryRequirements(device, image, &memoryRequirements);
+ * vkGetImageMemoryRequirements(device, image, &amp;memoryRequirements);
  * int32_t memoryType =
- *     findProperties(&memoryProperties, memoryRequirements.memoryTypeBits, optimalProperties);
+ *     findProperties(&amp;memoryProperties, memoryRequirements.memoryTypeBits, optimalProperties);
  * if (memoryType == -1) // not found; try fallback properties
  *     memoryType =
- *         findProperties(&memoryProperties, memoryRequirements.memoryTypeBits, requiredProperties);</pre></code>
+ *         findProperties(&amp;memoryProperties, memoryRequirements.memoryTypeBits, requiredProperties);</code></pre>
  * 
  * <h5>See Also</h5>
  * 
@@ -113,19 +113,20 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceMemoryProperties {
  *     uint32_t memoryTypeCount;
  *     {@link VkMemoryType VkMemoryType} memoryTypes[VK_MAX_MEMORY_TYPES];
  *     uint32_t memoryHeapCount;
  *     {@link VkMemoryHeap VkMemoryHeap} memoryHeaps[VK_MAX_MEMORY_HEAPS];
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

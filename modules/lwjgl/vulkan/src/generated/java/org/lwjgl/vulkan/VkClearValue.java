@@ -41,17 +41,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union VkClearValue {
  *     {@link VkClearColorValue VkClearColorValue} color;
  *     {@link VkClearDepthStencilValue VkClearDepthStencilValue} depthStencil;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkClearValue extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

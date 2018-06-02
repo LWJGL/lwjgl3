@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_configuration_stacks {
  *     {@link NkConfigStackStyleItem struct nk_config_stack_style_item} style_items;
  *     {@link NkConfigStackFloat struct nk_config_stack_float} floats;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkConfigStackColor struct nk_config_stack_color} colors;
  *     {@link NkConfigStackUserFont struct nk_config_stack_user_font} fonts;
  *     {@link NkConfigStackButtonBehavior struct nk_config_stack_button_behavior} button_behaviors;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_configuration_stacks")
 class NkConfigurationStacks extends Struct {
@@ -33,6 +33,7 @@ class NkConfigurationStacks extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct YGLayout {
  *     float positions[4];
  *     float dimensions[2];
@@ -36,13 +36,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link YGCachedMeasurement YGCachedMeasurement} cachedLayout;
  *     bool didUseLegacyFlag;
  *     bool doesLegacyStretchFlagAffectsLayout;
- * }</pre></code>
+ * }</code></pre>
  */
 public class YGLayout extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

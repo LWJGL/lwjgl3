@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>message / question</li>
  * <li>input / password</li>
  * <li>save file</li>
- * <li>open file & multiple files</li>
+ * <li>open file &amp; multiple files</li>
  * <li>select folder</li>
  * <li>color picker</li>
  * </ul>
@@ -91,7 +91,7 @@ public class TinyFileDialogs {
     /**
      * Can be modified at run time.
      * 
-     * <p>For unix & windows: 0 (graphic mode) or 1 (console mode).</p>
+     * <p>For unix &amp; windows: 0 (graphic mode) or 1 (console mode).</p>
      * 
      * <p>0: try to use a graphic solution, if it fails then it uses console mode.
      * 1: forces all dialogs into console mode even when the X server is present. It will use the package dialog or dialog.exe if installed. On windows it

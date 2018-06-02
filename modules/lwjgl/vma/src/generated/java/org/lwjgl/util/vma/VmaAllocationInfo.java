@@ -47,14 +47,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>It can change after call to {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaUnmapMemory UnmapMemory}. It can also change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function.</p></li>
  * <li>{@code pUserData} &ndash; 
- * custom general-purpose pointer that was passed as {@link AllocationCreateInfo}{@code ::pUserData} or set using {@link Vma#vmaSetAllocationUserData SetAllocationUserData}.
+ * custom general-purpose pointer that was passed as {@link VmaAllocationCreateInfo}{@code ::pUserData} or set using {@link Vma#vmaSetAllocationUserData SetAllocationUserData}.
  * 
  * <p>It can change after call to {@link Vma#vmaSetAllocationUserData SetAllocationUserData} for this allocation.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VmaAllocationInfo {
  *     uint32_t memoryType;
  *     VkDeviceMemory deviceMemory;
@@ -62,13 +62,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize size;
  *     void * pMappedData;
  *     void * pUserData;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VmaAllocationInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

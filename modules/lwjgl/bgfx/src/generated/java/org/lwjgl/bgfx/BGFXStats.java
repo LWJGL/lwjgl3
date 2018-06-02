@@ -66,7 +66,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_stats_t {
  *     int64_t cpuTimeFrame;
  *     int64_t cpuTimeBegin;
@@ -106,7 +106,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  *     {@link BGFXViewStats bgfx_view_stats_t} * viewStats;
  *     uint16_t numEncoder;
  *     {@link BGFXEncoderStats bgfx_encoder_stats_t} * encoderStats;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_stats_t")
 public class BGFXStats extends Struct {
@@ -114,6 +114,7 @@ public class BGFXStats extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

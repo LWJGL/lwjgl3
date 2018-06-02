@@ -50,12 +50,7 @@ public class VRSettings {
         return callPZ(__functionAddress, bForce, peError);
     }
 
-    /**
-     * Returns true if file sync occurred (force or settings dirty).
-     *
-     * @param bForce  
-     * @param peError 
-     */
+    /** Returns true if file sync occurred (force or settings dirty). */
     @NativeType("bool")
     public static boolean VRSettings_Sync(@NativeType("bool") boolean bForce, @NativeType("EVRSettingsError *") IntBuffer peError) {
         if (CHECKS) {

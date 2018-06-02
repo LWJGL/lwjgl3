@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkRenderPassMultiviewCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int32_t const * pViewOffsets;
  *     uint32_t correlationMaskCount;
  *     uint32_t const * pCorrelationMasks;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCreateInfo {
 

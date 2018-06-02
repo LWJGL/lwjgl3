@@ -36,7 +36,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_caps_t {
  *     bgfx_renderer_type_t rendererType;
  *     uint64_t supported;
@@ -48,7 +48,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  *     {@link BGFXCapsGPU bgfx_caps_gpu_t} gpu[4];
  *     {@link BGFXCapsLimits bgfx_caps_limits_t} limits;
  *     uint16_t formats[BGFX_TEXTURE_FORMAT_COUNT];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_caps_t")
 public class BGFXCaps extends Struct {
@@ -56,6 +56,7 @@ public class BGFXCaps extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

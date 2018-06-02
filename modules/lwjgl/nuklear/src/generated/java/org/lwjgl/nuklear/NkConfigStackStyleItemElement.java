@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_config_stack_style_item_element {
  *     {@link NkStyleItem struct nk_style_item} * pValues;
  *     {@link NkStyleItem struct nk_style_item} old_value;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_style_item_element")
 class NkConfigStackStyleItemElement extends Struct {
@@ -28,6 +28,7 @@ class NkConfigStackStyleItemElement extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -79,11 +79,11 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         <h5>C Specification</h5>
         To export a POSIX file descriptor representing the underlying resources of a Vulkan device memory object, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetMemoryFdKHR(
 ￿    VkDevice                                    device,
 ￿    const VkMemoryGetFdInfoKHR*                 pGetFdInfo,
-￿    int*                                        pFd);</pre></code>
+￿    int*                                        pFd);</code></pre>
 
         <h5>Description</h5>
         Each call to #GetMemoryFdKHR() <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.
@@ -126,12 +126,12 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         <h5>C Specification</h5>
         POSIX file descriptor memory handles compatible with Vulkan <b>may</b> also be created by non-Vulkan APIs using methods beyond the scope of this specification. To determine the correct parameters to use when importing such handles, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetMemoryFdPropertiesKHR(
 ￿    VkDevice                                    device,
 ￿    VkExternalMemoryHandleTypeFlagBits          handleType,
 ￿    int                                         fd,
-￿    VkMemoryFdPropertiesKHR*                    pMemoryFdProperties);</pre></code>
+￿    VkMemoryFdPropertiesKHR*                    pMemoryFdProperties);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

@@ -21,11 +21,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct stb_vorbis_alloc {
  *     char * alloc_buffer;
  *     int alloc_buffer_length_in_bytes;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct stb_vorbis_alloc")
 public class STBVorbisAlloc extends Struct implements NativeResource {
@@ -33,6 +33,7 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

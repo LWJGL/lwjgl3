@@ -76,7 +76,7 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
             The default uniform block, which is not assigned any ub_index, uses a private, internal data storage, and does not have any buffer object associated
             with it.
             """,
-            "An active uniform that is a member of the default uniform block has location >= 0 and it has offset == stride == -1.",
+            "An active uniform that is a member of the default uniform block has location &ge; 0 and it has offset == stride == -1.",
             "An active uniform that is a member of a named uniform block has location == -1.",
             "A uniform location of -1 is silently ignored if given as a function argument.",
             "Uniform block declarations may not be nested",

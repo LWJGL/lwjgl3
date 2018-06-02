@@ -23,7 +23,7 @@
  * instances, so there is no memory overhead. The internal Yoga structs are also exposed, which makes it very efficient to read the current tree layout
  * after a call to {@link org.lwjgl.util.yoga.Yoga#YGNodeCalculateLayout NodeCalculateLayout}:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * // Public API, 4x JNI call overhead
  * float l = YGNodeLayoutGetLeft(node);
  * float t = YGNodeLayoutGetTop(node);
@@ -36,7 +36,7 @@
  * float l = layout.positions(YGEdgeLeft);
  * float t = layout.positions(YGEdgeTop);
  * float w = layout.dimensions(YGDimensionWidth);
- * float h = layout.dimensions(YGDimensionHeight);</pre></code>
+ * float h = layout.dimensions(YGDimensionHeight);</code></pre>
  */
 @org.lwjgl.system.NonnullDefault
 package org.lwjgl.util.yoga;

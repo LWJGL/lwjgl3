@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct XXH64_state_t {
  *     long long total_len;
  *     long long v1;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     long long mem64[4];
  *     unsigned memsize;
  *     unsigned reserved[2];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct XXH64_state_t")
 public class XXH64State extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class XXH64State extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

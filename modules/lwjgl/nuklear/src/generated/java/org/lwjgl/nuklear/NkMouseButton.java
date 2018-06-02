@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_mouse_button {
  *     int down;
  *     unsigned int clicked;
  *     {@link NkVec2 struct nk_vec2} clicked_pos;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_mouse_button")
 public class NkMouseButton extends Struct {
@@ -29,6 +29,7 @@ public class NkMouseButton extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

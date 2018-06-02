@@ -20,14 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkExternalSemaphorePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkExternalSemaphoreHandleTypeFlags exportFromImportedHandleTypes;
  *     VkExternalSemaphoreHandleTypeFlags compatibleHandleTypes;
  *     VkExternalSemaphoreFeatureFlags externalSemaphoreFeatures;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphoreProperties {
 

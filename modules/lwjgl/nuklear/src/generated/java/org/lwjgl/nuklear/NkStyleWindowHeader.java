@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style_window_header {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} padding;
  *     {@link NkVec2 struct nk_vec2} label_padding;
  *     {@link NkVec2 struct nk_vec2} spacing;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_window_header")
 public class NkStyleWindowHeader extends Struct implements NativeResource {
@@ -49,6 +49,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

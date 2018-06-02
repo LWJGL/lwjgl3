@@ -124,12 +124,12 @@ public class EXTDiscardRectangles {
      * 
      * <p>If the pipeline state object was created with the {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_EXT} dynamic state enabled, the discard rectangles are dynamically set and changed with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetDiscardRectangleEXT(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    firstDiscardRectangle,
      *     uint32_t                                    discardRectangleCount,
-     *     const VkRect2D*                             pDiscardRectangles);</pre></code>
+     *     const VkRect2D*                             pDiscardRectangles);</code></pre>
      * 
      * <h5>Description</h5>
      * 

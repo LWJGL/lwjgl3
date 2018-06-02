@@ -1101,7 +1101,7 @@ public class VR {
      * <li>{@link #EDeviceActivityLevel_k_EDeviceActivityLevel_Idle EDeviceActivityLevel_k_EDeviceActivityLevel_Idle} - No activity for the last 10 seconds.</li>
      * <li>{@link #EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction} - Activity (movement or prox sensor) is happening now.</li>
      * <li>{@link #EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction_Timeout EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction_Timeout} - No activity for the last 0.5 seconds.</li>
-     * <li>{@link #EDeviceActivityLevel_k_EDeviceActivityLevel_Standby EDeviceActivityLevel_k_EDeviceActivityLevel_Standby} - Idle for at least 5 seconds (configurable in Settings -> Power Management).</li>
+     * <li>{@link #EDeviceActivityLevel_k_EDeviceActivityLevel_Standby EDeviceActivityLevel_k_EDeviceActivityLevel_Standby} - Idle for at least 5 seconds (configurable in Settings -&gt; Power Management).</li>
      * </ul>
      */
     public static final int
@@ -1250,8 +1250,8 @@ public class VR {
     /**
      * {@code EVRControllerAxisType}: Identifies what kind of axis is on the controller at index {@code n}. Read this type with:
      * 
-     * <code><pre>
-     * pVRSystem->Get(nControllerDeviceIndex, Prop_Axis0Type_Int32+n);</pre></code>
+     * <pre><code>
+     * pVRSystem-&gt;Get(nControllerDeviceIndex, Prop_Axis0Type_Int32+n);</code></pre>
      * 
      * <h5>Enum values:</h5>
      * 

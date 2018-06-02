@@ -25,13 +25,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Due to the nature of the {@code objc_msgSend*} functions, they are not directly exposed in this binding. Advanced users with good understanding of the
  * complexity involved with using these functions, may access them via the {@link #getLibrary} method:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * SharedLibrary objc = ObjCRuntime.getLibrary();
  * long objc_msgSend = objc.getFunctionAddress("objc_msgSend");
  * 
  * // example usage
  * long NSThread = objc_getClass("NSThread");
- * long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread"));</pre></code>
+ * long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread"));</code></pre>
  * 
  * <p>The safe way to use objc_msgSend in C code is to cast it to an appropriate function pointer. This is exactly what the {@link org.lwjgl.system.JNI JNI}
  * class does. If a particular function signature is not available, {@link org.lwjgl.system.dyncall.DynCall DynCall} may be used to invoke it.</p>
@@ -1309,23 +1309,23 @@ public class ObjCRuntime {
      * <p>An Objective-C method is simply a C function that takes at least two arguments &ndash; {@code self} and {@code _cmd}. For example, given the following
      * function:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void myMethodIMP(id self, SEL _cmd)
      * {
      *     // implementation ....
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>you can dynamically add it to a class as a method (called {@code resolveThisMethodDynamically}) like this:</p>
      * 
-     * <code><pre>
-     * class_addMethod([self class], @selector(resolveThisMethodDynamically), (IMP) myMethodIMP, "v@:");</pre></code>
+     * <pre><code>
+     * class_addMethod([self class], @selector(resolveThisMethodDynamically), (IMP) myMethodIMP, "v@:");</code></pre>
      *
      * @param cls   the class to which to add a method
      * @param name  a selector that specifies the name of the method being added
      * @param imp   a function which is the implementation of the new method. The function must take at least two arguments &ndash; {@code self} and {@code _cmd}.
-     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-     *              &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-     *              {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
+     *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
+     *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
      *
      * @return {@link #YES} if the method was added successfully, otherwise {@link #NO} (for example, the class already contains a method implementation with that name)
      */
@@ -1348,23 +1348,23 @@ public class ObjCRuntime {
      * <p>An Objective-C method is simply a C function that takes at least two arguments &ndash; {@code self} and {@code _cmd}. For example, given the following
      * function:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void myMethodIMP(id self, SEL _cmd)
      * {
      *     // implementation ....
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>you can dynamically add it to a class as a method (called {@code resolveThisMethodDynamically}) like this:</p>
      * 
-     * <code><pre>
-     * class_addMethod([self class], @selector(resolveThisMethodDynamically), (IMP) myMethodIMP, "v@:");</pre></code>
+     * <pre><code>
+     * class_addMethod([self class], @selector(resolveThisMethodDynamically), (IMP) myMethodIMP, "v@:");</code></pre>
      *
      * @param cls   the class to which to add a method
      * @param name  a selector that specifies the name of the method being added
      * @param imp   a function which is the implementation of the new method. The function must take at least two arguments &ndash; {@code self} and {@code _cmd}.
-     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-     *              &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-     *              {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
+     *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
+     *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
      *
      * @return {@link #YES} if the method was added successfully, otherwise {@link #NO} (for example, the class already contains a method implementation with that name)
      */
@@ -1409,9 +1409,9 @@ public class ObjCRuntime {
      * @param cls   the class you want to modify
      * @param name  a selector that identifies the method whose implementation you want to replace
      * @param imp   the new implementation for the method identified by {@code name} for the class identified by {@code cls}
-     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-     *              &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-     *              {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
+     *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
+     *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
      *
      * @return the previous implementation of the method identified by {@code name} for the class identified by {@code cls}
      */
@@ -1440,9 +1440,9 @@ public class ObjCRuntime {
      * @param cls   the class you want to modify
      * @param name  a selector that identifies the method whose implementation you want to replace
      * @param imp   the new implementation for the method identified by {@code name} for the class identified by {@code cls}
-     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-     *              &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-     *              {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
+     *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
+     *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
      *
      * @return the previous implementation of the method identified by {@code name} for the class identified by {@code cls}
      */
@@ -1479,12 +1479,6 @@ public class ObjCRuntime {
      * <p>The instance variable's minimum alignment in bytes is {@code 1<<align}. The minimum alignment of an instance variable depends on the ivar's type and
      * the machine architecture. For variables of any pointer type, pass {@code log2(sizeof(pointer_type))}.</p>
      *
-     * @param cls       
-     * @param name      
-     * @param size      
-     * @param alignment 
-     * @param types     
-     *
      * @return {@link #YES} if the instance variable was added successfully, otherwise {@link #NO} (for example, the class already contains an instance variable with that name)
      */
     @NativeType("BOOL")
@@ -1506,12 +1500,6 @@ public class ObjCRuntime {
      * 
      * <p>The instance variable's minimum alignment in bytes is {@code 1<<align}. The minimum alignment of an instance variable depends on the ivar's type and
      * the machine architecture. For variables of any pointer type, pass {@code log2(sizeof(pointer_type))}.</p>
-     *
-     * @param cls       
-     * @param name      
-     * @param size      
-     * @param alignment 
-     * @param types     
      *
      * @return {@link #YES} if the instance variable was added successfully, otherwise {@link #NO} (for example, the class already contains an instance variable with that name)
      */

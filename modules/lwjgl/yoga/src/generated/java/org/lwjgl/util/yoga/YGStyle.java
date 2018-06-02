@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct YGStyle {
  *     YGDirection direction;
  *     YGFlexDirection flexDirection;
@@ -41,13 +41,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link YGValue YGValue} minDimensions[2];
  *     {@link YGValue YGValue} maxDimensions[2];
  *     {@link YGFloatOptional YGFloatOptional} aspectRatio;
- * }</pre></code>
+ * }</code></pre>
  */
 public class YGStyle extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

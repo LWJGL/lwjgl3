@@ -40,10 +40,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>The paths, gradients, patterns and scissor region are transformed by an transformation matrix at the time when they are passed to the API. The current
  * transformation matrix is a affine matrix:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * [sx kx tx]
  * [ky sy ty]
- * [ 0  0  1]</pre></code>
+ * [ 0  0  1]</code></pre>
  * 
  * <p>Where: {@code sx,sy} define scaling, {@code kx,ky} skewing, and {@code tx,ty} translation. The last row is assumed to be {@code 0,0,1} and is not
  * stored.</p>
@@ -98,12 +98,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>While this may sound a little odd, the setup allows you to always render the same way regardless of scaling. I.e. following works regardless of scaling:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * const char* txt = "Text me up.";
  * nvgTextBounds(vg, x,y, txt, NULL, bounds);
  * nvgBeginPath(vg);
  * nvgRoundedRect(vg, bounds[0],bounds[1], bounds[2]-bounds[0], bounds[3]-bounds[1]);
- * nvgFill(vg);</pre></code>
+ * nvgFill(vg);</code></pre>
  * 
  * <p>Note: currently only solid color fill is supported for text.</p>
  */
@@ -822,10 +822,10 @@ public class NanoVG {
     /**
      * Premultiplies current coordinate system by specified matrix. The parameters are interpreted as matrix as follows:
      * 
-     * <code><pre>
+     * <pre><code>
      * [a c e]
      * [b d f]
-     * [0 0 1]</pre></code>
+     * [0 0 1]</code></pre>
      *
      * @param ctx the NanoVG context
      * @param a   the a value
@@ -942,10 +942,10 @@ public class NanoVG {
     /**
      * Stores the top part (a-f) of the current transformation matrix in to the specified buffer.
      * 
-     * <code><pre>
+     * <pre><code>
      * [a c e]
      * [b d f]
-     * [0 0 1]</pre></code>
+     * [0 0 1]</code></pre>
      * 
      * <p>There should be space for 6 floats in the return buffer for the values {@code a-f}.</p>
      *
@@ -1967,9 +1967,7 @@ public class NanoVG {
     /**
      * Adds fallback font by handle.
      *
-     * @param ctx          the NanoVG context
-     * @param baseFont     
-     * @param fallbackFont 
+     * @param ctx the NanoVG context
      */
     public static int nvgAddFallbackFontId(@NativeType("NVGcontext *") long ctx, int baseFont, int fallbackFont) {
         if (CHECKS) {
@@ -1986,9 +1984,7 @@ public class NanoVG {
     /**
      * Adds fallback font by name.
      *
-     * @param ctx          the NanoVG context
-     * @param baseFont     
-     * @param fallbackFont 
+     * @param ctx the NanoVG context
      */
     public static int nvgAddFallbackFont(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer baseFont, @NativeType("char const *") ByteBuffer fallbackFont) {
         if (CHECKS) {
@@ -2002,9 +1998,7 @@ public class NanoVG {
     /**
      * Adds fallback font by name.
      *
-     * @param ctx          the NanoVG context
-     * @param baseFont     
-     * @param fallbackFont 
+     * @param ctx the NanoVG context
      */
     public static int nvgAddFallbackFont(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence baseFont, @NativeType("char const *") CharSequence fallbackFont) {
         if (CHECKS) {

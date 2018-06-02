@@ -40,20 +40,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct MONITORINFOEX {
  *     DWORD cbSize;
  *     {@link RECT RECT} rcMonitor;
  *     {@link RECT RECT} rcWork;
  *     DWORD dwFlags;
  *     TCHAR szDevice[32];
- * }</pre></code>
+ * }</code></pre>
  */
 public class MONITORINFOEX extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

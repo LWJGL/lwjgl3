@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceSampleLocationsPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -50,13 +50,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float sampleLocationCoordinateRange[2];
  *     uint32_t sampleLocationSubPixelBits;
  *     VkBool32 variableSampleLocations;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

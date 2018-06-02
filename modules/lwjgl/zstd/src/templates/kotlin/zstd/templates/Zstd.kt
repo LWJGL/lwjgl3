@@ -155,7 +155,8 @@ ENABLE_WARNINGS()""")
             """
             decompressed size is an optional field, it may not be present, typically in streaming mode. When {@code return==ZSTD_CONTENTSIZE_UNKNOWN}, data to
             decompress could be any size. In which case, it's necessary to use streaming mode to decompress data. Optionally, application can rely on some
-            implicit limit, as #decompress() only needs an upper bound of decompressed size. (For example, data could be necessarily cut into blocks <= 16 KB).
+            implicit limit, as #decompress() only needs an upper bound of decompressed size. (For example, data could be necessarily cut into blocks &le; 16
+            KB).
             """,
             "decompressed size is always present when compression is done with #compress()",
             """

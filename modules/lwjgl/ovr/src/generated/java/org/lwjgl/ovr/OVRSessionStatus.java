@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrSessionStatus {
  *     ovrBool IsVisible;
  *     ovrBool HmdPresent;
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ovrBool HasInputFocus;
  *     ovrBool OverlayPresent;
  *     ovrBool DepthRequested;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrSessionStatus")
 public class OVRSessionStatus extends Struct implements NativeResource {
@@ -57,6 +57,7 @@ public class OVRSessionStatus extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

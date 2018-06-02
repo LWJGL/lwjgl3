@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     nk_handle handle,
  *     float font_height,
  *     struct nk_user_font_glyph *glyph,
  *     nk_rune codepoint,
  *     nk_rune next_codepoint
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class NkQueryFontGlyphCallback extends Callback implements NkQueryFontGlyphCallbackI {
 

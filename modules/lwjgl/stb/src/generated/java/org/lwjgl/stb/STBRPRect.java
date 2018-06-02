@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct stbrp_rect {
  *     int id;
  *     stbrp_coord w;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     stbrp_coord x;
  *     stbrp_coord y;
  *     int was_packed;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct stbrp_rect")
 public class STBRPRect extends Struct implements NativeResource {
@@ -47,6 +47,7 @@ public class STBRPRect extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

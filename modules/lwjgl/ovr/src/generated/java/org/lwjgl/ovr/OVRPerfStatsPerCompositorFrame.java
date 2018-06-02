@@ -35,8 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code AppQueueAheadTime} &ndash; 
  * amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU and GPU utilization.
  * 
- * <p>A value of 0.0 would mean the CPU & GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would indicate
- * that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.</p></li>
+ * <p>A value of 0.0 would mean the CPU &amp; GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would
+ * indicate that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.</p></li>
  * <li>{@code AppCpuElapsedTime} &ndash; 
  * amount of time in seconds spent on the CPU by the app's render-thread that calls {@link OVR#ovr_SubmitFrame SubmitFrame}.
  * 
@@ -85,7 +85,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrPerfStatsPerCompositorFrame {
  *     int HmdVsyncIndex;
  *     int AppFrameIndex;
@@ -105,7 +105,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     int AswActivatedToggleCount;
  *     int AswPresentedFrameCount;
  *     int AswFailedFrameCount;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrPerfStatsPerCompositorFrame")
 public class OVRPerfStatsPerCompositorFrame extends Struct {
@@ -113,6 +113,7 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

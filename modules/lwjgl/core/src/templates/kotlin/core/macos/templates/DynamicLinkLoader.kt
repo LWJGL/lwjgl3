@@ -12,7 +12,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         "<dlfcn.h>"
     )
 
-    documentation = "Native bindings to <dlfcn.h>."
+    documentation = "Native bindings to &lt;dlfcn.h&gt;."
 
     IntConstant(
         "The {@code mode} argument to #dlopen() contains one of the following.",

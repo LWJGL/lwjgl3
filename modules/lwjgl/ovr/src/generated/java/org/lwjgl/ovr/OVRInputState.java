@@ -42,7 +42,7 @@ import static org.lwjgl.ovr.OVR.ovrHand_Count;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrInputState {
  *     double TimeInSeconds;
  *     unsigned int Buttons;
@@ -57,7 +57,7 @@ import static org.lwjgl.ovr.OVR.ovrHand_Count;
  *     float IndexTriggerRaw[ovrHand_Count];
  *     float HandTriggerRaw[ovrHand_Count];
  *     {@link OVRVector2f ovrVector2f} ThumbstickRaw[ovrHand_Count];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrInputState")
 public class OVRInputState extends Struct implements NativeResource {
@@ -65,6 +65,7 @@ public class OVRInputState extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

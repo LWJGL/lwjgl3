@@ -66,8 +66,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
             """,
             "Added new built-in functions truncate() and round() to the shading language.",
             """
-            A new built-in variable accessible from within vertex shaders that holds the index <i> implicitly passed to ArrayElement to specify the vertex.
-            This is called the vertex ID.
+            A new built-in variable accessible from within vertex shaders that holds the index {@code i} implicitly passed to ArrayElement to specify the
+            vertex. This is called the vertex ID.
             """,
             """
             A new built-in variable accessible from within fragment and geometry shaders that hold the index of the currently processed primitive. This is

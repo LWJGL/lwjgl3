@@ -87,7 +87,7 @@ public final class SQLNCLI {
         SQL_SOPT_SS_NAME_SCOPE                = SQL_SOPT_SS_BASE+12,
         SQL_SOPT_SS_MAX_USED                  = SQL_SOPT_SS_NAME_SCOPE;
 
-    /** {@link SQL#SQLColAttribute ColAttribute} & {@link SQL#SQLSetDescField SetDescField}/{@link SQL#SQLGetDescField GetDescField} driver specific defines. */
+    /** {@link SQL#SQLColAttribute ColAttribute} &amp; {@link SQL#SQLSetDescField SetDescField}/{@link SQL#SQLGetDescField GetDescField} driver specific defines. */
     public static final short
         SQL_CA_SS_BASE                              = 1200,
         SQL_CA_SS_COLUMN_SSTYPE                     = SQL_CA_SS_BASE+0,

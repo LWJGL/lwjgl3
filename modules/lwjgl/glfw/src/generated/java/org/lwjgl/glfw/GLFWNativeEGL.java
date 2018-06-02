@@ -79,8 +79,6 @@ public class GLFWNativeEGL {
      * 
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
-     * @param window 
-     *
      * @return the {@code EGLSurface} of the specified window, or {@link EGL10#EGL_NO_SURFACE} if an error occurred
      *
      * @since version 3.0

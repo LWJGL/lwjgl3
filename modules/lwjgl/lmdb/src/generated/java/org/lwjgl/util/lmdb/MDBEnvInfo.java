@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct MDB_envinfo {
  *     void * me_mapaddr;
  *     mdb_size_t me_mapsize;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     mdb_size_t me_last_txnid;
  *     unsigned int me_maxreaders;
  *     unsigned int me_numreaders;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct MDB_envinfo")
 public class MDBEnvInfo extends Struct implements NativeResource {
@@ -47,6 +47,7 @@ public class MDBEnvInfo extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

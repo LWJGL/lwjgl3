@@ -14,14 +14,14 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * bool (*) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
  *     size_t size,
  *     bool committed,
  *     unsigned int arena_ind
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("extent_dalloc_t")
@@ -50,12 +50,6 @@ public interface ExtentDallocI extends CallbackI.Z {
      * {@code committed}/decommited memory as indicated, on behalf of arena {@code arena_ind}, returning false upon success. If the function returns true, this
      * indicates opt-out from deallocation; the virtual memory mapping associated with the extent remains mapped, in the same commit state, and available for
      * future use, in which case it will be automatically retained for later reuse.</p>
-     *
-     * @param extent_hooks 
-     * @param addr         
-     * @param size         
-     * @param committed    
-     * @param arena_ind    
      */
     @NativeType("bool") boolean invoke(@NativeType("extent_hooks_t *") long extent_hooks, @NativeType("void *") long addr, @NativeType("size_t") long size, @NativeType("bool") boolean committed, @NativeType("unsigned int") int arena_ind);
 

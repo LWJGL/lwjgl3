@@ -44,14 +44,16 @@ private val CLBinding = Generator.register(object : APIBinding(
         if (documentation.isEmpty())
             println("$t/** $injectedJavaDoc */")
         else {
-            print("$t/**\n$t * <p>$injectedJavaDoc</p>\n$t * \n")
             if (documentation.indexOf('\n') == -1) {
+                println("$t/**")
                 print("$t * ")
-                println(documentation.substring("$t/** ".length, documentation.length - 3))
-                println("$t */")
+                print(documentation.substring("$t/** ".length, documentation.length - " */".length))
             } else {
-                println(documentation.substring("$t/**\n".length))
+                print(documentation.substring(0, documentation.length - "\n$t */".length))
             }
+            print("\n$t * ")
+            print("\n$t * @see $injectedJavaDoc")
+            println("\n$t */")
         }
     }
 

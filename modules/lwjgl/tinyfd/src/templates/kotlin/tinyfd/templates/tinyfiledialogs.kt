@@ -22,7 +22,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
             "message / question",
             "input / password",
             "save file",
-            "open file & multiple files",
+            "open file &amp; multiple files",
             "select folder",
             "color picker"
         )}
@@ -50,7 +50,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         """
         Can be modified at run time.
 
-        For unix & windows: 0 (graphic mode) or 1 (console mode).
+        For unix &amp; windows: 0 (graphic mode) or 1 (console mode).
 
         0: try to use a graphic solution, if it fails then it uses console mode.
         1: forces all dialogs into console mode even when the X server is present. It will use the package dialog or dialog.exe if installed. On windows it

@@ -48,10 +48,10 @@ public class OVRVk {
      * 
      * <p>Example code:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *  char extensionNames[4096];
      *  uint32_t extensionNamesSize = sizeof(extensionNames);
-     *  ovr_GetInstanceExtensionsVk(luid, extensionsnames, &extensionNamesSize);
+     *  ovr_GetInstanceExtensionsVk(luid, extensionsnames, &amp;extensionNamesSize);
      * 
      *  uint32_t extensionCount = 0;
      *  const char* extensionNamePtrs[256];
@@ -66,7 +66,7 @@ public class OVRVk {
      *  VkInstanceCreateInfo info = { ... };
      *  info.enabledExtensionCount = extensionCount;
      *  info.ppEnabledExtensionNames = extensionNamePtrs;
-     *  [...]</pre></code>
+     *  [...]</code></pre>
      *
      * @param luid                    specifies the {@code luid} for the relevant GPU, which is returned from {@link OVR#ovr_Create Create}.
      * @param extensionNames          a character buffer which will receive a list of extension name strings, separated by a single space char between each extension
@@ -229,11 +229,10 @@ public class OVRVk {
     /**
      * Gets a specific {@code VkImage} within the chain.
      *
-     * @param session   an {@code ovrSession} previously returned by {@link OVR#ovr_Create Create}
-     * @param chain     an {@code ovrTextureSwapChain} previously returned by {@link #ovr_CreateTextureSwapChainVk CreateTextureSwapChainVk}
-     * @param index     the index within the chain to retrieve. Must be between 0 and length (see {@link OVR#ovr_GetTextureSwapChainLength GetTextureSwapChainLength}), or may pass -1 to get the buffer at the
-     *                  {@code CurrentIndex} location (saving a call to {@link OVR#ovr_GetTextureSwapChainCurrentIndex GetTextureSwapChainCurrentIndex}).
-     * @param out_Image 
+     * @param session an {@code ovrSession} previously returned by {@link OVR#ovr_Create Create}
+     * @param chain   an {@code ovrTextureSwapChain} previously returned by {@link #ovr_CreateTextureSwapChainVk CreateTextureSwapChainVk}
+     * @param index   the index within the chain to retrieve. Must be between 0 and length (see {@link OVR#ovr_GetTextureSwapChainLength GetTextureSwapChainLength}), or may pass -1 to get the buffer at the
+     *                {@code CurrentIndex} location (saving a call to {@link OVR#ovr_GetTextureSwapChainCurrentIndex GetTextureSwapChainCurrentIndex}).
      *
      * @return an {@code ovrResult} indicating success or failure. In the case of failure, use {@link OVR#ovr_GetLastErrorInfo GetLastErrorInfo} to get more information.
      */

@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDisplayPlaneCapabilitiesKHR {
  *     VkDisplayPlaneAlphaFlagsKHR supportedAlpha;
  *     {@link VkOffset2D VkOffset2D} minSrcPosition;
@@ -59,13 +59,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkOffset2D VkOffset2D} maxDstPosition;
  *     {@link VkExtent2D VkExtent2D} minDstExtent;
  *     {@link VkExtent2D VkExtent2D} maxDstExtent;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDisplayPlaneCapabilitiesKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

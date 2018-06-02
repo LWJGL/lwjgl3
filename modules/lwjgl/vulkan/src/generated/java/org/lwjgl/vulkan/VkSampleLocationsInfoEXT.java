@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkSampleLocationsInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -66,13 +66,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkExtent2D VkExtent2D} sampleLocationGridSize;
  *     uint32_t sampleLocationsCount;
  *     {@link VkSampleLocationEXT VkSampleLocationEXT const} * pSampleLocations;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

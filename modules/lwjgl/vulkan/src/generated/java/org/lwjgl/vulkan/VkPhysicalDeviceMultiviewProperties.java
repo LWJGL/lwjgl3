@@ -33,19 +33,20 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceMultiviewProperties {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t maxMultiviewViewCount;
  *     uint32_t maxMultiviewInstanceIndex;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceMultiviewProperties extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

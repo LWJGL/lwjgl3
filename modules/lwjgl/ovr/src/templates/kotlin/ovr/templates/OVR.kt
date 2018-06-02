@@ -141,8 +141,8 @@ ENABLE_WARNINGS()""")
 
             Prefer using this origin when your application requires the physical floor height to match the virtual floor height, such as standing experiences.
             When used, all poses in ##OVRTrackingState are reported as an offset transform from the profile calibrated floor pose. Calling
-            #RecenterTrackingOrigin() will recenter the X & Z axes as well as yaw, but the Y-axis (i.e. height) will continue to be reported using the floor
-            height as the origin for all poses.
+            #RecenterTrackingOrigin() will recenter the X &amp; Z axes as well as yaw, but the Y-axis (i.e. height) will continue to be reported using the
+            floor height as the origin for all poses.
             """
         )
     ).javaDocLinks
@@ -410,8 +410,8 @@ ENABLE_WARNINGS()""")
         "CameraStatus_None".enum("Initial state of camera.", 0x0),
         "CameraStatus_Connected".enum("Bit set when the camera is connected to the system.", 0x1),
         "CameraStatus_Calibrating".enum("Bit set when the camera is undergoing calibration.", 0x2),
-        "CameraStatus_CalibrationFailed".enum("Bit set when the camera has tried & failed calibration.", 0x4),
-        "CameraStatus_Calibrated".enum("Bit set when the camera has tried & passed calibration.", 0x8),
+        "CameraStatus_CalibrationFailed".enum("Bit set when the camera has tried &amp; failed calibration.", 0x4),
+        "CameraStatus_Calibrated".enum("Bit set when the camera has tried &amp; passed calibration.", 0x8),
         "CameraStatus_Capturing".enum("Bit set when the camera is capturing.", 0x10)
     )
 
@@ -1565,8 +1565,8 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 
     EnumConstant(
         """
-        Performance HUD enables the HMD user to see information critical to the real-time operation of the VR application such as latency timing, and CPU & GPU
-        performance metrics.
+        Performance HUD enables the HMD user to see information critical to the real-time operation of the VR application such as latency timing, and CPU &amp;
+        GPU performance metrics.
 
         App can toggle performance HUD modes as such:
         ${codeBlock("""
@@ -1580,7 +1580,7 @@ ovr_SetInt(session, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
         "PerfHud_AppRenderTiming".enum("Shows render timing info for application"),
         "PerfHud_CompRenderTiming".enum("Shows render timing info for OVR compositor"),
         "PerfHud_AwsStats".enum("Shows Async Spacewarp-specific info", 6),
-        "PerfHud_VersionInfo".enum("Shows SDK & HMD version Info", 5)
+        "PerfHud_VersionInfo".enum("Shows SDK &amp; HMD version Info", 5)
     )
 
     EnumConstant(

@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkSamplerYcbcrConversionInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkSamplerYcbcrConversion conversion;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInfo {
 

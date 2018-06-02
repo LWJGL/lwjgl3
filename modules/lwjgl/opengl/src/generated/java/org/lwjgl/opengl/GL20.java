@@ -205,9 +205,9 @@ public class GL20 {
     // --- [ glCreateProgram ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glCreateProgram">Reference Page</a></p>
-     * 
      * Creates a program object.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glCreateProgram">Reference Page</a>
      */
     @NativeType("GLuint")
     public static native int glCreateProgram();
@@ -215,23 +215,23 @@ public class GL20 {
     // --- [ glDeleteProgram ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDeleteProgram">Reference Page</a></p>
-     * 
      * Deletes a program object.
      *
      * @param program the program object to be deleted
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteProgram">Reference Page</a>
      */
     public static native void glDeleteProgram(@NativeType("GLuint") int program);
 
     // --- [ glIsProgram ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glIsProgram">Reference Page</a></p>
-     * 
      * Returns {@link GL11#GL_TRUE TRUE} if {@code program} is the name of a program object. If {@code program} is zero, or a non-zero value that is not the name of a program
      * object, IsProgram returns {@link GL11#GL_FALSE FALSE}. No error is generated if program is not a valid program object name.
      *
      * @param program the program object name to query
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glIsProgram">Reference Page</a>
      */
     @NativeType("GLboolean")
     public static native boolean glIsProgram(@NativeType("GLuint") int program);
@@ -239,11 +239,11 @@ public class GL20 {
     // --- [ glCreateShader ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glCreateShader">Reference Page</a></p>
-     * 
      * Creates a shader object.
      *
      * @param type the type of shader to be created. One of:<br><table><tr><td>{@link #GL_VERTEX_SHADER VERTEX_SHADER}</td><td>{@link #GL_FRAGMENT_SHADER FRAGMENT_SHADER}</td><td>{@link GL32#GL_GEOMETRY_SHADER GEOMETRY_SHADER}</td><td>{@link GL40#GL_TESS_CONTROL_SHADER TESS_CONTROL_SHADER}</td></tr><tr><td>{@link GL40#GL_TESS_EVALUATION_SHADER TESS_EVALUATION_SHADER}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShader">Reference Page</a>
      */
     @NativeType("GLuint")
     public static native int glCreateShader(@NativeType("GLenum") int type);
@@ -251,23 +251,23 @@ public class GL20 {
     // --- [ glDeleteShader ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDeleteShader">Reference Page</a></p>
-     * 
      * Deletes a shader object.
      *
      * @param shader the shader object to be deleted
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteShader">Reference Page</a>
      */
     public static native void glDeleteShader(@NativeType("GLuint") int shader);
 
     // --- [ glIsShader ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glIsShader">Reference Page</a></p>
-     * 
      * Returns {@link GL11#GL_TRUE TRUE} if {@code shader} is the name of a shader object. If {@code shader} is zero, or a nonzero value that is not the name of a shader
      * object, IsShader returns {@link GL11#GL_FALSE FALSE}. No error is generated if shader is not a valid shader object name.
      *
      * @param shader the shader object name to query
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glIsShader">Reference Page</a>
      */
     @NativeType("GLboolean")
     public static native boolean glIsShader(@NativeType("GLuint") int shader);
@@ -275,8 +275,6 @@ public class GL20 {
     // --- [ glAttachShader ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glAttachShader">Reference Page</a></p>
-     * 
      * Attaches a shader object to a program object.
      * 
      * <p>In order to create a complete shader program, there must be a way to specify the list of things that will be linked together. Program objects provide
@@ -292,18 +290,20 @@ public class GL20 {
      *
      * @param program the program object to which a shader object will be attached
      * @param shader  the shader object that is to be attached
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glAttachShader">Reference Page</a>
      */
     public static native void glAttachShader(@NativeType("GLuint") int program, @NativeType("GLuint") int shader);
 
     // --- [ glDetachShader ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDetachShader">Reference Page</a></p>
-     * 
      * Detaches a shader object from a program object to which it is attached.
      *
      * @param program the program object from which to detach the shader object
      * @param shader  the shader object to be detached
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDetachShader">Reference Page</a>
      */
     public static native void glDetachShader(@NativeType("GLuint") int program, @NativeType("GLuint") int shader);
 
@@ -317,8 +317,6 @@ public class GL20 {
     public static native void nglShaderSource(int shader, int count, long strings, long length);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a></p>
-     * 
      * Sets the source code in {@code shader} to the source code in the array of strings specified by {@code strings}. Any source code previously stored in the
      * shader object is completely replaced. The number of strings in the array is specified by {@code count}. If {@code length} is {@code NULL}, each string is
      * assumed to be null terminated. If {@code length} is a value other than {@code NULL}, it points to an array containing a string length for each of the
@@ -329,6 +327,8 @@ public class GL20 {
      * @param shader  the shader object whose source code is to be replaced
      * @param strings an array of pointers to strings containing the source code to be loaded into the shader
      * @param length  an array of string lengths
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
     public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") PointerBuffer strings, @Nullable @NativeType("GLint const *") IntBuffer length) {
         if (CHECKS) {
@@ -338,8 +338,6 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a></p>
-     * 
      * Sets the source code in {@code shader} to the source code in the array of strings specified by {@code strings}. Any source code previously stored in the
      * shader object is completely replaced. The number of strings in the array is specified by {@code count}. If {@code length} is {@code NULL}, each string is
      * assumed to be null terminated. If {@code length} is a value other than {@code NULL}, it points to an array containing a string length for each of the
@@ -349,6 +347,8 @@ public class GL20 {
      *
      * @param shader  the shader object whose source code is to be replaced
      * @param strings an array of pointers to strings containing the source code to be loaded into the shader
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
     public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") CharSequence... strings) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -362,8 +362,6 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a></p>
-     * 
      * Sets the source code in {@code shader} to the source code in the array of strings specified by {@code strings}. Any source code previously stored in the
      * shader object is completely replaced. The number of strings in the array is specified by {@code count}. If {@code length} is {@code NULL}, each string is
      * assumed to be null terminated. If {@code length} is a value other than {@code NULL}, it points to an array containing a string length for each of the
@@ -372,6 +370,8 @@ public class GL20 {
      * parsed at this time; they are simply copied into the specified shader object.
      *
      * @param shader the shader object whose source code is to be replaced
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
     public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -387,91 +387,89 @@ public class GL20 {
     // --- [ glCompileShader ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glCompileShader">Reference Page</a></p>
-     * 
      * Compiles a shader object.
      *
      * @param shader the shader object to be compiled
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glCompileShader">Reference Page</a>
      */
     public static native void glCompileShader(@NativeType("GLuint") int shader);
 
     // --- [ glLinkProgram ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glLinkProgram">Reference Page</a></p>
-     * 
      * Links a program object.
      *
      * @param program the program object to be linked
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glLinkProgram">Reference Page</a>
      */
     public static native void glLinkProgram(@NativeType("GLuint") int program);
 
     // --- [ glUseProgram ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUseProgram">Reference Page</a></p>
-     * 
      * Installs a program object as part of current rendering state.
      *
      * @param program the program object whose executables are to be used as part of current rendering state
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUseProgram">Reference Page</a>
      */
     public static native void glUseProgram(@NativeType("GLuint") int program);
 
     // --- [ glValidateProgram ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glValidateProgram">Reference Page</a></p>
-     * 
      * Validates a program object.
      *
      * @param program the program object to be validated
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glValidateProgram">Reference Page</a>
      */
     public static native void glValidateProgram(@NativeType("GLuint") int program);
 
     // --- [ glUniform1f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a float uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param v0       the uniform value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform1f(@NativeType("GLint") int location, @NativeType("GLfloat") float v0);
 
     // --- [ glUniform2f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a vec2 uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param v0       the uniform x value
      * @param v1       the uniform y value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform2f(@NativeType("GLint") int location, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1);
 
     // --- [ glUniform3f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a vec3 uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param v0       the uniform x value
      * @param v1       the uniform y value
      * @param v2       the uniform z value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform3f(@NativeType("GLint") int location, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2);
 
     // --- [ glUniform4f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a vec4 uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
@@ -479,53 +477,53 @@ public class GL20 {
      * @param v1       the uniform y value
      * @param v2       the uniform z value
      * @param v3       the uniform w value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform4f(@NativeType("GLint") int location, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2, @NativeType("GLfloat") float v3);
 
     // --- [ glUniform1i ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of an int uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param v0       the uniform value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform1i(@NativeType("GLint") int location, @NativeType("GLint") int v0);
 
     // --- [ glUniform2i ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of an ivec2 uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param v0       the uniform x value
      * @param v1       the uniform y value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform2i(@NativeType("GLint") int location, @NativeType("GLint") int v0, @NativeType("GLint") int v1);
 
     // --- [ glUniform3i ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of an ivec3 uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param v0       the uniform x value
      * @param v1       the uniform y value
      * @param v2       the uniform z value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform3i(@NativeType("GLint") int location, @NativeType("GLint") int v0, @NativeType("GLint") int v1, @NativeType("GLint") int v2);
 
     // --- [ glUniform4i ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of an ivec4 uniform variable for the current program object.
      *
      * @param location the location of the uniform variable to be modified
@@ -533,6 +531,8 @@ public class GL20 {
      * @param v1       the uniform y value
      * @param v2       the uniform z value
      * @param v3       the uniform w value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static native void glUniform4i(@NativeType("GLint") int location, @NativeType("GLint") int v0, @NativeType("GLint") int v1, @NativeType("GLint") int v2, @NativeType("GLint") int v3);
 
@@ -546,12 +546,12 @@ public class GL20 {
     public static native void nglUniform1fv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single float uniform variable or a float uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform1fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniform1fv(location, value.remaining(), memAddress(value));
@@ -567,12 +567,12 @@ public class GL20 {
     public static native void nglUniform2fv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single vec2 uniform variable or a vec2 uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform2fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniform2fv(location, value.remaining() >> 1, memAddress(value));
@@ -588,12 +588,12 @@ public class GL20 {
     public static native void nglUniform3fv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single vec3 uniform variable or a vec3 uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform3fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniform3fv(location, value.remaining() / 3, memAddress(value));
@@ -609,12 +609,12 @@ public class GL20 {
     public static native void nglUniform4fv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single vec4 uniform variable or a vec4 uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform4fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniform4fv(location, value.remaining() >> 2, memAddress(value));
@@ -630,12 +630,12 @@ public class GL20 {
     public static native void nglUniform1iv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single int uniform variable or a int uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform1iv(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         nglUniform1iv(location, value.remaining(), memAddress(value));
@@ -651,12 +651,12 @@ public class GL20 {
     public static native void nglUniform2iv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single ivec2 uniform variable or an ivec2 uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform2iv(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         nglUniform2iv(location, value.remaining() >> 1, memAddress(value));
@@ -672,12 +672,12 @@ public class GL20 {
     public static native void nglUniform3iv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single ivec3 uniform variable or an ivec3 uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform3iv(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         nglUniform3iv(location, value.remaining() / 3, memAddress(value));
@@ -693,12 +693,12 @@ public class GL20 {
     public static native void nglUniform4iv(int location, int count, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single ivec4 uniform variable or an ivec4 uniform variable array for the current program object.
      *
      * @param location the location of the uniform variable to be modified
      * @param value    a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform4iv(@NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
         nglUniform4iv(location, value.remaining() >> 2, memAddress(value));
@@ -714,13 +714,13 @@ public class GL20 {
     public static native void nglUniformMatrix2fv(int location, int count, boolean transpose, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single mat2 uniform variable or a mat2 uniform variable array for the current program object.
      *
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix2fv(location, value.remaining() >> 2, transpose, memAddress(value));
@@ -736,13 +736,13 @@ public class GL20 {
     public static native void nglUniformMatrix3fv(int location, int count, boolean transpose, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single mat3 uniform variable or a mat3 uniform variable array for the current program object.
      *
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix3fv(location, value.remaining() / 9, transpose, memAddress(value));
@@ -758,13 +758,13 @@ public class GL20 {
     public static native void nglUniformMatrix4fv(int location, int count, boolean transpose, long value);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Specifies the value of a single mat4 uniform variable or a mat4 uniform variable array for the current program object.
      *
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
         nglUniformMatrix4fv(location, value.remaining() >> 4, transpose, memAddress(value));
@@ -776,13 +776,13 @@ public class GL20 {
     public static native void nglGetShaderiv(int shader, int pname, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShader">Reference Page</a></p>
-     * 
      * Returns a parameter from a shader object.
      *
      * @param shader the shader object to be queried
      * @param pname  the object parameter. One of:<br><table><tr><td>{@link #GL_SHADER_TYPE SHADER_TYPE}</td><td>{@link #GL_DELETE_STATUS DELETE_STATUS}</td><td>{@link #GL_COMPILE_STATUS COMPILE_STATUS}</td><td>{@link #GL_INFO_LOG_LENGTH INFO_LOG_LENGTH}</td><td>{@link #GL_SHADER_SOURCE_LENGTH SHADER_SOURCE_LENGTH}</td></tr></table>
      * @param params the requested object parameter
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShader">Reference Page</a>
      */
     public static void glGetShaderiv(@NativeType("GLuint") int shader, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
@@ -792,12 +792,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShader">Reference Page</a></p>
-     * 
      * Returns a parameter from a shader object.
      *
      * @param shader the shader object to be queried
      * @param pname  the object parameter. One of:<br><table><tr><td>{@link #GL_SHADER_TYPE SHADER_TYPE}</td><td>{@link #GL_DELETE_STATUS DELETE_STATUS}</td><td>{@link #GL_COMPILE_STATUS COMPILE_STATUS}</td><td>{@link #GL_INFO_LOG_LENGTH INFO_LOG_LENGTH}</td><td>{@link #GL_SHADER_SOURCE_LENGTH SHADER_SOURCE_LENGTH}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShader">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetShaderi(@NativeType("GLuint") int shader, @NativeType("GLenum") int pname) {
@@ -817,13 +817,13 @@ public class GL20 {
     public static native void nglGetProgramiv(int program, int pname, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgram">Reference Page</a></p>
-     * 
      * Returns a parameter from a program object.
      *
      * @param program the program object to be queried
      * @param pname   the object parameter. One of:<br><table><tr><td>{@link #GL_DELETE_STATUS DELETE_STATUS}</td><td>{@link #GL_LINK_STATUS LINK_STATUS}</td><td>{@link #GL_VALIDATE_STATUS VALIDATE_STATUS}</td></tr><tr><td>{@link #GL_INFO_LOG_LENGTH INFO_LOG_LENGTH}</td><td>{@link #GL_ATTACHED_SHADERS ATTACHED_SHADERS}</td><td>{@link #GL_ACTIVE_ATTRIBUTES ACTIVE_ATTRIBUTES}</td></tr><tr><td>{@link #GL_ACTIVE_ATTRIBUTE_MAX_LENGTH ACTIVE_ATTRIBUTE_MAX_LENGTH}</td><td>{@link #GL_ACTIVE_UNIFORMS ACTIVE_UNIFORMS}</td><td>{@link #GL_ACTIVE_UNIFORM_MAX_LENGTH ACTIVE_UNIFORM_MAX_LENGTH}</td></tr><tr><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER_MODE TRANSFORM_FEEDBACK_BUFFER_MODE}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_VARYINGS TRANSFORM_FEEDBACK_VARYINGS}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH}</td></tr><tr><td>{@link GL31#GL_ACTIVE_UNIFORM_BLOCKS ACTIVE_UNIFORM_BLOCKS}</td><td>{@link GL31#GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH}</td><td>{@link GL32#GL_GEOMETRY_VERTICES_OUT GEOMETRY_VERTICES_OUT}</td></tr><tr><td>{@link GL32#GL_GEOMETRY_INPUT_TYPE GEOMETRY_INPUT_TYPE}</td><td>{@link GL32#GL_GEOMETRY_OUTPUT_TYPE GEOMETRY_OUTPUT_TYPE}</td><td>{@link GL41#GL_PROGRAM_BINARY_LENGTH PROGRAM_BINARY_LENGTH}</td></tr><tr><td>{@link GL42#GL_ACTIVE_ATOMIC_COUNTER_BUFFERS ACTIVE_ATOMIC_COUNTER_BUFFERS}</td><td>{@link GL43#GL_COMPUTE_WORK_GROUP_SIZE COMPUTE_WORK_GROUP_SIZE}</td></tr></table>
      * @param params  the requested object parameter
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgram">Reference Page</a>
      */
     public static void glGetProgramiv(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
@@ -833,12 +833,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgram">Reference Page</a></p>
-     * 
      * Returns a parameter from a program object.
      *
      * @param program the program object to be queried
      * @param pname   the object parameter. One of:<br><table><tr><td>{@link #GL_DELETE_STATUS DELETE_STATUS}</td><td>{@link #GL_LINK_STATUS LINK_STATUS}</td><td>{@link #GL_VALIDATE_STATUS VALIDATE_STATUS}</td></tr><tr><td>{@link #GL_INFO_LOG_LENGTH INFO_LOG_LENGTH}</td><td>{@link #GL_ATTACHED_SHADERS ATTACHED_SHADERS}</td><td>{@link #GL_ACTIVE_ATTRIBUTES ACTIVE_ATTRIBUTES}</td></tr><tr><td>{@link #GL_ACTIVE_ATTRIBUTE_MAX_LENGTH ACTIVE_ATTRIBUTE_MAX_LENGTH}</td><td>{@link #GL_ACTIVE_UNIFORMS ACTIVE_UNIFORMS}</td><td>{@link #GL_ACTIVE_UNIFORM_MAX_LENGTH ACTIVE_UNIFORM_MAX_LENGTH}</td></tr><tr><td>{@link GL30#GL_TRANSFORM_FEEDBACK_BUFFER_MODE TRANSFORM_FEEDBACK_BUFFER_MODE}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_VARYINGS TRANSFORM_FEEDBACK_VARYINGS}</td><td>{@link GL30#GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH}</td></tr><tr><td>{@link GL31#GL_ACTIVE_UNIFORM_BLOCKS ACTIVE_UNIFORM_BLOCKS}</td><td>{@link GL31#GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH}</td><td>{@link GL32#GL_GEOMETRY_VERTICES_OUT GEOMETRY_VERTICES_OUT}</td></tr><tr><td>{@link GL32#GL_GEOMETRY_INPUT_TYPE GEOMETRY_INPUT_TYPE}</td><td>{@link GL32#GL_GEOMETRY_OUTPUT_TYPE GEOMETRY_OUTPUT_TYPE}</td><td>{@link GL41#GL_PROGRAM_BINARY_LENGTH PROGRAM_BINARY_LENGTH}</td></tr><tr><td>{@link GL42#GL_ACTIVE_ATOMIC_COUNTER_BUFFERS ACTIVE_ATOMIC_COUNTER_BUFFERS}</td><td>{@link GL43#GL_COMPUTE_WORK_GROUP_SIZE COMPUTE_WORK_GROUP_SIZE}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgram">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetProgrami(@NativeType("GLuint") int program, @NativeType("GLenum") int pname) {
@@ -862,13 +862,13 @@ public class GL20 {
     public static native void nglGetShaderInfoLog(int shader, int maxLength, long length, long infoLog);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a></p>
-     * 
      * Returns the information log for a shader object.
      *
      * @param shader  the shader object whose information log is to be queried
      * @param length  the length of the string returned in {@code infoLog} (excluding the null terminator)
      * @param infoLog an array of characters that is used to return the information log
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a>
      */
     public static void glGetShaderInfoLog(@NativeType("GLuint") int shader, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
         if (CHECKS) {
@@ -878,12 +878,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a></p>
-     * 
      * Returns the information log for a shader object.
      *
      * @param shader    the shader object whose information log is to be queried
      * @param maxLength the size of the character buffer for storing the returned information log
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetShaderInfoLog(@NativeType("GLuint") int shader, @NativeType("GLsizei") int maxLength) {
@@ -900,11 +900,11 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a></p>
-     * 
      * Returns the information log for a shader object.
      *
      * @param shader the shader object whose information log is to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetShaderInfoLog(@NativeType("GLuint") int shader) {
@@ -921,13 +921,13 @@ public class GL20 {
     public static native void nglGetProgramInfoLog(int program, int maxLength, long length, long infoLog);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a></p>
-     * 
      * Returns the information log for a program object.
      *
      * @param program the program object whose information log is to be queried
      * @param length  the length of the string returned in {@code infoLog} (excluding the null terminator)
      * @param infoLog an array of characters that is used to return the information log
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a>
      */
     public static void glGetProgramInfoLog(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
         if (CHECKS) {
@@ -937,12 +937,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a></p>
-     * 
      * Returns the information log for a program object.
      *
      * @param program   the program object whose information log is to be queried
      * @param maxLength the size of the character buffer for storing the returned information log
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetProgramInfoLog(@NativeType("GLuint") int program, @NativeType("GLsizei") int maxLength) {
@@ -959,11 +959,11 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a></p>
-     * 
      * Returns the information log for a program object.
      *
      * @param program the program object whose information log is to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetProgramInfoLog(@NativeType("GLuint") int program) {
@@ -980,13 +980,13 @@ public class GL20 {
     public static native void nglGetAttachedShaders(int program, int maxCount, long count, long shaders);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetAttachedShaders">Reference Page</a></p>
-     * 
      * Returns the shader objects attached to a program object.
      *
      * @param program the program object to be queried
      * @param count   the number of names actually returned in {@code shaders}
      * @param shaders an array that is used to return the names of attached shader objects
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetAttachedShaders">Reference Page</a>
      */
     public static void glGetAttachedShaders(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") IntBuffer count, @NativeType("GLuint *") IntBuffer shaders) {
         if (CHECKS) {
@@ -1001,12 +1001,12 @@ public class GL20 {
     public static native int nglGetUniformLocation(int program, long name);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniformLocation">Reference Page</a></p>
-     * 
      * Returns the location of a uniform variable.
      *
      * @param program the program object to be queried
      * @param name    a null terminated string containing the name of the uniform variable whose location is to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformLocation">Reference Page</a>
      */
     @NativeType("GLint")
     public static int glGetUniformLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") ByteBuffer name) {
@@ -1017,12 +1017,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniformLocation">Reference Page</a></p>
-     * 
      * Returns the location of a uniform variable.
      *
      * @param program the program object to be queried
      * @param name    a null terminated string containing the name of the uniform variable whose location is to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformLocation">Reference Page</a>
      */
     @NativeType("GLint")
     public static int glGetUniformLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
@@ -1045,8 +1045,6 @@ public class GL20 {
     public static native void nglGetActiveUniform(int program, int index, int maxLength, long length, long size, long type, long name);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a></p>
-     * 
      * Returns information about an active uniform variable for the specified program object.
      *
      * @param program the program object to be queried
@@ -1055,6 +1053,8 @@ public class GL20 {
      * @param size    the size of the uniform variable
      * @param type    the data type of the uniform variable
      * @param name    a null terminated string containing the name of the uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a>
      */
     public static void glGetActiveUniform(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
         if (CHECKS) {
@@ -1066,8 +1066,6 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a></p>
-     * 
      * Returns information about an active uniform variable for the specified program object.
      *
      * @param program   the program object to be queried
@@ -1075,6 +1073,8 @@ public class GL20 {
      * @param maxLength the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}
      * @param size      the size of the uniform variable
      * @param type      the data type of the uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetActiveUniform(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLsizei") int maxLength, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
@@ -1094,14 +1094,14 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a></p>
-     * 
      * Returns information about an active uniform variable for the specified program object.
      *
      * @param program the program object to be queried
      * @param index   the index of the uniform variable to be queried
      * @param size    the size of the uniform variable
      * @param type    the data type of the uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetActiveUniform(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
@@ -1114,13 +1114,13 @@ public class GL20 {
     public static native void nglGetUniformfv(int program, int location, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a></p>
-     * 
      * Returns the float value(s) of a uniform variable.
      *
      * @param program  the program object to be queried
      * @param location the location of the uniform variable to be queried
      * @param params   the value of the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetUniformfv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") FloatBuffer params) {
         if (CHECKS) {
@@ -1130,12 +1130,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a></p>
-     * 
      * Returns the float value(s) of a uniform variable.
      *
      * @param program  the program object to be queried
      * @param location the location of the uniform variable to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
     public static float glGetUniformf(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
@@ -1155,13 +1155,13 @@ public class GL20 {
     public static native void nglGetUniformiv(int program, int location, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a></p>
-     * 
      * Returns the int value(s) of a uniform variable.
      *
      * @param program  the program object to be queried
      * @param location the location of the uniform variable to be queried
      * @param params   the value of the specified uniform variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
@@ -1171,12 +1171,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a></p>
-     * 
      * Returns the int value(s) of a uniform variable.
      *
      * @param program  the program object to be queried
      * @param location the location of the uniform variable to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetUniformi(@NativeType("GLuint") int program, @NativeType("GLint") int location) {
@@ -1200,13 +1200,13 @@ public class GL20 {
     public static native void nglGetShaderSource(int shader, int maxLength, long length, long source);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a></p>
-     * 
      * Returns the source code string from a shader object.
      *
      * @param shader the shader object to be queried
      * @param length the length of the string returned in source (excluding the null terminator)
      * @param source an array of characters that is used to return the source code string
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a>
      */
     public static void glGetShaderSource(@NativeType("GLuint") int shader, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer source) {
         if (CHECKS) {
@@ -1216,12 +1216,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a></p>
-     * 
      * Returns the source code string from a shader object.
      *
      * @param shader    the shader object to be queried
      * @param maxLength the size of the character buffer for storing the returned source code string
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetShaderSource(@NativeType("GLuint") int shader, @NativeType("GLsizei") int maxLength) {
@@ -1238,11 +1238,11 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a></p>
-     * 
      * Returns the source code string from a shader object.
      *
      * @param shader the shader object to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetShaderSource(@NativeType("GLuint") int shader) {
@@ -1252,125 +1252,123 @@ public class GL20 {
     // --- [ glVertexAttrib1f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0f and w to 1.0f.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib1f(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0);
 
     // --- [ glVertexAttrib1s ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Short version of {@link #glVertexAttrib1f VertexAttrib1f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib1s(@NativeType("GLuint") int index, @NativeType("GLshort") short v0);
 
     // --- [ glVertexAttrib1d ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Double version of {@link #glVertexAttrib1f VertexAttrib1f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib1d(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0);
 
     // --- [ glVertexAttrib2f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0f and w to 1.0f.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib2f(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1);
 
     // --- [ glVertexAttrib2s ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Short version of {@link #glVertexAttrib2f VertexAttrib2f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib2s(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1);
 
     // --- [ glVertexAttrib2d ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Double version of {@link #glVertexAttrib2f VertexAttrib2f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib2d(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1);
 
     // --- [ glVertexAttrib3f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0f.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib3f(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2);
 
     // --- [ glVertexAttrib3s ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Short version of {@link #glVertexAttrib3f VertexAttrib3f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib3s(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2);
 
     // --- [ glVertexAttrib3d ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Double version of {@link #glVertexAttrib3f VertexAttrib3f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v0    the vertex attribute x component
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib3d(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2);
 
     // --- [ glVertexAttrib4f ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Specifies the value of a generic vertex attribute.
      *
      * @param index the index of the generic vertex attribute to be modified
@@ -1378,14 +1376,14 @@ public class GL20 {
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
      * @param v3    the vertex attribute w component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib4f(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2, @NativeType("GLfloat") float v3);
 
     // --- [ glVertexAttrib4s ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Short version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
@@ -1393,14 +1391,14 @@ public class GL20 {
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
      * @param v3    the vertex attribute w component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib4s(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2, @NativeType("GLshort") short v3);
 
     // --- [ glVertexAttrib4d ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Double version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
@@ -1408,14 +1406,14 @@ public class GL20 {
      * @param v1    the vertex attribute y component
      * @param v2    the vertex attribute z component
      * @param v3    the vertex attribute w component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib4d(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2, @NativeType("GLdouble") double v3);
 
     // --- [ glVertexAttrib4Nub ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized unsigned byte version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
@@ -1423,6 +1421,8 @@ public class GL20 {
      * @param y     the vertex attribute y component
      * @param z     the vertex attribute z component
      * @param w     the vertex attribute w component
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttrib4Nub(@NativeType("GLuint") int index, @NativeType("GLubyte") byte x, @NativeType("GLubyte") byte y, @NativeType("GLubyte") byte z, @NativeType("GLubyte") byte w);
 
@@ -1432,12 +1432,12 @@ public class GL20 {
     public static native void nglVertexAttrib1fv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib1f VertexAttrib1f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib1fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -1452,12 +1452,12 @@ public class GL20 {
     public static native void nglVertexAttrib1sv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib1s VertexAttrib1s}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib1sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1472,12 +1472,12 @@ public class GL20 {
     public static native void nglVertexAttrib1dv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib1d VertexAttrib1d}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib1dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -1492,12 +1492,12 @@ public class GL20 {
     public static native void nglVertexAttrib2fv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib2f VertexAttrib2f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib2fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -1512,12 +1512,12 @@ public class GL20 {
     public static native void nglVertexAttrib2sv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib2s VertexAttrib2s}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib2sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1532,12 +1532,12 @@ public class GL20 {
     public static native void nglVertexAttrib2dv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib2d VertexAttrib2d}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib2dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -1552,12 +1552,12 @@ public class GL20 {
     public static native void nglVertexAttrib3fv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib3f VertexAttrib3f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib3fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -1572,12 +1572,12 @@ public class GL20 {
     public static native void nglVertexAttrib3sv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib3s VertexAttrib3s}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib3sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1592,12 +1592,12 @@ public class GL20 {
     public static native void nglVertexAttrib3dv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib3d VertexAttrib3d}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib3dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -1612,12 +1612,12 @@ public class GL20 {
     public static native void nglVertexAttrib4fv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
@@ -1632,12 +1632,12 @@ public class GL20 {
     public static native void nglVertexAttrib4sv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib4s VertexAttrib4s}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1652,12 +1652,12 @@ public class GL20 {
     public static native void nglVertexAttrib4dv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib4d VertexAttrib4d}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
@@ -1672,12 +1672,12 @@ public class GL20 {
     public static native void nglVertexAttrib4iv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Integer pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4iv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
@@ -1692,12 +1692,12 @@ public class GL20 {
     public static native void nglVertexAttrib4bv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Byte pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4bv(@NativeType("GLuint") int index, @NativeType("GLbyte const *") ByteBuffer v) {
         if (CHECKS) {
@@ -1712,12 +1712,12 @@ public class GL20 {
     public static native void nglVertexAttrib4ubv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Pointer version of {@link #glVertexAttrib4Nub VertexAttrib4Nub}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4ubv(@NativeType("GLuint") int index, @NativeType("GLubyte const *") ByteBuffer v) {
         if (CHECKS) {
@@ -1732,12 +1732,12 @@ public class GL20 {
     public static native void nglVertexAttrib4usv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Unsigned short pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4usv(@NativeType("GLuint") int index, @NativeType("GLushort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1752,12 +1752,12 @@ public class GL20 {
     public static native void nglVertexAttrib4uiv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Unsigned int pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
         if (CHECKS) {
@@ -1772,12 +1772,12 @@ public class GL20 {
     public static native void nglVertexAttrib4Nbv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized byte pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nbv(@NativeType("GLuint") int index, @NativeType("GLbyte const *") ByteBuffer v) {
         if (CHECKS) {
@@ -1792,12 +1792,12 @@ public class GL20 {
     public static native void nglVertexAttrib4Nsv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized short pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nsv(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1812,12 +1812,12 @@ public class GL20 {
     public static native void nglVertexAttrib4Niv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized int pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Niv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
@@ -1832,12 +1832,12 @@ public class GL20 {
     public static native void nglVertexAttrib4Nubv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized unsigned byte pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nubv(@NativeType("GLuint") int index, @NativeType("GLubyte const *") ByteBuffer v) {
         if (CHECKS) {
@@ -1852,12 +1852,12 @@ public class GL20 {
     public static native void nglVertexAttrib4Nusv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized unsigned short pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nusv(@NativeType("GLuint") int index, @NativeType("GLushort const *") ShortBuffer v) {
         if (CHECKS) {
@@ -1872,12 +1872,12 @@ public class GL20 {
     public static native void nglVertexAttrib4Nuiv(int index, long v);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Normalized unsigned int pointer version of {@link #glVertexAttrib4f VertexAttrib4f}.
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nuiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
         if (CHECKS) {
@@ -1892,8 +1892,6 @@ public class GL20 {
     public static native void nglVertexAttribPointer(int index, int size, int type, boolean normalized, int stride, long pointer);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a></p>
-     * 
      * Specifies the location and organization of a vertex attribute array.
      *
      * @param index      the index of the generic vertex attribute to be modified
@@ -1904,14 +1902,14 @@ public class GL20 {
      *                   the array. The initial value is 0.
      * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a>
      */
     public static void glVertexAttribPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
         nglVertexAttribPointer(index, size, type, normalized, stride, memAddress(pointer));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a></p>
-     * 
      * Specifies the location and organization of a vertex attribute array.
      *
      * @param index      the index of the generic vertex attribute to be modified
@@ -1922,14 +1920,14 @@ public class GL20 {
      *                   the array. The initial value is 0.
      * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a>
      */
     public static void glVertexAttribPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
         nglVertexAttribPointer(index, size, type, normalized, stride, pointer);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a></p>
-     * 
      * Specifies the location and organization of a vertex attribute array.
      *
      * @param index      the index of the generic vertex attribute to be modified
@@ -1940,14 +1938,14 @@ public class GL20 {
      *                   the array. The initial value is 0.
      * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a>
      */
     public static void glVertexAttribPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") ShortBuffer pointer) {
         nglVertexAttribPointer(index, size, type, normalized, stride, memAddress(pointer));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a></p>
-     * 
      * Specifies the location and organization of a vertex attribute array.
      *
      * @param index      the index of the generic vertex attribute to be modified
@@ -1958,14 +1956,14 @@ public class GL20 {
      *                   the array. The initial value is 0.
      * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a>
      */
     public static void glVertexAttribPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") IntBuffer pointer) {
         nglVertexAttribPointer(index, size, type, normalized, stride, memAddress(pointer));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a></p>
-     * 
      * Specifies the location and organization of a vertex attribute array.
      *
      * @param index      the index of the generic vertex attribute to be modified
@@ -1976,6 +1974,8 @@ public class GL20 {
      *                   the array. The initial value is 0.
      * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribPointer">Reference Page</a>
      */
     public static void glVertexAttribPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") FloatBuffer pointer) {
         nglVertexAttribPointer(index, size, type, normalized, stride, memAddress(pointer));
@@ -1984,22 +1984,22 @@ public class GL20 {
     // --- [ glEnableVertexAttribArray ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glEnableVertexAttribArray">Reference Page</a></p>
-     * 
      * Enables a generic vertex attribute array.
      *
      * @param index the index of the generic vertex attribute to be enabled
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glEnableVertexAttribArray">Reference Page</a>
      */
     public static native void glEnableVertexAttribArray(@NativeType("GLuint") int index);
 
     // --- [ glDisableVertexAttribArray ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDisableVertexAttribArray">Reference Page</a></p>
-     * 
      * Disables a generic vertex attribute array.
      *
      * @param index the index of the generic vertex attribute to be disabled
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDisableVertexAttribArray">Reference Page</a>
      */
     public static native void glDisableVertexAttribArray(@NativeType("GLuint") int index);
 
@@ -2009,13 +2009,13 @@ public class GL20 {
     public static native void nglBindAttribLocation(int program, int index, long name);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindAttribLocation">Reference Page</a></p>
-     * 
      * Associates a generic vertex attribute index with a named attribute variable.
      *
      * @param program the program object in which the association is to be made
      * @param index   the index of the generic vertex attribute to be bound
      * @param name    a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindAttribLocation">Reference Page</a>
      */
     public static void glBindAttribLocation(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLchar const *") ByteBuffer name) {
         if (CHECKS) {
@@ -2025,13 +2025,13 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBindAttribLocation">Reference Page</a></p>
-     * 
      * Associates a generic vertex attribute index with a named attribute variable.
      *
      * @param program the program object in which the association is to be made
      * @param index   the index of the generic vertex attribute to be bound
      * @param name    a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBindAttribLocation">Reference Page</a>
      */
     public static void glBindAttribLocation(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -2053,8 +2053,6 @@ public class GL20 {
     public static native void nglGetActiveAttrib(int program, int index, int maxLength, long length, long size, long type, long name);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a></p>
-     * 
      * Returns information about an active attribute variable for the specified program object.
      *
      * @param program the program object to be queried
@@ -2064,6 +2062,8 @@ public class GL20 {
      * @param size    the size of the attribute variable
      * @param type    the data type of the attribute variable
      * @param name    a null terminated string containing the name of the attribute variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a>
      */
     public static void glGetActiveAttrib(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
         if (CHECKS) {
@@ -2075,8 +2075,6 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a></p>
-     * 
      * Returns information about an active attribute variable for the specified program object.
      *
      * @param program   the program object to be queried
@@ -2084,6 +2082,8 @@ public class GL20 {
      * @param maxLength the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}
      * @param size      the size of the attribute variable
      * @param type      the data type of the attribute variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetActiveAttrib(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLsizei") int maxLength, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
@@ -2103,14 +2103,14 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a></p>
-     * 
      * Returns information about an active attribute variable for the specified program object.
      *
      * @param program the program object to be queried
      * @param index   the index of the attribute variable to be queried
      * @param size    the size of the attribute variable
      * @param type    the data type of the attribute variable
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetActiveAttrib(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
@@ -2123,12 +2123,12 @@ public class GL20 {
     public static native int nglGetAttribLocation(int program, long name);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetAttribLocation">Reference Page</a></p>
-     * 
      * Returns the location of an attribute variable.
      *
      * @param program the program object to be queried
      * @param name    a null terminated string containing the name of the attribute variable whose location is to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetAttribLocation">Reference Page</a>
      */
     @NativeType("GLint")
     public static int glGetAttribLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") ByteBuffer name) {
@@ -2139,12 +2139,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetAttribLocation">Reference Page</a></p>
-     * 
      * Returns the location of an attribute variable.
      *
      * @param program the program object to be queried
      * @param name    a null terminated string containing the name of the attribute variable whose location is to be queried
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetAttribLocation">Reference Page</a>
      */
     @NativeType("GLint")
     public static int glGetAttribLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
@@ -2163,13 +2163,13 @@ public class GL20 {
     public static native void nglGetVertexAttribiv(int index, int pname, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Returns the integer value of a generic vertex attribute parameter.
      *
      * @param index  the generic vertex attribute parameter to be queried
      * @param pname  the symbolic name of the vertex attribute parameter to be queried. One of:<br><table><tr><td>{@link GL15#GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING VERTEX_ATTRIB_ARRAY_BUFFER_BINDING}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_ENABLED VERTEX_ATTRIB_ARRAY_ENABLED}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_SIZE VERTEX_ATTRIB_ARRAY_SIZE}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_STRIDE VERTEX_ATTRIB_ARRAY_STRIDE}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_TYPE VERTEX_ATTRIB_ARRAY_TYPE}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_NORMALIZED VERTEX_ATTRIB_ARRAY_NORMALIZED}</td></tr><tr><td>{@link #GL_CURRENT_VERTEX_ATTRIB CURRENT_VERTEX_ATTRIB}</td><td>{@link GL30#GL_VERTEX_ATTRIB_ARRAY_INTEGER VERTEX_ATTRIB_ARRAY_INTEGER}</td></tr><tr><td>{@link GL33#GL_VERTEX_ATTRIB_ARRAY_DIVISOR VERTEX_ATTRIB_ARRAY_DIVISOR}</td></tr></table>
      * @param params returns the requested data
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribiv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
@@ -2179,12 +2179,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Returns the integer value of a generic vertex attribute parameter.
      *
      * @param index the generic vertex attribute parameter to be queried
      * @param pname the symbolic name of the vertex attribute parameter to be queried. One of:<br><table><tr><td>{@link GL15#GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING VERTEX_ATTRIB_ARRAY_BUFFER_BINDING}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_ENABLED VERTEX_ATTRIB_ARRAY_ENABLED}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_SIZE VERTEX_ATTRIB_ARRAY_SIZE}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_STRIDE VERTEX_ATTRIB_ARRAY_STRIDE}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_TYPE VERTEX_ATTRIB_ARRAY_TYPE}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_NORMALIZED VERTEX_ATTRIB_ARRAY_NORMALIZED}</td></tr><tr><td>{@link #GL_CURRENT_VERTEX_ATTRIB CURRENT_VERTEX_ATTRIB}</td><td>{@link GL30#GL_VERTEX_ATTRIB_ARRAY_INTEGER VERTEX_ATTRIB_ARRAY_INTEGER}</td></tr><tr><td>{@link GL33#GL_VERTEX_ATTRIB_ARRAY_DIVISOR VERTEX_ATTRIB_ARRAY_DIVISOR}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetVertexAttribi(@NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
@@ -2204,13 +2204,13 @@ public class GL20 {
     public static native void nglGetVertexAttribfv(int index, int pname, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Float version of {@link #glGetVertexAttribiv GetVertexAttribiv}.
      *
      * @param index  the generic vertex attribute parameter to be queried
      * @param pname  the symbolic name of the vertex attribute parameter to be queried
      * @param params returns the requested data
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribfv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLfloat *") FloatBuffer params) {
         if (CHECKS) {
@@ -2225,13 +2225,13 @@ public class GL20 {
     public static native void nglGetVertexAttribdv(int index, int pname, long params);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Double version of {@link #glGetVertexAttribiv GetVertexAttribiv}.
      *
      * @param index  the generic vertex attribute parameter to be queried
      * @param pname  the symbolic name of the vertex attribute parameter to be queried
      * @param params returns the requested data
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribdv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") DoubleBuffer params) {
         if (CHECKS) {
@@ -2246,13 +2246,13 @@ public class GL20 {
     public static native void nglGetVertexAttribPointerv(int index, int pname, long pointer);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttribPointerv">Reference Page</a></p>
-     * 
      * Returns the address of the specified generic vertex attribute pointer.
      *
      * @param index   the generic vertex attribute parameter to be queried
      * @param pname   the symbolic name of the generic vertex attribute parameter to be returned. Must be:<br><table><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_POINTER VERTEX_ATTRIB_ARRAY_POINTER}</td></tr></table>
      * @param pointer the pointer value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttribPointerv">Reference Page</a>
      */
     public static void glGetVertexAttribPointerv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("void **") PointerBuffer pointer) {
         if (CHECKS) {
@@ -2262,12 +2262,12 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttribPointerv">Reference Page</a></p>
-     * 
      * Returns the address of the specified generic vertex attribute pointer.
      *
      * @param index the generic vertex attribute parameter to be queried
      * @param pname the symbolic name of the generic vertex attribute parameter to be returned. Must be:<br><table><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_POINTER VERTEX_ATTRIB_ARRAY_POINTER}</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttribPointerv">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetVertexAttribPointer(@NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
@@ -2291,20 +2291,20 @@ public class GL20 {
     public static native void nglDrawBuffers(int n, long bufs);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawBuffers">Reference Page</a></p>
-     * 
      * Specifies a list of color buffers to be drawn into.
      *
      * @param bufs an array of symbolic constants specifying the buffers into which fragment colors or data values will be written. One of:<br><table><tr><td>{@link GL11#GL_NONE NONE}</td><td>{@link GL11#GL_FRONT_LEFT FRONT_LEFT}</td><td>{@link GL11#GL_FRONT_RIGHT FRONT_RIGHT}</td><td>{@link GL11#GL_BACK_LEFT BACK_LEFT}</td><td>{@link GL11#GL_BACK_RIGHT BACK_RIGHT}</td><td>{@link GL11#GL_AUX0 AUX0}</td><td>{@link GL11#GL_AUX1 AUX1}</td><td>{@link GL11#GL_AUX2 AUX2}</td></tr><tr><td>{@link GL11#GL_AUX3 AUX3}</td><td>{@link GL30#GL_COLOR_ATTACHMENT0 COLOR_ATTACHMENT0}</td><td>GL30.GL_COLOR_ATTACHMENT[1-15]</td></tr></table>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawBuffers">Reference Page</a>
      */
     public static void glDrawBuffers(@NativeType("GLenum const *") IntBuffer bufs) {
         nglDrawBuffers(bufs.remaining(), memAddress(bufs));
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawBuffers">Reference Page</a></p>
-     * 
      * Specifies a list of color buffers to be drawn into.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawBuffers">Reference Page</a>
      */
     public static void glDrawBuffers(@NativeType("GLenum const *") int buf) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -2319,20 +2319,18 @@ public class GL20 {
     // --- [ glBlendEquationSeparate ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glBlendEquationSeparate">Reference Page</a></p>
-     * 
      * Sets the RGB blend equation and the alpha blend equation separately.
      *
      * @param modeRGB   the RGB blend equation, how the red, green, and blue components of the source and destination colors are combined. One of:<br><table><tr><td>{@link GL14#GL_FUNC_ADD FUNC_ADD}</td><td>{@link GL14#GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link GL14#GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link GL14#GL_MIN MIN}</td><td>{@link GL14#GL_MAX MAX}</td></tr></table>
      * @param modeAlpha the alpha blend equation, how the alpha component of the source and destination colors are combined
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glBlendEquationSeparate">Reference Page</a>
      */
     public static native void glBlendEquationSeparate(@NativeType("GLenum") int modeRGB, @NativeType("GLenum") int modeAlpha);
 
     // --- [ glStencilOpSeparate ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glStencilOpSeparate">Reference Page</a></p>
-     * 
      * Sets front and/or back stencil test actions.
      *
      * @param face   whether front and/or back stencil state is updated. One of:<br><table><tr><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td></tr></table>
@@ -2340,14 +2338,14 @@ public class GL20 {
      * @param dpfail the stencil action when the stencil test passes, but the depth test fails. The initial value is GL_KEEP
      * @param dppass the stencil action when both the stencil test and the depth test pass, or when the stencil test passes and either there is no depth buffer or depth
      *               testing is not enabled. The initial value is GL_KEEP
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glStencilOpSeparate">Reference Page</a>
      */
     public static native void glStencilOpSeparate(@NativeType("GLenum") int face, @NativeType("GLenum") int sfail, @NativeType("GLenum") int dpfail, @NativeType("GLenum") int dppass);
 
     // --- [ glStencilFuncSeparate ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glStencilFuncSeparate">Reference Page</a></p>
-     * 
      * Sets front and/or back function and reference value for stencil testing.
      *
      * @param face whether front and/or back stencil state is updated. One of:<br><table><tr><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td></tr></table>
@@ -2355,25 +2353,27 @@ public class GL20 {
      * @param ref  the reference value for the stencil test. {@code ref} is clamped to the range [0, 2n &ndash; 1], where {@code n} is the number of bitplanes in the stencil
      *             buffer. The initial value is 0.
      * @param mask a mask that is ANDed with both the reference value and the stored stencil value when the test is done. The initial value is all 1's.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glStencilFuncSeparate">Reference Page</a>
      */
     public static native void glStencilFuncSeparate(@NativeType("GLenum") int face, @NativeType("GLenum") int func, @NativeType("GLint") int ref, @NativeType("GLuint") int mask);
 
     // --- [ glStencilMaskSeparate ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glStencilMaskSeparate">Reference Page</a></p>
-     * 
      * Controls the front and/or back writing of individual bits in the stencil planes.
      *
      * @param face whether front and/or back stencil writemask is updated. One of:<br><table><tr><td>{@link GL11#GL_FRONT FRONT}</td><td>{@link GL11#GL_BACK BACK}</td><td>{@link GL11#GL_FRONT_AND_BACK FRONT_AND_BACK}</td></tr></table>
      * @param mask a bit mask to enable and disable writing of individual bits in the stencil planes. Initially, the mask is all 1's.
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glStencilMaskSeparate">Reference Page</a>
      */
     public static native void glStencilMaskSeparate(@NativeType("GLenum") int face, @NativeType("GLuint") int mask);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a></p>
-     * 
      * Array version of: {@link #glShaderSource ShaderSource}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
     public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") PointerBuffer strings, @Nullable @NativeType("GLint const *") int[] length) {
         long __functionAddress = GL.getICD().glShaderSource;
@@ -2385,9 +2385,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform1fv Uniform1fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform1fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniform1fv;
@@ -2398,9 +2398,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform2fv Uniform2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform2fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniform2fv;
@@ -2411,9 +2411,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform3fv Uniform3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform3fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniform3fv;
@@ -2424,9 +2424,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform4fv Uniform4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform4fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniform4fv;
@@ -2437,9 +2437,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform1iv Uniform1iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform1iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform1iv;
@@ -2450,9 +2450,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform2iv Uniform2iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform2iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform2iv;
@@ -2463,9 +2463,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform3iv Uniform3iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform3iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform3iv;
@@ -2476,9 +2476,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniform4iv Uniform4iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniform4iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform4iv;
@@ -2489,9 +2489,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniformMatrix2fv UniformMatrix2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix2fv;
@@ -2502,9 +2502,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniformMatrix3fv UniformMatrix3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix3fv;
@@ -2515,9 +2515,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glUniformMatrix4fv UniformMatrix4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glUniformMatrix4fv;
@@ -2528,9 +2528,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShader">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetShaderiv GetShaderiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShader">Reference Page</a>
      */
     public static void glGetShaderiv(@NativeType("GLuint") int shader, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetShaderiv;
@@ -2542,9 +2542,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgram">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramiv GetProgramiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgram">Reference Page</a>
      */
     public static void glGetProgramiv(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetProgramiv;
@@ -2556,9 +2556,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetShaderInfoLog GetShaderInfoLog}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderInfoLog">Reference Page</a>
      */
     public static void glGetShaderInfoLog(@NativeType("GLuint") int shader, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer infoLog) {
         long __functionAddress = GL.getICD().glGetShaderInfoLog;
@@ -2570,9 +2570,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramInfoLog GetProgramInfoLog}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInfoLog">Reference Page</a>
      */
     public static void glGetProgramInfoLog(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer infoLog) {
         long __functionAddress = GL.getICD().glGetProgramInfoLog;
@@ -2584,9 +2584,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetAttachedShaders">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetAttachedShaders GetAttachedShaders}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetAttachedShaders">Reference Page</a>
      */
     public static void glGetAttachedShaders(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") int[] count, @NativeType("GLuint *") int[] shaders) {
         long __functionAddress = GL.getICD().glGetAttachedShaders;
@@ -2598,9 +2598,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetActiveUniform GetActiveUniform}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniform">Reference Page</a>
      */
     public static void glGetActiveUniform(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetActiveUniform;
@@ -2614,9 +2614,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetUniformfv GetUniformfv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetUniformfv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetUniformfv;
@@ -2628,9 +2628,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetUniformiv GetUniformiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniform">Reference Page</a>
      */
     public static void glGetUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetUniformiv;
@@ -2642,9 +2642,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetShaderSource GetShaderSource}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderSource">Reference Page</a>
      */
     public static void glGetShaderSource(@NativeType("GLuint") int shader, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer source) {
         long __functionAddress = GL.getICD().glGetShaderSource;
@@ -2656,9 +2656,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib1fv VertexAttrib1fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib1fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib1fv;
@@ -2670,9 +2670,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib1sv VertexAttrib1sv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib1sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib1sv;
@@ -2684,9 +2684,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib1dv VertexAttrib1dv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib1dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib1dv;
@@ -2698,9 +2698,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib2fv VertexAttrib2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib2fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib2fv;
@@ -2712,9 +2712,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib2sv VertexAttrib2sv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib2sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib2sv;
@@ -2726,9 +2726,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib2dv VertexAttrib2dv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib2dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib2dv;
@@ -2740,9 +2740,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib3fv VertexAttrib3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib3fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib3fv;
@@ -2754,9 +2754,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib3sv VertexAttrib3sv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib3sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib3sv;
@@ -2768,9 +2768,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib3dv VertexAttrib3dv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib3dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib3dv;
@@ -2782,9 +2782,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4fv VertexAttrib4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4fv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4fv;
@@ -2796,9 +2796,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4sv VertexAttrib4sv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4sv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4sv;
@@ -2810,9 +2810,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4dv VertexAttrib4dv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4dv;
@@ -2824,9 +2824,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4iv VertexAttrib4iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4iv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4iv;
@@ -2838,9 +2838,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4usv VertexAttrib4usv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4usv(@NativeType("GLuint") int index, @NativeType("GLushort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4usv;
@@ -2852,9 +2852,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4uiv VertexAttrib4uiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4uiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4uiv;
@@ -2866,9 +2866,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4Nsv VertexAttrib4Nsv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nsv(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4Nsv;
@@ -2880,9 +2880,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4Niv VertexAttrib4Niv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Niv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4Niv;
@@ -2894,9 +2894,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4Nusv VertexAttrib4Nusv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nusv(@NativeType("GLuint") int index, @NativeType("GLushort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4Nusv;
@@ -2908,9 +2908,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glVertexAttrib4Nuiv VertexAttrib4Nuiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttrib4Nuiv(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4Nuiv;
@@ -2922,9 +2922,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetActiveAttrib GetActiveAttrib}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveAttrib">Reference Page</a>
      */
     public static void glGetActiveAttrib(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetActiveAttrib;
@@ -2938,9 +2938,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetVertexAttribiv GetVertexAttribiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribiv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribiv;
@@ -2952,9 +2952,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetVertexAttribfv GetVertexAttribfv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribfv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribfv;
@@ -2966,9 +2966,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetVertexAttribdv GetVertexAttribdv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribdv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribdv;
@@ -2980,9 +2980,9 @@ public class GL20 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glDrawBuffers">Reference Page</a></p>
-     * 
      * Array version of: {@link #glDrawBuffers DrawBuffers}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glDrawBuffers">Reference Page</a>
      */
     public static void glDrawBuffers(@NativeType("GLenum const *") int[] bufs) {
         long __functionAddress = GL.getICD().glDrawBuffers;

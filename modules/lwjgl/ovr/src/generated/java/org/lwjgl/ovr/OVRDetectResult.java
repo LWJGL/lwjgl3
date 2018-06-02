@@ -35,12 +35,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrDetectResult {
  *     ovrBool IsOculusServiceRunning;
  *     ovrBool IsOculusHMDConnected;
  *     char[6];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrDetectResult")
 public class OVRDetectResult extends Struct implements NativeResource {
@@ -48,6 +48,7 @@ public class OVRDetectResult extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

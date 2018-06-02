@@ -52,8 +52,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramReleaseCallback.html">Reference Page</a></p>
-     * 
      * Registers a user callback function with a program object.
      * 
      * <p>Each call to {@code clSetProgramReleaseCallback} registers the specified user callback function on a callback stack associated with program. The
@@ -66,6 +64,8 @@ public class CL22 {
      *                   It is the applications responsibility to ensure that the callback function is thread safe.
      * @param user_data  a pointer to user supplied data. {@code user_data} will be passed as the {@code user_data} argument when {@code pfn_notify} is called.
      *                   {@code user_data} can be {@code NULL}.
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramReleaseCallback.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramReleaseCallback(@NativeType("cl_program") long program, @NativeType("void (*) (cl_program, void *)") CLProgramReleaseCallbackI pfn_notify, @NativeType("void *") long user_data) {
@@ -90,8 +90,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Sets the values of a SPIR-V specialization constants.
      * 
      * <p>Calling this function multiple times for the same specialization constant shall cause the last provided value to override any previously specified
@@ -118,6 +116,8 @@ public class CL22 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") ByteBuffer spec_value) {
@@ -125,8 +125,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Sets the values of a SPIR-V specialization constants.
      * 
      * <p>Calling this function multiple times for the same specialization constant shall cause the last provided value to override any previously specified
@@ -153,6 +151,8 @@ public class CL22 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") ShortBuffer spec_value) {
@@ -160,8 +160,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Sets the values of a SPIR-V specialization constants.
      * 
      * <p>Calling this function multiple times for the same specialization constant shall cause the last provided value to override any previously specified
@@ -188,6 +186,8 @@ public class CL22 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") IntBuffer spec_value) {
@@ -195,8 +195,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Sets the values of a SPIR-V specialization constants.
      * 
      * <p>Calling this function multiple times for the same specialization constant shall cause the last provided value to override any previously specified
@@ -223,6 +221,8 @@ public class CL22 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") LongBuffer spec_value) {
@@ -230,8 +230,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Sets the values of a SPIR-V specialization constants.
      * 
      * <p>Calling this function multiple times for the same specialization constant shall cause the last provided value to override any previously specified
@@ -258,6 +256,8 @@ public class CL22 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") FloatBuffer spec_value) {
@@ -265,8 +265,6 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Sets the values of a SPIR-V specialization constants.
      * 
      * <p>Calling this function multiple times for the same specialization constant shall cause the last provided value to override any previously specified
@@ -293,6 +291,8 @@ public class CL22 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") DoubleBuffer spec_value) {
@@ -300,9 +300,9 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clSetProgramSpecializationConstant SetProgramSpecializationConstant}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") short[] spec_value) {
@@ -315,9 +315,9 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clSetProgramSpecializationConstant SetProgramSpecializationConstant}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") int[] spec_value) {
@@ -330,9 +330,9 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clSetProgramSpecializationConstant SetProgramSpecializationConstant}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") long[] spec_value) {
@@ -345,9 +345,9 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clSetProgramSpecializationConstant SetProgramSpecializationConstant}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") float[] spec_value) {
@@ -360,9 +360,9 @@ public class CL22 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clSetProgramSpecializationConstant SetProgramSpecializationConstant}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetProgramSpecializationConstant.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetProgramSpecializationConstant(@NativeType("cl_program") long program, @NativeType("cl_uint") int spec_id, @NativeType("void const *") double[] spec_value) {

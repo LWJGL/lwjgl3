@@ -72,7 +72,7 @@ public class AMDDrawIndirectCount {
      * 
      * <p>To record a non-indexed draw call with a draw call count sourced from a buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndirectCountAMD(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
@@ -80,7 +80,7 @@ public class AMDDrawIndirectCount {
      *     VkBuffer                                    countBuffer,
      *     VkDeviceSize                                countBufferOffset,
      *     uint32_t                                    maxDrawCount,
-     *     uint32_t                                    stride);</pre></code>
+     *     uint32_t                                    stride);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -175,7 +175,7 @@ public class AMDDrawIndirectCount {
      * 
      * <p>To record an indexed draw call with a draw call count sourced from a buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndexedIndirectCountAMD(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
@@ -183,7 +183,7 @@ public class AMDDrawIndirectCount {
      *     VkBuffer                                    countBuffer,
      *     VkDeviceSize                                countBufferOffset,
      *     uint32_t                                    maxDrawCount,
-     *     uint32_t                                    stride);</pre></code>
+     *     uint32_t                                    stride);</code></pre>
      * 
      * <h5>Description</h5>
      * 

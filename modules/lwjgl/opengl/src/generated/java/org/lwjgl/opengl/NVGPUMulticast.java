@@ -80,11 +80,7 @@ public class NVGPUMulticast {
 
     // --- [ glRenderGpuMaskNV ] ---
 
-    /**
-     * Restricts render commands to a specific set of GPUs.
-     *
-     * @param mask 
-     */
+    /** Restricts render commands to a specific set of GPUs. */
     public static native void glRenderGpuMaskNV(@NativeType("GLbitfield") int mask);
 
     // --- [ glMulticastBufferSubDataNV ] ---

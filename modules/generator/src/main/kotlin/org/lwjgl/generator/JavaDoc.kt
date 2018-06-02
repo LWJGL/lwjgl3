@@ -7,7 +7,7 @@ package org.lwjgl.generator
 import java.lang.Math.*
 
 private val REDUNDANT_WHITESPACE = "^[ \\t]+$".toRegex(RegexOption.MULTILINE)
-private const val BLOCK_NODE = "(?:div|h[1-6]|code(?=><pre>)|(?<=</pre></)code|table|thead|tfoot|tbody|td|tr|ul|li|ol|dl|dt|dd)" // TODO: add more here if necessary
+private const val BLOCK_NODE = "(?:div|h[1-6]|pre|table|thead|tfoot|tbody|td|tr|ul|li|ol|dl|dt|dd)" // TODO: add more here if necessary
 private val FRAGMENT = "(</?$BLOCK_NODE(?:\\s[^>]+)?>|^)([\\s\\S]*?)(?=</?$BLOCK_NODE(?:\\s[^>]+)?>|$)".toRegex()
 private val CHILD_NODE = "<(?:tr|thead|tfoot|tbody|li|dt|dd)>".toRegex()
 private val PARAGRAPH_PATTERN = "\\n\\n(?:\\n?[ \\t]*[\\S][^\\n]*)+".toRegex(RegexOption.MULTILINE)
@@ -175,20 +175,24 @@ internal fun GeneratorTarget.toJavaDoc(
 
     return StringBuilder(if (documentation.isEmpty()) "" else documentation.cleanup())
         .apply {
+            val paramsWithJavadoc = params.filter { it.documentation != null }
             val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
 
-            if (params.any()) {
+            if (paramsWithJavadoc.any() || returnsStructValue) {
                 // Find maximum param name length
-                var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
+                var alignment = paramsWithJavadoc
+                    .map { it.name.length }
+                    .fold(0) { left, right -> Math.max(left, right) }
                 if (returnsStructValue)
                     alignment = Math.max(alignment, RESULT.length)
 
                 val multilineAligment = paramMultilineAligment(alignment)
 
                 if (isNotEmpty()) append("\n$t *")
-                params.forEach {
-                    printParam(it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
-                }
+                paramsWithJavadoc
+                    .forEach {
+                        printParam(it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
+                    }
                 if (returnsStructValue)
                     printParam(RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
             }
@@ -308,27 +312,40 @@ enum class LinkMode {
 
 infix fun String.mergeLargeLiteral(other: String): String = this.plus(other)
 
+private val HTML_ESCAPE_PATTERN = """[<>]|&(?![A-Za-z0-9#]+;)""".toRegex()
+
+private val String.htmlEscaped: String
+    get() = this.replace(HTML_ESCAPE_PATTERN) {
+        when (it.value) {
+            "<"  -> "&lt;"
+            ">"  -> "&gt;"
+            "&"  -> "&amp;"
+            else -> throw IllegalStateException()
+        }
+    }
+
 /** Useful for simple expressions. */
-fun code(code: String) = """<code>$code</code>"""
+fun code(code: String) = """<code>${code.htmlEscaped}</code>"""
 
 private val CODE_BLOCK_TRIM_PATTERN = """^\s*\n|\n\s*$""".toRegex() // first and/or last empty lines
 private val CODE_BLOCK_ESCAPE_PATTERN = "^".toRegex(RegexOption.MULTILINE) // line starts
 private val CODE_BLOCK_TAB_PATTERN = "\t".toRegex() // tabs
 
 /** Useful for pre-formatted code blocks. */
-fun codeBlock(code: String) = """<code><pre>
+fun codeBlock(code: String) = """<pre><code>
 ${code
+    .htmlEscaped
     .replace(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
     .replace(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF") // ...escape
     .replace(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
-}</pre></code>"""
+}</code></pre>"""
 
 fun note(content: String) = "<div style=\"margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;\"><h5>Note</h5>\n$content</div>"
 
 fun url(href: String, innerHTML: String) = """<a target="_blank" href="$href">$innerHTML</a>"""
 
-fun table(vararg rows: String, matrix: Boolean = false) = StringBuilder(512).run {
-    append("<table class=${if (matrix) "\"lwjgl matrix\"" else "lwjgl"}>")
+fun table(vararg rows: String) = StringBuilder(512).run {
+    append("<table class=striped>")
     for (row in rows) {
         append("\n$t")
         append(row)

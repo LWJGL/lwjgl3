@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     void *userdata,
  *     int index
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class NkValueGetter extends Callback implements NkValueGetterI {
 

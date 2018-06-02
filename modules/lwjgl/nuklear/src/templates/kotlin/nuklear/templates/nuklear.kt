@@ -83,8 +83,7 @@ ENABLE_WARNINGS()""")
         <h3>FONT</h3>
         Font handling in this library was designed to be quite customizable and lets you decide what you want to use and what you want to provide. There are
         three different ways to use the font atlas. The first two will use your font handling scheme and only requires essential data to run nuklear. The next
-        slightly more advanced features is font handling with vertex buffer output. <strike>Finally the most complex API wise is using nuklears font baking
-        API.</strike>
+        slightly more advanced features is font handling with vertex buffer output.
         ${ol(
             """
             Using your own implementation without vertex buffer output

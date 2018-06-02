@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDescriptorUpdateTemplateEntryKHR {
  *     uint32_t dstBinding;
  *     uint32_t dstArrayElement;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDescriptorType descriptorType;
  *     size_t offset;
  *     size_t stride;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateEntryKHR extends VkDescriptorUpdateTemplateEntry {
 

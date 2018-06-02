@@ -10,8 +10,8 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Examples</h5>
  * 
- * <code><pre>
- *     // TODO: Write some sample code here.</pre></code>
+ * <pre><code>
+ *     // TODO: Write some sample code here.</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

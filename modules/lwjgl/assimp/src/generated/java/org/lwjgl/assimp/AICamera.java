@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiCamera {
  *     {@link AIString struct aiString} mName;
  *     {@link AIVector3D struct aiVector3D} mPosition;
@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float mClipPlaneNear;
  *     float mClipPlaneFar;
  *     float mAspect;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiCamera")
 public class AICamera extends Struct implements NativeResource {
@@ -70,6 +70,7 @@ public class AICamera extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

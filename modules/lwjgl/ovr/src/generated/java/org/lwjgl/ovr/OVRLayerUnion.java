@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union ovrLayer_Union {
  *     {@link OVRLayerHeader ovrLayerHeader} Header;
  *     {@link OVRLayerEyeFov ovrLayerEyeFov} EyeFov;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link OVRLayerCylinder ovrLayerCylinder} Cylinder;
  *     {@link OVRLayerCube ovrLayerCube} Cube;
  *     {@link OVRLayerQuad ovrLayerQuad} Quad;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union ovrLayer_Union")
 public class OVRLayerUnion extends Struct implements NativeResource {
@@ -44,6 +44,7 @@ public class OVRLayerUnion extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

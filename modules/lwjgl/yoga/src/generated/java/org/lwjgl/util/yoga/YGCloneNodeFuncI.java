@@ -12,12 +12,12 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * YGNodeRef (*) (
  *     YGNodeRef oldNode,
  *     YGNodeRef owner,
  *     int childIndex
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("YGCloneNodeFunc")

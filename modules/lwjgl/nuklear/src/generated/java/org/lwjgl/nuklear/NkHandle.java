@@ -18,11 +18,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union nk_handle {
  *     void * ptr;
  *     int id;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union nk_handle")
 public class NkHandle extends Struct implements NativeResource {
@@ -30,6 +30,7 @@ public class NkHandle extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

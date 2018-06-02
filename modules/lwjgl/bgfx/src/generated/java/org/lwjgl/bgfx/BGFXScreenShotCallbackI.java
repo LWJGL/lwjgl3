@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_filePath,
@@ -24,7 +24,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     void const *_data,
  *     uint32_t _size,
  *     bool _yflip
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, void const *, uint32_t, bool)")

@@ -82,7 +82,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkImportSemaphoreWin32HandleInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -91,13 +91,14 @@ import org.lwjgl.system.windows.*;
  *     VkExternalSemaphoreHandleTypeFlagBits handleType;
  *     HANDLE handle;
  *     LPCWSTR name;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -184,7 +184,7 @@ val rpmalloc_global_statistics_t = struct(
     mutable = false
 ) {
     size_t.member("mapped", "Current amount of virtual memory mapped (only if {@code ENABLE_STATISTICS=1})")
-    size_t.member("cached", "Current amount of memory in global caches for small and medium sizes (<64KiB)")
+    size_t.member("cached", "Current amount of memory in global caches for small and medium sizes (&lt;64KiB)")
     size_t.member("mapped_total", "Total amount of memory mapped (only if {@code ENABLE_STATISTICS=1})")
     size_t.member("unmapped_total", "Total amount of memory unmapped (only if {@code ENABLE_STATISTICS=1})")
 }

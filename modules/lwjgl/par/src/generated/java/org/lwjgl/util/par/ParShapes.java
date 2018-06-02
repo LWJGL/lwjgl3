@@ -32,10 +32,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>When you’re done extracting the data you need from the mesh, be sure to free it:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * par_shapes_mesh* m = par_shapes_create_subdivided_sphere(1);
  * // ...
- * par_shapes_free_mesh(m);</pre></code>
+ * par_shapes_free_mesh(m);</code></pre>
  */
 public class ParShapes {
 
@@ -161,7 +161,6 @@ public class ParShapes {
      *
      * @param slices the number of slices
      * @param stacks the number of stacks
-     * @param radius 
      */
     @Nullable
     @NativeType("par_shapes_mesh *")

@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_hmd_eye_t {
  *     float rotation[4];
  *     float translation[3];
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float viewOffset[3];
  *     float projection[16];
  *     float pixelsPerTanAngle[2];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_hmd_eye_t")
 public class BGFXHmdEye extends Struct {
@@ -46,6 +46,7 @@ public class BGFXHmdEye extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

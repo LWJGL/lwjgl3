@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to <dlfcn.h>. */
+/** Native bindings to &lt;dlfcn.h&gt;. */
 public class DynamicLinkLoader {
 
     /** The {@code mode} argument to {@link #dlopen} contains one of the following. */

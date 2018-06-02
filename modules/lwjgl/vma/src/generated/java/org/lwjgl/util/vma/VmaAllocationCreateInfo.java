@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VmaAllocationCreateInfo {
  *     VmaAllocationCreateFlags flags;
  *     VmaMemoryUsage usage;
@@ -61,13 +61,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t memoryTypeBits;
  *     VmaPool pool;
  *     void * pUserData;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VmaAllocationCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

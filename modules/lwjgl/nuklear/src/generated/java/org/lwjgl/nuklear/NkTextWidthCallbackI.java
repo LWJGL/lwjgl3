@@ -14,13 +14,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     nk_handle handle,
  *     float h,
  *     char const *text,
  *     int len
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("nk_text_width_f")

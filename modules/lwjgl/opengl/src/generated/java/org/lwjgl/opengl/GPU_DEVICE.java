@@ -39,20 +39,21 @@ import org.lwjgl.system.windows.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct GPU_DEVICE {
  *     DWORD cb;
  *     CHAR DeviceName[32];
  *     CHAR DeviceString[128];
  *     DWORD Flags;
  *     {@link RECT RECT} rcVirtualScreen;
- * }</pre></code>
+ * }</code></pre>
  */
 public class GPU_DEVICE extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_texture_info_t {
  *     bgfx_texture_format_t format;
  *     uint32_t storageSize;
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t numMips;
  *     uint8_t bitsPerPixel;
  *     bool cubeMap;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_texture_info_t")
 public class BGFXTextureInfo extends Struct implements NativeResource {
@@ -53,6 +53,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

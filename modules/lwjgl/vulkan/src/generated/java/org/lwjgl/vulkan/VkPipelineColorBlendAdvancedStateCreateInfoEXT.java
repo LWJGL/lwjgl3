@@ -49,20 +49,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPipelineColorBlendAdvancedStateCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBool32 srcPremultiplied;
  *     VkBool32 dstPremultiplied;
  *     VkBlendOverlapEXT blendOverlap;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

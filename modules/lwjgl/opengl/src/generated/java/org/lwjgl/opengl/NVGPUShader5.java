@@ -20,8 +20,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs. Shaders using the
  * new functionality provided by this extension should enable this functionality via the construct</p>
  * 
- * <code><pre>
- * \#extension GL_NV_gpu_shader5 : require (or enable)</pre></code>
+ * <pre><code>
+ * \#extension GL_NV_gpu_shader5 : require (or enable)</code></pre>
  * 
  * <p>This extension was developed concurrently with the ARB_gpu_shader5 extension, and provides a superset of the features provided there. The features
  * common to both extensions are documented in the ARB_gpu_shader5 specification; this document describes only the addition language features not

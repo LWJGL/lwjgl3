@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * bool (*) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     size_t offset,
  *     size_t length,
  *     unsigned int arena_ind
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
 

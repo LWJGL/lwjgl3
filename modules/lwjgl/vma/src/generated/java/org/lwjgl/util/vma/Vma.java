@@ -33,13 +33,13 @@ import org.lwjgl.vulkan.*;
  * <li>Fill VmaAllocatorCreateInfo structure and create `VmaAllocator` object by calling vmaCreateAllocator().</li>
  * </ol>
  * 
- * <p><code>
-VmaAllocatorCreateInfo allocatorInfo = {};
-allocatorInfo.physicalDevice = physicalDevice;
-allocatorInfo.device = device;</p>
+ * <pre><code>
+ * VmaAllocatorCreateInfo allocatorInfo = {};
+ * allocatorInfo.physicalDevice = physicalDevice;
+ * allocatorInfo.device = device;
  * 
- * <p>VmaAllocator allocator;
-vmaCreateAllocator(&allocatorInfo, &allocator);</code></p>
+ * VmaAllocator allocator;
+ * vmaCreateAllocator(&amp;allocatorInfo, &amp;allocator);</code></pre>
  * 
  * <h4>Resource allocation</h4>
  * 
@@ -51,23 +51,23 @@ vmaCreateAllocator(&allocatorInfo, &allocator);</code></p>
  * <li>Call {@link #vmaCreateBuffer CreateBuffer} / {@link #vmaCreateImage CreateImage} to get {@code VkBuffer}/{@code VkImage} with memory already allocated and bound to it.</li>
  * </ol>
  * 
- * <p><code>
-VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-bufferInfo.size = 65536;
-bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;</p>
+ * <pre><code>
+ * VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+ * bufferInfo.size = 65536;
+ * bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
  * 
- * <p>VmaAllocationCreateInfo allocInfo = {};
-allocInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;</p>
+ * VmaAllocationCreateInfo allocInfo = {};
+ * allocInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
  * 
- * <p>VkBuffer buffer;
-VmaAllocation allocation;
-vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullptr);</code></p>
+ * VkBuffer buffer;
+ * VmaAllocation allocation;
+ * vmaCreateBuffer(allocator, &amp;bufferInfo, &amp;allocInfo, &amp;buffer, &amp;allocation, nullptr);</code></pre>
  * 
  * <p>Don't forget to destroy your objects when no longer needed:</p>
  * 
- * <p><code>
-vmaDestroyBuffer(allocator, buffer, allocation);
-vmaDestroyAllocator(allocator);</code></p>
+ * <pre><code>
+ * vmaDestroyBuffer(allocator, buffer, allocation);
+ * vmaDestroyAllocator(allocator);</code></pre>
  * 
  * <h3>Choosing memory type</h3>
  * 
@@ -101,7 +101,7 @@ vmaDestroyAllocator(allocator);</code></p>
  * <p>For example, if you want to create a uniform buffer that will be filled using transfer only once or infrequently and used for rendering every frame,
  * you can do it using following code:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
  * bufferInfo.size = 65536;
  * bufferInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
@@ -111,7 +111,7 @@ vmaDestroyAllocator(allocator);</code></p>
  * 
  * VkBuffer buffer;
  * VmaAllocation allocation;
- * vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullptr);</pre></code>
+ * vmaCreateBuffer(allocator, &amp;bufferInfo, &amp;allocInfo, &amp;buffer, &amp;allocation, nullptr);</code></pre>
  * 
  * <h4>Required and preferred flags</h4>
  * 
@@ -120,7 +120,7 @@ vmaDestroyAllocator(allocator);</code></p>
  * create a buffer that will be persistently mapped on host (so it must be {@code HOST_VISIBLE}) and preferably will also be {@code HOST_COHERENT} and
  * {@code HOST_CACHED}, use following code:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VmaAllocationCreateInfo allocInfo = {};
  * allocInfo.requiredFlags = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
  * allocInfo.preferredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_CACHED_BIT;
@@ -128,7 +128,7 @@ vmaDestroyAllocator(allocator);</code></p>
  * 
  * VkBuffer buffer;
  * VmaAllocation allocation;
- * vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullptr);</pre></code>
+ * vmaCreateBuffer(allocator, &amp;bufferInfo, &amp;allocInfo, &amp;buffer, &amp;allocation, nullptr);</code></pre>
  * 
  * <p>A memory type is chosen that has all the required flags and as many preferred flags set as possible.</p>
  * 
@@ -143,15 +143,15 @@ vmaDestroyAllocator(allocator);</code></p>
  * <p>Please note that this member is NOT just a memory type index. Still you can use it to choose just one, specific memory type. For example, if you
  * already determined that your buffer should be created in memory type 2, use following code:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * uint32_t memoryTypeIndex = 2;
  * 
  * VmaAllocationCreateInfo allocInfo = {};
- * allocInfo.memoryTypeBits = 1u << memoryTypeIndex;
+ * allocInfo.memoryTypeBits = 1u &lt;&lt; memoryTypeIndex;
  * 
  * VkBuffer buffer;
  * VmaAllocation allocation;
- * vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullptr);</pre></code>
+ * vmaCreateBuffer(allocator, &amp;bufferInfo, &amp;allocInfo, &amp;buffer, &amp;allocation, nullptr);</code></pre>
  * 
  * <h4>Custom memory pools</h4>
  * 
@@ -176,7 +176,7 @@ vmaDestroyAllocator(allocator);</code></p>
  * is that the library always maps entire memory block, not just region of the allocation. For further details, see description of {@link #vmaMapMemory MapMemory} function.
  * Example:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * // Having these objects initialized:
  * 
  * struct ConstantBuffer
@@ -192,9 +192,9 @@ vmaDestroyAllocator(allocator);</code></p>
  * // You can map and fill your buffer using following code:
  * 
  * void* mappedData;
- * vmaMapMemory(allocator, constantBufferAllocation, &mappedData);
- * memcpy(mappedData, &constantBufferData, sizeof(constantBufferData));
- * vmaUnmapMemory(allocator, constantBufferAllocation);</pre></code>
+ * vmaMapMemory(allocator, constantBufferAllocation, &amp;mappedData);
+ * memcpy(mappedData, &amp;constantBufferData, sizeof(constantBufferData));
+ * vmaUnmapMemory(allocator, constantBufferAllocation);</code></pre>
  * 
  * <h4>Persistently mapped memory</h4>
  * 
@@ -202,7 +202,7 @@ vmaDestroyAllocator(allocator);</code></p>
  * special feature designed for that: Allocations made with {@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag set in {@link VmaAllocationCreateInfo}{@code ::flags} stay mapped
  * all the time, so you can just access CPU pointer to it any time without a need to call any "map" or "unmap" function. Example:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
  * bufCreateInfo.size = sizeof(ConstantBuffer);
  * bufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
@@ -214,10 +214,10 @@ vmaDestroyAllocator(allocator);</code></p>
  * VkBuffer buf;
  * VmaAllocation alloc;
  * VmaAllocationInfo allocInfo;
- * vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
+ * vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, &amp;allocInfo);
  * 
  * // Buffer is already mapped. You can access its memory.
- * memcpy(allocInfo.pMappedData, &constantBufferData, sizeof(constantBufferData));</pre></code>
+ * memcpy(allocInfo.pMappedData, &amp;constantBufferData, sizeof(constantBufferData));</code></pre>
  * 
  * <p>There are some exceptions though, when you should consider mapping memory only for a short period of time:</p>
  * 
@@ -236,19 +236,19 @@ vmaDestroyAllocator(allocator);</code></p>
  * set, you need to manually invalidate cache before reading of mapped pointer using function {@code vkInvalidateMappedMemoryRanges()} and flush cache
  * after writing to mapped pointer using function {@code vkFlushMappedMemoryRanges()}. Example:</p>
  * 
- * <code><pre>
- * memcpy(allocInfo.pMappedData, &constantBufferData, sizeof(constantBufferData));
+ * <pre><code>
+ * memcpy(allocInfo.pMappedData, &amp;constantBufferData, sizeof(constantBufferData));
  * 
  * VkMemoryPropertyFlags memFlags;
- * vmaGetMemoryTypeProperties(allocator, allocInfo.memoryType, &memFlags);
- * if((memFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == 0)
+ * vmaGetMemoryTypeProperties(allocator, allocInfo.memoryType, &amp;memFlags);
+ * if((memFlags &amp; VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == 0)
  * {
  *     VkMappedMemoryRange memRange = { VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE };
  *     memRange.memory = allocInfo.deviceMemory;
  *     memRange.offset = allocInfo.offset;
  *     memRange.size   = allocInfo.size;
- *     vkFlushMappedMemoryRanges(device, 1, &memRange);
- * }</pre></code>
+ *     vkFlushMappedMemoryRanges(device, 1, &amp;memRange);
+ * }</code></pre>
  * 
  * <p>Please note that memory allocated with {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY} is guaranteed to be host coherent.</p>
  * 
@@ -265,64 +265,64 @@ vmaDestroyAllocator(allocator);</code></p>
  * inspect {@code allocInfo.memoryType}, call {@link #vmaGetMemoryTypeProperties GetMemoryTypeProperties}, and look for {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} flag in properties of
  * that memory type.</p>
  * 
- * <p><code>
-VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-bufCreateInfo.size = sizeof(ConstantBuffer);
-bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;</p>
+ * <pre><code>
+ * VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+ * bufCreateInfo.size = sizeof(ConstantBuffer);
+ * bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
  * 
- * <p>VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;</p>
+ * VmaAllocationCreateInfo allocCreateInfo = {};
+ * allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
  * 
- * <p>VkBuffer buf;
-VmaAllocation alloc;
-VmaAllocationInfo allocInfo;
-vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);</p>
+ * VkBuffer buf;
+ * VmaAllocation alloc;
+ * VmaAllocationInfo allocInfo;
+ * vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, &amp;allocInfo);
  * 
- * <p>VkMemoryPropertyFlags memFlags;
-vmaGetMemoryTypeProperties(allocator, allocInfo.memoryType, &memFlags);
-if((memFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) == 0)
-{
- * // Allocation ended up in mappable memory. You can map it and access it directly.
- * void* mappedData;
- * vmaMapMemory(allocator, alloc, &mappedData);
- * memcpy(mappedData, &constantBufferData, sizeof(constantBufferData));
- * vmaUnmapMemory(allocator, alloc);
-}
-else
-{
- * // Allocation ended up in non-mappable memory.
- * // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
-}</code></p>
+ * VkMemoryPropertyFlags memFlags;
+ * vmaGetMemoryTypeProperties(allocator, allocInfo.memoryType, &amp;memFlags);
+ * if((memFlags &amp; VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) == 0)
+ * {
+ *     // Allocation ended up in mappable memory. You can map it and access it directly.
+ *     void* mappedData;
+ *     vmaMapMemory(allocator, alloc, &amp;mappedData);
+ *     memcpy(mappedData, &amp;constantBufferData, sizeof(constantBufferData));
+ *     vmaUnmapMemory(allocator, alloc);
+ * }
+ * else
+ * {
+ *     // Allocation ended up in non-mappable memory.
+ *     // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
+ * }</code></pre>
  * 
  * <p>You can even use {@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag while creating allocations that are not necessarily {@code HOST_VISIBLE} (e.g. using
  * {@link #VMA_MEMORY_USAGE_GPU_ONLY MEMORY_USAGE_GPU_ONLY}). If the allocation ends up in memory type that is {@code HOST_VISIBL}E, it will be persistently mapped and you can use it
  * directly. If not, the flag is just ignored. Example:</p>
  * 
- * <p><code>
-VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-bufCreateInfo.size = sizeof(ConstantBuffer);
-bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;</p>
+ * <pre><code>
+ * VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+ * bufCreateInfo.size = sizeof(ConstantBuffer);
+ * bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
  * 
- * <p>VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
-allocCreateInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;</p>
+ * VmaAllocationCreateInfo allocCreateInfo = {};
+ * allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+ * allocCreateInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
  * 
- * <p>VkBuffer buf;
-VmaAllocation alloc;
-VmaAllocationInfo allocInfo;
-vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);</p>
+ * VkBuffer buf;
+ * VmaAllocation alloc;
+ * VmaAllocationInfo allocInfo;
+ * vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, &amp;allocInfo);
  * 
- * <p>if(allocInfo.pUserData != nullptr)
-{
- * // Allocation ended up in mappable memory.
- * // It's persistently mapped. You can access it directly.
- * memcpy(allocInfo.pMappedData, &constantBufferData, sizeof(constantBufferData));
-}
-else
-{
- * // Allocation ended up in non-mappable memory.
- * // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
-}</code></p>
+ * if(allocInfo.pUserData != nullptr)
+ * {
+ *     // Allocation ended up in mappable memory.
+ *     // It's persistently mapped. You can access it directly.
+ *     memcpy(allocInfo.pMappedData, &amp;constantBufferData, sizeof(constantBufferData));
+ * }
+ * else
+ * {
+ *     // Allocation ended up in non-mappable memory.
+ *     // You need to create CPU-side buffer in VMA_MEMORY_USAGE_CPU_ONLY and make a transfer.
+ * }</code></pre>
  * 
  * <h3>Custom memory pools</h3>
  * 
@@ -349,7 +349,7 @@ else
  * 
  * <p>Example:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * // Create a pool that can have at most 2 blocks, 128 MiB each.
  * VmaPoolCreateInfo poolCreateInfo = {};
  * poolCreateInfo.memoryTypeIndex = ...
@@ -357,7 +357,7 @@ else
  * poolCreateInfo.maxBlockCount = 2;
  * 
  * VmaPool pool;
- * vmaCreatePool(allocator, &poolCreateInfo, &pool);
+ * vmaCreatePool(allocator, &amp;poolCreateInfo, &amp;pool);
  * 
  * // Allocate a buffer out of it.
  * VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
@@ -370,13 +370,13 @@ else
  * VkBuffer buf;
  * VmaAllocation alloc;
  * VmaAllocationInfo allocInfo;
- * vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);</pre></code>
+ * vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, &amp;allocInfo);</code></pre>
  * 
  * <p>You have to free all allocations made from this pool before destroying it.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * vmaDestroyBuffer(allocator, buf, alloc);
- * vmaDestroyPool(allocator, pool);</pre></code>
+ * vmaDestroyPool(allocator, pool);</code></pre>
  * 
  * <h4>Choosing memory type index</h4>
  * 
@@ -384,7 +384,7 @@ else
  * {@link #vmaFindMemoryTypeIndexForBufferInfo FindMemoryTypeIndexForBufferInfo}, {@link #vmaFindMemoryTypeIndexForImageInfo FindMemoryTypeIndexForImageInfo}. You need to provide structures with example parameters of buffers or images
  * that you are going to create in that pool.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VkBufferCreateInfo exampleBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
  * exampleBufCreateInfo.size = 1024; // Whatever.
  * exampleBufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; // Change if needed.
@@ -393,11 +393,11 @@ else
  * allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY; // Change if needed.
  * 
  * uint32_t memTypeIndex;
- * vmaFindMemoryTypeIndexForBufferInfo(allocator, &exampleBufCreateInfo, &allocCreateInfo, &memTypeIndex);
+ * vmaFindMemoryTypeIndexForBufferInfo(allocator, &amp;exampleBufCreateInfo, &amp;allocCreateInfo, &amp;memTypeIndex);
  * 
  * VmaPoolCreateInfo poolCreateInfo = {};
  * poolCreateInfo.memoryTypeIndex = memTypeIndex;
- * // ...</pre></code>
+ * // ...</code></pre>
  * 
  * <p>When creating buffers/images allocated in that pool, provide following parameters:</p>
  * 
@@ -462,7 +462,7 @@ else
  * 
  * <p>Example code:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * struct MyBuffer
  * {
  *     VkBuffer m_Buf = nullptr;
@@ -498,8 +498,8 @@ else
  *     allocCreateInfo.flags = VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT |
  *         VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT;
  * 
- *     vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &m_Buf, &m_Alloc, nullptr);
- * }</pre></code>
+ *     vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;m_Buf, &amp;m_Alloc, nullptr);
+ * }</code></pre>
  * 
  * <p>When using lost allocations, you may see some Vulkan validation layer warnings about overlapping regions of memory bound to different kinds of buffers
  * and images. This is still valid as long as you implement proper handling of lost allocations (like in the example above) and don't use them.</p>
@@ -547,7 +547,7 @@ else
  * field when creating an allocation. It's an opaque {@code void*} pointer. You can use it e.g. as a pointer, some handle, index, key, ordinal number or
  * any other value that would associate the allocation with your custom metadata.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
  * // Fill bufferInfo...
  * 
@@ -559,14 +559,14 @@ else
  * 
  * VkBuffer buffer;
  * VmaAllocation allocation;
- * vmaCreateBuffer(allocator, &bufferInfo, &allocCreateInfo, &buffer, &allocation, nullptr);</pre></code>
+ * vmaCreateBuffer(allocator, &amp;bufferInfo, &amp;allocCreateInfo, &amp;buffer, &amp;allocation, nullptr);</code></pre>
  * 
  * <p>The pointer may be later retrieved as {@link VmaAllocationInfo}{@code ::pUserData}:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VmaAllocationInfo allocInfo;
- * vmaGetAllocationInfo(allocator, allocation, &allocInfo);
- * MyBufferMetadata* pMetadata = (MyBufferMetadata*)allocInfo.pUserData;</pre></code>
+ * vmaGetAllocationInfo(allocator, allocation, &amp;allocInfo);
+ * MyBufferMetadata* pMetadata = (MyBufferMetadata*)allocInfo.pUserData;</code></pre>
  * 
  * <p>It can also be changed using function {@link #vmaSetAllocationUserData SetAllocationUserData}.</p>
  * 
@@ -580,7 +580,7 @@ else
  * library creates internal copy of the string, so the pointer you pass doesn't need to be valid for whole lifetime of the allocation. You can free it
  * after the call.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VkImageCreateInfo imageInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
  * // Fill imageInfo...
  * 
@@ -594,16 +594,16 @@ else
  * 
  * VkImage image;
  * VmaAllocation allocation;
- * vmaCreateImage(allocator, &imageInfo, &allocCreateInfo, &image, &allocation, nullptr);</pre></code>
+ * vmaCreateImage(allocator, &amp;imageInfo, &amp;allocCreateInfo, &amp;image, &amp;allocation, nullptr);</code></pre>
  * 
  * <p>The value of {@code pUserData} pointer of the allocation will be different than the one you passed when setting allocation's name - pointing to a
  * buffer managed internally that holds copy of the string.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * VmaAllocationInfo allocInfo;
- * vmaGetAllocationInfo(allocator, allocation, &allocInfo);
+ * vmaGetAllocationInfo(allocator, allocation, &amp;allocInfo);
  * const char* imageName = (const char*)allocInfo.pUserData;
- * printf("Image name: %s\n", imageName);</pre></code>
+ * printf("Image name: %s\n", imageName);</code></pre>
  * 
  * <p>That string is also printed in JSON report created by {@link #vmaBuildStatsString BuildStatsString}.</p>
  * 
@@ -740,17 +740,17 @@ else
  * <p>2 . Use {@link #VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT} flag when creating your {@code VmaAllocator} to inform the library that you enabled required
  * extensions and you want the library to use them.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * allocatorInfo.flags |= VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT;
  * 
- * vmaCreateAllocator(&allocatorInfo, &allocator);</pre></code>
+ * vmaCreateAllocator(&amp;allocatorInfo, &amp;allocator);</code></pre>
  * 
  * <p>That's all. The extension will be automatically used whenever you create a buffer using {@link #vmaCreateBuffer CreateBuffer} or image using {@link #vmaCreateImage CreateImage}.</p>
  * 
  * <p>When using the extension together with Vulkan Validation Layer, you will receive warnings like this:</p>
  * 
- * <code><pre>
- * vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequirements() has not been called on that buffer.</pre></code>
+ * <pre><code>
+ * vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequirements() has not been called on that buffer.</code></pre>
  * 
  * <p>It is OK, you should just ignore it. It happens because you use function {@code vkGetBufferMemoryRequirements2KHR()} instead of standard
  * {@code vkGetBufferMemoryRequirements()}, while the validation layer seems to be unaware of it.</p>
@@ -833,8 +833,8 @@ public class Vma {
      * 
      * <p>When this flag is set, you can experience following warnings reported by Vulkan validation layer. You can ignore them.</p>
      * 
-     * <code><pre>
-     * > vkBindBufferMemory(): Binding memory to buffer 0x2d but vkGetBufferMemoryRequirements() has not been called on that buffer.</pre></code>
+     * <pre><code>
+     * &gt; vkBindBufferMemory(): Binding memory to buffer 0x2d but vkGetBufferMemoryRequirements() has not been called on that buffer.</code></pre>
      * </li>
      * </ul>
      */
@@ -1013,9 +1013,6 @@ public class Vma {
      * Creates Allocator object.
      * 
      * <p>LWJGL: Use {@link VmaVulkanFunctions}{@code ::set(VkInstance, VkDevice)} to populate the {@link VmaAllocatorCreateInfo}{@code ::pVulkanFunctions} struct.</p>
-     *
-     * @param pCreateInfo 
-     * @param pAllocator  
      */
     @NativeType("VkResult")
     public static int vmaCreateAllocator(@NativeType("VmaAllocatorCreateInfo const *") VmaAllocatorCreateInfo pCreateInfo, @NativeType("VmaAllocator *") PointerBuffer pAllocator) {
@@ -1031,11 +1028,7 @@ public class Vma {
     /** Unsafe version of: {@link #vmaDestroyAllocator DestroyAllocator} */
     public static native void nvmaDestroyAllocator(long allocator);
 
-    /**
-     * Destroys allocator object.
-     *
-     * @param allocator 
-     */
+    /** Destroys allocator object. */
     public static void vmaDestroyAllocator(@NativeType("VmaAllocator") long allocator) {
         if (CHECKS) {
             check(allocator);
@@ -1051,9 +1044,6 @@ public class Vma {
     /**
      * {@code PhysicalDeviceProperties} are fetched from {@code physicalDevice} by the allocator. You can access it here, without fetching it again on your
      * own.
-     *
-     * @param allocator                  
-     * @param ppPhysicalDeviceProperties 
      */
     public static void vmaGetPhysicalDeviceProperties(@NativeType("VmaAllocator") long allocator, @NativeType("VkPhysicalDeviceProperties const **") PointerBuffer ppPhysicalDeviceProperties) {
         if (CHECKS) {
@@ -1071,9 +1061,6 @@ public class Vma {
     /**
      * {@code PhysicalDeviceMemoryProperties} are fetched from {@code physicalDevice} by the allocator. You can access it here, without fetching it again on
      * your own.
-     *
-     * @param allocator                        
-     * @param ppPhysicalDeviceMemoryProperties 
      */
     public static void vmaGetMemoryProperties(@NativeType("VmaAllocator") long allocator, @NativeType("VkPhysicalDeviceMemoryProperties const **") PointerBuffer ppPhysicalDeviceMemoryProperties) {
         if (CHECKS) {
@@ -1092,10 +1079,6 @@ public class Vma {
      * Given Memory Type Index, returns Property Flags of this memory type.
      * 
      * <p>This is just a convenience function. Same information can be obtained using {@link #vmaGetMemoryProperties GetMemoryProperties}.</p>
-     *
-     * @param allocator       
-     * @param memoryTypeIndex 
-     * @param pFlags          
      */
     public static void vmaGetMemoryTypeProperties(@NativeType("VmaAllocator") long allocator, @NativeType("uint32_t") int memoryTypeIndex, @NativeType("VkMemoryPropertyFlags *") IntBuffer pFlags) {
         if (CHECKS) {
@@ -1115,9 +1098,6 @@ public class Vma {
      * 
      * <p>This function must be used if you make allocations with {@link #VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} and {@link #VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT} flags to
      * inform the allocator when a new frame begins. Allocations queried using {@link #vmaGetAllocationInfo GetAllocationInfo} cannot become lost in the current frame.</p>
-     *
-     * @param allocator  
-     * @param frameIndex 
      */
     public static void vmaSetCurrentFrameIndex(@NativeType("VmaAllocator") long allocator, @NativeType("uint32_t") int frameIndex) {
         if (CHECKS) {
@@ -1131,12 +1111,7 @@ public class Vma {
     /** Unsafe version of: {@link #vmaCalculateStats CalculateStats} */
     public static native void nvmaCalculateStats(long allocator, long pStats);
 
-    /**
-     * Retrieves statistics from current state of the Allocator.
-     *
-     * @param allocator 
-     * @param pStats    
-     */
+    /** Retrieves statistics from current state of the Allocator. */
     public static void vmaCalculateStats(@NativeType("VmaAllocator") long allocator, @NativeType("VmaStats *") VmaStats pStats) {
         if (CHECKS) {
             check(allocator);
@@ -1152,9 +1127,7 @@ public class Vma {
     /**
      * Builds and returns statistics as string in JSON format.
      *
-     * @param allocator     
      * @param ppStatsString must be freed using {@link #vmaFreeStatsString FreeStatsString} function
-     * @param detailedMap   
      */
     public static void vmaBuildStatsString(@NativeType("VmaAllocator") long allocator, @NativeType("char **") PointerBuffer ppStatsString, @NativeType("VkBool32") boolean detailedMap) {
         if (CHECKS) {
@@ -1206,11 +1179,6 @@ public class Vma {
      * <li>Has as many flags from {@code pAllocationCreateInfo->preferredFlags} as possible.</li>
      * </ul>
      *
-     * @param allocator             
-     * @param memoryTypeBits        
-     * @param pAllocationCreateInfo 
-     * @param pMemoryTypeIndex      
-     *
      * @return {@code VK_ERROR_FEATURE_NOT_PRESENT} if not found.
      *         
      *         <p>Receiving such result from this function or any other allocating function probably means that your device doesn't support any memory type with
@@ -1244,11 +1212,6 @@ public class Vma {
      * <li>{@link #vmaFindMemoryTypeIndex FindMemoryTypeIndex}</li>
      * <li>{@code vkDestroyBuffer}</li>
      * </ul>
-     *
-     * @param allocator             
-     * @param pBufferCreateInfo     
-     * @param pAllocationCreateInfo 
-     * @param pMemoryTypeIndex      
      */
     @NativeType("VkResult")
     public static int vmaFindMemoryTypeIndexForBufferInfo(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("uint32_t *") IntBuffer pMemoryTypeIndex) {
@@ -1278,11 +1241,6 @@ public class Vma {
      * <li>{@link #vmaFindMemoryTypeIndex FindMemoryTypeIndex}</li>
      * <li>{@code vkDestroyImage}</li>
      * </ul>
-     *
-     * @param allocator             
-     * @param pImageCreateInfo      
-     * @param pAllocationCreateInfo 
-     * @param pMemoryTypeIndex      
      */
     @NativeType("VkResult")
     public static int vmaFindMemoryTypeIndexForImageInfo(@NativeType("VmaAllocator") long allocator, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("uint32_t *") IntBuffer pMemoryTypeIndex) {
@@ -1321,12 +1279,7 @@ public class Vma {
     /** Unsafe version of: {@link #vmaDestroyPool DestroyPool} */
     public static native void nvmaDestroyPool(long allocator, long pool);
 
-    /**
-     * Destroys {@code VmaPool} object and frees Vulkan device memory.
-     *
-     * @param allocator 
-     * @param pool      
-     */
+    /** Destroys {@code VmaPool} object and frees Vulkan device memory. */
     public static void vmaDestroyPool(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool) {
         if (CHECKS) {
             check(allocator);
@@ -1410,11 +1363,8 @@ public class Vma {
      * 
      * <p>It is recommended to use {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}, {@link #vmaAllocateMemoryForImage AllocateMemoryForImage}, {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage} instead whenever possible.</p>
      *
-     * @param allocator             
-     * @param pVkMemoryRequirements 
-     * @param pCreateInfo           
-     * @param pAllocation           handle to allocated memory
-     * @param pAllocationInfo       information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
+     * @param pAllocation     handle to allocated memory
+     * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
     public static int vmaAllocateMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VkMemoryRequirements const *") VkMemoryRequirements pVkMemoryRequirements, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
@@ -1436,9 +1386,6 @@ public class Vma {
      * 
      * <p>You should free the memory using {@link #vmaFreeMemory FreeMemory}.</p>
      *
-     * @param allocator       
-     * @param buffer          
-     * @param pCreateInfo     
      * @param pAllocation     handle to allocated memory
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
@@ -1460,9 +1407,6 @@ public class Vma {
     /**
      * Function similar to {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}.
      *
-     * @param allocator       
-     * @param image           
-     * @param pCreateInfo     
      * @param pAllocation     handle to allocated memory
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
@@ -1481,12 +1425,7 @@ public class Vma {
     /** Unsafe version of: {@link #vmaFreeMemory FreeMemory} */
     public static native void nvmaFreeMemory(long allocator, long allocation);
 
-    /**
-     * Frees memory previously allocated using {@link #vmaAllocateMemory AllocateMemory}, {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}, or {@link #vmaAllocateMemoryForImage AllocateMemoryForImage}.
-     *
-     * @param allocator  
-     * @param allocation 
-     */
+    /** Frees memory previously allocated using {@link #vmaAllocateMemory AllocateMemory}, {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}, or {@link #vmaAllocateMemoryForImage AllocateMemoryForImage}. */
     public static void vmaFreeMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
             check(allocator);
@@ -1515,10 +1454,6 @@ public class Vma {
      * it if you are sure parameters don't change (e.g. due to defragmentation or allocation becoming lost).</li>
      * <li>If you just want to check if allocation is not lost, {@link #vmaTouchAllocation TouchAllocation} will work faster.</li>
      * </ul>
-     *
-     * @param allocator       
-     * @param allocation      
-     * @param pAllocationInfo 
      */
     public static void vmaGetAllocationInfo(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
@@ -1544,9 +1479,6 @@ public class Vma {
      * not be used. Lost allocation and the buffer/image still need to be destroyed.</p>
      * 
      * <p>If the allocation has been created without {@link #VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} flag, this function always returns {@code VK_TRUE}.</p>
-     *
-     * @param allocator  
-     * @param allocation 
      */
     @NativeType("VkBool32")
     public static boolean vmaTouchAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation) {
@@ -1572,10 +1504,6 @@ public class Vma {
      * 
      * <p>If the flag was not used, the value of pointer {@code pUserData} is just copied to allocation's {@code pUserData}. It is opaque, so you can use it
      * however you want - e.g. as a pointer, ordinal number or some handle to you own data.</p>
-     *
-     * @param allocator  
-     * @param allocation 
-     * @param pUserData  
      */
     public static void vmaSetAllocationUserData(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("void *") long pUserData) {
         if (CHECKS) {
@@ -1600,9 +1528,6 @@ public class Vma {
      * 
      * <p>Returned allocation is not tied to any specific memory pool or memory type and not bound to any image or buffer. It has size = 0. It cannot be turned
      * into a real, non-empty allocation.</p>
-     *
-     * @param allocator   
-     * @param pAllocation 
      */
     public static void vmaCreateLostAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation *") PointerBuffer pAllocation) {
         if (CHECKS) {
@@ -1642,10 +1567,6 @@ public class Vma {
      * 
      * <p>This function always fails when called for allocation that was created with {@link #VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} flag. Such allocations cannot be
      * mapped.</p>
-     *
-     * @param allocator  
-     * @param allocation 
-     * @param ppData     
      */
     @NativeType("VkResult")
     public static int vmaMapMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("void **") PointerBuffer ppData) {
@@ -1666,9 +1587,6 @@ public class Vma {
      * Unmaps memory represented by given allocation, mapped previously using {@link #vmaMapMemory MapMemory}.
      * 
      * <p>For details, see description of {@code vmaMapMemory()}.</p>
-     *
-     * @param allocator  
-     * @param allocation 
      */
     public static void vmaUnmapMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
@@ -1713,32 +1631,32 @@ public class Vma {
      * {@code vkDestroyImage()}, {@code vkCreateBuffer()}, {@code vkCreateImage()} for that purpose and NOT {@link #vmaDestroyBuffer DestroyBuffer}, {@link #vmaDestroyImage DestroyImage},
      * {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}! Example:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkDevice device = ...;
      * VmaAllocator allocator = ...;
-     * std::vector<VkBuffer> buffers = ...;
-     * std::vector<VmaAllocation> allocations = ...;
+     * std::vector&lt;VkBuffer&gt; buffers = ...;
+     * std::vector&lt;VmaAllocation&gt; allocations = ...;
      * 
-     * std::vector<VkBool32> allocationsChanged(allocations.size());
+     * std::vector&lt;VkBool32&gt; allocationsChanged(allocations.size());
      * vmaDefragment(allocator, allocations.data(), allocations.size(), allocationsChanged.data(), nullptr, nullptr);
      * 
-     * for(size_t i = 0; i < allocations.size(); ++i)
+     * for(size_t i = 0; i &lt; allocations.size(); ++i)
      * {
      *     if(allocationsChanged[i])
      *     {
      *         VmaAllocationInfo allocInfo;
-     *         vmaGetAllocationInfo(allocator, allocations[i], &allocInfo);
+     *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
      * 
      *         vkDestroyBuffer(device, buffers[i], nullptr);
      * 
      *         VkBufferCreateInfo bufferInfo = ...;
-     *         vkCreateBuffer(device, &bufferInfo, nullptr, &buffers[i]);
+     *         vkCreateBuffer(device, &amp;bufferInfo, nullptr, &amp;buffers[i]);
      * 
      *         // You can make dummy call to vkGetBufferMemoryRequirements here to silence validation layer warning.
      * 
      *         vkBindBufferMemory(device, buffers[i], allocInfo.deviceMemory, allocInfo.offset);
      *     }
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>Note: Please don't expect memory to be fully compacted after this call. Algorithms inside are based on some heuristics that try to maximize number of
      * Vulkan memory blocks to make totally empty to release them, as well as to maximimze continuous empty space inside remaining blocks, while minimizing
@@ -1751,7 +1669,6 @@ public class Vma {
      * <p>Warning: This function may be time-consuming, so you shouldn't call it too often (like every frame or after every resource creation/destruction). You
      * can call it on special occasions (like when reloading a game level or when you just destroyed a lot of objects).</p>
      *
-     * @param allocator             
      * @param pAllocations          array of allocations that can be moved during this compaction
      * @param pAllocationsChanged   array of boolean values that will indicate whether matching allocation in {@code pAllocations} array has been moved. This parameter is optional.
      *                              Pass null if you don't need this information.
@@ -1784,10 +1701,6 @@ public class Vma {
      * calls to {@code vkBind*Memory()} or {@code vkMapMemory()} won't happen from multiple threads simultaneously (which is illegal in Vulkan).</p>
      * 
      * <p>It is recommended to use function {@link #vmaCreateBuffer CreateBuffer} instead of this one.</p>
-     *
-     * @param allocator  
-     * @param allocation 
-     * @param buffer     
      */
     @NativeType("VkResult")
     public static int vmaBindBufferMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkBuffer") long buffer) {
@@ -1812,10 +1725,6 @@ public class Vma {
      * calls to {@code vkBind*Memory()} or {@code vkMapMemory()} won't happen from multiple threads simultaneously (which is illegal in Vulkan).</p>
      * 
      * <p>It is recommended to use function vmaCreateImage() instead of this one.</p>
-     *
-     * @param allocator  
-     * @param allocation 
-     * @param image      
      */
     @NativeType("VkResult")
     public static int vmaBindImageMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkImage") long image) {
@@ -1851,12 +1760,9 @@ public class Vma {
      * {@link VmaAllocationCreateInfo}{@code ::pool} is null and {@link #VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT} is not used), it creates dedicated allocation for this
      * buffer, just like when using {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}.</p>
      *
-     * @param allocator             
-     * @param pBufferCreateInfo     
-     * @param pAllocationCreateInfo 
-     * @param pBuffer               buffer that was created
-     * @param pAllocation           allocation that was created
-     * @param pAllocationInfo       information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
+     * @param pBuffer         buffer that was created
+     * @param pAllocation     allocation that was created
+     * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
     public static int vmaCreateBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
@@ -1880,15 +1786,11 @@ public class Vma {
      * 
      * <p>This is just a convenience function equivalent to:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * vkDestroyBuffer(device, buffer, allocationCallbacks);
-     * vmaFreeMemory(allocator, allocation);</pre></code>
+     * vmaFreeMemory(allocator, allocation);</code></pre>
      * 
      * <p>It it safe to pass null as buffer and/or allocation.</p>
-     *
-     * @param allocator  
-     * @param buffer     
-     * @param allocation 
      */
     public static void vmaDestroyBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBuffer") long buffer, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
@@ -1906,12 +1808,9 @@ public class Vma {
     /**
      * Function similar to {@link #vmaCreateBuffer CreateBuffer}.
      *
-     * @param allocator             
-     * @param pImageCreateInfo      
-     * @param pAllocationCreateInfo 
-     * @param pImage                image that was created
-     * @param pAllocation           allocation that was created
-     * @param pAllocationInfo       information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
+     * @param pImage          image that was created
+     * @param pAllocation     allocation that was created
+     * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
      */
     @NativeType("VkResult")
     public static int vmaCreateImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkImage *") LongBuffer pImage, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @Nullable @NativeType("VmaAllocationInfo *") VmaAllocationInfo pAllocationInfo) {
@@ -1935,15 +1834,11 @@ public class Vma {
      * 
      * <p>This is just a convenience function equivalent to:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * vkDestroyImage(device, image, allocationCallbacks);
-     * vmaFreeMemory(allocator, allocation);</pre></code>
+     * vmaFreeMemory(allocator, allocation);</code></pre>
      * 
      * <p>It it safe to pass null as image and/or allocation.</p>
-     *
-     * @param allocator  
-     * @param image      
-     * @param allocation 
      */
     public static void vmaDestroyImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImage") long image, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {

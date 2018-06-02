@@ -99,10 +99,10 @@ public class KHRExternalFenceFd {
      * 
      * <p>To import a fence payload from a POSIX file descriptor, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkImportFenceFdKHR(
      *     VkDevice                                    device,
-     *     const VkImportFenceFdInfoKHR*               pImportFenceFdInfo);</pre></code>
+     *     const VkImportFenceFdInfoKHR*               pImportFenceFdInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -167,11 +167,11 @@ public class KHRExternalFenceFd {
      * 
      * <p>To export a POSIX file descriptor representing the payload of a fence, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetFenceFdKHR(
      *     VkDevice                                    device,
      *     const VkFenceGetFdInfoKHR*                  pGetFdInfo,
-     *     int*                                        pFd);</pre></code>
+     *     int*                                        pFd);</code></pre>
      * 
      * <h5>Description</h5>
      * 

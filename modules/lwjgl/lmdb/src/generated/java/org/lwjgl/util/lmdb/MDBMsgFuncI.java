@@ -14,11 +14,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * int (*) (
  *     char const *msg,
  *     void *ctx
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("MDB_msg_func *")

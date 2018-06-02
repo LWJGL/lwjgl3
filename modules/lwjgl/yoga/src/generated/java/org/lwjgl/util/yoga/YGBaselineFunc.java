@@ -14,12 +14,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     YGNodeRef node,
  *     float width,
  *     float height
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI {
 

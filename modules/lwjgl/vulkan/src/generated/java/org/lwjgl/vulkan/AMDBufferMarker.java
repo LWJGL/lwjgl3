@@ -75,13 +75,13 @@ public class AMDBufferMarker {
      * 
      * <p>To write a 32-bit marker value into a buffer as a pipelined operation, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdWriteBufferMarkerAMD(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineStageFlagBits                     pipelineStage,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
-     *     uint32_t                                    marker);</pre></code>
+     *     uint32_t                                    marker);</code></pre>
      * 
      * <h5>Description</h5>
      * 

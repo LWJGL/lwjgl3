@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_context {
  *     {@link NkInput struct nk_input} input;
  *     {@link NkStyle struct nk_style} style;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     struct nk_page_element * freelist;
  *     unsigned int count;
  *     unsigned int seq;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_context")
 public class NkContext extends Struct implements NativeResource {
@@ -50,6 +50,7 @@ public class NkContext extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

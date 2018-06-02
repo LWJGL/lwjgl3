@@ -16,7 +16,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>This example shows a shader that queries the fragment mask from a multisampled compressed surface and uses it to query fragment values.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * #version 450 core
  * 
  * #extension GL_AMD_shader_fragment_mask: enable
@@ -33,19 +33,19 @@ package org.lwjgl.vulkan;
  *     vec4 fragOne = vec4(0.0);
  * 
  *     uint fragMask = fragmentMaskFetchAMD(s2DMS, ivec2(2, 3));
- *     uint fragIndex = (fragMask & 0xF0) >> 4;
+ *     uint fragIndex = (fragMask &amp; 0xF0) &gt;&gt; 4;
  *     fragOne += fragmentFetchAMD(s2DMS, ivec2(2, 3), 1);
  * 
  *     fragMask = fragmentMaskFetchAMD(is2DMSArray, ivec3(2, 3, 1));
- *     fragIndex = (fragMask & 0xF0) >> 4;
+ *     fragIndex = (fragMask &amp; 0xF0) &gt;&gt; 4;
  *     fragOne += fragmentFetchAMD(is2DMSArray, ivec3(2, 3, 1), fragIndex);
  * 
  *     fragMask = fragmentMaskFetchAMD(usubpassMS);
- *     fragIndex = (fragMask & 0xF0) >> 4;
+ *     fragIndex = (fragMask &amp; 0xF0) &gt;&gt; 4;
  *     fragOne += fragmentFetchAMD(usubpassMS, fragIndex);
  * 
  *     fragColor = fragOne;
- * }</pre></code>
+ * }</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

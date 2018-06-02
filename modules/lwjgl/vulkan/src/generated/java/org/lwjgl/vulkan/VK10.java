@@ -2690,11 +2690,11 @@ public class VK10 {
      * 
      * <p>To create an instance object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateInstance(
      *     const VkInstanceCreateInfo*                 pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkInstance*                                 pInstance);</pre></code>
+     *     VkInstance*                                 pInstance);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2766,10 +2766,10 @@ public class VK10 {
      * 
      * <p>To destroy an instance, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyInstance(
      *     VkInstance                                  instance,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -2822,11 +2822,11 @@ public class VK10 {
      * 
      * <p>To retrieve a list of physical device objects representing the physical devices installed in the system, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumeratePhysicalDevices(
      *     VkInstance                                  instance,
      *     uint32_t*                                   pPhysicalDeviceCount,
-     *     VkPhysicalDevice*                           pPhysicalDevices);</pre></code>
+     *     VkPhysicalDevice*                           pPhysicalDevices);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2884,10 +2884,10 @@ public class VK10 {
      * 
      * <p>To query supported features, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceFeatures(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceFeatures*                   pFeatures);</pre></code>
+     *     VkPhysicalDeviceFeatures*                   pFeatures);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2922,11 +2922,11 @@ public class VK10 {
      * 
      * <p>To query supported format features which are properties of the physical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceFormatProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkFormat                                    format,
-     *     VkFormatProperties*                         pFormatProperties);</pre></code>
+     *     VkFormatProperties*                         pFormatProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2963,7 +2963,7 @@ public class VK10 {
      * 
      * <p>To query additional capabilities specific to image types, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceImageFormatProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkFormat                                    format,
@@ -2971,7 +2971,7 @@ public class VK10 {
      *     VkImageTiling                               tiling,
      *     VkImageUsageFlags                           usage,
      *     VkImageCreateFlags                          flags,
-     *     VkImageFormatProperties*                    pImageFormatProperties);</pre></code>
+     *     VkImageFormatProperties*                    pImageFormatProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3041,10 +3041,10 @@ public class VK10 {
      * 
      * <p>To query general properties of physical devices once enumerated, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceProperties(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceProperties*                 pProperties);</pre></code>
+     *     VkPhysicalDeviceProperties*                 pProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -3083,11 +3083,11 @@ public class VK10 {
      * 
      * <p>To query properties of queues available on a physical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceQueueFamilyProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pQueueFamilyPropertyCount,
-     *     VkQueueFamilyProperties*                    pQueueFamilyProperties);</pre></code>
+     *     VkQueueFamilyProperties*                    pQueueFamilyProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3132,10 +3132,10 @@ public class VK10 {
      * 
      * <p>To query memory properties, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceMemoryProperties(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceMemoryProperties*           pMemoryProperties);</pre></code>
+     *     VkPhysicalDeviceMemoryProperties*           pMemoryProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -3170,10 +3170,10 @@ public class VK10 {
      * 
      * <p>Vulkan commands are not necessarily exposed statically on a platform. Function pointers for all Vulkan commands <b>can</b> be obtained with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * PFN_vkVoidFunction vkGetInstanceProcAddr(
      *     VkInstance                                  instance,
-     *     const char*                                 pName);</pre></code>
+     *     const char*                                 pName);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3238,10 +3238,10 @@ public class VK10 {
      * 
      * <p>Vulkan commands are not necessarily exposed statically on a platform. Function pointers for all Vulkan commands <b>can</b> be obtained with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * PFN_vkVoidFunction vkGetInstanceProcAddr(
      *     VkInstance                                  instance,
-     *     const char*                                 pName);</pre></code>
+     *     const char*                                 pName);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3317,10 +3317,10 @@ public class VK10 {
      * 
      * <p>In order to support systems with multiple Vulkan implementations, the function pointers returned by {@link #vkGetInstanceProcAddr GetInstanceProcAddr} <b>may</b> point to dispatch code that calls a different real implementation for different {@code VkDevice} objects or their child objects. The overhead of the internal dispatch for {@code VkDevice} objects can be avoided by obtaining device-specific function pointers for any commands that use a device or device-child object as their dispatchable object. Such function pointers <b>can</b> be obtained with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * PFN_vkVoidFunction vkGetDeviceProcAddr(
      *     VkDevice                                    device,
-     *     const char*                                 pName);</pre></code>
+     *     const char*                                 pName);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3350,9 +3350,6 @@ public class VK10 {
      * <h5>See Also</h5>
      * 
      * <p>{@code PFN_vkVoidFunction}</p>
-     *
-     * @param device 
-     * @param pName  
      */
     @NativeType("PFN_vkVoidFunction")
     public static long vkGetDeviceProcAddr(VkDevice device, @NativeType("char const *") ByteBuffer pName) {
@@ -3369,10 +3366,10 @@ public class VK10 {
      * 
      * <p>In order to support systems with multiple Vulkan implementations, the function pointers returned by {@link #vkGetInstanceProcAddr GetInstanceProcAddr} <b>may</b> point to dispatch code that calls a different real implementation for different {@code VkDevice} objects or their child objects. The overhead of the internal dispatch for {@code VkDevice} objects can be avoided by obtaining device-specific function pointers for any commands that use a device or device-child object as their dispatchable object. Such function pointers <b>can</b> be obtained with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * PFN_vkVoidFunction vkGetDeviceProcAddr(
      *     VkDevice                                    device,
-     *     const char*                                 pName);</pre></code>
+     *     const char*                                 pName);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3402,9 +3399,6 @@ public class VK10 {
      * <h5>See Also</h5>
      * 
      * <p>{@code PFN_vkVoidFunction}</p>
-     *
-     * @param device 
-     * @param pName  
      */
     @NativeType("PFN_vkVoidFunction")
     public static long vkGetDeviceProcAddr(VkDevice device, @NativeType("char const *") CharSequence pName) {
@@ -3436,12 +3430,12 @@ public class VK10 {
      * 
      * <p>A logical device is created as a <em>connection</em> to a physical device. To create a logical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDevice(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkDeviceCreateInfo*                   pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDevice*                                   pDevice);</pre></code>
+     *     VkDevice*                                   pDevice);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3520,10 +3514,10 @@ public class VK10 {
      * 
      * <p>To destroy a device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDevice(
      *     VkDevice                                    device,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3585,11 +3579,11 @@ public class VK10 {
      * 
      * <p>To query the available instance extensions, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateInstanceExtensionProperties(
      *     const char*                                 pLayerName,
      *     uint32_t*                                   pPropertyCount,
-     *     VkExtensionProperties*                      pProperties);</pre></code>
+     *     VkExtensionProperties*                      pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3648,11 +3642,11 @@ public class VK10 {
      * 
      * <p>To query the available instance extensions, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateInstanceExtensionProperties(
      *     const char*                                 pLayerName,
      *     uint32_t*                                   pPropertyCount,
-     *     VkExtensionProperties*                      pProperties);</pre></code>
+     *     VkExtensionProperties*                      pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3728,12 +3722,12 @@ public class VK10 {
      * 
      * <p>To query the extensions available to a given physical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateDeviceExtensionProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     const char*                                 pLayerName,
      *     uint32_t*                                   pPropertyCount,
-     *     VkExtensionProperties*                      pProperties);</pre></code>
+     *     VkExtensionProperties*                      pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3790,12 +3784,12 @@ public class VK10 {
      * 
      * <p>To query the extensions available to a given physical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateDeviceExtensionProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     const char*                                 pLayerName,
      *     uint32_t*                                   pPropertyCount,
-     *     VkExtensionProperties*                      pProperties);</pre></code>
+     *     VkExtensionProperties*                      pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3869,10 +3863,10 @@ public class VK10 {
      * 
      * <p>To query the available layers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateInstanceLayerProperties(
      *     uint32_t*                                   pPropertyCount,
-     *     VkLayerProperties*                          pProperties);</pre></code>
+     *     VkLayerProperties*                          pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3937,11 +3931,11 @@ public class VK10 {
      * 
      * <p>To enumerate device layers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateDeviceLayerProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pPropertyCount,
-     *     VkLayerProperties*                          pProperties);</pre></code>
+     *     VkLayerProperties*                          pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -3976,7 +3970,6 @@ public class VK10 {
      * 
      * <p>{@link VkLayerProperties}</p>
      *
-     * @param physicalDevice 
      * @param pPropertyCount a pointer to an integer related to the number of layer properties available or queried.
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkLayerProperties} structures.
      */
@@ -4004,12 +3997,12 @@ public class VK10 {
      * 
      * <p>To retrieve a handle to a VkQueue object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDeviceQueue(
      *     VkDevice                                    device,
      *     uint32_t                                    queueFamilyIndex,
      *     uint32_t                                    queueIndex,
-     *     VkQueue*                                    pQueue);</pre></code>
+     *     VkQueue*                                    pQueue);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4064,12 +4057,12 @@ public class VK10 {
      * 
      * <p>To submit command buffers to a queue, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkQueueSubmit(
      *     VkQueue                                     queue,
      *     uint32_t                                    submitCount,
      *     const VkSubmitInfo*                         pSubmits,
-     *     VkFence                                     fence);</pre></code>
+     *     VkFence                                     fence);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4167,12 +4160,12 @@ public class VK10 {
      * 
      * <p>To submit command buffers to a queue, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkQueueSubmit(
      *     VkQueue                                     queue,
      *     uint32_t                                    submitCount,
      *     const VkSubmitInfo*                         pSubmits,
-     *     VkFence                                     fence);</pre></code>
+     *     VkFence                                     fence);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4271,9 +4264,9 @@ public class VK10 {
      * 
      * <p>To wait on the host for the completion of outstanding queue operations for a given queue, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkQueueWaitIdle(
-     *     VkQueue                                     queue);</pre></code>
+     *     VkQueue                                     queue);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4324,9 +4317,9 @@ public class VK10 {
      * 
      * <p>To wait on the host for the completion of outstanding queue operations for all queues on a given logical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkDeviceWaitIdle(
-     *     VkDevice                                    device);</pre></code>
+     *     VkDevice                                    device);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4385,12 +4378,12 @@ public class VK10 {
      * 
      * <p>To allocate memory objects, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkAllocateMemory(
      *     VkDevice                                    device,
      *     const VkMemoryAllocateInfo*                 pAllocateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDeviceMemory*                             pMemory);</pre></code>
+     *     VkDeviceMemory*                             pMemory);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4414,8 +4407,8 @@ public class VK10 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pAllocateInfo}-&gt;{@code allocationSize} <b>must</b> be less than or equal to sVkPhysicalDeviceMemoryProperties{@code ::memoryHeaps}[{@code pAllocateInfo}-&gt;{@code memoryTypeIndex}].{@code size} as returned by {@link #vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties} for the {@code VkPhysicalDevice} that {@code device} was created from.</li>
-     * <li>{@code pAllocateInfo}-&gt;{@code memoryTypeIndex} <b>must</b> be less than {@link VkPhysicalDeviceMemoryProperties}{@code ::memoryTypeCount} as returned by {@link #vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties} for the {@code VkPhysicalDevice} that {@code device} was created from.</li>
+     * <li>{@code pAllocateInfo}\-&gt;{@code allocationSize} <b>must</b> be less than or equal to sVkPhysicalDeviceMemoryProperties{@code ::memoryHeaps}[{@code pAllocateInfo}\-&gt;{@code memoryTypeIndex}].{@code size} as returned by {@link #vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties} for the {@code VkPhysicalDevice} that {@code device} was created from.</li>
+     * <li>{@code pAllocateInfo}\-&gt;{@code memoryTypeIndex} <b>must</b> be less than {@link VkPhysicalDeviceMemoryProperties}{@code ::memoryTypeCount} as returned by {@link #vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties} for the {@code VkPhysicalDevice} that {@code device} was created from.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -4478,11 +4471,11 @@ public class VK10 {
      * 
      * <p>To free a memory object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkFreeMemory(
      *     VkDevice                                    device,
      *     VkDeviceMemory                              memory,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4545,14 +4538,14 @@ public class VK10 {
      * 
      * <p>To retrieve a host virtual address pointer to a region of a mappable memory object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkMapMemory(
      *     VkDevice                                    device,
      *     VkDeviceMemory                              memory,
      *     VkDeviceSize                                offset,
      *     VkDeviceSize                                size,
      *     VkMemoryMapFlags                            flags,
-     *     void**                                      ppData);</pre></code>
+     *     void**                                      ppData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4638,10 +4631,10 @@ public class VK10 {
      * 
      * <p>To unmap a memory object once host access to it is no longer needed by the application, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkUnmapMemory(
      *     VkDevice                                    device,
-     *     VkDeviceMemory                              memory);</pre></code>
+     *     VkDeviceMemory                              memory);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -4690,11 +4683,11 @@ public class VK10 {
      * 
      * <p>To flush ranges of non-coherent memory from the host caches, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkFlushMappedMemoryRanges(
      *     VkDevice                                    device,
      *     uint32_t                                    memoryRangeCount,
-     *     const VkMappedMemoryRange*                  pMemoryRanges);</pre></code>
+     *     const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4750,11 +4743,11 @@ public class VK10 {
      * 
      * <p>To flush ranges of non-coherent memory from the host caches, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkFlushMappedMemoryRanges(
      *     VkDevice                                    device,
      *     uint32_t                                    memoryRangeCount,
-     *     const VkMappedMemoryRange*                  pMemoryRanges);</pre></code>
+     *     const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4821,11 +4814,11 @@ public class VK10 {
      * 
      * <p>To invalidate ranges of non-coherent memory from the host caches, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkInvalidateMappedMemoryRanges(
      *     VkDevice                                    device,
      *     uint32_t                                    memoryRangeCount,
-     *     const VkMappedMemoryRange*                  pMemoryRanges);</pre></code>
+     *     const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4879,11 +4872,11 @@ public class VK10 {
      * 
      * <p>To invalidate ranges of non-coherent memory from the host caches, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkInvalidateMappedMemoryRanges(
      *     VkDevice                                    device,
      *     uint32_t                                    memoryRangeCount,
-     *     const VkMappedMemoryRange*                  pMemoryRanges);</pre></code>
+     *     const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4944,11 +4937,11 @@ public class VK10 {
      * 
      * <p>To determine the amount of lazily-allocated memory that is currently committed for a memory object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDeviceMemoryCommitment(
      *     VkDevice                                    device,
      *     VkDeviceMemory                              memory,
-     *     VkDeviceSize*                               pCommittedMemoryInBytes);</pre></code>
+     *     VkDeviceSize*                               pCommittedMemoryInBytes);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -4991,12 +4984,12 @@ public class VK10 {
      * 
      * <p>To attach memory to a buffer object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBindBufferMemory(
      *     VkDevice                                    device,
      *     VkBuffer                                    buffer,
      *     VkDeviceMemory                              memory,
-     *     VkDeviceSize                                memoryOffset);</pre></code>
+     *     VkDeviceSize                                memoryOffset);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5071,12 +5064,12 @@ public class VK10 {
      * 
      * <p>To attach memory to a {@code VkImage} object created without the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} set, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBindImageMemory(
      *     VkDevice                                    device,
      *     VkImage                                     image,
      *     VkDeviceMemory                              memory,
-     *     VkDeviceSize                                memoryOffset);</pre></code>
+     *     VkDeviceSize                                memoryOffset);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5155,11 +5148,11 @@ public class VK10 {
      * 
      * <p>To determine the memory requirements for a buffer resource, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetBufferMemoryRequirements(
      *     VkDevice                                    device,
      *     VkBuffer                                    buffer,
-     *     VkMemoryRequirements*                       pMemoryRequirements);</pre></code>
+     *     VkMemoryRequirements*                       pMemoryRequirements);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -5197,11 +5190,11 @@ public class VK10 {
      * 
      * <p>To determine the memory requirements for an image resource which is not created with the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} flag set, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageMemoryRequirements(
      *     VkDevice                                    device,
      *     VkImage                                     image,
-     *     VkMemoryRequirements*                       pMemoryRequirements);</pre></code>
+     *     VkMemoryRequirements*                       pMemoryRequirements);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -5249,12 +5242,12 @@ public class VK10 {
      * 
      * <p>To query sparse memory requirements for an image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageSparseMemoryRequirements(
      *     VkDevice                                    device,
      *     VkImage                                     image,
      *     uint32_t*                                   pSparseMemoryRequirementCount,
-     *     VkSparseImageMemoryRequirements*            pSparseMemoryRequirements);</pre></code>
+     *     VkSparseImageMemoryRequirements*            pSparseMemoryRequirements);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5313,7 +5306,7 @@ public class VK10 {
      * 
      * <p>{@link #vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties} returns an array of {@link VkSparseImageFormatProperties}. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceSparseImageFormatProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkFormat                                    format,
@@ -5322,7 +5315,7 @@ public class VK10 {
      *     VkImageUsageFlags                           usage,
      *     VkImageTiling                               tiling,
      *     uint32_t*                                   pPropertyCount,
-     *     VkSparseImageFormatProperties*              pProperties);</pre></code>
+     *     VkSparseImageFormatProperties*              pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5397,12 +5390,12 @@ public class VK10 {
      * 
      * <p>To submit sparse binding operations to a queue, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkQueueBindSparse(
      *     VkQueue                                     queue,
      *     uint32_t                                    bindInfoCount,
      *     const VkBindSparseInfo*                     pBindInfo,
-     *     VkFence                                     fence);</pre></code>
+     *     VkFence                                     fence);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5488,12 +5481,12 @@ public class VK10 {
      * 
      * <p>To submit sparse binding operations to a queue, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkQueueBindSparse(
      *     VkQueue                                     queue,
      *     uint32_t                                    bindInfoCount,
      *     const VkBindSparseInfo*                     pBindInfo,
-     *     VkFence                                     fence);</pre></code>
+     *     VkFence                                     fence);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5590,12 +5583,12 @@ public class VK10 {
      * 
      * <p>To create a fence, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateFence(
      *     VkDevice                                    device,
      *     const VkFenceCreateInfo*                    pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkFence*                                    pFence);</pre></code>
+     *     VkFence*                                    pFence);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -5655,11 +5648,11 @@ public class VK10 {
      * 
      * <p>To destroy a fence, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyFence(
      *     VkDevice                                    device,
      *     VkFence                                     fence,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -5715,11 +5708,11 @@ public class VK10 {
      * 
      * <p>To set the state of fences to unsignaled from the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkResetFences(
      *     VkDevice                                    device,
      *     uint32_t                                    fenceCount,
-     *     const VkFence*                              pFences);</pre></code>
+     *     const VkFence*                              pFences);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5779,11 +5772,11 @@ public class VK10 {
      * 
      * <p>To set the state of fences to unsignaled from the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkResetFences(
      *     VkDevice                                    device,
      *     uint32_t                                    fenceCount,
-     *     const VkFence*                              pFences);</pre></code>
+     *     const VkFence*                              pFences);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5850,10 +5843,10 @@ public class VK10 {
      * 
      * <p>To query the status of a fence from the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetFenceStatus(
      *     VkDevice                                    device,
-     *     VkFence                                     fence);</pre></code>
+     *     VkFence                                     fence);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5926,13 +5919,13 @@ public class VK10 {
      * 
      * <p>To wait for one or more fences to enter the signaled state on the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkWaitForFences(
      *     VkDevice                                    device,
      *     uint32_t                                    fenceCount,
      *     const VkFence*                              pFences,
      *     VkBool32                                    waitAll,
-     *     uint64_t                                    timeout);</pre></code>
+     *     uint64_t                                    timeout);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -5991,13 +5984,13 @@ public class VK10 {
      * 
      * <p>To wait for one or more fences to enter the signaled state on the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkWaitForFences(
      *     VkDevice                                    device,
      *     uint32_t                                    fenceCount,
      *     const VkFence*                              pFences,
      *     VkBool32                                    waitAll,
-     *     uint64_t                                    timeout);</pre></code>
+     *     uint64_t                                    timeout);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6072,12 +6065,12 @@ public class VK10 {
      * 
      * <p>To create a semaphore, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateSemaphore(
      *     VkDevice                                    device,
      *     const VkSemaphoreCreateInfo*                pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSemaphore*                                pSemaphore);</pre></code>
+     *     VkSemaphore*                                pSemaphore);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6141,11 +6134,11 @@ public class VK10 {
      * 
      * <p>To destroy a semaphore, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroySemaphore(
      *     VkDevice                                    device,
      *     VkSemaphore                                 semaphore,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -6200,12 +6193,12 @@ public class VK10 {
      * 
      * <p>To create an event, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateEvent(
      *     VkDevice                                    device,
      *     const VkEventCreateInfo*                    pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkEvent*                                    pEvent);</pre></code>
+     *     VkEvent*                                    pEvent);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6269,11 +6262,11 @@ public class VK10 {
      * 
      * <p>To destroy an event, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyEvent(
      *     VkDevice                                    device,
      *     VkEvent                                     event,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -6319,10 +6312,10 @@ public class VK10 {
      * 
      * <p>To query the state of an event from the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetEventStatus(
      *     VkDevice                                    device,
-     *     VkEvent                                     event);</pre></code>
+     *     VkEvent                                     event);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6384,10 +6377,10 @@ public class VK10 {
      * 
      * <p>To set the state of an event to signaled from the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkSetEvent(
      *     VkDevice                                    device,
-     *     VkEvent                                     event);</pre></code>
+     *     VkEvent                                     event);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6441,10 +6434,10 @@ public class VK10 {
      * 
      * <p>To set the state of an event to unsignaled from the host, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkResetEvent(
      *     VkDevice                                    device,
-     *     VkEvent                                     event);</pre></code>
+     *     VkEvent                                     event);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6513,12 +6506,12 @@ public class VK10 {
      * 
      * <p>To create a query pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateQueryPool(
      *     VkDevice                                    device,
      *     const VkQueryPoolCreateInfo*                pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkQueryPool*                                pQueryPool);</pre></code>
+     *     VkQueryPool*                                pQueryPool);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -6578,11 +6571,11 @@ public class VK10 {
      * 
      * <p>To destroy a query pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyQueryPool(
      *     VkDevice                                    device,
      *     VkQueryPool                                 queryPool,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -6638,7 +6631,7 @@ public class VK10 {
      * 
      * <p>To retrieve status and results for a set of queries, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetQueryPoolResults(
      *     VkDevice                                    device,
      *     VkQueryPool                                 queryPool,
@@ -6647,7 +6640,7 @@ public class VK10 {
      *     size_t                                      dataSize,
      *     void*                                       pData,
      *     VkDeviceSize                                stride,
-     *     VkQueryResultFlags                          flags);</pre></code>
+     *     VkQueryResultFlags                          flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6742,7 +6735,7 @@ public class VK10 {
      * 
      * <p>To retrieve status and results for a set of queries, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetQueryPoolResults(
      *     VkDevice                                    device,
      *     VkQueryPool                                 queryPool,
@@ -6751,7 +6744,7 @@ public class VK10 {
      *     size_t                                      dataSize,
      *     void*                                       pData,
      *     VkDeviceSize                                stride,
-     *     VkQueryResultFlags                          flags);</pre></code>
+     *     VkQueryResultFlags                          flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6846,7 +6839,7 @@ public class VK10 {
      * 
      * <p>To retrieve status and results for a set of queries, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetQueryPoolResults(
      *     VkDevice                                    device,
      *     VkQueryPool                                 queryPool,
@@ -6855,7 +6848,7 @@ public class VK10 {
      *     size_t                                      dataSize,
      *     void*                                       pData,
      *     VkDeviceSize                                stride,
-     *     VkQueryResultFlags                          flags);</pre></code>
+     *     VkQueryResultFlags                          flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -6962,12 +6955,12 @@ public class VK10 {
      * 
      * <p>To create buffers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateBuffer(
      *     VkDevice                                    device,
      *     const VkBufferCreateInfo*                   pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkBuffer*                                   pBuffer);</pre></code>
+     *     VkBuffer*                                   pBuffer);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7033,11 +7026,11 @@ public class VK10 {
      * 
      * <p>To destroy a buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyBuffer(
      *     VkDevice                                    device,
      *     VkBuffer                                    buffer,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7092,12 +7085,12 @@ public class VK10 {
      * 
      * <p>To create a buffer view, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateBufferView(
      *     VkDevice                                    device,
      *     const VkBufferViewCreateInfo*               pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkBufferView*                               pView);</pre></code>
+     *     VkBufferView*                               pView);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -7157,11 +7150,11 @@ public class VK10 {
      * 
      * <p>To destroy a buffer view, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyBufferView(
      *     VkDevice                                    device,
      *     VkBufferView                                bufferView,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7217,12 +7210,12 @@ public class VK10 {
      * 
      * <p>To create images, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateImage(
      *     VkDevice                                    device,
      *     const VkImageCreateInfo*                    pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkImage*                                    pImage);</pre></code>
+     *     VkImage*                                    pImage);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7288,11 +7281,11 @@ public class VK10 {
      * 
      * <p>To destroy an image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyImage(
      *     VkDevice                                    device,
      *     VkImage                                     image,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7344,12 +7337,12 @@ public class VK10 {
      * 
      * <p>To query the host access layout of an image subresource, for an image created with linear tiling, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageSubresourceLayout(
      *     VkDevice                                    device,
      *     VkImage                                     image,
      *     const VkImageSubresource*                   pSubresource,
-     *     VkSubresourceLayout*                        pLayout);</pre></code>
+     *     VkSubresourceLayout*                        pLayout);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7409,12 +7402,12 @@ public class VK10 {
      * 
      * <p>To create an image view, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateImageView(
      *     VkDevice                                    device,
      *     const VkImageViewCreateInfo*                pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkImageView*                                pView);</pre></code>
+     *     VkImageView*                                pView);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7480,11 +7473,11 @@ public class VK10 {
      * 
      * <p>To destroy an image view, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyImageView(
      *     VkDevice                                    device,
      *     VkImageView                                 imageView,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7540,12 +7533,12 @@ public class VK10 {
      * 
      * <p>To create a shader module, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateShaderModule(
      *     VkDevice                                    device,
      *     const VkShaderModuleCreateInfo*             pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkShaderModule*                             pShaderModule);</pre></code>
+     *     VkShaderModule*                             pShaderModule);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7612,11 +7605,11 @@ public class VK10 {
      * 
      * <p>To destroy a shader module, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyShaderModule(
      *     VkDevice                                    device,
      *     VkShaderModule                              shaderModule,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7675,12 +7668,12 @@ public class VK10 {
      * 
      * <p>To create pipeline cache objects, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreatePipelineCache(
      *     VkDevice                                    device,
      *     const VkPipelineCacheCreateInfo*            pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkPipelineCache*                            pPipelineCache);</pre></code>
+     *     VkPipelineCache*                            pPipelineCache);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7754,11 +7747,11 @@ public class VK10 {
      * 
      * <p>To destroy a pipeline cache, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyPipelineCache(
      *     VkDevice                                    device,
      *     VkPipelineCache                             pipelineCache,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -7813,12 +7806,12 @@ public class VK10 {
      * 
      * <p>Data <b>can</b> be retrieved from a pipeline cache object using the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPipelineCacheData(
      *     VkDevice                                    device,
      *     VkPipelineCache                             pipelineCache,
      *     size_t*                                     pDataSize,
-     *     void*                                       pData);</pre></code>
+     *     void*                                       pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7907,12 +7900,12 @@ public class VK10 {
      * 
      * <p>Pipeline cache objects <b>can</b> be merged using the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkMergePipelineCaches(
      *     VkDevice                                    device,
      *     VkPipelineCache                             dstCache,
      *     uint32_t                                    srcCacheCount,
-     *     const VkPipelineCache*                      pSrcCaches);</pre></code>
+     *     const VkPipelineCache*                      pSrcCaches);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -7990,14 +7983,14 @@ public class VK10 {
      * 
      * <p>To create graphics pipelines, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateGraphicsPipelines(
      *     VkDevice                                    device,
      *     VkPipelineCache                             pipelineCache,
      *     uint32_t                                    createInfoCount,
      *     const VkGraphicsPipelineCreateInfo*         pCreateInfos,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkPipeline*                                 pPipelines);</pre></code>
+     *     VkPipeline*                                 pPipelines);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -8078,14 +8071,14 @@ public class VK10 {
      * 
      * <p>To create compute pipelines, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateComputePipelines(
      *     VkDevice                                    device,
      *     VkPipelineCache                             pipelineCache,
      *     uint32_t                                    createInfoCount,
      *     const VkComputePipelineCreateInfo*          pCreateInfos,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkPipeline*                                 pPipelines);</pre></code>
+     *     VkPipeline*                                 pPipelines);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -8157,11 +8150,11 @@ public class VK10 {
      * 
      * <p>To destroy a graphics or compute pipeline, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyPipeline(
      *     VkDevice                                    device,
      *     VkPipeline                                  pipeline,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -8217,12 +8210,12 @@ public class VK10 {
      * 
      * <p>To create a pipeline layout, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreatePipelineLayout(
      *     VkDevice                                    device,
      *     const VkPipelineLayoutCreateInfo*           pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkPipelineLayout*                           pPipelineLayout);</pre></code>
+     *     VkPipelineLayout*                           pPipelineLayout);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -8282,11 +8275,11 @@ public class VK10 {
      * 
      * <p>To destroy a pipeline layout, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyPipelineLayout(
      *     VkDevice                                    device,
      *     VkPipelineLayout                            pipelineLayout,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -8340,12 +8333,12 @@ public class VK10 {
      * 
      * <p>To create a sampler object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateSampler(
      *     VkDevice                                    device,
      *     const VkSamplerCreateInfo*                  pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSampler*                                  pSampler);</pre></code>
+     *     VkSampler*                                  pSampler);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -8406,11 +8399,11 @@ public class VK10 {
      * 
      * <p>To destroy a sampler, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroySampler(
      *     VkDevice                                    device,
      *     VkSampler                                   sampler,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -8466,12 +8459,12 @@ public class VK10 {
      * 
      * <p>To create descriptor set layout objects, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDescriptorSetLayout(
      *     VkDevice                                    device,
      *     const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDescriptorSetLayout*                      pSetLayout);</pre></code>
+     *     VkDescriptorSetLayout*                      pSetLayout);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -8531,11 +8524,11 @@ public class VK10 {
      * 
      * <p>To destroy a descriptor set layout, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDescriptorSetLayout(
      *     VkDevice                                    device,
      *     VkDescriptorSetLayout                       descriptorSetLayout,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -8590,12 +8583,12 @@ public class VK10 {
      * 
      * <p>To create a descriptor pool object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDescriptorPool(
      *     VkDevice                                    device,
      *     const VkDescriptorPoolCreateInfo*           pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDescriptorPool*                           pDescriptorPool);</pre></code>
+     *     VkDescriptorPool*                           pDescriptorPool);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -8662,11 +8655,11 @@ public class VK10 {
      * 
      * <p>To destroy a descriptor pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDescriptorPool(
      *     VkDevice                                    device,
      *     VkDescriptorPool                            descriptorPool,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -8716,11 +8709,11 @@ public class VK10 {
      * 
      * <p>To return all descriptor sets allocated from a given pool to the pool, rather than freeing individual descriptor sets, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkResetDescriptorPool(
      *     VkDevice                                    device,
      *     VkDescriptorPool                            descriptorPool,
-     *     VkDescriptorPoolResetFlags                  flags);</pre></code>
+     *     VkDescriptorPoolResetFlags                  flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -8790,11 +8783,11 @@ public class VK10 {
      * 
      * <p>To allocate descriptor sets from a descriptor pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkAllocateDescriptorSets(
      *     VkDevice                                    device,
      *     const VkDescriptorSetAllocateInfo*          pAllocateInfo,
-     *     VkDescriptorSet*                            pDescriptorSets);</pre></code>
+     *     VkDescriptorSet*                            pDescriptorSets);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -8802,7 +8795,7 @@ public class VK10 {
      * 
      * <p>When a descriptor set is allocated, the initial state is largely uninitialized and all descriptors are undefined. However, the descriptor set <b>can</b> be bound in a command buffer without causing errors or exceptions. For descriptor set bindings created with the {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT} bit set, all descriptors in that binding that are dynamically used <b>must</b> have been populated before the descriptor set is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#descriptorsets-binding">consumed</a>. For descriptor set bindings created without the {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT} bit set, all descriptors in that binding that are statically used <b>must</b> have been populated before the descriptor set is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#descriptorsets-binding">consumed</a>. Entries that are not used by a pipeline <b>can</b> have uninitialized descriptors or descriptors of resources that have been destroyed, and executing a draw or dispatch with such a descriptor set bound does not cause undefined behavior. This means applications need not populate unused entries with dummy descriptors.</p>
      * 
-     * <p>If a call to {@link #vkAllocateDescriptorSets AllocateDescriptorSets} would cause the total number of descriptor sets allocated from the pool to exceed the value of {@link VkDescriptorPoolCreateInfo}{@code ::maxSets} used to create {@code pAllocateInfo}->{@code descriptorPool}, then the allocation <b>may</b> fail due to lack of space in the descriptor pool. Similarly, the allocation <b>may</b> fail due to lack of space if the call to {@link #vkAllocateDescriptorSets AllocateDescriptorSets} would cause the number of any given descriptor type to exceed the sum of all the {@code descriptorCount} members of each element of {@link VkDescriptorPoolCreateInfo}{@code ::pPoolSizes} with a {@code member} equal to that type. If the allocation fails due to no more space in the descriptor pool, and not because of system or device memory exhaustion, then {@link VK11#VK_ERROR_OUT_OF_POOL_MEMORY ERROR_OUT_OF_POOL_MEMORY} <b>must</b> be returned.</p>
+     * <p>If a call to {@link #vkAllocateDescriptorSets AllocateDescriptorSets} would cause the total number of descriptor sets allocated from the pool to exceed the value of {@link VkDescriptorPoolCreateInfo}{@code ::maxSets} used to create {@code pAllocateInfo}-&gt;{@code descriptorPool}, then the allocation <b>may</b> fail due to lack of space in the descriptor pool. Similarly, the allocation <b>may</b> fail due to lack of space if the call to {@link #vkAllocateDescriptorSets AllocateDescriptorSets} would cause the number of any given descriptor type to exceed the sum of all the {@code descriptorCount} members of each element of {@link VkDescriptorPoolCreateInfo}{@code ::pPoolSizes} with a {@code member} equal to that type. If the allocation fails due to no more space in the descriptor pool, and not because of system or device memory exhaustion, then {@link VK11#VK_ERROR_OUT_OF_POOL_MEMORY ERROR_OUT_OF_POOL_MEMORY} <b>must</b> be returned.</p>
      * 
      * <p>{@link #vkAllocateDescriptorSets AllocateDescriptorSets} <b>can</b> be used to create multiple descriptor sets. If the creation of any of those descriptor sets fails, then the implementation <b>must</b> destroy all successfully created descriptor set objects from this command, set all entries of the {@code pDescriptorSets} array to {@link #VK_NULL_HANDLE NULL_HANDLE} and return the error.</p>
      * 
@@ -8871,12 +8864,12 @@ public class VK10 {
      * 
      * <p>To free allocated descriptor sets, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkFreeDescriptorSets(
      *     VkDevice                                    device,
      *     VkDescriptorPool                            descriptorPool,
      *     uint32_t                                    descriptorSetCount,
-     *     const VkDescriptorSet*                      pDescriptorSets);</pre></code>
+     *     const VkDescriptorSet*                      pDescriptorSets);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -8938,12 +8931,12 @@ public class VK10 {
      * 
      * <p>To free allocated descriptor sets, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkFreeDescriptorSets(
      *     VkDevice                                    device,
      *     VkDescriptorPool                            descriptorPool,
      *     uint32_t                                    descriptorSetCount,
-     *     const VkDescriptorSet*                      pDescriptorSets);</pre></code>
+     *     const VkDescriptorSet*                      pDescriptorSets);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9026,13 +9019,13 @@ public class VK10 {
      * 
      * <p>Once allocated, descriptor sets <b>can</b> be updated with a combination of write and copy operations. To update descriptor sets, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkUpdateDescriptorSets(
      *     VkDevice                                    device,
      *     uint32_t                                    descriptorWriteCount,
      *     const VkWriteDescriptorSet*                 pDescriptorWrites,
      *     uint32_t                                    descriptorCopyCount,
-     *     const VkCopyDescriptorSet*                  pDescriptorCopies);</pre></code>
+     *     const VkCopyDescriptorSet*                  pDescriptorCopies);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9096,12 +9089,12 @@ public class VK10 {
      * 
      * <p>To create a framebuffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateFramebuffer(
      *     VkDevice                                    device,
      *     const VkFramebufferCreateInfo*              pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkFramebuffer*                              pFramebuffer);</pre></code>
+     *     VkFramebuffer*                              pFramebuffer);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -9161,11 +9154,11 @@ public class VK10 {
      * 
      * <p>To destroy a framebuffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyFramebuffer(
      *     VkDevice                                    device,
      *     VkFramebuffer                               framebuffer,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -9221,12 +9214,12 @@ public class VK10 {
      * 
      * <p>To create a render pass, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateRenderPass(
      *     VkDevice                                    device,
      *     const VkRenderPassCreateInfo*               pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkRenderPass*                               pRenderPass);</pre></code>
+     *     VkRenderPass*                               pRenderPass);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -9286,11 +9279,11 @@ public class VK10 {
      * 
      * <p>To destroy a render pass, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyRenderPass(
      *     VkDevice                                    device,
      *     VkRenderPass                                renderPass,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -9342,11 +9335,11 @@ public class VK10 {
      * 
      * <p>To query the render area granularity, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetRenderAreaGranularity(
      *     VkDevice                                    device,
      *     VkRenderPass                                renderPass,
-     *     VkExtent2D*                                 pGranularity);</pre></code>
+     *     VkExtent2D*                                 pGranularity);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9400,12 +9393,12 @@ public class VK10 {
      * 
      * <p>To create a command pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateCommandPool(
      *     VkDevice                                    device,
      *     const VkCommandPoolCreateInfo*              pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkCommandPool*                              pCommandPool);</pre></code>
+     *     VkCommandPool*                              pCommandPool);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -9471,11 +9464,11 @@ public class VK10 {
      * 
      * <p>To destroy a command pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyCommandPool(
      *     VkDevice                                    device,
      *     VkCommandPool                               commandPool,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9527,11 +9520,11 @@ public class VK10 {
      * 
      * <p>To reset a command pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkResetCommandPool(
      *     VkDevice                                    device,
      *     VkCommandPool                               commandPool,
-     *     VkCommandPoolResetFlags                     flags);</pre></code>
+     *     VkCommandPoolResetFlags                     flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9599,11 +9592,11 @@ public class VK10 {
      * 
      * <p>To allocate command buffers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkAllocateCommandBuffers(
      *     VkDevice                                    device,
      *     const VkCommandBufferAllocateInfo*          pAllocateInfo,
-     *     VkCommandBuffer*                            pCommandBuffers);</pre></code>
+     *     VkCommandBuffer*                            pCommandBuffers);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9674,12 +9667,12 @@ public class VK10 {
      * 
      * <p>To free command buffers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkFreeCommandBuffers(
      *     VkDevice                                    device,
      *     VkCommandPool                               commandPool,
      *     uint32_t                                    commandBufferCount,
-     *     const VkCommandBuffer*                      pCommandBuffers);</pre></code>
+     *     const VkCommandBuffer*                      pCommandBuffers);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9724,12 +9717,12 @@ public class VK10 {
      * 
      * <p>To free command buffers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkFreeCommandBuffers(
      *     VkDevice                                    device,
      *     VkCommandPool                               commandPool,
      *     uint32_t                                    commandBufferCount,
-     *     const VkCommandBuffer*                      pCommandBuffers);</pre></code>
+     *     const VkCommandBuffer*                      pCommandBuffers);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9787,10 +9780,10 @@ public class VK10 {
      * 
      * <p>To begin recording a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBeginCommandBuffer(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkCommandBufferBeginInfo*             pBeginInfo);</pre></code>
+     *     const VkCommandBufferBeginInfo*             pBeginInfo);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -9850,9 +9843,9 @@ public class VK10 {
      * 
      * <p>To complete recording of a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEndCommandBuffer(
-     *     VkCommandBuffer                             commandBuffer);</pre></code>
+     *     VkCommandBuffer                             commandBuffer);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9912,10 +9905,10 @@ public class VK10 {
      * 
      * <p>To reset command buffers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkResetCommandBuffer(
      *     VkCommandBuffer                             commandBuffer,
-     *     VkCommandBufferResetFlags                   flags);</pre></code>
+     *     VkCommandBufferResetFlags                   flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -9973,11 +9966,11 @@ public class VK10 {
      * 
      * <p>Once a pipeline has been created, it <b>can</b> be bound to the command buffer using the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBindPipeline(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineBindPoint                         pipelineBindPoint,
-     *     VkPipeline                                  pipeline);</pre></code>
+     *     VkPipeline                                  pipeline);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10047,12 +10040,12 @@ public class VK10 {
      * 
      * <p>If the bound pipeline state object was not created with the {@link #VK_DYNAMIC_STATE_VIEWPORT DYNAMIC_STATE_VIEWPORT} dynamic state enabled, viewport transformation parameters are specified using the {@code pViewports} member of {@link VkPipelineViewportStateCreateInfo} in the pipeline state object. If the pipeline state object was created with the {@link #VK_DYNAMIC_STATE_VIEWPORT DYNAMIC_STATE_VIEWPORT} dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetViewport(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    firstViewport,
      *     uint32_t                                    viewportCount,
-     *     const VkViewport*                           pViewports);</pre></code>
+     *     const VkViewport*                           pViewports);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10123,12 +10116,12 @@ public class VK10 {
      * 
      * <p>The scissor test determines if a fragment's framebuffer coordinates <code>(x<sub>f</sub>,y<sub>f</sub>)</code> lie within the scissor rectangle corresponding to the viewport index (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#vertexpostproc-viewport">Controlling the Viewport</a>) used by the primitive that generated the fragment. If the pipeline state object is created without {@link #VK_DYNAMIC_STATE_SCISSOR DYNAMIC_STATE_SCISSOR} enabled then the scissor rectangles are set by the {@link VkPipelineViewportStateCreateInfo} state of the pipeline state object. Otherwise, to dynamically set the scissor rectangles call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetScissor(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    firstScissor,
      *     uint32_t                                    scissorCount,
-     *     const VkRect2D*                             pScissors);</pre></code>
+     *     const VkRect2D*                             pScissors);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10196,10 +10189,10 @@ public class VK10 {
      * 
      * <p>Otherwise, the line width is set by calling {@link #vkCmdSetLineWidth CmdSetLineWidth}:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetLineWidth(
      *     VkCommandBuffer                             commandBuffer,
-     *     float                                       lineWidth);</pre></code>
+     *     float                                       lineWidth);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10247,12 +10240,12 @@ public class VK10 {
      * 
      * <p>The depth values of all fragments generated by the rasterization of a polygon <b>can</b> be offset by a single value that is computed for that polygon. This behavior is controlled by the {@code depthBiasEnable}, {@code depthBiasConstantFactor}, {@code depthBiasClamp}, and {@code depthBiasSlopeFactor} members of {@link VkPipelineRasterizationStateCreateInfo}, or by the corresponding parameters to the {@link #vkCmdSetDepthBias CmdSetDepthBias} command if depth bias state is dynamic.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetDepthBias(
      *     VkCommandBuffer                             commandBuffer,
      *     float                                       depthBiasConstantFactor,
      *     float                                       depthBiasClamp,
-     *     float                                       depthBiasSlopeFactor);</pre></code>
+     *     float                                       depthBiasSlopeFactor);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10262,13 +10255,13 @@ public class VK10 {
      * 
      * <p>The maximum depth slope <code>m</code> of a triangle is</p>
      * 
-     * <code><pre>
-     *       m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)</pre></code>
+     * <pre><code>
+     *       m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)</code></pre>
      * 
      * <p>where <code>(x<sub>f</sub>, y<sub>f</sub>, z<sub>f</sub>)</code> is a point on the triangle. <code>m</code> <b>may</b> be approximated as</p>
      * 
-     * <code><pre>
-     *       m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))</pre></code>
+     * <pre><code>
+     *       m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))</code></pre>
      * 
      * <p>The minimum resolvable difference <code>r</code> is an implementation-dependent parameter that depends on the depth buffer representation. It is the smallest difference in framebuffer coordinate <code>z</code> values that is guaranteed to remain distinct throughout polygon rasterization and in the depth buffer. All pairs of fragments generated by the rasterization of two polygons with otherwise identical vertices, but <code>z<sub>f</sub></code> values that differ by <code>r</code>, will have distinct depth values.</p>
      * 
@@ -10284,10 +10277,10 @@ public class VK10 {
      * 
      * <p>The bias value <code>o</code> for a polygon is</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *         m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor                     depthBiasClamp = 0 or NaN
      * o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &gt; 0
-     *     max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &lt; 0</pre></code>
+     *     max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &lt; 0</code></pre>
      * 
      * <p><code>m</code> is computed as described above. If the depth buffer uses a fixed-point representation, <code>m</code> is a function of depth values in the range <code>[0,1]</code>, and <code>o</code> is applied to depth values in the same range.</p>
      * 
@@ -10347,10 +10340,10 @@ public class VK10 {
      * 
      * <p>Otherwise, to dynamically set and change the blend constant, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetBlendConstants(
      *     VkCommandBuffer                             commandBuffer,
-     *     const float                                 blendConstants[4]);</pre></code>
+     *     const float                                 blendConstants[4]);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10399,11 +10392,11 @@ public class VK10 {
      * 
      * <p>The depth bounds test conditionally disables coverage of a sample based on the outcome of a comparison between the value <code>z<sub>a</sub></code> in the depth attachment at location <code>(x<sub>f</sub>,y<sub>f</sub>)</code> (for the appropriate sample) and a range of values. The test is enabled or disabled by the {@code depthBoundsTestEnable} member of {@link VkPipelineDepthStencilStateCreateInfo}: If the pipeline state object is created without the {@link #VK_DYNAMIC_STATE_DEPTH_BOUNDS DYNAMIC_STATE_DEPTH_BOUNDS} dynamic state enabled then the range of values used in the depth bounds test are defined by the {@code minDepthBounds} and {@code maxDepthBounds} members of the {@link VkPipelineDepthStencilStateCreateInfo} structure. Otherwise, to dynamically set the depth bounds range values call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetDepthBounds(
      *     VkCommandBuffer                             commandBuffer,
      *     float                                       minDepthBounds,
-     *     float                                       maxDepthBounds);</pre></code>
+     *     float                                       maxDepthBounds);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10453,11 +10446,11 @@ public class VK10 {
      * 
      * <p>If the pipeline state object is created with the {@link #VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK DYNAMIC_STATE_STENCIL_COMPARE_MASK} dynamic state enabled, then to dynamically set the stencil compare mask call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetStencilCompareMask(
      *     VkCommandBuffer                             commandBuffer,
      *     VkStencilFaceFlags                          faceMask,
-     *     uint32_t                                    compareMask);</pre></code>
+     *     uint32_t                                    compareMask);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10507,11 +10500,11 @@ public class VK10 {
      * 
      * <p>If the pipeline state object is created with the {@link #VK_DYNAMIC_STATE_STENCIL_WRITE_MASK DYNAMIC_STATE_STENCIL_WRITE_MASK} dynamic state enabled, then to dynamically set the stencil write mask call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetStencilWriteMask(
      *     VkCommandBuffer                             commandBuffer,
      *     VkStencilFaceFlags                          faceMask,
-     *     uint32_t                                    writeMask);</pre></code>
+     *     uint32_t                                    writeMask);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10561,11 +10554,11 @@ public class VK10 {
      * 
      * <p>If the pipeline state object is created with the {@link #VK_DYNAMIC_STATE_STENCIL_REFERENCE DYNAMIC_STATE_STENCIL_REFERENCE} dynamic state enabled, then to dynamically set the stencil reference value call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetStencilReference(
      *     VkCommandBuffer                             commandBuffer,
      *     VkStencilFaceFlags                          faceMask,
-     *     uint32_t                                    reference);</pre></code>
+     *     uint32_t                                    reference);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10626,7 +10619,7 @@ public class VK10 {
      * 
      * <p>To bind one or more descriptor sets to a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBindDescriptorSets(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineBindPoint                         pipelineBindPoint,
@@ -10635,7 +10628,7 @@ public class VK10 {
      *     uint32_t                                    descriptorSetCount,
      *     const VkDescriptorSet*                      pDescriptorSets,
      *     uint32_t                                    dynamicOffsetCount,
-     *     const uint32_t*                             pDynamicOffsets);</pre></code>
+     *     const uint32_t*                             pDynamicOffsets);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10720,12 +10713,12 @@ public class VK10 {
      * 
      * <p>To bind an index buffer to a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBindIndexBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
      *     VkDeviceSize                                offset,
-     *     VkIndexType                                 indexType);</pre></code>
+     *     VkIndexType                                 indexType);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -10790,13 +10783,13 @@ public class VK10 {
      * 
      * <p>To bind vertex buffers to a command buffer for use in subsequent draw commands, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBindVertexBuffers(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    firstBinding,
      *     uint32_t                                    bindingCount,
      *     const VkBuffer*                             pBuffers,
-     *     const VkDeviceSize*                         pOffsets);</pre></code>
+     *     const VkDeviceSize*                         pOffsets);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10859,13 +10852,13 @@ public class VK10 {
      * 
      * <p>To record a non-indexed draw, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDraw(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    vertexCount,
      *     uint32_t                                    instanceCount,
      *     uint32_t                                    firstVertex,
-     *     uint32_t                                    firstInstance);</pre></code>
+     *     uint32_t                                    firstInstance);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -10943,14 +10936,14 @@ public class VK10 {
      * 
      * <p>To record an indexed draw, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndexed(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    indexCount,
      *     uint32_t                                    instanceCount,
      *     uint32_t                                    firstIndex,
      *     int32_t                                     vertexOffset,
-     *     uint32_t                                    firstInstance);</pre></code>
+     *     uint32_t                                    firstInstance);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11034,13 +11027,13 @@ public class VK10 {
      * 
      * <p>To record a non-indexed indirect draw, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndirect(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
      *     VkDeviceSize                                offset,
      *     uint32_t                                    drawCount,
-     *     uint32_t                                    stride);</pre></code>
+     *     uint32_t                                    stride);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11128,13 +11121,13 @@ public class VK10 {
      * 
      * <p>To record an indexed indirect draw, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndexedIndirect(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
      *     VkDeviceSize                                offset,
      *     uint32_t                                    drawCount,
-     *     uint32_t                                    stride);</pre></code>
+     *     uint32_t                                    stride);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11222,12 +11215,12 @@ public class VK10 {
      * 
      * <p>To record a dispatch, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDispatch(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    groupCountX,
      *     uint32_t                                    groupCountY,
-     *     uint32_t                                    groupCountZ);</pre></code>
+     *     uint32_t                                    groupCountZ);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11252,8 +11245,8 @@ public class VK10 {
      * <li>Any {@code VkImageView} being sampled with {@link IMGFilterCubic#VK_FILTER_CUBIC_IMG FILTER_CUBIC_IMG} as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the {@link IMGFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG} flag in {@link VkFormatProperties}{@code ::linearTilingFeatures} or {@link VkFormatProperties}{@code ::optimalTilingFeatures} returned by {@link #vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} for linearly or optimally tiled images, respectively</li>
      * <li>Any {@code VkImageView} being sampled with {@link IMGFilterCubic#VK_FILTER_CUBIC_IMG FILTER_CUBIC_IMG} as a result of this command <b>must</b> not have a {@code VkImageViewType} of {@link #VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}, {@link #VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}, or {@link #VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}</li>
      * <li>If {@code commandBuffer} is an unprotected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE} reads from or writes to any image or buffer, that image or buffer <b>must</b> not be a protected image or protected buffer.</li>
-     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_POINT_COMPUTE PIPELINE_POINT_COMPUTE} writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer.</li>
-     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_POINT_COMPUTE PIPELINE_POINT_COMPUTE} reads from any image or buffer, the image or buffer <b>must</b> not be a protected image or protected buffer.</li>
+     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE} writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer.</li>
+     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE} reads from any image or buffer, the image or buffer <b>must</b> not be a protected image or protected buffer.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -11298,11 +11291,11 @@ public class VK10 {
      * 
      * <p>To record an indirect command dispatch, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDispatchIndirect(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
-     *     VkDeviceSize                                offset);</pre></code>
+     *     VkDeviceSize                                offset);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11328,8 +11321,8 @@ public class VK10 {
      * <li>Any {@code VkImageView} being sampled with {@link IMGFilterCubic#VK_FILTER_CUBIC_IMG FILTER_CUBIC_IMG} as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the {@link IMGFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG} flag in {@link VkFormatProperties}{@code ::linearTilingFeatures} or {@link VkFormatProperties}{@code ::optimalTilingFeatures} returned by {@link #vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} for linearly or optimally tiled images, respectively</li>
      * <li>Any {@code VkImageView} being sampled with {@link IMGFilterCubic#VK_FILTER_CUBIC_IMG FILTER_CUBIC_IMG} as a result of this command <b>must</b> not have a {@code VkImageViewType} of {@link #VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}, {@link #VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}, or {@link #VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}</li>
      * <li>If {@code commandBuffer} is an unprotected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE} reads from or writes to any image or buffer, that image or buffer <b>must</b> not be a protected image or protected buffer.</li>
-     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_POINT_COMPUTE PIPELINE_POINT_COMPUTE} writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer.</li>
-     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_POINT_COMPUTE PIPELINE_POINT_COMPUTE} reads from any image or buffer, the image or buffer <b>must</b> not be a protected image or protected buffer.</li>
+     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE} writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer.</li>
+     * <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the {@code VkPipeline} object bound to {@link #VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE} reads from any image or buffer, the image or buffer <b>must</b> not be a protected image or protected buffer.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -11385,13 +11378,13 @@ public class VK10 {
      * 
      * <p>To copy data between buffer objects, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdCopyBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    srcBuffer,
      *     VkBuffer                                    dstBuffer,
      *     uint32_t                                    regionCount,
-     *     const VkBufferCopy*                         pRegions);</pre></code>
+     *     const VkBufferCopy*                         pRegions);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11475,7 +11468,7 @@ public class VK10 {
      * 
      * <p>To copy data between image objects, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdCopyImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     srcImage,
@@ -11483,7 +11476,7 @@ public class VK10 {
      *     VkImage                                     dstImage,
      *     VkImageLayout                               dstImageLayout,
      *     uint32_t                                    regionCount,
-     *     const VkImageCopy*                          pRegions);</pre></code>
+     *     const VkImageCopy*                          pRegions);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11619,7 +11612,7 @@ public class VK10 {
      * 
      * <p>To copy regions of a source image into a destination image, potentially performing format conversion, arbitrary scaling, and filtering, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBlitImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     srcImage,
@@ -11628,7 +11621,7 @@ public class VK10 {
      *     VkImageLayout                               dstImageLayout,
      *     uint32_t                                    regionCount,
      *     const VkImageBlit*                          pRegions,
-     *     VkFilter                                    filter);</pre></code>
+     *     VkFilter                                    filter);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11803,14 +11796,14 @@ public class VK10 {
      * 
      * <p>To copy data from a buffer object to an image object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdCopyBufferToImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    srcBuffer,
      *     VkImage                                     dstImage,
      *     VkImageLayout                               dstImageLayout,
      *     uint32_t                                    regionCount,
-     *     const VkBufferImageCopy*                    pRegions);</pre></code>
+     *     const VkBufferImageCopy*                    pRegions);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -11902,14 +11895,14 @@ public class VK10 {
      * 
      * <p>To copy data from an image object to a buffer object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdCopyImageToBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     srcImage,
      *     VkImageLayout                               srcImageLayout,
      *     VkBuffer                                    dstBuffer,
      *     uint32_t                                    regionCount,
-     *     const VkBufferImageCopy*                    pRegions);</pre></code>
+     *     const VkBufferImageCopy*                    pRegions);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12001,13 +11994,13 @@ public class VK10 {
      * 
      * <p>To update buffer data inline in a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdUpdateBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                dataSize,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12083,13 +12076,13 @@ public class VK10 {
      * 
      * <p>To update buffer data inline in a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdUpdateBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                dataSize,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12165,13 +12158,13 @@ public class VK10 {
      * 
      * <p>To update buffer data inline in a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdUpdateBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                dataSize,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12247,13 +12240,13 @@ public class VK10 {
      * 
      * <p>To update buffer data inline in a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdUpdateBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                dataSize,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12329,13 +12322,13 @@ public class VK10 {
      * 
      * <p>To update buffer data inline in a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdUpdateBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                dataSize,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12411,13 +12404,13 @@ public class VK10 {
      * 
      * <p>To update buffer data inline in a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdUpdateBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                dataSize,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12495,13 +12488,13 @@ public class VK10 {
      * 
      * <p>To clear buffer data, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdFillBuffer(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                size,
-     *     uint32_t                                    data);</pre></code>
+     *     uint32_t                                    data);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12576,14 +12569,14 @@ public class VK10 {
      * 
      * <p>To clear one or more subranges of a color image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdClearColorImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     image,
      *     VkImageLayout                               imageLayout,
      *     const VkClearColorValue*                    pColor,
      *     uint32_t                                    rangeCount,
-     *     const VkImageSubresourceRange*              pRanges);</pre></code>
+     *     const VkImageSubresourceRange*              pRanges);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12657,14 +12650,14 @@ public class VK10 {
      * 
      * <p>To clear one or more subranges of a color image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdClearColorImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     image,
      *     VkImageLayout                               imageLayout,
      *     const VkClearColorValue*                    pColor,
      *     uint32_t                                    rangeCount,
-     *     const VkImageSubresourceRange*              pRanges);</pre></code>
+     *     const VkImageSubresourceRange*              pRanges);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12749,14 +12742,14 @@ public class VK10 {
      * 
      * <p>To clear one or more subranges of a depth/stencil image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdClearDepthStencilImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     image,
      *     VkImageLayout                               imageLayout,
      *     const VkClearDepthStencilValue*             pDepthStencil,
      *     uint32_t                                    rangeCount,
-     *     const VkImageSubresourceRange*              pRanges);</pre></code>
+     *     const VkImageSubresourceRange*              pRanges);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -12825,14 +12818,14 @@ public class VK10 {
      * 
      * <p>To clear one or more subranges of a depth/stencil image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdClearDepthStencilImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     image,
      *     VkImageLayout                               imageLayout,
      *     const VkClearDepthStencilValue*             pDepthStencil,
      *     uint32_t                                    rangeCount,
-     *     const VkImageSubresourceRange*              pRanges);</pre></code>
+     *     const VkImageSubresourceRange*              pRanges);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -12913,13 +12906,13 @@ public class VK10 {
      * 
      * <p>To clear one or more regions of color and depth/stencil attachments inside a render pass instance, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdClearAttachments(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    attachmentCount,
      *     const VkClearAttachment*                    pAttachments,
      *     uint32_t                                    rectCount,
-     *     const VkClearRect*                          pRects);</pre></code>
+     *     const VkClearRect*                          pRects);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -12993,7 +12986,7 @@ public class VK10 {
      * 
      * <p>To resolve a multisample image to a non-multisample image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdResolveImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     srcImage,
@@ -13001,7 +12994,7 @@ public class VK10 {
      *     VkImage                                     dstImage,
      *     VkImageLayout                               dstImageLayout,
      *     uint32_t                                    regionCount,
-     *     const VkImageResolve*                       pRegions);</pre></code>
+     *     const VkImageResolve*                       pRegions);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13089,7 +13082,7 @@ public class VK10 {
      * 
      * <p>To resolve a multisample image to a non-multisample image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdResolveImage(
      *     VkCommandBuffer                             commandBuffer,
      *     VkImage                                     srcImage,
@@ -13097,7 +13090,7 @@ public class VK10 {
      *     VkImage                                     dstImage,
      *     VkImageLayout                               dstImageLayout,
      *     uint32_t                                    regionCount,
-     *     const VkImageResolve*                       pRegions);</pre></code>
+     *     const VkImageResolve*                       pRegions);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13186,11 +13179,11 @@ public class VK10 {
      * 
      * <p>To set the state of an event to signaled from a device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetEvent(
      *     VkCommandBuffer                             commandBuffer,
      *     VkEvent                                     event,
-     *     VkPipelineStageFlags                        stageMask);</pre></code>
+     *     VkPipelineStageFlags                        stageMask);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13256,11 +13249,11 @@ public class VK10 {
      * 
      * <p>To set the state of an event to unsignaled from a device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdResetEvent(
      *     VkCommandBuffer                             commandBuffer,
      *     VkEvent                                     event,
-     *     VkPipelineStageFlags                        stageMask);</pre></code>
+     *     VkPipelineStageFlags                        stageMask);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13340,7 +13333,7 @@ public class VK10 {
      * 
      * <p>To wait for one or more events to enter the signaled state on a device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdWaitEvents(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    eventCount,
@@ -13352,7 +13345,7 @@ public class VK10 {
      *     uint32_t                                    bufferMemoryBarrierCount,
      *     const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
      *     uint32_t                                    imageMemoryBarrierCount,
-     *     const VkImageMemoryBarrier*                 pImageMemoryBarriers);</pre></code>
+     *     const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13460,7 +13453,7 @@ public class VK10 {
      * 
      * <p>To record a pipeline barrier, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPipelineBarrier(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineStageFlags                        srcStageMask,
@@ -13471,7 +13464,7 @@ public class VK10 {
      *     uint32_t                                    bufferMemoryBarrierCount,
      *     const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
      *     uint32_t                                    imageMemoryBarrierCount,
-     *     const VkImageMemoryBarrier*                 pImageMemoryBarriers);</pre></code>
+     *     const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13566,12 +13559,12 @@ public class VK10 {
      * 
      * <p>To begin a query, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBeginQuery(
      *     VkCommandBuffer                             commandBuffer,
      *     VkQueryPool                                 queryPool,
      *     uint32_t                                    query,
-     *     VkQueryControlFlags                         flags);</pre></code>
+     *     VkQueryControlFlags                         flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13637,11 +13630,11 @@ public class VK10 {
      * 
      * <p>To end a query after the set of desired draw or dispatch commands is executed, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdEndQuery(
      *     VkCommandBuffer                             commandBuffer,
      *     VkQueryPool                                 queryPool,
-     *     uint32_t                                    query);</pre></code>
+     *     uint32_t                                    query);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13700,12 +13693,12 @@ public class VK10 {
      * 
      * <p>To reset a range of queries in a query pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdResetQueryPool(
      *     VkCommandBuffer                             commandBuffer,
      *     VkQueryPool                                 queryPool,
      *     uint32_t                                    firstQuery,
-     *     uint32_t                                    queryCount);</pre></code>
+     *     uint32_t                                    queryCount);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13762,12 +13755,12 @@ public class VK10 {
      * 
      * <p>To request a timestamp, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdWriteTimestamp(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineStageFlagBits                     pipelineStage,
      *     VkQueryPool                                 queryPool,
-     *     uint32_t                                    query);</pre></code>
+     *     uint32_t                                    query);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13852,7 +13845,7 @@ public class VK10 {
      * 
      * <p>To copy query statuses and numerical results directly to buffer memory, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdCopyQueryPoolResults(
      *     VkCommandBuffer                             commandBuffer,
      *     VkQueryPool                                 queryPool,
@@ -13861,7 +13854,7 @@ public class VK10 {
      *     VkBuffer                                    dstBuffer,
      *     VkDeviceSize                                dstOffset,
      *     VkDeviceSize                                stride,
-     *     VkQueryResultFlags                          flags);</pre></code>
+     *     VkQueryResultFlags                          flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -13957,14 +13950,14 @@ public class VK10 {
      * 
      * <p>To update push constants, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushConstants(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineLayout                            layout,
      *     VkShaderStageFlags                          stageFlags,
      *     uint32_t                                    offset,
      *     uint32_t                                    size,
-     *     const void*                                 pValues);</pre></code>
+     *     const void*                                 pValues);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -14022,14 +14015,14 @@ public class VK10 {
      * 
      * <p>To update push constants, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushConstants(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineLayout                            layout,
      *     VkShaderStageFlags                          stageFlags,
      *     uint32_t                                    offset,
      *     uint32_t                                    size,
-     *     const void*                                 pValues);</pre></code>
+     *     const void*                                 pValues);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -14087,14 +14080,14 @@ public class VK10 {
      * 
      * <p>To update push constants, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushConstants(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineLayout                            layout,
      *     VkShaderStageFlags                          stageFlags,
      *     uint32_t                                    offset,
      *     uint32_t                                    size,
-     *     const void*                                 pValues);</pre></code>
+     *     const void*                                 pValues);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -14152,14 +14145,14 @@ public class VK10 {
      * 
      * <p>To update push constants, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushConstants(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineLayout                            layout,
      *     VkShaderStageFlags                          stageFlags,
      *     uint32_t                                    offset,
      *     uint32_t                                    size,
-     *     const void*                                 pValues);</pre></code>
+     *     const void*                                 pValues);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -14217,14 +14210,14 @@ public class VK10 {
      * 
      * <p>To update push constants, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushConstants(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineLayout                            layout,
      *     VkShaderStageFlags                          stageFlags,
      *     uint32_t                                    offset,
      *     uint32_t                                    size,
-     *     const void*                                 pValues);</pre></code>
+     *     const void*                                 pValues);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -14282,14 +14275,14 @@ public class VK10 {
      * 
      * <p>To update push constants, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushConstants(
      *     VkCommandBuffer                             commandBuffer,
      *     VkPipelineLayout                            layout,
      *     VkShaderStageFlags                          stageFlags,
      *     uint32_t                                    offset,
      *     uint32_t                                    size,
-     *     const void*                                 pValues);</pre></code>
+     *     const void*                                 pValues);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -14358,11 +14351,11 @@ public class VK10 {
      * 
      * <p>To begin a render pass instance, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBeginRenderPass(
      *     VkCommandBuffer                             commandBuffer,
      *     const VkRenderPassBeginInfo*                pRenderPassBegin,
-     *     VkSubpassContents                           contents);</pre></code>
+     *     VkSubpassContents                           contents);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -14427,10 +14420,10 @@ public class VK10 {
      * 
      * <p>To transition to the next subpass in the render pass instance after recording the commands for a subpass, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdNextSubpass(
      *     VkCommandBuffer                             commandBuffer,
-     *     VkSubpassContents                           contents);</pre></code>
+     *     VkSubpassContents                           contents);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -14488,9 +14481,9 @@ public class VK10 {
      * 
      * <p>To record a command to end a render pass instance after recording the commands for the last subpass, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdEndRenderPass(
-     *     VkCommandBuffer                             commandBuffer);</pre></code>
+     *     VkCommandBuffer                             commandBuffer);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -14552,11 +14545,11 @@ public class VK10 {
      * 
      * <p>A secondary command buffer <b>must</b> not be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary command buffer with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdExecuteCommands(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    commandBufferCount,
-     *     const VkCommandBuffer*                      pCommandBuffers);</pre></code>
+     *     const VkCommandBuffer*                      pCommandBuffers);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -14628,11 +14621,11 @@ public class VK10 {
      * 
      * <p>A secondary command buffer <b>must</b> not be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary command buffer with the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdExecuteCommands(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    commandBufferCount,
-     *     const VkCommandBuffer*                      pCommandBuffers);</pre></code>
+     *     const VkCommandBuffer*                      pCommandBuffers);</code></pre>
      * 
      * <h5>Description</h5>
      * 

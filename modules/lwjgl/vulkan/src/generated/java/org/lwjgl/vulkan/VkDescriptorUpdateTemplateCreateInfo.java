@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfo {
  *     VkStructureType sType;
  *     void * pNext;
@@ -74,13 +74,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineBindPoint pipelineBindPoint;
  *     VkPipelineLayout pipelineLayout;
  *     uint32_t set;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

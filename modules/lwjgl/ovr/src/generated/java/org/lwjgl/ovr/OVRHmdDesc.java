@@ -44,7 +44,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrHmdDesc {
  *     ovrHmdType Type;
  *     char[4];
@@ -64,7 +64,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  *     {@link OVRSizei ovrSizei} Resolution;
  *     float DisplayRefreshRate;
  *     char[4];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrHmdDesc")
 public class OVRHmdDesc extends Struct implements NativeResource {
@@ -72,6 +72,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

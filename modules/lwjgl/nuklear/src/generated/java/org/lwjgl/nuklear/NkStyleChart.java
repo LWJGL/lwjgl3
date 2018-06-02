@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style_chart {
  *     {@link NkStyleItem struct nk_style_item} background;
  *     {@link NkColor struct nk_color} border_color;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float border;
  *     float rounding;
  *     {@link NkVec2 struct nk_vec2} padding;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_chart")
 public class NkStyleChart extends Struct implements NativeResource {
@@ -35,6 +35,7 @@ public class NkStyleChart extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

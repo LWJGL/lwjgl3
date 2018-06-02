@@ -17,11 +17,12 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This class must be used before any EGL function is called. It has the following responsibilities:
+ * <p>This class must be used before any EGL function is called. It has the following responsibilities:</p>
  * <ul>
  * <li>Loads the EGL native library into the JVM process.</li>
  * <li>Creates instances of {@link EGLCapabilities} classes. An {@code EGLCapabilities} instance contains flags for functionality that is available in an
  * EGLDisplay or the EGL client library. Internally, it also contains function pointers that are only valid in that specific EGLDisplay or client library.</li>
+ * </ul>
  *
  * <h3>Library lifecycle</h3>
  * <p>The EGL library is loaded automatically when this class is initialized. Set the {@link Configuration#EGL_EXPLICIT_INIT} option to override this behavior.

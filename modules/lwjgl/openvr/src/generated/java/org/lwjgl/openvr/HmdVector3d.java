@@ -19,10 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct HmdVector3d_t {
  *     double v[3];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct HmdVector3d_t")
 public class HmdVector3d extends Struct implements NativeResource {
@@ -30,6 +30,7 @@ public class HmdVector3d extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

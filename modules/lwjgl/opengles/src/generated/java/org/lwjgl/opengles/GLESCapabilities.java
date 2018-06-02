@@ -1066,8 +1066,8 @@ public final class GLESCapabilities {
      * capabilities of version 3.10 of the OpenGL ES Shading Language. Shaders using the new functionality provided by this extension should enable this
      * functionality via the construct</p>
      * 
-     * <code><pre>
-     *     #extension GL_EXT_gpu_shader5 : require (or enable)</pre></code>
+     * <pre><code>
+     *     #extension GL_EXT_gpu_shader5 : require (or enable)</code></pre>
      * 
      * <p>This extension provides a variety of new features for all shader types, including:</p>
      * 
@@ -1132,13 +1132,13 @@ public final class GLESCapabilities {
      * <p>This extension allows the fragment shader to control whether values in gl_SampleMaskIn[] reflect the coverage after application of the early depth and
      * stencil tests. This feature can be enabled with the following layout qualifier in the fragment shader:</p>
      * 
-     * <code><pre>
-     *     layout(post_depth_coverage) in;</pre></code>
+     * <pre><code>
+     *     layout(post_depth_coverage) in;</code></pre>
      * 
      * <p>To use this feature, early fragment tests must also be enabled in the fragment shader via:</p>
      * 
-     * <code><pre>
-     *     layout(early_fragment_tests) in;</pre></code>
+     * <pre><code>
+     *     layout(early_fragment_tests) in;</code></pre>
      * 
      * <p>Requires {@link #GL_OES_sample_variables OES_sample_variables}.</p>
      */
@@ -1179,12 +1179,12 @@ public final class GLESCapabilities {
      * <p>Compute shaders operate on an explicitly specified group of threads (a local work group), but many implementations of OpenGL ES 3.0 will even group
      * non-compute shader invocations and execute them in a SIMD fashion. When executing code like</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * if (condition) {
      *     result = do_fast_path();
      * } else {
      *     result = do_general_path();
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>where {@code condition} diverges between invocations, a SIMD implementation might first call do_fast_path() for the invocations where {@code condition}
      * is true and leave the other invocations dormant. Once do_fast_path() returns, it might call do_general_path() for invocations where {@code condition}
@@ -1193,12 +1193,12 @@ public final class GLESCapabilities {
      * 
      * <p>This extension provides the ability to avoid divergent execution by evaluting a condition across an entire SIMD invocation group using code like:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * if (allInvocationsEXT(condition)) {
      *     result = do_fast_path();
      * } else {
      *     result = do_general_path();
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>The built-in function allInvocationsEXT() will return the same value for all invocations in the group, so the group will either execute do_fast_path()
      * or do_general_path(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation
@@ -1274,7 +1274,7 @@ public final class GLESCapabilities {
      * 
      * <p>The existing isotropic vertex texture functions:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *     vec4 texture2DLodEXT(sampler2D sampler,
      *                          vec2 coord,
      *                          float lod);
@@ -1287,13 +1287,13 @@ public final class GLESCapabilities {
      * 
      *     vec4 textureCubeLodEXT(samplerCube sampler,
      *                            vec3 coord,
-     *                            float lod);</pre></code>
+     *                            float lod);</code></pre>
      * 
      * <p>are added to the built-in functions for fragment shaders with "EXT" suffix appended.</p>
      * 
      * <p>New anisotropic texture functions, providing explicit derivatives:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *     vec4 texture2DGradEXT(sampler2D sampler,
      *                           vec2 P,
      *                           vec2 dPdx,
@@ -1310,7 +1310,7 @@ public final class GLESCapabilities {
      *     vec4 textureCubeGradEXT(samplerCube sampler,
      *                             vec3 P,
      *                             vec3 dPdx,
-     *                             vec3 dPdy);</pre></code>
+     *                             vec3 dPdy);</code></pre>
      * 
      * <p>are added to the built-in functions for vertex shaders and fragment shaders.</p>
      */
@@ -1588,7 +1588,7 @@ public final class GLESCapabilities {
      * <p>This extension provides a shading language abstraction to express such shaders without requiring explicit logic to manually copy attributes from input
      * vertices to output vertices. For example, consider the following simple geometry shader in unextended OpenGL:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *       layout(triangles) in;
      *       layout(triangle_strip) out;
      *       layout(max_vertices=3) out;
@@ -1605,21 +1605,21 @@ public final class GLESCapabilities {
      *       void main()
      *       {
      *         int layer = compute_layer();
-     *         for (int i = 0; i < 3; i++) {
+     *         for (int i = 0; i &lt; 3; i++) {
      *           gl_Position = gl_in[i].gl_Position;
      *           texcoord = v_in[i].texcoord;
      *           baseColor = v_in[i].baseColor;
      *           gl_Layer = layer;
      *           EmitVertex();
      *         }
-     *       }</pre></code>
+     *       }</code></pre>
      * 
      * <p>In this shader, the inputs "gl_Position", "Inputs.texcoord", and "Inputs.baseColor" are simply copied from the input vertex to the corresponding output
      * vertex. The only "interesting" work done by the geometry shader is computing and emitting a gl_Layer value for the primitive.</p>
      * 
      * <p>The following geometry shader, using this extension, is equivalent:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *       #extension GL_NV_geometry_shader_passthrough : require
      * 
      *       layout(triangles) in;
@@ -1643,7 +1643,7 @@ public final class GLESCapabilities {
      *         // The shader simply computes and writes gl_Layer.  We don't
      *         // loop over three vertices or call EmitVertex().
      *         gl_Layer = compute_layer();
-     *       }</pre></code>
+     *       }</code></pre>
      * 
      * <p>Requires {@link GLES31 GLES 3.1}.</p>
      */
@@ -1718,8 +1718,8 @@ public final class GLESCapabilities {
      * primitive, or that failed the early depth/stencil tests. This can be enabled by redeclaring the gl_SampleMask output with the "override_coverage"
      * layout qualifier:</p>
      * 
-     * <code><pre>
-     *     layout(override_coverage) out int gl_SampleMask[];</pre></code>
+     * <pre><code>
+     *     layout(override_coverage) out int gl_SampleMask[];</code></pre>
      * 
      * <p>Requires {@link #GL_OES_sample_variables OES_sample_variables}.</p>
      */
@@ -1882,7 +1882,8 @@ public final class GLESCapabilities {
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_element_index_uint.txt">OES_element_index_uint</a> extension is supported.
      * 
-     * <p>OpenGL ES 1.0 supports DrawElements with {@code type} value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT <type> values.</p>
+     * <p>OpenGL ES 1.0 supports DrawElements with {@code type} value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT
+     * {@code type} values.</p>
      */
     public final boolean GL_OES_element_index_uint;
     /**
@@ -1908,8 +1909,8 @@ public final class GLESCapabilities {
      * capabilities of version 3.10 of the OpenGL ES Shading Language. Shaders using the new functionality provided by this extension should enable this
      * functionality via the construct</p>
      * 
-     * <code><pre>
-     *     #extension GL_OES_gpu_shader5 : require (or enable)</pre></code>
+     * <pre><code>
+     *     #extension GL_OES_gpu_shader5 : require (or enable)</code></pre>
      * 
      * <p>This extension provides a variety of new features for all shader types, including:</p>
      * 

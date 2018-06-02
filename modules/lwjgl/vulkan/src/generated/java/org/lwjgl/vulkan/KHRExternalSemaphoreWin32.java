@@ -102,10 +102,10 @@ public class KHRExternalSemaphoreWin32 {
      * 
      * <p>To import a semaphore payload from a Windows handle, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkImportSemaphoreWin32HandleKHR(
      *     VkDevice                                    device,
-     *     const VkImportSemaphoreWin32HandleInfoKHR*  pImportSemaphoreWin32HandleInfo);</pre></code>
+     *     const VkImportSemaphoreWin32HandleInfoKHR*  pImportSemaphoreWin32HandleInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -164,11 +164,11 @@ public class KHRExternalSemaphoreWin32 {
      * 
      * <p>To export a Windows handle representing the payload of a semaphore, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetSemaphoreWin32HandleKHR(
      *     VkDevice                                    device,
      *     const VkSemaphoreGetWin32HandleInfoKHR*     pGetWin32HandleInfo,
-     *     HANDLE*                                     pHandle);</pre></code>
+     *     HANDLE*                                     pHandle);</code></pre>
      * 
      * <h5>Description</h5>
      * 

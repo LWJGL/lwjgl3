@@ -51,19 +51,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDeviceGroupDeviceCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t physicalDeviceCount;
  *     VkPhysicalDevice const * pPhysicalDevices;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

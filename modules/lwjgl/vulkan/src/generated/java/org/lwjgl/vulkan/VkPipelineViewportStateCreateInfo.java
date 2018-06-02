@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPipelineViewportStateCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -67,13 +67,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkViewport VkViewport const} * pViewports;
  *     uint32_t scissorCount;
  *     {@link VkRect2D VkRect2D const} * pScissors;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPipelineViewportStateCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

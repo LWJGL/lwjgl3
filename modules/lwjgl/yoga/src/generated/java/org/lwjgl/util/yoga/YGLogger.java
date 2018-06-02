@@ -14,14 +14,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * int (*) (
  *     YGConfigRef const config,
  *     YGNodeRef const node,
  *     YGLogLevel level,
  *     char const *format,
  *     va_list args
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class YGLogger extends Callback implements YGLoggerI {
 

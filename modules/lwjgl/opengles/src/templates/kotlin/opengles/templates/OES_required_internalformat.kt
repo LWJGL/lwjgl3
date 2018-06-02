@@ -21,9 +21,9 @@ val OES_required_internalformat = "OESRequiredInternalformat".nativeClassGLES("O
 
         For reference, "Desktop" OpenGL uses the {@code internalformat} argument to glTexImage*, glCopyTexImage* and glRenderbufferStorageEXT as a hint,
         defining the particular base format and precision that the application wants the implementation to maintain when storing the image data. Further, the
-        application can choose an {@code internalformat} with a different base internal format than the source format specified by <format>. The implementation
-        is not required to exactly match the precision specified by {@code internalformat} when choosing an internal storage precision, but it is required to
-        match the base internal format of {@code internalformat}.
+        application can choose an {@code internalformat} with a different base internal format than the source format specified by {@code format}. The
+        implementation is not required to exactly match the precision specified by {@code internalformat} when choosing an internal storage precision, but it
+        is required to match the base internal format of {@code internalformat}.
 
         In addition, ES 1.1 does not allow an implementation to fail a request to glTexImage2D for any of the legal {@code format} and {@code type}, even if
         the implementation does not natively support data stored in that external {@code format} and {@code type}. However, there are no additional requirements

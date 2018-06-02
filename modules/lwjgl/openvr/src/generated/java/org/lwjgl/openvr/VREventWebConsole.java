@@ -16,10 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VREvent_WebConsole_t {
  *     WebConsoleHandle_t webConsoleHandle;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VREvent_WebConsole_t")
 public class VREventWebConsole extends Struct {
@@ -27,6 +27,7 @@ public class VREventWebConsole extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

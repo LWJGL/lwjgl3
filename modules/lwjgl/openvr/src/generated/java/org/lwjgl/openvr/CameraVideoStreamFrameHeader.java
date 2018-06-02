@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct CameraVideoStreamFrameHeader_t {
  *     EVRTrackedCameraFrameType eFrameType;
  *     uint32_t nWidth;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t nBytesPerPixel;
  *     uint32_t nFrameSequence;
  *     {@link TrackedDevicePose TrackedDevicePose_t} standingTrackedDevicePose;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct CameraVideoStreamFrameHeader_t")
 public class CameraVideoStreamFrameHeader extends Struct implements NativeResource {
@@ -34,6 +34,7 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

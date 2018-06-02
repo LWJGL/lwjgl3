@@ -276,12 +276,11 @@ public class VRSystem {
      * <p>For {@link VR#ETextureType_TextureType_IOSurface} returns the {@code id<MTLDevice>} that should be used by the application.</p>
      * 
      * <p>On 10.13+ for {@link VR#ETextureType_TextureType_OpenGL} returns the {@code registryId} of the renderer which should be used by the application. See Apple
-     * Technical Q&A QA1168 for information on enumerating GL Renderers, and the new {@code kCGLRPRegistryIDLow} and {@code kCGLRPRegistryIDHigh}
+     * Technical Q&amp;A QA1168 for information on enumerating GL Renderers, and the new {@code kCGLRPRegistryIDLow} and {@code kCGLRPRegistryIDHigh}
      * {@code CGLRendererProperty} values in the 10.13 SDK.</p>
      * 
      * <p>Pre 10.13 for {@link VR#ETextureType_TextureType_OpenGL} returns 0, as there is no dependable way to correlate the HMDs {@code MTLDevice} with a GL Renderer.</p>
      *
-     * @param pnDevice    
      * @param textureType one of:<br><table><tr><td>{@link VR#ETextureType_TextureType_DirectX}</td><td>{@link VR#ETextureType_TextureType_OpenGL}</td></tr><tr><td>{@link VR#ETextureType_TextureType_Vulkan}</td><td>{@link VR#ETextureType_TextureType_IOSurface}</td></tr><tr><td>{@link VR#ETextureType_TextureType_DirectX12}</td><td>{@link VR#ETextureType_TextureType_DXGISharedHandle}</td></tr></table>
      * @param pInstance   an optional parameter that is required only when {@code textureType} is {@link VR#ETextureType_TextureType_Vulkan}
      */
@@ -351,7 +350,6 @@ public class VRSystem {
      *
      * @param eOrigin                           tracking universe that returned poses should be relative to. One of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
      * @param fPredictedSecondsToPhotonsFromNow number of seconds from now to predict poses for. Positive numbers are in the future. Pass 0 to get the state at the instant the function is called.
-     * @param pTrackedDevicePoseArray           
      */
     public static void VRSystem_GetDeviceToAbsoluteTrackingPose(@NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsToPhotonsFromNow, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pTrackedDevicePoseArray) {
         nVRSystem_GetDeviceToAbsoluteTrackingPose(eOrigin, fPredictedSecondsToPhotonsFromNow, pTrackedDevicePoseArray.address(), pTrackedDevicePoseArray.remaining());
@@ -442,9 +440,7 @@ public class VRSystem {
      * Get a sorted array of device indices of a given class of tracked devices (e.g. controllers).  Devices are sorted right to left relative to the
      * specified tracked device (default: hmd -- pass in -1 for absolute tracking space).
      *
-     * @param eTrackedDeviceClass            one of:<br><table><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_Invalid}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_HMD}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_Controller}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_GenericTracker}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_TrackingReference}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect}</td></tr></table>
-     * @param punTrackedDeviceIndexArray     
-     * @param unRelativeToTrackedDeviceIndex 
+     * @param eTrackedDeviceClass one of:<br><table><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_Invalid}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_HMD}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_Controller}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_GenericTracker}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_TrackingReference}</td></tr><tr><td>{@link VR#ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect}</td></tr></table>
      *
      * @return the number of devices in the list, or the size of the array needed if not large enough
      */
@@ -455,11 +451,7 @@ public class VRSystem {
 
     // --- [ VRSystem_GetTrackedDeviceActivityLevel ] ---
 
-    /**
-     * Returns the level of activity on the device.
-     *
-     * @param unDeviceId 
-     */
+    /** Returns the level of activity on the device. */
     @NativeType("EDeviceActivityLevel")
     public static int VRSystem_GetTrackedDeviceActivityLevel(@NativeType("TrackedDeviceIndex_t") int unDeviceId) {
         long __functionAddress = OpenVR.VRSystem.GetTrackedDeviceActivityLevel;
@@ -483,10 +475,6 @@ public class VRSystem {
     /**
      * Convenience utility to apply the specified transform to the specified pose. This properly transforms all pose components, including velocity and
      * angular velocity.
-     *
-     * @param pOutputPose        
-     * @param pTrackedDevicePose 
-     * @param pTransform         
      */
     public static void VRSystem_ApplyTransform(@NativeType("TrackedDevicePose_t *") TrackedDevicePose pOutputPose, @NativeType("TrackedDevicePose_t const *") TrackedDevicePose pTrackedDevicePose, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform) {
         nVRSystem_ApplyTransform(pOutputPose.address(), pTrackedDevicePose.address(), pTransform.address());
@@ -510,11 +498,7 @@ public class VRSystem {
 
     // --- [ VRSystem_GetControllerRoleForTrackedDeviceIndex ] ---
 
-    /**
-     * Returns the controller type associated with a device index.
-     *
-     * @param unDeviceIndex 
-     */
+    /** Returns the controller type associated with a device index. */
     @NativeType("ETrackedControllerRole")
     public static int VRSystem_GetControllerRoleForTrackedDeviceIndex(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex) {
         long __functionAddress = OpenVR.VRSystem.GetControllerRoleForTrackedDeviceIndex;
@@ -713,8 +697,6 @@ public class VRSystem {
      *
      * @param unDeviceIndex index of the device to get the property for
      * @param prop          which property to get
-     * @param propType      
-     * @param pBuffer       
      * @param pError        the error returned when attempting to fetch this property. This can be {@code NULL} if the caller doesn't care about the source of a property error.
      */
     @NativeType("uint32_t")
@@ -1152,10 +1134,6 @@ public class VRSystem {
      * Sends a request to the driver for the specified device and returns the response. The maximum response size is 32k, but this method can be called with a
      * smaller buffer. If the response exceeds the size of the buffer, it is truncated.
      *
-     * @param unDeviceIndex     
-     * @param pchRequest        
-     * @param pchResponseBuffer 
-     *
      * @return the size of the response including its terminating null
      */
     @NativeType("uint32_t")
@@ -1169,10 +1147,6 @@ public class VRSystem {
     /**
      * Sends a request to the driver for the specified device and returns the response. The maximum response size is 32k, but this method can be called with a
      * smaller buffer. If the response exceeds the size of the buffer, it is truncated.
-     *
-     * @param unDeviceIndex     
-     * @param pchRequest        
-     * @param pchResponseBuffer 
      *
      * @return the size of the response including its terminating null
      */
@@ -1190,10 +1164,6 @@ public class VRSystem {
     /**
      * Sends a request to the driver for the specified device and returns the response. The maximum response size is 32k, but this method can be called with a
      * smaller buffer. If the response exceeds the size of the buffer, it is truncated.
-     *
-     * @param unDeviceIndex        
-     * @param pchRequest           
-     * @param unResponseBufferSize 
      *
      * @return the size of the response including its terminating null
      */
@@ -1214,9 +1184,6 @@ public class VRSystem {
      * Sends a request to the driver for the specified device and returns the response. The maximum response size is 32k, but this method can be called with a
      * smaller buffer. If the response exceeds the size of the buffer, it is truncated.
      *
-     * @param unDeviceIndex 
-     * @param pchRequest    
-     *
      * @return the size of the response including its terminating null
      */
     @NativeType("uint32_t")
@@ -1235,8 +1202,6 @@ public class VRSystem {
      * <p>Use the properties {@link VR#ETrackedDeviceProperty_Prop_Firmware_UpdateAvailable_Bool}, {@link VR#ETrackedDeviceProperty_Prop_Firmware_ManualUpdate_Bool}, and
      * {@link VR#ETrackedDeviceProperty_Prop_Firmware_ManualUpdateURL_String} to figure our whether a firmware update is available, and to figure out whether its a
      * manual update. {@link VR#ETrackedDeviceProperty_Prop_Firmware_ManualUpdateURL_String} should point to an URL describing the manual update process.</p>
-     *
-     * @param unDeviceIndex 
      */
     @NativeType("EVRFirmwareError")
     public static int VRSystem_PerformFirmwareUpdate(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex) {

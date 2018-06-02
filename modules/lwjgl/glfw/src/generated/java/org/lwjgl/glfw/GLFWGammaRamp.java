@@ -30,13 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct GLFWgammaramp {
  *     unsigned short * red;
  *     unsigned short * green;
  *     unsigned short * blue;
  *     unsigned int size;
- * }</pre></code>
+ * }</code></pre>
  *
  * @since version 3.0
  */
@@ -46,6 +46,7 @@ public class GLFWGammaRamp extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

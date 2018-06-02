@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     void *_ptr,
  *     void *_userData
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class BGFXReleaseFunctionCallback extends Callback implements BGFXReleaseFunctionCallbackI {
 

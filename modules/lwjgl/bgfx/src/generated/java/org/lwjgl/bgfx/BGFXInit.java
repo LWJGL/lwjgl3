@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_init_t {
  *     bgfx_renderer_type_t type;
  *     uint16_t vendorId;
@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link BGFXInitLimits bgfx_init_limits_t} limits;
  *     {@link BGFXCallbackInterface bgfx_callback_interface_t} * callback;
  *     {@link BGFXAllocatorInterface bgfx_allocator_interface_t} * allocator;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_init_t")
 public class BGFXInit extends Struct implements NativeResource {
@@ -48,6 +48,7 @@ public class BGFXInit extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

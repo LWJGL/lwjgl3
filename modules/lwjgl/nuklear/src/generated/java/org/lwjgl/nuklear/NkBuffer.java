@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_buffer {
  *     {@link NkBufferMarker struct nk_buffer_marker} marker[2];
  *     {@link NkAllocator struct nk_allocator} pool;
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     nk_size needed;
  *     nk_size calls;
  *     nk_size size;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_buffer")
 public class NkBuffer extends Struct implements NativeResource {
@@ -52,6 +52,7 @@ public class NkBuffer extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

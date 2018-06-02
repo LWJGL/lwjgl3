@@ -14,10 +14,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     struct aiFile *pFile
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class AIFileFlushProc extends Callback implements AIFileFlushProcI {
 

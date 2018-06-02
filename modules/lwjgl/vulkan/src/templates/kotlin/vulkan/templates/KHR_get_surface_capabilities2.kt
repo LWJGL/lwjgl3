@@ -80,11 +80,11 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         <h5>C Specification</h5>
         To query the basic capabilities of a surface defined by the core or extensions, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceSurfaceCapabilities2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
-￿    VkSurfaceCapabilities2KHR*                  pSurfaceCapabilities);</pre></code>
+￿    VkSurfaceCapabilities2KHR*                  pSurfaceCapabilities);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceSurfaceCapabilities2KHR() behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
@@ -128,12 +128,12 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         <h5>C Specification</h5>
         To query the supported swapchain format tuples for a surface, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceSurfaceFormats2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
 ￿    uint32_t*                                   pSurfaceFormatCount,
-￿    VkSurfaceFormat2KHR*                        pSurfaceFormats);</pre></code>
+￿    VkSurfaceFormat2KHR*                        pSurfaceFormats);</code></pre>
 
         <h5>Description</h5>
         If {@code pSurfaceFormats} is {@code NULL}, then the number of format tuples supported for the given {@code surface} is returned in {@code pSurfaceFormatCount}. The number of format tuples supported will be greater than or equal to 1. Otherwise, {@code pSurfaceFormatCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of {@code pSurfaceFormatCount} is less than the number of format tuples supported, at most {@code pSurfaceFormatCount} structures will be written. If {@code pSurfaceFormatCount} is smaller than the number of format tuples supported for the surface parameters described in {@code pSurfaceInfo}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.

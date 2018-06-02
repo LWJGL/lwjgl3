@@ -34,14 +34,6 @@ public class OVRMultiviewMultisampledRenderToTexture {
     /**
      * Operates similarly to {@link OVRMultiview#glFramebufferTextureMultiviewOVR FramebufferTextureMultiviewOVR}, except that it also enables multisampled rendering into the images of a
      * non-multisampled texture object similarly to {@link EXTMultisampledRenderToTexture#glFramebufferTexture2DMultisampleEXT FramebufferTexture2DMultisampleEXT}.
-     *
-     * @param target        
-     * @param attachment    
-     * @param texture       
-     * @param level         
-     * @param samples       
-     * @param baseViewIndex 
-     * @param numViews      
      */
     public static native void glFramebufferTextureMultisampleMultiviewOVR(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLsizei") int samples, @NativeType("GLint") int baseViewIndex, @NativeType("GLsizei") int numViews);
 

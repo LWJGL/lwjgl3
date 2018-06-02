@@ -57,7 +57,7 @@ import static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrPerfStats {
  *     {@link OVRPerfStatsPerCompositorFrame ovrPerfStatsPerCompositorFrame} FrameStats[ovrMaxProvidedFrameStats];
  *     int FrameStatsCount;
@@ -65,7 +65,7 @@ import static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats;
  *     float AdaptiveGpuPerformanceScale;
  *     ovrBool AswIsAvailable;
  *     ovrProcessId VisibleProcessId;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrPerfStats")
 public class OVRPerfStats extends Struct implements NativeResource {
@@ -73,6 +73,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

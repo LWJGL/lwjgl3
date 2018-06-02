@@ -88,7 +88,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      *
      * @return This buffer
      *
-     * @throws IllegalArgumentException If the preconditions on <tt>newPosition</tt> do not hold
+     * @throws IllegalArgumentException If the preconditions on {@code newPosition} do not hold
      */
     public SELF position(int position) {
         if (position < 0 || limit < position) {
@@ -118,7 +118,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      *
      * @return This buffer
      *
-     * @throws IllegalArgumentException If the preconditions on <tt>newLimit</tt> do not hold
+     * @throws IllegalArgumentException If the preconditions on {@code newLimit} do not hold
      */
     public SELF limit(int limit) {
         if (limit < 0 || capacity < limit) {
@@ -237,7 +237,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
     /**
      * Tells whether there are any elements between the current position and the limit.
      *
-     * @return <tt>true</tt> if, and only if, there is at least one element remaining in this buffer
+     * @return {@code true} if, and only if, there is at least one element remaining in this buffer
      */
     public boolean hasRemaining() {
         return position < limit;
@@ -300,13 +300,13 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
      *
      * <p>This method transfers the elements remaining in the specified source buffer into this buffer. If there are more elements remaining in the source
-     * buffer than in this buffer, that is, if <tt>src.remaining()</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no elements are transferred and a
+     * buffer than in this buffer, that is, if {@code src.remaining()}&nbsp;{@code &gt;}&nbsp;{@code remaining()}, then no elements are transferred and a
      * {@link java.nio.BufferOverflowException} is thrown.
      *
-     * <p>Otherwise, this method copies <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> elements from the specified buffer into this buffer, starting at each
+     * <p>Otherwise, this method copies <i>n</i>&nbsp;=&nbsp;{@code src.remaining()} elements from the specified buffer into this buffer, starting at each
      * buffer's current position. The positions of both buffers are then incremented by <i>n</i>.</p>
      *
-     * <p>In other words, an invocation of this method of the form <tt>dst.put(src)</tt> has exactly the same effect as the loop</p>
+     * <p>In other words, an invocation of this method of the form {@code dst.put(src)} has exactly the same effect as the loop</p>
      *
      * <pre>
      *     while (src.hasRemaining())
@@ -341,8 +341,8 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * Compacts this buffer&nbsp;&nbsp;<i>(optional operation)</i>.
      *
      * <p>The elements between the buffer's current position and its limit, if any, are copied to the beginning of the buffer. That is, the element at index
-     * <i>p</i>&nbsp;=&nbsp;<tt>position()</tt> is copied to index zero, the element at index <i>p</i>&nbsp;+&nbsp;1 is copied to index one, and so forth until
-     * the element at index <tt>limit()</tt>&nbsp;-&nbsp;1 is copied to index <i>n</i>&nbsp;=&nbsp;<tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>&nbsp;-&nbsp;
+     * <i>p</i>&nbsp;=&nbsp;{@code position()} is copied to index zero, the element at index <i>p</i>&nbsp;+&nbsp;1 is copied to index one, and so forth until
+     * the element at index {@code limit()}&nbsp;-&nbsp;1 is copied to index <i>n</i>&nbsp;=&nbsp;{@code limit()}&nbsp;-&nbsp;{@code 1}&nbsp;-&nbsp;
      * <i>p</i>.
      * The buffer's position is then set to <i>n+1</i> and its limit is set to its capacity. The mark, if defined, is discarded.
      *

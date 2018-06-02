@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     void *cbopaque,
  *     char const *s
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class MallocMessageCallback extends Callback implements MallocMessageCallbackI {
 

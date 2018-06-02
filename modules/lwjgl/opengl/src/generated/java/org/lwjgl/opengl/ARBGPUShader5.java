@@ -12,8 +12,8 @@ package org.lwjgl.opengl;
  * capabilities of version 1.50 of the OpenGL Shading Language. Shaders using the new functionality provided by this extension should enable this
  * functionality via the construct:</p>
  * 
- * <code><pre>
- * #extension GL_ARB_gpu_shader5 : require     (or enable)</pre></code>
+ * <pre><code>
+ * #extension GL_ARB_gpu_shader5 : require     (or enable)</code></pre>
  * 
  * <p>This extension provides a variety of new features for all shader types, including:</p>
  * 

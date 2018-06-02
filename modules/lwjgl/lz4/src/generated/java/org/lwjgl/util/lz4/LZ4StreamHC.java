@@ -20,11 +20,11 @@ import static org.lwjgl.util.lz4.LZ4HC.LZ4_STREAMHCSIZE_SIZET;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union LZ4_streamHC_t {
  *     size_t table[LZ4_STREAMHCSIZE_SIZET];
  *     {@link LZ4HCCCtxInternal struct LZ4HC_CCtx_internal} internal_donotuse;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union LZ4_streamHC_t")
 public class LZ4StreamHC extends Struct {
@@ -32,6 +32,7 @@ public class LZ4StreamHC extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -20,14 +20,14 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         In the intended use case for viewport position scaling, an application should use a set of four viewports, one for each of the four quadrants of a Cartesian coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify <code>A</code> and <code>B</code> coefficients of the <code>w</code>-scaling equation above, that have the same value, but different signs, for each of the viewports. The signs of <code>A</code> and <code>B</code> should match the signs of <code>x</code> and <code>y</code> for the quadrant that they represent such that the value of <code>w'</code> will always be greater than or equal to the original <code>w</code> value for the entire image. Since the offset to <code>w</code>, (<code>Ax + By</code>), is always positive, and increases with the absolute values of <code>x</code> and <code>y</code>, the effective resolution will fall off linearly from the center of the image to its edges.
 
         <h5>Examples</h5>
-        <code><pre>
+        <pre><code>
 ￿VkViewport viewports[4];
 ￿VkRect2D scissors[4];
 ￿VkViewportWScalingNV scalings[4];
 ￿
-￿for (int i = 0; i < 4; i++) {
-￿    int x = (i & 2) ? 0 : currentWindowWidth / 2;
-￿    int y = (i & 1) ? 0 : currentWindowHeight / 2;
+￿for (int i = 0; i &lt; 4; i++) {
+￿    int x = (i &amp; 2) ? 0 : currentWindowWidth / 2;
+￿    int y = (i &amp; 1) ? 0 : currentWindowHeight / 2;
 ￿
 ￿    viewports[i].x = 0;
 ￿    viewports[i].y = 0;
@@ -42,26 +42,26 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 ￿    scissors[i].extent.height = currentWindowHeight/2;
 ￿
 ￿    const float factor = 0.15;
-￿    scalings[i].xcoeff = ((i & 2) ? -1.0 : 1.0) * factor;
-￿    scalings[i].ycoeff = ((i & 1) ? -1.0 : 1.0) * factor;
+￿    scalings[i].xcoeff = ((i &amp; 2) ? -1.0 : 1.0) * factor;
+￿    scalings[i].ycoeff = ((i &amp; 1) ? -1.0 : 1.0) * factor;
 ￿}
 ￿
 ￿VkPipelineViewportWScalingStateCreateInfoNV vpWScalingStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV };
 ￿
 ￿vpWScalingStateInfo.viewportWScalingEnable = VK_TRUE;
 ￿vpWScalingStateInfo.viewportCount = 4;
-￿vpWScalingStateInfo.pViewportWScalings = &scalings[0];
+￿vpWScalingStateInfo.pViewportWScalings = &amp;scalings[0];
 ￿
 ￿VkPipelineViewportStateCreateInfo vpStateInfo = { VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO };
 ￿vpStateInfo.viewportCount = 4;
-￿vpStateInfo.pViewports = &viewports[0];
+￿vpStateInfo.pViewports = &amp;viewports[0];
 ￿vpStateInfo.scissorCount = 4;
-￿vpStateInfo.pScissors = &scissors[0];
-￿vpStateInfo.pNext = &vpWScalingStateInfo;</pre></code>
+￿vpStateInfo.pScissors = &amp;scissors[0];
+￿vpStateInfo.pNext = &amp;vpWScalingStateInfo;</code></pre>
 
         Example shader to read from a w-scaled texture:
 
-        <code><pre>
+        <pre><code>
 ￿// Vertex Shader
 ￿// Draw a triangle that covers the whole screen
 ￿const vec4 positions[3] = vec4[3](vec4(-1, -1, 0, 1),
@@ -98,7 +98,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 ￿    P *= sign(uv);
 ￿
 ￿    Color = texture(tex, P * 0.5 + 0.5);
-￿}</pre></code>
+￿}</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -166,12 +166,12 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         <h5>C Specification</h5>
         If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled, viewport <b>W</b> scaling parameters are specified using the {@code pViewportWScalings} member of ##VkPipelineViewportWScalingStateCreateInfoNV in the pipeline state object. If the pipeline state object was created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdSetViewportWScalingNV(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    firstViewport,
 ￿    uint32_t                                    viewportCount,
-￿    const VkViewportWScalingNV*                 pViewportWScalings);</pre></code>
+￿    const VkViewportWScalingNV*                 pViewportWScalings);</code></pre>
 
         <h5>Description</h5>
         The viewport parameters taken from element <code>i</code> of {@code pViewportWScalings} replace the current state for the viewport index <code>firstViewport + i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.

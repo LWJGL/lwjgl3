@@ -99,11 +99,11 @@ public class EXTDisplaySurfaceCounter {
      * 
      * <p>To query the basic capabilities of a surface, needed in order to create a swapchain, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfaceCapabilities2EXT(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkSurfaceKHR                                surface,
-     *     VkSurfaceCapabilities2EXT*                  pSurfaceCapabilities);</pre></code>
+     *     VkSurfaceCapabilities2EXT*                  pSurfaceCapabilities);</code></pre>
      * 
      * <h5>Description</h5>
      * 

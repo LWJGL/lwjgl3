@@ -46,16 +46,9 @@ public class STBPerlin {
     /**
      * Computes ridged noise. Calls {@link #stb_perlin_noise3 perlin_noise3} {@code octaves} times, so this parameter will affect runtime.
      *
-     * @param x          the x coordinate
-     * @param y          the y coordinate
-     * @param z          the z coordinate
-     * @param lacunarity 
-     * @param gain       
-     * @param offset     
-     * @param octaves    
-     * @param x_wrap     
-     * @param y_wrap     
-     * @param z_wrap     
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param z the z coordinate
      */
     public static native float stb_perlin_ridge_noise3(float x, float y, float z, float lacunarity, float gain, float offset, int octaves, int x_wrap, int y_wrap, int z_wrap);
 
@@ -64,15 +57,9 @@ public class STBPerlin {
     /**
      * Computes Fractal Brownian Motion noise. Calls {@link #stb_perlin_noise3 perlin_noise3} {@code octaves} times, so this parameter will affect runtime.
      *
-     * @param x          the x coordinate
-     * @param y          the y coordinate
-     * @param z          the z coordinate
-     * @param lacunarity 
-     * @param gain       
-     * @param octaves    
-     * @param x_wrap     
-     * @param y_wrap     
-     * @param z_wrap     
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param z the z coordinate
      */
     public static native float stb_perlin_fbm_noise3(float x, float y, float z, float lacunarity, float gain, int octaves, int x_wrap, int y_wrap, int z_wrap);
 
@@ -81,15 +68,9 @@ public class STBPerlin {
     /**
      * Computes turbulence noise. Calls {@link #stb_perlin_noise3 perlin_noise3} {@code octaves} times, so this parameter will affect runtime.
      *
-     * @param x          the x coordinate
-     * @param y          the y coordinate
-     * @param z          the z coordinate
-     * @param lacunarity 
-     * @param gain       
-     * @param octaves    
-     * @param x_wrap     
-     * @param y_wrap     
-     * @param z_wrap     
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param z the z coordinate
      */
     public static native float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves, int x_wrap, int y_wrap, int z_wrap);
 

@@ -14,13 +14,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     void const *key,
  *     EGLsizeiANDROID keySize,
  *     void const *value,
  *     EGLsizeiANDROID valueSize
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("EGLSetBlobFuncANDROID")

@@ -16,14 +16,14 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_filePath,
  *     uint16_t _line,
  *     char const *_format,
  *     va_list _argList
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)")

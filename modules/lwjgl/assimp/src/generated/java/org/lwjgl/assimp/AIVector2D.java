@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiVector2D {
  *     float x;
  *     float y;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiVector2D")
 public class AIVector2D extends Struct {
@@ -28,6 +28,7 @@ public class AIVector2D extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

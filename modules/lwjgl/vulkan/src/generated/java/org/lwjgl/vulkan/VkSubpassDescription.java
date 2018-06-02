@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkSubpassDescription {
  *     VkSubpassDescriptionFlags flags;
  *     VkPipelineBindPoint pipelineBindPoint;
@@ -95,13 +95,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkAttachmentReference VkAttachmentReference const} * pDepthStencilAttachment;
  *     uint32_t preserveAttachmentCount;
  *     uint32_t const * pPreserveAttachments;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkSubpassDescription extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

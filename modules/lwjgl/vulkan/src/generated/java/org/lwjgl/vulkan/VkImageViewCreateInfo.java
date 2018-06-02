@@ -125,7 +125,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkImageViewCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -135,13 +135,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkFormat format;
  *     {@link VkComponentMapping VkComponentMapping} components;
  *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkImageViewCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

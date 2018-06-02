@@ -12,11 +12,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     void *mm_context,
  *     rmtU32 size
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("rmtMallocPtr")

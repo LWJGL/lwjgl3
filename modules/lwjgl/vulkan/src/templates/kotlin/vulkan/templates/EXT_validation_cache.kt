@@ -101,12 +101,12 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <h5>C Specification</h5>
         To create validation cache objects, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateValidationCacheEXT(
 ￿    VkDevice                                    device,
 ￿    const VkValidationCacheCreateInfoEXT*       pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkValidationCacheEXT*                       pValidationCache);</pre></code>
+￿    VkValidationCacheEXT*                       pValidationCache);</code></pre>
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -158,11 +158,11 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <h5>C Specification</h5>
         To destroy a validation cache, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroyValidationCacheEXT(
 ￿    VkDevice                                    device,
 ￿    VkValidationCacheEXT                        validationCache,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -200,12 +200,12 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <h5>C Specification</h5>
         Validation cache objects <b>can</b> be merged using the command:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkMergeValidationCachesEXT(
 ￿    VkDevice                                    device,
 ￿    VkValidationCacheEXT                        dstCache,
 ￿    uint32_t                                    srcCacheCount,
-￿    const VkValidationCacheEXT*                 pSrcCaches);</pre></code>
+￿    const VkValidationCacheEXT*                 pSrcCaches);</code></pre>
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -261,12 +261,12 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         <h5>C Specification</h5>
         Data <b>can</b> be retrieved from a validation cache object using the command:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetValidationCacheDataEXT(
 ￿    VkDevice                                    device,
 ￿    VkValidationCacheEXT                        validationCache,
 ￿    size_t*                                     pDataSize,
-￿    void*                                       pData);</pre></code>
+￿    void*                                       pData);</code></pre>
 
         <h5>Description</h5>
         If {@code pData} is {@code NULL}, then the maximum size of the data that <b>can</b> be retrieved from the validation cache, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}.

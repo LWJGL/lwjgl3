@@ -19,12 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ZSTD_customMem {
  *     {@link ZSTDAllocFunctionI ZSTD_allocFunction} customAlloc;
  *     {@link ZSTDFreeFunctionI ZSTD_freeFunction} customFree;
  *     void * opaque;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ZSTD_customMem")
 public class ZSTDCustomMem extends Struct implements NativeResource {
@@ -32,6 +32,7 @@ public class ZSTDCustomMem extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

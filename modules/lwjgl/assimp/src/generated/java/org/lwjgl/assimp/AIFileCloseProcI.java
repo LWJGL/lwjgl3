@@ -12,11 +12,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     struct aiFileIO *pFileIO,
  *     struct aiFile *pFile
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("aiFileCloseProc")

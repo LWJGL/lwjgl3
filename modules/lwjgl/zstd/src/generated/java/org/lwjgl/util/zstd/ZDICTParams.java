@@ -26,12 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ZDICT_params_t {
  *     int compressionLevel;
  *     unsigned notificationLevel;
  *     unsigned dictID;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ZDICT_params_t")
 public class ZDICTParams extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class ZDICTParams extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

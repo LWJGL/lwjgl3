@@ -19,10 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct HmdQuad_t {
  *     {@link HmdVector3 HmdVector3_t} vCorners[4];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct HmdQuad_t")
 public class HmdQuad extends Struct implements NativeResource {
@@ -30,6 +30,7 @@ public class HmdQuad extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

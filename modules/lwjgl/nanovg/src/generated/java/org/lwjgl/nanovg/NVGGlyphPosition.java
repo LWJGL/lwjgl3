@@ -29,13 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct NVGglyphPosition {
  *     char * str;
  *     float x;
  *     float minx;
  *     float maxx;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct NVGglyphPosition")
 public class NVGGlyphPosition extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

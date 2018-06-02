@@ -28,14 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct InputDigitalActionData_t {
  *     bool bActive;
  *     VRInputValueHandle_t activeOrigin;
  *     bool bState;
  *     bool bChanged;
  *     float fUpdateTime;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct InputDigitalActionData_t")
 public class InputDigitalActionData extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class InputDigitalActionData extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

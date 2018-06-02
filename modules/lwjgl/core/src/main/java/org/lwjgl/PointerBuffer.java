@@ -29,7 +29,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return the new pointer buffer
      *
-     * @throws IllegalArgumentException If the <tt>capacity</tt> is a negative integer
+     * @throws IllegalArgumentException If the {@code capacity} is a negative integer
      */
     public static PointerBuffer allocateDirect(int capacity) {
         ByteBuffer source = BufferUtils.createByteBuffer(BufferUtils.getAllocationSize(capacity, POINTER_SHIFT));
@@ -140,7 +140,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return the pointer at the specified {@code index}
      *
-     * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
+     * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public long get(int index) {
         return memGetAddress(address + (check(index, limit) << POINTER_SHIFT));
@@ -167,7 +167,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
+     * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public PointerBuffer put(int index, long p) {
         memPutAddress(address + (check(index, limit) << POINTER_SHIFT), p);
@@ -463,7 +463,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     /**
      * Relative bulk <i>get</i> method.
      *
-     * <p>This method transfers pointers from this buffer into the specified destination array. An invocation of this method of the form <tt>src.get(a)</tt>
+     * <p>This method transfers pointers from this buffer into the specified destination array. An invocation of this method of the form {@code src.get(a)}
      * behaves in exactly the same way as the invocation
      *
      * <pre>
@@ -471,7 +471,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @return This buffer
      *
-     * @throws BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
+     * @throws BufferUnderflowException If there are fewer than {@code length} pointers remaining in this buffer
      */
     public PointerBuffer get(long[] dst) {
         return get(dst, 0, dst.length);
@@ -481,28 +481,28 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * Relative bulk <i>get</i> method.
      *
      * <p>This method transfers pointers from this buffer into the specified destination array. If there are fewer pointers remaining in the buffer than are
-     * required to satisfy the request, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
+     * required to satisfy the request, that is, if {@code length}&nbsp;{@code &gt;}&nbsp;{@code remaining()}, then no pointers are transferred and a
      * {@link BufferUnderflowException} is thrown.
      *
-     * <p>Otherwise, this method copies <tt>length</tt> pointers from this buffer into the specified array, starting at the current position of this buffer and
-     * at the specified offset in the array. The position of this buffer is then incremented by <tt>length</tt>.
+     * <p>Otherwise, this method copies {@code length} pointers from this buffer into the specified array, starting at the current position of this buffer and
+     * at the specified offset in the array. The position of this buffer is then incremented by {@code length}.
      *
-     * <p>In other words, an invocation of this method of the form <tt>src.get(dst,&nbsp;off,&nbsp;len)</tt> has exactly the same effect as the loop</p>
+     * <p>In other words, an invocation of this method of the form {@code src.get(dst,&nbsp;off,&nbsp;len)} has exactly the same effect as the loop</p>
      *
      * <pre>
-     *     for (int i = off; i < off + len; i++)
+     *     for (int i = off; i &lt; off + len; i++)
      *         dst[i] = src.get(); </pre>
      *
      * <p>except that it first checks that there are sufficient pointers in this buffer and it is potentially much more efficient. </p>
      *
      * @param dst    the array into which pointers are to be written
-     * @param offset the offset within the array of the first pointer to be written; must be non-negative and no larger than <tt>dst.length</tt>
-     * @param length the maximum number of pointers to be written to the specified array; must be non-negative and no larger than <tt>dst.length - offset</tt>
+     * @param offset the offset within the array of the first pointer to be written; must be non-negative and no larger than {@code dst.length}
+     * @param length the maximum number of pointers to be written to the specified array; must be non-negative and no larger than {@code dst.length - offset}
      *
      * @return This buffer
      *
-     * @throws BufferUnderflowException  If there are fewer than <tt>length</tt> pointers remaining in this buffer
-     * @throws IndexOutOfBoundsException If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
+     * @throws BufferUnderflowException  If there are fewer than {@code length} pointers remaining in this buffer
+     * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length} parameters do not hold
      */
     public PointerBuffer get(long[] dst, int offset, int length) {
         if (BITS64) {
@@ -529,7 +529,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
      *
      * <p>This method transfers the entire content of the specified source pointer array into this buffer. An invocation of this method of the form
-     * <tt>dst.put(a)</tt> behaves in exactly the same way as the invocation</p>
+     * {@code dst.put(a)} behaves in exactly the same way as the invocation</p>
      *
      * <pre>
      *     dst.put(a, 0, a.length) </pre>
@@ -546,28 +546,28 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
      *
      * <p>This method transfers pointers into this buffer from the specified source array. If there are more pointers to be copied from the array than remain
-     * in this buffer, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
+     * in this buffer, that is, if {@code length}&nbsp;{@code &gt;}&nbsp;{@code remaining()}, then no pointers are transferred and a
      * {@link BufferOverflowException} is thrown.
      *
-     * <p>Otherwise, this method copies <tt>length</tt> pointers from the specified array into this buffer, starting at the specified offset in the array and
-     * at the current position of this buffer. The position of this buffer is then incremented by <tt>length</tt>.</p>
+     * <p>Otherwise, this method copies {@code length} pointers from the specified array into this buffer, starting at the specified offset in the array and
+     * at the current position of this buffer. The position of this buffer is then incremented by {@code length}.</p>
      *
-     * <p>In other words, an invocation of this method of the form <tt>dst.put(src,&nbsp;off,&nbsp;len)</tt> has exactly the same effect as the loop</p>
+     * <p>In other words, an invocation of this method of the form {@code dst.put(src,&nbsp;off,&nbsp;len)} has exactly the same effect as the loop</p>
      *
      * <pre>
-     *     for (int i = off; i < off + len; i++)
+     *     for (int i = off; i &lt; off + len; i++)
      *         dst.put(a[i]); </pre>
      *
      * <p>except that it first checks that there is sufficient space in this buffer and it is potentially much more efficient.</p>
      *
      * @param src    the array from which pointers are to be read
-     * @param offset the offset within the array of the first pointer to be read; must be non-negative and no larger than <tt>array.length</tt>
-     * @param length the number of pointers to be read from the specified array; must be non-negative and no larger than <tt>array.length - offset</tt>
+     * @param offset the offset within the array of the first pointer to be read; must be non-negative and no larger than {@code array.length}
+     * @param length the number of pointers to be read from the specified array; must be non-negative and no larger than {@code array.length - offset}
      *
      * @return This buffer
      *
      * @throws BufferOverflowException   If there is insufficient space in this buffer
-     * @throws IndexOutOfBoundsException If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
+     * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length} parameters do not hold
      */
     public PointerBuffer put(long[] src, int offset, int length) {
         if (BITS64) {
@@ -594,8 +594,8 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
     /**
      * Returns the current hash code of this buffer.
      *
-     * <p>The hash code of a pointer buffer depends only upon its remaining elements; that is, upon the elements from <tt>position()</tt> up to, and including,
-     * the element at <tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>.</p>
+     * <p>The hash code of a pointer buffer depends only upon its remaining elements; that is, upon the elements from {@code position()} up to, and including,
+     * the element at {@code limit()}&nbsp;-&nbsp;{@code 1}.</p>
      *
      * <p>Because buffer hash codes are content-dependent, it is inadvisable to use buffers as keys in hash maps or similar data structures unless it is known
      * that their contents will not change.</p>
@@ -627,7 +627,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @param ob the object to which this buffer is to be compared
      *
-     * @return <tt>true</tt> if, and only if, this buffer is equal to the
+     * @return {@code true} if, and only if, this buffer is equal to the
      * given object
      */
     public boolean equals(Object ob) {

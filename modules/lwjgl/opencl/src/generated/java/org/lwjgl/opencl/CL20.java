@@ -141,8 +141,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a></p>
-     * 
      * Creates a host or device command-queue on a specific device.
      * 
      * <p>OpenCL objects such as memory, program and kernel objects are created using a context. Operations on these objects are performed using a command-queue.
@@ -169,6 +167,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_command_queue")
     public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_command_queue_properties const *") LongBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -192,8 +192,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a></p>
-     * 
      * Creates a pipe object.
      *
      * @param context          a valid OpenCL context used to create the pipe object
@@ -218,6 +216,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") IntBuffer properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -245,8 +245,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a></p>
-     * 
      * Queries information specific to a pipe object.
      *
      * @param pipe                 the pipe object being queried
@@ -263,6 +261,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -273,8 +273,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a></p>
-     * 
      * Queries information specific to a pipe object.
      *
      * @param pipe                 the pipe object being queried
@@ -291,6 +289,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -313,8 +313,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSVMAlloc.html">Reference Page</a></p>
-     * 
      * Allocates a shared virtual memory buffer (referred to as a SVM buffer) that can be shared by the host and all devices in an OpenCL context that support
      * shared virtual memory.
      * 
@@ -360,6 +358,8 @@ public class CL20 {
      *         <li>{@code alignment} is not a power of two or the OpenCL implementation cannot support the specified alignment for at least one device in context.</li>
      *         <li>There was a failure to allocate resources.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSVMAlloc.html">Reference Page</a>
      */
     @Nullable
     @NativeType("void *")
@@ -381,8 +381,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSVMFree.html">Reference Page</a></p>
-     * 
      * Frees a shared virtual memory buffer allocated using {@link #clSVMAlloc SVMAlloc}.
      * 
      * <p>Note that {@code SVMFree} does not wait for previously enqueued commands that may be using {@code svm_pointer} to finish before freeing
@@ -396,6 +394,8 @@ public class CL20 {
      *
      * @param context     a valid OpenCL context used to create the SVM buffer
      * @param svm_pointer must be the value returned by a call to {@link #clSVMAlloc SVMAlloc}. If a {@code NULL} pointer is passed in {@code svm_pointer}, no action occurs.
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSVMFree.html">Reference Page</a>
      */
     public static void clSVMFree(@NativeType("cl_context") long context, @NativeType("void *") ByteBuffer svm_pointer) {
         nclSVMFree(context, memAddress(svm_pointer));
@@ -419,8 +419,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMFree.html">Reference Page</a></p>
-     * 
      * Enqueues a command to free the shared virtual memory buffer allocated using {@link #clSVMAlloc SVMAlloc} or a shared system memory pointer.
      *
      * @param command_queue   a valid host command-queue
@@ -451,6 +449,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMFree.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueSVMFree(@NativeType("cl_command_queue") long command_queue, @NativeType("void **") PointerBuffer svm_pointers, @Nullable @NativeType("void (*) (cl_command_queue, cl_uint, void **, void *)") CLSVMFreeCallbackI pfn_free_func, @NativeType("void *") long user_data, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -478,8 +478,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">Reference Page</a></p>
-     * 
      * Enqueues a command to do a {@code memcpy} operation.
      * 
      * <p>If {@code dst_ptr} and/or {@code src_ptr} are allocated using {@link #clSVMAlloc SVMAlloc} then they must be allocated from the same context from which
@@ -520,6 +518,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueSVMMemcpy(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking_copy, @NativeType("void *") ByteBuffer dst_ptr, @NativeType("void const *") ByteBuffer src_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -549,8 +549,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemFill.html">Reference Page</a></p>
-     * 
      * Enqueues a command to fill a region in memory with a pattern of a given pattern size.
      *
      * @param command_queue   the host command-queue in which the fill command will be queued
@@ -585,6 +583,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemFill.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueSVMMemFill(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer svm_ptr, @NativeType("void const *") ByteBuffer pattern, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -612,8 +612,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMap.html">Reference Page</a></p>
-     * 
      * Enqueues a command that will allow the host to update a region of a SVM buffer. Note that since we are enqueuing a command with a SVM buffer, the region
      * is already mapped in the host address space.
      *
@@ -651,6 +649,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMMap.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueSVMMap(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_bool") boolean blocking_map, @NativeType("cl_map_flags") long map_flags, @NativeType("void *") ByteBuffer svm_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -677,8 +677,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMUnmap.html">Reference Page</a></p>
-     * 
      * Enqueues a command to indicate that the host has completed updating the region given by {@code svm_ptr} and which was specified in a previous call to
      * {@link #clEnqueueSVMMap EnqueueSVMMap}.
      *
@@ -704,6 +702,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueSVMUnmap.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueSVMUnmap(@NativeType("cl_command_queue") long command_queue, @NativeType("void *") ByteBuffer svm_ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -726,8 +726,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArgSVMPointer.html">Reference Page</a></p>
-     * 
      * Set a SVM pointer as the argument value for a specific argument of a kernel.
      *
      * @param kernel    a valid kernel object
@@ -749,6 +747,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArgSVMPointer.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetKernelArgSVMPointer(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") ByteBuffer arg_value) {
@@ -772,8 +772,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a></p>
-     * 
      * Can be used to pass additional information other than argument values to a kernel.
      * 
      * <p>NOTES</p>
@@ -818,6 +816,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetKernelExecInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_exec_info") int param_name, @NativeType("void const *") ByteBuffer param_value) {
@@ -825,8 +825,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a></p>
-     * 
      * Can be used to pass additional information other than argument values to a kernel.
      * 
      * <p>NOTES</p>
@@ -871,6 +869,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetKernelExecInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_exec_info") int param_name, @NativeType("void const *") PointerBuffer param_value) {
@@ -878,8 +878,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a></p>
-     * 
      * Can be used to pass additional information other than argument values to a kernel.
      * 
      * <p>NOTES</p>
@@ -924,6 +922,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetKernelExecInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_exec_info") int param_name, @NativeType("void const *") IntBuffer param_value) {
@@ -943,8 +943,6 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a></p>
-     * 
      * Creates a sampler object.
      *
      * @param context            a valid OpenCL context
@@ -964,6 +962,8 @@ public class CL20 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_sampler")
     public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") IntBuffer sampler_properties, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -975,9 +975,9 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateCommandQueueWithProperties CreateCommandQueueWithProperties}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateCommandQueueWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_command_queue")
     public static long clCreateCommandQueueWithProperties(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @Nullable @NativeType("cl_command_queue_properties const *") long[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -993,9 +993,9 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreatePipe CreatePipe}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreatePipe.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreatePipe(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("cl_uint") int pipe_packet_size, @NativeType("cl_uint") int pipe_max_packets, @Nullable @NativeType("cl_pipe_properties const *") int[] properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1010,9 +1010,9 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clGetPipeInfo GetPipeInfo}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetPipeInfo(@NativeType("cl_mem") long pipe, @NativeType("cl_pipe_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -1026,9 +1026,9 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clSetKernelExecInfo SetKernelExecInfo}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelExecInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetKernelExecInfo(@NativeType("cl_kernel") long kernel, @NativeType("cl_kernel_exec_info") int param_name, @NativeType("void const *") int[] param_value) {
@@ -1041,9 +1041,9 @@ public class CL20 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateSamplerWithProperties CreateSamplerWithProperties}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSamplerWithProperties.html">Reference Page</a>
      */
     @NativeType("cl_sampler")
     public static long clCreateSamplerWithProperties(@NativeType("cl_context") long context, @Nullable @NativeType("cl_sampler_properties const *") int[] sampler_properties, @Nullable @NativeType("cl_int *") int[] errcode_ret) {

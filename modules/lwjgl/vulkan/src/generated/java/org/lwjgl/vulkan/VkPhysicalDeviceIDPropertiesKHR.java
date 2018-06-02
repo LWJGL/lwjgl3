@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceIDPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint8_t deviceLUID[VK_LUID_SIZE];
  *     uint32_t deviceNodeMask;
  *     VkBool32 deviceLUIDValid;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceIDPropertiesKHR extends VkPhysicalDeviceIDProperties {
 

@@ -17,8 +17,8 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_per
             "number of hardware events such as number of spawned vertex shaders. In this case the results represent the number of events.",
             """
             duration of certain activity, like time took by all fragment shader invocations. In that case the result usually represents the number of clocks in
-            which the particular HW unit was busy. In order to use such counter efficiently, it should be normalized to the range of <0,1> by dividing its
-            value by the number of render clocks.
+            which the particular HW unit was busy. In order to use such counter efficiently, it should be normalized to the range of &lt;0,1&gt; by dividing
+            its value by the number of render clocks.
             """,
             """
             used throughput of certain memory types such as texture memory. In that case the result of performance counter usually represents the number of

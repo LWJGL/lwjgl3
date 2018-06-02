@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct extent_hooks_t {
  *     {@link ExtentAllocI extent_alloc_t} alloc;
  *     {@link ExtentDallocI extent_dalloc_t} dalloc;
@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link ExtentPurgeI extent_purge_t} purge_forced;
  *     {@link ExtentSplitI extent_split_t} split;
  *     {@link ExtentMergeI extent_merge_t} merge;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct extent_hooks_t")
 public class ExtentHooks extends Struct implements NativeResource {
@@ -59,6 +59,7 @@ public class ExtentHooks extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

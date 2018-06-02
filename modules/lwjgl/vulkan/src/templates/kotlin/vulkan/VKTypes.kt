@@ -216,12 +216,12 @@ val PFN_vkAllocationFunction = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The type of {@code pfnAllocation} is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef void* (VKAPI_PTR *PFN_vkAllocationFunction)(
 ￿    void*                                       pUserData,
 ￿    size_t                                      size,
 ￿    size_t                                      alignment,
-￿    VkSystemAllocationScope                     allocationScope);</pre></code>
+￿    VkSystemAllocationScope                     allocationScope);</code></pre>
 
         <h5>Description</h5>
         If {@code pfnAllocation} is unable to allocate the requested memory, it <b>must</b> return {@code NULL}. If the allocation was successful, it <b>must</b> return a valid pointer to memory allocation containing at least {@code size} bytes, and with the pointer value being a multiple of {@code alignment}.
@@ -262,13 +262,13 @@ val PFN_vkReallocationFunction = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The type of {@code pfnReallocation} is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef void* (VKAPI_PTR *PFN_vkReallocationFunction)(
 ￿    void*                                       pUserData,
 ￿    void*                                       pOriginal,
 ￿    size_t                                      size,
 ￿    size_t                                      alignment,
-￿    VkSystemAllocationScope                     allocationScope);</pre></code>
+￿    VkSystemAllocationScope                     allocationScope);</code></pre>
 
         <h5>Description</h5>
         {@code pfnReallocation} <b>must</b> return an allocation with enough space for {@code size} bytes, and the contents of the original allocation from bytes zero to <code>min(original size, new size) - 1</code> <b>must</b> be preserved in the returned allocation. If {@code size} is larger than the old size, the contents of the additional space are undefined. If satisfying these requirements involves creating a new allocation, then the old allocation <b>should</b> be freed.
@@ -306,10 +306,10 @@ val PFN_vkFreeFunction = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The type of {@code pfnFree} is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef void (VKAPI_PTR *PFN_vkFreeFunction)(
 ￿    void*                                       pUserData,
-￿    void*                                       pMemory);</pre></code>
+￿    void*                                       pMemory);</code></pre>
 
         <h5>Description</h5>
         {@code pMemory} <b>may</b> be {@code NULL}, which the callback <b>must</b> handle safely. If {@code pMemory} is non-{@code NULL}, it <b>must</b> be a pointer previously allocated by {@code pfnAllocation} or {@code pfnReallocation}. The application <b>should</b> free this memory.
@@ -339,12 +339,12 @@ val PFN_vkInternalAllocationNotification = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The type of {@code pfnInternalAllocation} is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef void (VKAPI_PTR *PFN_vkInternalAllocationNotification)(
 ￿    void*                                       pUserData,
 ￿    size_t                                      size,
 ￿    VkInternalAllocationType                    allocationType,
-￿    VkSystemAllocationScope                     allocationScope);</pre></code>
+￿    VkSystemAllocationScope                     allocationScope);</code></pre>
 
         <h5>Description</h5>
         This is a purely informational callback.
@@ -374,12 +374,12 @@ val PFN_vkInternalFreeNotification = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The type of {@code pfnInternalFree} is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef void (VKAPI_PTR *PFN_vkInternalFreeNotification)(
 ￿    void*                                       pUserData,
 ￿    size_t                                      size,
 ￿    VkInternalAllocationType                    allocationType,
-￿    VkSystemAllocationScope                     allocationScope);</pre></code>
+￿    VkSystemAllocationScope                     allocationScope);</code></pre>
 
         
 
@@ -1032,23 +1032,23 @@ val VkPhysicalDeviceMemoryProperties = struct(Module.VULKAN, "VkPhysicalDeviceMe
 
         This ordering requirement enables applications to use a simple search loop to select the desired memory type along the lines of:
 
-        <code><pre>
+        <pre><code>
 ￿// Find a memory in `memoryTypeBitsRequirement` that includes all of `requiredProperties`
 ￿int32_t findProperties(const VkPhysicalDeviceMemoryProperties* pMemoryProperties,
 ￿                       uint32_t memoryTypeBitsRequirement,
 ￿                       VkMemoryPropertyFlags requiredProperties) {
-￿    const uint32_t memoryCount = pMemoryProperties->memoryTypeCount;
-￿    for (uint32_t memoryIndex = 0; memoryIndex < memoryCount; ++memoryIndex) {
-￿        const uint32_t memoryTypeBits = (1 << memoryIndex);
-￿        const bool isRequiredMemoryType = memoryTypeBitsRequirement & memoryTypeBits;
+￿    const uint32_t memoryCount = pMemoryProperties-&gt;memoryTypeCount;
+￿    for (uint32_t memoryIndex = 0; memoryIndex &lt; memoryCount; ++memoryIndex) {
+￿        const uint32_t memoryTypeBits = (1 &lt;&lt; memoryIndex);
+￿        const bool isRequiredMemoryType = memoryTypeBitsRequirement &amp; memoryTypeBits;
 ￿
 ￿        const VkMemoryPropertyFlags properties =
-￿            pMemoryProperties->memoryTypes[memoryIndex].propertyFlags;
+￿            pMemoryProperties-&gt;memoryTypes[memoryIndex].propertyFlags;
 ￿        const bool hasRequiredProperties =
-￿            (properties & requiredProperties) == requiredProperties;
+￿            (properties &amp; requiredProperties) == requiredProperties;
 ￿
-￿        if (isRequiredMemoryType && hasRequiredProperties)
-￿            return static_cast<int32_t>(memoryIndex);
+￿        if (isRequiredMemoryType &amp;&amp; hasRequiredProperties)
+￿            return static_cast&lt;int32_t&gt;(memoryIndex);
 ￿    }
 ￿
 ￿    // failed to find memory type
@@ -1062,12 +1062,12 @@ val VkPhysicalDeviceMemoryProperties = struct(Module.VULKAN, "VkPhysicalDeviceMe
 ￿// `requiredProperties` are the property flags that must be present
 ￿// `optimalProperties` are the property flags that are preferred by the application
 ￿VkMemoryRequirements memoryRequirements;
-￿vkGetImageMemoryRequirements(device, image, &memoryRequirements);
+￿vkGetImageMemoryRequirements(device, image, &amp;memoryRequirements);
 ￿int32_t memoryType =
-￿    findProperties(&memoryProperties, memoryRequirements.memoryTypeBits, optimalProperties);
+￿    findProperties(&amp;memoryProperties, memoryRequirements.memoryTypeBits, optimalProperties);
 ￿if (memoryType == -1) // not found; try fallback properties
 ￿    memoryType =
-￿        findProperties(&memoryProperties, memoryRequirements.memoryTypeBits, requiredProperties);</pre></code>
+￿        findProperties(&amp;memoryProperties, memoryRequirements.memoryTypeBits, requiredProperties);</code></pre>
 
         <h5>See Also</h5>
         ##VkMemoryHeap, ##VkMemoryType, ##VkPhysicalDeviceMemoryProperties2, #GetPhysicalDeviceMemoryProperties()
@@ -1904,15 +1904,15 @@ val VkSubresourceLayout = struct(Module.VULKAN, "VkSubresourceLayout", mutable =
         <h5>Description</h5>
         For images created with linear tiling, {@code rowPitch}, {@code arrayPitch} and {@code depthPitch} describe the layout of the image subresource in linear memory. For uncompressed formats, {@code rowPitch} is the number of bytes between texels with the same x coordinate in adjacent rows (y coordinates differ by one). {@code arrayPitch} is the number of bytes between texels with the same x and y coordinate in adjacent array layers of the image (array layer values differ by one). {@code depthPitch} is the number of bytes between texels with the same x and y coordinate in adjacent slices of a 3D image (z coordinates differ by one). Expressed as an addressing formula, the starting byte of a texel in the image subresource has address:
 
-        <code><pre>
+        <pre><code>
 ￿// (x,y,z,layer) are in texel coordinates
-￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*elementSize + offset</pre></code>
+￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*elementSize + offset</code></pre>
 
         For compressed formats, the {@code rowPitch} is the number of bytes between compressed texel blocks in adjacent rows. {@code arrayPitch} is the number of bytes between compressed texel blocks in adjacent array layers. {@code depthPitch} is the number of bytes between compressed texel blocks in adjacent slices of a 3D image.
 
-        <code><pre>
+        <pre><code>
 ￿// (x,y,z,layer) are in compressed texel block coordinates
-￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*compressedTexelBlockByteSize + offset;</pre></code>
+￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*compressedTexelBlockByteSize + offset;</code></pre>
 
         {@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.
 
@@ -5941,8 +5941,8 @@ val VkDescriptorUpdateTemplateEntry = struct(Module.VULKAN, "VkDescriptorUpdateT
     size_t.member("offset", "the offset in bytes of the first binding in the raw data structure.")
     size_t.member("stride", """the stride in bytes between two consecutive array elements of the descriptor update informations in the raw data structure. The actual pointer ptr for each array element j of update entry i is computed using the following formula:
 
-        <code><pre>
-￿    const char *ptr = (const char *)pData + pDescriptorUpdateEntries[i].offset + j * pDescriptorUpdateEntries[i].stride</pre></code>
+        <pre><code>
+￿    const char *ptr = (const char *)pData + pDescriptorUpdateEntries[i].offset + j * pDescriptorUpdateEntries[i].stride</code></pre>
 
         The stride is useful in case the bindings are stored in structs along with other data.""")
 }

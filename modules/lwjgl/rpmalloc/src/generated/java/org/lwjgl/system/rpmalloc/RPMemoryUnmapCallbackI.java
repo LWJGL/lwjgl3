@@ -14,13 +14,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     void *address,
  *     size_t size,
  *     size_t offset,
  *     int release
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void (*) (void *, size_t, size_t, int)")

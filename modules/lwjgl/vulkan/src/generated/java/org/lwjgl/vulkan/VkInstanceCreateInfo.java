@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkInstanceCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -60,13 +60,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char const * const * ppEnabledLayerNames;
  *     uint32_t enabledExtensionCount;
  *     char const * const * ppEnabledExtensionNames;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkInstanceCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

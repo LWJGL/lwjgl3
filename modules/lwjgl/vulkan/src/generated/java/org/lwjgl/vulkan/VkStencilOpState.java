@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkStencilOpState {
  *     VkStencilOp failOp;
  *     VkStencilOp passOp;
@@ -54,13 +54,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t compareMask;
  *     uint32_t writeMask;
  *     uint32_t reference;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkStencilOpState extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

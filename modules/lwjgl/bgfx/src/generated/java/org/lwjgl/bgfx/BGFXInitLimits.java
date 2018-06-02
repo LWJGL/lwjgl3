@@ -26,12 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_init_limits_t {
  *     uint16_t maxEncoders;
  *     uint32_t transientVbSize;
  *     uint32_t transientIbSize;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_init_limits_t")
 public class BGFXInitLimits extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

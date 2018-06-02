@@ -29,13 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct JAWT_Rectangle {
  *     jint x;
  *     jint y;
  *     jint width;
  *     jint height;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct JAWT_Rectangle")
 public class JAWTRectangle extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class JAWTRectangle extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

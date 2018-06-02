@@ -659,24 +659,24 @@ public class JEmalloc {
      * results in a partial MIB that can be used as the basis for constructing a complete MIB. For name components that are integers (e.g. the 2 in
      * "arenas.bin.2.size"), the corresponding MIB component will always be that integer. Therefore, it is legitimate to construct code like the following:
      * 
-     * <code><pre>
+     * <pre><code>
      * unsigned nbins, i;
      * size_t mib[4];
      * size_t len, miblen;
      * 
      * len = sizeof(nbins);
-     * mallctl("arenas.nbins", &nbins, &len, NULL, 0);
+     * mallctl("arenas.nbins", &amp;nbins, &amp;len, NULL, 0);
      * 
      * miblen = 4;
-     * mallctlnametomib("arenas.bin.0.size", mib, &miblen);
-     * for (i = 0; i < nbins; i++) {
+     * mallctlnametomib("arenas.bin.0.size", mib, &amp;miblen);
+     * for (i = 0; i &lt; nbins; i++) {
      *     size_t bin_size;
      * 
      *     mib[2] = i;
      *     len = sizeof(bin_size);
-     *     mallctlbymib(mib, miblen, &bin_size, &len, NULL, 0);
+     *     mallctlbymib(mib, miblen, &amp;bin_size, &amp;len, NULL, 0);
      *     // Do something with bin_size...
-     * }</pre></code>
+     * }</code></pre>
      *
      * @param name    the namespace location
      * @param mibp    an array of integers
@@ -699,24 +699,24 @@ public class JEmalloc {
      * results in a partial MIB that can be used as the basis for constructing a complete MIB. For name components that are integers (e.g. the 2 in
      * "arenas.bin.2.size"), the corresponding MIB component will always be that integer. Therefore, it is legitimate to construct code like the following:
      * 
-     * <code><pre>
+     * <pre><code>
      * unsigned nbins, i;
      * size_t mib[4];
      * size_t len, miblen;
      * 
      * len = sizeof(nbins);
-     * mallctl("arenas.nbins", &nbins, &len, NULL, 0);
+     * mallctl("arenas.nbins", &amp;nbins, &amp;len, NULL, 0);
      * 
      * miblen = 4;
-     * mallctlnametomib("arenas.bin.0.size", mib, &miblen);
-     * for (i = 0; i < nbins; i++) {
+     * mallctlnametomib("arenas.bin.0.size", mib, &amp;miblen);
+     * for (i = 0; i &lt; nbins; i++) {
      *     size_t bin_size;
      * 
      *     mib[2] = i;
      *     len = sizeof(bin_size);
-     *     mallctlbymib(mib, miblen, &bin_size, &len, NULL, 0);
+     *     mallctlbymib(mib, miblen, &amp;bin_size, &amp;len, NULL, 0);
      *     // Do something with bin_size...
-     * }</pre></code>
+     * }</code></pre>
      *
      * @param name    the namespace location
      * @param mibp    an array of integers

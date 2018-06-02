@@ -27,11 +27,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiVectorKey {
  *     double mTime;
  *     {@link AIVector3D struct aiVector3D} mValue;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiVectorKey")
 public class AIVectorKey extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class AIVectorKey extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

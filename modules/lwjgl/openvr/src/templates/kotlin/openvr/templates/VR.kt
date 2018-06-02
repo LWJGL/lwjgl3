@@ -703,7 +703,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "EDeviceActivityLevel_k_EDeviceActivityLevel_Idle".enum("No activity for the last 10 seconds."),
         "EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction".enum("Activity (movement or prox sensor) is happening now."),
         "EDeviceActivityLevel_k_EDeviceActivityLevel_UserInteraction_Timeout".enum("No activity for the last 0.5 seconds."),
-        "EDeviceActivityLevel_k_EDeviceActivityLevel_Standby".enum("Idle for at least 5 seconds (configurable in Settings -> Power Management).")
+        "EDeviceActivityLevel_k_EDeviceActivityLevel_Standby".enum("Idle for at least 5 seconds (configurable in Settings -&gt; Power Management).")
     )
 
     EnumConstant(

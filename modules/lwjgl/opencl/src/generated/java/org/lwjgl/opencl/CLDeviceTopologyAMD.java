@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union cl_device_topology_amd {
  *     struct {
  *         cl_uint type;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         cl_char device;
  *         cl_char function;
  *     } pcie;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union cl_device_topology_amd")
 public class CLDeviceTopologyAMD extends Struct implements NativeResource {
@@ -42,6 +42,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

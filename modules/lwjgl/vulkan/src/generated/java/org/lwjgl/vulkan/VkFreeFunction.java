@@ -18,10 +18,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The type of {@code pfnFree} is:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef void (VKAPI_PTR *PFN_vkFreeFunction)(
  *     void*                                       pUserData,
- *     void*                                       pMemory);</pre></code>
+ *     void*                                       pMemory);</code></pre>
  * 
  * <h5>Description</h5>
  * 

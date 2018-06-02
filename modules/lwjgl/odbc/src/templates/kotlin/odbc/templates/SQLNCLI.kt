@@ -99,7 +99,7 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "#ColAttribute() & #SetDescField()/#GetDescField() driver specific defines.",
+        "#ColAttribute() &amp; #SetDescField()/#GetDescField() driver specific defines.",
 
         "CA_SS_BASE".."1200",
         "CA_SS_COLUMN_SSTYPE".."SQL_CA_SS_BASE+0",

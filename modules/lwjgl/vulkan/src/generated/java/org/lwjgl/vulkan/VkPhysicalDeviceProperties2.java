@@ -44,18 +44,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceProperties2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkPhysicalDeviceProperties VkPhysicalDeviceProperties} properties;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceProperties2 extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

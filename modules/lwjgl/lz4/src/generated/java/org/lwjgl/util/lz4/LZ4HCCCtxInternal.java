@@ -30,7 +30,7 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct LZ4HC_CCtx_internal {
  *     uint32_t hashTable[LZ4HC_HASHTABLESIZE];
  *     uint16_t chainTable[LZ4HC_MAXD];
@@ -43,7 +43,7 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  *     short compressionLevel;
  *     short favorDecSpeed;
  *     {@link LZ4HCCCtxInternal LZ4HC_CCtx_internal} * const dictCtx;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct LZ4HC_CCtx_internal")
 public class LZ4HCCCtxInternal extends Struct {
@@ -51,6 +51,7 @@ public class LZ4HCCCtxInternal extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

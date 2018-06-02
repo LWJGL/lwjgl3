@@ -1028,8 +1028,8 @@ val ovrPerfStatsPerCompositorFrame = struct(Module.OVR, "OVRPerfStatsPerComposit
         """
         amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU and GPU utilization.
 
-        A value of 0.0 would mean the CPU & GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would indicate
-        that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.
+        A value of 0.0 would mean the CPU &amp; GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would
+        indicate that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.
         """
     )
     float.member(

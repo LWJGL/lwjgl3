@@ -60,9 +60,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>https://github.com/NVIDIAGameWorks/GraphicsSamples/tree/master/samples/vk10-kepler/BasicDeviceGeneratedCommandsVk</p>
  * 
- * <code><pre>
+ * <pre><code>
  *   // setup secondary command buffer
- *     vkBeginCommandBuffer(generatedCmdBuffer, &beginInfo);
+ *     vkBeginCommandBuffer(generatedCmdBuffer, &amp;beginInfo);
  *     ... setup its state as usual
  * 
  *   // insert the reservation (there can only be one per command buffer)
@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     reserveInfo.objectTable = objectTable;
  *     reserveInfo.indirectCommandsLayout = deviceGeneratedLayout;
  *     reserveInfo.maxSequencesCount = myCount;
- *     vkCmdReserveSpaceForCommandsNVX(generatedCmdBuffer, &reserveInfo);
+ *     vkCmdReserveSpaceForCommandsNVX(generatedCmdBuffer, &amp;reserveInfo);
  * 
  *     vkEndCommandBuffer(generatedCmdBuffer);
  * 
@@ -99,10 +99,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  *                          // dstStageMaskVK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX,
  *                          // dependencyFlags0,
  *                          // memoryBarrierCount1,
- *                          // pMemoryBarriers&memoryBarrier,
+ *                          // pMemoryBarriers&amp;memoryBarrier,
  *                          ...);
  * 
- *     vkCmdProcessCommandsNVX(mainCmd, &processInfo);
+ *     vkCmdProcessCommandsNVX(mainCmd, &amp;processInfo);
  *     ...
  *   // execute the secondary command buffer and ensure the processing that modifies command-buffer content
  *   // has completed
@@ -115,9 +115,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  *                          // dstStageMaskVK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
  *                          // dependencyFlags0,
  *                          // memoryBarrierCount1,
- *                          // pMemoryBarriers&memoryBarrier,
+ *                          // pMemoryBarriers&amp;memoryBarrier,
  *                          ...)
- *     vkCmdExecuteCommands(mainCmd, 1, &generatedCmdBuffer);</pre></code>
+ *     vkCmdExecuteCommands(mainCmd, 1, &amp;generatedCmdBuffer);</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -353,10 +353,10 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>The actual generation on the device is handled with:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdProcessCommandsNVX(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkCmdProcessCommandsInfoNVX*          pProcessCommandsInfo);</pre></code>
+     *     const VkCmdProcessCommandsInfoNVX*          pProcessCommandsInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -411,10 +411,10 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>Command space for generated commands recorded into a secondary command buffer <b>must</b> be reserved by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdReserveSpaceForCommandsNVX(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkCmdReserveSpaceForCommandsInfoNVX*  pReserveSpaceInfo);</pre></code>
+     *     const VkCmdReserveSpaceForCommandsInfoNVX*  pReserveSpaceInfo);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -452,8 +452,7 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>{@link VkCmdReserveSpaceForCommandsInfoNVX}</p>
      *
-     * @param commandBuffer     the secondary command buffer in which the space for device-generated commands is reserved.
-     * @param pReserveSpaceInfo 
+     * @param commandBuffer the secondary command buffer in which the space for device-generated commands is reserved.
      */
     public static void vkCmdReserveSpaceForCommandsNVX(VkCommandBuffer commandBuffer, @NativeType("VkCmdReserveSpaceForCommandsInfoNVX const *") VkCmdReserveSpaceForCommandsInfoNVX pReserveSpaceInfo) {
         nvkCmdReserveSpaceForCommandsNVX(commandBuffer, pReserveSpaceInfo.address());
@@ -479,12 +478,12 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>Indirect command layouts are created by:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateIndirectCommandsLayoutNVX(
      *     VkDevice                                    device,
      *     const VkIndirectCommandsLayoutCreateInfoNVX* pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkIndirectCommandsLayoutNVX*                pIndirectCommandsLayout);</pre></code>
+     *     VkIndirectCommandsLayoutNVX*                pIndirectCommandsLayout);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -545,11 +544,11 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>Indirect command layouts are destroyed by:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyIndirectCommandsLayoutNVX(
      *     VkDevice                                    device,
      *     VkIndirectCommandsLayoutNVX                 indirectCommandsLayout,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -600,12 +599,12 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>To create object tables, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateObjectTableNVX(
      *     VkDevice                                    device,
      *     const VkObjectTableCreateInfoNVX*           pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkObjectTableNVX*                           pObjectTable);</pre></code>
+     *     VkObjectTableNVX*                           pObjectTable);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -666,11 +665,11 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>To destroy an object table, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyObjectTableNVX(
      *     VkDevice                                    device,
      *     VkObjectTableNVX                            objectTable,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -729,13 +728,13 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>Resource bindings of Vulkan objects are registered at an arbitrary ftext:uint32_t index within an object table. As long as the object table references such objects, they <b>must</b> not be deleted.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkRegisterObjectsNVX(
      *     VkDevice                                    device,
      *     VkObjectTableNVX                            objectTable,
      *     uint32_t                                    objectCount,
      *     const VkObjectTableEntryNVX* const*         ppObjectTableEntries,
-     *     const uint32_t*                             pObjectIndices);</pre></code>
+     *     const uint32_t*                             pObjectIndices);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -815,13 +814,13 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>Use the following command to unregister resources from an object table:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkUnregisterObjectsNVX(
      *     VkDevice                                    device,
      *     VkObjectTableNVX                            objectTable,
      *     uint32_t                                    objectCount,
      *     const VkObjectEntryTypeNVX*                 pObjectEntryTypes,
-     *     const uint32_t*                             pObjectIndices);</pre></code>
+     *     const uint32_t*                             pObjectIndices);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -862,10 +861,9 @@ public class NVXDeviceGeneratedCommands {
      * </ul></dd>
      * </dl>
      *
-     * @param device            the logical device that creates the object table.
-     * @param objectTable       the table from which the resources are unregistered.
-     * @param pObjectEntryTypes 
-     * @param pObjectIndices    provides the array of object indices to be removed.
+     * @param device         the logical device that creates the object table.
+     * @param objectTable    the table from which the resources are unregistered.
+     * @param pObjectIndices provides the array of object indices to be removed.
      */
     @NativeType("VkResult")
     public static int vkUnregisterObjectsNVX(VkDevice device, @NativeType("VkObjectTableNVX") long objectTable, @NativeType("VkObjectEntryTypeNVX const *") IntBuffer pObjectEntryTypes, @NativeType("uint32_t const *") IntBuffer pObjectIndices) {
@@ -893,11 +891,11 @@ public class NVXDeviceGeneratedCommands {
      * 
      * <p>To query the support of related features and limitations, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkDeviceGeneratedCommandsFeaturesNVX*       pFeatures,
-     *     VkDeviceGeneratedCommandsLimitsNVX*         pLimits);</pre></code>
+     *     VkDeviceGeneratedCommandsLimitsNVX*         pLimits);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

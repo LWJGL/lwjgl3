@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceDescriptorIndexingPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -83,13 +83,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
  *     uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
  *     uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

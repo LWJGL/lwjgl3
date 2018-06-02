@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiLight {
  *     {@link AIString struct aiString} mName;
  *     aiLightSourceType mType;
@@ -87,7 +87,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float mAngleInnerCone;
  *     float mAngleOuterCone;
  *     {@link AIVector2D struct aiVector2D} mSize;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiLight")
 public class AILight extends Struct {
@@ -95,6 +95,7 @@ public class AILight extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

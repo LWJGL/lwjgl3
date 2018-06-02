@@ -18,7 +18,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
         <h5>Example</h5>
         Creating a sampler with the new address mode in each dimension
 
-        <code><pre>
+        <pre><code>
 ￿    VkSamplerCreateInfo createInfo =
 ￿    {
 ￿        VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO // sType
@@ -32,8 +32,8 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 ￿    VkSampler sampler;
 ￿    VkResult result = vkCreateSampler(
 ￿        device,
-￿        &createInfo,
-￿        &sampler);</pre></code>
+￿        &amp;createInfo,
+￿        &amp;sampler);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

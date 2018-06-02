@@ -32,24 +32,24 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension defines a derived point size to be closely related to point brightness. The brightness of a point is given by:</p>
  * 
- * <code><pre>
+ * <pre><code>
  *                         1
  * dist_atten(d) = -------------------
  *                 a + b * d + c * d^2
  * 
- * brightness(Pe) = Brightness * dist_atten(|Pe|)</pre></code>
+ * brightness(Pe) = Brightness * dist_atten(|Pe|)</code></pre>
  * 
  * <p>where 'Pe' is the point in eye coordinates, and 'Brightness' is some initial value proportional to the square of the size provided with glPointSize.
  * Here we simplify the raster brightness to be a function of the rasterized point area and point transparency.</p>
  * 
- * <code><pre>
- *             brightness(Pe)      brightness(Pe) >= Threshold_Area
+ * <pre><code>
+ *             brightness(Pe)      brightness(Pe) &gt;= Threshold_Area
  * area(Pe) =
  *             Threshold_Area      Otherwise
  * 
  * factor(Pe) = brightness(Pe)/Threshold_Area
  * 
- * alpha(Pe) = Alpha * factor(Pe)</pre></code>
+ * alpha(Pe) = Alpha * factor(Pe)</code></pre>
  * 
  * <p>where 'Alpha' comes with the point color (possibly modified by lighting).</p>
  * 

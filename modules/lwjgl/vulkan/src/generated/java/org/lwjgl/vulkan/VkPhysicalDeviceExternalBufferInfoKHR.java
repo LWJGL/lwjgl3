@@ -20,14 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceExternalBufferInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBufferCreateFlags flags;
  *     VkBufferUsageFlags usage;
  *     VkExternalMemoryHandleTypeFlagBits handleType;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceExternalBufferInfoKHR extends VkPhysicalDeviceExternalBufferInfo {
 

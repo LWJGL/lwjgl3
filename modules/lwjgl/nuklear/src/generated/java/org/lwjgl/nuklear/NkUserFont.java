@@ -28,14 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_user_font {
  *     {@link NkHandle nk_handle} userdata;
  *     float height;
  *     {@link NkTextWidthCallbackI nk_text_width_f} width;
  *     {@link NkQueryFontGlyphCallbackI nk_query_font_glyph_f} query;
  *     {@link NkHandle nk_handle} texture;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_user_font")
 public class NkUserFont extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class NkUserFont extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

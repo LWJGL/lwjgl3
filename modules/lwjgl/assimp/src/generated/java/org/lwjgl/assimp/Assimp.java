@@ -149,7 +149,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <ul>
  * <li>Collapse the scene graph, transform everything to world coordinates</li>
- * <li>Optimize meshes & nodes for fewer drawcalls</li>
+ * <li>Optimize meshes &amp; nodes for fewer drawcalls</li>
  * </ul>
  * 
  * <p>OTHER</p>
@@ -1656,12 +1656,12 @@ public class Assimp {
      * 
      * <p><b>Output UV coordinate system:</b></p>
      * 
-     * <code><pre>
+     * <pre><code>
      * 0y|0y ---------- 1x|0y
      *   |                |
      *   |                |
      *   |                |
-     * 0x|1y ---------- 1x|1y</pre></code>
+     * 0x|1y ---------- 1x|1y</code></pre>
      * 
      * <p>You'll probably want to consider this flag if you use Direct3D for rendering. The {@link #aiProcess_ConvertToLeftHanded Process_ConvertToLeftHanded} flag supersedes this setting and
      * bundles all conversions typically required for D3D-based applications.</p>
@@ -1673,11 +1673,11 @@ public class Assimp {
      * 
      * <p><b>Output face order:</b></p>
      * 
-     * <code><pre>
+     * <pre><code>
      *     x2
      * 
      *                   x0
-     * x1</pre></code>
+     * x1</code></pre>
      * </li>
      * <li>{@link #aiProcess_SplitByBoneCount Process_SplitByBoneCount} - 
      * This step splits meshes with many bones into sub-meshes so that each sub-mesh has fewer or as many bones as a given limit.

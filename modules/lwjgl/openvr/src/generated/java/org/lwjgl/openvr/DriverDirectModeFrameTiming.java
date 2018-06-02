@@ -27,14 +27,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct DriverDirectMode_FrameTiming {
  *     uint32_t m_nSize;
  *     uint32_t m_nNumFramePresents;
  *     uint32_t m_nNumMisPresented;
  *     uint32_t m_nNumDroppedFrames;
  *     uint32_t m_nReprojectionFlags;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct DriverDirectMode_FrameTiming")
 public class DriverDirectModeFrameTiming extends Struct {
@@ -42,6 +42,7 @@ public class DriverDirectModeFrameTiming extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

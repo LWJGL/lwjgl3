@@ -66,7 +66,7 @@ import static org.lwjgl.vulkan.VK11.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceIDProperties {
  *     VkStructureType sType;
  *     void * pNext;
@@ -75,13 +75,14 @@ import static org.lwjgl.vulkan.VK11.*;
  *     uint8_t deviceLUID[VK_LUID_SIZE];
  *     uint32_t deviceNodeMask;
  *     VkBool32 deviceLUIDValid;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceIDProperties extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -39,18 +39,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union VkClearColorValue {
  *     float float32[4];
  *     int32_t int32[4];
  *     uint32_t uint32[4];
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkClearColorValue extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

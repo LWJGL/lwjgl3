@@ -14,11 +14,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     struct nk_command_buffer *buffer,
  *     nk_handle userdata
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("nk_draw_end")

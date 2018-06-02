@@ -34,18 +34,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkExternalMemoryProperties {
  *     VkExternalMemoryFeatureFlags externalMemoryFeatures;
  *     VkExternalMemoryHandleTypeFlags exportFromImportedHandleTypes;
  *     VkExternalMemoryHandleTypeFlags compatibleHandleTypes;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkExternalMemoryProperties extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

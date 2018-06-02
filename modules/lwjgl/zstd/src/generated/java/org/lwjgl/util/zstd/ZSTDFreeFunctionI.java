@@ -12,11 +12,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     void *opaque,
  *     void *address
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("ZSTD_freeFunction")

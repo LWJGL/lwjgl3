@@ -31,11 +31,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension redefines the operation of glUseProgram(GLenum program) to be equivalent to:</p>
  * 
- * <code><pre>
+ * <pre><code>
  *  glUseShaderProgramEXT(GL_VERTEX_SHADER, program);
  * glUseShaderProgramEXT(GL_GEOMETRY_SHADER_EXT, program);
  * glUseShaderProgramEXT(GL_FRAGMENT_SHADER, program);
- * glActiveProgramEXT(program);</pre></code>
+ * glActiveProgramEXT(program);</code></pre>
  * 
  * <p>You can also call these commands separately to bind each respective domain. The GL_VERTEX_SHADER, GL_GEOMETRY_SHADER_EXT, and GL_FRAGMENT_SHADER tokens
  * refer to the conventional vertex, geometry, and fragment domains respectively. glActiveProgramEXT specifies the program that glUniform* commands will

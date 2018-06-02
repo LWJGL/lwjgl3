@@ -18,11 +18,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union VROverlayIntersectionMaskPrimitive_Data_t {
  *     {@link IntersectionMaskRectangle IntersectionMaskRectangle_t} m_Rectangle;
  *     {@link IntersectionMaskCircle IntersectionMaskCircle_t} m_Circle;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union VROverlayIntersectionMaskPrimitive_Data_t")
 public class VROverlayIntersectionMaskPrimitiveData extends Struct implements NativeResource {
@@ -30,6 +30,7 @@ public class VROverlayIntersectionMaskPrimitiveData extends Struct implements Na
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

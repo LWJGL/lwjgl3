@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct TrackedDevicePose_t {
  *     {@link HmdMatrix34 HmdMatrix34_t} mDeviceToAbsoluteTracking;
  *     {@link HmdVector3 HmdVector3_t} vVelocity;
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ETrackingResult eTrackingResult;
  *     bool bPoseIsValid;
  *     bool bDeviceIsConnected;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct TrackedDevicePose_t")
 public class TrackedDevicePose extends Struct implements NativeResource {
@@ -45,6 +45,7 @@ public class TrackedDevicePose extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

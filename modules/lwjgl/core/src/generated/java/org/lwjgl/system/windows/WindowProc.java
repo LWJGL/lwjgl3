@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * LRESULT (*) (
  *     HWND hwnd,
  *     UINT uMsg,
  *     WPARAM wParam,
  *     LPARAM lParam
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class WindowProc extends Callback implements WindowProcI {
 

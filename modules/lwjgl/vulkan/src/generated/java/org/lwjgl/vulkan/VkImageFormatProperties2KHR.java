@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkImageFormatProperties2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkImageFormatProperties VkImageFormatProperties} imageFormatProperties;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkImageFormatProperties2KHR extends VkImageFormatProperties2 {
 

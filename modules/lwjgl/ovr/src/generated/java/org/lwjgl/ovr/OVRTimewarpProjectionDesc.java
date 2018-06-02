@@ -30,12 +30,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrTimewarpProjectionDesc {
  *     float Projection22;
  *     float Projection23;
  *     float Projection32;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrTimewarpProjectionDesc")
 public class OVRTimewarpProjectionDesc extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -14,13 +14,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     VmaAllocator allocator,
  *     uint32_t memoryType,
  *     VkDeviceMemory memory,
  *     VkDeviceSize size
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("PFN_vmaAllocateDeviceMemoryFunction")
@@ -41,14 +41,7 @@ public interface VmaAllocateDeviceMemoryFunctionI extends CallbackI.V {
         );
     }
 
-    /**
-     * Called after successful {@code vkAllocateMemory}.
-     *
-     * @param allocator  
-     * @param memoryType 
-     * @param memory     
-     * @param size       
-     */
+    /** Called after successful {@code vkAllocateMemory}. */
     void invoke(@NativeType("VmaAllocator") long allocator, @NativeType("uint32_t") int memoryType, @NativeType("VkDeviceMemory") long memory, @NativeType("VkDeviceSize") long size);
 
 }

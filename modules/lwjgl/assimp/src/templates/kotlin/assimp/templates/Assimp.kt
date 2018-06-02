@@ -129,7 +129,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         SCENEGRAPH
         ${ul(
             "Collapse the scene graph, transform everything to world coordinates",
-            "Optimize meshes & nodes for fewer drawcalls"
+            "Optimize meshes &amp; nodes for fewer drawcalls"
         )}
 
         OTHER

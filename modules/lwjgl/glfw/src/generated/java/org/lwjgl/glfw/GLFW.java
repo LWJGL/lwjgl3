@@ -1503,7 +1503,7 @@ public class GLFW {
      * 
      * <h5>Supported and default values</h5>
      * 
-     * <table class=lwjgl>
+     * <table class=striped>
      * <tr><th>Name</th><th>Default value</th><th>Supported values</th></tr>
      * <tr><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_TRUE TRUE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
      * <tr><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_TRUE TRUE}</td><td>{@link #GLFW_TRUE TRUE} or {@link #GLFW_FALSE FALSE}</td></tr>
@@ -1580,7 +1580,7 @@ public class GLFW {
      * 
      * <h5>Supported and default values</h5>
      * 
-     * <table class=lwjgl>
+     * <table class=striped>
      * <tr><th>Name</th><th>Default value</th><th>Supported values</th></tr>
      * <tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>""</td><td>A UTF-8 encoded frame autosave name</td></tr>
      * <tr><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>""</td><td>An ASCII encoded {@code WM_CLASS} class name</td></tr>
@@ -1617,7 +1617,7 @@ public class GLFW {
      * 
      * <h5>Supported and default values</h5>
      * 
-     * <table class=lwjgl>
+     * <table class=striped>
      * <tr><th>Name</th><th>Default value</th><th>Supported values</th></tr>
      * <tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>""</td><td>A UTF-8 encoded frame autosave name</td></tr>
      * <tr><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>""</td><td>An ASCII encoded {@code WM_CLASS} class name</td></tr>
@@ -3917,7 +3917,7 @@ public class GLFW {
      * 
      * <p>This function returns the state of all hats of the specified joystick. Each element in the array is one of the following values:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * Name                | Value
      * ------------------- | ------------------------------
      * GLFW_HAT_CENTERED   | 0
@@ -3928,16 +3928,16 @@ public class GLFW {
      * GLFW_HAT_RIGHT_UP   | GLFW_HAT_RIGHT | GLFW_HAT_UP
      * GLFW_HAT_RIGHT_DOWN | GLFW_HAT_RIGHT | GLFW_HAT_DOWN
      * GLFW_HAT_LEFT_UP    | GLFW_HAT_LEFT  | GLFW_HAT_UP
-     * GLFW_HAT_LEFT_DOWN  | GLFW_HAT_LEFT  | GLFW_HAT_DOWN</pre></code>
+     * GLFW_HAT_LEFT_DOWN  | GLFW_HAT_LEFT  | GLFW_HAT_DOWN</code></pre>
      * 
      * <p>The diagonal directions are bitwise combinations of the primary (up, right, down and left) directions and you can test for these individually by ANDing
      * it with the corresponding direction.</p>
      * 
-     * <code><pre>
-     * if (hats[2] & GLFW_HAT_RIGHT)
+     * <pre><code>
+     * if (hats[2] &amp; GLFW_HAT_RIGHT)
      * {
      *     // State of hat 2 could be right-up, right or right-down
-     * }</pre></code>
+     * }</code></pre>
      * 
      * <p>If the specified joystick is not present this function will return {@code NULL} but will not generate an error. This can be used instead of first calling
      * {@link #glfwJoystickPresent JoystickPresent}.</p>
@@ -4390,7 +4390,7 @@ public class GLFW {
      * Sets the value of the GLFW timer. It then continues to count up from that value. The value must be a positive finite number less than or equal to
      * 18446744073.0, which is approximately 584.5 years.
      * 
-     * <p>The upper limit of the timer is calculated as <code>floor((2<sup>64</sup> - 1) / 10<sup>9</sup>)</code> and is due to implementations storing nanoseconds
+     * <p>The upper limit of the timer is calculated as <code>floor((2&lt;sup&gt;64&lt;/sup&gt; - 1) / 10&lt;sup&gt;9&lt;/sup&gt;)</code> and is due to implementations storing nanoseconds
      * in 64 bits. The limit may be increased in the future.</p>
      * 
      * <p>This function may be called from any thread. Reading and writing of the internal timer offset is not atomic, so it needs to be externally synchronized

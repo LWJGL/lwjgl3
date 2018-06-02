@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct rpmalloc_config_t {
  *     void * (*{@link RPMemoryMapCallbackI memory_map}) (size_t size, size_t *offset);
  *     void (*{@link RPMemoryUnmapCallbackI memory_unmap}) (void *address, size_t size, size_t offset, int release);
@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t span_size;
  *     size_t span_map_count;
  *     int enable_huge_pages;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct rpmalloc_config_t")
 public class RPMallocConfig extends Struct implements NativeResource {
@@ -67,6 +67,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

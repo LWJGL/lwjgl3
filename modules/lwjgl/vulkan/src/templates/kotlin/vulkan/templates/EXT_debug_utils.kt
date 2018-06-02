@@ -34,7 +34,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
         Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.
 
-        <code><pre>
+        <pre><code>
 ￿    extern VkInstance instance;
 ￿    VkResult res;
 ￿    VkDebugUtilsMessengerEXT cb1, cb2, cb3;
@@ -54,7 +54,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿            myOutputDebugString,                                      // pfnUserCallback
 ￿            NULL                                                      // pUserData
 ￿    };
-￿    res = pfnCreateDebugUtilsMessengerEXT(instance, &callback1, &cb1);
+￿    res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, &amp;cb1);
 ￿    if (res != VK_SUCCESS) {
 ￿       // Do error handling for VK_ERROR_OUT_OF_MEMORY
 ￿    }
@@ -62,7 +62,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿    callback1.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 ￿    callback1.pfnCallback = myDebugBreak;
 ￿    callback1.pUserData = NULL;
-￿    res = pfnCreateDebugUtilsMessengerEXT(instance, &callback1, &cb2);
+￿    res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, &amp;cb2);
 ￿    if (res != VK_SUCCESS) {
 ￿       // Do error handling for VK_ERROR_OUT_OF_MEMORY
 ￿    }
@@ -77,7 +77,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿            mystdOutLogger,                                           // pfnUserCallback
 ￿            NULL                                                      // pUserData
 ￿    };
-￿    res = pfnCreateDebugUtilsMessengerEXT(instance, &callback3, &cb3);
+￿    res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback3, &amp;cb3);
 ￿    if (res != VK_SUCCESS) {
 ￿       // Do error handling for VK_ERROR_OUT_OF_MEMORY
 ￿    }
@@ -87,13 +87,13 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿    // Remove callbacks when cleaning up
 ￿    pfnDestroyDebugUtilsMessengerEXT(instance, cb1);
 ￿    pfnDestroyDebugUtilsMessengerEXT(instance, cb2);
-￿    pfnDestroyDebugUtilsMessengerEXT(instance, cb3);</pre></code>
+￿    pfnDestroyDebugUtilsMessengerEXT(instance, cb3);</code></pre>
 
         <b>Example 2</b>
 
         Associate a name with an image, for easier debugging in external tools or with validation layers that can print a friendly name when referring to objects in error messages.
 
-        <code><pre>
+        <pre><code>
 ￿    extern VkDevice device;
 ￿    extern VkImage image;
 ￿
@@ -110,17 +110,17 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿        "Brick Diffuse Texture",                            // pObjectName
 ￿    };
 ￿
-￿    pfnSetDebugUtilsObjectNameEXT(device, &imageNameInfo);
+￿    pfnSetDebugUtilsObjectNameEXT(device, &amp;imageNameInfo);
 ￿
 ￿    // A subsequent error might print:
 ￿    //   Image 'Brick Diffuse Texture' (0xc0dec0dedeadbeef) is used in a
-￿    //   command buffer with no memory bound to it.</pre></code>
+￿    //   command buffer with no memory bound to it.</code></pre>
 
         <b>Example 3</b>
 
         Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualization of the commands submitted.
 
-        <code><pre>
+        <pre><code>
 ￿    extern VkDevice device;
 ￿    extern VkCommandBuffer commandBuffer;
 ￿
@@ -141,7 +141,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿    };
 ￿
 ￿    // Start an annotated group of calls under the 'Brick House' name
-￿    pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &houseLabel);
+￿    pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &amp;houseLabel);
 ￿    {
 ￿        // A mutable structure for each part being rendered
 ￿        VkDebugUtilsLabelEXT housePartLabel =
@@ -154,14 +154,14 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿
 ￿        // Set the name and insert the marker
 ￿        housePartLabel.pLabelName = "Walls";
-￿        pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+￿        pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
 ￿
 ￿        // Insert the drawcall for the walls
 ￿        vkCmdDrawIndexed(commandBuffer, 1000, 1, 0, 0, 0);
 ￿
 ￿        // Insert a recursive region for two sets of windows
 ￿        housePartLabel.pLabelName = "Windows";
-￿        pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+￿        pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
 ￿        {
 ￿            vkCmdDrawIndexed(commandBuffer, 75, 6, 1000, 0, 0);
 ￿            vkCmdDrawIndexed(commandBuffer, 100, 2, 1450, 0, 0);
@@ -169,12 +169,12 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿        pfnCmdEndDebugUtilsLabelEXT(commandBuffer);
 ￿
 ￿        housePartLabel.pLabelName = "Front Door";
-￿        pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+￿        pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
 ￿
 ￿        vkCmdDrawIndexed(commandBuffer, 350, 1, 1650, 0, 0);
 ￿
 ￿        housePartLabel.pLabelName = "Roof";
-￿        pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+￿        pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
 ￿
 ￿        vkCmdDrawIndexed(commandBuffer, 500, 1, 2000, 0, 0);
 ￿    }
@@ -195,7 +195,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿    };
 ￿
 ￿    // Identify the queue label region
-￿    pfnQueueBeginDebugUtilsLabelEXT(queue, &queueLabel);
+￿    pfnQueueBeginDebugUtilsLabelEXT(queue, &amp;queueLabel);
 ￿
 ￿    // Submit the work for the main render thread
 ￿    const VkCommandBuffer cmd_bufs[] = {commandBuffer};
@@ -208,10 +208,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿                                .pCommandBuffers = cmd_bufs,
 ￿                                .signalSemaphoreCount = 0,
 ￿                                .pSignalSemaphores = NULL};
-￿    vkQueueSubmit(queue, 1, &submit_info, fence);
+￿    vkQueueSubmit(queue, 1, &amp;submit_info, fence);
 ￿
 ￿    // End the queue label region
-￿    pfnQueueEndDebugUtilsLabelEXT(queue);</pre></code>
+￿    pfnQueueEndDebugUtilsLabelEXT(queue);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -346,10 +346,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         Give a user-friendly name to an object.
 
         <h5>C Specification</h5>
-        <code><pre>
+        <pre><code>
 ￿VkResult vkSetDebugUtilsObjectNameEXT(
 ￿    VkDevice                                    device,
-￿    const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);</pre></code>
+￿    const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -390,10 +390,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         Attach arbitrary data to an object.
 
         <h5>C Specification</h5>
-        <code><pre>
+        <pre><code>
 ￿VkResult vkSetDebugUtilsObjectTagEXT(
 ￿    VkDevice                                    device,
-￿    const VkDebugUtilsObjectTagInfoEXT*         pTagInfo);</pre></code>
+￿    const VkDebugUtilsObjectTagInfoEXT*         pTagInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -436,10 +436,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A queue debug label region is opened by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkQueueBeginDebugUtilsLabelEXT(
 ￿    VkQueue                                     queue,
-￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -469,9 +469,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A queue debug label region is closed by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkQueueEndDebugUtilsLabelEXT(
-￿    VkQueue                                     queue);</pre></code>
+￿    VkQueue                                     queue);</code></pre>
 
         <h5>Description</h5>
         The calls to #QueueBeginDebugUtilsLabelEXT() and #QueueEndDebugUtilsLabelEXT() <b>must</b> be matched and balanced.
@@ -504,10 +504,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A single label can be inserted into a queue by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkQueueInsertDebugUtilsLabelEXT(
 ￿    VkQueue                                     queue,
-￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -537,10 +537,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A command buffer debug label region can be opened by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdBeginDebugUtilsLabelEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -577,9 +577,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A command buffer label region can be closed by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdEndDebugUtilsLabelEXT(
-￿    VkCommandBuffer                             commandBuffer);</pre></code>
+￿    VkCommandBuffer                             commandBuffer);</code></pre>
 
         <h5>Description</h5>
         An application <b>may</b> open a debug label region in one command buffer and close it in another, or otherwise split debug label regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to #CmdBeginDebugUtilsLabelEXT() and #CmdEndDebugUtilsLabelEXT() <b>must</b> be matched and balanced.
@@ -620,10 +620,10 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A single debug label can be inserted into a command buffer by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdInsertDebugUtilsLabelEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+￿    const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -660,12 +660,12 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         A debug messenger triggers a debug callback with a debug message when an event of interest occurs. To create a debug messenger which will trigger a debug callback, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateDebugUtilsMessengerEXT(
 ￿    VkInstance                                  instance,
 ￿    const VkDebugUtilsMessengerCreateInfoEXT*   pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDebugUtilsMessengerEXT*                   pMessenger);</pre></code>
+￿    VkDebugUtilsMessengerEXT*                   pMessenger);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -706,11 +706,11 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         To destroy a {@code VkDebugUtilsMessengerEXT} object, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroyDebugUtilsMessengerEXT(
 ￿    VkInstance                                  instance,
 ￿    VkDebugUtilsMessengerEXT                    messenger,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -748,12 +748,12 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <h5>C Specification</h5>
         There may be times that a user wishes to intentionally submit a debug message. To do this, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkSubmitDebugUtilsMessageEXT(
 ￿    VkInstance                                  instance,
 ￿    VkDebugUtilsMessageSeverityFlagBitsEXT      messageSeverity,
 ￿    VkDebugUtilsMessageTypeFlagsEXT             messageTypes,
-￿    const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData);</pre></code>
+￿    const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData);</code></pre>
 
         <h5>Description</h5>
         The call will propagate through the layers and generate callback(s) as indicated by the message's flags. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the messenger was registered.

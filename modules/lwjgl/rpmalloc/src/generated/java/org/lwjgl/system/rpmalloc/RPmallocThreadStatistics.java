@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct rpmalloc_thread_statistics_t {
  *     size_t active;
  *     size_t sizecache;
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t deferred;
  *     size_t thread_to_global;
  *     size_t global_to_thread;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct rpmalloc_thread_statistics_t")
 public class RPmallocThreadStatistics extends Struct implements NativeResource {
@@ -45,6 +45,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -55,8 +55,6 @@ public class GLFWNativeWayland {
      * 
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
-     * @param monitor 
-     *
      * @return the {@code struct wl_output*} of the specified monitor, or {@code NULL} if an error occurred.
      *
      * @since version 3.2
@@ -76,8 +74,6 @@ public class GLFWNativeWayland {
      * Returns the main {@code struct wl_surface*} of the specified window.
      * 
      * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param window 
      *
      * @return the main {@code struct wl_surface*} of the specified window, or {@code NULL} if an error occurred.
      *

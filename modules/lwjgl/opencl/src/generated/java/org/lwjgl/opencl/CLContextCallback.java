@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     cl_char const *errinfo,
  *     void const *private_info,
  *     size_t cb,
  *     void *user_data
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class CLContextCallback extends Callback implements CLContextCallbackI {
 

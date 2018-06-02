@@ -102,10 +102,10 @@ public class KHRExternalFenceWin32 {
      * 
      * <p>To import a fence payload from a Windows handle, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkImportFenceWin32HandleKHR(
      *     VkDevice                                    device,
-     *     const VkImportFenceWin32HandleInfoKHR*      pImportFenceWin32HandleInfo);</pre></code>
+     *     const VkImportFenceWin32HandleInfoKHR*      pImportFenceWin32HandleInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -164,11 +164,11 @@ public class KHRExternalFenceWin32 {
      * 
      * <p>To export a Windows handle representing the state of a fence, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetFenceWin32HandleKHR(
      *     VkDevice                                    device,
      *     const VkFenceGetWin32HandleInfoKHR*         pGetWin32HandleInfo,
-     *     HANDLE*                                     pHandle);</pre></code>
+     *     HANDLE*                                     pHandle);</code></pre>
      * 
      * <h5>Description</h5>
      * 

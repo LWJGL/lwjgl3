@@ -44,19 +44,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkObjectTablePushConstantEntryNVX {
  *     VkObjectEntryTypeNVX type;
  *     VkObjectEntryUsageFlagsNVX flags;
  *     VkPipelineLayout pipelineLayout;
  *     VkShaderStageFlags stageFlags;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

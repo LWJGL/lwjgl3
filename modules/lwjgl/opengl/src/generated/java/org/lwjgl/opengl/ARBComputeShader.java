@@ -111,18 +111,18 @@ public class ARBComputeShader {
      * 
      * <p>The parameters addressed by indirect are packed a structure, which takes the form (in C):</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * typedef struct {
      *     uint num_groups_x;
      *     uint num_groups_y;
      *     uint num_groups_z;
-     * } DispatchIndirectCommand;</pre></code>
+     * } DispatchIndirectCommand;</code></pre>
      * 
      * <p>A call to {@code glDispatchComputeIndirect} is equivalent, assuming no errors are generated, to:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * cmd = (const DispatchIndirectCommand *)indirect;
-     * glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);</pre></code>
+     * glDispatchCompute(cmd-&gt;num_groups_x, cmd-&gt;num_groups_y, cmd-&gt;num_groups_z);</code></pre>
      *
      * @param indirect the offset into the buffer object currently bound to the {@link GL43#GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER} buffer target at which the dispatch parameters are
      *                 stored.

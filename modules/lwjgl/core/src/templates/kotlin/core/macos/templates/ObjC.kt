@@ -625,9 +625,9 @@ void myMethodIMP(id self, SEL _cmd)
         charUTF8.const.p.IN(
             "types",
             """
-            an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-            &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-            {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+            an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
+            Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
+            and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
             """
         ),
 
@@ -663,9 +663,9 @@ void myMethodIMP(id self, SEL _cmd)
         charUTF8.const.p.IN(
             "types",
             """
-            an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-            &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-            {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+            an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
+            Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
+            and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
             """
         ),
 

@@ -26,12 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct InputPoseActionData_t {
  *     bool bActive;
  *     VRInputValueHandle_t activeOrigin;
  *     {@link TrackedDevicePose TrackedDevicePose_t} pose;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct InputPoseActionData_t")
 public class InputPoseActionData extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class InputPoseActionData extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

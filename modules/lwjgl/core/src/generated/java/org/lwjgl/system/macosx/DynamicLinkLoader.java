@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to <dlfcn.h>. */
+/** Native bindings to &lt;dlfcn.h&gt;. */
 public class DynamicLinkLoader {
 
     /** The {@code mode} argument to {@link #dlopen} contains one of the following. */
@@ -210,7 +210,7 @@ public class DynamicLinkLoader {
      * <p>The value of handle specifies what images this function searches for to locate the symbol specified by the symbol parameter. The following table
      * describes the possible values for the handle parameter:</p>
      * 
-     * <table class=lwjgl>
+     * <table class=striped>
      * <tr><th>Handle value</th><th>Search scope</th></tr>
      * <tr><td>{@code dlopen} handle</td><td>Image associated with the {@link #dlopen} handle.</td></tr>
      * <tr><td>{@link #RTLD_DEFAULT}</td><td>Every dependent library or {@link #RTLD_GLOBAL}–opened library in the current process, in the order they were loaded.</td></tr>
@@ -238,7 +238,7 @@ public class DynamicLinkLoader {
      * <p>The value of handle specifies what images this function searches for to locate the symbol specified by the symbol parameter. The following table
      * describes the possible values for the handle parameter:</p>
      * 
-     * <table class=lwjgl>
+     * <table class=striped>
      * <tr><th>Handle value</th><th>Search scope</th></tr>
      * <tr><td>{@code dlopen} handle</td><td>Image associated with the {@link #dlopen} handle.</td></tr>
      * <tr><td>{@link #RTLD_DEFAULT}</td><td>Every dependent library or {@link #RTLD_GLOBAL}–opened library in the current process, in the order they were loaded.</td></tr>

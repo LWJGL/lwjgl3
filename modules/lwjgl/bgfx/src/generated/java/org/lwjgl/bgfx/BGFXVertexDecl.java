@@ -30,13 +30,13 @@ import static org.lwjgl.bgfx.BGFX.BGFX_ATTRIB_COUNT;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_vertex_decl_t {
  *     uint32_t hash;
  *     uint16_t stride;
  *     uint16_t offset[BGFX_ATTRIB_COUNT];
  *     uint16_t attributes[BGFX_ATTRIB_COUNT];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_vertex_decl_t")
 public class BGFXVertexDecl extends Struct implements NativeResource {
@@ -44,6 +44,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -30,13 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_transient_index_buffer_t {
  *     uint8_t * data;
  *     uint32_t size;
  *     bgfx_index_buffer_handle_t handle;
  *     uint32_t startIndex;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_transient_index_buffer_t")
 public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
@@ -44,6 +44,7 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

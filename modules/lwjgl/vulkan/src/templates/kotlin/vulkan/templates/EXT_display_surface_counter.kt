@@ -96,11 +96,11 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
         <h5>C Specification</h5>
         To query the basic capabilities of a surface, needed in order to create a swapchain, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceSurfaceCapabilities2EXT(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
-￿    VkSurfaceCapabilities2EXT*                  pSurfaceCapabilities);</pre></code>
+￿    VkSurfaceCapabilities2EXT*                  pSurfaceCapabilities);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceSurfaceCapabilities2EXT() behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pSurfaceCapabilities} parameter.

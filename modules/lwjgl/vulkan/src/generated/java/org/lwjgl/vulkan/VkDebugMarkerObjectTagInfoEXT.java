@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDebugMarkerObjectTagInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -68,13 +68,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t tagName;
  *     size_t tagSize;
  *     void const * pTag;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

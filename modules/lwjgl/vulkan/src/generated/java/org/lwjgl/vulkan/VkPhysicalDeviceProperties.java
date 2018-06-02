@@ -71,7 +71,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceProperties {
  *     uint32_t apiVersion;
  *     uint32_t driverVersion;
@@ -82,13 +82,14 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint8_t pipelineCacheUUID[VK_UUID_SIZE];
  *     {@link VkPhysicalDeviceLimits VkPhysicalDeviceLimits} limits;
  *     {@link VkPhysicalDeviceSparseProperties VkPhysicalDeviceSparseProperties} sparseProperties;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceProperties extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

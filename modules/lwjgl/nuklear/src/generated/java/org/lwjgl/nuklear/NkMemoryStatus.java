@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_memory_status {
  *     void * memory;
  *     unsigned int type;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     nk_size allocated;
  *     nk_size needed;
  *     nk_size calls;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_memory_status")
 public class NkMemoryStatus extends Struct implements NativeResource {
@@ -34,6 +34,7 @@ public class NkMemoryStatus extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

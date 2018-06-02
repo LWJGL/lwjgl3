@@ -23,14 +23,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VREvent_HapticVibration_t {
  *     uint64_t containerHandle;
  *     uint64_t componentHandle;
  *     float fDurationSeconds;
  *     float fFrequency;
  *     float fAmplitude;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VREvent_HapticVibration_t")
 public class VREventHapticVibration extends Struct {
@@ -38,6 +38,7 @@ public class VREventHapticVibration extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

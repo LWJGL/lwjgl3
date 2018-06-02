@@ -1368,7 +1368,7 @@ val GLX_EXT_no_config_context = EXT_FLAG.nativeClassGLX("GLX_EXT_no_config_conte
         Modern GPUs allow contexts to render to almost any combination of supported color and auxiliary buffer formats. Traditionally GLX context creation is
         done with respect to a GLXFBConfig specifying buffer formats, and constrains contexts to only work with drawables created with a "compatible" config.
 
-        This extension allows creation of GL & ES contexts without specifying a {@code GLXFBConfig}.
+        This extension allows creation of GL &amp; ES contexts without specifying a {@code GLXFBConfig}.
         """
 }
 

@@ -123,12 +123,12 @@ public class EXTValidationCache {
      * 
      * <p>To create validation cache objects, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateValidationCacheEXT(
      *     VkDevice                                    device,
      *     const VkValidationCacheCreateInfoEXT*       pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkValidationCacheEXT*                       pValidationCache);</pre></code>
+     *     VkValidationCacheEXT*                       pValidationCache);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -202,11 +202,11 @@ public class EXTValidationCache {
      * 
      * <p>To destroy a validation cache, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyValidationCacheEXT(
      *     VkDevice                                    device,
      *     VkValidationCacheEXT                        validationCache,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -264,12 +264,12 @@ public class EXTValidationCache {
      * 
      * <p>Validation cache objects <b>can</b> be merged using the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkMergeValidationCachesEXT(
      *     VkDevice                                    device,
      *     VkValidationCacheEXT                        dstCache,
      *     uint32_t                                    srcCacheCount,
-     *     const VkValidationCacheEXT*                 pSrcCaches);</pre></code>
+     *     const VkValidationCacheEXT*                 pSrcCaches);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -346,12 +346,12 @@ public class EXTValidationCache {
      * 
      * <p>Data <b>can</b> be retrieved from a validation cache object using the command:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetValidationCacheDataEXT(
      *     VkDevice                                    device,
      *     VkValidationCacheEXT                        validationCache,
      *     size_t*                                     pDataSize,
-     *     void*                                       pData);</pre></code>
+     *     void*                                       pData);</code></pre>
      * 
      * <h5>Description</h5>
      * 

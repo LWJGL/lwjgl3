@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_style_edit {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} scrollbar_size;
  *     {@link NkVec2 struct nk_vec2} padding;
  *     float row_padding;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_edit")
 public class NkStyleEdit extends Struct implements NativeResource {
@@ -50,6 +50,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -50,14 +50,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiTexture {
  *     unsigned int mWidth;
  *     unsigned int mHeight;
  *     char achFormatHint[4];
  *     {@link AITexel struct aiTexel} * pcData;
  *     {@link AIString struct aiString} mFilename;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiTexture")
 public class AITexture extends Struct {
@@ -65,6 +65,7 @@ public class AITexture extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

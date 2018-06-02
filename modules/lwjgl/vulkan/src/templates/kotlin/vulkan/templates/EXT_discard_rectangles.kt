@@ -109,12 +109,12 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
         <h5>C Specification</h5>
         If the pipeline state object was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled, the discard rectangles are dynamically set and changed with the command:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdSetDiscardRectangleEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    firstDiscardRectangle,
 ￿    uint32_t                                    discardRectangleCount,
-￿    const VkRect2D*                             pDiscardRectangles);</pre></code>
+￿    const VkRect2D*                             pDiscardRectangles);</code></pre>
 
         <h5>Description</h5>
         The discard rectangle taken from element <code>i</code> of {@code pDiscardRectangles} replace the current state for the discard rectangle index <code>firstDiscardRectangle + i</code>, for <code>i</code> in <code>[0, discardRectangleCount)</code>.

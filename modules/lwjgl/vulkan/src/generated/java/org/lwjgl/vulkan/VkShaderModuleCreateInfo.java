@@ -57,20 +57,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkShaderModuleCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkShaderModuleCreateFlags flags;
  *     size_t codeSize;
  *     uint32_t const * pCode;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

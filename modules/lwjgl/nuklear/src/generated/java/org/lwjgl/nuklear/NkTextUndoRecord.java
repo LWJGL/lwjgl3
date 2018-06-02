@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_text_undo_record {
  *     int where;
  *     short insert_length;
  *     short delete_length;
  *     short char_storage;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_text_undo_record")
 class NkTextUndoRecord extends Struct {
@@ -30,6 +30,7 @@ class NkTextUndoRecord extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

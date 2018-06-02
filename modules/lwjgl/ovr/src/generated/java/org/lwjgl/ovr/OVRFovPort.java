@@ -18,8 +18,8 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Field Of View (FOV) in tangent of the angle units. As an example, for a standard 90 degree vertical FOV, we would have:
  * 
- * <code><pre>
- * { UpTan = tan(90 degrees / 2), DownTan = tan(90 degrees / 2) }</pre></code>
+ * <pre><code>
+ * { UpTan = tan(90 degrees / 2), DownTan = tan(90 degrees / 2) }</code></pre>
  * 
  * <h3>Member documentation</h3>
  * 
@@ -32,13 +32,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrFovPort {
  *     float UpTan;
  *     float DownTan;
  *     float LeftTan;
  *     float RightTan;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrFovPort")
 public class OVRFovPort extends Struct implements NativeResource {
@@ -46,6 +46,7 @@ public class OVRFovPort extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPipelineTessellationDomainOriginStateCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkTessellationDomainOrigin domainOrigin;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPipelineTessellationDomainOriginStateCreateInfoKHR extends VkPipelineTessellationDomainOriginStateCreateInfo {
 

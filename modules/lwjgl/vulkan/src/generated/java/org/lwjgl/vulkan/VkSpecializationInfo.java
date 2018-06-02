@@ -52,19 +52,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkSpecializationInfo {
  *     uint32_t mapEntryCount;
  *     {@link VkSpecializationMapEntry VkSpecializationMapEntry const} * pMapEntries;
  *     size_t dataSize;
  *     void const * pData;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkSpecializationInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

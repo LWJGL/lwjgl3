@@ -83,10 +83,10 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         <h5>C Specification</h5>
         To import a fence payload from a Windows handle, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkImportFenceWin32HandleKHR(
 ￿    VkDevice                                    device,
-￿    const VkImportFenceWin32HandleInfoKHR*      pImportFenceWin32HandleInfo);</pre></code>
+￿    const VkImportFenceWin32HandleInfoKHR*      pImportFenceWin32HandleInfo);</code></pre>
 
         <h5>Description</h5>
         Importing a fence payload from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release ownership using the fname:CloseHandle system call when the handle is no longer needed.
@@ -129,11 +129,11 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
         <h5>C Specification</h5>
         To export a Windows handle representing the state of a fence, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetFenceWin32HandleKHR(
 ￿    VkDevice                                    device,
 ￿    const VkFenceGetWin32HandleInfoKHR*         pGetWin32HandleInfo,
-￿    HANDLE*                                     pHandle);</pre></code>
+￿    HANDLE*                                     pHandle);</code></pre>
 
         <h5>Description</h5>
         For handle types defined as NT handles, the handles returned by #GetFenceWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.

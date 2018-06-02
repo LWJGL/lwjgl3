@@ -248,7 +248,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
             one device associated with {@code kernel}.
             """,
             """
-            $INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt size of return type and
+            $INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt; size of return type and
             {@code param_value} is not #NULL.
             """,
             """

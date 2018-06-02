@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfoKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineBindPoint pipelineBindPoint;
  *     VkPipelineLayout pipelineLayout;
  *     uint32_t set;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateTemplateCreateInfo {
 

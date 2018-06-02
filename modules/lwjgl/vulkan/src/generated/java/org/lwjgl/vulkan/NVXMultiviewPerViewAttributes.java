@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Examples</h5>
  * 
- * <code><pre>
+ * <pre><code>
  * #version 450 core
  * 
  * #extension GL_KHX_multiview : enable
@@ -34,7 +34,7 @@ package org.lwjgl.vulkan;
  *     gl_PositionPerViewNV[0] = buf.mvpPerView[0] * position;
  *     gl_PositionPerViewNV[1] = buf.mvpPerView[1] * position;
  *     gl_Position = buf.mvpPerView[gl_ViewIndex] * position;
- * }</pre></code>
+ * }</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

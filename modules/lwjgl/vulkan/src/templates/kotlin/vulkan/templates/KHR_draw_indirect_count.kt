@@ -77,7 +77,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
         <h5>C Specification</h5>
         To record a non-indexed draw call with a draw call count sourced from a buffer, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDrawIndirectCountKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
@@ -85,7 +85,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
 ￿    VkBuffer                                    countBuffer,
 ￿    VkDeviceSize                                countBufferOffset,
 ￿    uint32_t                                    maxDrawCount,
-￿    uint32_t                                    stride);</pre></code>
+￿    uint32_t                                    stride);</code></pre>
 
         <h5>Description</h5>
         #CmdDrawIndirectCountKHR() behaves similarly to #CmdDrawIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.
@@ -170,7 +170,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
         <h5>C Specification</h5>
         To record an indexed draw call with a draw call count sourced from a buffer, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDrawIndexedIndirectCountKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkBuffer                                    buffer,
@@ -178,7 +178,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
 ￿    VkBuffer                                    countBuffer,
 ￿    VkDeviceSize                                countBufferOffset,
 ￿    uint32_t                                    maxDrawCount,
-￿    uint32_t                                    stride);</pre></code>
+￿    uint32_t                                    stride);</code></pre>
 
         <h5>Description</h5>
         #CmdDrawIndexedIndirectCountKHR() behaves similarly to #CmdDrawIndexedIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.

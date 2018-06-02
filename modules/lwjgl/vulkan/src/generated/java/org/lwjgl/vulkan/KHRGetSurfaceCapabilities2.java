@@ -101,11 +101,11 @@ public class KHRGetSurfaceCapabilities2 {
      * 
      * <p>To query the basic capabilities of a surface defined by the core or extensions, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfaceCapabilities2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
-     *     VkSurfaceCapabilities2KHR*                  pSurfaceCapabilities);</pre></code>
+     *     VkSurfaceCapabilities2KHR*                  pSurfaceCapabilities);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -169,12 +169,12 @@ public class KHRGetSurfaceCapabilities2 {
      * 
      * <p>To query the supported swapchain format tuples for a surface, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfaceFormats2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
      *     uint32_t*                                   pSurfaceFormatCount,
-     *     VkSurfaceFormat2KHR*                        pSurfaceFormats);</pre></code>
+     *     VkSurfaceFormat2KHR*                        pSurfaceFormats);</code></pre>
      * 
      * <h5>Description</h5>
      * 

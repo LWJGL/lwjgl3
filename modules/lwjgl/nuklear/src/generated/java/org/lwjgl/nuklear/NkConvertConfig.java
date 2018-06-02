@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_convert_config {
  *     float global_alpha;
  *     enum nk_anti_aliasing line_AA;
@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkDrawVertexLayoutElement struct nk_draw_vertex_layout_element} * vertex_layout;
  *     nk_size vertex_size;
  *     nk_size vertex_alignment;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_convert_config")
 public class NkConvertConfig extends Struct implements NativeResource {
@@ -54,6 +54,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

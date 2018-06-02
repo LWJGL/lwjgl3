@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     size_t size,
  *     size_t *offset
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class RPMemoryMapCallback extends Callback implements RPMemoryMapCallbackI {
 

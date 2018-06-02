@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct XSetWindowAttributes {
  *     Pixmap background_pixmap;
  *     unsigned long background_pixel;
@@ -37,13 +37,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Bool override_redirect;
  *     Colormap colormap;
  *     Cursor cursor;
- * }</pre></code>
+ * }</code></pre>
  */
 public class XSetWindowAttributes extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

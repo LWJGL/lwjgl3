@@ -27,11 +27,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct cl_buffer_region {
  *     size_t origin;
  *     size_t size;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct cl_buffer_region")
 public class CLBufferRegion extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

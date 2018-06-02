@@ -18,12 +18,12 @@ import static org.lwjgl.glfw.GLFW.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     GLFWwindow *window,
  *     int xpos,
  *     int ypos
- * )</pre></code>
+ * )</code></pre>
  *
  * @since version 3.0
  */

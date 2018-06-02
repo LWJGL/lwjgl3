@@ -40,7 +40,7 @@ public final class Checks {
      *
      * <p>When enabled, LWJGL will perform additional checks during its operation. These checks are more expensive than the ones enabled with {@link #CHECKS}
      * and will have a noticeable effect on performance, so they are disabled by default. Examples of such checks are: buffer object binding state check (GL),
-     * buffer capacity checks for texture images (GL & CL), etc. LWJGL will also print additional information, mainly during start-up.</p>
+     * buffer capacity checks for texture images (GL &amp; CL), etc. LWJGL will also print additional information, mainly during start-up.</p>
      *
      * <p>Can be enabled by setting {@link Configuration#DEBUG} to true.</p>
      */
@@ -93,7 +93,7 @@ public final class Checks {
      *
      * @param pointer the pointer to check
      *
-     * @throws NullPointerException
+     * @throws NullPointerException if {@code pointer} is {@code NULL}
      */
     public static long check(long pointer) {
         if (pointer == NULL) {
@@ -251,7 +251,7 @@ public final class Checks {
      * @param buf  the array to check
      * @param size the minimum array capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.length < size}
      */
     public static void check(byte[] buf, int size) {
         checkBuffer(buf.length, size);
@@ -263,7 +263,7 @@ public final class Checks {
      * @param buf  the array to check
      * @param size the minimum array capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.length < size}
      */
     public static void check(short[] buf, int size) {
         checkBuffer(buf.length, size);
@@ -275,7 +275,7 @@ public final class Checks {
      * @param buf  the array to check
      * @param size the minimum array capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.length < size}
      */
     public static void check(int[] buf, int size) {
         checkBuffer(buf.length, size);
@@ -287,7 +287,7 @@ public final class Checks {
      * @param buf  the array to check
      * @param size the minimum array capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.length < size}
      */
     public static void check(long[] buf, int size) {
         checkBuffer(buf.length, size);
@@ -299,7 +299,7 @@ public final class Checks {
      * @param buf  the array to check
      * @param size the minimum array capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.length < size}
      */
     public static void check(float[] buf, int size) {
         checkBuffer(buf.length, size);
@@ -311,7 +311,7 @@ public final class Checks {
      * @param buf  the array to check
      * @param size the minimum array capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.length < size}
      */
     public static void check(double[] buf, int size) {
         checkBuffer(buf.length, size);
@@ -322,6 +322,8 @@ public final class Checks {
      *
      * @param text the text to check
      * @param size the minimum number of characters
+     *
+     * @throws IllegalArgumentException if {@code text.length() < size}
      */
     public static void check(CharSequence text, int size) {
         checkBuffer(text.length(), size);
@@ -333,7 +335,7 @@ public final class Checks {
      * @param buf  the buffer to check
      * @param size the minimum buffer capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.remaining() < size}
      */
     public static void check(Buffer buf, int size) {
         checkBuffer(buf.remaining(), size);
@@ -350,7 +352,7 @@ public final class Checks {
      * @param buf  the buffer to check
      * @param size the minimum buffer capacity
      *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if {@code buf.remaining() < size}
      */
     public static void check(CustomBuffer<?> buf, int size) {
         checkBuffer(buf.remaining(), size);

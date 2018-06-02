@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     bgfx_allocator_interface_t *_this,
  *     void *_ptr,
@@ -22,7 +22,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     size_t _align,
  *     char *_file,
  *     uint32_t _line
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)")

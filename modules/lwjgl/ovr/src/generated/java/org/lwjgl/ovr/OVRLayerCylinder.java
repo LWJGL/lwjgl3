@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * Describes a layer of type {@link OVR#ovrLayerType_Cylinder LayerType_Cylinder} which is a single cylinder relative to the recentered origin. This type of layer represents a single
  * object placed in the world and not a stereo view of the world itself.
  * 
- * <code><pre>
+ * <pre><code>
  *                -Z                                       +Y
  *         U=0  +--+--+  U=1
  *          +---+  |  +---+            +-----------------+  - V=0
@@ -29,13 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  *    ++        \  A  /        ++      |                 |  |
  *   ++          \---/          ++     |                 |  |
  *   |            \ /            |     |              +X |  |
- *   +-------------C------R------+ +X  +--------C--------+  | <--- Height
+ *   +-------------C------R------+ +X  +--------C--------+  | &lt;--- Height
  *       (+Y is out of screen)         |                 |  |
  *                                     |                 |  |
  *   R = Radius                        |                 |  |
  *   A = Angle (0,2*Pi)                |                 |  |
  *   C = CylinderPoseCenter            |                 |  |
- *   U/V = UV Coordinates              +-----------------+  - V=1</pre></code>
+ *   U/V = UV Coordinates              +-----------------+  - V=1</code></pre>
  * 
  * <p>An identity {@code CylinderPoseCenter} places the center of the cylinder at the recentered origin unless the headlocked flag is set.</p>
  * 
@@ -67,7 +67,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrLayerCylinder {
  *     {@link OVRLayerHeader ovrLayerHeader} Header;
  *     ovrTextureSwapChain ColorTexture;
@@ -76,7 +76,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float CylinderRadius;
  *     float CylinderAngle;
  *     float CylinderAspectRatio;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrLayerCylinder")
 public class OVRLayerCylinder extends Struct implements NativeResource {
@@ -84,6 +84,7 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

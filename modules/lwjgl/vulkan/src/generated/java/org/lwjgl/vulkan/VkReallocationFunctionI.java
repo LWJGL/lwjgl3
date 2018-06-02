@@ -16,13 +16,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <p>The type of {@code pfnReallocation} is:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef void* (VKAPI_PTR *PFN_vkReallocationFunction)(
  *     void*                                       pUserData,
  *     void*                                       pOriginal,
  *     size_t                                      size,
  *     size_t                                      alignment,
- *     VkSystemAllocationScope                     allocationScope);</pre></code>
+ *     VkSystemAllocationScope                     allocationScope);</code></pre>
  * 
  * <h5>Description</h5>
  * 

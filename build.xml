@@ -679,7 +679,7 @@
 
     <!-- Includes all modules for javadoc.lwjgl.org -->
     <target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-compile-generator,-build-version">
-        <echo message="It is recommended to generate JavaDoc on JDK 9 or higher." unless:set="jdk9" taskname="Warning"/>
+        <echo message="It is recommended to generate JavaDoc on JDK 10 or higher." unless:set="jdk10" taskname="Warning"/>
         <delete dir="bin/javadoc"/>
 
         <path id="javadoc.sources">
@@ -689,7 +689,7 @@
         <javadoc
             destdir="bin/javadoc"
             sourcepathref="javadoc.sources"
-            source="1.8"
+            source="9"
             windowtitle="LWJGL ${build.version}"
             encoding="UTF-8"
             docencoding="UTF-8"
@@ -699,8 +699,6 @@
             notree="true"
             public="true"
             Splitindex="true"
-            doclet="org.lwjgl.system.ExcludeDoclet"
-            docletpath="${bin.generator}"
             maxmemory="1G"
             failonerror="true"
         >
@@ -713,10 +711,9 @@
 
             <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
-            <arg value="-Xdoclint"/>
-            <arg line="-Xmaxwarns 1000"/>
+            <arg line="-Xdoclint:html,reference,syntax"/>
+            <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
             <arg value="-html5" if:set="jdk9"/>
-            <arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
             <arg line="-J-Dfile.encoding=UTF8"/>
             <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
         </javadoc>
@@ -923,7 +920,7 @@
             <mkdir dir="${release}/${module}/javadoc"/>
             <javadoc
                 destdir="${release}/${module}/javadoc"
-                source="1.8"
+                source="9"
                 windowtitle="LWJGL ${build.version} - @{title}"
                 encoding="UTF-8"
                 docencoding="UTF-8"
@@ -932,8 +929,6 @@
                 nohelp="true"
                 notree="true"
                 public="true"
-                doclet="org.lwjgl.system.ExcludeDoclet"
-                docletpath="${bin.generator}"
                 failonerror="true"
             >
                 <doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
@@ -949,10 +944,9 @@
 
                 <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
-                <arg value="-Xdoclint:none"/>
-                <arg line="-Xmaxwarns 1"/>
+                <arg line="-Xdoclint:html,reference,syntax"/>
+                <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
                 <arg value="-html5" if:set="jdk9"/>
-                <arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
                 <arg line="-J-Dfile.encoding=UTF8"/>
                 <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
             </javadoc>
@@ -995,11 +989,11 @@
 
         <local name="input"/>
         <input
-            message="It is recommended to build LWJGL releases on JDK 9 or higher. Continue with JDK 8?"
+            message="It is recommended to build LWJGL releases on JDK 10 or higher. Continue with current JDK?"
             validargs="y,n"
             defaultvalue="n"
             addproperty="input"
-            unless:set="jdk9"
+            unless:set="jdk10"
         />
         <fail message="Cancelled" unless:set="jdk9">
             <condition>

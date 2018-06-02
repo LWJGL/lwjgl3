@@ -151,7 +151,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceLimits {
  *     uint32_t maxImageDimension1D;
  *     uint32_t maxImageDimension2D;
@@ -259,13 +259,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkDeviceSize optimalBufferCopyOffsetAlignment;
  *     VkDeviceSize optimalBufferCopyRowPitchAlignment;
  *     VkDeviceSize nonCoherentAtomSize;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceLimits extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

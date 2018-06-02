@@ -16,9 +16,9 @@ val NV_framebuffer_multisample_coverage = "NVFramebufferMultisampleCoverage".nat
         distinguishes between color samples and coverage samples.
 
         EXT_framebuffer_multisample introduced the function RenderbufferStorageMultisampleEXT as a method of defining the storage parameters for a multisample
-        render buffer. This function takes a {@code samples} parameter. Using rules provided by the specification, the <samples> parameter is resolved to an actual
-        number of samples that is supported by the underlying hardware. EXT_framebuffer_multisample does not specify whether {@code samples} refers to coverage
-        samples or color samples.
+        render buffer. This function takes a {@code samples} parameter. Using rules provided by the specification, the {@code samples} parameter is resolved to
+        an actual number of samples that is supported by the underlying hardware. EXT_framebuffer_multisample does not specify whether {@code samples} refers
+        to coverage samples or color samples.
 
         This extension adds the function RenderbufferStorageMultisamplCoverageNV, which takes a {@code coverageSamples} parameter as well as a
         {@code colorSamples} parameter. These two parameters give developers more fine grained control over the quality of multisampled images.

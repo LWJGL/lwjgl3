@@ -27,12 +27,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ZSTD_inBuffer {
  *     void const * src;
  *     size_t size;
  *     size_t pos;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ZSTD_inBuffer")
 public class ZSTDInBuffer extends Struct implements NativeResource {
@@ -40,6 +40,7 @@ public class ZSTDInBuffer extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

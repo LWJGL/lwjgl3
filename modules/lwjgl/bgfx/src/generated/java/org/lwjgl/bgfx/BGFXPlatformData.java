@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_platform_data_t {
  *     void * ndt;
  *     void * nwh;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * backBuffer;
  *     void * backBufferDS;
  *     void * session;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_platform_data_t")
 public class BGFXPlatformData extends Struct implements NativeResource {
@@ -47,6 +47,7 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

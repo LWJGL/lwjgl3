@@ -28,12 +28,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VRActiveActionSet_t {
  *     VRActionSetHandle_t ulActionSet;
  *     VRInputValueHandle_t ulRestrictedToDevice;
  *     VRActionSetHandle_t ulSecondaryActionSet;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VRActiveActionSet_t")
 public class VRActiveActionSet extends Struct implements NativeResource {
@@ -41,6 +41,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

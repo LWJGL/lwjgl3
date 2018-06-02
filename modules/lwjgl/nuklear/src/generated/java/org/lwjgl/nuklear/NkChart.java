@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_chart {
  *     int slot;
  *     float x;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float w;
  *     float h;
  *     {@link NkChartSlot struct nk_chart_slot} slots[4];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_chart")
 public class NkChart extends Struct {
@@ -33,6 +33,7 @@ public class NkChart extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -77,7 +77,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      *
      * @return the struct at the specified index
      *
-     * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
+     * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public T get(int index) {
         return nget(check(index, limit));
@@ -94,7 +94,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      *
      * @return the struct at the specified index
      *
-     * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
+     * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public SELF get(int index, T value) {
         memCopy(address + check(index, limit) * sizeof(), value.address(), sizeof());
@@ -111,7 +111,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      *
      * @return This buffer
      *
-     * @throws IndexOutOfBoundsException        If <tt>index</tt> is negative or not smaller than the buffer's limit
+     * @throws IndexOutOfBoundsException        If {@code index} is negative or not smaller than the buffer's limit
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public SELF put(int index, T value) {

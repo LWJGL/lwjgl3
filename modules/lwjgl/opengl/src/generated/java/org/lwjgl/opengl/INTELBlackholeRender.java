@@ -13,8 +13,8 @@ package org.lwjgl.opengl;
  * 
  * <p>New preprocessor {@code #defines} are added to the OpenGL Shading Language:</p>
  * 
- * <code><pre>
- * #define GL_INTEL_blackhole_render 1</pre></code>
+ * <pre><code>
+ * #define GL_INTEL_blackhole_render 1</code></pre>
  * 
  * <p>Requires {@link GL30 OpenGL 3.0}.</p>
  */

@@ -20,14 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkExternalFencePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkExternalFenceHandleTypeFlags exportFromImportedHandleTypes;
  *     VkExternalFenceHandleTypeFlags compatibleHandleTypes;
  *     VkExternalFenceFeatureFlags externalFenceFeatures;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
 

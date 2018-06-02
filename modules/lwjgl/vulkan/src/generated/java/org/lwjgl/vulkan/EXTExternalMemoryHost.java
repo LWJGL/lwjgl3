@@ -113,12 +113,12 @@ public class EXTExternalMemoryHost {
      * 
      * <p>To determine the correct parameters to use when importing host pointers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetMemoryHostPointerPropertiesEXT(
      *     VkDevice                                    device,
      *     VkExternalMemoryHandleTypeFlagBits          handleType,
      *     const void*                                 pHostPointer,
-     *     VkMemoryHostPointerPropertiesEXT*           pMemoryHostPointerProperties);</pre></code>
+     *     VkMemoryHostPointerPropertiesEXT*           pMemoryHostPointerProperties);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -154,10 +154,9 @@ public class EXTExternalMemoryHost {
      * 
      * <p>{@link VkMemoryHostPointerPropertiesEXT}</p>
      *
-     * @param device                       the logical device that will be importing {@code pHostPointer}.
-     * @param handleType                   the type of the handle {@code pHostPointer}.
-     * @param pHostPointer                 the host pointer to import from.
-     * @param pMemoryHostPointerProperties 
+     * @param device       the logical device that will be importing {@code pHostPointer}.
+     * @param handleType   the type of the handle {@code pHostPointer}.
+     * @param pHostPointer the host pointer to import from.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryHostPointerPropertiesEXT(VkDevice device, @NativeType("VkExternalMemoryHandleTypeFlagBits") int handleType, @NativeType("void const *") long pHostPointer, @NativeType("VkMemoryHostPointerPropertiesEXT *") VkMemoryHostPointerPropertiesEXT pMemoryHostPointerProperties) {

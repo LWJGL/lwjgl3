@@ -16,7 +16,7 @@ val KHR_no_config_context = "KHRNoConfigContext".nativeClassEGL("KHR_no_config_c
         done with respect to an {@code EGLConfig} specifying buffer formats, and constrains contexts to only work with surfaces created with a "compatible"
         config.
 
-        This extension allows creation of GL & ES contexts without specifying an {@code EGLConfig}.
+        This extension allows creation of GL &amp; ES contexts without specifying an {@code EGLConfig}.
 
         Requires ${EGL14.core}.
         """

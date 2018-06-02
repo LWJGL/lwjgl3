@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Here's sample code for old OpenGL; it's a lot more complicated to make work on modern APIs, and that's your problem.</p>
  * 
- * <code><pre>
+ * <pre><code>
  * void print_string(float x, float y, char *text, float r, float g, float b)
  * {
  *     static char buffer[99999]; // ~500 chars
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     glVertexPointer(2, GL_FLOAT, 16, buffer);
  *     glDrawArrays(GL_QUADS, 0, num_quads*4);
  *     glDisableClientState(GL_VERTEX_ARRAY);
- * }</pre></code>
+ * }</code></pre>
  */
 public class STBEasyFont {
 
@@ -148,11 +148,11 @@ public class STBEasyFont {
      * 
      * <p>The vertices are stored in an interleaved format:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * x:float
      * y:float
      * z:float
-     * color:uint8[4]</pre></code>
+     * color:uint8[4]</code></pre>
      * 
      * <p>You can ignore z and color if you get them from elsewhere. This format was chosen in the hopes it would make it easier for you to reuse existing
      * buffer-drawing code.</p>
@@ -187,11 +187,11 @@ public class STBEasyFont {
      * 
      * <p>The vertices are stored in an interleaved format:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * x:float
      * y:float
      * z:float
-     * color:uint8[4]</pre></code>
+     * color:uint8[4]</code></pre>
      * 
      * <p>You can ignore z and color if you get them from elsewhere. This format was chosen in the hopes it would make it easier for you to reuse existing
      * buffer-drawing code.</p>

@@ -23,10 +23,10 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union ovrTextureLayoutDesc_Union {
  *     {@link OVRTextureLayoutOctilinear ovrTextureLayoutOctilinear} Octilinear[ovrEye_Count];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union ovrTextureLayoutDesc_Union")
 public class OVRTextureLayoutDescUnion extends Struct implements NativeResource {
@@ -34,6 +34,7 @@ public class OVRTextureLayoutDescUnion extends Struct implements NativeResource 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

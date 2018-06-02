@@ -92,12 +92,12 @@ val KHR_wayland_surface = "KHRWaylandSurface".nativeClassVK("KHR_wayland_surface
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for a Wayland surface, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateWaylandSurfaceKHR(
 ￿    VkInstance                                  instance,
 ￿    const VkWaylandSurfaceCreateInfoKHR*        pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSurfaceKHR*                               pSurface);</pre></code>
+￿    VkSurfaceKHR*                               pSurface);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -139,11 +139,11 @@ val KHR_wayland_surface = "KHRWaylandSurface".nativeClassVK("KHR_wayland_surface
         <h5>C Specification</h5>
         To determine whether a queue family of a physical device supports presentation to a Wayland compositor, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkBool32 vkGetPhysicalDeviceWaylandPresentationSupportKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t                                    queueFamilyIndex,
-￿    struct wl_display*                          display);</pre></code>
+￿    struct wl_display*                          display);</code></pre>
 
         <h5>Description</h5>
         This platform-specific function <b>can</b> be called prior to creating a surface.

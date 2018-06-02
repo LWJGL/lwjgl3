@@ -27,8 +27,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         OpenGL rendering and can take advantage of OpenGL's existing mechanisms for texturing, programmability, and per-fragment operations.
 
         Unlike geometric primitive rendering, paths are specified on a 2D (non-projective) plane rather than in 3D (projective) space. Even though the path is
-        defined in a 2D plane, every path can be transformed into 3D clip space allowing for 3D view frustum & user-defined clipping, depth offset, and depth
-        testing in the same manner as geometric primitive rendering.
+        defined in a 2D plane, every path can be transformed into 3D clip space allowing for 3D view frustum &amp; user-defined clipping, depth offset, and
+        depth testing in the same manner as geometric primitive rendering.
 
         Both geometric primitive rendering and path rendering support rasterization of edges defined by line segments; however, path rendering also allows path
         segments to be specified by Bezier (cubic or quadratic) curves or partial elliptical arcs. This allows path rendering to define truly curved primitive
@@ -64,9 +64,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
             caps. These stroking properties specified are parameters of path objects.
             """,
             """
-            Path covering is the process of emitting simple (convex & planar) geometry that (conservatively) "covers" the path's sample coverage in the stencil
-            buffer. During path covering, stencil testing can be configured to discard fragments not within the actual coverage of the path as determined by
-            prior path stenciling.
+            Path covering is the process of emitting simple (convex &amp; planar) geometry that (conservatively) "covers" the path's sample coverage in the
+            stencil buffer. During path covering, stencil testing can be configured to discard fragments not within the actual coverage of the path as
+            determined by prior path stenciling.
 
             Path covering can cover either the filled or stroked coverage of a path.
 

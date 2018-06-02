@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_callback_vtbl_t {
  *     void (*{@link BGFXFatalCallbackI fatal}) (bgfx_callback_interface_t *_this, bgfx_fatal_t _code, char *_str);
  *     void (*{@link BGFXTraceVarArgsCallbackI trace_vargs}) (bgfx_callback_interface_t *_this, char const *_filePath, uint16_t _line, char const *_format, va_list _argList);
@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void (*{@link BGFXCaptureBeginCallbackI capture_begin}) (bgfx_callback_interface_t *_this, uint32_t _width, uint32_t _height, uint32_t _pitch, bgfx_texture_format_t _format, bool _yflip);
  *     void (*{@link BGFXCaptureEndCallbackI capture_end}) (bgfx_callback_interface_t *_this);
  *     void (*{@link BGFXCaptureFrameCallbackI capture_frame}) (bgfx_callback_interface_t *_this, void const *_data, uint32_t _size);
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_callback_vtbl_t")
 public class BGFXCallbackVtbl extends Struct implements NativeResource {
@@ -60,6 +60,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

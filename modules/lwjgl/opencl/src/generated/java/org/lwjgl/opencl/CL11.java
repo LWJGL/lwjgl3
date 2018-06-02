@@ -104,8 +104,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSubBuffer.html">Reference Page</a></p>
-     * 
      * Creates a new buffer object (referred to as a sub-buffer object) from an existing buffer object.
      * 
      * <p><strong>NOTE</strong>: Concurrent reading from, writing to and copying between both a buffer object and its sub-buffer object(s) is undefined.
@@ -148,6 +146,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSubBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateSubBuffer(@NativeType("cl_mem") long buffer, @NativeType("cl_mem_flags") long flags, @NativeType("cl_buffer_create_type") int buffer_create_type, @NativeType("void const *") ByteBuffer buffer_create_info, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -170,8 +170,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetMemObjectDestructorCallback.html">Reference Page</a></p>
-     * 
      * Registers a user callback function with a memory object. Each call to {@code clSetMemObjectDestructorCallback} registers the specified user callback
      * function on a callback stack associated with {@code memobj}. The registered user callback functions are called in the reverse order in which they were
      * registered. The user callback functions are called and then the memory object's resources are freed and the memory object is deleted. This provides a
@@ -191,6 +189,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetMemObjectDestructorCallback.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetMemObjectDestructorCallback(@NativeType("cl_mem") long memobj, @NativeType("void (*) (cl_mem, void *)") CLMemObjectDestructorCallbackI pfn_notify, @NativeType("void *") long user_data) {
@@ -215,8 +215,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
      * 
      * <p>Calling {@code clEnqueueReadBufferRect} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr} and
@@ -289,6 +287,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -302,8 +302,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
      * 
      * <p>Calling {@code clEnqueueReadBufferRect} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr} and
@@ -376,6 +374,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -389,8 +389,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
      * 
      * <p>Calling {@code clEnqueueReadBufferRect} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr} and
@@ -463,6 +461,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -476,8 +476,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
      * 
      * <p>Calling {@code clEnqueueReadBufferRect} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr} and
@@ -550,6 +548,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -563,8 +563,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
      * 
      * <p>Calling {@code clEnqueueReadBufferRect} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr} and
@@ -637,6 +635,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -667,8 +667,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
      * 
      * <p>Calling {@code clEnqueueWriteBufferRect} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
@@ -741,6 +739,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -754,8 +754,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
      * 
      * <p>Calling {@code clEnqueueWriteBufferRect} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
@@ -828,6 +826,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -841,8 +841,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
      * 
      * <p>Calling {@code clEnqueueWriteBufferRect} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
@@ -915,6 +913,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -928,8 +928,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
      * 
      * <p>Calling {@code clEnqueueWriteBufferRect} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
@@ -1002,6 +1000,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1015,8 +1015,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
      * 
      * <p>Calling {@code clEnqueueWriteBufferRect} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
@@ -1089,6 +1087,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1120,8 +1120,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyBufferRect.html">Reference Page</a></p>
-     * 
      * Enqueues a command to copy a 2D or 3D rectangular region from the buffer object identified by {@code src_buffer} to a 2D or 3D region in the buffer
      * object identified by {@code dst_buffer}. Copying begins at the source offset and destination offset which are computed as described below in the
      * description for {@code src_origin} and {@code dst_origin}. Each byte of the region's width is copied from the source offset to the destination offset.
@@ -1187,6 +1185,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueCopyBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueCopyBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t *") PointerBuffer src_origin, @NativeType("size_t *") PointerBuffer dst_origin, @NativeType("size_t *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1212,8 +1212,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateUserEvent.html">Reference Page</a></p>
-     * 
      * Creates a user event object. User events allow applications to enqueue commands that wait on a user event to finish before the command is executed by
      * the device.
      * 
@@ -1230,6 +1228,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateUserEvent.html">Reference Page</a>
      */
     @NativeType("cl_event")
     public static long clCreateUserEvent(@NativeType("cl_context") long context, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -1242,8 +1242,6 @@ public class CL11 {
     // --- [ clSetUserEventStatus ] ---
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetUserEventStatus.html">Reference Page</a></p>
-     * 
      * Sets the execution status of a user event object.
      * 
      * <p><strong>NOTE</strong>: Enqueued commands that specify user events in the {@code event_wait_list} argument of {@code clEnqueue***} commands must ensure
@@ -1252,21 +1250,21 @@ public class CL11 {
      * 
      * <p>For example, the following code sequence will result in undefined behavior of {@link CL10#clReleaseMemObject ReleaseMemObject}.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ev1 = clCreateUserEvent(ctx, NULL);
-     * clEnqueueWriteBuffer(cq, buf1, CL_FALSE, ..., 1, &ev1, NULL);
+     * clEnqueueWriteBuffer(cq, buf1, CL_FALSE, ..., 1, &amp;ev1, NULL);
      * clEnqueueWriteBuffer(cq, buf2, CL_FALSE, ...);
      * clReleaseMemObject(buf2);
-     * clSetUserEventStatus(ev1, CL_COMPLETE);</pre></code>
+     * clSetUserEventStatus(ev1, CL_COMPLETE);</code></pre>
      * 
      * <p>The following code sequence, however, works correctly.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ev1 = clCreateUserEvent(ctx, NULL);
-     * clEnqueueWriteBuffer(cq, buf1, CL_FALSE, ..., 1, &ev1, NULL);
+     * clEnqueueWriteBuffer(cq, buf1, CL_FALSE, ..., 1, &amp;ev1, NULL);
      * clEnqueueWriteBuffer(cq, buf2, CL_FALSE, ...);
      * clSetUserEventStatus(ev1, CL_COMPLETE);
-     * clReleaseMemObject(buf2);</pre></code>
+     * clReleaseMemObject(buf2);</code></pre>
      *
      * @param event            a user event object created using {@link #clCreateUserEvent CreateUserEvent}
      * @param execution_status the new execution status to be set and can be {@link CL10#CL_COMPLETE COMPLETE} or a negative integer value to indicate an error. A negative integer value
@@ -1282,6 +1280,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetUserEventStatus.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetUserEventStatus(@NativeType("cl_event") long event, @NativeType("cl_int") int execution_status) {
@@ -1306,8 +1306,6 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetEventCallback.html">Reference Page</a></p>
-     * 
      * Registers a user callback function for a specific command execution status. The registered callback function will be called when the execution status of
      * command associated with event changes to an execution status equal to or past the status specified by {@code command_exec_status}.
      * 
@@ -1353,6 +1351,8 @@ public class CL11 {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetEventCallback.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clSetEventCallback(@NativeType("cl_event") long event, @NativeType("cl_int") int command_exec_callback_type, @NativeType("void (*) (cl_event, cl_int, void *)") CLEventCallbackI pfn_notify, @NativeType("void *") long user_data) {
@@ -1360,9 +1360,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSubBuffer.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateSubBuffer CreateSubBuffer}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateSubBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateSubBuffer(@NativeType("cl_mem") long buffer, @NativeType("cl_mem_flags") long flags, @NativeType("cl_buffer_create_type") int buffer_create_type, @NativeType("void const *") ByteBuffer buffer_create_info, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -1376,9 +1376,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueReadBufferRect EnqueueReadBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1396,9 +1396,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueReadBufferRect EnqueueReadBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1416,9 +1416,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueReadBufferRect EnqueueReadBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1436,9 +1436,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueReadBufferRect EnqueueReadBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1456,9 +1456,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueWriteBufferRect EnqueueWriteBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1476,9 +1476,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueWriteBufferRect EnqueueWriteBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1496,9 +1496,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueWriteBufferRect EnqueueWriteBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1516,9 +1516,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clEnqueueWriteBufferRect EnqueueWriteBufferRect}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -1536,9 +1536,9 @@ public class CL11 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateUserEvent.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateUserEvent CreateUserEvent}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateUserEvent.html">Reference Page</a>
      */
     @NativeType("cl_event")
     public static long clCreateUserEvent(@NativeType("cl_context") long context, @Nullable @NativeType("cl_int *") int[] errcode_ret) {

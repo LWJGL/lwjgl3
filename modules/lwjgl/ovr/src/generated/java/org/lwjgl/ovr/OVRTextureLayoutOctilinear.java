@@ -22,9 +22,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Size of W quadrants:</p>
  * 
- * <code><pre>
- * SizeLeft + SizeRight <= Viewport.Size.w
- * SizeUp   + sizeDown  <= Viewport.Size.h
+ * <pre><code>
+ * SizeLeft + SizeRight &lt;= Viewport.Size.w
+ * SizeUp   + sizeDown  &lt;= Viewport.Size.h
  * 
  * Clip space (0,0) is located at Viewport.Pos + (SizeLeft,SizeUp) where
  * Viewport is given in the layer description.
@@ -34,10 +34,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * |                        ^                       |    |
  * |                        |                       |    |
  * |           0          SizeUp         1          |    |
- * |                        |                       |<--Portion of viewport
+ * |                        |                       |&lt;--Portion of viewport
  * |                        |                       |   determined by sizes
  * |                        |                       |    |
- * |<--------SizeLeft-------+-------SizeRight------>|    |
+ * |&lt;--------SizeLeft-------+-------SizeRight------&gt;|    |
  * |                        |                       |    |
  * |                        |                       |    |
  * |           2         SizeDown        3          |    |
@@ -61,7 +61,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *  Top    = 0
  *  Left   = SizeLeft
  *  Right  = SizeLeft + SizeRight
- *  Bottom = SizeUp</pre></code>
+ *  Bottom = SizeUp</code></pre>
  * 
  * <h3>Member documentation</h3>
  * 
@@ -78,7 +78,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrTextureLayoutOctilinear {
  *     float WarpLeft;
  *     float WarpRight;
@@ -88,7 +88,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float SizeRight;
  *     float SizeUp;
  *     float SizeDown;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrTextureLayoutOctilinear")
 public class OVRTextureLayoutOctilinear extends Struct implements NativeResource {
@@ -96,6 +96,7 @@ public class OVRTextureLayoutOctilinear extends Struct implements NativeResource
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

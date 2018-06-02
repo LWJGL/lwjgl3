@@ -82,10 +82,10 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         <h5>C Specification</h5>
         To import a semaphore payload from a Windows handle, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkImportSemaphoreWin32HandleKHR(
 ￿    VkDevice                                    device,
-￿    const VkImportSemaphoreWin32HandleInfoKHR*  pImportSemaphoreWin32HandleInfo);</pre></code>
+￿    const VkImportSemaphoreWin32HandleInfoKHR*  pImportSemaphoreWin32HandleInfo);</code></pre>
 
         <h5>Description</h5>
         Importing a semaphore payload from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release ownership using the fname:CloseHandle system call when the handle is no longer needed.
@@ -128,11 +128,11 @@ val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KH
         <h5>C Specification</h5>
         To export a Windows handle representing the payload of a semaphore, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetSemaphoreWin32HandleKHR(
 ￿    VkDevice                                    device,
 ￿    const VkSemaphoreGetWin32HandleInfoKHR*     pGetWin32HandleInfo,
-￿    HANDLE*                                     pHandle);</pre></code>
+￿    HANDLE*                                     pHandle);</code></pre>
 
         <h5>Description</h5>
         For handle types defined as NT handles, the handles returned by #GetSemaphoreWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.

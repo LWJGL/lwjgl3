@@ -2184,8 +2184,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("a1"), td("a5"), td("a9"), td("a13")),
             tr(td("a2"), td("a6"), td("a10"), td("a14")),
             tr(td("a3"), td("a7"), td("a11"), td("a15")),
-            tr(td("a4"), td("a8"), td("a12"), td("a16")),
-            matrix = true
+            tr(td("a4"), td("a8"), td("a12"), td("a16"))
         )}
 
         This differs from the standard row-major ordering for matrix elements. If the standard ordering is used, all of the subsequent transformation equations
@@ -2212,8 +2211,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("1"), td("0"), td("0"), td("0")),
             tr(td("0"), td("1"), td("0"), td("0")),
             tr(td("0"), td("0"), td("1"), td("0")),
-            tr(td("0"), td("0"), td("0"), td("1")),
-            matrix = true
+            tr(td("0"), td("0"), td("0"), td("1"))
         )}
         """
     )
@@ -2410,8 +2408,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("2n / (r - l)"), td("0"), td("(r + l) / (r - l)"), td("0")),
             tr(td("0"), td("2n / (t - b)"), td("(t + b) / (t - b)"), td("0")),
             tr(td("0"), td("0"), td("- (f + n) / (f - n)"), td("- (2fn) / (f - n)")),
-            tr(td("0"), td("0"), td("-1"), td("0")),
-            matrix = true
+            tr(td("0"), td("0"), td("-1"), td("0"))
         )}
         """,
 
@@ -2485,8 +2482,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("2 / (r - l)"), td("0"), td("0"), td("- (r + l) / (r - l)")),
             tr(td("0"), td("2 / (t - b)"), td("0"), td("- (t + b) / (t - b)")),
             tr(td("0"), td("0"), td("- 2 / (f - n)"), td("- (f + n) / (f - n)")),
-            tr(td("0"), td("0"), td("0"), td("1")),
-            matrix = true
+            tr(td("0"), td("0"), td("0"), td("1"))
         )}
         """,
 
@@ -2902,16 +2898,14 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("<b>R</b>", 3, 3), td("0")),
             tr(td("0")),
             tr(td("0")),
-            tr(td("0"), td("0"), td("0"), td("1")),
-            matrix = true
+            tr(td("0"), td("0"), td("0"), td("1"))
         )}
 
         Let <code>u = v / ||v|| = (x' y' z')<sup>T</sup></code>. If <b>S</b> =
         ${table(
             tr(td("0"), td("-z'"), td("y'")),
             tr(td("z'"), td("0"), td("-x'")),
-            tr(td("-y'"), td("x'"), td("0")),
-            matrix = true
+            tr(td("-y'"), td("x'"), td("0"))
         )}
 
         then ${code("<b>R</b> = uu<sup>T</sup> + cos(angle)(I - uu<sup>T</sup>) + sin(angle)<b>S</b>")}
@@ -2943,8 +2937,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("x"), td("0"), td("0"), td("0")),
             tr(td("0"), td("y"), td("0"), td("0")),
             tr(td("0"), td("0"), td("z"), td("0")),
-            tr(td("0"), td("0"), td("0"), td("1")),
-            matrix = true
+            tr(td("0"), td("0"), td("0"), td("1"))
         )}
         """,
 
@@ -3461,8 +3454,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             tr(td("1"), td("0"), td("0"), td("x")),
             tr(td("0"), td("1"), td("0"), td("y")),
             tr(td("0"), td("0"), td("1"), td("z")),
-            tr(td("0"), td("0"), td("0"), td("1")),
-            matrix = true
+            tr(td("0"), td("0"), td("0"), td("1"))
         )}
         """,
 

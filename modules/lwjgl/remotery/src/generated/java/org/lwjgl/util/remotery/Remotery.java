@@ -253,11 +253,7 @@ public class Remotery {
     /** Unsafe version of: {@link #rmt_BeginCPUSample BeginCPUSample} */
     public static native void nrmt_BeginCPUSample(long name, int flags, long hash_cache);
 
-    /**
-     * @param name       
-     * @param flags      one of:<br><table><tr><td>{@link #RMTSF_None}</td><td>{@link #RMTSF_Aggregate}</td><td>{@link #RMTSF_Recursive}</td></tr></table>
-     * @param hash_cache 
-     */
+    /** @param flags one of:<br><table><tr><td>{@link #RMTSF_None}</td><td>{@link #RMTSF_Aggregate}</td><td>{@link #RMTSF_Recursive}</td></tr></table> */
     public static void rmt_BeginCPUSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32") int flags, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
         if (CHECKS) {
             checkNT1(name);
@@ -266,11 +262,7 @@ public class Remotery {
         nrmt_BeginCPUSample(memAddress(name), flags, memAddressSafe(hash_cache));
     }
 
-    /**
-     * @param name       
-     * @param flags      one of:<br><table><tr><td>{@link #RMTSF_None}</td><td>{@link #RMTSF_Aggregate}</td><td>{@link #RMTSF_Recursive}</td></tr></table>
-     * @param hash_cache 
-     */
+    /** @param flags one of:<br><table><tr><td>{@link #RMTSF_None}</td><td>{@link #RMTSF_Aggregate}</td><td>{@link #RMTSF_Recursive}</td></tr></table> */
     public static void rmt_BeginCPUSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32") int flags, @Nullable @NativeType("rmtU32 *") IntBuffer hash_cache) {
         if (CHECKS) {
             checkSafe(hash_cache, 1);

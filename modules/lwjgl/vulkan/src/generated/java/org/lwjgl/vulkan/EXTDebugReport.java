@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     VkResult res;
  *     VkDebugReportCallbackEXT cb1, cb2, cb3;
  * 
@@ -39,14 +39,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *             myOutputDebugString,                                        // pfnCallback
  *             NULL                                                        // pUserData
  *     };
- *     res = vkCreateDebugReportCallbackEXT(instance, &callback1, &cb1);
+ *     res = vkCreateDebugReportCallbackEXT(instance, &amp;callback1, &amp;cb1);
  *     if (res != VK_SUCCESS)
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY 
  * 
  *     callback.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT;
  *     callback.pfnCallback = myDebugBreak;
  *     callback.pUserData = NULL;
- *     res = vkCreateDebugReportCallbackEXT(instance, &callback, &cb2);
+ *     res = vkCreateDebugReportCallbackEXT(instance, &amp;callback, &amp;cb2);
  *     if (res != VK_SUCCESS)
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY 
  * 
@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *             mystdOutLogger,                                             // pfnCallback
  *             NULL                                                        // pUserData
  *     };
- *     res = vkCreateDebugReportCallbackEXT(instance, &callback3, &cb3);
+ *     res = vkCreateDebugReportCallbackEXT(instance, &amp;callback3, &amp;cb3);
  *     if (res != VK_SUCCESS)
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY 
  * 
@@ -66,17 +66,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // remove callbacks when cleaning up 
  *     vkDestroyDebugReportCallbackEXT(instance, cb1);
  *     vkDestroyDebugReportCallbackEXT(instance, cb2);
- *     vkDestroyDebugReportCallbackEXT(instance, cb3);</pre></code>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>In the initial release of the {@code VK_EXT_debug_report} extension, the token {@link #VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT} was used. Starting in version 2 of the extension branch, {@link #VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT} is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.</p>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>In the initial release of the {@code VK_EXT_debug_report} extension, the token {@link #VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT} was used. Starting in version 8 of the extension branch, {@link #VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT} is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.</p>
- * </div>
+ *     vkDestroyDebugReportCallbackEXT(instance, cb3);</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -295,12 +285,12 @@ public class EXTDebugReport {
      * 
      * <p>To register a debug report callback, an application uses {@link #vkCreateDebugReportCallbackEXT CreateDebugReportCallbackEXT}.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDebugReportCallbackEXT(
      *     VkInstance                                  instance,
      *     const VkDebugReportCallbackCreateInfoEXT*   pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDebugReportCallbackEXT*                   pCallback);</pre></code>
+     *     VkDebugReportCallbackEXT*                   pCallback);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -360,11 +350,11 @@ public class EXTDebugReport {
      * 
      * <p>To destroy a {@code VkDebugReportCallbackEXT} object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDebugReportCallbackEXT(
      *     VkInstance                                  instance,
      *     VkDebugReportCallbackEXT                    callback,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -418,7 +408,7 @@ public class EXTDebugReport {
      * 
      * <p>To inject its own messages into the debug stream, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDebugReportMessageEXT(
      *     VkInstance                                  instance,
      *     VkDebugReportFlagsEXT                       flags,
@@ -427,7 +417,7 @@ public class EXTDebugReport {
      *     size_t                                      location,
      *     int32_t                                     messageCode,
      *     const char*                                 pLayerPrefix,
-     *     const char*                                 pMessage);</pre></code>
+     *     const char*                                 pMessage);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -475,7 +465,7 @@ public class EXTDebugReport {
      * 
      * <p>To inject its own messages into the debug stream, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDebugReportMessageEXT(
      *     VkInstance                                  instance,
      *     VkDebugReportFlagsEXT                       flags,
@@ -484,7 +474,7 @@ public class EXTDebugReport {
      *     size_t                                      location,
      *     int32_t                                     messageCode,
      *     const char*                                 pLayerPrefix,
-     *     const char*                                 pMessage);</pre></code>
+     *     const char*                                 pMessage);</code></pre>
      * 
      * <h5>Description</h5>
      * 

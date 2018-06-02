@@ -1183,8 +1183,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             """
             #MEM_COPY_OVERLAP if {@code src_buffer} and {@code dst_buffer} are the same buffer or sub-buffer object and the source and destination
             regions overlap or if {@code src_buffer} and {@code dst_buffer} are different sub-buffers of the same associated buffer object and they overlap. The
-            regions overlap if ${code("src_offset &#x2264 dst_offset &#x2264 src_offset + size – 1")} or if
-            ${code("dst_offset &#x2264 src_offset &#x2264 dst_offset + size – 1")}.
+            regions overlap if ${code("src_offset &#x2264; dst_offset &#x2264; src_offset + size – 1")} or if
+            ${code("dst_offset &#x2264; src_offset &#x2264; dst_offset + size – 1")}.
             """,
             "#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
             OORE,
@@ -2487,7 +2487,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
     cl_int(
         "BuildProgram",
         """
-        Builds (compiles & links) a program executable from the program source or binary for all the devices or a specific device(s) in the OpenCL context
+        Builds (compiles &amp; links) a program executable from the program source or binary for all the devices or a specific device(s) in the OpenCL context
         associated with {@code program}. OpenCL allows program executables to be built using the source or the binary. {@code clBuildProgram} must be called for
         {@code program} created using either #CreateProgramWithSource() or #CreateProgramWithBinary() to build the program executable for one or more devices
         associated with {@code program}. If {@code program} is created with #CreateProgramWithBinary(), then the program binary must be an executable binary (not

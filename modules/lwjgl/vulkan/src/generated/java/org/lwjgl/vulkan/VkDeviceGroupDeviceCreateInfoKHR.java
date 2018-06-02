@@ -21,13 +21,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDeviceGroupDeviceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t physicalDeviceCount;
  *     VkPhysicalDevice const * pPhysicalDevices;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateInfo {
 

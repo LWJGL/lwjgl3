@@ -62,7 +62,6 @@ public class KHREGLImage {
     /**
      * Creates an {@code EGLImage} target of type {@code cl_mem} from the {@code EGLImage} source provided as {@code image}.
      *
-     * @param context     
      * @param display     an {@code EGLDisplay}
      * @param image       an {@code EGLImageKHR}
      * @param flags       a bit-field that is used to specify usage information about the memory object being created

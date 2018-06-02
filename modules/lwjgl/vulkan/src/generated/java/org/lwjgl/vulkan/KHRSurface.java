@@ -190,7 +190,7 @@ public class KHRSurface {
      * 
      * <p>For Opto-Electrical Transfer Function (OETF), unless otherwise specified, the values of <code>L</code> and <code>E</code> are defined as:</p>
      * 
-     * <p><code>L</code> - linear luminance of image 0 &le L &le; 1 for conventional colorimetry</p>
+     * <p><code>L</code> - linear luminance of image 0 &le; L &le; 1 for conventional colorimetry</p>
      * 
      * <p><code>E</code> - corresponding electrical signal (value stored in memory)</p>
      * 
@@ -278,11 +278,11 @@ public class KHRSurface {
      * 
      * <p>To destroy a {@code VkSurfaceKHR} object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroySurfaceKHR(
      *     VkInstance                                  instance,
      *     VkSurfaceKHR                                surface,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -341,12 +341,12 @@ public class KHRSurface {
      * 
      * <p>To determine whether a queue family of a physical device supports presentation to a given surface, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfaceSupportKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t                                    queueFamilyIndex,
      *     VkSurfaceKHR                                surface,
-     *     VkBool32*                                   pSupported);</pre></code>
+     *     VkBool32*                                   pSupported);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -409,11 +409,11 @@ public class KHRSurface {
      * 
      * <p>To query the basic capabilities of a surface, needed in order to create a swapchain, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkSurfaceKHR                                surface,
-     *     VkSurfaceCapabilitiesKHR*                   pSurfaceCapabilities);</pre></code>
+     *     VkSurfaceCapabilitiesKHR*                   pSurfaceCapabilities);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -474,12 +474,12 @@ public class KHRSurface {
      * 
      * <p>To query the supported swapchain format-color space pairs for a surface, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfaceFormatsKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkSurfaceKHR                                surface,
      *     uint32_t*                                   pSurfaceFormatCount,
-     *     VkSurfaceFormatKHR*                         pSurfaceFormats);</pre></code>
+     *     VkSurfaceFormatKHR*                         pSurfaceFormats);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -551,12 +551,12 @@ public class KHRSurface {
      * 
      * <p>To query the supported presentation modes for a surface, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceSurfacePresentModesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkSurfaceKHR                                surface,
      *     uint32_t*                                   pPresentModeCount,
-     *     VkPresentModeKHR*                           pPresentModes);</pre></code>
+     *     VkPresentModeKHR*                           pPresentModes);</code></pre>
      * 
      * <h5>Description</h5>
      * 

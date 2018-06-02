@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     struct nk_command_buffer *buffer,
  *     nk_handle userdata
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class NkDrawBeginCallback extends Callback implements NkDrawBeginCallbackI {
 

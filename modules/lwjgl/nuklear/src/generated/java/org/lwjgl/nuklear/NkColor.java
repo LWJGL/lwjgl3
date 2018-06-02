@@ -18,13 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_color {
  *     nk_byte r;
  *     nk_byte g;
  *     nk_byte b;
  *     nk_byte a;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_color")
 public class NkColor extends Struct implements NativeResource {
@@ -32,6 +32,7 @@ public class NkColor extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

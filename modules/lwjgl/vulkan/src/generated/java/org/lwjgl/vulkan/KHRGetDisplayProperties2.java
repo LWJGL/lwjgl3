@@ -110,11 +110,11 @@ public class KHRGetDisplayProperties2 {
      * 
      * <p>To query information about the available displays, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceDisplayProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pPropertyCount,
-     *     VkDisplayProperties2KHR*                    pProperties);</pre></code>
+     *     VkDisplayProperties2KHR*                    pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -182,11 +182,11 @@ public class KHRGetDisplayProperties2 {
      * 
      * <p>To query the properties of a device's display planes, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceDisplayPlaneProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pPropertyCount,
-     *     VkDisplayPlaneProperties2KHR*               pProperties);</pre></code>
+     *     VkDisplayPlaneProperties2KHR*               pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -254,12 +254,12 @@ public class KHRGetDisplayProperties2 {
      * 
      * <p>To query the properties of a device's built-in display modes, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetDisplayModeProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkDisplayKHR                                display,
      *     uint32_t*                                   pPropertyCount,
-     *     VkDisplayModeProperties2KHR*                pProperties);</pre></code>
+     *     VkDisplayModeProperties2KHR*                pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -325,11 +325,11 @@ public class KHRGetDisplayProperties2 {
      * 
      * <p>To query the capabilities of a given mode and plane combination, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetDisplayPlaneCapabilities2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkDisplayPlaneInfo2KHR*               pDisplayPlaneInfo,
-     *     VkDisplayPlaneCapabilities2KHR*             pCapabilities);</pre></code>
+     *     VkDisplayPlaneCapabilities2KHR*             pCapabilities);</code></pre>
      * 
      * <h5>Description</h5>
      * 

@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ZSTD_frameHeader {
  *     unsigned long long frameContentSize;
  *     unsigned long long windowSize;
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned headerSize;
  *     unsigned dictID;
  *     unsigned checksumFlag;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ZSTD_frameHeader")
 public class ZSTDFrameHeader extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class ZSTDFrameHeader extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

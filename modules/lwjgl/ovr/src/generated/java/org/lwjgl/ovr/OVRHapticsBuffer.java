@@ -29,12 +29,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrHapticsBuffer {
  *     void * Samples;
  *     int SamplesCount;
  *     ovrHapticsBufferSubmitMode SubmitMode;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrHapticsBuffer")
 public class OVRHapticsBuffer extends Struct implements NativeResource {
@@ -42,6 +42,7 @@ public class OVRHapticsBuffer extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

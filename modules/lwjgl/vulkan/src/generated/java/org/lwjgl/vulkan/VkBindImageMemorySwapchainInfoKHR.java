@@ -54,19 +54,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkBindImageMemorySwapchainInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkSwapchainKHR swapchain;
  *     uint32_t imageIndex;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

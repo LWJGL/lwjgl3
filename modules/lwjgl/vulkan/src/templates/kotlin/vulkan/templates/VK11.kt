@@ -669,7 +669,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <ul>
             <li>#EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined in the {@link NVDedicatedAllocation VK_NV_dedicated_allocation} extension to create (or import) a dedicated allocation for the image or buffer.</li>
             <li>#EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT specifies that handles of this type <b>can</b> be exported from Vulkan memory objects.</li>
-            <li>#INTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
+            <li>#EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
         </ul>
 
         Because their semantics in external APIs roughly align with that of an image or buffer with a dedicated allocation in Vulkan, implementations are required: to report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT for the following external handle types:
@@ -850,9 +850,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         The version of Vulkan that is supported by an instance <b>may</b> be different than the version of Vulkan supported by a device or physical device. To query properties that <b>can</b> be used in creating an instance, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkEnumerateInstanceVersion(
-￿    uint32_t*                                   pApiVersion);</pre></code>
+￿    uint32_t*                                   pApiVersion);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -881,19 +881,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To attach memory to buffer objects for one or more buffers at a time, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkBindBufferMemory2(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    bindInfoCount,
-￿    const VkBindBufferMemoryInfo*               pBindInfos);</pre></code>
+￿    const VkBindBufferMemoryInfo*               pBindInfos);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkBindBufferMemory2KHR(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    bindInfoCount,
-￿    const VkBindBufferMemoryInfo*               pBindInfos);</pre></code>
+￿    const VkBindBufferMemoryInfo*               pBindInfos);</code></pre>
 
         <h5>Description</h5>
         On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
@@ -936,19 +936,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To attach memory to image objects for one or more images at a time, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkBindImageMemory2(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    bindInfoCount,
-￿    const VkBindImageMemoryInfo*                pBindInfos);</pre></code>
+￿    const VkBindImageMemoryInfo*                pBindInfos);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkBindImageMemory2KHR(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    bindInfoCount,
-￿    const VkBindImageMemoryInfo*                pBindInfos);</pre></code>
+￿    const VkBindImageMemoryInfo*                pBindInfos);</code></pre>
 
         <h5>Description</h5>
         On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.
@@ -995,23 +995,23 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         To determine how peer memory <b>can</b> be accessed, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetDeviceGroupPeerMemoryFeatures(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    heapIndex,
 ￿    uint32_t                                    localDeviceIndex,
 ￿    uint32_t                                    remoteDeviceIndex,
-￿    VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</pre></code>
+￿    VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetDeviceGroupPeerMemoryFeaturesKHR(
 ￿    VkDevice                                    device,
 ￿    uint32_t                                    heapIndex,
 ￿    uint32_t                                    localDeviceIndex,
 ￿    uint32_t                                    remoteDeviceIndex,
-￿    VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</pre></code>
+￿    VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1044,17 +1044,17 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To update the current device mask of a command buffer, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdSetDeviceMask(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    deviceMask);</pre></code>
+￿    uint32_t                                    deviceMask);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdSetDeviceMaskKHR(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    deviceMask);</pre></code>
+￿    uint32_t                                    deviceMask);</code></pre>
 
         <h5>Description</h5>
         {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask.
@@ -1099,7 +1099,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To record a dispatch using non-zero base values for the components of {@code WorkgroupId}, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDispatchBase(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    baseGroupX,
@@ -1107,11 +1107,11 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    baseGroupZ,
 ￿    uint32_t                                    groupCountX,
 ￿    uint32_t                                    groupCountY,
-￿    uint32_t                                    groupCountZ);</pre></code>
+￿    uint32_t                                    groupCountZ);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDispatchBaseKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    baseGroupX,
@@ -1119,7 +1119,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    baseGroupZ,
 ￿    uint32_t                                    groupCountX,
 ￿    uint32_t                                    groupCountY,
-￿    uint32_t                                    groupCountZ);</pre></code>
+￿    uint32_t                                    groupCountZ);</code></pre>
 
         <h5>Description</h5>
         When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. #CmdDispatch() is equivalent to vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ).
@@ -1176,19 +1176,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To retrieve a list of the device groups present in the system, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkEnumeratePhysicalDeviceGroups(
 ￿    VkInstance                                  instance,
 ￿    uint32_t*                                   pPhysicalDeviceGroupCount,
-￿    VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</pre></code>
+￿    VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkEnumeratePhysicalDeviceGroupsKHR(
 ￿    VkInstance                                  instance,
 ￿    uint32_t*                                   pPhysicalDeviceGroupCount,
-￿    VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</pre></code>
+￿    VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</code></pre>
 
         <h5>Description</h5>
         If {@code pPhysicalDeviceGroupProperties} is {@code NULL}, then the number of device groups available is returned in {@code pPhysicalDeviceGroupCount}. Otherwise, {@code pPhysicalDeviceGroupCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPhysicalDeviceGroupProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pPhysicalDeviceGroupProperties}. If {@code pPhysicalDeviceGroupCount} is less than the number of device groups available, at most {@code pPhysicalDeviceGroupCount} structures will be written. If {@code pPhysicalDeviceGroupCount} is smaller than the number of device groups available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available device groups were returned.
@@ -1237,19 +1237,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To determine the memory requirements for an image resource, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetImageMemoryRequirements2(
 ￿    VkDevice                                    device,
 ￿    const VkImageMemoryRequirementsInfo2*       pInfo,
-￿    VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+￿    VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetImageMemoryRequirements2KHR(
 ￿    VkDevice                                    device,
 ￿    const VkImageMemoryRequirementsInfo2*       pInfo,
-￿    VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+￿    VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1275,19 +1275,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To determine the memory requirements for a buffer resource, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetBufferMemoryRequirements2(
 ￿    VkDevice                                    device,
 ￿    const VkBufferMemoryRequirementsInfo2*      pInfo,
-￿    VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+￿    VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetBufferMemoryRequirements2KHR(
 ￿    VkDevice                                    device,
 ￿    const VkBufferMemoryRequirementsInfo2*      pInfo,
-￿    VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+￿    VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1313,21 +1313,21 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query sparse memory requirements for an image, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetImageSparseMemoryRequirements2(
 ￿    VkDevice                                    device,
 ￿    const VkImageSparseMemoryRequirementsInfo2* pInfo,
 ￿    uint32_t*                                   pSparseMemoryRequirementCount,
-￿    VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</pre></code>
+￿    VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetImageSparseMemoryRequirements2KHR(
 ￿    VkDevice                                    device,
 ￿    const VkImageSparseMemoryRequirementsInfo2* pInfo,
 ￿    uint32_t*                                   pSparseMemoryRequirementCount,
-￿    VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</pre></code>
+￿    VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1357,17 +1357,17 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query supported features defined by the core or extensions, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceFeatures2(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceFeatures2*                  pFeatures);</pre></code>
+￿    VkPhysicalDeviceFeatures2*                  pFeatures);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceFeatures2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceFeatures2*                  pFeatures);</pre></code>
+￿    VkPhysicalDeviceFeatures2*                  pFeatures);</code></pre>
 
         <h5>Description</h5>
         Each structure in {@code pFeatures} and its {@code pNext} chain contain members corresponding to fine-grained features. #GetPhysicalDeviceFeatures2() writes each member to a boolean value indicating whether that feature is supported.
@@ -1394,17 +1394,17 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query general properties of physical devices once enumerated, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceProperties2(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceProperties2*                pProperties);</pre></code>
+￿    VkPhysicalDeviceProperties2*                pProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceProperties2*                pProperties);</pre></code>
+￿    VkPhysicalDeviceProperties2*                pProperties);</code></pre>
 
         <h5>Description</h5>
         Each structure in {@code pProperties} and its {@code pNext} chain contain members corresponding to properties or implementation-dependent limits. #GetPhysicalDeviceProperties2() writes each member to a value indicating the value of that property or limit.
@@ -1431,19 +1431,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query supported format features which are properties of the physical device, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceFormatProperties2(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
-￿    VkFormatProperties2*                        pFormatProperties);</pre></code>
+￿    VkFormatProperties2*                        pFormatProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceFormatProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkFormat                                    format,
-￿    VkFormatProperties2*                        pFormatProperties);</pre></code>
+￿    VkFormatProperties2*                        pFormatProperties);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceFormatProperties2() behaves similarly to #GetPhysicalDeviceFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -1472,19 +1472,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query additional capabilities specific to image types, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceImageFormatProperties2(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceImageFormatInfo2*     pImageFormatInfo,
-￿    VkImageFormatProperties2*                   pImageFormatProperties);</pre></code>
+￿    VkImageFormatProperties2*                   pImageFormatProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceImageFormatProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceImageFormatInfo2*     pImageFormatInfo,
-￿    VkImageFormatProperties2*                   pImageFormatProperties);</pre></code>
+￿    VkImageFormatProperties2*                   pImageFormatProperties);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceImageFormatProperties2() behaves similarly to #GetPhysicalDeviceImageFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -1528,19 +1528,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query properties of queues available on a physical device, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceQueueFamilyProperties2(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pQueueFamilyPropertyCount,
-￿    VkQueueFamilyProperties2*                   pQueueFamilyProperties);</pre></code>
+￿    VkQueueFamilyProperties2*                   pQueueFamilyProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceQueueFamilyProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pQueueFamilyPropertyCount,
-￿    VkQueueFamilyProperties2*                   pQueueFamilyProperties);</pre></code>
+￿    VkQueueFamilyProperties2*                   pQueueFamilyProperties);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceQueueFamilyProperties2() behaves similarly to #GetPhysicalDeviceQueueFamilyProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -1569,17 +1569,17 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query memory properties, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceMemoryProperties2(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</pre></code>
+￿    VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceMemoryProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
-￿    VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</pre></code>
+￿    VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceMemoryProperties2() behaves similarly to #GetPhysicalDeviceMemoryProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
@@ -1606,21 +1606,21 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         #GetPhysicalDeviceSparseImageFormatProperties2() returns an array of ##VkSparseImageFormatProperties2. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceSparseImageFormatProperties2(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceSparseImageFormatInfo2* pFormatInfo,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkSparseImageFormatProperties2*             pProperties);</pre></code>
+￿    VkSparseImageFormatProperties2*             pProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceSparseImageFormatProperties2KHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceSparseImageFormatInfo2* pFormatInfo,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkSparseImageFormatProperties2*             pProperties);</pre></code>
+￿    VkSparseImageFormatProperties2*             pProperties);</code></pre>
 
         <h5>Description</h5>
         #GetPhysicalDeviceSparseImageFormatProperties2() behaves identically to #GetPhysicalDeviceSparseImageFormatProperties(), with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pProperties} parameter.
@@ -1653,19 +1653,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To trim a command pool, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkTrimCommandPool(
 ￿    VkDevice                                    device,
 ￿    VkCommandPool                               commandPool,
-￿    VkCommandPoolTrimFlags                      flags);</pre></code>
+￿    VkCommandPoolTrimFlags                      flags);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkTrimCommandPoolKHR(
 ￿    VkDevice                                    device,
 ￿    VkCommandPool                               commandPool,
-￿    VkCommandPoolTrimFlags                      flags);</pre></code>
+￿    VkCommandPoolTrimFlags                      flags);</code></pre>
 
         <h5>Description</h5>
         Trimming a command pool recycles unused memory from the command pool back to the system. Command buffers allocated from the pool are not affected by the command.
@@ -1713,11 +1713,11 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To retrieve a handle to a VkQueue object with specific {@code VkDeviceQueueCreateFlags} creation flags, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetDeviceQueue2(
 ￿    VkDevice                                    device,
 ￿    const VkDeviceQueueInfo2*                   pQueueInfo,
-￿    VkQueue*                                    pQueue);</pre></code>
+￿    VkQueue*                                    pQueue);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1745,21 +1745,21 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To create a {@code VkSamplerYcbcrConversion}, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateSamplerYcbcrConversion(
 ￿    VkDevice                                    device,
 ￿    const VkSamplerYcbcrConversionCreateInfo*   pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSamplerYcbcrConversion*                   pYcbcrConversion);</pre></code>
+￿    VkSamplerYcbcrConversion*                   pYcbcrConversion);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateSamplerYcbcrConversionKHR(
 ￿    VkDevice                                    device,
 ￿    const VkSamplerYcbcrConversionCreateInfo*   pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSamplerYcbcrConversion*                   pYcbcrConversion);</pre></code>
+￿    VkSamplerYcbcrConversion*                   pYcbcrConversion);</code></pre>
 
         <h5>Description</h5>
         The interpretation of the configured sampler Y'C<sub>B</sub>C<sub>R</sub> conversion is described in more detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures-sampler-YCbCr-conversion">the description of sampler Y'C<sub>B</sub>C<sub>R</sub> conversion</a> in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#textures">Image Operations</a> chapter.
@@ -1809,19 +1809,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To destroy a sampler Y'C<sub>B</sub>C<sub>R</sub> conversion, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroySamplerYcbcrConversion(
 ￿    VkDevice                                    device,
 ￿    VkSamplerYcbcrConversion                    ycbcrConversion,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroySamplerYcbcrConversionKHR(
 ￿    VkDevice                                    device,
 ￿    VkSamplerYcbcrConversion                    ycbcrConversion,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1859,21 +1859,21 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         To create a descriptor update template, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateDescriptorUpdateTemplate(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorUpdateTemplateCreateInfo* pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</pre></code>
+￿    VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateDescriptorUpdateTemplateKHR(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorUpdateTemplateCreateInfo* pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</pre></code>
+￿    VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1915,19 +1915,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To destroy a descriptor update template, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroyDescriptorUpdateTemplate(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroyDescriptorUpdateTemplateKHR(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1965,21 +1965,21 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         Once a {@code VkDescriptorUpdateTemplate} has been created, descriptor sets <b>can</b> be updated by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkUpdateDescriptorSetWithTemplate(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorSet                             descriptorSet,
 ￿    VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-￿    const void*                                 pData);</pre></code>
+￿    const void*                                 pData);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkUpdateDescriptorSetWithTemplateKHR(
 ￿    VkDevice                                    device,
 ￿    VkDescriptorSet                             descriptorSet,
 ￿    VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-￿    const void*                                 pData);</pre></code>
+￿    const void*                                 pData);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1999,7 +1999,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>Host access to {@code descriptorSet} <b>must</b> be externally synchronized</li>
         </ul>
 
-        <code><pre>
+        <pre><code>
 ￿struct AppBufferView {
 ￿    VkBufferView bufferView;
 ￿    uint32_t     applicationRelatedInformation;
@@ -2064,16 +2064,16 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;
 ￿myResult = vkCreateDescriptorUpdateTemplate(
 ￿    myDevice,
-￿    &createInfo,
+￿    &amp;createInfo,
 ￿    NULL,
-￿    &myDescriptorUpdateTemplate);
+￿    &amp;myDescriptorUpdateTemplate);
 ￿}
 ￿
 ￿
 ￿AppDataStructure appData;
 ￿
 ￿// fill appData here or cache it in your engine
-￿vkUpdateDescriptorSetWithTemplate(myDevice, myDescriptorSet, myDescriptorUpdateTemplate, &appData);</pre></code>
+￿vkUpdateDescriptorSetWithTemplate(myDevice, myDescriptorSet, myDescriptorUpdateTemplate, &amp;appData);</code></pre>
         """,
 
         VkDevice.IN("device", "the logical device that updates the descriptor sets."),
@@ -2092,19 +2092,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query the external handle types supported by buffers, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceExternalBufferProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
-￿    VkExternalBufferProperties*                 pExternalBufferProperties);</pre></code>
+￿    VkExternalBufferProperties*                 pExternalBufferProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceExternalBufferPropertiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
-￿    VkExternalBufferProperties*                 pExternalBufferProperties);</pre></code>
+￿    VkExternalBufferProperties*                 pExternalBufferProperties);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2132,19 +2132,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         Fences <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-fences-payloads">payload</a> to external handles. To query the external handle types supported by fences, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceExternalFenceProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalFenceInfo*    pExternalFenceInfo,
-￿    VkExternalFenceProperties*                  pExternalFenceProperties);</pre></code>
+￿    VkExternalFenceProperties*                  pExternalFenceProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceExternalFencePropertiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalFenceInfo*    pExternalFenceInfo,
-￿    VkExternalFenceProperties*                  pExternalFenceProperties);</pre></code>
+￿    VkExternalFenceProperties*                  pExternalFenceProperties);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2172,19 +2172,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         Semaphores <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-payloads">payload</a> to external handles. To query the external handle types supported by semaphores, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceExternalSemaphoreProperties(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo,
-￿    VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</pre></code>
+￿    VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo,
-￿    VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</pre></code>
+￿    VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2212,19 +2212,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>C Specification</h5>
         To query information about whether a descriptor set layout <b>can</b> be created, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetDescriptorSetLayoutSupport(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
-￿    VkDescriptorSetLayoutSupport*               pSupport);</pre></code>
+￿    VkDescriptorSetLayoutSupport*               pSupport);</code></pre>
 
         or the equivalent command
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetDescriptorSetLayoutSupportKHR(
 ￿    VkDevice                                    device,
 ￿    const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
-￿    VkDescriptorSetLayoutSupport*               pSupport);</pre></code>
+￿    VkDescriptorSetLayoutSupport*               pSupport);</code></pre>
 
         <h5>Description</h5>
         Some implementations have limitations on what fits in a descriptor set which are not easily expressible in terms of existing limits like {@code maxDescriptorSet}*, for example if all descriptor types share a limited space in memory but each descriptor is a different size or alignment. This command returns information about whether a descriptor set satisfies this limit. If the descriptor set layout satisfies the ##VkPhysicalDeviceMaintenance3Properties{@code ::maxPerSetDescriptors} limit, this command is guaranteed to return #TRUE in ##VkDescriptorSetLayoutSupport{@code ::supported}. If the descriptor set layout exceeds the ##VkPhysicalDeviceMaintenance3Properties{@code ::maxPerSetDescriptors} limit, whether the descriptor set layout is supported is implementation-dependent and <b>may</b> depend on whether the descriptor sizes and alignments cause the layout to exceed an internal limit.

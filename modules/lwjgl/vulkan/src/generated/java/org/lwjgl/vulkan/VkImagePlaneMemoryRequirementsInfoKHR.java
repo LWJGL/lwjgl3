@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkImagePlaneMemoryRequirementsInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImageAspectFlagBits planeAspect;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryRequirementsInfo {
 

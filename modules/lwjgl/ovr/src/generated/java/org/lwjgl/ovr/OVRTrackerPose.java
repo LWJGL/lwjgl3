@@ -30,13 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrTrackerPose {
  *     unsigned int TrackerFlags;
  *     {@link OVRPosef ovrPosef} Pose;
  *     {@link OVRPosef ovrPosef} LeveledPose;
  *     char[4];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrTrackerPose")
 public class OVRTrackerPose extends Struct implements NativeResource {
@@ -44,6 +44,7 @@ public class OVRTrackerPose extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

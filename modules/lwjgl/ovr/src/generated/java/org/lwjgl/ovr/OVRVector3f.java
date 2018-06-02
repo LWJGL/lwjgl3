@@ -28,12 +28,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrVector3f {
  *     float x;
  *     float y;
  *     float z;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrVector3f")
 public class OVRVector3f extends Struct implements NativeResource {
@@ -41,6 +41,7 @@ public class OVRVector3f extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

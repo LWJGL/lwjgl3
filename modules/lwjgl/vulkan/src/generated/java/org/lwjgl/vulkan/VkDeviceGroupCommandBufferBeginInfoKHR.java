@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDeviceGroupCommandBufferBeginInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t deviceMask;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDeviceGroupCommandBufferBeginInfoKHR extends VkDeviceGroupCommandBufferBeginInfo {
 

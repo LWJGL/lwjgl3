@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiNode {
  *     {@link AIString struct aiString} mName;
  *     {@link AIMatrix4x4 struct aiMatrix4x4} mTransformation;
@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mNumMeshes;
  *     unsigned int * mMeshes;
  *     {@link AIMetaData struct aiMetadata} * mMetadata;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiNode")
 public class AINode extends Struct implements NativeResource {
@@ -55,6 +55,7 @@ public class AINode extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

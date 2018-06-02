@@ -130,8 +130,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Incomplete text-in-3d-api example, which draws quads properly aligned to be lossless:</p>
  * 
- * <code><pre>
- * unsigned char ttf_buffer[1<<20];
+ * <pre><code>
+ * unsigned char ttf_buffer[1&lt;&lt;20];
  * unsigned char temp_bitmap[512*512];
  * 
  * stbtt_bakedchar cdata[96]; // ASCII 32..126 is 95 glyphs
@@ -139,10 +139,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * void my_stbtt_initfont(void)
  * {
- *    fread(ttf_buffer, 1, 1<<20, fopen("c:/windows/fonts/times.ttf", "rb"));
+ *    fread(ttf_buffer, 1, 1&lt;&lt;20, fopen("c:/windows/fonts/times.ttf", "rb"));
  *    stbtt_BakeFontBitmap(ttf_buffer,0, 32.0, temp_bitmap,512,512, 32,96, cdata); // no guarantee this fits!
  *    // can free ttf_buffer at this point
- *    glGenTextures(1, &ftex);
+ *    glGenTextures(1, &amp;ftex);
  *    glBindTexture(GL_TEXTURE_2D, ftex);
  *    glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, 512,512, 0, GL_ALPHA, GL_UNSIGNED_BYTE, temp_bitmap);
  *    // can free temp_bitmap at this point
@@ -156,9 +156,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  *    glBindTexture(GL_TEXTURE_2D, ftex);
  *    glBegin(GL_QUADS);
  *    while (*text) {
- *       if (*text >= 32 && *text < 128) {
+ *       if (*text &gt;= 32 &amp;&amp; *text &lt; 128) {
  *          stbtt_aligned_quad q;
- *          stbtt_GetBakedQuad(cdata, 512,512, *text-32, &x,&y,&q,1);//1=opengl & d3d10+,0=d3d9
+ *          stbtt_GetBakedQuad(cdata, 512,512, *text-32, &amp;x,&amp;y,&amp;q,1);//1=opengl &amp; d3d10+,0=d3d9
  *          glTexCoord2f(q.s0,q.t1); glVertex2f(q.x0,q.y0);
  *          glTexCoord2f(q.s1,q.t1); glVertex2f(q.x1,q.y0);
  *          glTexCoord2f(q.s1,q.t0); glVertex2f(q.x1,q.y1);
@@ -167,36 +167,36 @@ import static org.lwjgl.system.MemoryUtil.*;
  *       ++text;
  *    }
  *    glEnd();
- * }</pre></code>
+ * }</code></pre>
  * 
  * <p>Complete program (this compiles): get a single bitmap, print as ASCII art:</p>
  * 
- * <code><pre>
- * char ttf_buffer[1<<25];
+ * <pre><code>
+ * char ttf_buffer[1&lt;&lt;25];
  * 
  * int main(int argc, char **argv)
  * {
  *    stbtt_fontinfo font;
  *    unsigned char *bitmap;
- *    int w,h,i,j,c = (argc > 1 ? atoi(argv[1]) : 'a'), s = (argc > 2 ? atoi(argv[2]) : 20);
+ *    int w,h,i,j,c = (argc &gt; 1 ? atoi(argv[1]) : 'a'), s = (argc &gt; 2 ? atoi(argv[2]) : 20);
  * 
- *    fread(ttf_buffer, 1, 1<<25, fopen(argc > 3 ? argv[3] : "c:/windows/fonts/arialbd.ttf", "rb"));
+ *    fread(ttf_buffer, 1, 1&lt;&lt;25, fopen(argc &gt; 3 ? argv[3] : "c:/windows/fonts/arialbd.ttf", "rb"));
  * 
- *    stbtt_InitFont(&font, ttf_buffer, stbtt_GetFontOffsetForIndex(ttf_buffer,0));
- *    bitmap = stbtt_GetCodepointBitmap(&font, 0,stbtt_ScaleForPixelHeight(&font, s), c, &w, &h, 0,0);
+ *    stbtt_InitFont(&amp;font, ttf_buffer, stbtt_GetFontOffsetForIndex(ttf_buffer,0));
+ *    bitmap = stbtt_GetCodepointBitmap(&amp;font, 0,stbtt_ScaleForPixelHeight(&amp;font, s), c, &amp;w, &amp;h, 0,0);
  * 
- *    for (j=0; j < h; ++j) {
- *       for (i=0; i < w; ++i)
- *          putchar(" .:ioVM@"[bitmap[j*w+i]>>5]);
+ *    for (j=0; j &lt; h; ++j) {
+ *       for (i=0; i &lt; w; ++i)
+ *          putchar(" .:ioVM@"[bitmap[j*w+i]&gt;&gt;5]);
  *       putchar('\n');
  *    }
  *    return 0;
- * }</pre></code>
+ * }</code></pre>
  * 
  * <p>Complete program: print "Hello World!" banner, with bugs:</p>
  * 
- * <code><pre>
- * char buffer[24<<20];
+ * <pre><code>
+ * char buffer[24&lt;&lt;20];
  * unsigned char screen[20][79];
  * 
  * int main(int arg, char **argv)
@@ -207,42 +207,42 @@ import static org.lwjgl.system.MemoryUtil.*;
  *    char *text = "Heljo World!";
  * 
  *    fread(buffer, 1, 1000000, fopen("c:/windows/fonts/arialbd.ttf", "rb"));
- *    stbtt_InitFont(&font, buffer, 0);
+ *    stbtt_InitFont(&amp;font, buffer, 0);
  * 
- *    scale = stbtt_ScaleForPixelHeight(&font, 15);
- *    stbtt_GetFontVMetrics(&font, &ascent,0,0);
+ *    scale = stbtt_ScaleForPixelHeight(&amp;font, 15);
+ *    stbtt_GetFontVMetrics(&amp;font, &amp;ascent,0,0);
  *    baseline = (int) (ascent*scale);
  * 
  *    while (text[ch]) {
  *       int advance,lsb,x0,y0,x1,y1;
  *       float x_shift = xpos - (float) floor(xpos);
- *       stbtt_GetCodepointHMetrics(&font, text[ch], &advance, &lsb);
- *       stbtt_GetCodepointBitmapBoxSubpixel(&font, text[ch], scale,scale,x_shift,0, &x0,&y0,&x1,&y1);
- *       stbtt_MakeCodepointBitmapSubpixel(&font, &screen[baseline + y0][(int) xpos + x0], x1-x0,y1-y0, 79, scale,scale,x_shift,0, text[ch]);
+ *       stbtt_GetCodepointHMetrics(&amp;font, text[ch], &amp;advance, &amp;lsb);
+ *       stbtt_GetCodepointBitmapBoxSubpixel(&amp;font, text[ch], scale,scale,x_shift,0, &amp;x0,&amp;y0,&amp;x1,&amp;y1);
+ *       stbtt_MakeCodepointBitmapSubpixel(&amp;font, &amp;screen[baseline + y0][(int) xpos + x0], x1-x0,y1-y0, 79, scale,scale,x_shift,0, text[ch]);
  *       // note that this stomps the old data, so where character boxes overlap (e.g. 'lj') it's wrong
  *       // because this API is really for baking character bitmaps into textures. if you want to render
  *       // a sequence of characters, you really need to render each bitmap to a temp buffer, then
  *       // "alpha blend" that into the working buffer
  *       xpos += (advance * scale);
  *       if (text[ch+1])
- *          xpos += scale*stbtt_GetCodepointKernAdvance(&font, text[ch],text[ch+1]);
+ *          xpos += scale*stbtt_GetCodepointKernAdvance(&amp;font, text[ch],text[ch+1]);
  *       ++ch;
  *    }
  * 
- *    for (j=0; j < 20; ++j) {
- *       for (i=0; i < 78; ++i)
- *          putchar(" .:ioVM@"[screen[j][i]>>5]);
+ *    for (j=0; j &lt; 20; ++j) {
+ *       for (i=0; i &lt; 78; ++i)
+ *          putchar(" .:ioVM@"[screen[j][i]&gt;&gt;5]);
  *       putchar('\n');
  *    }
  * 
  *    return 0;
- * }</pre></code>
+ * }</code></pre>
  * 
  * <h3>Finding the right font...</h3>
  * 
  * <p>You should really just solve this offline, keep your own tables of what font is what, and don't try to get it out of the .ttf file. That's because
  * getting it out of the .ttf file is really hard, because the names in the file can appear in many possible encodings, in many possible languages, and
- * e.g. if you need a case-insensitive comparison, the details of that depend on the encoding & language in a complex way (actually underspecified in
+ * e.g. if you need a case-insensitive comparison, the details of that depend on the encoding &amp; language in a complex way (actually underspecified in
  * truetype, but also gigantic).</p>
  * 
  * <p>But you can use the provided functions in two possible ways:</p>
@@ -499,9 +499,9 @@ public class STBTruetype {
      * @param font_size                   the full height of the character from ascender to descender, as computed by {@link #stbtt_ScaleForPixelHeight ScaleForPixelHeight}. To use a point size as computed by
      *                                    {@link #stbtt_ScaleForMappingEmToPixels ScaleForMappingEmToPixels}, wrap the font size in {@link #STBTT_POINT_SIZE} and pass the result, i.e.:
      *                                    
-     *                                    <code><pre>
+     *                                    <pre><code>
      *                                    ...,                  20 , ... // font max minus min y is 20 pixels tall
-     *                                    ..., STBTT_POINT_SIZE(20), ... // 'M' is 20 pixels tall</pre></code>
+     *                                    ..., STBTT_POINT_SIZE(20), ... // 'M' is 20 pixels tall</code></pre>
      * @param first_unicode_char_in_range the first unicode code point in the range
      * @param chardata_for_range          an array of {@link STBTTPackedchar} structs
      *
@@ -765,8 +765,8 @@ public class STBTruetype {
      * Computes a scale factor to produce a font whose "height" is {@code pixels} tall. Height is measured as the distance from the highest ascender to the
      * lowest descender; in other words, it's equivalent to calling {@link #stbtt_GetFontVMetrics GetFontVMetrics} and computing:
      * 
-     * <code><pre>
-     * scale = pixels / (ascent - descent)</pre></code>
+     * <pre><code>
+     * scale = pixels / (ascent - descent)</code></pre>
      * 
      * <p>so if you prefer to measure height by the ascent only, use a similar calculation.</p>
      *
@@ -1610,27 +1610,27 @@ public class STBTruetype {
      * Computes a discretized SDF field for a single character, suitable for storing in a single-channel texture, sampling with bilinear filtering, and
      * testing against larger than some threshhold to produce scalable fonts.
      * 
-     * <p>{@code pixel_dist_scale} & {@code onedge_value} are a scale & bias that allows you to make optimal use of the limited {@code 0..255} for your
+     * <p>{@code pixel_dist_scale} &amp; {@code onedge_value} are a scale &amp; bias that allows you to make optimal use of the limited {@code 0..255} for your
      * application, trading off precision and special effects. SDF values outside the range {@code 0..255} are clamped to {@code 0..255}.</p>
      * 
      * <p>Example:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * scale = stbtt_ScaleForPixelHeight(22)
      * padding = 5
      * onedge_value = 180
-     * pixel_dist_scale = 180/5.0 = 36.0</pre></code>
+     * pixel_dist_scale = 180/5.0 = 36.0</code></pre>
      * 
      * <p>This will create an SDF bitmap in which the character is about 22 pixels high but the whole bitmap is about {@code 22+5+5=32} pixels high. To produce a
      * filled shape, sample the SDF at each pixel and fill the pixel if the SDF value is greater than or equal to {@code 180/255}. (You'll actually want to
-     * antialias, which is beyond the scope of this example.) Additionally, you can compute offset outlines (e.g. to stroke the character border inside &
+     * antialias, which is beyond the scope of this example.) Additionally, you can compute offset outlines (e.g. to stroke the character border inside &amp;
      * outside, or only outside). For example, to fill outside the character up to 3 SDF pixels, you would compare against {@code (180-36.0*3)/255 = 72/255}.
      * The above choice of variables maps a range from 5 pixels outside the shape to 2 pixels inside the shape to {@code 0..255}; this is intended primarily
      * for apply outside effects only (the interior range is needed to allow proper antialiasing of the font at <i>smaller</i> sizes).</p>
      * 
      * <p>The function computes the SDF analytically at each SDF pixel, not by e.g. building a higher-res bitmap and approximating it. In theory the quality
-     * should be as high as possible for an SDF of this size & representation, but unclear if this is true in practice (perhaps building a higher-res bitmap
-     * and computing from that can allow drop-out prevention).</p>
+     * should be as high as possible for an SDF of this size &amp; representation, but unclear if this is true in practice (perhaps building a higher-res
+     * bitmap and computing from that can allow drop-out prevention).</p>
      * 
      * <p>The algorithm has not been optimized at all, so expect it to be slow if computing lots of characters or very large sizes.</p>
      *

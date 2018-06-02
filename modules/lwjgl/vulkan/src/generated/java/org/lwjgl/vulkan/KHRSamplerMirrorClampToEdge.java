@@ -14,7 +14,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>Creating a sampler with the new address mode in each dimension</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     VkSamplerCreateInfo createInfo =
  *     {
  *         VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO // sType
@@ -28,8 +28,8 @@ package org.lwjgl.vulkan;
  *     VkSampler sampler;
  *     VkResult result = vkCreateSampler(
  *         device,
- *         &createInfo,
- *         &sampler);</pre></code>
+ *         &amp;createInfo,
+ *         &amp;sampler);</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

@@ -12,10 +12,10 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     struct aiFile *pFile
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("aiFileFlushProc")

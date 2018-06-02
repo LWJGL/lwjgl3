@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_hmd_t {
  *     {@link BGFXHmdEye bgfx_hmd_eye_t} eye[2];
  *     uint16_t width;
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t deviceWidth;
  *     uint32_t deviceHeight;
  *     uint8_t flags;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_hmd_t")
 public class BGFXHmd extends Struct {
@@ -45,6 +45,7 @@ public class BGFXHmd extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

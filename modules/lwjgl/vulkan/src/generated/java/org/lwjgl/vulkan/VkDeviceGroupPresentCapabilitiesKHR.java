@@ -52,19 +52,20 @@ import static org.lwjgl.vulkan.VK11.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDeviceGroupPresentCapabilitiesKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
  *     VkDeviceGroupPresentModeFlagsKHR modes;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

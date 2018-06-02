@@ -995,9 +995,9 @@ public class GLES31 {
     public static native void glVertexBindingDivisor(@NativeType("GLuint") int bindingindex, @NativeType("GLuint") int divisor);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glDrawArraysIndirect">Reference Page</a></p>
-     * 
      * Array version of: {@link #glDrawArraysIndirect DrawArraysIndirect}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glDrawArraysIndirect">Reference Page</a>
      */
     public static void glDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect) {
         long __functionAddress = GLES.getICD().glDrawArraysIndirect;
@@ -1009,9 +1009,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glDrawElementsIndirect">Reference Page</a></p>
-     * 
      * Array version of: {@link #glDrawElementsIndirect DrawElementsIndirect}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glDrawElementsIndirect">Reference Page</a>
      */
     public static void glDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect) {
         long __functionAddress = GLES.getICD().glDrawElementsIndirect;
@@ -1023,9 +1023,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetFramebufferParameter">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetFramebufferParameter">Reference Page</a>
      */
     public static void glGetFramebufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GLES.getICD().glGetFramebufferParameteriv;
@@ -1037,9 +1037,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetProgramInterface">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetProgramInterface">Reference Page</a>
      */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GLES.getICD().glGetProgramInterfaceiv;
@@ -1051,9 +1051,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetProgramResourceName">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramResourceName GetProgramResourceName}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetProgramResourceName">Reference Page</a>
      */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GLES.getICD().glGetProgramResourceName;
@@ -1065,9 +1065,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetProgramResource">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetProgramResource">Reference Page</a>
      */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] params) {
         long __functionAddress = GLES.getICD().glGetProgramResourceiv;
@@ -1079,9 +1079,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glDeleteProgramPipelines">Reference Page</a></p>
-     * 
      * Array version of: {@link #glDeleteProgramPipelines DeleteProgramPipelines}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glDeleteProgramPipelines">Reference Page</a>
      */
     public static void glDeleteProgramPipelines(@NativeType("GLuint const *") int[] pipelines) {
         long __functionAddress = GLES.getICD().glDeleteProgramPipelines;
@@ -1092,9 +1092,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGenProgramPipelines">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGenProgramPipelines GenProgramPipelines}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGenProgramPipelines">Reference Page</a>
      */
     public static void glGenProgramPipelines(@NativeType("GLuint *") int[] pipelines) {
         long __functionAddress = GLES.getICD().glGenProgramPipelines;
@@ -1105,9 +1105,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetProgramPipeline">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetProgramPipeline">Reference Page</a>
      */
     public static void glGetProgramPipelineiv(@NativeType("GLuint") int pipeline, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GLES.getICD().glGetProgramPipelineiv;
@@ -1119,9 +1119,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform1iv ProgramUniform1iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform1iv;
@@ -1132,9 +1132,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform2iv ProgramUniform2iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform2iv;
@@ -1145,9 +1145,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform3iv ProgramUniform3iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform3iv;
@@ -1158,9 +1158,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform4iv ProgramUniform4iv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform4iv;
@@ -1171,9 +1171,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform1uiv ProgramUniform1uiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform1uiv;
@@ -1184,9 +1184,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform2uiv ProgramUniform2uiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform2uiv;
@@ -1197,9 +1197,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform3uiv ProgramUniform3uiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform3uiv;
@@ -1210,9 +1210,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform4uiv ProgramUniform4uiv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform4uiv;
@@ -1223,9 +1223,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform1fv ProgramUniform1fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform1fv;
@@ -1236,9 +1236,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform2fv ProgramUniform2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform2fv;
@@ -1249,9 +1249,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform3fv ProgramUniform3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform3fv;
@@ -1262,9 +1262,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniform4fv ProgramUniform4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniform4fv;
@@ -1275,9 +1275,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix2fv ProgramUniformMatrix2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix2fv;
@@ -1288,9 +1288,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix3fv ProgramUniformMatrix3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix3fv;
@@ -1301,9 +1301,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix4fv ProgramUniformMatrix4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix4fv;
@@ -1314,9 +1314,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix2x3fv ProgramUniformMatrix2x3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2x3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix2x3fv;
@@ -1327,9 +1327,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix3x2fv ProgramUniformMatrix3x2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3x2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix3x2fv;
@@ -1340,9 +1340,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix2x4fv ProgramUniformMatrix2x4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2x4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix2x4fv;
@@ -1353,9 +1353,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix4x2fv ProgramUniformMatrix4x2fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4x2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix4x2fv;
@@ -1366,9 +1366,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix3x4fv ProgramUniformMatrix3x4fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3x4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix3x4fv;
@@ -1379,9 +1379,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a></p>
-     * 
      * Array version of: {@link #glProgramUniformMatrix4x3fv ProgramUniformMatrix4x3fv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4x3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glProgramUniformMatrix4x3fv;
@@ -1392,9 +1392,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetProgramPipelineInfoLog">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetProgramPipelineInfoLog GetProgramPipelineInfoLog}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetProgramPipelineInfoLog">Reference Page</a>
      */
     public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer infoLog) {
         long __functionAddress = GLES.getICD().glGetProgramPipelineInfoLog;
@@ -1406,9 +1406,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetMultisample">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetMultisamplefv GetMultisamplefv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetMultisample">Reference Page</a>
      */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] val) {
         long __functionAddress = GLES.getICD().glGetMultisamplefv;
@@ -1420,9 +1420,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetTexLevelParameter">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetTexLevelParameteriv GetTexLevelParameteriv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetTexLevelParameter">Reference Page</a>
      */
     public static void glGetTexLevelParameteriv(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GLES.getICD().glGetTexLevelParameteriv;
@@ -1434,9 +1434,9 @@ public class GLES31 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/es3/glGetTexLevelParameter">Reference Page</a></p>
-     * 
      * Array version of: {@link #glGetTexLevelParameterfv GetTexLevelParameterfv}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/es3/glGetTexLevelParameter">Reference Page</a>
      */
     public static void glGetTexLevelParameterfv(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GLES.getICD().glGetTexLevelParameterfv;

@@ -27,11 +27,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct cl_mem_ext_host_ptr {
  *     cl_uint allocation_type;
  *     cl_uint host_cache_policy;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct cl_mem_ext_host_ptr")
 public class CLMemEXTHostPtr extends Struct implements NativeResource {
@@ -39,6 +39,7 @@ public class CLMemEXTHostPtr extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

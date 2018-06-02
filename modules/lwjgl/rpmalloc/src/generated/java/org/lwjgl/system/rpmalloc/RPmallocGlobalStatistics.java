@@ -20,20 +20,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code mapped} &ndash; Current amount of virtual memory mapped (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code cached} &ndash; Current amount of memory in global caches for small and medium sizes (<64KiB)</li>
+ * <li>{@code cached} &ndash; Current amount of memory in global caches for small and medium sizes (&lt;64KiB)</li>
  * <li>{@code mapped_total} &ndash; Total amount of memory mapped (only if {@code ENABLE_STATISTICS=1})</li>
  * <li>{@code unmapped_total} &ndash; Total amount of memory unmapped (only if {@code ENABLE_STATISTICS=1})</li>
  * </ul>
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct rpmalloc_global_statistics_t {
  *     size_t mapped;
  *     size_t cached;
  *     size_t mapped_total;
  *     size_t unmapped_total;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct rpmalloc_global_statistics_t")
 public class RPmallocGlobalStatistics extends Struct implements NativeResource {
@@ -41,6 +41,7 @@ public class RPmallocGlobalStatistics extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -91,7 +91,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkWriteDescriptorSet {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -103,13 +103,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDescriptorImageInfo VkDescriptorImageInfo const} * pImageInfo;
  *     {@link VkDescriptorBufferInfo VkDescriptorBufferInfo const} * pBufferInfo;
  *     VkBufferView const * pTexelBufferView;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkWriteDescriptorSet extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

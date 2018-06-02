@@ -10,7 +10,7 @@ package org.lwjgl.opengles;
  * 
  * <p>This extension provides an additional format and type combination for use when specifying texture data.  The current allowed combinations are:</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     Internal Format     External Format Type                    Bytes per Pixel
  *     ---------------     --------------- ----                    ---------------
  *     RGBA                RGBA             UNSIGNED_BYTE          4
@@ -20,11 +20,11 @@ package org.lwjgl.opengles;
  *     RGB                 RGB              UNSIGNED_SHORT_5_6_5   2
  *     LUMINANCE_ALPHA     LUMINANCE_ALPHA  UNSIGNED_BYTE          2
  *     LUMINANCE           LUMINANCE        UNSIGNED_BYTE          1
- *     ALPHA               ALPHA            UNSIGNED_BYTE          1</pre></code>
+ *     ALPHA               ALPHA            UNSIGNED_BYTE          1</code></pre>
  * 
  * <p>This table is extended to include format BGRA_EXT and type UNSIGNED_BYTE:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * Internal Format     External Format Type                    Bytes per Pixel
  * ---------------     --------------- ----                    ---------------
  * BGRA_EXT            BGRA_EXT        UNSIGNED_BYTE           4
@@ -35,7 +35,7 @@ package org.lwjgl.opengles;
  * RGB                 RGB             UNSIGNED_SHORT_5_6_5    2
  * LUMINANCE_ALPHA     LUMINANCE_ALPHA UNSIGNED_BYTE           2
  * LUMINANCE           LUMINANCE       UNSIGNED_BYTE           1
- * ALPHA               ALPHA           UNSIGNED_BYTE           1</pre></code>
+ * ALPHA               ALPHA           UNSIGNED_BYTE           1</code></pre>
  */
 public final class EXTTextureFormatBGRA8888 {
 

@@ -29,13 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrBoundaryTestResult {
  *     ovrBool IsTriggering;
  *     float ClosestDistance;
  *     {@link OVRVector3f ovrVector3f} ClosestPoint;
  *     {@link OVRVector3f ovrVector3f} ClosestPointNormal;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrBoundaryTestResult")
 public class OVRBoundaryTestResult extends Struct implements NativeResource {
@@ -43,6 +43,7 @@ public class OVRBoundaryTestResult extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

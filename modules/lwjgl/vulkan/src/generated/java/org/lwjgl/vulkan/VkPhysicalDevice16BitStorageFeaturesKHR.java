@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDevice16BitStorageFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 uniformAndStorageBuffer16BitAccess;
  *     VkBool32 storagePushConstant16;
  *     VkBool32 storageInputOutput16;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDevice16BitStorageFeaturesKHR extends VkPhysicalDevice16BitStorageFeatures {
 

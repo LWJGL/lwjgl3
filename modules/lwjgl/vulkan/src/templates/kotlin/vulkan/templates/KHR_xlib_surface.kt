@@ -92,12 +92,12 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type =
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for an X11 window, using the Xlib client-side library, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateXlibSurfaceKHR(
 ￿    VkInstance                                  instance,
 ￿    const VkXlibSurfaceCreateInfoKHR*           pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSurfaceKHR*                               pSurface);</pre></code>
+￿    VkSurfaceKHR*                               pSurface);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -139,12 +139,12 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type =
         <h5>C Specification</h5>
         To determine whether a queue family of a physical device supports presentation to an X11 server, using the Xlib client-side library, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkBool32 vkGetPhysicalDeviceXlibPresentationSupportKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t                                    queueFamilyIndex,
 ￿    Display*                                    dpy,
-￿    VisualID                                    visualID);</pre></code>
+￿    VisualID                                    visualID);</code></pre>
 
         <h5>Description</h5>
         This platform-specific function <b>can</b> be called prior to creating a surface.

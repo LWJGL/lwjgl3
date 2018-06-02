@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiAnimation {
  *     {@link AIString struct aiString} mName;
  *     double mDuration;
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AINodeAnim struct aiNodeAnim} ** mChannels;
  *     unsigned int mNumMeshChannels;
  *     {@link AIMeshAnim struct aiMeshAnim} ** mMeshChannels;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiAnimation")
 public class AIAnimation extends Struct implements NativeResource {
@@ -52,6 +52,7 @@ public class AIAnimation extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

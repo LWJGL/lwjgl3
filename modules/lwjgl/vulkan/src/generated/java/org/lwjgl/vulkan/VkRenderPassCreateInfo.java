@@ -72,7 +72,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkRenderPassCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -83,13 +83,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkSubpassDescription VkSubpassDescription const} * pSubpasses;
  *     uint32_t dependencyCount;
  *     {@link VkSubpassDependency VkSubpassDependency const} * pDependencies;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkRenderPassCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

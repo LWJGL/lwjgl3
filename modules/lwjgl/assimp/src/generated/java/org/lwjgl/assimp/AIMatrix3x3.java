@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiMatrix3x3 {
  *     float a1;
  *     float a2;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float d1;
  *     float d2;
  *     float d3;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiMatrix3x3")
 public class AIMatrix3x3 extends Struct implements NativeResource {
@@ -42,6 +42,7 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

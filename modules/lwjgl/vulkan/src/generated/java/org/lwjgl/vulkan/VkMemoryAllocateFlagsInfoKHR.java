@@ -20,13 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkMemoryAllocateFlagsInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkMemoryAllocateFlags flags;
  *     uint32_t deviceMask;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkMemoryAllocateFlagsInfoKHR extends VkMemoryAllocateFlagsInfo {
 

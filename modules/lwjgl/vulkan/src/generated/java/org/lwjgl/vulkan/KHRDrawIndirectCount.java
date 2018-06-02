@@ -75,7 +75,7 @@ public class KHRDrawIndirectCount {
      * 
      * <p>To record a non-indexed draw call with a draw call count sourced from a buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndirectCountKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
@@ -83,7 +83,7 @@ public class KHRDrawIndirectCount {
      *     VkBuffer                                    countBuffer,
      *     VkDeviceSize                                countBufferOffset,
      *     uint32_t                                    maxDrawCount,
-     *     uint32_t                                    stride);</pre></code>
+     *     uint32_t                                    stride);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -180,7 +180,7 @@ public class KHRDrawIndirectCount {
      * 
      * <p>To record an indexed draw call with a draw call count sourced from a buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDrawIndexedIndirectCountKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     VkBuffer                                    buffer,
@@ -188,7 +188,7 @@ public class KHRDrawIndirectCount {
      *     VkBuffer                                    countBuffer,
      *     VkDeviceSize                                countBufferOffset,
      *     uint32_t                                    maxDrawCount,
-     *     uint32_t                                    stride);</pre></code>
+     *     uint32_t                                    stride);</code></pre>
      * 
      * <h5>Description</h5>
      * 

@@ -28,11 +28,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct GLFWgamepadstate {
  *     unsigned char buttons[15];
  *     float axes[6];
- * }</pre></code>
+ * }</code></pre>
  *
  * @since version 3.3
  */
@@ -42,6 +42,7 @@ public class GLFWGamepadState extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

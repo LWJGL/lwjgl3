@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_row_layout {
  *     enum nk_panel_row_layout_type type;
  *     int index;
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkRect struct nk_rect} item;
  *     int tree_depth;
  *     float templates[16];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_row_layout")
 public class NkRowLayout extends Struct {
@@ -46,6 +46,7 @@ public class NkRowLayout extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

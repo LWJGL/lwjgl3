@@ -67,7 +67,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VmaAllocatorCreateInfo {
  *     VmaAllocatorCreateFlags flags;
  *     VkPhysicalDevice physicalDevice;
@@ -78,13 +78,14 @@ import org.lwjgl.vulkan.*;
  *     uint32_t frameInUseCount;
  *     VkDeviceSize const * pHeapSizeLimit;
  *     {@link VmaVulkanFunctions VmaVulkanFunctions const} * pVulkanFunctions;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

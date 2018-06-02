@@ -98,8 +98,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLBuffer.html">Reference Page</a></p>
-     * 
      * Creates an OpenCL buffer object from an OpenGL buffer object.
      * 
      * <p>The size of the GL buffer object data store at the time {@code clCreateFromGLBuffer} is called will be used as the size of buffer object returned by
@@ -125,6 +123,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLuint") int bufobj, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -147,8 +147,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em></p>
-     * 
      * Creates an OpenCL 2D image object from an OpenGL 2D texture object, or a single face of an OpenGL cubemap texture object.
      * 
      * <p>If the state of a GL texture object is modified through the GL API (e.g. {@code glTexImage2D} or the values of the texture parameters
@@ -185,6 +183,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLTexture2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -207,8 +207,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em></p>
-     * 
      * Creates an OpenCL 3D image object from an OpenGL 3D texture object.
      * 
      * <p>If the state of a GL texture object is modified through the GL API (e.g. {@code glTexImage3D} or the values of the texture parameters
@@ -244,6 +242,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLTexture3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -266,8 +266,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLRenderbuffer.html">Reference Page</a></p>
-     * 
      * Creates an OpenCL 2D image object from an OpenGL renderbuffer object.
      * 
      * <p>If the state of a GL renderbuffer object is modified through the GL API (i.e. changes to the dimensions or format used to represent pixels of the GL
@@ -295,6 +293,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLRenderbuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLRenderbuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLuint") int renderbuffer, @Nullable @NativeType("cl_int *") IntBuffer errcode_ret) {
@@ -317,8 +317,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLObjectInfo.html">Reference Page</a></p>
-     * 
      * Queries the OpenGL object used to create the OpenCL memory object and information about the object type i.e. whether it is a texture, renderbuffer or
      * buffer object.
      *
@@ -334,6 +332,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetGLObjectInfo(@NativeType("cl_mem") long memobj, @Nullable @NativeType("cl_gl_object_type *") IntBuffer gl_object_type, @Nullable @NativeType("GLuint *") IntBuffer gl_object_name) {
@@ -361,11 +361,8 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLTextureInfo.html">Reference Page</a></p>
-     * 
      * Returns additional information about the GL texture object associated with {@code memobj}.
      *
-     * @param memobj               
      * @param param_name           specifies what additional information about the GL texture object associated with {@code memobj} to query. One of:<br><table><tr><td>{@link #CL_GL_TEXTURE_TARGET GL_TEXTURE_TARGET}</td><td>{@link #CL_GL_MIPMAP_LEVEL GL_MIPMAP_LEVEL}</td><td>{@link KHRGLMSAASharing#CL_GL_NUM_SAMPLES GL_NUM_SAMPLES}</td></tr></table>
      * @param param_value          a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is {@code NULL}, it is ignored.
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
@@ -380,6 +377,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLTextureInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetGLTextureInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_gl_texture_info") int param_name, @Nullable @NativeType("void *") ByteBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -390,11 +389,8 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLTextureInfo.html">Reference Page</a></p>
-     * 
      * Returns additional information about the GL texture object associated with {@code memobj}.
      *
-     * @param memobj               
      * @param param_name           specifies what additional information about the GL texture object associated with {@code memobj} to query. One of:<br><table><tr><td>{@link #CL_GL_TEXTURE_TARGET GL_TEXTURE_TARGET}</td><td>{@link #CL_GL_MIPMAP_LEVEL GL_MIPMAP_LEVEL}</td><td>{@link KHRGLMSAASharing#CL_GL_NUM_SAMPLES GL_NUM_SAMPLES}</td></tr></table>
      * @param param_value          a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is {@code NULL}, it is ignored.
      * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
@@ -409,6 +405,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLTextureInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetGLTextureInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_gl_texture_info") int param_name, @Nullable @NativeType("void *") IntBuffer param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {
@@ -436,8 +434,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueAcquireGLObjects.html">Reference Page</a></p>
-     * 
      * Acquire OpenCL memory objects that have been created from OpenGL objects. These objects need to be acquired before they can be used by any OpenCL
      * commands queued to a command-queue. The OpenGL objects are acquired by the OpenCL context associated with command_queue and can therefore be used by all
      * command-queues associated with the OpenCL context.
@@ -475,6 +471,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueAcquireGLObjects.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueAcquireGLObjects(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -485,8 +483,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueAcquireGLObjects.html">Reference Page</a></p>
-     * 
      * Acquire OpenCL memory objects that have been created from OpenGL objects. These objects need to be acquired before they can be used by any OpenCL
      * commands queued to a command-queue. The OpenGL objects are acquired by the OpenCL context associated with command_queue and can therefore be used by all
      * command-queues associated with the OpenCL context.
@@ -523,6 +519,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueAcquireGLObjects.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueAcquireGLObjects(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") long mem_object, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -556,8 +554,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReleaseGLObjects.html">Reference Page</a></p>
-     * 
      * Releases OpenCL memory objects that have been created from OpenGL objects. These objects need to be released before they can be used by OpenGL. The
      * OpenGL objects are released by the OpenCL context associated with {@code command_queue}.
      * 
@@ -591,6 +587,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReleaseGLObjects.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReleaseGLObjects(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -601,8 +599,6 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReleaseGLObjects.html">Reference Page</a></p>
-     * 
      * Releases OpenCL memory objects that have been created from OpenGL objects. These objects need to be released before they can be used by OpenGL. The
      * OpenGL objects are released by the OpenCL context associated with {@code command_queue}.
      * 
@@ -635,6 +631,8 @@ public class CL10GL {
      *         <li>{@link CL10#CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
      *         <li>{@link CL10#CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
      *         </ul>
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReleaseGLObjects.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clEnqueueReleaseGLObjects(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") long mem_object, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
@@ -651,9 +649,9 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLBuffer.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateFromGLBuffer CreateFromGLBuffer}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLBuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLBuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLuint") int bufobj, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -667,9 +665,9 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em></p>
-     * 
      * Array version of: {@link #clCreateFromGLTexture2D CreateFromGLTexture2D}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture2D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLTexture2D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -683,9 +681,9 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em></p>
-     * 
      * Array version of: {@link #clCreateFromGLTexture3D CreateFromGLTexture3D}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/1.1/docs/man/xhtml/clCreateFromGLTexture3D.html">Reference Page</a> - <em>This function is deprecated after OpenCL 1.1</em>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLTexture3D(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLenum") int texture_target, @NativeType("GLint") int miplevel, @NativeType("GLuint") int texture, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -699,9 +697,9 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLRenderbuffer.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clCreateFromGLRenderbuffer CreateFromGLRenderbuffer}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clCreateFromGLRenderbuffer.html">Reference Page</a>
      */
     @NativeType("cl_mem")
     public static long clCreateFromGLRenderbuffer(@NativeType("cl_context") long context, @NativeType("cl_mem_flags") long flags, @NativeType("GLuint") int renderbuffer, @Nullable @NativeType("cl_int *") int[] errcode_ret) {
@@ -715,9 +713,9 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLObjectInfo.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clGetGLObjectInfo GetGLObjectInfo}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLObjectInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetGLObjectInfo(@NativeType("cl_mem") long memobj, @Nullable @NativeType("cl_gl_object_type *") int[] gl_object_type, @Nullable @NativeType("GLuint *") int[] gl_object_name) {
@@ -732,9 +730,9 @@ public class CL10GL {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLTextureInfo.html">Reference Page</a></p>
-     * 
      * Array version of: {@link #clGetGLTextureInfo GetGLTextureInfo}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetGLTextureInfo.html">Reference Page</a>
      */
     @NativeType("cl_int")
     public static int clGetGLTextureInfo(@NativeType("cl_mem") long memobj, @NativeType("cl_gl_texture_info") int param_name, @Nullable @NativeType("void *") int[] param_value, @Nullable @NativeType("size_t *") PointerBuffer param_value_size_ret) {

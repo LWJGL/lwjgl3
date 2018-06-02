@@ -209,7 +209,7 @@ public class STBVorbis {
     public static native long nstb_vorbis_open_pushdata(long datablock, int datablock_length_in_bytes, long datablock_memory_consumed_in_bytes, long error, long alloc_buffer);
 
     /**
-     * Creates a vorbis decoder by passing in the initial data block containing the ogg&vorbis headers (you don't need to do parse them, just provide the
+     * Creates a vorbis decoder by passing in the initial data block containing the ogg&amp;vorbis headers (you don't need to do parse them, just provide the
      * first N bytes of the file -- you're told if it's not enough, see below)
      *
      * @param datablock                          the data block containing the ogg vorbis headers
@@ -643,12 +643,12 @@ public class STBVorbis {
      * <p>Let M be the number of channels requested, and N the number of channels present, and Cn be the nth channel; let stereo L be the sum of all L and center
      * channels, and stereo R be the sum of all R and center channels (channel assignment from the vorbis spec).</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * M    N      output
      * 1    k      sum(Ck) for all k
      * 2    *      stereo L, stereo R
-     * k    l      k > l, the first l channels, then 0s
-     * k    l      k <= l, the first k channels</pre></code>
+     * k    l      k &gt; l, the first l channels, then 0s
+     * k    l      k &lt;= l, the first k channels</code></pre>
      * 
      * <p>Note that this is not <b>good</b> surround etc. mixing at all! It's just so you get something useful.</p>
      *

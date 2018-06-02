@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * union VREvent_Data_t {
  *     {@link VREventReserved VREvent_Reserved_t} reserved;
  *     {@link VREventController VREvent_Controller_t} controller;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link VREventHapticVibration VREvent_HapticVibration_t} hapticVibration;
  *     {@link VREventWebConsole VREvent_WebConsole_t} webConsole;
  *     {@link VREventInputBindingLoad VREvent_InputBindingLoad_t} inputBinding;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("union VREvent_Data_t")
 public class VREventData extends Struct {
@@ -50,6 +50,7 @@ public class VREventData extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

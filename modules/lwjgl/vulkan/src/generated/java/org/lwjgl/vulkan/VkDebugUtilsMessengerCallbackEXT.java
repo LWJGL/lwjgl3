@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The prototype for the {@link VkDebugUtilsMessengerCreateInfoEXT}{@code ::pfnUserCallback} function implemented by the application is:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef VkBool32 (VKAPI_PTR *PFN_vkDebugUtilsMessengerCallbackEXT)(
  *     VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
  *     VkDebugUtilsMessageTypeFlagsEXT                  messageType,
  *     const VkDebugUtilsMessengerCallbackDataEXT*      pCallbackData,
- *     void*                                            pUserData);</pre></code>
+ *     void*                                            pUserData);</code></pre>
  * 
  * <h5>Description</h5>
  * 

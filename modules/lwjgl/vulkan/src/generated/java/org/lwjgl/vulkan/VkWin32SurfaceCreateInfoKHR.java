@@ -52,20 +52,21 @@ import org.lwjgl.system.windows.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkWin32SurfaceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkWin32SurfaceCreateFlagsKHR flags;
  *     HINSTANCE hinstance;
  *     HWND hwnd;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

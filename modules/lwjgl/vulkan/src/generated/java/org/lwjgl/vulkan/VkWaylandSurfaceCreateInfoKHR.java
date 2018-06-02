@@ -52,20 +52,21 @@ import org.lwjgl.system.linux.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkWaylandSurfaceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkWaylandSurfaceCreateFlagsKHR flags;
  *     struct wl_display * display;
  *     struct wl_surface * surface;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

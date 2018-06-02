@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct MDB_stat {
  *     unsigned int ms_psize;
  *     unsigned int ms_depth;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     mdb_size_t ms_leaf_pages;
  *     mdb_size_t ms_overflow_pages;
  *     mdb_size_t ms_entries;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct MDB_stat")
 public class MDBStat extends Struct implements NativeResource {
@@ -47,6 +47,7 @@ public class MDBStat extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

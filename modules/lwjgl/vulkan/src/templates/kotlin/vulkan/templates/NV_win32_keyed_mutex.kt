@@ -14,7 +14,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
         Applications that wish to import Direct3D 11 memory objects into the Vulkan API may wish to use the native keyed mutex mechanism to synchronize access to the memory between Vulkan and Direct3D. This extension provides a way for an application to access the keyed mutex associated with an imported Vulkan memory object when submitting command buffers to a queue.
 
         <h5>Examples</h5>
-        <code><pre>
+        <pre><code>
 ￿    //
 ￿    // Import a memory object from Direct3D 11, and synchronize
 ￿    // access to it in Vulkan using keyed mutex objects.
@@ -43,7 +43,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿
 ￿    // Figure out how many memory types the device supports
 ￿    vkGetPhysicalDeviceMemoryProperties(physicalDevice,
-￿                                        &memoryProperties);
+￿                                        &amp;memoryProperties);
 ￿    numMemoryTypes = memoryProperties.memoryTypeCount;
 ￿
 ￿    // Check the external handle type capabilities for the chosen format
@@ -59,24 +59,24 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
 ￿        0,
 ￿        handleType,
-￿        &properties);
+￿        &amp;properties);
 ￿
 ￿    if ((result != VK_SUCCESS) ||
-￿        !(properties.externalMemoryFeatures &
+￿        !(properties.externalMemoryFeatures &amp;
 ￿          VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV)) {
 ￿        abort();
 ￿    }
 ￿
 ￿    // Set up the external memory image creation info
-￿    memset(&externalMemoryImageCreateInfo,
+￿    memset(&amp;externalMemoryImageCreateInfo,
 ￿           0, sizeof(externalMemoryImageCreateInfo));
 ￿    externalMemoryImageCreateInfo.sType =
 ￿        VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV;
 ￿    externalMemoryImageCreateInfo.handleTypes = handleType;
 ￿    // Set up the  core image creation info
-￿    memset(&imageCreateInfo, 0, sizeof(imageCreateInfo));
+￿    memset(&amp;imageCreateInfo, 0, sizeof(imageCreateInfo));
 ￿    imageCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-￿    imageCreateInfo.pNext = &externalMemoryImageCreateInfo;
+￿    imageCreateInfo.pNext = &amp;externalMemoryImageCreateInfo;
 ￿    imageCreateInfo.format = format;
 ￿    imageCreateInfo.extent.width = 64;
 ￿    imageCreateInfo.extent.height = 64;
@@ -90,36 +90,36 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿    imageCreateInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 ￿    imageCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 ￿
-￿    vkCreateImage(device, &imageCreateInfo, NULL, &image);
+￿    vkCreateImage(device, &amp;imageCreateInfo, NULL, &amp;image);
 ￿    vkGetImageMemoryRequirements(device,
 ￿                                 image,
-￿                                 &imageMemoryRequirements);
+￿                                 &amp;imageMemoryRequirements);
 ￿
 ￿    // For simplicity, just pick the first compatible memory type.
-￿    for (memoryType = 0; memoryType < numMemoryTypes; memoryType++) {
-￿        if ((1 << memoryType) & imageMemoryRequirements.memoryTypeBits) {
+￿    for (memoryType = 0; memoryType &lt; numMemoryTypes; memoryType++) {
+￿        if ((1 &lt;&lt; memoryType) &amp; imageMemoryRequirements.memoryTypeBits) {
 ￿            break;
 ￿        }
 ￿    }
 ￿
 ￿    // At least one memory type must be supported given the prior external
 ￿    // handle capability check.
-￿    assert(memoryType < numMemoryTypes);
+￿    assert(memoryType &lt; numMemoryTypes);
 ￿
 ￿    // Allocate the external memory object.
-￿    memset(&exportMemoryAllocateInfo, 0, sizeof(exportMemoryAllocateInfo));
+￿    memset(&amp;exportMemoryAllocateInfo, 0, sizeof(exportMemoryAllocateInfo));
 ￿    exportMemoryAllocateInfo.sType =
 ￿        VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV;
 ￿    importMemoryInfo.handleTypes = handleType;
 ￿    importMemoryInfo.handle = sharedNtHandle;
 ￿
-￿    memset(&memoryAllocateInfo, 0, sizeof(memoryAllocateInfo));
+￿    memset(&amp;memoryAllocateInfo, 0, sizeof(memoryAllocateInfo));
 ￿    memoryAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-￿    memoryAllocateInfo.pNext = &exportMemoryAllocateInfo;
+￿    memoryAllocateInfo.pNext = &amp;exportMemoryAllocateInfo;
 ￿    memoryAllocateInfo.allocationSize = imageMemoryRequirements.size;
 ￿    memoryAllocateInfo.memoryTypeIndex = memoryType;
 ￿
-￿    vkAllocateMemory(device, &memoryAllocateInfo, NULL, &mem);
+￿    vkAllocateMemory(device, &amp;memoryAllocateInfo, NULL, &amp;mem);
 ￿
 ￿    vkBindImageMemory(device, image, mem, 0);
 ￿
@@ -132,17 +132,17 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 ￿    VkWin32KeyedMutexAcquireReleaseInfoNV keyedMutex =
 ￿        { VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV };
 ￿    keyedMutex.acquireCount = 1;
-￿    keyedMutex.pAcquireSyncs = &mem;
-￿    keyedMutex.pAcquireKeys = &acquireKey;
-￿    keyedMutex.pAcquireTimeoutMilliseconds = &timeout;
+￿    keyedMutex.pAcquireSyncs = &amp;mem;
+￿    keyedMutex.pAcquireKeys = &amp;acquireKey;
+￿    keyedMutex.pAcquireTimeoutMilliseconds = &amp;timeout;
 ￿    keyedMutex.releaseCount = 1;
-￿    keyedMutex.pReleaseSyncs = &mem;
-￿    keyedMutex.pReleaseKeys = &releaseKey;
+￿    keyedMutex.pReleaseSyncs = &amp;mem;
+￿    keyedMutex.pReleaseKeys = &amp;releaseKey;
 ￿
-￿    VkSubmitInfo submit_info = { VK_STRUCTURE_TYPE_SUBMIT_INFO, &keyedMutex };
+￿    VkSubmitInfo submit_info = { VK_STRUCTURE_TYPE_SUBMIT_INFO, &amp;keyedMutex };
 ￿    submit_info.commandBufferCount = 1;
-￿    submit_info.pCommandBuffers = &cmd_buf;
-￿    vkQueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);</pre></code>
+￿    submit_info.pCommandBuffers = &amp;cmd_buf;
+￿    vkQueueSubmit(queue, 1, &amp;submit_info, VK_NULL_HANDLE);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

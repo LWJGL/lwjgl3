@@ -27,17 +27,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkRect2D {
  *     {@link VkOffset2D VkOffset2D} offset;
  *     {@link VkExtent2D VkExtent2D} extent;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkRect2D extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

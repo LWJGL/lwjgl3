@@ -202,7 +202,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceFeatures {
  *     VkBool32 robustBufferAccess;
  *     VkBool32 fullDrawIndexUint32;
@@ -259,13 +259,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 sparseResidencyAliased;
  *     VkBool32 variableMultisampleRate;
  *     VkBool32 inheritedQueries;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

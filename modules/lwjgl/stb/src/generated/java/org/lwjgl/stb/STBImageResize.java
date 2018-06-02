@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>QUICKSTART</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * stbir_resize_uint8(      input_pixels , in_w , in_h , 0,
  *                          output_pixels, out_w, out_h, 0, num_channels)
  * stbir_resize_float(...)
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *                          input_pixels , in_w , in_h , 0,
  *                          output_pixels, out_w, out_h, 0,
  *                          num_channels , alpha_chan  , 0, STBIR_EDGE_CLAMP)
- *                                                       // WRAP/REFLECT/ZERO</pre></code>
+ *                                                       // WRAP/REFLECT/ZERO</code></pre>
  * 
  * <h3>ALPHA CHANNEL</h3>
  * 

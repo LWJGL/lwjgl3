@@ -120,7 +120,7 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The prototype for the ##VkDebugReportCallbackCreateInfoEXT{@code ::pfnCallback} function implemented by the application is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
 ￿    VkDebugReportFlagsEXT                       flags,
 ￿    VkDebugReportObjectTypeEXT                  objectType,
@@ -129,7 +129,7 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
 ￿    int32_t                                     messageCode,
 ￿    const char*                                 pLayerPrefix,
 ￿    const char*                                 pMessage,
-￿    void*                                       pUserData);</pre></code>
+￿    void*                                       pUserData);</code></pre>
 
         <h5>Description</h5>
         The callback <b>must</b> not call #DestroyDebugReportCallbackEXT().
@@ -164,12 +164,12 @@ val PFN_vkDebugUtilsMessengerCallbackEXT = Module.VULKAN.callback {
         <h5>C Specification</h5>
         The prototype for the ##VkDebugUtilsMessengerCreateInfoEXT{@code ::pfnUserCallback} function implemented by the application is:
 
-        <code><pre>
+        <pre><code>
 ￿typedef VkBool32 (VKAPI_PTR *PFN_vkDebugUtilsMessengerCallbackEXT)(
 ￿    VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
 ￿    VkDebugUtilsMessageTypeFlagsEXT                  messageType,
 ￿    const VkDebugUtilsMessengerCallbackDataEXT*      pCallbackData,
-￿    void*                                            pUserData);</pre></code>
+￿    void*                                            pUserData);</code></pre>
 
         <h5>Description</h5>
         The callback <b>must</b> not call #DestroyDebugUtilsMessengerEXT().
@@ -2266,23 +2266,23 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(Module.VULKAN, "VkIndirectCom
         <h5>Description</h5>
         The following code illustrates some of the key flags:
 
-        <code><pre>
+        <pre><code>
 ￿void cmdProcessAllSequences(cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequencesCount, indexbuffer, indexbufferoffset)
 ￿{
-￿  for (s = 0; s < sequencesCount; s++)
+￿  for (s = 0; s &lt; sequencesCount; s++)
 ￿  {
 ￿    sequence = s;
 ￿
-￿    if (indirectCommandsLayout.flags & VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX) {
+￿    if (indirectCommandsLayout.flags &amp; VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX) {
 ￿      sequence = incoherent_implementation_dependent_permutation[ sequence ];
 ￿    }
-￿    if (indirectCommandsLayout.flags & VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX) {
+￿    if (indirectCommandsLayout.flags &amp; VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX) {
 ￿      sequence = indexbuffer.load_uint32( sequence * sizeof(uint32_t) + indexbufferoffset);
 ￿    }
 ￿
 ￿    cmdProcessSequence( cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequence );
 ￿  }
-￿}</pre></code>
+￿}</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

@@ -14,11 +14,11 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     void *userdata,
  *     int index
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("nk_value_getter")

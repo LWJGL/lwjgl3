@@ -25,11 +25,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_draw_null_texture {
  *     {@link NkHandle nk_handle} texture;
  *     {@link NkVec2 struct nk_vec2} uv;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_draw_null_texture")
 public class NkDrawNullTexture extends Struct implements NativeResource {
@@ -37,6 +37,7 @@ public class NkDrawNullTexture extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

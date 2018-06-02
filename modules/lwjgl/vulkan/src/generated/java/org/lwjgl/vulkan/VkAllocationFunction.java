@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The type of {@code pfnAllocation} is:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef void* (VKAPI_PTR *PFN_vkAllocationFunction)(
  *     void*                                       pUserData,
  *     size_t                                      size,
  *     size_t                                      alignment,
- *     VkSystemAllocationScope                     allocationScope);</pre></code>
+ *     VkSystemAllocationScope                     allocationScope);</code></pre>
  * 
  * <h5>Description</h5>
  * 

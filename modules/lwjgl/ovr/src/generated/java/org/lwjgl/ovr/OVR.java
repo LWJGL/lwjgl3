@@ -186,8 +186,8 @@ public class OVR {
      * 
      * <p>Prefer using this origin when your application requires the physical floor height to match the virtual floor height, such as standing experiences.
      * When used, all poses in {@link OVRTrackingState} are reported as an offset transform from the profile calibrated floor pose. Calling
-     * {@link #ovr_RecenterTrackingOrigin RecenterTrackingOrigin} will recenter the X & Z axes as well as yaw, but the Y-axis (i.e. height) will continue to be reported using the floor
-     * height as the origin for all poses.</p>
+     * {@link #ovr_RecenterTrackingOrigin RecenterTrackingOrigin} will recenter the X &amp; Z axes as well as yaw, but the Y-axis (i.e. height) will continue to be reported using the
+     * floor height as the origin for all poses.</p>
      * </li>
      * </ul>
      */
@@ -568,8 +568,8 @@ public class OVR {
      * <li>{@link #ovrCameraStatus_None CameraStatus_None} - Initial state of camera.</li>
      * <li>{@link #ovrCameraStatus_Connected CameraStatus_Connected} - Bit set when the camera is connected to the system.</li>
      * <li>{@link #ovrCameraStatus_Calibrating CameraStatus_Calibrating} - Bit set when the camera is undergoing calibration.</li>
-     * <li>{@link #ovrCameraStatus_CalibrationFailed CameraStatus_CalibrationFailed} - Bit set when the camera has tried & failed calibration.</li>
-     * <li>{@link #ovrCameraStatus_Calibrated CameraStatus_Calibrated} - Bit set when the camera has tried & passed calibration.</li>
+     * <li>{@link #ovrCameraStatus_CalibrationFailed CameraStatus_CalibrationFailed} - Bit set when the camera has tried &amp; failed calibration.</li>
+     * <li>{@link #ovrCameraStatus_Calibrated CameraStatus_Calibrated} - Bit set when the camera has tried &amp; passed calibration.</li>
      * <li>{@link #ovrCameraStatus_Capturing CameraStatus_Capturing} - Bit set when the camera is capturing.</li>
      * </ul>
      */
@@ -699,14 +699,14 @@ public class OVR {
         ovrTextureLayout_Octilinear  = 1;
 
     /**
-     * Performance HUD enables the HMD user to see information critical to the real-time operation of the VR application such as latency timing, and CPU & GPU
-     * performance metrics.
+     * Performance HUD enables the HMD user to see information critical to the real-time operation of the VR application such as latency timing, and CPU &amp;
+     * GPU performance metrics.
      * 
      * <p>App can toggle performance HUD modes as such:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrPerfHudMode PerfHudMode = ovrPerfHud_LatencyTiming;
-     * ovr_SetInt(session, OVR_PERF_HUD_MODE, (int)PerfHudMode);</pre></code>
+     * ovr_SetInt(session, OVR_PERF_HUD_MODE, (int)PerfHudMode);</code></pre>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -717,7 +717,7 @@ public class OVR {
      * <li>{@link #ovrPerfHud_AppRenderTiming PerfHud_AppRenderTiming} - Shows render timing info for application</li>
      * <li>{@link #ovrPerfHud_CompRenderTiming PerfHud_CompRenderTiming} - Shows render timing info for OVR compositor</li>
      * <li>{@link #ovrPerfHud_AwsStats PerfHud_AwsStats} - Shows Async Spacewarp-specific info</li>
-     * <li>{@link #ovrPerfHud_VersionInfo PerfHud_VersionInfo} - Shows SDK & HMD version Info</li>
+     * <li>{@link #ovrPerfHud_VersionInfo PerfHud_VersionInfo} - Shows SDK &amp; HMD version Info</li>
      * </ul>
      */
     public static final int
@@ -734,9 +734,9 @@ public class OVR {
      * 
      * <p>App can toggle layer HUD modes as such:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrLayerHudMode LayerHudMode = ovrLayerHud_Info;
-     * ovr_SetInt(Hmd, OVR_LAYER_HUD_MODE, (int)LayerHudMode);</pre></code>
+     * ovr_SetInt(Hmd, OVR_LAYER_HUD_MODE, (int)LayerHudMode);</code></pre>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -756,9 +756,9 @@ public class OVR {
      * 
      * <p>App can toggle the debug HUD modes as such:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrDebugHudStereoMode DebugHudMode = ovrDebugHudStereo_QuadWithCrosshair;
-     * ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);</pre></code>
+     * ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);</code></pre>
      * 
      * <p>The app can modify the visual properties of the stereo guide (i.e. quad, crosshair) using the {@link #ovr_SetFloatArray SetFloatArray} function. For a list of tweakable
      * properties, see the {@code OVR_DEBUG_HUD_STEREO_GUIDE_*} keys in {@link OVRKeys}.</p>
@@ -936,22 +936,22 @@ public class OVR {
      * after {@link #ovr_Initialize Initialize} and before the first call to {@link #ovr_Create Create}. Each value is limited to 20 characters. Key names such as 'EngineName:', 'EngineVersion:'
      * do not count towards this limit.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * EngineName: %s\n
      * EngineVersion: %s\n
      * EnginePluginName: %s\n
      * EnginePluginVersion: %s\n
-     * EngineEditor: <boolean> ('true' or 'false')\n</pre></code>
+     * EngineEditor: &lt;boolean&gt; ('true' or 'false')\n</code></pre>
      * 
      * <p>Example code:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovr_IdentifyClient(
      *     "EngineName: Unity\n" +
      *     "EngineVersion: 5.3.3\n" +
      *     "EnginePluginName: OVRPlugin\n" +
      *     "EnginePluginVersion: 1.2.0\n" +
-     *     "EngineEditor: true");</pre></code>
+     *     "EngineEditor: true");</code></pre>
      *
      * @param identity specifies one or more newline-delimited lines of optional info
      */
@@ -971,22 +971,22 @@ public class OVR {
      * after {@link #ovr_Initialize Initialize} and before the first call to {@link #ovr_Create Create}. Each value is limited to 20 characters. Key names such as 'EngineName:', 'EngineVersion:'
      * do not count towards this limit.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * EngineName: %s\n
      * EngineVersion: %s\n
      * EnginePluginName: %s\n
      * EnginePluginVersion: %s\n
-     * EngineEditor: <boolean> ('true' or 'false')\n</pre></code>
+     * EngineEditor: &lt;boolean&gt; ('true' or 'false')\n</code></pre>
      * 
      * <p>Example code:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovr_IdentifyClient(
      *     "EngineName: Unity\n" +
      *     "EngineVersion: 5.3.3\n" +
      *     "EnginePluginName: OVRPlugin\n" +
      *     "EnginePluginVersion: 1.2.0\n" +
-     *     "EngineEditor: true");</pre></code>
+     *     "EngineEditor: true");</code></pre>
      *
      * @param identity specifies one or more newline-delimited lines of optional info
      */
@@ -1264,9 +1264,9 @@ public class OVR {
      * 
      * <p>This function can emulate ovr_RecenterTrackingOrigin as such:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrTrackingState ts = ovr_GetTrackingState(session, 0.0, ovrFalse);
-     * ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);</pre></code>
+     * ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);</code></pre>
      * 
      * <p>The roll and pitch orientation components are determined by gravity and cannot be redefined. If you are using {@code ovrTrackerPoses} then you will
      * need to call {@link #ovr_GetTrackerPose GetTrackerPose} after this, because the sensor position(s) will change as a result of this.</p>
@@ -1966,10 +1966,10 @@ public class OVR {
      * 
      * <p>Example code:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrHmdDesc hmdDesc = ovr_GetHmdDesc(session);
      * ovrSizei eyeSizeLeft  = ovr_GetFovTextureSize(session, ovrEye_Left,  hmdDesc.DefaultEyeFov[ovrEye_Left],  1.0f);
-     * ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.DefaultEyeFov[ovrEye_Right], 1.0f);</pre></code>
+     * ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.DefaultEyeFov[ovrEye_Right], 1.0f);</code></pre>
      *
      * @param session               an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      * @param eye                   which eye (left or right) to calculate for. One of:<br><table><tr><td>{@link #ovrEye_Left Eye_Left}</td><td>{@link #ovrEye_Right Eye_Right}</td></tr></table>
@@ -2098,12 +2098,12 @@ public class OVR {
      * 
      * <h3>Example code</h3>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrLayerEyeFov  layer0;
      * ovrLayerQuad    layer1;
      * ...
-     * ovrLayerHeader* layers[2] = { &layer0.Header, &layer1.Header };
-     * ovrResult result = ovr_EndFrame(session, frameIndex, nullptr, layers, 2);</pre></code>
+     * ovrLayerHeader* layers[2] = { &amp;layer0.Header, &amp;layer1.Header };
+     * ovrResult result = ovr_EndFrame(session, frameIndex, nullptr, layers, 2);</code></pre>
      *
      * @param session       an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      * @param frameIndex    specifies the targeted application frame index. It must match what was passed to {@link #ovr_BeginFrame BeginFrame}.
@@ -2163,12 +2163,12 @@ public class OVR {
      * 
      * <h3>Example code</h3>
      * 
-     * <code><pre>
+     * <pre><code>
      * ovrLayerEyeFov  layer0;
      * ovrLayerQuad    layer1;
      * ...
-     * ovrLayerHeader* layers[2] = { &layer0.Header, &layer1.Header };
-     * ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);</pre></code>
+     * ovrLayerHeader* layers[2] = { &amp;layer0.Header, &amp;layer1.Header };
+     * ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);</code></pre>
      *
      * @param session       an {@code ovrSession} previously returned by {@link #ovr_Create Create}
      * @param frameIndex    the targeted application frame index, or 0 to refer to one frame after the last time {@link #ovr_SubmitFrame SubmitFrame} was called

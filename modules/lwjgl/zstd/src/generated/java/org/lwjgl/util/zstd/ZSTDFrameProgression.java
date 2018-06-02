@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ZSTD_frameProgression {
  *     unsigned long long ingested;
  *     unsigned long long consumed;
  *     unsigned long long produced;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ZSTD_frameProgression")
 public class ZSTDFrameProgression extends Struct implements NativeResource {
@@ -31,6 +31,7 @@ public class ZSTDFrameProgression extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

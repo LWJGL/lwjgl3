@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct YGNode {
  *     void * context;
  *     {@link YGPrintFuncI YGPrintFunc} print;
@@ -37,13 +37,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     YGConfigRef config;
  *     bool isDirty;
  *     {@link YGValue YGValue} * resolvedDimensions[2];
- * }</pre></code>
+ * }</code></pre>
  */
 public class YGNode extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

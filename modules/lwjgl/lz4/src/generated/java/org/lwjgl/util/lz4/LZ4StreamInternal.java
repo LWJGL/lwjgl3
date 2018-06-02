@@ -19,7 +19,7 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_HASH_SIZE_U32;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct LZ4_stream_t_internal {
  *     uint32_t hashTable[LZ4_HASH_SIZE_U32];
  *     uint32_t currentOffset;
@@ -28,7 +28,7 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_HASH_SIZE_U32;
  *     uint8_t const * dictionary;
  *     {@link LZ4StreamInternal LZ4_stream_t_internal} * const dictCtx;
  *     uint32_t dictSize;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct LZ4_stream_t_internal")
 public class LZ4StreamInternal extends Struct {
@@ -36,6 +36,7 @@ public class LZ4StreamInternal extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

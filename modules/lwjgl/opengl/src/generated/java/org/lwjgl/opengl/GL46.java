@@ -110,8 +110,6 @@ public class GL46 {
     public static native void nglMultiDrawArraysIndirectCount(int mode, long indirect, long drawcount, int maxdrawcount, int stride);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a></p>
-     * 
      * Behaves similarly to {@link GL43#glMultiDrawArraysIndirect MultiDrawArraysIndirect}, except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
      * {@link #GL_PARAMETER_BUFFER PARAMETER_BUFFER} binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
      * the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
@@ -123,6 +121,8 @@ public class GL46 {
      * @param drawcount    the offset into the parameter buffer object
      * @param maxdrawcount the maximum number of draws
      * @param stride       the distance in basic machine units between elements of the draw parameter array
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirectCount(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
@@ -132,8 +132,6 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a></p>
-     * 
      * Behaves similarly to {@link GL43#glMultiDrawArraysIndirect MultiDrawArraysIndirect}, except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
      * {@link #GL_PARAMETER_BUFFER PARAMETER_BUFFER} binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
      * the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
@@ -145,14 +143,14 @@ public class GL46 {
      * @param drawcount    the offset into the parameter buffer object
      * @param maxdrawcount the maximum number of draws
      * @param stride       the distance in basic machine units between elements of the draw parameter array
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirectCount(@NativeType("GLenum") int mode, @NativeType("void const *") long indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         nglMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a></p>
-     * 
      * Behaves similarly to {@link GL43#glMultiDrawArraysIndirect MultiDrawArraysIndirect}, except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
      * {@link #GL_PARAMETER_BUFFER PARAMETER_BUFFER} binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
      * the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
@@ -164,6 +162,8 @@ public class GL46 {
      * @param drawcount    the offset into the parameter buffer object
      * @param maxdrawcount the maximum number of draws
      * @param stride       the distance in basic machine units between elements of the draw parameter array
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirectCount(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
@@ -178,8 +178,6 @@ public class GL46 {
     public static native void nglMultiDrawElementsIndirectCount(int mode, int type, long indirect, long drawcount, int maxdrawcount, int stride);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a></p>
-     * 
      * Behaves similarly to {@link GL43#glMultiDrawElementsIndirect MultiDrawElementsIndirect}, except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
      * {@link #GL_PARAMETER_BUFFER PARAMETER_BUFFER} binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
      * the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
@@ -192,6 +190,8 @@ public class GL46 {
      * @param drawcount    the offset into the parameter buffer object
      * @param maxdrawcount the maximum number of draws
      * @param stride       the distance in basic machine units between elements of the draw parameter array
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirectCount(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
@@ -201,8 +201,6 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a></p>
-     * 
      * Behaves similarly to {@link GL43#glMultiDrawElementsIndirect MultiDrawElementsIndirect}, except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
      * {@link #GL_PARAMETER_BUFFER PARAMETER_BUFFER} binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
      * the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
@@ -215,14 +213,14 @@ public class GL46 {
      * @param drawcount    the offset into the parameter buffer object
      * @param maxdrawcount the maximum number of draws
      * @param stride       the distance in basic machine units between elements of the draw parameter array
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirectCount(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") long indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         nglMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride);
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a></p>
-     * 
      * Behaves similarly to {@link GL43#glMultiDrawElementsIndirect MultiDrawElementsIndirect}, except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
      * {@link #GL_PARAMETER_BUFFER PARAMETER_BUFFER} binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
      * the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
@@ -235,6 +233,8 @@ public class GL46 {
      * @param drawcount    the offset into the parameter buffer object
      * @param maxdrawcount the maximum number of draws
      * @param stride       the distance in basic machine units between elements of the draw parameter array
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirectCount(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         if (CHECKS) {
@@ -246,8 +246,6 @@ public class GL46 {
     // --- [ glPolygonOffsetClamp ] ---
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glPolygonOffsetClamp">Reference Page</a></p>
-     * 
      * The depth values of all fragments generated by the rasterization of a polygon may be offset by a single value that is computed for that polygon. This
      * function determines this value.
      * 
@@ -261,6 +259,8 @@ public class GL46 {
      * @param factor scales the maximum depth slope of the polygon
      * @param units  scales an implementation-dependent constant that relates to the usable resolution of the depth buffer
      * @param clamp  the minimum or maximum polygon offset value
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glPolygonOffsetClamp">Reference Page</a>
      */
     public static native void glPolygonOffsetClamp(@NativeType("GLfloat") float factor, @NativeType("GLfloat") float units, @NativeType("GLfloat") float clamp);
 
@@ -274,8 +274,6 @@ public class GL46 {
     public static native void nglSpecializeShader(int shader, long pEntryPoint, int numSpecializationConstants, long pConstantIndex, long pConstantValue);
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a></p>
-     * 
      * Specializes a shader created from a SPIR-V module.
      * 
      * <p>Shaders associated with SPIR-V modules must be specialized before they can be linked into a program object. It is not necessary to specialize the
@@ -304,6 +302,8 @@ public class GL46 {
      *                       
      *                       <p>Although this array is of unsigned integer, each entry is bitcast to the appropriate type for the module, and therefore, floating-point constants
      *                       may be set by including their IEEE-754 bit representation in the {@code pConstantValue} array.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
     public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @NativeType("GLuint const *") IntBuffer pConstantIndex, @NativeType("GLuint const *") IntBuffer pConstantValue) {
         if (CHECKS) {
@@ -314,8 +314,6 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a></p>
-     * 
      * Specializes a shader created from a SPIR-V module.
      * 
      * <p>Shaders associated with SPIR-V modules must be specialized before they can be linked into a program object. It is not necessary to specialize the
@@ -344,6 +342,8 @@ public class GL46 {
      *                       
      *                       <p>Although this array is of unsigned integer, each entry is bitcast to the appropriate type for the module, and therefore, floating-point constants
      *                       may be set by including their IEEE-754 bit representation in the {@code pConstantValue} array.</p>
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
     public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @NativeType("GLuint const *") IntBuffer pConstantIndex, @NativeType("GLuint const *") IntBuffer pConstantValue) {
         if (CHECKS) {
@@ -359,9 +359,9 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a></p>
-     * 
      * Array version of: {@link #glMultiDrawArraysIndirectCount MultiDrawArraysIndirectCount}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirectCount(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         long __functionAddress = GL.getICD().glMultiDrawArraysIndirectCount;
@@ -373,9 +373,9 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a></p>
-     * 
      * Array version of: {@link #glMultiDrawElementsIndirectCount MultiDrawElementsIndirectCount}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirectCount">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirectCount(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         long __functionAddress = GL.getICD().glMultiDrawElementsIndirectCount;
@@ -387,9 +387,9 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a></p>
-     * 
      * Array version of: {@link #glSpecializeShader SpecializeShader}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
     public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @NativeType("GLuint const *") int[] pConstantIndex, @NativeType("GLuint const *") int[] pConstantValue) {
         long __functionAddress = GL.getICD().glSpecializeShader;
@@ -402,9 +402,9 @@ public class GL46 {
     }
 
     /**
-     * <p><a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a></p>
-     * 
      * Array version of: {@link #glSpecializeShader SpecializeShader}
+     * 
+     * @see <a target="_blank" href="http://docs.gl/gl4/glSpecializeShader">Reference Page</a>
      */
     public static void glSpecializeShader(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @NativeType("GLuint const *") int[] pConstantIndex, @NativeType("GLuint const *") int[] pConstantValue) {
         long __functionAddress = GL.getICD().glSpecializeShader;

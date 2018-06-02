@@ -29,17 +29,18 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkExtensionProperties {
  *     char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
  *     uint32_t specVersion;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkExtensionProperties extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

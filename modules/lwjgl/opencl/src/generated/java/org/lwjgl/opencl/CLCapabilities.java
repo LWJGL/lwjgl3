@@ -249,103 +249,103 @@ public class CLCapabilities {
      * 
      * <p>The directive when enabled adds the following built-in functions to the OpenCL language.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * Note: typen denote opencl scalar type {n = 1} and vector types {n = 4, 8, 16}.
      * 
      * Build-in Function
      *   uint  amd_pack(float4 src)
      * Description
-     *   dst =   ((((uint)src.s0) & 0xff)      )
-     *         + ((((uint)src.s1) & 0xff) <<  8)
-     *         + ((((uint)src.s2) & 0xff) << 16)
-     *         + ((((uint)src.s3) & 0xff) << 24)
+     *   dst =   ((((uint)src.s0) &amp; 0xff)      )
+     *         + ((((uint)src.s1) &amp; 0xff) &lt;&lt;  8)
+     *         + ((((uint)src.s2) &amp; 0xff) &lt;&lt; 16)
+     *         + ((((uint)src.s3) &amp; 0xff) &lt;&lt; 24)
      * 
      * Build-in Function
      *   floatn  amd_unpack3(unitn src)
      * Description
-     *   dst.s0 = (float)((src.s0 >> 24) & 0xff)
+     *   dst.s0 = (float)((src.s0 &gt;&gt; 24) &amp; 0xff)
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   floatn   amd_unpack2 (unitn src)
      * Description
-     *   dst.s0 = (float)((src.s0 >> 16) & 0xff)
+     *   dst.s0 = (float)((src.s0 &gt;&gt; 16) &amp; 0xff)
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   floatn   amd_unpack1 (unitn src)
      * Description
-     *   dst.s0 = (float)((src.s0 >> 8) & 0xff)
+     *   dst.s0 = (float)((src.s0 &gt;&gt; 8) &amp; 0xff)
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   floatn   amd_unpack0 (unitn src)
      * Description
-     *   dst.s0 = (float)(src.s0 & 0xff)
+     *   dst.s0 = (float)(src.s0 &amp; 0xff)
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   uintn  amd_bitalign (uintn src0, uintn src1, uintn src2)
      * Description
-     *   dst.s0 =  (uint) (((((long)src0.s0) << 32) | (long)src1.s0) >> (src2.s0 & 31))
+     *   dst.s0 =  (uint) (((((long)src0.s0) &lt;&lt; 32) | (long)src1.s0) &gt;&gt; (src2.s0 &amp; 31))
      *   similar operation applied to other components of the vectors.
      * 
      * 
      * Build-in Function
      *   uintn  amd_bytealign (uintn src0, uintn src1, uintn src2)
      * Description
-     *   dst.s0 =  (uint) (((((long)src0.s0) << 32) | (long)src1.s0) >> ((src2.s0 & 3)*8))
+     *   dst.s0 =  (uint) (((((long)src0.s0) &lt;&lt; 32) | (long)src1.s0) &gt;&gt; ((src2.s0 &amp; 3)*8))
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   uintn  amd_lerp (uintn src0, uintn src1, uintn src2)
      * Description
-     *   dst.s0 = (((((src0.s0 >>  0) & 0xff) + ((src1.s0 >>  0) & 0xff) + ((src2.s0 >>  0) & 1)) >> 1) <<  0) +
-     *            (((((src0.s0 >>  8) & 0xff) + ((src1.s0 >>  8) & 0xff) + ((src2.s0 >>  8) & 1)) >> 1) <<  8) +
-     *            (((((src0.s0 >> 16) & 0xff) + ((src1.s0 >> 16) & 0xff) + ((src2.s0 >> 16) & 1)) >> 1) << 16) +
-     *            (((((src0.s0 >> 24) & 0xff) + ((src1.s0 >> 24) & 0xff) + ((src2.s0 >> 24) & 1)) >> 1) << 24);
+     *   dst.s0 = (((((src0.s0 &gt;&gt;  0) &amp; 0xff) + ((src1.s0 &gt;&gt;  0) &amp; 0xff) + ((src2.s0 &gt;&gt;  0) &amp; 1)) &gt;&gt; 1) &lt;&lt;  0) +
+     *            (((((src0.s0 &gt;&gt;  8) &amp; 0xff) + ((src1.s0 &gt;&gt;  8) &amp; 0xff) + ((src2.s0 &gt;&gt;  8) &amp; 1)) &gt;&gt; 1) &lt;&lt;  8) +
+     *            (((((src0.s0 &gt;&gt; 16) &amp; 0xff) + ((src1.s0 &gt;&gt; 16) &amp; 0xff) + ((src2.s0 &gt;&gt; 16) &amp; 1)) &gt;&gt; 1) &lt;&lt; 16) +
+     *            (((((src0.s0 &gt;&gt; 24) &amp; 0xff) + ((src1.s0 &gt;&gt; 24) &amp; 0xff) + ((src2.s0 &gt;&gt; 24) &amp; 1)) &gt;&gt; 1) &lt;&lt; 24);
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   uintn  amd_sad (uintn src0, uintn src1, uintn src2)
      * Description
      *   dst.s0 = src2.s0 +
-     *            abs(((src0.s0 >>  0) & 0xff) - ((src1.s0 >>  0) & 0xff)) +
-     *            abs(((src0.s0 >>  8) & 0xff) - ((src1.s0 >>  8) & 0xff)) +
-     *            abs(((src0.s0 >> 16) & 0xff) - ((src1.s0 >> 16) & 0xff)) +
-     *            abs(((src0.s0 >> 24) & 0xff) - ((src1.s0 >> 24) & 0xff));
+     *            abs(((src0.s0 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) +
+     *            abs(((src0.s0 &gt;&gt;  8) &amp; 0xff) - ((src1.s0 &gt;&gt;  8) &amp; 0xff)) +
+     *            abs(((src0.s0 &gt;&gt; 16) &amp; 0xff) - ((src1.s0 &gt;&gt; 16) &amp; 0xff)) +
+     *            abs(((src0.s0 &gt;&gt; 24) &amp; 0xff) - ((src1.s0 &gt;&gt; 24) &amp; 0xff));
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   uintn  amd_sadhi (uintn src0, uintn src1n, uintn src2)
      * Description
      *   dst.s0 = src2.s0 +
-     *            (abs(((src0.s0 >>  0) & 0xff) - ((src1.s0 >>  0) & 0xff)) << 16) +
-     *            (abs(((src0.s0 >>  8) & 0xff) - ((src1.s0 >>  8) & 0xff)) << 16) +
-     *            (abs(((src0.s0 >> 16) & 0xff) - ((src1.s0 >> 16) & 0xff)) << 16) +
-     *            (abs(((src0.s0 >> 24) & 0xff) - ((src1.s0 >> 24) & 0xff)) << 16);
+     *            (abs(((src0.s0 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) &lt;&lt; 16) +
+     *            (abs(((src0.s0 &gt;&gt;  8) &amp; 0xff) - ((src1.s0 &gt;&gt;  8) &amp; 0xff)) &lt;&lt; 16) +
+     *            (abs(((src0.s0 &gt;&gt; 16) &amp; 0xff) - ((src1.s0 &gt;&gt; 16) &amp; 0xff)) &lt;&lt; 16) +
+     *            (abs(((src0.s0 &gt;&gt; 24) &amp; 0xff) - ((src1.s0 &gt;&gt; 24) &amp; 0xff)) &lt;&lt; 16);
      *   similar operation applied to other components of the vectors
      * 
      * Build-in Function
      *   uint  amd_sad4(uint4 src0, uint4 src1, uint src2)
      * Description
      *   dst   = src2   +
-     *            abs(((src0.s0 >>  0) & 0xff) - ((src1.s0 >>  0) & 0xff)) +
-     *            abs(((src0.s0 >>  8) & 0xff) - ((src1.s0 >>  8) & 0xff)) +
-     *            abs(((src0.s0 >> 16) & 0xff) - ((src1.s0 >> 16) & 0xff)) +
-     *            abs(((src0.s0 >> 24) & 0xff) - ((src1.s0 >> 24) & 0xff)) +
-     *            abs(((src0.s1 >>  0) & 0xff) - ((src1.s0 >>  0) & 0xff)) +
-     *            abs(((src0.s1 >>  8) & 0xff) - ((src1.s1 >>  8) & 0xff)) +
-     *            abs(((src0.s1 >> 16) & 0xff) - ((src1.s1 >> 16) & 0xff)) +
-     *            abs(((src0.s1 >> 24) & 0xff) - ((src1.s1 >> 24) & 0xff)) +
-     *            abs(((src0.s2 >>  0) & 0xff) - ((src1.s2 >>  0) & 0xff)) +
-     *            abs(((src0.s2 >>  8) & 0xff) - ((src1.s2 >>  8) & 0xff)) +
-     *            abs(((src0.s2 >> 16) & 0xff) - ((src1.s2 >> 16) & 0xff)) +
-     *            abs(((src0.s2 >> 24) & 0xff) - ((src1.s2 >> 24) & 0xff)) +
-     *            abs(((src0.s3 >>  0) & 0xff) - ((src1.s3 >>  0) & 0xff)) +
-     *            abs(((src0.s3 >>  8) & 0xff) - ((src1.s3 >>  8) & 0xff)) +
-     *            abs(((src0.s3 >> 16) & 0xff) - ((src1.s3 >> 16) & 0xff)) +
-     *            abs(((src0.s3 >> 24) & 0xff) - ((src1.s3 >> 24) & 0xff));</pre></code>
+     *            abs(((src0.s0 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) +
+     *            abs(((src0.s0 &gt;&gt;  8) &amp; 0xff) - ((src1.s0 &gt;&gt;  8) &amp; 0xff)) +
+     *            abs(((src0.s0 &gt;&gt; 16) &amp; 0xff) - ((src1.s0 &gt;&gt; 16) &amp; 0xff)) +
+     *            abs(((src0.s0 &gt;&gt; 24) &amp; 0xff) - ((src1.s0 &gt;&gt; 24) &amp; 0xff)) +
+     *            abs(((src0.s1 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) +
+     *            abs(((src0.s1 &gt;&gt;  8) &amp; 0xff) - ((src1.s1 &gt;&gt;  8) &amp; 0xff)) +
+     *            abs(((src0.s1 &gt;&gt; 16) &amp; 0xff) - ((src1.s1 &gt;&gt; 16) &amp; 0xff)) +
+     *            abs(((src0.s1 &gt;&gt; 24) &amp; 0xff) - ((src1.s1 &gt;&gt; 24) &amp; 0xff)) +
+     *            abs(((src0.s2 &gt;&gt;  0) &amp; 0xff) - ((src1.s2 &gt;&gt;  0) &amp; 0xff)) +
+     *            abs(((src0.s2 &gt;&gt;  8) &amp; 0xff) - ((src1.s2 &gt;&gt;  8) &amp; 0xff)) +
+     *            abs(((src0.s2 &gt;&gt; 16) &amp; 0xff) - ((src1.s2 &gt;&gt; 16) &amp; 0xff)) +
+     *            abs(((src0.s2 &gt;&gt; 24) &amp; 0xff) - ((src1.s2 &gt;&gt; 24) &amp; 0xff)) +
+     *            abs(((src0.s3 &gt;&gt;  0) &amp; 0xff) - ((src1.s3 &gt;&gt;  0) &amp; 0xff)) +
+     *            abs(((src0.s3 &gt;&gt;  8) &amp; 0xff) - ((src1.s3 &gt;&gt;  8) &amp; 0xff)) +
+     *            abs(((src0.s3 &gt;&gt; 16) &amp; 0xff) - ((src1.s3 &gt;&gt; 16) &amp; 0xff)) +
+     *            abs(((src0.s3 &gt;&gt; 24) &amp; 0xff) - ((src1.s3 &gt;&gt; 24) &amp; 0xff));</code></pre>
      */
     public final boolean cl_amd_media_ops;
     /**
@@ -353,7 +353,7 @@ public class CLCapabilities {
      * 
      * <p>The directive when enabled adds the following built-in functions to the OpenCL language.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * Note: typen denote open scalar type { n = 1 } and vector types { n = 2, 4, 8, 16 }.
      * 
      * Build-in Function
@@ -413,35 +413,35 @@ public class CLCapabilities {
      * Built-in Function:
      *   uintn amd_bfm (uintn src0, uintn src1)
      * Description
-     *   dst.s0 = ((1 << (src0.s0 & 0x1f)) - 1) << (src1.s0 & 0x1f);
+     *   dst.s0 = ((1 &lt;&lt; (src0.s0 &amp; 0x1f)) - 1) &lt;&lt; (src1.s0 &amp; 0x1f);
      *   similar operation applied to other components of the vectors
      * 
      * Built-in Function:
      *   uintn amd_bfe (uintn src0, uintn src1, uintn src2)
      * Description
-     *   NOTE: operator >> below represent logical right shift
-     *   offset = src1.s0 & 31;
-     *   width = src2.s0 & 31;
+     *   NOTE: operator &gt;&gt; below represent logical right shift
+     *   offset = src1.s0 &amp; 31;
+     *   width = src2.s0 &amp; 31;
      *   if width = 0
      *       dst.s0 = 0;
-     *   else if (offset + width) < 32
-     *       dst.s0 = (src0.s0 << (32 - offset - width)) >> (32 - width);
+     *   else if (offset + width) &lt; 32
+     *       dst.s0 = (src0.s0 &lt;&lt; (32 - offset - width)) &gt;&gt; (32 - width);
      *   else
-     *       dst.s0 = src0.s0 >> offset;
+     *       dst.s0 = src0.s0 &gt;&gt; offset;
      *   similar operation applied to other components of the vectors
      * 
      * Built-in Function:
      *    intn amd_bfe (intn src0, uintn src1, uintn src2)
      * Description
-     *   NOTE: operator >> below represent arithmetic right shift
-     *   offset = src1.s0 & 31;
-     *   width = src2.s0 & 31;
+     *   NOTE: operator &gt;&gt; below represent arithmetic right shift
+     *   offset = src1.s0 &amp; 31;
+     *   width = src2.s0 &amp; 31;
      *   if width = 0
      *       dst.s0 = 0;
-     *   else if (offset + width) < 32
-     *       dst.s0 = src0.s0 << (32-offset-width) >> 32-width;
+     *   else if (offset + width) &lt; 32
+     *       dst.s0 = src0.s0 &lt;&lt; (32-offset-width) &gt;&gt; 32-width;
      *   else
-     *       dst.s0 = src0.s0 >> offset;
+     *       dst.s0 = src0.s0 &gt;&gt; offset;
      *   similar operation applied to other components of the vectors
      * 
      * Built-in Function:
@@ -463,7 +463,7 @@ public class CLCapabilities {
      *    uintn amd_max3 (uintn src0, uintn src1, uintn src2)
      *    floatn amd_max3 (floatn src0, floatn src1, floattn src2)
      * Description
-     *    returns max of src0, src1, and src2</pre></code>
+     *    returns max of src0, src1, and src2</code></pre>
      */
     public final boolean cl_amd_media_ops2;
     /** When true, {@link AMDOfflineDevices} is supported. */
@@ -768,11 +768,11 @@ public class CLCapabilities {
      * <p>If this extension is enabled, the {@code __ROUNDING_MODE__} preprocessor symbol shall be defined to be one of the following according to the current
      * rounding mode:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * #define __ROUNDING_MODE__ rte
      * #define __ROUNDING_MODE__ rtz
      * #define __ROUNDING_MODE__ rtp
-     * #define __ROUNDING_MODE__ rtz</pre></code>
+     * #define __ROUNDING_MODE__ rtz</code></pre>
      * 
      * <p>The default rounding mode is round to nearest even. The built-in math functions, the common functions, and the geometric functions are implemented with
      * the round to nearest even rounding mode.</p>
@@ -799,9 +799,9 @@ public class CLCapabilities {
      * 
      * <p>This extension allows the programmer to pass options to the PTX assembler allowing greater control over code generation.</p>
      * 
-     * <code><pre>
-     * -cl-nv-maxrregcount <N>
-     *     Passed on to ptxas as --maxrregcount <N>
+     * <pre><code>
+     * -cl-nv-maxrregcount &lt;N&gt;
+     *     Passed on to ptxas as --maxrregcount &lt;N&gt;
      *         N is a positive integer.
      *     Specify the maximum number of registers that GPU functions can use.
      *     Until a function-specific limit, a higher value will generally increase
@@ -815,8 +815,8 @@ public class CLCapabilities {
      *     the specified value will be rounded to the next multiple of 4 registers
      *     until the GPU specific maximum of 128 registers.
      * 
-     * -cl-nv-opt-level <N>
-     *     Passed on to ptxas as --opt-level <N>
+     * -cl-nv-opt-level &lt;N&gt;
+     *     Passed on to ptxas as --opt-level &lt;N&gt;
      *         N is a positive integer, or 0 (no optimization).
      *     Specify optimization level.
      *     Default value:  3.
@@ -825,7 +825,7 @@ public class CLCapabilities {
      *     Passed on to ptxas as --verbose
      *     Enable verbose mode.
      *     Output will be reported in the build log (accessible through the
-     *     callback parameter to clBuildProgram).</pre></code>
+     *     callback parameter to clBuildProgram).</code></pre>
      */
     public final boolean cl_nv_compiler_options;
     /** When true, {@link NVDeviceAttributeQuery} is supported. */

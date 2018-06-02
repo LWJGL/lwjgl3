@@ -162,7 +162,7 @@ public abstract class Callback implements Pointer, NativeResource {
     }
 
     /**
-     * Converts the specified function pointer to the {@code CallbackI} instance associated with it.</p>
+     * Converts the specified function pointer to the {@code CallbackI} instance associated with it.
      *
      * @param functionPointer a function pointer
      * @param <T>             the {@code CallbackI} instance type

@@ -26,7 +26,7 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
         <h5>Sample Code</h5>
         Consider the following simple geometry shader in unextended GLSL:
 
-        <code><pre>
+        <pre><code>
 ￿layout(triangles) in;
 ￿layout(triangle_strip) out;
 ￿layout(max_vertices=3) out;
@@ -43,20 +43,20 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 ￿void main()
 ￿{
 ￿    int layer = compute_layer();
-￿    for (int i = 0; i < 3; i++) {
+￿    for (int i = 0; i &lt; 3; i++) {
 ￿        gl_Position = gl_in[i].gl_Position;
 ￿        texcoord = v_in[i].texcoord;
 ￿        baseColor = v_in[i].baseColor;
 ￿        gl_Layer = layer;
 ￿        EmitVertex();
 ￿    }
-￿}</pre></code>
+￿}</code></pre>
 
         In this shader, the inputs {@code gl_Position}, {@code Inputs.texcoord}, and {@code Inputs.baseColor} are simply copied from the input vertex to the corresponding output vertex. The only "{@code interesting}" work done by the geometry shader is computing and emitting a {@code gl_Layer} value for the primitive.
 
         The following geometry shader, using this extension, is equivalent:
 
-        <code><pre>
+        <pre><code>
 ￿\#extension GL_NV_geometry_shader_passthrough : require
 ￿
 ￿layout(triangles) in;
@@ -80,7 +80,7 @@ val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK
 ￿    // The shader simply computes and writes gl_Layer.  We don't
 ￿    // loop over three vertices or call EmitVertex().
 ￿    gl_Layer = compute_layer();
-￿}</pre></code>
+￿}</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

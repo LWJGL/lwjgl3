@@ -59,20 +59,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkImageResolve {
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} srcSubresource;
  *     {@link VkOffset3D VkOffset3D} srcOffset;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} dstSubresource;
  *     {@link VkOffset3D VkOffset3D} dstOffset;
  *     {@link VkExtent3D VkExtent3D} extent;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkImageResolve extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

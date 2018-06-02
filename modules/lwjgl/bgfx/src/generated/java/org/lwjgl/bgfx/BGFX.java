@@ -558,7 +558,7 @@ public class BGFX {
     /**
      * Texture format ({@code bgfx_texture_format_t}). Notation:
      * 
-     * <code><pre>
+     * <pre><code>
      * RGBA16S
      * ^   ^ ^
      * |   | +-- [ ]Unorm
@@ -567,7 +567,7 @@ public class BGFX {
      * |   |     [I]nt
      * |   |     [U]int
      * |   +---- Number of bits per component
-     * +-------- Components</pre></code>
+     * +-------- Components</code></pre>
      * 
      * <p>Availability depends on Caps.</p>
      * 
@@ -2020,9 +2020,8 @@ public class BGFX {
     /**
      * Clears internal debug text buffer.
      *
-     * @param _attr  color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
-     *               escape codes).
-     * @param _small 
+     * @param _attr color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
+     *              escape codes).
      */
     public static void bgfx_dbg_text_clear(@NativeType("uint8_t") int _attr, @NativeType("bool") boolean _small) {
         nbgfx_dbg_text_clear((byte)_attr, _small);
@@ -2532,11 +2531,7 @@ public class BGFX {
         return invokePS(__functionAddress, _mem);
     }
 
-    /**
-     * Creates shader from memory buffer.
-     *
-     * @param _mem 
-     */
+    /** Creates shader from memory buffer. */
     @NativeType("bgfx_shader_handle_t")
     public static short bgfx_create_shader(@NativeType("bgfx_memory_t const *") BGFXMemory _mem) {
         return nbgfx_create_shader(_mem.address());
@@ -2907,23 +2902,23 @@ public class BGFX {
      * 
      * <p>Cubemap sides: 0 is +X, 1 is -X, 2 is +Y, 3 is -Y, 4 is +Z, and 5 is -Z.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      *            +----------+
      *            |-z       2|
      *            | ^  +y    |
      *            | |        |    Unfolded cube:
-     *            | +---->+x |
+     *            | +----&gt;+x |
      * +----------+----------+----------+----------+
      * |+y       1|+y       4|+y       0|+y       5|
      * | ^  -x    | ^  +z    | ^  +x    | ^  -z    |
      * | |        | |        | |        | |        |
-     * | +---->+z | +---->+x | +---->-z | +---->-x |
+     * | +----&gt;+z | +----&gt;+x | +----&gt;-z | +----&gt;-x |
      * +----------+----------+----------+----------+
      *            |+z       3|
      *            | ^  -y    |
      *            | |        |
-     *            | +---->+x |
-     *            +----------+</pre></code>
+     *            | +----&gt;+x |
+     *            +----------+</code></pre>
      *
      * @param _handle texture handle
      * @param _layer  layers in texture array
@@ -3060,8 +3055,6 @@ public class BGFX {
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
      * <p>Availability depends on: {@link #BGFX_CAPS_TEXTURE_DIRECT_ACCESS CAPS_TEXTURE_DIRECT_ACCESS}. This feature is available on GPUs that have unified memory architecture (UMA) support.</p></div>
-     *
-     * @param _handle 
      */
     @NativeType("void *")
     public static long bgfx_get_direct_access_ptr(@NativeType("bgfx_texture_handle_t") short _handle) {
@@ -3432,12 +3425,12 @@ public class BGFX {
      * 
      * <p>This is debug only feature. In graphics debugger view name will appear as:</p>
      * 
-     * <code><pre>
-     * "nnnce <view name>"
+     * <pre><code>
+     * "nnnce &lt;view name&gt;"
      *  ^  ^^ ^
      *  |  |+-- eye (L/R)
      *  |  +--- compute (C)
-     *  +------ view id</pre></code>
+     *  +------ view id</code></pre>
      *
      * @param _id   view id
      * @param _name view name
@@ -3454,12 +3447,12 @@ public class BGFX {
      * 
      * <p>This is debug only feature. In graphics debugger view name will appear as:</p>
      * 
-     * <code><pre>
-     * "nnnce <view name>"
+     * <pre><code>
+     * "nnnce &lt;view name&gt;"
      *  ^  ^^ ^
      *  |  |+-- eye (L/R)
      *  |  +--- compute (C)
-     *  +------ view id</pre></code>
+     *  +------ view id</code></pre>
      *
      * @param _id   view id
      * @param _name view name
@@ -3790,13 +3783,13 @@ public class BGFX {
      * <ol>
      * <li>To setup more complex states use:
      * 
-     * <code><pre>
+     * <pre><code>
      * BGFX_STATE_ALPHA_REF(_ref),
      * BGFX_STATE_POINT_SIZE(_size),
      * BGFX_STATE_BLEND_FUNC(_src, _dst),
      * BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA)
      * BGFX_STATE_BLEND_EQUATION(_equation)
-     * BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)</pre></code></li>
+     * BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)</code></pre></li>
      * <li>{@link #BGFX_STATE_BLEND_EQUATION_ADD STATE_BLEND_EQUATION_ADD} is set when no other blend equation is specified.</li>
      * </ol>
      *
@@ -4543,13 +4536,13 @@ public class BGFX {
      * <ol>
      * <li>To setup more complex states use:
      * 
-     * <code><pre>
+     * <pre><code>
      * BGFX_STATE_ALPHA_REF(_ref),
      * BGFX_STATE_POINT_SIZE(_size),
      * BGFX_STATE_BLEND_FUNC(_src, _dst),
      * BGFX_STATE_BLEND_FUNC_SEPARATE(_srcRGB, _dstRGB, _srcA, _dstA)
      * BGFX_STATE_BLEND_EQUATION(_equation)
-     * BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)</pre></code></li>
+     * BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)</code></pre></li>
      * <li>{@link #BGFX_STATE_BLEND_EQUATION_ADD STATE_BLEND_EQUATION_ADD} is set when no other blend equation is specified.</li>
      * </ol>
      *

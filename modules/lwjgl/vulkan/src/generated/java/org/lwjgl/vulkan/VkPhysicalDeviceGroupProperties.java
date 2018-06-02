@@ -34,20 +34,21 @@ import static org.lwjgl.vulkan.VK11.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceGroupProperties {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t physicalDeviceCount;
  *     VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
  *     VkBool32 subsetAllocation;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceGroupProperties extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

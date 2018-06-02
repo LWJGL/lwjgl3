@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This example extracts the register usage of a fragment shader within a particular graphics pipeline:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * extern VkDevice device;
  * extern VkPipeline gfxPipeline;
  * 
@@ -43,22 +43,22 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     gfxPipeline,
  *     VK_SHADER_STAGE_FRAGMENT_BIT,
  *     VK_SHADER_INFO_TYPE_STATISTICS_AMD,
- *     &dataSize,
- *     &statistics) == VK_SUCCESS)
+ *     &amp;dataSize,
+ *     &amp;statistics) == VK_SUCCESS)
  * {
  *     printf("VGPR usage: %d\n", statistics.resourceUsage.numUsedVgprs);
  *     printf("SGPR usage: %d\n", statistics.resourceUsage.numUsedSgprs);
- * }</pre></code>
+ * }</code></pre>
  * 
  * <p>The following example continues the previous example by subsequently attempting to query and print shader disassembly about the fragment shader:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * // Query disassembly size (if available)
  * if (pfnGetShaderInfoAMD(device,
  *     gfxPipeline,
  *     VK_SHADER_STAGE_FRAGMENT_BIT,
  *     VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
- *     &dataSize,
+ *     &amp;dataSize,
  *     nullptr) == VK_SUCCESS)
  * {
  *     printf("Fragment shader disassembly:\n");
@@ -70,14 +70,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *         gfxPipeline,
  *         VK_SHADER_STAGE_FRAGMENT_BIT,
  *         VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
- *         &dataSize,
+ *         &amp;dataSize,
  *         disassembly) == VK_SUCCESS)
  *     {
  *         printf((char*)disassembly);
  *     }
  * 
  *     free(disassembly);
- * }</pre></code>
+ * }</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -162,14 +162,14 @@ public class AMDShaderInfo {
      * 
      * <p>Information about a particular shader that has been compiled as part of a pipeline object can be extracted by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetShaderInfoAMD(
      *     VkDevice                                    device,
      *     VkPipeline                                  pipeline,
      *     VkShaderStageFlagBits                       shaderStage,
      *     VkShaderInfoTypeAMD                         infoType,
      *     size_t*                                     pInfoSize,
-     *     void*                                       pInfo);</pre></code>
+     *     void*                                       pInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 

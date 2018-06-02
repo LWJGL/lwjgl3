@@ -19,8 +19,8 @@ import static org.lwjgl.system.Checks.*;
  * center towards the edges. This is achieved by scaling the "w" coordinate of the vertices in the clip space before perspective divide. The clip space
  * "w" coordinate of the vertices may be offset as of a function of "x" and "y" coordinates as follows:</p>
  * 
- * <code><pre>
- * w' = w + Ax + By</pre></code>
+ * <pre><code>
+ * w' = w + Ax + By</code></pre>
  * 
  * <p>In the intended use case for viewport position scaling, an application should use a set of 4 viewports, one for each of the 4 quadrants of a Cartesian
  * coordinate system. Each viewport is set to the dimension of the image, but is scissored to the quadrant it represents. The application should specify A
@@ -59,8 +59,8 @@ public class NVClipSpaceWScaling {
      * If {@link #GL_VIEWPORT_POSITION_W_SCALE_NV VIEWPORT_POSITION_W_SCALE_NV} is enabled, the w coordinates for each primitive sent to a given viewport will be scaled as a function of its x and y
      * coordinates using the following equation:
      * 
-     * <code><pre>
-     * w' = xcoeff * x + ycoeff * y + w;</pre></code>
+     * <pre><code>
+     * w' = xcoeff * x + ycoeff * y + w;</code></pre>
      * 
      * <p>The coefficients for "x" and "y" used in the above equation depend on the viewport index, and are controlled by this command.</p>
      * 

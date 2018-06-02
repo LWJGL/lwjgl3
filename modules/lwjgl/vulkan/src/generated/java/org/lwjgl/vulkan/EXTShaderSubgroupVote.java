@@ -34,23 +34,23 @@ package org.lwjgl.vulkan;
  * 
  * <p>Compute shaders operate on an explicitly specified group of threads (a local workgroup), but many implementations will also group non-compute shader invocations and execute them concurrently. When executing code like</p>
  * 
- * <code><pre>
+ * <pre><code>
  * if (condition) {
  *   result = do_fast_path();
  * } else {
  *   result = do_general_path();
- * }</pre></code>
+ * }</code></pre>
  * 
  * <p>where {@code condition} diverges between invocations, an implementation might first execute {@code do_fast_path}() for the invocations where {@code condition} is true and leave the other invocations dormant. Once {@code do_fast_path}() returns, it might call {@code do_general_path}() for invocations where {@code condition} is {@code false} and leave the other invocations dormant. In this case, the shader executes <b>both</b> the fast and the general path and might be better off just using the general path for all invocations.</p>
  * 
  * <p>This extension provides the ability to avoid divergent execution by evaluating a condition across an entire subgroup using code like:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * if (allInvocationsARB(condition)) {
  *   result = do_fast_path();
  * } else {
  *   result = do_general_path();
- * }</pre></code>
+ * }</code></pre>
  * 
  * <p>The built-in function {@code allInvocationsARB}() will return the same value for all invocations in the group, so the group will either execute {@code do_fast_path}() or {@code do_general_path}(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation of the result and then refining the approximation. Some input values may require a small number of iterations to generate an accurate result ({@code do_fast_path}) while others require a larger number ({@code do_general_path}). In another example, shader code might want to evaluate a complex function ({@code do_general_path}) that can be greatly simplified when assuming a specific value for one of its inputs ({@code do_fast_path}).</p>
  * 

@@ -40,13 +40,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiExportDataBlob {
  *     size_t size;
  *     void * data;
  *     {@link AIString struct aiString} name;
  *     {@link AIExportDataBlob struct aiExportDataBlob} * next;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiExportDataBlob")
 public class AIExportDataBlob extends Struct implements NativeResource {
@@ -54,6 +54,7 @@ public class AIExportDataBlob extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

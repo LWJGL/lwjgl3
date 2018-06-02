@@ -52,9 +52,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
         https://github.com/NVIDIAGameWorks/GraphicsSamples/tree/master/samples/vk10-kepler/BasicDeviceGeneratedCommandsVk
 
-        <code><pre>
+        <pre><code>
 ￿  // setup secondary command buffer
-￿    vkBeginCommandBuffer(generatedCmdBuffer, &beginInfo);
+￿    vkBeginCommandBuffer(generatedCmdBuffer, &amp;beginInfo);
 ￿    ... setup its state as usual
 ￿
 ￿  // insert the reservation (there can only be one per command buffer)
@@ -63,7 +63,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 ￿    reserveInfo.objectTable = objectTable;
 ￿    reserveInfo.indirectCommandsLayout = deviceGeneratedLayout;
 ￿    reserveInfo.maxSequencesCount = myCount;
-￿    vkCmdReserveSpaceForCommandsNVX(generatedCmdBuffer, &reserveInfo);
+￿    vkCmdReserveSpaceForCommandsNVX(generatedCmdBuffer, &amp;reserveInfo);
 ￿
 ￿    vkEndCommandBuffer(generatedCmdBuffer);
 ￿
@@ -91,10 +91,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 ￿                         // dstStageMaskVK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX,
 ￿                         // dependencyFlags0,
 ￿                         // memoryBarrierCount1,
-￿                         // pMemoryBarriers&memoryBarrier,
+￿                         // pMemoryBarriers&amp;memoryBarrier,
 ￿                         ...);
 ￿
-￿    vkCmdProcessCommandsNVX(mainCmd, &processInfo);
+￿    vkCmdProcessCommandsNVX(mainCmd, &amp;processInfo);
 ￿    ...
 ￿  // execute the secondary command buffer and ensure the processing that modifies command-buffer content
 ￿  // has completed
@@ -107,9 +107,9 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 ￿                         // dstStageMaskVK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
 ￿                         // dependencyFlags0,
 ￿                         // memoryBarrierCount1,
-￿                         // pMemoryBarriers&memoryBarrier,
+￿                         // pMemoryBarriers&amp;memoryBarrier,
 ￿                         ...)
-￿    vkCmdExecuteCommands(mainCmd, 1, &generatedCmdBuffer);</pre></code>
+￿    vkCmdExecuteCommands(mainCmd, 1, &amp;generatedCmdBuffer);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -300,10 +300,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         The actual generation on the device is handled with:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdProcessCommandsNVX(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkCmdProcessCommandsInfoNVX*          pProcessCommandsInfo);</pre></code>
+￿    const VkCmdProcessCommandsInfoNVX*          pProcessCommandsInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -342,10 +342,10 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         Command space for generated commands recorded into a secondary command buffer <b>must</b> be reserved by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdReserveSpaceForCommandsNVX(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkCmdReserveSpaceForCommandsInfoNVX*  pReserveSpaceInfo);</pre></code>
+￿    const VkCmdReserveSpaceForCommandsInfoNVX*  pReserveSpaceInfo);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -391,12 +391,12 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         Indirect command layouts are created by:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateIndirectCommandsLayoutNVX(
 ￿    VkDevice                                    device,
 ￿    const VkIndirectCommandsLayoutCreateInfoNVX* pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkIndirectCommandsLayoutNVX*                pIndirectCommandsLayout);</pre></code>
+￿    VkIndirectCommandsLayoutNVX*                pIndirectCommandsLayout);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -438,11 +438,11 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         Indirect command layouts are destroyed by:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroyIndirectCommandsLayoutNVX(
 ￿    VkDevice                                    device,
 ￿    VkIndirectCommandsLayoutNVX                 indirectCommandsLayout,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -476,12 +476,12 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         To create object tables, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateObjectTableNVX(
 ￿    VkDevice                                    device,
 ￿    const VkObjectTableCreateInfoNVX*           pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkObjectTableNVX*                           pObjectTable);</pre></code>
+￿    VkObjectTableNVX*                           pObjectTable);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -523,11 +523,11 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         To destroy an object table, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroyObjectTableNVX(
 ￿    VkDevice                                    device,
 ￿    VkObjectTableNVX                            objectTable,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -566,13 +566,13 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         Resource bindings of Vulkan objects are registered at an arbitrary ftext:uint32_t index within an object table. As long as the object table references such objects, they <b>must</b> not be deleted.
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkRegisterObjectsNVX(
 ￿    VkDevice                                    device,
 ￿    VkObjectTableNVX                            objectTable,
 ￿    uint32_t                                    objectCount,
 ￿    const VkObjectTableEntryNVX* const*         ppObjectTableEntries,
-￿    const uint32_t*                             pObjectIndices);</pre></code>
+￿    const uint32_t*                             pObjectIndices);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -629,13 +629,13 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         Use the following command to unregister resources from an object table:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkUnregisterObjectsNVX(
 ￿    VkDevice                                    device,
 ￿    VkObjectTableNVX                            objectTable,
 ￿    uint32_t                                    objectCount,
 ￿    const VkObjectEntryTypeNVX*                 pObjectEntryTypes,
-￿    const uint32_t*                             pObjectIndices);</pre></code>
+￿    const uint32_t*                             pObjectIndices);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -689,11 +689,11 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <h5>C Specification</h5>
         To query the support of related features and limitations, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkDeviceGeneratedCommandsFeaturesNVX*       pFeatures,
-￿    VkDeviceGeneratedCommandsLimitsNVX*         pLimits);</pre></code>
+￿    VkDeviceGeneratedCommandsLimitsNVX*         pLimits);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

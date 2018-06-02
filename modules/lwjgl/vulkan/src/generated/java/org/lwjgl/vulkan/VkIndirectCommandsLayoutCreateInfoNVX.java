@@ -23,23 +23,23 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The following code illustrates some of the key flags:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * void cmdProcessAllSequences(cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequencesCount, indexbuffer, indexbufferoffset)
  * {
- *   for (s = 0; s < sequencesCount; s++)
+ *   for (s = 0; s &lt; sequencesCount; s++)
  *   {
  *     sequence = s;
  * 
- *     if (indirectCommandsLayout.flags & VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX) {
+ *     if (indirectCommandsLayout.flags &amp; VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX) {
  *       sequence = incoherent_implementation_dependent_permutation[ sequence ];
  *     }
- *     if (indirectCommandsLayout.flags & VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX) {
+ *     if (indirectCommandsLayout.flags &amp; VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX) {
  *       sequence = indexbuffer.load_uint32( sequence * sizeof(uint32_t) + indexbufferoffset);
  *     }
  * 
  *     cmdProcessSequence( cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequence );
  *   }
- * }</pre></code>
+ * }</code></pre>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -80,7 +80,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkIndirectCommandsLayoutCreateInfoNVX {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -88,13 +88,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkIndirectCommandsLayoutUsageFlagsNVX flags;
  *     uint32_t tokenCount;
  *     {@link VkIndirectCommandsLayoutTokenNVX VkIndirectCommandsLayoutTokenNVX const} * pTokens;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

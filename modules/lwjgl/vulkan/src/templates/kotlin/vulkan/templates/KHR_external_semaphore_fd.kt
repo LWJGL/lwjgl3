@@ -80,10 +80,10 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
         <h5>C Specification</h5>
         To import a semaphore payload from a POSIX file descriptor, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkImportSemaphoreFdKHR(
 ￿    VkDevice                                    device,
-￿    const VkImportSemaphoreFdInfoKHR*           pImportSemaphoreFdInfo);</pre></code>
+￿    const VkImportSemaphoreFdInfoKHR*           pImportSemaphoreFdInfo);</code></pre>
 
         <h5>Description</h5>
         Importing a semaphore payload from a file descriptor transfers ownership of the file descriptor from the application to the Vulkan implementation. The application <b>must</b> not perform any operations on the file descriptor after a successful import.
@@ -131,11 +131,11 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
         <h5>C Specification</h5>
         To export a POSIX file descriptor representing the payload of a semaphore, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetSemaphoreFdKHR(
 ￿    VkDevice                                    device,
 ￿    const VkSemaphoreGetFdInfoKHR*              pGetFdInfo,
-￿    int*                                        pFd);</pre></code>
+￿    int*                                        pFd);</code></pre>
 
         <h5>Description</h5>
         Each call to #GetSemaphoreFdKHR() <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.

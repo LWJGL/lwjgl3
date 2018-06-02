@@ -90,12 +90,12 @@ val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_extern
         <h5>C Specification</h5>
         To determine the correct parameters to use when importing host pointers, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetMemoryHostPointerPropertiesEXT(
 ￿    VkDevice                                    device,
 ￿    VkExternalMemoryHandleTypeFlagBits          handleType,
 ￿    const void*                                 pHostPointer,
-￿    VkMemoryHostPointerPropertiesEXT*           pMemoryHostPointerProperties);</pre></code>
+￿    VkMemoryHostPointerPropertiesEXT*           pMemoryHostPointerProperties);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_text_edit {
  *     {@link NkClipboard struct nk_clipboard} clip;
  *     {@link NkStr struct nk_str} string;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char[1];
  *     float preferred_x;
  *     {@link NkTextUndoState struct nk_text_undo_state} undo;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_text_edit")
 class NkTextEdit extends Struct implements NativeResource {
@@ -44,6 +44,7 @@ class NkTextEdit extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

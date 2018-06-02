@@ -54,8 +54,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * DrawBuffer or DrawBuffers API commands.</li>
  * </ul></li>
  * <li>Added new built-in functions truncate() and round() to the shading language.</li>
- * <li>A new built-in variable accessible from within vertex shaders that holds the index <i> implicitly passed to ArrayElement to specify the vertex.
- * This is called the vertex ID.</li>
+ * <li>A new built-in variable accessible from within vertex shaders that holds the index {@code i} implicitly passed to ArrayElement to specify the
+ * vertex. This is called the vertex ID.</li>
  * <li>A new built-in variable accessible from within fragment and geometry shaders that hold the index of the currently processed primitive. This is
  * called the primitive ID.</li>
  * </ul>

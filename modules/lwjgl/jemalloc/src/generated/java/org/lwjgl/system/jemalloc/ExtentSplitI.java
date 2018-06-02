@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * bool (*) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
@@ -23,7 +23,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     size_t size_b,
  *     bool committed,
  *     unsigned int arena_ind
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("extent_split_t")
@@ -54,14 +54,6 @@ public interface ExtentSplitI extends CallbackI.Z {
      * adjacent extents, the first of {@code size_a} bytes, and the second of {@code size_b} bytes, operating on {@code committed}/decommitted memory as
      * indicated, on behalf of arena {@code arena_ind}, returning false upon success. If the function returns true, this indicates that the extent remains unsplit
      * and therefore should continue to be operated on as a whole.</p>
-     *
-     * @param extent_hooks 
-     * @param addr         
-     * @param size         
-     * @param size_a       
-     * @param size_b       
-     * @param committed    
-     * @param arena_ind    
      */
     @NativeType("bool") boolean invoke(@NativeType("extent_hooks_t *") long extent_hooks, @NativeType("void *") long addr, @NativeType("size_t") long size, @NativeType("size_t") long size_a, @NativeType("size_t") long size_b, @NativeType("bool") boolean committed, @NativeType("unsigned int") int arena_ind);
 

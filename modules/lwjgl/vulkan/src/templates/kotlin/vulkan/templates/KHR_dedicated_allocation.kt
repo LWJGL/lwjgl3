@@ -19,7 +19,7 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
-        <code><pre>
+        <pre><code>
 ￿    // Create an image with a dedicated allocation based on the
 ￿    // implementation's preference
 ￿
@@ -31,9 +31,9 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿    VkImage image;
 ￿    VkResult result = vkCreateImage(
 ￿        device,
-￿        &imageCreateInfo,
+￿        &amp;imageCreateInfo,
 ￿        NULL,                               // pAllocator
-￿        &image);
+￿        &amp;image);
 ￿
 ￿    VkMemoryDedicatedRequirementsKHR dedicatedRequirements =
 ￿    {
@@ -44,7 +44,7 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿    VkMemoryRequirements2 memoryRequirements =
 ￿    {
 ￿        VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2,
-￿        &dedicatedRequirements,             // pNext
+￿        &amp;dedicatedRequirements,             // pNext
 ￿    };
 ￿
 ￿    const VkImageMemoryRequirementsInfo2 imageRequirementsInfo =
@@ -56,8 +56,8 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿
 ￿    vkGetImageMemoryRequirements2(
 ￿        device,
-￿        &imageRequirementsInfo,
-￿        &memoryRequirements);
+￿        &amp;imageRequirementsInfo,
+￿        &amp;memoryRequirements);
 ￿
 ￿    if (dedicatedRequirements.prefersDedicatedAllocation) {
 ￿        // Allocate memory with VkMemoryDedicatedAllocateInfoKHR::image
@@ -74,7 +74,7 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿        VkMemoryAllocateInfo memoryAllocateInfo =
 ￿        {
 ￿            VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,                 // sType
-￿            &dedicatedInfo,                                         // pNext
+￿            &amp;dedicatedInfo,                                         // pNext
 ￿            memoryRequirements.size,                                // allocationSize
 ￿            FindMemoryTypeIndex(memoryRequirements.memoryTypeBits), // memoryTypeIndex
 ￿        };
@@ -82,9 +82,9 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿        VkDeviceMemory memory;
 ￿        vkAllocateMemory(
 ￿            device,
-￿            &memoryAllocateInfo,
+￿            &amp;memoryAllocateInfo,
 ￿            NULL,                       // pAllocator
-￿            &memory);
+￿            &amp;memory);
 ￿
 ￿        // Bind the image to the memory
 ￿
@@ -95,7 +95,7 @@ val KHR_dedicated_allocation = "KHRDedicatedAllocation".nativeClassVK("KHR_dedic
 ￿            0);
 ￿    } else {
 ￿        // Take the normal memory sub-allocation path
-￿    }</pre></code>
+￿    }</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

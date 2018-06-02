@@ -14,13 +14,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * unsigned char * (*) (
  *     unsigned char *data,
  *     int data_len,
  *     int *out_len,
  *     int quality
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("unsigned char * (*) (unsigned char *, int, int *, int)")

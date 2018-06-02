@@ -32,12 +32,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiExportFormatDesc {
  *     char const * id;
  *     char const * description;
  *     char const * fileExtension;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiExportFormatDesc")
 public class AIExportFormatDesc extends Struct implements NativeResource {
@@ -45,6 +45,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

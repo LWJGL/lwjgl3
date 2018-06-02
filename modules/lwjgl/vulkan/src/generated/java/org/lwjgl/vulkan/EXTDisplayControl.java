@@ -158,11 +158,11 @@ public class EXTDisplayControl {
      * 
      * <p>To set the power state of a display, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkDisplayPowerControlEXT(
      *     VkDevice                                    device,
      *     VkDisplayKHR                                display,
-     *     const VkDisplayPowerInfoEXT*                pDisplayPowerInfo);</pre></code>
+     *     const VkDisplayPowerInfoEXT*                pDisplayPowerInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -213,12 +213,12 @@ public class EXTDisplayControl {
      * 
      * <p>To create a fence that will be signaled when an event occurs on a device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkRegisterDeviceEventEXT(
      *     VkDevice                                    device,
      *     const VkDeviceEventInfoEXT*                 pDeviceEventInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkFence*                                    pFence);</pre></code>
+     *     VkFence*                                    pFence);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -274,13 +274,13 @@ public class EXTDisplayControl {
      * 
      * <p>To create a fence that will be signaled when an event occurs on a {@code VkDisplayKHR} object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkRegisterDisplayEventEXT(
      *     VkDevice                                    device,
      *     VkDisplayKHR                                display,
      *     const VkDisplayEventInfoEXT*                pDisplayEventInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkFence*                                    pFence);</pre></code>
+     *     VkFence*                                    pFence);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -337,12 +337,12 @@ public class EXTDisplayControl {
      * 
      * <p>The requested counters become active when the first presentation command for the associated swapchain is processed by the presentation engine. To query the value of an active counter, use:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetSwapchainCounterEXT(
      *     VkDevice                                    device,
      *     VkSwapchainKHR                              swapchain,
      *     VkSurfaceCounterFlagBitsEXT                 counter,
-     *     uint64_t*                                   pCounterValue);</pre></code>
+     *     uint64_t*                                   pCounterValue);</code></pre>
      * 
      * <h5>Description</h5>
      * 

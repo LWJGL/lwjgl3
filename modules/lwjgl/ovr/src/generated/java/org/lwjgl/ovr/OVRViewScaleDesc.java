@@ -40,11 +40,11 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrViewScaleDesc {
  *     {@link OVRPosef ovrPosef} HmdToEyePose[ovrEye_Count];
  *     float HmdSpaceToWorldScaleInMeters;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrViewScaleDesc")
 public class OVRViewScaleDesc extends Struct implements NativeResource {
@@ -52,6 +52,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

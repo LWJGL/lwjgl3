@@ -27,14 +27,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct NSVGpath {
  *     float * pts;
  *     int npts;
  *     char closed;
  *     float bounds[4];
  *     {@link NSVGPath NSVGpath} * next;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct NSVGpath")
 public class NSVGPath extends Struct {
@@ -42,6 +42,7 @@ public class NSVGPath extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

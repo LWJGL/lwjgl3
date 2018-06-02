@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct NSVGshape {
  *     char id[64];
  *     {@link NSVGPaint NSVGpaint} fill;
@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float bounds[4];
  *     {@link NSVGPath NSVGpath} * paths;
  *     {@link NSVGShape NSVGshape} * next;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct NSVGshape")
 public class NSVGShape extends Struct {
@@ -64,6 +64,7 @@ public class NSVGShape extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

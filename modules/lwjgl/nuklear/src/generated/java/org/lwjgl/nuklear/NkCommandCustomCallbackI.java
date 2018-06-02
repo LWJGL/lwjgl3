@@ -12,7 +12,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     void *canvas,
  *     short x,
@@ -20,7 +20,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     unsigned short w,
  *     unsigned short h,
  *     nk_handle callback_data
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("nk_command_custom_callback")

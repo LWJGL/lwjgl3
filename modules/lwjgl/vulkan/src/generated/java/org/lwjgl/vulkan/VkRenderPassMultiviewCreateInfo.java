@@ -67,7 +67,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkRenderPassMultiviewCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -77,13 +77,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int32_t const * pViewOffsets;
  *     uint32_t correlationMaskCount;
  *     uint32_t const * pCorrelationMasks;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkRenderPassMultiviewCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

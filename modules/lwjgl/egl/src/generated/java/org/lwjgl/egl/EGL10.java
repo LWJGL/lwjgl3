@@ -514,9 +514,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglChooseConfig.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglChooseConfig ChooseConfig}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglChooseConfig.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
     public static boolean eglChooseConfig(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLint const *") int[] attrib_list, @Nullable @NativeType("EGLConfig *") PointerBuffer configs, @NativeType("EGLint *") int[] num_config) {
@@ -531,9 +531,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateContext.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglCreateContext CreateContext}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateContext.xhtml">Reference Page</a>
      */
     @NativeType("EGLContext")
     public static long eglCreateContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLContext") long share_context, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
@@ -548,9 +548,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferSurface.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglCreatePbufferSurface CreatePbufferSurface}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferSurface.xhtml">Reference Page</a>
      */
     @NativeType("EGLSurface")
     public static long eglCreatePbufferSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
@@ -565,9 +565,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePixmapSurface.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglCreatePixmapSurface CreatePixmapSurface}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePixmapSurface.xhtml">Reference Page</a>
      */
     @NativeType("EGLSurface")
     public static long eglCreatePixmapSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLNativePixmapType") long pixmap, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
@@ -583,9 +583,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateWindowSurface.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglCreateWindowSurface CreateWindowSurface}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateWindowSurface.xhtml">Reference Page</a>
      */
     @NativeType("EGLSurface")
     public static long eglCreateWindowSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLNativeWindowType") long win, @Nullable @NativeType("EGLint const *") int[] attrib_list) {
@@ -601,9 +601,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigAttrib.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglGetConfigAttrib GetConfigAttrib}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigAttrib.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
     public static boolean eglGetConfigAttrib(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
@@ -618,9 +618,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigs.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglGetConfigs GetConfigs}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigs.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
     public static boolean eglGetConfigs(@NativeType("EGLDisplay") long dpy, @Nullable @NativeType("EGLConfig *") PointerBuffer configs, @NativeType("EGLint *") int[] num_config) {
@@ -634,9 +634,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglInitialize Initialize}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
     public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint *") int[] major, @NativeType("EGLint *") int[] minor) {
@@ -651,9 +651,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryContext.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglQueryContext QueryContext}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryContext.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
     public static boolean eglQueryContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
@@ -668,9 +668,9 @@ public class EGL10 {
     }
 
     /**
-     * <p><a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQuerySurface.xhtml">Reference Page</a></p>
-     * 
      * Array version of: {@link #eglQuerySurface QuerySurface}
+     * 
+     * @see <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQuerySurface.xhtml">Reference Page</a>
      */
     @NativeType("EGLBoolean")
     public static boolean eglQuerySurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {

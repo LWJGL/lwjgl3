@@ -27,10 +27,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_allocator_vtbl_t {
  *     void * (*{@link BGFXReallocCallbackI realloc}) (bgfx_allocator_interface_t *_this, void *_ptr, size_t _size, size_t _align, char *_file, uint32_t _line);
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_allocator_vtbl_t")
 public class BGFXAllocatorVtbl extends Struct implements NativeResource {
@@ -38,6 +38,7 @@ public class BGFXAllocatorVtbl extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

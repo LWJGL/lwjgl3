@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPipelineShaderStageCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -80,13 +80,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkShaderModule module;
  *     char const * pName;
  *     {@link VkSpecializationInfo VkSpecializationInfo const} * pSpecializationInfo;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPipelineShaderStageCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_config_stack_user_font_element {
  *     {@link NkUserFont struct nk_user_font} ** pValues;
  *     {@link NkUserFont struct nk_user_font} * old_value;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_user_font_element")
 class NkConfigStackUserFontElement extends Struct {
@@ -29,6 +29,7 @@ class NkConfigStackUserFontElement extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

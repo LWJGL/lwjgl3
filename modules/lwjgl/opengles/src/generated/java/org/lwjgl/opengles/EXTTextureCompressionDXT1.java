@@ -17,7 +17,8 @@ package org.lwjgl.opengles;
  * <p>However, EXT_texture_compression_s3tc specifies functionality that is burdensome for an OpenGL-ES implementation. In particular it requires that the
  * driver provide the capability to compress textures into S3TC texture formats, as an S3TC texture format is accepted as the {@code internalformat}
  * parameter of TexImage2D and CopyTexImage2D. Further, EXT_texture_compression_s3tc may require conversion from one S3TC format to another during
- * CompressedTexSubImage2D if the {@code format} parameter does not match the <internalformat> of the texture image previously created by TexImage2D.</p>
+ * CompressedTexSubImage2D if the {@code format} parameter does not match the {@code internalformat} of the texture image previously created by
+ * TexImage2D.</p>
  * 
  * <p>In an OpenGL-ES implementation it is therefore advantageous to support a limited subset of EXT_texture_compression_s3tc: Restrict supported texture
  * formats to DXT1 and restrict supported operations to those that do not require texture compression into an S3TC texture format or decompression from an

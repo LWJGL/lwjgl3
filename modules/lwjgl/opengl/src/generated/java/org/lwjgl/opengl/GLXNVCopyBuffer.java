@@ -29,16 +29,7 @@ public class GLXNVCopyBuffer {
 
     // --- [ glXCopyBufferSubDataNV ] ---
 
-    /**
-     * @param display     the connection to the X server
-     * @param readCtx     
-     * @param writeCtx    
-     * @param readTarget  
-     * @param writeTarget 
-     * @param readOffset  
-     * @param writeOffset 
-     * @param size        
-     */
+    /** @param display the connection to the X server */
     public static void glXCopyBufferSubDataNV(@NativeType("Display *") long display, @NativeType("GLXContext") long readCtx, @NativeType("GLXContext") long writeCtx, @NativeType("GLenum") int readTarget, @NativeType("GLenum") int writeTarget, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXCopyBufferSubDataNV;
         if (CHECKS) {
@@ -52,16 +43,7 @@ public class GLXNVCopyBuffer {
 
     // --- [ glXNamedCopyBufferSubDataNV ] ---
 
-    /**
-     * @param display     the connection to the X server
-     * @param readCtx     
-     * @param writeCtx    
-     * @param readBuffer  
-     * @param writeBuffer 
-     * @param readOffset  
-     * @param writeOffset 
-     * @param size        
-     */
+    /** @param display the connection to the X server */
     public static void glXNamedCopyBufferSubDataNV(@NativeType("Display *") long display, @NativeType("GLXContext") long readCtx, @NativeType("GLXContext") long writeCtx, @NativeType("GLuint") int readBuffer, @NativeType("GLuint") int writeBuffer, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXNamedCopyBufferSubDataNV;
         if (CHECKS) {

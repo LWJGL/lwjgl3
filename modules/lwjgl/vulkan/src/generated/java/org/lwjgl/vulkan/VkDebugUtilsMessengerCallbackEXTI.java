@@ -16,12 +16,12 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <p>The prototype for the {@link VkDebugUtilsMessengerCreateInfoEXT}{@code ::pfnUserCallback} function implemented by the application is:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef VkBool32 (VKAPI_PTR *PFN_vkDebugUtilsMessengerCallbackEXT)(
  *     VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
  *     VkDebugUtilsMessageTypeFlagsEXT                  messageType,
  *     const VkDebugUtilsMessengerCallbackDataEXT*      pCallbackData,
- *     void*                                            pUserData);</pre></code>
+ *     void*                                            pUserData);</code></pre>
  * 
  * <h5>Description</h5>
  * 
@@ -56,7 +56,6 @@ public interface VkDebugUtilsMessengerCallbackEXTI extends CallbackI.I {
      * Application-defined debug messenger callback function.
      *
      * @param messageSeverity specifies the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} that triggered this callback.
-     * @param messageType     
      * @param pCallbackData   contains all the callback related data in the {@link VkDebugUtilsMessengerCallbackDataEXT} structure.
      * @param pUserData       the user data provided when the {@code VkDebugUtilsMessengerEXT} was created.
      */

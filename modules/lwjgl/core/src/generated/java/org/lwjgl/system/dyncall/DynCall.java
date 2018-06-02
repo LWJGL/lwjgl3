@@ -347,7 +347,6 @@ public class DynCall {
      * Binds a struct argument.
      *
      * @param vm    a {@code CallVM} instance
-     * @param s     
      * @param value the argument value
      */
     public static void dcArgStruct(@NativeType("DCCallVM *") long vm, @NativeType("DCstruct *") long s, @NativeType("DCpointer") long value) {
@@ -600,10 +599,8 @@ public class DynCall {
      * <p>After the invocation of the foreign function call, the argument values are still bound and a second call using the same arguments can be issued. If you
      * need to clear the argument bindings, you have to reset the {@code CallVM}.</p>
      *
-     * @param vm          a {@code CallVM} instance
-     * @param funcptr     the function pointer
-     * @param s           
-     * @param returnValue 
+     * @param vm      a {@code CallVM} instance
+     * @param funcptr the function pointer
      */
     public static void dcCallStruct(@NativeType("DCCallVM *") long vm, @NativeType("DCpointer") long funcptr, @NativeType("DCstruct *") long s, @NativeType("DCpointer") long returnValue) {
         if (CHECKS) {

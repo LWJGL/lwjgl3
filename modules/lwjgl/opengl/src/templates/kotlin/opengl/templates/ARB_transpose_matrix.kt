@@ -42,8 +42,7 @@ val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_mat
             tr(td("a1"), td("a2"), td("a3"), td("a4")),
             tr(td("a5"), td("a6"), td("a7"), td("a8")),
             tr(td("a9"), td("a10"), td("a11"), td("a12")),
-            tr(td("a13"), td("a14"), td("a15"), td("a16")),
-            matrix = true
+            tr(td("a13"), td("a14"), td("a15"), td("a16"))
         )}
         """,
 

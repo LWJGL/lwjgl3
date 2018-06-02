@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Command structures</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * typedef struct {
  *   uint  header;
  * } TerminateSequenceCommandNV;
@@ -150,7 +150,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * typedef struct {
  *   uint  header;
  *   uint  frontFace; // 0 for CW, 1 for CCW
- * } FrontFaceCommandNV;</pre></code>
+ * } FrontFaceCommandNV;</code></pre>
  * 
  * <p>Tight packing is used for all structures.</p>
  */

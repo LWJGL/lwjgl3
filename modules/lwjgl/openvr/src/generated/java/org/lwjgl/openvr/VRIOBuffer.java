@@ -34,11 +34,7 @@ public class VRIOBuffer {
     /**
      * Opens an existing or creates a new {@code IOBuffer} of {@code unSize} bytes.
      *
-     * @param pchPath       
-     * @param mode          one of:<br><table><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Read}</td><td>{@link VR#EIOBufferMode_IOBufferMode_Write}</td></tr><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Create}</td></tr></table>
-     * @param unElementSize 
-     * @param unElements    
-     * @param pulBuffer     
+     * @param mode one of:<br><table><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Read}</td><td>{@link VR#EIOBufferMode_IOBufferMode_Write}</td></tr><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Create}</td></tr></table>
      */
     @NativeType("EIOBufferError")
     public static int VRIOBuffer_Open(@NativeType("char const *") ByteBuffer pchPath, @NativeType("EIOBufferMode") int mode, @NativeType("uint32_t") int unElementSize, @NativeType("uint32_t") int unElements, @NativeType("IOBufferHandle_t *") LongBuffer pulBuffer) {
@@ -52,11 +48,7 @@ public class VRIOBuffer {
     /**
      * Opens an existing or creates a new {@code IOBuffer} of {@code unSize} bytes.
      *
-     * @param pchPath       
-     * @param mode          one of:<br><table><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Read}</td><td>{@link VR#EIOBufferMode_IOBufferMode_Write}</td></tr><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Create}</td></tr></table>
-     * @param unElementSize 
-     * @param unElements    
-     * @param pulBuffer     
+     * @param mode one of:<br><table><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Read}</td><td>{@link VR#EIOBufferMode_IOBufferMode_Write}</td></tr><tr><td>{@link VR#EIOBufferMode_IOBufferMode_Create}</td></tr></table>
      */
     @NativeType("EIOBufferError")
     public static int VRIOBuffer_Open(@NativeType("char const *") CharSequence pchPath, @NativeType("EIOBufferMode") int mode, @NativeType("uint32_t") int unElementSize, @NativeType("uint32_t") int unElements, @NativeType("IOBufferHandle_t *") LongBuffer pulBuffer) {
@@ -74,11 +66,7 @@ public class VRIOBuffer {
 
     // --- [ VRIOBuffer_Close ] ---
 
-    /**
-     * Closes a previously opened or created buffer.
-     *
-     * @param ulBuffer 
-     */
+    /** Closes a previously opened or created buffer. */
     @NativeType("EIOBufferError")
     public static int VRIOBuffer_Close(@NativeType("IOBufferHandle_t") long ulBuffer) {
         long __functionAddress = OpenVR.VRIOBuffer.Close;
@@ -99,13 +87,7 @@ public class VRIOBuffer {
         return callJPPI(__functionAddress, ulBuffer, pDst, unBytes, punRead);
     }
 
-    /**
-     * Reads up to {@code unBytes} from buffer into {@code *pDst}, returning number of bytes read in {@code *punRead}
-     *
-     * @param ulBuffer 
-     * @param pDst     
-     * @param punRead  
-     */
+    /** Reads up to {@code unBytes} from buffer into {@code *pDst}, returning number of bytes read in {@code *punRead} */
     @NativeType("EIOBufferError")
     public static int VRIOBuffer_Read(@NativeType("IOBufferHandle_t") long ulBuffer, @NativeType("void *") ByteBuffer pDst, @NativeType("uint32_t *") IntBuffer punRead) {
         if (CHECKS) {
@@ -125,12 +107,7 @@ public class VRIOBuffer {
         return callJPI(__functionAddress, ulBuffer, pSrc, unBytes);
     }
 
-    /**
-     * Writes {@code unBytes} of data from {@code *pSrc} into a buffer.
-     *
-     * @param ulBuffer 
-     * @param pSrc     
-     */
+    /** Writes {@code unBytes} of data from {@code *pSrc} into a buffer. */
     @NativeType("EIOBufferError")
     public static int VRIOBuffer_Write(@NativeType("IOBufferHandle_t") long ulBuffer, @NativeType("void *") ByteBuffer pSrc) {
         return nVRIOBuffer_Write(ulBuffer, memAddress(pSrc), pSrc.remaining());
@@ -138,11 +115,7 @@ public class VRIOBuffer {
 
     // --- [ VRIOBuffer_PropertyContainer ] ---
 
-    /**
-     * Retrieves the property container of a buffer.
-     *
-     * @param ulBuffer 
-     */
+    /** Retrieves the property container of a buffer. */
     @NativeType("PropertyContainerHandle_t")
     public static long VRIOBuffer_PropertyContainer(@NativeType("IOBufferHandle_t") long ulBuffer) {
         long __functionAddress = OpenVR.VRIOBuffer.PropertyContainer;

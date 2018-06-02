@@ -39,8 +39,6 @@ public class VRInput {
      * {@link VR#EVRInputError_VRInputError_MismatchedActionManifest} is returned.
      * 
      * <p>This call must be made before the first call to {@link #VRInput_UpdateActionState UpdateActionState} or {@link VRSystem#VRSystem_PollNextEvent PollNextEvent}.</p>
-     *
-     * @param pchActionManifestPath 
      */
     @NativeType("EVRInputError")
     public static int VRInput_SetActionManifestPath(@NativeType("char const *") ByteBuffer pchActionManifestPath) {
@@ -56,8 +54,6 @@ public class VRInput {
      * {@link VR#EVRInputError_VRInputError_MismatchedActionManifest} is returned.
      * 
      * <p>This call must be made before the first call to {@link #VRInput_UpdateActionState UpdateActionState} or {@link VRSystem#VRSystem_PollNextEvent PollNextEvent}.</p>
-     *
-     * @param pchActionManifestPath 
      */
     @NativeType("EVRInputError")
     public static int VRInput_SetActionManifestPath(@NativeType("char const *") CharSequence pchActionManifestPath) {
@@ -81,12 +77,7 @@ public class VRInput {
         return callPPI(__functionAddress, pchActionSetName, pHandle);
     }
 
-    /**
-     * Returns a handle for an action set. This handle is used for all performance-sensitive calls.
-     *
-     * @param pchActionSetName 
-     * @param pHandle          
-     */
+    /** Returns a handle for an action set. This handle is used for all performance-sensitive calls. */
     @NativeType("EVRInputError")
     public static int VRInput_GetActionSetHandle(@NativeType("char const *") ByteBuffer pchActionSetName, @NativeType("VRActionSetHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -96,12 +87,7 @@ public class VRInput {
         return nVRInput_GetActionSetHandle(memAddress(pchActionSetName), memAddress(pHandle));
     }
 
-    /**
-     * Returns a handle for an action set. This handle is used for all performance-sensitive calls.
-     *
-     * @param pchActionSetName 
-     * @param pHandle          
-     */
+    /** Returns a handle for an action set. This handle is used for all performance-sensitive calls. */
     @NativeType("EVRInputError")
     public static int VRInput_GetActionSetHandle(@NativeType("char const *") CharSequence pchActionSetName, @NativeType("VRActionSetHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -127,12 +113,7 @@ public class VRInput {
         return callPPI(__functionAddress, pchActionName, pHandle);
     }
 
-    /**
-     * Returns a handle for an action. This handle is used for all performance-sensitive calls.
-     *
-     * @param pchActionName 
-     * @param pHandle       
-     */
+    /** Returns a handle for an action. This handle is used for all performance-sensitive calls. */
     @NativeType("EVRInputError")
     public static int VRInput_GetActionHandle(@NativeType("char const *") ByteBuffer pchActionName, @NativeType("VRActionHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -142,12 +123,7 @@ public class VRInput {
         return nVRInput_GetActionHandle(memAddress(pchActionName), memAddress(pHandle));
     }
 
-    /**
-     * Returns a handle for an action. This handle is used for all performance-sensitive calls.
-     *
-     * @param pchActionName 
-     * @param pHandle       
-     */
+    /** Returns a handle for an action. This handle is used for all performance-sensitive calls. */
     @NativeType("EVRInputError")
     public static int VRInput_GetActionHandle(@NativeType("char const *") CharSequence pchActionName, @NativeType("VRActionHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -173,12 +149,7 @@ public class VRInput {
         return callPPI(__functionAddress, pchInputSourcePath, pHandle);
     }
 
-    /**
-     * Returns a handle for any path in the input system. E.g. {@code /user/hand/right}.
-     *
-     * @param pchInputSourcePath 
-     * @param pHandle            
-     */
+    /** Returns a handle for any path in the input system. E.g. {@code /user/hand/right}. */
     @NativeType("EVRInputError")
     public static int VRInput_GetInputSourceHandle(@NativeType("char const *") ByteBuffer pchInputSourcePath, @NativeType("VRInputValueHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -188,12 +159,7 @@ public class VRInput {
         return nVRInput_GetInputSourceHandle(memAddress(pchInputSourcePath), memAddress(pHandle));
     }
 
-    /**
-     * Returns a handle for any path in the input system. E.g. {@code /user/hand/right}.
-     *
-     * @param pchInputSourcePath 
-     * @param pHandle            
-     */
+    /** Returns a handle for any path in the input system. E.g. {@code /user/hand/right}. */
     @NativeType("EVRInputError")
     public static int VRInput_GetInputSourceHandle(@NativeType("char const *") CharSequence pchInputSourcePath, @NativeType("VRInputValueHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -222,9 +188,6 @@ public class VRInput {
     /**
      * Reads the current state into all actions. After this call, the results of {@code Get*Action} calls will be the same until the next call to
      * {@code UpdateActionState}.
-     *
-     * @param pSets                         
-     * @param unSizeOfVRSelectedActionSet_t 
      */
     @NativeType("EVRInputError")
     public static int VRInput_UpdateActionState(@NativeType("VRActiveActionSet_t *") VRActiveActionSet.Buffer pSets, @NativeType("uint32_t") int unSizeOfVRSelectedActionSet_t) {
@@ -245,9 +208,6 @@ public class VRInput {
     /**
      * Reads the state of a digital action given its handle. This will return {@link VR#EVRInputError_VRInputError_WrongType} if the type of action is something other
      * than digital.
-     *
-     * @param action      
-     * @param pActionData 
      */
     @NativeType("EVRInputError")
     public static int VRInput_GetDigitalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputDigitalActionData_t *") InputDigitalActionData.Buffer pActionData) {
@@ -268,9 +228,6 @@ public class VRInput {
     /**
      * Reads the state of an analog action given its handle. This will return {@link VR#EVRInputError_VRInputError_WrongType} if the type of action is something other
      * than analog.
-     *
-     * @param action      
-     * @param pActionData 
      */
     @NativeType("EVRInputError")
     public static int VRInput_GetAnalogActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputAnalogActionData_t *") InputAnalogActionData.Buffer pActionData) {
@@ -291,10 +248,7 @@ public class VRInput {
     /**
      * Reads the state of a pose action given its handle.
      *
-     * @param action                   
-     * @param eOrigin                  one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
-     * @param fPredictedSecondsFromNow 
-     * @param pActionData              
+     * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
      */
     @NativeType("EVRInputError")
     public static int VRInput_GetPoseActionData(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData.Buffer pActionData) {
@@ -315,11 +269,7 @@ public class VRInput {
     /**
      * Reads the state of a skeletal action given its handle.
      *
-     * @param action                   
-     * @param eBoneParent              one of:<br><table><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive}</td></tr></table>
-     * @param fPredictedSecondsFromNow 
-     * @param pActionData              
-     * @param pTransformArray          
+     * @param eBoneParent one of:<br><table><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive}</td></tr></table>
      */
     @NativeType("EVRInputError")
     public static int VRInput_GetSkeletalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSkeletalTransformSpace") int eBoneParent, float fPredictedSecondsFromNow, @NativeType("InputSkeletonActionData_t *") InputSkeletonActionData.Buffer pActionData, @NativeType("VRBoneTransform_t *") VRBoneTransform.Buffer pTransformArray) {
@@ -341,11 +291,7 @@ public class VRInput {
      * Reads the state of a skeletal action given its handle in a compressed form that is suitable for sending over the network. The required buffer size will
      * never exceed ({@code sizeof(VR_BoneTransform_t)*boneCount + 2}). Usually the size will be much smaller.
      *
-     * @param action                    
-     * @param eBoneParent               one of:<br><table><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive}</td></tr></table>
-     * @param fPredictedSecondsFromNow  
-     * @param pvCompressedData          
-     * @param punRequiredCompressedSize 
+     * @param eBoneParent one of:<br><table><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent}</td></tr><tr><td>{@link VR#EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive}</td></tr></table>
      */
     @NativeType("EVRInputError")
     public static int VRInput_GetSkeletalActionDataCompressed(@NativeType("VRActionHandle_t") long action, @NativeType("EVRSkeletalTransformSpace") int eBoneParent, float fPredictedSecondsFromNow, @Nullable @NativeType("void *") ByteBuffer pvCompressedData, @Nullable @NativeType("uint32_t *") IntBuffer punRequiredCompressedSize) {
@@ -366,13 +312,7 @@ public class VRInput {
         return callPPPI(__functionAddress, pvCompressedBuffer, unCompressedBufferSize, peBoneParent, pTransformArray, unTransformArrayCount);
     }
 
-    /**
-     * Turns a compressed buffer from {@link #VRInput_GetSkeletalActionDataCompressed GetSkeletalActionDataCompressed} and turns it back into a bone transform array.
-     *
-     * @param pvCompressedBuffer 
-     * @param peBoneParent       
-     * @param pTransformArray    
-     */
+    /** Turns a compressed buffer from {@link #VRInput_GetSkeletalActionDataCompressed GetSkeletalActionDataCompressed} and turns it back into a bone transform array. */
     @NativeType("EVRInputError")
     public static int VRInput_UncompressSkeletalActionData(@NativeType("void *") ByteBuffer pvCompressedBuffer, @NativeType("EVRSkeletalTransformSpace *") IntBuffer peBoneParent, @NativeType("VRBoneTransform_t *") VRBoneTransform.Buffer pTransformArray) {
         if (CHECKS) {
@@ -383,15 +323,7 @@ public class VRInput {
 
     // --- [ VRInput_TriggerHapticVibrationAction ] ---
 
-    /**
-     * Triggers a haptic event as described by the specified action.
-     *
-     * @param action               
-     * @param fStartSecondsFromNow 
-     * @param fDurationSeconds     
-     * @param fFrequency           
-     * @param fAmplitude           
-     */
+    /** Triggers a haptic event as described by the specified action. */
     @NativeType("EVRInputError")
     public static int VRInput_TriggerHapticVibrationAction(@NativeType("VRActionHandle_t") long action, float fStartSecondsFromNow, float fDurationSeconds, float fFrequency, float fAmplitude) {
         long __functionAddress = OpenVR.VRInput.TriggerHapticVibrationAction;
@@ -412,13 +344,7 @@ public class VRInput {
         return callJJPI(__functionAddress, actionSetHandle, digitalActionHandle, originsOut, originOutCount);
     }
 
-    /**
-     * Retrieve origin handles for an action.
-     *
-     * @param actionSetHandle     
-     * @param digitalActionHandle 
-     * @param originsOut          
-     */
+    /** Retrieve origin handles for an action. */
     @NativeType("EVRInputError")
     public static int VRInput_GetActionOrigins(@NativeType("VRActionSetHandle_t") long actionSetHandle, @NativeType("VRActionHandle_t") long digitalActionHandle, @NativeType("VRInputValueHandle_t *") LongBuffer originsOut) {
         return nVRInput_GetActionOrigins(actionSetHandle, digitalActionHandle, memAddress(originsOut), originsOut.remaining());
@@ -435,12 +361,7 @@ public class VRInput {
         return callJPI(__functionAddress, origin, pchNameArray, unNameArraySize);
     }
 
-    /**
-     * Retrieves the name of the origin in the current language.
-     *
-     * @param origin       
-     * @param pchNameArray 
-     */
+    /** Retrieves the name of the origin in the current language. */
     @NativeType("EVRInputError")
     public static int VRInput_GetOriginLocalizedName(@NativeType("VRInputValueHandle_t") long origin, @NativeType("char *") ByteBuffer pchNameArray) {
         return nVRInput_GetOriginLocalizedName(origin, memAddress(pchNameArray), pchNameArray.remaining());
@@ -457,12 +378,7 @@ public class VRInput {
         return callJPI(__functionAddress, origin, pOriginInfo, unOriginInfoSize);
     }
 
-    /**
-     * Retrieves useful information for the origin of this action.
-     *
-     * @param origin      
-     * @param pOriginInfo 
-     */
+    /** Retrieves useful information for the origin of this action. */
     @NativeType("EVRInputError")
     public static int VRInput_GetOriginTrackedDeviceInfo(@NativeType("VRInputValueHandle_t") long origin, @NativeType("InputOriginInfo_t *") InputOriginInfo.Buffer pOriginInfo) {
         return nVRInput_GetOriginTrackedDeviceInfo(origin, pOriginInfo.address(), pOriginInfo.remaining());
@@ -470,12 +386,7 @@ public class VRInput {
 
     // --- [ VRInput_ShowActionOrigins ] ---
 
-    /**
-     * Shows the current binding for the action in-headset.
-     *
-     * @param actionSetHandle 
-     * @param ulActionHandle  
-     */
+    /** Shows the current binding for the action in-headset. */
     @NativeType("EVRInputError")
     public static int VRInput_ShowActionOrigins(@NativeType("VRActionSetHandle_t") long actionSetHandle, @NativeType("VRActionHandle_t") long ulActionHandle) {
         long __functionAddress = OpenVR.VRInput.ShowActionOrigins;
@@ -496,13 +407,7 @@ public class VRInput {
         return callPJI(__functionAddress, pSets, unSizeOfVRSelectedActionSet_t, unSetCount, originToHighlight);
     }
 
-    /**
-     * Shows the current binding all the actions in the specified action sets.
-     *
-     * @param pSets                         
-     * @param unSizeOfVRSelectedActionSet_t 
-     * @param originToHighlight             
-     */
+    /** Shows the current binding all the actions in the specified action sets. */
     @NativeType("EVRInputError")
     public static int VRInput_ShowBindingsForActionSet(@NativeType("VRActiveActionSet_t *") VRActiveActionSet.Buffer pSets, @NativeType("uint32_t") int unSizeOfVRSelectedActionSet_t, @NativeType("VRInputValueHandle_t") long originToHighlight) {
         return nVRInput_ShowBindingsForActionSet(pSets.address(), unSizeOfVRSelectedActionSet_t, pSets.remaining(), originToHighlight);

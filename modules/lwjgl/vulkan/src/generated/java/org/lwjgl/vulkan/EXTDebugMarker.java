@@ -19,7 +19,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>Associate a name with an image, for easier debugging in external tools or with validation layers that can print a friendly name when referring to objects in error messages.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     extern VkDevice device;
  *     extern VkImage image;
  * 
@@ -36,17 +36,17 @@ import static org.lwjgl.system.JNI.*;
  *         "Brick Diffuse Texture",                        // pObjectName
  *     };
  * 
- *     pfnDebugMarkerSetObjectNameEXT(device, &imageNameInfo);
+ *     pfnDebugMarkerSetObjectNameEXT(device, &amp;imageNameInfo);
  * 
  *     // A subsequent error might print:
  *     //   Image 'Brick Diffuse Texture' (0xc0dec0dedeadbeef) is used in a
- *     //   command buffer with no memory bound to it.</pre></code>
+ *     //   command buffer with no memory bound to it.</code></pre>
  * 
  * <p><b>Example 2</b></p>
  * 
  * <p>Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualisation of the commands submitted.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     extern VkDevice device;
  *     extern VkCommandBuffer commandBuffer;
  * 
@@ -65,7 +65,7 @@ import static org.lwjgl.system.JNI.*;
  *     };
  * 
  *     // Start an annotated group of calls under the 'Brick House' name
- *     pfnCmdDebugMarkerBeginEXT(commandBuffer, &houseMarker);
+ *     pfnCmdDebugMarkerBeginEXT(commandBuffer, &amp;houseMarker);
  *     {
  *         // A mutable structure for each part being rendered
  *         VkDebugMarkerMarkerInfoEXT housePartMarker =
@@ -78,14 +78,14 @@ import static org.lwjgl.system.JNI.*;
  * 
  *         // Set the name and insert the marker
  *         housePartMarker.pMarkerName = "Walls";
- *         pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+ *         pfnCmdDebugMarkerInsertEXT(commandBuffer, &amp;housePartMarker);
  * 
  *         // Insert the drawcall for the walls
  *         vkCmdDrawIndexed(commandBuffer, 1000, 1, 0, 0, 0);
  * 
  *         // Insert a recursive region for two sets of windows
  *         housePartMarker.pMarkerName = "Windows";
- *         pfnCmdDebugMarkerBeginEXT(commandBuffer, &housePartMarker);
+ *         pfnCmdDebugMarkerBeginEXT(commandBuffer, &amp;housePartMarker);
  *         {
  *             vkCmdDrawIndexed(commandBuffer, 75, 6, 1000, 0, 0);
  *             vkCmdDrawIndexed(commandBuffer, 100, 2, 1450, 0, 0);
@@ -93,17 +93,17 @@ import static org.lwjgl.system.JNI.*;
  *         pfnCmdDebugMarkerEndEXT(commandBuffer);
  * 
  *         housePartMarker.pMarkerName = "Front Door";
- *         pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+ *         pfnCmdDebugMarkerInsertEXT(commandBuffer, &amp;housePartMarker);
  * 
  *         vkCmdDrawIndexed(commandBuffer, 350, 1, 1650, 0, 0);
  * 
  *         housePartMarker.pMarkerName = "Roof";
- *         pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+ *         pfnCmdDebugMarkerInsertEXT(commandBuffer, &amp;housePartMarker);
  * 
  *         vkCmdDrawIndexed(commandBuffer, 500, 1, 2000, 0, 0);
  *     }
  *     // End the house annotation started above
- *     pfnCmdDebugMarkerEndEXT(commandBuffer);</pre></code>
+ *     pfnCmdDebugMarkerEndEXT(commandBuffer);</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -193,10 +193,10 @@ public class EXTDebugMarker {
      * 
      * <p>In addition to setting a name for an object, debugging and validation layers may have uses for additional binary data on a per-object basis that has no other place in the Vulkan API. For example, a {@code VkShaderModule} could have additional debugging data attached to it to aid in offline shader tracing. To attach data to an object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkDebugMarkerSetObjectTagEXT(
      *     VkDevice                                    device,
-     *     const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);</pre></code>
+     *     const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -256,10 +256,10 @@ public class EXTDebugMarker {
      * 
      * <p>An object can be given a user-friendly name by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkDebugMarkerSetObjectNameEXT(
      *     VkDevice                                    device,
-     *     const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);</pre></code>
+     *     const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -319,10 +319,10 @@ public class EXTDebugMarker {
      * 
      * <p>A marker region can be opened by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDebugMarkerBeginEXT(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</pre></code>
+     *     const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -366,9 +366,9 @@ public class EXTDebugMarker {
      * 
      * <p>A marker region can be closed by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDebugMarkerEndEXT(
-     *     VkCommandBuffer                             commandBuffer);</pre></code>
+     *     VkCommandBuffer                             commandBuffer);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -431,10 +431,10 @@ public class EXTDebugMarker {
      * 
      * <p>A single marker label can be inserted into a command buffer by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDebugMarkerInsertEXT(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</pre></code>
+     *     const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

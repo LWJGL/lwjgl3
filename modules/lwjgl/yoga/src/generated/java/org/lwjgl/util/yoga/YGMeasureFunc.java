@@ -16,14 +16,14 @@ import static java.lang.Float.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * uint64_t (*) (
  *     YGNodeRef node,
  *     float width,
  *     YGMeasureMode widthMode,
  *     float height,
  *     YGMeasureMode heightMode
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class YGMeasureFunc extends Callback implements YGMeasureFuncI {
 

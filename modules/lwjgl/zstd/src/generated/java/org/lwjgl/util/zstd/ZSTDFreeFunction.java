@@ -14,11 +14,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     void *opaque,
  *     void *address
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunctionI {
 

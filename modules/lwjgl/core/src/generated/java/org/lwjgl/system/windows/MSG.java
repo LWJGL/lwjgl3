@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct MSG {
  *     HWND hwnd;
  *     UINT message;
@@ -39,13 +39,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     LPARAM lParam;
  *     DWORD time;
  *     {@link POINT POINT} pt;
- * }</pre></code>
+ * }</code></pre>
  */
 public class MSG extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

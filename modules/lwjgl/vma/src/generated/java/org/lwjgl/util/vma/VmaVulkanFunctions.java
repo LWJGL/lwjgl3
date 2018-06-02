@@ -25,7 +25,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VmaVulkanFunctions {
  *     PFN_vkGetPhysicalDeviceProperties vkGetPhysicalDeviceProperties;
  *     PFN_vkGetPhysicalDeviceMemoryProperties vkGetPhysicalDeviceMemoryProperties;
@@ -43,13 +43,14 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkDestroyImage vkDestroyImage;
  *     PFN_vkGetBufferMemoryRequirements2KHR vkGetBufferMemoryRequirements2KHR;
  *     PFN_vkGetImageMemoryRequirements2KHR vkGetImageMemoryRequirements2KHR;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VmaVulkanFunctions extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

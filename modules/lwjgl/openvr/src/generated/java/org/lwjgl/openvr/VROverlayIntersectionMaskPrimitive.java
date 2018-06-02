@@ -18,11 +18,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VROverlayIntersectionMaskPrimitive_t {
  *     EVROverlayIntersectionMaskPrimitiveType m_nPrimitiveType;
  *     {@link VROverlayIntersectionMaskPrimitiveData VROverlayIntersectionMaskPrimitive_Data_t} m_Primitive;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VROverlayIntersectionMaskPrimitive_t")
 public class VROverlayIntersectionMaskPrimitive extends Struct implements NativeResource {
@@ -30,6 +30,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

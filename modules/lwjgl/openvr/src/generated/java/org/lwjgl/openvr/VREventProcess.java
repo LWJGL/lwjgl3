@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VREvent_Process_t {
  *     uint32_t pid;
  *     uint32_t oldPid;
  *     bool bForced;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VREvent_Process_t")
 public class VREventProcess extends Struct {
@@ -31,6 +31,7 @@ public class VREventProcess extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

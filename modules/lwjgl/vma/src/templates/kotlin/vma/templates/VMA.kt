@@ -37,7 +37,7 @@ ENABLE_WARNINGS()"""
             "Fill VmaAllocatorCreateInfo structure and create `VmaAllocator` object by calling vmaCreateAllocator()."
         )}
 
-        ${code(
+        ${codeBlock(
             """
 VmaAllocatorCreateInfo allocatorInfo = {};
 allocatorInfo.physicalDevice = physicalDevice;
@@ -56,7 +56,7 @@ vmaCreateAllocator(&allocatorInfo, &allocator);"""
             "Call #CreateBuffer() / #CreateImage() to get {@code VkBuffer}/{@code VkImage} with memory already allocated and bound to it."
         )}
 
-        ${code(
+        ${codeBlock(
             """
 VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
 bufferInfo.size = 65536;
@@ -72,7 +72,7 @@ vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullpt
 
         Don't forget to destroy your objects when no longer needed:
 
-        ${code(
+        ${codeBlock(
             """
 vmaDestroyBuffer(allocator, buffer, allocation);
 vmaDestroyAllocator(allocator);"""
@@ -280,7 +280,7 @@ if((memFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == 0)
         inspect {@code allocInfo.memoryType}, call #GetMemoryTypeProperties(), and look for {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} flag in properties of
         that memory type.
 
-        ${code("""
+        ${codeBlock("""
 VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
 bufCreateInfo.size = sizeof(ConstantBuffer);
 bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
@@ -313,7 +313,7 @@ else
         #MEMORY_USAGE_GPU_ONLY). If the allocation ends up in memory type that is {@code HOST_VISIBL}E, it will be persistently mapped and you can use it
         directly. If not, the flag is just ignored. Example:
 
-        ${code("""
+        ${codeBlock("""
 VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
 bufCreateInfo.size = sizeof(ConstantBuffer);
 bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;

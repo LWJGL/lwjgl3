@@ -19,7 +19,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_mouse {
  *     {@link NkMouseButton struct nk_mouse_button} buttons[NK_BUTTON_MAX];
  *     {@link NkVec2 struct nk_vec2} pos;
@@ -29,7 +29,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX;
  *     bool grab;
  *     bool grabbed;
  *     bool ungrab;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_mouse")
 public class NkMouse extends Struct {
@@ -37,6 +37,7 @@ public class NkMouse extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

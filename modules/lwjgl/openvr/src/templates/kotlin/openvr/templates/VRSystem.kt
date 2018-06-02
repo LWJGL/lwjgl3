@@ -178,7 +178,7 @@ typedef struct HiddenAreaMesh_t
         For #ETextureType_TextureType_IOSurface returns the {@code id<MTLDevice>} that should be used by the application.
 
         On 10.13+ for #ETextureType_TextureType_OpenGL returns the {@code registryId} of the renderer which should be used by the application. See Apple
-        Technical Q&A QA1168 for information on enumerating GL Renderers, and the new {@code kCGLRPRegistryIDLow} and {@code kCGLRPRegistryIDHigh}
+        Technical Q&amp;A QA1168 for information on enumerating GL Renderers, and the new {@code kCGLRPRegistryIDLow} and {@code kCGLRPRegistryIDHigh}
         {@code CGLRendererProperty} values in the 10.13 SDK.
 
         Pre 10.13 for #ETextureType_TextureType_OpenGL returns 0, as there is no dependable way to correlate the HMDs {@code MTLDevice} with a GL Renderer.

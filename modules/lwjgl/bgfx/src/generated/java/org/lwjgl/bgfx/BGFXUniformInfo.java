@@ -29,12 +29,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct bgfx_uniform_info_t {
  *     char name[256];
  *     bgfx_uniform_type_t type;
  *     uint16_t num;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_uniform_info_t")
 public class BGFXUniformInfo extends Struct implements NativeResource {
@@ -42,6 +42,7 @@ public class BGFXUniformInfo extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

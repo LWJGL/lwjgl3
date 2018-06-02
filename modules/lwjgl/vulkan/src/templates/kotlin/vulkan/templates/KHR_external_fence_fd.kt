@@ -81,10 +81,10 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
         <h5>C Specification</h5>
         To import a fence payload from a POSIX file descriptor, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkImportFenceFdKHR(
 ￿    VkDevice                                    device,
-￿    const VkImportFenceFdInfoKHR*               pImportFenceFdInfo);</pre></code>
+￿    const VkImportFenceFdInfoKHR*               pImportFenceFdInfo);</code></pre>
 
         <h5>Description</h5>
         Importing a fence payload from a file descriptor transfers ownership of the file descriptor from the application to the Vulkan implementation. The application <b>must</b> not perform any operations on the file descriptor after a successful import.
@@ -132,11 +132,11 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
         <h5>C Specification</h5>
         To export a POSIX file descriptor representing the payload of a fence, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetFenceFdKHR(
 ￿    VkDevice                                    device,
 ￿    const VkFenceGetFdInfoKHR*                  pGetFdInfo,
-￿    int*                                        pFd);</pre></code>
+￿    int*                                        pFd);</code></pre>
 
         <h5>Description</h5>
         Each call to #GetFenceFdKHR() <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.

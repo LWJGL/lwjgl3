@@ -14,12 +14,12 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     GLFWwindow *window,
  *     float xscale,
  *     float yscale
- * )</pre></code>
+ * )</code></pre>
  *
  * @since version 3.3
  */

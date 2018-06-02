@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void * (*) (
  *     bgfx_allocator_interface_t *_this,
  *     void *_ptr,
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     size_t _align,
  *     char *_file,
  *     uint32_t _line
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class BGFXReallocCallback extends Callback implements BGFXReallocCallbackI {
 

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -47,13 +47,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 advancedBlendNonPremultipliedDstColor;
  *     VkBool32 advancedBlendCorrelatedOverlap;
  *     VkBool32 advancedBlendAllOperations;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

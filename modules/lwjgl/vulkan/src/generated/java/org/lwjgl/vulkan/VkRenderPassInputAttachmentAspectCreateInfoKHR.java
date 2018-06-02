@@ -21,13 +21,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkRenderPassInputAttachmentAspectCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t aspectReferenceCount;
  *     {@link VkInputAttachmentAspectReference VkInputAttachmentAspectReference const} * pAspectReferences;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkRenderPassInputAttachmentAspectCreateInfoKHR extends VkRenderPassInputAttachmentAspectCreateInfo {
 

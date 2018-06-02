@@ -39,11 +39,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXJoinSwapGroupNV ] ---
 
-    /**
-     * @param display  the connection to the X server
-     * @param drawable 
-     * @param group    
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXJoinSwapGroupNV(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("GLuint") int group) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXJoinSwapGroupNV;
@@ -57,11 +53,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXBindSwapBarrierNV ] ---
 
-    /**
-     * @param display the connection to the X server
-     * @param group   
-     * @param barrier 
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXBindSwapBarrierNV(@NativeType("Display *") long display, @NativeType("GLuint") int group, @NativeType("GLuint") int barrier) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXBindSwapBarrierNV;
@@ -85,12 +77,7 @@ public class GLXNVSwapGroup {
         return callPPPPI(__functionAddress, display, drawable, group, barrier);
     }
 
-    /**
-     * @param display  the connection to the X server
-     * @param drawable 
-     * @param group    
-     * @param barrier  
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXQuerySwapGroupNV(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("GLuint *") IntBuffer group, @NativeType("GLuint *") IntBuffer barrier) {
         if (CHECKS) {
@@ -112,12 +99,7 @@ public class GLXNVSwapGroup {
         return callPPPI(__functionAddress, display, screen, maxGroups, maxBarriers);
     }
 
-    /**
-     * @param display     the connection to the X server
-     * @param screen      
-     * @param maxGroups   
-     * @param maxBarriers 
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXQueryMaxSwapGroupsNV(@NativeType("Display *") long display, int screen, @NativeType("GLuint *") IntBuffer maxGroups, @NativeType("GLuint *") IntBuffer maxBarriers) {
         if (CHECKS) {
@@ -139,11 +121,7 @@ public class GLXNVSwapGroup {
         return callPPI(__functionAddress, display, screen, count);
     }
 
-    /**
-     * @param display the connection to the X server
-     * @param screen  
-     * @param count   
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXQueryFrameCountNV(@NativeType("Display *") long display, int screen, @NativeType("GLuint *") IntBuffer count) {
         if (CHECKS) {
@@ -154,10 +132,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXResetFrameCountNV ] ---
 
-    /**
-     * @param display the connection to the X server
-     * @param screen  
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXResetFrameCountNV(@NativeType("Display *") long display, int screen) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXResetFrameCountNV;

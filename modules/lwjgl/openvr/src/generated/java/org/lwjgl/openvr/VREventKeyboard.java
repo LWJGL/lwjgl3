@@ -26,11 +26,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VREvent_Keyboard_t {
  *     char cNewInput[8];
  *     uint64_t uUserValue;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct VREvent_Keyboard_t")
 public class VREventKeyboard extends Struct {
@@ -38,6 +38,7 @@ public class VREventKeyboard extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

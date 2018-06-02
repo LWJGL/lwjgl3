@@ -214,10 +214,10 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
         To query these capabilities, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDeviceGroupPresentCapabilitiesKHR(
 ￿    VkDevice                                    device,
-￿    VkDeviceGroupPresentCapabilitiesKHR*        pDeviceGroupPresentCapabilities);</pre></code>
+￿    VkDeviceGroupPresentCapabilitiesKHR*        pDeviceGroupPresentCapabilities);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -257,11 +257,11 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
         To query the supported device group present modes for a particular surface, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDeviceGroupSurfacePresentModesKHR(
 ￿    VkDevice                                    device,
 ￿    VkSurfaceKHR                                surface,
-￿    VkDeviceGroupPresentModeFlagsKHR*           pModes);</pre></code>
+￿    VkDeviceGroupPresentModeFlagsKHR*           pModes);</code></pre>
 
         <h5>Description</h5>
         The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHR().
@@ -310,12 +310,12 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
         To query a set of rectangles used in presentation on the physical device, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDevicePresentRectanglesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
 ￿    uint32_t*                                   pRectCount,
-￿    VkRect2D*                                   pRects);</pre></code>
+￿    VkRect2D*                                   pRects);</code></pre>
 
         <h5>Description</h5>
         If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written. If {@code pRectCount} is smaller than the number of rectangles used for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -371,11 +371,11 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
         <h5>C Specification</h5>
         To acquire an available presentable image to use, and retrieve the index of that image, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkAcquireNextImage2KHR(
 ￿    VkDevice                                    device,
 ￿    const VkAcquireNextImageInfoKHR*            pAcquireInfo,
-￿    uint32_t*                                   pImageIndex);</pre></code>
+￿    uint32_t*                                   pImageIndex);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

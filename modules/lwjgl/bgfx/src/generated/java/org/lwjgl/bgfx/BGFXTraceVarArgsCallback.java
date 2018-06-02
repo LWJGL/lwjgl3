@@ -18,14 +18,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_filePath,
  *     uint16_t _line,
  *     char const *_format,
  *     va_list _argList
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class BGFXTraceVarArgsCallback extends Callback implements BGFXTraceVarArgsCallbackI {
 

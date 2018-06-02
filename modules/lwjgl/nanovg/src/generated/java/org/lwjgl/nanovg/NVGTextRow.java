@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct NVGtextRow {
  *     char * start;
  *     char * end;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float width;
  *     float minx;
  *     float maxx;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct NVGtextRow")
 public class NVGTextRow extends Struct implements NativeResource {
@@ -47,6 +47,7 @@ public class NVGTextRow extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

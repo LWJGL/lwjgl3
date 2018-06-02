@@ -14,7 +14,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     EGLenum error,
  *     char const *command,
@@ -22,7 +22,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *     EGLLabelKHR threadLabel,
  *     EGLLabelKHR objectLabel,
  *     char const *message
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("EGLDEBUGPROCKHR")

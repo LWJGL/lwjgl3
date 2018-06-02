@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     cl_command_queue queue,
  *     cl_uint num_svm_pointers,
  *     void **svm_pointers,
  *     void *user_data
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class CLSVMFreeCallback extends Callback implements CLSVMFreeCallbackI {
 

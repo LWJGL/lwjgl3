@@ -402,7 +402,7 @@ ENABLE_WARNINGS()""")
             """
             Synchronized mode:  Decompression buffer size is <i>exactly</i> the same as compression buffer size, and follows exactly same update rule (block
             boundaries at same positions), and decoding function is provided with exact decompressed size of each block (exception for last block of the
-            stream), <i>then</i> decoding & encoding ring buffer can have any size, including small ones ( &lt; 64 KB).
+            stream), <i>then</i> decoding &amp; encoding ring buffer can have any size, including small ones ( &lt; 64 KB).
             """,
             """
             Decompression buffer is larger than encoding buffer, by a minimum of {@code maxBlockSize} more bytes. In which case, encoding and decoding buffers

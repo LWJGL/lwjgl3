@@ -65,19 +65,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkImageBlit {
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} srcSubresource;
  *     {@link VkOffset3D VkOffset3D} srcOffsets[2];
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} dstSubresource;
  *     {@link VkOffset3D VkOffset3D} dstOffsets[2];
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkImageBlit extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

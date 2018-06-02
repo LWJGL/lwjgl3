@@ -31,12 +31,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct DistortionCoordinates_t {
  *     float rfRed[2];
  *     float rfGreen[2];
  *     float rfBlue[2];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct DistortionCoordinates_t")
 public class DistortionCoordinates extends Struct implements NativeResource {
@@ -44,6 +44,7 @@ public class DistortionCoordinates extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

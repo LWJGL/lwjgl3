@@ -14,14 +14,14 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     GLFWwindow *window,
  *     int key,
  *     int scancode,
  *     int action,
  *     int mods
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("GLFWkeyfun")

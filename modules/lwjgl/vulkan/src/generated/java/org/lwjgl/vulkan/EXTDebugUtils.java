@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     extern VkInstance instance;
  *     VkResult res;
  *     VkDebugUtilsMessengerEXT cb1, cb2, cb3;
@@ -60,7 +60,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *             myOutputDebugString,                                      // pfnUserCallback
  *             NULL                                                      // pUserData
  *     };
- *     res = pfnCreateDebugUtilsMessengerEXT(instance, &callback1, &cb1);
+ *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, &amp;cb1);
  *     if (res != VK_SUCCESS) {
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY
  *     }
@@ -68,7 +68,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     callback1.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
  *     callback1.pfnCallback = myDebugBreak;
  *     callback1.pUserData = NULL;
- *     res = pfnCreateDebugUtilsMessengerEXT(instance, &callback1, &cb2);
+ *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, &amp;cb2);
  *     if (res != VK_SUCCESS) {
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY
  *     }
@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *             mystdOutLogger,                                           // pfnUserCallback
  *             NULL                                                      // pUserData
  *     };
- *     res = pfnCreateDebugUtilsMessengerEXT(instance, &callback3, &cb3);
+ *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback3, &amp;cb3);
  *     if (res != VK_SUCCESS) {
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY
  *     }
@@ -93,13 +93,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Remove callbacks when cleaning up
  *     pfnDestroyDebugUtilsMessengerEXT(instance, cb1);
  *     pfnDestroyDebugUtilsMessengerEXT(instance, cb2);
- *     pfnDestroyDebugUtilsMessengerEXT(instance, cb3);</pre></code>
+ *     pfnDestroyDebugUtilsMessengerEXT(instance, cb3);</code></pre>
  * 
  * <p><b>Example 2</b></p>
  * 
  * <p>Associate a name with an image, for easier debugging in external tools or with validation layers that can print a friendly name when referring to objects in error messages.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     extern VkDevice device;
  *     extern VkImage image;
  * 
@@ -116,17 +116,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  *         "Brick Diffuse Texture",                            // pObjectName
  *     };
  * 
- *     pfnSetDebugUtilsObjectNameEXT(device, &imageNameInfo);
+ *     pfnSetDebugUtilsObjectNameEXT(device, &amp;imageNameInfo);
  * 
  *     // A subsequent error might print:
  *     //   Image 'Brick Diffuse Texture' (0xc0dec0dedeadbeef) is used in a
- *     //   command buffer with no memory bound to it.</pre></code>
+ *     //   command buffer with no memory bound to it.</code></pre>
  * 
  * <p><b>Example 3</b></p>
  * 
  * <p>Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualization of the commands submitted.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     extern VkDevice device;
  *     extern VkCommandBuffer commandBuffer;
  * 
@@ -147,7 +147,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     };
  * 
  *     // Start an annotated group of calls under the 'Brick House' name
- *     pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &houseLabel);
+ *     pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &amp;houseLabel);
  *     {
  *         // A mutable structure for each part being rendered
  *         VkDebugUtilsLabelEXT housePartLabel =
@@ -160,14 +160,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  *         // Set the name and insert the marker
  *         housePartLabel.pLabelName = "Walls";
- *         pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+ *         pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
  * 
  *         // Insert the drawcall for the walls
  *         vkCmdDrawIndexed(commandBuffer, 1000, 1, 0, 0, 0);
  * 
  *         // Insert a recursive region for two sets of windows
  *         housePartLabel.pLabelName = "Windows";
- *         pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+ *         pfnCmdBeginDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
  *         {
  *             vkCmdDrawIndexed(commandBuffer, 75, 6, 1000, 0, 0);
  *             vkCmdDrawIndexed(commandBuffer, 100, 2, 1450, 0, 0);
@@ -175,12 +175,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  *         pfnCmdEndDebugUtilsLabelEXT(commandBuffer);
  * 
  *         housePartLabel.pLabelName = "Front Door";
- *         pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+ *         pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
  * 
  *         vkCmdDrawIndexed(commandBuffer, 350, 1, 1650, 0, 0);
  * 
  *         housePartLabel.pLabelName = "Roof";
- *         pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &housePartLabel);
+ *         pfnCmdInsertDebugUtilsLabelEXT(commandBuffer, &amp;housePartLabel);
  * 
  *         vkCmdDrawIndexed(commandBuffer, 500, 1, 2000, 0, 0);
  *     }
@@ -201,7 +201,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     };
  * 
  *     // Identify the queue label region
- *     pfnQueueBeginDebugUtilsLabelEXT(queue, &queueLabel);
+ *     pfnQueueBeginDebugUtilsLabelEXT(queue, &amp;queueLabel);
  * 
  *     // Submit the work for the main render thread
  *     const VkCommandBuffer cmd_bufs[] = {commandBuffer};
@@ -214,10 +214,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  *                                 .pCommandBuffers = cmd_bufs,
  *                                 .signalSemaphoreCount = 0,
  *                                 .pSignalSemaphores = NULL};
- *     vkQueueSubmit(queue, 1, &submit_info, fence);
+ *     vkQueueSubmit(queue, 1, &amp;submit_info, fence);
  * 
  *     // End the queue label region
- *     pfnQueueEndDebugUtilsLabelEXT(queue);</pre></code>
+ *     pfnQueueEndDebugUtilsLabelEXT(queue);</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -379,10 +379,10 @@ public class EXTDebugUtils {
      * 
      * <h5>C Specification</h5>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkSetDebugUtilsObjectNameEXT(
      *     VkDevice                                    device,
-     *     const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);</pre></code>
+     *     const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -440,10 +440,10 @@ public class EXTDebugUtils {
      * 
      * <h5>C Specification</h5>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkSetDebugUtilsObjectTagEXT(
      *     VkDevice                                    device,
-     *     const VkDebugUtilsObjectTagInfoEXT*         pTagInfo);</pre></code>
+     *     const VkDebugUtilsObjectTagInfoEXT*         pTagInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -503,10 +503,10 @@ public class EXTDebugUtils {
      * 
      * <p>A queue debug label region is opened by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkQueueBeginDebugUtilsLabelEXT(
      *     VkQueue                                     queue,
-     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -542,9 +542,9 @@ public class EXTDebugUtils {
      * 
      * <p>A queue debug label region is closed by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkQueueEndDebugUtilsLabelEXT(
-     *     VkQueue                                     queue);</pre></code>
+     *     VkQueue                                     queue);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -598,10 +598,10 @@ public class EXTDebugUtils {
      * 
      * <p>A single label can be inserted into a queue by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkQueueInsertDebugUtilsLabelEXT(
      *     VkQueue                                     queue,
-     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -647,10 +647,10 @@ public class EXTDebugUtils {
      * 
      * <p>A command buffer debug label region can be opened by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdBeginDebugUtilsLabelEXT(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -694,9 +694,9 @@ public class EXTDebugUtils {
      * 
      * <p>A command buffer label region can be closed by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdEndDebugUtilsLabelEXT(
-     *     VkCommandBuffer                             commandBuffer);</pre></code>
+     *     VkCommandBuffer                             commandBuffer);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -759,10 +759,10 @@ public class EXTDebugUtils {
      * 
      * <p>A single debug label can be inserted into a command buffer by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdInsertDebugUtilsLabelEXT(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</pre></code>
+     *     const VkDebugUtilsLabelEXT*                 pLabelInfo);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -791,7 +791,6 @@ public class EXTDebugUtils {
      * <p>{@link VkDebugUtilsLabelEXT}</p>
      *
      * @param commandBuffer the command buffer into which the command is recorded.
-     * @param pLabelInfo    
      */
     public static void vkCmdInsertDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, @NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT pLabelInfo) {
         nvkCmdInsertDebugUtilsLabelEXT(commandBuffer, pLabelInfo.address());
@@ -817,12 +816,12 @@ public class EXTDebugUtils {
      * 
      * <p>A debug messenger triggers a debug callback with a debug message when an event of interest occurs. To create a debug messenger which will trigger a debug callback, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDebugUtilsMessengerEXT(
      *     VkInstance                                  instance,
      *     const VkDebugUtilsMessengerCreateInfoEXT*   pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDebugUtilsMessengerEXT*                   pMessenger);</pre></code>
+     *     VkDebugUtilsMessengerEXT*                   pMessenger);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -882,11 +881,11 @@ public class EXTDebugUtils {
      * 
      * <p>To destroy a {@code VkDebugUtilsMessengerEXT} object, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDebugUtilsMessengerEXT(
      *     VkInstance                                  instance,
      *     VkDebugUtilsMessengerEXT                    messenger,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -941,12 +940,12 @@ public class EXTDebugUtils {
      * 
      * <p>There may be times that a user wishes to intentionally submit a debug message. To do this, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkSubmitDebugUtilsMessageEXT(
      *     VkInstance                                  instance,
      *     VkDebugUtilsMessageSeverityFlagBitsEXT      messageSeverity,
      *     VkDebugUtilsMessageTypeFlagsEXT             messageTypes,
-     *     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData);</pre></code>
+     *     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData);</code></pre>
      * 
      * <h5>Description</h5>
      * 

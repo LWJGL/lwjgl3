@@ -18,10 +18,10 @@ import static org.lwjgl.glfw.GLFW.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     GLFWwindow *window
- * )</pre></code>
+ * )</code></pre>
  *
  * @since version 2.5
  */

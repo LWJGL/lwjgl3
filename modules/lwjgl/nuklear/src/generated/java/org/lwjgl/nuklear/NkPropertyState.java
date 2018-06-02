@@ -19,7 +19,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_property_state {
  *     int active;
  *     int prev;
@@ -32,7 +32,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER;
  *     unsigned int seq;
  *     unsigned int old;
  *     int state;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_property_state")
 public class NkPropertyState extends Struct {
@@ -40,6 +40,7 @@ public class NkPropertyState extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

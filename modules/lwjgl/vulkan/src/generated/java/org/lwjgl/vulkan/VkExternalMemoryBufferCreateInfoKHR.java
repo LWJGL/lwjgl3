@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkExternalMemoryBufferCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkExternalMemoryHandleTypeFlags handleTypes;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkExternalMemoryBufferCreateInfoKHR extends VkExternalMemoryBufferCreateInfo {
 

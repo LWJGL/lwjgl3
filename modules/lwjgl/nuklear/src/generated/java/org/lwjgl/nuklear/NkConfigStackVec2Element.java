@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_config_stack_vec2_element {
  *     {@link NkVec2 struct nk_vec2} * pValues;
  *     {@link NkVec2 struct nk_vec2} old_value;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_vec2_element")
 class NkConfigStackVec2Element extends Struct {
@@ -28,6 +28,7 @@ class NkConfigStackVec2Element extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

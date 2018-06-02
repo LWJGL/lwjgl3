@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * void (*) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_name,
  *     uint32_t _abgr,
  *     char const *_filePath,
  *     uint16_t _line
- * )</pre></code>
+ * )</code></pre>
  */
 public abstract class BGFXProfilerBeginLiteral extends Callback implements BGFXProfilerBeginLiteralI {
 

@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct Compositor_FrameTiming {
  *     uint32_t m_nSize;
  *     uint32_t m_nFrameIndex;
@@ -68,7 +68,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float m_flCompositorUpdateEndMs;
  *     float m_flCompositorRenderStartMs;
  *     {@link TrackedDevicePose TrackedDevicePose_t} m_HmdPose;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct Compositor_FrameTiming")
 public class CompositorFrameTiming extends Struct implements NativeResource {
@@ -76,6 +76,7 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

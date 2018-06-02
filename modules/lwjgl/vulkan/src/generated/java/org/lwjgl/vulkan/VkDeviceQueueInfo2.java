@@ -54,20 +54,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDeviceQueueInfo2 {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDeviceQueueCreateFlags flags;
  *     uint32_t queueFamilyIndex;
  *     uint32_t queueIndex;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_panel {
  *     enum nk_panel_type type;
  *     nk_flags flags;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkChart struct nk_chart} chart;
  *     {@link NkCommandBuffer struct nk_command_buffer} * buffer;
  *     {@link NkPanel struct nk_panel} * parent;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_panel")
 public class NkPanel extends Struct {
@@ -50,6 +50,7 @@ public class NkPanel extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

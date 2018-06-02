@@ -24,12 +24,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrExternalCamera {
  *     char Name[32];
  *     {@link OVRCameraIntrinsics ovrCameraIntrinsics} Intrinsics;
  *     {@link OVRCameraExtrinsics ovrCameraExtrinsics} Extrinsics;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrExternalCamera")
 public class OVRExternalCamera extends Struct implements NativeResource {
@@ -37,6 +37,7 @@ public class OVRExternalCamera extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

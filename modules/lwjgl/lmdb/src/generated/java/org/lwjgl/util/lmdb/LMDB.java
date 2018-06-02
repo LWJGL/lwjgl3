@@ -82,7 +82,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Also note that a transaction is tied to one thread by default using Thread Local Storage. If you want to pass read-only transactions across threads,
  * you can use the {@link #MDB_NOTLS NOTLS} option on the environment.</p>
  * 
- * <h3><Transactions, Rollbacks, etc.</h3>
+ * <h3>Transactions, Rollbacks, etc.</h3>
  * 
  * <p>To actually get anything done, a transaction must be committed using {@link #mdb_txn_commit txn_commit}. Alternatively, all of a transaction's operations can be discarded
  * using {@link #mdb_txn_abort txn_abort}. In a read-only transaction, any cursors will <b>not</b> automatically be freed. In a read-write transaction, all cursors will be

@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct Compositor_OverlaySettings {
  *     uint32_t size;
  *     bool curved;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float gridWidth;
  *     float gridScale;
  *     {@link HmdMatrix44 HmdMatrix44_t} transform;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct Compositor_OverlaySettings")
 public class CompositorOverlaySettings extends Struct implements NativeResource {
@@ -50,6 +50,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

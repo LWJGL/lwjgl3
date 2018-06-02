@@ -55,10 +55,6 @@ public class Zdict {
      * <li>It's recommended that total size of all samples be about ~x100 times the target size of dictionary.</li>
      * </ul>
      *
-     * @param dictBuffer    
-     * @param samplesBuffer 
-     * @param samplesSizes  
-     *
      * @return size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with {@link #ZDICT_isError isError}.
      */
     @NativeType("size_t")
@@ -78,8 +74,6 @@ public class Zdict {
 
     /**
      * Extracts {@code dictID}.
-     *
-     * @param dictBuffer 
      *
      * @return zero if error (not a valid dictionary)
      */
@@ -132,11 +126,6 @@ public class Zdict {
      * <li>It's recommended that total size of all samples be about ~x100 times the target size of dictionary.</li>
      * </ul>
      *
-     * @param dictBuffer    
-     * @param samplesBuffer 
-     * @param samplesSizes  
-     * @param parameters    
-     *
      * @return size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with {@link #ZDICT_isError isError}.
      */
     @NativeType("size_t")
@@ -170,11 +159,6 @@ public class Zdict {
      * <p>Note: {@code ZDICT_optimizeTrainFromBuffer_cover()} requires about 8 bytes of memory for each input byte and additionally another 5 bytes of memory for
      * each byte of memory for each thread.</p>
      *
-     * @param dictBuffer    
-     * @param samplesBuffer 
-     * @param samplesSizes  
-     * @param parameters    
-     *
      * @return size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with {@link #ZDICT_isError isError}. On success
      *         {@code *parameters} contains the parameters selected.
      */
@@ -207,12 +191,6 @@ public class Zdict {
      * <li>{@code ZDICT_finalizeDictionary()} will push notifications into {@code stderr} if instructed to, using {@code notificationLevel>0}.</li>
      * <li>{@code dictBuffer} and {@code dictContent} can overlap.</li>
      * </ul>
-     *
-     * @param dictBuffer    
-     * @param dictContent   
-     * @param samplesBuffer 
-     * @param samplesSizes  
-     * @param parameters    
      *
      * @return size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with {@link #ZDICT_isError isError}.
      */

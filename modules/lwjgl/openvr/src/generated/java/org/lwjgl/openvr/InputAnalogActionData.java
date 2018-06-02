@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct InputAnalogActionData_t {
  *     bool bActive;
  *     VRInputValueHandle_t activeOrigin;
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float deltaY;
  *     float deltaZ;
  *     float fUpdateTime;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct InputAnalogActionData_t")
 public class InputAnalogActionData extends Struct implements NativeResource {
@@ -51,6 +51,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

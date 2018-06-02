@@ -37,7 +37,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>Subpass 0 writes to attachment 0, subpass 1 reads only the depth information from attachment 0 (using inputAttachmentRead) and writes to attachment 1.</p>
  * 
- * <code><pre>
+ * <pre><code>
  *     VkInputAttachmentAspectReferenceKHR references[] = {
  *         {
  *             .subpass = 1,
@@ -56,11 +56,11 @@ package org.lwjgl.vulkan;
  * 
  *     VkRenderPassCreateInfo createInfo = {
  *         ...
- *         .pNext = &specifyAspects,
+ *         .pNext = &amp;specifyAspects,
  *         ...
  *     }
  * 
- *     vkCreateRenderPass(...);</pre></code>
+ *     vkCreateRenderPass(...);</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

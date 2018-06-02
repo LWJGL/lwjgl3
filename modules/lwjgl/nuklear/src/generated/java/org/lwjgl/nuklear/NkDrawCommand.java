@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct nk_draw_command {
  *     unsigned int elem_count;
  *     {@link NkRect struct nk_rect} clip_rect;
  *     {@link NkHandle nk_handle} texture;
  *     {@link NkHandle nk_handle} userdata;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct nk_draw_command")
 public class NkDrawCommand extends Struct {
@@ -30,6 +30,7 @@ public class NkDrawCommand extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

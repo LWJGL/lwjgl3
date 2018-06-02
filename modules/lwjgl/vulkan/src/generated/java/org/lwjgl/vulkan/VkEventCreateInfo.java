@@ -40,18 +40,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkEventCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkEventCreateFlags flags;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkEventCreateInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

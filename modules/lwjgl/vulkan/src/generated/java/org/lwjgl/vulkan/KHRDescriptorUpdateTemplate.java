@@ -173,13 +173,13 @@ public class KHRDescriptorUpdateTemplate {
      * 
      * <p>It is also possible to use a descriptor update template to specify the push descriptors to update. To do so, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdPushDescriptorSetWithTemplateKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
      *     VkPipelineLayout                            layout,
      *     uint32_t                                    set,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -213,7 +213,7 @@ public class KHRDescriptorUpdateTemplate {
      * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics Compute</td><td></td></tr></tbody>
      * </table>
      * 
-     * <code><pre>
+     * <pre><code>
      * struct AppBufferView {
      *     VkBufferView bufferView;
      *     uint32_t     applicationRelatedInformation;
@@ -257,14 +257,14 @@ public class KHRDescriptorUpdateTemplate {
      * VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;
      * myResult = vkCreateDescriptorUpdateTemplate(
      *     myDevice,
-     *     &createInfo,
+     *     &amp;createInfo,
      *     NULL,
-     *     &myDescriptorUpdateTemplate);
+     *     &amp;myDescriptorUpdateTemplate);
      * }
      * 
      * AppDataStructure appData;
      * // fill appData here or cache it in your engine
-     * vkCmdPushDescriptorSetWithTemplateKHR(myCmdBuffer, myDescriptorUpdateTemplate, myPipelineLayout, 0,&appData);</pre></code>
+     * vkCmdPushDescriptorSetWithTemplateKHR(myCmdBuffer, myDescriptorUpdateTemplate, myPipelineLayout, 0,&amp;appData);</code></pre>
      *
      * @param commandBuffer            the command buffer that the descriptors will be recorded in.
      * @param descriptorUpdateTemplate A descriptor update template which defines how to interpret the descriptor information in pData.

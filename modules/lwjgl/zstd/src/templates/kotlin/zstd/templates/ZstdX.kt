@@ -28,7 +28,7 @@ ENABLE_WARNINGS()""")
 
         Block functions produce and decode raw zstd blocks, without frame metadata.
 
-        Frame metadata cost is typically ~18 bytes, which can be non-negligible for very small blocks (< 100 bytes). User will have to take in charge required
+        Frame metadata cost is typically ~18 bytes, which can be non-negligible for very small blocks (&lt; 100 bytes). User will have to take in charge required
         information to regenerate data, such as compressed and content sizes.
 
         A few rules to respect:
@@ -225,7 +225,7 @@ ENABLE_WARNINGS()""")
             """
             Impact of this field depends on strategy.
 
-            For strategies {@code btopt} & {@code btultra}:
+            For strategies {@code btopt} &amp; {@code btultra}:
             ${ul(
                 "Length of Match considered \"good enough\" to stop search.",
                 "Larger values make compression stronger, and slower."
@@ -795,7 +795,7 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        if 0, {@code zfhPtr} is correctly filled. If >0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
+        if 0, {@code zfhPtr} is correctly filled. If &gt;0, {@code srcSize} is too small, value is wanted {@code srcSize} amount, or an error code, which can be
         tested using #isError().
         """
     )

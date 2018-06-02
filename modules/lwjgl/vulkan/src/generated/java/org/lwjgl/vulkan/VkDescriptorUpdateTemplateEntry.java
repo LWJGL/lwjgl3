@@ -45,15 +45,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code offset} &ndash; the offset in bytes of the first binding in the raw data structure.</li>
  * <li>{@code stride} &ndash; the stride in bytes between two consecutive array elements of the descriptor update informations in the raw data structure. The actual pointer ptr for each array element j of update entry i is computed using the following formula:
  * 
- * <code><pre>
- *     const char *ptr = (const char *)pData + pDescriptorUpdateEntries[i].offset + j * pDescriptorUpdateEntries[i].stride</pre></code>
+ * <pre><code>
+ *     const char *ptr = (const char *)pData + pDescriptorUpdateEntries[i].offset + j * pDescriptorUpdateEntries[i].stride</code></pre>
  * 
  * <p>The stride is useful in case the bindings are stored in structs along with other data.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDescriptorUpdateTemplateEntry {
  *     uint32_t dstBinding;
  *     uint32_t dstArrayElement;
@@ -61,13 +61,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDescriptorType descriptorType;
  *     size_t offset;
  *     size_t stride;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateEntry extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -12,12 +12,12 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 /**
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * float (*) (
  *     YGNodeRef node,
  *     float width,
  *     float height
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("YGBaselineFunc")

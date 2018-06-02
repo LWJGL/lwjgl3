@@ -114,11 +114,11 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         Various functions are provided for enumerating the available display devices present on a Vulkan physical device. To query information about the available displays, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceDisplayPropertiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkDisplayPropertiesKHR*                     pProperties);</pre></code>
+￿    VkDisplayPropertiesKHR*                     pProperties);</code></pre>
 
         <h5>Description</h5>
         If {@code pProperties} is {@code NULL}, then the number of display devices available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of display devices available for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -162,11 +162,11 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         Images are presented to individual planes on a display. Devices <b>must</b> support at least one plane on each display. Planes <b>can</b> be stacked and blended to composite multiple images on one display. Devices <b>may</b> support only a fixed stacking order and fixed mapping between planes and displays, or they <b>may</b> allow arbitrary application specified stacking orders and mappings between planes and displays. To query the properties of device display planes, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDeviceDisplayPlanePropertiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkDisplayPlanePropertiesKHR*                pProperties);</pre></code>
+￿    VkDisplayPlanePropertiesKHR*                pProperties);</code></pre>
 
         <h5>Description</h5>
         If {@code pProperties} is {@code NULL}, then the number of display planes available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written.
@@ -210,12 +210,12 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         To determine which displays a plane is usable with, call
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDisplayPlaneSupportedDisplaysKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    uint32_t                                    planeIndex,
 ￿    uint32_t*                                   pDisplayCount,
-￿    VkDisplayKHR*                               pDisplays);</pre></code>
+￿    VkDisplayKHR*                               pDisplays);</code></pre>
 
         <h5>Description</h5>
         If {@code pDisplays} is {@code NULL}, then the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice} is returned in {@code pDisplayCount}. Otherwise, {@code pDisplayCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pDisplays} array, and on return the variable is overwritten with the number of handles actually written to {@code pDisplays}. If the value of {@code pDisplayCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pDisplayCount} handles will be written. If {@code pDisplayCount} is smaller than the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -262,12 +262,12 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         Each display has one or more supported modes associated with it by default. These built-in modes are queried by calling:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDisplayModePropertiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkDisplayKHR                                display,
 ￿    uint32_t*                                   pPropertyCount,
-￿    VkDisplayModePropertiesKHR*                 pProperties);</pre></code>
+￿    VkDisplayModePropertiesKHR*                 pProperties);</code></pre>
 
         <h5>Description</h5>
         If {@code pProperties} is {@code NULL}, then the number of display modes available on the specified {@code display} for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of display modes available on the specified {@code display} for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -313,13 +313,13 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         Additional modes <b>may</b> also be created by calling:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateDisplayModeKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkDisplayKHR                                display,
 ￿    const VkDisplayModeCreateInfoKHR*           pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkDisplayModeKHR*                           pMode);</pre></code>
+￿    VkDisplayModeKHR*                           pMode);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -369,12 +369,12 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         Applications that wish to present directly to a display <b>must</b> select which layer, or "{@code plane}" of the display they wish to target, and a mode to use with the display. Each display supports at least one plane. The capabilities of a given mode and plane combination are determined by calling:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDisplayPlaneCapabilitiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkDisplayModeKHR                            mode,
 ￿    uint32_t                                    planeIndex,
-￿    VkDisplayPlaneCapabilitiesKHR*              pCapabilities);</pre></code>
+￿    VkDisplayPlaneCapabilitiesKHR*              pCapabilities);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -420,12 +420,12 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <h5>C Specification</h5>
         A complete display configuration includes a mode, one or more display planes and any parameters describing their behavior, and parameters describing some aspects of the images associated with those planes. Display surfaces describe the configuration of a single plane within a complete display configuration. To create a {@code VkSurfaceKHR} structure for a display surface, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateDisplayPlaneSurfaceKHR(
 ￿    VkInstance                                  instance,
 ￿    const VkDisplaySurfaceCreateInfoKHR*        pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSurfaceKHR*                               pSurface);</pre></code>
+￿    VkSurfaceKHR*                               pSurface);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

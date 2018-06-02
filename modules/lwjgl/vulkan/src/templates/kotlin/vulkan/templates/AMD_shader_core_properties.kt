@@ -16,11 +16,11 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
         <h5>Examples</h5>
         This example retrieves the shader core properties for a physical device.
 
-        <code><pre>
+        <pre><code>
 ￿extern VkInstance       instance;
 ￿
 ￿PFN_vkGetPhysicalDeviceProperties2 pfnVkGetPhysicalDeviceProperties2 =
-￿    reinterpret_cast<PFN_vkGetPhysicalDeviceProperties2>
+￿    reinterpret_cast&lt;PFN_vkGetPhysicalDeviceProperties2&gt;
 ￿    (vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceProperties2") );
 ￿
 ￿VkPhysicalDeviceProperties2             general_props;
@@ -29,11 +29,11 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
 ￿shader_core_properties.pNext = nullptr;
 ￿shader_core_properties.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD;
 ￿
-￿general_props.pNext = &shader_core_properties;
+￿general_props.pNext = &amp;shader_core_properties;
 ￿general_props.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
 ￿
 ￿// After this call, shader_core_properties has been populated
-￿pfnVkGetPhysicalDeviceProperties2(device, &general_props);
+￿pfnVkGetPhysicalDeviceProperties2(device, &amp;general_props);
 ￿
 ￿printf("Number of shader engines: %d\n",
 ￿    m_shader_core_properties.shader_engine_count =
@@ -76,7 +76,7 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
 ￿    shader_core_properties.maxVgprAllocation;
 ￿printf("VGPRs are allocated in groups of this size: %d\n",
 ￿    m_shader_core_properties.vgpr_allocation_granularity =
-￿    shader_core_properties.vgprAllocationGranularity;</pre></code>
+￿    shader_core_properties.vgprAllocationGranularity;</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

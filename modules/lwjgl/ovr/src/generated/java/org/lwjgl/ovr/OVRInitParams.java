@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ovrInitParams {
  *     uint32_t Flags;
  *     uint32_t RequestedMinorVersion;
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uintptr_t UserData;
  *     uint32_t ConnectionTimeoutMS;
  *     char[4];
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ovrInitParams")
 public class OVRInitParams extends Struct implements NativeResource {
@@ -53,6 +53,7 @@ public class OVRInitParams extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

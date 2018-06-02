@@ -46,20 +46,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDrawIndexedIndirectCommand {
  *     uint32_t indexCount;
  *     uint32_t instanceCount;
  *     uint32_t firstIndex;
  *     int32_t vertexOffset;
  *     uint32_t firstInstance;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDrawIndexedIndirectCommand extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

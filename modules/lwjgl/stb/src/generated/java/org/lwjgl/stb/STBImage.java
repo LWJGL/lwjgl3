@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Primarily of interest to game developers and other people who can avoid problematic images and only need the trivial interface. Supported formats:</p>
  * 
  * <ul>
- * <li>JPEG baseline & progressive (12 bpc/arithmetic not supported, same as stock IJG lib</li>
+ * <li>JPEG baseline &amp; progressive (12 bpc/arithmetic not supported, same as stock IJG lib</li>
  * <li>PNG 1/2/4/8/16-bit-per-channel</li>
  * <li>TGA (not sure what subset, if a subset)</li>
  * <li>BMP non-1bpp, non-RLE</li>
@@ -56,14 +56,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Basic usage (see HDR discussion below for HDR usage):</p>
  * 
- * <code><pre>
+ * <pre><code>
  * int x,y,n;
- * unsigned char *data = stbi_load(filename, &x, &y, &n, 0);
+ * unsigned char *data = stbi_load(filename, &amp;x, &amp;y, &amp;n, 0);
  * // ... process data if not NULL ...
  * // ... x = width, y = height, n = # 8-bit components per pixel ...
  * // ... replace '0' with '1'..'4' to force that many components per pixel
  * // ... but 'n' will always be the number that it would have been if you said 0
- * stbi_image_free(data)</pre></code>
+ * stbi_image_free(data)</code></pre>
  * 
  * <h3>HDR image support</h3>
  * 
@@ -71,29 +71,29 @@ import static org.lwjgl.system.MemoryUtil.*;
  * can still load any file through the existing interface; if you attempt to load an HDR file, it will be automatically remapped to LDR, assuming gamma
  * 2.2 and an arbitrary scale factor defaulting to 1; both of these constants can be reconfigured through this interface:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * stbi_hdr_to_ldr_gamma(2.2f);
- * stbi_hdr_to_ldr_scale(1.0f);</pre></code>
+ * stbi_hdr_to_ldr_scale(1.0f);</code></pre>
  * 
  * <p>(note, do not use <em>inverse</em> constants; stbi_image will invert them appropriately).</p>
  * 
  * <p>Additionally, there is a new, parallel interface for loading files as (linear) floats to preserve the full dynamic range:</p>
  * 
- * <code><pre>
- * float *data = stbi_loadf(filename, &x, &y, &n, 0);</pre></code>
+ * <pre><code>
+ * float *data = stbi_loadf(filename, &amp;x, &amp;y, &amp;n, 0);</code></pre>
  * 
  * <p>If you load LDR images through this interface, those images will be promoted to floating point values, run through the inverse of constants
  * corresponding to the above:</p>
  * 
- * <code><pre>
+ * <pre><code>
  * stbi_ldr_to_hdr_scale(1.0f);
- * stbi_ldr_to_hdr_gamma(2.2f);</pre></code>
+ * stbi_ldr_to_hdr_gamma(2.2f);</code></pre>
  * 
  * <p>Finally, given a filename (or an open file or memory block) containing image data, you can query for the "most appropriate" interface to use (that is,
  * whether the image is HDR or not), using:</p>
  * 
- * <code><pre>
- * stbi_is_hdr(char *filename);</pre></code>
+ * <pre><code>
+ * stbi_is_hdr(char *filename);</code></pre>
  * 
  * <h3>iPhone PNG support</h3>
  * 
@@ -149,12 +149,12 @@ public class STBImage {
      * 
      * <p>An output image with N components has the following components interleaved in this order in each pixel:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * N=#channels_in_file     components
      *   1                     grey
      *   2                     grey, alpha
      *   3                     red, green, blue
-     *   4                     red, green, blue, alpha</pre></code>
+     *   4                     red, green, blue, alpha</code></pre>
      * 
      * <p>If image loading fails for any reason, the return value will be {@code NULL}, and {@code *x}, {@code *y}, {@code *channels_in_file} will be unchanged. The
      * function {@link #stbi_failure_reason failure_reason} can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.</p>
@@ -193,12 +193,12 @@ public class STBImage {
      * 
      * <p>An output image with N components has the following components interleaved in this order in each pixel:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * N=#channels_in_file     components
      *   1                     grey
      *   2                     grey, alpha
      *   3                     red, green, blue
-     *   4                     red, green, blue, alpha</pre></code>
+     *   4                     red, green, blue, alpha</code></pre>
      * 
      * <p>If image loading fails for any reason, the return value will be {@code NULL}, and {@code *x}, {@code *y}, {@code *channels_in_file} will be unchanged. The
      * function {@link #stbi_failure_reason failure_reason} can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.</p>
@@ -932,12 +932,7 @@ public class STBImage {
     /** Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize zlib_decode_malloc_guesssize} */
     public static native long nstbi_zlib_decode_malloc_guesssize(long buffer, int len, int initial_size, long outlen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     *
-     * @param buffer       
-     * @param initial_size 
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_malloc_guesssize(@NativeType("char const *") ByteBuffer buffer, int initial_size) {
@@ -956,13 +951,7 @@ public class STBImage {
     /** Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize_headerflag zlib_decode_malloc_guesssize_headerflag} */
     public static native long nstbi_zlib_decode_malloc_guesssize_headerflag(long buffer, int len, int initial_size, long outlen, int parse_header);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     *
-     * @param buffer       
-     * @param initial_size 
-     * @param parse_header 
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_malloc_guesssize_headerflag(@NativeType("char const *") ByteBuffer buffer, int initial_size, @NativeType("int") boolean parse_header) {
@@ -981,11 +970,7 @@ public class STBImage {
     /** Unsafe version of: {@link #stbi_zlib_decode_malloc zlib_decode_malloc} */
     public static native long nstbi_zlib_decode_malloc(long buffer, int len, long outlen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     *
-     * @param buffer 
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_malloc(@NativeType("char const *") ByteBuffer buffer) {
@@ -1004,12 +989,7 @@ public class STBImage {
     /** Unsafe version of: {@link #stbi_zlib_decode_buffer zlib_decode_buffer} */
     public static native int nstbi_zlib_decode_buffer(long obuffer, int olen, long ibuffer, int ilen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     *
-     * @param obuffer 
-     * @param ibuffer 
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     public static int stbi_zlib_decode_buffer(@NativeType("char *") ByteBuffer obuffer, @NativeType("char const *") ByteBuffer ibuffer) {
         return nstbi_zlib_decode_buffer(memAddress(obuffer), obuffer.remaining(), memAddress(ibuffer), ibuffer.remaining());
     }
@@ -1019,11 +999,7 @@ public class STBImage {
     /** Unsafe version of: {@link #stbi_zlib_decode_noheader_malloc zlib_decode_noheader_malloc} */
     public static native long nstbi_zlib_decode_noheader_malloc(long buffer, int len, long outlen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     *
-     * @param buffer 
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_noheader_malloc(@NativeType("char const *") ByteBuffer buffer) {
@@ -1042,12 +1018,7 @@ public class STBImage {
     /** Unsafe version of: {@link #stbi_zlib_decode_noheader_buffer zlib_decode_noheader_buffer} */
     public static native int nstbi_zlib_decode_noheader_buffer(long obuffer, int olen, long ibuffer, int ilen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     *
-     * @param obuffer 
-     * @param ibuffer 
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     public static int stbi_zlib_decode_noheader_buffer(@NativeType("char *") ByteBuffer obuffer, @NativeType("char const *") ByteBuffer ibuffer) {
         return nstbi_zlib_decode_noheader_buffer(memAddress(obuffer), obuffer.remaining(), memAddress(ibuffer), ibuffer.remaining());
     }

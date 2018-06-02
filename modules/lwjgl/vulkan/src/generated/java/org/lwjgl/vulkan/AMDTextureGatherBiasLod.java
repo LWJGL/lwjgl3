@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Examples</h5>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkTextureLODGatherFormatPropertiesAMD
  * {
  *     VkStructureType sType;
@@ -44,9 +44,9 @@ package org.lwjgl.vulkan;
  * formatInfo.flags  = ...;
  * 
  * formatProps.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
- * formatProps.pNext = &textureLODGatherSupport;
+ * formatProps.pNext = &amp;textureLODGatherSupport;
  * 
- * vkGetPhysicalDeviceImageFormatProperties2(physical_device, &formatInfo, &formatProps);
+ * vkGetPhysicalDeviceImageFormatProperties2(physical_device, &amp;formatInfo, &amp;formatProps);
  * 
  * if (textureLODGatherSupport.supportsTextureGatherLODBiasAMD == VK_TRUE)
  * {
@@ -57,7 +57,7 @@ package org.lwjgl.vulkan;
  * {
  *     // physical device does not support SPV_AMD_texture_gather_bias_lod for the
  *     // specified format configuration.
- * }</pre></code>
+ * }</code></pre>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>

@@ -18,7 +18,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 
         Associate a name with an image, for easier debugging in external tools or with validation layers that can print a friendly name when referring to objects in error messages.
 
-        <code><pre>
+        <pre><code>
 ￿    extern VkDevice device;
 ￿    extern VkImage image;
 ￿
@@ -35,17 +35,17 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿        "Brick Diffuse Texture",                        // pObjectName
 ￿    };
 ￿
-￿    pfnDebugMarkerSetObjectNameEXT(device, &imageNameInfo);
+￿    pfnDebugMarkerSetObjectNameEXT(device, &amp;imageNameInfo);
 ￿
 ￿    // A subsequent error might print:
 ￿    //   Image 'Brick Diffuse Texture' (0xc0dec0dedeadbeef) is used in a
-￿    //   command buffer with no memory bound to it.</pre></code>
+￿    //   command buffer with no memory bound to it.</code></pre>
 
         <b>Example 2</b>
 
         Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualisation of the commands submitted.
 
-        <code><pre>
+        <pre><code>
 ￿    extern VkDevice device;
 ￿    extern VkCommandBuffer commandBuffer;
 ￿
@@ -64,7 +64,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿    };
 ￿
 ￿    // Start an annotated group of calls under the 'Brick House' name
-￿    pfnCmdDebugMarkerBeginEXT(commandBuffer, &houseMarker);
+￿    pfnCmdDebugMarkerBeginEXT(commandBuffer, &amp;houseMarker);
 ￿    {
 ￿        // A mutable structure for each part being rendered
 ￿        VkDebugMarkerMarkerInfoEXT housePartMarker =
@@ -77,14 +77,14 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿
 ￿        // Set the name and insert the marker
 ￿        housePartMarker.pMarkerName = "Walls";
-￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &amp;housePartMarker);
 ￿
 ￿        // Insert the drawcall for the walls
 ￿        vkCmdDrawIndexed(commandBuffer, 1000, 1, 0, 0, 0);
 ￿
 ￿        // Insert a recursive region for two sets of windows
 ￿        housePartMarker.pMarkerName = "Windows";
-￿        pfnCmdDebugMarkerBeginEXT(commandBuffer, &housePartMarker);
+￿        pfnCmdDebugMarkerBeginEXT(commandBuffer, &amp;housePartMarker);
 ￿        {
 ￿            vkCmdDrawIndexed(commandBuffer, 75, 6, 1000, 0, 0);
 ￿            vkCmdDrawIndexed(commandBuffer, 100, 2, 1450, 0, 0);
@@ -92,17 +92,17 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿        pfnCmdDebugMarkerEndEXT(commandBuffer);
 ￿
 ￿        housePartMarker.pMarkerName = "Front Door";
-￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &amp;housePartMarker);
 ￿
 ￿        vkCmdDrawIndexed(commandBuffer, 350, 1, 1650, 0, 0);
 ￿
 ￿        housePartMarker.pMarkerName = "Roof";
-￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &amp;housePartMarker);
 ￿
 ￿        vkCmdDrawIndexed(commandBuffer, 500, 1, 2000, 0, 0);
 ￿    }
 ￿    // End the house annotation started above
-￿    pfnCmdDebugMarkerEndEXT(commandBuffer);</pre></code>
+￿    pfnCmdDebugMarkerEndEXT(commandBuffer);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -172,10 +172,10 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>C Specification</h5>
         In addition to setting a name for an object, debugging and validation layers may have uses for additional binary data on a per-object basis that has no other place in the Vulkan API. For example, a {@code VkShaderModule} could have additional debugging data attached to it to aid in offline shader tracing. To attach data to an object, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkDebugMarkerSetObjectTagEXT(
 ￿    VkDevice                                    device,
-￿    const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);</pre></code>
+￿    const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -218,10 +218,10 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>C Specification</h5>
         An object can be given a user-friendly name by calling:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkDebugMarkerSetObjectNameEXT(
 ￿    VkDevice                                    device,
-￿    const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);</pre></code>
+￿    const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -264,10 +264,10 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>C Specification</h5>
         A marker region can be opened by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDebugMarkerBeginEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</pre></code>
+￿    const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -304,9 +304,9 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>C Specification</h5>
         A marker region can be closed by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDebugMarkerEndEXT(
-￿    VkCommandBuffer                             commandBuffer);</pre></code>
+￿    VkCommandBuffer                             commandBuffer);</code></pre>
 
         <h5>Description</h5>
         An application <b>may</b> open a marker region in one command buffer and close it in another, or otherwise split marker regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to #CmdDebugMarkerBeginEXT() and #CmdDebugMarkerEndEXT() <b>must</b> be matched and balanced.
@@ -347,10 +347,10 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         <h5>C Specification</h5>
         A single marker label can be inserted into a command buffer by calling:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdDebugMarkerInsertEXT(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</pre></code>
+￿    const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

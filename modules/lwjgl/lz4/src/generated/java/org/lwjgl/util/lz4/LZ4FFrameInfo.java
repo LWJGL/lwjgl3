@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct LZ4F_frameInfo_t {
  *     LZ4F_blockSizeID_t blockSizeID;
  *     LZ4F_blockMode_t blockMode;
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned long long contentSize;
  *     unsigned dictID;
  *     LZ4F_blockChecksum_t blockChecksumFlag;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct LZ4F_frameInfo_t")
 public class LZ4FFrameInfo extends Struct implements NativeResource {
@@ -51,6 +51,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

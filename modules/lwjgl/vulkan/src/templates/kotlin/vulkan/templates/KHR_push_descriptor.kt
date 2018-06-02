@@ -94,14 +94,14 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
         To push descriptor updates into a command buffer, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdPushDescriptorSetKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPipelineBindPoint                         pipelineBindPoint,
 ￿    VkPipelineLayout                            layout,
 ￿    uint32_t                                    set,
 ￿    uint32_t                                    descriptorWriteCount,
-￿    const VkWriteDescriptorSet*                 pDescriptorWrites);</pre></code>
+￿    const VkWriteDescriptorSet*                 pDescriptorWrites);</code></pre>
 
         <h5>Description</h5>
         <em>Push descriptors</em> are a small bank of descriptors whose storage is internally managed by the command buffer rather than being written into a descriptor set and later bound to a command buffer. Push descriptors allow for incremental updates of descriptors without managing the lifetime of descriptor sets.
@@ -167,13 +167,13 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         <h5>C Specification</h5>
         It is also possible to use a descriptor update template to specify the push descriptors to update. To do so, call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkCmdPushDescriptorSetWithTemplateKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
 ￿    VkPipelineLayout                            layout,
 ￿    uint32_t                                    set,
-￿    const void*                                 pData);</pre></code>
+￿    const void*                                 pData);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -203,7 +203,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
             <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics Compute</td><td></td></tr></tbody>
         </table>
 
-        <code><pre>
+        <pre><code>
 ￿struct AppBufferView {
 ￿    VkBufferView bufferView;
 ￿    uint32_t     applicationRelatedInformation;
@@ -247,14 +247,14 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 ￿VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;
 ￿myResult = vkCreateDescriptorUpdateTemplate(
 ￿    myDevice,
-￿    &createInfo,
+￿    &amp;createInfo,
 ￿    NULL,
-￿    &myDescriptorUpdateTemplate);
+￿    &amp;myDescriptorUpdateTemplate);
 ￿}
 ￿
 ￿AppDataStructure appData;
 ￿// fill appData here or cache it in your engine
-￿vkCmdPushDescriptorSetWithTemplateKHR(myCmdBuffer, myDescriptorUpdateTemplate, myPipelineLayout, 0,&appData);</pre></code>
+￿vkCmdPushDescriptorSetWithTemplateKHR(myCmdBuffer, myDescriptorUpdateTemplate, myPipelineLayout, 0,&amp;appData);</code></pre>
         """,
 
         VkCommandBuffer.IN("commandBuffer", "the command buffer that the descriptors will be recorded in."),

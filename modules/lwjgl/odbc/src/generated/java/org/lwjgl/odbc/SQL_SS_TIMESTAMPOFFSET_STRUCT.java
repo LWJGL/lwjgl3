@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct SQL_SS_TIMESTAMPOFFSET_STRUCT {
  *     SQLSMALLINT year;
  *     SQLUSMALLINT month;
@@ -29,13 +29,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SQLUINTEGER fraction;
  *     SQLSMALLINT timezone_hour;
  *     SQLSMALLINT timezone_minute;
- * }</pre></code>
+ * }</code></pre>
  */
 public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

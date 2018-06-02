@@ -869,7 +869,7 @@ public class VK11 {
      * <ul>
      * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT} specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined in the {@link NVDedicatedAllocation VK_NV_dedicated_allocation} extension to create (or import) a dedicated allocation for the image or buffer.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT} specifies that handles of this type <b>can</b> be exported from Vulkan memory objects.</li>
-     * <li>{@link #VK_INTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT INTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT} specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
+     * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT} specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
      * </ul>
      * 
      * <p>Because their semantics in external APIs roughly align with that of an image or buffer with a dedicated allocation in Vulkan, implementations are required: to report {@link #VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT} for the following external handle types:</p>
@@ -883,12 +883,6 @@ public class VK11 {
      * <h5>See Also</h5>
      * 
      * <p>{@code VkExternalMemoryFeatureFlags}</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT}</li>
-     * </ul>
      */
     public static final int
         VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT = 0x1,
@@ -1111,9 +1105,9 @@ public class VK11 {
      * 
      * <p>The version of Vulkan that is supported by an instance <b>may</b> be different than the version of Vulkan supported by a device or physical device. To query properties that <b>can</b> be used in creating an instance, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumerateInstanceVersion(
-     *     uint32_t*                                   pApiVersion);</pre></code>
+     *     uint32_t*                                   pApiVersion);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1162,19 +1156,19 @@ public class VK11 {
      * 
      * <p>To attach memory to buffer objects for one or more buffers at a time, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBindBufferMemory2(
      *     VkDevice                                    device,
      *     uint32_t                                    bindInfoCount,
-     *     const VkBindBufferMemoryInfo*               pBindInfos);</pre></code>
+     *     const VkBindBufferMemoryInfo*               pBindInfos);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBindBufferMemory2KHR(
      *     VkDevice                                    device,
      *     uint32_t                                    bindInfoCount,
-     *     const VkBindBufferMemoryInfo*               pBindInfos);</pre></code>
+     *     const VkBindBufferMemoryInfo*               pBindInfos);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1236,19 +1230,19 @@ public class VK11 {
      * 
      * <p>To attach memory to image objects for one or more images at a time, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBindImageMemory2(
      *     VkDevice                                    device,
      *     uint32_t                                    bindInfoCount,
-     *     const VkBindImageMemoryInfo*                pBindInfos);</pre></code>
+     *     const VkBindImageMemoryInfo*                pBindInfos);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkBindImageMemory2KHR(
      *     VkDevice                                    device,
      *     uint32_t                                    bindInfoCount,
-     *     const VkBindImageMemoryInfo*                pBindInfos);</pre></code>
+     *     const VkBindImageMemoryInfo*                pBindInfos);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1308,23 +1302,23 @@ public class VK11 {
      * 
      * <p>To determine how peer memory <b>can</b> be accessed, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDeviceGroupPeerMemoryFeatures(
      *     VkDevice                                    device,
      *     uint32_t                                    heapIndex,
      *     uint32_t                                    localDeviceIndex,
      *     uint32_t                                    remoteDeviceIndex,
-     *     VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</pre></code>
+     *     VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDeviceGroupPeerMemoryFeaturesKHR(
      *     VkDevice                                    device,
      *     uint32_t                                    heapIndex,
      *     uint32_t                                    localDeviceIndex,
      *     uint32_t                                    remoteDeviceIndex,
-     *     VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</pre></code>
+     *     VkPeerMemoryFeatureFlags*                   pPeerMemoryFeatures);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -1365,17 +1359,17 @@ public class VK11 {
      * 
      * <p>To update the current device mask of a command buffer, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetDeviceMask(
      *     VkCommandBuffer                             commandBuffer,
-     *     uint32_t                                    deviceMask);</pre></code>
+     *     uint32_t                                    deviceMask);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetDeviceMaskKHR(
      *     VkCommandBuffer                             commandBuffer,
-     *     uint32_t                                    deviceMask);</pre></code>
+     *     uint32_t                                    deviceMask);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1432,7 +1426,7 @@ public class VK11 {
      * 
      * <p>To record a dispatch using non-zero base values for the components of {@code WorkgroupId}, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDispatchBase(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    baseGroupX,
@@ -1440,11 +1434,11 @@ public class VK11 {
      *     uint32_t                                    baseGroupZ,
      *     uint32_t                                    groupCountX,
      *     uint32_t                                    groupCountY,
-     *     uint32_t                                    groupCountZ);</pre></code>
+     *     uint32_t                                    groupCountZ);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdDispatchBaseKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    baseGroupX,
@@ -1452,7 +1446,7 @@ public class VK11 {
      *     uint32_t                                    baseGroupZ,
      *     uint32_t                                    groupCountX,
      *     uint32_t                                    groupCountY,
-     *     uint32_t                                    groupCountZ);</pre></code>
+     *     uint32_t                                    groupCountZ);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1532,19 +1526,19 @@ public class VK11 {
      * 
      * <p>To retrieve a list of the device groups present in the system, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumeratePhysicalDeviceGroups(
      *     VkInstance                                  instance,
      *     uint32_t*                                   pPhysicalDeviceGroupCount,
-     *     VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</pre></code>
+     *     VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkEnumeratePhysicalDeviceGroupsKHR(
      *     VkInstance                                  instance,
      *     uint32_t*                                   pPhysicalDeviceGroupCount,
-     *     VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</pre></code>
+     *     VkPhysicalDeviceGroupProperties*            pPhysicalDeviceGroupProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1611,19 +1605,19 @@ public class VK11 {
      * 
      * <p>To determine the memory requirements for an image resource, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageMemoryRequirements2(
      *     VkDevice                                    device,
      *     const VkImageMemoryRequirementsInfo2*       pInfo,
-     *     VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+     *     VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageMemoryRequirements2KHR(
      *     VkDevice                                    device,
      *     const VkImageMemoryRequirementsInfo2*       pInfo,
-     *     VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+     *     VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1663,19 +1657,19 @@ public class VK11 {
      * 
      * <p>To determine the memory requirements for a buffer resource, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetBufferMemoryRequirements2(
      *     VkDevice                                    device,
      *     const VkBufferMemoryRequirementsInfo2*      pInfo,
-     *     VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+     *     VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetBufferMemoryRequirements2KHR(
      *     VkDevice                                    device,
      *     const VkBufferMemoryRequirementsInfo2*      pInfo,
-     *     VkMemoryRequirements2*                      pMemoryRequirements);</pre></code>
+     *     VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1719,21 +1713,21 @@ public class VK11 {
      * 
      * <p>To query sparse memory requirements for an image, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageSparseMemoryRequirements2(
      *     VkDevice                                    device,
      *     const VkImageSparseMemoryRequirementsInfo2* pInfo,
      *     uint32_t*                                   pSparseMemoryRequirementCount,
-     *     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</pre></code>
+     *     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetImageSparseMemoryRequirements2KHR(
      *     VkDevice                                    device,
      *     const VkImageSparseMemoryRequirementsInfo2* pInfo,
      *     uint32_t*                                   pSparseMemoryRequirementCount,
-     *     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</pre></code>
+     *     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1779,17 +1773,17 @@ public class VK11 {
      * 
      * <p>To query supported features defined by the core or extensions, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceFeatures2(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceFeatures2*                  pFeatures);</pre></code>
+     *     VkPhysicalDeviceFeatures2*                  pFeatures);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceFeatures2KHR(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceFeatures2*                  pFeatures);</pre></code>
+     *     VkPhysicalDeviceFeatures2*                  pFeatures);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1831,17 +1825,17 @@ public class VK11 {
      * 
      * <p>To query general properties of physical devices once enumerated, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceProperties2(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceProperties2*                pProperties);</pre></code>
+     *     VkPhysicalDeviceProperties2*                pProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceProperties2*                pProperties);</pre></code>
+     *     VkPhysicalDeviceProperties2*                pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1883,19 +1877,19 @@ public class VK11 {
      * 
      * <p>To query supported format features which are properties of the physical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceFormatProperties2(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkFormat                                    format,
-     *     VkFormatProperties2*                        pFormatProperties);</pre></code>
+     *     VkFormatProperties2*                        pFormatProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceFormatProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkFormat                                    format,
-     *     VkFormatProperties2*                        pFormatProperties);</pre></code>
+     *     VkFormatProperties2*                        pFormatProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -1939,19 +1933,19 @@ public class VK11 {
      * 
      * <p>To query additional capabilities specific to image types, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceImageFormatProperties2(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceImageFormatInfo2*     pImageFormatInfo,
-     *     VkImageFormatProperties2*                   pImageFormatProperties);</pre></code>
+     *     VkImageFormatProperties2*                   pImageFormatProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetPhysicalDeviceImageFormatProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceImageFormatInfo2*     pImageFormatInfo,
-     *     VkImageFormatProperties2*                   pImageFormatProperties);</pre></code>
+     *     VkImageFormatProperties2*                   pImageFormatProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2015,19 +2009,19 @@ public class VK11 {
      * 
      * <p>To query properties of queues available on a physical device, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceQueueFamilyProperties2(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pQueueFamilyPropertyCount,
-     *     VkQueueFamilyProperties2*                   pQueueFamilyProperties);</pre></code>
+     *     VkQueueFamilyProperties2*                   pQueueFamilyProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceQueueFamilyProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     uint32_t*                                   pQueueFamilyPropertyCount,
-     *     VkQueueFamilyProperties2*                   pQueueFamilyProperties);</pre></code>
+     *     VkQueueFamilyProperties2*                   pQueueFamilyProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2075,17 +2069,17 @@ public class VK11 {
      * 
      * <p>To query memory properties, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceMemoryProperties2(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</pre></code>
+     *     VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceMemoryProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
-     *     VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</pre></code>
+     *     VkPhysicalDeviceMemoryProperties2*          pMemoryProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2131,21 +2125,21 @@ public class VK11 {
      * 
      * <p>{@link #vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2} returns an array of {@link VkSparseImageFormatProperties2}. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceSparseImageFormatProperties2(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceSparseImageFormatInfo2* pFormatInfo,
      *     uint32_t*                                   pPropertyCount,
-     *     VkSparseImageFormatProperties2*             pProperties);</pre></code>
+     *     VkSparseImageFormatProperties2*             pProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceSparseImageFormatProperties2KHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceSparseImageFormatInfo2* pFormatInfo,
      *     uint32_t*                                   pPropertyCount,
-     *     VkSparseImageFormatProperties2*             pProperties);</pre></code>
+     *     VkSparseImageFormatProperties2*             pProperties);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2186,19 +2180,19 @@ public class VK11 {
      * 
      * <p>To trim a command pool, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkTrimCommandPool(
      *     VkDevice                                    device,
      *     VkCommandPool                               commandPool,
-     *     VkCommandPoolTrimFlags                      flags);</pre></code>
+     *     VkCommandPoolTrimFlags                      flags);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkTrimCommandPoolKHR(
      *     VkDevice                                    device,
      *     VkCommandPool                               commandPool,
-     *     VkCommandPoolTrimFlags                      flags);</pre></code>
+     *     VkCommandPoolTrimFlags                      flags);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2264,11 +2258,11 @@ public class VK11 {
      * 
      * <p>To retrieve a handle to a VkQueue object with specific {@code VkDeviceQueueCreateFlags} creation flags, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDeviceQueue2(
      *     VkDevice                                    device,
      *     const VkDeviceQueueInfo2*                   pQueueInfo,
-     *     VkQueue*                                    pQueue);</pre></code>
+     *     VkQueue*                                    pQueue);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2312,21 +2306,21 @@ public class VK11 {
      * 
      * <p>To create a {@code VkSamplerYcbcrConversion}, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateSamplerYcbcrConversion(
      *     VkDevice                                    device,
      *     const VkSamplerYcbcrConversionCreateInfo*   pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSamplerYcbcrConversion*                   pYcbcrConversion);</pre></code>
+     *     VkSamplerYcbcrConversion*                   pYcbcrConversion);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateSamplerYcbcrConversionKHR(
      *     VkDevice                                    device,
      *     const VkSamplerYcbcrConversionCreateInfo*   pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSamplerYcbcrConversion*                   pYcbcrConversion);</pre></code>
+     *     VkSamplerYcbcrConversion*                   pYcbcrConversion);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -2397,19 +2391,19 @@ public class VK11 {
      * 
      * <p>To destroy a sampler Y'C<sub>B</sub>C<sub>R</sub> conversion, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroySamplerYcbcrConversion(
      *     VkDevice                                    device,
      *     VkSamplerYcbcrConversion                    ycbcrConversion,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroySamplerYcbcrConversionKHR(
      *     VkDevice                                    device,
      *     VkSamplerYcbcrConversion                    ycbcrConversion,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2462,21 +2456,21 @@ public class VK11 {
      * 
      * <p>To create a descriptor update template, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDescriptorUpdateTemplate(
      *     VkDevice                                    device,
      *     const VkDescriptorUpdateTemplateCreateInfo* pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</pre></code>
+     *     VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkCreateDescriptorUpdateTemplateKHR(
      *     VkDevice                                    device,
      *     const VkDescriptorUpdateTemplateCreateInfo* pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
-     *     VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</pre></code>
+     *     VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2537,19 +2531,19 @@ public class VK11 {
      * 
      * <p>To destroy a descriptor update template, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDescriptorUpdateTemplate(
      *     VkDevice                                    device,
      *     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkDestroyDescriptorUpdateTemplateKHR(
      *     VkDevice                                    device,
      *     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-     *     const VkAllocationCallbacks*                pAllocator);</pre></code>
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -2594,21 +2588,21 @@ public class VK11 {
      * 
      * <p>Once a {@code VkDescriptorUpdateTemplate} has been created, descriptor sets <b>can</b> be updated by calling:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkUpdateDescriptorSetWithTemplate(
      *     VkDevice                                    device,
      *     VkDescriptorSet                             descriptorSet,
      *     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkUpdateDescriptorSetWithTemplateKHR(
      *     VkDevice                                    device,
      *     VkDescriptorSet                             descriptorSet,
      *     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
-     *     const void*                                 pData);</pre></code>
+     *     const void*                                 pData);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -2631,7 +2625,7 @@ public class VK11 {
      * <li>Host access to {@code descriptorSet} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
-     * <code><pre>
+     * <pre><code>
      * struct AppBufferView {
      *     VkBufferView bufferView;
      *     uint32_t     applicationRelatedInformation;
@@ -2696,16 +2690,16 @@ public class VK11 {
      * VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;
      * myResult = vkCreateDescriptorUpdateTemplate(
      *     myDevice,
-     *     &createInfo,
+     *     &amp;createInfo,
      *     NULL,
-     *     &myDescriptorUpdateTemplate);
+     *     &amp;myDescriptorUpdateTemplate);
      * }
      * 
      * 
      * AppDataStructure appData;
      * 
      * // fill appData here or cache it in your engine
-     * vkUpdateDescriptorSetWithTemplate(myDevice, myDescriptorSet, myDescriptorUpdateTemplate, &appData);</pre></code>
+     * vkUpdateDescriptorSetWithTemplate(myDevice, myDescriptorSet, myDescriptorUpdateTemplate, &amp;appData);</code></pre>
      *
      * @param device                   the logical device that updates the descriptor sets.
      * @param descriptorSet            the descriptor set to update
@@ -2739,19 +2733,19 @@ public class VK11 {
      * 
      * <p>To query the external handle types supported by buffers, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceExternalBufferProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
-     *     VkExternalBufferProperties*                 pExternalBufferProperties);</pre></code>
+     *     VkExternalBufferProperties*                 pExternalBufferProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceExternalBufferPropertiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
-     *     VkExternalBufferProperties*                 pExternalBufferProperties);</pre></code>
+     *     VkExternalBufferProperties*                 pExternalBufferProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2791,19 +2785,19 @@ public class VK11 {
      * 
      * <p>Fences <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-fences-payloads">payload</a> to external handles. To query the external handle types supported by fences, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceExternalFenceProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceExternalFenceInfo*    pExternalFenceInfo,
-     *     VkExternalFenceProperties*                  pExternalFenceProperties);</pre></code>
+     *     VkExternalFenceProperties*                  pExternalFenceProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceExternalFencePropertiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceExternalFenceInfo*    pExternalFenceInfo,
-     *     VkExternalFenceProperties*                  pExternalFenceProperties);</pre></code>
+     *     VkExternalFenceProperties*                  pExternalFenceProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2843,19 +2837,19 @@ public class VK11 {
      * 
      * <p>Semaphores <b>may</b> support import and export of their <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-semaphores-payloads">payload</a> to external handles. To query the external handle types supported by semaphores, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceExternalSemaphoreProperties(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo,
-     *     VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</pre></code>
+     *     VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
      *     const VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo,
-     *     VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</pre></code>
+     *     VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2896,19 +2890,19 @@ public class VK11 {
      * 
      * <p>To query information about whether a descriptor set layout <b>can</b> be created, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDescriptorSetLayoutSupport(
      *     VkDevice                                    device,
      *     const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
-     *     VkDescriptorSetLayoutSupport*               pSupport);</pre></code>
+     *     VkDescriptorSetLayoutSupport*               pSupport);</code></pre>
      * 
      * <p>or the equivalent command</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetDescriptorSetLayoutSupportKHR(
      *     VkDevice                                    device,
      *     const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
-     *     VkDescriptorSetLayoutSupport*               pSupport);</pre></code>
+     *     VkDescriptorSetLayoutSupport*               pSupport);</code></pre>
      * 
      * <h5>Description</h5>
      * 

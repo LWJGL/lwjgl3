@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkDeviceGroupSubmitInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * pCommandBufferDeviceMasks;
  *     uint32_t signalSemaphoreCount;
  *     uint32_t const * pSignalSemaphoreDeviceIndices;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkDeviceGroupSubmitInfoKHR extends VkDeviceGroupSubmitInfo {
 

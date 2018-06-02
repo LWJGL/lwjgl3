@@ -14,13 +14,13 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h3>Type</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * LRESULT (*) (
  *     HWND hwnd,
  *     UINT uMsg,
  *     WPARAM wParam,
  *     LPARAM lParam
- * )</pre></code>
+ * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("WNDPROC")

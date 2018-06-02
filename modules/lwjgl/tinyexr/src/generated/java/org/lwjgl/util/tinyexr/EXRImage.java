@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct EXRImage {
  *     {@link EXRTile EXRTile} * tiles;
  *     unsigned char ** images;
@@ -34,13 +34,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int height;
  *     int num_channels;
  *     int num_tiles;
- * }</pre></code>
+ * }</code></pre>
  */
 public class EXRImage extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

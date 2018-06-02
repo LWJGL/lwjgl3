@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct Compositor_CumulativeStats {
  *     uint32_t m_nPid;
  *     uint32_t m_nNumFramePresents;
@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t m_nNumFramePresentsTimedOut;
  *     uint32_t m_nNumDroppedFramesTimedOut;
  *     uint32_t m_nNumReprojectedFramesTimedOut;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct Compositor_CumulativeStats")
 public class CompositorCumulativeStats extends Struct implements NativeResource {
@@ -55,6 +55,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

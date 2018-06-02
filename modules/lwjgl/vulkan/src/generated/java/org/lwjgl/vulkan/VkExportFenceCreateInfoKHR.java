@@ -20,12 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkExportFenceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkExternalFenceHandleTypeFlags handleTypes;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
 

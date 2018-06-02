@@ -98,10 +98,10 @@ public class KHRExternalSemaphoreFd {
      * 
      * <p>To import a semaphore payload from a POSIX file descriptor, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkImportSemaphoreFdKHR(
      *     VkDevice                                    device,
-     *     const VkImportSemaphoreFdInfoKHR*           pImportSemaphoreFdInfo);</pre></code>
+     *     const VkImportSemaphoreFdInfoKHR*           pImportSemaphoreFdInfo);</code></pre>
      * 
      * <h5>Description</h5>
      * 
@@ -166,11 +166,11 @@ public class KHRExternalSemaphoreFd {
      * 
      * <p>To export a POSIX file descriptor representing the payload of a semaphore, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * VkResult vkGetSemaphoreFdKHR(
      *     VkDevice                                    device,
      *     const VkSemaphoreGetFdInfoKHR*              pGetFdInfo,
-     *     int*                                        pFd);</pre></code>
+     *     int*                                        pFd);</code></pre>
      * 
      * <h5>Description</h5>
      * 

@@ -18,7 +18,7 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "devi
 
         Passing in GLSL code
 
-        <code><pre>
+        <pre><code>
 ￿    char const vss[] =
 ￿        "\#version 450 core\n"
 ￿        "layout(location = 0) in vec2 aVertex;\n"
@@ -34,7 +34,7 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "devi
 ￿    vertexShaderInfo.codeSize = sizeof vss;
 ￿    vertexShaderInfo.pCode = vss;
 ￿    VkShaderModule vertexShader;
-￿    vkCreateShaderModule(device, &vertexShaderInfo, 0, &vertexShader);</pre></code>
+￿    vkCreateShaderModule(device, &amp;vertexShaderInfo, 0, &amp;vertexShader);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

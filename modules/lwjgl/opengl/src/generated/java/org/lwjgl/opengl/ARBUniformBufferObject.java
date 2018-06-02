@@ -81,7 +81,7 @@ import static org.lwjgl.system.Checks.*;
  * <li>A u_index or ub_index of {@link #GL_INVALID_INDEX INVALID_INDEX} generates the {@link GL11#GL_INVALID_VALUE INVALID_VALUE} error if given as a function argument.</li>
  * <li>The default uniform block, which is not assigned any ub_index, uses a private, internal data storage, and does not have any buffer object associated
  * with it.</li>
- * <li>An active uniform that is a member of the default uniform block has location >= 0 and it has offset == stride == -1.</li>
+ * <li>An active uniform that is a member of the default uniform block has location &ge; 0 and it has offset == stride == -1.</li>
  * <li>An active uniform that is a member of a named uniform block has location == -1.</li>
  * <li>A uniform location of -1 is silently ignored if given as a function argument.</li>
  * <li>Uniform block declarations may not be nested</li>

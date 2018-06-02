@@ -750,7 +750,8 @@ val OES_element_index_uint = EXT_FLAG.nativeClassGLES("OES_element_index_uint", 
         """
         When true, the $registryLink extension is supported.
 
-        OpenGL ES 1.0 supports DrawElements with {@code type} value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT <type> values.
+        OpenGL ES 1.0 supports DrawElements with {@code type} value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT
+        {@code type} values.
         """
 }
 

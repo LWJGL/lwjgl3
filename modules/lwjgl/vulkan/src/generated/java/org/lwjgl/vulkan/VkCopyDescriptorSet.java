@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkCopyDescriptorSet {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -73,13 +73,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t dstBinding;
  *     uint32_t dstArrayElement;
  *     uint32_t descriptorCount;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkCopyDescriptorSet extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

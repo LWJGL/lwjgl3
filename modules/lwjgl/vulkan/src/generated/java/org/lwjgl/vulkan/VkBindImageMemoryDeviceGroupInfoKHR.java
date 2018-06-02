@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkBindImageMemoryDeviceGroupInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * pDeviceIndices;
  *     uint32_t splitInstanceBindRegionCount;
  *     {@link VkRect2D VkRect2D const} * pSplitInstanceBindRegions;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkBindImageMemoryDeviceGroupInfoKHR extends VkBindImageMemoryDeviceGroupInfo {
 

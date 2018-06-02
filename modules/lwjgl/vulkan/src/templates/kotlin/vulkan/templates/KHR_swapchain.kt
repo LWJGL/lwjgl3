@@ -160,12 +160,12 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To create a swapchain, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkCreateSwapchainKHR(
 ￿    VkDevice                                    device,
 ￿    const VkSwapchainCreateInfoKHR*             pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
-￿    VkSwapchainKHR*                             pSwapchain);</pre></code>
+￿    VkSwapchainKHR*                             pSwapchain);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -216,11 +216,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To destroy a swapchain object call:
 
-        <code><pre>
+        <pre><code>
 ￿void vkDestroySwapchainKHR(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
-￿    const VkAllocationCallbacks*                pAllocator);</pre></code>
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
         <h5>Description</h5>
         The application <b>must</b> not destroy a swapchain until after completion of all outstanding operations on images that were acquired from the swapchain. {@code swapchain} and all associated {@code VkImage} handles are destroyed, and <b>must</b> not be acquired or used any more by the application. The memory of each {@code VkImage} will only be freed after that image is no longer used by the presentation engine. For example, if one image of the swapchain is being displayed in a window, the memory for that image <b>may</b> not be freed until the window is destroyed, or another swapchain is created for the window. Destroying the swapchain does not invalidate the parent {@code VkSurfaceKHR}, and a new swapchain <b>can</b> be created with it.
@@ -264,12 +264,12 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To obtain the array of presentable images associated with a swapchain, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetSwapchainImagesKHR(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
 ￿    uint32_t*                                   pSwapchainImageCount,
-￿    VkImage*                                    pSwapchainImages);</pre></code>
+￿    VkImage*                                    pSwapchainImages);</code></pre>
 
         <h5>Description</h5>
         If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written. If {@code pSwapchainImageCount} is smaller than the number of presentable images for {@code swapchain}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -313,14 +313,14 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To acquire an available presentable image to use, and retrieve the index of that image, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkAcquireNextImageKHR(
 ￿    VkDevice                                    device,
 ￿    VkSwapchainKHR                              swapchain,
 ￿    uint64_t                                    timeout,
 ￿    VkSemaphore                                 semaphore,
 ￿    VkFence                                     fence,
-￿    uint32_t*                                   pImageIndex);</pre></code>
+￿    uint32_t*                                   pImageIndex);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -388,10 +388,10 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         After queueing all rendering commands and transitioning the image to the correct layout, to queue an image for presentation, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkQueuePresentKHR(
 ￿    VkQueue                                     queue,
-￿    const VkPresentInfoKHR*                     pPresentInfo);</pre></code>
+￿    const VkPresentInfoKHR*                     pPresentInfo);</code></pre>
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -471,10 +471,10 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         To query these capabilities, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDeviceGroupPresentCapabilitiesKHR(
 ￿    VkDevice                                    device,
-￿    VkDeviceGroupPresentCapabilitiesKHR*        pDeviceGroupPresentCapabilities);</pre></code>
+￿    VkDeviceGroupPresentCapabilitiesKHR*        pDeviceGroupPresentCapabilities);</code></pre>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -514,11 +514,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         To query the supported device group present modes for a particular surface, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetDeviceGroupSurfacePresentModesKHR(
 ￿    VkDevice                                    device,
 ￿    VkSurfaceKHR                                surface,
-￿    VkDeviceGroupPresentModeFlagsKHR*           pModes);</pre></code>
+￿    VkDeviceGroupPresentModeFlagsKHR*           pModes);</code></pre>
 
         <h5>Description</h5>
         The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHR().
@@ -567,12 +567,12 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         To query a set of rectangles used in presentation on the physical device, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkGetPhysicalDevicePresentRectanglesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    VkSurfaceKHR                                surface,
 ￿    uint32_t*                                   pRectCount,
-￿    VkRect2D*                                   pRects);</pre></code>
+￿    VkRect2D*                                   pRects);</code></pre>
 
         <h5>Description</h5>
         If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written. If {@code pRectCount} is smaller than the number of rectangles used for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
@@ -628,11 +628,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>C Specification</h5>
         To acquire an available presentable image to use, and retrieve the index of that image, call:
 
-        <code><pre>
+        <pre><code>
 ￿VkResult vkAcquireNextImage2KHR(
 ￿    VkDevice                                    device,
 ￿    const VkAcquireNextImageInfoKHR*            pAcquireInfo,
-￿    uint32_t*                                   pImageIndex);</pre></code>
+￿    uint32_t*                                   pImageIndex);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>

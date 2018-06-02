@@ -1937,7 +1937,7 @@ public final class MemoryUtil {
     /**
      * Decodes the bytes with index {@code [position(), position()+(length*2)}) in {@code buffer}, as a UTF-16 string.
      *
-     * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.></p>
+     * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
      *
      * @param buffer the {@link ByteBuffer} to decode
      * @param length the number of characters to decode

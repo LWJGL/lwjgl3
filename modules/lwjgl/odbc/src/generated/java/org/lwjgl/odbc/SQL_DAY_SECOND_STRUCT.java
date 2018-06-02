@@ -18,20 +18,21 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct SQL_DAY_SECOND_STRUCT {
  *     SQLUINTEGER day;
  *     SQLUINTEGER hour;
  *     SQLUINTEGER minute;
  *     SQLUINTEGER second;
  *     SQLUINTEGER fraction;
- * }</pre></code>
+ * }</code></pre>
  */
 public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

@@ -20,14 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct VkBindImageMemoryInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImage image;
  *     VkDeviceMemory memory;
  *     VkDeviceSize memoryOffset;
- * }</pre></code>
+ * }</code></pre>
  */
 public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
 

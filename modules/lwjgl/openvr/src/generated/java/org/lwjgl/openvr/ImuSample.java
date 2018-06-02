@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct ImuSample_t {
  *     double fSampleTime;
  *     {@link HmdVector3d HmdVector3d_t} vAccel;
  *     {@link HmdVector3d HmdVector3d_t} vGyro;
  *     uint32_t unOffScaleFlags;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct ImuSample_t")
 public class ImuSample extends Struct {
@@ -30,6 +30,7 @@ public class ImuSample extends Struct {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

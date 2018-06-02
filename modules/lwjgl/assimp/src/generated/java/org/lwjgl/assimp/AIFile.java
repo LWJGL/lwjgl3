@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct aiFile {
  *     {@link AIFileReadProcI aiFileReadProc} ReadProc;
  *     {@link AIFileWriteProcI aiFileWriteProc} WriteProc;
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIFileSeekI aiFileSeek} SeekProc;
  *     {@link AIFileFlushProcI aiFileFlushProc} FlushProc;
  *     aiUserData UserData;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct aiFile")
 public class AIFile extends Struct implements NativeResource {
@@ -53,6 +53,7 @@ public class AIFile extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */

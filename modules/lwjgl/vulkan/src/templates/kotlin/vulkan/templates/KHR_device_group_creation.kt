@@ -17,34 +17,34 @@ val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_devi
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
         <h5>Examples</h5>
-        <code><pre>
+        <pre><code>
 ￿    VkDeviceCreateInfo devCreateInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
 ￿    // (not shown) fill out devCreateInfo as usual.
 ￿    uint32_t deviceGroupCount = 0;
 ￿    VkPhysicalDeviceGroupPropertiesKHR *props = NULL;
 ￿
 ￿    // Query the number of device groups
-￿    vkEnumeratePhysicalDeviceGroupsKHR(g_vkInstance, &deviceGroupCount, NULL);
+￿    vkEnumeratePhysicalDeviceGroupsKHR(g_vkInstance, &amp;deviceGroupCount, NULL);
 ￿
 ￿    // Allocate and initialize structures to query the device groups
 ￿    props = (VkPhysicalDeviceGroupPropertiesKHR *)malloc(deviceGroupCount*sizeof(VkPhysicalDeviceGroupPropertiesKHR));
-￿    for (i = 0; i < deviceGroupCount; ++i) {
+￿    for (i = 0; i &lt; deviceGroupCount; ++i) {
 ￿        props[i].sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR;
 ￿        props[i].pNext = NULL;
 ￿    }
-￿    vkEnumeratePhysicalDeviceGroupsKHR(g_vkInstance, &deviceGroupCount, props);
+￿    vkEnumeratePhysicalDeviceGroupsKHR(g_vkInstance, &amp;deviceGroupCount, props);
 ￿
 ￿    // If the first device group has more than one physical device. create
 ￿    // a logical device using all of the physical devices.
 ￿    VkDeviceGroupDeviceCreateInfoKHR deviceGroupInfo = { VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR };
-￿    if (props[0].physicalDeviceCount > 1) {
+￿    if (props[0].physicalDeviceCount &gt; 1) {
 ￿        deviceGroupInfo.physicalDeviceCount = props[0].physicalDeviceCount;
 ￿        deviceGroupInfo.pPhysicalDevices = props[0].physicalDevices;
-￿        devCreateInfo.pNext = &deviceGroupInfo;
+￿        devCreateInfo.pNext = &amp;deviceGroupInfo;
 ￿    }
 ￿
-￿    vkCreateDevice(props[0].physicalDevices[0], &devCreateInfo, NULL, &g_vkDevice);
-￿    free(props);</pre></code>
+￿    vkCreateDevice(props[0].physicalDevices[0], &amp;devCreateInfo, NULL, &amp;g_vkDevice);
+￿    free(props);</code></pre>
 
         <dl>
             <dt><b>Name String</b></dt>

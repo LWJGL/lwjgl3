@@ -119,10 +119,10 @@ public class EXTSampleLocations {
      * 
      * <p>Otherwise, the sample locations used for rasterization are set by calling {@link #vkCmdSetSampleLocationsEXT CmdSetSampleLocationsEXT}:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkCmdSetSampleLocationsEXT(
      *     VkCommandBuffer                             commandBuffer,
-     *     const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);</pre></code>
+     *     const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);</code></pre>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -186,11 +186,11 @@ public class EXTSampleLocations {
      * 
      * <p>To query additional sample count specific multisampling capabilities, call:</p>
      * 
-     * <code><pre>
+     * <pre><code>
      * void vkGetPhysicalDeviceMultisamplePropertiesEXT(
      *     VkPhysicalDevice                            physicalDevice,
      *     VkSampleCountFlagBits                       samples,
-     *     VkMultisamplePropertiesEXT*                 pMultisampleProperties);</pre></code>
+     *     VkMultisamplePropertiesEXT*                 pMultisampleProperties);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

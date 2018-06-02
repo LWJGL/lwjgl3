@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h3>Layout</h3>
  * 
- * <code><pre>
+ * <pre><code>
  * struct NVGpaint {
  *     float xform[6];
  *     float extent[2];
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NVGColor NVGcolor} innerColor;
  *     {@link NVGColor NVGcolor} outerColor;
  *     int image;
- * }</pre></code>
+ * }</code></pre>
  */
 @NativeType("struct NVGpaint")
 public class NVGPaint extends Struct implements NativeResource {
@@ -50,6 +50,7 @@ public class NVGPaint extends Struct implements NativeResource {
     /** The struct size in bytes. */
     public static final int SIZEOF;
 
+    /** The struct alignment in bytes. */
     public static final int ALIGNOF;
 
     /** The struct member offsets. */
