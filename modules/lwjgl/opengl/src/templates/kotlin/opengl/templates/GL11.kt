@@ -2960,7 +2960,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         """
         Defines the scissor rectangle for all viewports. The scissor test is enabled or disabled for all viewports using #Enable() or #Disable()
         with the symbolic constant #SCISSOR_TEST. When disabled, it is as if the scissor test always passes. When enabled, if
-        ${code("left <= x<sub>w</sub> < left + width")} and ${code("bottom <= y<sub>w</sub> < bottom + height")} for the scissor rectangle, then the scissor
+        ${code("left &le; x<sub>w</sub> &lt; left + width")} and ${code("bottom &le; y<sub>w</sub> &lt; bottom + height")} for the scissor rectangle, then the scissor
         test passes. Otherwise, the test fails and the fragment is discarded.
         """,
 

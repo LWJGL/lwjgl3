@@ -324,14 +324,14 @@ private val String.htmlEscaped: String
         }
     }
 
-/** Useful for simple expressions. */
-fun code(code: String) = """<code>${code.htmlEscaped}</code>"""
+/** Useful for simple expressions. HTML markup is allowed. */
+fun code(code: String) = """<code>$code</code>"""
 
 private val CODE_BLOCK_TRIM_PATTERN = """^\s*\n|\n\s*$""".toRegex() // first and/or last empty lines
 private val CODE_BLOCK_ESCAPE_PATTERN = "^".toRegex(RegexOption.MULTILINE) // line starts
 private val CODE_BLOCK_TAB_PATTERN = "\t".toRegex() // tabs
 
-/** Useful for pre-formatted code blocks. */
+/** Useful for pre-formatted code blocks. HTML markup is not allowed and will be escaped. */
 fun codeBlock(code: String) = """<pre><code>
 ${code
     .htmlEscaped

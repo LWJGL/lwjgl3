@@ -4401,7 +4401,7 @@ public class GLFW {
      * Sets the value of the GLFW timer. It then continues to count up from that value. The value must be a positive finite number less than or equal to
      * 18446744073.0, which is approximately 584.5 years.
      * 
-     * <p>The upper limit of the timer is calculated as <code>floor((2&lt;sup&gt;64&lt;/sup&gt; - 1) / 10&lt;sup&gt;9&lt;/sup&gt;)</code> and is due to implementations storing nanoseconds
+     * <p>The upper limit of the timer is calculated as <code>floor((2<sup>64</sup> - 1) / 10<sup>9</sup>)</code> and is due to implementations storing nanoseconds
      * in 64 bits. The limit may be increased in the future.</p>
      * 
      * <p>This function may be called from any thread. Reading and writing of the internal timer offset is not atomic, so it needs to be externally synchronized

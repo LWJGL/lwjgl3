@@ -1079,7 +1079,7 @@ public class GL11 {
 
     /**
      * sets the clear color index. index is converted to a fixed-point value with unspecified precision to the left of the binary point; the integer part of
-     * this value is then masked with <code>2&lt;sup&gt;m&lt;/sup&gt; &ndash; 1</code>, where {@code m} is the number of bits in a color index value stored in the
+     * this value is then masked with <code>2<sup>m</sup> &ndash; 1</code>, where {@code m} is the number of bits in a color index value stored in the
      * framebuffer.
      *
      * @param index the value to which to clear the color buffer in color index mode
@@ -4543,9 +4543,9 @@ public class GL11 {
     // --- [ glFrustum ] ---
 
     /**
-     * Manipulates the current matrix with a matrix that produces perspective projection, in such a way that the coordinates <code>(lb &ndash; n)&lt;sup&gt;T&lt;/sup&gt;</code>
-     * and <code>(rt &ndash; n)&lt;sup&gt;T&lt;/sup&gt;</code> specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
-     * window, respectively (assuming that the eye is located at <code>(0 0 0)&lt;sup&gt;T&lt;/sup&gt;</code>). {@code f} gives the distance from the eye to the far clipping
+     * Manipulates the current matrix with a matrix that produces perspective projection, in such a way that the coordinates <code>(lb &ndash; n)<sup>T</sup></code>
+     * and <code>(rt &ndash; n)<sup>T</sup></code> specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
+     * window, respectively (assuming that the eye is located at <code>(0 0 0)<sup>T</sup></code>). {@code f} gives the distance from the eye to the far clipping
      * plane.
      * 
      * <p>Calling this function is equivalent to calling {@link #glMultMatrixf MultMatrixf} with the following matrix:</p>
@@ -4823,9 +4823,9 @@ public class GL11 {
     // --- [ glOrtho ] ---
 
     /**
-     * Manipulates the current matrix with a matrix that produces parallel projection, in such a way that the coordinates <code>(lb &ndash; n)&lt;sup&gt;T&lt;/sup&gt;</code>
-     * and <code>(rt &ndash; n)&lt;sup&gt;T&lt;/sup&gt;</code> specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
-     * window, respectively (assuming that the eye is located at <code>(0 0 0)&lt;sup&gt;T&lt;/sup&gt;</code>). {@code f} gives the distance from the eye to the far clipping
+     * Manipulates the current matrix with a matrix that produces parallel projection, in such a way that the coordinates <code>(lb &ndash; n)<sup>T</sup></code>
+     * and <code>(rt &ndash; n)<sup>T</sup></code> specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
+     * window, respectively (assuming that the eye is located at <code>(0 0 0)<sup>T</sup></code>). {@code f} gives the distance from the eye to the far clipping
      * plane.
      * 
      * <p>Calling this function is equivalent to calling {@link #glMultMatrixf MultMatrixf} with the following matrix:</p>
@@ -5919,7 +5919,7 @@ public class GL11 {
     /**
      * Manipulates the current matrix with a rotation matrix.
      * 
-     * <p>{@code angle} gives an angle of rotation in degrees; the coordinates of a vector v are given by <code>v = (x y z)&lt;sup&gt;T&lt;/sup&gt;</code>. The computed matrix
+     * <p>{@code angle} gives an angle of rotation in degrees; the coordinates of a vector v are given by <code>v = (x y z)<sup>T</sup></code>. The computed matrix
      * is a counter-clockwise rotation about the line through the origin with the specified axis when that axis is pointing up (i.e. the right-hand rule
      * determines the sense of the rotation angle). The matrix is thus</p>
      * 
@@ -5938,7 +5938,7 @@ public class GL11 {
      * <tr><td>-y'</td><td>x'</td><td>0</td></tr>
      * </table>
      * 
-     * <p>then <code>&lt;b&gt;R&lt;/b&gt; = uu&lt;sup&gt;T&lt;/sup&gt; + cos(angle)(I - uu&lt;sup&gt;T&lt;/sup&gt;) + sin(angle)&lt;b&gt;S&lt;/b&gt;</code></p>
+     * <p>then <code><b>R</b> = uu<sup>T</sup> + cos(angle)(I - uu<sup>T</sup>) + sin(angle)<b>S</b></code></p>
      *
      * @param angle the angle of rotation in degrees
      * @param x     the x coordinate of the rotation vector
@@ -6003,7 +6003,7 @@ public class GL11 {
     /**
      * Defines the scissor rectangle for all viewports. The scissor test is enabled or disabled for all viewports using {@link #glEnable Enable} or {@link #glDisable Disable}
      * with the symbolic constant {@link #GL_SCISSOR_TEST SCISSOR_TEST}. When disabled, it is as if the scissor test always passes. When enabled, if
-     * <code>left &lt;= x&lt;sub&gt;w&lt;/sub&gt; &lt; left + width</code> and <code>bottom &lt;= y&lt;sub&gt;w&lt;/sub&gt; &lt; bottom + height</code> for the scissor rectangle, then the scissor
+     * <code>left &le; x<sub>w</sub> &lt; left + width</code> and <code>bottom &le; y<sub>w</sub> &lt; bottom + height</code> for the scissor rectangle, then the scissor
      * test passes. Otherwise, the test fails and the fragment is discarded.
      *
      * @param x      the left scissor rectangle coordinate
