@@ -194,6 +194,15 @@ val ovrVector3f = struct(Module.OVR, "OVRVector3f", nativeName = "ovrVector3f") 
     float.member("z", "the vector z component")
 }
 
+/*val ovrVector4f = struct(Module.OVR, "OVRVector4f", nativeName = "ovrVector4f") {
+    documentation = "A 4D vector with float components."
+
+    float.member("x", "the vector x component")
+    float.member("y", "the vector y component")
+    float.member("z", "the vector z component")
+    float.member("w", "the vector w component")
+}*/
+
 val ovrMatrix4f = struct(Module.OVR, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
     documentation = "A 4x4 matrix with float components."
 
@@ -420,6 +429,25 @@ val ovrMirrorTextureDesc = struct(Module.OVR, "OVRMirrorTextureDesc", nativeName
 
 val ovrTextureSwapChain = "ovrTextureSwapChain".handle
 val ovrMirrorTexture = "ovrMirrorTexture".handle
+
+val ovrViewportStencilType = "ovrViewportStencilType".enumType
+val ovrViewportStencilDesc = struct(Module.OVR, "OVRViewportStencilDesc", nativeName = "ovrViewportStencilDesc") {
+  ovrViewportStencilType.member("StencilType", "")
+  ovrEyeType.member("Eye", "")
+  ovrFovPort.member("FovPort", "typically Fov obtained from #GetRenderDesc()")
+  ovrQuatf.member("HmdToEyeRotation", "typically {@code HmdToEyePose.Orientation} obtained from #GetRenderDesc()")
+}
+val ovrViewportStencilMeshBuffer = struct(Module.OVR, "OVRViewportStencilMeshBuffer", nativeName = "ovrViewportStencilMeshBuffer") {
+  /// Vertex info
+  AutoSize("VertexBuffer")..int.member("AllocVertexCount", "to be filled in by caller of #GetViewportStencil()")
+  int.member("UsedVertexCount", "to be filled in by SDK and returned to caller")
+  ovrVector2f.p.buffer("VertexBuffer", "to be allocated by caller and filled in by SDK")
+
+  /// Index info
+  AutoSize("IndexBuffer")..int.member("AllocIndexCount", "to be filled in by caller of #GetViewportStencil()")
+  int.member("UsedIndexCount", "to be filled in by SDK and returned to caller")
+  uint16_t.p.member("IndexBuffer", "to be allocated by caller and filled in by SDK")
+}
 
 val ovrTouchHapticsDesc = struct(Module.OVR, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
     documentation = "Describes the Touch Haptics engine."

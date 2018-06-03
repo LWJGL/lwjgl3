@@ -391,29 +391,52 @@ public class OVR {
         ovrMirrorOption_IncludeSystemGui     = 0x20;
 
     /**
-     * Button input types. ({@code ovrTouch})
+     * {@code ovrViewportStencilType}
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #ovrButton_A Button_A} - Button A</li>
-     * <li>{@link #ovrButton_B Button_B} - Button B</li>
-     * <li>{@link #ovrButton_RThumb Button_RThumb} - Button RThumb</li>
-     * <li>{@link #ovrButton_RShoulder Button_RShoulder} - Button RShoulder</li>
-     * <li>{@link #ovrButton_X Button_X} - Button X</li>
-     * <li>{@link #ovrButton_Y Button_Y} - Button Y</li>
-     * <li>{@link #ovrButton_LThumb Button_LThumb} - Button LThumb</li>
-     * <li>{@link #ovrButton_LShoulder Button_LShoulder} - Button LShoulder</li>
-     * <li>{@link #ovrButton_Up Button_Up} - Button Up</li>
-     * <li>{@link #ovrButton_Down Button_Down} - Button Down</li>
-     * <li>{@link #ovrButton_Left Button_Left} - Button Left</li>
-     * <li>{@link #ovrButton_Right Button_Right} - Button Right</li>
-     * <li>{@link #ovrButton_Enter Button_Enter} - Button Enter</li>
-     * <li>{@link #ovrButton_Back Button_Back} - Button Back</li>
-     * <li>{@link #ovrButton_VolUp Button_VolUp} - Button VolUp</li>
-     * <li>{@link #ovrButton_VolDown Button_VolDown} - Button VolDown</li>
-     * <li>{@link #ovrButton_Home Button_Home} - Button Home</li>
-     * <li>{@link #ovrButton_Private Button_Private}</li>
+     * <li>{@link #ovrViewportStencil_HiddenArea ViewportStencil_HiddenArea} - Triangle mesh covering parts that are hidden to users.</li>
+     * <li>{@link #ovrViewportStencil_VisibleArea ViewportStencil_VisibleArea} - Triangle mesh covering parts that are visible to users.</li>
+     * <li>{@link #ovrViewportStencil_BorderLine ViewportStencil_BorderLine} - Line buffer that draws the boundary visible to users.</li>
+     * </ul>
+     */
+    public static final int
+        ovrViewportStencil_HiddenArea  = 0,
+        ovrViewportStencil_VisibleArea = 1,
+        ovrViewportStencil_BorderLine  = 2;
+
+    /**
+     * Describes button input types.({@code ovrButton})
+     * 
+     * <p>Button inputs are combined; that is they will be reported as pressed if they are pressed on either one of the two devices. The
+     * {@code ovrButton_Up/Down/Left/Right} map to both XBox D-Pad and directional buttons. The {@code ovrButton_Enter} and {@code ovrButton_Return} map to
+     * Start and Back controller buttons, respectively.</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #ovrButton_A Button_A} - A button on XBox controllers and right Touch controller. Select button on Oculus Remote.</li>
+     * <li>{@link #ovrButton_B Button_B} - B button on XBox controllers and right Touch controller. Back button on Oculus Remote.</li>
+     * <li>{@link #ovrButton_RThumb Button_RThumb} - Right thumbstick on XBox controllers and Touch controllers. Not present on Oculus Remote.</li>
+     * <li>{@link #ovrButton_RShoulder Button_RShoulder} - Right shoulder button on XBox controllers. Not present on Touch controllers or Oculus Remote.</li>
+     * <li>{@link #ovrButton_X Button_X} - X button on XBox controllers and left Touch controller. Not present on Oculus Remote.</li>
+     * <li>{@link #ovrButton_Y Button_Y} - Y button on XBox controllers and left Touch controller. Not present on Oculus Remote.</li>
+     * <li>{@link #ovrButton_LThumb Button_LThumb} - Left thumbstick on XBox controllers and Touch controllers. Not present on Oculus Remote.</li>
+     * <li>{@link #ovrButton_LShoulder Button_LShoulder} - Left shoulder button on XBox controllers. Not present on Touch controllers or Oculus Remote.</li>
+     * <li>{@link #ovrButton_Up Button_Up} - Up button on XBox controllers and Oculus Remote. Not present on Touch controllers.</li>
+     * <li>{@link #ovrButton_Down Button_Down} - Down button on XBox controllers and Oculus Remote. Not present on Touch controllers.</li>
+     * <li>{@link #ovrButton_Left Button_Left} - Left button on XBox controllers and Oculus Remote. Not present on Touch controllers.</li>
+     * <li>{@link #ovrButton_Right Button_Right} - Right button on XBox controllers and Oculus Remote. Not present on Touch controllers.</li>
+     * <li>{@link #ovrButton_Enter Button_Enter} - 
+     * Start on XBox 360 controller. Menu on XBox One controller and Left Touch controller. Should be referred to as the Menu button in user-facing
+     * documentation.
+     * </li>
+     * <li>{@link #ovrButton_Back Button_Back} - Back on Xbox 360 controller. View button on XBox One controller. Not present on Touch controllers or Oculus Remote.</li>
+     * <li>{@link #ovrButton_VolUp Button_VolUp} - Volume button on Oculus Remote. Not present on XBox or Touch controllers.</li>
+     * <li>{@link #ovrButton_VolDown Button_VolDown} - Volume button on Oculus Remote. Not present on XBox or Touch controllers.</li>
+     * <li>{@link #ovrButton_Home Button_Home} - Home button on XBox controllers. Oculus button on Touch controllers and Oculus Remote.</li>
+     * <li>{@link #ovrButton_Private Button_Private} - Bit mask of all buttons that are for private usage by Oculus</li>
      * <li>{@link #ovrButton_RMask Button_RMask} - Bit mask of all buttons on the right Touch controller</li>
      * <li>{@link #ovrButton_LMask Button_LMask} - Bit mask of all buttons on the left Touch controller</li>
      * </ul>
@@ -441,7 +464,9 @@ public class OVR {
         ovrButton_LMask     = ovrButton_X | ovrButton_Y | ovrButton_LThumb | ovrButton_LShoulder | ovrButton_Enter;
 
     /**
-     * Touch input types.
+     * Describes touch input types. ({@code ovrTouch})
+     * 
+     * <p>These values map to capacitive touch values reported {@link OVRInputState}{@code ::Touch}. Some of these values are mapped to button bits for consistency.</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -2007,6 +2032,21 @@ public class OVR {
         }
         novr_GetRenderDesc(session, eyeType, fov.address(), __result.address());
         return __result;
+    }
+
+    // --- [ ovr_GetViewportStencil ] ---
+
+    /** Unsafe version of: {@link #ovr_GetViewportStencil GetViewportStencil} */
+    public static native int novr_GetViewportStencil(long session, long viewportStencilDesc, long outMeshBuffer);
+
+    /** @param session an {@code ovrSession} previously returned by {@link #ovr_Create Create} */
+    @NativeType("ovrResult")
+    public static int ovr_GetViewportStencil(@NativeType("ovrSession") long session, @NativeType("ovrViewportStencilDesc const *") OVRViewportStencilDesc viewportStencilDesc, @NativeType("ovrViewportStencilMeshBuffer *") OVRViewportStencilMeshBuffer outMeshBuffer) {
+        if (CHECKS) {
+            check(session);
+            OVRViewportStencilMeshBuffer.validate(outMeshBuffer.address());
+        }
+        return novr_GetViewportStencil(session, viewportStencilDesc.address(), outMeshBuffer.address());
     }
 
     // --- [ ovr_WaitToBeginFrame ] ---

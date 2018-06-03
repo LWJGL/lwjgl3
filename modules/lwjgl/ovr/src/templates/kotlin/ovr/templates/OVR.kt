@@ -296,30 +296,50 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
-        "Button input types. ({@code ovrTouch})",
+        "{@code ovrViewportStencilType}",
 
-        "Button_A".enum("Button A", 0x00000001),
-        "Button_B".enum("Button B", 0x00000002),
-        "Button_RThumb".enum("Button RThumb", 0x00000004),
-        "Button_RShoulder".enum("Button RShoulder", 0x00000008),
+        "ViewportStencil_HiddenArea".enum("Triangle mesh covering parts that are hidden to users.", "0"),
+        "ViewportStencil_VisibleArea".enum("Triangle mesh covering parts that are visible to users.", "1"),
+        "ViewportStencil_BorderLine".enum("Line buffer that draws the boundary visible to users.", "2")
+    )
 
-        "Button_X".enum("Button X", 0x00000100),
-        "Button_Y".enum("Button Y", 0x00000200),
-        "Button_LThumb".enum("Button LThumb", 0x00000400),
-        "Button_LShoulder".enum("Button LShoulder", 0x00000800),
+    EnumConstant(
+        """
+        Describes button input types.({@code ovrButton})
+
+        Button inputs are combined; that is they will be reported as pressed if they are pressed on either one of the two devices. The
+        {@code ovrButton_Up/Down/Left/Right} map to both XBox D-Pad and directional buttons. The {@code ovrButton_Enter} and {@code ovrButton_Return} map to
+        Start and Back controller buttons, respectively.
+        """,
+
+        "Button_A".enum("A button on XBox controllers and right Touch controller. Select button on Oculus Remote.", 0x00000001),
+        "Button_B".enum("B button on XBox controllers and right Touch controller. Back button on Oculus Remote.", 0x00000002),
+        "Button_RThumb".enum("Right thumbstick on XBox controllers and Touch controllers. Not present on Oculus Remote.", 0x00000004),
+        "Button_RShoulder".enum("Right shoulder button on XBox controllers. Not present on Touch controllers or Oculus Remote.", 0x00000008),
+
+        "Button_X".enum("X button on XBox controllers and left Touch controller. Not present on Oculus Remote.", 0x00000100),
+        "Button_Y".enum("Y button on XBox controllers and left Touch controller. Not present on Oculus Remote.", 0x00000200),
+        "Button_LThumb".enum("Left thumbstick on XBox controllers and Touch controllers. Not present on Oculus Remote.", 0x00000400),
+        "Button_LShoulder".enum("Left shoulder button on XBox controllers. Not present on Touch controllers or Oculus Remote.", 0x00000800),
 
         // Navigation through DPad.
-        "Button_Up".enum("Button Up", 0x00010000),
-        "Button_Down".enum("Button Down", 0x00020000),
-        "Button_Left".enum("Button Left", 0x00040000),
-        "Button_Right".enum("Button Right", 0x00080000),
-        "Button_Enter".enum("Button Enter", 0x00100000), // Start on XBox controller.
-        "Button_Back".enum("Button Back", 0x00200000), // Back on Xbox controller.
-        "Button_VolUp".enum("Button VolUp", 0x00400000), // only supported by Remote.
-        "Button_VolDown".enum("Button VolDown", 0x00800000), // only supported by Remote.
-        "Button_Home".enum("Button Home", 0x01000000),
+        "Button_Up".enum("Up button on XBox controllers and Oculus Remote. Not present on Touch controllers.", 0x00010000),
+        "Button_Down".enum("Down button on XBox controllers and Oculus Remote. Not present on Touch controllers.", 0x00020000),
+        "Button_Left".enum("Left button on XBox controllers and Oculus Remote. Not present on Touch controllers.", 0x00040000),
+        "Button_Right".enum("Right button on XBox controllers and Oculus Remote. Not present on Touch controllers.", 0x00080000),
+        "Button_Enter".enum(
+            """
+            Start on XBox 360 controller. Menu on XBox One controller and Left Touch controller. Should be referred to as the Menu button in user-facing
+            documentation.
+            """,
+            0x00100000
+        ),
+        "Button_Back".enum("Back on Xbox 360 controller. View button on XBox One controller. Not present on Touch controllers or Oculus Remote.", 0x00200000),
+        "Button_VolUp".enum("Volume button on Oculus Remote. Not present on XBox or Touch controllers.", 0x00400000),
+        "Button_VolDown".enum("Volume button on Oculus Remote. Not present on XBox or Touch controllers.", 0x00800000),
+        "Button_Home".enum("Home button on XBox controllers. Oculus button on Touch controllers and Oculus Remote.", 0x01000000),
 
-        "Button_Private".."ovrButton_VolUp | ovrButton_VolDown | ovrButton_Home",
+        "Button_Private".enum("Bit mask of all buttons that are for private usage by Oculus", "ovrButton_VolUp | ovrButton_VolDown | ovrButton_Home"),
 
         "Button_RMask".enum(
             "Bit mask of all buttons on the right Touch controller",
@@ -332,7 +352,11 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
-        "Touch input types.",
+        """
+        Describes touch input types. ({@code ovrTouch})
+
+        These values map to capacitive touch values reported ##OVRInputState{@code ::Touch}. Some of these values are mapped to button bits for consistency.
+        """,
 
         "Touch_A".enum("Touch A", "ovrButton_A"),
         "Touch_B".enum("Touch B", "ovrButton_B"),
@@ -1271,6 +1295,15 @@ ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.Def
         ovrFovPort.IN("fov", "the ##OVRFovPort to use."),
 
         returnDoc = "the computed ##OVREyeRenderDesc for the given {@code eyeType} and field of view"
+    )
+
+    ovrResult(
+        "GetViewportStencil",
+        "",
+
+        session,
+        ovrViewportStencilDesc.const.p.IN("viewportStencilDesc", ""),
+        ovrViewportStencilMeshBuffer.p.INOUT("outMeshBuffer", "")
     )
 
     ovrResult(
