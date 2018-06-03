@@ -1304,6 +1304,7 @@ public class Assimp {
         aiAI_MATKEY_GLTF_ALPHACUTOFF                             = "$mat.gltf.alphaCutoff",
         aiAI_MATKEY_GLTF_PBRSPECULARGLOSSINESS                   = "$mat.gltf.pbrSpecularGlossiness",
         aiAI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR = "$mat.gltf.pbrMetallicRoughness.glossinessFactor",
+        aiAI_MATKEY_GLTF_UNLIT                                   = "$mat.gltf.unlit",
         ai_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE                  = "$tex.file.texCoord",
         ai_AI_MATKEY_GLTF_MAPPINGNAME_BASE                       = "$tex.mappingname",
         ai_AI_MATKEY_GLTF_MAPPINGID_BASE                         = "$tex.mappingid",

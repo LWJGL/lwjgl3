@@ -2147,6 +2147,7 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_GLTF_ALPHACUTOFF".."\$mat.gltf.alphaCutoff",
         "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS".."\$mat.gltf.pbrSpecularGlossiness",
         "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.glossinessFactor",
+        "AI_MATKEY_GLTF_UNLIT".."\$mat.gltf.unlit",
 
         "_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE".."\$tex.file.texCoord",
         "_AI_MATKEY_GLTF_MAPPINGNAME_BASE".."\$tex.mappingname",
