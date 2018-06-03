@@ -470,7 +470,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             0x0002000A),
         "HOVERED".enum(
             "{@code GetWindowAttrib}: indicates whether the cursor is currently directly over the client area of the window, with no other windows between.",
-            0x0002000A)
+            0x0002000A),
+        "FOCUS_ON_SHOW".enum(
+            """
+            {@code WindowHint}: specifies whether input focuses on calling show window.
+
+            {@code GetWindowAttrib}: Indicates whether input focuses on calling show window.
+            """,
+            0x0002000C)
     ).javaDocLinks
 
     val InputModes = IntConstant(
@@ -1806,6 +1813,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Makes the specified window visible if it was previously hidden. If the window is already visible or is in full screen mode, this function does nothing.
 
+        By default, windowed mode windows are focused when shown. Set the #FOCUS_ON_SHOW window hint to change this behavior for all newly created windows, or
+        change the behavior for an existing window with #SetWindowAttrib().
+
         This function must only be called from the main thread.
         """,
 
@@ -1833,6 +1843,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Brings the specified window to front and sets input focus. The window should already be visible and not iconified.
 
         By default, both windowed and full screen mode windows are focused when initially created. Set the #FOCUSED hint to disable this behavior.
+
+        Also by default, windowed mode windows are focused when shown with #ShowWindow(). Set the #FOCUS_ON_SHOW window hint to disable this behavior.
 
         <b>Do not use this function</b> to steal focus from other applications unless you are certain that is what the user wants. Focus stealing can be
         extremely disruptive.
@@ -1967,7 +1979,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
             Calling #GetWindowAttrib() will always return the latest value, even if that value is ignored by the current mode of the window.
             """,
-            "#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY"
+            "#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY #FOCUS_ON_SHOW"
         ),
         int.IN("value", "the value to set"),
 
