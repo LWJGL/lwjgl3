@@ -27,18 +27,15 @@ final class MemoryAccess {
     }
 
     static MemoryAccessor getInstance() {
-        MemoryAccessor accessor;
         try {
             // Depends on sun.misc.Unsafe
-            accessor = new MemoryAccessorUnsafe();
+            return new MemoryAccessorUnsafe();
         } catch (Throwable t) {
             t.printStackTrace(DEBUG_STREAM);
             DEBUG_STREAM
                 .println("[LWJGL] [MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
-            accessor = new MemoryAccessorJNI();
+            return new MemoryAccessorJNI();
         }
-
-        return accessor;
     }
 
     /** Implements functionality for {@link MemoryUtil}. */

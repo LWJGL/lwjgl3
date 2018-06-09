@@ -30,8 +30,6 @@ public class MemoryStack implements AutoCloseable {
     private static final int DEFAULT_STACK_SIZE   = Configuration.STACK_SIZE.get(64) * 1024;
     private static final int DEFAULT_STACK_FRAMES = 8;
 
-    private static final boolean DEBUG_STACK = Configuration.DEBUG_STACK.get(false);
-
     private static final ThreadLocal<MemoryStack> TLS = ThreadLocal.withInitial(MemoryStack::create);
 
     static {
@@ -40,11 +38,11 @@ public class MemoryStack implements AutoCloseable {
         }
     }
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @Nullable
     private final ByteBuffer buffer;
-    private final long       address;
 
-    private final int size;
+    private final long address;
+    private final int  size;
 
     private int pointer;
 
@@ -52,13 +50,17 @@ public class MemoryStack implements AutoCloseable {
     protected int   frameIndex;
 
     /**
-     * Creates a new {@link MemoryStack} with the specified size.
+     * Creates a new {@link MemoryStack} backed by the specified memory region.
      *
-     * @param size the maximum number of bytes that may be allocated on the stack
+     * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
+     *
+     * @param buffer  the backing memory buffer, may be null
+     * @param address the backing memory address
+     * @param size    the backing memory size
      */
-    protected MemoryStack(int size) {
-        this.buffer = BufferUtils.createByteBuffer(size);
-        this.address = memAddress(buffer);
+    protected MemoryStack(@Nullable ByteBuffer buffer, long address, int size) {
+        this.buffer = buffer;
+        this.address = address;
 
         this.size = size;
         this.pointer = size;
@@ -66,7 +68,11 @@ public class MemoryStack implements AutoCloseable {
         this.frames = new int[DEFAULT_STACK_FRAMES];
     }
 
-    /** Creates a new {@link MemoryStack} with the default size. */
+    /**
+     * Creates a new {@link MemoryStack} with the default size.
+     *
+     * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
+     */
     public static MemoryStack create() {
         return create(DEFAULT_STACK_SIZE);
     }
@@ -74,12 +80,41 @@ public class MemoryStack implements AutoCloseable {
     /**
      * Creates a new {@link MemoryStack} with the specified size.
      *
-     * @param size the maximum number of bytes that may be allocated on the stack
+     * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
+     *
+     * @param capacity the maximum number of bytes that may be allocated on the stack
      */
-    public static MemoryStack create(int size) {
-        return DEBUG_STACK
-            ? new DebugMemoryStack(size)
-            : new MemoryStack(size);
+    public static MemoryStack create(int capacity) {
+        return create(BufferUtils.createByteBuffer(capacity));
+    }
+
+    /**
+     * Creates a new {@link MemoryStack} backed by the specified memory buffer.
+     *
+     * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
+     *
+     * @param buffer the backing memory buffer
+     */
+    public static MemoryStack create(ByteBuffer buffer) {
+        long address = memAddress(buffer);
+        int  size    = buffer.remaining();
+        return Configuration.DEBUG_STACK.get(false)
+            ? new DebugMemoryStack(buffer, address, size)
+            : new MemoryStack(buffer, address, size);
+    }
+
+    /**
+     * Creates a new {@link MemoryStack} backed by the specified memory region.
+     *
+     * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
+     *
+     * @param address the backing memory address
+     * @param size    the backing memory size
+     */
+    public static MemoryStack ncreate(long address, int size) {
+        return Configuration.DEBUG_STACK.get(false)
+            ? new DebugMemoryStack(null, address, size)
+            : new MemoryStack(null, address, size);
     }
 
     /**
@@ -140,8 +175,8 @@ public class MemoryStack implements AutoCloseable {
 
         private Object[] debugFrames;
 
-        DebugMemoryStack(int size) {
-            super(size);
+        DebugMemoryStack(@Nullable ByteBuffer buffer, long address, int size) {
+            super(buffer, address, size);
             debugFrames = new Object[DEFAULT_STACK_FRAMES];
         }
 
@@ -276,21 +311,19 @@ public class MemoryStack implements AutoCloseable {
      * @return the memory address on the stack for the requested allocation
      */
     public long nmalloc(int alignment, int size) {
-        int newPointer = pointer - size;
-
         if (DEBUG) {
             checkAlignment(alignment);
         }
+
+        int newPointer = pointer - size;
         if (CHECKS) {
             checkPush(newPointer);
         }
 
         // Align pointer to the specified alignment
-        newPointer &= ~(alignment - 1);
+        pointer = newPointer & ~(alignment - 1);
 
-        pointer = newPointer;
-
-        return this.address + Integer.toUnsignedLong(newPointer);
+        return this.address + Integer.toUnsignedLong(pointer);
     }
 
     /**

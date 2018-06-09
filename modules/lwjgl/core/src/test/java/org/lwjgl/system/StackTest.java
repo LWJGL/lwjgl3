@@ -7,8 +7,11 @@ package org.lwjgl.system;
 import org.testng.*;
 import org.testng.annotations.*;
 
+import java.nio.*;
+
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
 
 @Test
@@ -63,17 +66,44 @@ public class StackTest {
         }
     }
 
+    public void testExternalMemory() {
+        ByteBuffer buffer = memAlloc(32);
+        for (int i = 0; i < 8; i++) {
+            buffer.putInt(i * 4, i);
+        }
+
+        MemoryStack stack = MemoryStack.create(buffer);
+
+        try (MemoryStack frame = stack.push()) {
+            IntBuffer pi = frame.mallocInt(8);
+            for (int i = 0; i < pi.capacity(); i++) {
+                assertEquals(pi.get(i), i);
+            }
+        }
+
+        try (MemoryStack frame = stack.push()) {
+            IntBuffer pi = frame.callocInt(8);
+            for (int i = 0; i < pi.capacity(); i++) {
+                assertEquals(pi.get(i), 0);
+            }
+        }
+
+        for (int i = 0; i < 8; i++) {
+            assertEquals(buffer.get(i * 4), 0);
+        }
+
+        memFree(buffer);
+    }
+
     public void testOOME() {
         if (!CHECKS) {
             throw new SkipException("This test may not run with checks disabled.");
         }
 
         expectThrows(OutOfMemoryError.class, () -> {
-            MemoryStack stack = new MemoryStack(8);
-
-            try (MemoryStack frame = stack.push()) {
-                frame.malloc(8);
-                frame.malloc(1);
+            try (MemoryStack stack = MemoryStack.create(8).push()) {
+                stack.malloc(8);
+                stack.malloc(1);
             }
         });
     }
@@ -89,8 +119,7 @@ public class StackTest {
     }
 
     private static void recursivePush(MemoryStack stack) {
-        stack.push();
-        recursivePush(stack);
+        recursivePush(stack.push());
     }
 
 }
