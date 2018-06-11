@@ -180,7 +180,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         write["w"],
         write["h"],
         write["comp"],
-        Check("w * h * comp")..float.const.p.IN("data", "the image data"),
+        Check("w * h * comp")..void.const.p.IN("data", "the image data"),
         int.IN("quality", "the compression quality"),
 
         returnDoc = "1 on success, 0 on failure"

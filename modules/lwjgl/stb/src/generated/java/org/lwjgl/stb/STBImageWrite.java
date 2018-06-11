@@ -385,7 +385,7 @@ public class STBImageWrite {
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
-    public static boolean stbi_write_jpg(@NativeType("char const *") ByteBuffer filename, int w, int h, int comp, @NativeType("float const *") FloatBuffer data, int quality) {
+    public static boolean stbi_write_jpg(@NativeType("char const *") ByteBuffer filename, int w, int h, int comp, @NativeType("void const *") ByteBuffer data, int quality) {
         if (CHECKS) {
             checkNT1(filename);
             check(data, w * h * comp);
@@ -409,7 +409,7 @@ public class STBImageWrite {
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
-    public static boolean stbi_write_jpg(@NativeType("char const *") CharSequence filename, int w, int h, int comp, @NativeType("float const *") FloatBuffer data, int quality) {
+    public static boolean stbi_write_jpg(@NativeType("char const *") CharSequence filename, int w, int h, int comp, @NativeType("void const *") ByteBuffer data, int quality) {
         if (CHECKS) {
             check(data, w * h * comp);
         }
@@ -585,34 +585,6 @@ public class STBImageWrite {
         try {
             ByteBuffer filenameEncoded = stack.ASCII(filename);
             return nstbi_write_hdr(memAddress(filenameEncoded), w, h, comp, data) != 0;
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /** Array version of: {@link #nstbi_write_jpg} */
-    public static native int nstbi_write_jpg(long filename, int w, int h, int comp, float[] data, int quality);
-
-    /** Array version of: {@link #stbi_write_jpg write_jpg} */
-    @NativeType("int")
-    public static boolean stbi_write_jpg(@NativeType("char const *") ByteBuffer filename, int w, int h, int comp, @NativeType("float const *") float[] data, int quality) {
-        if (CHECKS) {
-            checkNT1(filename);
-            check(data, w * h * comp);
-        }
-        return nstbi_write_jpg(memAddress(filename), w, h, comp, data, quality) != 0;
-    }
-
-    /** Array version of: {@link #stbi_write_jpg write_jpg} */
-    @NativeType("int")
-    public static boolean stbi_write_jpg(@NativeType("char const *") CharSequence filename, int w, int h, int comp, @NativeType("float const *") float[] data, int quality) {
-        if (CHECKS) {
-            check(data, w * h * comp);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_jpg(memAddress(filenameEncoded), w, h, comp, data, quality) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
