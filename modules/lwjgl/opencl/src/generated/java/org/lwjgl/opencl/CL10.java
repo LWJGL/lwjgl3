@@ -6528,66 +6528,6 @@ public class CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clSetKernelArg3b(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") byte arg0, byte arg1, byte arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer arg_value = stack.bytes(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << 0) * 3, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
     public static int clSetKernelArg4b(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") byte arg0, byte arg1, byte arg2, byte arg3) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6713,66 +6653,6 @@ public class CL10 {
         try {
             ShortBuffer arg_value = stack.shorts(arg0, arg1);
             return nclSetKernelArg(kernel, arg_index, (1 << 1) * 2, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
-    public static int clSetKernelArg3s(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") short arg0, short arg1, short arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ShortBuffer arg_value = stack.shorts(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << 1) * 3, memAddress(arg_value));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7008,66 +6888,6 @@ public class CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clSetKernelArg3i(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") int arg0, int arg1, int arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            IntBuffer arg_value = stack.ints(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << 2) * 3, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
     public static int clSetKernelArg4i(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") int arg0, int arg1, int arg2, int arg3) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7193,66 +7013,6 @@ public class CL10 {
         try {
             LongBuffer arg_value = stack.longs(arg0, arg1);
             return nclSetKernelArg(kernel, arg_index, (1 << 3) * 2, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
-    public static int clSetKernelArg3l(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") long arg0, long arg1, long arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            LongBuffer arg_value = stack.longs(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << 3) * 3, memAddress(arg_value));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7488,66 +7248,6 @@ public class CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clSetKernelArg3f(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") float arg0, float arg1, float arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            FloatBuffer arg_value = stack.floats(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << 2) * 3, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
     public static int clSetKernelArg4f(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") float arg0, float arg1, float arg2, float arg3) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7728,66 +7428,6 @@ public class CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clSetKernelArg3d(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") double arg0, double arg1, double arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            DoubleBuffer arg_value = stack.doubles(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << 3) * 3, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
     public static int clSetKernelArg4d(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") double arg0, double arg1, double arg2, double arg3) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7913,66 +7553,6 @@ public class CL10 {
         try {
             PointerBuffer arg_value = stack.pointers(arg0, arg1);
             return nclSetKernelArg(kernel, arg_index, (1 << POINTER_SHIFT) * 2, memAddress(arg_value));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Set the argument value for a specific argument of a kernel.
-     *
-     * @param kernel    a valid kernel object
-     * @param arg_index the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-     *                  the total number of arguments declared by a kernel.
-     *                  
-     *                  <p>For example, consider the following kernel:</p>
-     *                  
-     *                  <pre><code>
-     *                  kernel void image_filter (
-     *                      int n, int m,
-     *                      __constant float *filter_weights,
-     *                      __read_only image2d_t src_image,
-     *                      __write_only image2d_t dst_image
-     *                  ) {
-     *                      &hellip;
-     *                  }</code></pre>
-     *                  
-     *                  <p>Argument index values for image_filter will be 0 for {@code n}, 1 for {@code m}, 2 for {@code filter_weights}, 3 for {@code src_image} and 4 for
-     *                  {@code dst_image}.</p>
-     *                  
-     *                  <p><strong>NOTE</strong>: A kernel object does not update the reference count for objects such as memory, sampler objects specified as argument values
-     *                  by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.</p>
-     *
-     * @return {@link #CL_SUCCESS SUCCESS} if the function was executed successfully. Otherwise, it returns one of the following errors:
-     *         
-     *         <ul>
-     *         <li>{@link #CL_INVALID_KERNEL INVALID_KERNEL} if {@code kernel} is not a valid kernel object.</li>
-     *         <li>{@link #CL_INVALID_ARG_INDEX INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.</li>
-     *         <li>{@link #CL_INVALID_MEM_OBJECT INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.</li>
-     *         <li>{@link #CL_INVALID_SAMPLER INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.</li>
-     *         <li>{@link #CL_INVALID_ARG_SIZE INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
-     *         argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
-     *         {@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.</li>
-     *         <li>{@link CL22#CL_MAX_SIZE_RESTRICTION_EXCEEDED MAX_SIZE_RESTRICTION_EXCEEDED} if the size in bytes of the memory object (if the argument was declared with constant qualifier) or {@code arg_size}
-     *         (if the argument was declared with local qualifier) exceed the maximum size restriction that was set with the optional language attribute. The
-     *         optional attribute can be {@code cl::max_size} defined in OpenCL 2.2 C++ Kernel Language specification or {@code SpvDecorationMaxByteOffset}
-     *         defined in SPIR-V 1.2 Specification.</li>
-     *         <li>{@link #CL_INVALID_ARG_VALUE INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-     *         object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-     *         and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY MEM_READ_ONLY}.</li>
-     *         <li>{@link #CL_OUT_OF_RESOURCES OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device.</li>
-     *         <li>{@link #CL_OUT_OF_HOST_MEMORY OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host.</li>
-     *         </ul>
-     * 
-     * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clSetKernelArg.html">Reference Page</a>
-     */
-    @NativeType("cl_int")
-    public static int clSetKernelArg3p(@NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int arg_index, @NativeType("void const *") long arg0, long arg1, long arg2) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            PointerBuffer arg_value = stack.pointers(arg0, arg1, arg2);
-            return nclSetKernelArg(kernel, arg_index, (1 << POINTER_SHIFT) * 3, memAddress(arg_value));
         } finally {
             stack.setPointer(stackPointer);
         }

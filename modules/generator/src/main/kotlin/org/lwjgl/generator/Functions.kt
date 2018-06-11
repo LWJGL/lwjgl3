@@ -1265,9 +1265,12 @@ class Func(
                 for (autoType in multiTypes) {
                     val primitiveType = autoType.box.toLowerCase()
 
-                    // Generate type1, type2, type3, type4 versions
+                    // Generate type1, type2, type4 versions
                     // TODO: Make customizable? New modifier?
                     for (i in 1..4) {
+                        if (i == 3) {
+                            continue
+                        }
                         singleValueParams.forEach {
                             // Transform the AutoSize parameter
                             val autoSizeParam = getParam(hasAutoSizePredicate(it)) // required
