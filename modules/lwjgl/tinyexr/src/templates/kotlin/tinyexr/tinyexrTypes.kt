@@ -79,7 +79,7 @@ val EXRHeader = struct(Module.TINYEXR, "EXRHeader") {
     unsigned_int.member("header_len", "")
 
     AutoSize("custom_attributes")..int.member("num_custom_attributes", "number of {@code EXRAttribute} in the {@code custom_attributes} array")
-    EXRAttribute.p.buffer(
+    nullable..EXRAttribute.p.buffer(
         "custom_attributes",
         "custom attributes (excludes required attributes, e.g. `channels`, `compression`, etc)"
     )
