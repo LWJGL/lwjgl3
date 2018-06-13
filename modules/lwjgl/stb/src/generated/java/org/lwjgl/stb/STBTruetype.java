@@ -1051,6 +1051,7 @@ public class STBTruetype {
      * @param info              an {@link STBTTFontinfo} struct
      * @param unicode_codepoint the unicode codepoint
      */
+    @Nullable
     @NativeType("int")
     public static STBTTVertex.Buffer stbtt_GetCodepointShape(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, int unicode_codepoint) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1088,6 +1089,7 @@ public class STBTruetype {
      * @param info        an {@link STBTTFontinfo} struct
      * @param glyph_index the unicode codepoint
      */
+    @Nullable
     @NativeType("int")
     public static STBTTVertex.Buffer stbtt_GetGlyphShape(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, int glyph_index) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

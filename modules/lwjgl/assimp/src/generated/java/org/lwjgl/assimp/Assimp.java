@@ -2088,7 +2088,7 @@ public class Assimp {
      * const, a modifiable copy is needed.</p>
      *
      * @param pIn  Valid scene to be copied
-     * @param pOut Receives a modifyable copy of the scene. Use {@link #aiFreeScene FreeScene} to delete it again.
+     * @param pOut Receives a modifiable copy of the scene. Use {@link #aiFreeScene FreeScene} to delete it again.
      */
     public static void aiCopyScene(@NativeType("struct aiScene const *") AIScene pIn, @NativeType("struct aiScene **") PointerBuffer pOut) {
         if (CHECKS) {
@@ -2105,6 +2105,7 @@ public class Assimp {
      *
      * @param pIn Valid scene to be copied
      */
+    @Nullable
     @NativeType("void")
     public static AIScene aiCopyScene(@NativeType("struct aiScene const *") AIScene pIn) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

@@ -11,6 +11,7 @@ interface Transform
 interface FunctionTransform<in T : QualifiedType> : Transform {
     fun transformDeclaration(param: T, original: String): String?
     fun transformCall(param: T, original: String): String
+    val forceNullable: Boolean get() = false
 }
 
 /** A function transform that must generate additional code. */
@@ -197,11 +198,11 @@ internal class PrimitiveValueReturnTransform(
     private val bufferType: PointerType<*>,
     val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
-    override fun transformDeclaration(param: ReturnValue, original: String): String = if (bufferType.elementType is PointerType<*> && bufferType.elementType.elementType is StructType)
+    override fun transformDeclaration(param: ReturnValue, original: String): String = if (forceNullable)
         bufferType.elementType.javaMethodType
     else
         bufferType.mapping.primitive // Replace void with the buffer value type
-    override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType<*> && bufferType.elementType.elementType is StructType)
+    override fun transformCall(param: ReturnValue, original: String) = if (forceNullable)
         "$t${t}return ${bufferType.elementType.javaMethodType}.createSafe($paramName.get(0));"
     else if (bufferType.mapping === PointerMapping.DATA_BOOLEAN)
         "$t${t}return $paramName.get(0) != 0;"
@@ -211,6 +212,9 @@ internal class PrimitiveValueReturnTransform(
     override fun setupStack(func: Func, qtype: ReturnValue, writer: PrintWriter) = bufferType.mapping.let {
         writer.println("$t$t$t${it.box}Buffer $paramName = stack.calloc${it.mallocType}(1);")
     }
+
+    override val forceNullable: Boolean
+        get() = bufferType.elementType is PointerType<*> && bufferType.elementType.elementType is StructType
 }
 
 internal object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -326,6 +330,9 @@ internal class BufferAutoSizeReturnTransform(
             "mem${it.javaMethodType}Safe"
         }(${outParam.name}.get(0), $lengthExpression);"
     }
+
+    override val forceNullable: Boolean
+        get() = true
 }
 
 internal class BufferReturnTransform(

@@ -361,6 +361,7 @@ public class STBVorbis {
      *
      * @return the number of samples decoded, or -1 if the file could not be opened or was not an ogg vorbis file
      */
+    @Nullable
     @NativeType("int")
     public static ShortBuffer stb_vorbis_decode_filename(@NativeType("char const *") CharSequence filename, @NativeType("int *") IntBuffer channels, @NativeType("int *") IntBuffer sample_rate) {
         if (CHECKS) {
@@ -411,6 +412,7 @@ public class STBVorbis {
      * @param channels    returns the number of channels
      * @param sample_rate returns the sample rate
      */
+    @Nullable
     @NativeType("int")
     public static ShortBuffer stb_vorbis_decode_memory(@NativeType("unsigned char const *") ByteBuffer mem, @NativeType("int *") IntBuffer channels, @NativeType("int *") IntBuffer sample_rate) {
         if (CHECKS) {

@@ -1449,11 +1449,11 @@ class Func(
 
         // Method signature
 
-        if (returns.nativeType.isReference && returnsNull) {
+        val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType, false)!!
+
+        if ((returns.nativeType.isReference && returnsNull) || (transforms[returns].let { it is FunctionTransform<*> && it.forceNullable }) ) {
             println("$t@Nullable")
         }
-
-        val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType, false)!!
 
         val retTypeAnnotation = returns.nativeType.annotation(retType)
         if (retTypeAnnotation != null) {

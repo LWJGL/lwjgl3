@@ -1219,7 +1219,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         """,
 
         aiScene.const.p.IN("pIn", "Valid scene to be copied"),
-        ReturnParam..Check(1)..aiScene.p.p.OUT("pOut", "Receives a modifyable copy of the scene. Use #FreeScene() to delete it again.")
+        ReturnParam..Check(1)..aiScene.p.p.OUT("pOut", "Receives a modifiable copy of the scene. Use #FreeScene() to delete it again.")
     )
 
     void(
