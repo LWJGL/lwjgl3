@@ -95,19 +95,22 @@ public final class ALCDemo {
         alSourcei(source, AL_BUFFER, buffer);
         checkALError();
 
-        //lets loop the sound
-        alSourcei(source, AL_LOOPING, AL_TRUE);
-        checkALError();
-
-        //play source 0
+        //play source
         alSourcePlay(source);
         checkALError();
 
-        //wait 5 secs
-        try {
-            System.out.println("Waiting 5 seconds for sound to complete");
-            Thread.sleep(5000);
-        } catch (InterruptedException ignored) {
+        //wait
+        System.out.println("Waiting for sound to complete...");
+        while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+                break;
+            }
+            if (alGetSourcei(source, AL_SOURCE_STATE) == AL_STOPPED) {
+                break;
+            }
+            System.out.println(".");
         }
 
         //stop source 0
@@ -140,11 +143,9 @@ public final class ALCDemo {
 
         int channels = info.channels();
 
-        int lengthSamples = stb_vorbis_stream_length_in_samples(decoder);
+        ShortBuffer pcm = BufferUtils.createShortBuffer(stb_vorbis_stream_length_in_samples(decoder) * channels);
 
-        ShortBuffer pcm = BufferUtils.createShortBuffer(lengthSamples);
-
-        pcm.limit(stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm) * channels);
+        stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm);
         stb_vorbis_close(decoder);
 
         return pcm;
