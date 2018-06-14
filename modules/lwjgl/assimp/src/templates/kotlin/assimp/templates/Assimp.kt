@@ -2822,7 +2822,9 @@ x1""")}
             it uses that.
             """,
             0x10000000
-        )
+        ),
+
+        "Process_ForceGenNormals".enum("", 0x20000000)
     )
 
     EnumConstant(
