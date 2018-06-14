@@ -81,7 +81,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."3",
-        "VERSION_RELEASE".."4"
+        "VERSION_RELEASE".."5"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -158,7 +158,10 @@ ENABLE_WARNINGS()""")
             implicit limit, as #decompress() only needs an upper bound of decompressed size. (For example, data could be necessarily cut into blocks &le; 16
             KB).
             """,
-            "decompressed size is always present when compression is done with #compress()",
+            """
+            decompressed size is always present when compression is completed using single-pass functions, such as #compress(), #compressCCtx(),
+            #compress_usingDict() or #compress_usingCDict().
+            """,
             """
             decompressed size can be very large (64-bits value), potentially larger than what local system can handle as a single memory segment. In which
             case, it's necessary to use streaming mode to decompress data.
@@ -175,7 +178,7 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        decompressed size of the frame in {@code src}, if known
+        decompressed size of {@code src} frame content, if known
         ${ul(
             "#CONTENTSIZE_UNKNOWN if the size cannot be determined",
             "#CONTENTSIZE_ERROR if an error occurred (e.g. invalid magic number, {@code srcSize} too small)"

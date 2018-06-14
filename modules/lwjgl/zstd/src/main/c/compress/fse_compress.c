@@ -100,6 +100,7 @@ size_t FSE_buildCTable_wksp(FSE_CTable* ct, const short* normalizedCounter, unsi
     if (((size_t)1 << tableLog) * sizeof(FSE_FUNCTION_TYPE) > wkspSize) return ERROR(tableLog_tooLarge);
     tableU16[-2] = (U16) tableLog;
     tableU16[-1] = (U16) maxSymbolValue;
+    assert(tableLog < 16);   /* required for the threshold strategy to work */
 
     /* For explanations on how to distribute symbol values over the table :
     *  http://fastcompression.blogspot.fr/2014/02/fse-distributing-symbol-values.html */
@@ -143,7 +144,10 @@ size_t FSE_buildCTable_wksp(FSE_CTable* ct, const short* normalizedCounter, unsi
         for (s=0; s<=maxSymbolValue; s++) {
             switch (normalizedCounter[s])
             {
-            case  0: break;
+            case  0:
+                /* filling nonetheless, for compatibility with FSE_getMaxNbBits() */
+                symbolTT[s].deltaNbBits = ((tableLog+1) << 16) - (1<<tableLog);
+                break;
 
             case -1:
             case  1:
@@ -159,6 +163,18 @@ size_t FSE_buildCTable_wksp(FSE_CTable* ct, const short* normalizedCounter, unsi
                     symbolTT[s].deltaFindState = total - normalizedCounter[s];
                     total +=  normalizedCounter[s];
     }   }   }   }
+
+#if 0  /* debug : symbol costs */
+    DEBUGLOG(5, "\n --- table statistics : ");
+    {   U32 symbol;
+        for (symbol=0; symbol<=maxSymbolValue; symbol++) {
+            DEBUGLOG(5, "%3u: w=%3i,   maxBits=%u, fracBits=%.2f",
+                symbol, normalizedCounter[symbol],
+                FSE_getMaxNbBits(symbolTT, symbol),
+                (double)FSE_bitCost(symbolTT, tableLog, symbol, 8) / 256);
+        }
+    }
+#endif
 
     return 0;
 }

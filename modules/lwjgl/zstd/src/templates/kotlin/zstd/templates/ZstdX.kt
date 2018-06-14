@@ -92,7 +92,6 @@ ENABLE_WARNINGS()""")
         "SEARCHLOG_MIN".."1",
         "SEARCHLENGTH_MAX".."7",
         "SEARCHLENGTH_MIN".."3",
-        "TARGETLENGTH_MIN".."1",
         "LDM_MINMATCH_MIN".."4",
         "LDM_MINMATCH_MAX".."4096",
         "LDM_BUCKETSIZELOG_MAX".."8",
@@ -160,13 +159,12 @@ ENABLE_WARNINGS()""")
             Update all compression parameters according to pre-defined {@code cLevel} table.
 
             Default level is {@code ZSTD_CLEVEL_DEFAULT==3}.
-            Special: value 0 means "do not change {@code cLevel}".
+            Special: value 0 means default, which is controlled by #CLEVEL_DEFAULT.
 
             Notes:
             ${ol(
                 "it's possible to pass a negative compression level by casting it to unsigned type.",
-                "setting a level sets all default values of other compression parameters.",
-                "setting compressionLevel automatically updates #p_compressLiterals."
+                "setting a level sets all default values of other compression parameters."
             )}
             """,
             "100"
@@ -351,17 +349,6 @@ ENABLE_WARNINGS()""")
             """),
 
         /* experimental parameters - no stability guaranteed */
-        "p_compressLiterals".enum(
-            """
-            Control huffman compression of literals (enabled) by default.
-
-            Disabling it improves speed and decreases compression ratio by a large amount.
-
-            Note : this setting is automatically updated when changing compression level. Positive compression levels set {@code ZSTD_p_compressLiterals} to 1.
-            Negative compression levels set {@code ZSTD_p_compressLiterals} to 0.
-            """,
-            "1000"
-        ),
         "p_forceMaxWindow".enum("Force back-reference distances to remain &lt; windowSize, even when referencing into Dictionary content (default:0)", "1100")
     ).javaDocLinks
 

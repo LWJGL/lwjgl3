@@ -52,9 +52,11 @@ extern "C" {
 
 #define ZSTD_STATIC_ASSERT(c) { enum { ZSTD_static_assert = 1/(int)(!!(c)) }; }
 
+#undef RAWLOG
+#undef DEBUGLOG
 #if defined(ZSTD_DEBUG) && (ZSTD_DEBUG>=2)
 #  include <stdio.h>
-extern int g_debuglog_enable;
+extern int g_debuglevel;
 /* recommended values for ZSTD_DEBUG display levels :
  * 1 : no display, enables assert() only
  * 2 : reserved for currently active debug path
@@ -63,11 +65,11 @@ extern int g_debuglog_enable;
  * 5 : events once per block
  * 6 : events once per sequence (*very* verbose) */
 #  define RAWLOG(l, ...) {                                      \
-                if ((g_debuglog_enable) & (l<=ZSTD_DEBUG)) {    \
+                if (l<=g_debuglevel) {                          \
                     fprintf(stderr, __VA_ARGS__);               \
             }   }
 #  define DEBUGLOG(l, ...) {                                    \
-                if ((g_debuglog_enable) & (l<=ZSTD_DEBUG)) {    \
+                if (l<=g_debuglevel) {                          \
                     fprintf(stderr, __FILE__ ": " __VA_ARGS__); \
                     fprintf(stderr, " \n");                     \
             }   }

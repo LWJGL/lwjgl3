@@ -59,7 +59,7 @@ extern "C" {
 /*------   Version   ------*/
 #define ZSTD_VERSION_MAJOR    1
 #define ZSTD_VERSION_MINOR    3
-#define ZSTD_VERSION_RELEASE  4
+#define ZSTD_VERSION_RELEASE  5
 
 #define ZSTD_VERSION_NUMBER  (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)
 ZSTDLIB_API unsigned ZSTD_versionNumber(void);   /**< useful to check dll version */
@@ -70,6 +70,12 @@ ZSTDLIB_API unsigned ZSTD_versionNumber(void);   /**< useful to check dll versio
 #define ZSTD_VERSION_STRING ZSTD_EXPAND_AND_QUOTE(ZSTD_LIB_VERSION)
 ZSTDLIB_API const char* ZSTD_versionString(void);   /* added in v1.3.0 */
 
+/***************************************
+*  Default constant
+***************************************/
+#ifndef ZSTD_CLEVEL_DEFAULT
+#  define ZSTD_CLEVEL_DEFAULT 3
+#endif
 
 /***************************************
 *  Simple API
@@ -96,7 +102,7 @@ ZSTDLIB_API size_t ZSTD_decompress( void* dst, size_t dstCapacity,
  *  `src` should point to the start of a ZSTD encoded frame.
  *  `srcSize` must be at least as large as the frame header.
  *            hint : any size >= `ZSTD_frameHeaderSize_max` is large enough.
- *  @return : - decompressed size of the frame in `src`, if known
+ *  @return : - decompressed size of `src` frame content, if known
  *            - ZSTD_CONTENTSIZE_UNKNOWN if the size cannot be determined
  *            - ZSTD_CONTENTSIZE_ERROR if an error occurred (e.g. invalid magic number, srcSize too small)
  *   note 1 : a 0 return value means the frame is valid but "empty".
@@ -106,7 +112,8 @@ ZSTDLIB_API size_t ZSTD_decompress( void* dst, size_t dstCapacity,
  *            Optionally, application can rely on some implicit limit,
  *            as ZSTD_decompress() only needs an upper bound of decompressed size.
  *            (For example, data could be necessarily cut into blocks <= 16 KB).
- *   note 3 : decompressed size is always present when compression is done with ZSTD_compress()
+ *   note 3 : decompressed size is always present when compression is completed using single-pass functions,
+ *            such as ZSTD_compress(), ZSTD_compressCCtx() ZSTD_compress_usingDict() or ZSTD_compress_usingCDict().
  *   note 4 : decompressed size can be very large (64-bits value),
  *            potentially larger than what local system can handle as a single memory segment.
  *            In which case, it's necessary to use streaming mode to decompress data.
@@ -123,8 +130,7 @@ ZSTDLIB_API unsigned long long ZSTD_getFrameContentSize(const void *src, size_t 
  *  Both functions work the same way, but ZSTD_getDecompressedSize() blends
  *  "empty", "unknown" and "error" results to the same return value (0),
  *  while ZSTD_getFrameContentSize() gives them separate return values.
- * `src` is the start of a zstd compressed frame.
- * @return : content size to be decompressed, as a 64-bits value _if known and not empty_, 0 otherwise. */
+ * @return : decompressed size of `src` frame content _if known and not empty_, 0 otherwise. */
 ZSTDLIB_API unsigned long long ZSTD_getDecompressedSize(const void* src, size_t srcSize);
 
 
@@ -395,7 +401,6 @@ ZSTDLIB_API size_t ZSTD_DStreamOutSize(void);   /*!< recommended size for output
 #define ZSTD_SEARCHLOG_MIN       1
 #define ZSTD_SEARCHLENGTH_MAX    7   /* only for ZSTD_fast, other strategies are limited to 6 */
 #define ZSTD_SEARCHLENGTH_MIN    3   /* only for ZSTD_btopt, other strategies are limited to 4 */
-#define ZSTD_TARGETLENGTH_MIN    1   /* only used by btopt, btultra and btfast */
 #define ZSTD_LDM_MINMATCH_MIN    4
 #define ZSTD_LDM_MINMATCH_MAX 4096
 #define ZSTD_LDM_BUCKETSIZELOG_MAX 8
@@ -949,7 +954,7 @@ typedef enum {
     /* compression parameters */
     ZSTD_p_compressionLevel=100, /* Update all compression parameters according to pre-defined cLevel table
                               * Default level is ZSTD_CLEVEL_DEFAULT==3.
-                              * Special: value 0 means "do not change cLevel".
+                              * Special: value 0 means default, which is controlled by ZSTD_CLEVEL_DEFAULT.
                               * Note 1 : it's possible to pass a negative compression level by casting it to unsigned type.
                               * Note 2 : setting a level sets all default values of other compression parameters.
                               * Note 3 : setting compressionLevel automatically updates ZSTD_p_compressLiterals. */
@@ -1051,12 +1056,6 @@ typedef enum {
     /* =================================================================== */
     /* experimental parameters - no stability guaranteed                   */
     /* =================================================================== */
-
-    ZSTD_p_compressLiterals=1000, /* control huffman compression of literals (enabled) by default.
-                              * disabling it improves speed and decreases compression ratio by a large amount.
-                              * note : this setting is automatically updated when changing compression level.
-                              *        positive compression levels set ZSTD_p_compressLiterals to 1.
-                              *        negative compression levels set ZSTD_p_compressLiterals to 0. */
 
     ZSTD_p_forceMaxWindow=1100, /* Force back-reference distances to remain < windowSize,
                               * even when referencing into Dictionary content (default:0) */

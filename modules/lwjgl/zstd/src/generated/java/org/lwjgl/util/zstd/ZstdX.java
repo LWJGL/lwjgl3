@@ -85,7 +85,6 @@ public class ZstdX {
         ZSTD_SEARCHLOG_MIN          = 1,
         ZSTD_SEARCHLENGTH_MAX       = 7,
         ZSTD_SEARCHLENGTH_MIN       = 3,
-        ZSTD_TARGETLENGTH_MIN       = 1,
         ZSTD_LDM_MINMATCH_MIN       = 4,
         ZSTD_LDM_MINMATCH_MAX       = 4096,
         ZSTD_LDM_BUCKETSIZELOG_MAX  = 8,
@@ -191,14 +190,13 @@ public class ZstdX {
      * Update all compression parameters according to pre-defined {@code cLevel} table.
      * 
      * <p>Default level is {@code ZSTD_CLEVEL_DEFAULT==3}.
-     * Special: value 0 means "do not change {@code cLevel}".</p>
+     * Special: value 0 means default, which is controlled by {@link Zstd#ZSTD_CLEVEL_DEFAULT CLEVEL_DEFAULT}.</p>
      * 
      * <p>Notes:</p>
      * 
      * <ol>
      * <li>it's possible to pass a negative compression level by casting it to unsigned type.</li>
      * <li>setting a level sets all default values of other compression parameters.</li>
-     * <li>setting compressionLevel automatically updates {@link #ZSTD_p_compressLiterals p_compressLiterals}.</li>
      * </ol>
      * </li>
      * <li>{@link #ZSTD_p_windowLog p_windowLog} - 
@@ -357,14 +355,6 @@ public class ZstdX {
      * <li>{@code >=9: use full windowSize}</li>
      * </ul>
      * </li>
-     * <li>{@link #ZSTD_p_compressLiterals p_compressLiterals} - 
-     * Control huffman compression of literals (enabled) by default.
-     * 
-     * <p>Disabling it improves speed and decreases compression ratio by a large amount.</p>
-     * 
-     * <p>Note : this setting is automatically updated when changing compression level. Positive compression levels set {@code ZSTD_p_compressLiterals} to 1.
-     * Negative compression levels set {@code ZSTD_p_compressLiterals} to 0.</p>
-     * </li>
      * <li>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow} - Force back-reference distances to remain &lt; windowSize, even when referencing into Dictionary content (default:0)</li>
      * </ul>
      */
@@ -390,7 +380,6 @@ public class ZstdX {
         ZSTD_p_nonBlockingMode            = 401,
         ZSTD_p_jobSize                    = 402,
         ZSTD_p_overlapSizeLog             = 403,
-        ZSTD_p_compressLiterals           = 1000,
         ZSTD_p_forceMaxWindow             = 1100;
 
     /**
@@ -1023,7 +1012,7 @@ public class ZstdX {
      * 
      * <p>Note: when {@code value} type is not unsigned (int, or enum), cast it to unsigned for proper type checking.</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_compressLiterals p_compressLiterals}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
      *
      * @return informational value (typically, value being set, correctly clamped), 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError})
      */
@@ -1043,7 +1032,7 @@ public class ZstdX {
     /**
      * Get the requested value of one compression parameter, selected by enum {@code ZSTD_cParameter}.
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_compressLiterals p_compressLiterals}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError}).
      */
@@ -1386,7 +1375,7 @@ public class ZstdX {
      * <p>Set one compression parameter, selected by enum {@code ZSTD_cParameter}. Parameters must be applied to a {@code ZSTD_CCtx} using
      * {@link #ZSTD_CCtx_setParametersUsingCCtxParams CCtx_setParametersUsingCCtxParams}.</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_compressLiterals p_compressLiterals}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError})
      */
@@ -1408,7 +1397,7 @@ public class ZstdX {
      * 
      * <p>Get the requested value of one compression parameter, selected by enum {@code ZSTD_cParameter}.</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_compressLiterals p_compressLiterals}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_p_format p_format}</td><td>{@link #ZSTD_p_compressionLevel p_compressionLevel}</td><td>{@link #ZSTD_p_windowLog p_windowLog}</td><td>{@link #ZSTD_p_hashLog p_hashLog}</td><td>{@link #ZSTD_p_chainLog p_chainLog}</td></tr><tr><td>{@link #ZSTD_p_searchLog p_searchLog}</td><td>{@link #ZSTD_p_minMatch p_minMatch}</td><td>{@link #ZSTD_p_targetLength p_targetLength}</td><td>{@link #ZSTD_p_compressionStrategy p_compressionStrategy}</td><td>{@link #ZSTD_p_enableLongDistanceMatching p_enableLongDistanceMatching}</td></tr><tr><td>{@link #ZSTD_p_ldmHashLog p_ldmHashLog}</td><td>{@link #ZSTD_p_ldmMinMatch p_ldmMinMatch}</td><td>{@link #ZSTD_p_ldmBucketSizeLog p_ldmBucketSizeLog}</td><td>{@link #ZSTD_p_ldmHashEveryLog p_ldmHashEveryLog}</td><td>{@link #ZSTD_p_contentSizeFlag p_contentSizeFlag}</td></tr><tr><td>{@link #ZSTD_p_checksumFlag p_checksumFlag}</td><td>{@link #ZSTD_p_dictIDFlag p_dictIDFlag}</td><td>{@link #ZSTD_p_nbWorkers p_nbWorkers}</td><td>{@link #ZSTD_p_nonBlockingMode p_nonBlockingMode}</td><td>{@link #ZSTD_p_jobSize p_jobSize}</td></tr><tr><td>{@link #ZSTD_p_overlapSizeLog p_overlapSizeLog}</td><td>{@link #ZSTD_p_forceMaxWindow p_forceMaxWindow}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError}).
      */

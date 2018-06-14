@@ -83,7 +83,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 3,
-        ZSTD_VERSION_RELEASE = 4;
+        ZSTD_VERSION_RELEASE = 5;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -178,7 +178,8 @@ public class Zstd {
      * decompress could be any size. In which case, it's necessary to use streaming mode to decompress data. Optionally, application can rely on some
      * implicit limit, as {@link #ZSTD_decompress decompress} only needs an upper bound of decompressed size. (For example, data could be necessarily cut into blocks &le; 16
      * KB).</li>
-     * <li>decompressed size is always present when compression is done with {@link #ZSTD_compress compress}</li>
+     * <li>decompressed size is always present when compression is completed using single-pass functions, such as {@link #ZSTD_compress compress}, {@link #ZSTD_compressCCtx compressCCtx},
+     * {@link #ZSTD_compress_usingDict compress_usingDict} or {@link #ZSTD_compress_usingCDict compress_usingCDict}.</li>
      * <li>decompressed size can be very large (64-bits value), potentially larger than what local system can handle as a single memory segment. In which
      * case, it's necessary to use streaming mode to decompress data.</li>
      * <li>If source is untrusted, decompressed size could be wrong or intentionally modified. Always ensure return value fits within application's authorized
@@ -187,7 +188,7 @@ public class Zstd {
      *
      * @param src should point to the start of a ZSTD encoded frame
      *
-     * @return decompressed size of the frame in {@code src}, if known
+     * @return decompressed size of {@code src} frame content, if known
      *         
      *         <ul>
      *         <li>{@link #ZSTD_CONTENTSIZE_UNKNOWN CONTENTSIZE_UNKNOWN} if the size cannot be determined</li>
