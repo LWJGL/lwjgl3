@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."68"
+        "API_VERSION".."72"
     )
 
     ShortConstant(
@@ -430,7 +430,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000200000L,
         "CAPS_TEXTURE_READ_BACK"..0x0000000000400000L,
         "CAPS_VERTEX_ATTRIB_HALF"..0x0000000000800000L,
-        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000000800000L
+        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000000800000L,
+        "CAPS_VERTEX_ID"..0x0000000001000000L
     )
 
     ShortConstant(
@@ -604,6 +605,15 @@ RGBA16S
         "TEXTURE_FORMAT_PTC14A".enum("PVRTC1 RGBA 4BPP"),
         "TEXTURE_FORMAT_PTC22".enum("PVRTC2 RGBA 2BPP"),
         "TEXTURE_FORMAT_PTC24".enum("PVRTC2 RGBA 4BPP"),
+        "TEXTURE_FORMAT_ATC".enum("ATC RGB 4BPP"),
+        "TEXTURE_FORMAT_ATCE".enum("ATCE RGBA 8 BPP explicit alpha"),
+        "TEXTURE_FORMAT_ATCI".enum("ATCI RGBA 8 BPP interpolated alpha"),
+        "TEXTURE_FORMAT_ASTC4x4".enum("ASTC 4x4 8.0 BPP"),
+        "TEXTURE_FORMAT_ASTC5x5".enum("ASTC 5x5 5.12 BPP"),
+        "TEXTURE_FORMAT_ASTC6x6".enum("ASTC 6x6 3.56 BPP"),
+        "TEXTURE_FORMAT_ASTC8x5".enum("ASTC 8x5 3.20 BPP"),
+        "TEXTURE_FORMAT_ASTC8x6".enum("ASTC 8x6 2.67 BPP"),
+        "TEXTURE_FORMAT_ASTC10x5".enum("ASTC 10x5 2.56 BPP"),
 
         "TEXTURE_FORMAT_UNKNOWN".enum,
 
@@ -723,6 +733,7 @@ RGBA16S
         "Topology conversion function ({@code bgfx_topology_convert_t}).",
 
         "TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING".enum("Flip winding order of triangle list."),
+        "TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING".enum("Flip winding order of triangle strip."),
         "TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST".enum("Convert triangle list to line list."),
         "TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST".enum("Convert triangle strip to triangle list."),
         "TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST".enum("Convert line strip to line list."),
@@ -2103,6 +2114,17 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     )
 
     void(
+        "set_vertex_count",
+        """
+        Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+
+        Availability depends on: #CAPS_VERTEX_ID.
+        """,
+
+        uint32_t.IN("_numVertices", "number of vertices")
+    )
+
+    void(
         "set_instance_data_buffer",
         "Sets instance data buffer for draw primitive.",
 
@@ -2496,6 +2518,18 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_transient_vertex_buffer_t.const.p.IN("_tvb", "transient vertex buffer"),
         uint32_t.IN("_startVertex", "first vertex to render"),
         uint32_t.IN("_numVertices", "number of vertices to render")
+    )
+
+    void(
+        "encoder_set_vertex_count",
+        """
+        Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+
+        Availability depends on: #CAPS_VERTEX_ID.
+        """,
+
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
+        uint32_t.IN("_numVertices", "number of vertices")
     )
 
     void(

@@ -564,8 +564,8 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
 
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {
     uint16_t.member("maxEncoders", "maximum number of encoder threads")
-    uint32_t.member("transientVbSize", "amount of transient vertex buffer used")
-    uint32_t.member("transientIbSize", "amount of transient index buffer used")
+    uint32_t.member("transientVbSize", "maximum transient vertex buffer size")
+    uint32_t.member("transientIbSize", "maximum transient index buffer size")
 }
 
 val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", skipBuffer = true) {
