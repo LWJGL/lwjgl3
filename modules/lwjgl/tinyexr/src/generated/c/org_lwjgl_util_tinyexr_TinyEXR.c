@@ -34,6 +34,12 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nFreeEXRImage(JNIEnv 
     return (jint)FreeEXRImage(exr_image);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nFreeEXRErrorMessage(JNIEnv *__env, jclass clazz, jlong msgAddress) {
+    char const *msg = (char const *)(intptr_t)msgAddress;
+    UNUSED_PARAMS(__env, clazz)
+    FreeEXRErrorMessage(msg);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRVersionFromFile(JNIEnv *__env, jclass clazz, jlong versionAddress, jlong filenameAddress) {
     EXRVersion *version = (EXRVersion *)(intptr_t)versionAddress;
     char const *filename = (char const *)(intptr_t)filenameAddress;

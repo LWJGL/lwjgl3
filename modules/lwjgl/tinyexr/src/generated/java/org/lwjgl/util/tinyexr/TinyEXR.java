@@ -121,6 +121,16 @@ public class TinyEXR {
         return nFreeEXRImage(exr_image.address());
     }
 
+    // --- [ FreeEXRErrorMessage ] ---
+
+    /** Unsafe version of: {@link #FreeEXRErrorMessage} */
+    public static native void nFreeEXRErrorMessage(long msg);
+
+    /** Free's error message */
+    public static void FreeEXRErrorMessage(@NativeType("char const *") ByteBuffer msg) {
+        nFreeEXRErrorMessage(memAddress(msg));
+    }
+
     // --- [ ParseEXRVersionFromFile ] ---
 
     /** Unsafe version of: {@link #ParseEXRVersionFromFile} */
@@ -160,7 +170,11 @@ public class TinyEXR {
     /** Unsafe version of: {@link #ParseEXRHeaderFromFile} */
     public static native int nParseEXRHeaderFromFile(long header, long version, long filename, long err);
 
-    /** Parse single-part OpenEXR header from a file and initialize {@link EXRHeader}. */
+    /**
+     * Parse single-part OpenEXR header from a file and initialize {@link EXRHeader}.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
     public static int ParseEXRHeaderFromFile(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             checkNT1(filename);
@@ -169,7 +183,11 @@ public class TinyEXR {
         return nParseEXRHeaderFromFile(header.address(), version.address(), memAddress(filename), memAddress(err));
     }
 
-    /** Parse single-part OpenEXR header from a file and initialize {@link EXRHeader}. */
+    /**
+     * Parse single-part OpenEXR header from a file and initialize {@link EXRHeader}.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
     public static int ParseEXRHeaderFromFile(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -188,7 +206,11 @@ public class TinyEXR {
     /** Unsafe version of: {@link #ParseEXRHeaderFromMemory} */
     public static native int nParseEXRHeaderFromMemory(long header, long version, long memory, long size, long err);
 
-    /** Parse single-part OpenEXR header from a memory and initialize {@link EXRHeader}. */
+    /**
+     * Parse single-part OpenEXR header from a memory and initialize {@link EXRHeader}.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
     public static int ParseEXRHeaderFromMemory(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -201,7 +223,11 @@ public class TinyEXR {
     /** Unsafe version of: {@link #ParseEXRMultipartHeaderFromFile} */
     public static native int nParseEXRMultipartHeaderFromFile(long headers, long num_headers, long version, long filename, long err);
 
-    /** Parse multi-part OpenEXR headers from a file and initialize {@link EXRHeader}* array. */
+    /**
+     * Parse multi-part OpenEXR headers from a file and initialize {@link EXRHeader}* array.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
     public static int ParseEXRMultipartHeaderFromFile(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, 1);
@@ -212,7 +238,11 @@ public class TinyEXR {
         return nParseEXRMultipartHeaderFromFile(memAddress(headers), memAddress(num_headers), version.address(), memAddress(filename), memAddress(err));
     }
 
-    /** Parse multi-part OpenEXR headers from a file and initialize {@link EXRHeader}* array. */
+    /**
+     * Parse multi-part OpenEXR headers from a file and initialize {@link EXRHeader}* array.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
     public static int ParseEXRMultipartHeaderFromFile(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, 1);
@@ -233,7 +263,11 @@ public class TinyEXR {
     /** Unsafe version of: {@link #ParseEXRMultipartHeaderFromMemory} */
     public static native int nParseEXRMultipartHeaderFromMemory(long headers, long num_headers, long version, long memory, long size, long err);
 
-    /** Parse multi-part OpenEXR headers from a memory and initialize {@link EXRHeader}* array. */
+    /**
+     * Parse multi-part OpenEXR headers from a memory and initialize {@link EXRHeader}* array.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
     public static int ParseEXRMultipartHeaderFromMemory(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, 1);
@@ -253,7 +287,7 @@ public class TinyEXR {
      * 
      * <p>Application must setup {@link #ParseEXRHeaderFromFile} before calling this function.</p>
      * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}.</p>
+     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -271,7 +305,7 @@ public class TinyEXR {
      * 
      * <p>Application must setup {@link #ParseEXRHeaderFromFile} before calling this function.</p>
      * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}.</p>
+     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -299,7 +333,7 @@ public class TinyEXR {
      * 
      * <p>Application must setup {@link EXRHeader} with {@link #ParseEXRHeaderFromMemory} before calling this function.</p>
      * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}.</p>
+     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -321,7 +355,7 @@ public class TinyEXR {
      * 
      * <p>Application must setup {@link #ParseEXRMultipartHeaderFromFile} before calling this function.</p>
      * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}.</p>
+     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -339,7 +373,7 @@ public class TinyEXR {
      * 
      * <p>Application must setup {@link #ParseEXRMultipartHeaderFromFile} before calling this function.</p>
      * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}.</p>
+     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -367,7 +401,7 @@ public class TinyEXR {
      * 
      * <p>Application must setup {@link EXRHeader}* array with {@link #ParseEXRMultipartHeaderFromMemory} before calling this function.</p>
      * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}.</p>
+     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -386,6 +420,8 @@ public class TinyEXR {
 
     /**
      * Saves multi-channel, single-frame OpenEXR image to a file.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -401,6 +437,8 @@ public class TinyEXR {
 
     /**
      * Saves multi-channel, single-frame OpenEXR image to a file.
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -428,6 +466,8 @@ public class TinyEXR {
      * Saves multi-channel, single-frame OpenEXR image to a memory.
      * 
      * <p>Image is compressed using {@code EXRImage.compression} value.</p>
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return the number of bytes if success or negative value and may set error string in {@code err} when there's an error
      */
@@ -451,6 +491,8 @@ public class TinyEXR {
      * Loads single-frame OpenEXR deep image.
      * 
      * <p>Application must free memory of variables in {@code DeepImage(image, offset_table)}.</p>
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
@@ -466,6 +508,8 @@ public class TinyEXR {
      * Loads single-frame OpenEXR deep image.
      * 
      * <p>Application must free memory of variables in {@code DeepImage(image, offset_table)}.</p>
+     * 
+     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
      * @return negative value and may set error string in {@code err} when there's an error
      */
