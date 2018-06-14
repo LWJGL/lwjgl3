@@ -26,7 +26,7 @@ import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.CGL.*;
-import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL30C.*;
 import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;

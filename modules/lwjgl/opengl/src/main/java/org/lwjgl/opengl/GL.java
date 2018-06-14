@@ -13,7 +13,7 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GL32C.*;
 import static org.lwjgl.opengl.GLX.*;
 import static org.lwjgl.opengl.GLX11.*;
 import static org.lwjgl.opengl.WGL.*;

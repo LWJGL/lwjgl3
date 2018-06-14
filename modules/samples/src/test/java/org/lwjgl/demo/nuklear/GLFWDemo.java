@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nuklear.Nuklear.*;
 import static org.lwjgl.opengl.ARBDebugOutput.*;
-import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL30C.*;
 import static org.lwjgl.stb.STBTruetype.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
