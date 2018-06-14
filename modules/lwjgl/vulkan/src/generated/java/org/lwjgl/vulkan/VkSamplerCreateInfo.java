@@ -37,6 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>The absolute value of {@code mipLodBias} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxSamplerLodBias}</li>
+ * <li>{@code maxLod} <b>must</b> be greater than or equal to {@code minLod}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#features-features-samplerAnisotropy">anisotropic sampling</a> feature is not enabled, {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If {@code anisotropyEnable} is {@link VK10#VK_TRUE TRUE}, {@code maxAnisotropy} <b>must</b> be between {@code 1.0} and {@link VkPhysicalDeviceLimits}{@code ::maxSamplerAnisotropy}, inclusive</li>
  * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled and {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT} is not set for the format, {@code minFilter} and {@code magFilter} <b>must</b> be equal to the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion&#8217;s {@code chromaFilter}</li>
@@ -96,7 +97,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Note: Some implementations will default to shader state if this member does not match.</li>
  * </ul></li>
  * <li>{@code compareOp} &ndash; a {@code VkCompareOp} value specifying the comparison function to apply to fetched data before filtering as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-depth-compare-operation">Depth Compare Operation</a> section.</li>
- * <li>{@code minLod} &ndash; {@code minLod} and {@code maxLod} are the values used to clamp the computed LOD value, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-level-of-detail-operation">Level-of-Detail Operation</a> section. {@code maxLod} <b>must</b> be greater than or equal to {@code minLod}.</li>
+ * <li>{@code minLod} &ndash; {@code minLod} and {@code maxLod} are the values used to clamp the computed LOD value, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-level-of-detail-operation">Level-of-Detail Operation</a> section.</li>
  * <li>{@code maxLod} &ndash; see {@code minLod}</li>
  * <li>{@code borderColor} &ndash; a {@code VkBorderColor} value specifying the predefined border color to use.</li>
  * <li>{@code unnormalizedCoordinates} &ndash; controls whether to use unnormalized or normalized texel coordinates to address texels of the image. When set to {@link VK10#VK_TRUE TRUE}, the range of the image coordinates used to lookup the texel is in the range of zero to the image dimensions for x, y and z. When set to {@link VK10#VK_FALSE FALSE} the range of image coordinates is zero to one. When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, samplers have the following requirements:
