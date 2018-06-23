@@ -360,7 +360,7 @@ class Func(
                         it.error("The ReturnParam modifier can only be used in functions with void return type.")
                 } else {
                     if (returnMod.lengthParam.startsWith(RESULT)) {
-                        if (!returns.nativeType.mapping.let({ it === PrimitiveMapping.INT || it === PrimitiveMapping.POINTER }))
+                        if (!returns.nativeType.mapping.let { it === PrimitiveMapping.INT || it === PrimitiveMapping.POINTER })
                             it.error("The Return modifier was used in a function with an unsupported return type")
 
                         if (!it.has<Check>()) {

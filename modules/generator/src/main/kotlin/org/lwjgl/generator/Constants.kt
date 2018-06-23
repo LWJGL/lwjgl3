@@ -52,7 +52,7 @@ class EnumValueExpression(
     val expression: String
 ) : EnumValue(documentation, null)
 
-val EnumConstant = ConstantType(EnumValue::class, { "0x%X".format(it) })
+val EnumConstant = ConstantType(EnumValue::class) { "0x%X".format(it) }
 
 open class Constant<out T : Any>(val name: String, val value: T?)
 internal class ConstantExpression<out T : Any>(

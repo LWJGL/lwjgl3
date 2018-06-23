@@ -221,7 +221,7 @@ open class TypeMapping(
     /** The native method argument type. */
     val nativeMethodType: Class<*>,
     /** The Java method argument type. */
-    protected val javaMethodType: Class<*>
+    private val javaMethodType: Class<*>
 ) {
 
     constructor(

@@ -129,7 +129,7 @@ class Parameter(
         documentation
     ).copyModifiers(this)
 
-    internal fun copyModifiers(other: Parameter): Parameter {
+    private fun copyModifiers(other: Parameter): Parameter {
         if (other.hasModifiers())
             this._modifiers = HashMap(other.modifiers)
         return this

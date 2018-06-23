@@ -8,6 +8,7 @@
     <option name="languageVersion" value="1.2" />
   </component>
   <component name="KotlinCompilerSettings">
+    <option name="additionalArguments" value="-version -Xprogressive" />
     <option name="copyJsLibraryFiles" value="false" />
   </component>
 </project>

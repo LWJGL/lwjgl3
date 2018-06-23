@@ -112,7 +112,7 @@ enum class Module(
 fun String.dependsOn(vararg modules: Module): String? = if (modules.any { it.enabled }) this else null
 
 fun main(args: Array<String>) {
-    if (args.size < 1)
+    if (args.isEmpty())
         throw IllegalArgumentException("Module root path not specified")
 
     if (!Files.isDirectory(Paths.get(args[0])))
