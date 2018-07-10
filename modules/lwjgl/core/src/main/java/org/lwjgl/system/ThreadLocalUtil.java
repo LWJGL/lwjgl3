@@ -66,6 +66,8 @@ public final class ThreadLocalUtil {
     has as many function pointers as were available in the corresponding JNI version.
 
     - On startup, a pointer to the global jniNativeInterface is stored.
+    - When the library is created, setDefaultCaps is called to inject a default capabilities function pointer array in the global jniNativeInterface::reserved3
+      that reports an error for threads without capabilities set.
     - On setCapabilities:
         * If necessary, a jniNativeInterface copy is created and injected to the current thread (JavaThread::_jni_environment points to the copy).
         * A pointer to the capabilities function pointer array is set to jniNativeInterface::reserved3.
@@ -83,7 +85,6 @@ public final class ThreadLocalUtil {
 
     - Depends on Hotspot implementation details.
     - Requires custom JNI code for each function.
-    - (minor) Function pointers are not checked anymore. Calling an unsupported function causes a segfault.
     - (minor) Critical Natives cannot use it, there's no JNIEnv* parameter.
     - (minor) JVMTI has the ability to intercept JNI functions with SetJNIFunctionTable. This interacts badly with the jniNativeInterface copies, but it should
     be easy to workaround (attaching the agent at startup, making sure no contexts are current when the agent is attached, clearing and setting again the
@@ -95,6 +96,9 @@ public final class ThreadLocalUtil {
 
     /** A function to delegate to when an unsupported function is called. */
     private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
+
+    /** A function to delegate to when a function is called in a thread without a context. */
+    private static final long NO_CONTEXT_ABORT = getNoContextAbort();
 
     private static final long SIZE_OF_JNI_NATIVE_INTERFACE;
 
@@ -146,6 +150,8 @@ public final class ThreadLocalUtil {
 
     private static native long getFunctionMissingAbort();
 
+    private static native long getNoContextAbort();
+
     public static void setEnv(long capabilities, int index) {
         if (index < 0 || 3 < index) { // reserved0-3
             throw new IndexOutOfBoundsException();
@@ -180,8 +186,8 @@ public final class ThreadLocalUtil {
         return fields;
     }
 
-    // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
-    public static void setFunctionMissingAddresses(@Nullable Class<?> capabilitiesClass, int index) {
+    // Creates a default capabilities function pointer array for the global env that calls NO_CONTEXT_ABORT
+    public static void setDefaultCaps(@Nullable Class<?> capabilitiesClass, int index) {
         if (capabilitiesClass == null) {
             long missingCaps = memGetAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE);
             if (missingCaps != NULL) {
@@ -193,7 +199,7 @@ public final class ThreadLocalUtil {
 
             long missingCaps = getAllocator().malloc(functionCount * POINTER_SIZE);
             for (int i = 0; i < functionCount; i++) {
-                memPutAddress(missingCaps + i * POINTER_SIZE, FUNCTION_MISSING_ABORT);
+                memPutAddress(missingCaps + i * POINTER_SIZE, NO_CONTEXT_ABORT);
             }
 
             memPutAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE, missingCaps);
