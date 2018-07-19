@@ -295,8 +295,8 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t.member("maxUniforms", "maximum number of uniform handles")
     uint32_t.member("maxOcclusionQueries", "maximum number of occlusion query handles")
     uint32_t.member("maxEncoders", "maximum number of encoder threads")
-    uint32_t.member("transientVbSize", "amount of transient vertex buffer used")
-    uint32_t.member("transientIbSize", "amount of transient index buffer used")
+    uint32_t.member("transientVbSize", "maximum transient vertex buffer size")
+    uint32_t.member("transientIbSize", "maximum transient index buffer size")
 }
 
 val bgfx_caps_t = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false, skipBuffer = true) {
@@ -577,6 +577,8 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
     ).links("RENDERER_TYPE_\\w+")
     uint16_t.member("vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device.").links("PCI_ID_\\w+")
     uint16_t.member("deviceId", "device id. If set to 0 it will select first device, or device with matching id.")
+    bool.member("debug", "enable device for debugging")
+    bool.member("profile", "enable device for profiling")
 
     bgfx_resolution_t.member("resolution", "backbuffer resolution and reset parameters")
     bgfx_init_limits_t.member("limits", "")

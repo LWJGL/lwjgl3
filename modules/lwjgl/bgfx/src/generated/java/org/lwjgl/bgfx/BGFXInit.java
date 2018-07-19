@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code type} &ndash; select rendering backend. When set to {@link BGFX#BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT} a default rendering backend will be selected appropriate to the platform. One of:<br><table><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D9 RENDERER_TYPE_DIRECT3D9}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table></li>
  * <li>{@code vendorId} &ndash; vendor PCI id. If set to {@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE} it will select the first device. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table></li>
  * <li>{@code deviceId} &ndash; device id. If set to 0 it will select first device, or device with matching id.</li>
+ * <li>{@code debug} &ndash; enable device for debugging</li>
+ * <li>{@code profile} &ndash; enable device for profiling</li>
  * <li>{@code resolution} &ndash; backbuffer resolution and reset parameters</li>
  * <li>{@code callback} &ndash; provide application specific callback interface</li>
  * <li>{@code allocator} &ndash; custom allocator. When a custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes	custom allocator is thread safe.</li>
@@ -36,6 +38,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     bgfx_renderer_type_t type;
  *     uint16_t vendorId;
  *     uint16_t deviceId;
+ *     bool debug;
+ *     bool profile;
  *     {@link BGFXResolution bgfx_resolution_t} resolution;
  *     {@link BGFXInitLimits bgfx_init_limits_t} limits;
  *     {@link BGFXCallbackInterface bgfx_callback_interface_t} * callback;
@@ -56,6 +60,8 @@ public class BGFXInit extends Struct implements NativeResource {
         TYPE,
         VENDORID,
         DEVICEID,
+        DEBUG,
+        PROFILE,
         RESOLUTION,
         LIMITS,
         CALLBACK,
@@ -66,6 +72,8 @@ public class BGFXInit extends Struct implements NativeResource {
             __member(4),
             __member(2),
             __member(2),
+            __member(1),
+            __member(1),
             __member(BGFXResolution.SIZEOF, BGFXResolution.ALIGNOF),
             __member(BGFXInitLimits.SIZEOF, BGFXInitLimits.ALIGNOF),
             __member(POINTER_SIZE),
@@ -78,10 +86,12 @@ public class BGFXInit extends Struct implements NativeResource {
         TYPE = layout.offsetof(0);
         VENDORID = layout.offsetof(1);
         DEVICEID = layout.offsetof(2);
-        RESOLUTION = layout.offsetof(3);
-        LIMITS = layout.offsetof(4);
-        CALLBACK = layout.offsetof(5);
-        ALLOCATOR = layout.offsetof(6);
+        DEBUG = layout.offsetof(3);
+        PROFILE = layout.offsetof(4);
+        RESOLUTION = layout.offsetof(5);
+        LIMITS = layout.offsetof(6);
+        CALLBACK = layout.offsetof(7);
+        ALLOCATOR = layout.offsetof(8);
     }
 
     BGFXInit(long address, @Nullable ByteBuffer container) {
@@ -110,6 +120,12 @@ public class BGFXInit extends Struct implements NativeResource {
     /** Returns the value of the {@code deviceId} field. */
     @NativeType("uint16_t")
     public short deviceId() { return ndeviceId(address()); }
+    /** Returns the value of the {@code debug} field. */
+    @NativeType("bool")
+    public boolean debug() { return ndebug(address()); }
+    /** Returns the value of the {@code profile} field. */
+    @NativeType("bool")
+    public boolean profile() { return nprofile(address()); }
     /** Returns a {@link BGFXResolution} view of the {@code resolution} field. */
     @NativeType("bgfx_resolution_t")
     public BGFXResolution resolution() { return nresolution(address()); }
@@ -135,6 +151,10 @@ public class BGFXInit extends Struct implements NativeResource {
     public BGFXInit vendorId(@NativeType("uint16_t") short value) { nvendorId(address(), value); return this; }
     /** Sets the specified value to the {@code deviceId} field. */
     public BGFXInit deviceId(@NativeType("uint16_t") short value) { ndeviceId(address(), value); return this; }
+    /** Sets the specified value to the {@code debug} field. */
+    public BGFXInit debug(@NativeType("bool") boolean value) { ndebug(address(), value); return this; }
+    /** Sets the specified value to the {@code profile} field. */
+    public BGFXInit profile(@NativeType("bool") boolean value) { nprofile(address(), value); return this; }
     /** Copies the specified {@link BGFXResolution} to the {@code resolution} field. */
     public BGFXInit resolution(@NativeType("bgfx_resolution_t") BGFXResolution value) { nresolution(address(), value); return this; }
     /** Copies the specified {@link BGFXInitLimits} to the {@code limits} field. */
@@ -149,6 +169,8 @@ public class BGFXInit extends Struct implements NativeResource {
         int type,
         short vendorId,
         short deviceId,
+        boolean debug,
+        boolean profile,
         BGFXResolution resolution,
         BGFXInitLimits limits,
         @Nullable BGFXCallbackInterface callback,
@@ -157,6 +179,8 @@ public class BGFXInit extends Struct implements NativeResource {
         type(type);
         vendorId(vendorId);
         deviceId(deviceId);
+        debug(debug);
+        profile(profile);
         resolution(resolution);
         limits(limits);
         callback(callback);
@@ -243,6 +267,10 @@ public class BGFXInit extends Struct implements NativeResource {
     public static short nvendorId(long struct) { return memGetShort(struct + BGFXInit.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
     public static short ndeviceId(long struct) { return memGetShort(struct + BGFXInit.DEVICEID); }
+    /** Unsafe version of {@link #debug}. */
+    public static boolean ndebug(long struct) { return memGetByte(struct + BGFXInit.DEBUG) != 0; }
+    /** Unsafe version of {@link #profile}. */
+    public static boolean nprofile(long struct) { return memGetByte(struct + BGFXInit.PROFILE) != 0; }
     /** Unsafe version of {@link #resolution}. */
     public static BGFXResolution nresolution(long struct) { return BGFXResolution.create(struct + BGFXInit.RESOLUTION); }
     /** Unsafe version of {@link #limits}. */
@@ -258,6 +286,10 @@ public class BGFXInit extends Struct implements NativeResource {
     public static void nvendorId(long struct, short value) { memPutShort(struct + BGFXInit.VENDORID, value); }
     /** Unsafe version of {@link #deviceId(short) deviceId}. */
     public static void ndeviceId(long struct, short value) { memPutShort(struct + BGFXInit.DEVICEID, value); }
+    /** Unsafe version of {@link #debug(boolean) debug}. */
+    public static void ndebug(long struct, boolean value) { memPutByte(struct + BGFXInit.DEBUG, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #profile(boolean) profile}. */
+    public static void nprofile(long struct, boolean value) { memPutByte(struct + BGFXInit.PROFILE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #resolution(BGFXResolution) resolution}. */
     public static void nresolution(long struct, BGFXResolution value) { memCopy(value.address(), struct + BGFXInit.RESOLUTION, BGFXResolution.SIZEOF); }
     /** Unsafe version of {@link #limits(BGFXInitLimits) limits}. */

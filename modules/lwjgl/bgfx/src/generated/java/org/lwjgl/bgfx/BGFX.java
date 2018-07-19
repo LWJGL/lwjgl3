@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 72;
+    public static final int BGFX_API_VERSION = 75;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -963,6 +963,8 @@ public class BGFX {
         public static final long
             vertex_decl_begin                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_decl_begin"),
             vertex_decl_add                                      = apiGetFunctionAddress(BGFX, "bgfx_vertex_decl_add"),
+            vertex_decl_decode                                   = apiGetFunctionAddress(BGFX, "bgfx_vertex_decl_decode"),
+            vertex_decl_has                                      = apiGetFunctionAddress(BGFX, "bgfx_vertex_decl_has"),
             vertex_decl_skip                                     = apiGetFunctionAddress(BGFX, "bgfx_vertex_decl_skip"),
             vertex_decl_end                                      = apiGetFunctionAddress(BGFX, "bgfx_vertex_decl_end"),
             vertex_pack                                          = apiGetFunctionAddress(BGFX, "bgfx_vertex_pack"),
@@ -1182,6 +1184,53 @@ public class BGFX {
      */
     public static void bgfx_vertex_decl_add(@NativeType("bgfx_vertex_decl_t *") BGFXVertexDecl _decl, @NativeType("bgfx_attrib_t") int _attrib, @NativeType("uint8_t") int _num, @NativeType("bgfx_attrib_type_t") int _type, @NativeType("bool") boolean _normalized, @NativeType("bool") boolean _asInt) {
         nbgfx_vertex_decl_add(_decl.address(), _attrib, (byte)_num, _type, _normalized, _asInt);
+    }
+
+    // --- [ bgfx_vertex_decl_decode ] ---
+
+    /** Unsafe version of: {@link #bgfx_vertex_decl_decode vertex_decl_decode} */
+    public static void nbgfx_vertex_decl_decode(long _decl, int _attrib, long _num, long _type, long _normalized, long _asInt) {
+        long __functionAddress = Functions.vertex_decl_decode;
+        invokePPPPPV(__functionAddress, _decl, _attrib, _num, _type, _normalized, _asInt);
+    }
+
+    /**
+     * Decodes attribute.
+     *
+     * @param _decl       the vertex declaration
+     * @param _attrib     the attribute to decode
+     * @param _num        number of elements
+     * @param _type       element type
+     * @param _normalized normalized flag
+     * @param _asInt      packaging flag
+     */
+    public static void bgfx_vertex_decl_decode(@NativeType("bgfx_vertex_decl_t const *") BGFXVertexDecl _decl, @NativeType("bgfx_attrib_t") int _attrib, @NativeType("uint8_t *") ByteBuffer _num, @NativeType("bgfx_attrib_type_t *") IntBuffer _type, @NativeType("bool *") ByteBuffer _normalized, @NativeType("bool *") ByteBuffer _asInt) {
+        if (CHECKS) {
+            check(_num, 1);
+            check(_type, 1);
+            check(_normalized, 1);
+            check(_asInt, 1);
+        }
+        nbgfx_vertex_decl_decode(_decl.address(), _attrib, memAddress(_num), memAddress(_type), memAddress(_normalized), memAddress(_asInt));
+    }
+
+    // --- [ bgfx_vertex_decl_has ] ---
+
+    /** Unsafe version of: {@link #bgfx_vertex_decl_has vertex_decl_has} */
+    public static boolean nbgfx_vertex_decl_has(long _decl, int _attr) {
+        long __functionAddress = Functions.vertex_decl_has;
+        return invokePZ(__functionAddress, _decl, _attr);
+    }
+
+    /**
+     * Returns true if {@code _decl} contains attribute.
+     *
+     * @param _decl the vertex declaration
+     * @param _attr the attribute to query. One of:<br><table><tr><td>{@link #BGFX_ATTRIB_POSITION ATTRIB_POSITION}</td><td>{@link #BGFX_ATTRIB_NORMAL ATTRIB_NORMAL}</td><td>{@link #BGFX_ATTRIB_TANGENT ATTRIB_TANGENT}</td><td>{@link #BGFX_ATTRIB_BITANGENT ATTRIB_BITANGENT}</td><td>{@link #BGFX_ATTRIB_COLOR0 ATTRIB_COLOR0}</td></tr><tr><td>{@link #BGFX_ATTRIB_COLOR1 ATTRIB_COLOR1}</td><td>{@link #BGFX_ATTRIB_COLOR2 ATTRIB_COLOR2}</td><td>{@link #BGFX_ATTRIB_COLOR3 ATTRIB_COLOR3}</td><td>{@link #BGFX_ATTRIB_INDICES ATTRIB_INDICES}</td><td>{@link #BGFX_ATTRIB_WEIGHT ATTRIB_WEIGHT}</td></tr><tr><td>{@link #BGFX_ATTRIB_TEXCOORD0 ATTRIB_TEXCOORD0}</td><td>{@link #BGFX_ATTRIB_TEXCOORD1 ATTRIB_TEXCOORD1}</td><td>{@link #BGFX_ATTRIB_TEXCOORD2 ATTRIB_TEXCOORD2}</td><td>{@link #BGFX_ATTRIB_TEXCOORD3 ATTRIB_TEXCOORD3}</td><td>{@link #BGFX_ATTRIB_TEXCOORD4 ATTRIB_TEXCOORD4}</td></tr><tr><td>{@link #BGFX_ATTRIB_TEXCOORD5 ATTRIB_TEXCOORD5}</td><td>{@link #BGFX_ATTRIB_TEXCOORD6 ATTRIB_TEXCOORD6}</td><td>{@link #BGFX_ATTRIB_TEXCOORD7 ATTRIB_TEXCOORD7}</td></tr></table>
+     */
+    @NativeType("bool")
+    public static boolean bgfx_vertex_decl_has(@NativeType("bgfx_vertex_decl_t const *") BGFXVertexDecl _decl, @NativeType("bgfx_attrib_t") int _attr) {
+        return nbgfx_vertex_decl_has(_decl.address(), _attr);
     }
 
     // --- [ bgfx_vertex_decl_skip ] ---
@@ -1908,8 +1957,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -1925,8 +1974,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -1942,8 +1991,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -1959,8 +2008,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -1976,8 +2025,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -1993,8 +2042,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -2010,8 +2059,8 @@ public class BGFX {
      * called from any thread.</p>
      *
      * @param _data      the data to reference
-     * @param _releaseFn the release function
-     * @param _userData  user data to pass to {@code _releaseFn}
+     * @param _releaseFn callback function to release memory after use
+     * @param _userData  user data to be passed to callback function
      */
     @Nullable
     @NativeType("bgfx_memory_t const *")
@@ -2589,10 +2638,14 @@ public class BGFX {
 
     // --- [ bgfx_set_shader_name ] ---
 
-    /** Unsafe version of: {@link #bgfx_set_shader_name set_shader_name} */
-    public static void nbgfx_set_shader_name(short _handle, long _name) {
+    /**
+     * Unsafe version of: {@link #bgfx_set_shader_name set_shader_name}
+     *
+     * @param _len shader name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)
+     */
+    public static void nbgfx_set_shader_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_shader_name;
-        invokePV(__functionAddress, _handle, _name);
+        invokePV(__functionAddress, _handle, _name, _len);
     }
 
     /**
@@ -2602,10 +2655,7 @@ public class BGFX {
      * @param _name   shader name
      */
     public static void bgfx_set_shader_name(@NativeType("bgfx_shader_handle_t") short _handle, @NativeType("char const *") ByteBuffer _name) {
-        if (CHECKS) {
-            checkNT1(_name);
-        }
-        nbgfx_set_shader_name(_handle, memAddress(_name));
+        nbgfx_set_shader_name(_handle, memAddress(_name), _name.remaining());
     }
 
     /**
@@ -2617,8 +2667,8 @@ public class BGFX {
     public static void bgfx_set_shader_name(@NativeType("bgfx_shader_handle_t") short _handle, @NativeType("char const *") CharSequence _name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer _nameEncoded = stack.UTF8(_name);
-            nbgfx_set_shader_name(_handle, memAddress(_nameEncoded));
+            ByteBuffer _nameEncoded = stack.UTF8(_name, false);
+            nbgfx_set_shader_name(_handle, memAddress(_nameEncoded), _nameEncoded.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3032,10 +3082,14 @@ public class BGFX {
 
     // --- [ bgfx_set_texture_name ] ---
 
-    /** Unsafe version of: {@link #bgfx_set_texture_name set_texture_name} */
-    public static void nbgfx_set_texture_name(short _handle, long _name) {
+    /**
+     * Unsafe version of: {@link #bgfx_set_texture_name set_texture_name}
+     *
+     * @param _len texture name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)
+     */
+    public static void nbgfx_set_texture_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_texture_name;
-        invokePV(__functionAddress, _handle, _name);
+        invokePV(__functionAddress, _handle, _name, _len);
     }
 
     /**
@@ -3045,10 +3099,7 @@ public class BGFX {
      * @param _name   texture name
      */
     public static void bgfx_set_texture_name(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("char const *") ByteBuffer _name) {
-        if (CHECKS) {
-            checkNT1(_name);
-        }
-        nbgfx_set_texture_name(_handle, memAddress(_name));
+        nbgfx_set_texture_name(_handle, memAddress(_name), _name.remaining());
     }
 
     /**
@@ -3060,8 +3111,8 @@ public class BGFX {
     public static void bgfx_set_texture_name(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("char const *") CharSequence _name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer _nameEncoded = stack.UTF8(_name);
-            nbgfx_set_texture_name(_handle, memAddress(_nameEncoded));
+            ByteBuffer _nameEncoded = stack.UTF8(_name, false);
+            nbgfx_set_texture_name(_handle, memAddress(_nameEncoded), _nameEncoded.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5583,6 +5634,18 @@ public class BGFX {
     @NativeType("uint32_t")
     public static int BGFX_TEXTURE_BORDER_COLOR(@NativeType("uint32_t") int _index) {
         return (_index << BGFX_TEXTURE_BORDER_COLOR_SHIFT) & BGFX_TEXTURE_BORDER_COLOR_MASK;
+    }
+
+    /** Array version of: {@link #bgfx_vertex_decl_decode vertex_decl_decode} */
+    public static void bgfx_vertex_decl_decode(@NativeType("bgfx_vertex_decl_t const *") BGFXVertexDecl _decl, @NativeType("bgfx_attrib_t") int _attrib, @NativeType("uint8_t *") ByteBuffer _num, @NativeType("bgfx_attrib_type_t *") int[] _type, @NativeType("bool *") ByteBuffer _normalized, @NativeType("bool *") ByteBuffer _asInt) {
+        long __functionAddress = Functions.vertex_decl_decode;
+        if (CHECKS) {
+            check(_num, 1);
+            check(_type, 1);
+            check(_normalized, 1);
+            check(_asInt, 1);
+        }
+        invokePPPPPV(__functionAddress, _decl.address(), _attrib, memAddress(_num), _type, memAddress(_normalized), memAddress(_asInt));
     }
 
     /** Array version of: {@link #bgfx_vertex_pack vertex_pack} */

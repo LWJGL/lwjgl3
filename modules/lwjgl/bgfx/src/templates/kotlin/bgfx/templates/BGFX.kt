@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."72"
+        "API_VERSION".."75"
     )
 
     ShortConstant(
@@ -820,6 +820,26 @@ RGBA16S
     )
 
     void(
+        "vertex_decl_decode",
+        "Decodes attribute.",
+
+        bgfx_vertex_decl_t.const.p.IN("_decl", "the vertex declaration"),
+        bgfx_attrib_t.IN("_attrib", "the attribute to decode"),
+        Check(1)..uint8_t.p.OUT("_num", "number of elements"),
+        Check(1)..bgfx_attrib_type_t.p.OUT("_type", "element type"),
+        Check(1)..bool.p.OUT("_normalized", "normalized flag"),
+        Check(1)..bool.p.OUT("_asInt", "packaging flag")
+    )
+
+    bool(
+        "vertex_decl_has",
+        "Returns true if {@code _decl} contains attribute.",
+
+        bgfx_vertex_decl_t.const.p.IN("_decl", "the vertex declaration"),
+        bgfx_attrib_t.IN("_attr", "the attribute to query", Attrib)
+    )
+
+    void(
         "vertex_decl_skip",
         "Skips {@code _num} bytes in vertex stream.",
 
@@ -1081,8 +1101,8 @@ RGBA16S
 
         MultiTypeAll..void.const.p.IN("_data", "the data to reference"),
         AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to reference"),
-        bgfx_release_fn_t.IN("_releaseFn", "the release function"),
-        nullable..opaque_p.IN("_userData", "user data to pass to {@code _releaseFn}")
+        bgfx_release_fn_t.IN("_releaseFn", "callback function to release memory after use"),
+        nullable..opaque_p.IN("_userData", "user data to be passed to callback function")
     )
 
     void(
@@ -1369,7 +1389,11 @@ RGBA16S
         "Sets shader debug name.",
 
         bgfx_shader_handle_t.IN("_handle", "shader handle"),
-        charUTF8.const.p.IN("_name", "shader name")
+        charUTF8.const.p.IN("_name", "shader name"),
+        AutoSize("_name")..int32_t.IN(
+            "_len",
+            "shader name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
+        )
     )
 
     void(
@@ -1598,7 +1622,11 @@ RGBA16S
         "Sets texture debug name.",
 
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
-        charUTF8.const.p.IN("_name", "texture name")
+        charUTF8.const.p.IN("_name", "texture name"),
+        AutoSize("_name")..int32_t.IN(
+            "_len",
+            "texture name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
+        )
     )
 
     opaque_p(

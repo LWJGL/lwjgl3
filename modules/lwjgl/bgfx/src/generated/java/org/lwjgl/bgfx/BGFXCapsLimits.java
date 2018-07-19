@@ -39,8 +39,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code maxUniforms} &ndash; maximum number of uniform handles</li>
  * <li>{@code maxOcclusionQueries} &ndash; maximum number of occlusion query handles</li>
  * <li>{@code maxEncoders} &ndash; maximum number of encoder threads</li>
- * <li>{@code transientVbSize} &ndash; amount of transient vertex buffer used</li>
- * <li>{@code transientIbSize} &ndash; amount of transient index buffer used</li>
+ * <li>{@code transientVbSize} &ndash; maximum transient vertex buffer size</li>
+ * <li>{@code transientIbSize} &ndash; maximum transient index buffer size</li>
  * </ul>
  * 
  * <h3>Layout</h3>
