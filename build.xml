@@ -568,6 +568,7 @@
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jsr305.jar"/>
+                <pathelement path="${lib}/java/testng.jar"/>
                 <pathelement path="${lib}/java/joml.jar"/>
             </classpath>
 

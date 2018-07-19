@@ -21,16 +21,36 @@ import static org.testng.Assert.*;
 public class MemoryUtilTest {
 
     public void testZeroAllocation() {
+        if (!CHECKS) {
+            throw new SkipException("This test may not run with checks disabled.");
+        }
+
         long address = nmemAllocChecked(0);
-        assertEquals(address, NULL);
+        assertNotEquals(address, NULL);
+        nmemFree(address);
+
+        address = nmemCallocChecked(0, 0);
+        assertNotEquals(address, NULL);
         nmemFree(address);
 
         address = nmemCallocChecked(1, 0);
-        assertEquals(address, NULL);
+        assertNotEquals(address, NULL);
         nmemFree(address);
 
         address = nmemCallocChecked(0, 8);
-        assertEquals(address, NULL);
+        assertNotEquals(address, NULL);
+        nmemFree(address);
+
+        address = nmemAlignedAllocChecked(16, 0);
+        assertNotEquals(address, NULL);
+        nmemAlignedFree(address);
+
+        address = nmemReallocChecked(NULL, 0);
+        assertNotEquals(address, NULL);
+        address = nmemReallocChecked(address, 8);
+        assertNotEquals(address, NULL);
+        address = nmemReallocChecked(address, 0);
+        assertNotEquals(address, NULL);
         nmemFree(address);
     }
 

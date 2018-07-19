@@ -161,7 +161,7 @@ public final class ThreadLocalUtil {
             }
         } else {
             if (env == JNI_NATIVE_INTERFACE) {
-                long newEnv = nmemAlloc(SIZE_OF_JNI_NATIVE_INTERFACE);
+                long newEnv = nmemAllocChecked(SIZE_OF_JNI_NATIVE_INTERFACE);
                 memCopy(env, newEnv, SIZE_OF_JNI_NATIVE_INTERFACE);
                 setThreadJNIEnv(env = newEnv);
             }

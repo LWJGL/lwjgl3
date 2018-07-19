@@ -158,29 +158,30 @@ public final class MemoryUtil {
 
     // --- [ memAlloc ] ---
 
-    /** Unsafe version of {@link #memAlloc}. */
+    /** Unsafe version of {@link #memAlloc}. May return {@link #NULL} if {@code size} is zero or the allocation failed. */
     public static long nmemAlloc(long size) {
         return ALLOCATOR.malloc(size);
     }
 
     /**
-     * Unsafe version of {@link #memAlloc} that checks the requested {@code size}.
+     * Unsafe version of {@link #memAlloc} that checks the returned pointer.
      *
-     * @return {@link #NULL} if {@code size} is zero, otherwise a pointer to the memory block allocated by the function on success.
+     * @return a pointer to the memory block allocated by the function on success. This pointer will never be {@link #NULL}, even if {@code size} is zero.
      *
      * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
      */
     public static long nmemAllocChecked(long size) {
-        long address;
-        if (size == 0L) {
-            address = NULL;
-        } else {
-            address = nmemAlloc(size);
-            if (CHECKS && address == NULL) {
-                throw new OutOfMemoryError();
-            }
+        long address = nmemAlloc(size != 0 ? size : 1L);
+        if (CHECKS && address == NULL) {
+            throw new OutOfMemoryError();
         }
         return address;
+    }
+
+    private static long getAllocationSize(int elements, int elementShift) {
+        long bytes = apiGetBytes(elements, elementShift);
+        apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
+        return bytes;
     }
 
     /**
@@ -191,8 +192,7 @@ public final class MemoryUtil {
      *
      * <p>Memory allocated with this method must be freed with {@link #memFree}.</p>
      *
-     * @param size the size of the memory block to allocate, in bytes. If {@code size} is zero, the return value depends on the particular library
-     *             implementation (it may or may not be a null pointer), but the returned pointer shall not be dereferenced.
+     * @param size the size of the memory block to allocate, in bytes. If {@code size} is zero, the returned pointer shall not be dereferenced.
      *
      * @return on success, a pointer to the memory block allocated by the function
      *
@@ -200,12 +200,6 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memAlloc(int size) {
         return ACCESSOR.memByteBuffer(nmemAllocChecked(size), size);
-    }
-
-    private static long getAllocationSize(int elements, int elementShift) {
-        long bytes = apiGetBytes(elements, elementShift);
-        apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
-        return bytes;
     }
 
     /**
@@ -288,27 +282,28 @@ public final class MemoryUtil {
 
     // --- [ memCalloc ] ---
 
-    /** Unsafe version of {@link #memCalloc}. */
+    /** Unsafe version of {@link #memCalloc}. May return {@link #NULL} if {@code num} or {@code size} are zero or the allocation failed. */
     public static long nmemCalloc(long num, long size) {
         return ALLOCATOR.calloc(num, size);
     }
 
     /**
-     * Unsafe version of {@link #memCalloc} that checks the requested {@code size}.
+     * Unsafe version of {@link #memCalloc} that checks the returned pointer.
      *
-     * @return {@link #NULL} if {@code num} or {@code size} are zero, otherwise a pointer to the memory block allocated by the function on success.
+     * @return a pointer to the memory block allocated by the function on success. This pointer will never be {@link #NULL}, even if {@code num} or
+     * {@code size} are zero.
      *
      * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
      */
     public static long nmemCallocChecked(long num, long size) {
-        long address;
         if (num == 0L || size == 0L) {
-            address = NULL;
-        } else {
-            address = nmemCalloc(num, size);
-            if (CHECKS && address == NULL) {
-                throw new OutOfMemoryError();
-            }
+            num = 1L;
+            size = 1L;
+        }
+
+        long address = nmemCalloc(num, size);
+        if (CHECKS && address == NULL) {
+            throw new OutOfMemoryError();
         }
         return address;
     }
@@ -398,14 +393,28 @@ public final class MemoryUtil {
 
     // --- [ memRealloc] ---
 
-    /** Unsafe version of {@link #memRealloc}. */
+    /** Unsafe version of {@link #memRealloc}. May return {@link #NULL} if {@code size} is zero or the allocation failed. */
     public static long nmemRealloc(long ptr, long size) {
         return ALLOCATOR.realloc(ptr, size);
     }
 
-    @Nullable
-    private static <T extends Buffer> T realloc(@Nullable T old_p, @Nullable T new_p, int size) {
-        if (old_p != null && new_p != null) {
+    /**
+     * Unsafe version of {@link #memRealloc} that checks the returned pointer.
+     *
+     * @return a pointer to the memory block reallocated by the function on success. This pointer will never be {@link #NULL}, even if {@code size} is zero.
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
+     */
+    public static long nmemReallocChecked(long ptr, long size) {
+        long address = nmemRealloc(ptr, size != 0 ? size : 1L);
+        if (CHECKS && address == NULL) {
+            throw new OutOfMemoryError();
+        }
+        return address;
+    }
+
+    private static <T extends Buffer> T realloc(@Nullable T old_p, T new_p, int size) {
+        if (old_p != null) {
             new_p.position(min(old_p.position(), size));
         }
         return new_p;
@@ -426,13 +435,13 @@ public final class MemoryUtil {
      *             be a {@link #NULL} pointer, in which case a new block is allocated (as if {@link #memAlloc} was called).
      * @param size the new size for the memory block, in bytes.
      *
-     * @return a pointer to the reallocated memory block, which may be either the same as {@code ptr} or a new location. If the function fails to allocate the
-     * requested block of memory, a {@link #NULL} pointer is returned, and the memory block pointed to by argument {@code ptr} is not deallocated (it is still
-     * valid, and with its contents unchanged).
+     * @return a pointer to the reallocated memory block, which may be either the same as {@code ptr} or a new location
+     *
+     * @throws OutOfMemoryError if the function failed to allocate the requested block of memory. The memory block pointed to by argument {@code ptr} is not
+     *                          deallocated (it is still valid, and with its contents unchanged).
      */
-    @Nullable
     public static ByteBuffer memRealloc(@Nullable ByteBuffer ptr, int size) {
-        return realloc(ptr, memByteBuffer(nmemRealloc(memAddress0Safe(ptr), size), size), size);
+        return realloc(ptr, memByteBuffer(nmemReallocChecked(memAddress0Safe(ptr), size), size), size);
     }
 
     /**
@@ -440,9 +449,8 @@ public final class MemoryUtil {
      *
      * @param size the number of short values to allocate.
      */
-    @Nullable
     public static ShortBuffer memRealloc(@Nullable ShortBuffer ptr, int size) {
-        return realloc(ptr, memShortBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 1)), size), size);
+        return realloc(ptr, memShortBuffer(nmemReallocChecked(memAddress0Safe(ptr), getAllocationSize(size, 1)), size), size);
     }
 
     /**
@@ -450,9 +458,8 @@ public final class MemoryUtil {
      *
      * @param size the number of int values to allocate.
      */
-    @Nullable
     public static IntBuffer memRealloc(@Nullable IntBuffer ptr, int size) {
-        return realloc(ptr, memIntBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
+        return realloc(ptr, memIntBuffer(nmemReallocChecked(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
     }
 
     /**
@@ -460,9 +467,8 @@ public final class MemoryUtil {
      *
      * @param size the number of long values to allocate.
      */
-    @Nullable
     public static LongBuffer memRealloc(@Nullable LongBuffer ptr, int size) {
-        return realloc(ptr, memLongBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
+        return realloc(ptr, memLongBuffer(nmemReallocChecked(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
     }
 
     /**
@@ -470,9 +476,8 @@ public final class MemoryUtil {
      *
      * @param size the number of float values to allocate.
      */
-    @Nullable
     public static FloatBuffer memRealloc(@Nullable FloatBuffer ptr, int size) {
-        return realloc(ptr, memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
+        return realloc(ptr, memFloatBuffer(nmemReallocChecked(memAddress0Safe(ptr), getAllocationSize(size, 2)), size), size);
     }
 
     /**
@@ -480,9 +485,8 @@ public final class MemoryUtil {
      *
      * @param size the number of double values to allocate.
      */
-    @Nullable
     public static DoubleBuffer memRealloc(@Nullable DoubleBuffer ptr, int size) {
-        return realloc(ptr, memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
+        return realloc(ptr, memDoubleBuffer(nmemReallocChecked(memAddress0Safe(ptr), getAllocationSize(size, 3)), size), size);
     }
 
     /**
@@ -490,10 +494,9 @@ public final class MemoryUtil {
      *
      * @param size the number of pointer values to allocate.
      */
-    @Nullable
     public static PointerBuffer memRealloc(@Nullable PointerBuffer ptr, int size) {
-        PointerBuffer buffer = memPointerBufferSafe(nmemRealloc(memAddress0Safe(ptr), getAllocationSize(size, POINTER_SHIFT)), size);
-        if (ptr != null && buffer != null) {
+        PointerBuffer buffer = memPointerBuffer(nmemReallocChecked(memAddress0Safe(ptr), getAllocationSize(size, POINTER_SHIFT)), size);
+        if (ptr != null) {
             buffer.position(min(ptr.position(), size));
         }
         return buffer;
@@ -501,27 +504,22 @@ public final class MemoryUtil {
 
     // --- [ memAlignedAlloc ] ---
 
-    /** Unsafe version of {@link #memAlignedAlloc}. */
+    /** Unsafe version of {@link #memAlignedAlloc}. May return {@link #NULL} if {@code size} is zero or the allocation failed. */
     public static long nmemAlignedAlloc(long alignment, long size) {
         return ALLOCATOR.aligned_alloc(alignment, size);
     }
 
     /**
-     * Unsafe version of {@link #memAlignedAlloc} that checks the requested {@code size}.
+     * Unsafe version of {@link #memAlignedAlloc} that checks the returned pointer.
      *
-     * @return {@link #NULL} if {@code size} is zero, otherwise a pointer to the memory block allocated by the function on success.
+     * @return a pointer to the memory block allocated by the function on success. This pointer will never be {@link #NULL}, even if {@code size} is zero.
      *
      * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
      */
     public static long nmemAlignedAllocChecked(long alignment, long size) {
-        long address;
-        if (size == 0L) {
-            address = NULL;
-        } else {
-            address = nmemAlignedAlloc(alignment, size);
-            if (DEBUG && address == NULL) {
-                throw new OutOfMemoryError();
-            }
+        long address = nmemAlignedAlloc(alignment, size != 0 ? size : 1L);
+        if (CHECKS && address == NULL) {
+            throw new OutOfMemoryError();
         }
         return address;
     }
@@ -771,11 +769,7 @@ public final class MemoryUtil {
     /** Like {@link #memByteBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static ByteBuffer memByteBufferSafe(long address, int capacity) {
-        if (address == NULL) {
-            return null;
-        }
-
-        return ACCESSOR.memByteBuffer(address, capacity);
+        return address == NULL ? null : ACCESSOR.memByteBuffer(address, capacity);
     }
 
     /**

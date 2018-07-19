@@ -90,11 +90,7 @@ public class SVGDemo {
                 int c;
                 while ((c = rbc.read(svgData)) != -1) {
                     if (c == 0) {
-                        ByteBuffer newData = memRealloc(svgData, (svgData.capacity() * 3) >> 1);
-                        if (newData == null) {
-                            throw new OutOfMemoryError();
-                        }
-                        svgData = newData;
+                        svgData = memRealloc(svgData, (svgData.capacity() * 3) >> 1);
                     }
                 }
             }
