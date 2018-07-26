@@ -1026,7 +1026,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code pPeerMemoryFeatures} <b>must</b> be a valid pointer to a {@code VkPeerMemoryFeatureFlags} value</li>
-            <li>{@code pPeerMemoryFeatures} <b>must</b> not be 0</li>
         </ul>
         """,
 
@@ -1123,7 +1122,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    groupCountZ);</code></pre>
 
         <h5>Description</h5>
-        When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. #CmdDispatch() is equivalent to vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ).
+        When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. #CmdDispatch() is equivalent to {@code vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ)}.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1712,7 +1711,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         Get a queue handle from a device.
 
         <h5>C Specification</h5>
-        To retrieve a handle to a VkQueue object with specific {@code VkDeviceQueueCreateFlags} creation flags, call:
+        To retrieve a handle to a {@code VkQueue} object with specific {@code VkDeviceQueueCreateFlags} creation flags, call:
 
         <pre><code>
 ￿void vkGetDeviceQueue2(

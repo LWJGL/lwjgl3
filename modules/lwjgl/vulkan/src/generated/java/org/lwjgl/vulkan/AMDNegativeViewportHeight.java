@@ -9,12 +9,12 @@ package org.lwjgl.vulkan;
  * This extension allows an application to specify a negative viewport height. The result is that the viewport transformation will flip along the y-axis.
  * 
  * <ul>
- * <li>Allow negative height to be specified in the slink::VkViewport{@code ::height} field to perform y-inversion of the clip-space to framebuffer-space transform. This allows apps to avoid having to use gl_Position.y = -gl_Position.y in shaders also targeting other APIs.</li>
+ * <li>Allow negative height to be specified in the {@link VkViewport}{@code ::height} field to perform y-inversion of the clip-space to framebuffer-space transform. This allows apps to avoid having to use {@code gl_Position.y = -gl_Position.y} in shaders also targeting other APIs.</li>
  * </ul>
  * 
- * <h5>Deprecation by VK_KHR_maintenance1 and Vulkan 1.1</h5>
+ * <h5>Obsoletion by VK_KHR_maintenance1 and Vulkan 1.1</h5>
  * 
- * <p>Functionality in this extension is included in VK_KHR_maintenance1 and Vulkan 1.1. Due to some slight behavioral differences, this extension <b>must</b> not be enabled alongside VK_KHR_maintenance1, or in an instance created with version 1.1 or later requested in {@link VkApplicationInfo}{@code ::apiVersion}.</p>
+ * <p>Functionality in this extension is included in {@code VK_KHR_maintenance1} and Vulkan 1.1. Due to some slight behavioral differences, this extension <b>must</b> not be enabled alongside {@code VK_KHR_maintenance1}, or in an instance created with version 1.1 or later requested in {@link VkApplicationInfo}{@code ::apiVersion}.</p>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -28,6 +28,15 @@ package org.lwjgl.vulkan;
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Obsoleted</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_maintenance1">VK_KHR_maintenance1</a> extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
+ * </ul>
+ * </li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -45,8 +54,8 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Deprecated by VK_KHR_maintenance1</li>
- * <li>Deprecated by Vulkan 1.1</li>
+ * <li>Obsoleted by {@code VK_KHR_maintenance1}</li>
+ * <li>Obsoleted by Vulkan 1.1</li>
  * </ul></dd>
  * </dl>
  */

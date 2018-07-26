@@ -25,6 +25,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>For example, a 60Hz display mode would report a {@code refreshRate} of 60,000.</p>
  * </div>
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>The {@code width} member of {@code visibleRegion} <b>must</b> be greater than 0</li>
+ * <li>The {@code height} member of {@code visibleRegion} <b>must</b> be greater than 0</li>
+ * <li>{@code refreshRate} <b>must</b> be greater than 0</li>
+ * </ul>
+ * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkDisplayModeCreateInfoKHR}, {@link VkDisplayModePropertiesKHR}, {@link VkExtent2D}</p>

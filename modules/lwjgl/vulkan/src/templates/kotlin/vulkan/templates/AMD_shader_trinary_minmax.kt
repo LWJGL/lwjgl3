@@ -37,7 +37,8 @@ val AMD_shader_trinary_minmax = "AMDShaderTrinaryMinmax".nativeClassVK("AMD_shad
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Qun Lin, AMD @linqun</li>
+                <li>Qun Lin</li>
+                <li>AMD @linqun</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

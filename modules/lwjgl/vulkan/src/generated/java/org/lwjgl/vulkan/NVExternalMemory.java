@@ -27,6 +27,15 @@ package org.lwjgl.vulkan;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link NVExternalMemoryCapabilities VK_NV_external_memory_capabilities}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory">VK_KHR_external_memory</a> extension
+ * 
+ * <ul>
+ * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
+ * </ul>
+ * </li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>James Jones @cubanismo</li>

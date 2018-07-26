@@ -41,7 +41,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones @cubanismo,Norbert Nopper @FslNopper</li>
+ * <li>James Jones @cubanismo</li>
+ * <li>Norbert Nopper @FslNopper</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-03-13</dd>

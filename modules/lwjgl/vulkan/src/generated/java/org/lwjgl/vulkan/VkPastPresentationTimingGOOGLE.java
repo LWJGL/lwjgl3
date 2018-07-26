@@ -117,46 +117,6 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
     @NativeType("uint64_t")
     public long presentMargin() { return npresentMargin(address()); }
 
-    /** Sets the specified value to the {@code presentID} field. */
-    public VkPastPresentationTimingGOOGLE presentID(@NativeType("uint32_t") int value) { npresentID(address(), value); return this; }
-    /** Sets the specified value to the {@code desiredPresentTime} field. */
-    public VkPastPresentationTimingGOOGLE desiredPresentTime(@NativeType("uint64_t") long value) { ndesiredPresentTime(address(), value); return this; }
-    /** Sets the specified value to the {@code actualPresentTime} field. */
-    public VkPastPresentationTimingGOOGLE actualPresentTime(@NativeType("uint64_t") long value) { nactualPresentTime(address(), value); return this; }
-    /** Sets the specified value to the {@code earliestPresentTime} field. */
-    public VkPastPresentationTimingGOOGLE earliestPresentTime(@NativeType("uint64_t") long value) { nearliestPresentTime(address(), value); return this; }
-    /** Sets the specified value to the {@code presentMargin} field. */
-    public VkPastPresentationTimingGOOGLE presentMargin(@NativeType("uint64_t") long value) { npresentMargin(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public VkPastPresentationTimingGOOGLE set(
-        int presentID,
-        long desiredPresentTime,
-        long actualPresentTime,
-        long earliestPresentTime,
-        long presentMargin
-    ) {
-        presentID(presentID);
-        desiredPresentTime(desiredPresentTime);
-        actualPresentTime(actualPresentTime);
-        earliestPresentTime(earliestPresentTime);
-        presentMargin(presentMargin);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkPastPresentationTimingGOOGLE set(VkPastPresentationTimingGOOGLE src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link VkPastPresentationTimingGOOGLE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -309,17 +269,6 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
     /** Unsafe version of {@link #presentMargin}. */
     public static long npresentMargin(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.PRESENTMARGIN); }
 
-    /** Unsafe version of {@link #presentID(int) presentID}. */
-    public static void npresentID(long struct, int value) { memPutInt(struct + VkPastPresentationTimingGOOGLE.PRESENTID, value); }
-    /** Unsafe version of {@link #desiredPresentTime(long) desiredPresentTime}. */
-    public static void ndesiredPresentTime(long struct, long value) { memPutLong(struct + VkPastPresentationTimingGOOGLE.DESIREDPRESENTTIME, value); }
-    /** Unsafe version of {@link #actualPresentTime(long) actualPresentTime}. */
-    public static void nactualPresentTime(long struct, long value) { memPutLong(struct + VkPastPresentationTimingGOOGLE.ACTUALPRESENTTIME, value); }
-    /** Unsafe version of {@link #earliestPresentTime(long) earliestPresentTime}. */
-    public static void nearliestPresentTime(long struct, long value) { memPutLong(struct + VkPastPresentationTimingGOOGLE.EARLIESTPRESENTTIME, value); }
-    /** Unsafe version of {@link #presentMargin(long) presentMargin}. */
-    public static void npresentMargin(long struct, long value) { memPutLong(struct + VkPastPresentationTimingGOOGLE.PRESENTMARGIN, value); }
-
     // -----------------------------------
 
     /** An array of {@link VkPastPresentationTimingGOOGLE} structs. */
@@ -381,17 +330,6 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
         /** Returns the value of the {@code presentMargin} field. */
         @NativeType("uint64_t")
         public long presentMargin() { return VkPastPresentationTimingGOOGLE.npresentMargin(address()); }
-
-        /** Sets the specified value to the {@code presentID} field. */
-        public VkPastPresentationTimingGOOGLE.Buffer presentID(@NativeType("uint32_t") int value) { VkPastPresentationTimingGOOGLE.npresentID(address(), value); return this; }
-        /** Sets the specified value to the {@code desiredPresentTime} field. */
-        public VkPastPresentationTimingGOOGLE.Buffer desiredPresentTime(@NativeType("uint64_t") long value) { VkPastPresentationTimingGOOGLE.ndesiredPresentTime(address(), value); return this; }
-        /** Sets the specified value to the {@code actualPresentTime} field. */
-        public VkPastPresentationTimingGOOGLE.Buffer actualPresentTime(@NativeType("uint64_t") long value) { VkPastPresentationTimingGOOGLE.nactualPresentTime(address(), value); return this; }
-        /** Sets the specified value to the {@code earliestPresentTime} field. */
-        public VkPastPresentationTimingGOOGLE.Buffer earliestPresentTime(@NativeType("uint64_t") long value) { VkPastPresentationTimingGOOGLE.nearliestPresentTime(address(), value); return this; }
-        /** Sets the specified value to the {@code presentMargin} field. */
-        public VkPastPresentationTimingGOOGLE.Buffer presentMargin(@NativeType("uint64_t") long value) { VkPastPresentationTimingGOOGLE.npresentMargin(address(), value); return this; }
 
     }
 

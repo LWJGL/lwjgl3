@@ -163,6 +163,11 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
                 <li>Requires {@link NVExternalMemoryWin32 VK_NV_external_memory_win32}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_win32_keyed_mutex">VK_KHR_win32_keyed_mutex</a> extension</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Carsten Rohde @crohde</li>

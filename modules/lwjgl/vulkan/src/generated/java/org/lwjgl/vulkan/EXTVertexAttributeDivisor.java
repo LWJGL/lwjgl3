@@ -50,7 +50,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>191</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -61,19 +61,20 @@ package org.lwjgl.vulkan;
  * <li>Vikram Kushwaha @vkushwaha</li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-02-08</dd>
+ * <dd>2018-07-16</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Vikram Kushwaha, NVIDIA</li>
+ * <li>Jason Ekstrand, Intel</li>
  * </ul></dd>
  * </dl>
  */
 public final class EXTVertexAttributeDivisor {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION = 1;
+    public static final int VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION_NAME = "VK_EXT_vertex_attribute_divisor";

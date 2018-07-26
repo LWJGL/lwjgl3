@@ -35,6 +35,11 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
                 <li>Requires {@link KHRExternalFenceCapabilities VK_KHR_external_fence_capabilities}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Jesse Hall @critsec</li>

@@ -165,6 +165,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link NVExternalMemory VK_NV_external_memory}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_external_memory_win32">VK_KHR_external_memory_win32</a> extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>James Jones @cubanismo</li>

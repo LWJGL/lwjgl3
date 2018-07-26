@@ -39,7 +39,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo,Norbert Nopper @FslNopper</li>
+                <li>James Jones @cubanismo</li>
+                <li>Norbert Nopper @FslNopper</li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

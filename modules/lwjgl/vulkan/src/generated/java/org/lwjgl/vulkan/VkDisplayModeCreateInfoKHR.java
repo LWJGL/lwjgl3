@@ -18,19 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created display mode object.
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code width} and {@code height} members of the {@code visibleRegion} member of {@code parameters} <b>must</b> be greater than 0</li>
- * <li>The {@code refreshRate} member of {@code parameters} <b>must</b> be greater than 0</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRDisplay#VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code parameters} <b>must</b> be a valid {@link VkDisplayModeParametersKHR} structure</li>
  * </ul>
  * 
  * <h5>See Also</h5>

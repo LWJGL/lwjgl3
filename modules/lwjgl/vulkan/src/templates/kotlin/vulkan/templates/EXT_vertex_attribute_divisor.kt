@@ -57,7 +57,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
             <dd>191</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -71,7 +71,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-02-08</dd>
+            <dd>2018-07-16</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -79,6 +79,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Vikram Kushwaha, NVIDIA</li>
+                <li>Jason Ekstrand, Intel</li>
             </ul></dd>
         </dl>
         """
@@ -86,7 +87,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION".."1"
+        "EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION".."2"
     )
 
     StringConstant(

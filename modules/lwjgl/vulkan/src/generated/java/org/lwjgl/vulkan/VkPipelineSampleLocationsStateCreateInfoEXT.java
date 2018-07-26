@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code sampleLocationsEnable} &ndash; controls whether custom sample locations are used. If {@code sampleLocationsEnable} is {@link VK10#VK_FALSE FALSE}, the default sample locations are used and the values specified in {@code sampleLocationsInfo} are ignored.</li>
- * <li>{@code sampleLocationsInfo} &ndash; the sample locations to use during rasterization if {@code sampleLocationsEnable} is {@link VK10#VK_TRUE TRUE} and the graphics pipeline isn&#8217;t created with {@link EXTSampleLocations#VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT}.</li>
+ * <li>{@code sampleLocationsInfo} &ndash; the sample locations to use during rasterization if {@code sampleLocationsEnable} is {@link VK10#VK_TRUE TRUE} and the graphics pipeline is not created with {@link EXTSampleLocations#VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

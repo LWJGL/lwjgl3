@@ -75,21 +75,6 @@ public class VkRefreshCycleDurationGOOGLE extends Struct implements NativeResour
     @NativeType("uint64_t")
     public long refreshDuration() { return nrefreshDuration(address()); }
 
-    /** Sets the specified value to the {@code refreshDuration} field. */
-    public VkRefreshCycleDurationGOOGLE refreshDuration(@NativeType("uint64_t") long value) { nrefreshDuration(address(), value); return this; }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkRefreshCycleDurationGOOGLE set(VkRefreshCycleDurationGOOGLE src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
 
     /** Returns a new {@link VkRefreshCycleDurationGOOGLE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -234,9 +219,6 @@ public class VkRefreshCycleDurationGOOGLE extends Struct implements NativeResour
     /** Unsafe version of {@link #refreshDuration}. */
     public static long nrefreshDuration(long struct) { return memGetLong(struct + VkRefreshCycleDurationGOOGLE.REFRESHDURATION); }
 
-    /** Unsafe version of {@link #refreshDuration(long) refreshDuration}. */
-    public static void nrefreshDuration(long struct, long value) { memPutLong(struct + VkRefreshCycleDurationGOOGLE.REFRESHDURATION, value); }
-
     // -----------------------------------
 
     /** An array of {@link VkRefreshCycleDurationGOOGLE} structs. */
@@ -286,9 +268,6 @@ public class VkRefreshCycleDurationGOOGLE extends Struct implements NativeResour
         /** Returns the value of the {@code refreshDuration} field. */
         @NativeType("uint64_t")
         public long refreshDuration() { return VkRefreshCycleDurationGOOGLE.nrefreshDuration(address()); }
-
-        /** Sets the specified value to the {@code refreshDuration} field. */
-        public VkRefreshCycleDurationGOOGLE.Buffer refreshDuration(@NativeType("uint64_t") long value) { VkRefreshCycleDurationGOOGLE.nrefreshDuration(address(), value); return this; }
 
     }
 

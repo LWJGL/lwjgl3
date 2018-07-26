@@ -167,6 +167,11 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetShaderInfoAMD;
 
+    // EXT_conditional_rendering
+    public final long
+        vkCmdBeginConditionalRenderingEXT,
+        vkCmdEndConditionalRenderingEXT;
+
     // EXT_debug_marker
     public final long
         vkDebugMarkerSetObjectTagEXT,
@@ -225,6 +230,13 @@ public class VKCapabilitiesDevice {
     public final long
         vkBindBufferMemory2KHR,
         vkBindImageMemory2KHR;
+
+    // KHR_create_renderpass2
+    public final long
+        vkCreateRenderPass2KHR,
+        vkCmdBeginRenderPass2KHR,
+        vkCmdNextSubpass2KHR,
+        vkCmdEndRenderPass2KHR;
 
     // KHR_descriptor_update_template
     public final long
@@ -376,6 +388,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_AMD_texture_gather_bias_lod;
     /** When true, {@link EXTBlendOperationAdvanced} is supported. */
     public final boolean VK_EXT_blend_operation_advanced;
+    /** When true, {@link EXTConditionalRendering} is supported. */
+    public final boolean VK_EXT_conditional_rendering;
     /** When true, {@link EXTConservativeRasterization} is supported. */
     public final boolean VK_EXT_conservative_rasterization;
     /** When true, {@link EXTDebugMarker} is supported. */
@@ -424,8 +438,12 @@ public class VKCapabilitiesDevice {
     public final boolean VK_IMG_format_pvrtc;
     /** When true, {@link KHR16bitStorage} is supported. */
     public final boolean VK_KHR_16bit_storage;
+    /** When true, {@link KHR8bitStorage} is supported. */
+    public final boolean VK_KHR_8bit_storage;
     /** When true, {@link KHRBindMemory2} is supported. */
     public final boolean VK_KHR_bind_memory2;
+    /** When true, {@link KHRCreateRenderpass2} is supported. */
+    public final boolean VK_KHR_create_renderpass2;
     /** When true, {@link KHRDedicatedAllocation} is supported. */
     public final boolean VK_KHR_dedicated_allocation;
     /** When true, {@link KHRDescriptorUpdateTemplate} is supported. */
@@ -524,7 +542,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(219);
+        Map<String, Long> caps = new HashMap<>(225);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -545,6 +563,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_shader_trinary_minmax = ext.contains("VK_AMD_shader_trinary_minmax");
         VK_AMD_texture_gather_bias_lod = ext.contains("VK_AMD_texture_gather_bias_lod");
         VK_EXT_blend_operation_advanced = ext.contains("VK_EXT_blend_operation_advanced");
+        VK_EXT_conditional_rendering = EXTConditionalRendering.checkCapsDevice(provider, caps, ext);
         VK_EXT_conservative_rasterization = ext.contains("VK_EXT_conservative_rasterization");
         VK_EXT_debug_marker = EXTDebugMarker.checkCapsDevice(provider, caps, ext);
         EXTDebugUtils.checkCapsDevice(provider, caps, capsInstance);
@@ -570,7 +589,9 @@ public class VKCapabilitiesDevice {
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
         VK_KHR_16bit_storage = ext.contains("VK_KHR_16bit_storage");
+        VK_KHR_8bit_storage = ext.contains("VK_KHR_8bit_storage");
         VK_KHR_bind_memory2 = KHRBindMemory2.checkCapsDevice(provider, caps, ext);
+        VK_KHR_create_renderpass2 = KHRCreateRenderpass2.checkCapsDevice(provider, caps, ext);
         VK_KHR_dedicated_allocation = ext.contains("VK_KHR_dedicated_allocation");
         VK_KHR_descriptor_update_template = KHRDescriptorUpdateTemplate.checkCapsDevice(provider, caps, ext);
         VK_KHR_device_group = KHRDeviceGroup.checkCapsDevice(provider, caps, ext);
@@ -760,6 +781,8 @@ public class VKCapabilitiesDevice {
         vkCmdDrawIndirectCountAMD = VK.get(caps, "vkCmdDrawIndirectCountAMD");
         vkCmdDrawIndexedIndirectCountAMD = VK.get(caps, "vkCmdDrawIndexedIndirectCountAMD");
         vkGetShaderInfoAMD = VK.get(caps, "vkGetShaderInfoAMD");
+        vkCmdBeginConditionalRenderingEXT = VK.get(caps, "vkCmdBeginConditionalRenderingEXT");
+        vkCmdEndConditionalRenderingEXT = VK.get(caps, "vkCmdEndConditionalRenderingEXT");
         vkDebugMarkerSetObjectTagEXT = VK.get(caps, "vkDebugMarkerSetObjectTagEXT");
         vkDebugMarkerSetObjectNameEXT = VK.get(caps, "vkDebugMarkerSetObjectNameEXT");
         vkCmdDebugMarkerBeginEXT = VK.get(caps, "vkCmdDebugMarkerBeginEXT");
@@ -789,6 +812,10 @@ public class VKCapabilitiesDevice {
         vkGetPastPresentationTimingGOOGLE = VK.get(caps, "vkGetPastPresentationTimingGOOGLE");
         vkBindBufferMemory2KHR = VK.get(caps, "vkBindBufferMemory2KHR");
         vkBindImageMemory2KHR = VK.get(caps, "vkBindImageMemory2KHR");
+        vkCreateRenderPass2KHR = VK.get(caps, "vkCreateRenderPass2KHR");
+        vkCmdBeginRenderPass2KHR = VK.get(caps, "vkCmdBeginRenderPass2KHR");
+        vkCmdNextSubpass2KHR = VK.get(caps, "vkCmdNextSubpass2KHR");
+        vkCmdEndRenderPass2KHR = VK.get(caps, "vkCmdEndRenderPass2KHR");
         vkCreateDescriptorUpdateTemplateKHR = VK.get(caps, "vkCreateDescriptorUpdateTemplateKHR");
         vkDestroyDescriptorUpdateTemplateKHR = VK.get(caps, "vkDestroyDescriptorUpdateTemplateKHR");
         vkUpdateDescriptorSetWithTemplateKHR = VK.get(caps, "vkUpdateDescriptorSetWithTemplateKHR");

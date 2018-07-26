@@ -79,6 +79,11 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_debug_utils">VK_EXT_debug_utils</a> extension</li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Courtney Goeltzenleuchter @courtney-g</li>

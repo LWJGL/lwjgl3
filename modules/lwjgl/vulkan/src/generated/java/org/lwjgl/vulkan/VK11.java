@@ -1334,7 +1334,6 @@ public class VK11 extends VK10 {
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code pPeerMemoryFeatures} <b>must</b> be a valid pointer to a {@code VkPeerMemoryFeatureFlags} value</li>
-     * <li>{@code pPeerMemoryFeatures} <b>must</b> not be 0</li>
      * </ul>
      *
      * @param device              the logical device that owns the memory.
@@ -1450,7 +1449,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. {@link VK10#vkCmdDispatch CmdDispatch} is equivalent to vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ).</p>
+     * <p>When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. {@link VK10#vkCmdDispatch CmdDispatch} is equivalent to {@code vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ)}.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -2256,7 +2255,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To retrieve a handle to a VkQueue object with specific {@code VkDeviceQueueCreateFlags} creation flags, call:</p>
+     * <p>To retrieve a handle to a {@code VkQueue} object with specific {@code VkDeviceQueueCreateFlags} creation flags, call:</p>
      * 
      * <pre><code>
      * void vkGetDeviceQueue2(
