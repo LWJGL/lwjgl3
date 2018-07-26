@@ -45,15 +45,15 @@ extern "C" {
 // NanoSVG can return the paths in few different units. For example if you want to render an image, you may choose
 // to get the paths in pixels, or if you are feeding the data into a CNC-cutter, you may want to use millimeters.
 //
-// The units passed to NanoVG should be one of: 'px', 'pt', 'pc' 'mm', 'cm', or 'in'.
+// The units passed to NanoSVG should be one of: 'px', 'pt', 'pc' 'mm', 'cm', or 'in'.
 // DPI (dots-per-inch) controls how the unit conversion is done.
 //
 // If you don't know or care about the units stuff, "px" and 96 should get you going.
 
 
 /* Example Usage:
-	// Load
-	NSVGImage* image;
+	// Load SVG
+	NSVGimage* image;
 	image = nsvgParseFromFile("test.svg", "px", 96);
 	printf("size: %f x %f\n", image->width, image->height);
 	// Use...
@@ -167,7 +167,10 @@ NSVGimage* nsvgParseFromFile(const char* filename, const char* units, float dpi)
 // Important note: changes the string.
 NSVGimage* nsvgParse(char* input, const char* units, float dpi);
 
-// Deletes list of paths.
+// Duplicates a path.
+NSVGpath* nsvgDuplicatePath(NSVGpath* p);
+
+// Deletes an image.
 void nsvgDelete(NSVGimage* image);
 
 #ifdef __cplusplus
@@ -2903,6 +2906,36 @@ error:
 	if (data) NVG_FREE(data);
 	if (image) nsvgDelete(image);
 	return NULL;
+}
+
+NSVGpath* nsvgDuplicatePath(NSVGpath* p)
+{
+    NSVGpath* res = NULL;
+
+    if (p == NULL)
+        return NULL;
+
+    res = (NSVGpath*)NVG_MALLOC(sizeof(NSVGpath));
+    if (res == NULL) goto error;
+    memset(res, 0, sizeof(NSVGpath));
+
+    res->pts = (float*)NVG_MALLOC(p->npts*2*sizeof(float));
+    if (res->pts == NULL) goto error;
+    memcpy(res->pts, p->pts, p->npts * sizeof(float) * 2);
+    res->npts = p->npts;
+
+    memcpy(res->bounds, p->bounds, sizeof(p->bounds));
+
+    res->closed = p->closed;
+
+    return res;
+
+error:
+    if (res != NULL) {
+        NVG_FREE(res->pts);
+        NVG_FREE(res);
+    }
+    return NULL;
 }
 
 void nsvgDelete(NSVGimage* image)

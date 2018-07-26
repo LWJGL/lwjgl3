@@ -195,12 +195,25 @@ public class NanoSVG {
         }
     }
 
+    // --- [ nsvgDuplicatePath ] ---
+
+    /** Unsafe version of: {@link #nsvgDuplicatePath DuplicatePath} */
+    public static native long nnsvgDuplicatePath(long p);
+
+    /** Duplicates a path. */
+    @Nullable
+    @NativeType("NSVGpath *")
+    public static NSVGPath nsvgDuplicatePath(@NativeType("NSVGpath *") NSVGPath p) {
+        long __result = nnsvgDuplicatePath(p.address());
+        return NSVGPath.createSafe(__result);
+    }
+
     // --- [ nsvgDelete ] ---
 
     /** Unsafe version of: {@link #nsvgDelete Delete} */
     public static native void nnsvgDelete(long image);
 
-    /** Deletes list of paths. */
+    /** Deletes an image. */
     public static void nsvgDelete(@NativeType("NSVGimage *") NSVGImage image) {
         nnsvgDelete(image.address());
     }

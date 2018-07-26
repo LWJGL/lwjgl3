@@ -102,9 +102,16 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         float.IN("dpi", "")
     )
 
+    NSVGpath.p(
+        "DuplicatePath",
+        "Duplicates a path.",
+
+        NSVGpath.p.IN("p", "")
+    )
+
     void(
         "Delete",
-        "Deletes list of paths.",
+        "Deletes an image.",
 
         NSVGimage.p.IN("image", "")
     )

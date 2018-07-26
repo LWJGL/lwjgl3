@@ -31,6 +31,12 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoSVG_nnsvgParse(JNIEnv *__env, 
     return (jlong)(intptr_t)nsvgParse(input, units, dpi);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_NanoSVG_nnsvgDuplicatePath(JNIEnv *__env, jclass clazz, jlong pAddress) {
+    NSVGpath *p = (NSVGpath *)(intptr_t)pAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(intptr_t)nsvgDuplicatePath(p);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_NanoSVG_nnsvgDelete(JNIEnv *__env, jclass clazz, jlong imageAddress) {
     NSVGimage *image = (NSVGimage *)(intptr_t)imageAddress;
     UNUSED_PARAMS(__env, clazz)
