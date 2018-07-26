@@ -1,7 +1,7 @@
 
 
 /*
-Copyright 2014 Celtoys Ltd
+Copyright 2014-2018 Celtoys Ltd
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -356,11 +356,11 @@ typedef struct rmtSettings
     // Which port to listen for incoming connections on
     rmtU16 port;
 
-	// When this server exits it can leave the port open in TIME_WAIT state for
-	// a while. This forces subsequent server bind attempts to fail when
-	// restarting. If you find restarts fail repeatedly with bind attempts, set
-	// this to true to forcibly reuse the open port.
-	rmtBool reuse_open_port;
+    // When this server exits it can leave the port open in TIME_WAIT state for
+    // a while. This forces subsequent server bind attempts to fail when
+    // restarting. If you find restarts fail repeatedly with bind attempts, set
+    // this to true to forcibly reuse the open port.
+    rmtBool reuse_open_port;
 
     // Only allow connections on localhost?
     // For dev builds you may want to access your game from other devices but if

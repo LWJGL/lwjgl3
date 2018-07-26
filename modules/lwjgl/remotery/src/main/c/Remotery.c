@@ -1,5 +1,5 @@
 //
-// Copyright 2014-2017 Celtoys Ltd
+// Copyright 2014-2018 Celtoys Ltd
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -140,7 +140,7 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 #endif
 
 #ifdef _MSC_VER
-    #define RMT_UNREFERENCED_PARAMETER(i) assert(i == 0 || i != 0);	// To fool warning C4100 on warning level 4
+    #define RMT_UNREFERENCED_PARAMETER(i) (i)
 #else
     #define RMT_UNREFERENCED_PARAMETER(i) (void)(1 ? (void)0 : ((void)i))
 #endif
@@ -155,20 +155,6 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 static rmtU8 minU8(rmtU8 a, rmtU8 b)
 {
     return a < b ? a : b;
-}
-static rmtU16 minU16(rmtU16 a, rmtU16 b)
-{
-    return a < b ? a : b;
-}
-static rmtS64 minS64(rmtS64 a, rmtS64 b)
-{
-    return a < b ? a : b;
-}
-
-
-static rmtU8 maxU8(rmtU8 a, rmtU8 b)
-{
-    return a > b ? a : b;
 }
 static rmtU16 maxU16(rmtU16 a, rmtU16 b)
 {
@@ -219,23 +205,22 @@ static void rmtFreeLibrary(void* handle)
     #endif
 }
 
-static void* rmtGetProcAddress(void* handle, const char* symbol)
+#if defined(RMT_PLATFORM_WINDOWS)
+    typedef FARPROC ProcReturnType;
+#else
+    typedef void* ProcReturnType;
+#endif
+
+static ProcReturnType rmtGetProcAddress(void* handle, const char* symbol)
 {
     #if defined(RMT_PLATFORM_WINDOWS)
-        #ifdef _MSC_VER
-            #pragma warning(push)
-            #pragma warning(disable:4152) // C4152: nonstandard extension, function/data pointer conversion in expression
-        #endif
         return GetProcAddress((HMODULE)handle, (LPCSTR)symbol);
-        #ifdef _MSC_VER
-            #pragma warning(pop)
-        #endif
     #elif defined(RMT_PLATFORM_POSIX)
         return dlsym(handle, symbol);
-    #else
-        return NULL;
     #endif
 }
+
+
 #endif
 
 /*
@@ -596,8 +581,8 @@ typedef struct VirtualMirrorBuffer
 
 #ifdef RMT_PLATFORM_WINDOWS
     #ifdef _XBOX_ONE
-	    size_t page_count;
-	    size_t* page_mapping;
+        size_t page_count;
+        size_t* page_mapping;
     #else
         HANDLE file_map_handle;
     #endif
@@ -691,8 +676,8 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
     buffer->ptr = NULL;
 #ifdef RMT_PLATFORM_WINDOWS
     #ifdef _XBOX_ONE
-	    buffer->page_count = 0;
-	    buffer->page_mapping = NULL;
+        buffer->page_count = 0;
+        buffer->page_mapping = NULL;
     #else
         buffer->file_map_handle = INVALID_HANDLE_VALUE;
     #endif
@@ -703,47 +688,47 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
 
     // Xbox version based on Windows version and XDK reference
 
-	buffer->page_count = size / k_64;
-	if (buffer->page_mapping)
-	{
-		free( buffer->page_mapping );
-	}
-	buffer->page_mapping = malloc( sizeof( ULONG )*buffer->page_count );
+    buffer->page_count = size / k_64;
+    if (buffer->page_mapping)
+    {
+        free( buffer->page_mapping );
+    }
+    buffer->page_mapping = malloc( sizeof( ULONG )*buffer->page_count );
 
-	while(nb_attempts-- > 0)
-	{
-		rmtU8* desired_addr;
+    while(nb_attempts-- > 0)
+    {
+        rmtU8* desired_addr;
 
-		// Create a page mapping for pointing to its physical address with multiple virtual pages
-		if (!AllocateTitlePhysicalPages( GetCurrentProcess(), MEM_LARGE_PAGES, &buffer->page_count, buffer->page_mapping ))
-		{
-			free( buffer->page_mapping );
-			buffer->page_mapping = NULL;
-			break;
-		}
+        // Create a page mapping for pointing to its physical address with multiple virtual pages
+        if (!AllocateTitlePhysicalPages( GetCurrentProcess(), MEM_LARGE_PAGES, &buffer->page_count, buffer->page_mapping ))
+        {
+            free( buffer->page_mapping );
+            buffer->page_mapping = NULL;
+            break;
+        }
 
-		// Reserve two contiguous pages of virtual memory
-		desired_addr = (rmtU8*)VirtualAlloc( 0, size * 2, MEM_RESERVE, PAGE_NOACCESS );
-		if (desired_addr == NULL)
-			break;
+        // Reserve two contiguous pages of virtual memory
+        desired_addr = (rmtU8*)VirtualAlloc( 0, size * 2, MEM_RESERVE, PAGE_NOACCESS );
+        if (desired_addr == NULL)
+            break;
 
-		// Release the range immediately but retain the address for the next sequence of code to
-		// try and map to it. In the mean-time some other OS thread may come along and allocate this
-		// address range from underneath us so multiple attempts need to be made.
-		VirtualFree( desired_addr, 0, MEM_RELEASE );
+        // Release the range immediately but retain the address for the next sequence of code to
+        // try and map to it. In the mean-time some other OS thread may come along and allocate this
+        // address range from underneath us so multiple attempts need to be made.
+        VirtualFree( desired_addr, 0, MEM_RELEASE );
 
-		// Immediately try to point both pages at the file mapping
-		if (MapTitlePhysicalPages( desired_addr, buffer->page_count, MEM_LARGE_PAGES, PAGE_READWRITE, buffer->page_mapping ) == desired_addr &&
-			MapTitlePhysicalPages( desired_addr + size, buffer->page_count, MEM_LARGE_PAGES, PAGE_READWRITE, buffer->page_mapping ) == desired_addr + size)
-		{
-			buffer->ptr = desired_addr;
-			break;
-		}
+        // Immediately try to point both pages at the file mapping
+        if (MapTitlePhysicalPages( desired_addr, buffer->page_count, MEM_LARGE_PAGES, PAGE_READWRITE, buffer->page_mapping ) == desired_addr &&
+            MapTitlePhysicalPages( desired_addr + size, buffer->page_count, MEM_LARGE_PAGES, PAGE_READWRITE, buffer->page_mapping ) == desired_addr + size)
+        {
+            buffer->ptr = desired_addr;
+            break;
+        }
 
-		// Failed to map the virtual pages; cleanup and try again
-		FreeTitlePhysicalPages( GetCurrentProcess(), buffer->page_count, buffer->page_mapping );
-		buffer->page_mapping = NULL;
-	}
+        // Failed to map the virtual pages; cleanup and try again
+        FreeTitlePhysicalPages( GetCurrentProcess(), buffer->page_count, buffer->page_mapping );
+        buffer->page_mapping = NULL;
+    }
 
 #else
 
@@ -931,13 +916,13 @@ static void VirtualMirrorBuffer_Destructor(VirtualMirrorBuffer* buffer)
 
 #ifdef RMT_PLATFORM_WINDOWS
     #ifdef _XBOX_ONE
-	    if (buffer->page_mapping != NULL)
-	    {
-		    VirtualFree( buffer->ptr, 0, MEM_DECOMMIT );	//needed in conjunction with FreeTitlePhysicalPages
-		    FreeTitlePhysicalPages( GetCurrentProcess(), buffer->page_count, buffer->page_mapping );
-		    free( buffer->page_mapping );
-		    buffer->page_mapping = NULL;
-	    }
+        if (buffer->page_mapping != NULL)
+        {
+            VirtualFree( buffer->ptr, 0, MEM_DECOMMIT );	//needed in conjunction with FreeTitlePhysicalPages
+            FreeTitlePhysicalPages( GetCurrentProcess(), buffer->page_count, buffer->page_mapping );
+            free( buffer->page_mapping );
+            buffer->page_mapping = NULL;
+        }
     #else
         if (buffer->file_map_handle != NULL)
         {
@@ -2260,9 +2245,9 @@ static rmtError TCPSocket_RunServer(TCPSocket* tcp_socket, rmtU16 port, rmtBool 
 
     if (reuse_open_port)
     {
-		int enable = 1;
+        int enable = 1;
 
-		// set SO_REUSEADDR so binding doesn't fail when restarting the application
+        // set SO_REUSEADDR so binding doesn't fail when restarting the application
         // (otherwise the same port can't be reused within TIME_WAIT)
         // I'm not checking for errors because if this fails (unlikely) we might still
         // be able to bind to the socket anyway
@@ -3640,7 +3625,7 @@ typedef struct
 
     rmtU16 port;
 
-	rmtBool reuse_open_port;
+    rmtBool reuse_open_port;
     rmtBool limit_connections_to_localhost;
 
     // A dynamically-sized buffer used for binary-encoding messages and sending to the client
@@ -3673,7 +3658,7 @@ static rmtError Server_Constructor(Server* server, rmtU16 port, rmtBool reuse_op
     server->client_socket = NULL;
     server->last_ping_time = 0;
     server->port = port;
-	server->reuse_open_port = reuse_open_port;
+    server->reuse_open_port = reuse_open_port;
     server->limit_connections_to_localhost = limit_connections_to_localhost;
     server->bin_buf = NULL;
     server->receive_handler = NULL;
@@ -5053,7 +5038,7 @@ RMT_API rmtSettings* _rmt_Settings(void)
     if( g_SettingsInitialized == RMT_FALSE )
     {
         g_Settings.port = 0x4597;
-		g_Settings.reuse_open_port = RMT_FALSE;
+        g_Settings.reuse_open_port = RMT_FALSE;
         g_Settings.limit_connections_to_localhost = RMT_FALSE;
         g_Settings.msSleepBetweenServerUpdates = 10;
         g_Settings.messageQueueSizeInBytes = 128 * 1024;
@@ -5677,7 +5662,18 @@ RMT_API void _rmt_EndCUDASample(void* stream)
 // Allow use of the D3D11 helper macros for accessing the C-style vtable
 #define COBJMACROS
 
+#ifdef _MSC_VER
+    // Disable for d3d11.h
+    // warning C4201: nonstandard extension used : nameless struct/union
+    #pragma warning(push)
+    #pragma warning(disable: 4201)
+#endif
+
 #include <d3d11.h>
+
+#ifdef _MSC_VER
+    #pragma warning(pop)
+#endif
 
 
 typedef struct D3D11
@@ -6137,20 +6133,22 @@ static rmtBool GetD3D11SampleTimes(Sample* sample, rmtU64* out_first_timestamp, 
 
         assert(out_last_resync != NULL);
 
-        if (RMT_GPU_CPU_SYNC_SECONDS > 0 && *out_last_resync < d3d_sample->timestamp->cpu_timestamp)
-        {
-            //Convert from us to seconds.
-            rmtU64 time_diff = (d3d_sample->timestamp->cpu_timestamp - *out_last_resync) / 1000000ULL;
-            if (time_diff > RMT_GPU_CPU_SYNC_SECONDS)
+        #if (RMT_GPU_CPU_SYNC_SECONDS > 0)
+            if (*out_last_resync < d3d_sample->timestamp->cpu_timestamp)
             {
-                result = SyncD3D11CpuGpuTimes(out_first_timestamp, out_last_resync);
-                if (result != S_OK)
+                //Convert from us to seconds.
+                rmtU64 time_diff = (d3d_sample->timestamp->cpu_timestamp - *out_last_resync) / 1000000ULL;
+                if (time_diff > RMT_GPU_CPU_SYNC_SECONDS)
                 {
-                    d3d11->last_error = result;
-                    return RMT_FALSE;
+                    result = SyncD3D11CpuGpuTimes(out_first_timestamp, out_last_resync);
+                    if (result != S_OK)
+                    {
+                        d3d11->last_error = result;
+                        return RMT_FALSE;
+                    }
                 }
             }
-        }
+        #endif
 
         result = D3D11Timestamp_GetData(
             d3d_sample->timestamp,
@@ -6393,17 +6391,17 @@ static GLenum rmtglGetError(void)
 #endif
 
 
-static void* rmtglGetProcAddress(OpenGL* opengl, const char* symbol)
+static ProcReturnType rmtglGetProcAddress(OpenGL* opengl, const char* symbol)
 {
     #if defined(RMT_PLATFORM_WINDOWS)
     {
         // Get OpenGL extension-loading function for each call
-        typedef PROC(WINAPI * wglGetProcAddressFn)(LPCSTR);
+        typedef ProcReturnType (WINAPI * wglGetProcAddressFn)(LPCSTR);
         assert(opengl != NULL);
         {
             wglGetProcAddressFn wglGetProcAddress = (wglGetProcAddressFn)rmtGetProcAddress(opengl->dll_handle, "wglGetProcAddress");
             if (wglGetProcAddress != NULL)
-                return (void*)wglGetProcAddress(symbol);
+                return wglGetProcAddress(symbol);
         }
     }
 
@@ -6612,7 +6610,7 @@ typedef struct OpenGLSample
 
 static rmtError OpenGLSample_Constructor(OpenGLSample* sample)
 {
-	rmtError error;
+    rmtError error;
 
     assert(sample != NULL);
 
@@ -6620,7 +6618,7 @@ static rmtError OpenGLSample_Constructor(OpenGLSample* sample)
     Sample_Constructor((Sample*)sample);
     sample->base.type = SampleType_OpenGL;
     sample->base.size_bytes = sizeof(OpenGLSample);
-	New_0(OpenGLTimestamp, sample->timestamp);
+    New_0(OpenGLTimestamp, sample->timestamp);
 
     return RMT_ERROR_NONE;
 }
@@ -6628,7 +6626,7 @@ static rmtError OpenGLSample_Constructor(OpenGLSample* sample)
 
 static void OpenGLSample_Destructor(OpenGLSample* sample)
 {
-	Delete(OpenGLTimestamp, sample->timestamp);
+    Delete(OpenGLTimestamp, sample->timestamp);
     Sample_Destructor((Sample*)sample);
 }
 
@@ -6673,13 +6671,13 @@ RMT_API void _rmt_UnbindOpenGL(void)
         OpenGL* opengl = g_Remotery->opengl;
         assert(opengl != NULL);
 
-		// Stall waiting for the OpenGL queue to empty into the Remotery queue
-		while (!rmtMessageQueue_IsEmpty(opengl->mq_to_opengl_main))
-			UpdateOpenGLFrame();
+        // Stall waiting for the OpenGL queue to empty into the Remotery queue
+        while (!rmtMessageQueue_IsEmpty(opengl->mq_to_opengl_main))
+            UpdateOpenGLFrame();
 
-		// Forcefully delete sample tree on this thread to release time stamps from
-		// the same thread that created them
-		Remotery_BlockingDeleteSampleTree(g_Remotery, SampleType_OpenGL);
+        // Forcefully delete sample tree on this thread to release time stamps from
+        // the same thread that created them
+        Remotery_BlockingDeleteSampleTree(g_Remotery, SampleType_OpenGL);
 
         // Release reference to the OpenGL DLL
         if (opengl->dll_handle != NULL)
@@ -6708,8 +6706,8 @@ RMT_API void _rmt_BeginOpenGLSample(rmtPStr name, rmtU32* hash_cache)
         SampleTree** ogl_tree = &ts->sample_trees[SampleType_OpenGL];
         if (*ogl_tree == NULL)
         {
-			rmtError error;
-			New_3(SampleTree, *ogl_tree, sizeof(OpenGLSample), (ObjConstructor)OpenGLSample_Constructor, (ObjDestructor)OpenGLSample_Destructor);
+            rmtError error;
+            New_3(SampleTree, *ogl_tree, sizeof(OpenGLSample), (ObjConstructor)OpenGLSample_Constructor, (ObjDestructor)OpenGLSample_Destructor);
             if (error != RMT_ERROR_NONE)
                 return;
         }
@@ -6734,13 +6732,15 @@ static rmtBool GetOpenGLSampleTimes(Sample* sample, rmtU64* out_first_timestamp,
     if (ogl_sample->timestamp != NULL)
     {
         assert(out_last_resync != NULL);
-        if (RMT_GPU_CPU_SYNC_SECONDS > 0 && *out_last_resync < ogl_sample->timestamp->cpu_timestamp)
-        {
-            //Convert from us to seconds.
-            rmtU64 time_diff = (ogl_sample->timestamp->cpu_timestamp - *out_last_resync) / 1000000ULL;
-            if (time_diff > RMT_GPU_CPU_SYNC_SECONDS)
-                SyncOpenGLCpuGpuTimes(out_first_timestamp, out_last_resync);
-        }
+        #if (RMT_GPU_CPU_SYNC_SECONDS > 0)
+            if (*out_last_resync < ogl_sample->timestamp->cpu_timestamp)
+            {
+                //Convert from us to seconds.
+                rmtU64 time_diff = (ogl_sample->timestamp->cpu_timestamp - *out_last_resync) / 1000000ULL;
+                if (time_diff > RMT_GPU_CPU_SYNC_SECONDS)
+                    SyncOpenGLCpuGpuTimes(out_first_timestamp, out_last_resync);
+            }
+        #endif
 
         if (!OpenGLTimestamp_GetData(ogl_sample->timestamp, &sample->us_start, &sample->us_end, out_first_timestamp, out_last_resync))
             return RMT_FALSE;
