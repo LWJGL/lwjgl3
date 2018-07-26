@@ -374,6 +374,8 @@ public final class GLESCapabilities {
         glTexBuffer,
         glTexBufferRange,
         glTexStorage3DMultisample,
+        glRenderbufferStorageMultisampleAdvancedAMD,
+        glNamedRenderbufferStorageMultisampleAdvancedAMD,
         glGetPerfMonitorGroupsAMD,
         glGetPerfMonitorCountersAMD,
         glGetPerfMonitorGroupStringAMD,
@@ -867,6 +869,8 @@ public final class GLESCapabilities {
     public final boolean GL_AMD_compressed_3DC_texture;
     /** When true, {@link AMDCompressedATCTexture} is supported. */
     public final boolean GL_AMD_compressed_ATC_texture;
+    /** When true, {@link AMDFramebufferMultisampleAdvanced} is supported. */
+    public final boolean GL_AMD_framebuffer_multisample_advanced;
     /** When true, {@link AMDPerformanceMonitor} is supported. */
     public final boolean GL_AMD_performance_monitor;
     /** When true, {@link AMDProgramBinaryZ400} is supported. */
@@ -2494,6 +2498,8 @@ public final class GLESCapabilities {
         glTexBuffer = provider.getFunctionAddress("glTexBuffer");
         glTexBufferRange = provider.getFunctionAddress("glTexBufferRange");
         glTexStorage3DMultisample = provider.getFunctionAddress("glTexStorage3DMultisample");
+        glRenderbufferStorageMultisampleAdvancedAMD = provider.getFunctionAddress("glRenderbufferStorageMultisampleAdvancedAMD");
+        glNamedRenderbufferStorageMultisampleAdvancedAMD = provider.getFunctionAddress("glNamedRenderbufferStorageMultisampleAdvancedAMD");
         glGetPerfMonitorGroupsAMD = provider.getFunctionAddress("glGetPerfMonitorGroupsAMD");
         glGetPerfMonitorCountersAMD = provider.getFunctionAddress("glGetPerfMonitorCountersAMD");
         glGetPerfMonitorGroupStringAMD = provider.getFunctionAddress("glGetPerfMonitorGroupStringAMD");
@@ -2981,6 +2987,7 @@ public final class GLESCapabilities {
         GLES32 = ext.contains("GLES32") && checkExtension("GLES32", org.lwjgl.opengles.GLES32.isAvailable(this));
         GL_AMD_compressed_3DC_texture = ext.contains("GL_AMD_compressed_3DC_texture");
         GL_AMD_compressed_ATC_texture = ext.contains("GL_AMD_compressed_ATC_texture");
+        GL_AMD_framebuffer_multisample_advanced = ext.contains("GL_AMD_framebuffer_multisample_advanced") && checkExtension("GL_AMD_framebuffer_multisample_advanced", AMDFramebufferMultisampleAdvanced.isAvailable(this));
         GL_AMD_performance_monitor = ext.contains("GL_AMD_performance_monitor") && checkExtension("GL_AMD_performance_monitor", AMDPerformanceMonitor.isAvailable(this));
         GL_AMD_program_binary_Z400 = ext.contains("GL_AMD_program_binary_Z400");
         GL_ANDROID_extension_pack_es31a = ext.contains("GL_ANDROID_extension_pack_es31a");

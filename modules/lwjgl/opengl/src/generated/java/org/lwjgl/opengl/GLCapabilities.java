@@ -1072,6 +1072,8 @@ public final class GLCapabilities {
         glBlendFuncSeparateIndexedAMD,
         glBlendEquationIndexedAMD,
         glBlendEquationSeparateIndexedAMD,
+        glRenderbufferStorageMultisampleAdvancedAMD,
+        glNamedRenderbufferStorageMultisampleAdvancedAMD,
         glVertexAttribParameteriAMD,
         glQueryObjectParameteruiAMD,
         glGetPerfMonitorGroupsAMD,
@@ -2256,6 +2258,8 @@ public final class GLCapabilities {
     public final boolean GL_AMD_depth_clamp_separate;
     /** When true, {@link AMDDrawBuffersBlend} is supported. */
     public final boolean GL_AMD_draw_buffers_blend;
+    /** When true, {@link AMDFramebufferMultisampleAdvanced} is supported. */
+    public final boolean GL_AMD_framebuffer_multisample_advanced;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gcn_shader.txt">AMD_gcn_shader</a> extension is supported.
      * 
@@ -5081,6 +5085,8 @@ public final class GLCapabilities {
         glBlendFuncSeparateIndexedAMD = provider.getFunctionAddress("glBlendFuncSeparateIndexedAMD");
         glBlendEquationIndexedAMD = provider.getFunctionAddress("glBlendEquationIndexedAMD");
         glBlendEquationSeparateIndexedAMD = provider.getFunctionAddress("glBlendEquationSeparateIndexedAMD");
+        glRenderbufferStorageMultisampleAdvancedAMD = provider.getFunctionAddress("glRenderbufferStorageMultisampleAdvancedAMD");
+        glNamedRenderbufferStorageMultisampleAdvancedAMD = provider.getFunctionAddress("glNamedRenderbufferStorageMultisampleAdvancedAMD");
         glVertexAttribParameteriAMD = provider.getFunctionAddress("glVertexAttribParameteriAMD");
         glQueryObjectParameteruiAMD = provider.getFunctionAddress("glQueryObjectParameteruiAMD");
         glGetPerfMonitorGroupsAMD = provider.getFunctionAddress("glGetPerfMonitorGroupsAMD");
@@ -6229,6 +6235,7 @@ public final class GLCapabilities {
         GL_AMD_debug_output = ext.contains("GL_AMD_debug_output") && checkExtension("GL_AMD_debug_output", AMDDebugOutput.isAvailable(this));
         GL_AMD_depth_clamp_separate = ext.contains("GL_AMD_depth_clamp_separate");
         GL_AMD_draw_buffers_blend = ext.contains("GL_AMD_draw_buffers_blend") && checkExtension("GL_AMD_draw_buffers_blend", AMDDrawBuffersBlend.isAvailable(this));
+        GL_AMD_framebuffer_multisample_advanced = ext.contains("GL_AMD_framebuffer_multisample_advanced") && checkExtension("GL_AMD_framebuffer_multisample_advanced", AMDFramebufferMultisampleAdvanced.isAvailable(this));
         GL_AMD_gcn_shader = ext.contains("GL_AMD_gcn_shader");
         GL_AMD_gpu_shader_half_float = ext.contains("GL_AMD_gpu_shader_half_float");
         GL_AMD_gpu_shader_half_float_fetch = ext.contains("GL_AMD_gpu_shader_half_float_fetch");
