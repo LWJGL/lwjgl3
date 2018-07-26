@@ -12,14 +12,14 @@ typedef void (APIENTRY *glNamedBufferStorageEXTPROC) (jint, intptr_t, intptr_t, 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBufferStorage_nglBufferStorageEXT__IJJI(JNIEnv *__env, jclass clazz, jint target, jlong size, jlong dataAddress, jint flags) {
-    glBufferStorageEXTPROC glBufferStorageEXT = (glBufferStorageEXTPROC)tlsGetFunction(392);
+    glBufferStorageEXTPROC glBufferStorageEXT = (glBufferStorageEXTPROC)tlsGetFunction(394);
     intptr_t data = (intptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glBufferStorageEXT(target, (intptr_t)size, data, flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBufferStorage_nglNamedBufferStorageEXT__IJJI(JNIEnv *__env, jclass clazz, jint buffer, jlong size, jlong dataAddress, jint flags) {
-    glNamedBufferStorageEXTPROC glNamedBufferStorageEXT = (glNamedBufferStorageEXTPROC)tlsGetFunction(393);
+    glNamedBufferStorageEXTPROC glNamedBufferStorageEXT = (glNamedBufferStorageEXTPROC)tlsGetFunction(395);
     intptr_t data = (intptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glNamedBufferStorageEXT(buffer, (intptr_t)size, data, flags);

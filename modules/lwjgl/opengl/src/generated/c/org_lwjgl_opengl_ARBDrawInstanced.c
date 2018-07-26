@@ -12,13 +12,13 @@ typedef void (APIENTRY *glDrawElementsInstancedARBPROC) (jint, jint, jint, intpt
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDrawInstanced_glDrawArraysInstancedARB(JNIEnv *__env, jclass clazz, jint mode, jint first, jint count, jint primcount) {
-    glDrawArraysInstancedARBPROC glDrawArraysInstancedARB = (glDrawArraysInstancedARBPROC)tlsGetFunction(1106);
+    glDrawArraysInstancedARBPROC glDrawArraysInstancedARB = (glDrawArraysInstancedARBPROC)tlsGetFunction(1108);
     UNUSED_PARAM(clazz)
     glDrawArraysInstancedARB(mode, first, count, primcount);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDrawInstanced_nglDrawElementsInstancedARB(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint primcount) {
-    glDrawElementsInstancedARBPROC glDrawElementsInstancedARB = (glDrawElementsInstancedARBPROC)tlsGetFunction(1107);
+    glDrawElementsInstancedARBPROC glDrawElementsInstancedARB = (glDrawElementsInstancedARBPROC)tlsGetFunction(1109);
     intptr_t indices = (intptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElementsInstancedARB(mode, count, type, indices, primcount);

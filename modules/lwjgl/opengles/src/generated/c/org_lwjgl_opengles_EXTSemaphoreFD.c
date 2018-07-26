@@ -11,7 +11,7 @@ typedef void (APIENTRY *glImportSemaphoreFdEXTPROC) (jint, jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphoreFD_glImportSemaphoreFdEXT(JNIEnv *__env, jclass clazz, jint semaphore, jint handleType, jint fd) {
-    glImportSemaphoreFdEXTPROC glImportSemaphoreFdEXT = (glImportSemaphoreFdEXTPROC)tlsGetFunction(483);
+    glImportSemaphoreFdEXTPROC glImportSemaphoreFdEXT = (glImportSemaphoreFdEXTPROC)tlsGetFunction(485);
     UNUSED_PARAM(clazz)
     glImportSemaphoreFdEXT(semaphore, handleType, fd);
 }

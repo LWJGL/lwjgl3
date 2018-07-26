@@ -11,7 +11,7 @@ typedef void (APIENTRY *glFrameTerminatorGREMEDYPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GREMEDYFrameTerminator_glFrameTerminatorGREMEDY(JNIEnv *__env, jclass clazz) {
-    glFrameTerminatorGREMEDYPROC glFrameTerminatorGREMEDY = (glFrameTerminatorGREMEDYPROC)tlsGetFunction(1847);
+    glFrameTerminatorGREMEDYPROC glFrameTerminatorGREMEDY = (glFrameTerminatorGREMEDYPROC)tlsGetFunction(1849);
     UNUSED_PARAM(clazz)
     glFrameTerminatorGREMEDY();
 }

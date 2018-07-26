@@ -11,7 +11,7 @@ typedef void (APIENTRY *glCopyImageSubDataOESPROC) (jint, jint, jint, jint, jint
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESCopyImage_glCopyImageSubDataOES(JNIEnv *__env, jclass clazz, jint srcName, jint srcTarget, jint srcLevel, jint srcX, jint srcY, jint srcZ, jint dstName, jint dstTarget, jint dstLevel, jint dstX, jint dstY, jint dstZ, jint srcWidth, jint srcHeight, jint srcDepth) {
-    glCopyImageSubDataOESPROC glCopyImageSubDataOES = (glCopyImageSubDataOESPROC)tlsGetFunction(758);
+    glCopyImageSubDataOESPROC glCopyImageSubDataOES = (glCopyImageSubDataOESPROC)tlsGetFunction(760);
     UNUSED_PARAM(clazz)
     glCopyImageSubDataOES(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
 }

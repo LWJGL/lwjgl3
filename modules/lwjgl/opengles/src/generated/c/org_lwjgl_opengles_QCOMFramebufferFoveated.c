@@ -12,14 +12,14 @@ typedef void (APIENTRY *glFramebufferFoveationParametersQCOMPROC) (jint, jint, j
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMFramebufferFoveated_nglFramebufferFoveationConfigQCOM__IIIIJ(JNIEnv *__env, jclass clazz, jint fbo, jint numLayers, jint focalPointsPerLayer, jint requestedFeatures, jlong providedFeaturesAddress) {
-    glFramebufferFoveationConfigQCOMPROC glFramebufferFoveationConfigQCOM = (glFramebufferFoveationConfigQCOMPROC)tlsGetFunction(832);
+    glFramebufferFoveationConfigQCOMPROC glFramebufferFoveationConfigQCOM = (glFramebufferFoveationConfigQCOMPROC)tlsGetFunction(834);
     intptr_t providedFeatures = (intptr_t)providedFeaturesAddress;
     UNUSED_PARAM(clazz)
     glFramebufferFoveationConfigQCOM(fbo, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMFramebufferFoveated_glFramebufferFoveationParametersQCOM(JNIEnv *__env, jclass clazz, jint fbo, jint layer, jint focalPoint, jfloat focalX, jfloat focalY, jfloat gainX, jfloat gainY, jfloat foveaArea) {
-    glFramebufferFoveationParametersQCOMPROC glFramebufferFoveationParametersQCOM = (glFramebufferFoveationParametersQCOMPROC)tlsGetFunction(833);
+    glFramebufferFoveationParametersQCOMPROC glFramebufferFoveationParametersQCOM = (glFramebufferFoveationParametersQCOMPROC)tlsGetFunction(835);
     UNUSED_PARAM(clazz)
     glFramebufferFoveationParametersQCOM(fbo, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea);
 }

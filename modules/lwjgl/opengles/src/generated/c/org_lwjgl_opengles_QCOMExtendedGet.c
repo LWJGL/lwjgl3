@@ -18,7 +18,7 @@ typedef void (APIENTRY *glExtGetBufferPointervQCOMPROC) (jint, intptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetTexturesQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong texturesAddress, jint maxTextures, jlong numTexturesAddress) {
-    glExtGetTexturesQCOMPROC glExtGetTexturesQCOM = (glExtGetTexturesQCOMPROC)tlsGetFunction(820);
+    glExtGetTexturesQCOMPROC glExtGetTexturesQCOM = (glExtGetTexturesQCOMPROC)tlsGetFunction(822);
     intptr_t textures = (intptr_t)texturesAddress;
     intptr_t numTextures = (intptr_t)numTexturesAddress;
     UNUSED_PARAM(clazz)
@@ -26,7 +26,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetTextures
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetBuffersQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong buffersAddress, jint maxBuffers, jlong numBuffersAddress) {
-    glExtGetBuffersQCOMPROC glExtGetBuffersQCOM = (glExtGetBuffersQCOMPROC)tlsGetFunction(821);
+    glExtGetBuffersQCOMPROC glExtGetBuffersQCOM = (glExtGetBuffersQCOMPROC)tlsGetFunction(823);
     intptr_t buffers = (intptr_t)buffersAddress;
     intptr_t numBuffers = (intptr_t)numBuffersAddress;
     UNUSED_PARAM(clazz)
@@ -34,7 +34,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetBuffersQ
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetRenderbuffersQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong renderbuffersAddress, jint maxRenderbuffers, jlong numRenderbuffersAddress) {
-    glExtGetRenderbuffersQCOMPROC glExtGetRenderbuffersQCOM = (glExtGetRenderbuffersQCOMPROC)tlsGetFunction(822);
+    glExtGetRenderbuffersQCOMPROC glExtGetRenderbuffersQCOM = (glExtGetRenderbuffersQCOMPROC)tlsGetFunction(824);
     intptr_t renderbuffers = (intptr_t)renderbuffersAddress;
     intptr_t numRenderbuffers = (intptr_t)numRenderbuffersAddress;
     UNUSED_PARAM(clazz)
@@ -42,7 +42,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetRenderbu
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetFramebuffersQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong framebuffersAddress, jint maxFramebuffers, jlong numFramebuffersAddress) {
-    glExtGetFramebuffersQCOMPROC glExtGetFramebuffersQCOM = (glExtGetFramebuffersQCOMPROC)tlsGetFunction(823);
+    glExtGetFramebuffersQCOMPROC glExtGetFramebuffersQCOM = (glExtGetFramebuffersQCOMPROC)tlsGetFunction(825);
     intptr_t framebuffers = (intptr_t)framebuffersAddress;
     intptr_t numFramebuffers = (intptr_t)numFramebuffersAddress;
     UNUSED_PARAM(clazz)
@@ -50,27 +50,27 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetFramebuf
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetTexLevelParameterivQCOM__IIIIJ(JNIEnv *__env, jclass clazz, jint texture, jint face, jint level, jint pname, jlong paramsAddress) {
-    glExtGetTexLevelParameterivQCOMPROC glExtGetTexLevelParameterivQCOM = (glExtGetTexLevelParameterivQCOMPROC)tlsGetFunction(824);
+    glExtGetTexLevelParameterivQCOMPROC glExtGetTexLevelParameterivQCOM = (glExtGetTexLevelParameterivQCOMPROC)tlsGetFunction(826);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_glExtTexObjectStateOverrideiQCOM(JNIEnv *__env, jclass clazz, jint target, jint pname, jint param) {
-    glExtTexObjectStateOverrideiQCOMPROC glExtTexObjectStateOverrideiQCOM = (glExtTexObjectStateOverrideiQCOMPROC)tlsGetFunction(825);
+    glExtTexObjectStateOverrideiQCOMPROC glExtTexObjectStateOverrideiQCOM = (glExtTexObjectStateOverrideiQCOMPROC)tlsGetFunction(827);
     UNUSED_PARAM(clazz)
     glExtTexObjectStateOverrideiQCOM(target, pname, param);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetTexSubImageQCOM(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint yoffset, jint zoffset, jint width, jint height, jint depth, jint format, jint type, jlong texelsAddress) {
-    glExtGetTexSubImageQCOMPROC glExtGetTexSubImageQCOM = (glExtGetTexSubImageQCOMPROC)tlsGetFunction(826);
+    glExtGetTexSubImageQCOMPROC glExtGetTexSubImageQCOM = (glExtGetTexSubImageQCOMPROC)tlsGetFunction(828);
     intptr_t texels = (intptr_t)texelsAddress;
     UNUSED_PARAM(clazz)
     glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet_nglExtGetBufferPointervQCOM(JNIEnv *__env, jclass clazz, jint target, jlong paramsAddress) {
-    glExtGetBufferPointervQCOMPROC glExtGetBufferPointervQCOM = (glExtGetBufferPointervQCOMPROC)tlsGetFunction(827);
+    glExtGetBufferPointervQCOMPROC glExtGetBufferPointervQCOM = (glExtGetBufferPointervQCOMPROC)tlsGetFunction(829);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glExtGetBufferPointervQCOM(target, params);

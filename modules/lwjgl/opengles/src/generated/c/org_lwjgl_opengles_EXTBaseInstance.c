@@ -13,20 +13,20 @@ typedef void (APIENTRY *glDrawElementsInstancedBaseVertexBaseInstanceEXTPROC) (j
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBaseInstance_glDrawArraysInstancedBaseInstanceEXT(JNIEnv *__env, jclass clazz, jint mode, jint first, jint count, jint instancecount, jint baseinstance) {
-    glDrawArraysInstancedBaseInstanceEXTPROC glDrawArraysInstancedBaseInstanceEXT = (glDrawArraysInstancedBaseInstanceEXTPROC)tlsGetFunction(385);
+    glDrawArraysInstancedBaseInstanceEXTPROC glDrawArraysInstancedBaseInstanceEXT = (glDrawArraysInstancedBaseInstanceEXTPROC)tlsGetFunction(387);
     UNUSED_PARAM(clazz)
     glDrawArraysInstancedBaseInstanceEXT(mode, first, count, instancecount, baseinstance);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBaseInstance_nglDrawElementsInstancedBaseInstanceEXT(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint instancecount, jint baseinstance) {
-    glDrawElementsInstancedBaseInstanceEXTPROC glDrawElementsInstancedBaseInstanceEXT = (glDrawElementsInstancedBaseInstanceEXTPROC)tlsGetFunction(386);
+    glDrawElementsInstancedBaseInstanceEXTPROC glDrawElementsInstancedBaseInstanceEXT = (glDrawElementsInstancedBaseInstanceEXTPROC)tlsGetFunction(388);
     intptr_t indices = (intptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElementsInstancedBaseInstanceEXT(mode, count, type, indices, instancecount, baseinstance);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTBaseInstance_nglDrawElementsInstancedBaseVertexBaseInstanceEXT(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint instancecount, jint basevertex, jint baseinstance) {
-    glDrawElementsInstancedBaseVertexBaseInstanceEXTPROC glDrawElementsInstancedBaseVertexBaseInstanceEXT = (glDrawElementsInstancedBaseVertexBaseInstanceEXTPROC)tlsGetFunction(387);
+    glDrawElementsInstancedBaseVertexBaseInstanceEXTPROC glDrawElementsInstancedBaseVertexBaseInstanceEXT = (glDrawElementsInstancedBaseVertexBaseInstanceEXTPROC)tlsGetFunction(389);
     intptr_t indices = (intptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode, count, type, indices, instancecount, basevertex, baseinstance);

@@ -11,7 +11,7 @@ typedef void (APIENTRY *glStringMarkerGREMEDYPROC) (jint, intptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GREMEDYStringMarker_nglStringMarkerGREMEDY(JNIEnv *__env, jclass clazz, jint len, jlong stringAddress) {
-    glStringMarkerGREMEDYPROC glStringMarkerGREMEDY = (glStringMarkerGREMEDYPROC)tlsGetFunction(1848);
+    glStringMarkerGREMEDYPROC glStringMarkerGREMEDY = (glStringMarkerGREMEDYPROC)tlsGetFunction(1850);
     intptr_t string = (intptr_t)stringAddress;
     UNUSED_PARAM(clazz)
     glStringMarkerGREMEDY(len, string);

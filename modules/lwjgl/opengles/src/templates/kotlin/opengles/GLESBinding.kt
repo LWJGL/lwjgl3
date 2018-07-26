@@ -7,7 +7,6 @@ package opengles
 import org.lwjgl.generator.*
 import org.lwjgl.generator.Generator.Companion.register
 import java.io.*
-import java.util.SortedSet
 
 val NativeClass.capName: String
     get() = if (templateName.startsWith(prefixTemplate)) templateName else "${prefixTemplate}_$templateName"

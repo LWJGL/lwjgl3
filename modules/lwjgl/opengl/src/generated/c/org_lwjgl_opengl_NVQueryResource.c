@@ -11,7 +11,7 @@ typedef jint (APIENTRY *glQueryResourceNVPROC) (jint, jint, jint, intptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVQueryResource_nglQueryResourceNV__IIIJ(JNIEnv *__env, jclass clazz, jint queryType, jint pname, jint bufSize, jlong bufferAddress) {
-    glQueryResourceNVPROC glQueryResourceNV = (glQueryResourceNVPROC)tlsGetFunction(2095);
+    glQueryResourceNVPROC glQueryResourceNV = (glQueryResourceNVPROC)tlsGetFunction(2097);
     intptr_t buffer = (intptr_t)bufferAddress;
     UNUSED_PARAM(clazz)
     return (jint)glQueryResourceNV(queryType, pname, bufSize, buffer);

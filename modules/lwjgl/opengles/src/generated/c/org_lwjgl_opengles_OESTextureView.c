@@ -11,7 +11,7 @@ typedef void (APIENTRY *glTextureViewOESPROC) (jint, jint, jint, jint, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESTextureView_glTextureViewOES(JNIEnv *__env, jclass clazz, jint texture, jint target, jint origtexture, jint internalformat, jint minlevel, jint numlevels, jint minlayer, jint numlayers) {
-    glTextureViewOESPROC glTextureViewOES = (glTextureViewOESPROC)tlsGetFunction(799);
+    glTextureViewOESPROC glTextureViewOES = (glTextureViewOESPROC)tlsGetFunction(801);
     UNUSED_PARAM(clazz)
     glTextureViewOES(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers);
 }

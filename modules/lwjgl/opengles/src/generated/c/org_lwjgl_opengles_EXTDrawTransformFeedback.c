@@ -12,13 +12,13 @@ typedef void (APIENTRY *glDrawTransformFeedbackInstancedEXTPROC) (jint, jint, ji
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTDrawTransformFeedback_glDrawTransformFeedbackEXT(JNIEnv *__env, jclass clazz, jint mode, jint id) {
-    glDrawTransformFeedbackEXTPROC glDrawTransformFeedbackEXT = (glDrawTransformFeedbackEXTPROC)tlsGetFunction(421);
+    glDrawTransformFeedbackEXTPROC glDrawTransformFeedbackEXT = (glDrawTransformFeedbackEXTPROC)tlsGetFunction(423);
     UNUSED_PARAM(clazz)
     glDrawTransformFeedbackEXT(mode, id);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTDrawTransformFeedback_glDrawTransformFeedbackInstancedEXT(JNIEnv *__env, jclass clazz, jint mode, jint id, jint instancecount) {
-    glDrawTransformFeedbackInstancedEXTPROC glDrawTransformFeedbackInstancedEXT = (glDrawTransformFeedbackInstancedEXTPROC)tlsGetFunction(422);
+    glDrawTransformFeedbackInstancedEXTPROC glDrawTransformFeedbackInstancedEXT = (glDrawTransformFeedbackInstancedEXTPROC)tlsGetFunction(424);
     UNUSED_PARAM(clazz)
     glDrawTransformFeedbackInstancedEXT(mode, id, instancecount);
 }

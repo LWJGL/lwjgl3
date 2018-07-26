@@ -12,14 +12,14 @@ typedef void (APIENTRY *glGetObjectLabelEXTPROC) (jint, jint, jint, intptr_t, in
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugLabel_nglLabelObjectEXT(JNIEnv *__env, jclass clazz, jint type, jint object, jint length, jlong labelAddress) {
-    glLabelObjectEXTPROC glLabelObjectEXT = (glLabelObjectEXTPROC)tlsGetFunction(1466);
+    glLabelObjectEXTPROC glLabelObjectEXT = (glLabelObjectEXTPROC)tlsGetFunction(1468);
     intptr_t label = (intptr_t)labelAddress;
     UNUSED_PARAM(clazz)
     glLabelObjectEXT(type, object, length, label);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugLabel_nglGetObjectLabelEXT__IIIJJ(JNIEnv *__env, jclass clazz, jint type, jint object, jint bufSize, jlong lengthAddress, jlong labelAddress) {
-    glGetObjectLabelEXTPROC glGetObjectLabelEXT = (glGetObjectLabelEXTPROC)tlsGetFunction(1467);
+    glGetObjectLabelEXTPROC glGetObjectLabelEXT = (glGetObjectLabelEXTPROC)tlsGetFunction(1469);
     intptr_t length = (intptr_t)lengthAddress;
     intptr_t label = (intptr_t)labelAddress;
     UNUSED_PARAM(clazz)

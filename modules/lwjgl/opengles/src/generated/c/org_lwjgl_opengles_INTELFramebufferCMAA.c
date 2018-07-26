@@ -11,7 +11,7 @@ typedef void (APIENTRY *glApplyFramebufferAttachmentCMAAINTELPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_INTELFramebufferCMAA_glApplyFramebufferAttachmentCMAAINTEL(JNIEnv *__env, jclass clazz) {
-    glApplyFramebufferAttachmentCMAAINTELPROC glApplyFramebufferAttachmentCMAAINTEL = (glApplyFramebufferAttachmentCMAAINTELPROC)tlsGetFunction(560);
+    glApplyFramebufferAttachmentCMAAINTELPROC glApplyFramebufferAttachmentCMAAINTEL = (glApplyFramebufferAttachmentCMAAINTELPROC)tlsGetFunction(562);
     UNUSED_PARAM(clazz)
     glApplyFramebufferAttachmentCMAAINTEL();
 }

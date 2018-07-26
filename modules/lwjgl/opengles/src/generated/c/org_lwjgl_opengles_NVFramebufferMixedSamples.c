@@ -13,21 +13,21 @@ typedef void (APIENTRY *glCoverageModulationNVPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFramebufferMixedSamples_nglCoverageModulationTableNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong vAddress) {
-    glCoverageModulationTableNVPROC glCoverageModulationTableNV = (glCoverageModulationTableNVPROC)tlsGetFunction(630);
+    glCoverageModulationTableNVPROC glCoverageModulationTableNV = (glCoverageModulationTableNVPROC)tlsGetFunction(632);
     intptr_t v = (intptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glCoverageModulationTableNV(n, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFramebufferMixedSamples_nglGetCoverageModulationTableNV__IJ(JNIEnv *__env, jclass clazz, jint bufsize, jlong vAddress) {
-    glGetCoverageModulationTableNVPROC glGetCoverageModulationTableNV = (glGetCoverageModulationTableNVPROC)tlsGetFunction(631);
+    glGetCoverageModulationTableNVPROC glGetCoverageModulationTableNV = (glGetCoverageModulationTableNVPROC)tlsGetFunction(633);
     intptr_t v = (intptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glGetCoverageModulationTableNV(bufsize, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFramebufferMixedSamples_glCoverageModulationNV(JNIEnv *__env, jclass clazz, jint components) {
-    glCoverageModulationNVPROC glCoverageModulationNV = (glCoverageModulationNVPROC)tlsGetFunction(632);
+    glCoverageModulationNVPROC glCoverageModulationNV = (glCoverageModulationNVPROC)tlsGetFunction(634);
     UNUSED_PARAM(clazz)
     glCoverageModulationNV(components);
 }

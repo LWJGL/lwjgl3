@@ -11,7 +11,7 @@ typedef void (APIENTRY *glFramebufferTextureMultiviewOVRPROC) (jint, jint, jint,
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OVRMultiview_glFramebufferTextureMultiviewOVR(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level, jint baseViewIndex, jint numViews) {
-    glFramebufferTextureMultiviewOVRPROC glFramebufferTextureMultiviewOVR = (glFramebufferTextureMultiviewOVRPROC)tlsGetFunction(813);
+    glFramebufferTextureMultiviewOVRPROC glFramebufferTextureMultiviewOVR = (glFramebufferTextureMultiviewOVRPROC)tlsGetFunction(815);
     UNUSED_PARAM(clazz)
     glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex, numViews);
 }

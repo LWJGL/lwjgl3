@@ -11,7 +11,7 @@ typedef void (APIENTRY *glFragmentCoverageColorNVPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFragmentCoverageToColor_glFragmentCoverageColorNV(JNIEnv *__env, jclass clazz, jint color) {
-    glFragmentCoverageColorNVPROC glFragmentCoverageColorNV = (glFragmentCoverageColorNVPROC)tlsGetFunction(628);
+    glFragmentCoverageColorNVPROC glFragmentCoverageColorNV = (glFragmentCoverageColorNVPROC)tlsGetFunction(630);
     UNUSED_PARAM(clazz)
     glFragmentCoverageColorNV(color);
 }

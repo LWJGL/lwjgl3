@@ -12,13 +12,13 @@ typedef void (APIENTRY *glFramebufferTextureLayerDownsampleIMGPROC) (jint, jint,
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_IMGFramebufferDownsample_glFramebufferTexture2DDownsampleIMG(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint textarget, jint texture, jint level, jint xscale, jint yscale) {
-    glFramebufferTexture2DDownsampleIMGPROC glFramebufferTexture2DDownsampleIMG = (glFramebufferTexture2DDownsampleIMGPROC)tlsGetFunction(556);
+    glFramebufferTexture2DDownsampleIMGPROC glFramebufferTexture2DDownsampleIMG = (glFramebufferTexture2DDownsampleIMGPROC)tlsGetFunction(558);
     UNUSED_PARAM(clazz)
     glFramebufferTexture2DDownsampleIMG(target, attachment, textarget, texture, level, xscale, yscale);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_IMGFramebufferDownsample_glFramebufferTextureLayerDownsampleIMG(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level, jint layer, jint xscale, jint yscale) {
-    glFramebufferTextureLayerDownsampleIMGPROC glFramebufferTextureLayerDownsampleIMG = (glFramebufferTextureLayerDownsampleIMGPROC)tlsGetFunction(557);
+    glFramebufferTextureLayerDownsampleIMGPROC glFramebufferTextureLayerDownsampleIMG = (glFramebufferTextureLayerDownsampleIMGPROC)tlsGetFunction(559);
     UNUSED_PARAM(clazz)
     glFramebufferTextureLayerDownsampleIMG(target, attachment, texture, level, layer, xscale, yscale);
 }
