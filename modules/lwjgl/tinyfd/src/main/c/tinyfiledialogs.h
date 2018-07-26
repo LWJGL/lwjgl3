@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.h v3.3.5 [Apr 18, 2018] zlib licence
+ /         \ tinyfiledialogs.h v3.3.6 [Jul 25, 2018] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -21,9 +21,9 @@ OpenFileDialog SaveFileDialog SelectFolderDialog
 Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE & more
 SSH supported via automatic switch to console mode or X11 forwarding
 
-one C file and a header (add them to your C or C++ project) with 8 functions:
+one C file + a header (add them to your C or C++ project) with 8 functions:
 - beep
-- notify popup
+- notify popup (tray)
 - message & question
 - input & password
 - save file
@@ -33,7 +33,7 @@ one C file and a header (add them to your C or C++ project) with 8 functions:
 
 Complements OpenGL Vulkan GLFW GLUT GLUI VTK SFML TGUI
 SDL Ogre Unity3d ION OpenCV CEGUI MathGL GLM CPW GLOW
-IMGUI MyGUI GLT NGL STB & GUI less programs
+Open3D IMGUI MyGUI GLT NGL STB & GUI less programs
 
 NO INIT
 NO MAIN LOOP
@@ -104,6 +104,8 @@ extern "C" {
 extern char const tinyfd_version[8]; /* contains tinyfd current version number */
 extern char const tinyfd_needs[]; /* info about requirements */
 extern int tinyfd_verbose; /* 0 (default) or 1 : on unix, prints the command line calls */
+extern int tinyfd_silent; /* 1 (default) or 0 : on unix,
+                          hide errors and warnings from called dialog*/
 
 #ifdef _WIN32
 /* for UTF-16 use the functions at the end of this files */
@@ -168,7 +170,7 @@ char const * tinyfd_openFileDialog(
 	char const * const aTitle , /* NULL or "" */
 	char const * const aDefaultPathAndFile , /* NULL or "" */
 	int const aNumOfFilterPatterns , /* 0 */
-	char const * const * const aFilterPatterns , /* NULL {"*.jpg","*.png"} */
+	char const * const * const aFilterPatterns , /* NULL | {"*.jpg","*.png"} */
 	char const * const aSingleFilterDescription , /* NULL | "image files" */
 	int const aAllowMultipleSelects ) ; /* 0 or 1 */
 		/* in case of multiple files, the separator is | */

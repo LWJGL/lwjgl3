@@ -68,6 +68,32 @@ public class TinyFileDialogs {
     /** Contains info about requirements. */
     public static final String tinyfd_needs = tinyfd_needs();
 
+    // --- [ tinyfd_verbose ] ---
+
+    private static native long ntinyfd_verbose();
+
+    @NativeType("int *")
+    private static IntBuffer tinyfd_verbose() {
+        long __result = ntinyfd_verbose();
+        return memIntBuffer(__result, 1);
+    }
+
+    /** 0 (default) or 1 : on unix, prints the command line calls. */
+    public static final IntBuffer tinyfd_verbose = tinyfd_verbose();
+
+    // --- [ tinyfd_silent ] ---
+
+    private static native long ntinyfd_silent();
+
+    @NativeType("int *")
+    private static IntBuffer tinyfd_silent() {
+        long __result = ntinyfd_silent();
+        return memIntBuffer(__result, 1);
+    }
+
+    /** 1 (default) or 0 : on unix, hide errors and warnings from called dialog. */
+    public static final IntBuffer tinyfd_silent = tinyfd_silent();
+
     // --- [ tinyfd_winUtf8 ] ---
 
     private static native long ntinyfd_winUtf8();

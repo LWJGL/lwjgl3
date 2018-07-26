@@ -40,6 +40,16 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "Contains info about requirements."
     )
 
+    macro..Address..int.p(
+        "verbose",
+        "0 (default) or 1 : on unix, prints the command line calls."
+    )
+
+    macro..Address..int.p(
+        "silent",
+        "1 (default) or 0 : on unix, hide errors and warnings from called dialog."
+    )
+
     private..macro..Address..int.p(
         "winUtf8",
         "On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC."
