@@ -3,12 +3,8 @@
 //  
 // DirectX Mesh Geometry Library - Utilities
 //
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
 // Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
 //-------------------------------------------------------------------------------------
@@ -344,8 +340,7 @@ void DirectX::ComputeInputLayout(const D3D12_INPUT_LAYOUT_DESC& vbDecl,
     if (strides)
         memset(strides, 0, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT);
 
-    uint32_t prevABO[D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT];
-    memset(prevABO, 0, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT);
+    uint32_t prevABO[D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT] = {};
 
     for (size_t j = 0; j < vbDecl.NumElements; ++j)
     {

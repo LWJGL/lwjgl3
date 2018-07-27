@@ -3,35 +3,25 @@
 //  
 // DirectX Mesh Geometry Library
 //
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
 // Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
 //-------------------------------------------------------------------------------------
 
 #pragma once
 
-// VS 2013 related Off by default warnings
-#pragma warning(disable : 4619 4616 4350 4351 4472 4640 4777)
-// C4619/4616 #pragma warning warnings
-// C4350 behavior change
-// C4351 behavior change; warning removed in later versions
-// C4472 'X' is a native enum: add an access specifier (private/public) to declare a WinRT enum
-// C4640 construction of local static object is not thread-safe
-// C4777 use %zu when VS 2013 is dropped
-
 // Off by default warnings
-#pragma warning(disable : 4061 4365 4571 4623 4625 4626 4668 4710 4711 4746 4774 4820 4987 5026 5027 5031 5032)
+#pragma warning(disable : 4619 4616 4061 4365 4514 4571 4623 4625 4626 4628 4668 4710 4711 4746 4774 4820 4987 5026 5027 5031 5032 5039 5045)
+// C4619/4616 #pragma warning warnings
 // C4061 enumerator 'X' in switch of enum 'X' is not explicitly handled by a case label
 // C4365 signed/unsigned mismatch
+// C4514 unreferenced inline function has been removed
 // C4571 behavior change
 // C4623 default constructor was implicitly defined as deleted
 // C4625 copy constructor was implicitly defined as deleted
 // C4626 assignment operator was implicitly defined as deleted
+// C4628 digraphs not supported
 // C4668 not defined as a preprocessor macro
 // C4710 function not inlined
 // C4711 selected for automatic inline expansion
@@ -42,6 +32,8 @@
 // C5026 move constructor was implicitly defined as deleted
 // C5027 move assignment operator was implicitly defined as deleted
 // C5031/5032 push/pop mismatches in windows headers
+// C5039 pointer or reference to potentially throwing function passed to extern C function under - EHc
+// C5045 Spectre mitigation warning
 
 // Windows 8.1 SDK related Off by default warnings
 #pragma warning(disable : 4471 4917 4986 5029)
@@ -49,6 +41,10 @@
 // C4917 a GUID can only be associated with a class, interface or namespace
 // C4986 exception specification does not match previous declaration
 // C5029 nonstandard extension used
+
+// Xbox One XDK related Off by default warnings
+#pragma warning(disable : 4643)
+// C4643 Forward declaring in namespace std is not permitted by the C++ Standard
 
 #pragma warning(push)
 #pragma warning(disable : 4005)
@@ -78,6 +74,8 @@
 #include <d3d11_1.h>
 #endif
 
+#define _XM_NO_XMVECTOR_OVERLOADS_
+
 #include <directxmath.h>
 #include <directxpackedvector.h>
 
@@ -104,19 +102,19 @@ namespace DirectX
     const uint32_t UNUSED32 = uint32_t(-1);
 
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
-    static_assert( D3D11_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D11" );
-    static_assert( D3D11_16BIT_INDEX_STRIP_CUT_VALUE == UINT16_MAX, "Mismatch with Direct3D11" );
+    static_assert(D3D11_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D11");
+    static_assert(D3D11_16BIT_INDEX_STRIP_CUT_VALUE == UINT16_MAX, "Mismatch with Direct3D11");
 
-    static_assert( D3D11_32BIT_INDEX_STRIP_CUT_VALUE == uint32_t(-1), "Mismatch with Direct3D11" );
-    static_assert( D3D11_32BIT_INDEX_STRIP_CUT_VALUE == UINT32_MAX, "Mismatch with Direct3D11" );
+    static_assert(D3D11_32BIT_INDEX_STRIP_CUT_VALUE == uint32_t(-1), "Mismatch with Direct3D11");
+    static_assert(D3D11_32BIT_INDEX_STRIP_CUT_VALUE == UINT32_MAX, "Mismatch with Direct3D11");
 #endif
 
 #if defined(__d3d12_h__) || defined(__d3d12_x_h__)
-    static_assert( D3D12_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D12" );
-    static_assert( D3D12_16BIT_INDEX_STRIP_CUT_VALUE == UINT16_MAX, "Mismatch with Direct3D12" );
+    static_assert(D3D12_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D12");
+    static_assert(D3D12_16BIT_INDEX_STRIP_CUT_VALUE == UINT16_MAX, "Mismatch with Direct3D12");
 
-    static_assert( D3D12_32BIT_INDEX_STRIP_CUT_VALUE == uint32_t(-1), "Mismatch with Direct3D12" );
-    static_assert( D3D12_32BIT_INDEX_STRIP_CUT_VALUE == UINT32_MAX, "Mismatch with Direct3D12" );
+    static_assert(D3D12_32BIT_INDEX_STRIP_CUT_VALUE == uint32_t(-1), "Mismatch with Direct3D12");
+    static_assert(D3D12_32BIT_INDEX_STRIP_CUT_VALUE == UINT32_MAX, "Mismatch with Direct3D12");
 #endif
 
     //---------------------------------------------------------------------------------
@@ -191,8 +189,8 @@ namespace DirectX
             {
                 uint32_t prevFace = m_currentFace;
 
-                assert((m_currentFace * 3 + m_nextEdge) < (m_nFaces * 3));
-                _Analysis_assume_((m_currentFace * 3 + m_nextEdge) < (m_nFaces * 3));
+                assert((size_t(m_currentFace) * 3 + m_nextEdge) < (m_nFaces * 3));
+                _Analysis_assume_((size_t(m_currentFace) * 3 + m_nextEdge) < (m_nFaces * 3));
 
                 m_currentFace = m_adjacency[m_currentFace * 3 + m_nextEdge];
 
@@ -204,8 +202,8 @@ namespace DirectX
                 }
                 else if (m_currentFace != UNUSED32)
                 {
-                    assert((m_currentFace * 3 + 2) < (m_nFaces * 3));
-                    _Analysis_assume_((m_currentFace * 3 + 2) < (m_nFaces * 3));
+                    assert((size_t(m_currentFace) * 3 + 2) < (m_nFaces * 3));
+                    _Analysis_assume_((size_t(m_currentFace) * 3 + 2) < (m_nFaces * 3));
 
                     if (m_adjacency[m_currentFace * 3] == prevFace)
                         m_nextEdge = 0;
@@ -308,8 +306,8 @@ namespace DirectX
             return ret;
         }
 
-        bool done() const { return (m_currentFace == UNUSED32); };
-        uint32_t getpoint() const { return m_clockWise ? m_currentEdge : ((m_currentEdge + 1) % 3); };
+        bool done() const { return (m_currentFace == UNUSED32); }
+        uint32_t getpoint() const { return m_clockWise ? m_currentEdge : ((m_currentEdge + 1) % 3); }
 
     private:
         uint32_t        m_face;
@@ -331,7 +329,7 @@ namespace DirectX
     template<class index_t>
     inline uint32_t find_edge(_In_reads_(3) const index_t* indices, index_t search)
     {
-        assert(indices != 0);
+        assert(indices != nullptr);
 
         uint32_t edge = 0;
 
@@ -344,4 +342,4 @@ namespace DirectX
         return edge;
     }
 
-}; // namespace
+} // namespace

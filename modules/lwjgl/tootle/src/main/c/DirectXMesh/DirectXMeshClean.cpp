@@ -3,12 +3,8 @@
 //  
 // DirectX Mesh Geometry Library - Mesh clean-up
 //
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
 // Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
 //-------------------------------------------------------------------------------------
@@ -127,7 +123,7 @@ namespace
 
                 for (uint32_t face = 0; face < nFaces; ++face)
                 {
-                    for (size_t point = 0; point < 3; ++point)
+                    for (uint32_t point = 0; point < 3; ++point)
                     {
                         uint32_t k = adjacency[face * 3 + point];
                         if (k != UNUSED32)
@@ -187,16 +183,7 @@ namespace
                     || (j0 == j2 && j0 != UNUSED32)
                     || (j1 == j2 && j1 != UNUSED32))
                 {
-                    uint32_t neighbor;
-
-                    if (j0 == j1 || j0 == j2)
-                    {
-                        neighbor = j0;
-                    }
-                    else
-                    {
-                        neighbor = j1;
-                    }
+                    uint32_t neighbor = (j0 == j1 || j0 == j2) ? j0 : j1;
 
                     // remove links then break bowties will clean up any remaining issues
                     for (uint32_t edge = 0; edge < 3; ++edge)
@@ -369,7 +356,8 @@ namespace
                         if (it == range.second)
                         {
                             // Duplicate the vert
-                            dups.insert(std::pair<uint32_t, size_t>(j, curNewVert));
+                            auto dv = std::pair<uint32_t, size_t>(j, curNewVert);
+                            dups.insert(dv);
 
                             indicesNew[face * 3 + point] = index_t(curNewVert);
                             ++curNewVert;

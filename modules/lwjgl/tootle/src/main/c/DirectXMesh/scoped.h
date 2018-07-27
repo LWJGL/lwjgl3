@@ -3,12 +3,8 @@
 //  
 // Utility header with helper classes for exception-safe handling of resources
 //
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
 // Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
 
 #pragma once
@@ -29,4 +25,4 @@ struct handle_closer { void operator()(HANDLE h) { assert(h != INVALID_HANDLE_VA
 
 typedef std::unique_ptr<void, handle_closer> ScopedHandle;
 
-inline HANDLE safe_handle( HANDLE h ) { return (h == INVALID_HANDLE_VALUE) ? 0 : h; }
+inline HANDLE safe_handle(HANDLE h) { return (h == INVALID_HANDLE_VALUE) ? nullptr : h; }

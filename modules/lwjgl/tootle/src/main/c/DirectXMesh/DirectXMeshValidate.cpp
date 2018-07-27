@@ -3,12 +3,8 @@
 //  
 // DirectX Mesh Geometry Library - Mesh validation
 //
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
 // Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
 //-------------------------------------------------------------------------------------
@@ -66,7 +62,7 @@ namespace
                     result = false;
 
                     wchar_t buff[128];
-                    swprintf_s(buff, L"An invalid index value (%u) was found on face %Iu\n", i, face);
+                    swprintf_s(buff, L"An invalid index value (%u) was found on face %zu\n", i, face);
                     *msgs += buff;
                 }
 
@@ -81,7 +77,7 @@ namespace
                         result = false;
 
                         wchar_t buff[128];
-                        swprintf_s(buff, L"An invalid neighbor index value (%u) was found on face %Iu\n", j, face);
+                        swprintf_s(buff, L"An invalid neighbor index value (%u) was found on face %zu\n", j, face);
                         *msgs += buff;
                     }
                 }
@@ -107,7 +103,7 @@ namespace
                         result = false;
 
                         wchar_t buff[128];
-                        swprintf_s(buff, L"An unused face (%Iu) contains 'valid' but ignored vertices (%u,%u,%u)\n", face, i0, i1, i2);
+                        swprintf_s(buff, L"An unused face (%zu) contains 'valid' but ignored vertices (%u,%u,%u)\n", face, i0, i1, i2);
                         *msgs += buff;
                     }
 
@@ -124,7 +120,7 @@ namespace
                                 result = false;
 
                                 wchar_t buff[128];
-                                swprintf_s(buff, L"An unused face (%Iu) has a neighbor %u\n", face, k);
+                                swprintf_s(buff, L"An unused face (%zu) has a neighbor %u\n", face, k);
                                 *msgs += buff;
                             }
                         }
@@ -156,7 +152,7 @@ namespace
                         bad = i0;
 
                     wchar_t buff[128];
-                    swprintf_s(buff, L"A point (%u) was found more than once in triangle %Iu\n", bad, face);
+                    swprintf_s(buff, L"A point (%u) was found more than once in triangle %zu\n", bad, face);
                     *msgs += buff;
 
                     if (adjacency)
@@ -168,7 +164,7 @@ namespace
                             {
                                 result = false;
 
-                                swprintf_s(buff, L"A degenerate face (%Iu) has a neighbor %u\n", face, k);
+                                swprintf_s(buff, L"A degenerate face (%zu) has a neighbor %u\n", face, k);
                                 *msgs += buff;
                             }
                         }
@@ -199,7 +195,7 @@ namespace
                         result = false;
 
                         wchar_t buff[256];
-                        swprintf_s(buff, L"A neighbor triangle (%u) does not reference back to this face (%Iu) as expected\n", k, face);
+                        swprintf_s(buff, L"A neighbor triangle (%u) does not reference back to this face (%zu) as expected\n", k, face);
                         *msgs += buff;
                     }
                 }
@@ -229,8 +225,8 @@ namespace
                     else
                         bad = j1;
 
-                    wchar_t buff[256];
-                    swprintf_s(buff, L"A neighbor triangle (%u) was found more than once on triangle %Iu\n"
+                    wchar_t buff[256] = {};
+                    swprintf_s(buff, L"A neighbor triangle (%u) was found more than once on triangle %zu\n"
                         L"\t(likley problem is that two triangles share same points with opposite direction)\n", bad, face);
                     *msgs += buff;
                 }
@@ -295,7 +291,7 @@ namespace
                 continue;
             }
 
-            for (size_t point = 0; point < 3; ++point)
+            for (uint32_t point = 0; point < 3; ++point)
             {
                 if (faceSeen[face * 3 + point])
                     continue;
@@ -342,7 +338,7 @@ namespace
 
                         vertexBowtie[j] = true;
 
-                        wchar_t buff[256];
+                        wchar_t buff[256] = {};
                         swprintf_s(buff, L"\nBowtie found around vertex %u shared by faces %u and %u\n", j, curFace, faceUsing[j]);
                         *msgs += buff;
                     }
