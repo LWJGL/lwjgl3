@@ -41,6 +41,17 @@
 #endif
 
 
+/*!
+ *  NO_FORWARD_PROGRESS_MAX :
+ *  maximum allowed nb of calls to ZSTD_decompressStream() and ZSTD_decompress_generic()
+ *  without any forward progress
+ *  (defined as: no byte read from input, and no byte flushed to output)
+ *  before triggering an error.
+ */
+#ifndef ZSTD_NO_FORWARD_PROGRESS_MAX
+#  define ZSTD_NO_FORWARD_PROGRESS_MAX 16
+#endif
+
 /*-*******************************************************
 *  Dependencies
 *********************************************************/
@@ -153,6 +164,7 @@ struct ZSTD_DCtx_s
     U32 previousLegacyVersion;
     U32 legacyVersion;
     U32 hostageByte;
+    int noForwardProgress;
 
     /* workspace */
     BYTE litBuffer[ZSTD_BLOCKSIZE_MAX + WILDCOPY_OVERLENGTH];
@@ -192,6 +204,9 @@ static void ZSTD_initDCtx_internal(ZSTD_DCtx* dctx)
     dctx->inBuffSize  = 0;
     dctx->outBuffSize = 0;
     dctx->streamStage = zdss_init;
+    dctx->legacyContext = NULL;
+    dctx->previousLegacyVersion = 0;
+    dctx->noForwardProgress = 0;
     dctx->bmi2 = ZSTD_cpuid_bmi2(ZSTD_cpuid());
 }
 
@@ -215,8 +230,6 @@ ZSTD_DCtx* ZSTD_createDCtx_advanced(ZSTD_customMem customMem)
     {   ZSTD_DCtx* const dctx = (ZSTD_DCtx*)ZSTD_malloc(sizeof(*dctx), customMem);
         if (!dctx) return NULL;
         dctx->customMem = customMem;
-        dctx->legacyContext = NULL;
-        dctx->previousLegacyVersion = 0;
         ZSTD_initDCtx_internal(dctx);
         return dctx;
     }
@@ -595,7 +608,7 @@ size_t ZSTD_decodeLiteralsBlock(ZSTD_DCtx* dctx,
                                         HUF_decompress1X_usingDTable_bmi2(dctx->litBuffer, litSize, istart+lhSize, litCSize, dctx->HUFptr, dctx->bmi2) :
                                         HUF_decompress4X_usingDTable_bmi2(dctx->litBuffer, litSize, istart+lhSize, litCSize, dctx->HUFptr, dctx->bmi2) ) :
                                     ( singleStream ?
-                                        HUF_decompress1X2_DCtx_wksp_bmi2(dctx->entropy.hufTable, dctx->litBuffer, litSize, istart+lhSize, litCSize,
+                                        HUF_decompress1X1_DCtx_wksp_bmi2(dctx->entropy.hufTable, dctx->litBuffer, litSize, istart+lhSize, litCSize,
                                                                          dctx->entropy.workspace, sizeof(dctx->entropy.workspace), dctx->bmi2) :
                                         HUF_decompress4X_hufOnly_wksp_bmi2(dctx->entropy.hufTable, dctx->litBuffer, litSize, istart+lhSize, litCSize,
                                                                            dctx->entropy.workspace, sizeof(dctx->entropy.workspace), dctx->bmi2))))
@@ -1108,15 +1121,11 @@ size_t ZSTD_execSequence(BYTE* op,
             return sequenceLength;
         }
         /* span extDict & currentPrefixSegment */
-        DEBUGLOG(2, "ZSTD_execSequence: found a 2-segments match")
         {   size_t const length1 = dictEnd - match;
-            DEBUGLOG(2, "first part (extDict) is %zu bytes long", length1);
             memmove(oLitEnd, match, length1);
             op = oLitEnd + length1;
             sequence.matchLength -= length1;
-            DEBUGLOG(2, "second part (prefix) is %zu bytes long", sequence.matchLength);
             match = prefixStart;
-            DEBUGLOG(2, "first byte of 2nd part : %02X", *prefixStart);
             if (op > oend_w || sequence.matchLength < MINMATCH) {
               U32 i;
               for (i = 0; i < sequence.matchLength; ++i) op[i] = match[i];
@@ -1996,6 +2005,7 @@ size_t ZSTD_decompress(void* dst, size_t dstCapacity, const void* src, size_t sr
     return regenSize;
 #else   /* stack mode */
     ZSTD_DCtx dctx;
+    ZSTD_initDCtx_internal(&dctx);
     return ZSTD_decompressDCtx(&dctx, dst, dstCapacity, src, srcSize);
 #endif
 }
@@ -2193,7 +2203,7 @@ static size_t ZSTD_loadEntropy(ZSTD_entropyDTables_t* entropy, const void* const
     dictPtr += 8;   /* skip header = magic + dictID */
 
 
-    {   size_t const hSize = HUF_readDTableX4_wksp(
+    {   size_t const hSize = HUF_readDTableX2_wksp(
             entropy->hufTable, dictPtr, dictEnd - dictPtr,
             entropy->workspace, sizeof(entropy->workspace));
         if (HUF_isError(hSize)) return ERROR(dictionary_corrupted);
@@ -2623,6 +2633,7 @@ size_t ZSTD_initDStream_usingDict(ZSTD_DStream* zds, const void* dict, size_t di
 {
     DEBUGLOG(4, "ZSTD_initDStream_usingDict");
     zds->streamStage = zdss_init;
+    zds->noForwardProgress = 0;
     CHECK_F( ZSTD_DCtx_loadDictionary(zds, dict, dictSize) );
     return ZSTD_frameHeaderSize_prefix;
 }
@@ -2963,8 +2974,18 @@ size_t ZSTD_decompressStream(ZSTD_DStream* zds, ZSTD_outBuffer* output, ZSTD_inB
     }   }
 
     /* result */
-    input->pos += (size_t)(ip-istart);
-    output->pos += (size_t)(op-ostart);
+    input->pos = (size_t)(ip - (const char*)(input->src));
+    output->pos = (size_t)(op - (char*)(output->dst));
+    if ((ip==istart) && (op==ostart)) {  /* no forward progress */
+        zds->noForwardProgress ++;
+        if (zds->noForwardProgress >= ZSTD_NO_FORWARD_PROGRESS_MAX) {
+            if (op==oend) return ERROR(dstSize_tooSmall);
+            if (ip==iend) return ERROR(srcSize_wrong);
+            assert(0);
+        }
+    } else {
+        zds->noForwardProgress = 0;
+    }
     {   size_t nextSrcSizeHint = ZSTD_nextSrcSizeToDecompress(zds);
         if (!nextSrcSizeHint) {   /* frame fully decoded */
             if (zds->outEnd == zds->outStart) {  /* output fully flushed */

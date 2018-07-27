@@ -48,6 +48,12 @@ extern "C" {
 typedef enum { ZSTDcs_created=0, ZSTDcs_init, ZSTDcs_ongoing, ZSTDcs_ending } ZSTD_compressionStage_e;
 typedef enum { zcss_init=0, zcss_load, zcss_flush } ZSTD_cStreamStage;
 
+typedef enum {
+    ZSTD_dictDefaultAttach = 0,
+    ZSTD_dictForceAttach = 1,
+    ZSTD_dictForceCopy = -1,
+} ZSTD_dictAttachPref_e;
+
 typedef struct ZSTD_prefixDict_s {
     const void* dict;
     size_t dictSize;
@@ -186,6 +192,8 @@ struct ZSTD_CCtx_params_s {
     int forceWindow;           /* force back-references to respect limit of
                                 * 1<<wLog, even for dictionary */
 
+    ZSTD_dictAttachPref_e attachDictPref;
+
     /* Multithreading: used to pass parameters to mtctx */
     unsigned nbWorkers;
     unsigned jobSize;
@@ -298,7 +306,7 @@ MEM_STATIC U32 ZSTD_MLcode(U32 mlBase)
 */
 MEM_STATIC void ZSTD_storeSeq(seqStore_t* seqStorePtr, size_t litLength, const void* literals, U32 offsetCode, size_t mlBase)
 {
-#if defined(ZSTD_DEBUG) && (ZSTD_DEBUG >= 6)
+#if defined(DEBUGLEVEL) && (DEBUGLEVEL >= 6)
     static const BYTE* g_start = NULL;
     if (g_start==NULL) g_start = (const BYTE*)literals;  /* note : index only works for compression within a single segment */
     {   U32 const pos = (U32)((const BYTE*)literals - g_start);

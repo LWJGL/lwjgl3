@@ -349,7 +349,20 @@ ENABLE_WARNINGS()""")
             """),
 
         /* experimental parameters - no stability guaranteed */
-        "p_forceMaxWindow".enum("Force back-reference distances to remain &lt; windowSize, even when referencing into Dictionary content (default:0)", "1100")
+        "p_forceMaxWindow".enum("Force back-reference distances to remain &lt; windowSize, even when referencing into Dictionary content (default:0)", "1100"),
+        "p_forceAttachDict".enum(
+            """
+            ZSTD supports usage of a {@code CDict} in-place (avoiding having to copy the compression tables from the {@code CDict} into the working context).
+            Using a {@code CDict} in this way saves an initial setup step, but comes at the cost of more work per byte of input. ZSTD has a simple internal
+            heuristic that guesses which strategy will be faster. You can use this flag to override that guess.
+
+            Note that the by-reference, in-place strategy is only used when reusing a compression context with compatible compression parameters. (If
+            incompatible / uninitialized, the working context needs to be cleared anyways, which is about as expensive as overwriting it with the dictionary
+            context, so there's no savings in using the CDict by-ref.)
+
+            Values greater than 0 force attaching the dict. Values less than 0 force copying the dict. 0 selects the default heuristic-guided behavior.
+            """
+        )
     ).javaDocLinks
 
     val endDirectives = EnumConstant(
