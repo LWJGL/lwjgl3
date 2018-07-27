@@ -306,6 +306,13 @@ div {
         node
     )
 
+    YGNodeRef(
+        "NodeGetParent",
+        "",
+
+        node
+    )
+
     uint32_t(
         "NodeGetChildCount",
         "",
@@ -356,20 +363,6 @@ div {
         node
     )
 
-    bool(
-        "NodeIsDirty",
-        "",
-
-        node
-    )
-
-    bool(
-        "NodeLayoutGetDidUseLegacyFlag",
-        "",
-
-        node
-    )
-
     void(
         "NodePrint",
         "",
@@ -412,199 +405,562 @@ div {
         YGNodeRef.const.IN("srcNode", "")
     )
 
-    fun YG_NODE_PROPERTY(type: DataType, name: String, paramName: String) {
-        void(
-            "NodeSet$name",
-            "",
+    opaque_p(
+        "NodeGetContext",
+        "",
 
-            node,
-            type.IN(paramName, "").let {
-                if (type is CallbackType) {
-                    nullable..it
-                } else {
-                    it
-                }
-            }
-        )
+        node
+    )
+    void(
+        "NodeSetContext",
+        "",
 
-        type(
-            "NodeGet$name",
-            "",
+        node,
+        opaque_p.IN("context", "")
+    )
 
-            node
-        )
-    }
+    YGMeasureFunc(
+        "NodeGetMeasureFunc",
+        "",
 
-    fun YG_NODE_STYLE_PROPERTY(type: DataType, name: String, paramName: String, documentation: String = "") {
-        void(
-            "NodeStyleSet$name",
-            documentation,
+        node
+    )
+    void(
+        "NodeSetMeasureFunc",
+        "",
 
-            node,
-            type.IN(paramName, "", if (type.name.startsWith("YG")) "${type.name.substring(2)}\\w+" else "")
-        )
+        node,
+        nullable..YGMeasureFunc.IN("measureFunc", "")
+    )
 
-        type(
-            "NodeStyleGet$name",
-            documentation,
+    YGBaselineFunc(
+        "NodeGetBaselineFunc",
+        "",
 
-            node
-        )
-    }
+        node
+    )
+    void(
+        "NodeSetBaselineFunc",
+        "",
 
-    fun YG_NODE_STYLE_PROPERTY_UNIT(type: DataType, name: String, paramName: String, documentation: String = "") {
-        void(
-            "NodeStyleSet$name",
-            documentation,
+        node,
+        nullable..YGBaselineFunc.IN("baselineFunc", "")
+    )
 
-            node,
-            float.IN(paramName, "")
-        )
+    YGDirtiedFunc(
+        "NodeGetDirtiedFunc",
+        "",
 
-        void(
-            "NodeStyleSet${name}Percent",
-            documentation,
+        node
+    )
+    void(
+        "NodeSetDirtiedFunc",
+        "",
 
-            node,
-            float.IN(paramName, "")
-        )
+        node,
+        nullable..YGDirtiedFunc.IN("dirtiedFunc", "")
+    )
 
-        type(
-            "NodeStyleGet$name",
-            documentation,
+    YGPrintFunc(
+        "NodeGetPrintFunc",
+        "",
 
-            node
-        )
-    }
+        node
+    )
+    void(
+        "NodeSetPrintFunc",
+        "",
 
-    fun YG_NODE_STYLE_PROPERTY_UNIT_AUTO(type: DataType, name: String, paramName: String, documentation: String = "") {
-        YG_NODE_STYLE_PROPERTY_UNIT(type, name, paramName, documentation)
-        void(
-            "NodeStyleSet${name}Auto",
-            documentation,
+        node,
+        nullable..YGPrintFunc.IN("printFunc", "")
+    )
 
-            node
-        )
-    }
+    bool(
+        "NodeGetHasNewLayout",
+        "",
 
-    fun YG_NODE_STYLE_EDGE_PROPERTY(type: DataType, name: String, paramName: String) {
-        void(
-            "NodeStyleSet$name",
-            "",
+        node
+    )
+    void(
+        "NodeSetHasNewLayout",
+        "",
 
-            node,
-            YGEdge.IN("edge", "", Edges),
-            type.IN(paramName, "")
-        )
+        node,
+        bool.IN("hasNewLayout", "")
+    )
 
-        type(
-            "NodeStyleGet$name",
-            "",
+    YGNodeType(
+        "NodeGetNodeType",
+        "",
 
-            node,
-            YGEdge.IN("edge", "", Edges)
-        )
-    }
+        node
+    )
+    void(
+        "NodeSetNodeType",
+        "",
 
-    fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT(type: DataType, name: String, paramName: String) {
-        void(
-            "NodeStyleSet$name",
-            "",
+        node,
+        YGNodeType.IN("nodeType", "")
+    )
 
-            node,
-            YGEdge.IN("edge", "", Edges),
-            float.IN(paramName, "")
-        )
+    bool(
+        "NodeIsDirty",
+        "",
 
-        void(
-            "NodeStyleSet${name}Percent",
-            "",
+        node
+    )
 
-            node,
-            YGEdge.IN("edge", "", Edges),
-            float.IN(paramName, "")
-        )
+    bool(
+        "NodeLayoutGetDidUseLegacyFlag",
+        "",
 
-        type(
-            "NodeStyleGet$name",
-            "",
+        node
+    )
 
-            node,
-            YGEdge.IN("edge", "", Edges)
-        )
-    }
+    void(
+        "NodeStyleSetDirection",
+        "",
 
-    fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(/*type: NativeType, */name: String) {
-        void(
-            "NodeStyleSet${name}Auto",
-            "",
+        node,
+        YGDirection.IN("direction", "", "Direction\\w+")
+    )
+    YGDirection(
+        "NodeStyleGetDirection",
+        "",
 
-            node,
-            YGEdge.IN("edge", "", Edges)
-        )
-    }
+        node
+    )
 
-    fun YG_NODE_LAYOUT_PROPERTY(type: DataType, name: String) {
-        type(
-            "NodeLayoutGet$name",
-            "",
+    void(
+        "NodeStyleSetFlexDirection",
+        "",
 
-            node
-        )
-    }
+        node,
+        YGFlexDirection.IN("flexDirection", "", "FlexDirection\\w+")
+    )
+    YGFlexDirection(
+        "NodeStyleGetFlexDirection",
+        "",
 
-    fun YG_NODE_LAYOUT_EDGE_PROPERTY(type: DataType, name: String) {
-        type(
-            "NodeLayoutGet$name",
-            """
-            Gets the computed value for this nodes after performing layout. If they were set using point values then the returned value will be the same as
-            {@code YGNodeStyleGetXXX}. However if they were set using a percentage value then the returned value is the computed value used during layout.
-            """,
+        node
+    )
 
-            node,
-            YGEdge.IN("edge", "", Edges)
-        )
-    }
+    void(
+        "NodeStyleSetJustifyContent",
+        "",
 
-    YG_NODE_PROPERTY(opaque_p, "Context", "context")
-    YG_NODE_PROPERTY(YGMeasureFunc, "MeasureFunc", "measureFunc")
-    YG_NODE_PROPERTY(YGBaselineFunc, "BaselineFunc", "baselineFunc")
-    YG_NODE_PROPERTY(YGDirtiedFunc, "DirtiedFunc", "dirtiedFunc")
-    YG_NODE_PROPERTY(YGPrintFunc, "PrintFunc", "printFunc")
-    YG_NODE_PROPERTY(bool, "HasNewLayout", "hasNewLayout")
-    YG_NODE_PROPERTY(YGNodeType, "NodeType", "nodeType")
+        node,
+        YGJustify.IN("justifyContent", "", "Justify\\w+")
+    )
+    YGJustify(
+        "NodeStyleGetJustifyContent",
+        "",
 
-    YG_NODE_STYLE_PROPERTY(YGDirection, "Direction", "direction")
-    YG_NODE_STYLE_PROPERTY(YGFlexDirection, "FlexDirection", "flexDirection")
-    YG_NODE_STYLE_PROPERTY(YGJustify, "JustifyContent", "justifyContent")
-    YG_NODE_STYLE_PROPERTY(YGAlign, "AlignContent", "alignContent")
-    YG_NODE_STYLE_PROPERTY(YGAlign, "AlignItems", "alignItems")
-    YG_NODE_STYLE_PROPERTY(YGAlign, "AlignSelf", "alignSelf")
-    YG_NODE_STYLE_PROPERTY(YGPositionType, "PositionType", "positionType")
-    YG_NODE_STYLE_PROPERTY(YGWrap, "FlexWrap", "flexWrap")
-    YG_NODE_STYLE_PROPERTY(YGOverflow, "Overflow", "overflow")
-    YG_NODE_STYLE_PROPERTY(YGDisplay, "Display", "display")
-    YG_NODE_STYLE_PROPERTY(float, "Flex", "flex")
-    YG_NODE_STYLE_PROPERTY(float, "FlexGrow", "flexGrow")
-    YG_NODE_STYLE_PROPERTY(float, "FlexShrink", "flexShrink")
-    YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "FlexBasis", "flexBasis")
+        node
+    )
 
-    YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Position", "position")
-    YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Margin", "margin")
-    YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(/*YGValue, */"Margin")
-    YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Padding", "padding")
-    YG_NODE_STYLE_EDGE_PROPERTY(float, "Border", "border")
+    void(
+        "NodeStyleSetAlignContent",
+        "",
 
-    YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "Width", "width")
-    YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "Height", "height")
-    YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MinWidth", "minWidth")
-    YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MinHeight", "minHeight")
-    YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MaxWidth", "maxWidth")
-    YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MaxHeight", "maxHeight")
+        node,
+        YGAlign.IN("alignContent", "", "Align\\w+")
+    )
+    YGAlign(
+        "NodeStyleGetAlignContent",
+        "",
 
-    YG_NODE_STYLE_PROPERTY(
-        float, "AspectRatio", "aspectRatio",
-        documentation =
+        node
+    )
+
+    void(
+        "NodeStyleSetAlignItems",
+        "",
+
+        node,
+        YGAlign.IN("alignItems", "", "Align\\w+")
+    )
+    YGAlign(
+        "NodeStyleGetAlignItems",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetAlignSelf",
+        "",
+
+        node,
+        YGAlign.IN("alignSelf", "", "Align\\w+")
+    )
+    YGAlign(
+        "NodeStyleGetAlignSelf",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetPositionType",
+        "",
+
+        node,
+        YGPositionType.IN("positionType", "", "PositionType\\w+")
+    )
+    YGPositionType(
+        "NodeStyleGetPositionType",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetFlexWrap",
+        "",
+
+        node,
+        YGWrap.IN("flexWrap", "", "Wrap\\w+")
+    )
+    YGWrap(
+        "NodeStyleGetFlexWrap",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetOverflow",
+        "",
+
+        node,
+        YGOverflow.IN("overflow", "", "Overflow\\w+")
+    )
+    YGOverflow(
+        "NodeStyleGetOverflow",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetDisplay",
+        "",
+
+        node,
+        YGDisplay.IN("display", "", "Display\\w+")
+    )
+    YGDisplay(
+        "NodeStyleGetDisplay",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetFlex",
+        "",
+
+        node,
+        float.IN("flex", "")
+    )
+    float(
+        "NodeStyleGetFlex",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetFlexGrow",
+        "",
+
+        node,
+        float.IN("flexGrow", "")
+    )
+    float(
+        "NodeStyleGetFlexGrow",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetFlexShrink",
+        "",
+
+        node,
+        float.IN("flexShrink", "")
+    )
+    float(
+        "NodeStyleGetFlexShrink",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetFlexBasis",
+        "",
+
+        node,
+        float.IN("flexBasis", "")
+    )
+    void(
+        "NodeStyleSetFlexBasisPercent",
+        "",
+
+        node,
+        float.IN("flexBasis", "")
+    )
+    void(
+        "NodeStyleSetFlexBasisAuto",
+        "",
+
+        node
+    )
+    YGValue(
+        "NodeStyleGetFlexBasis",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetPosition",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("position", "")
+    )
+    void(
+        "NodeStyleSetPositionPercent",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("position", "")
+    )
+    YGValue(
+        "NodeStyleGetPosition",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+
+    void(
+        "NodeStyleSetMargin",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("margin", "")
+    )
+    void(
+        "NodeStyleSetMarginPercent",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("margin", "")
+    )
+    void(
+        "NodeStyleSetMarginAuto",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+    YGValue(
+        "NodeStyleGetMargin",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+
+    void(
+        "NodeStyleSetPadding",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("padding", "")
+    )
+    void(
+        "NodeStyleSetPaddingPercent",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("padding", "")
+    )
+    YGValue(
+        "NodeStyleGetPadding",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+
+    void(
+        "NodeStyleSetBorder",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges),
+        float.IN("border", "")
+    )
+    float(
+        "NodeStyleGetBorder",
+        "",
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+
+    void(
+        "NodeStyleSetWidth",
+        "",
+
+        node,
+        float.IN("width", "")
+    )
+    void(
+        "NodeStyleSetWidthPercent",
+        "",
+
+        node,
+        float.IN("width", "")
+    )
+    void(
+        "NodeStyleSetWidthAuto",
+        "",
+
+        node
+    )
+    YGValue(
+        "NodeStyleGetWidth",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetHeight",
+        "",
+
+        node,
+        float.IN("height", "")
+    )
+    void(
+        "NodeStyleSetHeightPercent",
+        "",
+
+        node,
+        float.IN("height", "")
+    )
+    void(
+        "NodeStyleSetHeightAuto",
+        "",
+
+        node
+    )
+    YGValue(
+        "NodeStyleGetHeight",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetMinWidth",
+        "",
+
+        node,
+        float.IN("minWidth", "")
+    )
+    void(
+        "NodeStyleSetMinWidthPercent",
+        "",
+
+        node,
+        float.IN("minWidth", "")
+    )
+    YGValue(
+        "NodeStyleGetMinWidth",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetMinHeight",
+        "",
+
+        node,
+        float.IN("minHeight", "")
+    )
+    void(
+        "NodeStyleSetMinHeightPercent",
+        "",
+
+        node,
+        float.IN("minHeight", "")
+    )
+    YGValue(
+        "NodeStyleGetMinHeight",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetMaxWidth",
+        "",
+
+        node,
+        float.IN("maxWidth", "")
+    )
+    void(
+        "NodeStyleSetMaxWidthPercent",
+        "",
+
+        node,
+        float.IN("maxWidth", "")
+    )
+    YGValue(
+        "NodeStyleGetMaxWidth",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetMaxHeight",
+        "",
+
+        node,
+        float.IN("maxHeight", "")
+    )
+    void(
+        "NodeStyleSetMaxHeightPercent",
+        "",
+
+        node,
+        float.IN("maxHeight", "")
+    )
+    YGValue(
+        "NodeStyleGetMaxHeight",
+        "",
+
+        node
+    )
+
+    void(
+        "NodeStyleSetAspectRatio",
         """
         Aspect ratio controls the size of the undefined dimension of a node.
 
@@ -617,22 +973,103 @@ div {
             "On a node with flex grow/shrink aspect ratio controls the size of the node in the cross axis if unset",
             "Aspect ratio takes min/max dimensions into account"
         )}
-        """
+        """,
+
+        node,
+        float.IN("aspectRatio", "")
+    )
+    float(
+        "NodeStyleGetAspectRatio",
+        "",
+
+        node
     )
 
-    YG_NODE_LAYOUT_PROPERTY(float, "Left")
-    YG_NODE_LAYOUT_PROPERTY(float, "Top")
-    YG_NODE_LAYOUT_PROPERTY(float, "Right")
-    YG_NODE_LAYOUT_PROPERTY(float, "Bottom")
-    YG_NODE_LAYOUT_PROPERTY(float, "Width")
-    YG_NODE_LAYOUT_PROPERTY(float, "Height")
-    YG_NODE_LAYOUT_PROPERTY(YGDirection, "Direction")
-    YG_NODE_LAYOUT_PROPERTY(bool, "HadOverflow")
-    YG_NODE_LAYOUT_PROPERTY(bool, "DidLegacyStretchFlagAffectLayout")
+    float(
+        "NodeLayoutGetLeft",
+        "",
 
-    YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Margin")
-    YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Border")
-    YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Padding")
+        node
+    )
+    float(
+        "NodeLayoutGetTop",
+        "",
+
+        node
+    )
+    float(
+        "NodeLayoutGetRight",
+        "",
+
+        node
+    )
+    float(
+        "NodeLayoutGetBottom",
+        "",
+
+        node
+    )
+    float(
+        "NodeLayoutGetWidth",
+        "",
+
+        node
+    )
+    float(
+        "NodeLayoutGetHeight",
+        "",
+
+        node
+    )
+    YGDirection(
+        "NodeLayoutGetDirection",
+        "",
+
+        node
+    )
+    bool(
+        "NodeLayoutGetHadOverflow",
+        "",
+
+        node
+    )
+    bool(
+        "NodeLayoutGetDidLegacyStretchFlagAffectLayout",
+        "",
+
+        node
+    )
+
+    float(
+        "NodeLayoutGetMargin",
+        """
+        Gets the computed value for this nodes after performing layout. If they were set using point values then the returned value will be the same as
+        {@code YGNodeStyleGetMargin}. However if they were set using a percentage value then the returned value is the computed value used during layout.
+        """,
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+    float(
+        "NodeLayoutGetBorder",
+        """
+        Gets the computed value for this nodes after performing layout. If they were set using point values then the returned value will be the same as
+        {@code YGNodeStyleGetBorder}. However if they were set using a percentage value then the returned value is the computed value used during layout.
+        """,
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
+    float(
+        "NodeLayoutGetPadding",
+        """
+        Gets the computed value for this nodes after performing layout. If they were set using point values then the returned value will be the same as
+        {@code YGNodeStyleGetPadding}. However if they were set using a percentage value then the returned value is the computed value used during layout.
+        """,
+
+        node,
+        YGEdge.IN("edge", "", Edges)
+    )
 
     void(
         "ConfigSetLogger",
@@ -686,29 +1123,6 @@ div {
         charUTF8.const.p.IN("message", "")
     )
 
-    YGConfigRef(
-        "ConfigNew",
-        ""
-    )
-
-    void("ConfigFree",
-        "",
-        YGConfigRef.const.IN("config", "")
-    )
-
-    void(
-        "ConfigCopy",
-        "",
-
-        YGConfigRef.const.IN("dest", ""),
-        YGConfigRef.const.IN("src", "")
-    )
-
-    int32_t(
-        "ConfigGetInstanceCount",
-        ""
-    )
-
     void(
         "ConfigSetPointScaleFactor",
         "Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
@@ -737,6 +1151,29 @@ div {
         bool.IN("useLegacyStretchBehaviour", "")
     )
 
+    YGConfigRef(
+        "ConfigNew",
+        ""
+    )
+
+    void("ConfigFree",
+        "",
+        YGConfigRef.const.IN("config", "")
+    )
+
+    void(
+        "ConfigCopy",
+        "",
+
+        YGConfigRef.const.IN("dest", ""),
+        YGConfigRef.const.IN("src", "")
+    )
+
+    int32_t(
+        "ConfigGetInstanceCount",
+        ""
+    )
+
     void(
         "ConfigSetExperimentalFeatureEnabled",
         "",
@@ -745,7 +1182,6 @@ div {
         YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+"),
         bool.IN("enabled", "")
     )
-
     bool(
         "ConfigIsExperimentalFeatureEnabled",
         "",
@@ -761,7 +1197,6 @@ div {
         YGConfigRef.const.IN("config", ""),
         bool.IN("enabled", "")
     )
-
     bool(
         "ConfigGetUseWebDefaults",
         "",
@@ -789,7 +1224,6 @@ div {
         YGConfigRef.const.IN("config", ""),
         opaque_p.IN("context", "")
     )
-
     opaque_p(
         "ConfigGetContext",
         "",

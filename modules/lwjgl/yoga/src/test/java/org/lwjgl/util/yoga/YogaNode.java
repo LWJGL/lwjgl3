@@ -4,7 +4,10 @@
  */
 package org.lwjgl.util.yoga;
 
+import org.lwjgl.system.*;
+
 import javax.annotation.*;
+import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.system.Checks.*;
@@ -147,8 +150,16 @@ class YogaNode {
         YGNodeStyleSetFlexBasisPercent(node, flexBasis);
     }
 
+    void setFlexBasisAuto() {
+        YGNodeStyleSetFlexBasisAuto(node);
+    }
+
     void setFlexGrow(float flexGrow) {
         YGNodeStyleSetFlexGrow(node, flexGrow);
+    }
+
+    void setFlex(float flex) {
+        YGNodeStyleSetFlex(node, flex);
     }
 
     void setFlexShrink(float flexShrink) {
@@ -205,6 +216,10 @@ class YogaNode {
 
     void setMaxHeightPercent(float maxHeight) {
         YGNodeStyleSetMaxHeightPercent(node, maxHeight);
+    }
+
+    void setAspectRatio(float aspectRatio) {
+        YGNodeStyleSetAspectRatio(node, aspectRatio);
     }
 
     void setPositionType(YogaPositionType type) {
@@ -279,8 +294,24 @@ class YogaNode {
         return YGNodeStyleGetHeight(node, __result);
     }
 
+    YGValue getMinWidth(YGValue __result) {
+        return YGNodeStyleGetMinWidth(node, __result);
+    }
+
+    YGValue getMinHeight(YGValue __result) {
+        return YGNodeStyleGetMinHeight(node, __result);
+    }
+
+    YGValue getMaxWidth(YGValue __result) {
+        return YGNodeStyleGetMaxWidth(node, __result);
+    }
+
     YGValue getMaxHeight(YGValue __result) {
         return YGNodeStyleGetMaxHeight(node, __result);
+    }
+
+    float getAspectRatio() {
+        return YGNodeStyleGetAspectRatio(node);
     }
 
     void copyStyle(YogaNode src) {
@@ -323,6 +354,76 @@ class YogaNode {
         return YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(node);
     }
 
+    private interface EnumWrapper {
+        int getValue();
+    }
+
+    private static <T extends EnumWrapper> T getEnumFromValue(T[] values, int value) {
+        for (T t : values) {
+            if (t.getValue() == value) {
+                return t;
+            }
+        }
+        throw new IllegalStateException();
+    }
+
+    YogaDirection getStyleDirection() {
+        return getEnumFromValue(YogaDirection.values(), YGNodeStyleGetDirection(node));
+    }
+
+    YogaDirection getLayoutDirection() {
+        return getEnumFromValue(YogaDirection.values(), YGNodeLayoutGetDirection(node));
+    }
+
+    YogaJustify getJustifyContent() {
+        return getEnumFromValue(YogaJustify.values(), YGNodeStyleGetJustifyContent(node));
+    }
+
+    YogaAlign getAlignItems() {
+        return getEnumFromValue(YogaAlign.values(), YGNodeStyleGetAlignItems(node));
+    }
+
+    YogaAlign getAlignSelf() {
+        return getEnumFromValue(YogaAlign.values(), YGNodeStyleGetAlignSelf(node));
+    }
+
+    YogaAlign getAlignContent() {
+        return getEnumFromValue(YogaAlign.values(), YGNodeStyleGetAlignContent(node));
+    }
+
+    YogaPositionType getPositionType() {
+        return getEnumFromValue(YogaPositionType.values(), YGNodeStyleGetPositionType(node));
+    }
+
+    YogaOverflow getOverflow() {
+        return getEnumFromValue(YogaOverflow.values(), YGNodeStyleGetOverflow(node));
+    }
+
+    YogaDisplay getDisplay() {
+        return getEnumFromValue(YogaDisplay.values(), YGNodeStyleGetDisplay(node));
+    }
+
+    float getFlexGrow() {
+        return YGNodeStyleGetFlexGrow(node);
+    }
+
+    float getFlexShrink() {
+        return YGNodeStyleGetFlexShrink(node);
+    }
+
+    YGValue getFlexBasis(YGValue __result) {
+        return YGNodeStyleGetFlexBasis(node, __result);
+    }
+
+    static <T extends Struct> boolean assertEquals(T a, T b) {
+        for (int i = 0; i < a.sizeof(); i++) {
+            if (memGetByte(a.address() + i) != memGetByte(b.address() + i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     static final class YogaConstants {
         static final float UNDEFINED = YGUndefined;
 
@@ -340,12 +441,31 @@ class YogaNode {
 
     static final class YogaUnit {
         static final int UNDEFINED = YGUnitUndefined;
+        static final int POINT     = YGUnitPoint;
+        static final int PERCENT   = YGUnitPercent;
+        static final int AUTO      = YGUnitAuto;
 
         private YogaUnit() {
         }
     }
 
-    enum YogaAlign {
+    static final class YogaValue extends YGValue {
+        static final YGValue UNDEFINED = YGValue.create().set(YogaConstants.UNDEFINED, YogaUnit.UNDEFINED);
+        static final YGValue ZERO      = YGValue.create().set(0, YogaUnit.POINT);
+        static final YGValue AUTO      = YGValue.create().set(YogaConstants.UNDEFINED, YogaUnit.AUTO);
+
+        YogaValue(long address, @Nullable ByteBuffer container) {
+            super(address, container);
+        }
+
+        public static YogaValue create(MemoryStack stack, float value, int unit) {
+            YogaValue v = new YogaValue(stack.nmalloc(ALIGNOF, SIZEOF), null);
+            v.set(value, unit);
+            return v;
+        }
+    }
+
+    enum YogaAlign implements EnumWrapper {
         AUTO(YGAlignAuto),
         FLEX_START(YGAlignFlexStart),
         CENTER(YGAlignCenter),
@@ -360,9 +480,13 @@ class YogaNode {
         YogaAlign(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaDirection {
+    enum YogaDirection implements EnumWrapper {
         INHERIT(YGDirectionInherit),
         LTR(YGDirectionLTR),
         RTL(YGDirectionRTL);
@@ -372,9 +496,13 @@ class YogaNode {
         YogaDirection(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaDisplay {
+    enum YogaDisplay implements EnumWrapper {
         FLEX(YGDisplayFlex),
         NONE(YGDisplayNone);
 
@@ -383,9 +511,13 @@ class YogaNode {
         YogaDisplay(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaEdge {
+    enum YogaEdge implements EnumWrapper {
         LEFT(YGEdgeLeft),
         TOP(YGEdgeTop),
         RIGHT(YGEdgeRight),
@@ -401,9 +533,13 @@ class YogaNode {
         YogaEdge(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaExperimentalFeature {
+    enum YogaExperimentalFeature implements EnumWrapper {
         WEB_FLEX_BASIS(YGExperimentalFeatureWebFlexBasis);
 
         final int value;
@@ -411,9 +547,13 @@ class YogaNode {
         YogaExperimentalFeature(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaFlexDirection {
+    enum YogaFlexDirection implements EnumWrapper {
         COLUMN(YGFlexDirectionColumn),
         COLUMN_REVERSE(YGFlexDirectionColumnReverse),
         ROW(YGFlexDirectionRow),
@@ -424,9 +564,13 @@ class YogaNode {
         YogaFlexDirection(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaJustify {
+    enum YogaJustify implements EnumWrapper {
         FLEX_START(YGJustifyFlexStart),
         CENTER(YGJustifyCenter),
         FLEX_END(YGJustifyFlexEnd),
@@ -439,9 +583,13 @@ class YogaNode {
         YogaJustify(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaOverflow {
+    enum YogaOverflow implements EnumWrapper {
         VISIBLE(YGOverflowVisible),
         HIDDEN(YGOverflowHidden),
         SCROLL(YGOverflowScroll);
@@ -451,9 +599,13 @@ class YogaNode {
         YogaOverflow(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaPositionType {
+    enum YogaPositionType implements EnumWrapper {
         ABSOLUTE(YGPositionTypeAbsolute),
         RELATIVE(YGPositionTypeRelative);
 
@@ -462,9 +614,13 @@ class YogaNode {
         YogaPositionType(int value) {
             this.value = value;
         }
+
+        @Override public int getValue() {
+            return value;
+        }
     }
 
-    enum YogaWrap {
+    enum YogaWrap implements EnumWrapper {
         NO_WRAP(YGWrapNoWrap),
         WRAP(YGWrapWrap),
         WRAP_REVERSE(YGWrapReverse);
@@ -473,6 +629,10 @@ class YogaNode {
 
         YogaWrap(int value) {
             this.value = value;
+        }
+
+        @Override public int getValue() {
+            return value;
         }
     }
 
