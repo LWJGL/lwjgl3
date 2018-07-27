@@ -4,11 +4,10 @@
  */
 #include "common_tools.h"
 
-static jint JNICALL functionMissingAbort(void) {
-    fprintf(stderr, "[LWJGL] No context is current or an unavailable function was called. The JVM will abort execution. Inspect the crash log to find the responsible Java code.\n");
-    fflush(stderr);
-
-    return *((volatile jint *)NULL); // force a segfault
+static void JNICALL functionMissingAbort(void) {
+    jboolean async;
+    JNIEnv* env = getEnv(&async);
+    (*env)->FatalError(env, "No context is current or a function that is not available in the current context was called. The JVM will abort execution.");
 }
 
 EXTERN_C_ENTER
