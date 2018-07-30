@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 75;
+    public static final int BGFX_API_VERSION = 76;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -335,9 +335,6 @@ public class BGFX {
         BGFX_RESET_VSYNC              = 0x80,
         BGFX_RESET_MAXANISOTROPY      = 0x100,
         BGFX_RESET_CAPTURE            = 0x200,
-        BGFX_RESET_HMD                = 0x400,
-        BGFX_RESET_HMD_DEBUG          = 0x800,
-        BGFX_RESET_HMD_RECENTER       = 0x1000,
         BGFX_RESET_FLUSH_AFTER_RENDER = 0x2000,
         BGFX_RESET_FLIP_AFTER_RENDER  = 0x4000,
         BGFX_RESET_SRGB_BACKBUFFER    = 0x8000,
@@ -361,7 +358,6 @@ public class BGFX {
         BGFX_CAPS_FRAGMENT_ORDERING      = 0x40L,
         BGFX_CAPS_GRAPHICS_DEBUGGER      = 0x80L,
         BGFX_CAPS_HIDPI                  = 0x100L,
-        BGFX_CAPS_HMD                    = 0x200L,
         BGFX_CAPS_INDEX32                = 0x400L,
         BGFX_CAPS_INSTANCING             = 0x800L,
         BGFX_CAPS_OCCLUSION_QUERY        = 0x1000L,
@@ -422,12 +418,6 @@ public class BGFX {
         BGFX_PCI_ID_AMD                 = 0x1002,
         BGFX_PCI_ID_INTEL               = (short)0x8086,
         BGFX_PCI_ID_NVIDIA              = 0x10DE;
-
-    /** HMD */
-    public static final byte
-        BGFX_HMD_NONE              = 0x0,
-        BGFX_HMD_DEVICE_RESOLUTION = 0x1,
-        BGFX_HMD_RENDERING         = 0x2;
 
     /** Cubemap */
     public static final byte
@@ -984,7 +974,6 @@ public class BGFX {
             frame                                                = apiGetFunctionAddress(BGFX, "bgfx_frame"),
             get_renderer_type                                    = apiGetFunctionAddress(BGFX, "bgfx_get_renderer_type"),
             get_caps                                             = apiGetFunctionAddress(BGFX, "bgfx_get_caps"),
-            get_hmd                                              = apiGetFunctionAddress(BGFX, "bgfx_get_hmd"),
             get_stats                                            = apiGetFunctionAddress(BGFX, "bgfx_get_stats"),
             alloc                                                = apiGetFunctionAddress(BGFX, "bgfx_alloc"),
             copy                                                 = apiGetFunctionAddress(BGFX, "bgfx_copy"),
@@ -1599,7 +1588,7 @@ public class BGFX {
      *
      * @param _width  back-buffer width
      * @param _height back-buffer height
-     * @param _flags  reset flags. One or more of:<br><table><tr><td>{@link #BGFX_RESET_NONE RESET_NONE}</td><td>{@link #BGFX_RESET_FULLSCREEN RESET_FULLSCREEN}</td><td>{@link #BGFX_RESET_FULLSCREEN_SHIFT RESET_FULLSCREEN_SHIFT}</td><td>{@link #BGFX_RESET_FULLSCREEN_MASK RESET_FULLSCREEN_MASK}</td><td>{@link #BGFX_RESET_MSAA_X2 RESET_MSAA_X2}</td></tr><tr><td>{@link #BGFX_RESET_MSAA_X4 RESET_MSAA_X4}</td><td>{@link #BGFX_RESET_MSAA_X8 RESET_MSAA_X8}</td><td>{@link #BGFX_RESET_MSAA_X16 RESET_MSAA_X16}</td><td>{@link #BGFX_RESET_MSAA_SHIFT RESET_MSAA_SHIFT}</td><td>{@link #BGFX_RESET_MSAA_MASK RESET_MSAA_MASK}</td></tr><tr><td>{@link #BGFX_RESET_VSYNC RESET_VSYNC}</td><td>{@link #BGFX_RESET_MAXANISOTROPY RESET_MAXANISOTROPY}</td><td>{@link #BGFX_RESET_CAPTURE RESET_CAPTURE}</td><td>{@link #BGFX_RESET_HMD RESET_HMD}</td><td>{@link #BGFX_RESET_HMD_DEBUG RESET_HMD_DEBUG}</td></tr><tr><td>{@link #BGFX_RESET_HMD_RECENTER RESET_HMD_RECENTER}</td><td>{@link #BGFX_RESET_FLUSH_AFTER_RENDER RESET_FLUSH_AFTER_RENDER}</td><td>{@link #BGFX_RESET_FLIP_AFTER_RENDER RESET_FLIP_AFTER_RENDER}</td><td>{@link #BGFX_RESET_SRGB_BACKBUFFER RESET_SRGB_BACKBUFFER}</td><td>{@link #BGFX_RESET_HIDPI RESET_HIDPI}</td></tr><tr><td>{@link #BGFX_RESET_DEPTH_CLAMP RESET_DEPTH_CLAMP}</td><td>{@link #BGFX_RESET_SUSPEND RESET_SUSPEND}</td></tr></table>
+     * @param _flags  reset flags. One or more of:<br><table><tr><td>{@link #BGFX_RESET_NONE RESET_NONE}</td><td>{@link #BGFX_RESET_FULLSCREEN RESET_FULLSCREEN}</td><td>{@link #BGFX_RESET_FULLSCREEN_SHIFT RESET_FULLSCREEN_SHIFT}</td><td>{@link #BGFX_RESET_FULLSCREEN_MASK RESET_FULLSCREEN_MASK}</td><td>{@link #BGFX_RESET_MSAA_X2 RESET_MSAA_X2}</td></tr><tr><td>{@link #BGFX_RESET_MSAA_X4 RESET_MSAA_X4}</td><td>{@link #BGFX_RESET_MSAA_X8 RESET_MSAA_X8}</td><td>{@link #BGFX_RESET_MSAA_X16 RESET_MSAA_X16}</td><td>{@link #BGFX_RESET_MSAA_SHIFT RESET_MSAA_SHIFT}</td><td>{@link #BGFX_RESET_MSAA_MASK RESET_MSAA_MASK}</td></tr><tr><td>{@link #BGFX_RESET_VSYNC RESET_VSYNC}</td><td>{@link #BGFX_RESET_MAXANISOTROPY RESET_MAXANISOTROPY}</td><td>{@link #BGFX_RESET_CAPTURE RESET_CAPTURE}</td><td>{@link #BGFX_RESET_FLUSH_AFTER_RENDER RESET_FLUSH_AFTER_RENDER}</td><td>{@link #BGFX_RESET_FLIP_AFTER_RENDER RESET_FLIP_AFTER_RENDER}</td></tr><tr><td>{@link #BGFX_RESET_SRGB_BACKBUFFER RESET_SRGB_BACKBUFFER}</td><td>{@link #BGFX_RESET_HIDPI RESET_HIDPI}</td><td>{@link #BGFX_RESET_DEPTH_CLAMP RESET_DEPTH_CLAMP}</td><td>{@link #BGFX_RESET_SUSPEND RESET_SUSPEND}</td></tr></table>
      */
     public static void bgfx_reset(@NativeType("uint32_t") int _width, @NativeType("uint32_t") int _height, @NativeType("uint32_t") int _flags) {
         long __functionAddress = Functions.reset;
@@ -1674,22 +1663,6 @@ public class BGFX {
     public static BGFXCaps bgfx_get_caps() {
         long __result = nbgfx_get_caps();
         return BGFXCaps.createSafe(__result);
-    }
-
-    // --- [ bgfx_get_hmd ] ---
-
-    /** Unsafe version of: {@link #bgfx_get_hmd get_hmd} */
-    public static long nbgfx_get_hmd() {
-        long __functionAddress = Functions.get_hmd;
-        return invokeP(__functionAddress);
-    }
-
-    /** Returns HMD info. */
-    @Nullable
-    @NativeType("bgfx_hmd_t const *")
-    public static BGFXHmd bgfx_get_hmd() {
-        long __result = nbgfx_get_hmd();
-        return BGFXHmd.createSafe(__result);
     }
 
     // --- [ bgfx_get_stats ] ---

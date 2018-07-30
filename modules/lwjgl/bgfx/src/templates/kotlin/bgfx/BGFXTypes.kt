@@ -97,28 +97,6 @@ val bgfx_transform_t = struct(Module.BGFX, "BGFXTransform", nativeName = "bgfx_t
     AutoSizeShl("4", "data")..uint16_t.member("num", "number of matrices")
 }
 
-val bgfx_hmd_eye_t = struct(Module.BGFX, "BGFXHmdEye", nativeName = "bgfx_hmd_eye_t", mutable = false) {
-    documentation = "Eye."
-
-    float.array("rotation", "eye rotation represented as quaternion", size = 4)
-    float.array("translation", "eye translation", size = 3)
-    float.array("fov", "field of view (up, down, left, right)", size = 4)
-    float.array("viewOffset", "eye view matrix translation adjustment", size = 3)
-    float.array("projection", "eye projection matrix", size = 16)
-    float.array("pixelsPerTanAngle", "number of pixels that fit in tan(angle) = 1.", size = 2)
-}
-
-val bgfx_hmd_t = struct(Module.BGFX, "BGFXHmd", nativeName = "bgfx_hmd_t", mutable = false, skipBuffer = true) {
-    documentation = "HMD info."
-
-    bgfx_hmd_eye_t.array("eye", "", size = 2)
-    uint16_t.member("width", "frame buffer width")
-    uint16_t.member("height", "frame buffer height")
-    uint32_t.member("deviceWidth", "device resolution width")
-    uint32_t.member("deviceHeight", "device resolution height")
-    uint8_t.member("flags", "status flags")
-}
-
 val bgfx_view_stats_t = struct(Module.BGFX, "BGFXViewStats", nativeName = "bgfx_view_stats_t", mutable = false) {
     documentation = "View stats."
 

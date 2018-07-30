@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."75"
+        "API_VERSION".."76"
     )
 
     ShortConstant(
@@ -385,9 +385,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RESET_VSYNC"..0x00000080,
         "RESET_MAXANISOTROPY"..0x00000100,
         "RESET_CAPTURE"..0x00000200,
-        "RESET_HMD"..0x00000400,
-        "RESET_HMD_DEBUG"..0x00000800,
-        "RESET_HMD_RECENTER"..0x00001000,
         "RESET_FLUSH_AFTER_RENDER"..0x00002000,
         "RESET_FLIP_AFTER_RENDER"..0x00004000,
         "RESET_SRGB_BACKBUFFER"..0x00008000,
@@ -415,7 +412,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_FRAGMENT_ORDERING"..0x0000000000000040L,
         "CAPS_GRAPHICS_DEBUGGER"..0x0000000000000080L,
         "CAPS_HIDPI"..0x0000000000000100L,
-        "CAPS_HMD"..0x0000000000000200L,
         "CAPS_INDEX32"..0x0000000000000400L,
         "CAPS_INSTANCING"..0x0000000000000800L,
         "CAPS_OCCLUSION_QUERY"..0x0000000000001000L,
@@ -487,14 +483,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "PCI_ID_AMD"..0x1002.s,
         "PCI_ID_INTEL".."(short)0x8086",
         "PCI_ID_NVIDIA"..0x10de.s
-    )
-
-    ByteConstant(
-        "HMD",
-
-        "HMD_NONE"..0x00.b,
-        "HMD_DEVICE_RESOLUTION"..0x01.b,
-        "HMD_RENDERING"..0x02.b
     )
 
     val CubeMapSides = ByteConstant(
@@ -1047,11 +1035,6 @@ RGBA16S
     bgfx_caps_t.const.p(
         "get_caps",
         "Returns renderer capabilities."
-    )
-
-    bgfx_hmd_t.const.p(
-        "get_hmd",
-        "Returns HMD info."
     )
 
     bgfx_stats_t.const.p(
