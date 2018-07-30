@@ -5078,3 +5078,32 @@ val VkPipelineVertexInputDivisorStateCreateInfoEXT = struct(Module.VULKAN, "VkPi
     AutoSize("pVertexBindingDivisors")..uint32_t.member("vertexBindingDivisorCount", "the number of elements in the {@code pVertexBindingDivisors} array.")
     VkVertexInputBindingDivisorDescriptionEXT.const.p.buffer("pVertexBindingDivisors", "a pointer to an array of ##VkVertexInputBindingDivisorDescriptionEXT structures, which specifies the divisor value for each binding.")
 }
+
+val VkQueueFamilyCheckpointPropertiesNV = struct(Module.VULKAN, "VkQueueFamilyCheckpointPropertiesNV", mutable = false) {
+    VkStructureType.member("sType", "").mutable()
+    nullable..opaque_p.member("pNext", "").mutable()
+    VkPipelineStageFlags.member("checkpointExecutionStageMask", "")
+}
+
+val VkCheckpointDataNV = struct(Module.VULKAN, "VkCheckpointDataNV", mutable = false) {
+    documentation =
+        """
+        return structure for command buffer checkpoint data.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CHECKPOINT_DATA_NV</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        Note that the stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@code vkGetPhysicalDeviceQueueFamilyProperties2}.
+
+        <h5>See Also</h5>
+        #GetQueueCheckpointDataNV()
+        """
+
+    VkStructureType.member("sType", "the type of this structure").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkPipelineStageFlagBits.member("stage", "indicates which pipeline stage the checkpoint marker data refers to.")
+    opaque_p.member("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
+}

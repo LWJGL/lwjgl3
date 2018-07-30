@@ -332,6 +332,11 @@ public class VKCapabilitiesDevice {
     public final long
         vkCmdSetViewportWScalingNV;
 
+    // NV_device_diagnostic_checkpoints
+    public final long
+        vkCmdSetCheckpointNV,
+        vkGetQueueCheckpointDataNV;
+
     // NV_external_memory_win32
     public final long
         vkGetMemoryWin32HandleNV;
@@ -510,6 +515,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_clip_space_w_scaling;
     /** When true, {@link NVDedicatedAllocation} is supported. */
     public final boolean VK_NV_dedicated_allocation;
+    /** When true, {@link NVDeviceDiagnosticCheckpoints} is supported. */
+    public final boolean VK_NV_device_diagnostic_checkpoints;
     /** When true, {@link NVExternalMemory} is supported. */
     public final boolean VK_NV_external_memory;
     /** When true, {@link NVExternalMemoryWin32} is supported. */
@@ -542,7 +549,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(225);
+        Map<String, Long> caps = new HashMap<>(227);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -625,6 +632,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_win32_keyed_mutex = ext.contains("VK_KHR_win32_keyed_mutex");
         VK_NV_clip_space_w_scaling = NVClipSpaceWScaling.checkCapsDevice(provider, caps, ext);
         VK_NV_dedicated_allocation = ext.contains("VK_NV_dedicated_allocation");
+        VK_NV_device_diagnostic_checkpoints = NVDeviceDiagnosticCheckpoints.checkCapsDevice(provider, caps, ext);
         VK_NV_external_memory = ext.contains("VK_NV_external_memory");
         VK_NV_external_memory_win32 = NVExternalMemoryWin32.checkCapsDevice(provider, caps, ext);
         VK_NV_fill_rectangle = ext.contains("VK_NV_fill_rectangle");
@@ -856,6 +864,8 @@ public class VKCapabilitiesDevice {
         vkAcquireNextImageKHR = VK.get(caps, "vkAcquireNextImageKHR");
         vkQueuePresentKHR = VK.get(caps, "vkQueuePresentKHR");
         vkCmdSetViewportWScalingNV = VK.get(caps, "vkCmdSetViewportWScalingNV");
+        vkCmdSetCheckpointNV = VK.get(caps, "vkCmdSetCheckpointNV");
+        vkGetQueueCheckpointDataNV = VK.get(caps, "vkGetQueueCheckpointDataNV");
         vkGetMemoryWin32HandleNV = VK.get(caps, "vkGetMemoryWin32HandleNV");
         vkCmdProcessCommandsNVX = VK.get(caps, "vkCmdProcessCommandsNVX");
         vkCmdReserveSpaceForCommandsNVX = VK.get(caps, "vkCmdReserveSpaceForCommandsNVX");
