@@ -7,7 +7,18 @@
 static void JNICALL functionMissingAbort(void) {
     jboolean async;
     JNIEnv* env = getEnv(&async);
-    (*env)->FatalError(env, "No context is current or a function that is not available in the current context was called. The JVM will abort execution.");
+
+    jclass Thread = (*env)->FindClass(env, "java/lang/Thread");
+    jobject thread     = (*env)->CallStaticObjectMethod(env, Thread, (*env)->GetStaticMethodID(env, Thread, "currentThread", "()Ljava/lang/Thread;"));
+    jstring threadName = (*env)->      CallObjectMethod(env, thread, (*env)->      GetMethodID(env, Thread,      "toString", "()Ljava/lang/String;"));
+
+    char msg[256];
+    snprintf(
+        msg, 256,
+        "%s: No context is current or a function that is not available in the current context was called. The JVM will abort execution.",
+        (*env)->GetStringUTFChars(env, threadName, NULL)
+    );
+    (*env)->FatalError(env, msg);
 }
 
 EXTERN_C_ENTER
