@@ -299,14 +299,22 @@ typedef struct HiddenAreaMesh_t
 
     TrackedDeviceIndex_t(
         "GetTrackedDeviceIndexForControllerRole",
-        "Returns the device index associated with a specific role, for example the left hand or the right hand.",
+        """
+        Returns the device index associated with a specific role, for example the left hand or the right hand.
+
+        This function is deprecated in favor of the new {@code IVRInput} system.
+        """,
 
         ETrackedControllerRole.IN("unDeviceType", "", "ETrackedControllerRole_\\w+")
     )
 
     ETrackedControllerRole(
         "GetControllerRoleForTrackedDeviceIndex",
-        "Returns the controller type associated with a device index.",
+        """
+        Returns the controller type associated with a device index.
+
+        This function is deprecated in favor of the new {@code IVRInput} system.
+        """,
 
         TrackedDeviceIndex_t.IN("unDeviceIndex", "")
     )
@@ -469,7 +477,11 @@ typedef struct HiddenAreaMesh_t
 
     bool(
         "GetControllerState",
-        "Fills the supplied struct with the current state of the controller.",
+        """
+        Fills the supplied struct with the current state of the controller.
+
+        This function is deprecated in favor of the new {@code IVRInput} system.
+        """,
 
         TrackedDeviceIndex_t.IN("unControllerDeviceIndex", "the tracked device index of the controller to get the state of"),
         VRControllerState_t.p.OUT("pControllerState", "a struct to fill with the controller state"),
@@ -483,6 +495,8 @@ typedef struct HiddenAreaMesh_t
         """
         Fills the supplied struct with the current state of the controller and the provided pose with the pose of the controller when the controller state was
         updated most recently. Use this form if you need a precise controller pose as input to your application when the user presses or releases a button.
+
+        This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
         ETrackingUniverseOrigin.IN("eOrigin", "the tracking coordinate system to return the pose in", "ETrackingUniverseOrigin_\\w+"),
@@ -497,6 +511,8 @@ typedef struct HiddenAreaMesh_t
         """
         Trigger a single haptic pulse on a controller. After this call the application may not trigger another haptic pulse on this controller and axis
         combination for 5ms.
+
+        This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
         TrackedDeviceIndex_t.IN("unControllerDeviceIndex", "the tracked device index of the controller to trigger a haptic pulse on"),
@@ -506,7 +522,11 @@ typedef struct HiddenAreaMesh_t
 
     charASCII.p(
         "GetButtonIdNameFromEnum",
-        "Returns the name of an {@code EVRButtonId} enum value.",
+        """
+        Returns the name of an {@code EVRButtonId} enum value.
+
+        This function is deprecated in favor of the new {@code IVRInput} system.
+        """,
 
         EVRButtonId.IN("eButtonId", "the button ID to return the name of", "EVRButtonId_\\w+")
     )

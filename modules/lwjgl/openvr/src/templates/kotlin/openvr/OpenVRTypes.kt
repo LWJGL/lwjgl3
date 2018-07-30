@@ -37,6 +37,7 @@ val EVRSettingsError = "EVRSettingsError".enumType
 val EVRTrackedCameraError = "EVRTrackedCameraError".enumType
 val EVRInputError = "EVRInputError".enumType
 val EIOBufferError = "EIOBufferError".enumType
+val EVRSpatialAnchorError = "EVRSpatialAnchorError".enumType
 
 val EVRApplicationProperty = "EVRApplicationProperty".enumType
 val EVRApplicationTransitionState = "EVRApplicationTransitionState".enumType
@@ -54,6 +55,7 @@ val EVRScreenshotType = "EVRScreenshotType".enumType
 val EVRSubmitFlags = "EVRSubmitFlags".enumType
 val EVRTrackedCameraFrameType = "EVRTrackedCameraFrameType".enumType
 val EVRSkeletalTransformSpace = "EVRSkeletalTransformSpace".enumType
+val EVRSkeletalMotionRange = "EVRSkeletalMotionRange".enumType
 
 val ChaperoneCalibrationState = "ChaperoneCalibrationState".enumType
 
@@ -82,6 +84,9 @@ val VROverlayTransformType = "VROverlayTransformType".enumType
 val PropertyContainerHandle_t = typedef(uint64_t, "PropertyContainerHandle_t")
 val PropertyTypeTag_t = typedef(uint32_t, "PropertyTypeTag_t")
 val DriverHandle_t = typedef(PropertyContainerHandle_t, "DriverHandle_t")
+val VRActionHandle_t = typedef(uint64_t, "VRActionHandle_t")
+val VRActionSetHandle_t = typedef(uint64_t, "VRActionSetHandle_t")
+val VRInputValueHandle_t = typedef(uint64_t, "VRInputValueHandle_t")
 val ScreenshotHandle_t = typedef(uint32_t, "ScreenshotHandle_t")
 val TextureID_t = typedef(int32_t, "TextureID_t")
 val TrackedCameraHandle_t = typedef(uint64_t, "TrackedCameraHandle_t")
@@ -92,11 +97,9 @@ val DriverId_t = typedef(uint32_t, "DriverId_t")
 val VRComponentProperties = typedef(uint32_t, "VRComponentProperties")
 val VRNotificationId = typedef(uint32_t, "VRNotificationId")
 val VROverlayHandle_t = typedef(uint64_t, "VROverlayHandle_t")
-val VRActionHandle_t = typedef(uint64_t, "VRActionHandle_t")
-val VRActionSetHandle_t = typedef(uint64_t, "VRActionSetHandle_t")
-val VRInputValueHandle_t = typedef(uint64_t, "VRInputValueHandle_t")
 val IOBufferHandle_t = typedef(uint64_t, "IOBufferHandle_t")
 
+val SpatialAnchorHandle_t = typedef(uint32_t, "SpatialAnchorHandle_t")
 val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
 val glInt_t = typedef(int32_t, "glInt_t")
 val glUInt_t = typedef(uint32_t, "glUInt_t")
@@ -108,6 +111,10 @@ val VkQueue_T = "VkQueue_T".opaque
 
 val HmdMatrix34_t = struct(Module.OPENVR, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
     float.array("m", "", size = 3 x 4)
+}
+
+val HmdMatrix33_t = struct(Module.OPENVR, "HmdMatrix33", nativeName = "HmdMatrix33_t") {
+    float.array("m", "", size = 3 x 3)
 }
 
 val HmdMatrix44_t = struct(Module.OPENVR, "HmdMatrix44", nativeName = "HmdMatrix44_t") {
@@ -337,6 +344,18 @@ val VREvent_InputBindingLoad_t = struct(Module.OPENVR, "VREventInputBindingLoad"
     PropertyContainerHandle_t.member("ulAppContainer", "")
 	uint64_t.member("pathMessage", "")
 	uint64_t.member("pathUrl", "")
+    uint64_t.member("pathControllerType", "")
+}
+
+val VREvent_InputActionManifestLoad_t = struct(Module.OPENVR, "VREventInputActionManifestLoad", nativeName = "VREvent_InputActionManifestLoad_t", mutable = false) {
+	uint64_t.member("pathAppKey", "")
+	uint64_t.member("pathMessage", "")
+	uint64_t.member("pathMessageParam", "")
+	uint64_t.member("pathManifestPath", "")
+}
+
+val VREvent_SpatialAnchor_t = struct(Module.OPENVR, "VREventSpatialAnchor", nativeName = "VREvent_SpatialAnchor_t", mutable = false) {
+	SpatialAnchorHandle_t.member("unHandle", "")
 }
 
 val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
@@ -481,7 +500,13 @@ val VRTextureWithPoseAndDepth_t = struct(Module.OPENVR, "VRTextureWithPoseAndDep
 }
 
 val VRVulkanTextureData_t = struct(Module.OPENVR, "VRVulkanTextureData", nativeName = "VRVulkanTextureData_t") {
-    documentation = "Data required for passing Vulkan textures to #Submit(). Be sure to call #ShutdownInternal() before destroying these resources."
+    documentation =
+        """
+        Data required for passing Vulkan textures to #Submit(). Be sure to call #ShutdownInternal() before destroying these resources.
+
+        Please see <a href="https://github.com/ValveSoftware/openvr/wiki/Vulkan">https://github.com/ValveSoftware/openvr/wiki/Vulkan</a> for Vulkan-specific
+        documentation.
+        """
 
     uint64_t.member("m_nImage", "VkImage")
     VkDevice_T.p.member("m_pDevice", "")
@@ -634,9 +659,10 @@ val InputPoseActionData_t = struct(Module.OPENVR, "InputPoseActionData", nativeN
 	TrackedDevicePose_t.member("pose", "the current state of this action")
 }
 
-val InputSkeletonActionData_t = struct(Module.OPENVR, "InputSkeletonActionData", nativeName = "InputSkeletonActionData_t", mutable = false) {
+val InputSkeletalActionData_t = struct(Module.OPENVR, "InputSkeletalActionData", nativeName = "InputSkeletalActionData_t", mutable = false) {
     bool.member("bActive", "whether or not this action is currently available to be bound in the active action set")
 	VRInputValueHandle_t.member("activeOrigin", "the origin that caused this action's current state")
+    uint32_t.member("boneCount", "the number of bones in the skeletal data")
 }
 
 val InputOriginInfo_t = struct(Module.OPENVR, "InputOriginInfo", nativeName = "InputOriginInfo_t", mutable = false) {
@@ -657,6 +683,18 @@ val VRActiveActionSet_t = struct(Module.OPENVR, "VRActiveActionSet", nativeName 
         #k_ulInvalidInputValueHandle, this parameter is ignored.
         """
     )
+    padding(4)
+	int32_t.member(
+        "nPriority",
+        """
+        the priority of this action set relative to other action sets. Any inputs bound to a source (e.g. trackpad, joystick, trigger) will disable bindings in
+        other active action sets with a smaller priority.
+        """
+    )
+}
+
+val SpatialAnchorPose_t = struct(Module.OPENVR, "SpatialAnchorPose", nativeName = "SpatialAnchorPose_t", mutable = false) {
+	HmdMatrix34_t.member("mAnchorToAbsoluteTracking", "")
 }
 
 val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName = "RenderModel_Vertex_t", mutable = false) {

@@ -484,7 +484,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_CompositorDumpImages ] ---
 
-    /** Writes all images that the compositor knows about (including overlays) to a 'screenshots' folder in the SteamVR runtime root. */
+    /** Writes back buffer and stereo left/right pair from the application to a 'screenshots' folder in the SteamVR runtime root. */
     public static void VRCompositor_CompositorDumpImages() {
         long __functionAddress = OpenVR.VRCompositor.CompositorDumpImages;
         if (CHECKS) {

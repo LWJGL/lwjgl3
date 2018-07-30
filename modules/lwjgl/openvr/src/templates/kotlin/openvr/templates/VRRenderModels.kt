@@ -148,18 +148,29 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         AutoSize("pchComponentRenderModelName")..uint32_t.IN("unComponentRenderModelNameLen", "")
     )
 
+    uint32_t(
+        "GetComponentStateForDevicePath",
+        "",
+
+        charASCII.const.p.IN("pchRenderModelName", ""),
+        charASCII.const.p.IN("pchComponentName", ""),
+        VRInputValueHandle_t.IN("devicePath", ""),
+        RenderModel_ControllerMode_State_t.const.p.IN("pState", ""),
+        RenderModel_ComponentState_t.p.OUT("pComponentState", ""),
+
+        returnDoc =
+        """
+        if the {@code pchRenderModelName} or {@code pchComponentName} is invalid, this will return false (and transforms will be set to identity). Otherwise,
+        return true Note: For dynamic objects, visibility may be dynamic. (I.e., true/false will be returned based on controller state and controller mode
+        state).
+        """
+    )
+
     bool(
         "GetComponentState",
         """
-        Use this to query information about the component, as a function of the controller state.
-
-        For dynamic controller components (ex: trigger) values will reflect component motions. For static components this will return a consistent value
-        independent of the ##VRControllerState.
-
-        If the {@code pchRenderModelName} or {@code pchComponentName} is invalid, this will return false (and transforms will be set to identity). Otherwise,
-        return true.
-
-        ${note("For dynamic objects, visibility may be dynamic. (I.e., true/false will be returned based on controller state and controller mode state )")}
+        This version of {@code GetComponentState} takes a controller state block instead of an action origin. This function is deprecated. You should use the
+        new input system and #GetComponentStateForDevicePath() instead.
         """,
 
         charASCII.const.p.IN("pchRenderModelName", ""),

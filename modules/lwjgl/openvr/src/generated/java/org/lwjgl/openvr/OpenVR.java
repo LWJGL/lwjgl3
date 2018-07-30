@@ -35,6 +35,7 @@ public final class OpenVR {
     @Nullable public static IVRTrackedCamera VRTrackedCamera;
     @Nullable public static IVRInput VRInput;
     @Nullable public static IVRIOBuffer VRIOBuffer;
+    @Nullable public static IVRSpatialAnchors VRSpatialAnchors;
 
     private static int token;
 
@@ -69,6 +70,7 @@ public final class OpenVR {
         VRTrackedCamera = getGenericInterface(IVRTrackedCamera_Version, IVRTrackedCamera::new);
         VRInput = getGenericInterface(IVRInput_Version, IVRInput::new);
         VRIOBuffer = getGenericInterface(IVRIOBuffer_Version, IVRIOBuffer::new);
+        VRSpatialAnchors = getGenericInterface(IVRSpatialAnchors_Version, IVRSpatialAnchors::new);
     }
 
     @Nullable
@@ -111,6 +113,7 @@ public final class OpenVR {
         VRTrackedCamera = null;
         VRInput = null;
         VRIOBuffer = null;
+        VRSpatialAnchors = null;
     }
 
     public static final class IVRSystem {
@@ -697,6 +700,7 @@ public final class OpenVR {
             GetComponentName,
             GetComponentButtonMask,
             GetComponentRenderModelName,
+            GetComponentStateForDevicePath,
             GetComponentState,
             RenderModelHasComponent,
             GetRenderModelThumbnailURL,
@@ -704,7 +708,7 @@ public final class OpenVR {
             GetRenderModelErrorNameFromEnum;
 
         public IVRRenderModels(long tableAddress) {
-            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 18);
+            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 19);
             LoadRenderModel_Async = table.get(0);
             FreeRenderModel = table.get(1);
             LoadTexture_Async = table.get(2);
@@ -718,11 +722,12 @@ public final class OpenVR {
             GetComponentName = table.get(10);
             GetComponentButtonMask = table.get(11);
             GetComponentRenderModelName = table.get(12);
-            GetComponentState = table.get(13);
-            RenderModelHasComponent = table.get(14);
-            GetRenderModelThumbnailURL = table.get(15);
-            GetRenderModelOriginalPath = table.get(16);
-            GetRenderModelErrorNameFromEnum = table.get(17);
+            GetComponentStateForDevicePath = table.get(13);
+            GetComponentState = table.get(14);
+            RenderModelHasComponent = table.get(15);
+            GetRenderModelThumbnailURL = table.get(16);
+            GetRenderModelOriginalPath = table.get(17);
+            GetRenderModelErrorNameFromEnum = table.get(18);
         }
 
     }
@@ -845,7 +850,8 @@ public final class OpenVR {
             GetAnalogActionData,
             GetPoseActionData,
             GetSkeletalActionData,
-            GetSkeletalActionDataCompressed,
+            GetSkeletalBoneData,
+            GetSkeletalBoneDataCompressed,
             UncompressSkeletalActionData,
             TriggerHapticVibrationAction,
             GetActionOrigins,
@@ -855,7 +861,7 @@ public final class OpenVR {
             ShowBindingsForActionSet;
 
         public IVRInput(long tableAddress) {
-            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 17);
+            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 18);
             SetActionManifestPath = table.get(0);
             GetActionSetHandle = table.get(1);
             GetActionHandle = table.get(2);
@@ -865,14 +871,15 @@ public final class OpenVR {
             GetAnalogActionData = table.get(6);
             GetPoseActionData = table.get(7);
             GetSkeletalActionData = table.get(8);
-            GetSkeletalActionDataCompressed = table.get(9);
-            UncompressSkeletalActionData = table.get(10);
-            TriggerHapticVibrationAction = table.get(11);
-            GetActionOrigins = table.get(12);
-            GetOriginLocalizedName = table.get(13);
-            GetOriginTrackedDeviceInfo = table.get(14);
-            ShowActionOrigins = table.get(15);
-            ShowBindingsForActionSet = table.get(16);
+            GetSkeletalBoneData = table.get(9);
+            GetSkeletalBoneDataCompressed = table.get(10);
+            UncompressSkeletalActionData = table.get(11);
+            TriggerHapticVibrationAction = table.get(12);
+            GetActionOrigins = table.get(13);
+            GetOriginLocalizedName = table.get(14);
+            GetOriginTrackedDeviceInfo = table.get(15);
+            ShowActionOrigins = table.get(16);
+            ShowBindingsForActionSet = table.get(17);
         }
 
     }
@@ -893,6 +900,24 @@ public final class OpenVR {
             Read = table.get(2);
             Write = table.get(3);
             PropertyContainer = table.get(4);
+        }
+
+    }
+
+    public static final class IVRSpatialAnchors {
+
+        public final long
+            CreateSpatialAnchorFromDescriptor,
+            CreateSpatialAnchorFromPose,
+            GetSpatialAnchorPose,
+            GetSpatialAnchorDescriptor;
+
+        public IVRSpatialAnchors(long tableAddress) {
+            PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, 4);
+            CreateSpatialAnchorFromDescriptor = table.get(0);
+            CreateSpatialAnchorFromPose = table.get(1);
+            GetSpatialAnchorPose = table.get(2);
+            GetSpatialAnchorDescriptor = table.get(3);
         }
 
     }

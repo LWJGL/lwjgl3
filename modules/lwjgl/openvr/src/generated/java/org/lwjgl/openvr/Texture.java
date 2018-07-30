@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code eType} &ndash; one of:<br><table><tr><td>{@link VR#ETextureType_TextureType_DirectX}</td><td>{@link VR#ETextureType_TextureType_OpenGL}</td></tr><tr><td>{@link VR#ETextureType_TextureType_Vulkan}</td><td>{@link VR#ETextureType_TextureType_IOSurface}</td></tr><tr><td>{@link VR#ETextureType_TextureType_DirectX12}</td><td>{@link VR#ETextureType_TextureType_DXGISharedHandle}</td></tr></table></li>
+ * <li>{@code eType} &ndash; one of:<br><table><tr><td>{@link VR#ETextureType_TextureType_Invalid}</td><td>{@link VR#ETextureType_TextureType_DirectX}</td></tr><tr><td>{@link VR#ETextureType_TextureType_OpenGL}</td><td>{@link VR#ETextureType_TextureType_Vulkan}</td></tr><tr><td>{@link VR#ETextureType_TextureType_IOSurface}</td><td>{@link VR#ETextureType_TextureType_DirectX12}</td></tr><tr><td>{@link VR#ETextureType_TextureType_DXGISharedHandle}</td><td>{@link VR#ETextureType_TextureType_Metal}</td></tr></table></li>
  * <li>{@code eColorSpace} &ndash; one of:<br><table><tr><td>{@link VR#EColorSpace_ColorSpace_Auto}</td><td>{@link VR#EColorSpace_ColorSpace_Gamma}</td></tr><tr><td>{@link VR#EColorSpace_ColorSpace_Linear}</td></tr></table></li>
  * </ul>
  * 

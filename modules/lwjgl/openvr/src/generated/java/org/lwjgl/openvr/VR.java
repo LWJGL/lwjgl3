@@ -49,6 +49,7 @@ public class VR {
         k_unWildcardPropertyTag          = 34,
         k_unHapticVibrationPropertyTag   = 35,
         k_unSkeletonPropertyTag          = 36,
+        k_unSpatialAnchorPosePropertyTag = 40,
         k_unOpenVRInternalReserved_Start = 1000,
         k_unOpenVRInternalReserved_End   = 10000,
         k_unScreenshotHandleInvalid      = 0,
@@ -59,13 +60,14 @@ public class VR {
 
     /** OpenVR constants. */
     public static final long
-        k_ulInvalidPropertyContainer = 0L,
-        k_ulInvalidDriverHandle      = 0L,
-        k_ulOverlayHandleInvalid     = 0L,
-        k_ulInvalidActionHandle      = 0L,
-        k_ulInvalidActionSetHandle   = 0L,
-        k_ulInvalidInputValueHandle  = 0L,
-        k_ulInvalidIOBufferHandle    = 0L;
+        k_ulInvalidPropertyContainer   = 0L,
+        k_ulInvalidDriverHandle        = 0L,
+        k_ulOverlayHandleInvalid       = 0L,
+        k_ulInvalidActionHandle        = 0L,
+        k_ulInvalidActionSetHandle     = 0L,
+        k_ulInvalidInputValueHandle    = 0L,
+        k_ulInvalidIOBufferHandle      = 0L,
+        k_ulInvalidSpatialAnchorHandle = 0L;
 
     /** No string property will ever be longer than this length. */
     public static final int k_unMaxPropertyStringSize = 32768;
@@ -108,7 +110,7 @@ public class VR {
         k_pch_Controller_Component_Tip                                 = "tip",
         k_pch_Controller_Component_HandGrip                            = "handgrip",
         k_pch_Controller_Component_Status                              = "status",
-        IVRRenderModels_Version                                        = "IVRRenderModels_005",
+        IVRRenderModels_Version                                        = "IVRRenderModels_006",
         IVRNotifications_Version                                       = "IVRNotifications_002",
         IVRSettings_Version                                            = "IVRSettings_002",
         k_pch_SteamVR_Section                                          = "steamvr",
@@ -162,6 +164,8 @@ public class VR {
         k_pch_SteamVR_DebugInput                                       = "debugInput",
         k_pch_SteamVR_LegacyInputRebinding                             = "legacyInputRebinding",
         k_pch_SteamVR_DebugInputBinding                                = "debugInputBinding",
+        k_pch_SteamVR_InputBindingUIBlock                              = "inputBindingUI",
+        k_pch_SteamVR_RenderCameraMode                                 = "renderCameraMode",
         k_pch_Lighthouse_Section                                       = "driver_lighthouse",
         k_pch_Lighthouse_DisableIMU_Bool                               = "disableimu",
         k_pch_Lighthouse_DisableIMUExceptHMD_Bool                      = "disableimuexcepthmd",
@@ -245,20 +249,24 @@ public class VR {
         k_pch_Dashboard_ArcadeMode_Bool                                = "arcadeMode",
         k_pch_Dashboard_EnableWebUI                                    = "webUI",
         k_pch_Dashboard_EnableWebUIDevTools                            = "webUIDevTools",
+        k_pch_Dashboard_EnableWebUIDashboardReplacement                = "webUIDashboard",
         k_pch_modelskin_Section                                        = "modelskins",
         k_pch_Driver_Enable_Bool                                       = "enable",
         k_pch_WebInterface_Section                                     = "WebInterface",
+        k_pch_WebInterface_WebEnable_Bool                              = "WebEnable",
         k_pch_WebInterface_WebPort_String                              = "WebPort",
         k_pch_TrackingOverride_Section                                 = "TrackingOverrides",
         k_pch_App_BindingAutosaveURLSuffix_String                      = "AutosaveURL",
         k_pch_App_BindingCurrentURLSuffix_String                       = "CurrentURL",
         k_pch_App_NeedToUpdateAutosaveSuffix_Bool                      = "NeedToUpdateAutosave",
         k_pch_App_ActionManifestURL_String                             = "ActionManifestURL",
+        k_pch_Trackers_Section                                         = "trackers",
         IVRScreenshots_Version                                         = "IVRScreenshots_001",
         IVRResources_Version                                           = "IVRResources_001",
         IVRDriverManager_Version                                       = "IVRDriverManager_001",
-        IVRInput_Version                                               = "IVRInput_003",
-        IVRIOBuffer_Version                                            = "IVRIOBuffer_001";
+        IVRInput_Version                                               = "IVRInput_004",
+        IVRIOBuffer_Version                                            = "IVRIOBuffer_001",
+        IVRSpatialAnchors_Version                                      = "IVRSpatialAnchors_001";
 
     /**
      * EVREye
@@ -280,24 +288,31 @@ public class VR {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #ETextureType_TextureType_Invalid ETextureType_TextureType_Invalid} - Handle has been invalidated</li>
      * <li>{@link #ETextureType_TextureType_DirectX ETextureType_TextureType_DirectX} - Handle is an ID3D11Texture.</li>
      * <li>{@link #ETextureType_TextureType_OpenGL ETextureType_TextureType_OpenGL} - Handle is an OpenGL texture name or an OpenGL render buffer name, depending on submit flags.</li>
      * <li>{@link #ETextureType_TextureType_Vulkan ETextureType_TextureType_Vulkan} - Handle is a pointer to a {@code VRVulkanTextureData_t} structure.</li>
-     * <li>{@link #ETextureType_TextureType_IOSurface ETextureType_TextureType_IOSurface} - Handle is a macOS cross-process-sharable {@code IOSurfaceRef}.</li>
+     * <li>{@link #ETextureType_TextureType_IOSurface ETextureType_TextureType_IOSurface} - Handle is a macOS cross-process-sharable {@code IOSurfaceRef}, deprecated in favor of {@code TextureType_Metal} on supported platforms</li>
      * <li>{@link #ETextureType_TextureType_DirectX12 ETextureType_TextureType_DirectX12} - Handle is a pointer to a {@code D3D12TextureData_t} structure.</li>
      * <li>{@link #ETextureType_TextureType_DXGISharedHandle ETextureType_TextureType_DXGISharedHandle} - 
      * Handle is a {@code HANDLE DXGI} share handle, only supported for Overlay render targets. This texture is used directly by our renderer, so only
      * perform atomic (copyresource or resolve) on it.
      * </li>
+     * <li>{@link #ETextureType_TextureType_Metal ETextureType_TextureType_Metal} - 
+     * Handle is a {@code MTLTexture} conforming to the {@code MTLSharedTexture} protocol. Textures submitted to {@link VRCompositor#VRCompositor_Submit Submit} which  are of type
+     * {@code MTLTextureType2DArray} assume layer 0 is the left eye texture ({@link #EVREye_Eye_Left}), layer 1 is the right eye texture ({@link #EVREye_Eye_Right}).
+     * </li>
      * </ul>
      */
     public static final int
+        ETextureType_TextureType_Invalid          = -1,
         ETextureType_TextureType_DirectX          = 0,
         ETextureType_TextureType_OpenGL           = 1,
         ETextureType_TextureType_Vulkan           = 2,
         ETextureType_TextureType_IOSurface        = 3,
         ETextureType_TextureType_DirectX12        = 4,
-        ETextureType_TextureType_DXGISharedHandle = 5;
+        ETextureType_TextureType_DXGISharedHandle = 5,
+        ETextureType_TextureType_Metal            = 6;
 
     /**
      * EColorSpace
@@ -347,6 +362,7 @@ public class VR {
      * <li>{@link #ETrackedDeviceClass_TrackedDeviceClass_GenericTracker ETrackedDeviceClass_TrackedDeviceClass_GenericTracker} - Generic trackers, similar to controllers.</li>
      * <li>{@link #ETrackedDeviceClass_TrackedDeviceClass_TrackingReference ETrackedDeviceClass_TrackedDeviceClass_TrackingReference} - Camera and base stations that serve as tracking reference points.</li>
      * <li>{@link #ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect} - Accessories that aren't necessarily tracked themselves, but may redirect video output from other tracked devices.</li>
+     * <li>{@link #ETrackedDeviceClass_TrackedDeviceClass_Max ETrackedDeviceClass_TrackedDeviceClass_Max}</li>
      * </ul>
      */
     public static final int
@@ -355,7 +371,8 @@ public class VR {
         ETrackedDeviceClass_TrackedDeviceClass_Controller        = 2,
         ETrackedDeviceClass_TrackedDeviceClass_GenericTracker    = 3,
         ETrackedDeviceClass_TrackedDeviceClass_TrackingReference = 4,
-        ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect   = 5;
+        ETrackedDeviceClass_TrackedDeviceClass_DisplayRedirect   = 5,
+        ETrackedDeviceClass_TrackedDeviceClass_Max               = 6;
 
     /**
      * {@code ETrackedControllerRole}: Describes what specific role associated with a tracked device.
@@ -511,6 +528,16 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3 ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ConfigurationIncludesLighthouse20Features_Bool ETrackedDeviceProperty_Prop_ConfigurationIncludesLighthouse20Features_Bool}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraCorrectionMode_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraCorrectionMode_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerLeft_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerLeft_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerRight_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerRight_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerTop_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerTop_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerBottom_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerBottom_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterLeft_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterLeft_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterRight_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterRight_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterTop_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterTop_Int32}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterBottom_Int32 ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterBottom_Int32}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_AttachedDeviceId_String ETrackedDeviceProperty_Prop_AttachedDeviceId_String}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_SupportedButtons_Uint64 ETrackedDeviceProperty_Prop_SupportedButtons_Uint64}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_Axis0Type_Int32 ETrackedDeviceProperty_Prop_Axis0Type_Int32}</li>
@@ -545,6 +572,7 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_HasCameraComponent_Bool ETrackedDeviceProperty_Prop_HasCameraComponent_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_HasDriverDirectModeComponent_Bool ETrackedDeviceProperty_Prop_HasDriverDirectModeComponent_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_HasVirtualDisplayComponent_Bool ETrackedDeviceProperty_Prop_HasVirtualDisplayComponent_Bool}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_HasSpatialAnchorsSupport_Bool ETrackedDeviceProperty_Prop_HasSpatialAnchorsSupport_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ControllerType_String ETrackedDeviceProperty_Prop_ControllerType_String}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_LegacyInputProfile_String ETrackedDeviceProperty_Prop_LegacyInputProfile_String}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start} - PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others</li>
@@ -661,6 +689,16 @@ public class VR {
         ETrackedDeviceProperty_Prop_ImuFactoryGyroScale_Vector3                    = 2065,
         ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerBias_Vector3            = 2066,
         ETrackedDeviceProperty_Prop_ImuFactoryAccelerometerScale_Vector3           = 2067,
+        ETrackedDeviceProperty_Prop_ConfigurationIncludesLighthouse20Features_Bool = 2069,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraCorrectionMode_Int32        = 2200,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerLeft_Int32     = 2201,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerRight_Int32    = 2202,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerTop_Int32      = 2203,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_InnerBottom_Int32   = 2204,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterLeft_Int32     = 2205,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterRight_Int32    = 2206,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterTop_Int32      = 2207,
+        ETrackedDeviceProperty_Prop_DriverRequestedMuraFeather_OuterBottom_Int32   = 2208,
         ETrackedDeviceProperty_Prop_AttachedDeviceId_String                        = 3000,
         ETrackedDeviceProperty_Prop_SupportedButtons_Uint64                        = 3001,
         ETrackedDeviceProperty_Prop_Axis0Type_Int32                                = 3002,
@@ -695,6 +733,7 @@ public class VR {
         ETrackedDeviceProperty_Prop_HasCameraComponent_Bool                        = 6004,
         ETrackedDeviceProperty_Prop_HasDriverDirectModeComponent_Bool              = 6005,
         ETrackedDeviceProperty_Prop_HasVirtualDisplayComponent_Bool                = 6006,
+        ETrackedDeviceProperty_Prop_HasSpatialAnchorsSupport_Bool                  = 6007,
         ETrackedDeviceProperty_Prop_ControllerType_String                          = 7000,
         ETrackedDeviceProperty_Prop_LegacyInputProfile_String                      = 7001,
         ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start                  = 10000,
@@ -911,6 +950,7 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_PerfSectionSettingChanged EVREventType_VREvent_PerfSectionSettingChanged}</li>
      * <li>{@link #EVREventType_VREvent_DashboardSectionSettingChanged EVREventType_VREvent_DashboardSectionSettingChanged}</li>
      * <li>{@link #EVREventType_VREvent_WebInterfaceSectionSettingChanged EVREventType_VREvent_WebInterfaceSectionSettingChanged}</li>
+     * <li>{@link #EVREventType_VREvent_TrackersSectionSettingChanged EVREventType_VREvent_TrackersSectionSettingChanged}</li>
      * <li>{@link #EVREventType_VREvent_StatusUpdate EVREventType_VREvent_StatusUpdate}</li>
      * <li>{@link #EVREventType_VREvent_WebInterface_InstallDriverCompleted EVREventType_VREvent_WebInterface_InstallDriverCompleted}</li>
      * <li>{@link #EVREventType_VREvent_MCImageUpdated EVREventType_VREvent_MCImageUpdated}</li>
@@ -942,8 +982,14 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_MessageOverlay_Closed EVREventType_VREvent_MessageOverlay_Closed}</li>
      * <li>{@link #EVREventType_VREvent_MessageOverlayCloseRequested EVREventType_VREvent_MessageOverlayCloseRequested}</li>
      * <li>{@link #EVREventType_VREvent_Input_HapticVibration EVREventType_VREvent_Input_HapticVibration}</li>
-     * <li>{@link #EVREventType_VREvent_Input_BindingLoadFailed EVREventType_VREvent_Input_BindingLoadFailed} - data is process</li>
-     * <li>{@link #EVREventType_VREvent_Input_BindingLoadSuccessful EVREventType_VREvent_Input_BindingLoadSuccessful} - data is process</li>
+     * <li>{@link #EVREventType_VREvent_Input_BindingLoadFailed EVREventType_VREvent_Input_BindingLoadFailed} - data is inputBinding</li>
+     * <li>{@link #EVREventType_VREvent_Input_BindingLoadSuccessful EVREventType_VREvent_Input_BindingLoadSuccessful} - data is inputBinding</li>
+     * <li>{@link #EVREventType_VREvent_Input_ActionManifestReloaded EVREventType_VREvent_Input_ActionManifestReloaded} - no data</li>
+     * <li>{@link #EVREventType_VREvent_Input_ActionManifestLoadFailed EVREventType_VREvent_Input_ActionManifestLoadFailed} - data is actionManifest</li>
+     * <li>{@link #EVREventType_VREvent_SpatialAnchors_PoseUpdated EVREventType_VREvent_SpatialAnchors_PoseUpdated} - data is spatialAnchor. broadcast</li>
+     * <li>{@link #EVREventType_VREvent_SpatialAnchors_DescriptorUpdated EVREventType_VREvent_SpatialAnchors_DescriptorUpdated} - data is spatialAnchor. broadcast</li>
+     * <li>{@link #EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate} - data is spatialAnchor. sent to specific driver</li>
+     * <li>{@link #EVREventType_VREvent_SpatialAnchors_RequestDescriptorUpdate EVREventType_VREvent_SpatialAnchors_RequestDescriptorUpdate} - data is spatialAnchor. sent to specific driver</li>
      * <li>{@link #EVREventType_VREvent_VendorSpecific_Reserved_Start EVREventType_VREvent_VendorSpecific_Reserved_Start}</li>
      * <li>{@link #EVREventType_VREvent_VendorSpecific_Reserved_End EVREventType_VREvent_VendorSpecific_Reserved_End}</li>
      * </ul>
@@ -1055,6 +1101,7 @@ public class VR {
         EVREventType_VREvent_PerfSectionSettingChanged                 = 863,
         EVREventType_VREvent_DashboardSectionSettingChanged            = 864,
         EVREventType_VREvent_WebInterfaceSectionSettingChanged         = 865,
+        EVREventType_VREvent_TrackersSectionSettingChanged             = 866,
         EVREventType_VREvent_StatusUpdate                              = 900,
         EVREventType_VREvent_WebInterface_InstallDriverCompleted       = 950,
         EVREventType_VREvent_MCImageUpdated                            = 1000,
@@ -1088,6 +1135,12 @@ public class VR {
         EVREventType_VREvent_Input_HapticVibration                     = 1700,
         EVREventType_VREvent_Input_BindingLoadFailed                   = 1701,
         EVREventType_VREvent_Input_BindingLoadSuccessful               = 1702,
+        EVREventType_VREvent_Input_ActionManifestReloaded              = 1703,
+        EVREventType_VREvent_Input_ActionManifestLoadFailed            = 1704,
+        EVREventType_VREvent_SpatialAnchors_PoseUpdated                = 1800,
+        EVREventType_VREvent_SpatialAnchors_DescriptorUpdated          = 1801,
+        EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate          = 1802,
+        EVREventType_VREvent_SpatialAnchors_RequestDescriptorUpdate    = 1803,
         EVREventType_VREvent_VendorSpecific_Reserved_Start             = 10000,
         EVREventType_VREvent_VendorSpecific_Reserved_End               = 19999;
 
@@ -1134,28 +1187,34 @@ public class VR {
      * <li>{@link #EVRButtonId_k_EButton_SteamVR_Touchpad EVRButtonId_k_EButton_SteamVR_Touchpad}</li>
      * <li>{@link #EVRButtonId_k_EButton_SteamVR_Trigger EVRButtonId_k_EButton_SteamVR_Trigger}</li>
      * <li>{@link #EVRButtonId_k_EButton_Dashboard_Back EVRButtonId_k_EButton_Dashboard_Back}</li>
+     * <li>{@link #EVRButtonId_k_EButton_Knuckles_A EVRButtonId_k_EButton_Knuckles_A}</li>
+     * <li>{@link #EVRButtonId_k_EButton_Knuckles_B EVRButtonId_k_EButton_Knuckles_B}</li>
+     * <li>{@link #EVRButtonId_k_EButton_Knuckles_JoyStick EVRButtonId_k_EButton_Knuckles_JoyStick}</li>
      * <li>{@link #EVRButtonId_k_EButton_Max EVRButtonId_k_EButton_Max}</li>
      * </ul>
      */
     public static final int
-        EVRButtonId_k_EButton_System           = 0,
-        EVRButtonId_k_EButton_ApplicationMenu  = 1,
-        EVRButtonId_k_EButton_Grip             = 2,
-        EVRButtonId_k_EButton_DPad_Left        = 3,
-        EVRButtonId_k_EButton_DPad_Up          = 4,
-        EVRButtonId_k_EButton_DPad_Right       = 5,
-        EVRButtonId_k_EButton_DPad_Down        = 6,
-        EVRButtonId_k_EButton_A                = 7,
-        EVRButtonId_k_EButton_ProximitySensor  = 31,
-        EVRButtonId_k_EButton_Axis0            = 32,
-        EVRButtonId_k_EButton_Axis1            = 33,
-        EVRButtonId_k_EButton_Axis2            = 34,
-        EVRButtonId_k_EButton_Axis3            = 35,
-        EVRButtonId_k_EButton_Axis4            = 36,
-        EVRButtonId_k_EButton_SteamVR_Touchpad = EVRButtonId_k_EButton_Axis0,
-        EVRButtonId_k_EButton_SteamVR_Trigger  = EVRButtonId_k_EButton_Axis1,
-        EVRButtonId_k_EButton_Dashboard_Back   = EVRButtonId_k_EButton_Grip,
-        EVRButtonId_k_EButton_Max              = 64;
+        EVRButtonId_k_EButton_System            = 0,
+        EVRButtonId_k_EButton_ApplicationMenu   = 1,
+        EVRButtonId_k_EButton_Grip              = 2,
+        EVRButtonId_k_EButton_DPad_Left         = 3,
+        EVRButtonId_k_EButton_DPad_Up           = 4,
+        EVRButtonId_k_EButton_DPad_Right        = 5,
+        EVRButtonId_k_EButton_DPad_Down         = 6,
+        EVRButtonId_k_EButton_A                 = 7,
+        EVRButtonId_k_EButton_ProximitySensor   = 31,
+        EVRButtonId_k_EButton_Axis0             = 32,
+        EVRButtonId_k_EButton_Axis1             = 33,
+        EVRButtonId_k_EButton_Axis2             = 34,
+        EVRButtonId_k_EButton_Axis3             = 35,
+        EVRButtonId_k_EButton_Axis4             = 36,
+        EVRButtonId_k_EButton_SteamVR_Touchpad  = EVRButtonId_k_EButton_Axis0,
+        EVRButtonId_k_EButton_SteamVR_Trigger   = EVRButtonId_k_EButton_Axis1,
+        EVRButtonId_k_EButton_Dashboard_Back    = EVRButtonId_k_EButton_Grip,
+        EVRButtonId_k_EButton_Knuckles_A        = EVRButtonId_k_EButton_Grip,
+        EVRButtonId_k_EButton_Knuckles_B        = EVRButtonId_k_EButton_ApplicationMenu,
+        EVRButtonId_k_EButton_Knuckles_JoyStick = EVRButtonId_k_EButton_Axis3,
+        EVRButtonId_k_EButton_Max               = 64;
 
     /**
      * {@code EVRMouseButton}: used for simulated mouse events in overlay space.
@@ -1209,6 +1268,7 @@ public class VR {
      * <li>{@link #EVRInputError_VRInputError_NoData EVRInputError_VRInputError_NoData}</li>
      * <li>{@link #EVRInputError_VRInputError_BufferTooSmall EVRInputError_VRInputError_BufferTooSmall}</li>
      * <li>{@link #EVRInputError_VRInputError_MismatchedActionManifest EVRInputError_VRInputError_MismatchedActionManifest}</li>
+     * <li>{@link #EVRInputError_VRInputError_MissingSkeletonData EVRInputError_VRInputError_MissingSkeletonData}</li>
      * </ul>
      */
     public static final int
@@ -1227,7 +1287,46 @@ public class VR {
         EVRInputError_VRInputError_InvalidCompressedData    = 12,
         EVRInputError_VRInputError_NoData                   = 13,
         EVRInputError_VRInputError_BufferTooSmall           = 14,
-        EVRInputError_VRInputError_MismatchedActionManifest = 15;
+        EVRInputError_VRInputError_MismatchedActionManifest = 15,
+        EVRInputError_VRInputError_MissingSkeletonData      = 16;
+
+    /**
+     * EVRSpatialAnchorError
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_Success EVRSpatialAnchorError_VRSpatialAnchorError_Success}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_Internal EVRSpatialAnchorError_VRSpatialAnchorError_Internal}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_UnknownHandle EVRSpatialAnchorError_VRSpatialAnchorError_UnknownHandle}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_ArrayTooSmall EVRSpatialAnchorError_VRSpatialAnchorError_ArrayTooSmall}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_InvalidDescriptorChar EVRSpatialAnchorError_VRSpatialAnchorError_InvalidDescriptorChar}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_NotYetAvailable EVRSpatialAnchorError_VRSpatialAnchorError_NotYetAvailable}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_NotAvailableInThisUniverse EVRSpatialAnchorError_VRSpatialAnchorError_NotAvailableInThisUniverse}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_PermanentlyUnavailable EVRSpatialAnchorError_VRSpatialAnchorError_PermanentlyUnavailable}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_WrongDriver EVRSpatialAnchorError_VRSpatialAnchorError_WrongDriver}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_DescriptorTooLong EVRSpatialAnchorError_VRSpatialAnchorError_DescriptorTooLong}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_Unknown EVRSpatialAnchorError_VRSpatialAnchorError_Unknown}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_NoRoomCalibration EVRSpatialAnchorError_VRSpatialAnchorError_NoRoomCalibration}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_InvalidArgument EVRSpatialAnchorError_VRSpatialAnchorError_InvalidArgument}</li>
+     * <li>{@link #EVRSpatialAnchorError_VRSpatialAnchorError_UnknownDriver EVRSpatialAnchorError_VRSpatialAnchorError_UnknownDriver}</li>
+     * </ul>
+     */
+    public static final int
+        EVRSpatialAnchorError_VRSpatialAnchorError_Success                    = 0,
+        EVRSpatialAnchorError_VRSpatialAnchorError_Internal                   = 1,
+        EVRSpatialAnchorError_VRSpatialAnchorError_UnknownHandle              = 2,
+        EVRSpatialAnchorError_VRSpatialAnchorError_ArrayTooSmall              = 3,
+        EVRSpatialAnchorError_VRSpatialAnchorError_InvalidDescriptorChar      = 4,
+        EVRSpatialAnchorError_VRSpatialAnchorError_NotYetAvailable            = 5,
+        EVRSpatialAnchorError_VRSpatialAnchorError_NotAvailableInThisUniverse = 6,
+        EVRSpatialAnchorError_VRSpatialAnchorError_PermanentlyUnavailable     = 7,
+        EVRSpatialAnchorError_VRSpatialAnchorError_WrongDriver                = 8,
+        EVRSpatialAnchorError_VRSpatialAnchorError_DescriptorTooLong          = 9,
+        EVRSpatialAnchorError_VRSpatialAnchorError_Unknown                    = 10,
+        EVRSpatialAnchorError_VRSpatialAnchorError_NoRoomCalibration          = 11,
+        EVRSpatialAnchorError_VRSpatialAnchorError_InvalidArgument            = 12,
+        EVRSpatialAnchorError_VRSpatialAnchorError_UnknownDriver              = 13;
 
     /**
      * EHiddenAreaMeshType
@@ -1430,6 +1529,26 @@ public class VR {
         EVRNotificationError_VRNotificationError_SystemWithUserValueAlreadyExists = 103;
 
     /**
+     * EVRSkeletalMotionRange
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EVRSkeletalMotionRange_VRSkeletalMotionRange_WithController EVRSkeletalMotionRange_VRSkeletalMotionRange_WithController} - 
+     * The range of motion of the skeleton takes into account any physical limits imposed by the controller itself. This will tend to be the most accurate
+     * pose compared to the user's actual hand pose, but might not allow a closed fist for example.
+     * </li>
+     * <li>{@link #EVRSkeletalMotionRange_VRSkeletalMotionRange_WithoutController EVRSkeletalMotionRange_VRSkeletalMotionRange_WithoutController} - 
+     * Retarget the range of motion provided by the input device to make the hand appear to move as if it was not holding a controller. eg: map "hand
+     * grasping controller" to "closed fist".
+     * </li>
+     * </ul>
+     */
+    public static final int
+        EVRSkeletalMotionRange_VRSkeletalMotionRange_WithController    = 0,
+        EVRSkeletalMotionRange_VRSkeletalMotionRange_WithoutController = 1;
+
+    /**
      * {@code EVRInitError}: error codes returned by {@link #VR_InitInternal InitInternal}.
      * 
      * <h5>Enum values:</h5>
@@ -1479,6 +1598,7 @@ public class VR {
      * <li>{@link #EVRInitError_VRInitError_Init_FirmwareRecoveryBusy EVRInitError_VRInitError_Init_FirmwareRecoveryBusy}</li>
      * <li>{@link #EVRInitError_VRInitError_Init_USBServiceBusy EVRInitError_VRInitError_Init_USBServiceBusy}</li>
      * <li>{@link #EVRInitError_VRInitError_Init_VRWebHelperStartupFailed EVRInitError_VRInitError_Init_VRWebHelperStartupFailed}</li>
+     * <li>{@link #EVRInitError_VRInitError_Init_TrackerManagerInitFailed EVRInitError_VRInitError_Init_TrackerManagerInitFailed}</li>
      * <li>{@link #EVRInitError_VRInitError_Driver_Failed EVRInitError_VRInitError_Driver_Failed}</li>
      * <li>{@link #EVRInitError_VRInitError_Driver_Unknown EVRInitError_VRInitError_Driver_Unknown}</li>
      * <li>{@link #EVRInitError_VRInitError_Driver_HmdUnknown EVRInitError_VRInitError_Driver_HmdUnknown}</li>
@@ -1569,6 +1689,7 @@ public class VR {
         EVRInitError_VRInitError_Init_FirmwareRecoveryBusy                          = 139,
         EVRInitError_VRInitError_Init_USBServiceBusy                                = 140,
         EVRInitError_VRInitError_Init_VRWebHelperStartupFailed                      = 141,
+        EVRInitError_VRInitError_Init_TrackerManagerInitFailed                      = 142,
         EVRInitError_VRInitError_Driver_Failed                                      = 200,
         EVRInitError_VRInitError_Driver_Unknown                                     = 201,
         EVRInitError_VRInitError_Driver_HmdUnknown                                  = 202,
@@ -1744,6 +1865,20 @@ public class VR {
         EVSync_VSync_None         = 0,
         EVSync_VSync_WaitRender   = 1,
         EVSync_VSync_NoWaitRender = 2;
+
+    /**
+     * EVRMuraCorrectionMode
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #EVRMuraCorrectionMode_Default EVRMuraCorrectionMode_Default}</li>
+     * <li>{@link #EVRMuraCorrectionMode_NoCorrection EVRMuraCorrectionMode_NoCorrection}</li>
+     * </ul>
+     */
+    public static final int
+        EVRMuraCorrectionMode_Default      = 0,
+        EVRMuraCorrectionMode_NoCorrection = 1;
 
     /**
      * {@code Imu_OffScaleFlags}: raw IMU data provided by {@code IVRIOBuffer} from paths to tracked devices with IMUs.
@@ -2302,13 +2437,13 @@ public class VR {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action}</li>
+     * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Model EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Model}</li>
      * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent}</li>
      * <li>{@link #EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive}</li>
      * </ul>
      */
     public static final int
-        EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Action   = 0,
+        EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Model    = 0,
         EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Parent   = 1,
         EVRSkeletalTransformSpace_VRSkeletalTransformSpace_Additive = 2;
 

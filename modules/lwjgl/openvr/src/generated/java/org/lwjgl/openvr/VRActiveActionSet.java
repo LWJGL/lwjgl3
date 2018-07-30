@@ -24,6 +24,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code ulSecondaryActionSet} &ndash; 
  * the action set to activate for all devices other than {@code ulRestrictedDevice}. If {@code ulRestrictedToDevice} is set to
  * {@link VR#k_ulInvalidInputValueHandle}, this parameter is ignored.</li>
+ * <li>{@code nPriority} &ndash; 
+ * the priority of this action set relative to other action sets. Any inputs bound to a source (e.g. trackpad, joystick, trigger) will disable bindings in
+ * other active action sets with a smaller priority.</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -33,6 +36,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VRActionSetHandle_t ulActionSet;
  *     VRInputValueHandle_t ulRestrictedToDevice;
  *     VRActionSetHandle_t ulSecondaryActionSet;
+ *     char[4];
+ *     int32_t nPriority;
  * }</code></pre>
  */
 @NativeType("struct VRActiveActionSet_t")
@@ -48,13 +53,16 @@ public class VRActiveActionSet extends Struct implements NativeResource {
     public static final int
         ULACTIONSET,
         ULRESTRICTEDTODEVICE,
-        ULSECONDARYACTIONSET;
+        ULSECONDARYACTIONSET,
+        NPRIORITY;
 
     static {
         Layout layout = __struct(
             __member(8),
             __member(8),
-            __member(8)
+            __member(8),
+            __padding(4, true),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -63,6 +71,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
         ULACTIONSET = layout.offsetof(0);
         ULRESTRICTEDTODEVICE = layout.offsetof(1);
         ULSECONDARYACTIONSET = layout.offsetof(2);
+        NPRIORITY = layout.offsetof(4);
     }
 
     VRActiveActionSet(long address, @Nullable ByteBuffer container) {
@@ -91,6 +100,9 @@ public class VRActiveActionSet extends Struct implements NativeResource {
     /** Returns the value of the {@code ulSecondaryActionSet} field. */
     @NativeType("VRActionSetHandle_t")
     public long ulSecondaryActionSet() { return nulSecondaryActionSet(address()); }
+    /** Returns the value of the {@code nPriority} field. */
+    @NativeType("int32_t")
+    public int nPriority() { return nnPriority(address()); }
 
     /** Sets the specified value to the {@code ulActionSet} field. */
     public VRActiveActionSet ulActionSet(@NativeType("VRActionSetHandle_t") long value) { nulActionSet(address(), value); return this; }
@@ -98,16 +110,20 @@ public class VRActiveActionSet extends Struct implements NativeResource {
     public VRActiveActionSet ulRestrictedToDevice(@NativeType("VRInputValueHandle_t") long value) { nulRestrictedToDevice(address(), value); return this; }
     /** Sets the specified value to the {@code ulSecondaryActionSet} field. */
     public VRActiveActionSet ulSecondaryActionSet(@NativeType("VRActionSetHandle_t") long value) { nulSecondaryActionSet(address(), value); return this; }
+    /** Sets the specified value to the {@code nPriority} field. */
+    public VRActiveActionSet nPriority(@NativeType("int32_t") int value) { nnPriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VRActiveActionSet set(
         long ulActionSet,
         long ulRestrictedToDevice,
-        long ulSecondaryActionSet
+        long ulSecondaryActionSet,
+        int nPriority
     ) {
         ulActionSet(ulActionSet);
         ulRestrictedToDevice(ulRestrictedToDevice);
         ulSecondaryActionSet(ulSecondaryActionSet);
+        nPriority(nPriority);
 
         return this;
     }
@@ -271,6 +287,8 @@ public class VRActiveActionSet extends Struct implements NativeResource {
     public static long nulRestrictedToDevice(long struct) { return memGetLong(struct + VRActiveActionSet.ULRESTRICTEDTODEVICE); }
     /** Unsafe version of {@link #ulSecondaryActionSet}. */
     public static long nulSecondaryActionSet(long struct) { return memGetLong(struct + VRActiveActionSet.ULSECONDARYACTIONSET); }
+    /** Unsafe version of {@link #nPriority}. */
+    public static int nnPriority(long struct) { return memGetInt(struct + VRActiveActionSet.NPRIORITY); }
 
     /** Unsafe version of {@link #ulActionSet(long) ulActionSet}. */
     public static void nulActionSet(long struct, long value) { memPutLong(struct + VRActiveActionSet.ULACTIONSET, value); }
@@ -278,6 +296,8 @@ public class VRActiveActionSet extends Struct implements NativeResource {
     public static void nulRestrictedToDevice(long struct, long value) { memPutLong(struct + VRActiveActionSet.ULRESTRICTEDTODEVICE, value); }
     /** Unsafe version of {@link #ulSecondaryActionSet(long) ulSecondaryActionSet}. */
     public static void nulSecondaryActionSet(long struct, long value) { memPutLong(struct + VRActiveActionSet.ULSECONDARYACTIONSET, value); }
+    /** Unsafe version of {@link #nPriority(int) nPriority}. */
+    public static void nnPriority(long struct, int value) { memPutInt(struct + VRActiveActionSet.NPRIORITY, value); }
 
     // -----------------------------------
 
@@ -334,6 +354,9 @@ public class VRActiveActionSet extends Struct implements NativeResource {
         /** Returns the value of the {@code ulSecondaryActionSet} field. */
         @NativeType("VRActionSetHandle_t")
         public long ulSecondaryActionSet() { return VRActiveActionSet.nulSecondaryActionSet(address()); }
+        /** Returns the value of the {@code nPriority} field. */
+        @NativeType("int32_t")
+        public int nPriority() { return VRActiveActionSet.nnPriority(address()); }
 
         /** Sets the specified value to the {@code ulActionSet} field. */
         public VRActiveActionSet.Buffer ulActionSet(@NativeType("VRActionSetHandle_t") long value) { VRActiveActionSet.nulActionSet(address(), value); return this; }
@@ -341,6 +364,8 @@ public class VRActiveActionSet extends Struct implements NativeResource {
         public VRActiveActionSet.Buffer ulRestrictedToDevice(@NativeType("VRInputValueHandle_t") long value) { VRActiveActionSet.nulRestrictedToDevice(address(), value); return this; }
         /** Sets the specified value to the {@code ulSecondaryActionSet} field. */
         public VRActiveActionSet.Buffer ulSecondaryActionSet(@NativeType("VRActionSetHandle_t") long value) { VRActiveActionSet.nulSecondaryActionSet(address(), value); return this; }
+        /** Sets the specified value to the {@code nPriority} field. */
+        public VRActiveActionSet.Buffer nPriority(@NativeType("int32_t") int value) { VRActiveActionSet.nnPriority(address(), value); return this; }
 
     }
 

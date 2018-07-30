@@ -75,7 +75,8 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionHandle_t.IN("action", ""),
         InputDigitalActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", "")
+        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
     EVRInputError(
@@ -87,7 +88,8 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionHandle_t.IN("action", ""),
         InputAnalogActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", "")
+        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
     EVRInputError(
@@ -98,44 +100,69 @@ val VRInput = "VRInput".nativeClass(
         ETrackingUniverseOrigin.IN("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         float.IN("fPredictedSecondsFromNow", ""),
         InputPoseActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", "")
+        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
+
+    /*
+	EVRInputError (OPENVR_FNTABLE_CALLTYPE *GetSkeletalActionData)(
+	    VRActionHandle_t action,
+	    struct InputSkeletalActionData_t * pActionData,
+	    uint32_t unActionDataSize,
+	    VRInputValueHandle_t ulRestrictToDevice
+    );
+	EVRInputError (OPENVR_FNTABLE_CALLTYPE *GetSkeletalBoneData)(VRActionHandle_t action, EVRSkeletalTransformSpace eTransformSpace, EVRSkeletalMotionRange eMotionRange, struct VRBoneTransform_t * pTransformArray, uint32_t unTransformArrayCount, VRInputValueHandle_t ulRestrictToDevice);
+	EVRInputError (OPENVR_FNTABLE_CALLTYPE *GetSkeletalBoneDataCompressed)(VRActionHandle_t action, EVRSkeletalTransformSpace eTransformSpace, EVRSkeletalMotionRange eMotionRange, void * pvCompressedData, uint32_t unCompressedSize, uint32_t * punRequiredCompressedSize, VRInputValueHandle_t ulRestrictToDevice);
+	EVRInputError (OPENVR_FNTABLE_CALLTYPE *DecompressSkeletalBoneData)(void * pvCompressedBuffer, uint32_t unCompressedBufferSize, EVRSkeletalTransformSpace * peTransformSpace, struct VRBoneTransform_t * pTransformArray, uint32_t unTransformArrayCount);
+	EVRInputError (OPENVR_FNTABLE_CALLTYPE *TriggerHapticVibrationAction)(VRActionHandle_t action, float fStartSecondsFromNow, float fDurationSeconds, float fFrequency, float fAmplitude, VRInputValueHandle_t ulRestrictToDevice);
+
+     */
 
     EVRInputError(
         "GetSkeletalActionData",
         "Reads the state of a skeletal action given its handle.",
 
         VRActionHandle_t.IN("action", ""),
-        EVRSkeletalTransformSpace.IN("eBoneParent", "", "EVRSkeletalTransformSpace_\\w+"),
-        float.IN("fPredictedSecondsFromNow", ""),
-        InputSkeletonActionData_t.p.OUT("pActionData", ""),
+        InputSkeletalActionData_t.p.OUT("pActionData", ""),
         AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
-        VRBoneTransform_t.p.OUT("pTransformArray", ""),
-        AutoSize("pTransformArray")..uint32_t.IN("unTransformArrayCount", "")
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
     EVRInputError(
-        "GetSkeletalActionDataCompressed",
+        "GetSkeletalBoneData",
+        "Reads the state of the skeletal bone data associated with this action and copies it into the given buffer.",
+
+        VRActionHandle_t.IN("action", ""),
+        EVRSkeletalTransformSpace.IN("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
+        EVRSkeletalMotionRange.IN("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
+        VRBoneTransform_t.p.OUT("pTransformArray", ""),
+        AutoSize("pTransformArray")..uint32_t.IN("unTransformArrayCount", ""),
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+    )
+
+    EVRInputError(
+        "GetSkeletalBoneDataCompressed",
         """
-        Reads the state of a skeletal action given its handle in a compressed form that is suitable for sending over the network. The required buffer size will
-        never exceed ({@code sizeof(VR_BoneTransform_t)*boneCount + 2}). Usually the size will be much smaller.
+        Reads the state of the skeletal bone data in a compressed form that is suitable for sending over the network. The required buffer size will never
+        exceed ({@code sizeof(VR_BoneTransform_t)*boneCount + 2}). Usually the size will be much smaller.
         """,
 
         VRActionHandle_t.IN("action", ""),
-        EVRSkeletalTransformSpace.IN("eBoneParent", "", "EVRSkeletalTransformSpace_\\w+"),
-        float.IN("fPredictedSecondsFromNow", ""),
+        EVRSkeletalTransformSpace.IN("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
+        EVRSkeletalMotionRange.IN("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
         nullable..void.p.OUT("pvCompressedData", ""),
         AutoSize("pvCompressedData")..uint32_t.IN("unCompressedSize", ""),
-        Check(1)..nullable..uint32_t.p.OUT("punRequiredCompressedSize", "")
+        Check(1)..nullable..uint32_t.p.OUT("punRequiredCompressedSize", ""),
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
     EVRInputError(
         "UncompressSkeletalActionData",
-        "Turns a compressed buffer from #GetSkeletalActionDataCompressed() and turns it back into a bone transform array.",
+        "Turns a compressed buffer from #GetSkeletalBoneDataCompressed() and turns it back into a bone transform array.",
 
         void.p.IN("pvCompressedBuffer", ""),
         AutoSize("pvCompressedBuffer")..uint32_t.IN("unCompressedBufferSize", ""),
-        Check(1)..EVRSkeletalTransformSpace.p.OUT("peBoneParent", ""),
+        Check(1)..EVRSkeletalTransformSpace.p.OUT("peTransformSpace", ""),
         VRBoneTransform_t.p.OUT("pTransformArray", ""),
         AutoSize("pTransformArray")..uint32_t.IN("unTransformArrayCount", "")
     )
@@ -148,7 +175,8 @@ val VRInput = "VRInput".nativeClass(
         float.IN("fStartSecondsFromNow", ""),
         float.IN("fDurationSeconds", ""),
         float.IN("fFrequency", ""),
-        float.IN("fAmplitude", "")
+        float.IN("fAmplitude", ""),
+        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
     EVRInputError(

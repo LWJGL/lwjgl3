@@ -21,6 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     PropertyContainerHandle_t ulAppContainer;
  *     uint64_t pathMessage;
  *     uint64_t pathUrl;
+ *     uint64_t pathControllerType;
  * }</code></pre>
  */
 @NativeType("struct VREvent_InputBindingLoad_t")
@@ -36,10 +37,12 @@ public class VREventInputBindingLoad extends Struct {
     public static final int
         ULAPPCONTAINER,
         PATHMESSAGE,
-        PATHURL;
+        PATHURL,
+        PATHCONTROLLERTYPE;
 
     static {
         Layout layout = __struct(
+            __member(8),
             __member(8),
             __member(8),
             __member(8)
@@ -51,6 +54,7 @@ public class VREventInputBindingLoad extends Struct {
         ULAPPCONTAINER = layout.offsetof(0);
         PATHMESSAGE = layout.offsetof(1);
         PATHURL = layout.offsetof(2);
+        PATHCONTROLLERTYPE = layout.offsetof(3);
     }
 
     VREventInputBindingLoad(long address, @Nullable ByteBuffer container) {
@@ -79,6 +83,9 @@ public class VREventInputBindingLoad extends Struct {
     /** Returns the value of the {@code pathUrl} field. */
     @NativeType("uint64_t")
     public long pathUrl() { return npathUrl(address()); }
+    /** Returns the value of the {@code pathControllerType} field. */
+    @NativeType("uint64_t")
+    public long pathControllerType() { return npathControllerType(address()); }
 
     // -----------------------------------
 
@@ -117,6 +124,8 @@ public class VREventInputBindingLoad extends Struct {
     public static long npathMessage(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHMESSAGE); }
     /** Unsafe version of {@link #pathUrl}. */
     public static long npathUrl(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHURL); }
+    /** Unsafe version of {@link #pathControllerType}. */
+    public static long npathControllerType(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHCONTROLLERTYPE); }
 
     // -----------------------------------
 
@@ -173,6 +182,9 @@ public class VREventInputBindingLoad extends Struct {
         /** Returns the value of the {@code pathUrl} field. */
         @NativeType("uint64_t")
         public long pathUrl() { return VREventInputBindingLoad.npathUrl(address()); }
+        /** Returns the value of the {@code pathControllerType} field. */
+        @NativeType("uint64_t")
+        public long pathControllerType() { return VREventInputBindingLoad.npathControllerType(address()); }
 
     }
 

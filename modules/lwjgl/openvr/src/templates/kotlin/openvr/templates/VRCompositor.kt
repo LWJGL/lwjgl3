@@ -286,7 +286,7 @@ typedef struct HmdColor_t
 
     void(
         "CompositorDumpImages",
-        "Writes all images that the compositor knows about (including overlays) to a 'screenshots' folder in the SteamVR runtime root."
+        "Writes back buffer and stereo left/right pair from the application to a 'screenshots' folder in the SteamVR runtime root."
     )
 
     bool(
