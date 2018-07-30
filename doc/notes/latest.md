@@ -1,74 +1,91 @@
-### 3.1.6
+### 3.2.0
 
-_Released 2018 Feb 04_
+_Released 2018 Jul 30_
 
 This build includes the following changes:
 
 #### Bindings
 
-- bgfx: Updated to API version 60 (up from 55)
+- Added [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator) bindings.
+- bgfx: Updated to API version 76 (up from 60)
+    * `bgfx_init` now accepts a parameter structure instead of arguments.
 - glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
-    * Support for lock key modifiers (`GLFW_LOCK_KEY_MODS` input mode, `GLFW_MOD_CAPS_LOCK`, `GLFW_MOD_NUM_LOCK`)
-    * Support for string window hints (`glfwWindowHintString`, `GLFW_COCOA_FRAME_NAME`, `GLFW_X11_CLASS_NAME`, `GLFW_X11_INSTANCE_NAME`)
-    * Support monitor & joystick user ponters (`glfwSetMonitorUserPointer`, `glfwGetMonitorUserPointer`, `glfwSetJoystickUserPointer`, `glfwGetJoystickUserPointer`)
-    * Support for window content scale callbacks (`glfwSetWindowContentScaleCallback`)
-    * Support for cursor hover tests (`GLFW_HOVERED`)
-- lz4: Update to 1.8.1 (up from 1.8.0)
-- Nuklear: Update to 3.00.2 (up from 2.00.4)
-- OpenVR: Updated to 1.0.12 (up from 1.0.10)
-- rpmalloc: Updated to 1.2.2 (up from 1.2.0)
+    * Added support for gamepad mapping input modifiers (SDL 2.0.6+ format)
+    * Added `GLFW_FOCUS_ON_SHOW`.
+- dyncall: Updated to revision 275 (up from 241)
+- jemalloc: Update to 5.1.0 (up from 5.0.1)
+- lz4: Updated to 1.8.2 (up from 1.8.1)
+- LibOVR: Updated to 1.26.0 (up from 1.20.0) 
+- Nuklear: Updated to 4.00.1 (up from 3.00.2)
+- OpenGL: Introduced new `GL11C...GL46C` classes that include symbols of the Core Profile only.
+    * Read the `org.lwjgl.opengl` package javadoc for more information on this feature.
+- OpenVR: Updated to 1.0.16 (up from 1.0.12)
+- rpmalloc: Updated to 1.3.1 (up from 1.2.2)
 - stb
-    * Updated `stb_dxt` to 1.08b (up from 1.0.7)
-    * Updated `stb_image` to 2.18 (up from 2.16)
-    * Updated `stb_image_write` to 1.08 (up from 1.07)
-        * `STBIW_ZLIB_COMPRESS` can be overridden at runtime with `stbi_zlib_compress`.
-    * Updated `stb_truetype` to 1.18 (up from 1.17)
-    * Updated `stb_vorbis` to 1.13b (up from 1.11)
-- tinyfiledialogs: Updated to 3.2.9 (up from 3.2.4)
-- Vulkan: Updated to 1.0.68 (up from 1.0.65)
-- xxhash: Updated to 0.6.4 (up from 0.6.3)
-- Zstd: Updated to 1.3.4 (up from 1.3.2)
-- Yoga: Updated to 1.7.1 (up from 1.7.0)
+    * Updated `stb_image` to 2.19 (up from 2.18)
+    * Updated `stb_image_write` to 1.09 (up from 1.08)
+    * Updated `stb_truetype` to 1.19 (up from 1.18)
+    * Updated `stb_vorbis` to 1.14 (up from 1.13b)
+- tinyfiledialogs: Updated to 3.3.6 (up from 3.2.9)
+- Vulkan: Updated to 1.1.82 (up from 1.0.68)
+    * Includes MoltenVK 1.0.16
+- xxhash: Update to 0.6.5 (up from 0.6.4)
+- Yoga: Updated to 1.9.0 (up from 1.7.1)
+- Zstd: Updated to 1.3.5 (up from 1.3.4)
 
 #### Improvements
 
-- Added [JSR-305](https://jcp.org/en/jsr/detail?id=305) nullability annotations to the core and all bindings. (#344)
-    * Enables static analysis tools ([FindBugs](http://findbugs.sourceforge.net/), IDEs) to detect accesses that could cause `NullPointerException`. Eliminating those improves the quality of LWJGL applications.
-    * Enables better interopation with JVM-based languages that feature built-in null-safety. For example, see [Kotlin's JSR-305 support](https://kotlinlang.org/docs/reference/java-interop.html#jsr-305-support).
-- Added `Configuration` setting to disable function lookup checks.
-- lmdb: Databases are now binary compatible across 32 & 64-bit architectures. (#364)
-    * `MDB_VL32` is enabled on 32-bit builds.
-- par_shapes: Patched to support 32-bit indices and extremely dense meshes.
-- stb_truetype: Exposed members of internal structures for advanced glyph packing customization. (#358)
-- Tootle: Now supports the Direct3D rasterizer for overdraw optimization.
+- Versioned classes in bindings now form inheritance hierarchies.
+    * Applicable to the following versioned classes: `AL`, `ALC`, `CL`, `EGL`, `GL`, `GLES`, `GLX`, `VK`
+    * For example, the `GL30` class now extends the `GL21` class, `GL21` extends `GL20` and so on.
+    * With this change, importing a versioned class allows all symbols up to that version to be resolved. Earlier versions do not need to be imported separately.
+- perf(core): `memGetAddress`/`memPutAddress` are now an order of magnitude faster on 32-bit JVMs.
+- perf(core): Optimized pointer arithmetic by helping the JVM identify unsigned integers.
+- perf(core): The new `java.util.Objects` index check intrinsics are used on Java 9.
+- perf(core): `MemoryUtil` string decoding methods are now faster on both Java 8 and 9+.
+    * The Java 9 implementations are tuned for compact strings ([JEP 254](http://openjdk.java.net/jeps/254)).
+- perf(generator):  Function pointers in capabilities classes are not sorted by name anymore.
+    * This makes it more likely that for functions that are commonly used together, their respective pointers
+    will be closer in memory, avoiding unnecessary cache misses.
+- Generator: `org.lwjgl.system.JNI` now includes signatures for known callback functions.
+    * Can be used for callback function delegation.
+- Generator: Added support for custom methods in struct classes.
+- Generator: Added fluent setters for nested structs.
+- Generator: Made StructBuffer subclass generation optional.
+- Loader: Now prints the path of shared libraries loaded from system paths in debug mode, when possible.
+- docs(core): Improved `PointerBuffer` javadoc.
+- docs: The LWJGL javadoc is now generated with JDK 10.
+- Core: `MemoryUtil` methods now replace requests for zero-size allocations with non-zero-size allocations.
+    * A zero-size allocation now always returns a non-`NULL` pointer or throws an `OOME`. This is consistent with `ByteBuffer.allocateDirect` and avoids the undefined behavior of native allocators.
+    * The returned buffer has a capacity of zero, regardless of the actual allocation size.
+- Core `MemoryUtil.memRealloc` is not `@Nullable` anymore, will either succeed or throw an `OOME`, like `memAlloc/memCalloc`.
+- Core: It is now possible to create a `MemoryStack` backed by externally managed memory.
+- Core: The debug allocator now also tracks internal allocations of shared libraries that have been configured to use the LWJGL memory allocator.
+    * This enables monitoring/debugging allocations inside shared libraries. Internal resources that are never released are now reported on shutdown.
+    * Enabled by default when `Configuration.DEBUG_MEMORY_ALLOCATOR` is enabled.
+    * May be disabled with `Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.set(false)`. 
+- LMDB: The LWJGL memory allocator is now used for internal allocations.
+- NanoVG/NanoSVG: The LWJGL memory allocator is now used for internal allocations.
+- OpenGL/GLES: Calling an unavailable function triggers a JNI `FatalError` instead of an arbitrary segfault.
+    * Avoids the intimidating crash log and writes a clean stack trace to `stderr`.
 
 #### Fixes
 
-- JPMS: A natives module now `requires transitive` the corresponding Java module, instead of the opposite. (#334)
-    * Enables loading shared libraries from non-modular paths/JARs.
-- JPMS: `module-info` files have been moved under `META-INF/version/9/` (#334)
-    * All LWJGL artifacts are now multi-release JAR files to avoid trouble with older tools that are not compatible with Java 9.
-- JPMS: Added appropriate `requires static` declarations to satisfy optional binding interop dependencies. (#369)
-- Fixed broken javadoc links in all bindings. Also updated URLs to avoid redirects.
-- bgfx: Restored default API thread encoder functions, that were erroneously removed in `3.1.4`.
-- LibOVR: Fixed `ovr_TraceMessage` signature. 
-- OpenAL: Fixed capability name of the `AL_SOFT_source_resampler` extension.
-- Tootle: Fixed `pnClusterRemapOut` parameter validation.
+- Generator: Fixed nullability of macro bindings.
+- Generator: Fixed location of generated static blocks
+- Core: Struct buffer `malloc/calloc` methods now support zero capacity, instead of throwing a `NPE`.
+- macOS: Fixed version number detection in `.dylib` name mapping
+- Nullability fixes in:
+    * Assimp
+    * CGL
+    * Yoga
+    * Parameters of struct multi-setter methods
+- OpenCL: Fixed `CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT` constant name.
+- OpenCL: Dropped unnecessary `clSetKernalArg3<t>` overloads.
+- OpenGL/GLES: The thread-local-free function pointer lookups do not depend on JVMTI anymore.
+- stb: Fixed type of `stbi_write_jpg` function's `data` parameter. 
 
 #### Breaking Changes
 
-- Several methods that previously accepted `null`/`NULL` and returned `null`, now require non-null input.
-    * Applies to: struct & callback creation methods and `memByteBuffer`/`memUTF8`/`stack.UTF8`/etc.
-    * Added corresponding methods with the `Safe` suffix that accept `null`/`NULL`, matching the old behavior.
-    * With this change the common case (non-null input) requires no code changes and is warning/error-free. The uncommon case (null input) is recognizable (the suffix) and must be handled properly to eliminate warnings/errors. 
-- Allocation methods that returned `null`/`NULL` on allocation failure, now throw `OutOfMemoryError` instead. This matches the behavior of `ByteBuffer.allocateDirect`.
-    * Applies to: struct allocation methods and `memAlloc`/`memCalloc`/etc.
-    * Does not apply to allocations via direct binding calls (e.g. `LibCStdlib.malloc`).
-- Getters of struct members that should never be `NULL`, throw `NullPointerException` instead of returning `null` when the struct instance is not initialized.
-    * Use `Struct::isNull` to test pointer members of untrusted struct instances.
-- bgfx: Restored native mapping of `bgfx_init(_vendorId)` and `bgfx_update_texture_cube(_side)` parameters. (#368)
-- bgfx: `uint16_t` bitfield constants are now mapped to `int`. (#368)
-- glfw: `glfwInitHintString` has been renamed to `glfwWindowHintString`.
-- lmdb: Databases developed on 32-bit architectures must be recreated. (#364)
-- par_shapes: Changed `par_shapes_mesh::triangles` from `uint16_t/ShortBuffer` to `uint32_t/IntBuffer`. 
-- stb_rect_pack: `stbrp_rect::was_packed` is now mapped to Java `boolean`.
+- Core: `MemoryUtil.MemoryAllocationReport` now also returns the address of the memory allocation.
+- NanoVG: Parameters `windowWidth`/`windowHeight` of the `nvgBeginFrame` function changed to `float`.
