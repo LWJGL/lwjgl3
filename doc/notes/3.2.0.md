@@ -94,3 +94,5 @@ This build includes the following changes:
 
 - vma: The native library is not initialized automatically.
     * Workaround: call `Class.forName("org.lwjgl.util.vma.LibVma")` before using the VMA bindings.
+- vma: `KHR_get_memory_requirements2` function addresses in `VmaVulkanFunctions` are not optional.
+    * Workaround: Enable the `KHR_get_memory_requirements2` extension, or set the equivalent function addresses from Vulkan `1.1`.

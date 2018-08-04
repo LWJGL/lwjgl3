@@ -160,8 +160,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     "PFN_vkDestroyBuffer".handle.member("vkDestroyBuffer", "")
     "PFN_vkCreateImage".handle.member("vkCreateImage", "")
     "PFN_vkDestroyImage".handle.member("vkDestroyImage", "")
-    "PFN_vkGetBufferMemoryRequirements2KHR".handle.member("vkGetBufferMemoryRequirements2KHR", "")
-    "PFN_vkGetImageMemoryRequirements2KHR".handle.member("vkGetImageMemoryRequirements2KHR", "")
+    nullable.."PFN_vkGetBufferMemoryRequirements2KHR".handle.member("vkGetBufferMemoryRequirements2KHR", "")
+    nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle.member("vkGetImageMemoryRequirements2KHR", "")
 
     customMethod("""
     /**
@@ -188,8 +188,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkDestroyBuffer(dc.vkDestroyBuffer)
             .vkCreateImage(dc.vkCreateImage)
             .vkDestroyImage(dc.vkDestroyImage)
-            .vkGetBufferMemoryRequirements2KHR(dc.vkGetBufferMemoryRequirements2KHR)
-            .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2KHR);
+            .vkGetBufferMemoryRequirements2KHR(dc.vkGetBufferMemoryRequirements2 != NULL ? dc.vkGetBufferMemoryRequirements2 : dc.vkGetBufferMemoryRequirements2KHR)
+            .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR);
     }""")
 }
 
