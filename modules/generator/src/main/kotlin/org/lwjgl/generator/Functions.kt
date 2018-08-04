@@ -169,7 +169,7 @@ class Func(
     private val ReturnValue.javaMethodType
         get() = this.nativeType.let {
             if (it is PointerType<*>) {
-                if (it.elementType is StructType && hasParam { it.has<AutoSizeResultParam>() })
+                if (it.elementType is StructType && hasParam { param -> param.has<AutoSizeResultParam>() })
                     "${it.javaMethodType}.Buffer"
                 else if (it is CallbackType)
                     it.className
@@ -210,11 +210,11 @@ class Func(
                 javaMethodType
         ).let {
             if (annotate) {
-                nativeType.annotate(it).let {
+                nativeType.annotate(it).let {annotatedType ->
                     if (nativeType.isReference && has(nullable)) {
-                        "@Nullable $it"
+                        "@Nullable $annotatedType"
                     } else {
-                        it
+                        annotatedType
                     }
                 }
             } else {
@@ -455,7 +455,7 @@ class Func(
 
                 if (it.has<Terminated>()) {
                     val postfix = if ((it.nativeType.mapping as PointerMapping).isMultiByte) "" else "1"
-                    checks.add("checkNT$postfix$Safe(${it.name}${it.get<Terminated>().let { if (it === NullTerminated) "" else ", ${it.value}" }});")
+                    checks.add("checkNT$postfix$Safe(${it.name}${it.get<Terminated>().let { terminated -> if (terminated === NullTerminated) "" else ", ${terminated.value}" }});")
                 }
             }
 
@@ -467,7 +467,7 @@ class Func(
                         it.has<MultiType>()         -> "check$Safe(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
                         it.nativeType is StructType -> "check$Safe(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"
                         else                        -> "check$Safe(${it.name}, ${check.expression});"
-                    }.let { if (check.debug) "if (DEBUG) {\n$t$t$t$t$it\n$t$t$t}" else it})
+                    }.let { code -> if (check.debug) "if (DEBUG) {\n$t$t$t$t$code\n$t$t$t}" else code})
                 }
             }
 
@@ -483,10 +483,10 @@ class Func(
                     } else if (autoSize.factor != null)
                         expression = autoSize.factor.scaleInv(expression)
 
-                    sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
-                        val bufferParam = paramMap[it]!!
+                    sequenceOf(autoSize.reference, *autoSize.dependent).forEach { reference ->
+                        val bufferParam = paramMap[reference]!!
                         Safe = if (bufferParam.has<Nullable>()) "Safe" else ""
-                        checks.add("check$Safe($it, $expression);")
+                        checks.add("check$Safe($reference, $expression);")
                     }
                 }
 
@@ -508,15 +508,15 @@ class Func(
                                 "${autoSize.reference}.remaining()"
                         }
 
-                    autoSize.dependent.forEach {
-                        val param = paramMap[it]!!
+                    autoSize.dependent.forEach { dependency ->
+                        val param = paramMap[dependency]!!
                         val transform = transforms[param]
                         if (transform !is SkipCheckFunctionTransform) {
                             Safe = if (param.has<Nullable>() && transform !is PointerArrayTransform) "Safe" else ""
                             checks.add(if (transform === PointerArrayTransformArray)
-                                "check$Safe($it, $expression);"
+                                "check$Safe($dependency, $expression);"
                             else
-                                "check$Safe($it, $expression);")
+                                "check$Safe($dependency, $expression);")
                         }
                     }
                 }
@@ -540,14 +540,14 @@ class Func(
                                         autoSize.name
                                     else
                                         @Suppress("UNCHECKED_CAST") (transform as FunctionTransform<Parameter>).transformCall(autoSize, autoSize.name)
-                                }.let {
+                                }.let { name ->
                                     if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
-                                        it
+                                        name
                                     else
-                                        "(int)$it"
+                                        "(int)$name"
                                 }
                         }
-                    ).firstOrNull { it != null }.let { if (it == null) "" else ", $it" }});".let { validation ->
+                    ).firstOrNull { size -> size != null }.let { size -> if (size == null) "" else ", $size" }});".let { validation ->
                         if (it.has<Nullable>())
                             "if (${it.name} != null) { $validation }"
                         else
@@ -559,7 +559,9 @@ class Func(
         // Third pass
         getNativeParams().forEach {
             // Special checks last
-            nativeClass.binding?.addParameterChecks(checks, mode, it) { transforms?.get(this) === it }
+            nativeClass.binding?.addParameterChecks(checks, mode, it) { transform ->
+                transforms?.get(this) === transform
+            }
         }
 
         if (checks.isEmpty())
@@ -746,14 +748,14 @@ class Func(
                         "${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
                             if (it.has<Check>()) it.get<Check>().expression else null,
                             getReferenceParam<AutoSize>(it.name).let { autoSize ->
-                                autoSize?.name?.let {
+                                autoSize?.name?.let { name ->
                                     if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
-                                        it
+                                        name
                                     else
-                                        "(int)$it"
+                                        "(int)$name"
                                 }
                             }
-                        ).firstOrNull { it != null }.let { if (it == null) "" else ", $it" }});".let { validation ->
+                        ).firstOrNull { size -> size != null }.let { size -> if (size == null) "" else ", $size" }});".let { validation ->
                             if (it.has<Nullable>())
                                 "if (${it.name} != NULL) { $validation }"
                             else
@@ -812,10 +814,12 @@ class Func(
 
         // JavaDoc
 
-        if (!constantMacro)
-            (parameters.count { it.isAutoSizeResultOut } == 1).let { hideAutoSizeResult ->
-                printDocumentation { !(hideAutoSizeResult && it.isAutoSizeResultOut) }
+        if (!constantMacro) {
+            val hideAutoSizeResult = parameters.count { it.isAutoSizeResultOut } == 1
+            printDocumentation {
+                !(hideAutoSizeResult && it.isAutoSizeResultOut)
             }
+        }
 
         // Method signature
 
@@ -903,9 +907,7 @@ class Func(
         generateCodeAfterNative(code, ApplyTo.NORMAL, hasFinally)
 
         if (returns.isStructValue) {
-            getParams { it has ReturnParam }.map { it.name }.singleOrNull().let {
-                println("${if (hasFinally) "$t$t$t" else "$t$t"}return ${it ?: RESULT};")
-            }
+            println("${if (hasFinally) "$t$t$t" else "$t$t"}return ${getParams { it has ReturnParam }.map { it.name }.singleOrNull() ?: RESULT};")
         } else if (!returns.isVoid) {
             if (returns.nativeType is PointerType<*> && returns.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
                 if (hasFinally)
@@ -972,7 +974,7 @@ class Func(
         if (param.paramType === IN)
             param.name.let {
                 val custom = param.get<AutoSizeResultParam>().expression
-                custom?.replace("\$original", it) ?: it.let { if (param.nativeType.mapping === PrimitiveMapping.INT) it else "(int)$it" }
+                custom?.replace("\$original", it) ?: it.let { expression -> if (param.nativeType.mapping === PrimitiveMapping.INT) expression else "(int)$expression" }
             }
         else
             when {
@@ -981,7 +983,7 @@ class Func(
                 else                             -> "${param.name}.get(${param.name}.position())"
             }.let {
                 val custom = param.get<AutoSizeResultParam>().expression
-                custom?.replace("\$original", it) ?: it.let { if (param.nativeType.mapping === PointerMapping.DATA_INT) it else "(int)$it" }
+                custom?.replace("\$original", it) ?: it.let { expression -> if (param.nativeType.mapping === PointerMapping.DATA_INT) expression else "(int)$expression" }
             }
 
     private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
@@ -1132,7 +1134,7 @@ class Func(
                 val hasAutoSize = hasAutoSizeFor(it)
                 it.apply {
                     if (hasAutoSize)
-                        getParams(hasAutoSizePredicate(this)).forEach { transforms[it] = AutoSizeCharSequenceTransform(this) }
+                        getParams(hasAutoSizePredicate(this)).forEach { param -> transforms[param] = AutoSizeCharSequenceTransform(this) }
                 }
                 transforms[it] = CharSequenceTransform(!hasAutoSize)
                 true
@@ -1155,11 +1157,11 @@ class Func(
 
         // Apply any complex transformations.
         parameters.forEach {
-            if (it.has<Return>() && !hasParam { it.has<PointerArray>() }) {
+            if (it.has<Return>() && !hasParam { param -> param.has<PointerArray>() }) {
                 val returnMod = it.get<Return>()
 
                 if (returnMod === ReturnParam && returns.isVoid && it.nativeType !is CharSequenceType) {
-                    if (!hasParam { it.has<SingleValue>() || it.has<PointerArray>() }) {
+                    if (!hasParam { param -> param.has<SingleValue>() || param.has<PointerArray>() }) {
                         // Skip, we inject the Return alternative in these transforms
                         applyReturnValueTransforms(it)
                         generateAlternativeMethod(stripPostfix(), transforms)
@@ -1214,10 +1216,7 @@ class Func(
                 if (autoSizeParam != null)
                     transforms[autoSizeParam] = AutoSizeTransform(bufferParam, hasCustomJNI || hasUnsafeMethod, applyFactor = false)
 
-                val types = ArrayList<AutoTypeToken>(autoTypes.types.size)
-                autoTypes.types.forEach { types.add(it) }
-
-                for (autoType in types) {
+                for (autoType in autoTypes.types) {
                     transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name}")
                     transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
                     generateAlternativeMethod(name, transforms)
@@ -1229,11 +1228,11 @@ class Func(
         }
 
         // Apply any MultiType transformations.
-        parameters.filter { it.has<MultiType>() }.let {
-            if (it.isEmpty())
+        parameters.filter { it.has<MultiType>() }.let { params ->
+            if (params.isEmpty())
                 return@let
 
-            if (it.groupBy { it.get<MultiType>().types.contentHashCode() }.size != 1)
+            if (params.groupBy { it.get<MultiType>().types.contentHashCode() }.size != 1)
                 throw IllegalStateException("All MultiType modifiers in a function must have the same structure.")
 
             // Add the AutoSize transformation if we skipped it above
@@ -1242,12 +1241,12 @@ class Func(
                 transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, hasCustomJNI || hasUnsafeMethod)
             }
 
-            var multiTypes = it.first().get<MultiType>().types.asSequence()
-            if (it.any { it has optional })
+            var multiTypes = params.first().get<MultiType>().types.asSequence()
+            if (params.any { it has optional })
                 multiTypes = sequenceOf(PointerMapping.DATA_BYTE) + multiTypes
 
             for (autoType in multiTypes) {
-                it.forEach {
+                params.forEach {
                     // Transform the AutoSize parameter, if there is one
                     getReferenceParam<AutoSize>(it.name).let { autoSizeParam ->
                         if (autoSizeParam != null)
@@ -1259,7 +1258,7 @@ class Func(
                 generateAlternativeMethod(name, transforms)
             }
 
-            val singleValueParams = it.filter { it.has<SingleValue>() }
+            val singleValueParams = params.filter { it.has<SingleValue>() }
             if (singleValueParams.any()) {
                 // Generate a SingleValue alternative for each type
                 for (autoType in multiTypes) {
@@ -1288,10 +1287,10 @@ class Func(
                 }
             }
 
-            it.forEach {
-                getReferenceParam<AutoSize>(it.name).let {
-                    if (it != null)
-                        transforms.remove(it)
+            params.forEach {
+                getReferenceParam<AutoSize>(it.name).let { param ->
+                    if (param != null)
+                        transforms.remove(param)
                 }
 
                 transforms.remove(it)
@@ -1299,16 +1298,16 @@ class Func(
         }
 
         // Apply any PointerArray transformations.
-        parameters.filter { it.has<PointerArray>() }.let {
-            if (it.isEmpty())
+        parameters.filter { it.has<PointerArray>() }.let { params ->
+            if (params.isEmpty())
                 return@let
 
-            fun Parameter.getAutoSizeReference(): Parameter? = getParams {
+            fun Parameter.getAutoSizeReference(): Parameter? = getParams { it ->
                 it.has<AutoSize>() && it.get<AutoSize>().reference == this.name
             }.firstOrNull()
 
             // Array version
-            it.forEach {
+            params.forEach {
                 val pointerArray = it.get<PointerArray>()
 
                 val lengthsParam = paramMap[pointerArray.lengthsParam]
@@ -1319,8 +1318,8 @@ class Func(
                 if (countParam != null)
                     transforms[countParam] = ExpressionTransform("${it.name}.length")
 
-                transforms[it] = if (it === parameters.last {
-                    it !== lengthsParam && it !== countParam // these will be hidden, ignore
+                transforms[it] = if (it === parameters.last { param ->
+                    param !== lengthsParam && param !== countParam // these will be hidden, ignore
                 }) PointerArrayTransformVararg else PointerArrayTransformArray
             }
             generateAlternativeMethod(name, transforms)
@@ -1329,7 +1328,7 @@ class Func(
             getParams { it has ReturnParam }.forEach(::applyReturnValueTransforms)
 
             // Single value version
-            it.forEach {
+            params.forEach {
                 val pointerArray = it.get<PointerArray>()
 
                 val lengthsParam = paramMap[pointerArray.lengthsParam]
@@ -1345,7 +1344,7 @@ class Func(
             generateAlternativeMethod(name, transforms)
 
             // Cleanup
-            it.forEach {
+            params.forEach {
                 val countParam = it.getAutoSizeReference()
                 if (countParam != null)
                     transforms.remove(countParam)
@@ -1359,11 +1358,11 @@ class Func(
                 false
             } else {
                 // Compine SingleValueTransform with BufferValueReturnTransform
-                getParams { it has ReturnParam }.forEach(::applyReturnValueTransforms)
+                getParams { param -> param has ReturnParam }.forEach(::applyReturnValueTransforms)
 
                 // Transform the AutoSize parameter, if there is one
-                getParams(hasAutoSizePredicate(it)).forEach {
-                    transforms[it] = Expression1Transform
+                getParams(hasAutoSizePredicate(it)).forEach { param ->
+                    transforms[param] = Expression1Transform
                 }
 
                 val singleValue = it.get<SingleValue>()
@@ -1441,7 +1440,8 @@ class Func(
                 printDocumentation { param ->
                     !(hideAutoSizeResult && param.isAutoSizeResultOut) && transforms[param].let {
                         @Suppress("UNCHECKED_CAST")
-                        (it == null || (it as FunctionTransform<Parameter>).transformDeclaration(param, param.name).let { it != null && it.endsWith(param.name) })
+                        (it == null || (it as FunctionTransform<Parameter>).transformDeclaration(param, param.name)
+                            .let { declaration -> declaration != null && declaration.endsWith(param.name) })
                     }
                 }
             }
@@ -1515,8 +1515,8 @@ class Func(
                 if ((it.isAutoSizeResultOut && hideAutoSizeResultParam))
                     null
                 else {
-                    it.transformDeclarationOrElse(transforms, it.name, false).let {
-                        it?.substring(it.lastIndexOf(' ') + 1)
+                    it.transformDeclarationOrElse(transforms, it.name, false).let { name ->
+                        name?.substring(name.lastIndexOf(' ') + 1)
                     }
                 }
             }
@@ -1544,7 +1544,7 @@ class Func(
 
         transforms
             .asSequence()
-            .filter { it.key.let { it is Parameter && it.has<UseVariable>() } }
+            .filter { it.key.let { qt -> qt is Parameter && qt.has<UseVariable>() } }
             .forEach {
                 val param = it.key as Parameter
                 @Suppress("UNCHECKED_CAST")
@@ -1733,7 +1733,7 @@ class Func(
         // Function signature
 
         val workaroundJDK8167409 = critical && 6 <= parameters.count() && parameters.any {
-            (it.nativeType is PointerType<*> && it.nativeType !is ArrayType<*>) || it.nativeType.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+            (it.nativeType is PointerType<*> && it.nativeType !is ArrayType<*>) || it.nativeType.mapping.let { mapping -> mapping is PrimitiveMapping && 4 < mapping.bytes }
         }
         if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
         print("JNIEXPORT ${returns.jniFunctionType} JNICALL Java${if (critical) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
@@ -1823,9 +1823,9 @@ class Func(
 
         // Call native function
 
-        code.nativeCall.let {
-            if (it != null)
-                println(it)
+        code.nativeCall.let { call ->
+            if (call != null)
+                println(call)
             else {
                 print(t)
                 if (returns.isStructValue) {

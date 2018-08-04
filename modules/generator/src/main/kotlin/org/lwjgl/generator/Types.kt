@@ -241,7 +241,7 @@ open class TypeMapping(
         if (it.isEmpty())
             this.simpleName
         else
-            "${this.simpleName}<${it.indices.map { '?' }.joinToString(", ")}>"
+            "${this.simpleName}<${it.indices.map { _ -> '?' }.joinToString(", ")}>"
     }
 
     internal val nativeMethodName get() = nativeMethodType.javaName

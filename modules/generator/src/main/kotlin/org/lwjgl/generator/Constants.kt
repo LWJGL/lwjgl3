@@ -22,15 +22,15 @@ open class ConstantType<T : Any>(
     ) : this(type.java.simpleName, print)
 }
 
-val ByteConstant = ConstantType(Byte::class) {
-    val i = it.toInt() and 0xFF
+val ByteConstant = ConstantType(Byte::class) { value ->
+    val i = value.toInt() and 0xFF
     "0x%X".format(i).let {
         if (i < 0x80) it else "(byte)$it"
     }
 }
 val CharConstant = ConstantType(Char::class) { "'$it'" }
-val ShortConstant = ConstantType(Short::class) {
-    val i = it.toInt() and 0xFFFF
+val ShortConstant = ConstantType(Short::class) { value ->
+    val i = value.toInt() and 0xFFFF
     "0x%X".format(i).let {
         if (i < 0x8000) it else "(short)$it"
     }
@@ -223,8 +223,8 @@ class ConstantBlock<T : Any>(
     val javaDocLinksSkipCount get() = javaDocLinks { !it.name.endsWith("_COUNT") }
 
     fun javaDocLinks(predicate: ((Constant<T>) -> Boolean)?) = constants.asSequence()
-        .let {
-            if (predicate == null) it else it.filter { predicate(it) }
+        .let { constants ->
+            if (predicate == null) constants else constants.filter { predicate(it) }
         }
         .map { it.name }
         .joinToString(" #", prefix = "#")

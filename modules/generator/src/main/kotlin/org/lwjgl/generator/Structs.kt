@@ -286,7 +286,7 @@ class Struct(
         get() = (nativeType as StructType).definition.visibleMembers
 
     private val containsUnion: Boolean get() = union || members.any {
-        it.isNestedStruct && (it.nativeType as StructType).let { it.name === ANONYMOUS && it.definition.containsUnion }
+        it.isNestedStruct && (it.nativeType as StructType).let { type -> type.name === ANONYMOUS && type.definition.containsUnion }
     }
 
     private fun StructMember.field(parentMember: String) = if (parentMember.isEmpty())
@@ -437,7 +437,7 @@ $indent}"""
         }
     }
 
-    private fun Struct.printStructLayout(indentation: String = ""): String {
+    private fun printStructLayout(indentation: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
 ${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {member ->
@@ -482,7 +482,7 @@ ${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {memb
 $indentation}"""
     }
 
-    private fun Struct.printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList()): List<String> {
+    private fun printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList()): List<String> {
         members.forEach {
             if (it.isNestedStructDefinition)
                 (it.nativeType as StructType).definition.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", documentation)
@@ -516,7 +516,7 @@ $indentation}"""
             val autoSize = it.get<AutoSizeMember>()
 
             autoSize.references.forEach { reference ->
-                val bufferParam = members.firstOrNull { it.name == reference }
+                val bufferParam = members.firstOrNull { member -> member.name == reference }
                 if (bufferParam == null)
                     it.error("Reference does not exist: AutoSize($reference)")
                 else {
@@ -1316,7 +1316,10 @@ ${validations.joinToString("\n")}
 
     private fun PrintWriter.setRemaining(m: StructMember, offset: Int = 0, prefix: String = " ", suffix: String = "") {
         // do not do this if the AutoSize parameter auto-sizes multiple members
-        val capacity = members.firstOrNull { it.has<AutoSizeMember>() && it.get<AutoSizeMember>().let { it.atLeastOne || (it.dependent.isEmpty() && it.reference == m.name) } }
+        val capacity = members.firstOrNull {
+            it.has<AutoSizeMember>() && it.get<AutoSizeMember>()
+                .let { autoSize -> autoSize.atLeastOne || (autoSize.dependent.isEmpty() && autoSize.reference == m.name) }
+        }
         if (capacity != null) {
             val autoSize = capacity.get<AutoSizeMember>()
             val autoSizeExpression = "value.remaining()"
@@ -1683,9 +1686,9 @@ ${validations.joinToString("\n")}
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                             println("$t${it.nullable("public", isArray = false)} static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
-                            println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $size) * POINTER_SIZE)${autoSizeIndirect.let {
-                                if (it == null) "" else ", n${it.name}($STRUCT)"
-                            }});")
+                            println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $size) * POINTER_SIZE)${
+                                if (autoSizeIndirect == null) "" else ", n${autoSizeIndirect.name}($STRUCT)"
+                            });")
                             println("$t}")
                         } else {
                             if (it.public)

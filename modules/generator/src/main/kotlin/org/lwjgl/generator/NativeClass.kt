@@ -314,11 +314,13 @@ class NativeClass internal constructor(
                                     it
                                         .copy(ArrayType(it.nativeType as PointerType<*>, autoType))
                                         .removeArrayModifiers()
-                                        .replaceModifier<Check> {
-                                            if (it === Unsafe)
-                                                it
+                                        .replaceModifier<Check> { check ->
+                                            if (check === Unsafe)
+                                                check
                                             else
-                                                Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")
+                                                Check("${check.expression.let { expression ->
+                                                    if (expression.contains(' ')) "($expression)" else expression
+                                                }} >> ${autoType.byteShift}")
                                         }
                                 else
                                     func[it.name].removeArrayModifiers()
@@ -417,20 +419,20 @@ class NativeClass internal constructor(
         if (hasFunctions || binding is SimpleBinding) {
             // TODO: This is horrible. Refactor so that we build imports after code generation.
             if (functions.any {
-                (it.returns.nativeType.isReference && it.returnsNull) || it.parameters.any {
-                    it.nativeType.isReference && it.has(nullable)
+                (it.returns.nativeType.isReference && it.returnsNull) || it.parameters.any { param ->
+                    param.nativeType.isReference && param.has(nullable)
                 } || it.has<MapPointer>()
             }) {
                 println("import javax.annotation.*;\n")
             }
 
-            val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.hasParam { it.nativeType.isPointerData } }
+            val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.hasParam { param -> param.nativeType.isPointerData } }
 
             if (hasBuffers) {
                 if (functions.any {
                     (it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is CharSequenceType)
                     ||
-                    it.hasParam { it.isBufferPointer && it.nativeType.mapping !== PointerMapping.DATA_POINTER }
+                    it.hasParam { param -> param.isBufferPointer && param.nativeType.mapping !== PointerMapping.DATA_POINTER }
                 })
                     println("import java.nio.*;\n")
 
@@ -438,8 +440,8 @@ class NativeClass internal constructor(
                     this is PointerType<*> && this.elementType.let { it is PointerType<*> || (it.mapping == PrimitiveMapping.POINTER && it !is StructType) }
                 }
                 if (functions.any {
-                    it.returns.nativeType.needsPointerBuffer() || it.hasParam {
-                        it.nativeType.needsPointerBuffer() || (it.has<MultiType>() && it.get<MultiType>().types.contains(PointerMapping.DATA_POINTER))
+                    it.returns.nativeType.needsPointerBuffer() || it.hasParam { param ->
+                        param.nativeType.needsPointerBuffer() || (param.has<MultiType>() && param.get<MultiType>().types.contains(PointerMapping.DATA_POINTER))
                     }
                 })
                     println("import org.lwjgl.*;\n")
@@ -484,7 +486,7 @@ class NativeClass internal constructor(
                 println("import static org.lwjgl.system.MemoryStack.*;")
             if (hasBuffers && functions.any {
                 it.returns.isBufferPointer || it.hasParam { param ->
-                    param.nativeType.let { it is PointerType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && (it.elementType !is StructType || param.has<Nullable>()) }
+                    param.nativeType.let { type -> type is PointerType<*> && type.mapping !== PointerMapping.OPAQUE_POINTER && (type.elementType !is StructType || param.has<Nullable>()) }
                 }
             }) {
                 println("import static org.lwjgl.system.MemoryUtil.*;")

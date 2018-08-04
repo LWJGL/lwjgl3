@@ -191,7 +191,7 @@ internal fun GeneratorTarget.toJavaDoc(
                 if (isNotEmpty()) append("\n$t *")
                 paramsWithJavadoc
                     .forEach {
-                        printParam(it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
+                        printParam(it.name, it.documentation.let { doc -> if (doc == null) "" else processDocumentation(doc()) }, alignment, multilineAligment)
                     }
                 if (returnsStructValue)
                     printParam(RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
@@ -288,10 +288,7 @@ enum class LinkMode {
         builder.append("<br><table><tr>")
 
         val theLinks = WHITESPACE.split(links.trim()).asSequence()
-        val columns = theLinks
-            .map { it.length - it.indexOf('#') - 1 }
-            .average()
-            .let { max(1, 80 / round(it).toInt()) }
+        val columns = max(1, 80 / round(theLinks.map { it.length - it.indexOf('#') - 1 }.average()).toInt())
 
         theLinks.forEachIndexed { i, link ->
             if (i > 0 && i % columns == 0)

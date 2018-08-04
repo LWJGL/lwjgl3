@@ -317,10 +317,10 @@ class Generator(private val moduleRoot: String) {
             .filter { KOTLIN_PATH_MATCHER.matches(it) }
             .sorted()
             .also {
-                it.forEach {
+                it.forEach { path ->
                     try {
                         Class
-                            .forName("$packageName.${it.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
+                            .forName("$packageName.${path.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
                             .methods
                             .asSequence()
                             .consume()
@@ -422,8 +422,8 @@ class Generator(private val moduleRoot: String) {
 
         if (!nativeClass.skipNative) {
             generateNative(nativeClass) {
-                generateOutput(nativeClass, it) {
-                    it.generateNative()
+                generateOutput(nativeClass, it) { out ->
+                    out.generateNative()
                 }
             }
         } else
@@ -455,8 +455,8 @@ class Generator(private val moduleRoot: String) {
 
         if (target is GeneratorTargetNative && !target.skipNative) {
             generateNative(target) {
-                generateOutput(target, it) {
-                    it.generateNative()
+                generateOutput(target, it) { out ->
+                    out.generateNative()
                 }
             }
         }

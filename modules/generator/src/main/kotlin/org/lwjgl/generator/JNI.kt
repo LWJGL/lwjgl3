@@ -130,7 +130,7 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
                     print("(jlong)")
             }
             print("((${it.returnType.nativeType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
-            print(it.arguments.asSequence().map { it.nativeType }.joinToString(", ", prefix = "(", postfix = ")"))
+            print(it.arguments.asSequence().map { arg -> arg.nativeType }.joinToString(", ", prefix = "(", postfix = ")"))
             print(")(intptr_t)__functionAddress)")
             print(it.arguments.asSequence().mapIndexed { i, param -> if (param.isPointer) "(intptr_t)param$i" else "param$i" }.joinToString(", ", prefix = "(", postfix = ")"))
             if (it.arguments.isNotEmpty())
@@ -152,13 +152,13 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
     ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)paramArray$i" else "param$i" }.joinToString(", ")});
     ${it.arguments.asSequence()
                     .withIndex()
-                    .sortedByDescending { it.index }
-                    .mapNotNull { if (it.value !is ArrayType<*>) null else "if (param${it.index} != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${it.index}, paramArray${it.index}, 0); }" }
+                    .sortedByDescending { arg -> arg.index }
+                    .mapNotNull { arg -> if (arg.value !is ArrayType<*>) null else "if (param${arg.index} != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${arg.index}, paramArray${arg.index}, 0); }" }
                     .joinToString("\n$t")}${if (it.returnType.mapping === TypeMapping.VOID) "" else """
     return __result;"""}
 }""")
-            val workaroundJDK8167409 = 6 <= it.arguments.count() && it.arguments.any {
-                (it is PointerType<*> && it !is ArrayType<*>) || it.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+            val workaroundJDK8167409 = 6 <= it.arguments.count() && it.arguments.any { type ->
+                (type is PointerType<*> && type !is ArrayType<*>) || type.mapping.let { mapping -> mapping is PrimitiveMapping && 4 < mapping.bytes }
             }
             if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
             println(
