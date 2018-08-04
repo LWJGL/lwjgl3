@@ -7,6 +7,8 @@ package vma
 import org.lwjgl.generator.*
 import vulkan.*
 
+const val VMA_LIBRARY = "LibVma.initialize();"
+
 fun config() {
     packageInfo(
         Module.VMA,

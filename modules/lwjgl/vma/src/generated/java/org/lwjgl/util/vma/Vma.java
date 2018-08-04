@@ -998,7 +998,7 @@ public class Vma {
      */
     public static final int VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT = 0x2;
 
-    static { Library.initialize(); }
+    static { LibVma.initialize(); }
 
     protected Vma() {
         throw new UnsupportedOperationException();

@@ -90,6 +90,11 @@ This build includes the following changes:
 - Core: `MemoryUtil.MemoryAllocationReport` now also returns the address of the memory allocation.
 - NanoVG: Parameters `windowWidth`/`windowHeight` of the `nvgBeginFrame` function changed to `float`.
 
+#### Known Issues
+
+- vma: The native library is not initialized automatically.
+    * Workaround: call `Class.forName("org.lwjgl.util.vma.LibVma")` before using the VMA bindings.
+
 ### 3.1.6
 
 _Released 2018 Feb 04_
