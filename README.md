@@ -5,7 +5,7 @@
 
 [![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors)
-![Size](https://reposs.herokuapp.com/?path=lwjgl/lwjgl3)
+![Size](https://github-size-badge.herokuapp.com/LWJGL/lwjgl3.svg)
 [![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
 
 ## LWJGL - Lightweight Java Game Library 3
