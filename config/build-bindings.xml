@@ -92,7 +92,6 @@ This script is included in /config/build-definitions.xml.
         </condition>
         <fail if="dependency_problem" message="The stb and OpenGL or OpenGL ES bindings are required."/>
 
-        <local name="test"/>
         <script language="javascript">
         var props = LWJGL.getProperties();
 

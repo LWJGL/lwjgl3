@@ -36,7 +36,7 @@ public final class JavadocPostProcess {
                 .find(root, 1, (path, basicFileAttributes) -> Files.isRegularFile(path) && path.toString().endsWith(".html"))
                 .mapToInt(path -> {
                     try {
-                        String html = new String(Files.readAllBytes(path), "UTF-8");
+                        String html = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
 
                         String processed = BlockListPostProcess.process(FieldSummaryPostProcess.process(html));
                         if (processed != html) {

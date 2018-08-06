@@ -716,6 +716,7 @@
 
             <arg line="-Xdoclint:html,reference,syntax"/>
             <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
+            <arg line="-notimestamp"/>
             <arg value="-html5" if:set="jdk9"/>
             <arg line="-J-Dfile.encoding=UTF8"/>
             <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
