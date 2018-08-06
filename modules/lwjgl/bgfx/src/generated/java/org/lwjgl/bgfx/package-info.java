@@ -10,15 +10,18 @@
  * <p>The bgfx documentation can be found online <a target="_blank" href="https://bkaradzic.github.io/bgfx/">here</a>. The API reference is available
  * <a target="_blank" href="https://bkaradzic.github.io/bgfx/bgfx.html">here</a>.</p>
  * 
- * <p>The bgfx library is very customizable and can be tailored to specific needs. For this reason, the {@code lwjgl-bgfx} artifact does not include any
- * prebuilt native libraries.</p>
+ * <p>Starting with LWJGL 3.2.1, builds of the bgfx tools are available for download via the LWJGL site's <a href="https://www.lwjgl.org/browse">file
+ * browser</a>. These tools are:</p>
  * 
- * <p>To compile your own version, follow the <a target="_blank" href="https://bkaradzic.github.io/bgfx/build.html">build instructions</a> for Windows, Linux and MacOS.
- * Please ensure to use the {@code --with-shared-lib} configuration to create a shared library. Just copy the compiled library found in
- * {@code <bgfx>/.build/<platform>/bin/} to the classpath of your LWJGL application.</p>
+ * <ul>
+ * <li>Geometry Compiler (geometryc)</li>
+ * <li>Shader Compiler (shaderc)</li>
+ * <li>Texture Compiler (texturec)</li>
+ * <li>Texture Viewer (texturev)</li>
+ * </ul>
  * 
- * <p>By default, lwjgl-bgfx searches for bgfx[32].dll (Windows), libbgfx.so (Linux) or libbgfx.dylib (MacOS). This can be customized by defining
- * {@code org.lwjgl.bgfx.libname}.</p>
+ * <p>The binaries are built from source, at the corresponding commit that was used to build the bgfx library. For example, the latest Windows x64 version of
+ * shaderc can be found under {@code nightly/windows/x64/bgfx-tools/}.</p>
  */
 @org.lwjgl.system.NonnullDefault
 package org.lwjgl.bgfx;
