@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -358,31 +357,9 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #memoryTypeBits(int) memoryTypeBits}. */
     public static void nmemoryTypeBits(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.MEMORYTYPEBITS, value); }
     /** Unsafe version of {@link #pool(long) pool}. */
-    public static void npool(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.POOL, check(value)); }
+    public static void npool(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.POOL, value); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
-    public static void npUserData(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.PUSERDATA, check(value)); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VmaAllocationCreateInfo.POOL));
-        check(memGetAddress(struct + VmaAllocationCreateInfo.PUSERDATA));
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
-        }
-    }
+    public static void npUserData(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.PUSERDATA, value); }
 
     // -----------------------------------
 

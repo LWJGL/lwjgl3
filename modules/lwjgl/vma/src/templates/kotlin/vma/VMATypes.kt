@@ -320,7 +320,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         further restrictions on memory type index. If {@code pool} is not null, this member is ignored.
         """
     )
-    VmaPool.member(
+    nullable..VmaPool.member(
         "pool",
         """
         pool that this allocation should be created in.
@@ -329,7 +329,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         {@code memoryTypeBits} are ignored.
         """
     )
-    opaque_p.member(
+    nullable..opaque_p.member(
         "pUserData",
         """
         custom general-purpose pointer that will be stored in {@code VmaAllocation}, can be read as ##VmaAllocationInfo{@code ::pUserData} and changed using
@@ -440,7 +440,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It never changes, unless allocation is lost.
         """
     )
-    opaque_p.member(
+    nullable..opaque_p.member(
         "pMappedData",
         """
         pointer to the beginning of this allocation as mapped data.
@@ -450,7 +450,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It can change after call to #MapMemory(), #UnmapMemory(). It can also change after call to #Defragment() if this allocation is passed to the function.
         """
     )
-    opaque_p.member(
+    nullable..opaque_p.member(
         "pUserData",
         """
         custom general-purpose pointer that was passed as ##VmaAllocationCreateInfo{@code ::pUserData} or set using #SetAllocationUserData().

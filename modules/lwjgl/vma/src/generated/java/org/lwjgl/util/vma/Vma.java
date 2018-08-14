@@ -1190,7 +1190,6 @@ public class Vma {
         if (CHECKS) {
             check(allocator);
             check(pMemoryTypeIndex, 1);
-            VmaAllocationCreateInfo.validate(pAllocationCreateInfo.address());
         }
         return nvmaFindMemoryTypeIndex(allocator, memoryTypeBits, pAllocationCreateInfo.address(), memAddress(pMemoryTypeIndex));
     }
@@ -1219,7 +1218,6 @@ public class Vma {
             check(allocator);
             check(pMemoryTypeIndex, 1);
             VkBufferCreateInfo.validate(pBufferCreateInfo.address());
-            VmaAllocationCreateInfo.validate(pAllocationCreateInfo.address());
         }
         return nvmaFindMemoryTypeIndexForBufferInfo(allocator, pBufferCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pMemoryTypeIndex));
     }
@@ -1248,7 +1246,6 @@ public class Vma {
             check(allocator);
             check(pMemoryTypeIndex, 1);
             VkImageCreateInfo.validate(pImageCreateInfo.address());
-            VmaAllocationCreateInfo.validate(pAllocationCreateInfo.address());
         }
         return nvmaFindMemoryTypeIndexForImageInfo(allocator, pImageCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pMemoryTypeIndex));
     }
@@ -1371,7 +1368,6 @@ public class Vma {
         if (CHECKS) {
             check(allocator);
             check(pAllocation, 1);
-            VmaAllocationCreateInfo.validate(pCreateInfo.address());
         }
         return nvmaAllocateMemory(allocator, pVkMemoryRequirements.address(), pCreateInfo.address(), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
@@ -1394,7 +1390,6 @@ public class Vma {
         if (CHECKS) {
             check(allocator);
             check(pAllocation, 1);
-            VmaAllocationCreateInfo.validate(pCreateInfo.address());
         }
         return nvmaAllocateMemoryForBuffer(allocator, buffer, pCreateInfo.address(), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
@@ -1415,7 +1410,6 @@ public class Vma {
         if (CHECKS) {
             check(allocator);
             check(pAllocation, 1);
-            VmaAllocationCreateInfo.validate(pCreateInfo.address());
         }
         return nvmaAllocateMemoryForImage(allocator, image, pCreateInfo.address(), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
@@ -1771,7 +1765,6 @@ public class Vma {
             check(pBuffer, 1);
             check(pAllocation, 1);
             VkBufferCreateInfo.validate(pBufferCreateInfo.address());
-            VmaAllocationCreateInfo.validate(pAllocationCreateInfo.address());
         }
         return nvmaCreateBuffer(allocator, pBufferCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pBuffer), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
@@ -1819,7 +1812,6 @@ public class Vma {
             check(pImage, 1);
             check(pAllocation, 1);
             VkImageCreateInfo.validate(pImageCreateInfo.address());
-            VmaAllocationCreateInfo.validate(pAllocationCreateInfo.address());
         }
         return nvmaCreateImage(allocator, pImageCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pImage), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
