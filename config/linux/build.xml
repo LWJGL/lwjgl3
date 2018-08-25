@@ -392,6 +392,7 @@
             <update-dependency name="GLFW" artifact="x64/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
             <update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
             <update-dependency name="OpenVR" artifact="x64/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="x64/libopus.so" dest="${lib}" if:true="${binding.opus}"/>
 
             </parallel>
 

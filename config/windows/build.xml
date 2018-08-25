@@ -405,6 +405,7 @@ EXPORTS
             <update-dependency name="GLFW" artifact="${build.arch}/glfw${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.glfw}"/>
             <update-dependency name="OpenAL32" artifact="${build.arch}/OpenAL${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.openal}"/>
             <update-dependency name="OpenVR" artifact="${build.arch}/openvr_api${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="${build.arch}/opus${LIB_POSTFIX}.dll" dest="${lib}" if:true="${binding.opus}"/>
 
             </parallel>
 

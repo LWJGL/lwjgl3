@@ -18,6 +18,11 @@
             <package name="org.lwjgl.opencl"/>
         </packages>
     </test>
+    <test name="opus">
+        <packages>
+            <package name="org.lwjgl.util.opus"/>
+        </packages>
+    </test>
     <test name="par">
         <packages>
             <package name="org.lwjgl.util.par"/>

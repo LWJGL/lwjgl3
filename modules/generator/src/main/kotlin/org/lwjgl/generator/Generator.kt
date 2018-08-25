@@ -63,6 +63,7 @@ enum class Module(
     OPENGL("binding.opengl", "org.lwjgl.opengl", CallingConvention.STDCALL),
     OPENGLES("binding.opengles", "org.lwjgl.opengles", CallingConvention.STDCALL),
     OPENVR("binding.openvr", "org.lwjgl.openvr", CallingConvention.STDCALL, arrayOverloads = false),
+    OPUS("binding.opus", "org.lwjgl.util.opus", arrayOverloads = false),
     OVR("binding.ovr", "org.lwjgl.ovr"),
     PAR("binding.par", "org.lwjgl.util.par"),
     REMOTERY("binding.remotery", "org.lwjgl.util.remotery", arrayOverloads = false),

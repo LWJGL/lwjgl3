@@ -376,6 +376,7 @@
             <compileBinding binding="openal"/>
             <compileBinding binding="opencl"/>
             <compileBinding binding="openvr"/>
+            <compileBinding binding="opus"/>
             <compileBinding binding="par"/>
             <compileBinding binding="remotery"/>
             <compileBinding binding="rpmalloc"/>
@@ -1158,6 +1159,9 @@
                 <get-release url="windows/x86/openvr_api32.dll.git"/>
             </natives>
         </release-module>
+
+        <!-- Opus -->
+        <release-module package="org.lwjgl.util.opus" name="opus" native-library="lwjgl_opus" title="Opus" license="opus" if:true="${binding.opus}"/>
 
         <!-- LibOVR -->
         <release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" license="oculus" if:true="${binding.ovr}">

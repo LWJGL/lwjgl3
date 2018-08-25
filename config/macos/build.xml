@@ -364,6 +364,7 @@
             <update-dependency name="GLFW" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
             <update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
             <update-dependency name="OpenVR" artifact="x64/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="x64/libopus.dylib" dest="${lib}" if:true="${binding.opus}"/>
             <update-dependency name="MoltenVK" artifact="x64/libMoltenVK.dylib" dest="${lib}" if:true="${binding.vulkan}"/>
 
             </parallel>

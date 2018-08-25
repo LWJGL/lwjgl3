@@ -128,6 +128,7 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[OpenAL](https://www.openal.org/)|A cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications.|
 |[OpenAL Soft](http://kcat.strangesoft.net/openal.html)|An LGPL-licensed, cross-platform, software implementation of the OpenAL 3D audio API.|
+|[Opus](https://http://opus-codec.org/)|A totally open, royalty-free, highly versatile audio codec.|
 
 #### Graphics
 
