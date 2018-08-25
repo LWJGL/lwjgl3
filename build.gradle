@@ -147,7 +147,12 @@ enum Artifacts {
     ),
     OPENVR(
         "lwjgl-openvr", "LWJGL - OpenVR bindings",
-        "OpenVR is an API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
+        "An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
+        Platforms.ALL
+    ),
+    OPUS(
+        "lwjgl-opus", "LWJGL - Opus bindings",
+        "A totally open, royalty-free, highly versatile audio codec.",
         Platforms.ALL
     ),
     OVR(
@@ -207,7 +212,7 @@ enum Artifacts {
     ),
     XXHASH(
         "lwjgl-xxhash", "LWJGL - xxHash bindings",
-        "An Extremely fast Hash algorithm, running at RAM speed limits.",
+        "An extremely fast hash algorithm, running at RAM speed limits.",
         Platforms.ALL
     ),
     YOGA(
@@ -217,7 +222,7 @@ enum Artifacts {
     ),
     ZSTD(
         "lwjgl-zstd", "LWJGL - Zstandard bindings",
-        "Zstandard (zstd) is a fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.",
+        "A fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.",
         Platforms.ALL
     )
 

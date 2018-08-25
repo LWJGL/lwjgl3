@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/lwjgl/opus" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/opus">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/opus/src/generated/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/opus/src/test/java" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="core" />
+    <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+    <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
+  </component>
+</module>

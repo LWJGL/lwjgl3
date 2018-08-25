@@ -41,6 +41,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/opengles-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/opengles-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/openvr.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/openvr-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/openvr-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/opus.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/opus.iml" group="MODULES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/opus-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/opus-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/ovr.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/ovr-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/ovr-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/par.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/par.iml" group="MODULES" />

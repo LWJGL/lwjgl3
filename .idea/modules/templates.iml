@@ -26,6 +26,7 @@
     <orderEntry type="module" module-name="opengl-templates" />
     <orderEntry type="module" module-name="opengles-templates" />
     <orderEntry type="module" module-name="openvr-templates" />
+    <orderEntry type="module" module-name="opus-templates" />
     <orderEntry type="module" module-name="ovr-templates" />
     <orderEntry type="module" module-name="par-templates" />
     <orderEntry type="module" module-name="remotery-templates" />
