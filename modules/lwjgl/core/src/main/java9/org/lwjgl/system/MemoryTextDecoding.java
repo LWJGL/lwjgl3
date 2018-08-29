@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import java.nio.*;
 import java.nio.charset.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -17,6 +18,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>An extra array copy is still required. New String constructors are required to eliminate it, that will likely be available on Java 11.</p>
  */
 final class MemoryTextDecoding {
+
+    static {
+        apiLog("Java 9 text decoding enabled");
+    }
 
     private MemoryTextDecoding() {
     }

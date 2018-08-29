@@ -12,7 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 public final class CheckIntrinsics {
 
     static {
-        apiLog("Java 9 optimizations enabled");
+        apiLog("Java 9 check intrinsics enabled");
     }
 
     private CheckIntrinsics() {

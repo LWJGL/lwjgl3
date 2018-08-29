@@ -6,8 +6,14 @@ package org.lwjgl.system;
 
 import java.util.*;
 
+import static org.lwjgl.system.APIUtil.*;
+
 /** Java 9 version of {@code {@link StackWalkUtil}}. */
 final class StackWalkUtil {
+
+    static {
+        apiLog("Java 9 stack walker enabled");
+    }
 
     private StackWalkUtil() {
     }
