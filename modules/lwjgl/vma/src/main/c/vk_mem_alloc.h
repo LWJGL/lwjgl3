@@ -7458,6 +7458,8 @@ VmaAllocator_T::~VmaAllocator_T()
 
 void VmaAllocator_T::ImportVulkanFunctions(const VmaVulkanFunctions* pVulkanFunctions)
 {
+    memset(&m_VulkanFunctions, 0, sizeof(m_VulkanFunctions));
+
 #if VMA_STATIC_VULKAN_FUNCTIONS == 1
     m_VulkanFunctions.vkGetPhysicalDeviceProperties = &vkGetPhysicalDeviceProperties;
     m_VulkanFunctions.vkGetPhysicalDeviceMemoryProperties = &vkGetPhysicalDeviceMemoryProperties;
