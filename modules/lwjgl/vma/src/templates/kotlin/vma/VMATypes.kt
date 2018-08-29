@@ -170,7 +170,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
      * @param instance         a Vulkan instance
      * @param device           a Vulkan device
      */
-    public void set(VkInstance instance, VkDevice device) {
+    public VmaVulkanFunctions set(VkInstance instance, VkDevice device) {
         VKCapabilitiesInstance ic = instance.getCapabilities();
         VKCapabilitiesDevice   dc = device.getCapabilities();
         this
@@ -190,6 +190,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkDestroyImage(dc.vkDestroyImage)
             .vkGetBufferMemoryRequirements2KHR(dc.vkGetBufferMemoryRequirements2 != NULL ? dc.vkGetBufferMemoryRequirements2 : dc.vkGetBufferMemoryRequirements2KHR)
             .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR);
+        return this;
     }""")
 }
 
