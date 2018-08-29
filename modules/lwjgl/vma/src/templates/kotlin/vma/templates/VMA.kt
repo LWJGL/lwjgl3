@@ -14,8 +14,8 @@ val VMA = "Vma".nativeClass(Module.VMA, "Vma", prefix = "VMA", library = VMA_LIB
 DISABLE_WARNINGS()
 #define VMA_IMPLEMENTATION
 #define VMA_STATIC_VULKAN_FUNCTIONS 0
-#define VMA_SYSTEM_ALIGNED_MALLOC org_lwjgl_aligned_alloc
-#define VMA_SYSTEM_FREE org_lwjgl_aligned_free
+#define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
+#define VMA_SYSTEM_FREE(ptr) org_lwjgl_aligned_free(ptr)
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()"""
     )
