@@ -123,7 +123,7 @@ final class MemoryTextDecoding {
             return "";
         }
 
-        return memCharBuffer(memAddress(buffer) + offset, length).toString();
+        return memCharBuffer(memAddress0(buffer) + offset, length).toString();
     }
 
 }

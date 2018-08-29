@@ -11,6 +11,7 @@ import org.testng.annotations.*;
 import java.nio.*;
 import java.nio.charset.*;
 import java.util.*;
+import java.util.function.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -232,6 +233,54 @@ public class MemoryUtilTest {
         for (int i = 0; i < db.capacity(); i++) {
             assertEquals(buffer.getDouble(i << 3), db.get(i));
         }
+    }
+
+    public void testTextDecoding() {
+        testTextDecoding(MemoryUtil::memASCII, MemoryUtil::memASCII, MemoryUtil::memASCII, 1);
+        testTextDecoding(MemoryUtil::memUTF8, MemoryUtil::memUTF8, MemoryUtil::memUTF8, 1);
+        testTextDecoding(MemoryUtil::memUTF16, MemoryUtil::memUTF16, MemoryUtil::memUTF16, 2);
+    }
+
+    @FunctionalInterface
+    private interface TextEncoder {
+        ByteBuffer apply(String text, boolean nullTerminated);
+    }
+
+    @FunctionalInterface
+    private interface TextDecoder {
+        String apply(ByteBuffer buffer, int length, int offset);
+    }
+
+    private static void testTextDecoding(TextEncoder encoder, Function<ByteBuffer, String> decoder, TextDecoder decoderUnsafe, int bpc) {
+        ByteBuffer encoded = encoder.apply("one two three", false);
+
+        assertEquals(encoded.position(), 0);
+        assertEquals(encoded.remaining(), 13 * bpc);
+
+        encoded.limit(13 * bpc);
+        encoded.position(0 * bpc);
+        assertEquals(decoder.apply(encoded), "one two three");
+
+        encoded.limit(3 * bpc);
+        encoded.position(0 * bpc);
+        assertEquals(decoder.apply(encoded), "one");
+
+        encoded.limit(7 * bpc);
+        encoded.position(4 * bpc);
+        assertEquals(decoder.apply(encoded), "two");
+
+        encoded.limit(13 * bpc);
+        encoded.position(8 * bpc);
+        assertEquals(decoder.apply(encoded), "three");
+
+        encoded.clear();
+
+        assertEquals(decoderUnsafe.apply(encoded, 13, 0 * bpc), "one two three");
+        assertEquals(decoderUnsafe.apply(encoded, 3, 0 * bpc), "one");
+        assertEquals(decoderUnsafe.apply(encoded, 3, 4 * bpc), "two");
+        assertEquals(decoderUnsafe.apply(encoded, 5, 8 * bpc), "three");
+
+        memFree(encoded);
     }
 
     public void testUTF8() {

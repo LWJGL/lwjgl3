@@ -1,8 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="TESTS" type="TestNG" factoryName="TestNG" singleton="true">
     <module name="samples" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
     <option name="SUITE_NAME" value="$PROJECT_DIR$/config/tests.xml" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
@@ -11,17 +9,13 @@
     <option name="TEST_OBJECT" value="SUITE" />
     <option name="VM_PARAMETERS" value="-Djava.library.path=bin/libs -ea -Dorg.lwjgl.util.Debug=true -Dorg.lwjgl.util.DebugAllocator=true" />
     <option name="PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="OUTPUT_DIRECTORY" value="" />
-    <option name="PASS_PARENT_ENVS" value="true" />
-    <option name="TEST_SEARCH_SCOPE">
-      <value defaultName="singleModule" />
-    </option>
-    <option name="USE_DEFAULT_REPORTERS" value="false" />
     <option name="PROPERTIES_FILE" value="" />
     <properties />
     <listeners />
-    <method>
+    <method v="2">
+      <option name="Make" enabled="true" />
       <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="compile-native" />
     </method>
   </configuration>

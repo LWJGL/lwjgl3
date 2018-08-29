@@ -28,7 +28,7 @@ final class MemoryTextDecoding {
         }
 
         byte[] bytes = new byte[length];
-        memByteBuffer(memAddress(buffer) + offset, length).get(bytes);
+        memByteBuffer(memAddress0(buffer) + offset, length).get(bytes);
         return new String(bytes, StandardCharsets.ISO_8859_1);
     }
 
@@ -41,7 +41,7 @@ final class MemoryTextDecoding {
         }
 
         byte[] bytes = new byte[length];
-        memByteBuffer(memAddress(buffer) + offset, length).get(bytes);
+        memByteBuffer(memAddress0(buffer) + offset, length).get(bytes);
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
@@ -53,7 +53,7 @@ final class MemoryTextDecoding {
             return "";
         }
 
-        return memCharBuffer(memAddress(buffer) + offset, length).toString();
+        return memCharBuffer(memAddress0(buffer) + offset, length).toString();
     }
 
 }
