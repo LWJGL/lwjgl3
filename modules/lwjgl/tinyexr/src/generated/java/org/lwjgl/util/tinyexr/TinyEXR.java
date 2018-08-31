@@ -469,7 +469,7 @@ public class TinyEXR {
      * 
      * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
      *
-     * @return the number of bytes if success or negative value and may set error string in {@code err} when there's an error
+     * @return the number of bytes if success or zero and may set error string in {@code err} when there's an error
      */
     @NativeType("size_t")
     public static long SaveEXRImageToMemory(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("unsigned char **") PointerBuffer memory, @NativeType("char const **") PointerBuffer err) {

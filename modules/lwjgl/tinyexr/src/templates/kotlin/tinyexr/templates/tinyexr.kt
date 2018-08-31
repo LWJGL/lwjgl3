@@ -303,7 +303,7 @@ ENABLE_WARNINGS()""")
         Check(1)..unsigned_char.p.p.OUT("memory", ""),
         Check(1)..charASCII.const.p.p.IN("err", ""),
 
-        returnDoc = "the number of bytes if success or negative value and may set error string in {@code err} when there's an error"
+        returnDoc = "the number of bytes if success or zero and may set error string in {@code err} when there's an error"
     )
 
     int(
