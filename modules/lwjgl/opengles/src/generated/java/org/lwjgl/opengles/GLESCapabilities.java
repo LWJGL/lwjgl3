@@ -2127,6 +2127,28 @@ public final class GLESCapabilities {
     public final boolean GL_QCOM_perfmon_global_mode;
     /** When true, {@link QCOMShaderFramebufferFetchNoncoherent} is supported. */
     public final boolean GL_QCOM_shader_framebuffer_fetch_noncoherent;
+    /**
+     * When certain built-ins (e.g. {@code gl_LastFragData}, {@code gl_LastFragStencilARM}) are referenced in the shader, the shader is required to execute at
+     * sample-rate if the attachments are multisampled. In some use-cases executing such shaders at fragment-rate is actually the preferred behavior. When
+     * this extension is enabled, such GLSL shaders will execute at fragment-rate and the built-in will return a per-fragment value. This avoids the
+     * significant performance penalty that would otherwise be incurred with sample-rate shading.
+     * 
+     * <p>The following built-ins are affected when the this extension is enabled:</p>
+     * 
+     * <ul>
+     * <li>{@code gl_LastFragData} (from {@link EXTShaderFramebufferFetch EXT_shader_framebuffer_fetch})</li>
+     * <li>{@code gl_LastFragDepthARM} (from {@link #GL_ARM_shader_framebuffer_fetch_depth_stencil ARM_shader_framebuffer_fetch_depth_stencil})</li>
+     * </ul>
+     * 
+     * <p>The following built-ins are disallowed when this extension is enabled:</p>
+     * 
+     * <ul>
+     * <li>gl_SampleID</li>
+     * <li>gl_SamplePosition</li>
+     * <li>interpolateAtSample()</li>
+     * </ul>
+     */
+    public final boolean GL_QCOM_shader_framebuffer_fetch_rate;
     /** When true, {@link QCOMTextureFoveated} is supported. */
     public final boolean GL_QCOM_texture_foveated;
     /** When true, {@link QCOMTiledRendering} is supported. */
@@ -3261,6 +3283,7 @@ public final class GLESCapabilities {
         GL_QCOM_framebuffer_foveated = ext.contains("GL_QCOM_framebuffer_foveated") && checkExtension("GL_QCOM_framebuffer_foveated", QCOMFramebufferFoveated.isAvailable(this));
         GL_QCOM_perfmon_global_mode = ext.contains("GL_QCOM_perfmon_global_mode");
         GL_QCOM_shader_framebuffer_fetch_noncoherent = ext.contains("GL_QCOM_shader_framebuffer_fetch_noncoherent") && checkExtension("GL_QCOM_shader_framebuffer_fetch_noncoherent", QCOMShaderFramebufferFetchNoncoherent.isAvailable(this));
+        GL_QCOM_shader_framebuffer_fetch_rate = ext.contains("GL_QCOM_shader_framebuffer_fetch_rate");
         GL_QCOM_texture_foveated = ext.contains("GL_QCOM_texture_foveated") && checkExtension("GL_QCOM_texture_foveated", QCOMTextureFoveated.isAvailable(this));
         GL_QCOM_tiled_rendering = ext.contains("GL_QCOM_tiled_rendering") && checkExtension("GL_QCOM_tiled_rendering", QCOMTiledRendering.isAvailable(this));
         GL_QCOM_writeonly_rendering = ext.contains("GL_QCOM_writeonly_rendering");

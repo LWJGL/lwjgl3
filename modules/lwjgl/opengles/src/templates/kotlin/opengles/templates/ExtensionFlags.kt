@@ -929,3 +929,26 @@ val OVR_multiview2 = EXT_FLAG.nativeClassGLES("OVR_multiview2", postfix = OVR) {
         Requires ${GLES30.core} and ${OVR_multiview.link}.
         """
 }
+
+val QCOM_shader_framebuffer_fetch_rate = EXT_FLAG.nativeClassGLES("QCOM_shader_framebuffer_fetch_rate", postfix = QCOM) {
+    documentation =
+        """
+        When certain built-ins (e.g. {@code gl_LastFragData}, {@code gl_LastFragStencilARM}) are referenced in the shader, the shader is required to execute at
+        sample-rate if the attachments are multisampled. In some use-cases executing such shaders at fragment-rate is actually the preferred behavior. When
+        this extension is enabled, such GLSL shaders will execute at fragment-rate and the built-in will return a per-fragment value. This avoids the
+        significant performance penalty that would otherwise be incurred with sample-rate shading.
+
+        The following built-ins are affected when the this extension is enabled:
+        ${ul(
+            "{@code gl_LastFragData} (from ${EXT_shader_framebuffer_fetch.link})",
+            "{@code gl_LastFragDepthARM} (from ${ARM_shader_framebuffer_fetch_depth_stencil.cap})"
+        )}
+
+        The following built-ins are disallowed when this extension is enabled:
+        ${ul(
+            "gl_SampleID",
+            "gl_SamplePosition",
+            "interpolateAtSample()"
+        )}
+        """
+}
