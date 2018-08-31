@@ -105,6 +105,7 @@
 /// NK_INCLUDE_COMMAND_USERDATA     | Defining this adds a userdata pointer into each command. Can be useful for example if you want to provide custom shaders depending on the used widget. Can be combined with the style structures.
 /// NK_BUTTON_TRIGGER_ON_RELEASE    | Different platforms require button clicks occurring either on buttons being pressed (up to down) or released (down to up). By default this library will react on buttons being pressed, but if you define this it will only trigger if a button is released.
 /// NK_ZERO_COMMAND_MEMORY          | Defining this will zero out memory for each drawing command added to a drawing queue (inside nk_command_buffer_push). Zeroing command memory is very useful for fast checking (using memcmp) if command buffers are equal and avoid drawing frames when nothing on screen has changed since previous frame.
+/// NK_UINT_DRAW_INDEX              | Defining this will set the size of vertex index elements when using NK_VERTEX_BUFFER_OUTPUT to 32bit instead of the default of 16bit
 ///
 /// !!! WARNING
 ///     The following flags will pull in the standard C library:
@@ -122,6 +123,7 @@
 ///     - NK_INCLUDE_DEFAULT_FONT
 ///     - NK_INCLUDE_STANDARD_VARARGS
 ///     - NK_INCLUDE_COMMAND_USERDATA
+///     - NK_UINT_DRAW_INDEX
 ///
 /// ### Constants
 /// Define                          | Description
@@ -335,7 +337,7 @@ extern "C" {
  #define NK_POINTER_TYPE uintptr_t
 #else
   #ifndef NK_INT8
-    #define NK_INT8 char
+    #define NK_INT8 signed char
   #endif
   #ifndef NK_UINT8
     #define NK_UINT8 unsigned char
@@ -1082,6 +1084,12 @@ NK_API void nk_input_end(struct nk_context*);
 ///
 /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c
 /// // fill configuration
+/// struct your_vertex
+/// {
+///     float pos[2]; // important to keep it to 2 floats
+///     float uv[2];
+///     unsigned char col[4];
+/// };
 /// struct nk_convert_config cfg = {};
 /// static const struct nk_draw_vertex_layout_element vertex_layout[] = {
 ///     {NK_VERTEX_POSITION, NK_FORMAT_FLOAT, NK_OFFSETOF(struct your_vertex, pos)},
@@ -1425,7 +1433,7 @@ NK_API const struct nk_draw_command* nk__draw_next(const struct nk_draw_command*
 /// NK_WINDOW_TITLE             | Forces a header at the top at the window showing the title
 /// NK_WINDOW_SCROLL_AUTO_HIDE  | Automatically hides the window scrollbar if no user interaction: also requires delta time in `nk_context` to be set each frame
 /// NK_WINDOW_BACKGROUND        | Always keep window in the background
-/// NK_WINDOW_SCALE_LEFT        | Puts window scaler in the left-ottom corner instead right-bottom
+/// NK_WINDOW_SCALE_LEFT        | Puts window scaler in the left-bottom corner instead right-bottom
 /// NK_WINDOW_NO_INPUT          | Prevents window of scaling, moving or getting focus
 ///
 /// #### nk_collapse_states
@@ -4586,7 +4594,11 @@ NK_API int nk_input_is_key_down(const struct nk_input*, enum nk_keys);
     In fact it is probably more powerful than needed but allows even more crazy
     things than this library provides by default.
 */
+#ifdef NK_UINT_DRAW_INDEX
+typedef nk_uint nk_draw_index;
+#else
 typedef nk_ushort nk_draw_index;
+#endif
 enum nk_draw_list_stroke {
     NK_STROKE_OPEN = nk_false,
     /* build up path has no connection back to the beginning */
@@ -9357,7 +9369,7 @@ nk_draw_list_alloc_vertices(struct nk_draw_list *list, nk_size count)
      * backend (OpenGL, DirectX, ...). For example in OpenGL for `glDrawElements`
      * instead of specifing `GL_UNSIGNED_SHORT` you have to define `GL_UNSIGNED_INT`.
      * Sorry for the inconvenience. */
-    NK_ASSERT((sizeof(nk_draw_index) == 2 && list->vertex_count < NK_USHORT_MAX &&
+    if(sizeof(nk_draw_index)==2) NK_ASSERT((list->vertex_count < NK_USHORT_MAX &&
         "To many verticies for 16-bit vertex indicies. Please read comment above on how to solve this problem"));
     return vtx;
 }
@@ -15798,11 +15810,11 @@ nk_panel_end(struct nk_context *ctx)
         nk_fill_rect(out, empty_space, 0, style->window.background);
 
         /* fill bottom empty space */
-        if (*layout->offset_x != 0 && !(layout->flags & NK_WINDOW_NO_SCROLLBAR)) {
+        if (layout->footer_height > 0) {
             empty_space.x = window->bounds.x;
             empty_space.y = layout->bounds.y + layout->bounds.h;
             empty_space.w = window->bounds.w;
-            empty_space.h = scrollbar_size.y;
+            empty_space.h = layout->footer_height;
             nk_fill_rect(out, empty_space, 0, style->window.background);
         }
     }
@@ -16176,8 +16188,8 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
 {
     struct nk_window *win;
     struct nk_style *style;
-    nk_hash title_hash;
-    int title_len;
+    nk_hash name_hash;
+    int name_len;
     int ret = 0;
 
     NK_ASSERT(ctx);
@@ -16190,12 +16202,12 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
 
     /* find or create window */
     style = &ctx->style;
-    title_len = (int)nk_strlen(name);
-    title_hash = nk_murmur_hash(name, (int)title_len, NK_WINDOW_TITLE);
-    win = nk_find_window(ctx, title_hash, name);
+    name_len = (int)nk_strlen(name);
+    name_hash = nk_murmur_hash(name, (int)name_len, NK_WINDOW_TITLE);
+    win = nk_find_window(ctx, name_hash, name);
     if (!win) {
         /* create new window */
-        nk_size name_length = (nk_size)nk_strlen(name);
+        nk_size name_length = (nk_size)name_len;
         win = (struct nk_window*)nk_create_window(ctx);
         NK_ASSERT(win);
         if (!win) return 0;
@@ -16207,7 +16219,7 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
 
         win->flags = flags;
         win->bounds = bounds;
-        win->name = title_hash;
+        win->name = name_hash;
         name_length = NK_MIN(name_length, NK_WINDOW_MAX_NAME-1);
         NK_MEMCPY(win->name_string, name, name_length);
         win->name_string[name_length] = 0;
@@ -18026,22 +18038,25 @@ nk_layout_widget_space(struct nk_rect *bounds, const struct nk_context *ctx,
     panel_space = nk_layout_row_calculate_usable_space(&ctx->style, layout->type,
                                             layout->bounds.w, layout->row.columns);
 
+    #define NK_FRAC(x) (x - (int)x) /* will be used to remove fookin gaps */
     /* calculate the width of one item inside the current layout space */
     switch (layout->row.type) {
     case NK_LAYOUT_DYNAMIC_FIXED: {
         /* scaling fixed size widgets item width */
-        item_width = NK_MAX(1.0f,panel_space) / (float)layout->row.columns;
-        item_offset = (float)layout->row.index * item_width;
+        float w = NK_MAX(1.0f,panel_space) / (float)layout->row.columns;
+        item_offset = (float)layout->row.index * w;
+        item_width = w + NK_FRAC(item_offset);
         item_spacing = (float)layout->row.index * spacing.x;
     } break;
     case NK_LAYOUT_DYNAMIC_ROW: {
         /* scaling single ratio widget width */
-        item_width = layout->row.item_width * panel_space;
+        float w = layout->row.item_width * panel_space;
         item_offset = layout->row.item_offset;
+        item_width = w + NK_FRAC(item_offset);
         item_spacing = 0;
 
         if (modify) {
-            layout->row.item_offset += item_width + spacing.x;
+            layout->row.item_offset += w + spacing.x;
             layout->row.filled += layout->row.item_width;
             layout->row.index = 0;
         }
@@ -18052,23 +18067,24 @@ nk_layout_widget_space(struct nk_rect *bounds, const struct nk_context *ctx,
         bounds->x -= (float)*layout->offset_x;
         bounds->y = layout->at_y + (layout->row.height * layout->row.item.y);
         bounds->y -= (float)*layout->offset_y;
-        bounds->w = layout->bounds.w  * layout->row.item.w;
-        bounds->h = layout->row.height * layout->row.item.h;
+        bounds->w = layout->bounds.w  * layout->row.item.w + NK_FRAC(bounds->x);
+        bounds->h = layout->row.height * layout->row.item.h + NK_FRAC(bounds->y);
         return;
     }
     case NK_LAYOUT_DYNAMIC: {
         /* scaling arrays of panel width ratios for every widget */
-        float ratio;
+        float ratio, w;
         NK_ASSERT(layout->row.ratio);
         ratio = (layout->row.ratio[layout->row.index] < 0) ?
             layout->row.item_width : layout->row.ratio[layout->row.index];
 
+        w = (ratio * panel_space);
         item_spacing = (float)layout->row.index * spacing.x;
-        item_width = (ratio * panel_space);
         item_offset = layout->row.item_offset;
+        item_width = w + NK_FRAC(item_offset);
 
         if (modify) {
-            layout->row.item_offset += item_width;
+            layout->row.item_offset += w;
             layout->row.filled += ratio;
         }
     } break;
@@ -18106,13 +18122,16 @@ nk_layout_widget_space(struct nk_rect *bounds, const struct nk_context *ctx,
     } break;
     case NK_LAYOUT_TEMPLATE: {
         /* stretchy row layout with combined dynamic/static widget width*/
+        float w;
         NK_ASSERT(layout->row.index < layout->row.columns);
         NK_ASSERT(layout->row.index < NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS);
-        item_width = layout->row.templates[layout->row.index];
+        w = layout->row.templates[layout->row.index];
         item_offset = layout->row.item_offset;
+        item_width = w + NK_FRAC(item_offset);
         item_spacing = (float)layout->row.index * spacing.x;
-        if (modify) layout->row.item_offset += item_width;
+        if (modify) layout->row.item_offset += w;
     } break;
+    #undef NK_FRAC
     default: NK_ASSERT(0); break;
     };
 
@@ -21180,6 +21199,7 @@ nk_scrollbar_behavior(nk_flags *state, struct nk_input *in,
 {
     nk_flags ws = 0;
     int left_mouse_down;
+    int left_mouse_clicked;
     int left_mouse_click_in_cursor;
     float scroll_delta;
 
@@ -21187,13 +21207,14 @@ nk_scrollbar_behavior(nk_flags *state, struct nk_input *in,
     if (!in) return scroll_offset;
 
     left_mouse_down = in->mouse.buttons[NK_BUTTON_LEFT].down;
+    left_mouse_clicked = in->mouse.buttons[NK_BUTTON_LEFT].clicked;
     left_mouse_click_in_cursor = nk_input_has_mouse_click_down_in_rect(in,
         NK_BUTTON_LEFT, *cursor, nk_true);
     if (nk_input_is_mouse_hovering_rect(in, *scroll))
         *state = NK_WIDGET_STATE_HOVERED;
 
     scroll_delta = (o == NK_VERTICAL) ? in->mouse.scroll_delta.y: in->mouse.scroll_delta.x;
-    if (left_mouse_down && left_mouse_click_in_cursor) {
+    if (left_mouse_down && left_mouse_click_in_cursor && !left_mouse_clicked) {
         /* update cursor by mouse dragging */
         float pixel, delta;
         *state = NK_WIDGET_STATE_ACTIVE;
