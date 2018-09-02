@@ -518,23 +518,25 @@ class NativeClass internal constructor(
         }
 
         fun PrintWriter.libraryInit() {
-            println(if (library == null)
-                "\n${t}static { Library.initialize(); }"
-            else if (library.contains('\n'))
-                """
+            if (library != null || binding !is SimpleBinding) {
+                println(if (library == null)
+                    "\n${t}static { Library.initialize(); }"
+                else if (library.contains('\n'))
+                    """
     static {
         ${library.trim()}
     }"""
-            else if (library.endsWith(");"))
-                "\n${t}static { $library }"
-            else
-                "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
-            )
+                else if (library.endsWith(");"))
+                    "\n${t}static { $library }"
+                else
+                    "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
+                )
+            }
         }
 
         if (hasFunctions || binding is SimpleBinding) {
             if (binding != null) {
-                if (binding !is SimpleBinding && functions.any(Func::hasCustomJNI))
+                if (functions.any(Func::hasCustomJNI))
                     libraryInit()
 
                 if (binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress }) {
