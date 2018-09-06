@@ -470,7 +470,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             0x0002000A),
         "HOVERED".enum(
             "{@code GetWindowAttrib}: indicates whether the cursor is currently directly over the client area of the window, with no other windows between.",
-            0x0002000A),
+            0x0002000B),
         "FOCUS_ON_SHOW".enum(
             """
             {@code WindowHint}: specifies whether input focuses on calling show window.

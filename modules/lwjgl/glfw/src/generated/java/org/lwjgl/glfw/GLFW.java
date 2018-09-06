@@ -443,7 +443,7 @@ public class GLFW {
         GLFW_MAXIMIZED               = 0x20008,
         GLFW_CENTER_CURSOR           = 0x20009,
         GLFW_TRANSPARENT_FRAMEBUFFER = 0x2000A,
-        GLFW_HOVERED                 = 0x2000A,
+        GLFW_HOVERED                 = 0x2000B,
         GLFW_FOCUS_ON_SHOW           = 0x2000C;
 
     /** Input options. */
