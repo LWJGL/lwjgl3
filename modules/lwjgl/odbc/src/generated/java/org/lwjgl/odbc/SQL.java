@@ -2442,9 +2442,6 @@ public class SQL {
      */
     public static short nSQLSetEnvAttr(long EnvironmentHandle, int Attribute, long Value, int StringLength) {
         long __functionAddress = Functions.SetEnvAttr;
-        if (CHECKS) {
-            check(EnvironmentHandle);
-        }
         return callPPS(__functionAddress, EnvironmentHandle, Attribute, Value, StringLength);
     }
 

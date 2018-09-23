@@ -2667,7 +2667,7 @@ val sql = "SQL".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL", b
         Sets attributes that govern aspects of environments.
         """,
 
-        SQLHENV.IN("EnvironmentHandle", "the environment handle"),
+        nullable..SQLHENV.IN("EnvironmentHandle", "the environment handle"),
         SQLINTEGER.IN("Attribute", "the attribute to set", EnvironmentAttributes),
         nullable..SQLPOINTER.IN(
             "Value",
