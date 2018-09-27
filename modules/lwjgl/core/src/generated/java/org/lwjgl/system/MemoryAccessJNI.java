@@ -8,7 +8,7 @@ package org.lwjgl.system;
 import static org.lwjgl.system.Checks.*;
 
 /** Memory access utilities. */
-class MemoryAccessJNI {
+final class MemoryAccessJNI {
 
     static { Library.initialize(); }
 

@@ -505,7 +505,7 @@ class NativeClass internal constructor(
         val documentation = super.documentation
         if (!documentation.isNullOrBlank())
             println(processDocumentation(documentation!!).toJavaDoc(indentation = ""))
-        val isOpen = hasFunctions || extends != null
+        val isOpen = access === Access.PUBLIC && (hasFunctions || extends != null)
         print("${access.modifier}${if (isOpen) "" else "final "}class $className")
         extends.let {
             if (it != null)
@@ -541,7 +541,7 @@ class NativeClass internal constructor(
 
                 if (binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress }) {
                     println("""
-    ${if (isOpen && access === Access.PUBLIC) "protected" else "private"} $className() {
+    ${if (isOpen) "protected" else "private"} $className() {
         throw new UnsupportedOperationException();
     }""")
                     binding.generateFunctionSetup(this, this@NativeClass)
@@ -554,12 +554,12 @@ class NativeClass internal constructor(
 
                 // This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
                 println("""
-    ${if (isOpen && access === Access.PUBLIC) "protected" else "private"} $className() {
+    ${if (isOpen) "protected" else "private"} $className() {
         throw new UnsupportedOperationException();
     }""")
             }
         } else {
-            println("\n$t${if (isOpen && access === Access.PUBLIC) "protected" else "private"} $className() {}")
+            println("\n$t${if (isOpen) "protected" else "private"} $className() {}")
         }
 
         genFunctions.forEach { func ->
