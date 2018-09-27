@@ -45,7 +45,7 @@ public final class Version {
         /** Feature complete, stable, official release. */
         STABLE("");
 
-        final String postfix;
+        public final String postfix;
 
         BuildType(String postfix) {
             this.postfix = postfix;
