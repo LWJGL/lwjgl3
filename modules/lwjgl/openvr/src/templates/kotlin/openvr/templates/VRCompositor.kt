@@ -52,7 +52,7 @@ typedef struct HmdColor_t
 
         TrackedDevicePose_t.p.OUT("pRenderPoseArray", ""),
         AutoSize("pRenderPoseArray")..uint32_t.IN("unRenderPoseArrayCount", ""),
-        TrackedDevicePose_t.p.OUT("pGamePoseArray", ""),
+        nullable..TrackedDevicePose_t.p.OUT("pGamePoseArray", ""),
         AutoSize("pGamePoseArray")..uint32_t.IN("unGamePoseArrayCount", "")
     )
 

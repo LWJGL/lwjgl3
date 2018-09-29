@@ -71,8 +71,8 @@ public class VRCompositor {
      * start rendering.
      */
     @NativeType("EVRCompositorError")
-    public static int VRCompositor_WaitGetPoses(@NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pRenderPoseArray, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pGamePoseArray) {
-        return nVRCompositor_WaitGetPoses(pRenderPoseArray.address(), pRenderPoseArray.remaining(), pGamePoseArray.address(), pGamePoseArray.remaining());
+    public static int VRCompositor_WaitGetPoses(@NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pRenderPoseArray, @Nullable @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pGamePoseArray) {
+        return nVRCompositor_WaitGetPoses(pRenderPoseArray.address(), pRenderPoseArray.remaining(), memAddressSafe(pGamePoseArray), remainingSafe(pGamePoseArray));
     }
 
     // --- [ VRCompositor_GetLastPoses ] ---
