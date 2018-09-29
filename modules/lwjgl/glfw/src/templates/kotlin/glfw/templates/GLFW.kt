@@ -674,6 +674,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             {@code GetWindowAttrib}: Indicates the context creation API used to create the window's context; either #NATIVE_CONTEXT_API or #EGL_CONTEXT_API.
             """,
             0x0002200B
+        ),
+        "SCALE_TO_MONITOR".enum(
+            """
+            {@code WindowHint}: Specifies whether the window content area should be resized based on the monitor content scale of any monitor it is placed on.
+            This includes the initial placement when the window is created. Possible values are #TRUE and #FALSE.
+            """,
+            0x0002200C
         )
     ).javaDocLinks
 
@@ -1215,6 +1222,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             tr(td("#MAXIMIZED"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#CENTER_CURSOR"), td("#TRUE"), td("#TRUE or #FALSE")),
             tr(td("#TRANSPARENT_FRAMEBUFFER"), td("#FALSE"), td("#TRUE or #FALSE")),
+            tr(td("#FOCUS_ON_SHOW"), td("#TRUE"), td("#TRUE or #FALSE")),
+            tr(td("#SCALE_TO_MONITOR"), td("#FALSE"), td("#TRUE or #FALSE")),
 
             tr(td("#RED_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
             tr(td("#GREEN_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
@@ -2456,8 +2465,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Returns the last state reported for the specified mouse button to the specified window. The returned state is one of #PRESS or #RELEASE. The
         higher-level action #REPEAT is only reported to the mouse button callback.
 
-        If the #STICKY_MOUSE_BUTTONS input mode is enabled, this function returns #PRESS the first time you call it for a mouse button that has been pressed,
-        even if that mouse button has already been released.
+        If the #STICKY_MOUSE_BUTTONS input mode is enabled, this function returns #PRESS the first time you call it for a mouse button that was pressed, even
+        if that mouse button has already been released.
 
         This function must only be called from the main thread.
         """,
@@ -3039,6 +3048,8 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         Not all devices have all the buttons or axes provided by ##GLFWGamepadState. Unavailable buttons and axes will always report #RELEASE and 0.0
         respectively.
+
+        This function must only be called from the main thread.
         """,
 
         int.IN("jid", "the joystick to query"),
